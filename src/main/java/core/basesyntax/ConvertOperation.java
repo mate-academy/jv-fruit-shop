@@ -1,7 +1,7 @@
 package core.basesyntax;
 
 import com.opencsv.bean.AbstractBeanField;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import core.basesyntax.exception.CsvFileException;
 
 public class ConvertOperation<T, I> extends AbstractBeanField<T, I> {
     private static final String SUPPLY = "s";
@@ -12,10 +12,7 @@ public class ConvertOperation<T, I> extends AbstractBeanField<T, I> {
     }
 
     @Override
-    protected Object convert(String value) throws CsvDataTypeMismatchException {
-        if (value.isEmpty()) {
-            return null;
-        }
+    protected Object convert(String value) {
         switch (value) {
             case SUPPLY:
                 return Operation.SUPPLY;
@@ -24,7 +21,7 @@ public class ConvertOperation<T, I> extends AbstractBeanField<T, I> {
             case RETURN:
                 return Operation.RETURN;
             default:
-                throw new CsvDataTypeMismatchException("Wrong operation format");
+                throw new CsvFileException("File contains wrong operation format");
         }
     }
 }
