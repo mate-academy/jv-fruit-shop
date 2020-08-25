@@ -8,8 +8,6 @@ import core.basesyntax.model.Fruit;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CsvUtils {
     private CsvStrategy<Fruit> csvStrategy = new CsvStrategyImpl();
@@ -29,7 +27,6 @@ public class CsvUtils {
     public boolean createReport(String csvOutputFile) {
         ControllerDao<Fruit> controllerDao = new ControllerDaoImpl();
         try (CSVWriter writer = new CSVWriter(new FileWriter(csvOutputFile))) {
-            List<String[]> outputLines = new ArrayList<>();
             for (Fruit fruit : controllerDao.getAll()) {
                 if (!csvStrategy.countFruit(fruit)) {
                     return false;
