@@ -11,7 +11,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -21,12 +20,12 @@ import java.util.List;
 public class CsvUtilsTest {
     private static CsvUtils csvUtils;
     private static StorageDao<Fruit> storageDao;
-    private static final String CSV_INPUT_TEST_FILE = "src\\main\\resources\\testInputFile.csv";
+    private static final String CSV_INPUT_TEST_FILE = "src/main/resources/testInputFile.csv";
     private static final String CSV_BAD_OPERATION_INPUT_TEST_FILE =
-            "src\\main\\resources\\testBadOperationInputFile.csv";
+            "src/main/resources/testBadOperationInputFile.csv";
     private static final String CSV_BAD_FRUIT_INPUT_TEST_FILE =
-            "src\\main\\resources\\testBadFruitInputFile.csv";
-    private static final String CSV_OUTPUT_TEST_FILE = "src\\main\\resources\\testOutputFile.csv";
+            "src/main/resources/testBadFruitInputFile.csv";
+    private static final String CSV_OUTPUT_TEST_FILE = "src/main/resources/testOutputFile.csv";
     private static final String NOT_EXISTING_FILE = "notExist";
 
     @BeforeClass
