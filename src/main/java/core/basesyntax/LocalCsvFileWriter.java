@@ -8,8 +8,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LocalCsvFileWriter implements CsvFileWriter {
+    public static final Logger LOGGER = LoggerFactory.getLogger(LocalCsvFileWriter.class);
     private static final String STOCK_BALANCE_HEADER = "fruit,quantity" + System.lineSeparator();
     private final String filePath;
 
@@ -27,6 +30,7 @@ public class LocalCsvFileWriter implements CsvFileWriter {
             Files.writeString(file, STOCK_BALANCE_HEADER);
             Files.write(file, lines, StandardOpenOption.APPEND);
         } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
             throw new CsvFileException("Can't write file", e);
         }
     }
