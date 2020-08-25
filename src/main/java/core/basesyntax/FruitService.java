@@ -12,6 +12,7 @@ public class FruitService {
                         -> t.getOperation() == Operation.BUY
                         ? stockQuantity - transactionQuantity
                         : stockQuantity + transactionQuantity));
+        stockBalance.entrySet().removeIf(entry -> entry.getValue() <= 0);
         return stockBalance;
     }
 }

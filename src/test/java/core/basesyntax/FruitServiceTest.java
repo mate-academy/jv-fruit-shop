@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitServiceTest {
-    private static List<Transaction> testTransactions;
+    private static List<Transaction> testTransactionsOk;
+    private static List<Transaction> testTransactionsNegativeValue;
     private static FruitService fruitService;
 
     @BeforeClass
@@ -19,16 +20,26 @@ public class FruitServiceTest {
         Transaction transactionThree = new Transaction(Operation.RETURN, "banana", 5);
         Transaction transactionFour = new Transaction(Operation.SUPPLY, "apple", 200);
         Transaction transactionFive = new Transaction(Operation.BUY, "apple", 50);
-        testTransactions = List.of(transactionOne, transactionTwo, transactionThree,
+        testTransactionsOk = List.of(transactionOne, transactionTwo, transactionThree,
                 transactionFour, transactionFive);
+        Transaction transactionFiveNegative = new Transaction(Operation.BUY, "apple", 300);
+        testTransactionsNegativeValue = List.of(transactionOne, transactionTwo, transactionThree,
+                transactionFour, transactionFiveNegative);
     }
 
     @Test
     public void getStockBalance_ok() {
-        Map<String, Integer> result = fruitService.getStockBalance(testTransactions);
+        Map<String, Integer> result = fruitService.getStockBalance(testTransactionsOk);
         Assert.assertEquals(2, result.size());
         Assert.assertEquals(85, (int)result.get("banana"));
         Assert.assertEquals(150, (int)result.get("apple"));
+    }
+
+    @Test
+    public void getStockBalance_negativeValue() {
+        Map<String, Integer> result = fruitService.getStockBalance(testTransactionsNegativeValue);
+        Assert.assertEquals(1, result.size());
+        Assert.assertEquals(85, (int)result.get("banana"));
     }
 
     @Test
