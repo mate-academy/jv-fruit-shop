@@ -8,9 +8,9 @@ Let's imagine you have a fruit store.
 There are three type of operations in your fruit store:
 
 ```text
-    s - supply, means you are receiving a new fruits from suppliers
+    s - supply, means you are receiving a new fruitStorages from suppliers
     b - buy, means someone bought a fruit
-    r - return, means someone who have bought the fruits now returns you it
+    r - return, means someone who have bought the fruitStorages now returns you it
 ```
 
 Let's check in details all types of operations:
@@ -20,13 +20,13 @@ Let's check in details all types of operations:
        s,banana,100,2020-10-17     
     ```
    The line above means you receive a 100 bananas, and their expiration date is 17-th October 2020.
-1. Buy. Buyers can visit your shop and buy some fruits. In this case you will have the following line in the file:
+1. Buy. Buyers can visit your shop and buy some fruitStorages. In this case you will have the following line in the file:
     
     ```text
        b,banana,13,2020-10-15     
     ```
    The line above means someone bought a 13 bananas. Date of purchase is 15-th October 2020.
-1. Return. Buyers can return you some fruits. In this case you will have the following line in the file:
+1. Return. Buyers can return you some fruitStorages. In this case you will have the following line in the file:
     
     ```text
        r,banana,10,2020-10-17     
@@ -43,7 +43,7 @@ Let's check in details all types of operations:
 ```
 
 ### Expecting output file example
-We are expecting to see how many fruits are available in your Fruit store after the file processing. For example:
+We are expecting to see how many fruitStorages are available in your Fruit store after the file processing. For example:
 ```text
     fruit,quantity
     banana,97
