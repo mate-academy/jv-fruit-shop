@@ -1,0 +1,16 @@
+type,fruit,quantity,date
+s,banana,10,2020-10-17
+b,banana,13,2020-10-15
+r,banana,10,2020-10-17
+r,banana,10,2020-10-15
+s,orange,147,2020-10-21
+s,apple,29,2020-10-20
+b,banana,13,2020-10-17
+b,banana,13,2020-10-22
+b,orange,20,2020-10-21
+r,orange,5,2020-10-21
+s,apple,19,2020-10-23
+b,orange,20,2020-10-19
+b,orange,20,2020-10-25
+s,banana,33,2020-10-25
+b,apple,9,2020-10-22
