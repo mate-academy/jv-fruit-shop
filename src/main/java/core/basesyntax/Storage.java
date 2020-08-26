@@ -14,6 +14,7 @@ public class Storage {
         checkNull(fruit);
         Optional<Fruit> optionalFruit = fruits.stream()
                 .filter(x -> x.getName().equals(fruit.getName()))
+                .filter(x -> x.getShelfLife().equals(fruit.getShelfLife()))
                 .findFirst();
         optionalFruit.ifPresentOrElse(x -> x.setQuantity(x.getQuantity()
                 + fruit.getQuantity()), () -> fruits.add(fruit.clone()));

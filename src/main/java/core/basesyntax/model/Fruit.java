@@ -18,10 +18,6 @@ public class Fruit implements Cloneable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -32,10 +28,6 @@ public class Fruit implements Cloneable {
 
     public LocalDate getShelfLife() {
         return shelfLife;
-    }
-
-    public void setShelfLife(LocalDate shelfLife) {
-        this.shelfLife = shelfLife;
     }
 
     @Override
@@ -60,10 +52,5 @@ public class Fruit implements Cloneable {
     @Override
     public int hashCode() {
         return Objects.hash(name, quantity, shelfLife);
-    }
-
-    @Override
-    public String toString() {
-        return name + "," + quantity;
     }
 }

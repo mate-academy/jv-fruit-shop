@@ -7,6 +7,9 @@ import core.basesyntax.shop.Trading;
 public class BuyTradingImpl implements Trading {
     @Override
     public void trade(Storage storage, Fruit fruit) {
+        if (storage == null || fruit == null) {
+            throw new NullPointerException();
+        }
         storage.remove(fruit);
     }
 }

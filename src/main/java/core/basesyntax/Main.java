@@ -1,9 +1,11 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FileService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitParser;
-import core.basesyntax.service.impl.FileServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitParserImpl;
 import core.basesyntax.shop.Shop;
 import core.basesyntax.shop.Trading;
@@ -24,17 +26,18 @@ public class Main {
         tradingMap.put("r", new RefundsTradingImpl());
 
         Shop shop = new Shop(tradingMap);
-        FileService fileService = new FileServiceImpl();
+        FileReaderService fileReader = new FileReaderServiceImpl();
         FruitParser fruitParser = new FruitParserImpl();
-        List<List<String>> data = fileService.readByPattern(args[0],
-                "(s|b|r),\\w+,\\d+,\\d{4}-\\d{2}-\\d{2}");
+        List<List<String>> data = fileReader.read("input.csv");
 
         for (List<String> row : data) {
             Fruit fruit = fruitParser.parse(row);
             shop.trade(row.get(0), fruit);
         }
 
-        fileService.write(shop.balanceStorage(), "balance_storage_"
-                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss")));
+        FileWriterService fileWriter = new FileWriterServiceImpl();
+        fileWriter.write(shop.balanceStorage(), "balance_storage_"
+                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss"))
+                + ".csv");
     }
 }

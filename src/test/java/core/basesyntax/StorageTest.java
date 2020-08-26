@@ -5,7 +5,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.security.InvalidParameterException;
 import java.time.LocalDate;
 import java.util.List;
@@ -28,46 +27,29 @@ public class StorageTest {
     }
 
     @Test
-    public void getFruitByName() {
+    public void getFruitByNameTest() {
         storage.add(BANANA_FRUIT);
         Fruit actual = storage.getByName(BANANA_FRUIT.getName());
         Assert.assertEquals(actual, BANANA_FRUIT);
     }
 
-    @Test
-    public void getFruitByName_Null() {
-        storage.add(BANANA_FRUIT);
-        try {
-            storage.getByName(null);
-        } catch (NoSuchElementException e) {
-            return;
-        }
-        Assert.fail();
+    @Test(expected = NoSuchElementException.class)
+    public void getFruitByName_NullTest() {
+        storage.getByName(null);
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void getFruitByName_WrongNameTest() {
+        storage.getByName("test");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void addNullTest() {
+        storage.add(null);
     }
 
     @Test
-    public void getFruitByName_WrongName() {
-        storage.add(BANANA_FRUIT);
-        try {
-            storage.getByName("test");
-        } catch (NoSuchElementException e) {
-            return;
-        }
-        Assert.fail();
-    }
-
-    @Test
-    public void addNull() {
-        try {
-            storage.add(null);
-        } catch (NullPointerException ignored) {
-            return;
-        }
-        Assert.fail();
-    }
-
-    @Test
-    public void addOneFruit() {
+    public void addOneFruitTest() {
         storage.add(BANANA_FRUIT);
         Fruit actual = storage.getByName(BANANA_FRUIT.getName());
         Assert.assertEquals(1, storage.size());
@@ -75,7 +57,7 @@ public class StorageTest {
     }
 
     @Test
-    public void addTwoIdenticalFruit() {
+    public void addTwoIdenticalFruitTest() {
         storage.add(BANANA_FRUIT);
         storage.add(BANANA_FRUIT);
         Assert.assertEquals(1, storage.size());
@@ -85,14 +67,14 @@ public class StorageTest {
     }
 
     @Test
-    public void addTwoDifferentFruits() {
+    public void addTwoDifferentFruitsTest() {
         storage.add(BANANA_FRUIT);
         storage.add(ORANGE_FRUIT);
         Assert.assertEquals(2, storage.size());
     }
 
     @Test
-    public void removeBanana() {
+    public void removeBananaTest() {
         storage.add(BANANA_FRUIT);
         Fruit removableFruit = new Fruit("banana", 40, DEFAULT_DATE);
         storage.remove(removableFruit);
@@ -102,7 +84,7 @@ public class StorageTest {
     }
 
     @Test
-    public void removeAllBanana() {
+    public void removeAllBananaTest() {
         storage.add(BANANA_FRUIT);
         Fruit removableFruit = new Fruit("banana", 100, DEFAULT_DATE);
         storage.remove(removableFruit);
@@ -111,36 +93,26 @@ public class StorageTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void removeMoreBananasThanAreInStorage() {
+    @Test(expected = InvalidParameterException.class)
+    public void removeMoreBananasThanAreInStorageTest() {
         storage.add(BANANA_FRUIT);
         Fruit removableFruit = new Fruit("banana", 101, DEFAULT_DATE);
-        try {
-            storage.remove(removableFruit);
-        } catch (InvalidParameterException e) {
-            return;
-        }
-        Assert.fail();
+        storage.remove(removableFruit);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void removeNullTest() {
+        storage.remove(null);
     }
 
     @Test
-    public void removeNull() {
-        try {
-            storage.remove(null);
-        } catch (NullPointerException ignored) {
-            return;
-        }
-        Assert.fail();
-    }
-
-    @Test
-    public void getAllFruits() {
+    public void getAllFruitsTest() {
         storage.add(BANANA_FRUIT);
         storage.add(ORANGE_FRUIT);
         storage.add(BANANA_FRUIT);
-        storage.remove(new Fruit("banana", 41, LocalDate.now()));
+        storage.remove(new Fruit("banana", 41, BANANA_FRUIT.getShelfLife()));
         storage.add(new Fruit("kiwi", 145, LocalDate.now()));
-        storage.remove(new Fruit("orange", 7, LocalDate.now()));
+        storage.remove(new Fruit("orange", 7, ORANGE_FRUIT.getShelfLife()));
         List<Fruit> fruits = storage.getAll();
         Assert.assertEquals(3, fruits.size());
     }

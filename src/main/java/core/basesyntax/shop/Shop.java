@@ -22,10 +22,10 @@ public class Shop {
         trading.trade(storage, fruit);
     }
 
-    public List<String> balanceStorage() {
+    public List<Fruit> balanceStorage() {
         return storage.getAll()
                 .stream()
-                .map(Fruit::toString)
+                .map(Fruit::clone)
                 .collect(Collectors.toList());
     }
 }
