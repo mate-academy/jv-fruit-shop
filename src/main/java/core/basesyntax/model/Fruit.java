@@ -41,9 +41,7 @@ public class Fruit {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Fruit fruit = (Fruit) o;
-
         return type != null ? type.equals(fruit.type) : fruit.type == null;
     }
 

@@ -9,13 +9,15 @@ public class Buy implements BuyInterface {
     @Override
     public void action(Storage storage, Fruit fruit) {
         if (storage.getFruits().contains(fruit)) {
-            int storagePositionFruit = storage.getFruits().indexOf(fruit);
-            int newCount = storage.getFruits().get(storagePositionFruit).getStock_balance() - fruit.getStock_balance();
+            int numInStorage = storage.getFruits().indexOf(fruit);
+            int newCount = storage.getFruits().get(numInStorage).getStock_balance() - fruit.getStock_balance();
             if (newCount < 0) {
                 throw new IllegalArgumentException();
-            } else {
-                storage.getFruits().get(storagePositionFruit).setStock_balance(newCount);
             }
+            if (fruit.getDate().isAfter(storage.getFruits().get(numInStorage).getDate())) {
+                throw new IllegalArgumentException();
+            }
+            storage.getFruits().get(numInStorage).setStock_balance(newCount);
         }
     }
 }
