@@ -1,0 +1,4 @@
+fruit,quantity
+banana,100
+apple,40
+orange,100500

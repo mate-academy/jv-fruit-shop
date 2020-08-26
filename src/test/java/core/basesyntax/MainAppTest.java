@@ -1,12 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.exception.*;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class MainAppTest {
