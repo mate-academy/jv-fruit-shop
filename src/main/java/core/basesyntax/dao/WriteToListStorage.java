@@ -7,9 +7,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class WriteToHashMapStorage {
+public class WriteToListStorage {
 
-    public void writeToHashMapStorage(String dataString) {
+    public void writeToListStorage(String dataString) {
         String[] arrayData = dataString.split(",");
         if (arrayData[0].length() > 1) {
             return;

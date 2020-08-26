@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class ReadFromFile {
     public void readFromFile(String filePath) {
-        WriteToHashMapStorage writer = new WriteToHashMapStorage();
+        WriteToListStorage writer = new WriteToListStorage();
         try {
             File file = new File(filePath);
             Scanner myReader = new Scanner(file);
             while (myReader.hasNextLine()) {
-                writer.writeToHashMapStorage(myReader.nextLine().toLowerCase());
+                writer.writeToListStorage(myReader.nextLine().toLowerCase());
             }
             myReader.close();
         } catch (FileNotFoundException e) {

@@ -1,39 +1,32 @@
 package core.basesyntax.service;
 
 import core.basesyntax.products.Fruit;
-import core.basesyntax.storage.TreeMapStorage;
+import core.basesyntax.storage.ListStorage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class BuyService implements Handleable {
 
     @Override
     public void operationWithProduct(Fruit fruit) {
         int numNeededFruit = fruit.getAmount();
-        String key = fruit.getName();
-        int count = TreeMapStorage.treeMapStorage
-                .entrySet()
-                .stream()
-                .filter(x -> x.getValue().getName().equals(key))
-                .filter(x -> x.getValue().getDate().isAfter(fruit.getDate()))
-                .flatMapToInt(x -> IntStream.of(x.getValue().getAmount()))
-                .sum();
-        if (count > numNeededFruit) {
-            for (Map.Entry<LocalDate, Fruit> entry : TreeMapStorage.treeMapStorage.entrySet()) {
-                if (entry.getKey().isAfter(fruit.getDate()) && entry.getValue().getName().equals(fruit.getName())) {
-                    int amount = entry.getValue().getAmount();
-                    if (amount >= numNeededFruit) {
-                        entry.getValue().setAmount(amount - numNeededFruit);
-                        return;
-                    }
-                    numNeededFruit -= amount;
-                    entry.getValue().setAmount(0);
-                }
-            }
-        } else {
-//            throw new NumberFormatException("Not enough fruit for this " + fruit.getDate() + " date!");
-        }
+        String fruitName = fruit.getName();
+        Optional<Fruit> optionalFruit = buyProduct(fruit);
+        optionalFruit.ifPresent(x -> x.setAmount(x.getAmount() - fruit.getAmount()));
+
+    }
+    private Optional<Fruit> buyProduct(Fruit fruit) {
+    return ListStorage.listStorage.stream()
+            .filter(x -> x.getName().equals(fruit.getName()))
+            .filter(x -> x.getDate().isAfter(fruit.getDate()))
+            .filter(x -> x.getAmount() >= fruit.getAmount())
+            .min(Comparator.comparing(Fruit::getDate));
+
     }
 }

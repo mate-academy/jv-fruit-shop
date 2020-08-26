@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.products.Fruit;
-import core.basesyntax.storage.TreeMapStorage;
+import core.basesyntax.storage.ListStorage;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -12,14 +12,13 @@ public class SupplyService implements Handleable {
         LocalDate fruitDate = fruit.getDate();
         String fruitName = fruit.getName();
 
-        Fruit newFruit = fruit;
-        for (Map.Entry<LocalDate, Fruit> entry : TreeMapStorage.treeMapStorage.entrySet()) {
-            if (entry.getKey().isEqual(fruitDate)
-                    && entry.getValue().getName().equals(fruitName)) {
-                newFruit.setAmount(fruit.getAmount() + entry.getValue().getAmount());
-                entry.setValue(newFruit);
+        for (Fruit element : ListStorage.listStorage) {
+            if (element.getName().equals(fruitName)
+                    && element.getDate().isEqual(fruitDate)) {
+                element.setAmount(element.getAmount() + fruit.getAmount());
+                return;
             }
         }
-        TreeMapStorage.treeMapStorage.put(fruitDate, fruit);
+        ListStorage.listStorage.add(fruit);
     }
 }
