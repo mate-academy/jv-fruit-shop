@@ -37,10 +37,6 @@ public class Fruit {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -53,7 +49,4 @@ public class Fruit {
         return endOfShelfLife;
     }
 
-    public void setEndOfShelfLife(LocalDate endOfShelfLife) {
-        this.endOfShelfLife = endOfShelfLife;
-    }
 }

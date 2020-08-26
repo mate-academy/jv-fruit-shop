@@ -1,6 +1,5 @@
 package app.service.impl;
 
-import app.FruitStorage;
 import app.model.Fruit;
 import app.service.FileWriterService;
 import java.io.FileWriter;
@@ -15,15 +14,15 @@ public class FileWriterServiceImplements implements FileWriterService {
     public static final String SEPARATOR = ",";
     
     @Override
-    public boolean writeData() {
+    public boolean writeData(List<Fruit> fruits) {
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
-            if (FruitStorage.fruits.size() == 0) {
+            if (fruits.size() == 0) {
                 return false;
             }
             int numberOfCurrentProducts = 0;
             writer.append("fruit").append(SEPARATOR).append("quantity")
                     .append(System.lineSeparator());
-            Map<String, List<Fruit>> resultList = FruitStorage.fruits.stream()
+            Map<String, List<Fruit>> resultList = fruits.stream()
                     .collect(Collectors.groupingBy(Fruit::getName));
             for (Map.Entry<String, List<Fruit>> resultElement : resultList.entrySet()) {
                 writer.append(resultElement.getKey()).append(SEPARATOR);

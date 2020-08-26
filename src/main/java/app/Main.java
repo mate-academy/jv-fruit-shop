@@ -1,5 +1,6 @@
 package app;
 
+import app.model.Fruit;
 import app.service.FileReadService;
 import app.service.FileWriterService;
 import app.service.Operation;
@@ -14,6 +15,16 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
+        getStart();
+    }
+
+    public static void fillMapOfOperators(Map<String, Operation> fruitOperations) {
+        fruitOperations.put("s",new OperationSupply());
+        fruitOperations.put("b", new OperationBuy());
+        fruitOperations.put("r", new OperationReturn());
+    }
+
+    public static void getStart() {
         Map<String, Operation> fruitOperations = new HashMap<>();
         fillMapOfOperators(fruitOperations);
         FruitOperationStrategy fruitOperationStrategy = new FruitOperationStrategy(fruitOperations);
@@ -25,12 +36,6 @@ public class Main {
             operation.doOperation(line);
         }
         FileWriterService fileWriterServiceImplements = new FileWriterServiceImplements();
-        fileWriterServiceImplements.writeData();
-    }
-
-    public static void fillMapOfOperators(Map<String, Operation> fruitOperations) {
-        fruitOperations.put("s",new OperationSupply());
-        fruitOperations.put("b", new OperationBuy());
-        fruitOperations.put("r", new OperationReturn());
+        fileWriterServiceImplements.writeData(FruitStorage.fruits);
     }
 }
