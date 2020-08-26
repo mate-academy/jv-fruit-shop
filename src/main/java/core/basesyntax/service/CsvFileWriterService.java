@@ -27,7 +27,7 @@ public class CsvFileWriterService implements FileWriterService {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        writer.write(formattedLines.deleteCharAt(formattedLines.length() - 1).toString());
+        writer.write(formattedLines.toString());
         writer.close();
         FruitStorage.clearStock();
     }
