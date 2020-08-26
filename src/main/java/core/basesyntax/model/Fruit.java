@@ -44,17 +44,12 @@ public class Fruit {
 
         Fruit fruit = (Fruit) o;
 
-        if (stock_balance != fruit.stock_balance) return false;
-        if (type != null ? !type.equals(fruit.type) : fruit.type != null) return false;
-        return date != null ? date.equals(fruit.date) : fruit.date == null;
+        return type != null ? type.equals(fruit.type) : fruit.type == null;
     }
 
     @Override
     public int hashCode() {
-        int result = type != null ? type.hashCode() : 0;
-        result = 31 * result + stock_balance;
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        return result;
+        return type != null ? type.hashCode() : 0;
     }
 
     @Override
