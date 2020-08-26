@@ -2,7 +2,6 @@ package core.basesyntax.shop;
 
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.List;
 
 public class ShopTest {
@@ -13,5 +12,4 @@ public class ShopTest {
         List<String> balanceStorage = shop.balanceStorage();
         Assert.assertEquals(0, balanceStorage.size());
     }
-
 }
