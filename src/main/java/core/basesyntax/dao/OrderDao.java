@@ -6,8 +6,8 @@ import core.basesyntax.operation.Supply;
 
 import java.util.List;
 
-public interface OrderDao {
-    void add(OperationGeneral order);
+public interface OrderDao<T extends OperationGeneral> {
+    void add(T order);
 
-    List<OperationGeneral> getAll();
+    List<T> getAll();
 }

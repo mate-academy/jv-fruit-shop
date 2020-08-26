@@ -7,14 +7,14 @@ import core.basesyntax.operation.Supply;
 
 import java.util.List;
 
-public class OrderDaoImpl implements OrderDao {
+public class OrderDaoImpl implements OrderDao<Supply> {
     @Override
-    public void add(OperationGeneral order) {
+    public void add(Supply order) {
         Storage.orders.add(order);
     }
 
     @Override
-    public List<OperationGeneral> getAll() {
+    public List<Supply> getAll() {
         return Storage.orders;
     }
 }

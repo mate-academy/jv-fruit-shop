@@ -19,4 +19,12 @@ public abstract class OperationGeneral {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "OperationGeneral{" +
+                "typeOfFruit='" + typeOfFruit + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

@@ -23,13 +23,17 @@ public class Main {
         List<String> data = fileServiceInt.readFile("/Users/artem2/Mate Academy/jv-fruit-shop/src/test/resources/base2.csv");
         for (String row : data) {
             String[] line = row.split(",");
-            if (line[0].equals("s")) {
-                String type = line[1];
-                int q = Integer.parseInt(line[2]);
+//            if (line[0].equals("s")) {
+            String t = line[0];
+            String type = line[1];
+            int q = Integer.parseInt(line[2]);
 //                Supply supply = supplySupplyParse.parse(data);
-                Supply supply = new Supply(type,q);
-                        Storage.orders.add(supply);
-            }
+            Supply supply = new Supply(t,type, q);
+
+            Storage.orders.add(supply);
+            RecordingService recordingService = new RecordingService();
+            recordingService.writingToFile();
+//            }
 
 
 //            if (data.get(0).equals("s")) {
@@ -40,7 +44,6 @@ public class Main {
 
 //        FileService fileService = new FileService();
 //        fileService.readFromFile("/Users/artem2/Mate Academy/jv-fruit-shop/src/test/resources/base.csv");
-//        RecordingService recordingService = new RecordingService();
-//        recordingService.writingToFile();
+
     }
 }
