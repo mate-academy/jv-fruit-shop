@@ -1,0 +1,7 @@
+type,fruit,quantity,date
+r,banana,100,2020-10-17
+s,apple,30,2020-10-15
+b,grapes,10,2020-10-17
+s,lemon,100,2020-10-17
+r,kiwi,30,2020-10-25
+s,peach,10,2020-10-17
