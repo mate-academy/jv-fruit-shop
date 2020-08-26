@@ -37,4 +37,16 @@ public class SupplyTransactionTest {
         String expectedResult = "s";
         Assert.assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void setters_correctWork() {
+        transaction.setFruitType("banana");
+        transaction.setDate(LocalDate.of(2020, 1, 10));
+        transaction.setQuantity(120);
+        AbstractTransaction newTransaction = new SupplyTransaction();
+        newTransaction.setFruitType("banana");
+        newTransaction.setDate(LocalDate.of(2020, 1, 10));
+        newTransaction.setQuantity(120);
+        Assert.assertEquals(newTransaction, transaction);
+    }
 }
