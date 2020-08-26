@@ -42,13 +42,4 @@ public final class FruitBatch {
     public int hashCode() {
         return Objects.hash(fruitType, expiryDate);
     }
-
-    @Override
-    public String toString() {
-        return "FruitBatch{"
-                + "fruitType='"
-                + fruitType + '\''
-                + ", expiryDate=" + expiryDate
-                + '}';
-    }
 }
