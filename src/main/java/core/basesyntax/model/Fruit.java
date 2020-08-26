@@ -8,13 +8,9 @@ public class Fruit {
     private LocalDate date;
 
     public Fruit(String type, int stock_balance, LocalDate date) {
-        this.type = type;
+        setType(type);
+        setDate(date);
         this.stock_balance = stock_balance;
-        this.date = date;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public int getStock_balance() {
@@ -25,7 +21,10 @@ public class Fruit {
         return date;
     }
 
-    public void setType(String type) {
+    private void setType(String type) {
+        type = type
+                .trim()
+                .toLowerCase();
         this.type = type;
     }
 
@@ -33,7 +32,7 @@ public class Fruit {
         this.stock_balance = stock_balance;
     }
 
-    public void setDate(LocalDate date) {
+    private void setDate(LocalDate date) {
         this.date = date;
     }
 
