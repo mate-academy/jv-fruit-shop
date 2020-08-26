@@ -5,5 +5,5 @@ import core.basesyntax.items.Storage;
 
 public interface Operation {
 
-    boolean doAction(Product fruit, Storage storage);
+    boolean updateStorage(Product fruit, Storage storage);
 }

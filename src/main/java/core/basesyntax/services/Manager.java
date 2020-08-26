@@ -15,7 +15,7 @@ public class Manager {
         printer = new TextPrinter();
     }
 
-    public void manage(String fileFrom, String fileTo) {
+    public void calculateRemainedProduct(String fileFrom, String fileTo) {
         printer.print(aggregator.aggregate(reader.read(fileFrom), storage).toString(), fileTo);
     }
 }

@@ -11,22 +11,27 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class DataAggregator {
+    public static final int OPERATION_SYMBOL_INDEX = 0;
+    public static final int PRODUCT_TYPE_INDEX = 1;
+    public static final int QUANTITY_INDEX = 2;
+    public static final int DATE_INDEX = 3;
     private final LineParser parser = new LineParser();
-    private final Map<String, Operation> operationsDecoder = new TreeMap<>();
+    private final Map<String, Operation> storageOperations = new TreeMap<>();
 
     public DataAggregator() {
-        operationsDecoder.put("s", new Supply());
-        operationsDecoder.put("b", new Buy());
-        operationsDecoder.put("r", new Supply());
+        storageOperations.put("s", new Supply());
+        storageOperations.put("b", new Buy());
+        storageOperations.put("r", new Supply());
     }
 
     public Storage aggregate(List<String> list, Storage storage) {
         for (String line : list) {
             String[] operationData = parser.parse(line);
-            Product product = new Product(operationData[1],
-                    Integer.parseInt(operationData[2]), LocalDate.parse(operationData[3]));
-            operationsDecoder.get(operationData[0])
-                    .doAction(product, storage);
+            Product product = new Product(operationData[PRODUCT_TYPE_INDEX],
+                    Integer.parseInt(operationData[QUANTITY_INDEX]),
+                    LocalDate.parse(operationData[DATE_INDEX]));
+            storageOperations.get(operationData[OPERATION_SYMBOL_INDEX])
+                    .updateStorage(product, storage);
         }
         return storage;
     }

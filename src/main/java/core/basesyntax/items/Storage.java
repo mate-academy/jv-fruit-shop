@@ -5,29 +5,29 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Storage {
-    private Map<String, Map<LocalDate, Integer>> storage = new TreeMap<>();
+    private Map<String, Map<LocalDate, Integer>> fruitStorage = new TreeMap<>();
 
     public Map<LocalDate, Integer> getBoxWithFruit(String fruit) {
-        return storage.get(fruit);
+        return fruitStorage.get(fruit);
     }
 
     public boolean isFruitInStorage(String fruit) {
-        return storage.containsKey(fruit);
+        return fruitStorage.containsKey(fruit);
     }
 
     public void addNewFruitToRange(String fruit, Integer quantity, LocalDate expirationDate) {
-        storage.put(fruit, new TreeMap<>());
-        storage.get(fruit).put(expirationDate, quantity);
+        fruitStorage.put(fruit, new TreeMap<>());
+        fruitStorage.get(fruit).put(expirationDate, quantity);
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (String fruit : storage.keySet()) {
-            for (LocalDate expirationDate : storage.get(fruit).keySet()) {
+        for (String fruit : fruitStorage.keySet()) {
+            for (LocalDate expirationDate : fruitStorage.get(fruit).keySet()) {
                 builder.append(fruit)
                         .append(",")
-                        .append(storage.get(fruit).get(expirationDate))
+                        .append(fruitStorage.get(fruit).get(expirationDate))
                         .append(",")
                         .append(expirationDate)
                         .append("\n");

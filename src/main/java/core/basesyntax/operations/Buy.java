@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Buy implements Operation {
     @Override
-    public boolean doAction(Product product, Storage storage) {
+    public boolean updateStorage(Product product, Storage storage) {
         String type = product.getType();
         Integer quantity = product.getQuantity();
         LocalDate purchaseDate = product.getDate();
@@ -27,6 +27,12 @@ public class Buy implements Operation {
         if (expirationDates.isEmpty()) {
             return false;
         }
+        return takeFromBoxes(quantity, expirationDates, box);
+    }
+
+    private boolean takeFromBoxes(Integer quantity,
+                                  List<LocalDate> expirationDates,
+                                  Map<LocalDate, Integer> box) {
         Integer quantityToBuy = quantity;
         for (LocalDate date : expirationDates) {
             Integer quantityInBox = box.get(date);

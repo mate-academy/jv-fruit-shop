@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Supply implements Operation {
     @Override
-    public boolean doAction(Product product, Storage storage) {
+    public boolean updateStorage(Product product, Storage storage) {
         String type = product.getType();
         Integer quantity = product.getQuantity();
         LocalDate expirationDate = product.getDate();

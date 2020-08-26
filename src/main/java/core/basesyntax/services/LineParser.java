@@ -4,15 +4,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class LineParser {
+    public static final int CORRECT_ARG_AMOUNT = 4;
+    public static final int QUANTITY_INDEX = 2;
+    public static final int DATE_INDEX = 3;
 
     public String[] parse(String line) {
         String[] splitedLine = line.split(",");
-        if (splitedLine.length != 4) {
+        if (splitedLine.length != CORRECT_ARG_AMOUNT) {
             throw new RuntimeException("Wrong argument format!");
         }
         try {
-            Integer.parseInt(splitedLine[2]);
-            LocalDate.parse(splitedLine[3]);
+            Integer.parseInt(splitedLine[QUANTITY_INDEX]);
+            LocalDate.parse(splitedLine[DATE_INDEX]);
         } catch (NumberFormatException e) {
             throw new RuntimeException("Wrong quantity format!");
         } catch (DateTimeParseException e) {
