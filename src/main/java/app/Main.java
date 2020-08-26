@@ -1,6 +1,5 @@
 package app;
 
-import app.model.Fruit;
 import app.service.FileReadService;
 import app.service.FileWriterService;
 import app.service.Operation;

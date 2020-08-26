@@ -2,8 +2,6 @@ package app.service.impl;
 
 import app.model.Fruit;
 import app.service.FruitParser;
-
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
