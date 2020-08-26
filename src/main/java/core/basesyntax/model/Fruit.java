@@ -45,12 +45,16 @@ public class Fruit implements Cloneable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Fruit fruit = (Fruit) o;
-        return quantity == fruit.quantity &&
-                Objects.equals(name, fruit.name) &&
-                Objects.equals(shelfLife, fruit.shelfLife);
+        return quantity == fruit.quantity
+                && Objects.equals(name, fruit.name)
+                && Objects.equals(shelfLife, fruit.shelfLife);
     }
 
     @Override
