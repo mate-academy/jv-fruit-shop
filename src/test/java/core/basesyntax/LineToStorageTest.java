@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class LineToStorageTest {
-    private static UpdateStorage newUpdate;
-    private HashMap<String, TreeMap<LocalDate, Integer>> toCompareStore;
+    private static StorageUpdaterImpl newUpdate;
+    private Map<String, TreeMap<LocalDate, Integer>> toCompareStore;
     private static final List<String> SUPPLY_BANANA_TO_STORE
             = new ArrayList<>(List.of("s", "banana", "15", "2020-10-17"));
     private static final List<String> SUPPLY_ORANGE_TO_STORE
@@ -36,7 +36,7 @@ public class LineToStorageTest {
 
     @Before
     public void setUp() {
-        newUpdate = new UpdateStorageImpl();
+        newUpdate = new StorageUpdaterImpl();
         toCompareStore = new HashMap<>();
         Storage.fruitsInStore = new HashMap<>();
     }
@@ -44,7 +44,7 @@ public class LineToStorageTest {
     @Test
     public void buyWhenStockIsEmpty() {
         newUpdate.putLineToStorage(BUY_BANANA_OVER_EXPIRATION_DATE);
-        HashMap<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
+        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
         Assert.assertEquals(toCompareStore, actualResult);
     }
 
@@ -53,7 +53,7 @@ public class LineToStorageTest {
         toCompareStore.put("orange", new TreeMap<>());
         toCompareStore.get("orange").put(LocalDate.parse("2020-10-21"), 17);
         newUpdate.putLineToStorage(RETURN_ORANGE_TO_STORE);
-        HashMap<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
+        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
         Assert.assertEquals(toCompareStore, actualResult);
     }
 
@@ -62,7 +62,7 @@ public class LineToStorageTest {
         toCompareStore.put("apple", new TreeMap<>());
         toCompareStore.get("apple").put(LocalDate.parse("2020-10-22"), 20);
         newUpdate.putLineToStorage(SUPPLY_APPLE_TO_STORE);
-        HashMap<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
+        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
         Assert.assertEquals(toCompareStore, actualResult);
     }
 
@@ -72,7 +72,7 @@ public class LineToStorageTest {
         toCompareStore.get("banana").put(LocalDate.parse("2020-10-17"), 15);
         newUpdate.putLineToStorage(SUPPLY_BANANA_TO_STORE);
         newUpdate.putLineToStorage(BUY_BANANA_OVER_EXPIRATION_DATE);
-        HashMap<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
+        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
         Assert.assertEquals(toCompareStore, actualResult);
     }
 
@@ -82,7 +82,7 @@ public class LineToStorageTest {
         toCompareStore.get("banana").put(LocalDate.parse("2020-10-17"), 5);
         newUpdate.putLineToStorage(SUPPLY_BANANA_TO_STORE);
         newUpdate.putLineToStorage(BUY_BANANA_LESS_THAN_IN_STOCK);
-        HashMap<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
+        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
         Assert.assertEquals(toCompareStore, actualResult);
     }
 
@@ -91,7 +91,7 @@ public class LineToStorageTest {
         toCompareStore.put("apple", new TreeMap<>());
         newUpdate.putLineToStorage(SUPPLY_APPLE_TO_STORE);
         newUpdate.putLineToStorage(BUY_APPLE_MORE_THAN_IN_STOCK);
-        HashMap<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
+        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
         Assert.assertEquals(toCompareStore, actualResult);
     }
 
@@ -110,7 +110,7 @@ public class LineToStorageTest {
         newUpdate.putLineToStorage(RETURN_BANANA_TO_STORE);
         newUpdate.putLineToStorage(SUPPLY_APPLE_TO_STORE);
         newUpdate.putLineToStorage(RETURN_ORANGE_TO_STORE);
-        HashMap<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
+        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
         Assert.assertEquals(toCompareStore, actualResult);
     }
 
@@ -129,7 +129,7 @@ public class LineToStorageTest {
         newUpdate.putLineToStorage(RETURN_APPLE_WITH_SAME_EXPIRATION);
         newUpdate.putLineToStorage(SUPPLY_ORANGE_WITH_SAME_EXPIRATION);
         newUpdate.putLineToStorage(RETURN_BANANA_TO_STORE);
-        HashMap<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
+        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
         Assert.assertEquals(toCompareStore, actualResult);
     }
 
@@ -148,7 +148,7 @@ public class LineToStorageTest {
         newUpdate.putLineToStorage(SUPPLY_ORANGE_WITH_SAME_EXPIRATION);
         newUpdate.putLineToStorage(BUY_LOTS_OF_ORANGES);
         newUpdate.putLineToStorage(SUPPLY_APPLE_TO_STORE);
-        HashMap<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
+        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.fruitsInStore;
         Assert.assertEquals(toCompareStore, actualResult);
     }
 }

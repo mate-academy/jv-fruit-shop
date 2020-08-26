@@ -6,11 +6,13 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 
 public class WriteToFile {
+    private static final String OUTPUT_FILE_HEADER = "fruit,quantity\n";
+
     public void csvFileWriter(String fileToSavePath, String updateFromFile) throws IOException {
-        UpdateStorageImpl updater = new UpdateStorageImpl();
-        updater.parseFileToStorage(updateFromFile);
+        StorageUpdater updater = new StorageUpdaterImpl();
+        updater.parseData(updateFromFile);
         PrintWriter writer = new PrintWriter(new File(fileToSavePath));
-        StringBuilder formattedData = new StringBuilder("fruit,quantity\n");
+        StringBuilder formattedData = new StringBuilder(OUTPUT_FILE_HEADER);
         for (String fruit : Storage.fruitsInStore.keySet()) {
             int fruitInstanceSum = 0;
             for (LocalDate expirationDate : Storage.fruitsInStore.get(fruit).keySet()) {

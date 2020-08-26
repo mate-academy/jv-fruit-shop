@@ -8,8 +8,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
-public class UpdateStorageTest {
-    private static UpdateStorage newUpdate;
+public class StorageUpdaterTest {
+    private static StorageUpdater newUpdate;
     private static final String PROPERLY_FILLED_FILE = "test11.csv";
     private static final String INCOMPLETE_DATA_FILE = "test10.csv";
     private static HashMap<String, TreeMap<LocalDate, Integer>> toCompareEmptyStore = new HashMap<>();
@@ -17,7 +17,7 @@ public class UpdateStorageTest {
 
     @BeforeClass
     public static void setUp() {
-        newUpdate = new UpdateStorageImpl();
+        newUpdate = new StorageUpdaterImpl();
         Storage.fruitsInStore = new HashMap<>();
 
         toCompareEmptyStore.put("banana", new TreeMap<>());
@@ -42,23 +42,23 @@ public class UpdateStorageTest {
 
     @Test
     public void updateEmptyStorageFromFile() throws IOException {
-        newUpdate.parseFileToStorage(PROPERLY_FILLED_FILE);
+        newUpdate.parseData(PROPERLY_FILLED_FILE);
         Assert.assertEquals(toCompareEmptyStore, Storage.fruitsInStore);
     }
 
     @Test
     public void updateNotEmptyStorageFromFile() throws IOException {
-        newUpdate.parseFileToStorage(PROPERLY_FILLED_FILE);
+        newUpdate.parseData(PROPERLY_FILLED_FILE);
         Assert.assertEquals(toCompareNotEmptyStore, Storage.fruitsInStore);
     }
 
     @Test
     public void getExceptionWhenDataIncomplete() throws IOException {
         try {
-            newUpdate.parseFileToStorage(INCOMPLETE_DATA_FILE);
-        } catch (ArrayIndexOutOfBoundsException message) {
+            newUpdate.parseData(INCOMPLETE_DATA_FILE);
+        } catch (IllegalArgumentException message) {
             return;
         }
-        Assert.fail("ArrayIndexOutOfBoundsException should be thrown");
+        Assert.fail("IllegalArgumentException should be thrown");
     }
 }

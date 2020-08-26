@@ -7,20 +7,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.IllegalFormatException;
 import java.util.IllegalFormatFlagsException;
 import java.util.List;
 
-public class ReadFromFile implements ReadableFile {
+public class LocalFileReader {
     private static final String COMMA_DELIMITER = ",";
     private static final String[] FILE_HEADER = new String[]{"type", "fruit", "quantity", "date"};
 
-    public List<List<String>> getNewData(String fileName) throws IOException {
-        if (fileName == null || fileName.length() < 4
-                || !fileName.substring(fileName.length() - 4).equals(".csv")) {
-            throw new IllegalArgumentException("You haven't indicated a file or have provided file "
-                    + "with unsupported extension! Please, make sure to provide a CSV file");
-        }
+    public List<List<String>> readFromFile(String fileName) throws IOException {
+        validateFilePath(fileName);
         List<List<String>> fileData = new ArrayList<>();
         try (BufferedReader textHolder = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -36,6 +31,13 @@ public class ReadFromFile implements ReadableFile {
         return fileData;
     }
 
+    private void validateFilePath(String filePath) {
+        if (filePath == null || filePath.length() < 4 || !filePath.endsWith(".csv")) {
+            throw new IllegalArgumentException("You haven't indicated a file or have provided file "
+                    + "with unsupported extension! Please, make sure to provide a CSV file");
+        }
+    }
+
     public boolean checkDataFormat(String[] lineFromFile, List<List<String>> fileData) {
         if (fileData.isEmpty() && !Arrays.equals(FILE_HEADER, lineFromFile)) {
             throw new IllegalFormatFlagsException("File header doesn't satisfy specified format");
@@ -48,10 +50,8 @@ public class ReadFromFile implements ReadableFile {
         try {
             int fruitAmount = Integer.parseInt(lineFromFile[2]);
             LocalDate date = LocalDate.parse(lineFromFile[3]);
-        } catch (IllegalFormatException | DateTimeParseException message) {
-            throw new IllegalArgumentException(message);
-        } catch (ArrayIndexOutOfBoundsException message) {
-            throw new ArrayIndexOutOfBoundsException("The provided data was incomplete");
+        } catch (NumberFormatException | DateTimeParseException | ArrayIndexOutOfBoundsException message) {
+            throw new IllegalArgumentException("File provides wrong data format");
         }
         return true;
     }

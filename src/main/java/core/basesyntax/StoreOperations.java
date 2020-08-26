@@ -1,10 +1,11 @@
 package core.basesyntax;
 
 import java.util.HashMap;
-import java.util.function.DoubleBinaryOperator;
+import java.util.Map;
+import java.util.function.IntBinaryOperator;
 
 public class StoreOperations {
-    static final HashMap<String, DoubleBinaryOperator> AVAILABLE_OPERATIONS = new HashMap<>();
+    static final Map<String, IntBinaryOperator> AVAILABLE_OPERATIONS = new HashMap<>();
 
     static {
         AVAILABLE_OPERATIONS.put("s", (x, y) -> x + y);
@@ -12,10 +13,10 @@ public class StoreOperations {
         AVAILABLE_OPERATIONS.put("r", (x, y) -> x + y);
     }
 
-    static double calculate(int x, int y, String operationSymbol) {
+    static int calculate(int x, int y, String operationSymbol) {
         if (!AVAILABLE_OPERATIONS.containsKey(operationSymbol)) {
             throw new IllegalArgumentException("Provided operation is not supported");
         }
-        return AVAILABLE_OPERATIONS.get(operationSymbol).applyAsDouble(x, y);
+        return AVAILABLE_OPERATIONS.get(operationSymbol).applyAsInt(x, y);
     }
 }

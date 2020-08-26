@@ -9,11 +9,11 @@ import java.util.*;
 public class CheckDataFormatTest {
     private static final String[] PROPER_FILE_HEADER = new String[]{"type", "fruit", "quantity", "date"};
     private static List<List<String>> dataFromProperFile;
-    private static ReadFromFile newReader;
+    private static LocalFileReader newReader;
 
     @Before
     public void setUp() {
-        newReader = new ReadFromFile();
+        newReader = new LocalFileReader();
         dataFromProperFile = new ArrayList<>();
         dataFromProperFile.add(Arrays.asList(PROPER_FILE_HEADER));
     }
@@ -69,10 +69,10 @@ public class CheckDataFormatTest {
     public void getExceptionWhenDataIncomplete() {
         try {
             newReader.checkDataFormat(INCOMPLETE_DATA, dataFromProperFile);
-        } catch (ArrayIndexOutOfBoundsException message) {
+        } catch (IllegalArgumentException message) {
             return;
         }
-        Assert.fail("ArrayIndexOutOfBoundsException should be thrown");
+        Assert.fail("IllegalArgumentException should be thrown");
     }
 
     @Test

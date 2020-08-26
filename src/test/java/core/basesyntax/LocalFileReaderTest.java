@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
-public class ReadFromFileTest {
+public class LocalFileReaderTest {
     private static final String EMPTY_FILE = "test1.csv";
     private static final String EMPTY_FILE_NAME = "";
     private static final String NULL_FILE_NAME = null;
@@ -32,30 +32,30 @@ public class ReadFromFileTest {
 
     @Test
     public void getOnlyHeaderFromFile() throws IOException {
-        ReadFromFile reader = new ReadFromFile();
-        List<List<String>> actualResult = reader.getNewData(JUST_HEADER_FILE);
+        LocalFileReader reader = new LocalFileReader();
+        List<List<String>> actualResult = reader.readFromFile(JUST_HEADER_FILE);
         Assert.assertEquals(ONLY_HEADER_RESULT, actualResult);
     }
 
     @Test
     public void readFromEmptyFile() throws IOException {
-        ReadFromFile reader = new ReadFromFile();
-        List<List<String>> actualResult = reader.getNewData(EMPTY_FILE);
+        LocalFileReader reader = new LocalFileReader();
+        List<List<String>> actualResult = reader.readFromFile(EMPTY_FILE);
         Assert.assertEquals(EMPTY_LIST_RESULT, actualResult);
     }
 
     @Test
     public void readFilledWithDataFile() throws IOException {
-        ReadFromFile reader = new ReadFromFile();
-        List<List<String>> actualResult = reader.getNewData(APPROPRIATE_DATA_FILE);
+        LocalFileReader reader = new LocalFileReader();
+        List<List<String>> actualResult = reader.readFromFile(APPROPRIATE_DATA_FILE);
         Assert.assertEquals(PROPER_DATA_RESULT, actualResult);
     }
 
     @Test
     public void getExceptionWhenFileWrongExtension() throws IOException {
-        ReadFromFile reader = new ReadFromFile();
+        LocalFileReader reader = new LocalFileReader();
         try {
-            reader.getNewData(EMPTY_FILE_NAME);
+            reader.readFromFile(EMPTY_FILE_NAME);
         } catch (IllegalArgumentException message) {
             return;
         }
@@ -64,9 +64,9 @@ public class ReadFromFileTest {
 
     @Test
     public void getExceptionWhenFileNameEmpty() throws IOException {
-        ReadFromFile reader = new ReadFromFile();
+        LocalFileReader reader = new LocalFileReader();
         try {
-            reader.getNewData(WRONG_EXTENSION_FILE);
+            reader.readFromFile(WRONG_EXTENSION_FILE);
         } catch (IllegalArgumentException message) {
             return;
         }
@@ -75,9 +75,9 @@ public class ReadFromFileTest {
 
     @Test
     public void getExceptionForNullFileName() throws IOException {
-        ReadFromFile reader = new ReadFromFile();
+        LocalFileReader reader = new LocalFileReader();
         try {
-            reader.getNewData(NULL_FILE_NAME);
+            reader.readFromFile(NULL_FILE_NAME);
         } catch (IllegalArgumentException message) {
             return;
         }
@@ -86,9 +86,9 @@ public class ReadFromFileTest {
 
     @Test
     public void getExceptionWhenFileNotExist() throws IOException {
-        ReadFromFile reader = new ReadFromFile();
+        LocalFileReader reader = new LocalFileReader();
         try {
-            reader.getNewData(NON_EXISTENT_FILE_NAME);
+            reader.readFromFile(NON_EXISTENT_FILE_NAME);
         } catch (FileNotFoundException message) {
             return;
         }
