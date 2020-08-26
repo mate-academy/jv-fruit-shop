@@ -11,9 +11,9 @@ import java.util.List;
 public class MainAppTest {
     private String[] args;
     private FruitStoreDao fruitStoreDAO = new FruitStoreDao();
-    public static final String INPUT_FOLDER = "src\\test\\resources\\input\\";
-    public static final String OUTPUT_FOLDER = "src\\test\\resources\\output\\";
-    public static final String EXPECTED_FOLDER = "src\\test\\resources\\expected\\";
+    public static final String INPUT_FOLDER = "src/test/resources/input/";
+    public static final String OUTPUT_FOLDER = "src/test/resources/output/";
+    public static final String EXPECTED_FOLDER = "src/test/resources/expected/";
 
     @Before
     public void setUp() {
@@ -145,7 +145,7 @@ public class MainAppTest {
     @Test
     public void invalidOutputPath() {
         String supplyFruitsOkInput = INPUT_FOLDER + "buyFruitsOK.txt";
-        String supplyFruitsOkOutput = "src\\test\\resources\\notExistingFolder\\outputBuyExpiredFruit.txt";
+        String supplyFruitsOkOutput = "src/test/resources/notExistingFolder/outputBuyExpiredFruit.txt";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         try {
             MainApp.main(args);
