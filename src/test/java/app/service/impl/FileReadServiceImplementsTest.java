@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class FileReadServiceImplementsTest {
-    private static final String FILE_PATH = "C:\\Users\\38093\\Desktop\\Mate academy\\jv-fruit-shop_prod" +
-            "\\src\\test\\java\\resources\\testOpen.csv";
+    public static final String RESULT_PATH = "C:\\Users\\38093\\Desktop\\Mate academy" +
+            "\\jv-fruit-shop_prod\\src\\main\\java\\resources\\result.csv";
     private static FileReadService fileReadService;
     private static final String SUPPLY = "s";
     private static final String BUY = "b";
@@ -79,7 +79,7 @@ public class FileReadServiceImplementsTest {
 
     @Test
     public void readFileOk() {
-        List<List<String>> allData = fileReadService.readFile(FILE_PATH);
+        List<List<String>> allData = fileReadService.readFile(RESULT_PATH);
         Assert.assertEquals(testValue, allData);
     }
 }
