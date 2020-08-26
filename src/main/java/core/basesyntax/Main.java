@@ -11,39 +11,31 @@ import core.basesyntax.write.RecordingService;
 //import core.basesyntax.write.RecordingService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-//        ParseOperation<Supply> supplySupplyParse = new SupplyParse();
-
+        List<String> listOfFruit = new ArrayList<>();
         FileServiceInt fileServiceInt = new FileServiceImp();
-        List<String> data = fileServiceInt.readFile("/Users/artem2/Mate Academy/jv-fruit-shop/src/test/resources/base2.csv");
+        List<String> data = fileServiceInt.readFile("/Users/artem2/Mate Academy/jv-fruit-shop/src/test/resources/base.csv");
         for (String row : data) {
             String[] line = row.split(",");
-//            if (line[0].equals("s")) {
+            listOfFruit.add(line[1]);
             String t = line[0];
             String type = line[1];
             int q = Integer.parseInt(line[2]);
-//                Supply supply = supplySupplyParse.parse(data);
-            Supply supply = new Supply(t,type, q);
-
+            Supply supply = new Supply(t, type, q);
             Storage.orders.add(supply);
             RecordingService recordingService = new RecordingService();
             recordingService.writingToFile();
-//            }
-
-
-//            if (data.get(0).equals("s")) {
-//                Supply supply = supplySupplyParse.parse(data);
-//                Storage.orders.add(supply);
-//            }
         }
-
-//        FileService fileService = new FileService();
-//        fileService.readFromFile("/Users/artem2/Mate Academy/jv-fruit-shop/src/test/resources/base.csv");
-
+        List<String> result = listOfFruit.stream().distinct().collect(Collectors.toList());
+        for (String fruit : result) {
+            fruit
+        }
     }
 }

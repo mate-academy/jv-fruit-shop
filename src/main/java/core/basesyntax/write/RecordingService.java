@@ -16,17 +16,22 @@ import java.util.stream.Collectors;
 public class RecordingService {
     public void writingToFile() {
         int s = 0;
+        String head = "fruit, quantity\n";
         List<String> resultList = new ArrayList<>();
         OrderDao<Supply> orderDao = new OrderDaoImpl();
         List<Supply> result = orderDao.getAll();
         System.out.println(result);
-//        for (Supply supply : result) {
 
-//            s = supply.getQuantity();
-//        }
-            int sum = result.stream().filter(x->x.getTypeOfOperation().equals("b") ? x.getTypeOfOperation() ). map(Supply::getQuantity).reduce(0,Integer::sum);
+        int sum = result.stream()
+                .filter(x -> x.getTypeOfFruit().equals("apple"))
+                .map(x -> x.getTypeOfOperation().equals("b")
+                        ? -(x.getQuantity())
+                        : x.getQuantity())
+                .reduce(0, Integer::sum);
+        resultList.add(head);
+        resultList.add(String.valueOf(sum));
         try (FileWriter writer = new FileWriter("notes2.csv", false)) {
-            String text = "result" + sum;
+            String text = resultList.toString();
             writer.write(text);
         } catch (IOException ex) {
 
@@ -35,3 +40,15 @@ public class RecordingService {
     }
 
 }
+
+//        for (Supply supply : result) {
+
+//            s = supply.getQuantity();
+//        }
+//        int amountOfApple = orderDao.getAll().stream()
+//                .filter(x -> x.getFruit().equals("apple"))
+//                .map(x -> x.getType().equals("b")
+//                        ? -(x.getQuantity())
+//                        : x.getQuantity())
+//                .reduce(0, Integer::sum);
+//        System.out.println(orderDao.getAll());
