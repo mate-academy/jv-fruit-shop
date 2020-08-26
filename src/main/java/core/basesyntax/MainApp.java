@@ -8,7 +8,7 @@ import core.basesyntax.services.operations.Supply;
 import java.util.HashMap;
 import java.util.Map;
 
-public class App {
+public class MainApp {
     private static final String FILE_PATH = "src/test/resources/inputFile.txt";
     private static final String RESULT_FILE_PATH = "src/test/resources/resultFile.txt";
     private static final String SUCCESSFUL_MESSAGE
