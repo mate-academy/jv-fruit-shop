@@ -12,10 +12,10 @@ public class Buy implements BuyInterface {
             int numInStorage = storage.getFruits().indexOf(fruit);
             int newCount = storage.getFruits().get(numInStorage).getStock_balance() - fruit.getStock_balance();
             if (newCount < 0) {
-                throw new IllegalArgumentException();
+                throw new RuntimeException("Недостаточно товаров на складе");
             }
             if (fruit.getDate().isAfter(storage.getFruits().get(numInStorage).getDate())) {
-                throw new IllegalArgumentException();
+                throw new RuntimeException("Нет товаров с пригодным сроком");
             }
             storage.getFruits().get(numInStorage).setStock_balance(newCount);
         }

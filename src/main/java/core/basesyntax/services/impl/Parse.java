@@ -17,6 +17,7 @@ public class Parse implements FruitParse {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             while ((line = bufferedReader.readLine()) != null) {
+                line = line.toLowerCase();
                 List<String> oneLine = Arrays.asList(line.split(","));
                 result.add(oneLine);
             }
