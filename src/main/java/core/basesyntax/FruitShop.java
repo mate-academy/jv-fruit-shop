@@ -12,7 +12,7 @@ public class FruitShop {
     private static FruitTypes range = new FruitTypes();
 
     public static void main(String[] args) throws Exception {
-        String file1 = "D:\\MateHW\\jv-fruit-shop\\txt7";
+        String file1 = "txt7";
         List<String> fruitsFromFile = readingFromFileOperation.readFromFile(file1);
         newFile.createNewFile(operation.operationWithFruits(fruitsFromFile));
     }
