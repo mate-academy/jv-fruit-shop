@@ -29,6 +29,5 @@ public class Reader {
             throw new RuntimeException("The file is empty");
         }
         return transactions;
-
     }
 }
