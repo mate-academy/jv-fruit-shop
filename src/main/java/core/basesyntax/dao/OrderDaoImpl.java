@@ -1,18 +1,20 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.order.Order;
+import core.basesyntax.operation.OperationGeneral;
+import core.basesyntax.operation.Supply;
+//import core.basesyntax.order.Order;
 
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
     @Override
-    public void add(Order order) {
+    public void add(OperationGeneral order) {
         Storage.orders.add(order);
     }
 
     @Override
-    public List<Order> getAll() {
+    public List<OperationGeneral> getAll() {
         return Storage.orders;
     }
 }

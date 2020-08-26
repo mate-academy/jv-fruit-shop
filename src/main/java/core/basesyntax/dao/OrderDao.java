@@ -1,11 +1,13 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.order.Order;
+import core.basesyntax.operation.OperationGeneral;
+import core.basesyntax.operation.Supply;
+//import core.basesyntax.order.Order;
 
 import java.util.List;
 
 public interface OrderDao {
-    void add(Order order);
+    void add(OperationGeneral order);
 
-    List<Order> getAll();
+    List<OperationGeneral> getAll();
 }

@@ -2,7 +2,8 @@ package core.basesyntax.read;
 
 import core.basesyntax.dao.OrderDao;
 import core.basesyntax.dao.OrderDaoImpl;
-import core.basesyntax.order.Order;
+import core.basesyntax.db.Storage;
+import core.basesyntax.operation.Supply;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,8 +11,6 @@ import java.io.IOException;
 
 public class FileService {
     public void readFromFile(String filePath) {
-        OrderDao orderDao = new OrderDaoImpl();
-
         try (BufferedReader bf = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = bf.readLine()) != null) {
@@ -19,8 +18,8 @@ public class FileService {
                 String type = arr1[0];
                 String fruit = arr1[1];
                 int quantity = Integer.parseInt(arr1[2]);
-                Order order = new Order(type, fruit, quantity);
-                orderDao.add(order);
+//                Supply supply = new Supply(fruit,quantity);
+//                Storage.orders.add(supply);
             }
         } catch (IOException e) {
             e.printStackTrace();
