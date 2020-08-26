@@ -14,6 +14,6 @@ public class FruitShop {
     public static void main(String[] args) throws Exception {
         String file1 = "D:\\MateHW\\jv-fruit-shop\\txt7";
         List<String> fruitsFromFile = readingFromFileOperation.readFromFile(file1);
-        System.out.println((operation.operationWithFruits(fruitsFromFile)));
+        newFile.createNewFile(operation.operationWithFruits(fruitsFromFile));
     }
 }
