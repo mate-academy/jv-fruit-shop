@@ -23,9 +23,9 @@ public class MainAppTest {
 
     @Test
     public void supplyFruitsOk() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "supplyFruitsOk.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputSupplyFruitsOk.txt";
-        String SupplyFruitsOkExpected = EXPECTED_FOLDER + "expectedSupplyFruitsOk.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "supplyFruitsOk.csv";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputSupplyFruitsOk.csv";
+        String SupplyFruitsOkExpected = EXPECTED_FOLDER + "expectedSupplyFruitsOk.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         MainApp.main(args);
         List<List<String>> actualAndExpectedData = getActualAndExpectedData(supplyFruitsOkOutput, SupplyFruitsOkExpected);
@@ -34,8 +34,8 @@ public class MainAppTest {
 
     @Test
     public void supplyFruitsWithInvalidExpirationDate() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "supplyFruitsWithInvalidExpirationDate.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputSupplyFruitsWithInvalidExpirationDate.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "supplyFruitsWithInvalidExpirationDate.csv";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputSupplyFruitsWithInvalidExpirationDate.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         try {
             MainApp.main(args);
@@ -47,9 +47,9 @@ public class MainAppTest {
 
     @Test
     public void buyFruitsOK() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "buyFruitsOK.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyFruitsOK.txt";
-        String SupplyFruitsOkExpected = EXPECTED_FOLDER + "expectedBuyFruitsOK.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "buyFruitsOK.csv";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyFruitsOK.csv";
+        String SupplyFruitsOkExpected = EXPECTED_FOLDER + "expectedBuyFruitsOK.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         MainApp.main(args);
         List<List<String>> actualAndExpectedData = getActualAndExpectedData(supplyFruitsOkOutput, SupplyFruitsOkExpected);
@@ -58,8 +58,8 @@ public class MainAppTest {
 
     @Test
     public void buyNonExistentFruit() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "buyNonExistentFruit.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyNonExistentFruit.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "buyNonExistentFruit.csv";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyNonExistentFruit.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         try {
             MainApp.main(args);
@@ -71,8 +71,8 @@ public class MainAppTest {
 
     @Test
     public void buyExpiredFruit() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "buyExpiredFruit.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyExpiredFruit.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "buyExpiredFruit.csv";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyExpiredFruit.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         try {
             MainApp.main(args);
@@ -84,8 +84,8 @@ public class MainAppTest {
 
     @Test
     public void buyMoreFruitsThanAvailable() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "buyMoreFruitsThanAvailable.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyMoreFruitsThanAvailable.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "buyMoreFruitsThanAvailable.csv";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyMoreFruitsThanAvailable.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         try {
             MainApp.main(args);
@@ -97,9 +97,9 @@ public class MainAppTest {
 
     @Test
     public void returnFruitsOk() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "returnFruitsOk.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputReturnFruitsOk.txt";
-        String SupplyFruitsOkExpected = EXPECTED_FOLDER + "expectedReturnFruitsOk.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "returnFruitsOk.csv";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputReturnFruitsOk.csv";
+        String SupplyFruitsOkExpected = EXPECTED_FOLDER + "expectedReturnFruitsOk.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         MainApp.main(args);
         List<List<String>> actualAndExpectedData = getActualAndExpectedData(supplyFruitsOkOutput, SupplyFruitsOkExpected);
@@ -108,9 +108,9 @@ public class MainAppTest {
 
     @Test
     public void buyFruitAfterReturnOk() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "buyFruitAfterReturnOk.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyFruitAfterReturnOk.txt";
-        String SupplyFruitsOkExpected = EXPECTED_FOLDER + "expectedBuyFruitAfterReturnOk.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "buyFruitAfterReturnOk.csv";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyFruitAfterReturnOk.csv";
+        String SupplyFruitsOkExpected = EXPECTED_FOLDER + "expectedBuyFruitAfterReturnOk.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         MainApp.main(args);
         List<List<String>> actualAndExpectedData = getActualAndExpectedData(supplyFruitsOkOutput, SupplyFruitsOkExpected);
@@ -119,8 +119,8 @@ public class MainAppTest {
 
     @Test
     public void buyFruitAfterReturnExpiredFruit() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "buyFruitAfterReturnExpiredFruit.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyFruitAfterReturnExpiredFruit.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "buyFruitAfterReturnExpiredFruit.csv";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "outputBuyFruitAfterReturnExpiredFruit.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         try {
             MainApp.main(args);
@@ -132,8 +132,8 @@ public class MainAppTest {
 
     @Test
     public void invalidOutputPath() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "buyFruitsOK.txt";
-        String supplyFruitsOkOutput = "src/test/resources/notExistingFolder/outputBuyExpiredFruit.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "buyFruitsOK.csv";
+        String supplyFruitsOkOutput = "src/test/resources/notExistingFolder/outputBuyExpiredFruit.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         try {
             MainApp.main(args);
@@ -145,8 +145,8 @@ public class MainAppTest {
 
     @Test
     public void invalidInputPath() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "notExistingFile.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "notExistingFile.txt";
+        String supplyFruitsOkInput = INPUT_FOLDER + "notExistingFile.csv";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "notExistingFile.csv";
         args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
         try {
             MainApp.main(args);

@@ -6,6 +6,7 @@ import core.basesyntax.filewriter.FileWriterServise;
 import core.basesyntax.filewriter.LocalFileWriterService;
 import core.basesyntax.fruitstoreoperation.BuyFruitOperation;
 import core.basesyntax.fruitstoreoperation.FruitStoreOperation;
+import core.basesyntax.fruitstoreoperation.ReturnFruitOperation;
 import core.basesyntax.fruitstoreoperation.SupplyFruitOperation;
 import core.basesyntax.parser.Parser;
 import core.basesyntax.parser.ProductParser;
@@ -19,7 +20,7 @@ public class MainApp {
     static {
         fruitStoreOperationMap.put("s", new SupplyFruitOperation());
         fruitStoreOperationMap.put("b", new BuyFruitOperation());
-        fruitStoreOperationMap.put("r", new SupplyFruitOperation());
+        fruitStoreOperationMap.put("r", new ReturnFruitOperation());
     }
 
     public static void main(String[] args) {
