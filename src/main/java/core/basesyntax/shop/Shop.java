@@ -10,8 +10,8 @@ public class Shop {
     private Storage storage = new Storage();
     private Map<String, Trading> tradings;
 
-    public Shop(Map<String, Trading> trading) {
-        this.tradings = trading;
+    public Shop(Map<String, Trading> tradings) {
+        this.tradings = tradings;
     }
 
     public void trade(String type, Fruit fruit) {
