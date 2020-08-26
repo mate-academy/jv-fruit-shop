@@ -1,14 +1,13 @@
-package core.basesyntax.CSVservice;
+package core.basesyntax.csvservice;
 
 import core.basesyntax.Transaction;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 public class Reader {
     public static List<Transaction> read(String fileName) {
@@ -24,8 +23,12 @@ public class Reader {
                 transactions.add(transaction);
             }
         } catch (IOException e) {
-            System.out.println("Something went wrong with reading file");
+            throw new RuntimeException("Something went wrong with reading file");
+        }
+        if (transactions.isEmpty()) {
+            throw new RuntimeException("The file is empty");
         }
         return transactions;
+
     }
 }

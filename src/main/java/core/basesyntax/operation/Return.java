@@ -7,7 +7,10 @@ public class Return implements Operation {
     @Override
     public void provideOperation(Transaction transaction) {
         String key = transaction.getFruitItem();
-        Integer quantityToAdd = Integer.parseInt(transaction.getQuantity());
-        Storage.storage.put(key, Storage.storage.getOrDefault(key, 0) + quantityToAdd);
+        Integer quantityToAdd = transaction.getQuantity();
+        Storage.DateAndQuantityPair pair = Storage.storage.get(key);
+        pair.setQuantity(pair.getQuantity() + quantityToAdd);
+        pair.setDate(transaction.getDate());
+        Storage.storage.put(key, pair);
     }
 }
