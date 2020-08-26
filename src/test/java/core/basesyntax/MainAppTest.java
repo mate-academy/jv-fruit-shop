@@ -1,8 +1,9 @@
 package core.basesyntax;
 
 import core.basesyntax.exception.*;
-import org.junit.*;
-
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -130,19 +131,6 @@ public class MainAppTest {
     }
 
     @Test
-    public void invalidInputPath() {
-        String supplyFruitsOkInput = INPUT_FOLDER + "notExistingFile.txt";
-        String supplyFruitsOkOutput = OUTPUT_FOLDER + "notExistingFile.txt";
-        args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
-        try {
-            MainApp.main(args);
-        } catch (FileReadingException e) {
-            return;
-        }
-        Assert.fail();
-    }
-
-    @Test
     public void invalidOutputPath() {
         String supplyFruitsOkInput = INPUT_FOLDER + "buyFruitsOK.txt";
         String supplyFruitsOkOutput = "src/test/resources/notExistingFolder/outputBuyExpiredFruit.txt";
@@ -155,6 +143,18 @@ public class MainAppTest {
         Assert.fail();
     }
 
+    @Test
+    public void invalidInputPath() {
+        String supplyFruitsOkInput = INPUT_FOLDER + "notExistingFile.txt";
+        String supplyFruitsOkOutput = OUTPUT_FOLDER + "notExistingFile.txt";
+        args = new String[]{supplyFruitsOkInput, supplyFruitsOkOutput};
+        try {
+            MainApp.main(args);
+        } catch (FileReadingException e) {
+            return;
+        }
+        Assert.fail();
+    }
 
     private List<List<String>> getActualAndExpectedData(String actualPath, String expectedPath) {
         List<String> actual = null;
@@ -167,5 +167,4 @@ public class MainAppTest {
         }
         return List.of(actual, expected);
     }
-
 }
