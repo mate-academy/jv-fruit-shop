@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 import core.basesyntax.exception.CsvFileException;
+import core.basesyntax.model.Transaction;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;

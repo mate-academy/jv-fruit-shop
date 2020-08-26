@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.exception.CsvFileException;
+import core.basesyntax.model.Operation;
 import org.junit.Assert;
 import org.junit.Test;
 

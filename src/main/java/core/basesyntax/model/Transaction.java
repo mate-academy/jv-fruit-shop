@@ -1,16 +1,17 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 import com.opencsv.bean.CsvDate;
+import core.basesyntax.ConvertOperation;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class Transaction {
     @CsvCustomBindByName(column = "type", converter = ConvertOperation.class)
     private Operation operation;
-    @CsvBindByName
-    private String fruit;
+    @CsvBindByName(column = "fruit")
+    private String fruitName;
     @CsvBindByName
     private int quantity;
     @CsvBindByName
@@ -20,15 +21,9 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(Operation operation, String fruit, int quantity) {
+    public Transaction(Operation operation, String fruitName, int quantity, LocalDate date) {
         this.operation = operation;
-        this.fruit = fruit;
-        this.quantity = quantity;
-    }
-
-    public Transaction(Operation operation, String fruit, int quantity, LocalDate date) {
-        this.operation = operation;
-        this.fruit = fruit;
+        this.fruitName = fruitName;
         this.quantity = quantity;
         this.date = date;
     }
@@ -37,8 +32,8 @@ public class Transaction {
         this.operation = operation;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
+    public void setFruitName(String fruitName) {
+        this.fruitName = fruitName;
     }
 
     public void setQuantity(int quantity) {
@@ -53,8 +48,8 @@ public class Transaction {
         return operation;
     }
 
-    public String getFruit() {
-        return fruit;
+    public String getFruitName() {
+        return fruitName;
     }
 
     public int getQuantity() {
@@ -76,12 +71,12 @@ public class Transaction {
         Transaction that = (Transaction) o;
         return quantity == that.quantity
                && operation == that.operation
-               && Objects.equals(fruit, that.fruit)
+               && Objects.equals(fruitName, that.fruitName)
                && Objects.equals(date, that.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(operation, fruit, quantity, date);
+        return Objects.hash(operation, fruitName, quantity, date);
     }
 }

@@ -1,6 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.exception.CsvFileException;
+import core.basesyntax.model.Operation;
+import core.basesyntax.model.Transaction;
 import org.junit.Assert;
 import org.junit.Test;
 import java.time.LocalDate;

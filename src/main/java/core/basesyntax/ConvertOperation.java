@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import com.opencsv.bean.AbstractBeanField;
 import core.basesyntax.exception.CsvFileException;
+import core.basesyntax.model.Operation;
 
 public class ConvertOperation<T, I> extends AbstractBeanField<T, I> {
     private static final String SUPPLY = "s";

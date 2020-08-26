@@ -1,30 +1,28 @@
 package core.basesyntax;
 
-import java.util.HashMap;
+import core.basesyntax.exception.NotEnoughFruitException;
+import core.basesyntax.model.Transaction;
 import java.util.List;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FruitService {
     private static final Logger logger = LoggerFactory.getLogger(FruitService.class);
+    private FruitStorage fruitStorage;
 
-    public Map<String, Integer> getStockBalance(List<Transaction> transactions) {
-        Map<String, Integer> stockBalance = new HashMap<>();
+    public FruitService(FruitStorage fruitStorage) {
+        this.fruitStorage = fruitStorage;
+    }
+
+    public void fillFruitStorage(List<Transaction> transactions) {
+        TransactionExecutor transactionExecutor = new TransactionExecutor(fruitStorage);
         for (int i = 0; i < transactions.size(); i++) {
-            Transaction transaction = transactions.get(i);
-            String fruit = transaction.getFruit();
-            stockBalance.merge(fruit, transaction.getQuantity(),
-                    (stockQuantity, transactionQuantity)
-                            -> transaction.getOperation() == Operation.BUY
-                            ? stockQuantity - transactionQuantity
-                            : stockQuantity + transactionQuantity);
-            if (stockBalance.get(fruit) < 0) {
-                logger.warn("Stock for [" + fruit
-                            + "] has negative balance after transaction at line " + i);
+            try {
+                transactionExecutor.execute(transactions.get(i));
+            } catch (NotEnoughFruitException e) {
+                logger.error("File contains impossible operation at line " + i, e);
+                throw e;
             }
         }
-        stockBalance.entrySet().removeIf(entry -> entry.getValue() <= 0);
-        return stockBalance;
     }
 }
