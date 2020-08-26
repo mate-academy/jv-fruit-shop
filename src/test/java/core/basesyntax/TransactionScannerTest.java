@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-public class DataReaderTest {
+public class TransactionScannerTest {
     public static final String REFERENCE_FILE = "src/test/resources/data.csv";
     public static final String WRONG_PATH = "src/test/resources/data1.csv";
     public static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
@@ -16,35 +16,35 @@ public class DataReaderTest {
 
     @Test
     public void getTransactionListOK() {
-        DataReader testReader = new DataReader();
-        List<Transaction> transactions = testReader.transactionList(REFERENCE_FILE);
+        TransactionScanner scanner = new TransactionScanner();
+        List<Transaction> transactions = scanner.transactionList(REFERENCE_FILE);
         Assert.assertFalse(transactions.isEmpty());
     }
 
     @Test(expected = RuntimeException.class)
     public void getWrongFilePath() {
-        DataReader testReader = new DataReader();
-        testReader.transactionList(WRONG_PATH);
+        TransactionScanner scanner = new TransactionScanner();
+        scanner.transactionList(WRONG_PATH);
     }
 
     @Test
     public void getCalculatorOK() {
-        DataCalculator calculator = new DataCalculator();
-        Map<String, Integer> map = calculator.dataCalculator(REFERENCE_FILE);
+        DataExecutor executor = new DataExecutor();
+        Map<String, Integer> map = executor.dataExecutor(REFERENCE_FILE);
         Assert.assertFalse(map.isEmpty());
     }
 
     @Test
     public void getEmptyCalculator() {
-        DataCalculator calculator = new DataCalculator();
-        Map<String, Integer> map = calculator.dataCalculator(EMPTY_FILE_PATH);
+        DataExecutor executor = new DataExecutor();
+        Map<String, Integer> map = executor.dataExecutor(EMPTY_FILE_PATH);
         Assert.assertTrue(map.isEmpty());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void getBuyBeforeSupply() {
-        DataCalculator calculator = new DataCalculator();
-        calculator.dataCalculator(WRONG_FILE_PATH);
+        DataExecutor executor = new DataExecutor();
+        executor.dataExecutor(WRONG_FILE_PATH);
     }
 
     @Test

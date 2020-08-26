@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DataCalculator {
+public class DataExecutor {
     Map<String, Integer> fruitStore;
     List<Transaction> list;
     Operational<Transaction, Map<String, Integer>> supplyAndReturn
@@ -12,10 +12,10 @@ public class DataCalculator {
     Operational<Transaction, Map<String, Integer>> buy
             = new BuyOperation<>();
 
-    public Map<String, Integer> dataCalculator(String filePath) {
-        DataReader dataReader = new DataReader();
+    public Map<String, Integer> dataExecutor(String filePath) {
+        TransactionScanner transactionScanner = new TransactionScanner();
         fruitStore = new HashMap<>();
-        list = dataReader.transactionList(filePath);
+        list = transactionScanner.transactionList(filePath);
 
         for (Transaction x : list) {
             if (x.getType().equals("s") || x.getType().equals("r")) {

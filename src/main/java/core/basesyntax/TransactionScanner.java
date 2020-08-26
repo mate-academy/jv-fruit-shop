@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-public class DataReader {
+public class TransactionScanner {
 
     public List<Transaction> transactionList(String filePath) {
         List<Transaction> items;

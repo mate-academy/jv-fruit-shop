@@ -9,8 +9,8 @@ public class DataWriter {
 
     public String getReport(String filePath) {
         String content = "";
-        DataCalculator calculator = new DataCalculator();
-        Map<String, Integer> report = calculator.dataCalculator(filePath);
+        DataExecutor executor = new DataExecutor();
+        Map<String, Integer> report = executor.dataExecutor(filePath);
 
         if (!report.isEmpty()) {
             StringBuilder builder = new StringBuilder();
