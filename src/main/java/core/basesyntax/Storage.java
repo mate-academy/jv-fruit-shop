@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Storage {
     private final List<Fruit> fruits = new ArrayList<>();
@@ -41,7 +42,10 @@ public class Storage {
     }
 
     public List<Fruit> getAll() {
-        return fruits;
+        return fruits
+                .stream()
+                .map(Fruit::clone)
+                .collect(Collectors.toList());
     }
 
     public int size() {

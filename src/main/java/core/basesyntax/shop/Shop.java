@@ -4,7 +4,6 @@ import core.basesyntax.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Shop {
     private Storage storage = new Storage();
@@ -23,9 +22,6 @@ public class Shop {
     }
 
     public List<Fruit> balanceStorage() {
-        return storage.getAll()
-                .stream()
-                .map(Fruit::clone)
-                .collect(Collectors.toList());
+        return storage.getAll();
     }
 }
