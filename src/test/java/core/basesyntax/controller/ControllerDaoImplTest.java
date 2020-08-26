@@ -1,12 +1,12 @@
 package core.basesyntax.controller;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ControllerDaoImplTest {
-    private static ControllerDao<Fruit> controllerDao;
+    private static ControllerDao<Product> controllerDao;
 
     @BeforeClass
     public static void initialCsvUtils() {

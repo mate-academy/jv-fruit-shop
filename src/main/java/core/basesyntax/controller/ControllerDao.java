@@ -1,9 +1,9 @@
 package core.basesyntax.controller;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Product;
 import java.util.List;
 
-public interface ControllerDao<T extends Fruit> {
+public interface ControllerDao<T extends Product> {
     boolean put(T value);
 
     T get(int index);

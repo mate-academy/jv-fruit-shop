@@ -2,14 +2,18 @@ package core.basesyntax.controller;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Product;
 import java.util.List;
 
-public class ControllerDaoImpl implements ControllerDao<Fruit> {
-    private StorageDao<Fruit> storageDao = new StorageDaoImpl();
+public class ControllerDaoImpl implements ControllerDao<Product> {
+    private StorageDao<Product> storageDao;
+
+    public ControllerDaoImpl() {
+        this.storageDao = new StorageDaoImpl();
+    }
 
     @Override
-    public boolean put(Fruit value) {
+    public boolean put(Product value) {
         if (value == null) {
             return false;
         }
@@ -17,17 +21,16 @@ public class ControllerDaoImpl implements ControllerDao<Fruit> {
     }
 
     @Override
-    public Fruit get(int index) {
+    public Product get(int index) {
         if (storageDao.getAll().size() <= index
-                || index < 0
-                || storageDao.getAll().isEmpty()) {
+                || index < 0) {
             throw new IllegalArgumentException();
         }
         return storageDao.remove(index).orElseThrow();
     }
 
     @Override
-    public List<Fruit> getAll() {
+    public List<Product> getAll() {
         return storageDao.getAll();
     }
 }
