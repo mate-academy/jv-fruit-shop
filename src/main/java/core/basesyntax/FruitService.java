@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class FruitService {
-    public static final Logger LOGGER = LoggerFactory.getLogger(FruitService.class);
+    private static final Logger logger = LoggerFactory.getLogger(FruitService.class);
 
     public Map<String, Integer> getStockBalance(List<Transaction> transactions) {
         Map<String, Integer> stockBalance = new HashMap<>();
@@ -20,7 +20,7 @@ public class FruitService {
                             ? stockQuantity - transactionQuantity
                             : stockQuantity + transactionQuantity);
             if (stockBalance.get(fruit) < 0) {
-                LOGGER.warn("Stock for [" + fruit
+                logger.warn("Stock for [" + fruit
                             + "] has negative balance after transaction at line " + i);
             }
         }

@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LocalCsvFileReader implements CsvFileReader {
-    public static final Logger LOGGER = LoggerFactory.getLogger(LocalCsvFileReader.class);
+    private static final Logger logger = LoggerFactory.getLogger(LocalCsvFileReader.class);
     private final String filePath;
 
     public LocalCsvFileReader(String filePath) {
@@ -23,10 +23,10 @@ public class LocalCsvFileReader implements CsvFileReader {
             return new CsvToBeanBuilder<Transaction>(fileReader)
                     .withType(Transaction.class).build().parse();
         } catch (FileNotFoundException e) {
-            LOGGER.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
             throw new CsvFileException("File not found", e);
         } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
+            logger.error(e.getMessage(), e);
             throw new CsvFileException("Can't read the file", e);
         }
     }
