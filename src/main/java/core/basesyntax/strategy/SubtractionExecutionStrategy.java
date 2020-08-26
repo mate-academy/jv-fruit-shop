@@ -6,7 +6,7 @@ import core.basesyntax.model.Transaction;
 public class SubtractionExecutionStrategy implements ExecutionStrategy {
     @Override
     public void execute(Transaction transaction, FruitStorage storage) {
-        storage.remove(transaction.getFruitName(),
+        storage.sell(transaction.getFruitName(),
                 transaction.getDate(), transaction.getQuantity());
     }
 }

@@ -16,7 +16,7 @@ public class FruitStorage {
         storage.merge(fruit, quantity, Integer::sum);
     }
 
-    public void remove(String fruitName, LocalDate minExpirationDate, int quantity) {
+    public void sell(String fruitName, LocalDate minExpirationDate, int quantity) {
         Map<Fruit, Integer> appropriateFruits
                 = getAppropriateFruits(fruitName, minExpirationDate, quantity);
         for (Map.Entry<Fruit, Integer> entry : appropriateFruits.entrySet()) {

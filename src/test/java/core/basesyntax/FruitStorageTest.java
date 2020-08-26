@@ -39,13 +39,13 @@ public class FruitStorageTest {
     }
 
     @Test
-    public void remove_ok() {
+    public void sell_ok() {
         fruitStorage.add(banana, 50);
         fruitStorage.add(apple, 30);
         fruitStorage.add(appleFresh, 70);
-        fruitStorage.remove(BANANA_NAME, bananaDate, 30);
-        fruitStorage.remove(BANANA_NAME, bananaDate, 10);
-        fruitStorage.remove(APPLE_NAME, bananaDate, 50);
+        fruitStorage.sell(BANANA_NAME, bananaDate, 30);
+        fruitStorage.sell(BANANA_NAME, bananaDate, 10);
+        fruitStorage.sell(APPLE_NAME, bananaDate, 50);
         Map<String, Integer> stock = fruitStorage.getStockBalance();
         assertEquals(2, stock.size());
         assertEquals(10, (int) stock.get(BANANA_NAME));
@@ -53,10 +53,10 @@ public class FruitStorageTest {
     }
 
     @Test
-    public void remove_fail() {
+    public void sell_fail() {
         fruitStorage.add(banana, 50);
         try {
-            fruitStorage.remove(BANANA_NAME, appleFreshDate, 30);
+            fruitStorage.sell(BANANA_NAME, appleFreshDate, 30);
             fail("Expected NotEnoughFruitException");
         } catch (NotEnoughFruitException e) {
             assertEquals("Asked to buy 30 banana, but have 0", e.getMessage());
