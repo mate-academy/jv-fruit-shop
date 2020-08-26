@@ -1,7 +1,6 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.services.FruitParse;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -28,6 +27,4 @@ public class Parse implements FruitParse {
         }
         return result;
     }
-
-
 }
