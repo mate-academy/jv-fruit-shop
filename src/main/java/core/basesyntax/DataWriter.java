@@ -23,7 +23,6 @@ public class DataWriter {
         }
         try (PrintWriter writer = new PrintWriter(new File("src/test/out/test.csv"))) {
             writer.write(content);
-            System.out.println(content);
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
