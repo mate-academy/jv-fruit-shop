@@ -37,5 +37,4 @@ public class Transaction {
     public String getQuantity() {
         return quantity;
     }
-
 }

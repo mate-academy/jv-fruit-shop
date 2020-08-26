@@ -6,10 +6,12 @@ import java.io.PrintWriter;
 import java.util.Map;
 
 public class DataWriter {
+
     public String getReport(String filePath) {
         String content = "";
         DataCalculator calculator = new DataCalculator();
         Map<String, Integer> report = calculator.dataCalculator(filePath);
+
         if (!report.isEmpty()) {
             StringBuilder builder = new StringBuilder();
             builder.append("fruit").append(";").append("quantity").append("\n");

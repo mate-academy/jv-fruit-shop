@@ -7,7 +7,6 @@ import java.util.Map;
 public class DataCalculator {
     Map<String, Integer> fruitStore;
     List<Transaction> list;
-
     Operational<Transaction, Map<String, Integer>> supplyAndReturn
             = new SupplyAndReturnOperation<>();
     Operational<Transaction, Map<String, Integer>> buy
