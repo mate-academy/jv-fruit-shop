@@ -14,7 +14,7 @@ public class CsvFileReaderImplTest {
 
     @Test(expected = NoSuchElementException.class)
     public void isEmptyFileTest() {
-        String path = "src\\main\\resources\\emptyList.csv";
+        String path = "src/main/resources/emptyList.csv";
         read.readFile(path);
     }
 }

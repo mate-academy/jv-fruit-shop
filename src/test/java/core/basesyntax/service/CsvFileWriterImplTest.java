@@ -26,7 +26,7 @@ public class CsvFileWriterImplTest {
 
     @Test
     public void fileWroteNormalTest() {
-        String path = "src\\main\\resources\\data.csv";
+        String path = "src/main/resources/data.csv";
         Assert.assertTrue(write.writeToFile(storage, path));
     }
 }

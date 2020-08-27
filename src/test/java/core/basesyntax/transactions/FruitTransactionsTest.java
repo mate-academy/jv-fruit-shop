@@ -11,14 +11,14 @@ public class FruitTransactionsTest {
 
     @BeforeClass
     public static void beforeClass() {
-        String path = "src\\main\\resources\\fruits.csv";
+        String path = "src/main/resources/fruits.csv";
         fileReader = new CsvFileReaderImpl();
         transactions = new FruitTransactions(fileReader.readFile(path));
     }
 
     @Test
     public void fruitTransactionNormalTest() {
-        String path = "src\\main\\resources\\fruits.csv";
+        String path = "src/main/resources/fruits.csv";
         Assert.assertEquals(transactions.getTransactions(), fileReader.readFile(path));
     }
 }

@@ -14,7 +14,7 @@ public class DirCreatorImplTest {
 
     @Test
     public void incorrectPathTest() {
-        String path = "src\\main\\resource\\dir";
+        String path = "src/main/resource/dir";
         Assert.assertFalse(create.createDir(path));
     }
 }

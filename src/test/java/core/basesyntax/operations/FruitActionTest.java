@@ -27,7 +27,7 @@ public class FruitActionTest {
     @Test
     public void actionSupplyTest() {
         List<List<String>> testList;
-        String path = "src\\main\\resources\\supplyCorrect.csv";
+        String path = "src/main/resources/supplyCorrect.csv";
         testList = fileReader.readFile(path);
         act.action(testList);
         Assert.assertTrue(act.result);
@@ -36,7 +36,7 @@ public class FruitActionTest {
     @Test
     public void actionBuyTest() {
         List<List<String>> testList;
-        String path = "src\\main\\resources\\buyCorrect.csv";
+        String path = "src/main/resources/buyCorrect.csv";
         testList = fileReader.readFile(path);
         act.action(testList);
         Assert.assertTrue(act.result);
@@ -45,7 +45,7 @@ public class FruitActionTest {
     @Test
     public void actionReturnTest() {
         List<List<String>> testList;
-        String path = "src\\main\\resources\\returnCorrect.csv";
+        String path = "src/main/resources/returnCorrect.csv";
         testList = fileReader.readFile(path);
         act.action(testList);
         Assert.assertTrue(act.result);
@@ -62,7 +62,7 @@ public class FruitActionTest {
     @Test(expected = UnsupportedOperationException.class)
     public void soldOutFruitTest() {
         List<List<String>> testList;
-        String path = "src\\main\\resources\\unsupportedOperation.csv";
+        String path = "src/main/resources/unsupportedOperation.csv";
         testList = fileReader.readFile(path);
         act.action(testList);
     }
