@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class StoreServiceTest {
-    private static final String ALL_OPERATIONS_EXECUTE_PATH = "src\\test\\resources\\file.csv";
-    private static final String READ_CORRECT_FILE_PATH = "src\\test\\resources\\fileServiceCorrect.csv";
-    private static final String READ_INCORRECT_FILE_PATH = "src\\test\\resources\\incorrectFileOperation.csv";
-    private static final String STORE_SERVICE_REPORT = "src\\test\\resources\\storeServiceTestReport.csv";
+    private static final String ALL_OPERATIONS_EXECUTE_PATH = "src/test/resources/file.csv";
+    private static final String READ_CORRECT_FILE_PATH = "src/test/resources/fileServiceCorrect.csv";
+    private static final String READ_INCORRECT_FILE_PATH = "src/test/resources/incorrectFileOperation.csv";
+    private static final String STORE_SERVICE_REPORT = "src/test/resources/storeServiceTestReport.csv";
     private StoreService storeService;
 
     @Before

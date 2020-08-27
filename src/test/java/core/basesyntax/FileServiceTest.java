@@ -12,11 +12,11 @@ import java.util.NoSuchElementException;
 
 public class FileServiceTest {
     private static final FileService SERVICE = new FileService();
-    private static final String FILE_SERVICE_REPORT = "src\\test\\resources\\outputFile.csv";
-    private static final String CORRECT_READ_FILE_PATH = "src\\test\\resources\\fileServiceCorrect.csv";
-    private static final String INCORRECT_FILE_TYPE_PATH = "src\\test\\resources\\fruits.txt";
-    private static final String EMPTY_FILE_PATH = "src\\test\\resources\\emptyFile.csv";
-    private static final String FILE_WITH_INCORRECT_TEXT_PATH = "src\\test\\resources\\incorrectHead.csv";
+    private static final String FILE_SERVICE_REPORT = "src/test/resources/outputFile.csv";
+    private static final String CORRECT_READ_FILE_PATH = "src/test/resources/fileServiceCorrect.csv";
+    private static final String INCORRECT_FILE_TYPE_PATH = "src/test/resources/fruits.txt";
+    private static final String EMPTY_FILE_PATH = "src/test/resources/emptyFile.csv";
+    private static final String FILE_WITH_INCORRECT_TEXT_PATH = "src/test/resources/incorrectHead.csv";
 
     @Test
     public void checkGetListFromInputFileCorrect() {
