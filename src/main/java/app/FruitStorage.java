@@ -1,9 +1,9 @@
 package app;
 
-import app.model.Fruit;
+import app.model.SupplyFruit;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FruitStorage {
-    public static final List<Fruit> fruits = new ArrayList<>();
+    public static final List<SupplyFruit> fruits = new ArrayList<>();
 }

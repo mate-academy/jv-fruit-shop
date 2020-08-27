@@ -1,8 +1,8 @@
 package app.service;
 
-import app.model.Fruit;
+import app.model.SupplyFruit;
 import java.util.List;
 
 public interface FruitParser {
-    Fruit parse(List<String> data);
+    SupplyFruit parse(List<String> data);
 }

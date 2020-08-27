@@ -1,6 +1,6 @@
 package app.service.impl;
 
-import app.model.Fruit;
+import app.model.SupplyFruit;
 import app.service.FileReadService;
 import app.service.FileWriterService;
 import org.junit.Assert;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileWriterServiceImplementsTest {
-    private static List<Fruit> testFruits;
+    private static List<SupplyFruit> testFruits;
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final String RESULT_PATH = "src/main/java/resources/result.csv";
     private static FileWriterService fileWriterService;
@@ -24,9 +24,9 @@ public class FileWriterServiceImplementsTest {
     public static void start() {
         fileWriterService = new FileWriterServiceImplements();
         fileReadService = new FileReadServiceImplements();
-        Fruit firstFruit = new Fruit("banana", 10, LocalDate.parse("2020-08-26", FORMATTER));
-        Fruit secondFruit = new Fruit("orange", 10, LocalDate.parse("2020-08-24", FORMATTER));
-        Fruit thirdFruit = new Fruit("orange", 10, LocalDate.parse("2020-08-22", FORMATTER));
+        SupplyFruit firstFruit = new SupplyFruit("banana", 10, LocalDate.parse("2020-08-26", FORMATTER));
+        SupplyFruit secondFruit = new SupplyFruit("orange", 10, LocalDate.parse("2020-08-24", FORMATTER));
+        SupplyFruit thirdFruit = new SupplyFruit("orange", 10, LocalDate.parse("2020-08-22", FORMATTER));
         testFruits = new ArrayList<>();
         testFruits.add(firstFruit);
         testFruits.add(secondFruit);
@@ -38,7 +38,7 @@ public class FileWriterServiceImplementsTest {
         fileWriterService.writeData(testFruits, RESULT_PATH);
         List<List<String>> allData = fileReadService.readFile(RESULT_PATH);
         int sizeFinalTestFruits = testFruits.stream()
-                .collect(Collectors.groupingBy(Fruit::getName)).size();
+                .collect(Collectors.groupingBy(SupplyFruit::getFruitName)).size();
         Assert.assertEquals(allData.size(), sizeFinalTestFruits);
     }
 

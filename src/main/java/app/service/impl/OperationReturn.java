@@ -1,17 +1,17 @@
 package app.service.impl;
 
 import app.FruitStorage;
-import app.model.Fruit;
+import app.model.SupplyFruit;
 import app.service.Operation;
 import java.util.List;
 
 public class OperationReturn implements Operation {
     @Override
     public void doOperation(List<String> data) {
-        Fruit currentFruit = new FruitParserImplements().parse(data);
+        SupplyFruit currentFruit = new FruitParserImplements().parse(data);
         boolean isExist = false;
-        for (Fruit iteratorFruit : FruitStorage.fruits) {
-            if (iteratorFruit.getName().equals(currentFruit.getName())) {
+        for (SupplyFruit iteratorFruit : FruitStorage.fruits) {
+            if (iteratorFruit.getFruitName().equals(currentFruit.getFruitName())) {
                 isExist = true;
                 break;
             }
@@ -19,8 +19,8 @@ public class OperationReturn implements Operation {
         if (!isExist) {
             throw new RuntimeException("The store does not sell this product");
         }
-        for (Fruit iteratorFruit : FruitStorage.fruits) {
-            if (iteratorFruit.getName().equals(currentFruit.getName())
+        for (SupplyFruit iteratorFruit : FruitStorage.fruits) {
+            if (iteratorFruit.getFruitName().equals(currentFruit.getFruitName())
                     && iteratorFruit.getEndOfShelfLife().equals(currentFruit.getEndOfShelfLife())) {
                 iteratorFruit.setQuantity(iteratorFruit.getQuantity() + currentFruit.getQuantity());
                 return;

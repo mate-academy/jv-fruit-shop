@@ -1,6 +1,6 @@
 package app.service.impl;
 
-import app.model.Fruit;
+import app.model.SupplyFruit;
 import app.service.FruitParser;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,18 +45,18 @@ public class FruitParserImplementsTest {
 
     @Test
     public void fruitParserOk() {
-        Fruit testFirstFruit = new Fruit("banana", 100,
+        SupplyFruit testFirstFruit = new SupplyFruit("banana", 100,
                 LocalDate.parse("2020-10-17", formatter));
-        Fruit testSecondFruit = new Fruit("banana", 13,
+        SupplyFruit testSecondFruit = new SupplyFruit("banana", 13,
                 LocalDate.parse("2020-10-15", formatter));
-        Fruit firstResult = parserImplements.parse(testValue.get(0));
-        Fruit secondResult = parserImplements.parse(testValue.get(1));
+        SupplyFruit firstResult = parserImplements.parse(testValue.get(0));
+        SupplyFruit secondResult = parserImplements.parse(testValue.get(1));
         Assert.assertEquals(firstResult, testFirstFruit);
         Assert.assertEquals(secondResult, testSecondFruit);
     }
 
     @Test(expected = RuntimeException.class)
     public void exception() {
-        Fruit testSecondFruit = parserImplements.parse(testValue.get(2));
+        SupplyFruit testSecondFruit = parserImplements.parse(testValue.get(2));
     }
 }

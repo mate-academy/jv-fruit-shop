@@ -1,6 +1,6 @@
 package app.service.impl;
 
-import app.model.Fruit;
+import app.model.SupplyFruit;
 import app.service.FileWriterService;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,7 +12,7 @@ public class FileWriterServiceImplements implements FileWriterService {
     public static final String SEPARATOR = ",";
     
     @Override
-    public boolean writeData(List<Fruit> fruits, String filePath) {
+    public boolean writeData(List<SupplyFruit> fruits, String filePath) {
         try (FileWriter writer = new FileWriter(filePath)) {
             if (fruits.size() == 0) {
                 return false;
@@ -20,11 +20,11 @@ public class FileWriterServiceImplements implements FileWriterService {
             int numberOfCurrentProducts = 0;
             writer.append("fruit").append(SEPARATOR).append("quantity")
                     .append(System.lineSeparator());
-            Map<String, List<Fruit>> resultList = fruits.stream()
-                    .collect(Collectors.groupingBy(Fruit::getName));
-            for (Map.Entry<String, List<Fruit>> resultElement : resultList.entrySet()) {
+            Map<String, List<SupplyFruit>> resultList = fruits.stream()
+                    .collect(Collectors.groupingBy(SupplyFruit::getFruitName));
+            for (Map.Entry<String, List<SupplyFruit>> resultElement : resultList.entrySet()) {
                 writer.append(resultElement.getKey()).append(SEPARATOR);
-                for (Fruit fruit : resultElement.getValue()) {
+                for (SupplyFruit fruit : resultElement.getValue()) {
                     numberOfCurrentProducts += fruit.getQuantity();
                 }
                 writer.append(String.valueOf(numberOfCurrentProducts))

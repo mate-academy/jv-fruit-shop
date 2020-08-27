@@ -1,8 +1,8 @@
 package app.service;
 
-import app.model.Fruit;
+import app.model.SupplyFruit;
 import java.util.List;
 
 public interface FileWriterService {
-    boolean writeData(List<Fruit> fruits, String filePath);
+    boolean writeData(List<SupplyFruit> fruits, String filePath);
 }

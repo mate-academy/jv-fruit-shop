@@ -1,7 +1,7 @@
 package app.service.impl;
 
 import app.FruitStorage;
-import app.model.Fruit;
+import app.model.SupplyFruit;
 import app.service.Operation;
 import java.util.List;
 
@@ -9,9 +9,9 @@ public class OperationBuy implements Operation {
 
     @Override
     public void doOperation(List<String> data) {
-        Fruit currentFruit = new FruitParserImplements().parse(data);
-        for (Fruit iteratorFruit : FruitStorage.fruits) {
-            if (iteratorFruit.getName().equals(currentFruit.getName())
+        SupplyFruit currentFruit = new FruitParserImplements().parse(data);
+        for (SupplyFruit iteratorFruit : FruitStorage.fruits) {
+            if (iteratorFruit.getFruitName().equals(currentFruit.getFruitName())
                     && iteratorFruit.getEndOfShelfLife().isAfter(currentFruit.getEndOfShelfLife())
                     || iteratorFruit.getEndOfShelfLife().equals(currentFruit.getEndOfShelfLife())) {
                 if (currentFruit.getQuantity() < iteratorFruit.getQuantity()) {
@@ -27,6 +27,6 @@ public class OperationBuy implements Operation {
 
             }
         }
-        throw new RuntimeException("Not enough " + currentFruit.getName() + "in stock for sale");
+        throw new RuntimeException("Not enough " + currentFruit.getFruitName() + "in stock for sale");
     }
 }

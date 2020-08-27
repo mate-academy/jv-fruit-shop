@@ -7,15 +7,15 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class FruitTest {
+public class SupplyFruitTest {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static Fruit firstBanana;
-    private static Fruit secondBanana;
+    private static SupplyFruit firstBanana;
+    private static SupplyFruit secondBanana;
 
     @BeforeClass
     public static void start() {
-        firstBanana = new Fruit("banana", 100, LocalDate.parse("2020-08-27", formatter));
-        secondBanana = new Fruit("banana", 100, LocalDate.parse("2020-08-27", formatter));
+        firstBanana = new SupplyFruit("banana", 100, LocalDate.parse("2020-08-27", formatter));
+        secondBanana = new SupplyFruit("banana", 100, LocalDate.parse("2020-08-27", formatter));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class FruitTest {
 
     @Test
     public void getName() {
-        Assert.assertEquals("banana", firstBanana.getName());
+        Assert.assertEquals("banana", firstBanana.getFruitName());
     }
 
     @Test

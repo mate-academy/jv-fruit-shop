@@ -3,13 +3,13 @@ package app.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Fruit {
-    private String name;
+public class SupplyFruit {
+    private String fruitName;
     private int quantity;
     private LocalDate endOfShelfLife;
 
-    public Fruit(String name, int quantity, LocalDate endOfShelfLife) {
-        this.name = name;
+    public SupplyFruit(String fruitName, int quantity, LocalDate endOfShelfLife) {
+        this.fruitName = fruitName;
         this.quantity = quantity;
         this.endOfShelfLife = endOfShelfLife;
     }
@@ -19,22 +19,22 @@ public class Fruit {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Fruit)) {
+        if (!(o instanceof SupplyFruit)) {
             return false;
         }
-        Fruit fruit = (Fruit) o;
+        SupplyFruit fruit = (SupplyFruit) o;
         return getQuantity() == fruit.getQuantity()
-                && Objects.equals(getName(), fruit.getName())
+                && Objects.equals(getFruitName(), fruit.getFruitName())
                 && Objects.equals(getEndOfShelfLife(), fruit.getEndOfShelfLife());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getQuantity(), getEndOfShelfLife());
+        return Objects.hash(getFruitName(), getQuantity(), getEndOfShelfLife());
     }
 
-    public String getName() {
-        return name;
+    public String getFruitName() {
+        return fruitName;
     }
 
     public int getQuantity() {
