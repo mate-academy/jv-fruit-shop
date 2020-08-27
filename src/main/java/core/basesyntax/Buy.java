@@ -7,15 +7,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Buy implements BuyInterface<String> {
+    private static Storage range = new Storage();
+    private static List<String> fruitsAvailable = range.getFruitTypes();
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
     @Override
-    public List<String> buying(List<String> fruitsAvailable, String fruitToByu)
+    public List<String> buying(String fruitToByu)
             throws Exception {
         int index = 1;
         int amountBuying = Integer.parseInt(fruitToByu.split(",")[2]);
         for (int j = 0; j < fruitsAvailable.size(); j++) {
-
             if (fruitToByu.split(",")[1]
                     .equals(fruitsAvailable.get(j).split(",")[1])) {
                 LocalDate dateOfAvailable = LocalDate.parse(fruitsAvailable.get(j)

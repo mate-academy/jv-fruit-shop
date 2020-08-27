@@ -8,7 +8,7 @@ import java.util.List;
 public class DataValidation {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
-    public void dataValidation(List<String> fruitsFromFile, List<String> rangeOfShop)
+    public void dataValidation(List<String> fruitsFromFile)
             throws NotValidDataException {
         if (fruitsFromFile.size() == 0) {
             throw new NotValidDataException("You have entered empty list.");
@@ -25,12 +25,6 @@ public class DataValidation {
             }
             if (!line[0].equals("s") && !line[0].equals("b") && !line[0].equals("r")) {
                 throw new NotValidDataException("You have entered incorrect transaction type.");
-            }
-            int count = (int) rangeOfShop.stream()
-                    .filter(x -> x.equals(line[1].toLowerCase()))
-                    .count();
-            if (count == 0) {
-                throw new NotValidDataException("You have entered incorrect type of fruit.");
             }
             if (!line[2].matches("\\d+")) {
                 throw new NotValidDataException("You have entered incorrect amount type.");
