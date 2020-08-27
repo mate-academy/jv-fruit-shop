@@ -1,3 +1,0 @@
-fruit, quantity
-banana, 30
-orange, 30
