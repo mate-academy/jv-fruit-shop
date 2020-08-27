@@ -40,16 +40,8 @@ public class Operation {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getFruit() {
         return fruit;
-    }
-
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
     }
 
     public int getQuantity() {
@@ -64,7 +56,4 @@ public class Operation {
         return expDate;
     }
 
-    public void setExpDate(LocalDate expDate) {
-        this.expDate = expDate;
-    }
 }
