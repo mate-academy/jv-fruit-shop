@@ -1,10 +1,13 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.services.FruitParse;
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,13 +21,14 @@ public class Parse implements FruitParse {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.toLowerCase();
-                List<String> oneLine = Arrays.asList(line.split(","));
-                result.add(oneLine);
+                String[] splitetLine = line.split(",");
+                if (splitetLine.length == 4) {
+                    List<String> oneLine = Arrays.asList(splitetLine);
+                    result.add(oneLine);
+                }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Ошибка чтения файла");
         }
         return result;
     }
