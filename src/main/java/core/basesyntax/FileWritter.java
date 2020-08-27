@@ -4,10 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class CreateNewFile implements core.basesyntax.interfaces.CreateNewFile<String> {
+public class FileWritter implements core.basesyntax.interfaces.CreateNewFile<String> {
 
     @Override
-    public void createNewFile(List<String> fruit) throws IOException {
+    public void writeNewFile(List<String> fruit) throws IOException {
         FileWriter newFile = new FileWriter("file1.txt");
         newFile.write("fruit,quantity" + "\n");
         String s;

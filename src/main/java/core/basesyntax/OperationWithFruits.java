@@ -14,13 +14,22 @@ public class OperationWithFruits {
         data.dataValidation(fruitsFromFile, rangeOfShop);
         List<String> fruitsAvailable = new ArrayList<>();
         for (int i = 0; i < fruitsFromFile.size(); i++) {
-            String[] splitFruitsFromFile = fruitsFromFile.get(i).split(",");
-            if (splitFruitsFromFile[0].startsWith("s")) {
-                fruitsAvailable = addOperation.fruitsAdd(fruitsFromFile.get(i), fruitsAvailable);
-            } else if (splitFruitsFromFile[0].startsWith("b")) {
-                fruitsAvailable = buyingOperation.buying(fruitsAvailable, fruitsFromFile.get(i));
-            } else {
-                fruitsAvailable = addOperation.fruitsAdd(fruitsFromFile.get(i), fruitsAvailable);
+
+            String operationType = fruitsFromFile.get(i).split(",")[0];
+            switch (operationType) {
+                case "s":
+                    fruitsAvailable = addOperation
+                            .fruitsAdd(fruitsFromFile.get(i), fruitsAvailable);
+                    break;
+                case "b":
+                    fruitsAvailable = buyingOperation
+                            .buying(fruitsAvailable, fruitsFromFile.get(i));
+                    break;
+                case "r":
+                    fruitsAvailable = addOperation
+                            .fruitsAdd(fruitsFromFile.get(i), fruitsAvailable);
+                    break;
+                default: break;
             }
         }
         return fruitsAvailable;
