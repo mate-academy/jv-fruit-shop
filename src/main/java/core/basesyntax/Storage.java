@@ -10,7 +10,7 @@ public class Storage {
     public static class DateAndQuantityPair {
         private LocalDate date;
         private Integer quantity;
-        private DateAndQuantityPair next = null;
+        private DateAndQuantityPair next;
 
         public DateAndQuantityPair(LocalDate date, Integer quantity) {
             this.date = date;
