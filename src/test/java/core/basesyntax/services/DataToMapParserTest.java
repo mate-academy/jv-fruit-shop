@@ -22,17 +22,17 @@ public class DataToMapParserTest {
     private static DataToMapParser dataParser;
 
     @BeforeClass
-    public static void before() {
+    public static void beforeClass() {
         dataParser = new DataToMapParser();
         operations = new HashMap<>();
         dataLines = new ArrayList<>();
-        operations.put(RETURN, new Return());
+        operations.put(RETURN, new Return(new Supply()));
         operations.put(SUPPLY, new Supply());
         operations.put(BUY, new PurchaseOperation());
     }
 
     @Test
-    public void dataToMapParserTest() {
+    public void parseDataToMap() {
         dataLines.add(new String[]{"s", "banana", "100", "2020-10-14" });
         dataLines.add(new String[]{"b", "banana", "30", "2020-10-15" });
         dataLines.add(new String[]{"r", "banana", "20", "2020-10-17" });
@@ -45,7 +45,7 @@ public class DataToMapParserTest {
     }
 
     @Test(expected = DateTimeParseException.class)
-    public void parseWithWrongLineTest() {
+    public void parseWithWrongLine() {
         dataLines.add(new String[]{"b", "**", "30", "!!!" });
         dataLines.add(new String[]{"s", "orange", "30", "2020-10-15" });
 
@@ -57,7 +57,7 @@ public class DataToMapParserTest {
     }
 
     @Test
-    public void parseWithWrongOperationTypeTest() {
+    public void parseWithWrongOperationType() {
         dataLines.add(new String[]{"s", "banana", "100", "2020-10-14" });
         dataLines.add(new String[]{"b", "banana", "30", "2020-10-15" });
         dataLines.add(new String[]{"G", "orange", "30", "2020-10-15" });
@@ -72,7 +72,7 @@ public class DataToMapParserTest {
     }
 
     @Test
-    public void parseEmptyListTest() {
+    public void parseEmptyList() {
         dataLines.clear();
         Map<String, Map<String, Integer>> actual = dataParser.parseData(dataLines,
                 operations);

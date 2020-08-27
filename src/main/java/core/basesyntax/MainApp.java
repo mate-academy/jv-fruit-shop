@@ -35,7 +35,7 @@ public class MainApp {
 
     private static Map<String, Operable> createOperationsMap() {
         Map<String, Operable> map = new HashMap<>();
-        map.put(RETURN, new Return());
+        map.put(RETURN, new Return(new Supply()));
         map.put(SUPPLY, new Supply());
         map.put(BUY, new PurchaseOperation());
         return map;

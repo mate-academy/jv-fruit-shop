@@ -3,6 +3,7 @@ package core.basesyntax.services;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,9 +20,13 @@ public class DataFileWriterTest {
     private static Map<String, Map<String, Integer>> store;
     private static Map<String, Integer> bananaEntity;
 
-    @Before
-    public void before(){
+    @BeforeClass
+    public static void beforeClass(){
         fileWriter = new DataFileWriter();
+    }
+
+    @Before
+    public void beforeEach(){
         store = new HashMap<>();
         bananaEntity = new HashMap<>();
         bananaEntity.put("2020-10-17", 100);
@@ -33,7 +38,7 @@ public class DataFileWriterTest {
     }
 
     @Test
-    public void fileWriterTest(){
+    public void writeToFile_ok(){
         store.put("banana", bananaEntity);
 
         boolean result = fileWriter.writeResultsToFile(store, FILE_PATH);
@@ -63,7 +68,7 @@ public class DataFileWriterTest {
     }
 
     @Test
-    public void writeSeveralLinesTest(){
+    public void writeSeveralLines(){
         Map<String, Integer> orangeEntity = new HashMap<>();
         orangeEntity.put("2020-10-18", 50);
         store.put("banana", bananaEntity);
@@ -84,7 +89,7 @@ public class DataFileWriterTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void writeWithEmptyPathTest(){
+    public void writeByEmptyPath(){
         fileWriter.writeResultsToFile(store, "");
     }
 }

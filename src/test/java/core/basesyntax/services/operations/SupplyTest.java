@@ -17,7 +17,7 @@ public class SupplyTest{
 
 
     @BeforeClass
-    public static void before(){
+    public static void beforeClass(){
         store = new HashMap<>();
         supply = new Supply();
     }

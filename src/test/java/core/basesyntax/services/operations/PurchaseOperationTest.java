@@ -11,13 +11,13 @@ public class PurchaseOperationTest {
     private static Map<String, Integer> bananaEntity;
 
     @BeforeClass
-    public static void before(){
+    public static void beforeClass(){
         store = new HashMap<>();
         bananaEntity = new HashMap<>();
     }
 
     @Test
-    public void testNormalConditionsBuy() {
+    public void normalConditions() {
         String[] data = new String[]{"b", "banana", "20", "2020-10-15" };
         bananaEntity.put("2020-10-17", 100);
         store.put("banana", bananaEntity);
@@ -29,7 +29,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void testBuyAll() {
+    public void buyAllAvailable() {
         String[] data = new String[]{"b", "banana", "10", "2020-10-15" };
         bananaEntity.put("2020-10-17", 10);
         store.put("banana", bananaEntity);
@@ -41,7 +41,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void testBuyMore() {
+    public void buyMoreThenAvailable() {
         String[] data = new String[]{"b", "banana", "20", "2020-10-15" };
         bananaEntity.put("2020-10-17", 10);
         store.put("banana", bananaEntity);
@@ -53,7 +53,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void testBuyWithDifferentExpirationDates() {
+    public void buyWithDifferentExpirationDates() {
         String[] data = new String[]{"b", "banana", "10", "2020-10-15" };
         bananaEntity.put("2020-10-17", 5);
         bananaEntity.put("2020-10-18", 10);
@@ -66,7 +66,7 @@ public class PurchaseOperationTest {
     }
 
     @Test
-    public void testBuyAbsentFruit() {
+    public void buyAbsentFruit() {
         String[] data = new String[]{"b", "orange", "10", "2020-10-15" };
         bananaEntity.put("2020-10-18", 10);
         store.put("banana", bananaEntity);

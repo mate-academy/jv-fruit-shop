@@ -22,15 +22,15 @@ public class FruitShopServiceTest {
     private static Map<String, Operable> operationsMap;
 
     @BeforeClass
-    public static void before(){
+    public static void beforeClass(){
         shopService = new FruitShopService(new DataFileReader(),
                 new DataFileWriter(), new DataToMapParser());
         operationsMap = new HashMap<>();
     }
 
     @Test
-    public void fruitShopServiceTest(){
-        operationsMap.put(RETURN, new Return());
+    public void processFile_ok(){
+        operationsMap.put(RETURN, new Return(new Supply()));
         operationsMap.put(SUPPLY, new Supply());
         operationsMap.put(BUY, new PurchaseOperation());
         boolean result = shopService.processFile(FILE_PATH,
@@ -40,7 +40,7 @@ public class FruitShopServiceTest {
     }
 
     @Test
-    public void withOneOperationTest(){
+    public void processWithOneOperation(){
         operationsMap.put(SUPPLY, new Supply());
         boolean result = shopService.processFile(FILE_PATH,
                 RESULT_FILE_PATH,
