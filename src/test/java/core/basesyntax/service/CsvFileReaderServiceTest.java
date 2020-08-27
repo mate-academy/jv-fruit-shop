@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderServiceTest {
-    private static final String VALID_PATH = "src/main/resources/test_fruit_transactions.csv";
-    private static final String INVALID_PATH = "src/main/resources/invalid_path.csv";
-    private static final String EMPTY_FILE = "src/main/resources/empty_file.csv";
+    private static final String VALID_PATH = "src/test/resources/test_fruit_transactions.csv";
+    private static final String INVALID_PATH = "src/test/resources/invalid_path.csv";
+    private static final String EMPTY_FILE = "src/test/resources/empty_file.csv";
     private static final List<String[]> EMPTY_LIST = new ArrayList<>();
 
     @Test

@@ -14,9 +14,8 @@ public class FruitBatchTest {
 
     @Test
     public void getFruitType_correctWork() {
-        String expectedResult = FRUIT_TYPE_ONE;
         String actualResult = fruitBatch.getFruitType();
-        Assert.assertEquals(expectedResult, actualResult);
+        Assert.assertEquals(FRUIT_TYPE_ONE, actualResult);
     }
 
     @Test
@@ -29,7 +28,7 @@ public class FruitBatchTest {
     @Test
     public void clone_correctWork() {
         FruitBatch clonedFruitBatch = fruitBatch.clone();
-        Assert.assertEquals(clonedFruitBatch, fruitBatch);
+        Assert.assertEquals(fruitBatch, clonedFruitBatch);
     }
 
     @Test
