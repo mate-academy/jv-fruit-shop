@@ -8,13 +8,20 @@ public class Supply implements Operation {
     public void provideOperation(Transaction transaction) {
         String key = transaction.getFruitItem();
         Integer quantityToAdd = transaction.getQuantity();
-        Storage.DateAndQuantityPair pair = Storage.storage.get(key);
-        if (pair == null) {
-            pair = new Storage.DateAndQuantityPair(transaction.getDate(),
-                    transaction.getQuantity());
+        Storage.DateAndQuantityPair pair;
+        if (Storage.storage.containsKey(key)) {
+            pair = Storage.storage.get(key);
+            while (pair.getNext() != null) {
+                if (pair.getDate().equals(transaction.getDate())) {
+                    pair.setQuantity(pair.getQuantity() + quantityToAdd);
+                    return;
+                }
+                pair = pair.getNext();
+            }
+            pair.setNext(new Storage.DateAndQuantityPair(transaction.getDate(), quantityToAdd));
         } else {
-            pair.setQuantity(pair.getQuantity() + quantityToAdd);
-            pair.setDate(transaction.getDate());
+            pair = new Storage.DateAndQuantityPair(transaction.getDate(),
+                    quantityToAdd);
         }
         Storage.storage.put(key, pair);
     }

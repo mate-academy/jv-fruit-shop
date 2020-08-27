@@ -35,6 +35,11 @@ public class ReturnTest {
     @Test
     public void returnNormalTest() {
         aReturn.provideOperation(new Transaction("r", "banana", "10", "2020-10-07"));
-        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).quantity);
+        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).getQuantity());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void returnNonExistingFruit() {
+        aReturn.provideOperation(new Transaction("r","potato","200","2020-10-07"));
     }
 }

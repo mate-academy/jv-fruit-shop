@@ -25,7 +25,7 @@ public class WriterTest {
         FruitStorageStrategy.fruitStorageStrategy.put("s", new Supply());
         FruitStorageStrategy.fruitStorageStrategy.put("b", new Buy());
         FruitStorageStrategy.fruitStorageStrategy.put("r", new Return());
-        List<Transaction> transactions = Reader.read("src/main/resources/inputNormal1.csv");
+        List<Transaction> transactions = Reader.read("src/main/resources/easyIncome.csv");
         FruitStorageStrategy.storageOperation(transactions);
     }
 
@@ -33,8 +33,8 @@ public class WriterTest {
     public void normalWrite() {
         Writer.write("src/main/resources/result1.csv");
         try {
-            Set<String> expected = new HashSet<>(Files.readAllLines(Path.of("src/main/resources/expectedResult.csv")));
-            Set<String> actual = new HashSet<>(Files.readAllLines(Path.of("src/main/resources/result1.csv")));
+            Set<String> expected = new HashSet<>(Files.readAllLines(Path.of("src/main/resources/expectedEasyIncomeResult.csv")));
+            Set<String> actual = new HashSet<>(Files.readAllLines(Path.of("src/main/resources/resultOfEasyIncome.csv")));
             expected.removeAll(actual);
             Assert.assertTrue(expected.isEmpty());
         } catch (IOException ignored) {
@@ -47,7 +47,7 @@ public class WriterTest {
         Writer.write("src/main/resources/onlyHeader.csv");
         try {
             Set<String> expected = new HashSet<>(Files.readAllLines(Path.of("src/main/resources/onlyHeader.csv")));
-            Assert.assertTrue(expected.size() == 1);
+            Assert.assertEquals(1, expected.size());
         } catch (IOException ignored) {
         }
     }

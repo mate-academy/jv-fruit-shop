@@ -35,7 +35,7 @@ public class SupplyTest {
     @Test
     public void supplyNormalTest() {
         supply.provideOperation(new Transaction("s", "banana", "10", "2020-10-07"));
-        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).quantity);
+        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).getQuantity());
     }
 
     @Test

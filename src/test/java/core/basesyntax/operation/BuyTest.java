@@ -35,7 +35,7 @@ public class BuyTest {
     @Test
     public void buyTest() {
         buy.provideOperation(new Transaction("b", "banana", "10", "2020-10-07"));
-        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).quantity);
+        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).getQuantity());
     }
 
     @Test(expected = RuntimeException.class)

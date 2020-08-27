@@ -70,5 +70,4 @@ public class Transaction {
     public int hashCode() {
         return Objects.hash(operation, fruitItem, quantity, date);
     }
-
 }

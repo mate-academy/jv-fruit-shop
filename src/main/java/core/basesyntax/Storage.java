@@ -8,12 +8,21 @@ public class Storage {
     public static Map<String, DateAndQuantityPair> storage = new HashMap<>();
 
     public static class DateAndQuantityPair {
-        public LocalDate date;
-        public Integer quantity;
+        private LocalDate date;
+        private Integer quantity;
+        private DateAndQuantityPair next = null;
 
         public DateAndQuantityPair(LocalDate date, Integer quantity) {
             this.date = date;
             this.quantity = quantity;
+        }
+
+        public DateAndQuantityPair getNext() {
+            return next;
+        }
+
+        public void setNext(DateAndQuantityPair next) {
+            this.next = next;
         }
 
         public LocalDate getDate() {
@@ -25,7 +34,13 @@ public class Storage {
         }
 
         public Integer getQuantity() {
-            return quantity;
+            Integer sum = 0;
+            DateAndQuantityPair pair = this;
+            while (pair.next != null) {
+                sum += quantity;
+                pair = pair.next;
+            }
+            return sum + pair.quantity;
         }
 
         public void setQuantity(Integer quantity) {
