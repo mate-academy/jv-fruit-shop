@@ -9,16 +9,16 @@ import java.util.*;
 public class LocalFileReaderTest {
     private static final String EMPTY_FILE_NAME = "";
     private static final String NULL_FILE_NAME = null;
-    private static final String EMPTY_FILE = "src\\test\\resources\\test1.csv";
-    private static final String NO_HEADER_FILE = "src\\test\\resources\\test4.csv";
-    private static final String WRONG_DATE_FILE = "src\\test\\resources\\test9.csv";
-    private static final String JUST_HEADER_FILE = "src\\test\\resources\\test2.csv";
-    private static final String WRONG_QUANTITY_FILE = "src\\test\\resources\\test8.csv";
-    private static final String INCOMPLETE_DATA_FILE = "src\\test\\resources\\test10.csv";
-    private static final String WRONG_EXTENSION_FILE = "src\\test\\resources\\test3.txt";
-    private static final String APPROPRIATE_DATA_FILE = "src\\test\\resources\\test6.csv";
-    private static final String NON_EXISTENT_FILE_NAME = "src\\test\\resources\\test3.csv";
-    private static final String WRONG_OPERATION_TYPE_FILE = "src\\test\\resources\\test7.csv";
+    private static final String EMPTY_FILE = "src/test/resources/test1.csv";
+    private static final String NO_HEADER_FILE = "src/test/resources/test4.csv";
+    private static final String WRONG_DATE_FILE = "src/test/resources/test9.csv";
+    private static final String JUST_HEADER_FILE = "src/test/resources/test2.csv";
+    private static final String WRONG_QUANTITY_FILE = "src/test/resources/test8.csv";
+    private static final String INCOMPLETE_DATA_FILE = "src/test/resources/test10.csv";
+    private static final String WRONG_EXTENSION_FILE = "src/test/resources/test3.txt";
+    private static final String APPROPRIATE_DATA_FILE = "src/test/resources/test6.csv";
+    private static final String NON_EXISTENT_FILE_NAME = "src/test/resources/test3.csv";
+    private static final String WRONG_OPERATION_TYPE_FILE = "src/test/resources/test7.csv";
 
     private static final List<List<String>> EMPTY_LIST_RESULT = new ArrayList<>();
     private static final List<List<String>> ONLY_HEADER_RESULT = new ArrayList<>();

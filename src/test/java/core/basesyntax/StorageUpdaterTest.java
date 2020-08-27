@@ -9,10 +9,10 @@ import java.util.*;
 
 public class StorageUpdaterTest {
     private static StorageUpdater newUpdate;
-    private static final String PROPERLY_FILLED_FILE = "src\\test\\resources\\test11.csv";
-    private static final String SECOND_PROPERLY_FILLED_FILE = "src\\test\\resources\\test6.csv";
-    private static final String INCOMPLETE_DATA_FILE = "src\\test\\resources\\test10.csv";
-    private static final String PURCHASE_FROM_EMPTY_STOCK_FILE = "src\\test\\resources\\test5.csv";
+    private static final String PROPERLY_FILLED_FILE = "src/test/resources/test11.csv";
+    private static final String SECOND_PROPERLY_FILLED_FILE = "src/test/resources/test6.csv";
+    private static final String INCOMPLETE_DATA_FILE = "src/test/resources/test10.csv";
+    private static final String PURCHASE_FROM_EMPTY_STOCK_FILE = "src/test/resources/test5.csv";
     private static Map<String, TreeMap<LocalDate, Integer>> toCompareEmptyStore = new HashMap<>();
     private static Map<String, TreeMap<LocalDate, Integer>> toCompareNotEmptyStore = new HashMap<>();
 
