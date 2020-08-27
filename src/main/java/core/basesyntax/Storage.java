@@ -58,7 +58,7 @@ public class Storage {
 
     private void checkNull(Fruit fruit) {
         if (fruit == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Passed parameter is null");
         }
     }
 }

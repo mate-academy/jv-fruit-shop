@@ -14,7 +14,7 @@ public class BuyTradingImpl implements Trading {
     @Override
     public void trade(Fruit fruit) {
         if (storage == null || fruit == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Passed parameter is null");
         }
         storage.remove(fruit);
     }

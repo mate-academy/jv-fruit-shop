@@ -10,10 +10,10 @@ public class FruitParserImpl implements FruitParser {
     @Override
     public Fruit parse(List<String> params) {
         if (params == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Passed parameter is null");
         }
         if (params.size() != 4) {
-            throw new InvalidParameterException();
+            throw new InvalidParameterException("Wrong number of parameters passed");
         }
         String name = params.get(1);
         int quantity = Integer.parseInt(params.get(2));

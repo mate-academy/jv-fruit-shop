@@ -23,7 +23,7 @@ public class FileWriterServiceImpl implements FileWriterService {
                 printer.printRecord(List.of(row.getName(), row.getQuantity()));
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to write file");
         } catch (IOException e) {
             e.printStackTrace();
         }

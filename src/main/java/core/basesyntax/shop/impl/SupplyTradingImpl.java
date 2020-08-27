@@ -13,8 +13,8 @@ public class SupplyTradingImpl implements Trading {
 
     @Override
     public void trade(Fruit fruit) {
-        if (storage == null || fruit == null) {
-            throw new NullPointerException();
+        if (fruit == null) {
+            throw new NullPointerException("Passed parameter is null");
         }
         storage.add(fruit);
     }

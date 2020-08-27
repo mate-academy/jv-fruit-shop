@@ -17,7 +17,7 @@ public class Shop {
     public void trade(String type, Fruit fruit) {
         Trading trading = tradings.get(type);
         if (trading == null) {
-            throw new NullPointerException("");
+            throw new NullPointerException("Passed parameter is null");
         }
         trading.trade(fruit);
     }
