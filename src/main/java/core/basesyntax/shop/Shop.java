@@ -17,9 +17,9 @@ public class Shop {
     public void trade(String type, Fruit fruit) {
         Trading trading = tradings.get(type);
         if (trading == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("");
         }
-        trading.trade(storage, fruit);
+        trading.trade(fruit);
     }
 
     public List<Fruit> balanceStorage() {

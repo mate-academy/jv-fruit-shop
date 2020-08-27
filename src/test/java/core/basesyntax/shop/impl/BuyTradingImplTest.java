@@ -16,8 +16,8 @@ public class BuyTradingImplTest {
 
     @BeforeClass
     public static void setup() {
-        buyTrading = new BuyTradingImpl();
         storage = new Storage();
+        buyTrading = new BuyTradingImpl(storage);
     }
 
     @After
@@ -28,7 +28,7 @@ public class BuyTradingImplTest {
     @Test
     public void buyFruitTest() {
         storage.add(BANANA_FRUIT);
-        buyTrading.trade(storage, BANANA_FRUIT);
+        buyTrading.trade(BANANA_FRUIT);
         Fruit expectedFruit = new Fruit("banana", 0, BANANA_FRUIT.getShelfLife());
         Fruit actualFruit = storage.getByName(BANANA_FRUIT.getName());
         int actualSize = storage.size();
@@ -38,11 +38,11 @@ public class BuyTradingImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void buyFruitWhenStorageEmptyTest() {
-        buyTrading.trade(storage, BANANA_FRUIT);
+        buyTrading.trade(BANANA_FRUIT);
     }
 
     @Test(expected = NullPointerException.class)
     public void buyFruitNullTest() {
-        buyTrading.trade(null, null);
+        buyTrading.trade( null);
     }
 }

@@ -19,11 +19,11 @@ public class ShopTest {
 
     @Before
     public void before() {
-        Map<String, Trading> tradingMap = new HashMap<>();
-        tradingMap.put("s", new SupplyTradingImpl());
-        tradingMap.put("b", new BuyTradingImpl());
-        tradingMap.put("r", new RefundsTradingImpl());
         Storage storage = new Storage();
+        Map<String, Trading> tradingMap = new HashMap<>();
+        tradingMap.put("s", new SupplyTradingImpl(storage));
+        tradingMap.put("b", new BuyTradingImpl(storage));
+        tradingMap.put("r", new RefundsTradingImpl(storage));
         shop = new Shop(tradingMap, storage);
     }
 

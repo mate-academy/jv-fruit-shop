@@ -16,8 +16,8 @@ public class RefundsTradingImplTest {
 
     @BeforeClass
     public static void setup() {
-        refundsTrading = new RefundsTradingImpl();
         storage = new Storage();
+        refundsTrading = new RefundsTradingImpl(storage);
     }
 
     @After
@@ -28,7 +28,7 @@ public class RefundsTradingImplTest {
     @Test
     public void refundsFruitTest() {
         storage.add(BANANA_FRUIT);
-        refundsTrading.trade(storage, BANANA_FRUIT);
+        refundsTrading.trade(BANANA_FRUIT);
         Fruit expectedFruit = new Fruit("banana", 200, BANANA_FRUIT.getShelfLife());
         Fruit actualFruit = storage.getByName(BANANA_FRUIT.getName());
         int actualSize = storage.size();
@@ -38,7 +38,7 @@ public class RefundsTradingImplTest {
 
     @Test
     public void refundsFruitWhenStorageEmptyTest() {
-        refundsTrading.trade(storage, BANANA_FRUIT);
+        refundsTrading.trade(BANANA_FRUIT);
         Fruit actualFruit = storage.getByName(BANANA_FRUIT.getName());
         int actualSize = storage.size();
         Assert.assertEquals(BANANA_FRUIT, actualFruit);
@@ -47,6 +47,6 @@ public class RefundsTradingImplTest {
 
     @Test(expected = NullPointerException.class)
     public void refundsFruitNullTest() {
-        refundsTrading.trade(null, null);
+        refundsTrading.trade(null);
     }
 }

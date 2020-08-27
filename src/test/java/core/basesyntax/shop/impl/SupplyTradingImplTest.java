@@ -16,8 +16,8 @@ public class SupplyTradingImplTest {
 
     @BeforeClass
     public static void setup() {
-        supplyTrading = new SupplyTradingImpl();
         storage = new Storage();
+        supplyTrading = new SupplyTradingImpl(storage);
     }
 
     @After
@@ -28,7 +28,7 @@ public class SupplyTradingImplTest {
     @Test
     public void supplyFruitTest() {
         storage.add(BANANA_FRUIT);
-        supplyTrading.trade(storage, BANANA_FRUIT);
+        supplyTrading.trade(BANANA_FRUIT);
         Fruit expectedFruit = new Fruit("banana", 200, BANANA_FRUIT.getShelfLife());
         Fruit actualFruit = storage.getByName(BANANA_FRUIT.getName());
         int actualSize = storage.size();
@@ -38,7 +38,7 @@ public class SupplyTradingImplTest {
 
     @Test
     public void supplyFruitWhenStorageEmptyTest() {
-        supplyTrading.trade(storage, BANANA_FRUIT);
+        supplyTrading.trade(BANANA_FRUIT);
         Fruit actualFruit = storage.getByName(BANANA_FRUIT.getName());
         int actualSize = storage.size();
         Assert.assertEquals(BANANA_FRUIT, actualFruit);
@@ -47,6 +47,6 @@ public class SupplyTradingImplTest {
 
     @Test(expected = NullPointerException.class)
     public void supplyFruitNullTest() {
-        supplyTrading.trade(null, null);
+        supplyTrading.trade(null);
     }
 }

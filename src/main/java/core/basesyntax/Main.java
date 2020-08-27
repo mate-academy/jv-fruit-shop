@@ -20,12 +20,11 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<String, Trading> tradingMap = new HashMap<>();
-        tradingMap.put("s", new SupplyTradingImpl());
-        tradingMap.put("b", new BuyTradingImpl());
-        tradingMap.put("r", new RefundsTradingImpl());
-
         Storage storage = new Storage();
+        Map<String, Trading> tradingMap = new HashMap<>();
+        tradingMap.put("s", new SupplyTradingImpl(storage));
+        tradingMap.put("b", new BuyTradingImpl(storage));
+        tradingMap.put("r", new RefundsTradingImpl(storage));
         Shop shop = new Shop(tradingMap, storage);
         FileReaderService fileReader = new FileReaderServiceImpl();
         FruitParser fruitParser = new FruitParserImpl();

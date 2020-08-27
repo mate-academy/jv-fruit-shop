@@ -5,8 +5,14 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.shop.Trading;
 
 public class BuyTradingImpl implements Trading {
+    private Storage storage;
+
+    public BuyTradingImpl(Storage storage) {
+        this.storage = storage;
+    }
+
     @Override
-    public void trade(Storage storage, Fruit fruit) {
+    public void trade(Fruit fruit) {
         if (storage == null || fruit == null) {
             throw new NullPointerException();
         }
