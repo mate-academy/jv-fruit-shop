@@ -5,7 +5,6 @@ import com.opencsv.exceptions.CsvException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class CsvFileReader {
             }
             for (String[] raw : raws) {
                 operationList.add(new Operation(raw[0], raw[1], Integer.parseInt(raw[2]),
-                        LocalDate.parse(raw[3], DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+                        LocalDate.parse(raw[3])));
             }
 
         } catch (IOException e) {
@@ -36,5 +35,4 @@ public class CsvFileReader {
 
         return operationList;
     }
-
 }

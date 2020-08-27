@@ -1,21 +1,25 @@
 package core.basesyntax;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStorageTest {
-    Map<String, Integer> expected = new HashMap<>();
-    CsvFileReader reader = new CsvFileReader();
-    FruitStorage storage = new FruitStorage();
+    static Map<String, Integer> expected;
+    static CsvFileReader reader;
+    static FruitStorage storage;
 
-    @Before
-    public void Before() {
+    @BeforeClass
+    public static void BeforeClass() {
+        expected = new HashMap<>();
+        reader = new CsvFileReader();
+        storage = new FruitStorage();
         expected.put("banana", 97);
         expected.put("apple", 300);
     }
+
     @Test
     public void normalInputTest() {
         Map<String, Integer> actual = storage.fruitStorage(reader.readFile("src/main/resources/NormalInput.csv"));

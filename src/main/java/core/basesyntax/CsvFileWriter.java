@@ -19,5 +19,4 @@ public class CsvFileWriter {
             System.out.println("Problems with writing to file");
         }
     }
-
 }
