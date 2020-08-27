@@ -9,14 +9,13 @@ import java.util.List;
 
 public class StorageService {
     private Storage fruitStore;
-    private List<Transaction> list;
-    private Operational supplyAndReturn = new SupplyAndReturnOperation();
-    private Operational buy = new BuyOperation();
+    private final Operational supplyAndReturn = new SupplyAndReturnOperation();
+    private final Operational buy = new BuyOperation();
 
     public void storageWriter(String filePath) {
         TransactionReader transactionReader = new TransactionReader();
         fruitStore = new Storage();
-        list = transactionReader.getTransactionList(filePath);
+        List<Transaction> list = transactionReader.getTransactionList(filePath);
 
         for (Transaction x : list) {
             if (x.getType().equals("s") || x.getType().equals("r")) {
@@ -24,6 +23,9 @@ public class StorageService {
             }
             if (x.getType().equals("b")) {
                 buy.operation(x, fruitStore);
+            }
+            if (!x.getType().matches("[srb]")) {
+                throw new RuntimeException("No such operation!");
             }
         }
     }
