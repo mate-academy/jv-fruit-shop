@@ -20,7 +20,7 @@ public class WriteToFileTest {
     }
 
     @Test
-    public void normalWriteTest() throws IOException {
+    public void normalWriteTest() {
         output.put("banana", 100);
         output.put("orange", 100);
         output.put("mango", 300);
@@ -29,8 +29,14 @@ public class WriteToFileTest {
         output.put("apricots", 200);
         writer.writeToFile(output,"src/main/resources/output.csv");
 
-        List<String> expected = new ArrayList<>(Files.readAllLines(Path.of("src/main/resources/expected.csv")));
-        List<String> actual = new ArrayList<>(Files.readAllLines(Path.of("src/main/resources/output.csv")));
-        Assert.assertEquals(expected, actual);
+        try {
+            List<String> expected = null;
+            expected = new ArrayList<>(Files.readAllLines(Path.of("src/main/resources/expected.csv")));
+            List<String> actual = null;
+            actual = new ArrayList<>(Files.readAllLines(Path.of("src/main/resources/output.csv")));
+            Assert.assertEquals(expected, actual);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

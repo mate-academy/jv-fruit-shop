@@ -1,7 +1,9 @@
 package core.basesyntax;
 
 import core.basesyntax.fileservice.ReadFromFile;
+import core.basesyntax.fruitservice.FruitStorage;
 import core.basesyntax.fruitservice.Transaction;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,10 +13,12 @@ import java.util.List;
 
 public class ReadFromFileTest {
     private static ReadFromFile reader;
+    private static FruitStorage fruitStorage;
 
     @BeforeClass
     public static void setup() {
         reader = new ReadFromFile();
+        fruitStorage = new FruitStorage();
     }
 
     @Test
@@ -29,12 +33,17 @@ public class ReadFromFileTest {
         expected.add(Transaction.build("b", "blackberries","15","2020-10-23"));
         expected.add(Transaction.build("r", "blackberries","5","2020-12-10"));
 
-        List<Transaction> actual = reader.readFromFile("src/main/resources/input.csv");
-        Assert.assertEquals(expected, actual);
+        reader.readFromFile("src/main/resources/input.csv");
+        Assert.assertEquals(expected, fruitStorage.getStorage());
     }
 
     @Test(expected = RuntimeException.class)
     public void wrongPath() {
         reader.readFromFile("src/main/resources/inputt.csv");
+    }
+
+    @AfterClass
+    public static void Clear() {
+        fruitStorage.getStorage().clear();
     }
 }

@@ -19,8 +19,6 @@
         <jacoco.version>0.8.5</jacoco.version>
     </properties>
 
-
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -28,10 +26,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-csv</artifactId>
-            <version>1.8</version>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.2</version>
         </dependency>
     </dependencies>
     <build>
@@ -94,12 +93,8 @@
                             </rules>
                         </configuration>
                     </execution>
+
                 </executions>
-                <configuration>
-                    <excludes>
-                        <exclude>**/Main*</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>
