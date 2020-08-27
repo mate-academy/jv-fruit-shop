@@ -8,9 +8,9 @@ import java.util.List;
 
 public class DataFileReaderTest{
     private static final String FILE_PATH
-            = "src/test/resources/testFile.txt";
+            = "src/test/resources/testFile.csv";
     private static final String EMPTY_FILE_PATH
-            = "src/test/resources/emptyTestFile.txt";
+            = "src/test/resources/emptyTestFile.csv";
     private static final String NON_EXISTED_FILE_PATH
             = "src/test/resources/111.txt";
     private static DataFileReader fileReader;
