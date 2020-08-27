@@ -7,7 +7,7 @@ import java.util.Map;
 public class Supply implements Operation {
     @Override
     public void operation(Map<String,Integer> fruitDao, Transaction transaction) {
-        if (transaction.getDate().compareTo(LocalDate.now()) < 0) {
+        if (ValidationData.checkDate(transaction)) {
             return;
         }
         if (fruitDao.containsKey(transaction.getProduct())) {
