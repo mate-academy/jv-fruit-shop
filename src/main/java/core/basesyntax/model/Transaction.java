@@ -1,10 +1,19 @@
 package core.basesyntax.model;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
+import java.time.LocalDate;
+
 public class Transaction {
+    @CsvBindByName
     private String type;
+    @CsvBindByName
     private String fruit;
-    private String date;
-    private String quantity;
+    @CsvDate(value = "yyyy-MM-dd")
+    @CsvBindByName
+    private LocalDate date;
+    @CsvBindByName
+    private int quantity;
 
     public void setType(String type) {
         this.type = type;
@@ -14,11 +23,11 @@ public class Transaction {
         this.fruit = fruit;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -26,7 +35,7 @@ public class Transaction {
         return fruit;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -34,7 +43,7 @@ public class Transaction {
         return type;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 }

@@ -8,10 +8,10 @@ import core.basesyntax.operation.SupplyAndReturnOperation;
 import java.util.List;
 
 public class StorageService {
-    Storage fruitStore;
-    List<Transaction> list;
-    Operational supplyAndReturn = new SupplyAndReturnOperation();
-    Operational buy = new BuyOperation();
+    private Storage fruitStore;
+    private List<Transaction> list;
+    private Operational supplyAndReturn = new SupplyAndReturnOperation();
+    private Operational buy = new BuyOperation();
 
     public void storageWriter(String filePath) {
         TransactionReader transactionReader = new TransactionReader();

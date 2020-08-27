@@ -23,8 +23,8 @@ public class Storage {
 
     public void addToStore(Transaction transaction) {
         Map<LocalDate, Integer> box;
-        LocalDate expirationDate = LocalDate.parse(transaction.getDate());
-        Integer quantity = Integer.parseInt(transaction.getQuantity());
+        LocalDate expirationDate = transaction.getDate();
+        Integer quantity = transaction.getQuantity();
 
         if (fruitStorage.isEmpty() || (box = fruitStorage.get(transaction.getFruit())) == null) {
             fruitStorage.put(transaction.getFruit(),
@@ -43,8 +43,8 @@ public class Storage {
     public void removeFromStore(Transaction transaction) {
         Map<LocalDate, Integer> box;
         int currentQuantity = 0;
-        LocalDate expirationDate = LocalDate.parse(transaction.getDate());
-        Integer quantity = Integer.parseInt(transaction.getQuantity());
+        LocalDate expirationDate = transaction.getDate();
+        Integer quantity = transaction.getQuantity();
 
         if (fruitStorage.isEmpty() || (box = fruitStorage.get(transaction.getFruit())) == null) {
             throw new RuntimeException("Not enough fruits!");

@@ -7,7 +7,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class ReportWriter {
-    public static final Path GENERATED_PATH = Path.of("src/test/out/test.csv");
+    private static final Path GENERATED_PATH = Path.of("src/test/out/test.csv");
 
     public String getReport(String filePath) {
         StorageService executor = new StorageService();
