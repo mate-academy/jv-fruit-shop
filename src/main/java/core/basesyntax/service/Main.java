@@ -9,7 +9,7 @@ public class Main {
         List<Operation> operationList = reader.readOperation("src/PerfectData.csv");
         Storage storage = new Storage();
         storage.addFruits(operationList);
-        File file = new File("src/InputFile.csv");
+        File file = new File("src/OutputFile.csv");
         FruitFileWriter writer = new FruitFileWriter();
         writer.writeFruits(storage.getAllInfo(), file.getName());
     }
