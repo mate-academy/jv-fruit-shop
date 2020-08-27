@@ -10,7 +10,7 @@ public class OperationReturn implements Operation {
     public void doOperation(List<String> data) {
         SupplyFruit currentFruit = new FruitParserImplements().parse(data);
         boolean isExist = false;
-        for (SupplyFruit iteratorFruit : FruitStorage.fruits) {
+        for (SupplyFruit iteratorFruit : FruitStorage.supplyFruits) {
             if (iteratorFruit.getFruitName().equals(currentFruit.getFruitName())) {
                 isExist = true;
                 break;
@@ -19,13 +19,13 @@ public class OperationReturn implements Operation {
         if (!isExist) {
             throw new RuntimeException("The store does not sell this product");
         }
-        for (SupplyFruit iteratorFruit : FruitStorage.fruits) {
+        for (SupplyFruit iteratorFruit : FruitStorage.supplyFruits) {
             if (iteratorFruit.getFruitName().equals(currentFruit.getFruitName())
                     && iteratorFruit.getEndOfShelfLife().equals(currentFruit.getEndOfShelfLife())) {
                 iteratorFruit.setQuantity(iteratorFruit.getQuantity() + currentFruit.getQuantity());
                 return;
             }
         }
-        FruitStorage.fruits.add(currentFruit);
+        FruitStorage.supplyFruits.add(currentFruit);
     }
 }

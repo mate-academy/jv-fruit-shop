@@ -10,7 +10,7 @@ public class OperationBuy implements Operation {
     @Override
     public void doOperation(List<String> data) {
         SupplyFruit currentFruit = new FruitParserImplements().parse(data);
-        for (SupplyFruit iteratorFruit : FruitStorage.fruits) {
+        for (SupplyFruit iteratorFruit : FruitStorage.supplyFruits) {
             if (iteratorFruit.getFruitName().equals(currentFruit.getFruitName())
                     && iteratorFruit.getEndOfShelfLife().isAfter(currentFruit.getEndOfShelfLife())
                     || iteratorFruit.getEndOfShelfLife().equals(currentFruit.getEndOfShelfLife())) {

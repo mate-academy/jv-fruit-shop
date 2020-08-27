@@ -37,6 +37,6 @@ public class MainApp {
             operation.doOperation(line);
         }
         FileWriterService fileWriterServiceImplements = new FileWriterServiceImplements();
-        fileWriterServiceImplements.writeData(FruitStorage.fruits, FILE_PATH_WRITE);
+        fileWriterServiceImplements.writeData(FruitStorage.supplyFruits, FILE_PATH_WRITE);
     }
 }
