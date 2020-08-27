@@ -24,8 +24,8 @@ public class DataAggregator {
         storageOperations.put("r", new Supply());
     }
 
-    public Storage aggregate(List<String> list, Storage storage) {
-        for (String line : list) {
+    public Storage aggregate(List<String> inputData, Storage storage) {
+        for (String line : inputData) {
             String[] operationData = parser.parse(line);
             Product product = new Product(operationData[PRODUCT_TYPE_INDEX],
                     Integer.parseInt(operationData[QUANTITY_INDEX]),

@@ -21,7 +21,7 @@ public class StoreStorageTest {
     public final static String FIRST_OUTPUT_DATA = "banana,20,2020-10-17";
 
     @Test
-    public void storageTestSupplyWithEmptyStorage() {
+    public void storageTest_supply_emptyStorage() {
         Storage storage = new Storage();
         Operation supply = new Supply();
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
@@ -33,7 +33,7 @@ public class StoreStorageTest {
     }
 
     @Test
-    public void storageTestSupplyWithSameFruitDifferentDate() {
+    public void storageTest_supply_sameFruit_differentDate() {
         Storage storage = new Storage();
         Operation supply = new Supply();
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
@@ -47,7 +47,7 @@ public class StoreStorageTest {
     }
 
     @Test
-    public void storageTestSupplyWithSameFruitSameDate() {
+    public void storageTest_supply_sameFruit_sameDate() {
         Storage storage = new Storage();
         Operation supply = new Supply();
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
@@ -60,7 +60,7 @@ public class StoreStorageTest {
     }
 
     @Test
-    public void storageTestBuyNonExistedFruit() {
+    public void storageTest_buy_nonExistedFruit() {
         Storage storage = new Storage();
         Operation buy = new Buy();
         Assert.assertFalse(buy.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage));
@@ -68,7 +68,7 @@ public class StoreStorageTest {
     }
 
     @Test
-    public void storageTestBuyNothing() {
+    public void storageTest_buy_nothing() {
         Storage storage = new Storage();
         Operation buy = new Buy();
         Operation supply = new Supply();
@@ -82,7 +82,7 @@ public class StoreStorageTest {
     }
 
     @Test
-    public void storageTestBuyAllFruitsAreOverdue() {
+    public void storageTest_buy_allFruitsAreOverdue() {
         Storage storage = new Storage();
         Operation buy = new Buy();
         Operation supply = new Supply();
@@ -96,7 +96,7 @@ public class StoreStorageTest {
     }
 
     @Test
-    public void storageTestBuyFromOneBox() {
+    public void storageTest_buy_fromOneBox() {
         Storage storage = new Storage();
         Operation buy = new Buy();
         Operation supply = new Supply();
@@ -110,7 +110,7 @@ public class StoreStorageTest {
     }
 
     @Test
-    public void storageTestBuyFullBox() {
+    public void storageTest_buy_fullBox() {
         Storage storage = new Storage();
         Operation buy = new Buy();
         Operation supply = new Supply();
@@ -120,18 +120,19 @@ public class StoreStorageTest {
     }
 
     @Test
-    public void storageTestBuyFromDifferentBox() {
+    public void storageTest_buy_fromDifferentBox() {
         Storage storage = new Storage();
         Operation buy = new Buy();
         Operation supply = new Supply();
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(EIGHTEENTH_OF_OCTOBER)), storage);
-        Assert.assertTrue(buy.updateStorage(new Product(BANANA, 40, LocalDate.parse(FIFTEENTH_OF_OCTOBER)), storage));
+        Assert.assertTrue(buy.updateStorage(new Product(BANANA,
+                40, LocalDate.parse(FIFTEENTH_OF_OCTOBER)), storage));
         Assert.assertEquals("", storage.toString());
     }
 
     @Test
-    public void storageTestBuyFromDifferentBoxWithRemainder() {
+    public void storageTest_buy_fromDifferentBox_withRemainder() {
         Storage storage = new Storage();
         Operation buy = new Buy();
         Operation supply = new Supply();

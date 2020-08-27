@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.items.Storage;
 import core.basesyntax.services.DataAggregator;
 import core.basesyntax.services.LineParser;
-import core.basesyntax.services.Manager;
+import core.basesyntax.services.StoreManager;
 import core.basesyntax.services.TextPrinter;
 import core.basesyntax.services.TextReader;
 import org.junit.Assert;
@@ -34,13 +34,13 @@ public class StoreServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void textReaderTestFail() {
+    public void textReaderTest_fail() {
         TextReader reader = new TextReader();
         reader.read("asdsd").get(0);
     }
 
     @Test
-    public void textReaderTestWithMultipleLines() {
+    public void textReaderTest_withMultipleLines() {
         TextReader reader = new TextReader();
         int actual = reader.read(SECOND_PATH).size();
         Assert.assertEquals(3, actual);
@@ -56,7 +56,7 @@ public class StoreServiceTest {
     }
 
     @Test
-    public void lineParserTestIncorrectArgumentsAmount() {
+    public void lineParserTest_incorrectArgumentsAmount() {
         LineParser parser = new LineParser();
         String actual = "";
         try {
@@ -69,7 +69,7 @@ public class StoreServiceTest {
     }
 
     @Test
-    public void lineParserTestIncorrectQuantity() {
+    public void lineParserTest_incorrectQuantity() {
         LineParser parser = new LineParser();
         String actual = "";
         try {
@@ -82,7 +82,7 @@ public class StoreServiceTest {
     }
 
     @Test
-    public void lineParserTestIncorrectDate() {
+    public void lineParserTest_incorrectDate() {
         LineParser parser = new LineParser();
         String actual = "";
         try {
@@ -107,7 +107,7 @@ public class StoreServiceTest {
     }
 
     @Test
-    public void aggregatorTestWithMultipleActions() {
+    public void aggregatorTest_multipleActions() {
         Storage storage = new Storage();
         DataAggregator aggregator = new DataAggregator();
         aggregator.aggregate(new ArrayList<String>(List.of("s,banana,100,2020-10-17"
@@ -135,7 +135,7 @@ public class StoreServiceTest {
 
     @Test
     public void fullTest() {
-        Manager manager = new Manager();
+        StoreManager manager = new StoreManager();
         manager.calculateRemainedProduct(FIRST_PATH, FIFTH_PATH);
         List<String> actual;
         try {
@@ -150,8 +150,8 @@ public class StoreServiceTest {
     }
 
     @Test
-    public void fullTestExtremeValue() {
-        Manager manager = new Manager();
+    public void fullTest_extremeValue() {
+        StoreManager manager = new StoreManager();
         manager.calculateRemainedProduct(THIRD_PATH, SIXTH_PATH);
         List<String> actual;
         try {
