@@ -27,6 +27,7 @@ public class OperationBuy implements Operation {
 
             }
         }
-        throw new RuntimeException("Not enough " + currentFruit.getFruitName() + "in stock for sale");
+        throw new RuntimeException("Not enough "
+                + currentFruit.getFruitName() + "in stock for sale");
     }
 }
