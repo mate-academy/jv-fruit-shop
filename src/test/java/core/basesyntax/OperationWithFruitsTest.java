@@ -10,12 +10,12 @@ import java.util.List;
 
 public class OperationWithFruitsTest {
 
-    private static final String FIRST_FILE_NAME = "D:\\MateHW\\jv-fruit-shop\\txt1";
-    private static final String SECOND_FILE_NAME = "D:\\MateHW\\jv-fruit-shop\\txt2";
-    private static final String THIRD_FILE_NAME = "D:\\MateHW\\jv-fruit-shop\\txt3";
-    private static final String FOURS_FILE_NAME = "D:\\MateHW\\jv-fruit-shop\\txt4";
-    private static final String FIRTH_FILE_NAME = "D:\\MateHW\\jv-fruit-shop\\txt5";
-    private static final String SIXTH_FILE_NAME = "D:\\MateHW\\jv-fruit-shop\\txt7";
+    private static final String FIRST_FILE_NAME = "txt1";
+    private static final String SECOND_FILE_NAME = "txt2";
+    private static final String THIRD_FILE_NAME = "txt3";
+    private static final String FOURS_FILE_NAME = "txt4";
+    private static final String FIRTH_FILE_NAME = "txt5";
+    private static final String SIXTH_FILE_NAME = "txt7";
     public final static String FIRST_INPUT_DATA = "type,fruit,quantity,date";
     public final static List<String> CORRECT_OPERATION = List.of("s,banana,70,2020-10-17", "r,banana,10,2020-10-17",
             "s,apple,0,2020-10-17", "s,orange,10,2020-10-17");
