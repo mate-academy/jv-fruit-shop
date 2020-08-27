@@ -12,13 +12,13 @@ import java.util.Map;
 public class BuyOperationTest {
 
     @Test
-    public void buyActionOk() {
+    public void buyOperationOk() {
         Map<String, Integer> actual = FruitStore.fruitStorage;
         Map<String, LocalDate> expirationDate = FruitStore.expirationDateStorage;
-        Operation buyAction = new BuyOperation();
+        Operation buyOperation = new BuyOperation();
         actual.put("banana", 100);
         expirationDate.put("banana", LocalDate.parse("2020-10-17"));
-        buyAction.apply(new FruitDto("b", "banana", 10, LocalDate.parse("2020-10-17")));
+        buyOperation.apply(new FruitDto("b", "banana", 10, LocalDate.parse("2020-10-17")));
 
         Assert.assertEquals(90, (int) actual.get("banana"));
     }
@@ -26,8 +26,8 @@ public class BuyOperationTest {
     @Test(expected = RuntimeException.class)
     public void buyQuantityMoreThanExist() {
         Map<String, Integer> actual = FruitStore.fruitStorage;
-        Operation buyAction = new BuyOperation();
+        Operation buyOperation = new BuyOperation();
         actual.put("banana", 100);
-        buyAction.apply(new FruitDto("b", "banana", 103, LocalDate.parse("2020-10-17")));
+        buyOperation.apply(new FruitDto("b", "banana", 103, LocalDate.parse("2020-10-17")));
     }
 }
