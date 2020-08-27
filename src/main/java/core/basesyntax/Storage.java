@@ -9,8 +9,4 @@ public class Storage {
     public List<String> getFruitTypes() {
         return fruitAvailable;
     }
-
-    public void setFruitTypes(String fruitType) {
-        fruitAvailable.add(fruitType);
-    }
 }
