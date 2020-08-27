@@ -32,10 +32,11 @@ public class FileWriterTest {
 
     @Test
     public void fileWriterOk() {
-        Main.main(new String[]{INPUT_FILE});
+        Main.main(new String[]{INPUT_FILE, OUTPUT_FILE});
 
-        String expected = "banana, 80\n"
+        String expected = "fruit, quantity\n"
                 + "orange, 90\n"
+                + "banana, 80\n"
                 + "apple, 75";
         StringBuilder actual = new StringBuilder();
         Path path = Paths.get(OUTPUT_FILE);
@@ -54,11 +55,11 @@ public class FileWriterTest {
     @Test(expected = IllegalArgumentException.class)
     public void fileWriteWithEmptyMap() {
         Map<String, Integer> testMap = new HashMap<>();
-        fileWriteService.writeFile(testMap);
+        fileWriteService.writeFile(testMap, OUTPUT_FILE);
     }
 
     @Test(expected = NullPointerException.class)
     public void fileWriteWithNullArgument() throws IOException {
-        fileWriteService.writeFile(null);
+        fileWriteService.writeFile(null, OUTPUT_FILE);
     }
 }

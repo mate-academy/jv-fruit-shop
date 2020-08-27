@@ -12,10 +12,6 @@ public class ReturnAction implements ActionsWithFruits {
         if (Integer.parseInt(quantity) < 0) {
             throw new RuntimeException("Something went wrong. Quantity can't be negative!");
         }
-        if (Store.fruits.containsKey(fruit)) {
-            Store.fruits.put(fruit, Store.fruits.get(fruit) + Integer.parseInt(quantity));
-        } else {
-            Store.fruits.put(fruit, Integer.parseInt(quantity));
-        }
+        Store.fruits.merge(fruit, Integer.parseInt(quantity), (oldVal, newVal) -> oldVal + newVal);
     }
 }

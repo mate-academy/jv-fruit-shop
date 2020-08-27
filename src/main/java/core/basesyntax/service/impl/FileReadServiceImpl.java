@@ -18,7 +18,9 @@ public class FileReadServiceImpl implements FileReadService {
         try (Scanner scanner = new Scanner(path)) {
             while (scanner.hasNext()) {
                 String[] parts = scanner.nextLine().split(",");
-                lines.add(new Transaction(parts[0], parts[1], parts[2], parts[3]));
+                if (!parts[0].equals("type")) {
+                    lines.add(new Transaction(parts[0], parts[1], parts[2], parts[3]));
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException("File is not exist");
@@ -27,6 +29,7 @@ public class FileReadServiceImpl implements FileReadService {
         if (lines.size() == 0) {
             throw new RuntimeException("File is empty");
         }
+
         return lines;
     }
 }

@@ -18,6 +18,6 @@ public class Main {
         }
 
         FileWriteService fileWriteService = new FileWriteServiceImpl();
-        fileWriteService.writeFile(Store.fruits);
+        fileWriteService.writeFile(Store.fruits, args[1]);
     }
 }

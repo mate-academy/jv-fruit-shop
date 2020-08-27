@@ -8,10 +8,11 @@ import java.util.Set;
 
 public class FileWriteServiceImpl implements FileWriteService {
     @Override
-    public boolean writeFile(Map<String, Integer> fruits) {
+    public boolean writeFile(Map<String, Integer> fruits, String outputFile) {
 
         Set<Map.Entry<String, Integer>> entries = fruits.entrySet();
-        try (FileWriter fileWriter = new FileWriter("output.txt")) {
+        try (FileWriter fileWriter = new FileWriter(outputFile)) {
+            fileWriter.write("fruit, quantity" + "\n");
             if (fruits.isEmpty()) {
                 throw new IllegalArgumentException();
             }

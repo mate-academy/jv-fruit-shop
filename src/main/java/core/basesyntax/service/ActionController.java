@@ -8,16 +8,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ActionController {
-    private static final Map<String, ActionsWithFruits> transfer = new HashMap<>();
+    private static final Map<String, ActionsWithFruits> actions = new HashMap<>();
 
     static {
-        transfer.put("s", new SupplyAction());
-        transfer.put("b", new BuyAction());
-        transfer.put("r", new ReturnAction());
+        actions.put("s", new SupplyAction());
+        actions.put("b", new BuyAction());
+        actions.put("r", new ReturnAction());
     }
 
     public void distributeActions(Transaction transaction) {
-        ActionsWithFruits action = transfer.get(transaction.getAction());
+        ActionsWithFruits action = actions.get(transaction.getAction());
         action.applyAction(transaction);
     }
 }
