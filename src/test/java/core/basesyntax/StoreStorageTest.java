@@ -7,8 +7,8 @@ import core.basesyntax.operations.Operation;
 import core.basesyntax.operations.Supply;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.time.LocalDate;
+import java.util.List;
 
 public class StoreStorageTest {
 
@@ -25,7 +25,11 @@ public class StoreStorageTest {
         Storage storage = new Storage();
         Operation supply = new Supply();
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
-        Assert.assertEquals(FIRST_OUTPUT_DATA + "\n", storage.toString());
+        List<String> expected = List.of(FIRST_OUTPUT_DATA
+                ,"Total amount:"
+                ,"banana,20");
+        List<String> actual = List.of(storage.toString().split("\n"));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -34,8 +38,12 @@ public class StoreStorageTest {
         Operation supply = new Supply();
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(EIGHTEENTH_OF_OCTOBER)), storage);
-        Assert.assertEquals(FIRST_OUTPUT_DATA + "\n" + "banana,20,2020-10-18" + "\n",
-                storage.toString());
+        List<String> expected = List.of(FIRST_OUTPUT_DATA
+                ,"banana,20,2020-10-18"
+                ,"Total amount:"
+                ,"banana,40");
+        List<String> actual = List.of(storage.toString().split("\n"));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -44,8 +52,11 @@ public class StoreStorageTest {
         Operation supply = new Supply();
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
-        Assert.assertEquals("banana,40,2020-10-17" + "\n",
-                storage.toString());
+        List<String> expected = List.of("banana,40,2020-10-17"
+                ,"Total amount:"
+                ,"banana,40");
+        List<String> actual = List.of(storage.toString().split("\n"));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -63,7 +74,11 @@ public class StoreStorageTest {
         Operation supply = new Supply();
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
         Assert.assertTrue(buy.updateStorage(new Product(BANANA, 0, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage));
-        Assert.assertEquals(FIRST_OUTPUT_DATA + "\n", storage.toString());
+        List<String> expected = List.of(FIRST_OUTPUT_DATA
+                ,"Total amount:"
+                ,"banana,20");
+        List<String> actual = List.of(storage.toString().split("\n"));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -73,7 +88,11 @@ public class StoreStorageTest {
         Operation supply = new Supply();
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
         Assert.assertFalse(buy.updateStorage(new Product(BANANA, 10, LocalDate.parse(EIGHTEENTH_OF_OCTOBER)), storage));
-        Assert.assertEquals(FIRST_OUTPUT_DATA + "\n", storage.toString());
+        List<String> expected = List.of(FIRST_OUTPUT_DATA
+                ,"Total amount:"
+                ,"banana,20");
+        List<String> actual = List.of(storage.toString().split("\n"));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -83,7 +102,11 @@ public class StoreStorageTest {
         Operation supply = new Supply();
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
         Assert.assertTrue(buy.updateStorage(new Product(BANANA, 10, LocalDate.parse(FIFTEENTH_OF_OCTOBER)), storage));
-        Assert.assertEquals("banana,10,2020-10-17" + "\n", storage.toString());
+        List<String> expected = List.of("banana,10,2020-10-17"
+                ,"Total amount:"
+                ,"banana,10");
+        List<String> actual = List.of(storage.toString().split("\n"));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -116,6 +139,10 @@ public class StoreStorageTest {
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(SEVENTEENTH_OF_OCTOBER)), storage);
         supply.updateStorage(new Product(BANANA, TWENTY, LocalDate.parse(EIGHTEENTH_OF_OCTOBER)), storage);
         Assert.assertTrue(buy.updateStorage(new Product(BANANA, 40, LocalDate.parse(FIFTEENTH_OF_OCTOBER)), storage));
-        Assert.assertEquals("banana,20,2020-10-10" + "\n", storage.toString());
+        List<String> expected = List.of("banana,20,2020-10-10"
+                ,"Total amount:"
+                ,"banana,20");
+        List<String> actual = List.of(storage.toString().split("\n"));
+        Assert.assertEquals(expected, actual);
     }
 }

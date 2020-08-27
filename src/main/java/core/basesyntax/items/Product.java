@@ -3,9 +3,9 @@ package core.basesyntax.items;
 import java.time.LocalDate;
 
 public class Product {
-    private String type;
+    private final String type;
     private Integer quantity;
-    private LocalDate date;
+    private final LocalDate date;
 
     public Product(String type, Integer quantity, LocalDate expirationDate) {
         this.type = type;
@@ -15,10 +15,6 @@ public class Product {
 
     public String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Integer getQuantity() {
@@ -31,9 +27,5 @@ public class Product {
 
     public LocalDate getDate() {
         return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 }

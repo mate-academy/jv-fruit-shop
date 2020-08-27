@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class LineParser {
-    public static final int CORRECT_ARG_AMOUNT = 4;
-    public static final int QUANTITY_INDEX = 2;
-    public static final int DATE_INDEX = 3;
+    private static final int CORRECT_ARG_AMOUNT = 4;
+    private static final int QUANTITY_INDEX = 2;
+    private static final int DATE_INDEX = 3;
 
     public String[] parse(String line) {
         String[] splitedLine = line.split(",");

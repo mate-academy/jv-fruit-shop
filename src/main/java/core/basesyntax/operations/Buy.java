@@ -19,7 +19,7 @@ public class Buy implements Operation {
         if (quantity == 0) {
             return true;
         }
-        Map<LocalDate, Integer> box = storage.getBoxWithFruit(type);
+        Map<LocalDate, Product> box = storage.getBoxWithFruit(type);
         List<LocalDate> expirationDates = box.keySet().stream()
                 .filter(expirationDate -> expirationDate.isAfter(purchaseDate))
                 .sorted()
@@ -27,17 +27,18 @@ public class Buy implements Operation {
         if (expirationDates.isEmpty()) {
             return false;
         }
-        return takeFromBoxes(quantity, expirationDates, box);
+        return takeFromBoxes(product, expirationDates, box);
     }
 
-    private boolean takeFromBoxes(Integer quantity,
+    private boolean takeFromBoxes(Product product,
                                   List<LocalDate> expirationDates,
-                                  Map<LocalDate, Integer> box) {
-        Integer quantityToBuy = quantity;
+                                  Map<LocalDate, Product> box) {
+        Integer quantityToBuy = product.getQuantity();
         for (LocalDate date : expirationDates) {
-            Integer quantityInBox = box.get(date);
+            Integer quantityInBox = box.get(date).getQuantity();
             if (quantityInBox > quantityToBuy) {
-                box.replace(date, quantityInBox - quantityToBuy);
+                Product productInBox = box.get(date);
+                productInBox.setQuantity(productInBox.getQuantity() - quantityToBuy);
                 return true;
             }
             if (quantityInBox.equals(quantityToBuy)) {

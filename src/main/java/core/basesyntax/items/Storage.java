@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Storage {
-    private Map<String, Map<LocalDate, Integer>> fruitStorage = new TreeMap<>();
+    private final Map<String, Map<LocalDate, Product>> fruitStorage = new TreeMap<>();
 
-    public Map<LocalDate, Integer> getBoxWithFruit(String fruit) {
+    public Map<LocalDate, Product> getBoxWithFruit(String fruit) {
         return fruitStorage.get(fruit);
     }
 
@@ -15,9 +15,11 @@ public class Storage {
         return fruitStorage.containsKey(fruit);
     }
 
-    public void addNewFruitToRange(String fruit, Integer quantity, LocalDate expirationDate) {
+    public void addNewFruitToRange(Product product) {
+        String fruit = product.getType();
+        LocalDate expirationDate = product.getDate();
         fruitStorage.put(fruit, new TreeMap<>());
-        fruitStorage.get(fruit).put(expirationDate, quantity);
+        fruitStorage.get(fruit).put(expirationDate, product);
     }
 
     @Override
@@ -27,11 +29,28 @@ public class Storage {
             for (LocalDate expirationDate : fruitStorage.get(fruit).keySet()) {
                 builder.append(fruit)
                         .append(",")
-                        .append(fruitStorage.get(fruit).get(expirationDate))
+                        .append(fruitStorage.get(fruit).get(expirationDate).getQuantity())
                         .append(",")
                         .append(expirationDate)
                         .append("\n");
             }
+        }
+        return builder.length() == 0 ? builder.toString() : builder
+                .append("Total amount:").append("\n")
+                .append(totalAmountToString())
+                .toString();
+    }
+
+    private String totalAmountToString() {
+        StringBuilder builder = new StringBuilder();
+        int count = 0;
+        for (String fruit : fruitStorage.keySet()) {
+            builder.append(fruit).append(",");
+            for (LocalDate expirationDate : fruitStorage.get(fruit).keySet()) {
+                count += fruitStorage.get(fruit).get(expirationDate).getQuantity();
+            }
+            builder.append(count).append("\n");
+            count = 0;
         }
         return builder.toString();
     }

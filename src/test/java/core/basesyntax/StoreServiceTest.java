@@ -1,10 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.items.Product;
 import core.basesyntax.items.Storage;
-import core.basesyntax.operations.Buy;
-import core.basesyntax.operations.Operation;
-import core.basesyntax.operations.Supply;
 import core.basesyntax.services.DataAggregator;
 import core.basesyntax.services.LineParser;
 import core.basesyntax.services.Manager;
@@ -12,11 +8,9 @@ import core.basesyntax.services.TextPrinter;
 import core.basesyntax.services.TextReader;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,7 +99,11 @@ public class StoreServiceTest {
         Storage storage = new Storage();
         DataAggregator aggregator = new DataAggregator();
         aggregator.aggregate(new ArrayList<String>(List.of("s,banana,100,2020-10-17")), storage);
-        Assert.assertEquals("banana,100,2020-10-17" + "\n", storage.toString());
+        List<String> expected = new ArrayList<>(List.of("banana,100,2020-10-17"
+                ,"Total amount:"
+                ,"banana,100"));
+        List<String> actual = List.of(storage.toString().split("\n"));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -113,8 +111,13 @@ public class StoreServiceTest {
         Storage storage = new Storage();
         DataAggregator aggregator = new DataAggregator();
         aggregator.aggregate(new ArrayList<String>(List.of("s,banana,100,2020-10-17"
-                , "b,banana,13,2020-10-15", "r,banana,10,2020-10-17")), storage);
-        Assert.assertEquals("banana,97,2020-10-17" + "\n", storage.toString());
+                ,"b,banana,13,2020-10-15"
+                ,"r,banana,10,2020-10-17")), storage);
+        List<String> expected = new ArrayList<>(List.of("banana,97,2020-10-17"
+                ,"Total amount:"
+                ,"banana,97"));
+        List<String> actual = List.of(storage.toString().split("\n"));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -134,13 +137,16 @@ public class StoreServiceTest {
     public void fullTest() {
         Manager manager = new Manager();
         manager.calculateRemainedProduct(FIRST_PATH, FIFTH_PATH);
-        String actual = "";
+        List<String> actual;
         try {
-            actual = Files.readString(Path.of(FIFTH_PATH));
+            actual = Files.readAllLines(Path.of(FIFTH_PATH));
         } catch (IOException e) {
             throw new RuntimeException("No such file exist!");
         }
-        Assert.assertEquals("banana,100,2020-10-17" + "\n", actual);
+        List<String> expected = new ArrayList<>(List.of("banana,100,2020-10-17"
+                ,"Total amount:"
+                ,"banana,100"));
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
@@ -158,7 +164,11 @@ public class StoreServiceTest {
                 , "banana,700,2020-10-15"
                 , "banana,485,2020-10-17"
                 , "potato,650,2020-10-12"
-                , "potato,50,2020-10-19"));
+                , "potato,50,2020-10-19"
+                ,"Total amount:"
+                ,"apple,970"
+                ,"banana,1185"
+                ,"potato,700"));
         Assert.assertEquals(expected, actual);
     }
 }

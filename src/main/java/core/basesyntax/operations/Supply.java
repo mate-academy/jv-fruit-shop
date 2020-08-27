@@ -12,15 +12,16 @@ public class Supply implements Operation {
         Integer quantity = product.getQuantity();
         LocalDate expirationDate = product.getDate();
         if (storage.isFruitInStorage(type)) {
-            Map<LocalDate, Integer> box = storage.getBoxWithFruit(type);
+            Map<LocalDate, Product> box = storage.getBoxWithFruit(type);
             if (box.containsKey(expirationDate)) {
-                box.replace(expirationDate, box.get(expirationDate) + quantity);
+                Product productInBox = box.get(expirationDate);
+                productInBox.setQuantity(productInBox.getQuantity() + quantity);
                 return true;
             }
-            box.put(expirationDate, quantity);
+            box.put(expirationDate, product);
             return true;
         }
-        storage.addNewFruitToRange(type, quantity, expirationDate);
+        storage.addNewFruitToRange(product);
         return true;
     }
 }

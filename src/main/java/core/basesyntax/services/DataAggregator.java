@@ -11,10 +11,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class DataAggregator {
-    public static final int OPERATION_SYMBOL_INDEX = 0;
-    public static final int PRODUCT_TYPE_INDEX = 1;
-    public static final int QUANTITY_INDEX = 2;
-    public static final int DATE_INDEX = 3;
+    private static final int OPERATION_SYMBOL_INDEX = 0;
+    private static final int PRODUCT_TYPE_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final int DATE_INDEX = 3;
     private final LineParser parser = new LineParser();
     private final Map<String, Operation> storageOperations = new TreeMap<>();
 
