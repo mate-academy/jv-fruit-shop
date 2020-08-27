@@ -2,31 +2,25 @@ package core.basesyntax.service;
 
 import core.basesyntax.products.Fruit;
 import core.basesyntax.storage.ListStorage;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-public class BuyService implements Handleable {
+public class BuyService implements ServiceAble {
 
     @Override
     public void operationWithProduct(Fruit fruit) {
         int numNeededFruit = fruit.getAmount();
-        String fruitName = fruit.getName();
-        Optional<Fruit> optionalFruit = buyProduct(fruit);
-        optionalFruit.ifPresent(x -> x.setAmount(x.getAmount() - fruit.getAmount()));
 
-    }
-    private Optional<Fruit> buyProduct(Fruit fruit) {
-    return ListStorage.listStorage.stream()
-            .filter(x -> x.getName().equals(fruit.getName()))
-            .filter(x -> x.getDate().isAfter(fruit.getDate()))
-            .filter(x -> x.getAmount() >= fruit.getAmount())
-            .min(Comparator.comparing(Fruit::getDate));
-
+        int sumAvailable = ListStorage.listStorage.stream()
+                .filter(x -> x.getName().equals(fruit.getName()))
+                .filter(x -> x.getExpirationDate().isAfter(fruit.getExpirationDate()))
+                .mapToInt(Fruit::getAmount)
+                .sum();
+        if (numNeededFruit > sumAvailable) {
+            throw new IllegalArgumentException("Wrong number of fruits");
+        }
+        ListStorage.listStorage.sort(Comparator.comparing(Fruit::getExpirationDate));
+        for (int i = 0; i < numNeededFruit; i++) {
+            ListStorage.listStorage.remove(i);
+        }
     }
 }

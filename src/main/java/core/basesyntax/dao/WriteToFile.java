@@ -7,46 +7,50 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class WriteToFile {
-    public void writeToFile(String filePath) {
+    public boolean writeToFile(String filePath) {
         Path path = Paths.get(filePath);
         if (Files.exists(path)) {
             try {
                 Files.delete(path);
             } catch (IOException e) {
-                System.out.println("File " + path.getFileName() + " is not deleted" + e.getMessage());
+                throw new RuntimeException (e);
             }
+            createFile(filePath);
         } else {
-            try {
-                Files.createFile(path);
-            } catch (IOException e) {
-                System.out.println("File " + path.getFileName() + " is not created" + e.getMessage());
-            }
+            createFile(filePath);
         }
-//        Map<String, Integer> mapToFile = ListStorage.listStorage.stream()
-//                .collect(Collectors.groupingBy(Fruit::getName),
-//                        Collectors.summingInt(Fruit::getAmount));
 
+        Map<String, Integer> mapToFile = ListStorage.listStorage.stream()
+                .collect(Collectors.groupingBy(Fruit::getName,
+                        Collectors.summingInt(Fruit::getAmount)));
 
-//        for (Map.Entry<String, Integer> entry : mapToFile.entrySet()) {
-//            String string = entry.getKey() + "," + entry.getValue();
-//            try {
-//                Files.write(path, Collections.singleton(string));
-//            } catch (IOException e) {
-//                System.out.println("Error with writing to file" + e.getMessage());
-//            }
-//        }
-        StringBuilder builder = new StringBuilder();
-        for (Fruit fruit : ListStorage.listStorage) {
-            builder.append(fruit.getName()).append(",").append(fruit.getAmount()).append(System.lineSeparator());
+        List<String> stringsToFile = new ArrayList<>();
+        stringsToFile.add("fruit,quantity");
+
+        for (Map.Entry<String, Integer> entry : mapToFile.entrySet()) {
+            stringsToFile.add(entry.getKey() + "," + entry.getValue());
         }
-            byte[] arrToWrite = builder.toString().getBytes();
-            try {
-                Files.write(path, arrToWrite);
-            } catch (IOException e) {
-                System.out.println("Error with writing to file" + e.getMessage());
-            }
-
+        try {
+            Files.write(path, stringsToFile, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            throw new RuntimeException ("Error with writing to file. "
+                    + "Rerun main. ", e);
+        }
+        return true;
+    }
+    private void createFile(String filePath) {
+        Path path = Paths.get(filePath);
+        try {
+            Files.createFile(path);
+        } catch (IOException e) {
+            throw new RuntimeException (e);
+        }
     }
 }
