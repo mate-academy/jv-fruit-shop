@@ -1,8 +1,7 @@
 package core.basesyntax.filewriter;
 
-import core.basesyntax.FruitStoreDao;
-import core.basesyntax.InputDataModel;
 import core.basesyntax.exception.FileWritingException;
+import core.basesyntax.model.InputDataModel;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,15 +10,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LocalFileWriterService implements FileWriterServise {
-    private FruitStoreDao fruitStoreDao = new FruitStoreDao();
+public class LocalFileWriterService implements FileWriterService {
+    public static final String HEADER = "fruit,quantity";
 
     @Override
-    public void writeFile(String filePath) {
+    public void writeFile(Map<InputDataModel, Integer> storage, String filePath) {
         List<String> fruitsInStorageList = new ArrayList<>();
-        fruitsInStorageList.add("fruit,quantity");
+        fruitsInStorageList.add(HEADER);
         Map<String, Integer> outputData = new LinkedHashMap<>();
-        for (Map.Entry<InputDataModel, Integer> entry : fruitStoreDao.getAllFruits().entrySet()) {
+        if (storage == null) {
+            throw new RuntimeException("Fruit store warehouse is empty");
+        }
+        for (Map.Entry<InputDataModel, Integer> entry : storage.entrySet()) {
             if (outputData.containsKey(entry.getKey().getName())) {
                 outputData.compute(entry.getKey().getName(), (f, a) -> a + entry.getValue());
             } else {
@@ -32,7 +34,7 @@ public class LocalFileWriterService implements FileWriterServise {
         try {
             Files.write(Paths.get(filePath), fruitsInStorageList);
         } catch (IOException e) {
-            throw new FileWritingException("Can't write the file");
+            throw new FileWritingException("Can't write the file", e);
         }
     }
 }

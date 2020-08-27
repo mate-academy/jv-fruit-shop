@@ -1,12 +1,16 @@
 package core.basesyntax.fruitstoreoperation;
 
-import core.basesyntax.FruitStoreDao;
-import core.basesyntax.InputDataModel;
+import core.basesyntax.Storage;
+import core.basesyntax.model.InputDataModel;
 
 public class SupplyFruitOperation implements FruitStoreOperation {
-    private FruitStoreDao fruitStoreDao = new FruitStoreDao();
+    private Storage storage;
+
+    public SupplyFruitOperation() {
+        this.storage = new Storage();
+    }
 
     public void doOperation(InputDataModel product, int amount) {
-        fruitStoreDao.addFruitProduct(product, amount);
+        storage.addFruitProduct(product, amount);
     }
 }

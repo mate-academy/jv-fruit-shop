@@ -1,9 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class InputDataModel {
+public class InputDataModel extends Model {
     private String name;
     private LocalDate date;
 
@@ -16,8 +16,16 @@ public class InputDataModel {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public LocalDate getDate() {
         return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Override

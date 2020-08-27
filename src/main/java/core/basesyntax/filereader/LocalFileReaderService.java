@@ -14,12 +14,13 @@ public class LocalFileReaderService implements FileReaderService {
         try {
             actionList = Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
-            throw new FileReadingException("Can't read the file");
+            throw new FileReadingException("Can't read the file",e);
         }
         List<List<String>> todoList = new ArrayList<>();
         for (String str : actionList) {
             todoList.add(List.of(str.split(",")));
         }
+        todoList.remove(0);
         return todoList;
     }
 }

@@ -1,22 +1,27 @@
 package core.basesyntax.fruitstoreoperation;
 
-import core.basesyntax.FruitStoreDao;
-import core.basesyntax.InputDataModel;
+import core.basesyntax.Storage;
 import core.basesyntax.exception.NoSuchFruitException;
 import core.basesyntax.exception.NotEnoughFruitException;
+import core.basesyntax.model.InputDataModel;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BuyFruitOperation implements FruitStoreOperation {
-    private FruitStoreDao fruitStoreDao = new FruitStoreDao();
+    private Storage storage;
+
+    public BuyFruitOperation() {
+        this.storage = new Storage();
+    }
 
     public void doOperation(InputDataModel product, int amount) {
         Map<InputDataModel, Integer> necessaryFruits =
-                fruitStoreDao.getAllFruits().entrySet().stream()
+                storage.getAllFruits().entrySet().stream()
                         .filter(p -> p.getKey().getName().equals(product.getName()))
-                        .filter(p -> p.getKey().getDate().isAfter(LocalDate.now()))
+                        .filter(p -> LocalDate.now().isBefore(p.getKey().getDate())
+                                || LocalDate.now().equals(p.getKey().getDate()))
                         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         int numberOfAvailableFruits = necessaryFruits.values().stream()
                 .mapToInt(i -> i).sum();
@@ -35,11 +40,11 @@ public class BuyFruitOperation implements FruitStoreOperation {
         while (iterator.hasNext() && counter > 0) {
             Map.Entry<InputDataModel, Integer> entry = iterator.next();
             if (entry.getValue() > counter) {
-                fruitStoreDao.changeAmountOfFruitProduct(entry.getKey(), amount);
+                storage.changeAmountOfFruitProduct(entry.getKey(), amount);
                 counter = 0;
             } else {
                 counter = amount - entry.getValue();
-                fruitStoreDao.removeFruitProduct(entry.getKey());
+                storage.removeFruitProduct(entry.getKey());
             }
         }
     }

@@ -1,7 +1,7 @@
 package core.basesyntax.parser;
 
-import core.basesyntax.InputDataModel;
 import core.basesyntax.exception.InvalidDateException;
+import core.basesyntax.model.InputDataModel;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -15,7 +15,7 @@ public class ProductParser implements Parser<InputDataModel> {
             inputDataModel = new InputDataModel(
                     parseData.get(1), LocalDate.parse(parseData.get(3)));
         } catch (DateTimeParseException e) {
-            throw new InvalidDateException(String.format("Invalid Data %s", parseData.get(3)));
+            throw new InvalidDateException(String.format("Invalid Data %s", parseData.get(3)), e);
         }
         return inputDataModel;
     }

@@ -1,22 +1,19 @@
 package core.basesyntax;
 
+import core.basesyntax.model.InputDataModel;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class FruitStoreDao {
+public class Storage {
     private static final Map<InputDataModel, Integer> fruitsInStore = new LinkedHashMap<>();
 
     public void addFruitProduct(InputDataModel fruit, int amount) {
-        if (fruitsInStore.containsKey(fruit)) {
-            fruitsInStore.compute(fruit, (f, a) -> a + amount);
-            return;
-        }
-        fruitsInStore.put(fruit, amount);
+        fruitsInStore.merge(fruit, amount, Integer::sum);
     }
 
     public boolean changeAmountOfFruitProduct(InputDataModel fruit, int quantity) {
         if (fruitsInStore.containsKey(fruit)) {
-            fruitsInStore.compute(fruit, (f, a) -> a - quantity);
+            fruitsInStore.merge(fruit, quantity, (f, a) -> f - a);
             return true;
         }
         return false;
