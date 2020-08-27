@@ -1,6 +1,6 @@
-package core.basesyntax.stock.manipulation;
+package core.basesyntax.util;
 
-import core.basesyntax.stock.order.Order;
+import core.basesyntax.order.Order;
 import java.util.List;
 import java.util.stream.Collectors;
 

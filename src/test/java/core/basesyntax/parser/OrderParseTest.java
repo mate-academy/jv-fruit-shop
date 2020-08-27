@@ -1,9 +1,7 @@
 package core.basesyntax.parser;
 
-import core.basesyntax.stock.parser.OrderParse;
 import org.junit.Assert;
 import org.junit.Test;
-
 
 public class OrderParseTest {
     public final static String FIRST_EXAMPLE = "s,banana,100,2020-10-17";

@@ -1,14 +1,11 @@
 package core.basesyntax.read;
 
-import core.basesyntax.stock.read.ReadFile;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFileTest {
-
     public final static String FIRST_PATH = "src/test/resources/test_1.csv";
     public final static String SECOND_PATH = "src/test/resources/test_2.csv";
     public final static List<String> EXPECTING_RESULT_FIRST = new ArrayList<>();

@@ -1,4 +1,4 @@
-package core.basesyntax.stock.parser;
+package core.basesyntax.parser;
 
 public class OrderParse {
     public String[] parse(String row) {

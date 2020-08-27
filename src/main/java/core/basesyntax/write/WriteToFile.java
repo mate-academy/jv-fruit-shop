@@ -1,6 +1,6 @@
-package core.basesyntax.stock.write;
+package core.basesyntax.write;
 
-import core.basesyntax.stock.manipulation.TotalFruitOnStorage;
+import core.basesyntax.util.TotalFruitOnStorage;
 import java.io.FileWriter;
 import java.io.IOException;
 

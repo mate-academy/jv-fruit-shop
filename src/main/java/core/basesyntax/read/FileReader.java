@@ -1,4 +1,4 @@
-package core.basesyntax.stock.read;
+package core.basesyntax.read;
 
 import java.util.List;
 

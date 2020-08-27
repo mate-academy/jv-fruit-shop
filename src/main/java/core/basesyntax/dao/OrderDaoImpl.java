@@ -1,7 +1,7 @@
-package core.basesyntax.stock.dao;
+package core.basesyntax.dao;
 
-import core.basesyntax.stock.db.Storage;
-import core.basesyntax.stock.order.Order;
+import core.basesyntax.db.Storage;
+import core.basesyntax.order.Order;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {

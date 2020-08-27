@@ -1,4 +1,4 @@
-package core.basesyntax.stock.order;
+package core.basesyntax.order;
 
 public class Order {
     private String typeOfOperation;

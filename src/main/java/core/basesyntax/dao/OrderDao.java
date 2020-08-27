@@ -1,6 +1,6 @@
-package core.basesyntax.stock.dao;
+package core.basesyntax.dao;
 
-import core.basesyntax.stock.order.Order;
+import core.basesyntax.order.Order;
 import java.util.List;
 
 public interface OrderDao {

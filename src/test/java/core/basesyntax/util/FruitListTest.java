@@ -1,7 +1,6 @@
-package core.basesyntax.manipulation;
+package core.basesyntax.util;
 
-import core.basesyntax.stock.manipulation.FruitList;
-import core.basesyntax.stock.order.Order;
+import core.basesyntax.order.Order;
 import org.junit.Assert;
 import org.junit.Test;
 

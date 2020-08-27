@@ -1,8 +1,7 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.stock.dao.OrderDaoImpl;
-import core.basesyntax.stock.db.Storage;
-import core.basesyntax.stock.order.Order;
+import core.basesyntax.db.Storage;
+import core.basesyntax.order.Order;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,11 +14,7 @@ public class OrderDaoImplTest {
     private static Order order3 = new Order("s", "orange", 100);
     List<Order> orders = new ArrayList<>();
 
-
-
     OrderDaoImpl orderDao = new OrderDaoImpl();
-
-
     @Test
     public void orderDaoImplTest() {
         orders.add(order1);

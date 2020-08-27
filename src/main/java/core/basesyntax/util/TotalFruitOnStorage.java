@@ -1,6 +1,6 @@
-package core.basesyntax.stock.manipulation;
+package core.basesyntax.util;
 
-import core.basesyntax.stock.dao.OrderDaoImpl;
+import core.basesyntax.dao.OrderDaoImpl;
 import java.util.List;
 
 public class TotalFruitOnStorage {
