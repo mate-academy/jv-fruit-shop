@@ -2,9 +2,9 @@ package core.basesyntax.services.impl;
 
 import core.basesyntax.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.services.SupplyInterface;
+import core.basesyntax.services.ActionInterface;
 
-public class SupplyAndReturn implements SupplyInterface {
+public class SupplyAndReturn implements ActionInterface {
     @Override
     public void action(Storage storage, Fruit fruit) {
         if (storage.getFruits().contains(fruit)) {

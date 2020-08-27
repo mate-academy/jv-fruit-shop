@@ -2,9 +2,9 @@ package core.basesyntax.services.impl;
 
 import core.basesyntax.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.services.BuyInterface;
+import core.basesyntax.services.ActionInterface;
 
-public class Buy implements BuyInterface {
+public class Buy implements ActionInterface {
 
     @Override
     public void action(Storage storage, Fruit fruit) {
