@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Shop {
-    private Storage storage = new Storage();
+    private Storage storage;
     private Map<String, Trading> tradings;
 
-    public Shop(Map<String, Trading> tradings) {
+    public Shop(Map<String, Trading> tradings, Storage storage) {
         this.tradings = tradings;
+        this.storage = storage;
     }
 
     public void trade(String type, Fruit fruit) {

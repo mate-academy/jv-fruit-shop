@@ -1,5 +1,6 @@
 package core.basesyntax.shop;
 
+import core.basesyntax.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.shop.impl.BuyTradingImpl;
 import core.basesyntax.shop.impl.RefundsTradingImpl;
@@ -22,7 +23,8 @@ public class ShopTest {
         tradingMap.put("s", new SupplyTradingImpl());
         tradingMap.put("b", new BuyTradingImpl());
         tradingMap.put("r", new RefundsTradingImpl());
-        shop = new Shop(tradingMap);
+        Storage storage = new Storage();
+        shop = new Shop(tradingMap, storage);
     }
 
     @Test(expected = NullPointerException.class)

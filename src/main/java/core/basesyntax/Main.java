@@ -25,7 +25,8 @@ public class Main {
         tradingMap.put("b", new BuyTradingImpl());
         tradingMap.put("r", new RefundsTradingImpl());
 
-        Shop shop = new Shop(tradingMap);
+        Storage storage = new Storage();
+        Shop shop = new Shop(tradingMap, storage);
         FileReaderService fileReader = new FileReaderServiceImpl();
         FruitParser fruitParser = new FruitParserImpl();
         List<List<String>> data = fileReader.read("input.csv");
