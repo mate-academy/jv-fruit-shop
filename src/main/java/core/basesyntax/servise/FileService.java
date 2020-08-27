@@ -1,32 +1,29 @@
 package core.basesyntax.servise;
 
+import au.com.bytecode.opencsv.CSVReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class FileService {
-    private static final String HEAD = "\"type\",\"fruit\",\"quantity\",\"date\"";
 
     public List<String> getListFromInputFile(String filePath) {
-        if (!filePath.endsWith(".csv")) {
-            throw new IllegalArgumentException("Incorrect file type!!!");
-        }
-        List<String> strings;
+        List<String> rows = new ArrayList<>();
         try {
-            strings = Files.readAllLines(Path.of(filePath));
+            CSVReader reader = new CSVReader(new FileReader(filePath), ',', '\"', 1);
+            String[] strings;
+            while ((strings = reader.readNext()) != null) {
+                rows.add(String.join(",", strings));
+            }
         } catch (IOException e) {
-            throw new NoSuchElementException("The file with path " + filePath
-                    + " cannot be read");
+            throw new RuntimeException("Can't read file", e);
         }
-        if (strings.indexOf(HEAD) >= 0) {
-            strings.remove(0);
-            return strings;
-        }
-        throw new IllegalArgumentException("Incorrect file text!");
+        return rows;
     }
 
     public void writeOutputFile(List<String> strings, String filePath) {

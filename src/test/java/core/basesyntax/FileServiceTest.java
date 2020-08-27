@@ -3,36 +3,35 @@ package core.basesyntax;
 import core.basesyntax.servise.FileService;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class FileServiceTest {
     private static final FileService SERVICE = new FileService();
     private static final String FILE_SERVICE_REPORT = "src/test/resources/outputFile.csv";
     private static final String CORRECT_READ_FILE_PATH = "src/test/resources/fileServiceCorrect.csv";
-    private static final String INCORRECT_FILE_TYPE_PATH = "src/test/resources/fruits.txt";
     private static final String EMPTY_FILE_PATH = "src/test/resources/emptyFile.csv";
     private static final String FILE_WITH_INCORRECT_TEXT_PATH = "src/test/resources/incorrectHead.csv";
 
     @Test
     public void checkGetListFromInputFileCorrect() {
-        List<String> expected = List.of("\"s\",\"banana\",\"100\",\"2020-10-17\"");
+        List<String> expected = List.of("s,banana,100,2020-10-17");
         List<String> actual = SERVICE
                 .getListFromInputFile(CORRECT_READ_FILE_PATH);
         Assert.assertEquals(1, actual.size());
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void checkGetListFromInputFileWithIncorrectHead() {
-        SERVICE.getListFromInputFile(FILE_WITH_INCORRECT_TEXT_PATH);
+    @Test
+    public void checkGetListFromInputFileOnlyWithHead() {
+        Assert.assertEquals(Collections.EMPTY_LIST,
+                SERVICE.getListFromInputFile(FILE_WITH_INCORRECT_TEXT_PATH));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test(expected = RuntimeException.class)
     public void checkGetListFromInputFileWithIncorrectFilePath() {
         SERVICE.getListFromInputFile("incorrect.csv");
     }
@@ -52,13 +51,9 @@ public class FileServiceTest {
         SERVICE.writeOutputFile(List.of(""), "incorrect/incorrect");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void checkGetListFromInputFileWithIncorrectFileType() {
-        SERVICE.getListFromInputFile(INCORRECT_FILE_TYPE_PATH);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void checkGetListFromEmptyFile() {
-        SERVICE.getListFromInputFile(EMPTY_FILE_PATH);
+        Assert.assertEquals(Collections.EMPTY_LIST,
+                SERVICE.getListFromInputFile(EMPTY_FILE_PATH));
     }
 }

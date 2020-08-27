@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class FruitDtoParser {
-
     public FruitDto parse(String row) {
         String[] data = row.replaceAll("\"", "").split(",");
         try {
