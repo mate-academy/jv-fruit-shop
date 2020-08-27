@@ -17,7 +17,7 @@ public class Shop {
     public void trade(String type, Fruit fruit) {
         Trading trading = tradings.get(type);
         if (trading == null) {
-            throw new NullPointerException("Passed parameter is null");
+            throw new RuntimeException("Can't find correct parser for type: " + type);
         }
         trading.trade(fruit);
     }

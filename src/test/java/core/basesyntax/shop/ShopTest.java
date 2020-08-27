@@ -27,12 +27,12 @@ public class ShopTest {
         shop = new Shop(tradingMap, storage);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void tradeNullTest() {
         shop.trade(null, null);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void tradingNullTest() {
         shop.trade("q", BANANA_FRUIT);
     }
