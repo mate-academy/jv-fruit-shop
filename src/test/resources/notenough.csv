@@ -2,7 +2,7 @@ type;fruit;quantity;date
 s;banana;100;2020-09-03
 b;banana;15;2020-08-26
 s;orange;150;2020-09-03
-b;banana;27;2020-08-26
+b;banana;150;2020-08-26
 s;apple;1000;2020-09-03
 b;orange;23;2020-08-26
 b;apple;150;2020-08-27

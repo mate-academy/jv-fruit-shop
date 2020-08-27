@@ -7,11 +7,13 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-public class TransactionScannerTest {
+public class CompleteTest {
     public static final String REFERENCE_FILE = "src/test/resources/data.csv";
     public static final String WRONG_PATH = "src/test/resources/data1.csv";
     public static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
     public static final String WRONG_FILE_PATH = "src/test/resources/wrong.csv";
+    public static final String NOT_ENOUGH_ITEMS = "src/test/resources/notenough.csv";
+    public static final String NO_FRESH_ITEMS = "src/test/resources/nofresh.csv";
     public static final Path GENERATED_PATH = Path.of("src/test/out/test.csv");
 
     @Test
@@ -41,7 +43,7 @@ public class TransactionScannerTest {
         Assert.assertTrue(map.isEmpty());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = RuntimeException.class)
     public void getBuyBeforeSupply() {
         DataExecutor executor = new DataExecutor();
         executor.dataExecutor(WRONG_FILE_PATH);
@@ -71,4 +73,15 @@ public class TransactionScannerTest {
         Assert.assertTrue(Files.exists(GENERATED_PATH));
     }
 
+    @Test(expected = RuntimeException.class)
+    public void notEnoughItems() {
+        DataExecutor executor = new DataExecutor();
+        executor.dataExecutor(NOT_ENOUGH_ITEMS);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void noFreshFood() {
+        DataExecutor executor = new DataExecutor();
+        executor.dataExecutor(NO_FRESH_ITEMS);
+    }
 }
