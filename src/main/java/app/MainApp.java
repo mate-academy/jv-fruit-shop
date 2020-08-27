@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MainApp {
+    public static final String FILE_PATH = "src\\test\\java\\resources\\testOpen.csv";
+
     public static void main(String[] args) {
         getStart();
     }
@@ -28,7 +30,7 @@ public class MainApp {
         fillMapOfOperators(fruitOperations);
         FruitOperationStrategy fruitOperationStrategy = new FruitOperationStrategy(fruitOperations);
         FileReadService fileReadService = new FileReadServiceImplements();
-        List<List<String>> allData = fileReadService.readFile("src\\test\\java\\resources\\testOpen.csv");
+        List<List<String>> allData = fileReadService.readFile(FILE_PATH);
         for (List<String> line : allData) {
             Operation operation = fruitOperationStrategy.getOperation(line);
             operation.doOperation(line);
