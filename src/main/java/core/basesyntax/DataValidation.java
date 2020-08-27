@@ -26,12 +26,9 @@ public class DataValidation {
             if (!line[0].equals("s") && !line[0].equals("b") && !line[0].equals("r")) {
                 throw new NotValidDataException("You have entered incorrect transaction type.");
             }
-            int count = 0;
-            for (int i = 0; i < rangeOfShop.size(); i++) {
-                if (line[1].toLowerCase().equals(rangeOfShop.get(i))) {
-                    count++;
-                }
-            }
+            int count = (int) rangeOfShop.stream()
+                    .filter(x -> x.equals(line[1].toLowerCase()))
+                    .count();
             if (count == 0) {
                 throw new NotValidDataException("You have entered incorrect type of fruit.");
             }
