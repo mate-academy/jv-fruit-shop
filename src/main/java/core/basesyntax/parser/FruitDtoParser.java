@@ -1,4 +1,4 @@
-package core.basesyntax.servise;
+package core.basesyntax.parser;
 
 import core.basesyntax.model.FruitDto;
 import java.time.LocalDate;

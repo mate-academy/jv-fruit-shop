@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.servise;
 
 import core.basesyntax.model.FruitDto;
 import java.time.LocalDate;
@@ -10,10 +10,10 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Storage {
+public class StorageService {
     private Map<String, Map<LocalDate, Integer>> fruitsStorage;
 
-    public Storage() {
+    public StorageService() {
         fruitsStorage = new HashMap<>();
     }
 
@@ -29,36 +29,22 @@ public class Storage {
             return;
         }
         Map<LocalDate, Integer> newMap = new HashMap<>(map);
-        if (map.containsKey(fruitDto.getDate())) {
-            newMap.put(fruitDto.getDate(), map.get(fruitDto.getDate()) + fruitDto.getQuantity());
-        } else {
-            newMap.put(fruitDto.getDate(), fruitDto.getQuantity());
-        }
+        Integer integer = map.get(fruitDto.getDate()) == null ? 0 : map.get(fruitDto.getDate());
+        newMap.put(fruitDto.getDate(), fruitDto.getQuantity() + integer);
         fruitsStorage.put(fruitDto.getName(), newMap);
     }
 
     public void removeItemData(FruitDto fruitDto) {
         Map<LocalDate, Integer> map;
-        int currentQuantity = 0;
         if (fruitsStorage.isEmpty() || (map = fruitsStorage.get(fruitDto.getName())) == null) {
             throw new NoSuchElementException("Can't remove data from storage!!!");
         }
-        Map<LocalDate, Integer> returnedMap = new HashMap<>(map);
-        Set<LocalDate> localDates = new TreeSet<>(returnedMap.keySet());
-        for (LocalDate date : localDates) {
-            if (fruitDto.getDate().isBefore(date)) {
-                if ((currentQuantity += map.get(date)) >= fruitDto.getQuantity()) {
-                    returnedMap.put(date, currentQuantity - fruitDto.getQuantity());
-                    fruitsStorage.put(fruitDto.getName(), returnedMap);
-                    break;
-                }
-            }
-            returnedMap.remove(date);
-        }
-        fruitsStorage.put(fruitDto.getName(), returnedMap);
-        if (returnedMap.isEmpty()) {
+        map = getEditedMap(map, fruitDto);
+        if (map.isEmpty()) {
+            fruitsStorage.remove(fruitDto.getName());
             throw new NoSuchElementException(fruitDto.getName() + " are spoiled!!!");
         }
+        fruitsStorage.put(fruitDto.getName(), map);
     }
 
     public List<String> getListInfo() {
@@ -72,5 +58,31 @@ public class Storage {
             resultList.add(String.format("%s,%d", entry.getKey(), reduce));
         }
         return resultList;
+    }
+
+    private Map<LocalDate, Integer> getEditedMap(Map<LocalDate, Integer> map, FruitDto fruitDto) {
+        Map<LocalDate, Integer> returnedMap = new HashMap<>(map);
+        Set<LocalDate> localDates = new TreeSet<>(returnedMap.keySet());
+        int currentQuantity = 0;
+        LocalDate currentDate = null;
+        for (LocalDate date : localDates) {
+            if (fruitDto.getDate().isBefore(date)) {
+                if ((currentQuantity += map.get(date)) >= fruitDto.getQuantity()) {
+                    returnedMap.put(date, currentQuantity - fruitDto.getQuantity());
+                    currentQuantity = 0;
+                    fruitsStorage.put(fruitDto.getName(), returnedMap);
+                    break;
+                }
+                currentDate = date;
+            }
+            returnedMap.remove(date);
+        }
+        if (currentQuantity != 0) {
+            returnedMap.put(currentDate, currentQuantity);
+            fruitsStorage.put(fruitDto.getName(), returnedMap);
+            throw new NoSuchElementException("Can get only " + currentQuantity + " "
+                    + fruitDto.getName());
+        }
+        return returnedMap;
     }
 }

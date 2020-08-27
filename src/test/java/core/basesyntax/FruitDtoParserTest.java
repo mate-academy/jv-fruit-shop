@@ -1,7 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitDto;
-import core.basesyntax.servise.FruitDtoParser;
+import core.basesyntax.parser.FruitDtoParser;
 import org.junit.Assert;
 import org.junit.Test;
 
