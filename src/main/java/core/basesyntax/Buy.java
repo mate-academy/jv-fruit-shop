@@ -13,7 +13,6 @@ public class Buy implements BuyInterface<String> {
     public List<String> buying(List<String> fruitsAvailable, String fruitToByu)
             throws Exception {
         int c = 1;
-        int count = 0;
         for (int j = 0; j < fruitsAvailable.size(); j++) {
             int amountBuying = Integer.parseInt(fruitToByu.split(",")[2]);
             if (fruitToByu.split(",")[1]
@@ -24,7 +23,6 @@ public class Buy implements BuyInterface<String> {
                         .split(",")[3], FORMATTER);
                 if (dateOfBuying.isEqual(dateOfAvailable)
                         || dateOfBuying.isBefore(dateOfAvailable)) {
-                    count++;
                     if (Integer.parseInt(fruitsAvailable.get(j).split(",")[2]) >= amountBuying) {
                         int k = Integer.parseInt(fruitsAvailable.get(j)
                                 .split(",")[2]) - amountBuying;
@@ -52,7 +50,7 @@ public class Buy implements BuyInterface<String> {
                 }
             }
         }
-        if (c == 1 && count != 0) {
+        if (c == 1) {
             throw new NotEnoughFruitsException("Not enough fruits to buy.");
         }
         return fruitsAvailable;
