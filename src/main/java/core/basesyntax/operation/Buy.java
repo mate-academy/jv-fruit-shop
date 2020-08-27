@@ -12,7 +12,6 @@ public class Buy implements Operation {
         Storage.DateAndQuantityPair pair = Storage.storage.get(key);
         LocalDate dateFromTransaction = transaction.getDate();
         LocalDate dateFromStorage = pair.getDate();
-
         if (dateFromStorage.isBefore(dateFromTransaction)) {
             throw new RuntimeException("All fruits are out of date. We are sorry");
         }
