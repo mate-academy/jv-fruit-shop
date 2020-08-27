@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FileWriterServiceImplements implements FileWriterService {
-    public static final String FILE_PATH = "C:\\Users\\38093\\Desktop\\Mate academy"
-            + "\\jv-fruit-shop_prod" + "\\src\\main\\java\\resources\\result.csv";
+    public static final String FILE_PATH = "src\\main\\java\\resources\\result.csv";
     public static final String SEPARATOR = ",";
     
     @Override

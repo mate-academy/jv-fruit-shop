@@ -28,8 +28,7 @@ public class MainApp {
         fillMapOfOperators(fruitOperations);
         FruitOperationStrategy fruitOperationStrategy = new FruitOperationStrategy(fruitOperations);
         FileReadService fileReadService = new FileReadServiceImplements();
-        List<List<String>> allData = fileReadService.readFile("C:\\Users\\38093\\Desktop"
-                + "\\Mate academy\\jv-fruit-shop_prod\\src\\test\\java\\resources\\testOpen.csv");
+        List<List<String>> allData = fileReadService.readFile("src\\test\\java\\resources\\testOpen.csv");
         for (List<String> line : allData) {
             Operation operation = fruitOperationStrategy.getOperation(line);
             operation.doOperation(line);
