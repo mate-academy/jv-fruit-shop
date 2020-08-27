@@ -15,11 +15,11 @@ public class ReadFileTest {
     private static final String NORMAL_FILE_NAME = "src/resources/fruits.csv";
     private static final String EMPTY_FILE = "src/resources/emptyFile.csv";
     private static final String WRONG_NAME_FILE = "wrongName.txt";
-    private static ReadFileServiceImpl reader;
+    private static ReadFileServiceImpl readFileService;
 
     @BeforeClass
     public static void BeforeClass() {
-        reader = new ReadFileServiceImpl();
+        readFileService = new ReadFileServiceImpl();
     }
 
     @Test
@@ -30,19 +30,19 @@ public class ReadFileTest {
         expected.add(new FruitDto("r", "banana", 10, LocalDate.parse("2020-10-17", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
         expected.add(new FruitDto("s", "orange", 100, LocalDate.parse("2020-10-17", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
         expected.add(new FruitDto("b", "orange", 10, LocalDate.parse("2020-10-15", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-        List<FruitDto> actual = reader.readFile(NORMAL_FILE_NAME);
+        List<FruitDto> actual = readFileService.readFile(NORMAL_FILE_NAME);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void emptyInputTest() {
         List<FruitDto> expected = new ArrayList<>();
-        List<FruitDto> actual = reader.readFile(EMPTY_FILE);
+        List<FruitDto> actual = readFileService.readFile(EMPTY_FILE);
         Assert.assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
     public void fileDoesNotExistTest() {
-        reader.readFile(WRONG_NAME_FILE);
+        readFileService.readFile(WRONG_NAME_FILE);
     }
 }
