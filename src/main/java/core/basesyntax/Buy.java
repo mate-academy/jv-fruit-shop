@@ -12,7 +12,7 @@ public class Buy implements BuyInterface<String> {
     @Override
     public List<String> buying(List<String> fruitsAvailable, String fruitToByu)
             throws Exception {
-        int c = 1;
+        int index = 1;
         for (int j = 0; j < fruitsAvailable.size(); j++) {
             int amountBuying = Integer.parseInt(fruitToByu.split(",")[2]);
             if (fruitToByu.split(",")[1]
@@ -34,7 +34,7 @@ public class Buy implements BuyInterface<String> {
                             newString = newString + s + ",";
                         }
                         fruitsAvailable.set(j, newString.substring(0, newString.length() - 1));
-                        c = 0;
+                        index = 0;
                         break;
                     } else {
                         if (amountBuying > Integer.parseInt(fruitsAvailable.get(j).split(",")[2])) {
@@ -50,7 +50,7 @@ public class Buy implements BuyInterface<String> {
                 }
             }
         }
-        if (c == 1) {
+        if (index == 1) {
             throw new NotEnoughFruitsException("Not enough fruits to buy.");
         }
         return fruitsAvailable;

@@ -26,10 +26,6 @@ public class OperationWithFruitsTest {
     public final static List<String> INCORRECT_INPUT_DATA4 = List.of("s,banana,100,2020-10-17", "r,apple,1,2020-25-25");
     public final static List<String> INCORRECT_INPUT_DATA5 = List.of("s,banana,100,2020-10-17", "r,apple,1,2020.10.25");
     public final static List<String> INCORRECT_INPUT_DATA_EMPTY = new ArrayList<>();
-    public final static List<String> CORRECT_OPERATION_SUPPLY = List.of("s,apple,30,2020-10-15", "s,lemon,100,2020-10-17",
-            "s,peach,10,2020-10-17");
-    public final static List<String> CORRECT_OPERATION_RETURN = List.of("r,banana,100,2020-10-17", "r,kiwi,30,2020-10-25");
-
 
     public static OperationWithFruits operation = new OperationWithFruits();
 
@@ -121,22 +117,5 @@ public class OperationWithFruitsTest {
         ReadFromFile reader = new ReadFromFile();
         List<String> fruitsFromFile = reader.readFromFile(FIRTH_FILE_NAME);
         operation.operationWithFruits(fruitsFromFile);
-    }
-    @Test
-    public void Text_Supply_Test_OK() {
-        ReadFromFile reader = new ReadFromFile();
-        Supply supply = new Supply();
-        List<String> fruitsFromFile = reader.readFromFile(SECOND_FILE_NAME);
-        List <String> actual = supply.fruitsAddaLL(fruitsFromFile);
-        Assert.assertEquals(CORRECT_OPERATION_SUPPLY, actual);
-    }
-
-    @Test
-    public void Text_Return_Test_OK() {
-        Return returnOperation = new Return();
-        ReadFromFile reader = new ReadFromFile();
-        List<String> fruitsFromFile = reader.readFromFile(SECOND_FILE_NAME);
-        List <String> actual = returnOperation.fruitsAddaLL(fruitsFromFile);
-        Assert.assertEquals(CORRECT_OPERATION_RETURN, actual);
     }
 }
