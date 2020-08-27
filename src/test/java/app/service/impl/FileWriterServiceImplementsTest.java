@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class FileWriterServiceImplementsTest {
     private static List<Fruit> testFruits;
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public static final String RESULT_PATH = "src\\main\\java\\resources\\result.csv";
+    public static final String RESULT_PATH = "src/main/java/resources/result.csv";
     private static FileWriterService fileWriterService;
     private static FileReadService fileReadService;
 

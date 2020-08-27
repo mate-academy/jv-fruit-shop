@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class OperationBuyTest {
     private static Map<String, Operation> fruitOperations;
-    public static final String FIRST_FILE = "src\\test\\resources\\testCantBuy.csv";
-    public static final String SECOND_FILE = "src\\test\\resources\\testCantBuy2.csv";
+    public static final String FIRST_FILE = "src/test/resources/testCantBuy.csv";
+    public static final String SECOND_FILE = "src/test/resources/testCantBuy2.csv";
     private static FruitOperationStrategy fruitOperationStrategy;
     private static FileReadService fileReadService;
 

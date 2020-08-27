@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MainApp {
-    public static final String FILE_PATH = "src\\test\\resources\\testOpen.csv";
+    public static final String FILE_PATH = "src/test/resources/testOpen.csv";
 
     public static void main(String[] args) {
         getStart();

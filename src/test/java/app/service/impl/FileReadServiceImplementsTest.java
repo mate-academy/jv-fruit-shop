@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class FileReadServiceImplementsTest {
-    public static final String RESULT_PATH = "src\\test\\resources\\testOpen.csv";
+    public static final String RESULT_PATH = "src/test/resources/testOpen.csv";
     private static FileReadService fileReadService;
     private static final String SUPPLY = "s";
     private static final String BUY = "b";
