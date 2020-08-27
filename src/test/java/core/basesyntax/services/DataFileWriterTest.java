@@ -28,12 +28,8 @@ public class DataFileWriterTest {
     }
 
     @AfterClass
-    public static void deleteFile(){
-        try {
-            Files.delete(Path.of(FILE_PATH));
-        } catch (IOException e) {
-            System.out.println("can't delete created file, some test works wrong");
-        }
+    public static void deleteFile() throws IOException {
+        Files.delete(Path.of(FILE_PATH));
     }
 
     @Test
