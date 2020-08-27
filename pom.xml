@@ -87,8 +87,12 @@
                             </rules>
                         </configuration>
                     </execution>
-
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/HelloWorld*</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>
