@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.model.Transaction;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,8 +10,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Storage {
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter
-            .ofPattern("yyyy-MM-dd");
 
     Map<String, Map<LocalDate,Integer>> fruitStorage;
 
@@ -26,7 +23,7 @@ public class Storage {
 
     public void addToStore(Transaction transaction) {
         Map<LocalDate, Integer> box;
-        LocalDate expirationDate = LocalDate.parse(transaction.getDate(), FORMATTER);
+        LocalDate expirationDate = LocalDate.parse(transaction.getDate());
         Integer quantity = Integer.parseInt(transaction.getQuantity());
 
         if (fruitStorage.isEmpty() || (box = fruitStorage.get(transaction.getFruit())) == null) {
@@ -46,7 +43,7 @@ public class Storage {
     public void removeFromStore(Transaction transaction) {
         Map<LocalDate, Integer> box;
         int currentQuantity = 0;
-        LocalDate expirationDate = LocalDate.parse(transaction.getDate(), FORMATTER);
+        LocalDate expirationDate = LocalDate.parse(transaction.getDate());
         Integer quantity = Integer.parseInt(transaction.getQuantity());
 
         if (fruitStorage.isEmpty() || (box = fruitStorage.get(transaction.getFruit())) == null) {
