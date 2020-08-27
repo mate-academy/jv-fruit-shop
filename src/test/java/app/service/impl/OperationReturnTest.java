@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class OperationReturnTest {
     private static Map<String, Operation> fruitOperations;
-    public static final String FIRST_FILE = "src\\test\\java\\resources\\testCantBuy.csv";
+    public static final String FIRST_FILE = "src\\test\\resources\\testCantBuy.csv";
     private static FruitOperationStrategy fruitOperationStrategy;
     private static FileReadService fileReadService;
 
