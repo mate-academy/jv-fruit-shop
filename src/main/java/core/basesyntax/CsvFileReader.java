@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReader {
+    private static final int OPERATION_POSITION = 0;
+    private static final int FRUIT_POSITION = 1;
+    private static final int QUANTITY_POSITION = 2;
+    private static final int DATE_POSITION = 3;
     public List<Operation> readFile(String filepath) {
         List<Operation> operationList = new ArrayList<>();
         try {
@@ -17,17 +21,17 @@ public class CsvFileReader {
                 throw new RuntimeException("File is not in .csv format");
             }
             CSVReader csvReader = new CSVReader(fileReader);
-            List<String[]> raws = csvReader.readAll();
-            if (raws.get(0)[0].equals("type")) {
-                raws.remove(0);
+            List<String[]> rows = csvReader.readAll();
+            if (rows.get(0)[0].equals("type")) {
+                rows.remove(0);
             }
-            for (String[] raw : raws) {
-                operationList.add(new Operation(raw[0], raw[1], Integer.parseInt(raw[2]),
-                        LocalDate.parse(raw[3])));
+            for (String[] row : rows) {
+                operationList.add(new Operation(row[OPERATION_POSITION], row[FRUIT_POSITION],
+                        Integer.parseInt(row[QUANTITY_POSITION]), LocalDate.parse(row[DATE_POSITION])));
             }
 
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Some problems with file reading");
 
         } catch (CsvException e) {
             System.out.println("File does not have csv structure");

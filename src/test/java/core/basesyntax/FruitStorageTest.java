@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStorageTest {
-    static Map<String, Integer> expected;
-    static CsvFileReader reader;
-    static FruitStorage storage;
+    private static Map<String, Integer> expected;
+    private static CsvFileReader reader;
+    private static FruitStorage storage;
 
     @BeforeClass
     public static void BeforeClass() {
@@ -22,23 +22,23 @@ public class FruitStorageTest {
 
     @Test
     public void normalInputTest() {
-        Map<String, Integer> actual = storage.fruitStorage(reader.readFile("src/main/resources/NormalInput.csv"));
+        Map<String, Integer> actual = storage.createFruitStorage(reader.readFile("src/main/resources/NormalInput.csv"));
         Assert.assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
     public void expiredFruitsSell() {
-        Map<String, Integer> actual = storage.fruitStorage(reader.readFile("src/main/resources/ExpiredSale.csv"));
+        Map<String, Integer> actual = storage.createFruitStorage(reader.readFile("src/main/resources/ExpiredSale.csv"));
     }
 
     @Test (expected = RuntimeException.class)
     public void notExistingFruitsSell() {
-        Map<String, Integer> actual = storage.fruitStorage(reader.readFile("src/main/resources/NotExistingFruitsSell.csv"));
+        Map<String, Integer> actual = storage.createFruitStorage(reader.readFile("src/main/resources/NotExistingFruitsSell.csv"));
     }
 
     @Test (expected = RuntimeException.class)
     public void notEnoughFruitsSell() {
-        Map<String, Integer> actual = storage.fruitStorage(reader.readFile("src/main/resources/NotEnoughFruits.csv"));
+        Map<String, Integer> actual = storage.createFruitStorage(reader.readFile("src/main/resources/NotEnoughFruits.csv"));
     }
 
 }

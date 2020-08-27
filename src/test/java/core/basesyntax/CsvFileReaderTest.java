@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderTest {
-    static CsvFileReader reader;
+    private static CsvFileReader reader;
 
     @BeforeClass
     public static void BeforeClass() {

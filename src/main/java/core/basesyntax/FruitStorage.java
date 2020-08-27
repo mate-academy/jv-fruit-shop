@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitStorage {
-    public Map<String, Integer> fruitStorage(List<Operation> operations) {
+
+    public Map<String, Integer> createFruitStorage(List<Operation> operations) {
         Map<String, Integer> fruitStorage = new HashMap<>();
         Map<String, LocalDate> expiration = new HashMap<>();
         for (Operation operation : operations) {
