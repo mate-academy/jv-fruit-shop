@@ -9,10 +9,9 @@ public class FruitShop {
     private static CreateNewFile newFile = new CreateNewFile();
     private static ReadFromFile readingFromFileOperation = new ReadFromFile();
     private static OperationWithFruits operation = new OperationWithFruits();
-    private static FruitTypes range = new FruitTypes();
 
     public static void main(String[] args) throws Exception {
-        String file1 = "txt7";
+        String file1 = "txt3";
         List<String> fruitsFromFile = readingFromFileOperation.readFromFile(file1);
         newFile.createNewFile(operation.operationWithFruits(fruitsFromFile));
     }

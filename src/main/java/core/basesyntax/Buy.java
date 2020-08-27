@@ -10,24 +10,24 @@ public class Buy implements BuyInterface<String> {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
     @Override
-    public List<String> buying(List<String> fruitsAvailable, String fruitsFromFile)
+    public List<String> buying(List<String> fruitsAvailable, String fruitToByu)
             throws Exception {
         int c = 1;
         int count = 0;
         for (int j = 0; j < fruitsAvailable.size(); j++) {
-            int amountBuyng = Integer.parseInt(fruitsFromFile.split(",")[2]);
-            if (fruitsFromFile.split(",")[1]
+            int amountBuying = Integer.parseInt(fruitToByu.split(",")[2]);
+            if (fruitToByu.split(",")[1]
                     .equals(fruitsAvailable.get(j).split(",")[1])) {
-                LocalDate dateSupply = LocalDate.parse(fruitsAvailable.get(j)
+                LocalDate dateOfAvailable = LocalDate.parse(fruitsAvailable.get(j)
                         .split(",")[3], FORMATTER);
-                LocalDate dateBuy = LocalDate.parse(fruitsFromFile
+                LocalDate dateOfBuying = LocalDate.parse(fruitToByu
                         .split(",")[3], FORMATTER);
-                if (dateBuy.isEqual(dateSupply)
-                        || dateBuy.isBefore(dateSupply)) {
+                if (dateOfBuying.isEqual(dateOfAvailable)
+                        || dateOfBuying.isBefore(dateOfAvailable)) {
                     count++;
-                    if (Integer.parseInt(fruitsAvailable.get(j).split(",")[2]) >= amountBuyng) {
+                    if (Integer.parseInt(fruitsAvailable.get(j).split(",")[2]) >= amountBuying) {
                         int k = Integer.parseInt(fruitsAvailable.get(j)
-                                .split(",")[2]) - amountBuyng;
+                                .split(",")[2]) - amountBuying;
                         String newAmounrOfFruits = "" + k;
                         String[] splitAvailable = fruitsAvailable.get(j).split(",");
                         splitAvailable[2] = newAmounrOfFruits;
@@ -39,10 +39,9 @@ public class Buy implements BuyInterface<String> {
                         c = 0;
                         break;
                     } else {
-                        if (amountBuyng > Integer.parseInt(fruitsAvailable.get(j).split(",")[2])) {
-                            String newAmounrOfFruits = "0";
+                        if (amountBuying > Integer.parseInt(fruitsAvailable.get(j).split(",")[2])) {
                             String[] splitAvailable = fruitsAvailable.get(j).split(",");
-                            splitAvailable[2] = newAmounrOfFruits;
+                            splitAvailable[2] = "0";
                             String newString = "";
                             for (String s : splitAvailable) {
                                 newString = newString + s + ",";

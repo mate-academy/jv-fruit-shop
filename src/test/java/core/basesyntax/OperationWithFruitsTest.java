@@ -4,7 +4,6 @@ import core.basesyntax.exeptions.NotEnoughFruitsException;
 import core.basesyntax.exeptions.NotValidDataException;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,4 +140,3 @@ public class OperationWithFruitsTest {
         Assert.assertEquals(CORRECT_OPERATION_RETURN, actual);
     }
 }
-

@@ -10,13 +10,10 @@ public class DataValidation {
 
     public void dataValidation(List<String> fruitsFromFile, List<String> rangeOfShop)
             throws NotValidDataException {
-        if (fruitsFromFile == null || fruitsFromFile.size() == 0) {
+        if (fruitsFromFile.size() == 0) {
             throw new NotValidDataException("You have entered empty list.");
         }
-        if (fruitsFromFile.get(0).split(",")[0].equals("type")
-                && fruitsFromFile.get(0).split(",")[1].equals("fruit")
-                && fruitsFromFile.get(0).split(",")[2].equals("quantity")
-                && fruitsFromFile.get(0).split(",")[3].equals("date")) {
+        if (fruitsFromFile.get(0).equals("type,fruit,quantity,date")) {
             fruitsFromFile.remove(0);
         } else {
             throw new NotValidDataException("File without correct upper line.");
