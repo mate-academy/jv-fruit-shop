@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.FruitStorage;
-import core.basesyntax.model.FruitBatch;
-import core.basesyntax.model.FruitDto;
+import core.basesyntax.FruitBatch;
+import core.basesyntax.FruitDto;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;

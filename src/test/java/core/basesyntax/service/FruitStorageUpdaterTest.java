@@ -1,17 +1,20 @@
 package core.basesyntax.service;
 
+import core.basesyntax.FruitBatch;
 import core.basesyntax.FruitDto;
 import core.basesyntax.FruitStorage;
-import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class DataParserTest {
-    private static DataParser dataParser = new DataParser();
-    private static List<String[]> data = new ArrayList<>();
+import org.junit.Assert;
+import org.junit.Test;
+
+public class FruitStorageUpdaterTest {
+    private static FruitStorageUpdater fruitStorageUpdater = new FruitStorageUpdater();
+    private static List<FruitDto> fruitDtos = new ArrayList<>();
     private static String TRANSACTION_TYPE_BUY = "b";
     private static final String TRANSACTION_TYPE_SUPPLY = "s";
     private static final String TRANSACTION_TYPE_RETURN = "r";
@@ -24,17 +27,6 @@ public class DataParserTest {
 
     @BeforeClass
     public static void setUp() {
-        String[] FirstLine = new String[]{"s", "banana", "100", "2020-11-01"};
-        String[] SecondLine = new String[]{"b", "banana", "15", "2020-10-10"};
-        String[] ThirdLine = new String[]{"r", "banana", "2", "2020-11-01"};
-        data.add(FirstLine);
-        data.add(SecondLine);
-        data.add(ThirdLine);
-    }
-
-    @Test
-    public void parseData_correctWork() {
-        List<FruitDto> expectedFruitDtos = new ArrayList<>();
         FruitDto fruitDtoOne = new FruitDto();
         fruitDtoOne.setTransaction(TRANSACTION_TYPE_SUPPLY);
         fruitDtoOne.setFruitType(FRUIT_TYPE);
@@ -50,16 +42,18 @@ public class DataParserTest {
         fruitDtoThree.setFruitType(FRUIT_TYPE);
         fruitDtoThree.setQuantity(QUANTITY_THREE);
         fruitDtoThree.setDate(DATE_ONE);
-        expectedFruitDtos.add(fruitDtoOne);
-        expectedFruitDtos.add(fruitDtoTwo);
-        expectedFruitDtos.add(fruitDtoThree);
+        fruitDtos.add(fruitDtoOne);
+        fruitDtos.add(fruitDtoTwo);
+        fruitDtos.add(fruitDtoThree);
         FruitStorage.clearStock();
-        List<FruitDto> actualFruitDtos = dataParser.parseData(data);
-        int actualSize = expectedFruitDtos.size();
-        int expectedSize = 3;
+    }
+
+    @Test
+    public void updateStock_correctWork() {
+        fruitStorageUpdater.updateStock(fruitDtos);
+        Map<FruitBatch, Integer> fruits = FruitStorage.getFruits();
+        int expectedSize = 1;
+        int actualSize = fruits.size();
         Assert.assertEquals(expectedSize, actualSize);
-        Assert.assertEquals(expectedFruitDtos.get(0), actualFruitDtos.get(0));
-        Assert.assertEquals(expectedFruitDtos.get(1), actualFruitDtos.get(1));
-        Assert.assertEquals(expectedFruitDtos.get(2), actualFruitDtos.get(2));
     }
 }

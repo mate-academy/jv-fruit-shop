@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitDto;
+import core.basesyntax.FruitDto;
 import core.basesyntax.strategy.StorageUpdaterStrategy;
 import java.util.List;
 

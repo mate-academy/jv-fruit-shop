@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitBatch;
 import java.util.HashMap;
 import java.util.Map;
 

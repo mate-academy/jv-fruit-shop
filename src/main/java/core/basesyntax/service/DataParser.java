@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitDto;
+import core.basesyntax.FruitDto;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

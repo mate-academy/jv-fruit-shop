@@ -1,5 +1,6 @@
-package core.basesyntax.model;
+package core.basesyntax;
 
+import core.basesyntax.FruitBatch;
 import org.junit.Test;
 import org.junit.Assert;
 import java.time.LocalDate;

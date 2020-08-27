@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitBatch;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.HashMap;

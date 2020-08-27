@@ -1,4 +1,4 @@
-package core.basesyntax.model;
+package core.basesyntax;
 
 import java.time.LocalDate;
 import java.util.Objects;

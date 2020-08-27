@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.FruitDto;
+import core.basesyntax.FruitDto;
 
 public interface FruitTransaction {
     void apply(FruitDto fruitDto);

@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitBatch;
+import core.basesyntax.FruitBatch;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
