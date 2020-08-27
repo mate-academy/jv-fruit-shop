@@ -25,10 +25,10 @@ public class Storage {
                 .filter(x -> x.getFruit().getName().equals(fruit.getName()))
                 .sorted()
                 .collect(Collectors.toList());
-        int quantitiesSum = fruitBoxes.stream()
+        int fruitSum = fruitBoxes.stream()
                 .mapToInt(FruitBox::getQuantity)
                 .sum();
-        if (quantitiesSum < quantity) {
+        if (fruitSum < quantity) {
             throw new InvalidParameterException();
         }
         int index = 0;
