@@ -13,8 +13,9 @@ public class Buy implements BuyInterface<String> {
     public List<String> buying(List<String> fruitsAvailable, String fruitToByu)
             throws Exception {
         int index = 1;
+        int amountBuying = Integer.parseInt(fruitToByu.split(",")[2]);
         for (int j = 0; j < fruitsAvailable.size(); j++) {
-            int amountBuying = Integer.parseInt(fruitToByu.split(",")[2]);
+
             if (fruitToByu.split(",")[1]
                     .equals(fruitsAvailable.get(j).split(",")[1])) {
                 LocalDate dateOfAvailable = LocalDate.parse(fruitsAvailable.get(j)
@@ -39,6 +40,8 @@ public class Buy implements BuyInterface<String> {
                     } else {
                         if (amountBuying > Integer.parseInt(fruitsAvailable.get(j).split(",")[2])) {
                             String[] splitAvailable = fruitsAvailable.get(j).split(",");
+                            amountBuying = amountBuying - Integer.parseInt(fruitsAvailable.get(j)
+                                    .split(",")[2]);
                             splitAvailable[2] = "0";
                             String newString = "";
                             for (String s : splitAvailable) {

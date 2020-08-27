@@ -11,7 +11,7 @@ public class FruitShop {
     private static OperationWithFruits operation = new OperationWithFruits();
 
     public static void main(String[] args) throws Exception {
-        String file1 = "txt3";
+        String file1 = "txt8";
         List<String> fruitsFromFile = readingFromFileOperation.readFromFile(file1);
         newFile.createNewFile(operation.operationWithFruits(fruitsFromFile));
     }
