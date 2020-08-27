@@ -36,36 +36,6 @@ public class WriteToFileTest {
     }
 
     @Test
-    public void checkResultOnEmptyStorage() throws IOException {
-        LocalFileReader reader = new LocalFileReader(FILLED_FILE_NAME);
-        newUpdate.parseData(reader.readFromFile());
-        WriteToFile parser = new WriteToFile(OUTPUT_FILE_PATH);
-        parser.csvFileWriter();
-        byte[] expectedResult = Files.readAllBytes(Paths.get(RESULT_ON_EMPTY_STORAGE));
-        byte[] actualResult = Files.readAllBytes(Paths.get(OUTPUT_FILE_PATH));
-        System.out.println(Files.readAllLines(Path.of(OUTPUT_FILE_PATH)).toString());
-        System.out.println(Files.readAllLines(Path.of(RESULT_ON_EMPTY_STORAGE)).toString());
-        Assert.assertArrayEquals(expectedResult, actualResult);
-    }
-
-    @Test
-    public void updateNotEmptyStorageFromFile() throws IOException {
-        LocalFileReader reader = new LocalFileReader(FILLED_FILE_NAME);
-        newUpdate.parseData(reader.readFromFile());
-        WriteToFile writer = new WriteToFile(OUTPUT_FILE_PATH);
-        writer.csvFileWriter();
-
-        LocalFileReader secondFileReader = new LocalFileReader(SECOND_FILLED_FILE_NAME);
-        newUpdate.parseData(secondFileReader.readFromFile());
-        WriteToFile secondFileWriter = new WriteToFile(NOT_EMPTY_STORAGE_OUTPUT_FILE_PATH);
-        secondFileWriter.csvFileWriter();
-
-        byte[] expectedResult = Files.readAllBytes(Paths.get(RESULT_ON_NOT_EMPTY_STORAGE));
-        byte[] actualResult = Files.readAllBytes(Paths.get(NOT_EMPTY_STORAGE_OUTPUT_FILE_PATH));
-        Assert.assertArrayEquals(expectedResult, actualResult);
-    }
-
-    @Test
     public void getExceptionWhenWrongHeader() throws IOException {
         LocalFileReader reader = new LocalFileReader(WRONG_HEADER_FILE);
         try {
