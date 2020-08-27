@@ -22,7 +22,7 @@ public class FruitShopTest {
             fruitShop.start();
             BufferedReader shopQuantityFile = new BufferedReader(new FileReader(STOCK));
             BufferedReader preparedFile = new BufferedReader(new FileReader(STOCK_NORMAL));
-            Assert.assertEquals("Результат работы не совпадает с ожидаемым", shopQuantityFile.read(), preparedFile.read());
+            Assert.assertEquals("Результат работы не совпадает с ожидаемым", shopQuantityFile.readLine(), preparedFile.readLine());
         } catch (IOException e) {
             throw new RuntimeException("Нет доступа к тестовым файлам");
         }
@@ -54,7 +54,7 @@ public class FruitShopTest {
             fruitShop.start();
             BufferedReader shopQuantityFile = new BufferedReader(new FileReader(STOCK));
             BufferedReader preparedFile = new BufferedReader(new FileReader(STOCK_NORMAL));
-            Assert.assertEquals("Результат работы не совпадает с ожидаемым", shopQuantityFile.read(), preparedFile.read());
+            Assert.assertEquals("Результат работы не совпадает с ожидаемым", shopQuantityFile.readLine(), preparedFile.readLine());
         } catch (IOException e) {
             throw new RuntimeException("Нет доступа к тестовым файлам");
         }
