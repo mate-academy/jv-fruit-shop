@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitBox;
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.Operator;
 import core.basesyntax.service.SoldFruitCounter;
-
 import java.time.LocalDate;
 
 public class Returner implements Operator<FruitBox> {
