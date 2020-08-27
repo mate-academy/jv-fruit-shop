@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+        Sum operation = new Sum();
         List<String> listOfFruit = new ArrayList<>();
         FileServiceInt fileServiceInt = new FileServiceImp();
         List<String> data = fileServiceInt.readFile("/Users/artem2/Mate Academy/jv-fruit-shop/src/test/resources/base.csv");
@@ -30,12 +31,12 @@ public class Main {
             int q = Integer.parseInt(line[2]);
             Supply supply = new Supply(t, type, q);
             Storage.orders.add(supply);
-            RecordingService recordingService = new RecordingService();
-            recordingService.writingToFile();
         }
-        List<String> result = listOfFruit.stream().distinct().collect(Collectors.toList());
-        for (String fruit : result) {
-            fruit
-        }
+        RecordingService recordingService = new RecordingService();
+        recordingService.writingToFile();
+//        List<String> result = listOfFruit.stream().distinct().collect(Collectors.toList());
+//        for (String fruit : result) {
+//            operation.sum(result,fruit);
+//        }
     }
 }

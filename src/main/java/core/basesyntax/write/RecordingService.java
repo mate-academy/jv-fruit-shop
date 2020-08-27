@@ -1,5 +1,6 @@
 package core.basesyntax.write;
 
+import core.basesyntax.Sum;
 import core.basesyntax.dao.OrderDao;
 import core.basesyntax.dao.OrderDaoImpl;
 import core.basesyntax.db.Storage;
@@ -15,31 +16,34 @@ import java.util.stream.Collectors;
 
 public class RecordingService {
     public void writingToFile() {
-        int s = 0;
+        String x = "";
         String head = "fruit, quantity\n";
-        List<String> resultList = new ArrayList<>();
+        Sum operation = new Sum();
+        List<String> listOfFruit = new ArrayList<>();
+        List<String> resultList;
         OrderDao<Supply> orderDao = new OrderDaoImpl();
         List<Supply> result = orderDao.getAll();
-        System.out.println(result);
-
-        int sum = result.stream()
-                .filter(x -> x.getTypeOfFruit().equals("apple"))
-                .map(x -> x.getTypeOfOperation().equals("b")
-                        ? -(x.getQuantity())
-                        : x.getQuantity())
-                .reduce(0, Integer::sum);
-        resultList.add(head);
-        resultList.add(String.valueOf(sum));
-        try (FileWriter writer = new FileWriter("notes2.csv", false)) {
-            String text = resultList.toString();
-            writer.write(text);
-        } catch (IOException ex) {
-
-            System.out.println(ex.getMessage());
+        for (Supply row : result) {
+            listOfFruit.add(row.getTypeOfFruit());
         }
+        resultList = listOfFruit.stream().distinct().collect(Collectors.toList());
+        for (int i = 0; i < resultList.size(); i++) {
+            x += resultList.get(i) + " " + operation.sum(result, resultList.get(i)) + "\n";
+        }
+            System.out.println(x);
+            resultList.add(head);
+            try (FileWriter writer = new FileWriter("notes2.csv", false)) {
+                String text = head + x;
+                writer.write(text);
+            } catch (IOException ex) {
+
+                System.out.println(ex.getMessage());
+            }
+        }
+
     }
 
-}
+
 
 //        for (Supply supply : result) {
 

@@ -5,18 +5,27 @@ public class Supply extends OperationGeneral {
     private String typeOfFruit;
     private int quantity;
 
+    public Supply(String typeOfOperation, String typeOfFruit, int quantity) {
+        this.typeOfOperation = typeOfOperation;
+        this.typeOfFruit = typeOfFruit;
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Supply{" +
+                "typeOfOperation='" + typeOfOperation + '\'' +
+                ", typeOfFruit='" + typeOfFruit + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
+
     public String getTypeOfOperation() {
         return typeOfOperation;
     }
 
     public void setTypeOfOperation(String typeOfOperation) {
         this.typeOfOperation = typeOfOperation;
-    }
-
-    public Supply(String typeOfOperation, String typeOfFruit, int quantity) {
-        this.typeOfOperation = typeOfOperation;
-        this.typeOfFruit = typeOfFruit;
-        this.quantity = quantity;
     }
 
     @Override
@@ -38,14 +47,4 @@ public class Supply extends OperationGeneral {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    @Override
-    public String toString() {
-        return "Supply{" +
-                "typeOfFruit='" + typeOfFruit + '\'' +
-                ", quantity=" + quantity +
-                '}';
-    }
-
-
 }
