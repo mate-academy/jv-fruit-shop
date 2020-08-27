@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class CsvFileWriter {
     private static final String HEADER = "fruit,quantity" + System.lineSeparator();
+
     public void write(String filepath, Map<String, Integer> storage) {
         try {
             Files.writeString(Paths.get(filepath), HEADER);

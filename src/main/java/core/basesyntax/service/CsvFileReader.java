@@ -1,7 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
+import core.basesyntax.model.Operation;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class CsvFileReader {
     private static final int FRUIT_POSITION = 1;
     private static final int QUANTITY_POSITION = 2;
     private static final int DATE_POSITION = 3;
+
     public List<Operation> readFile(String filepath) {
         List<Operation> operationList = new ArrayList<>();
         try {
@@ -27,7 +29,8 @@ public class CsvFileReader {
             }
             for (String[] row : rows) {
                 operationList.add(new Operation(row[OPERATION_POSITION], row[FRUIT_POSITION],
-                        Integer.parseInt(row[QUANTITY_POSITION]), LocalDate.parse(row[DATE_POSITION])));
+                        Integer.parseInt(row[QUANTITY_POSITION]),
+                        LocalDate.parse(row[DATE_POSITION])));
             }
 
         } catch (IOException e) {

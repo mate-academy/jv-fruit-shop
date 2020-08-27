@@ -1,32 +1,29 @@
 package core.basesyntax;
 
+import core.basesyntax.model.Operation;
+import core.basesyntax.operations.Buy;
+import core.basesyntax.operations.StorageOperation;
+import core.basesyntax.operations.SupplyAndReturn;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FruitStorage {
+    public static Map<String, Integer> fruitStorage;
+    public static Map<String, LocalDate> expiration;
 
     public Map<String, Integer> createFruitStorage(List<Operation> operations) {
-        Map<String, Integer> fruitStorage = new HashMap<>();
-        Map<String, LocalDate> expiration = new HashMap<>();
+        fruitStorage = new HashMap<>();
+        expiration = new HashMap<>();
         for (Operation operation : operations) {
             if (operation.getType().equals("s") || operation.getType().equals("r")) {
-                fruitStorage.merge(operation.getFruit(), operation.getQuantity(), Integer::sum);
-                expiration.put(operation.getFruit(), operation.getExpDate());
+                StorageOperation storageOperation = new SupplyAndReturn();
+                storageOperation.doStorageOperation(operation);
             }
             if (operation.getType().equals("b")) {
-                if (!fruitStorage.containsKey(operation.getFruit())) {
-                    throw new RuntimeException("No such fruits in storage, check input file");
-                }
-                if (fruitStorage.get(operation.getFruit()) < operation.getQuantity()) {
-                    throw new RuntimeException("Not enough fruits to sell");
-                }
-                if (expiration.get(operation.getFruit()).isBefore(operation.getExpDate())) {
-                    throw new RuntimeException("You sold expired fruits, check input file");
-                }
-                operation.setQuantity(- operation.getQuantity());
-                fruitStorage.merge(operation.getFruit(), operation.getQuantity(), Integer::sum);
+                StorageOperation storageOperation = new Buy();
+                storageOperation.doStorageOperation(operation);
             }
         }
         return fruitStorage;

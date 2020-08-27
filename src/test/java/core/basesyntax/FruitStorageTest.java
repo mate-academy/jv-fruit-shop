@@ -1,18 +1,19 @@
 package core.basesyntax;
 
+import core.basesyntax.service.CsvFileReader;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStorageTest {
-    private static Map<String, Integer> expected;
-    private static CsvFileReader reader;
-    private static FruitStorage storage;
+    private Map<String, Integer> expected;
+    private CsvFileReader reader;
+    private FruitStorage storage;
 
-    @BeforeClass
-    public static void BeforeClass() {
+    @Before
+    public void Before() {
         expected = new HashMap<>();
         reader = new CsvFileReader();
         storage = new FruitStorage();

@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.CsvFileReader;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
