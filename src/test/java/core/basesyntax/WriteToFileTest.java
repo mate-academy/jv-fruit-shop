@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.Assert;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.io.File;
@@ -42,6 +43,8 @@ public class WriteToFileTest {
         parser.csvFileWriter();
         byte[] expectedResult = Files.readAllBytes(Paths.get(RESULT_ON_EMPTY_STORAGE));
         byte[] actualResult = Files.readAllBytes(Paths.get(OUTPUT_FILE_PATH));
+        System.out.println(Files.readAllLines(Path.of(OUTPUT_FILE_PATH)).toString());
+        System.out.println(Files.readAllLines(Path.of(RESULT_ON_EMPTY_STORAGE)).toString());
         Assert.assertArrayEquals(expectedResult, actualResult);
     }
 
