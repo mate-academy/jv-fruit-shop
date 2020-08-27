@@ -17,6 +17,7 @@ public class FruitShop {
     public void start() {
         Storage storage = new Storage();
         FruitParse fruitParse = new Parse();
+
         for (List<String> row : fruitParse.readFile(path)) {
             ActionInterface action = new ShopInterfaceStrategy().get(row.get(0));
            if(action!=null){

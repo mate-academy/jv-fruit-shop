@@ -13,6 +13,10 @@ public class Fruit {
         this.stock_balance = stock_balance;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public int getStock_balance() {
         return stock_balance;
     }
@@ -40,13 +44,18 @@ public class Fruit {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Fruit fruit = (Fruit) o;
-        return type != null ? type.equals(fruit.type) : fruit.type == null;
+
+        if (type != null ? !type.equals(fruit.type) : fruit.type != null) return false;
+        return date != null ? date.equals(fruit.date) : fruit.date == null;
     }
 
     @Override
     public int hashCode() {
-        return type != null ? type.hashCode() : 0;
+        int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        return result;
     }
 
     @Override
