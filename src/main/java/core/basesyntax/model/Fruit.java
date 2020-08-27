@@ -44,9 +44,7 @@ public class Fruit implements Comparable<Fruit> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Fruit fruit = (Fruit) o;
-
         if (type != null ? !type.equals(fruit.type) : fruit.type != null) return false;
         return date != null ? date.equals(fruit.date) : fruit.date == null;
     }
@@ -72,6 +70,6 @@ public class Fruit implements Comparable<Fruit> {
         if (date.isEqual(o.getDate())) {
             return 0;
         }
-        return date.isBefore(o.getDate()) ? 1 : -1;
+        return date.isBefore(o.getDate()) ? -1 : 1;
     }
 }
