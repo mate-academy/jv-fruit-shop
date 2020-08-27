@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FruitOperationStrategyTest {
+public class    FruitOperationStrategyTest {
     private static final String SUPPLY = "s";
     private static final String BUY = "b";
     private static final String RETURN = "r";

@@ -14,6 +14,7 @@ import java.util.Map;
 public class OperationReturnTest {
     private static Map<String, Operation> fruitOperations;
     public static final String FIRST_FILE = "src/test/resources/testCantBuy.csv";
+    public static final String SECOND_FILE = "src/test/resources/testReturn.csv";
     private static FruitOperationStrategy fruitOperationStrategy;
     private static FileReadService fileReadService;
 
@@ -30,6 +31,15 @@ public class OperationReturnTest {
     @Test(expected = RuntimeException.class)
     public void nonExistentReturn() {
         List<List<String>> allData = fileReadService.readFile(FIRST_FILE);
+        for (List<String> line : allData) {
+            Operation operation = fruitOperationStrategy.getOperation(line);
+            operation.doOperation(line);
+        }
+    }
+
+    @Test
+    public void operationReturnOk() {
+        List<List<String>> allData = fileReadService.readFile(SECOND_FILE);
         for (List<String> line : allData) {
             Operation operation = fruitOperationStrategy.getOperation(line);
             operation.doOperation(line);

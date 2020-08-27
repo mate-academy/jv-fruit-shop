@@ -19,13 +19,13 @@ public class OperationSupplyTest {
         testValue = new ArrayList<>();
         List<String> firstRow = new ArrayList<>();
         firstRow.add(SUPPLY);
-        firstRow.add("banana");
+        firstRow.add("pineapple");
         firstRow.add(String.valueOf(100));
         firstRow.add("2020-10-17");
         testValue.add(firstRow);
         List<String> secondRow = new ArrayList<>();
         secondRow.add(SUPPLY);
-        secondRow.add("banana");
+        secondRow.add("pineapple");
         secondRow.add(String.valueOf(13));
         secondRow.add("2020-10-15");
         testValue.add(secondRow);
