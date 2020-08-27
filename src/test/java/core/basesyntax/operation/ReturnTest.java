@@ -16,30 +16,33 @@ public class ReturnTest {
     private static Operation aReturn;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void prepareEnvironmentBeforeTest(){
+        Storage.storage.clear();
         aReturn = new Return();
     }
 
     @Before
-    public void setUp() {
+    public void fillTheStorage() {
         Storage.storage.put("banana",
                 new Storage.DateAndQuantityPair(
                         LocalDate.of(2020, 10, 11), 50));
     }
 
     @After
-    public void tearDown() {
+    public void clearTheStorage() {
         Storage.storage.clear();
     }
 
     @Test
-    public void returnNormalTest() {
-        aReturn.provideOperation(new Transaction("r", "banana", "10", "2020-10-07"));
-        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).getQuantity());
+    public void testNormalReturn() {
+        aReturn.provideOperation(
+                new Transaction("r", "banana", "10", "2020-10-07"));
+        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).getAllQuantity());
     }
 
     @Test(expected = RuntimeException.class)
-    public void returnNonExistingFruit() {
-        aReturn.provideOperation(new Transaction("r","potato","200","2020-10-07"));
+    public void testReturnNonExistingFruit() {
+        aReturn.provideOperation(
+                new Transaction("r","potato","200","2020-10-07"));
     }
 }

@@ -34,6 +34,22 @@ public class Storage {
         }
 
         public Integer getQuantity() {
+            return quantity;
+        }
+
+        public Integer getAllQuantityByDate(LocalDate date) {
+            Integer sum = 0;
+            DateAndQuantityPair pair = this;
+            while (pair != null) {
+                if (date.isBefore(pair.getDate())) {
+                    sum += quantity;
+                }
+                pair = pair.next;
+            }
+            return sum;
+        }
+
+        public Integer getAllQuantity() {
             Integer sum = 0;
             DateAndQuantityPair pair = this;
             while (pair.next != null) {
@@ -46,5 +62,6 @@ public class Storage {
         public void setQuantity(Integer quantity) {
             this.quantity = quantity;
         }
+
     }
 }

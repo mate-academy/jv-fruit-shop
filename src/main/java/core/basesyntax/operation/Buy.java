@@ -8,17 +8,35 @@ public class Buy implements Operation {
     @Override
     public void provideOperation(Transaction transaction) {
         String key = transaction.getFruitItem();
-        Integer quantityToSubtract = transaction.getQuantity();
-        Storage.DateAndQuantityPair pair = Storage.storage.get(key);
-        LocalDate dateFromTransaction = transaction.getDate();
-        LocalDate dateFromStorage = pair.getDate();
-        if (dateFromStorage.isBefore(dateFromTransaction)) {
-            throw new RuntimeException("All fruits are out of date. We are sorry");
+        if (Storage.storage.containsKey(key)) {
+            LocalDate dateFromTransaction = transaction.getDate();
+            Integer quantityToSubtract = transaction.getQuantity();
+            extractFromStorage(quantityToSubtract, dateFromTransaction, key);
+        } else {
+            throw new RuntimeException("We do not have this fruit. Try to buy another");
         }
-        if (transaction.getQuantity() > pair.getQuantity()) {
+    }
+
+    private void extractFromStorage(Integer quantity, LocalDate date, String key) {
+        Storage.DateAndQuantityPair pair = Storage.storage.get(key);
+        if (pair.getAllQuantityByDate(date) < quantity) {
             throw new RuntimeException("We are out of this fruit. You can buy another one");
         }
-        pair.setQuantity(pair.getQuantity() - quantityToSubtract);
-        Storage.storage.put(key, pair);
+        while (pair != null) {
+            if (pair.getDate().isAfter(date)) {
+                if (pair.getQuantity() >= quantity) {
+                    pair.setQuantity(pair.getQuantity() - quantity);
+                    return;
+                }
+                int difference = quantity - pair.getQuantity();
+                pair.setQuantity(0);
+                quantity = difference;
+            }
+            if (quantity == 0) {
+                Storage.storage.put(key, pair);
+                return;
+            }
+            pair = pair.getNext();
+        }
     }
 }

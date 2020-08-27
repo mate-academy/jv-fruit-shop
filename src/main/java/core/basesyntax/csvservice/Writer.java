@@ -13,7 +13,7 @@ public class Writer {
         CSVFormat format = CSVFormat.DEFAULT.withHeader("fruit", "quantity");
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), format)) {
             for (Map.Entry<String, Storage.DateAndQuantityPair> item : Storage.storage.entrySet()) {
-                printer.printRecord(item.getKey(), item.getValue().getQuantity());
+                printer.printRecord(item.getKey(), item.getValue().getAllQuantity());
             }
         } catch (IOException e) {
             throw new RuntimeException("Something went wrong with writing to file");

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ReaderTest {
     @Test
-    public void normalDataTest() {
+    public void testReaderWithNormalData() {
         List<Transaction> expected = new ArrayList<>();
         expected.add(new Transaction("s", "banana", "185", "2020-11-20"));
         expected.add(new Transaction("b", "banana", "20", "2020-10-19"));
@@ -24,12 +24,12 @@ public class ReaderTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void noSuchFileTest() {
+    public void testReaderWithNonExistingFile() {
         Reader.read("src/main/resources/wrongName.csv");
     }
 
     @Test(expected = RuntimeException.class)
-    public void emptyFileTest() {
+    public void testReaderWithEmptyFile() {
         Reader.read("src/main/resources/emptyFile.csv");
     }
 }

@@ -18,14 +18,14 @@ import java.util.Set;
 public class WriterTest {
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void fillTheStorage() {
         List<Transaction> transactions = Reader.read("src/main/resources/easyIncome.csv");
         FruitStorageStrategy.initialize();
         OperationHandler.handleOperation(transactions);
     }
 
     @Test
-    public void normalWrite() {
+    public void testWriteWithNormalData() {
         Writer.write("src/main/resources/result1.csv");
         try {
             Set<String> expected = new HashSet<>(Files
@@ -39,7 +39,7 @@ public class WriterTest {
     }
 
     @Test
-    public void emptyStorageTest() {
+    public void testWriteWithEmptyFile() {
         Storage.storage = new HashMap<>();
         Writer.write("src/main/resources/onlyHeader.csv");
         try {

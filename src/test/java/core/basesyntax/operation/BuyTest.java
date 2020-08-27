@@ -1,50 +1,41 @@
 package core.basesyntax.operation;
 
+import core.basesyntax.OperationHandler;
 import core.basesyntax.Storage;
 import core.basesyntax.Transaction;
-import org.junit.After;
+import core.basesyntax.csvservice.Reader;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.time.LocalDate;
-
 public class BuyTest {
-    private static final Integer EXPECTED_QUANTITY = 40;
+    private static final Integer EXPECTED_QUANTITY = 90;
     private static final String KEY = "banana";
     private static Operation buy;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void prepareEnvironmentBeforeTest() {
         buy = new Buy();
-    }
-
-    @Before
-    public void setUp() {
-        Storage.storage.put("banana",
-                new Storage.DateAndQuantityPair(
-                        LocalDate.of(2020, 10, 11), 50));
-    }
-
-    @After
-    public void tearDown() {
         Storage.storage.clear();
+        OperationHandler.handleOperation(Reader.read("src/main/resources/buyTest.csv"));
     }
 
     @Test
-    public void buyTest() {
-        buy.provideOperation(new Transaction("b", "banana", "10", "2020-10-07"));
-        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).getQuantity());
+    public void testBuyWithNormalData() {
+        buy.provideOperation(
+                new Transaction("b", KEY, "10", "2020-10-07"));
+        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).getAllQuantity());
     }
 
     @Test(expected = RuntimeException.class)
-    public void buyDateExpiredTest() {
-        buy.provideOperation(new Transaction("b", "banana", "10", "2020-10-12"));
+    public void testBuyWithRunOutOfFruits() {
+        buy.provideOperation(
+                new Transaction("b", KEY, "160", "2020-10-05"));
     }
 
     @Test(expected = RuntimeException.class)
-    public void buyOutOfFruitTest() {
-        buy.provideOperation(new Transaction("b", "banana", "60", "2020-10-05"));
+    public void testBuyWithNonExistingFruit() {
+        buy.provideOperation(
+                new Transaction("b", "mango", "160", "2020-10-05"));
     }
 }

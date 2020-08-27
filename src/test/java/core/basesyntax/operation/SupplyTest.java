@@ -16,31 +16,33 @@ public class SupplyTest {
     private static Operation supply;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void prepareEnvironmentForTests() {
         supply = new Supply();
     }
 
     @Before
-    public void setUp() {
+    public void fillTheStorage() {
         Storage.storage.put("banana",
                 new Storage.DateAndQuantityPair(
                         LocalDate.of(2020, 10, 11), 50));
     }
 
     @After
-    public void tearDown() {
+    public void clearTheStorage() {
         Storage.storage.clear();
     }
 
     @Test
-    public void supplyNormalTest() {
-        supply.provideOperation(new Transaction("s", "banana", "10", "2020-10-07"));
-        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).getQuantity());
+    public void testSupplyWithExistingFruit() {
+        supply.provideOperation(
+                new Transaction("s", "banana", "10", "2020-10-07"));
+        Assert.assertEquals(EXPECTED_QUANTITY, Storage.storage.get(KEY).getAllQuantity());
     }
 
     @Test
-    public void supplyNew() {
-        supply.provideOperation(new Transaction("s", "orange", "30", "2020-10-07"));
+    public void testSupplyWithNewFruit() {
+        supply.provideOperation(
+                new Transaction("s", "orange", "30", "2020-10-07"));
         Assert.assertTrue(Storage.storage.size() > 1);
     }
 }
