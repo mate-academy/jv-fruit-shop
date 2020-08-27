@@ -1,9 +1,7 @@
 package core.basesyntax.service;
 
 import org.junit.Test;
-
 import org.junit.Assert;
-
 import java.util.ArrayList;
 import java.util.List;
 

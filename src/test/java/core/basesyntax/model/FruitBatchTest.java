@@ -1,9 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 import org.junit.Test;
-
 import org.junit.Assert;
-
 import java.time.LocalDate;
 
 public class FruitBatchTest {

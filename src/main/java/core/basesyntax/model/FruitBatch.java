@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -21,7 +21,7 @@ public final class FruitBatch {
     }
 
     @Override
-    protected FruitBatch clone() {
+    public FruitBatch clone() {
         return new FruitBatch(fruitType, expiryDate);
     }
 
