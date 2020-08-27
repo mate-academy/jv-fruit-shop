@@ -34,17 +34,6 @@ public class FruitStoreTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        ReadOperationFromFileService readOperationFromFileService = new ReadOperationFromFileService();
-//        readOperationFromFileService.read(InputRequestService.firstPath);
-
-//        StorageService<FruitBox> storageService = new StorageService<>();
-//        String storageContent = storageService.getStorage();
-//
-//        WriteIntoFileService writeIntoFileService = new WriteIntoFileService();
-//        writeIntoFileService.write(storageContent);
-//
-//        OutputResultFileService OutputResultFileService = new OutputResultFileService();
-//        System.out.println(OutputResultFileService.sout());
         Storage.storage.clear();
     }
 
