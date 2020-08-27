@@ -20,8 +20,8 @@ public class DataFileReader {
                 data.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Couldn't read file, " +
-                    "something wrong with file or path is incorrect!");
+            throw new RuntimeException("Couldn't read file, "
+                    + "something wrong with file or path is incorrect!");
         }
         return data;
     }

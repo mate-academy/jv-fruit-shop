@@ -31,7 +31,8 @@ public class PurchaseOperation implements Operable {
         return false;
     }
 
-    private Map<LocalDate, Integer> getFilledMap(Map<String, Map<String, Integer>> store, String buyingFruit) {
+    private Map<LocalDate, Integer> getFilledMap(Map<String, Map<String, Integer>> store,
+                                                 String buyingFruit) {
         Map<LocalDate, Integer> fruitsSortedByData = new TreeMap<>();
         for (Map.Entry<String, Integer> entry : store.get(buyingFruit).entrySet()) {
             fruitsSortedByData.put(LocalDate.parse(entry.getKey()),
@@ -40,7 +41,8 @@ public class PurchaseOperation implements Operable {
         return fruitsSortedByData;
     }
 
-    private boolean checkAvailableQuantity(int buyingCount, LocalDate buyingDate, Map<LocalDate, Integer> fruitsSortedByData) {
+    private boolean checkAvailableQuantity(int buyingCount, LocalDate buyingDate,
+                                           Map<LocalDate, Integer> fruitsSortedByData) {
         return fruitsSortedByData.entrySet().stream()
                 .filter(e -> e.getKey().isAfter(buyingDate))
                 .mapToInt(Map.Entry::getValue)
