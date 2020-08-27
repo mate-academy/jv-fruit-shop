@@ -2,9 +2,6 @@ package core.basesyntax;
 
 import java.util.List;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class FruitShop {
     private static FileWritter newFile = new FileWritter();
     private static ReadFromFile readingFromFileOperation = new ReadFromFile();
