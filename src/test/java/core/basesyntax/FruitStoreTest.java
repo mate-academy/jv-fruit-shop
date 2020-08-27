@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import org.junit.Assert;
 import org.junit.Test;
+import org.junit.Assert;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -285,11 +285,14 @@ public class FruitStoreTest {
         expectedResult.add(row1);
         expectedResult.add(row2);
         Assert.assertEquals(expectedResult.size(),
-                conclusion.toGetResult(storage, typesOfFruits.toGetTypes(storage)).size());
+                conclusion.toGetResult(storage,
+                        typesOfFruits.toGetTypes(storage)).size());
         Assert.assertEquals(expectedResult.get(1).get(0),
-                conclusion.toGetResult(storage, typesOfFruits.toGetTypes(storage)).get(1).get(0));
+                conclusion.toGetResult(storage,
+                        typesOfFruits.toGetTypes(storage)).get(1).get(0));
         Assert.assertEquals(expectedResult.get(1).get(1),
-                conclusion.toGetResult(storage, typesOfFruits.toGetTypes(storage)).get(1).get(1));
+                conclusion.toGetResult(storage,
+                        typesOfFruits.toGetTypes(storage)).get(1).get(1));
     }
 
     @Test
@@ -303,15 +306,19 @@ public class FruitStoreTest {
         row2.add("23");
         expectedResult.add(row1);
         expectedResult.add(row2);
-        fileWriterService.writeFile(expectedResult, ",", FILE_PATH_TO_FILE_WE_WRITE_IN);
+        fileWriterService.writeFile(expectedResult,
+                ",", FILE_PATH_TO_FILE_WE_WRITE_IN);
         Assert.assertEquals(expectedResult.size(),
-                fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN, ",")
+                fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN,
+                        ",")
                         .size());
         Assert.assertEquals(expectedResult.get(0),
-                fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN, ",")
+                fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN,
+                        ",")
                         .get(0));
         Assert.assertEquals(expectedResult.get(1),
-                fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN, ",")
+                fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN,
+                        ",")
                         .get(1));
     }
 
