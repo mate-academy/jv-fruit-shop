@@ -41,7 +41,6 @@ public class StorageUpdaterTest {
     @Before
     public void setUp() {
         newUpdate = new StorageUpdaterImpl();
-        // Storage testStorage = new Storage();
         Storage.clearStorage();
     }
 
