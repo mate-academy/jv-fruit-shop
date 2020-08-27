@@ -6,7 +6,7 @@ import java.util.Map;
 public class Supply implements Operable {
 
     @Override
-    public boolean operate(Map<String, Map<String, Integer>> store, String[] data) {
+    public boolean updateStorage(Map<String, Map<String, Integer>> store, String[] data) {
         String supplyingFruit = data[1];
         Integer availableFruitCount = Integer.parseInt(data[2]);
         String fruitExpirationDate = data[3];

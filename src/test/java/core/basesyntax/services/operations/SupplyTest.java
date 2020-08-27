@@ -29,7 +29,7 @@ public class SupplyTest{
 
     @Test
     public void supplyNormalConditionsTest(){
-        boolean result = supply.operate(store, BANANAS_20);
+        boolean result = supply.updateStorage(store, BANANAS_20);
         Assert.assertTrue(result);
         Assert.assertEquals(1, store.size());
         Assert.assertSame( 20, store.get("banana").get("2020-10-15"));
@@ -39,8 +39,8 @@ public class SupplyTest{
     public void supplyDifferentFruitsTest(){
         String[] dataOranges = new String[]{"s", "orange", "50", "2020-10-18" };
 
-        boolean resultBananas = supply.operate(store, BANANAS_20);
-        boolean resultOranges = supply.operate(store, dataOranges);
+        boolean resultBananas = supply.updateStorage(store, BANANAS_20);
+        boolean resultOranges = supply.updateStorage(store, dataOranges);
         Assert.assertTrue(resultBananas);
         Assert.assertTrue(resultOranges);
         Assert.assertEquals(2, store.size());
@@ -51,8 +51,8 @@ public class SupplyTest{
     @Test
     public void supplyDifferentDatesTest(){
         String[] data = new String[]{"s", "banana", "20", "2020-10-20" };
-        boolean result10 = supply.operate(store, BANANAS_10);
-        boolean result20 = supply.operate(store, data);
+        boolean result10 = supply.updateStorage(store, BANANAS_10);
+        boolean result20 = supply.updateStorage(store, data);
         Assert.assertTrue(result10);
         Assert.assertTrue(result20);
         Assert.assertEquals(1, store.size());
@@ -61,8 +61,8 @@ public class SupplyTest{
 
     @Test
     public void supplyIncreaseFruitsCountTest(){
-        boolean firstSupplyResult = supply.operate(store, BANANAS_10);
-        boolean secondSupplyResult = supply.operate(store, BANANAS_10);
+        boolean firstSupplyResult = supply.updateStorage(store, BANANAS_10);
+        boolean secondSupplyResult = supply.updateStorage(store, BANANAS_10);
         Assert.assertTrue(firstSupplyResult);
         Assert.assertTrue(secondSupplyResult);
         Assert.assertEquals(1, store.size());

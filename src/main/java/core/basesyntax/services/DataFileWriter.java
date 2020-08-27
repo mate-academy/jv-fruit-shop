@@ -21,7 +21,8 @@ public class DataFileWriter {
         try {
             Files.write(Path.of(filePath), result);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Couldn't write to file, " +
+                    "wrong file path or invalid data!");
         }
         return true;
     }

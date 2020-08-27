@@ -1,7 +1,10 @@
 package core.basesyntax;
 
+import core.basesyntax.services.DataFileReader;
+import core.basesyntax.services.DataFileWriter;
+import core.basesyntax.services.DataToMapParser;
 import core.basesyntax.services.FruitShopService;
-import core.basesyntax.services.operations.Buy;
+import core.basesyntax.services.operations.PurchaseOperation;
 import core.basesyntax.services.operations.Operable;
 import core.basesyntax.services.operations.Return;
 import core.basesyntax.services.operations.Supply;
@@ -20,7 +23,8 @@ public class MainApp {
     private static final String RETURN = "r";
 
     public static void main(String[] args) {
-        FruitShopService shopFileService = new FruitShopService();
+        FruitShopService shopFileService = new FruitShopService(new DataFileReader(),
+                new DataFileWriter(), new DataToMapParser());
         if (shopFileService.processFile(FILE_PATH,
                 RESULT_FILE_PATH, createOperationsMap())) {
             System.out.println(SUCCESSFUL_MESSAGE);
@@ -33,7 +37,7 @@ public class MainApp {
         Map<String, Operable> map = new HashMap<>();
         map.put(RETURN, new Return());
         map.put(SUPPLY, new Supply());
-        map.put(BUY, new Buy());
+        map.put(BUY, new PurchaseOperation());
         return map;
     }
 }

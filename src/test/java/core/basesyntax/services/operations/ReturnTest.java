@@ -21,7 +21,7 @@ public class ReturnTest{
 
     @Test
     public void returnTest(){
-        boolean result = ret.operate(store, data);
+        boolean result = ret.updateStorage(store, data);
         Assert.assertTrue(result);
         Assert.assertEquals(1, store.size());
         Assert.assertSame( 10, store.get("banana").get("2020-10-15"));
@@ -29,8 +29,8 @@ public class ReturnTest{
 
     @Test
     public void returnSameFruitTest(){
-        boolean firstResult = ret.operate(store, data);
-        boolean secondResult = ret.operate(store, data);
+        boolean firstResult = ret.updateStorage(store, data);
+        boolean secondResult = ret.updateStorage(store, data);
         Assert.assertTrue(firstResult);
         Assert.assertTrue(secondResult);
         Assert.assertEquals(1, store.size());
@@ -41,8 +41,8 @@ public class ReturnTest{
     public void returnSameFruitDifferentDatesTest(){
         String[] data20 = new String[]{"r", "banana", "20", "2020-10-20" };
 
-        boolean firstResult = ret.operate(store, data);
-        boolean secondResult = ret.operate(store, data20);
+        boolean firstResult = ret.updateStorage(store, data);
+        boolean secondResult = ret.updateStorage(store, data20);
         Assert.assertTrue(firstResult);
         Assert.assertTrue(secondResult);
         Assert.assertEquals(1, store.size());

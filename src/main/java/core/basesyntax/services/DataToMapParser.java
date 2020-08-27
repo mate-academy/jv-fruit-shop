@@ -11,7 +11,7 @@ public class DataToMapParser {
         Map<String, Map<String, Integer>> fruitStore = new HashMap<>();
         for (String[] line : lines) {
             if (operations.containsKey(line[0])) {
-                operations.get(line[0]).operate(fruitStore, line);
+                operations.get(line[0]).updateStorage(fruitStore, line);
             }
         }
         return fruitStore;

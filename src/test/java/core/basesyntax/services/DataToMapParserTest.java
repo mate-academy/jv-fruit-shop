@@ -1,6 +1,6 @@
 package core.basesyntax.services;
 
-import core.basesyntax.services.operations.Buy;
+import core.basesyntax.services.operations.PurchaseOperation;
 import core.basesyntax.services.operations.Operable;
 import core.basesyntax.services.operations.Return;
 import core.basesyntax.services.operations.Supply;
@@ -28,7 +28,7 @@ public class DataToMapParserTest {
         dataLines = new ArrayList<>();
         operations.put(RETURN, new Return());
         operations.put(SUPPLY, new Supply());
-        operations.put(BUY, new Buy());
+        operations.put(BUY, new PurchaseOperation());
     }
 
     @Test
