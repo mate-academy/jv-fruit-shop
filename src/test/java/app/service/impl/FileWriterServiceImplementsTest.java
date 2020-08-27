@@ -35,7 +35,7 @@ public class FileWriterServiceImplementsTest {
 
     @Test
     public void fileWriterOk() {
-        fileWriterService.writeData(testFruits);
+        fileWriterService.writeData(testFruits, RESULT_PATH);
         List<List<String>> allData = fileReadService.readFile(RESULT_PATH);
         int sizeFinalTestFruits = testFruits.stream()
                 .collect(Collectors.groupingBy(Fruit::getName)).size();
@@ -44,8 +44,13 @@ public class FileWriterServiceImplementsTest {
 
     @Test
     public void emptyListWriter() {
-        fileWriterService.writeData(new ArrayList<>());
+        fileWriterService.writeData(new ArrayList<>(), RESULT_PATH);
         List<List<String>> allData = fileReadService.readFile(RESULT_PATH);
         Assert.assertEquals(0, allData.size());
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void exceptionWriteTest() {
+        fileWriterService.writeData(new ArrayList<>(), "");
     }
 }

@@ -10,7 +10,6 @@ import java.util.List;
 
 public class OperationSupplyTest {
     private static final String SUPPLY = "s";
-    private static final String BUY = "b";
     private static List<List<String>> testValue;
     private static Operation supply;
 

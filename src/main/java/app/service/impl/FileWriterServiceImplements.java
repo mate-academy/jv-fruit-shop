@@ -9,12 +9,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FileWriterServiceImplements implements FileWriterService {
-    public static final String FILE_PATH = "src/main/java/resources/result.csv";
     public static final String SEPARATOR = ",";
     
     @Override
-    public boolean writeData(List<Fruit> fruits) {
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+    public boolean writeData(List<Fruit> fruits, String filePath) {
+        try (FileWriter writer = new FileWriter(filePath)) {
             if (fruits.size() == 0) {
                 return false;
             }

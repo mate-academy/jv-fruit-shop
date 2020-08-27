@@ -4,5 +4,5 @@ import app.model.Fruit;
 import java.util.List;
 
 public interface FileWriterService {
-    boolean writeData(List<Fruit> fruits);
+    boolean writeData(List<Fruit> fruits, String filePath);
 }
