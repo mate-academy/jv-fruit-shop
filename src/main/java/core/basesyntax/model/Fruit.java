@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 import java.time.LocalDate;
 
-public class Fruit {
+public class Fruit implements Comparable<Fruit> {
     private String type;
     private int stock_balance;
     private LocalDate date;
@@ -65,5 +65,13 @@ public class Fruit {
                 ", stock_balance=" + stock_balance +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Fruit o) {
+        if (date.isEqual(o.getDate())) {
+            return 0;
+        }
+        return date.isBefore(o.getDate()) ? 1 : -1;
     }
 }

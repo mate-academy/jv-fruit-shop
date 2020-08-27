@@ -16,6 +16,7 @@ public class Buy implements ActionInterface {
                 .filter(storageFruit -> storageFruit.getType().equals(fruit.getType()))
                 .filter(storagefruit -> storagefruit.getDate().isAfter(fruit.getDate())
                         || storagefruit.getDate().isEqual(fruit.getDate()))
+                .sorted()
                 .collect(Collectors.toList());
 
         System.out.println(list);
