@@ -12,7 +12,7 @@ import java.util.List;
 
 public class LocalFileReader {
     private static final String COMMA_DELIMITER = ",";
-    private static final String[] FILE_HEADER = new String[]{"type", "fruit", "quantity", "date"};
+    private static final String[] FILE_HEADER = {"type", "fruit", "quantity", "date"};
     private final String filePath;
 
     public LocalFileReader(String filePath) {
@@ -46,7 +46,8 @@ public class LocalFileReader {
     private void checkDataFormat(String[] lineFromFile, List<List<String>> fileData) {
         if (fileData.isEmpty() && !Arrays.equals(FILE_HEADER, lineFromFile)) {
             throw new IllegalFormatFlagsException("File header doesn't satisfy specified format");
-        } else if (fileData.isEmpty()) {
+        }
+        if (fileData.isEmpty()) {
             return;
         }
         if (!StoreOperations.AVAILABLE_OPERATIONS.containsKey(lineFromFile[0])) {
