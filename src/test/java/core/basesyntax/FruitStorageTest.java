@@ -2,13 +2,12 @@ package core.basesyntax;
 
 import core.basesyntax.exception.NotEnoughFruitException;
 import core.basesyntax.model.Fruit;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.Map;
-
-import static org.junit.Assert.*;
 
 public class FruitStorageTest {
     private static final String APPLE_NAME = "apple";
@@ -33,9 +32,9 @@ public class FruitStorageTest {
         fruitStorage.add(apple, 30);
         fruitStorage.add(appleFresh, 70);
         Map<String, Integer> stock = fruitStorage.getStockBalance();
-        assertEquals(2, stock.size());
-        assertEquals(50, (int) stock.get(BANANA_NAME));
-        assertEquals(100, (int) stock.get(APPLE_NAME));
+        Assert.assertEquals(2, stock.size());
+        Assert.assertEquals(50, (int) stock.get(BANANA_NAME));
+        Assert.assertEquals(100, (int) stock.get(APPLE_NAME));
     }
 
     @Test
@@ -47,9 +46,9 @@ public class FruitStorageTest {
         fruitStorage.sell(BANANA_NAME, bananaDate, 10);
         fruitStorage.sell(APPLE_NAME, bananaDate, 50);
         Map<String, Integer> stock = fruitStorage.getStockBalance();
-        assertEquals(2, stock.size());
-        assertEquals(10, (int) stock.get(BANANA_NAME));
-        assertEquals(50, (int) stock.get(APPLE_NAME));
+        Assert.assertEquals(2, stock.size());
+        Assert.assertEquals(10, (int) stock.get(BANANA_NAME));
+        Assert.assertEquals(50, (int) stock.get(APPLE_NAME));
     }
 
     @Test
@@ -57,9 +56,9 @@ public class FruitStorageTest {
         fruitStorage.add(banana, 50);
         try {
             fruitStorage.sell(BANANA_NAME, appleFreshDate, 30);
-            fail("Expected NotEnoughFruitException");
+            Assert.fail("Expected NotEnoughFruitException");
         } catch (NotEnoughFruitException e) {
-            assertEquals("Asked to buy 30 banana, but have 0", e.getMessage());
+            Assert.assertEquals("Asked to buy 30 banana, but have 0", e.getMessage());
         }
     }
 }
