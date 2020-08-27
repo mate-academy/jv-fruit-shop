@@ -1,8 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.orderprocessing.OrdersReader;
+import core.basesyntax.orderprocessing.CsvFileReader;
 import core.basesyntax.orderprocessing.OrdersStorage;
-import core.basesyntax.orderprocessing.ResultWriter;
+import core.basesyntax.orderprocessing.CsvFileWriter;
 import core.basesyntax.orderprocessing.StoreService;
 import java.util.Scanner;
 
@@ -20,12 +20,12 @@ public class Executor {
     }
 
     public static void execute(String inputPath, String outputPath) {
-        OrdersReader ordersReader = new OrdersReader();
+        CsvFileReader csvFileReader = new CsvFileReader();
         OrdersStorage ordersStorage = new OrdersStorage();
         StoreService storeService = new StoreService();
-        ResultWriter resultWriter = new ResultWriter();
-        ordersStorage.addOrders(ordersReader.formOrders(inputPath));
+        CsvFileWriter csvFileWriter = new CsvFileWriter();
+        ordersStorage.addOrders(csvFileReader.formOrders(inputPath));
         storeService.performOperations(ordersStorage.getOrders());
-        resultWriter.writeResult(outputPath, storeService.formatResult());
+        csvFileWriter.writeResult(outputPath, storeService.formatResult());
     }
 }

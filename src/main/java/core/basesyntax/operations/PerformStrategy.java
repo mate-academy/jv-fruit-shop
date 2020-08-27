@@ -5,15 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PerformStrategy {
-    public static Map<String, Operable> operableMap = new HashMap<>();
+    private Map<String, Operable> operableMap = new HashMap<>();
 
-    static {
+    public PerformStrategy() {
         operableMap.put("b", new Buying());
         operableMap.put("s", new Supplying());
         operableMap.put("r", new Returning());
     }
 
-    public static Operable getStrategy(String operationType) {
+    public boolean addStrategy(String name, Operable operation) {
+        operableMap.put(name, operation);
+        return true;
+    }
+
+    public Operable getStrategy(String operationType) {
         if (operableMap.containsKey(operationType)) {
             return operableMap.get(operationType);
         } else {

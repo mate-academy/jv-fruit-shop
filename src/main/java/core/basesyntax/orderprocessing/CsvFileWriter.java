@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-public class ResultWriter {
+public class CsvFileWriter {
     public boolean writeResult(String path, Map<String, Integer> total) {
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(path))) {
             csvWriter.writeNext(new String[]{"fruit", "quantity"});

@@ -11,23 +11,20 @@ import java.util.Map;
 
 public class StoreService {
     private List<FruitPack> performedPacks = new ArrayList<>();
+    private PerformStrategy performStrategy = new PerformStrategy();
 
     public void performOperations(List<Order> orders) {
         for (Order order : orders) {
-            Operable operation = PerformStrategy.getStrategy(order.getTypeOfOperation());
+            Operable operation = performStrategy.getStrategy(order.getTypeOfOperation());
             performedPacks = operation.perform(order, performedPacks);
         }
     }
 
     public Map<String, Integer> formatResult() {
         Map<String, Integer> totalResult = new HashMap<>();
-        for (FruitPack fp : performedPacks) {
-            String key = fp.getName();
-            if (totalResult.containsKey(key)) {
-                totalResult.put(key, totalResult.get(key) + fp.getQuantity());
-            } else {
-                totalResult.put(key, fp.getQuantity());
-            }
+        for (FruitPack fruitPack : performedPacks) {
+            String key = fruitPack.getName();
+            totalResult.merge(key, fruitPack.getQuantity(), Integer::sum);
         }
         return totalResult;
     }

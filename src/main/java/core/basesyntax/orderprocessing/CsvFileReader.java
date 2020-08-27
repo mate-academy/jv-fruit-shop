@@ -9,9 +9,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class OrdersReader {
+public class CsvFileReader {
     private static final String[] HEADER = new String[]{"type", "fruit", "quantity", "date"};
 
     public List<Order> formOrders(String path) {
@@ -28,17 +29,12 @@ public class OrdersReader {
                 orders.add(new Order(fruitPack, line[0]));
             }
         } catch (IOException | CsvValidationException e) {
-            throw new RuntimeException(e.getMessage(), e);
+            throw new RuntimeException("Order generation failed!!", e);
         }
         return orders;
     }
 
     private boolean isNotHeader(String[] firstLine) {
-        return firstLine == null
-                || firstLine.length != HEADER.length
-                || !(firstLine[0].equals(HEADER[0])
-                && firstLine[1].equals(HEADER[1])
-                && firstLine[2].equals(HEADER[2])
-                && firstLine[3].equals(HEADER[3]));
+        return !(Arrays.equals(firstLine, HEADER));
     }
 }

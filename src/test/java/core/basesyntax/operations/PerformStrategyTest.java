@@ -12,42 +12,43 @@ public class PerformStrategyTest {
     private static final String WRONG_TYPE_EMPTY = "";
     private static final String WRONG_TYPE_NULL = null;
     private static final String WRONG_TYPE_SOME = "abc";
+    private final PerformStrategy performStrategy = new PerformStrategy();
 
     @Test
     public void getSTypeStrategy() {
-        Operable operation = PerformStrategy.getStrategy(S_TYPE);
+        Operable operation = performStrategy.getStrategy(S_TYPE);
         Assert.assertSame(operation.getClass(), Supplying.class);
     }
 
     @Test
     public void getBTypeStrategy() {
-        Operable operation = PerformStrategy.getStrategy(B_TYPE);
+        Operable operation = performStrategy.getStrategy(B_TYPE);
         Assert.assertSame(operation.getClass(), Buying.class);
     }
 
     @Test
     public void getRTypeStrategy() {
-        Operable operation = PerformStrategy.getStrategy(R_TYPE);
+        Operable operation = performStrategy.getStrategy(R_TYPE);
         Assert.assertSame(operation.getClass(), Returning.class);
     }
 
     @Test(expected = NoSuchOperation.class)
     public void getWrongTypeStrategy() {
-        PerformStrategy.getStrategy(WRONG_TYPE);
+        performStrategy.getStrategy(WRONG_TYPE);
     }
 
     @Test(expected = NoSuchOperation.class)
     public void getEmptyStrategy() {
-        PerformStrategy.getStrategy(WRONG_TYPE_EMPTY);
+        performStrategy.getStrategy(WRONG_TYPE_EMPTY);
     }
 
     @Test(expected = NoSuchOperation.class)
     public void getWrongTypeNullStrategy() {
-        PerformStrategy.getStrategy(WRONG_TYPE_NULL);
+        performStrategy.getStrategy(WRONG_TYPE_NULL);
     }
 
     @Test(expected = NoSuchOperation.class)
     public void getWrongTypeStrategySomeChars() {
-        PerformStrategy.getStrategy(WRONG_TYPE_SOME);
+        performStrategy.getStrategy(WRONG_TYPE_SOME);
     }
 }

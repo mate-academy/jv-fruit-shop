@@ -12,20 +12,19 @@ public class Buying implements Operable {
         int orderPackQuantity = orderPack.getQuantity();
         for (FruitPack currentPack : totalPacks) {
             if (checkMatching(currentPack, orderPack)) {
-                int currentQuantity = currentPack.getQuantity();
-                currentPack.setQuantity(reduced(currentPack, orderPack));
-                orderPackQuantity -= currentQuantity;
-                break;
+                if (currentPack.getQuantity() < orderPackQuantity) {
+                    orderPackQuantity -= currentPack.getQuantity();
+                    currentPack.setQuantity(0);
+                } else {
+                    currentPack.setQuantity(currentPack.getQuantity() - orderPackQuantity);
+                    orderPackQuantity = 0;
+                    break;
+                }
             }
         }
         if (orderPackQuantity > 0) {
             throw new NoRequiredQuantityOfFruits("Insufficient amount of fruit;(");
         }
         return totalPacks;
-    }
-
-    private int reduced(FruitPack currentPack, FruitPack orderPack) {
-        return currentPack.getQuantity() > orderPack.getQuantity()
-                ? currentPack.getQuantity() - orderPack.getQuantity() : 0;
     }
 }
