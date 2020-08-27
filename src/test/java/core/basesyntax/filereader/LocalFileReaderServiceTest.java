@@ -2,6 +2,7 @@ package core.basesyntax.filereader;
 
 import core.basesyntax.exception.FileReadingException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.Arrays;

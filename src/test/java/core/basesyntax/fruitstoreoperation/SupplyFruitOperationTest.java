@@ -2,10 +2,8 @@ package core.basesyntax.fruitstoreoperation;
 
 import core.basesyntax.Storage;
 import core.basesyntax.model.InputDataModel;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+
 import java.time.LocalDate;
 
 public class SupplyFruitOperationTest {
@@ -24,6 +22,11 @@ public class SupplyFruitOperationTest {
 
     @Before
     public void setUp(){
+        storage.throwAwayAllTheFruits();
+    }
+
+    @After
+    public void tearDown() {
         storage.throwAwayAllTheFruits();
     }
 
