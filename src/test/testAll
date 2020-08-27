@@ -1,0 +1,7 @@
+type,fruit,quantity,date
+s,apple,10,2019-10-13
+s,lime,15,2019-10-14
+s,lime,10,2019-10-14
+b,lime,12,2019-10-14
+r,lime,20,2019-10-15
+b,apple,6,2019-10-12
