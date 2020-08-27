@@ -1,6 +1,7 @@
 package core.basesyntax.orderprocessing;
 
 import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import core.basesyntax.customexceptions.BadFileFormatting;
 import core.basesyntax.entries.FruitPack;
 import core.basesyntax.entries.Order;
@@ -26,7 +27,7 @@ public class OrdersReader {
                         LocalDate.parse(line[3]));
                 orders.add(new Order(fruitPack, line[0]));
             }
-        } catch (IOException e) {
+        } catch (IOException | CsvValidationException e) {
             throw new RuntimeException(e.getMessage(), e);
         }
         return orders;
