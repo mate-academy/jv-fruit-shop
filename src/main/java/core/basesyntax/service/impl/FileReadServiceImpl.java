@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.Transaction;
 import core.basesyntax.service.FileReadService;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;

@@ -5,8 +5,6 @@ import core.basesyntax.service.FileReadService;
 import core.basesyntax.service.FileWriteService;
 import core.basesyntax.service.impl.FileReadServiceImpl;
 import core.basesyntax.service.impl.FileWriteServiceImpl;
-
-import java.util.HashMap;
 import java.util.List;
 
 public class Main {

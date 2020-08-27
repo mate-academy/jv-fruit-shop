@@ -4,7 +4,6 @@ import core.basesyntax.Transaction;
 import core.basesyntax.service.impl.BuyAction;
 import core.basesyntax.service.impl.ReturnAction;
 import core.basesyntax.service.impl.SupplyAction;
-
 import java.util.HashMap;
 import java.util.Map;
 
