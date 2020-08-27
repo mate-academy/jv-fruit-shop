@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class OrdersReaderTest {
-    private final String DEFAULT_PATH = "C:\\Users\\User\\IdeaProjects\\JUnit_Practise\\src\\test\\resources\\";
+    private final String DEFAULT_PATH = "src/test/resources/";
     private final String BIG_TEST = "bigTest.csv";
     private final String SMALL_TEST = "smallTest.csv";
     private final String EMPTY_TEST = "emptyTest.csv";

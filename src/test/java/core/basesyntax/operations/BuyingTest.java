@@ -11,9 +11,9 @@ import java.util.Map;
 
 public class BuyingTest {
     private final String BUY_PATH =
-            "C:\\Users\\User\\IdeaProjects\\JUnit_Practise\\src\\test\\resources\\buy.csv";
+            "src/test/resources/buy.csv";
     private final String BUY_MORE_PATH =
-            "C:\\Users\\User\\IdeaProjects\\JUnit_Practise\\src\\test\\resources\\buyMoreThanHave.csv";
+            "src/test/resources/buyMoreThanHave.csv";
     private OrdersReader ordersReader;
     private OrdersStorage ordersStorage;
     private StoreService storeService;

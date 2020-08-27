@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ReturningTest {
     private final String BUY_PATH =
-            "C:\\Users\\User\\IdeaProjects\\JUnit_Practise\\src\\test\\resources\\return.csv";
+            "src/test/resources/return.csv";
     private OrdersReader ordersReader;
     private OrdersStorage ordersStorage;
     private StoreService storeService;

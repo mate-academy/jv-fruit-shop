@@ -7,9 +7,9 @@ import java.io.File;
 
 public class ResultWriterTest {
     private static final String BIG_TEST_PATH =
-            "C:\\Users\\User\\IdeaProjects\\JUnit_Practise\\src\\test\\resources\\bigTest.csv";
+            "src/test/resources/bigTest.csv";
     private static final String BIG_TEST_OUTPUT =
-            "C:\\Users\\User\\IdeaProjects\\JUnit_Practise\\src\\test\\resources\\bigTestOUT.csv";
+            "src/test/resources/bigTestOUT.csv";
     private OrdersReader ordersReader;
     private OrdersStorage ordersStorage;
     private StoreService storeService;
