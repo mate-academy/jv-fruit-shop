@@ -1,7 +1,6 @@
 package core.basesyntax.operation;
 
 import core.basesyntax.fruitservice.Transaction;
-import java.time.LocalDate;
 import java.util.Map;
 
 public class Return implements Operation {
