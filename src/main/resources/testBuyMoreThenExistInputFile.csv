@@ -1,8 +1,0 @@
-type,fruit,quantity,date
-    s,orange,3,2020-10-17
-    s,apple,1,2020-10-17
-    s,banana,1,2020-10-17
-    s,orange,1,2020-10-16
-    b,orange,10,2020-10-15
-    r,orange,1,2020-10-16
-    r,orange,1,2020-10-18

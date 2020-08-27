@@ -22,8 +22,6 @@ public class CsvUtilsImplTest {
             "src/main/resources/testBadOperationInputFile.csv";
     private static final String CSV_ALL_OPERATIONS_IN_SINGLE_LINE_INPUT_TEST_FILE =
             "src/main/resources/testAllOperationsInSingleLineInputFile.csv";
-    private static final String CSV_BUY_MORE_THEN_EXIST_INPUT_TEST_FILE =
-            "src/main/resources/testBuyMoreThenExistInputFile.csv";
     private static final String CSV_BAD_FRUIT_INPUT_TEST_FILE =
             "src/main/resources/testBadFruitInputFile.csv";
     private static final String CSV_OUTPUT_TEST_FILE = "src/main/resources/testOutputFile.csv";
