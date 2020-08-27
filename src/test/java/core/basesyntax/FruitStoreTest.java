@@ -19,24 +19,35 @@ public class FruitStoreTest {
     private final FileReaderForTest fileReaderForTest = new FileReaderForTest();
     private final FileWriterService fileWriterService = new FileWriterServiceImpl();
     private final FileReaderService fileReaderService = new FileReaderServiceImpl();
-    private static final String FILE_PATH_TO_EMPTY_FILE = "src\\test\\empty";
-    private static final String FILE_PATH_TO_FILE_DOES_NOT_EXIST = "src\\test\\resources\\k.csv";
-    private static final String FILE_PATH_TO_FILE_WITH_ONE_LINE_INFORMATION = "src\\test\\testOneOperation";
-    private static final String FILE_PATH_TO_OK_FILE = "src\\test\\basic";
-    private static final String FILE_PATH_TO_FILE_WITH_NOT_ENOUGH_INFORMATION = "src\\test\\notEnoughData";
-    private static final String FILE_PATH_TO_FILE_WITH_WRONG_OPERATION = "src\\test\\wrongOperation";
-    private static final String FILE_PATH_TO_FILE_WE_WRITE_IN = "src\\test\\writeFile";
-    private static final String FILE_PATH_FOR_MAIN_TEST = "src\\test\\testAll";
-    private static final String FILE_PATH_FOR_MAIN_TEST_TO_WRITE = "src\\test\\testAllWrite";
+    private static final String FILE_PATH_TO_EMPTY_FILE
+            = "src\\test\\empty";
+    private static final String FILE_PATH_TO_FILE_DOES_NOT_EXIST
+            = "src\\test\\resources\\k.csv";
+    private static final String FILE_PATH_TO_FILE_WITH_ONE_LINE_INFORMATION
+            = "src\\test\\testOneOperation";
+    private static final String FILE_PATH_TO_OK_FILE
+            = "src\\test\\basic";
+    private static final String FILE_PATH_TO_FILE_WITH_NOT_ENOUGH_INFORMATION
+            = "src\\test\\notEnoughData";
+    private static final String FILE_PATH_TO_FILE_WITH_WRONG_OPERATION
+            = "src\\test\\wrongOperation";
+    private static final String FILE_PATH_TO_FILE_WE_WRITE_IN
+            = "src\\test\\writeFile";
+    private static final String FILE_PATH_FOR_MAIN_TEST
+            = "src\\test\\testAll";
+    private static final String FILE_PATH_FOR_MAIN_TEST_TO_WRITE
+            = "src\\test\\testAllWrite";
 
     @Test(expected = RuntimeException.class)
     public void readFileEmpty() {
-        fileReaderService.readFile(FILE_PATH_TO_EMPTY_FILE, ",");
+        fileReaderService
+                .readFile(FILE_PATH_TO_EMPTY_FILE, ",");
     }
 
     @Test(expected = RuntimeException.class)
     public void readFileDoesNotExist() {
-        fileReaderService.readFile(FILE_PATH_TO_FILE_DOES_NOT_EXIST, ",");
+        fileReaderService
+                .readFile(FILE_PATH_TO_FILE_DOES_NOT_EXIST, ",");
     }
 
     @Test(expected = RuntimeException.class)
@@ -64,7 +75,8 @@ public class FruitStoreTest {
         row1.add("2020-10-17");
         expectedResultOfReading.add(row1);
 
-        List<List<String>> actual = fileReaderService.readFile(FILE_PATH_TO_FILE_WITH_ONE_LINE_INFORMATION, ",");
+        List<List<String>> actual = fileReaderService
+                .readFile(FILE_PATH_TO_FILE_WITH_ONE_LINE_INFORMATION, ",");
         Assert.assertEquals(expectedResultOfReading, actual);
     }
 
@@ -90,7 +102,8 @@ public class FruitStoreTest {
         expectedResultOfReading.add(row2);
         expectedResultOfReading.add(row3);
 
-        List<List<String>> actual = fileReaderService.readFile(FILE_PATH_TO_OK_FILE, ",");
+        List<List<String>> actual = fileReaderService
+                .readFile(FILE_PATH_TO_OK_FILE, ",");
         Assert.assertEquals(expectedResultOfReading, actual);
     }
 
@@ -122,9 +135,12 @@ public class FruitStoreTest {
         Fruit fruitApple = new Fruit("apple", 34, localDate);
         storage.getFruits().add(fruitBanana);
         supply.toDo(fruitApple, storage);
-        Assert.assertEquals(fruitApple.getType(), storage.getFruits().get(storage.getFruits().size() - 1).getType());
-        Assert.assertEquals(fruitApple.getAmount(), storage.getFruits().get(storage.getFruits().size() - 1).getAmount());
-        Assert.assertEquals(fruitApple.getDate(), storage.getFruits().get(storage.getFruits().size() - 1).getDate());
+        Assert.assertEquals(fruitApple.getType(),
+                storage.getFruits().get(storage.getFruits().size() - 1).getType());
+        Assert.assertEquals(fruitApple.getAmount(),
+                storage.getFruits().get(storage.getFruits().size() - 1).getAmount());
+        Assert.assertEquals(fruitApple.getDate(),
+                storage.getFruits().get(storage.getFruits().size() - 1).getDate());
     }
 
     @Test()
@@ -134,9 +150,12 @@ public class FruitStoreTest {
         Fruit fruitApple = new Fruit("apple", 34, localDate);
         storage.getFruits().add(fruitBanana);
         ret.toDo(fruitApple, storage);
-        Assert.assertEquals(fruitApple.getType(), storage.getFruits().get(storage.getFruits().size() - 1).getType());
-        Assert.assertEquals(fruitApple.getAmount(), storage.getFruits().get(storage.getFruits().size() - 1).getAmount());
-        Assert.assertEquals(fruitApple.getDate(), storage.getFruits().get(storage.getFruits().size() - 1).getDate());
+        Assert.assertEquals(fruitApple.getType(),
+                storage.getFruits().get(storage.getFruits().size() - 1).getType());
+        Assert.assertEquals(fruitApple.getAmount(),
+                storage.getFruits().get(storage.getFruits().size() - 1).getAmount());
+        Assert.assertEquals(fruitApple.getDate(),
+                storage.getFruits().get(storage.getFruits().size() - 1).getDate());
     }
 
     @Test()
@@ -151,9 +170,12 @@ public class FruitStoreTest {
         List<Fruit> expectedList = new ArrayList<>();
         expectedList.add(fruitRemaining);
         Assert.assertEquals(expectedList.size(), storage.getFruits().size());
-        Assert.assertEquals(expectedList.get(0).getAmount(), storage.getFruits().get(0).getAmount());
-        Assert.assertEquals(expectedList.get(0).getDate(), storage.getFruits().get(0).getDate());
-        Assert.assertEquals(expectedList.get(0).getType(), storage.getFruits().get(0).getType());
+        Assert.assertEquals(expectedList.get(0).getAmount(),
+                storage.getFruits().get(0).getAmount());
+        Assert.assertEquals(expectedList.get(0).getDate(),
+                storage.getFruits().get(0).getDate());
+        Assert.assertEquals(expectedList.get(0).getType(),
+                storage.getFruits().get(0).getType());
     }
 
 
@@ -190,9 +212,12 @@ public class FruitStoreTest {
         expectedList.add(fruitRemaining1);
         expectedList.add(fruitRemaining2);
         Assert.assertEquals(expectedList.size(), storage.getFruits().size());
-        Assert.assertEquals(expectedList.get(1).getType(), storage.getFruits().get(1).getType());
-        Assert.assertEquals(expectedList.get(1).getAmount(), storage.getFruits().get(1).getAmount());
-        Assert.assertEquals(expectedList.get(1).getDate(), storage.getFruits().get(1).getDate());
+        Assert.assertEquals(expectedList.get(1).getType(),
+                storage.getFruits().get(1).getType());
+        Assert.assertEquals(expectedList.get(1).getAmount(),
+                storage.getFruits().get(1).getAmount());
+        Assert.assertEquals(expectedList.get(1).getDate(),
+                storage.getFruits().get(1).getDate());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -220,7 +245,7 @@ public class FruitStoreTest {
 
     @Test(expected = RuntimeException.class)
     public void toGetTypesFromEmptyStorage() {
-     typesOfFruits.toGetTypes(storage);
+        typesOfFruits.toGetTypes(storage);
     }
 
     @Test
@@ -259,9 +284,12 @@ public class FruitStoreTest {
         row2.add("23");
         expectedResult.add(row1);
         expectedResult.add(row2);
-        Assert.assertEquals(expectedResult.size(), conclusion.toGetResult(storage, typesOfFruits.toGetTypes(storage)).size());
-        Assert.assertEquals(expectedResult.get(1).get(0), conclusion.toGetResult(storage, typesOfFruits.toGetTypes(storage)).get(1).get(0));
-        Assert.assertEquals(expectedResult.get(1).get(1), conclusion.toGetResult(storage, typesOfFruits.toGetTypes(storage)).get(1).get(1));
+        Assert.assertEquals(expectedResult.size(),
+                conclusion.toGetResult(storage, typesOfFruits.toGetTypes(storage)).size());
+        Assert.assertEquals(expectedResult.get(1).get(0),
+                conclusion.toGetResult(storage, typesOfFruits.toGetTypes(storage)).get(1).get(0));
+        Assert.assertEquals(expectedResult.get(1).get(1),
+                conclusion.toGetResult(storage, typesOfFruits.toGetTypes(storage)).get(1).get(1));
     }
 
     @Test
@@ -276,9 +304,15 @@ public class FruitStoreTest {
         expectedResult.add(row1);
         expectedResult.add(row2);
         fileWriterService.writeFile(expectedResult, ",", FILE_PATH_TO_FILE_WE_WRITE_IN);
-        Assert.assertEquals(expectedResult.size(), fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN, ",").size());
-        Assert.assertEquals(expectedResult.get(0), fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN, ",").get(0));
-        Assert.assertEquals(expectedResult.get(1), fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN, ",").get(1));
+        Assert.assertEquals(expectedResult.size(),
+                fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN, ",")
+                        .size());
+        Assert.assertEquals(expectedResult.get(0),
+                fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN, ",")
+                        .get(0));
+        Assert.assertEquals(expectedResult.get(1),
+                fileReaderForTest.toReadWrittenFile(FILE_PATH_TO_FILE_WE_WRITE_IN, ",")
+                        .get(1));
     }
 
     @Test
@@ -292,12 +326,18 @@ public class FruitStoreTest {
         row2.add("33");
         expected.add(row1);
         expected.add(row2);
-        List<List<String>> readFromFileList = fileReaderForTest.toReadWrittenFile(FILE_PATH_FOR_MAIN_TEST, ",");
+        List<List<String>> readFromFileList = fileReaderForTest
+                .toReadWrittenFile(FILE_PATH_FOR_MAIN_TEST, ",");
         for (List<String> row : readFromFileList) {
-            operationStorage.getOperationMap().get(row.get(0)).toDo(dataParser.toReadFromSting(row), storage);
+            operationStorage.getOperationMap()
+                    .get(row.get(0))
+                    .toDo(dataParser.toReadFromSting(row), storage);
         }
-        fileWriterService.writeFile(conclusion.toGetResult(storage, typesOfFruits.toGetTypes(storage)), ",", FILE_PATH_FOR_MAIN_TEST_TO_WRITE);
-        List<List<String>> actual = fileReaderForTest.toReadWrittenFile(FILE_PATH_FOR_MAIN_TEST_TO_WRITE, ",");
+        fileWriterService.writeFile(conclusion.toGetResult(storage,
+                typesOfFruits.toGetTypes(storage)),
+                ",", FILE_PATH_FOR_MAIN_TEST_TO_WRITE);
+        List<List<String>> actual = fileReaderForTest
+                .toReadWrittenFile(FILE_PATH_FOR_MAIN_TEST_TO_WRITE, ",");
         Assert.assertEquals(expected.size(), actual.size());
         Assert.assertEquals(expected.get(0), actual.get(0));
         Assert.assertEquals(expected.get(1), actual.get(1));
