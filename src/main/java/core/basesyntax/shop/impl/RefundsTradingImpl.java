@@ -12,10 +12,10 @@ public class RefundsTradingImpl implements Trading {
     }
 
     @Override
-    public void trade(Fruit fruit) {
+    public void trade(Fruit fruit, int quantity) {
         if (fruit == null) {
             throw new NullPointerException("Passed parameter is null");
         }
-        storage.add(fruit);
+        storage.add(fruit, quantity);
     }
 }

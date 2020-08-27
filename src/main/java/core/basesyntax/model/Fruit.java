@@ -5,25 +5,15 @@ import java.util.Objects;
 
 public class Fruit implements Cloneable {
     private String name;
-    private int quantity;
     private LocalDate shelfLife;
 
-    public Fruit(String name, int quantity, LocalDate shelfLife) {
+    public Fruit(String name, LocalDate shelfLife) {
         this.name = name;
-        this.quantity = quantity;
         this.shelfLife = shelfLife;
     }
 
     public String getName() {
         return name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public LocalDate getShelfLife() {
@@ -32,7 +22,7 @@ public class Fruit implements Cloneable {
 
     @Override
     public Fruit clone() {
-        return new Fruit(name, quantity, shelfLife);
+        return new Fruit(name, shelfLife);
     }
 
     @Override
@@ -44,13 +34,12 @@ public class Fruit implements Cloneable {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return quantity == fruit.quantity
-                && Objects.equals(name, fruit.name)
+        return Objects.equals(name, fruit.name)
                 && Objects.equals(shelfLife, fruit.shelfLife);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, quantity, shelfLife);
+        return Objects.hash(name, shelfLife);
     }
 }

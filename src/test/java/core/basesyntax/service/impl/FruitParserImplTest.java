@@ -1,18 +1,20 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitParser;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.security.InvalidParameterException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class FruitParserImplTest {
-    private static final Fruit BANANA_FRUIT = new Fruit("banana", 100, LocalDate.now());
-    private static final String TODAY_DATE_STRING = String.valueOf(LocalDate.now());
+    private static final Fruit BANANA_FRUIT = new Fruit("banana", LocalDate.now());
+    private static final List<FruitDto> BANANA_DTO = List.of(new FruitDto("s", "banana", 100, LocalDate.now()));
+    private static final List<FruitDto> KIWI_DTO = List.of(new FruitDto("s", "kiwi", 50, LocalDate.now()));
     private static FruitParser fruitParser;
 
     @BeforeClass
@@ -22,36 +24,31 @@ public class FruitParserImplTest {
 
     @Test
     public void parseFruitTest() {
-        Fruit actual = fruitParser.parse(List.of("s", "banana", "100", TODAY_DATE_STRING));
-        Assert.assertEquals(BANANA_FRUIT, actual);
+        List<Fruit> actual = fruitParser.parse(BANANA_DTO);
+        Assert.assertEquals(BANANA_FRUIT, actual.get(0));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = NoSuchElementException.class)
     public void parseFruitNullTest() {
         fruitParser.parse(null);
     }
 
-    @Test(expected = InvalidParameterException.class)
+    @Test(expected = NoSuchElementException.class)
     public void parseFruitWithEmptyListTest() {
         fruitParser.parse(Collections.emptyList());
     }
 
-    @Test(expected = InvalidParameterException.class)
-    public void parseFruitWithWrongParametersTest() {
-        fruitParser.parse(List.of("banana", "100", TODAY_DATE_STRING));
-    }
-
     @Test
     public void equalsFruitsTest() {
-        Fruit firstFruit = fruitParser.parse(List.of("s", "banana", "100", TODAY_DATE_STRING));
-        Fruit secondFruit = fruitParser.parse(List.of("s", "banana", "100", TODAY_DATE_STRING));
+        List<Fruit> firstFruit = fruitParser.parse(BANANA_DTO);
+        List<Fruit> secondFruit = fruitParser.parse(BANANA_DTO);
         Assert.assertEquals(firstFruit, secondFruit);
     }
 
     @Test
     public void noEqualsFruitsTest() {
-        Fruit firstFruit = fruitParser.parse(List.of("s", "banana", "100", TODAY_DATE_STRING));
-        Fruit secondFruit = fruitParser.parse(List.of("s", "kiwi", "50", TODAY_DATE_STRING));
+        List<Fruit> firstFruit = fruitParser.parse(BANANA_DTO);
+        List<Fruit> secondFruit = fruitParser.parse(KIWI_DTO);
         Assert.assertNotEquals(firstFruit, secondFruit);
     }
 }

@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 
 public class RefundsTradingImplTest {
-    private static final Fruit BANANA_FRUIT = new Fruit("banana", 100, LocalDate.now());
+    private static final Fruit BANANA_FRUIT = new Fruit("banana", LocalDate.now());
     private static Trading refundsTrading;
     private static Storage storage;
 
@@ -27,26 +27,25 @@ public class RefundsTradingImplTest {
 
     @Test
     public void refundsFruitTest() {
-        storage.add(BANANA_FRUIT);
-        refundsTrading.trade(BANANA_FRUIT);
-        Fruit expectedFruit = new Fruit("banana", 200, BANANA_FRUIT.getShelfLife());
-        Fruit actualFruit = storage.getByName(BANANA_FRUIT.getName());
+        storage.add(BANANA_FRUIT, 100);
+        refundsTrading.trade(BANANA_FRUIT, 100);
+        int actualQuantity = storage.getAll().get(0).getQuantity();
         int actualSize = storage.size();
-        Assert.assertEquals(expectedFruit, actualFruit);
+        Assert.assertEquals(200, actualQuantity);
         Assert.assertEquals(1, actualSize);
     }
 
     @Test
     public void refundsFruitWhenStorageEmptyTest() {
-        refundsTrading.trade(BANANA_FRUIT);
-        Fruit actualFruit = storage.getByName(BANANA_FRUIT.getName());
+        refundsTrading.trade(BANANA_FRUIT, 100);
+        int actualQuantity = storage.getAll().get(0).getQuantity();
         int actualSize = storage.size();
-        Assert.assertEquals(BANANA_FRUIT, actualFruit);
+        Assert.assertEquals(100, actualQuantity);
         Assert.assertEquals(1, actualSize);
     }
 
     @Test(expected = NullPointerException.class)
     public void refundsFruitNullTest() {
-        refundsTrading.trade(null);
+        refundsTrading.trade(null, 0);
     }
 }

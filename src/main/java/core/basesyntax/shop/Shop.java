@@ -14,15 +14,15 @@ public class Shop {
         this.storage = storage;
     }
 
-    public void trade(String type, Fruit fruit) {
+    public void trade(String type, Fruit fruit, int quantity) {
         Trading trading = tradings.get(type);
         if (trading == null) {
             throw new RuntimeException("Can't find correct parser for type: " + type);
         }
-        trading.trade(fruit);
+        trading.trade(fruit, quantity);
     }
 
-    public List<Fruit> balanceStorage() {
+    public List<Storage.FruitBox> balanceStorage() {
         return storage.getAll();
     }
 }

@@ -1,9 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.dto.FruitDto;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitParser;
+import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitParserImpl;
@@ -26,18 +27,19 @@ public class Main {
         tradingMap.put("b", new BuyTradingImpl(storage));
         tradingMap.put("r", new RefundsTradingImpl(storage));
         Shop shop = new Shop(tradingMap, storage);
-        FileReaderService fileReader = new FileReaderServiceImpl();
-        FruitParser fruitParser = new FruitParserImpl();
-        List<List<String>> data = fileReader.read("input.csv");
 
-        for (List<String> row : data) {
-            Fruit fruit = fruitParser.parse(row);
-            shop.trade(row.get(0), fruit);
-        }
+        FileReaderService fileReader = new FileReaderServiceImpl();
+        List<FruitDto> data = fileReader.read("input.csv");
+
+        FruitParser fruitParser = new FruitParserImpl();
+
+        ShopService shopService = new ShopService(shop, fruitParser, data);
+        shopService.precessWaybill();
 
         FileWriterService fileWriter = new FileWriterServiceImpl();
-        fileWriter.write(shop.balanceStorage(), "balance_storage_"
+        String fileName = "balance_storage_"
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss"))
-                + ".csv");
+                + ".csv";
+        fileWriter.write(shop.balanceStorage(), fileName);
     }
 }

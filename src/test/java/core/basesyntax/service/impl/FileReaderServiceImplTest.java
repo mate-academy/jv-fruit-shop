@@ -1,9 +1,12 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dto.FruitDto;
 import core.basesyntax.service.FileReaderService;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.time.LocalDate;
 import java.util.List;
 
 public class FileReaderServiceImplTest {
@@ -16,13 +19,14 @@ public class FileReaderServiceImplTest {
 
     @Test
     public void normalDataTest() {
-        List<List<String>> expected = List.of(List.of("s", "banana", "100", "2020-08-26"),
-                List.of("s", "banana", "100", "2020-08-26"),
-                List.of("b", "banana", "50", "2020-08-26"),
-                List.of("r", "banana", "50", "2020-07-26"),
-                List.of("s", "orange", "100", "2020-08-26"),
-                List.of("s", "kiwi", "100", "2020-06-26"));
-        List<List<String>> actual = reader.read("src/test/resources/normalData.csv");
+        List<FruitDto> expected = List.of(
+                new FruitDto("s", "banana", 100, LocalDate.parse("2020-08-26")),
+                new FruitDto("s", "banana", 100, LocalDate.parse("2020-08-26")),
+                new FruitDto("b", "banana", 50, LocalDate.parse("2020-08-26")),
+                new FruitDto("r", "banana", 50, LocalDate.parse("2020-07-26")),
+                new FruitDto("s", "orange", 100, LocalDate.parse("2020-08-26")),
+                new FruitDto("s", "kiwi", 100, LocalDate.parse("2020-06-26")));
+        List<FruitDto> actual = reader.read("src/test/resources/normalData.csv");
         Assert.assertEquals(expected, actual);
     }
 

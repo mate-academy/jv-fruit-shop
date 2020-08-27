@@ -10,11 +10,10 @@ import org.junit.Before;
 import org.junit.Test;
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ShopTest {
-    private static final Fruit BANANA_FRUIT = new Fruit("banana", 100, LocalDate.now());
+    private static final Fruit BANANA_FRUIT = new Fruit("banana", LocalDate.now());
     private Shop shop;
 
     @Before
@@ -29,24 +28,24 @@ public class ShopTest {
 
     @Test(expected = RuntimeException.class)
     public void tradeNullTest() {
-        shop.trade(null, null);
+        shop.trade(null, null, 0);
     }
 
     @Test(expected = RuntimeException.class)
     public void tradingNullTest() {
-        shop.trade("q", BANANA_FRUIT);
+        shop.trade("q", BANANA_FRUIT, 100);
     }
 
     @Test
     public void tradingCorrectTest() {
-        shop.trade("s", BANANA_FRUIT);
+        shop.trade("s", BANANA_FRUIT, 100);
         int actualSizeBalanceStorage = shop.balanceStorage().size();
         Assert.assertEquals(1, actualSizeBalanceStorage);
     }
 
     @Test
     public void emptyBalanceStorageTest() {
-        List<Fruit> balanceStorage = shop.balanceStorage();
-        Assert.assertEquals(0, balanceStorage.size());
+        int actual = shop.balanceStorage().size();
+        Assert.assertEquals(0, actual);
     }
 }

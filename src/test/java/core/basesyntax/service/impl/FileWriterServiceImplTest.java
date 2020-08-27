@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FileWriterService;
 import org.junit.Assert;
@@ -22,12 +23,12 @@ public class FileWriterServiceImplTest {
 
     @Test
     public void normalWriteTest() {
-        List<Fruit> fruits = List.of(
-                new Fruit("banana", 100, LocalDate.now()),
-                new Fruit("orange", 100, LocalDate.now()),
-                new Fruit("kiwi", 100, LocalDate.now()),
-                new Fruit("apple", 100, LocalDate.now()),
-                new Fruit("pineapple", 100, LocalDate.now()));
+        List<Storage.FruitBox> fruits = List.of(
+                new Storage.FruitBox(new Fruit("banana", LocalDate.now()), 100),
+                new Storage.FruitBox(new Fruit("orange", LocalDate.now()), 100),
+                new Storage.FruitBox(new Fruit("apple", LocalDate.now()), 100),
+                new Storage.FruitBox(new Fruit("kiwi", LocalDate.now()), 100),
+                new Storage.FruitBox(new Fruit("pineapple", LocalDate.now()), 100));
         writer.write(fruits, "src/test/resources/normalWriteTest.csv");
         try {
             List<String> expected = new ArrayList<>(Files.readAllLines(Path.of("src/test/resources/expectedFile.csv")));

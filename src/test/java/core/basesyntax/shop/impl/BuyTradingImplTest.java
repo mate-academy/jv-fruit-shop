@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 
 public class BuyTradingImplTest {
-    private static final Fruit BANANA_FRUIT = new Fruit("banana", 100, LocalDate.now());
+    private static final Fruit BANANA_FRUIT = new Fruit("banana", LocalDate.now());
     private static Trading buyTrading;
     private static Storage storage;
 
@@ -27,10 +27,10 @@ public class BuyTradingImplTest {
 
     @Test
     public void buyFruitTest() {
-        storage.add(BANANA_FRUIT);
-        buyTrading.trade(BANANA_FRUIT);
-        Fruit expectedFruit = new Fruit("banana", 0, BANANA_FRUIT.getShelfLife());
-        Fruit actualFruit = storage.getByName(BANANA_FRUIT.getName());
+        storage.add(BANANA_FRUIT, 100);
+        buyTrading.trade(BANANA_FRUIT, 100);
+        Fruit expectedFruit = new Fruit("banana", BANANA_FRUIT.getShelfLife());
+        Fruit actualFruit = storage.getAll().get(0).getFruit();
         int actualSize = storage.size();
         Assert.assertEquals(expectedFruit, actualFruit);
         Assert.assertEquals(1, actualSize);
@@ -38,11 +38,11 @@ public class BuyTradingImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void buyFruitWhenStorageEmptyTest() {
-        buyTrading.trade(BANANA_FRUIT);
+        buyTrading.trade(BANANA_FRUIT, 100);
     }
 
     @Test(expected = NullPointerException.class)
     public void buyFruitNullTest() {
-        buyTrading.trade( null);
+        buyTrading.trade( null, 0);
     }
 }

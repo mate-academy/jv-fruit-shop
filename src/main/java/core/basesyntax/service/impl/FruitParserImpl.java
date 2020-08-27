@@ -1,23 +1,22 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitParser;
-import java.security.InvalidParameterException;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class FruitParserImpl implements FruitParser {
     @Override
-    public Fruit parse(List<String> params) {
-        if (params == null) {
-            throw new NullPointerException("Passed parameter is null");
+    public List<Fruit> parse(List<FruitDto> data) {
+        if (data == null || data.isEmpty()) {
+            throw new NoSuchElementException();
         }
-        if (params.size() != 4) {
-            throw new InvalidParameterException("Wrong number of parameters passed");
+        List<Fruit> fruits = new ArrayList<>();
+        for (FruitDto fruitDto : data) {
+            fruits.add(new Fruit(fruitDto.getName(), fruitDto.getShelfLife()));
         }
-        String name = params.get(1);
-        int quantity = Integer.parseInt(params.get(2));
-        LocalDate shelfLife = LocalDate.parse(params.get(3));
-        return new Fruit(name, quantity, shelfLife);
+        return fruits;
     }
 }
