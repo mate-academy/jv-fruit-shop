@@ -1,9 +1,8 @@
 package core.basesyntax.products;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
-
 import java.time.LocalDate;
 
 public class FruitTest {
@@ -11,29 +10,29 @@ public class FruitTest {
     private static final String NAME_ORANGE = "Orange";
     private static final int AMOUNT_10 = 10;
     private static final int AMOUNT_20 = 20;
-    private static final LocalDate LOCAL_DATE_BEFORE = LocalDate.ofEpochDay(2020 - 10 - 17);
-    private static final LocalDate LOCAL_DATE_AFTER = LocalDate.ofEpochDay(2025 - 12 - 11);
+    private static final LocalDate LOCAL_DATE_BEFORE = LocalDate.of(2020,10,17);
+    private static final LocalDate LOCAL_DATE_AFTER = LocalDate.of(2025,12,11);
     private static Fruit testFruit;
 
-    @BeforeClass
-    public static void setUp() {
+    @Before
+    public void setUp() {
         testFruit = new Fruit(NAME_BANANA, AMOUNT_10, LOCAL_DATE_BEFORE);
     }
 
     @Test
     public void getName() {
-        Assert.assertEquals(testFruit.getName(),NAME_BANANA);
+        Assert.assertEquals(testFruit.getName(), NAME_BANANA);
     }
 
     @Test
     public void setName() {
         testFruit.setName(NAME_ORANGE);
-        Assert.assertEquals(NAME_ORANGE,testFruit.getName());
+        Assert.assertEquals(NAME_ORANGE, testFruit.getName());
     }
 
     @Test
     public void getAmount() {
-        Assert.assertEquals(testFruit.getAmount(), AMOUNT_10);
+        Assert.assertEquals(AMOUNT_10, testFruit.getAmount());
     }
 
     @Test
@@ -44,12 +43,12 @@ public class FruitTest {
 
     @Test
     public void getDate() {
-        Assert.assertEquals(LOCAL_DATE_BEFORE, testFruit.getDate());
+        Assert.assertEquals(LOCAL_DATE_BEFORE, testFruit.getExpirationDate());
     }
 
     @Test
     public void setDate() {
-        testFruit.setDate(LOCAL_DATE_AFTER);
-        Assert.assertEquals(LOCAL_DATE_AFTER, testFruit.getDate());
+        testFruit.setExpirationDate(LOCAL_DATE_AFTER);
+        Assert.assertEquals(LOCAL_DATE_AFTER, testFruit.getExpirationDate());
     }
 }

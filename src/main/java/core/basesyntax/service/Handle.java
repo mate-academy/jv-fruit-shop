@@ -16,6 +16,9 @@ public class Handle {
 
     public boolean operationWithProduct(List<FruitDto> fruitDtoList) {
         for (FruitDto dto : fruitDtoList) {
+            if (handleCheck.containsKey(dto.getOperation()) == false) {
+                throw new IllegalArgumentException("Not correct operation " + dto.getOperation());
+            }
             Fruit fruit = new Fruit();
             fruit.setName(dto.getName());
             fruit.setAmount(1);

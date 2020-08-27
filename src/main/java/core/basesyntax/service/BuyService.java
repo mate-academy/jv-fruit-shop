@@ -16,11 +16,11 @@ public class BuyService implements ServiceAble {
                 .mapToInt(Fruit::getAmount)
                 .sum();
         if (numNeededFruit > sumAvailable) {
-            throw new IllegalArgumentException("Wrong number of fruits");
+            throw new IllegalArgumentException("Wrong number or date of fruits");
         }
         ListStorage.listStorage.sort(Comparator.comparing(Fruit::getExpirationDate));
         for (int i = 0; i < numNeededFruit; i++) {
-            ListStorage.listStorage.remove(i);
+            ListStorage.listStorage.remove(0);
         }
     }
 }

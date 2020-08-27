@@ -1,6 +1,7 @@
 package core.basesyntax.products;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Fruit {
     private String name;
@@ -39,6 +40,23 @@ public class Fruit {
     public void setExpirationDate(LocalDate expirationDate) {
         this.expirationDate = expirationDate;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Fruit fruit = (Fruit) obj;
+        return amount == fruit.amount
+                && Objects.equals(name, fruit.name)
+                && Objects.equals(expirationDate, fruit.expirationDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, amount, expirationDate);
+    }
 }
-
-

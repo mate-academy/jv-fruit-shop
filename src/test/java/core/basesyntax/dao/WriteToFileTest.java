@@ -3,9 +3,8 @@ package core.basesyntax.dao;
 import core.basesyntax.products.Fruit;
 import core.basesyntax.storage.ListStorage;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,15 +15,15 @@ public class WriteToFileTest {
     private static final String TEST_STRING = "fruit,quantity" + System.lineSeparator() +
             "banana,3" + System.lineSeparator();
     private static final String FILE_DEST_TEST_5 = "src/test/resources/Test_5.csv";
-    private static final LocalDate FIRST_DATE = LocalDate.ofEpochDay(2020 - 12 - 12);
-    private static final LocalDate SECOND_DATE = LocalDate.ofEpochDay(2020 - 11 - 21);
+    private static final LocalDate FIRST_DATE = LocalDate.of(2020, 12, 12);
+    private static final LocalDate SECOND_DATE = LocalDate.of(2020, 11, 21);
     private static final Path FILE_DEST_TEST_3 = Paths.get("src/test/resources/Test_3.csv");
     private static final Path FILE_DEST_TEST_4 = Paths.get("src/test/resources/Test_4.csv");
     private static final Fruit FRUIT_FIRST = new Fruit();
     private static final Fruit FRUIT_SECOND = new Fruit();
 
-    @BeforeClass
-    public static void setUpClass() {
+    @Before
+    public void setUpClass() {
         FRUIT_FIRST.setName("banana");
         FRUIT_FIRST.setAmount(1);
         FRUIT_FIRST.setExpirationDate(FIRST_DATE);
