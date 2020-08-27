@@ -9,7 +9,7 @@ public class ShopInterfaceStrategy {
     private static final String ACTION_BUY = "b";
     private static final String ACTION_SUPPLY = "s";
     private static final String ACTION_RETURN = "r";
-    private final Map <String, ActionInterface>interfaceMap;
+    private final Map<String, ActionInterface> interfaceMap;
 
     public ShopInterfaceStrategy() {
         interfaceMap = new HashMap<>();
@@ -19,7 +19,7 @@ public class ShopInterfaceStrategy {
     }
 
     public ActionInterface get(String strategy) {
-        if(interfaceMap.containsKey(strategy)){
+        if (interfaceMap.containsKey(strategy)) {
             return interfaceMap.get(strategy);
         }
         return null;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private List<Fruit> fruits = new ArrayList<>();;
+    private List<Fruit> fruits = new ArrayList<>();
 
     public List<Fruit> getFruits() {
         return fruits;

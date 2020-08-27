@@ -1,13 +1,9 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.services.FruitParse;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
