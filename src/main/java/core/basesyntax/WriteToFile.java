@@ -23,7 +23,7 @@ public class WriteToFile {
             }
             formattedData.append(fruit).append(',').append(fruitInstanceSum).append('\n');
         }
-        writer.write(formattedData.deleteCharAt(formattedData.length() - 1).toString());
+        writer.write(formattedData.toString());
         writer.close();
     }
 }
