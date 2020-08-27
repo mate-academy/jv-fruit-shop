@@ -48,8 +48,9 @@ public class FruitShop {
                         }
                     });
 
+            nFile.write("fruit,quantity\n");
             for (Map.Entry<String, Integer> entry : map.entrySet()) {
-                nFile.write(entry.getKey()+"="+entry.getValue()+"\n");
+                nFile.write(entry.getKey()+","+entry.getValue()+"\n");
             }
             nFile.close();
 

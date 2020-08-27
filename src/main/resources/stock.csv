@@ -1,3 +1,4 @@
-banana=240
-orange=50
-apple=50
+fruit,quantity
+banana,240
+orange,50
+apple,50
