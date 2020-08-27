@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class FruitDto {
     String transaction;
@@ -38,5 +39,25 @@ public class FruitDto {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitDto fruitDto = (FruitDto) o;
+        return Objects.equals(transaction, fruitDto.transaction)
+                && Objects.equals(fruitType, fruitDto.fruitType)
+                && quantity == fruitDto.quantity
+                && Objects.equals(date, fruitDto.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }
