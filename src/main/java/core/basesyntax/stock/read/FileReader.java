@@ -1,7 +1,7 @@
-package core.basesyntax.read;
+package core.basesyntax.stock.read;
 
 import java.util.List;
 
-public interface FileServiceInt {
+public interface FileReader {
     List<String> readFile(String filePath);
 }

@@ -1,12 +1,10 @@
-package core.basesyntax;
+package core.basesyntax.stock.manipulation;
 
-import core.basesyntax.dao.OrderDao;
-import core.basesyntax.operation.Supply;
-
+import core.basesyntax.stock.order.Order;
 import java.util.List;
 
-public class Sum {
-    public int sum(List<Supply> supplyList, String fruit) {
+public class GetTotalSumOfFruit {
+    public int sum(List<Order> supplyList, String fruit) {
         return supplyList.stream()
                 .filter(x -> x.getTypeOfFruit().equals(fruit))
                 .map(x -> x.getTypeOfOperation().equals("b")

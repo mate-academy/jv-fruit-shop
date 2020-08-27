@@ -1,14 +1,12 @@
-package core.basesyntax.read;
+package core.basesyntax.stock.read;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
-public class FileServiceImp implements FileServiceInt {
+public class ReadFile implements FileReader {
     @Override
     public List<String> readFile(String filePath) {
         Path path = Paths.get(filePath);
@@ -17,6 +15,9 @@ public class FileServiceImp implements FileServiceInt {
             strings = Files.readAllLines(path);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        if (strings != null && strings.size() != 0) {
+            strings.remove(0);
         }
         return strings;
     }
