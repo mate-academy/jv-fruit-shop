@@ -16,6 +16,7 @@ public class FruitShopApplication {
         List<Record> recordList = recordParserService.parseRecords(stringList);
 
         Storage storage = new Storage();
+
         ProductCalculatorService productCalculatorService = new ProductCalculatorService(storage);
         productCalculatorService.calculateBalance(recordList);
 
