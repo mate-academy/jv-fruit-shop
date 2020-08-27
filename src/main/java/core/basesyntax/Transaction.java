@@ -17,31 +17,11 @@ public class Transaction {
         return action;
     }
 
-    public void setAction(String action) {
-        this.action = action;
-    }
-
     public String getFruit() {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
     public String getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 }
