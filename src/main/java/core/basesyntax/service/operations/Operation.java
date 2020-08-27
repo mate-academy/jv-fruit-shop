@@ -1,12 +1,12 @@
 package core.basesyntax.service.operations;
 
-import core.basesyntax.controller.ControllerDao;
-import core.basesyntax.controller.ControllerDaoImpl;
+import core.basesyntax.controller.StorageService;
+import core.basesyntax.controller.StorageServiceImpl;
 import core.basesyntax.model.Product;
 import java.util.List;
 
 public interface Operation {
-    ControllerDao<Product> controllerDao = new ControllerDaoImpl();
+    StorageService<Product> STORAGE_SERVICE = new StorageServiceImpl();
 
     boolean updateStorage(List<Product> product);
 }

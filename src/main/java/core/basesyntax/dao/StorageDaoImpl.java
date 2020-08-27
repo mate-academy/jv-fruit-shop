@@ -8,22 +8,22 @@ import java.util.Optional;
 public class StorageDaoImpl implements StorageDao<Product> {
     @Override
     public boolean put(Product value) {
-        boolean successOperation = Storage.FRUIT_LIST.add(value);
+        boolean successOperation = Storage.getFruitList().add(value);
         Storage.sortList();
         return successOperation;
     }
 
     @Override
-    public Optional<Product> remove(int index) {
-        Product returnedValue = Storage.FRUIT_LIST.remove(index);
+    public Optional<Product> retrieve(int index) {
+        Product returnedValue = Storage.getFruitList().remove(index);
         Storage.sortList();
         return Optional.ofNullable(returnedValue);
     }
 
     @Override
     public List<Product> getAll() {
-        return Storage.FRUIT_LIST.isEmpty()
+        return Storage.getFruitList().isEmpty()
                 ? Collections.emptyList()
-                : Storage.FRUIT_LIST;
+                : Storage.getFruitList();
     }
 }

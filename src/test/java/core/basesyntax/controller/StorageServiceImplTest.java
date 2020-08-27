@@ -5,21 +5,21 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class ControllerDaoImplTest {
-    private static ControllerDao<Product> controllerDao;
+public class StorageServiceImplTest {
+    private static StorageService<Product> storageService;
 
     @BeforeClass
     public static void initialCsvUtils() {
-        controllerDao = new ControllerDaoImpl();
+        storageService = new StorageServiceImpl();
     }
 
     @Test
     public void shouldReturnFalseWhenNullParameter() {
-        Assert.assertFalse(controllerDao.put(null));
+        Assert.assertFalse(storageService.put(null));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenMinusParameter() {
-        controllerDao.get(-1);
+        storageService.retrieve(-1);
     }
 }

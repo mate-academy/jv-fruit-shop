@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface StorageDao<T> {
     boolean put(T value);
 
-    Optional<T> remove(int index);
+    Optional<T> retrieve(int index);
 
     List<T> getAll();
 }

@@ -8,6 +8,6 @@ public class Supply implements Operation {
     @Override
     public boolean updateStorage(List<Product> products) {
         return IntStream.range(0, products.size())
-                .allMatch(i -> controllerDao.put(products.get(i)));
+                .allMatch(i -> STORAGE_SERVICE.put(products.get(i)));
     }
 }

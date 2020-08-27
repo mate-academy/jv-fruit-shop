@@ -5,10 +5,10 @@ import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Product;
 import java.util.List;
 
-public class ControllerDaoImpl implements ControllerDao<Product> {
+public class StorageServiceImpl implements StorageService<Product> {
     private StorageDao<Product> storageDao;
 
-    public ControllerDaoImpl() {
+    public StorageServiceImpl() {
         this.storageDao = new StorageDaoImpl();
     }
 
@@ -21,12 +21,12 @@ public class ControllerDaoImpl implements ControllerDao<Product> {
     }
 
     @Override
-    public Product get(int index) {
+    public Product retrieve(int index) {
         if (storageDao.getAll().size() <= index
                 || index < 0) {
             throw new IllegalArgumentException();
         }
-        return storageDao.remove(index).orElseThrow();
+        return storageDao.retrieve(index).orElseThrow();
     }
 
     @Override
