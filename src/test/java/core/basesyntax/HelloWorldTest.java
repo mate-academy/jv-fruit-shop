@@ -349,8 +349,4 @@ public class HelloWorldTest {
         Assert.assertEquals(expected.get(0), actual.get(0));
         Assert.assertEquals(expected.get(1), actual.get(1));
     }
-
-    @Test
-    public void testMain() {
-    }
 }
