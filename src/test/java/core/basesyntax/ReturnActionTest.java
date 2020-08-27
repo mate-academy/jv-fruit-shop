@@ -19,7 +19,7 @@ public class ReturnActionTest {
     public void returnActionOk() {
         Map<String, Integer> actual = Store.fruits;
         ActionsWithFruits returnAction = new ReturnAction();
-        returnAction.actionWithStorage(new Transaction("s", "banana", "120", "2020-10-17"));
+        returnAction.applyAction(new Transaction("s", "banana", "120", "2020-10-17"));
 
         Assert.assertEquals(120, (int) actual.get("banana"));
     }
@@ -27,6 +27,6 @@ public class ReturnActionTest {
     @Test(expected = RuntimeException.class)
     public void returnWithNegativeNum() {
         ActionsWithFruits returnAction = new ReturnAction();
-        returnAction.actionWithStorage(new Transaction("s", "banana", "-120", "2020-10-17"));
+        returnAction.applyAction(new Transaction("s", "banana", "-120", "2020-10-17"));
     }
 }

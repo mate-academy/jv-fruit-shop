@@ -19,7 +19,7 @@ public class FileWriteServiceImpl implements FileWriteService {
                 fileWriter.write(entry.getKey() + ", " + entry.getValue() + "\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Unable to create file");
         }
         return true;
     }

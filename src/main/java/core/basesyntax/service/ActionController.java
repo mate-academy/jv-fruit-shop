@@ -16,8 +16,8 @@ public class ActionController {
         transfer.put("r", new ReturnAction());
     }
 
-    public void controller(Transaction transaction) {
+    public void distributeActions(Transaction transaction) {
         ActionsWithFruits action = transfer.get(transaction.getAction());
-        action.actionWithStorage(transaction);
+        action.applyAction(transaction);
     }
 }

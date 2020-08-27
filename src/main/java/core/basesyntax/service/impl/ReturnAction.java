@@ -6,7 +6,7 @@ import core.basesyntax.service.ActionsWithFruits;
 
 public class ReturnAction implements ActionsWithFruits {
     @Override
-    public void actionWithStorage(Transaction transaction) {
+    public void applyAction(Transaction transaction) {
         String fruit = transaction.getFruit();
         String quantity = transaction.getQuantity();
         if (Integer.parseInt(quantity) < 0) {

@@ -14,7 +14,7 @@ public class Main {
 
         ActionController actionController = new ActionController();
         for (Transaction item : data) {
-            actionController.controller(item);
+            actionController.distributeActions(item);
         }
 
         FileWriteService fileWriteService = new FileWriteServiceImpl();
