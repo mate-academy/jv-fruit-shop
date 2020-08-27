@@ -7,20 +7,23 @@ import java.time.LocalDate;
 
 public class WriteToFile {
     private static final String OUTPUT_FILE_HEADER = "fruit,quantity\n";
+    private final String outputFilePath;
 
-    public void csvFileWriter(String fileToSavePath, String updateFromFile) throws IOException {
-        StorageUpdater updater = new StorageUpdaterImpl();
-        updater.parseData(updateFromFile);
-        PrintWriter writer = new PrintWriter(new File(fileToSavePath));
+    public WriteToFile(String outputFilePath) {
+        this.outputFilePath = outputFilePath;
+    }
+
+    public void csvFileWriter() throws IOException {
+        PrintWriter writer = new PrintWriter(new File(outputFilePath));
         StringBuilder formattedData = new StringBuilder(OUTPUT_FILE_HEADER);
-        for (String fruit : Storage.fruitsInStore.keySet()) {
+        for (String fruit : Storage.getAllFruits().keySet()) {
             int fruitInstanceSum = 0;
-            for (LocalDate expirationDate : Storage.fruitsInStore.get(fruit).keySet()) {
-                fruitInstanceSum += Storage.fruitsInStore.get(fruit).get(expirationDate);
+            for (LocalDate expirationDate : Storage.getFruit(fruit).keySet()) {
+                fruitInstanceSum += Storage.getFruit(fruit).get(expirationDate);
             }
             formattedData.append(fruit).append(',').append(fruitInstanceSum).append('\n');
         }
-        writer.write(formattedData.deleteCharAt(formattedData.length() - 1).toString());
+        writer.write(formattedData.toString());
         writer.close();
     }
 }

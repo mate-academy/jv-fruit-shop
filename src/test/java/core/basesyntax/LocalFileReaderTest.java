@@ -7,13 +7,18 @@ import java.io.IOException;
 import java.util.*;
 
 public class LocalFileReaderTest {
-    private static final String EMPTY_FILE = "test1.csv";
     private static final String EMPTY_FILE_NAME = "";
     private static final String NULL_FILE_NAME = null;
-    private static final String JUST_HEADER_FILE = "test2.csv";
-    private static final String WRONG_EXTENSION_FILE = "test3.txt";
-    private static final String APPROPRIATE_DATA_FILE = "test6.csv";
-    private static final String NON_EXISTENT_FILE_NAME = "test3.csv";
+    private static final String EMPTY_FILE = "src\\test\\resources\\test1.csv";
+    private static final String NO_HEADER_FILE = "src\\test\\resources\\test4.csv";
+    private static final String WRONG_DATE_FILE = "src\\test\\resources\\test9.csv";
+    private static final String JUST_HEADER_FILE = "src\\test\\resources\\test2.csv";
+    private static final String WRONG_QUANTITY_FILE = "src\\test\\resources\\test8.csv";
+    private static final String INCOMPLETE_DATA_FILE = "src\\test\\resources\\test10.csv";
+    private static final String WRONG_EXTENSION_FILE = "src\\test\\resources\\test3.txt";
+    private static final String APPROPRIATE_DATA_FILE = "src\\test\\resources\\test6.csv";
+    private static final String NON_EXISTENT_FILE_NAME = "src\\test\\resources\\test3.csv";
+    private static final String WRONG_OPERATION_TYPE_FILE = "src\\test\\resources\\test7.csv";
 
     private static final List<List<String>> EMPTY_LIST_RESULT = new ArrayList<>();
     private static final List<List<String>> ONLY_HEADER_RESULT = new ArrayList<>();
@@ -32,30 +37,30 @@ public class LocalFileReaderTest {
 
     @Test
     public void getOnlyHeaderFromFile() throws IOException {
-        LocalFileReader reader = new LocalFileReader();
-        List<List<String>> actualResult = reader.readFromFile(JUST_HEADER_FILE);
+        LocalFileReader reader = new LocalFileReader(JUST_HEADER_FILE);
+        List<List<String>> actualResult = reader.readFromFile();
         Assert.assertEquals(ONLY_HEADER_RESULT, actualResult);
     }
 
     @Test
     public void readFromEmptyFile() throws IOException {
-        LocalFileReader reader = new LocalFileReader();
-        List<List<String>> actualResult = reader.readFromFile(EMPTY_FILE);
+        LocalFileReader reader = new LocalFileReader(EMPTY_FILE);
+        List<List<String>> actualResult = reader.readFromFile();
         Assert.assertEquals(EMPTY_LIST_RESULT, actualResult);
     }
 
     @Test
-    public void readFilledWithDataFile() throws IOException {
-        LocalFileReader reader = new LocalFileReader();
-        List<List<String>> actualResult = reader.readFromFile(APPROPRIATE_DATA_FILE);
+    public void readProperDataFile() throws IOException {
+        LocalFileReader reader = new LocalFileReader(APPROPRIATE_DATA_FILE);
+        List<List<String>> actualResult = reader.readFromFile();
         Assert.assertEquals(PROPER_DATA_RESULT, actualResult);
     }
 
     @Test
     public void getExceptionWhenFileWrongExtension() throws IOException {
-        LocalFileReader reader = new LocalFileReader();
+        LocalFileReader reader = new LocalFileReader(EMPTY_FILE_NAME);
         try {
-            reader.readFromFile(EMPTY_FILE_NAME);
+            reader.readFromFile();
         } catch (IllegalArgumentException message) {
             return;
         }
@@ -64,9 +69,9 @@ public class LocalFileReaderTest {
 
     @Test
     public void getExceptionWhenFileNameEmpty() throws IOException {
-        LocalFileReader reader = new LocalFileReader();
+        LocalFileReader reader = new LocalFileReader(WRONG_EXTENSION_FILE);
         try {
-            reader.readFromFile(WRONG_EXTENSION_FILE);
+            reader.readFromFile();
         } catch (IllegalArgumentException message) {
             return;
         }
@@ -75,9 +80,9 @@ public class LocalFileReaderTest {
 
     @Test
     public void getExceptionForNullFileName() throws IOException {
-        LocalFileReader reader = new LocalFileReader();
+        LocalFileReader reader = new LocalFileReader(NULL_FILE_NAME);
         try {
-            reader.readFromFile(NULL_FILE_NAME);
+            reader.readFromFile();
         } catch (IllegalArgumentException message) {
             return;
         }
@@ -86,12 +91,67 @@ public class LocalFileReaderTest {
 
     @Test
     public void getExceptionWhenFileNotExist() throws IOException {
-        LocalFileReader reader = new LocalFileReader();
+        LocalFileReader reader = new LocalFileReader(NON_EXISTENT_FILE_NAME);
         try {
-            reader.readFromFile(NON_EXISTENT_FILE_NAME);
+            reader.readFromFile();
         } catch (FileNotFoundException message) {
             return;
         }
         Assert.fail("FileNotFoundException should be thrown");
+    }
+
+    @Test
+    public void getExceptionWhenWrongHeader() throws IOException {
+        LocalFileReader reader = new LocalFileReader(NO_HEADER_FILE);
+        try {
+            reader.readFromFile();
+        } catch (IllegalFormatFlagsException message) {
+            return;
+        }
+        Assert.fail("IllegalFormatFlagsException should be thrown");
+    }
+
+    @Test
+    public void getExceptionWhenOperationIncompatible() throws IOException {
+        LocalFileReader reader = new LocalFileReader(WRONG_OPERATION_TYPE_FILE);
+        try {
+            reader.readFromFile();
+        } catch (IllegalFormatException message) {
+            return;
+        }
+        Assert.fail("IllegalArgumentException should be thrown");
+    }
+
+    @Test
+    public void getExceptionWhenQuantityIncompatible() throws IOException {
+        LocalFileReader reader = new LocalFileReader(WRONG_QUANTITY_FILE);
+        try {
+            reader.readFromFile();
+        } catch (IllegalArgumentException message) {
+            return;
+        }
+        Assert.fail("IllegalArgumentException should be thrown");
+    }
+
+    @Test
+    public void getExceptionWhenDateIncompatible() throws IOException {
+        LocalFileReader reader = new LocalFileReader(WRONG_DATE_FILE);
+        try {
+            reader.readFromFile();
+        } catch (IllegalArgumentException message) {
+            return;
+        }
+        Assert.fail("IllegalArgumentException should be thrown");
+    }
+
+    @Test
+    public void getExceptionWhenDataIncomplete() throws IOException {
+        LocalFileReader reader = new LocalFileReader(INCOMPLETE_DATA_FILE);
+        try {
+            reader.readFromFile();
+        } catch (IllegalArgumentException message) {
+            return;
+        }
+        Assert.fail("IllegalArgumentException should be thrown");
     }
 }

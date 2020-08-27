@@ -13,11 +13,16 @@ import java.util.List;
 public class LocalFileReader {
     private static final String COMMA_DELIMITER = ",";
     private static final String[] FILE_HEADER = new String[]{"type", "fruit", "quantity", "date"};
+    private final String filePath;
 
-    public List<List<String>> readFromFile(String fileName) throws IOException {
-        validateFilePath(fileName);
+    public LocalFileReader(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public List<List<String>> readFromFile() throws IOException {
+        validateFilePath(filePath);
         List<List<String>> fileData = new ArrayList<>();
-        try (BufferedReader textHolder = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader textHolder = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = textHolder.readLine()) != null) {
                 String[] lineFromFile = line.split(COMMA_DELIMITER);
@@ -38,11 +43,11 @@ public class LocalFileReader {
         }
     }
 
-    public boolean checkDataFormat(String[] lineFromFile, List<List<String>> fileData) {
+    private void checkDataFormat(String[] lineFromFile, List<List<String>> fileData) {
         if (fileData.isEmpty() && !Arrays.equals(FILE_HEADER, lineFromFile)) {
             throw new IllegalFormatFlagsException("File header doesn't satisfy specified format");
         } else if (fileData.isEmpty()) {
-            return true;
+            return;
         }
         if (!StoreOperations.AVAILABLE_OPERATIONS.containsKey(lineFromFile[0])) {
             throw new IllegalFormatFlagsException("File provides unsupported operation type");
@@ -50,9 +55,9 @@ public class LocalFileReader {
         try {
             int fruitAmount = Integer.parseInt(lineFromFile[2]);
             LocalDate date = LocalDate.parse(lineFromFile[3]);
-        } catch (NumberFormatException | DateTimeParseException | ArrayIndexOutOfBoundsException message) {
+        } catch (NumberFormatException | DateTimeParseException
+                | ArrayIndexOutOfBoundsException message) {
             throw new IllegalArgumentException("File provides wrong data format");
         }
-        return true;
     }
 }
