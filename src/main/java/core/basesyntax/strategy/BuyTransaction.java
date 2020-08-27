@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.FruitStorage;
 import core.basesyntax.FruitBatch;
 import core.basesyntax.FruitDto;
+import core.basesyntax.FruitStorage;
 import java.time.LocalDate;
 import java.util.Map;
 
