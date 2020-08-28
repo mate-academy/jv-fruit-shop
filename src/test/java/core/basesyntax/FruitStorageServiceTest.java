@@ -17,10 +17,10 @@ public class FruitStorageServiceTest {
 
     @Test
     public void addTest() {
-        List<Transaction> testList = new ArrayList<>();
-        testList.add(transaction);
+        List<Transaction> expected = new ArrayList<>();
+        expected.add(transaction);
         fruitStorageService.addToStorage(transaction);
-        Assert.assertEquals(testList, fruitStorage.getStorage());
+        Assert.assertEquals(expected, fruitStorage.getStorage());
     }
 
     @After
@@ -37,7 +37,7 @@ public class FruitStorageServiceTest {
     }
 
     @AfterClass
-    public static void Clear() {
+    public static void clear() {
         FruitStorage fruitStorage = new FruitStorage();
         fruitStorage.getStorage().clear();
     }

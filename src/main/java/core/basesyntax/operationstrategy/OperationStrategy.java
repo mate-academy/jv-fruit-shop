@@ -18,10 +18,10 @@ public class OperationStrategy {
         operationStrategy.put("r", new Return());
     }
 
-    public void operation(Map<String,Integer> fruitDao, List<Transaction> transactionList) {
+    public void operation(Map<String, Integer> fruitMap, List<Transaction> transactionList) {
         for (Transaction transaction : transactionList) {
             Operation op = operationStrategy.get(transaction.getOperation());
-            op.operation(fruitDao, transaction);
+            op.operation(fruitMap, transaction);
         }
     }
 }

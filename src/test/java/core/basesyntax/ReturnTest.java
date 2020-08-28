@@ -24,7 +24,7 @@ public class ReturnTest {
     }
 
     @Test
-    public void supplyTest() {
+    public void returnTest() {
         fruitDao.put("banana", 355);
         expected.put("banana", 870);
         returnTest.operation(fruitDao, transaction);

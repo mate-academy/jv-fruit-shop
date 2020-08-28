@@ -27,13 +27,13 @@ public class WriteToFileTest {
         output.put("kiwi", 150);
         output.put("blackberries", 400);
         output.put("apricots", 200);
-        writer.writeToFile(output,"src/main/resources/output.csv");
+        writer.writeToFile(output,"src/test/resources/output.csv");
 
         try {
             List<String> expected = null;
-            expected = new ArrayList<>(Files.readAllLines(Path.of("src/main/resources/expected.csv")));
+            expected = new ArrayList<>(Files.readAllLines(Path.of("src/test/resources/expected.csv")));
             List<String> actual = null;
-            actual = new ArrayList<>(Files.readAllLines(Path.of("src/main/resources/output.csv")));
+            actual = new ArrayList<>(Files.readAllLines(Path.of("src/test/resources/output.csv")));
             Assert.assertEquals(expected, actual);
         } catch (IOException e) {
             e.printStackTrace();

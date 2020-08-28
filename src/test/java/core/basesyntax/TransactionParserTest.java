@@ -1,6 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.fileservice.ReadFileService;
+import core.basesyntax.fileservice.ReadFile;
+import core.basesyntax.fileservice.TransactionParser;
 import core.basesyntax.fruitservice.FruitStorage;
 import core.basesyntax.fruitservice.Transaction;
 import org.junit.AfterClass;
@@ -11,14 +12,16 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFileServiceTest {
-    private static ReadFileService reader;
-    private static FruitStorage fruitStorage;
+public class TransactionParserTest {
+    private static TransactionParser transactionParser;
+    private static List<Transaction> transactions;
+    private static ReadFile readFile;
 
     @BeforeClass
     public static void setup() {
-        reader = new ReadFileService();
-        fruitStorage = new FruitStorage();
+        transactionParser = new TransactionParser();
+        transactions = new ArrayList<>();
+        readFile = new ReadFile();
     }
 
     @Test
@@ -32,18 +35,7 @@ public class ReadFileServiceTest {
         expected.add(Transaction.build("s", "blackberries","40","2020-11-15"));
         expected.add(Transaction.build("b", "blackberries","15","2020-10-23"));
         expected.add(Transaction.build("r", "blackberries","5","2020-12-10"));
-
-        reader.parseInput("src/main/resources/input.csv");
-        Assert.assertEquals(expected, fruitStorage.getStorage());
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void wrongPath() {
-        reader.parseInput("src/main/resources/inputt.csv");
-    }
-
-    @AfterClass
-    public static void Clear() {
-        fruitStorage.getStorage().clear();
+        transactions.addAll(transactionParser.parseDate(readFile.read("src/test/resources/input.csv")));
+        Assert.assertEquals(expected, transactions);
     }
 }
