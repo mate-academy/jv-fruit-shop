@@ -14,9 +14,9 @@ public class ApplicationTest {
 
     @Test
     public void checkGetListFromInputFileCorrect() {
-        List<String> expected = List.of("    s,banana,100,2020-10-17\n" +
-                "    b,banana,13,2020-10-15\n" +
-                "    r,banana,10,2020-10-17 ");
+        List<String> expected = List.of("    s,banana,100,2020-10-17\n"
+                ,"    b,banana,13,2020-10-15\n"
+                ,"    r,banana,10,2020-10-17\n");
         SERVICE.setFileName(CORRECT_FILE_OUT);
         List<String> actual = SERVICE.readFile();
         Assert.assertEquals(3, actual.size());

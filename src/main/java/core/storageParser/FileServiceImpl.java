@@ -56,7 +56,7 @@ public class FileServiceImpl implements FileService {
         String line = "";
         try (BufferedReader br = new BufferedReader(new FileReader(fullPath))) {
             while ((line = br.readLine()) != null) {
-                lines.add(line);
+                lines.add(line + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
