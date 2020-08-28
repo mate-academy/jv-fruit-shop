@@ -16,11 +16,6 @@ public class WriteFileTest {
         fileWriteService = new WriteFileServiceImpl();
     }
 
-    @BeforeClass
-    public static void beforeClass() {
-        FruitStore.fruitStorage.clear();
-    }
-
     @Test
     public void fileWriteWithEmptyMap() {
         Map<String, Integer> testMap = new HashMap<>();
@@ -28,7 +23,7 @@ public class WriteFileTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void fileWriteWithNullArgument() {
+    public void checkFileWriteWithNullArgument() {
         fileWriteService.writeFile(null);
     }
 }
