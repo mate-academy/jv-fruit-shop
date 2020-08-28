@@ -14,11 +14,6 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitStoreApplication {
-    public static void main(String[] args) throws IOException {
-        Storage storage = new Storage();
-        String file = "File2.csv";
-        makeReport(file);
-    }
 
     public static void makeReport(String file) throws IOException {
 
