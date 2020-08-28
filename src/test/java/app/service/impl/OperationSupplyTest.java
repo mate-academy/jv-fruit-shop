@@ -45,17 +45,17 @@ public class OperationSupplyTest {
 
     @Test
     public void testSupplyOk() {
-        int storageSize = FruitStorage.supplyFruits.size();
-        supply.doOperation(testValue.get(0));
-        supply.doOperation(testValue.get(1));
-        Assert.assertEquals(storageSize + 2, FruitStorage.supplyFruits.size());
+        int storageSize = FruitStorage.SUPPLY_FRUIT_BATCHES.size();
+        supply.execute(testValue.get(0));
+        supply.execute(testValue.get(1));
+        Assert.assertEquals(storageSize + 2, FruitStorage.SUPPLY_FRUIT_BATCHES.size());
     }
 
     @Test
     public void testSupplySameEndOfShelfLife() {
-        int storageSize = FruitStorage.supplyFruits.size();
-        supply.doOperation(testValue.get(2));
-        supply.doOperation(testValue.get(3));
-        Assert.assertEquals(storageSize + 1, FruitStorage.supplyFruits.size());
+        int storageSize = FruitStorage.SUPPLY_FRUIT_BATCHES.size();
+        supply.execute(testValue.get(2));
+        supply.execute(testValue.get(3));
+        Assert.assertEquals(storageSize + 1, FruitStorage.SUPPLY_FRUIT_BATCHES.size());
     }
 }

@@ -9,19 +9,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FileReadServiceImplementation implements FileReadService {
-    public static final String SEPARATOR_TO_SPLIT = ",";
+    private static final String SEPARATOR_TO_SPLIT = ",";
 
     @Override
     public List<List<String>> readFile(String filePath) {
         String line;
         List<List<String>> dataFromFile = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            br.readLine();
-            while ((line = br.readLine()) != null) {
+        try (BufferedReader bufferedReaderFile = new BufferedReader(new FileReader(filePath))) {
+            bufferedReaderFile.readLine();
+            while ((line = bufferedReaderFile.readLine()) != null) {
                 dataFromFile.add(Arrays.asList(line.split(SEPARATOR_TO_SPLIT)));
             }
         } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException("Unable to read file, reason: " + e.getMessage());
         }
         return dataFromFile;
     }

@@ -3,5 +3,5 @@ package app.service;
 import java.util.List;
 
 public interface Operation {
-    void doOperation(List<String> data);
+    void execute(List<String> data);
 }

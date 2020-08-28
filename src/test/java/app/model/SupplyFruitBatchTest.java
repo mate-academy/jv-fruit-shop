@@ -5,14 +5,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import java.time.LocalDate;
 
-public class SupplyFruitTest {
-    private static SupplyFruit firstBanana;
-    private static SupplyFruit secondBanana;
+public class SupplyFruitBatchTest {
+    private static SupplyFruitBatch firstBanana;
+    private static SupplyFruitBatch secondBanana;
 
     @BeforeClass
     public static void start() {
-        firstBanana = new SupplyFruit("banana", 100, LocalDate.parse("2020-08-27"));
-        secondBanana = new SupplyFruit("banana", 100, LocalDate.parse("2020-08-27"));
+        firstBanana = new SupplyFruitBatch("banana", 100, LocalDate.parse("2020-08-27"));
+        secondBanana = new SupplyFruitBatch("banana", 100, LocalDate.parse("2020-08-27"));
     }
 
     @Test

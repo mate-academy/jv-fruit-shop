@@ -20,11 +20,11 @@ public class OperationReturnTest {
 
     @BeforeClass
     public static void start() {
+        fruitOperationStrategy = new FruitOperationStrategy();
         fruitOperations = new HashMap<>();
         fruitOperations.put("s",new OperationSupply());
         fruitOperations.put("b", new OperationBuy());
         fruitOperations.put("r", new OperationReturn());
-        fruitOperationStrategy = new FruitOperationStrategy(fruitOperations);
         fileReadService = new FileReadServiceImplementation();
     }
 
@@ -32,8 +32,8 @@ public class OperationReturnTest {
     public void nonExistentReturn() {
         List<List<String>> allData = fileReadService.readFile(FIRST_FILE);
         for (List<String> line : allData) {
-            Operation operation = fruitOperationStrategy.getOperation(line);
-            operation.doOperation(line);
+            Operation operation = fruitOperationStrategy.getOperation(line.get(0));
+            operation.execute(line);
         }
     }
 
@@ -41,8 +41,8 @@ public class OperationReturnTest {
     public void operationReturnOk() {
         List<List<String>> allData = fileReadService.readFile(SECOND_FILE);
         for (List<String> line : allData) {
-            Operation operation = fruitOperationStrategy.getOperation(line);
-            operation.doOperation(line);
+            Operation operation = fruitOperationStrategy.getOperation(line.get(0));
+            operation.execute(line);
         }
     }
 }

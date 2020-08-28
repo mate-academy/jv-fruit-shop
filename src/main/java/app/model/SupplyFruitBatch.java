@@ -3,12 +3,12 @@ package app.model;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class SupplyFruit {
+public class SupplyFruitBatch {
     private String fruitName;
     private int quantity;
     private LocalDate endOfShelfLife;
 
-    public SupplyFruit(String fruitName, int quantity, LocalDate endOfShelfLife) {
+    public SupplyFruitBatch(String fruitName, int quantity, LocalDate endOfShelfLife) {
         this.fruitName = fruitName;
         this.quantity = quantity;
         this.endOfShelfLife = endOfShelfLife;
@@ -19,10 +19,10 @@ public class SupplyFruit {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof SupplyFruit)) {
+        if (!(o instanceof SupplyFruitBatch)) {
             return false;
         }
-        SupplyFruit fruit = (SupplyFruit) o;
+        SupplyFruitBatch fruit = (SupplyFruitBatch) o;
         return getQuantity() == fruit.getQuantity()
                 && Objects.equals(getFruitName(), fruit.getFruitName())
                 && Objects.equals(getEndOfShelfLife(), fruit.getEndOfShelfLife());

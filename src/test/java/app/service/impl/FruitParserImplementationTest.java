@@ -1,6 +1,6 @@
 package app.service.impl;
 
-import app.model.SupplyFruit;
+import app.model.SupplyFruitBatch;
 import app.service.FruitParser;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -42,18 +42,18 @@ public class FruitParserImplementationTest {
 
     @Test
     public void fruitParserOk() {
-        SupplyFruit testFirstFruit = new SupplyFruit("banana", 100,
+        SupplyFruitBatch testFirstFruit = new SupplyFruitBatch("banana", 100,
                 LocalDate.parse("2020-10-17"));
-        SupplyFruit testSecondFruit = new SupplyFruit("banana", 13,
+        SupplyFruitBatch testSecondFruit = new SupplyFruitBatch("banana", 13,
                 LocalDate.parse("2020-10-15"));
-        SupplyFruit firstResult = parserImplements.parse(testValue.get(0));
-        SupplyFruit secondResult = parserImplements.parse(testValue.get(1));
+        SupplyFruitBatch firstResult = parserImplements.parse(testValue.get(0));
+        SupplyFruitBatch secondResult = parserImplements.parse(testValue.get(1));
         Assert.assertEquals(firstResult, testFirstFruit);
         Assert.assertEquals(secondResult, testSecondFruit);
     }
 
     @Test(expected = RuntimeException.class)
-    public void exception() {
-        SupplyFruit testSecondFruit = parserImplements.parse(testValue.get(2));
+    public void incorrectlyEnteredFruitExpirationDate() {
+        SupplyFruitBatch testSecondFruit = parserImplements.parse(testValue.get(2));
     }
 }

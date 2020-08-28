@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class    FruitOperationStrategyTest {
+public class FruitOperationStrategyTest {
     private static final String SUPPLY = "s";
     private static final String BUY = "b";
     private static final String RETURN = "r";
@@ -23,22 +23,22 @@ public class    FruitOperationStrategyTest {
 
     @BeforeClass
     public static void start() {
+        fruitOperationStrategy = new FruitOperationStrategy();
         mapForTest = new HashMap<>();
         mapForTest.put(SUPPLY,new OperationSupply());
         mapForTest.put(BUY, new OperationBuy());
         mapForTest.put(RETURN, new OperationReturn());
-        fruitOperationStrategy = new FruitOperationStrategy(mapForTest);
     }
 
     @Test
     public void choseCorrectOperationOk() {
        List<String> line = new ArrayList<>();
        line.add(RETURN);
-       Operation operationReturn = fruitOperationStrategy.getOperation(line);
+       Operation operationReturn = fruitOperationStrategy.getOperation(line.get(0));
        line.set(line.indexOf(RETURN), SUPPLY);
-       Operation operationSupply = fruitOperationStrategy.getOperation(line);
+       Operation operationSupply = fruitOperationStrategy.getOperation(line.get(0));
        line.set(line.indexOf(SUPPLY), BUY);
-       Operation operationBuy = fruitOperationStrategy.getOperation(line);
+       Operation operationBuy = fruitOperationStrategy.getOperation(line.get(0));
        Assert.assertEquals(OperationSupply.class, operationSupply.getClass());
        Assert.assertEquals(OperationReturn.class, operationReturn.getClass());
        Assert.assertEquals(OperationBuy.class, operationBuy.getClass());
@@ -49,7 +49,7 @@ public class    FruitOperationStrategyTest {
         List<String> line = new ArrayList<>();
         line.add(COLON);
         try {
-            Operation operationSupply = fruitOperationStrategy.getOperation(line);
+            Operation operationSupply = fruitOperationStrategy.getOperation(line.get(0));
         } catch (RuntimeException e) {
             Assert.assertEquals("Cant find correct operation for type: " + line.get(0),
                     e.getMessage());

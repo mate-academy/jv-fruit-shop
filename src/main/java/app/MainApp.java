@@ -5,38 +5,31 @@ import app.service.FileWriterService;
 import app.service.Operation;
 import app.service.impl.FileReadServiceImplementation;
 import app.service.impl.FileWriterServiceImplementation;
-import app.service.impl.OperationBuy;
-import app.service.impl.OperationReturn;
-import app.service.impl.OperationSupply;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 
 public class MainApp {
-    public static final String FILE_PATH_READ = "src/test/resources/testOpen.csv";
-    public static final String FILE_PATH_WRITE = "src/main/java/resources/result.csv";
+    private static FruitOperationStrategy fruitOperationStrategy;
+    private static int OPERATION_INDEX = 0;
 
     public static void main(String[] args) {
         getStart();
     }
 
-    public static void fillMapOfOperators(Map<String, Operation> fruitOperations) {
-        fruitOperations.put("s",new OperationSupply());
-        fruitOperations.put("b", new OperationBuy());
-        fruitOperations.put("r", new OperationReturn());
-    }
-
-    public static void getStart() {
-        Map<String, Operation> fruitOperations = new HashMap<>();
-        fillMapOfOperators(fruitOperations);
-        FruitOperationStrategy fruitOperationStrategy = new FruitOperationStrategy(fruitOperations);
+    private static void getStart() {
+        fruitOperationStrategy = new FruitOperationStrategy();
         FileReadService fileReadService = new FileReadServiceImplementation();
-        List<List<String>> allData = fileReadService.readFile(FILE_PATH_READ);
+        System.out.println("Input path to read file");
+        Scanner inputPath = new Scanner(System.in);
+        List<List<String>> allData = fileReadService.readFile(inputPath.nextLine());
         for (List<String> line : allData) {
-            Operation operation = fruitOperationStrategy.getOperation(line);
-            operation.doOperation(line);
+            Operation operation = fruitOperationStrategy.getOperation(line.get(OPERATION_INDEX));
+            operation.execute(line);
         }
         FileWriterService fileWriterServiceImplements = new FileWriterServiceImplementation();
-        fileWriterServiceImplements.writeData(FruitStorage.supplyFruits, FILE_PATH_WRITE);
+        System.out.println("Input path to write data file");
+        Scanner outputPath = new Scanner(System.in);
+        fileWriterServiceImplements.writeData(FruitStorage.SUPPLY_FRUIT_BATCHES,
+                outputPath.nextLine());
     }
 }

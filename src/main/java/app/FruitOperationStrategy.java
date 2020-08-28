@@ -1,21 +1,31 @@
 package app;
 
 import app.service.Operation;
-import java.util.List;
+import app.service.impl.OperationBuy;
+import app.service.impl.OperationReturn;
+import app.service.impl.OperationSupply;
+import java.util.HashMap;
 import java.util.Map;
 
 public class FruitOperationStrategy {
-    private Map<String, Operation> fruitOperations;
+    private static Map<String, Operation> fruitOperations;
 
-    public FruitOperationStrategy(Map<String, Operation> fruitOperations) {
-        this.fruitOperations = fruitOperations;
+    public FruitOperationStrategy() {
+        fruitOperations = new HashMap<>();
     }
 
-    public Operation getOperation(List<String> line) {
-        Operation resultOperation = fruitOperations.get(line.get(0));
+    public Operation getOperation(String operationName) {
+        fillMapOfOperators();
+        Operation resultOperation = fruitOperations.get(operationName);
         if (resultOperation == null) {
-            throw new RuntimeException("Cant find correct operation for type: " + line.get(0));
+            throw new RuntimeException("Cant find correct operation for type: " + operationName);
         }
         return resultOperation;
+    }
+
+    private static void fillMapOfOperators() {
+        fruitOperations.put("s",new OperationSupply());
+        fruitOperations.put("b", new OperationBuy());
+        fruitOperations.put("r", new OperationReturn());
     }
 }

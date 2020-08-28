@@ -1,9 +1,9 @@
 package app;
 
-import app.model.SupplyFruit;
+import app.model.SupplyFruitBatch;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FruitStorage {
-    public static final List<SupplyFruit> supplyFruits = new ArrayList<>();
+    public static final List<SupplyFruitBatch> SUPPLY_FRUIT_BATCHES = new ArrayList<>();
 }

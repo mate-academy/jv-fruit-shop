@@ -1,16 +1,16 @@
 package app.service.impl;
 
 import app.FruitStorage;
-import app.model.SupplyFruit;
+import app.model.SupplyFruitBatch;
 import app.service.Operation;
 import java.util.List;
 
 public class OperationReturn implements Operation {
     @Override
-    public void doOperation(List<String> data) {
-        SupplyFruit currentFruit = new FruitParserImplementation().parse(data);
+    public void execute(List<String> data) {
+        SupplyFruitBatch currentFruit = new FruitParserImplementation().parse(data);
         boolean isExist = false;
-        for (SupplyFruit iteratorFruit : FruitStorage.supplyFruits) {
+        for (SupplyFruitBatch iteratorFruit : FruitStorage.SUPPLY_FRUIT_BATCHES) {
             if (iteratorFruit.getFruitName().equals(currentFruit.getFruitName())) {
                 isExist = true;
                 break;
@@ -19,13 +19,13 @@ public class OperationReturn implements Operation {
         if (!isExist) {
             throw new RuntimeException("The store does not sell this product");
         }
-        for (SupplyFruit iteratorFruit : FruitStorage.supplyFruits) {
+        for (SupplyFruitBatch iteratorFruit : FruitStorage.SUPPLY_FRUIT_BATCHES) {
             if (iteratorFruit.getFruitName().equals(currentFruit.getFruitName())
                     && iteratorFruit.getEndOfShelfLife().equals(currentFruit.getEndOfShelfLife())) {
                 iteratorFruit.setQuantity(iteratorFruit.getQuantity() + currentFruit.getQuantity());
                 return;
             }
         }
-        FruitStorage.supplyFruits.add(currentFruit);
+        FruitStorage.SUPPLY_FRUIT_BATCHES.add(currentFruit);
     }
 }
