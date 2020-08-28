@@ -49,7 +49,6 @@ public class Storage {
         for (Map.Entry<String, Integer> entry: fruitsQuantity.entrySet()) {
             result.append("\n").append(entry.getKey()).append(",").append(entry.getValue());
         }
-
         return result.toString();
     }
 }

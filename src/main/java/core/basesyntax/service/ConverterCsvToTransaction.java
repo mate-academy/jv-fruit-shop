@@ -12,7 +12,6 @@ public class ConverterCsvToTransaction {
         fruitDto.setFruitName(data.get(1));
         fruitDto.setQuantity(Integer.parseInt(data.get(2)));
         fruitDto.setDate(LocalDate.parse(data.get(3), DateTimeFormatter.ISO_LOCAL_DATE));
-
         return fruitDto;
     }
 }

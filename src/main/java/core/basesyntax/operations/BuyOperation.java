@@ -18,7 +18,6 @@ public class BuyOperation extends AbstactOperation implements StoreOperation {
                 transaction.getQuantity(), transaction.getDate())) {
             throw new RuntimeException("Not enough fresh fruits");
         }
-
         storage.removeFruits(transaction.getFruitName(), transaction.getQuantity());
     }
 
