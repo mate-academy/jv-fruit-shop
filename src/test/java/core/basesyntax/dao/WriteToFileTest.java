@@ -4,6 +4,7 @@ import core.basesyntax.products.Fruit;
 import core.basesyntax.storage.ListStorage;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -58,10 +59,11 @@ public class WriteToFileTest {
         String csvString = Files.readString(FILE_DEST_TEST_4);
         Assert.assertEquals(TEST_STRING, csvString);
     }
-//
-//    @Test(expected = RuntimeException.class)
-//    public void fileWriterException() {
-//        WriteToFile write = new WriteToFile();
-//        write.writeToFile(FILE_DEST_TEST_5);
-//    }
+
+    @Ignore
+    @Test(expected = RuntimeException.class)
+    public void fileWriterException() {
+        WriteToFile write = new WriteToFile();
+        write.writeToFile(FILE_DEST_TEST_5);
+    }
 }
