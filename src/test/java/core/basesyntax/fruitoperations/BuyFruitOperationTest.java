@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public class BuyFruitOperationTest {
     private static final Storage TEST_STORAGE = new Storage();
     private static final BuyFruitOperation BUY_FRUIT_OPERATION = new BuyFruitOperation(TEST_STORAGE);
-    private static final FruitBatch FRUIT_BATCH = new FruitBatch("s", "apple",
+    private static final FruitBatch FRUIT_BATCH = new FruitBatch("b", "apple",
             10, LocalDate.parse("2020-05-17"));
 
     @BeforeClass
