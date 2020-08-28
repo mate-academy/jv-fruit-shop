@@ -11,6 +11,7 @@ public abstract class FruitOperation {
 
     public abstract Map<String, Transaction> execute(int totalQuantity,
                                                      Map<String, Transaction> storage);
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
