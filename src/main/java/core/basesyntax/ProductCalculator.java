@@ -36,7 +36,7 @@ public class ProductCalculator {
             }
         } else {
             while (getProdInStorage(order).get(counter).getDate()
-                    .isAfter(dateAndAmount.getDate())) {
+                    .isBefore(dateAndAmount.getDate())) {
                 counter++;
             }
             getProdInStorage(order).add(counter, dateAndAmount);
