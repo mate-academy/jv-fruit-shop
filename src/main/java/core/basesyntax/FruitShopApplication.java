@@ -20,10 +20,10 @@ public class FruitShopApplication {
         ProductCalculatorService productCalculatorService = new ProductCalculatorService(storage);
         productCalculatorService.calculateBalance(recordList);
 
-        ReportMakerService reportMakerService = new ReportMakerService();
-        String report = reportMakerService.makeReport(storage);
+        ReportMakerService reportMakerService = new ReportMakerService(storage);
+        String report = reportMakerService.makeReport();
 
         FileWriterService fileWriterService = new FileWriterService();
-        fileWriterService.writeLinesToFile("report.txt", report);
+        fileWriterService.writeLinesToFile("report.csv", report);
     }
 }

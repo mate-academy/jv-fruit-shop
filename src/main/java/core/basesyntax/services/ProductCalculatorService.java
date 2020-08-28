@@ -16,6 +16,7 @@ public class ProductCalculatorService {
 
     public ProductCalculatorService(Storage storage) {
         this.storage = storage;
+        initDealMap();
     }
 
     private void initDealMap() {
@@ -25,7 +26,6 @@ public class ProductCalculatorService {
     }
 
     public void calculateBalance(List<Record> recordList) {
-        initDealMap();
         for (Record record : recordList) {
             ShopOperation operation = dealMap.get(record.getType());
             operation.transaction(record);

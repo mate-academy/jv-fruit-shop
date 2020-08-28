@@ -14,7 +14,7 @@ public class FileReaderService {
             String[] inputFileAsStrings = Files.readString(Paths.get(fileName)).split("\n");
             return new ArrayList<>(Arrays.asList(inputFileAsStrings));
         } catch (IOException e) {
-            throw new RuntimeException("Got problem with reading of file [" + fileName + "]");
+            throw new RuntimeException("Got problem with reading of file [" + fileName + "], ", e);
         }
     }
 }

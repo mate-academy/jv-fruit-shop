@@ -23,6 +23,6 @@ public class IncomeShopOperation implements ShopOperation {
 
         ProductBox product = new ProductBox(record.getProductName(),
                 record.getCount(), record.getDate());
-        storage.getFruitSupplies().add(product);
+        storage.addProductBox(product);
     }
 }

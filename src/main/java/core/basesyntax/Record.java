@@ -21,20 +21,7 @@ public class Record {
     }
 
     public void setType(String stringType) {
-        switch (stringType) {
-            case "s":
-                type = RecordType.s;
-                break;
-            case "b":
-                type = RecordType.b;
-                break;
-            case "r":
-                type = RecordType.r;
-                break;
-            default: {
-                throw new RuntimeException("Unsupported record type: [" + stringType + "]");
-            }
-        }
+        type = RecordType.valueOf(stringType);
     }
 
     public String getProductName() {

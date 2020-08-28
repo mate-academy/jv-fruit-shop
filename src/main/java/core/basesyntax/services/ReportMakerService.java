@@ -2,32 +2,36 @@ package core.basesyntax.services;
 
 import core.basesyntax.ProductBox;
 import core.basesyntax.Storage;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReportMakerService {
+    private Storage storage;
 
-    public String makeReport(Storage storage) {
-        List<ProductBox> productList = new ArrayList<>();
+    public ReportMakerService(Storage storage) {
+        this.storage = storage;
+    }
+
+    public String makeReport() {
+        Map<String, Integer> fruitMap = new HashMap<>();
         for (int i = 0; i < storage.getFruitSupplies().size(); i++) {
-            ProductBox product = storage.getFruitSupplies().get(i);
-            productList.add(product);
-            for (int j = i + 1; j < storage.getFruitSupplies().size(); j++) {
-                ProductBox currentProduct = storage.getFruitSupplies().get(j);
-                if (product.getProductName().equals(currentProduct.getProductName())) {
-                    product.setCount(product.getCount() + currentProduct.getCount());
-                    storage.getFruitSupplies().remove(j);
-                }
+            ProductBox productBox = storage.getFruitSupplies().get(i);
+            if (fruitMap.containsKey(productBox.getProductName())) {
+                fruitMap.put(productBox.getProductName(),
+                        fruitMap.get(productBox.getProductName()) + productBox.getCount());
+            } else {
+                fruitMap.put(productBox.getProductName(), productBox.getCount());
             }
         }
 
         StringBuilder result = new StringBuilder("fruit,quantity\r");
-        for (ProductBox product : productList) {
-            result.append(product.getProductName())
+        for (String key : fruitMap.keySet()) {
+            result.append(key)
                     .append(",")
-                    .append(product.getCount())
+                    .append(fruitMap.get(key))
                     .append("\r");
         }
+
         return result.toString();
     }
 }
