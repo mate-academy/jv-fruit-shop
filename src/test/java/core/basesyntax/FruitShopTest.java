@@ -93,6 +93,21 @@ public class FruitShopTest {
         Fruit fruit2 = new Fruit("banana",72,date);
         Assert.assertEquals(fruit, fruit2);
     }
+
+    @Test
+    public void fruitEqualsAsHimself(){
+        LocalDate date = LocalDate.now();
+        Fruit fruit = new Fruit("banana",50,date);
+        Assert.assertEquals(fruit, fruit);
+    }
+
+    @Test
+    public void fruitEqualsAsNull(){
+        LocalDate date = LocalDate.now();
+        Fruit fruit = new Fruit("banana",50,date);
+        Assert.assertNotEquals(fruit, null);
+    }
+
     @Test
     public void fruitEqualsDifferentObjectTest(){
         LocalDate date = LocalDate.now();
@@ -118,8 +133,14 @@ public class FruitShopTest {
     @Test
     public void fruitCompareToTest(){
         LocalDate date = LocalDate.now();
+        LocalDate date1 = date.minusDays(15);
+        LocalDate date2 = date.plusDays(15);
         Fruit fruit = new Fruit("banana",50,date);
         Fruit fruit2 = new Fruit("banana",72,date);
+        Fruit fruitOlder = new Fruit("banana",72,date2);
+        Fruit fruitYanger = new Fruit("banana",72,date1);
         Assert.assertEquals(0, fruit.compareTo(fruit2));
+        Assert.assertEquals(-1, fruit.compareTo(fruitOlder));
+        Assert.assertEquals(1, fruit.compareTo(fruitYanger));
     }
 }
