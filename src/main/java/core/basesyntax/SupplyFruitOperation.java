@@ -11,9 +11,9 @@ public class SupplyFruitOperation extends FruitOperation {
     public Map<String, Transaction> execute(int totalQuantity,
                                             Map<String, Transaction> storage) {
         String name = transaction.getFruitType();
-        int amount = transaction.getQuantity();
+        int quantity = transaction.getQuantity();
         if (storage.containsKey(name)) {
-            storage.get(name).setQuantity(storage.get(name).getQuantity() + amount);
+            storage.get(name).setQuantity(storage.get(name).getQuantity() + quantity);
         } else {
             storage.put(name, transaction);
         }
