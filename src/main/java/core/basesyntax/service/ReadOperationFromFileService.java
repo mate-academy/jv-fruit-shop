@@ -11,6 +11,9 @@ import java.time.LocalDate;
 
 public class ReadOperationFromFileService {
     private static final String SPLITTER = ",";
+    private static final String SUPPLIER = "s";
+    private static final String CONSUMER = "b";
+    private static final String RETURNER = "r";
 
     public void read(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -21,15 +24,15 @@ public class ReadOperationFromFileService {
                         = new FruitBox(
                         data[1], Integer.parseInt(data[2]), LocalDate.parse(data[3]));
                 switch (data[0]) {
-                    case "s":
+                    case SUPPLIER:
                         Operator<FruitBox> supplier = new Supplier();
                         supplier.execute(fruit);
                         break;
-                    case "b":
+                    case CONSUMER:
                         Operator<FruitBox> consumer = new Consumer();
                         consumer.execute(fruit);
                         break;
-                    case "r":
+                    case RETURNER:
                         Operator<FruitBox> returner = new Returner();
                         returner.execute(fruit);
                         break;

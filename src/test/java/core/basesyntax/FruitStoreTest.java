@@ -49,7 +49,7 @@ public class FruitStoreTest {
         }
         Storage.storage.clear();
     }
-
+    
     @Test
     public void outputResultExceptionTest2() {
         try {
