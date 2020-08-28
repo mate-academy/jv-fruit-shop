@@ -25,19 +25,14 @@ public class CsvFileReaderTest {
         expected.add(new Operation("r", "banana", 10, LocalDate.parse("2020-10-17")));
         expected.add(new Operation("s", "apple", 300, LocalDate.parse("2020-10-18")));
 
-        List<Operation> actual = reader.readFile("src/main/resources/NormalInput.csv");
+        List<Operation> actual = CsvFileReader.readFile("src/main/resources/NormalInput.csv");
 
         Assert.assertEquals(expected, actual);
     }
 
     @Test (expected = RuntimeException.class)
-    public void notCsvFileTest() {
-        reader.readFile("src/main/resources/NotCsvFile.txt");
-    }
-
-    @Test (expected = RuntimeException.class)
     public void fileDoesNotExistTest() {
-        reader.readFile("notExistingFile.csv");
+        CsvFileReader.readFile("notExistingFile.csv");
     }
 
 

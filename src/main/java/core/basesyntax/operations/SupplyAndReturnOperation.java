@@ -3,7 +3,7 @@ package core.basesyntax.operations;
 import core.basesyntax.FruitStorage;
 import core.basesyntax.model.Operation;
 
-public class SupplyAndReturn implements StorageOperation {
+public class SupplyAndReturnOperation implements StorageOperation {
 
     @Override
     public void doStorageOperation(Operation operation) {

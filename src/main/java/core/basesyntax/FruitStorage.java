@@ -1,9 +1,9 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.operations.Buy;
+import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.operations.StorageOperation;
-import core.basesyntax.operations.SupplyAndReturn;
+import core.basesyntax.operations.SupplyAndReturnOperation;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +18,11 @@ public class FruitStorage {
         expiration = new HashMap<>();
         for (Operation operation : operations) {
             if (operation.getType().equals("s") || operation.getType().equals("r")) {
-                StorageOperation storageOperation = new SupplyAndReturn();
+                StorageOperation storageOperation = new SupplyAndReturnOperation();
                 storageOperation.doStorageOperation(operation);
             }
             if (operation.getType().equals("b")) {
-                StorageOperation storageOperation = new Buy();
+                StorageOperation storageOperation = new PurchaseOperation();
                 storageOperation.doStorageOperation(operation);
             }
         }

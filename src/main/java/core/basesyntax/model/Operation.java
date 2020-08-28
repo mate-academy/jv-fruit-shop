@@ -1,12 +1,19 @@
 package core.basesyntax.model;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class Operation {
+    @CsvBindByName (column = "type")
     private String type;
+    @CsvBindByName (column = "fruit")
     private String fruit;
+    @CsvBindByName (column = "quantity")
     private int quantity;
+    @CsvBindByName(column = "date")
+    @CsvDate("yyyy-MM-dd")
     private LocalDate expDate;
 
     public Operation(String type, String fruit, int quantity, LocalDate expDate) {
@@ -14,6 +21,9 @@ public class Operation {
         this.fruit = fruit;
         this.quantity = quantity;
         this.expDate = expDate;
+    }
+
+    public Operation() {
     }
 
     @Override

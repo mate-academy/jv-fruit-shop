@@ -3,7 +3,7 @@ package core.basesyntax.operations;
 import core.basesyntax.FruitStorage;
 import core.basesyntax.model.Operation;
 
-public class Buy implements StorageOperation {
+public class PurchaseOperation implements StorageOperation {
     @Override
     public void doStorageOperation(Operation operation) {
         if (!FruitStorage.fruitStorage.containsKey(operation.getFruit())) {
