@@ -94,6 +94,12 @@
                     </execution>
 
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/Main*</exclude>
+                        <exclude>**/MapOperations*</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>
