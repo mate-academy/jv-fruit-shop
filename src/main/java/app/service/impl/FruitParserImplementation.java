@@ -14,9 +14,9 @@ public class FruitParserImplementation implements FruitParser {
     @Override
     public SupplyFruit parse(List<String> data) {
         try {
-            return new SupplyFruit(data.get(FIRST_ELEMENT)
-                    , Integer.parseInt(data.get(SECOND_ELEMENT))
-                    , LocalDate.parse(data.get(THIRD_ELEMENT)));
+            return new SupplyFruit(data.get(FIRST_ELEMENT),
+                    Integer.parseInt(data.get(SECOND_ELEMENT)),
+                    LocalDate.parse(data.get(THIRD_ELEMENT)));
         } catch (DateTimeParseException e) {
             throw new RuntimeException("Wrong date in line with " + data.get(FIRST_ELEMENT)
                     + "," + data.get(SECOND_ELEMENT) + "," + data.get(THIRD_ELEMENT));
