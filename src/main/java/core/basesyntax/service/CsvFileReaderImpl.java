@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class CsvFileReaderImpl implements CsvFileReader {
-    public String[] header;
+    private String[] header;
 
     @Override
     public List<List<String>> readFile(String csvFilePath) {
