@@ -1,6 +1,6 @@
 package core.basesyntax.shop.impl;
 
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.shop.Trading;
 import org.junit.After;
@@ -41,7 +41,7 @@ public class BuyTradingImplTest {
         buyTrading.trade(BANANA_FRUIT, 100);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void buyFruitNullTest() {
         buyTrading.trade( null, 0);
     }

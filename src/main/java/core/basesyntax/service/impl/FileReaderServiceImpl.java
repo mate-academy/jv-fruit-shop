@@ -33,7 +33,9 @@ public class FileReaderServiceImpl implements FileReaderService {
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Failed to read file");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException();
         }
         if (data.isEmpty()) {
             throw new RuntimeException("File is empty");

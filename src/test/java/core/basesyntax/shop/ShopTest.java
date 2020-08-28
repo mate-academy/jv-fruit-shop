@@ -1,6 +1,6 @@
 package core.basesyntax.shop;
 
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.shop.impl.BuyTradingImpl;
 import core.basesyntax.shop.impl.RefundsTradingImpl;

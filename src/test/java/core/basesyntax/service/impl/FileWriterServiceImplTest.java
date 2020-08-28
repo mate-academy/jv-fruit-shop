@@ -1,8 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.ReportBuilder;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,10 +16,12 @@ import java.util.List;
 
 public class FileWriterServiceImplTest {
     private static FileWriterService writer;
+    private static ReportBuilder reportBuilder;
 
     @BeforeClass
     public static void setup() {
         writer = new FileWriterServiceImpl();
+        reportBuilder = new ReportBuilderImpl();
     }
 
     @Test
@@ -29,7 +32,7 @@ public class FileWriterServiceImplTest {
                 new Storage.FruitBox(new Fruit("apple", LocalDate.now()), 100),
                 new Storage.FruitBox(new Fruit("kiwi", LocalDate.now()), 100),
                 new Storage.FruitBox(new Fruit("pineapple", LocalDate.now()), 100));
-        writer.write(fruits, "src/test/resources/normalWriteTest.csv");
+        writer.write(reportBuilder.buildReport(fruits), "src/test/resources/normalWriteTest.csv");
         try {
             List<String> expected = new ArrayList<>(Files.readAllLines(Path.of("src/test/resources/expectedFile.csv")));
             List<String> actual = new ArrayList<>(Files.readAllLines(Path.of("src/test/resources/normalWriteTest.csv")));

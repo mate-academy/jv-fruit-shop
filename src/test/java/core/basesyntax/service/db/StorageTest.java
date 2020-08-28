@@ -1,5 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.service.db;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import org.junit.After;
 import org.junit.Assert;

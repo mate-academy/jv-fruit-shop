@@ -1,6 +1,6 @@
 package core.basesyntax.shop.impl;
 
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.shop.Trading;
 import org.junit.After;
@@ -44,7 +44,7 @@ public class SupplyTradingImplTest {
         Assert.assertEquals(1, actualSize);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = RuntimeException.class)
     public void supplyFruitNullTest() {
         supplyTrading.trade(null, 0);
     }

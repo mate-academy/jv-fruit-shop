@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.impl.FruitParserImpl;
@@ -19,6 +19,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ShopServiceTest {
+    private static final List<FruitDto> DATA = List.of(
+            new FruitDto("s", "banana", 100, LocalDate.now()),
+            new FruitDto("s", "banana", 50, LocalDate.now()),
+            new FruitDto("r", "banana", 10, LocalDate.now()),
+            new FruitDto("s", "orange", 200, LocalDate.now()),
+            new FruitDto("b", "banana", 100, LocalDate.now()));
     private static ShopService shopService;
     private static Storage storage;
 
@@ -31,18 +37,12 @@ public class ShopServiceTest {
         tradingMap.put("r", new RefundsTradingImpl(storage));
         Shop shop = new Shop(tradingMap, storage);
         FruitParser fruitParser = new FruitParserImpl();
-        List<FruitDto> data = List.of(
-                new FruitDto("s", "banana", 100, LocalDate.now()),
-                new FruitDto("s", "banana", 50, LocalDate.now()),
-                new FruitDto("r", "banana", 10, LocalDate.now()),
-                new FruitDto("s", "orange", 200, LocalDate.now()),
-                new FruitDto("b", "banana", 100, LocalDate.now()));
-        shopService = new ShopService(shop, fruitParser, data);
+        shopService = new ShopService(shop, fruitParser);
     }
 
     @Test
     public void precessWaybillTest() {
-        shopService.precessWaybill();
+        shopService.precessWaybill(DATA);
         List<Storage.FruitBox> actual = storage.getAll();
         List<Storage.FruitBox> expected = List.of(
                 new Storage.FruitBox(new Fruit("banana", LocalDate.now()), 60),

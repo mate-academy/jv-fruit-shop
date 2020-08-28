@@ -1,13 +1,16 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitParser;
+import core.basesyntax.service.ReportBuilder;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitParserImpl;
+import core.basesyntax.service.impl.ReportBuilderImpl;
 import core.basesyntax.shop.Shop;
 import core.basesyntax.shop.Trading;
 import core.basesyntax.shop.impl.BuyTradingImpl;
@@ -33,13 +36,15 @@ public class Main {
 
         FruitParser fruitParser = new FruitParserImpl();
 
-        ShopService shopService = new ShopService(shop, fruitParser, data);
-        shopService.precessWaybill();
+        ShopService shopService = new ShopService(shop, fruitParser);
+        shopService.precessWaybill(data);
 
         FileWriterService fileWriter = new FileWriterServiceImpl();
         String fileName = "balance_storage_"
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss"))
                 + ".csv";
-        fileWriter.write(shop.balanceStorage(), fileName);
+        ReportBuilder reportBuilder = new ReportBuilderImpl();
+        Map<String, Integer> report = reportBuilder.buildReport(shop.balanceStorage());
+        fileWriter.write(report, fileName);
     }
 }

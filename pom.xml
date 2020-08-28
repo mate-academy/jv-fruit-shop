@@ -98,7 +98,6 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
-                        <exclude>**/Storage*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

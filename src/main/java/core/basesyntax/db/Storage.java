@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.db;
 
 import core.basesyntax.model.Fruit;
 import java.security.InvalidParameterException;

@@ -1,6 +1,6 @@
 package core.basesyntax.shop;
 
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 import java.util.Map;

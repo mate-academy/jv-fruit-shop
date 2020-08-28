@@ -1,8 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.Storage;
-import java.util.List;
+import java.util.Map;
 
 public interface FileWriterService {
-    void write(List<Storage.FruitBox> data, String fileName);
+    void write(Map<String, Integer> data, String fileName);
 }
