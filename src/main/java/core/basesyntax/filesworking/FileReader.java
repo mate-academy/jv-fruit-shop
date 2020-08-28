@@ -24,7 +24,7 @@ public class FileReader {
             }
             return transactions;
         } catch (IOException e) {
-            throw new FileNotFoundException();
+            throw new RuntimeException("No such file");
         }
     }
 }
