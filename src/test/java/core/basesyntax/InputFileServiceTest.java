@@ -20,16 +20,8 @@ public class InputFileServiceTest {
     @Test
     public void readFileOkTest() {
         List<List<String>> fileStrings = new ArrayList<>();
-        fileStrings.add(new ArrayList<>());
-        fileStrings.add(new ArrayList<>());
-        fileStrings.get(0).add("r");
-        fileStrings.get(0).add("banana");
-        fileStrings.get(0).add("100");
-        fileStrings.get(0).add("2020-10-17");
-        fileStrings.get(1).add("b");
-        fileStrings.get(1).add("orange");
-        fileStrings.get(1).add("13");
-        fileStrings.get(1).add("2020-10-17");
+        fileStrings.add(List.of("r", "banana", "100", "2020-10-17"));
+        fileStrings.add(List.of("b", "orange", "13", "2020-10-17"));
 
         Assert.assertEquals(fileStrings, inputFileService.readFile(FILE_OK));
     }

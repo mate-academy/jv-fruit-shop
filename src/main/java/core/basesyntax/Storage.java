@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Storage {
     private final List<Fruit> storage = new ArrayList<>();
@@ -20,8 +21,11 @@ public class Storage {
     public void removeFruits(String fruitName, int quantity) {
         Iterator<Fruit> fruitIterator = storage.iterator();
         int counter = 0;
-        while (counter <= quantity && fruitIterator.hasNext()) {
-            storage.remove(fruitIterator.next());
+        while (counter < quantity && fruitIterator.hasNext()) {
+            if (fruitIterator.next().getFruitName().equals(fruitName)) {
+                fruitIterator.remove();
+                counter++;
+            }
         }
     }
 
@@ -29,17 +33,17 @@ public class Storage {
         StringBuilder result = new StringBuilder();
         Map<String, Integer> fruitsQuantity = new HashMap<>();
         
-        String[] kindOfFruits = (String[]) storage.stream()
+        List<String> kindOfFruits = storage.stream()
                 .map(Fruit::getFruitName)
                 .distinct()
-                .toArray();
+                .collect(Collectors.toList());
         
-        for (int i = 0; i < kindOfFruits.length; i++) {
-            String fruit = kindOfFruits[i];
+        for (int i = 0; i < kindOfFruits.size(); i++) {
+            String fruit = kindOfFruits.get(i);
             int fruitQuantity = (int) storage.stream()
                     .filter(f -> f.getFruitName().equals(fruit))
                     .count();
-            fruitsQuantity.put(kindOfFruits[i], fruitQuantity);            
+            fruitsQuantity.put(kindOfFruits.get(i), fruitQuantity);
         }
         result.append("fruit,quantity");
         for (Map.Entry<String, Integer> entry: fruitsQuantity.entrySet()) {

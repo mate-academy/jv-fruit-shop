@@ -20,6 +20,7 @@ public class InputFileServiceImpl implements InputFileService {
         String cvsSeparator = ",";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            line = reader.readLine();
             while ((line = reader.readLine()) != null) {
                 if (!line.matches(".+,.+,.+,.+")) {
                     throw new RuntimeException("File data in file");

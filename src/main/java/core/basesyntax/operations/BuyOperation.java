@@ -12,11 +12,11 @@ public class BuyOperation extends AbstactOperation implements StoreOperation {
     @Override
     public void performOperation(Transaction transaction) {
         if (!checkFruitQuantity(transaction.getFruitName(), transaction.getQuantity())) {
-            throw new IllegalArgumentException("We have less fruits than you want to buy");
+            throw new RuntimeException("We have less fruits than you want to buy");
         }
         if (!checkFreshFruitQuantity(transaction.getFruitName(),
                 transaction.getQuantity(), transaction.getDate())) {
-            throw new IllegalArgumentException("Not enough fresh fruits");
+            throw new RuntimeException("Not enough fresh fruits");
         }
 
         storage.removeFruits(transaction.getFruitName(), transaction.getQuantity());

@@ -17,11 +17,7 @@ public class ConverterCsvToTransactionTest {
         Transaction transaction = new Transaction("s", "banana", 100,
                 LocalDate.parse("2020-10-17", DateTimeFormatter.ISO_LOCAL_DATE));
 
-        List<String> data = new ArrayList<>();
-        data.add("s");
-        data.add("banana");
-        data.add("100");
-        data.add("2020-10-17");
+        List<String> data = List.of("s", "banana", "100", "2020-10-17");
 
         Assert.assertEquals(transaction, converter.convert(data));
     }
