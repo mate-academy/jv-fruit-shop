@@ -28,7 +28,7 @@ public class StorageUpdaterImpl implements StorageUpdater {
 
     private void updateStorageAfterPurchase(String fruitType, LocalDate date,
                                  int fruitAmount, String operationType) {
-        if (Storage.fruitIsAbsent(fruitType)) {
+        if (Storage.isFruitAbsent(fruitType)) {
             return;
         }
         Map<LocalDate, Integer> fruitReminders = new TreeMap<>(Storage.getFruit(fruitType));

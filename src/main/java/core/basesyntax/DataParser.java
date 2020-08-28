@@ -19,7 +19,7 @@ public class DataParser {
     }
 
     private void checkDataFormat(String[] lineFromFile) {
-        if (!StoreOperations.AVAILABLE_OPERATIONS.containsKey(lineFromFile[OPERATION_TYPE_INDEX])) {
+        if (!StoreOperations.containsOperation(lineFromFile[OPERATION_TYPE_INDEX])) {
             throw new IllegalFormatFlagsException("File provides unsupported operation type");
         }
         try {

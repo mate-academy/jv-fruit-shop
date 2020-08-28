@@ -36,7 +36,7 @@ public class Storage {
         return new HashMap<>(fruitsInStore);
     }
 
-    public static boolean fruitIsAbsent(String fruitType) {
+    public static boolean isFruitAbsent(String fruitType) {
         return !fruitsInStore.containsKey(fruitType);
     }
 }

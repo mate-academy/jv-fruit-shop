@@ -30,8 +30,8 @@ public class WriteToFileTest {
     public void checkFileCreation() throws IOException {
         LocalFileReader reader = new LocalFileReader(FILLED_FILE_NAME);
         newUpdate.parseDataToStorage(reader.readTransactionsFile());
-        WriteToFile parser = new WriteToFile(OUTPUT_FILE_PATH);
-        parser.csvFileWriter();
+        CsvFileWriter parser = new CsvFileWriter(OUTPUT_FILE_PATH);
+        parser.writeToFile();
         Assert.assertTrue(new File(OUTPUT_FILE_PATH).isFile());
     }
 
@@ -39,8 +39,8 @@ public class WriteToFileTest {
     public void checkResultOnEmptyStorage() throws IOException {
         LocalFileReader reader = new LocalFileReader(FILLED_FILE_NAME);
         newUpdate.parseDataToStorage(reader.readTransactionsFile());
-        WriteToFile parser = new WriteToFile(OUTPUT_FILE_PATH);
-        parser.csvFileWriter();
+        CsvFileWriter parser = new CsvFileWriter(OUTPUT_FILE_PATH);
+        parser.writeToFile();
         byte[] expectedResult = Files.readAllBytes(Paths.get(RESULT_ON_EMPTY_STORAGE));
         byte[] actualResult = Files.readAllBytes(Paths.get(OUTPUT_FILE_PATH));
         System.out.println(Files.readAllLines(Path.of(OUTPUT_FILE_PATH)).toString());
@@ -52,13 +52,13 @@ public class WriteToFileTest {
     public void updateNotEmptyStorageFromFile() throws IOException {
         LocalFileReader reader = new LocalFileReader(FILLED_FILE_NAME);
         newUpdate.parseDataToStorage(reader.readTransactionsFile());
-        WriteToFile writer = new WriteToFile(OUTPUT_FILE_PATH);
-        writer.csvFileWriter();
+        CsvFileWriter writer = new CsvFileWriter(OUTPUT_FILE_PATH);
+        writer.writeToFile();
 
         LocalFileReader secondFileReader = new LocalFileReader(SECOND_FILLED_FILE_NAME);
         newUpdate.parseDataToStorage(secondFileReader.readTransactionsFile());
-        WriteToFile secondFileWriter = new WriteToFile(NOT_EMPTY_STORAGE_OUTPUT_FILE_PATH);
-        secondFileWriter.csvFileWriter();
+        CsvFileWriter secondFileWriter = new CsvFileWriter(NOT_EMPTY_STORAGE_OUTPUT_FILE_PATH);
+        secondFileWriter.writeToFile();
 
         byte[] expectedResult = Files.readAllBytes(Paths.get(RESULT_ON_NOT_EMPTY_STORAGE));
         byte[] actualResult = Files.readAllBytes(Paths.get(NOT_EMPTY_STORAGE_OUTPUT_FILE_PATH));
@@ -70,8 +70,8 @@ public class WriteToFileTest {
         LocalFileReader reader = new LocalFileReader(WRONG_HEADER_FILE);
         try {
             newUpdate.parseDataToStorage(reader.readTransactionsFile());
-            WriteToFile parser = new WriteToFile(OUTPUT_FILE_PATH);
-            parser.csvFileWriter();
+            CsvFileWriter parser = new CsvFileWriter(OUTPUT_FILE_PATH);
+            parser.writeToFile();
         } catch (IllegalFormatFlagsException message) {
             return;
         }

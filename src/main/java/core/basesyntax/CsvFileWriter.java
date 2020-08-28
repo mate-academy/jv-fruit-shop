@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
-public class WriteToFile {
+public class CsvFileWriter {
     private static final String OUTPUT_FILE_HEADER = "fruit,quantity\n";
     private final String outputFilePath;
 
-    public WriteToFile(String outputFilePath) {
+    public CsvFileWriter(String outputFilePath) {
         this.outputFilePath = outputFilePath;
     }
 
-    public void csvFileWriter() throws IOException {
+    public void writeToFile() throws IOException {
         PrintWriter writer = new PrintWriter(new File(outputFilePath));
         StringBuilder formattedData = new StringBuilder(OUTPUT_FILE_HEADER);
         for (String fruit : Storage.getAllFruits().keySet()) {
