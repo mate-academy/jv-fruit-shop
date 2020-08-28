@@ -8,8 +8,8 @@ public class Fruit implements Comparable<Fruit> {
     private LocalDate date;
 
     public Fruit(String type, int stockBalance, LocalDate date) {
-        setType(type);
-        setDate(date);
+        this.type = type.trim();
+        this.date = date;
         this.stockBalance = stockBalance;
     }
 
@@ -25,19 +25,8 @@ public class Fruit implements Comparable<Fruit> {
         return date;
     }
 
-    private void setType(String type) {
-        type = type
-                .trim()
-                .toLowerCase();
-        this.type = type;
-    }
-
     public void setStock_balance(int stockBalance) {
         this.stockBalance = stockBalance;
-    }
-
-    private void setDate(LocalDate date) {
-        this.date = date;
     }
 
     @Override
@@ -60,14 +49,6 @@ public class Fruit implements Comparable<Fruit> {
         int result = type != null ? type.hashCode() : 0;
         result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Fruit{"
-                + "type='" + type + '\''
-                + ", stock_balance=" + stockBalance
-                + ", date=" + date + '}';
     }
 
     @Override

@@ -1,11 +1,13 @@
 package core.basesyntax;
 
+import core.basesyntax.model.Fruit;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class FruitShopTest {
     private static final String NORMAL_FILE = "src/test/resources/file.csv";
@@ -58,5 +60,22 @@ public class FruitShopTest {
         } catch (IOException e) {
             throw new RuntimeException("Нет доступа к тестовым файлам");
         }
+    }
+
+    @Test
+    public void fruinTest() {
+        LocalDate date = LocalDate.now();
+        Fruit fruit = new Fruit("banana",50,date);
+        Assert.assertEquals(fruit.getType(),"banana");
+        Assert.assertTrue("Даты не совпадаеют", date.isEqual(fruit.getDate()));
+        Assert.assertEquals("Неправильное количество ожидалось 50", 50, fruit.getStock_balance());
+    }
+
+    @Test
+    public void fruinSetterTest() {
+        LocalDate date = LocalDate.now();
+        Fruit fruit = new Fruit("banana",50,date);
+        fruit.setStock_balance(45);
+        Assert.assertEquals("Неправильное количество ожидалось 50", 45, fruit.getStock_balance());
     }
 }
