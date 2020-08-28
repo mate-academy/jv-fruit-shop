@@ -1,15 +1,15 @@
 package core.basesyntax;
 
-import core.basesyntax.interfaces.AddFruitsInterface;
+import core.basesyntax.interfaces.Operation;
 import java.util.List;
 
-public class AddFruit implements AddFruitsInterface<String> {
-    private static Storage range = new Storage();
-    private static List<String> fruitsAvailable = range.getFruitTypes();
+public class AddFruit implements Operation {
 
-    @Override
-    public List<String> fruitsAdd(String fruitsFromFile) {
-        fruitsAvailable.add(fruitsFromFile);
+    public List<Fruit> operation(List<Fruit> fruitsAvailable, Transaction fruitsFromFile) {
+        for (int i = 0; i < fruitsFromFile.getAmount(); i++) {
+            fruitsAvailable.add(new Fruit(fruitsFromFile.getTypeOfFruit(),
+                    fruitsFromFile.getExpirationDate()));
+        }
         return fruitsAvailable;
     }
 }

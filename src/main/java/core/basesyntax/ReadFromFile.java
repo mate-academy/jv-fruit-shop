@@ -1,13 +1,13 @@
 package core.basesyntax;
 
-import core.basesyntax.interfaces.ReadFromTheFileInterface;
+import core.basesyntax.interfaces.ReadFromFileInt;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ReadFromFile implements ReadFromTheFileInterface {
+public class ReadFromFile implements ReadFromFileInt {
 
     @Override
     public List<String> readFromFile(String fileName) {
@@ -18,8 +18,8 @@ public class ReadFromFile implements ReadFromTheFileInterface {
             while (sc.hasNextLine()) {
                 textFromFile.add(sc.nextLine().toLowerCase());
             }
-        } catch (IOException e) {
-            throw new RuntimeException("Can't open file ", e);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Not correct file path.", e);
         }
         return textFromFile;
     }

@@ -1,31 +1,31 @@
 package core.basesyntax;
 
+import core.basesyntax.exeptions.NotEnoughFruitsException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class OperationWithFruits {
-    private static Storage range = new Storage();
-    private static List<String> fruitsAvailable = range.getFruitTypes();
-    private static DataValidation data = new DataValidation();
-    private static Buy buyingOperation = new Buy();
-    private static AddFruit addOperation = new AddFruit();
 
-    public List<String> operationWithFruits(List<String> fruitsFromFile) throws Exception {
-        data.dataValidation(fruitsFromFile);
-        for (int i = 0; i < fruitsFromFile.size(); i++) {
+    private RemoveFruit buyingOperation = new RemoveFruit();
+    private AddFruit addOperation = new AddFruit();
 
-            String operationType = fruitsFromFile.get(i).split(",")[0];
+    public List<Fruit> operationWithFruits(List<Transaction> transaction)
+            throws NotEnoughFruitsException {
+        List<Fruit> fruitsAvailable = new ArrayList<>();
+        for (int i = 0; i < transaction.size(); i++) {
+            String operationType = transaction.get(i).getTypeOfOperation();
             switch (operationType) {
                 case "s":
                     fruitsAvailable = addOperation
-                            .fruitsAdd(fruitsFromFile.get(i));
+                            .operation(fruitsAvailable, transaction.get(i));
                     break;
                 case "b":
                     fruitsAvailable = buyingOperation
-                            .buying(fruitsFromFile.get(i));
+                            .operation(fruitsAvailable, transaction.get(i));
                     break;
                 case "r":
                     fruitsAvailable = addOperation
-                            .fruitsAdd(fruitsFromFile.get(i));
+                            .operation(fruitsAvailable, transaction.get(i));
                     break;
                 default:
                     break;

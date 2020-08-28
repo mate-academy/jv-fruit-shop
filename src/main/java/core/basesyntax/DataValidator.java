@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class DataValidation {
+public class DataValidator {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
     public void dataValidation(List<String> fruitsFromFile)
@@ -20,14 +20,9 @@ public class DataValidation {
         }
         for (String s : fruitsFromFile) {
             String[] line = s.split(",");
-            if (line.length != 4) {
+            String toCheck = line[0] + "," + line[1] + "," + line[2];
+            if (!toCheck.matches("[s,b,r],[a-zA-Z]+,\\d+")) {
                 throw new NotValidDataException("You have entered incorrect data type.");
-            }
-            if (!line[0].equals("s") && !line[0].equals("b") && !line[0].equals("r")) {
-                throw new NotValidDataException("You have entered incorrect transaction type.");
-            }
-            if (!line[2].matches("\\d+")) {
-                throw new NotValidDataException("You have entered incorrect amount type.");
             }
             try {
                 LocalDate dateSupply = LocalDate.parse(line[3], FORMATTER);
