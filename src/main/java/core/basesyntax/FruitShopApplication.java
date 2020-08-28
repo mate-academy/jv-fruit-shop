@@ -10,7 +10,8 @@ import java.util.List;
 public class FruitShopApplication {
     public static void main(String[] args) {
         FileReaderService fileReaderService = new FileReaderService();
-        List<String> stringList = fileReaderService.readLinesFromFile("inputRecords.txt");
+        List<String> stringList = fileReaderService.readLinesFromFile(
+                "src/test/resources/inputRecords.txt");
 
         RecordParserService recordParserService = new RecordParserService();
         List<Record> recordList = recordParserService.parseRecords(stringList);
@@ -24,6 +25,6 @@ public class FruitShopApplication {
         String report = reportMakerService.makeReport();
 
         FileWriterService fileWriterService = new FileWriterService();
-        fileWriterService.writeLinesToFile("report.csv", report);
+        fileWriterService.writeLinesToFile("src/test/resources/report.csv", report);
     }
 }

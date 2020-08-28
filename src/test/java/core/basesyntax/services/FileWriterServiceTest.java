@@ -8,11 +8,12 @@ public class FileWriterServiceTest {
     @Test
     public void fileWriterServiceTestOk() {
         FileWriterService fileWriterService = new FileWriterService();
-        fileWriterService.writeLinesToFile("file_writer_test_file.txt",
+        fileWriterService.writeLinesToFile("src/test/resources/file_writer_test_file.txt",
                 "Text for FileWriterService test");
 
         FileReaderService fileReaderService = new FileReaderService();
-        List<String> result = fileReaderService.readLinesFromFile("file_writer_test_file.txt");
+        List<String> result = fileReaderService.readLinesFromFile(
+                "src/test/resources/file_writer_test_file.txt");
 
         Assert.assertEquals("Text for FileWriterService test", result.get(0).trim());
     }
@@ -20,10 +21,11 @@ public class FileWriterServiceTest {
     @Test(expected = RuntimeException.class)
     public void fileWriterServiceTestNullValue() {
         FileWriterService fileWriterService = new FileWriterService();
-        fileWriterService.writeLinesToFile("file_writer_test_file.txt", null);
+        fileWriterService.writeLinesToFile(
+                "src/test/resources/file_writer_test_file.txt", null);
 
         FileReaderService fileReaderService = new FileReaderService();
-        fileReaderService.readLinesFromFile("file_writer_test_file.txt");
+        fileReaderService.readLinesFromFile("src/test/resources/file_writer_test_file.txt");
     }
 
 
@@ -33,7 +35,7 @@ public class FileWriterServiceTest {
         fileWriterService.writeLinesToFile(null, "Text for FileWriterService test");
 
         FileReaderService fileReaderService = new FileReaderService();
-        fileReaderService.readLinesFromFile("file_writer_test_file.txt");
+        fileReaderService.readLinesFromFile("src/test/resources/file_writer_test_file.txt");
     }
 
 }
