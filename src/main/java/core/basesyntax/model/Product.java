@@ -12,7 +12,7 @@ public class Product {
         this.expirationDate = expirationDate;
     }
 
-    public LocalDate getExDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 

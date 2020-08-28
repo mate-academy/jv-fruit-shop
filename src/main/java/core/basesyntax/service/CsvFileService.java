@@ -1,10 +1,11 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.Command;
 import core.basesyntax.model.Product;
-import core.basesyntax.service.operations.Buy;
 import core.basesyntax.service.operations.Operation;
-import core.basesyntax.service.operations.Return;
-import core.basesyntax.service.operations.Supply;
+import core.basesyntax.service.operations.PurchaseOperation;
+import core.basesyntax.service.operations.ReturnOperation;
+import core.basesyntax.service.operations.SupplyOperation;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,9 +15,9 @@ public class CsvFileService {
     private static final Map<String, Operation> OPERATIONS = new TreeMap<>();
 
     {
-        OPERATIONS.put("s", new Supply());
-        OPERATIONS.put("b", new Buy());
-        OPERATIONS.put("r", new Return());
+        OPERATIONS.put("s", new SupplyOperation());
+        OPERATIONS.put("b", new PurchaseOperation());
+        OPERATIONS.put("r", new ReturnOperation());
     }
 
     private CsvFileHandler csvFileHandler = new CsvFileHandler();
@@ -24,16 +25,16 @@ public class CsvFileService {
     private CsvFileWriter csvFileWriter = new CsvFileWriter();
 
     public boolean runApplication(String csvInputFile, String csvOutputFile) {
-        List<String[]> commandList = csvFileHandler.processFile(csvInputFile);
-        for (String[] line : commandList) {
-            if (line[OPERATION_DATA].equals("type")) {
+        List<Command> commandList = csvFileHandler.processFile(csvInputFile);
+        for (Command command : commandList) {
+            if (command.getCommand()[OPERATION_DATA].equals("type")) {
                 continue;
             }
-            if (!OPERATIONS.containsKey(line[OPERATION_DATA].trim())) {
+            if (!OPERATIONS.containsKey(command.getCommand()[OPERATION_DATA].trim())) {
                 throw new UnsupportedOperationException("Unsupported operation");
             }
-            OPERATIONS.get(line[OPERATION_DATA].trim())
-                    .updateStorage(productParser.getProducts(line));
+            OPERATIONS.get(command.getCommand()[OPERATION_DATA].trim())
+                    .updateStorage(productParser.getProducts(command.getCommand()));
         }
         return csvFileWriter.createReport(csvOutputFile);
     }

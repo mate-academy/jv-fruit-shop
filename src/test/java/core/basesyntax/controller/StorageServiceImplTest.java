@@ -1,5 +1,6 @@
 package core.basesyntax.controller;
 
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -10,7 +11,7 @@ public class StorageServiceImplTest {
 
     @BeforeClass
     public static void initialCsvUtils() {
-        storageService = new StorageServiceImpl();
+        storageService = new StorageServiceImpl(new StorageDaoImpl());
     }
 
     @Test

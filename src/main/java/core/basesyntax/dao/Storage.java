@@ -13,8 +13,8 @@ public class Storage {
 
     public static void sortList() {
         FRUIT_LIST.sort((e1, e2) ->
-                e1.getExDate().isBefore(e2.getExDate()) ? -1
-                        : e1.getExDate().isAfter(e2.getExDate())
+                e1.getExpirationDate().isBefore(e2.getExpirationDate()) ? -1
+                        : e1.getExpirationDate().isAfter(e2.getExpirationDate())
                         ? 1 : 0);
     }
 }

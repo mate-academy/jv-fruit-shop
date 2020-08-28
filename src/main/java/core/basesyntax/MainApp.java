@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class MainApp {
     public static void main(String[] args) {
-
         System.out.println("Input path to file for reading in form: "
                 + "src/main/resources/inputFile.csv");
         Scanner scanner = new Scanner(System.in);

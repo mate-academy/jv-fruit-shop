@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.controller.StorageServiceImpl;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Product;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ public class ReportCreator {
 
     private Map<String, Integer> countProducts() {
         Map<String, Integer> countMap = new TreeMap<>();
-        List<Product> storageList = new StorageServiceImpl().getAll();
+        List<Product> storageList = new StorageServiceImpl(new StorageDaoImpl()).getAll();
         for (Product product : storageList) {
             if (countMap.containsKey(product.getFruitType())) {
                 countMap.replace(product.getFruitType(), countMap.get(product.getFruitType()) + 1);
