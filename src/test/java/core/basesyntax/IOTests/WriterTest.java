@@ -18,7 +18,7 @@ public class WriterTest {
 
     @BeforeClass
     public static void beforeClass() {
-        List<FruitDto> transactions = Reader.readFromFile("src/csvFolder/inputNormal1.csv");
+        List<FruitDto> transactions = Reader.readFromFile("src/CsvFolder/inputNormal1.csv");
         OperationHandler.handleOperation(transactions);
     }
 
