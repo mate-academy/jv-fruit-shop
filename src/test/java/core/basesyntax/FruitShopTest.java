@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -56,8 +55,7 @@ public class FruitShopTest {
     }
 
     @Test
-    public void testManyFruits() throws IOException {
-        Files.deleteIfExists(REPORT);
+    public void testReportWithManyFruits() throws IOException {
         FruitStoreApplication.makeReport(MANY_FRUITS);
         List<String> BigTestFile = Files.readAllLines(Path.of(RESULT));
         Assert.assertTrue(BigTestFile.size() == 4);
@@ -70,17 +68,16 @@ public class FruitShopTest {
     @Test(expected = RuntimeException.class)
     public void wrongData() throws IOException {
         FruitStoreApplication.makeReport(ERROR_IN_DATE);
-        Files.deleteIfExists(REPORT);
     }
 
     @Test
     public void checkAdditionToStock() {
         List<Fruit> fruits = new ArrayList<>();
         Fruit fruit = new Fruit();
-        fruit.setFruit("banana");
+        fruit.setFruitName("banana");
         fruit.setLocalDate(LocalDate.now());
         fruits.add(fruit);
-        Assert.assertTrue(AvailableFruit.endStock(fruits).size() == 1);
-        Assert.assertTrue(AvailableFruit.endStock(fruits).get("banana") == 1);
+        Assert.assertTrue(AvailableFruit.getStockReport(fruits).size() == 1);
+        Assert.assertTrue(AvailableFruit.getStockReport(fruits).get("banana") == 1);
     }
 }

@@ -6,13 +6,13 @@ import java.util.Map;
 
 public class AvailableFruit {
 
-    public static Map<String, Integer> endStock(List<Fruit> list) {
+    public static Map<String, Integer> getStockReport(List<Fruit> list) {
         Map<String, Integer> stockReport = new HashMap<>();
         for (Fruit fruit : list) {
-            if (stockReport.containsKey(fruit.getFruit())) {
-                stockReport.put(fruit.getFruit(), stockReport.get(fruit.getFruit()) + 1);
+            if (stockReport.containsKey(fruit.getFruitName())) {
+                stockReport.put(fruit.getFruitName(), stockReport.get(fruit.getFruitName()) + 1);
             } else {
-                stockReport.put(fruit.getFruit(), 1);
+                stockReport.put(fruit.getFruitName(), 1);
             }
         }
         return stockReport;

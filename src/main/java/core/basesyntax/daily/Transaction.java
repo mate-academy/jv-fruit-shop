@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Transaction {
     private Character operation;
-    private String fruitType;
+    private String fruitName;
     private int quantity;
     private LocalDate transactionDate;
 
@@ -12,8 +12,8 @@ public class Transaction {
         this.operation = operation;
     }
 
-    public void setFruitType(String fruitType) {
-        this.fruitType = fruitType;
+    public void setFruitName(String fruitName) {
+        this.fruitName = fruitName;
     }
 
     public void setQuantity(int quantity) {
@@ -28,8 +28,8 @@ public class Transaction {
         return operation;
     }
 
-    public String getFruitType() {
-        return fruitType;
+    public String getFruitName() {
+        return fruitName;
     }
 
     public int getQuantity() {

@@ -3,7 +3,7 @@ package core.basesyntax.daily;
 import java.time.LocalDate;
 
 public class Fruit {
-    private String fruit;
+    private String fruitName;
     private LocalDate localDate;
 
     public LocalDate getLocalDate() {
@@ -14,11 +14,11 @@ public class Fruit {
         this.localDate = localDate;
     }
 
-    public String getFruit() {
-        return fruit;
+    public String getFruitName() {
+        return fruitName;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
+    public void setFruitName(String fruitName) {
+        this.fruitName = fruitName;
     }
 }

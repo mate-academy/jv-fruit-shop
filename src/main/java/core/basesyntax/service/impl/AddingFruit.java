@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.Storage;
 import core.basesyntax.daily.Fruit;
+import core.basesyntax.daily.Storage;
 
 public class AddingFruit implements StockChangeable {
     private Storage storage;

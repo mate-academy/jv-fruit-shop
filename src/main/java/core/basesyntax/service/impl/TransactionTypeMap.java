@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TypeMap {
+public class TransactionTypeMap {
     public static final Map<Character, StockChangeable> typeMap;
 
     static {

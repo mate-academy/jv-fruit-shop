@@ -19,7 +19,7 @@ public class ReportWriter {
 
             bufferedWriter.write("fruit" + "," + "quantity");
             bufferedWriter.newLine();
-            Map<String, Integer> result = AvailableFruit.endStock(report);
+            Map<String, Integer> result = AvailableFruit.getStockReport(report);
             for (Map.Entry<String, Integer> entry : result.entrySet()) {
                 bufferedWriter.write(entry.getKey() + "," + entry.getValue());
                 bufferedWriter.newLine();

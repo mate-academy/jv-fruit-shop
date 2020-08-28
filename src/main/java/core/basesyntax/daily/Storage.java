@@ -1,6 +1,5 @@
-package core.basesyntax;
+package core.basesyntax.daily;
 
-import core.basesyntax.daily.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class Storage {
 
     public void remove(Fruit fruit) {
         for (int i = 0; i < fruits.size(); i++) {
-            if (fruit.getFruit().equals(fruits.get(i).getFruit())
+            if (fruit.getFruitName().equals(fruits.get(i).getFruitName())
                     && fruit.getLocalDate().isBefore(fruits.get(i).getLocalDate())) {
                 fruits.remove(i);
                 return;
