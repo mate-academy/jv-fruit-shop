@@ -83,6 +83,9 @@
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
+                    <excludes>
+                        <exclude>**/Main</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>

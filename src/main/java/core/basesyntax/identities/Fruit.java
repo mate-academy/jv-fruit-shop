@@ -19,18 +19,6 @@ public class Fruit {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public LocalDate getDateOfProduction() {
-        return dateOfProduction;
-    }
-
-    public void setDateOfProduction(LocalDate dateOfProduction) {
-        this.dateOfProduction = dateOfProduction;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
