@@ -18,7 +18,6 @@ public class FruitDtoServiceTest {
 
     @Before
     public void setUp() {
-//        LIST_ARRAYS_OF_STRINGS.add(LINE_ONE.split(","));
         LIST_ARRAYS_OF_STRINGS.add(LINE_TWO.split(","));
         LIST_ARRAYS_OF_STRINGS.add(LINE_THREE.split(","));
         fruitDto.setOperation("s");

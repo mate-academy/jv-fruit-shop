@@ -3,14 +3,15 @@ package core.basesyntax.service;
 import core.basesyntax.products.Fruit;
 import core.basesyntax.storage.ListStorage;
 import java.util.Comparator;
+import java.util.List;
 
 public class BuyService implements ServiceAble {
 
     @Override
     public void operationWithProduct(Fruit fruit) {
         int numNeededFruit = fruit.getAmount();
-
-        int sumAvailable = ListStorage.listStorage.stream()
+        List<Fruit> listStorage = ListStorage.listStorage;
+        int sumAvailable = listStorage.stream()
                 .filter(x -> x.getName().equals(fruit.getName()))
                 .filter(x -> x.getExpirationDate().isAfter(fruit.getExpirationDate()))
                 .mapToInt(Fruit::getAmount)
@@ -18,9 +19,15 @@ public class BuyService implements ServiceAble {
         if (numNeededFruit > sumAvailable) {
             throw new IllegalArgumentException("Wrong number or date of fruits");
         }
-        ListStorage.listStorage.sort(Comparator.comparing(Fruit::getExpirationDate));
-        for (int i = 0; i < numNeededFruit; i++) {
-            ListStorage.listStorage.remove(0);
+        listStorage.sort(Comparator.comparing(Fruit::getExpirationDate));
+        while (numNeededFruit > 0) {
+            for (int i = 0; i > listStorage.size() || numNeededFruit > 0; i++) {
+                if (listStorage.get(i).getName().equals(fruit.getName())) {
+                    listStorage.remove(i);
+                    numNeededFruit--;
+                    i--;
+                }
+            }
         }
     }
 }
