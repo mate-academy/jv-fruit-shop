@@ -25,5 +25,4 @@ public class FruitFileReader {
         }
         return operations;
     }
-
 }
