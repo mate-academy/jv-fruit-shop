@@ -1,7 +1,6 @@
 package core.basesyntax.readwritefile;
 
 import core.basesyntax.readwritefile.interfaces.IWriteCsv;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;

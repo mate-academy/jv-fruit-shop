@@ -7,7 +7,6 @@ import core.basesyntax.maketransaction.operations.Return;
 import core.basesyntax.maketransaction.operations.Supply;
 import core.basesyntax.readwritefile.ReadCsv;
 import core.basesyntax.readwritefile.WriteCsv;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;

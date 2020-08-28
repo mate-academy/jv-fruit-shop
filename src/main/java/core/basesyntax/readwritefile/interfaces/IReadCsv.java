@@ -1,7 +1,6 @@
 package core.basesyntax.readwritefile.interfaces;
 
 import core.basesyntax.maketransaction.Transaction;
-
 import java.io.FileNotFoundException;
 import java.util.List;
 
