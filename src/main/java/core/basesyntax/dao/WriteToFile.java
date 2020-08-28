@@ -11,16 +11,12 @@ import java.util.List;
 public class WriteToFile {
     public boolean writeToFile(String filePath) {
         Path path = Paths.get(filePath);
-        if (Files.exists(path)) {
-            try {
-                Files.delete(path);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            createFile(filePath);
-        } else {
-            createFile(filePath);
+        try {
+            Files.deleteIfExists(path);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+        createFile(filePath);
 
         SortingService sort = new SortingService();
         List<String> stringsToFile = sort.sortDataBeforeWrite();
