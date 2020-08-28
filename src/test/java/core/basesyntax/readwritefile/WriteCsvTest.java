@@ -30,4 +30,11 @@ public class WriteCsvTest {
         List<String> actual = Files.readAllLines(Path.of("src/test/java/core/basesyntax/readwritefile/testfilestowrite/FileOkActual.csv"));
         assertEquals(expected,actual);
     }
+
+    @Test(expected = NullPointerException.class)
+    public void writeCSV_IOException() {
+        Map<String, Integer> currentBalance = new HashMap<>();
+        currentBalance.put("banana", 97);
+        testWriter.writeCsv(currentBalance,null);
+    }
 }

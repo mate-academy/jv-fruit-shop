@@ -20,8 +20,6 @@ public class WriteCsv implements IWriteCsv {
             for (Map.Entry<String, Integer> entry : currentBalance.entrySet()) {
                 printer.printRecord(entry.getKey(), entry.getValue());
             }
-        } catch (FileNotFoundException exception) {
-            System.out.println(("file " + pathName + " does not exist"));
         } catch (IOException exception) {
             System.out.println(("file " + pathName + " is not written"));
             exception.printStackTrace();

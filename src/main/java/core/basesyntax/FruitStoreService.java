@@ -7,6 +7,8 @@ import core.basesyntax.maketransaction.operations.Return;
 import core.basesyntax.maketransaction.operations.Supply;
 import core.basesyntax.readwritefile.ReadCsv;
 import core.basesyntax.readwritefile.WriteCsv;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class FruitStoreService {
         storage = new Storage();
     }
 
-    public void terminal(String pathNameFrom, String pathNameTo) {
+    public void terminal(String pathNameFrom, String pathNameTo) throws FileNotFoundException {
         List<Transaction> transactions = new ArrayList<>(new ReadCsv().readCsv(pathNameFrom));
         for (Transaction transaction : transactions) {
             switch (transaction.getType()) {

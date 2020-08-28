@@ -2,11 +2,13 @@ package core.basesyntax.readwritefile;
 
 import core.basesyntax.maketransaction.Transaction;
 import core.basesyntax.readwritefile.interfaces.IReadCsv;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -18,7 +20,7 @@ public class ReadCsv implements IReadCsv {
     }
 
     @Override
-    public List<Transaction> readCsv(String pathName) {
+    public List<Transaction> readCsv(String pathName) throws FileNotFoundException {
         List<Transaction> transactions = new ArrayList<>();
         try (CSVParser csvReader = new CSVParser(new FileReader(pathName), CSV_FORMAT)) {
             for (CSVRecord csvRecord : csvReader) {
@@ -30,11 +32,8 @@ public class ReadCsv implements IReadCsv {
                 checkData(transaction);
                 transactions.add(transaction);
             }
-        } catch (FileNotFoundException exception) {
-            System.out.println(("file " + pathName + " does not exist"));
         } catch (IOException exception) {
-            System.out.println(("file " + pathName + " is not read"));
-            exception.printStackTrace();
+            throw new FileNotFoundException("file " + pathName + "does not exist");
         }
         return transactions;
     }
