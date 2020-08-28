@@ -101,4 +101,12 @@ public class FruitShopTest {
         Fruit fruit2 = new Fruit("banana",72,date);
         Assert.assertTrue(fruit.hashCode()== fruit2.hashCode());
     }
+
+    @Test
+    public void fruitCompareToTest(){
+        LocalDate date = LocalDate.now();
+        Fruit fruit = new Fruit("banana",50,date);
+        Fruit fruit2 = new Fruit("banana",72,date);
+        Assert.assertTrue(fruit.compareTo(fruit2)==0);
+    }
 }
