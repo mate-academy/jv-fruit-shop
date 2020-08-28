@@ -10,7 +10,7 @@ public class ReadFileTest {
     public final static String SECOND_PATH = "src/test/resources/test_2.csv";
     public final static List<String> EXPECTING_RESULT_FIRST = new ArrayList<>();
     public final static String EXPECTING_RESULT_SECOND = "s,banana,100,2020-10-17";
-    public final static String SECOND_EXPECTING_RESULT = "fruit, quantity";
+    public final static String EXPECTING_RESULT_THIRD = "fruit, quantity";
 
     @Test
     public void simpleReadFileTest() {
@@ -37,7 +37,7 @@ public class ReadFileTest {
     public void fileReaderTestEmptyFile() {
         ReadFile reader = new ReadFile();
         String actual = reader.readFile(SECOND_PATH).get(0);
-        Assert.assertEquals(SECOND_EXPECTING_RESULT, actual);
+        Assert.assertEquals(EXPECTING_RESULT_THIRD, actual);
     }
 }
 

@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.order.Order;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +19,10 @@ public class OrderDaoImplTest {
         orders.add(order1);
         orders.add(order2);
         orders.add(order3);
-
         Storage.orders.add(order1);
         Storage.orders.add(order2);
         Storage.orders.add(order3);
         orderDao.getAll();
         Assert.assertEquals(orders,Storage.orders);
-
     }
 }

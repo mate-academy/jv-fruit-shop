@@ -3,7 +3,6 @@ package core.basesyntax.util;
 import core.basesyntax.order.Order;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,10 +13,10 @@ public class GetToltalSumOfFruitTest {
     private static int EXPECTING_RESULT = 51;
     public final static String FRUIT = "banana";
     private static List<Order> supplyList = new ArrayList<>();
-    GetTotalSumOfFruit getTotalSumOfFruit = new GetTotalSumOfFruit();
 
     @Test
     public void shouldGetTotalSumOfFruitTest() {
+        GetTotalSumOfFruit getTotalSumOfFruit = new GetTotalSumOfFruit();
         supplyList.add(order1);
         supplyList.add(order2);
         supplyList.add(order3);
