@@ -4,8 +4,8 @@ import java.util.List;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        String readFromFilePath = "";
-        String writeToFileName = "";
+        String readFromFilePath = "src\\test\\mainTest";
+        String writeToFileName = "src\\test\\mainTestWriter";
         String separator = ",";
 
         Storage storage = new Storage();
