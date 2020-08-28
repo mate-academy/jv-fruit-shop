@@ -20,7 +20,7 @@ public class FruitShopService {
     public boolean processFile(String inputFilePath, String outputFilePath,
                                Map<String, Operable> operations) {
 
-        List<String[]> data = fileReader.readDataFromFile(inputFilePath);
+        List<FruitDto> data = fileReader.readDataFromFile(inputFilePath);
         Map<String, Map<String, Integer>> fruitStorage
                 = parser.parseData(data, operations);
         fileWriter.writeResultsToFile(fruitStorage, outputFilePath);

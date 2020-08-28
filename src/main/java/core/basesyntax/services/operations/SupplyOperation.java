@@ -1,15 +1,16 @@
 package core.basesyntax.services.operations;
 
+import core.basesyntax.services.FruitDto;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Supply implements Operable {
+public class SupplyOperation implements Operable {
 
     @Override
-    public boolean updateStorage(Map<String, Map<String, Integer>> store, String[] data) {
-        String supplyingFruit = data[1];
-        Integer availableFruitCount = Integer.parseInt(data[2]);
-        String fruitExpirationDate = data[3];
+    public boolean updateStorage(Map<String, Map<String, Integer>> store, FruitDto dto) {
+        String supplyingFruit = dto.getFruitName();
+        Integer availableFruitCount = dto.getCount();
+        String fruitExpirationDate = dto.getData();
         if (store.containsKey(supplyingFruit)) {
             Map<String, Integer> fruit = store.get(supplyingFruit);
             int newFruitCount = availableFruitCount;

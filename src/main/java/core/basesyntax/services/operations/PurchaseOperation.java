@@ -1,5 +1,6 @@
 package core.basesyntax.services.operations;
 
+import core.basesyntax.services.FruitDto;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.TreeMap;
@@ -7,10 +8,10 @@ import java.util.TreeMap;
 public class PurchaseOperation implements Operable {
 
     @Override
-    public boolean updateStorage(Map<String, Map<String, Integer>> store, String[] data) {
-        String buyingFruit = data[1];
-        int buyingCount = Integer.parseInt(data[2]);
-        LocalDate buyingDate = LocalDate.parse(data[3]);
+    public boolean updateStorage(Map<String, Map<String, Integer>> store, FruitDto dto) {
+        String buyingFruit = dto.getFruitName();
+        int buyingCount = dto.getCount();
+        LocalDate buyingDate = LocalDate.parse(dto.getData());
         if (store.containsKey(buyingFruit)) {
             Map<LocalDate, Integer> fruitsSortedByData
                     = getFilledMap(store, buyingFruit);

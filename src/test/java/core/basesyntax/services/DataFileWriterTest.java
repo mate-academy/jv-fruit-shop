@@ -38,7 +38,7 @@ public class DataFileWriterTest {
     }
 
     @Test
-    public void writeToFile_ok(){
+    public void writeToValidFile(){
         store.put("banana", bananaEntity);
 
         boolean result = fileWriter.writeResultsToFile(store, FILE_PATH);

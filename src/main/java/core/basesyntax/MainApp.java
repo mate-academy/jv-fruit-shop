@@ -6,14 +6,13 @@ import core.basesyntax.services.DataToMapParser;
 import core.basesyntax.services.FruitShopService;
 import core.basesyntax.services.operations.Operable;
 import core.basesyntax.services.operations.PurchaseOperation;
-import core.basesyntax.services.operations.Return;
-import core.basesyntax.services.operations.Supply;
+import core.basesyntax.services.operations.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainApp {
-    private static final String FILE_PATH = "src/test/resources/inputFile.txt";
-    private static final String RESULT_FILE_PATH = "src/test/resources/resultFile.txt";
+    private static final String FILE_PATH = "src/test/resources/inputFile.csv";
+    private static final String RESULT_FILE_PATH = "src/test/resources/resultFile.csv";
     private static final String SUCCESSFUL_MESSAGE
             = "file processed successfully, output file was created";
     private static final String UNSUCCESSFUL_MESSAGE
@@ -35,8 +34,8 @@ public class MainApp {
 
     private static Map<String, Operable> createOperationsMap() {
         Map<String, Operable> map = new HashMap<>();
-        map.put(RETURN, new Return(new Supply()));
-        map.put(SUPPLY, new Supply());
+        map.put(RETURN, new SupplyOperation());
+        map.put(SUPPLY, new SupplyOperation());
         map.put(BUY, new PurchaseOperation());
         return map;
     }

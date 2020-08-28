@@ -2,8 +2,7 @@ package core.basesyntax.services;
 
 import core.basesyntax.services.operations.PurchaseOperation;
 import core.basesyntax.services.operations.Operable;
-import core.basesyntax.services.operations.Return;
-import core.basesyntax.services.operations.Supply;
+import core.basesyntax.services.operations.SupplyOperation;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,26 +17,26 @@ public class DataToMapParserTest {
     private static final String SUPPLY = "s";
     private static final String BUY = "b";
     private static Map<String, Operable> operations;
-    private static List<String[]> dataLines;
+    private static List<FruitDto> fruitDtos;
     private static DataToMapParser dataParser;
 
     @BeforeClass
     public static void beforeClass() {
         dataParser = new DataToMapParser();
         operations = new HashMap<>();
-        dataLines = new ArrayList<>();
-        operations.put(RETURN, new Return(new Supply()));
-        operations.put(SUPPLY, new Supply());
+        fruitDtos = new ArrayList<>();
+        operations.put(RETURN, new SupplyOperation());
+        operations.put(SUPPLY, new SupplyOperation());
         operations.put(BUY, new PurchaseOperation());
     }
 
     @Test
     public void parseDataToMap() {
-        dataLines.add(new String[]{"s", "banana", "100", "2020-10-14" });
-        dataLines.add(new String[]{"b", "banana", "30", "2020-10-15" });
-        dataLines.add(new String[]{"r", "banana", "20", "2020-10-17" });
-        dataLines.add(new String[]{"s", "orange", "30", "2020-10-15" });
-        Map<String, Map<String, Integer>> actual = dataParser.parseData(dataLines,
+        fruitDtos.add(new FruitDto("s", "banana", 100, "2020-10-14" ));
+        fruitDtos.add(new FruitDto("b", "banana", 30, "2020-10-15" ));
+        fruitDtos.add(new FruitDto("r", "banana", 20, "2020-10-17" ));
+        fruitDtos.add(new FruitDto("s", "orange", 30, "2020-10-15" ));
+        Map<String, Map<String, Integer>> actual = dataParser.parseData(fruitDtos,
                 operations);
 
         Assert.assertEquals(2, actual.size());
@@ -46,10 +45,10 @@ public class DataToMapParserTest {
 
     @Test(expected = DateTimeParseException.class)
     public void parseWithWrongLine() {
-        dataLines.add(new String[]{"b", "**", "30", "!!!" });
-        dataLines.add(new String[]{"s", "orange", "30", "2020-10-15" });
+        fruitDtos.add(new FruitDto("b", "**", 30, "!!!" ));
+        fruitDtos.add(new FruitDto("s", "orange", 30, "2020-10-15" ));
 
-        Map<String, Map<String, Integer>> actual = dataParser.parseData(dataLines,
+        Map<String, Map<String, Integer>> actual = dataParser.parseData(fruitDtos,
                 operations);
 
         Assert.assertEquals(2, actual.size());
@@ -58,13 +57,13 @@ public class DataToMapParserTest {
 
     @Test
     public void parseWithWrongOperationType() {
-        dataLines.add(new String[]{"s", "banana", "100", "2020-10-14" });
-        dataLines.add(new String[]{"b", "banana", "30", "2020-10-15" });
-        dataLines.add(new String[]{"G", "orange", "30", "2020-10-15" });
-        dataLines.add(new String[]{"r", "banana", "20", "2020-10-17" });
-        dataLines.add(new String[]{"s", "orange", "30", "2020-10-15" });
+        fruitDtos.add(new FruitDto("s", "banana", 100, "2020-10-14" ));
+        fruitDtos.add(new FruitDto("b", "banana", 30, "2020-10-15" ));
+        fruitDtos.add(new FruitDto("G", "orange", 30, "2020-10-15" ));
+        fruitDtos.add(new FruitDto("r", "banana", 20, "2020-10-17" ));
+        fruitDtos.add(new FruitDto("s", "orange", 30, "2020-10-15" ));
 
-        Map<String, Map<String, Integer>> actual = dataParser.parseData(dataLines, operations);
+        Map<String, Map<String, Integer>> actual = dataParser.parseData(fruitDtos, operations);
 
         Assert.assertEquals(2, actual.size());
         Assert.assertEquals(2, actual.get("banana").size());
@@ -73,8 +72,8 @@ public class DataToMapParserTest {
 
     @Test
     public void parseEmptyList() {
-        dataLines.clear();
-        Map<String, Map<String, Integer>> actual = dataParser.parseData(dataLines,
+        fruitDtos.clear();
+        Map<String, Map<String, Integer>> actual = dataParser.parseData(fruitDtos,
                 operations);
 
         Assert.assertEquals(0, actual.size());

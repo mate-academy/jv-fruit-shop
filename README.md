@@ -9,7 +9,7 @@ There are three type of operations in your fruit store:
 
 ```text
     s - supply, means you are receiving a new fruits from suppliers
-    b - purchaseOperation, means someone bought a fruit
+    b - buy, means someone bought a fruit
     r - return, means someone who have bought the fruits now returns you it
 ```
 
@@ -20,7 +20,7 @@ Let's check in details all types of operations:
        s,banana,100,2020-10-17     
     ```
    The line above means you receive a 100 bananas, and their expiration date is 17-th October 2020.
-1. Buy. Buyers can visit your shop and purchaseOperation some fruits. In this case you will have the following line in the file:
+1. Buy. Buyers can visit your shop and buy some fruits. In this case you will have the following line in the file:
     
     ```text
        b,banana,13,2020-10-15     

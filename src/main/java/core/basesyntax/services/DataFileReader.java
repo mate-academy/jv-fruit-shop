@@ -1,28 +1,18 @@
 package core.basesyntax.services;
 
-import com.opencsv.CSVReader;
+import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DataFileReader {
-    private static final int PARTS_OF_LINE = 4;
 
-    public List<String[]> readDataFromFile(String inputFilePath) {
-        List<String[]> data = new ArrayList<>();
-        try (CSVReader reader = new CSVReader(new FileReader(inputFilePath))) {
-            String[] line;
-            while ((line = reader.readNext()) != null) {
-                if (line.length != PARTS_OF_LINE) {
-                    continue;
-                }
-                data.add(line);
-            }
+    public List<FruitDto> readDataFromFile(String inputFilePath) {
+        try (FileReader fileReader = new FileReader(inputFilePath)) {
+            return new CsvToBeanBuilder<FruitDto>(fileReader)
+                    .withType(FruitDto.class).build().parse();
         } catch (IOException e) {
-            throw new RuntimeException("Couldn't read file, "
-                    + "something wrong with file or path is incorrect!");
+            throw new RuntimeException("Can't read the file, check path is correct");
         }
-        return data;
     }
 }
