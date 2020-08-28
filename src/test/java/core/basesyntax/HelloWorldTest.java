@@ -20,23 +20,23 @@ public class HelloWorldTest {
     private final FileWriterService fileWriterService = new FileWriterServiceImpl();
     private final FileReaderService fileReaderService = new FileReaderServiceImpl();
     private static final String FILE_PATH_TO_EMPTY_FILE
-            = "src\\test\\empty";
+            = "src/test/empty";
     private static final String FILE_PATH_TO_FILE_DOES_NOT_EXIST
-            = "src\\test\\resources\\k.csv";
+            = "src/test/resources/k.csv";
     private static final String FILE_PATH_TO_FILE_WITH_ONE_LINE_INFORMATION
-            = "src\\test\\testOneOperation";
+            = "src/test/testOneOperation";
     private static final String FILE_PATH_TO_OK_FILE
-            = "src\\test\\basic";
+            = "src/test/basic";
     private static final String FILE_PATH_TO_FILE_WITH_NOT_ENOUGH_INFORMATION
-            = "src\\test\\notEnoughData";
+            = "src/test/notEnoughData";
     private static final String FILE_PATH_TO_FILE_WITH_WRONG_OPERATION
-            = "src\\test\\wrongOperation";
+            = "src/test/wrongOperation";
     private static final String FILE_PATH_TO_FILE_WE_WRITE_IN
-            = "src\\test\\writeFile";
+            = "src/test/writeFile";
     private static final String FILE_PATH_FOR_MAIN_TEST
-            = "src\\test\\testAll";
+            = "src/test/testAll";
     private static final String FILE_PATH_FOR_MAIN_TEST_TO_WRITE
-            = "src\\test\\testAllWrite";
+            = "src/test/testAllWrite";
 
     @Test(expected = RuntimeException.class)
     public void readFileEmpty() {
