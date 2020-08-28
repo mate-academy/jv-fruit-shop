@@ -29,16 +29,16 @@ public class ReadCsvTest {
         expected.add(new Transaction("b", "banana", 13, "2020-10-15"));
         expected.add(new Transaction("r", "banana", 10, "2020-10-17"));
 
-        assertEquals(expected, testReader.readCsv("src/test/java/core/basesyntax/readWriteFile/testFilesToRead/fileOk.csv"));
+        assertEquals(expected, testReader.readCsv("src/test/java/core/basesyntax/readwritefile/testfilestoread/fileOk.csv"));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void readCSV_IllegalArgumentException() {
-        testReader.readCsv("src/test/java/core/basesyntax/readWriteFile/testFilesToRead/fileIllegalArgumentException.csv");
+        testReader.readCsv("src/test/java/core/basesyntax/readwritefile/testfilestoread/fileIllegalArgumentException.csv");
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void readCSV_IllegalArgumentException2() {
-        testReader.readCsv("src/test/java/core/basesyntax/readWriteFile/testFilesToRead/fileIllegalArgumentException2.csv");
+        testReader.readCsv("src/test/java/core/basesyntax/readwritefile/testfilestoread/fileIllegalArgumentException2.csv");
     }
 }
