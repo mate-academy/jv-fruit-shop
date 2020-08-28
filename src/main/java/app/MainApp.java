@@ -3,8 +3,8 @@ package app;
 import app.service.FileReadService;
 import app.service.FileWriterService;
 import app.service.Operation;
-import app.service.impl.FileReadServiceImplements;
-import app.service.impl.FileWriterServiceImplements;
+import app.service.impl.FileReadServiceImplementation;
+import app.service.impl.FileWriterServiceImplementation;
 import app.service.impl.OperationBuy;
 import app.service.impl.OperationReturn;
 import app.service.impl.OperationSupply;
@@ -30,13 +30,13 @@ public class MainApp {
         Map<String, Operation> fruitOperations = new HashMap<>();
         fillMapOfOperators(fruitOperations);
         FruitOperationStrategy fruitOperationStrategy = new FruitOperationStrategy(fruitOperations);
-        FileReadService fileReadService = new FileReadServiceImplements();
+        FileReadService fileReadService = new FileReadServiceImplementation();
         List<List<String>> allData = fileReadService.readFile(FILE_PATH_READ);
         for (List<String> line : allData) {
             Operation operation = fruitOperationStrategy.getOperation(line);
             operation.doOperation(line);
         }
-        FileWriterService fileWriterServiceImplements = new FileWriterServiceImplements();
+        FileWriterService fileWriterServiceImplements = new FileWriterServiceImplementation();
         fileWriterServiceImplements.writeData(FruitStorage.supplyFruits, FILE_PATH_WRITE);
     }
 }

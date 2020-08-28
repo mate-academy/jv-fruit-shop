@@ -8,25 +8,23 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileWriterServiceImplementsTest {
+public class FileWriterServiceImplementationTest {
     private static List<SupplyFruit> testFruits;
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final String RESULT_PATH = "src/main/java/resources/result.csv";
     private static FileWriterService fileWriterService;
     private static FileReadService fileReadService;
 
     @BeforeClass
     public static void start() {
-        fileWriterService = new FileWriterServiceImplements();
-        fileReadService = new FileReadServiceImplements();
-        SupplyFruit firstFruit = new SupplyFruit("banana", 10, LocalDate.parse("2020-08-26", FORMATTER));
-        SupplyFruit secondFruit = new SupplyFruit("orange", 10, LocalDate.parse("2020-08-24", FORMATTER));
-        SupplyFruit thirdFruit = new SupplyFruit("orange", 10, LocalDate.parse("2020-08-22", FORMATTER));
+        fileWriterService = new FileWriterServiceImplementation();
+        fileReadService = new FileReadServiceImplementation();
+        SupplyFruit firstFruit = new SupplyFruit("banana", 10, LocalDate.parse("2020-08-26"));
+        SupplyFruit secondFruit = new SupplyFruit("orange", 10, LocalDate.parse("2020-08-24"));
+        SupplyFruit thirdFruit = new SupplyFruit("orange", 10, LocalDate.parse("2020-08-22"));
         testFruits = new ArrayList<>();
         testFruits.add(firstFruit);
         testFruits.add(secondFruit);

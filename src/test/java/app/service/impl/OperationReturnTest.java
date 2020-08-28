@@ -25,7 +25,7 @@ public class OperationReturnTest {
         fruitOperations.put("b", new OperationBuy());
         fruitOperations.put("r", new OperationReturn());
         fruitOperationStrategy = new FruitOperationStrategy(fruitOperations);
-        fileReadService = new FileReadServiceImplements();
+        fileReadService = new FileReadServiceImplementation();
     }
 
     @Test(expected = RuntimeException.class)

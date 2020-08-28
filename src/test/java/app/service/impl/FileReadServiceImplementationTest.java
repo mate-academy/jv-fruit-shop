@@ -6,9 +6,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
-public class FileReadServiceImplementsTest {
+public class FileReadServiceImplementationTest {
     public static final String RESULT_PATH = "src/test/resources/testOpen.csv";
     private static FileReadService fileReadService;
     private static final String SUPPLY = "s";
@@ -18,7 +17,7 @@ public class FileReadServiceImplementsTest {
 
     @BeforeClass
     public static void start() {
-       fileReadService = new FileReadServiceImplements();
+       fileReadService = new FileReadServiceImplementation();
         testValue = new ArrayList<>();
         List<String> firstRow = new ArrayList<>();
         firstRow.add(SUPPLY);

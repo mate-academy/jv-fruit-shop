@@ -9,7 +9,7 @@ public class OperationBuy implements Operation {
 
     @Override
     public void doOperation(List<String> data) {
-        SupplyFruit currentFruit = new FruitParserImplements().parse(data);
+        SupplyFruit currentFruit = new FruitParserImplementation().parse(data);
         for (SupplyFruit iteratorFruit : FruitStorage.supplyFruits) {
             if (iteratorFruit.getFruitName().equals(currentFruit.getFruitName())
                     && iteratorFruit.getEndOfShelfLife().isAfter(currentFruit.getEndOfShelfLife())
@@ -24,7 +24,6 @@ public class OperationBuy implements Operation {
                             - iteratorFruit.getQuantity());
                     iteratorFruit.setQuantity(0);
                 }
-
             }
         }
         throw new RuntimeException("Not enough "

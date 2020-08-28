@@ -8,7 +8,7 @@ import java.util.List;
 public class OperationReturn implements Operation {
     @Override
     public void doOperation(List<String> data) {
-        SupplyFruit currentFruit = new FruitParserImplements().parse(data);
+        SupplyFruit currentFruit = new FruitParserImplementation().parse(data);
         boolean isExist = false;
         for (SupplyFruit iteratorFruit : FruitStorage.supplyFruits) {
             if (iteratorFruit.getFruitName().equals(currentFruit.getFruitName())) {

@@ -5,23 +5,20 @@ import app.service.FruitParser;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitParserImplementsTest {
+public class FruitParserImplementationTest {
     private static final String SUPPLY = "s";
     private static final String BUY = "b";
     private static final String RETURN = "r";
     private static List<List<String>> testValue;
     private static FruitParser parserImplements;
-    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @BeforeClass
     public static void start() {
-        parserImplements = new FruitParserImplements();
+        parserImplements = new FruitParserImplementation();
         testValue = new ArrayList<>();
         List<String> firstRow = new ArrayList<>();
         firstRow.add(SUPPLY);
@@ -46,9 +43,9 @@ public class FruitParserImplementsTest {
     @Test
     public void fruitParserOk() {
         SupplyFruit testFirstFruit = new SupplyFruit("banana", 100,
-                LocalDate.parse("2020-10-17", formatter));
+                LocalDate.parse("2020-10-17"));
         SupplyFruit testSecondFruit = new SupplyFruit("banana", 13,
-                LocalDate.parse("2020-10-15", formatter));
+                LocalDate.parse("2020-10-15"));
         SupplyFruit firstResult = parserImplements.parse(testValue.get(0));
         SupplyFruit secondResult = parserImplements.parse(testValue.get(1));
         Assert.assertEquals(firstResult, testFirstFruit);

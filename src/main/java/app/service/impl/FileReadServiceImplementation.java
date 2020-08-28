@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FileReadServiceImplements implements FileReadService {
+public class FileReadServiceImplementation implements FileReadService {
     public static final String SEPARATOR_TO_SPLIT = ",";
 
     @Override

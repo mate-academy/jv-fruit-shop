@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class FileWriterServiceImplements implements FileWriterService {
+public class FileWriterServiceImplementation implements FileWriterService {
     public static final String SEPARATOR = ",";
     
     @Override
