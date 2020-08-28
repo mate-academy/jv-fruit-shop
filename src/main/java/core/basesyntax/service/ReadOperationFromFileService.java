@@ -34,11 +34,11 @@ public class ReadOperationFromFileService {
                         returner.execute(fruit);
                         break;
                     default:
-                        throw new NullPointerException("Empty file");
+                        throw new IllegalArgumentException("Wrong operation");
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Wrong path");
         }
     }
 }

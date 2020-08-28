@@ -6,6 +6,7 @@ import core.basesyntax.model.Storage;
 import core.basesyntax.model.FruitBox;
 import core.basesyntax.service.*;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,20 +15,32 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
+import java.util.NoSuchElementException;
 
 
 public class FruitStoreTest {
+    private static final String INTO_PATH
+            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\storageContent.csv";
     private static final String FIRST_PATH
             = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\fruitsTest.csv";
     private static final String SECOND_PATH
-            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\storageContent.csv";
-    private static final String SECOND_PATH2
             = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\fruitsTest2.csv";
+    private static final String THIRD_PATH
+            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\fruitsTest3.csv";
+    private static final String FOURTH_PATH
+            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\fruitsTest4.csv";
+    private static final String FIFTH_PATH
+            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\fruitsTest5.csv";
+    private static final String WRONG_PATH
+            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\wrongTest.csv";
+    private static final String WRONG_DATE_PATH
+            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\wrongDateTest.csv";
 
     @Before
     public void setup() {
         try {
-            FileWriter fileWriter = new FileWriter(SECOND_PATH);
+            FileWriter fileWriter = new FileWriter(INTO_PATH);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write("");
             bufferedWriter.close();
@@ -35,6 +48,32 @@ public class FruitStoreTest {
             e.printStackTrace();
         }
         Storage.storage.clear();
+    }
+
+    @Test
+    public void outputResultExceptionTest2() {
+        try {
+            ReadOperationFromFileService readFromFileService = new ReadOperationFromFileService();
+            readFromFileService.read(WRONG_PATH);
+
+            Assert.fail("We had to get an exception");
+        } catch (IllegalArgumentException e) {
+            String errMsg = "Wrong operation";
+            assertEquals(errMsg, e.getMessage());
+        }
+    }
+
+    @Test
+    public void dataParseExceptionTest() {
+        try {
+            ReadOperationFromFileService readFromFileService = new ReadOperationFromFileService();
+            readFromFileService.read(WRONG_DATE_PATH);
+
+            Assert.fail("We had to get an exception");
+        } catch (DateTimeParseException e) {
+            String errMsg = "Text '20-10-2020' could not be parsed at index 0";
+            assertEquals(errMsg, e.getMessage());
+        }
     }
 
     @Test
@@ -57,7 +96,7 @@ public class FruitStoreTest {
         writeIntoFileService.write(storageContent);
 
         String currentString = "";
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(SECOND_PATH))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(INTO_PATH))) {
             currentString = bufferedReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,13 +106,92 @@ public class FruitStoreTest {
 
     @Test
     public void supplierTest() {
-        ReadOperationFromFileService readFromFileService = new ReadOperationFromFileService();
-        readFromFileService.read(SECOND_PATH2);
+        ReadOperationFromFileService readOperationFromFileService
+                = new ReadOperationFromFileService();
+        readOperationFromFileService.read(SECOND_PATH);
 
         StorageService<FruitBox> storageService = new StorageService<>();
         String storageContent = storageService.getStorage();
 
         assertEquals("banana,5", storageContent);
+        Storage.storage.clear();
+
+        readOperationFromFileService = new ReadOperationFromFileService();
+        readOperationFromFileService.read(THIRD_PATH);
+
+        storageService = new StorageService<>();
+        storageContent = storageService.getStorage();
+
+        assertEquals("banana,90", storageContent);
+    }
+
+    @Test
+    public void consumerNSEETest() {
+        try {
+            ReadOperationFromFileService readOperationFromFileService
+                    = new ReadOperationFromFileService();
+            readOperationFromFileService.read(FOURTH_PATH);
+
+            StorageService storageService = new StorageService<>();
+            String storageContent = storageService.getStorage();
+            Assert.fail("We had to get an exception");
+        } catch (NoSuchElementException e) {
+            String errMsg = "Not enough fruits in storage";
+            assertEquals(errMsg, e.getMessage());
+        }
+    }
+
+    @Test
+    public void consumerNPETest() {
+        try {
+            ReadOperationFromFileService readOperationFromFileService
+                    = new ReadOperationFromFileService();
+            readOperationFromFileService.read("");
+
+            StorageService storageService = new StorageService<>();
+            String storageContent = storageService.getStorage();
+
+            Assert.fail("We had to get an exception");
+        } catch (RuntimeException e) {
+            String errMsg = "Wrong path";
+            assertEquals(errMsg, e.getMessage());
+        }
+    }
+
+    @Test
+    public void resultFileServiceExceptionTest() {
+        try {
+            ReadOperationFromFileService readOperationFromFileService
+                    = new ReadOperationFromFileService();
+            readOperationFromFileService.read(FIFTH_PATH);
+
+            StorageService storageService = new StorageService<>();
+            String storageContent = storageService.getStorage();
+            Assert.fail("We had to get an exception");
+        } catch (NullPointerException e) {
+            String errMsg = "No fruits in storage";
+            assertEquals(errMsg, e.getMessage());
+        }
+    }
+
+    @Test
+    public void outputResultExceptionTest() {
+        try {
+            ReadOperationFromFileService readOperationFromFileService = new ReadOperationFromFileService();
+            readOperationFromFileService.read("");
+
+            StorageService<FruitBox> storageService = new StorageService<>();
+            String storageContent = storageService.getStorage();
+
+            WriteIntoFileService writeIntoFileService = new WriteIntoFileService();
+            writeIntoFileService.write(storageContent);
+
+            OutputResultFileService outputResultFileService = new OutputResultFileService();
+            Assert.fail("We had to get an exception here");
+        } catch (RuntimeException e) {
+            String errMsg = "Wrong path";
+            assertEquals(errMsg, e.getMessage());
+        }
     }
 
     @Test
@@ -87,9 +205,29 @@ public class FruitStoreTest {
         WriteIntoFileService writeIntoFileService = new WriteIntoFileService();
         writeIntoFileService.write(storageContent);
 
-        OutputResultFileService OutputResultFileService = new OutputResultFileService();
-        String actualResult = OutputResultFileService.sout();
+        OutputResultFileService outputResultFileService = new OutputResultFileService();
+        String actualResult = outputResultFileService.sout(outputResultFileService.getLocalPath());
 
         assertEquals("banana,95", storageContent);
+    }
+
+    @Test
+    public void writeIntoFileExceptionTest() {
+        final String localPath = "";
+        try {
+            ReadOperationFromFileService readOperationFromFileService = new ReadOperationFromFileService();
+            readOperationFromFileService.read(FIRST_PATH);
+
+            StorageService<FruitBox> storageService = new StorageService<>();
+            String storageContent = storageService.getStorage();
+
+            WriteIntoFileService writeIntoFileService = new WriteIntoFileService();
+            writeIntoFileService.setFilePath(localPath);
+            writeIntoFileService.write(storageContent);
+            Assert.fail("We had to get an exception");
+        } catch (RuntimeException e) {
+            String errMsg = "Wrong path";
+            assertEquals(errMsg, e.getMessage());
+        }
     }
 }

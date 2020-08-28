@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.InputMismatchException;
 
 public class WriteIntoFileService {
     private String filePath = "storageContent.csv";
@@ -15,7 +14,11 @@ public class WriteIntoFileService {
             out.write(storageContent + "\n");
             out.close();
         } catch (IOException e) {
-            throw new InputMismatchException("Wrong path");
+            throw new RuntimeException("Wrong path");
         }
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }

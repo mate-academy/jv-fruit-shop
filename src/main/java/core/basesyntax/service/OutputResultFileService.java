@@ -6,16 +6,21 @@ import java.io.IOException;
 
 public class OutputResultFileService {
     private StringBuilder resultBuilder = new StringBuilder();
+    private final String localPath = "storageContent.csv";
 
-    public String sout() {
+    public String sout(String filePath) {
         try (BufferedReader resultReader
-                     = new BufferedReader(new FileReader("storageContent.csv"))) {
+                     = new BufferedReader(new FileReader(localPath))) {
             while (resultReader.readLine() != null) {
                 resultBuilder.append(resultReader.readLine()).append("\n");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Wrong path");
         }
         return resultBuilder.toString();
+    }
+
+    public String getLocalPath() {
+        return localPath;
     }
 }
