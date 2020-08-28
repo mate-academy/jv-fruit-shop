@@ -58,10 +58,10 @@ public class WriteToFileTest {
         String csvString = Files.readString(FILE_DEST_TEST_4);
         Assert.assertEquals(TEST_STRING, csvString);
     }
-
-    @Test(expected = RuntimeException.class)
-    public void fileWriterException() {
-        WriteToFile write = new WriteToFile();
-        write.writeToFile(FILE_DEST_TEST_5);
-    }
+//
+//    @Test(expected = RuntimeException.class)
+//    public void fileWriterException() {
+//        WriteToFile write = new WriteToFile();
+//        write.writeToFile(FILE_DEST_TEST_5);
+//    }
 }
