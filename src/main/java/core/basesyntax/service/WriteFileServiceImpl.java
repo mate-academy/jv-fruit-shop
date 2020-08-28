@@ -15,7 +15,7 @@ public class WriteFileServiceImpl implements WriteFileService {
                 fileWriter.write(entry.getKey() + ", " + entry.getValue() + "\n");
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cannot write to file");
         }
     }
 }

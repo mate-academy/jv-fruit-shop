@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitDto;
+import core.basesyntax.model.TransactionDto;
 import core.basesyntax.operations.BuyOperation;
 import core.basesyntax.operations.Operation;
 import org.junit.Assert;
@@ -18,7 +18,7 @@ public class BuyOperationTest {
         Operation buyOperation = new BuyOperation();
         actual.put("banana", 100);
         expirationDate.put("banana", LocalDate.parse("2020-10-17"));
-        buyOperation.apply(new FruitDto("b", "banana", 10, LocalDate.parse("2020-10-17")));
+        buyOperation.apply(new TransactionDto("b", "banana", 10, LocalDate.parse("2020-10-17")));
 
         Assert.assertEquals(90, (int) actual.get("banana"));
     }
@@ -28,6 +28,6 @@ public class BuyOperationTest {
         Map<String, Integer> actual = FruitStore.fruitStorage;
         Operation buyOperation = new BuyOperation();
         actual.put("banana", 100);
-        buyOperation.apply(new FruitDto("b", "banana", 103, LocalDate.parse("2020-10-17")));
+        buyOperation.apply(new TransactionDto("b", "banana", 103, LocalDate.parse("2020-10-17")));
     }
 }

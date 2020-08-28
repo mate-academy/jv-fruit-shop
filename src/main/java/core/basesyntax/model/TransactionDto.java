@@ -1,19 +1,26 @@
 package core.basesyntax.model;
 
+import com.opencsv.bean.CsvBindByPosition;
+import com.opencsv.bean.CsvDate;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class FruitDto {
+public class TransactionDto {
+    @CsvBindByPosition(position = 0)
     private String operation;
+    @CsvBindByPosition(position = 1)
     private String fruit;
+    @CsvBindByPosition(position = 2)
     private int quantity;
-    private LocalDate expirationDate;
+    @CsvBindByPosition(position = 3)
+    @CsvDate("yyyy-MM-dd")
+    private LocalDate purchaseDate;
 
-    public FruitDto(String operation, String fruit, int quantity, LocalDate expirationDate) {
+    public TransactionDto(String operation, String fruit, int quantity, LocalDate purchaseDate) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
-        this.expirationDate = expirationDate;
+        this.purchaseDate = purchaseDate;
     }
 
     public String getOperation() {
@@ -28,8 +35,8 @@ public class FruitDto {
         return quantity;
     }
 
-    public LocalDate getExpirationDate() {
-        return expirationDate;
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
     }
 
     @Override
@@ -40,15 +47,15 @@ public class FruitDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        FruitDto operation = (FruitDto) o;
+        TransactionDto operation = (TransactionDto) o;
         return quantity == operation.quantity
                 && Objects.equals(this.operation, operation.operation)
                 && Objects.equals(fruit, operation.fruit)
-                && Objects.equals(expirationDate, operation.expirationDate);
+                && Objects.equals(purchaseDate, operation.purchaseDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(operation, fruit, quantity, expirationDate);
+        return Objects.hash(operation, fruit, quantity, purchaseDate);
     }
 }

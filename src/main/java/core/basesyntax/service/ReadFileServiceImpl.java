@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
 import com.opencsv.CSVReader;
-import core.basesyntax.model.FruitDto;
+import com.opencsv.exceptions.CsvException;
+import core.basesyntax.model.TransactionDto;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -15,19 +16,21 @@ public class ReadFileServiceImpl implements ReadFileService {
     private static final int EXPIRATION_DATE = 3;
 
     @Override
-    public List<FruitDto> readFile(String filePath) {
-        List<FruitDto> fruitDtoList = new ArrayList<>();
+    public List<TransactionDto> readFile(String filePath) {
+        List<TransactionDto> transactionDtoList = new ArrayList<>();
+        FileReader fileReader;
         try {
-            FileReader fileReader = new FileReader(filePath);
+            fileReader = new FileReader(filePath);
             CSVReader csvReader = new CSVReader(fileReader);
             List<String[]> lines = csvReader.readAll();
             for (String[] line : lines) {
-                fruitDtoList.add(new FruitDto(line[OPERATION], line[FRUIT],
+                transactionDtoList.add(new TransactionDto(line[OPERATION], line[FRUIT],
                         Integer.parseInt(line[QUANTITY]), LocalDate.parse(line[EXPIRATION_DATE])));
             }
-        } catch (IOException e) {
+            fileReader.close();
+        } catch (IOException | CsvException e) {
             throw new RuntimeException("File is not found");
         }
-        return fruitDtoList;
+        return transactionDtoList;
     }
 }

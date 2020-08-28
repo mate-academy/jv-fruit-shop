@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitDto;
+import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.ReadFileServiceImpl;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -24,20 +24,20 @@ public class ReadFileTest {
 
     @Test
     public void normalInputTest() {
-        List<FruitDto> expected = new ArrayList<>();
-        expected.add(new FruitDto("s", "banana", 100, LocalDate.parse("2020-10-17", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-        expected.add(new FruitDto("b", "banana", 13, LocalDate.parse("2020-10-15", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-        expected.add(new FruitDto("r", "banana", 10, LocalDate.parse("2020-10-17", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-        expected.add(new FruitDto("s", "orange", 100, LocalDate.parse("2020-10-17", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-        expected.add(new FruitDto("b", "orange", 10, LocalDate.parse("2020-10-15", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-        List<FruitDto> actual = readFileService.readFile(NORMAL_FILE_NAME);
+        List<TransactionDto> expected = new ArrayList<>();
+        expected.add(new TransactionDto("s", "banana", 100, LocalDate.parse("2020-10-17", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        expected.add(new TransactionDto("b", "banana", 13, LocalDate.parse("2020-10-15", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        expected.add(new TransactionDto("r", "banana", 10, LocalDate.parse("2020-10-17", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        expected.add(new TransactionDto("s", "orange", 100, LocalDate.parse("2020-10-17", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        expected.add(new TransactionDto("b", "orange", 10, LocalDate.parse("2020-10-15", DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        List<TransactionDto> actual = readFileService.readFile(NORMAL_FILE_NAME);
         Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void emptyInputTest() {
-        List<FruitDto> expected = new ArrayList<>();
-        List<FruitDto> actual = readFileService.readFile(EMPTY_FILE);
+        List<TransactionDto> expected = new ArrayList<>();
+        List<TransactionDto> actual = readFileService.readFile(EMPTY_FILE);
         Assert.assertEquals(expected, actual);
     }
 

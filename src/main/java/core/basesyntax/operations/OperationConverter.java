@@ -1,6 +1,6 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.model.FruitDto;
+import core.basesyntax.model.TransactionDto;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,13 +8,13 @@ public class OperationConverter {
     private static final Map<String, Operation> mapWithOperations = new HashMap<>();
 
     static {
-        mapWithOperations.put("s", new SupplyOperation());
+        mapWithOperations.put("s", new SupplyAndReturnOperation());
         mapWithOperations.put("b", new BuyOperation());
-        mapWithOperations.put("r", new ReturnOperation());
+        mapWithOperations.put("r", new SupplyAndReturnOperation());
     }
 
-    public void convert(FruitDto fruitDto) {
-        Operation operation = mapWithOperations.get(fruitDto.getOperation());
-        operation.apply(fruitDto);
+    public void convert(TransactionDto transactionDto) {
+        Operation operation = mapWithOperations.get(transactionDto.getOperation());
+        operation.apply(transactionDto);
     }
 }
