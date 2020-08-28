@@ -93,4 +93,12 @@ public class FruitShopTest {
         Storage storage = new Storage();
         Assert.assertEquals(storage.getFruits(), new ArrayList<>());
     }
+
+    @Test
+    public void fruitHashcodeTest(){
+        LocalDate date = LocalDate.now();
+        Fruit fruit = new Fruit("banana",50,date);
+        Fruit fruit2 = new Fruit("banana",72,date);
+        Assert.assertTrue(fruit.hashCode()== fruit2.hashCode());
+    }
 }
