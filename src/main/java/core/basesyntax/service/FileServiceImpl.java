@@ -24,6 +24,9 @@ public class FileServiceImpl implements FileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (orders != null && orders.size() != 0) {
+            orders.remove(0);
+        }
         return orders;
     }
 }
