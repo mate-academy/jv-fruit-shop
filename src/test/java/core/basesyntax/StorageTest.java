@@ -12,7 +12,7 @@ public class StorageTest {
     private List<Operation> operations;
 
     @Test
-    public void randomTest() {
+    public void testPerfectData() {
         operations = reader.readOperation("src/PerfectData.csv");
         Storage storage = new Storage();
         storage.addFruits(operations);

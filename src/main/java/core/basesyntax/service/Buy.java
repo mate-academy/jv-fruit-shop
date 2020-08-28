@@ -18,7 +18,8 @@ public class Buy extends Operation {
         }
         if (totalAmount >= amount) {
             for (FruitBox fruitBox : storage.values()) {
-                if (fruitBox.getFruitType().equals(fruitName) && !fruitBox.isEmpty()) {
+                if (fruitBox.getFruitType().equals(fruitName) && !fruitBox.isEmpty()
+                        && fruitBox.getDate().isAfter(fruit.getDate())) {
                     int numberOfFruits = fruitBox.getQuantity();
                     if (amount <= numberOfFruits) {
                         fruitBox.setQuantity(numberOfFruits - amount);
