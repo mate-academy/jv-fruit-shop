@@ -3,7 +3,6 @@ package core.basesyntax;
 import core.basesyntax.model.Fruit;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,6 +16,7 @@ public class FruitShopTest {
     private static final String EMPTY_FILE = "src/test/resources/empty.csv";
     private static final String STOCK = "src/main/resources/stock.csv";
     private static final String STOCK_NORMAL = "src/test/resources/normal.csv";
+    private static final String BALANCE_IS_LESS_THAN_BYU ="src/test/resources/lessbalance.csv";
 
     @Test
     public void normalFileTest() {
@@ -29,12 +29,18 @@ public class FruitShopTest {
         } catch (IOException e) {
             throw new RuntimeException("Нет доступа к тестовым файлам");
         }
-
     }
 
     @Test(expected = RuntimeException.class)
-    public void fileWhichWrongDate() {
+    public void fileWhichWrongDateTest() {
         FruitShop fruitShop = new FruitShop(WRONG_DATE_FILE);
+        fruitShop.start();
+    }
+
+
+    @Test(expected = RuntimeException.class)
+    public void setBalanceIsLessThanByuTest() {
+        FruitShop fruitShop = new FruitShop(BALANCE_IS_LESS_THAN_BYU);
         fruitShop.start();
     }
 
