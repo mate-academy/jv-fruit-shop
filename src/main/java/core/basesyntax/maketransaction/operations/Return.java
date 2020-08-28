@@ -1,10 +1,9 @@
-package core.basesyntax.makeTransaction.operations;
+package core.basesyntax.maketransaction.operations;
 
 import core.basesyntax.identities.Fruit;
 import core.basesyntax.identities.Storage;
-import core.basesyntax.makeTransaction.IFruitOperation;
-import core.basesyntax.makeTransaction.Transaction;
-
+import core.basesyntax.maketransaction.IFruitOperation;
+import core.basesyntax.maketransaction.Transaction;
 import java.time.LocalDate;
 
 public class Return implements IFruitOperation {

@@ -1,24 +1,24 @@
-package core.basesyntax.readWriteFile;
+package core.basesyntax.readwritefile;
 
-import java.io.*;
-
-import core.basesyntax.makeTransaction.Transaction;
-import core.basesyntax.readWriteFile.interfaces.IReadCSV;
+import core.basesyntax.maketransaction.Transaction;
+import core.basesyntax.readwritefile.interfaces.IReadCsv;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ReadCSV implements IReadCSV {
+public class ReadCsv implements IReadCsv {
     public static final CSVFormat CSV_FORMAT = CSVFormat.RFC4180.withHeader().withDelimiter(',');
 
-    public ReadCSV() {
+    public ReadCsv() {
     }
 
     @Override
-    public List<Transaction> readCSV(String pathName) {
+    public List<Transaction> readCsv(String pathName) {
         List<Transaction> transactions = new ArrayList<>();
         try (CSVParser csvReader = new CSVParser(new FileReader(pathName), CSV_FORMAT)) {
             for (CSVRecord csvRecord : csvReader) {
@@ -40,11 +40,6 @@ public class ReadCSV implements IReadCSV {
     }
 
     private void checkData(Transaction transaction) {
-        if (transaction.getType() == null
-                || transaction.getFruit() == null
-                || transaction.getDate() == null) {
-            throw new NullPointerException("Null data in " + transaction.toString());
-        }
         if (!transaction.getType().equals("s")
                 && !transaction.getType().equals("r")
                 && !transaction.getType().equals("b")
@@ -62,7 +57,9 @@ public class ReadCSV implements IReadCSV {
         }
         if (transaction.getQuantity() < 0) {
             throw new IllegalArgumentException("Not correct date of quantity of fruit"
-                    + transaction.getDate() + " in " + transaction.toString() + " Should be more then 0");
+                    + transaction.getQuantity() + " in "
+                    + transaction.toString()
+                    + " Should be more then 0");
         }
     }
 }

@@ -1,24 +1,21 @@
-package core.basesyntax.readWriteFile;
+package core.basesyntax.readwritefile;
 
-import com.opencsv.CSVParser;
-import com.opencsv.CSVWriter;
-import core.basesyntax.readWriteFile.interfaces.IWriteCSV;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
-
+import core.basesyntax.readwritefile.interfaces.IWriteCsv;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 
-public class WriteCSV implements IWriteCSV {
+public class WriteCsv implements IWriteCsv {
     public static final CSVFormat CSV_FORMAT = CSVFormat.DEFAULT.withHeader("fruit", "quantity");
 
-    public WriteCSV() {
+    public WriteCsv() {
     }
 
     @Override
-    public boolean writeCSV(Map<String, Integer> currentBalance, String pathName) {
+    public boolean writeCsv(Map<String, Integer> currentBalance, String pathName) {
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(pathName), CSV_FORMAT)) {
             for (Map.Entry<String, Integer> entry : currentBalance.entrySet()) {
                 printer.printRecord(entry.getKey(), entry.getValue());

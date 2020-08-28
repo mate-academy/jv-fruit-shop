@@ -1,6 +1,10 @@
 package core.basesyntax.identities;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class Storage {
     private Map<String, List<Fruit>> fruits;
@@ -22,7 +26,7 @@ public class Storage {
     }
 
     public boolean removeFruit(Fruit fruit) {
-        if (fruits.containsKey(fruit.getType())) {
+        if (fruits.containsKey(fruit.getType()) && !fruits.get(fruit.getType()).isEmpty()) {
             fruits.get(fruit.getType()).remove(fruit);
         } else {
             throw new NoSuchElementException("There is no " + fruit.getType());

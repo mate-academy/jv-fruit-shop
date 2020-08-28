@@ -1,4 +1,4 @@
-package core.basesyntax.makeTransaction;
+package core.basesyntax.maketransaction;
 
 import java.util.Objects;
 
@@ -9,6 +9,13 @@ public class Transaction {
     private String date;
 
     public Transaction() {
+    }
+
+    public Transaction(String type, String fruit, int quantity, String date) {
+        this.type = type;
+        this.fruit = fruit;
+        this.quantity = quantity;
+        this.date = date;
     }
 
     public String getType() {
@@ -45,13 +52,17 @@ public class Transaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Transaction that = (Transaction) o;
-        return quantity == that.quantity &&
-                Objects.equals(type, that.type) &&
-                Objects.equals(fruit, that.fruit) &&
-                Objects.equals(date, that.date);
+        return quantity == that.quantity
+                && Objects.equals(type, that.type)
+                && Objects.equals(fruit, that.fruit)
+                && Objects.equals(date, that.date);
     }
 
     @Override
