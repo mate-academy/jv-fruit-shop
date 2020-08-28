@@ -22,7 +22,7 @@ public class StoreServiceTest {
     @Test
     public void terminal_Ok() throws IOException {
         fruitStoreServiceTest.terminal("src/test/java/core/basesyntax/readwritefile/foolTest/fileFrom.csv",
-                "src/test/java/core/basesyntax/readWriteFile/foolTest/fileToActual.csv");
+                "src/test/java/core/basesyntax/readwritefile/foolTest/fileToActual.csv");
 
         List<String> expected = Files.readAllLines(Path.of("src/test/java/core/basesyntax/readwritefile/foolTest/fileToExpected.csv"));
         List<String> actual = Files.readAllLines(Path.of("src/test/java/core/basesyntax/readwritefile/foolTest/fileToActual.csv"));
