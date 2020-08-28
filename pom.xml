@@ -93,11 +93,6 @@
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <excludes>
-                        <exclude>**/FruitBatch*</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>
