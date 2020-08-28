@@ -26,13 +26,17 @@ public class FruitStoreApplication {
         transactions = FileReader.fileReading(file);
 
         Map<Character, StockChangeable> stockChangeableMap = TypeMap.typeMap;
-        for (Transaction tr : transactions) {
-            Fruit fruit = new Fruit();
-            fruit.setFruit(tr.getFruitType());
-            fruit.setLocalDate(tr.getTransactionDate());
-            for (int i = 0; i < tr.getQuantity(); i++) {
-                stockChangeableMap.get(tr.getOperation()).apply(fruit);
+        try {
+            for (Transaction tr : transactions) {
+                Fruit fruit = new Fruit();
+                fruit.setFruit(tr.getFruitType());
+                fruit.setLocalDate(tr.getTransactionDate());
+                for (int i = 0; i < tr.getQuantity(); i++) {
+                    stockChangeableMap.get(tr.getOperation()).apply(fruit);
+                }
             }
+        } catch (RuntimeException e) {
+            throw new RuntimeException("incorrect data in file");
         }
         ReportWriter.fileCompile(fruits);
     }
