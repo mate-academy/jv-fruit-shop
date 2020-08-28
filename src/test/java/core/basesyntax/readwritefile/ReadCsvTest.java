@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class ReadCSVTest {
+public class ReadCsvTest {
 
     private ReadCsv testReader;
 

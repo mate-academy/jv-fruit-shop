@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class WriteCSVTest {
+public class WriteCsvTest {
 
     private WriteCsv testWriter;
 
