@@ -111,7 +111,7 @@
                         <configuration>
                             <rules>
                                 <rule>
-                                    <element>PACKAGE</element>
+                                    <element>CLASS</element>
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
