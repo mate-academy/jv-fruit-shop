@@ -9,7 +9,7 @@ import org.junit.*;
 import java.time.LocalDate;
 import java.util.Map;
 
-public class SupplyOperationTests {
+public class SupplyOperationTest {
     private static final Integer EXPECTED_QUANTITY = 60;
     private static final String KEY = "banana";
     private static FruitOperations supply;

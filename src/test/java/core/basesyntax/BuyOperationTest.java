@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class BuyOperationTests {
+public class BuyOperationTest {
     private static final Integer EXPECTED_QUANTITY = 90;
     private static final String KEY = "banana";
     private static FruitOperations buy;
