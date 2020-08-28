@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderTest {
-    private static final String FILE_NAME_OK = "src\\test\\resources\\fileReaderTest.txt";
-    private static final String EMPTY_FILE = "src\\test\\resources\\emptyFile.txt";
+    private static final String FILE_NAME_OK = "src/test/resources/fileReaderTest.txt";
+    private static final String EMPTY_FILE = "src/test/resources/emptyFile.txt";
     private static final String WRONG_NAME_FILE = "wrongName.txt";
 
     private static final FileReadService fileReadService = new FileReadServiceImpl();

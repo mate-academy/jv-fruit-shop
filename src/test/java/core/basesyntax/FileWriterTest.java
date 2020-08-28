@@ -17,8 +17,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class FileWriterTest {
-    private static final String INPUT_FILE = "src\\test\\resources\\test0.txt";
-    private static final String OUTPUT_FILE = "src\\test\\resources\\output.txt";
+    private static final String INPUT_FILE = "src/test/resources/test0.txt";
+    private static final String OUTPUT_FILE = "src/test/resources/output.txt";
 
 
     private static final FileWriteService fileWriteService = new FileWriteServiceImpl();
