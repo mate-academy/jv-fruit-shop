@@ -1,49 +1,54 @@
 package core.basesyntax;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class ProductsDto {
     private String operation;
     private String name;
-    private Integer quantity;
-    private LocalDate expirationDate;
+    private int quantity;
+    private LocalDate date;
 
-    public ProductsDto(String operation, String name, Integer quantity, LocalDate expirationDate) {
+    public ProductsDto(String operation, String name, int quantity, LocalDate expirationDate) {
         this.operation = operation;
         this.name = name;
         this.quantity = quantity;
-        this.expirationDate = expirationDate;
+        this.date = expirationDate;
     }
 
     public String getOperation() {
         return operation;
     }
 
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public LocalDate getExpirationDate() {
-        return expirationDate;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ProductsDto that = (ProductsDto) o;
+        return quantity == that.quantity
+                && Objects.equals(operation, that.operation)
+                && Objects.equals(name, that.name)
+                && Objects.equals(date, that.date);
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
-        this.expirationDate = expirationDate;
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, name, quantity, date);
     }
 }

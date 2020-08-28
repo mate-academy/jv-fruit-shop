@@ -5,7 +5,6 @@ import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ public class ReturnOperationTest {
         FruitOperation returnOperation = new ReturnOperation();
         actual.put("banana", 50);
         returnOperation.fruitOperation(new ProductsDto("b", "banana", 13, LocalDate.parse("2020-10-17")));
-        Assert.assertEquals(63, (int)actual.get("banana"));
+        Assert.assertEquals(63, (int) actual.get("banana"));
     }
 
     @Test(expected = RuntimeException.class)
