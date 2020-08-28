@@ -15,7 +15,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         InputFileService fileService = new InputFileServiceImpl();
-        List<List<String>> fileStrings = fileService.readFile("test.txt");
+        List<List<String>> fileStrings = fileService.readFile("src/main/resources/testOK.csv");
 
         ConverterCsvToTransaction converter = new ConverterCsvToTransaction();
         List<Transaction> transactions = new ArrayList<>();
