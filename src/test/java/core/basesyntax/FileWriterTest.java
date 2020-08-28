@@ -1,10 +1,12 @@
 package core.basesyntax;
 
+import core.basesyntax.service.ActionController;
 import core.basesyntax.service.FileReadService;
 import core.basesyntax.service.FileWriteService;
 import core.basesyntax.service.impl.FileReadServiceImpl;
 import core.basesyntax.service.impl.FileWriteServiceImpl;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,24 +17,32 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Key;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class FileWriterTest {
-    private static final String INPUT_FILE = "test0.txt";
-    private static final String OUTPUT_FILE = "output.txt";
+    private static final String INPUT_FILE = "src\\test\\resources\\test0.txt";
+    private static final String OUTPUT_FILE = "src\\test\\resources\\output.txt";
 
 
     private static final FileWriteService fileWriteService = new FileWriteServiceImpl();
 
-    @BeforeClass
-    public static void beforeClass() throws Exception {
+    @Before
+    public void setUp() {
         Store.fruits.clear();
     }
 
     @Test
     public void fileWriterOk() {
-        Main.main(new String[]{INPUT_FILE, OUTPUT_FILE});
+        FileReadService fileReadService = new FileReadServiceImpl();
+        List<Transaction> data = fileReadService.readFile(INPUT_FILE);
+
+        ActionController actionController = new ActionController();
+        actionController.distributeActions(data);
+
+        FileWriteService fileWriteService = new FileWriteServiceImpl();
+        fileWriteService.writeFile(Store.fruits, OUTPUT_FILE);
 
         String expected = "fruit, quantity\n"
                 + "orange, 90\n"

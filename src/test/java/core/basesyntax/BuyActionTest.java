@@ -8,11 +8,11 @@ import org.junit.Test;
 import java.util.Map;
 
 public class BuyActionTest {
+    private static ActionsWithFruits buyAction = new BuyAction();
 
     @Test
     public void buyActionOk() {
         Map<String, Integer> actual = Store.fruits;
-        ActionsWithFruits buyAction = new BuyAction();
         actual.put("banana", 100);
         buyAction.applyAction(new Transaction("b", "banana", "20", "2020-10-17"));
 

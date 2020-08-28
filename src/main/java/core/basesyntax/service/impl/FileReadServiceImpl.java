@@ -10,20 +10,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileReadServiceImpl implements FileReadService {
+    public static final String COLUMN_NAMES = "type,fruit,quantity,date";
+
     @Override
     public List<Transaction> readFile(String filePath) {
         List<Transaction> lines = new ArrayList<>();
         Path path = Paths.get(filePath);
-
+        String nextLine;
         try (Scanner scanner = new Scanner(path)) {
             while (scanner.hasNext()) {
-                String[] parts = scanner.nextLine().split(",");
-                if (!parts[0].equals("type")) {
+                // can't use scanner.nextLine() directly because NoSuchElementException is thrown
+                nextLine = scanner.nextLine();
+                String[] parts = nextLine.split(",");
+                if (!nextLine.equals(COLUMN_NAMES)) {
                     lines.add(new Transaction(parts[0], parts[1], parts[2], parts[3]));
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("File is not exist");
+            throw new RuntimeException("File is not exist", e);
         }
 
         if (lines.size() == 0) {

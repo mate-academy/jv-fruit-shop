@@ -13,9 +13,7 @@ public class Main {
         List<Transaction> data = fileReadService.readFile(args[0]);
 
         ActionController actionController = new ActionController();
-        for (Transaction item : data) {
-            actionController.distributeActions(item);
-        }
+        actionController.distributeActions(data);
 
         FileWriteService fileWriteService = new FileWriteServiceImpl();
         fileWriteService.writeFile(Store.fruits, args[1]);

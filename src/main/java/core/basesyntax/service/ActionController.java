@@ -5,6 +5,7 @@ import core.basesyntax.service.impl.BuyAction;
 import core.basesyntax.service.impl.ReturnAction;
 import core.basesyntax.service.impl.SupplyAction;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ActionController {
@@ -16,8 +17,10 @@ public class ActionController {
         actions.put("r", new ReturnAction());
     }
 
-    public void distributeActions(Transaction transaction) {
-        ActionsWithFruits action = actions.get(transaction.getAction());
-        action.applyAction(transaction);
+    public void distributeActions(List<Transaction> data) {
+        for (Transaction item : data) {
+            ActionsWithFruits action = actions.get(item.getAction());
+            action.applyAction(item);
+        }
     }
 }
