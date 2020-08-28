@@ -21,21 +21,21 @@ import java.util.NoSuchElementException;
 
 public class FruitStoreTest {
     private static final String INTO_PATH
-            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\storageContent.csv";
+            = "C:/Users/mosko/IdeaProjects/jv-fruit-shop/storageContent.csv";
     private static final String FIRST_PATH
-            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\fruitsTest.csv";
+            = "C:/Users/mosko/IdeaProjects/jv-fruit-shop/src/fruitsTest.csv";
     private static final String SECOND_PATH
-            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\fruitsTest2.csv";
+            = "C:/Users/mosko/IdeaProjects/jv-fruit-shop/src/fruitsTest2.csv";
     private static final String THIRD_PATH
-            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\fruitsTest3.csv";
+            = "C:/Users/mosko/IdeaProjects/jv-fruit-shop/src/fruitsTest3.csv";
     private static final String FOURTH_PATH
-            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\fruitsTest4.csv";
+            = "C:/Users/mosko/IdeaProjects/jv-fruit-shop/src/fruitsTest4.csv";
     private static final String FIFTH_PATH
-            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\fruitsTest5.csv";
+            = "C:/Users/mosko/IdeaProjects/jv-fruit-shop/src/fruitsTest5.csv";
     private static final String WRONG_PATH
-            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\wrongTest.csv";
+            = "C:/Users/mosko/IdeaProjects/jv-fruit-shop/src/wrongTest.csv";
     private static final String WRONG_DATE_PATH
-            = "C:\\Users\\mosko\\IdeaProjects\\jv-fruit-shop\\src\\wrongDateTest.csv";
+            = "C:/Users/mosko/IdeaProjects/jv-fruit-shop/src/wrongDateTest.csv";
 
     @Before
     public void setup() {
