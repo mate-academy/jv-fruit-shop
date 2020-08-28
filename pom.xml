@@ -83,9 +83,6 @@
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
-                    <excludes>
-                        <exclude>**/Main</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -126,8 +123,12 @@
                             </rules>
                         </configuration>
                     </execution>
-
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**Main*</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>
