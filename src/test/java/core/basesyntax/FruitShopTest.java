@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class FruitShopTest {
     private static final String NORMAL_FILE = "src/test/resources/file.csv";
@@ -77,5 +78,19 @@ public class FruitShopTest {
         Fruit fruit = new Fruit("banana",50,date);
         fruit.setStock_balance(45);
         Assert.assertEquals("Неправильное количество ожидалось 50", 45, fruit.getStock_balance());
+    }
+
+    @Test
+    public void fruitEqualsTest(){
+        LocalDate date = LocalDate.now();
+        Fruit fruit = new Fruit("banana",50,date);
+        Fruit fruit2 = new Fruit("banana",72,date);
+        Assert.assertTrue(fruit.equals(fruit2));
+    }
+
+    @Test
+    public void storageTest(){
+        Storage storage = new Storage();
+        Assert.assertEquals(storage.getFruits(), new ArrayList<>());
     }
 }
