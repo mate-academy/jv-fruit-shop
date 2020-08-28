@@ -111,7 +111,7 @@
                         <configuration>
                             <rules>
                                 <rule>
-                                    <element>CLASS</element>
+                                    <element>BUNDLE</element>
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
@@ -126,9 +126,9 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**Main*</exclude>
-                        <exclude>**Fruit*</exclude>
-                        <exclude>**Transaction*</exclude>
+                        <exclude>**/Main*</exclude>
+                        <exclude>**/Fruit*</exclude>
+                        <exclude>**/Transaction*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
