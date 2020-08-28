@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
 import java.io.File;
+import java.util.IllegalFormatFlagsException;
 
 public class WriteToFileTest {
     private static StorageUpdater newUpdate;
@@ -29,7 +29,7 @@ public class WriteToFileTest {
     @Test
     public void checkFileCreation() throws IOException {
         LocalFileReader reader = new LocalFileReader(FILLED_FILE_NAME);
-        newUpdate.parseData(reader.readFromFile());
+        newUpdate.parseDataToStorage(reader.readTransactionsFile());
         WriteToFile parser = new WriteToFile(OUTPUT_FILE_PATH);
         parser.csvFileWriter();
         Assert.assertTrue(new File(OUTPUT_FILE_PATH).isFile());
@@ -38,7 +38,7 @@ public class WriteToFileTest {
     @Test
     public void checkResultOnEmptyStorage() throws IOException {
         LocalFileReader reader = new LocalFileReader(FILLED_FILE_NAME);
-        newUpdate.parseData(reader.readFromFile());
+        newUpdate.parseDataToStorage(reader.readTransactionsFile());
         WriteToFile parser = new WriteToFile(OUTPUT_FILE_PATH);
         parser.csvFileWriter();
         byte[] expectedResult = Files.readAllBytes(Paths.get(RESULT_ON_EMPTY_STORAGE));
@@ -51,12 +51,12 @@ public class WriteToFileTest {
     @Test
     public void updateNotEmptyStorageFromFile() throws IOException {
         LocalFileReader reader = new LocalFileReader(FILLED_FILE_NAME);
-        newUpdate.parseData(reader.readFromFile());
+        newUpdate.parseDataToStorage(reader.readTransactionsFile());
         WriteToFile writer = new WriteToFile(OUTPUT_FILE_PATH);
         writer.csvFileWriter();
 
         LocalFileReader secondFileReader = new LocalFileReader(SECOND_FILLED_FILE_NAME);
-        newUpdate.parseData(secondFileReader.readFromFile());
+        newUpdate.parseDataToStorage(secondFileReader.readTransactionsFile());
         WriteToFile secondFileWriter = new WriteToFile(NOT_EMPTY_STORAGE_OUTPUT_FILE_PATH);
         secondFileWriter.csvFileWriter();
 
@@ -69,7 +69,7 @@ public class WriteToFileTest {
     public void getExceptionWhenWrongHeader() throws IOException {
         LocalFileReader reader = new LocalFileReader(WRONG_HEADER_FILE);
         try {
-            newUpdate.parseData(reader.readFromFile());
+            newUpdate.parseDataToStorage(reader.readTransactionsFile());
             WriteToFile parser = new WriteToFile(OUTPUT_FILE_PATH);
             parser.csvFileWriter();
         } catch (IllegalFormatFlagsException message) {

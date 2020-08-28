@@ -4,5 +4,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface StorageUpdater {
-    void parseData(List<List<String>> newData) throws IOException;
+    void parseDataToStorage(List<Transaction> newData) throws IOException;
 }

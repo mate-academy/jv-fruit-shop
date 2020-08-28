@@ -17,7 +17,7 @@ public class MainApp {
         String outPutFilePath = scanner.nextLine();
 
         LocalFileReader reader = new LocalFileReader(filePath);
-        newUpdate.parseData(reader.readFromFile());
+        newUpdate.parseDataToStorage(reader.readTransactionsFile());
         WriteToFile writer = new WriteToFile(outPutFilePath);
         writer.csvFileWriter();
 

@@ -5,7 +5,9 @@ import org.junit.Test;
 import org.junit.Assert;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class StorageUpdaterTest {
     private static StorageUpdater newUpdate;
@@ -47,7 +49,7 @@ public class StorageUpdaterTest {
     @Test
     public void updateStorageWhenFruitIsAbsent() throws IOException {
         LocalFileReader reader = new LocalFileReader(PURCHASE_FROM_EMPTY_STOCK_FILE);
-        newUpdate.parseData(reader.readFromFile());
+        newUpdate.parseDataToStorage(reader.readTransactionsFile());
         Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.getAllFruits();
         Map<String, TreeMap<LocalDate, Integer>> expectedResult = new HashMap<>();
         Assert.assertEquals(expectedResult, actualResult);
@@ -56,16 +58,16 @@ public class StorageUpdaterTest {
     @Test
     public void updateEmptyStorageFromFile() throws IOException {
         LocalFileReader reader = new LocalFileReader(PROPERLY_FILLED_FILE);
-        newUpdate.parseData(reader.readFromFile());
+        newUpdate.parseDataToStorage(reader.readTransactionsFile());
         Assert.assertEquals(toCompareEmptyStore, Storage.getAllFruits());
     }
 
     @Test
     public void updateNotEmptyStorageFromFile() throws IOException {
         LocalFileReader reader = new LocalFileReader(PROPERLY_FILLED_FILE);
-        newUpdate.parseData(reader.readFromFile());
+        newUpdate.parseDataToStorage(reader.readTransactionsFile());
         LocalFileReader secondFileReader = new LocalFileReader(SECOND_PROPERLY_FILLED_FILE);
-        newUpdate.parseData(secondFileReader.readFromFile());
+        newUpdate.parseDataToStorage(secondFileReader.readTransactionsFile());
         Assert.assertEquals(toCompareNotEmptyStore, Storage.getAllFruits());
     }
 
@@ -73,7 +75,7 @@ public class StorageUpdaterTest {
     public void getExceptionWhenDataIncomplete() throws IOException {
         LocalFileReader reader = new LocalFileReader(INCOMPLETE_DATA_FILE);
         try {
-            newUpdate.parseData(reader.readFromFile());
+            newUpdate.parseDataToStorage(reader.readTransactionsFile());
         } catch (IllegalArgumentException message) {
             return;
         }

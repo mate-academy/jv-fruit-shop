@@ -7,17 +7,18 @@ import java.util.TreeMap;
 
 public class StorageUpdaterImpl implements StorageUpdater {
 
-    public void parseData(List<List<String>> newData) {
-        for (List<String> raw : newData) {
-            putLineToStorage(raw);
+    public void parseDataToStorage(List<Transaction> newData) {
+        for (Transaction newTransaction : newData) {
+            putLineToStorage(newTransaction);
         }
     }
 
-    public void putLineToStorage(List<String> raw) {
-        String operationType = raw.get(0);
-        String fruitType = raw.get(1);
-        int fruitAmount = Integer.parseInt(raw.get(2));
-        LocalDate date = LocalDate.parse(raw.get(3));
+    public void putLineToStorage(Transaction newTransaction) {
+        String operationType = newTransaction.getOperationType();
+        String fruitType = newTransaction.getName();
+        int fruitAmount = newTransaction.getQuantity();
+        LocalDate date = newTransaction.getDate();
+
         if (operationType.equals("b")) {
             updateStorageAfterPurchase(fruitType, date, fruitAmount, operationType);
             return;

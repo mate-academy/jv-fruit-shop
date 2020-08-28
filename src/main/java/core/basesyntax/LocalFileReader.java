@@ -3,35 +3,31 @@ package core.basesyntax;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.IllegalFormatFlagsException;
 import java.util.List;
 
-public class LocalFileReader {
-    private static final String COMMA_DELIMITER = ",";
+public class LocalFileReader implements CsvFileReader {
     private static final String[] FILE_HEADER = {"type", "fruit", "quantity", "date"};
+    private static final String COMMA_DELIMITER = ",";
+    private static DataParser parser = new DataParser();
     private final String filePath;
 
     public LocalFileReader(String filePath) {
         this.filePath = filePath;
     }
 
-    public List<List<String>> readFromFile() throws IOException {
+    public List<Transaction> readTransactionsFile() throws IOException {
         validateFilePath(filePath);
-        List<List<String>> fileData = new ArrayList<>();
+        List<Transaction> fileData = new ArrayList<>();
         try (BufferedReader textHolder = new BufferedReader(new FileReader(filePath))) {
+            validateFileHeader(textHolder.readLine());
             String line;
             while ((line = textHolder.readLine()) != null) {
-                String[] lineFromFile = line.split(COMMA_DELIMITER);
-                checkDataFormat(lineFromFile, fileData);
-                fileData.add(Arrays.asList(lineFromFile));
+                Transaction newTransaction = parser.parseLineToTransaction(line);
+                fileData.add(newTransaction);
             }
-        }
-        if (fileData.size() > 0) {
-            fileData.remove(0);
         }
         return fileData;
     }
@@ -43,22 +39,9 @@ public class LocalFileReader {
         }
     }
 
-    private void checkDataFormat(String[] lineFromFile, List<List<String>> fileData) {
-        if (fileData.isEmpty() && !Arrays.equals(FILE_HEADER, lineFromFile)) {
+    private void validateFileHeader(String line) {
+        if (line != null && !Arrays.equals(FILE_HEADER, line.split(COMMA_DELIMITER))) {
             throw new IllegalFormatFlagsException("File header doesn't satisfy specified format");
-        }
-        if (fileData.isEmpty()) {
-            return;
-        }
-        if (!StoreOperations.AVAILABLE_OPERATIONS.containsKey(lineFromFile[0])) {
-            throw new IllegalFormatFlagsException("File provides unsupported operation type");
-        }
-        try {
-            int fruitAmount = Integer.parseInt(lineFromFile[2]);
-            LocalDate date = LocalDate.parse(lineFromFile[3]);
-        } catch (NumberFormatException | DateTimeParseException
-                | ArrayIndexOutOfBoundsException message) {
-            throw new IllegalArgumentException("File provides wrong data format");
         }
     }
 }
