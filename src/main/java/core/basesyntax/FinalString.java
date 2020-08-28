@@ -15,6 +15,6 @@ public class FinalString {
             }
             finalString.append("\n").append(s).append(",").append(totalAmount);
         }
-        return finalString.toString();
+        return finalString.append("\n").toString();
     }
 }
