@@ -3,9 +3,9 @@ package core.basesyntax.model;
 import java.time.LocalDate;
 
 public class Fruit implements Comparable<Fruit> {
-    private String type;
+    private final String type;
     private int stockBalance;
-    private LocalDate date;
+    private final LocalDate date;
 
     public Fruit(String type, int stockBalance, LocalDate date) {
         this.type = type.trim();
