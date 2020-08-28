@@ -23,7 +23,7 @@ public class ConvertToFruitTransactionTest {
         fileService = new FileServiceImpl();
         row = new String[] {"s","banana","100","2020-10-17"};
         converter = new ConvertToFruitTransaction();
-        fileData = fileService.fileReader("src\\test\\java\\core\\basesyntax\\resources\\test0.csv");
+        fileData = fileService.fileReader("src/test/java/core/basesyntax/resources/test0.csv");
     }
 
     @Test

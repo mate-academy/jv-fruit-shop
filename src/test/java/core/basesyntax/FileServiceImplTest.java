@@ -23,7 +23,7 @@ public class FileServiceImplTest {
 
     @Test
     public void fileReaderTestOk() {
-        List<String[]> data = fileService.fileReader("src\\test\\java\\core\\basesyntax\\resources\\test0.csv");
+        List<String[]> data = fileService.fileReader("src/test/java/core/basesyntax/resources/test0.csv");
         List<FruitTransaction> actual = converter.fileDataToList(data);
         List<FruitTransaction> expected = new ArrayList<>();
         expected.add(new FruitTransaction("s","banana",100, LocalDate.parse("2020-10-17")));
