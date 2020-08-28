@@ -11,12 +11,10 @@ public class SupplyFruitOperation extends FruitOperation {
     public Map<String, Transaction> execute(int totalQuantity,
                                             Map<String, Transaction> storage) {
         String name = transaction.getFruitType();
-        int quantity = transaction.getQuantity();
-        if (storage.containsKey(name)) {
-            storage.get(name).setQuantity(storage.get(name).getQuantity() + quantity);
-        } else {
-            storage.put(name, transaction);
-        }
+        storage.merge(name, transaction, (t1, t2) -> {
+            storage.get(name).setQuantity(t1.getQuantity() + t2.getQuantity());
+            return t1;
+        });
         return storage;
     }
 }
