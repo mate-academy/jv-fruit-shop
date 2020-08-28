@@ -7,11 +7,11 @@ import java.util.List;
 
 public class ConverterCsvToTransaction {
     public Transaction convert(List<String> data) {
-        Transaction fruitDto = new Transaction();
-        fruitDto.setOperation(data.get(0));
-        fruitDto.setFruitName(data.get(1));
-        fruitDto.setQuantity(Integer.parseInt(data.get(2)));
-        fruitDto.setDate(LocalDate.parse(data.get(3), DateTimeFormatter.ISO_LOCAL_DATE));
-        return fruitDto;
+        Transaction transaction = new Transaction();
+        transaction.setOperation(data.get(0));
+        transaction.setFruitName(data.get(1));
+        transaction.setQuantity(Integer.parseInt(data.get(2)));
+        transaction.setDate(LocalDate.parse(data.get(3), DateTimeFormatter.ISO_LOCAL_DATE));
+        return transaction;
     }
 }
