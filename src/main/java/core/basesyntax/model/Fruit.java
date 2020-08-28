@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Fruit implements Comparable<Fruit> {
     private final String type;
@@ -38,10 +39,10 @@ public class Fruit implements Comparable<Fruit> {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        if (type != null ? !type.equals(fruit.type) : fruit.type != null) {
+        if (!Objects.equals(type, fruit.type)) {
             return false;
         }
-        return date != null ? date.equals(fruit.date) : fruit.date == null;
+        return Objects.equals(date, fruit.date);
     }
 
     @Override
