@@ -21,21 +21,21 @@ import java.util.NoSuchElementException;
 
 public class FruitStoreTest {
     private static final String INTO_PATH
-            = "/storageContent.csv";
+            = "storageContent.csv";
     private static final String FIRST_PATH
             = "src/fruitsTest.csv";
     private static final String SECOND_PATH
-            = "/src/fruitsTest2.csv";
+            = "src/fruitsTest2.csv";
     private static final String THIRD_PATH
             = "src/fruitsTest3.csv";
     private static final String FOURTH_PATH
-            = "/src/fruitsTest4.csv";
+            = "src/fruitsTest4.csv";
     private static final String FIFTH_PATH
-            = "/src/fruitsTest5.csv";
+            = "src/fruitsTest5.csv";
     private static final String WRONG_PATH
-            = "/src/wrongTest.csv";
+            = "src/wrongTest.csv";
     private static final String WRONG_DATE_PATH
-            = "/src/wrongDateTest.csv";
+            = "src/wrongDateTest.csv";
 
     @Before
     public void setup() {
