@@ -21,11 +21,9 @@ public class Handle {
             }
             Fruit fruit = new Fruit();
             fruit.setName(dto.getName());
-            fruit.setAmount(1);
+            fruit.setAmount(dto.getAmount());
             fruit.setExpirationDate(dto.getExpiredDate());
-            for (int i = 0; i < dto.getAmount(); i++) {
-                handleCheck.get(dto.getOperation()).operationWithProduct(fruit);
-            }
+            handleCheck.get(dto.getOperation()).operationWithProduct(fruit);
         }
         return true;
     }
