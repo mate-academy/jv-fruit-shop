@@ -1,7 +1,7 @@
 package core.basesyntax.IOTests;
 
 import core.basesyntax.dto.FruitDto;
-import core.basesyntax.service.IOoperations.Reader;
+import core.basesyntax.service.iooperations.Reader;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.ArrayList;

@@ -1,12 +1,11 @@
-package core.basesyntax.service.IOoperations;
+package core.basesyntax.service.iooperations;
 
 import core.basesyntax.model.Fruit;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVPrinter;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 
 public class Writer {
 

@@ -2,13 +2,10 @@ package core.basesyntax.IOTests;
 
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitStorageStrategy;
-import core.basesyntax.service.FruitOperations;
-import core.basesyntax.service.IOoperations.OperationHandler;
-import core.basesyntax.service.IOoperations.Reader;
-import core.basesyntax.service.IOoperations.Writer;
+import core.basesyntax.service.iooperations.OperationHandler;
+import core.basesyntax.service.iooperations.Reader;
+import core.basesyntax.service.iooperations.Writer;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

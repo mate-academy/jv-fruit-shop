@@ -53,13 +53,17 @@ public class FruitDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FruitDto item = (FruitDto) o;
-        return getAmount() == item.getAmount() &&
-                Objects.equals(getOperation(), item.getOperation()) &&
-                Objects.equals(getFruitName(), item.getFruitName()) &&
-                Objects.equals(getFruitDtoDate(), item.getFruitDtoDate());
+        return getAmount() == item.getAmount()
+                && Objects.equals(getOperation(), item.getOperation())
+                && Objects.equals(getFruitName(), item.getFruitName())
+                && Objects.equals(getFruitDtoDate(), item.getFruitDtoDate());
     }
 
     @Override

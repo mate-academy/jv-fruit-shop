@@ -1,4 +1,4 @@
-package core.basesyntax.service.IOoperations;
+package core.basesyntax.service.iooperations;
 
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.FruitStorageStrategy;

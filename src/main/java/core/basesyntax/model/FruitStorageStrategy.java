@@ -4,7 +4,6 @@ import core.basesyntax.service.FruitOperations;
 import core.basesyntax.service.impl.BuyFruitOperation;
 import core.basesyntax.service.impl.ReturnFruitOperation;
 import core.basesyntax.service.impl.SupplyFruitOperation;
-
 import java.util.HashMap;
 import java.util.Map;
 

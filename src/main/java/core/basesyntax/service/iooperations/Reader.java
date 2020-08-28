@@ -1,10 +1,9 @@
-package core.basesyntax.service.IOoperations;
+package core.basesyntax.service.iooperations;
 
 import core.basesyntax.dto.FruitDto;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
