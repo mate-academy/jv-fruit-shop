@@ -1,4 +1,4 @@
-package core.basesyntax.OperationsTests;
+package core.basesyntax;
 
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;

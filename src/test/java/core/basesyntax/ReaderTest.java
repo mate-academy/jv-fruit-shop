@@ -1,4 +1,4 @@
-package core.basesyntax.IOTests;
+package core.basesyntax;
 
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.service.iooperations.Reader;

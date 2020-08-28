@@ -1,24 +1,23 @@
-package core.basesyntax.OperationsTests;
+package core.basesyntax;
 
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitOperations;
-import core.basesyntax.service.impl.ReturnFruitOperation;
+import core.basesyntax.service.impl.SupplyFruitOperation;
 import org.junit.*;
 
 import java.time.LocalDate;
 import java.util.Map;
 
-public class ReturnOperationTests {
+public class SupplyOperationTests {
     private static final Integer EXPECTED_QUANTITY = 60;
     private static final String KEY = "banana";
-    private static FruitOperations returning;
+    private static FruitOperations supply;
     private static Map<String, Fruit> storage = Fruit.getFruitStorage();
 
     @BeforeClass
-    public static void prepareEnvironmentBeforeTest() {
-        storage.clear();
-        returning = new ReturnFruitOperation();
+    public static void prepareEnvironmentForTests() {
+        supply = new SupplyFruitOperation();
     }
 
     @Before
@@ -33,15 +32,16 @@ public class ReturnOperationTests {
     }
 
     @Test
-    public void testNormalReturn() {
-        returning.doOperation(
-                new FruitDto("r", "banana", "10", "2020-10-07"));
+    public void testSupplyWithExistingFruit() {
+        supply.doOperation(
+                new FruitDto("s", "banana", "10", "2020-10-07"));
         Assert.assertEquals(EXPECTED_QUANTITY, storage.get(KEY).getAllFruitAmount());
     }
 
-    @Test(expected = RuntimeException.class)
-    public void testReturnNonExistingFruit() {
-        returning.doOperation(
-                new FruitDto("r", "potato", "200", "2020-10-07"));
+    @Test
+    public void testSupplyWithNewFruit() {
+        supply.doOperation(
+                new FruitDto("s", "orange", "30", "2020-10-07"));
+        Assert.assertTrue(storage.size() > 1);
     }
 }
