@@ -11,26 +11,26 @@ public class Buy extends Operation {
     @Override
     public Map<String, FruitBox> changeQuantity(int totalAmount,
                                                 Map<String, FruitBox> storage) {
-        String fruitName = fruit.getFruitType();
-        int amount = fruit.getQuantity();
-        if (!storage.containsKey(fruitName)) {
-            throw new RuntimeException("The fruit does not exist");
-        }
-        if (totalAmount >= amount) {
-            for (FruitBox fruitBox : storage.values()) {
-                if (fruitBox.getFruitType().equals(fruitName) && !fruitBox.isEmpty()
-                        && fruitBox.getDate().isAfter(fruit.getDate())) {
-                    int numberOfFruits = fruitBox.getQuantity();
-                    if (amount <= numberOfFruits) {
-                        fruitBox.setQuantity(numberOfFruits - amount);
-                    } else {
-                        amount -= numberOfFruits;
-                        fruitBox.setQuantity(0);
+        String fruitName = fruitBox.getFruitType();
+        int amount = fruitBox.getQuantity();
+        if (storage.containsKey(fruitName)) {
+            if (totalAmount >= amount) {
+                for (FruitBox existingBox : storage.values()) {
+                    if (existingBox.getFruitType().equals(fruitName) && !existingBox.isEmpty()
+                            && existingBox.getDate().isAfter(fruitBox.getDate())) {
+                        int numberOfFruits = existingBox.getQuantity();
+                        if (amount <= numberOfFruits) {
+                            existingBox.setQuantity(numberOfFruits - amount);
+                        } else {
+                            amount -= numberOfFruits;
+                            existingBox.setQuantity(0);
+                        }
                     }
                 }
+                return storage;
             }
-            return storage;
+            throw new RuntimeException("Storage does not contain such amount of fruit");
         }
-        throw new RuntimeException("Storage does not contain such amount of fruit");
+        throw new RuntimeException("The fruit does not exist");
     }
 }

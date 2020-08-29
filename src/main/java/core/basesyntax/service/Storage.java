@@ -8,6 +8,13 @@ import java.util.Map;
 public class Storage {
     private Map<String, FruitBox> fruitStorage = new LinkedHashMap<>();
 
+    public void addFruits(List<Operation> operations) {
+        for (Operation operation : operations) {
+            fruitStorage = operation.changeQuantity(getAmount(operation.fruitBox.getFruitType()),
+                    fruitStorage);
+        }
+    }
+
     public int getAmount(String fruitType) {
         return fruitStorage.values().stream()
                 .filter(fruit -> fruit.getFruitType().equals(fruitType))
@@ -24,12 +31,5 @@ public class Storage {
                     .append("\n");
         }
         return builder.toString();
-    }
-
-    public void addFruits(List<Operation> operations) {
-        for (Operation operation : operations) {
-            fruitStorage = operation.changeQuantity(getAmount(operation.fruit.getFruitType()),
-                    fruitStorage);
-        }
     }
 }

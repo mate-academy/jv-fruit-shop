@@ -11,12 +11,12 @@ public class Supply extends Operation {
     @Override
     public Map<String, FruitBox> changeQuantity(int totalAmount,
                                                 Map<String, FruitBox> storage) {
-        String fruitName = fruit.getFruitType();
-        int amount = fruit.getQuantity();
+        String fruitName = fruitBox.getFruitType();
+        int amount = fruitBox.getQuantity();
         if (storage.containsKey(fruitName)) {
             storage.get(fruitName).setQuantity(storage.get(fruitName).getQuantity() + amount);
         } else {
-            storage.put(fruitName, fruit);
+            storage.put(fruitName, fruitBox);
         }
         return storage;
     }

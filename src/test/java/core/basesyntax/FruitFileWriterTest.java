@@ -1,9 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.service.FruitFileReader;
-import core.basesyntax.service.FruitFileWriter;
-import core.basesyntax.service.Operation;
-import core.basesyntax.service.Storage;
+import core.basesyntax.service.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,12 +11,13 @@ import java.util.List;
 
 public class FruitFileWriterTest {
     private FruitFileWriter writer = new FruitFileWriter();
-    FruitFileReader reader = new FruitFileReader();
+    private FruitFileReader reader = new FruitFileReader();
     private Storage storage = new Storage();
+    private FruitService service = new FruitService();
 
     @Before
     public void setUp() {
-        List<Operation> list = reader.readOperation("src/PerfectData.csv");
+        List<Operation> list = service.parseOperations(reader.readFruitFile("src/PerfectData.csv"));
         storage.addFruits(list);
     }
 

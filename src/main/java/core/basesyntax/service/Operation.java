@@ -6,11 +6,11 @@ import java.util.Objects;
 
 public abstract class Operation {
     OperationType type;
-    FruitBox fruit;
+    FruitBox fruitBox;
 
     public Operation(OperationType type, FruitBox fruit) {
         this.type = type;
-        this.fruit = fruit;
+        this.fruitBox = fruit;
     }
 
     public abstract Map<String, FruitBox> changeQuantity(int totalAmount,
@@ -26,11 +26,11 @@ public abstract class Operation {
         }
         Operation operation = (Operation) o;
         return type == operation.type
-                && Objects.equals(fruit, operation.fruit);
+                && Objects.equals(fruitBox, operation.fruitBox);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, fruit);
+        return Objects.hash(type, fruitBox);
     }
 }
