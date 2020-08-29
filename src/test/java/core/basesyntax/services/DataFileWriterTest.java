@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DataFileWriterTest {
-    private static final String FILE_PATH
-            = "src/test/resources/resultedTestFile.csv";
+    private static final String FILE_PATH = "src/test/resources/resultedTestFile.csv";
     private static DataFileWriter fileWriter;
     private static Map<String, Map<String, Integer>> store;
     private static Map<String, Integer> bananaEntity;

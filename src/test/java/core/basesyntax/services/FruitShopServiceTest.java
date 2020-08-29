@@ -10,10 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitShopServiceTest {
-    private static final String FILE_PATH
-            = "src/test/resources/testFile.csv";
-    private static final String RESULT_FILE_PATH
-            = "src/test/resources/resultedTestFile.csv";
+    private static final String FILE_PATH = "src/test/resources/testFile.csv";
+    private static final String RESULT_FILE_PATH = "src/test/resources/resultedTestFile.csv";
     private static final String RETURN = "r";
     private static final String SUPPLY = "s";
     private static final String BUY = "b";
