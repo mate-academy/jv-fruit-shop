@@ -5,7 +5,7 @@ import com.opencsv.bean.CsvDate;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Operation {
+public class FruitDto {
     @CsvBindByName (column = "type")
     private String type;
     @CsvBindByName (column = "fruit")
@@ -16,14 +16,14 @@ public class Operation {
     @CsvDate("yyyy-MM-dd")
     private LocalDate expDate;
 
-    public Operation(String type, String fruit, int quantity, LocalDate expDate) {
+    public FruitDto(String type, String fruit, int quantity, LocalDate expDate) {
         this.type = type;
         this.fruit = fruit;
         this.quantity = quantity;
         this.expDate = expDate;
     }
 
-    public Operation() {
+    public FruitDto() {
     }
 
     @Override
@@ -34,11 +34,11 @@ public class Operation {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Operation operation = (Operation) o;
-        return quantity == operation.quantity
-                && type.equals(operation.type)
-                && fruit.equals(operation.fruit)
-                && expDate.equals(operation.expDate);
+        FruitDto fruitDto = (FruitDto) o;
+        return quantity == fruitDto.quantity
+                && type.equals(fruitDto.type)
+                && fruit.equals(fruitDto.fruit)
+                && expDate.equals(fruitDto.expDate);
     }
 
     @Override

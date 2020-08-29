@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.FruitDto;
 import core.basesyntax.service.CsvFileReader;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -19,13 +19,13 @@ public class CsvFileReaderTest {
 
     @Test
     public void normalInputTest() {
-        List<Operation> expected = new ArrayList<>();
-        expected.add(new Operation("s", "banana", 100, LocalDate.parse("2020-10-17")));
-        expected.add(new Operation("b", "banana", 13, LocalDate.parse("2020-10-15")));
-        expected.add(new Operation("r", "banana", 10, LocalDate.parse("2020-10-17")));
-        expected.add(new Operation("s", "apple", 300, LocalDate.parse("2020-10-18")));
+        List<FruitDto> expected = new ArrayList<>();
+        expected.add(new FruitDto("s", "banana", 100, LocalDate.parse("2020-10-17")));
+        expected.add(new FruitDto("b", "banana", 13, LocalDate.parse("2020-10-15")));
+        expected.add(new FruitDto("r", "banana", 10, LocalDate.parse("2020-10-17")));
+        expected.add(new FruitDto("s", "apple", 300, LocalDate.parse("2020-10-18")));
 
-        List<Operation> actual = CsvFileReader.readFile("src/main/resources/NormalInput.csv");
+        List<FruitDto> actual = CsvFileReader.readFile("src/main/resources/NormalInput.csv");
 
         Assert.assertEquals(expected, actual);
     }

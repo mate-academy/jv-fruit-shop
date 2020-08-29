@@ -1,7 +1,7 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.FruitDto;
 
 public interface StorageOperation {
-    void doStorageOperation(Operation operation);
+    void doStorageOperation(FruitDto fruitDto);
 }

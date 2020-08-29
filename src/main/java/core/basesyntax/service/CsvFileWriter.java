@@ -18,7 +18,7 @@ public class CsvFileWriter {
                         StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
-            System.out.println("Problems with writing to file");
+            System.out.println("Problems with writing to file" + e);
         }
     }
 }
