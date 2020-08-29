@@ -5,7 +5,7 @@ All input data will be passed in the file in CSV format.
 
 ## Fruit Store
 Let's imagine you have a fruit store. 
-There are three type of fruitDtos in your fruit store:
+There are three type of operations in your fruit store:
 
 ```text
     s - supply, means you are receiving a new fruits from suppliers
@@ -13,7 +13,7 @@ There are three type of fruitDtos in your fruit store:
     r - return, means someone who have bought the fruits now returns you it
 ```
 
-Let's check in details all types of fruitDtos:
+Let's check in details all types of operations:
 1. Supply. You are accepting a new fruit from suppliers. The following line in the file will look like:
     
     ```text

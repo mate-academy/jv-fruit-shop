@@ -24,9 +24,7 @@ public class CsvFileReaderTest {
         expected.add(new FruitDto("b", "banana", 13, LocalDate.parse("2020-10-15")));
         expected.add(new FruitDto("r", "banana", 10, LocalDate.parse("2020-10-17")));
         expected.add(new FruitDto("s", "apple", 300, LocalDate.parse("2020-10-18")));
-
         List<FruitDto> actual = CsvFileReader.readFile("src/main/resources/NormalInput.csv");
-
         Assert.assertEquals(expected, actual);
     }
 
@@ -34,6 +32,4 @@ public class CsvFileReaderTest {
     public void fileDoesNotExistTest() {
         CsvFileReader.readFile("notExistingFile.csv");
     }
-
-
 }
