@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.impl.Seller;
 import core.basesyntax.impl.Returner;
+import core.basesyntax.impl.Seller;
 import core.basesyntax.impl.Supplier;
 import core.basesyntax.model.FruitBox;
 import java.io.BufferedReader;

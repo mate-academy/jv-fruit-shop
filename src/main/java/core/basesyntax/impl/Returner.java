@@ -1,8 +1,8 @@
 package core.basesyntax.impl;
 
 import core.basesyntax.model.FruitBox;
-import core.basesyntax.service.Operator;
 import core.basesyntax.service.FruitCounter;
+import core.basesyntax.service.Operator;
 import java.time.LocalDate;
 
 public class Returner implements Operator<FruitBox> {

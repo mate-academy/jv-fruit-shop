@@ -2,8 +2,8 @@ package core.basesyntax.impl;
 
 import core.basesyntax.model.FruitBox;
 import core.basesyntax.model.Storage;
-import core.basesyntax.service.Operator;
 import core.basesyntax.service.FruitCounter;
+import core.basesyntax.service.Operator;
 import java.util.NoSuchElementException;
 
 public class Seller implements Operator<FruitBox> {
