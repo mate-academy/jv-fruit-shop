@@ -13,10 +13,6 @@ import java.util.Map;
 public class MainApp {
     private static final String FILE_PATH = "src/test/resources/inputFile.csv";
     private static final String RESULT_FILE_PATH = "src/test/resources/resultFile.csv";
-    private static final String SUCCESSFUL_MESSAGE
-            = "file processed successfully, output file was created";
-    private static final String UNSUCCESSFUL_MESSAGE
-            = "file processed successfully, output file was created";
     private static final String SUPPLY = "s";
     private static final String BUY = "b";
     private static final String RETURN = "r";
@@ -26,9 +22,9 @@ public class MainApp {
                 new DataFileWriter(), new DataToMapParser());
         if (shopFileService.processFile(FILE_PATH,
                 RESULT_FILE_PATH, createOperationsMap())) {
-            System.out.println(SUCCESSFUL_MESSAGE);
+            System.out.println("File has been processed successfully, output has been created");
         } else {
-            System.out.println(UNSUCCESSFUL_MESSAGE);
+            System.out.println("File hasn't been processed, output file hasn't been created");
         }
     }
 
