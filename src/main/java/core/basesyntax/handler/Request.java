@@ -1,6 +1,7 @@
 package core.basesyntax.handler;
 
 import core.basesyntax.model.Fruit;
+import java.util.Objects;
 
 public class Request {
     private String actionType;
@@ -35,5 +36,33 @@ public class Request {
 
     public void setFruit(Fruit fruit) {
         this.fruit = fruit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Request request = (Request) o;
+        return quantity == request.quantity
+                && Objects.equals(actionType, request.actionType)
+                && Objects.equals(fruit, request.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(actionType, quantity, fruit);
+    }
+
+    @Override
+    public String toString() {
+        return "Request{"
+                + "actionType='" + actionType + '\''
+                + ", quantity=" + quantity
+                + ", fruit=" + fruit
+                + '}';
     }
 }

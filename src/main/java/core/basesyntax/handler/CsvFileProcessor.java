@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVRecord;
@@ -44,9 +46,13 @@ public class CsvFileProcessor implements FileProcessor {
     @Override
     public String write(List<String> data) {
         CSVFormat format = CSVFormat.DEFAULT.withHeader("fruit", "quantity");
+        List<List<String>> rows = data.stream()
+                .map(s -> s.split(","))
+                .map(Arrays::asList)
+                .collect(Collectors.toList());
 
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(RESULT_CSV_NAME), format)) {
-            printer.printRecords(data);
+            printer.printRecords(rows);
             return RESULT_CSV_NAME;
         } catch (IOException e) {
             throw new RuntimeException("Something went wrong with writing to file");

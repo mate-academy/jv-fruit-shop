@@ -9,16 +9,19 @@ import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
 
-    private static final List<Fruit> STORAGE = new ArrayList<>();
+    private final List<Fruit> storage = new ArrayList<>();
 
     @Override
     public boolean add(Fruit fruit) {
-        return STORAGE.add(fruit);
+        if (fruit == null) {
+            throw new IllegalArgumentException("Fruit cannot be null.");
+        }
+        return storage.add(fruit);
     }
 
     @Override
     public void sell(String fruitName, LocalDate expirationDate, int amount) {
-        List<Fruit> available = STORAGE.stream()
+        List<Fruit> available = storage.stream()
                 .filter(f -> f.getName().equals(fruitName))
                 .filter(f -> greaterOrEqual(f.getExpirationDate(), expirationDate))
                 .limit(amount)
@@ -28,12 +31,12 @@ public class FruitServiceImpl implements FruitService {
             throw new IllegalStateException(String.format("Not enough Fruits: %s", fruitName));
         }
 
-        available.forEach(STORAGE::remove);
+        available.forEach(storage::remove);
     }
 
     @Override
     public List<Fruit> getAll() {
-        return new ArrayList<>(STORAGE);
+        return new ArrayList<>(storage);
     }
 
     private boolean greaterOrEqual(LocalDate date1, LocalDate date2) {

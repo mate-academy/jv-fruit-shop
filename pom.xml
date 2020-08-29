@@ -58,6 +58,13 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>core/basesyntax/Main.class</exclude>
+                        <exclude>core/basesyntax/model/*</exclude>
+                        <exclude>core/basesyntax/handler/Request.class</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
