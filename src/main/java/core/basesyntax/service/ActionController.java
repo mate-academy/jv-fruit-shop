@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ActionController {
-    private static final Map<String, ActionsWithFruits> actions = new HashMap<>();
+    private static final Map<String, FruitAction> actions = new HashMap<>();
 
     static {
         actions.put("s", new SupplyAction());
@@ -19,7 +19,7 @@ public class ActionController {
 
     public void distributeActions(List<Transaction> data) {
         for (Transaction item : data) {
-            ActionsWithFruits action = actions.get(item.getAction());
+            FruitAction action = actions.get(item.getAction());
             action.applyAction(item);
         }
     }

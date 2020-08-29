@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.service.ActionsWithFruits;
+import core.basesyntax.service.FruitAction;
 import core.basesyntax.service.impl.BuyAction;
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.Map;
 
 public class BuyActionTest {
-    private static ActionsWithFruits buyAction = new BuyAction();
+    private static FruitAction buyAction = new BuyAction();
 
     @Test
     public void buyActionOk() {
@@ -22,7 +22,7 @@ public class BuyActionTest {
     @Test(expected = RuntimeException.class)
     public void buyQuantityMoreThanExist() {
         Map<String, Integer> actual = Store.fruits;
-        ActionsWithFruits buyAction = new BuyAction();
+        FruitAction buyAction = new BuyAction();
         actual.put("banana", 10);
         buyAction.applyAction(new Transaction("b", "banana", "20", "2020-10-17"));
     }

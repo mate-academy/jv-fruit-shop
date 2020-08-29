@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.service.ActionsWithFruits;
+import core.basesyntax.service.FruitAction;
 import core.basesyntax.service.impl.SupplyAction;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -18,7 +18,7 @@ public class SupplyActionTest {
     @Test
     public void applyActionOk() {
         Map<String, Integer> actual = Store.fruits;
-        ActionsWithFruits supplyAction = new SupplyAction();
+        FruitAction supplyAction = new SupplyAction();
         supplyAction.applyAction(new Transaction("s", "banana", "120", "2020-10-17"));
 
         Assert.assertEquals(120, (int) actual.get("banana"));
@@ -26,7 +26,7 @@ public class SupplyActionTest {
 
     @Test(expected = RuntimeException.class)
     public void supplyWithNegativeNum() {
-        ActionsWithFruits supplyAction = new SupplyAction();
+        FruitAction supplyAction = new SupplyAction();
         supplyAction.applyAction(new Transaction("s", "banana", "-120", "2020-10-17"));
     }
 }

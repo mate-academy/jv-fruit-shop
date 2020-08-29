@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.Store;
 import core.basesyntax.Transaction;
-import core.basesyntax.service.ActionsWithFruits;
+import core.basesyntax.service.FruitAction;
 
-public class SupplyAction implements ActionsWithFruits {
+public class SupplyAction implements FruitAction {
     @Override
     public void applyAction(Transaction transaction) {
         String fruit = transaction.getFruit();
