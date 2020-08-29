@@ -4,10 +4,10 @@ import core.basesyntax.customexceptions.NoSuchOperation;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PerformStrategy {
+public class StrategyPerformer {
     private Map<String, Operable> operableMap = new HashMap<>();
 
-    public PerformStrategy() {
+    public StrategyPerformer() {
         operableMap.put("b", new Buying());
         operableMap.put("s", new Supplying());
         operableMap.put("r", new Returning());

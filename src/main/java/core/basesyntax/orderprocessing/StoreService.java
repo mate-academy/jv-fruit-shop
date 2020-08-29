@@ -3,7 +3,7 @@ package core.basesyntax.orderprocessing;
 import core.basesyntax.entries.FruitPack;
 import core.basesyntax.entries.Order;
 import core.basesyntax.operations.Operable;
-import core.basesyntax.operations.PerformStrategy;
+import core.basesyntax.operations.StrategyPerformer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,11 +11,11 @@ import java.util.Map;
 
 public class StoreService {
     private List<FruitPack> performedPacks = new ArrayList<>();
-    private PerformStrategy performStrategy = new PerformStrategy();
+    private StrategyPerformer strategyPerformer = new StrategyPerformer();
 
     public void performOperations(List<Order> orders) {
         for (Order order : orders) {
-            Operable operation = performStrategy.getStrategy(order.getTypeOfOperation());
+            Operable operation = strategyPerformer.getStrategy(order.getTypeOfOperation());
             performedPacks = operation.perform(order, performedPacks);
         }
     }
