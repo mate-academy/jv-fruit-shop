@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ReadFromFileTest {
-    private static final String FIRST_FILE_NAME = "txt1";
+    private static final String FIRST_FILE_NAME = "txt1.csv";
     public final static String FIRST_INPUT_DATA = "type,fruit,quantity,date";
 
     @Test
