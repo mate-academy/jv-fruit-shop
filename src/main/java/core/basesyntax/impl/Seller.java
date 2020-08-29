@@ -3,10 +3,10 @@ package core.basesyntax.impl;
 import core.basesyntax.model.FruitBox;
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.Operator;
-import core.basesyntax.service.SoldFruitCounter;
+import core.basesyntax.service.FruitCounter;
 import java.util.NoSuchElementException;
 
-public class Consumer implements Operator<FruitBox> {
+public class Seller implements Operator<FruitBox> {
     @Override
     public void execute(FruitBox fruit) {
         if (Storage.storage.peek() == null) {
@@ -19,14 +19,14 @@ public class Consumer implements Operator<FruitBox> {
                     Storage.storage.peek().getAmount() + oldAmount);
             Storage.storage.peek().setAmount(
                     Storage.storage.peek().getAmount() - fruit.getAmount());
-            SoldFruitCounter.fruitCounter += fruit.getAmount();
+            FruitCounter.fruitCounter += fruit.getAmount();
         } else if (fruit.getAmount() <= Storage.storage.peek().getAmount()) {
             Storage.storage
                     .peek()
                     .setAmount(Storage.storage
                             .peek()
                             .getAmount() - fruit.getAmount());
-            SoldFruitCounter.fruitCounter += fruit.getAmount();
+            FruitCounter.fruitCounter += fruit.getAmount();
         } else {
             throw new NoSuchElementException("Not enough fruits in storage");
         }

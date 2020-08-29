@@ -9,12 +9,17 @@ public class Supplier implements Operator<FruitBox> {
     public void execute(FruitBox fruit) {
         if (Storage.storage.peek() == null) {
             Storage.storage.add(fruit);
-        } else if (Storage.storage.peek() != null
-                && Storage.storage.peek().getExpiryDate().equals(fruit.getExpiryDate())) {
+            return;
+        }
+        if (Storage.storage.peek().getExpiryDate().equals(fruit.getExpiryDate())) {
             Storage.storage.peek().setAmount(Storage.storage.peek().getAmount()
                     + fruit.getAmount());
-        } else {
-            Storage.storage.add(fruit);
+            return;
         }
+        if (fruit.getExpiryDate().isBefore(Storage.storage.peek().getExpiryDate())) {
+            Storage.storage.addFirst(fruit);
+            return;
+        }
+        Storage.storage.add(fruit);
     }
 }

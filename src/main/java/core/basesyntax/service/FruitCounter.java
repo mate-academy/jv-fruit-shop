@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public class SoldFruitCounter {
+public class FruitCounter {
     public static Integer fruitCounter = 0;
 }

@@ -4,11 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class OutputResultFileService {
+public class ReadFromFileService {
     private StringBuilder resultBuilder = new StringBuilder();
     private final String localPath = "storageContent.csv";
 
-    public String sout(String filePath) {
+    public String readFromFile(String filePath) {
         try (BufferedReader resultReader
                      = new BufferedReader(new FileReader(filePath))) {
             while (resultReader.readLine() != null) {
