@@ -16,6 +16,10 @@ public class ReadOperationFromFileService {
     private static final String RETURNER = "r";
 
     public void read(String filePath) {
+        Operator<FruitBox> supplier = new Supplier();
+        Operator<FruitBox> consumer = new Consumer();
+        Operator<FruitBox> returner = new Returner();
+
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -25,15 +29,12 @@ public class ReadOperationFromFileService {
                         data[1], Integer.parseInt(data[2]), LocalDate.parse(data[3]));
                 switch (data[0]) {
                     case SUPPLIER:
-                        Operator<FruitBox> supplier = new Supplier();
                         supplier.execute(fruit);
                         break;
                     case CONSUMER:
-                        Operator<FruitBox> consumer = new Consumer();
                         consumer.execute(fruit);
                         break;
                     case RETURNER:
-                        Operator<FruitBox> returner = new Returner();
                         returner.execute(fruit);
                         break;
                     default:

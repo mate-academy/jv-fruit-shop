@@ -20,7 +20,7 @@ public class Consumer implements Operator<FruitBox> {
             Storage.storage.peek().setAmount(
                     Storage.storage.peek().getAmount() - fruit.getAmount());
             SoldFruitCounter.fruitCounter += fruit.getAmount();
-        } else if (fruit.getAmount() < Storage.storage.peek().getAmount()) {
+        } else if (fruit.getAmount() <= Storage.storage.peek().getAmount()) {
             Storage.storage
                     .peek()
                     .setAmount(Storage.storage

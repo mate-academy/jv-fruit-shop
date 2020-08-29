@@ -10,7 +10,7 @@ public class OutputResultFileService {
 
     public String sout(String filePath) {
         try (BufferedReader resultReader
-                     = new BufferedReader(new FileReader(localPath))) {
+                     = new BufferedReader(new FileReader(filePath))) {
             while (resultReader.readLine() != null) {
                 resultBuilder.append(resultReader.readLine()).append("\n");
             }
