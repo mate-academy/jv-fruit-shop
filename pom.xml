@@ -26,6 +26,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>4.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -87,8 +92,12 @@
                             </rules>
                         </configuration>
                     </execution>
-
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/MainApp*</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>
