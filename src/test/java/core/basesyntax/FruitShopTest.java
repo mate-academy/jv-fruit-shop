@@ -24,9 +24,9 @@ public class FruitShopTest {
     private static final String NO_FILE = "NoFile.csv";
     private static final String RESULT = "Report";
     private static final String REPORT_HEADER = "fruit,quantity";
-    private static final String REPORT_LINE_TWO = "banana,257";
+    private static final String REPORT_LINE_TWO = "orange,140";
     private static final String REPORT_LINE_FOUR = "apple,40";
-    private static final String REPORT_LINE_THREE = "orange,140";
+    private static final String REPORT_LINE_THREE = "banana,257";
     private static final Path REPORT = Paths.get("Report");
 
     @Before

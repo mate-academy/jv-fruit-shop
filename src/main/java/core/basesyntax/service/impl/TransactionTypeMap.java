@@ -4,12 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TransactionTypeMap {
-    public static final Map<Character, StockChangeable> typeMap;
-
-    static {
-        typeMap = new HashMap<>();
-        typeMap.put('s', new AddingFruit());
-        typeMap.put('r', new AddingFruit());
-        typeMap.put('b', new SalesFruit());
-    }
+    public static final Map<Character, StockChangeable> typeMap = new HashMap<>() {{
+            put('s', new AddingFruit());
+            put('r', new AddingFruit());
+            put('b', new SalesFruit());
+        }};
 }

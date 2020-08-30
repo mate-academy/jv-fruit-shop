@@ -8,7 +8,6 @@ public class AddingFruit implements StockChangeable {
 
     @Override
     public void apply(Fruit fruit) {
-        Storage str = new Storage();
-        str.add(fruit);
+        Storage.add(fruit);
     }
 }
