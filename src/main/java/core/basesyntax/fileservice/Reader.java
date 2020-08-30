@@ -3,7 +3,6 @@ package core.basesyntax.fileservice;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 
 public class Reader {
@@ -20,7 +19,6 @@ public class Reader {
         try {
             lines = Files.readAllLines(Path.of(filePath));
             lines.remove(FIRST_ELEMENT_INDEX);
-            Collections.sort(lines);
         } catch (IOException e) {
             throw new IOException(e.getMessage());
         }

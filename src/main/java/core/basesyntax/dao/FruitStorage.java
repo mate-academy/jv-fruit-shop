@@ -17,12 +17,19 @@ public class FruitStorage {
         final LocalDate expDate = product.getExpDate();
         FruitPack.checkExpDate(expDate);
         Box box = new Box();
-        if (!storage.isEmpty()) {
+        if (!storage.isEmpty() && storage.containsKey(type)) {
             box = storage.get(type);
         }
         box.putProduct(product);
         storage.put(type, box);
         return true;
+    }
+
+    public void removeBox(String type) {
+        if (!storage.containsKey(type)) {
+            throw new IllegalArgumentException("Invalid input arguments");
+        }
+        storage.remove(type);
     }
 
     public boolean contains(String type) {
@@ -44,6 +51,10 @@ public class FruitStorage {
 
     public int size() {
         return storage.size();
+    }
+
+    public boolean isEmpty() {
+        return storage.isEmpty();
     }
 
     private void typeCheck(String type) {

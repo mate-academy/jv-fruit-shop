@@ -6,7 +6,6 @@ import core.basesyntax.fileservice.ProductDto;
 import core.basesyntax.goods.FruitPack;
 import java.util.List;
 
-
 public class Updater {
     private final FruitStorage storage;
 
@@ -15,11 +14,13 @@ public class Updater {
     }
 
     public FruitStorage updateData(List<ProductDto> inputData) {
-        if (inputData.size() == 0) {
-            throw new RuntimeException("No operation data found");
+        if (inputData == null || inputData.size() == 0) {
+            throw new IllegalArgumentException("No operation data found");
         }
         for (ProductDto element : inputData) {
-            FruitPack product = new FruitPack(element.getType(), element.getExpDate(), element.getQuantity());
+            FruitPack product = new FruitPack(element.getType(),
+                    element.getExpDate(),
+                    element.getQuantity());
             element.getOperation()
                     .updateStorage(product);
         }

@@ -13,6 +13,7 @@ public class Supplier implements Operation {
 
     @Override
     public boolean updateStorage(FruitPack product) {
+        FruitPack.isPresent(product);
         storage.addProduct(product);
         return true;
     }

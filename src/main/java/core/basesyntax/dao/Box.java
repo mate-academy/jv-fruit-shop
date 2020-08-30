@@ -1,18 +1,16 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.goods.FruitPack;
-
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 public class Box {
     private final Map<LocalDate, FruitPack> box;
 
     public Box() {
-       box = new HashMap<>();
+        box = new HashMap<>();
     }
 
     public Box(FruitPack product) {
@@ -25,9 +23,9 @@ public class Box {
         LocalDate expDate = product.getExpDate();
         FruitPack.checkExpDate(expDate);
         if (!box.isEmpty() && box.containsKey(expDate)) {
-                int newQuantity = product.getQuantity();
-                int prevQuantity = box.get(expDate).getQuantity();
-                product = product.setQuantity(newQuantity + prevQuantity);
+            int newQuantity = product.getQuantity();
+            int prevQuantity = box.get(expDate).getQuantity();
+            product = product.setQuantity(newQuantity + prevQuantity);
         }
         box.put(expDate, product);
         return this;
@@ -57,22 +55,16 @@ public class Box {
         return box.get(expDate);
     }
 
-    public Set<LocalDate> getExpDates() {
-        return box.keySet();
-    }
-
-    public boolean removeProduct(LocalDate expDate) {
-        FruitPack.checkExpDate(expDate);
-        box.remove(expDate);
-        return true;
-    }
-
     public void clear() {
         box.clear();
     }
 
     public int size() {
         return box.size();
+    }
+
+    public boolean isEmpty() {
+        return box.isEmpty();
     }
 
     @Override

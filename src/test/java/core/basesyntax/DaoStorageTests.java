@@ -131,42 +131,12 @@ public class DaoStorageTests {
     }
 
     @Test
-    public void BoxRemoveProductTestOk() {
-        Assert.assertEquals(0, BOX.size());
-        BOX.putProduct(VALID_PRODUCT);
-        Assert.assertEquals(1, BOX.size());
-        BOX.removeProduct(VALID_DATE);
-        Assert.assertEquals(0, BOX.size());
-    }
-
-    @Test
-    public void BoxRemoveProductNullTest() {
-        String actual = EMPTY;
-        try {
-            BOX.removeProduct(null);
-        } catch (DateTimeException exception) {
-            actual = exception.getMessage();
-        }
-        Assert.assertEquals(INVALID_DATE_INPUT_MESSAGE, actual);
-    }
-
-    @Test
-    public void BoxRemoveTerminatedProductTest() {
-        String actual = EMPTY;
-        try {
-            BOX.removeProduct(TERMINATED_DATE);
-        } catch (DateTimeException exception) {
-            actual = exception.getMessage();
-        }
-        Assert.assertEquals(TERMINATED_MESSAGE, actual);
-    }
-
-    @Test
     public void EmptyStorageAddBoxTestOk() {
         Assert.assertEquals(0, STORAGE.size());
         STORAGE.addProduct(VALID_PRODUCT);
         Assert.assertEquals(1, STORAGE.size());
-        FruitPack actual = STORAGE.getBox(PRODUCT_TYPE).getProduct(VALID_DATE);
+        FruitPack actual = STORAGE.getBox(PRODUCT_TYPE)
+                .getProduct(VALID_DATE);
         Assert.assertEquals(VALID_PRODUCT, actual);
     }
 
@@ -175,7 +145,9 @@ public class DaoStorageTests {
         STORAGE.addProduct(VALID_PRODUCT);
         STORAGE.addProduct(VALID_PRODUCT);
         STORAGE.addProduct(VALID_PRODUCT);
-        Integer actual = STORAGE.getBox(PRODUCT_TYPE).getProduct(VALID_DATE).getQuantity();
+        Integer actual = STORAGE.getBox(PRODUCT_TYPE)
+                .getProduct(VALID_DATE)
+                .getQuantity();
         Assert.assertEquals(NEW_COCONUT_QUANTITY, actual);
     }
 

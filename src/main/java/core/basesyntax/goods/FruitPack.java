@@ -16,12 +16,6 @@ public class FruitPack {
         this.quantity = quantity;
     }
 
-    public FruitPack(FruitPack fruitPack) {
-        this.type = fruitPack.type;
-        this.expDate = fruitPack.expDate;
-        this.quantity = fruitPack.quantity;
-    }
-
     public String getType() {
         return type;
     }
@@ -63,9 +57,9 @@ public class FruitPack {
             return false;
         }
         FruitPack fruitPack = (FruitPack) o;
-        return quantity == fruitPack.quantity &&
-                Objects.equals(type, fruitPack.type) &&
-                Objects.equals(expDate, fruitPack.expDate);
+        return quantity == fruitPack.quantity
+                && Objects.equals(type, fruitPack.type)
+                && Objects.equals(expDate, fruitPack.expDate);
     }
 
     @Override

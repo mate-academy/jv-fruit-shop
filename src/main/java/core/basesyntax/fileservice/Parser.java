@@ -18,15 +18,15 @@ public class Parser {
         for (String line : inputData) {
             String[] data;
             try {
-               data = line.split(CSV_REGEX);
+                data = line.split(CSV_REGEX);
             } catch (RuntimeException exception) {
                 throw new RuntimeException("No arguments to parse");
             }
             try {
                 productData.add(new ProductDto(switcher.getOperation(data[OPERATION_INDEX]),
-                    data[PRODUCT_TYPE_INDEX],
-                    LocalDate.parse(data[EXP_DATE_INDEX]),
-                    Integer.parseInt(data[QUANTITY_INDEX])));
+                        data[PRODUCT_TYPE_INDEX],
+                        LocalDate.parse(data[EXP_DATE_INDEX]),
+                        Integer.parseInt(data[QUANTITY_INDEX])));
             } catch (RuntimeException exception) {
                 throw new RuntimeException("Invalid format of input data");
             }
