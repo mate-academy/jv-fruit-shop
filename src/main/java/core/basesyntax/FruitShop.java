@@ -12,21 +12,22 @@ import java.util.List;
 
 public class FruitShop {
     private final String path;
+    private Storage storage;
 
     public FruitShop(String path) {
         this.path = path;
+        storage = new Storage();
     }
 
     public void start() {
-        Storage storage = new Storage();
         Writer writer = new Writer();
         FruitParser fruitParser = new Parser();
         for (List<String> row : fruitParser.readFile(path)) {
-            ActionInterface action = new ShopInterfaceStrategy().get(row.get(0));
+            ActionInterface action = new ShopInterfaceStrategy(storage).get(row.get(0));
             if (action != null) {
                 Fruit fruit =
                         new Fruit(row.get(1), checkBalance(row.get(2)), checkDate(row.get(3)));
-                action.action(storage, fruit);
+                action.action(fruit);
             }
         }
         writer.doWrite(storage);

@@ -7,9 +7,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Buy implements ActionInterface {
+    private Storage storage;
+
+    public Buy(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
-    public void action(Storage storage, Fruit fruit) {
+    public void action(Fruit fruit) {
         List<Fruit> list = storage.getFruits().stream()
                 .filter(storageFruit -> storageFruit.getType().equals(fruit.getType()))
                 .filter(storagefruit -> storagefruit.getDate().isAfter(fruit.getDate())
