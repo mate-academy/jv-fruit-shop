@@ -25,15 +25,15 @@ public class OperationStrategyTest {
     @Test
     public void supplyTest() {
         List<Transaction> input = new ArrayList<>();
-        input.add(Transaction.build("s", "banana","200","2020-11-20"));
-        input.add(Transaction.build("b", "banana","30","2020-10-19"));
-        input.add(Transaction.build("r", "banana","7","2020-11-20"));
-        input.add(Transaction.build("s", "mango","65","2020-11-17"));
-        input.add(Transaction.build("b", "mango","25","2020-10-19"));
-        input.add(Transaction.build("r", "banana","10","2020-11-20"));
-        input.add(Transaction.build("s", "orange","40","2020-11-17"));
-        input.add(Transaction.build("b", "orange","20","2020-10-19"));
-        input.add(Transaction.build("r", "orange","7","2020-11-20"));
+        input.add(new Transaction("s", "banana","200","2020-11-20"));
+        input.add(new Transaction("b", "banana","30","2020-10-19"));
+        input.add(new Transaction("r", "banana","7","2020-11-20"));
+        input.add(new Transaction("s", "mango","65","2020-11-17"));
+        input.add(new Transaction("b", "mango","25","2020-10-19"));
+        input.add(new Transaction("r", "banana","10","2020-11-20"));
+        input.add(new Transaction("s", "orange","40","2020-11-17"));
+        input.add(new Transaction("b", "orange","20","2020-10-19"));
+        input.add(new Transaction("r", "orange","7","2020-11-20"));
         expected.put("banana", 187);
         expected.put("mango", 40);
         expected.put("orange", 27);

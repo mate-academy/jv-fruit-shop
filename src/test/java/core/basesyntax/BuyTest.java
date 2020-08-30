@@ -13,15 +13,15 @@ import java.util.Map;
 public class BuyTest {
     private Map<String, Integer> fruitDao = new HashMap<>();
     private Map<String, Integer> expected = new HashMap<>();
-    private Transaction transaction = Transaction.build("b", "banana","130","2010-11-18");
-    private Transaction transaction1 = Transaction.build("b", "banana","147","2020-12-25");
-    private Transaction transaction2 = Transaction.build("b", "banana","213","2020-11-21");
-    private Transaction transaction3 = Transaction.build("b", "mango","100","2010-11-21");
-    private Transaction transaction4 = Transaction.build("b", "mango","50","2020-11-21");
-    private Transaction transaction5 = Transaction.build("b", "mango","60","2020-11-21");
-    private Transaction transaction6 = Transaction.build("b", "orange","200","2019-11-21");
-    private Transaction transaction7 = Transaction.build("b", "orange","40","2020-11-21");
-    private Transaction transaction8 = Transaction.build("b", "orange","80","2020-11-21");
+    private Transaction transaction = new Transaction("b", "banana","130","2010-11-18");
+    private Transaction transaction1 = new Transaction("b", "banana","147","2020-12-25");
+    private Transaction transaction2 = new Transaction("b", "banana","213","2020-11-21");
+    private Transaction transaction3 = new Transaction("b", "mango","100","2010-11-21");
+    private Transaction transaction4 = new Transaction("b", "mango","50","2020-11-21");
+    private Transaction transaction5 = new Transaction("b", "mango","60","2020-11-21");
+    private Transaction transaction6 = new Transaction("b", "orange","200","2019-11-21");
+    private Transaction transaction7 = new Transaction("b", "orange","40","2020-11-21");
+    private Transaction transaction8 = new Transaction("b", "orange","80","2020-11-21");
     private static Operation buy;
 
     @BeforeClass

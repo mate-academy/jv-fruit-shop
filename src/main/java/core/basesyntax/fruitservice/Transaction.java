@@ -9,6 +9,13 @@ public class Transaction {
     private Integer quantity;
     private LocalDate date;
 
+    public Transaction(String operation, String product, String quantity, String date) {
+        this.operation = operation;
+        this.product = product;
+        this.quantity = Integer.parseInt(quantity);
+        this.date = LocalDate.parse(date);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -41,16 +48,8 @@ public class Transaction {
         return product;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public LocalDate getDate() {
@@ -59,15 +58,5 @@ public class Transaction {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public static Transaction build(String operation, String product,
-                                    String quantity, String date) {
-        Transaction transaction = new Transaction();
-        transaction.setOperation(operation);
-        transaction.setProduct(product);
-        transaction.setQuantity(Integer.parseInt(quantity));
-        transaction.setDate(LocalDate.parse(date));
-        return transaction;
     }
 }

@@ -13,9 +13,9 @@ import java.util.Map;
 public class ReturnTest {
     private Map<String, Integer> fruitDao = new HashMap<>();
     private Map<String, Integer> expected = new HashMap<>();
-    private Transaction transaction = Transaction.build("b", "banana", "200", "2010-11-20");
-    private Transaction transaction1 = Transaction.build("b", "banana", "150", "2020-12-23");
-    private Transaction transaction2 = Transaction.build("b", "banana", "365", "2020-10-15");
+    private Transaction transaction = new Transaction("b", "banana", "200", "2010-11-20");
+    private Transaction transaction1 = new Transaction("b", "banana", "150", "2020-12-23");
+    private Transaction transaction2 = new Transaction("b", "banana", "365", "2020-10-15");
     private static Operation returnTest;
 
     @BeforeClass

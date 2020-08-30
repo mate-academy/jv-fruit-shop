@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FruitStorageServiceTest {
-    private Transaction transaction = Transaction.build("b", "banana", "200", "2010-11-20");
+    private Transaction transaction = new Transaction("b", "banana", "200", "2010-11-20");
     private FruitStorageService fruitStorageService = new FruitStorageService();
     private FruitStorage fruitStorage = new FruitStorage();
 
@@ -23,15 +23,11 @@ public class FruitStorageServiceTest {
         Assert.assertEquals(expected, fruitStorage.getStorage());
     }
 
-    @After
-    public void ClearAfterAddition() {
-        FruitStorage fruitStorage = new FruitStorage();
-        fruitStorage.getStorage().clear();
-    }
 
     @Test
     public void removeTest() {
-        fruitStorageService.addToStorage(transaction);
+        fruitStorage.getStorage().clear();
+        fruitStorage.getStorage().add(transaction);
         fruitStorageService.removeFromStorage(transaction);
         Assert.assertEquals(new ArrayList<>(), fruitStorage.getStorage());
     }

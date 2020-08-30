@@ -13,9 +13,9 @@ import java.util.Map;
 public class SupplyTest {
     private Map<String, Integer> fruitDao = new HashMap<>();
     private Map<String, Integer> expected = new HashMap<>();
-    private Transaction transaction = Transaction.build("s", "banana","245","2020-12-10");
-    private Transaction transaction1 = Transaction.build("s", "banana","300","2018-10-20");
-    private Transaction transaction2 = Transaction.build("s", "banana","350","2020-11-27");
+    private Transaction transaction = new Transaction("s", "banana","245","2020-12-10");
+    private Transaction transaction1 = new Transaction("s", "banana","300","2018-10-20");
+    private Transaction transaction2 = new Transaction("s", "banana","350","2020-11-27");
     private static Operation supply;
 
     @BeforeClass
