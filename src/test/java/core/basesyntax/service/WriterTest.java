@@ -24,7 +24,6 @@ public class WriterTest {
         writer.write("src/main/resources/Output.csv");
         List<String> expected = Files.readAllLines(Path.of("src/main/resources/Result.csv"));
         List<String> actual = Files.readAllLines(Path.of("src/main/resources/Output.csv"));
-        expected.removeAll(actual);
-        Assert.assertTrue(expected.isEmpty());
+        Assert.assertEquals(expected, actual);
     }
 }
