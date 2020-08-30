@@ -11,7 +11,7 @@ import java.util.Map;
 public class SupplyOperationTest {
     private static final Integer QUANTITY = 30;
     private static final Integer EXPECTED_QUANTITY = 60;
-    private static final String KEY = "orange";
+    private static final String FRUIT = "orange";
     private static SupplyOperation supply;
 
     @BeforeClass
@@ -26,18 +26,18 @@ public class SupplyOperationTest {
 
     @Test
     public void supplyNormalTest() {
-        Storage.addFruit(KEY, QUANTITY);
-        supply.supplyFruit(KEY, QUANTITY);
+        Storage.addFruit(FRUIT, QUANTITY);
+        supply.provideOperation(FRUIT, QUANTITY);
         Map<String, Integer> storage = Storage.getStockBalance();
-        Assert.assertEquals(EXPECTED_QUANTITY, storage.get(KEY));
+        Assert.assertEquals(EXPECTED_QUANTITY, storage.get(FRUIT));
     }
 
     @Test
     public void supplyNewFruitTest() {
         System.out.println(Storage.getStockBalance());
         Map<String, Integer> testMap = new HashMap<>();
-        testMap.put(KEY, QUANTITY);
-        supply.supplyFruit(KEY, QUANTITY);
+        testMap.put(FRUIT, QUANTITY);
+        supply.provideOperation(FRUIT, QUANTITY);
         Assert.assertEquals(testMap, Storage.getStockBalance());
     }
 }

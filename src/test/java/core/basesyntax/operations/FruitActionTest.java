@@ -6,17 +6,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FruitActionTest {
     private static FruitAction act;
-    private static CsvFileReaderImpl fileReader;
+    private static final String SUPPLY = "s";
+    private static final String BUY = "b";
+    private static final String RETURN = "r";
+    private static final String INCORRECT_OPERATION = "*";
+    private static final String FRUIT = "banana";
+    private static final Integer QUANTITY = 50;
+    private static final Integer INCORRECT_QUANTITY = -5;
+    private static final String DATE = "2020-09-15";
 
     @BeforeClass
     public static void beforeClass() {
         act = new FruitAction();
-        fileReader = new CsvFileReaderImpl();
     }
 
     @Before
@@ -26,44 +30,29 @@ public class FruitActionTest {
 
     @Test
     public void actionSupplyTest() {
-        List<List<String>> testList;
-        String path = "src/main/resources/supplyCorrect.csv";
-        testList = fileReader.readFile(path);
-        act.action(testList);
-        Assert.assertTrue(act.result);
+        Assert.assertTrue(act.action(SUPPLY, FRUIT, QUANTITY, DATE));
     }
 
     @Test
     public void actionBuyTest() {
-        List<List<String>> testList;
-        String path = "src/main/resources/buyCorrect.csv";
-        testList = fileReader.readFile(path);
-        act.action(testList);
-        Assert.assertTrue(act.result);
+        Storage.addFruit(FRUIT, QUANTITY);
+        Assert.assertTrue(act.action(BUY, FRUIT, QUANTITY, DATE));
+
     }
 
     @Test
     public void actionReturnTest() {
-        List<List<String>> testList;
-        String path = "src/main/resources/returnCorrect.csv";
-        testList = fileReader.readFile(path);
-        act.action(testList);
-        Assert.assertTrue(act.result);
+        Storage.addFruit(FRUIT, QUANTITY);
+        Assert.assertTrue(act.action(RETURN, FRUIT, QUANTITY, DATE));
     }
 
-    @Test
-    public void isEmptyListTest() {
-        List<List<String>> testList = new ArrayList<>();
-        List<String> emptyList = new ArrayList<>();
-        testList.add(emptyList);
-        Assert.assertFalse(act.action(testList));
+    @Test(expected = IllegalArgumentException.class)
+    public void checkQuantityTest() {
+        act.action(SUPPLY, FRUIT, INCORRECT_QUANTITY, DATE);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void soldOutFruitTest() {
-        List<List<String>> testList;
-        String path = "src/main/resources/unsupportedOperation.csv";
-        testList = fileReader.readFile(path);
-        act.action(testList);
+        Assert.assertTrue(act.action(INCORRECT_OPERATION, FRUIT, QUANTITY, DATE));
     }
 }

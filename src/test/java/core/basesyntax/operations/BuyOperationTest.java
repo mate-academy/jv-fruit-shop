@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class BuyOperationTest {
     private static final Integer EXPECTED_QUANTITY = 20;
-    private static final String KEY = "banana";
+    private static final String FRUIT = "banana";
     private static final String NOT_AVAILABLE_KEY = "coconut";
     private static final String NORMAL_DATE = "2020-10-12";
     private static final String EXPIRY_DATE = "2020-05-12";
@@ -23,23 +23,23 @@ public class BuyOperationTest {
 
     @Before
     public void before() {
-        Storage.addFruit("banana", QUANTITY);
+        Storage.addFruit(FRUIT, QUANTITY);
     }
 
     @Test
     public void buyNormalTest() {
-        buy.buyFruit(KEY, 30, NORMAL_DATE);
-        Assert.assertEquals(EXPECTED_QUANTITY, Storage.getStockBalance().get(KEY));
+        buy.buyFruit(FRUIT, 30, NORMAL_DATE);
+        Assert.assertEquals(EXPECTED_QUANTITY, Storage.getStockBalance().get(FRUIT));
     }
 
     @Test(expected = RuntimeException.class)
     public void soldOutFruitTest() {
-        buy.buyFruit(KEY, SOLD_QUANTITY, NORMAL_DATE);
+        buy.buyFruit(FRUIT, SOLD_QUANTITY, NORMAL_DATE);
     }
 
     @Test(expected = RuntimeException.class)
     public void expirationDateTest() {
-        buy.buyFruit(KEY, QUANTITY, EXPIRY_DATE);
+        buy.buyFruit(FRUIT, QUANTITY, EXPIRY_DATE);
     }
 
     @Test(expected = RuntimeException.class)

@@ -10,19 +10,17 @@ public class CsvFileWriterImpl implements CsvFileWriter {
 
     @Override
     public boolean writeToFile(Map<String, Integer> stockBalance, String filePath) {
-        CSVWriter writer;
-        try {
-            writer = new CSVWriter(new FileWriter(filePath), CSV_SPLIT_BY, '\0', ' ', "\n");
+        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath),
+                CSV_SPLIT_BY, '\0', ' ', "\n")) {
             String[] entries = {"fruit", "quantity"};
             writer.writeNext(entries);
             for (Map.Entry<String, Integer> entry : stockBalance.entrySet()) {
                 String[] toFile = new String[]{entry.getKey(), String.valueOf(entry.getValue())};
                 writer.writeNext(toFile);
             }
-            writer.close();
             return true;
         } catch (IOException e) {
-            throw new RuntimeException("The file cannot be written.");
+            throw new RuntimeException("The file cannot be written.", e);
         }
     }
 }

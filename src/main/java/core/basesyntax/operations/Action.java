@@ -1,7 +1,5 @@
 package core.basesyntax.operations;
 
-import java.util.List;
-
 public interface Action {
-    boolean action(List<List<String>> rows);
+    boolean action(String act, String fruit, int quantity, String date);
 }
