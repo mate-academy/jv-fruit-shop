@@ -26,14 +26,18 @@ public class Buy implements ActionInterface {
         }
 
         list.forEach(fruit1 -> {
-            if (fruit1.getStock_balance() >= fruit.getStock_balance()) {
-                fruit1.setStock_balance(fruit1.getStock_balance() - fruit.getStock_balance());
-                fruit.setStock_balance(0);
-            }
-            if (fruit1.getStock_balance() < fruit.getStock_balance()) {
-                fruit.setStock_balance(fruit.getStock_balance() - fruit1.getStock_balance());
-                fruit1.setStock_balance(0);
-            }
+            toBuyLogic(fruit1, fruit);
         });
+    }
+
+    private void toBuyLogic(Fruit fruit, Fruit fruitBuy) {
+        if (fruit.getStock_balance() >= fruitBuy.getStock_balance()) {
+            fruit.setStock_balance(fruit.getStock_balance() - fruitBuy.getStock_balance());
+            fruitBuy.setStock_balance(0);
+        }
+        if (fruit.getStock_balance() < fruitBuy.getStock_balance()) {
+            fruitBuy.setStock_balance(fruitBuy.getStock_balance() - fruit.getStock_balance());
+            fruit.setStock_balance(0);
+        }
     }
 }
