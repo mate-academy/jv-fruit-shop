@@ -1,6 +1,7 @@
 package app.service.impl;
 
 import app.FruitStorage;
+import app.model.SupplyFruitBatch;
 import app.service.Operation;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -46,16 +47,20 @@ public class OperationSupplyTest {
     @Test
     public void testSupplyOk() {
         int storageSize = FruitStorage.SUPPLY_FRUIT_BATCHES.size();
-        supply.execute(testValue.get(0));
-        supply.execute(testValue.get(1));
+        SupplyFruitBatch currentBatch = new FruitParserImplementation().parse(testValue.get(0));
+        supply.execute(currentBatch);
+        currentBatch = new FruitParserImplementation().parse(testValue.get(1));
+        supply.execute(currentBatch);
         Assert.assertEquals(storageSize + 2, FruitStorage.SUPPLY_FRUIT_BATCHES.size());
     }
 
     @Test
     public void testSupplySameEndOfShelfLife() {
         int storageSize = FruitStorage.SUPPLY_FRUIT_BATCHES.size();
-        supply.execute(testValue.get(2));
-        supply.execute(testValue.get(3));
+        SupplyFruitBatch currentBatch = new FruitParserImplementation().parse(testValue.get(2));
+        supply.execute(currentBatch);
+        currentBatch = new FruitParserImplementation().parse(testValue.get(3));
+        supply.execute(currentBatch);
         Assert.assertEquals(storageSize + 1, FruitStorage.SUPPLY_FRUIT_BATCHES.size());
     }
 }

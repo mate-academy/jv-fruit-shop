@@ -1,10 +1,13 @@
 package app;
 
+import app.model.SupplyFruitBatch;
 import app.service.FileReadService;
 import app.service.FileWriterService;
 import app.service.Operation;
 import app.service.impl.FileReadServiceImplementation;
 import app.service.impl.FileWriterServiceImplementation;
+import app.service.impl.FruitParserImplementation;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,7 +27,8 @@ public class MainApp {
         List<List<String>> allData = fileReadService.readFile(inputPath.nextLine());
         for (List<String> line : allData) {
             Operation operation = fruitOperationStrategy.getOperation(line.get(OPERATION_INDEX));
-            operation.execute(line);
+            SupplyFruitBatch currentBatch = new FruitParserImplementation().parse(line);
+            operation.execute(currentBatch);
         }
         FileWriterService fileWriterServiceImplements = new FileWriterServiceImplementation();
         System.out.println("Input path to write data file");

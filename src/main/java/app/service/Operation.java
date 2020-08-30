@@ -1,7 +1,7 @@
 package app.service;
 
-import java.util.List;
+import app.model.SupplyFruitBatch;
 
 public interface Operation {
-    void execute(List<String> data);
+    void execute(SupplyFruitBatch currentBatch);
 }

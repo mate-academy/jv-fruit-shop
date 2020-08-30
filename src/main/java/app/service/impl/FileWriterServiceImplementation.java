@@ -33,7 +33,7 @@ public class FileWriterServiceImplementation implements FileWriterService {
                         .append(System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Unable to write result to file: " + e.getMessage());
+            throw new RuntimeException("Unable to write result to file: " + filePath, e);
         }
         return true;
     }

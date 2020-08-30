@@ -1,6 +1,7 @@
 package app.service.impl;
 
 import app.FruitOperationStrategy;
+import app.model.SupplyFruitBatch;
 import app.service.FileReadService;
 import app.service.Operation;
 import org.junit.BeforeClass;
@@ -32,7 +33,8 @@ public class OperationBuyTest {
         List<List<String>> allData = fileReadService.readFile(FIRST_FILE);
         for (List<String> line : allData) {
             Operation operation = fruitOperationStrategy.getOperation(line.get(0));
-            operation.execute(line);
+            SupplyFruitBatch currentBatch = new FruitParserImplementation().parse(line);
+            operation.execute(currentBatch);
         }
     }
 
@@ -41,7 +43,8 @@ public class OperationBuyTest {
         List<List<String>> allData = fileReadService.readFile(SECOND_FILE);
         for (List<String> line : allData) {
             Operation operation = fruitOperationStrategy.getOperation(line.get(0));
-            operation.execute(line);
+            SupplyFruitBatch currentBatch = new FruitParserImplementation().parse(line);
+            operation.execute(currentBatch);
         }
     }
 }
