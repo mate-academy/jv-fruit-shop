@@ -3,20 +3,14 @@ package core.basesyntax.service;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionsTest {
     private static TransactionParser transaction;
     private static final String SUPPLY = "s";
-    private static final String BUY = "b";
-    private static final String RETURN = "r";
-    private static final String INCORRECT_OPERATION = "*";
-    private static final String FRUIT_BANANA = "banana";
     private static final String FRUIT_ORANGE = "orange";
     private static final Integer QUANTITY = 50;
-    private static final Integer INCORRECT_QUANTITY = -5;
     private static final String DATE = "2020-09-15";
 
 
