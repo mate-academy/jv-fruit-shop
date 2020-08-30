@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Parse implements FruitParse {
+public class Parser implements FruitParse {
     @Override
     public List<List<String>> readFile(String path) {
         List<List<String>> result = new ArrayList<>();

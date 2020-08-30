@@ -4,7 +4,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.services.ActionInterface;
 import core.basesyntax.services.FruitParse;
 import core.basesyntax.services.ShopInterfaceStrategy;
-import core.basesyntax.services.impl.Parse;
+import core.basesyntax.services.impl.Parser;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DateTimeException;
@@ -23,7 +23,7 @@ public class FruitShop {
 
     public void start() {
         Storage storage = new Storage();
-        FruitParse fruitParse = new Parse();
+        FruitParse fruitParse = new Parser();
         for (List<String> row : fruitParse.readFile(path)) {
             ActionInterface action = new ShopInterfaceStrategy().get(row.get(0));
             if (action != null) {
