@@ -1,8 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.fileservice.ReadFile;
+import core.basesyntax.fileservice.FileReader;
+import core.basesyntax.fileservice.FileWriter;
 import core.basesyntax.fileservice.TransactionParser;
-import core.basesyntax.fileservice.WriteToFile;
 import core.basesyntax.fruitservice.FruitStorageService;
 import core.basesyntax.operationstrategy.OperationStrategy;
 import java.util.HashMap;
@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        ReadFile readFile = new ReadFile();
+        FileReader readFile = new FileReader();
         TransactionParser parser = new TransactionParser();
-        WriteToFile writer = new WriteToFile();
+        FileWriter writer = new FileWriter();
         FruitStorageService fruitStorageService = new FruitStorageService();
         OperationStrategy operationStrategy = new OperationStrategy();
         Map<String, Integer> fruitOutput = new HashMap<>();

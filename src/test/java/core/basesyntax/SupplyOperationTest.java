@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.fruitservice.Transaction;
 import core.basesyntax.operation.Operation;
-import core.basesyntax.operation.Supply;
+import core.basesyntax.operation.SupplyOperation;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SupplyTest {
+public class SupplyOperationTest {
     private Map<String, Integer> fruitDao = new HashMap<>();
     private Map<String, Integer> expected = new HashMap<>();
     private Transaction transaction = new Transaction("s", "banana","245","2020-12-10");
@@ -20,7 +20,7 @@ public class SupplyTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        supply = new Supply();
+        supply = new SupplyOperation();
     }
 
     @Test

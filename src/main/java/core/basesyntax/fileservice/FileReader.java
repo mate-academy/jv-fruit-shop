@@ -1,14 +1,13 @@
 package core.basesyntax.fileservice;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFile {
+public class FileReader {
     public List<String[]> read(String filename) {
-        try (BufferedReader input = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader input = new BufferedReader(new java.io.FileReader(filename))) {
             String line;
             int forRemoveHeader = 0;
             List<String[]> list = new ArrayList<>();

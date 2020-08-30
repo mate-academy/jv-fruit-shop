@@ -1,7 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.fruitservice.Transaction;
-import core.basesyntax.operation.Buy;
+import core.basesyntax.operation.BuyOperation;
 import core.basesyntax.operation.Operation;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BuyTest {
+public class BuyOperationTest {
     private Map<String, Integer> fruitDao = new HashMap<>();
     private Map<String, Integer> expected = new HashMap<>();
     private Transaction transaction = new Transaction("b", "banana","130","2010-11-18");
@@ -26,7 +26,7 @@ public class BuyTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        buy = new Buy();
+        buy = new BuyOperation();
     }
 
     @Test

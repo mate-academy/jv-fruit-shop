@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.fileservice.ReadFile;
+import core.basesyntax.fileservice.FileReader;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFileTest {
-    private static ReadFile reader;
+    private static FileReader reader;
     private static List<String[]> inputData;
 
     @BeforeClass
     public static void setup() {
-        reader = new ReadFile();
+        reader = new FileReader();
         inputData = new ArrayList<>();
     }
 

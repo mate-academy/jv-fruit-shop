@@ -1,10 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.fileservice.ReadFile;
+import core.basesyntax.fileservice.FileReader;
 import core.basesyntax.fileservice.TransactionParser;
-import core.basesyntax.fruitservice.FruitStorage;
 import core.basesyntax.fruitservice.Transaction;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,13 +13,13 @@ import java.util.List;
 public class TransactionParserTest {
     private static TransactionParser transactionParser;
     private static List<Transaction> transactions;
-    private static ReadFile readFile;
+    private static FileReader readFile;
 
     @BeforeClass
     public static void setup() {
         transactionParser = new TransactionParser();
         transactions = new ArrayList<>();
-        readFile = new ReadFile();
+        readFile = new FileReader();
     }
 
     @Test

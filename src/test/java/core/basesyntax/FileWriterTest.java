@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.fileservice.WriteToFile;
+import core.basesyntax.fileservice.FileWriter;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -10,13 +10,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-public class WriteToFileTest {
-    private static WriteToFile writer;
+public class FileWriterTest {
+    private static FileWriter writer;
     private Map<String, Integer> output = new HashMap<>();
 
     @BeforeClass
     public static void setup() {
-        writer = new WriteToFile();
+        writer = new FileWriter();
     }
 
     @Test

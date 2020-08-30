@@ -1,10 +1,10 @@
 package core.basesyntax.operationstrategy;
 
 import core.basesyntax.fruitservice.Transaction;
-import core.basesyntax.operation.Buy;
+import core.basesyntax.operation.BuyOperation;
 import core.basesyntax.operation.Operation;
-import core.basesyntax.operation.Return;
-import core.basesyntax.operation.Supply;
+import core.basesyntax.operation.ReturnOperation;
+import core.basesyntax.operation.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,9 +13,9 @@ public class OperationStrategy {
     private static final Map<String, Operation> operationStrategy = new HashMap<>();
 
     static {
-        operationStrategy.put("s", new Supply());
-        operationStrategy.put("b", new Buy());
-        operationStrategy.put("r", new Return());
+        operationStrategy.put("s", new SupplyOperation());
+        operationStrategy.put("b", new BuyOperation());
+        operationStrategy.put("r", new ReturnOperation());
     }
 
     public void operation(Map<String, Integer> fruitMap, List<Transaction> transactionList) {
