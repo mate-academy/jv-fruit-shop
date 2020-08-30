@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-
 public class ReportWriterTest {
     private static final String REFERENCE_FILE = "src/test/resources/data.csv";
     private static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";

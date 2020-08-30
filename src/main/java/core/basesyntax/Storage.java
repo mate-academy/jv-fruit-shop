@@ -11,7 +11,7 @@ import java.util.TreeSet;
 
 public class Storage {
 
-    Map<String, Map<LocalDate,Integer>> fruitStorage;
+    private Map<String, Map<LocalDate,Integer>> fruitStorage;
 
     public Storage() {
         fruitStorage = new HashMap<>();

@@ -20,7 +20,7 @@ public class TransactionReader {
                     .build();
             items = csvToBean.parse();
         } catch (IOException e) {
-            throw new RuntimeException("Such file not found!");
+            throw new RuntimeException("Such file not found!", e);
         }
         return items;
     }

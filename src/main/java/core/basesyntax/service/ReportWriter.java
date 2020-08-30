@@ -24,7 +24,7 @@ public class ReportWriter {
                     forTest.append(line).append("\n");
                 }
             } catch (IOException e) {
-                throw new RuntimeException("Can't write file");
+                throw new RuntimeException("Can't write file", e);
             }
         }
         return forTest.toString().trim();
