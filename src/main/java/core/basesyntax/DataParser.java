@@ -27,7 +27,7 @@ public class DataParser {
             LocalDate date = LocalDate.parse(lineFromFile[DATE_INDEX]);
         } catch (NumberFormatException | DateTimeParseException
                 | ArrayIndexOutOfBoundsException message) {
-            throw new IllegalArgumentException("File provides wrong data format");
+            throw new IllegalArgumentException("File provides wrong data format", message);
         }
     }
 }

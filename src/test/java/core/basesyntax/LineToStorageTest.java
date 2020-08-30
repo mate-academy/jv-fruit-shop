@@ -13,7 +13,6 @@ public class LineToStorageTest {
     private static StorageUpdaterImpl newUpdate;
     private Map<String, TreeMap<LocalDate, Integer>> toCompareStore;
 
-
     private static final Transaction SUPPLY_BANANA_TO_STORE
             = parser.parseLineToTransaction("s,banana,15,2020-10-17");
     private static final Transaction SUPPLY_ORANGE_TO_STORE

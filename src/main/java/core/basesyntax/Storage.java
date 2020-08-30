@@ -9,7 +9,7 @@ public class Storage {
     private static Map<String, TreeMap<LocalDate, Integer>> fruitsInStore = new HashMap<>();
 
     public static TreeMap<LocalDate, Integer> getFruit(String fruit) {
-        return fruitsInStore.get(fruit);
+        return new TreeMap<>(fruitsInStore.get(fruit));
     }
 
     public static void setFruit(String fruitType, LocalDate date,

@@ -5,10 +5,11 @@ import org.junit.Test;
 import org.junit.Assert;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.File;
 import java.util.IllegalFormatFlagsException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class WriteToFileTest {
     private static StorageUpdater newUpdate;
@@ -41,11 +42,9 @@ public class WriteToFileTest {
         newUpdate.parseDataToStorage(reader.readTransactionsFile());
         CsvFileWriter parser = new CsvFileWriter(OUTPUT_FILE_PATH);
         parser.writeToFile();
-        byte[] expectedResult = Files.readAllBytes(Paths.get(RESULT_ON_EMPTY_STORAGE));
-        byte[] actualResult = Files.readAllBytes(Paths.get(OUTPUT_FILE_PATH));
-        System.out.println(Files.readAllLines(Path.of(OUTPUT_FILE_PATH)).toString());
-        System.out.println(Files.readAllLines(Path.of(RESULT_ON_EMPTY_STORAGE)).toString());
-        Assert.assertArrayEquals(expectedResult, actualResult);
+        List<String> expectedResult = Files.lines(Paths.get(RESULT_ON_EMPTY_STORAGE)).collect(Collectors.toList());
+        List<String> actualResult = Files.lines(Paths.get(OUTPUT_FILE_PATH)).collect(Collectors.toList());
+        Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test
@@ -60,9 +59,9 @@ public class WriteToFileTest {
         CsvFileWriter secondFileWriter = new CsvFileWriter(NOT_EMPTY_STORAGE_OUTPUT_FILE_PATH);
         secondFileWriter.writeToFile();
 
-        byte[] expectedResult = Files.readAllBytes(Paths.get(RESULT_ON_NOT_EMPTY_STORAGE));
-        byte[] actualResult = Files.readAllBytes(Paths.get(NOT_EMPTY_STORAGE_OUTPUT_FILE_PATH));
-        Assert.assertArrayEquals(expectedResult, actualResult);
+        List<String> expectedResult = Files.lines(Paths.get(RESULT_ON_NOT_EMPTY_STORAGE)).collect(Collectors.toList());
+        List<String> actualResult = Files.lines(Paths.get(NOT_EMPTY_STORAGE_OUTPUT_FILE_PATH)).collect(Collectors.toList());
+        Assert.assertEquals(expectedResult, actualResult);
     }
 
     @Test
