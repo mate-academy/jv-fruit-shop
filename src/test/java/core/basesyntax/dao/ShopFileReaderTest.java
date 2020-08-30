@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFromFileTest {
+public class ShopFileReaderTest {
     private static final String FILE_DEST_WRONG = "src/test/resources/WrongPath.csv";
     private static final String FILE_DEST_TEST_1 = "src/test/resources/Test_1.csv";
     private static final String FILE_DEST_TEST_2 = "src/test/resources/Test_2.csv";
@@ -25,20 +25,20 @@ public class ReadFromFileTest {
 
     @Test(expected = RuntimeException.class)
     public void fileReaderCreateExeption() {
-        ReadFromFile newReader = new ReadFromFile();
+        ShopFileReader newReader = new ShopFileReader();
         newReader.readFromFile(FILE_DEST_WRONG);
     }
 
     @Test
     public void fileExist() {
-        ReadFromFile newReader = new ReadFromFile();
+        ShopFileReader newReader = new ShopFileReader();
         newReader.readFromFile(FILE_DEST_TEST_1);
         Assert.assertTrue(Files.exists(Paths.get(FILE_DEST_TEST_1)));
     }
 
     @Test
     public void readFromFileOk() {
-        ReadFromFile newReader = new ReadFromFile();
+        ShopFileReader newReader = new ShopFileReader();
         List<String[]> testListReader = newReader.readFromFile(FILE_DEST_TEST_2);
         Assert.assertArrayEquals(list.get(0), testListReader.get(0));
     }

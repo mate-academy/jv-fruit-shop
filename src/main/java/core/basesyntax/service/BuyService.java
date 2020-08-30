@@ -1,16 +1,16 @@
 package core.basesyntax.service;
 
 import core.basesyntax.products.Fruit;
-import core.basesyntax.storage.ListStorage;
+import core.basesyntax.storage.ListShopStorage;
 import java.util.Comparator;
 import java.util.List;
 
-public class BuyService implements ServiceAble {
+public class BuyService implements Servicing {
 
     @Override
-    public void operationWithProduct(Fruit fruitToBuy) {
+    public void serviceProduct(Fruit fruitToBuy) {
         int numNeededFruit = fruitToBuy.getAmount();
-        List<Fruit> listStorage = ListStorage.listStorage;
+        List<Fruit> listStorage = ListShopStorage.listStorage;
         int sumAvailable = listStorage.stream()
                 .filter(x -> x.getName().equals(fruitToBuy.getName()))
                 .filter(x -> x.getExpirationDate().isAfter(fruitToBuy.getExpirationDate()))

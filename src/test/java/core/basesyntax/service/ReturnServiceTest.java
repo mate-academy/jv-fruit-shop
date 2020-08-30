@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.products.Fruit;
-import core.basesyntax.storage.ListStorage;
+import core.basesyntax.storage.ListShopStorage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +12,7 @@ public class ReturnServiceTest {
 
     @Before
     public void setUpFruit() {
-        ListStorage.listStorage.clear();
+        ListShopStorage.listStorage.clear();
         FRUIT.setName("banana");
         FRUIT.setAmount(1);
         FRUIT.setExpirationDate(LocalDate.of(2020, 5, 21));
@@ -21,8 +21,8 @@ public class ReturnServiceTest {
     @Test
     public void addToStorageOk() {
         ReturnService returnService = new ReturnService();
-        returnService.operationWithProduct(FRUIT);
-        Assert.assertEquals(1, ListStorage.listStorage.size());
-        Assert.assertEquals(FRUIT, ListStorage.listStorage.get(0));
+        returnService.serviceProduct(FRUIT);
+        Assert.assertEquals(1, ListShopStorage.listStorage.size());
+        Assert.assertEquals(FRUIT, ListShopStorage.listStorage.get(0));
     }
 }

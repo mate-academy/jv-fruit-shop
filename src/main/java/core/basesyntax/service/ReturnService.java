@@ -1,11 +1,11 @@
 package core.basesyntax.service;
 
 import core.basesyntax.products.Fruit;
-import core.basesyntax.storage.ListStorage;
+import core.basesyntax.storage.ListShopStorage;
 
-public class ReturnService implements ServiceAble {
+public class ReturnService implements Servicing {
     @Override
-    public void operationWithProduct(Fruit fruit) {
-        ListStorage.listStorage.add(fruit);
+    public void serviceProduct(Fruit fruit) {
+        ListShopStorage.listStorage.add(fruit);
     }
 }

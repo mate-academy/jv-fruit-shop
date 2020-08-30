@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.products.Fruit;
-import core.basesyntax.storage.ListStorage;
+import core.basesyntax.storage.ListShopStorage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,31 +33,31 @@ public class BuyServiceTest {
         FRUIT_TO_BUY_NOT_OK.setExpirationDate(THIRD_DATE);
 
 
-        ListStorage.listStorage.clear();
-        ListStorage.listStorage.add(FRUIT_FIRST);
-        ListStorage.listStorage.add(FRUIT_SECOND);
+        ListShopStorage.listStorage.clear();
+        ListShopStorage.listStorage.add(FRUIT_FIRST);
+        ListShopStorage.listStorage.add(FRUIT_SECOND);
     }
 
     @Test
     public void operationBuyProductOk() {
         BuyService testBuyService = new BuyService();
-        testBuyService.operationWithProduct(FRUIT_TO_BUY_OK);
-        Assert.assertEquals(1, ListStorage.listStorage.size());
+        testBuyService.serviceProduct(FRUIT_TO_BUY_OK);
+        Assert.assertEquals(1, ListShopStorage.listStorage.size());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void operationBuyProductTooMany() {
         FRUIT_TO_BUY_NOT_OK.setAmount(5);
         BuyService testBuyService = new BuyService();
-        testBuyService.operationWithProduct(FRUIT_TO_BUY_NOT_OK);
-        Assert.assertEquals(2, ListStorage.listStorage.size());
+        testBuyService.serviceProduct(FRUIT_TO_BUY_NOT_OK);
+        Assert.assertEquals(2, ListShopStorage.listStorage.size());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void operationBuyProductLateDate() {
         FRUIT_TO_BUY_NOT_OK.setExpirationDate(FORTH_DATE);
         BuyService testBuyService = new BuyService();
-        testBuyService.operationWithProduct(FRUIT_TO_BUY_NOT_OK);
-        Assert.assertEquals(1, ListStorage.listStorage.size());
+        testBuyService.serviceProduct(FRUIT_TO_BUY_NOT_OK);
+        Assert.assertEquals(1, ListShopStorage.listStorage.size());
     }
 }

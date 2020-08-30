@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitDtoService {
+public class FruitDtoMapper {
     private static final int OPERATION_POSITION = 0;
     private static final int NAME_POSITION = 1;
     private static final int AMOUNT_POSITION = 2;

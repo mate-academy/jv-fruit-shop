@@ -2,7 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.products.Fruit;
 import core.basesyntax.products.FruitDto;
-import core.basesyntax.storage.ListStorage;
+import core.basesyntax.storage.ListShopStorage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class HandleTest {
+public class OperationHandlerTest {
     public static final FruitDto DTO_FRUIT_S = new FruitDto();
     public static final FruitDto DTO_APPLE_S = new FruitDto();
     public static final FruitDto DTO_FRUIT_B = new FruitDto();
@@ -26,7 +26,7 @@ public class HandleTest {
 
     @Before
     public void setUp() {
-        ListStorage.listStorage.clear();
+        ListShopStorage.listStorage.clear();
         DTO_FRUIT_S.setOperation("s");
         DTO_FRUIT_S.setName(BANANA);
         DTO_FRUIT_S.setAmount(10);
@@ -50,8 +50,8 @@ public class HandleTest {
 
     @Test
     public void operationWithProductOk() {
-        Handle handle = new Handle();
-        handle.operationWithProduct(FRUIT_DTO_LIST);
+        OperationHandler operationHandler = new OperationHandler();
+        operationHandler.handlingProduct(FRUIT_DTO_LIST);
         Assert.assertEquals(6, sumOfFruit(BANANA));
     }
 
@@ -59,28 +59,28 @@ public class HandleTest {
     public void operationWithWrongOperand() {
         DTO_FRUIT_S.setOperation("g");
         FRUIT_DTO_LIST.add(DTO_FRUIT_S);
-        Handle handle = new Handle();
-        handle.operationWithProduct(FRUIT_DTO_LIST);
+        OperationHandler operationHandler = new OperationHandler();
+        operationHandler.handlingProduct(FRUIT_DTO_LIST);
     }
 
     @Test(expected = DateTimeException.class)
     public void operationWithWrongDate() {
         DTO_FRUIT_S.setExpiredDate(LocalDate.of(2020,10,36));
         FRUIT_DTO_LIST.add(DTO_FRUIT_S);
-        Handle handle = new Handle();
-        handle.operationWithProduct(FRUIT_DTO_LIST);
+        OperationHandler operationHandler = new OperationHandler();
+        operationHandler.handlingProduct(FRUIT_DTO_LIST);
     }
 
     @Test
     public void operationWithTwoFruits() {
         FRUIT_DTO_LIST.add(DTO_APPLE_S);
-        Handle handle = new Handle();
-        handle.operationWithProduct(FRUIT_DTO_LIST);
+        OperationHandler operationHandler = new OperationHandler();
+        operationHandler.handlingProduct(FRUIT_DTO_LIST);
         Assert.assertEquals(10, sumOfFruit(APPLE));
     }
 
     public int sumOfFruit(String name) {
-        Map<String, Integer> mapToFile = ListStorage.listStorage.stream()
+        Map<String, Integer> mapToFile = ListShopStorage.listStorage.stream()
                 .collect(Collectors.groupingBy(Fruit::getName,
                         Collectors.summingInt(Fruit::getAmount)));
         return mapToFile.get(name);

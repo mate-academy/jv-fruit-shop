@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.products.Fruit;
-import core.basesyntax.storage.ListStorage;
+import core.basesyntax.storage.ListShopStorage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +12,7 @@ public class SupplyServiceTest {
 
     @Before
     public void setUpFruit() {
-        ListStorage.listStorage.clear();
+        ListShopStorage.listStorage.clear();
         FRUIT.setName("banana");
         FRUIT.setAmount(1);
         FRUIT.setExpirationDate(LocalDate.of(2020, 5, 21));
@@ -21,10 +21,10 @@ public class SupplyServiceTest {
     @Test
     public void addToStorageOk() {
         SupplyService supplyService = new SupplyService();
-        supplyService.operationWithProduct(FRUIT);
-        Assert.assertEquals(1, ListStorage.listStorage.size());
-        Assert.assertEquals(FRUIT.getName(), ListStorage.listStorage.get(0).getName());
-        Assert.assertEquals(FRUIT.getAmount(), ListStorage.listStorage.get(0).getAmount());
-        Assert.assertEquals(FRUIT.getExpirationDate(), ListStorage.listStorage.get(0).getExpirationDate());
+        supplyService.serviceProduct(FRUIT);
+        Assert.assertEquals(1, ListShopStorage.listStorage.size());
+        Assert.assertEquals(FRUIT.getName(), ListShopStorage.listStorage.get(0).getName());
+        Assert.assertEquals(FRUIT.getAmount(), ListShopStorage.listStorage.get(0).getAmount());
+        Assert.assertEquals(FRUIT.getExpirationDate(), ListShopStorage.listStorage.get(0).getExpirationDate());
     }
 }

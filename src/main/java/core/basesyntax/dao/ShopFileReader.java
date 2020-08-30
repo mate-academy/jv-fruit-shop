@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-public class ReadFromFile {
+public class ShopFileReader {
     public List<String[]> readFromFile(String filePath) {
         List<String[]> listFruitsFromFile;
         try (FileReader reader = new FileReader(filePath)) {
@@ -23,7 +23,7 @@ public class ReadFromFile {
                     .build()) {
                 listFruitsFromFile = csvReader.readAll();
             } catch (IOException | CsvException e) {
-                throw new RuntimeException("Error reading file.");
+                throw new RuntimeException("Error reading file.", e);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -1,14 +1,13 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.dao.processing.SortingService;
+import core.basesyntax.storage.ListShopStorage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 
-public class WriteToFile {
+public class ShopFileWriter {
     public boolean writeToFile(String filePath) {
         Path path = Paths.get(filePath);
         try {
@@ -18,11 +17,11 @@ public class WriteToFile {
         }
         createFile(filePath);
 
-        SortingService sort = new SortingService();
+        ListShopStorage sort = new ListShopStorage();
         List<String> stringsToFile = sort.sortDataBeforeWrite();
 
         try {
-            Files.write(path, stringsToFile, StandardOpenOption.APPEND);
+            Files.write(path, stringsToFile);
         } catch (IOException e) {
             throw new RuntimeException("Error with writing to file. "
                     + "Rerun main. ", e);

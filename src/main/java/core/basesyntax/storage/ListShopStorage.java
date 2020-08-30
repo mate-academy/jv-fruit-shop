@@ -1,15 +1,16 @@
-package core.basesyntax.dao.processing;
+package core.basesyntax.storage;
 
 import core.basesyntax.products.Fruit;
-import core.basesyntax.storage.ListStorage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class SortingService {
+public class ListShopStorage {
+    public static List<Fruit> listStorage = new ArrayList<>();
+
     public List<String> sortDataBeforeWrite() {
-        Map<String, Integer> mapToFile = ListStorage.listStorage.stream()
+        Map<String, Integer> mapToFile = ListShopStorage.listStorage.stream()
                 .collect(Collectors.groupingBy(Fruit::getName,
                         Collectors.summingInt(Fruit::getAmount)));
         List<String> stringsToFile = new ArrayList<>();

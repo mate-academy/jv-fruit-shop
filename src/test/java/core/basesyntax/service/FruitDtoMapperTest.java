@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitDtoServiceTest {
+public class FruitDtoMapperTest {
     public static final String LINE_ONE = "type,fruit,quantity,date";
     public static final String LINE_TWO = "s,banana,100,2020-10-17";
     public static final String LINE_THREE = "b,banana,50,2020-10-15";
@@ -28,16 +28,16 @@ public class FruitDtoServiceTest {
 
     @Test
     public void converttoDtoOk() {
-        FruitDtoService fruitDtoService = new FruitDtoService();
-        List<FruitDto> fruitDtoList = fruitDtoService.convertToFruitDto(LIST_ARRAYS_OF_STRINGS);
+        FruitDtoMapper fruitDtoMapper = new FruitDtoMapper();
+        List<FruitDto> fruitDtoList = fruitDtoMapper.convertToFruitDto(LIST_ARRAYS_OF_STRINGS);
         Assert.assertEquals(fruitDto, fruitDtoList.get(0));
     }
 
     @Test(expected = DateTimeException.class)
     public void dtoFalseDate() {
         fruitDto.setExpiredDate(LocalDate.of(2020, 12, 33));
-        FruitDtoService fruitDtoService = new FruitDtoService();
-        List<FruitDto> fruitDtoList = fruitDtoService.convertToFruitDto(LIST_ARRAYS_OF_STRINGS);
+        FruitDtoMapper fruitDtoMapper = new FruitDtoMapper();
+        List<FruitDto> fruitDtoList = fruitDtoMapper.convertToFruitDto(LIST_ARRAYS_OF_STRINGS);
         Assert.assertEquals(fruitDto, fruitDtoList.get(0));
     }
 }

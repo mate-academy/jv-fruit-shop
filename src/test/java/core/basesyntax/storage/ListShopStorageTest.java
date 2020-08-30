@@ -1,16 +1,13 @@
-package core.basesyntax.dao.processing;
+package core.basesyntax.storage;
 
 import core.basesyntax.products.Fruit;
-import core.basesyntax.storage.ListStorage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
-public class SortingServiceTest {
+public class ListShopStorageTest {
     private static final Fruit FIRST_FRUIT =
             new Fruit("banana",111, LocalDate.of(2015, 2, 24));
     private static final Fruit SECOND_FRUIT =
@@ -24,7 +21,7 @@ public class SortingServiceTest {
     private final int second = 1;
     private final int third = 2;
 
-    private List<Fruit> listStorage = ListStorage.listStorage;
+    private List<Fruit> listStorage = ListShopStorage.listStorage;
 
     @Before
     public void setUp(){
@@ -36,9 +33,8 @@ public class SortingServiceTest {
 
     @Test
     public void sortingByName() {
-        SortingService sortService = new SortingService();
-        List<String> testListSorted = new ArrayList<>();
-        testListSorted = sortService.sortDataBeforeWrite();
+        ListShopStorage sortService = new ListShopStorage();
+        List<String> testListSorted = sortService.sortDataBeforeWrite();
         Assert.assertEquals("Fail in sorting",FIRST_STRING,testListSorted.get(first));
         Assert.assertEquals("Fail in sorting",SECOND_STRING,testListSorted.get(second));
         Assert.assertEquals("Fail in sorting",THIRD_STRING,testListSorted.get(third));

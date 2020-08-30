@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.products.Fruit;
-import core.basesyntax.storage.ListStorage;
+import core.basesyntax.storage.ListShopStorage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 
-public class WriteToFileTest {
+public class ShopFileWriterTest {
     private static final String TEST_STRING = "fruit,quantity" + System.lineSeparator() +
             "banana,3" + System.lineSeparator();
     private static final String FILE_DEST_TEST_5 = "src/test/resources/Test_5.csv";
@@ -31,9 +31,9 @@ public class WriteToFileTest {
         FRUIT_SECOND.setName("banana");
         FRUIT_SECOND.setAmount(2);
         FRUIT_SECOND.setExpirationDate(SECOND_DATE);
-        ListStorage.listStorage.clear();
-        ListStorage.listStorage.add(FRUIT_FIRST);
-        ListStorage.listStorage.add(FRUIT_SECOND);
+        ListShopStorage.listStorage.clear();
+        ListShopStorage.listStorage.add(FRUIT_FIRST);
+        ListShopStorage.listStorage.add(FRUIT_SECOND);
 
         if (Files.exists(FILE_DEST_TEST_4)) {
             try {
@@ -46,7 +46,7 @@ public class WriteToFileTest {
 
     @Test
     public void writeToExistedFile() throws IOException {
-        WriteToFile write = new WriteToFile();
+        ShopFileWriter write = new ShopFileWriter();
         write.writeToFile(FILE_DEST_TEST_3.toString());
         String csvString = Files.readString(FILE_DEST_TEST_3);
         Assert.assertEquals(TEST_STRING, csvString);
@@ -54,7 +54,7 @@ public class WriteToFileTest {
 
     @Test
     public void writeToNonExistedFile() throws IOException {
-        WriteToFile write = new WriteToFile();
+        ShopFileWriter write = new ShopFileWriter();
         write.writeToFile(FILE_DEST_TEST_4.toString());
         String csvString = Files.readString(FILE_DEST_TEST_4);
         Assert.assertEquals(TEST_STRING, csvString);
@@ -63,7 +63,7 @@ public class WriteToFileTest {
     @Ignore
     @Test(expected = RuntimeException.class)
     public void fileWriterException() {
-        WriteToFile write = new WriteToFile();
+        ShopFileWriter write = new ShopFileWriter();
         write.writeToFile(FILE_DEST_TEST_5);
     }
 }
