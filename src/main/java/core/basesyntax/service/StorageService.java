@@ -12,12 +12,11 @@ public class StorageService {
     private Operational buy;
     private Operational supplyAndReturn;
 
-
     public void storageWriter(String filePath) {
-        TransactionReader transactionReader = new TransactionReader();
         fruitStore = new Storage();
         buy = new BuyOperation(fruitStore);
         supplyAndReturn = new SupplyAndReturnOperation(fruitStore);
+        TransactionReader transactionReader = new TransactionReader();
         List<Transaction> list = transactionReader.getTransactionList(filePath);
 
         for (Transaction x : list) {
