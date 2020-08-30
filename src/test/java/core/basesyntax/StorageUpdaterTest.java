@@ -50,7 +50,7 @@ public class StorageUpdaterTest {
     public void updateStorageWhenFruitIsAbsent() throws IOException {
         LocalFileReader reader = new LocalFileReader(PURCHASE_FROM_EMPTY_STOCK_FILE);
         newUpdate.parseDataToStorage(reader.readTransactionsFile());
-        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.getAllFruits();
+        Map<String, TreeMap<LocalDate, Integer>> actualResult = Storage.getAllData();
         Map<String, TreeMap<LocalDate, Integer>> expectedResult = new HashMap<>();
         Assert.assertEquals(expectedResult, actualResult);
     }
@@ -59,7 +59,7 @@ public class StorageUpdaterTest {
     public void updateEmptyStorageFromFile() throws IOException {
         LocalFileReader reader = new LocalFileReader(PROPERLY_FILLED_FILE);
         newUpdate.parseDataToStorage(reader.readTransactionsFile());
-        Assert.assertEquals(toCompareEmptyStore, Storage.getAllFruits());
+        Assert.assertEquals(toCompareEmptyStore, Storage.getAllData());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class StorageUpdaterTest {
         newUpdate.parseDataToStorage(reader.readTransactionsFile());
         LocalFileReader secondFileReader = new LocalFileReader(SECOND_PROPERLY_FILLED_FILE);
         newUpdate.parseDataToStorage(secondFileReader.readTransactionsFile());
-        Assert.assertEquals(toCompareNotEmptyStore, Storage.getAllFruits());
+        Assert.assertEquals(toCompareNotEmptyStore, Storage.getAllData());
     }
 
     @Test

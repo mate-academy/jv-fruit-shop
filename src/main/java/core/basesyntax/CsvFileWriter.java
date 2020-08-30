@@ -16,7 +16,7 @@ public class CsvFileWriter {
     public void writeToFile() throws IOException {
         PrintWriter writer = new PrintWriter(new File(outputFilePath));
         StringBuilder formattedData = new StringBuilder(OUTPUT_FILE_HEADER);
-        for (String fruit : Storage.getAllFruits().keySet()) {
+        for (String fruit : Storage.getAllFruits()) {
             int fruitInstanceSum = 0;
             for (LocalDate expirationDate : Storage.getFruit(fruit).keySet()) {
                 fruitInstanceSum += Storage.getFruit(fruit).get(expirationDate);

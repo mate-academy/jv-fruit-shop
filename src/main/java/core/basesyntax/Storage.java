@@ -3,6 +3,7 @@ package core.basesyntax;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class Storage {
@@ -36,8 +37,17 @@ public class Storage {
         fruitsInStore.clear();
     }
 
-    public static Map<String, TreeMap<LocalDate, Integer>> getAllFruits() {
-        return new HashMap<>(fruitsInStore);
+    public static Set<String> getAllFruits() {
+        return fruitsInStore.keySet();
+    }
+
+    public static Map<String, TreeMap<LocalDate, Integer>> getAllData() {
+        Map<String, TreeMap<LocalDate, Integer>> storageCopy = new HashMap<>();
+        for (String fruit : fruitsInStore.keySet()) {
+            storageCopy.put(fruit, new TreeMap<>());
+            storageCopy.get(fruit).putAll(fruitsInStore.get(fruit));
+        }
+        return storageCopy;
     }
 
     public static boolean isFruitAbsent(String fruitType) {
