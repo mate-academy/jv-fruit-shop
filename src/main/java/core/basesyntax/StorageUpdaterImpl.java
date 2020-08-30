@@ -14,20 +14,18 @@ public class StorageUpdaterImpl implements StorageUpdater {
     }
 
     public void putLineToStorage(Transaction newTransaction) {
-        String operationType = newTransaction.getOperationType();
+        if (newTransaction.getOperationType().equals("b")) {
+            updateStorageAfterPurchase(newTransaction);
+            return;
+        }
+        Storage.setTransaction(newTransaction);
+    }
+
+    private void updateStorageAfterPurchase(Transaction newTransaction) {
         String fruitType = newTransaction.getName();
         int fruitAmount = newTransaction.getQuantity();
         LocalDate date = newTransaction.getDate();
 
-        if (operationType.equals("b")) {
-            updateStorageAfterPurchase(fruitType, date, fruitAmount, operationType);
-            return;
-        }
-        Storage.setFruit(fruitType, date, fruitAmount, operationType);
-    }
-
-    private void updateStorageAfterPurchase(String fruitType, LocalDate date,
-                                 int fruitAmount, String operationType) {
         if (Storage.isFruitAbsent(fruitType)) {
             return;
         }
@@ -39,7 +37,9 @@ public class StorageUpdaterImpl implements StorageUpdater {
                 continue;
             }
             if (expirationDateReminder > neededToSell) {
-                Storage.setFruit(fruitType, toCompare, neededToSell, operationType);
+                newTransaction.setQuantity(neededToSell);
+                newTransaction.setDate(toCompare);
+                Storage.setTransaction(newTransaction);
                 return;
             } else {
                 neededToSell = neededToSell - expirationDateReminder;

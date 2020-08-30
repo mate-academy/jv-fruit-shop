@@ -12,8 +12,12 @@ public class Storage {
         return new TreeMap<>(fruitsInStore.get(fruit));
     }
 
-    public static void setFruit(String fruitType, LocalDate date,
-                                int fruitAmount, String operationType) {
+    public static void setTransaction(Transaction newTransaction) {
+        String fruitType = newTransaction.getName();
+        int fruitAmount = newTransaction.getQuantity();
+        String operationType = newTransaction.getOperationType();
+        LocalDate date = newTransaction.getDate();
+
         fruitsInStore.putIfAbsent(fruitType, new TreeMap<>());
         Storage.fruitsInStore.get(fruitType).computeIfPresent(date, (key, value)
                 -> StoreOperations.calculate(value, fruitAmount, operationType));
