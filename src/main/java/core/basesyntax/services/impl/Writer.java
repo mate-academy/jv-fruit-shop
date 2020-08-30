@@ -1,6 +1,7 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.Storage;
+import core.basesyntax.model.Fruit;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,12 +17,7 @@ public class Writer {
                     .stream()
                     .filter(fruit -> fruit.getStock_balance() > 0)
                     .forEach(fruit -> {
-                        if (map.containsKey(fruit.getType())) {
-                            map.put(fruit.getType(), fruit.getStock_balance()
-                                    + map.get(fruit.getType()));
-                        } else {
-                            map.put(fruit.getType(), fruit.getStock_balance());
-                        }
+                        sum(map, fruit);
                     });
 
             writerFile.write("fruit,quantity\n");
@@ -30,6 +26,15 @@ public class Writer {
             }
         } catch (IOException e) {
             throw new RuntimeException("No write access to file");
+        }
+    }
+
+    private void sum(Map<String, Integer> map, Fruit fruit) {
+        if (map.containsKey(fruit.getType())) {
+            map.put(fruit.getType(), fruit.getStock_balance()
+                    + map.get(fruit.getType()));
+        } else {
+            map.put(fruit.getType(), fruit.getStock_balance());
         }
     }
 }
