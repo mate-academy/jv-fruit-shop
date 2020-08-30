@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileParseImpl implements FileParse {
+public class LocalFileParserImpl implements LocalFileParser {
     @Override
     public List<FruitBatch> parseList(List<List<String>> listOfLists) {
         if (listOfLists == null) {

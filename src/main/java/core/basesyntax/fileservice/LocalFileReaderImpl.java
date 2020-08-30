@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FileReadImpl implements FileRead {
+public class LocalFileReaderImpl implements LocalFileReader {
 
     @Override
     public List<List<String>> readFile(String[] path) {

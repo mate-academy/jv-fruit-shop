@@ -2,6 +2,6 @@ package core.basesyntax.fileservice;
 
 import core.basesyntax.storage.Storage;
 
-public interface FileWrite {
+public interface LocalFileWriter {
     void writeToFile(String[] fileInfo, Storage storage);
 }

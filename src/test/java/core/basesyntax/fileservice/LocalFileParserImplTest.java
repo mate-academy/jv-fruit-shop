@@ -6,13 +6,13 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileParseImplTest {
+public class LocalFileParserImplTest {
     private static final List<String> HEADER_LIST
             = new ArrayList<>(List.of("type","fruit","quantity","date"));
     private static final List<List<String>> CORRECT_LIST = new ArrayList<>();
     private static final List<List<String>> NULL_LIST = null;
     private static final List<List<String>> INCORRECT_LIST = new ArrayList<>();
-    private static final FileParse FILE_PARSER = new FileParseImpl();
+    private static final LocalFileParser FILE_PARSER = new LocalFileParserImpl();
 
     @BeforeClass
     public static void setUp() {

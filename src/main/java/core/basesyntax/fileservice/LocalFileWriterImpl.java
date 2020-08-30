@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 
-public class FileWriterImpl implements FileWrite {
+public class LocalFileWriterImpl implements LocalFileWriter {
     private static final String OUTPUT_HEADER = "fruit, quantity\n";
 
     @Override

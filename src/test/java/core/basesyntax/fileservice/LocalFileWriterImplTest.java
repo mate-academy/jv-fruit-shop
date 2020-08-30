@@ -14,8 +14,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 
-public class FileWriterImplTest {
-    private static final FileWrite FILE_WRITER = new FileWriterImpl();
+public class LocalFileWriterImplTest {
+    private static final LocalFileWriter FILE_WRITER = new LocalFileWriterImpl();
     private static final Storage EMPTY_STORAGE = new Storage();
     private static final Storage REGULAR_STORAGE = new Storage();
     private static final String[] PATH = {"src/test/resources", "test5.csv"};
