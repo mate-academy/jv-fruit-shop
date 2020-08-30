@@ -1,8 +1,7 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.goods.Product;
+import core.basesyntax.goods.FruitPack;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,27 +9,22 @@ import java.util.Set;
 
 public class Box {
     private static final LocalDate TODAY = LocalDate.now();
-    private Map<LocalDate, Product> box;
+    private Map<LocalDate, FruitPack> box;
 
     public Box() {
        box = new HashMap<>();
     }
 
-    public boolean addProduct(Product product) {
+    public boolean addProduct(FruitPack product) {
         LocalDate expDate = product.getExpDate();
-        dateCheck(expDate);
+        FruitPack.checkExpDate(expDate);
         box.put(expDate, product);
         return true;
     }
 
-    public Product getProduct(LocalDate expDate) {
+    public FruitPack getProduct(LocalDate expDate) {
+        FruitPack.checkExpDate(expDate);
         return box.get(expDate);
-    }
-
-    private void dateCheck(LocalDate expDate) {
-        if (!expDate.isAfter(TODAY)) {
-            throw new DateTimeException("The product is terminated");
-        }
     }
 
     public Set<LocalDate> getExpDates() {
@@ -38,6 +32,7 @@ public class Box {
     }
 
     public boolean removeProduct(LocalDate expDate) {
+        FruitPack.checkExpDate(expDate);
         box.remove(expDate);
         return true;
     }
@@ -47,7 +42,8 @@ public class Box {
         return box.entrySet().toString();
     }
 
-    public void put(LocalDate expDate, Product product) {
+    public void put(LocalDate expDate, FruitPack product) {
+        FruitPack.checkExpDate(expDate);
         box.put(expDate, product);
     }
 }

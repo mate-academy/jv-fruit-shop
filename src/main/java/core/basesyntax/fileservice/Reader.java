@@ -7,13 +7,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class Reader {
-    private static final String DIR_PATH = "/src/main/files/";
+    public static final int FIRST_ELEMENT_INDEX = 0;
+    private final String dirPath;
+
+    public Reader(String dirPath) {
+        this.dirPath = dirPath;
+    }
 
     public List<String> readFile(String fileName) throws IOException {
-        String filePath = DIR_PATH.concat(fileName);
+        String filePath = dirPath.concat(fileName);
         List<String> lines;
         try {
             lines = Files.readAllLines(Path.of(filePath));
+            lines.remove(FIRST_ELEMENT_INDEX);
             Collections.sort(lines);
         } catch (IOException e) {
             throw new IOException(e.getMessage());

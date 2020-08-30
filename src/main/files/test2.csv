@@ -1,0 +1,6 @@
+operation, type, expDate, quantity
+s, banana, 2020-10-17, 10
+s, banana, 2020-10-17, 10
+r, mango, 2020-10-20, 5
+r, mango, 2020-10-20, 5
+s, banana, 2020-10-17, 10

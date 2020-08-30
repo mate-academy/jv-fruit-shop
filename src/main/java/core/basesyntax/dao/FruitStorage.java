@@ -1,19 +1,20 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.goods.Product;
+import core.basesyntax.goods.FruitPack;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-public class Storage {
+public class FruitStorage {
     private HashMap<String, Box> storage;
 
-    public Storage() {
+    public FruitStorage() {
         storage = new HashMap<>();
     }
 
-    public boolean add(Product product) {
+    public boolean add(FruitPack product) {
         final String type = product.getType();
         final LocalDate expDate = product.getExpDate();
+        FruitPack.checkExpDate(expDate);
         Box box = new Box();
 
         if (!storage.isEmpty()) {

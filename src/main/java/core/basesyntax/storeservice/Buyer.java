@@ -1,17 +1,17 @@
-package core.basesyntax.operations;
+package core.basesyntax.storeservice;
 
 import core.basesyntax.dao.Box;
-import core.basesyntax.dao.Storage;
-import core.basesyntax.goods.Product;
+import core.basesyntax.dao.FruitStorage;
+import core.basesyntax.goods.FruitPack;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Buy implements Operation {
+public class Buyer implements Operation {
     @Override
-    public boolean updateStorage(Product product, Storage storage) {
+    public boolean updateStorage(FruitPack product, FruitStorage storage) {
         LocalDate productExpDate = product.getExpDate();
-        Product.checkExpDate(productExpDate);
+        FruitPack.checkExpDate(productExpDate);
         String type = product.getType();
         int quantity = product.getQuantity();
         if (!storage.contains(type)) {
@@ -25,17 +25,17 @@ public class Buy implements Operation {
         if (expDates.isEmpty()) {
             return false;
         }
-        return buyCheck(product, expDates, box);
+        return buySuccess(product, expDates, box);
     }
 
-    private boolean buyCheck(Product product,
-                             List<LocalDate> expDates,
-                             Box box) {
+    private boolean buySuccess(FruitPack product,
+                               List<LocalDate> expDates,
+                               Box box) {
         int quantityToBuy = product.getQuantity();
         for (LocalDate expDate : expDates) {
             Integer quantityInBox = box.getProduct(expDate).getQuantity();
             if (quantityInBox > quantityToBuy) {
-                Product productInBox = box.getProduct(expDate);
+                FruitPack productInBox = box.getProduct(expDate);
                 productInBox.setQuantity(productInBox.getQuantity() - quantityToBuy);
                 return true;
             }
