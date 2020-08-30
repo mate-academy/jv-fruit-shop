@@ -54,3 +54,4 @@ We are expecting to see how many fruits are available in your Fruit store after 
 
 ADVANCED:
 - Keep in mind Open-Closed Principle (from SOLID) when you will do this task
+
