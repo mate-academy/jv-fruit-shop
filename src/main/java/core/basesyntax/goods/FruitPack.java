@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class FruitPack {
     private static final LocalDate TODAY = LocalDate.now();
-    private String type;
-    private LocalDate expDate;
+    private final String type;
+    private final LocalDate expDate;
     private final int quantity;
 
     public FruitPack(String type, LocalDate expDate, int quantity) {

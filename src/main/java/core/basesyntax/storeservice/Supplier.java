@@ -1,27 +1,18 @@
 package core.basesyntax.storeservice;
 
-import core.basesyntax.dao.Box;
 import core.basesyntax.dao.FruitStorage;
+import core.basesyntax.dao.Storage;
 import core.basesyntax.goods.FruitPack;
-import java.time.LocalDate;
 
 public class Supplier implements Operation {
+    private final FruitStorage storage;
+
+    public Supplier() {
+        this.storage = Storage.MAIN_STORAGE;
+    }
+
     @Override
-    public boolean updateStorage(FruitPack product, FruitStorage storage) {
-        LocalDate expDate = product.getExpDate();
-        FruitPack.checkExpDate(expDate);
-        String type = product.getType();
-        int quantity = product.getQuantity();
-        if (storage.contains(type)) {
-            Box box = storage.getBox(type);
-            if (box.getExpDates().contains(expDate)) {
-                FruitPack productInBox = box.getProduct(expDate);
-                productInBox.setQuantity(productInBox.getQuantity() + quantity);
-                return true;
-            }
-            box.addProduct(product);
-            return true;
-        }
+    public boolean updateStorage(FruitPack product) {
         storage.addProduct(product);
         return true;
     }

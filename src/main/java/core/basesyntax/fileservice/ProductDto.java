@@ -6,10 +6,10 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class ProductDto {
-    private Operation operation;
-    private String type;
-    private LocalDate expDate;
-    private Integer quantity;
+    private final Operation operation;
+    private final String type;
+    private final LocalDate expDate;
+    private final Integer quantity;
 
     public ProductDto(Operation operation, String type, LocalDate expDate, Integer quantity) {
         this.operation = operation;

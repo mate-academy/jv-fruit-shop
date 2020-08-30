@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Box {
-    private Map<LocalDate, FruitPack> box;
+    private final Map<LocalDate, FruitPack> box;
 
     public Box() {
        box = new HashMap<>();
@@ -17,22 +17,38 @@ public class Box {
 
     public Box(FruitPack product) {
         box = new HashMap<>();
-        this.addProduct(product);
+        this.putProduct(product);
     }
 
-    public Box addProduct(FruitPack product) {
-        if (product == null) {
-            throw new IllegalArgumentException("Invalid arguments");
-        }
-        FruitPack fruitPack = new FruitPack(product);
+    public Box putProduct(FruitPack product) {
+        FruitPack.isPresent(product);
         LocalDate expDate = product.getExpDate();
         FruitPack.checkExpDate(expDate);
-        if (!box.isEmpty()) {
-            int newQuantity = fruitPack.getQuantity();
-            int prevQuantity = box.get(expDate).getQuantity();
-            fruitPack = fruitPack.setQuantity(newQuantity + prevQuantity);
+        if (!box.isEmpty() && box.containsKey(expDate)) {
+                int newQuantity = product.getQuantity();
+                int prevQuantity = box.get(expDate).getQuantity();
+                product = product.setQuantity(newQuantity + prevQuantity);
         }
-        box.put(expDate, fruitPack);
+        box.put(expDate, product);
+        return this;
+    }
+
+    public Box takeProduct(FruitPack product) {
+        FruitPack.isPresent(product);
+        LocalDate expDate = product.getExpDate();
+        FruitPack.checkExpDate(expDate);
+        if (!box.isEmpty() && box.containsKey(expDate)) {
+            int takingQuantity = product.getQuantity();
+            int existingQuantity = box.get(expDate).getQuantity();
+            if (takingQuantity > existingQuantity) {
+                throw new IllegalArgumentException("Lack of products");
+            } else if (existingQuantity > takingQuantity) {
+                product = product.setQuantity(existingQuantity - takingQuantity);
+                box.put(expDate, product);
+            } else {
+                box.remove(expDate);
+            }
+        }
         return this;
     }
 

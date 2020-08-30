@@ -1,7 +1,5 @@
 package core.basesyntax.storeservice;
 
-import core.basesyntax.dao.FruitStorage;
-
 import java.util.HashMap;
 import java.util.Map;
 

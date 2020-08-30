@@ -1,16 +1,17 @@
 package core.basesyntax.storeservice;
 
 import core.basesyntax.dao.FruitStorage;
+import core.basesyntax.dao.Storage;
 import core.basesyntax.fileservice.ProductDto;
 import core.basesyntax.goods.FruitPack;
 import java.util.List;
 
 
 public class Updater {
-    private FruitStorage storage;
+    private final FruitStorage storage;
 
-    public Updater(FruitStorage storage) {
-        this.storage = storage;
+    public Updater() {
+        this.storage = Storage.MAIN_STORAGE;
     }
 
     public FruitStorage updateData(List<ProductDto> inputData) {
@@ -20,7 +21,7 @@ public class Updater {
         for (ProductDto element : inputData) {
             FruitPack product = new FruitPack(element.getType(), element.getExpDate(), element.getQuantity());
             element.getOperation()
-                    .updateStorage(product, storage);
+                    .updateStorage(product);
         }
         return storage;
     }
