@@ -4,7 +4,7 @@ import interfaces.IOperationStrategy;
 import model.Position;
 import services.StorageService;
 
-public class ReturnOperation implements IOperationStrategy {
+public class SupplyOperation implements IOperationStrategy {
     StorageService storageService = new StorageService();
 
     @Override

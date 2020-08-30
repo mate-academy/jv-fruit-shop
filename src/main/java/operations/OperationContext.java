@@ -1,32 +1,31 @@
 package operations;
 
-import dto.FruitDto;
+import dto.PositionDto;
 import exceptions.NoValidOperationException;
-import interfaces.OperationStrategy;
-import model.Fruit;
+import interfaces.IOperationStrategy;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import model.Position;
 
 public class OperationContext {
     private static final String BUY = "b";
     private static final String RETURN = "r";
     private static final String SUPPLY = "s";
-    private OperationStrategy strategy;
 
-    public void operateSwitcher(FruitDto fruitDto) {
-        String operation = fruitDto.getOperation();
-        switch (operation) {
-            case BUY:
-                strategy = new BuyOperation();
-                break;
-            case RETURN:
-                strategy = new ReturnOperation();
-                break;
-            case SUPPLY:
-                strategy = new SupplyOperations();
-                break;
-            default:
-                throw new NoValidOperationException("No valid operation!");
+    public boolean operateSwitcher(List<PositionDto> positionDtos) {
+        Map<String, IOperationStrategy> operations = new HashMap<>();
+        operations.put(BUY, new BuyOperation());
+        operations.put(RETURN, new ReturnOperation());
+        operations.put(SUPPLY, new SupplyOperation());
+        for (PositionDto positionDto : positionDtos) {
+            IOperationStrategy strategy = operations.get(positionDto.getOperation());
+            if (strategy == null) {
+                throw new NoValidOperationException("Operation is not valid");
+            }
+            strategy.operate(new Position(positionDto.getFruitName(),
+                    positionDto.getQuantity(), positionDto.getDate()));
         }
-        strategy.operate(new Fruit(fruitDto.getFruitName(),
-                fruitDto.getQuantity(), fruitDto.getDate()));
+        return true;
     }
 }

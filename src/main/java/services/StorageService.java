@@ -2,28 +2,27 @@ package services;
 
 import exceptions.ExpiredProductException;
 import exceptions.NotEnoughQuantityException;
-import interfaces.StorageServiceInterface;
+import interfaces.IStorageService;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import model.Fruit;
-import model.FruitStorage;
+import model.Position;
+import model.Storage;
 
-public class StorageService implements StorageServiceInterface {
-    private static final String HEADER_FOR_REPORT = "PRODUCT, QUANTITY, SHELF LIFE \n";
+public class StorageService implements IStorageService {
 
     @Override
-    public void put(Fruit fruit) {
-        if (!isFresh(fruit)) {
+    public void put(Position position) {
+        if (!isFresh(position)) {
             throw new ExpiredProductException("Sorry! Product expired");
         }
-        if (FruitStorage.storage.containsKey(fruit.getName())) {
-            int totalQuantity = FruitStorage.storage.get(
-                    fruit.getName()).getQuantity() + fruit.getQuantity();
-            fruit.setQuantity(totalQuantity);
-            FruitStorage.storage.put(fruit.getName(), fruit);
+        if (Storage.storage.containsKey(position.getName())) {
+            int totalQuantity = Storage.storage.get(
+                    position.getName()).getQuantity() + position.getQuantity();
+            position.setQuantity(totalQuantity);
+            Storage.storage.put(position.getName(), position);
         }
-        FruitStorage.storage.put(fruit.getName(), fruit);
+        Storage.storage.put(position.getName(), position);
     }
 
     @Override
@@ -32,39 +31,19 @@ public class StorageService implements StorageServiceInterface {
             throw new NotEnoughQuantityException("Sorry! Not enough " + fruitName);
         }
         Map<String, Integer> result = new HashMap<>();
-        for (Map.Entry<String, Fruit> entry : FruitStorage.storage.entrySet()) {
+        for (Map.Entry<String, Position> entry : Storage.storage.entrySet()) {
             if (entry.getKey().equals(fruitName)) {
-                Fruit fruit = FruitStorage.storage.get(fruitName);
-                fruit.setQuantity(fruit.getQuantity() - neededQuantity);
-                FruitStorage.storage.put(fruitName, fruit);
+                Position position = Storage.storage.get(fruitName);
+                position.setQuantity(position.getQuantity() - neededQuantity);
+                Storage.storage.put(fruitName, position);
             }
         }
         return result;
     }
 
-    @Override
-    public Map getReport() {
-        StringBuilder content = new StringBuilder(HEADER_FOR_REPORT);
-        Map<String, Integer> result = new HashMap<>();
-        for (Map.Entry<String, Fruit> entry : FruitStorage.storage.entrySet()) {
-            if (result.containsKey(entry.getKey())) {
-                result.put(entry.getKey(),
-                        result.get(entry.getKey()) + entry.getValue().getQuantity());
-                appendInfo(entry, content);
-                continue;
-            }
-            result.put(entry.getKey(), entry.getValue().getQuantity());
-            appendInfo(entry, content);
-        }
-        FileService fileService = new FileService();
-        fileService.writeFile(content.toString());
-        return result;
-    }
-
-    @Override
     public boolean isEnough(String fruitName, int neededQuantity) {
         int availability = 0;
-        for (Map.Entry<String, Fruit> entry : FruitStorage.storage.entrySet()) {
+        for (Map.Entry<String, Position> entry : Storage.storage.entrySet()) {
             if (entry.getKey().equals(fruitName)) {
                 availability += entry.getValue().getQuantity();
             }
@@ -72,19 +51,9 @@ public class StorageService implements StorageServiceInterface {
         return availability >= neededQuantity;
     }
 
-    public boolean isFresh(Fruit fruit) {
+    public boolean isFresh(Position position) {
         LocalDate localDate = LocalDate.now();
-        LocalDate shelfLife = LocalDate.parse(fruit.getDate());
+        LocalDate shelfLife = position.getDate();
         return shelfLife.isAfter(localDate);
-    }
-
-    private StringBuilder appendInfo(Map.Entry<String, Fruit> entry, StringBuilder content) {
-        content.append(entry.getKey())
-                .append(", ")
-                .append(entry.getValue().getQuantity())
-                .append(", ")
-                .append(entry.getValue().getDate())
-                .append("\n");
-        return content;
     }
 }

@@ -1,12 +1,14 @@
 package dto;
 
-public class FruitDto {
+import java.time.LocalDate;
+
+public class PositionDto {
     private String operation;
     private String fruitName;
     private int quantity;
-    private String date;
+    private LocalDate date;
 
-    public FruitDto(String operation, String fruitName, int quantity, String date) {
+    public PositionDto(String operation, String fruitName, int quantity, LocalDate date) {
         this.operation = operation;
         this.fruitName = fruitName;
         this.quantity = quantity;
@@ -37,11 +39,11 @@ public class FruitDto {
         this.quantity = quantity;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }

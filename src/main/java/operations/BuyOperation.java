@@ -1,14 +1,14 @@
 package operations;
 
-import interfaces.OperationStrategy;
-import model.Fruit;
+import interfaces.IOperationStrategy;
+import model.Position;
 import services.StorageService;
 
-public class BuyOperation implements OperationStrategy {
+public class BuyOperation implements IOperationStrategy {
     StorageService storageService = new StorageService();
 
     @Override
-    public void operate(Fruit fruit) {
-        storageService.buy(fruit.getName(), fruit.getQuantity());
+    public void operate(Position position) {
+        storageService.buy(position.getName(), position.getQuantity());
     }
 }

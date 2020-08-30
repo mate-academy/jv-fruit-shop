@@ -1,14 +1,14 @@
 package services;
 
-import dto.FruitDto;
+import dto.PositionDto;
+import java.time.LocalDate;
 
 public class FileParser {
     private static final String SEPARATOR = ",";
 
-    public FruitDto parse(String line) {
+    public PositionDto parse(String line) {
         String[] cortege = line.split(SEPARATOR);
-        FruitDto fruitDto = new FruitDto(cortege[0],
-                cortege[1], Integer.parseInt(cortege[2]), cortege[3]);
-        return fruitDto;
+        return new PositionDto(cortege[0],
+                cortege[1], Integer.parseInt(cortege[2]), LocalDate.parse(cortege[3]));
     }
 }

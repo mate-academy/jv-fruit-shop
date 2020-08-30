@@ -1,11 +1,13 @@
 package model;
 
-public class Fruit {
+import java.time.LocalDate;
+
+public class Position {
     private String name;
     private int quantity;
-    private String date;
+    private LocalDate date;
 
-    public Fruit(String name, int quantity, String date) {
+    public Position(String name, int quantity, LocalDate date) {
         this.name = name;
         this.quantity = quantity;
         this.date = date;
@@ -27,11 +29,11 @@ public class Fruit {
         this.quantity = quantity;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }
