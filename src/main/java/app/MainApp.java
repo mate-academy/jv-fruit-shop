@@ -7,7 +7,6 @@ import app.service.Operation;
 import app.service.impl.FileReadServiceImplementation;
 import app.service.impl.FileWriterServiceImplementation;
 import app.service.impl.FruitParserImplementation;
-
 import java.util.List;
 import java.util.Scanner;
 

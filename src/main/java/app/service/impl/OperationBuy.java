@@ -27,7 +27,8 @@ public class OperationBuy implements Operation {
                 + currentBatch.getFruitName() + "in stock for sale");
     }
 
-    boolean isTheFruitSuitableForSale(SupplyFruitBatch iteratorFruit, SupplyFruitBatch currentFruit) {
+    boolean isTheFruitSuitableForSale(SupplyFruitBatch iteratorFruit,
+                                      SupplyFruitBatch currentFruit) {
         return iteratorFruit.getFruitName().equals(currentFruit.getFruitName())
                 && iteratorFruit.getEndOfShelfLife().isAfter(currentFruit.getEndOfShelfLife())
                 || iteratorFruit.getEndOfShelfLife().equals(currentFruit.getEndOfShelfLife());
