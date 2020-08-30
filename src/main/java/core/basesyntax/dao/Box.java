@@ -5,21 +5,35 @@ import core.basesyntax.goods.FruitPack;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class Box {
-    private static final LocalDate TODAY = LocalDate.now();
     private Map<LocalDate, FruitPack> box;
 
     public Box() {
        box = new HashMap<>();
     }
 
-    public boolean addProduct(FruitPack product) {
+    public Box(FruitPack product) {
+        box = new HashMap<>();
+        this.addProduct(product);
+    }
+
+    public Box addProduct(FruitPack product) {
+        if (product == null) {
+            throw new IllegalArgumentException("Invalid arguments");
+        }
+        FruitPack fruitPack = new FruitPack(product);
         LocalDate expDate = product.getExpDate();
         FruitPack.checkExpDate(expDate);
-        box.put(expDate, product);
-        return true;
+        if (!box.isEmpty()) {
+            int newQuantity = fruitPack.getQuantity();
+            int prevQuantity = box.get(expDate).getQuantity();
+            fruitPack = fruitPack.setQuantity(newQuantity + prevQuantity);
+        }
+        box.put(expDate, fruitPack);
+        return this;
     }
 
     public FruitPack getProduct(LocalDate expDate) {
@@ -37,13 +51,33 @@ public class Box {
         return true;
     }
 
+    public void clear() {
+        box.clear();
+    }
+
+    public int size() {
+        return box.size();
+    }
+
     @Override
     public String toString() {
         return box.entrySet().toString();
     }
 
-    public void put(LocalDate expDate, FruitPack product) {
-        FruitPack.checkExpDate(expDate);
-        box.put(expDate, product);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Box that = (Box) o;
+        return Objects.equals(box, that.box);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(box);
     }
 }

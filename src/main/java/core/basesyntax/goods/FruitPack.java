@@ -2,17 +2,24 @@ package core.basesyntax.goods;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class FruitPack {
     private static final LocalDate TODAY = LocalDate.now();
     private String type;
     private LocalDate expDate;
-    private int quantity;
+    private final int quantity;
 
     public FruitPack(String type, LocalDate expDate, int quantity) {
         this.type = type;
         this.expDate = expDate;
         this.quantity = quantity;
+    }
+
+    public FruitPack(FruitPack fruitPack) {
+        this.type = fruitPack.type;
+        this.expDate = fruitPack.expDate;
+        this.quantity = fruitPack.quantity;
     }
 
     public String getType() {
@@ -27,8 +34,15 @@ public class FruitPack {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public FruitPack setQuantity(int quantity) {
+        return new FruitPack(this.type, this.expDate, quantity);
+    }
+
+    public static boolean isPresent(FruitPack product) {
+        if (product == null) {
+            throw new IllegalArgumentException("Invalid input arguments");
+        }
+        return true;
     }
 
     public static void checkExpDate(LocalDate expDate) {
@@ -38,5 +52,24 @@ public class FruitPack {
         if (!expDate.isAfter(TODAY)) {
             throw new DateTimeException("Product is terminated");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitPack fruitPack = (FruitPack) o;
+        return quantity == fruitPack.quantity &&
+                Objects.equals(type, fruitPack.type) &&
+                Objects.equals(expDate, fruitPack.expDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, expDate, quantity);
     }
 }

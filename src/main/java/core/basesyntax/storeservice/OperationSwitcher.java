@@ -1,5 +1,7 @@
 package core.basesyntax.storeservice;
 
+import core.basesyntax.dao.FruitStorage;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +10,7 @@ public class OperationSwitcher {
 
     public OperationSwitcher() {
         storageOperations.put("s", new Supplier());
-        storageOperations.put("b", new Buyer());
+        storageOperations.put("b", new Consumer());
         storageOperations.put("r", new Supplier());
     }
 

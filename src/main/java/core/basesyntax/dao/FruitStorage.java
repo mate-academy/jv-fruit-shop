@@ -11,7 +11,8 @@ public class FruitStorage {
         storage = new HashMap<>();
     }
 
-    public boolean add(FruitPack product) {
+    public boolean addProduct(FruitPack product) {
+        FruitPack.isPresent(product);
         final String type = product.getType();
         final LocalDate expDate = product.getExpDate();
         FruitPack.checkExpDate(expDate);
@@ -34,10 +35,29 @@ public class FruitStorage {
     }
 
     public boolean contains(String type) {
+        typeCheck(type);
         return storage.containsKey(type);
     }
 
     public Box getBox(String type) {
+        typeCheck(type);
+        if (!storage.containsKey(type)) {
+            throw new IllegalArgumentException("Invalid input arguments");
+        }
         return storage.get(type);
+    }
+
+    public void clearStorage() {
+        storage.clear();
+    }
+
+    public int size() {
+        return storage.size();
+    }
+
+    private void typeCheck(String type) {
+        if (type == null) {
+            throw new IllegalArgumentException("Invalid input arguments");
+        }
     }
 }

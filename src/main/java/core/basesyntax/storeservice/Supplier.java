@@ -19,10 +19,10 @@ public class Supplier implements Operation {
                 productInBox.setQuantity(productInBox.getQuantity() + quantity);
                 return true;
             }
-            box.put(expDate, product);
+            box.addProduct(product);
             return true;
         }
-        storage.add(product);
+        storage.addProduct(product);
         return true;
     }
 }

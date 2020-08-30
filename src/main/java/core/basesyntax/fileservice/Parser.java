@@ -1,5 +1,6 @@
 package core.basesyntax.fileservice;
 
+import core.basesyntax.dao.FruitStorage;
 import core.basesyntax.storeservice.OperationSwitcher;
 import java.time.LocalDate;
 import java.util.ArrayList;

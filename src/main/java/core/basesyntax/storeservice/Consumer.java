@@ -7,7 +7,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Buyer implements Operation {
+public class Consumer implements Operation {
+    /*private FruitStorage storage;
+
+    public Consumer(FruitStorage storage) {
+        this.storage = storage;
+    }*/
+
     @Override
     public boolean updateStorage(FruitPack product, FruitStorage storage) {
         LocalDate productExpDate = product.getExpDate();

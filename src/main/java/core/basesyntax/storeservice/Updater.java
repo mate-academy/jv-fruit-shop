@@ -3,8 +3,8 @@ package core.basesyntax.storeservice;
 import core.basesyntax.dao.FruitStorage;
 import core.basesyntax.fileservice.ProductDto;
 import core.basesyntax.goods.FruitPack;
+import java.util.List;
 
-import java.util.*;
 
 public class Updater {
     private FruitStorage storage;
