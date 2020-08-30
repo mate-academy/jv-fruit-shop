@@ -20,7 +20,7 @@ public class StorageServiceImpl implements StorageService<Product> {
     }
 
     @Override
-    public Product retrieve(int index) {
+    public Product get(int index) {
         if (storageDao.getAll().size() <= index
                 || index < 0) {
             throw new IllegalArgumentException();

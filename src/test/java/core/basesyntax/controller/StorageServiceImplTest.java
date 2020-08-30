@@ -21,6 +21,6 @@ public class StorageServiceImplTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenMinusParameter() {
-        storageService.retrieve(-1);
+        storageService.get(-1);
     }
 }

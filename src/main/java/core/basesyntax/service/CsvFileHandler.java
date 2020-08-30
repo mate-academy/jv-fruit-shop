@@ -16,7 +16,7 @@ public class CsvFileHandler {
                 listOfCommands.add(new Command(line));
             }
         } catch (IOException e) {
-            throw new RuntimeException("No such file for input");
+            throw new RuntimeException("No such file for input", e);
         }
         return listOfCommands;
     }

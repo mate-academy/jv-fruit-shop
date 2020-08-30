@@ -15,7 +15,7 @@ public class CsvFileWriter {
             writer.writeAll(reportCreator.createReport());
             return true;
         } catch (IOException e) {
-            throw new RuntimeException("No such file for output");
+            throw new RuntimeException("No such file for output", e);
         }
     }
 }

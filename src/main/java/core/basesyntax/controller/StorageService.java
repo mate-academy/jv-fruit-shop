@@ -6,7 +6,7 @@ import java.util.List;
 public interface StorageService<T extends Product> {
     boolean put(T value);
 
-    T retrieve(int index);
+    T get(int index);
 
     List<T> getAll();
 }
