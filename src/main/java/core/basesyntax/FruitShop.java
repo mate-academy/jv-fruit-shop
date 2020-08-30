@@ -5,16 +5,12 @@ import core.basesyntax.services.ActionInterface;
 import core.basesyntax.services.FruitParse;
 import core.basesyntax.services.ShopInterfaceStrategy;
 import core.basesyntax.services.impl.Parser;
-import java.io.FileWriter;
-import java.io.IOException;
+import core.basesyntax.services.impl.Writer;
 import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FruitShop {
-    private static final String STOCK_FILE = "src/main/resources/stock.csv";
     private final String path;
 
     public FruitShop(String path) {
@@ -23,6 +19,7 @@ public class FruitShop {
 
     public void start() {
         Storage storage = new Storage();
+        Writer writer = new Writer();
         FruitParse fruitParse = new Parser();
         for (List<String> row : fruitParse.readFile(path)) {
             ActionInterface action = new ShopInterfaceStrategy().get(row.get(0));
@@ -32,31 +29,7 @@ public class FruitShop {
                 action.action(storage, fruit);
             }
         }
-        stock(storage);
-    }
-
-    private void stock(Storage storage) {
-        try (FileWriter writerFile = new FileWriter(STOCK_FILE)) {
-            Map<String, Integer> map = new HashMap<>();
-            storage.getFruits()
-                    .stream()
-                    .filter(fruit -> fruit.getStock_balance() > 0)
-                    .forEach(fruit -> {
-                        if (map.containsKey(fruit.getType())) {
-                            map.put(fruit.getType(), fruit.getStock_balance()
-                                    + map.get(fruit.getType()));
-                        } else {
-                            map.put(fruit.getType(), fruit.getStock_balance());
-                        }
-                    });
-
-            writerFile.write("fruit,quantity\n");
-            for (Map.Entry<String, Integer> entry : map.entrySet()) {
-                writerFile.write(entry.getKey() + "," + entry.getValue() + "\n");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("No write access to file");
-        }
+        writer.doWrite(storage);
     }
 
     private LocalDate checkDate(String string) {
