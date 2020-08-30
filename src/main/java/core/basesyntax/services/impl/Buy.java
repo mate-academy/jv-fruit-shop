@@ -17,11 +17,11 @@ public class Buy implements ActionInterface {
                 .sorted()
                 .collect(Collectors.toList());
 
-        int summ = list.stream()
+        int sum = list.stream()
                 .mapToInt(Fruit::getStock_balance)
                 .sum();
 
-        if (summ < fruit.getStock_balance()) {
+        if (sum < fruit.getStock_balance()) {
             throw new RuntimeException("Not enough items in stock");
         }
 
