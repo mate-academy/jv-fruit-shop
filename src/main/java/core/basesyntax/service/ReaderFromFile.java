@@ -31,7 +31,9 @@ public class ReaderFromFile implements FileService {
         } catch (IOException e) {
             throw new RuntimeException("This file does not exist!", e);
         }
-        orders.remove(0);
+        if (orders.size() != 0 && orders.get(0).contains("type,fruit,quantity,date")) {
+            orders.remove(0);
+        }
         return orders;
     }
 }
