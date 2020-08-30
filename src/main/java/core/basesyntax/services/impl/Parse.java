@@ -1,7 +1,6 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.services.FruitParse;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,8 +13,7 @@ public class Parse implements FruitParse {
     public List<List<String>> readFile(String path) {
         List<List<String>> result = new ArrayList<>();
         String line;
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             while ((line = bufferedReader.readLine()) != null) {
                 line = line.toLowerCase();
                 String[] splitetLine = line.split(",");
