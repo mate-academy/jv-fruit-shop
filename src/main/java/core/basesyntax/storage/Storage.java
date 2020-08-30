@@ -14,9 +14,7 @@ public class Storage implements StorageOperations {
         }
         String fruitName = fruitBatch.getFruitName();
         FruitBatch storageBatch = storage.get(fruitName);
-        if (storageBatch != null
-                && (storageBatch.getBatchDay().isBefore(fruitBatch.getBatchDay())
-                || storageBatch.getBatchDay().isEqual(fruitBatch.getBatchDay()))) {
+        if (isValidBatch(fruitBatch, storageBatch)) {
             storageBatch.setAmount(storageBatch.getAmount() + fruitBatch.getAmount());
             return true;
         }
@@ -34,10 +32,7 @@ public class Storage implements StorageOperations {
         }
         String fruitName = fruitBatch.getFruitName();
         FruitBatch storageBatch = storage.get(fruitName);
-        if (storageBatch != null
-                && storageBatch.getAmount() >= fruitBatch.getAmount()
-                && (storageBatch.getBatchDay().isBefore(fruitBatch.getBatchDay())
-                || storageBatch.getBatchDay().isEqual(fruitBatch.getBatchDay()))) {
+        if (isValidBatch(fruitBatch, storageBatch)) {
             storageBatch.setAmount(storageBatch.getAmount() - fruitBatch.getAmount());
             return true;
         }
@@ -58,5 +53,12 @@ public class Storage implements StorageOperations {
                     .append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    private boolean isValidBatch(FruitBatch fruitBatch, FruitBatch storageBatch) {
+        return storageBatch != null
+                && storageBatch.getAmount() >= fruitBatch.getAmount()
+                && (storageBatch.getBatchDay().isBefore(fruitBatch.getBatchDay())
+                || storageBatch.getBatchDay().isEqual(fruitBatch.getBatchDay()));
     }
 }
