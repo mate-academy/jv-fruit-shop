@@ -36,7 +36,7 @@ public class FruitShop {
     }
 
     private void stock(Storage storage) {
-        try (FileWriter writerFile = new FileWriter(STOCK_FILE)){
+        try (FileWriter writerFile = new FileWriter(STOCK_FILE)) {
             Map<String, Integer> map = new HashMap<>();
             storage.getFruits()
                     .stream()
