@@ -52,7 +52,7 @@ public class Storage implements StorageOperations {
                     .append(entry.getValue().getAmount())
                     .append("\n");
         }
-        return stringBuilder.toString();
+        return stringBuilder.toString().trim();
     }
 
     private boolean isValidBatch(FruitBatch fruitBatch, FruitBatch storageBatch) {

@@ -22,7 +22,7 @@ public class StorageTest {
     private static final FruitBatch[] FILLER_FRUITS = {new FruitBatch("s", "banana",
             15, LocalDate.parse("2020-05-20")), new FruitBatch("s", "apple",
             34, LocalDate.parse("2020-05-17"))};
-    private static final String CORRECT_STRING = "banana, 16\nmango, 15\n";
+    private static final String CORRECT_STRING = "banana, 16\nmango, 15";
 
     @BeforeClass
     public static void setUp() {

@@ -32,21 +32,21 @@ public class FruitOperationStrategyTest {
 
     @Test
     public void returnBatch() {
-        String expected = "banana, 100\nmango, 10\n";
+        String expected = "banana, 100\nmango, 10";
         strategy.applyOperationOnBatch(RETURN_BATCH);
         Assert.assertEquals(expected, storage.outputProducts());
     }
 
     @Test
     public void buyBatch() {
-        String expected = "banana, 90\n";
+        String expected = "banana, 90";
         strategy.applyOperationOnBatch(BUY_BATCH);
         Assert.assertEquals(expected, storage.outputProducts());
     }
 
     @Test
     public void supplyBatch() {
-        String expected = "banana, 100\napple, 10\n";
+        String expected = "banana, 100\napple, 10";
         strategy.applyOperationOnBatch(SUPPLY_BATCH);
         Assert.assertEquals(expected, storage.outputProducts());
     }

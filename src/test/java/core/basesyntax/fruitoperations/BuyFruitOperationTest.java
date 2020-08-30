@@ -32,6 +32,6 @@ public class BuyFruitOperationTest {
     @Test
     public void applyCorrect() {
         BUY_FRUIT_OPERATION.apply(FRUIT_BATCH);
-        Assert.assertEquals("Storage size should be zero","apple, 0\n", TEST_STORAGE.outputProducts());
+        Assert.assertEquals("Storage size should be zero","apple, 0", TEST_STORAGE.outputProducts());
     }
 }

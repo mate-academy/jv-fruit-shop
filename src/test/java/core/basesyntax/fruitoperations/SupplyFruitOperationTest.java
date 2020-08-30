@@ -32,6 +32,6 @@ public class SupplyFruitOperationTest {
     @Test
     public void applyCorrect() {
         SUPPLY_FRUIT_OPERATION.apply(FRUIT_BATCH);
-        Assert.assertEquals("There should be 20 apples","apple, 20\n", TEST_STORAGE.outputProducts());
+        Assert.assertEquals("There should be 20 apples","apple, 20", TEST_STORAGE.outputProducts());
     }
 }
