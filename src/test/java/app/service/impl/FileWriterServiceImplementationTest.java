@@ -6,7 +6,6 @@ import app.service.FileWriterService;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

@@ -6,7 +6,6 @@ import app.service.FileReadService;
 import app.service.Operation;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
