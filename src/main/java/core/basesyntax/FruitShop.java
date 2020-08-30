@@ -55,7 +55,7 @@ public class FruitShop {
                 writerFile.write(entry.getKey() + "," + entry.getValue() + "\n");
             }
         } catch (IOException e) {
-            throw new RuntimeException("Нет доступа к файлу для записи");
+            throw new RuntimeException("No write access to file");
         }
     }
 
@@ -63,7 +63,7 @@ public class FruitShop {
         try {
             return LocalDate.parse(string);
         } catch (DateTimeException e) {
-            throw new RuntimeException("Ошибка в дате " + string);
+            throw new RuntimeException("Date error " + string);
         }
     }
 
@@ -71,7 +71,7 @@ public class FruitShop {
         try {
             return Integer.parseInt(string);
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Ошибка указанного в файле количества " + string);
+            throw new RuntimeException("Amount specified in file error " + string);
         }
     }
 }

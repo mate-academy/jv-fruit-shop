@@ -25,9 +25,9 @@ public class FruitShopTest {
             fruitShop.start();
             BufferedReader shopQuantityFile = new BufferedReader(new FileReader(STOCK));
             BufferedReader preparedFile = new BufferedReader(new FileReader(STOCK_NORMAL));
-            Assert.assertEquals("Результат работы не совпадает с ожидаемым", shopQuantityFile.readLine(), preparedFile.readLine());
+            Assert.assertEquals("The result of the work does not match the expected", shopQuantityFile.readLine(), preparedFile.readLine());
         } catch (IOException e) {
-            throw new RuntimeException("Нет доступа к тестовым файлам");
+            throw new RuntimeException("No access to test files");
         }
     }
 
@@ -63,9 +63,9 @@ public class FruitShopTest {
             fruitShop.start();
             BufferedReader shopQuantityFile = new BufferedReader(new FileReader(STOCK));
             BufferedReader preparedFile = new BufferedReader(new FileReader(STOCK_NORMAL));
-            Assert.assertEquals("Результат работы не совпадает с ожидаемым", shopQuantityFile.readLine(), preparedFile.readLine());
+            Assert.assertEquals("The result of the work does not match the expected", shopQuantityFile.readLine(), preparedFile.readLine());
         } catch (IOException e) {
-            throw new RuntimeException("Нет доступа к тестовым файлам");
+            throw new RuntimeException("No access to test files");
         }
     }
 
@@ -74,8 +74,8 @@ public class FruitShopTest {
         LocalDate date = LocalDate.now();
         Fruit fruit = new Fruit("banana",50,date);
         Assert.assertEquals(fruit.getType(),"banana");
-        Assert.assertTrue("Даты не совпадаеют", date.isEqual(fruit.getDate()));
-        Assert.assertEquals("Неправильное количество ожидалось 50", 50, fruit.getStock_balance());
+        Assert.assertTrue("Dates do not match", date.isEqual(fruit.getDate()));
+        Assert.assertEquals("Wrong quantity expected 50", 50, fruit.getStock_balance());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class FruitShopTest {
         LocalDate date = LocalDate.now();
         Fruit fruit = new Fruit("banana",50,date);
         fruit.setStock_balance(45);
-        Assert.assertEquals("Неправильное количество ожидалось 50", 45, fruit.getStock_balance());
+        Assert.assertEquals("Wrong quantity expected 50", 45, fruit.getStock_balance());
     }
 
     @Test

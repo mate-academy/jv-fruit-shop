@@ -24,7 +24,7 @@ public class Parse implements FruitParse {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка чтения файла");
+            throw new RuntimeException("File read error");
         }
         return result;
     }

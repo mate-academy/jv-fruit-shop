@@ -22,7 +22,7 @@ public class Buy implements ActionInterface {
                 .sum();
 
         if (summ < fruit.getStock_balance()) {
-            throw new RuntimeException("Недостаточно товаров на складе");
+            throw new RuntimeException("Not enough items in stock");
         } else {
             list.forEach(fruit1 -> {
                 if (fruit1.getStock_balance() >= fruit.getStock_balance()) {
