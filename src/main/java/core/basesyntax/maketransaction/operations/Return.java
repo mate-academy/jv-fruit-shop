@@ -11,7 +11,7 @@ public class Return implements IFruitOperation {
     public boolean apply(Transaction transaction) {
         for (int i = 0; i < transaction.getQuantity(); i++) {
             Fruit fruit = new Fruit(transaction.getFruit(), LocalDate.parse(transaction.getDate()));
-           Storage.addFruit(fruit);
+            Storage.addFruit(fruit);
         }
         return true;
     }

@@ -3,22 +3,20 @@ package core.basesyntax.identities;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.time.LocalDate;
 import java.util.*;
-
 import static org.junit.Assert.*;
 
 public class StorageTest {
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.addFruit(new Fruit("banana", LocalDate.parse("2020-10-15")));
         Storage.addFruit(new Fruit("banana", LocalDate.parse("2020-10-15")));
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.clear();
     }
 

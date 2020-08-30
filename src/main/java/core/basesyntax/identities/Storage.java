@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class Storage {
-    private static Map<String, List<Fruit>> fruits  = new HashMap<>();
+    private static Map<String, List<Fruit>> fruits = new HashMap<>();
 
     public static Map<String, List<Fruit>> getFruits() {
         return fruits;
@@ -39,6 +39,6 @@ public class Storage {
     }
 
     public static void clear() {
-        fruits  = new HashMap<>();
+        fruits = new HashMap<>();
     }
 }
