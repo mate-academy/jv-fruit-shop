@@ -14,7 +14,7 @@ public class WriteToFileTest {
     @Test
     public void simpleWriteToFileTest() {
         double randomNumber = Math.random() * 1000;
-        String actual = String.valueOf(randomNumber);
+        String actual = String.valueOf(randomNumber) + "\n";
         writeToFile.print(actual, "src/test/java/resourses/writeSomething.csv");
         try {
             List<String> result = Files.readAllLines(Path.of("src/test/java/resourses/writeSomething.csv"));
