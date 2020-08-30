@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFileTest {
-    public final static String FIRST_PATH = "src/test/resources/test_1.csv";
+    public final static String FIRST_PATH = "src/test/resources/test_3.csv";
     public final static String SECOND_PATH = "src/test/resources/test_2.csv";
     public final static List<String> EXPECTING_RESULT_FIRST = new ArrayList<>();
     public final static String EXPECTING_RESULT_SECOND = "s,banana,100,2020-10-17";

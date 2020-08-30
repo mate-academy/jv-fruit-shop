@@ -10,7 +10,6 @@ public class TotalFruitOnStorage {
         String totalFruitOnStorage = "";
         FruitList fruitList = new FruitList();
         List<String> listOfFruit = fruitList.createListOfFruit(orderDao.getAll());
-        fruitList.createListOfFruit(orderDao.getAll());
         for (String fruit : listOfFruit) {
             totalFruitOnStorage += fruit + " " + operation.sum(orderDao.getAll(), fruit) + "\n";
         }

@@ -28,11 +28,8 @@ public class Order {
         return "Order{"
                 + "typeOfOperation='"
                 + typeOfOperation + '\''
-                +
-                ", typeOfFruit='" + typeOfFruit + '\''
-                +
-                ", quantity=" + quantity
-                +
-                '}';
+                + ", typeOfFruit='" + typeOfFruit + '\''
+                + ", quantity=" + quantity
+                + '}';
     }
 }
