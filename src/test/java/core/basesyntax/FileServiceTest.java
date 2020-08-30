@@ -46,7 +46,6 @@ public class FileServiceTest {
     public void checkCorrectWriteOutputFile() throws IOException {
         List<String> outputStrings = List.of("fruit,quantity", "banana,97");
         SERVICE.writeFile(outputStrings, OUT_FILE);
-        System.out.println(SERVICE.getPath());
         Assert.assertTrue(Files.exists(Path.of(SERVICE.getPath())));
         int size = Files.readAllLines(Path.of(SERVICE.getPath())).size();
         Assert.assertEquals(outputStrings.size(), size);
