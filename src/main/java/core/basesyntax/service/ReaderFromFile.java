@@ -1,7 +1,9 @@
 package core.basesyntax.service;
 
+import core.basesyntax.exceptions.EmptyFileException;
 import core.basesyntax.exceptions.WrongFormatException;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +15,10 @@ public class ReaderFromFile implements FileService {
     public List<List<String>> readFile(String filePath) {
         List<List<String>> orders = new ArrayList<>();
         String line;
+        File file = new File(filePath);
+        if (file.length() == 0) {
+            throw new EmptyFileException("Your file is empty!");
+        }
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             while (!((line = br.readLine()) == null)) {
                 List<String> singleLine = Arrays.asList(line.split(","));
@@ -25,9 +31,7 @@ public class ReaderFromFile implements FileService {
         } catch (IOException e) {
             throw new RuntimeException("This file does not exist!", e);
         }
-        if (orders != null && orders.size() != 0) {
-            orders.remove(0);
-        }
+        orders.remove(0);
         return orders;
     }
 }

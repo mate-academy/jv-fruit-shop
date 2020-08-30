@@ -1,13 +1,13 @@
 package core.basesyntax.service;
 
 import core.basesyntax.exceptions.WrongFormatException;
+import core.basesyntax.exceptions.EmptyFileException;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.List;
 
-public class ReaderFromFileTest { //добавь проверку на первую линию
+public class ReaderFromFileTest {
 
     public final static String FIRST_PATH = "src/test/java/resourses/test1.csv";
     public final static String SECOND_PATH = "src/test/java/resourses/test2.csv";
@@ -32,6 +32,11 @@ public class ReaderFromFileTest { //добавь проверку на перв�
     public void fileReaderTestWithMultipleLines() {
         int actual = reader.readFile(SECOND_PATH).size();
         Assert.assertEquals(4, actual);
+    }
+
+    @Test(expected = EmptyFileException.class)
+    public void EmptyFileTest() {
+        int actual = reader.readFile(FOURTH_PATH).get(0).size();
     }
 
     @Test(expected = WrongFormatException.class)

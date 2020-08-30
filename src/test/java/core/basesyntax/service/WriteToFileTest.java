@@ -18,7 +18,7 @@ public class WriteToFileTest {
         writeToFile.print(actual, "src/test/java/resourses/writeSomething.csv");
         try {
             List<String> result = Files.readAllLines(Path.of("src/test/java/resourses/writeSomething.csv"));
-            String expected = String.join("", result);
+            String expected = String.join("", result) + "\n";
             Assert.assertEquals(actual, expected);
         } catch (IOException e) {
             e.printStackTrace();
