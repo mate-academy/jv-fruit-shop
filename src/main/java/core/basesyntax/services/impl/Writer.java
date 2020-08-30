@@ -15,7 +15,7 @@ public class Writer {
             Map<String, Integer> map = new HashMap<>();
             storage.getFruits()
                     .stream()
-                    .filter(fruit -> fruit.getStock_balance() > 0)
+                    .filter(fruit -> fruit.getStockBalance() > 0)
                     .forEach(fruit -> {
                         sum(map, fruit);
                     });
@@ -31,10 +31,10 @@ public class Writer {
 
     private void sum(Map<String, Integer> map, Fruit fruit) {
         if (map.containsKey(fruit.getType())) {
-            map.put(fruit.getType(), fruit.getStock_balance()
+            map.put(fruit.getType(), fruit.getStockBalance()
                     + map.get(fruit.getType()));
         } else {
-            map.put(fruit.getType(), fruit.getStock_balance());
+            map.put(fruit.getType(), fruit.getStockBalance());
         }
     }
 }

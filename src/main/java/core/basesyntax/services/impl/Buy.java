@@ -18,10 +18,10 @@ public class Buy implements ActionInterface {
                 .collect(Collectors.toList());
 
         int sum = list.stream()
-                .mapToInt(Fruit::getStock_balance)
+                .mapToInt(Fruit::getStockBalance)
                 .sum();
 
-        if (sum < fruit.getStock_balance()) {
+        if (sum < fruit.getStockBalance()) {
             throw new RuntimeException("Not enough items in stock");
         }
 
@@ -31,12 +31,12 @@ public class Buy implements ActionInterface {
     }
 
     private void toBuyLogic(Fruit fruit, Fruit fruitBuy) {
-        if (fruit.getStock_balance() >= fruitBuy.getStock_balance()) {
-            fruit.setStock_balance(fruit.getStock_balance() - fruitBuy.getStock_balance());
+        if (fruit.getStockBalance() >= fruitBuy.getStockBalance()) {
+            fruit.setStock_balance(fruit.getStockBalance() - fruitBuy.getStockBalance());
             fruitBuy.setStock_balance(0);
         }
-        if (fruit.getStock_balance() < fruitBuy.getStock_balance()) {
-            fruitBuy.setStock_balance(fruitBuy.getStock_balance() - fruit.getStock_balance());
+        if (fruit.getStockBalance() < fruitBuy.getStockBalance()) {
+            fruitBuy.setStock_balance(fruitBuy.getStockBalance() - fruit.getStockBalance());
             fruit.setStock_balance(0);
         }
     }

@@ -75,7 +75,7 @@ public class FruitShopTest {
         Fruit fruit = new Fruit("banana",50,date);
         Assert.assertEquals(fruit.getType(),"banana");
         Assert.assertTrue("Dates do not match", date.isEqual(fruit.getDate()));
-        Assert.assertEquals("Wrong quantity expected 50", 50, fruit.getStock_balance());
+        Assert.assertEquals("Wrong quantity expected 50", 50, fruit.getStockBalance());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class FruitShopTest {
         LocalDate date = LocalDate.now();
         Fruit fruit = new Fruit("banana",50,date);
         fruit.setStock_balance(45);
-        Assert.assertEquals("Wrong quantity expected 50", 45, fruit.getStock_balance());
+        Assert.assertEquals("Wrong quantity expected 50", 45, fruit.getStockBalance());
     }
 
     @Test

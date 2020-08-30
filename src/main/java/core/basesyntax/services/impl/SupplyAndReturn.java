@@ -9,8 +9,8 @@ public class SupplyAndReturn implements ActionInterface {
     public void action(Storage storage, Fruit fruit) {
         if (storage.getFruits().contains(fruit)) {
             int storagePositionFruit = storage.getFruits().indexOf(fruit);
-            int newCount = storage.getFruits().get(storagePositionFruit).getStock_balance()
-                            + fruit.getStock_balance();
+            int newCount = storage.getFruits().get(storagePositionFruit).getStockBalance()
+                            + fruit.getStockBalance();
             storage.getFruits().get(storagePositionFruit).setStock_balance(newCount);
         } else {
             storage.getFruits().add(fruit);

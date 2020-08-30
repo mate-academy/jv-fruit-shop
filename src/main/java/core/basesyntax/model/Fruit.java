@@ -18,7 +18,7 @@ public class Fruit implements Comparable<Fruit> {
         return type;
     }
 
-    public int getStock_balance() {
+    public int getStockBalance() {
         return stockBalance;
     }
 
