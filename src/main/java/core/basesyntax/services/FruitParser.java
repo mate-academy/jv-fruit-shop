@@ -2,6 +2,6 @@ package core.basesyntax.services;
 
 import java.util.List;
 
-public interface FruitParse {
+public interface FruitParser {
     List<List<String>> readFile(String path);
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.services.FruitParse;
+import core.basesyntax.services.FruitParser;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Parser implements FruitParse {
+public class Parser implements FruitParser {
     @Override
     public List<List<String>> readFile(String path) {
         List<List<String>> result = new ArrayList<>();

@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.services.ActionInterface;
-import core.basesyntax.services.FruitParse;
+import core.basesyntax.services.FruitParser;
 import core.basesyntax.services.ShopInterfaceStrategy;
 import core.basesyntax.services.impl.Parser;
 import core.basesyntax.services.impl.Writer;
@@ -20,8 +20,8 @@ public class FruitShop {
     public void start() {
         Storage storage = new Storage();
         Writer writer = new Writer();
-        FruitParse fruitParse = new Parser();
-        for (List<String> row : fruitParse.readFile(path)) {
+        FruitParser fruitParser = new Parser();
+        for (List<String> row : fruitParser.readFile(path)) {
             ActionInterface action = new ShopInterfaceStrategy().get(row.get(0));
             if (action != null) {
                 Fruit fruit =
