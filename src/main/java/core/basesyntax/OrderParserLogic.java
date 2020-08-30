@@ -13,21 +13,19 @@ import parsers.RefunderOrderParser;
 import parsers.SupplierOrderParser;
 
 public class OrderParserLogic {
-    private OrderParser<SupplierOrder> supplierOrderParser = new SupplierOrderParser();
-    private OrderParser<BuyerOrder> buyerOrderParser = new BuyerOrderParser();
-    private OrderParser<RefunderOrder> refunderOrderParser = new RefunderOrderParser();
 
-    private Map<String, OrderParser> command = new HashMap<>();
+    public static final Map<String, OrderParser> command = new HashMap<>();
 
     {
-        command.put("b", buyerOrderParser);
-        command.put("r", refunderOrderParser);
-        command.put("s", supplierOrderParser);
+        command.put("b", new BuyerOrderParser());
+        command.put("r", new RefunderOrderParser());
+        command.put("s", new SupplierOrderParser());
     }
 
-    public void parse(List<String> line) {
+    public void parseToStorage(List<String> line) {
         AbstractOrder order = command.get(line.get(0)).parse(line);
         ProductCalculator calculator = new ProductCalculator();
+
         if (order instanceof SupplierOrder) {
             calculator.productToStorage((SupplierOrder) order);
         }

@@ -24,10 +24,6 @@ public abstract class AbstractOrder {
         this.quantity = quantity;
     }
 
-    public String getType() {
-        return type;
-    }
-
     public String getProductName() {
         return productName;
     }
@@ -39,5 +35,4 @@ public abstract class AbstractOrder {
     public int getQuantity() {
         return quantity;
     }
-
 }
