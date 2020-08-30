@@ -36,8 +36,7 @@ public class FruitShop {
     }
 
     private void stock(Storage storage) {
-        try {
-            FileWriter writerFile = new FileWriter(STOCK_FILE);
+        try (FileWriter writerFile = new FileWriter(STOCK_FILE);){
             Map<String, Integer> map = new HashMap<>();
             storage.getFruits()
                     .stream()
@@ -55,8 +54,6 @@ public class FruitShop {
             for (Map.Entry<String, Integer> entry : map.entrySet()) {
                 writerFile.write(entry.getKey() + "," + entry.getValue() + "\n");
             }
-            writerFile.close();
-
         } catch (IOException e) {
             throw new RuntimeException("Нет доступа к файлу для записи");
         }
