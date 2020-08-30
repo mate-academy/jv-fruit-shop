@@ -11,10 +11,10 @@ public class FruitOperationStrategy {
 
     public FruitOperationStrategy(Storage storage) {
         this.storage = storage;
-        hashMapInit();
+        initHashMap();
     }
 
-    private void hashMapInit() {
+    private void initHashMap() {
         operationHashMap.put("b", new BuyFruitOperation(storage));
         operationHashMap.put("r", new ReturnFruitOperation(storage));
         operationHashMap.put("s", new SupplyFruitOperation(storage));

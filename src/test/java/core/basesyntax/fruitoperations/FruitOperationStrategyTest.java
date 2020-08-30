@@ -2,7 +2,6 @@ package core.basesyntax.fruitoperations;
 
 import core.basesyntax.model.FruitBatch;
 import core.basesyntax.storage.Storage;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,7 +59,5 @@ public class FruitOperationStrategyTest {
         } catch (IllegalArgumentException e) {
             Assert.assertEquals("No such operation " + WRONG_OP_BATCH.getOperation(), e.getMessage());
         }
-
     }
-
 }
