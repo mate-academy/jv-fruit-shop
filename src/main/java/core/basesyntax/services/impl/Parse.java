@@ -1,6 +1,7 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.services.FruitParse;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class Parse implements FruitParse {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("File read error");
+            throw new RuntimeException("File read error" + path, e);
         }
         return result;
     }
