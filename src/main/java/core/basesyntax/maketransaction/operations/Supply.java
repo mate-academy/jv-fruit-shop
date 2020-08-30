@@ -8,10 +8,10 @@ import java.time.LocalDate;
 
 public class Supply implements IFruitOperation {
     @Override
-    public boolean apply(Transaction transaction, Storage storage) {
+    public boolean apply(Transaction transaction) {
         for (int i = 0; i < transaction.getQuantity(); i++) {
             Fruit fruit = new Fruit(transaction.getFruit(), LocalDate.parse(transaction.getDate()));
-            storage.addFruit(fruit);
+            Storage.addFruit(fruit);
         }
         return true;
     }

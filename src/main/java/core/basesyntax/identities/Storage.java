@@ -7,17 +7,13 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class Storage {
-    private Map<String, List<Fruit>> fruits;
+    private static Map<String, List<Fruit>> fruits  = new HashMap<>();
 
-    public Storage() {
-        this.fruits = new HashMap<>();
-    }
-
-    public Map<String, List<Fruit>> getFruits() {
+    public static Map<String, List<Fruit>> getFruits() {
         return fruits;
     }
 
-    public boolean addFruit(Fruit fruit) {
+    public static boolean addFruit(Fruit fruit) {
         if (!fruits.containsKey(fruit.getType())) {
             fruits.put(fruit.getType(), new ArrayList<>());
         }
@@ -25,7 +21,7 @@ public class Storage {
         return true;
     }
 
-    public boolean removeFruit(Fruit fruit) {
+    public static boolean removeFruit(Fruit fruit) {
         if (fruits.containsKey(fruit.getType()) && !fruits.get(fruit.getType()).isEmpty()) {
             fruits.get(fruit.getType()).remove(fruit);
         } else {
@@ -34,11 +30,15 @@ public class Storage {
         return true;
     }
 
-    public Map<String, Integer> currentAmountOfEachTypeOfFruit() {
+    public static Map<String, Integer> currentAmountOfEachTypeOfFruit() {
         Map<String, Integer> output = new HashMap<>();
         for (Map.Entry<String, List<Fruit>> entry : fruits.entrySet()) {
             output.put(entry.getKey(), entry.getValue().size());
         }
         return output;
+    }
+
+    public static void clear() {
+        fruits  = new HashMap<>();
     }
 }
