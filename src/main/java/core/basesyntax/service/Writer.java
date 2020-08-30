@@ -10,7 +10,10 @@ public class Writer {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write("fruit, quantity" + "\n");
             for (Map.Entry<String, Fruit> item : Fruit.getFruitStorage().entrySet()) {
-                writer.append(item.getKey()).append(", ").append("" + item.getValue().getAmount());
+                writer.append(item.getKey())
+                        .append(", ")
+                        .append("" + item.getValue().getAmount())
+                        .append("\n");
             }
         } catch (IOException e) {
             throw new RuntimeException("Something went wrong with file!");

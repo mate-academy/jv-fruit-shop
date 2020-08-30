@@ -15,14 +15,14 @@ public class WriterTest {
 
     @Before
     public void beforeClass() {
-        List<FruitDto> transactions = reader.readFromFile("src/main/resources/Input.csv");
+        List<FruitDto> transactions = reader.readFromFile("src/main/resources/InputForWriter.csv");
         OperationHandler.handleOperation(transactions);
     }
 
     @Test
     public void testResult() throws IOException {
         writer.write("src/main/resources/Output.csv");
-        List<String> expected = Files.readAllLines(Path.of("src/main/resources/Result.csv"));
+        List<String> expected = Files.readAllLines(Path.of("src/main/resources/WriterTest.csv"));
         List<String> actual = Files.readAllLines(Path.of("src/main/resources/Output.csv"));
         Assert.assertEquals(expected, actual);
     }
