@@ -3,7 +3,6 @@ package core.basesyntax.services.impl;
 import core.basesyntax.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.services.ActionInterface;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
