@@ -55,7 +55,7 @@ public class FruitShopTest {
     @Test
     public void testSecondFile() {
         fruitShop.runFruitShop(INPUT_SECOND_FILE);
-        String expected = "fruit, quantity\nbanana, 210";
+        String expected = "fruit, quantity\nbanana, 130";
         String actual = readResult(REPORT_SECOND_FILE);
         Assert.assertEquals(expected, actual);
     }
