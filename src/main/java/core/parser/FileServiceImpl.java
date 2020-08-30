@@ -1,4 +1,4 @@
-package core.storageParser;
+package core.parser;
 
 import core.exceptions.FileEmptyException;
 import java.io.BufferedReader;

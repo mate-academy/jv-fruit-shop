@@ -1,15 +1,14 @@
 package core.basesyntax;
 
 import core.exceptions.FileEmptyException;
-import core.storageParser.FileService;
-import core.storageParser.FileServiceImpl;
+import core.parser.FileService;
+import core.parser.FileServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 
 

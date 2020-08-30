@@ -1,4 +1,4 @@
-package core.storageParser;
+package core.parser;
 
 import core.storage.Fruit;
 import core.storage.Storage;

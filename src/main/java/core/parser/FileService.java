@@ -1,4 +1,4 @@
-package core.storageParser;
+package core.parser;
 
 import java.util.List;
 
