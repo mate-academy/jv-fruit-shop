@@ -3,6 +3,7 @@ package core.basesyntax.services.impl;
 import core.basesyntax.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.services.ActionInterface;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,17 +24,17 @@ public class Buy implements ActionInterface {
 
         if (summ < fruit.getStock_balance()) {
             throw new RuntimeException("Not enough items in stock");
-        } else {
-            list.forEach(fruit1 -> {
-                if (fruit1.getStock_balance() >= fruit.getStock_balance()) {
-                    fruit1.setStock_balance(fruit1.getStock_balance() - fruit.getStock_balance());
-                    fruit.setStock_balance(0);
-                }
-                if (fruit1.getStock_balance() < fruit.getStock_balance()) {
-                    fruit.setStock_balance(fruit.getStock_balance() - fruit1.getStock_balance());
-                    fruit1.setStock_balance(0);
-                }
-            });
         }
+
+        list.forEach(fruit1 -> {
+            if (fruit1.getStock_balance() >= fruit.getStock_balance()) {
+                fruit1.setStock_balance(fruit1.getStock_balance() - fruit.getStock_balance());
+                fruit.setStock_balance(0);
+            }
+            if (fruit1.getStock_balance() < fruit.getStock_balance()) {
+                fruit.setStock_balance(fruit.getStock_balance() - fruit1.getStock_balance());
+                fruit1.setStock_balance(0);
+            }
+        });
     }
 }
