@@ -1,17 +1,16 @@
 package core.basesyntax.services;
 
-import core.basesyntax.parsers.ParseToCSV;
-import core.basesyntax.parsers.Transaction;
-
+import core.basesyntax.parsers.ParseToFile;
+import core.basesyntax.transactions.Transaction;
 import java.time.LocalDate;
 
 public class Return implements StorageOperation {
 
     @Override
-    public boolean UpdateTransactionTable(String FilePath, String type, Integer quantity, LocalDate expirationDate) {
+    public boolean updateTransactionTable(String filePath, String type,
+                                          Integer quantity, LocalDate expirationDate) {
         Transaction transaction = new Transaction("r", type, quantity, expirationDate);
-        boolean addReturnToCSV = new ParseToCSV().writeToFile(transaction, FilePath);
+        new ParseToFile().writeToFile(transaction, filePath);
         return true;
     }
-
 }

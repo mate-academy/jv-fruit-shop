@@ -1,20 +1,20 @@
 package core.basesyntax.parsers;
 
+import core.basesyntax.transactions.Transaction;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ParseToCSV {
+public class ParseToFile {
 
-    public boolean writeToFile(Transaction transaction, String FilePath) {
+    public void writeToFile(Transaction transaction, String filePath) {
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter(FilePath,true));
+            writer = new BufferedWriter(new FileWriter(filePath,true));
             writer.write(transaction.toString());
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
     }
 }

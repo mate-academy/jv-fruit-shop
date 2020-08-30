@@ -1,37 +1,36 @@
-package core.basesyntax.parsers;
+package core.basesyntax.transactions;
 
 import java.time.LocalDate;
 
 public class Transaction {
-    private String operaton;
+    private String operation;
     private String fruitType;
     private int quantity;
     private LocalDate expirationDate;
+    private Transaction transaction;
 
-    public Transaction() {
-
-    }
-    public Transaction(String operaton, String fruitType, int quantity, LocalDate expirationDate) {
-        this.operaton = operaton;
+    public Transaction(String operation, String fruitType, int quantity, LocalDate expirationDate) {
+        this.operation = operation;
         this.fruitType = fruitType;
         this.quantity = quantity;
         this.expirationDate = expirationDate;
+        this.transaction = transaction;
     }
 
     @Override
     public String toString() {
-        return   "\n" + operaton + "," +
-                 fruitType + "," +
-                 quantity + "," +
-                 expirationDate;
+        return "\n" + operation + ","
+                + fruitType + ","
+                + quantity + ","
+                + expirationDate;
     }
 
-    public String getOperaton() {
-        return operaton;
+    public String getOperation() {
+        return operation;
     }
 
-    public void setOperaton(String operaton) {
-        this.operaton = operaton;
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
 
     public String getFruitType() {

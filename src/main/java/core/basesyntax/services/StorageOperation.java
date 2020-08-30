@@ -3,5 +3,6 @@ package core.basesyntax.services;
 import java.time.LocalDate;
 
 public interface StorageOperation {
-    public boolean UpdateTransactionTable(String FilePath, String type, Integer quantity, LocalDate expirationDate);
+    public boolean updateTransactionTable(String filePath, String type,
+                                          Integer quantity, LocalDate expirationDate);
 }

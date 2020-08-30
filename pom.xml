@@ -94,6 +94,12 @@
                     </execution>
 
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/Main*</exclude>
+                        <exclude>**/ParseToCSV*</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>
