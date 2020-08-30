@@ -30,14 +30,4 @@ public class SupplyOrReturnOperationTest {
         actual = fruitStorage.getListOfFruits().size();
         Assert.assertEquals(1, actual);
     }
-
-    @Test
-    public void enoughFreshOk() {
-        Assert.assertTrue(true);
-    }
-
-    @Test (expected = RuntimeException.class)
-    public void enoughFreshNegativeQuantity() {
-        operation.enoughFresh("banana", LocalDate.now(), -6);
-    }
 }

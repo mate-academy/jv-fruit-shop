@@ -1,12 +1,19 @@
 package core.basesyntax;
 
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvDate;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class FruitTransaction {
+    @CsvBindByName (column = "type")
     private String type;
+    @CsvBindByName (column = "fruit")
     private String fruit;
+    @CsvBindByName (column = "quantity")
     private int quantity;
+    @CsvBindByName (column = "date")
+    @CsvDate ("yyyy-MM-dd")
     private LocalDate date;
 
     public FruitTransaction(String type, String fruit, int quantity, LocalDate date) {

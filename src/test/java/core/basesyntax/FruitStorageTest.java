@@ -30,11 +30,11 @@ public class FruitStorageTest {
         int expected = 1;
         int actual;
         fruitStorage.add(fruitA);
-        actual = fruitStorage.fruits.size();
+        actual = fruitStorage.size();
         Assert.assertEquals(expected, actual);
         expected++;
         fruitStorage.add(fruitA);
-        actual = fruitStorage.fruits.size();
+        actual = fruitStorage.size();
         Assert.assertEquals(expected, actual);
     }
 
@@ -45,17 +45,17 @@ public class FruitStorageTest {
         fruitStorage.add(fruitA);
         fruitStorage.add(fruitB);
 
-        actual = fruitStorage.fruits.size();
+        actual = fruitStorage.size();
         Assert.assertEquals(expected, actual);
 
         fruitStorage.remove(fruitA);
         expected--;
-        actual = fruitStorage.fruits.size();
+        actual = fruitStorage.size();
         Assert.assertEquals(expected, actual);
 
         fruitStorage.remove(fruitB);
         expected--;
-        actual = fruitStorage.fruits.size();
+        actual = fruitStorage.size();
         Assert.assertEquals(expected, actual);
     }
 
@@ -80,7 +80,7 @@ public class FruitStorageTest {
         fruitStorage.add(fruitA);
         fruitStorage.add(fruitB);
         fruitStorage.add(fruitB);
-        List<String> actual = fruitStorage.calculateStocks();
+        List<String> actual = fruitStorage.getReport();
         Assert.assertEquals(expected, actual);
     }
 }

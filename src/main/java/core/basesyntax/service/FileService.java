@@ -1,10 +1,11 @@
 package core.basesyntax.service;
 
+import core.basesyntax.FruitTransaction;
 import java.util.List;
 
 public interface FileService {
 
-    List<String[]> fileReader(String filePath);
+    List<FruitTransaction> readFile(String filePath);
 
-    void fileWriter(String filePath, List<String> output);
+    void writeFile(String filePath, List<String> output);
 }

@@ -4,13 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapOperations {
-    private Map<String, core.basesyntax.service.Operational> mapOperations = new HashMap<>();
+    private Map<String, Operational> mapOperations = new HashMap<>();
 
-    public void addOperation(String key, core.basesyntax.service.Operational operation) {
+    public void addOperation(String key, Operational operation) {
         mapOperations.put(key, operation);
     }
 
-    public core.basesyntax.service.Operational getOperation(String key) {
+    public Operational getOperation(String key) {
         return mapOperations.get(key);
+    }
+
+    public int size() {
+        return mapOperations.size();
     }
 }

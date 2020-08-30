@@ -19,9 +19,6 @@ public class SupplyOrReturnOperation implements Operational {
 
     @Override
     public boolean enoughFresh(String name, LocalDate date, int demand) {
-        if (demand < 0) {
-            throw new RuntimeException("Supplying must be positive");
-        }
         return true;
     }
 }

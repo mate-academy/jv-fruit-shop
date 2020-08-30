@@ -58,8 +58,7 @@ public class BuyOperationTest {
         fruitStorage.add(fruit17);
         fruitStorage.add(fruit18);
         fruitStorage.add(fruit19);
-        boolean a = operation.enoughFresh("banana", LocalDate.parse("2020-10-18"), 3);
-        System.out.println(fruitStorage.getListOfFruits().size());
-        System.out.println(a);
+        boolean actual = operation.enoughFresh("banana", LocalDate.parse("2020-10-18"), 3);
+        Assert.assertFalse(actual);
     }
 }

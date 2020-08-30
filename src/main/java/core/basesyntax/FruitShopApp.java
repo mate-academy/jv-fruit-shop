@@ -5,21 +5,17 @@ import core.basesyntax.service.MapOperations;
 import core.basesyntax.service.Operational;
 import core.basesyntax.service.impl.BuyOperation;
 import core.basesyntax.service.impl.ConvertToFruit;
-import core.basesyntax.service.impl.ConvertToFruitTransaction;
 import core.basesyntax.service.impl.FileServiceImpl;
 import core.basesyntax.service.impl.SupplyOrReturnOperation;
 import java.util.List;
 
-public class Main {
-    public static void main(String[] args) {
+public class FruitShopApp {
+    public void startApp(String inputFile, String outputFile) {
         FileService fileService = new FileServiceImpl();
-        List<String[]> fileData = fileService
-                .fileReader("src\\test\\java\\core\\basesyntax\\resources\\data.csv");
-        ConvertToFruitTransaction converter = new ConvertToFruitTransaction();
-        List<FruitTransaction> convertedData = converter.fileDataToList(fileData);
+        List<FruitTransaction> fileData = fileService.readFile(inputFile);
 
         TransactionStorage transactionStorage = new TransactionStorage();
-        transactionStorage.addAll(convertedData);
+        transactionStorage.addAll(fileData);
 
         FruitStorage fruitStorage = new FruitStorage();
 
@@ -37,9 +33,7 @@ public class Main {
                 operator.apply(fruit);
             }
         }
-        List<String> outputData = fruitStorage.calculateStocks();
-        fileService
-                .fileWriter("src\\test\\java\\core\\basesyntax\\resources\\data_output.csv",
-                        outputData);
+        List<String> outputData = fruitStorage.getReport();
+        fileService.writeFile(outputFile, outputData);
     }
 }

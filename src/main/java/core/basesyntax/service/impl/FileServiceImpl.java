@@ -1,46 +1,41 @@
 package core.basesyntax.service.impl;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
+import com.opencsv.bean.CsvToBeanBuilder;
+import core.basesyntax.FruitTransaction;
+import core.basesyntax.service.FileService;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
-public class FileServiceImpl implements core.basesyntax.service.FileService {
+public class FileServiceImpl implements FileService {
+
+    private static final String FILE_HEADER = "fruit,quantity\n";
+
     @Override
-    public List<String[]> fileReader(String filePath) {
-        List<String[]> data = null;
-        try (FileReader fileReader = new FileReader(filePath);
-                CSVReader read = new CSVReader(fileReader)) {
-            data = read.readAll();
-        } catch (IOException | CsvException e) {
-            throw new RuntimeException("Error occured");
+    public List<FruitTransaction> readFile(String filePath) {
+        FileReader fileReader;
+        try {
+            fileReader = new FileReader(filePath);
+        } catch (IOException e) {
+            throw new RuntimeException("Error occured", e);
         }
-        return data;
+        return new CsvToBeanBuilder<FruitTransaction>(fileReader)
+                .withType(FruitTransaction.class)
+                .build()
+                .parse();
     }
 
     @Override
-    public void fileWriter(String filePath, List<String> output) {
-        Path path = Paths.get(filePath);
-        if (!Files.exists(path)) {
-            try {
-                Files.createFile(path);
-            } catch (IOException e) {
-                throw new RuntimeException("Check if the file path is correct");
-            }
-        }
+    public void writeFile(String filePath, List<String> output) {
         try (FileWriter fileWriter = new FileWriter(filePath)) {
-            fileWriter.write("fruit,quantity\n");
+            fileWriter.write(FILE_HEADER);
             for (String line : output) {
                 fileWriter.write(line);
                 fileWriter.write("\n");
             }
         } catch (IOException e) {
-            throw new RuntimeException("Check if the file path is correct");
+            throw new RuntimeException("Check if the file path is correct", e);
         }
     }
 }

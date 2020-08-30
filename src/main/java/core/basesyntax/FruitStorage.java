@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class FruitStorage {
-    List<Fruit> fruits = new ArrayList<>();
+    private List<Fruit> fruits = new ArrayList<>();
 
     public void add(Fruit fruit) {
         fruits.add(fruit);
@@ -26,9 +26,9 @@ public class FruitStorage {
         return fruits;
     }
 
-    public List<String> calculateStocks() {
+    public List<String> getReport() {
         List<String> list = new ArrayList<>();
-        String line = "";
+        String line;
         Set<String> names = fruits.stream()
                 .map(Fruit::getName)
                 .collect(Collectors.toSet());
@@ -40,5 +40,9 @@ public class FruitStorage {
             list.add(line);
         }
         return list;
+    }
+
+    public int size() {
+        return fruits.size();
     }
 }
