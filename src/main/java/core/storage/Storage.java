@@ -1,13 +1,12 @@
 package core.storage;
 
 import core.exceptions.NoFruitsEnoughException;
-
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashMap;
-import java.util.ArrayList;
 
 public class Storage implements FruitOperations {
     private Map<Fruit, Integer> fruitBay;
@@ -57,18 +56,21 @@ public class Storage implements FruitOperations {
     }
 
     public void apply(Fruit fruit, int quantity, String operator) throws NoSuchMethodException {
-        if (!operators.contains(operator)) {
-            throw new NoSuchMethodException("Operator \"" + operator + "\" is not defined");
-        }
         switch (operator) {
             case "s": {
                 supply(fruit, quantity);
+                break;
             }
             case "r": {
                 refund(fruit, quantity);
+                break;
             }
             case "b": {
                 buy(fruit, quantity);
+                break;
+            }
+            default: {
+                throw new NoSuchMethodException("Operator \"" + operator + "\" is not defined");
             }
         }
     }

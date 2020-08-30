@@ -1,5 +1,6 @@
 package core.storageParser;
 
+import core.exceptions.FileEmptyException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -25,9 +26,9 @@ public class FileServiceImpl implements FileService {
         this.fullPath = path + fileName + extension;
     }
 
-    public FileServiceImpl(String path, String extension, String fileName) {
+    public FileServiceImpl(String path, String fileName) {
         this.path = path;
-        this.extension = extension;
+        this.extension = ".csv";
         this.fileName = fileName;
         this.fullPath = path + fileName + extension;
     }
@@ -43,7 +44,7 @@ public class FileServiceImpl implements FileService {
     }
 
     public String getPath() {
-        return path;
+        return fullPath;
     }
 
     public void setPath(String path) {
@@ -61,12 +62,16 @@ public class FileServiceImpl implements FileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (lines.isEmpty()) {
+            throw new FileEmptyException("File is empty");
+        }
         lines.remove(0);
         return lines;
     }
 
     @Override
-    public boolean writeFile(List<String> text) {
+    public boolean writeFile(List<String> text, String fileName) {
+        setFileName(fileName);
         Path path = Paths.get(fullPath);
         try {
             Files.deleteIfExists(path);
@@ -74,7 +79,7 @@ public class FileServiceImpl implements FileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (FileWriter fw = new FileWriter(path + fileName + extension)) {
+        try (FileWriter fw = new FileWriter(fullPath)) {
             fw.write(topLine);
             for (String line : text) {
                 fw.write(line + "\n");

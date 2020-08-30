@@ -2,7 +2,6 @@ package core.storageParser;
 
 import core.storage.Fruit;
 import core.storage.Storage;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -31,8 +30,7 @@ public class FruitDto {
             }
         }
         fileName = "Fruit Out";
-        fileService.setFileName(fileName);
-        fileService.writeFile(storage.toList());
+        fileService.writeFile(storage.toList(), fileName);
         return true;
     }
 }

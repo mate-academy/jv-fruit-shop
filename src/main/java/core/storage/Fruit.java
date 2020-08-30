@@ -2,7 +2,6 @@ package core.storage;
 
 import java.time.LocalDate;
 
-
 public class Fruit {
     private String type;
     private LocalDate expireDate;

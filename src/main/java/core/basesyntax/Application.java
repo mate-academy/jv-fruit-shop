@@ -3,20 +3,17 @@ package core.basesyntax;
 import core.storage.Fruit;
 import core.storage.Storage;
 import core.storageParser.FileServiceImpl;
-
 import java.time.LocalDate;
 import java.util.List;
 
 public class Application {
-    String defaultSeparator = ",";
-    Storage storage = new Storage();
+    private String defaultSeparator = ",";
+    private Storage storage = new Storage();
 
     public void application() {
         String path = "src/test/resources/";
         String fileName = "Fruit In";
-        FileServiceImpl fileService = new FileServiceImpl();
-        fileService.setPath(path);
-        fileService.setFileName(fileName);
+        FileServiceImpl fileService = new FileServiceImpl(path, fileName);
         List<String> text = fileService.readFile();
         for (String line : text) {
             String[] info = line.split(defaultSeparator);
@@ -32,7 +29,6 @@ public class Application {
             }
         }
         fileName = "Fruit Out";
-        fileService.setFileName(fileName);
-        fileService.writeFile(storage.toList());
+        fileService.writeFile(storage.toList(), fileName);
     }
 }
