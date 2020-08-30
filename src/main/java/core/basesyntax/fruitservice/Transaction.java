@@ -9,6 +9,9 @@ public class Transaction {
     private Integer quantity;
     private LocalDate date;
 
+    public Transaction() {
+    }
+
     public Transaction(String operation, String product, String quantity, String date) {
         this.operation = operation;
         this.product = product;
@@ -25,9 +28,9 @@ public class Transaction {
             return false;
         }
         Transaction that = (Transaction) o;
-        return quantity == that.quantity
-                && Objects.equals(operation, that.operation)
+        return Objects.equals(operation, that.operation)
                 && Objects.equals(product, that.product)
+                && Objects.equals(quantity, that.quantity)
                 && Objects.equals(date, that.date);
     }
 
@@ -54,5 +57,17 @@ public class Transaction {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }
