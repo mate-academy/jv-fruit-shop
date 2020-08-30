@@ -21,7 +21,7 @@ public class FileReadServiceImplementation implements FileReadService {
                 dataFromFile.add(Arrays.asList(line.split(SEPARATOR_TO_SPLIT)));
             }
         } catch (IOException e) {
-            throw new RuntimeException("Unable to read file, reason: " + e.getMessage());
+            throw new RuntimeException("Unable to read file, reason: " + filePath, e);
         }
         return dataFromFile;
     }

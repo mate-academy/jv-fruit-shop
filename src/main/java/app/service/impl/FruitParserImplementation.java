@@ -19,7 +19,7 @@ public class FruitParserImplementation implements FruitParser {
                     LocalDate.parse(data.get(END_OF_SHELF_LIFE_INDEX)));
         } catch (DateTimeParseException e) {
             throw new RuntimeException("Wrong date in line with " + data.get(FRUIT_NAME_INDEX)
-                    + "," + data.get(QUANTITY_INDEX) + "," + data.get(END_OF_SHELF_LIFE_INDEX));
+                    + "," + data.get(QUANTITY_INDEX) + "," + data.get(END_OF_SHELF_LIFE_INDEX), e);
         }
     }
 }
