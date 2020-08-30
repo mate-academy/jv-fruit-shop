@@ -21,6 +21,9 @@ public class ReaderFromFile implements FileService {
         }
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             while (!((line = br.readLine()) == null)) {
+                if (line.contains("type,fruit,quantity,date")) {
+                    continue;
+                }
                 List<String> singleLine = Arrays.asList(line.split(","));
                 if (singleLine.size() == 4) {
                     orders.add(singleLine);
@@ -30,9 +33,6 @@ public class ReaderFromFile implements FileService {
             }
         } catch (IOException e) {
             throw new RuntimeException("This file does not exist!", e);
-        }
-        if (orders.size() != 0 && orders.get(0).contains("type,fruit,quantity,date")) {
-            orders.remove(0);
         }
         return orders;
     }
