@@ -15,7 +15,7 @@ public class Box {
 
     public Box(FruitPack product) {
         box = new HashMap<>();
-        this.putProduct(product);
+        putProduct(product);
     }
 
     public Box putProduct(FruitPack product) {

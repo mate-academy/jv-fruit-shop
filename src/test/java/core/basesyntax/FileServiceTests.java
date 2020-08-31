@@ -18,9 +18,11 @@ public class FileServiceTests {
     public static final String SECOND_FILE = "test2.csv";
     public static final String THIRD_FILE = "test3.csv";
     public static final String FOURTH_FILE = "test4.csv";
+    public static final String ELEVENTH_FILE = "test11.csv";
     public static final String FIRST_INPUT_DATA = "s, banana, 2020-10-17, 10";
     public static final String INVALID_DATA_FORMAT = "s,banana,2020-10-17,10";
-    public static final String LACK_OF_ARGUMENTS = "2020-08-30";
+    public static final String LACK_OF_ARGS_MESSAGE = "2020-08-30";
+    public static final String NO_FILE_MESSAGE = "No such file found";
     public static final String INVALID_ARGUMENTS_ORDER = "s, banana, 10, 2020-10-17";
     public static final String EMPTY = "";
     public static final Reader READER = new Reader(DIR_PATH);
@@ -38,9 +40,27 @@ public class FileServiceTests {
     public static final ProductDto MANGO_PRODUCT_COMPLEX = new ProductDto(new Supplier(),
             "mango", LocalDate.parse("2020-10-20"), 250);
 
-    @Test(expected = IOException.class)
-    public void ReaderTestException() throws IOException {
-        READER.readFile("12345");
+    @Test
+    public void ReaderTestException() {
+        String actual = EMPTY;
+        try {
+            READER.readFile("12345");
+        } catch (IOException exception) {
+            actual = exception.getMessage();
+        }
+        Assert.assertEquals(NO_FILE_MESSAGE, actual);
+        try {
+            READER.readFile(ELEVENTH_FILE);
+        } catch (IOException exception) {
+            actual = exception.getMessage();
+        }
+        Assert.assertEquals(NO_FILE_MESSAGE, actual);
+        try {
+            READER.readFile(null);
+        } catch (IOException exception) {
+            actual = exception.getMessage();
+        }
+        Assert.assertEquals(NO_FILE_MESSAGE, actual);
     }
 
     @Test
@@ -107,7 +127,7 @@ public class FileServiceTests {
     public void ParserLackOfArgsTest() {
         String actual = EMPTY;
         List<String> readData = new ArrayList<>();
-        readData.add(LACK_OF_ARGUMENTS);
+        readData.add(LACK_OF_ARGS_MESSAGE);
         try {
             PARSER.parseData(readData);
         } catch (RuntimeException exception) {
