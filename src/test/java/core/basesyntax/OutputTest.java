@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.FruitBox;
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.ReadOperationFromFileService;
-import core.basesyntax.service.StorageService;
+import core.basesyntax.service.StorageContent;
 import core.basesyntax.service.WriteIntoFileService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -50,7 +50,7 @@ public class OutputTest {
                     = new ReadOperationFromFileService();
             readOperationFromFileService.read(FIRST_PATH);
 
-            StorageService<FruitBox> storageService = new StorageService<>();
+            StorageContent<FruitBox> storageService = new StorageContent<>();
             String storageContent = storageService.getStorage();
 
             WriteIntoFileService writeIntoFileService = new WriteIntoFileService();

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.FruitBox;
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.ReadOperationFromFileService;
-import core.basesyntax.service.StorageService;
+import core.basesyntax.service.StorageContent;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -40,7 +40,7 @@ public class StorageTest {
                 = new ReadOperationFromFileService();
         readOperationFromFileService.read(FIRST_PATH);
 
-        StorageService<FruitBox> storageService = new StorageService<>();
+        StorageContent<FruitBox> storageService = new StorageContent<>();
         String storageContent = storageService.getStorage();
 
         assertEquals("banana,95\n", storageContent);
@@ -53,7 +53,7 @@ public class StorageTest {
                     = new ReadOperationFromFileService();
             readOperationFromFileService.read(FIFTH_PATH);
 
-            StorageService storageService = new StorageService<>();
+            StorageContent storageService = new StorageContent<>();
             storageService.getStorage();
             Assert.fail("We had to get an exception");
         } catch (NullPointerException e) {
@@ -66,7 +66,7 @@ public class StorageTest {
     public void storageTest() {
         ReadOperationFromFileService readFromFileService = new ReadOperationFromFileService();
         readFromFileService.read(FIRST_PATH);
-        StorageService storageService = new StorageService();
+        StorageContent storageService = new StorageContent();
         assertEquals("banana,95\n", storageService.getStorage());
     }
 }

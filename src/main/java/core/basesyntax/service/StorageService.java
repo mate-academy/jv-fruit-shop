@@ -1,29 +1,60 @@
 package core.basesyntax.service;
 
+import core.basesyntax.impl.Supplier;
 import core.basesyntax.model.FruitBox;
 import core.basesyntax.model.Storage;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.NoSuchElementException;
 
-public class StorageService<T> {
-    private StringBuilder fruitsString = new StringBuilder();
-    private Map<String, Integer> storageContent = new LinkedHashMap<>();
+public class StorageService {
+    public void addProduct(FruitBox fruit) {
+        if (Storage.storage.peek() == null) {
+            Storage.storage.add(fruit);
+            return;
+        }
+        if (Storage.storage.peek().getExpiryDate().equals(fruit.getExpiryDate())) {
+            Storage.storage.peek().setAmount(Storage.storage.peek().getAmount()
+                    + fruit.getAmount());
+            return;
+        }
+        if (fruit.getExpiryDate().isBefore(Storage.storage.peek().getExpiryDate())) {
+            Storage.storage.addFirst(fruit);
+            return;
+        }
+        Storage.storage.add(fruit);
+    }
 
-    public String getStorage() {
-        for (FruitBox fruitBox : Storage.storage) {
-            if (storageContent.containsKey(fruitBox.getName())) {
-                storageContent.replace(fruitBox.getName(),
-                        storageContent.get(fruitBox.getName()) + fruitBox.getAmount());
-            } else {
-                storageContent.put(fruitBox.getName(), fruitBox.getAmount());
-            }
+    public void sellProduct(FruitBox fruit) {
+        if (Storage.storage.peek() == null) {
+            throw new NullPointerException("No fruits in storage");
         }
-        for (String key : storageContent.keySet()) {
-            fruitsString.append(key)
-                    .append(",")
-                    .append(storageContent.get(key))
-                    .append("\n");
+        if (fruit.getAmount() > Storage.storage.peek().getAmount()
+                && Storage.storage.size() > 1) {
+            int oldAmount = Storage.storage.poll().getAmount();
+            Storage.storage.peek().setAmount(
+                    Storage.storage.peek().getAmount() + oldAmount);
+            Storage.storage.peek().setAmount(
+                    Storage.storage.peek().getAmount() - fruit.getAmount());
+            FruitCounter.fruitCounter += fruit.getAmount();
+        } else if (fruit.getAmount() <= Storage.storage.peek().getAmount()) {
+            Storage.storage
+                    .peek()
+                    .setAmount(Storage.storage
+                            .peek()
+                            .getAmount() - fruit.getAmount());
+            FruitCounter.fruitCounter += fruit.getAmount();
+        } else {
+            throw new NoSuchElementException("Not enough fruits in storage");
         }
-        return fruitsString.toString();
+    }
+
+    public void returnProduct(FruitBox fruit) {
+        LocalDate dateNow = LocalDate.now();
+        Operator<FruitBox> supplier = new Supplier();
+        if (FruitCounter.fruitCounter < fruit.getAmount()
+                || fruit.getExpiryDate().isBefore(dateNow)) {
+            throw new RuntimeException("We can not accept this fruits!");
+        }
+        supplier.execute(fruit);
     }
 }

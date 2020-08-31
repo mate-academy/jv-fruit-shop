@@ -1,6 +1,6 @@
 import core.basesyntax.model.FruitBox;
 import core.basesyntax.service.ReadOperationFromFileService;
-import core.basesyntax.service.StorageService;
+import core.basesyntax.service.StorageContent;
 import core.basesyntax.service.WriteIntoFileService;
 
 public class Main {
@@ -9,7 +9,7 @@ public class Main {
                 = new ReadOperationFromFileService();
         readOperationFromFileService.read("src/fruitsTest.csv");
 
-        StorageService<FruitBox> storageService = new StorageService<>();
+        StorageContent<FruitBox> storageService = new StorageContent<>();
         String storageContent = storageService.getStorage();
 
         WriteIntoFileService writeIntoFileService = new WriteIntoFileService();

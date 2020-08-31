@@ -52,7 +52,7 @@ public class ConsumerTest {
                     = new ReadOperationFromFileService();
             readOperationFromFileService.read("");
 
-            StorageService storageService = new StorageService<>();
+            StorageContent storageService = new StorageContent<>();
             String storageContent = storageService.getStorage();
 
             Assert.fail("We had to get an exception");

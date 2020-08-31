@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.FruitBox;
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.ReadOperationFromFileService;
-import core.basesyntax.service.StorageService;
+import core.basesyntax.service.StorageContent;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +37,7 @@ public class SupplierTest {
                 = new ReadOperationFromFileService();
         readOperationFromFileService.read(SECOND_PATH);
 
-        StorageService<FruitBox> storageService = new StorageService<>();
+        StorageContent<FruitBox> storageService = new StorageContent<>();
         String storageContent = storageService.getStorage();
 
         assertEquals("banana,5\n", storageContent);
@@ -46,7 +46,7 @@ public class SupplierTest {
         readOperationFromFileService = new ReadOperationFromFileService();
         readOperationFromFileService.read(THIRD_PATH);
 
-        storageService = new StorageService<>();
+        storageService = new StorageContent<>();
         storageContent = storageService.getStorage();
 
         assertEquals("banana,90\n", storageContent);

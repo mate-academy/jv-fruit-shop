@@ -12,7 +12,6 @@ public class ReadOperationFromFileService {
     public void read(String filePath) {
         FruitBoxDtoParser fruitParser = new FruitBoxDtoParser();
         FruitBox fruit;
-
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
