@@ -8,10 +8,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Writer {
-    private static final String STOCK_FILE = "src/main/resources/stock.csv";
+    private  String stockFile;
+
+    public Writer(String stockFile) {
+        this.stockFile = stockFile;
+    }
 
     public void doWrite(Storage storage) {
-        try (FileWriter writerFile = new FileWriter(STOCK_FILE)) {
+        try (FileWriter writerFile = new FileWriter(stockFile)) {
             Map<String, Integer> map = new HashMap<>();
             storage.getFruits()
                     .stream()

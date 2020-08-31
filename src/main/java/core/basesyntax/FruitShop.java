@@ -13,6 +13,7 @@ import java.util.List;
 public class FruitShop {
     private final String path;
     private Storage storage;
+    private static final String STOCK_FILE = "src/main/resources/stock.csv";
 
     public FruitShop(String path) {
         this.path = path;
@@ -20,7 +21,7 @@ public class FruitShop {
     }
 
     public void start() {
-        Writer writer = new Writer();
+        Writer writer = new Writer(STOCK_FILE);
         FruitParser fruitParser = new Parser();
         for (List<String> row : fruitParser.readFile(path)) {
             ActionInterface action = new ShopInterfaceStrategy(storage).get(row.get(0));
