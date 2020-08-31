@@ -4,14 +4,10 @@ import core.basesyntax.operations.BuyOperation;
 import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.StoreOperation;
 import core.basesyntax.operations.SupplyOperation;
-import core.basesyntax.service.ConverterCsvToTransaction;
-import core.basesyntax.service.InputFileService;
-import core.basesyntax.service.OutputFileService;
-import core.basesyntax.service.impl.InputFileServiceImpl;
-import core.basesyntax.service.impl.OutputFileServiceImpl;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -22,8 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OutputFileServiceTest {
-    private static OutputFileService outputFileService = new OutputFileServiceImpl();
+public class FileWriterTest {
+    private static FileWriterService outputFileService = new FileWriterServiceImpl();
     private static Storage storage = new Storage();
     public static final String TEST_INPUT_FILE = "src/main/resources/OutputFile.csv";
 
@@ -53,10 +49,22 @@ public class OutputFileServiceTest {
             storeOperationMap.get(transaction.getOperation()).performOperation(transaction);
         }
 
-        outputFileService.writeToFile(TEST_INPUT_FILE, storage.getFruitsQuantity());
+        Map<String, Integer> fruitsQuantity = storage.getFruitsQuantityByType();
+        StringBuilder result = new StringBuilder();
+        result.append("fruit,quantity");
+        for (Map.Entry<String, Integer> entry: fruitsQuantity.entrySet()) {
+            result.append("\n").append(entry.getKey()).append(",").append(entry.getValue());
+        }
+
+        outputFileService.writeToFile(TEST_INPUT_FILE, result.toString());
 
         List<String> expected = Files.readAllLines(Paths.get("src/main/resources/testInput.csv"));
         List<String> actual = Files.readAllLines(Paths.get("src/main/resources/OutputFile.csv"));
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void outputFileFailTest() {
+        outputFileService.writeToFile("someF/ ile", "some text");
     }
 }

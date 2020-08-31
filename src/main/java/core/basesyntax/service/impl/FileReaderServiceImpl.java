@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.InputFileService;
+import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class InputFileServiceImpl implements InputFileService {
+public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public List<List<String>> readFile(String filePath) {
         if (!filePath.endsWith(".csv")) {

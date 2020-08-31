@@ -9,9 +9,6 @@ public class Transaction {
     private int quantity;
     private LocalDate date;
 
-    public Transaction() {
-    }
-
     public Transaction(String operation, String fruitName, int quantity, LocalDate date) {
         this.operation = operation;
         this.fruitName = fruitName;

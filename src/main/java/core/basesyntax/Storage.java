@@ -1,10 +1,15 @@
 package core.basesyntax;
 
+import core.basesyntax.operations.BuyOperation;
+import core.basesyntax.operations.ReturnOperation;
+import core.basesyntax.operations.StoreOperation;
+import core.basesyntax.operations.SupplyOperation;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Storage {
@@ -29,10 +34,8 @@ public class Storage {
         }
     }
 
-    public String getFruitsQuantity() {
-        StringBuilder result = new StringBuilder();
+    public Map<String, Integer> getFruitsQuantityByType() {
         Map<String, Integer> fruitsQuantity = new HashMap<>();
-        
         List<String> kindOfFruits = storage.stream()
                 .map(Fruit::getFruitName)
                 .distinct()
@@ -45,10 +48,34 @@ public class Storage {
                     .count();
             fruitsQuantity.put(kindOfFruits.get(i), fruitQuantity);
         }
-        result.append("fruit,quantity");
-        for (Map.Entry<String, Integer> entry: fruitsQuantity.entrySet()) {
-            result.append("\n").append(entry.getKey()).append(",").append(entry.getValue());
+        return fruitsQuantity;
+    }
+
+    public void fillStorage(List<Transaction> transactions) {
+        Map<String, StoreOperation> storeOperationMap = new HashMap<>();
+        storeOperationMap.put("s", new SupplyOperation(this));
+        storeOperationMap.put("b", new BuyOperation(this));
+        storeOperationMap.put("r", new ReturnOperation(this));
+
+        for (Transaction transaction : transactions) {
+            storeOperationMap.get(transaction.getOperation()).performOperation(transaction);
         }
-        return result.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Storage storage1 = (Storage) o;
+        return Objects.equals(storage, storage1.storage);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(storage);
     }
 }

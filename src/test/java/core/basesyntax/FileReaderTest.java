@@ -1,13 +1,13 @@
 package core.basesyntax;
 
-import core.basesyntax.service.impl.InputFileServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputFileServiceTest {
-    private static InputFileServiceImpl inputFileService = new InputFileServiceImpl();
+public class FileReaderTest {
+    private static FileReaderServiceImpl inputFileService = new FileReaderServiceImpl();
     public static final String TXT_FILE = "src/main/resources/test.txt";
     public static final String FILE_OK = "src/main/resources/testOK.csv";
     public static final String FILE_WRONG_DATA = "src/main/resources/testWrongData.csv";

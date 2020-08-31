@@ -4,9 +4,7 @@ import core.basesyntax.operations.BuyOperation;
 import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.StoreOperation;
 import core.basesyntax.operations.SupplyOperation;
-import core.basesyntax.service.ConverterCsvToTransaction;
-import core.basesyntax.service.InputFileService;
-import core.basesyntax.service.impl.InputFileServiceImpl;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 import java.time.LocalDate;
@@ -17,21 +15,26 @@ import java.util.List;
 import java.util.Map;
 
 public class StorageTest {
-    private static final String RESULT_STRING = "fruit,quantity\n" +
-            "banana,93\n" +
-            "orange,50";
+    private static Storage storage;
+    private static Transaction transaction1 = new Transaction("s", "banana", 100,
+            LocalDate.parse("2020-10-18", DateTimeFormatter.ISO_LOCAL_DATE));
+    private static Transaction transaction2 = new Transaction("b", "banana", 17,
+            LocalDate.parse("2020-10-17", DateTimeFormatter.ISO_LOCAL_DATE));
+    private static Transaction transaction3 = new Transaction("r", "banana", 10,
+            LocalDate.parse("2020-10-18", DateTimeFormatter.ISO_LOCAL_DATE));
+    private static Transaction transaction4 = new Transaction("s", "orange", 50,
+            LocalDate.parse("2020-10-17", DateTimeFormatter.ISO_LOCAL_DATE));
+
+    @Before
+    public void prepareStorage() {
+        storage = new Storage();
+    }
 
     @Test
-    public void getFruitsQuantityTest1() {
-        Storage storage = new Storage();
-        Transaction transaction1 = new Transaction("s", "banana", 100,
-                LocalDate.parse("2020-10-18", DateTimeFormatter.ISO_LOCAL_DATE));
-        Transaction transaction2 = new Transaction("b", "banana", 17,
-                LocalDate.parse("2020-10-17", DateTimeFormatter.ISO_LOCAL_DATE));
-        Transaction transaction3 = new Transaction("r", "banana", 10,
-                LocalDate.parse("2020-10-18", DateTimeFormatter.ISO_LOCAL_DATE));
-        Transaction transaction4 = new Transaction("s", "orange", 50,
-                LocalDate.parse("2020-10-17", DateTimeFormatter.ISO_LOCAL_DATE));
+    public void getFruitsQuantityTest() {
+        Map<String, Integer> expectedFruitsQuantity = new HashMap<>();
+        expectedFruitsQuantity.put("banana", 93);
+        expectedFruitsQuantity.put("orange", 50);
 
         List<Transaction> transactions = new ArrayList<>();
         transactions.add(transaction1);
@@ -48,6 +51,26 @@ public class StorageTest {
             storeOperationMap.get(transaction.getOperation()).performOperation(transaction);
         }
 
-        Assert.assertEquals(storage.getFruitsQuantity(), RESULT_STRING);
+        Assert.assertEquals(storage.getFruitsQuantityByType(), expectedFruitsQuantity);
+    }
+
+    @Test
+    public void fillStorageOkTest() {
+        Storage expectedStorage = new Storage();
+        for(int i = 0; i < 83; i++) {
+            expectedStorage.addFruit(new Fruit("banana",
+                    LocalDate.parse("2020-10-18", DateTimeFormatter.ISO_LOCAL_DATE)));
+        }
+        for(int i = 0; i < 50; i++) {
+            expectedStorage.addFruit(new Fruit("orange",
+                    LocalDate.parse("2020-10-17", DateTimeFormatter.ISO_LOCAL_DATE)));
+        }
+
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.add(transaction1);
+        transactions.add(transaction2);
+        transactions.add(transaction4);
+        storage.fillStorage(transactions);
+        Assert.assertEquals(expectedStorage, storage);
     }
 }

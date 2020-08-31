@@ -1,37 +1,30 @@
 package core.basesyntax;
 
-import core.basesyntax.operations.BuyOperation;
-import core.basesyntax.operations.ReturnOperation;
-import core.basesyntax.operations.StoreOperation;
-import core.basesyntax.operations.SupplyOperation;
-import core.basesyntax.service.ConverterCsvToTransaction;
-import core.basesyntax.service.InputFileService;
-import core.basesyntax.service.impl.InputFileServiceImpl;
-import java.util.ArrayList;
-import java.util.HashMap;
+import core.basesyntax.service.ConverterCsvToTransactions;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        InputFileService fileService = new InputFileServiceImpl();
-        List<List<String>> fileStrings = fileService.readFile("src/main/resources/testOK.csv");
-
-        ConverterCsvToTransaction converter = new ConverterCsvToTransaction();
-        List<Transaction> transactions = new ArrayList<>();
-        for (List<String> data : fileStrings) {
-            Transaction transaction = converter.convert(data);
-            transactions.add(transaction);
-        }
-
+        FileReaderService fileReader = new FileReaderServiceImpl();
+        List<List<String>> fileStrings = fileReader.readFile("src/main/resources/testOK.csv");
+        ConverterCsvToTransactions converter = new ConverterCsvToTransactions();
+        List<Transaction> transactions = converter.convert(fileStrings);
         Storage storage = new Storage();
-        Map<String, StoreOperation> storeOperationMap = new HashMap<>();
-        storeOperationMap.put("s", new SupplyOperation(storage));
-        storeOperationMap.put("b", new BuyOperation(storage));
-        storeOperationMap.put("r", new ReturnOperation(storage));
+        storage.fillStorage(transactions);
 
-        for (Transaction transaction : transactions) {
-            storeOperationMap.get(transaction.getOperation()).performOperation(transaction);
+        Map<String, Integer> fruitsQuantity = storage.getFruitsQuantityByType();
+        StringBuilder result = new StringBuilder();
+        result.append("fruit,quantity");
+        for (Map.Entry<String, Integer> entry: fruitsQuantity.entrySet()) {
+            result.append("\n").append(entry.getKey()).append(",").append(entry.getValue());
         }
+
+        FileWriterService fileWriter = new FileWriterServiceImpl();
+        fileWriter.writeToFile("src/main/resources/OutputFile.csv", result.toString());
     }
 }

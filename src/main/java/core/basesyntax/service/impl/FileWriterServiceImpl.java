@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.OutputFileService;
+import core.basesyntax.service.FileWriterService;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class OutputFileServiceImpl implements OutputFileService {
+public class FileWriterServiceImpl implements FileWriterService {
 
     @Override
     public void writeToFile(String fileName, String text) {
