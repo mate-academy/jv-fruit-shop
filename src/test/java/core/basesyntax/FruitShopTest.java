@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FruitShopTest {
-
     private static final String EMPTY_FILE = "src/main/resources/Empty.csv";
     private static final String WRONG_DATA_FILE = "src/main/resources/WrongDate.csv";
     private static final String MANY_FRUITS = "src/main/resources/Input.csv";

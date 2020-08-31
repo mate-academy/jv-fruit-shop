@@ -8,7 +8,6 @@ import java.util.Map;
 
 public class FruitFileWriter {
     public static void fileCompile(List<Fruit> report) throws IOException {
-        String outputFilePath = null;
         File file = new File("Report");
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file))) {
             bufferedWriter.write("fruit" + "," + "quantity");
