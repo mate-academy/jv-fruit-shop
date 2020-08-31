@@ -1,29 +1,29 @@
 package parsers;
 
-import dto.BuyerOrder;
-import dto.RefunderOrder;
-import dto.SupplierOrder;
+import core.basesyntax.service.FileService;
+import java.util.List;
+import org.junit.Assert;
 import org.junit.Test;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 public class OrderParserTest {
-    SupplierOrder supplierOrder = new SupplierOrder();
-    BuyerOrder buyerOrder = new BuyerOrder();
-    RefunderOrder refunderOrder = new RefunderOrder();
+    FileService fileService = new FileService();
+    OrderParser orderParser = new OrderParser();
 
-    @Test(expected = DateTimeParseException.class)
-    public void incorrectDateInputTest() {
-        supplierOrder.setDate(LocalDate.parse("blablabla"));
-        buyerOrder.setDate(LocalDate.parse("blablabla"));
-        refunderOrder.setDate(LocalDate.parse("blablabla"));
+    @Test
+    public void orderParserTest() {
+        List<String> line = fileService.readFile("src/test/java/resourses/test5.csv");
+        String actual = line.get(0);
+        String expected = "b,banana,50,2020-10-15";
+        Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = NumberFormatException.class)
-    public void incorrectAmountInputTest() {
-        supplierOrder.setQuantity(Integer.parseInt("blablabla"));
-        buyerOrder.setQuantity(Integer.parseInt("blablabla"));
-        refunderOrder.setQuantity(Integer.parseInt("blablabla"));
+    @Test(expected = RuntimeException.class)
+    public void WrongAmountTest() {
+        orderParser.parse("s,banana,blablabla,2020-10-17");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void WrongDateTest() {
+        orderParser.parse("s,banana,121,blablabla");
     }
 }
