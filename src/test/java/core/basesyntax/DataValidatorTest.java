@@ -1,4 +1,4 @@
-package core.basesyntax.resources;
+package core.basesyntax;
 
 import core.basesyntax.DataValidator;
 import core.basesyntax.exeptions.NotValidDataException;

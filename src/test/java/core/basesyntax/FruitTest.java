@@ -1,4 +1,4 @@
-package core.basesyntax.resources;
+package core.basesyntax;
 
 import core.basesyntax.Fruit;
 import org.junit.Assert;

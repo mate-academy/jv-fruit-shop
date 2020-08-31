@@ -1,11 +1,11 @@
-package core.basesyntax.resources;
+package core.basesyntax;
 
 import core.basesyntax.ReadFromFile;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ReadFromFileTest {
-    private static final String FIRST_FILE_NAME = "txt1.csv";
+    private static final String FIRST_FILE_NAME = "src/test/resources/txt1.csv";
     public final static String FIRST_INPUT_DATA = "type,fruit,quantity,date";
 
     @Test

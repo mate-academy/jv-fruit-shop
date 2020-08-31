@@ -1,4 +1,4 @@
-package core.basesyntax.resources;
+package core.basesyntax;
 
 import core.basesyntax.*;
 import core.basesyntax.exeptions.NotEnoughFruitsException;
@@ -11,11 +11,11 @@ public class OperationWithFruitsTest {
     public static DataValidator dataValidator = new DataValidator();
     public static ReadFromFile reader = new ReadFromFile();
     public static OperationWithFruits operation = new OperationWithFruits();
-    private static final String FIRST_FILE_NAME = "txt2.csv";
-    private static final String SECOND_FILE_NAME = "txt3.csv";
-    private static final String THIRD_FILE_NAME = "txt4.csv";
-    private static final String FOURTH_FILE_NAME = "txt6.csv";
-    private static final String FIFTH_FILE_NAME = "txt5.csv";
+    private static final String FIRST_FILE_NAME = "src/test/resources/txt2.csv";
+    private static final String SECOND_FILE_NAME = "src/test/resources/txt3.csv";
+    private static final String THIRD_FILE_NAME = "src/test/resources/txt4.csv";
+    private static final String FOURTH_FILE_NAME = "src/test/resources/txt6.csv";
+    private static final String FIFTH_FILE_NAME = "src/test/resources/txt5.csv";
     public static Parser transaction = new Parser();
 
 
