@@ -2,7 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FruitParser;
+import core.basesyntax.service.FruitMapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -13,11 +13,11 @@ public class FruitParserImplTest {
     private static final Fruit BANANA_FRUIT = new Fruit("banana", LocalDate.now());
     private static final FruitDto BANANA_DTO = new FruitDto("s", "banana", 100, LocalDate.now());
     private static final FruitDto KIWI_DTO = new FruitDto("s", "kiwi", 50, LocalDate.now());
-    private static FruitParser fruitParser;
+    private static FruitMapper fruitParser;
 
     @BeforeClass
     public static void setup() {
-        fruitParser = new FruitParserImpl();
+        fruitParser = new FruitMapperImpl();
     }
 
     @Test

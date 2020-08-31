@@ -14,7 +14,7 @@ public class RefundsTradingImpl implements Trading {
     @Override
     public void trade(Fruit fruit, int quantity) {
         if (fruit == null) {
-            throw new RuntimeException("The passed argument is null");
+            throw new RuntimeException("Expected to receive fruit, but got null");
         }
         storage.add(fruit, quantity);
     }

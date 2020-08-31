@@ -4,12 +4,12 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.FruitParser;
+import core.basesyntax.service.FruitMapper;
 import core.basesyntax.service.ReportBuilder;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.FruitParserImpl;
+import core.basesyntax.service.impl.FruitMapperImpl;
 import core.basesyntax.service.impl.ReportBuilderImpl;
 import core.basesyntax.shop.Shop;
 import core.basesyntax.shop.Trading;
@@ -34,7 +34,7 @@ public class Main {
         FileReaderService fileReader = new FileReaderServiceImpl();
         List<FruitDto> data = fileReader.read("input.csv");
 
-        FruitParser fruitParser = new FruitParserImpl();
+        FruitMapper fruitParser = new FruitMapperImpl();
 
         ShopService shopService = new ShopService(shop, fruitParser);
         shopService.precessWaybill(data);

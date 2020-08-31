@@ -31,11 +31,11 @@ public class FileReaderServiceImpl implements FileReaderService {
                 data.add(new FruitDto(command, name, quantity, shelfLife));
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Failed to read file");
+            throw new RuntimeException("Failed to read file", e);
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         } catch (NumberFormatException e) {
-            throw new NumberFormatException();
+            throw new NumberFormatException(e.toString());
         }
         if (data.isEmpty()) {
             throw new RuntimeException("File is empty");

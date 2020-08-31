@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.impl.FruitParserImpl;
+import core.basesyntax.service.impl.FruitMapperImpl;
 import core.basesyntax.shop.Shop;
 import core.basesyntax.shop.Trading;
 import core.basesyntax.shop.impl.BuyTradingImpl;
@@ -36,7 +36,7 @@ public class ShopServiceTest {
         tradingMap.put("b", new BuyTradingImpl(storage));
         tradingMap.put("r", new RefundsTradingImpl(storage));
         Shop shop = new Shop(tradingMap, storage);
-        FruitParser fruitParser = new FruitParserImpl();
+        FruitMapper fruitParser = new FruitMapperImpl();
         shopService = new ShopService(shop, fruitParser);
     }
 

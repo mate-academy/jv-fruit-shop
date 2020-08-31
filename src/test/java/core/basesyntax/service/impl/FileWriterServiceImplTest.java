@@ -39,6 +39,7 @@ public class FileWriterServiceImplTest {
             Assert.assertEquals(expected, actual);
         } catch (IOException e) {
             e.printStackTrace();
+            Assert.fail();
         }
     }
 }

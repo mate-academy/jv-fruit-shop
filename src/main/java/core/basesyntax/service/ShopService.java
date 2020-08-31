@@ -7,9 +7,9 @@ import java.util.List;
 
 public class ShopService {
     private Shop shop;
-    private FruitParser fruitParser;
+    private FruitMapper fruitParser;
 
-    public ShopService(Shop shop, FruitParser fruitParser) {
+    public ShopService(Shop shop, FruitMapper fruitParser) {
         this.shop = shop;
         this.fruitParser = fruitParser;
     }

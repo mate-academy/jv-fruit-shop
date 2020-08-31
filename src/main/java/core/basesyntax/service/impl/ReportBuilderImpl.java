@@ -12,7 +12,7 @@ public class ReportBuilderImpl implements ReportBuilder {
     @Override
     public Map<String, Integer> buildReport(List<Storage.FruitBox> data) {
         if (data == null) {
-            throw new RuntimeException();
+            throw new RuntimeException("Expected to receive data, but got null");
         }
         List<String> fruitNames = data.stream()
                 .sorted()
