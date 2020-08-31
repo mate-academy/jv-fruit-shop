@@ -2,8 +2,7 @@
 
 Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
-The current input file is sent to the program in CSV format 
-(it is recommended to use standard libraries for parsing).
+The current input file is sent to the program in CSV format (recommended to use standard libraries for parsing).
 
 Your task is:
 - validate the data in the file
@@ -14,7 +13,7 @@ There are a four activities at the store:
     b - balance, the remnants of fruits at the beginning of the working day
     s - supply, means you are receiving a new fruits from suppliers
     p - purchase, means someone bought a fruit
-    r - return, means someone who have bought the fruits now returns you it
+    r - return, means someone who have bought the fruits now returns them to you
 ```
 
 Let's check in details all types of activities:
@@ -71,14 +70,14 @@ The line above means you have 152 bananas, and 90 apples in your Fruit store aft
 If the file has mistakes, you should throw an exception. Example of incorrect input file:
 ```text
     type,fruit,quantity
-    bl,banana,20
-    b,banana,30 // Buyers will not be able to buy 30 bananas, because they are only 20 units in stock.
+    b,banana,20
+    p,banana,30 // Buyers will not be able to buy 30 bananas, because they are only 20 units in stock.
     s,banana,50 
 ```
 or
 ```text
     type,fruit,quantity
-    bl,banana,20
-    b,banana,-10 // Buyers will not be able to buy -10 bananas. -10 is incorrect input.
+    b,banana,20
+    p,banana,-10 // Buyers will not be able to buy -10 bananas. -10 is incorrect input.
     s,banana,50 
 ```
