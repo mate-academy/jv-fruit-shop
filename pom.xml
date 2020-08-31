@@ -87,8 +87,13 @@
                             </rules>
                         </configuration>
                     </execution>
-
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/dto/*</exclude>
+                        <exclude>**/model/*</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>
