@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitStorage;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;

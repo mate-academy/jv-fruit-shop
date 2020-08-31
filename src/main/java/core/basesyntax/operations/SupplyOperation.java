@@ -3,7 +3,6 @@ package core.basesyntax.operations;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitDto;
 import core.basesyntax.model.FruitStorage;
-
 import java.util.Map;
 
 public class SupplyOperation implements Operation {
