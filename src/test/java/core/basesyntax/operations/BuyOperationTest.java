@@ -18,8 +18,7 @@ public class BuyOperationTest {
 
     @BeforeClass
     public static void beforeClass() {
-        buy = new BuyOperation() {
-        };
+        buy = new BuyOperation();
     }
 
     @Before
