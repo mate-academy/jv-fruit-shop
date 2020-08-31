@@ -1,0 +1,9 @@
+type,fruit,quantity,date
+b,banana,30,2020-10-25
+r,banana,7,2020-12-10
+s,mango,55,2020-12-10
+b,mango,30,2020-10-23
+r,banana,8,2020-12-10
+s,blackberries,40,2020-11-15
+b,blackberries,15,2020-10-23
+r,blackberries,5,2020-12-10
