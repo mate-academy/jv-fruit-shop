@@ -8,6 +8,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReadOperationFromFileService {
     private static final String SPLITTER = ",";
@@ -16,9 +18,10 @@ public class ReadOperationFromFileService {
     private static final String RETURNER = "r";
 
     public void read(String filePath) {
-        Operator<FruitBox> supplier = new Supplier();
-        Operator<FruitBox> consumer = new Seller();
-        Operator<FruitBox> returner = new Returner();
+        Map<String, Operator<FruitBox>> operations = new HashMap<>();
+        operations.put(SUPPLIER, new Supplier());
+        operations.put(CONSUMER, new Seller());
+        operations.put(RETURNER, new Returner());
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -27,18 +30,10 @@ public class ReadOperationFromFileService {
                 FruitBox fruit
                         = new FruitBox(
                         data[1], Integer.parseInt(data[2]), LocalDate.parse(data[3]));
-                switch (data[0]) {
-                    case SUPPLIER:
-                        supplier.execute(fruit);
-                        break;
-                    case CONSUMER:
-                        consumer.execute(fruit);
-                        break;
-                    case RETURNER:
-                        returner.execute(fruit);
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Wrong operation");
+                if (operations.containsKey(data[0])) {
+                    operations.get(data[0]).execute(fruit);
+                } else {
+                    throw new IllegalArgumentException("Wrong operation");
                 }
             }
         } catch (IOException e) {

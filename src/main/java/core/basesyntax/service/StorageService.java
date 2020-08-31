@@ -6,19 +6,21 @@ import java.time.LocalDate;
 
 public class StorageService<T> {
     private static final LocalDate DATE_NOW = LocalDate.now();
+    private static final String BANANA_FRUIT_TYPE = "banana";
 
     public String getStorage() {
-        int sumOfBananas = 0;
+        int sumOfFruits = 0;
         for (FruitBox fruitBox : Storage.storage) {
             if (fruitBox.getExpiryDate().isAfter(DATE_NOW)
-                    && fruitBox.getName().equals("banana")) {
-                sumOfBananas = sumOfBananas + fruitBox.getAmount();
+                    && fruitBox.getName().equals(BANANA_FRUIT_TYPE)) {
+                sumOfFruits += fruitBox.getAmount();
             }
         }
         StringBuilder resultString = new StringBuilder();
         resultString.append("banana")
                 .append(",")
-                .append(sumOfBananas);
+                .append(sumOfFruits);
+
         return resultString.toString();
     }
 }
