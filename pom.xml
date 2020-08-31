@@ -90,7 +90,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/PositionDto</exclude>
+                        <exclude>**/dto/*</exclude>
                         <exclude>**/model/*</exclude>
                     </excludes>
                 </configuration>
