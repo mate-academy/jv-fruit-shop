@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class ParseOperation {
-    public Transaction convert(String[] line) throws IOException {
+    public Transaction parse(String[] line) throws IOException {
         Transaction transaction = new Transaction();
         try {
             transaction.setOperation(line[0].trim().charAt(0));

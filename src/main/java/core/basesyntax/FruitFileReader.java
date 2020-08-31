@@ -15,7 +15,7 @@ public class FruitFileReader {
             }
             while ((line = reader.readNext()) != null) {
                 ParseOperation transactionMapper = new ParseOperation();
-                transactions.add(transactionMapper.convert(line));
+                transactions.add(transactionMapper.parse(line));
             }
             return transactions;
         } catch (IOException e) {
