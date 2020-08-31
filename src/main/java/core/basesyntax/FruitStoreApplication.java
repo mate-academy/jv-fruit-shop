@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class FruitStoreApplication {
 
-    public static void makeReport(String file) throws IOException {
+    public void makeReport(String file) throws IOException {
 
         List<Transaction> transactions = FileReader.fileReading(file);
 
@@ -29,7 +29,7 @@ public class FruitStoreApplication {
                 }
             }
         } catch (RuntimeException e) {
-            throw new RuntimeException("incorrect data in file");
+            throw new RuntimeException("incorrect data in file", e);
         }
         ReportWriter.fileCompile(fruits);
     }

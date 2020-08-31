@@ -23,7 +23,7 @@ public class ReportWriter {
             }
             bufferedWriter.flush();
         } catch (IOException e) {
-            throw new RuntimeException("File can't be created");
+            throw new RuntimeException("File can't be created", e);
         }
     }
 }

@@ -12,6 +12,7 @@ import core.basesyntax.daily.AvailableFruit;
 import core.basesyntax.daily.Fruit;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopTest {
@@ -28,6 +29,7 @@ public class FruitShopTest {
     private static final String REPORT_LINE_FOUR = "apple,40";
     private static final String REPORT_LINE_THREE = "banana,257";
     private static final Path REPORT = Paths.get("Report");
+    private FruitStoreApplication fruitStoreApplication = new FruitStoreApplication();
 
     @Before
     public void setUp() throws Exception {
@@ -36,27 +38,27 @@ public class FruitShopTest {
 
     @Test(expected = RuntimeException.class)
     public void emptyFile() throws IOException {
-        FruitStoreApplication.makeReport(EMPTY_FILE);
+        fruitStoreApplication.makeReport(EMPTY_FILE);
     }
 
     @Test(expected = RuntimeException.class)
     public void wrongDataInFile() throws IOException {
-        FruitStoreApplication.makeReport(WRONG_DATA_FILE);
+        fruitStoreApplication.makeReport(WRONG_DATA_FILE);
     }
 
     @Test(expected = RuntimeException.class)
     public void fileAbsent() throws IOException {
-        FruitStoreApplication.makeReport(NO_FILE);
+        fruitStoreApplication.makeReport(NO_FILE);
     }
 
     @Test(expected = RuntimeException.class)
     public void fileWithWrongOperation() throws IOException {
-        FruitStoreApplication.makeReport(WRONG_OPERATION);
+        fruitStoreApplication.makeReport(WRONG_OPERATION);
     }
 
     @Test
     public void testReportWithManyFruits() throws IOException {
-        FruitStoreApplication.makeReport(MANY_FRUITS);
+        fruitStoreApplication.makeReport(MANY_FRUITS);
         List<String> BigTestFile = Files.readAllLines(Path.of(RESULT));
         Assert.assertTrue(BigTestFile.size() == 4);
         Assert.assertEquals(REPORT_HEADER, BigTestFile.get(0));
@@ -67,7 +69,7 @@ public class FruitShopTest {
 
     @Test(expected = RuntimeException.class)
     public void wrongData() throws IOException {
-        FruitStoreApplication.makeReport(ERROR_IN_DATE);
+        fruitStoreApplication.makeReport(ERROR_IN_DATE);
     }
 
     @Test
