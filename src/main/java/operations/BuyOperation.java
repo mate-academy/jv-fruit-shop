@@ -5,7 +5,7 @@ import model.Position;
 import services.StorageServiceImpl;
 
 public class BuyOperation implements OperationStrategy {
-    StorageServiceImpl storageServiceImpl = new StorageServiceImpl();
+    private StorageServiceImpl storageServiceImpl = new StorageServiceImpl();
 
     @Override
     public void operate(Position position) {

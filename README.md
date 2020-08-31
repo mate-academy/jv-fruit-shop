@@ -4,17 +4,17 @@ Your task is to implement the following requirements and cover at least 80% of y
 All input data will be passed in the file in CSV format.
 
 ## Fruit Store
-Let's imagine you have a position store. 
-There are three type of operations in your position store:
+Let's imagine you have a fruit store. 
+There are three type of operations in your fruit store:
 
 ```text
     s - supply, means you are receiving a new fruits from suppliers
-    b - buy, means someone bought a position
+    b - buy, means someone bought a fruit
     r - return, means someone who have bought the fruits now returns you it
 ```
 
 Let's check in details all types of operations:
-1. Supply. You are accepting a new position from suppliers. The following line in the file will look like:
+1. Supply. You are accepting a new fruit from suppliers. The following line in the file will look like:
     
     ```text
        s,banana,100,2020-10-17     
@@ -36,7 +36,7 @@ Let's check in details all types of operations:
 
 ### Input file example
 ```text
-    type,position,quantity,date
+    type,fruit,quantity,date
     s,banana,100,2020-10-17
     b,banana,13,2020-10-15
     r,banana,10,2020-10-17 
@@ -45,7 +45,7 @@ Let's check in details all types of operations:
 ### Expecting output file example
 We are expecting to see how many fruits are available in your Fruit store after the file processing. For example:
 ```text
-    position,quantity
+    fruit,quantity
     banana,97
     orange,147
     apple,29

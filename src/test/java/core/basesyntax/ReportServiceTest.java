@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public class ReportServiceTest {
     private static final String FRUIT_NAME = "banana";
-    private static final String FILE_PATH_TO_WRITE_RESULT = "src/test/java/results/result.txt";
+    private static final String FILE_PATH_TO_WRITE_RESULT = "src/main/resources/result.txt";
     private static final int ONE = 1;
     private static final int TEN = 10;
     private static final LocalDate DATE_IN_FUTURE = LocalDate.now().plusDays(ONE);

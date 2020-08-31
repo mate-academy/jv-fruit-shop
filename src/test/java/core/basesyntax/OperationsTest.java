@@ -20,7 +20,7 @@ public class OperationsTest {
     private static OperationContext operationContext;
 
     @BeforeClass
-    public static void setUp(){
+    public static void setUp() {
         PositionDto positionDto = new PositionDto(BUY_OPERATION, FRUIT_NAME,
                 QUANTITY, DATE);
         positionDtos = new ArrayList<>();

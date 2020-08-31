@@ -7,7 +7,7 @@ import model.Storage;
 
 public class ReportService {
     private static final String HEADER_FOR_REPORT = "PRODUCT, QUANTITY, SHELF LIFE \n";
-    private static final String FILE_PATH_TO_WRITE_RESULT = "src/test/java/results/result.txt";
+    private static final String FILE_PATH_TO_WRITE_RESULT = "src/main/resources/result.txt";
 
     public void printReportIntoFile() {
         String content = getStorageContent();
