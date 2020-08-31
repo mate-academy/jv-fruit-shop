@@ -5,7 +5,7 @@ import core.basesyntax.FruitStorage;
 import java.time.LocalDate;
 import java.util.List;
 
-public class BuyOperation implements core.basesyntax.service.Operational {
+public class BuyOperation implements Operational {
     private FruitStorage fruitStorage;
 
     public BuyOperation(FruitStorage fruitStorage) {
