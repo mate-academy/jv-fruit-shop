@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionsTest {
-    private static TransactionParser transaction;
+    private static Transaction transaction;
     private static final String SUPPLY = "s";
     private static final String FRUIT_ORANGE = "orange";
     private static final Integer QUANTITY = 50;
@@ -21,7 +21,7 @@ public class TransactionsTest {
         row.add("banana");
         row.add("100");
         row.add("2020-10-12");
-        transaction = new TransactionParser(row);
+        transaction = new Transaction(row);
     }
 
     @Test

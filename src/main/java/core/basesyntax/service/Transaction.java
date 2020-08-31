@@ -2,13 +2,13 @@ package core.basesyntax.service;
 
 import java.util.List;
 
-public class TransactionParser {
+public class Transaction {
     private String operation;
     private String fruit;
     private Integer quantity;
     private String date;
 
-    public TransactionParser(List<String> transaction) {
+    public Transaction(List<String> transaction) {
         this.operation = transaction.get(0);
         this.fruit = transaction.get(1);
         this.quantity = Integer.parseInt(transaction.get(2));

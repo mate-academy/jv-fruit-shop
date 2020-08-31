@@ -24,11 +24,11 @@ public class BuyOperation implements Operation {
         }
     }
 
-    public boolean checkQuantity(int available, int quantity) {
+    private boolean checkQuantity(int available, int quantity) {
         return available >= quantity;
     }
 
-    public void checkExpirationDate(String date) {
+    private void checkExpirationDate(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         LocalDate expirationDay = LocalDate.parse(date, formatter);
         if (LocalDate.now().minusDays(1) == expirationDay

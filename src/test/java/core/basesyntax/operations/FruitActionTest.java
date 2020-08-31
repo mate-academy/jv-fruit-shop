@@ -1,6 +1,6 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.Transaction;
 import core.basesyntax.storage.Storage;
 import org.junit.*;
 
@@ -41,14 +41,14 @@ public class FruitActionTest {
 
     @Test
     public void actionSupplyTest() {
-        TransactionParser transaction = new TransactionParser(testList);
+        Transaction transaction = new Transaction(testList);
         Assert.assertTrue(act.action(transaction));
     }
 
     @Test
     public void actionBuyTest() {
         Storage.addFruit(FRUIT, QUANTITY_INT);
-        TransactionParser transaction = new TransactionParser(testList);
+        Transaction transaction = new Transaction(testList);
         transaction.setOperation(BUY);
         Assert.assertTrue(act.action(transaction));
     }
@@ -56,7 +56,7 @@ public class FruitActionTest {
     @Test
     public void actionReturnTest() {
         Storage.addFruit(FRUIT, QUANTITY_INT);
-        TransactionParser transaction = new TransactionParser(testList);
+        Transaction transaction = new Transaction(testList);
         transaction.setOperation(RETURN);
         Assert.assertTrue(act.action(transaction));
     }
@@ -64,7 +64,7 @@ public class FruitActionTest {
     @Test(expected = IllegalArgumentException.class)
     public void checkQuantityTest() {
         Storage.addFruit(FRUIT, QUANTITY_INT);
-        TransactionParser transaction = new TransactionParser(testList);
+        Transaction transaction = new Transaction(testList);
         transaction.setQuantity(INCORRECT_QUANTITY);
         act.action(transaction);
     }
@@ -72,7 +72,7 @@ public class FruitActionTest {
     @Test(expected = UnsupportedOperationException.class)
     public void soldOutFruitTest() {
         Storage.addFruit(FRUIT, QUANTITY_INT);
-        TransactionParser transaction = new TransactionParser(testList);
+        Transaction transaction = new Transaction(testList);
         transaction.setOperation(INCORRECT_OPERATION);
         act.action(transaction);
     }

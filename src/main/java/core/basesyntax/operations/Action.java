@@ -1,7 +1,7 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.Transaction;
 
 public interface Action {
-    boolean action(TransactionParser transaction);
+    boolean action(Transaction transactionDto);
 }
