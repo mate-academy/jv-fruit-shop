@@ -87,7 +87,7 @@ public class FruitStoreTest {
         ReadOperationFromFileService readFromFileService = new ReadOperationFromFileService();
         readFromFileService.read(FIRST_PATH);
         StorageService storageService = new StorageService();
-        assertEquals("banana,95", storageService.getStorage());
+        assertEquals("banana,95\n", storageService.getStorage());
     }
 
     @Test
@@ -119,7 +119,7 @@ public class FruitStoreTest {
         StorageService<FruitBox> storageService = new StorageService<>();
         String storageContent = storageService.getStorage();
 
-        assertEquals("banana,5", storageContent);
+        assertEquals("banana,5\n", storageContent);
         Storage.storage.clear();
 
         readOperationFromFileService = new ReadOperationFromFileService();
@@ -128,7 +128,7 @@ public class FruitStoreTest {
         storageService = new StorageService<>();
         storageContent = storageService.getStorage();
 
-        assertEquals("banana,90", storageContent);
+        assertEquals("banana,90\n", storageContent);
     }
 
     @Test
@@ -213,7 +213,7 @@ public class FruitStoreTest {
         StorageService<FruitBox> storageService = new StorageService<>();
         String storageContent = storageService.getStorage();
 
-        assertEquals("banana,95", storageContent);
+        assertEquals("banana,95\n", storageContent);
     }
 
     @Test

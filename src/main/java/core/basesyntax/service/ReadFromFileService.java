@@ -15,7 +15,7 @@ public class ReadFromFileService {
                 resultBuilder.append(resultReader.readLine()).append("\n");
             }
         } catch (IOException e) {
-            throw new RuntimeException("Wrong path");
+            throw new RuntimeException("Wrong path", e);
         }
         return resultBuilder.toString();
     }

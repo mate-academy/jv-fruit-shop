@@ -2,25 +2,38 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitBox;
 import core.basesyntax.model.Storage;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class StorageService<T> {
-    private static final LocalDate DATE_NOW = LocalDate.now();
     private static final String BANANA_FRUIT_TYPE = "banana";
+    private List<String> fruits = new ArrayList<>();
 
     public String getStorage() {
-        int sumOfFruits = 0;
-        for (FruitBox fruitBox : Storage.storage) {
-            if (fruitBox.getExpiryDate().isAfter(DATE_NOW)
-                    && fruitBox.getName().equals(BANANA_FRUIT_TYPE)) {
-                sumOfFruits += fruitBox.getAmount();
+        fruits.add(BANANA_FRUIT_TYPE);
+        Map<String, Integer> storageContent = new LinkedHashMap<>();
+        mark: for (FruitBox fruitBox : Storage.storage) {
+            switch (fruitBox.getName()) {
+                case BANANA_FRUIT_TYPE:
+                    if (storageContent.containsKey(BANANA_FRUIT_TYPE)) {
+                        storageContent.replace(BANANA_FRUIT_TYPE,
+                                storageContent.get(BANANA_FRUIT_TYPE) + fruitBox.getAmount());
+                    }
+                    storageContent.put(BANANA_FRUIT_TYPE, fruitBox.getAmount());
+                    continue mark;
+                default:
+                    throw new RuntimeException("Unknown fruit");
             }
         }
-        StringBuilder resultString = new StringBuilder();
-        resultString.append("banana")
-                .append(",")
-                .append(sumOfFruits);
-
-        return resultString.toString();
+        StringBuilder fruitsString = new StringBuilder();
+        for (int i = 0; i < storageContent.size(); i++) {
+            fruitsString.append(fruits.get(i))
+                    .append(",")
+                    .append(storageContent.get(fruits.get(i)))
+                    .append("\n");
+        }
+        return fruitsString.toString();
     }
 }
