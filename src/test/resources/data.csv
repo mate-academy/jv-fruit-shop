@@ -1,0 +1,14 @@
+type,fruit,quantity,date
+s,banana,120,2020-08-30
+s,apple,330,2020-08-30
+s,melon,130,2020-08-30
+s,watermelon,150,2020-08-30
+s,orange,120,2020-08-30
+b,banana,200,2020-08-26
+b,apple,30,2020-08-26
+b,melon,60,2020-08-26
+b,banana,12,2020-08-26
+b,melon,17,2020-08-26
+b,orange,10,2020-08-23
+r,banana,10,2020-08-27
+r,melon,3,2020-08-27
