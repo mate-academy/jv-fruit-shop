@@ -47,7 +47,7 @@ public class LocalFileWriterImplTest {
         try {
             Files.deleteIfExists(FILE_PATH);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new RuntimeException("File not found", e);
         }
     }
 }

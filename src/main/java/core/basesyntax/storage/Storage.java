@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage implements StorageOperations {
-    private Map<String,FruitBatch> storage = new HashMap<>();
+    private final Map<String,FruitBatch> storage = new HashMap<>();
 
     @Override
     public boolean addFruits(FruitBatch fruitBatch) {

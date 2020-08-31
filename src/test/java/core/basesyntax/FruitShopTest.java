@@ -34,7 +34,7 @@ public class FruitShopTest {
         try {
             Files.deleteIfExists(Paths.get(path[0] + FileSystems.getDefault().getSeparator() + path[1]));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("File not found", e);
         }
         return result;
     }

@@ -27,7 +27,7 @@ public class LocalFileReaderImpl implements LocalFileReader {
                 listOfLists.add(tempList);
             }
         } catch (IOException | CsvValidationException e) {
-            throw new RuntimeException("No such file");
+            throw new RuntimeException("No such file", e);
         }
         return listOfLists;
     }
