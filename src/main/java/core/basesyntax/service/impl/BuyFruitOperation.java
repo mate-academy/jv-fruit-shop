@@ -2,12 +2,13 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitStorage;
 import core.basesyntax.service.FruitOperations;
 import java.time.LocalDate;
 import java.util.Map;
 
 public class BuyFruitOperation implements FruitOperations {
-    private Map<String, Fruit> storage = Fruit.getFruitStorage();
+    private Map<String, Fruit> storage = FruitStorage.getFruitStorage();
 
     @Override
     public void doOperation(FruitDto fruitDto) {

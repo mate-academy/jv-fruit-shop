@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitStorage;
 import core.basesyntax.service.iooperations.OperationHandler;
 import core.basesyntax.service.iooperations.Reader;
 import core.basesyntax.service.iooperations.Writer;
@@ -15,16 +16,19 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class WriterTest {
+    private Writer writer = new Writer();
 
     @BeforeClass
     public static void beforeClass() {
-        List<FruitDto> transactions = Reader.readFromFile("src/CsvFolder/inputNormal1.csv");
-        OperationHandler.handleOperation(transactions);
+        Reader reader = new Reader();
+        OperationHandler operationHandler = new OperationHandler();
+        List<FruitDto> transactions = reader.readFromFile("src/CsvFolder/inputNormal1.csv");
+        operationHandler.handleOperation(transactions);
     }
 
     @Test
     public void normalWrite() throws IOException {
-        Writer.write("src/CsvFolder/result1.csv");
+        writer.write("src/CsvFolder/result1.csv");
         List<String> expected = Files
                 .readAllLines(Path.of("src/CsvFolder/expectedResultFromWriterTest.csv"));
         List<String> actual = Files
@@ -35,8 +39,8 @@ public class WriterTest {
 
     @Test
     public void writeFromEmptyStorageTest() throws IOException {
-        Fruit.getFruitStorage().clear();
-        Writer.write("src/CsvFolder/onlyHeader.csv");
+        FruitStorage.getFruitStorage().clear();
+        writer.write("src/CsvFolder/onlyHeader.csv");
         List<String> actual = Files
                 .readAllLines(Path.of("src/CsvFolder/onlyHeader.csv"));
         Assert.assertEquals(1, actual.size());

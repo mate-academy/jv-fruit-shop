@@ -5,7 +5,7 @@ import core.basesyntax.model.FruitStorageStrategy;
 import java.util.List;
 
 public class OperationHandler {
-    public static void handleOperation(List<FruitDto> fruitDtos) {
+    public void handleOperation(List<FruitDto> fruitDtos) {
         FruitStorageStrategy.initialize();
         for (FruitDto fruitDto : fruitDtos) {
             FruitStorageStrategy.fruitStorageStrategy

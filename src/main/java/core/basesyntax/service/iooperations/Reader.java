@@ -11,7 +11,7 @@ import org.apache.commons.csv.CSVRecord;
 
 public class Reader {
 
-    public static List<FruitDto> readFromFile(String filePath) {
+    public List<FruitDto> readFromFile(String filePath) {
         List<FruitDto> fruitDtos = new ArrayList<>();
         CSVFormat format = CSVFormat.RFC4180.withHeader().withDelimiter(',');
         try (CSVParser parser = new CSVParser(new FileReader(filePath), format)) {
@@ -24,7 +24,7 @@ public class Reader {
                 fruitDtos.add(fruitDto);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Something went wrong with reading file");
+            throw new RuntimeException("Something went wrong with reading file", e);
         }
         if (fruitDtos.isEmpty()) {
             throw new RuntimeException("This file is empty!");

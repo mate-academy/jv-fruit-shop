@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Fruit {
-    private static Map<String, Fruit> fruitStorage = new HashMap<>();
     private LocalDate date;
     private Integer amount;
     private Fruit next;
@@ -35,33 +34,29 @@ public class Fruit {
         return amount;
     }
 
-    public static Map<String, Fruit> getFruitStorage() {
-        return fruitStorage;
-    }
-
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
     public Integer getAllFruitAmountByDate(LocalDate date) {
         Integer sum = 0;
-        Fruit pair = this;
-        while (pair != null) {
-            if (date.isBefore(pair.getDate())) {
+        Fruit fruit = this;
+        while (fruit != null) {
+            if (date.isBefore(fruit.getDate())) {
                 sum += amount;
             }
-            pair = pair.next;
+            fruit = fruit.next;
         }
         return sum;
     }
 
     public Integer getAllFruitAmount() {
         Integer sum = 0;
-        Fruit pair = this;
-        while (pair.next != null) {
+        Fruit fruit = this;
+        while (fruit.next != null) {
             sum += amount;
-            pair = pair.next;
+            fruit = fruit.next;
         }
-        return sum + pair.amount;
+        return sum + fruit.amount;
     }
 }
