@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriter;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +14,7 @@ public class CsvFileWriter implements FileWriter {
     private static final String STOCK_BALANCE_HEADER = "fruit,quantity" + System.lineSeparator();
 
     @Override
-    public void createReportFile(Map<String, Long> stockBalance, String filePath) {
+    public void createReportFile(Map<String, Integer> stockBalance, String filePath) {
         Path file = Path.of(filePath);
         List<String> lines = stockBalance.entrySet().stream()
                 .map(entry -> entry.getKey() + "," + entry.getValue())

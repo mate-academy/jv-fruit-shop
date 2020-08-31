@@ -1,33 +1,33 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitDto;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.FruitOperation;
 import core.basesyntax.service.FruitService;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class FruitServiceImpl implements FruitService {
-    private Map<Operation, FruitOperation> operationType;
-
-    public FruitServiceImpl(Map<Operation, FruitOperation> operationType) {
-        this.operationType = operationType;
-
-    }
 
     @Override
-    public void makeOperationsOnFruitsDto(List<FruitDto> fruitDtos) {
-        for (FruitDto fruitDto : fruitDtos) {
-            operationType.get(fruitDto.getOperation()).apply(fruitDto);
+    public Map<String, Integer> getAvailableFruits(List<FruitDto> fruitDtos) {
+        Map<String, Integer> stockBalance = new HashMap<>();
+        for (int i = 0; i < fruitDtos.size(); i++) {
+            FruitDto fruitDto = fruitDtos.get(i);
+            String fruit = fruitDto.getFruit();
+
+            Integer integer = stockBalance.get(fruit);
+            if (fruitDto.getOperation() == Operation.BUY && integer < fruitDto.getQuantity()) {
+                throw new RuntimeException("The report is wrong. It is impossible to buy "
+                        + fruitDto.getQuantity() + fruit + "s.");
+            }
+
+            stockBalance.merge(fruit, fruitDto.getQuantity(),
+                    (stockQuantity, transactionQuantity)
+                            -> fruitDto.getOperation() == Operation.BUY
+                            ? stockQuantity - transactionQuantity
+                            : stockQuantity + transactionQuantity);
         }
-    }
-
-    @Override
-    public Map<String, Long> gerFruitReport() {
-        return Storage.fruits.stream()
-                .collect(Collectors.groupingBy(Fruit::getName, Collectors.counting()));
+        return stockBalance;
     }
 }
