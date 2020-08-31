@@ -13,11 +13,11 @@ import static org.junit.Assert.*;
 
 public class WriteCsvTest {
 
-    private WriteCsv testWriter;
+    private CsvFileWriter testWriter;
 
     @Before
     public void setUp() throws Exception {
-        testWriter = new WriteCsv();
+        testWriter = new CsvFileWriter();
     }
 
     @Test

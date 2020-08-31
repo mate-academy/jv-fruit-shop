@@ -14,11 +14,11 @@ import static org.junit.Assert.*;
 
 public class BuyTest {
 
-    private Buy testBuy;
+    private BuyOperation testBuy;
 
     @Before
     public void setUp() throws Exception {
-        testBuy = new Buy();
+        testBuy = new BuyOperation();
     }
 
     @After

@@ -2,11 +2,11 @@ package core.basesyntax.maketransaction.operations;
 
 import core.basesyntax.identities.Fruit;
 import core.basesyntax.identities.Storage;
-import core.basesyntax.maketransaction.IFruitOperation;
+import core.basesyntax.maketransaction.FruitOperation;
 import core.basesyntax.maketransaction.Transaction;
 import java.time.LocalDate;
 
-public class Supply implements IFruitOperation {
+public class SupplyOperation implements FruitOperation {
     @Override
     public boolean apply(Transaction transaction) {
         for (int i = 0; i < transaction.getQuantity(); i++) {

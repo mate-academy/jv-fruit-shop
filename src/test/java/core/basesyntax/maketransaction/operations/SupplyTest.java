@@ -10,11 +10,11 @@ import static org.junit.Assert.*;
 
 public class SupplyTest {
 
-    private Supply testSupply;
+    private SupplyOperation testSupply;
 
     @Before
     public void setUp() throws Exception {
-        testSupply = new Supply();
+        testSupply = new SupplyOperation();
     }
 
     @After

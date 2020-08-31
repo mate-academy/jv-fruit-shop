@@ -1,9 +1,8 @@
 package core.basesyntax.readwritefile;
 
 import core.basesyntax.maketransaction.Transaction;
-import core.basesyntax.readwritefile.interfaces.IReadCsv;
+import core.basesyntax.readwritefile.interfaces.FileReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +10,16 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-public class ReadCsv implements IReadCsv {
+public class CsvFileReader implements FileReader {
     public static final CSVFormat CSV_FORMAT = CSVFormat.RFC4180.withHeader().withDelimiter(',');
 
-    public ReadCsv() {
+    public CsvFileReader() {
     }
 
     @Override
     public List<Transaction> readCsv(String pathName) throws FileNotFoundException {
         List<Transaction> transactions = new ArrayList<>();
-        try (CSVParser csvReader = new CSVParser(new FileReader(pathName), CSV_FORMAT)) {
+        try (CSVParser csvReader = new CSVParser(new java.io.FileReader(pathName), CSV_FORMAT)) {
             for (CSVRecord csvRecord : csvReader) {
                 Transaction transaction = new Transaction();
                 transaction.setType(csvRecord.get("type"));

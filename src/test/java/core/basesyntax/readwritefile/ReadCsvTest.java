@@ -13,11 +13,11 @@ import static org.junit.Assert.*;
 
 public class ReadCsvTest {
 
-    private ReadCsv testReader;
+    private CsvFileReader testReader;
 
     @Before
     public void setUp() throws Exception {
-        testReader = new ReadCsv();
+        testReader = new CsvFileReader();
     }
 
     @After

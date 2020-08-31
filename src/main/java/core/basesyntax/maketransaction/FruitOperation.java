@@ -1,5 +1,5 @@
 package core.basesyntax.maketransaction;
 
-public interface IFruitOperation {
+public interface FruitOperation {
     boolean apply(Transaction transaction);
 }

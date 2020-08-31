@@ -10,11 +10,11 @@ import static org.junit.Assert.*;
 
 public class ReturnTest {
 
-    private Return testReturn;
+    private ReturnOperation testReturn;
 
     @Before
     public void setUp() throws Exception {
-        testReturn = new Return();
+        testReturn = new ReturnOperation();
     }
 
     @After
