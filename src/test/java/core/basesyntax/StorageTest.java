@@ -73,4 +73,24 @@ public class StorageTest {
         storage.fillStorage(transactions);
         Assert.assertEquals(expectedStorage, storage);
     }
+
+    @Test
+    public void StorageEqualsOkTest() {
+        Storage expectedStorage = new Storage();
+        expectedStorage.addFruit(new Fruit("banana",
+                LocalDate.parse("2020-10-18", DateTimeFormatter.ISO_LOCAL_DATE)));
+        storage.addFruit(new Fruit("banana",
+                LocalDate.parse("2020-10-18", DateTimeFormatter.ISO_LOCAL_DATE)));
+        Assert.assertTrue(expectedStorage.equals(storage));
+    }
+
+    @Test
+    public void StorageHashCodeOkTest() {
+        Storage expectedStorage = new Storage();
+        expectedStorage.addFruit(new Fruit("banana",
+                LocalDate.parse("2020-10-18", DateTimeFormatter.ISO_LOCAL_DATE)));
+        storage.addFruit(new Fruit("banana",
+                LocalDate.parse("2020-10-18", DateTimeFormatter.ISO_LOCAL_DATE)));
+        Assert.assertEquals(expectedStorage.hashCode(), storage.hashCode());
+    }
 }
