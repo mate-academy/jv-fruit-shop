@@ -1,14 +1,14 @@
 package operations;
 
-import interfaces.IOperationStrategy;
+import interfaces.OperationStrategy;
 import model.Position;
-import services.StorageService;
+import services.StorageServiceImpl;
 
-public class ReturnOperation implements IOperationStrategy {
-    StorageService storageService = new StorageService();
+public class ReturnOperation implements OperationStrategy {
+    StorageServiceImpl storageServiceImpl = new StorageServiceImpl();
 
     @Override
     public void operate(Position position) {
-        storageService.put(position);
+        storageServiceImpl.put(position);
     }
 }

@@ -2,6 +2,6 @@ package interfaces;
 
 import model.Position;
 
-public interface IOperationStrategy {
+public interface OperationStrategy {
     void operate(Position position);
 }

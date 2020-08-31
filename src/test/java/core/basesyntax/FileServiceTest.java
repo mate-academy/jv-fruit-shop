@@ -11,14 +11,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import services.FileParser;
 import services.FileService;
-import services.StorageService;
 
-public class FileServiceTest extends RuntimeException {
+public class FileServiceTest {
     private static final String VALID_DATAFILE_PATH = "src/test/resources/fruits.csv";
     private static final String FILE_PATH_TO_WRITE_RESULT = "src/test/java/results/result.txt";
     private static final String OPERATION = "some operation";
     private static final String FRUIT_NAME = "kiwi";
-    private static final String APPLE = "apple";
     private static final String QUANTITY = "12";
     private static final LocalDate DATE = LocalDate.parse("2020-12-12");
     private static final String SEPARATOR = ",";
@@ -28,7 +26,6 @@ public class FileServiceTest extends RuntimeException {
             + SEPARATOR + DATE;
 
     private static FileService fileService;
-    private static StorageService storageService = new StorageService();
 
     @BeforeClass
     public static void setUp() throws IOException {

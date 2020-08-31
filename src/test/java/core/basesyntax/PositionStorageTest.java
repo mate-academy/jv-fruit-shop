@@ -11,7 +11,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import services.StorageService;
+import services.StorageServiceImpl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +29,13 @@ public class PositionStorageTest {
 
     private static Position position;
     private static Map<String, Position> testStorage;
-    private static StorageService storageService;
+    private static StorageServiceImpl storageServiceImpl;
 
     @BeforeClass
         public static void setUp() {
         position = new Position(FRUIT_NAME, TEN, DATE_IN_FUTURE);
         testStorage = Storage.storage;
-        storageService = new StorageService();
+        storageServiceImpl = new StorageServiceImpl();
     }
 
     @AfterClass
@@ -56,7 +56,7 @@ public class PositionStorageTest {
     public void buyTestOk() {
         setUp();
         testStorage.put(FRUIT_NAME, position);
-        storageService.buy(FRUIT_NAME, FIVE);
+        storageServiceImpl.buy(FRUIT_NAME, FIVE);
         int expected = FIVE;
         int actual = testStorage.get(FRUIT_NAME).getQuantity();
         Assert.assertSame(expected, actual);
@@ -66,22 +66,22 @@ public class PositionStorageTest {
     public void isFruitFreshTest() {
         LocalDate now = LocalDate.now();
         position.setDate(DATE_IN_PAST);
-        Assert.assertFalse(storageService.isFresh(position));
+        Assert.assertFalse(storageServiceImpl.isFresh(position));
         position.setDate(now.plusDays(ONE));
-        Assert.assertTrue(storageService.isFresh(position));
+        Assert.assertTrue(storageServiceImpl.isFresh(position));
     }
 
     @Test
     public void isNotEnoughQuantityTest() {
         testStorage.put(position.getName(), position);
-        boolean actual = storageService.isEnough(position.getName(), BIG_QUANTITY);
+        boolean actual = storageServiceImpl.isEnough(position.getName(), BIG_QUANTITY);
         Assert.assertFalse(actual);
     }
 
     @Test
     public void isEnoughQuantityTest() {
         testStorage.put(position.getName(), position);
-        boolean actual = storageService.isEnough(position.getName(), FIVE);
+        boolean actual = storageServiceImpl.isEnough(position.getName(), FIVE);
         Assert.assertTrue(actual);
     }
 
@@ -96,13 +96,13 @@ public class PositionStorageTest {
     @Test(expected = ExpiredProductException.class)
     public void ExpiredProductExceptionTest() {
         position.setDate(DATE_IN_PAST);
-        storageService.put(position);
+        storageServiceImpl.put(position);
     }
 
     @Test(expected = NotEnoughQuantityException.class)
     public void NotEnoughQuantityExceptionTest() {
         position.setQuantity(FIVE);
-        storageService.put(position);
-        storageService.buy(FRUIT_NAME, BIG_QUANTITY);
+        storageServiceImpl.put(position);
+        storageServiceImpl.buy(FRUIT_NAME, BIG_QUANTITY);
     }
 }

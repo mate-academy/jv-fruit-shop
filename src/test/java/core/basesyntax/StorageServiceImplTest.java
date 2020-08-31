@@ -6,41 +6,29 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import services.ReportService;
-import services.StorageService;
-import java.io.File;
+import services.StorageServiceImpl;
 import java.time.LocalDate;
 
-public class StorageServiceTest {
+public class StorageServiceImplTest {
     private static final int ONE = 1;
     private static final int TEN = 10;
     private static final LocalDate DATE_IN_FUTURE = LocalDate.now().plusDays(ONE);
     private static final String FRUIT_NAME = "banana";
-    private static final String FILE_PATH_TO_WRITE_RESULT = "src/test/java/results/result.txt";
     private static Position position;
     private static ReportService reportService;
-    private static StorageService storageService;
+    private static StorageServiceImpl storageServiceImpl;
 
     @BeforeClass
     public static void setUp() {
         position = new Position(FRUIT_NAME, TEN, DATE_IN_FUTURE);
         reportService = new ReportService();
-        storageService = new StorageService();
+        storageServiceImpl = new StorageServiceImpl();
     }
 
     @Test
     public void putTest() {
-        storageService.put(position);
+        storageServiceImpl.put(position);
         boolean expected = Storage.storage.containsValue(position);
         Assert.assertTrue(expected);
-    }
-
-    @Test
-    public void printReportIntoFileTest() {
-        Storage.storage.put(FRUIT_NAME, position);
-        reportService.printReportIntoFile();
-        File expected = new File(FILE_PATH_TO_WRITE_RESULT);
-        Assert.assertTrue(expected.exists()
-                && expected.length() != 0
-                && !expected.isDirectory());
     }
 }

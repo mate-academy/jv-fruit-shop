@@ -1,16 +1,14 @@
 package services;
 
-import interfaces.Printable;
 import java.util.HashMap;
 import java.util.Map;
 import model.Position;
 import model.Storage;
 
-public class ReportService implements Printable {
+public class ReportService {
     private static final String HEADER_FOR_REPORT = "PRODUCT, QUANTITY, SHELF LIFE \n";
     private static final String FILE_PATH_TO_WRITE_RESULT = "src/test/java/results/result.txt";
 
-    @Override
     public void printReportIntoFile() {
         String content = getStorageContent();
         FileService fileService = new FileService();

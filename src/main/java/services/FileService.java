@@ -13,7 +13,6 @@ import java.util.List;
 import operations.OperationContext;
 
 public class FileService implements FileReadable, FileWritable {
-    private static final String FILE_PATH_TO_WRITE_RESULT = "src/test/java/results/result.txt";
 
     @Override
     public boolean readFile(String path) {
@@ -37,7 +36,7 @@ public class FileService implements FileReadable, FileWritable {
 
     @Override
     public void writeFile(String content, String path) {
-        try (FileWriter writer = new FileWriter(FILE_PATH_TO_WRITE_RESULT, false)) {
+        try (FileWriter writer = new FileWriter(path, false)) {
             writer.write(content);
             writer.flush();
         } catch (IOException ex) {

@@ -2,14 +2,13 @@ package services;
 
 import exceptions.ExpiredProductException;
 import exceptions.NotEnoughQuantityException;
-import interfaces.IStorageService;
+import interfaces.StorageService;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 import model.Position;
 import model.Storage;
 
-public class StorageService implements IStorageService {
+public class StorageServiceImpl implements StorageService {
 
     @Override
     public void put(Position position) {
@@ -26,11 +25,10 @@ public class StorageService implements IStorageService {
     }
 
     @Override
-    public Map buy(String fruitName, int neededQuantity) {
+    public boolean buy(String fruitName, int neededQuantity) {
         if (!isEnough(fruitName, neededQuantity)) {
             throw new NotEnoughQuantityException("Sorry! Not enough " + fruitName);
         }
-        Map<String, Integer> result = new HashMap<>();
         for (Map.Entry<String, Position> entry : Storage.storage.entrySet()) {
             if (entry.getKey().equals(fruitName)) {
                 Position position = Storage.storage.get(fruitName);
@@ -38,7 +36,7 @@ public class StorageService implements IStorageService {
                 Storage.storage.put(fruitName, position);
             }
         }
-        return result;
+        return true;
     }
 
     public boolean isEnough(String fruitName, int neededQuantity) {
