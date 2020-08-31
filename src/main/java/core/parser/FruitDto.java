@@ -7,15 +7,13 @@ import java.util.List;
 
 public class FruitDto {
     String defaultSeparator = ",";
-    Storage storage = new Storage();
 
-    public boolean dtoParse() {
-        String path = "src/test/resources/";
-        String fileName = "Fruit In";
+
+    public Storage dtoParse(String path, String fullPath) {
+        Storage storage = new Storage();
+//        String path = "src/test/resources/";
         FileServiceImpl fileService = new FileServiceImpl();
-        fileService.setPath(path);
-        fileService.setFileName(fileName);
-        List<String> text = fileService.readFile();
+        List<String> text = fileService.readFile(fullPath);
         for (String line : text) {
             String[] info = line.split(defaultSeparator);
             String fruitOperator = info[0];
@@ -29,8 +27,13 @@ public class FruitDto {
                 e.printStackTrace();
             }
         }
-        fileName = "Fruit Out";
-        fileService.writeFile(storage.toList(), fileName);
+        return storage;
+    }
+
+    public boolean storageOut(Storage storage) {
+        FileServiceImpl fileService = new FileServiceImpl();
+        String path = "src/test/resources/fruitOut.csv";
+        fileService.writeFile(storage.toList(), path);
         return true;
     }
 }

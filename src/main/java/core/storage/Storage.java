@@ -21,11 +21,6 @@ public class Storage implements FruitOperations {
         this.fruitBay = new HashMap();
     }
 
-    public boolean addOperator(String operator) {
-        operators.add(operator);
-        return true;
-    }
-
     public boolean add(Fruit fruit, Integer quantity) {
         fruitBay.put(fruit, quantity);
         return true;
@@ -87,8 +82,9 @@ public class Storage implements FruitOperations {
     private boolean check(Fruit fruit, int quantity) {
         int has = fruitBay.get(fruit);
         if (has < quantity) {
+            Throwable RuntimeException = new Throwable();
             throw new NoFruitsEnoughException("Sorry, trying to buy " + quantity
-                    + " " + fruit.getType() + ", but have only " + has);
+                    + " " + fruit.getType() + ", but have only " + has, RuntimeException);
         }
         return true;
     }
