@@ -1,25 +1,31 @@
-//package core.basesyntax;
-//
-//import org.junit.Assert;
-//import org.junit.Test;
-//
-//import java.time.LocalDate;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//public class ReportTest {
-//
-//    @Test
-//    public void createCorrectReportTest() {
-//        int randomAmount = (int) (Math.random() * 100);
-//        DateAndQuantity dateAndQuantity = new DateAndQuantity(LocalDate.now(), randomAmount);
-//        List<DateAndQuantity> specificFruitList = new ArrayList<>();
-//        specificFruitList.add(dateAndQuantity);
-//        ProductCalculator.STORAGE.put("banana", specificFruitList);
-//        Report report = new Report();
-//        String actual = report.getReport();
-//        String expected = "fruit,quantity\nbanana," + String.valueOf(randomAmount) + "\n";
-//        System.out.println(expected);
-//        Assert.assertEquals(actual, expected);
-//    }
-//}
+package core.basesyntax;
+
+import core.basesyntax.service.FileService;
+import dto.Order;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.Assert;
+import org.junit.Test;
+import parsers.OrderParser;
+
+public class ReportTest {
+
+    public final static Storage testStorage = new Storage();
+    FileService fileService = new FileService();
+
+    @Test
+    public void createCorrectReportTest() {
+        List<String> file = fileService.readFile("src/test/java/resourses/test2.csv");
+        List<Order> orders = new ArrayList<>();
+        OrderParser parser = new OrderParser();
+        for (String line : file) {
+            orders.add(parser.parse(line));
+        }
+        ProductCalculator productCalculator = new ProductCalculator(testStorage);
+        productCalculator.ordersToStorage(orders);
+        String actual = testStorage.getReport();
+        String expected = "fruit,quantity\n" +
+                "banana,130\n";
+        Assert.assertEquals(actual, expected);
+    }
+}

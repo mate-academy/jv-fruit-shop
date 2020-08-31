@@ -14,7 +14,7 @@ public class ProductCalculatorTest {
 
     @Test
     public void productCalculatorTest() {
-        List<String> file = fileService.readFile("src/main/resources/test2.csv");
+        List<String> file = fileService.readFile("src/test/java/resourses/test2.csv");
         List<Order> orders = new ArrayList<>();
         OrderParser parser = new OrderParser();
         for (String line : file) {
@@ -24,7 +24,7 @@ public class ProductCalculatorTest {
         productCalculator.ordersToStorage(orders);
 
         Assert.assertEquals(1, testStorage.getAllProducts().size());
-        Assert.assertEquals(130, testStorage.getAllProducts().get("banana").get(0).getQuantity());
+        Assert.assertEquals(30, testStorage.getAllProducts().get("banana").get(0).getQuantity());
     }
 
 }
