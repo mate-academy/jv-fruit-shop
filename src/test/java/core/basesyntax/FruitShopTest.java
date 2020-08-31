@@ -12,7 +12,6 @@ import core.basesyntax.daily.AvailableFruit;
 import core.basesyntax.daily.Fruit;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitShopTest {
