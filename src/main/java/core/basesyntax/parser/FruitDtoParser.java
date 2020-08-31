@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 public class FruitDtoParser {
     public FruitDto parse(String row) {
-        String[] data = row.replaceAll("\"", "").split(",");
+        String[] data = row.split(",");
         try {
             return new FruitDto.FruitDtoBuilder()
                     .setTypeOperation(data[0])
@@ -15,7 +15,7 @@ public class FruitDtoParser {
                     .setQuantity(Integer.parseInt(data[2]))
                     .build();
         } catch (NumberFormatException | DateTimeParseException e) {
-            throw new IllegalArgumentException("Incorrect params in row!!!");
+            throw new IllegalArgumentException("Incorrect params in row!!!", e);
         }
     }
 }

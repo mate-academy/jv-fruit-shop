@@ -35,7 +35,7 @@ public class FileService {
                 Files.writeString(path, row + "\n", StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
-            throw new RuntimeException("The file can't be written!!!");
+            throw new RuntimeException("The file can't be written!!!", e);
         }
     }
 }

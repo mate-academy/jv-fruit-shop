@@ -8,9 +8,9 @@ import org.junit.Test;
 import java.time.LocalDate;
 
 public class FruitDtoParserTest {
-    private static final String INCORRECT_NUMBER = "\"s\",\"banana\",\"incorrect\",\"2017-10-12\"";
-    private static final String ROW = "\"s\",\"banana\",\"100\",\"2017-10-12\"";
-    private static final String INCORRECT_DATE = "\"s\",\"banana\",\"100\",\"2017-10-35\"";
+    private static final String INCORRECT_NUMBER = "s,banana,incorrect,2017-10-12";
+    private static final String ROW = "s,banana,100,2017-10-12";
+    private static final String INCORRECT_DATE = "s,banana,100,2017-10-35";
     private static final FruitDtoParser PARSER = new FruitDtoParser();
 
     @Test(expected = IllegalArgumentException.class)
