@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitStorage;
-import core.basesyntax.service.FruitOperations;
+import core.basesyntax.service.FruitOperation;
 import core.basesyntax.service.impl.ReturnFruitOperation;
 import org.junit.After;
 import org.junit.Assert;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class ReturnOperationTest {
     private static final Integer EXPECTED_QUANTITY = 60;
     private static final String KEY = "banana";
-    private static FruitOperations returning;
+    private static FruitOperation returning;
     private static Map<String, Fruit> storage = FruitStorage.getFruitStorage();
 
     @BeforeClass

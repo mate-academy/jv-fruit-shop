@@ -3,12 +3,13 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitStorage;
-import core.basesyntax.service.FruitOperations;
+import core.basesyntax.service.FruitOperation;
 import java.time.LocalDate;
 import java.util.Map;
 
-public class BuyFruitOperation implements FruitOperations {
+public class BuyFruitOperation implements FruitOperation {
     private Map<String, Fruit> storage = FruitStorage.getFruitStorage();
+    private StorageService storageService = new StorageService();
 
     @Override
     public void doOperation(FruitDto fruitDto) {
@@ -16,32 +17,9 @@ public class BuyFruitOperation implements FruitOperations {
         if (storage.containsKey(key)) {
             LocalDate dateFromTransaction = fruitDto.getFruitDtoDate();
             Integer amountToSubtract = fruitDto.getAmount();
-            extractFromStorage(amountToSubtract, dateFromTransaction, key);
+            storageService.extractFromStorage(amountToSubtract, dateFromTransaction, key);
         } else {
             throw new RuntimeException("We do not have this fruit.");
-        }
-    }
-
-    private void extractFromStorage(Integer amount, LocalDate date, String key) {
-        Fruit fruit = storage.get(key);
-        if (fruit.getAllFruitAmountByDate(date) < amount) {
-            throw new RuntimeException("We are out of this fruit.");
-        }
-        while (fruit != null) {
-            if (fruit.getDate().isAfter(date)) {
-                if (fruit.getAmount() >= amount) {
-                    fruit.setAmount(fruit.getAmount() - amount);
-                    return;
-                }
-                int difference = amount - fruit.getAmount();
-                fruit.setAmount(0);
-                amount = difference;
-            }
-            if (amount == 0) {
-                storage.put(key, fruit);
-                return;
-            }
-            fruit = fruit.getNext();
         }
     }
 }

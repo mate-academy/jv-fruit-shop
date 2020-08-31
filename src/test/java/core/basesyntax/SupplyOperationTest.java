@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitStorage;
-import core.basesyntax.service.FruitOperations;
+import core.basesyntax.service.FruitOperation;
 import core.basesyntax.service.impl.SupplyFruitOperation;
 import org.junit.*;
 
@@ -13,7 +13,7 @@ import java.util.Map;
 public class SupplyOperationTest {
     private static final Integer EXPECTED_QUANTITY = 60;
     private static final String KEY = "banana";
-    private static FruitOperations supply;
+    private static FruitOperation supply;
     private static Map<String, Fruit> storage = FruitStorage.getFruitStorage();
 
     @BeforeClass

@@ -22,7 +22,7 @@ public class WriterTest {
     public static void beforeClass() {
         Reader reader = new Reader();
         OperationHandler operationHandler = new OperationHandler();
-        List<FruitDto> transactions = reader.readFromFile("src/CsvFolder/inputNormal1.csv");
+        List<FruitDto> transactions = reader.readFromFile("src/test/resources/inputNormal1.csv");
         operationHandler.handleOperation(transactions);
     }
 
@@ -30,9 +30,9 @@ public class WriterTest {
     public void normalWrite() throws IOException {
         writer.write("src/CsvFolder/result1.csv");
         List<String> expected = Files
-                .readAllLines(Path.of("src/CsvFolder/expectedResultFromWriterTest.csv"));
+                .readAllLines(Path.of("src/test/resources/expectedResultFromWriterTest.csv"));
         List<String> actual = Files
-                .readAllLines(Path.of("src/CsvFolder/result1.csv"));
+                .readAllLines(Path.of("src/test/resources/result1.csv"));
         expected.removeAll(actual);
         Assert.assertTrue(expected.isEmpty());
     }
@@ -40,9 +40,9 @@ public class WriterTest {
     @Test
     public void writeFromEmptyStorageTest() throws IOException {
         FruitStorage.getFruitStorage().clear();
-        writer.write("src/CsvFolder/onlyHeader.csv");
+        writer.write("src/test/resources/onlyHeader.csv");
         List<String> actual = Files
-                .readAllLines(Path.of("src/CsvFolder/onlyHeader.csv"));
+                .readAllLines(Path.of("src/test/resources/onlyHeader.csv"));
         Assert.assertEquals(1, actual.size());
     }
 }

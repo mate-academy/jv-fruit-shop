@@ -1,9 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.FruitDto;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitStorage;
-import core.basesyntax.service.FruitOperations;
+import core.basesyntax.service.FruitOperation;
 import core.basesyntax.service.iooperations.OperationHandler;
 import core.basesyntax.service.iooperations.Reader;
 import core.basesyntax.service.impl.BuyFruitOperation;
@@ -14,13 +13,13 @@ import org.junit.Test;
 public class BuyOperationTest {
     private static final Integer EXPECTED_QUANTITY = 90;
     private static final String KEY = "banana";
-    private static FruitOperations buy;
+    private static FruitOperation buy;
 
     @BeforeClass
     public static void prepareEnvironmentBeforeTest() {
         buy = new BuyFruitOperation();
         FruitStorage.getFruitStorage().clear();
-        new OperationHandler().handleOperation(new Reader().readFromFile("src/CsvFolder/buyTest.csv"));
+        new OperationHandler().handleOperation(new Reader().readFromFile("src/test/resources/buyTest.csv"));
     }
 
     @Test

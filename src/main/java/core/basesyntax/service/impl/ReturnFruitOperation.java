@@ -3,11 +3,12 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitStorage;
-import core.basesyntax.service.FruitOperations;
+import core.basesyntax.service.FruitOperation;
 import java.util.Map;
 
-public class ReturnFruitOperation implements FruitOperations {
+public class ReturnFruitOperation implements FruitOperation {
     private Map<String, Fruit> storage = FruitStorage.getFruitStorage();
+    private StorageService storageService = new StorageService();
 
     @Override
     public void doOperation(FruitDto fruitDto) {
@@ -15,7 +16,7 @@ public class ReturnFruitOperation implements FruitOperations {
         Integer amountToReturn = fruitDto.getAmount();
         Fruit fruit;
         if (storage.containsKey(fruitName)) {
-            fruit = new SupplyFruitOperation().getFruit(fruitDto, fruitName, amountToReturn);
+            fruit = storageService.getFruitFromStorage(fruitDto, fruitName, amountToReturn);
             if (fruit == null) {
                 return;
             }
