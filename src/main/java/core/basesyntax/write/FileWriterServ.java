@@ -1,5 +1,5 @@
 package core.basesyntax.write;
 
-public interface FileWriter {
+public interface FileWriterServ {
     void writingToFile(String path, String totalFruitOnStorage);
 }

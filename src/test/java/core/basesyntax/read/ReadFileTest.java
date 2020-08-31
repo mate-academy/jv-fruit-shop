@@ -10,7 +10,7 @@ public class ReadFileTest {
     private static final String SECOND_PATH = "src/test/resources/test_2.csv";
     private static final String EXPECTING_RESULT_SECOND = "s,banana,100,2020-10-17";
     private static final String EXPECTING_RESULT_THIRD = "fruit, quantity";
-    private static final ReadFile READER = new ReadFile();
+    private static final FileReaderImpl READER = new FileReaderImpl();
 
     @Test
     public void simpleReadFileTest() {

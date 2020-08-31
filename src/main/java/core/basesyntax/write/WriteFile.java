@@ -1,12 +1,13 @@
 package core.basesyntax.write;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteFile implements FileWriter {
+public class WriteFile implements FileWriterServ {
     private static final String HEAD_OF_FILE = "fruit, quantity\n";
 
     public void writingToFile(String path, String totalFruit) {
-        try (java.io.FileWriter writer = new java.io.FileWriter(path, false)) {
+        try (FileWriter writer = new FileWriter(path, false)) {
             String text = HEAD_OF_FILE + totalFruit;
             writer.write(text);
         } catch (IOException e) {
