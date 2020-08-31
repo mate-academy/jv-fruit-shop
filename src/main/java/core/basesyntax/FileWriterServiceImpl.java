@@ -6,14 +6,15 @@ import java.util.Map;
 
 public class FileWriterServiceImpl implements FileWriterService {
     private static final String HEADER = "fruit,quantity";
+    private static final String SEPARATOR = ",";
 
     @Override
-    public void writeFile(Map<String, String> conclusionData, String separator, String fileName) {
+    public void writeToFile(Map<String, String> conclusionData, String fileName) {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(HEADER + "\n");
             for (String key : conclusionData.keySet()) {
                 writer.append(key);
-                writer.append(separator);
+                writer.append(SEPARATOR);
                 writer.append(conclusionData.get(key));
                 writer.append(System.lineSeparator());
             }

@@ -12,6 +12,7 @@ public class FruitShopTest {
     private ReportService reportService = new ReportService();
     private TypesOfFruitsInStorage typesOfFruitsInStorage = new TypesOfFruitsInStorage();
     private Storage storage = new Storage();
+    private DataParser dataParser = new DataParser();
     private final FileReaderForTest fileReaderForTest = new FileReaderForTest();
     private final FileWriterService fileWriterService = new FileWriterServiceImpl();
     private static final String FILE_PATH_FOR_MAIN_TEST
@@ -30,12 +31,14 @@ public class FruitShopTest {
         row2.add("33");
         expected.add(row1);
         expected.add(row2);
-        operationStrategy.fulfillAllOrders(fileReaderServiceImpl.readFile(FILE_PATH_FOR_MAIN_TEST, ","), storage);
-        fileWriterService.writeFile(reportService.toGetReport(storage,
-                typesOfFruitsInStorage.getTypesOfFruits(storage)),
-                ",", FILE_PATH_FOR_MAIN_TEST_TO_WRITE);
+        List<List<String>> data = fileReaderServiceImpl.readFile(FILE_PATH_FOR_MAIN_TEST, ",");
+        for(List<String> row : data){
+            operationStrategy.fulfillAllOrders(row, storage, dataParser.mapToFruit(row));
+        }
+        fileWriterService.writeToFile(reportService.toGetReport(storage,
+                typesOfFruitsInStorage.getTypesOfFruits(storage)), FILE_PATH_FOR_MAIN_TEST_TO_WRITE);
         List<List<String>> actual = fileReaderForTest
-                .toReadWrittenFile(FILE_PATH_FOR_MAIN_TEST_TO_WRITE, ",");
+                .readWrittenFile(FILE_PATH_FOR_MAIN_TEST_TO_WRITE, ",");
         Assert.assertEquals(expected.size(), actual.size());
         Assert.assertEquals(expected.get(0), actual.get(0));
         Assert.assertEquals(expected.get(1), actual.get(1));

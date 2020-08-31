@@ -10,6 +10,10 @@ import java.util.List;
 public class BuyTest {
     private Buy buy = new Buy();
     private Storage storage = new Storage();
+    private static final String FILE_PATH_TO_TEST_SEVERAL_OPERATIONS = "src/test/resources/testSeveralBuyOperations";
+    private FileReaderServiceImpl fileReaderService = new FileReaderServiceImpl();
+    private OperationStrategy operationStrategy = new OperationStrategy();
+    private DataParser dataParser = new DataParser();
 
     @Test()
     public void toBuyOkFromOneObject() {
@@ -47,30 +51,18 @@ public class BuyTest {
 
     @Test()
     public void toBuyOkFromSeveralObjects() {
-        LocalDate localDateBanana1 = LocalDate.of(2020, 4, 10);
-        LocalDate localDateBanana2 = LocalDate.of(2020, 4, 13);
-        LocalDate localDateBanana3 = LocalDate.of(2020, 4, 14);
-        FruitPackage fruitPostBanana1 = new FruitPackage("banana", 10, localDateBanana1);
-        FruitPackage fruitPostBanana2 = new FruitPackage("banana", 4, localDateBanana2);
-        FruitPackage fruitPostBanana3 = new FruitPackage("banana", 15, localDateBanana3);
-        storage.getFruitPackages().add(fruitPostBanana1);
-        storage.getFruitPackages().add(fruitPostBanana2);
-        storage.getFruitPackages().add(fruitPostBanana3);
-        LocalDate localDateBuying = LocalDate.of(2020, 4, 11);
-        FruitPackage fruitPackageSell = new FruitPackage("banana", 10, localDateBuying);
-        buy.apply(fruitPackageSell, storage);
-        FruitPackage fruitPackageRemaining1 = new FruitPackage("banana", 10, localDateBanana1);
-        FruitPackage fruitPackageRemaining2 = new FruitPackage("banana", 9, localDateBanana3);
         List<FruitPackage> expectedList = new ArrayList<>();
-        expectedList.add(fruitPackageRemaining1);
-        expectedList.add(fruitPackageRemaining2);
+        FruitPackage fruitPackage1 = new FruitPackage("banana", 75, LocalDate.parse("2020-10-17"));
+        FruitPackage fruitPackage2 = new FruitPackage("banana", 10, LocalDate.parse("2020-10-24"));
+        expectedList.add(fruitPackage1);
+        expectedList.add(fruitPackage2);
+        List<List<String>> data = fileReaderService.readFile(FILE_PATH_TO_TEST_SEVERAL_OPERATIONS, ",");
+        for(List<String> row : data){
+            operationStrategy.fulfillAllOrders(row, storage, dataParser.mapToFruit(row));
+        }
         Assert.assertEquals(expectedList.size(), storage.getFruitPackages().size());
-        Assert.assertEquals(expectedList.get(1).getType(),
-                storage.getFruitPackages().get(1).getType());
-        Assert.assertEquals(expectedList.get(1).getAmount(),
-                storage.getFruitPackages().get(1).getAmount());
-        Assert.assertEquals(expectedList.get(1).getDate(),
-                storage.getFruitPackages().get(1).getDate());
+        Assert.assertEquals(expectedList.get(0).getAmount(), storage.getFruitPackages().get(0).getAmount());
+        Assert.assertEquals(expectedList.get(1).getAmount(), storage.getFruitPackages().get(1).getAmount());
     }
 
     @Test(expected = IllegalArgumentException.class)

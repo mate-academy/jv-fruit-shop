@@ -24,9 +24,9 @@ public class AvailableFruitPackagesTest {
         storage.getFruitPackages().add(fruitPackageLime);
         List<FruitPackage> expectedList = new ArrayList<>();
         expectedList.add(fruitPackageBanana1);
-        Assert.assertEquals(expectedList.size(), availableFruitPackages.toGetAvailableFruitPackages(order, storage).size());
-        Assert.assertEquals(expectedList.get(0).getDate(), availableFruitPackages.toGetAvailableFruitPackages(order, storage).get(0).getDate());
-        Assert.assertEquals(expectedList.get(0).getAmount(), availableFruitPackages.toGetAvailableFruitPackages(order, storage).get(0).getAmount());
-        Assert.assertEquals(expectedList.get(0).getType(), availableFruitPackages.toGetAvailableFruitPackages(order, storage).get(0).getType());
+        Assert.assertEquals(expectedList.size(), availableFruitPackages.getAvailableFruitPackages(order, storage).size());
+        Assert.assertEquals(expectedList.get(0).getDate(), availableFruitPackages.getAvailableFruitPackages(order, storage).get(0).getDate());
+        Assert.assertEquals(expectedList.get(0).getAmount(), availableFruitPackages.getAvailableFruitPackages(order, storage).get(0).getAmount());
+        Assert.assertEquals(expectedList.get(0).getType(), availableFruitPackages.getAvailableFruitPackages(order, storage).get(0).getType());
     }
 }

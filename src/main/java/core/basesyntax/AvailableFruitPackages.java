@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AvailableFruitPackages {
-    public List<FruitPackage> toGetAvailableFruitPackages(FruitPackage fruitPackage,
-                                                          Storage storage) {
+    public List<FruitPackage> getAvailableFruitPackages(FruitPackage fruitPackage,
+                                                        Storage storage) {
         List<FruitPackage> availableFruitsPackages = storage.getFruitPackages()
                 .stream()
                 .filter(position -> position.getType().equals(fruitPackage.getType())

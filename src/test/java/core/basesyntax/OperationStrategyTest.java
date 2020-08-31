@@ -8,15 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OperationStrategyTest {
+    private DataParser dataParser = new DataParser();
     private OperationStrategy operationStrategy = new OperationStrategy();
     private Storage storage = new Storage();
 
     @Test
     public void toFulfillAllOrdersOk() {
-        List<FruitPackage> fruitPackagesList = new ArrayList<>();
+        List<FruitPackage> expectedList = new ArrayList<>();
         LocalDate localDateLime = LocalDate.parse("2019-10-14");
         FruitPackage fruitPackageLime = new FruitPackage("lime", 5, localDateLime);
-        fruitPackagesList.add(fruitPackageLime);
+        expectedList.add(fruitPackageLime);
         List<List<String>> data = new ArrayList<>();
         List<String> row1 = new ArrayList<>();
         row1.add("s");
@@ -42,10 +43,12 @@ public class OperationStrategyTest {
         data.add(row2);
         data.add(row3);
         data.add(row4);
-        operationStrategy.fulfillAllOrders(data, storage);
-        Assert.assertEquals(fruitPackagesList.size(), storage.getFruitPackages().size());
-        Assert.assertEquals(fruitPackagesList.get(0).getAmount(), storage.getFruitPackages().get(0).getAmount());
-        Assert.assertEquals(fruitPackagesList.get(0).getType(), storage.getFruitPackages().get(0).getType());
-        Assert.assertEquals(fruitPackagesList.get(0).getDate(), storage.getFruitPackages().get(0).getDate());
+        for(List<String> row : data){
+            operationStrategy.fulfillAllOrders(row, storage, dataParser.mapToFruit(row));
+        }
+        Assert.assertEquals(expectedList.size(), storage.getFruitPackages().size());
+        Assert.assertEquals(expectedList.get(0).getAmount(), storage.getFruitPackages().get(0).getAmount());
+        Assert.assertEquals(expectedList.get(0).getType(), storage.getFruitPackages().get(0).getType());
+        Assert.assertEquals(expectedList.get(0).getDate(), storage.getFruitPackages().get(0).getDate());
     }
 }

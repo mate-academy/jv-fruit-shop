@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderForTest {
-    public List<List<String>> toReadWrittenFile(String filePath, String separator) {
+    public List<List<String>> readWrittenFile(String filePath, String separator) {
         String line;
         List<List<String>> data = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
