@@ -4,29 +4,29 @@ Your task is to implement the following requirements and cover at least 80% of y
 All input data will be passed in the file in CSV format.
 
 ## Fruit Store
-Let's imagine you have a fruit store. 
-There are three type of operations in your fruit store:
+Let's imagine you have a fruitPackageDTO store. 
+There are three type of operations in your fruitPackageDTO store:
 
 ```text
-    s - supply, means you are receiving a new fruits from suppliers
-    b - buy, means someone bought a fruit
-    r - return, means someone who have bought the fruits now returns you it
+    s - supply, means you are receiving a new fruitPackageDTOS from suppliers
+    b - buy, means someone bought a fruitPackageDTO
+    r - return, means someone who have bought the fruitPackageDTOS now returns you it
 ```
 
 Let's check in details all types of operations:
-1. Supply. You are accepting a new fruit from suppliers. The following line in the file will look like:
+1. Supply. You are accepting a new fruitPackageDTO from suppliers. The following line in the file will look like:
     
     ```text
        s,banana,100,2020-10-17     
     ```
    The line above means you receive a 100 bananas, and their expiration date is 17-th October 2020.
-1. Buy. Buyers can visit your shop and buy some fruits. In this case you will have the following line in the file:
+1. Buy. Buyers can visit your shop and buy some fruitPackageDTOS. In this case you will have the following line in the file:
     
     ```text
        b,banana,13,2020-10-15     
     ```
    The line above means someone bought a 13 bananas. Date of purchase is 15-th October 2020.
-1. Return. Buyers can return you some fruits. In this case you will have the following line in the file:
+1. Return. Buyers can return you some fruitPackageDTOS. In this case you will have the following line in the file:
     
     ```text
        r,banana,10,2020-10-17     
@@ -36,16 +36,16 @@ Let's check in details all types of operations:
 
 ### Input file example
 ```text
-    type,fruit,quantity,date
+    type,fruitPackageDTO,quantity,date
     s,banana,100,2020-10-17
     b,banana,13,2020-10-15
     r,banana,10,2020-10-17 
 ```
 
 ### Expecting output file example
-We are expecting to see how many fruits are available in your Fruit store after the file processing. For example:
+We are expecting to see how many fruitPackageDTOS are available in your Fruit store after the file processing. For example:
 ```text
-    fruit,quantity
+    fruitPackageDTO,quantity
     banana,97
     orange,147
     apple,29

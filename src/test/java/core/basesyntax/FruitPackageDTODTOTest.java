@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class FruitDTOTest {
+public class FruitPackageDTODTOTest {
     private static final FileService SERVICE = new FileServiceImpl();
     private static final String CORRECT_FILE_IN = "Fruit In";
     private static final String EMPTY_FILE_IN = "Fruit Empty";
