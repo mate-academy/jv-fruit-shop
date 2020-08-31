@@ -6,12 +6,12 @@ public class FruitAction implements Action {
     private static final String RETURN = "r";
 
     @Override
-    public boolean action(String act, String fruit, int quantity, String date) {
+    public boolean action(String operation, String fruit, int quantity, String date) {
         Operation supply = new SupplyOperation();
         Operation buy = new BuyOperation();
         Operation ret = new ReturnOperation();
         checkQuantity(quantity);
-        switch (act) {
+        switch (operation) {
             case SUPPLY:
                 supply.provideOperation(fruit, quantity, date);
                 return true;
