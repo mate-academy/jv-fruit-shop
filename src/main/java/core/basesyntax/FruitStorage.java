@@ -1,39 +1,23 @@
 package core.basesyntax;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class FruitStorage {
-    private Map<String, Transaction> fruitStorage = new LinkedHashMap<>();
+    public static final List<Fruit> fruits = new ArrayList<>();
 
-    public int getQuantity(String fruitType) {
-        int newQuantity = 0;
-        for (Transaction fruit : fruitStorage.values()) {
-            if (fruit.getFruitType().equals(fruitType)) {
-                int quantity = fruit.getQuantity();
-                newQuantity = newQuantity + quantity;
+    public static void add(Fruit fruit) {
+        fruits.add(fruit);
+    }
+
+    public static void remove(Fruit fruit) {
+        for (int i = 0; i < fruits.size(); i++) {
+            if (fruit.getFruitName().equals(fruits.get(i).getFruitName())
+                    && fruit.getLocalDate().isBefore(fruits.get(i).getLocalDate())) {
+                fruits.remove(i);
+                return;
             }
         }
-        return newQuantity;
-    }
-    
-    public String getInfo() {
-        StringBuilder builder = new StringBuilder();
-        for (Map.Entry<String, Transaction> pair: fruitStorage.entrySet()) {
-            builder.append(pair.getKey())
-                    .append(",")
-                    .append(pair.getValue().getQuantity())
-                    .append("\n");
-        }
-        return builder.toString();
-    }
-
-    public void add(List<FruitOperation> operation) {
-        for (FruitOperation fruitOperation : operation) {
-            fruitStorage = fruitOperation.execute(getQuantity(
-                    fruitOperation.transaction.getFruitType()),
-                    fruitStorage);
-        }
+        throw new RuntimeException("incorrect purchase data");
     }
 }
