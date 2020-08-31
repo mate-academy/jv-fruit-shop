@@ -8,18 +8,18 @@ public class FruitAction implements Action {
     @Override
     public boolean action(String act, String fruit, int quantity, String date) {
         Operation supply = new SupplyOperation();
-        Buy buy = new BuyOperation();
+        Operation buy = new BuyOperation();
         Operation ret = new ReturnOperation();
         checkQuantity(quantity);
         switch (act) {
             case SUPPLY:
-                supply.provideOperation(fruit, quantity);
+                supply.provideOperation(fruit, quantity, date);
                 return true;
             case BUY:
-                buy.buyFruit(fruit, quantity, date);
+                buy.provideOperation(fruit, quantity, date);
                 return true;
             case RETURN:
-                ret.provideOperation(fruit, quantity);
+                ret.provideOperation(fruit, quantity, date);
                 return true;
             default:
                 throw new UnsupportedOperationException("Wrong operation format.");

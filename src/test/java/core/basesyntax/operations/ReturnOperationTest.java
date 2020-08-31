@@ -12,6 +12,7 @@ public class ReturnOperationTest {
     private static final Integer EXPECTED_QUANTITY = 60;
     private static final String INCORRECT_KEY = "banana";
     private static final String FRUIT = "orange";
+    private static final String DATE = "2020-10-12";
     private static ReturnOperation ret;
 
     @BeforeClass
@@ -28,12 +29,12 @@ public class ReturnOperationTest {
     @Test
     public void returnNormalTest() {
         Map<String, Integer> storage = Storage.getStockBalance();
-        ret.provideOperation(FRUIT, QUANTITY);
+        ret.provideOperation(FRUIT, QUANTITY, DATE);
         Assert.assertEquals(EXPECTED_QUANTITY, storage.get(FRUIT));
     }
 
     @Test(expected = RuntimeException.class)
     public void incorrectFruitTest() {
-        ret.provideOperation(INCORRECT_KEY, QUANTITY);
+        ret.provideOperation(INCORRECT_KEY, QUANTITY, DATE);
     }
 }

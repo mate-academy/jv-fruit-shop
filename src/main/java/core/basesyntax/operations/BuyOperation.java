@@ -5,11 +5,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-public class BuyOperation implements Buy {
+public class BuyOperation implements Operation {
     private final Map<String, Integer> stockBalance = Storage.getStockBalance();
 
     @Override
-    public void buyFruit(String fruit, int quantity, String date) {
+    public void provideOperation(String fruit, int quantity, String date) {
         checkExpirationDate(date);
         if (stockBalance.containsKey(fruit)) {
             int fruitsAmount = stockBalance.get(fruit);

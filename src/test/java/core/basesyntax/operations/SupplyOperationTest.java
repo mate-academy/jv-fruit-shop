@@ -12,6 +12,7 @@ public class SupplyOperationTest {
     private static final Integer QUANTITY = 30;
     private static final Integer EXPECTED_QUANTITY = 60;
     private static final String FRUIT = "orange";
+    private static final String DATE = "2020-10-12";
     private static SupplyOperation supply;
 
     @BeforeClass
@@ -27,7 +28,7 @@ public class SupplyOperationTest {
     @Test
     public void supplyNormalTest() {
         Storage.addFruit(FRUIT, QUANTITY);
-        supply.provideOperation(FRUIT, QUANTITY);
+        supply.provideOperation(FRUIT, QUANTITY, DATE);
         Map<String, Integer> storage = Storage.getStockBalance();
         Assert.assertEquals(EXPECTED_QUANTITY, storage.get(FRUIT));
     }
@@ -37,7 +38,7 @@ public class SupplyOperationTest {
         System.out.println(Storage.getStockBalance());
         Map<String, Integer> testMap = new HashMap<>();
         testMap.put(FRUIT, QUANTITY);
-        supply.provideOperation(FRUIT, QUANTITY);
+        supply.provideOperation(FRUIT, QUANTITY, DATE);
         Assert.assertEquals(testMap, Storage.getStockBalance());
     }
 }

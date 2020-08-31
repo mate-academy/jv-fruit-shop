@@ -14,11 +14,12 @@ public class BuyOperationTest {
     private static final String EXPIRY_DATE = "2020-05-12";
     private static final Integer QUANTITY = 50;
     private static final Integer SOLD_QUANTITY = 60;
-    private static Buy buy;
+    private static Operation buy;
 
     @BeforeClass
     public static void beforeClass() {
-        buy = new BuyOperation();
+        buy = new BuyOperation() {
+        };
     }
 
     @Before
@@ -28,22 +29,22 @@ public class BuyOperationTest {
 
     @Test
     public void buyNormalTest() {
-        buy.buyFruit(FRUIT, 30, NORMAL_DATE);
+        buy.provideOperation(FRUIT, 30, NORMAL_DATE);
         Assert.assertEquals(EXPECTED_QUANTITY, Storage.getStockBalance().get(FRUIT));
     }
 
     @Test(expected = RuntimeException.class)
     public void soldOutFruitTest() {
-        buy.buyFruit(FRUIT, SOLD_QUANTITY, NORMAL_DATE);
+        buy.provideOperation(FRUIT, SOLD_QUANTITY, NORMAL_DATE);
     }
 
     @Test(expected = RuntimeException.class)
     public void expirationDateTest() {
-        buy.buyFruit(FRUIT, QUANTITY, EXPIRY_DATE);
+        buy.provideOperation(FRUIT, QUANTITY, EXPIRY_DATE);
     }
 
     @Test(expected = RuntimeException.class)
     public void notAvailableFruitTest() {
-        buy.buyFruit(NOT_AVAILABLE_KEY, QUANTITY, NORMAL_DATE);
+        buy.provideOperation(NOT_AVAILABLE_KEY, QUANTITY, NORMAL_DATE);
     }
 }
