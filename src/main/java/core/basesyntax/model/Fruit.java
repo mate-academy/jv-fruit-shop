@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Fruit {
-    private static Map<String, Fruit> fruitStorage = new HashMap<>();
     private LocalDate date;
     private Integer amount;
     private Fruit next;
@@ -33,10 +32,6 @@ public class Fruit {
 
     public Integer getAmount() {
         return amount;
-    }
-
-    public static Map<String, Fruit> getFruitStorage() {
-        return fruitStorage;
     }
 
     public void setAmount(Integer amount) {

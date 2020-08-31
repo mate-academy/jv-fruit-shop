@@ -2,6 +2,7 @@ package core.basesyntax.operations;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitDto;
+import core.basesyntax.model.FruitStorage;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.Reader;
 import org.junit.Assert;
@@ -17,14 +18,14 @@ public class BuyOperationTest {
     @BeforeClass
     public static void beforeClass() {
         buy = new BuyOperation();
-        Fruit.getFruitStorage().clear();
+        FruitStorage.getFruitStorage().clear();
         OperationHandler.handleOperation(reader.readFromFile("src/main/resources/BuyTest.csv"));
     }
 
     @Test
     public void testBuyWithNormalData() {
         buy.doOperation(new FruitDto("b", KEY, "10", "2020-10-07"));
-        Assert.assertEquals(EXPECTED_QUANTITY, Fruit.getFruitStorage().get(KEY).getAllFruitAmount());
+        Assert.assertEquals(EXPECTED_QUANTITY, FruitStorage.getFruitStorage().get(KEY).getAllFruitAmount());
     }
 
     @Test(expected = RuntimeException.class)
