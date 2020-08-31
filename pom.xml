@@ -26,6 +26,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -47,6 +52,7 @@
                     <consoleOutput>true</consoleOutput>
                     <failsOnError>true</failsOnError>
                     <linkXRef>false</linkXRef>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
                 </configuration>
             </plugin>
             <plugin>
@@ -66,7 +72,6 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
-                    <!-- Add this checking -->
                     <execution>
                         <id>jacoco-check</id>
                         <goals>
@@ -75,7 +80,7 @@
                         <configuration>
                             <rules>
                                 <rule>
-                                    <element>PACKAGE</element>
+                                    <element>BUNDLE</element>
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
@@ -87,7 +92,6 @@
                             </rules>
                         </configuration>
                     </execution>
-
                 </executions>
             </plugin>
         </plugins>
