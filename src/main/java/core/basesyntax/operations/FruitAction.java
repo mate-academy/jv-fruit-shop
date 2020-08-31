@@ -1,12 +1,18 @@
 package core.basesyntax.operations;
 
+import core.basesyntax.service.TransactionParser;
+
 public class FruitAction implements Action {
     private static final String SUPPLY = "s";
     private static final String BUY = "b";
     private static final String RETURN = "r";
 
     @Override
-    public boolean action(String operation, String fruit, int quantity, String date) {
+    public boolean action(TransactionParser transaction) {
+        String operation = transaction.getOperation();
+        Integer quantity = transaction.getQuantity();
+        String fruit = transaction.getFruit();
+        String date = transaction.getDate();
         Operation supply = new SupplyOperation();
         Operation buy = new BuyOperation();
         Operation ret = new ReturnOperation();

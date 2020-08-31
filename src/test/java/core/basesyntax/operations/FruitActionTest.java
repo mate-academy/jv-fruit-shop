@@ -1,10 +1,11 @@
 package core.basesyntax.operations;
 
+import core.basesyntax.service.TransactionParser;
 import core.basesyntax.storage.Storage;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FruitActionTest {
     private static FruitAction act;
@@ -13,9 +14,11 @@ public class FruitActionTest {
     private static final String RETURN = "r";
     private static final String INCORRECT_OPERATION = "*";
     private static final String FRUIT = "banana";
-    private static final Integer QUANTITY = 50;
+    private static final String QUANTITY = "50";
+    private static final Integer QUANTITY_INT = 100;
     private static final Integer INCORRECT_QUANTITY = -5;
     private static final String DATE = "2020-09-15";
+    List<String> testList;
 
     @BeforeClass
     public static void beforeClass() {
@@ -24,34 +27,53 @@ public class FruitActionTest {
 
     @Before
     public void before() {
+        testList = new ArrayList<>();
+        testList.add(0, SUPPLY);
+        testList.add(1, FRUIT);
+        testList.add(2, QUANTITY);
+        testList.add(3, DATE);
+    }
+
+    @After
+    public void after(){
         Storage.getStockBalance().clear();
     }
 
     @Test
     public void actionSupplyTest() {
-        Assert.assertTrue(act.action(SUPPLY, FRUIT, QUANTITY, DATE));
+        TransactionParser transaction = new TransactionParser(testList);
+        Assert.assertTrue(act.action(transaction));
     }
 
     @Test
     public void actionBuyTest() {
-        Storage.addFruit(FRUIT, QUANTITY);
-        Assert.assertTrue(act.action(BUY, FRUIT, QUANTITY, DATE));
-
+        Storage.addFruit(FRUIT, QUANTITY_INT);
+        TransactionParser transaction = new TransactionParser(testList);
+        transaction.setOperation(BUY);
+        Assert.assertTrue(act.action(transaction));
     }
 
     @Test
     public void actionReturnTest() {
-        Storage.addFruit(FRUIT, QUANTITY);
-        Assert.assertTrue(act.action(RETURN, FRUIT, QUANTITY, DATE));
+        Storage.addFruit(FRUIT, QUANTITY_INT);
+        TransactionParser transaction = new TransactionParser(testList);
+        transaction.setOperation(RETURN);
+        Assert.assertTrue(act.action(transaction));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void checkQuantityTest() {
-        act.action(SUPPLY, FRUIT, INCORRECT_QUANTITY, DATE);
+        Storage.addFruit(FRUIT, QUANTITY_INT);
+        TransactionParser transaction = new TransactionParser(testList);
+        transaction.setQuantity(INCORRECT_QUANTITY);
+        act.action(transaction);
     }
 
     @Test(expected = UnsupportedOperationException.class)
     public void soldOutFruitTest() {
-        Assert.assertTrue(act.action(INCORRECT_OPERATION, FRUIT, QUANTITY, DATE));
+        Storage.addFruit(FRUIT, QUANTITY_INT);
+        TransactionParser transaction = new TransactionParser(testList);
+        transaction.setOperation(INCORRECT_OPERATION);
+        act.action(transaction);
     }
 }

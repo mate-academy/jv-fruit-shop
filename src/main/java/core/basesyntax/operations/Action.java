@@ -1,5 +1,7 @@
 package core.basesyntax.operations;
 
+import core.basesyntax.service.TransactionParser;
+
 public interface Action {
-    boolean action(String act, String fruit, int quantity, String date);
+    boolean action(TransactionParser transaction);
 }
