@@ -20,4 +20,9 @@ public class TransactionTest {
     public void TransactionHashCodeOkTest() {
         Assert.assertEquals(transaction1.hashCode(), transaction2.hashCode());
     }
+
+    @Test
+    public void TransactionEqualsSameObjectOkTest() {
+        Assert.assertTrue(transaction1.equals(transaction1));
+    }
 }

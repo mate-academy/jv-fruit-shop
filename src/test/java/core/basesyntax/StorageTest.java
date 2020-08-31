@@ -93,4 +93,9 @@ public class StorageTest {
                 LocalDate.parse("2020-10-18", DateTimeFormatter.ISO_LOCAL_DATE)));
         Assert.assertEquals(expectedStorage.hashCode(), storage.hashCode());
     }
+
+    @Test
+    public void StorageEqualsSameObjectOkTest() {
+        Assert.assertTrue(storage.equals(storage));
+    }
 }
