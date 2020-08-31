@@ -75,7 +75,7 @@
                         <configuration>
                             <rules>
                                 <rule>
-                                    <element>PACKAGE</element>
+                                    <element>BUNDLE</element>
                                     <limits>
                                         <limit>
                                             <counter>LINE</counter>
@@ -89,6 +89,11 @@
                     </execution>
 
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/FruitShop*</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
         <pluginManagement>
