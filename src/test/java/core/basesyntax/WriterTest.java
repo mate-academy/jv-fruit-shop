@@ -28,7 +28,7 @@ public class WriterTest {
 
     @Test
     public void normalWrite() throws IOException {
-        writer.write("src/CsvFolder/result1.csv");
+        writer.write("src/test/resources/result1.csv");
         List<String> expected = Files
                 .readAllLines(Path.of("src/test/resources/expectedResultFromWriterTest.csv"));
         List<String> actual = Files
