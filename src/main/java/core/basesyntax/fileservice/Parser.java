@@ -20,7 +20,7 @@ public class Parser {
             try {
                 data = line.split(CSV_REGEX);
             } catch (RuntimeException exception) {
-                throw new RuntimeException("No arguments to parse");
+                throw new RuntimeException("No arguments to parse", exception);
             }
             try {
                 productData.add(new ProductDto(switcher.getOperation(data[OPERATION_INDEX]),
@@ -28,7 +28,7 @@ public class Parser {
                         LocalDate.parse(data[EXP_DATE_INDEX]),
                         Integer.parseInt(data[QUANTITY_INDEX])));
             } catch (RuntimeException exception) {
-                throw new RuntimeException("Invalid format of input data");
+                throw new RuntimeException("Invalid format of input data", exception);
             }
         }
         return productData;

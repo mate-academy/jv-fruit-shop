@@ -8,6 +8,7 @@ import core.basesyntax.storeservice.Supplier;
 import org.junit.Assert;
 import org.junit.Test;
 import java.io.IOException;
+import java.nio.file.NoSuchFileException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,27 +41,15 @@ public class FileServiceTests {
     public static final ProductDto MANGO_PRODUCT_COMPLEX = new ProductDto(new Supplier(),
             "mango", LocalDate.parse("2020-10-20"), 250);
 
-    @Test
-    public void ReaderTestException() {
-        String actual = EMPTY;
-        try {
-            READER.readFile("12345");
-        } catch (IOException exception) {
-            actual = exception.getMessage();
-        }
-        Assert.assertEquals(NO_FILE_MESSAGE, actual);
-        try {
-            READER.readFile(ELEVENTH_FILE);
-        } catch (IOException exception) {
-            actual = exception.getMessage();
-        }
-        Assert.assertEquals(NO_FILE_MESSAGE, actual);
-        try {
-            READER.readFile(null);
-        } catch (IOException exception) {
-            actual = exception.getMessage();
-        }
-        Assert.assertEquals(NO_FILE_MESSAGE, actual);
+    @Test(expected = IOException.class)
+    public void ReaderTestInvalidFileName() throws IOException {
+        READER.readFile(ELEVENTH_FILE);
+
+    }
+
+    @Test(expected = IOException.class)
+    public void ReaderTestNullException() throws IOException {
+        READER.readFile(null);
     }
 
     @Test
