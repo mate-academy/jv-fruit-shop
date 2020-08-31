@@ -33,6 +33,6 @@ public class ReaderTest {
 
     @Test(expected = RuntimeException.class)
     public void emptyFileTest() {
-        reader.readFromFile("src/main/resources/emptyFile.csv");
+        reader.readFromFile("src/СSVFolder/emptyFile.csv");
     }
 }
