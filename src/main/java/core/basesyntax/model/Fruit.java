@@ -1,8 +1,6 @@
 package core.basesyntax.model;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Fruit {
     private LocalDate date;
