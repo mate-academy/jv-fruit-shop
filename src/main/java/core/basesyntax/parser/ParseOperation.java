@@ -1,5 +1,7 @@
 package core.basesyntax.parser;
 
+import core.basesyntax.model.Order;
+
 public interface ParseOperation {
-    String[] parse(String row);
+    Order parseNewOrder(String row);
 }

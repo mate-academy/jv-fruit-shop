@@ -1,28 +1,23 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.order.Order;
+import core.basesyntax.model.Order;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDaoImplTest {
-    private static Order order1 = new Order("s", "banana", 100);
-    private static Order order2 = new Order("s", "apple", 100);
-    private static Order order3 = new Order("s", "orange", 100);
-    List<Order> orders = new ArrayList<>();
 
-    OrderDaoImpl orderDao = new OrderDaoImpl();
     @Test
     public void orderDaoImplTest() {
-        orders.add(order1);
-        orders.add(order2);
-        orders.add(order3);
-        Storage.orders.add(order1);
-        Storage.orders.add(order2);
-        Storage.orders.add(order3);
-        orderDao.getAll();
-        Assert.assertEquals(orders,Storage.orders);
+        OrderDaoImpl actual = new OrderDaoImpl();
+        List<Order> expected = new ArrayList<>();
+        expected.add(new Order("s", "banana", 100));
+        expected.add(new Order("s", "apple", 100));
+        expected.add(new Order("s", "orange", 100));
+        actual.add(new Order("s", "banana", 100));
+        actual.add(new Order("s", "apple", 100));
+        actual.add(new Order("s", "orange", 100));
+        Assert.assertEquals(expected, actual.getAll());
     }
 }

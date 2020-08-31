@@ -1,6 +1,6 @@
 package core.basesyntax.db;
 
-import core.basesyntax.order.Order;
+import core.basesyntax.model.Order;
 import java.util.ArrayList;
 import java.util.List;
 

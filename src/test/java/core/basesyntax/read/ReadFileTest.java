@@ -6,38 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFileTest {
-    public final static String FIRST_PATH = "src/test/resources/test_3.csv";
-    public final static String SECOND_PATH = "src/test/resources/test_2.csv";
-    public final static List<String> EXPECTING_RESULT_FIRST = new ArrayList<>();
-    public final static String EXPECTING_RESULT_SECOND = "s,banana,100,2020-10-17";
-    public final static String EXPECTING_RESULT_THIRD = "fruit, quantity";
+    private static final String FIRST_PATH = "src/test/resources/test_3.csv";
+    private static final String SECOND_PATH = "src/test/resources/test_2.csv";
+    private static final String EXPECTING_RESULT_SECOND = "s,banana,100,2020-10-17";
+    private static final String EXPECTING_RESULT_THIRD = "fruit, quantity";
+    private static final ReadFile READER = new ReadFile();
 
     @Test
     public void simpleReadFileTest() {
-        EXPECTING_RESULT_FIRST.add(EXPECTING_RESULT_SECOND);
-        ReadFile reader = new ReadFile();
-        List<String> actual = reader.readFile(FIRST_PATH);
-        Assert.assertEquals(EXPECTING_RESULT_FIRST, actual);
+        List<String> expectResultFirst = new ArrayList<>();
+        expectResultFirst.add(EXPECTING_RESULT_SECOND);
+        List<String> actual = READER.readFile(FIRST_PATH);
+        Assert.assertEquals(expectResultFirst, actual);
     }
 
     @Test
     public void shouldFileReaderTest() {
-        ReadFile reader = new ReadFile();
-        String actual = reader.readFile(FIRST_PATH).get(0);
+        String actual = READER.readFile(FIRST_PATH).get(0);
         Assert.assertEquals(EXPECTING_RESULT_SECOND, actual);
     }
 
     @Test(expected = RuntimeException.class)
     public void fileReaderTestFail() {
-        ReadFile reader = new ReadFile();
-        reader.readFile("blblblb").get(0);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void fileReaderTestEmptyFile() {
-        ReadFile reader = new ReadFile();
-        String actual = reader.readFile(SECOND_PATH).get(0);
-        Assert.assertEquals(EXPECTING_RESULT_THIRD, actual);
+        READER.readFile("blblblb").get(0);
     }
 }
 

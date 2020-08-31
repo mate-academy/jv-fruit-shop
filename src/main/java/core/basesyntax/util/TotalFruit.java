@@ -3,8 +3,8 @@ package core.basesyntax.util;
 import core.basesyntax.dao.OrderDaoImpl;
 import java.util.List;
 
-public class TotalFruitOnStorage {
-    public String totalFruit() {
+public class TotalFruit {
+    public String totalFruitOnStorage() {
         GetTotalSumOfFruit operation = new GetTotalSumOfFruit();
         OrderDaoImpl orderDao = new OrderDaoImpl();
         String totalFruitOnStorage = "";

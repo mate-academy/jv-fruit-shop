@@ -1,6 +1,6 @@
 package core.basesyntax.util;
 
-import core.basesyntax.order.Order;
+import core.basesyntax.model.Order;
 import java.util.List;
 
 public class GetTotalSumOfFruit {
