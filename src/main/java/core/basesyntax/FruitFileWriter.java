@@ -7,11 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitFileWriter {
+    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
+
     public static void fileCompile(List<Fruit> report) throws IOException {
         File file = new File("Report");
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file))) {
-            bufferedWriter.write("fruit" + "," + "quantity");
-            bufferedWriter.newLine();
+            bufferedWriter.write(HEADER);
             Map<String, Long> result = AvailableFruit.getStockReport(report);
             for (Map.Entry<String, Long> entry : result.entrySet()) {
                 bufferedWriter.write(entry.getKey() + "," + entry.getValue());
