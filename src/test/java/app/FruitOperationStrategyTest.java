@@ -49,6 +49,7 @@ public class FruitOperationStrategyTest {
         line.add(COLON);
         try {
             Operation operationSupply = fruitOperationStrategy.getOperation(line.get(0));
+            Assert.fail("Expected value" + RuntimeException.class);
         } catch (RuntimeException e) {
             Assert.assertEquals("Cant find correct operation for type: " + line.get(0),
                     e.getMessage());
