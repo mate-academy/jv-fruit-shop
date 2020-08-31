@@ -97,6 +97,7 @@
                 </executions>
                 <configuration>
                     <excludes>
+                        <exclude>**/FruitStorage*</exclude>
                         <exclude>**/Main*</exclude>
                     </excludes>
                 </configuration>
