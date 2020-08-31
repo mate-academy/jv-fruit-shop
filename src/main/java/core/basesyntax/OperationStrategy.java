@@ -8,7 +8,7 @@ public class OperationStrategy {
         OperationStorage operationStorage = new OperationStorage();
         for (List<String> row : data) {
             operationStorage.getOperationMap()
-                    .get(row.get(0)).toDo(dataParser.mapToFruit(row), storage);
+                    .get(row.get(0)).apply(dataParser.mapToFruit(row), storage);
         }
     }
 }

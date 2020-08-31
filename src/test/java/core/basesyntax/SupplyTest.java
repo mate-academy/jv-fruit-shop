@@ -15,7 +15,7 @@ public class SupplyTest {
         FruitPackage fruitBananaPackage = new FruitPackage("banana", 100, localDate);
         FruitPackage fruitApplePackage = new FruitPackage("apple", 34, localDate);
         storage.getFruitPackages().add(fruitBananaPackage);
-        supply.toDo(fruitApplePackage, storage);
+        supply.apply(fruitApplePackage, storage);
         Assert.assertEquals(fruitApplePackage.getType(),
                 storage.getFruitPackages().get(storage.getFruitPackages().size() - 1).getType());
         Assert.assertEquals(fruitApplePackage.getAmount(),

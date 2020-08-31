@@ -9,7 +9,7 @@ public class Buy extends Operation {
             = new AvailableAmountOfFruits();
 
     @Override
-    public void toDo(FruitPackage fruitPackage, Storage storage) {
+    public void apply(FruitPackage fruitPackage, Storage storage) {
         if (storage.getFruitPackages().size() == 0) {
             throw new RuntimeException("We have nothing to sell you");
         }

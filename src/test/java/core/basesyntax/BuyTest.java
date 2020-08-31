@@ -18,7 +18,7 @@ public class BuyTest {
         storage.getFruitPackages().add(fruitPackagePost);
         LocalDate localDateBuying = LocalDate.of(2020, 4, 11);
         FruitPackage fruitPackageSell = new FruitPackage("banana", 20, localDateBuying);
-        buy.toDo(fruitPackageSell, storage);
+        buy.apply(fruitPackageSell, storage);
         FruitPackage fruitPackageRemaining = new FruitPackage("banana", 80, localDate);
         List<FruitPackage> expectedList = new ArrayList<>();
         expectedList.add(fruitPackageRemaining);
@@ -42,7 +42,7 @@ public class BuyTest {
         storage.getFruitPackages().add(fruitPostApple);
         LocalDate localDateBuying = LocalDate.of(2020, 4, 11);
         FruitPackage fruitPackageSell = new FruitPackage("banana", 20, localDateBuying);
-        buy.toDo(fruitPackageSell, storage);
+        buy.apply(fruitPackageSell, storage);
     }
 
     @Test()
@@ -58,7 +58,7 @@ public class BuyTest {
         storage.getFruitPackages().add(fruitPostBanana3);
         LocalDate localDateBuying = LocalDate.of(2020, 4, 11);
         FruitPackage fruitPackageSell = new FruitPackage("banana", 10, localDateBuying);
-        buy.toDo(fruitPackageSell, storage);
+        buy.apply(fruitPackageSell, storage);
         FruitPackage fruitPackageRemaining1 = new FruitPackage("banana", 10, localDateBanana1);
         FruitPackage fruitPackageRemaining2 = new FruitPackage("banana", 9, localDateBanana3);
         List<FruitPackage> expectedList = new ArrayList<>();
@@ -80,7 +80,7 @@ public class BuyTest {
         storage.getFruitPackages().add(fruitPostApple);
         LocalDate localDateBuying = LocalDate.of(2020, 4, 11);
         FruitPackage fruitPackageSell = new FruitPackage("apple", 20, localDateBuying);
-        buy.toDo(fruitPackageSell, storage);
+        buy.apply(fruitPackageSell, storage);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -93,6 +93,6 @@ public class BuyTest {
         storage.getFruitPackages().add(fruitPostOrange);
         storage.getFruitPackages().add(fruitPostLime);
         FruitPackage fruitPackageSell = new FruitPackage("lemon", 4, localDateApple);
-        buy.toDo(fruitPackageSell, storage);
+        buy.apply(fruitPackageSell, storage);
     }
 }
