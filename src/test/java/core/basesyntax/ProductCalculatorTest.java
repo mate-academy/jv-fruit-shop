@@ -27,4 +27,10 @@ public class ProductCalculatorTest {
         Assert.assertEquals(30, testStorage.getAllProducts().get("banana").get(0).getQuantity());
     }
 
+    @Test
+    public void removeProductTest() {
+        testStorage.removeProductBox("banana", testStorage.getAllProducts().get("banana"));
+        Assert.assertFalse(testStorage.getAllProducts().containsKey("banana"));
+    }
+
 }
