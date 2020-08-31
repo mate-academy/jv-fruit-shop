@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private List<Fruit> fruits;
+    private List<FruitPackage> fruitPackages;
 
     public Storage() {
-        fruits = new ArrayList<>();
+        fruitPackages = new ArrayList<>();
     }
 
-    public List<Fruit> getFruits() {
-        return fruits;
+    public List<FruitPackage> getFruitPackages() {
+        return fruitPackages;
     }
 }

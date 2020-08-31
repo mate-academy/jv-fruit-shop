@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
+
     @Override
     public List<List<String>> readFile(String filePath, String separator) {
         String line;
@@ -18,22 +19,15 @@ public class FileReaderServiceImpl implements FileReaderService {
             while ((line = br.readLine()) != null) {
                 List<String> row = new ArrayList<>();
                 String[] str = line.split(separator);
-                if (str.length == 1) {
-                    throw new RuntimeException("Wrong separator");
-                }
-                if (str.length < 4) {
-                    throw new RuntimeException("Wrong format. We need more data");
-                }
-                if (!(str[0].equals("s")) && !(str[0].equals("b")) && !(str[0].equals("r"))) {
-                    throw new RuntimeException("We don't have such operation");
-                }
+                OrderValidation orderValidation = new OrderValidation();
+                orderValidation.toCheckOrder(str);
                 for (String dataPieces : str) {
                     row.add(dataPieces);
                 }
                 data.add(row);
             }
         } catch (IOException e) {
-            throw new RuntimeException("File not found");
+            throw new RuntimeException("File not found", e);
         }
         return data;
     }

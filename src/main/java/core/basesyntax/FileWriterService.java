@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import java.util.List;
+import java.util.Map;
 
 public interface FileWriterService {
-    void writeFile(List<List<String>> conclusionData, String separator, String filename);
+    void writeFile(Map<String, String> conclusionData, String separator, String filename);
 }

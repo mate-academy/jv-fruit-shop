@@ -2,7 +2,7 @@ package core.basesyntax;
 
 public class Supply extends Operation {
     @Override
-    public void toDo(Fruit fruit, Storage storage) {
-        storage.getFruits().add(fruit);
+    public void toDo(FruitPackage fruitPackage, Storage storage) {
+        storage.getFruitPackages().add(fruitPackage);
     }
 }

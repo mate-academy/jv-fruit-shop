@@ -23,7 +23,7 @@ public class FileReaderForTest {
                 data.add(row);
             }
         } catch (IOException e) {
-            throw new RuntimeException("File not found");
+            throw new RuntimeException("File not found", e);
         }
         return data;
     }
