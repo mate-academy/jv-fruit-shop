@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.DataValidator;
+import core.basesyntax.operations.DataValidator;
 import core.basesyntax.exeptions.NotValidDataException;
 import org.junit.Test;
 import java.util.ArrayList;

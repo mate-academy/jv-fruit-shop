@@ -1,10 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.Fruit;
+import core.basesyntax.model.Fruit;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class FruitTest {
    static Fruit fruit = new Fruit("banana","2020-10-15");

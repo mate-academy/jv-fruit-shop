@@ -1,12 +1,10 @@
-package core.basesyntax;
+package core.basesyntax.operations;
 
 import core.basesyntax.exeptions.NotValidDataException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class DataValidator {
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
     public void dataValidation(List<String> fruitsFromFile)
             throws NotValidDataException {
@@ -25,7 +23,7 @@ public class DataValidator {
                 throw new NotValidDataException("You have entered incorrect data type.");
             }
             try {
-                LocalDate dateSupply = LocalDate.parse(line[3], FORMATTER);
+                LocalDate dateSupply = LocalDate.parse(line[3]);
             } catch (Exception e) {
                 throw new NotValidDataException("You have entered incorrect date type.");
             }

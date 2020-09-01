@@ -1,40 +1,45 @@
-package core.basesyntax;
+package core.basesyntax.operations;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.exeptions.NotEnoughFruitsException;
 import core.basesyntax.interfaces.Operation;
+import core.basesyntax.model.Fruit;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RemoveFruit implements Operation {
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
-    public List<Fruit> operation(List<Fruit> fruitsAvailable, Transaction fruitsFromFile)
+    public List<Fruit> apply(Transaction fruitsFromFile)
             throws NotEnoughFruitsException {
         List<Fruit> fruitsAfterRemove = new ArrayList<>();
+        FruitDao fruitDao = new FruitDaoImpl();
         int amountBuying = fruitsFromFile.getAmount();
-        if (amountBuying > fruitsAvailable.size()) {
+        if (amountBuying > fruitDao.getAll().size()) {
             throw new NotEnoughFruitsException("Not enough fruits to buy.");
         }
-        for (int i = 0; i < fruitsAvailable.size(); i++) {
-            LocalDate dateOfAvailable = LocalDate.parse(fruitsAvailable
-                    .get(i).getExpirationDate(), FORMATTER);
+        for (int i = 0; i < fruitDao.getAll().size(); i++) {
+            LocalDate dateOfAvailable = LocalDate.parse(fruitDao.getAll()
+                    .get(i).getExpirationDate());
             LocalDate dateOfBuying = LocalDate.parse(fruitsFromFile
-                    .getExpirationDate(), FORMATTER);
-            if (fruitsFromFile.getTypeOfFruit().equals(fruitsAvailable.get(i).getTypeOfFruit())
+                    .getExpirationDate());
+            if (fruitsFromFile.getTypeOfFruit().equals(fruitDao.getAll().get(i).getTypeOfFruit())
                     && (dateOfBuying.isEqual(dateOfAvailable)
                     || dateOfBuying.isBefore(dateOfAvailable))
                     && amountBuying != 0) {
                 amountBuying--;
             } else {
-                fruitsAfterRemove.add(fruitsAvailable.get(i));
+                fruitsAfterRemove.add(fruitDao.getAll().get(i));
             }
         }
         if (amountBuying != 0) {
             throw new NotEnoughFruitsException("Not enough fruits to buy.");
         }
-        fruitsAvailable = fruitsAfterRemove;
-        return fruitsAvailable;
+        fruitDao.getAll().clear();
+        for (Fruit f : fruitsAfterRemove) {
+            fruitDao.add(f);
+        }
+        return fruitDao.getAll();
     }
 }

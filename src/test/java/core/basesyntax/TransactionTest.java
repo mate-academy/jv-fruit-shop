@@ -1,11 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.Fruit;
-import core.basesyntax.Transaction;
+import core.basesyntax.operations.Transaction;
 import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class TransactionTest {
 

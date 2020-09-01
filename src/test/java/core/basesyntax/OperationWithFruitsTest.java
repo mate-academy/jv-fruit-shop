@@ -1,15 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.*;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.exeptions.NotEnoughFruitsException;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.operations.*;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OperationWithFruitsTest {
     public static DataValidator dataValidator = new DataValidator();
-    public static ReadFromFile reader = new ReadFromFile();
+    public static FileReaderImpl reader = new FileReaderImpl();
     public static OperationWithFruits operation = new OperationWithFruits();
     private static final String FIRST_FILE_NAME = "src/test/resources/txt2.csv";
     private static final String SECOND_FILE_NAME = "src/test/resources/txt3.csv";
@@ -17,8 +21,12 @@ public class OperationWithFruitsTest {
     private static final String FOURTH_FILE_NAME = "src/test/resources/txt6.csv";
     private static final String FIFTH_FILE_NAME = "src/test/resources/txt5.csv";
     public static Parser transaction = new Parser();
+    public static FruitDao fruitDao = new FruitDaoImpl();
 
-
+@Before
+public void setUp() {
+    fruitDao.getAll().clear();;
+}
     @Test
     public void buying_Test_OK() throws Exception {
         List<String> fruitsFromFileString = reader.readFromFile(FIRST_FILE_NAME);

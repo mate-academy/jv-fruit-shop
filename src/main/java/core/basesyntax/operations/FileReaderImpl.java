@@ -1,13 +1,13 @@
-package core.basesyntax;
+package core.basesyntax.operations;
 
-import core.basesyntax.interfaces.ReadFromFileInt;
+import core.basesyntax.interfaces.FileReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ReadFromFile implements ReadFromFileInt {
+public class FileReaderImpl implements FileReader {
 
     @Override
     public List<String> readFromFile(String fileName) {

@@ -1,11 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Fruit {
-    private static List<Fruit> fruitAvailable = new ArrayList<>();
     private String typeOfFruit;
     private String expirationDate;
 
@@ -18,20 +15,8 @@ public class Fruit {
         return typeOfFruit;
     }
 
-    public void setTypeOfFruit(String typeOfFruit) {
-        this.typeOfFruit = typeOfFruit;
-    }
-
     public String getExpirationDate() {
         return expirationDate;
-    }
-
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
-    }
-
-    public List<Fruit> getFruitTypes() {
-        return fruitAvailable;
     }
 
     @Override

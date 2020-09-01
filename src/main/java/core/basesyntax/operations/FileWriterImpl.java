@@ -1,5 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.operations;
 
+import core.basesyntax.interfaces.FileWriter;
+import core.basesyntax.model.Fruit;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class FileWriter implements core.basesyntax.interfaces.FileWriter {
+public class FileWriterImpl implements FileWriter {
 
     public void writeNewFile(List<Fruit> fruit) throws IOException {
         List<String> stringFruit = new ArrayList<>();

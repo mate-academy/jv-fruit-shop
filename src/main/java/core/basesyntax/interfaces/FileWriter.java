@@ -1,6 +1,6 @@
 package core.basesyntax.interfaces;
 
-import core.basesyntax.Fruit;
+import core.basesyntax.model.Fruit;
 import java.io.IOException;
 import java.util.List;
 

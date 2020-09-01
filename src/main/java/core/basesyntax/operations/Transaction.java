@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.operations;
 
 import java.util.Objects;
 
