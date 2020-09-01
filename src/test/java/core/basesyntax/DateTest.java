@@ -16,8 +16,8 @@ import java.time.format.DateTimeParseException;
 
 public class DateTest {
     private static final String INTO_PATH = "storageContent.csv";
-    private static final String WRONG_DATE_PATH = "src/wrongDateTest.csv";
-    private static final String EXPIRED_DATE_PATH = "src/expiredFruitsReturn.csv";
+    private static final String WRONG_DATE_PATH = "src/test/resources/wrongDateTest.csv";
+    private static final String EXPIRED_DATE_PATH = "src/test/resources/expiredFruitsReturn.csv";
 
     @Before
     public void setup() {

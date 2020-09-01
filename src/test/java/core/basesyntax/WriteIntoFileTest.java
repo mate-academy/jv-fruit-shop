@@ -21,7 +21,7 @@ import java.io.IOException;
 
 public class WriteIntoFileTest {
     private static final String INTO_PATH = "storageContent.csv";
-    private static final String FIRST_PATH = "src/fruitsTest.csv";
+    private static final String FIRST_PATH = "src/test/resources/fruitsTest.csv";
 
     @Before
     public void setup() {

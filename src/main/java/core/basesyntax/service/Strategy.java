@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.impl.Returner;
-import core.basesyntax.impl.Seller;
-import core.basesyntax.impl.Supplier;
+import core.basesyntax.impl.ReturnOperation;
+import core.basesyntax.impl.SellOperation;
+import core.basesyntax.impl.SupplyOperation;
 import core.basesyntax.model.FruitBox;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,9 +14,9 @@ public class Strategy {
     private final Map<String, Operator<FruitBox>> operations = new HashMap<>();
 
     public Strategy() {
-        operations.put(SUPPLIER, new Supplier());
-        operations.put(CONSUMER, new Seller());
-        operations.put(RETURNER, new Returner());
+        operations.put(SUPPLIER, new SupplyOperation());
+        operations.put(CONSUMER, new SellOperation());
+        operations.put(RETURNER, new ReturnOperation());
     }
 
     public Operator<FruitBox> getOperator(String option) {

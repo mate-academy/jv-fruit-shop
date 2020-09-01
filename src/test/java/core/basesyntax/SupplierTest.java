@@ -15,8 +15,8 @@ import java.io.IOException;
 
 public class SupplierTest {
     private static final String INTO_PATH = "storageContent.csv";
-    private static final String SECOND_PATH = "src/fruitsTest2.csv";
-    private static final String THIRD_PATH = "src/fruitsTest3.csv";
+    private static final String SECOND_PATH = "src/test/resources/fruitsTest2.csv";
+    private static final String THIRD_PATH = "src/test/resources/fruitsTest3.csv";
 
     @Before
     public void setup() {

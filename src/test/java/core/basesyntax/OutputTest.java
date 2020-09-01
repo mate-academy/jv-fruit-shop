@@ -15,7 +15,7 @@ import java.io.*;
 
 public class OutputTest {
     private static final String INTO_PATH = "storageContent.csv";
-    private static final String FIRST_PATH = "src/fruitsTest.csv";
+    private static final String FIRST_PATH = "src/test/resources/fruitsTest.csv";
 
     private String readFromFile(String filePath) {
         StringBuilder resultBuilder = new StringBuilder();

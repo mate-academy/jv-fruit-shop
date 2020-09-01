@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.impl.Supplier;
+import core.basesyntax.impl.SupplyOperation;
 import core.basesyntax.model.FruitBox;
 import core.basesyntax.model.Storage;
 import java.time.LocalDate;
@@ -26,7 +26,7 @@ public class StorageService {
 
     public void sellProduct(FruitBox fruit) {
         if (Storage.storage.peek() == null) {
-            throw new NullPointerException("No fruits in storage");
+            throw new NoSuchElementException("No fruits in storage");
         }
         if (fruit.getAmount() > Storage.storage.peek().getAmount()
                 && Storage.storage.size() > 1) {
@@ -50,7 +50,7 @@ public class StorageService {
 
     public void returnProduct(FruitBox fruit) {
         LocalDate dateNow = LocalDate.now();
-        Operator<FruitBox> supplier = new Supplier();
+        Operator<FruitBox> supplier = new SupplyOperation();
         if (FruitCounter.fruitCounter < fruit.getAmount()
                 || fruit.getExpiryDate().isBefore(dateNow)) {
             throw new RuntimeException("We can not accept this fruits!");

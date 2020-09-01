@@ -12,7 +12,6 @@ import static org.junit.Assert.assertEquals;
 
 public class ReadFromFileTest {
     private static final String INTO_PATH = "storageContent.csv";
-    private static final String WRONG_PATH = "src/wrongTest.csv";
 
     @Before
     public void setup() {

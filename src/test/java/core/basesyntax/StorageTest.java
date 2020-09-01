@@ -14,11 +14,12 @@ import org.junit.Test;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 public class StorageTest {
     private static final String INTO_PATH = "storageContent.csv";
-    private static final String FIRST_PATH = "src/fruitsTest.csv";
-    private static final String FIFTH_PATH = "src/fruitsTest5.csv";
+    private static final String FIRST_PATH = "src/test/resources/fruitsTest.csv";
+    private static final String FIFTH_PATH = "src/test/resources/fruitsTest5.csv";
 
 
     @Before
@@ -56,7 +57,7 @@ public class StorageTest {
             StorageContent storageService = new StorageContent<>();
             storageService.getStorage();
             Assert.fail("We had to get an exception");
-        } catch (NullPointerException e) {
+        } catch (NoSuchElementException e) {
             String errMsg = "No fruits in storage";
             assertEquals(errMsg, e.getMessage());
         }

@@ -17,7 +17,7 @@ import java.util.NoSuchElementException;
 
 public class ConsumerTest {
     private static final String INTO_PATH = "storageContent.csv";
-    private static final String FOURTH_PATH = "src/fruitsTest4.csv";
+    private static final String FOURTH_PATH = "src/test/resources/fruitsTest4.csv";
 
     @Before
     public void setup() {
