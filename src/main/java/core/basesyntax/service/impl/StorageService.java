@@ -1,17 +1,25 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitDto;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitDateAmountPair;
 import core.basesyntax.model.FruitStorage;
 import java.time.LocalDate;
 import java.util.Map;
 
 public class StorageService {
-    private Map<String, Fruit> storage = FruitStorage.getFruitStorage();
+    private Map<String, FruitDateAmountPair> storage = FruitStorage.getFruitStorage();
 
-    public Fruit getFruitFromStorage(
+    public FruitDateAmountPair addFruitToStorage(String fruitName, FruitDateAmountPair fruit) {
+        return storage.put(fruitName, fruit);
+    }
+
+    public boolean checkIsFruitPresent(String key) {
+        return storage.containsKey(key);
+    }
+
+    public FruitDateAmountPair getFruitFromStorage(
             FruitDto fruitDto, String key, Integer quantityToAdd) {
-        Fruit fruit = storage.get(key);
+        FruitDateAmountPair fruit = storage.get(key);
         while (fruit.getNext() != null) {
             if (fruit.getDate().equals(fruitDto.getFruitDtoDate())) {
                 fruit.setAmount(fruit.getAllFruitAmount() + quantityToAdd);
@@ -19,12 +27,12 @@ public class StorageService {
             }
             fruit = fruit.getNext();
         }
-        fruit.setNext(new Fruit(fruitDto.getFruitDtoDate(), quantityToAdd));
+        fruit.setNext(new FruitDateAmountPair(fruitDto.getFruitDtoDate(), quantityToAdd));
         return fruit;
     }
 
     public void extractFromStorage(Integer amount, LocalDate date, String key) {
-        Fruit fruit = storage.get(key);
+        FruitDateAmountPair fruit = storage.get(key);
         if (fruit.getAllFruitAmountByDate(date) < amount) {
             throw new RuntimeException("We are out of this fruit.");
         }

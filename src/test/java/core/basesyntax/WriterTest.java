@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.FruitDto;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitStorage;
 import core.basesyntax.service.iooperations.OperationHandler;
 import core.basesyntax.service.iooperations.Reader;

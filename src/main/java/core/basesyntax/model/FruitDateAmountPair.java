@@ -2,21 +2,21 @@ package core.basesyntax.model;
 
 import java.time.LocalDate;
 
-public class Fruit {
+public class FruitDateAmountPair {
     private LocalDate date;
     private Integer amount;
-    private Fruit next;
+    private FruitDateAmountPair next;
 
-    public Fruit(LocalDate date, Integer amount) {
+    public FruitDateAmountPair(LocalDate date, Integer amount) {
         this.date = date;
         this.amount = amount;
     }
 
-    public Fruit getNext() {
+    public FruitDateAmountPair getNext() {
         return next;
     }
 
-    public void setNext(Fruit next) {
+    public void setNext(FruitDateAmountPair next) {
         this.next = next;
     }
 
@@ -38,7 +38,7 @@ public class Fruit {
 
     public Integer getAllFruitAmountByDate(LocalDate date) {
         Integer sum = 0;
-        Fruit fruit = this;
+        FruitDateAmountPair fruit = this;
         while (fruit != null) {
             if (date.isBefore(fruit.getDate())) {
                 sum += amount;
@@ -50,7 +50,7 @@ public class Fruit {
 
     public Integer getAllFruitAmount() {
         Integer sum = 0;
-        Fruit fruit = this;
+        FruitDateAmountPair fruit = this;
         while (fruit.next != null) {
             sum += amount;
             fruit = fruit.next;

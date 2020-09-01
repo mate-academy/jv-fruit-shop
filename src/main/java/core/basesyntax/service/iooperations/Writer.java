@@ -1,6 +1,6 @@
 package core.basesyntax.service.iooperations;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitDateAmountPair;
 import core.basesyntax.model.FruitStorage;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class Writer {
     public void write(String fileName) {
         CSVFormat format = CSVFormat.DEFAULT.withHeader("fruit", "quantity");
         try (CSVPrinter printer = new CSVPrinter(new FileWriter(fileName), format)) {
-            for (Map.Entry<String, Fruit> item : FruitStorage.getFruitStorage().entrySet()) {
+            for (Map.Entry<String, FruitDateAmountPair> item : FruitStorage.getFruitStorage().entrySet()) {
                 printer.printRecord(item.getKey(), item.getValue().getAmount());
             }
         } catch (IOException e) {

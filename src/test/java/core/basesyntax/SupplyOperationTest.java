@@ -1,7 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.FruitDto;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitDateAmountPair;
 import core.basesyntax.model.FruitStorage;
 import core.basesyntax.service.FruitOperation;
 import core.basesyntax.service.impl.SupplyFruitOperation;
@@ -14,7 +14,7 @@ public class SupplyOperationTest {
     private static final Integer EXPECTED_QUANTITY = 60;
     private static final String KEY = "banana";
     private static FruitOperation supply;
-    private static Map<String, Fruit> storage = FruitStorage.getFruitStorage();
+    private static Map<String, FruitDateAmountPair> storage = FruitStorage.getFruitStorage();
 
     @BeforeClass
     public static void prepareEnvironmentForTests() {
@@ -24,7 +24,7 @@ public class SupplyOperationTest {
     @Before
     public void fillTheStorage() {
         storage.put("banana",
-                new Fruit(LocalDate.of(2020, 10, 11), 50));
+                new FruitDateAmountPair(LocalDate.of(2020, 10, 11), 50));
     }
 
     @After
