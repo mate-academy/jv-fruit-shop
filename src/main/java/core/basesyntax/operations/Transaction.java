@@ -20,32 +20,16 @@ public class Transaction {
         return typeOfOperation;
     }
 
-    public void setTypeOfOperation(String typeOfOperation) {
-        this.typeOfOperation = typeOfOperation;
-    }
-
     public String getTypeOfFruit() {
         return typeOfFruit;
-    }
-
-    public void setTypeOfFruit(String typeOfFruit) {
-        this.typeOfFruit = typeOfFruit;
     }
 
     public int getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public String getExpirationDate() {
         return expirationDate;
-    }
-
-    public void setExpirationDate(String expirationDate) {
-        this.expirationDate = expirationDate;
     }
 
     @Override

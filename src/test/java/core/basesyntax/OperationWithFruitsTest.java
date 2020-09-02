@@ -25,7 +25,7 @@ public class OperationWithFruitsTest {
 
 @Before
 public void setUp() {
-    fruitDao.getAll().clear();;
+    fruitDao.getAll().clear();
 }
     @Test
     public void buying_Test_OK() throws Exception {
