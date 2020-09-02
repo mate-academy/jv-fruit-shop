@@ -20,38 +20,38 @@ public class DataValidatorTest {
     public final static List<String> INCORRECT_INPUT_DATA_EMPTY = new ArrayList<>();
 
 
-    @Test(expected = Exception.class)
-    public void data_Validation_Test_Fail() throws NotValidDataException {
+    @Test(expected = NotValidDataException.class)
+    public void data_Validation_Test_Fail() {
         DataValidator data = new DataValidator();
         data.dataValidation(INCORRECT_INPUT_DATA);
     }
 
-    @Test(expected = Exception.class)
-    public void data_Validation_Test2_Fail() throws NotValidDataException {
+    @Test(expected = NotValidDataException.class)
+    public void data_Validation_Test2_Fail(){
         DataValidator data = new DataValidator();
         data.dataValidation(INCORRECT_INPUT_DATA2);
     }
 
-    @Test(expected = Exception.class)
-    public void data_Validation_Test3_Fail() throws NotValidDataException {
+    @Test(expected = NotValidDataException.class)
+    public void data_Validation_Test3_Fail() {
         DataValidator data = new DataValidator();
         data.dataValidation(INCORRECT_INPUT_DATA3);
     }
 
-    @Test(expected = Exception.class)
-    public void data_Validation_Test_Empty_Fail() throws NotValidDataException {
+    @Test(expected = NotValidDataException.class)
+    public void data_Validation_Test_Empty_Fail() {
         DataValidator data = new DataValidator();
         data.dataValidation(INCORRECT_INPUT_DATA_EMPTY);
     }
 
-    @Test(expected = Exception.class)
-    public void data_Validation_Test5_Fail() throws NotValidDataException {
+    @Test(expected = NotValidDataException.class)
+    public void data_Validation_Test5_Fail() {
         DataValidator data = new DataValidator();
         data.dataValidation(INCORRECT_INPUT_DATA5);
     }
 
-    @Test(expected = Exception.class)
-    public void data_Validation_Test6_Fail() throws NotValidDataException {
+    @Test(expected = NotValidDataException.class)
+    public void data_Validation_Test6_Fail() {
         DataValidator data = new DataValidator();
         data.dataValidation(INCORRECT_INPUT_DATA6);
     }

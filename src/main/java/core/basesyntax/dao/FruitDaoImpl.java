@@ -15,4 +15,5 @@ public class FruitDaoImpl implements FruitDao {
     public List<Fruit> getAll() {
         return Storage.fruitsAvailable;
     }
+
 }

@@ -9,17 +9,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OperationWithFruits {
+public class Operator {
     public static final Map<String, Operation> map = new HashMap<>();
     private FruitDao fruitDao = new FruitDaoImpl();
 
     static {
-        map.put("s", new AddFruit());
-        map.put("r", new AddFruit());
-        map.put("b", new RemoveFruit());
+        map.put("s", new AddOperation());
+        map.put("r", new AddOperation());
+        map.put("b", new RemoveOperation());
     }
 
-    public List<Fruit> operationWithFruits(List<Transaction> transaction)
+    public List<Fruit> processTransaction(List<Transaction> transaction)
             throws NotEnoughFruitsException {
         for (int i = 0; i < transaction.size(); i++) {
             String operationType = transaction.get(i).getTypeOfOperation();

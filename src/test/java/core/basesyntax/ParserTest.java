@@ -14,9 +14,10 @@ public class ParserTest {
 
     @Test
     public void adding_Test_OK() {
+        stringToParse.add("type,fruit,quantity,date");
         stringToParse.add("s,banana,10,2020-10-11");
         Parser parser = new Parser();
-        Transaction expected = parser.parser(stringToParse).get(0);
+        Transaction expected = parser.parse(stringToParse).get(0);
         Assert.assertEquals(correctTransaction,expected);
     }
 }
