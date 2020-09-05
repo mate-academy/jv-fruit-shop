@@ -1,12 +1,13 @@
 package core.basesyntax.model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Fruit {
     private String typeOfFruit;
-    private String expirationDate;
+    private LocalDate expirationDate;
 
-    public Fruit(String typeOfFruit, String expirationDate) {
+    public Fruit(String typeOfFruit, LocalDate expirationDate) {
         this.typeOfFruit = typeOfFruit;
         this.expirationDate = expirationDate;
     }
@@ -15,7 +16,7 @@ public class Fruit {
         return typeOfFruit;
     }
 
-    public String getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 

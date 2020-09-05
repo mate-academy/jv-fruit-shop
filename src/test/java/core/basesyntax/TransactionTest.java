@@ -3,16 +3,17 @@ package core.basesyntax;
 import core.basesyntax.operations.Transaction;
 import org.junit.Assert;
 import org.junit.Test;
+import java.time.LocalDate;
 
 public class TransactionTest {
 
     static Transaction transaction = new Transaction("s","banana"
-            , 25,"2020-08-15");
+            , 25, LocalDate.of(2020,8,15));
 
     @Test
     public void testEquals() {
         Transaction transactionTheSame = new Transaction("s","banana"
-                , 25,"2020-08-15");
+                , 25,LocalDate.of(2020,8,15));
         Assert.assertEquals(true, transactionTheSame.equals(transaction));
     }
 
@@ -28,7 +29,7 @@ public class TransactionTest {
 
     @Test
     public void getExpirationDate() {
-        Assert.assertEquals("2020-08-15", transaction.getExpirationDate());
+        Assert.assertEquals(LocalDate.of(2020,8,15), transaction.getExpirationDate());
     }
 
     @Test

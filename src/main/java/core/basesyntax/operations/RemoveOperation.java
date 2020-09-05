@@ -5,29 +5,27 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.exeptions.NotEnoughFruitsException;
 import core.basesyntax.interfaces.Operation;
 import core.basesyntax.model.Fruit;
-import java.time.LocalDate;
 import java.util.List;
 
 public class RemoveOperation implements Operation {
     private FruitDao fruitDao = new FruitDaoImpl();
 
     public List<Fruit> apply(Transaction fruitsFromFile) {
+        fruitDao.getAll().sort((o1, o2) -> {
+            if (o2.getExpirationDate().isEqual(o1.getExpirationDate())) {
+                return 0;
+            }
+            return (o2.getExpirationDate().isBefore(o1.getExpirationDate())) ? 1 : -1;
+        });
         int amountBuying = fruitsFromFile.getAmount();
-        if (amountBuying > fruitDao.getAll().stream()
-                .filter(fruit -> fruit.getTypeOfFruit().equals(fruitsFromFile.getTypeOfFruit()))
-                .count()) {
-            throw new NotEnoughFruitsException("Not enough fruits to buy.");
-        }
         for (int i = 0; i < fruitDao.getAll().size(); i++) {
             Fruit fruit = fruitDao.getAll().get(i);
-            LocalDate dateOfAvailable = LocalDate.parse(fruitDao.getAll()
-                    .get(i).getExpirationDate());
-            LocalDate dateOfBuying = LocalDate.parse(fruitsFromFile
-                    .getExpirationDate());
             if (fruitsFromFile.getTypeOfFruit().equals(fruit.getTypeOfFruit())
-                    && (dateOfBuying.isEqual(dateOfAvailable)
-                    || dateOfBuying.isBefore(dateOfAvailable))
-                    && amountBuying != 0) {
+                    && (fruitsFromFile.getExpirationDate()
+                    .isEqual(fruitDao.getAll().get(i).getExpirationDate())
+                    || fruitsFromFile.getExpirationDate()
+                    .isBefore(fruitDao.getAll().get(i).getExpirationDate()))
+                    && (amountBuying != 0)) {
                 fruitDao.getAll().remove(fruit);
                 amountBuying--;
                 i--;

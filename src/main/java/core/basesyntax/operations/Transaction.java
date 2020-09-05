@@ -1,15 +1,16 @@
 package core.basesyntax.operations;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Transaction {
     private String typeOfOperation;
     private String typeOfFruit;
     private int amount;
-    private String expirationDate;
+    private LocalDate expirationDate;
 
     public Transaction(String typeOfOperation, String typeOfFruit,
-                       int amount, String expirationDate) {
+                       int amount, LocalDate expirationDate) {
         this.typeOfOperation = typeOfOperation;
         this.typeOfFruit = typeOfFruit;
         this.amount = amount;
@@ -28,7 +29,7 @@ public class Transaction {
         return amount;
     }
 
-    public String getExpirationDate() {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 

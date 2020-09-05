@@ -9,7 +9,6 @@ import core.basesyntax.operations.Parser;
 import core.basesyntax.operations.Transaction;
 import org.junit.Assert;
 import org.junit.Test;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,6 +37,6 @@ public class FileWriterImplTest {
         while (sc.hasNextLine()) {
             textFromFile.add(sc.nextLine().toLowerCase());
         }
-        Assert.assertEquals(4, textFromFile.size());
+        Assert.assertEquals(3, textFromFile.size());
     }
 }

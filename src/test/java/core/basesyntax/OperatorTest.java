@@ -12,6 +12,7 @@ import core.basesyntax.operations.Transaction;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,6 @@ public class OperatorTest {
     private static final String FIRST_FILE_NAME = "src/test/resources/txt2.csv";
     private static final String SECOND_FILE_NAME = "src/test/resources/txt3.csv";
     private static final String THIRD_FILE_NAME = "src/test/resources/txt4.csv";
-    private static final String FOURTH_FILE_NAME = "src/test/resources/txt6.csv";
     private static final String FIFTH_FILE_NAME = "src/test/resources/txt5.csv";
     public static Parser transaction = new Parser();
     public static FruitDao fruitDao = new FruitDaoImpl();
@@ -38,24 +38,10 @@ public void setUp() {
         List <Transaction> fruitsFromFile = transaction.parse(fruitsFromFileString);
         List <Fruit> actual = operation.processTransaction(fruitsFromFile);
         List<Fruit> expected = new ArrayList<>();
-        expected.add(new Fruit("apple", "2020-10-17"));
-        expected.add(new Fruit("banana", "2020-10-17"));
-        expected.add(new Fruit("banana", "2020-10-17"));
-        expected.add(new Fruit("orange", "2020-10-17"));
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void buying_Test2_OK() {
-        List<String> fruitsFromFileString = reader.readFromFile(FOURTH_FILE_NAME);
-        dataValidator.dataValidation(fruitsFromFileString);
-        List <Transaction> fruitsFromFile = transaction.parse(fruitsFromFileString);
-        List <Fruit> actual = operation.processTransaction(fruitsFromFile);
-        List<Fruit> expected = new ArrayList<>();
-        expected.add(new Fruit("banana", "2020-10-27"));
-        expected.add(new Fruit("banana", "2020-10-27"));
-        expected.add(new Fruit("banana", "2020-10-27"));
-        expected.add(new Fruit("banana", "2020-10-27"));
+        expected.add(new Fruit("banana", LocalDate.of(2020,10,17)));
+        expected.add(new Fruit("banana", LocalDate.of(2020,10,17)));
+        expected.add(new Fruit("banana", LocalDate.of(2020,10,17)));
+        expected.add(new Fruit("apple", LocalDate.of(2020,10,20)));
         Assert.assertEquals(expected, actual);
     }
 

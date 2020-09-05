@@ -1,6 +1,7 @@
 package core.basesyntax.operations;
 
 import core.basesyntax.model.Fruit;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,8 @@ public class Parser {
         List<Transaction> parser = new ArrayList<>();
         for (int i = 1; i < fruitsFromFile.size(); i++) {
             String[] line = fruitsFromFile.get(i).split(",");
-            parser.add(new Transaction(line[0], line[1], Integer.parseInt(line[2]), line[3]));
+            parser.add(new Transaction(line[0], line[1], Integer.parseInt(line[2]),
+                    LocalDate.parse(line[3])));
         }
         return parser;
     }
