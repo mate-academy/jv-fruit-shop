@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OrderParser {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE;
 
     public Order parse(String line) {
         Order order = new Order();

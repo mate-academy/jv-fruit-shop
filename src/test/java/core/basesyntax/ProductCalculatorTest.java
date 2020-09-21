@@ -13,8 +13,28 @@ public class ProductCalculatorTest {
     FileService fileService = new FileService();
 
     @Test
-    public void productCalculatorTest() {
-        List<String> file = fileService.readFile("src/test/java/resourses/test2.csv");
+    public void addProductsToDBTest() {
+        orderToDB("src/test/java/resourses/test2.csv");
+        Assert.assertEquals(1, testStorage.getAllProducts().size());
+        Assert.assertEquals(30, testStorage.getAllProducts().get("banana").get(0).getQuantity());
+    }
+
+    @Test
+    public void removeSomeProductsFromDBTest() {
+        orderToDB("src/test/java/resourses/test8.csv");
+        Assert.assertEquals(0, testStorage.getAllProducts().get("banana").get(0).getQuantity());
+        Assert.assertEquals(0, testStorage.getAllProducts().get("banana").get(1).getQuantity());
+        Assert.assertEquals(50, testStorage.getAllProducts().get("banana").get(2).getQuantity());
+    }
+
+    @Test
+    public void removeAllProductsFromDBTest() {
+        testStorage.removeProductBox("banana", testStorage.getAllProducts().get("banana"));
+        Assert.assertFalse(testStorage.getAllProducts().containsKey("banana"));
+    }
+
+    private void orderToDB(String filename) {
+        List<String> file = fileService.readFile(filename);
         List<Order> orders = new ArrayList<>();
         OrderParser parser = new OrderParser();
         for (String line : file) {
@@ -22,15 +42,5 @@ public class ProductCalculatorTest {
         }
         ProductCalculator productCalculator = new ProductCalculator(testStorage);
         productCalculator.ordersToStorage(orders);
-
-        Assert.assertEquals(1, testStorage.getAllProducts().size());
-        Assert.assertEquals(30, testStorage.getAllProducts().get("banana").get(0).getQuantity());
     }
-
-    @Test
-    public void removeProductTest() {
-        testStorage.removeProductBox("banana", testStorage.getAllProducts().get("banana"));
-        Assert.assertFalse(testStorage.getAllProducts().containsKey("banana"));
-    }
-
 }
