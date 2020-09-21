@@ -12,18 +12,17 @@ import org.junit.Test;
 import parsers.OrderParser;
 
 public class DifferentTests {
-    public final static Storage testStorage = new Storage();
-    public final static String SECOND_PATH = "src/test/java/resourses/test2.csv";
-    public final static String THIRD_PATH = "src/test/java/resourses/test3.csv";
-    public final static String FOURTH_PATH = "src/test/java/resourses/test4.csv";
-    public final static String FIFTH_PATH = "src/test/java/resourses/test5.csv";
-    public final static String SIXTH_PATH = "src/test/java/resourses/test6.csv";
-    public final static String SECOND_PATH_OUT = "src/test/java/resourses/expectedOutput2.csv";
-    public final static String THIRD_PATH_OUT = "src/test/java/resourses/expectedOutput3.csv";
-    public final static String FOURTH_PATH_OUT = "src/test/java/resourses/expectedOutput4.csv";
-    public final static String SIXTH_PATH_OUT = "src/test/java/resourses/expectedOutput6.csv";
-    public final static String SEVENTH_PATH = "src/test/java/resourses/test7.csv";
-
+    public static final Storage testStorage = new Storage();
+    public static final String SECOND_PATH = "src/test/java/resourses/test2.csv";
+    public static final String THIRD_PATH = "src/test/java/resourses/test3.csv";
+    public static final String FOURTH_PATH = "src/test/java/resourses/test4.csv";
+    public static final String FIFTH_PATH = "src/test/java/resourses/test5.csv";
+    public static final String SIXTH_PATH = "src/test/java/resourses/test6.csv";
+    public static final String SECOND_PATH_OUT = "src/test/java/resourses/expectedOutput2.csv";
+    public static final String THIRD_PATH_OUT = "src/test/java/resourses/expectedOutput3.csv";
+    public static final String FOURTH_PATH_OUT = "src/test/java/resourses/expectedOutput4.csv";
+    public static final String SIXTH_PATH_OUT = "src/test/java/resourses/expectedOutput6.csv";
+    public static final String SEVENTH_PATH = "src/test/java/resourses/test7.csv";
 
     FileService fileService = new FileService();
     OrderParser parser = new OrderParser();
@@ -40,7 +39,8 @@ public class DifferentTests {
         productCalculator.ordersToStorage(orders);
         fileService.writeToFile(testStorage.getReport(), "src/test/java/resourses/test2Result.csv");
         try {
-            List<String> actual = Files.readAllLines(Path.of("src/test/java/resourses/test2Result.csv"));
+            List<String> actual = Files
+                    .readAllLines(Path.of("src/test/java/resourses/test2Result.csv"));
             List<String> expected = Files.readAllLines(Path.of(SECOND_PATH_OUT));
             Assert.assertEquals(actual, expected);
         } catch (IOException e) {
@@ -59,7 +59,8 @@ public class DifferentTests {
         productCalculator.ordersToStorage(orders);
         fileService.writeToFile(testStorage.getReport(), "src/test/java/resourses/test3Result.csv");
         try {
-            List<String> actual = Files.readAllLines(Path.of("src/test/java/resourses/test3Result.csv"));
+            List<String> actual = Files
+                    .readAllLines(Path.of("src/test/java/resourses/test3Result.csv"));
             List<String> expected = Files.readAllLines(Path.of(THIRD_PATH_OUT));
             Assert.assertEquals(actual, expected);
         } catch (IOException e) {
@@ -76,9 +77,11 @@ public class DifferentTests {
             orders.add(parser.parse(line));
         }
         productCalculator.ordersToStorage(orders);
-        fileService.writeToFile(testStorage.getReport(), "src/test/java/resourses/test6Result.csv");
+        fileService
+                .writeToFile(testStorage.getReport(), "src/test/java/resourses/test6Result.csv");
         try {
-            List<String> actual = Files.readAllLines(Path.of("src/test/java/resourses/test6Result.csv"));
+            List<String> actual = Files
+                    .readAllLines(Path.of("src/test/java/resourses/test6Result.csv"));
             List<String> expected = Files.readAllLines(Path.of(SIXTH_PATH_OUT));
             Assert.assertEquals(actual, expected);
         } catch (IOException e) {
@@ -95,9 +98,11 @@ public class DifferentTests {
             orders.add(parser.parse(line));
         }
         productCalculator.ordersToStorage(orders);
-        fileService.writeToFile(testStorage.getReport(), "src/test/java/resourses/test4Result.csv");
+        fileService
+                .writeToFile(testStorage.getReport(), "src/test/java/resourses/test4Result.csv");
         try {
-            List<String> actual = Files.readAllLines(Path.of("src/test/java/resourses/test4Result.csv"));
+            List<String> actual = Files
+                    .readAllLines(Path.of("src/test/java/resourses/test4Result.csv"));
             List<String> expected = Files.readAllLines(Path.of(FOURTH_PATH_OUT));
             Assert.assertEquals(actual, expected);
         } catch (IOException e) {
@@ -117,7 +122,7 @@ public class DifferentTests {
     }
 
     @Test(expected = RuntimeException.class)
-    public void buyMoreProductsThanWeHaveTest () {
+    public void buyMoreProductsThanWeHaveTest() {
         testStorage.getAllProducts().clear();
         List<String> file = fileService.readFile(SEVENTH_PATH);
         List<Order> orders = new ArrayList<>();

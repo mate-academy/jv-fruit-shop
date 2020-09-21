@@ -18,12 +18,12 @@ public class OrderParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void WrongAmountTest() {
+    public void wrongAmountTest() {
         orderParser.parse("s,banana,blablabla,2020-10-17");
     }
 
     @Test(expected = RuntimeException.class)
-    public void WrongDateTest() {
+    public void wrongDateTest() {
         orderParser.parse("s,banana,121,blablabla");
     }
 }

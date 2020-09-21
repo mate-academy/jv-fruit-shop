@@ -8,10 +8,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FileServiceTest {
-    public final static String FIRST_PATH = "src/test/java/resourses/test1.csv";
-    public final static String SECOND_PATH = "src/test/java/resourses/test2.csv";
-    public final static String THIRD_PATH = "src/test/java/resourses/WrongFormatTest.csv";
-    public final static String FOURTH_PATH = "src/test/java/resourses/emptyFile.csv";
+    public static final String FIRST_PATH = "src/test/java/resourses/test1.csv";
+    public static final String SECOND_PATH = "src/test/java/resourses/test2.csv";
+    public static final String THIRD_PATH = "src/test/java/resourses/WrongFormatTest.csv";
+    public static final String FOURTH_PATH = "src/test/java/resourses/emptyFile.csv";
     FileService fileService = new FileService();
 
     @Test
@@ -20,7 +20,8 @@ public class FileServiceTest {
         String actual = String.valueOf(randomNumber) + "\n";
         fileService.writeToFile(actual, "src/test/java/resourses/writeSomething.csv");
         try {
-            List<String> result = Files.readAllLines(Path.of("src/test/java/resourses/writeSomething.csv"));
+            List<String> result = Files
+                    .readAllLines(Path.of("src/test/java/resourses/writeSomething.csv"));
             String expected = String.join("", result) + "\n";
             Assert.assertEquals(actual, expected);
         } catch (IOException e) {
@@ -52,12 +53,12 @@ public class FileServiceTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void EmptyFileTest() {
+    public void emptyFileTest() {
         int actual = fileService.readFile(FOURTH_PATH).size();
     }
 
     @Test(expected = RuntimeException.class)
-    public void WrongFileFormatTest() {
+    public void wrongFileFormatTest() {
         int actual = fileService.readFile(THIRD_PATH).size();
     }
 }

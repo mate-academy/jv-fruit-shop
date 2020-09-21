@@ -10,7 +10,7 @@ import parsers.OrderParser;
 
 public class ReportTest {
 
-    public final static Storage testStorage = new Storage();
+    public static final Storage testStorage = new Storage();
     FileService fileService = new FileService();
 
     @Test
@@ -24,8 +24,8 @@ public class ReportTest {
         ProductCalculator productCalculator = new ProductCalculator(testStorage);
         productCalculator.ordersToStorage(orders);
         String actual = testStorage.getReport();
-        String expected = "fruit,quantity\n" +
-                "banana,130\n";
+        String expected = "fruit,quantity\n"
+                + "banana,130\n";
         Assert.assertEquals(actual, expected);
     }
 }
