@@ -1,4 +1,4 @@
-# JUnit practice
+# Fruit shop
 
 Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
@@ -81,3 +81,5 @@ or
     p,banana,-10 // Buyers will not be able to buy -10 bananas. -10 is incorrect input.
     s,banana,50 
 ```
+
+#### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop.html)
