@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ReportFormatterImpl implements ReportFormatter {
+    private static final String HEAD_OF_REPORT = "fruit,quantity";
     private static final String SPLITTER = ",";
     private static final int OPERATION = 0;
     private static final int FRUIT = 1;
@@ -26,17 +27,14 @@ public class ReportFormatterImpl implements ReportFormatter {
         List<String> list = dataReader.readData();
         for (String row: list) {
             String[] data = row.split(SPLITTER);
-            if (Integer.parseInt(data[AMOUNT]) < 0 || !Operations.contains(data[OPERATION])) {
-                throw new RuntimeException("Incorrect data");
-            }
             operationStrategy.get(Operations.valueOf(data[OPERATION].toUpperCase()))
-                    .doOperation(storage, new Fruit(data[FRUIT]), Integer.parseInt(data[AMOUNT]));
+                    .doOperation(new Fruit(data[FRUIT]), Integer.parseInt(data[AMOUNT]));
 
         }
-        StringBuilder report = new StringBuilder("fruit,quantity");
+        StringBuilder report = new StringBuilder(HEAD_OF_REPORT);
         for (Map.Entry<Fruit, Integer> entry: storage.getFruits().entrySet()) {
             report.append(System.lineSeparator())
-                    .append(entry.getKey().getName()).append(",").append(entry.getValue());
+                    .append(entry.getKey().getName()).append(SPLITTER).append(entry.getValue());
         }
         return report.toString();
     }

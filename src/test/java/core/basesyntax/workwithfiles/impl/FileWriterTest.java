@@ -1,4 +1,4 @@
-package core.basesyntax.report;
+package core.basesyntax.workwithfiles.impl;
 
 import core.basesyntax.fruitoperation.Operation;
 import core.basesyntax.fruitoperation.OperationBalance;
@@ -8,14 +8,19 @@ import core.basesyntax.fruitoperation.OperationSupply;
 import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
 import core.basesyntax.fruitoperation.strategy.OperationStrategyImpl;
-import core.basesyntax.workwithfiles.impl.FileReader;
+import core.basesyntax.report.ReportFormatter;
+import core.basesyntax.report.ReportFormatterImpl;
+import core.basesyntax.workwithfiles.DataWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ReportFormatterImplTest {
+public class FileWriterTest {
     private static ReportFormatter reportFormatter;
 
     @Before
@@ -30,40 +35,19 @@ public class ReportFormatterImplTest {
     }
 
     @Test
-    public void test1ReportFormatting_Ok() {
-        String actual = reportFormatter.createReport(
-                new FileReader("src/main/resources/test1_correct.csv"));
+    public void testReportFormattingInFile_Ok() {
+        DataWriter dataWriter = new FileWriter();
+        dataWriter.writeToFile(reportFormatter.createReport(
+                new FileReader("src/main/resources/test2_correct.csv")),
+                "src/main/resources/ApplesAndBananas");
+        String actual;
+        try {
+            actual = Files.readString(Path.of("src/main/resources/ApplesAndBananas"));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't correctly read data from file ApplesAndBananas", e);
+        }
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator() + "banana,152";
         Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void test2ReportFormatting_Ok() {
-        String actual = reportFormatter.createReport(
-                new FileReader("src/main/resources/test2_correct.csv"));
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "apple,90" + System.lineSeparator() + "banana,152";
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void test3ReportFormatting_incorrectOperation() {
-        try {
-            reportFormatter.createReport(
-                    new FileReader("src/main/resources/test3_incorrect.csv"));
-        } catch (RuntimeException e) {
-            Assert.assertEquals("Incorrect data", e.getMessage());
-        }
-    }
-
-    @Test
-    public void test4ReportFormatting_operationDontPass() {
-        try {
-            reportFormatter.createReport(
-                    new FileReader("src/main/resources/test4_incorrect.csv"));
-        } catch (RuntimeException e) {
-            Assert.assertEquals("Incorrect data", e.getMessage());
-        }
     }
 }

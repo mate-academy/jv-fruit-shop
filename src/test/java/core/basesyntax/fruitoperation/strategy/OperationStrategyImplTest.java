@@ -1,4 +1,4 @@
-package core.basesyntax.report;
+package core.basesyntax.fruitoperation.strategy;
 
 import core.basesyntax.fruitoperation.Operation;
 import core.basesyntax.fruitoperation.OperationBalance;
@@ -6,8 +6,8 @@ import core.basesyntax.fruitoperation.OperationPurchase;
 import core.basesyntax.fruitoperation.OperationReturn;
 import core.basesyntax.fruitoperation.OperationSupply;
 import core.basesyntax.fruitoperation.Operations;
-import core.basesyntax.fruitoperation.strategy.OperationStrategy;
-import core.basesyntax.fruitoperation.strategy.OperationStrategyImpl;
+import core.basesyntax.report.ReportFormatter;
+import core.basesyntax.report.ReportFormatterImpl;
 import core.basesyntax.workwithfiles.impl.FileReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ReportFormatterImplTest {
+public class OperationStrategyImplTest {
     private static ReportFormatter reportFormatter;
 
     @Before
@@ -30,40 +30,34 @@ public class ReportFormatterImplTest {
     }
 
     @Test
-    public void test1ReportFormatting_Ok() {
-        String actual = reportFormatter.createReport(
-                new FileReader("src/main/resources/test1_correct.csv"));
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "apple,90" + System.lineSeparator() + "banana,152";
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void test2ReportFormatting_Ok() {
-        String actual = reportFormatter.createReport(
-                new FileReader("src/main/resources/test2_correct.csv"));
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "apple,90" + System.lineSeparator() + "banana,152";
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void test3ReportFormatting_incorrectOperation() {
+    public void test5ReportFormatting_twoBalanced() {
         try {
             reportFormatter.createReport(
-                    new FileReader("src/main/resources/test3_incorrect.csv"));
+                    new FileReader("src/main/resources/test5_incorrect.csv"));
         } catch (RuntimeException e) {
-            Assert.assertEquals("Incorrect data", e.getMessage());
+            Assert.assertEquals("Incorrect operation!!! This fruit already has balance!",
+                    e.getMessage());
         }
     }
 
     @Test
-    public void test4ReportFormatting_operationDontPass() {
+    public void test6ReportFormatting_notEnough() {
         try {
             reportFormatter.createReport(
-                    new FileReader("src/main/resources/test4_incorrect.csv"));
+                    new FileReader("src/main/resources/test6_incorrect.csv"));
         } catch (RuntimeException e) {
-            Assert.assertEquals("Incorrect data", e.getMessage());
+            Assert.assertEquals("Sorry, byt we haven't enough fruits", e.getMessage());
+        }
+    }
+
+    @Test
+    public void test7ReportFormatting_notBalanced() {
+        try {
+            reportFormatter.createReport(
+                    new FileReader("src/main/resources/test7_incorrect.csv"));
+        } catch (RuntimeException e) {
+            Assert.assertEquals("Incorrect operation!!! This fruit does not have a balance!",
+                    e.getMessage());
         }
     }
 }

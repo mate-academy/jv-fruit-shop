@@ -6,10 +6,10 @@ import java.util.Map;
 
 public class OperationBalance implements Operation {
     @Override
-    public void doOperation(Storage storage, Fruit fruit, int amount) {
-        Map<Fruit, Integer> mapFruits = storage.getFruits();
+    public void doOperation(Fruit fruit, int amount) {
+        Map<Fruit, Integer> mapFruits = Storage.getFruits();
         if (mapFruits.containsKey(fruit)) {
-            throw new RuntimeException("Incorrect operation!!! This fruit also balanced!");
+            throw new RuntimeException("Incorrect operation!!! This fruit already has balance!");
         }
         mapFruits.put(fruit, amount);
     }

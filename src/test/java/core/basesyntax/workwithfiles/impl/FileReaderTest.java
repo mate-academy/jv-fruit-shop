@@ -1,4 +1,4 @@
-package core.basesyntax.report;
+package core.basesyntax.workwithfiles.impl;
 
 import core.basesyntax.fruitoperation.Operation;
 import core.basesyntax.fruitoperation.OperationBalance;
@@ -8,14 +8,19 @@ import core.basesyntax.fruitoperation.OperationSupply;
 import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
 import core.basesyntax.fruitoperation.strategy.OperationStrategyImpl;
-import core.basesyntax.workwithfiles.impl.FileReader;
+import core.basesyntax.report.ReportFormatter;
+import core.basesyntax.report.ReportFormatterImpl;
+import core.basesyntax.workwithfiles.DataReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ReportFormatterImplTest {
+public class FileReaderTest extends TestCase {
     private static ReportFormatter reportFormatter;
 
     @Before
@@ -30,38 +35,30 @@ public class ReportFormatterImplTest {
     }
 
     @Test
-    public void test1ReportFormatting_Ok() {
-        String actual = reportFormatter.createReport(
-                new FileReader("src/main/resources/test1_correct.csv"));
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "apple,90" + System.lineSeparator() + "banana,152";
-        Assert.assertEquals(expected, actual);
+    public void testName() {
+        List<String> expected = new ArrayList<>();
+        expected.add("b,banana,20");
+        expected.add("b,apple,100");
+        expected.add("s,banana,100");
+        DataReader dataReader = new FileReader("src/main/resources/data_for_FR.csv");
+        assertEquals(expected, dataReader.readData());
     }
 
     @Test
-    public void test2ReportFormatting_Ok() {
-        String actual = reportFormatter.createReport(
-                new FileReader("src/main/resources/test2_correct.csv"));
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "apple,90" + System.lineSeparator() + "banana,152";
-        Assert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void test3ReportFormatting_incorrectOperation() {
+    public void testIncorrectStrings() {
         try {
             reportFormatter.createReport(
-                    new FileReader("src/main/resources/test3_incorrect.csv"));
+                    new FileReader("src/main/resources/test_FR_hardcode1.csv"));
         } catch (RuntimeException e) {
             Assert.assertEquals("Incorrect data", e.getMessage());
         }
     }
 
     @Test
-    public void test4ReportFormatting_operationDontPass() {
+    public void testIncorrectName() {
         try {
             reportFormatter.createReport(
-                    new FileReader("src/main/resources/test4_incorrect.csv"));
+                    new FileReader("src/main/resources/test_FR_hardcode2.csv"));
         } catch (RuntimeException e) {
             Assert.assertEquals("Incorrect data", e.getMessage());
         }
