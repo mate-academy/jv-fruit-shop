@@ -2,7 +2,11 @@ package core.basesyntax.model;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.dao.FruitsDaoImpl;
-import core.basesyntax.service.*;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.FileWriterServiceImpl;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
+import core.basesyntax.service.OperationStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +22,10 @@ public class FruitStoreImpl implements Store {
     }
 
     @Override
-    public void getStatistic(String fromFile_Path, String toFile_Path) {
-        fruitService.getDataFromFile(fromFile_Path);
+    public void getStatistic(String fromFilePath, String toFilePath) {
+        fruitService.getDataFromFile(fromFilePath);
         fruits = fruitService.getFruitsBalance(fruitsDao.getData());
-        FileWriterService fileWriterService = new FileWriterServiceImpl(toFile_Path);
+        FileWriterService fileWriterService = new FileWriterServiceImpl(toFilePath);
         fileWriterService.writeToFile(createReport());
     }
 
