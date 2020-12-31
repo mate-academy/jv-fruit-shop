@@ -7,6 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
+    private static final Integer OPERATION_POSITION = 0;
+    private static final Integer FRUIT_NAME_POSITION = 1;
+    private static final Integer VALUE_POSITION = 2;
     private FruitsDao fruitsDao;
     private OperationStrategy operationStrategy;
 
@@ -18,12 +21,8 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public void getDataFromFile(String filePath) {
         FileReaderService fileReaderService = new FileReaderServiceImpl(filePath);
-        String[] strings = fileReaderService.readFromFile().split(System.lineSeparator());
-        String[] updatedData = new String[strings.length - 1];
-        for (int i = 0; i < updatedData.length; i++) {
-            updatedData[i] = strings[i + 1];
-        }
-        fruitsDao.setData(Arrays.asList(updatedData));
+        String[] strings = fileReaderService.getDataFromFile(filePath);
+        fruitsDao.setData(Arrays.asList(strings));
     }
 
     @Override
@@ -33,13 +32,11 @@ public class FruitServiceImpl implements FruitService {
         String operation;
         for (String s : data) {
             Fruit fruit = new Fruit();
-            operation = s.split(",")[0];
-            fruit.setName(s.split(",")[1]);
-            value = Integer.parseInt(s.split(",")[2]);
+            operation = s.split(",")[OPERATION_POSITION];
+            fruit.setName(s.split(",")[FRUIT_NAME_POSITION]);
+            value = Integer.parseInt(s.split(",")[VALUE_POSITION]);
 
-            if (value < 0) {
-                throw new RuntimeException("Invalid quantity");
-            }
+            isValidValue(value);
 
             if (!fruits.contains(fruit)) {
                 fruit.setBalance(value);
@@ -51,5 +48,12 @@ public class FruitServiceImpl implements FruitService {
             }
         }
         return fruits;
+    }
+
+    private void isValidValue(Integer value) {
+        if (value < 0) {
+            throw new RuntimeException(String.format("Buyers will not be able to buy %s units. "
+                    + "%s is incorrect input.", value));
+        }
     }
 }

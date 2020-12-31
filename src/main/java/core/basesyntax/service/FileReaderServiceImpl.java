@@ -19,4 +19,15 @@ public class FileReaderServiceImpl implements FileReaderService {
             throw new RuntimeException("Can't correctly read data from file " + filePath, e);
         }
     }
+
+    @Override
+    public String[] getDataFromFile(String filePath) {
+        FileReaderService fileReaderService = new FileReaderServiceImpl(filePath);
+        String[] strings = fileReaderService.readFromFile().split(System.lineSeparator());
+        String[] updatedData = new String[strings.length - 1];
+        for (int i = 0; i < updatedData.length; i++) {
+            updatedData[i] = strings[i + 1];
+        }
+        return updatedData;
+    }
 }
