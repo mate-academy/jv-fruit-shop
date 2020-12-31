@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.Fruit;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,6 +36,11 @@ public class FruitServiceImpl implements FruitService {
             operation = s.split(",")[0];
             fruit.setName(s.split(",")[1]);
             value = Integer.parseInt(s.split(",")[2]);
+
+            if (value < 0) {
+                throw new RuntimeException("Invalid quantity");
+            }
+
             if (!fruits.contains(fruit)) {
                 fruit.setBalance(value);
                 fruits.add(fruit);

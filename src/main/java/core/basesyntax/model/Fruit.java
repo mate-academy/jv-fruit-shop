@@ -26,8 +26,8 @@ public class Fruit {
     public String toString() {
         return "Fruit{"
                 + "name='" + name + '\''
-                + ", balance=" + balance +
-                '}';
+                + ", balance=" + balance
+                + '}';
     }
 
     @Override

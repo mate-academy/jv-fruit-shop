@@ -5,7 +5,6 @@ import core.basesyntax.dao.FruitsDaoImpl;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitServiceImpl;
 import core.basesyntax.service.OperationStrategy;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
