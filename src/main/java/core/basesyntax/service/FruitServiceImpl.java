@@ -39,6 +39,7 @@ public class FruitServiceImpl implements FruitService {
             isValidValue(value);
 
             if (!fruits.contains(fruit)) {
+                isValidOperation(operation);
                 fruit.setBalance(value);
                 fruits.add(fruit);
             } else {
@@ -53,7 +54,14 @@ public class FruitServiceImpl implements FruitService {
     private void isValidValue(Integer value) {
         if (value < 0) {
             throw new RuntimeException(String.format("Buyers will not be able to buy %s units. "
-                    + "%s is incorrect input.", value));
+                    + "%s is incorrect input.", value, value));
+        }
+    }
+
+    private void isValidOperation(String operation) {
+        if (!(operation.equals("s") || operation.equals("b"))) {
+            throw new RuntimeException(String.format("You can't buy these fruits as there "
+                    + "are not in the stock. '%s' is wrong operation.", operation));
         }
     }
 }

@@ -1,7 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitStoreImpl;
 import core.basesyntax.model.Store;
-import core.basesyntax.model.StoreImpl;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
@@ -22,7 +22,8 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
-        Store store = new StoreImpl(operationStrategy);
-        store.getStatistic("src\\test.csv");
+        Store store = new FruitStoreImpl(operationStrategy);
+        store.getStatistic("src\\test2.csv", "src\\result1.csv");
+        store.getStatistic("src\\test.csv", "");
     }
 }
