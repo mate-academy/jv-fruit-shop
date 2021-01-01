@@ -9,6 +9,9 @@ import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
 import core.basesyntax.fruitoperation.strategy.OperationStrategyImpl;
 import core.basesyntax.reader.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import junit.framework.TestCase;
@@ -29,7 +32,6 @@ public class ReportFormatterImplTest extends TestCase {
     }
 
     public void test1ReportFormatting_Ok() {
-
         String actual = reportFormatter.createReport(new FileReader("test1_correct.csv"));
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator() + "banana,152";
@@ -37,8 +39,20 @@ public class ReportFormatterImplTest extends TestCase {
     }
 
     public void test2ReportFormatting_Ok() {
-
         String actual = reportFormatter.createReport(new FileReader("test2_correct.csv"));
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "apple,90" + System.lineSeparator() + "banana,152";
+        assertEquals(expected, actual);
+    }
+
+    public void testReportFormattingInFile_Ok() {
+        reportFormatter.createReportInFile(new FileReader("test2_correct.csv"), "ApplesAndBananas");
+        String actual;
+        try {
+            actual = Files.readString(Path.of("ApplesAndBananas"));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't correctly read data from file ApplesAndBananas", e);
+        }
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,90" + System.lineSeparator() + "banana,152";
         assertEquals(expected, actual);
