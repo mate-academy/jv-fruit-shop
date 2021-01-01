@@ -7,6 +7,10 @@ public class PurchaseOperationHandler implements OperationHandler {
             throw new RuntimeException(String.format("Buyers will not be able to buy %s units, "
                     + "because they are only %s units in stock.", value, balance));
         }
+        if (value < 0) {
+            throw new RuntimeException(String.format("Buyers will not be able to buy %s units. "
+                    + "%s is incorrect input.", value, value));
+        }
         return balance - value;
     }
 }
