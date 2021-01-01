@@ -1,7 +1,6 @@
 package core.basesyntax.fruitoperation;
 
 import core.basesyntax.fruit.Fruits;
-
 import java.util.Map;
 
 public class OperationPurchase implements Operation {
@@ -12,7 +11,7 @@ public class OperationPurchase implements Operation {
             throw new RuntimeException("Incorrect operation!!! This fruit not balanced!");
         }
         if (mapFruits.get(name) - amount < 0) {
-            throw  new RuntimeException("Sorry, byt we haven't enough fruits");
+            throw new RuntimeException("Sorry, byt we haven't enough fruits");
         }
         mapFruits.put(name, mapFruits.get(name) - amount);
     }

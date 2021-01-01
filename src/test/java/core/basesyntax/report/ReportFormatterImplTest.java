@@ -1,15 +1,19 @@
 package core.basesyntax.report;
 
-import core.basesyntax.fruitoperation.*;
+import core.basesyntax.fruitoperation.Operation;
+import core.basesyntax.fruitoperation.OperationBalance;
+import core.basesyntax.fruitoperation.OperationPurchase;
+import core.basesyntax.fruitoperation.OperationReturn;
+import core.basesyntax.fruitoperation.OperationSupply;
+import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
 import core.basesyntax.fruitoperation.strategy.OperationStrategyImpl;
 import core.basesyntax.reader.FileReader;
-import junit.framework.TestCase;
-
 import java.util.HashMap;
 import java.util.Map;
+import junit.framework.TestCase;
 
-public class reportFormatterImplTest extends TestCase {
+public class ReportFormatterImplTest extends TestCase {
     private static ReportFormatter reportFormatter;
 
     @Override

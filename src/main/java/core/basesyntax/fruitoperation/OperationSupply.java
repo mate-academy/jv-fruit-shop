@@ -1,7 +1,6 @@
 package core.basesyntax.fruitoperation;
 
 import core.basesyntax.fruit.Fruits;
-
 import java.util.Map;
 
 public class OperationSupply implements Operation {

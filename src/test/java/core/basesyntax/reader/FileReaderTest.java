@@ -1,9 +1,8 @@
 package core.basesyntax.reader;
 
-import junit.framework.TestCase;
-
 import java.util.ArrayList;
 import java.util.List;
+import junit.framework.TestCase;
 
 public class FileReaderTest extends TestCase {
     public void testName() {

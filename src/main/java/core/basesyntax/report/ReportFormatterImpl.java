@@ -4,8 +4,6 @@ import core.basesyntax.fruit.Fruits;
 import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
 import core.basesyntax.reader.DataReader;
-import core.basesyntax.reader.FileReader;
-
 import java.util.List;
 import java.util.Map;
 
