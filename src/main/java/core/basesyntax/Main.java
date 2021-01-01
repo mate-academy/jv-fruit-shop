@@ -24,6 +24,6 @@ public class Main {
 
         Store store = new FruitStoreImpl(operationStrategy);
         store.getStatistic("src\\test2.csv", "src\\result1.csv");
-        store.getStatistic("src\\test.csv", "");
+        store.getStatistic("src\\test1.csv", "");
     }
 }

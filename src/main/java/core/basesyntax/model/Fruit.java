@@ -6,6 +6,14 @@ public class Fruit {
     private String name;
     private Integer balance;
 
+    public Fruit() {
+    }
+
+    public Fruit(String name, Integer balance) {
+        this.name = name;
+        this.balance = balance;
+    }
+
     public String getName() {
         return name;
     }
