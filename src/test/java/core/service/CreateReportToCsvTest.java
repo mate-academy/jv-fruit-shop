@@ -44,10 +44,11 @@ class CreateReportToCsvTest {
         createReportToFile.createReport(getDataFromFile.getData("FruitShopUshakova.csv"),
                 "UshakovaReport.csv");
         String firstExpected = "fruit,quantity" + System.lineSeparator() + "banana,152"
-                + System.lineSeparator() + "apple,90";
+                + System.lineSeparator() + "apple,90" + System.lineSeparator();
         String secondExpected = "fruit,quantity" + System.lineSeparator() + "banana,152"
                 + System.lineSeparator() + "apple,90" + System.lineSeparator() + "kiwi,20"
-                + System.lineSeparator() + "mango,30" + System.lineSeparator() + "lemon,60";
+                + System.lineSeparator() + "mango,30" + System.lineSeparator() + "lemon,60"
+                + System.lineSeparator();
         String firstActual = readFromFile("ChornovolaReport.csv");
         String secondActual = readFromFile("UshakovaReport.csv");
         assertEquals(firstExpected, firstActual,

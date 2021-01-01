@@ -10,7 +10,7 @@ public class CreateReportToCsv implements CreateReportToFile {
 
     @Override
     public void createReport(String reportData, String toFileName) {
-        String reportToFile = String.format(FORMAT_FOR_REPORT, reportData);
+        String reportToFile = String.format(FORMAT_FOR_REPORT, reportData) + System.lineSeparator();
         try (BufferedWriter writeFile = new BufferedWriter(new FileWriter(toFileName))) {
             writeFile.write(reportToFile);
         } catch (IOException e) {
