@@ -1,5 +1,5 @@
 package core.basesyntax;
 
-public class FileService {
+public interface FileService {
 
 }
