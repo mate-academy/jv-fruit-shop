@@ -1,8 +1,10 @@
 package core.basesyntax;
 
-/**
- * Feel free to remove this class and create your own.
- */
-public class ShopProduction {
+import core.basesyntax.dao.ReportWorker;
 
+public class ShopProduction {
+    public static void main(String[] args) {
+        ReportWorker reportWorker = new ReportWorker();
+        //reportWorker.readFromReport();
+    }
 }
