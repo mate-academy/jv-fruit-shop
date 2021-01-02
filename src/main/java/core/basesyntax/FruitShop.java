@@ -7,6 +7,11 @@ public class FruitShop implements Shop {
     private Map<String, Integer> balance = new HashMap<>();
 
     @Override
+    public Map<String, Integer> getBalance() {
+        return balance;
+    }
+
+    @Override
     public void supply(String fruit, Integer quantity) {
         balance.put(fruit, balance.get(fruit) + quantity);
     }
