@@ -3,7 +3,6 @@ package core.basesyntax.dao;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.fileworker.InputOutputReport;
-import java.time.LocalDate;
 import org.junit.Test;
 
 public class ReportWorkerTest {

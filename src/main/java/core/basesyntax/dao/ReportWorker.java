@@ -9,22 +9,22 @@ public class ReportWorker implements WarehouseDao {
 
     @Override
     public void readFromReport(String filName, WarehouseImpl warehouse) {
-        final char BALANCE = 'b';
-        final char SUPPLY = 's';
-        final char PURCHASE = 'p';
-        final char RETURN = 'r';
+        final char balance = 'b';
+        final char supply = 's';
+        final char purchase = 'p';
+        final char returnFruit = 'r';
         String[] file = inputOutputReport.readReport(filName).split(" ");
         for (String line : file) {
             String[] temp = line.split(",");
             switch (temp[0].toLowerCase().charAt(0)) {
-                case (BALANCE):
+                case (balance):
                     warehouse.replace(temp[1], Integer.parseInt(temp[2]));
                     break;
-                case (SUPPLY):
-                case (RETURN):
+                case (supply):
+                case (returnFruit):
                     warehouse.addFruit(temp[1], Integer.parseInt(temp[2]));
                     break;
-                case (PURCHASE):
+                case (purchase):
                     if (!Validation.isValid(warehouse, temp[1], Integer.parseInt(temp[2]))) {
                         throw new RuntimeException("wrong amount");
                     }

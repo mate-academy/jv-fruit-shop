@@ -6,11 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 
 public class InputOutputReport implements WorkWithReport {
-
     @Override
     public String readReport(String fileName) {
         StringBuilder stringBuilder = new StringBuilder();
