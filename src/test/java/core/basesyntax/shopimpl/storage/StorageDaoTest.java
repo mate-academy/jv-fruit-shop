@@ -56,23 +56,22 @@ public class StorageDaoTest {
         testStorageDao.close();
         
         try {
-            String expected = "ShopAction,Item,Amount" + System.lineSeparator()
-                              + "PURCHASE,apple,10" + System.lineSeparator()
-                              + "PURCHASE,banana,15" + System.lineSeparator()
-                              + "SUPPLY,banana,200";
-            
-            StringBuilder actual = new StringBuilder("");
-            List<String> lines = Files.readAllLines(Path.of(path));
-            for (String line : lines) {
-                actual.append(line);
-            }
-            
-            Assertions.assertEquals(expected, actual.toString());
-            
-            Files.deleteIfExists(Path.of(path));
-            Files.createFile(Path.of(path));
+            List<String> expected = List.of("ShopAction,Item,Amount",
+                    "PURCHASE,apple,10",
+                    "PURCHASE,banana,15",
+                    "SUPPLY,banana,200");
+            List<String> actual = Files.readAllLines(Path.of(path));
+            Assertions.assertLinesMatch(expected, actual);
         } catch (IOException e) {
             throw new RuntimeException("A problem has occurred while working with file", e);
+        } finally {
+            try {
+                Files.deleteIfExists(Path.of(path));
+                Files.createFile(Path.of(path));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        
     }
 }
