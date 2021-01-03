@@ -1,7 +1,7 @@
 package core.basesyntax.shop;
 
-import core.basesyntax.fileservice.CSVFileService;
-import core.basesyntax.validation.CSVValidator;
+import core.basesyntax.fileservice.CSVFileReaderService;
+import core.basesyntax.fileservice.CSVFileWriterService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,15 +9,10 @@ import java.util.Map;
 
 public class FruitShop implements Shop {
     private static final Map<String, Integer> BALANCE = new HashMap<>();
-    private final String sourceFilePath;
 
-    public FruitShop(String sourceFilePath) {
-        this.sourceFilePath = sourceFilePath;
-        initBalance();
-    }
-
-    private void initBalance() {
-        CSVFileService csvFileService = new CSVFileService(new CSVValidator(BALANCE));
+    @Override
+    public void initBalanceFromFile(String sourceFilePath) {
+        CSVFileReaderService csvFileService = new CSVFileReaderService();
         List<String[]> data = csvFileService.readFromFile(sourceFilePath);
         for (String[] record : data) {
             Operation type = Operation.getOperation(record[0]);
@@ -33,7 +28,7 @@ public class FruitShop implements Shop {
 
     @Override
     public void generateDailyReport(String destFilePath) {
-        CSVFileService csvFileService = new CSVFileService(new CSVValidator(BALANCE));
+        CSVFileWriterService csvFileService = new CSVFileWriterService();
         csvFileService.writeToFile(BALANCE, destFilePath);
     }
 

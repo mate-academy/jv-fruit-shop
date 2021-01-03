@@ -5,12 +5,8 @@ import core.basesyntax.shop.FruitShop;
 import java.util.Map;
 
 public class CSVValidator implements Validator {
-    private final Map<String, Integer> balance;
+    private final Map<String, Integer> balance = new FruitShop().getBalance();
     private boolean isBalanceArea = true;
-
-    public CSVValidator(Map<String, Integer> balance) {
-        this.balance = balance;
-    }
 
     @Override
     public boolean isValidRecord(String[] record) {
