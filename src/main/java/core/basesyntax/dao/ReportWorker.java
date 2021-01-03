@@ -2,33 +2,37 @@ package core.basesyntax.dao;
 
 import core.basesyntax.fileworker.InputOutputReport;
 import core.basesyntax.service.Validation;
+import java.time.LocalDate;
 import java.util.Map;
 
 public class ReportWorker implements WarehouseDao {
     private InputOutputReport inputOutputReport = new InputOutputReport();
 
     @Override
-    public void readFromReport(String filName, WarehouseImpl warehouse) {
+    public void readFromReport(String filName, Warehouse warehouse) {
         final char balance = 'b';
         final char supply = 's';
         final char purchase = 'p';
         final char returnFruit = 'r';
+        final int operation = 0;
+        final int typeFruit = 1;
+        final int amount = 2;
         String[] file = inputOutputReport.readReport(filName).split(" ");
         for (String line : file) {
             String[] temp = line.split(",");
-            switch (temp[0].toLowerCase().charAt(0)) {
+            switch (temp[operation].toLowerCase().charAt(0)) {
                 case (balance):
-                    warehouse.replace(temp[1], Integer.parseInt(temp[2]));
+                    warehouse.replace(temp[typeFruit], Integer.parseInt(temp[amount]));
                     break;
                 case (supply):
                 case (returnFruit):
-                    warehouse.addFruit(temp[1], Integer.parseInt(temp[2]));
+                    warehouse.addFruit(temp[typeFruit], Integer.parseInt(temp[amount]));
                     break;
                 case (purchase):
-                    if (!Validation.isValid(warehouse, temp[1], Integer.parseInt(temp[2]))) {
+                    if (!Validation.isValid(warehouse, temp[typeFruit], Integer.parseInt(temp[amount]))) {
                         throw new RuntimeException("wrong amount");
                     }
-                    warehouse.getFruitFrom(temp[1], Integer.parseInt(temp[2]));
+                    warehouse.getFruitFrom(temp[typeFruit], Integer.parseInt(temp[amount]));
                     break;
                 default:
                     break;
@@ -37,13 +41,13 @@ public class ReportWorker implements WarehouseDao {
     }
 
     @Override
-    public void writeToReport(WarehouseImpl warehouse) {
+    public void writeToReport(Warehouse warehouse) {
         StringBuilder report = new StringBuilder();
         report.append("fruit,quantity").append(System.lineSeparator());
         Map<String, Integer> allFruits = warehouse.getListFruits();
         for (Map.Entry<String, Integer> fruit : allFruits.entrySet()) {
-            report.append(fruit.getKey() + "," + fruit.getValue()).append(System.lineSeparator());
+            report.append(fruit.getKey()).append(",").append(fruit.getValue()).append(System.lineSeparator());
         }
-        inputOutputReport.writeReport(report.toString());
+        inputOutputReport.writeReport(report.toString(), LocalDate.now().toString());
     }
 }
