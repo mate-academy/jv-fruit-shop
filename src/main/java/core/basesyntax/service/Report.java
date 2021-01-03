@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Plant;
 import java.util.List;
 
-public interface Report {
-    String createReport(List<Fruit> fruits);
+public interface Report<T extends Plant> {
+    String createReport(List<T> plants);
 }
