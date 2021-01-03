@@ -9,7 +9,8 @@ public class FileWriterServiceImpl implements FileWriterService {
     private String filePath;
 
     public FileWriterServiceImpl(String filePath) {
-        this.filePath = filePath.equals("") ? "src" + File.separator + "defaultResult.csv" : filePath;
+        this.filePath = filePath.equals("") ? "src" + File.separator + "defaultResult.csv"
+                : filePath;
     }
 
     @Override

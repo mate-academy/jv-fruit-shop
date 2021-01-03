@@ -24,7 +24,8 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         Store store = new FruitStoreImpl(operationStrategy);
-        store.getStatistic("src" + File.separator + "test2.csv", "src" + File.separator + "result1.csv");
+        store.getStatistic("src" + File.separator + "test2.csv", "src" + File.separator
+                + "result1.csv");
         store.getStatistic("src" + File.separator + "test1.csv", "");
     }
 }

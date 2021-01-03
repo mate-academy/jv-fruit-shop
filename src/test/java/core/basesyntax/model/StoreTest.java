@@ -2,6 +2,7 @@ package core.basesyntax.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
