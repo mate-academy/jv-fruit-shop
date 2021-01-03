@@ -1,0 +1,4 @@
+ShopAction,Item,Amount
+PURCHASE,apple,10
+PURCHASE,banana,15
+SUPPLY,banana,200
