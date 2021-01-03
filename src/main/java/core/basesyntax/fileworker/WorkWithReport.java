@@ -1,7 +1,7 @@
 package core.basesyntax.fileworker;
 
 public interface WorkWithReport {
-    public String readReport(String fileName);
+    String readReport(String fileName);
 
-    public void writeReport(String report);
+    void writeReport(String report, String fileName);
 }
