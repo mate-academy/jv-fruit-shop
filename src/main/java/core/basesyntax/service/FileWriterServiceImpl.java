@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -8,7 +9,7 @@ public class FileWriterServiceImpl implements FileWriterService {
     private String filePath;
 
     public FileWriterServiceImpl(String filePath) {
-        this.filePath = filePath.equals("") ? "src\\defaultResult.csv" : filePath;
+        this.filePath = filePath.equals("") ? "src" + File.separator + "defaultResult.csv" : filePath;
     }
 
     @Override
