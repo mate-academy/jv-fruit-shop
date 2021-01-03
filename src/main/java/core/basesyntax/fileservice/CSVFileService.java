@@ -1,13 +1,12 @@
-package core.basesyntax;
+package core.basesyntax.fileservice;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CSVFileService implements FileService {
@@ -23,7 +22,13 @@ public class CSVFileService implements FileService {
     }
 
     @Override
-    public void writeToFile(String filePath) {
-
+    public void writeToFile(List<String[]> records, String filePath) {
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(filePath))) {
+            for (String[] record : records) {
+                csvWriter.writeNext(record);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write to file", e);
+        }
     }
 }
