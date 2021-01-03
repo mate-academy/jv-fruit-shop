@@ -15,7 +15,7 @@ public class StorageDao implements ShopDao<DataRecord> {
     private static final int FILE_INDEX_OF_ITEM = 1;
     private static final int FILE_INDEX_OF_AMOUNT = 2;
     
-    private static List<DataRecord> dataBase;
+    private final List<DataRecord> dataBase;
     private final String dataFilePath;
     
     public StorageDao(String dataFilePath) {
@@ -31,7 +31,7 @@ public class StorageDao implements ShopDao<DataRecord> {
     @Override
     public List<DataRecord> getItemActions(String item) {
         return dataBase.stream()
-                .filter(data -> data.item().equals(item))
+                .filter(data -> data.item().equalsIgnoreCase(item))
                 .collect(Collectors.toList());
     }
     
@@ -65,6 +65,10 @@ public class StorageDao implements ShopDao<DataRecord> {
     private List<DataRecord> parseFileLines(String path) {
         List<DataRecord> records = new ArrayList<>();
         List<String> lines = readDataFile(path);
+        
+        if (lines.isEmpty()) {
+            return records;
+        }
         
         int index = 0;
         String line = lines.get(index);
