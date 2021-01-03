@@ -3,8 +3,10 @@ package core.basesyntax.shopimpl.storage;
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,8 +17,8 @@ public class StorageDao implements ShopDao<DataRecord> {
     private static final int FILE_INDEX_OF_ITEM = 1;
     private static final int FILE_INDEX_OF_AMOUNT = 2;
     
-    private final List<DataRecord> dataBase;
-    private final String dataFilePath;
+    private List<DataRecord> dataBase;
+    private String dataFilePath;
     
     public StorageDao(String dataFilePath) {
         dataBase = parseFileLines(dataFilePath);
@@ -48,16 +50,20 @@ public class StorageDao implements ShopDao<DataRecord> {
     public void close() {
         StringBuilder sb = new StringBuilder("");
         
+        sb.append("ShopAction").append(FILE_DELIMITER)
+                .append("Item").append(FILE_DELIMITER)
+                .append("Amount");
+        
         for (DataRecord record : dataBase) {
-            sb.append(record.action().toString()).append(FILE_DELIMITER);
-            sb.append(record.item()).append(FILE_DELIMITER);
-            sb.append(record.amount().toString()).append(FILE_DELIMITER)
-                    .append(System.lineSeparator());
+            sb.append(System.lineSeparator())
+                    .append(record.action().toString()).append(FILE_DELIMITER)
+                    .append(record.item()).append(FILE_DELIMITER)
+                    .append(record.amount().toString());
         }
         
         try {
-            Files.deleteIfExists(Path.of(dataFilePath));
-            Files.writeString(Path.of(dataFilePath), sb.toString());
+            Files.delete(Path.of(dataFilePath));
+            Files.writeString(Path.of(dataFilePath), sb.toString(), StandardOpenOption.CREATE_NEW);
         } catch (IOException e) {
             throw new RuntimeException("A problem has occurred while writing the file");
         }
@@ -71,16 +77,13 @@ public class StorageDao implements ShopDao<DataRecord> {
             return records;
         }
         
-        int index = 0;
-        String line = lines.get(index);
-        
-        while (line != null) {
-            String[] data = line.split(FILE_DELIMITER);
+        for (int i = 1; i < lines.size(); i++) {
+            String[] data = lines.get(i).split(FILE_DELIMITER);
             records.add(new DataRecord(ShopActions.valueOf(data[FILE_INDEX_OF_ACTION]),
                     data[FILE_INDEX_OF_ITEM],
                     Integer.parseInt(data[FILE_INDEX_OF_AMOUNT])));
-            line = lines.get(++index);
         }
+        
         return records;
     }
     
