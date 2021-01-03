@@ -1,15 +1,14 @@
 package core.basesyntax.model.shopdao;
 
-import core.basesyntax.model.shopstrategy.ShopActions;
 import java.util.List;
 
-public interface ShopDao {
+public interface ShopDao<R> {
     
-    List<String> getAllActions();
+    List<R> getAllActions();
     
-    int getItemActions(String item);
+    List<R> getItemActions(String item);
     
-    void addAction(ShopActions action, String item, int amount);
+    void addAction(R action);
     
     void close();
 }
