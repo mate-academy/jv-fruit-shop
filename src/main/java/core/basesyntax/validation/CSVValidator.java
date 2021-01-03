@@ -30,7 +30,7 @@ public class CSVValidator implements Validator {
 
     private boolean isValidFruit(String fruit) {
         if (fruit == null || fruit.isEmpty()
-                || !fruit.replaceAll("[^a-zA-Z]", "").isEmpty()) {
+                || !fruit.replaceAll("[a-zA-Z]", "").isEmpty()) {
             throw new RuntimeException("It's not a fruit: " + fruit);
         }
         return true;

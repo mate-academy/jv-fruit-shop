@@ -2,7 +2,10 @@ package core.basesyntax.shop;
 
 import core.basesyntax.fileservice.CSVFileReaderService;
 import core.basesyntax.fileservice.CSVFileWriterService;
+import core.basesyntax.validation.CSVValidator;
+import core.basesyntax.validation.Validator;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,15 +13,24 @@ import java.util.Map;
 public class FruitShop implements Shop {
     private static final Map<String, Integer> BALANCE = new HashMap<>();
 
+    public static void main(String[] args) {
+        List<String[]> list = new CSVFileReaderService().readFromFile("src/test/resources/data_for_monday.csv");
+        for (String[] d : list) {
+            System.out.println(Arrays.toString(d));
+        }
+    }
     @Override
     public void initBalanceFromFile(String sourceFilePath) {
         CSVFileReaderService csvFileService = new CSVFileReaderService();
         List<String[]> data = csvFileService.readFromFile(sourceFilePath);
+        Validator validator = new CSVValidator();
         for (String[] record : data) {
-            Operation type = Operation.getOperation(record[0]);
-            String fruit = record[1];
-            int quantity = Integer.parseInt(record[2]);
-            type.operation(fruit, quantity);
+            if (validator.isValidRecord(record)) {
+                Operation type = Operation.getOperation(record[0]);
+                String fruit = record[1];
+                int quantity = Integer.parseInt(record[2]);
+                type.operation(fruit, quantity);
+            }
         }
     }
 
