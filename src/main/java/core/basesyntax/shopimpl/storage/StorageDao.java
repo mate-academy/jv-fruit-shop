@@ -46,12 +46,13 @@ public class StorageDao implements ShopDao<DataRecord> {
     
     @Override
     public void close() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("");
         
         for (DataRecord record : dataBase) {
             sb.append(record.action().toString()).append(FILE_DELIMITER);
             sb.append(record.item()).append(FILE_DELIMITER);
-            sb.append(record.amount().toString()).append(FILE_DELIMITER).append("\n");
+            sb.append(record.amount().toString()).append(FILE_DELIMITER)
+                    .append(System.lineSeparator());
         }
         
         try {
