@@ -4,7 +4,7 @@ import core.basesyntax.dao.Warehouse;
 
 public interface Validation {
 
-    public static boolean isValid(Warehouse warehouse, String name, int amount) {
+    static boolean isValid(Warehouse warehouse, String name, int amount) {
         if (amount < 0) {
             return false;
         }
