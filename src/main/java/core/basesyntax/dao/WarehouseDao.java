@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
 public interface WarehouseDao {
-    public void readFromReport(String filName, WarehouseImpl warehouse);
+    void readFromReport(String filName, Warehouse warehouse);
 
-    public void writeToReport(WarehouseImpl warehouse);
+    void writeToReport(Warehouse warehouse);
 }
