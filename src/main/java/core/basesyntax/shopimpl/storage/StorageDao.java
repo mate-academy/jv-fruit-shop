@@ -3,7 +3,6 @@ package core.basesyntax.shopimpl.storage;
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;

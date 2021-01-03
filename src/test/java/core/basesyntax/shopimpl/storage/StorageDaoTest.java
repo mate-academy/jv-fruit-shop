@@ -37,10 +37,11 @@ public class StorageDaoTest {
         testStorageDao.addAction(ShopActions.SUPPLY, "oranges", 100);
         testStorageDao.addAction(ShopActions.RETURN, "oranges", 10);
         testStorageDao.addAction(ShopActions.RETURN, "nuts", 10);
-        testStorageDao.addAction(ShopActions.SUPPLY, "nuts", 100);
+        testStorageDao.addAction(new DataRecord(ShopActions.SUPPLY, "nuts", 100));
         
         List<DataRecord> actual = testStorageDao.getItemActions("banana");
-        List<DataRecord> expected = List.of(new DataRecord(ShopActions.PURCHASE, "banana", 15),
+        List<DataRecord> expected
+                = List.of(new DataRecord(ShopActions.PURCHASE, "banana", 15),
                 new DataRecord(ShopActions.SUPPLY, "banana", 200));
         
         Assertions.assertEquals(expected, actual);
@@ -48,7 +49,18 @@ public class StorageDaoTest {
     
     @Test
     public void addAction() {
-    
+        String path = "src/test/java/core/basesyntax/shopimpl"
+                      + "/storage/getItemActionsTestFile.csv";
+        testStorageDao = new StorageDao(path);
+        testStorageDao.addAction(ShopActions.SUPPLY, "oranges", 100);
+        testStorageDao.addAction(ShopActions.RETURN, "oranges", 10);
+        testStorageDao.addAction(ShopActions.RETURN, "nuts", 10);
+        testStorageDao.addAction(ShopActions.SUPPLY, "nuts", 100);
+        
+        int actual = testStorageDao.getAllActions().size();
+        int expected = 7;
+        
+        Assertions.assertEquals(expected, actual);
     }
     
     @Test
