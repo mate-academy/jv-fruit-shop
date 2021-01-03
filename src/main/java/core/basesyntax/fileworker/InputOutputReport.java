@@ -27,8 +27,7 @@ public class InputOutputReport implements WorkWithReport {
     }
 
     @Override
-    public void writeReport(String report) {
-        String fileName = "report.txt";
+    public void writeReport(String report, String fileName) {
         File file = new File(fileName);
         try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
             fileOutputStream.write(report.getBytes());
