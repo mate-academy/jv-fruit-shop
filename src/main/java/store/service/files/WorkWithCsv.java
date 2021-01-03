@@ -87,8 +87,8 @@ public class WorkWithCsv implements ReadWriteAble {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(TEMP_FILE))) {
             for (Map.Entry<Actions, List<Fruits>> entry : dataFromDb.entrySet()) {
                 List<Fruits> fruits = entry.getValue();
-                // TODO ChangeAble
                 StringBuilder builder = new StringBuilder();
+
                 for (int i = 0; i < fruits.size(); i++) {
                     builder.append(entry.getKey()).append(COMA)
                             .append(fruits.get(i).getName()).append(COMA)
