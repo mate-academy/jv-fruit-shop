@@ -7,6 +7,6 @@ public class BalanceOperationHandler implements OperationHandler {
             throw new RuntimeException(String.format("Buyers will not be able to buy %s units. "
                     + "%s is incorrect input.", value, value));
         }
-        return value;
+        return balance + value;
     }
 }
