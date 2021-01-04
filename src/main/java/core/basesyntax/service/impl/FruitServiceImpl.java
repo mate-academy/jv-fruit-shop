@@ -6,7 +6,6 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

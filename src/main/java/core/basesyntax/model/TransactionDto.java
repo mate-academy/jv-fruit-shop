@@ -31,10 +31,10 @@ public class TransactionDto {
 
     @Override
     public String toString() {
-        return "TransactionDto{" +
-                "operation=" + operation +
-                ", fruit=" + fruit +
-                ", quantity=" + quantity +
-                '}';
+        return "TransactionDto{"
+                + "operation=" + operation
+                + ", fruit=" + fruit
+                + ", quantity=" + quantity
+                + '}';
     }
 }

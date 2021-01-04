@@ -6,7 +6,7 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    final private String operationSignature;
+    private final String operationSignature;
 
     Operation(String text) {
         this.operationSignature = text;

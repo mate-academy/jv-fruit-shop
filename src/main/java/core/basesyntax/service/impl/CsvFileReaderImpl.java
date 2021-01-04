@@ -2,16 +2,15 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FileReader;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderFromCSVImpl implements FileReader {
+public class CsvFileReaderImpl implements FileReader {
     private final String path;
 
-    public FileReaderFromCSVImpl(String path) {
+    public CsvFileReaderImpl(String path) {
         this.path = path;
     }
 

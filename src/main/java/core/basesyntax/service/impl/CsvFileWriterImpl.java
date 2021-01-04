@@ -1,12 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriter;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Map;
 
-public class FileWriterToCSVImpl implements FileWriter {
+public class CsvFileWriterImpl implements FileWriter {
     private static final String HEADER = "fruit,quantity";
     private static final String NEW_LINE = System.lineSeparator();
     private static final String SEPARATOR = ",";

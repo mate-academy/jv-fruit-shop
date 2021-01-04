@@ -6,7 +6,6 @@ import core.basesyntax.model.TransactionDto;
 
 public class TransactionDtoFactory {
     public static TransactionDto build(String line) {
-        TransactionDto transactionDto = new TransactionDto();
         String[] array = line.split(",");
         if (array[0].equals("b")
                 && Integer.parseInt(array[2]) < 0) {
@@ -24,6 +23,7 @@ public class TransactionDtoFactory {
                 && Integer.parseInt(array[2]) < 0) {
             throw new RuntimeException("Return can't be lower than 0");
         }
+        TransactionDto transactionDto = new TransactionDto();
         transactionDto.setOperation(Operation.fromString(array[0]));
         transactionDto.setFruit(new Fruits(array[1]));
         transactionDto.setQuantity(Integer.parseInt(array[2]));

@@ -29,9 +29,9 @@ public class Fruits {
 
     @Override
     public String toString() {
-        return "Fruits{" +
-                "name='" + name + '\'' +
-                '}';
+        return "Fruits{"
+                + "name='" + name + '\''
+                + '}';
     }
 
     @Override
