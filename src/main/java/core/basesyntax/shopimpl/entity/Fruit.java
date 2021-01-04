@@ -1,6 +1,6 @@
 package core.basesyntax.shopimpl.entity;
 
-import core.basesyntax.model.AbstractItem;
+import core.basesyntax.model.abstractstorage.AbstractItem;
 
 public class Fruit extends AbstractItem {
     public Fruit(String itemName) {

@@ -1,6 +1,6 @@
 package core.basesyntax.shopimpl.service;
 
-import core.basesyntax.model.AbstractItem;
+import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;

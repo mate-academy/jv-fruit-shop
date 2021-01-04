@@ -1,6 +1,6 @@
 package core.basesyntax.shopimpl.service;
 
-import core.basesyntax.model.AbstractItem;
+import core.basesyntax.model.abstractstorage.AbstractItem;
 import java.util.Map;
 
 public class Validator {

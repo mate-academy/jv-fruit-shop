@@ -1,6 +1,6 @@
 package core.basesyntax.shopimpl.fruitshopstrategy;
 
-import core.basesyntax.model.AbstractItem;
+import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.shopstrategy.AbstractAction;
 import core.basesyntax.shopimpl.database.FruitShopDao;
 import core.basesyntax.shopimpl.service.Validator;

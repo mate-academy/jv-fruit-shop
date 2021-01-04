@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import core.basesyntax.model.abstractstorage.AbstractItem;
+import core.basesyntax.model.abstractstorage.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.ShopActions;
 

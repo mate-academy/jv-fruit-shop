@@ -1,12 +1,8 @@
 package core.basesyntax.shopimpl.fruitshopstrategy;
 
-import core.basesyntax.model.AbstractItem;
-import core.basesyntax.model.AbstractStorage;
-import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.ShopAction;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import core.basesyntax.shopimpl.database.FruitShopDao;
-import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.storage.FruitShopStorage;
 import java.util.HashMap;
 import java.util.Map;

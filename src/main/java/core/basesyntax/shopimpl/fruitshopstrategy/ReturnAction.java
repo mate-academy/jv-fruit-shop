@@ -1,8 +1,6 @@
 package core.basesyntax.shopimpl.fruitshopstrategy;
 
-import core.basesyntax.model.AbstractItem;
-import core.basesyntax.model.AbstractStorage;
-import core.basesyntax.model.shopdao.ShopDao;
+import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.shopstrategy.AbstractAction;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import core.basesyntax.shopimpl.database.FruitShopDao;

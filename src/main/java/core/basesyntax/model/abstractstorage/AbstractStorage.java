@@ -1,4 +1,4 @@
-package core.basesyntax.model;
+package core.basesyntax.model.abstractstorage;
 
 import core.basesyntax.model.shopdao.ShopDao;
 import java.util.Map;
