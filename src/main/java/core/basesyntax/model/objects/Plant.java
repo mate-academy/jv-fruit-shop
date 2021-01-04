@@ -7,7 +7,6 @@ public class Plant {
     protected Integer balance;
 
     public Plant() {
-        balance = 0;
     }
 
     public Plant(String name, Integer balance) {

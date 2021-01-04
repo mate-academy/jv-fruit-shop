@@ -37,21 +37,23 @@ public class StoreServiceImpl<T extends Plant> implements StoreService<T> {
         List<T> plants = new ArrayList<>();
         Integer value;
         String operation;
-        Plant plant = new Plant();
-        OperationValidation operationValidator = new OperationValidationImpl();
         for (String s : data) {
+            Plant plant = new Plant();
             operation = s.split(",")[OPERATION_POSITION];
             plant.setName(s.split(",")[PLANT_NAME_POSITION]);
             value = Integer.parseInt(s.split(",")[VALUE_POSITION]);
 
+            OperationValidation operationValidator = new OperationValidationImpl();
             operationValidator.isValidOperation(operations, operation);
 
             if (!plants.contains(plant)) {
+                plant.setBalance(value);
                 plants.add((T) plant);
+            } else {
+                Plant current = plants.get(plants.indexOf(plant));
+                current.setBalance(operationStrategy.get(operation)
+                        .updateBalance(current.getBalance(), value));
             }
-            Plant current = plants.get(plants.indexOf(plant));
-            current.setBalance(operationStrategy.get(operation)
-                    .updateBalance(current.getBalance(), value));
         }
         return plants;
     }
