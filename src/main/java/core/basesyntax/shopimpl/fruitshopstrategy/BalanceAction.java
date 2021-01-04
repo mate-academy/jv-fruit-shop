@@ -9,7 +9,6 @@ import core.basesyntax.shopimpl.storage.FruitShopStorage;
 
 public class BalanceAction extends AbstractAction<DataRecord, Fruit> {
     
-    
     public BalanceAction(FruitShopStorage storage, ShopDao<DataRecord> shopDao) {
         super(storage, shopDao);
     }
@@ -17,6 +16,5 @@ public class BalanceAction extends AbstractAction<DataRecord, Fruit> {
     @Override
     public void apply(AbstractItem item, int amount) {
         getStorage().put((Fruit) item, amount);
-//        getShopDao().addTransaction();
     }
 }

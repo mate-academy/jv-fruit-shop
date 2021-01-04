@@ -21,7 +21,7 @@ public class FruitShopStorage extends AbstractStorage<DataRecord, Fruit> {
         Map<Fruit, Integer> storage = new HashMap<>();
         
         List<AbstractItem> fruits = shopDao.getTransactionHistory().stream()
-                .map(DataRecord::item)
+                .map(DataRecord::getItem)
                 .distinct()
                 .collect(Collectors.toList());
         
@@ -30,10 +30,10 @@ public class FruitShopStorage extends AbstractStorage<DataRecord, Fruit> {
         }
         
         for (DataRecord record : shopDao.getTransactionHistory()) {
-            int actualAmount = record.action() == ShopActions.PURCHASE
-                    ? storage.get(record.item()) - record.amount()
-                    : storage.get(record.item()) - record.amount();
-            storage.put((Fruit) record.item(), actualAmount);
+            int actualAmount = record.getAction() == ShopActions.PURCHASE
+                    ? storage.get(record.getItem()) - record.getAmount()
+                    : storage.get(record.getItem()) - record.getAmount();
+            storage.put((Fruit) record.getItem(), actualAmount);
         }
         
         return storage;

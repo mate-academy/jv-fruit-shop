@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class IODataFileService {
+public class IOdataFileService {
     private static final String FILE_DELIMITER = ",";
     private static final String REPORT_DELIMITER = " --- ";
     private static final int FILE_INDEX_OF_ACTION = 0;
@@ -20,7 +20,7 @@ public class IODataFileService {
     private static final int FILE_INDEX_OF_AMOUNT = 2;
     private String dataFilePath;
     
-    public IODataFileService(String dataFilePath) {
+    public IOdataFileService(String dataFilePath) {
         this.dataFilePath = dataFilePath;
     }
     
@@ -50,9 +50,9 @@ public class IODataFileService {
         
         for (DataRecord record : dataBase) {
             sb.append(System.lineSeparator())
-                    .append(record.action().getValue()).append(FILE_DELIMITER)
-                    .append(record.item().getItemName()).append(FILE_DELIMITER)
-                    .append(record.amount().toString());
+                    .append(record.getAction().getValue()).append(FILE_DELIMITER)
+                    .append(record.getItem().getItemName()).append(FILE_DELIMITER)
+                    .append(record.getAmount().toString());
         }
         
         try {

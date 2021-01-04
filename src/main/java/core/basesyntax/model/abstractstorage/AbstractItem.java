@@ -19,8 +19,12 @@ public abstract class AbstractItem {
     
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AbstractItem)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof AbstractItem)) {
+            return false;
+        }
         AbstractItem that = (AbstractItem) o;
         return itemName.equals(that.itemName);
     }

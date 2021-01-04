@@ -4,17 +4,17 @@ import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
-import core.basesyntax.shopimpl.service.IODataFileService;
+import core.basesyntax.shopimpl.service.IOdataFileService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FruitShopDao implements ShopDao<DataRecord> {
     private List<DataRecord> dataBase;
-    private IODataFileService fileService;
+    private IOdataFileService fileService;
     
     public FruitShopDao(String dataFilePath) {
-        fileService = new IODataFileService(dataFilePath);
+        fileService = new IOdataFileService(dataFilePath);
         dataBase = fileService.readDataFile();
     }
     
@@ -26,7 +26,7 @@ public class FruitShopDao implements ShopDao<DataRecord> {
     @Override
     public List<DataRecord> getItemTransactionHistory(String item) {
         return dataBase.stream()
-                .filter(data -> data.item().getItemName().equalsIgnoreCase(item))
+                .filter(data -> data.getItem().getItemName().equalsIgnoreCase(item))
                 .collect(Collectors.toList());
     }
     
