@@ -1,15 +1,15 @@
 package core.basesyntax.shopimpl.fruitshopstrategy;
 
 import core.basesyntax.model.AbstractItem;
-import core.basesyntax.model.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.AbstractAction;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import core.basesyntax.shopimpl.entity.DataRecord;
+import core.basesyntax.shopimpl.storage.FruitShopStorage;
 
 public class SupplyAction extends AbstractAction {
     
-    public SupplyAction(AbstractStorage<DataRecord, AbstractItem> storage, ShopDao<DataRecord> shopDao) {
+    public SupplyAction(FruitShopStorage storage, ShopDao<DataRecord> shopDao) {
         super(storage, shopDao);
     }
     

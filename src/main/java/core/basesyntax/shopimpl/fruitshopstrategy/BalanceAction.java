@@ -1,26 +1,25 @@
 package core.basesyntax.shopimpl.fruitshopstrategy;
 
 import core.basesyntax.model.AbstractItem;
-import core.basesyntax.model.AbstractStorage;
-import core.basesyntax.model.shopstrategy.ShopAction;
+import core.basesyntax.model.shopdao.ShopDao;
+import core.basesyntax.model.shopstrategy.AbstractAction;
 import core.basesyntax.shopimpl.entity.DataRecord;
-import core.basesyntax.shopimpl.service.IODataFileService;
+import core.basesyntax.shopimpl.storage.FruitShopStorage;
 import java.util.Map;
 
-public class BalanceAction implements ShopAction {
-    private AbstractStorage<DataRecord, AbstractItem> storage;
+public class BalanceAction extends AbstractAction {
     
-    public BalanceAction(AbstractStorage<DataRecord, AbstractItem> storage) {
-        this.storage = storage;
+    
+    public BalanceAction(FruitShopStorage storage, ShopDao<DataRecord> shopDao) {
+        super(storage, shopDao);
     }
     
     @Override
     public void apply(AbstractItem item, int amount) {
-        IODataFileService.buildReport(storage.getStorage(),
-                "src/main/java/core/basesyntax/shopimpl/Report.txt");
+    
     }
     
     public Map<AbstractItem, Integer> getStorage() {
-        return storage.getStorage();
+        return getStorage();
     }
 }
