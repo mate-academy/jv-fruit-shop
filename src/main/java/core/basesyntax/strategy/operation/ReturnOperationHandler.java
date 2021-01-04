@@ -1,6 +1,6 @@
-package core.basesyntax.service.operation;
+package core.basesyntax.strategy.operation;
 
-public class SupplyOperationHandler implements OperationHandler {
+public class ReturnOperationHandler implements OperationHandler {
     @Override
     public Integer updateBalance(Integer balance, Integer value) {
         if (value < 0) {

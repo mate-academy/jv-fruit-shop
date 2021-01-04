@@ -1,4 +1,4 @@
-package core.basesyntax.service.validator;
+package core.basesyntax.validator;
 
 import java.util.List;
 

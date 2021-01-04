@@ -1,9 +1,10 @@
-package core.basesyntax.model;
+package core.basesyntax.model.impl;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.dao.FruitsDaoImpl;
-import core.basesyntax.service.FruitServiceImpl;
-import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.model.objects.Fruit;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.ArrayList;
 
 public class FruitStoreImpl extends StoreImpl<Fruit> {

@@ -1,6 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.strategy;
 
-import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.strategy.operation.OperationHandler;
 import java.util.List;
 
 public interface OperationStrategy {

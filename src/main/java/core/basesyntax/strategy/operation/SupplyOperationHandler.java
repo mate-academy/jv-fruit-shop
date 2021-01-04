@@ -1,12 +1,12 @@
-package core.basesyntax.service.operation;
+package core.basesyntax.strategy.operation;
 
-public class BalanceOperationHandler implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
     @Override
     public Integer updateBalance(Integer balance, Integer value) {
         if (value < 0) {
             throw new RuntimeException(String.format("Buyers will not be able to buy %s units. "
                     + "%s is incorrect input.", value, value));
         }
-        return value;
+        return balance + value;
     }
 }
