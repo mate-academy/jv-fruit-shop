@@ -1,6 +1,5 @@
 package core.basesyntax.shopimpl.service;
 
-import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
@@ -10,11 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class IOdataFileService {
     private static final String FILE_DELIMITER = ",";
-    private static final String REPORT_DELIMITER = " --- ";
     private static final int FILE_INDEX_OF_ACTION = 0;
     private static final int FILE_INDEX_OF_ITEM = 1;
     private static final int FILE_INDEX_OF_AMOUNT = 2;
