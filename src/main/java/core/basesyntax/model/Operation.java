@@ -8,20 +8,20 @@ public enum Operation {
 
     private final String operationSignature;
 
-    Operation(String text) {
-        this.operationSignature = text;
+    Operation(String operationSignature) {
+        this.operationSignature = operationSignature;
     }
 
     public String getOperation() {
         return operationSignature;
     }
 
-    public static Operation fromString(String text) {
+    public static Operation fromString(String operationSignature) {
         for (Operation operation : Operation.values()) {
-            if (operation.operationSignature.equalsIgnoreCase(text)) {
+            if (operation.operationSignature.equalsIgnoreCase(operationSignature)) {
                 return operation;
             }
         }
-        throw new RuntimeException("Operation is incorrect " + text);
+        throw new RuntimeException("Operation is incorrect " + operationSignature);
     }
 }
