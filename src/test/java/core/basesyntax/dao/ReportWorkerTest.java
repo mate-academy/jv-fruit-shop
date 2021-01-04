@@ -18,9 +18,21 @@ public class ReportWorkerTest {
     }
 
     @Test(expected = RuntimeException.class)
+    public void testReadError() {
+        ReportWorker reportWorker = new ReportWorker();
+        reportWorker.readFromReport("noFind", warehouse);
+    }
+
+    @Test(expected = RuntimeException.class)
     public void testReadFromError() {
         ReportWorker reportWorker = new ReportWorker();
         reportWorker.readFromReport("errorReport", warehouse);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testValidationError() {
+        ReportWorker reportWorker = new ReportWorker();
+        reportWorker.readFromReport("test2", warehouse);
     }
 
     @Test
