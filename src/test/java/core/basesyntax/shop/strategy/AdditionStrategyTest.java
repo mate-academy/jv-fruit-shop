@@ -36,7 +36,6 @@ class AdditionStrategyTest {
         strategy.apply(appleTransactionDto);
         Integer bananaQuantity = Storage.fruitBalance.get(bananaTransactionDto.getFruit());
         Integer appleQuantity = Storage.fruitBalance.get(appleTransactionDto.getFruit());
-        assertEquals(2, Storage.fruitBalance.size());
         assertEquals(40, bananaQuantity);
         assertEquals(20, appleQuantity);
     }
