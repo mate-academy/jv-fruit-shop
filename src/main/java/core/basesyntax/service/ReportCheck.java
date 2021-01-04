@@ -1,6 +1,8 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
-public interface WarehouseDao {
+import core.basesyntax.dao.Warehouse;
+
+public interface ReportCheck {
     void readFromReport(String filName, Warehouse warehouse);
 
     void writeToReport(Warehouse warehouse);
