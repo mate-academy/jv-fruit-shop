@@ -7,9 +7,9 @@ import core.basesyntax.model.shopstrategy.AbstractAction;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import core.basesyntax.shopimpl.entity.DataRecord;
 
-public class Supply extends AbstractAction {
+public class SupplyAction extends AbstractAction {
     
-    public Supply(AbstractStorage<DataRecord, AbstractItem> storage, ShopDao<DataRecord> shopDao) {
+    public SupplyAction(AbstractStorage<DataRecord, AbstractItem> storage, ShopDao<DataRecord> shopDao) {
         super(storage, shopDao);
     }
     

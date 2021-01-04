@@ -12,13 +12,13 @@ public enum ShopActions {
         this.value = value;
     }
     
-    public String getValue() {
-        return value;
-    }
-    
     public static ShopActions getAction(String value) {
         return java.util.Arrays.stream(ShopActions.values())
                 .filter(i -> i.value.equalsIgnoreCase(value))
                 .findFirst().get();
+    }
+    
+    public String getValue() {
+        return value;
     }
 }

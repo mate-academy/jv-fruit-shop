@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import core.basesyntax.model.shopdao.ShopDao;
-import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractStorage<R, I extends AbstractItem> {

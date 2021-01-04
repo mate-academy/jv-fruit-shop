@@ -28,7 +28,7 @@ public class FruitShopStorage extends AbstractStorage<DataRecord, Fruit> {
         for (AbstractItem fruit : fruits) {
             storage.put((Fruit) fruit, 0);
         }
-    
+        
         for (DataRecord record : shopDao.getAllActions()) {
             int actualAmount = record.action() == ShopActions.PURCHASE
                     ? storage.get(record.item()) - record.amount()

@@ -1,5 +1,6 @@
 package core.basesyntax.shopimpl.service;
 
+import core.basesyntax.model.AbstractItem;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
@@ -9,9 +10,11 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class IODataFileService {
     private static final String FILE_DELIMITER = ",";
+    private static final String REPORT_DELIMITER = " --- ";
     private static final int FILE_INDEX_OF_ACTION = 0;
     private static final int FILE_INDEX_OF_ITEM = 1;
     private static final int FILE_INDEX_OF_AMOUNT = 2;
@@ -19,6 +22,23 @@ public class IODataFileService {
     
     public IODataFileService(String dataFilePath) {
         this.dataFilePath = dataFilePath;
+    }
+    
+    public static void buildReport(Map<AbstractItem, Integer> storage, String path) {
+        StringBuilder sb = new StringBuilder("");
+        
+        sb.append("Fruits --- amount");
+        for (Map.Entry<AbstractItem, Integer> entry : storage.entrySet()) {
+            sb.append(System.lineSeparator()).append(entry.getKey().getItemName())
+                    .append(REPORT_DELIMITER).append(entry.getValue());
+        }
+        
+        try {
+            Files.writeString(Path.of(path), sb.toString(), StandardOpenOption.CREATE_NEW);
+        } catch (IOException e) {
+            throw new RuntimeException("A problem has occurred while report building ", e);
+        }
+        
     }
     
     public void writeDataFile(List<DataRecord> dataBase) {
