@@ -1,4 +1,6 @@
 package core.basesyntax.shopimpl.storage;
 
-public class FruitShopStorage {
+import core.basesyntax.model.AbstractStorage;
+
+public class FruitShopStorage  {
 }
