@@ -1,4 +1,4 @@
-package core.basesyntax.shopimpl.storage;
+package core.basesyntax.shopimpl.database;
 
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.ShopActions;

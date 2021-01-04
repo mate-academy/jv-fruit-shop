@@ -1,7 +1,7 @@
 package core.basesyntax.shopimpl.service;
 
 import core.basesyntax.model.shopstrategy.ShopActions;
-import core.basesyntax.shopimpl.storage.DataRecord;
+import core.basesyntax.shopimpl.database.DataRecord;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
