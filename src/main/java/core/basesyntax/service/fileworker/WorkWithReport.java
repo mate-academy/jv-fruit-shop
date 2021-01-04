@@ -1,4 +1,4 @@
-package core.basesyntax.fileworker;
+package core.basesyntax.service.fileworker;
 
 public interface WorkWithReport {
     String readReport(String fileName);
