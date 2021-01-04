@@ -3,10 +3,9 @@ package core.basesyntax.validator;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.basesyntax.validator.impl.OperationValidationImpl;
 import java.util.Arrays;
 import java.util.List;
-
-import core.basesyntax.validator.impl.OperationValidationImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

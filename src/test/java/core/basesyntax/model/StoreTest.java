@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.impl.FruitStoreImpl;
-import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
 import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.PurchaseOperationHandler;

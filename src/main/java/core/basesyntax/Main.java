@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.model.impl.FruitStoreImpl;
 import core.basesyntax.model.Store;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.model.impl.FruitStoreImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
 import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.PurchaseOperationHandler;

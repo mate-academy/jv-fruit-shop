@@ -1,7 +1,6 @@
 package core.basesyntax.validator.impl;
 
 import core.basesyntax.validator.OperationValidation;
-
 import java.util.List;
 
 public class OperationValidationImpl implements OperationValidation {
