@@ -2,6 +2,7 @@ package core.basesyntax.shopimpl.entity;
 
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
+import java.util.Objects;
 
 public class DataRecord {
     private ShopTransactionsTypes action;
@@ -24,5 +25,22 @@ public class DataRecord {
     
     public Integer getAmount() {
         return amount;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof DataRecord)) {
+            return false;
+        }
+        DataRecord that = (DataRecord) o;
+        return action == that.action && item.equals(that.item) && amount.equals(that.amount);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(action, item, amount);
     }
 }

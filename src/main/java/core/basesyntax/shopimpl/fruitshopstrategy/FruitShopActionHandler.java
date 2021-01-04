@@ -14,6 +14,10 @@ public class FruitShopActionHandler {
         initHandler(strategyMap, storage, shopDao);
     }
     
+    public ShopTransaction getAction(ShopTransactionsTypes actionType) {
+        return strategyMap.get(actionType);
+    }
+    
     private void initHandler(Map<ShopTransactionsTypes, ShopTransaction> strategyMap,
                              FruitShopStorage storage,
                              FruitShopDao shopDao) {
@@ -21,9 +25,5 @@ public class FruitShopActionHandler {
         strategyMap.put(ShopTransactionsTypes.PURCHASE, new PurchaseTransaction(storage, shopDao));
         strategyMap.put(ShopTransactionsTypes.RETURN, new ReturnTransaction(storage, shopDao));
         strategyMap.put(ShopTransactionsTypes.BALANCE, new BalanceTransaction(storage, shopDao));
-    }
-    
-    public ShopTransaction getAction(ShopTransactionsTypes actionType) {
-        return strategyMap.get(actionType);
     }
 }
