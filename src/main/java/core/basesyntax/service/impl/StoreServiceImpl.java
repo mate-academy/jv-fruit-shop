@@ -14,7 +14,7 @@ import java.util.List;
 
 public class StoreServiceImpl<T extends Plant> implements StoreService<T> {
     protected static final Integer OPERATION_POSITION = 0;
-    protected static final Integer FRUIT_NAME_POSITION = 1;
+    protected static final Integer PLANT_NAME_POSITION = 1;
     protected static final Integer VALUE_POSITION = 2;
     protected PlantsDao plantsDao;
     protected OperationStrategy operationStrategy;
@@ -39,9 +39,9 @@ public class StoreServiceImpl<T extends Plant> implements StoreService<T> {
         Integer value;
         String operation;
         for (String s : data) {
-            Plant plant = new Fruit();
+            Plant plant = new Plant();
             operation = s.split(",")[OPERATION_POSITION];
-            plant.setName(s.split(",")[FRUIT_NAME_POSITION]);
+            plant.setName(s.split(",")[PLANT_NAME_POSITION]);
             value = Integer.parseInt(s.split(",")[VALUE_POSITION]);
 
             OperationValidation operationValidator = new OperationValidationImpl();
