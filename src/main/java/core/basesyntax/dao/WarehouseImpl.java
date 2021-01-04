@@ -4,38 +4,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WarehouseImpl implements Warehouse {
-    private Map<String, Integer> listFruits = new HashMap<>();
+    private final Map<String, Integer> listItems = new HashMap<>();
 
     @Override
-    public void addFruit(String fruit, int amount) {
-        if (listFruits.containsKey(fruit)) {
-            listFruits.replace(fruit, (amount + listFruits.get(fruit)));
+    public void addItem(String fruit, int amount) {
+        if (listItems.containsKey(fruit)) {
+            listItems.replace(fruit, (amount + listItems.get(fruit)));
         } else {
-            listFruits.put(fruit, amount);
+            listItems.put(fruit, amount);
         }
     }
 
     @Override
     public void replace(String fruit, int amount) {
-        if (listFruits.get(fruit) == null) {
-            listFruits.put(fruit, amount);
+        if (listItems.get(fruit) == null) {
+            listItems.put(fruit, amount);
         } else {
-            listFruits.replace(fruit, (amount));
+            listItems.replace(fruit, (amount));
         }
     }
 
     @Override
-    public Map<String, Integer> getListFruits() {
-        return listFruits;
+    public Map<String, Integer> getListItems() {
+        return listItems;
     }
 
     @Override
-    public int getAmountOfFruit(String fruit) {
-        return listFruits.getOrDefault(fruit, 0);
+    public int getAmountOfItem(String fruit) {
+        return listItems.getOrDefault(fruit, 0);
     }
 
     @Override
-    public void getFruitFrom(String fruit, int amount) {
-        listFruits.replace(fruit, (listFruits.get(fruit) - amount));
+    public void getItemFrom(String fruit, int amount) {
+        listItems.replace(fruit, (listItems.get(fruit) - amount));
     }
 }

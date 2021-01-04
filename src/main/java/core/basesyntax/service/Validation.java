@@ -8,6 +8,6 @@ public interface Validation {
         if (amount < 0) {
             return false;
         }
-        return warehouse.getAmountOfFruit(name) - amount >= 0;
+        return warehouse.getAmountOfItem(name) - amount >= 0;
     }
 }

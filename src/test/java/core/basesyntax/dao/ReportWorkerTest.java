@@ -12,9 +12,9 @@ public class ReportWorkerTest {
     public void testReadFromReport() {
         ReportWorker reportWorker = new ReportWorker();
         reportWorker.readFromReport("reportIn", warehouse);
-        assertEquals(2, warehouse.getListFruits().size());
-        assertEquals(152, warehouse.getAmountOfFruit("banana"));
-        assertEquals(90, warehouse.getAmountOfFruit("apple"));
+        assertEquals(2, warehouse.getListItems().size());
+        assertEquals(152, warehouse.getAmountOfItem("banana"));
+        assertEquals(90, warehouse.getAmountOfItem("apple"));
     }
 
     @Test(expected = RuntimeException.class)
@@ -26,8 +26,8 @@ public class ReportWorkerTest {
     @Test
     public void testWriteToReport() {
         WarehouseImpl warehouse = new WarehouseImpl();
-        warehouse.addFruit("banana",140);
-        warehouse.addFruit("apple", 40);
+        warehouse.addItem("banana",140);
+        warehouse.addItem("apple", 40);
         ReportWorker reportWorker = new ReportWorker();
         InputOutputReport inputOutputReport = new InputOutputReport();
         reportWorker.writeToReport(warehouse);
