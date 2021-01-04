@@ -3,6 +3,7 @@ package core.basesyntax.shopimpl.database;
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import core.basesyntax.shopimpl.service.IODataFileService;
+import core.basesyntax.shopimpl.storage.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ public class FruitShopDao implements ShopDao<DataRecord> {
     @Override
     public List<DataRecord> getItemActions(String item) {
         return dataBase.stream()
-                .filter(data -> data.item().equalsIgnoreCase(item))
+                .filter(data -> data.item().getItemName().equalsIgnoreCase(item))
                 .collect(Collectors.toList());
     }
     
@@ -34,7 +35,7 @@ public class FruitShopDao implements ShopDao<DataRecord> {
     }
     
     public void addAction(ShopActions action, String item, Integer amount) {
-        dataBase.add(new DataRecord(action, item, amount));
+        dataBase.add(new DataRecord(action, new Fruit(item), amount));
     }
     
     @Override

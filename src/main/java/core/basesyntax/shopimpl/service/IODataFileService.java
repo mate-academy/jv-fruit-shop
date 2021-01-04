@@ -1,7 +1,9 @@
 package core.basesyntax.shopimpl.service;
 
+import core.basesyntax.model.AbstractItem;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import core.basesyntax.shopimpl.database.DataRecord;
+import core.basesyntax.shopimpl.storage.Fruit;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -30,7 +32,7 @@ public class IODataFileService {
         for (DataRecord record : dataBase) {
             sb.append(System.lineSeparator())
                     .append(record.action().getValue()).append(FILE_DELIMITER)
-                    .append(record.item()).append(FILE_DELIMITER)
+                    .append(record.item().getItemName()).append(FILE_DELIMITER)
                     .append(record.amount().toString());
         }
         
@@ -54,7 +56,7 @@ public class IODataFileService {
             String[] data = lines.get(i).split(FILE_DELIMITER);
             
             records.add(new DataRecord(ShopActions.getAction(data[FILE_INDEX_OF_ACTION]),
-                    data[FILE_INDEX_OF_ITEM],
+                    new Fruit(data[FILE_INDEX_OF_ITEM]),
                     Integer.parseInt(data[FILE_INDEX_OF_AMOUNT])));
         }
         

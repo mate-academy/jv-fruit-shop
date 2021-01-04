@@ -1,6 +1,7 @@
 package core.basesyntax.shopimpl.database;
 
 import core.basesyntax.model.shopstrategy.ShopActions;
+import core.basesyntax.shopimpl.storage.Fruit;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,12 +36,12 @@ public class StorageDaoTest {
         testFruitShopDao.addAction(ShopActions.SUPPLY, "oranges", 100);
         testFruitShopDao.addAction(ShopActions.RETURN, "oranges", 10);
         testFruitShopDao.addAction(ShopActions.RETURN, "nuts", 10);
-        testFruitShopDao.addAction(new DataRecord(ShopActions.SUPPLY, "nuts", 100));
+        testFruitShopDao.addAction(new DataRecord(ShopActions.SUPPLY, new Fruit("nuts"), 100));
         
         List<DataRecord> actual = testFruitShopDao.getItemActions("banana");
         List<DataRecord> expected
-                = List.of(new DataRecord(ShopActions.PURCHASE, "banana", 15),
-                new DataRecord(ShopActions.SUPPLY, "banana", 200));
+                = List.of(new DataRecord(ShopActions.PURCHASE, new Fruit("banana"), 15),
+                new DataRecord(ShopActions.SUPPLY, new Fruit("banana"), 200));
         
         Assertions.assertEquals(expected, actual);
     }
