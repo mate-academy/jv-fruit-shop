@@ -19,21 +19,26 @@ public class CsvFileReader implements FileReader {
         try {
             return Files.lines(Path.of(filePath))
                     .filter(line -> !line.startsWith("type"))
-                    .map(this::getFromCSVRow)
+                    .map(this::getFromCsvRow)
                     .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can`t read file " + filePath, e);
         }
     }
 
-    private TransactionDto getFromCSVRow(String line) {
+    private TransactionDto getFromCsvRow(String line) {
         String[] dataFromLine = line.split(",");
+        if (dataFromLine.length < 3) {
+            throw new IllegalArgumentException("File is broken!");
+        }
+
+        String operation = dataFromLine[TYPE_COLUMN];
+        String fruitType = dataFromLine[FRUIT_COLUMN];
         int quantity = Integer.parseInt(dataFromLine[QUANTITY_COLUMN]);
-        if (quantity < 0) {
+
+        if (quantity < 0 || fruitType.isEmpty()) {
             throw new IllegalArgumentException("Quantity cannot be negative");
         }
-        return new TransactionDto(Operation.fromString(dataFromLine[TYPE_COLUMN]),
-                new Fruit(dataFromLine[FRUIT_COLUMN]),
-                quantity);
+        return new TransactionDto(Operation.fromString(operation), new Fruit(fruitType), quantity);
     }
 }
