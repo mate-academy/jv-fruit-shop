@@ -4,10 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.reader.DataReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import core.basesyntax.workwithfiles.DataReader;
 import java.util.List;
 import java.util.Map;
 
@@ -42,15 +39,5 @@ public class ReportFormatterImpl implements ReportFormatter {
                     .append(entry.getKey().getName()).append(",").append(entry.getValue());
         }
         return report.toString();
-    }
-
-    @Override
-    public void createReportInFile(DataReader dataReader, String fileName) {
-        String report = createReport(dataReader);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
-            bufferedWriter.write(report);
-        } catch (IOException e) {
-            throw new RuntimeException("File was not found");
-        }
     }
 }
