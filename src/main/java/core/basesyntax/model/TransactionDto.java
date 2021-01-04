@@ -15,11 +15,9 @@ public class TransactionDto {
         return operation;
     }
 
-
     public Fruit getFruit() {
         return fruit;
     }
-
 
     public Integer getQuantity() {
         return quantity;

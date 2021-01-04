@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-public class CsvReader implements FileReader {
+public class CsvFileReader implements FileReader {
     private static final String PARSE_BY = ",";
     private static final int COUNT_OF_PARSE = 3;
     private static final int OPERATION = 0;
@@ -63,5 +63,4 @@ public class CsvReader implements FileReader {
         }
         throw new NoSuchElementException(String.format("%s operation not found", operation));
     }
-
 }

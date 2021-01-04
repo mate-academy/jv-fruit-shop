@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FruitService;
@@ -24,7 +26,7 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public Map<String, Integer> getFruitReporter() {
-        return null;
+    public Map<Fruit, Integer> getFruitReporter() {
+        return Storage.getFruits();
     }
 }
