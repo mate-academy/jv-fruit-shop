@@ -1,4 +1,4 @@
-package core.basesyntax.shopimpl.database;
+package core.basesyntax.shopimpl.entity;
 
 import core.basesyntax.model.AbstractItem;
 import core.basesyntax.model.shopstrategy.ShopActions;

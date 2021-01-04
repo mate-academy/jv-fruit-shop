@@ -1,9 +1,8 @@
 package core.basesyntax.shopimpl.service;
 
-import core.basesyntax.model.AbstractItem;
 import core.basesyntax.model.shopstrategy.ShopActions;
-import core.basesyntax.shopimpl.database.DataRecord;
-import core.basesyntax.shopimpl.storage.Fruit;
+import core.basesyntax.shopimpl.entity.DataRecord;
+import core.basesyntax.shopimpl.entity.Fruit;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
