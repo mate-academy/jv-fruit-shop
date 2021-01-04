@@ -12,6 +12,7 @@ import java.util.Map;
 import org.junit.Assert;
 
 class Test {
+
     @org.junit.jupiter.api.Test
     void usualTest() {
         new Shop("data", "result");
