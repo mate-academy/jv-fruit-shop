@@ -43,11 +43,9 @@ public class ReportWorkerTest {
         ReportWorker reportWorker = new ReportWorker();
         InputOutputReport inputOutputReport = new InputOutputReport();
         reportWorker.writeToReport(warehouse);
-        StringBuilder stringBuilder = new StringBuilder();
-
-        String expected = "fruit,quantity " +
-                "banana,140 " +
-                "apple,40 ";
+        String expected = "fruit,quantity "
+                + "banana,140 "
+                + "apple,40 ";
         String acctual = inputOutputReport.readReport("report.txt");
         assertEquals(expected, acctual);
     }
