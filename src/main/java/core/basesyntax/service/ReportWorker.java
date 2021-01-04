@@ -1,11 +1,12 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
-import core.basesyntax.fileworker.InputOutputReport;
-import core.basesyntax.service.Validation;
+import core.basesyntax.dao.Warehouse;
+import core.basesyntax.db.DataBase;
+import core.basesyntax.service.fileworker.InputOutputReport;
 import java.time.LocalDate;
 import java.util.Map;
 
-public class ReportWorker implements WarehouseDao {
+public class ReportWorker implements ReportCheck {
     private final InputOutputReport inputOutputReport = new InputOutputReport();
 
     @Override
@@ -45,9 +46,8 @@ public class ReportWorker implements WarehouseDao {
     public void writeToReport(Warehouse warehouse) {
         StringBuilder report = new StringBuilder();
         report.append("fruit,quantity").append(System.lineSeparator());
-        Map<String, Integer> allFruits = warehouse.getListItems();
         for (Map.Entry<String, Integer> fruit
-                : allFruits.entrySet()) {
+                : DataBase.getListItems().entrySet()) {
             report.append(fruit.getKey()).append(",")
                     .append(fruit.getValue()).append(System.lineSeparator());
         }
