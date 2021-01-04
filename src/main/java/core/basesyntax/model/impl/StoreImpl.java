@@ -27,7 +27,7 @@ public class StoreImpl<T extends Plant> implements Store {
     @Override
     public void getStatistic(String fromFilePath, String toFilePath) {
         storeService.getDataFromFile(fromFilePath);
-        plants = storeService.getFruitsBalance(plantsDao.getData());
+        plants = storeService.getPlantsBalance(plantsDao.getData());
         FileWriterService fileWriterService = new FileWriterServiceImpl(toFilePath);
         Report report = plants -> {
             StringBuilder result = new StringBuilder();

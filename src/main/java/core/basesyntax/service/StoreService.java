@@ -6,5 +6,5 @@ import java.util.List;
 public interface StoreService<T extends Plant> {
     void getDataFromFile(String filePath);
 
-    List<T> getFruitsBalance(List<String> data);
+    List<T> getPlantsBalance(List<String> data);
 }

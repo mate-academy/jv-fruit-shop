@@ -33,7 +33,7 @@ public class StoreServiceImpl<T extends Plant> implements StoreService<T> {
     }
 
     @Override
-    public List<T> getFruitsBalance(List<String> data) {
+    public List<T> getPlantsBalance(List<String> data) {
         List<T> plants = new ArrayList<>();
         Integer value;
         String operation;
