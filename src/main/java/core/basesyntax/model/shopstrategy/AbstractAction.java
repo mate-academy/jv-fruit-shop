@@ -4,6 +4,7 @@ import core.basesyntax.model.AbstractItem;
 import core.basesyntax.model.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.shopimpl.entity.DataRecord;
+import java.util.Map;
 
 public abstract class AbstractAction implements ShopAction {
     private AbstractStorage<DataRecord, AbstractItem> storage;
@@ -16,4 +17,12 @@ public abstract class AbstractAction implements ShopAction {
     
     @Override
     public abstract void apply(AbstractItem item, int amount);
+    
+    public Map<AbstractItem, Integer> getStorage() {
+        return storage.getStorage();
+    }
+    
+    public ShopDao<DataRecord> getShopDao() {
+        return shopDao;
+    }
 }

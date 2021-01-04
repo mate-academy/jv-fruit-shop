@@ -7,17 +7,17 @@ import core.basesyntax.model.shopstrategy.AbstractAction;
 import core.basesyntax.model.shopstrategy.ShopActions;
 import core.basesyntax.shopimpl.entity.DataRecord;
 
-public class Supply extends AbstractAction {
+public class Return extends AbstractAction {
     
-    public Supply(AbstractStorage<DataRecord, AbstractItem> storage, ShopDao<DataRecord> shopDao) {
+    public Return(AbstractStorage<DataRecord, AbstractItem> storage, ShopDao<DataRecord> shopDao) {
         super(storage, shopDao);
     }
     
     @Override
     public void apply(AbstractItem item, int amount) {
-        getShopDao().addAction(new DataRecord(ShopActions.SUPPLY, item, amount));
-        getShopDao().update();
-        int update = getStorage().get(item) + amount;
-        getStorage().put(item, update);
+        super.getShopDao().addAction(new DataRecord(ShopActions.SUPPLY, item, amount));
+        super.getShopDao().update();
+        int update = super.getStorage().get(item) + amount;
+        super.getStorage().put(item, update);
     }
 }
