@@ -4,13 +4,16 @@ import core.basesyntax.model.shopdao.ShopDao;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractStorage<I extends AbstractItem> {
-    private final Map<I, Integer> storage = new HashMap<>();
-    private final ShopDao shopDao;
+public abstract class AbstractStorage<R, I extends AbstractItem> {
+    private final Map<I, Integer> storage;
+    private final ShopDao<R> shopDao;
     
-    public AbstractStorage(ShopDao shopDao) {
+    public AbstractStorage(ShopDao<R> shopDao) {
         this.shopDao = shopDao;
+        storage = initStorage(shopDao);
     }
+    
+    protected abstract Map<I, Integer> initStorage(ShopDao<R> shopDao);
     
     public Map<I, Integer> getStorage() {
         return storage;
