@@ -7,5 +7,6 @@ import java.util.Map;
 
 public interface ShopService {
     void applyOperationOnFruitsDto(List<TransactionDto> transactionDtos);
+
     Map<Fruit, Integer> getFruitReport();
 }

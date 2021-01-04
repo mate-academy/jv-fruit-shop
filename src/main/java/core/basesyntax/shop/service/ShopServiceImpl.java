@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
-    private Map<Operation, OperationStrategy> operationStrategyMap;
+    private final Map<Operation, OperationStrategy> operationStrategyMap;
 
     public ShopServiceImpl(Map<Operation, OperationStrategy> operationStrategyMap) {
         this.operationStrategyMap = operationStrategyMap;

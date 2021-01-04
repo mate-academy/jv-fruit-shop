@@ -6,22 +6,18 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    private String operation;
+    private final String operation;
 
     Operation(String operation) {
         this.operation = operation;
     }
 
-    public String getOperation() {
-        return operation;
-    }
-
     public static Operation fromString(String operation) {
-        for (Operation b : Operation.values()) {
-            if (b.operation.equalsIgnoreCase(operation)) {
-                return b;
+        for (Operation existingOperation : Operation.values()) {
+            if (existingOperation.operation.equalsIgnoreCase(operation)) {
+                return existingOperation;
             }
         }
-        throw new IllegalArgumentException("No constant with operation " + operation + " found");
+        throw new IllegalArgumentException("No constant with operation '" + operation + "' found");
     }
 }

@@ -1,9 +1,9 @@
 package core.basesyntax.shop.model;
 
 public class TransactionDto {
-    private Operation operation;
-    private Fruit fruit;
-    private Integer quantity;
+    private final Operation operation;
+    private final Fruit fruit;
+    private final Integer quantity;
 
     public TransactionDto(Operation operation, Fruit fruit, Integer quantity) {
         this.operation = operation;
