@@ -10,19 +10,19 @@ import org.junit.jupiter.api.Test;
 
 
 public class StorageDaoTest {
-    private StorageDao testStorageDao;
+    private FruitShopDao testStorageDao;
     
     @Test
     public void getAllActionsNonExistingFile() {
         String path = "src/test/java/core/basesyntax/shopimpl"
                       + "/storage/DatabaseNoFile.csv";
-        Assertions.assertThrows(RuntimeException.class, () -> new StorageDao(path));
+        Assertions.assertThrows(RuntimeException.class, () -> new FruitShopDao(path));
     }
     
     @Test
     public void getAllActionsEmptyFile() {
-        testStorageDao = new StorageDao("src/test/java/core/basesyntax/shopimpl"
-                                        + "/storage/DatabaseEmptyFile.csv");
+        testStorageDao = new FruitShopDao("src/test/java/core/basesyntax/shopimpl"
+                                          + "/storage/DatabaseEmptyFile.csv");
         List<DataRecord> list = testStorageDao.getAllActions();
         int expectedSize = 0;
         int actualSize = list.size();
@@ -33,7 +33,7 @@ public class StorageDaoTest {
     public void getItemActions() {
         String path = "src/test/java/core/basesyntax/shopimpl"
                       + "/storage/getItemActionsTestFile.csv";
-        testStorageDao = new StorageDao(path);
+        testStorageDao = new FruitShopDao(path);
         testStorageDao.addAction(ShopActions.SUPPLY, "oranges", 100);
         testStorageDao.addAction(ShopActions.RETURN, "oranges", 10);
         testStorageDao.addAction(ShopActions.RETURN, "nuts", 10);
@@ -51,7 +51,7 @@ public class StorageDaoTest {
     public void addAction() {
         String path = "src/test/java/core/basesyntax/shopimpl"
                       + "/storage/getItemActionsTestFile.csv";
-        testStorageDao = new StorageDao(path);
+        testStorageDao = new FruitShopDao(path);
         testStorageDao.addAction(ShopActions.SUPPLY, "oranges", 100);
         testStorageDao.addAction(ShopActions.RETURN, "oranges", 10);
         testStorageDao.addAction(ShopActions.RETURN, "nuts", 10);
@@ -66,13 +66,13 @@ public class StorageDaoTest {
     @Test
     public void closeEmptyFileWithNonEmptyInput() {
         String path = "src/test/java/core/basesyntax/shopimpl/storage/closeTestEmptyFile.csv";
-        testStorageDao = new StorageDao(path);
+        testStorageDao = new FruitShopDao(path);
         
         testStorageDao.addAction(ShopActions.PURCHASE, "apple", 10);
         testStorageDao.addAction(ShopActions.PURCHASE, "banana", 15);
         testStorageDao.addAction(ShopActions.SUPPLY, "banana", 200);
         
-        testStorageDao.close();
+        testStorageDao.update();
         
         try {
             List<String> expected = List.of("ShopAction,Item,Amount",
