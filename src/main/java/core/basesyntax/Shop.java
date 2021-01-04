@@ -1,7 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.service.*;
-
+import core.basesyntax.service.ReadFromFileImpl;
+import core.basesyntax.service.SetDataIntoMapImpl;
+import core.basesyntax.service.WriteToFileImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

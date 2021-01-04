@@ -2,14 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.service.ReadFromFileImpl;
 import core.basesyntax.service.SetDataIntoMapImpl;
-import org.junit.Assert;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.junit.Assert;
 
 class Test {
     @org.junit.jupiter.api.Test

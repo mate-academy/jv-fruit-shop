@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFromFileImpl implements ReadFromFile {
+
     private static final int HEADING_LINE = 0;
+
     @Override
     public List<String> readFromFile(String fileName) {
         try {

@@ -1,7 +1,10 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.operations.*;
-
+import core.basesyntax.service.operations.BalanceOperation;
+import core.basesyntax.service.operations.Operation;
+import core.basesyntax.service.operations.PurchaseOperation;
+import core.basesyntax.service.operations.ReturnOperation;
+import core.basesyntax.service.operations.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
 
