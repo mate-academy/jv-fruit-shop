@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.PlantsDao;
-import core.basesyntax.model.objects.Fruit;
 import core.basesyntax.model.objects.Plant;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.StoreService;
@@ -39,12 +38,12 @@ public class StoreServiceImpl<T extends Plant> implements StoreService<T> {
         Integer value;
         String operation;
         Plant plant = new Plant();
+        OperationValidation operationValidator = new OperationValidationImpl();
         for (String s : data) {
             operation = s.split(",")[OPERATION_POSITION];
             plant.setName(s.split(",")[PLANT_NAME_POSITION]);
             value = Integer.parseInt(s.split(",")[VALUE_POSITION]);
 
-            OperationValidation operationValidator = new OperationValidationImpl();
             operationValidator.isValidOperation(operations, operation);
 
             if (!plants.contains(plant)) {
