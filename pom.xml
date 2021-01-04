@@ -26,6 +26,11 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>4.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -54,6 +59,15 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>core/basesyntax/MainFruitStorageApp*</exclude>
+                        <exclude>core/basesyntax/ExportData*</exclude>
+                        <exclude>core/basesyntax/Fruit*</exclude>
+                        <exclude>core/basesyntax/Order*</exclude>
+                        <exclude>core/basesyntax/Storage*</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
