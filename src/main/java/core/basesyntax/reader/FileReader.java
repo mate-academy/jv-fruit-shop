@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReader implements DataReader {
-    private String path;
+    private final String path;
 
     public FileReader(String path) {
         this.path = path;

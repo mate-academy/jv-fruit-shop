@@ -1,18 +1,19 @@
 package core.basesyntax.fruitoperation;
 
-import core.basesyntax.fruit.Fruits;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public class OperationPurchase implements Operation {
     @Override
-    public void doOperation(Fruits fruits, String name, int amount) {
-        Map<String, Integer> mapFruits = fruits.getFruits();
-        if (!mapFruits.containsKey(name)) {
+    public void doOperation(Storage storage, Fruit fruit, int amount) {
+        Map<Fruit, Integer> mapFruits = storage.getFruits();
+        if (!mapFruits.containsKey(fruit)) {
             throw new RuntimeException("Incorrect operation!!! This fruit not balanced!");
         }
-        if (mapFruits.get(name) - amount < 0) {
+        if (mapFruits.get(fruit) - amount < 0) {
             throw new RuntimeException("Sorry, byt we haven't enough fruits");
         }
-        mapFruits.put(name, mapFruits.get(name) - amount);
+        mapFruits.put(fruit, mapFruits.get(fruit) - amount);
     }
 }

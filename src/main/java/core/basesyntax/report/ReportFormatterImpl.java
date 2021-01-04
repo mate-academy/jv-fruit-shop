@@ -1,8 +1,9 @@
 package core.basesyntax.report;
 
-import core.basesyntax.fruit.Fruits;
+import core.basesyntax.db.Storage;
 import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.reader.DataReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,12 +16,12 @@ public class ReportFormatterImpl implements ReportFormatter {
     private static final int OPERATION = 0;
     private static final int FRUIT = 1;
     private static final int AMOUNT = 2;
-    private final Fruits fruits;
+    private final Storage storage;
     private final OperationStrategy operationStrategy;
 
     public ReportFormatterImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
-        fruits = new Fruits();
+        storage = new Storage();
     }
 
     @Override
@@ -32,13 +33,13 @@ public class ReportFormatterImpl implements ReportFormatter {
                 throw new RuntimeException("Incorrect data");
             }
             operationStrategy.get(Operations.valueOf(data[OPERATION].toUpperCase()))
-                    .doOperation(fruits, data[FRUIT], Integer.parseInt(data[AMOUNT]));
+                    .doOperation(storage, new Fruit(data[FRUIT]), Integer.parseInt(data[AMOUNT]));
 
         }
         StringBuilder report = new StringBuilder("fruit,quantity");
-        for (Map.Entry<String, Integer> entry: fruits.getFruits().entrySet()) {
+        for (Map.Entry<Fruit, Integer> entry: storage.getFruits().entrySet()) {
             report.append(System.lineSeparator())
-                    .append(entry.getKey()).append(",").append(entry.getValue());
+                    .append(entry.getKey().getName()).append(",").append(entry.getValue());
         }
         return report.toString();
     }

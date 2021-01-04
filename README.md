@@ -10,10 +10,10 @@ Your task is:
 
 There are a four activities at the store:
 ```text
-    b - balance, the remnants of fruits at the beginning of the working day
-    s - supply, means you are receiving a new fruits from suppliers
+    b - balance, the remnants of storage at the beginning of the working day
+    s - supply, means you are receiving a new storage from suppliers
     p - purchase, means someone bought a fruit
-    r - return, means someone who have bought the fruits now returns them to you
+    r - return, means someone who have bought the storage now returns them to you
 ```
 
 Let's check in details all types of activities:
@@ -24,19 +24,19 @@ Let's check in details all types of activities:
     ```
    The line above means there are 100 bananas at the beginning of the work shift. 
    Balance information is always at the beginning of the file (other cases should not be checked).
-1. Supply. You are accepting a new fruits from suppliers. The following line in the file will look like:
+1. Supply. You are accepting a new storage from suppliers. The following line in the file will look like:
     
     ```text
        s,banana,100     
     ```
    The line above means you receive a 100 bananas.
-1. Purchase. Buyers can visit your shop and buy some fruits. In this case you will have the following line in the file:
+1. Purchase. Buyers can visit your shop and buy some storage. In this case you will have the following line in the file:
     
     ```text
        b,banana,13  
     ```
    The line above means someone bought a 13 bananas.
-1. Return. Buyers can return you some fruits. In this case you will have the following line in the file:
+1. Return. Buyers can return you some storage. In this case you will have the following line in the file:
     
     ```text
        r,banana,10   
@@ -57,7 +57,7 @@ Let's check in details all types of activities:
 ```
 
 ### Expecting report file example
-We are expecting to see how many fruits are available today after work shift in your Fruit store. 
+We are expecting to see how many storage are available today after work shift in your Fruit store. 
 ```text
     fruit,quantity
     banana,152
