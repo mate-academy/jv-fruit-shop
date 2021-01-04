@@ -20,6 +20,9 @@ public class Validator<T extends Product> {
 
     public void validateOperation(Operation<T> operation, Product product, Integer amount) {
         Map<? extends Product, Integer> storage = warehouse.getStorage();
+        if (amount <= 0) {
+            throw new InvalidOperationException("Negative amount cannot be processed");
+        }
         if (operation instanceof PurchaseOperation
                 && (!storage.containsKey(product) || storage.get(product) - amount < 0)) {
             throw new InvalidOperationException(
