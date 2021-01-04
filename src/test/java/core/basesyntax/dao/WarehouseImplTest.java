@@ -20,7 +20,7 @@ public class WarehouseImplTest {
         warehouseImpl1.addItem("Fruit", 1);
         warehouseImpl1.addItem("Fruit", 2);
         warehouseImpl1.addItem("Apple", 2);
-        assertEquals(5, warehouseImpl1.getAmountOfItem("Fruit"));
+        assertEquals(15, warehouseImpl1.getAmountOfItem("Fruit"));
         assertEquals(2, warehouseImpl1.getAmountOfItem("Apple"));
         assertEquals(2, warehouseImpl1.getListItems().size());
     }
@@ -36,10 +36,10 @@ public class WarehouseImplTest {
     @Test
     public void testGetAmountOfFruit() {
         WarehouseImpl warehouseImpl3 = new WarehouseImpl();
-        warehouseImpl3.addItem("Fruit", 2);
-        warehouseImpl3.addItem("Fruit", 10);
-        assertEquals(12, warehouseImpl3.getAmountOfItem("Fruit"));
-        assertEquals(0, warehouseImpl3.getAmountOfItem("Apple"));
+        warehouseImpl3.addItem("Pineapple", 2);
+        warehouseImpl3.addItem("Pineapple", 10);
+        assertEquals(12, warehouseImpl3.getAmountOfItem("Pineapple"));
+        assertEquals(0, warehouseImpl3.getAmountOfItem("Orange"));
     }
 }
 

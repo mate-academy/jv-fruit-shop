@@ -2,37 +2,37 @@ package core.basesyntax.dao;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.fileworker.InputOutputReport;
+import core.basesyntax.service.ReportWorker;
+import core.basesyntax.service.fileworker.InputOutputReport;
 import org.junit.Test;
 
 public class ReportWorkerTest {
-    WarehouseImpl warehouse = new WarehouseImpl();
+    WarehouseImpl warehouseTest = new WarehouseImpl();
 
     @Test
     public void testReadFromReport() {
         ReportWorker reportWorker = new ReportWorker();
-        reportWorker.readFromReport("reportIn", warehouse);
-        assertEquals(2, warehouse.getListItems().size());
-        assertEquals(152, warehouse.getAmountOfItem("banana"));
-        assertEquals(90, warehouse.getAmountOfItem("apple"));
+        reportWorker.readFromReport("reportIn", warehouseTest);
+        assertEquals(152, warehouseTest.getAmountOfItem("banana"));
+        assertEquals(90, warehouseTest.getAmountOfItem("apple"));
     }
 
     @Test(expected = RuntimeException.class)
     public void testReadError() {
         ReportWorker reportWorker = new ReportWorker();
-        reportWorker.readFromReport("noFind", warehouse);
+        reportWorker.readFromReport("noFind", warehouseTest);
     }
 
     @Test(expected = RuntimeException.class)
     public void testReadFromError() {
         ReportWorker reportWorker = new ReportWorker();
-        reportWorker.readFromReport("errorReport", warehouse);
+        reportWorker.readFromReport("errorReport", warehouseTest);
     }
 
     @Test(expected = RuntimeException.class)
     public void testValidationError() {
         ReportWorker reportWorker = new ReportWorker();
-        reportWorker.readFromReport("test2", warehouse);
+        reportWorker.readFromReport("test2", warehouseTest);
     }
 
     @Test
