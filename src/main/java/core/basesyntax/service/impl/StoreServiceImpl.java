@@ -38,8 +38,8 @@ public class StoreServiceImpl<T extends Plant> implements StoreService<T> {
         List<T> plants = new ArrayList<>();
         Integer value;
         String operation;
+        Plant plant = new Plant();
         for (String s : data) {
-            Plant plant = new Plant();
             operation = s.split(",")[OPERATION_POSITION];
             plant.setName(s.split(",")[PLANT_NAME_POSITION]);
             value = Integer.parseInt(s.split(",")[VALUE_POSITION]);
