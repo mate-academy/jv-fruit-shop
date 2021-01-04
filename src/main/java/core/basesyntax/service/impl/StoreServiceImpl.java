@@ -38,7 +38,7 @@ public class StoreServiceImpl<T extends Plant> implements StoreService<T> {
         Integer value;
         String operation;
         for (String s : data) {
-            Plant plant = new Plant();
+            T plant = (T) new Plant();
             operation = s.split(",")[OPERATION_POSITION];
             plant.setName(s.split(",")[PLANT_NAME_POSITION]);
             value = Integer.parseInt(s.split(",")[VALUE_POSITION]);
@@ -48,7 +48,7 @@ public class StoreServiceImpl<T extends Plant> implements StoreService<T> {
 
             if (!plants.contains(plant)) {
                 plant.setBalance(value);
-                plants.add((T) plant);
+                plants.add(plant);
             } else {
                 Plant current = plants.get(plants.indexOf(plant));
                 current.setBalance(operationStrategy.get(operation)
