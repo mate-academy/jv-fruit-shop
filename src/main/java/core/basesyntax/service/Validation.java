@@ -6,8 +6,11 @@ public interface Validation {
 
     static boolean isValid(Warehouse warehouse, String name, int amount) {
         if (amount < 0) {
-            return false;
+            throw new RuntimeException("Amount can't be less as zero, check the report");
         }
-        return warehouse.getAmountOfItem(name) - amount >= 0;
+        if (warehouse.getAmountOfItem(name) - amount < 0) {
+            throw new RuntimeException(name + " is not enough in warehouse, check the report");
+        }
+        return true;
     }
 }

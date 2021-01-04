@@ -32,9 +32,8 @@ public class ReportWorker implements ReportCheck {
                 case (purchase):
                     if (!Validation.isValid(warehouse,
                             temp[typeFruit], Integer.parseInt(temp[amount]))) {
-                        throw new RuntimeException("wrong amount");
+                        warehouse.getItemFrom(temp[typeFruit], Integer.parseInt(temp[amount]));
                     }
-                    warehouse.getItemFrom(temp[typeFruit], Integer.parseInt(temp[amount]));
                     break;
                 default:
                     break;
