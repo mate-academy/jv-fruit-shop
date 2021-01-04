@@ -29,7 +29,7 @@ public class IODataFileService {
         
         for (DataRecord record : dataBase) {
             sb.append(System.lineSeparator())
-                    .append(record.action().toString()).append(FILE_DELIMITER)
+                    .append(record.action().getValue()).append(FILE_DELIMITER)
                     .append(record.item()).append(FILE_DELIMITER)
                     .append(record.amount().toString());
         }
@@ -52,7 +52,8 @@ public class IODataFileService {
         
         for (int i = 1; i < lines.size(); i++) {
             String[] data = lines.get(i).split(FILE_DELIMITER);
-            records.add(new DataRecord(ShopActions.valueOf(data[FILE_INDEX_OF_ACTION]),
+            
+            records.add(new DataRecord(ShopActions.getAction(data[FILE_INDEX_OF_ACTION]),
                     data[FILE_INDEX_OF_ITEM],
                     Integer.parseInt(data[FILE_INDEX_OF_AMOUNT])));
         }

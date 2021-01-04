@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 import core.basesyntax.model.shopstrategy.ShopActions;
 
-public abstract class AbstractShop<T> {
+public abstract class AbstractShop<T extends AbstractItem> {
     private final AbstractStorage<T> shopStorage;
     
     public AbstractShop(AbstractStorage<T> shopStorage) {

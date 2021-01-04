@@ -15,4 +15,10 @@ public enum ShopActions {
     public String getValue() {
         return value;
     }
+    
+    public static ShopActions getAction(String value) {
+        return java.util.Arrays.stream(ShopActions.values())
+                .filter(i -> i.value.equalsIgnoreCase(value))
+                .findFirst().get();
+    }
 }

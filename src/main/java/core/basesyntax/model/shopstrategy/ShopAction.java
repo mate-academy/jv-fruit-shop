@@ -1,5 +1,7 @@
 package core.basesyntax.model.shopstrategy;
 
+import core.basesyntax.model.AbstractItem;
+
 public interface ShopAction {
-    void apply();
+    void apply(AbstractItem item, int amount);
 }
