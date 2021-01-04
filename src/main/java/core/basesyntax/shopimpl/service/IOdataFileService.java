@@ -24,23 +24,6 @@ public class IOdataFileService {
         this.dataFilePath = dataFilePath;
     }
     
-    public static void buildReport(Map<AbstractItem, Integer> storage, String path) {
-        StringBuilder sb = new StringBuilder("");
-        
-        sb.append("Fruits --- amount");
-        for (Map.Entry<AbstractItem, Integer> entry : storage.entrySet()) {
-            sb.append(System.lineSeparator()).append(entry.getKey().getItemName())
-                    .append(REPORT_DELIMITER).append(entry.getValue());
-        }
-        
-        try {
-            Files.writeString(Path.of(path), sb.toString(), StandardOpenOption.CREATE_NEW);
-        } catch (IOException e) {
-            throw new RuntimeException("A problem has occurred while report building ", e);
-        }
-        
-    }
-    
     public void writeDataFile(List<DataRecord> dataBase) {
         StringBuilder sb = new StringBuilder("");
         

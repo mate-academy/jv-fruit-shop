@@ -15,6 +15,6 @@ public class PurchaseTransaction extends AbstractTransaction<DataRecord, Fruit> 
     
     @Override
     public void apply(AbstractItem item, int amount) {
-        Validator.validate(item, amount, getStorage());
+        Validator.transactionValidator(item, amount, getStorage());
     }
 }

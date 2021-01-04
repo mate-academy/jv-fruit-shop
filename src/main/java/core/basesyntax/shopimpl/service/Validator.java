@@ -5,9 +5,9 @@ import core.basesyntax.shopimpl.entity.Fruit;
 import java.util.Map;
 
 public class Validator {
-    public static void validate(AbstractItem item,
-                                int amount,
-                                Map<Fruit, Integer> storage) {
+    public static void transactionValidator(AbstractItem item,
+                                            int amount,
+                                            Map<Fruit, Integer> storage) {
         int currentAmount = storage.get(item);
         if (currentAmount < amount) {
             System.out.println("Sorry, out shop can't provide " + amount
