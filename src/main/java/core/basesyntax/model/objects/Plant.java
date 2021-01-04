@@ -7,6 +7,7 @@ public class Plant {
     protected Integer balance;
 
     public Plant() {
+        balance = 0;
     }
 
     public Plant(String name, Integer balance) {
@@ -43,8 +44,8 @@ public class Plant {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Fruit fruit = (Fruit) o;
-        return name.equals(fruit.name);
+        Plant plant = (Plant) o;
+        return name.equals(plant.name);
     }
 
     @Override
