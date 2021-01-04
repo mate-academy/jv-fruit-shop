@@ -1,4 +1,4 @@
-package core.basesyntax.fileworker;
+package core.basesyntax.service.fileworker;
 
 import java.io.BufferedReader;
 import java.io.File;
