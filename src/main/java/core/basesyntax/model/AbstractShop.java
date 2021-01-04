@@ -13,4 +13,12 @@ public abstract class AbstractShop<R, T extends AbstractItem> {
     }
     
     public abstract void performAction(ShopActions action, T item, int amount);
+    
+    public AbstractStorage<R, T> getShopStorage() {
+        return shopStorage;
+    }
+    
+    public ShopDao<R> getShopDao() {
+        return shopDao;
+    }
 }
