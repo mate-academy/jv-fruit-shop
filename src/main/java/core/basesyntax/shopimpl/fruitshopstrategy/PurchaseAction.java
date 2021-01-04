@@ -3,10 +3,12 @@ package core.basesyntax.shopimpl.fruitshopstrategy;
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.shopstrategy.AbstractAction;
 import core.basesyntax.shopimpl.database.FruitShopDao;
+import core.basesyntax.shopimpl.entity.DataRecord;
+import core.basesyntax.shopimpl.entity.Fruit;
 import core.basesyntax.shopimpl.service.Validator;
 import core.basesyntax.shopimpl.storage.FruitShopStorage;
 
-public class PurchaseAction extends AbstractAction {
+public class PurchaseAction extends AbstractAction<DataRecord, Fruit> {
     public PurchaseAction(FruitShopStorage storage, FruitShopDao shopDao) {
         super(storage, shopDao);
     }

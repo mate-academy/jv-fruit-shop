@@ -19,19 +19,19 @@ public class FruitShopDao implements ShopDao<DataRecord> {
     }
     
     @Override
-    public List<DataRecord> getAllActions() {
+    public List<DataRecord> getTransactionHistory() {
         return new ArrayList<>(dataBase);
     }
     
     @Override
-    public List<DataRecord> getItemActions(String item) {
+    public List<DataRecord> getItemTransactionHistory(String item) {
         return dataBase.stream()
                 .filter(data -> data.item().getItemName().equalsIgnoreCase(item))
                 .collect(Collectors.toList());
     }
     
     @Override
-    public void addAction(DataRecord action) {
+    public void addTransaction(DataRecord action) {
         dataBase.add(action);
     }
     
@@ -40,7 +40,7 @@ public class FruitShopDao implements ShopDao<DataRecord> {
     }
     
     @Override
-    public void update() {
+    public void updateDatabase() {
         fileService.writeDataFile(dataBase);
     }
 }

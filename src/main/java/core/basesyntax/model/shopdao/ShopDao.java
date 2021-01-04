@@ -3,11 +3,11 @@ package core.basesyntax.model.shopdao;
 import java.util.List;
 
 public interface ShopDao<R> {
-    List<R> getAllActions();
+    List<R> getTransactionHistory();
     
-    List<R> getItemActions(String item);
+    List<R> getItemTransactionHistory(String item);
     
-    void addAction(R action);
+    void addTransaction(R action);
     
-    void update();
+    void updateDatabase();
 }

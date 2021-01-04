@@ -4,9 +4,10 @@ import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.AbstractAction;
 import core.basesyntax.shopimpl.entity.DataRecord;
+import core.basesyntax.shopimpl.entity.Fruit;
 import core.basesyntax.shopimpl.storage.FruitShopStorage;
 
-public class BalanceAction extends AbstractAction {
+public class BalanceAction extends AbstractAction<DataRecord, Fruit> {
     
     
     public BalanceAction(FruitShopStorage storage, ShopDao<DataRecord> shopDao) {
@@ -15,6 +16,7 @@ public class BalanceAction extends AbstractAction {
     
     @Override
     public void apply(AbstractItem item, int amount) {
-        getStorage().put(item, amount);
+        getStorage().put((Fruit) item, amount);
+//        getShopDao().addTransaction();
     }
 }

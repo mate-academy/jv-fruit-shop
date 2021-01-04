@@ -5,18 +5,18 @@ import core.basesyntax.model.abstractstorage.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.ShopActions;
 
-public abstract class AbstractShop<R, T extends AbstractItem> {
-    private final AbstractStorage<R, T> shopStorage;
+public abstract class AbstractShop<R, I extends AbstractItem> {
+    private final AbstractStorage<R, I> shopStorage;
     private final ShopDao<R> shopDao;
     
-    public AbstractShop(AbstractStorage<R, T> shopStorage, ShopDao<R> shopDao) {
+    public AbstractShop(AbstractStorage<R, I> shopStorage, ShopDao<R> shopDao) {
         this.shopStorage = shopStorage;
         this.shopDao = shopDao;
     }
     
-    public abstract void performAction(ShopActions action, T item, int amount);
+    public abstract void performAction(ShopActions action, I item, int amount);
     
-    public AbstractStorage<R, T> getShopStorage() {
+    public AbstractStorage<R, I> getShopStorage() {
         return shopStorage;
     }
     

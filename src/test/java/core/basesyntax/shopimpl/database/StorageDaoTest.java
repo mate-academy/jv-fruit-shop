@@ -24,7 +24,7 @@ public class StorageDaoTest {
     public void getAllActionsEmptyFile() {
         testFruitShopDao = new FruitShopDao("src/test/java/core/basesyntax"
                                             + "/shopimpl/database/DatabaseEmptyFile.csv");
-        List<DataRecord> list = testFruitShopDao.getAllActions();
+        List<DataRecord> list = testFruitShopDao.getTransactionHistory();
         int expectedSize = 0;
         int actualSize = list.size();
         Assertions.assertEquals(expectedSize, actualSize);
@@ -37,9 +37,9 @@ public class StorageDaoTest {
         testFruitShopDao.addAction(ShopActions.SUPPLY, "oranges", 100);
         testFruitShopDao.addAction(ShopActions.RETURN, "oranges", 10);
         testFruitShopDao.addAction(ShopActions.RETURN, "nuts", 10);
-        testFruitShopDao.addAction(new DataRecord(ShopActions.SUPPLY, new Fruit("nuts"), 100));
+        testFruitShopDao.addTransaction(new DataRecord(ShopActions.SUPPLY, new Fruit("nuts"), 100));
         
-        List<DataRecord> actual = testFruitShopDao.getItemActions("banana");
+        List<DataRecord> actual = testFruitShopDao.getItemTransactionHistory("banana");
         List<DataRecord> expected
                 = List.of(new DataRecord(ShopActions.PURCHASE, new Fruit("banana"), 15),
                 new DataRecord(ShopActions.SUPPLY, new Fruit("banana"), 200));
@@ -56,7 +56,7 @@ public class StorageDaoTest {
         testFruitShopDao.addAction(ShopActions.RETURN, "nuts", 10);
         testFruitShopDao.addAction(ShopActions.SUPPLY, "nuts", 100);
         
-        int actual = testFruitShopDao.getAllActions().size();
+        int actual = testFruitShopDao.getTransactionHistory().size();
         int expected = 7;
         
         Assertions.assertEquals(expected, actual);
@@ -71,7 +71,7 @@ public class StorageDaoTest {
         testFruitShopDao.addAction(ShopActions.PURCHASE, "banana", 15);
         testFruitShopDao.addAction(ShopActions.SUPPLY, "banana", 200);
         
-        testFruitShopDao.update();
+        testFruitShopDao.updateDatabase();
         
         try {
             List<String> expected = List.of("ShopAction,Item,Amount",

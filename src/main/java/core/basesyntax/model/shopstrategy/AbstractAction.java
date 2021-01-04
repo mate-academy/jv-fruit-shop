@@ -3,14 +3,13 @@ package core.basesyntax.model.shopstrategy;
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.abstractstorage.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.shopimpl.entity.DataRecord;
 import java.util.Map;
 
-public abstract class AbstractAction implements ShopAction {
-    private AbstractStorage<DataRecord, AbstractItem> storage;
-    private ShopDao<DataRecord> shopDao;
+public abstract class AbstractAction<R, I extends AbstractItem> implements ShopAction {
+    private AbstractStorage<R, I> storage;
+    private ShopDao<R> shopDao;
     
-    public AbstractAction(AbstractStorage<DataRecord, AbstractItem> storage, ShopDao<DataRecord> shopDao) {
+    public AbstractAction(AbstractStorage<R, I> storage, ShopDao<R> shopDao) {
         this.storage = storage;
         this.shopDao = shopDao;
     }
@@ -18,11 +17,11 @@ public abstract class AbstractAction implements ShopAction {
     @Override
     public abstract void apply(AbstractItem item, int amount);
     
-    public Map<AbstractItem, Integer> getStorage() {
+    public Map<I, Integer> getStorage() {
         return storage.getStorage();
     }
     
-    public ShopDao<DataRecord> getShopDao() {
+    public ShopDao<R> getShopDao() {
         return shopDao;
     }
 }
