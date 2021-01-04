@@ -18,6 +18,6 @@ public class FruitShop extends AbstractShop<DataRecord, Fruit> {
     
     @Override
     public void performAction(ShopActions action, Fruit item, int amount) {
-    
+        handler.getAction(action).apply(item, amount);
     }
 }

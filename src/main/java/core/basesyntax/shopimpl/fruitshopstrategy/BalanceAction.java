@@ -5,7 +5,6 @@ import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.AbstractAction;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.storage.FruitShopStorage;
-import java.util.Map;
 
 public class BalanceAction extends AbstractAction {
     
@@ -16,10 +15,6 @@ public class BalanceAction extends AbstractAction {
     
     @Override
     public void apply(AbstractItem item, int amount) {
-    
-    }
-    
-    public Map<AbstractItem, Integer> getStorage() {
-        return getStorage();
+        getStorage().put(item, amount);
     }
 }
