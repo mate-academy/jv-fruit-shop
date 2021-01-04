@@ -3,13 +3,13 @@ package core.basesyntax.dao;
 import java.util.Map;
 
 public interface Warehouse {
-    public void addItem(String fruit, int amount);
+    void addItem(String fruit, int amount);
 
-    public void replace(String fruit, int amount);
+    void replace(String fruit, int amount);
 
-    public Map<String, Integer> getListItems();
+    Map<String, Integer> getListItems();
 
-    public int getAmountOfItem(String fruit);
+    int getAmountOfItem(String fruit);
 
-    public void getItemFrom(String name, int amount);
+    void getItemFrom(String name, int amount);
 }
