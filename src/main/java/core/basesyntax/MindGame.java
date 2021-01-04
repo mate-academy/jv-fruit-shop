@@ -8,8 +8,11 @@ import core.basesyntax.service.FruitService;
 import core.basesyntax.service.impl.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileWriter;
 import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.strategy.*;
-
+import core.basesyntax.strategy.BalanceStrategy;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.PurchaseStrategy;
+import core.basesyntax.strategy.ReturnStrategy;
+import core.basesyntax.strategy.SupplyStrategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

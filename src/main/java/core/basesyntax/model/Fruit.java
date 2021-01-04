@@ -21,7 +21,7 @@ public class Fruit {
         if (obj == null) {
             return false;
         }
-        if (getClass() == obj.getClass()){
+        if (getClass() == obj.getClass()) {
             Fruit fruit = (Fruit) obj;
             return Objects.equals(fruitName, fruit.fruitName);
         }

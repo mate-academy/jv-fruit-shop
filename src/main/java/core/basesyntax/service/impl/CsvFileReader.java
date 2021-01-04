@@ -4,7 +4,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FileReader;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -42,7 +41,8 @@ public class CsvFileReader implements FileReader {
         for (String line : data) {
             String[] arrayOfData = line.split(PARSE_BY);
             if (arrayOfData.length != COUNT_OF_PARSE) {
-                throw new NoSuchElementException(String.format("Elements in line %d, but must be %d",
+                throw new NoSuchElementException(
+                        String.format("Elements in line %d, but must be %d",
                                 arrayOfData.length, COUNT_OF_PARSE));
             }
             transactionDtos.add(createTransactionDto(arrayOfData));
