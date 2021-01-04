@@ -1,7 +1,7 @@
 package core.basesyntax.shopimpl;
 
 import core.basesyntax.model.AbstractShop;
-import core.basesyntax.model.shopstrategy.ShopActions;
+import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.database.FruitShopDao;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
@@ -17,7 +17,7 @@ public class FruitShop extends AbstractShop<DataRecord, Fruit> {
     }
     
     @Override
-    public void performAction(ShopActions action, Fruit item, int amount) {
+    public void performAction(ShopTransactionsTypes action, Fruit item, int amount) {
         handler.getAction(action).apply(item, amount);
     }
 }

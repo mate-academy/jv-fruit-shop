@@ -1,7 +1,7 @@
 package core.basesyntax.shopimpl.database;
 
 import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.model.shopstrategy.ShopActions;
+import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import core.basesyntax.shopimpl.service.IOdataFileService;
@@ -35,7 +35,7 @@ public class FruitShopDao implements ShopDao<DataRecord> {
         dataBase.add(action);
     }
     
-    public void addAction(ShopActions action, String item, Integer amount) {
+    public void addAction(ShopTransactionsTypes action, String item, Integer amount) {
         dataBase.add(new DataRecord(action, new Fruit(item), amount));
     }
     

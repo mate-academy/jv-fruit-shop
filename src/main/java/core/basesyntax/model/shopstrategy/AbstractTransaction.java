@@ -5,11 +5,11 @@ import core.basesyntax.model.abstractstorage.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
 import java.util.Map;
 
-public abstract class AbstractAction<R, I extends AbstractItem> implements ShopAction {
+public abstract class AbstractTransaction<R, I extends AbstractItem> implements ShopTransaction {
     private AbstractStorage<R, I> storage;
     private ShopDao<R> shopDao;
     
-    public AbstractAction(AbstractStorage<R, I> storage, ShopDao<R> shopDao) {
+    public AbstractTransaction(AbstractStorage<R, I> storage, ShopDao<R> shopDao) {
         this.storage = storage;
         this.shopDao = shopDao;
     }

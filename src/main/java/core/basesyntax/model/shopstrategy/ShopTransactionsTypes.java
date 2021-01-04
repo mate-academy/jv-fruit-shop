@@ -1,6 +1,6 @@
 package core.basesyntax.model.shopstrategy;
 
-public enum ShopActions {
+public enum ShopTransactionsTypes {
     BALANCE("b"),
     PURCHASE("p"),
     RETURN("r"),
@@ -8,12 +8,12 @@ public enum ShopActions {
     
     private String value;
     
-    ShopActions(String value) {
+    ShopTransactionsTypes(String value) {
         this.value = value;
     }
     
-    public static ShopActions getAction(String value) {
-        return java.util.Arrays.stream(ShopActions.values())
+    public static ShopTransactionsTypes getAction(String value) {
+        return java.util.Arrays.stream(ShopTransactionsTypes.values())
                 .filter(i -> i.value.equalsIgnoreCase(value))
                 .findFirst().get();
     }

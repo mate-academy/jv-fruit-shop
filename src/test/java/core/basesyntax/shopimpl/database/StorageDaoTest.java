@@ -1,6 +1,6 @@
 package core.basesyntax.shopimpl.database;
 
-import core.basesyntax.model.shopstrategy.ShopActions;
+import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import java.io.IOException;
@@ -35,17 +35,17 @@ public class StorageDaoTest {
         String path = "src/test/java/core/basesyntax/shopimpl"
                       + "/database/getItemActionsTestFile.csv";
         testFruitShopDao = new FruitShopDao(path);
-        testFruitShopDao.addAction(ShopActions.SUPPLY, "oranges", 100);
-        testFruitShopDao.addAction(ShopActions.RETURN, "oranges", 10);
-        testFruitShopDao.addAction(ShopActions.RETURN, "nuts", 10);
-        testFruitShopDao.addTransaction(new DataRecord(ShopActions.SUPPLY,
+        testFruitShopDao.addAction(ShopTransactionsTypes.SUPPLY, "oranges", 100);
+        testFruitShopDao.addAction(ShopTransactionsTypes.RETURN, "oranges", 10);
+        testFruitShopDao.addAction(ShopTransactionsTypes.RETURN, "nuts", 10);
+        testFruitShopDao.addTransaction(new DataRecord(ShopTransactionsTypes.SUPPLY,
                 new Fruit("nuts"),
                 100));
         
         List<DataRecord> actual = testFruitShopDao.getItemTransactionHistory("banana");
         List<DataRecord> expected
-                = List.of(new DataRecord(ShopActions.PURCHASE, new Fruit("banana"), 15),
-                new DataRecord(ShopActions.SUPPLY, new Fruit("banana"), 200));
+                = List.of(new DataRecord(ShopTransactionsTypes.PURCHASE, new Fruit("banana"), 15),
+                new DataRecord(ShopTransactionsTypes.SUPPLY, new Fruit("banana"), 200));
         
         Assertions.assertEquals(expected, actual);
     }
@@ -55,10 +55,10 @@ public class StorageDaoTest {
         String path = "src/test/java/core/basesyntax/shopimpl/"
                       + "database/getItemActionsTestFile.csv";
         testFruitShopDao = new FruitShopDao(path);
-        testFruitShopDao.addAction(ShopActions.SUPPLY, "oranges", 100);
-        testFruitShopDao.addAction(ShopActions.RETURN, "oranges", 10);
-        testFruitShopDao.addAction(ShopActions.RETURN, "nuts", 10);
-        testFruitShopDao.addAction(ShopActions.SUPPLY, "nuts", 100);
+        testFruitShopDao.addAction(ShopTransactionsTypes.SUPPLY, "oranges", 100);
+        testFruitShopDao.addAction(ShopTransactionsTypes.RETURN, "oranges", 10);
+        testFruitShopDao.addAction(ShopTransactionsTypes.RETURN, "nuts", 10);
+        testFruitShopDao.addAction(ShopTransactionsTypes.SUPPLY, "nuts", 100);
         
         int actual = testFruitShopDao.getTransactionHistory().size();
         int expected = 7;
@@ -71,9 +71,9 @@ public class StorageDaoTest {
         String path = "src/test/java/core/basesyntax/shopimpl/database/updateTestEmptyFile.csv";
         testFruitShopDao = new FruitShopDao(path);
         
-        testFruitShopDao.addAction(ShopActions.PURCHASE, "apple", 10);
-        testFruitShopDao.addAction(ShopActions.PURCHASE, "banana", 15);
-        testFruitShopDao.addAction(ShopActions.SUPPLY, "banana", 200);
+        testFruitShopDao.addAction(ShopTransactionsTypes.PURCHASE, "apple", 10);
+        testFruitShopDao.addAction(ShopTransactionsTypes.PURCHASE, "banana", 15);
+        testFruitShopDao.addAction(ShopTransactionsTypes.SUPPLY, "banana", 200);
         
         testFruitShopDao.updateDatabase();
         

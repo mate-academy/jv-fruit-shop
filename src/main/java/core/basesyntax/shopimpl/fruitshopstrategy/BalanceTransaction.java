@@ -2,14 +2,14 @@ package core.basesyntax.shopimpl.fruitshopstrategy;
 
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.model.shopstrategy.AbstractAction;
+import core.basesyntax.model.shopstrategy.AbstractTransaction;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import core.basesyntax.shopimpl.storage.FruitShopStorage;
 
-public class BalanceAction extends AbstractAction<DataRecord, Fruit> {
+public class BalanceTransaction extends AbstractTransaction<DataRecord, Fruit> {
     
-    public BalanceAction(FruitShopStorage storage, ShopDao<DataRecord> shopDao) {
+    public BalanceTransaction(FruitShopStorage storage, ShopDao<DataRecord> shopDao) {
         super(storage, shopDao);
     }
     

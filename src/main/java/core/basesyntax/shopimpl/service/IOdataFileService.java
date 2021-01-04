@@ -1,7 +1,7 @@
 package core.basesyntax.shopimpl.service;
 
 import core.basesyntax.model.abstractstorage.AbstractItem;
-import core.basesyntax.model.shopstrategy.ShopActions;
+import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import java.io.IOException;
@@ -74,7 +74,7 @@ public class IOdataFileService {
         for (int i = 1; i < lines.size(); i++) {
             String[] data = lines.get(i).split(FILE_DELIMITER);
             
-            records.add(new DataRecord(ShopActions.getAction(data[FILE_INDEX_OF_ACTION]),
+            records.add(new DataRecord(ShopTransactionsTypes.getAction(data[FILE_INDEX_OF_ACTION]),
                     new Fruit(data[FILE_INDEX_OF_ITEM]),
                     Integer.parseInt(data[FILE_INDEX_OF_AMOUNT])));
         }
