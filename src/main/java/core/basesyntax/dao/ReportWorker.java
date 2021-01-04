@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public class ReportWorker implements WarehouseDao {
-    private InputOutputReport inputOutputReport = new InputOutputReport();
+    private final InputOutputReport inputOutputReport = new InputOutputReport();
 
     @Override
     public void readFromReport(String filName, Warehouse warehouse) {
