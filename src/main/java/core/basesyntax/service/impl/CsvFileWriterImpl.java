@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-public class CsvFileWriterImpl implements CsvFileWriter {
+public class CsvFileWriterImpl implements CsvFileWriter { //
     private static final String SYMBOL = ",";
     private static final String REPORT_HEADER = "fruit,quantity";
 
