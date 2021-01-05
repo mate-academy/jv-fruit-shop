@@ -8,9 +8,10 @@ import core.basesyntax.fruitoperation.OperationSupply;
 import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
 import core.basesyntax.fruitoperation.strategy.OperationStrategyImpl;
-import core.basesyntax.report.ReportFormatter;
-import core.basesyntax.report.ReportFormatterImpl;
-import core.basesyntax.workwithfiles.impl.FileReader;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
+import core.basesyntax.service.file.DataReader;
+import core.basesyntax.service.file.impl.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,8 +23,9 @@ public class Application {
         operationMap.put(Operations.R, new OperationReturn());
         operationMap.put(Operations.S, new OperationSupply());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
-        ReportFormatter reportFormatter = new ReportFormatterImpl(operationStrategy);
-        System.out.println(reportFormatter.createReport(
-                new FileReader("src/main/resources/test1_correct.csv")));
+        DataReader dataReader = new FileReader();
+        FruitService fruitService = new FruitServiceImpl(operationStrategy);
+        fruitService.saveToStorage(dataReader.readData("src/main/resources/test1_correct.csv"));
+        System.out.println(fruitService.getFromStorage());
     }
 }

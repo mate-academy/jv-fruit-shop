@@ -12,7 +12,7 @@ public class OperationPurchase implements Operation {
             throw new RuntimeException("Incorrect operation!!!"
                     + " This fruit does not have a balance!");
         }
-        if (mapFruits.get(fruit) - amount < 0) {
+        if (mapFruits.get(fruit) < amount) {
             throw new RuntimeException("Sorry, byt we haven't enough fruits");
         }
         mapFruits.put(fruit, mapFruits.get(fruit) - amount);

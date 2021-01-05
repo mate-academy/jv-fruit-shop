@@ -1,8 +1,8 @@
-package core.basesyntax.workwithfiles.impl;
+package core.basesyntax.service.file.impl;
 
 import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.workwithfiles.DataValidator;
+import core.basesyntax.service.file.DataValidator;
 import java.util.List;
 import org.junit.Test;
 

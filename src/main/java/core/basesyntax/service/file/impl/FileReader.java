@@ -1,27 +1,24 @@
-package core.basesyntax.workwithfiles.impl;
+package core.basesyntax.service.file.impl;
 
-import core.basesyntax.workwithfiles.DataReader;
-import core.basesyntax.workwithfiles.DataValidator;
+import core.basesyntax.service.file.DataReader;
+import core.basesyntax.service.file.DataValidator;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileReader implements DataReader {
-    private final String path;
     private final DataValidator validator;
 
-    public FileReader(String path) {
-        this.path = path;
+    public FileReader() {
         validator = new DataValidatorImpl();
     }
 
     @Override
-    public List<String> readData() {
+    public List<String> readData(String path) {
         List<String> list = new ArrayList<>();
         String line;
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(path))) {
-            bufferedReader.readLine();
             while ((line = bufferedReader.readLine()) != null) {
                 list.add(line.trim());
             }

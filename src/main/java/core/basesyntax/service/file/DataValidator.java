@@ -1,4 +1,4 @@
-package core.basesyntax.workwithfiles;
+package core.basesyntax.service.file;
 
 import java.util.List;
 

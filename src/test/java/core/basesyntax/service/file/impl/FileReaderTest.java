@@ -1,4 +1,4 @@
-package core.basesyntax.workwithfiles.impl;
+package core.basesyntax.service.file.impl;
 
 import core.basesyntax.fruitoperation.Operation;
 import core.basesyntax.fruitoperation.OperationBalance;
@@ -8,9 +8,9 @@ import core.basesyntax.fruitoperation.OperationSupply;
 import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
 import core.basesyntax.fruitoperation.strategy.OperationStrategyImpl;
-import core.basesyntax.report.ReportFormatter;
-import core.basesyntax.report.ReportFormatterImpl;
-import core.basesyntax.workwithfiles.DataReader;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
+import core.basesyntax.service.file.DataReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +21,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileReaderTest extends TestCase {
-    private static ReportFormatter reportFormatter;
+    private static FruitService fruitService;
 
     @Before
     public void setUp() throws Exception {
@@ -31,7 +31,7 @@ public class FileReaderTest extends TestCase {
         operationMap.put(Operations.R, new OperationReturn());
         operationMap.put(Operations.S, new OperationSupply());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
-        reportFormatter = new ReportFormatterImpl(operationStrategy);
+        fruitService = new FruitServiceImpl(operationStrategy);
     }
 
     @Test
@@ -40,15 +40,16 @@ public class FileReaderTest extends TestCase {
         expected.add("b,banana,20");
         expected.add("b,apple,100");
         expected.add("s,banana,100");
-        DataReader dataReader = new FileReader("src/main/resources/data_for_FR.csv");
-        assertEquals(expected, dataReader.readData());
+        DataReader dataReader = new FileReader();
+        assertEquals(expected, dataReader.readData("src/main/resources/data_for_FR.csv"));
     }
 
     @Test
     public void testIncorrectStrings() {
         try {
-            reportFormatter.createReport(
-                    new FileReader("src/main/resources/test_FR_hardcode1.csv"));
+            DataReader dataReader = new FileReader();
+            fruitService.saveToStorage(
+                    dataReader.readData("src/main/resources/test_FR_hardcode1.csv"));
         } catch (RuntimeException e) {
             Assert.assertEquals("Incorrect data", e.getMessage());
         }
@@ -57,8 +58,9 @@ public class FileReaderTest extends TestCase {
     @Test
     public void testIncorrectName() {
         try {
-            reportFormatter.createReport(
-                    new FileReader("src/main/resources/test_FR_hardcode2.csv"));
+            DataReader dataReader = new FileReader();
+            fruitService.saveToStorage(
+                    dataReader.readData("src/main/resources/test_FR_hardcode2.csv"));
         } catch (RuntimeException e) {
             Assert.assertEquals("Incorrect data", e.getMessage());
         }

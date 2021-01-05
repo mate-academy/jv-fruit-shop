@@ -1,4 +1,4 @@
-package core.basesyntax.workwithfiles.impl;
+package core.basesyntax.service.file.impl;
 
 import core.basesyntax.fruitoperation.Operation;
 import core.basesyntax.fruitoperation.OperationBalance;
@@ -8,9 +8,10 @@ import core.basesyntax.fruitoperation.OperationSupply;
 import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
 import core.basesyntax.fruitoperation.strategy.OperationStrategyImpl;
-import core.basesyntax.report.ReportFormatter;
-import core.basesyntax.report.ReportFormatterImpl;
-import core.basesyntax.workwithfiles.DataWriter;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
+import core.basesyntax.service.file.DataReader;
+import core.basesyntax.service.file.DataWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,7 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class FileWriterTest {
-    private static ReportFormatter reportFormatter;
+    private static FruitService fruitService;
 
     @Before
     public void setUp() throws Exception {
@@ -31,14 +32,15 @@ public class FileWriterTest {
         operationMap.put(Operations.R, new OperationReturn());
         operationMap.put(Operations.S, new OperationSupply());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
-        reportFormatter = new ReportFormatterImpl(operationStrategy);
+        fruitService = new FruitServiceImpl(operationStrategy);
     }
 
     @Test
     public void testReportFormattingInFile_Ok() {
         DataWriter dataWriter = new FileWriter();
-        dataWriter.writeToFile(reportFormatter.createReport(
-                new FileReader("src/main/resources/test2_correct.csv")),
+        DataReader dataReader = new FileReader();
+        fruitService.saveToStorage(dataReader.readData("src/main/resources/test2_correct.csv"));
+        dataWriter.writeToFile(fruitService.getFromStorage(),
                 "src/main/resources/ApplesAndBananas");
         String actual;
         try {
