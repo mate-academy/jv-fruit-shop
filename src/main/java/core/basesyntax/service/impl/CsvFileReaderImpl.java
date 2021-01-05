@@ -11,20 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderImpl implements FileReader {
+    public static Integer ZERO = 0;
+    public static Integer ONE = 1;
+    public static Integer TWO = 2;
+
     @Override
     public List<TransactionDto> readData(String fileName) {
         List<TransactionDto> transactionDtos = new ArrayList<>();
-        Operation operation;
         List<String[]> strings;
-        try {
-            CSVReader reader = new CSVReader(new java.io.FileReader(fileName));
+        try (CSVReader reader = new CSVReader(new java.io.FileReader(fileName))) {
             strings = reader.readAll();
         } catch (IOException | CsvException e) {
             throw new RuntimeException("Can't parse this file " + fileName);
         }
         for (int i = 1; i < strings.size(); i++) {
-            transactionDtos.add(new TransactionDto(Operation.fromString(strings.get(i)[0]),
-                    new Fruit(strings.get(i)[1]), Integer.parseInt(strings.get(i)[2])));
+            transactionDtos.add(new TransactionDto(Operation.fromString(strings.get(i)[ZERO]),
+                    new Fruit(strings.get(i)[ONE]), Integer.parseInt(strings.get(i)[TWO])));
         }
         return transactionDtos;
     }

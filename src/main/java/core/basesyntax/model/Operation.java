@@ -22,6 +22,6 @@ public enum Operation {
                 return operation;
             }
         }
-        return null;
+        throw new RuntimeException("This operator not exist");
     }
 }

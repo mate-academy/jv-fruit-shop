@@ -13,6 +13,10 @@ public class Fruit {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object secondObj) {
         if (this == secondObj) {
@@ -23,5 +27,10 @@ public class Fruit {
         }
         Fruit fruit = (Fruit) secondObj;
         return Objects.equals(name, fruit.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

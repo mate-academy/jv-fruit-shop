@@ -5,13 +5,14 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
+import core.basesyntax.service.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderImplTest {
-    public static CsvFileReaderImpl csvFileReader;
+    public static FileReader csvFileReader;
 
     @BeforeClass
     public static void beforeClass() {
