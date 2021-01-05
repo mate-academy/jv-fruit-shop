@@ -5,7 +5,6 @@ import core.basesyntax.model.AbstractOperation;
 import core.basesyntax.model.entities.Product;
 
 public class BalanceOperation<T extends Product> extends AbstractOperation<T> {
-
     public BalanceOperation(Warehouse<T> warehouse) {
         super(warehouse);
     }
