@@ -7,7 +7,6 @@ import model.Operation;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 public class AdditionStrategyTest {
     private static AdditionStrategy additionStrategy;
