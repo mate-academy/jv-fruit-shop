@@ -1,8 +1,13 @@
-b,banana,20
+b,banana,200
 b,apple,100
+b,orange,120
 s,banana,100
-p,banana,13
+p,banana,20
+s,orange,100
 r,apple,10
-p,apple,120
+p,orange,20
+p,apple,20
 p,banana,5
+r,orange,10
 s,banana,50
+s,apple,110

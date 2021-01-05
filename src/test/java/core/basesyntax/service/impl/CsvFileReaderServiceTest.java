@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.service.FileReaderService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
@@ -15,7 +16,7 @@ public class CsvFileReaderServiceTest {
     private static final String FRIDAY = "src/test/resources/data_for_friday.csv";
     private static final String SATURDAY = "src/test/resources/data_for_saturday.csv";
     private static final String SUNDAY = "src/test/resources/data_for_sunday.csv";
-    private static CsvFileReaderService csvFileReaderService;
+    private static FileReaderService csvFileReaderService;
 
     @BeforeClass
     public static void beforeAll() {
