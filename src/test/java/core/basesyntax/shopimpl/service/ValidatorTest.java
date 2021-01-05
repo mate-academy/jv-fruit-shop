@@ -16,7 +16,7 @@ public class ValidatorTest {
         Validator.transactionValidator(new Fruit("tasty fruit"), 10, map);
     }
     
-    @Test(expected = Exception.class)
+    @Test
     public void transactionValidatorValidTransaction() throws Exception {
         Map<Fruit, Integer> map = new HashMap<>();
         map.put(new Fruit("tasty fruit"), 20);
