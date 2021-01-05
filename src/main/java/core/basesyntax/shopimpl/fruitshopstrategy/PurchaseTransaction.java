@@ -15,6 +15,10 @@ public class PurchaseTransaction extends AbstractTransaction<DataRecord, Fruit> 
     
     @Override
     public void apply(AbstractItem item, int amount) {
-        Validator.transactionValidator(item, amount, getStorage());
+        try {
+            Validator.transactionValidator(item, amount, getStorage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
