@@ -35,8 +35,8 @@ public class ReportWorker implements ReportCheck {
         report.append(topPattern).append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> fruit
                 : DataBase.getListItems().entrySet()) {
-            report.append(fruit.getKey()).append(",")
-                    .append(fruit.getValue()).append(System.lineSeparator());
+            report.append(fruit.getKey().getName()).append(",")
+                    .append(fruit.getValue().toString()).append(System.lineSeparator());
         }
         return report.toString();
     }

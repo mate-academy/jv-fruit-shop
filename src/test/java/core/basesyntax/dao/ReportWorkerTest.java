@@ -69,7 +69,7 @@ public class ReportWorkerTest {
         warehouse.addItem(new Fruit("apple"), 40);
         ReportWorker reportWorker = new ReportWorker();
         InputOutputReport inputOutputReport = new InputOutputReport();
-        reportWorker.writeToReport();
+        inputOutputReport.writeReport(reportWorker.writeToReport(), "report.txt");
         String expected = "fruit,quantity "
                 + "banana,140 "
                 + "apple,40 ";
