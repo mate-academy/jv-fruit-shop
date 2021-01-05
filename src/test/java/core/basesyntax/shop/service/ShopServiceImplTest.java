@@ -1,6 +1,6 @@
 package core.basesyntax.shop.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.shop.db.Storage;
 import core.basesyntax.shop.model.Fruit;
@@ -13,16 +13,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class ShopServiceImplTest {
-    public static final String DAY_ACTIVITY = "src/test/resources/NormalDayActivity.csv";
+public class ShopServiceImplTest {
     private static List<TransactionDto> expectedTransactionDtos;
     private static ShopService service;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put(Operation.BALANCE, new AdditionStrategy());
         operationStrategyMap.put(Operation.SUPPLY, new AdditionStrategy());
@@ -55,7 +54,7 @@ class ShopServiceImplTest {
         Fruit apple = new Fruit("apple");
         Fruit banana = new Fruit("banana");
         service.applyOperationOnFruitsDto(expectedTransactionDtos);
-        assertEquals(90, Storage.fruitBalance.get(apple));
-        assertEquals(152, Storage.fruitBalance.get(banana));
+        assertEquals(90, Storage.fruitBalance.get(apple).intValue());
+        assertEquals(152, Storage.fruitBalance.get(banana).intValue());
     }
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.shop.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.shop.model.Fruit;
 import java.io.IOException;
@@ -9,17 +9,17 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class CsvFileWriterTest {
+public class CsvFileWriterTest {
     public static final String REPORT_PATH = "src/test/resources/report-fruit.csv";
     public static final String EXPECTED_REPORT_PATH = "src/test/resources/ExpectedReport.csv";
     private static Map<Fruit, Integer> fruitReport;
     private static FileWriter writer;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         writer = new CsvFileWriter();
         fruitReport = new HashMap<>();
         fruitReport.put(new Fruit("Banana"), 132);

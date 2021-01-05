@@ -1,22 +1,22 @@
 package core.basesyntax.shop.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.shop.db.Storage;
 import core.basesyntax.shop.model.Fruit;
 import core.basesyntax.shop.model.Operation;
 import core.basesyntax.shop.model.TransactionDto;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class AdditionStrategyTest {
+public class AdditionStrategyTest {
     private static OperationStrategy strategy;
     private static TransactionDto bananaTransactionDto;
     private static TransactionDto appleTransactionDto;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         bananaTransactionDto = new TransactionDto(Operation.SUPPLY,
                 new Fruit("Banana"), 20);
         appleTransactionDto = new TransactionDto(Operation.SUPPLY,
@@ -24,7 +24,7 @@ class AdditionStrategyTest {
         strategy = new AdditionStrategy();
     }
 
-    @AfterEach
+    @After
     public void tearDown() {
         Storage.fruitBalance.clear();
     }
@@ -36,7 +36,7 @@ class AdditionStrategyTest {
         strategy.apply(appleTransactionDto);
         Integer bananaQuantity = Storage.fruitBalance.get(bananaTransactionDto.getFruit());
         Integer appleQuantity = Storage.fruitBalance.get(appleTransactionDto.getFruit());
-        assertEquals(40, bananaQuantity);
-        assertEquals(20, appleQuantity);
+        assertEquals(40, bananaQuantity.intValue());
+        assertEquals(20, appleQuantity.intValue());
     }
 }

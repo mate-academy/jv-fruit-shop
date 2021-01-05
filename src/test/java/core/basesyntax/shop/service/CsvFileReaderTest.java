@@ -1,17 +1,16 @@
 package core.basesyntax.shop.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.shop.model.Fruit;
 import core.basesyntax.shop.model.Operation;
 import core.basesyntax.shop.model.TransactionDto;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class CsvFileReaderTest {
+public class CsvFileReaderTest {
     public static final String DAY_ACTIVITY = "src/test/resources/NormalDayActivity.csv";
     public static final String BROKEN_FILE_1 = "src/test/resources/BrokenDayActivity1.csv";
     public static final String BROKEN_FILE_2 = "src/test/resources/BrokenDayActivity2.csv";
@@ -23,8 +22,8 @@ class CsvFileReaderTest {
     private static FileReader reader;
     private static List<TransactionDto> expectedTransactionDtos;
 
-    @BeforeAll
-    public static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() {
         reader = new CsvFileReader();
         expectedTransactionDtos = new ArrayList<>();
         expectedTransactionDtos.add(new TransactionDto(Operation.BALANCE,
@@ -58,17 +57,17 @@ class CsvFileReaderTest {
         }
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void readData_FromBrokenFile() {
-        assertThrows(IllegalArgumentException.class, () -> reader.readData(BROKEN_FILE_1));
-        assertThrows(IllegalArgumentException.class, () -> reader.readData(BROKEN_FILE_2));
-        assertThrows(IllegalArgumentException.class, () -> reader.readData(BROKEN_FILE_3));
+        reader.readData(BROKEN_FILE_1);
+        reader.readData(BROKEN_FILE_2);
+        reader.readData(BROKEN_FILE_3);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void readData_FromWrongFile() {
-        assertThrows(RuntimeException.class, () -> reader.readData(WRONG_FILE_1));
-        assertThrows(RuntimeException.class, () -> reader.readData(WRONG_FILE_2));
-        assertThrows(RuntimeException.class, () -> reader.readData(MISSING_FILE));
+        reader.readData(WRONG_FILE_1);
+        reader.readData(WRONG_FILE_2);
+        reader.readData(MISSING_FILE);
     }
 }
