@@ -24,7 +24,7 @@ class StoreTest {
     private static OperationStrategy operationStrategy;
 
     @BeforeAll
-    static void setUp() {
+    public static void setUp() {
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("b", new BalanceOperationHandler());
         operationHandlerMap.put("p", new PurchaseOperationHandler());
@@ -37,7 +37,7 @@ class StoreTest {
     }
 
     @Test
-    void getStatistic_2items() {
+    public void getStatistic_2items() {
         String fromFilePath = "test1.csv";
         String toFilePath = "result1.csv";
         store.showStatistic(fromFilePath, toFilePath);
@@ -49,7 +49,7 @@ class StoreTest {
     }
 
     @Test
-    void getStatistic_3items() {
+    public void getStatistic_3items() {
         String fromFilePath = "test2.csv";
         String toFilePath = "result2.csv";
         store.showStatistic(fromFilePath, toFilePath);
@@ -62,7 +62,7 @@ class StoreTest {
     }
 
     @Test
-    void getStatistic_wrongOperator() {
+    public void getStatistic_wrongOperator() {
         String fromFilePath = "test3.csv";
         String toFilePath = "result3.csv";
         assertThrows(RuntimeException.class, () -> {
@@ -71,7 +71,7 @@ class StoreTest {
     }
 
     @Test
-    void getStatistic_negativeQuantity() {
+    public void getStatistic_negativeQuantity() {
         String fromFilePath = "test4.csv";
         String toFilePath = "result4.csv";
         assertThrows(RuntimeException.class, () -> {
@@ -80,7 +80,7 @@ class StoreTest {
     }
 
     @Test
-    void getStatistic_invalidQuantity() {
+    public void getStatistic_invalidQuantity() {
         String fromFilePath = "test5.csv";
         String toFilePath = "result5.csv";
         assertThrows(RuntimeException.class, () -> {
@@ -89,7 +89,7 @@ class StoreTest {
     }
 
     @Test
-    void getStatistic_balanceIsZero() {
+    public void getStatistic_balanceIsZero() {
         String fromFilePath = "test6.csv";
         String toFilePath = "result6.csv";
         store.showStatistic(fromFilePath, toFilePath);

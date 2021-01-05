@@ -6,14 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriterServiceImpl implements FileWriterService {
-    private String filePath;
-
-    public FileWriterServiceImpl(String filePath) {
-        this.filePath = filePath.equals("") ? "src\\defaultResult.csv" : filePath;
-    }
-
     @Override
-    public void writeToFile(String report) {
+    public void writeToFile(String filePath, String report) {
         BufferedWriter bufferedWriter = null;
         try {
             bufferedWriter = new BufferedWriter(new FileWriter(filePath));

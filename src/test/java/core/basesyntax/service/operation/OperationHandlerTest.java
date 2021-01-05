@@ -21,7 +21,7 @@ class OperationHandlerTest {
     private static final Integer BALANCE_SMALLER_VALUE = 200;
 
     @BeforeAll
-    static void setUp() {
+     public static void setUp() {
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("b", new BalanceOperationHandler());
         operationHandlerMap.put("p", new PurchaseOperationHandler());
@@ -30,7 +30,7 @@ class OperationHandlerTest {
     }
 
     @Test
-    void updateBalanceReturn() {
+    public void updateBalanceReturn() {
         Integer expected = 110;
         Integer actual = operationHandlerMap.get(OPERATION_RETURN)
                 .updateBalance(BALANCE, VALID_VALUE);
@@ -50,7 +50,7 @@ class OperationHandlerTest {
     }
 
     @Test
-    void updateBalanceSupply() {
+    public void updateBalanceSupply() {
         Integer expected = 110;
         Integer actual = operationHandlerMap.get(OPERATION_SUPPLY)
                 .updateBalance(BALANCE, VALID_VALUE);
@@ -70,7 +70,7 @@ class OperationHandlerTest {
     }
 
     @Test
-    void updateBalancePurchase() {
+    public void updateBalancePurchase() {
         Integer expected = 90;
         Integer actual = operationHandlerMap.get(OPERATION_PURCHASE)
                 .updateBalance(BALANCE, VALID_VALUE);
@@ -88,7 +88,7 @@ class OperationHandlerTest {
     }
 
     @Test
-    void updateBalanceBalance() {
+    public void updateBalanceBalance() {
         Integer expected = 10;
         Integer actual = operationHandlerMap.get(OPERATION_BALANCE)
                 .updateBalance(BALANCE, VALID_VALUE);

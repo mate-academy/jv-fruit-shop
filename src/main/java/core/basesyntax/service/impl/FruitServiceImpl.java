@@ -27,11 +27,13 @@ public class FruitServiceImpl implements FruitService {
         List<Fruit> fruits = fruitsDao.getData();
         Integer value;
         String operation;
+        String name;
         OperationValidation operationValidator = new OperationValidationImpl();
         for (String s : data) {
             Fruit fruit = new Fruit();
             operation = s.split(",")[OPERATION_POSITION];
-            fruit.setName(s.split(",")[FRUIT_NAME_POSITION]);
+            name = s.split(",")[FRUIT_NAME_POSITION];
+            fruit.setName(name);
             value = Integer.parseInt(s.split(",")[VALUE_POSITION]);
 
             operationValidator.isValidOperation(operations, operation);

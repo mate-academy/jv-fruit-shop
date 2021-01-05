@@ -25,7 +25,6 @@ public class Store {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> dataFromFile = fileReaderService.getDataFromFile(fromFilePath);
         fruitService.calculateFruitsBalance(dataFromFile);
-        FileWriterService fileWriterService = new FileWriterServiceImpl(toFilePath);
         Report report = fruits -> {
             StringBuilder result = new StringBuilder();
             result.append("fruit,quantity").append(System.lineSeparator());
@@ -35,6 +34,7 @@ public class Store {
             }
             return result.toString();
         };
-        fileWriterService.writeToFile(report.createReport(fruitsDao.getData()));
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.writeToFile(toFilePath, report.createReport(fruitsDao.getData()));
     }
 }

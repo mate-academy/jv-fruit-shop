@@ -15,18 +15,18 @@ class OperationValidationTest {
     private static OperationValidation operationValidator;
 
     @BeforeAll
-    static void setUp() {
+    public static void setUp() {
         operationValidator = new OperationValidationImpl();
     }
 
     @Test
-    void isValidOperation_Ok() {
+    public void isValidOperation_Ok() {
         boolean actual = operationValidator.isValidOperation(LIST_OF_OPERATIONS, OPERATION_VALID);
         assertTrue(actual);
     }
 
     @Test
-    void isValidOperation_NotOk() {
+    public void isValidOperation_NotOk() {
         assertThrows(RuntimeException.class, () -> {
             operationValidator.isValidOperation(LIST_OF_OPERATIONS, OPERATION_INVALID);
         });
