@@ -6,6 +6,9 @@ public class Fruit {
     private final String fruitName;
 
     public Fruit(String fruitName) {
+        if (fruitName == null || fruitName.length() <= 2) {
+            throw new RuntimeException("Fruit cannot be null or length less 3");
+        }
         this.fruitName = fruitName;
     }
 

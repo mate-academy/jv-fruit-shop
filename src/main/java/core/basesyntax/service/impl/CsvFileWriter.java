@@ -21,7 +21,7 @@ public class CsvFileWriter implements FruitFileWriter {
             }
             writer.flush();
         } catch (IOException e) {
-            throw new RuntimeException("Problem to write new file.", e);
+            throw new RuntimeException("Problem to write information to file.", e);
         }
     }
 }

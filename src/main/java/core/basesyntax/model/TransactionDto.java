@@ -1,11 +1,16 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class TransactionDto {
     private final Operation operation;
     private final Fruit fruit;
     private final Integer quantity;
 
     public TransactionDto(Operation operation, Fruit fruit, Integer quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity must be more 0. But was" + quantity);
+        }
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -23,4 +28,24 @@ public class TransactionDto {
         return quantity;
     }
 
+    @Override
+    public boolean equals(Object transaction) {
+        if (this == transaction) {
+            return true;
+        }
+        if (transaction == null) {
+            return false;
+        }
+        if (getClass().equals(transaction.getClass())) {
+            TransactionDto that = (TransactionDto) transaction;
+            return operation == that.operation && Objects.equals(fruit, that.fruit)
+                    && Objects.equals(quantity, that.quantity);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
+    }
 }

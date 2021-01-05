@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MindGame {
+public class Application {
     public static void main(String[] args) {
         Map<Operation, OperationStrategy> operationOperationStrategyMap = new HashMap<>();
         operationOperationStrategyMap.put(Operation.BALANCE, new BalanceStrategy());
@@ -31,6 +31,6 @@ public class MindGame {
         service.applyOperation(transaction);
 
         FruitFileWriter writer = new CsvFileWriter();
-        writer.createReportFile(service.getFruitReporter(), "src/main/resources/test.CSV");
+        writer.createReportFile(service.getFruitReporter(), "src/main/resources/report.CSV");
     }
 }
