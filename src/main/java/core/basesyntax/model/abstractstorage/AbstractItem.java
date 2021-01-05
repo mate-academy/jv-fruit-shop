@@ -6,6 +6,9 @@ public abstract class AbstractItem {
     private String itemName;
     
     public AbstractItem(String itemName) {
+        if (itemName == null) {
+            throw new RuntimeException("NonNull arguments expected");
+        }
         this.itemName = itemName;
     }
     

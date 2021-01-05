@@ -7,6 +7,7 @@ import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import core.basesyntax.shopimpl.fruitshopstrategy.FruitShopActionHandler;
+import core.basesyntax.shopimpl.service.Validator;
 
 public class FruitShop extends AbstractShop<DataRecord, Fruit> {
     private FruitShopActionHandler handler;
@@ -18,6 +19,7 @@ public class FruitShop extends AbstractShop<DataRecord, Fruit> {
     
     @Override
     public void performAction(ShopTransactionsTypes action, Fruit item, int amount) {
+        Validator.transactionValidator(action, item, amount);
         handler.getAction(action).apply(item, amount);
     }
 }

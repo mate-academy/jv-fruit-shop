@@ -77,12 +77,27 @@ public class FruitShopTest {
     }
     
     @Test(expected = RuntimeException.class)
-    public void shopExceptionExpected() {
+    public void shopPurchaseExceptionExpected() {
         shopDao = new FruitShopDao(testDatabase);
         storage = new FruitShopStorage(shopDao);
         shop = new FruitShop(storage, shopDao);
         
         shop.performAction(ShopTransactionsTypes.PURCHASE, new Fruit("Fruit1"), 1000);
+    }
+    
+    @Test
+    public void shopPurchase() {
+        shopDao = new FruitShopDao(testDatabase);
+        storage = new FruitShopStorage(shopDao);
+        shop = new FruitShop(storage, shopDao);
+        Fruit fruit3 = new Fruit("Fruit3");
+        
+        int actual = shop.getShopStorage().get(fruit3);
+        int expectedDifference = 5;
+        
+        shop.performAction(ShopTransactionsTypes.PURCHASE, fruit3, expectedDifference);
+        actual = actual - shop.getShopStorage().get(fruit3);
+        assertEquals(expectedDifference, actual);
     }
     
     @Test
@@ -105,12 +120,26 @@ public class FruitShopTest {
     }
     
     @Test
+    public void shopSupplyProduct() {
+        shopDao = new FruitShopDao(testDatabase);
+        storage = new FruitShopStorage(shopDao);
+        shop = new FruitShop(storage, shopDao);
+        Fruit fruit3 = new Fruit("Fruit3");
+    
+        int actual = shop.getShopStorage().get(fruit3);
+        int expectedDifference = 50;
+    
+        shop.performAction(ShopTransactionsTypes.SUPPLY, fruit3, expectedDifference);
+        actual = shop.getShopStorage().get(fruit3) - actual;
+        assertEquals(expectedDifference, actual);
+    }
+    
+    @Test
     public void shopReturnProduct() {
         shopDao = new FruitShopDao(testDatabase);
         storage = new FruitShopStorage(shopDao);
         shop = new FruitShop(storage, shopDao);
         Fruit fruit3 = new Fruit("Fruit3");
-        
         
         int actual = shop.getShopStorage().get(fruit3);
         int expectedDifference = 5;
@@ -118,5 +147,36 @@ public class FruitShopTest {
         shop.performAction(ShopTransactionsTypes.RETURN, fruit3, expectedDifference);
         actual = shop.getShopStorage().get(fruit3) - actual;
         assertEquals(expectedDifference, actual);
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void nullTestOnShopDaoArgument() {
+        shopDao = new FruitShopDao(null);
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void nullTestOnShopStorageArgument() {
+        storage = new FruitShopStorage(null);
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void nullTestOnShopConstructorArguments() {
+        shop = new FruitShop(storage, shopDao);
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void nullTestOnShopPerformActionArguments() {
+        shopDao = new FruitShopDao(testDatabase);
+        storage = new FruitShopStorage(shopDao);
+        shop = new FruitShop(storage, shopDao);
+        shop.performAction(ShopTransactionsTypes.RETURN, null, 0);
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void nullTestOnShopPerformActionArguments2() {
+        shopDao = new FruitShopDao(testDatabase);
+        storage = new FruitShopStorage(shopDao);
+        shop = new FruitShop(storage, shopDao);
+        shop.performAction(null, new Fruit("Some"), 0);
     }
 }

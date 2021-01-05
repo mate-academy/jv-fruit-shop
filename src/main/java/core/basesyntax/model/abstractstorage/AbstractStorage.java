@@ -8,6 +8,9 @@ public abstract class AbstractStorage<R, I extends AbstractItem> {
     private final ShopDao<R> shopDao;
     
     public AbstractStorage(ShopDao<R> shopDao) {
+        if (shopDao == null) {
+            throw new RuntimeException("NonNull arguments expected");
+        }
         this.shopDao = shopDao;
         storage = initStorage(shopDao);
     }

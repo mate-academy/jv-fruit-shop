@@ -7,7 +7,6 @@ import core.basesyntax.model.shopstrategy.AbstractTransaction;
 import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
-import core.basesyntax.shopimpl.storage.FruitShopStorage;
 
 public class SupplyTransaction extends AbstractTransaction<DataRecord, Fruit> {
     
@@ -23,6 +22,7 @@ public class SupplyTransaction extends AbstractTransaction<DataRecord, Fruit> {
         if (getStorage().containsKey(item)) {
             int update = getStorage().get(item) + amount;
             getStorage().put((Fruit) item, update);
+            return;
         }
         getStorage().put((Fruit) item, amount);
     }

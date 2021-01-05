@@ -11,6 +11,9 @@ public abstract class AbstractTransaction<R extends DataRecord, I extends Abstra
     private ShopDao<R> shopDao;
     
     public AbstractTransaction(AbstractStorage<R, I> storage, ShopDao<R> shopDao) {
+        if (storage == null || shopDao == null) {
+            throw new RuntimeException("NonNull arguments expected");
+        }
         this.storage = storage;
         this.shopDao = shopDao;
     }

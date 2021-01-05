@@ -11,6 +11,9 @@ public abstract class AbstractShop<R, I extends AbstractItem> {
     private final ShopDao<R> shopDao;
     
     public AbstractShop(AbstractStorage<R, I> shopStorage, ShopDao<R> shopDao) {
+        if (shopDao == null || shopStorage == null) {
+            throw new RuntimeException("NonNull arguments expected");
+        }
         this.shopStorage = shopStorage;
         this.shopDao = shopDao;
     }
