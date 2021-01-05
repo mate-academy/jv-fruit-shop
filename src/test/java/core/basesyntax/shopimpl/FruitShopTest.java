@@ -96,7 +96,7 @@ public class FruitShopTest {
             index++;
         }
         Fruit newFruit1 = new Fruit("Fruit" + index);
-        Fruit newFruit2 = new Fruit("Fruit" + index + 1);
+        Fruit newFruit2 = new Fruit("Fruit" + (index + 1));
         
         shop.performAction(ShopTransactionsTypes.BALANCE, newFruit1, 100);
         shop.performAction(ShopTransactionsTypes.SUPPLY, newFruit2, 100);
@@ -105,7 +105,18 @@ public class FruitShopTest {
     }
     
     @Test
-    public void performAction() {
-    
+    public void shopReturnProduct() {
+        shopDao = new FruitShopDao(testDatabase);
+        storage = new FruitShopStorage(shopDao);
+        shop = new FruitShop(storage, shopDao);
+        Fruit fruit3 = new Fruit("Fruit3");
+        
+        
+        int actual = shop.getShopStorage().get(fruit3);
+        int expectedDifference = 5;
+        
+        shop.performAction(ShopTransactionsTypes.RETURN, fruit3, expectedDifference);
+        actual = shop.getShopStorage().get(fruit3) - actual;
+        assertEquals(expectedDifference, actual);
     }
 }
