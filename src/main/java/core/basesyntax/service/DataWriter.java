@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruits;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public interface DataWriter {
-    void write(Map<Fruits, Integer> storage, String destinationFile);
+    void write(Map<Fruit, Integer> storage, String destinationFile);
 }

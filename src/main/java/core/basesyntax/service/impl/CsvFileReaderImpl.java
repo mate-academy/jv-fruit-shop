@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruits;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operations;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.DataReader;
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,24 +19,25 @@ public class CsvFileReaderImpl implements DataReader {
     private static final int LOWER_BOUND_OF_BALANCE = 0;
 
     @Override
-    public List<Transaction> read(String filename) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
+    public List<Transaction> read(String filepath) {
+        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(filepath))) {
             List<Transaction> lineList = new ArrayList<>();
-            String line = bufferedReader.readLine();
-            while (line != null) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
                 if (!line.contains("type")) {
-                    lineList.add(dataLine(line));
+                    lineList.add(parseLine(line));
                 }
-                line = bufferedReader.readLine();
             }
             return lineList;
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("There is no file in this path");
         } catch (IOException e) {
-            throw new RuntimeException("Can`t read from file " + filename);
+            throw new RuntimeException("Can`t read from file " + filepath);
         }
     }
 
-    private Transaction dataLine(String line) {
-        String [] operationData = line.split(DELIMITER);
+    private Transaction parseLine(String line) {
+        String[] operationData = line.split(DELIMITER);
         if (operationData.length != DATA_TYPES_QUANTITY) {
             throw new RuntimeException("Wrong format of data from file");
         }
@@ -48,6 +49,6 @@ public class CsvFileReaderImpl implements DataReader {
             throw new RuntimeException("Inappropriate argument in the line");
         }
         return new Transaction(Operations.checkOperation(operation.trim()),
-                new Fruits(fruit), amount);
+                new Fruit(fruit), amount);
     }
 }

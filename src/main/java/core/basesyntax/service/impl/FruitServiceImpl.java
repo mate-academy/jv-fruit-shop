@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruits;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operations;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FruitService;
@@ -17,14 +17,14 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void chooseStrategy(List<Transaction> transaction) {
-        for (Transaction oneAction : transaction) {
-            operationMap.get(oneAction.getOperation()).apply(oneAction);
+    public void putDataToStorage(List<Transaction> transactions) {
+        for (Transaction transaction : transactions) {
+            operationMap.get(transaction.getOperation()).apply(transaction);
         }
     }
 
     @Override
-    public Map<Fruits, Integer> storage() {
+    public Map<Fruit, Integer> getDataFromStorage() {
         return Storage.storage;
     }
 }

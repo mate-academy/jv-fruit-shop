@@ -2,10 +2,10 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class Fruits {
+public class Fruit {
     private String fruitName;
 
-    public Fruits(String fruitName) {
+    public Fruit(String fruitName) {
         this.fruitName = fruitName;
     }
 
@@ -25,7 +25,7 @@ public class Fruits {
         if (fruit == null || getClass() != fruit.getClass()) {
             return false;
         }
-        Fruits fruitToCheck = (Fruits) fruit;
+        Fruit fruitToCheck = (Fruit) fruit;
         return Objects.equals(fruitName, fruitToCheck.getFruitName());
     }
 

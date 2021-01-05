@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Application {
-    private static final String REPORT_FROM = "example_OK.csv";
-    private static final String REPORT_TO = "Final_balance.csv";
+    private static final String REPORT_FROM = "src/main/resources/example_OK.csv";
+    private static final String REPORT_TO = "src/main/resources/Final_balance.csv";
 
     public static void main(String[] args) {
         Map<Operations, OperationWithFruits> operationMap = new HashMap<>();
@@ -29,8 +29,8 @@ public class Application {
         DataReader dataReader = new CsvFileReaderImpl();
         List<Transaction> transactionList = dataReader.read(REPORT_FROM);
         FruitService service = new FruitServiceImpl(operationMap);
-        service.chooseStrategy(transactionList);
+        service.putDataToStorage(transactionList);
         DataWriter dataWriter = new CsvFileWriterImpl();
-        dataWriter.write(service.storage(), REPORT_TO);
+        dataWriter.write(service.getDataFromStorage(), REPORT_TO);
     }
 }

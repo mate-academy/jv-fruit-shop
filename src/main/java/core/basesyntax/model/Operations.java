@@ -18,10 +18,10 @@ public enum Operations {
         return operation;
     }
 
-    public static Operations checkOperation(String operations) {
+    public static Operations checkOperation(String operation) {
         return Arrays.stream(Operations.values())
-                .filter(type -> type.getOperation().equalsIgnoreCase(operations))
+                .filter(type -> type.getOperation().equalsIgnoreCase(operation))
                 .findFirst().orElseThrow(()
-                        -> new RuntimeException("Wrong operation " + operations));
+                        -> new RuntimeException("Wrong operation " + operation));
     }
 }
