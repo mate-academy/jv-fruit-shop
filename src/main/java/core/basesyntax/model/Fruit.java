@@ -13,10 +13,6 @@ public class Fruit {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public int hashCode() {
         return 13 * name.hashCode();

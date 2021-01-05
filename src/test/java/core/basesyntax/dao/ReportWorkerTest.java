@@ -76,5 +76,11 @@ public class ReportWorkerTest {
         String acctual = inputOutputReport.readReport("report.txt");
         assertEquals(expected, acctual);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void testWriteToError() {
+        InputOutputReport inputOutputReport = new InputOutputReport();
+        inputOutputReport.writeReport("", "");
+    }
 }
 

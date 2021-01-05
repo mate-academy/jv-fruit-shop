@@ -7,6 +7,7 @@ import org.junit.After;
 import org.junit.Test;
 
 public class WarehouseImplTest {
+
     @After
     public void storeClear() {
         Warehouse warehouse = new WarehouseImpl();
@@ -17,7 +18,7 @@ public class WarehouseImplTest {
     public void testAddFruit() {
         WarehouseImpl warehouseImpl = new WarehouseImpl();
         warehouseImpl.addItem(new Fruit("Fruit"), 10);
-        assertEquals(1, warehouseImpl.getListItems().size());
+        assertEquals(3, warehouseImpl.getListItems().size());
     }
 
     @Test
