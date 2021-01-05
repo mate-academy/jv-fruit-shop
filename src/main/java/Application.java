@@ -1,11 +1,8 @@
-package core.basesyntax;
-
 import core.basesyntax.model.FruitShop;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.strategy.AdditionStrategy;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.SubtractionStrategy;
-
 import java.util.HashMap;
 import java.util.Map;
 

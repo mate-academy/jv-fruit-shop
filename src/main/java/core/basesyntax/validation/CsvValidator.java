@@ -2,7 +2,7 @@ package core.basesyntax.validation;
 
 import core.basesyntax.model.Operation;
 
-public class CSVValidator implements Validator {
+public class CsvValidator implements Validator {
     private boolean isBalanceArea = true;
 
     @Override

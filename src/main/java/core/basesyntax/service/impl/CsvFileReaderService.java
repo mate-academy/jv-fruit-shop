@@ -6,18 +6,17 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FileReaderService;
-import core.basesyntax.validation.CSVValidator;
+import core.basesyntax.validation.CsvValidator;
 import core.basesyntax.validation.Validator;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CSVFileReaderService implements FileReaderService {
+public class CsvFileReaderService implements FileReaderService {
     @Override
     public List<Transaction> readFromFile(String filePath) {
-        Validator validator = new CSVValidator();
+        Validator validator = new CsvValidator();
         List<Transaction> list = new ArrayList<>();
         String[] line;
         try (CSVReader reader = new CSVReader(new FileReader(filePath))) {

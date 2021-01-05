@@ -27,12 +27,16 @@ public class Transaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Transaction that = (Transaction) o;
-        return operation == that.operation &&
-                Objects.equals(fruit, that.fruit) &&
-                Objects.equals(quantity, that.quantity);
+        return operation == that.operation
+                && Objects.equals(fruit, that.fruit)
+                && Objects.equals(quantity, that.quantity);
     }
 
     @Override
