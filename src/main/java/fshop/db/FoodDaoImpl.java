@@ -2,7 +2,6 @@ package fshop.db;
 
 import fshop.model.Food;
 import fshop.service.FoodService;
-import fshop.service.workfile.ReadCsv;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -13,19 +12,16 @@ public class FoodDaoImpl implements FoodDao {
     private static final String BALANCE = "b";
     private static final String COMA = ",";
     private Map<Food, Integer> dataOfBalance;
-    private ReadCsv readCsv;
     private FoodService foodService;
 
-    public FoodDaoImpl(ReadCsv readCsv) {
-        Objects.requireNonNull(readCsv);
-        this.readCsv = readCsv;
+    public FoodDaoImpl() {
         dataOfBalance = new HashMap<>();
         foodService = new FoodService();
     }
 
     @Override
-    public void addAll() {
-        Iterator<String> listAfterRead = readCsv.read().iterator();
+    public void addAll(List<String> fileLines) {
+        Iterator<String> listAfterRead = fileLines.iterator();
         while (listAfterRead.hasNext()) {
             String line = listAfterRead.next();
             if (line.substring(0, line.indexOf(COMA)).equals(BALANCE)) {
@@ -42,12 +38,11 @@ public class FoodDaoImpl implements FoodDao {
         return dataOfBalance.get(food);
     }
 
-    public void updateAll() {
-        List<String> listAfterRead = readCsv.read();
-        listAfterRead.remove(0);
+    public void updateAll(List<String> fileLines) {
+        fileLines.remove(0);
 
         for (Map.Entry<Food, Integer> entry : dataOfBalance.entrySet()) {
-            Iterator<String> listIterator = listAfterRead.iterator();
+            Iterator<String> listIterator = fileLines.iterator();
             int currentValue = entry.getValue();
             while (listIterator.hasNext()) {
                 String key = listIterator.next();

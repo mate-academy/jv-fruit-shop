@@ -5,91 +5,79 @@ import static junit.framework.TestCase.assertEquals;
 import fshop.model.Food;
 import fshop.service.workfile.ReadCsv;
 import fshop.service.workfile.ReadCsvImpl;
+import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 
 public class FoodDaoImplTest {
     @Test(expected = NullPointerException.class)
-    public void createObject_null() {
-        new FoodDaoImpl(null);
-    }
-
-    @Test(expected = NullPointerException.class)
     public void getValue_null() {
-        FoodDao foodDao = new FoodDaoImpl(new ReadCsvImpl("file.csv"));
-        foodDao.addAll();
+        FoodDao foodDao = new FoodDaoImpl();
+        foodDao.addAll(new ReadCsvImpl().read("file.csv"));
         foodDao.get(null);
     }
 
     @Test
     public void getValue_test1_ok() {
-        ReadCsv readCsv = new ReadCsvImpl("file.csv");
-        FoodDao foodDao = new FoodDaoImpl(readCsv);
+        FoodDao foodDao = new FoodDaoImpl();
         Food actual = new Food("apple", 100);
-        foodDao.addAll();
+        foodDao.addAll(new ReadCsvImpl().read("file.csv"));
         assertEquals(Integer.valueOf(100), foodDao.get(actual));
     }
 
     @Test
     public void getValue_test2_ok() {
-        ReadCsv readCsv = new ReadCsvImpl("file.csv");
-        FoodDao foodDao = new FoodDaoImpl(readCsv);
+        FoodDao foodDao = new FoodDaoImpl();
         Food actual = new Food("banana", 20);
-        foodDao.addAll();
+        foodDao.addAll(new ReadCsvImpl().read("file.csv"));
         assertEquals(Integer.valueOf(20), foodDao.get(actual));
     }
 
     @Test
     public void getValue_test3_ok() {
-        ReadCsv readCsv = new ReadCsvImpl("file2.csv");
-        FoodDao foodDao = new FoodDaoImpl(readCsv);
+        FoodDao foodDao = new FoodDaoImpl();
         Food actual = new Food("apple", 150);
-        foodDao.addAll();
+        foodDao.addAll(new ReadCsvImpl().read("file2.csv"));
         assertEquals(Integer.valueOf(150), foodDao.get(actual));
     }
 
     @Test
     public void getValue_test4_ok() {
-        ReadCsv readCsv = new ReadCsvImpl("file2.csv");
-        FoodDao foodDao = new FoodDaoImpl(readCsv);
+        FoodDao foodDao = new FoodDaoImpl();
         Food actual = new Food("banana", 80);
-        foodDao.addAll();
+        foodDao.addAll(new ReadCsvImpl().read("file2.csv"));
         assertEquals(Integer.valueOf(80), foodDao.get(actual));
     }
 
     @Test
     public void getValue_test1_notOk() {
-        ReadCsv readCsv = new ReadCsvImpl("file2.csv");
-        FoodDao foodDao = new FoodDaoImpl(readCsv);
+        FoodDao foodDao = new FoodDaoImpl();
         Food actual = new Food("banana", 130);
-        foodDao.addAll();
+        foodDao.addAll(new ReadCsvImpl().read("file.csv"));
         assertEquals(null, foodDao.get(actual));
     }
 
     @Test
     public void getValue_test2_notOk() {
-        ReadCsv readCsv = new ReadCsvImpl("file2.csv");
-        FoodDao foodDao = new FoodDaoImpl(readCsv);
+        FoodDao foodDao = new FoodDaoImpl();
         Food actual = new Food("apple", 10);
-        foodDao.addAll();
+        foodDao.addAll(new ReadCsvImpl().read("file2.csv"));
         assertEquals(null, foodDao.get(actual));
     }
 
     @Test
     public void getValue_test3_notOk() {
-        ReadCsv readCsv = new ReadCsvImpl("file.csv");
-        FoodDao foodDao = new FoodDaoImpl(readCsv);
+        FoodDao foodDao = new FoodDaoImpl();
         Food actual = new Food("banana", 2000);
-        foodDao.addAll();
+        foodDao.addAll(new ReadCsvImpl().read("file2.csv"));
         assertEquals(null, foodDao.get(actual));
     }
 
     @Test
     public void getValue_test4_notOk() {
-        ReadCsv readCsv = new ReadCsvImpl("file.csv");
-        FoodDao foodDao = new FoodDaoImpl(readCsv);
+        FoodDao foodDao = new FoodDaoImpl();
         Food actual = new Food("apple", 5);
-        foodDao.addAll();
+        foodDao.addAll(new ReadCsvImpl().read("file.csv"));
         assertEquals(null, foodDao.get(actual));
     }
 
@@ -102,10 +90,12 @@ public class FoodDaoImplTest {
                 .append("apple").append(" = ")
                 .append("90").append(System.lineSeparator());
 
-        ReadCsv readCsv = new ReadCsvImpl("file.csv");
-        FoodDao foodDao = new FoodDaoImpl(readCsv);
-        foodDao.addAll();
-        foodDao.updateAll();
+        ReadCsv readCsv = new ReadCsvImpl();
+        FoodDao foodDao = new FoodDaoImpl();
+
+        List<String> fileLines = readCsv.read("file.csv");
+        foodDao.addAll(fileLines);
+        foodDao.updateAll(fileLines);
 
         for (Map.Entry<Food, Integer> entry : foodDao.getDataOfBalance().entrySet()) {
             actual.append(entry.getKey().getName()).append(" = ")
@@ -123,10 +113,12 @@ public class FoodDaoImplTest {
                 .append("apple").append(" = ")
                 .append("140").append(System.lineSeparator());
 
-        ReadCsv readCsv = new ReadCsvImpl("file2.csv");
-        FoodDao foodDao = new FoodDaoImpl(readCsv);
-        foodDao.addAll();
-        foodDao.updateAll();
+        ReadCsv readCsv = new ReadCsvImpl();
+        FoodDao foodDao = new FoodDaoImpl();
+
+        List<String> fileLines = readCsv.read("file2.csv");
+        foodDao.addAll(fileLines);
+        foodDao.updateAll(fileLines);
 
         for (Map.Entry<Food, Integer> entry : foodDao.getDataOfBalance().entrySet()) {
             actual.append(entry.getKey().getName()).append(" = ")

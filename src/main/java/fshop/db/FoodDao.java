@@ -1,6 +1,7 @@
 package fshop.db;
 
 import fshop.model.Food;
+import java.util.List;
 import java.util.Map;
 
 public interface FoodDao {
@@ -8,7 +9,7 @@ public interface FoodDao {
 
     Map<Food, Integer> getDataOfBalance();
 
-    void addAll();
+    void addAll(List<String> fileLines);
 
-    void updateAll();
+    void updateAll(List<String> fileLines);
 }

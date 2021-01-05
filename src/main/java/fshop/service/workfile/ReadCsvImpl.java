@@ -6,20 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 public class ReadCsvImpl implements ReadCsv {
     private static final String COMA = ",";
-    private String fileName;
-
-    public ReadCsvImpl(String fileName) {
-        Objects.requireNonNull(fileName);
-        this.fileName = fileName;
-    }
 
     @Override
-    // set parameter
-    public List<String> read() {
+    public List<String> read(String fileName) {
         try {
             return checkToNegativeAfterRead(Files
                     .readAllLines(Paths.get(new File(fileName)
