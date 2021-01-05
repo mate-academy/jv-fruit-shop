@@ -1,6 +1,7 @@
 package core.basesyntax.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
@@ -23,5 +24,10 @@ public class TestsModels {
                 "Fruits must be equal");
         assertEquals(100, transaction.getQuantity(),
                 "values must be equal");
+    }
+    @Test
+    public void checkFruit(){
+        fruit = new Fruit("banana");
+        assertFalse(fruit.equals(null));
     }
 }
