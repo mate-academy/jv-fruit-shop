@@ -31,6 +31,4 @@ public class AdditionStrategyTest {
         Assert.assertEquals(200, papayaAmount);
         Assert.assertEquals(100, durianAmount);
     }
-
-
 }
