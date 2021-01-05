@@ -12,6 +12,7 @@ public class WarehouseImplTest {
         Warehouse warehouse = new WarehouseImpl();
         warehouse.getListItems().clear();
     }
+
     @Test
     public void testAddFruit() {
         WarehouseImpl warehouseImpl = new WarehouseImpl();
