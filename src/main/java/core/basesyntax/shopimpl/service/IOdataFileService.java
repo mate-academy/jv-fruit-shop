@@ -13,6 +13,7 @@ import java.util.List;
 
 public class IOdataFileService {
     private static final String FILE_DELIMITER = ",";
+    private static final String NUMBERS_PATTERN = "[^0-9]";
     private static final int FILE_INDEX_OF_ACTION = 0;
     private static final int FILE_INDEX_OF_ITEM = 1;
     private static final int FILE_INDEX_OF_AMOUNT = 2;
@@ -50,7 +51,7 @@ public class IOdataFileService {
                 continue;
             }
             String[] data = lines.get(i).split(FILE_DELIMITER);
-            if (data[FILE_INDEX_OF_AMOUNT].matches("[^0-9]")
+            if (data[FILE_INDEX_OF_AMOUNT].matches(NUMBERS_PATTERN)
                     || Integer.parseInt(data[FILE_INDEX_OF_AMOUNT]) < 0) {
                 throw new IllegalArgumentException("The file line doesn't"
                                                    + " contain proper values or fields");
