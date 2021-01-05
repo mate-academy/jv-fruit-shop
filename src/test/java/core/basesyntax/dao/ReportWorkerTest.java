@@ -13,6 +13,8 @@ import core.basesyntax.strategy.Return;
 import core.basesyntax.strategy.Supply;
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReportWorkerTest {
@@ -20,12 +22,22 @@ public class ReportWorkerTest {
     WarehouseImpl warehouseTest = new WarehouseImpl();
     InputOutputReport inputOutputReport = new InputOutputReport();
 
-    @Test
-    public void testReadFromReport() {
+    @After
+    public void storeClear() {
+        Warehouse warehouse = new WarehouseImpl();
+        warehouse.getListItems().clear();
+    }
+
+    @Before
+    public void putMap() {
         operationStrategyMap.put(Procedure.Balance, new Balance());
         operationStrategyMap.put(Procedure.Purchase, new Purchase());
         operationStrategyMap.put(Procedure.Return, new Return());
         operationStrategyMap.put(Procedure.Supply, new Supply());
+    }
+
+    @Test
+    public void testReadFromReport() {
         ReportWorker reportWorker = new ReportWorker();
         String report = inputOutputReport.readReport("reportIn");
         reportWorker.readFromReport(report, operationStrategyMap);
@@ -42,10 +54,6 @@ public class ReportWorkerTest {
 
     @Test(expected = RuntimeException.class)
     public void testReadFromError() {
-        operationStrategyMap.put(Procedure.Balance, new Balance());
-        operationStrategyMap.put(Procedure.Purchase, new Purchase());
-        operationStrategyMap.put(Procedure.Return, new Return());
-        operationStrategyMap.put(Procedure.Supply, new Supply());
         ReportWorker reportWorker = new ReportWorker();
         String report = inputOutputReport.readReport("errorReport");
         reportWorker.readFromReport(report, operationStrategyMap);
@@ -53,10 +61,6 @@ public class ReportWorkerTest {
 
     @Test(expected = RuntimeException.class)
     public void testValidationError() {
-        operationStrategyMap.put(Procedure.Balance, new Balance());
-        operationStrategyMap.put(Procedure.Purchase, new Purchase());
-        operationStrategyMap.put(Procedure.Return, new Return());
-        operationStrategyMap.put(Procedure.Supply, new Supply());
         ReportWorker reportWorker = new ReportWorker();
         String report = inputOutputReport.readReport("test2");
         reportWorker.readFromReport(report, operationStrategyMap);

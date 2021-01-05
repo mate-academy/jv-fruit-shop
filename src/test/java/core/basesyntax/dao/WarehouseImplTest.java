@@ -18,7 +18,7 @@ public class WarehouseImplTest {
     public void testAddFruit() {
         WarehouseImpl warehouseImpl = new WarehouseImpl();
         warehouseImpl.addItem(new Fruit("Fruit"), 10);
-        assertEquals(3, warehouseImpl.getListItems().size());
+        assertEquals(1, warehouseImpl.getListItems().size());
     }
 
     @Test
