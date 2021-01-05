@@ -25,7 +25,7 @@ public class CsvFileReaderTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void read_incorrectPath_Ok() {
-        List<String[]> data = filesReader.read("");
+    public void read_incorrectPath_notOk() {
+        List<String[]> data = filesReader.read("file.scv");
     }
 }
