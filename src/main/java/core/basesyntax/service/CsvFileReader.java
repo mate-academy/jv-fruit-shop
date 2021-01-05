@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import core.basesyntax.exception.ReadFileException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,7 +14,7 @@ public class CsvFileReader implements FilesReader {
                 .withSkipLines(1).build()) {
             return reader.readAll();
         } catch (IOException e) {
-            throw new ReadFileException("Can't read read file " + fileName);
+            throw new RuntimeException("Can't read read file " + fileName);
         }
     }
 }

@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import com.opencsv.CSVWriter;
 import core.basesyntax.database.Storage;
-import core.basesyntax.exception.WriteFileException;
 import core.basesyntax.model.Fruit;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,7 +23,7 @@ public class CsvFileWriter implements FilesWriter {
                         String.valueOf(entry.getValue())});
             }
         } catch (IOException e) {
-            throw new WriteFileException("Can't write data to file " + fileName);
+            throw new RuntimeException("Can't write data to file " + fileName);
         }
     }
 }
