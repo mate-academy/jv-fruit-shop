@@ -37,7 +37,7 @@ public class CsvFileReaderServiceTest {
         expected.add(new Transaction(Operation.PURCHASE, banana, 5));
         expected.add(new Transaction(Operation.SUPPLY, banana, 50));
         List<Transaction> actual = csvFileReaderService.readFromFile(MONDAY);
-        Assert.assertArrayEquals(expected.toArray(), actual.toArray());
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)

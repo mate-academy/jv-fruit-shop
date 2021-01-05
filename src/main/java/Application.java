@@ -14,7 +14,9 @@ public class Application {
         strategyMap.put(Operation.RETURN, new AdditionStrategy());
         strategyMap.put(Operation.PURCHASE, new SubtractionStrategy());
         FruitShop fruitShop = new FruitShop(strategyMap);
-        fruitShop.generateBalance("src/main/resources/data_for_monday.csv");
-        fruitShop.generateReport("report.csv");
+        String sourceFilePath = "src/main/resources/data_for_monday.csv";
+        fruitShop.generateBalance(sourceFilePath);
+        String destFilePath = "report.csv";
+        fruitShop.generateReport(destFilePath);
     }
 }

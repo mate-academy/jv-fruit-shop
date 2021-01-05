@@ -29,20 +29,11 @@ public class CsvFileWriterServiceTest {
         Map<Fruit, Integer> balance = new HashMap<>();
         balance.put(new Fruit("banana"), 152);
         balance.put(new Fruit("apple"), 90);
-        String report = "src/test/resources/report.csv";
-        writerService.writeToFile(balance, report);
+        writerService.writeToFile(balance, REPORT);
         List<String[]> expected = new ArrayList<>();
         expected.add(new String[]{"banana", "152"});
         expected.add(new String[]{"apple", "90"});
-        List<String[]> actual;
-        try {
-            CSVReader csvReader = new CSVReader(new FileReader(REPORT));
-            actual = csvReader.readAll();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("Incorrect path: " + REPORT, e);
-        } catch (IOException | CsvException e) {
-            throw new RuntimeException("Can't read the file", e);
-        }
+        List<String[]> actual = getReportList();
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
@@ -50,19 +41,10 @@ public class CsvFileWriterServiceTest {
     public void writeReportForTuesday_Ok() {
         Map<Fruit, Integer> balance = new HashMap<>();
         balance.put(new Fruit("banana"), 349);
-        String report = "src/test/resources/report.csv";
-        writerService.writeToFile(balance, report);
+        writerService.writeToFile(balance, REPORT);
         List<String[]> expected = new ArrayList<>();
         expected.add(new String[]{"banana", "349"});
-        List<String[]> actual;
-        try {
-            CSVReader csvReader = new CSVReader(new FileReader(REPORT));
-            actual = csvReader.readAll();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("Incorrect path: " + REPORT, e);
-        } catch (IOException | CsvException e) {
-            throw new RuntimeException("Can't read the file", e);
-        }
+        List<String[]> actual = getReportList();
         Assert.assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
@@ -72,21 +54,25 @@ public class CsvFileWriterServiceTest {
         balance.put(new Fruit("banana"), 325);
         balance.put(new Fruit("apple"), 200);
         balance.put(new Fruit("orange"), 210);
-        String report = "src/test/resources/report.csv";
-        writerService.writeToFile(balance, report);
+        writerService.writeToFile(balance, REPORT);
         List<String[]> expected = new ArrayList<>();
         expected.add(new String[]{"banana", "325"});
         expected.add(new String[]{"apple", "200"});
         expected.add(new String[]{"orange", "210"});
-        List<String[]> actual;
+        List<String[]> actual = getReportList();
+        Assert.assertArrayEquals(expected.toArray(), actual.toArray());
+    }
+
+    private List<String[]> getReportList() {
+        List<String[]> reportList;
         try {
             CSVReader csvReader = new CSVReader(new FileReader(REPORT));
-            actual = csvReader.readAll();
+            reportList = csvReader.readAll();
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Incorrect path: " + REPORT, e);
         } catch (IOException | CsvException e) {
             throw new RuntimeException("Can't read the file", e);
         }
-        Assert.assertArrayEquals(expected.toArray(), actual.toArray());
+        return reportList;
     }
 }
