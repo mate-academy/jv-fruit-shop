@@ -13,11 +13,11 @@ import org.junit.Test;
 
 public class IOdataFileServiceTest {
     private String filePathValid
-            = "src/test/java/core/basesyntax/shopimpl/service/TestValid.csv";
+            = "src/test/resources/TestValid.csv";
     private String filePathInvalid
-            = "src/test/java/core/basesyntax/shopimpl/service/TestInvalid.csv";
+            = "src/test/resources/TestInvalid.csv";
     private String filePathInvalid2
-            = "src/test/java/core/basesyntax/shopimpl/service/TestInvalid2.csv";
+            = "src/test/resources/TestInvalid2.csv";
     private IOdataFileService testObject = new IOdataFileService(filePathValid);
     private List<DataRecord> list =
             List.of(new DataRecord(ShopTransactionsTypes.BALANCE, new Fruit("Fruit"), 100),

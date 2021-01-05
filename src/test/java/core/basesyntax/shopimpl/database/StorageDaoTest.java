@@ -16,15 +16,13 @@ public class StorageDaoTest {
     
     @Test(expected = RuntimeException.class)
     public void getAllActionsNonExistingFile() {
-        String path = "src/test/java/core/basesyntax/shopimpl"
-                      + "/storage/DatabaseNoFile.csv";
+        String path = "src/test/resources/DatabaseNoFile.csv";
         new FruitShopDao(path);
     }
     
     @Test
     public void getAllActionsEmptyFile() {
-        testFruitShopDao = new FruitShopDao("src/test/java/core/basesyntax"
-                                            + "/shopimpl/database/DatabaseEmptyFile.csv");
+        testFruitShopDao = new FruitShopDao("src/test/resources/DatabaseEmptyFile.csv");
         List<DataRecord> list = testFruitShopDao.getTransactionHistory();
         int expectedSize = 0;
         int actualSize = list.size();
@@ -33,8 +31,7 @@ public class StorageDaoTest {
     
     @Test
     public void getItemActions() {
-        String path = "src/test/java/core/basesyntax/shopimpl"
-                      + "/database/getItemActionsTestFile.csv";
+        String path = "src/test/resources/getItemActionsTestFile.csv";
         testFruitShopDao = new FruitShopDao(path);
         testFruitShopDao.addAction(ShopTransactionsTypes.SUPPLY, "oranges", 100);
         testFruitShopDao.addAction(ShopTransactionsTypes.RETURN, "oranges", 10);
@@ -53,8 +50,7 @@ public class StorageDaoTest {
     
     @Test
     public void addAction() {
-        String path = "src/test/java/core/basesyntax/shopimpl/"
-                      + "database/getItemActionsTestFile.csv";
+        String path = "src/test/resources/getItemActionsTestFile.csv";
         testFruitShopDao = new FruitShopDao(path);
         testFruitShopDao.addAction(ShopTransactionsTypes.SUPPLY, "oranges", 100);
         testFruitShopDao.addAction(ShopTransactionsTypes.RETURN, "oranges", 10);
@@ -69,7 +65,7 @@ public class StorageDaoTest {
     
     @Test
     public void updateEmptyFileWithNonEmptyInput() {
-        String path = "src/test/java/core/basesyntax/shopimpl/database/updateTestEmptyFile.csv";
+        String path = "src/test/resources/updateTestEmptyFile.csv";
         testFruitShopDao = new FruitShopDao(path);
         
         testFruitShopDao.addAction(ShopTransactionsTypes.PURCHASE, "apple", 10);
