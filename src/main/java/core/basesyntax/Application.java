@@ -27,9 +27,10 @@ public class Application {
         FruitService fruitService = new FruitServiceImpl(operationStrategyMap);
         FileWriter fileWriter = new CsvFileWriterImpl();
 
-        List<TransactionDto> transactionDtos = fileReader.readData("src/main/fruit_shop.csv");
+        List<TransactionDto> transactionDtos = fileReader.readData("src/main/"
+                + "resources/fruit_shop.csv");
         fruitService.applyAllOperators(transactionDtos);
         Map<String, Long> report = fruitService.getReport();
-        fileWriter.writeDataInFile(report, "src/main/fruit_report.csv");
+        fileWriter.writeDataInFile(report, "src/main/resources/fruit_report.csv");
     }
 }

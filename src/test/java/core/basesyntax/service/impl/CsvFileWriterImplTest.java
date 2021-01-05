@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
@@ -11,8 +11,6 @@ import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.AdditionalStrategy;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.ReductionStrategy;
-
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,17 +18,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class CsvFileWriterImplTest {
+public class CsvFileWriterImplTest {
     public static FileWriter csvFileWriter;
     public static FruitService fruitService;
     public static List<TransactionDto> transactionDtos;
     public static Map<Operation, OperationStrategy> operationStrategyMap;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         csvFileWriter = new CsvFileWriterImpl();
         fruitService = new FruitServiceImpl(operationStrategyMap);
         transactionDtos = new ArrayList<>();
@@ -43,16 +41,17 @@ class CsvFileWriterImplTest {
                 new Fruit("banana"), 20));
         transactionDtos.add(new TransactionDto(Operation.PURCHASE,
                 new Fruit("banana"), 10));
+        Storage.fruits.removeAll(Storage.fruits);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void fileNotFound_Ok() {
+        csvFileWriter
+                .writeDataInFile(new HashMap<>(), "");
     }
 
     @Test
-    void fileNotFound_Ok() {
-        assertThrows(RuntimeException.class, () -> csvFileWriter
-                .writeDataInFile(new HashMap<>(), ""));
-    }
-
-    @Test
-    void dataWrite_Ok() {
+    public void dataWrite_Ok() {
         fruitService.applyAllOperators(transactionDtos);
         Map<String, Long> longMap = fruitService.getReport();
         csvFileWriter.writeDataInFile(longMap, "src/test/resources/checkWriteMethod.csv");

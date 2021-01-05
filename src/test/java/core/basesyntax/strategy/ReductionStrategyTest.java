@@ -1,27 +1,31 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class ReductionStrategyTest {
-    public static FruitServiceImpl fruitService;
+public class ReductionStrategyTest {
+    public static AdditionalStrategy additionalStrategy;
+    public static ReductionStrategy reductionStrategy;
+    public static FruitService fruitService;
     public static List<TransactionDto> transactionDtos;
     public static Map<Operation, OperationStrategy> operationStrategyMap;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        additionalStrategy = new AdditionalStrategy();
+        reductionStrategy = new ReductionStrategy();
         fruitService = new FruitServiceImpl(operationStrategyMap);
         transactionDtos = new ArrayList<>();
         operationStrategyMap = new HashMap<>();
@@ -33,26 +37,30 @@ class ReductionStrategyTest {
                 new Fruit("banana"), 20));
         transactionDtos.add(new TransactionDto(Operation.PURCHASE,
                 new Fruit("banana"), 10));
+        Storage.fruits.removeAll(Storage.fruits);
     }
 
     @Test
-    void subtraction_Ok() {
-        fruitService.applyAllOperators(transactionDtos);
+    public void subtraction_Ok() {
+        additionalStrategy.apply(new TransactionDto(Operation.BALANCE,
+                new Fruit("banana"), 20));
+        reductionStrategy.apply(new TransactionDto(Operation.PURCHASE,
+                new Fruit("banana"), 10));
         Integer actul = Storage.fruits.size();
-        assertEquals(10, actul);
+        assertEquals(Integer.valueOf(10), actul);
     }
 
-    @Test
-    void subtractionBadData_Ok() {
+    @Test(expected = RuntimeException.class)
+    public void subtractionBadData_Ok() {
         transactionDtos.add(new TransactionDto(Operation.PURCHASE,
                 new Fruit("banana"), -10));
-        assertThrows(RuntimeException.class, () -> fruitService.applyAllOperators(transactionDtos));
+        fruitService.applyAllOperators(transactionDtos);
     }
 
-    @Test
-    void subtractionMoreThanWeHave_Ok() {
+    @Test(expected = RuntimeException.class)
+    public void subtractionMoreThanWeHave_Ok() {
         transactionDtos.add(new TransactionDto(Operation.PURCHASE,
-                new Fruit("banana"), 100));
-        assertThrows(RuntimeException.class, () -> fruitService.applyAllOperators(transactionDtos));
+                new Fruit("banana"), 50));
+        fruitService.applyAllOperators(transactionDtos);
     }
 }

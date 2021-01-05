@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -11,16 +11,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class AdditionalStrategyTest {
+public class AdditionalStrategyTest {
     public static FruitServiceImpl fruitService;
     public static List<TransactionDto> transactionDtos;
     public static Map<Operation, OperationStrategy> operationStrategyMap;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         fruitService = new FruitServiceImpl(operationStrategyMap);
         transactionDtos = new ArrayList<>();
         operationStrategyMap = new HashMap<>();
@@ -32,12 +32,13 @@ class AdditionalStrategyTest {
                 new Fruit("banana"), 20));
         transactionDtos.add(new TransactionDto(Operation.PURCHASE,
                 new Fruit("banana"), 10));
+        Storage.fruits.removeAll(Storage.fruits);
     }
 
     @Test
-    void additional_Ok() {
+    public void additional_Ok() {
         fruitService.applyAllOperators(transactionDtos);
         Integer actul = Storage.fruits.size();
-        assertEquals(10, actul);
+        assertEquals(Integer.valueOf(10), actul);
     }
 }

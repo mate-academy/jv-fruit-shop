@@ -1,38 +1,38 @@
 package core.basesyntax.service.impl;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class CsvFileReaderImplTest {
+public class CsvFileReaderImplTest {
     public static CsvFileReaderImpl csvFileReader;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
         csvFileReader = new CsvFileReaderImpl();
+
+    }
+
+    @Test(expected = RuntimeException.class)
+     public void empty_Ok() {
+        csvFileReader.readData("src/"
+                + "test/java/core/service/impl/test.csv");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void notACsvFormat_Ok() {
+        csvFileReader.readData("src/"
+                + "test/java/core/basesyntax/service/impl/test.csv");
     }
 
     @Test
-    void empty_Ok() {
-        assertThrows(RuntimeException.class, () -> csvFileReader.readData("src/test/"
-                + "java/core/basesyntax/service/impl/CsvFileReaderImplTest.java"));
-    }
-
-    @Test
-    void notACsvFormat_Ok() {
-        assertThrows(RuntimeException.class, () -> csvFileReader.readData("src/"
-                + "test/java/core/basesyntax/service/impl/test.csv"));
-    }
-
-    @Test
-    void usualFile_Ok() {
+    public void usualFile_Ok() {
         List<TransactionDto> expected = new ArrayList<>();
         expected.add(new TransactionDto(Operation.BALANCE, new Fruit("banana"), 20));
         assertEquals(expected.get(0).getOperation(), csvFileReader
