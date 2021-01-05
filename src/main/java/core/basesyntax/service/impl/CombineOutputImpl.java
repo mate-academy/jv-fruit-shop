@@ -1,10 +1,11 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.interfaces.CombineOutput;
 import java.util.Map;
 
-public class CombineStringFromMapImpl implements CombineStringFromMap {
+public class CombineOutputImpl implements CombineOutput {
     @Override
-    public String combineString(Map<String, Integer> shop) {
+    public String combineOutput(Map<String, Integer> shop) {
         String result = "fruit,quantity";
         for (Map.Entry<String, Integer> record : shop.entrySet()) {
             result = result + "\n" + record.getKey() + "," + record.getValue();
