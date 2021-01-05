@@ -4,5 +4,5 @@ import core.basesyntax.model.TransactionDto;
 import java.util.List;
 
 public interface ParseFruit {
-    List<TransactionDto> parse(String data);
+    List<TransactionDto> parse(List<String[]> data);
 }

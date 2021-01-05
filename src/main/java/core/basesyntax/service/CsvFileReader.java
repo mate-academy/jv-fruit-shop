@@ -1,20 +1,19 @@
 package core.basesyntax.service;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import core.basesyntax.exception.ReadFileException;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class CsvFileReader implements FilesReader {
     @Override
-    public String read(String fileName) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-            StringBuilder stringBuilder = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuilder.append(line).append(System.lineSeparator());
-            }
-            return stringBuilder.toString();
+    public List<String[]> read(String fileName) {
+        try (CSVReader reader = new CSVReaderBuilder(Files.newBufferedReader(Paths.get(fileName)))
+                .withSkipLines(1).build()) {
+            return reader.readAll();
         } catch (IOException e) {
             throw new ReadFileException("Can't read read file " + fileName);
         }

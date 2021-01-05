@@ -8,18 +8,16 @@ import java.util.List;
 
 public class ParseFruitImpl implements ParseFruit {
     @Override
-    public List<TransactionDto> parse(String data) {
+    public List<TransactionDto> parse(List<String[]> data) {
         List<TransactionDto> transactionDtos = new ArrayList<>();
-        String[] lines = data.split(System.lineSeparator());
-        for (int i = 1; i < lines.length; i++) {
-            transactionDtos.add(createTransactionDto(lines[i]));
+        for (String[] line : data) {
+            transactionDtos.add(createTransactionDto(line));
         }
         return transactionDtos;
     }
 
-    private TransactionDto createTransactionDto(String line) {
-        String[] words = line.split(",");
-        return new TransactionDto(new Fruit(words[1]),
-                Integer.parseInt(words[2]), Operation.findValue(words[0]));
+    private TransactionDto createTransactionDto(String[] line) {
+        return new TransactionDto(new Fruit(line[1]),
+                Integer.parseInt(line[2]), Operation.findValue(line[0]));
     }
 }

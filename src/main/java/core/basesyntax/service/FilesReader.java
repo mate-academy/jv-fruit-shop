@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.util.List;
+
 public interface FilesReader {
-    String read(String fileName);
+    List<String[]> read(String fileName);
 }

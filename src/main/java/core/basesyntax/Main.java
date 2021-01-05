@@ -1,8 +1,6 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.parse.FruitReport;
-import core.basesyntax.parse.FruitRetortImpl;
 import core.basesyntax.parse.ParseFruit;
 import core.basesyntax.parse.ParseFruitImpl;
 import core.basesyntax.service.CsvFileReader;
@@ -27,11 +25,10 @@ public class Main {
 
         FruitService fruitService = new FruitServiceImpl(operationStrategyMap);
         ParseFruit parseFruit = new ParseFruitImpl();
-        FruitReport fruitReport = new FruitRetortImpl();
         FilesWriter filesWriter = new CsvFileWriter();
         FilesReader filesReader = new CsvFileReader();
 
         fruitService.applyOperations(parseFruit.parse(filesReader.read("storageFile.csv")));
-        filesWriter.write(fruitReport.create(fruitService.getFruitReport()), "report.csv");
+        filesWriter.write("report.csv");
     }
 }
