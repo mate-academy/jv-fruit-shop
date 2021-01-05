@@ -1,5 +1,7 @@
 package core.basesyntax.shopimpl.database;
 
+import static org.junit.Assert.assertEquals;
+
 import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
@@ -7,17 +9,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class StorageDaoTest {
     private FruitShopDao testFruitShopDao;
     
-    @Test
+    @Test(expected = RuntimeException.class)
     public void getAllActionsNonExistingFile() {
         String path = "src/test/java/core/basesyntax/shopimpl"
                       + "/storage/DatabaseNoFile.csv";
-        Assertions.assertThrows(RuntimeException.class, () -> new FruitShopDao(path));
+        new FruitShopDao(path);
     }
     
     @Test
@@ -27,7 +28,7 @@ public class StorageDaoTest {
         List<DataRecord> list = testFruitShopDao.getTransactionHistory();
         int expectedSize = 0;
         int actualSize = list.size();
-        Assertions.assertEquals(expectedSize, actualSize);
+        assertEquals(expectedSize, actualSize);
     }
     
     @Test
@@ -47,7 +48,7 @@ public class StorageDaoTest {
                 = List.of(new DataRecord(ShopTransactionsTypes.PURCHASE, new Fruit("banana"), 15),
                 new DataRecord(ShopTransactionsTypes.SUPPLY, new Fruit("banana"), 200));
         
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
     
     @Test
@@ -63,7 +64,7 @@ public class StorageDaoTest {
         int actual = testFruitShopDao.getTransactionHistory().size();
         int expected = 7;
         
-        Assertions.assertEquals(expected, actual);
+        assertEquals(expected, actual);
     }
     
     @Test
@@ -83,7 +84,7 @@ public class StorageDaoTest {
                     "p,banana,15",
                     "s,banana,200");
             List<String> actual = Files.readAllLines(Path.of(path));
-            Assertions.assertLinesMatch(expected, actual);
+            assertEquals(expected, actual);
         } catch (IOException e) {
             throw new RuntimeException("A problem has occurred while working with file", e);
         } finally {
@@ -94,6 +95,5 @@ public class StorageDaoTest {
                 e.printStackTrace();
             }
         }
-        
     }
 }

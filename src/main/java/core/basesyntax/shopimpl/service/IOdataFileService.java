@@ -4,6 +4,7 @@ import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -36,8 +37,10 @@ public class IOdataFileService {
         }
         
         try {
-            Files.delete(Path.of(dataFilePath));
-            Files.writeString(Path.of(dataFilePath), sb.toString(), StandardOpenOption.CREATE_NEW);
+            
+            Files.write(Path.of(dataFilePath),
+                    sb.toString().getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE);
+            
         } catch (IOException e) {
             throw new RuntimeException("A problem has occurred while writing the file");
         }
