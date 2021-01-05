@@ -1,5 +1,4 @@
 .idea/*
 *.iml
-*.csv
 target/*
 src/main/resources
