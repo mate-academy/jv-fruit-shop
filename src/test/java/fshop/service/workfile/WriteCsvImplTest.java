@@ -1,27 +1,26 @@
 package fshop.service.workfile;
 
+import static junit.framework.TestCase.assertEquals;
+
 import fshop.db.FoodDao;
 import fshop.db.FoodDaoImpl;
 import fshop.model.Food;
 import java.util.Map;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class WriteCsvImplTest {
-    @Test
-    void createObject_null() {
-        Assertions.assertThrows(NullPointerException.class, () -> new WriteCsvImpl(null));
+public class WriteCsvImplTest {
+    @Test (expected = NullPointerException.class)
+    public void createObject_null() {
+        new WriteCsvImpl(null);
     }
     
-    @Test
-    void setFoodDao_null() {
-        FoodDao foodDao = null;
-        Assertions.assertThrows(NullPointerException.class,
-                () -> new WriteCsvImpl("report.csv").setFoodDao(foodDao));
+    @Test (expected = NullPointerException.class)
+    public void setFoodDao_null() {
+        new WriteCsvImpl("report.csv").setFoodDao(null);
     }
 
     @Test
-    void write_test1() {
+    public void write_test1() {
         ReadCsv readCsvFirst = new ReadCsvImpl("file.csv");
         FoodDao foodDaoFirst = new FoodDaoImpl(readCsvFirst);
         foodDaoFirst.addAll();
@@ -30,11 +29,11 @@ class WriteCsvImplTest {
         writeCsvFirst.setFoodDao(foodDaoFirst);
         Map<Food, Integer> actual = writeCsvFirst.write();
 
-        Assertions.assertEquals(2, actual.size());
+        assertEquals(2, actual.size());
     }
 
     @Test
-    void write_test2() {
+    public void write_test2() {
         ReadCsv readCsvSecond = new ReadCsvImpl("file2.csv");
         FoodDao foodDaoSecond = new FoodDaoImpl(readCsvSecond);
         foodDaoSecond.addAll();
@@ -43,6 +42,6 @@ class WriteCsvImplTest {
         writeCsvSecond.setFoodDao(foodDaoSecond);
         Map<Food, Integer> actual = writeCsvSecond.write();
 
-        Assertions.assertEquals(2, actual.size());
+        assertEquals(2, actual.size());
     }
 }

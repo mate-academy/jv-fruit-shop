@@ -1,45 +1,45 @@
 package fshop.service.workfile;
 
+import static junit.framework.TestCase.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class ReadCsvImplTest {
-    @Test
-    void createObject_null() {
-        Assertions.assertThrows(NullPointerException.class, () -> new ReadCsvImpl(null));
+public class ReadCsvImplTest {
+    @Test (expected = NullPointerException.class)
+    public void createObject_null() {
+        new ReadCsvImpl(null);
+    }
+
+    @Test (expected = RuntimeException.class)
+    public void notExist_file() {
+        new ReadCsvImpl("asdad").read();
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void negative_valueOfFile() {
+        new ReadCsvImpl("fileNegativeValues.csv").read();
     }
 
     @Test
-    void notExist_file() {
-        Assertions.assertThrows(RuntimeException.class, () -> new ReadCsvImpl("asdad").read());
-    }
-
-    @Test
-    void negative_valueOfFile() {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new ReadCsvImpl("fileNegativeValues.csv").read());
-    }
-
-    @Test
-    void test1_readOk() throws IOException {
+    public void test1_readOk() throws IOException {
         ReadCsv readCsv = new ReadCsvImpl("file.csv");
         List<String> expected = Files.readAllLines(Paths.get(new File("file.csv")
                 .getAbsolutePath()));
         expected.remove(0);
-        Assertions.assertEquals(expected, readCsv.read());
+        assertEquals(expected, readCsv.read());
     }
 
     @Test
-    void test2_readOk() throws IOException {
+    public void test2_readOk() throws IOException {
         ReadCsv readCsv = new ReadCsvImpl("file2.csv");
         List<String> expected = Files.readAllLines(Paths.get(new File("file2.csv")
                 .getAbsolutePath()));
         expected.remove(0);
-        Assertions.assertEquals(expected, readCsv.read());
+        assertEquals(expected, readCsv.read());
     }
 }
