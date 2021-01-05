@@ -91,6 +91,5 @@ public class TestStrategy {
         Fruit fruit = new Fruit("apple");
         transactionDto = new TransactionDto(operation, fruit, 110);
         purchaseStrategy.apply(transactionDto);
-
     }
 }
