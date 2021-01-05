@@ -17,9 +17,13 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void applyOperations(List<TransactionDto> transactionDtos) {
+        if (transactionDtos == null) {
+            throw new RuntimeException("Data can't be null!");
+        }
         for (TransactionDto dto : transactionDtos) {
             Operation operation = dto.getOperation();
             operationStrategyMap.get(operation).apply(dto);
+
         }
     }
 

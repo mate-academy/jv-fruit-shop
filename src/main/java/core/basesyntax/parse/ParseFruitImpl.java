@@ -9,11 +9,14 @@ import java.util.List;
 public class ParseFruitImpl implements ParseFruit {
     @Override
     public List<TransactionDto> parse(List<String[]> data) {
-        List<TransactionDto> transactionDtos = new ArrayList<>();
-        for (String[] line : data) {
-            transactionDtos.add(createTransactionDto(line));
+        if (data != null) {
+            List<TransactionDto> transactionDtos = new ArrayList<>();
+            for (String[] line : data) {
+                transactionDtos.add(createTransactionDto(line));
+            }
+            return transactionDtos;
         }
-        return transactionDtos;
+        throw new RuntimeException("Can't parse null data!");
     }
 
     private TransactionDto createTransactionDto(String[] line) {

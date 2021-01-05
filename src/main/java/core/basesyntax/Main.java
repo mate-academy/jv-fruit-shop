@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    public static final String STORAGE_FILE = "src/main/resources/storageFile.csv";
+    public static final String REPORT_FILE = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put(Operation.BALANCE, new AdditionStrategy());
@@ -28,7 +31,7 @@ public class Main {
         FilesWriter filesWriter = new CsvFileWriter();
         FilesReader filesReader = new CsvFileReader();
 
-        fruitService.applyOperations(parseFruit.parse(filesReader.read("storageFile.csv")));
-        filesWriter.write("report.csv");
+        fruitService.applyOperations(parseFruit.parse(filesReader.read(STORAGE_FILE)));
+        filesWriter.write(fruitService.getFruitReport(),REPORT_FILE);
     }
 }
