@@ -6,5 +6,5 @@ import core.basesyntax.model.TransactionDto;
 public interface OperationStrategy {
     OperationsDao dao = new OperationsDao();
 
-    void apply(TransactionDto transactionObject, int quantity);
+    void apply(TransactionDto transactionObject);
 }

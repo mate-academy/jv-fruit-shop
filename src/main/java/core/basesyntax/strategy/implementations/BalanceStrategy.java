@@ -5,7 +5,7 @@ import core.basesyntax.strategy.OperationStrategy;
 
 public class BalanceStrategy implements OperationStrategy {
     @Override
-    public void apply(TransactionDto transactionObject, int quantity) {
+    public void apply(TransactionDto transactionObject) {
         dao.addToStorage(transactionObject.getItem(), transactionObject.getQuantity());
     }
 }

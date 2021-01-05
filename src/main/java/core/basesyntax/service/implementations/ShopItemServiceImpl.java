@@ -6,8 +6,6 @@ import core.basesyntax.model.ShopItem;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.ShopItemService;
 import core.basesyntax.strategy.OperationStrategy;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,13 +20,14 @@ public class ShopItemServiceImpl implements ShopItemService {
     public void applyOperationOnShopItem(List<TransactionDto> transactionDtoList) {
         for (TransactionDto dto : transactionDtoList) {
             OperationStrategy operationStrategy = operationStrategyMap.get(dto.getOperation());
-            operationStrategy.apply(dto, dto.getQuantity());
+            operationStrategy.apply(dto);
         }
     }
 
     @Override
     public String getStringReport() {
         StringBuilder report = new StringBuilder();
+        report.append("fruit,quantity");
         for (Map.Entry<ShopItem, Integer> entry : Storage.storage.entrySet()) {
             String line = entry.getKey().getName() + "," + entry.getValue();
             report.append(System.lineSeparator()).append(line);

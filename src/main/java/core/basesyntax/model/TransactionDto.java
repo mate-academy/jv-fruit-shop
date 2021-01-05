@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import core.basesyntax.db.Storage;
-
 public class TransactionDto {
     private final Operation operation;
     private final ShopItem shopItem;

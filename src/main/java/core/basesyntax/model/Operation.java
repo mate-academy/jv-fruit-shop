@@ -6,7 +6,7 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    private String operation;
+    private final String operation;
 
     Operation(String operation) {
         this.operation = operation;
@@ -19,9 +19,5 @@ public enum Operation {
             }
         }
         throw new IllegalArgumentException("No constant with operation " + operation + " found");
-    }
-
-    public String getOperation() {
-        return operation;
     }
 }
