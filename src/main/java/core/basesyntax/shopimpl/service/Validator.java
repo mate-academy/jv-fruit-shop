@@ -12,16 +12,20 @@ public class Validator {
                                             Map<Fruit, Integer> storage) throws Exception {
         int currentAmount = storage.get(item);
         if (currentAmount < amount) {
-            throw new IllegalPurchaseAmountException("Sorry, out shop can't provide " + amount
-                                                     + " of " + item + "s. We can offer you only "
-                                                     + currentAmount);
+            String message = String
+                    .format("Sorry, out shop can't provide %d of %s's. We can offer you only %d",
+                    amount,
+                    item.getItemName(),
+                    currentAmount);
+            
+            throw new IllegalPurchaseAmountException(message);
         }
     }
     
     public static void transactionValidator(ShopTransactionsType transactionsType,
                                             AbstractItem item,
-                                            int amount) {
-        if (transactionsType == null || item == null) {
+                                            Integer amount) {
+        if (transactionsType == null || item == null || amount == null) {
             throw new RuntimeException("NonNull arguments expected");
         }
     }

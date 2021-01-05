@@ -51,7 +51,7 @@ public class IOdataFileService {
             }
             String[] data = lines.get(i).split(FILE_DELIMITER);
             if (data[FILE_INDEX_OF_AMOUNT].matches("[^0-9]")
-                || Integer.parseInt(data[FILE_INDEX_OF_AMOUNT]) < 0) {
+                    || Integer.parseInt(data[FILE_INDEX_OF_AMOUNT]) < 0) {
                 throw new IllegalArgumentException("The file line doesn't"
                                                    + " contain proper values or fields");
             }
