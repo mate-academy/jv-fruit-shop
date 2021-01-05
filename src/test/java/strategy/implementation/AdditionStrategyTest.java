@@ -23,7 +23,6 @@ public class AdditionStrategyTest {
                 new Fruit("durian"), 100);
     }
 
-    @Test
     public void applyAdditionStrategy_Ok() {
         additionStrategy.apply(papayaDto);
         additionStrategy.apply(durianDto);
