@@ -1,9 +1,12 @@
 package core.basesyntax;
 
-import core.basesyntax.fileservice.CSVFileReaderService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Operation;
+import core.basesyntax.model.Transaction;
+import core.basesyntax.service.impl.CSVFileReaderService;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,31 +18,58 @@ public class CSVFileReaderServiceTest {
     private static final String THURSDAY = "src/test/resources/data_for_thursday.csv";
     private static final String FRIDAY = "src/test/resources/data_for_friday.csv";
     private static final String SATURDAY = "src/test/resources/data_for_saturday.csv";
-    private static final String NON_CSV = "src/test/resources/non_csv.txt";
+    private static final String SUNDAY = "src/test/resources/data_for_sunday.csv";
     private static CSVFileReaderService csvFileReaderService;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeAll() {
         csvFileReaderService = new CSVFileReaderService();
     }
 
     @Test
-    void readFromNonCSVFile_NotOk() {
-        Assertions.assertThrows(RuntimeException.class, () -> csvFileReaderService.readFromFile(NON_CSV));
+    public void readFromFile_Ok() {
+        Fruit BANANA = new Fruit("banana");
+        Fruit APPLE = new Fruit("apple");
+        List<Transaction> expected = new ArrayList<>();
+        expected.add(new Transaction(Operation.BALANCE, BANANA, 20));
+        expected.add(new Transaction(Operation.BALANCE, APPLE, 100));
+        expected.add(new Transaction(Operation.SUPPLY, BANANA, 100));
+        expected.add(new Transaction(Operation.PURCHASE, BANANA, 13));
+        expected.add(new Transaction(Operation.RETURN, APPLE, 10));
+        expected.add(new Transaction(Operation.PURCHASE, APPLE, 20));
+        expected.add(new Transaction(Operation.PURCHASE, BANANA, 5));
+        expected.add(new Transaction(Operation.SUPPLY, BANANA, 50));
+        List<Transaction> actual = csvFileReaderService.readFromFile(MONDAY);
+        Assert.assertArrayEquals(expected.toArray(), actual.toArray());
     }
 
-    @Test
-    void readFromFile_Ok() {
-        List<String[]> expected = new ArrayList<>();
-        expected.add(new String[]{"b", "banana", "20"});
-        expected.add(new String[]{"b", "apple", "100"});
-        expected.add(new String[]{"s", "banana", "100"});
-        expected.add(new String[]{"p", "banana", "13"});
-        expected.add(new String[]{"r", "apple", "10"});
-        expected.add(new String[]{"p", "apple", "20"});
-        expected.add(new String[]{"p", "banana", "5"});
-        expected.add(new String[]{"s", "banana", "50"});
-        List<String[]> actual = csvFileReaderService.readFromFile(MONDAY);
-        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
+    @Test(expected = RuntimeException.class)
+    public void readFromFileNegativeQuantity_NotOk() {
+        csvFileReaderService.readFromFile(TUESDAY);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFromFileBigPurchaseQuantity_NotOk() {
+        csvFileReaderService.readFromFile(WEDNESDAY);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFromFileInvalidOperation_NotOk() {
+        csvFileReaderService.readFromFile(FRIDAY);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFromFileEmptyQuantity_NotOk() {
+        csvFileReaderService.readFromFile(THURSDAY);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFromFileBalanceInTheMiddle_NotOk() {
+        csvFileReaderService.readFromFile(SATURDAY);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readFromFileIncorrectInputFile_NotOk() {
+        csvFileReaderService.readFromFile(SUNDAY);
     }
 }
