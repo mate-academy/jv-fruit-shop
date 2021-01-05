@@ -1,8 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
-import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.Filereader;
+import core.basesyntax.service.CsvFileReader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,15 +8,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.basesyntax.model.Operation.fromString;
-
-public class CsvFilereaderImpl implements Filereader {
-    public static final int OPERATION = 0;
-    public static final int FRUIT = 1;
-    public static final int QUANTITY = 2;
+public class CsvFilereaderImpl implements CsvFileReader {
+    public static final int FIRST_LINE_FROM_FILE = 0;
 
     @Override
-    public List<TransactionDto> readFile(String fileName) {
+    public List<String> readFile(String fileName) {
         StringBuilder report = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String value = reader.readLine();
@@ -30,13 +24,11 @@ public class CsvFilereaderImpl implements Filereader {
             throw new RuntimeException("Can't read file - " + fileName, e);
         }
         String[] valuesReport = report.toString().split(System.lineSeparator());
-        List<TransactionDto> dataFromFile = new ArrayList<>();
-        for(String value: valuesReport) {
-            String[] splittedData =  value.split(",");
-            dataFromFile.add(new TransactionDto(fromString(splittedData[OPERATION]),
-                    new Fruit(splittedData[FRUIT]) ,Integer.valueOf(splittedData[QUANTITY])));
+        List<String> dataString = new ArrayList<>();
+        for (String data: valuesReport) {
+            dataString.add(data);
         }
-
-        return dataFromFile;
+        dataString.remove(FIRST_LINE_FROM_FILE);
+        return dataString;
     }
 }
