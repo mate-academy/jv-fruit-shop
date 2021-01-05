@@ -22,6 +22,6 @@ public enum Operation {
         return Arrays.stream(Operation.values())
                 .filter(o -> o.getOperationSymbol().equals(operationSymbol))
                 .findFirst()
-                .get();
+                .orElseThrow(UnsupportedOperationException::new);
     }
 }

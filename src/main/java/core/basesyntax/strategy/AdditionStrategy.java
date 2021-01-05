@@ -9,10 +9,8 @@ public class AdditionStrategy implements OperationStrategy {
         if (transactionDto == null) {
             throw new RuntimeException("Transaction dto can't be null!");
         }
-        Integer oldNumber = Storage.storage.get(transactionDto.getFruit());
-        if (oldNumber == null) {
-            oldNumber = 0;
-        }
+        Integer oldNumber = Storage.storage.get(transactionDto.getFruit()) == null ? 0
+                : Storage.storage.get(transactionDto.getFruit());
         Storage.storage.put(transactionDto.getFruit(),
                 oldNumber + transactionDto.getNumber());
     }

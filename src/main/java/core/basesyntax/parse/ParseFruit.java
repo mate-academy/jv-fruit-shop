@@ -1,8 +1,7 @@
 package core.basesyntax.parse;
 
-import core.basesyntax.model.TransactionDto;
 import java.util.List;
 
-public interface ParseFruit {
-    List<TransactionDto> parse(List<String[]> data);
+public interface ParseFruit<T> {
+    List<T> parse(List<String[]> data);
 }

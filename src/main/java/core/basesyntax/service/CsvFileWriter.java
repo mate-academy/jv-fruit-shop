@@ -8,16 +8,16 @@ import java.nio.file.Path;
 import java.util.Map;
 
 public class CsvFileWriter implements FilesWriter {
-    private final String[] head = {"fruit", "quantity"};
+    private static final String[] HEAD = {"fruit", "quantity"};
 
     @Override
-    public void write(Map<Fruit, Integer> result, String fileName) {
+    public void write(Map<Fruit, Integer> report, String fileName) {
         try (CSVWriter writer = new CSVWriter(Files.newBufferedWriter(Path.of(fileName)),
                 CSVWriter.DEFAULT_SEPARATOR,
                 CSVWriter.NO_QUOTE_CHARACTER,
                 CSVWriter.DEFAULT_LINE_END)) {
-            writer.writeNext(head);
-            for (Map.Entry<Fruit, Integer> entry : result.entrySet()) {
+            writer.writeNext(HEAD);
+            for (Map.Entry<Fruit, Integer> entry : report.entrySet()) {
                 writer.writeNext(new String[]{entry.getKey().getName(),
                         String.valueOf(entry.getValue())});
             }

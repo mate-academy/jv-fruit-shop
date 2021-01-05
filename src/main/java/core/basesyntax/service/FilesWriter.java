@@ -4,5 +4,5 @@ import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public interface FilesWriter {
-    void write(Map<Fruit, Integer> result, String fileName);
+    void write(Map<Fruit, Integer> report, String fileName);
 }

@@ -14,7 +14,7 @@ public class CsvFileReader implements FilesReader {
                 .withSkipLines(1).build()) {
             return reader.readAll();
         } catch (IOException e) {
-            throw new RuntimeException("Can't read read file " + fileName);
+            throw new RuntimeException("Can't read file " + fileName);
         }
     }
 }
