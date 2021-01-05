@@ -26,6 +26,12 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -90,7 +96,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/Application*</exclude>
+                        <exclude>**/model/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
