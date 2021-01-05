@@ -16,7 +16,7 @@
         <maven.checkstyle.plugin.configLocation>
             https://raw.githubusercontent.com/mate-academy/style-guides/master/java/checkstyle.xml
         </maven.checkstyle.plugin.configLocation>
-        <jacoco.version>0.8.5</jacoco.version>
+        <jacoco.version>0.8.6</jacoco.version>
     </properties>
 
     <dependencies>
@@ -90,7 +90,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/ApplicationStarter*</exclude>
+                        <exclude>**/model/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -111,4 +112,3 @@
         </pluginManagement>
     </build>
 </project>
-
