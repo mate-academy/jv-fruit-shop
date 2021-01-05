@@ -1,6 +1,8 @@
 package core.basesyntax.shopimpl.fruitshopstrategy;
 
 import core.basesyntax.model.abstractstorage.AbstractItem;
+import core.basesyntax.model.abstractstorage.AbstractStorage;
+import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.AbstractTransaction;
 import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.database.FruitShopDao;
@@ -10,7 +12,7 @@ import core.basesyntax.shopimpl.storage.FruitShopStorage;
 
 public class ReturnTransaction extends AbstractTransaction<DataRecord, Fruit> {
     
-    public ReturnTransaction(FruitShopStorage storage, FruitShopDao shopDao) {
+    public ReturnTransaction(AbstractStorage<DataRecord, Fruit> storage, ShopDao<DataRecord> shopDao) {
         super(storage, shopDao);
     }
     

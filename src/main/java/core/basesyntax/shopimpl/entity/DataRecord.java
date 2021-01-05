@@ -43,13 +43,4 @@ public class DataRecord {
     public int hashCode() {
         return Objects.hash(action, item, amount);
     }
-    
-    @Override
-    public String toString() {
-        return "DataRecord{"
-               + "action=" + action
-               + ", item=" + item
-               + ", amount=" + amount
-               + '}';
-    }
 }

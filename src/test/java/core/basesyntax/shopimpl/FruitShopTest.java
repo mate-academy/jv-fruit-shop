@@ -3,12 +3,14 @@ package core.basesyntax.shopimpl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import core.basesyntax.model.AbstractShop;
 import core.basesyntax.model.abstractstorage.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.database.FruitShopDao;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
+import core.basesyntax.shopimpl.entity.IllegalPurchaseAmountException;
 import core.basesyntax.shopimpl.storage.FruitShopStorage;
 import org.junit.Test;
 
@@ -23,8 +25,12 @@ public class FruitShopTest {
             = "src/test/resources/SeveralFruitsDatabase.csv";
     private String getSeveralFruitsAndActionFilePath
             = "src/test/resources/SeveralFruitsAndActionsTestDatabase.csv";
+    private String testDatabase
+            = "src/test/resources/testDataBase.csv";
+    
     private ShopDao<DataRecord> shopDao;
     private AbstractStorage<DataRecord, Fruit> storage;
+    private AbstractShop<DataRecord, Fruit> shop;
     
     @Test
     public void emptyFileStorageInit() {
@@ -72,11 +78,12 @@ public class FruitShopTest {
         assertEquals(expectedAmountFruit1, actualAmountFruit1);
     }
     
-    //    @Test(expected = IllegalPurchaseAmountException.class)
-    //    public void shopExceptionExpected() {
-    //        shopDao = new FruitShopDao(illegalEntryFilePath);
-    //        storage = new FruitShopStorage(shopDao);
-    //    }
+    @Test(expected = IllegalPurchaseAmountException.class)
+    public void shopExceptionExpected() {
+        shopDao = new FruitShopDao(illegalEntryFilePath);
+        storage = new FruitShopStorage(shopDao);
+        shop = new FruitShop(storage, shopDao);
+    }
     
     @Test
     public void performAction() {
