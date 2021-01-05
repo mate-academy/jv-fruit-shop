@@ -1,6 +1,8 @@
 package core.basesyntax;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
+import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.FruitService;
@@ -13,6 +15,7 @@ import core.basesyntax.strategy.PurchaseStrategy;
 import core.basesyntax.strategy.ReturnStrategy;
 import core.basesyntax.strategy.SupplyStrategy;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -28,8 +31,13 @@ public class Main {
 
         CsvFileReader csvFileReader = new CsvFileReaderImpl();
         FruitService fruitService = new FruitServiceImpl(operationStrategyMap);
-        fruitService.applyOperationsOnFruitsDto(csvFileReader.readFromFile(FILE_PATH));
+        List<TransactionDto> transactionDtoList = csvFileReader.readFromFile(FILE_PATH);
+
+        fruitService.applyOperationsOnFruitsDto(transactionDtoList);
+
         CsvFileWriter csvFileWriter = new CsvFileWriterImpl();
-        csvFileWriter.reportFile(fruitService.getFruitsReport(), FRUIT_REPORT_CSV);
+        Map<Fruit, Integer> fruitReport = fruitService.getFruitsReport();
+
+        csvFileWriter.reportFile(fruitReport, FRUIT_REPORT_CSV);
     }
 }

@@ -37,16 +37,19 @@ public class CsvFileReaderImpl implements CsvFileReader {
             Operation operation = Operation.fromString(strings[0]);
             Fruit fruit = new Fruit(strings[1]);
             int quality = Integer.parseInt(strings[2]);
-
-            if (quality < 0 || (!operation.equals(Operation.RETURN)
-                    && !operation.equals(Operation.BALANCE))
-                    && !operation.equals(Operation.SUPPLY)
-                    && !operation.equals(Operation.PURCHASE)) {
-                throw new RuntimeException("File is wrong");
-            }
+            correctData(operation, quality);
             transactionDtos.add(new TransactionDto(operation, fruit, quality));
         }
         return transactionDtos;
+    }
+
+    private void correctData(Operation operation, int quality) {
+        if (quality < 0 || (!operation.equals(Operation.RETURN)
+                && !operation.equals(Operation.BALANCE))
+                && !operation.equals(Operation.SUPPLY)
+                && !operation.equals(Operation.PURCHASE)) {
+            throw new RuntimeException("File is wrong");
+        }
     }
 }
 

@@ -13,9 +13,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
+    private FruitService fruitService;
+
+    @Before
+    public void setUp() {
+        fruitService = new FruitServiceImpl(operationStrategyMap());
+    }
+
     @Test
     public void correctStorage_Ok() {
         List<TransactionDto> transactionDtoList = List.of(
@@ -25,7 +33,6 @@ public class FruitServiceImplTest {
                 new TransactionDto(Operation.RETURN, new Fruit("apple"), 10),
                 new TransactionDto(Operation.SUPPLY, new Fruit("banana"), 20));
 
-        FruitService fruitService = new FruitServiceImpl(operationStrategyMap());
         fruitService.applyOperationsOnFruitsDto(transactionDtoList);
 
         Map<Fruit, Integer> actual = fruitService.getFruitsReport();
@@ -42,7 +49,6 @@ public class FruitServiceImplTest {
                 new TransactionDto(Operation.BALANCE, new Fruit("apple"), 100),
                 new TransactionDto(Operation.PURCHASE, new Fruit("banana"), 50));
 
-        FruitService fruitService = new FruitServiceImpl(operationStrategyMap());
         fruitService.applyOperationsOnFruitsDto(transactionDtoList);
     }
 

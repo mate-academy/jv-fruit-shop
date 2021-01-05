@@ -6,32 +6,29 @@ import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.CsvFileReader;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 public class CsvFileReaderImplTest {
-    private CsvFileReader csvFileReader;
-
-    @Before
-    public void setUp() {
-        csvFileReader = new CsvFileReaderImpl();
-    }
+    private static final String INCORRECT_QUALITY_FRUIT_SHOP_CSV = "src/test/resources/"
+            + "incorrectQuality_fruit_shop.csv";
+    private static final String INCORRECT_OPERATION_FRUIT_SHOP_CSV = "src/test/resources/"
+            + "incorrectOperation_fruit_shop.csv";
+    private static final String CORRECT_FRUIT_SHOP_CSV = "src/test/resources/"
+            + "correct_fruit_shop.csv";
+    private static final CsvFileReader CSV_FILE_READER = new CsvFileReaderImpl();
 
     @Test(expected = RuntimeException.class)
     public void correctQuality_notOk() {
-        String filePath = "src/test/resources/incorrectQuality_fruit_shop.csv";
-        csvFileReader.readFromFile(filePath);
+        CSV_FILE_READER.readFromFile(INCORRECT_QUALITY_FRUIT_SHOP_CSV);
     }
 
     @Test(expected = RuntimeException.class)
     public void correctOperation_notOk() {
-        String filePath = "src/test/resources/incorrectOperation_fruit_shop.csv";
-        csvFileReader.readFromFile(filePath);
+        CSV_FILE_READER.readFromFile(INCORRECT_OPERATION_FRUIT_SHOP_CSV);
     }
 
     @Test
     public void readCsvFile_Ok() {
-        String filePath = "src/test/resources/correct_fruit_shop.csv";
         List<TransactionDto> expectedTransactionDtoList =
                 List.of(new TransactionDto(Operation.BALANCE, new Fruit("banana"), 20),
                         new TransactionDto(Operation.BALANCE, new Fruit("apple"), 100),
@@ -39,7 +36,8 @@ public class CsvFileReaderImplTest {
                         new TransactionDto(Operation.RETURN, new Fruit("apple"), 10),
                         new TransactionDto(Operation.SUPPLY, new Fruit("apple"), 20));
 
-        List<TransactionDto> actualTransactionDtoList = csvFileReader.readFromFile(filePath);
+        List<TransactionDto> actualTransactionDtoList = CSV_FILE_READER
+                .readFromFile(CORRECT_FRUIT_SHOP_CSV);
         Assert.assertEquals(expectedTransactionDtoList, actualTransactionDtoList);
     }
 }
