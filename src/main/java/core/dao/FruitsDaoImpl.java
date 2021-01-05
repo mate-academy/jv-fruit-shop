@@ -1,6 +1,7 @@
 package core.dao;
 
 import core.db.Storage;
+import java.util.Map;
 import java.util.Optional;
 
 public class FruitsDaoImpl implements FruitsDao {
@@ -14,4 +15,10 @@ public class FruitsDaoImpl implements FruitsDao {
         Optional<Integer> optionalInteger = Optional.ofNullable(Storage.fruits.get(fruit));
         return optionalInteger.orElse(0);
     }
+
+    @Override
+    public Map<String, Integer> getAll() {
+        return Storage.fruits;
+    }
+
 }

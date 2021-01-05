@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CreateReportToCsv implements CreateReportToFile {
+public class CsvFileWriterService implements FileWriterService {
     private static final String FORMAT_FOR_REPORT =
             "fruit,quantity" + System.lineSeparator() + "%s";
 

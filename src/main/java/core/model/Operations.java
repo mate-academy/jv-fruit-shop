@@ -12,16 +12,12 @@ public enum Operations {
         this.operationHandler = operationHandler;
     }
 
-    public String getOperation() {
-        return operationHandler;
-    }
-
     public static Operations operationFromString(String operationSignature) {
         for (Operations operations : Operations.values()) {
             if (operations.operationHandler.equalsIgnoreCase(operationSignature)) {
                 return operations;
             }
         }
-        throw new RuntimeException("Incorrect type of operation: " + operationSignature);
+        throw new RuntimeException("This operation doesn't exist: " + operationSignature);
     }
 }

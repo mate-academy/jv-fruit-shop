@@ -1,17 +1,17 @@
 package core.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class BalanceAmountHandlerTest {
     private static AmountHandler balanceAmountHandler;
     private static final String STRING_FORMAT_FOR_WRONG =
             "Wrong operation! expected: %d But was: %d";
 
-    @BeforeAll
-    public static void beforeAll() {
+    @Before
+    public void beforeAll() {
         balanceAmountHandler = new BalanceAmountHandler();
     }
 
@@ -21,9 +21,7 @@ public class BalanceAmountHandlerTest {
         int secondExpected = 65;
         int firstActual = balanceAmountHandler.calculateAmount(0, 15);
         int secondActual = balanceAmountHandler.calculateAmount(30, 35);
-        assertEquals(firstExpected, firstActual,
-                String.format(STRING_FORMAT_FOR_WRONG, firstExpected, firstActual));
-        assertEquals(firstExpected, firstActual,
-                String.format(STRING_FORMAT_FOR_WRONG, secondExpected, secondActual));
+        assertEquals(firstExpected, firstActual);
+        assertEquals(secondExpected, secondActual);
     }
 }

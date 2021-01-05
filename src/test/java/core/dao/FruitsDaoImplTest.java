@@ -1,18 +1,19 @@
 package core.dao;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.db.Storage;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class FruitsDaoImplTest {
     private static FruitsDao fruitsDao;
-    private static final String STRING_FORMAT_FOR_WRONG =
-            "Wrong operation! expected: %s But was: %s";
-    @BeforeAll
-    static void beforeAll() {
+
+    @BeforeClass
+    public static void beforeAll() {
         fruitsDao = new FruitsDaoImpl();
         Storage.fruits.put("banana", 150);
         Storage.fruits.put("mango", 150);
@@ -22,33 +23,42 @@ public class FruitsDaoImplTest {
     }
 
     @Test
-    void testForAdd() {
+    public void testForAdd() {
         fruitsDao.add("apple", 20);
         int firstExpected = 6;
         int firstActual = Storage.fruits.size();
-        assertEquals(firstExpected, firstActual, String.format(STRING_FORMAT_FOR_WRONG,
-                firstExpected, firstActual));
+        assertEquals(firstExpected, firstActual);
         fruitsDao.add("banana", 20);
         int secondExpected = 6;
         int secondActual = Storage.fruits.size();
-        assertEquals(secondExpected, secondActual, String.format(STRING_FORMAT_FOR_WRONG,
-                secondExpected, secondActual));
+        assertEquals(secondExpected, secondActual);
     }
 
     @Test
-    void testForGet() {
+    public void testForGet() {
         int firstExpected = 20;
         int firstActual = fruitsDao.get("banana");
         int secondExpected = 0;
         int secondActual = fruitsDao.get("dog");
-        assertEquals(firstExpected, firstActual, String.format(STRING_FORMAT_FOR_WRONG,
-                firstExpected, firstActual));
-        assertEquals(secondExpected, secondActual, String.format(STRING_FORMAT_FOR_WRONG,
-                secondExpected, secondActual));
+        assertEquals(firstExpected, firstActual);
+        assertEquals(secondExpected, secondActual);
     }
 
-    @AfterAll
-    static void afterAll() {
+    @Test
+    public void testForGetAll() {
+        Map<String, Integer> firstExpected = new LinkedHashMap<>();
+        firstExpected.put("banana", 20);
+        firstExpected.put("mango", 150);
+        firstExpected.put("lemon", 220);
+        firstExpected.put("lime", 230);
+        firstExpected.put("orange", 420);
+        firstExpected.put("apple", 20);
+        Map<String, Integer> firstActual = fruitsDao.getAll();
+        assertEquals(firstExpected, firstActual);
+    }
+
+    @AfterClass
+    public static void afterAll() {
         Storage.fruits.clear();
     }
 }

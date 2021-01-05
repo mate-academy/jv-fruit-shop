@@ -1,13 +1,10 @@
 package core.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 public class OperationsTest {
-    private static final String STRING_FORMAT_FOR_WRONG =
-            "Wrong operation! expected: %s But was: %s";
     @Test
     public void testForCorrectInput() {
         Operations firstExpected = Operations.BALANCE;
@@ -16,18 +13,23 @@ public class OperationsTest {
         Operations firstActual = Operations.operationFromString("b");
         Operations secondActual = Operations.operationFromString("p");
         Operations thirdActual = Operations.operationFromString("r");
-        assertEquals(firstExpected, firstActual, String.format(STRING_FORMAT_FOR_WRONG,
-                firstExpected, firstActual));
-        assertEquals(secondExpected, secondActual, String.format(STRING_FORMAT_FOR_WRONG,
-                secondActual, secondActual));
-        assertEquals(thirdExpected, thirdActual, String.format(STRING_FORMAT_FOR_WRONG,
-                thirdExpected, thirdActual));
+        assertEquals(firstExpected, firstActual);
+        assertEquals(secondExpected, secondActual);
+        assertEquals(thirdExpected, thirdActual);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void testForIncorrectData() {
-        assertThrows(RuntimeException.class, () -> Operations.operationFromString("d"));
-        assertThrows(RuntimeException.class, () -> Operations.operationFromString(""));
-        assertThrows(RuntimeException.class, () -> Operations.operationFromString("$"));
+        Operations.operationFromString("1235");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testForIncorrectDataSecond() {
+        Operations.operationFromString("");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testForIncorrectDataThird() {
+        Operations.operationFromString("$");
     }
 }
