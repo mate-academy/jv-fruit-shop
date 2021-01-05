@@ -16,7 +16,8 @@ public class ReturnTransaction extends AbstractTransaction<DataRecord, Fruit> {
     
     @Override
     public void apply(AbstractItem item, int amount) {
-        super.getShopDao().addTransaction(new DataRecord(ShopTransactionsTypes.SUPPLY, item, amount));
+        super.getShopDao()
+                .addTransaction(new DataRecord(ShopTransactionsTypes.SUPPLY, item, amount));
         super.getShopDao().updateDatabase();
         int update = super.getStorage().get(item) + amount;
         super.getStorage().put((Fruit) item, update);

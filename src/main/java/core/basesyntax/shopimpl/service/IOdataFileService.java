@@ -15,7 +15,7 @@ public class IOdataFileService {
     private static final int FILE_INDEX_OF_ACTION = 0;
     private static final int FILE_INDEX_OF_ITEM = 1;
     private static final int FILE_INDEX_OF_AMOUNT = 2;
-    private String dataFilePath;
+    private final String dataFilePath;
     
     public IOdataFileService(String dataFilePath) {
         this.dataFilePath = dataFilePath;
