@@ -33,7 +33,7 @@ Let's check in details all types of activities:
 1. Purchase. Buyers can visit your shop and buy some fruits. In this case you will have the following line in the file:
     
     ```text
-       b,banana,13  
+       p,banana,13  
     ```
    The line above means someone bought a 13 bananas.
 1. Return. Buyers can return you some fruits. In this case you will have the following line in the file:
