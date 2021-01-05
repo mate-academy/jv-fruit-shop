@@ -10,8 +10,8 @@ import java.util.List;
 public class FileReader implements DataReader {
     private final DataValidator validator;
 
-    public FileReader() {
-        validator = new DataValidatorImpl();
+    public FileReader(DataValidator dataValidator) {
+        validator = dataValidator;
     }
 
     @Override
@@ -19,6 +19,7 @@ public class FileReader implements DataReader {
         List<String> list = new ArrayList<>();
         String line;
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(path))) {
+
             while ((line = bufferedReader.readLine()) != null) {
                 list.add(line.trim());
             }

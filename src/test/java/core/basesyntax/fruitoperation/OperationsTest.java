@@ -1,9 +1,11 @@
 package core.basesyntax.fruitoperation;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
-public class OperationsTest extends TestCase {
+public class OperationsTest {
     @Test
     public void test_contains_Ok() {
         assertTrue(Operations.contains("P"));

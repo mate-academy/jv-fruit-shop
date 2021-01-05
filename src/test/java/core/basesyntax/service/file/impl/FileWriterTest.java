@@ -1,55 +1,63 @@
 package core.basesyntax.service.file.impl;
 
-import core.basesyntax.fruitoperation.Operation;
-import core.basesyntax.fruitoperation.OperationBalance;
-import core.basesyntax.fruitoperation.OperationPurchase;
-import core.basesyntax.fruitoperation.OperationReturn;
-import core.basesyntax.fruitoperation.OperationSupply;
-import core.basesyntax.fruitoperation.Operations;
-import core.basesyntax.fruitoperation.strategy.OperationStrategy;
-import core.basesyntax.fruitoperation.strategy.OperationStrategyImpl;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.FruitServiceImpl;
-import core.basesyntax.service.file.DataReader;
 import core.basesyntax.service.file.DataWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FileWriterTest {
-    private static FruitService fruitService;
+    private static DataWriter writer;
 
-    @Before
-    public void setUp() throws Exception {
-        Map<Operations, Operation> operationMap = new HashMap<>();
-        operationMap.put(Operations.B, new OperationBalance());
-        operationMap.put(Operations.P, new OperationPurchase());
-        operationMap.put(Operations.R, new OperationReturn());
-        operationMap.put(Operations.S, new OperationSupply());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
-        fruitService = new FruitServiceImpl(operationStrategy);
+    @BeforeClass
+    public static void beforeClass() {
+        writer = new FileWriter();
     }
 
     @Test
     public void testReportFormattingInFile_Ok() {
-        DataWriter dataWriter = new FileWriter();
-        DataReader dataReader = new FileReader();
-        fruitService.saveToStorage(dataReader.readData("src/main/resources/test2_correct.csv"));
-        dataWriter.writeToFile(fruitService.getFromStorage(),
-                "src/main/resources/ApplesAndBananas");
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "apple,90" + System.lineSeparator() + "banana,152";
+        List<String> list = List.of("fruit,quantity" + System.lineSeparator(),
+                "apple,90" + System.lineSeparator(), "banana,152");
+        writer.writeToFile(list, "src/test/resources/ApplesAndBananas.csv");
         String actual;
         try {
-            actual = Files.readString(Path.of("src/main/resources/ApplesAndBananas"));
+            actual = Files.readString(Path.of("src/test/resources/ApplesAndBananas.csv"));
         } catch (IOException e) {
             throw new RuntimeException("Can't correctly read data from file ApplesAndBananas", e);
         }
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "apple,90" + System.lineSeparator() + "banana,152";
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void writeToFileSimpleText_Ok() {
+        String expected = "The Wise Men will unlearn your name.\n"
+                + "Above your head no star will flame.\n"
+                + "One weary sound will be the same—\n"
+                + "the hoarse roar of the gale.\n"
+                + "The shadows fall from your tired eyes\n"
+                + "as your lone bedside candle dies,\n"
+                + "for here the calendar breeds nights\n"
+                + "till...";
+        List<String> list = List.of("The Wise Men will unlearn your name.\n",
+                "Above your head no star will flame.\n",
+                "One weary sound will be the same—\n",
+                "the hoarse roar of the gale.\n",
+                "The shadows fall from your tired eyes\n",
+                "as your lone bedside candle dies,\n",
+                "for here the calendar breeds nights\n",
+                "till...");
+        writer.writeToFile(list, "src/test/resources/SomeText.csv");
+        List<String> actual;
+        try {
+            actual = Files.readAllLines(Path.of("src/test/resources/SomeText.csv"));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't correctly read data from file SomeText.csv", e);
+        }
+        Assert.assertEquals(expected, String.join("\n", actual));
     }
 }

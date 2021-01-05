@@ -5,5 +5,5 @@ import java.util.List;
 public interface FruitService {
     void saveToStorage(List<String> rows);
 
-    String getFromStorage();
+    List<String> getFromStorage();
 }

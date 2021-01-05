@@ -14,10 +14,11 @@ public class DataValidatorImpl implements DataValidator {
         if (record.get(0).matches(HEAD_FORMAT)) {
             record.remove(0);
         }
-        for (String row: record) {
-            if (!row.matches(ROW_FORMAT)
-                    || !Operations.contains(row.substring(0,1))
-                    || Integer.parseInt(row.substring(row.lastIndexOf(SPLITTER) + 1)) < 0) {
+        for (int i = 0; i < record.size(); i++) {
+            if (!record.get(i).matches(ROW_FORMAT)
+                    || !Operations.contains(record.get(i).substring(0, 1))
+                    || Integer.parseInt(record.get(i).substring(record.get(i)
+                    .lastIndexOf(SPLITTER) + 1)) < 0) {
                 throw new RuntimeException("Incorrect data");
             }
         }
