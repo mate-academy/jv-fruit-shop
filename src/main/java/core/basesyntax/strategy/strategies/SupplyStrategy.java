@@ -7,15 +7,15 @@ import core.basesyntax.strategy.OperationStrategy;
 public class SupplyStrategy implements OperationStrategy {
     @Override
     public void apply(TransactionDto transactionDto) {
-        operationValidation(transactionDto);
         Integer newQuantity = Storage.storage.get(transactionDto.getFruit())
-                + transactionDto.getQuantity();
+                + operationValidation(transactionDto);
         Storage.storage.replace(transactionDto.getFruit(), newQuantity);
     }
 
-    private void operationValidation(TransactionDto transactionDto) {
+    private int operationValidation(TransactionDto transactionDto) {
         if (transactionDto.getQuantity() < 0) {
             throw new RuntimeException("It's unacceptable to be supplied with negative amount!");
         }
+        return transactionDto.getQuantity();
     }
 }
