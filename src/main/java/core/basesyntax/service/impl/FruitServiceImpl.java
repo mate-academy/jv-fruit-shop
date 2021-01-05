@@ -1,11 +1,11 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.validator.OperationValidation;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.validator.OperationValidationImpl;
-import java.util.ArrayList;
-import java.util.Arrays;
+import core.basesyntax.service.validator.OperationValidation;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
@@ -23,35 +23,27 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void getDataFromFile(String filePath) {
-        FileReaderService fileReaderService = new FileReaderServiceImpl(filePath);
-        String[] strings = fileReaderService.getDataFromFile(filePath);
-        fruitsDao.setData(Arrays.asList(strings));
-    }
-
-    @Override
-    public List<Fruit> getFruitsBalance(List<String> data) {
-        List<Fruit> fruits = new ArrayList<>();
+    public void calculateFruitsBalance(List<String> data) {
+        List<Fruit> fruits = fruitsDao.getData();
         Integer value;
         String operation;
+        OperationValidation operationValidator = new OperationValidationImpl();
         for (String s : data) {
             Fruit fruit = new Fruit();
             operation = s.split(",")[OPERATION_POSITION];
             fruit.setName(s.split(",")[FRUIT_NAME_POSITION]);
             value = Integer.parseInt(s.split(",")[VALUE_POSITION]);
 
-            OperationValidation operationValidator = new OperationValidationImpl();
             operationValidator.isValidOperation(operations, operation);
 
             if (!fruits.contains(fruit)) {
-                fruit.setBalance(value);
+                fruit.setBalance(0);
                 fruits.add(fruit);
-            } else {
-                Fruit current = fruits.get(fruits.indexOf(fruit));
-                current.setBalance(operationStrategy.get(operation)
-                        .updateBalance(current.getBalance(), value));
             }
+            Fruit current = fruits.get(fruits.indexOf(fruit));
+            current.setBalance(operationStrategy.get(operation)
+                    .updateBalance(current.getBalance(), value));
         }
-        return fruits;
+        fruitsDao.setData(fruits);
     }
 }

@@ -1,7 +1,9 @@
 package core.basesyntax.service;
 
-public interface FileReaderService {
-    String readFromFile();
+import java.util.List;
 
-    String[] getDataFromFile(String filePath);
+public interface FileReaderService {
+    String readFromFile(String filepath);
+
+    List<String> getDataFromFile(String filePath);
 }

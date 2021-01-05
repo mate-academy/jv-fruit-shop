@@ -1,4 +1,4 @@
-package core.basesyntax.service.operation;
+package core.basesyntax.strategy.operation;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override

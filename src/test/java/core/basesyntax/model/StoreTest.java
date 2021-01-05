@@ -3,13 +3,13 @@ package core.basesyntax.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.OperationStrategyImpl;
-import core.basesyntax.service.operation.BalanceOperationHandler;
-import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.service.operation.PurchaseOperationHandler;
-import core.basesyntax.service.operation.ReturnOperationHandler;
-import core.basesyntax.service.operation.SupplyOperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.operation.BalanceOperationHandler;
+import core.basesyntax.strategy.operation.OperationHandler;
+import core.basesyntax.strategy.operation.PurchaseOperationHandler;
+import core.basesyntax.strategy.operation.ReturnOperationHandler;
+import core.basesyntax.strategy.operation.SupplyOperationHandler;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,14 +33,14 @@ class StoreTest {
 
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
-        store = new FruitStoreImpl(operationStrategy);
+        store = new Store(operationStrategy);
     }
 
     @Test
     void getStatistic_2items() {
-        String fromFilePath = "src\\test1.csv";
-        String toFilePath = "src\\result1.csv";
-        store.getStatistic(fromFilePath, toFilePath);
+        String fromFilePath = "test1.csv";
+        String toFilePath = "result1.csv";
+        store.showStatistic(fromFilePath, toFilePath);
         String actual = readFromFile(toFilePath).trim();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,65" + System.lineSeparator()
@@ -50,9 +50,9 @@ class StoreTest {
 
     @Test
     void getStatistic_3items() {
-        String fromFilePath = "src\\test2.csv";
-        String toFilePath = "src\\result2.csv";
-        store.getStatistic(fromFilePath, toFilePath);
+        String fromFilePath = "test2.csv";
+        String toFilePath = "result2.csv";
+        store.showStatistic(fromFilePath, toFilePath);
         String actual = readFromFile(toFilePath).trim();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,145" + System.lineSeparator()
@@ -63,36 +63,36 @@ class StoreTest {
 
     @Test
     void getStatistic_wrongOperator() {
-        String fromFilePath = "src\\test3.csv";
-        String toFilePath = "src\\result3.csv";
+        String fromFilePath = "test3.csv";
+        String toFilePath = "result3.csv";
         assertThrows(RuntimeException.class, () -> {
-            store.getStatistic(fromFilePath, toFilePath);
+            store.showStatistic(fromFilePath, toFilePath);
         });
     }
 
     @Test
     void getStatistic_negativeQuantity() {
-        String fromFilePath = "src\\test4.csv";
-        String toFilePath = "src\\result4.csv";
+        String fromFilePath = "test4.csv";
+        String toFilePath = "result4.csv";
         assertThrows(RuntimeException.class, () -> {
-            store.getStatistic(fromFilePath, toFilePath);
+            store.showStatistic(fromFilePath, toFilePath);
         });
     }
 
     @Test
     void getStatistic_invalidQuantity() {
-        String fromFilePath = "src\\test5.csv";
-        String toFilePath = "src\\result5.csv";
+        String fromFilePath = "test5.csv";
+        String toFilePath = "result5.csv";
         assertThrows(RuntimeException.class, () -> {
-            store.getStatistic(fromFilePath, toFilePath);
+            store.showStatistic(fromFilePath, toFilePath);
         });
     }
 
     @Test
     void getStatistic_balanceIsZero() {
-        String fromFilePath = "src\\test6.csv";
-        String toFilePath = "src\\result6.csv";
-        store.getStatistic(fromFilePath, toFilePath);
+        String fromFilePath = "test6.csv";
+        String toFilePath = "result6.csv";
+        store.showStatistic(fromFilePath, toFilePath);
         String actual = readFromFile(toFilePath).trim();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,0";
