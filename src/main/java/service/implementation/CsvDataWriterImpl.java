@@ -8,6 +8,7 @@ import model.Fruit;
 import service.DataWriter;
 
 public class CsvDataWriterImpl implements DataWriter {
+    //comment
 
     @Override
     public void writeToFile(Map<Fruit, Integer> fruitReport, String writeFileTo) {
@@ -25,4 +26,3 @@ public class CsvDataWriterImpl implements DataWriter {
         }
     }
 }
-
