@@ -3,10 +3,15 @@ package core.basesyntax.dao;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.Fruit;
+import org.junit.After;
 import org.junit.Test;
 
 public class WarehouseImplTest {
-
+    @After
+    public void storeClear() {
+        Warehouse warehouse = new WarehouseImpl();
+        warehouse.getListItems().clear();
+    }
     @Test
     public void testAddFruit() {
         WarehouseImpl warehouseImpl = new WarehouseImpl();
@@ -21,7 +26,7 @@ public class WarehouseImplTest {
         warehouseImpl1.addItem(new Fruit("Fruit"), 1);
         warehouseImpl1.addItem(new Fruit("Fruit"), 2);
         warehouseImpl1.addItem(new Fruit("Apple"), 2);
-        assertEquals(15, warehouseImpl1.getAmountOfItem(new Fruit("Fruit")));
+        assertEquals(5, warehouseImpl1.getAmountOfItem(new Fruit("Fruit")));
         assertEquals(2, warehouseImpl1.getAmountOfItem(new Fruit("Apple")));
         assertEquals(2, warehouseImpl1.getListItems().size());
     }
