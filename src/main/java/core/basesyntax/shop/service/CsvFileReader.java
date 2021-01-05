@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CsvFileReader implements FileReader {
+    public static final int COLUMNS_COUNT = 3;
     public static final int TYPE_COLUMN = 0;
     public static final int FRUIT_COLUMN = 1;
     public static final int QUANTITY_COLUMN = 2;
@@ -28,7 +29,7 @@ public class CsvFileReader implements FileReader {
 
     private TransactionDto getFromCsvRow(String line) {
         String[] dataFromLine = line.split(",");
-        if (dataFromLine.length < 3) {
+        if (dataFromLine.length < COLUMNS_COUNT) {
             throw new IllegalArgumentException("File is broken!");
         }
 

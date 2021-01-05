@@ -10,7 +10,7 @@ public class CsvFileWriter implements FileWriter {
     @Override
     public void createReportFile(Map<Fruit, Integer> fruitReport, String filePath) {
         try (Writer writer = new java.io.FileWriter(filePath)) {
-            writer.append("fruit").append(',').append("quantity").append(System.lineSeparator());
+            writer.append("fruit,quantity").append(System.lineSeparator());
             for (Map.Entry<Fruit, Integer> entry : fruitReport.entrySet()) {
                 writer.append(entry.getKey().getType())
                         .append(',')
