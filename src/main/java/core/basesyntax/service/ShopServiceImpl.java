@@ -1,16 +1,17 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.operation.Operation;
 import core.basesyntax.service.operation.OperationStrategy;
-import core.basesyntax.service.work.with.file.ReadFromCsvFile;
-import core.basesyntax.service.work.with.file.ReadFromCsvFileImpl;
+import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
     private static final int OPERATION = 0;
     private static final int FRUIT_NAME = 1;
     private static final int AMOUNT = 2;
+    private static final String DELIMITER = ",";
     private FruitDao fruitDao;
     private OperationStrategy operationStrategy;
 
@@ -20,28 +21,47 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void doOperation(Fruit fruit, String fromFileName) {
-        ReadFromCsvFile readFromCsvFile = new ReadFromCsvFileImpl(fruitDao, fromFileName);
+    public void doOperation(List<String> list) {
         Operation operation = new Operation();
-        for (int i = 0; i < readFromCsvFile.readInformationFromFile().size(); i++) {
-            int amountAfterOperation = 0;
-            operation.setOperation(Operation.Type.valueOf(readFromCsvFile.readInformationFromFile()
-                    .get(i)[OPERATION].toUpperCase()));
-            if ((readFromCsvFile.readInformationFromFile().get(i))[FRUIT_NAME]
-                    .equals(fruit.getFruitName())) {
-                if (Integer.parseInt(readFromCsvFile.readInformationFromFile()
-                        .get(i)[AMOUNT]) < 0) {
-                    throw new ArithmeticException("Amount cannot be below than zero");
-                }
-                amountAfterOperation = operationStrategy.get(operation.getOperation())
-                        .getOperation(Integer.parseInt(readFromCsvFile.readInformationFromFile()
-                                .get(i)[AMOUNT]));
+        for (String fileName : list) {
+            String[] oneLine = fileName.split(DELIMITER);
+            int amountAfterOperation = checkOperation(oneLine, operation);
+            if (fruitDao.containsKey(new Fruit(oneLine[FRUIT_NAME]))) {
+                fruitDao.update(new Fruit(oneLine[FRUIT_NAME]), amountAfterOperation);
             }
-            fruit.setAmount(fruit.getAmount() + amountAfterOperation);
-            if (fruit.getAmount() < 0) {
-                throw new RuntimeException("Amount cannot be below than zero");
-            }
-            fruitDao.update(fruit);
+        }
+    }
+
+    private int checkOperation(String[] oneLine, Operation operation) {
+        int amountAfterOperation = 0;
+        if (isValidOperation(oneLine[OPERATION])) {
+            operation.setOperation(Operation.Type.valueOf(oneLine[OPERATION].toUpperCase()));
+        } else {
+            return 0;
+        }
+        if (fruitDao.containsKey(new Fruit(oneLine[FRUIT_NAME]))) {
+            checkInputData(oneLine, operation);
+            amountAfterOperation = operationStrategy.get(operation.getOperation())
+                    .getOperation(Integer.parseInt(oneLine[AMOUNT]));
+        }
+        return amountAfterOperation;
+    }
+
+    private boolean isValidOperation(String operation) {
+        operation = operation.toUpperCase();
+        return operation.equals(Operation.Type.S.toString())
+                || operation.equals(Operation.Type.P.toString())
+                || operation.equals(Operation.Type.R.toString());
+    }
+
+    private void checkInputData(String[] oneLine, Operation operation) {
+        if (Integer.parseInt(oneLine[AMOUNT]) < 0) {
+            throw new ArithmeticException("Amount cannot be below than zero");
+        }
+        if (operation.getOperation().equals(Operation.Type.P)
+                && Integer.parseInt(oneLine[AMOUNT])
+                > Storage.fruits.get(new Fruit(oneLine[FRUIT_NAME]))) {
+            throw new ArithmeticException("");
         }
     }
 }

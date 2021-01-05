@@ -1,35 +1,41 @@
 package core.basesyntax.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-class FruitTest {
-    static Fruit fruit;
+public class FruitTest {
+    private Fruit fruit;
 
-    @BeforeAll
-    static void beforeAll() {
+    @Before
+    public void beforeAll() {
         fruit = new Fruit();
     }
 
-    @Test
-    void inputDataToString_Ok() {
-        fruit.setAmount(100);
-        fruit.setFruitName("apple");
-        assertEquals(new Fruit("apple", 100).toString(), fruit.toString());
-        assertEquals("apple", fruit.getFruitName());
-        assertEquals(100, fruit.getAmount());
+    @After
+    public void tearDown() throws Exception {
         Storage.fruits.clear();
     }
 
     @Test
-    void inputData_Ok() {
+    public void inputDataToString_Ok() {
+        fruit.setFruitName("apple");
+        assertEquals(new Fruit("apple").toString(), fruit.toString());
+        assertEquals("apple", fruit.getFruitName());
+    }
+
+    @Test
+    public void inputDataHashCode_Ok() {
         fruit.setFruitName("banana");
-        fruit.setAmount(0);
-        assertEquals(new Fruit("banana", 0), fruit);
-        assertEquals(new Fruit("banana", 0).hashCode(), fruit.hashCode());
-        Storage.fruits.clear();
+        assertEquals(new Fruit("banana"), fruit);
+        assertTrue(new Fruit("banana").equals(fruit));
+        assertFalse(new Fruit("apple").equals(fruit));
+        assertFalse(fruit.equals(null));
+        assertEquals(new Fruit("banana").hashCode(), fruit.hashCode());
     }
 }

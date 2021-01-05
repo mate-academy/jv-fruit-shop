@@ -4,14 +4,12 @@ import java.util.Objects;
 
 public class Fruit {
     private String fruitName;
-    private int amount;
 
     public Fruit() {
     }
 
-    public Fruit(String fruitName, int amount) {
+    public Fruit(String fruitName) {
         this.fruitName = fruitName;
-        this.amount = amount;
     }
 
     public String getFruitName() {
@@ -22,19 +20,10 @@ public class Fruit {
         this.fruitName = fruitName;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     @Override
     public String toString() {
         return "Fruit{"
                 + "fruitName='" + fruitName + '\''
-                + ", amount=" + amount
                 + '}';
     }
 
@@ -47,13 +36,12 @@ public class Fruit {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return amount == fruit.amount
-                && Objects.equals(fruitName, fruit.fruitName);
+        return Objects.equals(fruitName, fruit.fruitName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fruitName, amount);
+        return Objects.hash(fruitName);
     }
 
 }

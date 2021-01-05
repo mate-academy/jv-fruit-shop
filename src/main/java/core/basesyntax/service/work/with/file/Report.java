@@ -1,9 +1,11 @@
 package core.basesyntax.service.work.with.file;
 
+import java.util.List;
+
 public interface Report {
-    String writeReport(String fromFileName);
+    String writeReport(List<String> list);
 
-    void createReport(String fromFileName);
+    void createReport(List<String> list);
 
-    void writeReportToFile(String fromFileName);
+    void writeReportToFile(String report, String toFileName);
 }

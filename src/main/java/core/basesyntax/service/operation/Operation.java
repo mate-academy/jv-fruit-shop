@@ -12,6 +12,6 @@ public class Operation {
     }
 
     public enum Type {
-        S, P, R;
+        B, S, P, R;
     }
 }

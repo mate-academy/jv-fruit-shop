@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
@@ -12,35 +12,53 @@ import core.basesyntax.service.operation.OperationStrategyImpl;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
-import core.basesyntax.service.work.with.file.Report;
-import core.basesyntax.service.work.with.file.ReportImpl;
+import core.basesyntax.service.work.with.file.ReadInformationFromFile;
+import core.basesyntax.service.work.with.file.ReadInformationFromFileImpl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class ShopServiceImplTest {
-    static FruitDao fruitDao = new FruitDaoImpl();
-    static Map<Operation.Type, OperationHandler> operationHandlerMap = new HashMap<>();
-    static OperationStrategy operationStrategy;
-    static ShopService shopService;
-    static Report report;
+public class ShopServiceImplTest {
+    private static String fileName;
+    private static FruitService fruitService;
+    private static ReadInformationFromFile readInformationFromFile;
+    private static ShopService shopService;
+    private static Map<Operation.Type, OperationHandler> operationHandlerMap = new HashMap<>();
+    private static OperationStrategy operationStrategy;
+    private static FruitDao fruitDao;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeClass
+    public static void beforeClass() throws Exception {
+        fruitService = new FruitServiceImpl();
+        readInformationFromFile = new ReadInformationFromFileImpl();
+        fruitDao = new FruitDaoImpl();
+    }
+
+    @Before
+    public void beforeAll() {
         operationHandlerMap.put(Operation.Type.R, new ReturnOperationHandler());
         operationHandlerMap.put(Operation.Type.P, new PurchaseOperationHandler());
         operationHandlerMap.put(Operation.Type.S, new SupplyOperationHandler());
         operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         shopService = new ShopServiceImpl(fruitDao, operationStrategy);
-        report = new ReportImpl();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 
     @Test
-    void getFruitAmount_Ok() {
-        report.createReport("database.csv");
-        assertEquals(152, Storage.fruits.get(0).getAmount());
-        assertEquals(90, Storage.fruits.get(1).getAmount());
-        Storage.fruits.clear();
+    public void getFruitAmount_Ok() {
+        fileName = "database.csv";
+        List<String> allLinesFromFile = readInformationFromFile.getAllLines(fileName);
+        fruitService.addNewFruit(allLinesFromFile);
+        shopService.doOperation(allLinesFromFile);
+        assertEquals(152, fruitDao.getAmount("banana"));
+        assertEquals(90, fruitDao.getAmount("apple"));
     }
 }

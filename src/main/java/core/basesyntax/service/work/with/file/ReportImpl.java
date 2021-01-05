@@ -3,6 +3,7 @@ package core.basesyntax.service.work.with.file;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.operation.Operation;
@@ -16,21 +17,23 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ReportImpl implements Report {
-    private static final String toFileName = "Report";
-
     @Override
-    public String writeReport(String fromFileName) {
-        createReport(fromFileName);
+    public String writeReport(List<String> list) {
+        createReport(list);
         FruitDao fruitDao = new FruitDaoImpl();
         StringBuilder report = new StringBuilder();
         report.append("fruit,quantity").append(System.lineSeparator());
-        for (int i = 0; i < Storage.fruits.size(); i++) {
-            report.append(fruitDao.get(i).getFruitName()).append(",")
-                    .append(fruitDao.get(i).getAmount());
-            if (i < Storage.fruits.size() - 1) {
+        int counter = 0;
+        for (Map.Entry<Fruit, Integer> entry : fruitDao.getAllFruits()) {
+            report.append(fruitDao.getFruit(entry.getKey().getFruitName())
+                    .getFruitName()).append(",")
+                    .append(fruitDao.getAmount(entry.getKey().getFruitName()));
+            counter++;
+            if (counter < fruitDao.getSize()) {
                 report.append(System.lineSeparator());
             }
         }
@@ -38,8 +41,7 @@ public class ReportImpl implements Report {
     }
 
     @Override
-    public void writeReportToFile(String fromFileName) {
-        String report = writeReport(fromFileName);
+    public void writeReportToFile(String report, String toFileName) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFileName))) {
             bufferedWriter.write(report);
         } catch (IOException e) {
@@ -49,18 +51,15 @@ public class ReportImpl implements Report {
     }
 
     @Override
-    public void createReport(String fromFileName) {
+    public void createReport(List<String> list) {
         Map<Operation.Type, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.Type.B, new ReturnOperationHandler());
         operationHandlerMap.put(Operation.Type.R, new ReturnOperationHandler());
         operationHandlerMap.put(Operation.Type.P, new PurchaseOperationHandler());
         operationHandlerMap.put(Operation.Type.S, new SupplyOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ShopService shopService = new ShopServiceImpl(new FruitDaoImpl(), operationStrategy);
-        FruitDaoImpl fruitDao = new FruitDaoImpl();
-        ReadFromCsvFile readFromCsvFile = new ReadFromCsvFileImpl(fruitDao, fromFileName);
-        readFromCsvFile.addNewFruit();
-        for (int i = 0; i < Storage.fruits.size(); i++) {
-            shopService.doOperation(fruitDao.get(i), fromFileName);
-        }
+        shopService.doOperation(list);
     }
 }
+

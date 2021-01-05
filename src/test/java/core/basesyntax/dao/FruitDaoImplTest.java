@@ -1,42 +1,63 @@
+
 package core.basesyntax.dao;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-class FruitDaoImplTest {
-    static FruitDao fruitDao;
+public class FruitDaoImplTest {
+    private static FruitDao fruitDao;
 
-    @BeforeAll
-    static void beforeAll() {
+    @Before
+    public void setUp() throws Exception {
         fruitDao = new FruitDaoImpl();
     }
 
-    @Test
-    void getByIndex_Ok() {
-        Fruit fruit = new Fruit("banana", 0);
-        fruitDao.add(fruit);
-        assertEquals(fruit, fruitDao.get(0));
+    @After
+    public void tearDown() throws Exception {
         Storage.fruits.clear();
     }
 
     @Test
-    void getByName_Ok() {
-        Fruit fruit = new Fruit("apple", 100);
-        fruitDao.add(fruit);
-        assertEquals(fruit, fruitDao.get("apple"));
-        Storage.fruits.clear();
+    public void getByKey_Ok() {
+        Fruit fruit = new Fruit("banana");
+        fruitDao.add(fruit, 10);
+        assertEquals(fruit, fruitDao.getFruit("banana"));
     }
 
     @Test
-    void update_Ok() {
-        Fruit fruit = new Fruit("apple", 11);
-        fruitDao.add(fruit);
-        fruitDao.update(fruitDao.get("apple"));
-        assertEquals(fruit, fruitDao.get("apple"));
-        Storage.fruits.clear();
+    public void containsKey_Ok() {
+        Fruit fruit = new Fruit("apple");
+        fruitDao.add(fruit, 100);
+        assertTrue(fruitDao.containsKey(fruit));
+    }
+
+    @Test (expected = ArithmeticException.class)
+    public void update_Ok() {
+        Fruit fruit = new Fruit("apple");
+        fruitDao.add(fruit, 11);
+        fruitDao.update(fruitDao.getFruit("apple"), 5);
+        assertEquals(16, fruitDao.getAmount("apple"));
+        fruitDao.update(fruitDao.getFruit("apple"), -100);
+    }
+
+    @Test
+    public void getSize_Ok() {
+        assertEquals(0, fruitDao.getSize());
+        fruitDao.add(new Fruit("apple"), 10);
+        assertEquals(1, fruitDao.getSize());
+    }
+
+    @Test
+    public void getAllFruits_Ok() {
+        fruitDao.add(new Fruit("apple"), 10);
+        String expected = "[Fruit{fruitName='apple'}=10]";
+        assertEquals(expected, fruitDao.getAllFruits().toString());
     }
 }
+

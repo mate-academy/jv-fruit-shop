@@ -1,54 +1,56 @@
 package core.basesyntax.service.work.with.file;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-class ReadFromCsvFileImplTest {
-    private static FruitDao fruitDao;
-    private ReadFromCsvFile readFromCsvFile;
+public class ReadFromCsvFileImplTest {
+    private static ReadInformationFromFile readInformationFromFile;
     private String fileName;
 
-    @BeforeAll
-    static void beforeAll() {
-        fruitDao = new FruitDaoImpl();
+    @Before
+    public void beforeAll() {
+        readInformationFromFile = new ReadInformationFromFileImpl();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        Storage.fruits.clear();
     }
 
     @Test
-    void inputFile_Ok() {
+    public void inputFile_Ok() {
         fileName = "database.csv";
-        readFromCsvFile = new ReadFromCsvFileImpl(fruitDao, fileName);
-        List<String[]> expectedList = new ArrayList<>();
         boolean expected = true;
-        expectedList.add(new String[]{"s", "banana", "100"});
-        expectedList.add(new String[]{"p", "banana", "13"});
-        expectedList.add(new String[]{"r", "apple", "10"});
-        expectedList.add(new String[]{"p", "apple", "20"});
-        expectedList.add(new String[]{"p", "banana", "5"});
-        expectedList.add(new String[]{"s", "banana", "50"});
+        List<String> expectedList = new ArrayList<>();
+        expectedList.add("type,fruit,quantity");
+        expectedList.add("b,banana,20");
+        expectedList.add("b,apple,100");
+        expectedList.add("s,banana,100");
+        expectedList.add("p,banana,13");
+        expectedList.add("r,apple,10");
+        expectedList.add("p,apple,20");
+        expectedList.add("p,banana,5");
+        expectedList.add("s,banana,50");
+        List<String> allLines = readInformationFromFile.getAllLines(fileName);
         for (int i = 0; i < expectedList.size(); i++) {
-            expected = Arrays.toString(readFromCsvFile.readInformationFromFile()
-                    .get(i)).equals(Arrays.toString(expectedList.get(i)));
+            expected = allLines.get(i).equals(expectedList.get(i));
             if (!expected) {
                 break;
             }
         }
         assertTrue(expected);
-        Storage.fruits.clear();
     }
 
-    @Test
-    void inputFileName_NotOk() {
+    @Test (expected = RuntimeException.class)
+    public void inputFileName_NotOk() {
         fileName = "qwerty.csv";
-        readFromCsvFile = new ReadFromCsvFileImpl(fruitDao, fileName);
-        assertThrows(RuntimeException.class, () -> readFromCsvFile.readInformationFromFile());
+        readInformationFromFile.getAllLines(fileName);
     }
 }
+

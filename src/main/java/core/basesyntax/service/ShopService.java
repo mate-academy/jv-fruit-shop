@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
+import java.util.List;
 
 public interface ShopService {
-    void doOperation(Fruit fruit, String fromFileName);
+    void doOperation(List<String> list);
 }

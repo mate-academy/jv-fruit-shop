@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.util.List;
+
 public interface FruitService {
-    void addNewFruit(String fruitName, int amount);
+    void addNewFruit(List<String> allLines);
 }
