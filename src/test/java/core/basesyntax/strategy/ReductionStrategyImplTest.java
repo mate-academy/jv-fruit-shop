@@ -46,8 +46,13 @@ public class ReductionStrategyImplTest {
     }
 
     @Test(expected = NegativeQuantityException.class)
-    public void applyBiggerThanExist_NotOk() {
+    public void reduceMoreThanExist_NotOk() {
         Storage.getFruits().put("banana", 20);
+        reductionStrategy.apply(testDto3);
+    }
+
+    @Test(expected = NegativeQuantityException.class)
+    public void reduceNonExistingGoods_NotOk() {
         reductionStrategy.apply(testDto3);
     }
 }
