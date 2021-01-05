@@ -1,7 +1,9 @@
 package core.basesyntax;
 
+import core.basesyntax.service.DoOperationImpl;
 import core.basesyntax.service.ReadFromFileImpl;
 import core.basesyntax.service.SetDataIntoMapImpl;
+import core.basesyntax.service.WriteToFileImpl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,13 +11,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 class Test {
+    String dataPath = "src/test/resources/data";
+    String resultPath = "src/test/resources/result";
 
     @org.junit.jupiter.api.Test
     void usualTest() {
-        new Shop("data", "result");
+        new Shop(dataPath, resultPath);
         List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("banana,152");
@@ -23,11 +27,11 @@ class Test {
 
         List<String> actual = new ArrayList<>();
         try {
-            actual = Files.readAllLines(new File("result").toPath());
+            actual = Files.readAllLines(new File(resultPath).toPath());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @org.junit.jupiter.api.Test
@@ -42,9 +46,9 @@ class Test {
         expected.add("p,banana,5");
         expected.add("s,banana,50");
 
-        List<String> actual = new ReadFromFileImpl().readFromFile("data");
-        
-        Assert.assertEquals(expected, actual);
+        List<String> actual = new ReadFromFileImpl().readFromFile(dataPath);
+
+        Assertions.assertEquals(expected, actual);
     }
 
     @org.junit.jupiter.api.Test
@@ -66,11 +70,42 @@ class Test {
 
         new SetDataIntoMapImpl().setDataIntoMap(actual, parsedData);
 
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @org.junit.jupiter.api.Test
     void writeToFileImplTest() {
+        List<String> expected = new ArrayList<>();
+        expected.add("fruit,quantity");
+        expected.add("floop-loop,1");
+        expected.add("ababagalamaga,2");
+        expected.add("pum-purum,3");
 
+        Map<String, Integer> map = new HashMap<>();
+        map.put("floop-loop", 1);
+        map.put("ababagalamaga", 2);
+        map.put("pum-purum", 3);
+        new WriteToFileImpl().write(resultPath, map);
+
+        List<String> actual = new ArrayList<>();
+        try {
+            actual = Files.readAllLines(new File(resultPath).toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @org.junit.jupiter.api.Test
+    void incorrectOperationTest() {
+        Map<String, Integer> map = new HashMap<>();
+        map.put("item_1", 0);
+        map.put("item_2", 0);
+        map.put("item_3", 0);
+
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            new DoOperationImpl().doOperation(map, "H", "key", "123");
+        });
     }
 }

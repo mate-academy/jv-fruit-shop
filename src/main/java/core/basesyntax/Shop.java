@@ -11,13 +11,13 @@ public class Shop {
 
     private Map<String, Integer> shop = new HashMap<>();
 
-    public Shop(String fileNameData, String fileNameResult) {
+    public Shop(String pathData, String pathResult) {
         shop.put("banana", 0);
         shop.put("apple", 0);
 
-        List<String> dataFromFile = new ReadFromFileImpl().readFromFile(fileNameData);
+        List<String> dataFromFile = new ReadFromFileImpl().readFromFile(pathData);
         new SetDataIntoMapImpl().setDataIntoMap(shop, dataFromFile);
 
-        new WriteToFileImpl().write(fileNameResult, shop);
+        new WriteToFileImpl().write(pathResult, shop);
     }
 }
