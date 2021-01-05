@@ -50,4 +50,5 @@ public class ReductionStrategyTest {
     public void applyReductionInvalid_Fruit_Ok() {
         reductionStrategy.apply(invalidFruit);
     }
+
 }

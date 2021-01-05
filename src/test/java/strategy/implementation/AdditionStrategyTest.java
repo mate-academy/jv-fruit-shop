@@ -7,6 +7,7 @@ import model.Operation;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class AdditionStrategyTest {
     private static AdditionStrategy additionStrategy;
@@ -22,6 +23,7 @@ public class AdditionStrategyTest {
                 new Fruit("durian"), 100);
     }
 
+    @Test
     public void applyAdditionStrategy_Ok() {
         additionStrategy.apply(papayaDto);
         additionStrategy.apply(durianDto);
