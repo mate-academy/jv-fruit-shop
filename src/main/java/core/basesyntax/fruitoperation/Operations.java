@@ -5,7 +5,7 @@ public enum Operations {
 
     public static boolean contains(String value) {
         for (Operations operation : Operations.values()) {
-            if (operation.toString().equals(value.toUpperCase())) {
+            if (operation.toString().equalsIgnoreCase(value)) {
                 return true;
             }
         }
