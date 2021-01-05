@@ -1,9 +1,10 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.Warehouse;
+import core.basesyntax.strategy.OperationStrategy;
+import java.util.Map;
 
 public interface ReportCheck {
-    void readFromReport(String filName, Warehouse warehouse);
+    void readFromReport(String filName, Map<Procedure, OperationStrategy> operationStrategyMap);
 
-    void writeToReport(Warehouse warehouse);
+    String writeToReport();
 }

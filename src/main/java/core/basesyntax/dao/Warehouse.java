@@ -1,15 +1,16 @@
 package core.basesyntax.dao;
 
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public interface Warehouse {
-    void addItem(String fruit, int amount);
+    void addItem(Fruit fruit, int amount);
 
-    void replace(String fruit, int amount);
+    void replace(Fruit fruit, int amount);
 
-    Map<String, Integer> getListItems();
+    Map<Fruit, Integer> getListItems();
 
-    int getAmountOfItem(String fruit);
+    int getAmountOfItem(Fruit fruit);
 
-    void getItemFrom(String name, int amount);
+    void getItemFrom(Fruit fruit, int amount);
 }

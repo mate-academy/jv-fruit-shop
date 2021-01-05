@@ -1,12 +1,12 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.DataBase;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public class WarehouseImpl implements Warehouse {
-
     @Override
-    public void addItem(String fruit, int amount) {
+    public void addItem(Fruit fruit, int amount) {
         if (DataBase.getListItems().containsKey(fruit)) {
             DataBase.getListItems().replace(fruit, (amount + DataBase.getListItems().get(fruit)));
         } else {
@@ -15,7 +15,7 @@ public class WarehouseImpl implements Warehouse {
     }
 
     @Override
-    public void replace(String fruit, int amount) {
+    public void replace(Fruit fruit, int amount) {
         if (DataBase.getListItems().get(fruit) == null) {
             DataBase.getListItems().put(fruit, amount);
         } else {
@@ -23,17 +23,17 @@ public class WarehouseImpl implements Warehouse {
         }
     }
 
-    public Map<String, Integer> getListItems() {
+    public Map<Fruit, Integer> getListItems() {
         return DataBase.getListItems();
     }
 
     @Override
-    public int getAmountOfItem(String fruit) {
+    public int getAmountOfItem(Fruit fruit) {
         return DataBase.getListItems().getOrDefault(fruit, 0);
     }
 
     @Override
-    public void getItemFrom(String fruit, int amount) {
+    public void getItemFrom(Fruit fruit, int amount) {
         DataBase.getListItems().replace(fruit, (DataBase.getListItems().get(fruit) - amount));
     }
 }
