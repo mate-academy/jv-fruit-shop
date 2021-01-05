@@ -39,7 +39,7 @@ public class FruitServiceTest {
     }
 
     @AfterClass
-    public static void afterClass() throws Exception {
+    public static void afterClass() {
         Storage.fruits.clear();
     }
 

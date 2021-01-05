@@ -9,9 +9,6 @@ import java.util.List;
 
 public class CsvParser implements FileParser<TransactionDto> {
     private static final String DELIMITER = ",";
-    private static final int OPERATION = 0;
-    private static final int FRUIT = 1;
-    private static final int AMOUNT = 2;
 
     @Override
     public List<TransactionDto> parseData(List<String> list) {
@@ -19,9 +16,9 @@ public class CsvParser implements FileParser<TransactionDto> {
         for (String line : list) {
             String[] split = line.split(DELIMITER);
             TransactionDto dto = new TransactionDto(
-                    Operation.fromString(split[OPERATION]),
-                    new Fruit(split[FRUIT]),
-                    Integer.parseInt(split[AMOUNT]));
+                    Operation.fromString(split[0]),
+                    new Fruit(split[1]),
+                    Integer.parseInt(split[2]));
             dtoList.add(dto);
         }
         return dtoList;

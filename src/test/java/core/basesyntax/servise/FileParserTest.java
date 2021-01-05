@@ -16,13 +16,11 @@ import org.junit.Test;
 public class FileParserTest {
     private static FileParser<TransactionDto> fileParser;
     private static FilesReader filesReader;
-    private static List<String> list;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         fileParser = new CsvParser();
         filesReader = new FilesReaderImpl();
-        list = filesReader.readData("src/main/resources/test-fruit.csv");
     }
 
     @Test
@@ -36,12 +34,14 @@ public class FileParserTest {
         expect.add(new TransactionDto(Operation.fromString("p"), new Fruit("apple"), 20));
         expect.add(new TransactionDto(Operation.fromString("p"), new Fruit("banana"), 5));
         expect.add(new TransactionDto(Operation.fromString("s"), new Fruit("banana"), 50));
+        List<String> list = filesReader.readData("src/main/resources/test-fruit.csv");
         assertEquals(expect, fileParser.parseData(list));
     }
 
     @Test
     public void parseDataEmptyList_NotOk() {
         List<TransactionDto> expect = new ArrayList<>();
+        List<String> list = filesReader.readData("src/main/resources/test-fruit.csv");
         assertNotEquals(expect, fileParser.parseData(list));
     }
 
@@ -50,6 +50,7 @@ public class FileParserTest {
         List<TransactionDto> expect = new ArrayList<>();
         expect.add(new TransactionDto(Operation.fromString("r"), new Fruit("melon"), 10));
         expect.add(new TransactionDto(Operation.fromString("s"), new Fruit("orange"), 1));
+        List<String> list = filesReader.readData("src/main/resources/test-fruit.csv");
         assertNotEquals(expect, fileParser.parseData(list));
     }
 }

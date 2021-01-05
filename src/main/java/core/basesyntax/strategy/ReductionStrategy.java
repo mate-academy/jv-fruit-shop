@@ -12,7 +12,7 @@ public class ReductionStrategy implements OperationStrategy {
         Integer amount = Optional.ofNullable(Storage.fruits.get(fruit)).orElse(0);
         int newAmount = amount - transactionDto.getQuantity();
         if (newAmount < 0) {
-            throw new RuntimeException("Incorrect data");
+            throw new RuntimeException("You don't have enough fruit");
         }
         Storage.fruits.put(fruit, newAmount);
     }
