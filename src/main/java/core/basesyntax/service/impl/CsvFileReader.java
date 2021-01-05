@@ -5,7 +5,6 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FileReader;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +25,6 @@ public class CsvFileReader implements FileReader {
             while (reader.ready()) {
                 listOfInformation.add(reader.readLine());
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(String.format("File %s not found.", filePath), e);
         } catch (IOException e) {
             throw new RuntimeException(String.format("The problem has been encountered "
                     + "while reading file %s.)", filePath), e);
