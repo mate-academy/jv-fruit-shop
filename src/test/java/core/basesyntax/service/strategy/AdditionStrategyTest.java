@@ -5,10 +5,8 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.HashMap;
 
@@ -19,7 +17,7 @@ public class AdditionStrategyTest {
     private static final Fruit LIME = new Fruit("lime");
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         strategy = new AdditionStrategy();
         Storage.balance = new HashMap<>();
         Storage.balance.put(ORANGE, 100);
@@ -73,7 +71,7 @@ public class AdditionStrategyTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Storage.balance = new HashMap<>();
     }
 }

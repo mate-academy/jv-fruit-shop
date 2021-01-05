@@ -3,11 +3,9 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.impl.CSVFileReaderService;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
