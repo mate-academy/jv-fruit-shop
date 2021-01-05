@@ -56,6 +56,10 @@ public class IOdataFileService {
         
         for (int i = 1; i < lines.size(); i++) {
             String[] data = lines.get(i).split(FILE_DELIMITER);
+            if (data[FILE_INDEX_OF_AMOUNT].matches("[^0-9]")
+                || Integer.parseInt(data[FILE_INDEX_OF_AMOUNT]) < 0) {
+                throw new IllegalArgumentException("The file line doesn't contain proper values or fields");
+            }
             
             records.add(new DataRecord(ShopTransactionsTypes.getAction(data[FILE_INDEX_OF_ACTION]),
                     new Fruit(data[FILE_INDEX_OF_ITEM]),
