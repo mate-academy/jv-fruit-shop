@@ -51,6 +51,6 @@ public class WorkWithFileTests {
     @Test
     public void testWritingToFile_Ok() {
         FileWriter writer = new WriteToCsvFileImpl();
-        writer.writeToFile("Expected report", "expectedReport");
+        writer.writeToFile("Expected report", "ExpectedReport");
     }
 }
