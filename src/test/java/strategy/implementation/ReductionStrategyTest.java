@@ -6,6 +6,7 @@ import exception.NoSuchFruitException;
 import model.Fruit;
 import model.FruitTransactionDto;
 import model.Operation;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -51,4 +52,8 @@ public class ReductionStrategyTest {
         reductionStrategy.apply(invalidFruit);
     }
 
+    @AfterClass
+    public static void afterClass() {
+        FruitStorage.fruitStorage.clear();
+    }
 }

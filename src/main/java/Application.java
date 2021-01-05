@@ -38,5 +38,6 @@ public class Application {
         for (Map.Entry<Fruit, Integer> entry : FruitStorage.fruitStorage.entrySet()) {
             System.out.println(entry.getKey().getName() + " " + entry.getValue());
         }
+        FruitStorage.fruitStorage.clear();
     }
 }

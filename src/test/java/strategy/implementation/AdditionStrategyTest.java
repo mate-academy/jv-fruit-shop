@@ -4,6 +4,7 @@ import db.FruitStorage;
 import model.Fruit;
 import model.FruitTransactionDto;
 import model.Operation;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,5 +31,10 @@ public class AdditionStrategyTest {
         int durianAmount = FruitStorage.fruitStorage.get(durianDto.getFruit());
         Assert.assertEquals(200, papayaAmount);
         Assert.assertEquals(100, durianAmount);
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        FruitStorage.fruitStorage.clear();
     }
 }

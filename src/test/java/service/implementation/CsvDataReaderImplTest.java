@@ -2,12 +2,14 @@ package service.implementation;
 
 import static org.junit.Assert.assertEquals;
 
+import db.FruitStorage;
 import exception.InvalidDataFormatException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
 import model.FruitTransactionDto;
 import model.Operation;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import service.DataReader;
@@ -61,5 +63,10 @@ public class CsvDataReaderImplTest {
     @Test(expected = IllegalArgumentException.class)
     public void readFrom_InvalidFormat_OperationIsNumber_file() {
         dataReader.readFromFile(INVALID_OPERATION_IS_NUMBER);
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        FruitStorage.fruitStorage.clear();
     }
 }
