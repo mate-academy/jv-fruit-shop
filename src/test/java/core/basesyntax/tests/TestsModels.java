@@ -25,8 +25,9 @@ public class TestsModels {
         assertEquals(100, transaction.getQuantity(),
                 "values must be equal");
     }
+
     @Test
-    public void checkFruit(){
+    public void checkFruit() {
         fruit = new Fruit("banana");
         assertFalse(fruit.equals(null));
     }
