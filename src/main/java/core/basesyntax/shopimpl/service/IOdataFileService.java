@@ -23,19 +23,16 @@ public class IOdataFileService {
     }
     
     public void writeDataFile(List<DataRecord> dataBase) {
-        StringBuilder sb = new StringBuilder("");
-        
+        StringBuilder sb = new StringBuilder();
         sb.append("ShopAction").append(FILE_DELIMITER)
                 .append("Item").append(FILE_DELIMITER)
                 .append("Amount");
-        
         for (DataRecord record : dataBase) {
             sb.append(System.lineSeparator())
                     .append(record.getAction().getValue()).append(FILE_DELIMITER)
                     .append(record.getItem().getItemName()).append(FILE_DELIMITER)
                     .append(record.getAmount().toString());
         }
-        
         try {
             
             Files.write(Path.of(dataFilePath),
@@ -49,23 +46,20 @@ public class IOdataFileService {
     public List<DataRecord> readDataFile() {
         List<DataRecord> records = new ArrayList<>();
         List<String> lines = readFile();
-        
         if (lines.isEmpty()) {
             return records;
         }
-        
         for (int i = 1; i < lines.size(); i++) {
             String[] data = lines.get(i).split(FILE_DELIMITER);
             if (data[FILE_INDEX_OF_AMOUNT].matches("[^0-9]")
-                || Integer.parseInt(data[FILE_INDEX_OF_AMOUNT]) < 0) {
-                throw new IllegalArgumentException("The file line doesn't contain proper values or fields");
+                    || Integer.parseInt(data[FILE_INDEX_OF_AMOUNT]) < 0) {
+                throw new IllegalArgumentException("The file line doesn't"
+                                                   + " contain proper values or fields");
             }
-            
             records.add(new DataRecord(ShopTransactionsTypes.getAction(data[FILE_INDEX_OF_ACTION]),
                     new Fruit(data[FILE_INDEX_OF_ITEM]),
                     Integer.parseInt(data[FILE_INDEX_OF_AMOUNT])));
         }
-        
         return records;
     }
     
