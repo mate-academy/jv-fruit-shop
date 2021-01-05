@@ -25,4 +25,6 @@ public enum Operation {
         throw new IllegalArgumentException("No constant with operation " + operation + " found");
     }
 
+
+
 }

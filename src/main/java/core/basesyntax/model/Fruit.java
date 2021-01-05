@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class Fruit {
+public class Fruit implements Comparable<Fruit>{
     private String name;
 
     public Fruit(String name) {
@@ -28,5 +28,10 @@ public class Fruit {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    @Override
+    public int compareTo(Fruit o) {
+        return this.name.compareTo(o.name);
     }
 }
