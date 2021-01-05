@@ -3,8 +3,8 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.validator.OperationValidationImpl;
 import core.basesyntax.service.validator.OperationValidation;
+import core.basesyntax.service.validator.OperationValidationImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 

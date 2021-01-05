@@ -2,9 +2,9 @@ package core.basesyntax.model;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.dao.FruitsDaoImpl;
-import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Report;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;

@@ -3,9 +3,13 @@ package core.basesyntax.service.operation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.strategy.operation.BalanceOperationHandler;
+import core.basesyntax.strategy.operation.OperationHandler;
+import core.basesyntax.strategy.operation.PurchaseOperationHandler;
+import core.basesyntax.strategy.operation.ReturnOperationHandler;
+import core.basesyntax.strategy.operation.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import core.basesyntax.strategy.operation.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
