@@ -12,7 +12,8 @@ public class Validator {
         int currentAmount = storage.get(item);
         if (currentAmount < amount) {
             throw new IllegalPurchaseAmountException("Sorry, out shop can't provide " + amount
-                                                     + " of " + item + "s. We can offer you only " + currentAmount);
+                                                     + " of " + item + "s. We can offer you only "
+                                                     + currentAmount);
         }
     }
 }

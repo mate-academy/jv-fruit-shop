@@ -1,13 +1,14 @@
 package core.basesyntax.shopimpl.service;
 
 import core.basesyntax.shopimpl.entity.Fruit;
+import core.basesyntax.shopimpl.entity.IllegalPurchaseAmountException;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Test;
 
 public class ValidatorTest {
     
-    @Test(expected = Exception.class)
+    @Test(expected = IllegalPurchaseAmountException.class)
     public void transactionValidatorInvalidTransaction() throws Exception {
         Map<Fruit, Integer> map = new HashMap<>();
         map.put(new Fruit("tasty fruit"), 0);

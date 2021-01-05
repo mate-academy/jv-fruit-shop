@@ -91,6 +91,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/model/**</exclude>
+                        <exclude>**/entity/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

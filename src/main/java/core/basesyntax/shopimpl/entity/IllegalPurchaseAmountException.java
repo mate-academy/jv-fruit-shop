@@ -6,7 +6,7 @@ public class IllegalPurchaseAmountException extends Exception {
     
     }
     
-    public IllegalPurchaseAmountException(String message){
+    public IllegalPurchaseAmountException(String message) {
         super(message);
     }
 }
