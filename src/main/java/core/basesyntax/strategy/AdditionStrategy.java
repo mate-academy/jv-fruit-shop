@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class AdditionStrategy implements OperationStrategy {
     @Override
-    public void apply(TransactionDto transactionDto, Storage storage) {
+    public void apply(TransactionDto transactionDto) {
         Integer quantity = transactionDto.getQuantity();
         for (Map.Entry<Fruit, Integer> fruit: Storage.fruits.entrySet()) {
             if (fruit.getKey().equals(transactionDto.getFruit())) {

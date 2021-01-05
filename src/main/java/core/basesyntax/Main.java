@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Feel free to remove this class and create your own.
  */
-public class Application {
+public class Main {
     public static void main(String[] args) {
         Map<Operation, OperationStrategy> operationOperationStrategyMap = new HashMap<>();
         operationOperationStrategyMap.put(Operation.BALANCE, new AdditionStrategy());
@@ -31,7 +31,7 @@ public class Application {
         FruitService service = new FruitServiceImpl(operationOperationStrategyMap);
         service.applyOperationsOnFruitsDto(transactionDtos);
         CsvFileWriter writer = new CsvFileWriterImpl();
-        writer.writeData(service.getFruitReport(),"src/main/resources/test-fruit-write.csv");
+        writer.writeData("src/main/resources/test-fruit-write.csv");
 
     }
 

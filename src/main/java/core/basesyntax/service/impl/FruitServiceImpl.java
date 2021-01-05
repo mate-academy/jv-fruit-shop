@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
-    Map<Operation, OperationStrategy> operationOperationStrategyMap;
-    Storage storage = new Storage();
+    private Map<Operation, OperationStrategy> operationOperationStrategyMap;
 
     public FruitServiceImpl(Map<Operation, OperationStrategy> operationOperationStrategyMap) {
         this.operationOperationStrategyMap = operationOperationStrategyMap;
@@ -21,7 +20,7 @@ public class FruitServiceImpl implements FruitService {
     public void applyOperationsOnFruitsDto(List<TransactionDto> transactionDtos) {
         for (TransactionDto transactionDto: transactionDtos) {
             operationOperationStrategyMap.get(transactionDto.getOperation())
-                    .apply(transactionDto, storage);
+                    .apply(transactionDto);
         }
     }
 

@@ -27,7 +27,7 @@ public class CsvFileReaderImpl implements CsvFileReader {
                 fruit.setName(transaction[1]);
                 transactionDto.setFruit(fruit);
                 transactionDto.setOperation(Operation.fromString(transaction[0])); //
-                transactionDto.setQuantity(Integer.valueOf(transaction[2]));
+                transactionDto.setQuantity(chekInteger(transaction[2]));
                 transactionDtos.add(transactionDto);
                 value = reader.readLine();
             }
@@ -35,5 +35,15 @@ public class CsvFileReaderImpl implements CsvFileReader {
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from the file " + fileName, e);
         }
+    }
+
+    private Integer chekInteger(String string) {
+        if (!string.matches("[-+]?\\d+")) {
+            throw new RuntimeException("Incorrect quantity");
+        }
+        if (Integer.valueOf(string) <= 0) {
+            throw new RuntimeException("Quantity cannot be <= 0");
+        }
+        return Integer.valueOf(string);
     }
 }

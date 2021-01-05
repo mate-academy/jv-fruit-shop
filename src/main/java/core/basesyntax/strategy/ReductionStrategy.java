@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ReductionStrategy implements OperationStrategy {
     @Override
-    public void apply(TransactionDto transactionDto, Storage storage) {
+    public void apply(TransactionDto transactionDto) {
         Integer quantity = transactionDto.getQuantity();
         if (!Storage.fruits.containsKey(transactionDto.getFruit())) {
             throw new RuntimeException("We can't sell a product if we don't have it!");
