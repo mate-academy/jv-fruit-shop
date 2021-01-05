@@ -11,7 +11,6 @@ import core.basesyntax.service.impl.CsvFileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import org.junit.After;
 import org.junit.Test;
 
@@ -20,7 +19,7 @@ public class TestReader {
             "src/main/resourcestests/fruitShopOneLine.CSV";
     private static final String FILE_PATH_FOUR_LINES =
             "src/main/resourcestests/fruitShopFourLines.CSV";
-    private static final String FILE_PATH_WITH_ERROR = "" +
+    private static final String FILE_PATH_WITH_ERROR =
             "src/main/resourcestests/fruitShopNotAllowedOperation.CSV";
     private static List<TransactionDto> data;
     private static final FileReader reader = new CsvFileReader();
