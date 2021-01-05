@@ -30,10 +30,24 @@ public class FruitShopStorage extends AbstractStorage<DataRecord, Fruit> {
         }
         
         for (DataRecord record : shopDao.getTransactionHistory()) {
-            int actualAmount = record.getAction() == ShopTransactionsTypes.PURCHASE
-                    ? storage.get(record.getItem()) - record.getAmount()
-                    : storage.get(record.getItem()) - record.getAmount();
-            storage.put((Fruit) record.getItem(), actualAmount);
+            if (record.getAction() == ShopTransactionsTypes.PURCHASE) {
+                Fruit key = (Fruit) record.getItem();
+                int updatedValue = storage.get(key) - record.getAmount();
+                if (updatedValue < 0) {
+                    throw new IllegalStateException("Illegal data entry was found"
+                                                    + " while storage initialization"
+                                                    + " storage can't contain negative values");
+                }
+                storage.put(key, storage.get(key) - record.getAmount());
+                continue;
+            }
+            if (record.getAction() == ShopTransactionsTypes.BALANCE) {
+                Fruit key = (Fruit) record.getItem();
+                storage.put(key, record.getAmount());
+                continue;
+            }
+            Fruit key = (Fruit) record.getItem();
+            storage.put(key, storage.get(key) + record.getAmount());
         }
         
         return storage;
