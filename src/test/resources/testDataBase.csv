@@ -1,4 +1,5 @@
 ShopAction,Item,Amount
+b,Fruit0,0
 b,Fruit1,100
 b,Fruit2,200
 b,Fruit3,300
@@ -9,3 +10,11 @@ s,Fruit2,50
 r,Fruit3,5
 r,Fruit1,10
 s,Fruit2,100
+p,Fruit3,5
+s,Fruit4,5
+r,Fruit4,10
+s,Fruit5,100
+b,Fruit6,100
+s,Fruit61,100
+b,Fruit7,100
+s,Fruit71,100

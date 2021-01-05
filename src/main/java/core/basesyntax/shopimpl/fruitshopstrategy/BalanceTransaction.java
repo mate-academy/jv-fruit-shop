@@ -7,7 +7,6 @@ import core.basesyntax.model.shopstrategy.AbstractTransaction;
 import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
-import core.basesyntax.shopimpl.storage.FruitShopStorage;
 
 public class BalanceTransaction extends AbstractTransaction<DataRecord, Fruit> {
     

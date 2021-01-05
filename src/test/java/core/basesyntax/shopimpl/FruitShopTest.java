@@ -10,11 +10,11 @@ import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
 import core.basesyntax.shopimpl.database.FruitShopDao;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
-import core.basesyntax.shopimpl.entity.IllegalPurchaseAmountException;
 import core.basesyntax.shopimpl.storage.FruitShopStorage;
 import org.junit.Test;
 
 public class FruitShopTest {
+    private static AbstractShop<DataRecord, Fruit> shop;
     private String emptyFilePath
             = "src/test/resources/EmptyTestDatabase.csv";
     private String illegalEntryFilePath
@@ -27,10 +27,8 @@ public class FruitShopTest {
             = "src/test/resources/SeveralFruitsAndActionsTestDatabase.csv";
     private String testDatabase
             = "src/test/resources/testDataBase.csv";
-    
     private ShopDao<DataRecord> shopDao;
     private AbstractStorage<DataRecord, Fruit> storage;
-    private AbstractShop<DataRecord, Fruit> shop;
     
     @Test
     public void emptyFileStorageInit() {
@@ -78,11 +76,32 @@ public class FruitShopTest {
         assertEquals(expectedAmountFruit1, actualAmountFruit1);
     }
     
-    @Test(expected = IllegalPurchaseAmountException.class)
+    @Test(expected = RuntimeException.class)
     public void shopExceptionExpected() {
-        shopDao = new FruitShopDao(illegalEntryFilePath);
+        shopDao = new FruitShopDao(testDatabase);
         storage = new FruitShopStorage(shopDao);
         shop = new FruitShop(storage, shopDao);
+        
+        shop.performAction(ShopTransactionsTypes.PURCHASE, new Fruit("Fruit1"), 1000);
+    }
+    
+    @Test
+    public void shopAddNewProduct() {
+        shopDao = new FruitShopDao(testDatabase);
+        storage = new FruitShopStorage(shopDao);
+        shop = new FruitShop(storage, shopDao);
+        
+        int index = 0;
+        while (shop.getShopStorage().containsKey(new Fruit("Fruit" + index))) {
+            index++;
+        }
+        Fruit newFruit1 = new Fruit("Fruit" + index);
+        Fruit newFruit2 = new Fruit("Fruit" + index + 1);
+        
+        shop.performAction(ShopTransactionsTypes.BALANCE, newFruit1, 100);
+        shop.performAction(ShopTransactionsTypes.SUPPLY, newFruit2, 100);
+        assertTrue(shop.getShopStorage().containsKey(newFruit1));
+        assertTrue(shop.getShopStorage().containsKey(newFruit2));
     }
     
     @Test

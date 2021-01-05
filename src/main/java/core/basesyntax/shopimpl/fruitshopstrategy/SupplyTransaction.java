@@ -19,7 +19,11 @@ public class SupplyTransaction extends AbstractTransaction<DataRecord, Fruit> {
     public void apply(AbstractItem item, int amount) {
         getShopDao().addTransaction(new DataRecord(ShopTransactionsTypes.SUPPLY, item, amount));
         getShopDao().updateDatabase();
-        int update = getStorage().get(item) + amount;
-        getStorage().put((Fruit) item, update);
+        
+        if (getStorage().containsKey(item)) {
+            int update = getStorage().get(item) + amount;
+            getStorage().put((Fruit) item, update);
+        }
+        getStorage().put((Fruit) item, amount);
     }
 }
