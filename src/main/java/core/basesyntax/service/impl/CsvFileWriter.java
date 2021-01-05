@@ -9,12 +9,12 @@ import java.util.Map;
 
 public class CsvFileWriter implements FruitFileWriter {
     private static final String SEPARATOR = ",";
-    private static final String UP_CASE = "fruit,quantity";
+    private static final String HEADER = "fruit,quantity";
 
     @Override
     public void createReportFile(Map<Fruit, Integer> base, String filePath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write(UP_CASE + System.lineSeparator());
+            writer.write(HEADER + System.lineSeparator());
             for (Map.Entry<Fruit, Integer> entry : base.entrySet()) {
                 writer.write(entry.getKey().getFruitName()
                         + SEPARATOR + entry.getValue() + System.lineSeparator());

@@ -8,9 +8,6 @@ public class TransactionDto {
     private final Integer quantity;
 
     public TransactionDto(Operation operation, Fruit fruit, Integer quantity) {
-        if (quantity < 0) {
-            throw new RuntimeException("Quantity must be more 0. But was" + quantity);
-        }
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;

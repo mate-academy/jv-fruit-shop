@@ -1,6 +1,7 @@
 package core.basesyntax.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
@@ -47,6 +48,20 @@ public class TestReader {
         data = reader.readData(FILE_PATH_FOUR_LINES);
         assertEquals(expected.size(), data.size(), "Size list must be equals");
         assertEquals(expected, data, "List must be equals");
+    }
+
+    @Test
+    public void notEquals() {
+        List<TransactionDto> expected = new ArrayList<>();
+        Fruit banana = new Fruit("banana");
+        expected.add(new TransactionDto(Operation.BALANCE, banana, 20));
+        expected.add(new TransactionDto(Operation.RETURN, banana, 100));
+        expected.add(new TransactionDto(Operation.SUPPLY, banana, 100));
+        expected.add(new TransactionDto(Operation.PURCHASE, banana, 13));
+        expected.add(new TransactionDto(Operation.RETURN, banana, 20));
+        data = reader.readData(FILE_PATH_FOUR_LINES);
+        assertNotEquals(expected.size(), data.size(), "Size list must be equals");
+        assertNotEquals(expected, data, "List must be equals");
     }
 
     @Test(expected = RuntimeException.class)

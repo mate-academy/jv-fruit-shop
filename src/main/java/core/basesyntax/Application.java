@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Application {
+    private static final String PATH_READ = "src/main/resources/fruitShop.CSV";
+    private static final String PATH_WRITE = "src/main/resources/report.CSV";
+
     public static void main(String[] args) {
         Map<Operation, OperationStrategy> operationOperationStrategyMap = new HashMap<>();
         operationOperationStrategyMap.put(Operation.BALANCE, new BalanceStrategy());
@@ -26,11 +29,11 @@ public class Application {
         operationOperationStrategyMap.put(Operation.PURCHASE, new PurchaseStrategy());
 
         FileReader reader = new CsvFileReader();
-        List<TransactionDto> transaction = reader.readData("src/main/resources/fruitShop.CSV");
+        List<TransactionDto> transaction = reader.readData(PATH_READ);
         FruitService service = new FruitServiceImpl(operationOperationStrategyMap);
         service.applyOperation(transaction);
 
         FruitFileWriter writer = new CsvFileWriter();
-        writer.createReportFile(service.getFruitReporter(), "src/main/resources/report.CSV");
+        writer.createReportFile(service.getFruitReporter(), PATH_WRITE);
     }
 }

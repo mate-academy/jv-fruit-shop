@@ -24,21 +24,4 @@ public class TestsModels {
         assertEquals(100, transaction.getQuantity(),
                 "values must be equal");
     }
-
-    @Test(expected = RuntimeException.class)
-    public void checkNotValidFruitNull() {
-        new Fruit(null);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void checkNotValidFruitLowLength() {
-        new Fruit("ap");
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void checkNotValidQuantity() {
-        operation = Operation.PURCHASE;
-        transaction = new TransactionDto(operation, new Fruit("apple"),
-                -10);
-    }
 }

@@ -51,6 +51,11 @@ public class CsvFileReader implements FileReader {
     }
 
     private TransactionDto createTransactionDto(String[] data) {
+        for (String value : data) {
+            if (value == null || value.length() == 0) {
+                throw new NoSuchElementException("Elements cannot be null");
+            }
+        }
         return new TransactionDto(checkAndGetOperation(data[OPERATION]),
                 new Fruit(data[FRUIT]), Integer.parseInt(data[COUNT]));
     }
