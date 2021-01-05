@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.TransactionDto;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,25 +9,24 @@ public class CsvFileReaderImplTest {
 
     @Test
     public void correctCvsFileReaderImpl() {
-        List<TransactionDto> transactionDtos = reader
+        List<String> transactionDtos = reader
                 .readData("src/test/resources/test-fruit-correct.csv");
-        Assert.assertEquals(3, transactionDtos.size());
+        Assert.assertEquals("type,fruit,quantity", transactionDtos.get(0));
+        Assert.assertEquals("b,banana,20", transactionDtos.get(1));
+        Assert.assertEquals("b,apple,100", transactionDtos.get(2));
+        Assert.assertEquals("s,banana,100", transactionDtos.get(3));
+        Assert.assertEquals(4, transactionDtos.size());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void incorrectCvsFileReaderImpl() {
-        List<TransactionDto> transactionDtos = reader
+        List<String> transactionDtos = reader
                 .readData("src/test/resources/test-fruit-incorrect.csv");
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void incorrectQuantityCvsFileReaderImpl() {
-        List<TransactionDto> transactionDtos = reader
-                .readData("src/test/resources/test-fruit-incorrect-quantity.csv");
+        Assert.assertEquals(0, transactionDtos.size());
     }
 
     @Test(expected = RuntimeException.class)
     public void incorrectFileNameCvsFileReaderImpl() {
-        List<TransactionDto> transactionDtos = reader.readData("sdfsdf");
+        List<String> transactionDtos = reader.readData("sdfsdf");
     }
 }

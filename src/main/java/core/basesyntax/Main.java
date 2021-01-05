@@ -4,9 +4,11 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.CsvFileWriter;
+import core.basesyntax.service.CsvParser;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
 import core.basesyntax.service.impl.CsvFileWriterImpl;
+import core.basesyntax.service.impl.CsvParserImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.strategy.AdditionStrategy;
 import core.basesyntax.strategy.OperationStrategy;
@@ -27,12 +29,12 @@ public class Main {
         operationOperationStrategyMap.put(Operation.PURCHASE, new ReductionStrategy());
 
         CsvFileReader reader = new CsvFileReaderImpl();
-        List<TransactionDto> transactionDtos = reader.readData("src/main/resources/test-fruit.csv");
+        List<String> transactionDtoString = reader.readData("src/main/resources/test-fruit.csv");
+        CsvParser csvFileWriter = new CsvParserImpl();
+        List<TransactionDto> transactionDtos = csvFileWriter.convert(transactionDtoString);
         FruitService service = new FruitServiceImpl(operationOperationStrategyMap);
         service.applyOperationsOnFruitsDto(transactionDtos);
         CsvFileWriter writer = new CsvFileWriterImpl();
         writer.writeData("src/main/resources/test-fruit-write.csv");
-
     }
-
 }
