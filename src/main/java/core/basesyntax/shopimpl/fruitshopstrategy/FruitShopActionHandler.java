@@ -12,7 +12,8 @@ import java.util.Map;
 public class FruitShopActionHandler {
     private final Map<ShopTransactionsTypes, ShopTransaction> strategyMap = new HashMap<>();
     
-    public FruitShopActionHandler(AbstractStorage<DataRecord, Fruit> storage, ShopDao<DataRecord> shopDao) {
+    public FruitShopActionHandler(AbstractStorage<DataRecord, Fruit> storage,
+                                  ShopDao<DataRecord> shopDao) {
         initHandler(strategyMap, storage, shopDao);
     }
     

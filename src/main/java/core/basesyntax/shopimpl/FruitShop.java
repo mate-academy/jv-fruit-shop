@@ -12,7 +12,8 @@ import core.basesyntax.shopimpl.service.Validator;
 public class FruitShop extends AbstractShop<DataRecord, Fruit> {
     private FruitShopActionHandler handler;
     
-    public FruitShop(AbstractStorage<DataRecord, Fruit> shopStorage, ShopDao<DataRecord> fruitShopDao) {
+    public FruitShop(AbstractStorage<DataRecord, Fruit> shopStorage,
+                     ShopDao<DataRecord> fruitShopDao) {
         super(shopStorage, fruitShopDao);
         handler = new FruitShopActionHandler(shopStorage, fruitShopDao);
     }

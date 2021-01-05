@@ -10,7 +10,8 @@ import core.basesyntax.shopimpl.entity.Fruit;
 
 public class SupplyTransaction extends AbstractTransaction<DataRecord, Fruit> {
     
-    public SupplyTransaction(AbstractStorage<DataRecord, Fruit> storage, ShopDao<DataRecord> shopDao) {
+    public SupplyTransaction(AbstractStorage<DataRecord, Fruit> storage,
+                             ShopDao<DataRecord> shopDao) {
         super(storage, shopDao);
     }
     
