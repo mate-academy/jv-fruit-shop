@@ -52,7 +52,7 @@ class ReductionStrategyTest {
     @Test
     void subtractionMoreThanWeHave_Ok() {
         transactionDtos.add(new TransactionDto(Operation.PURCHASE,
-                new Fruit("banana"), 20));
+                new Fruit("banana"), 100));
         assertThrows(RuntimeException.class, () -> fruitService.applyAllOperators(transactionDtos));
     }
 }

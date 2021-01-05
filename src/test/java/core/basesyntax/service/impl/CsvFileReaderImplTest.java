@@ -35,11 +35,11 @@ class CsvFileReaderImplTest {
     void usualFile_Ok() {
         List<TransactionDto> expected = new ArrayList<>();
         expected.add(new TransactionDto(Operation.BALANCE, new Fruit("banana"), 20));
-        assertEquals(expected.get(0).getOperation(), csvFileReader.readData("src/test"
-                + "/java/core/basesyntax/service/impl/usual.csv").get(0).getOperation());
-        assertEquals(expected.get(0).getFruit(), csvFileReader.readData("src/test"
-                + "/java/core/basesyntax/service/impl/usual.csv").get(0).getFruit());
-        assertEquals(expected.get(0).getQuantity(), csvFileReader.readData("src/test"
-                + "/java/core/basesyntax/service/impl/usual.csv").get(0).getQuantity());
+        assertEquals(expected.get(0).getOperation(), csvFileReader
+                .readData("src/test/resources/usual.csv").get(0).getOperation());
+        assertEquals(expected.get(0).getFruit(), csvFileReader
+                .readData("src/test/resources/usual.csv").get(0).getFruit());
+        assertEquals(expected.get(0).getQuantity(), csvFileReader
+                .readData("src/test/resources/usual.csv").get(0).getQuantity());
     }
 }

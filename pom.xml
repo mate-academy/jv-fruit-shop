@@ -101,7 +101,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/Application*</exclude>
+                        <exclude>**/model/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -122,4 +123,3 @@
         </pluginManagement>
     </build>
 </project>
-

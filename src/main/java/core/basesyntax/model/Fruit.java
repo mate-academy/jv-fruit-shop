@@ -24,9 +24,4 @@ public class Fruit {
         Fruit fruit = (Fruit) secondObj;
         return Objects.equals(name, fruit.name);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
 }

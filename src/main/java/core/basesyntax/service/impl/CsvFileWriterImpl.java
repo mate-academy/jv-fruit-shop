@@ -15,7 +15,7 @@ public class CsvFileWriterImpl implements FileWriter {
             sb.append("quantity");
             sb.append("\n");
             for (Map.Entry<String, Long> entry : report.entrySet()) {
-                sb.append(entry.getKey()).append(" ").append(entry.getValue()).append("\n");
+                sb.append(entry.getKey()).append(",").append(entry.getValue()).append("\n");
             }
             writer.write(sb.toString());
         } catch (FileNotFoundException e) {

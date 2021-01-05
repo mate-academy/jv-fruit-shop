@@ -15,10 +15,6 @@ public class TransactionDto {
         return operation;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
-    }
-
     public Fruit getFruit() {
         return fruit;
     }
@@ -29,9 +25,5 @@ public class TransactionDto {
 
     public Integer getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 }
