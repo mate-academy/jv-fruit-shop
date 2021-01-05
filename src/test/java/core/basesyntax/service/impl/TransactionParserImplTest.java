@@ -6,10 +6,16 @@ import core.basesyntax.model.TransactionDto;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TransactionParserImplTest {
-    private static TransactionParserImpl transactionParser = new TransactionParserImpl();
+    private static TransactionParserImpl transactionParser;
+
+    @BeforeClass
+    public static void beforeClass() {
+        transactionParser = new TransactionParserImpl();
+    }
 
     @Test
     public void parse_ok() {

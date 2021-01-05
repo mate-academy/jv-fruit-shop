@@ -22,7 +22,7 @@ public class CsvFileWriter implements FileWriter {
             }
             bufferedWriter.write(reportLines.toString());
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Invalid path to file");
         }
     }
 }

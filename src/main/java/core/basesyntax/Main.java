@@ -2,6 +2,9 @@ package core.basesyntax;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.impl.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileWriter;
@@ -17,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String PATH_TO_FILE = "src/main/java/resources/fruits.csv";
+    private static final String PATH_TO_REPORT = "src/main/java/resources/fruits-report.csv";
 
     public static void main(String[] args) {
         Map<Operation, OperationStrategy> operations = new HashMap<>();
@@ -25,15 +30,15 @@ public class Main {
         operations.put(Operation.RETURN, new ReturnStrategy());
         operations.put(Operation.SUPPLY, new SupplyStrategy());
 
-        CsvFileReader csvFileReader = new CsvFileReader();
-        FruitServiceImpl fruitService = new FruitServiceImpl(operations);
-        CsvFileWriter fileWriter = new CsvFileWriter();
+        FileReader csvFileReader = new CsvFileReader();
+        FruitService fruitService = new FruitServiceImpl(operations);
+        FileWriter fileWriter = new CsvFileWriter();
         TransactionParser parser = new TransactionParserImpl();
 
         List<TransactionDto> transactionDtoList = parser
-                .parse(csvFileReader.readData("src/main/java/resources/fruits.csv"));
+                .parse(csvFileReader.readData(PATH_TO_FILE));
         fruitService.applyOperationOnFruitDto(transactionDtoList);
         Map<String, Integer> fruitReport = fruitService.getFruitReport();
-        fileWriter.createReportFile(fruitReport, "src/main/java/resources/fruits-report.csv");
+        fileWriter.createReportFile(fruitReport, PATH_TO_REPORT);
     }
 }

@@ -13,13 +13,26 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
-    private static FruitServiceImpl fruitService = new FruitServiceImpl(getOperation());
-    private static List<TransactionDto> transactionDtoList = new ArrayList<>();
+    private static FruitServiceImpl fruitService;
+    private static List<TransactionDto> transactionDtoList;
+    private static Map<Operation, OperationStrategy> operations;
+
+    @BeforeClass
+    public static void beforeClass() {
+        operations = new HashMap<>();
+        operations.put(Operation.BALANCE, new BalanceStrategy());
+        operations.put(Operation.PURCHASE, new PurchaseStrategy());
+        operations.put(Operation.RETURN, new ReturnStrategy());
+        operations.put(Operation.SUPPLY, new SupplyStrategy());
+        fruitService = new FruitServiceImpl(operations);
+        transactionDtoList = new ArrayList<>();
+    }
 
     @Test
     public void applyBalanceOperation_ok() {
@@ -94,15 +107,6 @@ public class FruitServiceImplTest {
         fruitService.applyOperationOnFruitDto(transactionDtoList);
     }
 
-    private static Map<Operation, OperationStrategy> getOperation() {
-        Map<Operation, OperationStrategy> operations = new HashMap<>();
-        operations.put(Operation.BALANCE, new BalanceStrategy());
-        operations.put(Operation.PURCHASE, new PurchaseStrategy());
-        operations.put(Operation.RETURN, new ReturnStrategy());
-        operations.put(Operation.SUPPLY, new SupplyStrategy());
-        return operations;
-    }
-
     @Test
     public void getFruitReport_ok() {
         Map<String, Integer> expectedMap = new HashMap<>();
@@ -113,7 +117,7 @@ public class FruitServiceImplTest {
 
     }
 
-    @Before
+    @After
     public void setUp() {
         Storage.getFruitsStorage().clear();
         transactionDtoList.clear();

@@ -26,6 +26,7 @@ public class FruitServiceImpl implements FruitService {
         return fruitReport;
     }
 
+    @Override
     public void applyOperationOnFruitDto(List<TransactionDto> transactionsDto) {
         for (TransactionDto transaction : transactionsDto) {
             operations.get(transaction.getOperation()).apply(transaction);

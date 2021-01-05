@@ -3,10 +3,16 @@ package core.basesyntax.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderTest {
-    private static final CsvFileReader reader = new CsvFileReader();
+    private static CsvFileReader reader;
+
+    @BeforeClass
+    public static void beforeClass() {
+        reader = new CsvFileReader();
+    }
 
     @Test
     public void read_ok() {

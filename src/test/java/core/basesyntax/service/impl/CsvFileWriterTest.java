@@ -6,12 +6,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileWriterTest {
-    private static FileWriter writer = new CsvFileWriter();
     private static final String PATH = "src/test/java/resources/fruit-writeTest.csv";
-    private static Map<String, Integer> report = new HashMap<>();
+    private static FileWriter writer;
+    private static Map<String, Integer> report;
+
+    @BeforeClass
+    public static void beforeClass() {
+        writer = new CsvFileWriter();
+        report = new HashMap<>();
+    }
 
     @Test
     public void write_ok() {
@@ -20,7 +27,6 @@ public class CsvFileWriterTest {
         String expected = "fruit,quantity"
                 + System.lineSeparator()
                 + "banana,50";
-
         String actual = reader(PATH);
         Assert.assertEquals(expected, actual);
     }
@@ -30,7 +36,7 @@ public class CsvFileWriterTest {
         writer.createReportFile(report, "");
     }
 
-    private static String reader(String path) {
+    private String reader(String path) {
         StringBuilder result = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(path))) {
             bufferedReader.lines()
