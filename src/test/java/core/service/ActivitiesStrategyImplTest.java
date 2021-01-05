@@ -3,11 +3,12 @@ package core.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.activities.ActivitiesHandler;
-import core.activities.BalanceActivitiesHandler;
-import core.activities.PurchaseActivitiesHandler;
-import core.activities.ReturnActivitiesHandler;
-import core.activities.SupplyActivitiesHandler;
+import core.model.Operations;
+import core.strategy.AmountHandler;
+import core.strategy.BalanceAmountHandler;
+import core.strategy.PurchaseAmountHandler;
+import core.strategy.ReturnAmountHandler;
+import core.strategy.SupplyAmountHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,42 +21,46 @@ public class ActivitiesStrategyImplTest {
 
     @BeforeAll
     public static void beforeAll() {
-        Map<String, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();
-        activitiesHandlerMap.put("b", new BalanceActivitiesHandler());
-        activitiesHandlerMap.put("s", new SupplyActivitiesHandler());
-        activitiesHandlerMap.put("r", new ReturnActivitiesHandler());
-        activitiesHandlerMap.put("p", new PurchaseActivitiesHandler());
+        Map<Operations, AmountHandler> activitiesHandlerMap = new HashMap<>();
+        activitiesHandlerMap.put(Operations.BALANCE, new BalanceAmountHandler());
+        activitiesHandlerMap.put(Operations.SUPPLY, new SupplyAmountHandler());
+        activitiesHandlerMap.put(Operations.RETURN, new ReturnAmountHandler());
+        activitiesHandlerMap.put(Operations.PURCHASE, new PurchaseAmountHandler());
         activitiesStrategy = new ActivitiesStrategyImpl(activitiesHandlerMap);
     }
 
     @Test
     public void testForBalance() {
-        Class<BalanceActivitiesHandler> firstExpected = BalanceActivitiesHandler.class;
-        Class<? extends ActivitiesHandler> firstActual = activitiesStrategy.get("b").getClass();
+        Class<BalanceAmountHandler> firstExpected = BalanceAmountHandler.class;
+        Class<? extends AmountHandler> firstActual = activitiesStrategy.get(Operations.BALANCE)
+                .getClass();
         assertEquals(firstExpected, firstActual,
                 String.format(STRING_FORMAT_FOR_WRONG, firstExpected, firstActual));
     }
 
     @Test
     public void testForPurchase() {
-        Class<PurchaseActivitiesHandler> firstExpected = PurchaseActivitiesHandler.class;
-        Class<? extends ActivitiesHandler> firstActual = activitiesStrategy.get("p").getClass();
+        Class<PurchaseAmountHandler> firstExpected = PurchaseAmountHandler.class;
+        Class<? extends AmountHandler> firstActual = activitiesStrategy.get(Operations.PURCHASE)
+                .getClass();
         assertEquals(firstExpected, firstActual,
                 String.format(STRING_FORMAT_FOR_WRONG, firstExpected, firstActual));
     }
 
     @Test
     public void testForReturn() {
-        Class<ReturnActivitiesHandler> firstExpected = ReturnActivitiesHandler.class;
-        Class<? extends ActivitiesHandler> firstActual = activitiesStrategy.get("r").getClass();
+        Class<ReturnAmountHandler> firstExpected = ReturnAmountHandler.class;
+        Class<? extends AmountHandler> firstActual = activitiesStrategy.get(Operations.RETURN)
+                .getClass();
         assertEquals(firstExpected, firstActual,
                 String.format(STRING_FORMAT_FOR_WRONG, firstExpected, firstActual));
     }
 
     @Test
     public void testForSupply() {
-        Class<SupplyActivitiesHandler> firstExpected = SupplyActivitiesHandler.class;
-        Class<? extends ActivitiesHandler> firstActual = activitiesStrategy.get("s").getClass();
+        Class<SupplyAmountHandler> firstExpected = SupplyAmountHandler.class;
+        Class<? extends AmountHandler> firstActual = activitiesStrategy
+                .get(Operations.operationFromString("s")).getClass();
         assertEquals(firstExpected, firstActual,
                 String.format(STRING_FORMAT_FOR_WRONG, firstExpected, firstActual));
     }
@@ -63,8 +68,11 @@ public class ActivitiesStrategyImplTest {
     @Test
     public void testForIncorrectData() {
         assertThrows(RuntimeException.class, () -> activitiesStrategy.get(null));
-        assertThrows(RuntimeException.class, () -> activitiesStrategy.get("c"));
-        assertThrows(RuntimeException.class, () -> activitiesStrategy.get("1"));
-        assertThrows(RuntimeException.class, () -> activitiesStrategy.get("%"));
+        assertThrows(RuntimeException.class, () -> activitiesStrategy
+                .get(Operations.operationFromString("d")));
+        assertThrows(RuntimeException.class, () -> activitiesStrategy
+                .get(Operations.operationFromString("1")));
+        assertThrows(RuntimeException.class, () -> activitiesStrategy
+                .get(Operations.operationFromString("%")));
     }
 }

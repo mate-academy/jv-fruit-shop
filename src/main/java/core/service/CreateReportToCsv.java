@@ -9,12 +9,12 @@ public class CreateReportToCsv implements CreateReportToFile {
             "fruit,quantity" + System.lineSeparator() + "%s";
 
     @Override
-    public void createReport(String reportData, String toFileName) {
-        String reportToFile = String.format(FORMAT_FOR_REPORT, reportData) + System.lineSeparator();
-        try (BufferedWriter writeFile = new BufferedWriter(new FileWriter(toFileName))) {
+    public void write(String data, String path) {
+        String reportToFile = String.format(FORMAT_FOR_REPORT, data) + System.lineSeparator();
+        try (BufferedWriter writeFile = new BufferedWriter(new FileWriter(path))) {
             writeFile.write(reportToFile);
         } catch (IOException e) {
-            throw new RuntimeException("Can't create a file!" + toFileName, e);
+            throw new RuntimeException("Can't create a file!" + path, e);
         }
     }
 }

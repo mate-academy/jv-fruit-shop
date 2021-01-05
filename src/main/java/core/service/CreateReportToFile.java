@@ -1,5 +1,5 @@
 package core.service;
 
 public interface CreateReportToFile {
-    void createReport(String reportData, String toFileName);
+    void write(String data, String path);
 }

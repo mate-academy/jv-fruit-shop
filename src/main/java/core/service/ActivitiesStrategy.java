@@ -1,7 +1,8 @@
 package core.service;
 
-import core.activities.ActivitiesHandler;
+import core.model.Operations;
+import core.strategy.AmountHandler;
 
 public interface ActivitiesStrategy {
-    ActivitiesHandler get(String typeOfActivity);
+    AmountHandler get(Operations typeOfActivity);
 }
