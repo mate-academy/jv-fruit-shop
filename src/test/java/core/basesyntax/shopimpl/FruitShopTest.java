@@ -21,6 +21,8 @@ public class FruitShopTest {
             = "src/test/resources/IllegalArgumentTestDatabase.csv";
     private String severalFruitsFilePath
             = "src/test/resources/SeveralFruitsDatabase.csv";
+    private String getSeveralFruitsAndActionFilePath
+            = "src/test/resources/SeveralFruitsAndActionsTestDatabase.csv";
     private ShopDao<DataRecord> shopDao;
     private AbstractStorage<DataRecord, Fruit> storage;
     
@@ -62,7 +64,12 @@ public class FruitShopTest {
     
     @Test
     public void severalFruitsAndActionsStorageInit() {
-    
+        shopDao = new FruitShopDao(getSeveralFruitsAndActionFilePath);
+        storage = new FruitShopStorage(shopDao);
+        
+        int actualAmountFruit1 = storage.getStorage().get(new Fruit("Fruit1"));
+        int expectedAmountFruit1 = 80;
+        assertEquals(expectedAmountFruit1, actualAmountFruit1);
     }
     
     //    @Test(expected = IllegalPurchaseAmountException.class)
