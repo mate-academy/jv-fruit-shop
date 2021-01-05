@@ -28,7 +28,7 @@ public class CsvFileWriterImplTest {
     public static Map<Operation, OperationStrategy> operationStrategyMap;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         csvFileWriter = new CsvFileWriterImpl();
         fruitService = new FruitServiceImpl(operationStrategyMap);
         transactionDtos = new ArrayList<>();
@@ -56,9 +56,10 @@ public class CsvFileWriterImplTest {
         Map<String, Long> longMap = fruitService.getReport();
         csvFileWriter.writeDataInFile(longMap, "src/test/resources/checkWriteMethod.csv");
         try {
-            List lines = Files.readAllLines(Path.of("src/test/resources/checkWriteMethod.csv"));
+            List<String> lines = Files.readAllLines(Path.of("src/test/"
+                    + "resources/checkWriteMethod.csv"));
             StringBuilder sb = new StringBuilder();
-            for (Object line : lines) {
+            for (String line : lines) {
                 sb.append(line);
             }
             assertEquals("fruit,quantitybanana,10", sb.toString());

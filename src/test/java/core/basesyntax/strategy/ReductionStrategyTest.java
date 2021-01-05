@@ -23,7 +23,7 @@ public class ReductionStrategyTest {
     public static Map<Operation, OperationStrategy> operationStrategyMap;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         additionalStrategy = new AdditionalStrategy();
         reductionStrategy = new ReductionStrategy();
         fruitService = new FruitServiceImpl(operationStrategyMap);

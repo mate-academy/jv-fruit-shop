@@ -14,9 +14,8 @@ public class CsvFileReaderImplTest {
     public static CsvFileReaderImpl csvFileReader;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         csvFileReader = new CsvFileReaderImpl();
-
     }
 
     @Test(expected = RuntimeException.class)

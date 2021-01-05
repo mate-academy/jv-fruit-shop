@@ -22,7 +22,7 @@ public class FruitServiceImplTest {
     public static Map<Operation, OperationStrategy> operationStrategyMap;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         fruitService = new FruitServiceImpl(operationStrategyMap);
         transactionDtos = new ArrayList<>();
         operationStrategyMap = new HashMap<>();
