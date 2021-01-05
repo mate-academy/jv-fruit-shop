@@ -12,10 +12,11 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseHandler;
 import core.basesyntax.strategy.ReturnHandler;
 import core.basesyntax.strategy.SupplyHandler;
-
-import java.util.*;
-
-import junit.framework.TestCase;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
