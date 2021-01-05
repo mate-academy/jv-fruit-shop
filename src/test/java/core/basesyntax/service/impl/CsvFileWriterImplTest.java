@@ -11,14 +11,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileWriterImplTest {
-    private CsvFileWriter csvFileWriter;
+    private static CsvFileWriter csvFileWriter;
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void beforeClass() {
         csvFileWriter = new CsvFileWriterImpl();
     }
 
