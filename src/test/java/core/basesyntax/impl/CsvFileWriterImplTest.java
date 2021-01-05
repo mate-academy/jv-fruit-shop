@@ -33,7 +33,7 @@ public class CsvFileWriterImplTest {
         testWriter.createReportFile(testMap, CORRECT_FILE_FOR_WRITING);
         String testLine;
         StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(CORRECT_FILE_FOR_WRITING));){
+        try (BufferedReader reader = new BufferedReader(new FileReader(CORRECT_FILE_FOR_WRITING))) {
             while ((testLine = reader.readLine()) != null) {
                 sb.append(testLine)
                         .append("\n");
