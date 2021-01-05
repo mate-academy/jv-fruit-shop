@@ -1,7 +1,7 @@
 package core.basesyntax.shopimpl.service;
 
 import core.basesyntax.model.abstractstorage.AbstractItem;
-import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
+import core.basesyntax.model.shopstrategy.ShopTransactionsType;
 import core.basesyntax.shopimpl.entity.Fruit;
 import core.basesyntax.shopimpl.entity.IllegalPurchaseAmountException;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class Validator {
         }
     }
     
-    public static void transactionValidator(ShopTransactionsTypes transactionsType,
+    public static void transactionValidator(ShopTransactionsType transactionsType,
                                             AbstractItem item,
                                             int amount) {
         if (transactionsType == null || item == null) {

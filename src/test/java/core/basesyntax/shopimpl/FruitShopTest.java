@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import core.basesyntax.model.AbstractShop;
 import core.basesyntax.model.abstractstorage.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
+import core.basesyntax.model.shopstrategy.ShopTransactionsType;
 import core.basesyntax.shopimpl.database.FruitShopDao;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
@@ -59,7 +59,7 @@ public class FruitShopTest {
         int actual = storage.getStorage().size();
         int expected = 4;
         assertEquals(expected, actual);
-        DataRecord expectedRecord = new DataRecord(ShopTransactionsTypes.BALANCE,
+        DataRecord expectedRecord = new DataRecord(ShopTransactionsType.BALANCE,
                 new Fruit("Fruit"),
                 100);
         assertTrue(shopDao.getTransactionHistory().contains(expectedRecord));
@@ -82,7 +82,7 @@ public class FruitShopTest {
         storage = new FruitShopStorage(shopDao);
         shop = new FruitShop(storage, shopDao);
         
-        shop.performAction(ShopTransactionsTypes.PURCHASE, new Fruit("Fruit1"), 1000);
+        shop.performAction(ShopTransactionsType.PURCHASE, new Fruit("Fruit1"), 1000);
     }
     
     @Test
@@ -95,7 +95,7 @@ public class FruitShopTest {
         int actual = shop.getShopStorage().get(fruit3);
         int expectedDifference = 5;
         
-        shop.performAction(ShopTransactionsTypes.PURCHASE, fruit3, expectedDifference);
+        shop.performAction(ShopTransactionsType.PURCHASE, fruit3, expectedDifference);
         actual = actual - shop.getShopStorage().get(fruit3);
         assertEquals(expectedDifference, actual);
     }
@@ -113,8 +113,8 @@ public class FruitShopTest {
         Fruit newFruit1 = new Fruit("Fruit" + index);
         Fruit newFruit2 = new Fruit("Fruit" + (index + 1));
         
-        shop.performAction(ShopTransactionsTypes.BALANCE, newFruit1, 100);
-        shop.performAction(ShopTransactionsTypes.SUPPLY, newFruit2, 100);
+        shop.performAction(ShopTransactionsType.BALANCE, newFruit1, 100);
+        shop.performAction(ShopTransactionsType.SUPPLY, newFruit2, 100);
         assertTrue(shop.getShopStorage().containsKey(newFruit1));
         assertTrue(shop.getShopStorage().containsKey(newFruit2));
     }
@@ -129,7 +129,7 @@ public class FruitShopTest {
         int actual = shop.getShopStorage().get(fruit3);
         int expectedDifference = 50;
     
-        shop.performAction(ShopTransactionsTypes.SUPPLY, fruit3, expectedDifference);
+        shop.performAction(ShopTransactionsType.SUPPLY, fruit3, expectedDifference);
         actual = shop.getShopStorage().get(fruit3) - actual;
         assertEquals(expectedDifference, actual);
     }
@@ -144,7 +144,7 @@ public class FruitShopTest {
         int actual = shop.getShopStorage().get(fruit3);
         int expectedDifference = 5;
         
-        shop.performAction(ShopTransactionsTypes.RETURN, fruit3, expectedDifference);
+        shop.performAction(ShopTransactionsType.RETURN, fruit3, expectedDifference);
         actual = shop.getShopStorage().get(fruit3) - actual;
         assertEquals(expectedDifference, actual);
     }
@@ -169,7 +169,7 @@ public class FruitShopTest {
         shopDao = new FruitShopDao(testDatabase);
         storage = new FruitShopStorage(shopDao);
         shop = new FruitShop(storage, shopDao);
-        shop.performAction(ShopTransactionsTypes.RETURN, null, 0);
+        shop.performAction(ShopTransactionsType.RETURN, null, 0);
     }
     
     @Test(expected = RuntimeException.class)

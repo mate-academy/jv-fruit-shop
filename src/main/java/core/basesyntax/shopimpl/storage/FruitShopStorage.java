@@ -3,7 +3,7 @@ package core.basesyntax.shopimpl.storage;
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.abstractstorage.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
+import core.basesyntax.model.shopstrategy.ShopTransactionsType;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ public class FruitShopStorage extends AbstractStorage<DataRecord, Fruit> {
         }
         
         for (DataRecord record : shopDao.getTransactionHistory()) {
-            if (record.getAction() == ShopTransactionsTypes.PURCHASE) {
+            if (record.getAction() == ShopTransactionsType.PURCHASE) {
                 Fruit key = (Fruit) record.getItem();
                 int updatedValue = storage.get(key) - record.getAmount();
                 if (updatedValue < 0) {
@@ -41,7 +41,7 @@ public class FruitShopStorage extends AbstractStorage<DataRecord, Fruit> {
                 storage.put(key, storage.get(key) - record.getAmount());
                 continue;
             }
-            if (record.getAction() == ShopTransactionsTypes.BALANCE) {
+            if (record.getAction() == ShopTransactionsType.BALANCE) {
                 Fruit key = (Fruit) record.getItem();
                 storage.put(key, record.getAmount());
                 continue;

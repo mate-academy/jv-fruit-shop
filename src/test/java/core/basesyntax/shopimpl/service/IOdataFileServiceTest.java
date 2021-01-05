@@ -2,7 +2,7 @@ package core.basesyntax.shopimpl.service;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
+import core.basesyntax.model.shopstrategy.ShopTransactionsType;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import java.io.IOException;
@@ -18,15 +18,14 @@ public class IOdataFileServiceTest {
             = "src/test/resources/TestInvalid.csv";
     private String filePathInvalid2
             = "src/test/resources/TestInvalid2.csv";
-    private IOdataFileService testObject = new IOdataFileService(filePathValid);
     private List<DataRecord> list =
-            List.of(new DataRecord(ShopTransactionsTypes.BALANCE, new Fruit("Fruit"), 100),
-                    new DataRecord(ShopTransactionsTypes.BALANCE, new Fruit("Fruit"), 100),
-                    new DataRecord(ShopTransactionsTypes.BALANCE, new Fruit("Fruit"), 100));
+            List.of(new DataRecord(ShopTransactionsType.BALANCE, new Fruit("Fruit"), 100),
+                    new DataRecord(ShopTransactionsType.BALANCE, new Fruit("Fruit"), 100),
+                    new DataRecord(ShopTransactionsType.BALANCE, new Fruit("Fruit"), 100));
     
     @Test
     public void writeDataFile() {
-        testObject.writeDataFile(list);
+        IOdataFileService.writeDataFile(filePathValid, list);
         
         String expected = "ShopAction,Item,Amount\n\r"
                           + "b,Fruit,100\n\r"
@@ -43,21 +42,18 @@ public class IOdataFileServiceTest {
     
     @Test
     public void readDataFile() {
-        testObject = new IOdataFileService(filePathValid);
-        List<DataRecord> actual = testObject.readDataFile();
+        List<DataRecord> actual = IOdataFileService.readDataFile(filePathValid);
         List<DataRecord> expected = list;
         assertEquals(expected, actual);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void readDataFileInvalidData() {
-        testObject = new IOdataFileService(filePathInvalid);
-        List<DataRecord> actual = testObject.readDataFile();
+        List<DataRecord> actual = IOdataFileService.readDataFile(filePathInvalid);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void readDataFileNegativeValue() {
-        testObject = new IOdataFileService(filePathInvalid2);
-        List<DataRecord> actual = testObject.readDataFile();
+        List<DataRecord> actual = IOdataFileService.readDataFile(filePathInvalid2);
     }
 }

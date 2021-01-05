@@ -4,7 +4,7 @@ import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.abstractstorage.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
 import core.basesyntax.model.shopstrategy.AbstractTransaction;
-import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
+import core.basesyntax.model.shopstrategy.ShopTransactionsType;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import core.basesyntax.shopimpl.entity.IllegalPurchaseAmountException;
@@ -22,7 +22,7 @@ public class PurchaseTransaction extends AbstractTransaction<DataRecord, Fruit> 
             Validator.transactionValidator(item, amount, getStorage());
             int update = getStorage().get(item) - amount;
             getStorage().put((Fruit) item, update);
-            getShopDao().addTransaction(new DataRecord(ShopTransactionsTypes.PURCHASE,
+            getShopDao().addTransaction(new DataRecord(ShopTransactionsType.PURCHASE,
                     item,
                     amount));
             getShopDao().updateDatabase();

@@ -3,10 +3,9 @@ package core.basesyntax.model.shopstrategy;
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.abstractstorage.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.shopimpl.entity.DataRecord;
 import java.util.Map;
 
-public abstract class AbstractTransaction<R extends DataRecord,
+public abstract class AbstractTransaction<R,
         I extends AbstractItem> implements ShopTransaction {
     private AbstractStorage<R, I> storage;
     private ShopDao<R> shopDao;

@@ -1,7 +1,7 @@
 package core.basesyntax.shopimpl.database;
 
 import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
+import core.basesyntax.model.shopstrategy.ShopTransactionsType;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import core.basesyntax.shopimpl.service.IOdataFileService;
@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 
 public class FruitShopDao implements ShopDao<DataRecord> {
     private List<DataRecord> dataBase;
-    private IOdataFileService fileService;
+    private String filePath;
     
-    public FruitShopDao(String dataFilePath) {
-        fileService = new IOdataFileService(dataFilePath);
-        dataBase = fileService.readDataFile();
+    public FruitShopDao(String filePath) {
+        this.filePath = filePath;
+        dataBase = IOdataFileService.readDataFile(filePath);
     }
     
     @Override
@@ -35,12 +35,12 @@ public class FruitShopDao implements ShopDao<DataRecord> {
         dataBase.add(action);
     }
     
-    public void addAction(ShopTransactionsTypes action, String item, Integer amount) {
+    public void addAction(ShopTransactionsType action, String item, Integer amount) {
         dataBase.add(new DataRecord(action, new Fruit(item), amount));
     }
     
     @Override
     public void updateDatabase() {
-        fileService.writeDataFile(dataBase);
+        IOdataFileService.writeDataFile(filePath, dataBase);
     }
 }

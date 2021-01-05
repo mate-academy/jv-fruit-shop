@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.abstractstorage.AbstractStorage;
 import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
+import core.basesyntax.model.shopstrategy.ShopTransactionsType;
 import java.util.Map;
 
 public abstract class AbstractShop<R, I extends AbstractItem> {
@@ -18,7 +18,7 @@ public abstract class AbstractShop<R, I extends AbstractItem> {
         this.shopDao = shopDao;
     }
     
-    public abstract void performAction(ShopTransactionsTypes action, I item, int amount);
+    public abstract void performAction(ShopTransactionsType action, I item, int amount);
     
     public Map<I, Integer> getShopStorage() {
         return shopStorage.getStorage();

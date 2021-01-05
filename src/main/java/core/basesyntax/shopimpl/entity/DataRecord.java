@@ -1,21 +1,21 @@
 package core.basesyntax.shopimpl.entity;
 
 import core.basesyntax.model.abstractstorage.AbstractItem;
-import core.basesyntax.model.shopstrategy.ShopTransactionsTypes;
+import core.basesyntax.model.shopstrategy.ShopTransactionsType;
 import java.util.Objects;
 
 public class DataRecord {
-    private ShopTransactionsTypes action;
+    private ShopTransactionsType action;
     private AbstractItem item;
     private Integer amount;
     
-    public DataRecord(ShopTransactionsTypes action, AbstractItem item, Integer amount) {
+    public DataRecord(ShopTransactionsType action, AbstractItem item, Integer amount) {
         this.action = action;
         this.item = item;
         this.amount = amount;
     }
     
-    public ShopTransactionsTypes getAction() {
+    public ShopTransactionsType getAction() {
         return action;
     }
     
