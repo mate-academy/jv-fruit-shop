@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.service.impl.ReadFromFileImpl;
 import core.basesyntax.service.interfaces.ReadFromFile;
-
 import java.util.HashMap;
 import java.util.List;
 import org.junit.Assert;
