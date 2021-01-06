@@ -6,7 +6,6 @@ import core.basesyntax.exceptions.NegativeQuantityException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
-import java.util.ArrayList;
 import java.util.List;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -19,26 +18,17 @@ public class CsvParserTest {
     private static List<TransactionDto> expectedDtoList;
     private static List<String> inputOkStringList;
     private static List<String> inputNotOkStringList;
-    private static final TransactionDto testDto1 = new TransactionDto(Operation.fromString("b"),
-            new Fruit("banana"), 20);
-    private static final TransactionDto testDto2 = new TransactionDto(Operation.fromString("s"),
-            new Fruit("apple"), 100);
 
     @BeforeClass
     public static void beforeAll() {
         csvParser = new CsvParser();
-        inputOkStringList = new ArrayList<>();
-        inputNotOkStringList = new ArrayList<>();
-        inputOkStringList.add(TEST_STRING_1);
-        inputOkStringList.add(TEST_STRING_2);
-        inputNotOkStringList.add(TEST_STRING_3);
-        expectedDtoList = new ArrayList<>();
-        TransactionDto testDto1 = new TransactionDto(Operation.fromString("b"),
+        inputOkStringList = List.of(TEST_STRING_1, TEST_STRING_2);
+        inputNotOkStringList = List.of(TEST_STRING_3);
+        TransactionDto testDto1 = new TransactionDto(Operation.BALANCE,
                 new Fruit("banana"), 20);
-        TransactionDto testDto2 = new TransactionDto(Operation.fromString("s"),
+        TransactionDto testDto2 = new TransactionDto(Operation.SUPPLY,
                 new Fruit("apple"), 100);
-        expectedDtoList.add(testDto1);
-        expectedDtoList.add(testDto2);
+        expectedDtoList = List.of(testDto1, testDto2);
     }
 
     @Test

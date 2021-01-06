@@ -14,11 +14,11 @@ import org.junit.Test;
 
 public class AdditionStrategyImplTest {
     private static OperationStrategy additionStrategy;
-    private static final TransactionDto testDto1 = new TransactionDto(Operation.fromString("b"),
+    private static final TransactionDto testDto1 = new TransactionDto(Operation.BALANCE,
             new Fruit("banana"), 20);
-    private static final TransactionDto testDto2 = new TransactionDto(Operation.fromString("s"),
+    private static final TransactionDto testDto2 = new TransactionDto(Operation.SUPPLY,
             new Fruit("apple"), 100);
-    private static final TransactionDto testDto3 = new TransactionDto(Operation.fromString("r"),
+    private static final TransactionDto testDto3 = new TransactionDto(Operation.RETURN,
             new Fruit("banana"), 50);
 
     @BeforeClass

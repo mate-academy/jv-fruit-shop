@@ -10,7 +10,6 @@ import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.AdditionStrategyImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.ReductionStrategyImpl;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,19 +21,17 @@ public class FruitServiceImplTest {
     private static Map<Operation, OperationStrategy> operationStrategyMap;
     private static FruitService fruitService;
     private static List<TransactionDto> transactionDtoListCorrect;
-    private static List<TransactionDto> transactionDtoListIncorrectAmount;
-    private static List<TransactionDto> transactionDtoListIncorrectResult;
-    private static final TransactionDto testDto1 = new TransactionDto(Operation.fromString("b"),
+    private static final TransactionDto testDto1 = new TransactionDto(Operation.BALANCE,
             new Fruit("banana"), 20);
-    private static final TransactionDto testDto2 = new TransactionDto(Operation.fromString("s"),
+    private static final TransactionDto testDto2 = new TransactionDto(Operation.SUPPLY,
             new Fruit("apple"), 100);
-    private static final TransactionDto testDto3 = new TransactionDto(Operation.fromString("p"),
+    private static final TransactionDto testDto3 = new TransactionDto(Operation.PURCHASE,
             new Fruit("banana"), 100);
-    private static final TransactionDto testDto4 = new TransactionDto(Operation.fromString("r"),
+    private static final TransactionDto testDto4 = new TransactionDto(Operation.RETURN,
             new Fruit("apple"), 100);
-    private static final TransactionDto testDto5 = new TransactionDto(Operation.fromString("s"),
+    private static final TransactionDto testDto5 = new TransactionDto(Operation.SUPPLY,
             new Fruit("apple"), -100);
-    private static final TransactionDto testDto6 = new TransactionDto(Operation.fromString("p"),
+    private static final TransactionDto testDto6 = new TransactionDto(Operation.PURCHASE,
             new Fruit("apple"), 50);
 
     @BeforeClass
@@ -45,16 +42,7 @@ public class FruitServiceImplTest {
         operationStrategyMap.put(Operation.SUPPLY, new AdditionStrategyImpl());
         operationStrategyMap.put(Operation.RETURN, new AdditionStrategyImpl());
         fruitService = new FruitServiceImpl(operationStrategyMap);
-        transactionDtoListCorrect = new ArrayList<>();
-        transactionDtoListIncorrectAmount = new ArrayList<>();
-        transactionDtoListIncorrectResult = new ArrayList<>();
-        transactionDtoListCorrect.add(testDto1);
-        transactionDtoListCorrect.add(testDto2);
-        transactionDtoListCorrect.add(testDto4);
-        transactionDtoListCorrect.add(testDto6);
-        transactionDtoListIncorrectAmount.add(testDto5);
-        transactionDtoListIncorrectResult.add(testDto1);
-        transactionDtoListIncorrectAmount.add(testDto3);
+        transactionDtoListCorrect = List.of(testDto1, testDto2, testDto4, testDto6);
     }
 
     @Before
@@ -73,8 +61,9 @@ public class FruitServiceImplTest {
 
     @Test
     public void getReport_Ok() {
-        transactionToDB_Ok();
-        String expected = "fruit,quantity\nbanana,20\napple,150";
+        fruitService.applyTransactionsToDB(transactionDtoListCorrect);
+        String expected = "fruit,quantity" + System.lineSeparator()
+                + "banana,20" + System.lineSeparator() + "apple,150";
         String actual = fruitService.getReport();
         assertEquals(expected, actual);
     }

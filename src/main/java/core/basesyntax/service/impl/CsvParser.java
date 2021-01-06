@@ -18,10 +18,13 @@ public class CsvParser {
             String[] parsedData = item.split(",");
             Integer currentAmount = Integer.parseInt(parsedData[QUANTITY_INDEX]);
             if (currentAmount < 0) {
-                throw new NegativeQuantityException("Buyers will not be able to "
-                        + Operation.fromString(parsedData[OPERATION_INDEX]) + " "
-                        + currentAmount + " " + parsedData[FRUIT_NAME_INDEX]
-                        + ". " + currentAmount + " is incorrect input.");
+                throw new NegativeQuantityException(String
+                        .format("Buyers will not be able to %s %s %s. %s incorrect input.",
+                        Operation.fromString(parsedData[OPERATION_INDEX]),
+                        currentAmount,
+                        parsedData[FRUIT_NAME_INDEX],
+                        parsedData[FRUIT_NAME_INDEX],
+                        currentAmount));
             }
             TransactionDto transactionDto =
                     new TransactionDto(Operation.fromString(parsedData[OPERATION_INDEX]),

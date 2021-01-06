@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
+    private static final String HEADER = "fruit,quantity";
     private Map<Operation, OperationStrategy> operationStrategyMap;
 
     public FruitServiceImpl(Map<Operation, OperationStrategy> operationStrategyMap) {
@@ -24,9 +25,10 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public String getReport() {
-        StringBuilder stringBuilder = new StringBuilder("fruit,quantity");
+        StringBuilder stringBuilder = new StringBuilder(HEADER);
         for (Map.Entry<String, Integer> entry : Storage.getFruits().entrySet()) {
-            stringBuilder.append("\n").append(entry.getKey()).append(",").append(entry.getValue());
+            stringBuilder.append(System.lineSeparator()).append(entry.getKey())
+                    .append(",").append(entry.getValue());
         }
         return stringBuilder.toString();
     }

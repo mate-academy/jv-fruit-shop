@@ -17,22 +17,23 @@ import java.util.List;
 import java.util.Map;
 
 public class Application {
-    private static final String INPUT_FILEPATH = "src/main/resources/test-fruit.csv";
-    private static final String OUTPUT_FILEPATH = "src/main/resources/output-fruit.csv";
-
     public static void main(String[] args) {
-        CsvParser csvParser = new CsvParser();
-        DataReader dataReader = new CsvDataReaderImpl(csvParser);
+        String inputFilepath = "src/main/resources/test-fruit.csv";
+        DataReader dataReader = new CsvDataReaderImpl();
+        List<String> linesFromFile = dataReader.read(inputFilepath);
+        linesFromFile.remove(0);
         Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put(Operation.BALANCE, new AdditionStrategyImpl());
         operationStrategyMap.put(Operation.PURCHASE, new ReductionStrategyImpl());
         operationStrategyMap.put(Operation.SUPPLY, new AdditionStrategyImpl());
         operationStrategyMap.put(Operation.RETURN, new AdditionStrategyImpl());
         FruitService fruitService = new FruitServiceImpl(operationStrategyMap);
-        DataWriter dataWriter = new CsvDataWriterImpl();
-        List<TransactionDto> transactionsFromFile = dataReader.read(INPUT_FILEPATH);
-        fruitService.applyTransactionsToDB(transactionsFromFile);
+        CsvParser csvParser = new CsvParser();
+        List<TransactionDto> transactionDtoList = csvParser.parse(linesFromFile);
+        fruitService.applyTransactionsToDB(transactionDtoList);
         String report = fruitService.getReport();
-        dataWriter.writeReport(report, OUTPUT_FILEPATH);
+        String outputFilepath = "src/main/resources/output-fruit.csv";
+        DataWriter dataWriter = new CsvDataWriterImpl();
+        dataWriter.writeReport(report, outputFilepath);
     }
 }
