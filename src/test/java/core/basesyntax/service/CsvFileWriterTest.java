@@ -31,7 +31,7 @@ public class CsvFileWriterTest {
             Assert.assertEquals("banana,150", bufferedReader.readLine());
             Assert.assertEquals("apple,50", bufferedReader.readLine());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error writing data!");
         }
     }
 

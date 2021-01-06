@@ -96,11 +96,9 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
-                        <exclude>**/Fruit*</exclude>
-                        <exclude>**/Operation*</exclude>
-                        <exclude>**/TransactionDto*</exclude>
-                        <exclude>**/Storage*</exclude>
-                        <exclude>**/WrongNumberOfFruitException*</exclude>
+                        <exclude>**/database/**</exclude>
+                        <exclude>**/exception/**</exclude>
+                        <exclude>**/model/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

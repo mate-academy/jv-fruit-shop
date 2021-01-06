@@ -6,7 +6,7 @@ import core.basesyntax.model.TransactionDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseFruitImpl implements ParseFruit<TransactionDto> {
+public class FruitParserImpl implements DataParser<TransactionDto> {
     @Override
     public List<TransactionDto> parse(List<String[]> data) {
         if (data != null) {

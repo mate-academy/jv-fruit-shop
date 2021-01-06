@@ -1,8 +1,9 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.parse.ParseFruit;
-import core.basesyntax.parse.ParseFruitImpl;
+import core.basesyntax.model.TransactionDto;
+import core.basesyntax.parse.DataParser;
+import core.basesyntax.parse.FruitParserImpl;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.FilesReader;
@@ -27,7 +28,7 @@ public class Main {
         operationStrategyMap.put(Operation.PURCHASE, new ReductionStrategy());
 
         FruitService fruitService = new FruitServiceImpl(operationStrategyMap);
-        ParseFruit parseFruit = new ParseFruitImpl();
+        DataParser<TransactionDto> parseFruit = new FruitParserImpl();
         FilesWriter filesWriter = new CsvFileWriter();
         FilesReader filesReader = new CsvFileReader();
 
