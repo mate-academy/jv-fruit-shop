@@ -11,7 +11,6 @@ import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.strategy.AdditionStrategy;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.ReductionStrategy;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

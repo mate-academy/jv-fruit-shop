@@ -3,7 +3,6 @@ package core.basesyntax.strategy;
 import core.basesyntax.database.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Record;
-
 import java.util.Map;
 import java.util.NoSuchElementException;
 

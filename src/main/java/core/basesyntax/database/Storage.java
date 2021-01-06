@@ -11,7 +11,7 @@ public class Storage {
         storage = new HashMap<>();
     }
 
-    public static Map<Fruit, Long> getStorage(){
+    public static Map<Fruit, Long> getStorage() {
         return storage;
     }
 }

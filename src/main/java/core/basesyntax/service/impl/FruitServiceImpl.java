@@ -5,7 +5,6 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.model.Record;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
