@@ -4,15 +4,12 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.ParseToList;
-import core.basesyntax.service.impl.ParseToListImpl;
-import org.junit.After;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class ParseToListImplTest {
     private static List<TransactionDto> data = new ArrayList<>();
@@ -39,25 +36,25 @@ public class ParseToListImplTest {
     @Test
     public void parseOneLine_Ok() {
         List<TransactionDto> expected = new ArrayList<>();
-        expected.add(new TransactionDto(Operation.BALANCE, new Fruit("banana"),150));
+        expected.add(new TransactionDto(Operation.BALANCE, new Fruit("banana"), 150));
         List<TransactionDto> actual = parseToList.parseToTransactions(listOfStringsWithOneLine);
-        assertEquals(expected.size(), actual.size());
-        assertEquals(expected,actual);
+        Assert.assertEquals(expected.size(), actual.size());
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
     public void parseThreeLines_Ok() {
         List<TransactionDto> expected = new ArrayList<>();
-        expected.add(new TransactionDto(Operation.BALANCE, new Fruit("banana"),20));
-        expected.add(new TransactionDto(Operation.BALANCE, new Fruit("apple"),100));
+        expected.add(new TransactionDto(Operation.BALANCE, new Fruit("banana"), 20));
+        expected.add(new TransactionDto(Operation.BALANCE, new Fruit("apple"), 100));
         expected.add(new TransactionDto(Operation.SUPPLY, new Fruit("orange"), 60));
         List<TransactionDto> actual = parseToList.parseToTransactions(listOfStringsWithThreeLines);
-        assertEquals(expected.size(), actual.size());
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected.size(), actual.size());
+        Assert.assertEquals(expected, actual);
     }
 
     @Test(expected = RuntimeException.class)
-    public void NoDataInFile() {
+    public void noDataInFile() {
         parseToList.parseToTransactions(nullList);
     }
 }

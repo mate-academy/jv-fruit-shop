@@ -13,7 +13,6 @@ import core.basesyntax.service.impl.ParseToListImpl;
 import core.basesyntax.strategy.AdditionStrategy;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.ReduceStrategy;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,13 +26,11 @@ public class Application {
         operationStrategyMap.put(Operation.PURCHASE, new ReduceStrategy());
 
         CsvFileReader fileReader = new CsvFilereaderImpl();
-
         FruitService fruitService = new FruitServiceImpl(operationStrategyMap);
         ParseToList parse = new ParseToListImpl();
         List<TransactionDto> transactionDtos = parse.parseToTransactions(
                 fileReader.readFile("src/main/resources/test_fruits"));
         fruitService.applyOperationoOnFruitsDto(transactionDtos);
-
 
         CsvFileWriter fileWriter = new CsvFileWriterImpl();
         fileWriter.writeReport("src/main/resources/fruits_report", fruitService.getFruitsReport());

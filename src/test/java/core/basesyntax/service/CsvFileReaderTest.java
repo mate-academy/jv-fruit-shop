@@ -1,13 +1,11 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.impl.CsvFilereaderImpl;
-import org.junit.After;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class CsvFileReaderTest {
     private static final String PATH_TO_THREE_LINE_FILE = "src/test/resources/test2_3lines";
@@ -27,8 +25,8 @@ public class CsvFileReaderTest {
         List<String> expected = new ArrayList<>();
         expected.add("b,banana,150");
         data = fileReader.readFile(PATH_TO_ONE_LINE_FILE);
-        assertEquals(expected.size(), data.size());
-        assertEquals(expected, data);
+        Assert.assertEquals(expected.size(), data.size());
+        Assert.assertEquals(expected, data);
     }
 
     @Test
@@ -38,8 +36,8 @@ public class CsvFileReaderTest {
         expected.add("b,apple,100");
         expected.add("s,banana,60");
         data = fileReader.readFile(PATH_TO_THREE_LINE_FILE);
-        assertEquals(expected.size(), data.size());
-        assertEquals(expected, data);
+        Assert.assertEquals(expected.size(), data.size());
+        Assert.assertEquals(expected, data);
     }
 
     @Test(expected = RuntimeException.class)

@@ -2,18 +2,15 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CsvFileWriter;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-
-import static org.junit.Assert.*;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class CsvFilereaderImplTest {
     private static final String EXPECTED_REPORT = "src/test/resources/expected_file";
@@ -36,10 +33,9 @@ public class CsvFilereaderImplTest {
             actualData = Files.readAllLines(Path.of(PATH_TO_WRITE));
             expectedData = Files.readAllLines(Path.of(EXPECTED_REPORT));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from files");
+            throw new RuntimeException("Can't read data from files" + PATH_TO_WRITE, e);
         }
-        assertEquals(actualData.size(), expectedData.size());
-        assertEquals(expectedData, actualData);
+        Assert.assertEquals(actualData.size(), expectedData.size());
+        Assert.assertEquals(expectedData, actualData);
     }
-
 }
