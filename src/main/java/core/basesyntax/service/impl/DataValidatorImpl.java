@@ -5,9 +5,15 @@ import core.basesyntax.service.operations.Operation;
 import java.util.Map;
 
 public class DataValidatorImpl implements DataValidator {
+    private final Map<String, Operation> strategyMap;
+
+    public DataValidatorImpl(Map<String, Operation> strategyMap) {
+        this.strategyMap = strategyMap;
+    }
+
     @Override
-    public void isOperationValid(Map<String, Operation> strategy, String[] record) {
-        if (strategy.get(record[0]) == null) {
+    public void isOperationValid(String[] record) {
+        if (strategyMap.get(record[0]) == null) {
             throw new RuntimeException("Operation does not present");
         }
     }
