@@ -3,9 +3,13 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Fruit {
-    private final String fruitName;
+    private String fruitName;
 
     public Fruit(String fruitName) {
+        this.fruitName = fruitName;
+    }
+
+    public void setFruitName(String fruitName) {
         this.fruitName = fruitName;
     }
 
