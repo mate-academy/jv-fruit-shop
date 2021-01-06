@@ -15,7 +15,7 @@ public class CsvFileWriterImpl implements CsvFileWriter {
                 writer.append(entry.getKey().getName());
                 writer.append(",");
                 writer.append(entry.getValue().toString());
-                writer.append("\n");
+                writer.append(System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file " + filePathTo);

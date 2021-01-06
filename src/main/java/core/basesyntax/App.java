@@ -16,11 +16,11 @@ public class App {
 
     public static void main(String[] args) {
         CsvFileReader reader = new CsvFileReaderImpl();
-        List<String> todayAlgorithm = reader.readFromFile(FILE_FROM);
-        List<String[]> parsedAlgorithm = new CsvParserImpl().parse(todayAlgorithm);
+        List<String> dataFromFile = reader.readFromFile(FILE_FROM);
+        List<String[]> parsedData = new CsvParserImpl().parse(dataFromFile);
 
         FruitService service = new FruitServiceImpl();
-        service.processActivities(parsedAlgorithm);
+        service.processActivities(parsedData);
 
         CsvFileWriter writer = new CsvFileWriterImpl();
         writer.writeToFile(FILE_TO, Storage.storage);

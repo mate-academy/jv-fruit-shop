@@ -16,10 +16,7 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void processActivities(List<String[]> incomeAlgorithm) {
-        for (String[] algorithm : incomeAlgorithm) {
-            if (Arrays.equals(algorithm, HEADER)) {
-                continue;
-            }
+        for (String[] algorithm : incomeAlgorithm.subList(1, incomeAlgorithm.size())) {
             Operation operation = Operation.fromString(algorithm[OPERATION_INDEX]);
             Fruit fruit = new Fruit(algorithm[FRUIT_INDEX]);
             Integer quantity = Integer.parseInt(algorithm[QUANTITY_INDEX]);
