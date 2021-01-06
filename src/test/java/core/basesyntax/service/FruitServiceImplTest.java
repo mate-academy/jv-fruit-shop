@@ -1,16 +1,14 @@
-
 package core.basesyntax.service;
+
+import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.work.with.file.ReadInformationFromFile;
 import core.basesyntax.service.work.with.file.ReadInformationFromFileImpl;
-import org.junit.Before;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 public class FruitServiceImplTest {
     FruitService fruitService;

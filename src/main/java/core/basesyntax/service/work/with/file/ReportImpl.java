@@ -22,6 +22,7 @@ import java.util.Map;
 
 public class ReportImpl implements Report {
     private static final String HEADER = "fruit,quantity";
+
     @Override
     public String writeReport(List<String> list) {
         createReport(list);

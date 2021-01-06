@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.operation.Operation;
 import core.basesyntax.service.operation.OperationStrategy;
