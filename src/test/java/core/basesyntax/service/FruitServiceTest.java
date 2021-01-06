@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
@@ -69,9 +70,8 @@ public class FruitServiceTest {
         testData.add(RETURN_BANANA_TRANSACTION);
         testData.add(RETURN_APPLE_TRANSACTION);
         service.processActivities(testData);
-        Map<Fruit, Integer> report = service.getReport();
-        Assert.assertEquals(Integer.valueOf(160), report.get(BANANA));
-        Assert.assertEquals(Integer.valueOf(160), report.get(APPLE));
+        Assert.assertEquals(Integer.valueOf(160), Storage.storage.get(BANANA));
+        Assert.assertEquals(Integer.valueOf(160), Storage.storage.get(APPLE));
     }
 
     @Test(expected = RuntimeException.class)
@@ -86,6 +86,13 @@ public class FruitServiceTest {
         testData.add(RETURN_BANANA_TRANSACTION);
         testData.add(RETURN_APPLE_TRANSACTION);
         service.processActivities(testData);
+    }
+
+    @Test
+    public void getReport_OK() {
+        Storage.storage.put(BANANA, 100);
+        Storage.storage.put(APPLE, 40);
+        Assert.assertEquals(Storage.storage, service.getReport());
     }
 
     @After

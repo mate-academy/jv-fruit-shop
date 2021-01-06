@@ -31,13 +31,6 @@ public class StrategyTest {
         operationStrategyMap.put(Operation.SUPPLY, new SupplyStrategy());
     }
 
-    @Test
-    public void validOperation() {
-        dto = new TransactionDto(Operation.BALANCE, BANANA, 50);
-        OperationStrategy actual = operationStrategyMap.get(dto.getOperation());
-        Assert.assertNotNull(actual);
-    }
-
     @Test(expected = IllegalArgumentException.class)
     public void invalidOperation() {
         dto = new TransactionDto(Operation.valueOf("CATCH"), APPLE, 60);

@@ -10,34 +10,35 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import java.util.Map;
+
+import org.junit.*;
 
 public class WriteToFileTest {
     private static final String FILE_TO = "src/test/resources/report.csv";
     private static final Fruit BANANA = new Fruit("banana");
     private static final Fruit APPLE = new Fruit("apple");
     private static CsvFileWriter writer;
+    private static Map<Fruit, Integer> storage = new HashMap<>();
 
-    @BeforeClass
-    public static void before() {
+    @Before
+    public void before() {
         writer = new CsvFileWriterImpl();
-        Storage.storage.put(BANANA, 50);
-        Storage.storage.put(APPLE, 25);
+        storage.put(BANANA, 50);
+        storage.put(APPLE, 25);
     }
 
     @Test
     public void writeToFile() {
-        writer.writeToFile(FILE_TO, Storage.storage);
+        writer.writeToFile(FILE_TO, storage);
         assertTrue(Files.exists(Path.of(FILE_TO)));
     }
 
     @Test
     public void actualDataInFile() throws IOException {
-        writer.writeToFile(FILE_TO, Storage.storage);
+        writer.writeToFile(FILE_TO, storage);
         List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("banana,50");
@@ -48,6 +49,6 @@ public class WriteToFileTest {
 
     @After
     public void afterClass() {
-        Storage.storage.clear();
+        storage.clear();
     }
 }

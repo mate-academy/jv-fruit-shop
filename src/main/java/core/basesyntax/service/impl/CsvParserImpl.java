@@ -4,12 +4,10 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.CsvParser;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CsvParserImpl implements CsvParser {
-
     public static final int OPERATION_INDEX = 0;
     public static final int FRUIT_INDEX = 1;
     public static final int QUANTITY_INDEX = 2;
