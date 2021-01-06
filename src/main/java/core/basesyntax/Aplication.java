@@ -19,6 +19,9 @@ import java.util.Map;
 
 public class Aplication {
     public static void main(String[] args) {
+        final String textFile = "src\\main\\resource\\text.csv";
+        final String destinationFile = "src\\main\\resource\\destination.csv";
+
         Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put(Operation.BALANCE, new AdditionStrategyImpl());
         operationStrategyMap.put(Operation.SUPPLY, new AdditionStrategyImpl());
@@ -26,7 +29,7 @@ public class Aplication {
         operationStrategyMap.put(Operation.RETURN, new AdditionStrategyImpl());
 
         ReaderService readerService = new ReaderServiceImpl();
-        List<TransactionDto> dtos = readerService.readData("src\\main\\resource\\text.csv");
+        List<TransactionDto> dtos = readerService.readData(textFile);
 
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategyMap);
         fruitShopService.applyOperationOnFruitsDto(dtos);
@@ -35,6 +38,6 @@ public class Aplication {
         List<String> fruitReport = reportService.createReport();
 
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile(fruitReport, "src\\main\\resource\\destination.csv");
+        writerService.writeToFile(fruitReport, destinationFile);
     }
 }

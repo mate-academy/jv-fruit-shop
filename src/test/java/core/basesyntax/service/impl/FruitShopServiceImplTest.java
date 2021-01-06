@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -88,4 +89,11 @@ public class FruitShopServiceImplTest {
         Integer expected = Integer.valueOf(45);
         Assert.assertEquals(actual, expected);
     }
+
+    @After
+    public void cleanStorage() {
+        fruitStorage.clear();
+        transactionDtoList.clear();
+    }
+
 }
