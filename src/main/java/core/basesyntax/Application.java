@@ -21,8 +21,8 @@ public class Application {
         operationStrategyMap.put(Procedure.Supply, new Supply());
         InputOutputReport inputOutputReport = new InputOutputReport();
         String report = inputOutputReport.readReport("reportIn");
-        ReportWorker reportWorker = new ReportWorker();
-        reportWorker.readFromReport(report, operationStrategyMap);
+        ReportWorker reportWorker = new ReportWorker(operationStrategyMap);
+        reportWorker.readFromReport(report);
         inputOutputReport.writeReport(reportWorker.writeToReport(), LocalDate.now().toString());
 
     }
