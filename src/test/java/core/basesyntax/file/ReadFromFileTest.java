@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class ReadFromFileTest {
     private static final String FILE_FROM_OK = "src/test/resources/shop_activity_test.csv";
-    private static final String FILE_FROM_NOT_OK = "src/main/resources/shop_activitytest.csv";
+    private static final String FILE_FROM_NOT_OK = "src/test/resources/shop_activitytest.csv";
     private static List<String> OK_DATA = new ArrayList<>();
     private static CsvFileReader reader;
 
