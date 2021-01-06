@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class CsvFileWriterTest {
     public static final String REPORT = "Test text for filewriter";
-    public static final String CORRECT_PATH = "src/main/resources/writer_test.csv";
+    public static final String CORRECT_PATH = "src/test/resources/writer_test.csv";
     public static FileWriter fileWriter;
 
     @BeforeClass

@@ -35,11 +35,6 @@ public class CsvToTransactionDtoParserTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void invalidQuantity_ThrowsException() {
-        parser.parse(INVALID_NEGATIVE_VALUE_LIST);
-    }
-
-    @Test(expected = RuntimeException.class)
     public void emptyItem_ThrowsException() {
         parser.parse(INVALID_EMPTY_ITEM_LIST);
     }

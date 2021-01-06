@@ -7,7 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class CsvFileReaderTest {
-    public static final String EMPTY_FILE_PATH = "src/main/resources/FileReaderTest.csv";
+    public static final String EMPTY_FILE_PATH = "src/test/resources/FileReaderTest.csv";
     public static FileReader reader;
 
     @BeforeClass
@@ -27,7 +27,7 @@ public class CsvFileReaderTest {
 
     @Test
     public void getAllLines_Correct() {
-        List<String> list = reader.getAllLines("src/main/resources/test1.CSV");
+        List<String> list = reader.getAllLines("src/test/resources/test1.csv");
         List<String> expected = List.of("b,banana,20", "b,apple,100", "s,banana,100",
                 "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50");
         Assert.assertEquals(expected, list);

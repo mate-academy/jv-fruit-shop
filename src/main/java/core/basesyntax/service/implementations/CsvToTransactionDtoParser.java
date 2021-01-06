@@ -23,13 +23,8 @@ public class CsvToTransactionDtoParser implements CsvParser<TransactionDto> {
     private void validate(String[] parsed) {
         String operation = parsed[0];
         String item = parsed[1];
-        int quantity = Integer.parseInt(parsed[2]);
-        if (operation.length() == 0 || item.length() == 0) {
+        if (operation.length() == 0 || item.length() == 0 || parsed[2].length() == 0) {
             throw new RuntimeException("Invalid line in file");
         }
-        if (quantity < 0) {
-            throw new RuntimeException("Negative quantity!");
-        }
-        Operation.fromString(operation);
     }
 }
