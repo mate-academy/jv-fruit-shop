@@ -3,7 +3,6 @@ package core.basesyntax.model.strategy;
 import core.basesyntax.exception.InvalidOperationException;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.entities.Product;
-
 import java.util.HashMap;
 import java.util.Map;
 

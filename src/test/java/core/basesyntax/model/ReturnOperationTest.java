@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Warehouse;
 import core.basesyntax.exception.InvalidOperationException;
 import core.basesyntax.model.entities.Fruit;
-import core.basesyntax.model.strategy.BalanceOperation;
 import core.basesyntax.model.strategy.ReturnOperation;
 import org.junit.After;
 import org.junit.Test;
