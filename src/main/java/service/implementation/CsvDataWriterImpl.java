@@ -10,8 +10,8 @@ import service.DataWriter;
 public class CsvDataWriterImpl implements DataWriter {
 
     @Override
-    public void writeToFile(Map<Fruit, Integer> fruitReport, String writeFileTo) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(writeFileTo))) {
+    public void writeToFile(Map<Fruit, Integer> fruitReport, String fileName) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             StringBuilder builder = new StringBuilder("fruit,quantity" + System.lineSeparator());
             for (Map.Entry<Fruit, Integer> entry : fruitReport.entrySet()) {
                 builder.append(entry.getKey().getName())
@@ -21,7 +21,7 @@ public class CsvDataWriterImpl implements DataWriter {
             }
             bufferedWriter.write(builder.toString());
         } catch (IOException e) {
-            throw new RuntimeException("Can not write data to file: " + writeFileTo, e);
+            throw new RuntimeException("Can not write data to file: " + fileName, e);
         }
     }
 }

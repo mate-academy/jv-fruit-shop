@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.Fruit;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import service.DataWriter;
@@ -44,8 +44,8 @@ public class CsvDataWriterImplTest {
         assertEquals(actual, expected);
     }
 
-    @AfterClass
-    public static void afterClass() {
+    @After
+    public void tearDown() {
         FruitStorage.fruitStorage.clear();
     }
 }

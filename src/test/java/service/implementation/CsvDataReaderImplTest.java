@@ -55,12 +55,12 @@ public class CsvDataReaderImplTest {
         dataReader.readFromFile(INVALID_AMOUNT_NAN);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataFormatException.class)
     public void readFrom_InvalidFormat_file() {
         dataReader.readFromFile(INVALID_FORMAT);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = InvalidDataFormatException.class)
     public void readFrom_InvalidFormat_OperationIsNumber_file() {
         dataReader.readFromFile(INVALID_OPERATION_IS_NUMBER);
     }

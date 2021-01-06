@@ -20,7 +20,7 @@ public class CsvDataParser implements DataParser {
             return new FruitTransactionDto(Operation.fromString(parsedLine[OPERATION]),
                     new Fruit(parsedLine[FRUIT_NAME].toLowerCase()),
                     Integer.parseInt(parsedLine[FRUITS_AMOUNT]));
-        } catch (NumberFormatException nfe) {
+        } catch (RuntimeException e) {
             throw new InvalidDataFormatException("Input data has invalid format: "
                     + Arrays.toString(parsedLine) + "\n"
                     + "should be ['o' - operation, 'fruit', '3'- amount]");
