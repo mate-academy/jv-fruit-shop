@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Record;
 import core.basesyntax.service.FileReader;
@@ -11,6 +12,7 @@ import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.strategy.AdditionStrategy;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.ReductionStrategy;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,5 +38,21 @@ public class Application {
 
         FileWriter fileWriter = new CsvFileWriter();
         fileWriter.writeReportToFile(fruitReport, PATH_TO_OUTPUT);
+
+        records = new ArrayList<>();
+
+        Record firstRecord = new Record(Operation.BALANCE, new Fruit("banana"), 98L);
+        Record secondRecord = new Record(Operation.BALANCE, new Fruit("cherry"), 56L);
+        Record thirdRecord = new Record(Operation.SUPPLY, new Fruit("cherry"), 150L);
+        Record fourthRecord = new Record(Operation.PURCHASE, new Fruit("banana"), 3L);
+        Record fifthRecord = new Record(Operation.RETURN, new Fruit("banana"), 3L);
+
+        records.add(firstRecord);
+        records.add(secondRecord);
+        records.add(thirdRecord);
+        records.add(fourthRecord);
+        records.add(fifthRecord);
+
+        records.forEach(System.out::println);
     }
 }

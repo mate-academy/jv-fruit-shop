@@ -21,9 +21,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>5.3</version>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -100,8 +100,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>META-INF/**</exclude>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/Application*</exclude>
+                        <exclude>**/database/**</exclude>
                         <exclude>**/model/**</exclude>
                     </excludes>
                 </configuration>

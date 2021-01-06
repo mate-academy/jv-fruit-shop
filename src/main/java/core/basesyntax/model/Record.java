@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class Record {
     Operation operation;
     Fruit fruit;
@@ -28,5 +30,24 @@ public class Record {
         return operation.getOperation()
                 + "," + fruit.type
                 + "," + amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Record)) {
+            return false;
+        }
+        Record record = (Record) o;
+        return amount == record.amount
+                && operation == record.operation
+                && Objects.equals(fruit, record.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, amount);
     }
 }
