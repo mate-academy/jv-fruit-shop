@@ -8,12 +8,12 @@ public class PurchaseStrategy implements OperationStrategy {
     @Override
     public void apply(TransactionDto transactionDto) {
         Fruit fruit = transactionDto.getFruit();
-        int quality = Storage.fruitReport.get(fruit) == null
+        int quantity = Storage.fruitReport.get(fruit) == null
                 ? -transactionDto.getQuantity()
                 : Storage.fruitReport.get(fruit) - transactionDto.getQuantity();
-        if (quality < 0) {
+        if (quantity < 0) {
             throw new RuntimeException("Not enough fruit " + fruit);
         }
-        Storage.fruitReport.put(fruit, quality);
+        Storage.fruitReport.put(fruit, quantity);
     }
 }

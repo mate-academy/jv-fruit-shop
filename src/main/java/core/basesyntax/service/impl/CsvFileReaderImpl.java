@@ -23,7 +23,7 @@ public class CsvFileReaderImpl implements CsvFileReader {
                 readFromFile.add(value);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file", e);
+            throw new RuntimeException("Can't read file by path: " + filePath, e);
         }
 
         List<String[]> type = readFromFile.stream()
@@ -36,20 +36,13 @@ public class CsvFileReaderImpl implements CsvFileReader {
         for (String[] strings : type) {
             Operation operation = Operation.fromString(strings[0]);
             Fruit fruit = new Fruit(strings[1]);
-            int quality = Integer.parseInt(strings[2]);
-            correctData(operation, quality);
-            transactionDtos.add(new TransactionDto(operation, fruit, quality));
+            int quantity = Integer.parseInt(strings[2]);
+            if (quantity < 0) {
+                throw new RuntimeException("File is wrong");
+            }
+            transactionDtos.add(new TransactionDto(operation, fruit, quantity));
         }
         return transactionDtos;
-    }
-
-    private void correctData(Operation operation, int quality) {
-        if (quality < 0 || (!operation.equals(Operation.RETURN)
-                && !operation.equals(Operation.BALANCE))
-                && !operation.equals(Operation.SUPPLY)
-                && !operation.equals(Operation.PURCHASE)) {
-            throw new RuntimeException("File is wrong");
-        }
     }
 }
 

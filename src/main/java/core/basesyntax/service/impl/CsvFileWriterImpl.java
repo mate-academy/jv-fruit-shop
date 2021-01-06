@@ -13,11 +13,13 @@ public class CsvFileWriterImpl implements CsvFileWriter {
     public void reportFile(Map<Fruit, Integer> fruitReport, String filePath) {
         try (FileWriter writerToFile = new FileWriter(filePath)) {
             for (Map.Entry<Fruit, Integer> entry : fruitReport.entrySet()) {
-                writerToFile.append(entry.getKey().getName()).append(COMMA)
-                        .append(String.valueOf(entry.getValue())).append(System.lineSeparator());
+                writerToFile.append(entry.getKey().getName())
+                        .append(COMMA)
+                        .append(String.valueOf(entry.getValue()))
+                        .append(System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file", e);
+            throw new RuntimeException("Can't create file by path: " + filePath, e);
         }
     }
 }
