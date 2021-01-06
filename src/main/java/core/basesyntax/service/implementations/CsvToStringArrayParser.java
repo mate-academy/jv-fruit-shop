@@ -19,9 +19,7 @@ public class CsvToStringArrayParser implements CsvParser<TransactionDto> {
                 continue;
             }
             String[] parsed = line.split(",");
-            Validator.validate(parsed[0]);
-            Validator.validateItem(parsed[1]);
-            Validator.validate(Integer.parseInt(parsed[2]));
+            Validator.validate(parsed);
             result.add(new TransactionDto(Operation.fromString(parsed[0]),
                     new ShopItem(parsed[1]), Integer.parseInt(parsed[2])));
         }

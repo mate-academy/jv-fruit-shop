@@ -1,7 +1,6 @@
 package core.basesyntax.service.implementations;
 
 import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
 import java.util.List;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
