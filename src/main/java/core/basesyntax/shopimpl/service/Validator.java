@@ -2,6 +2,7 @@ package core.basesyntax.shopimpl.service;
 
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.shopstrategy.ShopTransactionsType;
+import core.basesyntax.shopimpl.entity.Fruit;
 import core.basesyntax.shopimpl.entity.IllegalPurchaseAmountException;
 import java.util.Map;
 

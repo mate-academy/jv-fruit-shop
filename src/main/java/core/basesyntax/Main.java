@@ -1,11 +1,13 @@
 package core.basesyntax;
 
+import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.shopdao.ShopDto;
 import core.basesyntax.shopimpl.database.FruitShopDto;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.service.IOdataFileService;
 import core.basesyntax.shopimpl.storage.FruitShopStorage;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String path = "src/test/resources/testDataBase.csv";
@@ -21,5 +23,8 @@ public class Main {
         FruitShopStorage storage = new FruitShopStorage();
         
         storage.initStorage(dto.getTransactionHistory());
+        
+        fileService.writeReport("src/main/java/core/basesyntax/report.csv",
+                storage.getStorage());
     }
 }

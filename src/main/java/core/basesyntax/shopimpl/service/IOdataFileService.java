@@ -26,8 +26,8 @@ public class IOdataFileService {
                 .append("Amount")
                 .append(System.lineSeparator());
         for (Map.Entry<AbstractItem, Integer> entry : storage.entrySet()) {
-            sb.append(entry.getKey()).append(FILE_DELIMITER)
-                    .append(entry.getValue()).append(FILE_DELIMITER)
+            sb.append(entry.getKey().getItemName()).append(FILE_DELIMITER)
+                    .append(entry.getValue())
                     .append(System.lineSeparator());
         }
         try {
