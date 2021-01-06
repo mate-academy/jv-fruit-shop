@@ -29,9 +29,4 @@ public class ShopItem {
     public int hashCode() {
         return Objects.hash(name);
     }
-
-    public ShopItem setName(String name) {
-        this.name = name;
-        return this;
-    }
 }
