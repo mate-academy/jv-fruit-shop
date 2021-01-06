@@ -13,7 +13,6 @@ import core.basesyntax.strategy.strategies.SupplyStrategy;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

@@ -2,7 +2,6 @@ package core.basesyntax.file;
 
 import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.impl.CsvFileWriterImpl;
@@ -13,8 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class WriteToFileTest {
     private static final String FILE_TO = "src/test/resources/report.csv";
