@@ -55,15 +55,27 @@ public class CsvFileReaderImplTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void readNotCorrectInformationFromRows_NotOK() {
+    public void readNotCorrectInformationFromRow1_NotOK() {
         dataReader.read(MISTAKE_IN_ROW1);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readNotCorrectInformationFromRow2_NotOK() {
         dataReader.read(MISTAKE_IN_ROW2);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readNotCorrectInformationFromRow3_NotOK() {
         dataReader.read(MISTAKE_IN_ROW3);
     }
 
     @Test(expected = RuntimeException.class)
-    public void readNotCorrectInformationFromFile_NotOK() {
+    public void readNotCorrectOperatorFromFile_NotOK() {
         dataReader.read(WRONG_OPERATOR);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void readNotCorrectInformationFromFile_NotOK() {
         dataReader.read(INCORRECT_DATA_FORMAT);
     }
 }

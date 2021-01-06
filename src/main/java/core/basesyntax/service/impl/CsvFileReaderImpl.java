@@ -22,11 +22,10 @@ public class CsvFileReaderImpl implements DataReader {
     public List<Transaction> read(String filepath) {
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(filepath))) {
             List<Transaction> lineList = new ArrayList<>();
+            bufferedReader.readLine();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                if (!line.contains("type")) {
-                    lineList.add(parseLine(line));
-                }
+                lineList.add(parseLine(line));
             }
             return lineList;
         } catch (FileNotFoundException e) {

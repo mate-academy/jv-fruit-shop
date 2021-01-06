@@ -50,6 +50,13 @@ public class FruitServiceImplTest {
         assertEquals(60, Storage.storage.get(new Fruit("apple")).intValue());
     }
 
+    @Test
+    public void gettingFromStorage() {
+        fruitService.putDataToStorage(expectedList);
+        assertEquals(3, Storage.storage.size());
+        assertEquals(0, Storage.storage.get(new Fruit("kiwi")).intValue());
+    }
+
     @After
     public void clearStorage() {
         Storage.storage.clear();
