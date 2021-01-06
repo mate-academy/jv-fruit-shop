@@ -7,9 +7,14 @@ import java.util.Map;
 
 public class ReportWorker implements ReportCheck {
     private final String topPattern = "fruit,quantity";
+    private final Map<Procedure, OperationStrategy> operationStrategyMap;
+
+    public ReportWorker(Map<Procedure, OperationStrategy> operationStrategyMap) {
+        this.operationStrategyMap = operationStrategyMap;
+    }
+
     @Override
-    public void readFromReport(String report,
-                               Map<Procedure, OperationStrategy> operationStrategyMap) {
+    public void readFromReport(String report) {
         final int operation = 0;
         final int typeFruit = 1;
         final int amount = 2;
