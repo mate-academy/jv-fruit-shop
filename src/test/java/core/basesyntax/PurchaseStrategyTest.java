@@ -4,21 +4,17 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.strategy.PurchaseHandler;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseStrategyTest {
     public static PurchaseHandler purchaseHandler;
-    public static FruitService fruitService;
     public static Fruit banana;
 
     @BeforeClass
     public static void beforeClass() {
         purchaseHandler = new PurchaseHandler();
-        fruitService = new FruitServiceImpl();
         banana = new Fruit("banana");
     }
 
@@ -27,7 +23,8 @@ public class PurchaseStrategyTest {
         Storage.getStorage().put(banana, 20);
         purchaseHandler.apply(banana, 1);
         Integer actual = Storage.getStorage().get(banana);
-        assertEquals(Integer.valueOf(19), actual);
+        Integer expected = 19;
+        assertEquals(expected, actual);
         Storage.getStorage().clear();
     }
 
@@ -36,7 +33,9 @@ public class PurchaseStrategyTest {
         Storage.getStorage().put(banana, 20);
         purchaseHandler.apply(banana, -1);
         Integer actual = Storage.getStorage().get(banana);
-        assertEquals(Integer.valueOf(49), actual);
+        Integer expected = 49;
+        assertEquals(expected, actual);
+        Storage.getStorage().clear();
     }
 
     @Test(expected = RuntimeException.class)
@@ -44,6 +43,8 @@ public class PurchaseStrategyTest {
         Storage.getStorage().put(banana, 20);
         purchaseHandler.apply(banana, 100);
         Integer actual = Storage.getStorage().get(banana);
-        assertEquals(Integer.valueOf(49), actual);
+        Integer expected = 49;
+        assertEquals(expected, actual);
+        Storage.getStorage().clear();
     }
 }

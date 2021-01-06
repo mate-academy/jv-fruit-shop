@@ -3,12 +3,11 @@ package core.basesyntax.model;
 public enum Operations {
     R,P,S,B;
 
-    public static boolean contains(String value) {
+    public static Operations getByString(String value) {
         try {
-            Operations.valueOf(value.toUpperCase());
-            return true;
+            return Operations.valueOf(value.toUpperCase());
         } catch (IllegalArgumentException e) {
-            return false;
+            throw new RuntimeException("Illegal operation");
         }
     }
 }

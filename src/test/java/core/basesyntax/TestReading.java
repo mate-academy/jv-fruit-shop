@@ -5,8 +5,6 @@ import core.basesyntax.service.FileReader;
 import core.basesyntax.service.impl.ReadFromCsvFileImpl;
 import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseHandler;
 import core.basesyntax.strategy.ReturnHandler;
 import core.basesyntax.strategy.SupplyHandler;
@@ -29,7 +27,6 @@ public class TestReading {
         operationMap.put(Operations.P, new PurchaseHandler());
         operationMap.put(Operations.R, new ReturnHandler());
         operationMap.put(Operations.S, new SupplyHandler());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
     }
 
     @Test
@@ -41,7 +38,6 @@ public class TestReading {
 
     @Test
     public void testReadingEmptyFile_Ok() {
-
         List<String> actual = reader.read("src/test/resources/test_emptyFile.csv");
         Assert.assertEquals(Collections.EMPTY_LIST, actual);
     }

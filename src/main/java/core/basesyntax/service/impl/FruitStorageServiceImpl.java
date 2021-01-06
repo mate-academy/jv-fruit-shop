@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operations;
-import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FruitStorageService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ public class FruitStorageServiceImpl implements FruitStorageService {
     private static final int FIELDS_QUANTITY = 3;
     private final OperationStrategy operationStrategy;
     private final ValidateOperationImpl validation = new ValidateOperationImpl();
-    private final FileReader file = new ReadFromCsvFileImpl();
     private List<String> data = new ArrayList<>();
 
     public FruitStorageServiceImpl(OperationStrategy operationStrategy) {
@@ -26,12 +24,10 @@ public class FruitStorageServiceImpl implements FruitStorageService {
     }
 
     @Override
-    public void saveFruitToStorage(String path) {
-        data = file.read(path);
+    public void saveFruitToStorage(List<String> data) {
         for (String row: data) {
             String[] lineData = row.split(SPLITTER);
-            if (lineData.length < FIELDS_QUANTITY
-                    || !Operations.contains(lineData[OPERATION])) {
+            if (lineData.length < FIELDS_QUANTITY) {
                 throw new RuntimeException("Incorrect data");
             }
             Fruit fruit = new Fruit(lineData[FRUIT]);
