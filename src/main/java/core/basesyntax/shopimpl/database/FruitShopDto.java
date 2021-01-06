@@ -1,6 +1,6 @@
 package core.basesyntax.shopimpl.database;
 
-import core.basesyntax.model.shopdao.ShopDao;
+import core.basesyntax.model.shopdao.ShopDto;
 import core.basesyntax.model.shopstrategy.ShopTransactionsType;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
@@ -9,38 +9,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FruitShopDao implements ShopDao<DataRecord> {
-    private List<DataRecord> dataBase;
-    private String filePath;
-    
-    public FruitShopDao(String filePath) {
-        this.filePath = filePath;
-        dataBase = IOdataFileService.readDataFile(filePath);
-    }
+public class FruitShopDto implements ShopDto<DataRecord> {
+    private final List<DataRecord> transactionHistory = new ArrayList<>();
     
     @Override
     public List<DataRecord> getTransactionHistory() {
-        return new ArrayList<>(dataBase);
+        return new ArrayList<>(transactionHistory);
     }
     
     @Override
     public List<DataRecord> getItemTransactionHistory(String item) {
-        return dataBase.stream()
+        return transactionHistory.stream()
                 .filter(data -> data.getItem().getItemName().equalsIgnoreCase(item))
                 .collect(Collectors.toList());
     }
     
     @Override
     public void addTransaction(DataRecord action) {
-        dataBase.add(action);
-    }
-    
-    public void addAction(ShopTransactionsType action, String item, Integer amount) {
-        dataBase.add(new DataRecord(action, new Fruit(item), amount));
+        transactionHistory.add(action);
     }
     
     @Override
-    public void updateDatabase() {
-        IOdataFileService.writeDataFile(filePath, dataBase);
+    public void addAll(List<DataRecord> lines) {
+        transactionHistory.addAll(lines);
+    }
+    
+    public void addAction(ShopTransactionsType action, String item, Integer amount) {
+        transactionHistory.add(new DataRecord(action, new Fruit(item), amount));
     }
 }

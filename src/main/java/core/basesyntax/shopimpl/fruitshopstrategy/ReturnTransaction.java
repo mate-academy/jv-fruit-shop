@@ -2,25 +2,16 @@ package core.basesyntax.shopimpl.fruitshopstrategy;
 
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.abstractstorage.AbstractStorage;
-import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.model.shopstrategy.AbstractTransaction;
-import core.basesyntax.model.shopstrategy.ShopTransactionsType;
+import core.basesyntax.model.shopstrategy.ShopTransaction;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
+import java.util.Map;
 
-public class ReturnTransaction extends AbstractTransaction<DataRecord, Fruit> {
-    
-    public ReturnTransaction(AbstractStorage<DataRecord, Fruit> storage,
-                             ShopDao<DataRecord> shopDao) {
-        super(storage, shopDao);
-    }
+public class ReturnTransaction implements ShopTransaction {
     
     @Override
-    public void apply(AbstractItem item, int amount) {
-        super.getShopDao()
-                .addTransaction(new DataRecord(ShopTransactionsType.RETURN, item, amount));
-        super.getShopDao().updateDatabase();
-        int update = super.getStorage().get(item) + amount;
-        super.getStorage().put((Fruit) item, update);
+    public void apply(AbstractItem item, int amount, Map<AbstractItem, Integer>  storage) {
+        int update = storage.get(item) + amount;
+        storage.put(item, update);
     }
 }

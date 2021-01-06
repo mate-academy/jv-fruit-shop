@@ -2,29 +2,19 @@ package core.basesyntax.shopimpl.fruitshopstrategy;
 
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.abstractstorage.AbstractStorage;
-import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.model.shopstrategy.AbstractTransaction;
-import core.basesyntax.model.shopstrategy.ShopTransactionsType;
+import core.basesyntax.model.shopstrategy.ShopTransaction;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
+import java.util.Map;
 
-public class SupplyTransaction extends AbstractTransaction<DataRecord, Fruit> {
-    
-    public SupplyTransaction(AbstractStorage<DataRecord, Fruit> storage,
-                             ShopDao<DataRecord> shopDao) {
-        super(storage, shopDao);
-    }
-    
+public class SupplyTransaction implements ShopTransaction {
     @Override
-    public void apply(AbstractItem item, int amount) {
-        getShopDao().addTransaction(new DataRecord(ShopTransactionsType.SUPPLY, item, amount));
-        getShopDao().updateDatabase();
-        
-        if (getStorage().containsKey(item)) {
-            int update = getStorage().get(item) + amount;
-            getStorage().put((Fruit) item, update);
+    public void apply(AbstractItem item, int amount, Map<AbstractItem, Integer> storage) {
+        if (storage.containsKey(item)) {
+            int update = storage.get(item) + amount;
+            storage.put((Fruit) item, update);
             return;
         }
-        getStorage().put((Fruit) item, amount);
+        storage.put((Fruit) item, amount);
     }
 }

@@ -2,30 +2,20 @@ package core.basesyntax.shopimpl.fruitshopstrategy;
 
 import core.basesyntax.model.abstractstorage.AbstractItem;
 import core.basesyntax.model.abstractstorage.AbstractStorage;
-import core.basesyntax.model.shopdao.ShopDao;
-import core.basesyntax.model.shopstrategy.AbstractTransaction;
-import core.basesyntax.model.shopstrategy.ShopTransactionsType;
+import core.basesyntax.model.shopstrategy.ShopTransaction;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.entity.Fruit;
 import core.basesyntax.shopimpl.entity.IllegalPurchaseAmountException;
 import core.basesyntax.shopimpl.service.Validator;
+import java.util.Map;
 
-public class PurchaseTransaction extends AbstractTransaction<DataRecord, Fruit> {
-    public PurchaseTransaction(AbstractStorage<DataRecord, Fruit> storage,
-                               ShopDao<DataRecord> shopDao) {
-        super(storage, shopDao);
-    }
-    
+public class PurchaseTransaction implements ShopTransaction {
     @Override
-    public void apply(AbstractItem item, int amount) {
+    public void apply(AbstractItem item, int amount, Map<AbstractItem, Integer> storage) {
         try {
-            Validator.transactionValidator(item, amount, getStorage());
-            int update = getStorage().get(item) - amount;
-            getStorage().put((Fruit) item, update);
-            getShopDao().addTransaction(new DataRecord(ShopTransactionsType.PURCHASE,
-                    item,
-                    amount));
-            getShopDao().updateDatabase();
+            Validator.transactionValidator(item, amount, storage);
+            int update = storage.get(item) - amount;
+            storage.put(item, update);
         } catch (IllegalPurchaseAmountException e) {
             throw new RuntimeException(e.getMessage());
         } catch (Exception e) {

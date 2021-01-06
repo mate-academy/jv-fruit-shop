@@ -9,7 +9,7 @@ import java.util.Map;
 public class Validator {
     public static void transactionValidator(AbstractItem item,
                                             int amount,
-                                            Map<Fruit, Integer> storage) throws Exception {
+                                            Map<AbstractItem, Integer> storage) throws Exception {
         int currentAmount = storage.get(item);
         if (currentAmount < amount) {
             String message = String

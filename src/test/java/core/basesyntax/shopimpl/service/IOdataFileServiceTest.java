@@ -25,7 +25,7 @@ public class IOdataFileServiceTest {
     
     @Test
     public void writeDataFile() {
-        IOdataFileService.writeDataFile(filePathValid, list);
+        IOdataFileService.writeReport(filePathValid, list);
         
         String expected = "ShopAction,Item,Amount\n\r"
                           + "b,Fruit,100\n\r"
