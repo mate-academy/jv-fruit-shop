@@ -5,7 +5,6 @@ import core.basesyntax.service.operations.Operation;
 import java.util.Map;
 
 public class DataValidatorImpl implements DataValidator {
-
     @Override
     public void isOperationValid(Map<String, Operation> strategy, String[] record) {
         if (strategy.get(record[0]) == null) {
