@@ -34,11 +34,12 @@ public class Main {
         FruitService fruitService = new FruitServiceImpl(operations);
         FileWriter fileWriter = new CsvFileWriter();
         TransactionParser parser = new TransactionParserImpl();
+        List<String> linesFromFie = csvFileReader.readData(PATH_TO_FILE);
+        Map<String, Integer> fruitReport = fruitService.getFruitReport();
 
         List<TransactionDto> transactionDtoList = parser
-                .parse(csvFileReader.readData(PATH_TO_FILE));
+                .parse(linesFromFie);
         fruitService.applyOperationOnFruitDto(transactionDtoList);
-        Map<String, Integer> fruitReport = fruitService.getFruitReport();
         fileWriter.createReportFile(fruitReport, PATH_TO_REPORT);
     }
 }
