@@ -32,31 +32,26 @@ public class OperationsDaoTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void addToStorage_ThrowsError() {
+    public void addToStorageNegativeValue_ThrowsError() {
         dao.addToStorage(BANANA, -1);
     }
 
     @Test
     public void subtractFromStorage_Ok() {
-        dao.addToStorage(PINEAPPLE, 1337);
-        dao.addToStorage(BANANA, 0);
+        Storage.storage.put(PINEAPPLE, 1337);
+        Storage.storage.put(BANANA, 0);
         dao.subtractFromStorage(PINEAPPLE, 1337);
         dao.subtractFromStorage(BANANA, 0);
     }
 
     @Test(expected = RuntimeException.class)
     public void subtractFromEmptyStorage_ThrowsError() {
-        dao.subtractFromStorage(BANANA, 1);
+        dao.subtractFromStorage(BANANA, 1337);
     }
 
     @Test(expected = RuntimeException.class)
     public void subtractMoreThanWeHaveFromStorage_ThrowsError() {
-        dao.addToStorage(BANANA, 1);
+        Storage.storage.put(BANANA, 1);
         dao.subtractFromStorage(BANANA, 2);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void subtractNegativeValueFromStorage_ThrowsError() {
-        dao.subtractFromStorage(PINEAPPLE, -1337);
     }
 }

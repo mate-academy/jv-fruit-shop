@@ -26,17 +26,13 @@ public class Application {
         operationStrategyMap.put(Operation.SUPPLY, new SupplyStrategy());
         operationStrategyMap.put(Operation.PURCHASE, new PurchaseStrategy());
         operationStrategyMap.put(Operation.RETURN, new ReturnStrategy());
-
         FileReader fileReaderService = new CsvFileReader();
         List<String> linesFromFile =
                 fileReaderService.getAllLines("src/main/resources/FileReaderTest.csv");
-
         CsvParser<TransactionDto> parser = new CsvToStringArrayParser();
         List<TransactionDto> parsed = parser.parse(linesFromFile);
-
         ShopItemService shopService = new ShopItemServiceImpl(operationStrategyMap);
         shopService.applyOperationOnShopItem(parsed);
-
         String report = shopService.getStringReport();
         FileWriter fileWriter = new CsvFileWriter();
         fileWriter.write(report,"src/main/resources/result.csv");

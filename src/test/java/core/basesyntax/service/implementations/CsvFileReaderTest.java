@@ -10,18 +10,15 @@ import org.junit.Test;
 
 public class CsvFileReaderTest {
     public static final String CORRECT_PATH = "src/main/resources/FileReaderTest.csv";
-    public static FileWriter writer;
     public static FileReader reader;
 
     @BeforeClass
     public static void initialize() {
         reader = new CsvFileReader();
-        writer = new CsvFileWriter();
     }
 
     @Test(expected = RuntimeException.class)
     public void emptyFile_ThrowsException() {
-        writer.write(null, CORRECT_PATH);
         reader.getAllLines(CORRECT_PATH);
     }
 
