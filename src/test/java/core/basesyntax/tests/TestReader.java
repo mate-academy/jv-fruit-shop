@@ -32,8 +32,8 @@ public class TestReader {
     }
 
     @Test(expected = RuntimeException.class)
-    public void notRightPath(){
-       reader.readData("FILE_PATH_FOUR_LINES");
+    public void notRightPath() {
+        reader.readData("FILE_PATH_FOUR_LINES");
     }
 }
 
