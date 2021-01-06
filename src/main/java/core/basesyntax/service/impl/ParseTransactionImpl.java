@@ -12,6 +12,9 @@ public class ParseTransactionImpl implements ParseTransactionDto {
 
     @Override
     public TransactionDto parseDateFromFile(String[] transaction) {
+        if (Integer.parseInt(transaction[QUANTITY_INDEX]) < 0) {
+            throw new RuntimeException("We can't work with negative number");
+        }
         TransactionDto currentTransaction = new TransactionDto();
         currentTransaction.setOperation(Operation.fromString(transaction[OPERATION_INDEX]));
         currentTransaction.setFruit(new Fruit(transaction[FRUIT_INDEX]));

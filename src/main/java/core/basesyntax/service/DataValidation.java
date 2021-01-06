@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.TransactionDto;
 
-public interface DateValidation {
+public interface DataValidation {
     void validation(TransactionDto transactionDto);
 }
