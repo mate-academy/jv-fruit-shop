@@ -21,5 +21,6 @@ public class Main {
         Report report = new ReportImpl();
         String s = report.writeReport(allLinesFromFile);
         report.writeReportToFile(s, "Report");
+        System.out.println(allLinesFromFile);
     }
 }

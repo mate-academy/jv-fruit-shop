@@ -60,7 +60,7 @@ public class ShopServiceImpl implements ShopService {
         }
         if (operation.getOperation().equals(Operation.Type.P)
                 && Integer.parseInt(oneLine[AMOUNT])
-                > Storage.fruits.get(new Fruit(oneLine[FRUIT_NAME]))) {
+                > fruitDao.getAmount(oneLine[FRUIT_NAME])) {
             throw new ArithmeticException("");
         }
     }

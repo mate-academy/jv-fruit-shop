@@ -21,12 +21,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ReportImpl implements Report {
+    private static final String HEADER = "fruit,quantity";
     @Override
     public String writeReport(List<String> list) {
         createReport(list);
         FruitDao fruitDao = new FruitDaoImpl();
         StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity").append(System.lineSeparator());
+        report.append(HEADER).append(System.lineSeparator());
         int counter = 0;
         for (Map.Entry<Fruit, Integer> entry : fruitDao.getAllFruits()) {
             report.append(fruitDao.getFruit(entry.getKey().getFruitName())
@@ -53,7 +54,6 @@ public class ReportImpl implements Report {
     @Override
     public void createReport(List<String> list) {
         Map<Operation.Type, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.Type.B, new ReturnOperationHandler());
         operationHandlerMap.put(Operation.Type.R, new ReturnOperationHandler());
         operationHandlerMap.put(Operation.Type.P, new PurchaseOperationHandler());
         operationHandlerMap.put(Operation.Type.S, new SupplyOperationHandler());
