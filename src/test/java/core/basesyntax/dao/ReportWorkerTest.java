@@ -21,6 +21,7 @@ public class ReportWorkerTest {
     private static Map<Procedure, OperationStrategy> operationStrategyMap;
     private static WarehouseImpl warehouseTest;
     private static InputOutputReport inputOutputReport;
+    private static ReportWorker reportWorker;
 
     @BeforeClass
     public static void setup() {
@@ -31,6 +32,7 @@ public class ReportWorkerTest {
         operationStrategyMap.put(Procedure.Purchase, new Purchase());
         operationStrategyMap.put(Procedure.Return, new Return());
         operationStrategyMap.put(Procedure.Supply, new Supply());
+        reportWorker = new ReportWorker(operationStrategyMap);
     }
 
     @After
@@ -41,32 +43,28 @@ public class ReportWorkerTest {
 
     @Test
     public void testReadFromReport() {
-        ReportWorker reportWorker = new ReportWorker();
         String report = inputOutputReport.readReport("reportIn");
-        reportWorker.readFromReport(report, operationStrategyMap);
+        reportWorker.readFromReport(report);
         assertEquals(152, warehouseTest.getAmountOfItem(new Fruit("banana")));
         assertEquals(90, warehouseTest.getAmountOfItem(new Fruit("apple")));
     }
 
     @Test(expected = RuntimeException.class)
     public void testReadError() {
-        ReportWorker reportWorker = new ReportWorker();
         String report = inputOutputReport.readReport("noFind");
-        reportWorker.readFromReport(report, operationStrategyMap);
+        reportWorker.readFromReport(report);
     }
 
     @Test(expected = RuntimeException.class)
     public void testReadFromError() {
-        ReportWorker reportWorker = new ReportWorker();
         String report = inputOutputReport.readReport("errorReport");
-        reportWorker.readFromReport(report, operationStrategyMap);
+        reportWorker.readFromReport(report);
     }
 
     @Test(expected = RuntimeException.class)
     public void testValidationError() {
-        ReportWorker reportWorker = new ReportWorker();
         String report = inputOutputReport.readReport("test2");
-        reportWorker.readFromReport(report, operationStrategyMap);
+        reportWorker.readFromReport(report);
     }
 
     @Test
@@ -74,7 +72,6 @@ public class ReportWorkerTest {
         WarehouseImpl warehouse = new WarehouseImpl();
         warehouse.addItem(new Fruit("banana"),140);
         warehouse.addItem(new Fruit("apple"), 40);
-        ReportWorker reportWorker = new ReportWorker();
         InputOutputReport inputOutputReport = new InputOutputReport();
         inputOutputReport.writeReport(reportWorker.writeToReport(), "report.txt");
         String expected = "fruit,quantity "
