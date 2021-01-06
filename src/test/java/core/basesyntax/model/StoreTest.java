@@ -88,17 +88,6 @@ class StoreTest {
         });
     }
 
-    @Test
-    public void getStatistic_balanceIsZero() {
-        String fromFilePath = "test6.csv";
-        String toFilePath = "result6.csv";
-        store.showStatistic(fromFilePath, toFilePath);
-        String actual = readFromFile(toFilePath).trim();
-        String expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,0";
-        assertEquals(expected, actual);
-    }
-
     private String readFromFile(String fileName) {
         try {
             return Files.readString(Path.of(fileName));

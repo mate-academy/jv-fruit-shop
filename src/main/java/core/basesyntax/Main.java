@@ -23,7 +23,6 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         Store store = new Store(operationStrategy);
-        store.showStatistic("test3.csv", "result3.csv");
-        store.showStatistic("test1.csv", "");
+        store.showStatistic("test6.csv", "result6.csv");
     }
 }
