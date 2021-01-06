@@ -13,10 +13,13 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseStrategy;
 import core.basesyntax.strategy.ReturnStrategy;
 import core.basesyntax.strategy.SupplyStrategy;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,6 +41,11 @@ public class TestFruitService {
         listTransaction.add(new TransactionDto(Operation.PURCHASE, banana, 13));
     }
 
+    @After
+    public void clearData() {
+        Storage.getFruits().clear();
+    }
+
     @Test
     public void checkMap() {
         fruitService.applyOperation(listTransaction);
@@ -48,8 +56,9 @@ public class TestFruitService {
         assertEquals(storage.keySet(), expected.keySet(), "Map keys must be equals");
         assertEquals(storage.entrySet(), expected.entrySet(), "Map must be equals");
     }
+
     @Test
-    public void checkGetFruitReport(){
+    public void checkGetFruitReport() {
         fruitService.applyOperation(listTransaction);
         Map<Fruit, Integer> storage = fruitService.getFruitReport();
         Map<Fruit, Integer> expected = new HashMap<>();

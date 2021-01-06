@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,12 +23,10 @@ public class TestStorage {
         data.put(new Fruit("apple"), 15);
         storage.put(new Fruit("banana"), 100);
         storage.put(new Fruit("apple"), 15);
-    }
-
-    @Before
-    public void cleanData() {
-        data.clear();
-        storage.clear();
+        if (data != null || storage != null) {
+            data.clear();
+            storage.clear();
+        }
     }
 
     @Test

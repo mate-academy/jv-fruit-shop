@@ -2,6 +2,7 @@ package core.basesyntax.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FileReader;
@@ -17,10 +18,15 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseStrategy;
 import core.basesyntax.strategy.ReturnStrategy;
 import core.basesyntax.strategy.SupplyStrategy;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,10 +56,17 @@ public class TestWriter {
 
     @Test
     public void createReport_OK() {
-        writer.writeToFile(service.getFruitReport(), PATH_FILE);
+        Map<Fruit, Integer> data = Map.of(new Fruit("banana"),
+                20, new Fruit("apple"), 100);
+        writer.writeToFile(data, PATH_FILE);
         List<String> expected = List.of("fruit,quantity", "banana,20", "apple,100");
         FileReader reader = new CsvFileReader();
-        List<String> dataFromFile = reader.readData(PATH_FILE);
+        List<String> dataFromFile = null;
+        try {
+            dataFromFile = Files.readAllLines(Path.of(PATH_FILE));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file " + PATH_FILE);
+        }
         assertEquals(expected, dataFromFile, "Lines from file must be equal");
     }
 }
