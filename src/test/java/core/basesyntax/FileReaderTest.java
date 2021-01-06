@@ -17,11 +17,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestReading {
+public class FileReaderTest {
     FileReader reader = new ReadFromCsvFileImpl();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Map<Operations, OperationHandler> operationMap = new HashMap<>();
         operationMap.put(Operations.B, new BalanceHandler());
         operationMap.put(Operations.P, new PurchaseHandler());
