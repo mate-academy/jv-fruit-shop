@@ -6,13 +6,11 @@ import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.ParseToList;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ParseToListImplTest {
-    private static List<TransactionDto> data = new ArrayList<>();
     private static List<String> listOfStringsWithOneLine = new ArrayList<>();
     private static List<String> listOfStringsWithThreeLines = new ArrayList<>();
     private static List<String> nullList;
@@ -24,13 +22,6 @@ public class ParseToListImplTest {
         listOfStringsWithThreeLines.add("b,banana,20");
         listOfStringsWithThreeLines.add("b,apple,100");
         listOfStringsWithThreeLines.add("s,orange,60");
-    }
-
-    @After
-    public void data() {
-        if (data != null) {
-            data.clear();
-        }
     }
 
     @Test

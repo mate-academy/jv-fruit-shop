@@ -12,7 +12,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CsvFilereaderImplTest {
+public class CsvFileWriterImplTest {
     private static final String EXPECTED_REPORT = "src/test/resources/expected_file";
     private static final String PATH_TO_WRITE = "src/test/resources/file_to_write";
     private static Map<Fruit, Integer> fruits = new HashMap<>();

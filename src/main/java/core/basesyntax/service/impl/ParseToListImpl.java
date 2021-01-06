@@ -16,7 +16,7 @@ public class ParseToListImpl implements ParseToList {
 
     @Override
     public List<TransactionDto> parseToTransactions(List<String> dataFromFile) {
-        if (dataFromFile == null) {
+        if (dataFromFile.isEmpty()) {
             throw new RuntimeException(String.format("No data in the file %s", dataFromFile));
         }
         List<TransactionDto> convertedToTransaction = new ArrayList<>();

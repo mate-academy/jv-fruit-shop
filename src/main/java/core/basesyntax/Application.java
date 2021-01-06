@@ -6,8 +6,8 @@ import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ParseToList;
+import core.basesyntax.service.impl.CsvFileReaderImpl;
 import core.basesyntax.service.impl.CsvFileWriterImpl;
-import core.basesyntax.service.impl.CsvFilereaderImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParseToListImpl;
 import core.basesyntax.strategy.AdditionStrategy;
@@ -25,7 +25,7 @@ public class Application {
         operationStrategyMap.put(Operation.RETURN, new AdditionStrategy());
         operationStrategyMap.put(Operation.PURCHASE, new ReduceStrategy());
 
-        CsvFileReader fileReader = new CsvFilereaderImpl();
+        CsvFileReader fileReader = new CsvFileReaderImpl();
         FruitService fruitService = new FruitServiceImpl(operationStrategyMap);
         ParseToList parse = new ParseToListImpl();
         List<TransactionDto> transactionDtos = parse.parseToTransactions(

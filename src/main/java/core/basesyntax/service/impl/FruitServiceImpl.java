@@ -26,6 +26,6 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public Map<Fruit, Integer> getFruitsReport() {
-        return Storage.getFruits();
+        return Storage.fruits;
     }
 }

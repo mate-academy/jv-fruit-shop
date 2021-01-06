@@ -60,8 +60,8 @@ public class FruitServiceImplTest {
         Fruit apple = new Fruit("apple");
         Fruit banana = new Fruit("banana");
         fruitService.applyOperationoOnFruitsDto(expectedTransactionDtos);
-        Assert.assertEquals(90, Storage.getFruits().get(apple).intValue());
-        Assert.assertEquals(152, Storage.getFruits().get(banana).intValue());
+        Assert.assertEquals(90, Storage.fruits.get(apple).intValue());
+        Assert.assertEquals(152, Storage.fruits.get(banana).intValue());
     }
 
     @Test

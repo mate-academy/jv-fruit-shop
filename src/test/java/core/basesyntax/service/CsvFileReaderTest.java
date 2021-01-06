@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.impl.CsvFilereaderImpl;
+import core.basesyntax.service.impl.CsvFileReaderImpl;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -11,7 +11,7 @@ public class CsvFileReaderTest {
     private static final String PATH_TO_THREE_LINE_FILE = "src/test/resources/test2_3lines";
     private static final String PATH_TO_ONE_LINE_FILE = "src/test/resources/test_read_1_line";
     private static List<String> data;
-    private static CsvFileReader fileReader = new CsvFilereaderImpl();
+    private static CsvFileReader fileReader = new CsvFileReaderImpl();
 
     @After
     public void cleanData() {
