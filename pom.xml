@@ -90,7 +90,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/App*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
