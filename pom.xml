@@ -90,6 +90,7 @@
                 </executions>
                 <configuration>
                     <excludes>
+                        <exclude>**/model/**</exclude>
                         <exclude>**/Main*</exclude>
                     </excludes>
                 </configuration>
