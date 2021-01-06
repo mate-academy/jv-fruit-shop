@@ -5,11 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 

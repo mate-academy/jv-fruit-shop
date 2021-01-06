@@ -18,7 +18,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseStrategy;
 import core.basesyntax.strategy.ReturnStrategy;
 import core.basesyntax.strategy.SupplyStrategy;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 
