@@ -7,8 +7,14 @@ public class Operation {
         return operation;
     }
 
-    public void setOperation(Type operation) {
-        this.operation = operation;
+    public boolean checkOperation(Type operation) {
+        if (operation.equals(Operation.Type.S)
+                || operation.equals(Operation.Type.P)
+                || operation.equals(Operation.Type.R)) {
+            this.operation = operation;
+            return true;
+        }
+        return false;
     }
 
     public enum Type {

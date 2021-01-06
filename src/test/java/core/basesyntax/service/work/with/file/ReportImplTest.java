@@ -3,8 +3,6 @@ package core.basesyntax.service.work.with.file;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.FruitServiceImpl;
 import java.util.List;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -14,13 +12,11 @@ public class ReportImplTest {
     private static Report report;
     private static String expected;
     private static String fileName;
-    private static FruitService fruitService;
     private static ReadInformationFromFile readInformationFromFile;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         report = new ReportImpl();
-        fruitService = new FruitServiceImpl();
         readInformationFromFile = new ReadInformationFromFileImpl();
     }
 
@@ -33,58 +29,38 @@ public class ReportImplTest {
     public void inputData_Ok() {
         fileName = "database.csv";
         List<String> allLinesFromFile = readInformationFromFile.getAllLines(fileName);
-        fruitService.addNewFruit(allLinesFromFile);
         expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90";
-        report.createReport(allLinesFromFile);
-        assertEquals(expected, report.writeReport(allLinesFromFile));
+        assertEquals(expected, report.writeReportToString(allLinesFromFile));
     }
 
     @Test
     public void inputData1_Ok() {
         fileName = "database1.csv";
         List<String> allLinesFromFile = readInformationFromFile.getAllLines(fileName);
-        fruitService.addNewFruit(allLinesFromFile);
         expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,46" + System.lineSeparator()
                 + "apple,134" + System.lineSeparator()
                 + "orange,1000";
-        report.createReport(allLinesFromFile);
-        assertEquals(expected, report.writeReport(allLinesFromFile));
+        assertEquals(expected, report.writeReportToString(allLinesFromFile));
     }
 
     @Test (expected = ArithmeticException.class)
     public void inputData_NotOk() {
         fileName = "databaseWithNegativeNumber.csv";
         List<String> allLinesFromFile = readInformationFromFile.getAllLines(fileName);
-        fruitService.addNewFruit(allLinesFromFile);
-        report.createReport(allLinesFromFile);
-        report.writeReport(allLinesFromFile);
+        report.writeReportToString(allLinesFromFile);
     }
 
     @Test
     public void inputDataWithRepetitiveBalance_Ok() {
         fileName = "databaseWithRepetitiveBalance.csv";
         List<String> allLinesFromFile = readInformationFromFile.getAllLines(fileName);
-        fruitService.addNewFruit(allLinesFromFile);
         expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90";
-        report.createReport(allLinesFromFile);
-        assertEquals(expected, report.writeReport(allLinesFromFile));
-    }
-
-    @Test
-    public void inputWithoutBalanceButWithSupply() {
-        fileName = "databaseWithoutBalanceButWithSupply.csv";
-        List<String> allLinesFromFile = readInformationFromFile.getAllLines(fileName);
-        fruitService.addNewFruit(allLinesFromFile);
-        expected = "fruit,quantity" + System.lineSeparator()
-                + "banana,132" + System.lineSeparator()
-                + "apple,90";
-        report.createReport(allLinesFromFile);
-        assertEquals(expected, report.writeReport(allLinesFromFile));
+        assertEquals(expected, report.writeReportToString(allLinesFromFile));
     }
 
     @Test (expected = RuntimeException.class)

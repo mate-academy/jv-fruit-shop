@@ -24,33 +24,34 @@ public class ShopServiceImpl implements ShopService {
         Operation operation = new Operation();
         for (String eachLine : informationFromFile) {
             String[] oneLine = eachLine.split(DELIMITER);
+            Fruit fruit = new Fruit(oneLine[FRUIT_NAME]);
+            if (addNewFruit(oneLine, fruit)) {
+                continue;
+            }
             int amountAfterOperation = checkOperation(oneLine, operation);
-            if (fruitDao.containsKey(new Fruit(oneLine[FRUIT_NAME]))) {
-                fruitDao.update(new Fruit(oneLine[FRUIT_NAME]), amountAfterOperation);
+            if (fruitDao.containsKey(fruit)) {
+                fruitDao.update(fruit, amountAfterOperation);
             }
         }
     }
 
+    private boolean addNewFruit(String[] oneLine, Fruit fruit) {
+        if (oneLine[OPERATION].toUpperCase().equals(Operation.Type.B.toString())
+                && !fruitDao.containsKey(fruit) && Integer.parseInt(oneLine[AMOUNT]) > 0) {
+            fruitDao.add(fruit, Integer.parseInt(oneLine[AMOUNT]));
+            return true;
+        }
+        return false;
+    }
+
     private int checkOperation(String[] oneLine, Operation operation) {
         int amountAfterOperation = 0;
-        if (isValidOperation(oneLine[OPERATION])) {
-            operation.setOperation(Operation.Type.valueOf(oneLine[OPERATION].toUpperCase()));
-        } else {
-            return 0;
-        }
-        if (fruitDao.containsKey(new Fruit(oneLine[FRUIT_NAME]))) {
+        if (operation.checkOperation(Operation.Type.valueOf(oneLine[OPERATION].toUpperCase()))) {
             checkInputData(oneLine, operation);
             amountAfterOperation = operationStrategy.get(operation.getOperation())
                     .getOperation(Integer.parseInt(oneLine[AMOUNT]));
         }
         return amountAfterOperation;
-    }
-
-    private boolean isValidOperation(String operation) {
-        operation = operation.toUpperCase();
-        return operation.equals(Operation.Type.S.toString())
-                || operation.equals(Operation.Type.P.toString())
-                || operation.equals(Operation.Type.R.toString());
     }
 
     private void checkInputData(String[] oneLine, Operation operation) {

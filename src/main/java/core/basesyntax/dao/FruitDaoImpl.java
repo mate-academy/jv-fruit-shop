@@ -30,10 +30,10 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void update(Fruit fruit, int amount) {
-        Storage.fruits.replace(fruit, Storage.fruits.get(fruit) + amount);
-        if (Storage.fruits.get(fruit) < 0) {
+        if (Storage.fruits.get(fruit) + amount < 0) {
             throw new ArithmeticException("Amount cannot be below than zero");
         }
+        Storage.fruits.replace(fruit, Storage.fruits.get(fruit) + amount);
     }
 
     @Override

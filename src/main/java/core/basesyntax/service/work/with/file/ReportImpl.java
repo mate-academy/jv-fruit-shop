@@ -2,7 +2,6 @@ package core.basesyntax.service.work.with.file;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
@@ -24,7 +23,8 @@ public class ReportImpl implements Report {
     private static final String HEADER = "fruit,quantity";
 
     @Override
-    public String writeReport(List<String> informationFromFile) {
+    public String writeReportToString(List<String> informationFromFile) {
+        createReport(informationFromFile);
         FruitDao fruitDao = new FruitDaoImpl();
         StringBuilder report = new StringBuilder();
         report.append(HEADER).append(System.lineSeparator());
@@ -48,12 +48,12 @@ public class ReportImpl implements Report {
         } catch (IOException e) {
             throw new RuntimeException("Can't write file", e);
         }
-        Storage.fruits.clear();
     }
 
     @Override
     public void createReport(List<String> list) {
         Map<Operation.Type, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.Type.B, new SupplyOperationHandler());
         operationHandlerMap.put(Operation.Type.R, new ReturnOperationHandler());
         operationHandlerMap.put(Operation.Type.P, new PurchaseOperationHandler());
         operationHandlerMap.put(Operation.Type.S, new SupplyOperationHandler());

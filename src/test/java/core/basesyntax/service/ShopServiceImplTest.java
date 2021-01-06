@@ -24,7 +24,6 @@ import org.junit.Test;
 
 public class ShopServiceImplTest {
     private static String fileName;
-    private static FruitService fruitService;
     private static ReadInformationFromFile readInformationFromFile;
     private static ShopService shopService;
     private static Map<Operation.Type, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -33,7 +32,6 @@ public class ShopServiceImplTest {
 
     @BeforeClass
     public static void beforeClass() throws Exception {
-        fruitService = new FruitServiceImpl();
         readInformationFromFile = new ReadInformationFromFileImpl();
         fruitDao = new FruitDaoImpl();
     }
@@ -56,7 +54,6 @@ public class ShopServiceImplTest {
     public void getFruitAmount_Ok() {
         fileName = "database.csv";
         List<String> allLinesFromFile = readInformationFromFile.getAllLines(fileName);
-        fruitService.addNewFruit(allLinesFromFile);
         shopService.doOperation(allLinesFromFile);
         assertEquals(152, fruitDao.getAmount("banana"));
         assertEquals(90, fruitDao.getAmount("apple"));

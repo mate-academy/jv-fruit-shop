@@ -9,7 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ReadFromCsvFileImplTest {
+public class ReadInformationFromFileImplTest {
     private static ReadInformationFromFile readInformationFromFile;
     private String fileName;
 
@@ -28,7 +28,6 @@ public class ReadFromCsvFileImplTest {
         fileName = "database.csv";
         boolean expected = true;
         List<String> expectedList = new ArrayList<>();
-        expectedList.add("type,fruit,quantity");
         expectedList.add("b,banana,20");
         expectedList.add("b,apple,100");
         expectedList.add("s,banana,100");

@@ -38,4 +38,12 @@ public class FruitTest {
         assertFalse(fruit.equals(null));
         assertEquals(new Fruit("banana").hashCode(), fruit.hashCode());
     }
+
+    @Test
+    public void getFruit_Ok() {
+        fruit.setFruitName("apple");
+        assertEquals("apple", fruit.getFruitName());
+        Fruit newFruit = new Fruit("apple");
+        assertEquals(fruit.getFruitName(), newFruit.getFruitName());
+    }
 }
