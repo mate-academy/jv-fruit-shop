@@ -1,7 +1,7 @@
 package core.basesyntax.stratege;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.TransactionDto;
 
 public interface OperationStrategy {
-    Integer operation(Operation operationName);
+    void doOperation(TransactionDto transactionDto);
 }
