@@ -1,13 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.model.abstractstorage.AbstractItem;
-import core.basesyntax.model.shopdao.ShopDto;
-import core.basesyntax.shopimpl.database.FruitShopDto;
 import core.basesyntax.shopimpl.entity.DataRecord;
 import core.basesyntax.shopimpl.service.IOdataFileService;
 import core.basesyntax.shopimpl.storage.FruitShopStorage;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     private static final String path = "src/test/resources/testDataBase.csv";
@@ -17,12 +13,9 @@ public class Main {
         List<String> lines = fileService.readFile(path);
         List<DataRecord> records = fileService.parseAll(lines);
         
-        ShopDto<DataRecord> dto = new FruitShopDto();
-        dto.addAll(records);
-        
         FruitShopStorage storage = new FruitShopStorage();
         
-        storage.initStorage(dto.getTransactionHistory());
+        storage.initStorage(records);
         
         fileService.writeReport("src/main/java/core/basesyntax/report.csv",
                 storage.getStorage());

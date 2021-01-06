@@ -10,6 +10,7 @@ public class Validator {
     public static void transactionValidator(AbstractItem item,
                                             int amount,
                                             Map<AbstractItem, Integer> storage) throws Exception {
+        transactionValidator(amount);
         int currentAmount = storage.get(item);
         if (currentAmount < amount) {
             String message = String
@@ -22,11 +23,9 @@ public class Validator {
         }
     }
     
-    public static void transactionValidator(ShopTransactionsType transactionsType,
-                                            AbstractItem item,
-                                            Integer amount) {
-        if (transactionsType == null || item == null || amount == null) {
-            throw new RuntimeException("NonNull arguments expected");
+    public static void transactionValidator(Integer amount) {
+        if (amount < 0) {
+            throw new IllegalStateException();
         }
     }
 }
