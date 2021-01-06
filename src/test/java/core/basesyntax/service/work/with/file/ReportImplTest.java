@@ -37,6 +37,7 @@ public class ReportImplTest {
         expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90";
+        report.createReport(allLinesFromFile);
         assertEquals(expected, report.writeReport(allLinesFromFile));
     }
 
@@ -49,6 +50,7 @@ public class ReportImplTest {
                 + "banana,46" + System.lineSeparator()
                 + "apple,134" + System.lineSeparator()
                 + "orange,1000";
+        report.createReport(allLinesFromFile);
         assertEquals(expected, report.writeReport(allLinesFromFile));
     }
 
@@ -57,6 +59,7 @@ public class ReportImplTest {
         fileName = "databaseWithNegativeNumber.csv";
         List<String> allLinesFromFile = readInformationFromFile.getAllLines(fileName);
         fruitService.addNewFruit(allLinesFromFile);
+        report.createReport(allLinesFromFile);
         report.writeReport(allLinesFromFile);
     }
 
@@ -68,6 +71,7 @@ public class ReportImplTest {
         expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator()
                 + "apple,90";
+        report.createReport(allLinesFromFile);
         assertEquals(expected, report.writeReport(allLinesFromFile));
     }
 
@@ -79,6 +83,7 @@ public class ReportImplTest {
         expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,132" + System.lineSeparator()
                 + "apple,90";
+        report.createReport(allLinesFromFile);
         assertEquals(expected, report.writeReport(allLinesFromFile));
     }
 
