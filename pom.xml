@@ -91,7 +91,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/model/**</exclude>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/Application*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

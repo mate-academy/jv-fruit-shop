@@ -12,6 +12,7 @@ public class ParseToListImpl implements ParseToList {
     public static final int OPERATION = 0;
     public static final int FRUIT = 1;
     public static final int QUANTITY = 2;
+    public static final String COMMA = ",";
 
     @Override
     public List<TransactionDto> parseToTransactions(List<String> dataFromFile) {
@@ -20,7 +21,7 @@ public class ParseToListImpl implements ParseToList {
         }
         List<TransactionDto> convertedToTransaction = new ArrayList<>();
         for (String value : dataFromFile) {
-            String[] splittedData = value.split(",");
+            String[] splittedData = value.split(COMMA);
             convertedToTransaction.add(new TransactionDto(fromString(splittedData[OPERATION]),
                     new Fruit(splittedData[FRUIT]), Integer.valueOf(splittedData[QUANTITY])));
         }

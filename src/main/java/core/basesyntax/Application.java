@@ -35,5 +35,4 @@ public class Application {
         CsvFileWriter fileWriter = new CsvFileWriterImpl();
         fileWriter.writeReport("src/main/resources/fruits_report", fruitService.getFruitsReport());
     }
-
 }

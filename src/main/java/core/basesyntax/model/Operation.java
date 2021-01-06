@@ -17,9 +17,9 @@ public enum Operation {
     }
 
     public static Operation fromString(String operation) {
-        for (Operation o : Operation.values()) {
-            if (o.operation.equalsIgnoreCase(operation)) {
-                return o;
+        for (Operation operations : Operation.values()) {
+            if (operations.operation.equalsIgnoreCase(operation)) {
+                return operations;
             }
         }
         throw new IllegalArgumentException("No constant with operation " + operation + " found");
