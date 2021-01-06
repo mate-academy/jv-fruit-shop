@@ -16,14 +16,10 @@ public class CsvParserImpl implements CsvParser {
 
     @Override
     public List<TransactionDto> parse(List<String> input) {
-        List<String[]> dataCollection = input.stream()
-                .map(l -> l.split(","))
+        return input.stream()
+                .skip(1)
+                .map(l -> createDtoFromData(l.split(",")))
                 .collect(Collectors.toList());
-        List<TransactionDto> data = new ArrayList<>();
-        for (String[] line : dataCollection.subList(1, dataCollection.size())) {
-            data.add(createDtoFromData(line));
-        }
-        return data;
     }
 
     private TransactionDto createDtoFromData(String[] data) {
