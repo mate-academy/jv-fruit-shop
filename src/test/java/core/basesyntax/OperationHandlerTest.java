@@ -1,5 +1,11 @@
-package core.basesyntax.strategy;
+package core.basesyntax;
 
+import core.basesyntax.exceptions.WrongFruitsAmountException;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Assert;
@@ -35,7 +41,7 @@ public class OperationHandlerTest {
 
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = WrongFruitsAmountException.class)
     public void check_Return_not_ok() {
         operationHandlerMap.get(RETURN).updateBalance(50, -2);
     }
@@ -51,7 +57,7 @@ public class OperationHandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = WrongFruitsAmountException.class)
     public void check_Supply_not_ok() {
         operationHandlerMap.get(SUPPLY).updateBalance(50, -1);
     }
@@ -63,12 +69,12 @@ public class OperationHandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = WrongFruitsAmountException.class)
     public void check_Purchase_not_ok() {
         operationHandlerMap.get(PURCHASE).updateBalance(50, -1);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = WrongFruitsAmountException.class)
     public void check_Purchase_not_ok_2() {
         operationHandlerMap.get(PURCHASE).updateBalance(50, 100);
     }
@@ -83,7 +89,7 @@ public class OperationHandlerTest {
         Assert.assertEquals(expected, actual);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = WrongFruitsAmountException.class)
     public void check_Balance_not_ok() {
         operationHandlerMap.get(BALANCE).updateBalance(50, -2);
     }

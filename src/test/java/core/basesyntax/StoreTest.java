@@ -1,5 +1,6 @@
-package core.basesyntax.model;
+package core.basesyntax;
 
+import core.basesyntax.model.Store;
 import core.basesyntax.model.impl.FruitStoreImpl;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
@@ -18,16 +19,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StoreTest {
-    private static final String mainTest = "src/main/resources/FruitShopMorningData.csv";
-    private static final String firstTest = "src/main/resources/FirstTest.csv";
-    private static final String secondTest = "src/main/resources/SecondTest.csv";
-    private static final String thirdTest = "src/main/resources/ThirdTest.csv";
-    private static final String fourthTest = "src/main/resources/FourthTest.csv";
-    private static final String mainResult = "src/main/resources/MainResult.csv";
-    private static final String firstResult = "src/main/resources/FirstResult.csv";
-    private static final String secondResult = "src/main/resources/SecondResult.csv";
-    private static final String thirdResult = "src/main/resources/ThirdResult.csv";
-    private static final String fourthResult = "src/main/resources/FourthResult.csv";
+    private static final String mainTest = "src/test/resources/FruitShopMorningData.csv";
+    private static final String firstTest = "src/test/resources/FirstTest.csv";
+    private static final String secondTest = "src/test/resources/SecondTest.csv";
+    private static final String thirdTest = "src/test/resources/ThirdTest.csv";
+    private static final String fourthTest = "src/test/resources/FourthTest.csv";
+    private static final String mainResult = "src/test/resources/MainResult.csv";
+    private static final String firstResult = "src/test/resources/FirstResult.csv";
+    private static final String secondResult = "src/test/resources/SecondResult.csv";
+    private static final String thirdResult = "src/test/resources/ThirdResult.csv";
+    private static final String fourthResult = "src/test/resources/FourthResult.csv";
     private static Store store;
 
     @BeforeClass

@@ -16,7 +16,7 @@
         <maven.checkstyle.plugin.configLocation>
             https://raw.githubusercontent.com/mate-academy/style-guides/master/java/checkstyle.xml
         </maven.checkstyle.plugin.configLocation>
-        <jacoco.version>0.8.5</jacoco.version>
+        <jacoco.version>0.8.6</jacoco.version>
     </properties>
 
     <dependencies>
@@ -27,10 +27,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.3</version>
         </dependency>
     </dependencies>
     <build>
@@ -97,7 +96,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/FruitShopMain*</exclude>
-                        <exclude>**/model**</exclude>
+                        <exclude>**/model/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
