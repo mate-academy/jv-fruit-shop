@@ -43,7 +43,7 @@ public class ParserCsvFile implements Parser<TransactionDto> {
 
     private Operation checkAndGetOperation(String operation) {
         for (Operation value : Operation.values()) {
-            if (operation != null && operation.equalsIgnoreCase(operation)) {
+            if (operation.equalsIgnoreCase(value.getOperation())) {
                 return value;
             }
         }

@@ -17,5 +17,4 @@ public class CsvFileReader implements FileReader {
                     + "while reading file %s.)", filePath), e);
         }
     }
-
 }

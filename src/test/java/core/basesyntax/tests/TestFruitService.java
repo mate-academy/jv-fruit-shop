@@ -48,4 +48,14 @@ public class TestFruitService {
         assertEquals(storage.keySet(), expected.keySet(), "Map keys must be equals");
         assertEquals(storage.entrySet(), expected.entrySet(), "Map must be equals");
     }
+    @Test
+    public void checkGetFruitReport(){
+        fruitService.applyOperation(listTransaction);
+        Map<Fruit, Integer> storage = fruitService.getFruitReport();
+        Map<Fruit, Integer> expected = new HashMap<>();
+        expected.put(new Fruit("banana"), 207);
+        assertEquals(storage.size(), expected.size(), "Size of must must be same");
+        assertEquals(storage.keySet(), expected.keySet(), "Map keys must be equals");
+        assertEquals(storage.entrySet(), expected.entrySet(), "Map must be equals");
+    }
 }
