@@ -95,7 +95,7 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Main*</exclude>
+                        <exclude>**/Aplication*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

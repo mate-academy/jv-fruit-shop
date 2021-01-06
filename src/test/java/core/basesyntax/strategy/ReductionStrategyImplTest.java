@@ -5,6 +5,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import java.util.HashMap;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,5 +33,24 @@ public class ReductionStrategyImplTest {
         Integer actual = myStorage.fruitStorage.get(new Fruit("lemon"));
         Integer expected = Integer.valueOf(5);
         Assert.assertEquals(actual, expected);
+    }
+
+    @Test
+    public void typicalTest_Notok() {
+        additionalStrategy.operate(transactionDtoFirst);
+        reductionStrategyImpl.operate(transactionDtoSecond);
+        Integer actual = myStorage.fruitStorage.get(new Fruit("lemon"));
+        Integer expected = Integer.valueOf(200);
+        Assert.assertNotEquals(actual, expected);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void checkReductionNoExistFruit_NotOk() {
+        reductionStrategyImpl.operate(transactionDtoSecond);
+    }
+
+    @After
+    public void clear() {
+        myStorage.fruitStorage.clear();
     }
 }
