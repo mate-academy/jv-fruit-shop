@@ -1,16 +1,26 @@
 package core.basesyntax.model.impl;
 
-import core.basesyntax.db.Warehouse;
+import core.basesyntax.exception.InvalidOperationException;
 import core.basesyntax.model.AbstractOperation;
 import core.basesyntax.model.entities.Product;
+import java.util.Map;
 
 public class BalanceOperation<T extends Product> extends AbstractOperation<T> {
-    public BalanceOperation(Warehouse<T> warehouse) {
-        super(warehouse);
+    public BalanceOperation(Map<T, Integer> storage) {
+        super(storage);
     }
 
     @Override
     public void execute(T product, Integer amount) {
-        warehouse.getStorage().put(product, amount);
+        validateExecution(product);
+        storage.put(product, amount);
+    }
+
+    private boolean validateExecution(T product) {
+        if (storage.containsKey(product)) {
+            throw new InvalidOperationException(
+                    "More than one Balance operation found for product " + product.getName());
+        }
+        return true;
     }
 }

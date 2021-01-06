@@ -20,28 +20,28 @@ public class OperationFactoryTest {
 
     @Test
     public void getPurchaseOperation_ok() {
-        OperationSet existingOperation = OperationSet.P;
+        Operation existingOperation = Operation.P;
         AbstractOperation<Product> expectedOperation = operationFactory.get(existingOperation);
         assertEquals(expectedOperation.getClass(), PurchaseOperation.class);
     }
 
     @Test
     public void getBalanceOperation_ok() {
-        OperationSet existingOperation = OperationSet.B;
+        Operation existingOperation = Operation.B;
         AbstractOperation<Product> expectedOperation = operationFactory.get(existingOperation);
         assertEquals(expectedOperation.getClass(), BalanceOperation.class);
     }
 
     @Test
     public void getReturnOperation_ok() {
-        OperationSet existingOperation = OperationSet.R;
+        Operation existingOperation = Operation.R;
         AbstractOperation<Product> expectedOperation = operationFactory.get(existingOperation);
         assertEquals(expectedOperation.getClass(), ReturnOperation.class);
     }
 
     @Test
     public void getSupplyOperation_ok() {
-        OperationSet existingOperation = OperationSet.S;
+        Operation existingOperation = Operation.S;
         AbstractOperation<Product> expectedOperation = operationFactory.get(existingOperation);
         assertEquals(expectedOperation.getClass(), SupplyOperation.class);
     }

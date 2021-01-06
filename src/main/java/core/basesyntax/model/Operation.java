@@ -1,5 +1,5 @@
 package core.basesyntax.model;
 
-public enum OperationSet {
+public enum Operation {
     B, S, P, R
 }

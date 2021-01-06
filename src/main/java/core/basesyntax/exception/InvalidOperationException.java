@@ -1,4 +1,4 @@
-package core.basesyntax.model.entities.exception;
+package core.basesyntax.exception;
 
 public class InvalidOperationException extends RuntimeException {
     public InvalidOperationException(String message) {

@@ -1,10 +1,9 @@
 package core.basesyntax.service.io;
 
-import core.basesyntax.db.Warehouse;
-import core.basesyntax.model.entities.Product;
+import java.nio.file.Path;
+import java.util.List;
 
-public interface ReportWriter<T extends Product> {
-    void validateFileExtension();
+public interface ReportWriter {
 
-    void writeReport(Warehouse<T> warehouse);
+    void writeReport(Path pathToFile, List<String[]> report);
 }

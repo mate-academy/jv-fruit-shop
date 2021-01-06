@@ -1,18 +1,22 @@
 package core.basesyntax;
 
-import core.basesyntax.model.entities.Fruit;
+import core.basesyntax.db.Warehouse;
+import core.basesyntax.model.OperationFactory;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.io.DataReader;
 import core.basesyntax.service.io.ReportWriter;
 import core.basesyntax.service.io.impl.CsvDataReader;
 import core.basesyntax.service.io.impl.CsvReportWriter;
+import java.nio.file.Path;
 
 public class Main {
     public static void main(String[] args) {
-        DataReader<Fruit> reader = new CsvDataReader<>("src/main/resources/input.csv");
-        ReportWriter<Fruit> writer = new CsvReportWriter<>("src/main/resources/report.csv");
-        FruitService service = new FruitService();
-        service.importData(reader.readData());
-        service.writeReport(writer);
+        DataReader reader = new CsvDataReader();
+        ReportWriter writer = new CsvReportWriter();
+        FruitService service =
+                new FruitService(new OperationFactory<>(Warehouse.getFruitStorage()));
+
+        service.importData(reader.readData(Path.of("src/main/resources/input.csv")));
+        writer.writeReport(Path.of("src/main/resources/report.csv"), service.generateReport());
     }
 }

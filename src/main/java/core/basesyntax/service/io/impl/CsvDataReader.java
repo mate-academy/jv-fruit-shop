@@ -2,33 +2,26 @@ package core.basesyntax.service.io.impl;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import core.basesyntax.model.entities.Product;
-import core.basesyntax.model.entities.exception.InvalidFileExtensionException;
+import core.basesyntax.exception.InvalidFileExtensionException;
 import core.basesyntax.service.io.DataReader;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.List;
 
-public class CsvDataReader<T extends Product> implements DataReader<T> {
-    private final String inputFilePath;
-
-    public CsvDataReader(String inputFilePath) {
-        this.inputFilePath = inputFilePath;
-        validateFileExtension();
-    }
-
-    @Override
-    public void validateFileExtension() {
-        if (!inputFilePath.endsWith(".csv")) {
+public class CsvDataReader implements DataReader {
+    public boolean validateFileExtension(Path pathToFile) {
+        if (!pathToFile.toString().endsWith(".csv")) {
             throw new InvalidFileExtensionException("This reader works with .csv files only");
         }
+        return true;
     }
 
     @Override
-    public List<String[]> readData() {
+    public List<String[]> readData(Path pathToFile) {
+        validateFileExtension(pathToFile);
         try (CSVReader csvReader =
-                     new CSVReaderBuilder(Files.newBufferedReader(Paths.get(inputFilePath)))
+                     new CSVReaderBuilder(Files.newBufferedReader(pathToFile))
                 .withSkipLines(1)
                 .build()) {
             return csvReader.readAll();

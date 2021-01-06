@@ -1,10 +1,9 @@
 package core.basesyntax.service.io;
 
-import core.basesyntax.model.entities.Product;
+import java.nio.file.Path;
 import java.util.List;
 
-public interface DataReader<T extends Product> {
-    void validateFileExtension();
+public interface DataReader {
 
-    List<String[]> readData();
+    List<String[]> readData(Path pathToFile);
 }

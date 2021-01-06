@@ -1,44 +1,44 @@
 package core.basesyntax.service;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
 
-import core.basesyntax.model.entities.Fruit;
-import core.basesyntax.service.io.ReportWriter;
-import core.basesyntax.service.io.impl.CsvReportWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import core.basesyntax.db.Warehouse;
+import core.basesyntax.model.OperationFactory;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class FruitServiceTest {
-    private static final List<String[]> TEST_DATA = new ArrayList<>();
-    private static final String REPORT_FILE_PATH = "src/main/resources/service_test_report.csv";
-    private static ReportWriter<Fruit> writer;
-    private final FruitService fruitService = new FruitService();
+    private static final List<String[]> TEST_INPUT = new ArrayList<>();
+    private static final List<String[]> TEST_REPORT = new ArrayList<>();
+    private final FruitService fruitService =
+            new FruitService(new OperationFactory<>(Warehouse.getFruitStorage()));
 
     @BeforeClass
     public static void setUp() {
-        TEST_DATA.add(new String[]{"b", "test", "10"});
-        writer = new CsvReportWriter<>(REPORT_FILE_PATH);
+        TEST_INPUT.add(new String[]{"b", "test", "10"});
+        TEST_REPORT.add(new String[]{"test", "10"});
     }
 
     @Test
     public void importData_ok() {
-        fruitService.importData(TEST_DATA);
+        fruitService.importData(TEST_INPUT);
         assertTrue("One or more lines should be imported",
-                fruitService.getWarehouse().getStorage().size() >= 1);
+                Warehouse.getFruitStorage().size() >= 1);
     }
 
     @Test
-    public void writeReport_ok() throws IOException {
-        fruitService.importData(TEST_DATA);
-        fruitService.writeReport(writer);
-        writer.writeReport(fruitService.getWarehouse());
-        assertTrue("One or more lines should be written",
-                Files.readAllLines(Path.of(REPORT_FILE_PATH)).size() > 1);
-        Files.delete(Path.of(REPORT_FILE_PATH));
+    public void generateReport_ok() {
+        fruitService.importData(TEST_INPUT);
+        List<String[]> actualReport = fruitService.generateReport();
+        assertArrayEquals(TEST_REPORT.get(0), actualReport.get(0));
+    }
+
+    @After
+    public void tearDown() {
+        Warehouse.getFruitStorage().clear();
     }
 }

@@ -1,4 +1,4 @@
-package core.basesyntax.model.entities.exception;
+package core.basesyntax.exception;
 
 public class InvalidFileExtensionException extends RuntimeException {
     public InvalidFileExtensionException(String message) {

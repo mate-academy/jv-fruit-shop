@@ -1,13 +1,13 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.entities.Product;
+import core.basesyntax.model.entities.Fruit;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Warehouse<T extends Product> {
-    private final Map<T, Integer> storage = new HashMap<>();
+public class Warehouse {
+    private static final Map<Fruit, Integer> FRUIT_STORAGE = new HashMap<>();
 
-    public Map<T, Integer> getStorage() {
-        return storage;
+    public static Map<Fruit, Integer> getFruitStorage() {
+        return FRUIT_STORAGE;
     }
 }

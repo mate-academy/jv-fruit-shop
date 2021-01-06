@@ -3,7 +3,7 @@ package core.basesyntax.model.entities;
 import java.util.Objects;
 
 public abstract class Product {
-    private final String name;
+    private String name;
 
     public Product(String name) {
         this.name = name;
@@ -11,6 +11,10 @@ public abstract class Product {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

@@ -1,12 +1,12 @@
 package core.basesyntax.model;
 
-import core.basesyntax.db.Warehouse;
 import core.basesyntax.model.entities.Product;
+import java.util.Map;
 
 public abstract class AbstractOperation<T extends Product> implements Executable<T> {
-    protected Warehouse<T> warehouse;
+    protected final Map<T, Integer> storage;
 
-    public AbstractOperation(Warehouse<T> warehouse) {
-        this.warehouse = warehouse;
+    public AbstractOperation(Map<T, Integer> storage) {
+        this.storage = storage;
     }
 }

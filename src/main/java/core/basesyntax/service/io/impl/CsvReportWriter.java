@@ -1,42 +1,34 @@
 package core.basesyntax.service.io.impl;
 
 import com.opencsv.CSVWriter;
-import core.basesyntax.db.Warehouse;
-import core.basesyntax.model.entities.Product;
-import core.basesyntax.model.entities.exception.InvalidFileExtensionException;
+import core.basesyntax.exception.InvalidFileExtensionException;
 import core.basesyntax.service.io.ReportWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Map;
+import java.util.List;
 
-public class CsvReportWriter<T extends Product> implements ReportWriter<T> {
+public class CsvReportWriter implements ReportWriter {
     private static final String[] HEADER = new String[]{"fruit", "quantity"};
-    private final String reportFilePath;
 
-    public CsvReportWriter(String reportFilePath) {
-        this.reportFilePath = reportFilePath;
-        validateFileExtension();
-    }
-
-    @Override
-    public void validateFileExtension() {
-        if (!reportFilePath.endsWith(".csv")) {
+    public boolean validateFileExtension(Path pathToFile) {
+        if (!pathToFile.toString().endsWith(".csv")) {
             throw new InvalidFileExtensionException("This reader works with .csv files only");
         }
+        return true;
     }
 
     @Override
-    public void writeReport(Warehouse<T> warehouse) {
-        try (CSVWriter csvWriter = new CSVWriter(Files.newBufferedWriter(Path.of(reportFilePath)),
+    public void writeReport(Path pathToFile, List<String[]> report) {
+        validateFileExtension(pathToFile);
+        try (CSVWriter csvWriter = new CSVWriter(Files.newBufferedWriter(pathToFile),
                 CSVWriter.DEFAULT_SEPARATOR,
                 CSVWriter.NO_QUOTE_CHARACTER,
                 CSVWriter.DEFAULT_ESCAPE_CHARACTER,
                 CSVWriter.DEFAULT_LINE_END)) {
             csvWriter.writeNext(HEADER);
-            for (Map.Entry<T, Integer> entry : warehouse.getStorage().entrySet()) {
-                csvWriter.writeNext(new String[]{entry.getKey().getName(),
-                        String.valueOf(entry.getValue())});
+            for (String[] row : report) {
+                csvWriter.writeNext(row);
             }
         } catch (IOException e) {
             throw new RuntimeException("Could not write to file", e);
