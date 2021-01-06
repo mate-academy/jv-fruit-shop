@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.operation.Operation;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.OperationStrategy;
@@ -55,7 +56,7 @@ public class ShopServiceImplTest {
         fileName = "database.csv";
         List<String> allLinesFromFile = readInformationFromFile.getAllLines(fileName);
         shopService.doOperation(allLinesFromFile);
-        assertEquals(152, fruitDao.getAmount("banana"));
-        assertEquals(90, fruitDao.getAmount("apple"));
+        assertEquals(152, fruitDao.getAmount(new Fruit("banana")));
+        assertEquals(90, fruitDao.getAmount(new Fruit("apple")));
     }
 }

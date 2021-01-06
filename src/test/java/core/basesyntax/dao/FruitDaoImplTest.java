@@ -42,7 +42,7 @@ public class FruitDaoImplTest {
         Fruit fruit = new Fruit("apple");
         fruitDao.add(fruit, 11);
         fruitDao.update(fruitDao.getFruit("apple"), 5);
-        assertEquals(16, fruitDao.getAmount("apple"));
+        assertEquals(16, fruitDao.getAmount(fruit));
         fruitDao.update(fruitDao.getFruit("apple"), -100);
     }
 

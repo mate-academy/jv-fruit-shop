@@ -20,7 +20,7 @@ public class ReportImpl implements Report {
         for (Map.Entry<Fruit, Integer> entry : fruitDao.getAllFruits()) {
             report.append(fruitDao.getFruit(entry.getKey().getFruitName())
                     .getFruitName()).append(",")
-                    .append(fruitDao.getAmount(entry.getKey().getFruitName()));
+                    .append(fruitDao.getAmount(entry.getKey()));
             counter++;
             if (counter < fruitDao.getSize()) {
                 report.append(System.lineSeparator());
