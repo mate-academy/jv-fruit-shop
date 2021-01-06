@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderService implements FileReaderService {
-    private final List<String> dataFromFile = new ArrayList<>();
-
     @Override
     public List<String> read(String fileName) {
+        List<String> dataFromFile = new ArrayList<>();
         try (BufferedReader readFile = new BufferedReader(new FileReader(fileName))) {
             readFile.readLine();
             String lineText;

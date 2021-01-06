@@ -62,14 +62,4 @@ public class ActivitiesStrategyImplTest {
     public void testForIncorrectData() {
         activitiesStrategy.get(null);
     }
-
-    @Test(expected = RuntimeException.class)
-    public void testForIncorrectDataSecond() {
-        activitiesStrategy.get(Operations.operationFromString("1"));
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void testForIncorrectDataThird() {
-        activitiesStrategy.get(Operations.operationFromString("%"));
-    }
 }

@@ -12,9 +12,9 @@ public class ParseDataServiceImpl implements ParseDataService {
     private final ActivitiesStrategy activitiesStrategy;
     private final FruitsDao fruitsDao;
 
-    public ParseDataServiceImpl(ActivitiesStrategy activitiesStrategy) {
+    public ParseDataServiceImpl(ActivitiesStrategy activitiesStrategy, FruitsDao fruitsDao) {
         this.activitiesStrategy = activitiesStrategy;
-        fruitsDao = new FruitsDaoImpl();
+        this.fruitsDao = fruitsDao;
     }
 
     @Override

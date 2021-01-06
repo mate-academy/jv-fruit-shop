@@ -2,6 +2,7 @@ package core.service;
 
 import static org.junit.Assert.assertEquals;
 
+import core.dao.FruitsDaoImpl;
 import core.db.Storage;
 import core.model.Operations;
 import core.strategy.AmountHandler;
@@ -27,7 +28,7 @@ public class ParseDataServiceImplTest {
         activitiesHandlerMap.put(Operations.RETURN, new ReturnAmountHandler());
         activitiesHandlerMap.put(Operations.PURCHASE, new PurchaseAmountHandler());
         ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImpl(activitiesHandlerMap);
-        parseDataService = new ParseDataServiceImpl(activitiesStrategy);
+        parseDataService = new ParseDataServiceImpl(activitiesStrategy, new FruitsDaoImpl());
     }
 
     @Test

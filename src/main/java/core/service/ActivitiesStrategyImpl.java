@@ -15,7 +15,7 @@ public class ActivitiesStrategyImpl implements ActivitiesStrategy {
     @Override
     public AmountHandler get(Operations typeOfActivity) {
         Optional<AmountHandler> activitiesHandler =
-                Optional.of(activitiesMap.get(typeOfActivity));
+                Optional.ofNullable(activitiesMap.get(typeOfActivity));
         return activitiesHandler.orElseThrow(RuntimeException::new);
     }
 }

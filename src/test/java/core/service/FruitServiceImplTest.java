@@ -3,7 +3,7 @@ package core.service;
 import static org.junit.Assert.assertEquals;
 
 import core.db.Storage;
-import org.junit.AfterClass;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,8 +35,8 @@ public class FruitServiceImplTest {
         assertEquals(secondExpected, secondActual);
     }
 
-    @AfterClass
-    public static void afterAll() {
+    @After
+    public void afterAll() {
         Storage.fruits.clear();
     }
 }

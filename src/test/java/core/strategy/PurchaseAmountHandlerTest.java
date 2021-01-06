@@ -2,14 +2,14 @@ package core.strategy;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class PurchaseAmountHandlerTest {
     private static AmountHandler purchaseAmountHandler;
 
-    @Before
-    public void beforeAll() {
+    @BeforeClass
+    public static void beforeAll() {
         purchaseAmountHandler = new PurchaseAmountHandler();
     }
 

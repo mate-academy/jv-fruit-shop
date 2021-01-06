@@ -7,8 +7,6 @@ import org.junit.Test;
 
 public class BalanceAmountHandlerTest {
     private static AmountHandler balanceAmountHandler;
-    private static final String STRING_FORMAT_FOR_WRONG =
-            "Wrong operation! expected: %d But was: %d";
 
     @Before
     public void beforeAll() {
