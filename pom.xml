@@ -97,6 +97,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/FruitShopMain*</exclude>
+                        <exclude>**/model**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

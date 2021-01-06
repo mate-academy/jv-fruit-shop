@@ -1,8 +1,5 @@
 package core.basesyntax.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.model.impl.FruitStoreImpl;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
@@ -16,10 +13,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class StoreTest {
+public class StoreTest {
     private static final String mainTest = "src/main/resources/FruitShopMorningData.csv";
     private static final String firstTest = "src/main/resources/FirstTest.csv";
     private static final String secondTest = "src/main/resources/SecondTest.csv";
@@ -32,8 +30,8 @@ class StoreTest {
     private static final String fourthResult = "src/main/resources/FourthResult.csv";
     private static Store store;
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeClass
+    public static void setUp() {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("b", new BalanceOperationHandler());
         operationHandlerMap.put("p", new PurchaseOperationHandler());
@@ -44,44 +42,38 @@ class StoreTest {
     }
 
     @Test
-    void getInfo_check_ok() {
+    public void getInfo_check_ok() {
         store.getInfo(mainTest, mainResult);
         String actual = readFile(mainResult).trim();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,165" + System.lineSeparator()
                 + "orange,160" + System.lineSeparator()
                 + "apple,420";
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void getStatistic_wrong_Operator() {
+        store.getInfo(firstTest, firstResult);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void getStatistic_negative_quantity() {
+        store.getInfo(secondTest, secondResult);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void getStatistic_invalid_quantity() {
+        store.getInfo(thirdTest, thirdResult);
     }
 
     @Test
-    void getStatistic_wrongOperator() {
-        assertThrows(RuntimeException.class, () -> {
-            store.getInfo(firstTest, firstResult);
-        });
-    }
-
-    @Test
-    void getStatistic_negativeQuantity() {
-        assertThrows(RuntimeException.class, () -> {
-            store.getInfo(secondTest, secondResult);
-        });
-    }
-
-    @Test
-    void getStatistic_invalidQuantity() {
-        assertThrows(RuntimeException.class, () -> {
-            store.getInfo(thirdTest, thirdResult);
-        });
-    }
-
-    @Test
-    void getStatistic_balanceIsZero() {
+    public void getStatistic_balance_zero() {
         store.getInfo(fourthTest, fourthResult);
         String actual = readFile(fourthResult).trim();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,0";
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
     private String readFile(String fileName) {

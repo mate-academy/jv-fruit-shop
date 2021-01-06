@@ -1,22 +1,20 @@
 package core.basesyntax.strategy;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-class OperationHandlerTest {
+public class OperationHandlerTest {
     private static Map<String, OperationHandler> operationHandlerMap;
     private static final String RETURN = "r";
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
     private static final String BALANCE = "b";
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeClass
+    public static void setUp() {
         operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("b", new BalanceOperationHandler());
         operationHandlerMap.put("p", new PurchaseOperationHandler());
@@ -25,74 +23,68 @@ class OperationHandlerTest {
     }
 
     @Test
-    void check_Return_ok() {
+    public void check_Return_ok() {
         Integer expected = 70;
         Integer actual = operationHandlerMap.get(RETURN)
                 .updateBalance(50, 20);
-
-        assertEquals(expected, actual);
-
-        assertThrows(RuntimeException.class, () -> operationHandlerMap
-                .get(RETURN).updateBalance(50, -2));
-
+        Assert.assertEquals(expected, actual);
         expected = 150;
         actual = operationHandlerMap.get(RETURN)
                 .updateBalance(50, 100);
-
-        assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
 
     }
 
+    @Test(expected = RuntimeException.class)
+    public void check_Return_not_ok() {
+        operationHandlerMap.get(RETURN).updateBalance(50, -2);
+    }
+
     @Test
-    void check_Supply_ok() {
+    public void check_Supply_ok() {
         Integer expected = 70;
         Integer actual = operationHandlerMap.get(SUPPLY)
                 .updateBalance(50, 20);
-
-        assertEquals(expected, actual);
-
-        assertThrows(RuntimeException.class, () -> operationHandlerMap
-                .get(SUPPLY).updateBalance(50, -1));
-
+        Assert.assertEquals(expected, actual);
         expected = 150;
-        actual = operationHandlerMap.get(SUPPLY)
-                .updateBalance(50, 100);
+        actual = operationHandlerMap.get(SUPPLY).updateBalance(50, 100);
+        Assert.assertEquals(expected, actual);
+    }
 
-        assertEquals(expected, actual);
-
+    @Test(expected = RuntimeException.class)
+    public void check_Supply_not_ok() {
+        operationHandlerMap.get(SUPPLY).updateBalance(50, -1);
     }
 
     @Test
-    void check_Purchase_ok() {
+    public void check_Purchase_ok() {
         Integer expected = 30;
-        Integer actual = operationHandlerMap.get(PURCHASE)
-                .updateBalance(50, 20);
+        Integer actual = operationHandlerMap.get(PURCHASE).updateBalance(50, 20);
+        Assert.assertEquals(expected, actual);
+    }
 
-        assertEquals(expected, actual);
+    @Test(expected = RuntimeException.class)
+    public void check_Purchase_not_ok() {
+        operationHandlerMap.get(PURCHASE).updateBalance(50, -1);
+    }
 
-        assertThrows(RuntimeException.class, () -> operationHandlerMap
-                .get(PURCHASE).updateBalance(50, -1));
-
-        assertThrows(RuntimeException.class, () -> operationHandlerMap
-                .get(PURCHASE).updateBalance(50, 100));
+    @Test(expected = RuntimeException.class)
+    public void check_Purchase_not_ok_2() {
+        operationHandlerMap.get(PURCHASE).updateBalance(50, 100);
     }
 
     @Test
-    void check_Balance_ok() {
+    public void check_Balance_ok() {
         Integer expected = 70;
-        Integer actual = operationHandlerMap.get(BALANCE)
-                .updateBalance(50, 20);
-
-        assertEquals(expected, actual);
-
-        assertThrows(RuntimeException.class, () -> operationHandlerMap
-                .get(BALANCE).updateBalance(50, -2));
-
+        Integer actual = operationHandlerMap.get(BALANCE).updateBalance(50, 20);
+        Assert.assertEquals(expected, actual);
         expected = 150;
-        actual = operationHandlerMap.get(BALANCE)
-                .updateBalance(50, 100);
+        actual = operationHandlerMap.get(BALANCE).updateBalance(50, 100);
+        Assert.assertEquals(expected, actual);
+    }
 
-        assertEquals(expected, actual);
-
+    @Test(expected = RuntimeException.class)
+    public void check_Balance_not_ok() {
+        operationHandlerMap.get(BALANCE).updateBalance(50, -2);
     }
 }
