@@ -8,9 +8,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.BalanceStrategy;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseStrategy;
@@ -25,7 +23,6 @@ import org.junit.Test;
 
 public class FruitServiceImplTest {
     private static FruitService fruitService;
-    private static ReportService reportService;
 
     @BeforeClass
     public static void beforeAll() {
@@ -35,7 +32,6 @@ public class FruitServiceImplTest {
         operationStrategyMap.put(Operation.RETURN, new ReturnStrategy());
         operationStrategyMap.put(Operation.SUPPLY, new SupplyStrategy());
         fruitService = new FruitServiceImpl(operationStrategyMap);
-        reportService = new ReportServiceImpl();
     }
 
     @Test
@@ -90,6 +86,6 @@ public class FruitServiceImplTest {
     public void getFruitReport_twoValue_ok() {
         Storage.fruitList.add(new Fruit("banana"));
         Storage.fruitList.add(new Fruit("apple"));
-        assertEquals(2, reportService.getDefaultReport().size());
+        assertEquals(2, fruitService.getDefaultReport().size());
     }
 }
