@@ -6,12 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-
 public class CsvFileReader implements FileReader {
 
     @Override
     public List<String> readData(String filePath) {
-        try  {
+        try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException(String.format("The problem has been encountered "

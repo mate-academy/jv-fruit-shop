@@ -20,7 +20,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class TestFruitService {
     private static final Map<Operation, OperationStrategy> strategyMap = new HashMap<>();
     private static final List<TransactionDto> listTransaction = new ArrayList<>();

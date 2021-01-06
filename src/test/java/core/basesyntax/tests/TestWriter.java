@@ -10,24 +10,29 @@ import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.impl.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileWriter;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ParserCsvFile;
+import core.basesyntax.strategy.BalanceStrategy;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.PurchaseStrategy;
+import core.basesyntax.strategy.ReturnStrategy;
+import core.basesyntax.strategy.SupplyStrategy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.service.impl.ParserCsvFile;
-import core.basesyntax.strategy.*;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TestWriter {
-    Map<Operation, OperationStrategy> operationOperationStrategyMap = new HashMap<>();
-    private static final List<String> lines = new ArrayList<>();
-    private static final FruitFileWriter writer = new CsvFileWriter();
-    private static final String PATH_FILE = "src/test/java/core/basesyntax/tests/resourcestests/fruitReport.csv";
-    Parser parser = new ParserCsvFile();
-    List<TransactionDto> transactions = new ArrayList<>();
-    FruitService service;
+    private static final String PATH_FILE =
+            "src/test/java/core/basesyntax/tests/resourcestests/fruitReport.csv";
+    private final Map<Operation, OperationStrategy> operationOperationStrategyMap = new HashMap<>();
+    private final List<String> lines = new ArrayList<>();
+    private final FruitFileWriter writer = new CsvFileWriter();
+    private Parser parser = new ParserCsvFile();
+    private List<TransactionDto> transactions = new ArrayList<>();
+    private FruitService service;
 
     @Before
     public void putDataInData() {
