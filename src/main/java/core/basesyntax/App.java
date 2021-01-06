@@ -14,7 +14,6 @@ import core.basesyntax.strategy.strategies.BalanceStrategy;
 import core.basesyntax.strategy.strategies.PurchaseStrategy;
 import core.basesyntax.strategy.strategies.ReturnStrategy;
 import core.basesyntax.strategy.strategies.SupplyStrategy;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

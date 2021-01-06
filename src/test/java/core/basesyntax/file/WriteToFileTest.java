@@ -5,10 +5,7 @@ import static org.junit.Assert.assertTrue;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CsvFileWriter;
-import core.basesyntax.service.impl.CsvFileReaderImpl;
 import core.basesyntax.service.impl.CsvFileWriterImpl;
-
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WriteToFileTest {
@@ -25,8 +22,8 @@ public class WriteToFileTest {
     private static final Fruit APPLE = new Fruit("apple");
     private static CsvFileWriter writer;
 
-    @Before
-    public void before() {
+    @BeforeClass
+    public static void before() {
         writer = new CsvFileWriterImpl();
         Storage.storage.put(BANANA, 50);
         Storage.storage.put(APPLE, 25);

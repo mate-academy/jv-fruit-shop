@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -11,13 +10,12 @@ import core.basesyntax.strategy.strategies.BalanceStrategy;
 import core.basesyntax.strategy.strategies.PurchaseStrategy;
 import core.basesyntax.strategy.strategies.ReturnStrategy;
 import core.basesyntax.strategy.strategies.SupplyStrategy;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class StrategyTest {
     private static final Fruit BANANA = new Fruit("banana");
@@ -25,8 +23,8 @@ public class StrategyTest {
     private static Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
     private TransactionDto dto;
 
-    @Before
-    public void beforeClass() {
+    @BeforeClass
+    public static void beforeClass() {
         operationStrategyMap.put(Operation.BALANCE, new BalanceStrategy());
         operationStrategyMap.put(Operation.PURCHASE, new PurchaseStrategy());
         operationStrategyMap.put(Operation.RETURN, new ReturnStrategy());

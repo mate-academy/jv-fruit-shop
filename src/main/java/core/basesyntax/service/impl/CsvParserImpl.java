@@ -4,7 +4,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.CsvParser;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
