@@ -2,7 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FruitsDaoImpl implements FruitsDao {
@@ -14,6 +13,6 @@ public class FruitsDaoImpl implements FruitsDao {
 
     @Override
     public List<Fruit> getData() {
-        return Storage.data == null ? new ArrayList<>() : Storage.data;
+        return Storage.data;
     }
 }
