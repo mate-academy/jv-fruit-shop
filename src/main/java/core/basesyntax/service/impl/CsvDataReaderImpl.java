@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class CsvDataReaderImpl implements DataReader {
-
     @Override
     public List<String> read(String filePath) {
         try {

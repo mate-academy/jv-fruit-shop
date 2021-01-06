@@ -14,27 +14,27 @@ import org.junit.Test;
 
 public class AdditionStrategyImplTest {
     private static OperationStrategy additionStrategy;
-    private static final TransactionDto testDto1 = new TransactionDto(Operation.BALANCE,
+    private static final TransactionDto TEST_DTO_1 = new TransactionDto(Operation.BALANCE,
             new Fruit("banana"), 20);
-    private static final TransactionDto testDto2 = new TransactionDto(Operation.SUPPLY,
+    private static final TransactionDto TEST_DTO_2 = new TransactionDto(Operation.SUPPLY,
             new Fruit("apple"), 100);
-    private static final TransactionDto testDto3 = new TransactionDto(Operation.RETURN,
+    private static final TransactionDto TEST_DTO_3 = new TransactionDto(Operation.RETURN,
             new Fruit("banana"), 50);
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         additionStrategy = new AdditionStrategyImpl();
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.getFruits().clear();
     }
 
     @Test
     public void applyNew_Ok() {
-        additionStrategy.apply(testDto1);
-        additionStrategy.apply(testDto2);
+        additionStrategy.apply(TEST_DTO_1);
+        additionStrategy.apply(TEST_DTO_2);
         Map<String, Integer> expectedMap = new HashMap<>();
         expectedMap.put("banana", 20);
         expectedMap.put("apple", 100);
@@ -43,8 +43,8 @@ public class AdditionStrategyImplTest {
 
     @Test
     public void applyExisted_Ok() {
-        additionStrategy.apply(testDto1);
-        additionStrategy.apply(testDto3);
+        additionStrategy.apply(TEST_DTO_1);
+        additionStrategy.apply(TEST_DTO_3);
         Map<String, Integer> expectedMap = new HashMap<>();
         expectedMap.put("banana", 70);
         assertEquals(expectedMap, Storage.getFruits());
