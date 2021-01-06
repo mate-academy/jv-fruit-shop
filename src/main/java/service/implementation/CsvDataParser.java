@@ -20,10 +20,10 @@ public class CsvDataParser implements DataParser {
             return new FruitTransactionDto(Operation.fromString(parsedLine[OPERATION]),
                     new Fruit(parsedLine[FRUIT_NAME].toLowerCase()),
                     Integer.parseInt(parsedLine[FRUITS_AMOUNT]));
-        } catch (RuntimeException e) {
-            throw new InvalidDataFormatException("Input data has invalid format: "
-                    + Arrays.toString(parsedLine) + "\n"
-                    + "should be ['o' - operation, 'fruit', '3'- amount]");
+        } catch (NumberFormatException nfe) {
+            throw new InvalidDataFormatException(String.format("Input data has invalid format: "
+                    + "%s \nShould be ['o' - operation, 'fruit', '3'- amount]",
+                    Arrays.toString(parsedLine)));
         }
     }
 }

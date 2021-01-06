@@ -20,14 +20,11 @@ public class CsvDataReaderImplTest {
     public static final String INVALID_FORMAT = "src/test/resources/invalid_format.csv";
     public static final String INVALID_OPERATION_IS_NUMBER = "src/test/resources/"
             + "invalid_operation_isNumber.csv";
-
-    private static List<FruitTransactionDto> expectedFruits;
-    private static DataReader dataReader;
+    private static final List<FruitTransactionDto> expectedFruits = new ArrayList<>();
+    private static final DataReader dataReader = new CsvDataReaderImpl();
 
     @Before
     public void setUp() {
-        expectedFruits = new ArrayList<>();
-        dataReader = new CsvDataReaderImpl();
         expectedFruits.add(new FruitTransactionDto(Operation.BALANCE, new Fruit("papaya"), 200));
         expectedFruits.add(new FruitTransactionDto(Operation.PURCHASE, new Fruit("papaya"), 20));
         expectedFruits.add(new FruitTransactionDto(Operation.SUPPLY, new Fruit("papaya"), 23));
@@ -55,12 +52,12 @@ public class CsvDataReaderImplTest {
         dataReader.readFromFile(INVALID_AMOUNT_NAN);
     }
 
-    @Test(expected = InvalidDataFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void readFrom_InvalidFormat_file() {
         dataReader.readFromFile(INVALID_FORMAT);
     }
 
-    @Test(expected = InvalidDataFormatException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void readFrom_InvalidFormat_OperationIsNumber_file() {
         dataReader.readFromFile(INVALID_OPERATION_IS_NUMBER);
     }

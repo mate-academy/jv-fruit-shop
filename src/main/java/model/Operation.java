@@ -24,8 +24,8 @@ public enum Operation {
                 return type;
             }
         }
-        throw new IllegalArgumentException("You have entered invalid operation: "
-                + stringType + "." + "\nValid operations: "
-                + Arrays.toString(Operation.values()));
+        throw new IllegalArgumentException(String.format("You have entered invalid "
+                        + "operation: %s \n.Valid operations: %s",
+                stringType, Arrays.toString(Operation.values())));
     }
 }

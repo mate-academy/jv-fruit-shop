@@ -19,11 +19,10 @@ public class CsvDataWriterImplTest {
     public static final String CORRECT_OUTPUT = "src/test/resources/correct_output.csv";
     public static final String EXPECTED_OUTPUT = "src/test/resources/expected_output.csv";
     private static final Map<Fruit, Integer> testFruits = new HashMap<>();
-    private DataWriter dataWriter;
+    private final DataWriter dataWriter = new CsvDataWriterImpl();
 
     @Before
     public void setUp() {
-        dataWriter = new CsvDataWriterImpl();
         testFruits.put(new Fruit("cherry"), 50);
         testFruits.put(new Fruit("banana"), 108);
         testFruits.put(new Fruit("apple"), 213);
