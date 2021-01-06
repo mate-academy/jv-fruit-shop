@@ -20,7 +20,7 @@ public class IOdataFileService {
     private static final int FILE_INDEX_OF_ITEM = 1;
     private static final int FILE_INDEX_OF_AMOUNT = 2;
     
-    public static void writeReport(String path, Map<AbstractItem, Integer> storage) {
+    public void writeReport(String path, Map<AbstractItem, Integer> storage) {
         StringBuilder sb = new StringBuilder();
         sb.append("Item").append(FILE_DELIMITER)
                 .append("Amount")

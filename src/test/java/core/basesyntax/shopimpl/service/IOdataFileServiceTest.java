@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.Test;
 
 public class IOdataFileServiceTest {
+    private static final IOdataFileService fileService = new IOdataFileService();
     private String filePathValid
             = "src/test/resources/TestValid.csv";
     private String filePathInvalid
