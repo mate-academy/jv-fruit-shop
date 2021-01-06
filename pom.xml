@@ -96,9 +96,8 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/Application/**</exclude>
+                        <exclude>**/Application*</exclude>
                         <exclude>**/model/**</exclude>
-                        <exclude>**/ShopItemServiceImpl/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
