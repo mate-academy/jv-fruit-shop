@@ -16,16 +16,13 @@ import org.junit.Test;
 public class FileParserTest {
     private static FileParser<TransactionDto> fileParser;
     private static FilesReader filesReader;
+    private static List<TransactionDto> expect;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         fileParser = new CsvParser();
         filesReader = new FilesReaderImpl();
-    }
-
-    @Test
-    public void parseData_Ok() {
-        List<TransactionDto> expect = new ArrayList<>();
+        expect = new ArrayList<>();
         expect.add(new TransactionDto(Operation.fromString("b"), new Fruit("banana"), 20));
         expect.add(new TransactionDto(Operation.fromString("b"), new Fruit("apple"), 100));
         expect.add(new TransactionDto(Operation.fromString("s"), new Fruit("banana"), 100));
@@ -34,6 +31,10 @@ public class FileParserTest {
         expect.add(new TransactionDto(Operation.fromString("p"), new Fruit("apple"), 20));
         expect.add(new TransactionDto(Operation.fromString("p"), new Fruit("banana"), 5));
         expect.add(new TransactionDto(Operation.fromString("s"), new Fruit("banana"), 50));
+    }
+
+    @Test
+    public void parseData_Ok() {
         List<String> list = filesReader.readData("src/main/resources/test-fruit.csv");
         assertEquals(expect, fileParser.parseData(list));
     }

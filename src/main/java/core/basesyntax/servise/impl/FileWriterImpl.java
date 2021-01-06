@@ -5,7 +5,6 @@ import core.basesyntax.servise.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,9 +18,9 @@ public class FileWriterImpl implements FileWriter {
         List<String> report = map.entrySet().stream()
                 .map(e -> e.getKey() + "," + e.getValue())
                 .collect(Collectors.toList());
+        report.add(0, HEADER);
         try {
-            Files.writeString(file, HEADER + System.lineSeparator());
-            Files.write(file, report, StandardOpenOption.APPEND);
+            Files.write(file, report);
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file", e);
         }

@@ -11,15 +11,12 @@ import org.junit.Test;
 
 public class FilesReaderTest {
     private static FilesReader reader;
+    private static List<String> expect;
 
     @BeforeClass
     public static void beforeClass() throws Exception {
         reader = new FilesReaderImpl();
-    }
-
-    @Test
-    public void readDataFromFile_Ok() {
-        List<String> expect = new ArrayList<>();
+        expect = new ArrayList<>();
         expect.add("b,banana,20");
         expect.add("b,apple,100");
         expect.add("s,banana,100");
@@ -28,6 +25,10 @@ public class FilesReaderTest {
         expect.add("p,apple,20");
         expect.add("p,banana,5");
         expect.add("s,banana,50");
+    }
+
+    @Test
+    public void readDataFromFile_Ok() {
         assertEquals(expect, reader.readData("src/main/resources/test-fruit.csv"));
     }
 
