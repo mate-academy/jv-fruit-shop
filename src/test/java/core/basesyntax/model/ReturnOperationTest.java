@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import core.basesyntax.db.Warehouse;
 import core.basesyntax.exception.InvalidOperationException;
 import core.basesyntax.model.entities.Fruit;
-import core.basesyntax.model.impl.BalanceOperation;
-import core.basesyntax.model.impl.ReturnOperation;
+import core.basesyntax.model.strategy.BalanceOperation;
+import core.basesyntax.model.strategy.ReturnOperation;
 import org.junit.After;
 import org.junit.Test;
 
@@ -18,9 +18,10 @@ public class ReturnOperationTest {
 
     @Test
     public void executeReturnOperationTest_ok() {
-        new BalanceOperation<>(Warehouse.getFruitStorage()).execute(TEST_PRODUCT, TEST_AMOUNT);
+        Warehouse.getFruitStorage().put(TEST_PRODUCT, TEST_AMOUNT);
         RETURN_OPERATION.execute(TEST_PRODUCT, TEST_AMOUNT);
         assertEquals(1, Warehouse.getFruitStorage().size());
+        assertEquals(Integer.valueOf(20), Warehouse.getFruitStorage().get(TEST_PRODUCT));
     }
 
     @Test(expected = InvalidOperationException.class)

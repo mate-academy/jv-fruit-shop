@@ -1,11 +1,9 @@
-package core.basesyntax.model;
+package core.basesyntax.model.strategy;
 
 import core.basesyntax.exception.InvalidOperationException;
+import core.basesyntax.model.Operation;
 import core.basesyntax.model.entities.Product;
-import core.basesyntax.model.impl.BalanceOperation;
-import core.basesyntax.model.impl.PurchaseOperation;
-import core.basesyntax.model.impl.ReturnOperation;
-import core.basesyntax.model.impl.SupplyOperation;
+
 import java.util.HashMap;
 import java.util.Map;
 

@@ -10,12 +10,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class CsvDataReader implements DataReader {
-    public boolean validateFileExtension(Path pathToFile) {
-        if (!pathToFile.toString().endsWith(".csv")) {
-            throw new InvalidFileExtensionException("This reader works with .csv files only");
-        }
-        return true;
-    }
 
     @Override
     public List<String[]> readData(Path pathToFile) {
@@ -28,5 +22,12 @@ public class CsvDataReader implements DataReader {
         } catch (IOException e) {
             throw new RuntimeException("Could not read from file", e);
         }
+    }
+
+    public boolean validateFileExtension(Path pathToFile) {
+        if (!pathToFile.toString().endsWith(".csv")) {
+            throw new InvalidFileExtensionException("This reader works with .csv files only");
+        }
+        return true;
     }
 }

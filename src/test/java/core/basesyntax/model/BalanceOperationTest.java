@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Warehouse;
 import core.basesyntax.model.entities.Fruit;
-import core.basesyntax.model.impl.BalanceOperation;
+import core.basesyntax.model.strategy.BalanceOperation;
 import org.junit.After;
 import org.junit.Test;
 

@@ -11,13 +11,6 @@ import java.util.List;
 public class CsvReportWriter implements ReportWriter {
     private static final String[] HEADER = new String[]{"fruit", "quantity"};
 
-    public boolean validateFileExtension(Path pathToFile) {
-        if (!pathToFile.toString().endsWith(".csv")) {
-            throw new InvalidFileExtensionException("This reader works with .csv files only");
-        }
-        return true;
-    }
-
     @Override
     public void writeReport(Path pathToFile, List<String[]> report) {
         validateFileExtension(pathToFile);
@@ -33,5 +26,12 @@ public class CsvReportWriter implements ReportWriter {
         } catch (IOException e) {
             throw new RuntimeException("Could not write to file", e);
         }
+    }
+
+    private boolean validateFileExtension(Path pathToFile) {
+        if (!pathToFile.toString().endsWith(".csv")) {
+            throw new InvalidFileExtensionException("This reader works with .csv files only");
+        }
+        return true;
     }
 }

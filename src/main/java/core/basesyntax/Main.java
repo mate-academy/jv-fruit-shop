@@ -1,7 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Warehouse;
-import core.basesyntax.model.OperationFactory;
+import core.basesyntax.model.strategy.OperationFactory;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.io.DataReader;
 import core.basesyntax.service.io.ReportWriter;

@@ -1,9 +1,9 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Warehouse;
-import core.basesyntax.model.AbstractOperation;
+import core.basesyntax.model.strategy.AbstractOperation;
 import core.basesyntax.model.Operation;
-import core.basesyntax.model.OperationFactory;
+import core.basesyntax.model.strategy.OperationFactory;
 import core.basesyntax.model.entities.Fruit;
 import java.util.ArrayList;
 import java.util.List;

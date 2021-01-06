@@ -1,7 +1,6 @@
-package core.basesyntax.model.impl;
+package core.basesyntax.model.strategy;
 
 import core.basesyntax.exception.InvalidOperationException;
-import core.basesyntax.model.AbstractOperation;
 import core.basesyntax.model.entities.Product;
 import java.util.Map;
 

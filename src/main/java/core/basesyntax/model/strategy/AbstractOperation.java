@@ -1,5 +1,6 @@
-package core.basesyntax.model;
+package core.basesyntax.model.strategy;
 
+import core.basesyntax.model.Executable;
 import core.basesyntax.model.entities.Product;
 import java.util.Map;
 

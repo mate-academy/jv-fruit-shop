@@ -3,10 +3,7 @@ package core.basesyntax.model;
 import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.model.entities.Product;
-import core.basesyntax.model.impl.BalanceOperation;
-import core.basesyntax.model.impl.PurchaseOperation;
-import core.basesyntax.model.impl.ReturnOperation;
-import core.basesyntax.model.impl.SupplyOperation;
+import core.basesyntax.model.strategy.*;
 import org.junit.Before;
 import org.junit.Test;
 
