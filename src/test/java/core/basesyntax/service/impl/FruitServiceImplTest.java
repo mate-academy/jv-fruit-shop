@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FruitServiceImplTest {
-    private Map<Operation, OperationStrategy> operationOperationStrategyMap = new HashMap<>();
+    private final Map<Operation, OperationStrategy> operationOperationStrategyMap = new HashMap<>();
 
     @Test
     public void correctFruitServiceImnl() {

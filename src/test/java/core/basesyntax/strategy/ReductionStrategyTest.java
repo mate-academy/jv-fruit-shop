@@ -9,8 +9,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReductionStrategyTest {
-    private OperationStrategy reductionStrategy = new ReductionStrategy();
-    private TransactionDto transactionDto = new TransactionDto();
+
+    private final OperationStrategy reductionStrategy = new ReductionStrategy();
+    private final TransactionDto transactionDto = new TransactionDto();
 
     @BeforeClass
     public static void beforeClass() throws Exception {

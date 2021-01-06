@@ -9,9 +9,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CsvParserImplTest {
-    private CsvParserImpl csvParser = new CsvParserImpl();
-    private List<String> strings = new ArrayList<>();
-    private Fruit apple = new Fruit();
+    private final CsvParserImpl csvParser = new CsvParserImpl();
+    private final List<String> strings = new ArrayList<>();
+    private final Fruit apple = new Fruit();
 
     @Test
     public void correctCsvParserImpl() {
