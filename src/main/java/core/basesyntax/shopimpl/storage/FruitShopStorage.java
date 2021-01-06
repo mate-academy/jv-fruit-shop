@@ -18,9 +18,7 @@ public class FruitShopStorage extends AbstractStorage<DataRecord, Fruit> {
     protected Map<Fruit, Integer> initStorage(ShopDao<DataRecord> shopDao) {
         Map<Fruit, Integer> storage = new HashMap<>();
         List<DataRecord> dataRecords = shopDao.getTransactionHistory();
-    
         new StorageService().apply(storage,dataRecords);
-        
         return storage;
     }
 }
