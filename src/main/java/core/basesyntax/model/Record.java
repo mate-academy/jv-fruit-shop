@@ -3,9 +3,9 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Record {
-    Operation operation;
-    Fruit fruit;
-    long amount;
+    private Operation operation;
+    private Fruit fruit;
+    private long amount;
 
     public Record(Operation operation, Fruit fruit, long amount) {
         this.operation = operation;
