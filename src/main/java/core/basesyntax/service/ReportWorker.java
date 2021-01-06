@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
 
 public class ReportWorker implements ReportCheck {
-
+    private final String topPattern = "fruit,quantity";
     @Override
     public void readFromReport(String report,
                                Map<Procedure, OperationStrategy> operationStrategyMap) {
@@ -30,7 +30,6 @@ public class ReportWorker implements ReportCheck {
 
     @Override
     public String writeToReport() {
-        String topPattern = "fruit,quantity";
         StringBuilder report = new StringBuilder();
         report.append(topPattern).append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> fruit
