@@ -12,7 +12,7 @@ public class CsvFileWriter implements FruitFileWriter {
     private static final String HEADER = "fruit,quantity";
 
     @Override
-    public void createReportFile(Map<Fruit, Integer> base, String filePath) {
+    public void writeToFile(Map<Fruit, Integer> base, String filePath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(HEADER + System.lineSeparator());
             for (Map.Entry<Fruit, Integer> entry : base.entrySet()) {

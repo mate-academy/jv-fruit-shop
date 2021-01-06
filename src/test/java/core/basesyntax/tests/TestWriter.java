@@ -12,7 +12,7 @@ import org.junit.Test;
 public class TestWriter {
     private static final Map<Fruit, Integer> data = new HashMap<>();
     private static final FruitFileWriter writer = new CsvFileWriter();
-    private static final String PATH_FILE = "src/main/resourcestests/fruitReport.CSV";
+    private static final String PATH_FILE = "src/main/resourcestests/fruitReport.csv";
 
     @Before
     public void putDataInData() {
@@ -31,6 +31,6 @@ public class TestWriter {
 
     @Test
     public void createReport() {
-        writer.createReportFile(data, PATH_FILE);
+        writer.writeToFile(data, PATH_FILE);
     }
 }

@@ -8,5 +8,5 @@ import java.util.Map;
 public interface FruitService {
     void applyOperation(List<TransactionDto> transaction);
 
-    Map<Fruit, Integer> getFruitReporter();
+    Map<Fruit, Integer> getFruitReport();
 }

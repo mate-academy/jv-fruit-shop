@@ -59,7 +59,7 @@ public class CsvFileReader implements FileReader {
 
     private Operation checkAndGetOperation(String operation) {
         for (Operation value : Operation.values()) {
-            if (Objects.equals(value.getOperation(), operation.toLowerCase().trim())) {
+            if (operation != null && operation.equalsIgnoreCase(operation)) {
                 return value;
             }
         }

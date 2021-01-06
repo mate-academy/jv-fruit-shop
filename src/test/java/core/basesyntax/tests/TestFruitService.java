@@ -43,7 +43,7 @@ public class TestFruitService {
         listTransaction.add(new TransactionDto(Operation.PURCHASE, banana, 13));
         fruitService.applyOperation(listTransaction);
         storage = Storage.getFruits();
-        Map<Fruit, Integer> expected = fruitService.getFruitReporter();
+        Map<Fruit, Integer> expected = fruitService.getFruitReport();
         assertEquals(storage.size(), expected.size(), "Size of must must be same");
         assertEquals(storage.keySet(), expected.keySet(), "Map keys must be equals");
         assertEquals(storage.entrySet(), expected.entrySet(), "Map must be equals");
@@ -59,7 +59,7 @@ public class TestFruitService {
         listTransaction.add(new TransactionDto(Operation.PURCHASE, banana, 13));
         fruitService.applyOperation(listTransaction);
         storage = Storage.getFruits();
-        Map<Fruit, Integer> expected = fruitService.getFruitReporter();
+        Map<Fruit, Integer> expected = fruitService.getFruitReport();
         assertEquals(storage.size(), expected.size(), "Size of must must be same");
         assertEquals(storage.keySet(), expected.keySet(), "Map keys must be equals");
         assertEquals(storage.entrySet(), expected.entrySet(), "Map must be equals");

@@ -16,11 +16,11 @@ import org.junit.Test;
 
 public class TestReader {
     private static final String FILE_PATH_ONE_LINE =
-            "src/main/resourcestests/fruitShopOneLine.CSV";
+            "src/main/resourcestests/fruitShopOneLine.csv";
     private static final String FILE_PATH_FOUR_LINES =
-            "src/main/resourcestests/fruitShopFourLines.CSV";
+            "src/main/resourcestests/fruitShopFourLines.csv";
     private static final String FILE_PATH_WITH_ERROR =
-            "src/main/resourcestests/fruitShopNotAllowedOperation.CSV";
+            "src/main/resourcestests/fruitShopNotAllowedOperation.csv";
     private static List<TransactionDto> data;
     private static final FileReader reader = new CsvFileReader();
 
@@ -63,8 +63,8 @@ public class TestReader {
         expected.add(new TransactionDto(Operation.PURCHASE, banana, 13));
         expected.add(new TransactionDto(Operation.RETURN, banana, 20));
         data = reader.readData(FILE_PATH_FOUR_LINES);
-        assertNotEquals(expected.size(), data.size(), "Size list must be equals");
-        assertNotEquals(expected, data, "List must be equals");
+        assertNotEquals(expected.size(), data.size(), "Size list must be not equal");
+        assertNotEquals(expected, data, "List must be not equal");
     }
 
     @Test(expected = RuntimeException.class)
