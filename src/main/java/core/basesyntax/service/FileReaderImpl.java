@@ -1,4 +1,4 @@
-package core.basesyntax.dataio;
+package core.basesyntax.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,14 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-    private final String path;
-
-    public FileReaderImpl(String path) {
-        this.path = path;
-    }
-
     @Override
-    public List<String> read() {
+    public List<String> read(String path) {
         List<String> data = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(path))) {
             bufferedReader.readLine();

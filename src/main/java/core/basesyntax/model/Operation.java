@@ -1,6 +1,4 @@
-package core.basesyntax.operation;
-
-import core.basesyntax.model.Fruit;
+package core.basesyntax.model;
 
 public interface Operation {
     void doOperation(Fruit fruit, int quantity);

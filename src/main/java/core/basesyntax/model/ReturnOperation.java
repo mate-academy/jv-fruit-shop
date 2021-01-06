@@ -1,10 +1,9 @@
-package core.basesyntax.operation;
+package core.basesyntax.model;
 
 import core.basesyntax.database.Storage;
-import core.basesyntax.model.Fruit;
 import java.util.Map;
 
-public class SupplyOperation implements Operation {
+public class ReturnOperation implements Operation {
     @Override
     public void doOperation(Fruit fruit, int quantity) {
         Map<Fruit, Integer> fruitsMap = Storage.getFruitsMap();

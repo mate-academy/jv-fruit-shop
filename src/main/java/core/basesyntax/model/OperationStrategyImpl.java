@@ -1,4 +1,4 @@
-package core.basesyntax.operation;
+package core.basesyntax.model;
 
 import java.util.Map;
 
