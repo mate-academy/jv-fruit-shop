@@ -2,6 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.service.impl.ReadFromFileImpl;
 import core.basesyntax.service.interfaces.ReadFromFile;
+
+import java.util.HashMap;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -13,6 +15,7 @@ public class MainTest {
 
     @BeforeClass
     public static void setUp() {
+        Storage.storage = new HashMap<>();
         fileReader = new ReadFromFileImpl();
     }
 
