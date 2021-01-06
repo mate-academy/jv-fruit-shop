@@ -5,11 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FruitFileWriter;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Parser;
-import core.basesyntax.service.impl.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileWriter;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserCsvFile;
@@ -58,8 +56,7 @@ public class TestWriter {
                 20, new Fruit("apple"), 100);
         writer.writeToFile(data, PATH_FILE);
         List<String> expected = List.of("fruit,quantity", "banana,20", "apple,100");
-        FileReader reader = new CsvFileReader();
-        List<String> dataFromFile = null;
+        List<String> dataFromFile;
         try {
             dataFromFile = Files.readAllLines(Path.of(PATH_FILE));
         } catch (IOException e) {
