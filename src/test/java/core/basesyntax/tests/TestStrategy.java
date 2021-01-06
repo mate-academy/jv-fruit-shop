@@ -48,8 +48,8 @@ public class TestStrategy {
 
     @Test
     public void checkPurchaseCorrect() {
-        Operation operation = Operation.PURCHASE;
-        Fruit fruit = new Fruit("banana");
+        operation = Operation.PURCHASE;
+        fruit = new Fruit("banana");
         transactionDto = new TransactionDto(operation, fruit, 20);
         purchaseStrategy.apply(transactionDto);
         assertEquals(Storage.getFruits().size(), 1, "Size must be 1");
@@ -58,8 +58,8 @@ public class TestStrategy {
 
     @Test
     public void checkReturnCorrect() {
-        Operation operation = Operation.RETURN;
-        Fruit fruit = new Fruit("banana");
+        operation = Operation.RETURN;
+        fruit = new Fruit("banana");
         transactionDto = new TransactionDto(operation, fruit, 20);
         returnStrategy.apply(transactionDto);
         assertEquals(Storage.getFruits().size(), 1, "Size must be 1");
@@ -68,8 +68,8 @@ public class TestStrategy {
 
     @Test
     public void checkSupplyCorrect() {
-        Operation operation = Operation.RETURN;
-        Fruit fruit = new Fruit("banana");
+        operation = Operation.RETURN;
+        fruit = new Fruit("banana");
         transactionDto = new TransactionDto(operation, fruit, 20);
         supplyStrategy.apply(transactionDto);
         assertEquals(Storage.getFruits().size(), 1, "Size must be 1");
@@ -78,17 +78,16 @@ public class TestStrategy {
 
     @Test(expected = RuntimeException.class)
     public void purchaseStrategyException() {
-        Operation operation = Operation.PURCHASE;
-        Fruit fruit = new Fruit("banana");
+        operation = Operation.PURCHASE;
+        fruit = new Fruit("banana");
         transactionDto = new TransactionDto(operation, fruit, 110);
         purchaseStrategy.apply(transactionDto);
-
     }
 
     @Test(expected = NoSuchElementException.class)
     public void purchaseStrategyExceptionNotHaveProduct() {
-        Operation operation = Operation.PURCHASE;
-        Fruit fruit = new Fruit("apple");
+        operation = Operation.PURCHASE;
+        fruit = new Fruit("apple");
         transactionDto = new TransactionDto(operation, fruit, 110);
         purchaseStrategy.apply(transactionDto);
     }

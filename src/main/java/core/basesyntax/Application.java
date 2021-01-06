@@ -5,14 +5,17 @@ import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FruitFileWriter;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.Parser;
 import core.basesyntax.service.impl.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileWriter;
 import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ParserCsvFile;
 import core.basesyntax.strategy.BalanceStrategy;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseStrategy;
 import core.basesyntax.strategy.ReturnStrategy;
 import core.basesyntax.strategy.SupplyStrategy;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +32,8 @@ public class Application {
         operationOperationStrategyMap.put(Operation.PURCHASE, new PurchaseStrategy());
 
         FileReader reader = new CsvFileReader();
-        List<TransactionDto> transactions = reader.readData(PATH_READ);
+        Parser parser = new ParserCsvFile();
+        List<TransactionDto> transactions = parser.parseCsvFile(reader.readData(PATH_READ));
         FruitService service = new FruitServiceImpl(operationOperationStrategyMap);
         service.applyOperation(transactions);
 
