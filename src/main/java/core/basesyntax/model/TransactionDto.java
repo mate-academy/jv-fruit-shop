@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class TransactionDto {
     private Operation operation;
-    private Fruits fruit;
+    private Fruit fruit;
     private Integer quantity;
 
     public Operation getOperation() {
@@ -15,11 +15,11 @@ public class TransactionDto {
         this.operation = operation;
     }
 
-    public Fruits getFruit() {
+    public Fruit getFruit() {
         return fruit;
     }
 
-    public void setFruit(Fruits fruit) {
+    public void setFruit(Fruit fruit) {
         this.fruit = fruit;
     }
 

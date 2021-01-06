@@ -2,20 +2,17 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-/**
- * Feel free to remove this class and create your own.
- */
-public class Fruits {
+public class Fruit {
     private String name;
 
-    public Fruits() {
+    public Fruit() {
     }
 
-    public Fruits(Fruits fruit) {
+    public Fruit(Fruit fruit) {
         this.name = fruit.name;
     }
 
-    public Fruits(String name) {
+    public Fruit(String name) {
         this.name = name;
     }
 
@@ -42,8 +39,8 @@ public class Fruits {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Fruits fruits = (Fruits) o;
-        return Objects.equals(name, fruits.name);
+        Fruit fruit = (Fruit) o;
+        return Objects.equals(name, fruit.name);
     }
 
     @Override

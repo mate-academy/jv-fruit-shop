@@ -24,11 +24,12 @@ public class Application {
         mapOperation.put(Operation.RETURN, new OperationAddition());
 
         FileReader csvFileReader = new
-                CsvFileReaderImpl("src/main/java/resources/testFile.csv");
+                CsvFileReaderImpl();
         FruitService fruitService = new FruitServiceImpl(mapOperation);
         FileWriter csvFileWriter = new CsvFileWriterImpl();
 
-        List<TransactionDto> transactionDtoList = csvFileReader.readFromFile();
+        List<TransactionDto> transactionDtoList = csvFileReader
+                .readFromFile("src/main/java/resources/testFile.csv");
         fruitService.applyOperations(transactionDtoList);
         Map<String, Long> fruitReport = fruitService.getReport();
         csvFileWriter.createReportFile(fruitReport, "src/main/java/resources/report-testFile.csv");

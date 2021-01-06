@@ -4,5 +4,5 @@ import core.basesyntax.model.TransactionDto;
 import java.util.List;
 
 public interface FileReader {
-    List<TransactionDto> readFromFile();
+    List<TransactionDto> readFromFile(String path);
 }

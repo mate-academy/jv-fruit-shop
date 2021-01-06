@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruits;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FruitService;
@@ -27,7 +27,7 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public Map<String, Long> getReport() {
         Map<String, Long> map = new HashMap<>();
-        for (Fruits fruit : Storage.fruits) {
+        for (Fruit fruit : Storage.fruits) {
             if (map.containsKey(fruit.getName())) {
                 map.put(fruit.getName(), map.get(fruit.getName()) + 1);
             } else {

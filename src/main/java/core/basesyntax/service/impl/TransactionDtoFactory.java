@@ -1,40 +1,36 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruits;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionDtoFactory {
-    public static final String BUY_SIGNATURE = "b";
-    public static final String SUPPLY_SIGNATURE = "s";
-    public static final String PURCHASE_SIGNATURE = "p";
-    public static final String RETURN_SIGNATURE = "r";
-    public static final String SEPARATOR = ",";
+    private static final List<String> signatures = new ArrayList<>();
+    private static final String SEPARATOR = ",";
+    private static final String BUY_SIGNATURE = "b";
+    private static final String SUPPLY_SIGNATURE = "s";
+    private static final String PURCHASE_SIGNATURE = "p";
+    private static final String RETURN_SIGNATURE = "r";
 
     public static TransactionDto build(String line) {
+        signatures.add(BUY_SIGNATURE);
+        signatures.add(SUPPLY_SIGNATURE);
+        signatures.add(PURCHASE_SIGNATURE);
+        signatures.add(RETURN_SIGNATURE);
         String[] array = line.split(SEPARATOR);
-        if (array[0].equals(BUY_SIGNATURE)
+        if (signatures.contains(array[0])
                 && Integer.parseInt(array[2]) < 0) {
-            throw new RuntimeException("Balance can't be lower than 0");
-        }
-        if (array[0].equals(SUPPLY_SIGNATURE)
-                && Integer.parseInt(array[2]) < 0) {
-            throw new RuntimeException("Supply can't be lower than 0");
-        }
-        if (array[0].equals(PURCHASE_SIGNATURE)
-                && Integer.parseInt(array[2]) < 0) {
-            throw new RuntimeException("Purchase should be positive, without '-'");
-        }
-        if (array[0].equals(RETURN_SIGNATURE)
-                && Integer.parseInt(array[2]) < 0) {
-            throw new RuntimeException("Return can't be lower than 0");
+            throw new RuntimeException("This type of operation cannot "
+                    + "be used with the negative values.");
         }
         if (array.length != 3) {
             throw new RuntimeException("Incorrect format");
         }
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setOperation(Operation.fromString(array[0]));
-        transactionDto.setFruit(new Fruits(array[1]));
+        transactionDto.setFruit(new Fruit(array[1]));
         transactionDto.setQuantity(Integer.parseInt(array[2]));
         return transactionDto;
     }

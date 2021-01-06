@@ -2,7 +2,7 @@ package core.basesyntax.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.model.Fruits;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FileReader;
@@ -36,11 +36,11 @@ public class CsvFileReaderImplTest {
     public static void beforeClass() {
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setOperation(Operation.fromString("b"));
-        transactionDto.setFruit(new Fruits("banana"));
+        transactionDto.setFruit(new Fruit("banana"));
         transactionDto.setQuantity(20);
         TransactionDto transactionDto2 = new TransactionDto();
         transactionDto2.setOperation(Operation.fromString("b"));
-        transactionDto2.setFruit(new Fruits("apple"));
+        transactionDto2.setFruit(new Fruit("apple"));
         transactionDto2.setQuantity(100);
         successTestList.add(transactionDto);
         successTestList.add(transactionDto2);
@@ -69,21 +69,21 @@ public class CsvFileReaderImplTest {
 
     @Test
     public void testReaderForCorrectFile() {
-        FileReader testReader = new CsvFileReaderImpl(CORRECT_FILE);
-        List<TransactionDto> testTransactions = testReader.readFromFile();
+        FileReader testReader = new CsvFileReaderImpl();
+        List<TransactionDto> testTransactions = testReader.readFromFile(CORRECT_FILE);
         assertEquals(testTransactions, successTestList);
     }
 
     @Test(expected = RuntimeException.class)
     public void testReaderForNegativeNumber() {
-        FileReader testReader = new CsvFileReaderImpl(INCORRECT_FILE_NEGATIVE_NUMBER);
-        testReader.readFromFile();
+        FileReader testReader = new CsvFileReaderImpl();
+        testReader.readFromFile(INCORRECT_FILE_NEGATIVE_NUMBER);
     }
 
     @Test(expected = RuntimeException.class)
     public void testReaderForWrongLength() {
-        FileReader testReader = new CsvFileReaderImpl(INCORRECT_FILE_WRONG_LENGTH);
-        testReader.readFromFile();
+        FileReader testReader = new CsvFileReaderImpl();
+        testReader.readFromFile(INCORRECT_FILE_WRONG_LENGTH);
     }
 
     @AfterClass
