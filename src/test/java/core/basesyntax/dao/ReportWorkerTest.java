@@ -14,26 +14,29 @@ import core.basesyntax.strategy.Supply;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReportWorkerTest {
-    Map<Procedure, OperationStrategy> operationStrategyMap = new HashMap<>();
-    WarehouseImpl warehouseTest = new WarehouseImpl();
-    InputOutputReport inputOutputReport = new InputOutputReport();
+    private static Map<Procedure, OperationStrategy> operationStrategyMap;
+    private static WarehouseImpl warehouseTest;
+    private static InputOutputReport inputOutputReport;
+
+    @BeforeClass
+    public static void setup() {
+        inputOutputReport = new InputOutputReport();
+        warehouseTest = new WarehouseImpl();
+        operationStrategyMap = new HashMap<>();
+        operationStrategyMap.put(Procedure.Balance, new Balance());
+        operationStrategyMap.put(Procedure.Purchase, new Purchase());
+        operationStrategyMap.put(Procedure.Return, new Return());
+        operationStrategyMap.put(Procedure.Supply, new Supply());
+    }
 
     @After
     public void storeClear() {
         Warehouse warehouse = new WarehouseImpl();
         warehouse.getListItems().clear();
-    }
-
-    @Before
-    public void putMap() {
-        operationStrategyMap.put(Procedure.Balance, new Balance());
-        operationStrategyMap.put(Procedure.Purchase, new Purchase());
-        operationStrategyMap.put(Procedure.Return, new Return());
-        operationStrategyMap.put(Procedure.Supply, new Supply());
     }
 
     @Test
