@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Aplication {
+public class Application {
     public static void main(String[] args) {
         final String textFile = "src\\main\\resource\\text.csv";
         final String destinationFile = "src\\main\\resource\\destination.csv";
