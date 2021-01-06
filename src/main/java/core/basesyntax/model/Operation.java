@@ -15,4 +15,13 @@ public enum Operation {
     public String getOperation() {
         return operation;
     }
+
+    public static Operation fromString(String input) {
+        for (Operation constant : Operation.values()) {
+            if (constant.operation.equals(input)) {
+                return constant;
+            }
+        }
+        throw new IllegalArgumentException("No such constant with " + input + " marker!");
+    }
 }

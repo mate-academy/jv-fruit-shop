@@ -37,12 +37,10 @@ public class StrategyTest {
         assertNotNull(Storage.storage);
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void balanceStrategyCheck_NotOK() {
         dto = new TransactionDto(Operation.BALANCE, BANANA, -20);
         new BalanceStrategy().apply(dto);
-        assertNotNull(Storage.storage);
-        assertEquals(Integer.valueOf(0), Storage.storage.get(BANANA));
     }
 
     @Test

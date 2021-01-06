@@ -12,8 +12,7 @@ public class BalanceStrategy implements OperationStrategy {
 
     private int operationValidation(TransactionDto transactionDto) {
         if (transactionDto.getQuantity() < 0) {
-            System.out.println("We can't have negative amount. Setting to 0.");
-            return 0;
+            throw new RuntimeException("Impossible! Negative balance!");
         }
         return transactionDto.getQuantity();
     }

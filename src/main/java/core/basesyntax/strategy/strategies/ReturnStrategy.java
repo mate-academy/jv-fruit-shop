@@ -7,15 +7,16 @@ import core.basesyntax.strategy.OperationStrategy;
 public class ReturnStrategy implements OperationStrategy {
     @Override
     public void apply(TransactionDto transactionDto) {
+        returnValidation(transactionDto);
+
         Integer newQuantity = Storage.storage.get(transactionDto.getFruit())
-                + operationValidation(transactionDto);
+                + transactionDto.getQuantity();
         Storage.storage.replace(transactionDto.getFruit(), newQuantity);
     }
 
-    private int operationValidation(TransactionDto transactionDto) {
+    private void returnValidation(TransactionDto transactionDto) {
         if (transactionDto.getQuantity() < 0) {
             throw new RuntimeException("People cannot return negative amount!");
         }
-        return transactionDto.getQuantity();
     }
 }

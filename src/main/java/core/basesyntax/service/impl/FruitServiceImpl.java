@@ -15,36 +15,16 @@ public class FruitServiceImpl implements FruitService {
     private static final String[] HEADER = {"type", "fruit", "quantity"};
 
     @Override
-    public void callItADay(List<String[]> incomeAlgorithm) {
+    public void processActivities(List<String[]> incomeAlgorithm) {
         for (String[] algorithm : incomeAlgorithm) {
             if (Arrays.equals(algorithm, HEADER)) {
                 continue;
             }
-            Operation operation = getOperation(algorithm[OPERATION_INDEX]);
+            Operation operation = Operation.fromString(algorithm[OPERATION_INDEX]);
             Fruit fruit = new Fruit(algorithm[FRUIT_INDEX]);
             Integer quantity = Integer.parseInt(algorithm[QUANTITY_INDEX]);
             TransactionDto dto = new TransactionDto(operation, fruit, quantity);
             OperationStrategy.chooseTheStrategy(dto);
-        }
-    }
-
-    private Operation getOperation(String operation) {
-        switch (operation) {
-            case "b": {
-                return Operation.BALANCE;
-            }
-            case "s": {
-                return Operation.SUPPLY;
-            }
-            case "p": {
-                return Operation.PURCHASE;
-            }
-            case "r": {
-                return Operation.RETURN;
-            }
-            default: {
-                throw new RuntimeException("Invalid data! Operation was " + operation);
-            }
         }
     }
 }
