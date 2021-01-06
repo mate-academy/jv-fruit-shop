@@ -9,14 +9,13 @@ import core.basesyntax.fruitoperation.OperationSupply;
 import core.basesyntax.fruitoperation.Operations;
 import core.basesyntax.fruitoperation.strategy.OperationStrategy;
 import core.basesyntax.fruitoperation.strategy.OperationStrategyImpl;
-import core.basesyntax.service.file.DataReader;
-import core.basesyntax.service.file.DataValidator;
-import core.basesyntax.service.file.impl.DataValidatorImpl;
-import core.basesyntax.service.file.impl.FileReader;
+import core.basesyntax.model.Fruit;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -24,13 +23,9 @@ import org.junit.Test;
 
 public class FruitServiceImplTest {
     private static FruitService fruitService;
-    private static DataValidator validator;
-    private static DataReader reader;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
-        validator = new DataValidatorImpl();
-        reader = new FileReader(validator);
+    public static void beforeClass() {
         Map<Operations, Operation> operationMap = new HashMap<>();
         operationMap.put(Operations.B, new OperationBalance());
         operationMap.put(Operations.P, new OperationPurchase());
@@ -47,7 +42,8 @@ public class FruitServiceImplTest {
 
     @Test
     public void test1ReportFormatting_Ok() {
-        fruitService.saveToStorage(reader.readData("src/test/resources/test1_correct.csv"));
+        Storage.getFruits().put(new Fruit("apple"), 90);
+        Storage.getFruits().put(new Fruit("banana"), 152);
         List<String> actual = fruitService.getFromStorage();
         List<String> expected = List.of("fruit,quantity",System.lineSeparator() + "apple,90",
                 System.lineSeparator() + "banana,152");
@@ -56,10 +52,22 @@ public class FruitServiceImplTest {
 
     @Test
     public void test2ReportFormatting_Ok() {
-        fruitService.saveToStorage(reader.readData("src/test/resources/test2_correct.csv"));
-        List<String> actual = fruitService.getFromStorage();
-        List<String> expected = List.of("fruit,quantity",System.lineSeparator() + "apple,90",
-                System.lineSeparator() + "banana,152");
+        List<String> input = new ArrayList<>();
+        input.add("operation,fruit,amount");
+        input.add("b,banana,20");
+        input.add("b,apple,100");
+        input.add("s,banana,100");
+        input.add("p,banana,13");
+        input.add("r,apple,10");
+        input.add("p,apple,20");
+        input.add("p,banana,5");
+        input.add("s,banana,50");
+        fruitService.saveToStorage(input);
+        List<String> actual = Storage.getFruits().entrySet()
+                .stream()
+                .map(e -> e.getKey().getName() + "," + e.getValue())
+                .collect(Collectors.toList());
+        List<String> expected = List.of("apple,90", "banana,152");
         Assert.assertEquals(expected, actual);
     }
 }

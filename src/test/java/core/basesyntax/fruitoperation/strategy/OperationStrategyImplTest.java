@@ -21,7 +21,7 @@ public class OperationStrategyImplTest {
     private static Fruit apple;
 
     @BeforeClass
-    public static void beforeClass() throws Exception {
+    public static void beforeClass() {
         apple = new Fruit("apple");
         Map<Operations, Operation> operationMap = new HashMap<>();
         operationMap.put(Operations.B, new OperationBalance());
@@ -32,7 +32,7 @@ public class OperationStrategyImplTest {
     }
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Storage.setFruits(new TreeMap<>());
     }
 

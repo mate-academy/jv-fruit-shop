@@ -22,8 +22,8 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void saveToStorage(List<String> rows) {
-        for (String row: rows) {
-            String[] data = row.split(SPLITTER);
+        for (int i = 1; i < rows.size(); i++) {
+            String[] data = rows.get(i).split(SPLITTER);
             operationStrategy.get(Operations.valueOf(data[OPERATION].toUpperCase()))
                     .doOperation(new Fruit(data[FRUIT]), Integer.parseInt(data[AMOUNT]));
         }
@@ -31,7 +31,6 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public List<String> getFromStorage() {
-
         List<String> list = new ArrayList<>();
         list.add(HEAD_OF_REPORT);
         for (Map.Entry<Fruit, Integer> entry: Storage.getFruits().entrySet()) {
