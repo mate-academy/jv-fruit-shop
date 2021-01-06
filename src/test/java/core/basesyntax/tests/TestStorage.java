@@ -1,7 +1,6 @@
 package core.basesyntax.tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
@@ -39,17 +38,5 @@ public class TestStorage {
         assertEquals(data.keySet(), storage.keySet(), "Key's not equal");
         assertEquals(data.entrySet(), storage.entrySet(),
                 "Key or value not equals");
-
-    }
-
-    @Test
-    public void checkTwoMapNotEquals() {
-        data.put(new Fruit("lime"), 75);
-        assertNotEquals(data.size(), storage.size(),
-                "Maps size must but not equals");
-        assertNotEquals(data.keySet(), storage.keySet(),
-                "Key's must be not equals");
-        assertNotEquals(data.entrySet(), storage.entrySet(),
-                "Key or value must be not equals");
     }
 }
