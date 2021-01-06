@@ -12,6 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class StoreServiceImpl<T extends Fruit> implements StoreService<T> {
+    private static final String COMA = ",";
+    private static final int FIRST_POSITION = 0;
+    private static final int SECOND_POSITION = 1;
+    private static final int THIRD_POSITION = 2;
     private FruitDao fruitDao;
     private OperationStrategy operationStrategy;
     private List<String> operations;
@@ -36,9 +40,9 @@ public class StoreServiceImpl<T extends Fruit> implements StoreService<T> {
         String operation;
         for (int i = 0; i < data.size(); i++) {
             Fruit fruit = new Fruit();
-            operation = data.get(i).split(",")[0];
-            fruit.setName(data.get(i).split(",")[1]);
-            value = Integer.parseInt(data.get(i).split(",")[2]);
+            operation = data.get(i).split(COMA)[FIRST_POSITION];
+            fruit.setName(data.get(i).split(COMA)[SECOND_POSITION]);
+            value = Integer.parseInt(data.get(i).split(COMA)[THIRD_POSITION]);
             OperationValidator operationValidator = new OperationValidatorImpl();
             operationValidator.validationCheck(operations, operation);
             if (!fruits.contains(fruit)) {
