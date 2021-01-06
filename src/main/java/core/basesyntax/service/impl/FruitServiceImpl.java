@@ -6,7 +6,7 @@ import core.basesyntax.service.FruitService;
 
 public class FruitServiceImpl implements FruitService {
     @Override
-    public void addFruit(Storage storage, Fruit fruit, int amount) {
-        storage.getStorage().put(fruit, amount);
+    public void addFruit(Fruit fruit, int amount) {
+        Storage.getStorage().put(fruit, amount);
     }
 }

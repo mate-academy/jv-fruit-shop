@@ -9,11 +9,13 @@ public class PurchaseHandler implements OperationHandler {
     ValidateOperationImpl validation = new ValidateOperationImpl();
 
     @Override
-    public void apply(Storage storage, Fruit fruit, int amount) {
-        validation.validate(storage, fruit, amount);
-        if (amount > storage.getStorage().get(fruit)) {
+    public void apply(Fruit fruit, int amount) {
+        validation.validate(fruit, amount);
+        if (!Storage.getStorage().containsKey(fruit)) {
+            throw new RuntimeException("We haven`t this fruit at storage");
+        } else if (amount > Storage.getStorage().get(fruit)) {
             throw new OperationException("We can't sell more than we have");
         }
-        storage.getStorage().put(fruit, storage.getStorage().get(fruit) - amount);
+        Storage.getStorage().put(fruit, Storage.getStorage().get(fruit) - amount);
     }
 }

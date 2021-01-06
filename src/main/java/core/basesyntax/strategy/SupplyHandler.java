@@ -8,8 +8,8 @@ public class SupplyHandler implements OperationHandler {
     ValidateOperationImpl validation = new ValidateOperationImpl();
 
     @Override
-    public void apply(Storage storage, Fruit fruit, int amount) {
-        validation.validate(storage, fruit, amount);
-        storage.getStorage().put(fruit, storage.getStorage().get(fruit) + amount);
+    public void apply(Fruit fruit, int amount) {
+        validation.validate(fruit, amount);
+        Storage.getStorage().put(fruit, Storage.getStorage().get(fruit) + amount);
     }
 }

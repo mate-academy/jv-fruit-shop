@@ -1,8 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Operations;
-import core.basesyntax.service.impl.ReadFromCsvFileImpl;
-import core.basesyntax.service.impl.ReportCreatorImpl;
+import core.basesyntax.service.impl.FruitStorageServiceImpl;
 import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -17,7 +16,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ReportTests extends TestCase {
-    private static ReportCreatorImpl reportCreator;
+    private static FruitStorageServiceImpl reportCreator;
 
     @Override
     public void setUp() throws Exception {
@@ -27,14 +26,14 @@ public class ReportTests extends TestCase {
         operationMap.put(Operations.R, new ReturnHandler());
         operationMap.put(Operations.S, new SupplyHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
-        reportCreator = new ReportCreatorImpl(operationStrategy);
+        reportCreator = new FruitStorageServiceImpl(operationStrategy);
         super.setUp();
     }
 
     @Test
     public void test1Report_Ok() {
-        String actual = reportCreator.createReport(
-                new ReadFromCsvFileImpl("src/test/resources/test1_correct.csv"));
+        reportCreator.saveFruitToStorage("src/test/resources/test1_correct.csv");
+        String actual = reportCreator.createReport();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator() + "apple,90";
         assertEquals(expected, actual);
@@ -42,8 +41,8 @@ public class ReportTests extends TestCase {
 
     @Test
     public void test2Report_Ok() {
-        String actual = reportCreator.createReport(
-                new ReadFromCsvFileImpl("src/test/resources/test2_correct.csv"));
+        reportCreator.saveFruitToStorage("src/test/resources/test2_correct.csv");
+        String actual = reportCreator.createReport();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "banana,152" + System.lineSeparator() + "apple,90";
         assertEquals(expected, actual);
@@ -52,8 +51,7 @@ public class ReportTests extends TestCase {
     @Test
     public void test3Report_notOk() {
         try {
-            reportCreator.createReport(
-                    new ReadFromCsvFileImpl("src/test/resources/test3_incorrect.csv"));
+            reportCreator.saveFruitToStorage("src/test/resources/test3_incorrect.csv");
         } catch (RuntimeException e) {
             Assert.assertEquals(e.getMessage(), "File was not found");
         }

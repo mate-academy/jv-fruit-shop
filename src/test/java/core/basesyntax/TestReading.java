@@ -2,9 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.model.Operations;
 import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.impl.ReadFromCsvFileImpl;
-import core.basesyntax.service.impl.WriteToCsvFileImpl;
 import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -21,7 +19,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class WorkWithFileTests {
+public class TestReading {
+    FileReader reader = new ReadFromCsvFileImpl();
 
     @Before
     public void setUp() throws Exception {
@@ -35,22 +34,16 @@ public class WorkWithFileTests {
 
     @Test
     public void testReading_Ok() {
-        FileReader reader = new ReadFromCsvFileImpl("src/test/resources/test1_correct.csv");
-        List<String> actual = reader.read();
+        List<String> actual = reader.read("src/test/resources/test1_correct.csv");
         Assert.assertEquals(Arrays.asList("b,banana,20", "b,apple,100", "s,banana,100",
                 "p,banana,13", "r,apple,10", "p,apple,20", "p,banana,5", "s,banana,50"), actual);
     }
 
     @Test
     public void testReadingEmptyFile_Ok() {
-        FileReader reader = new ReadFromCsvFileImpl("src/test/resources/test_emptyFile.csv");
-        List<String> actual = reader.read();
+
+        List<String> actual = reader.read("src/test/resources/test_emptyFile.csv");
         Assert.assertEquals(Collections.EMPTY_LIST, actual);
     }
 
-    @Test
-    public void testWritingToFile_Ok() {
-        FileWriter writer = new WriteToCsvFileImpl();
-        writer.writeToFile("Expected report", "ExpectedReport");
-    }
 }

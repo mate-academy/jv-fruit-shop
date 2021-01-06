@@ -7,14 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFromCsvFileImpl implements FileReader {
-    private final String path;
-
-    public ReadFromCsvFileImpl(String path) {
-        this.path = path;
-    }
 
     @Override
-    public List<String> read() {
+    public List<String> read(String path) {
         List<String> list = new ArrayList<>();
         String line;
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(path))) {
