@@ -24,7 +24,7 @@ public class CsvDataReader implements DataReader {
         }
     }
 
-    public boolean validateFileExtension(Path pathToFile) {
+    private boolean validateFileExtension(Path pathToFile) {
         if (!pathToFile.toString().endsWith(".csv")) {
             throw new InvalidFileExtensionException("This reader works with .csv files only");
         }
