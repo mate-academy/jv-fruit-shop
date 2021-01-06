@@ -14,10 +14,8 @@ public class CsvFileReader implements FileReader {
         List<String> list = new ArrayList<>();
         try (BufferedReader bufferedReader =
                      new BufferedReader(Files.newBufferedReader(Path.of(path)))) {
+            bufferedReader.readLine();
             String line = bufferedReader.readLine();
-            if (line.contains("quantity")) {
-                line = bufferedReader.readLine();
-            }
             while (line != null) {
                 list.add(line);
                 line = bufferedReader.readLine();

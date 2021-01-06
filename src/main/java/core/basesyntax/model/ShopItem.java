@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class ShopItem {
-    private final String name;
+    private String name;
 
     public ShopItem(String name) {
         this.name = name;
@@ -28,5 +28,10 @@ public class ShopItem {
     @Override
     public int hashCode() {
         return Objects.hash(name);
+    }
+
+    public ShopItem setName(String name) {
+        this.name = name;
+        return this;
     }
 }

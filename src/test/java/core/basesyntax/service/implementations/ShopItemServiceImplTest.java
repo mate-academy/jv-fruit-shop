@@ -2,6 +2,7 @@ package core.basesyntax.service.implementations;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.ShopItem;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,6 +22,11 @@ public class ShopItemServiceImplTest {
         shopService = new ShopItemServiceImpl(null);
     }
 
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
+    }
+
     @Test
     public void testReport_Correct() {
         Storage.storage.put(banana, 20);
@@ -31,7 +37,6 @@ public class ShopItemServiceImplTest {
 
     @Test
     public void emptyReport_Correct() {
-        Storage.storage.clear();
         Assert.assertEquals("fruit,quantity", shopService.getStringReport());
     }
 }

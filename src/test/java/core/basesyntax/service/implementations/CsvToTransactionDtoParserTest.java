@@ -7,17 +7,17 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CsvToStringArrayParserTest {
+public class CsvToTransactionDtoParserTest {
     public static final List<String> CORRECT_LIST = List.of("b,engine,65536");
     public static final List<String> INVALID_OPERATION_LIST = List.of("z,engine,65536");
     public static final List<String> INVALID_NEGATIVE_VALUE_LIST = List.of("b,engine,-65536");
     public static final List<String> INVALID_EMPTY_ITEM_LIST = List.of("b,,65536");
 
-    public static CsvToStringArrayParser parser;
+    public static CsvToTransactionDtoParser parser;
 
     @BeforeClass
     public static void initialize() {
-        parser = new CsvToStringArrayParser();
+        parser = new CsvToTransactionDtoParser();
     }
 
     @Test

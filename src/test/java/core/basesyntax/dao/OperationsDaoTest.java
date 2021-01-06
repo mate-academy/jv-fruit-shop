@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.ShopItem;
+import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -11,11 +12,16 @@ public class OperationsDaoTest {
     public static final ShopItem BANANA = new ShopItem("banana");
     public static final ShopItem APPLE = new ShopItem("apple");
     public static final ShopItem PINEAPPLE = new ShopItem("pineapple");
-    static OperationsDao dao;
+    public static OperationsDao dao;
 
     @BeforeClass
     public static void beforeAll() {
         dao = new OperationsDao();
+    }
+
+    @After
+    public void tearDown() {
+        Storage.storage.clear();
     }
 
     @Test
@@ -42,6 +48,12 @@ public class OperationsDaoTest {
         Storage.storage.put(BANANA, 0);
         dao.subtractFromStorage(PINEAPPLE, 1337);
         dao.subtractFromStorage(BANANA, 0);
+        Integer expectedPineapple = 0;
+        Integer actualPineapple = Storage.storage.get(PINEAPPLE);
+        Integer expectedBanana = 0;
+        Integer actualBanana = Storage.storage.get(BANANA);
+        assertEquals(expectedBanana, actualBanana);
+        assertEquals(expectedPineapple, actualPineapple);
     }
 
     @Test(expected = RuntimeException.class)
