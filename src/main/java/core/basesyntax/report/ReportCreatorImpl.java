@@ -7,6 +7,7 @@ import java.util.Map;
 public class ReportCreatorImpl implements ReportCreator {
     private static final String REPORT_HEADER = "fruit,quantity";
     private static final String SPLITTER = ",";
+
     @Override
     public String createReport() {
         StringBuilder report = new StringBuilder(REPORT_HEADER);

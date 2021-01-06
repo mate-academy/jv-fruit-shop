@@ -1,7 +1,6 @@
 package core.basesyntax.dataio;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.operation.Operation;
 import core.basesyntax.operation.OperationMap;
 import core.basesyntax.operation.OperationStrategy;
 import core.basesyntax.operation.OperationStrategyImpl;
@@ -15,7 +14,8 @@ public class CsvToStorage {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private final List<String> data;
-    private final OperationStrategy operationStrategy = new OperationStrategyImpl(new OperationMap().getOperationMap());
+    private final OperationStrategy operationStrategy =
+            new OperationStrategyImpl(new OperationMap().getOperationMap());
 
     public CsvToStorage(List<String> data) {
         this.data = data;
@@ -36,7 +36,7 @@ public class CsvToStorage {
 
     private Operations chek(String operation) {
         for (Operations current : Operations.values()) {
-            if (Objects.equals(current.getOperation(), operation.toLowerCase().trim())){
+            if (Objects.equals(current.getOperation(), operation.toLowerCase().trim())) {
                 return current;
             }
         }

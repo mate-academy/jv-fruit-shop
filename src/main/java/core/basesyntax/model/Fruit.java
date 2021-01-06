@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class Fruit implements Comparable<Fruit>{
+public class Fruit implements Comparable<Fruit> {
     private final String name;
 
     public Fruit(String name) {

@@ -13,6 +13,4 @@ public class OperationStrategyImpl implements OperationStrategy {
     public Operation get(Operations type) {
         return operationMap.get(type);
     }
-
-
 }

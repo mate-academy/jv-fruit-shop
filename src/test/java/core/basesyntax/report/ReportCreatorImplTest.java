@@ -7,12 +7,12 @@ import core.basesyntax.dataio.CsvToStorage;
 import core.basesyntax.dataio.FileReaderImpl;
 import core.basesyntax.dataio.FileWriter;
 import core.basesyntax.dataio.FileWriterImpl;
-import org.junit.Before;
-import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.TreeMap;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ReportCreatorImplTest {
     private static ReportCreator reportCreator = new ReportCreatorImpl();
@@ -74,5 +74,4 @@ public class ReportCreatorImplTest {
             assertEquals("Wrong operation k", e.getMessage());
         }
     }
-
 }

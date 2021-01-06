@@ -1,11 +1,11 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.model.Fruit;
 import java.util.HashMap;
 import java.util.Map;
 
 public class OperationMap {
     private final Map<Operations, Operation> operationMap;
+
     public OperationMap() {
         operationMap = new HashMap<>();
         operationMap.put(Operations.BALANCE, new BalanceOperation());
