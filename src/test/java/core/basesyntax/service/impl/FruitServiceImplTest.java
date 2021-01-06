@@ -30,9 +30,9 @@ public class FruitServiceImplTest {
         operationStrategyMap.put(Operation.RETURN, new AdditionStrategy());
         operationStrategyMap.put(Operation.PURCHASE, new ReductionStrategy());
         fruitService = new FruitServiceImpl(operationStrategyMap);
-        transactionDtoList.add(new TransactionDto(Operation.BALANCE,new Fruit("banana"),30));
-        transactionDtoList.add(new TransactionDto(Operation.SUPPLY,new Fruit("banana"),30));
-        transactionDtoList.add(new TransactionDto(Operation.RETURN,new Fruit("banana"),10));
+        transactionDtoList.add(new TransactionDto(Operation.BALANCE, new Fruit("banana"), 30));
+        transactionDtoList.add(new TransactionDto(Operation.SUPPLY, new Fruit("banana"), 30));
+        transactionDtoList.add(new TransactionDto(Operation.RETURN, new Fruit("banana"), 10));
         fruitService = new FruitServiceImpl(operationStrategyMap);
         Storage.fruits.removeAll(Storage.fruits);
     }
@@ -49,7 +49,7 @@ public class FruitServiceImplTest {
         Map<String, Long> expected = fruitService.getFruitReport();
         for (Map.Entry<String, Long> entry : expected.entrySet()) {
             assertEquals("banana", entry.getKey());
-            assertEquals(Long.valueOf(70),entry.getValue());
+            assertEquals(Long.valueOf(70), entry.getValue());
         }
     }
 }

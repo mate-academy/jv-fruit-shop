@@ -11,12 +11,13 @@ import java.util.stream.Collectors;
 
 public class CsvFileWriterImpl implements CsvFileWriter {
     private static final String HEADER = "fruit,quantity" + System.lineSeparator();
+    private static final String DATA_SPLITTER = ",";
 
     @Override
     public void reportFile(Map<String, Long> balance, String filePath) {
         Path file = Path.of(filePath);
         List<String> listBalance = balance.entrySet().stream()
-                .map(entry -> entry.getKey() + "," + entry.getValue())
+                .map(entry -> entry.getKey() + DATA_SPLITTER + entry.getValue())
                 .collect(Collectors.toList());
         try {
             Files.writeString(file, HEADER);

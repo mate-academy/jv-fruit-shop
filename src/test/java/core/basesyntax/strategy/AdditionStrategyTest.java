@@ -30,9 +30,9 @@ public class AdditionStrategyTest {
         operationStrategyMap.put(Operation.RETURN, new AdditionStrategy());
         operationStrategyMap.put(Operation.PURCHASE, new ReductionStrategy());
         fruitService = new FruitServiceImpl(operationStrategyMap);
-        transactionDtoList.add(new TransactionDto(Operation.BALANCE,new Fruit("banana"),40));
-        transactionDtoList.add(new TransactionDto(Operation.SUPPLY,new Fruit("banana"),40));
-        transactionDtoList.add(new TransactionDto(Operation.RETURN,new Fruit("banana"),60));
+        transactionDtoList.add(new TransactionDto(Operation.BALANCE, new Fruit("banana"), 40));
+        transactionDtoList.add(new TransactionDto(Operation.SUPPLY, new Fruit("banana"), 40));
+        transactionDtoList.add(new TransactionDto(Operation.RETURN, new Fruit("banana"), 60));
     }
 
     @Test
@@ -46,8 +46,8 @@ public class AdditionStrategyTest {
     @Test
     public void own_addition_Ok() {
         Storage.fruits.removeAll(Storage.fruits);
-        additionStrategy.apply(new TransactionDto(Operation.RETURN,new Fruit("banana"),20));
-        additionStrategy.apply(new TransactionDto(Operation.SUPPLY,new Fruit("banana"),20));
+        additionStrategy.apply(new TransactionDto(Operation.RETURN, new Fruit("banana"), 20));
+        additionStrategy.apply(new TransactionDto(Operation.SUPPLY, new Fruit("banana"), 20));
         Integer actual = Storage.fruits.size();
         assertEquals(Integer.valueOf(40), actual);
     }

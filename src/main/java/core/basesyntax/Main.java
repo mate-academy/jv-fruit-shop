@@ -19,6 +19,9 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class Main {
+    private static final String FILE_PATH_READER = "src/main/resources/test-fruit.txt";
+    private static final String FILE_PATH_REPORT = "src/main/resources/report-fruit.txt";
+
     public static void main(String[] args) {
         Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put(Operation.BALANCE, new AdditionStrategy());
@@ -30,9 +33,9 @@ public class Main {
         CsvFileWriter writer = new CsvFileWriterImpl();
         FruitService fruitService = new FruitServiceImpl(operationStrategyMap);
 
-        List<TransactionDto> transactionDtos = reader.readData("src/main/resources/test-fruit.txt");
+        List<TransactionDto> transactionDtos = reader.readData(FILE_PATH_READER);
         fruitService.applyOperationOnFruitDto(transactionDtos);
         Map<String, Long> fruitReport = fruitService.getFruitReport();
-        writer.reportFile(fruitReport,"src/main/resources/report-fruit.txt");
+        writer.reportFile(fruitReport,FILE_PATH_REPORT);
     }
 }
