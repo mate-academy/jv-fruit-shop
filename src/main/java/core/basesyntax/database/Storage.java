@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class Storage {
-    private static Map<Fruit, Integer> fruitData = new TreeMap<>();
+    private static Map<Fruit, Integer> fruitsMap = new TreeMap<>();
 
-    public static void setFruitData(Map<Fruit, Integer> fruitData) {
-        Storage.fruitData = fruitData;
+    public static Map<Fruit, Integer> getFruitsMap() {
+        return fruitsMap;
     }
 
-    public static Map<Fruit, Integer> getFruitData() {
-        return fruitData;
+    public static void setFruitsMap(Map<Fruit, Integer> fruitData) {
+        Storage.fruitsMap = fruitData;
     }
 }

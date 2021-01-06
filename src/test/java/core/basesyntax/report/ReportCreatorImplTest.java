@@ -2,51 +2,30 @@ package core.basesyntax.report;
 
 import static org.junit.Assert.assertEquals;
 
-import core.basesyntax.dao.classes.MyFileReaderImpl;
-import core.basesyntax.dao.classes.MyFileWriterImpl;
-import core.basesyntax.dao.interfaces.MyFileWriter;
 import core.basesyntax.database.Storage;
-import core.basesyntax.procedures.classes.BalanceProcedure;
-import core.basesyntax.procedures.classes.ProcedureStrategyImpl;
-import core.basesyntax.procedures.classes.Procedures;
-import core.basesyntax.procedures.classes.PurchaseProcedure;
-import core.basesyntax.procedures.classes.ReturnProcedure;
-import core.basesyntax.procedures.classes.SupplyProcedure;
-import core.basesyntax.procedures.interfaces.Procedure;
-import core.basesyntax.procedures.interfaces.ProcedureStrategy;
+import core.basesyntax.dataio.CsvToStorage;
+import core.basesyntax.dataio.FileReaderImpl;
+import core.basesyntax.dataio.FileWriter;
+import core.basesyntax.dataio.FileWriterImpl;
+import org.junit.Before;
+import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeMap;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 public class ReportCreatorImplTest {
-    private static ReportCreator reportCreator;
-
-    @BeforeClass
-    public static void beforeClass() {
-        Map<Procedures, Procedure> procedureMap = new HashMap<>();
-        procedureMap.put(Procedures.BALANCE, new BalanceProcedure());
-        procedureMap.put(Procedures.PURCHASE, new PurchaseProcedure());
-        procedureMap.put(Procedures.SUPPLY, new SupplyProcedure());
-        procedureMap.put(Procedures.RETURN, new ReturnProcedure());
-        ProcedureStrategy procedureStrategy = new ProcedureStrategyImpl(procedureMap);
-        reportCreator = new ReportCreatorImpl(procedureStrategy);
-    }
+    private static ReportCreator reportCreator = new ReportCreatorImpl();
 
     @Before
     public void setUp() {
-        Storage.setFruitData(new TreeMap<>());
+        Storage.setFruitsMap(new TreeMap<>());
     }
 
     @Test
     public void test1_ReportCreatorOk() {
-        String actual = reportCreator.createReport(
-                new MyFileReaderImpl("src/main/resources/test1.cvs"));
+        new CsvToStorage(new FileReaderImpl("src/main/resources/test1.cvs").read());
+        String actual = reportCreator.createReport();
         String expected = "fruit,quantity" + System.lineSeparator()
                 + "apple,20" + System.lineSeparator() + "banana,95";
         assertEquals(expected, actual);
@@ -54,9 +33,9 @@ public class ReportCreatorImplTest {
 
     @Test
     public void test2_ReportCreatorToFileOk() {
-        MyFileWriter myFileWriter = new MyFileWriterImpl();
-        myFileWriter.writeData(reportCreator.createReport(
-                new MyFileReaderImpl("src/main/resources/test2.csv")),
+        new CsvToStorage(new FileReaderImpl("src/main/resources/test2.csv").read());
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFile(reportCreator.createReport(),
                 "src/main/resources/test2_output.csv");
         String actual;
         try {
@@ -70,29 +49,30 @@ public class ReportCreatorImplTest {
     }
 
     @Test
-    public void test3_ReportCreator_emptyProcedures() {
+    public void test3_CsvToStorage_emptyProcedures() {
         try {
-            reportCreator.createReport(new MyFileReaderImpl("src/main/resources/test3.csv"));
+            new CsvToStorage(new FileReaderImpl("src/main/resources/test3.csv").read());
         } catch (RuntimeException e) {
-            assertEquals("Procedure '' not found", e.getMessage());
+            assertEquals("Wrong operation ", e.getMessage());
         }
     }
 
     @Test
-    public void test4_ReportCreator_notEnoughSupply() {
+    public void test4_CsvToStorage_notEnoughSupply() {
         try {
-            reportCreator.createReport(new MyFileReaderImpl("src/main/resources/test4.csv"));
+            new CsvToStorage(new FileReaderImpl("src/main/resources/test4.csv").read());
         } catch (RuntimeException e) {
-            assertEquals("There are not enough banana in the storage", e.getMessage());
+            assertEquals("Not enough bananas", e.getMessage());
         }
     }
 
     @Test
-    public void test5_ReportCreator_wrongProcedure() {
+    public void test5_CsvToStorage_wrongProcedure() {
         try {
-            reportCreator.createReport(new MyFileReaderImpl("src/main/resources/test5.csv"));
+            new CsvToStorage(new FileReaderImpl("src/main/resources/test5.csv").read());
         } catch (RuntimeException e) {
-            assertEquals("Procedure 'k' not found", e.getMessage());
+            assertEquals("Wrong operation k", e.getMessage());
         }
     }
+
 }
