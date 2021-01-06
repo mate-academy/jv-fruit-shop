@@ -7,12 +7,16 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
 import core.basesyntax.service.impl.CsvFileWriterImpl;
+
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 public class WriteToFileTest {
@@ -21,8 +25,8 @@ public class WriteToFileTest {
     private static final Fruit APPLE = new Fruit("apple");
     private static CsvFileWriter writer;
 
-    @BeforeClass
-    public static void beforeClass() {
+    @Before
+    public void before() {
         writer = new CsvFileWriterImpl();
         Storage.storage.put(BANANA, 50);
         Storage.storage.put(APPLE, 25);
@@ -35,13 +39,18 @@ public class WriteToFileTest {
     }
 
     @Test
-    public void actualDataInFile() {
+    public void actualDataInFile() throws IOException {
         writer.writeToFile(FILE_TO, Storage.storage);
         List<String> expected = new ArrayList<>();
         expected.add("fruit,quantity");
         expected.add("banana,50");
         expected.add("apple,25");
-        List<String> actualData = new CsvFileReaderImpl().readFromFile(FILE_TO);
+        List<String> actualData = Files.readAllLines(Path.of(FILE_TO));
         Assert.assertEquals(expected, actualData);
+    }
+
+    @After
+    public void afterClass() {
+        Storage.storage.clear();
     }
 }

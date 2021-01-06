@@ -10,7 +10,7 @@ public class CsvFileWriterImpl implements CsvFileWriter {
     @Override
     public void writeToFile(String filePathTo, Map<Fruit, Integer> fruits) {
         try (FileWriter writer = new FileWriter(filePathTo)) {
-            writer.write("fruit,quantity\n");
+            writer.write("fruit,quantity" + System.lineSeparator());
             for (Map.Entry<Fruit, Integer> entry: fruits.entrySet()) {
                 writer.append(entry.getKey().getName());
                 writer.append(",");

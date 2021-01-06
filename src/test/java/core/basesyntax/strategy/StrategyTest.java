@@ -11,36 +11,45 @@ import core.basesyntax.strategy.strategies.BalanceStrategy;
 import core.basesyntax.strategy.strategies.PurchaseStrategy;
 import core.basesyntax.strategy.strategies.ReturnStrategy;
 import core.basesyntax.strategy.strategies.SupplyStrategy;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class StrategyTest {
     private static final Fruit BANANA = new Fruit("banana");
     private static final Fruit APPLE = new Fruit("apple");
+    private static Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
     private TransactionDto dto;
 
-    @Test(expected = Test.None.class)
-    public void validData() {
-        dto = new TransactionDto(Operation.BALANCE, BANANA, 50);
-        OperationStrategy.chooseTheStrategy(dto);
+    @Before
+    public void beforeClass() {
+        operationStrategyMap.put(Operation.BALANCE, new BalanceStrategy());
+        operationStrategyMap.put(Operation.PURCHASE, new PurchaseStrategy());
+        operationStrategyMap.put(Operation.RETURN, new ReturnStrategy());
+        operationStrategyMap.put(Operation.SUPPLY, new SupplyStrategy());
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
+    public void validOperation() {
+        dto = new TransactionDto(Operation.BALANCE, BANANA, 50);
+        OperationStrategy actual = operationStrategyMap.get(dto.getOperation());
+        Assert.assertNotNull(actual);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void invalidOperation() {
         dto = new TransactionDto(Operation.valueOf("CATCH"), APPLE, 60);
-        OperationStrategy.chooseTheStrategy(dto);
     }
 
     @Test
     public void balanceStrategyCheck_OK() {
         dto = new TransactionDto(Operation.BALANCE, BANANA, 40);
         new BalanceStrategy().apply(dto);
-        assertNotNull(Storage.storage);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void balanceStrategyCheck_NotOK() {
-        dto = new TransactionDto(Operation.BALANCE, BANANA, -20);
-        new BalanceStrategy().apply(dto);
+        assertEquals(Integer.valueOf(40), Storage.storage.get(BANANA));
     }
 
     @Test
@@ -49,13 +58,6 @@ public class StrategyTest {
         dto = new TransactionDto(Operation.PURCHASE, APPLE, 20);
         new PurchaseStrategy().apply(dto);
         assertEquals(Integer.valueOf(30), Storage.storage.get(APPLE));
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void purchaseCheck_NegativeAmount() {
-        Storage.storage.put(APPLE, 40);
-        dto = new TransactionDto(Operation.PURCHASE, APPLE, -10);
-        new PurchaseStrategy().apply(dto);
     }
 
     @Test(expected = RuntimeException.class)
@@ -74,14 +76,6 @@ public class StrategyTest {
     }
 
     @Test
-    public void returnCheck_NegativeAmount() {
-        Storage.storage.put(BANANA, 10);
-        dto = new TransactionDto(Operation.RETURN, BANANA, 10);
-        new ReturnStrategy().apply(dto);
-        assertEquals(Integer.valueOf(20), Storage.storage.get(BANANA));
-    }
-
-    @Test
     public void supplyCheck_OK() {
         Storage.storage.put(APPLE, 20);
         dto = new TransactionDto(Operation.SUPPLY, APPLE, 20);
@@ -89,10 +83,8 @@ public class StrategyTest {
         assertEquals(Integer.valueOf(40), Storage.storage.get(APPLE));
     }
 
-    @Test(expected = RuntimeException.class)
-    public void supplyCheck_NegativeValue() {
-        Storage.storage.put(APPLE, 20);
-        dto = new TransactionDto(Operation.SUPPLY, APPLE, -15);
-        new SupplyStrategy().apply(dto);
+    @After
+    public void afterClass() {
+        Storage.storage.clear();
     }
 }
