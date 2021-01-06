@@ -10,17 +10,17 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        String fileName = "database.csv";
-
+        String fromFileName = "database.csv";
+        String toFileName = "Report";
         FruitService fruitService = new FruitServiceImpl();
         ReadInformationFromFile readInformationFromFile = new ReadInformationFromFileImpl();
 
-        List<String> allLinesFromFile = readInformationFromFile.getAllLines(fileName);
+        List<String> allLinesFromFile = readInformationFromFile.getAllLines(fromFileName);
         fruitService.addNewFruit(allLinesFromFile);
 
         Report report = new ReportImpl();
-        String s = report.writeReport(allLinesFromFile);
-        report.writeReportToFile(s, "Report");
-        System.out.println(allLinesFromFile);
+        report.createReport(allLinesFromFile);
+        String reportString = report.writeReport(allLinesFromFile);
+        report.writeReportToFile(reportString, toFileName);
     }
 }

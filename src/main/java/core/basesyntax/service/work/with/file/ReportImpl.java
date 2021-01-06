@@ -24,8 +24,7 @@ public class ReportImpl implements Report {
     private static final String HEADER = "fruit,quantity";
 
     @Override
-    public String writeReport(List<String> list) {
-        createReport(list);
+    public String writeReport(List<String> informationFromFile) {
         FruitDao fruitDao = new FruitDaoImpl();
         StringBuilder report = new StringBuilder();
         report.append(HEADER).append(System.lineSeparator());

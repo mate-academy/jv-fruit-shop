@@ -7,12 +7,12 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ReadInformationFromFileImpl implements ReadInformationFromFile {
-    public List<String> getAllLines(String fileName) {
+    public List<String> getAllLines(String fromFileName) {
         List<String> fruits;
         try {
-            fruits = Files.readAllLines(Path.of(fileName));
+            fruits = Files.readAllLines(Path.of(fromFileName));
         } catch (IOException e) {
-            throw new RuntimeException("Cannot get data from file " + fileName);
+            throw new RuntimeException("Cannot get data from file " + fromFileName);
         }
         return fruits;
     }
