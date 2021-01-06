@@ -34,16 +34,6 @@ public class ReductionStrategyTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void notHaveFruitReductionStrategy() {
-        Fruit fruit = new Fruit();
-        fruit.setName("apple");
-        transactionDto.setQuantity(20);
-        transactionDto.setOperation(Operation.PURCHASE);
-        transactionDto.setFruit(fruit);
-        reductionStrategy.apply(transactionDto);
-    }
-
-    @Test(expected = RuntimeException.class)
     public void fewFruitReductionStrategy() {
         Fruit fruit = new Fruit();
         fruit.setName("banana");
