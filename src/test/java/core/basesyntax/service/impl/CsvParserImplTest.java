@@ -9,9 +9,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CsvParserImplTest {
-    CsvParserImpl csvParser = new CsvParserImpl();
-    List<String> strings = new ArrayList<>();
-    Fruit apple = new Fruit();
+    private CsvParserImpl csvParser = new CsvParserImpl();
+    private List<String> strings = new ArrayList<>();
+    private Fruit apple = new Fruit();
 
     @Test
     public void correctCsvParserImpl() {
@@ -42,6 +42,5 @@ public class CsvParserImplTest {
         strings.add("b,banana,-5");
         strings.add("b,banana,20");
         csvParser.convert(strings);
-
     }
 }

@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class CsvFileReaderImplTest {
-    CsvFileReaderImpl reader = new CsvFileReaderImpl();
+    private CsvFileReaderImpl reader = new CsvFileReaderImpl();
 
     @Test
     public void correctCvsFileReaderImpl() {

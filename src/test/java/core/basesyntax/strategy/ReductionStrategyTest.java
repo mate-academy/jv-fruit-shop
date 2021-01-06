@@ -9,9 +9,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ReductionStrategyTest {
-
-    OperationStrategy reductionStrategy = new ReductionStrategy();
-    TransactionDto transactionDto = new TransactionDto();
+    private OperationStrategy reductionStrategy = new ReductionStrategy();
+    private TransactionDto transactionDto = new TransactionDto();
 
     @BeforeClass
     public static void beforeClass() throws Exception {
@@ -31,6 +30,16 @@ public class ReductionStrategyTest {
         int actual = Storage.fruits.get(fruit);
         Assert.assertEquals(10, actual);
         Storage.fruits.clear();
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void notHaveFruitReductionStrategy() {
+        Fruit fruit = new Fruit();
+        fruit.setName("apple");
+        transactionDto.setQuantity(20);
+        transactionDto.setOperation(Operation.PURCHASE);
+        transactionDto.setFruit(fruit);
+        reductionStrategy.apply(transactionDto);
     }
 
     @Test(expected = RuntimeException.class)
