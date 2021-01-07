@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ReaderServiceImplTest {
@@ -18,7 +19,7 @@ public class ReaderServiceImplTest {
     public static final String WRONG_DATA_FILE_DESTINATION =
             "src\\test\\resource\\wrongDataFile.csv";
     public static final String EMPTY_FILE_DESTINATION = "src\\test\\resource\\emptyFile.csv";
-    ReaderService readerService = new ReaderServiceImpl();
+    private static ReaderService readerService;
 
     static {
         Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
@@ -26,6 +27,11 @@ public class ReaderServiceImplTest {
         operationStrategyMap.put(Operation.SUPPLY, new AdditionStrategyImpl());
         operationStrategyMap.put(Operation.PURCHASE, new ReductionStrategyImpl());
         operationStrategyMap.put(Operation.RETURN, new AdditionStrategyImpl());
+    }
+
+    @Before
+    public void setUp() {
+        readerService = new ReaderServiceImpl();
     }
 
     @Test
