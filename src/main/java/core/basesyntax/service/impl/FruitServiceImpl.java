@@ -12,13 +12,13 @@ import java.util.Map;
 public class FruitServiceImpl implements FruitService {
     private Map<Operation, OperationStrategy> operationStrategyMap;
 
-    public FruitServiceImpl(Map<Operation, OperationStrategy> operationOperationStrategyMap) {
-        this.operationStrategyMap = operationOperationStrategyMap;
+    public FruitServiceImpl(Map<Operation, OperationStrategy> operationStrategyMap) {
+        this.operationStrategyMap = operationStrategyMap;
     }
 
     @Override
-    public void applyOperationsOnFruitsDto(List<TransactionDto> transactionDtos) {
-        for (TransactionDto dto: transactionDtos) {
+    public void applyOperationsOnFruitsDto(List<TransactionDto> transactionDto) {
+        for (TransactionDto dto: transactionDto) {
             Operation operation = dto.getOperation();
             operationStrategyMap.get(operation).apply(dto);
         }

@@ -16,4 +16,3 @@ public class BalanceStrategy implements OperationStrategy {
         Storage.fruitsMap.put(transactionDto.getFruit(), amount);
     }
 }
-
