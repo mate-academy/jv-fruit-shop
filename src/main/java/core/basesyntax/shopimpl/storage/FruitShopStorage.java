@@ -8,7 +8,10 @@ import java.util.List;
 
 public class FruitShopStorage extends AbstractStorage<DataRecord, AbstractItem> {
     @Override
-    public void initStorage(List<DataRecord> history) {
+    public void performTransactions(List<DataRecord> history) {
+        if (history == null) {
+            throw new RuntimeException("Storage requires non null list");
+        }
         FruitShopActionHandler handler = new FruitShopActionHandler();
         for (DataRecord record : history) {
             handler.getAction(record.getAction())

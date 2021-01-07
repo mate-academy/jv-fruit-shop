@@ -55,7 +55,7 @@ public class IOdataFileService {
     public DataRecord parseToRecord(String line) {
         String[] data = line.split(FILE_DELIMITER);
         if (data[FILE_INDEX_OF_AMOUNT].matches(NUMBERS_PATTERN)
-            || Integer.parseInt(data[FILE_INDEX_OF_AMOUNT]) < 0) {
+                || Integer.parseInt(data[FILE_INDEX_OF_AMOUNT]) < 0) {
             throw new IllegalArgumentException("The file line doesn't"
                                                + " contain proper values or fields");
         }

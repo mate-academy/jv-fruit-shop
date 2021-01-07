@@ -36,10 +36,10 @@ public class IOdataFileServiceTest {
         storage.put(new Fruit("Fruit3"), 100);
         fileService.writeReport(reportFile, storage);
         
-        List<String> expected = List.of("Item,Amount"
-                , "Fruit1,100"
-                , "Fruit2,100"
-                , "Fruit3,100");
+        List<String> expected = List.of("Item,Amount",
+                 "Fruit1,100",
+                 "Fruit2,100",
+                 "Fruit3,100");
         try {
             List<String> actual = Files.readAllLines(Path.of(reportFile));
             assertEquals(expected, actual);

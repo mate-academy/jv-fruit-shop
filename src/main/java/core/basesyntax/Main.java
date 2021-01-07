@@ -15,7 +15,7 @@ public class Main {
         
         FruitShopStorage storage = new FruitShopStorage();
         
-        storage.initStorage(records);
+        storage.performTransactions(records);
         
         fileService.writeReport("src/main/java/core/basesyntax/report.csv",
                 storage.getStorage());

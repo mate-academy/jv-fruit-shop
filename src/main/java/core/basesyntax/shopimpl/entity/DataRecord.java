@@ -10,6 +10,9 @@ public class DataRecord {
     private Integer amount;
     
     public DataRecord(ShopTransactionsType action, AbstractItem item, Integer amount) {
+        if (action == null || item == null || amount == null) {
+            throw new RuntimeException("Require non null arguments");
+        }
         this.action = action;
         this.item = item;
         this.amount = amount;
