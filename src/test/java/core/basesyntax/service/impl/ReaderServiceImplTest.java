@@ -21,17 +21,14 @@ public class ReaderServiceImplTest {
     public static final String EMPTY_FILE_DESTINATION = "src\\test\\resource\\emptyFile.csv";
     private static ReaderService readerService;
 
-    static {
+    @Before
+    public void setUp() {
+        readerService = new ReaderServiceImpl();
         Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put(Operation.BALANCE, new AdditionStrategyImpl());
         operationStrategyMap.put(Operation.SUPPLY, new AdditionStrategyImpl());
         operationStrategyMap.put(Operation.PURCHASE, new ReductionStrategyImpl());
         operationStrategyMap.put(Operation.RETURN, new AdditionStrategyImpl());
-    }
-
-    @Before
-    public void setUp() {
-        readerService = new ReaderServiceImpl();
     }
 
     @Test
