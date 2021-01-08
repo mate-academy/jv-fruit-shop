@@ -4,10 +4,8 @@ import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.impl.ReadFromCsvFileImpl;
 import core.basesyntax.service.impl.WriteToCsvFileImpl;
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.util.List;
+import org.junit.Test;
 
 public class FileWriterTest {
 
