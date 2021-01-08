@@ -1,8 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.MyFileReader;
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,15 +52,5 @@ public class MyFileReaderCsvImplTest {
         List<String> expected = myFileReaderCsv.readFromFile(TEST_INPUT_FRUIT_CSV);
         List<String> actual = myFileReaderCsv.readFromFile(TEST_INPUT_FRUIT2_CSV);
         Assert.assertEquals(expected,actual);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void readFromFileWhichLocked_NotOk() {
-        try {
-            new RandomAccessFile(TEST_FRUIT_WHICH_LOCK_CSV, "rw").getChannel().lock();
-            myFileReaderCsv.readFromFile(TEST_FRUIT_WHICH_LOCK_CSV);
-        } catch (IOException e) {
-            throw new RuntimeException("IOException",e);
-        }
     }
 }
