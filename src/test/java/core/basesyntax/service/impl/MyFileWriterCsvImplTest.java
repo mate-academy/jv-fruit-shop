@@ -2,8 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.MyFileReader;
 import core.basesyntax.service.MyFileWriter;
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,16 +53,5 @@ public class MyFileWriterCsvImplTest {
     @Test(expected = RuntimeException.class)
     public void writeToFileDoNotExistFile_NotOk() {
         myFileWriterCsv.writeToFile("src/test/", dataForWrite);
-    }
-
-    @Test(expected = RuntimeException.class)
-    public void writeToFileWhichLocked_NotOk() {
-        myFileWriterCsv.writeToFile(TEST_FRUIT_WHICH_LOCK_CSV, dataForWrite);
-        try {
-            new RandomAccessFile(TEST_FRUIT_WHICH_LOCK_CSV, "rw").getChannel().lock();
-            myFileReaderCsv.readFromFile(TEST_FRUIT_WHICH_LOCK_CSV);
-        } catch (IOException e) {
-            throw new RuntimeException("IOException",e);
-        }
     }
 }
