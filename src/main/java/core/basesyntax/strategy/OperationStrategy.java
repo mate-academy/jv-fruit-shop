@@ -1,4 +1,4 @@
-package core.basesyntax.model;
+package core.basesyntax.strategy;
 
 public interface OperationStrategy {
     Operation get(Operations type);

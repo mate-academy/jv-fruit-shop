@@ -2,8 +2,8 @@ package core.basesyntax.service;
 
 import core.basesyntax.database.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.OperationStrategy;
-import core.basesyntax.model.Operations;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.Operations;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;

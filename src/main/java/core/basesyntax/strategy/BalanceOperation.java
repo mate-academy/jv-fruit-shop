@@ -1,6 +1,7 @@
-package core.basesyntax.model;
+package core.basesyntax.strategy;
 
 import core.basesyntax.database.Storage;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public class BalanceOperation implements Operation {
