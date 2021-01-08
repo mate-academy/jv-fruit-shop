@@ -16,6 +16,7 @@ public class ReturnStrategy implements OperationStrategy {
                             + transactionDto.getQuantity());
             return;
         }
-        Storage.fruitsAndAmountsMap.put(transactionDto.getFruit(), transactionDto.getQuantity());
+        Storage.fruitsAndAmountsMap.put(transactionDto.getFruit(),
+                transactionDto.getQuantity());
     }
 }

@@ -6,6 +6,10 @@ import core.basesyntax.model.TransactionDto;
 public class PurchaseStrategy implements OperationStrategy {
     @Override
     public void doOperation(TransactionDto transactionDto) {
+        if (transactionDto.getQuantity() < 0) {
+            throw new IllegalArgumentException("Purchase can't be negative number "
+                    + transactionDto.getQuantity());
+        }
         if (!Storage.fruitsAndAmountsMap.containsKey(transactionDto.getFruit())) {
             throw new IllegalArgumentException("We can't buy fruit because we don't have this fruit"
                     + transactionDto.getFruit());

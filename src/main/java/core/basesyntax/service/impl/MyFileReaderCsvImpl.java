@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.MyFileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ public class MyFileReaderCsvImpl implements MyFileReader {
     public List<String> readFromFile(String filePathForRead) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader =
-                     new BufferedReader(new java.io.FileReader(filePathForRead))) {
+                     new BufferedReader(new FileReader(filePathForRead))) {
             String value = bufferedReader.readLine();
             while (value != null) {
                 lines.add(value);

@@ -10,6 +10,7 @@ public class BalanceStrategy implements OperationStrategy {
             throw new IllegalArgumentException("Balance can't be negative number "
                     + transactionDto.getQuantity());
         }
-        Storage.fruitsAndAmountsMap.put(transactionDto.getFruit(), transactionDto.getQuantity());
+        Storage.fruitsAndAmountsMap.put(transactionDto.getFruit(),
+                transactionDto.getQuantity());
     }
 }

@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FruitService;
@@ -27,18 +26,15 @@ public class Main {
     public static void main(String[] args) {
         MyFileReader myFileReaderCsv = new MyFileReaderCsvImpl();
         List<String> fruitsFromFile = myFileReaderCsv.readFromFile(NAME_FILE);
-        System.out.println(fruitsFromFile);
-        System.out.println(Operation.getOperationByLetter("s"));
         ParseCsvImpl parseCsvImpl = new ParseCsvImpl();
         List<TransactionDto> transactionDtoList = parseCsvImpl.parse(fruitsFromFile);
-        System.out.println(transactionDtoList.toString());
         operationMap = addAllOperationsToMap(operationMap);
-        System.out.println(operationMap.entrySet());
         FruitService fruitService = new FruitServiceImpl(operationMap);
-        fruitService.selectOperation(transactionDtoList);
-        System.out.println(Storage.fruitsAndAmountsMap.entrySet());
+        fruitService.selectOperationAndWriteToStorage(transactionDtoList);
         MyFileWriter myFileWriter = new MyFileWriterCsvImpl();
-        myFileWriter.writeToFile(NAME_FILE_FOR_REPORT);
+        String dataForWrite = fruitService.prepareDataForReport();
+        System.out.println(dataForWrite);
+        myFileWriter.writeToFile(NAME_FILE_FOR_REPORT, dataForWrite);
     }
 
     private static Map<Operation, OperationStrategy> addAllOperationsToMap(Map<Operation,

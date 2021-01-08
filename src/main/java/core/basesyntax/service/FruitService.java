@@ -4,5 +4,7 @@ import core.basesyntax.model.TransactionDto;
 import java.util.List;
 
 public interface FruitService {
-    void selectOperation(List<TransactionDto> transactionDto);
+    void selectOperationAndWriteToStorage(List<TransactionDto> transactionDto);
+
+    String prepareDataForReport();
 }

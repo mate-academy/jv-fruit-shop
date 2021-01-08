@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Fruit {
-    private String name;
+    private final String name;
 
     public Fruit(String name) {
         this.name = name;
@@ -29,7 +29,6 @@ public class Fruit {
     public int hashCode() {
         return Objects.hash(name);
     }
-    // this.name.compareTo(o.name);
 
     @Override
     public String toString() {
