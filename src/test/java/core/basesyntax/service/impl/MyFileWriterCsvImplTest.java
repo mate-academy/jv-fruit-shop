@@ -31,7 +31,7 @@ public class MyFileWriterCsvImplTest {
     @Test
     public void writeToFileUsualData_Ok() {
         myFileWriterCsv.writeToFile(TEST_FRUIT_REPORT_CSV, dataForWrite);
-        List<String> expected = Arrays.asList("b,banana,20", "b,apple,100");
+        List<String> expected = Arrays.asList("type,fruit,quantity","b,banana,20", "b,apple,100");
         List<String> actual = myFileReaderCsv.readFromFile(TEST_FRUIT_REPORT_CSV);
         Assert.assertEquals(expected, actual);
     }

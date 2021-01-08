@@ -18,7 +18,7 @@ public class ParseCsvImplTest {
     @BeforeClass
     public static void beforeClass() {
         parseCsv = new ParseCsvImpl();
-        dataForParse = Arrays.asList("b,banana,20", "b,apple,100");
+        dataForParse = Arrays.asList("type,fruit,quantity","b,banana,20", "b,apple,100");
         notValidDataForParse = Arrays.asList("b,banana,20,20", "b,apple,100,s");
     }
 

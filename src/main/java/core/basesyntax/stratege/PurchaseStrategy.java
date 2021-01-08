@@ -16,9 +16,10 @@ public class PurchaseStrategy implements OperationStrategy {
         }
         if (Storage.fruitsAndAmountsMap.get(transactionDto.getFruit())
                 < transactionDto.getQuantity()) {
-            throw new IllegalArgumentException("We don't have enough this fruits! You want buy "
-                    + transactionDto.getQuantity() + " but we have only "
-                    + Storage.fruitsAndAmountsMap.get(transactionDto.getFruit()));
+            throw new IllegalArgumentException(String.format(
+                    "We don't have enough this fruits! You want buy %d but we have only %s.",
+                    transactionDto.getQuantity(),
+                    Storage.fruitsAndAmountsMap.get(transactionDto.getFruit())));
         }
         Storage.fruitsAndAmountsMap.replace(transactionDto.getFruit(),
                 Storage.fruitsAndAmountsMap.get(transactionDto.getFruit())

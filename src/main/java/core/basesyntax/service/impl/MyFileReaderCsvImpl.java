@@ -24,9 +24,6 @@ public class MyFileReaderCsvImpl implements MyFileReader {
         } catch (IOException e) {
             throw new RuntimeException("Data couldn't read from file " + filePathForRead, e);
         }
-        if (lines.size() > 0) {
-            lines.remove(0);
-        }
         return lines;
     }
 }

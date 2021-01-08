@@ -23,7 +23,7 @@ public class MyFileReaderCsvImplTest {
 
     @Test
     public void readFromFile_Ok() {
-        List<String> expected = Arrays.asList("b,banana,20","b,apple,100");
+        List<String> expected = Arrays.asList("type,fruit,quantity","b,banana,20","b,apple,100");
         List<String> actual = myFileReaderCsv.readFromFile(TEST_INPUT_FRUIT_CSV);
         Assert.assertEquals(expected,actual);
     }

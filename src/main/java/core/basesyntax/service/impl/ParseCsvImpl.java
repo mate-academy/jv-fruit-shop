@@ -14,8 +14,8 @@ public class ParseCsvImpl implements Parse {
     @Override
     public List<TransactionDto> parse(List<String> data) {
         List<TransactionDto> transactionDtoList = new ArrayList<>();
-        for (String line : data) {
-            String[] split = line.split(COMA);
+        for (int i = 1; i < data.size(); i++) {
+            String[] split = data.get(i).split(COMA);
             if (split.length != EXPECTED_LENGTH_ARRAY) {
                 throw new IllegalArgumentException("Don't valid data for parse");
             }
