@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.database.Storage;
-import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;

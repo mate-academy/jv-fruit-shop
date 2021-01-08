@@ -1,9 +1,6 @@
 package core.basesyntax.model;
 
 import core.basesyntax.database.Storage;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.OperationStrategy;
@@ -12,6 +9,9 @@ import core.basesyntax.strategy.Operations;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyOperation;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
