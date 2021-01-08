@@ -97,6 +97,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/Main*</exclude>
+                        <exclude>**/test*</exclude>
                     </excludes>
                 </configuration>
             </plugin>
