@@ -17,6 +17,6 @@ public class FileWriterTest {
         writer.writeToFile("Expected report", "ExpectedReport");
         FileReader reader = new ReadFromCsvFileImpl();
         List<String> actualReport = reader.read("expectedReport");
-        List<String> expectedReport = List.of("Expected report");
+        List<String> expectedReport = List.of("Expected report!");
     }
 }
