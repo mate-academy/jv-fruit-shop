@@ -33,7 +33,6 @@ public class Main {
         fruitService.selectOperationAndWriteToStorage(transactionDtoList);
         MyFileWriter myFileWriter = new MyFileWriterCsvImpl();
         String dataForWrite = fruitService.prepareDataForReport();
-        System.out.println(dataForWrite);
         myFileWriter.writeToFile(NAME_FILE_FOR_REPORT, dataForWrite);
     }
 
