@@ -1,5 +1,4 @@
 # Fruit shop
-## First part
 Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
@@ -80,34 +79,4 @@ or
     p,banana,-10 // Buyers will not be able to buy -10 bananas. -10 is incorrect input.
     s,banana,50 
 ```
-#### Task submission
-After you complete the main application logic explained above - make a Pull Request as usual and wait for it to be approved.
-
-## Second part
-In this part you will also have to cover your code with tests. 
-
-NOTE: Continue working in the same branch and push changes to the same PR after the first part was approved.
-### Add Travis code coverage check
-Let's add the following file to the root of the project (it should be located on the same level as `pom.xml` and `.gitignore`):
-
-file name - `.travis.yml`
-
-content of the file:
-
-```test
-language: java
-jdk:
-  - openjdk11
-script:
-  - mvn clean verify
-cache:
-  directories:
-    - $HOME/.m2
-```
-
-This file enables Travis to check your code coverage to be more than 80%.
-To test your code coverage locally - run `mvn clean verify` in the terminal.
-### Add tests for your services
-Create test classes and tests for checking the work of each of your services. 
-Use JUnit4 library (the dependency is already in `pom.xml`).
 #### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop)
