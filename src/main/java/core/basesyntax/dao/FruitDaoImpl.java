@@ -21,11 +21,7 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public int getAmount(Fruit fruit) {
-        return Storage.fruits.entrySet().stream()
-                .filter(n -> n.getKey().equals(fruit))
-                .map(Map.Entry::getValue)
-                .findFirst()
-                .get();
+        return Storage.fruits.get(fruit);
     }
 
     @Override
