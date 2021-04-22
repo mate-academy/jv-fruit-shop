@@ -27,7 +27,8 @@ public class ProductServiceImpl implements ProductService {
             String[] data = line.split(SEPARATOR);
             Product product = new Product(data[PRODUCT_NAME_INDEX]);
             int oldAmount = productDao.get(product);
-            int newAmount = operationStrategy.get(Operations.valueOf(data[TYPE_INDEX].toUpperCase()))
+            String operationType = data[TYPE_INDEX].toUpperCase();
+            int newAmount = operationStrategy.get(Operations.valueOf(operationType))
                     .calculateAmount(oldAmount, Integer.parseInt(data[AMOUNT_INDEX]));
             productDao.add(new Product(data[PRODUCT_NAME_INDEX]), newAmount);
         }

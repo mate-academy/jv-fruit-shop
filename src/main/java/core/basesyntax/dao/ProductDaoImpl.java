@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class ProductDaoImpl implements ProductDao {
-
     @Override
     public void add(Product product, int amount) {
         Storage.getProducts().put(product, amount);
@@ -22,6 +21,4 @@ public class ProductDaoImpl implements ProductDao {
     public Map<Product, Integer> getMap() {
         return Storage.getProducts();
     }
-
-
 }

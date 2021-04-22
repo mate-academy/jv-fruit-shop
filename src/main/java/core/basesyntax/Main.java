@@ -26,10 +26,11 @@ public class Main {
         operationMap.put(Operations.P, new PurchaseOperation());
         operationMap.put(Operations.R, new ReturnOperation());
 
-        OperationsStrategy operatiosStrategy = new OperationsStrategyImpl(operationMap);
+        OperationsStrategy operationsStrategy = new OperationsStrategyImpl(operationMap);
         ProductDao productDao = new ProductDaoImpl();
 
-        FruitShopService fruitShopService = new FruitShopServiceImpl(productDao, operatiosStrategy);
+        FruitShopService fruitShopService = new FruitShopServiceImpl(productDao,
+                operationsStrategy);
         fruitShopService.createReport(FILE_PATH_FROM, FILE_PATH_TO);
     }
 }
