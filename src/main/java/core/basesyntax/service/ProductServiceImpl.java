@@ -27,9 +27,14 @@ public class ProductServiceImpl implements ProductService {
             String[] data = line.split(SEPARATOR);
             Product product = new Product(data[PRODUCT_NAME_INDEX]);
             int oldAmount = productDao.get(product);
+
             String operationType = data[TYPE_INDEX].toUpperCase();
+            if (!Operations.contains(operationType)) {
+                throw new RuntimeException("There is no operation of such type " + operationType);
+            }
             int newAmount = operationStrategy.get(Operations.valueOf(operationType))
                     .calculateAmount(oldAmount, Integer.parseInt(data[AMOUNT_INDEX]));
+
             productDao.add(new Product(data[PRODUCT_NAME_INDEX]), newAmount);
         }
     }
