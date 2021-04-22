@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ProductServiceImpl implements ProductService {
+public class ProductsServiceImpl implements ProductsService {
     public static final String TITLE = "fruit,quantity";
     public static final String SEPARATOR = ",";
     public static final int TYPE_INDEX = 0;
@@ -16,15 +16,15 @@ public class ProductServiceImpl implements ProductService {
     private final OperationsStrategy operationStrategy;
     private final ProductDao productDao;
 
-    public ProductServiceImpl(OperationsStrategy operationStrategy, ProductDao productDao) {
+    public ProductsServiceImpl(OperationsStrategy operationStrategy, ProductDao productDao) {
         this.operationStrategy = operationStrategy;
         this.productDao = productDao;
     }
 
     @Override
     public void addToStorage(List<String> dataFromFile) {
-        for (String line : dataFromFile) {
-            String[] data = line.split(SEPARATOR);
+        for (int i = 1; i < dataFromFile.size(); i++) {
+            String[] data = dataFromFile.get(i).split(SEPARATOR);
             Product product = new Product(data[PRODUCT_NAME_INDEX]);
             int oldAmount = productDao.get(product);
 

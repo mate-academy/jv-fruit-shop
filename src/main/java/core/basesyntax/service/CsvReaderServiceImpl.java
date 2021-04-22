@@ -6,13 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReaderServiceImpl implements ReaderService {
+public class CsvReaderServiceImpl implements ReaderService {
 
     @Override
     public List<String> readFromFile(String filePath) {
         List<String> dataFromFile = new ArrayList<>();
         try (BufferedReader readFile = new BufferedReader(new FileReader(filePath))) {
-            readFile.readLine();
             String lineText;
             while ((lineText = readFile.readLine()) != null) {
                 dataFromFile.add(lineText);

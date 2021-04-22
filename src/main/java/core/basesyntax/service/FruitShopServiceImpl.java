@@ -15,14 +15,14 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public void createReport(String filePathFrom, String filePathTo) {
-        ReaderService readerService = new ReaderServiceImpl();
+        ReaderService readerService = new CsvReaderServiceImpl();
         List<String> data = readerService.readFromFile(filePathFrom);
 
-        ProductService productService = new ProductServiceImpl(operationsStrategy, productDao);
-        productService.addToStorage(data);
-        List<String> report = productService.getFromStorage();
+        ProductsService productsService = new ProductsServiceImpl(operationsStrategy, productDao);
+        productsService.addToStorage(data);
+        List<String> report = productsService.getFromStorage();
 
-        WriterService writerService = new WriterServiceImpl();
+        WriterService writerService = new CsvWriterServiceImpl();
         writerService.writeToFile(report, filePathTo);
     }
 }
