@@ -25,9 +25,11 @@ public class ProductServiceImpl implements ProductService {
     public void addToStorage(List<String> dataFromFile) {
         for (String line : dataFromFile) {
             String[] data = line.split(SEPARATOR);
-            operationStrategy.get(Operations.valueOf(data[TYPE_INDEX].toUpperCase()))
-                    .perform(new Product(data[PRODUCT_NAME_INDEX]),
-                            Integer.parseInt(data[AMOUNT_INDEX]), productDao);
+            Product product = new Product(data[PRODUCT_NAME_INDEX]);
+            int oldAmount = productDao.get(product);
+            int newAmount = operationStrategy.get(Operations.valueOf(data[TYPE_INDEX].toUpperCase()))
+                    .calculateAmount(oldAmount, Integer.parseInt(data[AMOUNT_INDEX]));
+            productDao.add(new Product(data[PRODUCT_NAME_INDEX]), newAmount);
         }
     }
 
@@ -35,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
     public List<String> getFromStorage() {
         List<String> data = new ArrayList<>();
         data.add(TITLE);
-        Map<Product, Integer> products = productDao.get();
+        Map<Product, Integer> products = productDao.getMap();
         for (Map.Entry<Product, Integer> productIntegerEntry : products.entrySet()) {
             data.add(System.lineSeparator());
             data.add(productIntegerEntry.getKey().getName()

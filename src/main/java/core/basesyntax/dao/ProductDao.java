@@ -4,7 +4,9 @@ import core.basesyntax.service.Product;
 import java.util.Map;
 
 public interface ProductDao {
-    void add(Map<Product, Integer> productsMap);
+    void add(Product product, int amount);
 
-    Map<Product, Integer> get();
+    int get(Product product);
+
+    Map<Product, Integer> getMap();
 }
