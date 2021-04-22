@@ -1,24 +1,24 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.Operation;
 import core.basesyntax.operations.Operations;
 import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
-import core.basesyntax.service.ProductService;
-import core.basesyntax.service.ProductServiceImpl;
-import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.ReaderServiceImpl;
-import core.basesyntax.service.WriterService;
-import core.basesyntax.service.WriterServiceImpl;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.FruitShopServiceImpl;
 import core.basesyntax.strategy.OperationsStrategy;
 import core.basesyntax.strategy.OperationsStrategyImpl;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_PATH_FROM = "src/main/resources/file.csv";
+    private static final String FILE_PATH_TO = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         Map<Operations, Operation> operationMap = new HashMap<>();
         operationMap.put(Operations.B, new BalanceOperation());
@@ -26,16 +26,10 @@ public class Main {
         operationMap.put(Operations.P, new PurchaseOperation());
         operationMap.put(Operations.R, new ReturnOperation());
 
-        OperationsStrategy strategy = new OperationsStrategyImpl(operationMap);
+        OperationsStrategy operatiosStrategy = new OperationsStrategyImpl(operationMap);
+        ProductDao productDao = new ProductDaoImpl();
 
-        ReaderService readerService = new ReaderServiceImpl();
-        List<String> data = readerService.readFromFile("src/main/resources/file.csv");
-
-        ProductService productService = new ProductServiceImpl(strategy);
-        productService.addToStorage(data);
-        List<String> report = productService.getFromStorage();
-
-        WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile(report, "src/main/resources/report.csv");
+        FruitShopService fruitShopService = new FruitShopServiceImpl(productDao, operatiosStrategy);
+        fruitShopService.createReport(FILE_PATH_FROM, FILE_PATH_TO);
     }
 }

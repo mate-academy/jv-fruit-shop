@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.ProductDao;
 import core.basesyntax.operations.Operations;
 import core.basesyntax.strategy.OperationsStrategy;
 import java.util.ArrayList;
@@ -14,9 +14,11 @@ public class ProductServiceImpl implements ProductService {
     public static final int PRODUCT_NAME_INDEX = 1;
     public static final int AMOUNT_INDEX = 2;
     private final OperationsStrategy operationStrategy;
+    private final ProductDao productDao;
 
-    public ProductServiceImpl(OperationsStrategy operationStrategy) {
+    public ProductServiceImpl(OperationsStrategy operationStrategy, ProductDao productDao) {
         this.operationStrategy = operationStrategy;
+        this.productDao = productDao;
     }
 
     @Override
@@ -25,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
             String[] data = line.split(SEPARATOR);
             operationStrategy.get(Operations.valueOf(data[TYPE_INDEX].toUpperCase()))
                     .perform(new Product(data[PRODUCT_NAME_INDEX]),
-                            Integer.parseInt(data[AMOUNT_INDEX]));
+                            Integer.parseInt(data[AMOUNT_INDEX]), productDao);
         }
     }
 
@@ -33,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     public List<String> getFromStorage() {
         List<String> data = new ArrayList<>();
         data.add(TITLE);
-        Map<Product, Integer> products = Storage.getProducts();
+        Map<Product, Integer> products = productDao.get();
         for (Map.Entry<Product, Integer> productIntegerEntry : products.entrySet()) {
             data.add(System.lineSeparator());
             data.add(productIntegerEntry.getKey().getName()
