@@ -5,10 +5,7 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoMapImpl;
 import core.basesyntax.dao.ReportDaoCsvFileImpl;
 import core.basesyntax.model.Activity;
-import core.basesyntax.service.ActivityStrategy;
-import core.basesyntax.service.ActivityStrategyImpl;
-import core.basesyntax.service.ReportService;
-import core.basesyntax.service.ReportServiceImpl;
+import core.basesyntax.service.*;
 import core.basesyntax.service.activityhandler.ActivityHandler;
 import core.basesyntax.service.activityhandler.BalanceActivityHandler;
 import core.basesyntax.service.activityhandler.PurchaseActivityHandler;
@@ -31,9 +28,9 @@ public class Main {
 
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(operationStrategies);
 
-        ReportService reportService = new ReportServiceImpl(
-                new ActivityDaoCsvFileImpl(INPUT_FILE), activityStrategy,
-                new FruitDaoMapImpl(), new ReportDaoCsvFileImpl(OUTPUT_FILE));
+        ReportService reportService = new ReportServiceImpl(new ActivityDaoCsvFileImpl(INPUT_FILE),
+                new FruitDaoMapImpl(), new ReportDaoCsvFileImpl(OUTPUT_FILE),
+                new ActivityServiceImpl(activityStrategy));
         reportService.generateReport();
     }
 }
