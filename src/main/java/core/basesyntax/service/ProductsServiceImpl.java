@@ -33,8 +33,12 @@ public class ProductsServiceImpl implements ProductsService {
                 throw new RuntimeException("There is no operation of such type "
                         + operationTypeName);
             }
+            int amount = Integer.parseInt(data[AMOUNT_INDEX]);
+            if (amount < 0) {
+                throw new RuntimeException("Amount can't be less than zero");
+            }
             int newAmount = operationStrategy.get(Operations.valueOf(operationTypeName))
-                    .calculateAmount(oldAmount, Integer.parseInt(data[AMOUNT_INDEX]));
+                    .calculateAmount(oldAmount, amount);
 
             productDao.add(new Product(data[PRODUCT_NAME_INDEX]), newAmount);
         }
