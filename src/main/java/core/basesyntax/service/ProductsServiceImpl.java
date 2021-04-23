@@ -28,11 +28,12 @@ public class ProductsServiceImpl implements ProductsService {
             Product product = new Product(data[PRODUCT_NAME_INDEX]);
             int oldAmount = productDao.get(product);
 
-            String operationType = data[TYPE_INDEX].toUpperCase();
-            if (!Operations.contains(operationType)) {
-                throw new RuntimeException("There is no operation of such type " + operationType);
+            String operationTypeName = data[TYPE_INDEX].toUpperCase();
+            if (!Operations.contains(operationTypeName)) {
+                throw new RuntimeException("There is no operation of such type "
+                        + operationTypeName);
             }
-            int newAmount = operationStrategy.get(Operations.valueOf(operationType))
+            int newAmount = operationStrategy.get(Operations.valueOf(operationTypeName))
                     .calculateAmount(oldAmount, Integer.parseInt(data[AMOUNT_INDEX]));
 
             productDao.add(new Product(data[PRODUCT_NAME_INDEX]), newAmount);
