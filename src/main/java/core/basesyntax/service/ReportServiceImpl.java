@@ -12,8 +12,8 @@ public class ReportServiceImpl implements ReportService {
     private final ReportDao reportDao;
     private final ActivityService activityService;
 
-    public ReportServiceImpl(ActivityDao activityDao,
-                             FruitDao fruitDao, ReportDao reportDao, ActivityService activityService) {
+    public ReportServiceImpl(ActivityDao activityDao, FruitDao fruitDao,
+                             ReportDao reportDao, ActivityService activityService) {
         this.activityDao = activityDao;
         this.fruitDao = fruitDao;
         this.reportDao = reportDao;
