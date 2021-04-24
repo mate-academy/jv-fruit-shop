@@ -22,7 +22,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void createReportFrom(String pathFrom, String pathTo) {
+    public void createReport(String pathFrom, String pathTo) {
         ProductParser parser = new ProductParserImpl();
         List<String> records = reader.readFile(pathFrom);
         List<ProductFactory> productFactories = parser.parseProduct(records);

@@ -29,6 +29,6 @@ public class Main {
 
         FruitShopService fruitShopService = new FruitShopServiceImpl(new CsvReaderImpl(),
                 operationStrategy, new ProductDaoImpl(), new CsvWriterImpl(new ProductDaoImpl()));
-        fruitShopService.createReportFrom(PATH_FROM, PATH_TO);
+        fruitShopService.createReport(PATH_FROM, PATH_TO);
     }
 }
