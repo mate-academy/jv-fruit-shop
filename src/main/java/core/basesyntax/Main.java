@@ -12,6 +12,8 @@ import core.basesyntax.service.CsvReaderServiceImpl;
 import core.basesyntax.service.CsvWriterServiceImpl;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
+import core.basesyntax.service.ProductsService;
+import core.basesyntax.service.ProductsServiceImpl;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.strategy.OperationsStrategy;
@@ -32,11 +34,13 @@ public class Main {
 
         OperationsStrategy operationsStrategy = new OperationsStrategyImpl(operationMap);
         ProductDao productDao = new ProductDaoImpl();
+        ProductsService productsService = new ProductsServiceImpl(operationsStrategy, productDao);
+
         ReaderService readerService = new CsvReaderServiceImpl();
         WriterService writerService = new CsvWriterServiceImpl();
 
-        FruitShopService fruitShopService = new FruitShopServiceImpl(productDao,
-                operationsStrategy, readerService, writerService);
+        FruitShopService fruitShopService = new FruitShopServiceImpl(productsService,
+                readerService, writerService);
         fruitShopService.createReport(FILE_PATH_FROM, FILE_PATH_TO);
     }
 }
