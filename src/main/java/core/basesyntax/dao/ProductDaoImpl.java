@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 public class ProductDaoImpl implements ProductDao {
     @Override
     public void add(Fruit fruit, int amount) {
-
         Storage.productStorage.put(fruit, amount);
     }
 
