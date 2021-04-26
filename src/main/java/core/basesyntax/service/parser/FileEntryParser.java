@@ -1,8 +1,8 @@
 package core.basesyntax.service.parser;
 
-import core.basesyntax.model.Transaction;
+import core.basesyntax.model.TransactionDto;
 import java.util.List;
 
 public interface FileEntryParser {
-    List<Transaction> parseProduct(List<String> records);
+    List<TransactionDto> parseProduct(List<String> records);
 }

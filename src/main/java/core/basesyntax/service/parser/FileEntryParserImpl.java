@@ -1,8 +1,9 @@
 package core.basesyntax.service.parser;
 
+import core.basesyntax.exception.EntryFormatException;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Product;
-import core.basesyntax.model.Transaction;
+import core.basesyntax.model.TransactionDto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,17 +16,18 @@ public class FileEntryParserImpl implements FileEntryParser {
     private static final String EXCEPTION_MESSAGE = "Entry format should be " + CSV_FORMAT;
 
     @Override
-    public List<Transaction> parseProduct(List<String> records) {
-        List<Transaction> factories = new ArrayList<>();
+    public List<TransactionDto> parseProduct(List<String> records) {
+        List<TransactionDto> factories = new ArrayList<>();
         for (String record : records) {
             if (!record.matches(CSV_FORMAT)) {
-                throw new RuntimeException(EXCEPTION_MESSAGE);
+                throw new EntryFormatException(EXCEPTION_MESSAGE
+                        + " but was [" + record + "]");
             }
             String[] fields = record.split(SPLITERATOR);
             Operation operation = Operation.getOperationByLetter(fields[OPERATION_INDEX]);
             Product fruit = new Product(fields[FRUIT_INDEX]);
             int amount = Integer.parseInt(fields[QUANTITY_INDEX]);
-            Transaction product = new Transaction(operation, fruit, amount);
+            TransactionDto product = new TransactionDto(operation, fruit, amount);
             factories.add(product);
         }
         return factories;

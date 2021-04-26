@@ -1,5 +1,6 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.OperationFormatException;
 import java.util.Arrays;
 
 public enum Operation {
@@ -7,7 +8,7 @@ public enum Operation {
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
-
+    private static final String EXCEPTION_MESSAGE = "Wrong operation type";
     private String operation;
 
     Operation(String operation) {
@@ -22,6 +23,7 @@ public enum Operation {
         return Arrays.stream(Operation.values())
                 .filter(o -> o.getOperation().equals(letter))
                 .findFirst()
-                .get();
+                .orElseThrow(()
+                        -> new OperationFormatException(EXCEPTION_MESSAGE + "[" + letter + "]"));
     }
 }

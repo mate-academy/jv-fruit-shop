@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class Transaction {
+public class TransactionDto {
     private Operation operation;
     private Product fruit;
     private int amount;
 
-    public Transaction(Operation operation, Product fruit, int amount) {
+    public TransactionDto(Operation operation, Product fruit, int amount) {
         this.operation = operation;
         this.fruit = fruit;
         this.amount = amount;
@@ -26,14 +26,14 @@ public class Transaction {
     }
 
     @Override
-    public boolean equals(Object entity) {
-        if (this == entity) {
+    public boolean equals(Object entry) {
+        if (this == entry) {
             return true;
         }
-        if (entity == null || getClass() != entity.getClass()) {
+        if (entry == null || getClass() != entry.getClass()) {
             return false;
         }
-        Transaction that = (Transaction) entity;
+        TransactionDto that = (TransactionDto) entry;
         return amount == that.amount
                 && operation == that.operation
                 && Objects.equals(fruit, that.fruit);
