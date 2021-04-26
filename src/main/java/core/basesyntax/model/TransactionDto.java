@@ -3,9 +3,9 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class TransactionDto {
-    private Operation operation;
-    private Product fruit;
-    private int amount;
+    private final Operation operation;
+    private final Product fruit;
+    private final int amount;
 
     public TransactionDto(Operation operation, Product fruit, int amount) {
         this.operation = operation;
@@ -26,17 +26,17 @@ public class TransactionDto {
     }
 
     @Override
-    public boolean equals(Object entry) {
-        if (this == entry) {
+    public boolean equals(Object dto) {
+        if (this == dto) {
             return true;
         }
-        if (entry == null || getClass() != entry.getClass()) {
+        if (dto == null || getClass() != dto.getClass()) {
             return false;
         }
-        TransactionDto that = (TransactionDto) entry;
-        return amount == that.amount
-                && operation == that.operation
-                && Objects.equals(fruit, that.fruit);
+        TransactionDto otherDto = (TransactionDto) dto;
+        return amount == otherDto.amount
+                && operation == otherDto.operation
+                && Objects.equals(fruit, otherDto.fruit);
     }
 
     @Override

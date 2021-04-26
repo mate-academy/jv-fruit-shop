@@ -2,9 +2,8 @@ package core.basesyntax.dao;
 
 import core.basesyntax.model.Product;
 import core.basesyntax.storage.Storage;
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class ProductDaoImpl implements ProductDao {
     @Override
@@ -18,12 +17,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public List<String> getAll() {
-        return Storage.productStorage
-                .entrySet()
-                .stream()
-                .map(entry -> entry.getKey().getFruitName() + "," + entry.getValue()
-                        + System.lineSeparator())
-                .collect(Collectors.toList());
+    public Map<Product, Integer> getAll() {
+        return Storage.productStorage;
     }
 }

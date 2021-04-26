@@ -3,14 +3,14 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public final class Product {
-    private final String fruitName;
+    private final String name;
 
     public Product(String fruitName) {
-        this.fruitName = fruitName;
+        this.name = fruitName;
     }
 
-    public String getFruitName() {
-        return fruitName;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -22,16 +22,16 @@ public final class Product {
             return false;
         }
         Product fruit = (Product) otherFruit;
-        return Objects.equals(fruitName, fruit.fruitName);
+        return Objects.equals(name, fruit.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fruitName);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
-        return "Fruit{" + "fruitName='" + fruitName + '\'' + '}';
+        return "Fruit{" + "fruitName='" + name + '\'' + '}';
     }
 }

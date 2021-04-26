@@ -4,19 +4,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class FileEntryReaderImpl implements FileEntryReader {
+public class FileReaderImpl implements FileReader {
     private static final String ERROR_MESSAGE = "Can't read the file in this path";
-    private static final int SKIP_TITLE = 1;
 
     @Override
-    public List<String> readFile(String path) {
+    public List<String> read(String path) {
         try {
-            return Files.readAllLines(Path.of(path))
-                    .stream()
-                    .skip(SKIP_TITLE)
-                    .collect(Collectors.toList());
+            return Files.readAllLines(Path.of(path));
         } catch (IOException e) {
             throw new RuntimeException(ERROR_MESSAGE + " " + path, e);
         }

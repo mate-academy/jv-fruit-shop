@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.Product;
-import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface ProductDao {
@@ -9,5 +9,5 @@ public interface ProductDao {
 
     Optional<Integer> get(Product key);
 
-    List<String> getAll();
+    Map<Product, Integer> getAll();
 }
