@@ -26,7 +26,7 @@ public class Main {
         ProductDao productDao = new ProductDaoImpl();
         Map<String, OperationHandler> handlers = getHandlersStorage(productDao);
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
-        FruitShopService service = new FruitShopServiceImpl(operationStrategy,productDao);
+        FruitShopService service = new FruitShopServiceImpl(operationStrategy, productDao);
         FileReader reader = new FileReaderImpl();
         FileWriter writer = new FileWriterImpl();
         TransactionDtoParser parser = new TransactionDtoParserImpl();
