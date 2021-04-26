@@ -13,8 +13,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public int get(Product product) {
-        Optional<Integer> optional = Optional.ofNullable(Storage.getProducts().get(product));
-        return optional.orElse(0);
+        return Storage.getProducts().getOrDefault(product, 0);
     }
 
     @Override
