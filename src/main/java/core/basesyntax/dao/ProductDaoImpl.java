@@ -14,7 +14,6 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Optional<Integer> get(Product key) {
-
         return Optional.ofNullable(Storage.productStorage.get(key));
     }
 
