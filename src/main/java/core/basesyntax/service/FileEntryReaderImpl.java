@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CsvReaderImpl implements CsvReader {
+public class FileEntryReaderImpl implements FileEntryReader {
     private static final String ERROR_MESSAGE = "Can't read the file in this path";
     private static final int SKIP_TITLE = 1;
 

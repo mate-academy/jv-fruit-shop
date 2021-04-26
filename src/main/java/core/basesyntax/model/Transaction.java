@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class ProductFactory {
+public class Transaction {
     private Operation operation;
-    private Fruit fruit;
+    private Product fruit;
     private int amount;
 
-    public ProductFactory(Operation operation, Fruit fruit, int amount) {
+    public Transaction(Operation operation, Product fruit, int amount) {
         this.operation = operation;
         this.fruit = fruit;
         this.amount = amount;
@@ -17,7 +17,7 @@ public class ProductFactory {
         return operation;
     }
 
-    public Fruit getFruit() {
+    public Product getFruit() {
         return fruit;
     }
 
@@ -33,7 +33,7 @@ public class ProductFactory {
         if (entity == null || getClass() != entity.getClass()) {
             return false;
         }
-        ProductFactory that = (ProductFactory) entity;
+        Transaction that = (Transaction) entity;
         return amount == that.amount
                 && operation == that.operation
                 && Objects.equals(fruit, that.fruit);

@@ -1,7 +1,7 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Product;
 
 public interface OperationHandler {
-    int apply(int amount, Fruit key);
+    int apply(int amount, Product key);
 }

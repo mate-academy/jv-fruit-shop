@@ -1,10 +1,10 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Product;
 import java.util.List;
 
 public interface ProductDao {
-    void add(Fruit fruit, int amount);
+    void add(Product fruit, int amount);
 
     List<String> getAll();
 }

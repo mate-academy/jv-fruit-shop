@@ -2,10 +2,10 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public final class Fruit {
+public final class Product {
     private final String fruitName;
 
-    public Fruit(String fruitName) {
+    public Product(String fruitName) {
         this.fruitName = fruitName;
     }
 
@@ -21,7 +21,7 @@ public final class Fruit {
         if (otherFruit == null || getClass() != otherFruit.getClass()) {
             return false;
         }
-        Fruit fruit = (Fruit) otherFruit;
+        Product fruit = (Product) otherFruit;
         return Objects.equals(fruitName, fruit.fruitName);
     }
 
@@ -32,7 +32,6 @@ public final class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{" + "fruitName='" + fruitName
-                + '\'' + '}';
+        return "Fruit{" + "fruitName='" + fruitName + '\'' + '}';
     }
 }

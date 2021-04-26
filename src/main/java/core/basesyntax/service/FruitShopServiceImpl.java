@@ -1,20 +1,22 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.ProductDao;
-import core.basesyntax.model.ProductFactory;
+import core.basesyntax.model.Transaction;
 import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.parser.FileEntryParser;
+import core.basesyntax.service.parser.FileEntryParserImpl;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private final CsvReader reader;
+    private final FileEntryReader reader;
     private final OperationStrategy handlers;
     private final ProductDao productDao;
-    private final CsvWriter writer;
+    private final FileEntryWriter writer;
 
-    public FruitShopServiceImpl(CsvReader reader,
+    public FruitShopServiceImpl(FileEntryReader reader,
                                 OperationStrategy operationStrategy,
                                 ProductDao productDao,
-                                CsvWriter writer) {
+                                FileEntryWriter writer) {
         this.reader = reader;
         this.handlers = operationStrategy;
         this.productDao = productDao;
@@ -23,10 +25,10 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public void createReport(String pathFrom, String pathTo) {
-        ProductParser parser = new ProductParserImpl();
+        FileEntryParser parser = new FileEntryParserImpl();
         List<String> records = reader.readFile(pathFrom);
-        List<ProductFactory> productFactories = parser.parseProduct(records);
-        for (ProductFactory product : productFactories) {
+        List<Transaction> productFactories = parser.parseProduct(records);
+        for (Transaction product : productFactories) {
             OperationHandler handler = handlers.get(product.getOperation());
             int amount = handler.apply(product.getAmount(), product.getFruit());
             productDao.add(product.getFruit(), amount);

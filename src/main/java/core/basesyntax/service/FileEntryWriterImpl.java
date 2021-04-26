@@ -6,12 +6,12 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CsvWriterImpl implements CsvWriter {
+public class FileEntryWriterImpl implements FileEntryWriter {
     private static final String TITLE = "fruit, quantity";
     private static final String ERROR_MESSAGE = "Can't write to file in this path";
     private final ProductDao productDao;
 
-    public CsvWriterImpl(ProductDaoImpl productDao) {
+    public FileEntryWriterImpl(ProductDaoImpl productDao) {
         this.productDao = productDao;
     }
 
