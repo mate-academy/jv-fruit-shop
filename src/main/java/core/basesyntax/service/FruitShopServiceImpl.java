@@ -5,11 +5,11 @@ import java.util.List;
 public class FruitShopServiceImpl implements FruitShopService {
     private ReaderService readerService;
     private WriterService writerService;
-    private ProductsService productsService;
+    private WarehouseService warehouseService;
 
-    public FruitShopServiceImpl(ProductsService productsService,
+    public FruitShopServiceImpl(WarehouseService warehouseService,
                                 ReaderService readerService, WriterService writerService) {
-        this.productsService = productsService;
+        this.warehouseService = warehouseService;
         this.readerService = readerService;
         this.writerService = writerService;
     }
@@ -18,8 +18,8 @@ public class FruitShopServiceImpl implements FruitShopService {
     public void createReport(String filePathFrom, String filePathTo) {
         List<String> data = readerService.readFromFile(filePathFrom);
 
-        productsService.addToStorage(data);
-        List<String> report = productsService.getFromStorage();
+        warehouseService.addToStorage(data);
+        List<String> report = warehouseService.getFromStorage();
 
         writerService.writeToFile(report, filePathTo);
     }

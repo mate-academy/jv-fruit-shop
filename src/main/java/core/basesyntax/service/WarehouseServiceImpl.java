@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ProductsServiceImpl implements ProductsService {
+public class WarehouseServiceImpl implements WarehouseService {
     public static final String TITLE = "fruit,quantity";
     public static final String SEPARATOR = ",";
     public static final int TYPE_INDEX = 0;
@@ -16,7 +16,7 @@ public class ProductsServiceImpl implements ProductsService {
     private final OperationsStrategy operationStrategy;
     private final ProductDao productDao;
 
-    public ProductsServiceImpl(OperationsStrategy operationStrategy, ProductDao productDao) {
+    public WarehouseServiceImpl(OperationsStrategy operationStrategy, ProductDao productDao) {
         this.operationStrategy = operationStrategy;
         this.productDao = productDao;
     }

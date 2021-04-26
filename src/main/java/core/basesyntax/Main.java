@@ -12,9 +12,9 @@ import core.basesyntax.service.CsvReaderServiceImpl;
 import core.basesyntax.service.CsvWriterServiceImpl;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
-import core.basesyntax.service.ProductsService;
-import core.basesyntax.service.ProductsServiceImpl;
 import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.WarehouseService;
+import core.basesyntax.service.WarehouseServiceImpl;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.strategy.OperationsStrategy;
 import core.basesyntax.strategy.OperationsStrategyImpl;
@@ -34,12 +34,13 @@ public class Main {
 
         OperationsStrategy operationsStrategy = new OperationsStrategyImpl(operationMap);
         ProductDao productDao = new ProductDaoImpl();
-        ProductsService productsService = new ProductsServiceImpl(operationsStrategy, productDao);
+        WarehouseService warehouseService = new WarehouseServiceImpl(operationsStrategy,
+                productDao);
 
         ReaderService readerService = new CsvReaderServiceImpl();
         WriterService writerService = new CsvWriterServiceImpl();
 
-        FruitShopService fruitShopService = new FruitShopServiceImpl(productsService,
+        FruitShopService fruitShopService = new FruitShopServiceImpl(warehouseService,
                 readerService, writerService);
         fruitShopService.createReport(FILE_PATH_FROM, FILE_PATH_TO);
     }

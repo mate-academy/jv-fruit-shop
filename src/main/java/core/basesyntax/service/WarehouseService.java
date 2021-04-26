@@ -2,7 +2,7 @@ package core.basesyntax.service;
 
 import java.util.List;
 
-public interface ProductsService {
+public interface WarehouseService {
     void addToStorage(List<String> dataFromFile);
 
     List<String> getFromStorage();
