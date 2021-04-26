@@ -13,6 +13,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     public static final int TYPE_INDEX = 0;
     public static final int PRODUCT_NAME_INDEX = 1;
     public static final int AMOUNT_INDEX = 2;
+    public static final int INDEX_OF_DATA_START = 1;
     private final OperationsStrategy operationStrategy;
     private final ProductDao productDao;
 
@@ -23,7 +24,7 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public void addToStorage(List<String> dataFromFile) {
-        for (int i = 1; i < dataFromFile.size(); i++) {
+        for (int i = INDEX_OF_DATA_START; i < dataFromFile.size(); i++) {
             String[] data = dataFromFile.get(i).split(SEPARATOR);
             Product product = new Product(data[PRODUCT_NAME_INDEX]);
             int oldAmount = productDao.get(product);
@@ -40,20 +41,21 @@ public class WarehouseServiceImpl implements WarehouseService {
             int newAmount = operationStrategy.get(Operations.valueOf(operationTypeName))
                     .calculateAmount(oldAmount, amount);
 
-            productDao.add(new Product(data[PRODUCT_NAME_INDEX]), newAmount);
+            productDao.add(product, newAmount);
         }
     }
 
     @Override
-    public List<String> getFromStorage() {
+    public String getReportFromStorage() {
         List<String> data = new ArrayList<>();
-        data.add(TITLE);
-        Map<Product, Integer> products = productDao.getMap();
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append(TITLE);
+        Map<Product, Integer> products = productDao.getAll();
         for (Map.Entry<Product, Integer> productIntegerEntry : products.entrySet()) {
-            data.add(System.lineSeparator());
-            data.add(productIntegerEntry.getKey().getName()
+            reportBuilder.append(System.lineSeparator());
+            reportBuilder.append(productIntegerEntry.getKey().getName()
                     + SEPARATOR + productIntegerEntry.getValue());
         }
-        return data;
+        return reportBuilder.toString();
     }
 }

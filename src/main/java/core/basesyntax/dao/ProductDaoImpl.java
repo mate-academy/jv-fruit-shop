@@ -16,7 +16,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public Map<Product, Integer> getMap() {
+    public Map<Product, Integer> getAll() {
         return Storage.getProducts();
     }
 }

@@ -8,5 +8,5 @@ public interface ProductDao {
 
     int get(Product product);
 
-    Map<Product, Integer> getMap();
+    Map<Product, Integer> getAll();
 }

@@ -10,8 +10,6 @@ import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
 import core.basesyntax.service.CsvReaderServiceImpl;
 import core.basesyntax.service.CsvWriterServiceImpl;
-import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.FruitShopServiceImpl;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WarehouseService;
 import core.basesyntax.service.WarehouseServiceImpl;
@@ -19,6 +17,7 @@ import core.basesyntax.service.WriterService;
 import core.basesyntax.strategy.OperationsStrategy;
 import core.basesyntax.strategy.OperationsStrategyImpl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -38,10 +37,10 @@ public class Main {
                 productDao);
 
         ReaderService readerService = new CsvReaderServiceImpl();
+        List<String> data = readerService.readFromFile(FILE_PATH_FROM);
+        warehouseService.addToStorage(data);
+        String report = warehouseService.getReportFromStorage();
         WriterService writerService = new CsvWriterServiceImpl();
-
-        FruitShopService fruitShopService = new FruitShopServiceImpl(warehouseService,
-                readerService, writerService);
-        fruitShopService.createReport(FILE_PATH_FROM, FILE_PATH_TO);
+        writerService.writeToFile(report, FILE_PATH_TO);
     }
 }

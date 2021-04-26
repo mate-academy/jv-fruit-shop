@@ -5,5 +5,5 @@ import java.util.List;
 public interface WarehouseService {
     void addToStorage(List<String> dataFromFile);
 
-    List<String> getFromStorage();
+    String getReportFromStorage();
 }
