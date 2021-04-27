@@ -10,7 +10,9 @@ import core.basesyntax.report.ReportMakerImpl;
 import core.basesyntax.store.strategy.*;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String PATH_FOR_DB_OK =
@@ -20,9 +22,6 @@ public class Main {
     private static final String REPORT_PATH =
             "src/main/store/report/report.csv";
 
-    static Parser parser;
-    static ReportMaker reportMaker;
-
     public static void main(String[] args) throws IOException {
         ReaderService readerService = new ReaderServiceImpl();
         List<String[]> list = readerService.readFromFile(PATH_FOR_DB_OK);
@@ -31,9 +30,9 @@ public class Main {
         typeHandlerMap.put("s", new SupplyHandler());
         typeHandlerMap.put("p", new PurchaseHandler());
         typeHandlerMap.put("r", new ReturnHandler());
-        parser = new ParserImpl(typeHandlerMap);
+        Parser parser = new ParserImpl(typeHandlerMap);
         List<Fruit> fruitList = parser.parseLines(list, typeHandlerMap.keySet());
-        reportMaker = new ReportMakerImpl();
+        ReportMaker reportMaker = new ReportMakerImpl();
         reportMaker.reportMaker(REPORT_PATH, fruitList);
     }
 }
