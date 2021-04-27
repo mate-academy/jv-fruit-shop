@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class FruitStoreServiceImpl implements FruitStoreService {
     private static final String REPORT_TITLE = "fruit,quantity";
     private static final String COMMA_DELIMITER = ",";
-    private static final int ACTIVITY_INDEX = 0;
+    private static final int ACTION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final int ZERO_NUM = 0;
@@ -37,7 +37,7 @@ public class FruitStoreServiceImpl implements FruitStoreService {
     public void addDataToStorage(List<String> data) {
         for (String record : data) {
             String[] currentActionData = record.split(COMMA_DELIMITER);
-            String actionType = currentActionData[ACTIVITY_INDEX];
+            String actionType = currentActionData[ACTION_INDEX];
             String fruitName = currentActionData[FRUIT_NAME_INDEX];
             Fruit fruit = new Fruit(fruitName);
             int inputQuantity = Integer.parseInt(currentActionData[QUANTITY_INDEX]);
