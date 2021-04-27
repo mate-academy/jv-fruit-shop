@@ -20,13 +20,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE = "src/main/resources/input.csv";
-    private static final String REPORT = "src/main/resources/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
     private static final Map<Operations, FruitsService> fruitStrategies = new HashMap<>();
 
     public static void main(String[] args) {
         InputFileCreator inputFileCreator = new InputFileCreatorImpl();
-        inputFileCreator.create(INPUT_FILE);
+        inputFileCreator.create(INPUT_FILE_PATH);
         FruitDataBase fruitDataBase = new FruitDataBase();
         fruitDataBase.setFruitShopData("apple", 0);
         fruitDataBase.setFruitShopData("banana", 0);
@@ -39,13 +39,13 @@ public class Main {
         fruitStrategies.put(Operations.getEnum("p"), fruitsDecreasing);
 
         FileServiceReader fileServiceReader = new FileServiceReaderImpl();
-        List<String> dataFromFile = fileServiceReader.read(INPUT_FILE);
+        List<String> dataFromFile = fileServiceReader.read(INPUT_FILE_PATH);
 
         DataParser dataAnalyzer = new DataParserImpl();
         dataAnalyzer.convert(dataFromFile, fruitStrategies, fruitDataBase);
 
         ReportCreator reportCreator = new ReportCreatorImpl();
         FileServiceWritter fileServiceWritter = new FileServiceWritterImpl();
-        fileServiceWritter.write(reportCreator.report(fruitDataBase), REPORT);
+        fileServiceWritter.write(reportCreator.generateReport(fruitDataBase), REPORT_FILE_PATH);
     }
 }
