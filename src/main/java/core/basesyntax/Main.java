@@ -26,18 +26,13 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ReaderService readerService = new ReaderServiceImpl();
         List<String[]> list = readerService.readFromFile(PATH_FOR_DB_OK);
-        Set<String> set = new HashSet<>();
-        set.add("b");
-        set.add("p");
-        set.add("s");
-        set.add("r");
         Map<String, TypeHandler> typeHandlerMap = new HashMap<>();
         typeHandlerMap.put("b", new BalanceHandler());
         typeHandlerMap.put("s", new SupplyHandler());
         typeHandlerMap.put("p", new PurchaseHandler());
         typeHandlerMap.put("r", new ReturnHandler());
         parser = new ParserImpl(typeHandlerMap);
-        List<Fruit> fruitList = parser.parseLines(list, set);
+        List<Fruit> fruitList = parser.parseLines(list, typeHandlerMap.keySet());
         reportMaker = new ReportMakerImpl();
         reportMaker.reportMaker(REPORT_PATH, fruitList);
     }
