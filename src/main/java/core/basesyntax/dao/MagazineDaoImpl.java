@@ -27,16 +27,21 @@ public class MagazineDaoImpl implements MagazineDao {
                 if (key.equals(fruitFromStorage.getFruitName())) {
                     int oldValue = actualStorage.get(key);
                     int newValue = oldValue + fruit.getQuantity();
-                    if (newValue >= 0) {
+                    if (isValid(newValue, fruit)) {
                         actualStorage.put(key, newValue);
                         break;
-                    } else {
-                        throw new IncorrectPurchaseRequestException("You can't buy "
-                                + -fruit.getQuantity() + " " + fruit.getFruitName()
-                                + "'s because it left not enough(" + oldValue + ")");
                     }
                 }
             }
         }
+    }
+
+    private boolean isValid(int value, Fruit fruit) {
+        if (value < 0) {
+            throw new IncorrectPurchaseRequestException("You can't buy "
+                    + -fruit.getQuantity() + " " + fruit.getFruitName()
+                    + "'s because it left not enough");
+        }
+        return true;
     }
 }
