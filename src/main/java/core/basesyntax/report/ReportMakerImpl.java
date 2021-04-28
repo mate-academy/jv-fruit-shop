@@ -4,8 +4,7 @@ import core.basesyntax.csv.writer.WriterService;
 import core.basesyntax.csv.writer.WriterServiceImpl;
 import core.basesyntax.model.Fruit;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 public class ReportMakerImpl implements ReportMaker {
@@ -17,9 +16,11 @@ public class ReportMakerImpl implements ReportMaker {
 
     @Override
     public void reportMaker(String path, List<Fruit> storage) throws IOException {
-        FileWriter fileWriter = new FileWriter(path);
-        fileWriter.write("fruit,quantity");
-        writerService.writeToFile(fileWriter, storage);
-        fileWriter.close();
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
+            bufferedWriter.write("fruit,quantity");
+            writerService.writeToFile(bufferedWriter, storage);
+        } catch (IOException e) {
+            throw new RuntimeException("Cant find file by path: " + path, e);
+        }
     }
 }
