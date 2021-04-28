@@ -1,20 +1,12 @@
 package core.basesyntax.activity;
 
-import core.basesyntax.managing.storage.HandleGoods;
+import core.basesyntax.storage.dao.HandleGoods;
 import java.util.Map;
 
 public class ActivityStrategyImpl implements PickActivityStrategy {
-    private Map<Activities, HandleGoods> handleGoodsMap;
+    private final Map<Activities, HandleGoods> handleGoodsMap;
 
     public ActivityStrategyImpl(Map<Activities, HandleGoods> handleGoodsMap) {
-        this.handleGoodsMap = handleGoodsMap;
-    }
-
-    public Map<Activities, HandleGoods> getHandleGoodsMap() {
-        return handleGoodsMap;
-    }
-
-    public void setHandleGoodsMap(Map<Activities, HandleGoods> handleGoodsMap) {
         this.handleGoodsMap = handleGoodsMap;
     }
 

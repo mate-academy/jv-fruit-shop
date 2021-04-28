@@ -1,6 +1,6 @@
 package core.basesyntax.activity;
 
-import core.basesyntax.managing.storage.HandleGoods;
+import core.basesyntax.storage.dao.HandleGoods;
 
 public interface PickActivityStrategy {
     HandleGoods get(Activities activities);
