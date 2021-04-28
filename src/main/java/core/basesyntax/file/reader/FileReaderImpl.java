@@ -1,18 +1,17 @@
-package core.basesyntax.csv.reader;
+package core.basesyntax.file.reader;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ReaderServiceImpl implements ReaderService {
+public class FileReaderImpl implements FileReader {
 
 
     @Override
-    public List<String> readFromFile(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+    public List<String> read(String filePath) {
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
             List<String> fruitList = new ArrayList<>();
             reader.readLine();
             String line;

@@ -3,8 +3,8 @@ package core.basesyntax;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.parser.Parser;
 import core.basesyntax.parser.ParserImpl;
-import core.basesyntax.csv.reader.ReaderService;
-import core.basesyntax.csv.reader.ReaderServiceImpl;
+import core.basesyntax.file.reader.FileReader;
+import core.basesyntax.file.reader.FileReaderImpl;
 import core.basesyntax.report.ReportMaker;
 import core.basesyntax.report.ReportMakerImpl;
 import core.basesyntax.store.strategy.*;
@@ -23,8 +23,8 @@ public class Main {
             "src/main/store/report/report.csv";
 
     public static void main(String[] args) throws IOException {
-        ReaderService readerService = new ReaderServiceImpl();
-        List<String> list = readerService.readFromFile(PATH_FOR_DB_OK);
+        FileReader readerService = new FileReaderImpl();
+        List<String> list = readerService.read(PATH_FOR_DB_OK);
         Map<String, TypeHandler> typeHandlerMap = new HashMap<>();
         typeHandlerMap.put("b", new BalanceHandler());
         typeHandlerMap.put("s", new SupplyHandler());
