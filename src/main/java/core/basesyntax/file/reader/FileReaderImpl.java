@@ -10,7 +10,6 @@ public class FileReaderImpl implements FileReader {
     public List<String> read(String filePath) {
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
             List<String> fruitList = new ArrayList<>();
-            reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
                 fruitList.add(line);

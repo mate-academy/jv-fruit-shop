@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitRecord;
 import java.util.List;
 
 public interface StorageService {
-    List<Fruit> getReport(List<FruitRecord> fruitRecordList);
+    List<Fruit> saveData(List<FruitRecord> fruitRecordList);
 
-    void reportMaker(String path, List<Fruit> storage);
+    String getReport(List<Fruit> storage);
 }

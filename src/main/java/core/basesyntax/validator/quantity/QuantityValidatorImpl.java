@@ -3,10 +3,10 @@ package core.basesyntax.validator.quantity;
 public class QuantityValidatorImpl implements QuantityValidator {
     @Override
     public boolean isQuantityCorrectForPurchase(long quantity,
-                                               long fruitBalance, int lineNumber) {
+                                               long fruitBalance) {
         if (quantity > fruitBalance) {
-            throw new UnavailableQuantityException("Line " + lineNumber
-                    + " has unavailable value for quantity");
+            throw new UnavailableQuantityException(
+                    "This quantity is unavailable at the moment");
         }
         return true;
     }

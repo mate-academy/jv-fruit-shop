@@ -6,12 +6,12 @@ import core.basesyntax.dao.FruitDaoImpl;
 public class ReturnHandler implements TypeHandler {
     private final FruitDao fruitDao;
 
-    public ReturnHandler() {
-        fruitDao = new FruitDaoImpl();
+    public ReturnHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
-    public void makeOperation(String fruitName, long quantity, int lineNumber) {
+    public void makeOperation(String fruitName, long quantity) {
         fruitDao.update(fruitName, quantity);
     }
 }

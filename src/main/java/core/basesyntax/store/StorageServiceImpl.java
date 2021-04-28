@@ -12,51 +12,34 @@ import java.util.List;
 
 
 public class StorageServiceImpl implements StorageService {
-    private TypeStrategy typeStrategy;
+    private static final String CSV_SEPARATOR = ",";
+    private final TypeStrategy typeStrategy;
     private final FruitDao fruitDao;
-    private FileWriter writerService;
 
-    public StorageServiceImpl(TypeStrategy typeStrategy, FruitDao fruitDao,
-                              FileWriter writerService) {
+    public StorageServiceImpl(TypeStrategy typeStrategy, FruitDao fruitDao) {
         this.typeStrategy = typeStrategy;
         this.fruitDao = fruitDao;
-        this.writerService = writerService;
     }
 
     @Override
-    public List<Fruit> getReport (List<FruitRecord> fruitRecordList) {
-        int lineNumber = 0;
+    public List<Fruit> saveData (List<FruitRecord> fruitRecordList) {
         for(FruitRecord fruitRecord: fruitRecordList) {
-            saveData(fruitRecord, lineNumber);
-            lineNumber++;
+            typeStrategy.get(fruitRecord.getOperationType())
+                    .makeOperation(fruitRecord.getFruit().getName(),
+                            fruitRecord.getFruit().getBalance());
         }
         return fruitDao.getAll();
     }
 
     @Override
-    public void reportMaker(String path, List<Fruit> storage) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(path))) {
-            bufferedWriter.write("fruit,quantity");
-            writerService.write(bufferedWriter, storage);
-        } catch (IOException e) {
-            throw new RuntimeException("Cant find file by path: " + path, e);
+    public String getReport(List<Fruit> storage) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("fruit,quantity");
+        for (Fruit fruit: storage) {
+            stringBuilder.append("\n" + fruit.getName()
+                    + CSV_SEPARATOR + fruit.getBalance());
         }
+       return stringBuilder.toString();
     }
 
-    @Override
-    public void createNewFruit(String name, long quantity) {
-        fruitDao.add(new Fruit(name, quantity));
-    }
-
-    @Override
-    public Fruit makeFruit(String name, long quantity) {
-        return new Fruit(name, quantity);
-    }
-
-
-    private void saveData(FruitRecord fruitRecord, int lineNumber) {
-        typeStrategy.get(fruitRecord.getOperationType())
-                .makeOperation(fruitRecord.getFruit().getName(),
-                        fruitRecord.getFruit().getBalance(), lineNumber);
-    }
 }

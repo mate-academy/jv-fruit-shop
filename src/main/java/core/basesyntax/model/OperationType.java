@@ -6,7 +6,7 @@ public enum OperationType {
     P,
     R;
 
-    public static boolean isMember(String value) {
+    public static boolean isPresent(String value) {
         for (OperationType operation : OperationType.values()) {
             if (operation.toString().equalsIgnoreCase(value)) {
                 return true;

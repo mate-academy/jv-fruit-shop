@@ -6,14 +6,14 @@ import core.basesyntax.store.StorageService;
 import core.basesyntax.store.StorageServiceImpl;
 
 public class BalanceHandler implements TypeHandler {
-    FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
     public BalanceHandler(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
     @Override
-    public void makeOperation(String fruitName, long quantity, int lineNumber) {
+    public void makeOperation(String fruitName, long quantity) {
         fruitDao.add(new Fruit(fruitName, quantity));
     }
 }

@@ -1,16 +1,16 @@
 package core.basesyntax.file.writer;
 
-import core.basesyntax.model.Fruit;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.util.List;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void write(BufferedWriter bufferedWriter, List<Fruit> fruitList) throws IOException {
-        for (Fruit fruit : fruitList) {
-            bufferedWriter.write("\n" + fruit.getName() + "," + fruit.getBalance());
+    public void write(String path, String fileContent) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(path))) {
+            bufferedWriter.write(fileContent);
+        } catch (IOException e) {
+            throw new RuntimeException("File not found by path " + path, e);
         }
+
     }
 }

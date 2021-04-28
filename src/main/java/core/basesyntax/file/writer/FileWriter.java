@@ -7,5 +7,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface FileWriter {
-    void write(BufferedWriter bufferedWriter, List<Fruit> fruitList) throws IOException;
+    void write(String path, String fileContent);
 }

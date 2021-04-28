@@ -17,7 +17,7 @@ public class ValidatorImpl implements Validator {
     }
 
     @Override
-    public void lineValidator(String[] line, int lineNumber) {
+    public void validateLine(String[] line, int lineNumber) {
         lineLengthValidator.isLengthCorrect(line, lineNumber);
         typeValidator.isTypeCorrect(line[0], lineNumber);
         quantityValidator.isQuantityLessThanZero(Long.parseLong(line[2]), lineNumber);

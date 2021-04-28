@@ -1,5 +1,5 @@
 package core.basesyntax.validator;
 
 public interface Validator {
-    void lineValidator(String[] line, int lineNumber);
+    void validateLine(String[] line, int lineNumber);
 }

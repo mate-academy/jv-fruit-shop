@@ -9,16 +9,17 @@ public class PurchaseHandler implements TypeHandler {
     private final FruitDao fruitDao;
     private final QuantityValidator quantityValidator;
 
-    public PurchaseHandler() {
-        fruitDao = new FruitDaoImpl();
-        quantityValidator = new QuantityValidatorImpl();
+    public PurchaseHandler(FruitDao fruitDao,
+                           QuantityValidator quantityValidator) {
+        this.fruitDao = fruitDao;
+        this.quantityValidator = quantityValidator;
     }
 
     @Override
-    public void makeOperation(String fruitName, long quantity, int lineNumber) {
+    public void makeOperation(String fruitName, long quantity) {
         long fruitBalance = fruitDao.getBalance(fruitName);
         quantityValidator.isQuantityCorrectForPurchase(quantity,
-                fruitBalance, lineNumber);
+                fruitBalance);
         fruitDao.update(fruitName, -quantity);
     }
 }
