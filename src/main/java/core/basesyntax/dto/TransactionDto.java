@@ -1,11 +1,13 @@
 package core.basesyntax.dto;
 
-public class Dto {
-    private String operation;
-    private String fruit;
-    private Integer amount;
+import core.basesyntax.model.Fruit;
 
-    public Dto(String operation, String fruit, Integer amount) {
+public class TransactionDto {
+    private final String operation;
+    private final Fruit fruit;
+    private final Integer amount;
+
+    public TransactionDto(String operation, Fruit fruit, Integer amount) {
         this.operation = operation;
         this.fruit = fruit;
         this.amount = amount;
@@ -15,7 +17,7 @@ public class Dto {
         return operation;
     }
 
-    public String getFruit() {
+    public Fruit getFruit() {
         return fruit;
     }
 

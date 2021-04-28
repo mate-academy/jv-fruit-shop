@@ -1,10 +1,11 @@
 package core.basesyntax;
 
-import core.basesyntax.data.DataAnalyzer;
 import core.basesyntax.data.DataParser;
-import core.basesyntax.data.impl.FruitShopAnalyzer;
+import core.basesyntax.data.FruitService;
+import core.basesyntax.data.impl.FruitServiceImpl;
 import core.basesyntax.data.impl.FruitShopDataParser;
-import core.basesyntax.dto.Dto;
+import core.basesyntax.model.Operation;
+import core.basesyntax.dto.TransactionDto;
 import core.basesyntax.handlers.FruitsDecrement;
 import core.basesyntax.handlers.FruitsIncrement;
 import core.basesyntax.services.FileServiceReader;
@@ -13,9 +14,7 @@ import core.basesyntax.services.InputFileCreator;
 import core.basesyntax.services.impl.FileServiceReaderImpl;
 import core.basesyntax.services.impl.FileServiceWritterImpl;
 import core.basesyntax.services.impl.InputFileCreatorImpl;
-import core.basesyntax.storage.FruitDataBase;
 import core.basesyntax.strategy.FruitsStrategy;
-import core.basesyntax.strategy.Operations;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,26 +26,23 @@ public class Main {
     public static void main(String[] args) {
         InputFileCreator inputFileCreator = new InputFileCreatorImpl();
         inputFileCreator.create(INPUT_FILE_PATH);
-        FruitDataBase fruitDataBase = new FruitDataBase();
-        fruitDataBase.setFruitShopData("apple", 0);
-        fruitDataBase.setFruitShopData("banana", 0);
 
-        Map<Operations, FruitsStrategy> fruitStrategies = new HashMap<>();
+        Map<Operation, FruitsStrategy> fruitStrategies = new HashMap<>();
         FruitsStrategy fruitsIncreasing = new FruitsIncrement();
         FruitsStrategy fruitsDecreasing = new FruitsDecrement();
-        fruitStrategies.put(Operations.getEnum("b"), fruitsIncreasing);
-        fruitStrategies.put(Operations.getEnum("r"), fruitsIncreasing);
-        fruitStrategies.put(Operations.getEnum("s"), fruitsIncreasing);
-        fruitStrategies.put(Operations.getEnum("p"), fruitsDecreasing);
+        fruitStrategies.put(Operation.getEnum("b"), fruitsIncreasing);
+        fruitStrategies.put(Operation.getEnum("r"), fruitsIncreasing);
+        fruitStrategies.put(Operation.getEnum("s"), fruitsIncreasing);
+        fruitStrategies.put(Operation.getEnum("p"), fruitsDecreasing);
 
         FileServiceReader fileServiceReader = new FileServiceReaderImpl();
         List<String> dataFromFile = fileServiceReader.read(INPUT_FILE_PATH);
 
         DataParser dataParser = new FruitShopDataParser();
-        List<Dto> listWithFruits = dataParser.convert(dataFromFile);
+        List<TransactionDto> listWithFruits = dataParser.convert(dataFromFile);
 
-        DataAnalyzer dataAnalyzer = new FruitShopAnalyzer(fruitDataBase, fruitStrategies);
-        dataAnalyzer.analyze(listWithFruits);
+        FruitService dataAnalyzer = new FruitServiceImpl(fruitStrategies);
+        dataAnalyzer.applyOperationsOnFruitsDto(listWithFruits);
         String report = dataAnalyzer.generateReport();
 
         FileServiceWritter fileServiceWritter = new FileServiceWritterImpl();

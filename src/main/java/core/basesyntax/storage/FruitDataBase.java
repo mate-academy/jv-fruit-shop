@@ -1,24 +1,13 @@
 package core.basesyntax.storage;
 
+import core.basesyntax.model.Fruit;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FruitDataBase {
-    private final Map<String, Integer> fruitShopData;
+    private static final Map<Fruit, Integer> fruitData = new HashMap<>();
 
-    public FruitDataBase() {
-        fruitShopData = new HashMap<>();
-    }
-
-    public Integer getFruitShopData(String key) {
-        return fruitShopData.get(key);
-    }
-
-    public Map<String, Integer> getDataBaseCopy() {
-        return new HashMap<>(fruitShopData);
-    }
-
-    public void setFruitShopData(String key, Integer value) {
-        fruitShopData.put(key, value);
+    public static Map<Fruit, Integer> getFruitData() {
+        return fruitData;
     }
 }

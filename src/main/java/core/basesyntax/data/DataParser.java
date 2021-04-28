@@ -1,8 +1,8 @@
 package core.basesyntax.data;
 
-import core.basesyntax.dto.Dto;
+import core.basesyntax.dto.TransactionDto;
 import java.util.List;
 
 public interface DataParser {
-    List<Dto> convert(List<String> listWithRawData);
+    List<TransactionDto> convert(List<String> listWithRawData);
 }

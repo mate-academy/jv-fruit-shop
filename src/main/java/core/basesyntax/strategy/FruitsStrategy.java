@@ -1,8 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dto.Dto;
-import core.basesyntax.storage.FruitDataBase;
+import core.basesyntax.dto.TransactionDto;
 
 public interface FruitsStrategy {
-    int change(Dto fruitDto, FruitDataBase fruitDataBase);
+    int change(TransactionDto fruitDto);
 }

@@ -1,17 +1,17 @@
-package core.basesyntax.strategy;
+package core.basesyntax.model;
 
 import core.basesyntax.exceptions.IllegalOperationException;
 
-public enum Operations {
+public enum Operation {
     P("p"), S("s"), R("r"), B("b");
 
     private final String operation;
 
-    Operations(String operation) {
+    Operation(String operation) {
         this.operation = operation;
     }
 
-    public static Operations getEnum(String operation) {
+    public static Operation getEnum(String operation) {
         switch (operation) {
             case "p" :
                 return P;
