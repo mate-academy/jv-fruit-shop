@@ -4,9 +4,9 @@ import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public interface FruitStoreDao {
-    void addFruit(Fruit fruit, int newQuantity);
+    void add(Fruit fruit, int newQuantity);
 
-    int getFruitQuantity(Fruit fruit);
+    int getQuantity(Fruit fruit);
 
-    Map<Fruit, Integer> getAllFruits();
+    Map<Fruit, Integer> getAll();
 }

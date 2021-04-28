@@ -13,7 +13,6 @@ public class ReaderServiceImpl implements ReaderService {
         Path filePath = Paths.get(inputDataFile);
         try {
             return Files.lines(filePath)
-                    .skip(1)
                     .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + inputDataFile, e);

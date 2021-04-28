@@ -13,6 +13,6 @@ public enum Action {
     }
 
     public String getActionCode() {
-        return this.actionCode;
+        return actionCode;
     }
 }
