@@ -9,8 +9,4 @@ public interface StorageService {
     List<Fruit> getReport(List<FruitRecord> fruitRecordList);
 
     void reportMaker(String path, List<Fruit> storage);
-
-    void createNewFruit(String name, long quantity);
-
-    Fruit makeFruit(String name, long quantity);
 }
