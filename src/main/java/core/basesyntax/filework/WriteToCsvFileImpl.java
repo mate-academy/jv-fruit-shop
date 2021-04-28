@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
-public class WriteToCSVFileImpl implements WriteToFile {
+public class WriteToCsvFileImpl implements WriteToFile {
     private static final String SEPARATOR = System.getProperty("line.separator");
     private static final String COMA = ",";
 

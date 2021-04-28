@@ -23,15 +23,10 @@ public class MagazineDaoImpl implements MagazineDao {
         if (!actualStorage.containsKey(fruitFromStorage.getFruitName())) {
             actualStorage.put(fruitFromStorage.getFruitName(), fruitFromStorage.getQuantity());
         } else {
-            for (String key : actualStorage.keySet()) {
-                if (key.equals(fruitFromStorage.getFruitName())) {
-                    int oldValue = actualStorage.get(key);
-                    int newValue = oldValue + fruit.getQuantity();
-                    if (isValid(newValue, fruit)) {
-                        actualStorage.put(key, newValue);
-                        break;
-                    }
-                }
+            int oldValue = actualStorage.get(fruit.getFruitName());
+            int newValue = oldValue + fruit.getQuantity();
+            if (isValid(newValue, fruit)) {
+                actualStorage.put(fruit.getFruitName(), newValue);
             }
         }
     }

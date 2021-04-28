@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ReadFromCSVFileImpl implements ReadFromFile {
+public class ReadFromCsvFileImpl implements ReadFromFile {
     private static final String COMA = ",";
 
     @Override

@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.MagazineDaoImpl;
-import core.basesyntax.filework.ReadFromCSVFileImpl;
-import core.basesyntax.filework.WriteToCSVFileImpl;
+import core.basesyntax.filework.ReadFromCsvFileImpl;
+import core.basesyntax.filework.WriteToCsvFileImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitServiceImpl;
@@ -25,7 +25,7 @@ public class Main {
 
         TypeStrategy typeStrategy = new TypeStrategyImpl(typeHandlerMap);
         FruitService fruitService = new FruitServiceImpl(new MagazineDaoImpl(), typeStrategy,
-                new ReadFromCSVFileImpl(), new WriteToCSVFileImpl());
+                new ReadFromCsvFileImpl(), new WriteToCsvFileImpl());
         fruitService.createReport();
     }
 }

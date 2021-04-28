@@ -17,16 +17,8 @@ public class Fruit {
         return actionType;
     }
 
-    public void setActionType(Type actionType) {
-        this.actionType = actionType;
-    }
-
     public String getFruitName() {
         return fruitName;
-    }
-
-    public void setFruitName(String fruitName) {
-        this.fruitName = fruitName;
     }
 
     public int getQuantity() {
