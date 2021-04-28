@@ -1,31 +1,27 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.MagazineDaoImpl;
-import core.basesyntax.filework.ReadFromCsvFileImpl;
-import core.basesyntax.filework.WriteToCsvFileImpl;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.filework.CsvFileReaderImpl;
+import core.basesyntax.filework.CsvFileWriterImpl;
+import core.basesyntax.model.Type;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitServiceImpl;
-import core.basesyntax.service.TypeStrategy;
-import core.basesyntax.service.TypeStrategyImpl;
-import core.basesyntax.service.strategy.AdditionOperationTypeHandler;
-import core.basesyntax.service.strategy.ReduceOperationTypeHandler;
-import core.basesyntax.service.strategy.TypeHandler;
+import core.basesyntax.service.strategy.DecreaseOperationHandler;
+import core.basesyntax.service.strategy.IncreaseOperationHandler;
+import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) {
-        Map<Fruit.Type, TypeHandler> typeHandlerMap = new HashMap<>();
-        typeHandlerMap.put(Fruit.Type.b, new AdditionOperationTypeHandler());
-        typeHandlerMap.put(Fruit.Type.s, new AdditionOperationTypeHandler());
-        typeHandlerMap.put(Fruit.Type.r, new AdditionOperationTypeHandler());
-        typeHandlerMap.put(Fruit.Type.p, new ReduceOperationTypeHandler());
+        Map<Type, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Type.BALANCE, new IncreaseOperationHandler());
+        operationHandlerMap.put(Type.SUPPLY, new IncreaseOperationHandler());
+        operationHandlerMap.put(Type.RETURN, new IncreaseOperationHandler());
+        operationHandlerMap.put(Type.PURCHASE, new DecreaseOperationHandler());
 
-        TypeStrategy typeStrategy = new TypeStrategyImpl(typeHandlerMap);
-        FruitService fruitService = new FruitServiceImpl(new MagazineDaoImpl(), typeStrategy,
-                new ReadFromCsvFileImpl(), new WriteToCsvFileImpl());
-        fruitService.createReport();
+        FruitService fruitService = new FruitServiceImpl(new CsvFileReaderImpl(),
+                new CsvFileWriterImpl());
+        fruitService.createReport(operationHandlerMap);
     }
 }
