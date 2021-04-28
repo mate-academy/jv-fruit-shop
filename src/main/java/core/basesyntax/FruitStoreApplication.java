@@ -2,11 +2,11 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitStoreDao;
 import core.basesyntax.dao.FruitStoreDaoImpl;
+import core.basesyntax.model.Action;
 import core.basesyntax.service.ActionStrategy;
 import core.basesyntax.service.ActionStrategyImpl;
 import core.basesyntax.service.FruitStoreService;
 import core.basesyntax.service.FruitStoreServiceImpl;
-import core.basesyntax.service.action.Action;
 import core.basesyntax.service.action.ActionHandler;
 import core.basesyntax.service.action.BalanceActionHandler;
 import core.basesyntax.service.action.PurchaseActionHandler;

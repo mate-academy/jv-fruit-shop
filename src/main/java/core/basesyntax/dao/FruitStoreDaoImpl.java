@@ -12,8 +12,8 @@ public class FruitStoreDaoImpl implements FruitStoreDao {
     }
 
     @Override
-    public Optional<Integer> getFruitQuantity(Fruit fruit) {
-        return Optional.ofNullable(Storage.getFruits().get(fruit));
+    public int getFruitQuantity(Fruit fruit) {
+        return Optional.ofNullable(Storage.getFruits().get(fruit)).orElse(0);
     }
 
     @Override

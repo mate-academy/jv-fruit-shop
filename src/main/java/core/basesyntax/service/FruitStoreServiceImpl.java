@@ -13,7 +13,6 @@ public class FruitStoreServiceImpl implements FruitStoreService {
     private static final int ACTION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final int ZERO_NUM = 0;
     private FruitStoreDao fruitStoreDao;
     private ActionStrategy activityStrategy;
 
@@ -37,17 +36,16 @@ public class FruitStoreServiceImpl implements FruitStoreService {
     public void addDataToStorage(List<String> data) {
         for (String record : data) {
             String[] currentActionData = record.split(COMMA_DELIMITER);
-            String actionType = currentActionData[ACTION_INDEX];
-            String fruitName = currentActionData[FRUIT_NAME_INDEX];
-            Fruit fruit = new Fruit(fruitName);
+            Fruit fruit = new Fruit(currentActionData[FRUIT_NAME_INDEX]);
             int inputQuantity = Integer.parseInt(currentActionData[QUANTITY_INDEX]);
             if (inputQuantity < 0) {
                 throw new RuntimeException("Input data can't be negative!");
             }
-            int currentQuantity = fruitStoreDao.getFruitQuantity(fruit).orElse(ZERO_NUM);
+            int currentQuantity = fruitStoreDao.getFruitQuantity(fruit);
             ActionHandler actionHandler = activityStrategy
-                    .get(actionType)
-                    .orElseThrow(() -> new RuntimeException("Wrong action: " + actionType));
+                    .get(currentActionData[ACTION_INDEX])
+                    .orElseThrow(() -> new RuntimeException("Unknown action: "
+                            + currentActionData[ACTION_INDEX]));
             int newQuantity = actionHandler.calculateQuantity(currentQuantity, inputQuantity);
             fruitStoreDao.addFruit(fruit, newQuantity);
         }
