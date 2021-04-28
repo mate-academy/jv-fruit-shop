@@ -1,5 +1,6 @@
 package core.basesyntax.dao.validation;
 
+import core.basesyntax.dto.FruitDto;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.db.Storage;
 import java.util.List;
@@ -34,14 +35,14 @@ public class ValidatorImpl implements Validator {
             throw new RuntimeException(INVALID_ACTIVITY + operator);
         }
         if (operator.equals(BALANCE) && !Storage.getFruits().containsKey(fruitName)) {
-            strategy.get(operator).fruitActivity(fruitName, capacity);
+            strategy.get(operator).fruitActivity(new FruitDto(fruitName, capacity));
             return;
         }
         if (!Storage.getFruits().containsKey(fruitName)) {
             throw new RuntimeException(UNREGISTERED_FRUIT + fruitName);
         }
         if (!operator.equals(BALANCE)) {
-            strategy.get(operator).fruitActivity(fruitName, capacity);
+            strategy.get(operator).fruitActivity(new FruitDto(fruitName, capacity));
             if (Storage.getFruits().get(fruitName) >= 0) {
                 return;
             } else {

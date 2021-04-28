@@ -1,5 +1,6 @@
 package core.basesyntax.dao;
 
+import core.basesyntax.dto.FruitDto;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.dao.validation.Validator;
 import core.basesyntax.db.Storage;
@@ -37,6 +38,6 @@ public class FruitDaoImpl implements FruitDao {
 
     private void fruitsDistribution(String lineFromDb) {
         String[] fields = lineFromDb.split(SEPARATOR);
-        strategy.get(fields[0]).fruitActivity(fields[1], Integer.parseInt(fields[2]));
+        strategy.get(fields[0]).fruitActivity(new FruitDto(fields[1], Integer.parseInt(fields[2])));
     }
 }

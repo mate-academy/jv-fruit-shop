@@ -1,10 +1,12 @@
 package core.basesyntax.dao.strategy;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.dto.FruitDto;
 
 public class FruitSupplyOrReturn implements FruitOperations {
     @Override
-    public void fruitActivity(String fruit, int capacity) {
-        Storage.getFruits().replace(fruit, Storage.getFruits().get(fruit) + capacity);
+    public void fruitActivity(FruitDto fruitDto) {
+        Storage.getFruits().replace(fruitDto.getFruitName()
+                , Storage.getFruits().get(fruitDto.getFruitName()) + fruitDto.getQuantity());
     }
 }

@@ -1,5 +1,7 @@
 package core.basesyntax.dao.strategy;
 
+import core.basesyntax.dto.FruitDto;
+
 public interface FruitOperations {
-    void fruitActivity(String fruit, int capacity);
+    void fruitActivity(FruitDto fruitDto);
 }
