@@ -1,5 +1,6 @@
-package core.basesyntax.services;
+package core.basesyntax.services.impl;
 
+import core.basesyntax.services.FileServiceReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

@@ -3,10 +3,10 @@ package core.basesyntax.handlers;
 import core.basesyntax.data.DataValidator;
 import core.basesyntax.data.impl.PurchaseAmountValidator;
 import core.basesyntax.dto.Dto;
-import core.basesyntax.services.FruitsService;
+import core.basesyntax.services.FruitsStrategy;
 import core.basesyntax.storage.FruitDataBase;
 
-public class FruitsDecrement implements FruitsService {
+public class FruitsDecrement implements FruitsStrategy {
     @Override
     public int change(Dto fruitDto, FruitDataBase fruitDataBase) {
         Integer oldFruitAmount = fruitDataBase.getFruitShopData(fruitDto.getFruit());

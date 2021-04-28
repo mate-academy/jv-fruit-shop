@@ -5,7 +5,7 @@ import core.basesyntax.dto.Dto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataParserImpl implements DataParser {
+public class FruitShopDataParser implements DataParser {
     private static final String SPLIT_REGEX = ",";
     private static final int REQUIRED_LENGTH = 1;
     private static final int ZERO = 0;
