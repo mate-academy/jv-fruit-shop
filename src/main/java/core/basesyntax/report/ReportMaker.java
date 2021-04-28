@@ -6,5 +6,5 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ReportMaker {
-    void reportMaker(String path, List<Fruit> storage) throws IOException;
+    void reportMaker(String path, List<Fruit> storage);
 }

@@ -4,7 +4,7 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 
 public class ReturnHandler implements TypeHandler {
-    FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
     public ReturnHandler() {
         fruitDao = new FruitDaoImpl();

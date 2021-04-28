@@ -1,18 +1,14 @@
 package core.basesyntax.store;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
-import core.basesyntax.model.OperationType;
-import core.basesyntax.store.strategy.TypeHandler;
-
 import java.util.List;
-import java.util.Map;
+
 
 public class StorageServiceImpl implements StorageService {
-    TypeStrategy typeStrategy;
-    FruitDao fruitDao;
+    private final TypeStrategy typeStrategy;
+    private final FruitDao fruitDao;
 
     public StorageServiceImpl(TypeStrategy typeStrategy, FruitDao fruitDao) {
         this.typeStrategy = typeStrategy;

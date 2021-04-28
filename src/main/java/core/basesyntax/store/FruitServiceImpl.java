@@ -5,7 +5,7 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 
 public class FruitServiceImpl implements FruitService {
-    FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
     public FruitServiceImpl() {
         fruitDao = new FruitDaoImpl();

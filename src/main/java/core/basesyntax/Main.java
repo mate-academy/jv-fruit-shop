@@ -20,7 +20,6 @@ import core.basesyntax.store.strategy.*;
 import core.basesyntax.validator.Validator;
 import core.basesyntax.validator.ValidatorImpl;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +32,7 @@ public class Main {
     private static final String REPORT_PATH =
             "src/main/store/report/report.csv";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         FileReader readerService = new FileReaderImpl();
         List<String> list = readerService.read(PATH_FOR_DB_OK);
 

@@ -1,22 +1,12 @@
 package core.basesyntax.parser;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.store.FruitService;
-import core.basesyntax.store.FruitServiceImpl;
-import core.basesyntax.store.StorageService;
-import core.basesyntax.store.StorageServiceImpl;
 import core.basesyntax.store.record.FruitRecordService;
-import core.basesyntax.store.record.FruitRecordServiceImpl;
-import core.basesyntax.store.strategy.TypeHandler;
 import core.basesyntax.validator.Validator;
-import core.basesyntax.validator.ValidatorImpl;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ParserImpl implements Parser {
     private static final String CSV_SEPARATOR = ",";

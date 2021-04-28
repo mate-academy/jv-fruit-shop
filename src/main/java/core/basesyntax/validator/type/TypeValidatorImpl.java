@@ -3,13 +3,11 @@ package core.basesyntax.validator.type;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.validator.quantity.UnavailableQuantity;
 
-import java.util.Set;
-
 public class TypeValidatorImpl implements TypeValidator {
     @Override
     public void isTypeCorrect(String type, int lineNumber) {
         try {
-            if (OperationType.isMember(type)) {
+            if (!OperationType.isMember(type)) {
                 throw new UnavailableQuantity();
             }
         } catch (UnavailableQuantity e) {

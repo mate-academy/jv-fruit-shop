@@ -10,9 +10,9 @@ import core.basesyntax.validator.type.TypeValidatorImpl;
 import java.util.Set;
 
 public class ValidatorImpl implements Validator {
-    ValidateLineLength validateLineLength;
-    TypeValidator typeValidator;
-    QuantityValidator quantityValidator;
+    private final ValidateLineLength validateLineLength;
+    private final TypeValidator typeValidator;
+    private final QuantityValidator quantityValidator;
 
     public ValidatorImpl() {
         validateLineLength = new ValidateLineLengthImpl();
@@ -23,7 +23,7 @@ public class ValidatorImpl implements Validator {
     @Override
     public void lineValidator(String[] line, int lineNumber) {
         validateLineLength.isLengthCorrect(line, lineNumber);
-        //typeValidator.isTypeCorrect(line[0], lineNumber);
+        typeValidator.isTypeCorrect(line[0], lineNumber);
         quantityValidator.isQuantityLessThanZero(Long.parseLong(line[2]), lineNumber);
     }
 }

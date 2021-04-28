@@ -4,7 +4,7 @@ import core.basesyntax.store.FruitService;
 import core.basesyntax.store.FruitServiceImpl;
 
 public class BalanceHandler implements TypeHandler {
-    FruitService fruitService;
+    private final FruitService fruitService;
 
     public BalanceHandler() {
         fruitService = new FruitServiceImpl();

@@ -6,8 +6,8 @@ import core.basesyntax.validator.quantity.QuantityValidator;
 import core.basesyntax.validator.quantity.QuantityValidatorImpl;
 
 public class PurchaseHandler implements TypeHandler {
-    FruitDao fruitDao;
-    QuantityValidator quantityValidator;
+    private final FruitDao fruitDao;
+    private final QuantityValidator quantityValidator;
 
     public PurchaseHandler() {
         fruitDao = new FruitDaoImpl();
