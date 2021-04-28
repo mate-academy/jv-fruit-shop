@@ -1,4 +1,4 @@
-package core.basesyntax.services;
+package core.basesyntax.strategy;
 
 import core.basesyntax.dto.Dto;
 import core.basesyntax.storage.FruitDataBase;

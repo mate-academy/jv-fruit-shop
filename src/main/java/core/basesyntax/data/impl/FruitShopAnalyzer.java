@@ -2,9 +2,9 @@ package core.basesyntax.data.impl;
 
 import core.basesyntax.data.DataAnalyzer;
 import core.basesyntax.dto.Dto;
-import core.basesyntax.handlers.Operations;
-import core.basesyntax.services.FruitsStrategy;
 import core.basesyntax.storage.FruitDataBase;
+import core.basesyntax.strategy.FruitsStrategy;
+import core.basesyntax.strategy.Operations;
 import java.util.List;
 import java.util.Map;
 
@@ -24,5 +24,16 @@ public class FruitShopAnalyzer implements DataAnalyzer {
             fruitStrategies.get(Operations.getEnum(fruit.getOperation()))
                     .change(fruit, fruitDataBase);
         }
+    }
+
+    @Override
+    public String generateReport() {
+        StringBuilder report = new StringBuilder();
+        report.append("fruit,quantity").append(System.lineSeparator());
+        for (Map.Entry<String, Integer> entrySet : fruitDataBase.getDataBaseCopy().entrySet()) {
+            report.append(entrySet.getKey()).append(", ").append(entrySet.getValue())
+                    .append(System.lineSeparator());
+        }
+        return report.toString();
     }
 }

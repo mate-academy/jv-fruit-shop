@@ -2,22 +2,20 @@ package core.basesyntax;
 
 import core.basesyntax.data.DataAnalyzer;
 import core.basesyntax.data.DataParser;
-import core.basesyntax.data.ReportCreator;
 import core.basesyntax.data.impl.FruitShopAnalyzer;
 import core.basesyntax.data.impl.FruitShopDataParser;
-import core.basesyntax.data.impl.FruitShopReportCreator;
 import core.basesyntax.dto.Dto;
 import core.basesyntax.handlers.FruitsDecrement;
 import core.basesyntax.handlers.FruitsIncrement;
-import core.basesyntax.handlers.Operations;
 import core.basesyntax.services.FileServiceReader;
 import core.basesyntax.services.FileServiceWritter;
-import core.basesyntax.services.FruitsStrategy;
 import core.basesyntax.services.InputFileCreator;
 import core.basesyntax.services.impl.FileServiceReaderImpl;
 import core.basesyntax.services.impl.FileServiceWritterImpl;
 import core.basesyntax.services.impl.InputFileCreatorImpl;
 import core.basesyntax.storage.FruitDataBase;
+import core.basesyntax.strategy.FruitsStrategy;
+import core.basesyntax.strategy.Operations;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,9 +47,9 @@ public class Main {
 
         DataAnalyzer dataAnalyzer = new FruitShopAnalyzer(fruitDataBase, fruitStrategies);
         dataAnalyzer.analyze(listWithFruits);
+        String report = dataAnalyzer.generateReport();
 
-        ReportCreator reportCreator = new FruitShopReportCreator(fruitDataBase);
         FileServiceWritter fileServiceWritter = new FileServiceWritterImpl();
-        fileServiceWritter.write(reportCreator.generateReport(), REPORT_FILE_PATH);
+        fileServiceWritter.write(report, REPORT_FILE_PATH);
     }
 }

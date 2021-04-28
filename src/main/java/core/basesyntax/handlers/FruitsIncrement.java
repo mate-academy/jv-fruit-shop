@@ -1,8 +1,8 @@
 package core.basesyntax.handlers;
 
 import core.basesyntax.dto.Dto;
-import core.basesyntax.services.FruitsStrategy;
 import core.basesyntax.storage.FruitDataBase;
+import core.basesyntax.strategy.FruitsStrategy;
 
 public class FruitsIncrement implements FruitsStrategy {
     @Override

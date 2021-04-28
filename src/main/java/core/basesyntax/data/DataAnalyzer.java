@@ -5,5 +5,7 @@ import java.util.List;
 
 public interface DataAnalyzer {
     void analyze(List<Dto> listWithDtos);
+
+    String generateReport();
 }
 

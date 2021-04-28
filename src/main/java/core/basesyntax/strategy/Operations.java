@@ -1,4 +1,4 @@
-package core.basesyntax.handlers;
+package core.basesyntax.strategy;
 
 import core.basesyntax.exceptions.IllegalOperationException;
 
