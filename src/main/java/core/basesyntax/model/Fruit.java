@@ -28,12 +28,6 @@ public final class Fruit {
         return Objects.hash(name);
     }
 
-    @Override
-    public String toString() {
-        return "Fruit{" + "name='" + name + '\''
-                + ", amount=" + amount + '}';
-    }
-
     public String getName() {
         return name;
     }

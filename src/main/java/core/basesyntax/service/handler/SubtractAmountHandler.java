@@ -13,7 +13,7 @@ public class SubtractAmountHandler implements RecordHandler {
 
     @Override
     public long changeBalance(Fruit fruit) {
-        Optional<Fruit> fruitFromDB = fruitDao.get(fruit);
+        Optional<Fruit> fruitFromDB = fruitDao.get(fruit.getName());
         if (fruitFromDB.isEmpty() || fruitFromDB.get().getAmount() < fruit.getAmount()) {
             throw new IllegalArgumentException("You can't buy more fruits then the store contains");
         }

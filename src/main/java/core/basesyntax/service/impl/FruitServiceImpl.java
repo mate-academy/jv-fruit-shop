@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dto.FruitRecordDto;
 import core.basesyntax.service.FruitRecordStrategy;
 import core.basesyntax.service.FruitService;
@@ -10,9 +10,11 @@ import java.util.stream.Collectors;
 public class FruitServiceImpl implements FruitService {
     private static final String TITLE = "fruit,quantity" + System.lineSeparator();
     private final FruitRecordStrategy fruitRecordStrategy;
+    private final FruitDao fruitDao;
 
-    public FruitServiceImpl(FruitRecordStrategy fruitRecordStrategy) {
+    public FruitServiceImpl(FruitRecordStrategy fruitRecordStrategy, FruitDao fruitDao) {
         this.fruitRecordStrategy = fruitRecordStrategy;
+        this.fruitDao = fruitDao;
     }
 
     @Override
@@ -23,7 +25,7 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public String getFruitReport() {
-        return TITLE + Storage.storage.values().stream()
+        return TITLE + fruitDao.getAll().stream()
                 .map(fruit -> String.format("%s,%d",
                         fruit.getName(), fruit.getAmount()))
                 .collect(Collectors.joining(System.lineSeparator()));

@@ -13,9 +13,9 @@ public class AddAmountHandler implements RecordHandler {
 
     @Override
     public long changeBalance(Fruit fruit) {
-        Optional<Fruit> fruitFromDB = fruitDao.get(fruit);
-        if (fruitFromDB.isPresent()) {
-            long newBalance = fruitFromDB.get().getAmount() + fruit.getAmount();
+        Optional<Fruit> fruitFromDb = fruitDao.get(fruit.getName());
+        if (fruitFromDb.isPresent()) {
+            long newBalance = fruitFromDb.get().getAmount() + fruit.getAmount();
             fruit.setAmount(newBalance);
             fruitDao.save(fruit);
             return newBalance;

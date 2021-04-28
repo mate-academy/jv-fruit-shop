@@ -4,10 +4,12 @@ import core.basesyntax.model.Fruit;
 
 public class FruitRecordDto {
     private Fruit fruit;
+    private long amount;
     private Type type;
 
     public FruitRecordDto(Type type, String fruitName, long amount) {
         this.fruit = new Fruit(fruitName, amount);
+        this.amount = amount;
         this.type = type;
     }
 

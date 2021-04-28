@@ -34,11 +34,11 @@ public class Main {
         FruitRecordStrategy fruitRecordStrategy = new FruitRecordStrategyImpl(operationStrategies);
         FileService fileService = new FileServiceImpl();
         FruitRecordDtoParser fruitRecordDtoParser = new FruitRecordDtoParserImpl();
-        FruitService fruitService = new FruitServiceImpl(fruitRecordStrategy);
+        FruitService fruitService = new FruitServiceImpl(fruitRecordStrategy, fruitDao);
 
-        List<FruitRecordDto> fruitRecordDtoS = fruitRecordDtoParser.parse(
+        List<FruitRecordDto> fruitRecordDtos = fruitRecordDtoParser.parse(
                 fileService.readFile(INPUT_FILE));
-        fruitService.saveData(fruitRecordDtoS);
+        fruitService.saveData(fruitRecordDtos);
         fileService.writeToFile(OUTPUT_FILE, fruitService.getFruitReport());
     }
 }
