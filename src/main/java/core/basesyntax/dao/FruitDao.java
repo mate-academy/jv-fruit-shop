@@ -7,9 +7,9 @@ import java.util.List;
 public interface FruitDao {
     void add(Fruit fruit);
 
-    void changeBalanceForFruit(String name, long quantity);
+    void update(String name, long quantity);
 
     long getBalance(String name);
 
-    List<Fruit> getFullStorage();
+    List<Fruit> getAll();
 }

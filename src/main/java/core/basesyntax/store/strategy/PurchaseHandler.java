@@ -19,6 +19,6 @@ public class PurchaseHandler implements TypeHandler {
         long fruitBalance = fruitDao.getBalance(fruitName);
         quantityValidator.isQuantityCorrectForPurcase(quantity,
                 fruitBalance, lineNumber);
-        fruitDao.changeBalanceForFruit(fruitName, -quantity);
+        fruitDao.update(fruitName, -quantity);
     }
 }

@@ -2,6 +2,7 @@ package core.basesyntax.validator.length;
 
 public class ValidateLineLengthImpl implements ValidateLineLength {
     private static final int CORRECT_LENGTH = 3;
+
     @Override
     public void isLengthCorrect(String[] line, int lineNumber) {
         try {

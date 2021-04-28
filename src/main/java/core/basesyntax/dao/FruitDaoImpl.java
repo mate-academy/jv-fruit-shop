@@ -6,7 +6,6 @@ import core.basesyntax.model.Fruit;
 import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
-
     @Override
     public void add(Fruit fruit) {
         Storage.fruitStorage.add(fruit);
@@ -19,7 +18,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void changeBalanceForFruit(String name, long quantity) {
+    public void update(String name, long quantity) {
         Fruit fruit = getByName(name);
         fruit.setBalance(fruit.getBalance() + quantity);
     }
@@ -30,7 +29,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public List<Fruit> getFullStorage() {
+    public List<Fruit> getAll() {
         return Storage.fruitStorage;
     }
 

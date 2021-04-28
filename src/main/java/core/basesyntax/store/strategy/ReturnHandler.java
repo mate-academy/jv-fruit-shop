@@ -12,6 +12,6 @@ public class ReturnHandler implements TypeHandler {
 
     @Override
     public void makeOperation(String fruitName, long quantity, int lineNumber) {
-        fruitDao.changeBalanceForFruit(fruitName, quantity);
+        fruitDao.update(fruitName, quantity);
     }
 }

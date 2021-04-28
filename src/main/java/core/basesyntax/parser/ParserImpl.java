@@ -34,6 +34,6 @@ public class ParserImpl implements Parser {
             validator.lineValidator(splitedLine, lineNumber, types);
             storageService.makeOperationDependsOnType(splitedLine, lineNumber);
         }
-        return fruitDao.getFullStorage();
+        return fruitDao.getAll();
     }
 }

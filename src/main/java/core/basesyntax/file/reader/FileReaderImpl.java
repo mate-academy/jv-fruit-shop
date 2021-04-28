@@ -7,8 +7,6 @@ import java.util.List;
 
 
 public class FileReaderImpl implements FileReader {
-
-
     @Override
     public List<String> read(String filePath) {
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
