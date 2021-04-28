@@ -11,7 +11,7 @@ public class FruitsIncrement implements FruitsStrategy {
     public int change(Dto fruitDto, FruitDataBase fruitDataBase) {
         Integer oldFruitAmount = fruitDataBase.getFruitShopData(fruitDto.getFruit());
         DataValidator dataValidator = new FruitShopValidator();
-        dataValidator.validateFruitName(oldFruitAmount);
+        dataValidator.validateName(oldFruitAmount);
         dataValidator.validateAmountPositive(fruitDto.getAmount());
         int addedAmount = oldFruitAmount + fruitDto.getAmount();
         fruitDataBase.setFruitShopData(fruitDto.getFruit(), addedAmount);

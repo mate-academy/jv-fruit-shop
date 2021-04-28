@@ -22,7 +22,7 @@ public class FruitShopValidator implements DataValidator {
     }
 
     @Override
-    public void validateFruitName(Integer fruitAmount) {
+    public void validateName(Integer fruitAmount) {
         if (fruitAmount == null) {
             throw new IllegalFruitNameException("Incorrect fruit name");
         }

@@ -11,7 +11,7 @@ public class FruitsDecrement implements FruitsStrategy {
     public int change(Dto fruitDto, FruitDataBase fruitDataBase) {
         Integer oldFruitAmount = fruitDataBase.getFruitShopData(fruitDto.getFruit());
         DataValidator dataValidator = new FruitShopValidator();
-        dataValidator.validateFruitName(oldFruitAmount);
+        dataValidator.validateName(oldFruitAmount);
         dataValidator.validateAmount(oldFruitAmount, fruitDto.getAmount());
         int soldAmount = oldFruitAmount - fruitDto.getAmount();
         fruitDataBase.setFruitShopData(fruitDto.getFruit(), soldAmount);
