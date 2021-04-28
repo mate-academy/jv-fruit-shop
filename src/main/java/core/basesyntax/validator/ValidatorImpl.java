@@ -1,28 +1,24 @@
 package core.basesyntax.validator;
 
-import core.basesyntax.validator.length.ValidateLineLength;
-import core.basesyntax.validator.length.ValidateLineLengthImpl;
+import core.basesyntax.validator.length.LineLengthValidator;
 import core.basesyntax.validator.quantity.QuantityValidator;
-import core.basesyntax.validator.quantity.QuantityValidatorImpl;
 import core.basesyntax.validator.type.TypeValidator;
-import core.basesyntax.validator.type.TypeValidatorImpl;
-
-import java.util.Set;
 
 public class ValidatorImpl implements Validator {
-    private final ValidateLineLength validateLineLength;
+    private final LineLengthValidator lineLengthValidator;
     private final TypeValidator typeValidator;
     private final QuantityValidator quantityValidator;
 
-    public ValidatorImpl() {
-        validateLineLength = new ValidateLineLengthImpl();
-        typeValidator = new TypeValidatorImpl();
-        quantityValidator = new QuantityValidatorImpl();
+    public ValidatorImpl(LineLengthValidator lineLengthValidator, TypeValidator typeValidator,
+                         QuantityValidator quantityValidator) {
+       this.lineLengthValidator = lineLengthValidator;
+       this.typeValidator = typeValidator;
+       this.quantityValidator = quantityValidator;
     }
 
     @Override
     public void lineValidator(String[] line, int lineNumber) {
-        validateLineLength.isLengthCorrect(line, lineNumber);
+        lineLengthValidator.isLengthCorrect(line, lineNumber);
         typeValidator.isTypeCorrect(line[0], lineNumber);
         quantityValidator.isQuantityLessThanZero(Long.parseLong(line[2]), lineNumber);
     }

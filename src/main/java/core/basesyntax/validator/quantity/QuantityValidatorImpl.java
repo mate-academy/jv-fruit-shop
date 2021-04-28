@@ -2,30 +2,20 @@ package core.basesyntax.validator.quantity;
 
 public class QuantityValidatorImpl implements QuantityValidator {
     @Override
-    public boolean isQuantityCorrectForPurcase(long quantity,
-                                               long fruitBalace, int lineNumber) {
-        try {
-            if (quantity > fruitBalace) {
-                throw new UnavailableQuantity();
-            }
-            return true;
-        } catch (UnavailableQuantity e) {
-            throw new RuntimeException(
-                    "Line " + lineNumber
-                            + " has unavailable value for quantity", e);
+    public boolean isQuantityCorrectForPurchase(long quantity,
+                                               long fruitBalance, int lineNumber) {
+        if (quantity > fruitBalance) {
+            throw new UnavailableQuantityException("Line " + lineNumber
+                    + " has unavailable value for quantity");
         }
+        return true;
     }
 
     @Override
     public void isQuantityLessThanZero(long quantity, int lineNumber) {
-        try {
-            if (quantity < 0) {
-                throw new UnavailableQuantity();
-            }
-        } catch (UnavailableQuantity e) {
-            throw new RuntimeException(
-                    "Line " + lineNumber
-                            + " has unavailable value for quantity", e);
+        if (quantity < 0) {
+            throw new UnavailableQuantityException("Line " + lineNumber
+                    + " has unavailable value for quantity");
         }
     }
 }

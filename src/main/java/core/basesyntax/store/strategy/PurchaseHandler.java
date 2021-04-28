@@ -17,7 +17,7 @@ public class PurchaseHandler implements TypeHandler {
     @Override
     public void makeOperation(String fruitName, long quantity, int lineNumber) {
         long fruitBalance = fruitDao.getBalance(fruitName);
-        quantityValidator.isQuantityCorrectForPurcase(quantity,
+        quantityValidator.isQuantityCorrectForPurchase(quantity,
                 fruitBalance, lineNumber);
         fruitDao.update(fruitName, -quantity);
     }

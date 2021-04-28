@@ -1,17 +1,19 @@
 package core.basesyntax.store.strategy;
 
-import core.basesyntax.store.FruitService;
-import core.basesyntax.store.FruitServiceImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.store.StorageService;
+import core.basesyntax.store.StorageServiceImpl;
 
 public class BalanceHandler implements TypeHandler {
-    private final FruitService fruitService;
+    FruitDao fruitDao;
 
-    public BalanceHandler() {
-        fruitService = new FruitServiceImpl();
+    public BalanceHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
     public void makeOperation(String fruitName, long quantity, int lineNumber) {
-        fruitService.createNewFruit(fruitName, quantity);
+        fruitDao.add(new Fruit(fruitName, quantity));
     }
 }
