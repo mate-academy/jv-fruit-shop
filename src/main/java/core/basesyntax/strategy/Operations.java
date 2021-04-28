@@ -22,7 +22,7 @@ public enum Operations {
             case "b" :
                 return B;
             default :
-                throw new IllegalOperationException("Illegal operation" + operation);
+                throw new IllegalOperationException("Illegal operation " + operation);
         }
     }
 }

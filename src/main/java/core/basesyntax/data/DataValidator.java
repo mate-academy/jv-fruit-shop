@@ -1,5 +1,9 @@
 package core.basesyntax.data;
 
 public interface DataValidator {
-    boolean validate(int balance, int checkedAmount);
+    void validateAmount(int balance, int checkedAmount);
+
+    void validateFruitName(Integer fruitAmount);
+
+    void validateAmountPositive(Integer fruitAmount);
 }
