@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class ParserImpl implements Parser {
+    private static final String CSV_SEPARATOR = ",";
     Validator validator;
     StorageService storageService;
     FruitDao fruitDao;
@@ -26,11 +27,12 @@ public class ParserImpl implements Parser {
     }
 
     @Override
-    public List<Fruit> parseLines(List<String[]> lines, Set<String> types) {
+    public List<Fruit> parseLines(List<String> lines, Set<String> types) {
         int lineNumber = 1;
-        for (String[] line : lines) {
-            validator.lineValidator(line, lineNumber, types);
-            storageService.makeOperationDependsOnType(line, lineNumber);
+        for (String line : lines) {
+            String[] splitedLine = line.split(CSV_SEPARATOR);
+            validator.lineValidator(splitedLine, lineNumber, types);
+            storageService.makeOperationDependsOnType(splitedLine, lineNumber);
         }
         return fruitDao.getFullStorage();
     }

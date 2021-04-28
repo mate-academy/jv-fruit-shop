@@ -24,7 +24,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         ReaderService readerService = new ReaderServiceImpl();
-        List<String[]> list = readerService.readFromFile(PATH_FOR_DB_OK);
+        List<String> list = readerService.readFromFile(PATH_FOR_DB_OK);
         Map<String, TypeHandler> typeHandlerMap = new HashMap<>();
         typeHandlerMap.put("b", new BalanceHandler());
         typeHandlerMap.put("s", new SupplyHandler());
