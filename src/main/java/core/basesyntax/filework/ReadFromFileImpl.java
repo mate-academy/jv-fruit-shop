@@ -19,18 +19,16 @@ public class ReadFromFileImpl implements ReadFromFile {
                 if ((line = br.readLine()) == null) {
                     break;
                 }
-                convertToFruit(line.split(COMA));
+                parseToFruit(line.split(COMA));
             }
         } catch (IOException e) {
             throw new ReadFromFileException("Can't rad from file");
         }
     }
 
-    private void convertToFruit(String[] line) {
-        Fruit newFruit = new Fruit();
-        newFruit.setActionType(Fruit.Type.valueOf(line[0]));
-        newFruit.setFruitName(line[1]);
-        newFruit.setQuantity(Integer.parseInt(line[2]));
+    private void parseToFruit(String[] line) {
+        Fruit newFruit = new Fruit(Fruit.Type.valueOf(line[0]),
+                line[1], Integer.parseInt(line[2]));
         AfterReadListStorage.fruitStore.add(newFruit);
     }
 }

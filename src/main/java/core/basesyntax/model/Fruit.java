@@ -7,6 +7,12 @@ public class Fruit {
     private String fruitName;
     private int quantity;
 
+    public Fruit(Type actionType, String fruitName, int quantity) {
+        this.actionType = actionType;
+        this.fruitName = fruitName;
+        this.quantity = quantity;
+    }
+
     public Type getActionType() {
         return actionType;
     }
