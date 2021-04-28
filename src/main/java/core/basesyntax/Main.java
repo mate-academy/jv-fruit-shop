@@ -1,17 +1,17 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.service.files.FruitService;
+import core.basesyntax.service.files.FruitServiceImpl;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
-import core.basesyntax.service.strategy.FruitBalance;
-import core.basesyntax.service.strategy.FruitOperations;
-import core.basesyntax.service.strategy.FruitPurchase;
-import core.basesyntax.service.strategy.FruitSupplyOrReturn;
-import core.basesyntax.service.validation.Validator;
-import core.basesyntax.service.validation.ValidatorImpl;
-import core.basesyntax.service.works.WorkWithStorage;
-import core.basesyntax.service.works.WorkWithStorageImpl;
+import core.basesyntax.dao.strategy.FruitBalance;
+import core.basesyntax.dao.strategy.FruitOperations;
+import core.basesyntax.dao.strategy.FruitPurchase;
+import core.basesyntax.dao.strategy.FruitSupplyOrReturn;
+import core.basesyntax.dao.validation.Validator;
+import core.basesyntax.dao.validation.ValidatorImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,9 +27,9 @@ public class Main {
         operationsMap.put("s", new FruitSupplyOrReturn());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
         Validator validator = new ValidatorImpl(operationStrategy);
-        WorkWithStorage workWithStorage = new WorkWithStorageImpl(validator, operationStrategy);
-        FruitDao fruitDao = new FruitDaoImpl(workWithStorage);
-        fruitDao.readFromDb(FROM_FILE_PATH);
-        fruitDao.writeToReport(TO_FILE_PATH);
+        FruitDao fruitDao = new FruitDaoImpl(validator, operationStrategy);
+        FruitService fruitService = new FruitServiceImpl(fruitDao);
+        fruitService.readFromDb(FROM_FILE_PATH);
+        fruitService.writeToReport(TO_FILE_PATH);
     }
 }

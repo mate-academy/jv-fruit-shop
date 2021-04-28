@@ -1,6 +1,6 @@
-package core.basesyntax.service.strategy;
+package core.basesyntax.dao.strategy;
 
-import core.basesyntax.storage.Storage;
+import core.basesyntax.db.Storage;
 
 public class FruitPurchase implements FruitOperations {
     @Override

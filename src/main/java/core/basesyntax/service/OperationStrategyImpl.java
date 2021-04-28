@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.strategy.FruitOperations;
+import core.basesyntax.dao.strategy.FruitOperations;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {

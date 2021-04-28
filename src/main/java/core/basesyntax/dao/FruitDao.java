@@ -1,7 +1,9 @@
 package core.basesyntax.dao;
 
-public interface FruitDao {
-    void readFromDb(String filePath);
+import java.util.List;
 
-    void writeToReport(String reportPath);
+public interface FruitDao {
+    void writeToStorage(List<String> information);
+
+    String generateReport();
 }

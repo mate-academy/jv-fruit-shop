@@ -1,7 +1,7 @@
-package core.basesyntax.service.validation;
+package core.basesyntax.dao.validation;
 
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.storage.Storage;
+import core.basesyntax.db.Storage;
 import java.util.List;
 
 public class ValidatorImpl implements Validator {
