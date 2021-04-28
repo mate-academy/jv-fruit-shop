@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public final class Fruit {
     private final String name;
-    private final long amount;
+    private long amount;
 
     public Fruit(String fruitName, long amount) {
         this.name = fruitName;
@@ -38,11 +38,11 @@ public final class Fruit {
         return name;
     }
 
-    public long getBalance() {
+    public long getAmount() {
         return amount;
     }
 
-    public Fruit setAmount(long amount) {
-        return new Fruit(name, amount);
+    public void setAmount(long amount) {
+        this.amount = amount;
     }
 }

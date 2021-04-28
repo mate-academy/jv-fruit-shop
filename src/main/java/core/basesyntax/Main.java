@@ -1,21 +1,21 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.ActivityDaoCsvFileImpl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoMapImpl;
-import core.basesyntax.dao.ReportDaoCsvFileImpl;
-import core.basesyntax.model.Activity;
-import core.basesyntax.service.ActivityServiceImpl;
-import core.basesyntax.service.ActivityStrategy;
-import core.basesyntax.service.ActivityStrategyImpl;
-import core.basesyntax.service.ReportService;
-import core.basesyntax.service.ReportServiceImpl;
-import core.basesyntax.service.activityhandler.ActivityHandler;
-import core.basesyntax.service.activityhandler.BalanceActivityHandler;
-import core.basesyntax.service.activityhandler.PurchaseActivityHandler;
-import core.basesyntax.service.activityhandler.ReturnActivityHandler;
-import core.basesyntax.service.activityhandler.SupplyActivityHandler;
+import core.basesyntax.dto.FruitRecordDto;
+import core.basesyntax.service.FileService;
+import core.basesyntax.service.FruitRecordDtoParser;
+import core.basesyntax.service.FruitRecordStrategy;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.handler.AddAmountHandler;
+import core.basesyntax.service.handler.RecordHandler;
+import core.basesyntax.service.handler.SubtractAmountHandler;
+import core.basesyntax.service.impl.FileServiceImpl;
+import core.basesyntax.service.impl.FruitRecordDtoParserImpl;
+import core.basesyntax.service.impl.FruitRecordStrategyImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -24,17 +24,21 @@ public class Main {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoMapImpl();
-        Map<Activity.Type, ActivityHandler> operationStrategies = new HashMap<>();
-        operationStrategies.put(Activity.Type.b, new BalanceActivityHandler(fruitDao));
-        operationStrategies.put(Activity.Type.p, new PurchaseActivityHandler(fruitDao));
-        operationStrategies.put(Activity.Type.s, new SupplyActivityHandler(fruitDao));
-        operationStrategies.put(Activity.Type.r, new ReturnActivityHandler(fruitDao));
+        RecordHandler addHandler = new AddAmountHandler(fruitDao);
+        Map<FruitRecordDto.Type, RecordHandler> operationStrategies = new HashMap<>();
+        operationStrategies.put(FruitRecordDto.Type.b, addHandler);
+        operationStrategies.put(FruitRecordDto.Type.p, new SubtractAmountHandler(fruitDao));
+        operationStrategies.put(FruitRecordDto.Type.s, addHandler);
+        operationStrategies.put(FruitRecordDto.Type.r, addHandler);
 
-        ActivityStrategy activityStrategy = new ActivityStrategyImpl(operationStrategies);
+        FruitRecordStrategy fruitRecordStrategy = new FruitRecordStrategyImpl(operationStrategies);
+        FileService fileService = new FileServiceImpl();
+        FruitRecordDtoParser fruitRecordDtoParser = new FruitRecordDtoParserImpl();
+        FruitService fruitService = new FruitServiceImpl(fruitRecordStrategy);
 
-        ReportService reportService = new ReportServiceImpl(new ActivityDaoCsvFileImpl(INPUT_FILE),
-                new FruitDaoMapImpl(), new ReportDaoCsvFileImpl(OUTPUT_FILE),
-                new ActivityServiceImpl(activityStrategy));
-        reportService.generateReport();
+        List<FruitRecordDto> fruitRecordDtoS = fruitRecordDtoParser.parse(
+                fileService.readFile(INPUT_FILE));
+        fruitService.saveData(fruitRecordDtoS);
+        fileService.writeToFile(OUTPUT_FILE, fruitService.getFruitReport());
     }
 }

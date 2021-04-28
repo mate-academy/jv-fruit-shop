@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FruitDao {
-    void add(Fruit fruit);
+    void save(Fruit fruit);
 
     Optional<Fruit> get(Fruit fruit);
 

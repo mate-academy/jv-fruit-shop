@@ -1,13 +1,13 @@
-package core.basesyntax.service.activityhandler;
+package core.basesyntax.service.handler;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import java.util.Optional;
 
-public class BalanceActivityHandler implements ActivityHandler {
+public class AddAmountHandler implements RecordHandler {
     private final FruitDao fruitDao;
 
-    public BalanceActivityHandler(FruitDao fruitDao) {
+    public AddAmountHandler(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
@@ -15,11 +15,12 @@ public class BalanceActivityHandler implements ActivityHandler {
     public long changeBalance(Fruit fruit) {
         Optional<Fruit> fruitFromDB = fruitDao.get(fruit);
         if (fruitFromDB.isPresent()) {
-            long newBalance = fruitFromDB.get().getBalance() + fruit.getBalance();
-            fruitDao.add(fruit.setAmount(newBalance));
+            long newBalance = fruitFromDB.get().getAmount() + fruit.getAmount();
+            fruit.setAmount(newBalance);
+            fruitDao.save(fruit);
             return newBalance;
         }
-        fruitDao.add(fruit);
-        return fruit.getBalance();
+        fruitDao.save(fruit);
+        return fruit.getAmount();
     }
 }
