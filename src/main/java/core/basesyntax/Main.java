@@ -1,9 +1,12 @@
 package core.basesyntax;
 
+import core.basesyntax.data.DataAnalyzer;
 import core.basesyntax.data.DataParser;
-import core.basesyntax.data.DataParserImpl;
 import core.basesyntax.data.ReportCreator;
-import core.basesyntax.data.ReportCreatorImpl;
+import core.basesyntax.data.impl.DataAnalyzerImpl;
+import core.basesyntax.data.impl.DataParserImpl;
+import core.basesyntax.data.impl.ReportCreatorImpl;
+import core.basesyntax.dto.Dto;
 import core.basesyntax.handlers.FruitsDecrement;
 import core.basesyntax.handlers.FruitsIncrement;
 import core.basesyntax.handlers.Operations;
@@ -22,7 +25,6 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
-    private static final Map<Operations, FruitsService> fruitStrategies = new HashMap<>();
 
     public static void main(String[] args) {
         InputFileCreator inputFileCreator = new InputFileCreatorImpl();
@@ -31,6 +33,7 @@ public class Main {
         fruitDataBase.setFruitShopData("apple", 0);
         fruitDataBase.setFruitShopData("banana", 0);
 
+        Map<Operations, FruitsService> fruitStrategies = new HashMap<>();
         FruitsService fruitsIncreasing = new FruitsIncrement();
         FruitsService fruitsDecreasing = new FruitsDecrement();
         fruitStrategies.put(Operations.getEnum("b"), fruitsIncreasing);
@@ -41,8 +44,11 @@ public class Main {
         FileServiceReader fileServiceReader = new FileServiceReaderImpl();
         List<String> dataFromFile = fileServiceReader.read(INPUT_FILE_PATH);
 
-        DataParser dataAnalyzer = new DataParserImpl();
-        dataAnalyzer.convert(dataFromFile, fruitStrategies, fruitDataBase);
+        DataParser dataParser = new DataParserImpl();
+        List<Dto> listWithFruits = dataParser.convert(dataFromFile);
+
+        DataAnalyzer dataAnalyzer = new DataAnalyzerImpl();
+        dataAnalyzer.analyze(listWithFruits, fruitStrategies, fruitDataBase);
 
         ReportCreator reportCreator = new ReportCreatorImpl();
         FileServiceWritter fileServiceWritter = new FileServiceWritterImpl();

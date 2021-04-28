@@ -1,5 +1,6 @@
-package core.basesyntax.data;
+package core.basesyntax.data.impl;
 
+import core.basesyntax.data.DataValidator;
 import core.basesyntax.exceptions.IncorrectPurchasedAmountException;
 
 public class PurchaseAmountValidator implements DataValidator {

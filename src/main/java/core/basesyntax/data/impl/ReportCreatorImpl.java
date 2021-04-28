@@ -1,5 +1,6 @@
-package core.basesyntax.data;
+package core.basesyntax.data.impl;
 
+import core.basesyntax.data.ReportCreator;
 import core.basesyntax.storage.FruitDataBase;
 import java.util.Map;
 

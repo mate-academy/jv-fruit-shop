@@ -1,7 +1,8 @@
 package core.basesyntax.services;
 
+import core.basesyntax.dto.Dto;
 import core.basesyntax.storage.FruitDataBase;
 
 public interface FruitsService {
-    void change(String fruit, Integer amount, FruitDataBase fruitDataBase);
+    int change(Dto fruitDto, FruitDataBase fruitDataBase);
 }
