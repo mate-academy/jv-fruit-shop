@@ -1,7 +1,7 @@
 package core.basesyntax.fruitshop.file.reader;
 
-import java.util.Map;
+import java.util.List;
 
 public interface TaskReader {
-    Map<String, Integer> readFile(String fromFile);
+    List<String[]> readFile(String fromFile);
 }

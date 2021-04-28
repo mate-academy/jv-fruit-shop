@@ -4,6 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.fruit.dto.FruitDto;
 
 public class AddToStorageImpl implements HandleGoods {
+
     @Override
     public void handleGoods(FruitDto fruitData) {
         int amount = fruitData.getAmount();

@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private static final String LEGENDS = "fruit,quantity\n";
+    private static final String TITLE = "fruit,quantity\n";
 
     @Override
     public void generateReport(String toFile, Map<String, Integer> storage) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFile))) {
-            bufferedWriter.write(LEGENDS);
+            bufferedWriter.write(TITLE);
             for (Map.Entry<String, Integer> map : storage.entrySet()) {
                 bufferedWriter.write(map.getKey() + ",");
                 bufferedWriter.write(map.getValue() + "\n");
