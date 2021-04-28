@@ -14,9 +14,9 @@ public class StorageServiceImpl implements StorageService {
     TypeStrategy typeStrategy;
     FruitDao fruitDao;
 
-    public StorageServiceImpl(Map<OperationType, TypeHandler> typeHandlerMap) {
-        typeStrategy = new TypeStrategyImpl(typeHandlerMap);
-        fruitDao = new FruitDaoImpl();
+    public StorageServiceImpl(TypeStrategy typeStrategy, FruitDao fruitDao) {
+        this.typeStrategy = typeStrategy;
+        this.fruitDao = fruitDao;
     }
 
     @Override

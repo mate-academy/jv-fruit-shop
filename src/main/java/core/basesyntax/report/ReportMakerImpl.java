@@ -10,8 +10,8 @@ import java.util.List;
 public class ReportMakerImpl implements ReportMaker {
     FileWriter writerService;
 
-    public ReportMakerImpl() {
-        writerService = new FileWriterImpl();
+    public ReportMakerImpl(FileWriter writerService) {
+        this.writerService = writerService;
     }
 
     @Override

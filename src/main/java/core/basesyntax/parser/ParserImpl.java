@@ -24,10 +24,12 @@ public class ParserImpl implements Parser {
     FruitRecordService fruitRecordService;
     FruitService fruitService;
 
-    public ParserImpl() {
-        validator = new ValidatorImpl();
-        fruitRecordService = new FruitRecordServiceImpl();
-        fruitService = new FruitServiceImpl();
+    public ParserImpl(Validator validator,
+                      FruitRecordService fruitRecordService,
+                      FruitService fruitService) {
+        this.validator = validator;
+        this.fruitRecordService = fruitRecordService;
+        this.fruitService = fruitService;
     }
 
     @Override
