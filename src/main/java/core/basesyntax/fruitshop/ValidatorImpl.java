@@ -3,10 +3,10 @@ package core.basesyntax.fruitshop;
 public class ValidatorImpl implements Validator {
     private static final String IS_NUMERIC = "[0-9]+";
     private static final String VALID_ACTION = "[bspr]";
+    private final FruitChecker fruitChecker = new FruitCheckerImpl();
 
     @Override
-    public void validate(String inputLine) {
-        String[] strings = inputLine.split(",");
+    public void validate(String[] strings) {
         String action = strings[0];
         String fruit = strings[1];
         int amount = Integer.parseInt(strings[2]);
@@ -15,8 +15,11 @@ public class ValidatorImpl implements Validator {
                     + amount + " " + fruit + ". "
                     + amount + " is incorrect input.");
         }
-        if (!strings[2].matches(IS_NUMERIC) || !action.matches(VALID_ACTION)) {
+        if (!action.matches(VALID_ACTION) || !strings[2].matches(IS_NUMERIC)) {
             throw new RuntimeException("Invalid input");
+        }
+        if (!fruitChecker.checkFruits(strings)) {
+            throw new RuntimeException("There is no " + fruit + " in stock");
         }
     }
 }

@@ -18,8 +18,8 @@ public class TaskReaderImpl implements TaskReader {
             reader.readLine();
             String line = reader.readLine();
             while (line != null) {
-                inputData = line.trim().split(",");
-                validator.validate(line);
+                inputData = line.replaceAll(" +", "").split(",");
+                validator.validate(inputData);
                 tempStorage.add(inputData);
                 line = reader.readLine();
             }

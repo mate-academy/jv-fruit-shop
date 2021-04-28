@@ -16,4 +16,8 @@ public class FruitDto {
     public int getAmount() {
         return amount;
     }
+
+    public enum Fruits {
+        BANANA, APPLE;
+    }
 }

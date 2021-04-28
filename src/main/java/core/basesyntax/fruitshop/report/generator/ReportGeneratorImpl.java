@@ -14,7 +14,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
             bufferedWriter.write(TITLE);
             for (Map.Entry<String, Integer> map : storage.entrySet()) {
                 bufferedWriter.write(map.getKey() + ",");
-                bufferedWriter.write(map.getValue() + "\n");
+                bufferedWriter.write(map.getValue() + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't find the file", e);
