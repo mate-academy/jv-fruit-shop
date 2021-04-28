@@ -15,4 +15,11 @@ public class FruitServiceImpl implements FruitService {
     public void createNewFruit(String name, long quantity) {
         fruitDao.add(new Fruit(name, quantity));
     }
+
+    @Override
+    public Fruit makeFruit(String name, long quantity) {
+        return new Fruit(name, quantity);
+    }
+
+
 }

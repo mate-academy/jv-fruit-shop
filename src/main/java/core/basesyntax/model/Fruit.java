@@ -45,5 +45,4 @@ public class Fruit {
     public long getBalance() {
         return quantity;
     }
-
 }

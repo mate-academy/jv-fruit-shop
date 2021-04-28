@@ -11,12 +11,6 @@ public class FruitDaoImpl implements FruitDao {
         Storage.fruitStorage.add(fruit);
     }
 
-    private Fruit getByName(String name) {
-        return Storage.fruitStorage.stream()
-                .filter(fruit -> fruit.getName().equals(name))
-                .findFirst().get();
-    }
-
     @Override
     public void update(String name, long quantity) {
         Fruit fruit = getByName(name);
@@ -33,5 +27,9 @@ public class FruitDaoImpl implements FruitDao {
         return Storage.fruitStorage;
     }
 
-
+    private Fruit getByName(String name) {
+        return Storage.fruitStorage.stream()
+                .filter(fruit -> fruit.getName().equals(name))
+                .findFirst().get();
+    }
 }
