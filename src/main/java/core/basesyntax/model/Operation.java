@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import core.basesyntax.exceptions.IllegalOperationException;
 
 public enum Operation {
-    P("p"), S("s"), R("r"), B("b");
+    PURCHASE("p"), SUPPLY("s"), RETURN("r"), BALANCE("b");
 
     private final String operation;
 
@@ -14,13 +14,13 @@ public enum Operation {
     public static Operation getEnum(String operation) {
         switch (operation) {
             case "p" :
-                return P;
+                return PURCHASE;
             case "s" :
-                return S;
+                return SUPPLY;
             case "r" :
-                return R;
+                return RETURN;
             case "b" :
-                return B;
+                return BALANCE;
             default :
                 throw new IllegalOperationException("Illegal operation " + operation);
         }

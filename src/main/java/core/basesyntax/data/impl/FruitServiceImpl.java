@@ -1,9 +1,9 @@
 package core.basesyntax.data.impl;
 
 import core.basesyntax.data.FruitService;
+import core.basesyntax.dto.TransactionDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
-import core.basesyntax.dto.TransactionDto;
 import core.basesyntax.storage.FruitDataBase;
 import core.basesyntax.strategy.FruitsStrategy;
 import java.util.List;
@@ -18,8 +18,8 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void applyOperationsOnFruitsDto(List<TransactionDto> transactionDtos) {
-        for (TransactionDto fruit : transactionDtos) {
-            fruitStrategies.get(Operation.getEnum(fruit.getOperation())).change(fruit);
+        for (TransactionDto transaction : transactionDtos) {
+            fruitStrategies.get(transaction.getOperation()).change(transaction);
         }
     }
 
