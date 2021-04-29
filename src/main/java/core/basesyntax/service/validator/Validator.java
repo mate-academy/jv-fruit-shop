@@ -3,7 +3,7 @@ package core.basesyntax.service.validator;
 import core.basesyntax.dao.FruitRecordDto;
 import core.basesyntax.exceptions.IncorectOperationException;
 import core.basesyntax.exceptions.IncorrectPurchaseRequestException;
-import core.basesyntax.model.Type;
+import core.basesyntax.model.OperationType;
 
 public class Validator {
     public static void canDoPurchase(int newValue, int oldValue, FruitRecordDto fruit) {
@@ -16,7 +16,7 @@ public class Validator {
 
     public static boolean isValidLine(String[] line) {
         try {
-            if (Type.getType(line[0]).name().length() > 0) {
+            if (OperationType.getType(line[0]).name().length() > 0) {
                 return true;
             }
         } catch (IncorectOperationException e) {

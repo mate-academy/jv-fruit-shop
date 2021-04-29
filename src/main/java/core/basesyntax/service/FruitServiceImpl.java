@@ -2,10 +2,10 @@ package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitRecordDto;
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.db.SaveData;
+import core.basesyntax.db.SaveDataAfterReadFromFile;
 import core.basesyntax.filework.FileReader;
 import core.basesyntax.filework.FileWriter;
-import core.basesyntax.model.Type;
+import core.basesyntax.model.OperationType;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.Map;
 
@@ -14,23 +14,17 @@ public class FruitServiceImpl implements FruitService {
     private static final String TO_FILE_NAME = "src/main/resources/result.csv";
     private static final String SEPARATOR = System.getProperty("line.separator");
     private static final String COMA = ",";
-    private final FileReader reader;
-    private final FileWriter writer;
-
-    public FruitServiceImpl(FileReader reader, FileWriter writer) {
-        this.reader = reader;
-        this.writer = writer;
-    }
 
     @Override
-    public void createReport(Map<Type, OperationHandler> operationHandlerMap) {
+    public void createReport(FileReader reader, FileWriter writer,
+                             Map<OperationType, OperationHandler> operationHandlerMap) {
         reader.read(FROM_FILE_NAME);
         updateInfo(operationHandlerMap);
         writer.write(TO_FILE_NAME, makeContent(FruitStorage.storage));
     }
 
-    private void updateInfo(Map<Type, OperationHandler> operationHandlerMap) {
-        for (FruitRecordDto fruit : SaveData.fruitStore) {
+    private void updateInfo(Map<OperationType, OperationHandler> operationHandlerMap) {
+        for (FruitRecordDto fruit : SaveDataAfterReadFromFile.fruitStore) {
             operationHandlerMap.get(fruit.getType())
                     .apply(fruit);
         }

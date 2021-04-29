@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.filework.CsvFileReaderImpl;
 import core.basesyntax.filework.CsvFileWriterImpl;
-import core.basesyntax.model.Type;
+import core.basesyntax.model.OperationType;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitServiceImpl;
 import core.basesyntax.service.strategy.DecreaseOperationHandler;
@@ -14,14 +14,14 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        Map<Type, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Type.BALANCE, new IncreaseOperationHandler());
-        operationHandlerMap.put(Type.SUPPLY, new IncreaseOperationHandler());
-        operationHandlerMap.put(Type.RETURN, new IncreaseOperationHandler());
-        operationHandlerMap.put(Type.PURCHASE, new DecreaseOperationHandler());
+        Map<OperationType, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(OperationType.BALANCE, new IncreaseOperationHandler());
+        operationHandlerMap.put(OperationType.SUPPLY, new IncreaseOperationHandler());
+        operationHandlerMap.put(OperationType.RETURN, new IncreaseOperationHandler());
+        operationHandlerMap.put(OperationType.PURCHASE, new DecreaseOperationHandler());
 
-        FruitService fruitService = new FruitServiceImpl(new CsvFileReaderImpl(),
-                new CsvFileWriterImpl());
-        fruitService.createReport(operationHandlerMap);
+        FruitService fruitService = new FruitServiceImpl();
+        fruitService.createReport(new CsvFileReaderImpl(),
+                new CsvFileWriterImpl(), operationHandlerMap);
     }
 }

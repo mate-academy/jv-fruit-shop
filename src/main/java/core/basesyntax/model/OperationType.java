@@ -2,19 +2,19 @@ package core.basesyntax.model;
 
 import core.basesyntax.exceptions.IncorectOperationException;
 
-public enum Type {
+public enum OperationType {
     BALANCE, RETURN, SUPPLY, PURCHASE;
 
-    public static Type getType(String type) {
+    public static OperationType getType(String type) {
         switch (type) {
             case "b" :
-                return Type.BALANCE;
+                return OperationType.BALANCE;
             case "r" :
-                return Type.RETURN;
+                return OperationType.RETURN;
             case "s" :
-                return Type.SUPPLY;
+                return OperationType.SUPPLY;
             case "p" :
-                return Type.PURCHASE;
+                return OperationType.PURCHASE;
             default:
                 throw new IncorectOperationException("Wrong operation " + type);
         }

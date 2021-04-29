@@ -4,6 +4,6 @@ import core.basesyntax.dao.FruitRecordDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaveData {
+public class SaveDataAfterReadFromFile {
     public static final List<FruitRecordDto> fruitStore = new ArrayList<>();
 }
