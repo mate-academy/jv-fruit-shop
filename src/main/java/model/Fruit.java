@@ -1,5 +1,7 @@
 package model;
 
+import exception.InvalidFruitTypeException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Fruit {
@@ -30,8 +32,24 @@ public class Fruit {
         return Objects.hash(type);
     }
 
+    public static Fruit.Type getFruitType(String type) {
+        return Arrays.stream(Fruit.Type.values())
+                .filter(t -> t.getType().equals(type))
+                .findAny()
+                .orElseThrow(() -> new InvalidFruitTypeException("Incorrect Type of Fruit"));
+    }
+
     public enum Type {
-        APPLE,
-        BANANA
+        APPLE("apple"),
+        BANANA("banana");
+        private String type;
+
+        Type(String type) {
+            this.type = type;
+        }
+
+        public String getType() {
+            return type;
+        }
     }
 }

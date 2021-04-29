@@ -1,3 +1,4 @@
+import dao.FruitDao;
 import dao.FruitDaoImpl;
 import database.Storage;
 import java.util.HashMap;
@@ -16,36 +17,31 @@ import service.interfaces.FileReaderService;
 import service.interfaces.FruitOperationService;
 
 public class Main {
-    private static final String elementaryFile = "src/main/resources/file.csv";
-    private static final String destinationFile = "src/main/resources/reportFile.csv";
+    private static final String INPUT_FILE = "src/main/resources/file.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/reportFile.csv";
 
     public static void main(String[] args) {
+        FruitDao fruitDao = new FruitDaoImpl(new Storage());
+        Map<OperationType, FruitOperationService> strategyOperation = new HashMap<>();
+        strategyOperation.put(OperationType.BALANCE,
+                new FruitBalanceServiceImpl(fruitDao));
+        strategyOperation.put(OperationType.SUPPLY,
+                new FruitSupplyServiceImpl(fruitDao));
+        strategyOperation.put(OperationType.PURCHASE,
+                new FruitPurchaseServiceImpl(fruitDao));
+        strategyOperation.put(OperationType.RETURN,
+                new FruitReturnServiceImpl(fruitDao));
         FileReaderService fileReaderService = new FilReaderImpl();
-        List<String> fileContent = fileReaderService.readFromFile(elementaryFile);
+        List<String> fileContent = fileReaderService.readFromFile(INPUT_FILE);
         List<FruitRecordParserImpl> fruitRecordParsers = new FruitRecordParserImpl()
                 .parseLines(fileContent);
-        Map<OperationType, FruitOperationService> strategyOperation = operationStrategy();
         for (FruitRecordParserImpl fruitRecordParser : fruitRecordParsers) {
             FruitOperationService fruitOperationService = strategyOperation
                      .get(fruitRecordParser.getType());
             fruitOperationService.apply(fruitRecordParser);
         }
-        String finalReport = new ReportCreateServiceImpl(new FruitDaoImpl(
-                new Storage())).createReport();
+        String finalReport = new ReportCreateServiceImpl(fruitDao).createReport();
         FileWriterServiceImpl fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.fileWriteTo(finalReport, destinationFile);
-    }
-
-    public static Map<OperationType, FruitOperationService> operationStrategy() {
-        Map<OperationType, FruitOperationService> operationStrategy = new HashMap<>();
-        operationStrategy.put(OperationType.BALANCE,
-                new FruitBalanceServiceImpl(new FruitDaoImpl(new Storage())));
-        operationStrategy.put(OperationType.SUPPLY,
-                new FruitSupplyServiceImpl(new FruitDaoImpl(new Storage())));
-        operationStrategy.put(OperationType.PURCHASE,
-                new FruitPurchaseServiceImpl(new FruitDaoImpl(new Storage())));
-        operationStrategy.put(OperationType.RETURN,
-                new FruitReturnServiceImpl(new FruitDaoImpl(new Storage())));
-        return operationStrategy;
+        fileWriterService.fileWriteTo(finalReport, OUTPUT_FILE);
     }
 }

@@ -7,6 +7,7 @@ import service.interfaces.ReportCreateService;
 
 public class ReportCreateServiceImpl implements ReportCreateService {
     private static final String SEPARATING_ELEMENT = ",";
+    private static final String TITLE = "fruit,quantity";
     private FruitDao fruitDao;
 
     public ReportCreateServiceImpl(FruitDao fruitDao) {
@@ -16,7 +17,7 @@ public class ReportCreateServiceImpl implements ReportCreateService {
     @Override
     public String createReport() {
         StringBuilder builder = new StringBuilder();
-        builder.append("fruit,quantity").append(System.lineSeparator());
+        builder.append(TITLE).append(System.lineSeparator());
         Map<Fruit, Integer> fruitDataBase = fruitDao.getAll();
         for (Map.Entry<Fruit, Integer> fruit : fruitDataBase.entrySet()) {
             builder.append(fruit.getKey().getType().toString().toLowerCase())

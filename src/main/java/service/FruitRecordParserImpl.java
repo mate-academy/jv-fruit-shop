@@ -43,10 +43,9 @@ public class FruitRecordParserImpl implements FruitRecordParser {
         List<FruitRecordParserImpl> parsedLines = new ArrayList<>();
         for (int i = 1; i < fileContent.size(); i++) {
             String[] information = fileContent.get(i).split(SEPARATING_ELEMENT);
-            OperationType operationType = new GetOperationTypeServiceImpl()
+            OperationType operationType = OperationType
                     .getOperationType(information[INDEX_OF_OPERATION_TYPE]);
-            Fruit.Type fruitType = new GetFruitTypeServiceImpl()
-                    .getFruitType(information[INDEX_OF_FRUIT_TYPE]);
+            Fruit.Type fruitType = Fruit.getFruitType(information[INDEX_OF_FRUIT_TYPE]);
             if (!information[INDEX_OF_QUANTITY].matches(MATCHE_FOR_INTEGER)) {
                 throw new IncorrectInputValueException("Incorrect input value");
             }
