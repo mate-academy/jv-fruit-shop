@@ -1,11 +1,12 @@
 package core.basesyntax.fruitshop;
 
 import core.basesyntax.fruit.dto.FruitDto;
+import java.util.Arrays;
 
 public class FruitCheckerImpl implements FruitChecker {
     @Override
     public boolean checkFruits(String[] line) {
-        return FruitDto.Fruits.APPLE.name().equalsIgnoreCase(line[1])
-                || FruitDto.Fruits.BANANA.name().equalsIgnoreCase(line[1]);
+        return Arrays.stream(FruitDto.Fruits.values()).anyMatch(fruit
+                -> fruit.name().equalsIgnoreCase(line[1]));
     }
 }
