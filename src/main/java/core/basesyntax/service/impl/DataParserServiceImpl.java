@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.dto.FruitDataDto;
 import core.basesyntax.service.DataParserService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +19,7 @@ public class DataParserServiceImpl implements DataParserService {
                 .map(string -> string.split(DATA_COLUMN_SEPARATOR))
                 .filter(this::isValid)
                 .map(array -> new FruitDataDto(array[OPERATION_TYPE_INDEX],
-                        array[FRUIT_NAME_INDEX] , Integer.parseInt(array[FRUIT_QUANTITY_INDEX])))
+                        array[FRUIT_NAME_INDEX], Integer.parseInt(array[FRUIT_QUANTITY_INDEX])))
                 .collect(Collectors.toList());
     }
 
