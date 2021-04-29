@@ -1,15 +1,16 @@
 package service;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import service.interfaces.FileWriterService;
 
 public class FileWriterServiceImpl implements FileWriterService {
+
     @Override
-    public void fileWriteTo(String report, String destination) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destination))) {
-            bufferedWriter.write(report);
+    public void fileWriteTo(String report, String path) {
+        try {
+            Files.writeString(Path.of(path), report);
         } catch (IOException exception) {
             throw new RuntimeException("Cant write Report to File", exception);
         }

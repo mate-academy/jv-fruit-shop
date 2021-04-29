@@ -2,6 +2,7 @@ package dao;
 
 import database.Storage;
 import java.util.Map;
+import java.util.Optional;
 import model.Fruit;
 
 public class FruitDaoImpl implements FruitDao {
@@ -17,8 +18,9 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Integer get(Fruit fruit) {
-        return storage.getFruitDataBase().get(fruit);
+    public Optional<Integer> get(Fruit fruit) {
+
+        return Optional.ofNullable(storage.getFruitDataBase().get(fruit));
     }
 
     @Override

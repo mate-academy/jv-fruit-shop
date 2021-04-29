@@ -9,16 +9,17 @@ import service.FilReaderImpl;
 import service.FileWriterServiceImpl;
 import service.FruitBalanceServiceImpl;
 import service.FruitPurchaseServiceImpl;
-import service.FruitRecordParserImpl;
 import service.FruitReturnServiceImpl;
 import service.FruitSupplyServiceImpl;
-import service.ReportCreateServiceImpl;
+import service.ReportCreateService;
+import service.TransactionDto;
 import service.interfaces.FileReaderService;
+import service.interfaces.FileWriterService;
 import service.interfaces.FruitOperationService;
 
 public class Main {
-    private static final String INPUT_FILE = "src/main/resources/file.csv";
-    private static final String OUTPUT_FILE = "src/main/resources/reportFile.csv";
+    private static final String INPUT_PATH = "src/main/resources/file.csv";
+    private static final String OUTPUT_PATH = "src/main/resources/reportFile.csv";
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl(new Storage());
@@ -31,17 +32,19 @@ public class Main {
                 new FruitPurchaseServiceImpl(fruitDao));
         strategyOperation.put(OperationType.RETURN,
                 new FruitReturnServiceImpl(fruitDao));
+
         FileReaderService fileReaderService = new FilReaderImpl();
-        List<String> fileContent = fileReaderService.readFromFile(INPUT_FILE);
-        List<FruitRecordParserImpl> fruitRecordParsers = new FruitRecordParserImpl()
-                .parseLines(fileContent);
-        for (FruitRecordParserImpl fruitRecordParser : fruitRecordParsers) {
+        List<String> fileContent = fileReaderService.readFromFile(INPUT_PATH);
+        List<TransactionDto> transactionList = new TransactionDto()
+                .parser(fileContent);
+        for (TransactionDto transaction : transactionList) {
             FruitOperationService fruitOperationService = strategyOperation
-                     .get(fruitRecordParser.getType());
-            fruitOperationService.apply(fruitRecordParser);
+                     .get(transaction.getType());
+            fruitOperationService.apply(transaction);
         }
-        String finalReport = new ReportCreateServiceImpl(fruitDao).createReport();
-        FileWriterServiceImpl fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.fileWriteTo(finalReport, OUTPUT_FILE);
+
+        String finalReport = new ReportCreateService(fruitDao).createReport();
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.fileWriteTo(finalReport, OUTPUT_PATH);
     }
 }

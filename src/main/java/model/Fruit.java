@@ -1,18 +1,16 @@
 package model;
 
-import exception.InvalidFruitTypeException;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class Fruit {
-    private Type type;
+    private String fruitType;
 
-    public Fruit(Type type) {
-        this.type = type;
+    public Fruit(String fruitType) {
+        this.fruitType = fruitType;
     }
 
-    public Type getType() {
-        return type;
+    public String getFruitType() {
+        return fruitType;
     }
 
     @Override
@@ -24,32 +22,11 @@ public class Fruit {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return Objects.equals(type, fruit.type);
+        return Objects.equals(fruitType, fruit.fruitType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type);
-    }
-
-    public static Fruit.Type getFruitType(String type) {
-        return Arrays.stream(Fruit.Type.values())
-                .filter(t -> t.getType().equals(type))
-                .findAny()
-                .orElseThrow(() -> new InvalidFruitTypeException("Incorrect Type of Fruit"));
-    }
-
-    public enum Type {
-        APPLE("apple"),
-        BANANA("banana");
-        private String type;
-
-        Type(String type) {
-            this.type = type;
-        }
-
-        public String getType() {
-            return type;
-        }
+        return Objects.hash(fruitType);
     }
 }

@@ -1,8 +1,8 @@
 package service;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import service.interfaces.FileReaderService;
@@ -10,17 +10,12 @@ import service.interfaces.FileReaderService;
 public class FilReaderImpl implements FileReaderService {
 
     @Override
-    public List<String> readFromFile(String fileName) {
+    public List<String> readFromFile(String path) {
         List<String> fileContent = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line = reader.readLine();
-            while (line != null) {
-                fileContent.add(line);
-                line = reader.readLine();
-            }
+        try {
+            return Files.readAllLines(Path.of(path));
         } catch (IOException exception) {
             throw new RuntimeException("File does not exist!", exception);
         }
-        return fileContent;
     }
 }

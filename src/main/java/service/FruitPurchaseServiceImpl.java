@@ -2,11 +2,10 @@ package service;
 
 import dao.FruitDao;
 import exception.InsufficientAmountException;
-import model.Fruit;
+import java.util.Optional;
 import service.interfaces.FruitOperationService;
 
 public class FruitPurchaseServiceImpl implements FruitOperationService {
-    private static final String MESSAGE_FOR_EXCEPTION = "Insufficient quantity of goods";
     private FruitDao fruitDao;
 
     public FruitPurchaseServiceImpl(FruitDao fruitDao) {
@@ -14,13 +13,13 @@ public class FruitPurchaseServiceImpl implements FruitOperationService {
     }
 
     @Override
-    public void apply(FruitRecordParserImpl fruitRecordParser) {
-        Fruit fruit = new Fruit(fruitRecordParser.getFruitType());
-        int currentQuantity = fruitDao.get(fruit);
-        currentQuantity = currentQuantity - fruitRecordParser.getQuantity();
-        if (currentQuantity < 0) {
-            throw new InsufficientAmountException(MESSAGE_FOR_EXCEPTION);
+    public void apply(TransactionDto transactionDto) {
+        Optional<Integer> currentQuantity = fruitDao.get(transactionDto.getFruit());
+        if (currentQuantity.isPresent() && currentQuantity.get() >= transactionDto.getQuantity()) {
+            fruitDao.put(transactionDto.getFruit(), currentQuantity.get()
+                    - transactionDto.getQuantity());
+            return;
         }
-        fruitDao.put(fruit, currentQuantity);
+        throw new InsufficientAmountException("Insufficient quantity of goods");
     }
 }

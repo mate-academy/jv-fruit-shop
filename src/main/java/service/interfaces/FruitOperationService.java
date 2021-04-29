@@ -1,7 +1,7 @@
 package service.interfaces;
 
-import service.FruitRecordParserImpl;
+import service.TransactionDto;
 
 public interface FruitOperationService {
-    void apply(FruitRecordParserImpl fruitRecordParser);
+    void apply(TransactionDto fruitRecordParser);
 }
