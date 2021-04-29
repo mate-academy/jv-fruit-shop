@@ -1,9 +1,13 @@
 package core.basesyntax.dao;
 
-import java.util.List;
+import java.util.Map;
 
 public interface FruitDao {
-    void writeToStorage(List<String> information);
+    void clearStorage();
 
-    String generateReport();
+    Map<String, Integer> getAll();
+
+    Integer getQuantity(String fruitName);
+
+    boolean containFruit(String fruitName);
 }

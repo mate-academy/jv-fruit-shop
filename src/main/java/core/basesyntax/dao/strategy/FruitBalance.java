@@ -5,7 +5,7 @@ import core.basesyntax.dto.FruitDto;
 
 public class FruitBalance implements FruitOperations {
     @Override
-    public void fruitActivity(FruitDto fruitDto) {
+    public void doOperationWithFruit(FruitDto fruitDto) {
         Storage.getFruits().put(fruitDto.getFruitName(), fruitDto.getQuantity());
     }
 }

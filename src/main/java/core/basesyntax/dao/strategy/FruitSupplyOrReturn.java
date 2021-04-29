@@ -5,8 +5,8 @@ import core.basesyntax.dto.FruitDto;
 
 public class FruitSupplyOrReturn implements FruitOperations {
     @Override
-    public void fruitActivity(FruitDto fruitDto) {
-        Storage.getFruits().replace(fruitDto.getFruitName()
-                , Storage.getFruits().get(fruitDto.getFruitName()) + fruitDto.getQuantity());
+    public void doOperationWithFruit(FruitDto fruitDto) {
+        Storage.getFruits().replace(fruitDto.getFruitName(),
+                Storage.getFruits().get(fruitDto.getFruitName()) + fruitDto.getQuantity());
     }
 }
