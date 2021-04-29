@@ -6,7 +6,7 @@ import core.basesyntax.model.product.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionDtoImpl implements TransactionDtoService {
+public class TransactionDtoServiceImpl implements TransactionDtoService {
     private static final String SPLITTER = ",";
     private static final String VALID_REGEX = "[bspr],[a-z]+,[0-9]+";
     private static final int OPERATION_INDEX = 0;
