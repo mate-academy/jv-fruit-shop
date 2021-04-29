@@ -24,9 +24,7 @@ public class Main {
                 .parseDataFromInputFile(dataFromInputFile);
 
         FruitService fruitService = new FruitServiceImpl();
-        for (FruitDataDto fruitDataDto : fruitDataDtoList) {
-            fruitService.applyCorrectOperationImpl(fruitDataDto);
-        }
+        fruitService.applyCorrectOperationImpl(fruitDataDtoList);
         String reportFromDB = fruitService.getReportFromDB();
 
         WriterService writerService = new WriterServiceImpl();
