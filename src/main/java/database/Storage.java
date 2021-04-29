@@ -5,9 +5,9 @@ import java.util.Map;
 import model.Fruit;
 
 public class Storage {
-    private static Map<Fruit.Type, Integer> fruitDataBase = new HashMap<>();
+    private static Map<Fruit, Integer> fruitDataBase = new HashMap<>();
 
-    public Map<Fruit.Type, Integer> getFruitDataBase() {
+    public Map<Fruit, Integer> getFruitDataBase() {
         return fruitDataBase;
     }
 }

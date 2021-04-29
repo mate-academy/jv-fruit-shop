@@ -4,9 +4,9 @@ import java.util.Map;
 import model.Fruit;
 
 public interface FruitDao {
-    void put(Fruit.Type fruitType, Integer value);
+    void put(Fruit fruitType, Integer value);
 
-    Integer get(Fruit.Type fruitType);
+    Integer get(Fruit fruitType);
 
-    Map<Fruit.Type, Integer> getAll();
+    Map<Fruit, Integer> getAll();
 }

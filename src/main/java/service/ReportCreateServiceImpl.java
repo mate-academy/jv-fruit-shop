@@ -17,9 +17,9 @@ public class ReportCreateServiceImpl implements ReportCreateService {
     public String createReport() {
         StringBuilder builder = new StringBuilder();
         builder.append("fruit,quantity").append(System.lineSeparator());
-        Map<Fruit.Type, Integer> fruitDataBase = fruitDao.getAll();
-        for (Map.Entry<Fruit.Type, Integer> fruit : fruitDataBase.entrySet()) {
-            builder.append(fruit.getKey().toString().toLowerCase())
+        Map<Fruit, Integer> fruitDataBase = fruitDao.getAll();
+        for (Map.Entry<Fruit, Integer> fruit : fruitDataBase.entrySet()) {
+            builder.append(fruit.getKey().getType().toString().toLowerCase())
                     .append(SEPARATING_ELEMENT)
                     .append(fruit.getValue()).append(System.lineSeparator());
         }

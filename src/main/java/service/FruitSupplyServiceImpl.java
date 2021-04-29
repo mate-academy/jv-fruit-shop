@@ -1,6 +1,7 @@
 package service;
 
 import dao.FruitDao;
+import model.Fruit;
 import service.interfaces.FruitOperationService;
 
 public class FruitSupplyServiceImpl implements FruitOperationService {
@@ -12,8 +13,8 @@ public class FruitSupplyServiceImpl implements FruitOperationService {
 
     @Override
     public void apply(FruitRecordParserImpl fruitRecordParser) {
-        int currentQuantity = fruitDao.get(fruitRecordParser.getFruitType());
-        fruitDao.put(fruitRecordParser.getFruitType(),
-                currentQuantity + fruitRecordParser.getQuantity());
+        Fruit fruit = new Fruit(fruitRecordParser.getFruitType());
+        int currentQuantity = fruitDao.get(fruit);
+        fruitDao.put(fruit, currentQuantity + fruitRecordParser.getQuantity());
     }
 }

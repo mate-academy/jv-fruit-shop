@@ -13,7 +13,6 @@ public class FruitRecordParserImpl implements FruitRecordParser {
     private static final int INDEX_OF_FRUIT_TYPE = 1;
     private static final int INDEX_OF_QUANTITY = 2;
     private static final String MATCHE_FOR_INTEGER = "[0-9]+";
-    private static final String MASSAGE_FOR_EXCEPTION = "Incorrect input value";
     private OperationType type;
     private Fruit.Type fruitType;
     private Integer quantity;
@@ -44,16 +43,16 @@ public class FruitRecordParserImpl implements FruitRecordParser {
         List<FruitRecordParserImpl> parsedLines = new ArrayList<>();
         for (int i = 1; i < fileContent.size(); i++) {
             String[] information = fileContent.get(i).split(SEPARATING_ELEMENT);
-            OperationType operationType = new OperationTypeServiceImpl()
+            OperationType operationType = new GetOperationTypeServiceImpl()
                     .getOperationType(information[INDEX_OF_OPERATION_TYPE]);
-            Fruit.Type fruitType = new FruitTypeServiceImpl()
+            Fruit.Type fruitType = new GetFruitTypeServiceImpl()
                     .getFruitType(information[INDEX_OF_FRUIT_TYPE]);
             if (!information[INDEX_OF_QUANTITY].matches(MATCHE_FOR_INTEGER)) {
-                throw new IncorrectInputValueException(MASSAGE_FOR_EXCEPTION);
+                throw new IncorrectInputValueException("Incorrect input value");
             }
             int quantity = Integer.parseInt(information[INDEX_OF_QUANTITY]);
             if (quantity < 0) {
-                throw new IncorrectInputValueException(MASSAGE_FOR_EXCEPTION);
+                throw new IncorrectInputValueException("Incorrect input value");
             }
             FruitRecordParserImpl fruitRecordParser = new FruitRecordParserImpl(operationType,
                     fruitType, quantity);

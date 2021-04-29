@@ -12,17 +12,17 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void put(Fruit.Type fruitType, Integer value) {
-        storage.getFruitDataBase().put(fruitType, value);
+    public void put(Fruit fruit, Integer value) {
+        storage.getFruitDataBase().put(fruit, value);
     }
 
     @Override
-    public Integer get(Fruit.Type fruitType) {
-        return storage.getFruitDataBase().get(fruitType);
+    public Integer get(Fruit fruit) {
+        return storage.getFruitDataBase().get(fruit);
     }
 
     @Override
-    public Map<Fruit.Type, Integer> getAll() {
+    public Map<Fruit, Integer> getAll() {
         return storage.getFruitDataBase();
     }
 }

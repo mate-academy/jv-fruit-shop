@@ -4,8 +4,7 @@ import exception.InvalidOperationTypeException;
 import model.OperationType;
 import service.interfaces.GetOperationTypeService;
 
-public class OperationTypeServiceImpl implements GetOperationTypeService {
-    private static final String MASSAGE_FOR_EXCEPTION = "Invalid Operation Type";
+public class GetOperationTypeServiceImpl implements GetOperationTypeService {
 
     @Override
     public OperationType getOperationType(String type) {
@@ -19,7 +18,7 @@ public class OperationTypeServiceImpl implements GetOperationTypeService {
             case "r":
                 return OperationType.RETURN;
             default:
-                throw new InvalidOperationTypeException(MASSAGE_FOR_EXCEPTION);
+                throw new InvalidOperationTypeException("Invalid Operation Type");
         }
 
     }

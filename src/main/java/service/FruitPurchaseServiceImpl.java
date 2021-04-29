@@ -2,6 +2,7 @@ package service;
 
 import dao.FruitDao;
 import exception.InsufficientAmountException;
+import model.Fruit;
 import service.interfaces.FruitOperationService;
 
 public class FruitPurchaseServiceImpl implements FruitOperationService {
@@ -14,11 +15,12 @@ public class FruitPurchaseServiceImpl implements FruitOperationService {
 
     @Override
     public void apply(FruitRecordParserImpl fruitRecordParser) {
-        int currentQuantity = fruitDao.get(fruitRecordParser.getFruitType());
+        Fruit fruit = new Fruit(fruitRecordParser.getFruitType());
+        int currentQuantity = fruitDao.get(fruit);
         currentQuantity = currentQuantity - fruitRecordParser.getQuantity();
         if (currentQuantity < 0) {
             throw new InsufficientAmountException(MESSAGE_FOR_EXCEPTION);
         }
-        fruitDao.put(fruitRecordParser.getFruitType(), currentQuantity);
+        fruitDao.put(fruit, currentQuantity);
     }
 }

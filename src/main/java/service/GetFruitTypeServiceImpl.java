@@ -2,10 +2,9 @@ package service;
 
 import exception.InvalidFruitTypeException;
 import model.Fruit;
-import service.interfaces.FruitTypeService;
+import service.interfaces.GetFruitTypeService;
 
-public class FruitTypeServiceImpl implements FruitTypeService {
-    private static final String MESSAGE_FOR_EXCEPTION = "Incorrect Type of Fruit";
+public class GetFruitTypeServiceImpl implements GetFruitTypeService {
 
     @Override
     public Fruit.Type getFruitType(String type) {
@@ -15,7 +14,7 @@ public class FruitTypeServiceImpl implements FruitTypeService {
             case "banana":
                 return Fruit.Type.BANANA;
             default:
-                throw new InvalidFruitTypeException(MESSAGE_FOR_EXCEPTION);
+                throw new InvalidFruitTypeException("Incorrect Type of Fruit");
         }
     }
 }

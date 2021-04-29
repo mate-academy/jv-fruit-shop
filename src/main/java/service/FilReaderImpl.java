@@ -19,7 +19,7 @@ public class FilReaderImpl implements FileReaderService {
                 line = reader.readLine();
             }
         } catch (IOException exception) {
-            throw new RuntimeException("File not exist!", exception);
+            throw new RuntimeException("File does not exist!", exception);
         }
         return fileContent;
     }
