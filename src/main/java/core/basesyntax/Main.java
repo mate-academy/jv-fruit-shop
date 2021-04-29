@@ -27,7 +27,7 @@ public class Main {
         FileReader reader = new CsvFileReaderImpl();
         reader.read(FROM_FILE_NAME);
         FruitService fruitService = new FruitServiceImpl();
-        fruitService.createReport(operationHandlerMap);
+        fruitService.createReport(operationHandlerMap, reader);
         FileWriter writer = new CsvFileWriterImpl();
         writer.write(TO_FILE_NAME);
     }

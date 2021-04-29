@@ -33,6 +33,11 @@ public class CsvFileReaderImpl implements FileReader {
         }
     }
 
+    @Override
+    public List<FruitRecordDto> getStorage() {
+        return fruitStore;
+    }
+
     private FruitRecordDto parseTransaction(String[] line) {
         return new FruitRecordDto(OperationType.getType(line[0]),
                 line[1], Integer.parseInt(line[2]));
