@@ -1,14 +1,16 @@
 package core.basesyntax.filework;
 
 import core.basesyntax.dao.FruitRecordDto;
-import core.basesyntax.db.SaveDataAfterReadFromFile;
 import core.basesyntax.exceptions.ReadFromFileException;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.validator.Validator;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CsvFileReaderImpl implements FileReader {
+    public static final List<FruitRecordDto> fruitStore = new ArrayList<>();
     private static final String COMA = ",";
 
     public void read(String path) {
@@ -21,7 +23,7 @@ public class CsvFileReaderImpl implements FileReader {
                 }
                 if (Validator.isValidLine(line.split(COMA))) {
                     FruitRecordDto fruit = parseTransaction(line.split(COMA));
-                    SaveDataAfterReadFromFile.fruitStore.add(fruit);
+                    fruitStore.add(fruit);
                 } else {
                     continue;
                 }
