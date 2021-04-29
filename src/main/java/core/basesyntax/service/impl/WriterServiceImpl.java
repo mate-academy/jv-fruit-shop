@@ -7,20 +7,14 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
 public class WriterServiceImpl implements WriterService {
+    private static final String EXCEPTION_MESSAGE = "Can't write data into the file";
+
     @Override
-    public void createReportFromData(String pathName, String report) {
-        File file = new File(pathName);
-
+    public void write(String pathName, String data) {
         try {
-            file.createNewFile();
+            Files.writeString(new File(pathName).toPath(), data, StandardOpenOption.APPEND);
         } catch (IOException e) {
-            throw new RuntimeException("Can't create file");
-        }
-
-        try {
-            Files.writeString(file.toPath(), report, StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't write data into the file");
+            throw new RuntimeException(EXCEPTION_MESSAGE);
         }
     }
 }

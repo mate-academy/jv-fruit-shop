@@ -22,17 +22,4 @@ public class FruitDataDto {
     public Integer getFruitQuantity() {
         return fruitQuantity;
     }
-
-    public enum Operations {
-        b, s, p, r;
-
-        public static boolean contains(String inputOperation) {
-            for (Operations operation : Operations.values()) {
-                if (operation.name().equals(inputOperation)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
 }
