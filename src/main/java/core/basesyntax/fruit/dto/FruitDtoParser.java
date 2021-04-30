@@ -1,5 +1,6 @@
 package core.basesyntax.fruit.dto;
 
 public interface FruitDtoParser {
-    FruitDto parseFruitDto(String[] line);
-}
+    FruitDto parseFruitDto(String line);
+    }
+

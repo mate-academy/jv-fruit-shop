@@ -17,7 +17,4 @@ public class FruitDto {
         return amount;
     }
 
-    public enum Fruits {
-        BANANA, APPLE;
-    }
 }

@@ -1,6 +1,7 @@
 package core.basesyntax.activity;
 
 import core.basesyntax.storage.dao.HandleGoods;
+
 import java.util.Map;
 
 public class ActivityStrategyImpl implements PickActivityStrategy {

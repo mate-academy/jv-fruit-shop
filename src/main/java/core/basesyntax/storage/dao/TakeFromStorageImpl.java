@@ -17,9 +17,8 @@ public class TakeFromStorageImpl implements HandleGoods {
         }
         if (!Storage.getFruitStorage().containsKey(fruitType)) {
             throw new RuntimeException("There is no such fruit in the stock: " + fruitType + ".");
-        } else {
-            Storage.getFruitStorage().put(fruitType,
-                    Storage.getFruitStorage().get(fruitType) - amount);
         }
+        Storage.getFruitStorage().put(fruitType, Storage.getFruitStorage().get(fruitType) - amount);
     }
 }
+
