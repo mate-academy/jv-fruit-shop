@@ -4,11 +4,9 @@ import java.util.Objects;
 
 public class Fruit {
     private String name;
-    private Integer quantity;
 
-    public Fruit(String name, Integer quantity) {
+    public Fruit(String name) {
         this.name = name;
-        this.quantity = quantity;
     }
 
     public String getName() {
@@ -17,14 +15,6 @@ public class Fruit {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     @Override
@@ -36,12 +26,12 @@ public class Fruit {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return Objects.equals(name, fruit.name)
-                && Objects.equals(quantity, fruit.quantity);
+        return Objects.equals(name, fruit.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, quantity);
+        return Objects.hash(name);
     }
 }
+

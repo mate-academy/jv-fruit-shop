@@ -17,11 +17,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String PATH = "src\\main\\resources\\shop.csv";
+    private static final String READ_PATH = "src\\main\\resources\\shop.csv";
+    private static final String WRITE_PATH = "report.csv";
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
-        List<String> list = readerService.readFile(PATH);
+        List<String> list = readerService.readFile(READ_PATH);
+
         FruitParserDto fruitParserDto = new FruitParserDto();
         FruitOperationService addOperation = new AddOperation();
         FruitOperationService subtractOperation = new SubtractOperation();
@@ -30,12 +32,14 @@ public class Main {
         operationServiceMap.put(Operation.p, subtractOperation);
         operationServiceMap.put(Operation.r, addOperation);
         operationServiceMap.put(Operation.s, addOperation);
+
         FruitStrategy fruitStrategy = new FruitStrategyImpl(operationServiceMap);
         OperationHandler operationHandler = new FruitOperationHandler(fruitStrategy);
         List<FruitDto> fruitDtos = fruitParserDto.parseInformation(list);
         operationHandler.operationProcessing(fruitDtos);
+
         ReportWriter reportWriter = new ReportWriterImpl();
-        reportWriter.writeReport("report.csv");
+        reportWriter.writeReport(WRITE_PATH);
     }
 }
 

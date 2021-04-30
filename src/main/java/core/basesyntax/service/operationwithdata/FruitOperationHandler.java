@@ -1,6 +1,7 @@
 package core.basesyntax.service.operationwithdata;
 
 import core.basesyntax.dto.FruitDto;
+import core.basesyntax.fruitmodel.Fruit;
 import core.basesyntax.fruitoperationstrategy.FruitStrategy;
 import core.basesyntax.fruitstorage.FruitStorage;
 import java.util.List;
@@ -17,7 +18,7 @@ public class FruitOperationHandler implements OperationHandler {
         for (FruitDto fruit : fruitDtos) {
             FruitOperationService fruitOperationService = fruitStrategy.get(fruit.getOperation());
             int quantity = fruitOperationService.apply(fruit);
-            FruitStorage.fruitStorage.put(fruit.getFruitName(), quantity);
+            FruitStorage.fruitStorage.put(new Fruit(fruit.getFruitName()), quantity);
         }
     }
 }
