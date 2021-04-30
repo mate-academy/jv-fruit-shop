@@ -6,7 +6,6 @@ import java.util.Optional;
 import model.Fruit;
 
 public class FruitDaoImpl implements FruitDao {
-
     @Override
     public void put(Fruit fruit, Integer value) {
         Storage.getFruitDataBase().put(fruit, value);

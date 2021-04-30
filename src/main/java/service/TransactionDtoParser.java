@@ -1,6 +1,7 @@
 package service;
 
 import exception.IncorrectFruitTypeException;
+import exception.IncorrectQuantityValueException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
@@ -15,7 +16,7 @@ public class TransactionDtoParser {
     private static final String FRUIT_MATCH = "[a-z]+";
     private static final String FIRST_LINE = "type,fruit,quantity";
 
-    public List<TransactionDto> parser(List<String> fileContent) {
+    public List<TransactionDto> parse(List<String> fileContent) {
         List<TransactionDto> transactionList = new ArrayList<>();
         for (String line : fileContent) {
             if (line.equals(FIRST_LINE)) {
@@ -34,12 +35,12 @@ public class TransactionDtoParser {
                     + FRUIT_MATCH + " but was - " + transactions[INDEX_OF_FRUIT_TYPE]);
         }
         if (!transactions[INDEX_OF_QUANTITY].matches(INTEGER_MATCH)) {
-            throw new IncorrectFruitTypeException("Quantity value should match "
+            throw new IncorrectQuantityValueException("Quantity value should match "
                     + INTEGER_MATCH + " but was - " + transactions[INDEX_OF_QUANTITY]);
         }
         int quantity = Integer.parseInt(transactions[INDEX_OF_QUANTITY]);
         if (quantity < 0) {
-            throw new IncorrectFruitTypeException("Input value cannot be less than 0");
+            throw new IncorrectQuantityValueException("Input value cannot be less than 0");
         }
         return new TransactionDto(OperationType.getOperationType(
                 transactions[INDEX_OF_OPERATION_TYPE]),

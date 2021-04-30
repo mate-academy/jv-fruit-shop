@@ -36,7 +36,7 @@ public class Main {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> fileContent = fileReaderService.readFromFile(INPUT_PATH);
         List<TransactionDto> transactionList = new TransactionDtoParser()
-                .parser(fileContent);
+                .parse(fileContent);
         for (TransactionDto transaction : transactionList) {
             FruitOperationService fruitOperationService = strategyOperation
                      .get(transaction.getType());
