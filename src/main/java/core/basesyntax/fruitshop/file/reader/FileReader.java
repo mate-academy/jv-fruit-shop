@@ -2,6 +2,6 @@ package core.basesyntax.fruitshop.file.reader;
 
 import java.util.List;
 
-public interface TaskReader {
-    List<String> readFile(String fromFile);
+public interface FileReader {
+    List<String> read(String fromFile);
 }

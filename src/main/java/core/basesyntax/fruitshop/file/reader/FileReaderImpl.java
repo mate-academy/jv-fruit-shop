@@ -5,14 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskReaderImpl implements TaskReader {
-
+public class FileReaderImpl implements FileReader {
     @Override
-    public List<String> readFile(String fromFile) {
+    public List<String> read(String fromFile) {
         List<String> tempStorage = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fromFile))) {
-            reader.readLine();
             String line = reader.readLine();
             while (line != null) {
                 tempStorage.add(line);

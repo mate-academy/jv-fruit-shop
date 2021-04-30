@@ -5,7 +5,6 @@ public class ActivityParserImpl implements ActivityParser {
 
     @Override
     public Activities parseActivity(String line) {
-        String receivedActivity = line.substring(ACTIVITY_TYPE, line.indexOf(","));
         switch (line.charAt(ACTIVITY_TYPE)) {
             case 'b': return Activities.BALANCE;
             case 's': return Activities.SUPPLY;

@@ -5,7 +5,6 @@ import core.basesyntax.fruit.dto.FruitDto;
 import java.util.Map;
 
 public class TakeFromStorageHandlerImpl implements StorageHandler {
-
     @Override
     public void handleGoods(FruitDto fruitData) {
         int amount = fruitData.getAmount();
