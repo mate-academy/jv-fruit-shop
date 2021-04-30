@@ -1,22 +1,25 @@
 package core.basesyntax.model.dto;
 
+import core.basesyntax.model.Fruit;
+import core.basesyntax.operations.Operations;
+
 public class FruitDataDto {
-    private String operationType;
-    private String fruitName;
+    private Operations operationType;
+    private Fruit fruit;
     private Integer fruitQuantity;
 
-    public FruitDataDto(String operationType, String fruitName, Integer fruitQuantity) {
+    public FruitDataDto(Operations operationType, Fruit fruit, Integer fruitQuantity) {
         this.operationType = operationType;
-        this.fruitName = fruitName;
+        this.fruit = fruit;
         this.fruitQuantity = fruitQuantity;
     }
 
-    public String getOperationType() {
+    public Operations getOperationType() {
         return operationType;
     }
 
-    public String getFruitName() {
-        return fruitName;
+    public Fruit getFruit() {
+        return fruit;
     }
 
     public Integer getFruitQuantity() {

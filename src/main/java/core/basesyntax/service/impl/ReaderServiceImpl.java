@@ -10,7 +10,7 @@ public class ReaderServiceImpl implements ReaderService {
     private static final String EXCEPTION_MESSAGE = "Can't read date from current file";
 
     @Override
-    public List<String> readDataFromInputFile(String pathName) {
+    public List<String> read(String pathName) {
         List<String> dataFromInputFile;
         try {
             dataFromInputFile = Files.readAllLines(new File(pathName).toPath());

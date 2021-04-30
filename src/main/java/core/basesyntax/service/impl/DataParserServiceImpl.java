@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.dto.FruitDataDto;
 import core.basesyntax.operations.Operations;
 import core.basesyntax.service.DataParserService;
@@ -23,8 +24,8 @@ public class DataParserServiceImpl implements DataParserService {
                 .skip(COLUMN_HEADER_ROW)
                 .map(string -> string.split(DATA_COLUMN_SEPARATOR))
                 .filter(this::isValid)
-                .map(array -> new FruitDataDto(array[OPERATION_TYPE_INDEX],
-                        array[FRUIT_NAME_INDEX], Integer.parseInt(array[FRUIT_QUANTITY_INDEX])))
+                .map(array -> new FruitDataDto(Operations.valueOf(array[OPERATION_TYPE_INDEX]),
+                        new Fruit(array[FRUIT_NAME_INDEX]), Integer.parseInt(array[FRUIT_QUANTITY_INDEX])))
                 .collect(Collectors.toList());
     }
 

@@ -18,14 +18,11 @@ public class Fruit {
         if (fruit == this) {
             return true;
         }
-        if (fruit == null) {
+        if (fruit == null || fruit.getClass().equals(Fruit.class)) {
             return false;
         }
-        if (fruit.getClass().equals(Fruit.class)) {
-            Fruit current = (Fruit) fruit;
-            return Objects.equals(this.name, current.name);
-        }
-        return false;
+        Fruit current = (Fruit) fruit;
+        return Objects.equals(this.name, current.name);
     }
 
     @Override
