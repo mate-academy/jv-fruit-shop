@@ -46,28 +46,28 @@ public class TransactionDto {
                 continue;
             }
             String[] information = line.split(SEPARATING_ELEMENT);
-            TransactionDto transactionDto = transactionValidator(information);
+            TransactionDto transactionDto = getValidTransaction(information);
             transactionList.add(transactionDto);
         }
         return transactionList;
     }
 
-    private TransactionDto transactionValidator(String[] information) {
-        if (!information[INDEX_OF_FRUIT_TYPE].matches(FRUIT_MATCH)) {
+    private TransactionDto getValidTransaction(String[] transactions) {
+        if (!transactions[INDEX_OF_FRUIT_TYPE].matches(FRUIT_MATCH)) {
             throw new IncorrectInputValueException("Fruit type should match "
-            + FRUIT_MATCH + " but was - " + information[INDEX_OF_FRUIT_TYPE]);
+            + FRUIT_MATCH + " but was - " + transactions[INDEX_OF_FRUIT_TYPE]);
         }
-        if (!information[INDEX_OF_QUANTITY].matches(INTEGER_MATCH)) {
+        if (!transactions[INDEX_OF_QUANTITY].matches(INTEGER_MATCH)) {
             throw new IncorrectInputValueException("Quantity value should match "
-            + INTEGER_MATCH + " but was - " + information[INDEX_OF_QUANTITY]);
+            + INTEGER_MATCH + " but was - " + transactions[INDEX_OF_QUANTITY]);
         }
-        int quantity = Integer.parseInt(information[INDEX_OF_QUANTITY]);
+        int quantity = Integer.parseInt(transactions[INDEX_OF_QUANTITY]);
         if (quantity < 0) {
             throw new IncorrectInputValueException("Input value cannot be less than 0");
         }
         return new TransactionDto(OperationType.getOperationType(
-                information[INDEX_OF_OPERATION_TYPE]),
-                new Fruit(information[INDEX_OF_FRUIT_TYPE]),
+                transactions[INDEX_OF_OPERATION_TYPE]),
+                new Fruit(transactions[INDEX_OF_FRUIT_TYPE]),
                 quantity);
     }
 }

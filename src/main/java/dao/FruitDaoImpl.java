@@ -19,7 +19,6 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public Optional<Integer> get(Fruit fruit) {
-
         return Optional.ofNullable(storage.getFruitDataBase().get(fruit));
     }
 
