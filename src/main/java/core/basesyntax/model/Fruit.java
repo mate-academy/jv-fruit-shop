@@ -18,9 +18,6 @@ public class Fruit {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
 
         Fruit fruit = (Fruit) o;
 
@@ -30,5 +27,10 @@ public class Fruit {
     @Override
     public int hashCode() {
         return fruitName != null ? fruitName.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return fruitName;
     }
 }

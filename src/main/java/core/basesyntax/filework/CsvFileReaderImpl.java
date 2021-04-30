@@ -1,45 +1,26 @@
 package core.basesyntax.filework;
 
-import core.basesyntax.dao.FruitRecordDto;
 import core.basesyntax.exceptions.ReadFromFileException;
-import core.basesyntax.model.OperationType;
-import core.basesyntax.service.validator.Validator;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CsvFileReaderImpl implements FileReader {
-    public static final List<FruitRecordDto> fruitStore = new ArrayList<>();
-    private static final String COMA = ",";
+    private static final String SEPARATOR = System.lineSeparator();
 
-    public void read(String path) {
+    public String[] read(String path) {
         String line;
+        StringBuilder linesStringBuilder = new StringBuilder();
 
         try (BufferedReader br = new BufferedReader(new java.io.FileReader(path))) {
             while (true) {
                 if ((line = br.readLine()) == null) {
                     break;
                 }
-                if (Validator.isValidLine(line.split(COMA))) {
-                    FruitRecordDto fruit = parseTransaction(line.split(COMA));
-                    fruitStore.add(fruit);
-                } else {
-                    continue;
-                }
+                linesStringBuilder.append(line).append(SEPARATOR);
             }
         } catch (IOException e) {
-            throw new ReadFromFileException("Can't rad from file");
+            throw new ReadFromFileException("Can't read from file");
         }
-    }
-
-    @Override
-    public List<FruitRecordDto> getStorage() {
-        return fruitStore;
-    }
-
-    private FruitRecordDto parseTransaction(String[] line) {
-        return new FruitRecordDto(OperationType.getType(line[0]),
-                line[1], Integer.parseInt(line[2]));
+        return linesStringBuilder.toString().split(SEPARATOR);
     }
 }

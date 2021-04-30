@@ -9,13 +9,12 @@ public class DecreaseOperationHandler implements OperationHandler {
 
     @Override
     public void apply(FruitRecordDto fruitRecord) {
-        Fruit fruit = new Fruit(fruitRecord.getFruitName());
-        if (!FruitStorage.storage.containsKey(fruit.getFruitName())) {
-            FruitStorage.storage.put(fruit.getFruitName(), 0);
+        if (!FruitStorage.storage.containsKey(fruitRecord.getFruitName())) {
+            FruitStorage.storage.put(new Fruit(fruitRecord.getFruitName().toString()), 0);
         }
-        Integer currentQuantity = FruitStorage.storage.get(fruit.getFruitName());
+        Integer currentQuantity = FruitStorage.storage.get(fruitRecord.getFruitName());
         int newQuantity = currentQuantity - fruitRecord.getQuantity();
         Validator.canDoPurchase(newQuantity, currentQuantity, fruitRecord);
-        FruitStorage.storage.put(fruit.getFruitName(), newQuantity);
+        FruitStorage.storage.put(fruitRecord.getFruitName(), newQuantity);
     }
 }

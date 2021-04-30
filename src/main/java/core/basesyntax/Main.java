@@ -7,6 +7,8 @@ import core.basesyntax.filework.FileWriter;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitServiceImpl;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.ParserCsvImpl;
 import core.basesyntax.service.strategy.DecreaseOperationHandler;
 import core.basesyntax.service.strategy.IncreaseOperationHandler;
 import core.basesyntax.service.strategy.OperationHandler;
@@ -25,10 +27,12 @@ public class Main {
         operationHandlerMap.put(OperationType.PURCHASE, new DecreaseOperationHandler());
 
         FileReader reader = new CsvFileReaderImpl();
-        reader.read(FROM_FILE_NAME);
+        String[] lines = reader.read(FROM_FILE_NAME);
+        Parser parser = new ParserCsvImpl();
+        parser.parse(lines);
         FruitService fruitService = new FruitServiceImpl();
-        fruitService.createReport(operationHandlerMap, reader);
+        String report = fruitService.createReport(operationHandlerMap);
         FileWriter writer = new CsvFileWriterImpl();
-        writer.write(TO_FILE_NAME);
+        writer.write(TO_FILE_NAME, report);
     }
 }

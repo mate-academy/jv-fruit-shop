@@ -1,14 +1,15 @@
 package core.basesyntax.dao;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import java.util.Objects;
 
 public class FruitRecordDto {
     private OperationType type;
-    private String fruitName;
+    private Fruit fruitName;
     private int quantity;
 
-    public FruitRecordDto(OperationType type, String fruitName, int quantity) {
+    public FruitRecordDto(OperationType type, Fruit fruitName, int quantity) {
         this.type = type;
         this.fruitName = fruitName;
         this.quantity = quantity;
@@ -18,7 +19,7 @@ public class FruitRecordDto {
         return type;
     }
 
-    public String getFruitName() {
+    public Fruit getFruitName() {
         return fruitName;
     }
 
