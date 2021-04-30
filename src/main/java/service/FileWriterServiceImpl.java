@@ -6,9 +6,8 @@ import java.nio.file.Path;
 import service.interfaces.FileWriterService;
 
 public class FileWriterServiceImpl implements FileWriterService {
-
     @Override
-    public void fileWriteTo(String report, String path) {
+    public void writeToFile(String report, String path) {
         try {
             Files.writeString(Path.of(path), report);
         } catch (IOException exception) {

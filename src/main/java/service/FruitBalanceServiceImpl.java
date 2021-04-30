@@ -11,7 +11,7 @@ public class FruitBalanceServiceImpl implements FruitOperationService {
     }
 
     @Override
-    public void apply(TransactionDto transactionDto) {
-        fruitDao.put(transactionDto.getFruit(), transactionDto.getQuantity());
+    public void apply(TransactionDto dto) {
+        fruitDao.put(dto.getFruit(), dto.getQuantity());
     }
 }

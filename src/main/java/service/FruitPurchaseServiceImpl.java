@@ -13,11 +13,11 @@ public class FruitPurchaseServiceImpl implements FruitOperationService {
     }
 
     @Override
-    public void apply(TransactionDto transactionDto) {
-        Optional<Integer> currentQuantity = fruitDao.get(transactionDto.getFruit());
-        if (currentQuantity.isPresent() && currentQuantity.get() >= transactionDto.getQuantity()) {
-            fruitDao.put(transactionDto.getFruit(), currentQuantity.get()
-                    - transactionDto.getQuantity());
+    public void apply(TransactionDto dto) {
+        Optional<Integer> currentQuantity = fruitDao.get(dto.getFruit());
+        if (currentQuantity.isPresent() && currentQuantity.get() >= dto.getQuantity()) {
+            fruitDao.put(dto.getFruit(), currentQuantity.get()
+                    - dto.getQuantity());
             return;
         }
         throw new InsufficientAmountException("Insufficient quantity of goods");

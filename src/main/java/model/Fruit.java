@@ -18,7 +18,7 @@ public class Fruit {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Fruit)) {
+        if (!(o.getClass().equals(Fruit.class))) {
             return false;
         }
         Fruit fruit = (Fruit) o;

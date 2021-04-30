@@ -1,11 +1,10 @@
 import dao.FruitDao;
 import dao.FruitDaoImpl;
-import database.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.OperationType;
-import service.FilReaderImpl;
+import service.FileReaderServiceImpl;
 import service.FileWriterServiceImpl;
 import service.FruitBalanceServiceImpl;
 import service.FruitPurchaseServiceImpl;
@@ -13,6 +12,7 @@ import service.FruitReturnServiceImpl;
 import service.FruitSupplyServiceImpl;
 import service.ReportCreateService;
 import service.TransactionDto;
+import service.TransactionDtoParser;
 import service.interfaces.FileReaderService;
 import service.interfaces.FileWriterService;
 import service.interfaces.FruitOperationService;
@@ -22,7 +22,7 @@ public class Main {
     private static final String OUTPUT_PATH = "src/main/resources/reportFile.csv";
 
     public static void main(String[] args) {
-        FruitDao fruitDao = new FruitDaoImpl(new Storage());
+        FruitDao fruitDao = new FruitDaoImpl();
         Map<OperationType, FruitOperationService> strategyOperation = new HashMap<>();
         strategyOperation.put(OperationType.BALANCE,
                 new FruitBalanceServiceImpl(fruitDao));
@@ -33,9 +33,9 @@ public class Main {
         strategyOperation.put(OperationType.RETURN,
                 new FruitReturnServiceImpl(fruitDao));
 
-        FileReaderService fileReaderService = new FilReaderImpl();
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> fileContent = fileReaderService.readFromFile(INPUT_PATH);
-        List<TransactionDto> transactionList = new TransactionDto()
+        List<TransactionDto> transactionList = new TransactionDtoParser()
                 .parser(fileContent);
         for (TransactionDto transaction : transactionList) {
             FruitOperationService fruitOperationService = strategyOperation
@@ -45,6 +45,6 @@ public class Main {
 
         String finalReport = new ReportCreateService(fruitDao).createReport();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.fileWriteTo(finalReport, OUTPUT_PATH);
+        fileWriterService.writeToFile(finalReport, OUTPUT_PATH);
     }
 }

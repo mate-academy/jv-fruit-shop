@@ -7,7 +7,7 @@ import model.Fruit;
 public class Storage {
     private static Map<Fruit, Integer> fruitDataBase = new HashMap<>();
 
-    public Map<Fruit, Integer> getFruitDataBase() {
+    public static Map<Fruit, Integer> getFruitDataBase() {
         return fruitDataBase;
     }
 }

@@ -12,9 +12,9 @@ public class FruitReturnServiceImpl implements FruitOperationService {
     }
 
     @Override
-    public void apply(TransactionDto transactionDto) {
-        Optional<Integer> currentQuantity = fruitDao.get(transactionDto.getFruit());
-        fruitDao.put(transactionDto.getFruit(), currentQuantity.orElse(0)
-                + transactionDto.getQuantity());
+    public void apply(TransactionDto dto) {
+        Optional<Integer> currentQuantity = fruitDao.get(dto.getFruit());
+        fruitDao.put(dto.getFruit(), currentQuantity.orElse(0)
+                + dto.getQuantity());
     }
 }
