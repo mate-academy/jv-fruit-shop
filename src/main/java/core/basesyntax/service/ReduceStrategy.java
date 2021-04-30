@@ -1,11 +1,11 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Storage;
-import core.basesyntax.model.dto.TransactionDto;
+import core.basesyntax.model.dto.FruitRecordDto;
 
 public class ReduceStrategy implements OperationStrategy {
     @Override
-    public void apply(TransactionDto transactionDto) {
+    public void apply(FruitRecordDto transactionDto) {
         if (!Storage.fruits.containsKey(transactionDto.getFruit())) {
             throw new RuntimeException("You can't sell fruits what storage don't contains");
         }

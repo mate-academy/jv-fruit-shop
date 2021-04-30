@@ -1,12 +1,12 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.dto.TransactionDto;
+import core.basesyntax.model.dto.FruitRecordDto;
 import java.util.List;
 import java.util.Map;
 
 public interface FruitShopService {
-    void applyOperationoOnFruitsDto(List<TransactionDto> transactionDtos);
+    void applyOperationOnFruitsDt(List<FruitRecordDto> transactionDtos);
 
     Map<Fruit, Integer> getFruitsReport();
 }

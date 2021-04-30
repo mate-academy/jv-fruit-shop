@@ -1,11 +1,11 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Storage;
-import core.basesyntax.model.dto.TransactionDto;
+import core.basesyntax.model.dto.FruitRecordDto;
 
 public class AdditionStrategy implements OperationStrategy {
     @Override
-    public void apply(TransactionDto transactionDto) {
+    public void apply(FruitRecordDto transactionDto) {
         if (!Storage.fruits.containsKey(transactionDto.getFruit())) {
             Storage.fruits.put(transactionDto.getFruit(), transactionDto.getQuantity());
         } else {

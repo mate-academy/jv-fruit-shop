@@ -2,7 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Storage;
-import core.basesyntax.model.dto.TransactionDto;
+import core.basesyntax.model.dto.FruitRecordDto;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +14,8 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void applyOperationoOnFruitsDto(List<TransactionDto> transactionDtos) {
-        for (TransactionDto dto : transactionDtos) {
+    public void applyOperationOnFruitsDt(List<FruitRecordDto> transactionDtos) {
+        for (FruitRecordDto dto : transactionDtos) {
             Operation operation = dto.getOperation();
             operationStrategyMap.get(operation).apply(dto);
         }

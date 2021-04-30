@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.dto.TransactionDto;
+import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.AdditionStrategy;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
@@ -28,12 +28,12 @@ public class Application {
         ServiceReader fileReader = new ServiceReaderImpl();
         FruitShopService fruitService = new FruitShopServiceImpl(operationStrategyMap);
         ParseToList parse = new Parser();
-        List<TransactionDto> transactionDtos = parse.parseToTransactions(
+        List<FruitRecordDto> fruitRecordDtos = parse.parseToTransactions(
                 fileReader.readFile("src/main/java/resources/shop_fruits.csv"));
-        fruitService.applyOperationoOnFruitsDto(transactionDtos);
+        fruitService.applyOperationOnFruitsDt(fruitRecordDtos);
 
         ServiceWriter fileWriter = new ServiceWriterImpl();
-        fileWriter.writeReport("src/main/java/resources/fruits_report",
+        fileWriter.writeReport("src/main/java/resources/fruits_report.csv",
                 fruitService.getFruitsReport());
     }
 }

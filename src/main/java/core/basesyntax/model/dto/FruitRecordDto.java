@@ -1,25 +1,56 @@
 package core.basesyntax.model.dto;
 
+import core.basesyntax.model.Fruit;
+import core.basesyntax.service.Operation;
+import java.util.Objects;
+
 public class FruitRecordDto {
-    private String operationType;
-    private String fruitName;
+    private Operation operation;
+    private Fruit fruit;
     private Integer quantity;
 
-    public FruitRecordDto(String operationType, String fruitName, Integer quantity) {
-        this.operationType = operationType;
-        this.fruitName = fruitName;
+    public FruitRecordDto(Operation operation, Fruit fruit, Integer quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public String getOperationType() {
-        return operationType;
+    public Operation getOperation() {
+        return operation;
     }
 
-    public String getFruitName() {
-        return fruitName;
+    public Fruit getFruit() {
+        return fruit;
+    }
+
+    public void setFruit(Fruit fruit) {
+        this.fruit = fruit;
     }
 
     public Integer getQuantity() {
         return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitRecordDto that = (FruitRecordDto) o;
+        return operation == that.operation
+                && Objects.equals(fruit, that.fruit)
+                && Objects.equals(quantity, that.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
     }
 }

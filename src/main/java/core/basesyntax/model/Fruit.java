@@ -13,10 +13,6 @@ public class Fruit implements Comparable<Fruit> {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public int compareTo(Fruit fruit) {
         return this.name.compareTo(fruit.name);

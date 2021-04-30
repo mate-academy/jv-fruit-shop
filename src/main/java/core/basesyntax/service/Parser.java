@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import static core.basesyntax.service.Operation.fromString;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.dto.TransactionDto;
+import core.basesyntax.model.dto.FruitRecordDto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,15 +14,15 @@ public class Parser implements ParseToList {
     public static final String COMMA = ",";
 
     @Override
-    public List<TransactionDto> parseToTransactions(List<String> dataFromFile) {
+    public List<FruitRecordDto> parseToTransactions(List<String> dataFromFile) {
         if (dataFromFile.isEmpty()) {
             throw new RuntimeException(String.format("No data in the file %s", dataFromFile));
         }
-        List<TransactionDto> convertedToTransaction = new ArrayList<>();
+        List<FruitRecordDto> convertedToTransaction = new ArrayList<>();
         for (String value : dataFromFile) {
-            String[] splittedData = value.split(COMMA);
-            convertedToTransaction.add(new TransactionDto(fromString(splittedData[OPERATION]),
-                    new Fruit(splittedData[FRUIT]), Integer.valueOf(splittedData[QUANTITY])));
+            String[] splitData = value.split(COMMA);
+            convertedToTransaction.add(new FruitRecordDto(fromString(splitData[OPERATION]),
+                    new Fruit(splitData[FRUIT]), Integer.valueOf(splitData[QUANTITY])));
         }
         return convertedToTransaction;
     }

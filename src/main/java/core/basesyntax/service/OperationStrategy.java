@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.dto.TransactionDto;
+import core.basesyntax.model.dto.FruitRecordDto;
 
 public interface OperationStrategy {
-    void apply(TransactionDto transactionDto);
+    void apply(FruitRecordDto fruitRecordDto);
 }
