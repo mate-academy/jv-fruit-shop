@@ -1,16 +1,15 @@
 package com.companyname.fruitshop.service.impl;
 
-import com.companyname.fruitshop.service.interfaces.ReaderService;
-
+import com.companyname.fruitshop.service.interfaces.FileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FileReaderService implements ReaderService {
+public class FileReaderServiceImpl implements FileReaderService {
     private final Path filePath;
 
-    public FileReaderService(Path filePath) {
+    public FileReaderServiceImpl(Path filePath) {
         this.filePath = filePath;
     }
 

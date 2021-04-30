@@ -5,16 +5,18 @@ import com.companyname.fruitshop.model.dao.FruitDaoImpl;
 import com.companyname.fruitshop.model.dto.FruitRecordDto;
 import com.companyname.fruitshop.service.interfaces.OperationHandler;
 
-public class BalanceOperationHandler implements OperationHandler {
+public class AddOperationHandler implements OperationHandler {
     private final FruitDao fruitDao;
 
-    public BalanceOperationHandler() {
+    public AddOperationHandler() {
         fruitDao = new FruitDaoImpl();
     }
 
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
-        fruitDao.add(fruitRecordDto);
-        return fruitDao.getCurrentQuantity(fruitRecordDto);
+        int currentQuantity = fruitDao.getCurrentQuantity(fruitRecordDto);
+        int newQuantity = currentQuantity + fruitRecordDto.getQuantity();
+        fruitDao.updateQuantity(fruitRecordDto, newQuantity);
+        return newQuantity;
     }
 }

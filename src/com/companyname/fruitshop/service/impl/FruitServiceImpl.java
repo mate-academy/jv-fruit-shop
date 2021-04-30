@@ -1,21 +1,33 @@
 package com.companyname.fruitshop.service.impl;
 
-import com.companyname.fruitshop.dao.FruitDao;
-import com.companyname.fruitshop.model.Fruit;
-import com.companyname.fruitshop.model.Operation;
+import com.companyname.fruitshop.model.dto.FruitRecordDto;
 import com.companyname.fruitshop.service.interfaces.FruitService;
 import com.companyname.fruitshop.service.interfaces.OperationStrategy;
+import com.companyname.fruitshop.service.interfaces.ParserService;
+import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-    private final FruitDao fruitDao;
-    private OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
+    private final ParserService parserService;
 
-    public FruitServiceImpl(FruitDao fruitDao, OperationStrategy operationStrategy) {
-        this.fruitDao = fruitDao;
+    public FruitServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
+        parserService = new ParserServiceImpl();
     }
 
     @Override
-    public void doSomething(Fruit fruit, Operation operation) {
+    public void saveData(List<String> data) {
+        data.stream()
+                .map(parserService::parse)
+                .forEach(this::applyStrategy);
+    }
+
+    @Override
+    public String getReport() {
+        return null;
+    }
+
+    private void applyStrategy(FruitRecordDto fruitRecord) {
+        operationStrategy.get(fruitRecord.getOperation()).apply(fruitRecord);
     }
 }
