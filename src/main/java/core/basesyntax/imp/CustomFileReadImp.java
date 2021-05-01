@@ -1,7 +1,6 @@
-package core.basesyntax.Imp;
+package core.basesyntax.imp;
 
-import core.basesyntax.Service.CustomFileReader;
-
+import core.basesyntax.service.CustomFileReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

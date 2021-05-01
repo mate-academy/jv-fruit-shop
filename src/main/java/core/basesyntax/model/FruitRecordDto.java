@@ -1,4 +1,4 @@
-package core.basesyntax.Model;
+package core.basesyntax.model;
 
 import java.util.Objects;
 
@@ -27,10 +27,15 @@ public class FruitRecordDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FruitRecordDto that = (FruitRecordDto) o;
-        return amount == that.amount && Objects.equals(operation, that.operation) && Objects.equals(nameFruits, that.nameFruits);
+        return amount == that.amount && Objects.equals(operation, that.operation)
+                && Objects.equals(nameFruits, that.nameFruits);
     }
 
     @Override

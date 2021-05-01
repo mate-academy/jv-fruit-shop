@@ -1,6 +1,6 @@
-package core.basesyntax.Service;
+package core.basesyntax.service;
 
-import core.basesyntax.Model.FruitRecordDto;
+import core.basesyntax.model.FruitRecordDto;
 
 public interface Validator {
     boolean checkAmount(FruitRecordDto fruit);

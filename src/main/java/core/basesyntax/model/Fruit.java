@@ -1,4 +1,4 @@
-package core.basesyntax.Model;
+package core.basesyntax.model;
 
 import java.util.Objects;
 
@@ -13,14 +13,14 @@ public class Fruit {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Fruit fruit = (Fruit) o;
         return Objects.equals(name, fruit.name);
     }
@@ -29,5 +29,4 @@ public class Fruit {
     public int hashCode() {
         return Objects.hash(name);
     }
-
 }

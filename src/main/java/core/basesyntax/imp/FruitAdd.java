@@ -1,9 +1,9 @@
-package core.basesyntax.Imp;
+package core.basesyntax.imp;
 
-import core.basesyntax.Model.Fruit;
-import core.basesyntax.Model.FruitRecordDto;
-import core.basesyntax.Model.Storage;
-import core.basesyntax.Service.FruitOperation;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitRecordDto;
+import core.basesyntax.model.Storage;
+import core.basesyntax.service.FruitOperation;
 
 public class FruitAdd implements FruitOperation {
     @Override

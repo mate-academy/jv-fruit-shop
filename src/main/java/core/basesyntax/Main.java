@@ -1,13 +1,12 @@
 package core.basesyntax;
 
-import core.basesyntax.Dto.CustomWriterFileImp;
-import core.basesyntax.Imp.CustomFileReadImp;
-import core.basesyntax.Imp.FruitAdd;
-import core.basesyntax.Imp.FruitMinus;
-import core.basesyntax.Imp.FruitParseDtoParseImp;
-import core.basesyntax.Model.FruitRecordDto;
-import core.basesyntax.Service.FruitOperation;
-
+import core.basesyntax.dto.CustomWriterFileImp;
+import core.basesyntax.imp.CustomFileReadImp;
+import core.basesyntax.imp.FruitAdd;
+import core.basesyntax.imp.FruitMinus;
+import core.basesyntax.imp.FruitParseDtoParseImp;
+import core.basesyntax.model.FruitRecordDto;
+import core.basesyntax.service.FruitOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

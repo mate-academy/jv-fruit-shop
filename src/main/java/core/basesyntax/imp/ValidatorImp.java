@@ -1,9 +1,9 @@
-package core.basesyntax.Imp;
+package core.basesyntax.imp;
 
-import core.basesyntax.Model.Fruit;
-import core.basesyntax.Model.FruitRecordDto;
-import core.basesyntax.Model.Storage;
-import core.basesyntax.Service.Validator;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitRecordDto;
+import core.basesyntax.model.Storage;
+import core.basesyntax.service.Validator;
 
 public class ValidatorImp implements Validator {
     @Override

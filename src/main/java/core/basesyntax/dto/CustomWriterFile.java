@@ -1,4 +1,4 @@
-package core.basesyntax.Dto;
+package core.basesyntax.dto;
 
 public interface CustomWriterFile {
     void writeFile(String nameFile);

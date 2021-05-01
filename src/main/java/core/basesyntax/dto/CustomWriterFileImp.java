@@ -1,8 +1,7 @@
-package core.basesyntax.Dto;
+package core.basesyntax.dto;
 
-import core.basesyntax.Model.Fruit;
-import core.basesyntax.Model.Storage;
-
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Storage;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
