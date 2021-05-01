@@ -4,10 +4,10 @@ import dao.FruitsDao;
 import model.Fruit;
 import model.FruitRecordDto;
 
-public class CreateAddOperation implements Operation {
+public class CreateOperation implements Operation {
     private FruitsDao fruitsDao;
 
-    public CreateAddOperation(FruitsDao fruitsDao) {
+    public CreateOperation(FruitsDao fruitsDao) {
         this.fruitsDao = fruitsDao;
     }
 

@@ -1,7 +1,7 @@
 package dao;
 
 import db.Storage;
-import exception.NoFruitsException;
+import exception.InvalidInputException;
 import java.util.Map;
 import java.util.Set;
 import model.Fruit;
@@ -29,7 +29,7 @@ public class FruitsDaoImpl implements FruitsDao {
     public void update(Fruit fruit, Integer amount) {
         Integer oldValue = Storage.getFruits().remove(fruit);
         if (oldValue == null) {
-            throw new NoFruitsException("there are no " + fruit.getType() + " in this store");
+            throw new InvalidInputException("there are no " + fruit.getType() + " in this store");
         }
         add(fruit, amount);
     }

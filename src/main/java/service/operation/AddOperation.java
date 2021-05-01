@@ -1,7 +1,7 @@
 package service.operation;
 
 import dao.FruitsDao;
-import exception.NoFruitsException;
+import exception.InvalidInputException;
 import model.Fruit;
 import model.FruitRecordDto;
 
@@ -18,7 +18,7 @@ public class AddOperation implements Operation {
         int newAmount = fruitsDao.getAmount(fruit) + fruitRecordDto.getAmount();
         try {
             fruitsDao.update(fruit, newAmount);
-        } catch (NoFruitsException e) {
+        } catch (InvalidInputException e) {
             return false;
         }
         return true;
