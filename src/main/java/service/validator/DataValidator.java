@@ -11,6 +11,8 @@ public class DataValidator implements Predicate<String> {
     public static final String PURCHASE = "p";
     public static final String SUPPLY = "s";
     public static final String RETURN = "r";
+    public static final int QUANTITY_INDEX = 2;
+    public static final int OPERATION_INDEX = 0;
 
     @Override
     public boolean test(String data) {
@@ -19,13 +21,13 @@ public class DataValidator implements Predicate<String> {
             return false;
         }
         try {
-            if (Integer.parseInt(dataArr[2]) < 0) {
+            if (Integer.parseInt(dataArr[QUANTITY_INDEX]) < 0) {
                 throw new InvalidInputException(NEGATIVE_INPUT_MESSAGE);
             }
         } catch (NumberFormatException e) {
             return false;
         }
-        String activity = dataArr[0];
+        String activity = dataArr[OPERATION_INDEX];
         return BALANCE.equals(activity)
                 || PURCHASE.equals(activity)
                 || SUPPLY.equals(activity)
