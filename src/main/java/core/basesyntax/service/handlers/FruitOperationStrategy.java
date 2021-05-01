@@ -1,7 +1,7 @@
-package core.basesyntax.service.interfaces;
+package core.basesyntax.service.handlers;
 
 import core.basesyntax.model.dto.FruitRecordDto;
 
-public interface FruitOperationHandler {
+public interface FruitOperationStrategy {
     void applyAction(FruitRecordDto fruitRecordDto);
 }

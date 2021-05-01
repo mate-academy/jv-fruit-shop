@@ -1,11 +1,10 @@
-package core.basesyntax.service;
+package core.basesyntax.service.handlers;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.dto.FruitRecordDto;
-import core.basesyntax.service.interfaces.FruitOperationHandler;
 
-public class AddOperation implements FruitOperationHandler {
+public class AddOperationStrategy implements FruitOperationStrategy {
     private static final int DEFAULT_VALUE = 0;
 
     @Override

@@ -1,6 +1,5 @@
-package core.basesyntax.service;
+package core.basesyntax.service.file_readers;
 
-import core.basesyntax.service.interfaces.FileReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

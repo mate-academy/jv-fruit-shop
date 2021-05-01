@@ -1,4 +1,4 @@
-package core.basesyntax.service.interfaces;
+package core.basesyntax.service.parser;
 
 import core.basesyntax.model.dto.FruitRecordDto;
 import java.util.List;

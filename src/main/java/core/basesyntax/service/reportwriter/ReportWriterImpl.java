@@ -1,7 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.service.report_writer;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.interfaces.ReportWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
