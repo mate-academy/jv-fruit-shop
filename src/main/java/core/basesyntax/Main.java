@@ -12,8 +12,10 @@ import core.basesyntax.files.FileWriter;
 import core.basesyntax.files.FileWriterImpl;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitServiceImpl;
-import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.service.Generator;
+import core.basesyntax.service.GeneratorImpl;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.ParserImpl;
 import core.basesyntax.service.validation.Validator;
 import core.basesyntax.service.validation.ValidatorImpl;
 import java.util.HashMap;
@@ -29,13 +31,14 @@ public class Main {
         operationsMap.put("p", new FruitPurchase());
         operationsMap.put("r", new FruitSupplyOrReturn());
         operationsMap.put("s", new FruitSupplyOrReturn());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
         FruitDao fruitDao = new FruitDaoImpl();
-        Validator validator = new ValidatorImpl(operationStrategy, fruitDao);
-        FruitService fruitService = new FruitServiceImpl(validator, operationStrategy, fruitDao);
-        FileReader fileReader = new FileReaderImpl(fruitService);
-        FileWriter fileWriter = new FileWriterImpl(fruitService);
-        fileReader.readFromInputFile(FROM_FILE_PATH);
-        fileWriter.writeToReport(TO_FILE_PATH);
+        Validator validator = new ValidatorImpl(operationsMap, fruitDao);
+        FruitService fruitService = new FruitServiceImpl(operationsMap, validator, fruitDao);
+        Parser parser = new ParserImpl();
+        Generator generator = new GeneratorImpl(fruitDao);
+        FileReader fileReader = new FileReaderImpl();
+        FileWriter fileWriter = new FileWriterImpl();
+        fruitService.applyOperationsOnFruitsDto(parser.parseDto(fileReader.read(FROM_FILE_PATH)));
+        fileWriter.write(TO_FILE_PATH, generator.generateReport());
     }
 }

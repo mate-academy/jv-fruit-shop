@@ -1,9 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.dto.FruitDto;
 import java.util.List;
 
 public interface FruitService {
-    void writeToStorage(List<String> information);
-
-    String generateReport();
+    void applyOperationsOnFruitsDto(List<FruitDto> transactions);
 }

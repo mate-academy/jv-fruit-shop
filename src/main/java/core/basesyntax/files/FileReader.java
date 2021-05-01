@@ -1,5 +1,7 @@
 package core.basesyntax.files;
 
+import java.util.List;
+
 public interface FileReader {
-    void readFromInputFile(String filePath);
+    List<String> read(String filePath);
 }

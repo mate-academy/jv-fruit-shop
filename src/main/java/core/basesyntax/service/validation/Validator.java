@@ -1,5 +1,7 @@
 package core.basesyntax.service.validation;
 
+import core.basesyntax.dto.FruitDto;
+
 public interface Validator {
-    void validateFile(String lineFromFile);
+    void validateFile(FruitDto fruitDto);
 }
