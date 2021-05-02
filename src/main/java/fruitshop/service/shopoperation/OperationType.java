@@ -1,4 +1,4 @@
-package fruitshop.service.operation;
+package fruitshop.service.shopoperation;
 
 public enum OperationType {
     BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");

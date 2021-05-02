@@ -1,8 +1,8 @@
 package fruitshop.service;
 
-import fruitshop.model.dto.FruitDto;
+import fruitshop.model.dto.FruitOperationDto;
 import java.util.List;
 
 public interface FruitDtoParser {
-    List<FruitDto> parse(List<String> fruitInfoLines);
+    List<FruitOperationDto> parse(List<String> fruitInfoLines);
 }

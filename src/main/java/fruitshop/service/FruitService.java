@@ -1,8 +1,8 @@
 package fruitshop.service;
 
-import fruitshop.service.operation.OperationHandler;
-import fruitshop.service.operation.OperationType;
+import fruitshop.service.shopoperation.OperationHandler;
+import fruitshop.service.shopoperation.OperationType;
 
 public interface FruitService {
-    OperationHandler get(OperationType operationType);
+    OperationHandler getOperation(OperationType operationType);
 }

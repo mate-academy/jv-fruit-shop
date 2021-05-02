@@ -2,27 +2,28 @@ package fruitshop.dao;
 
 import fruitshop.db.FruitStorage;
 import fruitshop.model.Fruit;
-import fruitshop.model.dto.FruitDto;
+import fruitshop.model.dto.FruitOperationDto;
 import fruitshop.model.dto.ReportDto;
+import java.math.BigDecimal;
 
 public class FruitStorageDaoImpl implements FruitStorageDao {
     @Override
-    public Integer getValueFromStorage(FruitDto fruitDto) {
-        Fruit fruit = new Fruit(fruitDto.getFruitName());
+    public BigDecimal getValueFromStorage(FruitOperationDto fruitOperationDto) {
+        Fruit fruit = new Fruit(fruitOperationDto.getFruitName());
         if (FruitStorage.getFruitMap().containsKey(fruit)) {
             return FruitStorage.getFruitMap().get(fruit);
         }
-        return 0;
+        return BigDecimal.valueOf(0);
     }
 
     @Override
-    public void updateDataInStorage(FruitDto fruitDto) {
+    public void updateDataInStorage(FruitOperationDto fruitOperationDto) {
         FruitStorage.getFruitMap()
-                .put(new Fruit(fruitDto.getFruitName()), fruitDto.getQuantity());
+                .put(new Fruit(fruitOperationDto.getFruitName()), fruitOperationDto.getQuantity());
     }
 
     @Override
-    public ReportDto getDataFromStorage() {
+    public ReportDto getDataReportFromStorage() {
         return new ReportDto(FruitStorage.getFruitMap().entrySet());
     }
 }

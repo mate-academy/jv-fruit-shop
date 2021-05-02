@@ -1,12 +1,13 @@
 package fruitshop.dao;
 
-import fruitshop.model.dto.FruitDto;
+import fruitshop.model.dto.FruitOperationDto;
 import fruitshop.model.dto.ReportDto;
+import java.math.BigDecimal;
 
 public interface FruitStorageDao {
-    Integer getValueFromStorage(FruitDto fruitDto);
+    BigDecimal getValueFromStorage(FruitOperationDto fruitOperationDto);
 
-    void updateDataInStorage(FruitDto fruitDto);
+    void updateDataInStorage(FruitOperationDto fruitOperationDto);
 
-    ReportDto getDataFromStorage();
+    ReportDto getDataReportFromStorage();
 }

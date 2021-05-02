@@ -1,13 +1,14 @@
 package fruitshop.model.dto;
 
-import fruitshop.service.operation.OperationType;
+import fruitshop.service.shopoperation.OperationType;
+import java.math.BigDecimal;
 
-public class FruitDto {
+public class FruitOperationDto {
     private final OperationType operationType;
     private final String fruitName;
-    private final Integer quantity;
+    private final BigDecimal quantity;
 
-    public FruitDto(OperationType operationType, String fruitName, Integer quantity) {
+    public FruitOperationDto(OperationType operationType, String fruitName, BigDecimal quantity) {
         this.operationType = operationType;
         this.fruitName = fruitName;
         this.quantity = quantity;
@@ -21,7 +22,7 @@ public class FruitDto {
         return fruitName;
     }
 
-    public Integer getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 }

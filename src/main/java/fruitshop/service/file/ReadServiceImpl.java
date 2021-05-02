@@ -1,4 +1,4 @@
-package fruitshop.service.files;
+package fruitshop.service.file;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,7 +1,7 @@
 package fruitshop.service;
 
-import fruitshop.service.operation.OperationHandler;
-import fruitshop.service.operation.OperationType;
+import fruitshop.service.shopoperation.OperationHandler;
+import fruitshop.service.shopoperation.OperationType;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
@@ -12,7 +12,7 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public OperationHandler get(OperationType operationType) {
+    public OperationHandler getOperation(OperationType operationType) {
         return operationMap.get(operationType);
     }
 }

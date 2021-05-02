@@ -1,7 +1,7 @@
 package fruitshop;
 
 import fruitshop.dao.FruitStorageDaoImpl;
-import fruitshop.model.dto.FruitDto;
+import fruitshop.model.dto.FruitOperationDto;
 import fruitshop.model.dto.ReportDto;
 import fruitshop.service.FruitDtoParser;
 import fruitshop.service.FruitDtoParserImpl;
@@ -9,14 +9,14 @@ import fruitshop.service.FruitService;
 import fruitshop.service.FruitServiceImpl;
 import fruitshop.service.ReportService;
 import fruitshop.service.ReportServiceImpl;
-import fruitshop.service.files.ReadService;
-import fruitshop.service.files.ReadServiceImpl;
-import fruitshop.service.files.WriteService;
-import fruitshop.service.files.WriteServiceImpl;
-import fruitshop.service.operation.OperationHandler;
-import fruitshop.service.operation.OperationType;
-import fruitshop.service.operation.StorageDecreaseHandler;
-import fruitshop.service.operation.StorageIncreaseHandler;
+import fruitshop.service.file.ReadService;
+import fruitshop.service.file.ReadServiceImpl;
+import fruitshop.service.file.WriteService;
+import fruitshop.service.file.WriteServiceImpl;
+import fruitshop.service.shopoperation.OperationHandler;
+import fruitshop.service.shopoperation.OperationType;
+import fruitshop.service.shopoperation.StorageDecreaseHandler;
+import fruitshop.service.shopoperation.StorageIncreaseHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,12 +35,13 @@ public class Main {
         ReadService readService = new ReadServiceImpl();
         List<String> fruitDataLines = readService.readFromFile("src/main/resources/input.csv");
         FruitDtoParser fruitDtoParser = new FruitDtoParserImpl();
-        List<FruitDto> fruitDtoList = fruitDtoParser.parse(fruitDataLines);
+        List<FruitOperationDto> fruitOperationDtoList = fruitDtoParser.parse(fruitDataLines);
         FruitService fruitService = new FruitServiceImpl(operationMap);
-        for (FruitDto fruitDto : fruitDtoList) {
-            fruitService.get(fruitDto.getOperationType()).apply(fruitDto);
+        for (FruitOperationDto fruitOperationDto : fruitOperationDtoList) {
+            fruitService.getOperation(fruitOperationDto.getOperationType())
+                    .apply(fruitOperationDto);
         }
-        ReportDto reportDto = new FruitStorageDaoImpl().getDataFromStorage();
+        ReportDto reportDto = new FruitStorageDaoImpl().getDataReportFromStorage();
         ReportService reportService = new ReportServiceImpl();
         String reportString = reportService.generateReport(reportDto);
         WriteService writeService = new WriteServiceImpl();
