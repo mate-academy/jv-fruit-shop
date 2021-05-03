@@ -3,10 +3,9 @@ package core.basesyntax.service.workwithfile;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.SaveDataToStorage;
-
 import java.util.Map;
 
-public class ReportImpl implements Report{
+public class ReportImpl implements Report {
     private static final String TITLE = "fruit,quantity";
 
     @Override
@@ -18,7 +17,7 @@ public class ReportImpl implements Report{
                          .append(",")
                          .append(entry.getValue())
                          .append(System.lineSeparator());
-            }
+        }
         return reportBuilder.toString().trim();
     }
 }

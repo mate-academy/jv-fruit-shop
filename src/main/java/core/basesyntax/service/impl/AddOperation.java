@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.FruitOperation;
-
 import java.util.Optional;
 
 public class AddOperation implements FruitOperation {

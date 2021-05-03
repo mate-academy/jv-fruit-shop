@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.operations.OperationType;
-
 import java.util.List;
 import java.util.Map;
 

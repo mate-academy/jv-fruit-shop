@@ -6,11 +6,10 @@ import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.FruitOperation;
 import core.basesyntax.validate.RemoveOperationValidator;
 import core.basesyntax.validate.impl.RemoveOperationValidatorImpl;
-
 import java.util.Optional;
 
 public class RemoveOperation implements FruitOperation {
-    RemoveOperationValidator removeOperationValidator
+    private RemoveOperationValidator removeOperationValidator
             = new RemoveOperationValidatorImpl();
 
     @Override
@@ -21,7 +20,8 @@ public class RemoveOperation implements FruitOperation {
         int newValue = 0;
         if (currentQuantityFruit.isPresent()
                 && removeOperationValidator
-                .removeOperationValidate(currentQuantityFruit.get(), fruitRecordDto.getFruitCount())) {
+                .removeOperationValidate(currentQuantityFruit.get(),
+                        fruitRecordDto.getFruitCount())) {
             newValue = currentQuantityFruit.get() - fruitRecordDto.getFruitCount();
             Storage.fruits.put(fruit, newValue);
         }
