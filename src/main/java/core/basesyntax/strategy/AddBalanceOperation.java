@@ -6,9 +6,9 @@ import core.basesyntax.model.Fruit;
 
 public class AddBalanceOperation implements FruitOperationHandler {
     @Override
-    public void apply(FruitRecordDto fruitRecordDto)  {
-        Integer quantity =  fruitRecordDto.getQuantity();
+    public void apply(FruitRecordDto fruitRecordDto) {
+        Integer quantity = fruitRecordDto.getQuantity();
         checkQuantity(quantity);
-        Storage.fruitsDataBase.put(new Fruit(fruitRecordDto.getFruitName()), fruitRecordDto.getQuantity());
+        Storage.fruitsDataBase.put(new Fruit(fruitRecordDto.getFruitName()), quantity);
     }
 }

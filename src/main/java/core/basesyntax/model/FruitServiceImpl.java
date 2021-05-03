@@ -3,26 +3,33 @@ package core.basesyntax.model;
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitRecordDto;
 import core.basesyntax.strategy.FruitOperationHandler;
-
 import java.util.List;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
+    private static final String COLUMNS_NAME = "fruit,quantity";
+    private static final String COMMA = ",";
+
     @Override
-    public void save(List<FruitRecordDto> recordDtos, Map<Operation, FruitOperationHandler> operationStrategyMap) {
+    public void save(List<FruitRecordDto> recordDtos, Map<Operation,
+            FruitOperationHandler> strategyMap) {
         for (FruitRecordDto fruitRecordDto : recordDtos) { // b,banana,100
-            FruitOperationHandler fruitOperationHandler = operationStrategyMap.get(fruitRecordDto.getOperationType());//отримую операцію
-            fruitOperationHandler.apply(fruitRecordDto);
+            Operation operationType = fruitRecordDto.getOperationType();
+            FruitOperationHandler fruitOperation = strategyMap.get(operationType);//отримую операцію
+            fruitOperation.apply(fruitRecordDto);
         }
     }
 
     @Override
     public String getReport() {
         StringBuilder builderReport = new StringBuilder();
-        builderReport.append("fruit,quantity").append(System.lineSeparator());
+        builderReport.append(COLUMNS_NAME).append(System.lineSeparator());
 
         for (Map.Entry<Fruit, Integer> entry : Storage.fruitsDataBase.entrySet()) {
-            builderReport.append(entry.getKey()).append(",").append(entry.getValue()).append(System.lineSeparator());
+            builderReport.append(entry.getKey().getType())
+                    .append(COMMA)
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
         }
         return builderReport.toString().strip();
     }

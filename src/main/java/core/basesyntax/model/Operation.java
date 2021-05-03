@@ -20,6 +20,6 @@ public enum Operation {
                 return operation;
             }
         }
-        throw new RuntimeException("This operation is missing " + operationType);
+        throw new RuntimeException("This operation is missing - " + operationType);
     }
 }

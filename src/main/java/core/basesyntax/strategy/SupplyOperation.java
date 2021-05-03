@@ -7,7 +7,7 @@ import core.basesyntax.model.Fruit;
 public class SupplyOperation implements FruitOperationHandler {
     @Override
     public void apply(FruitRecordDto fruitRecordDto) {
-        Integer quantity =  fruitRecordDto.getQuantity();
+        Integer quantity = fruitRecordDto.getQuantity();
         checkQuantity(quantity);
 
         Fruit fruit = new Fruit(fruitRecordDto.getFruitName());

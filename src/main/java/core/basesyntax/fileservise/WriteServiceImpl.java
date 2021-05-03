@@ -1,6 +1,4 @@
-package core.basesyntax.FileServise;
-
-import core.basesyntax.FileServise.WriteService;
+package core.basesyntax.fileservise;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +11,7 @@ public class WriteServiceImpl implements WriteService {
         try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file", e);
+            throw new RuntimeException("Can't write to file - " + filePath, e);
         }
     }
 }
