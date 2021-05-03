@@ -14,9 +14,8 @@ public class CsvReadServiceImpl implements ReadService {
         List<String> dataFromFile = new ArrayList<>();
         try (BufferedReader readFile = new BufferedReader(new FileReader(filePath))) {
             String data = readFile.readLine();
-            DataValidator dataValidator = new DataValidator();
             while ((data != null)) {
-                dataValidator.validateData(data);
+                new DataValidator().validateData(data);
                 dataFromFile.add(data);
                 data = readFile.readLine();
             }
