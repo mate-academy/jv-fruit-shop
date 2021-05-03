@@ -18,7 +18,7 @@ public class PurchaseOperation implements FruitOperationHandler {
         }
         if (purchaseAmount < 0) {
             throw new RuntimeException("Buyers will not be able to buy "
-                    + purchaseAmount + " bananas. -10 is incorrect input.");
+                    + purchaseAmount + " bananas. It's incorrect input.");
         }
         int newQuantity = currentQuantity - purchaseAmount;
         Storage.fruits.put(fruit,newQuantity);
