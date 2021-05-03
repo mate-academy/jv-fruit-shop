@@ -27,7 +27,13 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
             String operationType = parseLine[TYPE];
             Operation operationTypeCorrect = Operation.getOperationByShortName(operationType);
             String fruitName = parseLine[FRUIT_NAME];
-            Integer quantity = Integer.parseInt(parseLine[QUANTITY]);
+
+            int quantity; //додаткова перевірка, якщо в колонку quantity введуть null
+            try {
+                quantity = Integer.parseInt(parseLine[QUANTITY]);
+            } catch (NumberFormatException e) {
+                throw new RuntimeException("Invalid value entered - " + parseLine[QUANTITY]);
+            }
             FruitRecordDto dto = new FruitRecordDto(operationTypeCorrect, fruitName, quantity);
             recordDtos.add(dto);
         }

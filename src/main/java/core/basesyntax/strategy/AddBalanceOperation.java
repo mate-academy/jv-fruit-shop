@@ -9,6 +9,8 @@ public class AddBalanceOperation implements FruitOperationHandler {
     public void apply(FruitRecordDto fruitRecordDto) {
         Integer quantity = fruitRecordDto.getQuantity();
         checkQuantity(quantity);
-        Storage.fruitsDataBase.put(new Fruit(fruitRecordDto.getFruitName()), quantity);
+        String fruitName = fruitRecordDto.getFruitName();
+        checkFruitName(fruitName);
+        Storage.fruitsDataBase.put(new Fruit(fruitName), quantity);
     }
 }

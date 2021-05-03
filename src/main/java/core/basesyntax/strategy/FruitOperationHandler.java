@@ -10,4 +10,10 @@ public interface FruitOperationHandler {
             throw new RuntimeException("Negative value of the number of fruits");
         }
     }
+
+    default void checkFruitName(String fruitType) {
+        if (fruitType.equals("null") || fruitType.equals("")) {
+            throw new RuntimeException("Wrong fruit name - " + fruitType);
+        }
+    }
 }
