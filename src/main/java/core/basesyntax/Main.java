@@ -10,6 +10,7 @@ import service.ReportService;
 import service.StoreService;
 import service.file.FileReader;
 import service.file.FileReaderImpl;
+import service.file.FileWriterImpl;
 import service.impl.FruitRecordParserServiceImpl;
 import service.impl.OperationStrategyImpl;
 import service.impl.ReportServiceImpl;
@@ -37,7 +38,7 @@ public class Main {
         StoreService storeService = new StoreServiceImpl(operationStrategy);
         storeService.doInstruction(recordService.getRecord(fileReader.readFile("src/store.csv")));
 
-        ReportService reportService = new ReportServiceImpl();
+        ReportService reportService = new ReportServiceImpl(new FileWriterImpl(), fruitsDao);
         reportService.createReport("src/report.csv");
     }
 }
