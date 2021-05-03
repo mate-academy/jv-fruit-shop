@@ -16,7 +16,7 @@ public class ReturnOperation implements FruitOperationHandler {
         if (Storage.fruitsDataBase.containsKey(fruit)) {
             Storage.fruitsDataBase.put(fruit, Storage.fruitsDataBase.get(fruit) + quantity);
         } else {
-            throw new RuntimeException("This fruit is not in stock - " + fruit.getType());
+            throw new RuntimeException("This fruit is not in stock - " + fruitName);
         }
     }
 }

@@ -16,7 +16,7 @@ public class SupplyOperation implements FruitOperationHandler {
         if (Storage.fruitsDataBase.containsKey(fruit)) {
             Storage.fruitsDataBase.put(fruit, Storage.fruitsDataBase.get(fruit) + quantity);
         } else {
-            Storage.fruitsDataBase.put(fruit, fruitRecordDto.getQuantity());
+            Storage.fruitsDataBase.put(fruit, quantity);
         }
     }
 }
