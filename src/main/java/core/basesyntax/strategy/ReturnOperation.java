@@ -6,7 +6,7 @@ import core.basesyntax.model.Fruit;
 
 public class ReturnOperation implements FruitOperationHandler {
     @Override
-    public void apply(FruitRecordDto fruitRecordDto) {
+    public int apply(FruitRecordDto fruitRecordDto) {
         Integer quantity = fruitRecordDto.getQuantity();
         checkQuantity(quantity);
 
@@ -16,5 +16,6 @@ public class ReturnOperation implements FruitOperationHandler {
         } else {
             throw new RuntimeException("This fruit is not in stock - " + fruit.getType());
         }
+        return Storage.fruitsDataBase.get(fruit);
     }
 }

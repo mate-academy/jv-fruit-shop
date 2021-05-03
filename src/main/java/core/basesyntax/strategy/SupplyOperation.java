@@ -6,7 +6,7 @@ import core.basesyntax.model.Fruit;
 
 public class SupplyOperation implements FruitOperationHandler {
     @Override
-    public void apply(FruitRecordDto fruitRecordDto) {
+    public int apply(FruitRecordDto fruitRecordDto) {
         Integer quantity = fruitRecordDto.getQuantity();
         checkQuantity(quantity);
         String fruitName = fruitRecordDto.getFruitName();
@@ -18,5 +18,6 @@ public class SupplyOperation implements FruitOperationHandler {
         } else {
             Storage.fruitsDataBase.put(fruit, quantity);
         }
+        return Storage.fruitsDataBase.get(fruit);
     }
 }

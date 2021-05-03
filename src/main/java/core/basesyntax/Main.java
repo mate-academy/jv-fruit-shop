@@ -24,29 +24,23 @@ public class Main {
     private static final String FILE_PATH_FOR_WRITE = "src\\main\\save_Report.csv";
 
     public static void main(String[] args) {
-        // мапа зі стратегіями
         Map<Operation, FruitOperationHandler> strategyMap = new HashMap<>();
         strategyMap.put(Operation.BALANCE, new AddBalanceOperation());
         strategyMap.put(Operation.SUPPLY, new SupplyOperation());
         strategyMap.put(Operation.PURCHASE, new PurchaseOperation());
         strategyMap.put(Operation.RETURN, new ReturnOperation());
 
-        //зчитуємо файл
         ReaderService readerService = new ReaderServiceImpl();
         List<String> linesFromFile = readerService.read(FILE_PATH_FOR_READ);
 
-        // розпарсимо файл
         FruitRecordDtoParser parser = new FruitRecordDtoParserImpl();
         List<FruitRecordDto> fruitRecordDtos = parser.parse(linesFromFile);
 
-        // викликаємо фрутсервіс і заносимо всі дані у базу(storage.fruits)
         FruitService fruitService = new FruitServiceImpl();
         fruitService.save(fruitRecordDtos, strategyMap);
 
-        // створили стрінгу з report
         String report = fruitService.getReport();
 
-        // створимо файл з report
         WriteService writeService = new WriteServiceImpl();
         writeService.write(report, FILE_PATH_FOR_WRITE);
     }

@@ -13,9 +13,9 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public void save(List<FruitRecordDto> recordDtos, Map<Operation,
             FruitOperationHandler> strategyMap) {
-        for (FruitRecordDto fruitRecordDto : recordDtos) { // b,banana,100
+        for (FruitRecordDto fruitRecordDto : recordDtos) {
             Operation operationType = fruitRecordDto.getOperationType();
-            FruitOperationHandler fruitOperation = strategyMap.get(operationType);//отримую операцію
+            FruitOperationHandler fruitOperation = strategyMap.get(operationType);
             fruitOperation.apply(fruitRecordDto);
         }
     }

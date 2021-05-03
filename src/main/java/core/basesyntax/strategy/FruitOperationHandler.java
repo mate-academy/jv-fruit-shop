@@ -4,7 +4,7 @@ import core.basesyntax.dto.FruitRecordDto;
 
 public interface FruitOperationHandler {
     String EXCEPT_LETTERS = "[^A-z]";
-    void apply(FruitRecordDto fruitRecordDto);
+    int apply(FruitRecordDto fruitRecordDto);
 
     default void checkQuantity(Integer quantity) {
         if (quantity < 0) {

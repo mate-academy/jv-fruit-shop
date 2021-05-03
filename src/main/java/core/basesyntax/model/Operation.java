@@ -7,7 +7,7 @@ public enum Operation {
     private String shortName;
 
     Operation(String b) {
-        this.shortName = b; // тут приймає значення "b" "s" "p" "r"
+        this.shortName = b;
     }
 
     public String getShortNameOperation() {

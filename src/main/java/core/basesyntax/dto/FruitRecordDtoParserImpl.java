@@ -26,9 +26,9 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
             String operationType = parseLine[TYPE];
             Operation operationTypeCorrect = Operation.getOperationByShortName(operationType);
 
-            int quantity; //додаткова перевірка, якщо в колонку quantity введуть слово
+            int quantity;
             try {
-                quantity = Integer.parseInt(parseLine[QUANTITY]);// тут буде помилка якщо буде слово
+                quantity = Integer.parseInt(parseLine[QUANTITY]);
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Invalid value entered - " + parseLine[QUANTITY]);
             }
