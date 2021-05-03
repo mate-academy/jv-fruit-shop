@@ -6,7 +6,7 @@ import java.util.List;
 
 public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
     private static final String SEPARATOR = ",";
-    private static final int COLUMNS_NAME = 0;
+    private static final String COLUMNS_NAME = "type,fruit,quantity";
     private static final int TYPE = 0;
     private static final int FRUIT_NAME = 1;
     private static final int QUANTITY = 2;
@@ -14,12 +14,10 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
 
     @Override
     public List<FruitRecordDto> parse(List<String> lines) {
+        lines.remove(COLUMNS_NAME);
         List<FruitRecordDto> recordDtos = new ArrayList<>(lines.size());
-        for (String line : lines) {
-            if (line.equals(lines.get(COLUMNS_NAME))) {
-                continue;
-            }
 
+        for (String line : lines) {
             String[] parseLine = line.split(SEPARATOR);
             if (parseLine.length > CORRECT_LENGTH) {
                 throw new RuntimeException("Wrong number of columns");
