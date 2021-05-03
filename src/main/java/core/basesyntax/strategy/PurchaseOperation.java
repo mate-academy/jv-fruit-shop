@@ -7,11 +7,9 @@ import core.basesyntax.model.Fruit;
 public class PurchaseOperation implements FruitOperationHandler {
     @Override
     public void apply(FruitRecordDto fruitRecordDto) {
-        String fruitName = fruitRecordDto.getFruitName();
-        checkFruitName(fruitName);
-        Fruit fruit = new Fruit(fruitName);
+        Fruit fruit = new Fruit(fruitRecordDto.getFruitName());
         if (!Storage.fruitsDataBase.containsKey(fruit)) {
-            throw new RuntimeException("This fruit is not in stock - " + fruitName);
+            throw new RuntimeException("This fruit is not in stock - " + fruit.getType());
         }
 
         Integer wishQuantity = fruitRecordDto.getQuantity();
