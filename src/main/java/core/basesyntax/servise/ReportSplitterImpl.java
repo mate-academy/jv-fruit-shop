@@ -19,8 +19,8 @@ public class ReportSplitterImpl implements ReportSplitter {
         report.remove(UNNECESSARY_LINE);
         for (String line : report) {
             String[] data = line.split(COMMA);
-            Operation operation = Operation.getOperationType(data[INDEX_OF_TYPE].trim());
             validatorOfData(data);
+            Operation operation = Operation.getOperationType(data[INDEX_OF_TYPE].trim());
 
             FruitRecordDto fruitFromReport = new FruitRecordDto(operation,
                     data[INDEX_OF_FRUIT], Integer.parseInt(data[INDEX_OF_AMOUNT]));
@@ -30,9 +30,14 @@ public class ReportSplitterImpl implements ReportSplitter {
     }
 
     private boolean validatorOfData(String[] data) {
-        if (data.length != NUMBER_OF_TYPES_IN_THE_ENTERED_DATA
-                || Integer.parseInt(data[INDEX_OF_AMOUNT]) < 0) {
-            throw new InvalidInputDataException("Input data is incorrect!"
+        try {
+            if (data.length != NUMBER_OF_TYPES_IN_THE_ENTERED_DATA
+                    || Integer.parseInt(data[INDEX_OF_AMOUNT]) < 0) {
+                throw new InvalidInputDataException("Input data is incorrect!"
+                        + " Please check your file and try again.");
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("You must enter number in format [0-9]!"
                     + " Please check your file and try again.");
         }
         return true;

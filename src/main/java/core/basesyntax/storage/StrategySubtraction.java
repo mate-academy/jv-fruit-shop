@@ -9,6 +9,10 @@ public class StrategySubtraction implements Strategy {
     public int changeBalance(FruitRecordDto fruitRecordDto) {
         Fruit newFruit = new Fruit(fruitRecordDto.getFruit());
         Integer currentAmount = Storage.storageOfFruits.get(newFruit);
+        if (currentAmount == null) {
+            throw new InvalidValueOfAmountException("Amount of fruit \"" + fruitRecordDto.getFruit()
+                    + "\" is not exist!  Please check your file and try again.");
+        }
         int newAmount = currentAmount - fruitRecordDto.getAmountOfFruit();
         if (newAmount < 0) {
             throw new InvalidValueOfAmountException("Amount can't be less then 0!"

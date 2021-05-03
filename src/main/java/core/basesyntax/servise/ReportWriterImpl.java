@@ -10,14 +10,17 @@ import java.io.IOException;
 import java.util.Map;
 
 public class ReportWriterImpl implements ReportWriter {
+    private static final String NAME_OF_COLUMNS = "fruit,quantity";
+    private static final String COMA = ",";
+
     @Override
     public void writeReport(String fileName) {
         File newFile = new File(fileName);
         try (BufferedWriter bufferedWriter =
                      new BufferedWriter(new FileWriter(newFile, true))) {
-            bufferedWriter.write("fruit,quantity" + System.lineSeparator());
+            bufferedWriter.write(NAME_OF_COLUMNS + System.lineSeparator());
             for (Map.Entry<Fruit, Integer> entry : Storage.getAll().entrySet()) {
-                String line = entry.getKey().getTypeOfFruit() + "," + entry.getValue()
+                String line = entry.getKey().getTypeOfFruit() + COMA + entry.getValue()
                         + System.lineSeparator();
                 bufferedWriter.write(line);
             }
