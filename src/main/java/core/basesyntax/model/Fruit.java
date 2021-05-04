@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class Fruit implements Comparable<Fruit> {
+public class Fruit implements Comparable<Fruit>, Cloneable {
     private final String name;
 
     public Fruit(String name) {
@@ -14,15 +14,15 @@ public class Fruit implements Comparable<Fruit> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object fruit) {
+        if (this == fruit) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (fruit == null || getClass() != fruit.getClass()) {
             return false;
         }
-        Fruit fruit = (Fruit) o;
-        return Objects.equals(name, fruit.name);
+        Fruit currentFruit = (Fruit) fruit;
+        return Objects.equals(name, currentFruit.name);
     }
 
     @Override
@@ -31,7 +31,16 @@ public class Fruit implements Comparable<Fruit> {
     }
 
     @Override
-    public int compareTo(Fruit o) {
-        return this.name.compareTo(o.getName());
+    public int compareTo(Fruit fruit) {
+        return this.name.compareTo(fruit.getName());
+    }
+
+    @Override
+    public Fruit clone() {
+        try {
+            return (Fruit) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Can't clone Fruit object", e);
+        }
     }
 }

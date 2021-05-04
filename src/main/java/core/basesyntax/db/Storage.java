@@ -1,7 +1,6 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.Fruit;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class Storage {
     public static Map<Fruit, Integer> getAll() {
         Map<Fruit, Integer> fruitsCopy = new HashMap<>();
         for (Map.Entry<Fruit, Integer> fruitEntry : fruits.entrySet()) {
-            fruitsCopy.put(fruitEntry.getKey(), fruitEntry.getValue());
+            fruitsCopy.put(fruitEntry.getKey().clone(), fruitEntry.getValue());
         }
         return fruitsCopy;
     }
