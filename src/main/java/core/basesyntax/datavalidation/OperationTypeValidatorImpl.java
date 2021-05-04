@@ -1,18 +1,18 @@
 package core.basesyntax.datavalidation;
 
 import core.basesyntax.operationswithfile.Operation;
-import java.util.ArrayList;
+import java.util.List;
 
 public class OperationTypeValidatorImpl implements OperationTypeValidator {
     @Override
-    public void validation(ArrayList<Operation> operationArrayList) {
-        for (int i = 0; i < operationArrayList.size(); i++) {
-            if (!"b".equals(operationArrayList.get(i).getOperationType())
-                    && !"p".equals(operationArrayList.get(i).getOperationType())
-                    && !"r".equals(operationArrayList.get(i).getOperationType())
-                    && !"s".equals(operationArrayList.get(i).getOperationType())) {
+    public void validation(List<Operation> operationList) {
+        for (int i = 0; i < operationList.size(); i++) {
+            if (!"b".equals(operationList.get(i).getOperationType())
+                    && !"p".equals(operationList.get(i).getOperationType())
+                    && !"r".equals(operationList.get(i).getOperationType())
+                    && !"s".equals(operationList.get(i).getOperationType())) {
                 throw new RuntimeException("NotValid operation type! "
-                        + operationArrayList.get(i).toString());
+                        + operationList.get(i).toString());
             }
         }
     }

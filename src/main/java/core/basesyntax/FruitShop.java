@@ -11,23 +11,24 @@ import core.basesyntax.operationswithfile.FileReaderImpl;
 import core.basesyntax.operationswithfile.FileWriter;
 import core.basesyntax.operationswithfile.FileWriterImpl;
 import core.basesyntax.operationswithfile.Operation;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FruitShop {
+    private static final String CSV_FILE_NAME = "src\\main\\java\\resources\\operations.csv";
+    private static final String NEW_CSV_FILE = "src\\main\\java\\resources\\output.csv";
+
     public static void main(String[] args) {
-        String csvFileName = "src\\main\\java\\resources\\operations.csv";
         FileReader fileReader = new FileReaderImpl();
-        ArrayList<Operation> operationArrayList = fileReader.getOperations(csvFileName);
+        List<Operation> operationList = fileReader.getOperations(CSV_FILE_NAME);
         OperationTypeValidator operationTypeValidator = new OperationTypeValidatorImpl();
-        operationTypeValidator.validation(operationArrayList);
+        operationTypeValidator.validation(operationList);
         ProductsList productsList = new ProductsListImpl();
-        HashMap balance = productsList.getProductList(operationArrayList);
+        Map balance = productsList.getProductList(operationList);
         CountOperation countOperation = new CountOperationImpl();
-        HashMap count = countOperation.getCount(balance, operationArrayList);
-        String newCsvFileName = "src\\main\\java\\resources\\output.csv";
+        Map count = countOperation.getCount(balance, operationList);
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.getNewFile(balance, newCsvFileName);
+        fileWriter.getNewFile(balance, NEW_CSV_FILE);
         System.out.println(count.toString());
     }
 }

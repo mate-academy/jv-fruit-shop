@@ -1,8 +1,6 @@
 package core.basesyntax.operationswithfile;
 
-import java.io.Serializable;
-
-public class Operation implements Serializable {
+public class Operation {
     private String operationType;
     private String name;
     private int count;

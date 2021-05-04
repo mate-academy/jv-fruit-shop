@@ -5,27 +5,29 @@ import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
+    private static final Character SEPARATOR = ',';
+    private static final Character QUOTECHAR = '"';
+    private static final Integer NUMBER_OF_LINE = 1;
     private MappingStrategy mappingStrategy = new MappingStrategyImpl();
 
     @Override
-    public ArrayList getOperations(String csvFileName) {
+    public List getOperations(String csvFileName) {
         CsvToBean csv = new CsvToBean();
-        List list;
+        List operationsList;
         ColumnPositionMappingStrategy columnPositionMappingStrategy
                 = mappingStrategy.setColumnMapping();
         try (CSVReader csvReader = new CSVReader(new java.io.FileReader(csvFileName),
-                ',', '"', 1)) {
-            list = csv.parse(columnPositionMappingStrategy, csvReader);
+                SEPARATOR, QUOTECHAR, NUMBER_OF_LINE)) {
+            operationsList = csv.parse(columnPositionMappingStrategy, csvReader);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File not found!");
         } catch (IOException e) {
             throw new RuntimeException("Parsing filed!");
         }
-        return (ArrayList) list;
+        return operationsList;
     }
 
 }

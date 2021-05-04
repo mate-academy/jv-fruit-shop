@@ -1,7 +1,7 @@
 package core.basesyntax.operationswithfile;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface FileReader {
-    ArrayList getOperations(String csvFileName);
+    List<Operation> getOperations(String csvFileName);
 }

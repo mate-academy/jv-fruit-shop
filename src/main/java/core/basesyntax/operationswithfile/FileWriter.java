@@ -1,7 +1,7 @@
 package core.basesyntax.operationswithfile;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface FileWriter {
-    void getNewFile(HashMap<String, Integer> balance, String newCsvFileName);
+    void getNewFile(Map<String, Integer> balance, String newCsvFileName);
 }

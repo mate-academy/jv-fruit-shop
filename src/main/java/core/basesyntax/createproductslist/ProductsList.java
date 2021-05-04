@@ -1,10 +1,9 @@
 package core.basesyntax.createproductslist;
 
 import core.basesyntax.operationswithfile.Operation;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public interface ProductsList {
-
-    HashMap getProductList(ArrayList<Operation> arrayList);
+    Map getProductList(List<Operation> operationList);
 }
