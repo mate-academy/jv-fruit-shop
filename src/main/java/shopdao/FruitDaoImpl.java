@@ -5,6 +5,7 @@ import fruitsassortment.Fruit;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
+
     @Override
     public boolean add(Fruit fruit, int amount) {
         Storage.getFruits().put(fruit, amount);

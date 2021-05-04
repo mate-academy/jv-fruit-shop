@@ -1,6 +1,6 @@
 package shopservice;
 
-import datavalidation.DataValidator;
+import datavalidation.DataValidatorImpl;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class CsvReadServiceImpl implements ReadService {
         try (BufferedReader readFile = new BufferedReader(new FileReader(filePath))) {
             String data = readFile.readLine();
             while ((data != null)) {
-                new DataValidator().validateData(data);
+                new DataValidatorImpl().validateData(data);
                 dataFromFile.add(data);
                 data = readFile.readLine();
             }

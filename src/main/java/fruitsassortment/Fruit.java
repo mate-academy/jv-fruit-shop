@@ -2,7 +2,7 @@ package fruitsassortment;
 
 import java.util.Objects;
 
-public class Fruit implements Comparable<Fruit> {
+public class Fruit {
     private final String name;
 
     public Fruit(String name) {
@@ -11,11 +11,6 @@ public class Fruit implements Comparable<Fruit> {
 
     public String getName() {
         return name;
-    }
-
-    @Override
-    public int compareTo(Fruit fruit) {
-        return name.compareTo(fruit.getName());
     }
 
     @Override
