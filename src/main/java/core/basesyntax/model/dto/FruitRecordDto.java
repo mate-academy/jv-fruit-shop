@@ -1,9 +1,9 @@
 package core.basesyntax.model.dto;
 
 public class FruitRecordDto {
-    private String operationType;
-    private String fruitName;
-    private Integer quantity;
+    private final String operationType;
+    private final String fruitName;
+    private final Integer quantity;
 
     public FruitRecordDto(String operationType, String fruitName, Integer quantity) {
         this.operationType = operationType;

@@ -1,4 +1,4 @@
-package core.basesyntax.service.report_writer;
+package core.basesyntax.service.reportwriter;
 
 import core.basesyntax.db.Storage;
 import java.io.File;
@@ -13,7 +13,7 @@ public class ReportWriterImpl implements ReportWriter {
 
     @Override
     public void writeReport(String fileName) {
-        List<String> collect = Storage.fruits.entrySet()
+        List<String> collect = Storage.getAll().entrySet()
                 .stream()
                 .map(currentKey -> currentKey.getKey().getName() + "," + currentKey.getValue())
                 .collect(Collectors.toList());

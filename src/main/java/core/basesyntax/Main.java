@@ -1,17 +1,17 @@
 package core.basesyntax;
 
 import core.basesyntax.model.dto.FruitRecordDto;
-import core.basesyntax.service.file_readers.FileReaderImplForCsv;
 import core.basesyntax.service.FruitAvailabilityValidatorImpl;
-import core.basesyntax.service.parser.FruitRecordDtoParserImpl;
 import core.basesyntax.service.Operation;
-import core.basesyntax.service.report_writer.ReportWriterImpl;
+import core.basesyntax.service.filereader.FileReader;
+import core.basesyntax.service.filereader.FileReaderImplForCsv;
 import core.basesyntax.service.handlers.AddOperationStrategy;
 import core.basesyntax.service.handlers.FruitOperationStrategy;
 import core.basesyntax.service.handlers.RemoveOperationStrategy;
-import core.basesyntax.service.file_readers.FileReader;
 import core.basesyntax.service.parser.FruitRecordDtoParser;
-import core.basesyntax.service.report_writer.ReportWriter;
+import core.basesyntax.service.parser.FruitRecordDtoParserImpl;
+import core.basesyntax.service.reportwriter.ReportWriter;
+import core.basesyntax.service.reportwriter.ReportWriterImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

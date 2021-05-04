@@ -10,7 +10,7 @@ public class FruitAvailabilityValidatorImpl implements FruitAvailabilityValidato
     @Override
     public void checkAvailability(FruitRecordDto fruitRecordDto) {
         Fruit fruit = new Fruit(fruitRecordDto.getFruitName());
-        if (Storage.fruits.get(fruit) == null) {
+        if (Storage.getQuantity(fruit) == null) {
             throw new RuntimeException("No such fruit in the store: "
                     + fruitRecordDto.getFruitName());
         }

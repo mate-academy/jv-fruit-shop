@@ -10,10 +10,11 @@ public class AddOperationStrategy implements FruitOperationStrategy {
     @Override
     public void applyAction(FruitRecordDto fruitRecordDto) {
         Fruit fruit = new Fruit(fruitRecordDto.getFruitName());
-        int currentQuantity = Storage.fruits.get(fruit) == null
+
+        int currentQuantity = Storage.getQuantity(fruit) == null
                 ? DEFAULT_VALUE
-                : Storage.fruits.get(fruit);
+                : Storage.getQuantity(fruit);
         int newQuantity = currentQuantity + fruitRecordDto.getQuantity();
-        Storage.fruits.put(fruit, newQuantity);
+        Storage.applyToStorage(fruit, newQuantity);
     }
 }

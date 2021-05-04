@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.interfaces.FruitAvailabilityValidator;
-
 import java.util.Optional;
 
 public class RemoveOperationStrategy implements FruitOperationStrategy {
@@ -21,11 +20,11 @@ public class RemoveOperationStrategy implements FruitOperationStrategy {
     public void applyAction(FruitRecordDto fruitRecordDto) {
         fruitAvailabilityValidator.checkAvailability(fruitRecordDto);
         Fruit fruit = new Fruit(fruitRecordDto.getFruitName());
-        int currentQuantity = Storage.fruits.get(fruit);
+        int currentQuantity = Storage.getQuantity(fruit);
         int subtractionResult = currentQuantity - fruitRecordDto.getQuantity();
         int newQuantity = currentQuantity < DEFAULT_VALUE ? Optional.of(subtractionResult)
                 .orElseThrow(() -> new RuntimeException(EXCEPTION_MESSAGE))
                 : subtractionResult;
-        Storage.fruits.put(fruit, newQuantity);
+        Storage.applyToStorage(fruit, newQuantity);
     }
 }

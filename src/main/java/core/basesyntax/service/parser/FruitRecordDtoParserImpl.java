@@ -2,7 +2,6 @@ package core.basesyntax.service.parser;
 
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.Operation;
-
 import java.util.ArrayList;
 import java.util.List;
 
