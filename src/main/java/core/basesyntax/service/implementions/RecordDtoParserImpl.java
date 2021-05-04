@@ -1,29 +1,34 @@
-package core.basesyntax.service;
+package core.basesyntax.service.implementions;
 
+import core.basesyntax.dto.FruitRecordDto;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.model.OperationType;
+import core.basesyntax.service.RecordDtoParser;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RecordDtoParserImpl implements RecordDtoParser {
     private static final String COMMA = ",";
-    private static final int TITLE = 0;
+    private static final long TITLE = 1;
 
     @Override
     public List<FruitRecordDto> parse(List<String> dataFromFile) {
-        dataFromFile.remove(TITLE);
         List<FruitRecordDto> fruitRecordDtoList = new ArrayList<>(dataFromFile.size());
-        for (String line : dataFromFile) {
+        List<String> ignoredTitle = dataFromFile.stream()
+                                            .skip(TITLE)
+                                            .collect(Collectors.toList());
+        for (String line : ignoredTitle) {
             String[] data = line.split(COMMA);
-            if (line.matches("(.*),(.*),(.*)")) {
-                data = line.split(COMMA);
+            if (data.length != 3) {
+                throw new RuntimeException("Incorrect input");
             }
-            if (Integer.parseInt(data[2]) < 0) {
-                throw new RuntimeException(Integer.parseInt(data[2]) + " is incorrect input.");
+            int quantity = Integer.parseInt(data[2]);
+            if (quantity < 0) {
+                throw new RuntimeException(quantity + " is incorrect input.");
             }
             fruitRecordDtoList.add(new FruitRecordDto(new Fruit(data[1]),
-                                    Integer.parseInt(data[2]), determinateOperation(data[0])));
+                                    quantity, determinateOperation(data[0])));
         }
         return fruitRecordDtoList;
     }

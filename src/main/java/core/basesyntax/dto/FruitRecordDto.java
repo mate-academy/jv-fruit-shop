@@ -1,5 +1,7 @@
-package core.basesyntax.model;
+package core.basesyntax.dto;
 
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.OperationType;
 import java.util.Objects;
 
 public class FruitRecordDto {
