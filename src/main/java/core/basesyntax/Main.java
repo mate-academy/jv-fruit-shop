@@ -5,7 +5,7 @@ import core.basesyntax.service.ReportFileWriter;
 import core.basesyntax.service.impls.ReportFileWriterImpl;
 
 public class Main {
-    private static final String OUTPUT_FILE = "report.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Application application = new Application();
