@@ -15,10 +15,11 @@ import service.impl.ReaderServiceImpl;
 import service.impl.RemoveOperation;
 import service.impl.ReportServiceImpl;
 
-public class HelloWorld {
+public class ApplicationRun {
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
+    private static final String PATH_SOURCE_FILE = "src/main/resources/input.csv";
     private static final Map<String, FruitOperationsService> fruitOperationsServiceMap
             = new HashMap<>();
 
@@ -29,9 +30,8 @@ public class HelloWorld {
     }
 
     public static void main(String[] args) {
-        String path = "src/main/resources/input.csv";
         ReaderService readerService = new ReaderServiceImpl();
-        List<String> stringsFromFile = readerService.readFromFile(path);
+        List<String> stringsFromFile = readerService.readFromFile(PATH_SOURCE_FILE);
         ParserService parserService = new ParserServiceImpl();
         List<FruitRecordDto> fruitDtos = parserService.parseToDto(stringsFromFile);
         for (FruitRecordDto dto : fruitDtos) {
