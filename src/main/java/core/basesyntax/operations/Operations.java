@@ -7,8 +7,8 @@ public enum Operations {
     R;
 
     public static boolean contains(String values) {
-        for (Operations operation : Operations.values()){
-            if (operation.toString().equalsIgnoreCase(values)){
+        for (Operations operation : Operations.values()) {
+            if (operation.toString().equalsIgnoreCase(values)) {
                 return true;
 
             }

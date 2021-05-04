@@ -3,14 +3,11 @@ package core.basesyntax.service;
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.operations.Operations;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-public class StoreServiceImpl implements StoreService{
+public class StoreServiceImpl implements StoreService {
     private static final String COMA = ",";
     private static final String TITLE = "fruit,quantity";
     private static final int OPERATION_INDEX = 0;
@@ -34,13 +31,15 @@ public class StoreServiceImpl implements StoreService{
 
             String operationType = data[OPERATION_INDEX].toUpperCase();
             if (!Operations.contains(operationType)) {
-                throw new RuntimeException("Incorrect operation try something else" + operationType);
+                throw new RuntimeException("Incorrect operation try something else"
+                        + operationType);
             }
             int value = Integer.parseInt(data[QUANTITY_INDEX]);
-            if (value < 0){
+            if (value < 0) {
                 throw new RuntimeException("The value can't be less than 0");
             }
-            int newValue = operationStrategy.get(Operations.valueOf(operationType)).calculateValue(oldValue, value);
+            int newValue = operationStrategy.get(Operations.valueOf(operationType))
+                    .calculateValue(oldValue, value);
 
             productDao.add(product, newValue);
         }

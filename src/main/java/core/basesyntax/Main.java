@@ -16,7 +16,6 @@ import core.basesyntax.service.WriteService;
 import core.basesyntax.service.WriteServiceToCscImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
