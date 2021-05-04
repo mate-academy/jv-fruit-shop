@@ -1,7 +1,8 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dto.FruitRecordDto;
+import core.basesyntax.handler.OperationHandler;
+import core.basesyntax.model.OperationType;
 
 public interface OperationStrategy {
-    int apply(FruitRecordDto fruitRecordDto);
+    OperationHandler getHandler(OperationType operationType);
 }

@@ -14,7 +14,7 @@ public class RecordDtoParserImpl implements RecordDtoParser {
 
     @Override
     public List<FruitRecordDto> parse(List<String> dataFromFile) {
-        List<FruitRecordDto> fruitRecordDtoList = new ArrayList<>(dataFromFile.size());
+        List<FruitRecordDto> fruitRecordDtoList = new ArrayList<>();
         List<String> ignoredTitle = dataFromFile.stream()
                                             .skip(TITLE)
                                             .collect(Collectors.toList());

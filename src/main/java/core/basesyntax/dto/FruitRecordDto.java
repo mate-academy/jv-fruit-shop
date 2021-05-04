@@ -15,6 +15,10 @@ public class FruitRecordDto {
         this.operationType = operationType;
     }
 
+    public FruitRecordDto() {
+
+    }
+
     public Fruit getFruit() {
         return fruit;
     }

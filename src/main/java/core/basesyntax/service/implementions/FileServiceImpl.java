@@ -10,13 +10,11 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<String> readDataFromFile(String fileName) {
-        List<String> dataFromFile;
         try {
-            dataFromFile = Files.readAllLines(Path.of(fileName));
+            return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + fileName, e);
         }
-        return dataFromFile;
     }
 
     @Override
