@@ -9,7 +9,8 @@ import service.validator.DataValidator;
 
 public class FruitRecordParserServiceImpl implements FruitRecordParserService {
     public static final String COMMA = ",";
-    public static final int LIST_TITLE_INDEX = 0;
+    public static final int PROBABLY_TITLE_INDEX = 0;
+    public static final int VALID_STRING_INDEX = 1;
     public static final int OPERATION_INDEX = 0;
     public static final int FRUIT_INDEX = 1;
     public static final int QUANTITY_INDEX = 2;
@@ -17,9 +18,15 @@ public class FruitRecordParserServiceImpl implements FruitRecordParserService {
     @Override
     public List<FruitRecordDto> getRecord(List<String> stringsFromFile) {
         List<FruitRecordDto> outputList = new ArrayList<>();
-        stringsFromFile.remove(LIST_TITLE_INDEX);
-        for (String string : stringsFromFile) {
-            if (!new DataValidator().test(string)) {
+        DataValidator dataValidator = new DataValidator();
+        List<String> listToParse;
+        if (dataValidator.test(stringsFromFile.get(PROBABLY_TITLE_INDEX))) {
+            listToParse = stringsFromFile;
+        } else {
+            listToParse = stringsFromFile.subList(VALID_STRING_INDEX, stringsFromFile.size());
+        }
+        for (String string : listToParse) {
+            if (!dataValidator.test(string)) {
                 throw new InvalidInputException("Invalid line in input file: " + string);
             }
             String[] stringElements = string.split(COMMA);
