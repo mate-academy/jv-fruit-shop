@@ -16,7 +16,7 @@ public class PurchaseOperation implements FruitOperationHandler {
         Integer currentQuantity = Storage.fruitsDataBase.get(fruit);
         if (wishQuantity > currentQuantity) {
             throw new RuntimeException("Cannot purchase, because such amount of "
-                    + fruit.getFruitName() + "s " + "is not available...");
+                    + fruit.getFruitName() + "s is not available...");
         }
         Storage.fruitsDataBase.put(fruit, currentQuantity - wishQuantity);
     }
