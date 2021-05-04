@@ -29,7 +29,7 @@ public class ReportServiceImpl implements ReportService {
                     fruitOperationsService.apply(dto);
                     break;
                 case PURCHASE_OPERATION:
-                    fruitOperationsService = new RemoveOperations();
+                    fruitOperationsService = new RemoveOperation();
                     fruitOperationsService.apply(dto);
                     break;
                 default: break;
