@@ -22,7 +22,7 @@ public class FruitServiceImpl implements FruitService {
         builder.append("fruit, quantity")
                 .append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> entry : Storage.fruitsDataBase.entrySet()) {
-            builder.append(entry.getKey()).append(",")
+            builder.append(entry.getKey().getFruitName()).append(",")
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }

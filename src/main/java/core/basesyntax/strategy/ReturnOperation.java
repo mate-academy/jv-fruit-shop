@@ -13,7 +13,7 @@ public class ReturnOperation implements FruitOperationHandler {
         if (Storage.fruitsDataBase.containsKey(fruit)) {
             Storage.fruitsDataBase.put(fruit, Storage.fruitsDataBase.get(fruit) + quantity);
         } else {
-            throw new RuntimeException("There is no such fruit...");
+            throw new RuntimeException("Cannot return fruit. There is no such fruit...");
         }
     }
 }

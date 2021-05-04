@@ -10,6 +10,6 @@ public class BalanceOperation implements FruitOperationHandler {
         Integer quantity = fruitRecordDto.getQuantity();
         checkQuantity(quantity);
         Storage.fruitsDataBase.put(new Fruit(fruitRecordDto.getFruitName()),
-                fruitRecordDto.getQuantity());
+                quantity);
     }
 }

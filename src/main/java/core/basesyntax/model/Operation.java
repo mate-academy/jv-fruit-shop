@@ -6,8 +6,8 @@ public enum Operation {
 
     private String shortName;
 
-    Operation(String shirtOperationType) {
-        this.shortName = shirtOperationType;
+    Operation(String shortOperationType) {
+        this.shortName = shortOperationType;
     }
 
     public String getShortNameOperation() {
