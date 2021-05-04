@@ -1,27 +1,26 @@
 package service.impl;
 
 import db.Storage;
-import model.Fruit;
-import model.dto.FruitRecordDto;
-import service.FruitOperationsService;
-import service.ReportService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.Map;
+import model.Fruit;
+import model.dto.FruitRecordDto;
+import service.FruitOperationsService;
+import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     public static final String PURCHASE_OPERATION = "p";
     public static final String RETURN_OPERATION = "r";
     public static final String SUPPLY_OPERATION = "s";
     public static final String OUTPUT_FILE_NAME = "src/main/resources/output.csv";
-    FruitOperationsService fruitOperationsService;
+    private FruitOperationsService fruitOperationsService;
 
     @Override
-    public boolean makeStockReportToCSVFile(List<FruitRecordDto> dtos) {
+    public boolean makeStockReportToCsvFile(List<FruitRecordDto> dtos) {
         for (FruitRecordDto dto : dtos) {
             switch (dto.getOperationType()) {
                 case RETURN_OPERATION:
@@ -33,6 +32,7 @@ public class ReportServiceImpl implements ReportService {
                     fruitOperationsService = new RemoveOperations();
                     fruitOperationsService.apply(dto);
                     break;
+                default: break;
             }
         }
         StringBuilder stringBuilder = new StringBuilder();

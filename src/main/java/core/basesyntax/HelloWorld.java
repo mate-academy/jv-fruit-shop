@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import java.util.List;
 import model.dto.FruitRecordDto;
 import service.ParserService;
 import service.ReaderService;
@@ -8,11 +9,6 @@ import service.impl.ParserServiceImpl;
 import service.impl.ReaderServiceImpl;
 import service.impl.ReportServiceImpl;
 
-import java.util.List;
-
-/**
- * Feel free to remove this class and create your own.
- */
 public class HelloWorld {
     public static void main(String[] args) {
         String path = "src/main/resources/input.csv";
@@ -21,9 +17,9 @@ public class HelloWorld {
         List<String> stringsFromFile = readerService.readFromFile(path);
 
         ParserService parserService = new ParserServiceImpl();
-        List<FruitRecordDto> dtos = parserService.parseToDto(stringsFromFile);
+        List<FruitRecordDto> fruitDtos = parserService.parseToDto(stringsFromFile);
 
         ReportService reportService = new ReportServiceImpl();
-        reportService.makeStockReportToCSVFile(dtos);
+        reportService.makeStockReportToCsvFile(fruitDtos);
     }
 }

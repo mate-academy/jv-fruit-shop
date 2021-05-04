@@ -1,12 +1,11 @@
 package service.impl;
 
 import db.Storage;
+import java.util.ArrayList;
+import java.util.List;
 import model.Fruit;
 import model.dto.FruitRecordDto;
 import service.ParserService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ParserServiceImpl implements ParserService {
     private static final int OPERATION_TYPE = 0;
@@ -33,7 +32,8 @@ public class ParserServiceImpl implements ParserService {
             if (Storage.validOperations.contains(operation)
                     && Storage.validFruitNames.contains(fruitName)
                     && fruitQuantity.matches(REGEX_ONLY_DIGITS)) {
-                fruitRecordDtoList.add(new FruitRecordDto(operation, fruitName, Integer.parseInt(fruitQuantity)));
+                fruitRecordDtoList.add(new FruitRecordDto(operation, fruitName,
+                        Integer.parseInt(fruitQuantity)));
                 if (BALANCE_OPERATION.equals(operation)) {
                     Storage.fruits.put(new Fruit(fruitName), Integer.parseInt(fruitQuantity));
                 }
