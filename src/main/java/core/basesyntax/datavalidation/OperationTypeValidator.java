@@ -1,8 +1,8 @@
 package core.basesyntax.datavalidation;
 
-import core.basesyntax.operationswithfile.Operation;
+import core.basesyntax.operationswithfile.Transaction;
 import java.util.List;
 
 public interface OperationTypeValidator {
-    void validation(List<Operation> operationList);
+    void validation(List<Transaction> transactionList);
 }

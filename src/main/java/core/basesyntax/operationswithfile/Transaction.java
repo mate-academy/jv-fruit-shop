@@ -1,6 +1,6 @@
 package core.basesyntax.operationswithfile;
 
-public class Operation {
+public class Transaction {
     private String operationType;
     private String name;
     private int count;
@@ -31,6 +31,6 @@ public class Operation {
 
     @Override
     public String toString() {
-        return "Operation type: " + operationType + " name: " + name + " count: " + count;
+        return "Transaction type: " + operationType + " name: " + name + " count: " + count;
     }
 }

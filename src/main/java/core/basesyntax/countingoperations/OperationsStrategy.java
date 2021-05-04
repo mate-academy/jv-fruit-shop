@@ -1,7 +1,7 @@
 package core.basesyntax.countingoperations;
 
-import core.basesyntax.operationswithfile.Operation;
+import core.basesyntax.operationswithfile.Transaction;
 
 public interface OperationsStrategy {
-    Integer getStrategy(Operation operation);
+    Integer getStrategy(Transaction transaction);
 }
