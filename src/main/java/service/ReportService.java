@@ -1,8 +1,8 @@
 package service;
 
-import java.util.List;
-import model.dto.FruitRecordDto;
+import java.util.Map;
+import model.Fruit;
 
 public interface ReportService {
-    boolean makeStockReportToCsvFile(List<FruitRecordDto> dtos);
+    void makeStockReportToCsvFile(Map<Fruit, Integer> stock);
 }

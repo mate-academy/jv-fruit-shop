@@ -32,10 +32,11 @@ public class ParserServiceImpl implements ParserService {
             if (Storage.validOperations.contains(operation)
                     && Storage.validFruitNames.contains(fruitName)
                     && fruitQuantity.matches(REGEX_ONLY_DIGITS)) {
-                fruitRecordDtoList.add(new FruitRecordDto(operation, fruitName,
-                        Integer.parseInt(fruitQuantity)));
                 if (BALANCE_OPERATION.equals(operation)) {
                     Storage.fruits.put(new Fruit(fruitName), Integer.parseInt(fruitQuantity));
+                } else {
+                    fruitRecordDtoList.add(new FruitRecordDto(operation, fruitName,
+                            Integer.parseInt(fruitQuantity)));
                 }
             } else {
                 throw new RuntimeException(ERROR_FIELDS);
