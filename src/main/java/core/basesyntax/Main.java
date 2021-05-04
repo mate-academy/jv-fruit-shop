@@ -25,25 +25,23 @@ public class Main {
     private static final String FILE_NAME_TO = "src/main/java/resources/report.csv";
 
     public static void main(String[] args) {
-        FruitRecordDto fruitRecord = new FruitRecordDto();
+        OperationHandler increaseHandler = new IncreaseOperationHandler();
         Map<OperationType, OperationHandler> handlers = new HashMap<>();
-        handlers.put(OperationType.BALANCE, new IncreaseOperationHandler());
-        handlers.put(OperationType.RETURN, new IncreaseOperationHandler());
-        handlers.put(OperationType.SUPPLY, new IncreaseOperationHandler());
+        handlers.put(OperationType.BALANCE, increaseHandler);
+        handlers.put(OperationType.RETURN, increaseHandler);
+        handlers.put(OperationType.SUPPLY, increaseHandler);
         handlers.put(OperationType.PURCHASE, new DecreaseOperationHandler());
 
+        FruitRecordDto fruitRecord = new FruitRecordDto();
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
-
         FileService fileService = new FileServiceImpl();
-        List<String> fromFile = fileService.readDataFromFile(FILE_NAME_FROM);
         RecordDtoParser recordDtoParser = new RecordDtoParserImpl();
-
-        List<FruitRecordDto> fruitRecordDtos = recordDtoParser.parse(fromFile);
         FruitService fruitService = new FruitServiceImpl(operationStrategy, fruitRecord);
-        fruitService.saveDataToDataBase(fruitRecordDtos);
-
         ReportCreator reportCreator = new ReportCreatorImpl();
-        String report = reportCreator.createReport(Storage.fruitStorage);
-        fileService.writeToFile(FILE_NAME_TO, report);
+
+        List<FruitRecordDto> fruitRecordDtos = recordDtoParser
+                                            .parse(fileService.readDataFromFile(FILE_NAME_FROM));
+        fruitService.saveDataToDataBase(fruitRecordDtos);
+        fileService.writeToFile(FILE_NAME_TO, reportCreator.createReport(Storage.fruitStorage));
     }
 }
