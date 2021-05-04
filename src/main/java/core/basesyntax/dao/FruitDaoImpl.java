@@ -13,7 +13,7 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public Optional<Integer> get(Fruit key) {
-        return Optional.of(Storage.getFruits().get(key));
+        return Optional.ofNullable(Storage.getFruits().get(key));
     }
 
     @Override

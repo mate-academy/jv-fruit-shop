@@ -18,7 +18,7 @@ public class Fruit {
         if (fruit == this) {
             return true;
         }
-        if (fruit == null || fruit.getClass().equals(Fruit.class)) {
+        if (fruit == null || !fruit.getClass().equals(Fruit.class)) {
             return false;
         }
         Fruit current = (Fruit) fruit;
