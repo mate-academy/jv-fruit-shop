@@ -1,6 +1,5 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.OperationType;
 import core.basesyntax.service.handler.OperationHandler;
 import java.util.Map;
 import java.util.Optional;
