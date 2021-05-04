@@ -12,10 +12,9 @@ import core.basesyntax.service.handler.OperationHandler;
 import core.basesyntax.service.handler.PurchaseHandler;
 import core.basesyntax.service.handler.ReturnHandler;
 import core.basesyntax.service.handler.SupplyHandler;
-import core.basesyntax.service.reader.ReaderService;
-import core.basesyntax.service.reader.ReaderServiceImpl;
-import core.basesyntax.service.writer.WriterService;
-import core.basesyntax.service.writer.WriterServiceImpl;
+import core.basesyntax.service.file.FileService;
+import core.basesyntax.service.file.FileServiceImpl;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +33,10 @@ public class Main {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
         FruitShopService fruitShopService =
                 new FruitShopServiceImpl(fruitShopDao, operationStrategy);
-        ReaderService readerService = new ReaderServiceImpl();
-        WriterService writerService = new WriterServiceImpl();
+        FileService readerService = new FileServiceImpl();
+        FileService writerService = new FileServiceImpl();
         List<String> data = readerService.readFile(INPUT_FILE);
-        fruitShopService.addData(data);
+        fruitShopService.saveData(data);
         String report = fruitShopService.getReport();
         writerService.writeToFile(report, OUTPUT_FILE);
 

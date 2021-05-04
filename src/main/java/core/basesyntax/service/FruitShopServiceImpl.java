@@ -22,7 +22,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void addData(List<String> data) {
+    public void saveData(List<String> data) {
         for (int i = 1; i < data.size(); i++) {
             String[] dataFromList = data.get(i).split(COMMA);
             Fruit fruit = new Fruit(dataFromList[INDEX_OF_FRUIT]);
