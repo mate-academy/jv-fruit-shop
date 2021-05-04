@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.model.OperationType;
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.FruitRecordDtoParser;
 import core.basesyntax.service.Operation;
@@ -22,15 +23,15 @@ public class Main {
         writeReport();
     }
 
-    private static Map<String, Operation> getHandlersOperation() {
+    private static Map<OperationType, Operation> getHandlersOperation() {
         Operation addOperation = new AddOperation();
         Operation removeOperation = new RemoveOperation();
 
-        Map<String, Operation> handlersOperation = new HashMap<>();
-        handlersOperation.put("b", addOperation);
-        handlersOperation.put("s", addOperation);
-        handlersOperation.put("r", addOperation);
-        handlersOperation.put("p", removeOperation);
+        Map<OperationType, Operation> handlersOperation = new HashMap<>();
+        handlersOperation.put(OperationType.BALANCE, addOperation);
+        handlersOperation.put(OperationType.SUPPLY, addOperation);
+        handlersOperation.put(OperationType.RETURN, addOperation);
+        handlersOperation.put(OperationType.PURCHASE, removeOperation);
 
         return handlersOperation;
     }
@@ -53,7 +54,7 @@ public class Main {
     }
 
     private static void createReport(List<FruitRecordDto> recordDtos) {
-        Map<String, Operation> handlersOperation = getHandlersOperation();
+        Map<OperationType, Operation> handlersOperation = getHandlersOperation();
         for (FruitRecordDto dto : recordDtos) {
             handlersOperation.get(dto.getOperationType()).apply(dto);
         }

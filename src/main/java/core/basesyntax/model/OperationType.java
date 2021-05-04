@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-public enum Operation {
+public enum OperationType {
     BALANCE("b"),
     SUPPLY("s"),
     RETURN("r"),
@@ -8,7 +8,7 @@ public enum Operation {
 
     private final String operationShortName;
 
-    Operation(String operationShortName) {
+    OperationType(String operationShortName) {
         this.operationShortName = operationShortName;
     }
 
@@ -16,8 +16,8 @@ public enum Operation {
         return operationShortName;
     }
 
-    public static Operation getOperationByShortName(String operationType) {
-        for (Operation operation : Operation.values()) {
+    public static OperationType getOperationByShortName(String operationType) {
+        for (OperationType operation : OperationType.values()) {
             if (operation.getShortNameOperation().equals(operationType)) {
                 return operation;
             }

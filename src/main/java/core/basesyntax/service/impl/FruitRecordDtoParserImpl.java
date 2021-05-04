@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.OperationType;
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.FruitRecordDtoParser;
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
             }
 
             String operationType = splittedValues[OPERATION_TYPE];
-            Operation.getOperationByShortName(operationType);
+            OperationType operation = OperationType.getOperationByShortName(operationType);
 
             FruitRecordDto dto =
-                    new FruitRecordDto(operationType,
+                    new FruitRecordDto(operation,
                             splittedValues[FRUIT_TYPE],
                             Integer.parseInt(splittedValues[QUANTITY]));
             recordDtos.add(dto);
