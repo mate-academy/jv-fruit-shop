@@ -22,7 +22,7 @@ import java.util.Map;
 public class FruitMain {
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<String> readerList = fileReader.readFromFile("shop_operations.csv");
+        List<String> readerList = fileReader.readFromFile("src/main/resources/shop_operations.csv");
         FruitRecordDtoParser fruitRecordDtoParser = new FruitRecordDtoParserImpl();
         FruitOperation addOperation = new AddOperation();
         FruitOperation removeOperation = new RemoveOperation();
@@ -37,6 +37,6 @@ public class FruitMain {
         Report reported = new ReportImpl();
         String report = reported.report(saveDataToStorage);
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeData(report,"save_report.csv");
+        fileWriter.writeData(report,"src/main/resources/save_report.csv");
     }
 }
