@@ -3,34 +3,34 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Fruit {
-    private String type;
+    private String fruitName;
 
-    public Fruit(String type){
-        this.type = type;
+    public Fruit(String fruitName) {
+        this.fruitName = fruitName;
     }
 
-    public String getType() {
-        return type;
+    public String getFruitName() {
+        return fruitName;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setFruitName(String fruitName) {
+        this.fruitName = fruitName;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj)  {
+        if (this == obj) {
             return true;
         }
-        if(obj == null || getClass() != obj.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
         Fruit fruit = (Fruit) obj;
-        return Objects.equals(type, fruit.type);
+        return Objects.equals(fruitName, fruit.fruitName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type);
+        return Objects.hash(fruitName);
     }
 }

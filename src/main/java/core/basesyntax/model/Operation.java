@@ -1,12 +1,13 @@
 package core.basesyntax.model;
 
 public enum Operation {
-    BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
+    BALANCE("b"), SUPPLY("s"),
+    PURCHASE("p"), RETURN("r");
 
     private String shortName;
 
-    Operation(String b) {
-        this.shortName = b;
+    Operation(String shirtOperationType) {
+        this.shortName = shirtOperationType;
     }
 
     public String getShortNameOperation() {
@@ -14,11 +15,12 @@ public enum Operation {
     }
 
     public static Operation getOperationByShortName(String operationType) {
-        for(Operation operation : Operation.values()) {
+        for (Operation operation : Operation.values()) {
             if (operation.getShortNameOperation().equals(operationType)) {
                 return operation;
             }
         }
-        throw new RuntimeException("There is no such type of operation:" + "<" + operationType + ">");
+        throw new RuntimeException("There is no such type of operation:"
+                + "<" + operationType + ">");
     }
 }
