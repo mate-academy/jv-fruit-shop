@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +19,7 @@ public class ApplicationRun {
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
     private static final String PATH_SOURCE_FILE = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_NAME = "src/main/resources/output.csv";
     private static final Map<String, FruitOperationsService> fruitOperationsServiceMap
             = new HashMap<>();
 
@@ -39,6 +39,6 @@ public class ApplicationRun {
                                                        .apply(dto);
         }
         ReportService reportService = new ReportServiceImpl();
-        reportService.makeStockReportToCsvFile(Storage.fruits);
+        reportService.makeStockReportToCsvFile(OUTPUT_FILE_NAME);
     }
 }
