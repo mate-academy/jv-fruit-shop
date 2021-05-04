@@ -26,14 +26,14 @@ public class FruitRecordDto {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) {
+    public boolean equals(Object fruit) {
+        if (this == fruit) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()) {
+        if (fruit == null || getClass() != fruit.getClass()) {
             return false;
         }
-        FruitRecordDto that = (FruitRecordDto) object;
+        FruitRecordDto that = (FruitRecordDto) fruit;
         return amount == that.amount && Objects.equals(operation, that.operation)
                 && Objects.equals(nameFruits, that.nameFruits);
     }

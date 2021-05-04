@@ -14,15 +14,15 @@ public class Fruit {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) {
+    public boolean equals(Object fruit) {
+        if (this == fruit) {
             return true;
         }
-        if (object == null || getClass() != object.getClass()) {
+        if (fruit == null || getClass() != fruit.getClass()) {
             return false;
         }
-        Fruit fruit = (Fruit) object;
-        return Objects.equals(name, fruit.name);
+        Fruit currentFruit = (Fruit) fruit;
+        return Objects.equals(name, currentFruit.name);
     }
 
     @Override
