@@ -32,6 +32,7 @@ public class Fruit implements Cloneable {
     @Override
     public Fruit clone() {
         try {
+            Fruit clonedFruit = new Fruit(this.name);
             return (Fruit) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException("Can't create clone", e);

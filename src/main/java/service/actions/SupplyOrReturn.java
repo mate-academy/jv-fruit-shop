@@ -5,10 +5,10 @@ import dao.FruitDaoImpl;
 import model.Fruit;
 import model.FruitDataDto;
 
-public class Return implements ActivityHandler {
+public class SupplyOrReturn implements ActivityHandler {
     private FruitDao fruitDao = new FruitDaoImpl();
 
-    public Return(FruitDao fruitDao) {
+    public SupplyOrReturn(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 

@@ -9,24 +9,25 @@ public class DataValidatorImpl implements DataValidator {
     public static final String PURCHASE = "p";
     public static final String RETURN = "r";
     public static final String SUPPLY = "s";
+    public static final int ACTIVITY_INDEX = 0;
+    public static final int QUANTITY_INDEX = 2;
 
     public void validateRecord(String record) {
         String[] data = record.split(COMMA);
-        String action = data[0];
+        String activity = data[ACTIVITY_INDEX];
         try {
-            Integer.parseInt(data[2]);
+            int amount = Integer.parseInt(data[QUANTITY_INDEX]);
+            if (amount < 0) {
+                throw new InvalidInputException("Quantity can not be negative");
+            }
         } catch (NumberFormatException e) {
             throw new InvalidInputException("Wrong input, unparsable value of fruits");
         }
-        int amount = Integer.parseInt(data[2]);
-        if (!(action.equals(BALANCE)
-                    || action.equals(PURCHASE)
-                    || action.equals(RETURN)
-                    || action.equals(SUPPLY))) {
+        if (!(activity.equals(BALANCE)
+                    || activity.equals(PURCHASE)
+                    || activity.equals(RETURN)
+                    || activity.equals(SUPPLY))) {
             throw new InvalidInputException("Activity is not supported");
-        }
-        if (amount < 0) {
-            throw new InvalidInputException("Quantity can not be negative");
         }
     }
 

@@ -16,8 +16,7 @@ import service.ShopServiceImpl;
 import service.actions.ActivityHandler;
 import service.actions.Balance;
 import service.actions.Purchase;
-import service.actions.Return;
-import service.actions.Supply;
+import service.actions.SupplyOrReturn;
 import service.file.FileReader;
 import service.file.FileReaderImpl;
 import service.file.FileWriter;
@@ -37,8 +36,8 @@ public class Main {
     public static void main(String[] args) {
         map.put(BALANCE, new Balance(fruitDao));
         map.put(PURCHASE, new Purchase(fruitDao));
-        map.put(RETURN, new Return(fruitDao));
-        map.put(SUPPLY, new Supply(fruitDao));
+        map.put(RETURN, new SupplyOrReturn(fruitDao));
+        map.put(SUPPLY, new SupplyOrReturn(fruitDao));
         ActivityStrategyImpl activityStrategy = new ActivityStrategyImpl(map);
         FileReader fileReader = new FileReaderImpl();
         DataParser dataParser = new DataParserImpl();
