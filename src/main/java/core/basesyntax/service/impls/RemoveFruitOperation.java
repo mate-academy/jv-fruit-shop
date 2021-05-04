@@ -7,9 +7,10 @@ import core.basesyntax.service.DatabaseOperation;
 public class RemoveFruitOperation implements DatabaseOperation {
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
-        int newQuantity = Storage.shopDatabase.get(fruitRecordDto.getFruitName())
-                - fruitRecordDto.getQuantity();
-        Storage.shopDatabase.put(fruitRecordDto.getFruitName(), newQuantity);
+        int currentQuantity = Storage.shopDatabase.get(fruitRecordDto.getFruitName()) == null
+                ? 0 : Storage.shopDatabase.get(fruitRecordDto.getFruitName());
+        int newQuantity = currentQuantity - fruitRecordDto.getQuantity();
+        validate(fruitRecordDto.getQuantity(), newQuantity);
         return newQuantity;
     }
 }

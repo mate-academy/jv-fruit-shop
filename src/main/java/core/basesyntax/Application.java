@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Application {
-    private static final String INPUT_FILE = "input.csv";
+    private static final String INPUT_FILE = "src/main/resources/input.csv";
 
     public void initialize() {
         Map<String, DatabaseOperation> fruitOperationsStrategy = new HashMap<>();
@@ -23,7 +23,7 @@ public class Application {
 
         FileLinesReaderImpl reader = new FileLinesReaderImpl();
         DtoParser dto = new DtoParseImpl();
-        List<FruitRecordDto> dtosList = dto.parse(reader.dataFromFile("input.csv"));
+        List<FruitRecordDto> dtosList = dto.parse(reader.dataFromFile(INPUT_FILE));
 
         for (FruitRecordDto fruitRecordDto : dtosList) {
             fruitOperationsStrategy.get(fruitRecordDto.getOperation()).apply(fruitRecordDto);

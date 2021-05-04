@@ -9,8 +9,8 @@ public class AddFruitOperation implements DatabaseOperation {
     public int apply(FruitRecordDto fruitRecordDto) {
         int currentQuantity = Storage.shopDatabase.get(fruitRecordDto.getFruitName()) == null
                 ? 0 : Storage.shopDatabase.get(fruitRecordDto.getFruitName());
-        int newQuantity = currentQuantity
-                + fruitRecordDto.getQuantity();
+        int newQuantity = currentQuantity + fruitRecordDto.getQuantity();
+        validate(fruitRecordDto.getQuantity(), newQuantity);
         Storage.shopDatabase.put(fruitRecordDto.getFruitName(), newQuantity);
         return newQuantity;
     }
