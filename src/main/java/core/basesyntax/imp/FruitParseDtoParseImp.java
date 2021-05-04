@@ -1,11 +1,11 @@
 package core.basesyntax.imp;
 
 import core.basesyntax.model.FruitRecordDto;
-import core.basesyntax.service.FruitRecordDtoParse;
+import core.basesyntax.service.FruitParseImp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitParseDtoParseImp implements FruitRecordDtoParse {
+public class FruitParseDtoParseImp implements FruitParseImp {
     @Override
     public List<FruitRecordDto> parse(List<String> line) {
         List<FruitRecordDto> listFruit = new ArrayList<>(line.size());

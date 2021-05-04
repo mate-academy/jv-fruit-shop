@@ -8,6 +8,9 @@ import core.basesyntax.service.FruitOperation;
 public class FruitMinus implements FruitOperation {
     @Override
     public boolean operation(FruitRecordDto fruitRecordDto) {
+        if (fruitRecordDto == null) {
+            return false;
+        }
         ValidatorImp validator = new ValidatorImp();
         validator.checkAmount(fruitRecordDto);
         Fruit fruit = new Fruit(fruitRecordDto.getNameFruits());

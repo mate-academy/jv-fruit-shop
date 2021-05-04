@@ -9,14 +9,13 @@ import java.util.List;
 
 public class CustomFileReadImp implements CustomFileReader {
     @Override
-    public List<String> readFromFile(String nameFile) {
+    public List<String> readFromFile(String fileName) {
         FruitParseDtoParseImp fruitRecordImp = new FruitParseDtoParseImp();
         LinkedList<String> linkedList = new LinkedList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(nameFile))) {
-            String value = reader.readLine();
-            while (value != null) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String value;
+            while ((value = reader.readLine()) != null) {
                 linkedList.add(value);
-                value = reader.readLine();
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file", e);
