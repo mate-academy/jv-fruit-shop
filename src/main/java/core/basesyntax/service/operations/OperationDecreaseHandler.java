@@ -6,8 +6,6 @@ import core.basesyntax.model.Fruit;
 import java.util.Optional;
 
 public class OperationDecreaseHandler implements OperationHandler {
-    private static final String ERROR_MESSAGE
-            = "You can't buy more fruits than there is in storage";
     private final FruitDao fruitDao;
 
     public OperationDecreaseHandler(FruitDao fruitDao) {
@@ -22,6 +20,7 @@ public class OperationDecreaseHandler implements OperationHandler {
                 && quantity > 0) {
             return fruitQuantity.get() - quantity;
         }
-        throw new InvalidQuantityException(ERROR_MESSAGE + "[" + quantity + "]");
+        throw new InvalidQuantityException("You can't buy more fruits than there is in storage ["
+                + quantity + "]");
     }
 }

@@ -13,7 +13,6 @@ public class TransactionDtoParserImpl implements TransactionDtoParser {
     private static final int INDEX_OF_QUANTITY = 2;
     private static final String SKIP_LINE = "type,fruit,quantity";
     private static final String VALID_FORMAT = "[b,s,r,p],[a-z]+,[0-9]+";
-    private static final String ERROR_MESSAGE = "Data format should be " + VALID_FORMAT;
 
     @Override
     public List<TransactionDto> parse(List<String> transactions) {
@@ -23,8 +22,8 @@ public class TransactionDtoParserImpl implements TransactionDtoParser {
                 continue;
             }
             if (!transaction.matches(VALID_FORMAT)) {
-                throw new InvalidDataFormatException(ERROR_MESSAGE
-                        + ", but was [" + transaction + "]");
+                throw new InvalidDataFormatException("Data format should be "
+                        + VALID_FORMAT + ", but was [" + transaction + "]");
             }
             String[] fields = transaction.split(SEPARATOR);
             OperationType operation
