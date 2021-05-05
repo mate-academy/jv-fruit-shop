@@ -10,18 +10,18 @@ public class PurchaseFruitHandlerImpl implements ApplyFruitHandler {
     @Override
     public int applyFruit(FruitRecordDto fruitRecordDto) {
         checkPurchaseValidation(fruitRecordDto);
-        int amountOnBalance = DataBase.getDataBase().get(fruitRecordDto.getFruit());
-        DataBase.getDataBase().put(fruitRecordDto.getFruit(), amountOnBalance
+        int amountOnBalance = DataBase.getDataBase().get(fruitRecordDto.getName());
+        DataBase.getDataBase().put(fruitRecordDto.getName(), amountOnBalance
                 - fruitRecordDto.getAmount());
-        return DataBase.getDataBase().get(fruitRecordDto.getFruit());
+        return DataBase.getDataBase().get(fruitRecordDto.getName());
     }
 
     void checkPurchaseValidation(FruitRecordDto fruitRecordDto) {
-        int amountOnBalance = DataBase.getDataBase().get(fruitRecordDto.getFruit());
+        int amountOnBalance = DataBase.getDataBase().get(fruitRecordDto.getName());
         int amountPurchase = fruitRecordDto.getAmount();
         if (amountOnBalance < amountPurchase) {
             throw new RuntimeException("Not enough "
-                    + fruitRecordDto.getFruit().getName() + "'s in Storage");
+                    + fruitRecordDto.getName() + "'s in Storage");
         }
         if (amountPurchase < ZERO_AMOUNT) {
             throw new RuntimeException(fruitRecordDto.getAmount()

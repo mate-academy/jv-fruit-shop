@@ -8,7 +8,7 @@ public class SetBalanceHandlerImpl implements ApplyFruitHandler {
 
     @Override
     public int applyFruit(FruitRecordDto fruitRecordDto) {
-        DataBase.getDataBase().put(fruitRecordDto.getFruit(), fruitRecordDto.getAmount());
-        return DataBase.getDataBase().get(fruitRecordDto.getFruit());
+        DataBase.getDataBase().put(fruitRecordDto.getName(), fruitRecordDto.getAmount());
+        return DataBase.getDataBase().get(fruitRecordDto.getName());
     }
 }

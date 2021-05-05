@@ -1,16 +1,15 @@
 package core.basesyntax.model.dto;
 
-import core.basesyntax.model.Fruit;
 import java.util.Objects;
 
 public class FruitRecordDto {
     private final String operationType;
-    private final Fruit fruit;
+    private final String name;
     private final int amount;
 
-    public FruitRecordDto(String operationType, Fruit fruit, int amount) {
+    public FruitRecordDto(String operationType, String fruit, int amount) {
         this.operationType = operationType;
-        this.fruit = fruit;
+        this.name = fruit;
         this.amount = amount;
     }
 
@@ -18,9 +17,9 @@ public class FruitRecordDto {
         return operationType;
     }
 
-    public Fruit getFruit() {
+    public String getName() {
 
-        return fruit;
+        return name;
     }
 
     public int getAmount() {
@@ -29,7 +28,7 @@ public class FruitRecordDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(operationType, fruit, amount);
+        return Objects.hash(operationType, name, amount);
     }
 
     @Override
@@ -44,7 +43,7 @@ public class FruitRecordDto {
 
         FruitRecordDto fruitDto = (FruitRecordDto) obj;
         return Objects.equals(operationType, fruitDto.operationType)
-                && Objects.equals(fruit, fruitDto.fruit)
+                && Objects.equals(name, fruitDto.name)
                 && amount == fruitDto.amount;
     }
 }
