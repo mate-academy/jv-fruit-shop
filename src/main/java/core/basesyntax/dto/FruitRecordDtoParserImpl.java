@@ -8,6 +8,7 @@ import java.util.List;
 
 public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
     private static final String DELIMITER = ",";
+    private static final String SKIP_LINE = "type,fruit,quantity";
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_QUANTITY = 2;
@@ -16,12 +17,14 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
     @Override
     public List<FruitRecordDto> parse(List<String> lines) {
         fruitRecordDtos.clear();
-        lines.remove(0);
         for (String line : lines) {
             if (line.isEmpty()) {
                 break;
             }
             line = line.trim();
+            if (line.equals(SKIP_LINE)) {
+                continue;
+            }
             OperatorParser operatorParser = new OperatorParserImpl();
             String[] lineInfo = line.split(DELIMITER);
             OperationType operation = operatorParser.parse(lineInfo[INDEX_OF_OPERATION]);
