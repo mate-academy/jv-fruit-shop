@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface Parser {
     List<Operation> parseOperationsToList(List<String> list);
-
-    Operation parseDataToOperation(String line);
 }

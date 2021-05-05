@@ -23,8 +23,7 @@ public class OperationParser implements Parser {
        return list.stream().map(this::parseDataToOperation).collect(Collectors.toList());
     }
 
-    @Override
-    public Operation parseDataToOperation(String line) {
+    private Operation parseDataToOperation(String line) {
         String[] operationFields = line.split(COMA);
         if (operationFields.length != SIZE) {
             throw new IllegalDataException("Can't parse this line, resulting array length is: "
