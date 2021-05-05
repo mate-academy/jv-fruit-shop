@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.dto.FruitRecordDto;
-import core.basesyntax.service.SupplyFruitHandler;
+import core.basesyntax.service.ApplyFruitHandler;
 import core.basesyntax.storage.DataBase;
 
-public class SupplyFruitsImpl implements SupplyFruitHandler {
+public class SupplyFruitsImpl implements ApplyFruitHandler {
 
     @Override
-    public int addFruit(FruitRecordDto fruitRecordDto) {
+    public int applyFruit(FruitRecordDto fruitRecordDto) {
         int amountOnBalance = DataBase.getDataBase().get(fruitRecordDto.getFruit());
         DataBase.getDataBase().put(fruitRecordDto.getFruit(), amountOnBalance
                 + fruitRecordDto.getAmount());
