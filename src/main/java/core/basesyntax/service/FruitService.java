@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface FruitService {
-    void saveData(List<FruitRecordDto> parsedLines,
-                  Map<Operation, FruitOperationHandler> operations);
+    void saveData(List<FruitRecordDto> parsedLines);
 
     String createReport();
 }

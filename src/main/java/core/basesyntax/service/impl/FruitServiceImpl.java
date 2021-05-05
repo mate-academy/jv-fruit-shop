@@ -11,10 +11,14 @@ import java.util.Map;
 public class FruitServiceImpl implements FruitService {
     private static final String COLUMNS_NAME = "fruit,quantity";
     private static final String CSV_SEPARATOR = ",";
+    Map<Operation, FruitOperationHandler> operations;
+
+    public FruitServiceImpl(Map<Operation, FruitOperationHandler> operations) {
+        this.operations = operations;
+    }
 
     @Override
-    public void saveData(List<FruitRecordDto> parsedLines,
-                         Map<Operation, FruitOperationHandler> operations) {
+    public void saveData(List<FruitRecordDto> parsedLines) {
         for (FruitRecordDto parsedLine : parsedLines) {
             Operation operationType = parsedLine.getOperationType();
             operations.get(operationType).applyOperation(parsedLine);

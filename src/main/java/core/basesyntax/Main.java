@@ -34,8 +34,8 @@ public class Main {
         FruitRecordDtoParser recordParser = new FruitRecordDtoParserImpl();
         List<FruitRecordDto> parsedLines = recordParser.parseLines(records);
 
-        FruitService fruitService = new FruitServiceImpl();
-        fruitService.saveData(parsedLines, operationStrategy);
+        FruitService fruitService = new FruitServiceImpl(operationStrategy);
+        fruitService.saveData(parsedLines);
 
         String report = fruitService.createReport();
 
