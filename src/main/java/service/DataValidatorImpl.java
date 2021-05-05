@@ -31,6 +31,13 @@ public class DataValidatorImpl implements DataValidator {
         }
     }
 
+    @Override
+    public void validateFirstLine(String firstLine) {
+        if (!firstLine.equals("activity,fruit,quantity")) {
+            throw new InvalidInputException("Unknown file format");
+        }
+    }
+
     public void validateAmount(int newAmount) {
         if (newAmount < 0) {
             throw new InvalidInputException("Wrong quantity");

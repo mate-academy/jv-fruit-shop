@@ -29,9 +29,13 @@ public class Main {
     public static final String PURCHASE = "p";
     public static final String RETURN = "r";
     public static final String SUPPLY = "s";
+    private static final FruitDao fruitDao = new FruitDaoImpl();
+    private static final FileWriter fileWriter = new FileWriterImpl();
+    private static final FileReader fileReader = new FileReaderImpl();
+    private static final DataParser dataParser = new DataParserImpl();
+    private static final ReportGenerator reportGenerator =
+            new ReportGeneratorImpl(fileWriter, fruitDao);
     private static Map<String, ActivityHandler> map = new HashMap<>();
-    private static FruitDao fruitDao = new FruitDaoImpl();
-    private static FileWriter fileWriter = new FileWriterImpl();
 
     public static void main(String[] args) {
         map.put(BALANCE, new Balance(fruitDao));
@@ -39,13 +43,10 @@ public class Main {
         map.put(RETURN, new SupplyOrReturn(fruitDao));
         map.put(SUPPLY, new SupplyOrReturn(fruitDao));
         ActivityStrategyImpl activityStrategy = new ActivityStrategyImpl(map);
-        FileReader fileReader = new FileReaderImpl();
-        DataParser dataParser = new DataParserImpl();
+        ShopService shopService = new ShopServiceImpl(activityStrategy);
         List<FruitDataDto> fruitDataDtoList = dataParser
                 .parseData(fileReader.readFile(FILE_TO_READ));
-        ShopService shopService = new ShopServiceImpl(activityStrategy);
-        shopService.doAction(fruitDataDtoList);
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(fileWriter, fruitDao);
+        shopService.fillStorage(fruitDataDtoList);
         reportGenerator.generateReport(FILE_TO_WRITE);
     }
 }

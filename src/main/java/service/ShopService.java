@@ -4,5 +4,5 @@ import java.util.List;
 import model.FruitDataDto;
 
 public interface ShopService {
-    public void doAction(List<FruitDataDto> data);
+    public void fillStorage(List<FruitDataDto> data);
 }

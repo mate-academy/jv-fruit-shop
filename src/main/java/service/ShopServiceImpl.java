@@ -10,7 +10,7 @@ public class ShopServiceImpl implements ShopService {
         this.activityStrategy = activityStrategy;
     }
 
-    public void doAction(List<FruitDataDto> data) {
+    public void fillStorage(List<FruitDataDto> data) {
         for (FruitDataDto record : data) {
             activityStrategy.get(record.getOperation()).apply(record);
         }
