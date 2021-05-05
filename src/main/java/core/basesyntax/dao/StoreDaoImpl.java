@@ -5,7 +5,7 @@ import core.basesyntax.model.Fruit;
 import java.util.Map;
 import java.util.Optional;
 
-public class StoreDaoImpl implements StoreDao {
+public class StoreDaoImpl implements FruitDao {
     @Override
     public void add(Fruit fruit, int newQuantity) {
         Storage.fruits.put(fruit, newQuantity);

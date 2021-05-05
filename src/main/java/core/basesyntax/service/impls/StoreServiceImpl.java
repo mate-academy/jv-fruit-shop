@@ -1,6 +1,6 @@
 package core.basesyntax.service.impls;
 
-import core.basesyntax.dao.StoreDao;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.RecordStrategy;
 import core.basesyntax.service.StoreService;
@@ -16,10 +16,10 @@ public class StoreServiceImpl implements StoreService {
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final int START_DATA_INDEX = 1;
-    private final StoreDao storeDao;
+    private final FruitDao storeDao;
     private final RecordStrategy recordStrategy;
 
-    public StoreServiceImpl(StoreDao storeDao, RecordStrategy recordStrategy) {
+    public StoreServiceImpl(FruitDao storeDao, RecordStrategy recordStrategy) {
         this.storeDao = storeDao;
         this.recordStrategy = recordStrategy;
     }
@@ -36,7 +36,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public void toStorage(List<String> data) {
+    public void processRecords(List<String> data) {
         for (int i = START_DATA_INDEX; i < data.size(); i++) {
             String[] currentOperationData = data.get(i).split(CSV_SEPARATOR);
             Fruit fruit = new Fruit(currentOperationData[FRUIT_NAME_INDEX]);

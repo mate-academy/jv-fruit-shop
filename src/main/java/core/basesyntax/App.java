@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.StoreDao;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.StoreDaoImpl;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ReaderService;
@@ -32,12 +32,12 @@ public class App {
         operationHandlerMap.put(Operation.RETURN.getType(), new ReturnOperationHandler());
 
         RecordStrategy recordStrategy = new RecordStrategyImpl(operationHandlerMap);
-        StoreDao storeDao = new StoreDaoImpl();
-        StoreService storeService = new StoreServiceImpl(storeDao, recordStrategy);
+        FruitDao fruitDao = new StoreDaoImpl();
+        StoreService storeService = new StoreServiceImpl(fruitDao, recordStrategy);
 
         ReaderService reader = new ReaderServiceImpl();
         List<String> data = reader.readFile(INPUT_DATA_FILE);
-        storeService.toStorage(data);
+        storeService.processRecords(data);
 
         WriterService writer = new WriterServiceImpl();
         String report = storeService.createReport();
