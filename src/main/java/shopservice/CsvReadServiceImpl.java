@@ -14,11 +14,11 @@ public class CsvReadServiceImpl implements ReadService {
         int dataIndex = 0;
         try {
             dataFromFile = Files.readAllLines(Path.of(filePath));
-            String data = dataFromFile.get(dataIndex);
-            while (dataIndex + 1 != dataFromFile.size()) {
+            String data;
+            while (dataIndex != dataFromFile.size()) {
+                data = dataFromFile.get(dataIndex);
                 new DataValidatorImpl().validateData(data);
                 dataIndex++;
-                data = dataFromFile.get(dataIndex);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + filePath);
