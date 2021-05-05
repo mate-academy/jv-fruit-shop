@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.dto.FruitRecordDto;
 
-public interface FruitOperations {
+public interface FruitOperation {
     int apply(FruitRecordDto fruitRecordDto);
 }

@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.FruitOperations;
+import core.basesyntax.service.FruitOperation;
 import core.basesyntax.service.FruitRecordParser;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.impl.AddOperation;
@@ -24,12 +24,12 @@ public class Main {
     private static final String FILE_TO = "src/main/resources/report_after_work.csv";
 
     public static void main(String[] args) {
-        FruitOperations balanceOperation = new BalanceOperation();
-        FruitOperations returnOperation = new AddOperation();
-        FruitOperations supplyOperation = new AddOperation();
-        FruitOperations purchaseOperation = new PurchaseOperation();
+        FruitOperation balanceOperation = new BalanceOperation();
+        FruitOperation returnOperation = new AddOperation();
+        FruitOperation supplyOperation = new AddOperation();
+        FruitOperation purchaseOperation = new PurchaseOperation();
 
-        Map<OperationType, FruitOperations> operationHandlers = new HashMap<>();
+        Map<OperationType, FruitOperation> operationHandlers = new HashMap<>();
         operationHandlers.put(OperationType.BALANCE, balanceOperation);
         operationHandlers.put(OperationType.RETURN, returnOperation);
         operationHandlers.put(OperationType.SUPPLY, supplyOperation);

@@ -17,6 +17,6 @@ public class ReportCreatorCsvImpl implements ReportCreator {
             builder.append(System.lineSeparator()).append(fruitName)
                     .append(DIVIDER).append(quantity);
         }
-        return builder.toString();
+        return builder.append(System.lineSeparator()).toString();
     }
 }
