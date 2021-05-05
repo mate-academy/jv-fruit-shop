@@ -12,6 +12,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int operationTypeIndex = 0;
     private static final int quantityIndex = 2;
     private static final int nameIndex = 1;
+    private static final int MAX_VALUES_NUMBER = 3;
 
     @Override
     public FruitRecordDto parse(String line) {
@@ -22,7 +23,7 @@ public class ParserServiceImpl implements ParserService {
             throw new InvalidDataFormatException(EMPTY_LINE);
         }
         String[] splitLine = line.split(DELIMITER);
-        if (splitLine.length != 3) {
+        if (splitLine.length != MAX_VALUES_NUMBER) {
             throw new InvalidDataFormatException(INVALID_DATA_FORMAT + line);
         }
         try {

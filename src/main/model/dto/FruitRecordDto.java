@@ -3,9 +3,9 @@ package main.model.dto;
 import main.model.Operation;
 
 public class FruitRecordDto {
-    Operation operation;
-    String name;
-    int quantity;
+    private final Operation operation;
+    private final String name;
+    private final int quantity;
 
     public FruitRecordDto(Operation operation, String name, int quantity) {
         this.operation = operation;
