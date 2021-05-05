@@ -1,6 +1,7 @@
 package core.basesyntax.dto;
 
 import core.basesyntax.model.Operation;
+import java.util.Objects;
 
 public class FruitRecordDto {
     private Operation operationType;
@@ -24,4 +25,24 @@ public class FruitRecordDto {
     public Integer getQuantity() {
         return quantity;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitRecordDto that = (FruitRecordDto) o;
+        return operationType == that.operationType
+                && Objects.equals(fruitName, that.fruitName)
+                && Objects.equals(quantity, that.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operationType, fruitName, quantity);
+    }
+
 }
