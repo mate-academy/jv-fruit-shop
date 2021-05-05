@@ -5,7 +5,6 @@ import core.basesyntax.model.Storage;
 import core.basesyntax.service.FruitOperationHandler;
 
 public class SetOperation implements FruitOperationHandler {
-
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
         String fruitName = fruitRecordDto.getFruitName();

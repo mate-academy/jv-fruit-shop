@@ -5,7 +5,6 @@ import core.basesyntax.model.Storage;
 import core.basesyntax.service.FruitOperationHandler;
 
 public class DecreaseOperationImpl implements FruitOperationHandler {
-
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
         Integer currentQuantity = Storage.getFruits().get(fruitRecordDto.getFruitName());

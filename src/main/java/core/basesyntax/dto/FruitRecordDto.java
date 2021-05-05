@@ -3,7 +3,6 @@ package core.basesyntax.dto;
 import core.basesyntax.service.OperationType;
 
 public class FruitRecordDto {
-
     private OperationType operationType;
     private String fruitName;
     private Integer quantity;

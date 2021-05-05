@@ -4,7 +4,6 @@ import core.basesyntax.service.OperationType;
 import core.basesyntax.service.OperatorParse;
 
 public class OperatorParseImpl implements OperatorParse {
-
     @Override
     public OperationType parse(String operationName) {
         switch (operationName) {

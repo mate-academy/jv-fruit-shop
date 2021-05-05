@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-
     @Override
     public List<String> readFromFile(String filePath) {
         List<String> importedData;
