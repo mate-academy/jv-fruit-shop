@@ -1,25 +1,22 @@
 package core.basesyntax.service.implementation;
 
 import core.basesyntax.service.FileReader;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readFromFile(String filePath) {
-        List<String> importedData;
-        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(filePath))) {
-            importedData = new ArrayList<>();
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                importedData.add(line);
-                line = bufferedReader.readLine();
-            }
+        Path path = Paths.get(filePath);
+        try {
+            return Files.lines(path)
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Couldn't read file" + filePath, e);
         }
-        return importedData;
     }
 }

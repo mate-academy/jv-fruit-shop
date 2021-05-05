@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 public class FruitParserImpl implements FruitParser {
     private static final int HEAD_LINE = 1;
+    private static final int OPERATION_TYPE = 0;
+    private static final int FRUIT_NAME = 1;
+    private static final int QUANTITY = 2;
     private static final String SEPARATOR = ",";
     private static final int COUNT_OF_COLUMNS = 3;
 
@@ -22,18 +25,19 @@ public class FruitParserImpl implements FruitParser {
 
     private FruitRecordDto parseInputData(String line) {
         OperatorParse operatorParse = new OperatorParseImpl();
-        String[] strings = line.split(SEPARATOR);
-        if (strings.length != COUNT_OF_COLUMNS) {
+        String[] splitedRecord = line.split(SEPARATOR);
+        if (splitedRecord.length != COUNT_OF_COLUMNS) {
             throw new IllegalArgumentException("required 3 parameters, but provided: "
-                    + strings.length);
+                    + splitedRecord.length);
         }
         try {
-            OperationType operation = operatorParse.parse(strings[0].toLowerCase());
-            if (Integer.parseInt(strings[2]) < 0) {
+            OperationType operation = operatorParse.parse(splitedRecord[OPERATION_TYPE]
+                                                    .toLowerCase());
+            if (Integer.parseInt(splitedRecord[QUANTITY]) < 0) {
                 throw new IllegalArgumentException("Quantity can't be less then zero");
             }
-            return new FruitRecordDto(operation, strings[1].toLowerCase(),
-                    Integer.parseInt(strings[2]));
+            return new FruitRecordDto(operation, splitedRecord[FRUIT_NAME].toLowerCase(),
+                    Integer.parseInt(splitedRecord[QUANTITY]));
         } catch (IllegalArgumentException ex) {
             throw new IllegalArgumentException("Illegal type argument passed in file", ex);
         }
