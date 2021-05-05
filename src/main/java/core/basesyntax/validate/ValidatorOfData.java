@@ -1,6 +1,6 @@
 package core.basesyntax.validate;
 
-public class ValidationOfData implements Validation {
+public class ValidatorOfData implements Validator {
     private static final String EXCEPTION_MESSAGE = "Invalid data";
 
     @Override

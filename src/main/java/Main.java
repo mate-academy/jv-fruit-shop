@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class Main {
     private static final String READ_PATH = "src\\main\\resources\\shop.csv";
-    private static final String WRITE_PATH = "report.csv";
+    private static final String WRITE_PATH = "src\\main\\resources\\report.csv";
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
@@ -28,10 +28,10 @@ public class Main {
         FruitOperationService addOperation = new AddOperation();
         FruitOperationService subtractOperation = new SubtractOperation();
         Map<Operation, FruitOperationService> operationServiceMap = new HashMap<>();
-        operationServiceMap.put(Operation.b, addOperation);
-        operationServiceMap.put(Operation.p, subtractOperation);
-        operationServiceMap.put(Operation.r, addOperation);
-        operationServiceMap.put(Operation.s, addOperation);
+        operationServiceMap.put(Operation.BALANCE, addOperation);
+        operationServiceMap.put(Operation.PURCHASE, subtractOperation);
+        operationServiceMap.put(Operation.RETURN, addOperation);
+        operationServiceMap.put(Operation.SUPPLY, addOperation);
 
         FruitStrategy fruitStrategy = new FruitStrategyImpl(operationServiceMap);
         OperationHandler operationHandler = new FruitOperationHandler(fruitStrategy);

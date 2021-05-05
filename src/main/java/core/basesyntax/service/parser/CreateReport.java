@@ -1,7 +1,9 @@
 package core.basesyntax.service.parser;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.fruitmodel.Fruit;
-import core.basesyntax.fruitstorage.FruitStorage;
+import core.basesyntax.db.FruitStorage;
 import java.util.Map;
 
 public class CreateReport implements Report {
@@ -9,15 +11,16 @@ public class CreateReport implements Report {
 
     @Override
     public String report() {
-        FruitStorage fruitStorage = new FruitStorage();
+        FruitDao fruitDao = new FruitDaoImpl();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(TITLE).append(System.lineSeparator());
-        for (Map.Entry<Fruit, Integer> entry : fruitStorage.getAll().entrySet()) {
+        for (Map.Entry<Fruit, Integer> entry : fruitDao.getAll().entrySet()) {
             stringBuilder.append(entry.getKey().getName())
                     .append(",")
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
+        stringBuilder.append(System.lineSeparator());
         return stringBuilder.toString().trim();
     }
 }

@@ -1,46 +1,51 @@
 package core.basesyntax.service.parser;
 
 import core.basesyntax.dto.FruitDto;
-import core.basesyntax.dto.StorageFruitDto;
 import core.basesyntax.operations.Operation;
-import core.basesyntax.validate.Validation;
-import core.basesyntax.validate.ValidationOfData;
+import core.basesyntax.validate.Validator;
+import core.basesyntax.validate.ValidatorOfData;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FruitParserDto implements Parser {
-    private static final String SKIP_TITLE = "type,fruit,quantity";
+    private static final String EXCEPTION_MESSAGE = "Illegal argument";
+    private static final String TITLE = "type,fruit,quantity";
     private static final String SPLIT_STRING = ",";
+    private static final Integer OPERATION = 0;
+    private static final Integer FRUIT = 1;
+    private static final Integer QUANTITY = 2;
 
     @Override
     public List<FruitDto> parseInformation(List<String> fruitList) {
-        Validation validation = new ValidationOfData();
+        List<FruitDto> fruitDtoList = new ArrayList<>();
+        Validator validator = new ValidatorOfData();
         for (String line : fruitList) {
-            if (line.equals(SKIP_TITLE)) {
+            if (line.equals(TITLE)) {
                 continue;
             }
             String[] parsedLine = line.split(SPLIT_STRING);
-            if (validation.validationData(parsedLine[0], parsedLine[1], parsedLine[2])) {
-                Operation operation = findOperation(parsedLine[0].trim());
-                String fruitName = parsedLine[1];
-                Integer countChange = Integer.parseInt(parsedLine[2]);
+            if (validator.validationData(parsedLine[OPERATION], parsedLine[FRUIT], parsedLine[QUANTITY])) {
+                Operation operation = findOperation(parsedLine[OPERATION].trim());
+                String fruitName = parsedLine[FRUIT];
+                Integer countChange = Integer.parseInt(parsedLine[QUANTITY]);
                 FruitDto newFruit = new FruitDto(operation, fruitName, countChange);
-                StorageFruitDto.fruitAndActionList.add(newFruit);
+                fruitDtoList.add(newFruit);
             }
         }
-        return StorageFruitDto.fruitAndActionList;
+        return fruitDtoList;
     }
 
     private Operation findOperation(String operation) {
-        if ("b".equals(operation)) {
-            return Operation.b;
-        } else if ("p".equals(operation)) {
-            return Operation.p;
-        } else if ("r".equals(operation)) {
-            return Operation.r;
-        } else if ("s".equals(operation)) {
-            return Operation.s;
+        if (Operation.BALANCE.getOperation().equals(operation)) {
+            return Operation.BALANCE;
+        } else if (Operation.PURCHASE.getOperation().equals(operation)) {
+            return Operation.PURCHASE;
+        } else if (Operation.RETURN.getOperation().equals(operation)) {
+            return Operation.RETURN;
+        } else if (Operation.SUPPLY.getOperation().equals(operation)) {
+            return Operation.SUPPLY;
         } else {
-            return null;
+            throw new RuntimeException(EXCEPTION_MESSAGE);
         }
     }
 }

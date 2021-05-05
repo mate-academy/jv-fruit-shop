@@ -1,25 +1,26 @@
 package core.basesyntax.service.operationwithdata;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.fruitmodel.Fruit;
-import core.basesyntax.fruitstorage.FruitStorage;
+import core.basesyntax.db.FruitStorage;
 import java.util.Optional;
 
 public class AddOperation implements FruitOperationService {
     @Override
     public int apply(FruitDto fruitDto) {
         Fruit fruit = new Fruit(fruitDto.getFruitName());
-        FruitStorage fruitStorage = new FruitStorage();
+        FruitDao fruitDao = new FruitDaoImpl();
         Optional<Integer> currentQuantityFruit =
-                Optional.ofNullable(fruitStorage.get(fruit));
+                Optional.ofNullable(fruitDao.get(fruit));
         if (currentQuantityFruit.isPresent()) {
             int newBalance = currentQuantityFruit.get() + fruitDto.getCountFruit();
-            fruitStorage.save(fruit, newBalance);
+            fruitDao.save(fruit, newBalance);
             return newBalance;
-        } else {
-            fruitStorage.save(fruit, fruitDto.getCountFruit());
-            return fruitDto.getCountFruit();
         }
+        fruitDao.save(fruit, fruitDto.getCountFruit());
+        return fruitDto.getCountFruit();
     }
 }
 

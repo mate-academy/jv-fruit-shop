@@ -1,9 +1,11 @@
 package core.basesyntax.service.operationwithdata;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.fruitmodel.Fruit;
 import core.basesyntax.fruitoperationstrategy.FruitStrategy;
-import core.basesyntax.fruitstorage.FruitStorage;
+import core.basesyntax.db.FruitStorage;
 import java.util.List;
 
 public class FruitOperationHandler implements OperationHandler {
@@ -15,11 +17,11 @@ public class FruitOperationHandler implements OperationHandler {
 
     @Override
     public void operationProcessing(List<FruitDto> fruitDtos) {
-        FruitStorage fruitStorage = new FruitStorage();
+        FruitDao fruitDao = new FruitDaoImpl();
         for (FruitDto fruit : fruitDtos) {
             FruitOperationService fruitOperationService = fruitStrategy.get(fruit.getOperation());
             int quantity = fruitOperationService.apply(fruit);
-            fruitStorage.save(new Fruit(fruit.getFruitName()), quantity);
+            fruitDao.save(new Fruit(fruit.getFruitName()), quantity);
         }
     }
 }

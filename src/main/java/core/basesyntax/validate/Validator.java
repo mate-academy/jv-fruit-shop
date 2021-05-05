@@ -1,6 +1,6 @@
 package core.basesyntax.validate;
 
-public interface Validation {
+public interface Validator {
     boolean validationData(String operation, String fruitName, String quantity);
 
     boolean validationOfOperation(String operation);

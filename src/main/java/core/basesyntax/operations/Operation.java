@@ -1,5 +1,18 @@
 package core.basesyntax.operations;
 
 public enum Operation {
-    b, s, p, r
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
+
+    String operation;
+
+    Operation(String operation) {
+        this.operation = operation;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
 }

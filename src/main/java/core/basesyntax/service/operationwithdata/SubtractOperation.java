@@ -1,8 +1,10 @@
 package core.basesyntax.service.operationwithdata;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.fruitmodel.Fruit;
-import core.basesyntax.fruitstorage.FruitStorage;
+import core.basesyntax.db.FruitStorage;
 import core.basesyntax.validate.ValidationSubtractOperation;
 import core.basesyntax.validate.ValidationSubtractOperationValue;
 import java.util.Optional;
@@ -13,16 +15,16 @@ public class SubtractOperation implements FruitOperationService {
 
     @Override
     public int apply(FruitDto fruitDto) {
+        FruitDao fruitDao = new FruitDaoImpl() ;
         Fruit fruit = new Fruit(fruitDto.getFruitName());
-        FruitStorage fruitStorage = new FruitStorage();
         Optional<Integer> currentQuantityFruit =
-                Optional.ofNullable(fruitStorage.get(fruit));
+                Optional.ofNullable(fruitDao.get(fruit));
         int newBalance = 0;
         if (currentQuantityFruit.isPresent()
                 && validationSubtractOperation
                 .validateDeleteOperation(currentQuantityFruit.get(), fruitDto.getCountFruit())) {
             newBalance = currentQuantityFruit.get() - fruitDto.getCountFruit();
-            fruitStorage.save(fruit, newBalance);
+            fruitDao.save(fruit, newBalance);
         }
         return newBalance;
     }
