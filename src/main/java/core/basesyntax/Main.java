@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitRecordDto;
-import core.basesyntax.dto.FruitRecordDtoParseImpl;
+import core.basesyntax.dto.FruitRecordDtoParserImpl;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FruitOperationHandler;
@@ -25,7 +25,7 @@ public class Main {
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
         List<String> fileInfo = fileReader.read(INPUT_FILE_NAME);
-        List<FruitRecordDto> listOfRecord = new FruitRecordDtoParseImpl().parse(fileInfo);
+        List<FruitRecordDto> listOfRecord = new FruitRecordDtoParserImpl().parse(fileInfo);
         Map<OperationType, FruitOperationHandler> handlers = fillMap();
 
         for (FruitRecordDto fruitRecordDto : listOfRecord) {

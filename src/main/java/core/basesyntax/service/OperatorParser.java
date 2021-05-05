@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface OperatorParse {
+public interface OperatorParser {
     OperationType parse(String operationName);
 }

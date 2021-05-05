@@ -1,9 +1,9 @@
 package core.basesyntax.service.implementation;
 
 import core.basesyntax.service.OperationType;
-import core.basesyntax.service.OperatorParse;
+import core.basesyntax.service.OperatorParser;
 
-public class OperatorParseImpl implements OperatorParse {
+public class OperatorParserImpl implements OperatorParser {
     @Override
     public OperationType parse(String operationName) {
         switch (operationName) {
