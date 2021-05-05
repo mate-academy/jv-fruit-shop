@@ -16,6 +16,14 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
     private static final int FRUIT_NAME = 1;
     private static final int QUANTITY = 2;
 
+    @Override
+    public List<FruitRecordDto> parse(List<String> lines) {
+        return lines.stream()
+                .skip(SKIP_HEADLINE)
+                .map(this::parseLine)
+                .collect(Collectors.toList());
+    }
+
     private FruitRecordDto parseLine(String currentLine) {
         String operationType;
         String fruitName;
@@ -23,22 +31,14 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
         if (currentLineArray.length < 3) {
             throw new RuntimeException(INSUFFICIENT_NUMBER_OF_VALUES);
         }
-        operationType = Operation.getOperationByLetter(currentLineArray[OPERATION_TYPE]
-                .trim()).getOperation();
-        fruitName = currentLineArray[FRUIT_NAME].trim();
-        int quantity = Integer.parseInt(currentLineArray[QUANTITY].trim());
+        operationType = Operation.getOperationByLetter(currentLineArray[OPERATION_TYPE])
+                .getOperation();
+        fruitName = currentLineArray[FRUIT_NAME];
+        int quantity = Integer.parseInt(currentLineArray[QUANTITY]);
         if (quantity < 0) {
             throw new RuntimeException(NEGATIVE_VALUE_EXCEPTION);
         }
         return new FruitRecordDto(Operation.getOperationByLetter(operationType),
                 new Fruit(fruitName), quantity);
-    }
-
-    @Override
-    public List<FruitRecordDto> parse(List<String> lines) {
-        return lines.stream()
-                .skip(SKIP_HEADLINE)
-                .map(this::parseLine)
-                .collect(Collectors.toList());
     }
 }
