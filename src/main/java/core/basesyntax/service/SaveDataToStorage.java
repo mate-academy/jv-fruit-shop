@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface SaveDataToStorage {
-    void saveData(List<FruitRecordDto> recordDtos, Map<OperationType, FruitOperation> operationMap);
+    void saveData(List<FruitRecordDto> recordDtos, Map<String, FruitOperation> operationMap);
 }

@@ -26,11 +26,11 @@ public class FruitMain {
         FruitRecordDtoParser fruitRecordDtoParser = new FruitRecordDtoParserImpl();
         FruitOperation addOperation = new AddOperation();
         FruitOperation removeOperation = new RemoveOperation();
-        Map<OperationType,FruitOperation> fruitOperationMap = new HashMap<>();
-        fruitOperationMap.put(OperationType.b, addOperation);
-        fruitOperationMap.put(OperationType.p, removeOperation);
-        fruitOperationMap.put(OperationType.s, addOperation);
-        fruitOperationMap.put(OperationType.r, addOperation);
+        Map<String,FruitOperation> fruitOperationMap = new HashMap<>();
+        fruitOperationMap.put(OperationType.BALANCE.getOperation(), addOperation);
+        fruitOperationMap.put(OperationType.PURCHASE.getOperation(), removeOperation);
+        fruitOperationMap.put(OperationType.SUPPLY.getOperation(), addOperation);
+        fruitOperationMap.put(OperationType.RETURN.getOperation(), addOperation);
         List<FruitRecordDto> fruitRecordDtos = fruitRecordDtoParser.parse(readerList);
         SaveDataToStorage saveDataToStorage = new SaveDataToStorageImpl();
         saveDataToStorage.saveData(fruitRecordDtos,fruitOperationMap);

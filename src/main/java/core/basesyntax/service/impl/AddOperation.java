@@ -16,9 +16,8 @@ public class AddOperation implements FruitOperation {
             int newQuantity = currentQuantity.get() + fruitRecordDto.getFruitCount();
             Storage.fruits.put(fruit, newQuantity);
             return newQuantity;
-        } else {
-            Storage.fruits.put(fruit, fruitRecordDto.getFruitCount());
-            return fruitRecordDto.getFruitCount();
         }
+        Storage.fruits.put(fruit, fruitRecordDto.getFruitCount());
+        return fruitRecordDto.getFruitCount();
     }
 }

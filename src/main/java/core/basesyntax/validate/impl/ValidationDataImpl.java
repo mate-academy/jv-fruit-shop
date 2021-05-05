@@ -13,7 +13,7 @@ public class ValidationDataImpl implements ValidationData {
 
     @Override
     public boolean validationByOperation(String operation) {
-        if (operation.replaceAll("[^b_s_p_r]", "").length() < operation.trim().length()) {
+        if (operation.replaceAll("[^BALNCE_SUPLY_RH_T]", "").length() < operation.trim().length()) {
             throw new RuntimeException("Invalid operation");
         }
         return true;

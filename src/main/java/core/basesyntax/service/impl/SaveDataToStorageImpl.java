@@ -10,10 +10,10 @@ import java.util.Map;
 public class SaveDataToStorageImpl implements SaveDataToStorage {
     @Override
     public void saveData(List<FruitRecordDto> recordDtos,
-                         Map<OperationType, FruitOperation> operationMap) {
+                         Map<String, FruitOperation> operationMap) {
         for (FruitRecordDto fruitRecordDto : recordDtos) {
             OperationType operationType = fruitRecordDto.getOperationType();
-            FruitOperation fruitOperation = operationMap.get(operationType);
+            FruitOperation fruitOperation = operationMap.get(operationType.getOperation());
             fruitOperation.apply(fruitRecordDto);
         }
     }
