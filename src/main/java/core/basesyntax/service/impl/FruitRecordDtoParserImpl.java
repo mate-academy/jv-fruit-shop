@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitRecordDto;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitRecordDtoParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,9 @@ import java.util.List;
 public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
     private static final String COMMA_JOINER = ",";
     private static final int LENGTH_OF_THE_CORRECT_DATA = 3;
+    private static final int INDEX_OPERATION = 0;
+    private static final int INDEX_FRUIT= 1;
+    private static final int INDEX_QUANTITY = 2;
 
     @Override
     public List<FruitRecordDto> parse(List<String> lines) {
@@ -17,19 +21,17 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
             if (splitLine.length < LENGTH_OF_THE_CORRECT_DATA) {
                 throw new RuntimeException("Line is not valid");
             }
-            if (splitLine[0].equals("r")
-                    || splitLine[0].equals("s")
-                    || splitLine[0].equals("p") || splitLine[0].equals("b")) {
-                try {
-                    FruitRecordDto dto = new FruitRecordDto(splitLine[0], splitLine[1],
-                            Integer.parseInt(splitLine[2]));
-                    recordDtos.add(dto);
-                } catch (IllegalArgumentException e) {
-                    throw new RuntimeException("Not valid data, quantity must be numbers", e);
-                }
-            } else {
+            if (!Operation.isPresent(splitLine[INDEX_OPERATION])) {
                 throw new RuntimeException("Operation is not valid");
             }
+            try {
+                FruitRecordDto dto = new FruitRecordDto(splitLine[INDEX_OPERATION], splitLine[INDEX_FRUIT],
+                            Integer.parseInt(splitLine[INDEX_QUANTITY]));
+                recordDtos.add(dto);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Not valid data, quantity must be numbers", e);
+            }
+
         }
         return recordDtos;
     }
