@@ -1,10 +1,10 @@
 package core.basesyntax.model;
 
 public enum Operation {
-    b,
-    r,
-    s,
-    p;
+    BALANCE,
+    RETURN,
+    SUPPLY,
+    PURCHASE;
 
     public static boolean isPresent(String value) {
         Operation [] operations = values();

@@ -8,5 +8,4 @@ import java.util.Map;
 public interface StrategyOperation {
     Map<Fruit, Integer> get(List<FruitRecordDto> fruitRecordDtos);
 
-    String writeBalance(Map<Fruit, Integer> balance);
 }

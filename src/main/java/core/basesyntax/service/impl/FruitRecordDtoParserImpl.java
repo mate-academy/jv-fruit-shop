@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitRecordDto;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitRecordDtoParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +20,6 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
             if (splitLine.length < LENGTH_OF_THE_CORRECT_DATA) {
                 throw new RuntimeException("Line is not valid");
             }
-            if (!Operation.isPresent(splitLine[INDEX_OPERATION])) {
-                throw new RuntimeException("Operation is not valid");
-            }
             try {
                 FruitRecordDto dto = new FruitRecordDto(splitLine[INDEX_OPERATION],
                         splitLine[INDEX_FRUIT],
@@ -32,7 +28,6 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
             } catch (IllegalArgumentException e) {
                 throw new RuntimeException("Not valid data, quantity must be numbers", e);
             }
-
         }
         return recordDtos;
     }

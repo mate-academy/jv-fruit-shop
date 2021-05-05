@@ -16,9 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/file.csv";
 
@@ -33,10 +30,11 @@ public class Main {
         ReaderServiceImpl fileReader = new ReaderServiceImpl();
         List<String> newLinesOperation = fileReader.readFromFile(INPUT_FILE_PATH);
         FruitRecordDtoParser parser = new FruitRecordDtoParserImpl();
-        List<FruitRecordDto> allFruitRecordDto = parser.parse(newLinesOperation);
+        List<FruitRecordDto> allFruitRecordDto;
+        allFruitRecordDto = parser.parse(newLinesOperation);
 
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeBalanceOfFruitToFile(strategyOperation
+        writerService.writeBalanceOfFruitToFile(new BalanceHandler()
                 .writeBalance(strategyOperation.get(allFruitRecordDto)));
     }
 }
