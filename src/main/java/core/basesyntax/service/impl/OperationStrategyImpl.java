@@ -10,7 +10,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     private static final String RETURN = "r";
 
     @Override
-    public void operation(FruitRecordDto fruitRecordDto) {
+    public int operation(FruitRecordDto fruitRecordDto) {
         switch (fruitRecordDto.getOperationType()) {
             case (BALANCE) :
                 new SetBalanceHandlerImpl().applyFruit(fruitRecordDto);
@@ -27,5 +27,6 @@ public class OperationStrategyImpl implements OperationStrategy {
             default:
                 throw new RuntimeException("No such operation allowed");
         }
+        return fruitRecordDto.getAmount();
     }
 }

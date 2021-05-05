@@ -17,16 +17,20 @@ public class FileParserImpl implements FileParser {
     @Override
     public List<FruitRecordDto> parser(List<String> lines) {
         List<FruitRecordDto> listOfLines = new ArrayList<>(lines.size());
-        for (int i = 1; i < lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++) {
             String[] singleLineList = lines.get(i).split(COLUMN_SEPARATOR);
-            FruitRecordDto fruitRecordDto =
-                    new FruitRecordDto(singleLineList[ZERO_COLUMN_INDEX]
-                            .replaceAll(REPLACE_REGEX, EMPTY_STRING),
-                            singleLineList[FIRST_COLUMN_INDEX]
-                                    .replaceAll(REPLACE_REGEX, EMPTY_STRING),
-                            Integer.parseInt(singleLineList[SECOND_COLUMN_INDEX]
-                                    .replaceAll(REPLACE_REGEX_AMOUNT, EMPTY_STRING)));
-            listOfLines.add(fruitRecordDto);
+            String operationType =
+                    singleLineList[ZERO_COLUMN_INDEX]
+                            .replaceAll(REPLACE_REGEX, EMPTY_STRING);
+            if (operationType.length() == 1) {
+                FruitRecordDto fruitRecordDto =
+                        new FruitRecordDto(operationType,
+                                singleLineList[FIRST_COLUMN_INDEX]
+                                        .replaceAll(REPLACE_REGEX, EMPTY_STRING),
+                                Integer.parseInt(singleLineList[SECOND_COLUMN_INDEX]
+                                        .replaceAll(REPLACE_REGEX_AMOUNT, EMPTY_STRING)));
+                listOfLines.add(fruitRecordDto);
+            }
         }
         return listOfLines;
     }

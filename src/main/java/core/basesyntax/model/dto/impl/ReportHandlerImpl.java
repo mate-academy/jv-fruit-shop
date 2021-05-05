@@ -18,7 +18,7 @@ public class ReportHandlerImpl implements ReportHandler {
                     .append(COLUMN_SEPARATOR)
                     .append(entry.getValue().toString())
                     .append(System.lineSeparator());
-            reportString += report.toString();
+            reportString = report.toString();
         }
         return reportString;
     }
