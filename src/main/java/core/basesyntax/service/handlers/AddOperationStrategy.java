@@ -15,7 +15,6 @@ public class AddOperationStrategy implements RecordHandler {
     @Override
     public long applyAction(FruitRecordDto fruitRecordDto) {
         Fruit fruit = new Fruit(fruitRecordDto.getFruit().getName());
-
         int currentQuantity = fruitDao.getQuantity(fruit).orElse(DEFAULT_VALUE);
         int newQuantity = currentQuantity + fruitRecordDto.getQuantity();
         fruitDao.save(fruit, newQuantity);

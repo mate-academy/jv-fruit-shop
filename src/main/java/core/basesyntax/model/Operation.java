@@ -3,7 +3,10 @@ package core.basesyntax.model;
 import java.util.Arrays;
 
 public enum Operation {
-    BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
 
     private static final String INVALID_OPERATION_MESSAGE = "Invalid operation format";
 
