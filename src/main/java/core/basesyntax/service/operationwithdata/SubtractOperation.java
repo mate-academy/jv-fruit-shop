@@ -14,14 +14,15 @@ public class SubtractOperation implements FruitOperationService {
     @Override
     public int apply(FruitDto fruitDto) {
         Fruit fruit = new Fruit(fruitDto.getFruitName());
+        FruitStorage fruitStorage = new FruitStorage();
         Optional<Integer> currentQuantityFruit =
-                Optional.ofNullable(FruitStorage.fruitStorage.get(fruit));
+                Optional.ofNullable(fruitStorage.get(fruit));
         int newBalance = 0;
         if (currentQuantityFruit.isPresent()
                 && validationSubtractOperation
                 .validateDeleteOperation(currentQuantityFruit.get(), fruitDto.getCountFruit())) {
             newBalance = currentQuantityFruit.get() - fruitDto.getCountFruit();
-            FruitStorage.fruitStorage.put(fruit, newBalance);
+            fruitStorage.save(fruit, newBalance);
         }
         return newBalance;
     }

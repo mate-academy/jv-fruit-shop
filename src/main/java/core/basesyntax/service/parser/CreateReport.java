@@ -9,9 +9,10 @@ public class CreateReport implements Report {
 
     @Override
     public String report() {
+        FruitStorage fruitStorage = new FruitStorage();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(TITLE).append(System.lineSeparator());
-        for (Map.Entry<Fruit, Integer> entry : FruitStorage.fruitStorage.entrySet()) {
+        for (Map.Entry<Fruit, Integer> entry : fruitStorage.getAll().entrySet()) {
             stringBuilder.append(entry.getKey().getName())
                     .append(",")
                     .append(entry.getValue())

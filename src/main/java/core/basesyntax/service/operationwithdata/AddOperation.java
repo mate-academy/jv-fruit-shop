@@ -9,14 +9,15 @@ public class AddOperation implements FruitOperationService {
     @Override
     public int apply(FruitDto fruitDto) {
         Fruit fruit = new Fruit(fruitDto.getFruitName());
+        FruitStorage fruitStorage = new FruitStorage();
         Optional<Integer> currentQuantityFruit =
-                Optional.ofNullable(FruitStorage.fruitStorage.get(fruit));
+                Optional.ofNullable(fruitStorage.get(fruit));
         if (currentQuantityFruit.isPresent()) {
             int newBalance = currentQuantityFruit.get() + fruitDto.getCountFruit();
-            FruitStorage.fruitStorage.put(fruit, newBalance);
+            fruitStorage.save(fruit, newBalance);
             return newBalance;
         } else {
-            FruitStorage.fruitStorage.put(fruit, fruitDto.getCountFruit());
+            fruitStorage.save(fruit, fruitDto.getCountFruit());
             return fruitDto.getCountFruit();
         }
     }

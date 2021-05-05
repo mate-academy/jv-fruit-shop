@@ -15,10 +15,11 @@ public class FruitOperationHandler implements OperationHandler {
 
     @Override
     public void operationProcessing(List<FruitDto> fruitDtos) {
+        FruitStorage fruitStorage = new FruitStorage();
         for (FruitDto fruit : fruitDtos) {
             FruitOperationService fruitOperationService = fruitStrategy.get(fruit.getOperation());
             int quantity = fruitOperationService.apply(fruit);
-            FruitStorage.fruitStorage.put(new Fruit(fruit.getFruitName()), quantity);
+            fruitStorage.save(new Fruit(fruit.getFruitName()), quantity);
         }
     }
 }
