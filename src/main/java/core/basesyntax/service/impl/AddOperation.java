@@ -7,10 +7,10 @@ import core.basesyntax.service.FruitOperationHandler;
 import java.util.Optional;
 
 public class AddOperation implements FruitOperationHandler {
-    private int newBalance;
 
     @Override
     public int applyOperation(FruitRecordDto fruitRecordDto) {
+        int newBalance;
         Fruit fruit = new Fruit(fruitRecordDto.getFruitName());
         int adding = fruitRecordDto.getQuantity();
         Optional<Integer> currentQuantity = Optional.ofNullable(Storage.fruits.get(fruit));

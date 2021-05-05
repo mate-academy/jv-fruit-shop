@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
+    private static final int INDEX_OF_COLUMNS_NAME = 0;
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -15,11 +16,10 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
 
     @Override
     public List<FruitRecordDto> parseLines(List<String> records) {
+        records.remove(INDEX_OF_COLUMNS_NAME);
         List<FruitRecordDto> fruitRecordDto = new ArrayList<>(records.size());
         for (String record : records) {
-            if (!dataValidation.checkLine(record)) {
-                continue;
-            }
+            dataValidation.checkLine(record);
             String[] recordArray = record.split(SPLITERATOR);
             String operation = recordArray[OPERATION_INDEX];
             Operation recordOperation = Operation.getOperationByLetter(operation);

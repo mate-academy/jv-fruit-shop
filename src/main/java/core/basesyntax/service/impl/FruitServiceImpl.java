@@ -10,14 +10,14 @@ import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
     private static final String COLUMNS_NAME = "fruit,quantity";
-    private static final String COMMA = ",";
+    private static final String CSV_SEPARATOR = ",";
 
     @Override
     public void saveData(List<FruitRecordDto> parsedLines,
-                         Map<Operation, FruitOperationHandler> operationStrategy) {
+                         Map<Operation, FruitOperationHandler> operations) {
         for (FruitRecordDto parsedLine : parsedLines) {
             Operation operationType = parsedLine.getOperationType();
-            operationStrategy.get(operationType).applyOperation(parsedLine);
+            operations.get(operationType).applyOperation(parsedLine);
         }
     }
 
@@ -27,7 +27,7 @@ public class FruitServiceImpl implements FruitService {
         reportBuilder.append(COLUMNS_NAME).append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> entry : Storage.fruits.entrySet()) {
             reportBuilder.append(entry.getKey().getFruitName())
-                    .append(COMMA)
+                    .append(CSV_SEPARATOR)
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }

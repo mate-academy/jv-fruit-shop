@@ -8,11 +8,11 @@ import core.basesyntax.service.FruitOperationHandler;
 import java.util.Optional;
 
 public class SubtractOperation implements FruitOperationHandler {
-    private int newBalance;
     private DataValidation subtractValidation = new DataValidationImpl();
 
     @Override
     public int applyOperation(FruitRecordDto fruitRecordDto) {
+        int newBalance = 0;
         Fruit fruit = new Fruit(fruitRecordDto.getFruitName());
         int subtracting = fruitRecordDto.getQuantity();
         Optional<Integer> currentQuantity = Optional.ofNullable(Storage.fruits.get(fruit));

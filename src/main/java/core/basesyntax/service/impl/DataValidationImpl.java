@@ -3,11 +3,14 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.DataValidation;
 
 public class DataValidationImpl implements DataValidation {
-    private static final String VALID_REGEX = "[bspr],[a-z]+,[0-9]+";
+    private static final String VALID_RECORD_REGEX = "[bspr],[a-z]+,[0-9]+";
 
     @Override
     public boolean checkLine(String line) {
-        return line.matches(VALID_REGEX);
+        if (line.matches(VALID_RECORD_REGEX)) {
+            return true;
+        }
+        throw new RuntimeException("Invalid input information in line " + line);
     }
 
     @Override
