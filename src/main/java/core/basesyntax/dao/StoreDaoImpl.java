@@ -8,16 +8,16 @@ import java.util.Optional;
 public class StoreDaoImpl implements StoreDao {
     @Override
     public void add(Fruit fruit, int newQuantity) {
-        Storage.addFruit(fruit, newQuantity);
+        Storage.fruits.put(fruit, newQuantity);
     }
 
     @Override
     public int get(Fruit fruit) {
-        return Optional.ofNullable(Storage.getFruits().get(fruit)).orElse(0);
+        return Optional.ofNullable(Storage.fruits.get(fruit)).orElse(0);
     }
 
     @Override
     public Map<Fruit, Integer> getAll() {
-        return Storage.getFruits();
+        return Storage.fruits;
     }
 }

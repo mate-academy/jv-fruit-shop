@@ -1,4 +1,3 @@
-
 package core.basesyntax.service.impls;
 
 import core.basesyntax.dao.StoreDao;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class StoreServiceImpl implements StoreService {
     private static final String REPORT_TITLE = "fruit,quantity";
-    private static final String COMMA_DELIMITER = ",";
+    private static final String CSV_SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -31,7 +30,7 @@ public class StoreServiceImpl implements StoreService {
         stringBuilder.append(REPORT_TITLE).append(System.lineSeparator());
         Map<Fruit, Integer> fruitQuantityMap = storeDao.getAll();
         stringBuilder.append(fruitQuantityMap.entrySet().stream()
-                .map(entry -> entry.getKey().getName() + COMMA_DELIMITER + entry.getValue())
+                .map(entry -> entry.getKey().getName() + CSV_SEPARATOR + entry.getValue())
                 .collect(Collectors.joining(System.lineSeparator())));
         return stringBuilder.toString();
     }
@@ -39,7 +38,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public void toStorage(List<String> data) {
         for (int i = START_DATA_INDEX; i < data.size(); i++) {
-            String[] currentOperationData = data.get(i).split(COMMA_DELIMITER);
+            String[] currentOperationData = data.get(i).split(CSV_SEPARATOR);
             Fruit fruit = new Fruit(currentOperationData[FRUIT_NAME_INDEX]);
             int inputQuantity = Integer.parseInt(currentOperationData[QUANTITY_INDEX]);
             if (inputQuantity < 0) {

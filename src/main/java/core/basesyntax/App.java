@@ -3,17 +3,19 @@ package core.basesyntax;
 import core.basesyntax.dao.StoreDao;
 import core.basesyntax.dao.StoreDaoImpl;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.FileService;
+import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.RecordStrategy;
 import core.basesyntax.service.StoreService;
+import core.basesyntax.service.WriterService;
 import core.basesyntax.service.handler.BalanceOperationHandler;
 import core.basesyntax.service.handler.OperationHandler;
 import core.basesyntax.service.handler.PurchaseOperationHandler;
 import core.basesyntax.service.handler.ReturnOperationHandler;
 import core.basesyntax.service.handler.SupplyOperationHandler;
-import core.basesyntax.service.impls.FileServiceImpl;
+import core.basesyntax.service.impls.ReaderServiceImpl;
 import core.basesyntax.service.impls.RecordStrategyImpl;
 import core.basesyntax.service.impls.StoreServiceImpl;
+import core.basesyntax.service.impls.WriterServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +35,13 @@ public class App {
         StoreDao storeDao = new StoreDaoImpl();
         StoreService storeService = new StoreServiceImpl(storeDao, recordStrategy);
 
-        FileService readerService = new FileServiceImpl();
-        List<String> data = readerService.readFile(INPUT_DATA_FILE);
+        ReaderService reader = new ReaderServiceImpl();
+        List<String> data = reader.readFile(INPUT_DATA_FILE);
         storeService.toStorage(data);
 
-        FileService writerService = new FileServiceImpl();
+        WriterService writer = new WriterServiceImpl();
         String report = storeService.createReport();
-        writerService.writeToFile(report, OUTPUT_DATA_FILE);
+        writer.writeToFile(report, OUTPUT_DATA_FILE);
 
     }
 

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class RecordStrategyImpl implements RecordStrategy {
-    private Map<String, OperationHandler> operationHandlerMap;
+    private final Map<String, OperationHandler> operationHandlerMap;
 
     public RecordStrategyImpl(Map<String, OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
