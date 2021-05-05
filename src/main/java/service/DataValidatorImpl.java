@@ -11,6 +11,7 @@ public class DataValidatorImpl implements DataValidator {
     public static final String SUPPLY = "s";
     public static final int ACTIVITY_INDEX = 0;
     public static final int QUANTITY_INDEX = 2;
+    public static final String CORRECT_FIRST_LINE = "activity,fruit,quantity";
 
     public void validateRecord(String record) {
         String[] data = record.split(COMMA);
@@ -33,7 +34,7 @@ public class DataValidatorImpl implements DataValidator {
 
     @Override
     public void validateFirstLine(String firstLine) {
-        if (!firstLine.equals("activity,fruit,quantity")) {
+        if (!firstLine.equals(CORRECT_FIRST_LINE)) {
             throw new InvalidInputException("Unknown file format");
         }
     }
