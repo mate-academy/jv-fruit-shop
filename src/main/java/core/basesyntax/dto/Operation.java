@@ -45,7 +45,6 @@ public class Operation {
     }
 
     public enum OperationType {
-        UNKNOWN,
         BALANCE,
         SUPPLY,
         PURCHASE,

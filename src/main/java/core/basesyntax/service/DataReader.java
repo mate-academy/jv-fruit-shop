@@ -7,8 +7,7 @@ import java.util.List;
 
 public class DataReader implements Reader {
 
-    public DataReader(String fileName) {
-    }
+    public DataReader() { }
 
     @Override
     public List<String> readData(String sourceName) throws IOException {
