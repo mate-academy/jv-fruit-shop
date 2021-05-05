@@ -1,17 +1,19 @@
 package model.dto;
 
+import model.OperationType;
+
 public class FruitRecordDto {
-    private String operationType;
+    private OperationType operationType;
     private String fruitName;
     private Integer quantity;
 
-    public FruitRecordDto(String operationType, String fruitName, Integer quantity) {
+    public FruitRecordDto(OperationType operationType, String fruitName, Integer quantity) {
         this.operationType = operationType;
         this.fruitName = fruitName;
         this.quantity = quantity;
     }
 
-    public String getOperationType() {
+    public OperationType getOperationType() {
         return operationType;
     }
 

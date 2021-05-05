@@ -3,9 +3,9 @@ package service.impl;
 import db.Storage;
 import model.Fruit;
 import model.dto.FruitRecordDto;
-import service.FruitOperationsService;
+import service.OperationHandler;
 
-public class ReturnOperation implements FruitOperationsService {
+public class ReturnOperation implements OperationHandler {
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
         Fruit currentFruit = new Fruit(fruitRecordDto.getFruitName());

@@ -3,9 +3,9 @@ package service.impl;
 import db.Storage;
 import model.Fruit;
 import model.dto.FruitRecordDto;
-import service.FruitOperationsService;
+import service.OperationHandler;
 
-public class RemoveOperation implements FruitOperationsService {
+public class RemoveOperation implements OperationHandler {
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
         if (Storage.fruits

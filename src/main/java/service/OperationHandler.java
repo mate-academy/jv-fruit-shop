@@ -2,6 +2,6 @@ package service;
 
 import model.dto.FruitRecordDto;
 
-public interface FruitOperationsService {
+public interface OperationHandler {
     int apply(FruitRecordDto fruitRecordDto);
 }
