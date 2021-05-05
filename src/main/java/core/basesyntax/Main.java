@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_PATH = "src/main/resources/shop_operations.csv";
+    private static final String REPORT_PATH = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         List<String> dataFromFile = readFile();
         List<FruitRecordDto> recordDtos = parseData(dataFromFile);
@@ -36,14 +39,9 @@ public class Main {
         return handlersOperation;
     }
 
-    private static void writeReport() {
-        Writer reportWriter = new WriterImpl();
-        reportWriter.writer("src/main/resources/report.csv");
-    }
-
     private static List<String> readFile() {
         Reader reader = new ReaderImpl();
-        List<String> rowsFromFile = reader.readFromFile("src/main/resources/shop_operations.csv");
+        List<String> rowsFromFile = reader.readFromFile(FILE_PATH);
         return rowsFromFile;
     }
 
@@ -58,5 +56,10 @@ public class Main {
         for (FruitRecordDto dto : recordDtos) {
             handlersOperation.get(dto.getOperationType()).apply(dto);
         }
+    }
+
+    private static void writeReport() {
+        Writer reportWriter = new WriterImpl();
+        reportWriter.writer(REPORT_PATH);
     }
 }
