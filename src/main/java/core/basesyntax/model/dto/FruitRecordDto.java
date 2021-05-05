@@ -18,7 +18,6 @@ public class FruitRecordDto {
     }
 
     public String getName() {
-
         return name;
     }
 
