@@ -7,10 +7,11 @@ import core.basesyntax.fruitmodel.Fruit;
 import java.util.Optional;
 
 public class AddOperation implements FruitOperationService {
+    private FruitDao fruitDao = new FruitDaoImpl();
+
     @Override
     public int apply(FruitDto fruitDto) {
         Fruit fruit = new Fruit(fruitDto.getFruitName());
-        FruitDao fruitDao = new FruitDaoImpl();
         Optional<Integer> currentQuantityFruit =
                 Optional.ofNullable(fruitDao.get(fruit));
         if (currentQuantityFruit.isPresent()) {

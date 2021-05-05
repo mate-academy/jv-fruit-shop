@@ -1,3 +1,5 @@
+package core.basesyntax;
+
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.fruitoperationstrategy.FruitStrategy;
 import core.basesyntax.fruitoperationstrategy.FruitStrategyImpl;
@@ -8,6 +10,8 @@ import core.basesyntax.service.operationwithdata.FruitOperationService;
 import core.basesyntax.service.operationwithdata.OperationHandler;
 import core.basesyntax.service.operationwithdata.SubtractOperation;
 import core.basesyntax.service.parser.FruitParserDto;
+import core.basesyntax.service.parser.ReportService;
+import core.basesyntax.service.parser.ReportServiceImpl;
 import core.basesyntax.service.readandwrite.ReaderService;
 import core.basesyntax.service.readandwrite.ReaderServiceImpl;
 import core.basesyntax.service.readandwrite.ReportWriter;
@@ -39,7 +43,9 @@ public class Main {
         operationHandler.operationProcessing(fruitDtos);
 
         ReportWriter reportWriter = new ReportWriterImpl();
-        reportWriter.writeReport(WRITE_PATH);
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.generateReport();
+        reportWriter.writeReport(WRITE_PATH, report);
     }
 }
 

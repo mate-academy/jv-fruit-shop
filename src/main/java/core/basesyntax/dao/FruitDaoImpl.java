@@ -5,20 +5,18 @@ import core.basesyntax.fruitmodel.Fruit;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-    private FruitStorage fruitStorage = new FruitStorage();
-
     @Override
     public void save(Fruit fruit, Integer quantity) {
-        fruitStorage.getFruitStorage().put(fruit, quantity);
+        FruitStorage.fruitStorage.put(fruit, quantity);
     }
 
     @Override
     public Integer get(Fruit fruit) {
-        return fruitStorage.getFruitStorage().get(fruit);
+        return FruitStorage.fruitStorage.get(fruit);
     }
 
     @Override
     public Map<Fruit, Integer> getAll() {
-        return fruitStorage.getFruitStorage();
+        return FruitStorage.fruitStorage;
     }
 }
