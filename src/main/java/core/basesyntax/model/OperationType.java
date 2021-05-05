@@ -1,7 +1,10 @@
 package core.basesyntax.model;
 
 public enum OperationType {
-    BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
 
     private static final String EXCEPTION_MESSAGE = "Wrong operation type";
     private String code;
