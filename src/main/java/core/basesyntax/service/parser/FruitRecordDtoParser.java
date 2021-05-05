@@ -1,6 +1,6 @@
 package core.basesyntax.service.parser;
 
-import core.basesyntax.model.dto.FruitRecordDto;
+import core.basesyntax.dto.FruitRecordDto;
 import java.util.List;
 
 public interface FruitRecordDtoParser {

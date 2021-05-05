@@ -1,44 +1,49 @@
 package core.basesyntax;
 
-import core.basesyntax.model.dto.FruitRecordDto;
-import core.basesyntax.service.FruitAvailabilityValidatorImpl;
-import core.basesyntax.service.Operation;
-import core.basesyntax.service.filereader.FileReader;
-import core.basesyntax.service.filereader.FileReaderImplForCsv;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.dto.FruitRecordDto;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.fileservice.FileService;
+import core.basesyntax.service.fileservice.FileServiceImplForCsv;
 import core.basesyntax.service.handlers.AddOperationStrategy;
 import core.basesyntax.service.handlers.FruitOperationStrategy;
 import core.basesyntax.service.handlers.RemoveOperationStrategy;
 import core.basesyntax.service.parser.FruitRecordDtoParser;
 import core.basesyntax.service.parser.FruitRecordDtoParserImpl;
-import core.basesyntax.service.reportwriter.ReportWriter;
-import core.basesyntax.service.reportwriter.ReportWriterImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String fromFile = "src/main/resources/shop_instructions.csv";
+    private static final String toFile = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
-        FileReader fileReader = new FileReaderImplForCsv();
+        FruitDao fruitDao = new FruitDaoImpl();
+        FileService fileService = new FileServiceImplForCsv(fruitDao);
         FruitRecordDtoParser parser = new FruitRecordDtoParserImpl();
-        String fromFile = "src/main/resources/shop_instructions.csv";
-        Map<String, FruitOperationStrategy> fruitOperationHandlerMap = new HashMap<>();
-        fruitOperationHandlerMap.put(Operation.getOperationByLetter("s")
-                .getOperation(), new AddOperationStrategy());
-        fruitOperationHandlerMap.put(Operation.getOperationByLetter("r")
-                .getOperation(), new AddOperationStrategy());
-        fruitOperationHandlerMap.put(Operation.getOperationByLetter("b")
-                .getOperation(), new AddOperationStrategy());
-        fruitOperationHandlerMap.put(Operation.getOperationByLetter("p")
-                .getOperation(), new RemoveOperationStrategy(
-                new FruitAvailabilityValidatorImpl()));
-        List<FruitRecordDto> dtos = parser.parse(fileReader.readAllLinesFromFile(fromFile));
+        List<FruitRecordDto> dtos = parser.parse(fileService.readAllLinesFromFile(fromFile));
+        Map<Operation, FruitOperationStrategy> fruitOperationHandlerMap =
+                createStrategyMap(fruitDao);
         for (FruitRecordDto dto : dtos) {
             fruitOperationHandlerMap
                     .get(dto.getOperationType())
                     .applyAction(dto);
         }
-        String toFile = "src/main/resources/report.csv";
-        ReportWriter reportWriter = new ReportWriterImpl();
-        reportWriter.writeReport(toFile);
+        fileService.writeReport(toFile);
+    }
+
+    private static Map<Operation, FruitOperationStrategy> createStrategyMap(FruitDao fruitDao) {
+        Map<Operation, FruitOperationStrategy> fruitOperationHandler = new HashMap<>();
+        fruitOperationHandler.put(Operation.getOperationByLetter("s"),
+                new AddOperationStrategy(fruitDao));
+        fruitOperationHandler.put(Operation.getOperationByLetter("r"),
+                new AddOperationStrategy(fruitDao));
+        fruitOperationHandler.put(Operation.getOperationByLetter("b"),
+                new AddOperationStrategy(fruitDao));
+        fruitOperationHandler.put(Operation.getOperationByLetter("p"),
+                new RemoveOperationStrategy(fruitDao));
+        return fruitOperationHandler;
     }
 }

@@ -1,20 +1,24 @@
 package core.basesyntax.service.handlers;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dto.FruitRecordDto;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.dto.FruitRecordDto;
 
 public class AddOperationStrategy implements FruitOperationStrategy {
     private static final int DEFAULT_VALUE = 0;
+    private final FruitDao fruitDao;
+
+    public AddOperationStrategy(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
-    public void applyAction(FruitRecordDto fruitRecordDto) {
-        Fruit fruit = new Fruit(fruitRecordDto.getFruitName());
+    public int applyAction(FruitRecordDto fruitRecordDto) {
+        Fruit fruit = new Fruit(fruitRecordDto.getFruit().getName());
 
-        int currentQuantity = Storage.getQuantity(fruit) == null
-                ? DEFAULT_VALUE
-                : Storage.getQuantity(fruit);
+        int currentQuantity = fruitDao.getQuantity(fruit).orElse(DEFAULT_VALUE);
         int newQuantity = currentQuantity + fruitRecordDto.getQuantity();
-        Storage.applyToStorage(fruit, newQuantity);
+        fruitDao.save(fruit, newQuantity);
+        return newQuantity;
     }
 }

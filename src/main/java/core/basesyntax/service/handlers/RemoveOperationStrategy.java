@@ -1,30 +1,28 @@
 package core.basesyntax.service.handlers;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dto.FruitRecordDto;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.dto.FruitRecordDto;
-import core.basesyntax.service.interfaces.FruitAvailabilityValidator;
-import java.util.Optional;
 
 public class RemoveOperationStrategy implements FruitOperationStrategy {
     private static final int DEFAULT_VALUE = 0;
     private static final String EXCEPTION_MESSAGE = "Amount of fruits you want "
             + "to buy is bigger than we currently have";
-    private final FruitAvailabilityValidator fruitAvailabilityValidator;
+    private final FruitDao fruitDao;
 
-    public RemoveOperationStrategy(FruitAvailabilityValidator fruitAvailabilityValidator) {
-        this.fruitAvailabilityValidator = fruitAvailabilityValidator;
+    public RemoveOperationStrategy(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
-    public void applyAction(FruitRecordDto fruitRecordDto) {
-        fruitAvailabilityValidator.checkAvailability(fruitRecordDto);
-        Fruit fruit = new Fruit(fruitRecordDto.getFruitName());
-        int currentQuantity = Storage.getQuantity(fruit);
+    public int applyAction(FruitRecordDto fruitRecordDto) {
+        Fruit fruit = new Fruit(fruitRecordDto.getFruit().getName());
+        int currentQuantity = fruitDao.getQuantity(fruit).orElse(DEFAULT_VALUE);
         int subtractionResult = currentQuantity - fruitRecordDto.getQuantity();
-        int newQuantity = currentQuantity < DEFAULT_VALUE ? Optional.of(subtractionResult)
-                .orElseThrow(() -> new RuntimeException(EXCEPTION_MESSAGE))
-                : subtractionResult;
-        Storage.applyToStorage(fruit, newQuantity);
+        if (subtractionResult < DEFAULT_VALUE) {
+            throw new RuntimeException(EXCEPTION_MESSAGE);
+        }
+        fruitDao.save(fruit, subtractionResult);
+        return subtractionResult;
     }
 }
