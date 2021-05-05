@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_PATH_FOR_READ = "src\\main\\shopExample.csv";
-    private static final String FILE_PATH_FOR_WRITE = "src\\main\\save_Report.csv";
+    private static final String FILE_PATH_FOR_READ = "src\\main\\java\\resources\\input_Date.csv";
+    private static final String FILE_PATH_FOR_WRITE = "src\\main\\java\\resources\\save_Report.csv";
 
     public static void main(String[] args) {
         Map<Operation, FruitOperationHandler> strategyMap = new HashMap<>();
@@ -36,8 +36,8 @@ public class Main {
         FruitRecordDtoParser parser = new FruitRecordDtoParserImpl();
         List<FruitRecordDto> fruitRecordDtos = parser.parse(linesFromFile);
 
-        FruitService fruitService = new FruitServiceImpl();
-        fruitService.save(fruitRecordDtos, strategyMap);
+        FruitService fruitService = new FruitServiceImpl(strategyMap);
+        fruitService.save(fruitRecordDtos);
 
         String report = fruitService.getReport();
 

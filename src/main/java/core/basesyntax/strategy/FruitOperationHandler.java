@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import core.basesyntax.dto.FruitRecordDto;
 
 public interface FruitOperationHandler {
-    String EXCEPT_LETTERS = "[^A-z]";
+    String NON_LETTERS = "[^A-z]";
     int apply(FruitRecordDto fruitRecordDto);
 
     default void checkQuantity(Integer quantity) {
@@ -13,9 +13,8 @@ public interface FruitOperationHandler {
     }
 
     default void checkFruitName(String fruitType) {
-        if (fruitType.equals("null")
-                || fruitType.equals("")
-                || fruitType.length() > fruitType.replaceAll(EXCEPT_LETTERS, "").length()) {
+        if (fruitType.equals("")
+                || fruitType.length() > fruitType.replaceAll(NON_LETTERS, "").length()) {
             throw new RuntimeException("Wrong fruit name - " + fruitType);
         }
     }

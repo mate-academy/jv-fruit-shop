@@ -10,9 +10,14 @@ public class FruitServiceImpl implements FruitService {
     private static final String COLUMNS_NAME = "fruit,quantity";
     private static final String COMMA = ",";
 
+    private Map<Operation, FruitOperationHandler> strategyMap;
+
+    public FruitServiceImpl(Map<Operation, FruitOperationHandler> strategyMap) {
+        this.strategyMap = strategyMap;
+    }
+
     @Override
-    public void save(List<FruitRecordDto> recordDtos, Map<Operation,
-            FruitOperationHandler> strategyMap) {
+    public void save(List<FruitRecordDto> recordDtos) {
         for (FruitRecordDto fruitRecordDto : recordDtos) {
             Operation operationType = fruitRecordDto.getOperationType();
             FruitOperationHandler fruitOperation = strategyMap.get(operationType);
@@ -31,6 +36,6 @@ public class FruitServiceImpl implements FruitService {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        return builderReport.toString().strip();
+        return builderReport.toString();
     }
 }

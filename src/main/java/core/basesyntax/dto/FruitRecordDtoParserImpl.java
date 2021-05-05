@@ -18,22 +18,22 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
         List<FruitRecordDto> recordDtos = new ArrayList<>(lines.size());
 
         for (String line : lines) {
-            String[] parseLine = line.split(SEPARATOR);
-            if (parseLine.length > CORRECT_LENGTH) {
+            String[] splitedRecord = line.split(SEPARATOR);
+            if (splitedRecord.length > CORRECT_LENGTH) {
                 throw new RuntimeException("Wrong number of columns");
             }
 
-            String operationType = parseLine[TYPE];
+            String operationType = splitedRecord [TYPE].trim();
             Operation operationTypeCorrect = Operation.getOperationByShortName(operationType);
 
             int quantity;
             try {
-                quantity = Integer.parseInt(parseLine[QUANTITY]);
+                quantity = Integer.parseInt(splitedRecord [QUANTITY]);
             } catch (NumberFormatException e) {
-                throw new RuntimeException("Invalid value entered - " + parseLine[QUANTITY]);
+                throw new RuntimeException("Invalid value entered - " + splitedRecord [QUANTITY]);
             }
             FruitRecordDto dto = new FruitRecordDto(operationTypeCorrect,
-                    parseLine[FRUIT_NAME], quantity);
+                    splitedRecord [FRUIT_NAME].trim(), quantity);
             recordDtos.add(dto);
         }
         return recordDtos;
