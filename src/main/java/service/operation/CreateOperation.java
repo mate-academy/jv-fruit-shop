@@ -12,8 +12,7 @@ public class CreateOperation implements Operation {
     }
 
     @Override
-    public boolean apply(FruitRecordDto fruitRecordDto) {
+    public void apply(FruitRecordDto fruitRecordDto) {
         fruitsDao.add(new Fruit(fruitRecordDto.getFruitType()), fruitRecordDto.getAmount());
-        return true;
     }
 }

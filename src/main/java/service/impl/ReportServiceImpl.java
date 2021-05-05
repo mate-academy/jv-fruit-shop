@@ -5,10 +5,10 @@ import java.util.Map;
 import model.Fruit;
 import service.ReportService;
 import service.file.FileWriter;
+import service.validator.DataValidator;
 
 public class ReportServiceImpl implements ReportService {
     public static final String COLUMNS = "type,quantity";
-    public static final char COLUMN_SEPARATOR = ',';
 
     private FileWriter fileWriter;
     private FruitsDao fruitsDao;
@@ -20,13 +20,13 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public void createReport(String filename) {
-        fileWriter.writeToFile(filename, COLUMNS);
+        StringBuilder builder = new StringBuilder(COLUMNS);
         for (Map.Entry<Fruit, Integer> entry : fruitsDao.getAll()) {
-            String reportLine = System.lineSeparator()
-                    + entry.getKey().getType()
-                    + COLUMN_SEPARATOR
-                    + entry.getValue();
-            fileWriter.writeToFile(filename, reportLine);
+            builder.append(System.lineSeparator())
+                    .append(entry.getKey().getType())
+                    .append(DataValidator.CSV_SEPARATOR)
+                    .append(entry.getValue());
         }
+        fileWriter.writeToFile(filename, builder.toString());
     }
 }

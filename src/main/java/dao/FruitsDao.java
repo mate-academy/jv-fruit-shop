@@ -9,7 +9,7 @@ public interface FruitsDao {
 
     Integer getAmount(Fruit fruit);
 
-    Fruit get(String type);
+    Fruit getAmountByType(String type);
 
     void update(Fruit fruit, Integer amount);
 

@@ -1,7 +1,6 @@
 package service.operation;
 
 import dao.FruitsDao;
-import exception.InvalidInputException;
 import model.Fruit;
 import model.FruitRecordDto;
 
@@ -13,14 +12,9 @@ public class AddOperation implements Operation {
     }
 
     @Override
-    public boolean apply(FruitRecordDto fruitRecordDto) {
-        Fruit fruit = fruitsDao.get(fruitRecordDto.getFruitType());
+    public void apply(FruitRecordDto fruitRecordDto) {
+        Fruit fruit = fruitsDao.getAmountByType(fruitRecordDto.getFruitType());
         int newAmount = fruitsDao.getAmount(fruit) + fruitRecordDto.getAmount();
-        try {
-            fruitsDao.update(fruit, newAmount);
-        } catch (InvalidInputException e) {
-            return false;
-        }
-        return true;
+        fruitsDao.update(fruit, newAmount);
     }
 }

@@ -20,6 +20,7 @@ import service.operation.AddOrCreateOperation;
 import service.operation.CreateOperation;
 import service.operation.Operation;
 import service.operation.RemoveOperation;
+import service.validator.DataValidator;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,7 +35,8 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(map);
         FileReader fileReader = new FileReaderImpl();
-        FruitRecordParserService recordService = new FruitRecordParserServiceImpl();
+        DataValidator dataValidator = new DataValidator();
+        FruitRecordParserService recordService = new FruitRecordParserServiceImpl(dataValidator);
         StoreService storeService = new StoreServiceImpl(operationStrategy);
         storeService.doInstruction(recordService.getRecord(fileReader.readFile("src/store.csv")));
 

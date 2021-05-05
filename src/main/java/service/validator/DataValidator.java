@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 public class DataValidator implements Predicate<String> {
     public static final int DATA_ELEMENTS = 3;
-    public static final String COMMA = ",";
+    public static final String CSV_SEPARATOR = ",";
     public static final String NEGATIVE_INPUT_MESSAGE = "quantity can't be negative";
     public static final String BALANCE = "b";
     public static final String PURCHASE = "p";
@@ -16,7 +16,7 @@ public class DataValidator implements Predicate<String> {
 
     @Override
     public boolean test(String data) {
-        String[] dataArr = data.split(COMMA);
+        String[] dataArr = data.split(CSV_SEPARATOR);
         if (dataArr.length != DATA_ELEMENTS) {
             return false;
         }

@@ -18,7 +18,7 @@ public class FruitsDaoImpl implements FruitsDao {
     }
 
     @Override
-    public Fruit get(String type) {
+    public Fruit getAmountByType(String type) {
         return Storage.getFruits().keySet().stream()
                 .filter(f -> f.getType().equals(type))
                 .findFirst()

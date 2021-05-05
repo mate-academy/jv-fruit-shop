@@ -13,19 +13,14 @@ public class RemoveOperation implements Operation {
     }
 
     @Override
-    public boolean apply(FruitRecordDto fruitRecordDto) {
-        Fruit fruit = fruitsDao.get(fruitRecordDto.getFruitType());
+    public void apply(FruitRecordDto fruitRecordDto) {
+        Fruit fruit = fruitsDao.getAmountByType(fruitRecordDto.getFruitType());
         int newAmount = fruitsDao.getAmount(fruit) - fruitRecordDto.getAmount();
         if (newAmount < 0) {
             throw new InvalidInputException("there are not enough "
                     + fruitRecordDto.getFruitType()
                     + " in the store");
         }
-        try {
-            fruitsDao.update(fruit, newAmount);
-        } catch (InvalidInputException e) {
-            return false;
-        }
-        return true;
+        fruitsDao.update(fruit, newAmount);
     }
 }
