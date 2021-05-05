@@ -11,7 +11,7 @@ public class FruitRecordParserImpl implements FruitRecordParser {
     private static final int FRUIT_NAME = 1;
     private static final int QUANTITY = 2;
     private static final int CORRECT_FIELDS_NUMBER = 3;
-    private static final String DELIMITER = ",";
+    private static final String WORDS_DIVIDER = ",";
     private static final String ERROR_MESSAGE = "Invalid data!";
 
     @Override
@@ -21,7 +21,7 @@ public class FruitRecordParserImpl implements FruitRecordParser {
             if (string.equals("type,fruit,quantity")) {
                 continue;
             }
-            String[] fieldsDto = string.split(DELIMITER);
+            String[] fieldsDto = string.split(WORDS_DIVIDER);
             if (fieldsDto.length != CORRECT_FIELDS_NUMBER) {
                 throw new RuntimeException(ERROR_MESSAGE);
             }

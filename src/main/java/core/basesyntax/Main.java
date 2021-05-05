@@ -21,17 +21,13 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE = "src/main/java/core/basesyntax/resources/fruitsFrom";
     private static final String OUTPUT_FILE = "src/main/java/core/basesyntax/resources/report.csv";
-    private static final String BALANCE = "b";
-    private static final String SUPPLY = "s";
-    private static final String RETURN = "r";
-    private static final String PURCHASE = "p";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> map = new HashMap<>();
-        map.put(BALANCE, new BalanceOperationHandler());
-        map.put(SUPPLY, new AddOperationHandler());
-        map.put(RETURN, new AddOperationHandler());
-        map.put(PURCHASE, new SubtractOperationHandler());
+        map.put(Storage.BALANCE, new BalanceOperationHandler());
+        map.put(Storage.SUPPLY, new AddOperationHandler());
+        map.put(Storage.RETURN, new AddOperationHandler());
+        map.put(Storage.PURCHASE, new SubtractOperationHandler());
 
         FileReaderService fileReader = new FileReaderImpl();
         FruitRecordParser fruitRecordParser = new FruitRecordParserImpl();
