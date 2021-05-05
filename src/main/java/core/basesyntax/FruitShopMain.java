@@ -10,11 +10,10 @@ import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.FruitOperationHandler;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Operation;
+import core.basesyntax.service.impl.AddOperation;
 import core.basesyntax.service.impl.BalanceOperation;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.PurchaseOperation;
-import core.basesyntax.service.impl.ReturnOperation;
-import core.basesyntax.service.impl.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +25,9 @@ public class FruitShopMain {
     public static void main(String[] args) {
         Map<Operation, FruitOperationHandler> operationsExamples = new HashMap<>();
         operationsExamples.put(Operation.BALANCE, new BalanceOperation());
-        operationsExamples.put(Operation.SUPPLY, new SupplyOperation());
+        operationsExamples.put(Operation.SUPPLY, new AddOperation());
         operationsExamples.put(Operation.PURCHASE, new PurchaseOperation());
-        operationsExamples.put(Operation.RETURN, new ReturnOperation());
+        operationsExamples.put(Operation.RETURN, new AddOperation());
 
         FileReader fileReader = new FileReaderImpl();
         List<String> dataFromFile = fileReader.readFromFile(FILE_PATH);

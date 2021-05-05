@@ -4,7 +4,7 @@ import core.basesyntax.database.Storage;
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.FruitOperationHandler;
 
-public class SupplyOperation implements FruitOperationHandler {
+public class AddOperation implements FruitOperationHandler {
     @Override
     public void apply(FruitRecordDto fruitRecordDto) {
         Integer currentQuantity = Storage.getFruits().get(fruitRecordDto.getFruit());
