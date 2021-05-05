@@ -3,6 +3,8 @@ package core.basesyntax;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import datavalidation.DataValidatorImpl;
 import shopdao.FruitDaoImpl;
 import shopoperations.Balance;
 import shopoperations.ListOfOperations;
@@ -28,6 +30,7 @@ public class Main {
         StoreService storeService
                 = new StoreServiceImpl(new StrategyImpl(operationMap), new FruitDaoImpl());
         List<String> data = new CsvReadServiceImpl().readFromFile("src/main/resources/file.csv");
+        new DataValidatorImpl().validateData(data);
         storeService.addToStorage(data);
         new FileWriterServiceImpl().writeToFile(new ReportServiceImpl(
                 new FruitDaoImpl()).getReport(), "src/main/resources/report.csv");
