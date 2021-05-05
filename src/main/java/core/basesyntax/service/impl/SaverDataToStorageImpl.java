@@ -15,26 +15,8 @@ public class SaverDataToStorageImpl implements SaverDataToStorage {
     public void saveDataToStorage(List<FruitRecordDto> fruitDtos,
                                   Map<OperationType, ApplierFruitsToStorage> operationStrategyMap) {
         for (FruitRecordDto fruitRecordDto : fruitDtos) {
-            switch (fruitRecordDto.getOperationType()) {
-                case (PURCHASE):
-                    operationStrategyMap.get(OperationType.PURCHASE)
-                            .applyFruitToStorage(fruitRecordDto);
-                    break;
-                case (BALANCE):
-                    operationStrategyMap.get(OperationType.BALANCE)
-                            .applyFruitToStorage(fruitRecordDto);
-                    break;
-                case (SUPPLY):
-                    operationStrategyMap.get(OperationType.SUPPLY)
-                            .applyFruitToStorage(fruitRecordDto);
-                    break;
-                case (RETURN):
-                    operationStrategyMap.get(OperationType.RETURN)
-                                .applyFruitToStorage(fruitRecordDto);
-                    break;
-                default:
-                    throw new RuntimeException("No such operation allowed");
-            }
+            operationStrategyMap.get(fruitRecordDto.getOperationType())
+                    .applyFruitToStorage(fruitRecordDto);
         }
     }
 }
