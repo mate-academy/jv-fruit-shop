@@ -24,7 +24,5 @@ public class Main {
         ReportCreator creator = new ReportCreator();
         writeData.writeToReport(creator.createReport(),
                 FILE_PATH_TO_WRITER);
-
     }
-
 }
