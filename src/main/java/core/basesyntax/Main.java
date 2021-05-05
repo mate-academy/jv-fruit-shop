@@ -11,8 +11,8 @@ import shopoperations.Return;
 import shopoperations.ShopBalanceOperation;
 import shopoperations.Supply;
 import shopservice.CsvReadServiceImpl;
-import shopservice.CsvWriteServiceImpl;
-import shopservice.ReportCompilerImpl;
+import shopservice.FileWriterServiceImpl;
+import shopservice.ReportServiceImpl;
 import shopservice.StoreService;
 import shopservice.StoreServiceImpl;
 import shopstrategy.StrategyImpl;
@@ -27,9 +27,9 @@ public class Main {
         operationMap.put(ListOfOperations.R, new Return());
         StoreService storeService
                 = new StoreServiceImpl(new StrategyImpl(operationMap), new FruitDaoImpl());
-        List<String> data = new CsvReadServiceImpl().readFromFile("src/main/file.csv");
+        List<String> data = new CsvReadServiceImpl().readFromFile("src/main/resources/file.csv");
         storeService.addToStorage(data);
-        new CsvWriteServiceImpl().writeToFile(new ReportCompilerImpl(
-                new FruitDaoImpl()).getReport(), "src/main/report.csv");
+        new FileWriterServiceImpl().writeToFile(new ReportServiceImpl(
+                new FruitDaoImpl()).getReport(), "src/main/resources/report.csv");
     }
 }

@@ -1,5 +1,5 @@
 package shopservice;
 
-public interface ReportCompiler {
+public interface ReportService {
     String getReport();
 }

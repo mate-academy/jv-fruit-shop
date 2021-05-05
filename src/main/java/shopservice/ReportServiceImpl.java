@@ -4,11 +4,11 @@ import fruitsassortment.Fruit;
 import java.util.Map;
 import shopdao.FruitDao;
 
-public class ReportCompilerImpl implements ReportCompiler {
+public class ReportServiceImpl implements ReportService {
     private static final String SEPARATOR = ",";
     private final FruitDao fruitDao;
 
-    public ReportCompilerImpl(FruitDao fruitDao) {
+    public ReportServiceImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
