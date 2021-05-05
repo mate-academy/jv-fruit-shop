@@ -15,9 +15,10 @@ public class CsvReadServiceImpl implements ReadService {
         try {
             dataFromFile = Files.readAllLines(Path.of(filePath));
             String data = dataFromFile.get(dataIndex);
-            while (dataIndex < dataFromFile.size()) {
+            while (dataIndex + 1 != dataFromFile.size()) {
                 new DataValidatorImpl().validateData(data);
                 dataIndex++;
+                data = dataFromFile.get(dataIndex);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + filePath);
