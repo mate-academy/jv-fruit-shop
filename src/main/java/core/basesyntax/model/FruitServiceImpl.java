@@ -10,7 +10,7 @@ public class FruitServiceImpl implements FruitService {
     private static final String COLUMNS_NAME = "fruit,quantity";
     private static final String COMMA = ",";
 
-    private Map<Operation, FruitOperationHandler> strategyMap;
+    private final Map<Operation, FruitOperationHandler> strategyMap;
 
     public FruitServiceImpl(Map<Operation, FruitOperationHandler> strategyMap) {
         this.strategyMap = strategyMap;
