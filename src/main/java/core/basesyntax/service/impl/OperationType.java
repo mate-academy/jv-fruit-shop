@@ -7,25 +7,4 @@ public enum OperationType {
 
     OperationType(String type) {
     }
-
-    public static OperationType getOperationType(String type) {
-        switch (type) {
-            case "b": {
-                return BALANCE;
-            }
-            case "s": {
-                return SUPPLY;
-            }
-            case "p": {
-                return PURCHASE;
-            }
-            case "r": {
-                return RETURN;
-            }
-            default: {
-                throw new RuntimeException("No such operation allowed");
-            }
-        }
-    }
 }
-

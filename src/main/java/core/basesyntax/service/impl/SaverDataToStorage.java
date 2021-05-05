@@ -17,13 +17,19 @@ public class SaverDataToStorage {
         for (FruitRecordDto fruitRecordDto : fruitDtos) {
             switch (fruitRecordDto.getOperationType()) {
                 case (PURCHASE):
-                    operationStrategyMap.get(OperationType.getOperationType(PURCHASE))
+                    operationStrategyMap.get(OperationType.PURCHASE)
                             .applyFruitToStorage(fruitRecordDto);
                     break;
                 case (BALANCE):
+                    operationStrategyMap.get(OperationType.BALANCE)
+                            .applyFruitToStorage(fruitRecordDto);
+                    break;
                 case (SUPPLY):
+                    operationStrategyMap.get(OperationType.SUPPLY)
+                            .applyFruitToStorage(fruitRecordDto);
+                    break;
                 case (RETURN):
-                    operationStrategyMap.get(OperationType.getOperationType(BALANCE))
+                    operationStrategyMap.get(OperationType.RETURN)
                                 .applyFruitToStorage(fruitRecordDto);
                     break;
                 default:
