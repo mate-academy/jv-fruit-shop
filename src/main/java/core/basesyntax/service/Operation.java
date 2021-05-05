@@ -12,8 +12,7 @@ public interface Operation {
     }
 
     default void checkFruitType(String fruitType) {
-        if (fruitType.equals("null")
-                || fruitType.equals("")
+        if (fruitType.equals("")
                 || fruitType.length() > fruitType.replaceAll("[^A-z]", "").length()) {
             throw new RuntimeException("Incorrect fruit type: " + fruitType);
         }
