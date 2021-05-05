@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Application {
-    private static final String DIRECT_INPUT_FILE = "src/resources/file.csv";
-    private static final String DIRECT_OUTPUT_FILE = "src/resources/report.csv";
+    private static final String DIRECT_INPUT_FILE = "src/resources/input report.csv";
+    private static final String DIRECT_OUTPUT_FILE = "src/resources/output report.csv";
 
     public static void main(String[] args) {
         Map<Operation, Strategy> strategyOperation = new HashMap<>();

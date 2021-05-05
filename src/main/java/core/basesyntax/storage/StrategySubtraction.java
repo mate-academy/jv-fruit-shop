@@ -7,7 +7,7 @@ import core.basesyntax.servise.exception.InvalidValueOfAmountException;
 public class StrategySubtraction implements Strategy {
     @Override
     public int changeBalance(FruitRecordDto fruitRecordDto) {
-        Fruit newFruit = new Fruit(fruitRecordDto.getFruit());
+        Fruit newFruit = fruitRecordDto.getFruit();
         if (!Storage.storageOfFruits.containsKey(newFruit)) {
             throw new InvalidValueOfAmountException("Amount of fruit \"" + fruitRecordDto.getFruit()
                     + "\" is not exist!  Please check your file and try again.");

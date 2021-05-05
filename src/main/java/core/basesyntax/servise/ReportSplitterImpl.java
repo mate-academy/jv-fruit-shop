@@ -1,5 +1,6 @@
 package core.basesyntax.servise;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.servise.exception.InvalidInputDataException;
 import core.basesyntax.servise.inrterfase.ReportSplitter;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ReportSplitterImpl implements ReportSplitter {
             Operation operation = Operation.getOperationType(data[INDEX_OF_TYPE].trim());
 
             FruitRecordDto fruitFromReport = new FruitRecordDto(operation,
-                    data[INDEX_OF_FRUIT], Integer.parseInt(data[INDEX_OF_AMOUNT]));
+                    new Fruit(data[INDEX_OF_FRUIT]), Integer.parseInt(data[INDEX_OF_AMOUNT]));
             fruitRecordDtos.add(fruitFromReport);
         }
         return fruitRecordDtos;

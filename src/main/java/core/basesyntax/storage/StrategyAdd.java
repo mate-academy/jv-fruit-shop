@@ -6,7 +6,7 @@ import core.basesyntax.servise.FruitRecordDto;
 public class StrategyAdd implements Strategy {
     @Override
     public int changeBalance(FruitRecordDto fruitRecordDto) {
-        Fruit newFruit = new Fruit(fruitRecordDto.getFruit());
+        Fruit newFruit = fruitRecordDto.getFruit();
         Integer currentAmount = Storage.storageOfFruits.get(newFruit);
         int newAmount = currentAmount != null
                 ? currentAmount + fruitRecordDto.getAmountOfFruit()

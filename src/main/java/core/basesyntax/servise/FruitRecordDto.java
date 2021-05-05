@@ -1,11 +1,13 @@
 package core.basesyntax.servise;
 
+import core.basesyntax.model.Fruit;
+
 public class FruitRecordDto {
     private Operation type;
-    private String fruit;
+    private Fruit fruit;
     private int amountOfFruit;
 
-    public FruitRecordDto(Operation type, String fruit, int amountOfFruit) {
+    public FruitRecordDto(Operation type, Fruit fruit, int amountOfFruit) {
         this.type = type;
         this.fruit = fruit;
         this.amountOfFruit = amountOfFruit;
@@ -15,7 +17,7 @@ public class FruitRecordDto {
         return type;
     }
 
-    public String getFruit() {
+    public Fruit getFruit() {
         return fruit;
     }
 
