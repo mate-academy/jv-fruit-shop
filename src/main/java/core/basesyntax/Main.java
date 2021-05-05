@@ -1,7 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ReportFileWriter;
+import core.basesyntax.service.impls.ReportCreatorImpl;
 import core.basesyntax.service.impls.ReportFileWriterImpl;
 
 public class Main {
@@ -12,6 +13,7 @@ public class Main {
         application.initialize();
 
         ReportFileWriter writer = new ReportFileWriterImpl();
-        writer.writeToFile(OUTPUT_FILE);
+        ReportCreator reportCreator = new ReportCreatorImpl();
+        writer.writeToFile(OUTPUT_FILE, reportCreator.getReport());
     }
 }

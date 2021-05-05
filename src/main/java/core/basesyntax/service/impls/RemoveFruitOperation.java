@@ -11,6 +11,7 @@ public class RemoveFruitOperation implements DatabaseOperation {
                 ? 0 : Storage.shopDatabase.get(fruitRecordDto.getFruitName());
         int newQuantity = currentQuantity - fruitRecordDto.getQuantity();
         validate(fruitRecordDto.getQuantity(), newQuantity);
+        Storage.shopDatabase.put(fruitRecordDto.getFruitName(), newQuantity);
         return newQuantity;
     }
 }
