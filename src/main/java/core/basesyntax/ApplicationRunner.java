@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ApplicationRunner {
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         Map<String, FruitOperationHandler> handlers = new HashMap<>();
         handlers.put("b", new BalanceOperation());
@@ -23,6 +25,6 @@ public class ApplicationRunner {
         operationStrategy.doOperation();
         String data = operationStrategy.getReport();
         FileWriterService fileWriter = new FileWriterImplementation();
-        fileWriter.write(data,"report.csv");
+        fileWriter.write(data,REPORT_FILE_PATH);
     }
 }

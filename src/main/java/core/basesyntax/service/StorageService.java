@@ -1,10 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
+
 import java.util.Map;
 
-public interface OperationStrategy {
-    void doOperation();
+public interface StorageService {
+    Map<Fruit,Integer> getAllData();
 
-    String getReport();
 }
