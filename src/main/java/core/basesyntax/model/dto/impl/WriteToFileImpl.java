@@ -12,7 +12,6 @@ public class WriteToFileImpl implements WriteToFile {
     public void writeToFile(String report) {
         try (FileWriter fileWriter = new FileWriter("Report.csv", false)) {
             fileWriter.write(report);
-
         } catch (IOException e) {
             throw new RuntimeException("File not found" + FILE_NAME);
         }
