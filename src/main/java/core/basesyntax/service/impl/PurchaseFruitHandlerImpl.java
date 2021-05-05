@@ -2,31 +2,20 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.ApplyFruitHandler;
+import core.basesyntax.service.Validator;
 import core.basesyntax.storage.DataBase;
+import java.util.Optional;
 
 public class PurchaseFruitHandlerImpl implements ApplyFruitHandler {
-    private static final int ZERO_AMOUNT = 0;
 
     @Override
     public int applyFruit(FruitRecordDto fruitRecordDto) {
-        checkPurchaseValidation(fruitRecordDto);
-        int amountOnBalance = DataBase.getDataBase().get(fruitRecordDto.getName());
+        Validator validator = new ValidatorImpl();
+        validator.checkPurchaseValidation(fruitRecordDto);
+        int amountOnBalance = Optional.ofNullable(DataBase
+                .getDataBase().get(fruitRecordDto.getName())).orElse(0);
         DataBase.getDataBase().put(fruitRecordDto.getName(), amountOnBalance
                 - fruitRecordDto.getAmount());
         return DataBase.getDataBase().get(fruitRecordDto.getName());
     }
-
-    void checkPurchaseValidation(FruitRecordDto fruitRecordDto) {
-        int amountOnBalance = DataBase.getDataBase().get(fruitRecordDto.getName());
-        int amountPurchase = fruitRecordDto.getAmount();
-        if (amountOnBalance < amountPurchase) {
-            throw new RuntimeException("Not enough "
-                    + fruitRecordDto.getName() + "'s in Storage");
-        }
-        if (amountPurchase < ZERO_AMOUNT) {
-            throw new RuntimeException(fruitRecordDto.getAmount()
-                    + " - wrong input");
-        }
-    }
-
 }

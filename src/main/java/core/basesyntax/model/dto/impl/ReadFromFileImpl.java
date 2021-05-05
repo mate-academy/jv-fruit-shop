@@ -12,8 +12,7 @@ public class ReadFromFileImpl implements ReadFromFileDto {
     @Override
     public List<String> readFile(String fileName) {
         List<String> linesList = new ArrayList<>();
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 System.out.println(line);

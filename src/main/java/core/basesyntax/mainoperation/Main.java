@@ -17,6 +17,5 @@ public class Main {
             new OperationStrategyImpl().operation(fruitDto);
         }
         new WriteToFileImpl().writeToFile(DataBase.getDataBase());
-        System.out.println(DataBase.getDataBase().toString());
     }
 }
