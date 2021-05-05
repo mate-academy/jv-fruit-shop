@@ -2,6 +2,7 @@ package core.basesyntax.service.fileservice.impl;
 
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.fileservice.FruitRecordDtoParser;
+import core.basesyntax.service.impl.OperationType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
                             .replaceAll(REPLACE_REGEX, EMPTY_STRING);
             if (operationType.length() == 1) {
                 FruitRecordDto fruitRecordDto =
-                        new FruitRecordDto(operationType,
+                        new FruitRecordDto(OperationType.getOperationType(operationType),
                                 singleLineList[FIRST_COLUMN_INDEX]
                                         .replaceAll(REPLACE_REGEX, EMPTY_STRING),
                                 Integer.parseInt(singleLineList[SECOND_COLUMN_INDEX]

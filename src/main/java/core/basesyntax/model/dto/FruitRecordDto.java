@@ -1,19 +1,20 @@
 package core.basesyntax.model.dto;
 
+import core.basesyntax.service.impl.OperationType;
 import java.util.Objects;
 
 public class FruitRecordDto {
-    private final String operationType;
+    private final OperationType operationType;
     private final String name;
     private final int amount;
 
-    public FruitRecordDto(String operationType, String fruit, int amount) {
+    public FruitRecordDto(OperationType operationType, String fruit, int amount) {
         this.operationType = operationType;
         this.name = fruit;
         this.amount = amount;
     }
 
-    public String getOperationType() {
+    public OperationType getOperationType() {
         return operationType;
     }
 
