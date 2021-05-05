@@ -1,7 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FruitShopDao;
-import core.basesyntax.dao.FruitShopDaoImpl;
+import core.basesyntax.dao.FruitShopDaoMapImpl;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
@@ -15,7 +15,6 @@ import core.basesyntax.service.handler.PurchaseHandler;
 import core.basesyntax.service.handler.ReturnHandler;
 import core.basesyntax.service.handler.SupplyHandler;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -29,15 +28,12 @@ public class Main {
         operationHandlerMap.put(OperationType.PURCHASE.getOperation(), new PurchaseHandler());
         operationHandlerMap.put(OperationType.RETURN.getOperation(), new ReturnHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        FruitShopDao fruitShopDao = new FruitShopDaoImpl();
+        FruitShopDao fruitShopDao = new FruitShopDaoMapImpl();
         FruitShopService fruitShopService =
                 new FruitShopServiceImpl(fruitShopDao, operationStrategy);
-        FileService readerService = new FileServiceImpl();
-        FileService writerService = new FileServiceImpl();
-        List<String> data = readerService.readFile(INPUT_FILE);
-        fruitShopService.saveData(data);
-        String report = fruitShopService.getReport();
-        writerService.writeToFile(report, OUTPUT_FILE);
+        FileService fileService = new FileServiceImpl();
+        fruitShopService.saveData(fileService.readFile(INPUT_FILE));
+        fileService.writeToFile(fruitShopService.getReport(), OUTPUT_FILE);
 
     }
 }

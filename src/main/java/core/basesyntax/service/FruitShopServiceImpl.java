@@ -25,6 +25,9 @@ public class FruitShopServiceImpl implements FruitShopService {
     public void saveData(List<String> data) {
         for (int i = 1; i < data.size(); i++) {
             String[] dataFromList = data.get(i).split(COMMA);
+            if (dataFromList.length < 3) {
+                throw new RuntimeException("Invalid data");
+            }
             Fruit fruit = new Fruit(dataFromList[INDEX_OF_FRUIT]);
             int quantity = Integer.parseInt(dataFromList[INDEX_OF_QUANTITY]);
             if (quantity < 0) {
@@ -32,8 +35,7 @@ public class FruitShopServiceImpl implements FruitShopService {
             }
             int currentQuantity = fruitShopDao.getBalance(fruit);
             OperationHandler operationHandler = operationStrategy
-                    .get(dataFromList[INDEX_OF_OPERATION_TYPE])
-                    .orElseThrow(() -> new RuntimeException("Invalid operation type"));
+                    .get(dataFromList[INDEX_OF_OPERATION_TYPE]);
             int updatedQuantity = operationHandler.updateQuantity(currentQuantity, quantity);
             fruitShopDao.add(fruit, updatedQuantity);
         }
@@ -41,11 +43,9 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public String getReport() {
-        StringBuilder stringBuilder = new StringBuilder().append(DEFAULT_START);
         Map<Fruit, Integer> fruitMap = fruitShopDao.getAll();
-        stringBuilder.append(fruitMap.entrySet().stream()
+        return DEFAULT_START + fruitMap.entrySet().stream()
                 .map(entry -> entry.getKey().getName() + COMMA + entry.getValue())
-                .collect(Collectors.joining(System.lineSeparator())));
-        return stringBuilder.toString();
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

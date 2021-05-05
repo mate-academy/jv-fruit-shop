@@ -12,7 +12,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public Optional<OperationHandler> get(String operation) {
-        return Optional.ofNullable(operationHandlerMap.get(operation));
+    public OperationHandler get(String operation) {
+        return operationHandlerMap.get(operation);
     }
 }
