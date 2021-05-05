@@ -7,13 +7,15 @@ import java.io.IOException;
 import java.util.Map;
 
 public class ReportService {
+    private static final char OLD_CHAR_EQUALS = '=';
+    private static final char NEW_CHAR_COMA = ',';
 
     public static void buildReport(String filePath, StorageService storage) {
         File file = new File(filePath);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             for (Map.Entry<String, Integer> entry : storage.getStorageMap().entrySet()) {
-                writer.write(String.valueOf(entry).replace('=', ','));
-                writer.write("\n");
+                writer.write(String.valueOf(entry).replace(OLD_CHAR_EQUALS, NEW_CHAR_COMA));
+                writer.write(System.lineSeparator());
                 writer.flush();
             }
         } catch (IOException e) {

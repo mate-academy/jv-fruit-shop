@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class OperationService {
-    private HashMap<Operation.OperationType, OperationHandler> operationMap = new HashMap<>();
+    private final HashMap<Operation.OperationType, OperationHandler> operationMap = new HashMap<>();
 
     public OperationService(StorageService storage) {
         operationMap.put(Operation.OperationType.BALANCE, new BalanceOperationHandlerImpl(storage));
@@ -17,7 +17,7 @@ public class OperationService {
         operationMap.put(Operation.OperationType.RETURN, new AddingOperationHandlerImpl(storage));
     }
 
-    public void applyOperations(List<Operation> list) throws AlreadyHaveItException {
+    public void applyOperations(List<Operation> list) {
         for (Operation operation : list) {
             operationMap.get(operation.getOperationType()).handle(operation);
         }

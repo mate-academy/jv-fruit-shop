@@ -4,7 +4,7 @@ import core.basesyntax.dto.Operation;
 import core.basesyntax.service.StorageService;
 
 public class AddingOperationHandlerImpl implements OperationHandler {
-    private StorageService storage;
+    private final StorageService storage;
 
     public AddingOperationHandlerImpl(StorageService storage) {
         this.storage = storage;

@@ -5,7 +5,7 @@ import core.basesyntax.exceptions.AlreadyHaveItException;
 import core.basesyntax.service.StorageService;
 
 public class BalanceOperationHandlerImpl implements OperationHandler {
-    private StorageService storage;
+    private final StorageService storage;
 
     public BalanceOperationHandlerImpl(StorageService storage) {
         this.storage = storage;

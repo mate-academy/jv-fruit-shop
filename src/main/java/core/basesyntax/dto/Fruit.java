@@ -3,7 +3,7 @@ package core.basesyntax.dto;
 import java.util.Objects;
 
 public class Fruit {
-    private String name;
+    private final String name;
 
     public Fruit(String name) {
         this.name = name;
@@ -14,15 +14,15 @@ public class Fruit {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object fruit) {
+        if (this == fruit) {
             return true;
         }
-        if (!(o instanceof Fruit)) {
+        if (!(fruit instanceof Fruit)) {
             return false;
         }
-        Fruit fruit = (Fruit) o;
-        return Objects.equals(getName(), fruit.getName());
+        Fruit newFruit = (Fruit) fruit;
+        return Objects.equals(getName(), newFruit.getName());
     }
 
     @Override

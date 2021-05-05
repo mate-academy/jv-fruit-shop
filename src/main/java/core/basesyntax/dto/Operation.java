@@ -3,9 +3,9 @@ package core.basesyntax.dto;
 import java.util.Objects;
 
 public class Operation {
-    private OperationType operationType;
-    private Fruit fruit;
-    private int quantity;
+    private final OperationType operationType;
+    private final Fruit fruit;
+    private final int quantity;
 
     public Operation(OperationType operationType, Fruit fruit, int quantity) {
         this.operationType = operationType;
@@ -26,17 +26,17 @@ public class Operation {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object operation) {
+        if (this == operation) {
             return true;
         }
-        if (!(o instanceof Operation)) {
+        if (!(operation instanceof Operation)) {
             return false;
         }
-        Operation operation = (Operation) o;
-        return getQuantity() == operation.getQuantity()
-                && getOperationType() == operation.getOperationType()
-                && Objects.equals(getFruit(), operation.getFruit());
+        Operation newOperation = (Operation) operation;
+        return getQuantity() == newOperation.getQuantity()
+                && getOperationType() == newOperation.getOperationType()
+                && Objects.equals(getFruit(), newOperation.getFruit());
     }
 
     @Override
