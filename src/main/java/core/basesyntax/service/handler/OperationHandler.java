@@ -1,5 +1,7 @@
 package core.basesyntax.service.handler;
 
+import core.basesyntax.model.Fruit;
+
 public interface OperationHandler {
-    int updateQuantity(int current, int input);
+    long updateBalance(Fruit fruit);
 }

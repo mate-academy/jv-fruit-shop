@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.dto.FruitRecordDto;
 import core.basesyntax.service.handler.OperationHandler;
-import java.util.Optional;
 
 public interface OperationStrategy {
-    OperationHandler get(String operation);
+    OperationHandler get(FruitRecordDto.OperationType operationType);
 }

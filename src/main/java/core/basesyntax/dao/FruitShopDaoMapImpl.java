@@ -1,21 +1,23 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class FruitShopDaoMapImpl implements FruitShopDao {
     @Override
-    public void add(Fruit fruit, int quantity) {
-        Storage.storageMap.put(fruit, quantity);
-    }
-
-    public int getBalance(Fruit fruit) {
-        return Storage.storageMap.getOrDefault(fruit, 0);
+    public void add(Fruit fruit) {
+        Storage.storageMap.put(fruit.getName(), fruit);
     }
 
     @Override
-    public Map<Fruit, Integer> getAll() {
-        return Storage.storageMap;
+    public Optional<Fruit> get(String name) {
+        return Optional.ofNullable(Storage.storageMap.get(name));
+    }
+
+    @Override
+    public List<Fruit> getAll() {
+        return new ArrayList<>(Storage.storageMap.values());
     }
 }
