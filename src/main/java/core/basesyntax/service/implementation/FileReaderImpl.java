@@ -2,7 +2,6 @@ package core.basesyntax.service.implementation;
 
 import core.basesyntax.service.FileReader;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +18,6 @@ public class FileReaderImpl implements FileReader {
                 importedData.add(line);
                 line = bufferedReader.readLine();
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("File is missing" + filePath, e);
         } catch (IOException e) {
             throw new RuntimeException("Couldn't read file" + filePath, e);
         }

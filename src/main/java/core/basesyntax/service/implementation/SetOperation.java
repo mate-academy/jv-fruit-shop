@@ -10,9 +10,6 @@ public class SetOperation implements FruitOperationHandler {
     public int apply(FruitRecordDto fruitRecordDto) {
         String fruitName = fruitRecordDto.getFruitName();
         int quantity = fruitRecordDto.getQuantity();
-        if (quantity < 0) {
-            throw new RuntimeException("Incorrect input value: " + quantity);
-        }
         Storage.getFruits().put(fruitName, quantity);
         return Storage.getFruits().get(fruitName);
     }

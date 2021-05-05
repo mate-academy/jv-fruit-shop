@@ -22,18 +22,18 @@ public class FruitParserImpl implements FruitParser {
 
     private FruitRecordDto parseInputData(String line) {
         OperatorParse operatorParse = new OperatorParseImpl();
-        String[] splitedLine = line.split(SEPARATOR);
-        if (splitedLine.length != COUNT_OF_COLUMNS) {
+        String[] strings = line.split(SEPARATOR);
+        if (strings.length != COUNT_OF_COLUMNS) {
             throw new IllegalArgumentException("required 3 parameters, but provided: "
-                    + splitedLine.length);
+                    + strings.length);
         }
         try {
-            OperationType operation = operatorParse.parse(splitedLine[0].toLowerCase());
-            if (Integer.parseInt(splitedLine[2]) < 0) {
+            OperationType operation = operatorParse.parse(strings[0].toLowerCase());
+            if (Integer.parseInt(strings[2]) < 0) {
                 throw new IllegalArgumentException("Quantity can't be less then zero");
             }
-            return new FruitRecordDto(operation, splitedLine[1].toLowerCase(),
-                    Integer.parseInt(splitedLine[2]));
+            return new FruitRecordDto(operation, strings[1].toLowerCase(),
+                    Integer.parseInt(strings[2]));
         } catch (IllegalArgumentException ex) {
             throw new IllegalArgumentException("Illegal type argument passed in file", ex);
         }
