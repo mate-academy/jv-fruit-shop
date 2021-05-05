@@ -1,7 +1,10 @@
 package fruitshop.service;
 
-import fruitshop.model.dto.ReportDto;
+import fruitshop.model.Fruit;
+import java.math.BigDecimal;
+import java.util.Map;
+import java.util.Set;
 
 public interface ReportService {
-    String generateReport(ReportDto reportDto);
+    String generateReport(Set<Map.Entry<Fruit, BigDecimal>> report);
 }

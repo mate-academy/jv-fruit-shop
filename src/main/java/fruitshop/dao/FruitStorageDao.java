@@ -1,13 +1,15 @@
 package fruitshop.dao;
 
+import fruitshop.model.Fruit;
 import fruitshop.model.dto.FruitOperationDto;
-import fruitshop.model.dto.ReportDto;
 import java.math.BigDecimal;
+import java.util.Map;
+import java.util.Set;
 
 public interface FruitStorageDao {
     BigDecimal getValueFromStorage(FruitOperationDto fruitOperationDto);
 
     void updateDataInStorage(FruitOperationDto fruitOperationDto);
 
-    ReportDto getDataReportFromStorage();
+    Set<Map.Entry<Fruit, BigDecimal>> getDataReportFromStorage();
 }

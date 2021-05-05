@@ -3,8 +3,9 @@ package fruitshop.dao;
 import fruitshop.db.FruitStorage;
 import fruitshop.model.Fruit;
 import fruitshop.model.dto.FruitOperationDto;
-import fruitshop.model.dto.ReportDto;
 import java.math.BigDecimal;
+import java.util.Map;
+import java.util.Set;
 
 public class FruitStorageDaoImpl implements FruitStorageDao {
     @Override
@@ -23,7 +24,7 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
     }
 
     @Override
-    public ReportDto getDataReportFromStorage() {
-        return new ReportDto(FruitStorage.getFruitMap().entrySet());
+    public Set<Map.Entry<Fruit, BigDecimal>> getDataReportFromStorage() {
+        return FruitStorage.getFruitMap().entrySet();
     }
 }
