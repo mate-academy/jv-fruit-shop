@@ -1,15 +1,14 @@
 package core.basesyntax.model.dto;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.Operation;
 import java.util.Objects;
 
 public class FruitRecordDto {
     private Operation operationType;
-    private Fruit fruit;
+    private String fruit;
     private Integer quantity;
 
-    public FruitRecordDto(Operation operationType, Fruit fruit, Integer quantity) {
+    public FruitRecordDto(Operation operationType, String fruit, Integer quantity) {
         this.operationType = operationType;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -19,7 +18,7 @@ public class FruitRecordDto {
         return operationType;
     }
 
-    public Fruit getFruit() {
+    public String getFruit() {
         return fruit;
     }
 

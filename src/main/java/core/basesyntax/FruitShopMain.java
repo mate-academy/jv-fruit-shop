@@ -11,7 +11,6 @@ import core.basesyntax.service.FruitOperationHandler;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Operation;
 import core.basesyntax.service.impl.AddOperation;
-import core.basesyntax.service.impl.BalanceOperation;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.PurchaseOperation;
 import java.util.HashMap;
@@ -24,18 +23,22 @@ public class FruitShopMain {
 
     public static void main(String[] args) {
         Map<Operation, FruitOperationHandler> operationsExamples = new HashMap<>();
-        operationsExamples.put(Operation.BALANCE, new BalanceOperation());
+        operationsExamples.put(Operation.BALANCE, new AddOperation());
         operationsExamples.put(Operation.SUPPLY, new AddOperation());
-        operationsExamples.put(Operation.PURCHASE, new PurchaseOperation());
         operationsExamples.put(Operation.RETURN, new AddOperation());
+        operationsExamples.put(Operation.PURCHASE, new PurchaseOperation());
 
         FileReader fileReader = new FileReaderImpl();
         List<String> dataFromFile = fileReader.readFromFile(FILE_PATH);
+
         FruitRecordDtoParser fruitRecordDtoParser = new FruitRecordDtoParserImpl();
         List<FruitRecordDto> fruitRecordDtoList = fruitRecordDtoParser.parseStrings(dataFromFile);
+
         FruitService fruitService = new FruitServiceImpl(operationsExamples);
         fruitService.applyOperation(fruitRecordDtoList);
-        Map<String, Integer> report = fruitService.getFruitReport();
+
+        String report = fruitService.getFruitReport();
+
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.createReport(report, REPORT_PATH);
     }
