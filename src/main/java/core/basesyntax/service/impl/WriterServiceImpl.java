@@ -1,11 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.WriterService;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.Map;
 
 public class WriterServiceImpl implements WriterService {
 

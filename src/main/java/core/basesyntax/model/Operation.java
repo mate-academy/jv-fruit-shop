@@ -6,9 +6,9 @@ public enum Operation {
     s,
     p;
 
-    public static boolean isPresent(String value){
+    public static boolean isPresent(String value) {
         Operation [] operations = values();
-        for(Operation operation: operations) {
+        for (Operation operation: operations) {
             if (operation.toString().equals(value)) {
                 return true;
             }

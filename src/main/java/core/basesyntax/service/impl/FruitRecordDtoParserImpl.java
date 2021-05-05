@@ -10,7 +10,7 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
     private static final String COMMA_JOINER = ",";
     private static final int LENGTH_OF_THE_CORRECT_DATA = 3;
     private static final int INDEX_OPERATION = 0;
-    private static final int INDEX_FRUIT= 1;
+    private static final int INDEX_FRUIT = 1;
     private static final int INDEX_QUANTITY = 2;
 
     @Override
@@ -25,8 +25,9 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
                 throw new RuntimeException("Operation is not valid");
             }
             try {
-                FruitRecordDto dto = new FruitRecordDto(splitLine[INDEX_OPERATION], splitLine[INDEX_FRUIT],
-                            Integer.parseInt(splitLine[INDEX_QUANTITY]));
+                FruitRecordDto dto = new FruitRecordDto(splitLine[INDEX_OPERATION],
+                        splitLine[INDEX_FRUIT],
+                        Integer.parseInt(splitLine[INDEX_QUANTITY]));
                 recordDtos.add(dto);
             } catch (IllegalArgumentException e) {
                 throw new RuntimeException("Not valid data, quantity must be numbers", e);

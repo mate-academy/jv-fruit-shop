@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.FruitRecordDto;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitOperationHandler;
 import core.basesyntax.service.FruitRecordDtoParser;
 import core.basesyntax.service.StrategyOperation;
@@ -22,6 +21,7 @@ import java.util.Map;
  */
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/file.csv";
+
     public static void main(String[] args) {
         Map<String, FruitOperationHandler> handlers = new HashMap<>();
         handlers.put("b", new BalanceHandler());
@@ -36,6 +36,7 @@ public class Main {
         List<FruitRecordDto> allFruitRecordDto = parser.parse(newLinesOperation);
 
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeBalanceOfFruitToFile(strategyOperation.writeBalance(strategyOperation.get(allFruitRecordDto)));
+        writerService.writeBalanceOfFruitToFile(strategyOperation
+                .writeBalance(strategyOperation.get(allFruitRecordDto)));
     }
 }

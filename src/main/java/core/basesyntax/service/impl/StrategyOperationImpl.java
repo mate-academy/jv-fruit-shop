@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class StrategyOperationImpl implements StrategyOperation {
-    private Map<String, FruitOperationHandler> handlers;
     private static final String SEPARATOR = System.getProperty("line.separator");
+    private Map<String, FruitOperationHandler> handlers;
 
     public StrategyOperationImpl(Map<String, FruitOperationHandler> handlers) {
         this.handlers = handlers;
