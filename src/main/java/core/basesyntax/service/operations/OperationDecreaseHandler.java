@@ -1,0 +1,25 @@
+package core.basesyntax.service.operations;
+
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.exeptions.InvalidQuantityException;
+import core.basesyntax.model.Fruit;
+import java.util.Optional;
+
+public class OperationDecreaseHandler implements OperationHandler {
+    private static final String ERROR_MESSAGE
+            = "You can't buy more fruits than there is in storage";
+    private final FruitDao fruitDao;
+
+    public OperationDecreaseHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
+
+    @Override
+    public int apply(int quantity, Fruit key) {
+        Optional<Integer> fruitQuantity = fruitDao.get(key);
+        if (fruitQuantity.isPresent() && fruitQuantity.get() >= quantity) {
+            return fruitQuantity.get() - quantity;
+        }
+        throw new InvalidQuantityException(ERROR_MESSAGE + "[" + quantity + "]");
+    }
+}
