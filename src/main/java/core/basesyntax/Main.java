@@ -41,7 +41,7 @@ public class Main {
 
         List<FruitRecordDto> fruitRecordDtos = recordDtoParser
                                             .parse(fileService.readDataFromFile(FILE_NAME_FROM));
-        fruitService.saveDataToDataBase(fruitRecordDtos);
+        fruitService.saveData(fruitRecordDtos);
         fileService.writeToFile(FILE_NAME_TO, reportCreator.createReport(Storage.fruitStorage));
     }
 }

@@ -16,7 +16,7 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void saveDataToDataBase(List<FruitRecordDto> fruitRecordDtos) {
+    public void saveData(List<FruitRecordDto> fruitRecordDtos) {
         for (FruitRecordDto dto : fruitRecordDtos) {
             operationStrategy.getHandler(dto.getOperationType()).apply(dto);
         }
