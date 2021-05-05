@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.dto.FruitRecordDto;
-import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FruitOperationHandler;
 import core.basesyntax.service.FruitRecordDtoParser;
 import core.basesyntax.service.FruitService;
@@ -28,7 +28,7 @@ public class Main {
         operationStrategy.put(Operation.RETURN, new AddOperation());
         operationStrategy.put(Operation.SUPPLY, new AddOperation());
 
-        FileReader fileReader = new FileReaderImpl();
+        FileReaderService fileReader = new FileReaderImpl();
         List<String> records = fileReader.readFromFile(INPUT_FILE_PATH);
 
         FruitRecordDtoParser parser = new FruitRecordDtoParserImpl();
