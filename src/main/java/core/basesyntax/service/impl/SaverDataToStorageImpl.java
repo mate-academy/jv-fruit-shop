@@ -2,11 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.ApplierFruitsToStorage;
+import core.basesyntax.service.SaverDataToStorage;
 import java.util.List;
 import java.util.Map;
 
-public class SaverDataToStorage {
-
+public class SaverDataToStorageImpl implements SaverDataToStorage {
     private static final String BALANCE = "b";
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
@@ -36,8 +36,5 @@ public class SaverDataToStorage {
                     throw new RuntimeException("No such operation allowed");
             }
         }
-
     }
 }
-
-

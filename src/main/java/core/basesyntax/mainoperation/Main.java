@@ -9,7 +9,7 @@ import core.basesyntax.service.fileservice.impl.FruitRecordDtoParserImpl;
 import core.basesyntax.service.impl.AddHandlerImpl;
 import core.basesyntax.service.impl.OperationType;
 import core.basesyntax.service.impl.PurchaseFruitHandlerImpl;
-import core.basesyntax.service.impl.SaverDataToStorage;
+import core.basesyntax.service.impl.SaverDataToStorageImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,7 @@ public class Main {
         operationStrategyMap.put(OperationType.SUPPLY, addHandler);
         operationStrategyMap.put(OperationType.PURCHASE, purchaseHandler);
         List<FruitRecordDto> fruitDtos = new FruitRecordDtoParserImpl().parse(linesFromFile);
-        new SaverDataToStorage().saveDataToStorage(fruitDtos, operationStrategyMap);
+        new SaverDataToStorageImpl().saveDataToStorage(fruitDtos, operationStrategyMap);
         String report = new ReportHandlerImpl().makeReport();
         new FileWriterImpl().writeToFile(report, "Report.csv");
     }
