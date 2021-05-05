@@ -13,15 +13,19 @@ import core.basesyntax.services.interfaces.FileReader;
 import core.basesyntax.services.interfaces.FileWriter;
 import core.basesyntax.services.interfaces.FruitDtoTransactionParser;
 import core.basesyntax.services.interfaces.FruitShopService;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ApplicationMain {
-    private static final String INPUT_FILE_NAME = "src/main/java/core/basesyntax/resources/"
+    private static final String INPUT_FILE_NAME = "src" + File.separator + "main"
+            + File.separator + "java" + File.separator + "core" + File.separator
+            + "basesyntax" + File.separator + "resources" + File.separator
             + "fruit_shop_report.csv";
-
-    private static final String REPORT_FILE_NAME = "src/main/java/core/basesyntax/resources/"
+    private static final String REPORT_FILE_NAME = "src" + File.separator + "main"
+            + File.separator + "java" + File.separator + "core" + File.separator
+            + "basesyntax" + File.separator + "resources" + File.separator
             + "fruit_shop_final_report.csv";
 
     public static void main(String[] args) {
