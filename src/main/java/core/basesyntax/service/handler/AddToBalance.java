@@ -13,6 +13,9 @@ public class AddToBalance implements OperationHandler {
 
     @Override
     public long updateBalance(Fruit fruit) {
+        if (fruit.getAmount() < 0) {
+            throw new RuntimeException("Invalid amount");
+        }
         Optional<Fruit> fruitFromDb = fruitShopDao.get(fruit.getName());
         if (fruitFromDb.isPresent()) {
             long updatedBalance = fruitFromDb.get().getAmount() + fruit.getAmount();

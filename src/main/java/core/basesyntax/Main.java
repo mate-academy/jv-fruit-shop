@@ -5,6 +5,7 @@ import core.basesyntax.dao.FruitShopDaoMapImpl;
 import core.basesyntax.dto.FruitRecordDto;
 import core.basesyntax.dto.FruitRecordDtoParser;
 import core.basesyntax.dto.FruitRecordDtoParserImpl;
+import core.basesyntax.model.OperationType;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
 import core.basesyntax.service.OperationStrategy;
@@ -25,12 +26,12 @@ public class Main {
     public static void main(String[] args) {
         FruitShopDao fruitShopDao = new FruitShopDaoMapImpl();
         OperationHandler addToBalance = new AddToBalance(fruitShopDao);
-        Map<FruitRecordDto.OperationType, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitRecordDto.OperationType.b, addToBalance);
-        operationHandlerMap.put(FruitRecordDto.OperationType.p,
+        Map<OperationType, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(OperationType.valueOf("b"), addToBalance);
+        operationHandlerMap.put(OperationType.valueOf("p"),
                 new SubtractFromBalance(fruitShopDao));
-        operationHandlerMap.put(FruitRecordDto.OperationType.s, addToBalance);
-        operationHandlerMap.put(FruitRecordDto.OperationType.r, addToBalance);
+        operationHandlerMap.put(OperationType.valueOf("s"), addToBalance);
+        operationHandlerMap.put(OperationType.valueOf("r"), addToBalance);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FileService fileService = new FileServiceImpl();
         FruitRecordDtoParser fruitRecordDtoParser = new FruitRecordDtoParserImpl();

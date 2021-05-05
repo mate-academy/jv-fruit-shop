@@ -1,19 +1,19 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dto.FruitRecordDto;
+import core.basesyntax.model.OperationType;
 import core.basesyntax.service.handler.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<FruitRecordDto.OperationType, OperationHandler> operationHandlerMap;
+    private Map<OperationType, OperationHandler> operationHandlerMap;
 
-    public OperationStrategyImpl(Map<FruitRecordDto.OperationType,
+    public OperationStrategyImpl(Map<OperationType,
             OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
     }
 
     @Override
-    public OperationHandler get(FruitRecordDto.OperationType operationType) {
+    public OperationHandler get(OperationType operationType) {
         return operationHandlerMap.get(operationType);
     }
 }

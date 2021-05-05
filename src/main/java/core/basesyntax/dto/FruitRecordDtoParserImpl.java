@@ -1,5 +1,7 @@
 package core.basesyntax.dto;
 
+import core.basesyntax.model.OperationType;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,12 +25,7 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
         if (records.length != 3) {
             throw new RuntimeException("Invalid data");
         }
-        FruitRecordDto.OperationType operationType;
-        try {
-            operationType = FruitRecordDto.OperationType.valueOf(records[INDEX_OF_TYPE]);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Invalid type");
-        }
+        OperationType operationType = OperationType.getOperationTypeByLetter(records[INDEX_OF_TYPE]);
         long amount = Integer.parseInt(records[INDEX_OF_AMOUNT]);
         if (amount < 0) {
             throw new RuntimeException("Invalid amount");

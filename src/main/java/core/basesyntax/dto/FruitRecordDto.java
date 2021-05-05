@@ -1,6 +1,7 @@
 package core.basesyntax.dto;
 
 import core.basesyntax.model.Fruit;
+import core.basesyntax.model.OperationType;
 
 public class FruitRecordDto {
     private Fruit fruit;
@@ -21,7 +22,4 @@ public class FruitRecordDto {
         return operationType;
     }
 
-    public enum OperationType {
-        b, s, p, r
-    }
 }
