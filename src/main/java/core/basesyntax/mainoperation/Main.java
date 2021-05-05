@@ -2,6 +2,7 @@ package core.basesyntax.mainoperation;
 
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.model.dto.impl.ReadFromFileImpl;
+import core.basesyntax.model.dto.impl.ReportHandlerImpl;
 import core.basesyntax.model.dto.impl.WriteToFileImpl;
 import core.basesyntax.service.fileservice.impl.FileParserImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
@@ -16,6 +17,7 @@ public class Main {
         for (FruitRecordDto fruitDto : fruitDtos) {
             new OperationStrategyImpl().operation(fruitDto);
         }
-        new WriteToFileImpl().writeToFile(DataBase.getDataBase());
+       String report = new ReportHandlerImpl().makeReport(DataBase.getDataBase());
+        new WriteToFileImpl().writeToFile(report);
     }
 }
