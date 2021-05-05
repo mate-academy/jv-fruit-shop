@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.FruitRecordDto;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitOperationHandler;
 import core.basesyntax.service.FruitRecordDtoParser;
 import core.basesyntax.service.StrategyOperation;
@@ -33,6 +32,7 @@ public class Main {
         List<String> newLinesOperation = fileReader.readFromFile("src/main/resources/file.csv");
         FruitRecordDtoParser parser = new FruitRecordDtoParserImpl();
         List<FruitRecordDto> allFruitRecordDto = parser.parse(newLinesOperation);
+
         WriterService writerService = new WriterServiceImpl();
         writerService.writeBalanceOfFruitToFile(strategyOperation.get(allFruitRecordDto));
     }

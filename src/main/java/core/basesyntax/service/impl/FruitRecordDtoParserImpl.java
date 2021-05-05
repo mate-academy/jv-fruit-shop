@@ -20,9 +20,13 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
             if (splitLine[0].equals("r")
                     || splitLine[0].equals("s")
                     || splitLine[0].equals("p") || splitLine[0].equals("b")) {
-                FruitRecordDto dto = new FruitRecordDto(splitLine[0], splitLine[1],
-                        Integer.parseInt(splitLine[2]));
-                recordDtos.add(dto);
+                try {
+                    FruitRecordDto dto = new FruitRecordDto(splitLine[0], splitLine[1],
+                            Integer.parseInt(splitLine[2]));
+                    recordDtos.add(dto);
+                } catch (IllegalArgumentException e) {
+                    throw new RuntimeException("Not valid data, quantity must be numbers", e);
+                }
             } else {
                 throw new RuntimeException("Operation is not valid");
             }
