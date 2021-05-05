@@ -44,8 +44,7 @@ public class Main {
 
         ReportWriter reportWriter = new ReportWriterImpl();
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.generateReport();
-        reportWriter.writeReport(WRITE_PATH, report);
+        reportWriter.writeReport(WRITE_PATH, reportService.generateReport());
     }
 }
 
