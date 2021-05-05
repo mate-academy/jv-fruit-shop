@@ -1,8 +1,6 @@
 package core.basesyntax.fileservice;
 
 import core.basesyntax.dto.ProductDto;
-import core.basesyntax.storage.Storage;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +9,7 @@ public class CsvParser implements Parser {
     private static final int FRUIT_NAME = 1;
     private static final int FRUIT_QUANTITY = 2;
     private static final String CSV_SEPARATOR = ",";
+
     @Override
     public List<ProductDto> parse(List<String> data) {
         ProductDto productDto;

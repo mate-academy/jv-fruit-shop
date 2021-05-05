@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Storage {
-    private static final String CSV_SEPARATOR = ",";
     public static final Map<String, Integer> fruits = new HashMap<>();
+    private static final String CSV_SEPARATOR = ",";
 
     public static List<String> toList() {
         List<String> output = new ArrayList<>();
