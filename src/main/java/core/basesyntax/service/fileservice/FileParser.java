@@ -1,7 +1,7 @@
-package service.fileservice;
+package core.basesyntax.service.fileservice;
 
+import core.basesyntax.model.dto.FruitRecordDto;
 import java.util.List;
-import model.dto.FruitRecordDto;
 
 public interface FileParser {
     List<FruitRecordDto> parser(List<String> lines);

@@ -1,7 +1,7 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
-import model.dto.FruitRecordDto;
-import service.OperationStrategy;
+import core.basesyntax.model.dto.FruitRecordDto;
+import core.basesyntax.service.OperationStrategy;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private static final String BALANCE = "b";

@@ -1,6 +1,6 @@
-package service;
+package core.basesyntax.service;
 
-import model.dto.FruitRecordDto;
+import core.basesyntax.model.dto.FruitRecordDto;
 
 public interface ReturnFruitHandler {
     int returnFruit(FruitRecordDto fruitRecordDto);

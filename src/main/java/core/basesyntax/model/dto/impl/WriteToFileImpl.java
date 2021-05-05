@@ -1,15 +1,15 @@
-package model.dto.impl;
+package core.basesyntax.model.dto.impl;
 
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.dto.WriteToFile;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
-import model.Fruit;
-import model.dto.WriteToFile;
 
 public class WriteToFileImpl implements WriteToFile {
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String NEXT_LINE_REGEX = "\n";
-    private static final String DOT = ",";
+    private static final String COMA = ",";
     private static final String FILE_NAME = "Report.csv";
 
     @Override
@@ -19,7 +19,7 @@ public class WriteToFileImpl implements WriteToFile {
             fileWriter.append(NEXT_LINE_REGEX);
             for (Map.Entry<Fruit, Integer> entry : map.entrySet()) {
                 fileWriter.append(entry.getKey().getName())
-                        .append(DOT)
+                        .append(COMA)
                         .append(entry.getValue().toString())
                         .append(NEXT_LINE_REGEX);
             }

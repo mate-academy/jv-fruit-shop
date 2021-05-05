@@ -1,11 +1,11 @@
-package model.dto.impl;
+package core.basesyntax.model.dto.impl;
 
+import core.basesyntax.model.dto.ReadFromFileDto;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import model.dto.ReadFromFileDto;
 
 public class ReadFromFileImpl implements ReadFromFileDto {
 

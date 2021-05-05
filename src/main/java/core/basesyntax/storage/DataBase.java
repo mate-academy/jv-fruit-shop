@@ -1,14 +1,14 @@
-package storage;
+package core.basesyntax.storage;
 
+import core.basesyntax.model.Fruit;
 import java.util.HashMap;
 import java.util.Map;
-import model.Fruit;
 
-public class Db {
+public class DataBase {
     private static Map<Fruit, Integer> dataBase = new HashMap<>();
 
-    public Db(Map<Fruit, Integer> dataBase) {
-        Db.dataBase = dataBase;
+    public DataBase(Map<Fruit, Integer> dataBase) {
+        DataBase.dataBase = dataBase;
     }
 
     public static Map<Fruit, Integer> getDataBase() {

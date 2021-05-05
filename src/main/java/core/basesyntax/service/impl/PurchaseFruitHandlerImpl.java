@@ -1,8 +1,8 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
-import model.dto.FruitRecordDto;
-import service.PurchaseFruitHandler;
-import storage.Db;
+import core.basesyntax.model.dto.FruitRecordDto;
+import core.basesyntax.service.PurchaseFruitHandler;
+import core.basesyntax.storage.DataBase;
 
 public class PurchaseFruitHandlerImpl implements PurchaseFruitHandler {
     private static final int ZERO = 0;
@@ -10,14 +10,14 @@ public class PurchaseFruitHandlerImpl implements PurchaseFruitHandler {
     @Override
     public int purchaseFruit(FruitRecordDto fruitRecordDto) {
         checkPurchaseValidation(fruitRecordDto);
-        int amountOnBalance = Db.getDataBase().get(fruitRecordDto.getFruit());
-        Db.getDataBase().put(fruitRecordDto.getFruit(), amountOnBalance
+        int amountOnBalance = DataBase.getDataBase().get(fruitRecordDto.getFruit());
+        DataBase.getDataBase().put(fruitRecordDto.getFruit(), amountOnBalance
                 - fruitRecordDto.getAmount());
-        return Db.getDataBase().get(fruitRecordDto.getFruit());
+        return DataBase.getDataBase().get(fruitRecordDto.getFruit());
     }
 
     void checkPurchaseValidation(FruitRecordDto fruitRecordDto) {
-        int amountOnBalance = Db.getDataBase().get(fruitRecordDto.getFruit());
+        int amountOnBalance = DataBase.getDataBase().get(fruitRecordDto.getFruit());
         int amountPurchase = fruitRecordDto.getAmount();
         if (amountOnBalance < amountPurchase) {
             throw new RuntimeException("Not enough "

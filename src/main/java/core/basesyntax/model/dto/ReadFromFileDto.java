@@ -1,4 +1,4 @@
-package model.dto;
+package core.basesyntax.model.dto;
 
 import java.util.List;
 
