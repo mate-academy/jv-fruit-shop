@@ -10,8 +10,7 @@ public class PurchaseOperation implements FruitOperationHandler {
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
         Fruit fruit = new Fruit(fruitRecordDto.getFruitName());
-        Optional<Integer> optional = Optional.ofNullable(Storage.fruits.get(fruit));
-        Integer currentQuantity = optional.get();
+        Integer currentQuantity = Optional.ofNullable(Storage.fruits.get(fruit)).orElse(0);
         int purchaseAmount = fruitRecordDto.getQuantity();
         if (purchaseAmount > currentQuantity) {
             throw new RuntimeException("Buyers will not be able to buy "
@@ -24,7 +23,7 @@ public class PurchaseOperation implements FruitOperationHandler {
         }
         int newQuantity = currentQuantity - purchaseAmount;
         Storage.fruits.put(fruit, newQuantity);
-        return newQuantity;
+        return Storage.fruits.get(fruit);
     }
 
     @Override

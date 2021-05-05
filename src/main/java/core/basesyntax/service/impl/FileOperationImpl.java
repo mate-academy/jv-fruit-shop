@@ -1,33 +1,18 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.dto.FruitRecordDto;
-import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FruitOperationHandler;
-import core.basesyntax.service.FruitRecordDtoParser;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.StorageService;
-import java.util.List;
 import java.util.Map;
 
 public class FileOperationImpl implements OperationStrategy {
     private static final String CSV_SEPARATOR = ",";
-    private static final String INPUT_FILE_PATH = "src/main/resources/fruitStorageInfo.csv";
     private Map<String, FruitOperationHandler> mapStrategy;
-    private FileReaderService fileReader = new FileReaderImpl();
-    private FruitRecordDtoParser parser = new FruitRecordDtoParserImpl();
     private StorageService storageService = new StorageServiceImpl();
 
     public FileOperationImpl(Map<String, FruitOperationHandler> mapStrategy) {
         this.mapStrategy = mapStrategy;
-    }
-
-    @Override
-    public void doOperation() {
-        List<FruitRecordDto> dtos = parser.parse(fileReader.readFromFile(INPUT_FILE_PATH));
-        for (FruitRecordDto dto : dtos) {
-            mapStrategy.get(dto.getOperationType()).apply(dto);
-        }
     }
 
     @Override

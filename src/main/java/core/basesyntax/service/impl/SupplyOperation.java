@@ -10,15 +10,14 @@ public class SupplyOperation implements FruitOperationHandler {
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
         Fruit fruit = new Fruit(fruitRecordDto.getFruitName());
-        Optional<Integer> optional = Optional.ofNullable(Storage.fruits.get(fruit));
-        Integer currentQuantity = optional.get();
+        Integer currentQuantity = Optional.ofNullable(Storage.fruits.get(fruit)).orElse(0);
         int supplyAmount = fruitRecordDto.getQuantity();
         if (supplyAmount < 0) {
             throw new RuntimeException("Supply amount can't be less than 0");
         }
         int newQuantity = currentQuantity + supplyAmount;
         Storage.fruits.put(fruit, newQuantity);
-        return newQuantity;
+        return Storage.fruits.get(fruit);
     }
 
     @Override
