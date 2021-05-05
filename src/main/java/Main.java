@@ -7,7 +7,6 @@ import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.Operation;
 import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.storage.Storage;
-
 import java.util.List;
 
 public class Main {

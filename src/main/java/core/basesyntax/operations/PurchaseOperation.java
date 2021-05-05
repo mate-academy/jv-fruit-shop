@@ -7,8 +7,9 @@ public class PurchaseOperation implements Operation {
     @Override
     public void apply(ProductDto productDto) {
         if (productDto.getQuantity() < 0
-                || !Storage.fruits.containsKey(productDto.getFruitName())) {
-            return;
+                || !Storage.fruits.containsKey(productDto.getFruitName())
+                || Storage.fruits.get(productDto.getFruitName()) < productDto.getQuantity()) {
+            throw new RuntimeException("Invalid input");
         }
         Integer newQuantity =
                 Storage.fruits.get(productDto.getFruitName()) - productDto.getQuantity();
