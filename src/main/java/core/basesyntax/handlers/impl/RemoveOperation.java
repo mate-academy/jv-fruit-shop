@@ -9,15 +9,13 @@ import core.basesyntax.services.interfaces.DataValidator;
 import java.util.Optional;
 
 public class RemoveOperation implements FruitOperationHandler {
-    private static final int ZERO = 0;
 
     @Override
     public int apply(FruitDtoTransaction fruitDtoTransaction) {
         Fruit fruit = new Fruit(fruitDtoTransaction.getFruitName());
-        int currentQuantity = Optional.ofNullable(Storage.getFruits().get(fruit)).orElse(ZERO);
+        int currentQuantity = Optional.ofNullable(Storage.getFruits().get(fruit)).orElse(0);
         int operationQuantity = fruitDtoTransaction.getFruitCount();
         DataValidator dataValidator = new DataValidatorImpl();
-        dataValidator.checkIfQuantityPositive(fruitDtoTransaction.getFruitCount());
         dataValidator.checkIfQuantitySufficiently(currentQuantity, operationQuantity);
         Storage.getFruits().put(fruit, currentQuantity - operationQuantity);
         return currentQuantity - operationQuantity;
