@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class StoreServiceImpl implements StoreService {
-    private static final String COMA = ",";
+    private static final String CSV_SEPARATOR = ",";
     private static final String TITLE = "fruit,quantity";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
@@ -25,7 +25,7 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public void addToStorage(List<String> dataFromFile) {
         for (int i = INDEX_OF_DATA_START; i < dataFromFile.size(); i++) {
-            String[] data = dataFromFile.get(i).split(COMA);
+            String[] data = dataFromFile.get(i).split(CSV_SEPARATOR);
             Product product = new Product(data[FRUIT_INDEX]);
             int oldValue = productDao.get(product);
 
@@ -54,7 +54,7 @@ public class StoreServiceImpl implements StoreService {
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
             stringBuilder.append(System.lineSeparator());
             stringBuilder.append(entry.getKey().getName()
-                    + COMA + entry.getValue());
+                    + CSV_SEPARATOR + entry.getValue());
         }
         return stringBuilder.toString();
     }

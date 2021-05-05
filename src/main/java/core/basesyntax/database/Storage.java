@@ -5,5 +5,5 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    public static Map<Product, Integer> products = new HashMap<>();
+    public static final Map<Product, Integer> products = new HashMap<>();
 }
