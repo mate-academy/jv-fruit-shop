@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Application {
+    private static final String INPUT_FILE_PATH = "src/main/java/resources/shop_fruits.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/java/resources/fruits_report.csv";
+
     public static void main(String[] args) {
         Map<Operation, OperationStrategy> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put(Operation.BALANCE, new AdditionStrategy());
@@ -27,13 +30,12 @@ public class Application {
 
         ServiceReader fileReader = new ServiceReaderImpl();
         FruitShopService fruitService = new FruitShopServiceImpl(operationStrategyMap);
-        ParseToList parse = new Parser();
-        List<FruitRecordDto> fruitRecordDtos = parse.parseToTransactions(
-                fileReader.readFile("src/main/java/resources/shop_fruits.csv"));
-        fruitService.applyOperationOnFruitsDt(fruitRecordDtos);
+        ParseToList parser = new Parser();
+        List<FruitRecordDto> fruitRecordDtos = parser.parseToDto(
+                fileReader.readFile(INPUT_FILE_PATH));
+        fruitService.applyOperationOnFruitsDto(fruitRecordDtos);
 
         ServiceWriter fileWriter = new ServiceWriterImpl();
-        fileWriter.writeReport("src/main/java/resources/fruits_report.csv",
-                fruitService.getFruitsReport());
+        fileWriter.writeReport(OUTPUT_FILE_PATH, fruitService.getFruitsReport());
     }
 }

@@ -14,7 +14,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void applyOperationOnFruitsDt(List<FruitRecordDto> transactionDtos) {
+    public void applyOperationOnFruitsDto(List<FruitRecordDto> transactionDtos) {
         for (FruitRecordDto dto : transactionDtos) {
             Operation operation = dto.getOperation();
             operationStrategyMap.get(operation).apply(dto);

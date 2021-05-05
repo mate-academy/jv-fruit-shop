@@ -14,7 +14,7 @@ public class Parser implements ParseToList {
     public static final String COMMA = ",";
 
     @Override
-    public List<FruitRecordDto> parseToTransactions(List<String> dataFromFile) {
+    public List<FruitRecordDto> parseToDto(List<String> dataFromFile) {
         if (dataFromFile.isEmpty()) {
             throw new RuntimeException(String.format("No data in the file %s", dataFromFile));
         }
