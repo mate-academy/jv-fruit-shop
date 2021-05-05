@@ -1,7 +1,10 @@
 package core.basesyntax.shop;
 
 public enum Activities {
-    BALANCE("B"), SUPPLY("S"), PURCHASE("P"), RETURN("R");
+    BALANCE("B"),
+    SUPPLY("S"),
+    PURCHASE("P"),
+    RETURN("R");
 
     private String type;
 

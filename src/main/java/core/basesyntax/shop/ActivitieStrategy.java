@@ -1,7 +1,7 @@
 package core.basesyntax.shop;
 
-import core.basesyntax.handlers.Activitie;
+import core.basesyntax.handlers.Activity;
 
 public interface ActivitieStrategy {
-    Activitie get(String action);
+    Activity get(String action);
 }

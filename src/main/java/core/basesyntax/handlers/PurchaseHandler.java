@@ -1,6 +1,6 @@
 package core.basesyntax.handlers;
 
-public class PurchaseHandler implements Activitie {
+public class PurchaseHandler implements Activity {
     @Override
     public int calculateCount(int currentCount, int newCount) {
         int result = currentCount - newCount;

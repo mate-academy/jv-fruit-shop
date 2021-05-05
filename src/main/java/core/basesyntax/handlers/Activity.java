@@ -1,5 +1,5 @@
 package core.basesyntax.handlers;
 
-public interface Activitie {
+public interface Activity {
     int calculateCount(int currentCount, int newCount);
 }
