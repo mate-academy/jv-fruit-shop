@@ -1,5 +1,5 @@
 package core.basesyntax.dto;
 
 public interface CustomWriterFile {
-    void writeFile(String nameFile, String text);
+    boolean writeFile(String nameFile, String text);
 }

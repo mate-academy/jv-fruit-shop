@@ -6,11 +6,12 @@ import java.io.IOException;
 
 public class CustomWriterFileImp implements CustomWriterFile {
     @Override
-    public void writeFile(String nameFile, String text) {
+    public boolean writeFile(String nameFile, String text) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(nameFile))) {
             bufferedWriter.append(text);
         } catch (IOException e) {
             throw new RuntimeException("Can't write file", e);
         }
+        return true;
     }
 }
