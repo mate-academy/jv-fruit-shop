@@ -9,6 +9,8 @@ import model.FruitDataDto;
 import service.ActivityStrategyImpl;
 import service.DataParser;
 import service.DataParserImpl;
+import service.DataValidator;
+import service.DataValidatorImpl;
 import service.ReportGenerator;
 import service.ReportGeneratorImpl;
 import service.ShopService;
@@ -32,14 +34,15 @@ public class Main {
     private static final FruitDao fruitDao = new FruitDaoImpl();
     private static final FileWriter fileWriter = new FileWriterImpl();
     private static final FileReader fileReader = new FileReaderImpl();
-    private static final DataParser dataParser = new DataParserImpl();
+    private static final DataValidator dataValidator = new DataValidatorImpl();
+    private static final DataParser dataParser = new DataParserImpl(dataValidator);
     private static final ReportGenerator reportGenerator =
             new ReportGeneratorImpl(fileWriter, fruitDao);
     private static Map<String, ActivityHandler> map = new HashMap<>();
 
     public static void main(String[] args) {
         map.put(BALANCE, new Balance(fruitDao));
-        map.put(PURCHASE, new Purchase(fruitDao));
+        map.put(PURCHASE, new Purchase(fruitDao, dataValidator));
         map.put(RETURN, new SupplyOrReturn(fruitDao));
         map.put(SUPPLY, new SupplyOrReturn(fruitDao));
         ActivityStrategyImpl activityStrategy = new ActivityStrategyImpl(map);

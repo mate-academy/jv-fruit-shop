@@ -10,12 +10,4 @@ public class Storage {
     public static Map<Fruit, Integer> getFruits() {
         return fruits;
     }
-
-    public static Map<Fruit, Integer> getDB() {
-        HashMap<Fruit, Integer> clonedDB = new HashMap<>();
-        for (Map.Entry<Fruit, Integer> entry: fruits.entrySet()) {
-            clonedDB.put(entry.getKey().clone(), entry.getValue());
-        }
-        return clonedDB;
-    }
 }

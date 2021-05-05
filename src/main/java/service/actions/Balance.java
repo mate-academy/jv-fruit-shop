@@ -1,12 +1,11 @@
 package service.actions;
 
 import dao.FruitDao;
-import dao.FruitDaoImpl;
 import model.Fruit;
 import model.FruitDataDto;
 
 public class Balance implements ActivityHandler {
-    private FruitDao fruitDao = new FruitDaoImpl();
+    private FruitDao fruitDao;
 
     public Balance(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
