@@ -9,11 +9,13 @@ public class RemoveOperation implements FruitOperationsService {
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
         if (Storage.fruits
-                .get(new Fruit(fruitRecordDto.getFruitName())) < fruitRecordDto.getQuantity()) {
+                .getOrDefault(new Fruit(fruitRecordDto.getFruitName()), 0) < fruitRecordDto.getQuantity()) {
             throw new RuntimeException(fruitRecordDto.getFruitName() + " out of Stock!");
         }
-        fruitRecordDto.setQuantity(-fruitRecordDto.getQuantity());
-        FruitOperationsService fruitOperationsService = new AddOperation();
-        return fruitOperationsService.apply(fruitRecordDto);
+        Fruit currentFruit = new Fruit(fruitRecordDto.getFruitName());
+        int currentQuantityInStock = Storage.fruits.getOrDefault(currentFruit, 0);
+        int newQuantityInStock = currentQuantityInStock - fruitRecordDto.getQuantity();
+        Storage.fruits.put(currentFruit, newQuantityInStock);
+        return newQuantityInStock;
     }
 }

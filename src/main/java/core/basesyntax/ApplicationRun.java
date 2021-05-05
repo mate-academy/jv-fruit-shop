@@ -6,11 +6,11 @@ import java.util.Map;
 import model.dto.FruitRecordDto;
 import service.FruitOperationsService;
 import service.ParserService;
-import service.ReaderService;
+import service.FileService;
 import service.ReportService;
 import service.impl.AddOperation;
 import service.impl.ParserServiceImpl;
-import service.impl.ReaderServiceImpl;
+import service.impl.FileServiceImpl;
 import service.impl.RemoveOperation;
 import service.impl.ReportServiceImpl;
 
@@ -30,8 +30,8 @@ public class ApplicationRun {
     }
 
     public static void main(String[] args) {
-        ReaderService readerService = new ReaderServiceImpl();
-        List<String> stringsFromFile = readerService.readFromFile(PATH_SOURCE_FILE);
+        FileService fileService = new FileServiceImpl();
+        List<String> stringsFromFile = fileService.readFromCsvFile(PATH_SOURCE_FILE);
         ParserService parserService = new ParserServiceImpl();
         List<FruitRecordDto> fruitDtos = parserService.parseToDto(stringsFromFile);
         for (FruitRecordDto dto : fruitDtos) {
@@ -39,6 +39,6 @@ public class ApplicationRun {
                                                        .apply(dto);
         }
         ReportService reportService = new ReportServiceImpl();
-        reportService.makeStockReportToCsvFile(OUTPUT_FILE_NAME);
+        fileService.writeToCsvFile(OUTPUT_FILE_NAME, reportService.makeStockReportForCsvFile());
     }
 }
