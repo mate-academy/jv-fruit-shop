@@ -7,21 +7,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFromFileImpl implements ReadFromFileDto {
+public class FileReaderImpl implements ReadFromFileDto {
 
     @Override
     public List<String> readFile(String fileName) {
-        List<String> linesList = new ArrayList<>();
+        List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line = bufferedReader.readLine();
             while (line != null) {
-                System.out.println(line);
-                linesList.add(line);
+                lines.add(line);
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("File not found");
+            throw new RuntimeException("File not found or can't be read", e);
         }
-        return linesList;
+        return lines;
     }
 }

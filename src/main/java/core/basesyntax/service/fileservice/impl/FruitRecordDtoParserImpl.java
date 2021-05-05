@@ -1,11 +1,11 @@
 package core.basesyntax.service.fileservice.impl;
 
 import core.basesyntax.model.dto.FruitRecordDto;
-import core.basesyntax.service.fileservice.FileParser;
+import core.basesyntax.service.fileservice.FruitRecordDtoParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileParserImpl implements FileParser {
+public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
     private static final String REPLACE_REGEX = "\\W";
     private static final String REPLACE_REGEX_AMOUNT = "[^0-9-]";
     private static final int ZERO_COLUMN_INDEX = 0;
@@ -15,7 +15,7 @@ public class FileParserImpl implements FileParser {
     private static final String EMPTY_STRING = "";
 
     @Override
-    public List<FruitRecordDto> parser(List<String> lines) {
+    public List<FruitRecordDto> parse(List<String> lines) {
         List<FruitRecordDto> listOfLines = new ArrayList<>(lines.size());
         for (int i = 0; i < lines.size(); i++) {
             String[] singleLineList = lines.get(i).split(COLUMN_SEPARATOR);

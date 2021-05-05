@@ -1,14 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.dto.FruitRecordDto;
-import core.basesyntax.service.Validator;
 import core.basesyntax.storage.DataBase;
 import java.util.Optional;
 
-public class ValidatorImpl implements Validator {
+public class Validator {
     private static final int ZERO_AMOUNT = 0;
 
-    @Override
     public void checkPurchaseValidation(FruitRecordDto fruitRecordDto) {
         int amountOnBalance = Optional.ofNullable(DataBase.getDataBase()
                 .get(fruitRecordDto.getName())).orElse(0);
@@ -17,6 +15,7 @@ public class ValidatorImpl implements Validator {
             throw new RuntimeException("Not enough "
                     + fruitRecordDto.getName() + "'s in Storage");
         }
+
         if (amountPurchase < ZERO_AMOUNT) {
             throw new RuntimeException(fruitRecordDto.getAmount()
                     + " - wrong input");

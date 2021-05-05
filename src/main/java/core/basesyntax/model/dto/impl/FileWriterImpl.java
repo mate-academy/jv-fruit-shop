@@ -5,16 +5,15 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteToFileImpl implements WriteToFile {
-    private static final String FILE_NAME = "Report.csv";
+public class FileWriterImpl implements WriteToFile {
 
     @Override
-    public void writeToFile(String report) {
+    public void writeToFile(String report, String fileName) {
         try (BufferedWriter bufferedWriter
-                     = new BufferedWriter(new FileWriter("Report.csv"))) {
+                     = new BufferedWriter(new FileWriter(fileName))) {
             bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("File not found" + FILE_NAME);
+            throw new RuntimeException("File not found or can't be created" + fileName, e);
         }
     }
 }

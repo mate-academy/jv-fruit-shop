@@ -9,6 +9,10 @@ public class ReportHandlerImpl implements ReportHandler {
     private static final String COLUMN_SEPARATOR = ",";
     private Map<String, Integer> map;
 
+    public ReportHandlerImpl(Map<String, Integer> map) {
+        this.map = map;
+    }
+
     public ReportHandlerImpl() {
         map = DataBase.getDataBase();
     }
