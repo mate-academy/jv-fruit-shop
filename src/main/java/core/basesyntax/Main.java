@@ -7,6 +7,7 @@ import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FruitOperations;
 import core.basesyntax.service.FruitRecordParser;
 import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.AddOperation;
 import core.basesyntax.service.impl.BalanceOperation;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
@@ -14,8 +15,6 @@ import core.basesyntax.service.impl.FruitRecordParserImpl;
 import core.basesyntax.service.impl.OperationType;
 import core.basesyntax.service.impl.PurchaseOperation;
 import core.basesyntax.service.impl.ReportCreatorCsvImpl;
-import core.basesyntax.service.impl.ReturnOperation;
-import core.basesyntax.service.impl.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +25,8 @@ public class Main {
 
     public static void main(String[] args) {
         FruitOperations balanceOperation = new BalanceOperation();
-        FruitOperations returnOperation = new ReturnOperation();
-        FruitOperations supplyOperation = new SupplyOperation();
+        FruitOperations returnOperation = new AddOperation();
+        FruitOperations supplyOperation = new AddOperation();
         FruitOperations purchaseOperation = new PurchaseOperation();
 
         Map<OperationType, FruitOperations> operationHandlers = new HashMap<>();

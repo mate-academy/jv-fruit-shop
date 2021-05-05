@@ -5,7 +5,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.dto.FruitRecordDto;
 import core.basesyntax.service.FruitOperations;
 
-public class SupplyOperation implements FruitOperations {
+public class AddOperation implements FruitOperations {
     @Override
     public int apply(FruitRecordDto fruitRecordDto) {
         Fruit fruit = new Fruit(fruitRecordDto.getFruitName());

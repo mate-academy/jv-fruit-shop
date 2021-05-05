@@ -26,7 +26,7 @@ public class FruitRecordParserImpl implements FruitRecordParser {
             String fruitName = columnsDto[FRUIT_NAME].trim();
             int fruitQuantity = Integer.parseInt(columnsDto[QUANTITY]);
             fruitRecordDtoList.add(new FruitRecordDto(findOperation(operation),
-                    fruitName, fruitQuantity));
+                    fruitName, checkQuantity(fruitQuantity)));
         }
         return fruitRecordDtoList;
     }
@@ -49,5 +49,12 @@ public class FruitRecordParserImpl implements FruitRecordParser {
                 throw new RuntimeException("Wrong operation type");
             }
         }
+    }
+
+    private int checkQuantity(int fruitQuantity) {
+        if (fruitQuantity > 0) {
+            return fruitQuantity;
+        }
+        throw new RuntimeException(ERROR);
     }
 }
