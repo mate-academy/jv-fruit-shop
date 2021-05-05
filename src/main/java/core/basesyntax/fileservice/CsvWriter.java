@@ -2,7 +2,6 @@ package core.basesyntax.fileservice;
 
 import core.basesyntax.reportcreator.CsvReporter;
 import core.basesyntax.reportcreator.ReportCreator;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
