@@ -1,10 +1,13 @@
 package core.basesyntax.db;
 
-import core.basesyntax.dao.FruitDao;
 import core.basesyntax.fruitmodel.Fruit;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStorage {
-    public static Map<Fruit, Integer> fruitStorage = new HashMap<>();
+    private static Map<Fruit, Integer> fruitStorage = new HashMap<>();
+
+    public Map<Fruit, Integer> getFruitStorage() {
+        return fruitStorage;
+    }
 }

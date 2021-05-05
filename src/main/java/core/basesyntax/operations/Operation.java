@@ -6,7 +6,7 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    String operation;
+    private String operation;
 
     Operation(String operation) {
         this.operation = operation;

@@ -5,7 +5,6 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.fruitmodel.Fruit;
 import core.basesyntax.fruitoperationstrategy.FruitStrategy;
-import core.basesyntax.db.FruitStorage;
 import java.util.List;
 
 public class FruitOperationHandler implements OperationHandler {

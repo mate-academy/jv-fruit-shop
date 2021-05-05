@@ -4,7 +4,6 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.fruitmodel.Fruit;
-import core.basesyntax.db.FruitStorage;
 import java.util.Optional;
 
 public class AddOperation implements FruitOperationService {

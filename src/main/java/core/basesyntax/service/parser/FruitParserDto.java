@@ -24,7 +24,9 @@ public class FruitParserDto implements Parser {
                 continue;
             }
             String[] parsedLine = line.split(SPLIT_STRING);
-            if (validator.validationData(parsedLine[OPERATION], parsedLine[FRUIT], parsedLine[QUANTITY])) {
+            if (validator.validationData(parsedLine[OPERATION],
+                    parsedLine[FRUIT],
+                    parsedLine[QUANTITY])) {
                 Operation operation = findOperation(parsedLine[OPERATION].trim());
                 String fruitName = parsedLine[FRUIT];
                 Integer countChange = Integer.parseInt(parsedLine[QUANTITY]);

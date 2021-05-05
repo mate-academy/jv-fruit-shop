@@ -3,7 +3,6 @@ package core.basesyntax.service.parser;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.fruitmodel.Fruit;
-import core.basesyntax.db.FruitStorage;
 import java.util.Map;
 
 public class CreateReport implements Report {
