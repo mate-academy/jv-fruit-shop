@@ -4,17 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.dto.FruitRecordDto;
+import service.FileService;
 import service.FruitOperationsService;
 import service.ParserService;
-import service.FileService;
 import service.ReportService;
 import service.impl.AddOperation;
-import service.impl.ParserServiceImpl;
+import service.impl.BalanceOperation;
 import service.impl.FileServiceImpl;
+import service.impl.ParserServiceImpl;
 import service.impl.RemoveOperation;
 import service.impl.ReportServiceImpl;
+import service.impl.ReturnOperation;
 
 public class ApplicationRun {
+    private static final String BALANCE = "b";
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
@@ -24,9 +27,10 @@ public class ApplicationRun {
             = new HashMap<>();
 
     static {
+        fruitOperationsServiceMap.put(BALANCE, new BalanceOperation());
         fruitOperationsServiceMap.put(SUPPLY, new AddOperation());
         fruitOperationsServiceMap.put(PURCHASE, new RemoveOperation());
-        fruitOperationsServiceMap.put(RETURN, new AddOperation());
+        fruitOperationsServiceMap.put(RETURN, new ReturnOperation());
     }
 
     public static void main(String[] args) {

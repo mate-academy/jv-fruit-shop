@@ -19,6 +19,7 @@ public class FileServiceImpl implements FileService {
             throw new RuntimeException(ERROR_READ_MESSAGE + filePath, e);
         }
     }
+
     @Override
     public void writeToCsvFile(String filePath, String reportData) {
         try {

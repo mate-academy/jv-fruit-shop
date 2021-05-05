@@ -3,7 +3,6 @@ package service.impl;
 import db.Storage;
 import java.util.ArrayList;
 import java.util.List;
-import model.Fruit;
 import model.dto.FruitRecordDto;
 import service.ParserService;
 
@@ -12,7 +11,6 @@ public class ParserServiceImpl implements ParserService {
     private static final int FRUIT_NAME = 1;
     private static final int QUANTITY = 2;
     private static final int CORRECT_FIELDS_NUMBER = 3;
-    private static final String BALANCE_OPERATION = "b";
     private static final String DELIMITER = ",";
     private static final String ERROR_FIELDS_NUMBER = "Invalid number of fields!";
     private static final String ERROR_FIELDS = "Invalid one or more fields!";
@@ -32,12 +30,8 @@ public class ParserServiceImpl implements ParserService {
             if (Storage.validOperations.contains(operation)
                     && Storage.validFruitNames.contains(fruitName)
                     && fruitQuantity.matches(REGEX_ONLY_DIGITS)) {
-                if (BALANCE_OPERATION.equals(operation)) {
-                    Storage.fruits.put(new Fruit(fruitName), Integer.parseInt(fruitQuantity));
-                } else {
-                    fruitRecordDtoList.add(new FruitRecordDto(operation, fruitName,
-                            Integer.parseInt(fruitQuantity)));
-                }
+                fruitRecordDtoList.add(new FruitRecordDto(operation, fruitName,
+                        Integer.parseInt(fruitQuantity)));
             } else {
                 throw new RuntimeException(ERROR_FIELDS);
             }
