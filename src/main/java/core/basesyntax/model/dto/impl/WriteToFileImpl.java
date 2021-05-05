@@ -1,7 +1,6 @@
 package core.basesyntax.model.dto.impl;
 
 import core.basesyntax.model.dto.WriteToFile;
-
 import java.io.FileWriter;
 import java.io.IOException;
 

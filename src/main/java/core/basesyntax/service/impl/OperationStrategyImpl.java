@@ -12,17 +12,13 @@ public class OperationStrategyImpl implements OperationStrategy {
     @Override
     public int operation(FruitRecordDto fruitRecordDto) {
         switch (fruitRecordDto.getOperationType()) {
-            case (BALANCE) :
-                new SetBalanceHandlerImpl().applyFruit(fruitRecordDto);
-                break;
-            case (SUPPLY) :
-                new SupplyFruitsImpl().applyFruit(fruitRecordDto);
-                break;
             case (PURCHASE) :
                 new PurchaseFruitHandlerImpl().applyFruit(fruitRecordDto);
                 break;
+            case (BALANCE) :
+            case (SUPPLY) :
             case (RETURN) :
-                new ReturnFruitHandlerImpl().applyFruit(fruitRecordDto);
+                new AddHandlerImpl().applyFruit(fruitRecordDto);
                 break;
             default:
                 throw new RuntimeException("No such operation allowed");
