@@ -19,13 +19,13 @@ public class Main {
         List<String> linesFromFile = new FileReaderImpl().readFile("Operations.csv");
         ApplierFruitsToStorage addHandler = new AddHandlerImpl();
         ApplierFruitsToStorage purchaseHandler = new PurchaseFruitHandlerImpl();
-        Map<OperationType, ApplierFruitsToStorage> hashMap = new HashMap<>();
-        hashMap.put(OperationType.BALANCE, addHandler);
-        hashMap.put(OperationType.RETURN, addHandler);
-        hashMap.put(OperationType.SUPPLY, addHandler);
-        hashMap.put(OperationType.PURCHASE, purchaseHandler);
+        Map<OperationType, ApplierFruitsToStorage> operationStrategyMap = new HashMap<>();
+        operationStrategyMap.put(OperationType.BALANCE, addHandler);
+        operationStrategyMap.put(OperationType.RETURN, addHandler);
+        operationStrategyMap.put(OperationType.SUPPLY, addHandler);
+        operationStrategyMap.put(OperationType.PURCHASE, purchaseHandler);
         List<FruitRecordDto> fruitDtos = new FruitRecordDtoParserImpl().parse(linesFromFile);
-        new SaverDataToStorage().saveDataToStorage(fruitDtos, hashMap);
+        new SaverDataToStorage().saveDataToStorage(fruitDtos, operationStrategyMap);
         String report = new ReportHandlerImpl().makeReport();
         new FileWriterImpl().writeToFile(report, "Report.csv");
     }
