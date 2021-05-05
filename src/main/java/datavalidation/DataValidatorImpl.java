@@ -1,8 +1,7 @@
 package datavalidation;
 
-import shopoperations.ListOfOperations;
-
 import java.util.List;
+import shopoperations.ListOfOperations;
 
 public class DataValidatorImpl implements DataValidator {
     private static final int OPERATION_TYPE_INDEX = 0;

@@ -1,10 +1,9 @@
 package core.basesyntax;
 
+import datavalidation.DataValidatorImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import datavalidation.DataValidatorImpl;
 import shopdao.FruitDaoImpl;
 import shopoperations.Balance;
 import shopoperations.ListOfOperations;
