@@ -7,7 +7,11 @@ import java.util.Map;
 public class ReportHandlerImpl implements ReportHandler {
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String COLUMN_SEPARATOR = ",";
-    private static final Map<String, Integer> MAP = DataBase.getDataBase();
+    private Map<String, Integer> map;
+
+    public ReportHandlerImpl() {
+        map = DataBase.getDataBase();
+    }
 
     @Override
     public String makeReport() {
@@ -15,7 +19,7 @@ public class ReportHandlerImpl implements ReportHandler {
         String reportString = "";
         report.append(FIRST_LINE)
                 .append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : MAP.entrySet()) {
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
             report.append(entry.getKey())
                     .append(COLUMN_SEPARATOR)
                     .append(entry.getValue().toString())
