@@ -21,24 +21,24 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void saveData(List<TransactionDto> data) {
-        for (TransactionDto fruit : data) {
-            OperationHandler handler = handlers.get(fruit.getOperationType());
-            int amount = handler.apply(fruit.getQuantity(), fruit.getFruit());
-            fruitDao.add(fruit.getFruit(), amount);
+    public void saveData(List<TransactionDto> transactionsList) {
+        for (TransactionDto transaction : transactionsList) {
+            OperationHandler handler = handlers.get(transaction.getOperationType());
+            int quantity = handler.apply(transaction.getQuantity(), transaction.getFruit());
+            fruitDao.add(transaction.getFruit(), quantity);
         }
     }
 
     @Override
     public String createReport() {
-        StringBuilder buildReport = new StringBuilder();
-        buildReport.append(TITLE).append(System.lineSeparator());
+        StringBuilder report = new StringBuilder();
+        report.append(TITLE).append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> entry : fruitDao.getAll().entrySet()) {
-            buildReport.append(entry.getKey().getName())
+            report.append(entry.getKey().getName())
                     .append(SEPARATOR)
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        return buildReport.toString();
+        return report.toString();
     }
 }

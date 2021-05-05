@@ -16,23 +16,23 @@ public class TransactionDtoParserImpl implements TransactionDtoParser {
     private static final String ERROR_MESSAGE = "Data format should be " + VALID_FORMAT;
 
     @Override
-    public List<TransactionDto> parse(List<String> records) {
+    public List<TransactionDto> parse(List<String> transactions) {
         List<TransactionDto> transactionsList = new ArrayList<>();
-        for (String record : records) {
-            if (record.equals(SKIP_LINE)) {
+        for (String transaction : transactions) {
+            if (transaction.equals(SKIP_LINE)) {
                 continue;
             }
-            if (!record.matches(VALID_FORMAT)) {
+            if (!transaction.matches(VALID_FORMAT)) {
                 throw new InvalidDataFormatException(ERROR_MESSAGE
-                        + ", but was [" + record + "]");
+                        + ", but was [" + transaction + "]");
             }
-            String[] fields = record.split(SEPARATOR);
+            String[] fields = transaction.split(SEPARATOR);
             OperationType operation
                     = OperationType.getOperationType(fields[INDEX_OF_OPERATION_TYPE]);
             Fruit fruit = new Fruit(fields[INDEX_OF_FRUIT_TYPE]);
             int quantity = Integer.parseInt(fields[INDEX_OF_QUANTITY]);
-            TransactionDto product = new TransactionDto(operation, fruit, quantity);
-            transactionsList.add(product);
+            TransactionDto transactionDto = new TransactionDto(operation, fruit, quantity);
+            transactionsList.add(transactionDto);
         }
         return transactionsList;
     }
