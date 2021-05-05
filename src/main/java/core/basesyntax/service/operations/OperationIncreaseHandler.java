@@ -1,10 +1,12 @@
 package core.basesyntax.service.operations;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.exeptions.InvalidQuantityException;
 import core.basesyntax.model.Fruit;
-import java.util.Optional;
 
 public class OperationIncreaseHandler implements OperationHandler {
+    private static final String ERROR_MESSAGE
+            = "Invalid quantity";
     private final FruitDao fruitDao;
 
     public OperationIncreaseHandler(FruitDao fruitDao) {
@@ -13,7 +15,10 @@ public class OperationIncreaseHandler implements OperationHandler {
 
     @Override
     public int apply(int quantity, Fruit key) {
-        Optional<Integer> fruitQuantity = fruitDao.get(key);
-        return fruitQuantity.isPresent() ? fruitQuantity.get() + quantity : quantity;
+        if (quantity < 0) {
+            throw new InvalidQuantityException(ERROR_MESSAGE + "[" + quantity + "]");
+        }
+        int fruitQuantity = fruitDao.get(key).orElse(0);
+        return fruitQuantity + quantity;
     }
 }

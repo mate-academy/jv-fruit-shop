@@ -17,7 +17,9 @@ public class OperationDecreaseHandler implements OperationHandler {
     @Override
     public int apply(int quantity, Fruit key) {
         Optional<Integer> fruitQuantity = fruitDao.get(key);
-        if (fruitQuantity.isPresent() && fruitQuantity.get() >= quantity) {
+        if (fruitQuantity.isPresent()
+                && fruitQuantity.get() >= quantity
+                && quantity > 0) {
             return fruitQuantity.get() - quantity;
         }
         throw new InvalidQuantityException(ERROR_MESSAGE + "[" + quantity + "]");
