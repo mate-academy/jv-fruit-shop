@@ -4,7 +4,7 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dto.FruitRecordDto;
 import core.basesyntax.model.Fruit;
 
-public class RemoveOperationStrategy implements FruitOperationStrategy {
+public class RemoveOperationStrategy implements RecordHandler {
     private static final int DEFAULT_VALUE = 0;
     private static final String EXCEPTION_MESSAGE = "Amount of fruits you want "
             + "to buy is bigger than we currently have";
@@ -15,7 +15,7 @@ public class RemoveOperationStrategy implements FruitOperationStrategy {
     }
 
     @Override
-    public int applyAction(FruitRecordDto fruitRecordDto) {
+    public long applyAction(FruitRecordDto fruitRecordDto) {
         Fruit fruit = new Fruit(fruitRecordDto.getFruit().getName());
         int currentQuantity = fruitDao.getQuantity(fruit).orElse(DEFAULT_VALUE);
         int subtractionResult = currentQuantity - fruitRecordDto.getQuantity();
