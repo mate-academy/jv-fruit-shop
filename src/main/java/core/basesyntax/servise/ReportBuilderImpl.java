@@ -2,11 +2,11 @@ package core.basesyntax.servise;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.servise.exception.InvalidInputDataException;
-import core.basesyntax.servise.inrterfase.ReportSplitter;
+import core.basesyntax.servise.inrterfase.ReportBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportSplitterImpl implements ReportSplitter {
+public class ReportBuilderImpl implements ReportBuilder {
     private static final String COMMA = ",";
     private static final int INDEX_OF_TYPE = 0;
     private static final int UNNECESSARY_LINE = 0;
@@ -15,7 +15,7 @@ public class ReportSplitterImpl implements ReportSplitter {
     private static final int NUMBER_OF_TYPES_IN_THE_ENTERED_DATA = 3;
 
     @Override
-    public List<FruitRecordDto> splitOfReport(List<String> report) {
+    public List<FruitRecordDto> getReport(List<String> report) {
         List<FruitRecordDto> fruitRecordDtos = new ArrayList<>();
         report.remove(UNNECESSARY_LINE);
         for (String line : report) {

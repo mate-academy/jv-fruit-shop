@@ -2,11 +2,11 @@ package core.basesyntax;
 
 import core.basesyntax.servise.FruitRecordDto;
 import core.basesyntax.servise.Operation;
+import core.basesyntax.servise.ReportBuilderImpl;
 import core.basesyntax.servise.ReportReaderImpl;
-import core.basesyntax.servise.ReportSplitterImpl;
 import core.basesyntax.servise.ReportWriterImpl;
+import core.basesyntax.servise.inrterfase.ReportBuilder;
 import core.basesyntax.servise.inrterfase.ReportReader;
-import core.basesyntax.servise.inrterfase.ReportSplitter;
 import core.basesyntax.servise.inrterfase.ReportWriter;
 import core.basesyntax.storage.Strategy;
 import core.basesyntax.storage.StrategyAdd;
@@ -28,8 +28,8 @@ public class Application {
 
         ReportReader reportReader = new ReportReaderImpl();
         List<String> report = reportReader.readFile(DIRECT_INPUT_FILE);
-        ReportSplitter splitter = new ReportSplitterImpl();
-        List<FruitRecordDto> fruitRecordDtos = splitter.splitOfReport(report);
+        ReportBuilder splitter = new ReportBuilderImpl();
+        List<FruitRecordDto> fruitRecordDtos = splitter.getReport(report);
         for (FruitRecordDto fruitRecordDto : fruitRecordDtos) {
             Strategy local = strategyOperation.get(fruitRecordDto.getType());
             if (local != null) {
