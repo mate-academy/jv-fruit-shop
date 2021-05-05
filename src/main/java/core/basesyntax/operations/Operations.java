@@ -10,7 +10,6 @@ public enum Operations {
         for (Operations operation : Operations.values()) {
             if (operation.toString().equalsIgnoreCase(values)) {
                 return true;
-
             }
         }
         return false;

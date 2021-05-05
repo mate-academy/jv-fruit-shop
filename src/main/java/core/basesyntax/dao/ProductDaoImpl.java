@@ -7,16 +7,16 @@ import java.util.Map;
 public class ProductDaoImpl implements ProductDao {
     @Override
     public void add(Product product, int value) {
-        Storage.getProducts().put(product, value);
+        Storage.products.put(product, value);
     }
 
     @Override
     public int get(Product product) {
-        return Storage.getProducts().getOrDefault(product, 0);
+        return Storage.products.getOrDefault(product, 0);
     }
 
     @Override
     public Map<Product, Integer> getAll() {
-        return Storage.getProducts();
+        return Storage.products;
     }
 }
