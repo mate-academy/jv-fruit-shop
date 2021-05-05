@@ -2,6 +2,8 @@ package core.basesyntax.model;
 
 public enum OperationType {
     BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
+
+    private static final String EXCEPTION_MESSAGE = "Wrong operation type";
     private String code;
 
     OperationType(String code) {
@@ -22,7 +24,7 @@ public enum OperationType {
                 return RETURN;
             }
             default: {
-                throw new IllegalArgumentException("Wrong operation type");
+                throw new IllegalArgumentException(EXCEPTION_MESSAGE);
             }
         }
     }

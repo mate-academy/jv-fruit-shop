@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
+    private static final String EXCEPTION_MESSAGE = "Can't read file ";
 
     @Override
     public List<String> getLinesFromFile(String fileName) {
@@ -19,7 +20,7 @@ public class FileReaderImpl implements FileReader {
             try {
                 dataFromFile = Files.readAllLines(Path.of(path));
             } catch (IOException e) {
-                throw new RuntimeException("Can't read file " + e);
+                throw new RuntimeException(EXCEPTION_MESSAGE + e);
             }
         }
         return dataFromFile;
