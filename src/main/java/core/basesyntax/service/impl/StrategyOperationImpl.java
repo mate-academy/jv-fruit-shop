@@ -1,6 +1,8 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitRecordDto;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitOperationHandler;
 import core.basesyntax.service.StrategyOperation;
 import java.util.HashMap;
@@ -15,12 +17,12 @@ public class StrategyOperationImpl implements StrategyOperation {
     }
 
     @Override
-    public Map<String, Integer> get(List<FruitRecordDto> fruitRecordDtos) {
-        Map<String, Integer> balanceForDay = new HashMap<>();
+    public Map<Fruit, Integer> get(List<FruitRecordDto> fruitRecordDtos) {
+        Storage storage = new Storage();
         for (FruitRecordDto dto: fruitRecordDtos) {
             int apply = handlers.get(dto.getOperationType()).apply(dto);
-            balanceForDay.put(dto.getFruitName(), apply);
+            storage.fruits.put(new Fruit(dto.getFruitName()), apply);
         }
-        return balanceForDay;
+        return storage.fruits;
     }
 }
