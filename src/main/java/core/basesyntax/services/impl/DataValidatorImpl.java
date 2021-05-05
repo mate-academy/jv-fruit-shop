@@ -6,7 +6,8 @@ import core.basesyntax.services.interfaces.DataValidator;
 
 public class DataValidatorImpl implements DataValidator {
     private static final String INCORRECT_QUANTITY_EXCEPTION_MESSAGE = "Quantity must be positive";
-    private static final String INSUFFICIENT_QUANTITY_EXCEPTION_MESSAGE = "Insufficient quantity of fruit";
+    private static final String INSUFFICIENT_QUANTITY_EXCEPTION_MESSAGE = "Insufficient"
+            + " quantity of fruit";
 
     @Override
     public void checkIfQuantityPositive(int fruitQuantity) {

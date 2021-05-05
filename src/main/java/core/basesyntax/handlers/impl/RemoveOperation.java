@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public class RemoveOperation implements FruitOperationHandler {
     private static final int ZERO = 0;
+
     @Override
     public int apply(FruitDtoTransaction fruitDtoTransaction) {
         Fruit fruit = new Fruit(fruitDtoTransaction.getFruitName());
