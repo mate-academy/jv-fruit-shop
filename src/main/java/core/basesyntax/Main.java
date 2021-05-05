@@ -27,11 +27,11 @@ public class Main {
         FruitShopDao fruitShopDao = new FruitShopDaoMapImpl();
         OperationHandler addToBalance = new AddToBalance(fruitShopDao);
         Map<OperationType, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(OperationType.valueOf("b"), addToBalance);
-        operationHandlerMap.put(OperationType.valueOf("p"),
+        operationHandlerMap.put(OperationType.BALANCE, addToBalance);
+        operationHandlerMap.put(OperationType.PURCHASE,
                 new SubtractFromBalance(fruitShopDao));
-        operationHandlerMap.put(OperationType.valueOf("s"), addToBalance);
-        operationHandlerMap.put(OperationType.valueOf("r"), addToBalance);
+        operationHandlerMap.put(OperationType.SUPPLY, addToBalance);
+        operationHandlerMap.put(OperationType.RETURN, addToBalance);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FileService fileService = new FileServiceImpl();
         FruitRecordDtoParser fruitRecordDtoParser = new FruitRecordDtoParserImpl();
