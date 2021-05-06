@@ -22,7 +22,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public Map<Fruit, Integer> getFruitsReport() {
+    public Map<Fruit, Integer> getFruits() {
         return Storage.fruits;
     }
 }

@@ -1,26 +1,19 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class ServiceWriterImpl implements ServiceWriter {
     private static final String COMMA = ",";
-    private static final String REPORT_FIRST_LINE = "fruit,quantity";
 
     @Override
-    public void writeReport(String filePath, Map<Fruit, Integer> storage) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write(REPORT_FIRST_LINE + System.lineSeparator());
-            for (Map.Entry<Fruit, Integer> entry : storage.entrySet()) {
-                writer.write((entry.getKey().getName() + COMMA + entry.getValue()
-                        + System.lineSeparator()));
-            }
-            writer.flush();
+    public void writeData(String data, String filePath) {
+        Path path = Path.of(filePath);
+        try {
+            Files.writeString(path, data);
         } catch (IOException e) {
-            throw new RuntimeException("Problem to write new file ", e);
+            throw new RuntimeException("Can't write to a file " + filePath, e);
         }
     }
 }

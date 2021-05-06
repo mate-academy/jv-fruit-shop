@@ -9,6 +9,8 @@ import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ParseToList;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReduceStrategy;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.ReportCreatorImpl;
 import core.basesyntax.service.ServiceReader;
 import core.basesyntax.service.ServiceReaderImpl;
 import core.basesyntax.service.ServiceWriter;
@@ -34,8 +36,10 @@ public class Application {
         List<FruitRecordDto> fruitRecordDtos = parser.parseToDto(
                 fileReader.readFile(INPUT_FILE_PATH));
         fruitService.applyOperationOnFruitsDto(fruitRecordDtos);
+        ReportCreator reportCreator = new ReportCreatorImpl();
 
         ServiceWriter fileWriter = new ServiceWriterImpl();
-        fileWriter.writeReport(OUTPUT_FILE_PATH, fruitService.getFruitsReport());
+        fileWriter.writeData(reportCreator.getFruitsReport(fileWriter,
+                fruitService.getFruits()), OUTPUT_FILE_PATH);
     }
 }
