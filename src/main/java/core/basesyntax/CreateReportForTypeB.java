@@ -1,0 +1,16 @@
+package core.basesyntax;
+
+import java.util.List;
+
+public class CreateReportForTypeB implements TypeHandler {
+
+    @Override
+    public void createReport(List<FruitDto> fruitDtoList) {
+        fruitDtoList.stream()
+                .filter(fruitDto -> fruitDto.getType().equals("b"))
+                .filter(fruitDto -> fruitDto.getFruit().equals("banana")
+                        || fruitDto.getFruit().equals("apple"))
+                .forEach(fruitDto -> Storage.fruits.put(fruitDto.getFruit(),
+                        Integer.parseInt(fruitDto.getQuantity())));
+    }
+}
