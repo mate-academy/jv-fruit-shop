@@ -1,16 +1,14 @@
 package core.basesyntax;
 
-import java.util.List;
-
 public class CreateReportForTypeP implements TypeHandler {
     @Override
-    public void createReport(List<FruitDto> fruitDtoList) {
-        fruitDtoList.stream()
-                .filter(fruitDto -> fruitDto.getType().equals("p"))
-                .filter(fruitDto -> fruitDto.getFruit().equals("banana")
-                            || fruitDto.getFruit().equals("apple"))
-                .forEach(fruitDto -> Storage.fruits.put(fruitDto.getFruit(),
-                            Storage.fruits.get(fruitDto.getFruit())
-                                    - Integer.parseInt(fruitDto.getQuantity())));
+    public void createReport(FruitDto fruitDto) {
+        if (fruitDto.getType().equals("p")) {
+            if (Storage.fruits.get(fruitDto.getFruit()) >= fruitDto.getQuantity()) {
+                Storage.fruits.put(fruitDto.getFruit(), Storage.fruits.get(fruitDto.getFruit())
+                        - fruitDto.getQuantity());
+            } else throw new RuntimeException("You can't buy this fruit!");
+
+        }
     }
 }

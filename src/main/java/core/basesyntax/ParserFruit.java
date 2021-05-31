@@ -1,12 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.exeptions.AuthenticationException;
+import core.basesyntax.exeptions.WrongQuantityException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParserFruit {
-    public List<FruitDto> parserFruit(List<String> databaseInfo) throws AuthenticationException {
-        databaseInfo.remove(0);
+    public List<FruitDto> parserFruit(List<String> databaseInfo) throws WrongQuantityException {
+        if (databaseInfo.get(0).equals("type,fruit,quantity")) {
+            databaseInfo.remove(0);
+        }
         List<FruitDto> fruitDtoList = new ArrayList<>();
         for (String s : databaseInfo) {
             FruitDto fruitDto = new FruitDto();
@@ -15,12 +17,12 @@ public class ParserFruit {
                 fruitDto.setType(splitString[0]);
                 fruitDto.setFruit(splitString[1]);
                 if (Integer.parseInt(splitString[2]) < 0) {
-                    throw new AuthenticationException("Value of quantity is not correct!");
+                    throw new WrongQuantityException("Value of quantity is not correct!");
                 }
-                fruitDto.setQuantity(splitString[2]);
+                fruitDto.setQuantity(Integer.parseInt(splitString[2]));
                 fruitDtoList.add(fruitDto);
             } else {
-                throw new AuthenticationException("File have a mistakes!");
+                throw new WrongQuantityException("File have a mistakes!");
             }
         }
         return fruitDtoList;

@@ -3,7 +3,7 @@ package core.basesyntax;
 public class FruitDto {
     private String type;
     private String fruit;
-    private String quantity;
+    private int quantity;
 
     public FruitDto() {
         this.type = type;
@@ -27,11 +27,11 @@ public class FruitDto {
         this.fruit = fruit;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
