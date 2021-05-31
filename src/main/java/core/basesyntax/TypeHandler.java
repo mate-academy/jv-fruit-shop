@@ -1,6 +1,5 @@
 package core.basesyntax;
 
 public interface TypeHandler {
-
-    void createReport(FruitDto fruitDto);
+    void handle(FruitDto fruitDto);
 }
