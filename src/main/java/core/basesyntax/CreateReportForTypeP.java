@@ -7,8 +7,10 @@ public class CreateReportForTypeP implements TypeHandler {
             if (Storage.fruits.get(fruitDto.getFruit()) >= fruitDto.getQuantity()) {
                 Storage.fruits.put(fruitDto.getFruit(), Storage.fruits.get(fruitDto.getFruit())
                         - fruitDto.getQuantity());
-            } else throw new RuntimeException("You can't buy this fruit!");
-
+            } else {
+                throw new RuntimeException("You can't buy this fruit!");
+            }
         }
+
     }
 }

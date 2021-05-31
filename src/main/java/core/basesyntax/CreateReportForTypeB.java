@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import java.util.List;
-
 public class CreateReportForTypeB implements TypeHandler {
 
     @Override

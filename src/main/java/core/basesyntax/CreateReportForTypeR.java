@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import java.util.List;
-
 public class CreateReportForTypeR implements TypeHandler {
     @Override
     public void createReport(FruitDto fruitDto) {

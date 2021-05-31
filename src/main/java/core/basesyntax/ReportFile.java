@@ -12,13 +12,13 @@ public class ReportFile {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportFile))) {
             bufferedWriter.write("fruit,quantity");
             bufferedWriter.newLine();
-                for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
-                    bufferedWriter.write(entry.getKey() + "," + entry.getValue());
-                    bufferedWriter.newLine();
-                }
-                bufferedWriter.flush();
-            } catch (IOException e) {
-                throw new RuntimeException("Can't write data to file", e);
+            for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
+                bufferedWriter.write(entry.getKey() + "," + entry.getValue());
+                bufferedWriter.newLine();
             }
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write data to file", e);
+        }
     }
 }

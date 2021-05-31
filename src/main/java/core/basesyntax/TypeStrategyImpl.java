@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-public class TypeStrategyImpl implements TypeStrategy{
+public class TypeStrategyImpl implements TypeStrategy {
 
     @Override
     public TypeHandler getTypeHandler(FruitDto fruitDto) {
@@ -8,8 +8,7 @@ public class TypeStrategyImpl implements TypeStrategy{
             return new CreateReportForTypeB();
         } else if (fruitDto.getType().equals("p")) {
             return new CreateReportForTypeP();
-        }
-        else if (fruitDto.getType().equals("r")) {
+        } else if (fruitDto.getType().equals("r")) {
             return new CreateReportForTypeR();
         }
         return new CreateReportForTypeS();
