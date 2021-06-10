@@ -1,26 +1,22 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 public class FileServiceImpl implements FileService {
 
     @Override
     public List<String> readFile(String fileName) {
-        List<String> result = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader((fileName)))) {
-            while (reader.ready()) {
-                result.add(reader.readLine().trim());
-            }
+        List<String> result;
+        try {
+            result = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Cannot read the file", e);
         }
-        result.remove(0); //delete heading
         return result;
     }
 
