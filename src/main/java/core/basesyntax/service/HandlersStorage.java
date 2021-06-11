@@ -1,10 +1,9 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.operation.OperationBHandler;
+import core.basesyntax.service.operation.BalanceHandler;
+import core.basesyntax.service.operation.IncreaseHandler;
 import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.service.operation.OperationPHandler;
-import core.basesyntax.service.operation.OperationRHandler;
-import core.basesyntax.service.operation.OperationSHandler;
+import core.basesyntax.service.operation.PurchaseHandler;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,10 +11,10 @@ public class HandlersStorage {
     private final Map<String, OperationHandler> handlers = new HashMap<>();
 
     {
-        handlers.put("b",new OperationBHandler());
-        handlers.put("s",new OperationSHandler());
-        handlers.put("p",new OperationPHandler());
-        handlers.put("r",new OperationRHandler());
+        handlers.put("b",new BalanceHandler());
+        handlers.put("s",new IncreaseHandler());
+        handlers.put("p",new PurchaseHandler());
+        handlers.put("r",new IncreaseHandler());
     }
 
     public Map<String, OperationHandler> getHandlers() {

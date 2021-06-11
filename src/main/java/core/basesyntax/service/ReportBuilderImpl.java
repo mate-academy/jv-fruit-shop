@@ -25,7 +25,7 @@ public class ReportBuilderImpl implements ReportBuilder {
             operationHandler.process(fruitName,fruitQuantity);
         }
 
-        for (Map.Entry<String,Integer> pair: FruitShop.FRUIT_WAREHOUSE.entrySet()) {
+        for (Map.Entry<String,Integer> pair: FruitShop.fruitWarehouse.entrySet()) {
             report.append(pair.getKey())
                     .append(",")
                     .append(pair.getValue())

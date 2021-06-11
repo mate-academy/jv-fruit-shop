@@ -12,7 +12,7 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class FruitShop {
-    public static final Map<String,Integer> FRUIT_WAREHOUSE = new HashMap<>();
+    public static final Map<String,Integer> fruitWarehouse = new HashMap<>();
     private final ReportBuilder reportBuilder = new ReportBuilderImpl();
     private final FileService fileService = new FileServiceImpl();
     private final String inputFileName = "input.txt";
