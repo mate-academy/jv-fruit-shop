@@ -1,5 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
+import core.basesyntax.db.Storage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

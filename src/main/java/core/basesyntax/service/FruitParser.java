@@ -1,6 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import core.basesyntax.exeptions.ValidationException;
+import core.basesyntax.model.FruitDto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,10 @@ public class FruitParser {
             if (splitString.length > 1) {
                 fruitDto.setType(splitString[0]);
                 fruitDto.setFruit(splitString[1]);
-                if (Integer.parseInt(splitString[2]) < 0) {
+                if (splitString.length == 2) {
+                    throw new ValidationException("Value of quantity is not correct!");
+                }
+                if (Integer.parseInt(splitString[2]) == 0) {
                     throw new ValidationException("Value of quantity is not correct!");
                 }
                 fruitDto.setQuantity(Integer.parseInt(splitString[2]));

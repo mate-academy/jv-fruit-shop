@@ -1,7 +1,10 @@
-package core.basesyntax;
+package core.basesyntax.service;
+
+import core.basesyntax.model.FruitDto;
 
 public class TypeStrategyImpl implements TypeStrategy {
     @Override
+
     public TypeHandler getTypeHandler(FruitDto fruitDto) {
         if (fruitDto.getType().equals("b")) {
             return new BalanceOperation();

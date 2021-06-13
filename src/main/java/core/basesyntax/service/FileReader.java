@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +9,8 @@ public class FileReader {
     public List<String> readDataFromFile(String fileName) {
         List<String> databaseInfo;
         try {
-            databaseInfo = Files.readAllLines(Path.of(fileName));
+            String path = this.getClass().getClassLoader().getResource(fileName).getPath();
+            databaseInfo = Files.readAllLines(Path.of(path));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file" + fileName, e);
         }
