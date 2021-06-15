@@ -1,5 +1,7 @@
 package services.actions;
 
+import java.util.Map;
+
 public interface ActionHandler {
-    void getResultOfAction(String fruitName, int fruitCount);
+    Map<String, Integer> getResultOfAction(String fruitName, int fruitCount);
 }

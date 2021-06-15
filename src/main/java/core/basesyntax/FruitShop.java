@@ -11,8 +11,8 @@ import services.Report;
 import services.ReportImpl;
 import services.actions.ActionHandler;
 import services.actions.BalanceHandler;
+import services.actions.IncreaseHandler;
 import services.actions.PurchaseHandler;
-import services.actions.ReturnAndSupplyHandler;
 
 public class FruitShop {
     public static void main(String[] args) {
@@ -23,9 +23,9 @@ public class FruitShop {
 
         Map<String, ActionHandler> actionHandlerMap = new HashMap<>();
         actionHandlerMap.put("b",new BalanceHandler());
-        actionHandlerMap.put("s",new ReturnAndSupplyHandler());
+        actionHandlerMap.put("s",new IncreaseHandler());
         actionHandlerMap.put("p",new PurchaseHandler());
-        actionHandlerMap.put("r",new ReturnAndSupplyHandler());
+        actionHandlerMap.put("r",new IncreaseHandler());
         ActionTypeStrategy actionTypeStrategy = new ActionTypeStrategyImpl(actionHandlerMap);
 
         Report reportService = new ReportImpl(actionTypeStrategy);

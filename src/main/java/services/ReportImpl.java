@@ -7,6 +7,7 @@ import services.actions.ActionHandler;
 
 public class ReportImpl implements Report {
     private final ActionTypeStrategy actionTypeStrategy;
+    private final RecordValidation recordValidation = new RecordValidation();
 
     public ReportImpl(ActionTypeStrategy actionTypeStrategy) {
         this.actionTypeStrategy = actionTypeStrategy;
@@ -15,7 +16,6 @@ public class ReportImpl implements Report {
     @Override
     public String createReport(List<String> records) {
         StringBuilder report = new StringBuilder();
-        RecordValidation recordValidation = new RecordValidation();
         report.append("fruit,quantity\n");
 
         for (String record: records) {
@@ -26,7 +26,8 @@ public class ReportImpl implements Report {
                 String type = recordParts[0];
                 int quantity = Integer.parseInt(recordParts[2]);
                 ActionHandler actionHandler = actionTypeStrategy.get(type);
-                actionHandler.getResultOfAction(fruitName, quantity);
+                Map<String, Integer> storage = actionHandler.getResultOfAction(fruitName, quantity);
+                System.out.println(storage);
             }
         }
 

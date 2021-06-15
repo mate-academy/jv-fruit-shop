@@ -10,13 +10,11 @@ import java.util.List;
 public class RecordDaoImpl implements RecordDao {
     @Override
     public List<String> readFile(String fileName) {
-        List<String> result;
         try {
-            result = Files.readAllLines(Path.of(fileName));
+            return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Cannot read a file", e);
         }
-        return result;
     }
 
     @Override
