@@ -12,9 +12,6 @@ public class ValidatorImpl implements Validator {
             if (!Pattern.matches("\\w,\\w+,\\d+", record)) {
                 throw new RuntimeException("Wrong input format " + record);
             }
-            if (!Pattern.matches("[bpsrBPSR].+", record)) {
-                throw new RuntimeException("Wrong input operation " + record);
-            }
             int value = Integer.parseInt(record.split(",")[2]);
             if (value < 0) {
                 throw new RuntimeException("Wrong input value " + record);

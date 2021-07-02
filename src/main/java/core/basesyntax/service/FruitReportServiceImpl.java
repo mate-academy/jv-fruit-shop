@@ -5,6 +5,7 @@ import core.basesyntax.service.validator.Validator;
 import java.util.List;
 
 public class FruitReportServiceImpl implements ShopReportService {
+    private static final String WORDS_SEPARATOR = ",";
     private final Validator validator;
     private final OperationHandler operationHandler;
 
@@ -22,7 +23,7 @@ public class FruitReportServiceImpl implements ShopReportService {
 
     private void addDataToDB(List<String> inputData) {
         for (String record : inputData) {
-            String[] words = record.trim().split(",");
+            String[] words = record.trim().split(WORDS_SEPARATOR);
             operationHandler.processRequest(words[0], words[1], Integer.parseInt(words[2]));
         }
     }
