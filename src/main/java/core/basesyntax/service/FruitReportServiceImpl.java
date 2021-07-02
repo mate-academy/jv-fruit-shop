@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.OperationHandler;
 import core.basesyntax.service.validator.Validator;
-
 import java.util.List;
 
 public class FruitReportServiceImpl implements ShopReportService {

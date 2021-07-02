@@ -1,12 +1,16 @@
 package core.basesyntax.model;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
-
 import java.util.Map;
 
 public class OperationHandlerImpl implements OperationHandler {
-    FruitDao fruitDao = new FruitDaoImpl(); // TODO: 02.07.2021
+    private static final String WORDS_SEPARATOR = ",";
+    private static final String LINES_SEPARATOR = "\n";
+    private final FruitDao fruitDao;
+
+    public OperationHandlerImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
     public void processRequest(String operation, String fruitName, int fruitQuantity) {
@@ -26,6 +30,8 @@ public class OperationHandlerImpl implements OperationHandler {
                 int currentQuantity2 = fruitDao.getQuantity(fruitName);
                 fruitDao.put(fruitName, currentQuantity2 + fruitQuantity);
                 break;
+            default:
+                throw new RuntimeException("Invalid operation: " + operation);
         }
     }
 
@@ -35,9 +41,9 @@ public class OperationHandlerImpl implements OperationHandler {
         currentStorageState.append("fruit,quantity\n");
         for (Map.Entry<String, Integer> pair : fruitDao.getSet()) {
             currentStorageState.append(pair.getKey())
-                    .append(",")
+                    .append(WORDS_SEPARATOR)
                     .append(pair.getValue())
-                    .append("\n");
+                    .append(LINES_SEPARATOR);
         }
         return currentStorageState.toString();
     }

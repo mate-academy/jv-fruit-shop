@@ -1,4 +1,4 @@
-package core.basesyntax.service.fileHandler;
+package core.basesyntax.service.filehandler;
 
 import java.util.List;
 
