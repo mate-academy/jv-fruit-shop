@@ -8,10 +8,12 @@ public class PurchaseOperationHandler implements OperationHandler {
     public int apply(Transaction transaction) {
         int previousValue = Storage.storage.get(transaction.getFruit());
         int newValue = previousValue - transaction.getQuantity();
-        if (previousValue - transaction.getQuantity() < 0) {
+        if (newValue < 0) {
+            System.out.println("Don't have enough fruits, giving you all that I have - "
+            + previousValue + " " + transaction.getFruit().getName() + "s");
             newValue = 0;
         }
         Storage.storage.put(transaction.getFruit(), newValue);
-        return Storage.storage.get(transaction.getFruit());
+        return newValue;
     }
 }

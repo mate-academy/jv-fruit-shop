@@ -9,7 +9,7 @@ public class WriterImpl implements Writer {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.append(content);
         } catch (Exception e) {
-            throw new RuntimeException("Can't write to file");
+            throw new RuntimeException("Can't write to file " + filePath);
         }
     }
 }

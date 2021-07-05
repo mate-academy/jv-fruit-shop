@@ -9,6 +9,6 @@ public class AddOperationHandler implements OperationHandler {
         int previousValue = Storage.storage.get(transaction.getFruit());
         int newValue = previousValue + transaction.getQuantity();
         Storage.storage.put(transaction.getFruit(), newValue);
-        return Storage.storage.get(transaction.getFruit());
+        return newValue;
     }
 }

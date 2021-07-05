@@ -12,9 +12,8 @@ public class ReaderImpl implements Reader {
         try {
             content = Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file");
+            throw new RuntimeException("Can't read from file " + filePath);
         }
-        content.remove(0);
         return content;
     }
 }

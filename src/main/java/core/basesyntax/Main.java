@@ -29,6 +29,7 @@ public class Main {
         List<String> contentFromFile =
                 fileReader.readFromFile("src/main/resources/input.csv");
 
+        contentFromFile.remove(0);
         contentFromFile.stream()
                 .map(parser::parseLine)
                 .forEach(transaction ->
