@@ -15,7 +15,6 @@ import core.basesyntax.service.Parser;
 import core.basesyntax.service.ParserImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,8 +29,7 @@ public class FruitShop {
         handlers.put("p", new RemoveOperationHandler());
 
         FruitFileReader fileReader = new FruitFileReaderImpl();
-        List<String> lines = fileReader.read(
-                Path.of("src/main/java/core/basesyntax/resources/input.csv"));
+        List<String> lines = fileReader.read("src/main/java/core/basesyntax/resources/input.csv");
 
         Parser parser = new ParserImpl();
         List<Transaction> transactionList = new ArrayList<>();
@@ -50,7 +48,6 @@ public class FruitShop {
         String report = fruitShopService.createReport();
 
         FruitFileWriter fruitFileWriter = new FruitFIleWriterImpl();
-        fruitFileWriter.writeToFile(report,
-                Path.of("src/main/java/core/basesyntax/resources/output.csv"));
+        fruitFileWriter.writeToFile(report, "src/main/java/core/basesyntax/resources/output.csv");
     }
 }
