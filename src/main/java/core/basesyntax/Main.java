@@ -35,5 +35,4 @@ public class Main {
         ShopFileWriter writer = new ShopFileWriterImpl();
         writer.writeToFile(report,"src/main/java/resources/fruit_report.csv");
     }
-
 }

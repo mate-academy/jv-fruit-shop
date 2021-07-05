@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ShopFileReaderImpl implements ShopFileReader {
+    private static final String SEPARATOR = ",";
+
     @Override
     public List<Transaction> readFromFile(String fileName) {
         List<Transaction> dataFromFile = new ArrayList<>();
@@ -21,7 +23,7 @@ public class ShopFileReaderImpl implements ShopFileReader {
                         .stream()
                         .skip(1)
                         .filter(p -> new ValidatorImpl().isLineValid(p))
-                        .map(p -> p.split(","))
+                        .map(p -> p.split(SEPARATOR))
                         .map(p -> new Transaction(OperationType
                                 .getOperationType(p[0]), p[1], Integer.parseInt(p[2])))
                                 .collect(Collectors.toList());
@@ -30,7 +32,6 @@ public class ShopFileReaderImpl implements ShopFileReader {
                 throw new RuntimeException("Can`t read from file: " + fileName);
             }
         }
-
         return dataFromFile;
     }
 }
