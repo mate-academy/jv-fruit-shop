@@ -22,9 +22,9 @@ public class FruitFileReaderImpl implements FruitFileReader {
                 result.add(currentString);
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Cant found file" + file.getName());
+            throw new RuntimeException("Cant found file" + file.getName(), e);
         } catch (IOException e) {
-            throw new RuntimeException("Cant read data from file" + file.getName());
+            throw new RuntimeException("Cant read data from file" + file.getName(), e);
         }
         return result;
     }

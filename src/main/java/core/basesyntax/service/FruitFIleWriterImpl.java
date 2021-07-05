@@ -13,7 +13,7 @@ public class FruitFIleWriterImpl implements FruitFileWriter {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(data);
         } catch (IOException e) {
-            throw new RuntimeException("Cant write data to File" + filePath);
+            throw new RuntimeException("Cant write data to File" + file.getName(), e);
         }
     }
 }
