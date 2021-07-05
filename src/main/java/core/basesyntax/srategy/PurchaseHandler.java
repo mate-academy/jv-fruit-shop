@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 
-public class PurchaseHandler implements OperationHandler{
+public class PurchaseHandler implements OperationHandler {
     @Override
     public int apply(FruitDto fruitDto) {
         if (!Storage.storage.containsKey(new Fruit(fruitDto.getName()))) {

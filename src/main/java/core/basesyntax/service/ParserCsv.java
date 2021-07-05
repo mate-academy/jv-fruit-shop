@@ -18,8 +18,8 @@ public class ParserCsv implements Parser {
             throw new RuntimeException("Exception: wrong line");
         }
         String[] partsOfElement = element.split(",");
-        return new FruitDto(partsOfElement[INDEX_OPERATION]
-                ,partsOfElement[INDEX_NAME]
-                , Integer.parseInt(partsOfElement[INDEX_COUNT]));
+        return new FruitDto(partsOfElement[INDEX_OPERATION],
+                partsOfElement[INDEX_NAME],
+                Integer.parseInt(partsOfElement[INDEX_COUNT]));
     }
 }

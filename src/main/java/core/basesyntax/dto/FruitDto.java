@@ -57,10 +57,9 @@ public class FruitDto {
 
     @Override
     public String toString() {
-        return "FruitDto{" +
-            "operation='" + operation + '\'' +
-            ", name='" + name + '\'' +
-            ", count=" + count +
-            '}';
+        return "FruitDto{"
+            + "operation='" + operation + '\''
+            + ", name='" + name + '\''
+            + ", count=" + count + '}';
     }
 }

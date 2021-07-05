@@ -16,10 +16,10 @@ public class FruitReport {
     public String getReport() {
         StringBuilder stringBuilder = new StringBuilder(FILE_CSV_TITLE);
         storage.forEach((key, value) -> stringBuilder
-            .append(key.getName())
-            .append(CSV_SEPARATOR)
-            .append(value)
-            .append(System.lineSeparator()));
+                .append(key.getName())
+                .append(CSV_SEPARATOR)
+                .append(value)
+                .append(System.lineSeparator()));
         return stringBuilder.toString();
     }
 }
