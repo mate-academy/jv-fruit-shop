@@ -17,9 +17,6 @@ public class FruitReadFile implements ReadFile {
         } catch (IOException e) {
             throw new RuntimeException("Can't find file by path: " + filePath, e);
         }
-        if (linesFromFile.get(0).contains("type")) {
-            linesFromFile.remove(0);
-        }
         return linesFromFile;
     }
 }

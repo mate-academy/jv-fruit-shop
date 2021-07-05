@@ -23,6 +23,7 @@ public class Main {
 
         List<String> parsedLines = new FruitReadFile()
                 .readLines("src/main/resources/shop_operations.csv");
+        parsedLines.remove(0);
         List<TransferObject> listOfTransferObjects = new ArrayList<>();
         FruitParser fruitParser = new FruitParser();
         for (String line : parsedLines) {
