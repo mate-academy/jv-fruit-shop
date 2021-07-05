@@ -11,12 +11,13 @@ public class FruitReportImpl implements FruitReport {
     @Override
     public String getReport() {
         StringBuilder builder = new StringBuilder().append(TITLE).append(System.lineSeparator());
-        return Storage.storage.entrySet()
+        Storage.storage.entrySet()
                 .stream()
-                .map(entry -> builder
+                .forEach(entry -> builder
                         .append(entry.getKey().getName())
                         .append(CSV_SEPARATOR)
-                        .append(entry.getValue()))
-                .collect(Collectors.joining());
+                        .append(entry.getValue())
+                        .append(System.lineSeparator()));
+        return builder.toString();
     }
 }
