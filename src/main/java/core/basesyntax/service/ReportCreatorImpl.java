@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.storage.Storage;
 
 public class ReportCreatorImpl implements ReportCreator {
-    private static final String REPORT_STARTING = "fruit,quantity" + System.lineSeparator();
+    private static final String REPORT_STARTING = "fruit,quantity";
     private static final String COMMA = ",";
 
     @Override
