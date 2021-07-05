@@ -10,9 +10,5 @@ public class ValidatorImpl implements Validator {
         if (!string.matches("\\w,\\w+,\\d+")) {
             throw new RuntimeException("Wrong input format " + string);
         }
-        int value = Integer.parseInt(string.split(WORDS_SEPARATOR)[VALUE_INDEX]);
-        if (value < 0) {
-            throw new RuntimeException("Wrong input value " + string);
-        }
     }
 }

@@ -1,9 +1,25 @@
 package core.basesyntax.dto;
 
-public interface FruitDto {
-    String getName();
+public class FruitDto {
+    private final String name;
+    private final int quantity;
+    private final String operation;
 
-    int getQuantity();
+    public FruitDto(String operation, String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
+        this.operation = operation;
+    }
 
-    String getOperation();
+    public String getName() {
+        return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
 }

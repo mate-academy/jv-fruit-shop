@@ -7,7 +7,7 @@ import java.util.Set;
 public interface FruitDao {
     void put(Fruit fruit, int fruitQuantity);
 
-    Integer getQuantity(Fruit fruit);
+    Integer get(Fruit fruit);
 
     Set<Map.Entry<Fruit, Integer>> getAll();
 }

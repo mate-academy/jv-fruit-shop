@@ -2,7 +2,7 @@ package core.basesyntax.service.strategy;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dto.FruitDto;
-import core.basesyntax.model.FruitImpl;
+import core.basesyntax.model.Fruit;
 
 public class SetQuantityStrategy implements OperationStrategy {
     private final FruitDao fruitDao;
@@ -13,6 +13,6 @@ public class SetQuantityStrategy implements OperationStrategy {
 
     @Override
     public void process(FruitDto transferAction) {
-        fruitDao.put(new FruitImpl(transferAction.getName()), transferAction.getQuantity());
+        fruitDao.put(new Fruit(transferAction.getName()), transferAction.getQuantity());
     }
 }
