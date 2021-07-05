@@ -13,6 +13,7 @@ public class SubtractOperationHandler implements OperationHandler {
             throw new RuntimeException("Not enough product");
         }
         int newAmount = oldAmount - shopOperation.getQuantity();
+        Storage.storage.put(fruit, newAmount);
         return newAmount;
     }
 }
