@@ -1,24 +1,24 @@
 package core.basesyntax.dao;
 
-import java.util.HashMap;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 import java.util.Set;
 
 public class FruitDaoImpl implements FruitDao {
-    private final Map<String, Integer> fruitStorage = new HashMap<>();
 
     @Override
-    public void put(String fruitName, int fruitQuantity) {
-        fruitStorage.put(fruitName, fruitQuantity);
+    public void put(Fruit fruit, int fruitQuantity) {
+        Storage.fruitStorage.put(fruit, fruitQuantity);
     }
 
     @Override
-    public Integer getQuantity(String fruitName) {
-        return fruitStorage.get(fruitName);
+    public Integer getQuantity(Fruit fruit) {
+        return Storage.fruitStorage.get(fruit);
     }
 
     @Override
-    public Set<Map.Entry<String, Integer>> getSet() {
-        return fruitStorage.entrySet();
+    public Set<Map.Entry<Fruit, Integer>> getSet() {
+        return Storage.fruitStorage.entrySet();
     }
 }

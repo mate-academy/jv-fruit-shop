@@ -1,9 +1,9 @@
-package core.basesyntax.model.strategy;
+package core.basesyntax.service.strategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class StrategySupplier {
+public class StrategySupplierImpl implements StrategySupplier {
     private final Map<String, OperationStrategy> strategys = new HashMap<>();
 
     {

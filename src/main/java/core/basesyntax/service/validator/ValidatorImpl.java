@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 public class ValidatorImpl implements Validator {
     @Override
     public void validate(List<String> list) {
-        list.remove(0);
         for (String record : list) {
             record = record.trim();
             if (!Pattern.matches("\\w,\\w+,\\d+", record)) {

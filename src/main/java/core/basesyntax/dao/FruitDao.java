@@ -1,12 +1,13 @@
 package core.basesyntax.dao;
 
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 import java.util.Set;
 
 public interface FruitDao {
-    void put(String fruitName, int fruitQuantity);
+    void put(Fruit fruit, int fruitQuantity);
 
-    Integer getQuantity(String fruitName);
+    Integer getQuantity(Fruit fruit);
 
-    Set<Map.Entry<String, Integer>> getSet();
+    Set<Map.Entry<Fruit, Integer>> getSet();
 }

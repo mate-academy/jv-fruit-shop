@@ -2,13 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.model.OperationHandler;
-import core.basesyntax.model.OperationHandlerImpl;
-import core.basesyntax.model.strategy.StrategySupplier;
-import core.basesyntax.service.FruitReportServiceImpl;
-import core.basesyntax.service.ShopReportService;
+import core.basesyntax.dto.TransferAction;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.ParserImpl;
 import core.basesyntax.service.filehandler.FileHandler;
 import core.basesyntax.service.filehandler.FileHandlerImpl;
+import core.basesyntax.service.strategy.StrategySupplierImpl;
 import core.basesyntax.service.validator.Validator;
 import core.basesyntax.service.validator.ValidatorImpl;
 import java.util.List;
@@ -20,13 +21,15 @@ public class FruitShop {
     public static void main(String[] args) {
         FileHandler fileHandler = new FileHandlerImpl();
         Validator validator = new ValidatorImpl();
+        Parser parser = new ParserImpl(validator);
         FruitDao fruitDao = new FruitDaoImpl();
-        StrategySupplier supplier = new StrategySupplier();
-        OperationHandler operationHandler = new OperationHandlerImpl(supplier, fruitDao);
-        ShopReportService fruitReportService = new FruitReportServiceImpl(validator,
-                operationHandler);
+        StrategySupplierImpl supplier = new StrategySupplierImpl();
+        FruitService fruitService = new FruitServiceImpl(supplier, fruitDao);
 
         List<String> list = fileHandler.readFromFile(INPUT_DATA);
-        fileHandler.writeToFile(OUTPUT_DATA, fruitReportService.makeReport(list));
+        List<TransferAction> transferActions = parser.parseToDto(list);
+        fruitService.processRequest(transferActions);
+        String currentStorageState = fruitService.getCurrentStorageState();
+        fileHandler.writeToFile(OUTPUT_DATA, currentStorageState);
     }
 }
