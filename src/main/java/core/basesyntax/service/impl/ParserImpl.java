@@ -14,11 +14,16 @@ public class ParserImpl implements Parser {
     private static final String CSV_SEPARATOR = ",";
 
     @Override
-    public List<FruitDto> parseAndValidateLine(List<String> lines) {
-        return lines.stream().skip(SKIP_LINE).filter(i -> i.matches(CSV_FORMAT)).map(l -> {
-            String[] columns = l.split(CSV_SEPARATOR);
-            return new FruitDto(columns[ZERO_INDEX], columns[FIRST_INDEX],
-                    Integer.parseInt(columns[SECOND_INDEX]));
-        }).collect(Collectors.toList());
+    public List<FruitDto> parseAndValidateLines(List<String> lines) {
+        return lines.stream().skip(SKIP_LINE)
+                .filter(i -> i.matches(CSV_FORMAT))
+                .map(this::getFruitDto)
+                .collect(Collectors.toList());
+    }
+
+    private FruitDto getFruitDto(String line) {
+        String[] columns = line.split(CSV_SEPARATOR);
+        return new FruitDto(columns[ZERO_INDEX], columns[FIRST_INDEX],
+                Integer.parseInt(columns[SECOND_INDEX]));
     }
 }

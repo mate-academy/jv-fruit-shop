@@ -32,7 +32,7 @@ public class Main {
         List<String> infoFromFile = reader.readFromFile(PATH_TO_INPUT_FILE);
 
         Parser parser = new ParserImpl();
-        List<FruitDto> fruitDtos = parser.parseAndValidateLine(infoFromFile);
+        List<FruitDto> fruitDtos = parser.parseAndValidateLines(infoFromFile);
         for (FruitDto fruitDto : fruitDtos) {
             OperationsHandler handler = handlerOperations.get(fruitDto.getOperation());
             handler.apply(fruitDto);

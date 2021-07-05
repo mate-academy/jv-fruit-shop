@@ -7,10 +7,10 @@ import core.basesyntax.model.Fruit;
 public class SupplyOperationHandler implements OperationsHandler {
     @Override
     public int apply(FruitDto fruitDto) {
-        Fruit fruitName = new Fruit(fruitDto.getName());
-        int currentQuantity = Storage.storage.getOrDefault(fruitName, 0);
+        Fruit fruit = new Fruit(fruitDto.getName());
+        int currentQuantity = Storage.storage.getOrDefault(fruit, 0);
         int newQuantity = currentQuantity + fruitDto.getQuantity();
-        Storage.storage.put(fruitName, newQuantity);
+        Storage.storage.put(fruit, newQuantity);
         return newQuantity;
     }
 }

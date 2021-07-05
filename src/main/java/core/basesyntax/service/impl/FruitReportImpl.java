@@ -10,13 +10,13 @@ public class FruitReportImpl implements FruitReport {
 
     @Override
     public String getReport() {
-        return TITLE + System.lineSeparator()
-                + Storage.storage.entrySet()
+        StringBuilder builder = new StringBuilder().append(TITLE).append(System.lineSeparator());
+        return Storage.storage.entrySet()
                 .stream()
-                .map(entry -> entry.getKey().getName()
-                        + CSV_SEPARATOR
-                        + entry.getValue()
-                        + System.lineSeparator())
+                .map(entry -> builder
+                        .append(entry.getKey().getName())
+                        .append(CSV_SEPARATOR)
+                        .append(entry.getValue()))
                 .collect(Collectors.joining());
     }
 }
