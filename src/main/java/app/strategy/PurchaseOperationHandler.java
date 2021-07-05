@@ -12,7 +12,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         int newQuantity = currentQuantity - transactionDto.getQuantity();
         if (newQuantity < 0) {
             throw new RuntimeException("Fruit shop haven't this amount of : "
-                    + transactionDto.getName());
+                    + transactionDto.getName() + "s");
         }
         Storage.storage.put(fruit, newQuantity);
         return newQuantity;
