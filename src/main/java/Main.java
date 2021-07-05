@@ -22,7 +22,7 @@ public class Main {
         handlerMap.put(Operations.r, new SupplyOperationHandler());
 
         List<String> parsedLines = new FruitReadFile()
-                .readLines("src/main/resources/shop_operations.csv");
+                .readFromFile("src/main/resources/shop_operations.csv");
         parsedLines.remove(0);
         List<TransferObject> listOfTransferObjects = new ArrayList<>();
         FruitParser fruitParser = new FruitParser();
@@ -37,6 +37,6 @@ public class Main {
         FruitReportService reportService = new FruitReportService();
         String report = reportService.getReport();
         FruitWriteFile writeFile = new FruitWriteFile();
-        writeFile.writeLines("src/main/resources/report.csv", report);
+        writeFile.writeToFile("src/main/resources/report.csv", report);
     }
 }

@@ -26,14 +26,9 @@ public class TransferObject {
     @Override
     public String toString() {
         return "TransferObject{"
-                + "operation='"
-                + operation
-                + '\''
-                + ", name='"
-                + name
-                + '\''
-                + ", quantity="
-                + quantity
+                + "operation='" + operation + '\''
+                + ", name='" + name + '\''
+                + ", quantity=" + quantity
                 + '}';
     }
 }

@@ -11,7 +11,8 @@ public class FruitParser implements Parser {
     @Override
     public TransferObject parse(String line) {
         String[] lineParse = line.split(SEPARATOR);
-        if (!new FruitValidator().validate(lineParse)) {
+        FruitValidator fruitValidator = new FruitValidator();
+        if (!fruitValidator.validate(lineParse)) {
             throw new RuntimeException("Incorrect input");
         }
         return new TransferObject(lineParse[OPERATOR_INDEX],

@@ -1,5 +1,5 @@
 package service;
 
 public interface WriteFile {
-    boolean writeLines(String fileName, String report);
+    boolean writeToFile(String fileName, String report);
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class FruitReadFile implements ReadFile {
 
     @Override
-    public List<String> readLines(String fileName) {
+    public List<String> readFromFile(String fileName) {
         Path filePath = Paths.get(fileName);
         List<String> linesFromFile;
         try {
