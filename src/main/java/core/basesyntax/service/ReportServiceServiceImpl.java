@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.Map;
 
-public class FruitReportImpl implements FruitReport {
+public class ReportServiceServiceImpl implements ReportService {
     private static final String SEPARATOR = ",";
 
     @Override

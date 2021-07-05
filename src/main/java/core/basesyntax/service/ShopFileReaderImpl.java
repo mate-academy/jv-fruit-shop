@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dto.OperationType;
+import core.basesyntax.model.OperationType;
 import core.basesyntax.dto.Transaction;
 import java.io.File;
 import java.io.IOException;

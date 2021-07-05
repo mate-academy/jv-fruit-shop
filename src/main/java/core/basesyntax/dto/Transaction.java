@@ -1,5 +1,7 @@
 package core.basesyntax.dto;
 
+import core.basesyntax.model.OperationType;
+
 public class Transaction {
     private OperationType operationType;
     private String name;

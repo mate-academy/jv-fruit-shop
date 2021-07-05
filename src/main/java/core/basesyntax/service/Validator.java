@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface Validator {
-    boolean isLineValid(String s);
+    boolean isLineValid(String string);
 }

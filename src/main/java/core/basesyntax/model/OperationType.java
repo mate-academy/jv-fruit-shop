@@ -1,13 +1,10 @@
-package core.basesyntax.dto;
+package core.basesyntax.model;
 
 public enum OperationType {
-    BALANCE("b"),
-    SUPPLY("s"),
-    PURCHASE("p"),
-    RETURN("r");
-
-    OperationType(String symbol) {
-    }
+    BALANCE,
+    SUPPLY,
+    PURCHASE,
+    RETURN;
 
     public static OperationType getOperationType(String symbol) {
         switch (symbol) {
