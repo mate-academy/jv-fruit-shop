@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.dto.Transaction;
-import core.basesyntax.fruit.Fruit;
+import core.basesyntax.model.Transaction;
+import core.basesyntax.model.Fruit;
 
 public class AddOperationHandler implements OperationHandler {
     private static final int DEFAULT_VALUE = 0;

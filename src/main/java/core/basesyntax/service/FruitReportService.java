@@ -1,11 +1,11 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.fruit.Fruit;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 import java.util.Set;
 
-public class FruitReporterImpl implements FruitReporter {
+public class FruitReportService implements ReportService {
     private static final String COLUMNS = "fruit,quantity";
     private static final String COMMA_SEPARATOR = ",";
 

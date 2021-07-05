@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dto.Operations;
-import core.basesyntax.dto.Transaction;
-import core.basesyntax.fruit.Fruit;
+import core.basesyntax.model.Operation;
+import core.basesyntax.model.Transaction;
+import core.basesyntax.model.Fruit;
 
 public class ParserImpl implements Parser {
     private static final int OPERATION_INDEX = 0;
@@ -13,14 +13,12 @@ public class ParserImpl implements Parser {
 
     @Override
     public Transaction parseLine(String line) {
-        Transaction transaction;
         String[] splittedData = line.split(COMMA_SEPARATOR);
         if (validate(splittedData)) {
-            Operations operation = Operations.valueOf(splittedData[OPERATION_INDEX]);
+            Operation operation = Operation.valueOf(splittedData[OPERATION_INDEX]);
             Fruit fruit = new Fruit(splittedData[FRUIT_INDEX]);
             int quantity = Integer.parseInt(splittedData[QUANTITY_INDEX]);
-            transaction = new Transaction(operation, fruit, quantity);
-            return transaction;
+            return new Transaction(operation, fruit, quantity);
         }
         throw new RuntimeException("Wrong input data! " + line);
     }

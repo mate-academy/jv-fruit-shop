@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.dto.Transaction;
-import core.basesyntax.fruit.Fruit;
+import core.basesyntax.model.Transaction;
+import core.basesyntax.model.Fruit;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private static final int DEFAULT_VALUE = 0;
@@ -16,6 +16,6 @@ public class PurchaseOperationHandler implements OperationHandler {
             throw new RuntimeException("There is no enough " + fruit.getName() + "s");
         }
         Storage.storage.put(transaction.getFruit(), remainingQuantity);
-        return Storage.storage.get(transaction.getFruit());
+        return transaction.getQuantity();
     }
 }

@@ -1,13 +1,13 @@
 package core.basesyntax;
 
-import core.basesyntax.dto.Operations;
-import core.basesyntax.dto.Transaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileReaderImpl;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FileWriterImpl;
-import core.basesyntax.service.FruitReporter;
-import core.basesyntax.service.FruitReporterImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.FruitReportService;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ParserImpl;
 import core.basesyntax.strategy.AddOperationHandler;
@@ -21,34 +21,29 @@ import java.util.Map;
 
 public class Main {
     private static final String TYPE = "type";
-    private static final String INPUT_FILE_NAME = "src/main/java/core/basesyntax/input.csv";
-    private static final String OUTPUT_FILE_NAME = "src/main/java/core/basesyntax/output.csv";
+    private static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_NAME = "src/main/resources/output.csv";
     private static final int OPERATION_INDEX = 0;
 
     public static void main(String[] args) {
-        Map<Operations, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Operations.p, new PurchaseOperationHandler());
-        operationHandlers.put(Operations.s, new AddOperationHandler());
-        operationHandlers.put(Operations.b, new BalanceOperationHandler());
-        operationHandlers.put(Operations.r, new AddOperationHandler());
+        Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(Operation.p, new PurchaseOperationHandler());
+        operationHandlers.put(Operation.s, new AddOperationHandler());
+        operationHandlers.put(Operation.b, new BalanceOperationHandler());
+        operationHandlers.put(Operation.r, new AddOperationHandler());
 
         FileReader fileReader = new FileReaderImpl();
         List<String> linesFromFile = fileReader.readFromFile(INPUT_FILE_NAME);
 
         List<Transaction> transactions = new ArrayList<>();
         Parser parser = new ParserImpl();
-        for (String line : linesFromFile) {
-            if (line.split(",")[OPERATION_INDEX].equals(TYPE)) {
-                continue;
-            }
-            transactions.add(parser.parseLine(line));
-        }
-        for (Transaction transaction : transactions) {
-            OperationHandler handler = operationHandlers.get(transaction.getOperation());
-            handler.apply(transaction);
+        for (int i = 1; i < linesFromFile.size(); i++) {
+            transactions.add(parser.parseLine(linesFromFile.get(i)));
+            OperationHandler handler = operationHandlers.get(transactions.get(i-1).getOperation());
+            handler.apply(transactions.get(i-1));
         }
 
-        FruitReporter fruitReporter = new FruitReporterImpl();
+        ReportService fruitReporter = new FruitReportService();
         String report = fruitReporter.makeReport();
 
         FileWriter fileWriter = new FileWriterImpl();

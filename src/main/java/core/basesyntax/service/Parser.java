@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dto.Transaction;
+import core.basesyntax.model.Transaction;
 
 public interface Parser {
     Transaction parseLine(String line);

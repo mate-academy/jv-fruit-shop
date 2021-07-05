@@ -1,19 +1,17 @@
-package core.basesyntax.dto;
-
-import core.basesyntax.fruit.Fruit;
+package core.basesyntax.model;
 
 public class Transaction {
-    private final Operations operation;
+    private final Operation operation;
     private final Fruit fruit;
     private int quantity;
 
-    public Transaction(Operations operation, Fruit fruit, int quantity) {
+    public Transaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public Operations getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
