@@ -6,17 +6,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class FruitReadFile implements ReadFile {
-
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readFromFile(String fileName) {
         Path filePath = Paths.get(fileName);
-        List<String> linesFromFile;
         try {
-            linesFromFile = Files.readAllLines(filePath);
+            return Files.readAllLines(filePath);
         } catch (IOException e) {
             throw new RuntimeException("Can't find file by path: " + filePath, e);
         }
-        return linesFromFile;
     }
 }

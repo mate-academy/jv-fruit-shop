@@ -11,11 +11,11 @@ public class FruitReportService implements ReportService {
     @Override
     public String getReport() {
         StringBuilder reportStringBuilder = new StringBuilder().append(HEADER);
-        for (Map.Entry<Fruit, Integer> map : Storage.getStorage().entrySet()) {
+        for (Map.Entry<Fruit, Integer> entry : Storage.getStorage().entrySet()) {
             reportStringBuilder.append(System.lineSeparator())
-                    .append(map.getKey().getFruitName())
+                    .append(entry.getKey().getFruitName())
                     .append(SEPARATOR)
-                    .append(map.getValue());
+                    .append(entry.getValue());
         }
         return reportStringBuilder.toString();
     }

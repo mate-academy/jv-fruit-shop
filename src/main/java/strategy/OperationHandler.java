@@ -1,7 +1,7 @@
 package strategy;
 
-import dto.TransferObject;
+import dto.Transaction;
 
 public interface OperationHandler {
-    int perform(TransferObject transferObject);
+    int perform(Transaction transferObject);
 }

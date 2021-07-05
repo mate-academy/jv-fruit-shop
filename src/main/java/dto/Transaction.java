@@ -1,11 +1,11 @@
 package dto;
 
-public class TransferObject {
+public class Transaction {
     private String operation;
     private String name;
     private int quantity;
 
-    public TransferObject(String operation, String name, int quantity) {
+    public Transaction(String operation, String name, int quantity) {
         this.operation = operation;
         this.name = name;
         this.quantity = quantity;

@@ -1,13 +1,16 @@
-import dto.TransferObject;
-import java.util.ArrayList;
+import dto.Transaction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import service.FileReaderImpl;
+import service.FileWriter;
+import service.FileWriterImpl;
 import service.FruitParser;
-import service.FruitReadFile;
 import service.FruitReportService;
-import service.FruitWriteFile;
-import service.Operations;
+import service.FruitValidator;
+import service.Parser;
+import service.ReportService;
+import service.Validator;
 import strategy.BalanceOperationHandler;
 import strategy.OperationHandler;
 import strategy.PurchaseOperationHandler;
@@ -15,28 +18,25 @@ import strategy.SupplyOperationHandler;
 
 public class Main {
     public static void main(String[] args) {
-        Map<Operations, OperationHandler> handlerMap = new HashMap<>();
-        handlerMap.put(Operations.b, new BalanceOperationHandler());
-        handlerMap.put(Operations.s, new SupplyOperationHandler());
-        handlerMap.put(Operations.p, new PurchaseOperationHandler());
-        handlerMap.put(Operations.r, new SupplyOperationHandler());
-
-        List<String> parsedLines = new FruitReadFile()
+        Map<String, OperationHandler> handlerMap = new HashMap<>();
+        handlerMap.put("b", new BalanceOperationHandler());
+        handlerMap.put("s", new SupplyOperationHandler());
+        handlerMap.put("p", new PurchaseOperationHandler());
+        handlerMap.put("r", new SupplyOperationHandler());
+        List<String> parsedLines = new FileReaderImpl()
                 .readFromFile("src/main/resources/shop_operations.csv");
         parsedLines.remove(0);
-        List<TransferObject> listOfTransferObjects = new ArrayList<>();
-        FruitParser fruitParser = new FruitParser();
+        Validator fruitValidator = new FruitValidator();
+        Parser fruitParser = new FruitParser(fruitValidator);
         for (String line : parsedLines) {
-            listOfTransferObjects.add(fruitParser.parse(line));
-        }
-        for (TransferObject transferObject : listOfTransferObjects) {
+            Transaction transaction = fruitParser.parse(line);
             OperationHandler handler =
-                    handlerMap.get(Operations.valueOf(transferObject.getOperation()));
-            handler.perform(transferObject);
+                    handlerMap.get(transaction.getOperation());
+            handler.perform(transaction);
         }
-        FruitReportService reportService = new FruitReportService();
+        ReportService reportService = new FruitReportService();
         String report = reportService.getReport();
-        FruitWriteFile writeFile = new FruitWriteFile();
+        FileWriter writeFile = new FileWriterImpl();
         writeFile.writeToFile("src/main/resources/report.csv", report);
     }
 }

@@ -1,7 +1,7 @@
 package service;
 
-import dto.TransferObject;
+import dto.Transaction;
 
 public interface Parser {
-    TransferObject parse(String line);
+    Transaction parse(String line);
 }
