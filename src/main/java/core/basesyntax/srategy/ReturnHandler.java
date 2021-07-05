@@ -7,11 +7,13 @@ import core.basesyntax.model.Fruit;
 public class ReturnHandler implements OperationHandler {
     @Override
     public int apply(FruitDto fruitDto) {
-        if (!Storage.storage.containsKey(new Fruit(fruitDto.getName()))) {
+        Fruit fruit = new Fruit(fruitDto.getName());
+        if (!Storage.storage.containsKey(fruit)) {
             throw new RuntimeException(fruitDto.getName() + "isn't exist");
         }
-        int count = Storage.storage.get(new Fruit(fruitDto.getName()));
-        Storage.storage.put(new Fruit(fruitDto.getName()), count + fruitDto.getCount());
-        return 0;
+        int count = Storage.storage.get(fruit);
+        int result = count + fruitDto.getCount();
+        Storage.storage.put(fruit, result);
+        return result;
     }
 }

@@ -7,11 +7,13 @@ import core.basesyntax.model.Fruit;
 public class SupplyHandler implements OperationHandler {
     @Override
     public int apply(FruitDto fruitDto) {
-        if (!Storage.storage.containsKey(new Fruit(fruitDto.getName()))) {
-            throw new RuntimeException(fruitDto.getName() + "isn't exist");
+        Fruit fruit = new Fruit(fruitDto.getName());
+        if (!Storage.storage.containsKey(fruit)) {
+            throw new RuntimeException(fruit.getName() + "isn't exist");
         }
-        int count = Storage.storage.get(new Fruit(fruitDto.getName()));
-        Storage.storage.put(new Fruit(fruitDto.getName()), fruitDto.getCount() + count);
-        return count + fruitDto.getCount();
+        int count = Storage.storage.get(fruit);
+        int result = fruitDto.getCount() + count;
+        Storage.storage.put(fruit, result);
+        return result;
     }
 }

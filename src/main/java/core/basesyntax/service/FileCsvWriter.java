@@ -7,14 +7,14 @@ import java.nio.file.Path;
 
 public class FileCsvWriter implements Writer {
     @Override
-    public boolean write(String report, String path) {
+    public boolean writeToFile(String report, String filePath) {
         try {
-            if (!Files.exists(Path.of(path))) {
-                Files.createFile(Path.of(path));
+            if (!Files.exists(Path.of(filePath))) {
+                Files.createFile(Path.of(filePath));
             }
-            Files.write(Path.of(path),report.getBytes(StandardCharsets.UTF_8));
+            Files.write(Path.of(filePath),report.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
-            throw new RuntimeException("There is a problem with saving", e);
+            throw new RuntimeException("There is a problem with saving" + filePath, e);
         }
         return true;
     }

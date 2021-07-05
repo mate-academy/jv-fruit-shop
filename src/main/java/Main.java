@@ -1,4 +1,3 @@
-import core.basesyntax.dto.FruitDto;
 import core.basesyntax.service.FileCsvReader;
 import core.basesyntax.service.FileCsvWriter;
 import core.basesyntax.service.FruitReport;
@@ -16,34 +15,32 @@ import core.basesyntax.srategy.SupplyHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Main {
     private static final String STORAGE_PATH = "src/main/resources/storage.csv";
     private static final String PATH_OUTPUT_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        Map<String, OperationHandler> handlerOperations = new HashMap<>();
-        handlerOperations.put("b", new BalanceHandler());
-        handlerOperations.put("p", new PurchaseHandler());
-        handlerOperations.put("s", new SupplyHandler());
-        handlerOperations.put("r", new ReturnHandler());
+        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put("b", new BalanceHandler());
+        operationHandlerMap.put("p", new PurchaseHandler());
+        operationHandlerMap.put("s", new SupplyHandler());
+        operationHandlerMap.put("r", new ReturnHandler());
 
         Reader reader = new FileCsvReader();
-        List<String> infoFromFile = reader.read(STORAGE_PATH);
+        List<String> infoFromFile = reader.readFromFile(STORAGE_PATH);
 
         Validator validator = new ValidatorCsv();
         Parser parser = new ParserCsv(validator);
-        List<FruitDto> fruitDtos = infoFromFile.stream()
-                .map(parser::parse)
-                .collect(Collectors.toList());
-        OperationHandler handler;
-        for (FruitDto fruitDto : fruitDtos) {
-            handler = handlerOperations.get(fruitDto.getOperation());
-            handler.apply(fruitDto);
-        }
+
+        infoFromFile.stream()
+                .map(parser::parseToFruitDto)
+                .forEach(fruitDto -> operationHandlerMap
+                    .get(fruitDto.getOperation())
+                    .apply(fruitDto)
+                );
         FruitReport report = new FruitReport();
         Writer writer = new FileCsvWriter();
-        writer.write(report.getReport(), PATH_OUTPUT_FILE);
+        writer.writeToFile(report.getReport(), PATH_OUTPUT_FILE);
     }
 }

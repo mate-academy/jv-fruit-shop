@@ -7,14 +7,16 @@ import core.basesyntax.model.Fruit;
 public class PurchaseHandler implements OperationHandler {
     @Override
     public int apply(FruitDto fruitDto) {
-        if (!Storage.storage.containsKey(new Fruit(fruitDto.getName()))) {
-            throw new RuntimeException(fruitDto.getName() + "isn't exist");
+        Fruit fruit = new Fruit(fruitDto.getName());
+        if (!Storage.storage.containsKey(fruit)) {
+            throw new RuntimeException(fruit.getName() + "isn't exist");
         }
-        int count = Storage.storage.get(new Fruit(fruitDto.getName()));
+        int count = Storage.storage.get(fruit);
         if (count - fruitDto.getCount() < 0) {
-            throw new RuntimeException(fruitDto.getName() + "is not enough");
+            throw new RuntimeException(fruit.getName() + "is not enough");
         }
-        Storage.storage.put(new Fruit(fruitDto.getName()),count - fruitDto.getCount());
-        return count - fruitDto.getCount();
+        int result = count - fruitDto.getCount();
+        Storage.storage.put(fruit,result);
+        return result;
     }
 }
