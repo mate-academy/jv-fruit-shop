@@ -1,8 +1,7 @@
 package core.basesyntax.service.strategy;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dto.TransferAction;
+import core.basesyntax.dto.FruitDto;
 
 public interface OperationStrategy {
-    void process(FruitDao fruitDao, TransferAction transferAction);
+    void process(FruitDto transferAction);
 }

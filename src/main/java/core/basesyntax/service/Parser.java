@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dto.TransferAction;
+import core.basesyntax.dto.FruitDto;
 import java.util.List;
 
 public interface Parser {
-    List<TransferAction> parseToDto(List<String> inputData);
+    List<FruitDto> parseToDto(List<String> inputData);
 }

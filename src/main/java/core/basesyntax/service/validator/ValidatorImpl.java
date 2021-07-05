@@ -1,20 +1,18 @@
 package core.basesyntax.service.validator;
 
-import java.util.List;
-import java.util.regex.Pattern;
-
 public class ValidatorImpl implements Validator {
+    private static final String WORDS_SEPARATOR = ",";
+    private static final int VALUE_INDEX = 2;
+
     @Override
-    public void validate(List<String> list) {
-        for (String record : list) {
-            record = record.trim();
-            if (!Pattern.matches("\\w,\\w+,\\d+", record)) {
-                throw new RuntimeException("Wrong input format " + record);
-            }
-            int value = Integer.parseInt(record.split(",")[2]);
-            if (value < 0) {
-                throw new RuntimeException("Wrong input value " + record);
-            }
+    public void validate(String string) {
+        string = string.trim();
+        if (!string.matches("\\w,\\w+,\\d+")) {
+            throw new RuntimeException("Wrong input format " + string);
+        }
+        int value = Integer.parseInt(string.split(WORDS_SEPARATOR)[VALUE_INDEX]);
+        if (value < 0) {
+            throw new RuntimeException("Wrong input value " + string);
         }
     }
 }

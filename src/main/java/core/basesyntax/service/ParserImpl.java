@@ -1,10 +1,10 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dto.TransferAction;
-import core.basesyntax.dto.TransferActionImpl;
+import core.basesyntax.dto.FruitDto;
+import core.basesyntax.dto.FruitDtoImpl;
 import core.basesyntax.service.validator.Validator;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ParserImpl implements Parser {
     private static final String WORDS_SEPARATOR = ",";
@@ -14,15 +14,11 @@ public class ParserImpl implements Parser {
         this.validator = validator;
     }
 
-    public List<TransferAction> parseToDto(List<String> inputData) {
-        inputData.remove(0);
-        validator.validate(inputData);
-        List<TransferAction> transferActions = new ArrayList<>();
-        for (String record : inputData) {
-            String[] words = record.trim().split(WORDS_SEPARATOR);
-            transferActions.add(new TransferActionImpl(words[0],
-                    words[1], Integer.parseInt(words[2])));
-        }
-        return transferActions;
+    public List<FruitDto> parseToDto(List<String> inputData) {
+        return inputData.stream().skip(1).peek(validator::validate).map(s -> {
+            String[] words = s.split(WORDS_SEPARATOR);
+            return new FruitDtoImpl(words[0].trim(),
+                    words[1], Integer.parseInt(words[2]));
+        }).collect(Collectors.toList());
     }
 }

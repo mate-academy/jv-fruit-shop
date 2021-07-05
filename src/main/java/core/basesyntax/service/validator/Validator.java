@@ -1,7 +1,5 @@
 package core.basesyntax.service.validator;
 
-import java.util.List;
-
 public interface Validator {
-    void validate(List<String> list);
+    void validate(String list);
 }

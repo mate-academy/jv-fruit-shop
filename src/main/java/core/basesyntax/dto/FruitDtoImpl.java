@@ -1,11 +1,11 @@
 package core.basesyntax.dto;
 
-public class TransferActionImpl implements TransferAction {
+public class FruitDtoImpl implements FruitDto {
     private final String name;
     private final int quantity;
     private final String operation;
 
-    public TransferActionImpl(String operation, String name, int quantity) {
+    public FruitDtoImpl(String operation, String name, int quantity) {
         this.name = name;
         this.quantity = quantity;
         this.operation = operation;

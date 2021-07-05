@@ -1,33 +1,33 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dto.TransferAction;
+import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.strategy.OperationStrategy;
-import core.basesyntax.service.strategy.StrategySupplierImpl;
+import core.basesyntax.service.strategy.StrategySupplier;
 import java.util.List;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
     private static final String WORDS_SEPARATOR = ",";
     private static final String LINES_SEPARATOR = "\n";
-    private final StrategySupplierImpl supplier;
+    private final StrategySupplier supplier;
     private final FruitDao fruitDao;
 
-    public FruitServiceImpl(StrategySupplierImpl supplier, FruitDao fruitDao) {
+    public FruitServiceImpl(StrategySupplier supplier, FruitDao fruitDao) {
         this.supplier = supplier;
         this.fruitDao = fruitDao;
     }
 
     @Override
-    public void processRequest(List<TransferAction> transferActions) {
+    public void processRequests(List<FruitDto> transferActions) {
         OperationStrategy operationStrategy;
-        for (TransferAction transferAction : transferActions) {
+        for (FruitDto transferAction : transferActions) {
             operationStrategy = supplier.getStrategy(transferAction.getOperation());
             if (operationStrategy == null) {
-                throw new RuntimeException("Invalid operation");
+                throw new RuntimeException("Invalid operation" + transferAction.getOperation());
             }
-            operationStrategy.process(fruitDao, transferAction);
+            operationStrategy.process(transferAction);
         }
     }
 
@@ -35,7 +35,7 @@ public class FruitServiceImpl implements FruitService {
     public String getCurrentStorageState() {
         StringBuilder currentStorageState = new StringBuilder();
         currentStorageState.append("fruit,quantity\n");
-        for (Map.Entry<Fruit, Integer> pair : fruitDao.getSet()) {
+        for (Map.Entry<Fruit, Integer> pair : fruitDao.getAll()) {
             currentStorageState.append(pair.getKey().getName())
                     .append(WORDS_SEPARATOR)
                     .append(pair.getValue())

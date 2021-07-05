@@ -1,10 +1,10 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dto.TransferAction;
+import core.basesyntax.dto.FruitDto;
 import java.util.List;
 
 public interface FruitService {
-    void processRequest(List<TransferAction> transferActions);
+    void processRequests(List<FruitDto> transferActions);
 
     String getCurrentStorageState();
 }
