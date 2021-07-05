@@ -1,12 +1,20 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.Transaction;
-import core.basesyntax.service.*;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileReaderServiceImpl;
+import core.basesyntax.service.FileValidator;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.FileWriterServiceImpl;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.ParserImpl;
+import core.basesyntax.service.Report;
+import core.basesyntax.service.ReportImpl;
+import core.basesyntax.service.Validator;
+import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
-import core.basesyntax.strategy.AddOperationHandler;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;

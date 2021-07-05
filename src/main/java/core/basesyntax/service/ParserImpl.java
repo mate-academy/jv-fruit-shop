@@ -11,6 +11,7 @@ public class ParserImpl implements Parser {
     @Override
     public Transaction parse(String line) {
         String[] array = line.split(COMMA);
-        return new Transaction(array[ZERO_INDEX], array[FIRST_INDEX], Integer.parseInt(array[SECOND_INDEX]));
+        return new Transaction(array[ZERO_INDEX],
+                array[FIRST_INDEX], Integer.parseInt(array[SECOND_INDEX]));
     }
 }
