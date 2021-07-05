@@ -12,6 +12,5 @@ public class FileWriterImpl implements FileWriter {
         } catch (IOException e) {
             throw new RuntimeException("Couldn't write to file " + fileName, e);
         }
-
     }
 }

@@ -33,7 +33,7 @@ public class Main {
         operationHandlers.put(Operations.r, new AddOperationHandler());
 
         FileReader fileReader = new FileReaderImpl();
-        List<String> linesFromFile = fileReader.readLines(INPUT_FILE_NAME);
+        List<String> linesFromFile = fileReader.readFromFile(INPUT_FILE_NAME);
 
         List<Transaction> transactions = new ArrayList<>();
         Parser parser = new ParserImpl();
