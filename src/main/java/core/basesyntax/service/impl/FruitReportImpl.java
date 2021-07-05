@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitReport;
-
 import java.util.stream.Collectors;
 
 public class FruitReportImpl implements FruitReport {

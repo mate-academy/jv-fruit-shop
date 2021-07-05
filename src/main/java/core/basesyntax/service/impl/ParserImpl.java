@@ -2,12 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.service.Parser;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ParserImpl implements Parser {
-    private static final String CSV_FORMAT = "[b,s,r,p],[a-zA-Z]+,[0-9]+";
+    private static final String CSV_FORMAT = "[bsrp],[a-zA-Z]+,[0-9]+";
     private static final int ZERO_INDEX = 0;
     private static final int SKIP_LINE = 1;
     private static final int FIRST_INDEX = 1;

@@ -13,7 +13,6 @@ import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationsHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,7 @@ public class Main {
         handlerOperations.put("r", new SupplyOperationHandler());
 
         FileReader reader = new FileReaderImpl();
-        List<String> infoFromFile = reader.fruitsList(PATH_TO_INPUT_FILE);
+        List<String> infoFromFile = reader.readFromFile(PATH_TO_INPUT_FILE);
 
         Parser parser = new ParserImpl();
         List<FruitDto> fruitDtos = parser.parseAndValidateLine(infoFromFile);
