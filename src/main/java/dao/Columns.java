@@ -13,7 +13,7 @@ public class Columns {
     public static String getAllColumns(int from) {
         int counter = 0;
         StringBuilder builder = new StringBuilder();
-        for (String string : columns.keySet()) {
+        for (String string : columns.values().toArray(new String[0])) {
             if (from > counter) {
                 counter++;
                 continue;

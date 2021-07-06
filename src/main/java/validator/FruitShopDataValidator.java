@@ -2,22 +2,27 @@ package validator;
 
 import dao.Columns;
 import java.util.List;
-import operation.OperationTypes;
+import strategy.OperationTypes;
 
 public class FruitShopDataValidator implements Validator<List<String>> {
-    private String[] partsOfLine;
+    private static final Integer TYPE_INDEX = 0;
+    private static final Integer FRUIT_INDEX = 1;
+    private static final Integer QUANTITY_INDEX = 2;
+    private static final String SPLITERATOR = ",";
+    private static final Integer CSV_DATA_PARTS = 3;
 
     @Override
     public boolean validate(List<String> data) {
+        String[] partsOfLine;
         for (String string : data) {
-            partsOfLine = string.split(",");
-            if (Columns.inColumns(partsOfLine[0])) {
+            partsOfLine = string.split(SPLITERATOR);
+            if (Columns.inColumns(partsOfLine[TYPE_INDEX])) {
                 continue;
             }
-            if (partsOfLine.length != 3
-                    || !(OperationTypes.isOperationExist(partsOfLine[0]))
-                    || !(new StringIsNumber().validate(partsOfLine[2])
-                    || partsOfLine[2].charAt(0) == '-')) {
+            if (partsOfLine.length != CSV_DATA_PARTS
+                    || !(OperationTypes.isOperationExist(partsOfLine[TYPE_INDEX]))
+                    || !(new StringIsNumber().validate(partsOfLine[QUANTITY_INDEX])
+                    || partsOfLine[QUANTITY_INDEX].charAt(0) == '-')) {
                 return false;
             }
         }
