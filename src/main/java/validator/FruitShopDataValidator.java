@@ -1,6 +1,5 @@
 package validator;
 
-import dao.Columns;
 import java.util.List;
 import strategy.OperationTypes;
 
@@ -14,9 +13,11 @@ public class FruitShopDataValidator implements Validator<List<String>> {
     @Override
     public boolean validate(List<String> data) {
         String[] partsOfLine;
+        boolean firstTime = true;
         for (String string : data) {
             partsOfLine = string.split(SPLITERATOR);
-            if (Columns.inColumns(partsOfLine[TYPE_INDEX])) {
+            if (firstTime) {
+                firstTime = false;
                 continue;
             }
             if (partsOfLine.length != CSV_DATA_PARTS

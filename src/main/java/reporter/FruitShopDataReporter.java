@@ -1,6 +1,5 @@
 package reporter;
 
-import dao.Columns;
 import dao.FruitsDao;
 import dao.GenericDao;
 import exceptions.InvalidDataException;
@@ -8,8 +7,8 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 import reader.FileReaderImpl;
+import service.DaoUpdater;
 import service.ProcessFruitsMapToString;
-import strategy.OperationTypes;
 import validator.FruitShopDataValidator;
 import validator.Validator;
 import writer.WriterToFileImpl;
@@ -23,16 +22,8 @@ public class FruitShopDataReporter implements Reporter<Path> {
         List<String> data = new FileReaderImpl().read(path);
         Validator<List<String>> dataValidator = new FruitShopDataValidator();
         fruitBalanceService = new FruitsDao();
-        String[] splittedLine;
         if (dataValidator.validate(data)) {
-            for (String line : data) {
-                splittedLine = line.split(",");
-                if (Columns.inColumns(splittedLine[0])) {
-                    continue;
-                }
-                OperationTypes.getOperationHandler(splittedLine[0])
-                        .changeBalance(splittedLine[1], Integer.parseInt(splittedLine[2]));
-            }
+            DaoUpdater.updateData(data);
             File file = new File("./src/main/resources/FruitShopReport.txt");
             new WriterToFileImpl().write(
                     file,
