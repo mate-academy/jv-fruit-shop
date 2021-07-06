@@ -21,6 +21,8 @@ public class Main {
     private static final String OPERATION_SUPPLY = "s";
     private static final String OPERATION_PURCHASE = "p";
     private static final String OPERATION_RETURN = "r";
+    private static final String FILE_NAME_FRUIT_STATISTIC = "src/main/resources/fruit_file.csv";
+    private static final String FILE_NAME_FRUIT_REPORT = "src/main/resources/fruit_report_from_";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> handlers = new HashMap<>();
@@ -30,7 +32,7 @@ public class Main {
         handlers.put(OPERATION_RETURN, new AddOperationHandler());
 
         List<String> linesFromFile = new FileReaderImpl()
-                .read("src/main/resources/fruit_file.csv");
+                .read(FILE_NAME_FRUIT_STATISTIC);
         Parser parser = new ParserImpl(new FruitValidator());
         linesFromFile.stream()
                 .skip(1)
@@ -41,6 +43,6 @@ public class Main {
 
         String report = new FruitServiceImpl().createReport();
         new FileWriterImpl()
-                .write("src/main/resources/fruit_report_from_" + LocalDate.now(), report);
+                .write(FILE_NAME_FRUIT_REPORT + LocalDate.now(), report);
     }
 }
