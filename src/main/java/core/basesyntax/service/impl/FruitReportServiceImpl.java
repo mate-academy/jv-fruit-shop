@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.FruitReport;
+import core.basesyntax.service.FruitReportService;
 
-public class FruitReportImpl implements FruitReport {
+public class FruitReportServiceImpl implements FruitReportService {
     private static final String TITLE = "fruit,quantity";
     private static final String SEPARATOR = ",";
 

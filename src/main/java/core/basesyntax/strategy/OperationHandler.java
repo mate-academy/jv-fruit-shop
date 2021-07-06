@@ -2,6 +2,6 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.dto.FruitDto;
 
-public interface OperationsHandler {
+public interface OperationHandler {
     int apply(FruitDto fruitDto);
 }

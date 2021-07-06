@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 
-public class SupplyOperationHandler implements OperationsHandler {
+public class SupplyOperationHandler implements OperationHandler {
     @Override
     public int apply(FruitDto fruitDto) {
         Fruit fruitName = new Fruit(fruitDto.getName());
