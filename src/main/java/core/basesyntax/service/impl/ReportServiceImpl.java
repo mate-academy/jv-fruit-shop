@@ -1,10 +1,11 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
-public class ReportServiceServiceImpl implements ReportService {
+public class ReportServiceImpl implements ReportService {
     private static final String SEPARATOR = ",";
 
     @Override

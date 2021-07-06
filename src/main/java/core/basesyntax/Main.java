@@ -1,15 +1,18 @@
 package core.basesyntax;
 
-import core.basesyntax.model.OperationType;
 import core.basesyntax.dto.Transaction;
-import core.basesyntax.service.ReportService;
-import core.basesyntax.service.ReportServiceServiceImpl;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.FruitServiceImpl;
-import core.basesyntax.service.ShopFileReader;
-import core.basesyntax.service.ShopFileReaderImpl;
+import core.basesyntax.model.OperationType;
+import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.FileWriterImpl;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ParserImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.ValidatorImpl;
 import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
@@ -25,12 +28,13 @@ public class Main {
         handlerMap.put(OperationType.PURCHASE, new PurchaseOperationHandler());
         handlerMap.put(OperationType.RETURN, new AddOperationHandler());
         handlerMap.put(OperationType.SUPPLY, new AddOperationHandler());
-        ShopFileReader reader = new ShopFileReaderImpl();
-        List<Transaction> transactionList = reader
-                .readFromFile("src/main/resources/input_report.csv");
-        FruitService fruitService = new FruitServiceImpl();
-        fruitService.addTransaction(handlerMap,transactionList);
-        ReportService reportService = new ReportServiceServiceImpl();
+        FileReader reader = new FileReaderImpl();
+        Parser parser = new ParserImpl(new ValidatorImpl());
+        List<Transaction> transactionList = parser.parseLine(reader
+                .readFromFile("src/main/resources/input_report.csv"));
+        FruitService fruitService = new FruitServiceImpl(handlerMap);
+        fruitService.applyOperations(transactionList);
+        ReportService reportService = new ReportServiceImpl();
         String report = reportService.getReport();
         FileWriter writer = new FileWriterImpl();
         writer.writeToFile(report,"src/main/resources/fruit_report.csv");

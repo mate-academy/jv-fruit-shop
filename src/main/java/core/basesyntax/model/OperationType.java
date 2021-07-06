@@ -1,28 +1,23 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public enum OperationType {
-    BALANCE,
-    SUPPLY,
-    PURCHASE,
-    RETURN;
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
+
+    private String value;
+
+    OperationType(String value) {
+        this.value = value;
+    }
 
     public static OperationType getOperationType(String symbol) {
-        switch (symbol) {
-            case "b": {
-                return BALANCE;
-            }
-            case "s": {
-                return SUPPLY;
-            }
-            case "p": {
-                return PURCHASE;
-            }
-            case "r": {
-                return RETURN;
-            }
-            default: {
-                throw new IllegalArgumentException("Wrong operation type");
-            }
-        }
+        return Arrays.stream(OperationType.values())
+                .filter(e -> e.value.equals(symbol))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Illegal operation type: " + symbol));
     }
 }

@@ -10,7 +10,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         Fruit fruit = new Fruit(transaction.getName());
         int currentQuantity = Storage.getFruits().getOrDefault(fruit, 0);
         int newQuantity = currentQuantity - transaction.getQuantity();
-        if (currentQuantity - newQuantity < 0) {
+        if (newQuantity < 0) {
             throw new RuntimeException("The store does`t have the required amount of fruits");
         }
         Storage.getFruits().put(fruit, newQuantity);
