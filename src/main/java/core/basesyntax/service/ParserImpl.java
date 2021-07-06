@@ -27,12 +27,9 @@ public class ParserImpl implements Parser {
     }
 
     private Transaction createTransaction(String[] strings) {
-        return new Transaction(getOperation(strings[OPERATION_INDEX]), strings[FRUIT_NAME_INDEX],
+        return new Transaction(Transaction.Operation.valueOf(strings[OPERATION_INDEX]
+                .toUpperCase()), strings[FRUIT_NAME_INDEX],
                 Integer.parseInt(strings[QUANTITY_INDEX]));
-    }
-
-    private Transaction.Operation getOperation(String splitDatum) {
-        return Transaction.Operation.valueOf(splitDatum.toUpperCase());
     }
 }
 
