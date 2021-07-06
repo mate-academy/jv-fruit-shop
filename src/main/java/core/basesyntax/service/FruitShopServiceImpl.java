@@ -8,10 +8,9 @@ public class FruitShopServiceImpl implements FruitShopService {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String COMMA = ",";
 
-    private StringBuilder stringBuilder = new StringBuilder();
-
     @Override
     public String createReport() {
+        StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
                 .append("fruit").append(COMMA)
                 .append("quantity").append(LINE_SEPARATOR);
