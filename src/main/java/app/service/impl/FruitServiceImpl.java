@@ -1,11 +1,11 @@
-package app.service;
-
-import static app.constants.Constants.SEPARATOR;
+package app.service.impl;
 
 import app.db.Storage;
+import app.service.FruitService;
 
 public class FruitServiceImpl implements FruitService {
-    public static final String HEAD = "fruit,quantity";
+    private static final String SEPARATOR = ",";
+    private static final String HEAD = "fruit,quantity";
 
     @Override
     public String getReport() {

@@ -1,5 +1,6 @@
-package app.service;
+package app.service.impl;
 
+import app.service.FileWriter;
 import java.io.BufferedWriter;
 
 public class FileWriterImpl implements FileWriter {
