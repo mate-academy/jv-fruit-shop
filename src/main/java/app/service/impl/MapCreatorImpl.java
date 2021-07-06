@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapCreatorImpl implements MapCreator {
-
     @Override
     public Map<String, OperationHandler> createMap() {
         Map<String, OperationHandler> handlers = new HashMap<>();
