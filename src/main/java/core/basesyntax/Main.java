@@ -30,7 +30,7 @@ public class Main {
         handlers.put(OPERATION_RETURN, new AddOperationHandler());
 
         List<String> linesFromFile = new FileReaderImpl()
-                .readFromFile("src/main/resources/fruit_file.csv");
+                .read("src/main/resources/fruit_file.csv");
         Parser parser = new ParserImpl(new FruitValidator());
         linesFromFile.stream()
                 .skip(1)
