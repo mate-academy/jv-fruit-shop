@@ -34,17 +34,17 @@ public class Main {
         List<String> list = fileReaderService.readFromFile(INPUT_FILE);
 
         Validator validator = new FileValidator();
-        validator.validate(list);
-
         Parser parser = new ParserImpl();
+
         for (int i = 1; i < list.size(); i++) {
+            validator.validate(list.get(i));
             Transaction transaction = parser.parse(list.get(i));
             OperationHandler handler = map.get(transaction.getOperation());
             handler.apply(transaction);
         }
 
-        ReportService report = new ReportServiceImpl();
+        ReportService reportService = new ReportServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(report.getReport(), OUTPUT_FILE);
+        fileWriterService.writeToFile(reportService.getReport(), OUTPUT_FILE);
     }
 }
