@@ -13,8 +13,7 @@ public class MyFileReaderImpl implements MyFileReader {
         List<String> data = new ArrayList<>();
         File file = new File(fileName);
         try {
-            data = Files.readAllLines(file.toPath());
-            return data;
+            return Files.readAllLines(file.toPath());
         } catch (IOException e) {
             throw new RuntimeException("Can`t reading from file : " + fileName + e);
         }
