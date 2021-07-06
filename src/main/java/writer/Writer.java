@@ -1,5 +1,5 @@
 package writer;
 
-public interface Writer<I, K, J> {
+public interface Writer<K, J> {
     String write(K writeTo, J data);
 }
