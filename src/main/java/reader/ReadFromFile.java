@@ -8,10 +8,8 @@ import java.util.List;
 public class ReadFromFile implements Reader<String, Path> {
     @Override
     public List<String> read(Path path) {
-        List<String> data;
         try {
-            data = Files.readAllLines(path);
-            return data;
+            return Files.readAllLines(path);
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file :(", e);
         }
