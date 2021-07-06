@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitReportService;
 import java.util.Map;
 
@@ -9,10 +10,10 @@ public class FruitReportServiceImpl implements FruitReportService {
     public String report() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity").append("\n");
-        for (Map.Entry<String, Integer> fruit : Storage.data.entrySet()) {
-            stringBuilder.append(fruit.getKey())
+        for (Map.Entry<Fruit, Integer> entry : Storage.data.entrySet()) {
+            stringBuilder.append(entry.getKey().getName())
                     .append(",")
-                    .append(fruit.getValue())
+                    .append(entry.getValue())
                     .append("\n");
         }
         return stringBuilder.toString();
