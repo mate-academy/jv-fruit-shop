@@ -28,7 +28,7 @@ public class Main {
         handlers.put(Operation.SUPPLY, new AdditionOperationHandler());
 
         ReaderService reader = new ReaderServiceImpl();
-        List<String> stringsList = reader.readFromFile("src/main/resources.txt");
+        List<String> stringsList = reader.readFromFile("src/main/resources/input-file.txt");
         Parser parser = new ParserImpl(new DataValidatorImpl());
         List<Transaction> list = parser.parseToTransactionList(stringsList);
         for (Transaction transaction : list) {
@@ -38,6 +38,6 @@ public class Main {
         ReportCreator creator = new ReportCreatorImpl();
         String report = creator.createReport();
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile("src/main/report.txt", report);
+        writerService.writeToFile("src/main/resources/report.txt", report);
     }
 }
