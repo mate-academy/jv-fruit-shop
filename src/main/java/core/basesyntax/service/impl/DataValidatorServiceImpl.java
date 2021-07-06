@@ -4,9 +4,10 @@ public class DataValidatorServiceImpl {
     public static final int OPERATION = 0;
     public static final int FRUIT_NAME = 1;
     public static final int QUALITY = 2;
+    public static final int SIZE_TRANSLATION = 3;
 
     public boolean checkDataInput(String[] data) {
-        if (data.length != 3) {
+        if (data.length != SIZE_TRANSLATION) {
             return false;
         }
         if (data[FRUIT_NAME].equals("")
