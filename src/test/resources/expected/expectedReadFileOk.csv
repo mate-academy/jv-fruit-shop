@@ -1,0 +1,5 @@
+type,fruit,quantity,date
+s,banana,100,2020-10-17
+s,apple,40,2020-10-15
+b,banana,50,2020-10-17
+r,banana,1,2020-10-17
