@@ -16,13 +16,13 @@ public class ParserImpl implements Parser {
     }
 
     @Override
-    public List<Transaction> parseLine(List<String> lines) {
+    public List<Transaction> parseLines(List<String> lines) {
         return lines.stream()
                 .skip(1)
-                .filter(p -> validator.isLineValid(p))
-                .map(p -> p.split(SEPARATOR))
-                .map(p -> new Transaction(OperationType
-                        .getOperationType(p[0]), p[1], Integer.parseInt(p[2])))
+                .filter(line -> validator.isLineValid(line))
+                .map(line -> line.split(SEPARATOR))
+                .map(strings -> new Transaction(OperationType
+                        .getOperationType(strings[0]), strings[1], Integer.parseInt(strings[2])))
                 .collect(Collectors.toList());
     }
 }

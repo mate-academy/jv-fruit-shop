@@ -30,7 +30,7 @@ public class Main {
         handlerMap.put(OperationType.SUPPLY, new AddOperationHandler());
         FileReader reader = new FileReaderImpl();
         Parser parser = new ParserImpl(new ValidatorImpl());
-        List<Transaction> transactionList = parser.parseLine(reader
+        List<Transaction> transactionList = parser.parseLines(reader
                 .readFromFile("src/main/resources/input_report.csv"));
         FruitService fruitService = new FruitServiceImpl(handlerMap);
         fruitService.applyOperations(transactionList);

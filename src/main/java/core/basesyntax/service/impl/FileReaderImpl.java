@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-    private static final String SEPARATOR = ",";
 
     @Override
     public List<String> readFromFile(String fileName) {
