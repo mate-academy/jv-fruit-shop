@@ -10,6 +10,9 @@ public class RemoveOperationHandler implements OperationHandler {
         Fruit fruit = new Fruit(transactionDto.getName());
         int newQuantity = Storage.fruitStorage.getOrDefault(fruit, 0)
                 - transactionDto.getQuantity();
+        if (newQuantity < 0) {
+            throw new RuntimeException("We don't have enough fruit");
+        }
         Storage.fruitStorage.put(fruit, newQuantity);
         return newQuantity;
     }

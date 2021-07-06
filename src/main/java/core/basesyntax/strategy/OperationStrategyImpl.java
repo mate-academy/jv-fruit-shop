@@ -4,7 +4,6 @@ import core.basesyntax.handler.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-
     private Map<String, OperationHandler> handlers;
 
     public OperationStrategyImpl(Map<String, OperationHandler> handlers) {

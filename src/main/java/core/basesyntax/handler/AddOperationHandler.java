@@ -5,7 +5,6 @@ import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
 
 public class AddOperationHandler implements OperationHandler {
-
     @Override
     public int apply(Transaction transactionDto) {
         Fruit fruit = new Fruit(transactionDto.getName());
