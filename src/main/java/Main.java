@@ -1,5 +1,4 @@
 import dto.Transaction;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +27,8 @@ public class Main {
         TheFileReader reader = new TheFileReaderImpl();
         List<String> linesFromReader = reader.readFromFile("Data.csv");
         TheParser parser = new TheParserImpl();
-        List<Transaction> transactionsList = new ArrayList<>();
-        for (String line : linesFromReader) {
-            transactionsList.add(parser.parseLine(line));
-        }
-        for (Transaction transaction : transactionsList) {
+        for (int i = 1; i < linesFromReader.size(); i++) {
+            Transaction transaction = parser.parseLine(linesFromReader.get(i));
             OperationVariables handler = operationsMap.get(transaction.getOperation());
             handler.apply(transaction);
         }

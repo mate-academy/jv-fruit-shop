@@ -16,7 +16,6 @@ public class TheFileReaderImpl implements TheFileReader {
         } catch (IOException e) {
             throw new RuntimeException("Something wrong with file - " + fileName, e);
         }
-        reader.remove(TITLE);
         return reader;
     }
 }
