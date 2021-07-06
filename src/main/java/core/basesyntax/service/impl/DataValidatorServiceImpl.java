@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-public class DataValidatorServiceImpl {
+public class DataValidatorServiceImpl implements DataValidatorService{
     public static final int OPERATION = 0;
     public static final int FRUIT_NAME = 1;
     public static final int QUALITY = 2;
@@ -9,8 +9,8 @@ public class DataValidatorServiceImpl {
 
     public boolean checkDataInput(String[] data) {
         if (data.length != SIZE_TRANSLATION
-                || (data[FRUIT_NAME].equals("")
-                || data[FRUIT_NAME].equals(" "))
+                || (data[FRUIT_NAME].isBlank()
+                || data[FRUIT_NAME].isEmpty())
                 || Integer.parseInt(data[QUALITY]) < 0
                 || !(data[OPERATION].equals("b")
                 || data[OPERATION].equals("s")

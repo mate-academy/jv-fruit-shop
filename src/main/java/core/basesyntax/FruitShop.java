@@ -4,7 +4,7 @@ import core.basesyntax.dto.Transaction;
 import core.basesyntax.service.FruitReportService;
 import core.basesyntax.service.MyFileReader;
 import core.basesyntax.service.MyFileWriter;
-import core.basesyntax.service.ParserData;
+import core.basesyntax.service.DataParser;
 import core.basesyntax.service.impl.DataValidatorServiceImpl;
 import core.basesyntax.service.impl.FruitReportServiceImpl;
 import core.basesyntax.service.impl.MyFileReaderImpl;
@@ -30,7 +30,7 @@ public class FruitShop {
         listData.remove(0);
         DataValidatorServiceImpl validator = new DataValidatorServiceImpl();
 
-        ParserData parser = new ParserDataImpl();
+        DataParser parser = new ParserDataImpl();
         for (String line : listData) {
             validator.checkDataInput(line.split(","));
             Transaction transaction = parser.parseData(line);

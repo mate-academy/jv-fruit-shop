@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.dto.Transaction;
 
-public interface ParserData {
+public interface DataParser {
     Transaction parseData(String data);
 }

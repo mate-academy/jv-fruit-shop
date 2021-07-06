@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ParserData;
+import core.basesyntax.service.DataParser;
 
-public class ParserDataImpl implements ParserData {
+public class ParserDataImpl implements DataParser {
     public static final int OPERATION_INDEX = 0;
     public static final int FRUIT_INDEX = 1;
     public static final int QUALITY_INDEX = 2;

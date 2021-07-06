@@ -6,15 +6,18 @@ import core.basesyntax.service.FruitReportService;
 import java.util.Map;
 
 public class FruitReportServiceImpl implements FruitReportService {
+    public static final String COMMA = ",";
+    public static final String LINE_SEPARATOR = "\n";
+
     @Override
     public String getReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity").append("\n");
         for (Map.Entry<Fruit, Integer> entry : Storage.data.entrySet()) {
             stringBuilder.append(entry.getKey().getName())
-                    .append(",")
+                    .append(COMMA)
                     .append(entry.getValue())
-                    .append("\n");
+                    .append(LINE_SEPARATOR);
         }
         return stringBuilder.toString();
     }
