@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitReport;
-import java.util.stream.Collectors;
 
 public class FruitReportImpl implements FruitReport {
     private static final String TITLE = "fruit,quantity";
@@ -10,10 +9,13 @@ public class FruitReportImpl implements FruitReport {
 
     @Override
     public String getReport() {
-        return TITLE + System.lineSeparator()
-                + Storage.storage.entrySet()
-                .stream()
-                .map(e -> e.getKey().getName() + SEPARATOR + e.getValue() + System.lineSeparator())
-                .collect(Collectors.joining());
+        StringBuilder report = new StringBuilder().append(TITLE)
+                .append(System.lineSeparator());
+        Storage.storage.entrySet().stream()
+                .forEach(e -> report.append(e.getKey().getName())
+                        .append(SEPARATOR)
+                        .append(e.getValue())
+                        .append(System.lineSeparator()));
+        return report.toString();
     }
 }
