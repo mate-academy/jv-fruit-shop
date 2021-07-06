@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.Transaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataValidatorImpl;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ParserImpl;
@@ -20,11 +21,11 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<Transaction.Operation, OperationHandler> handlers = new HashMap<>();
-        handlers.put(Transaction.Operation.B, new BalanceOperationHandler());
-        handlers.put(Transaction.Operation.P, new SubtractionOperatorHandler());
-        handlers.put(Transaction.Operation.R, new AdditionOperationHandler());
-        handlers.put(Transaction.Operation.S, new AdditionOperationHandler());
+        Map<Operation, OperationHandler> handlers = new HashMap<>();
+        handlers.put(Operation.BALANCE, new BalanceOperationHandler());
+        handlers.put(Operation.PURCHASE, new SubtractionOperatorHandler());
+        handlers.put(Operation.RETURN, new AdditionOperationHandler());
+        handlers.put(Operation.SUPPLY, new AdditionOperationHandler());
 
         ReaderService reader = new ReaderServiceImpl();
         List<String> stringsList = reader.readFromFile("src/main/resources.txt");

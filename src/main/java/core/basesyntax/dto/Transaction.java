@@ -1,5 +1,7 @@
 package core.basesyntax.dto;
 
+import core.basesyntax.model.Operation;
+
 public class Transaction {
     private Operation operation;
     private String name;
@@ -21,9 +23,5 @@ public class Transaction {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public enum Operation {
-     B, S, P, R
     }
 }

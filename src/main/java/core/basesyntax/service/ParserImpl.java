@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dto.Transaction;
+import core.basesyntax.model.Operation;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,8 @@ public class ParserImpl implements Parser {
     }
 
     private Transaction createTransaction(String[] strings) {
-        return new Transaction(Transaction.Operation.valueOf(strings[OPERATION_INDEX]
-                .toUpperCase()), strings[FRUIT_NAME_INDEX],
+        return new Transaction(Operation.getOperation(strings[OPERATION_INDEX]),
+                strings[FRUIT_NAME_INDEX],
                 Integer.parseInt(strings[QUANTITY_INDEX]));
     }
 }
