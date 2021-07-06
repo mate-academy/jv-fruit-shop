@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
-
 public class DataValidatorServiceImpl {
     public static final int OPERATION = 0;
     public static final int FRUIT_NAME = 1;
