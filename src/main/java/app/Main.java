@@ -13,7 +13,6 @@ import app.service.impl.LineValidatorImpl;
 import app.service.impl.MapCreatorImpl;
 import app.service.impl.ParserImpl;
 import app.strategy.OperationHandler;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,14 +26,13 @@ public class Main {
         FileReader fileReader = new FileReaderImpl();
         List<String> linesFromFile = fileReader.readFromFile(INPUT_FILE);
 
-        List<Transaction> transactions = new ArrayList<>();
         LineValidator lineValidator = new LineValidatorImpl();
         Parser parser = new ParserImpl(lineValidator);
 
         linesFromFile.stream()
-                .filter(lineValidator::isValid)
-                .forEach(list -> transactions.add(parser.parseLine(list)));
-        transactions.forEach(t -> handlers.get(t.getOperation()).apply(t));
+                .skip(1)
+                .map(parser::parseLine)
+                .forEach(t -> handlers.get(t.getOperation()).apply(t));
 
         FruitService fruitService = new FruitServiceImpl();
         String report = fruitService.getReport();

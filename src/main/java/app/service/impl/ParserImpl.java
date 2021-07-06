@@ -21,6 +21,6 @@ public class ParserImpl implements Parser {
             String[] data = line.split(SEPARATOR);
             return new Transaction(data[TYPE], data[FRUIT], Integer.parseInt(data[QUANTITY]));
         }
-        throw new RuntimeException("Not correct line");
+        throw new RuntimeException("Not correct line : " + line);
     }
 }
