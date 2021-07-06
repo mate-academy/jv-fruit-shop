@@ -10,7 +10,7 @@ public class ShopFileWriterImpl implements ShopFileWriter{
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file", e);
+            throw new RuntimeException("Can't write to file" + fileName, e);
         }
     }
 }

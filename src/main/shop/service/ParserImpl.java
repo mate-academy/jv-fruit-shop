@@ -21,13 +21,11 @@ public class ParserImpl implements Parser {
         if (arrayParse.length != COUNT_DATA) {
             throw new RuntimeException("Uncorrected this line - " + line);
         }
-        if (typeOperationValidator(arrayParse[TYPE_OPERATION])) {
+        if (typeOperationValidator(arrayParse[TYPE_OPERATION])
+                && nameFruitValidator(arrayParse[NAME_FRUIT])
+                && quantityValidator(arrayParse[QUANTITY])) {
             typeOperation = arrayParse[TYPE_OPERATION];
-        }
-        if (nameFruitValidator(arrayParse[NAME_FRUIT])) {
             nameFruit = arrayParse[NAME_FRUIT];
-        }
-        if (quantityValidator(arrayParse[QUANTITY])) {
             quantity = Integer.parseInt(arrayParse[QUANTITY]);
         }
         return new Transaction(typeOperation, nameFruit, quantity);

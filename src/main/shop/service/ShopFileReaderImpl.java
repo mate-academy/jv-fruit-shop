@@ -16,9 +16,9 @@ public class ShopFileReaderImpl implements ShopFileReader {
                 line = reader.readLine();
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Can't file with this name", e);
+            throw new RuntimeException("Can't file with this name" + fileName, e);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file", e);
+            throw new RuntimeException("Can't read file" + fileName, e);
         }
         return readFile;
     }

@@ -1,7 +1,6 @@
 package db;
 
 import model.Fruit;
-
 import java.util.HashMap;
 import java.util.Map;
 
