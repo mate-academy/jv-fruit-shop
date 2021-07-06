@@ -1,6 +1,5 @@
 package app;
 
-import app.dto.Transaction;
 import app.service.FileReader;
 import app.service.FileWriter;
 import app.service.FruitService;
