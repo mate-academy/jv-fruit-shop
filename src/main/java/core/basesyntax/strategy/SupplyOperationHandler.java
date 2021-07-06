@@ -10,6 +10,5 @@ public class SupplyOperationHandler implements OperationHandler {
         int newQuantity = transaction.getQuality() + oldQuantity;
         Storage.data.put(transaction.getFruitName(), newQuantity);
         return newQuantity;
-
     }
 }

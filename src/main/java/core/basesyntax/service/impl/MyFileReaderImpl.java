@@ -15,9 +15,9 @@ public class MyFileReaderImpl implements MyFileReader {
         File file = new File(fileName);
         try {
             data = Files.readAllLines(file.toPath());
+            return data;
         } catch (IOException e) {
-            throw new RuntimeException("Can`t reading from file :" + e);
+            throw new RuntimeException("Can`t reading from file : " + fileName + e);
         }
-        return data;
     }
 }

@@ -3,12 +3,12 @@ package core.basesyntax.dto;
 public class Transaction {
     private final String operation;
     private final String fruitName;
-    private final int quanlity;
+    private final int quality;
 
     public Transaction(String operation, String fruit, int quality) {
         this.operation = operation;
         this.fruitName = fruit;
-        this.quanlity = quality;
+        this.quality = quality;
     }
 
     public String getOperation() {
@@ -20,7 +20,7 @@ public class Transaction {
     }
 
     public Integer getQuality() {
-        return quanlity;
+        return quality;
     }
 
 }

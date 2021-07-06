@@ -30,7 +30,6 @@ public class FruitShop {
         listData.remove(0);
         ParserData parser = new ParserDataImpl();
         List<Transaction> transactionsList = new ArrayList<>();
-
         for (String line : listData) {
             Transaction transaction = parser.parseData(line);
             operationsMap.get(transaction.getOperation()).apply(transaction);
