@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-public class DataValidatorServiceImpl implements DataValidatorService{
+public class DataValidatorServiceImpl implements DataValidatorService {
     public static final int OPERATION = 0;
     public static final int FRUIT_NAME = 1;
     public static final int QUALITY = 2;

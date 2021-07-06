@@ -1,10 +1,10 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.Transaction;
+import core.basesyntax.service.DataParser;
 import core.basesyntax.service.FruitReportService;
 import core.basesyntax.service.MyFileReader;
 import core.basesyntax.service.MyFileWriter;
-import core.basesyntax.service.DataParser;
 import core.basesyntax.service.impl.DataValidatorServiceImpl;
 import core.basesyntax.service.impl.FruitReportServiceImpl;
 import core.basesyntax.service.impl.MyFileReaderImpl;
