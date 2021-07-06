@@ -38,6 +38,6 @@ public class FruitShop {
         }
         FruitReportService fruitReport = new FruitReportServiceImpl();
         MyFileWriter writer = new MyFileWriterImpl();
-        writer.writeToFile("src/main/resources/finalData.csv", fruitReport.report());
+        writer.writeToFile("src/main/resources/finalData.csv", fruitReport.getReport());
     }
 }
