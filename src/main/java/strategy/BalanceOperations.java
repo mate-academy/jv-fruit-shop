@@ -10,6 +10,7 @@ public class BalanceOperations implements OperationVariables {
     public int apply(Transaction transaction) {
         int currentQuantity = transaction.getQuantitiy();
         TheStorage.iStorage.put(new TheFruit(transaction.getName()), currentQuantity);
+
         return currentQuantity;
     }
 }
