@@ -8,28 +8,20 @@ import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FileWriterServiceImpl;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ParserImpl;
-import core.basesyntax.service.Report;
-import core.basesyntax.service.ReportImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.Validator;
 import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE = "src" + File.separator
-            + "main" + File.separator
-            + "resources" + File.separator
-            + "input_file.csv";
-    private static final String OUTPUT_FILE = "src" + File.separator
-            + "main" + File.separator
-            + "resources" + File.separator
-            + "report.csv";
+    private static final String INPUT_FILE = "src/main/resources/input_file.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> map = new HashMap<>();
@@ -44,18 +36,14 @@ public class Main {
         Validator validator = new FileValidator();
         validator.validate(list);
 
-        List<Transaction> transactions = new ArrayList<>();
         Parser parser = new ParserImpl();
         for (int i = 1; i < list.size(); i++) {
-            transactions.add(parser.parse(list.get(i)));
-        }
-
-        for (Transaction transaction : transactions) {
+            Transaction transaction = parser.parse(list.get(i));
             OperationHandler handler = map.get(transaction.getOperation());
             handler.apply(transaction);
         }
 
-        Report report = new ReportImpl();
+        ReportService report = new ReportServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(report.getReport(), OUTPUT_FILE);
     }

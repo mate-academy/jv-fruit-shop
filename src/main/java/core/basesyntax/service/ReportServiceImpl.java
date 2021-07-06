@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.Map;
 
-public class ReportImpl implements Report {
+public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
     private static final String COMMA = ",";
 
