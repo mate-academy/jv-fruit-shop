@@ -11,12 +11,12 @@ public class ParserImpl implements Parser {
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
-    private int quantity;
-    private String nameFruit;
-    private String typeOperation;
 
     @Override
     public Transaction parseLine(String line) {
+        int quantity = 0;
+        String nameFruit = "";
+        String typeOperation = "";
         String[] arrayParse = line.split(",");
         if (arrayParse.length != COUNT_DATA) {
             throw new RuntimeException("Uncorrected this line - " + line);

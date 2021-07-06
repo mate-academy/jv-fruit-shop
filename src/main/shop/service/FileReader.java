@@ -2,6 +2,6 @@ package service;
 
 import java.util.List;
 
-public interface ShopFileReader {
+public interface FileReader {
     List<String> readFromFile(String fileName);
 }

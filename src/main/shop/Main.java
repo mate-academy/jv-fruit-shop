@@ -1,3 +1,4 @@
+import dto.Transaction;
 import service.*;
 import strategy.AddOperationHandler;
 import strategy.BalanceOperationHandler;
@@ -8,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String pathToStartFile = "src/main/shop/resources/test.csv";
-    private static final String pathToResultFile = "src/main/shop/resources/result.csv";
+    private static final String PATH_TO_START_FILE = "src/main/resources/test.csv";
+    private static final String PATH_TO_RESULT_FILE = "src/main/resources/result.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> handlers = new HashMap<>();
@@ -18,18 +19,19 @@ public class Main {
         handlers.put("p", new PurchaseOperationHandler());
         handlers.put("r", new AddOperationHandler());
 
-        ShopFileReader shopFileReader = new ShopFileReaderImpl();
-        List<String> fileReader = shopFileReader.readFromFile(pathToStartFile);
+        FileReader reader = new FileReaderImpl();
+        List<String> fileReader = reader.readFromFile(PATH_TO_START_FILE);
         Parser parser = new ParserImpl();
-        for (String line : fileReader) {
-            OperationHandler handler = handlers.get(parser.parseLine(line).getOperation());
-            handler.apply(parser.parseLine(line));
+        for (int i = 1; i < fileReader.size(); i++) {
+            Transaction transactionHandler = parser.parseLine(fileReader.get(i));
+            OperationHandler handler = handlers.get(transactionHandler.getOperation());
+            handler.apply(transactionHandler);
         }
 
         FruitService reportService = new FruitServiceImpl();
         String report = reportService.getReport();
 
-        ShopFileWriter shopFileWriter = new ShopFileWriterImpl();
-        shopFileWriter.writeToFile(report, pathToResultFile);
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFile(report, PATH_TO_RESULT_FILE);
     }
 }

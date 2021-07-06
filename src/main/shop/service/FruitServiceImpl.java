@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
     private static final String SYMBOL_FOR_SEPARATING = ",";
+
     @Override
     public String getReport() {
         StringBuilder stringBuilder = new StringBuilder();
