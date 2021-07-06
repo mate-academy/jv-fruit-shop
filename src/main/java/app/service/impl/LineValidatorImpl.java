@@ -13,8 +13,7 @@ public class LineValidatorImpl implements LineValidator {
             String[] data = line.split(SEPARATOR);
             if (data.length == WORDS_COUNT) {
                 try {
-                    Integer.parseInt(data[QUANTITY]);
-                    return true;
+                    return Integer.parseInt(data[QUANTITY]) > 0;
                 } catch (NumberFormatException e) {
                     return false;
                 }
