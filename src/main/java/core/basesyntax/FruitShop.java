@@ -26,7 +26,7 @@ public class FruitShop {
         operationsMap.put("p", new PurchaseOperationHandler());
         operationsMap.put("r", new SupplyOperationHandler());
         MyFileReader reader = new MyFileReaderImpl();
-        List<String> listData = reader.readFromFile("data.csv");
+        List<String> listData = reader.readFromFile("src/main/resources/data.csv");
         listData.remove(0);
         ParserData parser = new ParserDataImpl();
         List<Transaction> transactionsList = new ArrayList<>();
@@ -37,6 +37,6 @@ public class FruitShop {
         }
         FruitReportService fruitReport = new FruitReportServiceImpl();
         MyFileWriter writer = new MyFileWriterImpl();
-        writer.writeToFile("finalData.csv", fruitReport.report());
+        writer.writeToFile("src/main/resources/finalData.csv", fruitReport.report());
     }
 }
