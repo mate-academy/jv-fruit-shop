@@ -26,11 +26,11 @@ public class Main {
         handlers.put("p", new PurchaseOperationHandler());
         handlers.put("r", new AddOperationHandler());
 
-        FileReader reader = (FileReader) new FileReaderImpl();
-        List<String> fileReader = reader.readFromFile(PATH_TO_START_FILE);
+        FileReader reader = new FileReaderImpl();
+        List<String> readLines = reader.readFromFile(PATH_TO_START_FILE);
         Parser parser = new ParserImpl();
-        for (int i = 1; i < fileReader.size(); i++) {
-            Transaction transactionHandler = parser.parseLine(fileReader.get(i));
+        for (int i = 1; i < readLines.size(); i++) {
+            Transaction transactionHandler = parser.parseLine(readLines.get(i));
             OperationHandler handler = handlers.get(transactionHandler.getOperation());
             handler.apply(transactionHandler);
         }
