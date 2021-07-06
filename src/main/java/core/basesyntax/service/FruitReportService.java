@@ -8,9 +8,6 @@ public class FruitReportService implements ReportService {
     public static final String FILE_CSV_TITLE = "fruit,quantity\n";
     private static final char CSV_SEPARATOR = ',';
 
-    public FruitReportService() {
-    }
-
     public String getReport() {
         final Map<Fruit, Integer> storage = Storage.storage;
         StringBuilder stringBuilder = new StringBuilder(FILE_CSV_TITLE);

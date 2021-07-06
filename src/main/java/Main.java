@@ -1,5 +1,4 @@
 import core.basesyntax.service.CsvFileReader;
-import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FruitReportService;
@@ -7,6 +6,7 @@ import core.basesyntax.service.Parser;
 import core.basesyntax.service.ParserImpl;
 import core.basesyntax.service.Validator;
 import core.basesyntax.service.ValidatorCsv;
+import core.basesyntax.service.Writer;
 import core.basesyntax.srategy.AdditionHandler;
 import core.basesyntax.srategy.BalanceHandler;
 import core.basesyntax.srategy.OperationHandler;
@@ -39,7 +39,7 @@ public class Main {
                     .apply(fruitDto)
                 );
         FruitReportService report = new FruitReportService();
-        FileWriter fileWriter = new CsvFileWriter();
+        Writer fileWriter = new FileWriter();
         fileWriter.writeToFile(report.getReport(), PATH_OUTPUT_FILE);
     }
 }
