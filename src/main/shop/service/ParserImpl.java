@@ -58,6 +58,6 @@ public class ParserImpl implements Parser {
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Uncorrected this quantity - " + quantity);
         }
-        throw new RuntimeException("Uncorrected this quantity - " + quantity);
+        return false;
     }
 }
