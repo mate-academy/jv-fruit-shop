@@ -1,5 +1,12 @@
 import dto.Transaction;
-import service.*;
+import service.FruitService;
+import service.FileWriter;
+import service.FileReader;
+import service.Parser;
+import service.FruitServiceImpl;
+import service.FileWriterImpl;
+import service.FileReaderImpl;
+import service.ParserImpl;
 import strategy.AddOperationHandler;
 import strategy.BalanceOperationHandler;
 import strategy.OperationHandler;
@@ -19,7 +26,7 @@ public class Main {
         handlers.put("p", new PurchaseOperationHandler());
         handlers.put("r", new AddOperationHandler());
 
-        FileReader reader = new FileReaderImpl();
+        FileReader reader = (FileReader) new FileReaderImpl();
         List<String> fileReader = reader.readFromFile(PATH_TO_START_FILE);
         Parser parser = new ParserImpl();
         for (int i = 1; i < fileReader.size(); i++) {
