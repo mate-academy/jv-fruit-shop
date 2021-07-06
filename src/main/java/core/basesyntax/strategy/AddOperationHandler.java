@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dbo.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
 

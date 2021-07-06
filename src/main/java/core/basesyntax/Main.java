@@ -31,7 +31,6 @@ public class Main {
         handlers.put(Operation.R, new AddOperationHandler());
         FileReader fileReader = new FileReaderImpl();
         List<String> linesFromFile = fileReader.readFromFile(INPUT_FILE_NAME);
-        List<Transaction> transactions = new ArrayList<>();
         Parser parser = new ParserImpl();
         for (int i = 1; i < linesFromFile.size(); i++) {
             Transaction transaction = parser.parseLine(linesFromFile.get(i).toUpperCase());

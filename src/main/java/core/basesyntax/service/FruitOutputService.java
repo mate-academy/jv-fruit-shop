@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dbo.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.Map;
 
