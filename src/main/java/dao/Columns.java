@@ -10,14 +10,9 @@ public class Columns {
         return columns.containsKey(column);
     }
 
-    public static String getAllColumns(int from) {
-        int counter = 0;
+    public static String getAllColumns() {
         StringBuilder builder = new StringBuilder();
         for (String string : columns.values().toArray(new String[0])) {
-            if (from > counter) {
-                counter++;
-                continue;
-            }
             builder.append(string);
             builder.append(",");
         }

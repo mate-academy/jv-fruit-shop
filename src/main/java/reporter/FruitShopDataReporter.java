@@ -36,9 +36,11 @@ public class FruitShopDataReporter implements Reporter<Path> {
             File file = new File("./src/main/resources/FruitShopReport.txt");
             new WriterToFileImpl().write(
                     file,
-                    Columns.getAllColumns(TYPE_INDEX + 1)
-                    + System.lineSeparator()
-                            + new ProcessFruitsMapToString().process(fruitBalanceService.getAll()));
+                    new StringBuilder("fruit, quantity")
+                            .append(System.lineSeparator())
+                            .append(new ProcessFruitsMapToString()
+                                    .process(fruitBalanceService.getAll()))
+                            .toString());
             return;
         }
         throw new InvalidDataException("Invalid data");
