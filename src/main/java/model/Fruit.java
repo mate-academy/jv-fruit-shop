@@ -2,10 +2,10 @@ package model;
 
 import java.util.Objects;
 
-public class TheFruit {
+public class Fruit {
     private String fruitName;
 
-    public TheFruit(String fruitName) {
+    public Fruit(String fruitName) {
         this.fruitName = fruitName;
     }
 
@@ -17,7 +17,7 @@ public class TheFruit {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        TheFruit fruit = (TheFruit) o;
+        Fruit fruit = (Fruit) o;
         return Objects.equals(fruitName, fruit.fruitName);
     }
 

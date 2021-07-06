@@ -1,10 +1,10 @@
 package service;
 
 import java.util.Map;
-import model.TheFruit;
-import storage.TheStorage;
+import model.Fruit;
+import storage.Storage;
 
-public class TheFruitReportImpl implements TheFruitReport {
+public class FruitReportServiceImpl implements FruitReportService {
     private static final String COMMA = ",";
     private static final String TITLE_RESULT = "fruit,quantity";
 
@@ -12,7 +12,7 @@ public class TheFruitReportImpl implements TheFruitReport {
     public String returnReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(TITLE_RESULT);
-        for (Map.Entry<TheFruit,Integer> entry : TheStorage.iStorage.entrySet()) {
+        for (Map.Entry<Fruit,Integer> entry : Storage.fruitStorage.entrySet()) {
             stringBuilder.append(System.lineSeparator()).append(entry.getKey().getFruitName())
                     .append(COMMA).append(entry.getValue());
         }

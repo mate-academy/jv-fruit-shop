@@ -1,5 +1,5 @@
 package service;
 
-public interface TheFruitReport {
+public interface FruitReportService {
     String returnReport();
 }

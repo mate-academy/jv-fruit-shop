@@ -2,6 +2,6 @@ package strategy;
 
 import dto.Transaction;
 
-public interface OperationVariables {
+public interface OperationHandler {
     int apply(Transaction transaction);
 }

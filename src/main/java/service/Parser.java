@@ -2,6 +2,6 @@ package service;
 
 import dto.Transaction;
 
-public interface TheParser {
+public interface Parser {
     Transaction parseLine(String dataline);
 }

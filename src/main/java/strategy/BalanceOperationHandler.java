@@ -1,16 +1,14 @@
 package strategy;
 
 import dto.Transaction;
-import model.TheFruit;
-import storage.TheStorage;
+import model.Fruit;
+import storage.Storage;
 
-public class BalanceOperations implements OperationVariables {
-
+public class BalanceOperationHandler implements OperationHandler {
     @Override
     public int apply(Transaction transaction) {
         int currentQuantity = transaction.getQuantitiy();
-        TheStorage.iStorage.put(new TheFruit(transaction.getName()), currentQuantity);
-
+        Storage.fruitStorage.put(new Fruit(transaction.getName()), currentQuantity);
         return currentQuantity;
     }
 }

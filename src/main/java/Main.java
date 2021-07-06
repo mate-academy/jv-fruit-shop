@@ -2,40 +2,39 @@ import dto.Transaction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import service.TheFileReader;
-import service.TheFileReaderImpl;
-import service.TheFileWriter;
-import service.TheFileWriterImpl;
-import service.TheFruitReport;
-import service.TheFruitReportImpl;
-import service.TheParser;
-import service.TheParserImpl;
-import strategy.AppendOperations;
-import strategy.BalanceOperations;
-import strategy.OperationVariables;
-import strategy.PurchaseOperations;
+import service.FileReader;
+import service.FileReaderImpl;
+import service.FileWriter;
+import service.FileWriterImpl;
+import service.FruitReportService;
+import service.FruitReportServiceImpl;
+import service.Parser;
+import service.ParserImpl;
+import strategy.AppendOperationHandler;
+import strategy.BalanceOperationHandler;
+import strategy.OperationHandler;
+import strategy.PurchaseOperationHandler;
 
 public class Main {
     public static void main(String[] args) {
+        Map<String, OperationHandler> operationsMap = new HashMap<>();
+        operationsMap.put("r", new AppendOperationHandler());
+        operationsMap.put("s", new AppendOperationHandler());
+        operationsMap.put("b", new BalanceOperationHandler());
+        operationsMap.put("p", new PurchaseOperationHandler());
 
-        Map<String, OperationVariables> operationsMap = new HashMap<>();
-        operationsMap.put("r", new AppendOperations());
-        operationsMap.put("s", new AppendOperations());
-        operationsMap.put("b", new BalanceOperations());
-        operationsMap.put("p", new PurchaseOperations());
-
-        TheFileReader reader = new TheFileReaderImpl();
-        List<String> linesFromReader = reader.readFromFile("Data.csv");
-        TheParser parser = new TheParserImpl();
+        FileReader reader = new FileReaderImpl();
+        List<String> linesFromReader = reader.readFromFile("src/main/resources/Data.csv");
+        Parser parser = new ParserImpl();
         for (int i = 1; i < linesFromReader.size(); i++) {
             Transaction transaction = parser.parseLine(linesFromReader.get(i));
-            OperationVariables handler = operationsMap.get(transaction.getOperation());
+            OperationHandler handler = operationsMap.get(transaction.getOperation());
             handler.apply(transaction);
         }
-        TheFruitReport reportService = new TheFruitReportImpl();
+        FruitReportService reportService = new FruitReportServiceImpl();
         String report = reportService.returnReport();
 
-        TheFileWriter writer = new TheFileWriterImpl();
-        writer.writeToFile(report, "ResultData.csv");
+        FileWriter writer = new FileWriterImpl();
+        writer.writeToFile(report, "src/main/resources/ResultData.csv");
     }
 }
