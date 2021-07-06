@@ -23,9 +23,4 @@ public class DataValidatorServiceImpl {
                 || data[OPERATION].equals("p")
                 || data[OPERATION].equals("r");
     }
-
-    public boolean checkFruits(Fruit fruit) {
-
-        return true;
-    }
 }
