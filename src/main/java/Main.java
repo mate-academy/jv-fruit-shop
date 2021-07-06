@@ -28,13 +28,12 @@ public class Main {
         TheFileReader reader = new TheFileReaderImpl();
         List<String> linesFromReader = reader.readFromFile("Data.csv");
         TheParser parser = new TheParserImpl();
-        List<Transaction> transactions = new ArrayList<>();
+        List<Transaction> transactionsList = new ArrayList<>();
         for (String line : linesFromReader) {
-            transactions.add(parser.parseLine(line));
+            transactionsList.add(parser.parseLine(line));
         }
-        OperationVariables handler;
-        for (Transaction transaction : transactions) {
-            handler = operationsMap.get(transaction.getOperation());
+        for (Transaction transaction : transactionsList) {
+            OperationVariables handler = operationsMap.get(transaction.getOperation());
             handler.apply(transaction);
         }
         TheFruitReport reportService = new TheFruitReportImpl();

@@ -14,7 +14,7 @@ public class TheFileReaderImpl implements TheFileReader {
         try {
             reader = Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
-            throw new RuntimeException("no file Bro!", e);
+            throw new RuntimeException("Something wrong with file - " + fileName, e);
         }
         reader.remove(TITLE);
         return reader;

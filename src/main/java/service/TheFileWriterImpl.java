@@ -11,7 +11,7 @@ public class TheFileWriterImpl implements TheFileWriter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.append(report);
         } catch (IOException e) {
-            throw new RuntimeException("can`t write to this file - " + fileName);
+            throw new RuntimeException("can`t write to this file - " + fileName, e);
         }
     }
 }

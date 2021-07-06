@@ -22,5 +22,4 @@ public class Transaction {
     public int getQuantitiy() {
         return quantitiy;
     }
-
 }
