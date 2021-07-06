@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Transaction;
+import core.basesyntax.dto.Transaction;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override

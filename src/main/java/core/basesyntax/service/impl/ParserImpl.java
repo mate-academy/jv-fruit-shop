@@ -1,8 +1,9 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.model.Transaction;
+import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.Parser;
 
 public class ParserImpl implements Parser {
     private static final int OPERATION_INDEX = 0;
@@ -15,7 +16,7 @@ public class ParserImpl implements Parser {
     public Transaction parseLine(String line) {
         String[] splittedData = line.split(COMMA_SEPARATOR);
         if (validate(splittedData)) {
-            Operation operation = Operation.valueOf(splittedData[OPERATION_INDEX]);
+            Operation operation = Operation.valueOf(splittedData[OPERATION_INDEX].toUpperCase());
             Fruit fruit = new Fruit(splittedData[FRUIT_INDEX]);
             int quantity = Integer.parseInt(splittedData[QUANTITY_INDEX]);
             return new Transaction(operation, fruit, quantity);

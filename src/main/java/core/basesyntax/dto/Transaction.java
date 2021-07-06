@@ -1,9 +1,12 @@
-package core.basesyntax.model;
+package core.basesyntax.dto;
+
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Operation;
 
 public class Transaction {
     private final Operation operation;
     private final Fruit fruit;
-    private int quantity;
+    private final int quantity;
 
     public Transaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;
