@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.Transaction;
+import core.basesyntax.service.DataValidatorImpl;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ParserImpl;
 import core.basesyntax.service.ReaderService;
@@ -26,8 +27,8 @@ public class Main {
         handlers.put(Transaction.Operation.S, new AdditionOperationHandler());
 
         ReaderService reader = new ReaderServiceImpl();
-        List<String> stringsList = reader.readFromFile("src/main/toRead.txt");
-        Parser parser = new ParserImpl();
+        List<String> stringsList = reader.readFromFile("src/main/resources.txt");
+        Parser parser = new ParserImpl(new DataValidatorImpl());
         List<Transaction> list = parser.parseToTransactionList(stringsList);
         for (Transaction transaction : list) {
             OperationHandler operationHandler = handlers.get(transaction.getOperation());
@@ -36,6 +37,6 @@ public class Main {
         ReportCreator creator = new ReportCreatorImpl();
         String report = creator.createReport();
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile("src/main/toWrite.txt", report);
+        writerService.writeToFile("src/main/report.txt", report);
     }
 }
