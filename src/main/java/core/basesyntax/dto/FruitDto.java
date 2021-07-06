@@ -5,12 +5,12 @@ import java.util.Objects;
 public class FruitDto {
     private String operation;
     private String name;
-    private int count;
+    private int quantity;
 
-    public FruitDto(String operation, String name, int count) {
+    public FruitDto(String operation, String name, int quantity) {
         this.operation = operation;
         this.name = name;
-        this.count = count;
+        this.quantity = quantity;
     }
 
     public String getOperation() {
@@ -29,12 +29,12 @@ public class FruitDto {
         this.name = name;
     }
 
-    public int getCount() {
-        return count;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -46,13 +46,13 @@ public class FruitDto {
             return false;
         }
         FruitDto fruitDto = (FruitDto) o;
-        return count == fruitDto.count && Objects.equals(operation, fruitDto.operation)
+        return quantity == fruitDto.quantity && Objects.equals(operation, fruitDto.operation)
             && Objects.equals(name, fruitDto.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(operation, name, count);
+        return Objects.hash(operation, name, quantity);
     }
 
     @Override
@@ -60,6 +60,6 @@ public class FruitDto {
         return "FruitDto{"
             + "operation='" + operation + '\''
             + ", name='" + name + '\''
-            + ", count=" + count + '}';
+            + ", count=" + quantity + '}';
     }
 }

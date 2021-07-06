@@ -12,10 +12,10 @@ public class PurchaseHandler implements OperationHandler {
             throw new RuntimeException(fruit.getName() + "isn't exist");
         }
         int count = Storage.storage.get(fruit);
-        if (count - fruitDto.getCount() < 0) {
+        if (count - fruitDto.getQuantity() < 0) {
             throw new RuntimeException(fruit.getName() + "is not enough");
         }
-        int result = count - fruitDto.getCount();
+        int result = count - fruitDto.getQuantity();
         Storage.storage.put(fruit,result);
         return result;
     }

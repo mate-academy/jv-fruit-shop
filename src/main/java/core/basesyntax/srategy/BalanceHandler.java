@@ -7,7 +7,7 @@ import core.basesyntax.model.Fruit;
 public class BalanceHandler implements OperationHandler {
     @Override
     public int apply(FruitDto fruitDto) {
-        Storage.storage.put(new Fruit(fruitDto.getName()), fruitDto.getCount());
-        return fruitDto.getCount();
+        Storage.storage.put(new Fruit(fruitDto.getName()), fruitDto.getQuantity());
+        return fruitDto.getQuantity();
     }
 }

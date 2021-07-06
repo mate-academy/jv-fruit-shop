@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitDto;
 import core.basesyntax.model.Fruit;
 
-public class SupplyHandler implements OperationHandler {
+public class AdditionHandler implements OperationHandler {
     @Override
     public int apply(FruitDto fruitDto) {
         Fruit fruit = new Fruit(fruitDto.getName());
@@ -12,7 +12,7 @@ public class SupplyHandler implements OperationHandler {
             throw new RuntimeException(fruit.getName() + "isn't exist");
         }
         int count = Storage.storage.get(fruit);
-        int result = fruitDto.getCount() + count;
+        int result = fruitDto.getQuantity() + count;
         Storage.storage.put(fruit, result);
         return result;
     }

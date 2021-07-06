@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileCsvReader implements Reader {
+public class CsvFileReader implements FileReader {
     @Override
     public List<String> readFromFile(String fileName) {
         try {
@@ -15,7 +15,7 @@ public class FileCsvReader implements Reader {
                 .skip(1)
                 .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Problem with file",e);
+            throw new RuntimeException("Problem with file" + fileName, e);
         }
     }
 }

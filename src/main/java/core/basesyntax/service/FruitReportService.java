@@ -4,16 +4,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.Map;
 
-public class FruitReport {
+public class FruitReportService implements ReportService {
     public static final String FILE_CSV_TITLE = "fruit,quantity\n";
     private static final char CSV_SEPARATOR = ',';
-    private final Map<Fruit, Integer> storage;
 
-    public FruitReport() {
-        this.storage = Storage.storage;
+    public FruitReportService() {
     }
 
     public String getReport() {
+        final Map<Fruit, Integer> storage = Storage.storage;
         StringBuilder stringBuilder = new StringBuilder(FILE_CSV_TITLE);
         storage.forEach((key, value) -> stringBuilder
                 .append(key.getName())
