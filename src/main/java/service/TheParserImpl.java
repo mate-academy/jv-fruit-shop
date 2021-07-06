@@ -18,10 +18,7 @@ public class TheParserImpl implements TheParser {
         String[] parsedLine = dataline.split(COMMA);
         if ((parsedLine.length == EXPECTED_ELEMENTS)
                 || (Integer.parseInt(parsedLine[QUANTITY_INDEX])) > 0
-                || parsedLine[OPERATION_INDEX].equals(B_CHAR)
-                || parsedLine[OPERATION_INDEX].equals(R_CHAR)
-                || parsedLine[OPERATION_INDEX].equals(S_CHAR)
-                || parsedLine[OPERATION_INDEX].equals(P_CHAR)) {
+                || parsedLine[OPERATION_INDEX].matches("bspr")) {
             return new Transaction(parsedLine[OPERATION_INDEX],
                     parsedLine[FRUIT_INDEX],
                     Integer.parseInt(parsedLine[QUANTITY_INDEX]));
