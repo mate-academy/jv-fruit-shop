@@ -22,5 +22,4 @@ public class Transaction {
     public Integer getQuality() {
         return quality;
     }
-
 }
