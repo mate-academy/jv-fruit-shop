@@ -25,7 +25,7 @@ public class FruitShopDataParser implements Parser<List<String>> {
             partsOfLine = data.get(r).split(SPLITERATOR);
             if (partsOfLine.length != CSV_DATA_PARTS
                     || !(operationTypes.isOperationExist(partsOfLine[TYPE_INDEX]))
-                    || partsOfLine[QUANTITY_INDEX].charAt(0) == '-')) {
+                    || partsOfLine[QUANTITY_INDEX].charAt(0) == '-') {
                 String dataInput = new StringBuilder(partsOfLine[TYPE_INDEX])
                         .append(partsOfLine[FRUIT_INDEX])
                         .append(partsOfLine[QUANTITY_INDEX])
