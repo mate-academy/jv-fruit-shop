@@ -1,11 +1,10 @@
-package dao;
+package db;
 
 import exceptions.BalanceException;
 import java.util.Map;
 import models.Fruit;
 
 public class FruitsDao implements GenericDao<Fruit, Integer> {
-
     @Override
     public void update(Fruit fruit, Integer quantity) {
         if (Storage.fruits.containsKey(fruit)) {

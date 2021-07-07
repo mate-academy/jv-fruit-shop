@@ -1,6 +1,6 @@
 package strategy;
 
-import dao.GenericDao;
+import db.GenericDao;
 import models.Fruit;
 
 public class PurchaseOperationHandler implements OperationStrategy {

@@ -11,9 +11,7 @@ public class ProcessFruitsMapToString implements Process<Map<Fruit,Integer>, Str
             builder.append(entry.getKey().getName())
                     .append(",")
                     .append(entry.getValue())
-                    .append(System.lineSeparator());
         }
-        String result = builder.toString();
-        return result.substring(0, result.length() - 1); //it's for deletion of last line separator
+        return String.join(System.lineSeparator(), builder.toString());
     }
 }

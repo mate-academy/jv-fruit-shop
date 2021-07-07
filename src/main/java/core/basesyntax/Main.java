@@ -4,11 +4,12 @@ import java.nio.file.Path;
 import reporter.FruitShopAutoReporterImpl;
 
 public class Main {
-    private static final Path CSV_DATA_SOURCE = Path.of("./src/main/resources/reportData.txt");
-    private static final Path CSV_DATA_OUTPUT = Path.of("./src/main/resources/FruitShopReport.txt");
+    private static final Path CSV_DATA_SOURCE = Path.of("src/main/resources/reportData.csv");
+    private static final Path CSV_DATA_OUTPUT = Path.of("src/main/resources/FruitShopReport.csv");
 
     public static void main(String[] args) {
-        FruitShopAutoReporterImpl report = new FruitShopAutoReporterImpl();
-        report.makeReportFromTo(CSV_DATA_SOURCE, CSV_DATA_OUTPUT);
+        Reporter report = new FruitShopAutoReporterImpl();
+        GenericDao fruitsDao = new FruitsDao();
+        report.makeReportFromTo(CSV_DATA_SOURCE, CSV_DATA_OUTPUT, fruitsDao);
     }
 }

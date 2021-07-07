@@ -1,7 +1,7 @@
 package parser;
 
 import core.basesyntax.Checker;
-import dao.GenericDao;
+import db.GenericDao;
 import exceptions.InvalidDataException;
 import java.util.List;
 import strategy.OperationTypes;
@@ -22,11 +22,10 @@ public class FruitShopDataParser implements Parser<List<String>> {
     public void parse(List<String> data) {
         String[] partsOfLine;
         OperationTypes operationTypes = new OperationTypes(fruitsDao);
-        for (int r = 1; r < data.size(); r++) {
+        for (int r = 1; r < data.size() - 1; r++) {
             partsOfLine = data.get(r).split(SPLITERATOR);
             if (partsOfLine.length != CSV_DATA_PARTS
                     || !(operationTypes.isOperationExist(partsOfLine[TYPE_INDEX]))
-                    || !(new Checker().checkIfStringIsNumber(partsOfLine[QUANTITY_INDEX])
                     || partsOfLine[QUANTITY_INDEX].charAt(0) == '-')) {
                 String dataInput = new StringBuilder(partsOfLine[TYPE_INDEX])
                         .append(partsOfLine[FRUIT_INDEX])
