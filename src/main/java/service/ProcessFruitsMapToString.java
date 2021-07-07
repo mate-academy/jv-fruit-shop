@@ -10,7 +10,7 @@ public class ProcessFruitsMapToString implements Process<Map<Fruit,Integer>, Str
         for (Map.Entry<Fruit, Integer> entry : map.entrySet()) {
             builder.append(entry.getKey().getName())
                     .append(",")
-                    .append(entry.getValue())
+                    .append(entry.getValue());
         }
         return String.join(System.lineSeparator(), builder.toString());
     }
