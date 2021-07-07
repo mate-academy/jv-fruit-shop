@@ -3,7 +3,7 @@ package strategy;
 import db.GenericDao;
 import models.Fruit;
 
-public class PurchaseOperationHandler implements OperationStrategy {
+public class PurchaseOperationHandler implements OperationHandler {
     private GenericDao dao;
 
     public PurchaseOperationHandler(GenericDao dao) {

@@ -20,7 +20,7 @@ public final class Fruit {
         if (fruit == null || !(fruit.getClass().equals(Fruit.class))) {
             return false;
         }
-        return name.equals((Fruit) fruit.getName());
+        return name.equals(((Fruit)fruit).getName());
     }
 
     @Override
