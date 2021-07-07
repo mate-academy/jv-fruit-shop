@@ -1,6 +1,5 @@
 package parser;
 
-import core.basesyntax.Checker;
 import db.GenericDao;
 import exceptions.InvalidDataException;
 import java.util.List;
