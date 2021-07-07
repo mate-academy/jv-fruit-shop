@@ -1,7 +1,10 @@
 package core.basesyntax;
 
+import db.FruitsDao;
+import db.GenericDao;
 import java.nio.file.Path;
 import reporter.FruitShopAutoReporterImpl;
+import reporter.Reporter;
 
 public class Main {
     private static final Path CSV_DATA_SOURCE = Path.of("src/main/resources/reportData.csv");
