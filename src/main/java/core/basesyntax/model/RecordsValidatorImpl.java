@@ -3,7 +3,13 @@ package core.basesyntax.model;
 public class RecordsValidatorImpl implements RecordsValidator {
     @Override
     public Record validate(String operationType, String fruitName, String quantity) {
-        int fruitQuantity = Integer.parseInt(quantity);
+        int fruitQuantity;
+        try {
+            fruitQuantity = Integer.parseInt(quantity);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Data input file contains illegal "
+                    + "quantity record: " + quantity);
+        }
 
         if (fruitQuantity < 0 || quantity.equals("")) {
             throw new IllegalArgumentException("Data input file contains illegal "
@@ -13,6 +19,10 @@ public class RecordsValidatorImpl implements RecordsValidator {
         if (fruitName == null || fruitName.equals("")) {
             throw new IllegalArgumentException("Data input file contains illegal "
                     + "fruit name record: " + fruitName);
+        }
+
+        if (operationType == null) {
+            throw new IllegalArgumentException("Operation type cannot be NULL");
         }
 
         switch (operationType) {

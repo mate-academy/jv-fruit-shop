@@ -14,12 +14,15 @@ public class ReportsDaoImpl implements ReportsDao {
 
     @Override
     public void saveReport(Map<String, Integer> transactionsMap, String reportFilename) {
+        if (transactionsMap == null) {
+            throw new IllegalArgumentException("Obtained corrupted data for writing");
+        }
         File toFile = new File(reportFilename);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(toFile))) {
-            writer.write(FILE_HEADER + System.lineSeparator());
+            writer.write(FILE_HEADER);
             transactionsMap.forEach((k, v) -> {
                 try {
-                    writer.write(k + SEPARATOR + v + System.lineSeparator());
+                    writer.write(System.lineSeparator() + k + SEPARATOR + v);
                 } catch (IOException e) {
                     throw new RuntimeException("Line " + k + SEPARATOR + v
                             + " cannot be written to file " + reportFilename, e);
@@ -28,7 +31,6 @@ public class ReportsDaoImpl implements ReportsDao {
         } catch (IOException e) {
             throw new RuntimeException("Can't open file " + reportFilename + " for writing ", e);
         }
-
     }
 
     @Override
@@ -40,4 +42,3 @@ public class ReportsDaoImpl implements ReportsDao {
         }
     }
 }
-

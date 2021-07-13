@@ -25,16 +25,18 @@ public class RecordsMapperImpl implements RecordsMapper {
                         + "Expected: " + FILE_HEADER + " but received: " + header);
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Input file " + sourceFilename + " is empty " + e);
+            throw new IllegalArgumentException("Input file " + sourceFilename + " is empty " + e);
         }
-        try {
-            return recordList.stream()
-                    .map((i) -> i.split(SEPARATOR))
-                    .map((i) -> recordsValidator.validate(i[0], i[1], i[2]))
-                    .collect(Collectors.toList());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Input file has corrupted columns structure" + e);
-        }
-
+        return recordList.stream()
+                .map((i) -> i.split(SEPARATOR))
+                .map((i) -> {
+                    if (i.length == 3) {
+                        return recordsValidator.validate(i[0], i[1], i[2]);
+                    } else {
+                        throw new IllegalArgumentException("Input file has corrupted "
+                                + "columns structure");
+                    }
+                })
+                .collect(Collectors.toList());
     }
 }
