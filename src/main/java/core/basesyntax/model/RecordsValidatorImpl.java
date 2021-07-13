@@ -1,31 +1,8 @@
 package core.basesyntax.model;
 
-import core.basesyntax.dao.ReportsDao;
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class RecordsValidatorImpl implements RecordsValidator {
-    private static final String SEPARATOR = ",";
-    private final ReportsDao reportsDao;
-
-    public RecordsValidatorImpl(ReportsDao reportsDao) {
-        this.reportsDao = reportsDao;
-    }
-
+public class RecordsValidatorImpl implements RecordsValidator{
     @Override
-    public List<Record> validateInput(String sourceFilename) {
-        try {
-            return reportsDao.getRawRecords(sourceFilename).stream()
-                    .map((i) -> i.split(SEPARATOR))
-                    .map((i) -> addRecord(i[0], i[1], i[2]))
-                    .collect(Collectors.toList());
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new IllegalArgumentException("Input file has corrupted columns structure", e);
-        }
-
-    }
-
-    private Record addRecord(String operationType, String fruitName, String quantity) {
+    public Record validate(String operationType, String fruitName, String quantity) {
         int fruitQuantity = Integer.parseInt(quantity);
 
         if (fruitQuantity < 0 || quantity.equals("")) {
