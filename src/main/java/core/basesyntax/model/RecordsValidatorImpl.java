@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-public class RecordsValidatorImpl implements RecordsValidator{
+public class RecordsValidatorImpl implements RecordsValidator {
     @Override
     public Record validate(String operationType, String fruitName, String quantity) {
         int fruitQuantity = Integer.parseInt(quantity);

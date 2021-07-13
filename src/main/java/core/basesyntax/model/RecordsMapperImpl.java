@@ -18,7 +18,7 @@ public class RecordsMapperImpl implements RecordsMapper {
     @Override
     public List<Record> map(String sourceFilename) {
         List<String> recordList = reportsDao.getRawRecords(sourceFilename);
-        try{
+        try {
             String header = recordList.remove(0);
             if (!header.equals(FILE_HEADER)) {
                 throw new IllegalArgumentException("Input file has invalid header structure. "

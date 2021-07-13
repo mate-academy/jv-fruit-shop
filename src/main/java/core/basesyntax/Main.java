@@ -2,7 +2,11 @@ package core.basesyntax;
 
 import core.basesyntax.dao.ReportsDao;
 import core.basesyntax.dao.ReportsDaoImpl;
-import core.basesyntax.model.*;
+import core.basesyntax.model.Record;
+import core.basesyntax.model.RecordsMapper;
+import core.basesyntax.model.RecordsMapperImpl;
+import core.basesyntax.model.RecordsValidator;
+import core.basesyntax.model.RecordsValidatorImpl;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
 import core.basesyntax.service.OperationStrategy;
