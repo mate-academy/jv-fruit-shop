@@ -1,12 +1,10 @@
 package core.basesyntax.dao;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
@@ -35,22 +33,10 @@ public class ReportsDaoImpl implements ReportsDao {
 
     @Override
     public List<String> getRawRecords(String sourceFilename) {
-        File fromFile = new File(sourceFilename);
-        try (BufferedReader reader = new BufferedReader(new FileReader(fromFile))) {
-            String line = reader.readLine();
-            if (!line.equals(FILE_HEADER)) {
-                throw new IllegalArgumentException("Input file has incorrect heading. "
-                    + "Expected - " + FILE_HEADER + ", provided - " + line);
-            }
-            line = reader.readLine();
-            List<String> rawRecords = new LinkedList<>();
-            while (line != null) {
-                rawRecords.add(line);
-                line = reader.readLine();
-            }
-            return rawRecords;
+        try {
+            return Files.readAllLines(new File(sourceFilename).toPath());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file " + fromFile + " for reading", e);
+            throw new RuntimeException("Can't open file " + sourceFilename + " for reading", e);
         }
     }
 }

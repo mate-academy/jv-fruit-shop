@@ -2,9 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.ReportsDao;
 import core.basesyntax.dao.ReportsDaoImpl;
-import core.basesyntax.model.Record;
-import core.basesyntax.model.RecordsValidator;
-import core.basesyntax.model.RecordsValidatorImpl;
+import core.basesyntax.model.*;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
 import core.basesyntax.service.OperationStrategy;
@@ -31,9 +29,10 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(OPERATION_HANDLER_MAP);
         ReportsDao reportsDao = new ReportsDaoImpl();
-        RecordsValidator recordsValidator = new RecordsValidatorImpl(reportsDao);
+        RecordsValidator recordsValidator = new RecordsValidatorImpl();
+        RecordsMapper recordsMapper = new RecordsMapperImpl(reportsDao, recordsValidator);
         FruitShopService fruitShopService =
-                new FruitShopServiceImpl(reportsDao, operationStrategy, recordsValidator);
+                new FruitShopServiceImpl(reportsDao, operationStrategy, recordsMapper);
 
         fruitShopService.generateDailyReport(INPUT_FILENAME, REPORT_FILENAME);
     }

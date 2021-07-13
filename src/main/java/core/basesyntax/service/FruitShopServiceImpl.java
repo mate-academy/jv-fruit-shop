@@ -2,26 +2,26 @@ package core.basesyntax.service;
 
 import core.basesyntax.dao.ReportsDao;
 import core.basesyntax.model.Record;
-import core.basesyntax.model.RecordsValidator;
+import core.basesyntax.model.RecordsMapper;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private final ReportsDao reportsDao;
     private final OperationStrategy operationStrategy;
-    private final RecordsValidator recordsValidator;
+    private final RecordsMapper recordsMapper;
     private final Map<String, Integer> transactionsMap = new HashMap<>();
 
     public FruitShopServiceImpl(ReportsDao reportsDao, OperationStrategy operationStrategy,
-                                RecordsValidator recordsValidator) {
+                                RecordsMapper recordsMapper) {
         this.reportsDao = reportsDao;
         this.operationStrategy = operationStrategy;
-        this.recordsValidator = recordsValidator;
+        this.recordsMapper = recordsMapper;
     }
 
     @Override
     public void generateDailyReport(String dataSourceFilename, String reportFilename) {
-        recordsValidator.validateInput(dataSourceFilename).forEach(this::sortRecord);
+        recordsMapper.map(dataSourceFilename).forEach(this::sortRecord);
         reportsDao.saveReport(transactionsMap, reportFilename);
     }
 
