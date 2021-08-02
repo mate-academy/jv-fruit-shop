@@ -1,40 +1,39 @@
 package dao;
 
-import fileManagers.FileManager;
-import fileManagers.FileManagerCsvImpl;
-import fruitOperationManagers.FruitOperationManager;
-import fruitOperationManagers.FruitOperationManagerCsvImpl;
+import fm.FileManager;
+import fm.FileManagerCsvImpl;
+import fom.FruitOperationManager;
+import fom.FruitOperationManagerCsvImpl;
+import java.util.List;
+import java.util.stream.Collectors;
 import validators.FruitDataValidator;
 import validators.FruitDataValidatorCsvImpl;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class ShopOperationsDaoCsvImpl implements ShopOperationsDao {
-    private final String INPUT_FILE_NAME;
-    private final String OUTPUT_FILE_NAME;
+    private final String inputFileName;
+    private final String outputFileName;
 
     public ShopOperationsDaoCsvImpl(String inputFileName, String outputFileName) {
-        this.INPUT_FILE_NAME = inputFileName;
-        this.OUTPUT_FILE_NAME = outputFileName;
+        this.inputFileName = inputFileName;
+        this.outputFileName = outputFileName;
     }
 
     @Override
     public boolean validate() {
-        FruitDataValidator dataValidator = new FruitDataValidatorCsvImpl(INPUT_FILE_NAME);
+        FruitDataValidator dataValidator = new FruitDataValidatorCsvImpl(inputFileName);
         return dataValidator.validate();
     }
 
     @Override
     public void generateReport() {
         if (!validate()) {
-            throw new RuntimeException("File " + INPUT_FILE_NAME + " is not valid!");
+            throw new RuntimeException("File " + inputFileName + " is not valid!");
         }
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity").append(System.lineSeparator());
 
-        FruitOperationManager operationManager = new FruitOperationManagerCsvImpl(INPUT_FILE_NAME);
+        FruitOperationManager operationManager = new FruitOperationManagerCsvImpl(inputFileName);
         operationManager.getAllOperations()
                 .stream()
                 .map(this::cutFruitDataToNameValueFormat)
@@ -44,7 +43,7 @@ public class ShopOperationsDaoCsvImpl implements ShopOperationsDao {
                 .forEach(s -> stringBuilder.append(s).append(System.lineSeparator()));
 
         FileManager fileManager = new FileManagerCsvImpl();
-        fileManager.writeToFile(OUTPUT_FILE_NAME, stringBuilder.toString().trim());
+        fileManager.writeToFile(outputFileName, stringBuilder.toString().trim());
     }
 
     private String getFruitTotal(String fruit, List<String> operationList) {

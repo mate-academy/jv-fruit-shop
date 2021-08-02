@@ -1,8 +1,7 @@
 package validators;
 
-import fruitOperationManagers.FruitOperationManager;
-import fruitOperationManagers.FruitOperationManagerCsvImpl;
-
+import fom.FruitOperationManager;
+import fom.FruitOperationManagerCsvImpl;
 import java.util.List;
 
 public class FruitDataValidatorCsvImpl implements FruitDataValidator {
