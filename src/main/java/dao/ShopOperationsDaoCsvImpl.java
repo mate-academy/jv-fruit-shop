@@ -2,8 +2,6 @@ package dao;
 
 import fm.FileManager;
 import fm.FileManagerCsvImpl;
-import fom.FruitOperationManager;
-import fom.FruitOperationManagerCsvImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 import validators.FruitDataValidator;
@@ -12,6 +10,7 @@ import validators.FruitDataValidatorCsvImpl;
 public class ShopOperationsDaoCsvImpl implements ShopOperationsDao {
     private final String inputFileName;
     private final String outputFileName;
+    private final FileManager fileManager = new FileManagerCsvImpl();
 
     public ShopOperationsDaoCsvImpl(String inputFileName, String outputFileName) {
         this.inputFileName = inputFileName;
@@ -21,8 +20,7 @@ public class ShopOperationsDaoCsvImpl implements ShopOperationsDao {
     @Override
     public boolean validate() {
         FruitDataValidator dataValidator = new FruitDataValidatorCsvImpl();
-        FruitOperationManager operationManager = new FruitOperationManagerCsvImpl(inputFileName);
-        return dataValidator.validate(operationManager.getAllOperations());
+        return dataValidator.validate(fileManager.getAllOperations(inputFileName));
     }
 
     @Override
@@ -34,8 +32,7 @@ public class ShopOperationsDaoCsvImpl implements ShopOperationsDao {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity").append(System.lineSeparator());
 
-        FruitOperationManager operationManager = new FruitOperationManagerCsvImpl(inputFileName);
-        operationManager.getAllOperations()
+        fileManager.getAllOperations(inputFileName)
                 .stream()
                 .map(this::cutFruitDataToNameValueFormat)
                 .collect(Collectors.groupingBy(row -> row.split(",")[0]))
