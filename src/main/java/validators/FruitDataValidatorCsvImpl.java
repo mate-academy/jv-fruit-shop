@@ -1,14 +1,10 @@
 package validators;
 
-import fom.FruitOperationManager;
-import fom.FruitOperationManagerCsvImpl;
 import java.util.List;
 
 public class FruitDataValidatorCsvImpl implements FruitDataValidator {
-        @Override
-    public boolean validate(String csvFilePath) {
-        FruitOperationManager operationManager = new FruitOperationManagerCsvImpl(csvFilePath);
-        List<String> operations = operationManager.getAllOperations();
+    @Override
+    public boolean validate(List<String> operations) {
         return operations.stream()
                 .allMatch(this::rowIsValid);
     }

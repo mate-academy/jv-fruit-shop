@@ -1,5 +1,7 @@
 package validators;
 
+import java.util.List;
+
 public interface FruitDataValidator {
-    boolean validate(String filePath);
+    boolean validate(List<String> rows);
 }
