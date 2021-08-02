@@ -1,5 +1,5 @@
 package validators;
 
 public interface FruitDataValidator {
-    boolean validate();
+    boolean validate(String filePath);
 }

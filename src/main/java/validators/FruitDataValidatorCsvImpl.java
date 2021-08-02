@@ -5,14 +5,8 @@ import fom.FruitOperationManagerCsvImpl;
 import java.util.List;
 
 public class FruitDataValidatorCsvImpl implements FruitDataValidator {
-    private final String csvFilePath;
-
-    public FruitDataValidatorCsvImpl(String csvFilePath) {
-        this.csvFilePath = csvFilePath;
-    }
-
-    @Override
-    public boolean validate() {
+        @Override
+    public boolean validate(String csvFilePath) {
         FruitOperationManager operationManager = new FruitOperationManagerCsvImpl(csvFilePath);
         List<String> operations = operationManager.getAllOperations();
         return operations.stream()

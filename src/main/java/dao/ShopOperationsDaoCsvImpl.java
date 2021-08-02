@@ -20,8 +20,8 @@ public class ShopOperationsDaoCsvImpl implements ShopOperationsDao {
 
     @Override
     public boolean validate() {
-        FruitDataValidator dataValidator = new FruitDataValidatorCsvImpl(inputFileName);
-        return dataValidator.validate();
+        FruitDataValidator dataValidator = new FruitDataValidatorCsvImpl();
+        return dataValidator.validate(inputFileName);
     }
 
     @Override
