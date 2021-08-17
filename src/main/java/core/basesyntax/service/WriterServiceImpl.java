@@ -23,7 +23,7 @@ public class WriterServiceImpl implements WriterService {
         }
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, false));) {
-            fruitStorageDao.getFruitList().stream()
+            fruitStorageDao.getFruitList()
                     .forEach(fruit -> {
                         try {
                             bufferedWriter.write(fruit.getName() + "," + fruit.getQuantity());

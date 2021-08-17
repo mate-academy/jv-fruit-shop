@@ -4,10 +4,8 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,17 +19,19 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     @Override
-    public void readFromFile(String fileName) {
-        List<String> data = new ArrayList<>();
+    public List<String> readFromFile(String fileName) {
         try {
-            data = Files.readAllLines(Path.of(fileName));
+            return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't get data from file " + fileName);
         }
+    }
 
+    @Override
+    public void packToStorage(List<String> data) {
         data.stream()
                 .map(this::getFromCsvRow)
-                .filter(new FileDataValidator())
+                .peek(new FileDataValidator())
                 .forEach(this::performOperations);
     }
 
@@ -41,7 +41,7 @@ public class ReaderServiceImpl implements ReaderService {
         try {
             operation.setType(fields[0]);
             operation.setFruitName(fields[1]);
-            operation.setQuantity(new BigDecimal(fields[2]));
+            operation.setQuantity(Long.parseLong(fields[2]));
         } catch (Exception e) {
             throw new RuntimeException("The input file has incorrect data!");
         }
@@ -57,7 +57,7 @@ public class ReaderServiceImpl implements ReaderService {
             fruit = fruitOptional.get();
         }
 
-        BigDecimal calculation = operationStrategy.get(operation.getType())
+        long calculation = operationStrategy.get(operation.getType())
                 .perform(fruit, operation.getQuantity());
 
         fruit.setQuantity(calculation);

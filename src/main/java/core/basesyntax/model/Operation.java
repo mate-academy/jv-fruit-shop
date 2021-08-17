@@ -1,22 +1,21 @@
 package core.basesyntax.model;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Operation {
-    public static final Map<String, Type> TYPE_MAP = new HashMap<>();
+    public static final Map<String, Type> typeMap = new HashMap<>();
 
     static {
-        TYPE_MAP.put("b", Type.BALANCE);
-        TYPE_MAP.put("s", Type.SUPPLY);
-        TYPE_MAP.put("p", Type.PURCHASE);
-        TYPE_MAP.put("r", Type.RETURN);
+        typeMap.put("b", Type.BALANCE);
+        typeMap.put("s", Type.SUPPLY);
+        typeMap.put("p", Type.PURCHASE);
+        typeMap.put("r", Type.RETURN);
     }
 
     private Type type;
     private String fruitName;
-    private BigDecimal quantity;
+    private long quantity;
 
     public enum Type {
         BALANCE, SUPPLY, PURCHASE, RETURN;
@@ -31,7 +30,7 @@ public class Operation {
     }
 
     public void setType(String type) {
-        this.type = TYPE_MAP.get(type);
+        this.type = typeMap.get(type);
     }
 
     public String getFruitName() {
@@ -42,11 +41,11 @@ public class Operation {
         this.fruitName = fruitName;
     }
 
-    public BigDecimal getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigDecimal quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 }

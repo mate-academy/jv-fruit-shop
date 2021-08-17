@@ -1,5 +1,9 @@
 package core.basesyntax.service;
 
+import java.util.List;
+
 public interface ReaderService {
-    void readFromFile(String fileName);
+    List<String> readFromFile(String fileName);
+
+    void packToStorage(List<String> data);
 }

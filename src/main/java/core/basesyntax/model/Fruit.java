@@ -1,24 +1,23 @@
 package core.basesyntax.model;
 
-import java.math.BigDecimal;
-
 public class Fruit {
     private final String name;
-    private BigDecimal quantity = new BigDecimal(0);
+    private long quantity;
 
     public Fruit(String name) {
         this.name = name;
+        this.quantity = 0;
     }
 
     public String getName() {
         return name;
     }
 
-    public BigDecimal getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigDecimal quantity) {
+    public void setQuantity(long quantity) {
         this.quantity = quantity;
     }
 

@@ -1,16 +1,14 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Operation;
-import java.math.BigDecimal;
-import java.util.function.Predicate;
+import java.util.function.Consumer;
 
-public class FileDataValidator implements Predicate<Operation> {
+public class FileDataValidator implements Consumer<Operation> {
     @Override
-    public boolean test(Operation operation) {
+    public void accept(Operation operation) {
         if (operation.getFruitName().isEmpty()
-                || operation.getQuantity().compareTo(new BigDecimal(0)) < 0) {
+                || operation.getQuantity() < 0) {
             throw new RuntimeException("Validation data didn't pass! Data is incorrect!");
         }
-        return true;
     }
 }
