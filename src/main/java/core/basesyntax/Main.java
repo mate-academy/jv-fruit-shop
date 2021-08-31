@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import database.FruitDao;
-import database.FruitDaoImpl;
+import database.FileService;
+import database.FileServiceImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,13 +32,14 @@ public class Main {
         typeHandlerMap.put(Operation.SUPPLY.getType(), new SupplyHandler());
         typeHandlerMap.put(Operation.PURCHASE.getType(), new PurchaseHandler());
 
-        FruitDao fruitDao = new FruitDaoImpl();
+        FileService fruitDao = new FileServiceImpl();
         List<String> input = fruitDao.readFile(inputName);
 
         List<FruitShopOperation> shopOperationList = new ArrayList<>();
         LineParser parser = new LineParserImpl();
         for (int i = 1; i < input.size(); i++) {
             shopOperationList.add(parser.parseLine(input.get(i)));
+
         }
         Strategy strategy = new Strategy(typeHandlerMap);
         strategy.operationHandler(shopOperationList);
@@ -46,7 +47,7 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.makeReport();
 
-        FruitDao fileWriter = new FruitDaoImpl();
+        FileService fileWriter = new FileServiceImpl();
         fileWriter.writeToFile(outPutName, report);
     }
 }

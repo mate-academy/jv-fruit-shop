@@ -5,11 +5,14 @@ import shop.Fruit;
 import shop.FruitShopOperation;
 
 public class ReturnHandler implements TypeHandler {
-    private int balance;
+    private static final int DEFAULT_VALUE = 0;
 
     @Override
-    public void countAmount(FruitShopOperation fruitShopOperation) {
-        balance = fruitShopOperation.getAmount();
-        StorageFruits.storageFruits.put(new Fruit(fruitShopOperation.getName()), balance);
+    public int countAmount(FruitShopOperation fruitShopOperation) {
+        Fruit fruit = fruitShopOperation.getFruit();
+        int oldQuantity = StorageFruits.storageFruits.getOrDefault(fruit, DEFAULT_VALUE);
+        int newQuantity = oldQuantity + fruitShopOperation.getAmount();
+        StorageFruits.storageFruits.put(fruitShopOperation.getFruit(), newQuantity);
+        return newQuantity;
     }
 }

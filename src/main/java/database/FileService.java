@@ -2,7 +2,7 @@ package database;
 
 import java.util.List;
 
-public interface FruitDao {
+public interface FileService {
 
     List<String> readFile(String inputName);
 

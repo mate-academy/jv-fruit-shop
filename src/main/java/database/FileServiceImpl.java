@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class FruitDaoImpl implements FruitDao {
+public class FileServiceImpl implements FileService {
 
     @Override
     public List<String> readFile(String inputName) {

@@ -1,16 +1,15 @@
 package strategy;
 
 import database.StorageFruits;
-import shop.Fruit;
 import shop.FruitShopOperation;
 
 public class BalanceHandler implements TypeHandler {
-    private int balance;
 
     @Override
-    public void countAmount(FruitShopOperation fruitShopOperation) {
-        balance = fruitShopOperation.getAmount();
-        StorageFruits.storageFruits.put(new Fruit(fruitShopOperation.getName()), balance);
+    public int countAmount(FruitShopOperation fruitShopOperation) {
+        StorageFruits.storageFruits.put(fruitShopOperation.getFruit(),
+                fruitShopOperation.getAmount());
+        return fruitShopOperation.getAmount();
     }
 }
 
