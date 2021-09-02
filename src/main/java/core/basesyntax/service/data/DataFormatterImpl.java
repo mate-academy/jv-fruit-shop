@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.service.data;
 
 import core.basesyntax.dao.OperationDao;
 import core.basesyntax.dao.OperationDaoImpl;
