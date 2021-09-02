@@ -4,7 +4,7 @@ import core.basesyntax.dao.OperationDao;
 import core.basesyntax.dao.OperationDaoImpl;
 import java.util.List;
 
-public class DataFormatterImpl implements DataFormatter {
+public class DataToOperationFormatterImpl implements DataToOperationFormatter {
     @Override
     public void formatData(List<String> data) {
         OperationDao operationDao = new OperationDaoImpl();

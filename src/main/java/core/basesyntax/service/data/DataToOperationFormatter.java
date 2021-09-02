@@ -2,6 +2,6 @@ package core.basesyntax.service.data;
 
 import java.util.List;
 
-public interface DataFormatter {
+public interface DataToOperationFormatter {
     void formatData(List<String> data);
 }
