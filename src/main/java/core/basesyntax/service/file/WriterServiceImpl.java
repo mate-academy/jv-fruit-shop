@@ -12,7 +12,7 @@ public class WriterServiceImpl implements WriterService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
             bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("cant write to file " + fileName, e);
+            throw new RuntimeException("Can't write to file " + fileName, e);
         }
     }
 }

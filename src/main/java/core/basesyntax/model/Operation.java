@@ -22,4 +22,21 @@ public class Operation {
     public int getAmount() {
         return amount;
     }
+
+    public enum Type {
+        BALANCE("b"),
+        PURCHASE("p"),
+        RETURN("r"),
+        SUPPLY("s");
+
+        private String type;
+
+        Type(String s) {
+            this.type = s;
+        }
+
+        public String getType() {
+            return type;
+        }
+    }
 }

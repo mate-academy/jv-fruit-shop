@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.util.Map;
+
 public interface StoreService {
-    String createReport();
+    String createReport(Map<String, Integer> fruitsStorage);
 }

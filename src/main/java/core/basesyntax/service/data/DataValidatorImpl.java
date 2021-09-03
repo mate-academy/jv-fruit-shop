@@ -1,15 +1,12 @@
 package core.basesyntax.service.data;
 
-import java.util.List;
+import java.util.Arrays;
 
 public class DataValidatorImpl implements DataValidator {
     @Override
-    public void validate(List<String> data) {
-        for (String datum : data) {
-            String[] datumArray = datum.split(",");
-            if (datumArray.length != 3 || Integer.parseInt(datumArray[2]) <= 0) {
-                throw new RuntimeException("Wrong data input: " + data);
-            }
+    public void validate(String[] datumArray) {
+        if (datumArray.length != 3 || Integer.parseInt(datumArray[2]) <= 0) {
+                throw new RuntimeException("Wrong data input: " + Arrays.toString(datumArray));
         }
     }
 }

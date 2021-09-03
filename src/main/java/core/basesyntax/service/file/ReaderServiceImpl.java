@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
+    private static final int FIRST_LINE_INDEX = 0;
+
     @Override
     public List<String> readFromFile(String filePath) {
         List<String> data;
@@ -14,7 +16,7 @@ public class ReaderServiceImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + filePath, e);
         }
-        data.remove(0);
+        data.remove(FIRST_LINE_INDEX);
         return data;
     }
 }
