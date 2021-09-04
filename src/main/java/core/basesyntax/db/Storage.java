@@ -1,8 +1,8 @@
-package db;
+package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
-import model.Fruit;
+import core.basesyntax.model.Fruit;
 
 public class Storage {
     public static final Map<Fruit, Integer> data = new HashMap<>();

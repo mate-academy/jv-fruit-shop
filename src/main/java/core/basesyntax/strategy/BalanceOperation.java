@@ -1,7 +1,7 @@
-package strategy;
+package core.basesyntax.strategy;
 
-import db.Storage;
-import dto.Transaction;
+import core.basesyntax.db.Storage;
+import core.basesyntax.dto.Transaction;
 
 public class BalanceOperation implements Operation {
     @Override

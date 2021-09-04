@@ -1,9 +1,9 @@
-package strategy;
+package core.basesyntax.strategy;
 
-import db.Storage;
-import dto.Transaction;
-import service.Validator;
-import service.ValidatorImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.dto.Transaction;
+import core.basesyntax.service.Validator;
+import core.basesyntax.service.ValidatorImpl;
 
 public class PurchaseOperation implements Operation {
     @Override

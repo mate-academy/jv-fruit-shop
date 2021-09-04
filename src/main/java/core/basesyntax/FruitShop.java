@@ -1,17 +1,19 @@
-import dto.Transaction;
+package core.basesyntax;
+
+import core.basesyntax.dto.Transaction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import service.FileReaderImpl;
-import service.FileWriter;
-import service.FileWriterImpl;
-import service.FruitParser;
-import service.ReportFruitImpl;
-import service.ValidatorImpl;
-import strategy.BalanceOperation;
-import strategy.Operation;
-import strategy.PurchaseOperation;
-import strategy.SupplyOperation;
+import core.basesyntax.service.FileReaderImpl;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FileWriterImpl;
+import core.basesyntax.service.FruitParser;
+import core.basesyntax.service.ReportFruitImpl;
+import core.basesyntax.service.ValidatorImpl;
+import core.basesyntax.strategy.BalanceOperation;
+import core.basesyntax.strategy.Operation;
+import core.basesyntax.strategy.PurchaseOperation;
+import core.basesyntax.strategy.SupplyOperation;
 
 public class FruitShop {
     public static void main(String[] args) {
@@ -21,7 +23,7 @@ public class FruitShop {
         operationsMap.put("p", new PurchaseOperation());
         operationsMap.put("r", new SupplyOperation());
         FileReaderImpl fileReader = new FileReaderImpl();
-        List<String> listData = fileReader.readFromFile("src/main/resources/input.csv");
+        List<String> listData = fileReader.readFromFile("src/main/java/core/basesyntax/resources/input.csv");
         listData.remove(0);
         ValidatorImpl validator = new ValidatorImpl();
 
@@ -33,6 +35,6 @@ public class FruitShop {
         }
         ReportFruitImpl fruitReport = new ReportFruitImpl();
         FileWriter writer = new FileWriterImpl();
-        writer.writeToFile("src/main/resources/output.csv", fruitReport.getReport());
+        writer.writeToFile("src/main/java/core/basesyntax/resources/output.csv", fruitReport.getReport());
     }
 }

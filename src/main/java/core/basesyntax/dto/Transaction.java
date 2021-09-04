@@ -1,6 +1,6 @@
-package dto;
+package core.basesyntax.dto;
 
-import model.Fruit;
+import core.basesyntax.model.Fruit;
 
 public class Transaction {
     private final String operation;

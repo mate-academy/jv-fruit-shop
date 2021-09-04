@@ -1,7 +1,7 @@
-package service;
+package core.basesyntax.service;
 
-import dto.Transaction;
-import model.Fruit;
+import core.basesyntax.dto.Transaction;
+import core.basesyntax.model.Fruit;
 
 public class FruitParser {
     public static final int OPERATION = 0;
