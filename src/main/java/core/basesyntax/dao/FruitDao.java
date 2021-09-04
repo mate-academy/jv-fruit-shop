@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
-import java.io.File;
+import java.util.List;
 
 public interface FruitDao {
-    File get();
+    List<String> getData();
 }
