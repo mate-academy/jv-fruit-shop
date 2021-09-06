@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class FileWriterImpl {
+public class FileWriterImpl implements WriteIntoFile {
+    @Override
     public void writeInFile(Set<Map.Entry<String, Integer>> entries, String toFile) {
         File file = new File(toFile);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {

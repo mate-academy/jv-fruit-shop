@@ -1,0 +1,10 @@
+package core.basesyntax.service.operationHandler;
+
+import core.basesyntax.service.reportdb.ReportDataStorage;
+
+public class PurchaseOperationHandler implements OperationHandler{
+    @Override
+    public boolean provideOperation(ReportDataStorage reportDataStorage, String fruit, Integer amount) {
+        return reportDataStorage.acceptData(fruit, reportDataStorage.getDataPerFruit(fruit) - amount);
+    }
+}

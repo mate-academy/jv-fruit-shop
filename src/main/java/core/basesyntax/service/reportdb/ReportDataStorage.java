@@ -11,3 +11,6 @@ public interface ReportDataStorage {
 
     Set<Map.Entry<String, Integer>> getAllData();
 }
+
+
+
