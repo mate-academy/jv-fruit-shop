@@ -1,10 +1,10 @@
 package core.basesyntax.validator;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ValidatorImpl implements Validator{
+public class ValidatorImpl implements Validator {
+
     @Override
     public boolean validate(List<String> input) {
         input.remove(0);

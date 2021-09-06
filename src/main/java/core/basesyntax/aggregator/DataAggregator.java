@@ -1,6 +1,5 @@
 package core.basesyntax.aggregator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface DataAggregator {

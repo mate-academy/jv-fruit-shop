@@ -1,10 +1,9 @@
-package core.basesyntax.fileWriter;
+package core.basesyntax.filewriter;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 

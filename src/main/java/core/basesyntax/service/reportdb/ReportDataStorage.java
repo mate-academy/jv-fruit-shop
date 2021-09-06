@@ -1,6 +1,5 @@
 package core.basesyntax.service.reportdb;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class ReportDataStoragePerMapImpl implements ReportDataStorage{
+public class ReportDataStoragePerMapImpl implements ReportDataStorage {
     private HashMap<String, Integer> dataStorageMap;
 
     public ReportDataStoragePerMapImpl(HashMap<String, Integer> dataStorageMap) {

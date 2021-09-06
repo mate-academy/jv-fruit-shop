@@ -1,6 +1,5 @@
-package core.basesyntax.fileWriter;
+package core.basesyntax.filewriter;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
