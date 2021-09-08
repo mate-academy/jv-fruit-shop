@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.service.operationstrategy;
 
 import core.basesyntax.service.operationhandler.OperationHandler;
 import java.util.Map;

@@ -4,8 +4,10 @@ import core.basesyntax.dao.FileDaoCsv;
 import core.basesyntax.dao.FileDaoCsvImpl;
 import core.basesyntax.filewriter.FileWriterImpl;
 import core.basesyntax.filewriter.WriteIntoFile;
-import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.operationprovider.OperationProvider;
+import core.basesyntax.operationprovider.OperationProviderImpl;
+import core.basesyntax.service.operationstrategy.OperationStrategy;
+import core.basesyntax.service.operationstrategy.OperationStrategyImpl;
 import core.basesyntax.service.operationhandler.BalanceOperationHandler;
 import core.basesyntax.service.operationhandler.OperationHandler;
 import core.basesyntax.service.operationhandler.PurchaseOperationHandler;
@@ -20,9 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final String FROM_FILE_NAME = "report.csv";
+    public static final String TO_FILE_NAME = "result.csv";
+
     public static void main(String[] args) {
         FileDaoCsv fileDaoCsv = new FileDaoCsvImpl();
-        List<String> input = fileDaoCsv.getData("report.csv");
+        List<String> input = fileDaoCsv.getData(FROM_FILE_NAME);
         Validator validator = new ValidatorImpl();
         if (!validator.validate(input)) {
             throw new RuntimeException("Incorrect data in the file");
@@ -39,13 +44,9 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ReportDataStorage reportDataStorage =
                 new ReportDataStoragePerMapImpl(new HashMap<>());
-        for (String s : input) {
-            String[] separate = s.split(",");
-            operationStrategy.getOperationHandler(separate[0])
-                    .provideOperation(reportDataStorage,
-                            separate[1], Integer.parseInt(separate[2]));
-        }
+        OperationProvider operationProvider = new OperationProviderImpl();
+        operationProvider.provideOperations(input, operationStrategy, reportDataStorage);
         WriteIntoFile fileWriter = new FileWriterImpl();
-        fileWriter.writeInFile(reportDataStorage.getAllData(), "result.csv");
+        fileWriter.writeInFile(reportDataStorage.getAllData(), TO_FILE_NAME);
     }
 }

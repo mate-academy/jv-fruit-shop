@@ -4,22 +4,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ValidatorImpl implements Validator {
+    private static final int HEAD_STRING = 0;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int NUMBER_INDEX = 2;
 
     @Override
     public boolean validate(List<String> input) {
-        input.remove(0);
+        input.remove(HEAD_STRING);
         List<String> fruits = input.stream().map(s -> s.split(","))
-                .filter(strings -> strings[0].equals("b"))
-                .map(strings -> strings[1])
+                .filter(strings -> strings[OPERATION_INDEX].equals("b"))
+                .map(strings -> strings[FRUIT_INDEX])
                 .collect(Collectors.toList());
         return !input.stream()
                 .map(s -> s.split(","))
-                .anyMatch(strings -> Integer.parseInt(strings[2]) < 0
-                    || (strings[0].isEmpty() || strings[1].isEmpty() || strings[2].isEmpty())
-                    || !(strings[0].equals("s")
-                        || strings[0].equals("b")
-                        || strings[0].equals("p")
-                        || strings[0].equals("r"))
+                .anyMatch(strings -> Integer.parseInt(strings[NUMBER_INDEX]) < OPERATION_INDEX
+                    || (strings[OPERATION_INDEX].isEmpty()
+                        || strings[FRUIT_INDEX].isEmpty()
+                        || strings[NUMBER_INDEX].isEmpty())
                     || !(fruits.contains(strings[1])));
     }
 }
