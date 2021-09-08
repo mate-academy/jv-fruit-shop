@@ -6,9 +6,9 @@ import core.basesyntax.model.FruitRecord;
 public class IncreaseAmountOperationHandlerImpl implements OperationHandler {
     @Override
     public int getChangedAmount(FruitRecord record) {
-        int amount = Storage.storage.get(record.getFruitName());
+        int amount = Storage.getStorage().get(record.getFruitName());
         int newAmount = amount + record.getAmount();
-        Storage.storage.put(record.getFruitName(), newAmount);
+        Storage.getStorage().put(record.getFruitName(), newAmount);
         return newAmount;
     }
 }

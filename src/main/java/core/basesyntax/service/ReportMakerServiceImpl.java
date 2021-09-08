@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-
 import java.util.Map;
 
 public class ReportMakerServiceImpl implements ReportMakerService {
@@ -12,7 +11,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
     @Override
     public String getReport() {
         StringBuilder builder = new StringBuilder(FIRST_ROW);
-        for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.getStorage().entrySet()) {
             builder.append(LINE_SEPARATOR)
                     .append(getSingleFruitReport(entry));
         }

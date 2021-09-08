@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitRecord;
 public class BalanceOperationHandlerImpl implements OperationHandler {
     @Override
     public int getChangedAmount(FruitRecord record) {
-        Storage.storage.put(record.getFruitName(), record.getAmount());
+        Storage.getStorage().put(record.getFruitName(), record.getAmount());
         return record.getAmount();
     }
 }

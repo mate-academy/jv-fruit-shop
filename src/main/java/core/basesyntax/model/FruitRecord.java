@@ -27,11 +27,11 @@ public class FruitRecord {
 
     @Override
     public String toString() {
-        return "FruitRecord{" +
-                "operation=" + operation +
-                ", fruitName='" + fruitName + '\'' +
-                ", amount=" + amount +
-                '}';
+        return "FruitRecord{"
+                + "operation=" + operation
+                + ", fruitName='" + fruitName + '\''
+                + ", amount=" + amount
+                + '}';
     }
 
     public static Operation getOperationByFirstLetter(char symbol) {
@@ -40,8 +40,8 @@ public class FruitRecord {
             case 'p': return Operation.PURCHASE;
             case 'r': return Operation.RETURN;
             case 's': return Operation.SUPPLY;
+            default: throw new NoSuchElementException("There isn't such operation for fruit shop.");
         }
-        throw new NoSuchElementException("There isn't such operation for fruit shop.");
     }
 
     public enum Operation {
