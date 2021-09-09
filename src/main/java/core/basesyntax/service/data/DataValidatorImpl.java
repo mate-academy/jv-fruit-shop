@@ -8,7 +8,8 @@ public class DataValidatorImpl implements DataValidator {
 
     @Override
     public void validate(String[] datumArray) {
-        if (datumArray.length != NUMBER_OF_COLUMNS || Integer.parseInt(datumArray[INDEX_OF_AMOUNT]) <= 0) {
+        if (datumArray.length != NUMBER_OF_COLUMNS
+                || Integer.parseInt(datumArray[INDEX_OF_AMOUNT]) <= 0) {
             throw new RuntimeException("Wrong data input: " + Arrays.toString(datumArray));
         }
     }
