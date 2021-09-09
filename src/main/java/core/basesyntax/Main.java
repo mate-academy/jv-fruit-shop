@@ -5,10 +5,10 @@ import core.basesyntax.service.AmountCalculator;
 import core.basesyntax.service.AmountCalculatorImpl;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
-import core.basesyntax.service.StoreService;
-import core.basesyntax.service.StoreServiceImpl;
-import core.basesyntax.service.data.DataToOperationsFormatter;
-import core.basesyntax.service.data.DataToOperationsFormatterImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportServiceImpl;
+import core.basesyntax.service.data.DataParser;
+import core.basesyntax.service.data.CsvOperationParser;
 import core.basesyntax.service.file.ReaderService;
 import core.basesyntax.service.file.ReaderServiceImpl;
 import core.basesyntax.service.file.WriterService;
@@ -25,20 +25,20 @@ public class Main {
     private static final String TO_FILE_NAME = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        Map<String, OperationHandler> operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put(Operation.Type.BALANCE.getType(), new IncreaseOperationHandler());
-        operationStrategyMap.put(Operation.Type.PURCHASE.getType(), new DecreaseOperationHandler());
-        operationStrategyMap.put(Operation.Type.RETURN.getType(), new IncreaseOperationHandler());
-        operationStrategyMap.put(Operation.Type.SUPPLY.getType(), new IncreaseOperationHandler());
+        Map<Operation.Type, OperationHandler> operationStrategyMap = new HashMap<>();
+        operationStrategyMap.put(Operation.Type.BALANCE, new IncreaseOperationHandler());
+        operationStrategyMap.put(Operation.Type.PURCHASE, new DecreaseOperationHandler());
+        operationStrategyMap.put(Operation.Type.RETURN, new IncreaseOperationHandler());
+        operationStrategyMap.put(Operation.Type.SUPPLY, new IncreaseOperationHandler());
         ReaderService readerService = new ReaderServiceImpl();
         List<String> dataFromFile = readerService.readFromFile(FROM_FILE_NAME);
-        DataToOperationsFormatter dataToOperationsFormatter = new DataToOperationsFormatterImpl();
-        List<Operation> operations = dataToOperationsFormatter.formatData(dataFromFile);
+        DataParser<Operation, String> dataParser = new CsvOperationParser();
+        List<Operation> operations = dataParser.formatData(dataFromFile);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         AmountCalculator amountCalculator = new AmountCalculatorImpl(operationStrategy);
-        Map<String, Integer> calculateFruits = amountCalculator.calculate(operations);
-        StoreService storeService = new StoreServiceImpl();
+        Map<String, Integer> calculateFruits = amountCalculator.calculateDataForReport(operations);
+        ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
-        writerService.write(TO_FILE_NAME, storeService.createReport(calculateFruits));
+        writerService.write(TO_FILE_NAME, reportService.createReport(calculateFruits));
     }
 }

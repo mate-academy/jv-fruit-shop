@@ -13,7 +13,7 @@ public class AmountCalculatorImpl implements AmountCalculator {
     }
 
     @Override
-    public Map<String, Integer> calculate(List<Operation> operations) {
+    public Map<String, Integer> calculateDataForReport(List<Operation> operations) {
         Map<String, Integer> fruitsStorage = new HashMap<>();
         for (Operation operation : operations) {
             int newAmount = operationStrategy.get(operation.getType())
