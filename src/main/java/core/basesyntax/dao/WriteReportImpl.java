@@ -6,14 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriteReportImpl implements WriteReport {
-    private final String fileName;
-
-    public WriteReportImpl(String fileName) {
-        this.fileName = fileName;
-    }
 
     @Override
-    public void write(String report) {
+    public void write(String report, String fileName) {
         try (BufferedWriter writeToFile = new BufferedWriter(new FileWriter(fileName))) {
             writeToFile.write(report);
         } catch (IOException e) {

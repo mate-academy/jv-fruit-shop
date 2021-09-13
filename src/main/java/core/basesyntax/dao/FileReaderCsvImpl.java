@@ -7,15 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FruitDaoCsvImpl implements FruitDao {
-    private final String fileName;
-
-    public FruitDaoCsvImpl(String fileName) {
-        this.fileName = fileName;
-    }
+public class FileReaderCsvImpl implements FileReader {
 
     @Override
-    public List<String> getData() {
+    public List<String> getData(String fileName) {
         List<String> dataFromFile;
         try {
             dataFromFile = Files.readAllLines(Path.of(String.valueOf(new File(fileName))));

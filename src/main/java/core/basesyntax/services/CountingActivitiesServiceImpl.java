@@ -14,14 +14,14 @@ public class CountingActivitiesServiceImpl implements CountingActivitiesService 
         Map<String, Integer> fruitStorage = new HashMap<>();
         for (Operation recording : operations) {
             String type = recording.getType();
-            if (type.equals(Operation.TypeOperation.BALANCE.getType())) {
+            if (!fruitStorage.containsKey(recording.getFruit())) {
                 fruitStorage.put(recording.getFruit(),recording.getQuantity());
             } else {
                 fruitStorage.put(recording.getFruit(),
                         fruitStrategy.getHandler(type).newQuantity(recording, fruitStorage));
+                validatorService.correctAmountValidator(fruitStorage);
             }
         }
-        validatorService.correctAmountValidator(fruitStorage);
         return fruitStorage;
     }
 }
