@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-import java.util.Map;
 import core.basesyntax.model.Fruit;
+import java.util.Map;
 
 public class ReportFruitImpl implements ReportFruit {
     public static final String COMMA = ",";
