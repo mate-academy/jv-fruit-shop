@@ -9,7 +9,7 @@ public class FIleWriterServiceImpl implements FIleWriterService {
     @Override
     public void writeToFile(String text, String fileName) {
         try (FileWriter fileWriter = new FileWriter(fileName)) {
-            fileWriter.write(text);
+            fileWriter.write(text + System.lineSeparator());
         } catch (IOException e) {
             throw new RuntimeException(CANT_WRITE_TO_FILE);
         }

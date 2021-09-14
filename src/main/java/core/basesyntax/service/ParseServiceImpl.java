@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.HandlerStorage;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
-import java.util.NoSuchElementException;
 
 public class ParseServiceImpl implements ParseService {
     private static final String COMMA = ",";
@@ -15,11 +16,11 @@ public class ParseServiceImpl implements ParseService {
     public FruitRecord getParsedLine(String row) {
         String[] rowData = row.split((COMMA));
         if (rowIsValid(rowData)) {
-            FruitRecord.Operation operation
-                    = getOperationByFirstLetter(rowData[OPERATION_DATA_INDEX].charAt(0));
+            FruitRecord.Operation operation = HandlerStorage
+                    .getOperationByFirstLetter(rowData[OPERATION_DATA_INDEX].charAt(0));
             String fruitName = rowData[FRUIT_NAME_DATA_INDEX];
             int fruitAmount = Integer.parseInt(rowData[FRUIT_AMOUNT_DATA_INDEX]);
-            return new FruitRecord(operation, fruitName, fruitAmount);
+            return new FruitRecord(operation, new Fruit(fruitName), fruitAmount);
         }
         throw new RuntimeException("Data '" + row + "' in row is not valid.");
     }
@@ -29,15 +30,5 @@ public class ParseServiceImpl implements ParseService {
                 && rowData[OPERATION_DATA_INDEX].length() == OPERATION_LENGTH
                 && rowData[FRUIT_NAME_DATA_INDEX].length() > 0
                 && Integer.parseInt(rowData[FRUIT_AMOUNT_DATA_INDEX]) >= 0;
-    }
-
-    public static FruitRecord.Operation getOperationByFirstLetter(char symbol) {
-        switch (symbol) {
-            case 'b': return FruitRecord.Operation.BALANCE;
-            case 'p': return FruitRecord.Operation.PURCHASE;
-            case 'r': return FruitRecord.Operation.RETURN;
-            case 's': return FruitRecord.Operation.SUPPLY;
-            default: throw new NoSuchElementException("There isn't such operation for fruit shop.");
-        }
     }
 }

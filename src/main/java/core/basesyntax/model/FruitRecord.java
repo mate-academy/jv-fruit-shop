@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 public class FruitRecord {
     private final Operation operation;
-    private final String fruitName;
+    private final Fruit fruit;
     private final int amount;
 
-    public FruitRecord(Operation operation, String fruitName, int amount) {
+    public FruitRecord(Operation operation, Fruit fruit, int amount) {
         this.operation = operation;
-        this.fruitName = fruitName;
+        this.fruit = fruit;
         this.amount = amount;
     }
 
@@ -15,8 +15,8 @@ public class FruitRecord {
         return operation;
     }
 
-    public String getFruitName() {
-        return fruitName;
+    public Fruit getFruit() {
+        return fruit;
     }
 
     public int getAmount() {
@@ -27,7 +27,7 @@ public class FruitRecord {
     public String toString() {
         return "FruitRecord{"
                 + "operation=" + operation
-                + ", fruitName='" + fruitName + '\''
+                + ", Fruit='" + fruit + '\''
                 + ", amount=" + amount
                 + '}';
     }
