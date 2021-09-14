@@ -1,6 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.ReportMakerService;
 import java.util.Map;
 
 public class ReportMakerServiceImpl implements ReportMakerService {
@@ -19,7 +20,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
     }
 
     private String getSingleFruitReport(Map.Entry<Fruit, Integer> entry) {
-        return entry.getKey().getFruitName()
+        return entry.getKey().getName()
                 + COMMA
                 + entry.getValue();
     }

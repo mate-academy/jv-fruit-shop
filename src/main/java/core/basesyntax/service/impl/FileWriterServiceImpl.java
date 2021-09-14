@@ -1,9 +1,10 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileWriterService;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FIleWriterServiceImpl implements FIleWriterService {
+public class FileWriterServiceImpl implements FileWriterService {
     private static final String CANT_WRITE_TO_FILE = "Can't write to file.";
 
     @Override

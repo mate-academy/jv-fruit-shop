@@ -1,8 +1,9 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.HandlerStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
+import core.basesyntax.service.ParseService;
 
 public class ParseServiceImpl implements ParseService {
     private static final String COMMA = ",";
