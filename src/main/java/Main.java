@@ -2,6 +2,7 @@ import core.basesyntax.dao.FileReader;
 import core.basesyntax.dao.FileReaderCsvImpl;
 import core.basesyntax.dao.WriteReport;
 import core.basesyntax.dao.WriteReportImpl;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.services.CommandParser;
 import core.basesyntax.services.CommandParserImpl;
@@ -40,7 +41,7 @@ public class Main {
         List<Operation> operations = commandParser.parseData(inputData);
         FruitStrategy fruitStrategy = new FruitStrategyImpl(fruitStrategyMap);
         CountingActivitiesService countingService = new CountingActivitiesServiceImpl();
-        Map<String, Integer> result = countingService.countingActivities(operations, fruitStrategy);
+        Map<Fruit, Integer> result = countingService.countingActivities(operations, fruitStrategy);
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.createReport(result, TITLE_REPORT);
         WriteReport writeReport = new WriteReportImpl();

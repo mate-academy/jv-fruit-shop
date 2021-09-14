@@ -1,6 +1,7 @@
 package core.basesyntax.services;
 
 import core.basesyntax.exception.ValidationException;
+import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class ValidatorServiceImpl implements ValidatorService {
     }
 
     @Override
-    public void correctAmountValidator(Map<String, Integer> countingActivities) {
+    public void correctAmountValidator(Map<Fruit, Integer> countingActivities) {
         for (Integer amount : countingActivities.values()) {
             if (amount < 0) {
                 throw new ValidationException("Incorrect day activities: negative amount");

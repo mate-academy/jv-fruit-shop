@@ -1,11 +1,13 @@
 package core.basesyntax.model;
 
-public class Operation {
-    private String type;
-    private String fruit;
-    private int quantity;
+import java.util.Objects;
 
-    public Operation(String type, String fruit, int quantity) {
+public class Operation {
+    private final String type;
+    private final Fruit fruit;
+    private final int quantity;
+
+    public Operation(String type, Fruit fruit, int quantity) {
         this.type = type;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -15,12 +17,30 @@ public class Operation {
         return type;
     }
 
-    public String getFruit() {
+    public Fruit getFruit() {
         return fruit;
     }
 
     public int getQuantity() {
         return quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Operation operation = (Operation) o;
+        return quantity == operation.quantity && Objects.equals(type, operation.type)
+                && Objects.equals(fruit, operation.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, fruit, quantity);
     }
 
     public enum TypeOperation {
@@ -29,7 +49,7 @@ public class Operation {
         PURCHASE("p"),
         RETURN("r");
 
-        private String typeInFile;
+        private final String typeInFile;
 
         TypeOperation(String typeInFile) {
             this.typeInFile = typeInFile;

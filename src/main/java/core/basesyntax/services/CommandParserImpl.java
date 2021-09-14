@@ -1,5 +1,6 @@
 package core.basesyntax.services;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class CommandParserImpl implements CommandParser {
         for (String line : dataFromFile) {
             lineFromFile = line.split(COMMA);
             parseData.add(new Operation(lineFromFile[TYPE_OPERATION_INDEX],
-                    lineFromFile[FRUIT_NAME_INDEX],
+                    new Fruit(lineFromFile[FRUIT_NAME_INDEX]),
                     Integer.parseInt(lineFromFile[QUANTITY_INDEX])));
         }
         return parseData;
