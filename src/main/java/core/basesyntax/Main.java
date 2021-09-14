@@ -4,8 +4,8 @@ import core.basesyntax.dao.FileDaoCsv;
 import core.basesyntax.dao.FileDaoCsvImpl;
 import core.basesyntax.filewriter.FileWriterImpl;
 import core.basesyntax.filewriter.WriteIntoFile;
-import core.basesyntax.operationprovider.OperationProvider;
-import core.basesyntax.operationprovider.OperationProviderImpl;
+import core.basesyntax.operationprovider.DataProcessor;
+import core.basesyntax.operationprovider.DataProcessorImpl;
 import core.basesyntax.service.operationhandler.BalanceOperationHandler;
 import core.basesyntax.service.operationhandler.OperationHandler;
 import core.basesyntax.service.operationhandler.Operations;
@@ -45,8 +45,8 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ReportDataStorage reportDataStorage =
                 new ReportDataStoragePerMapImpl(new HashMap<>());
-        OperationProvider operationProvider = new OperationProviderImpl();
-        operationProvider.provideOperations(input, operationStrategy, reportDataStorage);
+        DataProcessor dataProcessor = new DataProcessorImpl();
+        dataProcessor.handleInput(input, operationStrategy, reportDataStorage);
         WriteIntoFile fileWriter = new FileWriterImpl();
         fileWriter.writeInFile(reportDataStorage.getAllData(), TO_FILE_NAME);
     }

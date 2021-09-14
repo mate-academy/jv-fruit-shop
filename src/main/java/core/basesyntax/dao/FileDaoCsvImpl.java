@@ -9,12 +9,12 @@ import java.util.List;
 public class FileDaoCsvImpl implements FileDaoCsv {
     @Override
     public List<String> getData(String fileName) {
-        List<String> operations = new ArrayList<>();
+        List<String> data = new ArrayList<>();
         try {
-            operations = Files.readAllLines(Path.of(fileName));
+            data = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't get data from file" + fileName);
         }
-        return operations;
+        return data;
     }
 }
