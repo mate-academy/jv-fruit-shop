@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.NoSuchElementException;
-
 public class FruitRecord {
     private final Operation operation;
     private final String fruitName;
@@ -32,16 +30,6 @@ public class FruitRecord {
                 + ", fruitName='" + fruitName + '\''
                 + ", amount=" + amount
                 + '}';
-    }
-
-    public static Operation getOperationByFirstLetter(char symbol) {
-        switch (symbol) {
-            case 'b': return Operation.BALANCE;
-            case 'p': return Operation.PURCHASE;
-            case 'r': return Operation.RETURN;
-            case 's': return Operation.SUPPLY;
-            default: throw new NoSuchElementException("There isn't such operation for fruit shop.");
-        }
     }
 
     public enum Operation {

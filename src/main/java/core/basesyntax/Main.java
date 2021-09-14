@@ -29,7 +29,7 @@ public class Main {
                     .toLowerCase()
                     .charAt(0);
             OperationHandler handler = Storage.getHandlerMap()
-                    .get(FruitRecord.getOperationByFirstLetter(symbol));
+                    .get(ParseServiceImpl.getOperationByFirstLetter(symbol));
             handler.getChangedAmount(record);
         }
 
