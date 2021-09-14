@@ -1,11 +1,12 @@
 package validators;
 
+import static shop.service.ShopServiceImpl.CSV_SEPARATOR;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class ValidatorForFileImpl implements ValidatorForFile {
-    private static final String CSV_SEPARATOR = ",";
 
     @Override
     public boolean test(String file) {
@@ -18,21 +19,17 @@ public class ValidatorForFileImpl implements ValidatorForFile {
                 String fruitName = operationNameQuality[1];
                 int quantity = Integer.parseInt(operationNameQuality[2]);
                 if (operation.strip().equals("") || fruitName.strip().equals("")) {
-                    System.out.println("Not found operation or name of fruit!!!");
-                    return false;
+                    throw new RuntimeException("Not found operation or name of fruit!!!");
                 }
                 if (quantity < 0) {
-                    System.out.println("The quality must be greater than zero!!!");
-                    return false;
+                    throw new RuntimeException("The quality must be greater than zero!!!");
                 }
             }
             return true;
         } catch (NumberFormatException e) {
-            System.out.println("Quality is not correct!!!");
-            return false;
+            throw new RuntimeException("Quality is not correct!!!");
         } catch (IOException e) {
-            System.out.println("Error!!! File not found!!!");
-            return false;
+            throw new RuntimeException("Error!!! File not found!!!");
         }
     }
 }

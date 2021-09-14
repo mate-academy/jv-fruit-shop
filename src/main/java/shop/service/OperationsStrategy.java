@@ -1,7 +1,7 @@
 package shop.service;
 
-import shop.service.operations.Operation;
+import shop.service.operations.OperationHandler;
 
 public interface OperationsStrategy {
-    Operation get(String operationIndex);
+    OperationHandler get(String operation);
 }

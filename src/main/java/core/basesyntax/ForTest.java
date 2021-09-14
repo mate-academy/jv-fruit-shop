@@ -9,14 +9,14 @@ import shop.service.OperationsStrategyImpl;
 import shop.service.ShopService;
 import shop.service.ShopServiceImpl;
 import shop.service.operations.Balance;
-import shop.service.operations.Operation;
+import shop.service.operations.OperationHandler;
 import shop.service.operations.Purchase;
 import shop.service.operations.Return;
 import shop.service.operations.Supply;
 
 public class ForTest {
     public static void main(String[] args) {
-        Map<String, Operation> operationMap = new HashMap<>();
+        Map<String, OperationHandler> operationMap = new HashMap<>();
         operationMap.put("b", new Balance());
         operationMap.put("s", new Supply());
         operationMap.put("p", new Purchase());
@@ -25,7 +25,7 @@ public class ForTest {
         OperationsStrategy operationsStrategy = new OperationsStrategyImpl(operationMap);
         ShopService shop = new ShopServiceImpl(new FruitDaoImpl(), operationsStrategy);
 
-        shop.fromFileToStorage(new FileReaderImpl().read("10.09.99"));
+        shop.saveToStorage(new FileReaderImpl().read("10.09.99"));
         shop.printReport();
 
     }

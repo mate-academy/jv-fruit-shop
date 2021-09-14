@@ -1,15 +1,17 @@
 package shop.service.operations;
 
+import dao.FruitDao;
 import dao.FruitDaoImpl;
 import shop.item.Fruit;
 
-public class Supply implements Operation {
+public class Supply implements OperationHandler {
+    private FruitDao fruitDao = new FruitDaoImpl();
+
     @Override
-    public void operation(Fruit fruit) {
-        FruitDaoImpl dao = new FruitDaoImpl();
-        if (dao.get(fruit) != null) {
-            fruit.setQuality(fruit.getQuality() + dao.get(fruit).getQuality());
-            dao.update(fruit);
+    public void apply(Fruit fruit) {
+        if (fruitDao.get(fruit) != null) {
+            fruit.setQuality(fruit.getQuality() + fruitDao.get(fruit).getQuality());
+            fruitDao.update(fruit);
         } else {
             new FruitDaoImpl().add(fruit);
         }

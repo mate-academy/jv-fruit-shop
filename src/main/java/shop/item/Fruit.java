@@ -20,4 +20,17 @@ public class Fruit {
     public void setQuality(Integer quality) {
         this.quality = quality;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Fruit fruit = (Fruit) o;
+        return name.equals(fruit.name);
+    }
+
 }

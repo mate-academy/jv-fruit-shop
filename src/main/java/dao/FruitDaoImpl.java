@@ -19,9 +19,7 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void update(Fruit fruit) {
-        Fruit fruitOld = get(fruit);
-        Storage.fruits.remove(fruitOld);
-        add(fruit);
+        Storage.fruits.set(Storage.fruits.indexOf(fruit), fruit);
     }
 
     @Override
