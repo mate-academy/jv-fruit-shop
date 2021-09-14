@@ -11,6 +11,7 @@ import core.basesyntax.services.FruitStrategy;
 import core.basesyntax.services.FruitStrategyImpl;
 import core.basesyntax.services.ReportService;
 import core.basesyntax.services.ReportServiceImpl;
+import core.basesyntax.services.handlers.BalanceFruitHandler;
 import core.basesyntax.services.handlers.DecreaseFruitHandler;
 import core.basesyntax.services.handlers.FruitHandler;
 import core.basesyntax.services.handlers.IncreaseFruitHandler;
@@ -32,7 +33,7 @@ public class Main {
         fruitStrategyMap.put(Operation.TypeOperation.PURCHASE.getType(),
                 new DecreaseFruitHandler());
         fruitStrategyMap.put(Operation.TypeOperation.BALANCE.getType(),
-                new IncreaseFruitHandler());
+                new BalanceFruitHandler());
         FileReader fileReaderCsv = new FileReaderCsvImpl();
         List<String> inputData = fileReaderCsv.getData(INPUT_FILE);
         CommandParser commandParser = new CommandParserImpl();

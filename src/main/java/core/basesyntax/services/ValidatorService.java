@@ -9,5 +9,6 @@ public interface ValidatorService {
     void positiveQuantityValidator(List<String> inputData);
 
     void correctAmountValidator(Map<String, Integer> countingActivities);
+
 }
 

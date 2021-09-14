@@ -11,7 +11,6 @@ public class CommandParserImpl implements CommandParser {
     private static final int QUANTITY_INDEX = 2;
     private static final int FRUIT_NAME_INDEX = 1;
     private final ValidatorService validatorService = new ValidatorServiceImpl();
-    private List<Operation> parseData;
 
     @Override
     public List<Operation> parseData(List<String> dataFromFile) {
@@ -19,7 +18,7 @@ public class CommandParserImpl implements CommandParser {
         validatorService.positiveQuantityValidator(dataFromFile);
         dataFromFile.remove(TITLE_INDEX);
         String[] lineFromFile;
-        parseData = new ArrayList<>();
+        List<Operation> parseData = new ArrayList<>();
         for (String line : dataFromFile) {
             lineFromFile = line.split(COMMA);
             parseData.add(new Operation(lineFromFile[TYPE_OPERATION_INDEX],
