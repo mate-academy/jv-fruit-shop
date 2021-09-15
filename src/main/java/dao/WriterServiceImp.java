@@ -9,13 +9,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class WriterServiceImp implements WriterService {
-    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yy HH_mm_ss");
-    private String filePath = "src/main/reports/";
+    private static final String FILE_REPORT_PATH = "src/main/resources/";
+    private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yy HH_mm_ss");
 
     @Override
     public void writeToFile(List<String> reportList) {
         String reportDateTime = dtf.format(LocalDateTime.now());
-        String fullFilePath = filePath + "report dated" + reportDateTime;
+
+        String fullFilePath = FILE_REPORT_PATH + "report dated" + reportDateTime + ".csv";
         File file = new File(fullFilePath);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             for (String line:
