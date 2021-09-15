@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.dto.Transaction;
 import java.util.NoSuchElementException;
 
 public class ValidatorImpl implements Validator {
@@ -21,26 +22,19 @@ public class ValidatorImpl implements Validator {
                 || (data[FRUIT_NAME].isBlank()
                 || data[FRUIT_NAME].isEmpty())
                 || Integer.parseInt(data[QUALITY]) < 0
-                || findOperation(data[OPERATION]).length() != 1) {
+                || findOperation(data[OPERATION]).toString().length() != 1) {
             throw new RuntimeException("Incorrect input data ");
         }
         return true;
     }
 
-    public String findOperation(String data) {
+    public static Transaction.Operation findOperation(String data) {
         switch (data) {
-            case "b" : return Operations.BALANCE.toString().toLowerCase();
-            case "s" : return Operations.SUPPLY.toString().toLowerCase();
-            case "p" : return Operations.PURCHASE.toString().toLowerCase();
-            case "r" : return Operations.RETURN.toString().toLowerCase();
+            case "b" : return Transaction.Operation.BALANCE;
+            case "s" : return Transaction.Operation.SUPPLY;
+            case "p" : return Transaction.Operation.PURCHASE;
+            case "r" : return Transaction.Operation.RETURN;
             default: throw new NoSuchElementException("Incorrect operation");
         }
-    }
-
-    public enum Operations {
-        BALANCE,
-        SUPPLY,
-        PURCHASE,
-        RETURN
     }
 }

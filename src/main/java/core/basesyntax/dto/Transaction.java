@@ -3,17 +3,17 @@ package core.basesyntax.dto;
 import core.basesyntax.model.Fruit;
 
 public class Transaction {
-    private final String operation;
+    private final Operation operation;
     private final Fruit fruit;
     private final Integer quantity;
 
-    public Transaction(String operation, Fruit fruit, int quantity) {
+    public Transaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public String getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
@@ -23,5 +23,12 @@ public class Transaction {
 
     public Integer getQuantity() {
         return quantity;
+    }
+
+    public enum Operation {
+        BALANCE,
+        SUPPLY,
+        PURCHASE,
+        RETURN
     }
 }

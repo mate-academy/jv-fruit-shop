@@ -20,6 +20,7 @@ public class FruitShop {
             = "src/main/java/core/basesyntax/resources/input.csv";
     private static final String OUTPUT_FILEPATH
             = "src/main/java/core/basesyntax/resources/output.csv";
+    private static int removeIndex = 0;
 
     public static void main(String[] args) {
         Map<String, Operation> operationsMap = new HashMap<>();
@@ -29,7 +30,7 @@ public class FruitShop {
         operationsMap.put("r", new SupplyOperation());
         FileReaderImpl fileReader = new FileReaderImpl();
         List<String> listData = fileReader.readFromFile(INPUT_FILEPATH);
-        listData.remove(0);
+        listData.remove(removeIndex);
         ValidatorImpl validator = new ValidatorImpl();
         FruitParser parser = new FruitParser();
         for (String line : listData) {

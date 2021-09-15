@@ -6,17 +6,16 @@ import java.util.Map;
 
 public class ReportFruitImpl implements ReportFruit {
     public static final String COMMA = ",";
-    public static final String LINE_SEPARATOR = "\n";
 
     @Override
     public String getReport() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("fruit,quantity").append(LINE_SEPARATOR);
+        stringBuilder.append("fruit,quantity").append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> entry : Storage.data.entrySet()) {
             stringBuilder.append(entry.getKey().getFruitName())
                     .append(COMMA)
                     .append(entry.getValue())
-                    .append(LINE_SEPARATOR);
+                    .append(System.lineSeparator());
         }
         return stringBuilder.toString();
     }
