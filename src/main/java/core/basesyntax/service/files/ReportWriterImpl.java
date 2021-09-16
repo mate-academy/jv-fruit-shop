@@ -19,7 +19,7 @@ public class ReportWriterImpl implements ReportWriter {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename, true))) {
             bw.write(REPORT_HEADER + System.lineSeparator());
             for (FruitRecord record : fruitsDbRecords) {
-                String fruitName = record.getName();
+                String fruitName = record.getFruit().getFruitName();
                 int fruitsAmount = record.getAmount();
                 bw.write(fruitName + DATA_DIVIDER + fruitsAmount + System.lineSeparator());
             }

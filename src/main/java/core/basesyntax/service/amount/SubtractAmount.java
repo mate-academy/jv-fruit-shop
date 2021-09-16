@@ -13,12 +13,14 @@ public class SubtractAmount implements AmountHandler {
         if (updatedAmount < 0) {
             throw new RuntimeException("It isn't possible to buy fruits!"
                     + System.lineSeparator()
-                    + "Is available: " + currentFruit.getAmount() + " " + currentFruit.getName()
+                    + "Is available: " + currentFruit.getAmount()
+                    + " " + currentFruit.getFruit().getFruitName()
                     + System.lineSeparator()
-                    + "Trying to buy: " + newFruit.getAmount() + " " + newFruit.getName());
+                    + "Trying to buy: " + newFruit.getAmount()
+                    + " " + newFruit.getFruit().getFruitName());
         }
         FruitRecord fruitRecord = new FruitRecord(updatedAmount,
-                newFruit.getName(), newFruit.getType());
+                newFruit.getFruit(), newFruit.getType());
         fruitsDao.addRecord(fruitRecord);
     }
 }

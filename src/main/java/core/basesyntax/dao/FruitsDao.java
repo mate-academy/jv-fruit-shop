@@ -11,6 +11,4 @@ public interface FruitsDao {
     FruitRecord getRecord(FruitRecord newFruitRecord);
 
     boolean modifyRecord(FruitRecord fruitRecord);
-
-    boolean isRecordExists(FruitRecord fruitRecord);
 }

@@ -4,18 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitRecord {
-    private String fruitName;
     private int fruitsAmount;
     private Type operationType;
+    private Fruit fruit;
 
-    public FruitRecord(int fruitsAmount, String fruitName, Type operationType) {
-        this.fruitName = fruitName;
+    public FruitRecord(int fruitsAmount, Fruit fruit, Type operationType) {
+        this.fruit = fruit;
         this.fruitsAmount = fruitsAmount;
         this.operationType = operationType;
-    }
-
-    public String getName() {
-        return fruitName;
     }
 
     public int getAmount() {
@@ -24,6 +20,10 @@ public class FruitRecord {
 
     public Type getType() {
         return operationType;
+    }
+
+    public Fruit getFruit() {
+        return fruit;
     }
 
     public enum Type {

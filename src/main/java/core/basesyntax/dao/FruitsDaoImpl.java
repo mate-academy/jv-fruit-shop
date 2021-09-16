@@ -23,18 +23,18 @@ public class FruitsDaoImpl implements FruitsDao {
     @Override
     public FruitRecord getRecord(FruitRecord newFruitRecord) {
         for (FruitRecord record : DATA_BASE) {
-            if (record.getName().equals(newFruitRecord.getName())) {
+            if (record.getFruit().equals(newFruitRecord.getFruit())) {
                 return record;
             }
         }
-        return new FruitRecord(0, newFruitRecord.getName(), newFruitRecord.getType());
+        return new FruitRecord(0, newFruitRecord.getFruit(), newFruitRecord.getType());
     }
 
     @Override
     public boolean modifyRecord(FruitRecord newFruitRecord) {
         for (int i = 0; i < DATA_BASE.size(); i++) {
             FruitRecord record = DATA_BASE.get(i);
-            if (record.getName().equals(newFruitRecord.getName())) {
+            if (record.getFruit().equals(newFruitRecord.getFruit())) {
                 DATA_BASE.set(i, newFruitRecord);
                 return true;
             }
@@ -42,10 +42,9 @@ public class FruitsDaoImpl implements FruitsDao {
         return false;
     }
 
-    @Override
-    public boolean isRecordExists(FruitRecord newFruitRecord) {
+    private boolean isRecordExists(FruitRecord newFruitRecord) {
         for (FruitRecord record : DATA_BASE) {
-            if (record.getName().equals(newFruitRecord.getName())) {
+            if (record.getFruit().getFruitName().equals(newFruitRecord.getFruit().getFruitName())) {
                 return true;
             }
         }

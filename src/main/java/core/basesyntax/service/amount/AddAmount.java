@@ -11,7 +11,7 @@ public class AddAmount implements AmountHandler {
         FruitRecord currentFruit = fruitsDao.getRecord(newFruit);
         int updatedAmount = currentFruit.getAmount() + newFruit.getAmount();
         FruitRecord fruitRecord = new FruitRecord(updatedAmount,
-                newFruit.getName(), newFruit.getType());
+                newFruit.getFruit(), newFruit.getType());
         fruitsDao.addRecord(fruitRecord);
     }
 }
