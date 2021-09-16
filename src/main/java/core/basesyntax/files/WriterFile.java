@@ -7,7 +7,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class WriterFile implements Writer {
-    private String writeFilePath;
+    private final String writeFilePath;
 
     public WriterFile(String writeFilePath) {
         this.writeFilePath = writeFilePath;

@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class WriterServiceImpl implements WriterService {
-    private final Writer writerFile;
+    private final Writer writer;
 
-    public WriterServiceImpl(Writer writerFile) {
-        this.writerFile = writerFile;
+    public WriterServiceImpl(Writer writer) {
+        this.writer = writer;
     }
 
     @Override
@@ -19,6 +19,6 @@ public class WriterServiceImpl implements WriterService {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             resultList.add(entry.getKey() + "," + entry.getValue());
         }
-        writerFile.write(resultList);
+        writer.write(resultList);
     }
 }

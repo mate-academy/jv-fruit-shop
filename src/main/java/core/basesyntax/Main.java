@@ -32,13 +32,13 @@ public class Main {
         activities.put("s", new SupplyActivityHandler());
         activities.put("p", new PurchaseActivityHandler());
         activities.put("r", new ReturnActivityHandler());
+        ActivityStrategy activityStrategy = new ActivityStrategyImpl(activities);
         Validator titleValidator = new TitleValidator();
         Validator lineValidator = new LineValidator();
         Reader reader = new ReaderFile(sourceFilePath);
         ReaderService readerService = new ReaderServiceImpl(reader, titleValidator, lineValidator);
         Writer writer = new WriterFile(resultFilePath);
         WriterService writerService = new WriterServiceImpl(writer);
-        ActivityStrategy activityStrategy = new ActivityStrategyImpl(activities);
         ShopService shopService = new ShopServiceImpl(readerService,
                 writerService, activityStrategy);
         shopService.availableFruitsAfterWorkShift();

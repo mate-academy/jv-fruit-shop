@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReaderFile implements Reader {
-    private String readFilePath;
+    private final String readFilePath;
 
     public ReaderFile(String readFilePath) {
         this.readFilePath = readFilePath;

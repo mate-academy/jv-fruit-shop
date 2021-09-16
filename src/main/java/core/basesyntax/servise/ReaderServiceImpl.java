@@ -7,12 +7,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
-    private final Reader readerFile;
+    private final Reader reader;
     private final Validator titleValidator;
     private final Validator lineValidator;
 
-    public ReaderServiceImpl(Reader readerFile, Validator titleValidator, Validator lineValidator) {
-        this.readerFile = readerFile;
+    public ReaderServiceImpl(Reader reader, Validator titleValidator, Validator lineValidator) {
+        this.reader = reader;
         this.titleValidator = titleValidator;
         this.lineValidator = lineValidator;
     }
@@ -20,7 +20,7 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<List<String>> readData() {
         List<List<String>> resultList = new ArrayList<>();
-        List<String> lines = readerFile.read();
+        List<String> lines = reader.read();
         for (int i = 0; i < lines.size(); i++) {
             List<String> parsedLine = Arrays.asList(lines.get(i).strip().split(","));
             if (i == 0) {
