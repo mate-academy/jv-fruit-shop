@@ -44,7 +44,7 @@ public class FruitsDaoImpl implements FruitsDao {
 
     private boolean isRecordExists(FruitRecord newFruitRecord) {
         for (FruitRecord record : DATA_BASE) {
-            if (record.getFruit().getFruitName().equals(newFruitRecord.getFruit().getFruitName())) {
+            if (record.getFruit().equals(newFruitRecord.getFruit())) {
                 return true;
             }
         }
