@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class WriterServiceImpl implements WriterService {
-    private Writer writerFile;
+    private final Writer writerFile;
 
     public WriterServiceImpl(Writer writerFile) {
         this.writerFile = writerFile;
@@ -17,7 +17,7 @@ public class WriterServiceImpl implements WriterService {
         List<String> resultList = new ArrayList<>();
         resultList.add("fruit,quantity");
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            resultList.add(entry.getKey() + "," + String.valueOf(entry.getValue()));
+            resultList.add(entry.getKey() + "," + entry.getValue());
         }
         writerFile.write(resultList);
     }

@@ -17,6 +17,9 @@ import core.basesyntax.servise.activity.BalanceActivityHandler;
 import core.basesyntax.servise.activity.PurchaseActivityHandler;
 import core.basesyntax.servise.activity.ReturnActivityHandler;
 import core.basesyntax.servise.activity.SupplyActivityHandler;
+import core.basesyntax.validation.LineValidator;
+import core.basesyntax.validation.TitleValidator;
+import core.basesyntax.validation.Validator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,8 +32,10 @@ public class Main {
         activities.put("s", new SupplyActivityHandler());
         activities.put("p", new PurchaseActivityHandler());
         activities.put("r", new ReturnActivityHandler());
+        Validator titleValidator = new TitleValidator();
+        Validator lineValidator = new LineValidator();
         Reader reader = new ReaderFile(sourceFilePath);
-        ReaderService readerService = new ReaderServiceImpl(reader);
+        ReaderService readerService = new ReaderServiceImpl(reader, titleValidator, lineValidator);
         Writer writer = new WriterFile(resultFilePath);
         WriterService writerService = new WriterServiceImpl(writer);
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activities);

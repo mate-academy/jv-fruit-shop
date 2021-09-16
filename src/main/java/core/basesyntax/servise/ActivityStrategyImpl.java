@@ -4,7 +4,7 @@ import core.basesyntax.servise.activity.ActivityHandler;
 import java.util.Map;
 
 public class ActivityStrategyImpl implements ActivityStrategy {
-    private Map<String, ActivityHandler> activities;
+    private final Map<String, ActivityHandler> activities;
 
     public ActivityStrategyImpl(Map<String, ActivityHandler> activities) {
         this.activities = activities;
