@@ -1,21 +1,19 @@
 package core.basesyntax.service.files;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class InputFileReaderImpl implements InputFileReader {
+    private static final int HEADER_LINE_INDEX = 0;
+
     @Override
     public List<String> readFile(String fileName) {
-        List<String> result = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            reader.readLine();
-            String row;
-            while ((row = reader.readLine()) != null) {
-                result.add(row);
-            }
+        List<String> result;
+        try {
+            result = Files.readAllLines(Paths.get(fileName));
+            result.remove(HEADER_LINE_INDEX);
         } catch (IOException e) {
             throw new RuntimeException("Can't read input file, " + e);
         }

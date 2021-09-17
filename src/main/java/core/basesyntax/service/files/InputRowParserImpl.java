@@ -24,7 +24,7 @@ public class InputRowParserImpl implements InputRowParser {
             FruitRecord.Type operationType = FruitRecord.Type.getType(inputRowData[OPERATION_TYPE]);
             int fruitsAmount = Integer.parseInt(inputRowData[FRUITS_AMOUNT]);
             Fruit newFruit = new Fruit(fruitName);
-            fruitRecords.add(new FruitRecord(fruitsAmount, newFruit, operationType));
+            fruitRecords.add(new FruitRecord(fruitsAmount, operationType, newFruit));
         }
         return fruitRecords;
     }

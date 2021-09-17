@@ -10,7 +10,7 @@ public class FruitsDaoImpl implements FruitsDao {
     @Override
     public boolean addRecord(FruitRecord newFruitRecord) {
         if (isRecordExists(newFruitRecord)) {
-            return modifyRecord(newFruitRecord);
+            return updateRecord(newFruitRecord);
         }
         return DATA_BASE.add(newFruitRecord);
     }
@@ -27,11 +27,11 @@ public class FruitsDaoImpl implements FruitsDao {
                 return record;
             }
         }
-        return new FruitRecord(0, newFruitRecord.getFruit(), newFruitRecord.getType());
+        return new FruitRecord(0, newFruitRecord.getType(), newFruitRecord.getFruit());
     }
 
     @Override
-    public boolean modifyRecord(FruitRecord newFruitRecord) {
+    public boolean updateRecord(FruitRecord newFruitRecord) {
         for (int i = 0; i < DATA_BASE.size(); i++) {
             FruitRecord record = DATA_BASE.get(i);
             if (record.getFruit().equals(newFruitRecord.getFruit())) {

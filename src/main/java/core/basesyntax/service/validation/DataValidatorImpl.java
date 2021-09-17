@@ -24,6 +24,6 @@ public class DataValidatorImpl implements DataValidator {
         if (operationType.isEmpty()) {
             throw new RuntimeException("Operation type can't be empty!");
         }
-        return false;
+        return true;
     }
 }

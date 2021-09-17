@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitRecord;
 
 public class SubtractAmount implements AmountHandler {
     @Override
-    public void modifyAmount(FruitRecord newFruit) {
+    public boolean apply(FruitRecord newFruit) {
         FruitsDao fruitsDao = new FruitsDaoImpl();
         FruitRecord currentFruit = fruitsDao.getRecord(newFruit);
         int updatedAmount = currentFruit.getAmount() - newFruit.getAmount();
@@ -20,7 +20,7 @@ public class SubtractAmount implements AmountHandler {
                     + " " + newFruit.getFruit().getFruitName());
         }
         FruitRecord fruitRecord = new FruitRecord(updatedAmount,
-                newFruit.getFruit(), newFruit.getType());
-        fruitsDao.addRecord(fruitRecord);
+                newFruit.getType(), newFruit.getFruit());
+        return fruitsDao.updateRecord(fruitRecord);
     }
 }

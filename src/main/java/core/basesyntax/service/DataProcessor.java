@@ -3,6 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitRecord;
 import java.util.List;
 
-public interface Worker {
-    void processData(List<FruitRecord> records);
+public interface DataProcessor {
+    boolean processData(List<FruitRecord> records);
 }
