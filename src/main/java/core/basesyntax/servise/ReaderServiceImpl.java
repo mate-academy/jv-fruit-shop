@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
+    private static final String SEPARATOR = ",";
     private final Reader reader;
     private final Validator titleValidator;
     private final Validator lineValidator;
@@ -22,7 +23,7 @@ public class ReaderServiceImpl implements ReaderService {
         List<List<String>> resultList = new ArrayList<>();
         List<String> lines = reader.read();
         for (int i = 0; i < lines.size(); i++) {
-            List<String> parsedLine = Arrays.asList(lines.get(i).strip().split(","));
+            List<String> parsedLine = Arrays.asList(lines.get(i).strip().split(SEPARATOR));
             if (i == 0) {
                 titleValidator.validate(parsedLine);
                 continue;
