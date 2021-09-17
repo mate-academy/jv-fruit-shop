@@ -29,10 +29,10 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String, ActivityHandler> activities = new HashMap<>();
-        activities.put("b", new BalanceActivityHandler());
-        activities.put("s", new SupplyActivityHandler());
-        activities.put("p", new PurchaseActivityHandler());
-        activities.put("r", new ReturnActivityHandler());
+        activities.put(Activities.BALANCE.getActivity(), new BalanceActivityHandler());
+        activities.put(Activities.SUPPLY.getActivity(), new SupplyActivityHandler());
+        activities.put(Activities.PURCHASE.getActivity(), new PurchaseActivityHandler());
+        activities.put(Activities.RETURN.getActivity(), new ReturnActivityHandler());
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activities);
         Validator titleValidator = new TitleValidator();
         Validator lineValidator = new LineValidator();
@@ -43,5 +43,22 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(readerService,
                 writerService, activityStrategy);
         shopService.availableFruitsAfterWorkShift();
+    }
+
+    enum Activities {
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private final String activity;
+
+        Activities(String activity) {
+            this.activity = activity;
+        }
+
+        public String getActivity() {
+            return activity;
+        }
     }
 }
