@@ -24,9 +24,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    private static final String SOURCE_FILE = "src/main/resources/12-09-2021.csv";
+    private static final String RESULT_FILE = "src/main/resources/12-09-2021result.csv";
+
     public static void main(String[] args) {
-        String sourceFilePath = "src/main/resources/12-09-2021.csv";
-        String resultFilePath = "src/main/resources/12-09-2021result.csv";
         Map<String, ActivityHandler> activities = new HashMap<>();
         activities.put("b", new BalanceActivityHandler());
         activities.put("s", new SupplyActivityHandler());
@@ -35,9 +36,9 @@ public class Main {
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activities);
         Validator titleValidator = new TitleValidator();
         Validator lineValidator = new LineValidator();
-        Reader reader = new ReaderFile(sourceFilePath);
+        Reader reader = new ReaderFile(SOURCE_FILE);
         ReaderService readerService = new ReaderServiceImpl(reader, titleValidator, lineValidator);
-        Writer writer = new WriterFile(resultFilePath);
+        Writer writer = new WriterFile(RESULT_FILE);
         WriterService writerService = new WriterServiceImpl(writer);
         ShopService shopService = new ShopServiceImpl(readerService,
                 writerService, activityStrategy);
