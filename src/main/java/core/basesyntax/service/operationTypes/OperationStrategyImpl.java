@@ -2,6 +2,7 @@ package core.basesyntax.service.operationTypes;
 
 import java.util.Map;
 
+//
 public class OperationStrategyImpl implements OperationStrategy{
 
     private Map<Operations, OperationTypeHandler> operationTypeHandlerMap;

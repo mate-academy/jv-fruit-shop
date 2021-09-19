@@ -1,5 +1,6 @@
 package core.basesyntax.model;
 
+//
 public class Fruit {
     private String type;
     private int amount;

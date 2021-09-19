@@ -3,6 +3,7 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 
+//
 public class FruitsDaoImpl implements FruitsDao{
 
     @Override

@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+//
 import core.basesyntax.db.Storage;
 import core.basesyntax.fileReader.ReadFromFile;
 import core.basesyntax.fileReader.ReadFromFileImpl;
@@ -11,9 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
+
 public class Main {
     private static final String FROM_FILE_NAME = "fruitsData.csv";
     public static void main(String[] args) {

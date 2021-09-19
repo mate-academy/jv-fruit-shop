@@ -1,7 +1,6 @@
 package core.basesyntax.service.operationTypes;
 
 import core.basesyntax.dao.FruitsDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 
 public class BalanceOperationHandler implements OperationTypeHandler{
