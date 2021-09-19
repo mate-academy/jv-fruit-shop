@@ -40,6 +40,6 @@ public class FruitShop {
         }
         ReportFruitImpl fruitReport = new ReportFruitImpl();
         FileWriter writer = new FileWriterImpl();
-        writer.writeToFile(OUTPUT_FILEPATH, fruitReport.getReport());
+        writer.writeToFile(OUTPUT_FILEPATH, fruitReport.getReport() + System.lineSeparator());
     }
 }
