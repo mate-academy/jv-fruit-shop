@@ -5,7 +5,7 @@ import core.basesyntax.model.Fruit;
 public class Transaction {
     private final Operation operation;
     private final Fruit fruit;
-    private final Integer quantity;
+    private final int quantity;
 
     public Transaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;

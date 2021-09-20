@@ -16,5 +16,4 @@ public class PurchaseOperation implements Operation {
         }
         return newQuantity;
     }
-
 }
