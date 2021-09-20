@@ -25,7 +25,7 @@ public class ReportCreatorImpl implements ReportCreator {
             OperationHandler operationHandler = operationStrategy.operate(record.getOperationType());
             operationHandler.operate(record);
         }
-        return Report.REPORT.entrySet().stream()
+        return Report.FRUIT_REPORT.entrySet().stream()
                 .map(string -> string.getKey() + "," + string.getValue())
                 .collect(Collectors.toList());
     }
