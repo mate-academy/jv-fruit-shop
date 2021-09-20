@@ -4,13 +4,14 @@ import core.basesyntax.model.FruitRecord;
 import core.basesyntax.model.Report;
 import java.util.Map;
 
-public class SubtractAmount implements AmountHandler {
-    private static final Map<String, Integer> REPORT = Report.REPORT_TEMPLATE;
+public class SubtractionHandler implements AmountHandler {
+    private static final Map<String, Integer> REPORT_RAW_DATA = Report.REPORT_RAW_DATA;
 
     @Override
     public void apply(FruitRecord record) {
         String fruitName = record.getFruit().getFruitName();
-        int currentAmount = REPORT.get(fruitName) == null ? 0 : REPORT.get(fruitName);
+        int currentAmount = REPORT_RAW_DATA.get(fruitName) == null
+                ? 0 : REPORT_RAW_DATA.get(fruitName);
         int updatedAmount = currentAmount - record.getAmount();
         if (updatedAmount < 0) {
             throw new RuntimeException("It isn't possible to buy fruits!"
@@ -21,6 +22,6 @@ public class SubtractAmount implements AmountHandler {
                     + "Trying to buy: " + record.getAmount()
                     + " " + fruitName);
         }
-        Report.REPORT_TEMPLATE.put(fruitName, updatedAmount);
+        REPORT_RAW_DATA.put(fruitName, updatedAmount);
     }
 }

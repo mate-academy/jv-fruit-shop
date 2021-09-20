@@ -7,8 +7,8 @@ import core.basesyntax.service.validation.DataValidatorImpl;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputRowParserImpl implements InputRowParser {
-    private static final String DATA_DIVIDER = ",";
+public class RowParserImpl implements RowParser {
+    private static final String DATA_SEPARATOR = ",";
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int OPERATION_TYPE = 0;
     private static final int FRUITS_AMOUNT = 2;
@@ -17,7 +17,7 @@ public class InputRowParserImpl implements InputRowParser {
     public List<FruitRecord> parse(List<String> fileData) {
         List<FruitRecord> fruitRecords = new ArrayList<>();
         for (String row : fileData) {
-            String[] inputRowData = row.split(DATA_DIVIDER);
+            String[] inputRowData = row.split(DATA_SEPARATOR);
             DataValidator isInputRowValid = new DataValidatorImpl();
             isInputRowValid.validate(inputRowData);
             String fruitName = inputRowData[FRUIT_NAME_INDEX];

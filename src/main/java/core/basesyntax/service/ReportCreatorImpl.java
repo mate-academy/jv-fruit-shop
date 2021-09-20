@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportCreatorImpl implements ReportCreator {
-    private static final Map<String, Integer> REPORT = Report.REPORT_TEMPLATE;
-    private static final String DATA_DIVIDER = ",";
+    private static final Map<String, Integer> REPORT_RAW_DATA = Report.REPORT_RAW_DATA;
+    private static final String DATA_SEPARATOR = ",";
     private final OperationStrategy operationStrategy;
 
     public ReportCreatorImpl(OperationStrategy operationStrategy) {
@@ -27,8 +27,8 @@ public class ReportCreatorImpl implements ReportCreator {
             AmountHandler amountHandler = operationStrategy.get(record.getType());
             amountHandler.apply(record);
         }
-        return REPORT.entrySet().stream()
-                .map(row -> row.getKey() + DATA_DIVIDER + row.getValue())
+        return REPORT_RAW_DATA.entrySet().stream()
+                .map(row -> row.getKey() + DATA_SEPARATOR + row.getValue())
                 .collect(Collectors.toList());
     }
 }
