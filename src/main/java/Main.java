@@ -1,6 +1,8 @@
 import service.InputDataValidator;
+import service.Parse;
 import service.impl.FileReaderServiceImpl;
 import service.impl.InputDataValidatorImpl;
+import service.impl.ParseImpl;
 
 import java.util.List;
 
@@ -13,8 +15,9 @@ public class Main {
         InputDataValidator validator = new InputDataValidatorImpl();
         validator.chekDate(strings);
 
+        Parse parse = new ParseImpl();
+        parse.parseList(strings);
 
 
     }
-
 }
