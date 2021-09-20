@@ -17,7 +17,7 @@ import reporter.ReportCreatorImpl;
 /**
  * Feel free to remove this class and create your own.
  */
-public class HelloWorld {
+public class FruitShopMain {
     public static void main(String[] args) {
         Map<String, Operation> operationMap = new HashMap<>();
         operationMap.put("s", new OperationSupply());

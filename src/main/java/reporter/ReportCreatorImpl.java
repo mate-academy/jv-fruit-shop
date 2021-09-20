@@ -49,15 +49,16 @@ public class ReportCreatorImpl implements ReportCreator {
     @Override
     public void createReport(String filepath, String toFilepath) {
         StringBuilder reportBuilder = new StringBuilder();
-        reportBuilder.append("\nfruit")
+        reportBuilder.append("fruit")
                 .append(",")
-                .append("quantity\n");
+                .append("quantity")
+                .append(System.lineSeparator());
         Map<String, Integer> tempMap = createPreReport(filepath);
         for (Map.Entry<String, Integer> entry: tempMap.entrySet()) {
             reportBuilder.append(entry.getKey())
                       .append(",")
                       .append(entry.getValue())
-                      .append("\n");
+                      .append(System.lineSeparator());
         }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(toFilepath))) {
             writer.write(reportBuilder.toString());
