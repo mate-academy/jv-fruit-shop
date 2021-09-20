@@ -19,7 +19,7 @@ public class ValidateDataImpl implements ValidateData, Predicate<String[]> {
     @Override
     public boolean test(String[] strings) {
         return strings.length == 3
-                &&(Objects.equals(strings[0], "b")
+                && (Objects.equals(strings[0], "b")
                 || Objects.equals(strings[0], "s")
                 || Objects.equals(strings[0], "p")
                 || Objects.equals(strings[0], "r"))
