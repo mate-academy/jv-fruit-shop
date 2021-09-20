@@ -1,15 +1,12 @@
 package core.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private Map<Fruit, Integer> fruitStorageMap;
+    private static final Map<Fruit, Integer> fruitStorageMap = new HashMap<>();
 
-    public Storage(Map<Fruit, Integer> fruitStorageMap) {
-        this.fruitStorageMap = fruitStorageMap;
-    }
-
-    public Map<Fruit, Integer> getFruitStorageMap() {
+    public static Map<Fruit, Integer> getFruitStorageMap() {
         return fruitStorageMap;
     }
 }

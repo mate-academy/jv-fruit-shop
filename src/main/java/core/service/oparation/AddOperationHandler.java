@@ -1,8 +1,8 @@
 package core.service.oparation;
 
-import core.controller.FruitShop;
 import core.model.Fruit;
 import core.model.FruitRecordDto;
+import core.model.Storage;
 
 public class AddOperationHandler implements OperationHandler {
 
@@ -11,8 +11,7 @@ public class AddOperationHandler implements OperationHandler {
         String nameFruit = fruitRecordDto.getFruitName();
         Fruit fruit = new Fruit(nameFruit);
         int addQuantity = fruitRecordDto.getQuantity();
-        int oldQuantity = FruitShop.STORAGE.getFruitStorageMap().get(fruit);
-        FruitShop.STORAGE.getFruitStorageMap()
-                .put(new Fruit(nameFruit), (oldQuantity + addQuantity));
+        int oldQuantity = Storage.getFruitStorageMap().get(fruit);
+        Storage.getFruitStorageMap().put(new Fruit(nameFruit), (oldQuantity + addQuantity));
     }
 }

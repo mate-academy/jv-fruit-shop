@@ -1,25 +1,35 @@
 package core;
 
-import core.controller.FruitShop;
 import core.model.Fruit;
+import core.model.Storage;
 import core.model.TypeOperations;
 import core.service.oparation.BalanceHandler;
 import core.service.oparation.OperationHandler;
 import core.service.oparation.PurchaseHandler;
 import core.service.oparation.ReturnHandler;
 import core.service.oparation.SupplyHandler;
+import core.service.reader.ReaderService;
+import core.service.reader.ReaderServiceImpl;
+import core.service.report.FruitRecordDtoParser;
+import core.service.report.FruitRecordDtoParserImpl;
+import core.service.reporter.ReportGeneratorImpl;
 import core.service.validator.ForScannerValidatorImpl;
 import core.service.writer.OperationWriter;
 import core.service.writer.OperationWriterImpl;
+import core.service.writer.ReportWriter;
+import core.service.writer.ReportWriterImpl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+    private static final String INPUT_FILE_CSV = "src/main/resources/inputFile.csv";
+    private static final String REPORT_FILE_CSV = "src/main/resources/reportFile.csv";
 
     public static void main(String[] args) {
         writeReportToFile();
-        writeDailyReport();
+        //writeDailyReport(); // My custom method for add new line operation in file.
     }
 
     private static void writeReportToFile() {
@@ -30,13 +40,22 @@ public class Main {
         operationHandlersMap.put(TypeOperations.PURCHASE.get(), new PurchaseHandler());
         operationHandlersMap.put(TypeOperations.RETURN.get(), new ReturnHandler());
         // Add fruits in StorageMap operation handlers:
-        FruitShop.STORAGE.getFruitStorageMap().put(new Fruit("banana"), 0);
-        FruitShop.STORAGE.getFruitStorageMap().put(new Fruit("apple"), 0);
+        Storage.getFruitStorageMap().put(new Fruit("banana"), 0);
+        Storage.getFruitStorageMap().put(new Fruit("apple"), 0);
         // Run generate FruitShop report:
-        String inputFileCsv = "src/main/resources/inputFile.csv";
-        String reportFileCsv = "src/main/resources/reportFile.csv";
-        FruitShop fruitShop = new FruitShop(operationHandlersMap, inputFileCsv, reportFileCsv);
-        fruitShop.writeReport();
+        // Read File.
+        ReaderService readerService = new ReaderServiceImpl();
+        List<String> readFromInputFile = readerService.read(INPUT_FILE_CSV);
+        // Parse and add to DB.
+        FruitRecordDtoParser fruitRecordDtoParser =
+                new FruitRecordDtoParserImpl(operationHandlersMap);
+        fruitRecordDtoParser.createFruitRecordDto(readFromInputFile);
+        // Create report.
+        ReportGeneratorImpl fruitShop = new ReportGeneratorImpl();
+        String reportString = fruitShop.createReport();
+        // Write report ro File.
+        ReportWriter reportWriter = new ReportWriterImpl();
+        reportWriter.write(REPORT_FILE_CSV, reportString);
     }
 
     private static void writeDailyReport() {

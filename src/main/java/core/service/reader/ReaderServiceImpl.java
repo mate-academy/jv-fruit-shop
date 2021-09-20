@@ -22,8 +22,8 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     @Override
-    public List<String> read(String filePath) {
-        File file = new File(filePath);
+    public List<String> read(String inputFilePath) {
+        File file = new File(inputFilePath);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String tmp = bufferedReader.readLine();
             firstLineValidator.valid(tmp);

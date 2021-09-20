@@ -1,8 +1,8 @@
 package core.service.oparation;
 
-import core.controller.FruitShop;
 import core.model.Fruit;
 import core.model.FruitRecordDto;
+import core.model.Storage;
 
 public class PurchaseHandler implements OperationHandler {
 
@@ -11,9 +11,9 @@ public class PurchaseHandler implements OperationHandler {
         String nameFruit = fruitRecordDto.getFruitName();
         Fruit fruit = new Fruit(nameFruit);
         int subtractQuantity = fruitRecordDto.getQuantity();
-        int oldQuantity = FruitShop.STORAGE.getFruitStorageMap().get(new Fruit(nameFruit));
-        if (subtractQuantity <= FruitShop.STORAGE.getFruitStorageMap().get(fruit)) {
-            FruitShop.STORAGE.getFruitStorageMap()
+        int oldQuantity = Storage.getFruitStorageMap().get(new Fruit(nameFruit));
+        if (subtractQuantity <= Storage.getFruitStorageMap().get(fruit)) {
+            Storage.getFruitStorageMap()
                     .put(new Fruit(nameFruit), (oldQuantity - subtractQuantity));
         } else {
             throw new RuntimeException("It isn't enough " + fruit.getName() + "!");
