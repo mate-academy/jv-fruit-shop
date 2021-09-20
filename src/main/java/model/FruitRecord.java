@@ -1,11 +1,12 @@
 package model;
 
 import java.util.Objects;
+import operation.OperationType;
 
 public class FruitRecord {
-   private OperationType type;
-   private Fruit fruit;
-   private int amount;
+    private OperationType type;
+    private Fruit fruit;
+    private int amount;
 
     public FruitRecord(OperationType type, Fruit fruit, int amount) {
         this.type = type;
@@ -27,8 +28,12 @@ public class FruitRecord {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FruitRecord that = (FruitRecord) o;
         return amount == that.amount && type == that.type && Objects.equals(fruit, that.fruit);
     }
@@ -36,14 +41,5 @@ public class FruitRecord {
     @Override
     public int hashCode() {
         return Objects.hash(type, fruit, amount);
-    }
-
-    @Override
-    public String toString() {
-        return "FruitRecord{" +
-                "type=" + type +
-                ", fruit=" + fruit +
-                ", amount=" + amount +
-                '}';
     }
 }

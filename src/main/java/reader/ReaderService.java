@@ -1,9 +1,8 @@
 package reader;
 
-import model.Fruit;
-
 import java.util.List;
+import model.FruitRecord;
 
 public interface ReaderService {
-   List<Fruit> read(String path);
+    List<FruitRecord> read(String path);
 }
