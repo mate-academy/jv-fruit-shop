@@ -23,6 +23,6 @@ public class UserInterfaceImpl implements UserInterface {
         List<FruitRecord> records = readerService.read(fromPath);
         parse.parseAndAddToStorage(records);
         creator.createReport(toPath, date);
-        return "Your report wait you in src/main/resources, name as outputFile.csv";
+        return "Your report wait you in src/main/resources, name as: outputFile.csv";
     }
 }
