@@ -1,9 +1,9 @@
 package core.basesyntax;
 
 import core.basesyntax.files.Reader;
-import core.basesyntax.files.ReaderFile;
+import core.basesyntax.files.ReaderFileImpl;
 import core.basesyntax.files.Writer;
-import core.basesyntax.files.WriterFile;
+import core.basesyntax.files.WriterFileImpl;
 import core.basesyntax.servise.ActivityStrategy;
 import core.basesyntax.servise.ActivityStrategyImpl;
 import core.basesyntax.servise.ReaderService;
@@ -13,10 +13,10 @@ import core.basesyntax.servise.ShopServiceImpl;
 import core.basesyntax.servise.WriterService;
 import core.basesyntax.servise.WriterServiceImpl;
 import core.basesyntax.servise.activity.ActivityHandler;
-import core.basesyntax.servise.activity.BalanceActivityHandler;
-import core.basesyntax.servise.activity.PurchaseActivityHandler;
-import core.basesyntax.servise.activity.ReturnActivityHandler;
-import core.basesyntax.servise.activity.SupplyActivityHandler;
+import core.basesyntax.servise.activity.BalanceActivityHandlerImpl;
+import core.basesyntax.servise.activity.PurchaseActivityHandlerImpl;
+import core.basesyntax.servise.activity.ReturnActivityHandlerImpl;
+import core.basesyntax.servise.activity.SupplyActivityHandlerImpl;
 import core.basesyntax.validation.LineValidator;
 import core.basesyntax.validation.TitleValidator;
 import core.basesyntax.validation.Validator;
@@ -29,16 +29,16 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String, ActivityHandler> activities = new HashMap<>();
-        activities.put(Activities.BALANCE.getActivity(), new BalanceActivityHandler());
-        activities.put(Activities.SUPPLY.getActivity(), new SupplyActivityHandler());
-        activities.put(Activities.PURCHASE.getActivity(), new PurchaseActivityHandler());
-        activities.put(Activities.RETURN.getActivity(), new ReturnActivityHandler());
+        activities.put(Activities.BALANCE.getActivity(), new BalanceActivityHandlerImpl());
+        activities.put(Activities.SUPPLY.getActivity(), new SupplyActivityHandlerImpl());
+        activities.put(Activities.PURCHASE.getActivity(), new PurchaseActivityHandlerImpl());
+        activities.put(Activities.RETURN.getActivity(), new ReturnActivityHandlerImpl());
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activities);
         Validator titleValidator = new TitleValidator();
         Validator lineValidator = new LineValidator();
-        Reader reader = new ReaderFile(SOURCE_FILE);
+        Reader reader = new ReaderFileImpl(SOURCE_FILE);
         ReaderService readerService = new ReaderServiceImpl(reader, titleValidator, lineValidator);
-        Writer writer = new WriterFile(RESULT_FILE);
+        Writer writer = new WriterFileImpl(RESULT_FILE);
         WriterService writerService = new WriterServiceImpl(writer);
         ShopService shopService = new ShopServiceImpl(readerService,
                 writerService, activityStrategy);

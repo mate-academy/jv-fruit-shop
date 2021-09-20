@@ -6,10 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
-public class WriterFile implements Writer {
+public class WriterFileImpl implements Writer {
     private final String writeFilePath;
 
-    public WriterFile(String writeFilePath) {
+    public WriterFileImpl(String writeFilePath) {
         this.writeFilePath = writeFilePath;
     }
 

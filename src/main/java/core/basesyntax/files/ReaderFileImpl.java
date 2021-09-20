@@ -6,10 +6,10 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReaderFile implements Reader {
+public class ReaderFileImpl implements Reader {
     private final String readFilePath;
 
-    public ReaderFile(String readFilePath) {
+    public ReaderFileImpl(String readFilePath) {
         this.readFilePath = readFilePath;
     }
 

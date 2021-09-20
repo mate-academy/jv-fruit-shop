@@ -2,7 +2,7 @@ package core.basesyntax.servise.activity;
 
 import java.util.Map;
 
-public class SupplyActivityHandler implements ActivityHandler {
+public class SupplyActivityHandlerImpl implements ActivityHandler {
     @Override
     public void act(String fruit, String quantity, Map<String, Integer> goalMap) {
         Integer intQuantity = Integer.valueOf(quantity);
