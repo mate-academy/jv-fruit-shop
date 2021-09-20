@@ -1,7 +1,7 @@
 package core;
 
 import core.controller.FruitShop;
-import core.model.MyConstants;
+import core.model.Fruit;
 import core.model.TypeOperations;
 import core.service.oparation.BalanceHandler;
 import core.service.oparation.OperationHandler;
@@ -22,16 +22,23 @@ public class Main {
     }
 
     private static void writeReportToFile() {
+        // Crate Map with operation handlers:
         Map<String, OperationHandler> operationHandlersMap = new HashMap<>();
-        operationHandlersMap.put(TypeOperations.B.toString().toLowerCase(), new BalanceHandler());
-        operationHandlersMap.put(TypeOperations.S.toString().toLowerCase(), new SupplyHandler());
-        operationHandlersMap.put(TypeOperations.P.toString().toLowerCase(), new PurchaseHandler());
-        operationHandlersMap.put(TypeOperations.R.toString().toLowerCase(), new ReturnHandler());
+        operationHandlersMap.put(TypeOperations.BALANCE.get(), new BalanceHandler());
+        operationHandlersMap.put(TypeOperations.SUPPLY.get(), new SupplyHandler());
+        operationHandlersMap.put(TypeOperations.PURCHASE.get(), new PurchaseHandler());
+        operationHandlersMap.put(TypeOperations.RETURN.get(), new ReturnHandler());
+        // Add fruits in StorageMap operation handlers:
+        FruitShop.STORAGE.getFruitStorageMap().put(new Fruit("banana"), 0);
+        FruitShop.STORAGE.getFruitStorageMap().put(new Fruit("apple"), 0);
+        // Run generate FruitShop report:
         FruitShop fruitShop = new FruitShop(operationHandlersMap);
         fruitShop.writeReport();
     }
 
     private static void writeDailyReport() {
+        // My custom method for add new line operation in file.
+        String myDailyInputFileCsv = "src/main/resources/MyDailyInputFile.csv";
         OperationWriter operationWriter = new OperationWriterImpl();
         ForScannerValidatorImpl validator = new ForScannerValidatorImpl();
         Scanner scanner = new Scanner(System.in);
@@ -41,7 +48,7 @@ public class Main {
         while (!stringToDailyReport.equals("Exit")) {
             System.out.println("Ви ввели: " + stringToDailyReport);
             if (validator.checkIsValid(stringToDailyReport)) {
-                operationWriter.write(stringToDailyReport, MyConstants.MY_DAILY_INPUT_FILE_CSV);
+                operationWriter.write(stringToDailyReport, myDailyInputFileCsv);
             }
             stringToDailyReport = scanner.nextLine();
         }

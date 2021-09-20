@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ReturnHandler extends AddOperationHandler {
     @Override
-    public void doOperation(Map<String, Fruit> fruitMap, String[] operation) {
+    public void doOperation(Map<Fruit, Integer> fruitMap, String[] operation) {
         super.doOperation(fruitMap, operation);
     }
 }

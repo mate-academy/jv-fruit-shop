@@ -11,20 +11,13 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-
     public OperationHandler get(String typeOperations) {
-        if (typeOperations.equals(TypeOperations.B.toString().toLowerCase())) {
-            return operationHandlersMap.get(TypeOperations.B.toString().toLowerCase());
+        TypeOperations[] enumOperationArray = TypeOperations.values();
+        for (TypeOperations operation : enumOperationArray) {
+            if (operation.get().equals(typeOperations)) {
+                return operationHandlersMap.get(operation.get());
+            }
         }
-        if (typeOperations.equals(TypeOperations.S.toString().toLowerCase())) {
-            return operationHandlersMap.get(TypeOperations.S.toString().toLowerCase());
-        }
-        if (typeOperations.equals(TypeOperations.P.toString().toLowerCase())) {
-            return operationHandlersMap.get(TypeOperations.P.toString().toLowerCase());
-        }
-        if (typeOperations.equals(TypeOperations.R.toString().toLowerCase())) {
-            return operationHandlersMap.get(TypeOperations.R.toString().toLowerCase());
-        }
-        throw new RuntimeException("Incorrect operation!");
+        return null;
     }
 }

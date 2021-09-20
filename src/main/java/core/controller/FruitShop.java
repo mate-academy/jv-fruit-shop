@@ -1,7 +1,6 @@
 package core.controller;
 
-import core.model.Fruit;
-import core.model.MyConstants;
+import core.model.Storage;
 import core.service.oparation.OperationHandler;
 import core.service.reader.ReaderService;
 import core.service.reader.ReaderServiceImpl;
@@ -14,16 +13,12 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShop {
-    public static final Fruit BANANA;
-    public static final Fruit APPLE;
-    public static final Map<String, Fruit> FRUITS;
+    public static final Storage STORAGE;
+    private static final String INPUT_FILE_CSV = "src/main/resources/inputFile.csv";
+    private static final String REPORT_FILE_CSV = "src/main/resources/reportFile.csv";
 
     static {
-        BANANA = new Fruit(MyConstants.BANANA);
-        APPLE = new Fruit(MyConstants.APPLE);
-        FRUITS = new HashMap<>();
-        FRUITS.put(BANANA.getName(), BANANA);
-        FRUITS.put(APPLE.getName(), APPLE);
+        STORAGE = new Storage(new HashMap<>());
     }
 
     private ReaderService readerService;
@@ -39,8 +34,8 @@ public class FruitShop {
     }
 
     public void writeReport() {
-        List<String> listFromInputFile = readerService.read(MyConstants.INPUT_FILE_CSV);
+        List<String> listFromInputFile = readerService.read(INPUT_FILE_CSV);
         List<String> report = reportGenerator.createReport(listFromInputFile);
-        reportWriter.write(report, MyConstants.REPORT_FILE_CSV);
+        reportWriter.write(report, REPORT_FILE_CSV);
     }
 }

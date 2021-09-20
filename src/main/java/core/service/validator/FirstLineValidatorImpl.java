@@ -1,8 +1,7 @@
 package core.service.validator;
 
-import core.model.MyConstants;
-
 public class FirstLineValidatorImpl implements Validator {
+    private static final String COMA_SEPARATOR = ",";
     private static final int INDEX_TYPE_OPERATION = 0;
     private static final int INDEX_FRUIT_NAME = 1;
     private static final int INDEX_FRUIT_QUANTITY = 2;
@@ -12,7 +11,7 @@ public class FirstLineValidatorImpl implements Validator {
 
     @Override
     public void valid(String string) {
-        String[] strings = string.split(MyConstants.COMA_SEPARATOR);
+        String[] strings = string.split(COMA_SEPARATOR);
         if (!(strings.length == 3
                 && strings[INDEX_TYPE_OPERATION].equals(TYPE)
                 && strings[INDEX_FRUIT_NAME].equals(FRUIT)
