@@ -1,12 +1,11 @@
 package service.impl;
 
-import service.FileReaderService;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import service.FileReaderService;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override

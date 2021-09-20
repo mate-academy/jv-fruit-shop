@@ -1,11 +1,10 @@
 package service.impl;
 
 import db.Storage;
-import service.FileWriterService;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import service.FileWriterService;
 
 public class FileWriterServiceImpl implements FileWriterService {
     private static final String REPORT_HEAD = "fruit,quantity";

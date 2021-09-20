@@ -1,13 +1,13 @@
 package service.impl;
 
+import java.util.List;
 import service.OperationStrategy;
 import service.Parse;
 import service.operation.Handler;
 
-import java.util.List;
-
 public class ParseImpl implements Parse {
-    OperationStrategy strategy = new OperationStrategyImpl();
+    private OperationStrategy strategy = new OperationStrategyImpl();
+
     @Override
     public void parseList(List<String> list) {
         for (int i = 1; i < list.size(); i++) {

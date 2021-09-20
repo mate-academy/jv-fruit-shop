@@ -1,3 +1,4 @@
+import java.util.List;
 import service.FileWriterService;
 import service.InputDataValidator;
 import service.Parse;
@@ -5,8 +6,6 @@ import service.impl.FileReaderServiceImpl;
 import service.impl.FileWriterServiceImpl;
 import service.impl.InputDataValidatorImpl;
 import service.impl.ParseImpl;
-
-import java.util.List;
 
 public class Main {
     private static final String INPUT_FILE_NAME = "src/main/res/input.csv";
