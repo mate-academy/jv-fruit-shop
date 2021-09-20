@@ -1,4 +1,4 @@
-package service.operation;
+package service.strategy;
 
 import db.Storage;
 

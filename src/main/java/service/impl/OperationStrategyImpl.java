@@ -1,11 +1,11 @@
 package service.impl;
 
 import service.OperationStrategy;
-import service.operation.BalanceHandler;
-import service.operation.Handler;
-import service.operation.PurchaseHandler;
-import service.operation.ReturnHandler;
-import service.operation.SupplyHandler;
+import service.strategy.BalanceHandler;
+import service.strategy.Handler;
+import service.strategy.PurchaseHandler;
+import service.strategy.ReturnHandler;
+import service.strategy.SupplyHandler;
 
 public class OperationStrategyImpl implements OperationStrategy {
     @Override

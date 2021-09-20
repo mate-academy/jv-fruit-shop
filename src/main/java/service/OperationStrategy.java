@@ -1,6 +1,6 @@
 package service;
 
-import service.operation.Handler;
+import service.strategy.Handler;
 
 public interface OperationStrategy {
     Handler get(String[] str);
