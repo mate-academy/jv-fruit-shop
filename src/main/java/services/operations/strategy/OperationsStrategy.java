@@ -2,6 +2,6 @@ package services.operations.strategy;
 
 import services.operations.Operation;
 
-public interface StrategyOperations {
+public interface OperationsStrategy {
     Operation getOperation(String operation);
 }

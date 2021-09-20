@@ -3,10 +3,10 @@ package services.operations.strategy;
 import java.util.Map;
 import services.operations.Operation;
 
-public class StrategyOperationsImpl implements StrategyOperations {
+public class OperationsStrategyImpl implements OperationsStrategy {
     private Map<String, Operation> strategyMap;
 
-    public StrategyOperationsImpl(Map<String, Operation> strategyMap) {
+    public OperationsStrategyImpl(Map<String, Operation> strategyMap) {
         this.strategyMap = strategyMap;
     }
 

@@ -8,20 +8,20 @@ import services.operations.OperationBalanceImpl;
 import services.operations.OperationPurchaseImpl;
 import services.operations.OperationReturnImpl;
 import services.operations.OperationSupplyImpl;
-import services.operations.strategy.StrategyOperations;
-import services.operations.strategy.StrategyOperationsImpl;
+import services.operations.strategy.OperationsStrategy;
+import services.operations.strategy.OperationsStrategyImpl;
 import services.writetofile.WriteToFile;
 import services.writetofile.WriteToFileImpl;
 
 public class Main {
     public static void main(String[] args) {
-        String filePath = "src/main/java/resources/file.csv";
+        String filePath = "src/main/resources/file.csv";
         Map<String, Operation> stringOperationMap = new HashMap<>();
         stringOperationMap.put("b", new OperationBalanceImpl());
         stringOperationMap.put("s", new OperationSupplyImpl());
         stringOperationMap.put("p", new OperationPurchaseImpl());
         stringOperationMap.put("r", new OperationReturnImpl());
-        StrategyOperations strategyOperations = new StrategyOperationsImpl(stringOperationMap);
+        OperationsStrategy strategyOperations = new OperationsStrategyImpl(stringOperationMap);
         Reporting reporting = new ReportingImpl(strategyOperations);
         List<String> report = reporting.createReport(filePath);
         WriteToFile writeToFile = new WriteToFileImpl();

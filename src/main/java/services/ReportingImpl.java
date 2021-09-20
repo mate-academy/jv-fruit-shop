@@ -3,7 +3,7 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import services.operations.strategy.StrategyOperations;
+import services.operations.strategy.OperationsStrategy;
 import services.readfromfile.ReadingFromFile;
 import services.readfromfile.ReadingFromFileImpl;
 import services.stockservice.StockService;
@@ -12,9 +12,9 @@ import storage.Stock;
 import storage.StorageTransactions;
 
 public class ReportingImpl implements Reporting {
-    private StrategyOperations strategyOperations;
+    private OperationsStrategy strategyOperations;
 
-    public ReportingImpl(StrategyOperations strategyOperations) {
+    public ReportingImpl(OperationsStrategy strategyOperations) {
         this.strategyOperations = strategyOperations;
     }
 

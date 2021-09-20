@@ -2,14 +2,14 @@ package services.stockservice;
 
 import java.util.HashMap;
 import model.TransactionDto;
-import services.operations.strategy.StrategyOperations;
+import services.operations.strategy.OperationsStrategy;
 import storage.Stock;
 import storage.StorageTransactions;
 
 public class StockServiceImpl implements StockService {
-    private StrategyOperations strategyOperations;
+    private OperationsStrategy strategyOperations;
 
-    public StockServiceImpl(StrategyOperations strategyOperations) {
+    public StockServiceImpl(OperationsStrategy strategyOperations) {
         this.strategyOperations = strategyOperations;
     }
 

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class WriteToFileImpl implements WriteToFile {
-    private String filePath = "src/main/java/resources/report.csv";
+    private String filePath = "src/main/resources/report.csv";
 
     @Override
     public void writeToFile(List<String> report) {
