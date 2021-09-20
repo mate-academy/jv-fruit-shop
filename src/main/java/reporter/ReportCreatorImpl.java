@@ -48,9 +48,9 @@ public class ReportCreatorImpl implements ReportCreator {
     }
 
     @Override
-    public boolean createReport(String filepath, String toFilepath) {
+    public void createReport(String filepath, String toFilepath) {
         StringBuilder reportBuilder = new StringBuilder();
-        reportBuilder.append("fruit")
+        reportBuilder.append("\nfruit")
                 .append(",")
                 .append("quantity\n");
       Map<String, Integer> tempMap = createPreReport(filepath);
@@ -66,6 +66,5 @@ public class ReportCreatorImpl implements ReportCreator {
       } catch (IOException e) {
           throw new RuntimeException("Cant write to file " + filepath);
       }
-      return true;
     }
 }

@@ -7,6 +7,8 @@ import reporter.ReportCreatorImpl;
 import java.util.HashMap;
 import java.util.Map;
 
+import static db.FruitShop.fruitShop;
+
 /**
  * Feel free to remove this class and create your own.
  */
@@ -21,6 +23,7 @@ public class HelloWorld {
         ReportCreator creator = new ReportCreatorImpl(strategy);
         String fromFile = "src/main/resources/rightInputFile.csv";
         String toFile = "src/main/resources/outputFile";
-        System.out.println(creator.createReport(fromFile, toFile));
+        creator.createReport(fromFile, toFile);
+        System.out.println(fruitShop);
     }
 }
