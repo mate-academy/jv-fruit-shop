@@ -1,11 +1,11 @@
 package core.service.oparation;
 
-import core.model.Fruit;
-import java.util.Map;
+import core.model.FruitRecordDto;
 
 public class BalanceHandler extends AddOperationHandler {
+
     @Override
-    public void doOperation(Map<Fruit, Integer> fruitMap, String[] operation) {
-        super.doOperation(fruitMap, operation);
+    public void apply(FruitRecordDto fruitRecordDto) {
+        super.apply(fruitRecordDto);
     }
 }

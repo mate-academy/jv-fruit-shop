@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+
     public static void main(String[] args) {
         writeReportToFile();
         writeDailyReport();
@@ -32,7 +33,9 @@ public class Main {
         FruitShop.STORAGE.getFruitStorageMap().put(new Fruit("banana"), 0);
         FruitShop.STORAGE.getFruitStorageMap().put(new Fruit("apple"), 0);
         // Run generate FruitShop report:
-        FruitShop fruitShop = new FruitShop(operationHandlersMap);
+        String inputFileCsv = "src/main/resources/inputFile.csv";
+        String reportFileCsv = "src/main/resources/reportFile.csv";
+        FruitShop fruitShop = new FruitShop(operationHandlersMap, inputFileCsv, reportFileCsv);
         fruitShop.writeReport();
     }
 

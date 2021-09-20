@@ -1,8 +1,7 @@
 package core.service.oparation;
 
-import core.model.Fruit;
-import java.util.Map;
+import core.model.FruitRecordDto;
 
 public interface OperationHandler {
-    void doOperation(Map<Fruit, Integer> fruitMap, String[] operation);
+    void apply(FruitRecordDto fruitRecordDto);
 }

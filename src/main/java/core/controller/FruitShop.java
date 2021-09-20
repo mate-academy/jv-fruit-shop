@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class FruitShop {
     public static final Storage STORAGE;
-    private static final String INPUT_FILE_CSV = "src/main/resources/inputFile.csv";
-    private static final String REPORT_FILE_CSV = "src/main/resources/reportFile.csv";
+    private String inputFileCsv;
+    private String reportFileCsv;
 
     static {
         STORAGE = new Storage(new HashMap<>());
@@ -26,16 +26,20 @@ public class FruitShop {
     private ReportWriter reportWriter;
     private Map<String, OperationHandler> operationHandlersMap;
 
-    public FruitShop(Map<String, OperationHandler> operationHandlersMap) {
+    public FruitShop(Map<String, OperationHandler> operationHandlersMap,
+                     String inputFileCsv,
+                     String reportFileCsv) {
         readerService = new ReaderServiceImpl();
         reportWriter = new ReportWriterImpl();
         this.operationHandlersMap = operationHandlersMap;
         reportGenerator = new ReportGeneratorImpl(this.operationHandlersMap);
+        this.inputFileCsv = inputFileCsv;
+        this.reportFileCsv = reportFileCsv;
     }
 
     public void writeReport() {
-        List<String> listFromInputFile = readerService.read(INPUT_FILE_CSV);
+        List<String> listFromInputFile = readerService.read(inputFileCsv);
         List<String> report = reportGenerator.createReport(listFromInputFile);
-        reportWriter.write(report, REPORT_FILE_CSV);
+        reportWriter.write(report, reportFileCsv);
     }
 }
