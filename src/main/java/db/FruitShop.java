@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShop {
-    public static final Map<LocalDate, String> fruitShop = new HashMap<>();
+    public static final Map<LocalDate, Map<String, Integer>> fruitShop = new HashMap<>();
 }

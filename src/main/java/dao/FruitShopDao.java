@@ -1,6 +1,7 @@
 package dao;
 
-import java.util.List;
+import java.util.Map;
+
 public interface FruitShopDao {
-    void add(String validList);
+    void add(Map<String, Integer> validMap);
 }

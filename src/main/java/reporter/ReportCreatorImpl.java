@@ -44,6 +44,7 @@ public class ReportCreatorImpl implements ReportCreator {
                     .calculate(collect.get(splittedLine[FRUIT_COLUMN]),
                             Integer.parseInt(splittedLine[QUANTITY_COLUMN])));
         }
+        fruitShopDao.add(collect);
         return collect;
     }
 
@@ -60,7 +61,6 @@ public class ReportCreatorImpl implements ReportCreator {
                   .append(entry.getValue())
                   .append("\n");
       }
-      fruitShopDao.add(reportBuilder.toString());
       try(BufferedWriter writer = new BufferedWriter(new FileWriter(toFilepath))) {
           writer.write(reportBuilder.toString());
       } catch (IOException e) {

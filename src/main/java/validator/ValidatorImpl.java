@@ -10,8 +10,8 @@ public class ValidatorImpl implements Validator {
     public boolean isValidLine(String line) {
         String[] oneLine = line.split(",");
         if(oneLine.length != NUMBER_OF_COLUMN
-        || Integer.parseInt(oneLine[QUANTITY_COLUMN]) < 0 ) {
-            throw new RuntimeException("Line have mistakes");
+        || Integer.parseInt(oneLine[QUANTITY_COLUMN]) <= 0 ) {
+            throw new RuntimeException("Line have mistakes " + line);
         }
         return true;
     }
