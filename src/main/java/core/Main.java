@@ -8,6 +8,7 @@ import core.service.oparation.OperationHandler;
 import core.service.oparation.PurchaseHandler;
 import core.service.oparation.ReturnHandler;
 import core.service.oparation.SupplyHandler;
+import core.service.validator.ForScannerValidatorImpl;
 import core.service.writer.OperationWriter;
 import core.service.writer.OperationWriterImpl;
 import java.util.HashMap;
@@ -32,13 +33,16 @@ public class Main {
 
     private static void writeDailyReport() {
         OperationWriter operationWriter = new OperationWriterImpl();
+        ForScannerValidatorImpl validator = new ForScannerValidatorImpl();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введіть операцію так: b,apple,17");
         System.out.println("Введіть для завершення: Exit");
         String stringToDailyReport = scanner.nextLine();
         while (!stringToDailyReport.equals("Exit")) {
             System.out.println("Ви ввели: " + stringToDailyReport);
-            operationWriter.write(stringToDailyReport, MyConstants.MY_DAILY_INPUT_FILE_CSV);
+            if (validator.checkIsValid(stringToDailyReport)) {
+                operationWriter.write(stringToDailyReport, MyConstants.MY_DAILY_INPUT_FILE_CSV);
+            }
             stringToDailyReport = scanner.nextLine();
         }
         System.out.println("Exit!");
