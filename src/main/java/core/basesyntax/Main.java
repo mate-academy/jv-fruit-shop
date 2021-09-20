@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.service.FruitsShopService;
 import core.basesyntax.service.FruitsShopServiceImpl;
 import core.basesyntax.service.activity.ActivityHandler;
 import core.basesyntax.service.activity.BalanceHandler;
@@ -19,7 +20,7 @@ public class Main {
         activityHandlerMap.put("p", new PurchaseHandler());
         activityHandlerMap.put("s", new SupplyHandler());
         activityHandlerMap.put("r", new ReturnHandler());
-        FruitsShopServiceImpl fruitsShopService =
+        FruitsShopService fruitsShopService =
                 new FruitsShopServiceImpl(new ActivityStrategyImpl(activityHandlerMap),
                         new ReaderServiceImpl(), new WriterServiceImpl());
         String report = fruitsShopService.createReport("src/main/resources/activities.csv");
