@@ -1,13 +1,18 @@
 package core.basesyntax;
 
-import operations.*;
-import reporter.ReportCreator;
-import reporter.ReportCreatorImpl;
+import static db.FruitShop.fruitShop;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static db.FruitShop.fruitShop;
+import operations.Operation;
+import operations.OperationBalance;
+import operations.OperationPurchase;
+import operations.OperationReturn;
+import operations.OperationStrategy;
+import operations.OperationStrategyImpl;
+import operations.OperationSupply;
+import reporter.ReportCreator;
+import reporter.ReportCreatorImpl;
 
 /**
  * Feel free to remove this class and create your own.

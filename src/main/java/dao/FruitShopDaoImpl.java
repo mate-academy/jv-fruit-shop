@@ -1,7 +1,6 @@
 package dao;
 
 import db.FruitShop;
-
 import java.time.LocalDate;
 import java.util.Map;
 

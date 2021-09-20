@@ -2,18 +2,17 @@ package reporter;
 
 import dao.FruitShopDao;
 import dao.FruitShopDaoImpl;
-import operations.OperationStrategy;
-import readerService.Reader;
-import readerService.ReaderImpl;
-import validator.Validator;
-import validator.ValidatorImpl;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import operations.OperationStrategy;
+import reader.service.Reader;
+import reader.service.ReaderImpl;
+import validator.Validator;
+import validator.ValidatorImpl;
 
 public class ReportCreatorImpl implements ReportCreator {
     private static final int FRUIT_COLUMN = 1;
@@ -28,10 +27,9 @@ public class ReportCreatorImpl implements ReportCreator {
         this.strategy = strategy;
     }
 
-
     @Override
     public Map<String, Integer> createPreReport(String filepath) {
-       List<String> lines =  reader.read(filepath);
+        List<String> lines = reader.read(filepath);
         Map<String, Integer> collect = lines.stream()
                 .skip(1)
                 .filter(validator::isValidLine)
@@ -54,17 +52,17 @@ public class ReportCreatorImpl implements ReportCreator {
         reportBuilder.append("\nfruit")
                 .append(",")
                 .append("quantity\n");
-      Map<String, Integer> tempMap = createPreReport(filepath);
-      for (Map.Entry<String, Integer> entry: tempMap.entrySet()) {
-          reportBuilder.append(entry.getKey())
-                  .append(",")
-                  .append(entry.getValue())
-                  .append("\n");
-      }
-      try(BufferedWriter writer = new BufferedWriter(new FileWriter(toFilepath))) {
-          writer.write(reportBuilder.toString());
-      } catch (IOException e) {
-          throw new RuntimeException("Cant write to file " + filepath);
-      }
+        Map<String, Integer> tempMap = createPreReport(filepath);
+        for (Map.Entry<String, Integer> entry: tempMap.entrySet()) {
+            reportBuilder.append(entry.getKey())
+                      .append(",")
+                      .append(entry.getValue())
+                      .append("\n");
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(toFilepath))) {
+            writer.write(reportBuilder.toString());
+        } catch (IOException e) {
+            throw new RuntimeException("Cant write to file " + filepath);
+        }
     }
 }

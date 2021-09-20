@@ -1,4 +1,4 @@
-package readerService;
+package reader.service;
 
 import java.util.List;
 
