@@ -4,6 +4,7 @@ import core.basesyntax.files.Reader;
 import core.basesyntax.files.ReaderFileImpl;
 import core.basesyntax.files.Writer;
 import core.basesyntax.files.WriterFileImpl;
+import core.basesyntax.lib.ActivitiesEnum;
 import core.basesyntax.servise.ActivityStrategy;
 import core.basesyntax.servise.ActivityStrategyImpl;
 import core.basesyntax.servise.ReaderService;
@@ -29,10 +30,10 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String, ActivityHandler> activities = new HashMap<>();
-        activities.put(Activities.BALANCE.getActivity(), new BalanceActivityHandlerImpl());
-        activities.put(Activities.SUPPLY.getActivity(), new SupplyActivityHandlerImpl());
-        activities.put(Activities.PURCHASE.getActivity(), new PurchaseActivityHandlerImpl());
-        activities.put(Activities.RETURN.getActivity(), new ReturnActivityHandlerImpl());
+        activities.put(ActivitiesEnum.BALANCE.getActivity(), new BalanceActivityHandlerImpl());
+        activities.put(ActivitiesEnum.SUPPLY.getActivity(), new SupplyActivityHandlerImpl());
+        activities.put(ActivitiesEnum.PURCHASE.getActivity(), new PurchaseActivityHandlerImpl());
+        activities.put(ActivitiesEnum.RETURN.getActivity(), new ReturnActivityHandlerImpl());
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activities);
         Validator titleValidator = new TitleValidator();
         Validator lineValidator = new LineValidator();
@@ -43,22 +44,5 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(readerService,
                 writerService, activityStrategy);
         shopService.availableFruitsAfterWorkShift();
-    }
-
-    enum Activities {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private final String activity;
-
-        Activities(String activity) {
-            this.activity = activity;
-        }
-
-        public String getActivity() {
-            return activity;
-        }
     }
 }
