@@ -1,10 +1,11 @@
 package service.strategy;
 
 import db.Storage;
+import model.Fruit;
 
 public class SupplyHandler implements Handler {
     @Override
     public void calc(String fruit, int quantity) {
-        Storage.storage.put(fruit, (Storage.storage.get(fruit) + quantity));
+        Storage.storage.put(new Fruit(fruit), (Storage.storage.get(new Fruit(fruit)) + quantity));
     }
 }

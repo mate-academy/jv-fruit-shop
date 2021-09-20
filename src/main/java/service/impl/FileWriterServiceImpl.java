@@ -13,7 +13,7 @@ public class FileWriterServiceImpl implements FileWriterService {
     public void writeToFile(String fileName) {
         StringBuilder stringBuilder = new StringBuilder(REPORT_HEAD);
         Storage.storage.forEach((key, value) -> stringBuilder.append(System.lineSeparator())
-                .append(key)
+                .append(key.getName())
                 .append(",")
                 .append(value));
         String s = stringBuilder.toString();
