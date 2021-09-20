@@ -7,7 +7,7 @@ public class BalanceOperationHandler implements OperationTypeHandler{
     FruitsDaoImpl fruitsDao = new FruitsDaoImpl();
 
     @Override
-    public boolean operationMaker(String fruitType, int amount) {
-        return fruitsDao.add(new Fruit(fruitType, amount));
+    public void makeOperation(String fruitType, int amount) {
+        fruitsDao.add(new Fruit(fruitType, amount));
     }
 }

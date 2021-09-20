@@ -5,14 +5,14 @@ import java.util.Map;
 //
 public class OperationStrategyImpl implements OperationStrategy{
 
-    private Map<Operations, OperationTypeHandler> operationTypeHandlerMap;
+    private Map<String, OperationTypeHandler> operationTypeHandlerMap;
 
-    public OperationStrategyImpl(Map<Operations, OperationTypeHandler> operationTypeHandlerMap) {
+    public OperationStrategyImpl(Map<String, OperationTypeHandler> operationTypeHandlerMap) {
         this.operationTypeHandlerMap = operationTypeHandlerMap;
     }
 
     @Override
-    public OperationTypeHandler get(Operations operation) {
+    public OperationTypeHandler get(String operation) {
         return operationTypeHandlerMap.get(operation);
     }
 }

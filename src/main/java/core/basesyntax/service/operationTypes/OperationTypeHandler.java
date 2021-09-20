@@ -2,5 +2,5 @@ package core.basesyntax.service.operationTypes;
 
 //
 public interface OperationTypeHandler {
-    boolean operationMaker(String fruitType, int amount);
+    void makeOperation(String fruitType, int amount);
 }

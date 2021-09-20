@@ -7,9 +7,8 @@ import core.basesyntax.model.Fruit;
 public class FruitsDaoImpl implements FruitsDao{
 
     @Override
-    public boolean add(Fruit fruit) {
+    public void add(Fruit fruit) {
         Storage.fruits.add(fruit);
-        return false;
     }
 
     @Override

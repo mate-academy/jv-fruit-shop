@@ -4,6 +4,6 @@ import core.basesyntax.model.Fruit;
 
 //
 public interface FruitsDao {
-    boolean add(Fruit fruit);
+    void add(Fruit fruit);
     Fruit get(String someFruit);
 }

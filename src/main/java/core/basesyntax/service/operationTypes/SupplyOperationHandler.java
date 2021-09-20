@@ -8,9 +8,8 @@ public class SupplyOperationHandler implements OperationTypeHandler{
     FruitsDaoImpl fruitsDao = new FruitsDaoImpl();
 
     @Override
-    public boolean operationMaker(String fruitType, int amount) {
+    public void makeOperation(String fruitType, int amount) {
         Fruit someFruit = fruitsDao.get(fruitType);
         someFruit.setAmount(someFruit.getAmount() + amount);
-        return true;
     }
 }
