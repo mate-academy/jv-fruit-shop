@@ -3,6 +3,8 @@ package core.basesyntax;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.DataProcessor;
 import core.basesyntax.service.DataProcessorImpl;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.ReportCreatorImpl;
 import core.basesyntax.service.amount.AddAmount;
 import core.basesyntax.service.amount.AmountHandler;
 import core.basesyntax.service.amount.SubtractAmount;
@@ -19,7 +21,7 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE = "src/main/resources/fruits_correct.csv";
-    private static final String REPORT_FILE = "src/main/resources/report.csv";
+    private static final String TARGET_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitRecord.Type, AmountHandler> strategies = new HashMap<>();
@@ -31,9 +33,11 @@ public class Main {
         List<String> fileData = new InputFileReaderImpl().readFile(INPUT_FILE);
         InputRowParser inputRowParser = new InputRowParserImpl();
         List<FruitRecord> records = inputRowParser.parse(fileData);
-        DataProcessor processor = new DataProcessorImpl(operationStrategy);
+        DataProcessor processor = new DataProcessorImpl();
         processor.processData(records);
+        ReportCreator report = new ReportCreatorImpl(operationStrategy);
         ReportWriter newReportWriter = new ReportWriterImpl();
-        newReportWriter.writeReportToFile(REPORT_FILE);
+        List<String> newReport = report.createReport();
+        newReportWriter.writeReportToFile(TARGET_FILE, newReport);
     }
 }

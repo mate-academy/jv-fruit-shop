@@ -5,5 +5,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataBase {
-    public static final List<FruitRecord> db = new ArrayList<>();
+    public static final List<FruitRecord> DB = new ArrayList<>();
 }

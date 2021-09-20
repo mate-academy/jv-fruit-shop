@@ -1,5 +1,6 @@
 package core.basesyntax.dao;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
 import java.util.List;
 
@@ -8,7 +9,7 @@ public interface FruitsDao {
 
     List<FruitRecord> getRecords();
 
-    FruitRecord getRecord(FruitRecord newFruitRecord);
+    List<FruitRecord> getRecord(Fruit desiredFruit);
 
     boolean updateRecord(FruitRecord fruitRecord);
 }

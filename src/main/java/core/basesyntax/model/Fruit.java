@@ -22,10 +22,9 @@ public class Fruit {
     public boolean equals(Object newFruit) {
         if (newFruit.getClass().equals(Fruit.class)) {
             Fruit castedFruit = (Fruit) newFruit;
-            return ((this.fruitname == null && castedFruit.getFruitName() == null)
-                    || (this.fruitname != null
-                    && castedFruit.fruitname != null
-                    && this.fruitname.equals(castedFruit.getFruitName())));
+            return ((fruitname.equals(castedFruit.getFruitName()))
+                    || (fruitname != null
+                    && fruitname.equals(castedFruit.getFruitName())));
         }
         return false;
     }

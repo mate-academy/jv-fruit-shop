@@ -1,50 +1,41 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.DataBase;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FruitsDaoImpl implements FruitsDao {
-    private static final List<FruitRecord> DATA_BASE = DataBase.db;
+    private static final List<FruitRecord> DATABASE = DataBase.DB;
 
     @Override
     public boolean addRecord(FruitRecord newFruitRecord) {
-        if (isRecordExists(newFruitRecord)) {
-            return updateRecord(newFruitRecord);
-        }
-        return DATA_BASE.add(newFruitRecord);
+        return DATABASE.add(newFruitRecord);
     }
 
     @Override
     public List<FruitRecord> getRecords() {
-        return DATA_BASE;
+        return DATABASE;
     }
 
     @Override
-    public FruitRecord getRecord(FruitRecord newFruitRecord) {
-        for (FruitRecord record : DATA_BASE) {
-            if (record.getFruit().equals(newFruitRecord.getFruit())) {
-                return record;
+    public List<FruitRecord> getRecord(Fruit desiredFruit) {
+        List<FruitRecord> foundRecords = new ArrayList<>();
+        for (FruitRecord record : DATABASE) {
+            if (record.getFruit().equals(desiredFruit)) {
+                foundRecords.add(record);
             }
         }
-        return new FruitRecord(0, newFruitRecord.getType(), newFruitRecord.getFruit());
+        return foundRecords;
     }
 
     @Override
-    public boolean updateRecord(FruitRecord newFruitRecord) {
-        for (int i = 0; i < DATA_BASE.size(); i++) {
-            FruitRecord record = DATA_BASE.get(i);
-            if (record.getFruit().equals(newFruitRecord.getFruit())) {
-                DATA_BASE.set(i, newFruitRecord);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isRecordExists(FruitRecord newFruitRecord) {
-        for (FruitRecord record : DATA_BASE) {
-            if (record.getFruit().equals(newFruitRecord.getFruit())) {
+    public boolean updateRecord(FruitRecord desiredRecord) {
+        for (int i = 0; i < DATABASE.size(); i++) {
+            FruitRecord recordFromDB = DATABASE.get(i);
+            if (recordFromDB.getFruit().equals(desiredRecord.getFruit())) {
+                DATABASE.set(i, desiredRecord);
                 return true;
             }
         }
