@@ -1,9 +1,8 @@
 package core.basesyntax.servise;
 
 import core.basesyntax.model.FruitRecordDto;
-import java.util.HashMap;
+import core.basesyntax.storage.Storage;
 import java.util.List;
-import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private final ReaderService readerService;
@@ -20,12 +19,11 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void availableFruitsAfterWorkShift() {
         List<FruitRecordDto> parsedLines;
-        Map<String, Integer> goalMap = new HashMap<>();
         parsedLines = readerService.readData();
         for (FruitRecordDto line : parsedLines) {
             activityStrategy.getActivity(line.getTypeOperation())
-                    .act(line.getFruit(), line.getQuantity(), goalMap);
+                    .act(line.getFruit(), line.getQuantity());
         }
-        writerService.writeData(goalMap);
+        writerService.writeData(Storage.fruitsDataBase);
     }
 }

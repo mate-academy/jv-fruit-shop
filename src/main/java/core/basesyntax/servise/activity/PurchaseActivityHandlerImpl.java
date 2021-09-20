@@ -1,17 +1,17 @@
 package core.basesyntax.servise.activity;
 
-import java.util.Map;
+import core.basesyntax.storage.Storage;
 
 public class PurchaseActivityHandlerImpl implements ActivityHandler {
     @Override
-    public void act(String fruit, String quantity, Map<String, Integer> goalMap) {
+    public void act(String fruit, String quantity) {
         Integer intQuantity = Integer.valueOf(quantity);
-        if (goalMap.get(fruit) == null) {
+        if (Storage.fruitsDataBase.get(fruit) == null) {
             throw new RuntimeException("Balance wasn't first activity");
         }
-        if (goalMap.get(fruit) < intQuantity) {
+        if (Storage.fruitsDataBase.get(fruit) < intQuantity) {
             throw new RuntimeException("You couldn't sale more than you had");
         }
-        goalMap.put(fruit, goalMap.get(fruit) - intQuantity);
+        Storage.fruitsDataBase.put(fruit, Storage.fruitsDataBase.get(fruit) - intQuantity);
     }
 }
