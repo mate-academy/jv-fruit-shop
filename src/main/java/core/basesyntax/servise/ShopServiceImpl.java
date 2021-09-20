@@ -1,13 +1,11 @@
 package core.basesyntax.servise;
 
+import core.basesyntax.model.FruitRecordDto;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
-    private static final int TYPE = 0;
-    private static final int FRUIT = 1;
-    private static final int QUANTITY = 2;
     private final ReaderService readerService;
     private final WriterService writerService;
     private final ActivityStrategy activityStrategy;
@@ -21,12 +19,12 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void availableFruitsAfterWorkShift() {
-        List<List<String>> parsedLines;
+        List<FruitRecordDto> parsedLines;
         Map<String, Integer> goalMap = new HashMap<>();
         parsedLines = readerService.readData();
-        for (List<String> line : parsedLines) {
-            activityStrategy.getActivity(line.get(TYPE))
-                    .act(line.get(FRUIT), line.get(QUANTITY), goalMap);
+        for (FruitRecordDto line : parsedLines) {
+            activityStrategy.getActivity(line.getTypeOperation())
+                    .act(line.getFruit(), line.getQuantity(), goalMap);
         }
         writerService.writeData(goalMap);
     }
