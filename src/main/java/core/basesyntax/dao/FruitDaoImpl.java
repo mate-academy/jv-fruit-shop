@@ -4,7 +4,7 @@ import core.basesyntax.db.DataBase;
 import core.basesyntax.model.FruitRecord;
 import java.util.List;
 
-public class FruitsDaoImpl implements FruitsDao {
+public class FruitDaoImpl implements FruitDao {
     private static final List<FruitRecord> DATABASE = DataBase.DB;
 
     @Override

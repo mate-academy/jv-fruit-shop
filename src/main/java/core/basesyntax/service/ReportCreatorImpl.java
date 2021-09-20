@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.dao.FruitsDaoImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.model.Report;
 import core.basesyntax.service.amount.AmountHandler;
@@ -21,8 +21,8 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public List<String> createReport() {
-        FruitsDao fruitsDao = new FruitsDaoImpl();
-        List<FruitRecord> records = fruitsDao.getRecords();
+        FruitDao fruitDao = new FruitDaoImpl();
+        List<FruitRecord> records = fruitDao.getRecords();
         for (FruitRecord record : records) {
             AmountHandler amountHandler = operationStrategy.get(record.getType());
             amountHandler.apply(record);
