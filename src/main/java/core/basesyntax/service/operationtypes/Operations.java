@@ -1,4 +1,4 @@
-package core.basesyntax.service.operationTypes;
+package core.basesyntax.service.operationtypes;
 
 //
 public enum Operations {

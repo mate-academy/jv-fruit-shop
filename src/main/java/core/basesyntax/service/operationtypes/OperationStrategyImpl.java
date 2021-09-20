@@ -1,9 +1,8 @@
-package core.basesyntax.service.operationTypes;
+package core.basesyntax.service.operationtypes;
 
 import java.util.Map;
 
-//
-public class OperationStrategyImpl implements OperationStrategy{
+public class OperationStrategyImpl implements OperationStrategy {
 
     private Map<String, OperationTypeHandler> operationTypeHandlerMap;
 

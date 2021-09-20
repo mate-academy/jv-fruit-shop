@@ -1,6 +1,5 @@
 package core.basesyntax.model;
 
-//
 public class Fruit {
     private String type;
     private int amount;
@@ -24,13 +23,5 @@ public class Fruit {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    @Override
-    public String toString() {
-        return "Fruit{" +
-                "type='" + type + '\'' +
-                ", amount=" + amount +
-                '}';
     }
 }

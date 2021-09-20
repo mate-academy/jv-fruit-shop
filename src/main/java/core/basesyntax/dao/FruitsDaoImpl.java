@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 
 //
-public class FruitsDaoImpl implements FruitsDao{
+public class FruitsDaoImpl implements FruitsDao {
 
     @Override
     public void add(Fruit fruit) {

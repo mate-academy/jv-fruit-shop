@@ -1,11 +1,11 @@
-package core.basesyntax.service.operationTypes;
+package core.basesyntax.service.operationtypes;
 
 import core.basesyntax.dao.FruitsDaoImpl;
 import core.basesyntax.model.Fruit;
 
 //
-public class ReturnOperationHandler implements OperationTypeHandler{
-    FruitsDaoImpl fruitsDao = new FruitsDaoImpl();
+public class SupplyOperationHandler implements OperationTypeHandler {
+    private FruitsDaoImpl fruitsDao = new FruitsDaoImpl();
 
     @Override
     public void makeOperation(String fruitType, int amount) {

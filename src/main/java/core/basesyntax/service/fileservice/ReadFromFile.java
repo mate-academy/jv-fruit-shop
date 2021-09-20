@@ -1,5 +1,4 @@
-package core.basesyntax.service.fileService;
-
+package core.basesyntax.service.fileservice;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,3 +14,4 @@ public class ReadFromFile {
         }
     }
 }
+
