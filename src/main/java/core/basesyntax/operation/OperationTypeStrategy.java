@@ -1,7 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.operation;
 
 import core.basesyntax.model.OperationType;
-import core.basesyntax.service.operation.ShopOperationHandler;
 
 public interface OperationTypeStrategy {
     ShopOperationHandler get(OperationType type);

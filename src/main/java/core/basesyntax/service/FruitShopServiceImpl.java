@@ -1,9 +1,9 @@
 package core.basesyntax.service;
 
-import core.basesyntax.fruitdao.FruitShopDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.operation.ShopOperationHandler;
+import core.basesyntax.operation.OperationTypeStrategy;
+import core.basesyntax.operation.ShopOperationHandler;
 import java.util.List;
 import java.util.Map;
 

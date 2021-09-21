@@ -1,4 +1,4 @@
-package core.basesyntax.fruitdao;
+package core.basesyntax.service;
 
 import java.io.File;
 import java.io.IOException;

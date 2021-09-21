@@ -1,4 +1,4 @@
-package core.basesyntax.fruitdao;
+package core.basesyntax.service;
 
 import core.basesyntax.exception.FileValidation;
 import core.basesyntax.model.Fruit;
