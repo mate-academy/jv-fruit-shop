@@ -18,10 +18,11 @@ public class StockServiceImpl implements StockService {
             if (!Stock.stockStorage.containsKey(transaction.getFruit())) {
                 Stock.stockStorage.put(transaction.getFruit(), transaction.getAmount());
             }
-            Stock.stockStorage.put(transaction.getFruit(),
-                    strategyOperations.getOperation(
-                            transaction.getOperationType()).getNewAmount(
-                            transaction, Stock.stockStorage.get(transaction.getFruit())));
+            String operationType = transaction.getOperationType();
+            int oldAmount = Stock.stockStorage.get(transaction.getFruit());
+            int quantity = strategyOperations
+                    .getOperation(operationType).getNewAmount(transaction, oldAmount);
+            Stock.stockStorage.put(transaction.getFruit(), quantity);
         }
     }
 }
