@@ -1,4 +1,4 @@
-package Service;
+package service;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
-public class WriteFileImpl implements WriteFile{
+public class WriteFileImpl implements WriteFile {
     public static final String PATH_RESOURCE = "src/main/resources/";
+
     @Override
     public void writeWithMapToFile(Map<String, Integer> map, String newFileName) {
         String fileNamePath = PATH_RESOURCE + newFileName;
@@ -20,7 +21,7 @@ public class WriteFileImpl implements WriteFile{
                         .append(System.lineSeparator());
             }
         } catch (IOException e) {
-           throw new RuntimeException("Can't write data to the file, " + newFileName, e);
+            throw new RuntimeException("Can't write data to the file, " + newFileName, e);
         }
     }
 }

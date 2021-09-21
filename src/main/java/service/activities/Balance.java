@@ -1,4 +1,4 @@
-package Service.Activities;
+package service.activities;
 
 import db.Storage;
 
@@ -6,9 +6,9 @@ public class Balance implements Activities {
 
     @Override
     public void setBalance(String productName, Integer productBalance) {
-        if(Storage.storage.containsKey(productName)) {
+        if (Storage.storage.containsKey(productName)) {
             Storage.storage.replace(productName, productBalance);
-        }else {
+        } else {
             Storage.storage.put(productName, productBalance);
         }
     }

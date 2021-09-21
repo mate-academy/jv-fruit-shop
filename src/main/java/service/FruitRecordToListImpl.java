@@ -1,11 +1,10 @@
-package Service;
-
-import Service.fruitRecord.FruitRecord;
-import validator.Validator;
-import validator.ValidatorImpl;
+package service;
 
 import java.util.ArrayList;
 import java.util.List;
+import service.fruitrecord.FruitRecord;
+import validator.Validator;
+import validator.ValidatorImpl;
 
 public class FruitRecordToListImpl implements FruitRecordToList {
     @Override

@@ -1,6 +1,4 @@
-package Service.Activities;
-
-import java.util.Objects;
+package service.activities;
 
 public enum TypeOfActivities {
     BALANCE("b"),
@@ -8,7 +6,7 @@ public enum TypeOfActivities {
     PURCHASE("p"),
     RETURN("r");
 
-    String activities;
+    private String activities;
 
     TypeOfActivities(String activities) {
         this.activities = activities;
@@ -18,15 +16,13 @@ public enum TypeOfActivities {
         return activities;
     }
 
-    public TypeOfActivities getActivities (String value){
+    public TypeOfActivities getActivities(String value) {
         TypeOfActivities[] values = TypeOfActivities.values();
-        for(TypeOfActivities type : values) {
-            if(type.getActivitiesValues().equals(value)) {
+        for (TypeOfActivities type : values) {
+            if (type.getActivitiesValues().equals(value)) {
                 return type;
             }
         }
         throw new RuntimeException("Can't find type of activities with this value, " + value);
     }
-
-
 }

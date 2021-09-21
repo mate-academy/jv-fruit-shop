@@ -1,9 +1,8 @@
-package Service;
-
-import Service.Activities.Activities;
-import Service.Activities.TypeOfActivities;
+package service;
 
 import java.util.Map;
+import service.activities.Activities;
+import service.activities.TypeOfActivities;
 
 public class ActivitiesStrategyImpl implements ActivitiesStrategy {
     private Map<TypeOfActivities, Activities> activitiesMap;

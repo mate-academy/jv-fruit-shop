@@ -1,8 +1,7 @@
-package Service;
-
-import Service.fruitRecord.FruitRecord;
+package service;
 
 import java.util.List;
+import service.fruitrecord.FruitRecord;
 
 public interface FruitRecordToList {
     List<FruitRecord> fruitRecordToList(String stringFruit);

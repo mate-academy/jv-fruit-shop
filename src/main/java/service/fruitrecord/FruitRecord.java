@@ -1,6 +1,6 @@
-package Service.fruitRecord;
+package service.fruitrecord;
 
-import Service.Activities.TypeOfActivities;
+import service.activities.TypeOfActivities;
 
 public class FruitRecord {
     public static final int ACTIVITIES_INDEX = 0;
@@ -12,7 +12,7 @@ public class FruitRecord {
 
     public FruitRecord(String[] fruitRecordData) {
 
-        TypeOfActivities activities  = TypeOfActivities.BALANCE;
+        TypeOfActivities activities = TypeOfActivities.BALANCE;
         this.operationType = activities.getActivities(fruitRecordData[ACTIVITIES_INDEX]);
         this.fruit = fruitRecordData[FRUIT_NAME_INDEX];
         this.amount = Integer.parseInt(fruitRecordData[FRUIT_VALUE_INDEX]);
