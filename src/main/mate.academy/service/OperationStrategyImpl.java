@@ -11,7 +11,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public Handler get(String type) {
+    public Handler getHandler(String type) {
         if (handlerMap.get(type) == null) {
             throw new RuntimeException("Invalid operation");
         }

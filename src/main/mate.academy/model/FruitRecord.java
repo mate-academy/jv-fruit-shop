@@ -2,12 +2,12 @@ package model;
 
 public class FruitRecord {
     private final String typeOperation;
-    private final Fruit fruitName;
+    private final Fruit fruit;
     private final int amount;
 
-    public FruitRecord(String typeOperation, Fruit fruitName, int amount) {
+    public FruitRecord(String typeOperation, Fruit fruit, int amount) {
         this.typeOperation = typeOperation;
-        this.fruitName = fruitName;
+        this.fruit = fruit;
         this.amount = amount;
     }
 
@@ -15,8 +15,8 @@ public class FruitRecord {
         return typeOperation;
     }
 
-    public Fruit getFruitName() {
-        return fruitName;
+    public Fruit getFruit() {
+        return fruit;
     }
 
     public int getAmount() {

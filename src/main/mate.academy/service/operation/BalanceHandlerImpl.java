@@ -8,7 +8,7 @@ public class BalanceHandlerImpl implements Handler {
 
     @Override
     public int changeAmount(FruitRecord fruitRecord, Map<Fruit, Integer> storage) {
-        storage.put(fruitRecord.getFruitName(), 0);
+        storage.put(fruitRecord.getFruit(), 0);
         return fruitRecord.getAmount();
     }
 }

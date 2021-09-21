@@ -9,7 +9,7 @@ public class FileReaderDaoImpl implements FileReaderDao {
     private static final int REMOVE_LINE = 0;
 
     @Override
-    public List<String> getDataFile(String fileName) {
+    public List<String> getFileData(String fileName) {
         List<String> fileData;
         try {
             fileData = Files.readAllLines(Path.of(fileName));

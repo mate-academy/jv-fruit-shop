@@ -15,11 +15,10 @@ public class FruitParser {
     Validator lineValidator = new ValidatorImpl();
 
     public List<FruitRecord> createDto(List<String> list) {
-        String[] split;
         List<FruitRecord> fruitRecords = new ArrayList<>();
         for (String newSplit : list) {
-            split = newSplit.split(SPLIT_SYMBOL);
-            lineValidator.validator(split);
+            String[] split = newSplit.split(SPLIT_SYMBOL);
+            lineValidator.validate(split);
             fruitRecords.add(new FruitRecord(split[TYPE_INDEX],
                     new Fruit(split[NAME_INDEX]),
                     Integer.parseInt(split[AMOUNT_INDEX])));

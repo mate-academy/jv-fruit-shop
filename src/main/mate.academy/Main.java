@@ -37,7 +37,7 @@ public class Main {
         handlerMap.put(TypeOperation.p.name(), purchaseHandler);
         handlerMap.put(TypeOperation.r.name(), returnHandler);
         FruitParser fruitParser = new FruitParser();
-        List<String> input = fileReaderDao.getDataFile(INPUT);
+        List<String> input = fileReaderDao.getFileData(INPUT);
         List<FruitRecord> fruitRecordList = fruitParser.createDto(input);
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);

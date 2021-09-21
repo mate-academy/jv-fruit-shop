@@ -20,9 +20,8 @@ public class FruitShopServiceImpl implements FruitShopService {
         Map<Fruit, Integer> fruitStorage = storage.getStorage();
         for (FruitRecord fruitRecord : transferFruitList) {
             String type = fruitRecord.getTypeOperation();
-            fruitStorage.put(fruitRecord.getFruitName(),
-                    operationStrategy.get(type).changeAmount(fruitRecord, fruitStorage));
-
+            fruitStorage.put(fruitRecord.getFruit(),
+                    operationStrategy.getHandler(type).changeAmount(fruitRecord, fruitStorage));
         }
         return fruitStorage;
     }

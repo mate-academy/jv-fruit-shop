@@ -1,5 +1,5 @@
 package dao;
 
 public interface Validator {
-    void validator(String[] fileDataLine);
+    void validate(String[] dataFromFile);
 }
