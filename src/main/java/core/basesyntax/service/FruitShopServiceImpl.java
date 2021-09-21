@@ -16,8 +16,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public Map<Fruit, Integer> transact(List<TransactionDto> transactionDtoList,
                                         OperationStrategy operationStrategy) {
-        Storage storage = new Storage();
-        Map<Fruit, Integer> fruitsStorage = storage.getAllData();
+        Map<Fruit, Integer> fruitsStorage = Storage.getAllData();
         for (TransactionDto transactionDto : transactionDtoList) {
             String type = transactionDto.getType();
             fruitsStorage.put(transactionDto.getFruit(),
