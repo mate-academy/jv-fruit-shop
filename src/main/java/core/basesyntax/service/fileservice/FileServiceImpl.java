@@ -1,7 +1,5 @@
 package core.basesyntax.service.fileservice;
 
-import core.basesyntax.service.fileservice.FruitRecordsDto;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FruitRecordsDtoImpl implements FruitRecordsDto {
+public class FileServiceImpl implements FileService {
     @Override
     public List<String> readDataFromFile(String fileName) {
         List<String> fruitRecords;

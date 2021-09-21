@@ -5,7 +5,7 @@ import java.util.Objects;
 public class FruitRecordDto {
     private Fruit fruitName;
     private int amount;
-    private String operationType;
+    private OperationType operationType;
 
     public Fruit getFruitName() {
         return fruitName;
@@ -15,7 +15,7 @@ public class FruitRecordDto {
         return amount;
     }
 
-    public String getOperationType() {
+    public OperationType getOperationType() {
         return operationType;
     }
 
@@ -27,7 +27,7 @@ public class FruitRecordDto {
         this.amount = amount;
     }
 
-    public void setOperationType(String operationType) {
+    public void setOperationType(OperationType operationType) {
         this.operationType = operationType;
     }
 

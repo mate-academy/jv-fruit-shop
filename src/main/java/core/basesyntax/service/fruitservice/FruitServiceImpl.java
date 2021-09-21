@@ -12,17 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
-
     @Override
-    public void safe(String fromFileName) {
-        DataParser dataParser = new DataParserImpl();
-        List<FruitRecordDto> fruitRecords = dataParser.parseData(fromFileName);
-        Map<String, OperationHandler> operationHandlerMap = new MapInitialize().initializeMap();
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+    public void safe(List<FruitRecordDto> fruitRecords, OperationStrategy operationStrategy) {
         Map<Fruit, Integer> fruitStorage = Storage.fruitStorage;
         for (FruitRecordDto record : fruitRecords) {
             fruitStorage.put(record.getFruitName(),
-                    operationStrategy.get(record.getOperationType())
+                    operationStrategy.get(record.getOperationType().getType())
                             .getAmount(record));
         }
     }

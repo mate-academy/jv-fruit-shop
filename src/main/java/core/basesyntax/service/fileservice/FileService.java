@@ -2,7 +2,7 @@ package core.basesyntax.service.fileservice;
 
 import java.util.List;
 
-public interface FruitRecordsDto {
+public interface FileService {
 
     List<String> readDataFromFile(String fileName);
 
