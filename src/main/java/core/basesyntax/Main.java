@@ -2,9 +2,10 @@ package core.basesyntax;
 
 import core.basesyntax.dao.ActivitiesDao;
 import core.basesyntax.dao.ActivitiesDaoCsvImpl;
+import core.basesyntax.exceptions.InputException;
 import core.basesyntax.model.ActivitiesType;
-import core.basesyntax.service.ActivitiesService;
-import core.basesyntax.service.ActivitiesServiceImpl;
+import core.basesyntax.service.ActivityService;
+import core.basesyntax.service.ActivityServiceImpl;
 import core.basesyntax.service.ActivityTypeStrategy;
 import core.basesyntax.service.ActivityTypeStrategyImpl;
 import core.basesyntax.service.activityhandler.ActivityTypeHandler;
@@ -34,11 +35,19 @@ public class Main {
         activityTypeHandlerMap.put(ActivitiesType.r, returnActivityHandler);
         ActivityTypeStrategy activityTypeStrategy =
                 new ActivityTypeStrategyImpl(activityTypeHandlerMap);
+
         ActivitiesDao activitiesDao = new ActivitiesDaoCsvImpl();
-        InputValidator validator = new InputValidatorImpl();
-        ActivitiesService activitiesService = new ActivitiesServiceImpl(validator);
         List<String> activities = activitiesDao.getActivities(FROM_FILE);
-        activitiesService.processingActivities(activityTypeStrategy, activities);
-        activitiesDao.writeInFile(TO_FILE);
+
+        InputValidator validator = new InputValidatorImpl();
+        try {
+            validator.validate(activities);
+        } catch (InputException e) {
+            throw new RuntimeException(e);
+        }
+        Map<String, Integer> reportStorage;
+        ActivityService activityService = new ActivityServiceImpl();
+        reportStorage = activityService.processingActivities(activityTypeStrategy, activities);
+        activitiesDao.writeReportInFile(TO_FILE, reportStorage);
     }
 }

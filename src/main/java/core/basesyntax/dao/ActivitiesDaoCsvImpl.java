@@ -1,7 +1,5 @@
 package core.basesyntax.dao;
 
-import static core.basesyntax.db.Storage.storage;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,10 +24,10 @@ public class ActivitiesDaoCsvImpl implements ActivitiesDao {
     }
 
     @Override
-    public void writeInFile(String pathToFile) {
+    public void writeReportInFile(String pathToFile, Map<String, Integer> report) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathToFile))) {
             bufferedWriter.write(FRUIT + REGEX + QUANTITY + System.lineSeparator());
-            for (Map.Entry<String, Integer> entry : storage.entrySet()) {
+            for (Map.Entry<String, Integer> entry : report.entrySet()) {
                 bufferedWriter.write(entry.getKey() + REGEX
                         + entry.getValue() + System.lineSeparator());
             }

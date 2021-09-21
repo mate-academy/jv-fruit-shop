@@ -1,10 +1,13 @@
 package core.basesyntax.service.activityhandler;
 
-import static core.basesyntax.db.Storage.storage;
+import core.basesyntax.exceptions.OperationException;
+
+import java.util.Map;
 
 public class BalanceActivityHandler implements ActivityTypeHandler {
     @Override
-    public void processActivity(String fruit, Integer amount) {
+    public void processActivity(Map<String, Integer> storage,
+                                String fruit, Integer amount) {
         storage.put(fruit, amount);
     }
 }

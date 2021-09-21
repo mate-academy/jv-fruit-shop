@@ -1,10 +1,11 @@
 package core.basesyntax.service.activityhandler;
 
-import static core.basesyntax.db.Storage.storage;
+import java.util.Map;
 
 public class SupplyActivityHandler implements ActivityTypeHandler {
     @Override
-    public void processActivity(String fruit, Integer amount) {
+    public void processActivity(Map<String, Integer> storage,
+                                String fruit, Integer amount) {
         storage.put(fruit, storage.get(fruit) + amount);
     }
 }

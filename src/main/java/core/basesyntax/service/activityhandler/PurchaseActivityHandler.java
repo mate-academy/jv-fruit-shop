@@ -1,16 +1,16 @@
 package core.basesyntax.service.activityhandler;
 
-import static core.basesyntax.db.Storage.storage;
+import core.basesyntax.exceptions.OperationException;
 
-import core.basesyntax.service.validators.ExperssionValidatorImpl;
-import core.basesyntax.service.validators.ExpessionValidator;
+import java.util.Map;
 
 public class PurchaseActivityHandler implements ActivityTypeHandler {
     @Override
-    public void processActivity(String fruit, Integer amount) {
-        ExpessionValidator validator = new ExperssionValidatorImpl();
-        // check if there are enough fruits in storage
-        validator.validateExpression(storage.get(fruit), amount);
+    public void processActivity(Map<String, Integer> storage,
+                                String fruit, Integer amount) throws OperationException {
+        if (storage.get(fruit) - amount < 0) {
+            throw new OperationException("Not enough fruits in storage");
+        }
         storage.put(fruit, storage.get(fruit) - amount);
     }
 }

@@ -1,9 +1,8 @@
 package core.basesyntax.service.validators;
 
-import core.basesyntax.model.ActivitiesType;
+import core.basesyntax.exceptions.InputException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class InputValidatorImpl implements InputValidator {
     private static final int HEAD_STRING = 0;
@@ -16,29 +15,43 @@ public class InputValidatorImpl implements InputValidator {
     private static final String REGEX = ",";
 
     @Override
-    public void validate(List<String> data) {
-        String[] head = data.get(HEAD_STRING).split(REGEX);
-        if (!head[ACTIVITY_TYPE_INDEX].equals(TYPE)
-                || !head[FRUIT_INDEX].equals(FRUIT)
-                || !head[AMOUNT_INDEX].equals(QUANTITY)) {
-            throw new RuntimeException("input data is invalid");
-        }
+    public void validate(List<String> data) throws InputException {
+        String head = data.get(HEAD_STRING);
+        headValidation(head);
         List<String> dataToValidate = new ArrayList<>(List.copyOf(data));
         dataToValidate.remove(HEAD_STRING);
-        List<String> fruits = dataToValidate.stream()
-                .map(s -> s.split(REGEX))
-                .filter(s -> s[ACTIVITY_TYPE_INDEX].equals(ActivitiesType.b.toString()))
-                .map(s -> s[FRUIT_INDEX])
-                .collect(Collectors.toList());
-        boolean flag = dataToValidate.stream()
-                .map(s -> s.split(REGEX))
-                .anyMatch(s -> (s[ACTIVITY_TYPE_INDEX].isEmpty()
-                    || s[FRUIT_INDEX].isEmpty()
-                    || s[AMOUNT_INDEX].isEmpty())
-                    || !(fruits.contains(s[FRUIT_INDEX]))
-                    || Integer.parseInt(s[AMOUNT_INDEX]) < 0);
-        if (flag) {
-            throw new RuntimeException("input data is invalid");
+        for (String activity : dataToValidate) {
+            activityValidation(activity);
         }
+    }
+
+    private void headValidation(String head) throws InputException {
+        String[] headElements = baseValidationAndSplitter(head);
+        if (!TYPE.equals(headElements[ACTIVITY_TYPE_INDEX])
+                || !FRUIT.equals(headElements[FRUIT_INDEX])
+                || !QUANTITY.equals(headElements[AMOUNT_INDEX])) {
+            throw new InputException("input head is invalid");
+        }
+    }
+
+    private void activityValidation(String activity) throws InputException {
+        String[] activityElements = baseValidationAndSplitter(activity);
+        if (activityElements[ACTIVITY_TYPE_INDEX].isEmpty()
+                || activityElements[FRUIT_INDEX].isEmpty()
+                || activityElements[AMOUNT_INDEX].isEmpty()
+                || Integer.parseInt(activityElements[AMOUNT_INDEX]) < 0) {
+            throw new InputException("activity parameters were invalid");
+        }
+    }
+
+    private String[] baseValidationAndSplitter(String dataLine) throws InputException {
+        if (dataLine == null) {
+            throw new InputException("dataLine was null!");
+        }
+        String[] lineElements;
+        if ((lineElements = dataLine.split(REGEX)).length != 3) {
+            throw new InputException("invalid number of elements in dataLine");
+        }
+        return lineElements;
     }
 }
