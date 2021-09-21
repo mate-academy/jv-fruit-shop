@@ -5,7 +5,7 @@ import model.FruitRecord;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private final OperationStrategy operationStrategy;
+    private OperationStrategy operationStrategy;
 
     public FruitShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
