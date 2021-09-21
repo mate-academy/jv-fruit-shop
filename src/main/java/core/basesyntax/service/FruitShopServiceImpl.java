@@ -35,8 +35,7 @@ public class FruitShopServiceImpl implements FruitShopService {
             DataBaseFruit.storage.put(fruitRecordDto.getFruit(),
                     operationStrategy
                             .getHandel(typeOperation)
-                            .changeAmount(fruitRecordDto,
-                                    DataBaseFruit.storage));
+                            .changeAmount(fruitRecordDto));
         }
     }
 }

@@ -1,5 +1,6 @@
 package core.basesyntax.operation;
 
+import core.basesyntax.db.DataBaseFruit;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecordDto;
 import java.util.Map;
@@ -7,8 +8,8 @@ import java.util.Map;
 public class IncreaseFruitHandlerImpl implements Handler {
 
     @Override
-    public int changeAmount(FruitRecordDto fruitRecord, Map<Fruit, Integer> storage) {
-        for (Map.Entry<Fruit, Integer> fruitInteger : storage.entrySet()) {
+    public int changeAmount(FruitRecordDto fruitRecord) {
+        for (Map.Entry<Fruit, Integer> fruitInteger : DataBaseFruit.storage.entrySet()) {
             if (fruitInteger.getKey().equals(fruitRecord.getFruit())) {
                 return fruitInteger.getValue() + fruitRecord.getQuantity();
             }
