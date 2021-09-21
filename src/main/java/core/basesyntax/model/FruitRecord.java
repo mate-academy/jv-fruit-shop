@@ -33,19 +33,24 @@ public class FruitRecord {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FruitRecord that = (FruitRecord) o;
-        return amount == that.amount && Objects.equals(fruitName, that.fruitName) && operationType == that.operationType;
+        return amount == that.amount && Objects.equals(fruitName, that.fruitName)
+                && operationType == that.operationType;
     }
 
     @Override
     public String toString() {
-        return "FruitRecord{" +
-                "fruit='" + fruitName + '\'' +
-                ", amount=" + amount +
-                ", operationType=" + operationType +
-                '}';
+        return "FruitRecord{"
+                + "fruit='" + fruitName + '\''
+                + ", amount=" + amount
+                + ", operationType=" + operationType
+                + '}';
     }
 
     @Override
@@ -54,10 +59,10 @@ public class FruitRecord {
     }
 
     public enum OperationType {
-        BALANCE ("b"),
-        SUPPLY ("s"),
-        PURCHASE ("p"),
-        RETURN ("r");
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
 
         private String type;
 

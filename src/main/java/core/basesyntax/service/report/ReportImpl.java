@@ -5,7 +5,6 @@ import core.basesyntax.dao.FruitRecordsDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.transfer.FruitTransfer;
 import core.basesyntax.service.transfer.FruitTransferImpl;
-
 import java.util.Map;
 
 public class ReportImpl implements Report {

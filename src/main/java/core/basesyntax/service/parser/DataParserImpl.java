@@ -4,7 +4,6 @@ import core.basesyntax.dao.FruitRecordsDaoImpl;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.validator.Validator;
 import core.basesyntax.service.validator.ValidatorImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 
