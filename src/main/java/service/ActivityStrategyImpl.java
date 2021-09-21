@@ -13,11 +13,10 @@ public class ActivityStrategyImpl implements ActivityStrategy {
     @Override
     public ActivityHandler get(String activityType) {
 
-        if (activityType.equals("b") || activityType.equals("p")
-                || activityType.equals("r") || activityType.equals("s")) {
+        if (activityHandlerMap.containsKey(activityType)) {
             return activityHandlerMap.get(activityType);
+        } else {
+            throw new RuntimeException("Wrong activity type in the file");
         }
-
-        throw new RuntimeException("Wrong activity type in the file");
     }
 }

@@ -9,26 +9,42 @@ public class InputValidatorImpl implements InputValidator {
     private static final int FRUIT_TYPE_COLUMN_INDEX = 1;
     private static final int FRUIT_QUANTITY_COLUMN_INDEX = 2;
     private static final int REQ_COLUMNS_FOR_REPORT = 3;
+    private static final String DELIMITER = ",";
 
     @Override
-    public void validateInput(List<String> listFromFile) {
+    public boolean validateInput(List<String> listFromFile) {
         for (int i = DATA_START_FROM_LINE; i < listFromFile.size(); i++) {
-            String[] inputColumn = listFromFile.get(i).split(",");
+            String[] fruitLineArray = listFromFile.get(i).split(DELIMITER);
 
-            String operationType = inputColumn[OPERATION_TYPE_COLULMN_INDEX];
-            String fruitType = inputColumn[FRUIT_TYPE_COLUMN_INDEX];
-            int fruitAmount = Integer.parseInt(inputColumn[FRUIT_QUANTITY_COLUMN_INDEX]);
+            checkColumnAmount(fruitLineArray);
 
-            if (inputColumn.length != REQ_COLUMNS_FOR_REPORT
-                    || fruitType.isBlank() || operationType.isBlank()) {
-                throw new RuntimeException("Missing data in row: "
-                        + (i + 1) + ". Row: " + listFromFile.get(i));
-            }
+            String operationType = fruitLineArray[OPERATION_TYPE_COLULMN_INDEX];
+            String fruitType = fruitLineArray[FRUIT_TYPE_COLUMN_INDEX];
+            int fruitAmount = Integer.parseInt(fruitLineArray[FRUIT_QUANTITY_COLUMN_INDEX]);
 
-            if (fruitAmount < 0) {
-                throw new RuntimeException("Fruit count can not be negative. Row #"
-                        + (i + 1) + ". Row: " + listFromFile.get(i));
-            }
+            columnIsNotEmpty(operationType);
+            columnIsNotEmpty(fruitType);
+            checkFruitAmount(fruitAmount);
+        }
+        return true;
+    }
+
+    private void checkColumnAmount(String[] inputArray) {
+        if (inputArray.length != REQ_COLUMNS_FOR_REPORT) {
+            throw new IllegalArgumentException("Wrong data format");
         }
     }
+
+    private void columnIsNotEmpty(String column) {
+        if (column.isBlank()) {
+            throw new IllegalArgumentException("Missing data in one of the columns");
+        }
+    }
+
+    private void checkFruitAmount(int fruitAmount) {
+        if (fruitAmount < 0) {
+            throw new IllegalArgumentException("Fruit amount can not be negative");
+        }
+    }
+
 }
