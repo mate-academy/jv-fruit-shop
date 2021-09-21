@@ -28,6 +28,6 @@ public class ReportImpl implements Report {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        return stringBuilder.toString().trim();
+        return stringBuilder.toString();
     }
 }
