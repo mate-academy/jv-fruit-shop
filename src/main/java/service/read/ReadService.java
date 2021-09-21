@@ -1,7 +1,7 @@
-package read;
+package service.read;
 
 import java.util.List;
 
-public interface ReaderService {
+public interface ReadService {
     List<String[]> read(String filePath);
 }

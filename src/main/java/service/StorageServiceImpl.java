@@ -1,6 +1,9 @@
+package service;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.FruitRecord;
 
 public class StorageServiceImpl implements StorageService {
     private OperationStrategy operationStrategy;

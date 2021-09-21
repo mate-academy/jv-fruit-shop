@@ -1,4 +1,6 @@
-import operationhandler.OperationHandler;
+package service;
+
+import operationtype.OperationHandler;
 
 public interface OperationStrategy {
 

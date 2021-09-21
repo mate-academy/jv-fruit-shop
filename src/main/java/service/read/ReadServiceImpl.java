@@ -1,4 +1,4 @@
-package read;
+package service.read;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReaderServiceImpl implements ReaderService {
+public class ReadServiceImpl implements ReadService {
 
     @Override
     public List<String[]> read(String filePath) {

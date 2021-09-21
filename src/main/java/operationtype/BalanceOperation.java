@@ -1,4 +1,4 @@
-package operationhandler;
+package operationtype;
 
 public class BalanceOperation implements OperationHandler {
 

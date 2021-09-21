@@ -1,4 +1,4 @@
-package write;
+package service.write;
 
 import java.util.Map;
 
