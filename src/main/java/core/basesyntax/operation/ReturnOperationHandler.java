@@ -1,12 +1,12 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.model.FruitType;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public void setDataInStorage(Map<FruitType, Integer> totalFruitAmount,
-                                 FruitType fruit, int amount) {
+    public void setDataInStorage(Map<Fruit, Integer> totalFruitAmount,
+                                 Fruit fruit, int amount) {
         totalFruitAmount.put(fruit, totalFruitAmount.get(fruit) + amount);
     }
 }

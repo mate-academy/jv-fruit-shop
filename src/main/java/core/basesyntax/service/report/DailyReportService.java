@@ -1,5 +1,8 @@
 package core.basesyntax.service.report;
 
+import core.basesyntax.model.Fruit;
+import java.util.Map;
+
 public interface DailyReportService {
-    void createReport(String filePathTo);
+    String createReport(Map<Fruit, Integer> totalFruitAmount);
 }

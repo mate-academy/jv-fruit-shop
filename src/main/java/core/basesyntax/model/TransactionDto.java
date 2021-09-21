@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 public class TransactionDto {
     private OperationType operationType;
-    private FruitType fruitType;
+    private Fruit fruit;
     private int fruitAmount;
 
-    public TransactionDto(OperationType operationType, FruitType fruitType, int fruitAmount) {
+    public TransactionDto(OperationType operationType, Fruit fruit, int fruitAmount) {
         this.operationType = operationType;
-        this.fruitType = fruitType;
+        this.fruit = fruit;
         this.fruitAmount = fruitAmount;
     }
 
@@ -15,8 +15,8 @@ public class TransactionDto {
         return operationType;
     }
 
-    public FruitType getFruitType() {
-        return fruitType;
+    public Fruit getFruitType() {
+        return fruit;
     }
 
     public int getFruitAmount() {

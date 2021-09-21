@@ -8,14 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputDataReaderImpl implements InputDataReader {
-    private String inputFilePath;
-
-    public InputDataReaderImpl(String inputFilePath) {
-        this.inputFilePath = inputFilePath;
-    }
 
     @Override
-    public List<String> getDataFromFile() {
+    public List<String> getDataFromFile(String inputFilePath) {
         List<String> dataFromFile = new ArrayList<>();
         String value;
         File file = new File(inputFilePath);

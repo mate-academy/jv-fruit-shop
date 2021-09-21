@@ -1,31 +1,23 @@
 package core.basesyntax.service.report;
 
-import core.basesyntax.model.FruitType;
-import core.basesyntax.service.writer.ReportWriter;
-import core.basesyntax.service.writer.ReportWriterImpl;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public class DailyReportServiceImpl implements DailyReportService {
     private static final String OUTPUT_FILE_HEADER = "fruit,quantity";
-    private final FruitAmountCounter fruitAmountCounter;
-    private final ReportWriter reportWriter;
-
-    public DailyReportServiceImpl(FruitAmountCounter fruitAmountCounter) {
-        this.fruitAmountCounter = fruitAmountCounter;
-        this.reportWriter = new ReportWriterImpl();
-    }
 
     @Override
-    public void createReport(String filePathTo) {
+    public String createReport(Map<Fruit, Integer> totalFruitAmount) {
         StringBuilder builderReport = new StringBuilder();
-        builderReport.append(OUTPUT_FILE_HEADER);
-        for (Map.Entry<FruitType, Integer> entry :
-                fruitAmountCounter.countFruitByOperation().entrySet()) {
-            builderReport.append(System.lineSeparator())
-                    .append(entry.getKey())
+        builderReport.append(OUTPUT_FILE_HEADER)
+                .append(System.lineSeparator());
+        for (Map.Entry<Fruit, Integer> entry :
+                totalFruitAmount.entrySet()) {
+            builderReport.append(entry.getKey().getName())
                     .append(",")
-                    .append(entry.getValue());
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
         }
-        reportWriter.writeReport(filePathTo, builderReport.toString());
+        return builderReport.toString();
     }
 }

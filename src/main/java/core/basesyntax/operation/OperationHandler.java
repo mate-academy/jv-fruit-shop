@@ -1,8 +1,8 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.model.FruitType;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public interface OperationHandler {
-    void setDataInStorage(Map<FruitType, Integer> totalFruitAmount, FruitType fruit, int amount);
+    void setDataInStorage(Map<Fruit, Integer> totalFruitAmount, Fruit fruit, int amount);
 }
