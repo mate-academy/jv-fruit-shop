@@ -1,5 +1,5 @@
-package dao;
+package service;
 
-public interface FileWriterDao {
+public interface FileWriter {
     void writeFile(String fileName, String report);
 }

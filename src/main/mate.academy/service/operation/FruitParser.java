@@ -1,7 +1,7 @@
 package service.operation;
 
-import dao.Validator;
-import dao.ValidatorImpl;
+import service.validation.Validator;
+import service.validation.ValidatorImpl;
 import model.Fruit;
 import model.FruitRecord;
 import java.util.ArrayList;

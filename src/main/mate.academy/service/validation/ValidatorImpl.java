@@ -1,4 +1,4 @@
-package dao;
+package service.validation;
 
 public class ValidatorImpl implements Validator {
     private static final int MAX_LENGTH = 3;

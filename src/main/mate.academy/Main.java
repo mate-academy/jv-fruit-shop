@@ -1,7 +1,7 @@
-import dao.FileReader;
-import dao.FileReaderImpl;
-import dao.FileWriterDao;
-import dao.FileWriterDaoImpl;
+import service.FileReader;
+import service.FileReaderImpl;
+import service.FileWriter;
+import service.FileWriterImpl;
 import model.FruitRecord;
 import model.Operation;
 import service.FruitShopService;
@@ -42,7 +42,7 @@ public class Main {
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
         fruitShopService.transfer(fruitRecordList);
         ReportService reportService = new ReportServiceImpl();
-        FileWriterDao fileWriter = new FileWriterDaoImpl();
+        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeFile(OUTPUT, reportService.createReport());
     }
 }
