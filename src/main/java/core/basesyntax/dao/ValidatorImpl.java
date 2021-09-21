@@ -13,12 +13,10 @@ public class ValidatorImpl implements Validator {
     public boolean isDataValid(List<String> inputDataFromFile) {
         List<String> inputData = new ArrayList<>(inputDataFromFile);
         inputData.remove(TITLE_LINE);
-        for (String line : inputData) {
-            if (!(inputDataFromFile.get(TYPE_OPERATION_INDEX).isEmpty())
-                    || inputDataFromFile.get(FRUIT_INDEX).isEmpty()
-                    || inputDataFromFile.get(FRUIT_AMOUNT_INDEX).isEmpty()) {
-                return true;
-            }
+        if (!(inputDataFromFile.get(TYPE_OPERATION_INDEX).isEmpty())
+                || inputDataFromFile.get(FRUIT_INDEX).isEmpty()
+                || inputDataFromFile.get(FRUIT_AMOUNT_INDEX).isEmpty()) {
+            return true;
         }
         throw new RuntimeException("Amount of columns is incorrect");
     }

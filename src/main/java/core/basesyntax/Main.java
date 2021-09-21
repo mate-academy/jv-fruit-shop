@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.ReadFile;
-import core.basesyntax.dao.ReadFileImpl;
-import core.basesyntax.dao.WriteToFile;
-import core.basesyntax.dao.WriteToFileImpl;
+import core.basesyntax.dao.FileReaderDao;
+import core.basesyntax.dao.FileReaderDaoImpl;
+import core.basesyntax.dao.FileWriterDao;
+import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.model.TransactionDto;
@@ -34,7 +34,7 @@ public class Main {
         operationHandlerMap.put(OperationType.SUPPLY.getType(), new SupplyOperationHandler());
         operationHandlerMap.put(OperationType.PURCHASE.getType(), new PurchaseOperationHandler());
         operationHandlerMap.put(OperationType.RETURN.getType(), new ReturnOperationHandler());
-        ReadFile readFile = new ReadFileImpl();
+        FileReaderDao readFile = new FileReaderDaoImpl();
         List<String> inputData = readFile.getDataFromFile(FROM_FILE_NAME);
         ParseFileDataService parseFileDataService = new ParseDataServiceImpl();
         List<TransactionDto> operationTypeList = parseFileDataService.parseData(inputData);
@@ -44,7 +44,7 @@ public class Main {
                 operationStrategy);
         CreateReportService createReportService = new CreateReportServiceImpl();
         String report = createReportService.createReport(reportMap, REPORT_NAME);
-        WriteToFile writeToFile = new WriteToFileImpl();
+        FileWriterDao writeToFile = new FileWriterImpl();
         writeToFile.writeToFile(report, REPORT_NAME);
     }
 }

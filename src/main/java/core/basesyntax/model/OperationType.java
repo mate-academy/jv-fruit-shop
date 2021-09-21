@@ -15,5 +15,4 @@ public enum OperationType {
     public String getType() {
         return type;
     }
-
 }
