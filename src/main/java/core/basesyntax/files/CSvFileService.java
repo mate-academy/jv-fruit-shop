@@ -1,12 +1,10 @@
-package core.basesyntax.fileManager;
+package core.basesyntax.files;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.Set;
 
 public class CSvFileService implements FileService {
     @Override

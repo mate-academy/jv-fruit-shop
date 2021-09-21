@@ -1,6 +1,4 @@
-package core.basesyntax.fileManager;
-
-import java.util.Set;
+package core.basesyntax.files;
 
 public interface FileService {
     String readeDataFromFileSource(String absolutePath);

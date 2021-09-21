@@ -2,8 +2,6 @@ package core.basesyntax.dto;
 
 import core.basesyntax.models.Fruit;
 import core.basesyntax.models.FruitRecord;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -12,13 +10,13 @@ import java.util.stream.Collectors;
 public class CSvParseService implements ParseService {
     private static final String RECORD_SEPARATOR = "\r\n";
     private static final String DATA_SEPARATOR = ",";
-    ;
-    private static final int APPEND_TO_REMOVE_TITLE = 3;
+    private static final int APPEND_TO_REMOVE_TITLE = 2;
 
     @Override
     public List<FruitRecord> convertStringDataIntoFruitRecordList(String datInString) {
-        List<FruitRecord> listOfRecords = new ArrayList<>();
-        datInString = datInString.substring(datInString.indexOf(RECORD_SEPARATOR) + APPEND_TO_REMOVE_TITLE);
+        List<FruitRecord> listOfRecords;
+        datInString = datInString.substring(datInString.indexOf(RECORD_SEPARATOR)
+                + APPEND_TO_REMOVE_TITLE);
         String[] arrOfRecords = datInString.split(RECORD_SEPARATOR);
         listOfRecords = Arrays.stream(arrOfRecords)
                 .map(String::trim)

@@ -3,7 +3,6 @@ package core.basesyntax.dao;
 import core.basesyntax.models.Fruit;
 import core.basesyntax.models.FruitRecord;
 import core.basesyntax.storage.Storage;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,11 +16,12 @@ public class DAoServiceImp implements DAoService {
     @Override
     public void changeAmountOfFruits(FruitRecord fruitRecord) {
         Set<Fruit> fruitsInStorage = storage.getFruitsInStorage();
-        for (Fruit fruitInStorage : fruitsInStorage)
+        for (Fruit fruitInStorage : fruitsInStorage) {
             if (fruitInStorage.getName().equals(fruitRecord.getNameOfFruit())) {
                 fruitInStorage.setAmount(fruitInStorage.getAmount() + fruitRecord.getAmount());
                 break;
             }
+        }
     }
 
     @Override
@@ -39,7 +39,7 @@ public class DAoServiceImp implements DAoService {
     public Set<Fruit> getWholeStorageCopy() {
         Set<Fruit> fruitsInStorage = storage.getFruitsInStorage();
         Set<Fruit> newFruits = new HashSet<>();
-        fruitsInStorage.forEach(e -> newFruits.add(e));
+        newFruits.addAll(fruitsInStorage);
         return newFruits;
     }
 }

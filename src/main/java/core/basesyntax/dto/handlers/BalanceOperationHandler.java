@@ -5,7 +5,7 @@ import core.basesyntax.models.FruitRecord;
 
 public class BalanceOperationHandler implements OperationsHandler {
     @Override
-    public void apply(DAoService dAoService, FruitRecord fruitRecord) {
-        dAoService.addRemains(fruitRecord);
+    public void apply(DAoService daoService, FruitRecord fruitRecord) {
+        daoService.addRemains(fruitRecord);
     }
 }

@@ -5,8 +5,8 @@ import core.basesyntax.models.FruitRecord;
 
 public class PurchaseOperationHandler implements OperationsHandler {
     @Override
-    public void apply(DAoService dAoService, FruitRecord fruitRecord) {
+    public void apply(DAoService daoService, FruitRecord fruitRecord) {
         fruitRecord.setAmount(fruitRecord.getAmount() * (-1));
-        dAoService.changeAmountOfFruits(fruitRecord);
+        daoService.changeAmountOfFruits(fruitRecord);
     }
 }

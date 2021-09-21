@@ -4,5 +4,5 @@ import core.basesyntax.dao.DAoService;
 import core.basesyntax.models.FruitRecord;
 
 public interface OperationsHandler {
-    void apply(DAoService dAoService, FruitRecord fruitRecord);
+    void apply(DAoService daoService, FruitRecord fruitRecord);
 }
