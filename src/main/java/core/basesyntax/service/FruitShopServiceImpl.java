@@ -15,8 +15,8 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void updateStorage(String fileName, RecordParserService recordParserService) {
-        for (FruitRecord record : recordParserService.parseRecords(fileName)) {
+    public void updateStorage(String fileName, RecordsParserService recordsParserService) {
+        for (FruitRecord record : recordsParserService.parseRecords(fileName)) {
             OperationHandler operationHandler = operationStrategy.get(record.getTypeOfOperation());
             Integer newAmountValue = operationHandler.calculateNewAmount(fruitDao,
                     record.getFruit(), record.getAmount());

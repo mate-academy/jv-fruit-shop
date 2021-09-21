@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface FruitShopService {
-    void updateStorage(String fileName, RecordParserService recordParserService);
+    void updateStorage(String fileName, RecordsParserService recordsParserService);
 }

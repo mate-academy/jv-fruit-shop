@@ -5,10 +5,14 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileReaderServiceImpl;
+import core.basesyntax.service.FruitParserService;
+import core.basesyntax.service.FruitParserServiceImpl;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
-import core.basesyntax.service.RecordParserService;
-import core.basesyntax.service.RecordParserServiceImpl;
+import core.basesyntax.service.RecordsParserService;
+import core.basesyntax.service.RecordsParserServiceImpl;
+import core.basesyntax.service.ReportMakerService;
+import core.basesyntax.service.ReportMakerServiceImpl;
 import core.basesyntax.service.ReportWriterService;
 import core.basesyntax.service.ReportWriterServiceImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
@@ -38,10 +42,13 @@ public class Main {
         FruitShopService fruitShop = new FruitShopServiceImpl(fruitDao, operationStrategy);
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         RecordValidator recordValidator = new RecordValidatorImpl();
-        RecordParserService recordParserService = new RecordParserServiceImpl(fileReaderService,
-                recordValidator);
-        fruitShop.updateStorage(FROM_FILE_NAME, recordParserService);
-        ReportWriterService reportWriterService = new ReportWriterServiceImpl(fruitDao);
+        FruitParserService fruitParserService = new FruitParserServiceImpl();
+        RecordsParserService recordsParserService = new RecordsParserServiceImpl(fileReaderService,
+                recordValidator, fruitParserService);
+        fruitShop.updateStorage(FROM_FILE_NAME, recordsParserService);
+        ReportMakerService reportMakerService = new ReportMakerServiceImpl();
+        ReportWriterService reportWriterService = new ReportWriterServiceImpl(fruitDao,
+                reportMakerService);
         reportWriterService.createReport(TO_FILE_NAME);
     }
 }

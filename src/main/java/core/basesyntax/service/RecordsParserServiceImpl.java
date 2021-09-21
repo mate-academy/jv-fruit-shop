@@ -1,23 +1,22 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.validator.RecordValidator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecordParserServiceImpl implements RecordParserService {
-    private static final int OPERATION_TYPE_INDEX = 0;
-    private static final int FRUIT_NAME_INDEX = 1;
-    private static final int FRUIT_AMOUNT_INDEX = 2;
+public class RecordsParserServiceImpl implements RecordsParserService {
     private static final String CSV_SEPARATOR = ",";
     private final FileReaderService fileReaderService;
     private final RecordValidator recordValidator;
+    private final FruitParserService fruitParserService;
 
-    public RecordParserServiceImpl(FileReaderService fileReaderService,
-                                   RecordValidator recordValidator) {
+    public RecordsParserServiceImpl(FileReaderService fileReaderService,
+                                    RecordValidator recordValidator,
+                                    FruitParserService fruitParserService) {
         this.fileReaderService = fileReaderService;
         this.recordValidator = recordValidator;
+        this.fruitParserService = fruitParserService;
     }
 
     @Override
@@ -25,13 +24,9 @@ public class RecordParserServiceImpl implements RecordParserService {
         List<FruitRecord> fruitRecords = new ArrayList<>();
         List<String> records = fileReaderService.getRecords(fileName);
         for (String record : records) {
-            FruitRecord fruitRecord = new FruitRecord();
             String[] recordData = record.split(CSV_SEPARATOR);
             recordValidator.checkRecord(recordData);
-            fruitRecord.setTypeOfOperation(FruitRecord.Type
-                    .valueOfLabel(recordData[OPERATION_TYPE_INDEX]));
-            fruitRecord.setFruit(new Fruit(recordData[FRUIT_NAME_INDEX]));
-            fruitRecord.setAmount(Integer.parseInt(recordData[FRUIT_AMOUNT_INDEX]));
+            FruitRecord fruitRecord = fruitParserService.parseRecord(recordData);
             fruitRecords.add(fruitRecord);
         }
         return fruitRecords;
