@@ -15,7 +15,7 @@ public class ValidatorImpl implements Validator {
                 || !containsSpecificChars(operation[OPERATIONS_POSITION])) {
             throw new RuntimeException("Incorrect input file.");
         }
-        return  true;
+        return true;
     }
 
     private boolean isNumeric(String str) {
