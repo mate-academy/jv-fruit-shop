@@ -24,11 +24,12 @@ public class ValidateDataImpl implements ValidateData, Predicate<String[]> {
 
     @Override
     public boolean test(String[] strings) {
+        String operationType = strings[OPERATION_TYPE];
         return strings.length == MAX_LENGTH
-                && (Objects.equals(strings[OPERATION_TYPE], OperationTypes.BALANCE.getShortName())
-                || Objects.equals(strings[OPERATION_TYPE], OperationTypes.SUPPLY.getShortName())
-                || Objects.equals(strings[OPERATION_TYPE], OperationTypes.PURCHASE.getShortName())
-                || Objects.equals(strings[OPERATION_TYPE], OperationTypes.RETURN.getShortName()))
+                && Objects.equals(strings[OPERATION_TYPE],
+                        Objects.requireNonNull(OperationTypes
+                                .valueOfShortName(operationType))
+                                .getShortName())
                 && Integer.parseInt(strings[AMOUNT]) >= 0;
     }
 }
