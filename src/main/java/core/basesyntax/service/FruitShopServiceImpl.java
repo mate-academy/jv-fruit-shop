@@ -16,11 +16,12 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public Map<Fruit, Integer> transact(List<TransactionDto> transactionDtoList,
                                         OperationStrategy operationStrategy) {
-        Map<Fruit, Integer> fruitsStorage = Storage.getAllData();
+        Storage storage = new Storage();
+        Map<Fruit, Integer> fruitsStorage = storage.getAllData();
         for (TransactionDto transactionDto : transactionDtoList) {
             String type = transactionDto.getType();
             fruitsStorage.put(transactionDto.getFruit(),
-                    operationStrategy.getHandler(type).changeAmount(transactionDto, fruitsStorage));
+                    operationStrategy.getHandler(type).apply(transactionDto, fruitsStorage));
         }
         return fruitsStorage;
     }

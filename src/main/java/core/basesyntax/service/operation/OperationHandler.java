@@ -5,5 +5,5 @@ import core.basesyntax.model.TransactionDto;
 import java.util.Map;
 
 public interface OperationHandler {
-    int changeAmount(TransactionDto transactionDto, Map<Fruit, Integer> storage);
+    int apply(TransactionDto transactionDto, Map<Fruit, Integer> storage);
 }

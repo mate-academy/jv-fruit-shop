@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FileReaderDaoImpl implements FileReaderDao {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> getDataFromFile(String filePath) {
         List<String> data;

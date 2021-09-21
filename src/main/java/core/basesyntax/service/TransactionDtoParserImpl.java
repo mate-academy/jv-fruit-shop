@@ -7,7 +7,7 @@ import core.basesyntax.model.TransactionDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseDataServiceImpl implements ParseFileDataService {
+public class TransactionDtoParserImpl implements TransactionDtoParser {
     private static final int TITLE_LINE = 0;
     private static final int TYPE_OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
