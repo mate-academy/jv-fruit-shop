@@ -1,8 +1,8 @@
-package core.basesyntax.dao;
+package core.basesyntax.dto;
 
 import java.util.List;
 
-public interface FruitRecordsDao {
+public interface FruitRecordsDto {
 
     List<String> readDataFromFile(String fileName);
 

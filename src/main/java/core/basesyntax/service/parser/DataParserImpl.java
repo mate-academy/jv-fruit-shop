@@ -1,6 +1,6 @@
 package core.basesyntax.service.parser;
 
-import core.basesyntax.dao.FruitRecordsDaoImpl;
+import core.basesyntax.dto.FruitRecordsDtoImpl;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.validator.Validator;
 import core.basesyntax.service.validator.ValidatorImpl;
@@ -16,7 +16,7 @@ public class DataParserImpl implements DataParser {
 
     @Override
     public List<FruitRecord> parseData(String fileName) {
-        List<String> rawFruitRecords = new FruitRecordsDaoImpl().readDataFromFile(fileName);
+        List<String> rawFruitRecords = new FruitRecordsDtoImpl().readDataFromFile(fileName);
         List<FruitRecord> fruitRecords = new ArrayList<>();
         Validator validator = new ValidatorImpl();
         rawFruitRecords.remove(TITLE_INDEX);

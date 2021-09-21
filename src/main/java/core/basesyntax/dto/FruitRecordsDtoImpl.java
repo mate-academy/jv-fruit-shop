@@ -1,4 +1,4 @@
-package core.basesyntax.dao;
+package core.basesyntax.dto;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FruitRecordsDaoImpl implements FruitRecordsDao {
+public class FruitRecordsDtoImpl implements FruitRecordsDto {
     @Override
     public List<String> readDataFromFile(String fileName) {
         List<String> fruitRecords;

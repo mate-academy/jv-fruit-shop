@@ -1,7 +1,7 @@
 package core.basesyntax.service.report;
 
-import core.basesyntax.dao.FruitRecordsDao;
-import core.basesyntax.dao.FruitRecordsDaoImpl;
+import core.basesyntax.dto.FruitRecordsDto;
+import core.basesyntax.dto.FruitRecordsDtoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.transfer.FruitTransfer;
 import core.basesyntax.service.transfer.FruitTransferImpl;
@@ -11,7 +11,7 @@ public class ReportImpl implements Report {
 
     @Override
     public void createReport(String fromFileName, String toFilename) {
-        FruitRecordsDao fruitRecordsDao = new FruitRecordsDaoImpl();
+        FruitRecordsDto fruitRecordsDao = new FruitRecordsDtoImpl();
         FruitTransfer fruitTransfer = new FruitTransferImpl();
         fruitTransfer.transfer(fromFileName);
         fruitRecordsDao.writeDataToFile(toFilename, buildReport());
