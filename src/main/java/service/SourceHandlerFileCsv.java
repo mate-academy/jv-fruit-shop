@@ -1,11 +1,13 @@
 package service;
 
 import dao.OperationDaoUseFileImpl;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import model.FruitRecordDto;
 
 public class SourceHandlerFileCsv implements SourceHandler {
@@ -29,7 +31,6 @@ public class SourceHandlerFileCsv implements SourceHandler {
     public boolean writOutputData(String data, String path) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
             bufferedWriter.write(data);
-            bufferedWriter.flush();
         } catch (IOException e) {
             throw new RuntimeException("The writing path is not correct.");
         }
