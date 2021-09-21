@@ -13,14 +13,15 @@ public class ValidatorImpl implements Validator {
             throw new RuntimeException("Incorrect data in file. String don't have needed data!");
         }
 
-        if (isNumeric(operation[AMOUNT_POSITION]) && !(Integer.parseInt(operation[AMOUNT_POSITION]) > 0)) {
+        if (isNumeric(operation[AMOUNT_POSITION])
+                && !(Integer.parseInt(operation[AMOUNT_POSITION]) > 0)) {
             throw new RuntimeException("Incorrect quantity. Quantity can't be less by zero");
         }
 
         if (!containsSpecificChars(operation[OPERATIONS_POSITION])) {
             throw new RuntimeException("Incorrect data in file. This operation don't exist");
         }
-        return  true;
+        return true;
     }
 
     private boolean isNumeric(String str) {
