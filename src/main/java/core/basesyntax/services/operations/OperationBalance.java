@@ -8,7 +8,7 @@ public class OperationBalance implements OperationHandler {
     @Override
     public int apply(FruitDto fruitDto) {
         int amountOfFruit = fruitDto.getAmountOfFruit();
-        Storage.fruitRecordDto.put(new Fruit(fruitDto.getNameOfFruit()), amountOfFruit);
+        Storage.fruitStorage.put(new Fruit(fruitDto.getFruit().getName()), amountOfFruit);
         return amountOfFruit;
     }
 }
