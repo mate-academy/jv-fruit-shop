@@ -9,11 +9,11 @@ import service.StoreActivities;
 import service.Strategy;
 import service.Validator;
 import service.impl.Balance;
-import service.impl.Fruit;
 import service.impl.OsFileServiceImpl;
 import service.impl.Purchase;
 import service.impl.ReportServiceImpl;
 import service.impl.Return;
+import service.impl.Storage;
 import service.impl.StrategyImpl;
 import service.impl.Supply;
 import service.impl.TransactionDataImpl;
@@ -33,10 +33,10 @@ public class Main {
         Strategy strategy = new StrategyImpl(stringActivitiesMap);
         Validator validation = new ValidatorImpl();
         List<String> inputValues = fileService.readFromFile(INPUT_FILE_PATH);
-        Map<Fruit, Integer> report = new HashMap<>();
+        Storage storage = new Storage();
         service.TransactionData transactionData = new TransactionDataImpl(validation, strategy);
-        transactionData.parseDataToMap(inputValues, report);
+        transactionData.parseDataToMap(inputValues, storage.getReport());
         ReportService valueReport = new ReportServiceImpl();
-        fileService.writeToReportFile(valueReport.getReport(report), REPORT_FILE_PATH);
+        fileService.writeToReportFile(valueReport.getReport(storage.getReport()), REPORT_FILE_PATH);
     }
 }
