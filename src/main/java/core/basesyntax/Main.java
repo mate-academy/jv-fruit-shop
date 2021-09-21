@@ -23,10 +23,10 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String, OperationHandler> handlerOperations = new HashMap<>();
-        handlerOperations.put("p", new OperationPurchase());
-        handlerOperations.put("s", new OperationSupply());
         handlerOperations.put("b", new OperationBalance());
+        handlerOperations.put("s", new OperationSupply());
         handlerOperations.put("r", new OperationSupply());
+        handlerOperations.put("p", new OperationPurchase());
 
         FileReaderService fileReaderService = new FileReaderImpl();
         List<String> infoFromFile = fileReaderService.read(FILE_FOR_READ);

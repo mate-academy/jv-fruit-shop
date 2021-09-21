@@ -3,9 +3,9 @@ package core.basesyntax.dto;
 public class FruitDto {
     private String typeOfOperation;
     private String nameOfFruit;
-    private Integer amountOfFruit;
+    private int amountOfFruit;
 
-    public FruitDto(String typeOfOperation, String nameOfFruit, Integer amountOfFruit) {
+    public FruitDto(String typeOfOperation, String nameOfFruit, int amountOfFruit) {
         this.typeOfOperation = typeOfOperation;
         this.nameOfFruit = nameOfFruit;
         this.amountOfFruit = amountOfFruit;
@@ -19,7 +19,8 @@ public class FruitDto {
         return nameOfFruit;
     }
 
-    public Integer getAmountOfFruit() {
+    public int getAmountOfFruit() {
         return amountOfFruit;
     }
+
 }

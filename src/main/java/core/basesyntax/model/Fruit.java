@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class Fruit {
     private String name;
 
@@ -9,5 +11,22 @@ public class Fruit {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Fruit)) {
+            return false;
+        }
+        Fruit fruit = (Fruit) o;
+        return Objects.equals(getName(), fruit.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
     }
 }
