@@ -3,7 +3,6 @@ package service.activities;
 import db.Storage;
 
 public class Balance implements Activities {
-
     @Override
     public void setBalance(String productName, Integer productBalance) {
         if (Storage.storage.containsKey(productName)) {
