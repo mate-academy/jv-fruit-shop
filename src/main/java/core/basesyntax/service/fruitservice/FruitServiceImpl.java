@@ -3,11 +3,7 @@ package core.basesyntax.service.fruitservice;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecordDto;
-import core.basesyntax.service.parser.DataParser;
-import core.basesyntax.service.parser.DataParserImpl;
 import core.basesyntax.service.strategy.OperationStrategy;
-import core.basesyntax.service.strategy.OperationStrategyImpl;
-import core.basesyntax.service.strategy.operation.OperationHandler;
 import java.util.List;
 import java.util.Map;
 

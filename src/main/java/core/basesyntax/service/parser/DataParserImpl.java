@@ -1,6 +1,5 @@
 package core.basesyntax.service.parser;
 
-import core.basesyntax.service.fileservice.FileServiceImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.service.validator.Validator;
@@ -26,7 +25,8 @@ public class DataParserImpl implements DataParser {
             if (validator.validate(splitRecord)) {
                 Fruit fruit = new Fruit();
                 fruit.setFruit(splitRecord[FRUIT_INDEX]);
-                fruitRecord.setOperationType(FruitRecordDto.OperationType.get(splitRecord[OPERATION_TYPE_INDEX]));
+                fruitRecord.setOperationType(FruitRecordDto
+                        .OperationType.get(splitRecord[OPERATION_TYPE_INDEX]));
                 fruitRecord.setFruit(fruit);
                 fruitRecord.setAmount(Integer.parseInt(splitRecord[AMOUNT_INDEX]));
                 fruitRecords.add(fruitRecord);

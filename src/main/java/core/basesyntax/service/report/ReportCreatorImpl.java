@@ -1,10 +1,7 @@
 package core.basesyntax.service.report;
 
-import core.basesyntax.service.fileservice.FileService;
-import core.basesyntax.service.fileservice.FileServiceImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.fruitservice.FruitServiceImpl;
 import java.util.Map;
 
 public class ReportCreatorImpl implements Report {
