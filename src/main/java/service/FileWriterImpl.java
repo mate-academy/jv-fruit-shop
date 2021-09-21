@@ -8,11 +8,11 @@ import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.List;
 
-public class WriterServiceImpl implements WriterService {
+public class FileWriterImpl implements FileWriter {
     private static final String FILE_HEADER = "fruit,amount";
 
     @Override
-    public void writeReportToCsv(List<String> report, String filepath) {
+    public void write(List<String> report, String filepath) {
 
         Path file = Paths.get(filepath);
         try {

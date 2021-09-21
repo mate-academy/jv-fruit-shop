@@ -8,13 +8,13 @@ import operation.DecreaseHandler;
 import operation.OperationHandler;
 import operation.OperationStrategy;
 import operation.OperationStrategyImpl;
-import service.ReaderServiceImpl;
+import service.FileReaderImpl;
 import service.RecordParser;
 import service.RecordParserImpl;
 import service.ReportCreator;
 import service.ReportCreatorImpl;
-import service.WriterService;
-import service.WriterServiceImpl;
+import service.FileWriter;
+import service.FileWriterImpl;
 
 public class Main {
     private static final String INPUT_PATH = "src/main/resources/input.csv";
@@ -25,7 +25,7 @@ public class Main {
     private static final String RETURN = "r";
 
     public static void main(String[] args) {
-        List<String> fileData = new ReaderServiceImpl().readFromFile(INPUT_PATH);
+        List<String> fileData = new FileReaderImpl().read(INPUT_PATH);
         RecordParser recordParser = new RecordParserImpl();
         recordParser.parseRecords(fileData);
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -35,8 +35,8 @@ public class Main {
         operationHandlerMap.put(RETURN, new AdditionHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ReportCreator reportCreator = new ReportCreatorImpl(operationStrategy);
-        List<String> newReport = reportCreator.createNewReport();
-        WriterService writerService = new WriterServiceImpl();
-        writerService.writeReportToCsv(newReport, REPORT_PATH);
+        List<String> newReport = reportCreator.createReport();
+        FileWriter writerService = new FileWriterImpl();
+        writerService.write(newReport, REPORT_PATH);
     }
 }

@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class ReaderServiceImpl implements ReaderService {
+public class FileReaderImpl implements FileReader {
     private static final int HEADER_INDEX = 0;
 
     @Override
-    public List<String> readFromFile(String filePath) {
+    public List<String> read(String filePath) {
         List<String> fileContent;
         File file = new File(filePath);
         try {

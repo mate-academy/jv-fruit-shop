@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import model.Record;
 import operation.OperationHandler;
 import operation.OperationStrategy;
-import report.Report;
+import report.FruitBalance;
 
 public class ReportCreatorImpl implements ReportCreator {
     private final OperationStrategy operationStrategy;
@@ -17,15 +17,15 @@ public class ReportCreatorImpl implements ReportCreator {
     }
 
     @Override
-    public List<String> createNewReport() {
+    public List<String> createReport() {
         RecordDao recordDao = new RecordDaoImpl();
         List<Record> records = recordDao.getRecords();
         for (Record record: records) {
             OperationHandler operationHandler = operationStrategy
                     .operate(record.getOperationType());
-            operationHandler.operate(record);
+            operationHandler.apply(record);
         }
-        return Report.FRUIT_REPORT.entrySet().stream()
+        return FruitBalance.FRUIT_BALANCE.entrySet().stream()
                 .map(string -> string.getKey() + "," + string.getValue())
                 .collect(Collectors.toList());
     }
