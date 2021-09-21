@@ -3,8 +3,8 @@ package core.basesyntax;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.CreateReportService;
-import core.basesyntax.service.CreateReportServiceImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileReaderImpl;
 import core.basesyntax.service.FileWriter;
@@ -42,7 +42,7 @@ public class Main {
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
         Map<Fruit, Integer> reportMap = fruitShopService.transact(operationTypeList,
                 operationStrategy);
-        CreateReportService createReportService = new CreateReportServiceImpl();
+        ReportService createReportService = new ReportServiceImpl();
         String report = createReportService.createReport(reportMap, REPORT_NAME);
         FileWriter writeToFile = new FileWriterImpl();
         writeToFile.writeToFile(report, REPORT_NAME);
