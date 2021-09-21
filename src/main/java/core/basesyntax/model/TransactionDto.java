@@ -33,6 +33,9 @@ public class TransactionDto {
 
     @Override
     public boolean equals(Object transaction) {
+        if (this == transaction) {
+            return true;
+        }
         if (transaction == null || getClass() != transaction.getClass()) {
             return false;
         }

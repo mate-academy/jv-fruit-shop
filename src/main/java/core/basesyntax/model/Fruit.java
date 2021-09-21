@@ -2,14 +2,10 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class Fruit {
-    private String fruitName;
+public final class Fruit {
+    private final String fruitName;
 
     public Fruit(String fruitName) {
-        this.fruitName = fruitName;
-    }
-
-    public void setFruitName(String fruitName) {
         this.fruitName = fruitName;
     }
 
@@ -24,6 +20,9 @@ public class Fruit {
 
     @Override
     public boolean equals(Object comparedFruit) {
+        if (this == comparedFruit) {
+            return true;
+        }
         if (comparedFruit == null || getClass() != comparedFruit.getClass()) {
             return false;
         }

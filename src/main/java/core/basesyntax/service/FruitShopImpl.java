@@ -21,7 +21,7 @@ public class FruitShopImpl implements FruitShopCsv {
         try {
             Files.write(new File(fileName).toPath(), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to the file " + fileName);
+            throw new RuntimeException("Can't write data to the file " + fileName, e);
         }
     }
 }

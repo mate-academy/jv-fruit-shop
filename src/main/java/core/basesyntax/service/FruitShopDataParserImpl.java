@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 
 public class FruitShopDataParserImpl implements FruitShopDataParser {
     private static final String WORDS_IN_TITLE = "type,fruit,quantity";
-    private static final int TYPE = 0;
-    private static final int FRUITS_NAME = 1;
-    private static final int QUANTITY = 2;
+    private static final int TYPE_INDEX = 0;
+    private static final int FRUITS_NAME_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
     private final FileValidation validation = new FileValidation();
 
     @Override
@@ -27,9 +27,9 @@ public class FruitShopDataParserImpl implements FruitShopDataParser {
     public TransactionDto getFromCsvRow(String line) {
         String[] fields = line.split(",");
         TransactionDto transactionDto = new TransactionDto();
-        transactionDto.setOperationType(OperationType.getOperationType(fields[TYPE]));
-        transactionDto.setFruitName(new Fruit(fields[FRUITS_NAME]));
-        transactionDto.setAmount(Integer.parseInt(fields[QUANTITY]));
+        transactionDto.setOperationType(OperationType.getOperationType(fields[TYPE_INDEX]));
+        transactionDto.setFruitName(new Fruit(fields[FRUITS_NAME_INDEX]));
+        transactionDto.setAmount(Integer.parseInt(fields[QUANTITY_INDEX]));
         return transactionDto;
     }
 }
