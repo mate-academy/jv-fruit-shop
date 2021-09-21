@@ -1,9 +1,8 @@
 package dao;
 
 import database.Database;
-import model.Record;
-
 import java.util.List;
+import model.Record;
 
 public class RecordDaoImpl implements RecordDao {
 

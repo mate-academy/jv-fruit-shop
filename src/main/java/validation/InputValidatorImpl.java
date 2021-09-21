@@ -7,6 +7,7 @@ public class InputValidatorImpl implements InputValidator {
     private static final int AMOUNT_INDEX = 2;
     private static final int OPERATION_CHARS = 1;
     private static final int OPERATION_CHAR_INDEX = 0;
+    private static final String DIGITS_CHECK_REGEX = ".*\\d+.*";
 
     @Override
     public boolean isValidInput(String[] input) {
@@ -15,7 +16,6 @@ public class InputValidatorImpl implements InputValidator {
         }
         String operationType = input[OPERATION_INDEX];
         String fruit = input[FRUIT_INDEX];
-        int amount = Integer.parseInt(input[AMOUNT_INDEX]);
         if (operationType.isEmpty()) {
             throw new RuntimeException("Operation type can't be empty!");
         }
@@ -26,9 +26,10 @@ public class InputValidatorImpl implements InputValidator {
         if (fruit.isEmpty()) {
             throw new RuntimeException("Fruit name can't be empty!");
         }
-        if (fruit.matches(".*\\d+.*")) {
+        if (fruit.matches(DIGITS_CHECK_REGEX)) {
             throw new RuntimeException("Fruit name can't contain digits!");
         }
+        int amount = Integer.parseInt(input[AMOUNT_INDEX]);
         if (amount < 0) {
             throw new RuntimeException("Fruits amount can't be less than 0");
         }

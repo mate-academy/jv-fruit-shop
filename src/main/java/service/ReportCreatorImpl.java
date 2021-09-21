@@ -2,16 +2,15 @@ package service;
 
 import dao.RecordDao;
 import dao.RecordDaoImpl;
+import java.util.List;
+import java.util.stream.Collectors;
 import model.Record;
 import operation.OperationHandler;
 import operation.OperationStrategy;
 import report.Report;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class ReportCreatorImpl implements ReportCreator {
-    private OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public ReportCreatorImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
@@ -22,7 +21,8 @@ public class ReportCreatorImpl implements ReportCreator {
         RecordDao recordDao = new RecordDaoImpl();
         List<Record> records = recordDao.getRecords();
         for (Record record: records) {
-            OperationHandler operationHandler = operationStrategy.operate(record.getOperationType());
+            OperationHandler operationHandler = operationStrategy
+                    .operate(record.getOperationType());
             operationHandler.operate(record);
         }
         return Report.FRUIT_REPORT.entrySet().stream()

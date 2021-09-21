@@ -1,11 +1,10 @@
 package dao;
 
-import database.Database;
-import model.Record;
-
 import java.util.List;
+import model.Record;
 
 public interface RecordDao {
     void addRecord(Record record);
+
     List<Record> getRecords();
 }

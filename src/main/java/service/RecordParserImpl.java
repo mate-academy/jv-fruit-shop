@@ -2,13 +2,10 @@ package service;
 
 import dao.RecordDao;
 import dao.RecordDaoImpl;
-import database.Database;
+import java.util.List;
 import model.Record;
 import validation.InputValidator;
 import validation.InputValidatorImpl;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RecordParserImpl implements RecordParser {
     private static final String SEPARATOR = ",";
