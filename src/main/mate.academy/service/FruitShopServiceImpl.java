@@ -1,10 +1,8 @@
 package service;
 
 import db.Storage;
-import model.Fruit;
 import model.FruitRecord;
 import java.util.List;
-import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private final OperationStrategy operationStrategy;
