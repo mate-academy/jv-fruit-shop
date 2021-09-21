@@ -4,15 +4,15 @@ import core.basesyntax.model.FruitRecord;
 
 import java.util.Map;
 
-public class PurchaseOperationHandlerImpl implements OperationHandler {
+public class IncreaseOperationHandlerImpl implements OperationHandler {
 
     @Override
     public int getAmount(FruitRecord fruitRecord, Map<String, Integer> fruitStorage) {
         for (Map.Entry<String, Integer> fruitRecordEntry : fruitStorage.entrySet()) {
             if (fruitRecordEntry.getKey().equals(fruitRecord.getFruitName())) {
-                return fruitRecordEntry.getValue() - fruitRecord.getAmount();
+                return fruitRecordEntry.getValue() + fruitRecord.getAmount();
             }
         }
-        return 0;
+        throw new RuntimeException("No such operation");
     }
 }

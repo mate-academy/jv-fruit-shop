@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface FruitTransfer {
-    Map<String, Integer> transfer(String fromFileName); //(List<FruitRecord> fruitRecords, OperationStrategy operationStrategy);
+    Map<String, Integer> transfer(String fromFileName);
 }
