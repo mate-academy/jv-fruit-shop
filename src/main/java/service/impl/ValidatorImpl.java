@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import service.Validator;
 
-public class ValidateImpl implements Validator {
+public class ValidatorImpl implements Validator {
     private static final int FIRST_VALUE_LINE = 1;
     private static final int LENGTH_VALUE_LINE = 3;
     private static final int FRUIT_COUNT_LINE_INDEX = 2;
