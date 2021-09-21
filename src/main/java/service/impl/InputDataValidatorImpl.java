@@ -2,7 +2,6 @@ package service.impl;
 
 import java.util.List;
 import java.util.regex.Pattern;
-
 import service.InputDataValidator;
 
 public class InputDataValidatorImpl implements InputDataValidator {
