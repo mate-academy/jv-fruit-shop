@@ -1,10 +1,12 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitRecordsDao;
+import core.basesyntax.db.FruitRecordsDao;
 import core.basesyntax.fileservice.FileService;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.operationstrategy.OperationStrategy;
 import core.basesyntax.parser.FruitRecordParser;
+import core.basesyntax.service.FruitService;
+
 import java.nio.file.Path;
 import java.util.List;
 

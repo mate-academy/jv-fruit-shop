@@ -1,7 +1,7 @@
 package core.basesyntax.validator;
 
 import core.basesyntax.OperationType;
-import core.basesyntax.ValidatorException;
+import core.basesyntax.exception.ValidatorException;
 
 public class ValidatorImpl implements Validator<String> {
     private static final int OPERATION_TYPE = 0;

@@ -1,6 +1,5 @@
-package core.basesyntax.dao;
+package core.basesyntax.db;
 
-import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.operationstrategy.OperationStrategy;
