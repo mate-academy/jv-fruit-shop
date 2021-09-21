@@ -13,9 +13,7 @@ public class Fruit {
 
     @Override
     public int hashCode() {
-        int result = 17;
-        result = 31 * result + (fruitName == null ? 0 : fruitName.hashCode());
-        return result;
+        return fruitName == null ? 0 : fruitName.hashCode();
     }
 
     @Override
