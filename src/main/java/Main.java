@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.Fruit;
-import service.handler.BalanceHandler;
+import service.handler.AdditionHandler;
 import service.handler.OperationHandler;
-import service.handler.PurchaseHandler;
-import service.handler.ReturnHandler;
-import service.handler.SupplyHandler;
+import service.handler.SubtractionHandler;
 import service.read.FileReadService;
 import service.read.FileReadServiceImpl;
 import service.storage.StoreService;
@@ -30,10 +28,10 @@ public class Main {
         validatorProcess.checkAllList(doneFileReading);
 
         Map<Fruit.TypeOperation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Fruit.TypeOperation.b, new BalanceHandler());
-        operationHandlerMap.put(Fruit.TypeOperation.p, new PurchaseHandler());
-        operationHandlerMap.put(Fruit.TypeOperation.s, new SupplyHandler());
-        operationHandlerMap.put(Fruit.TypeOperation.r, new ReturnHandler());
+        operationHandlerMap.put(Fruit.TypeOperation.BALANCE, new AdditionHandler());
+        operationHandlerMap.put(Fruit.TypeOperation.PURCHASE, new SubtractionHandler());
+        operationHandlerMap.put(Fruit.TypeOperation.SUPPLY, new AdditionHandler());
+        operationHandlerMap.put(Fruit.TypeOperation.RETURN, new AdditionHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FruitsDao fruitsDao = new FruitsDaoImpl();

@@ -26,7 +26,7 @@ public class StoreServiceImpl implements StoreService {
         for (int i = 0; i < dataFromFile.size(); i++) {
             String[] data = dataFromFile.get(i).split(CSV_SEPARATOR);
             Fruit operationFruit =
-                    new Fruit(Fruit.TypeOperation.valueOf(data[OPERATION_INDEX]),
+                    new Fruit(Fruit.TypeOperation.get(data[OPERATION_INDEX]),
                             data[FRUIT_INDEX],
                             Integer.parseInt(data[VALUE_INDEX]));
 
@@ -34,7 +34,7 @@ public class StoreServiceImpl implements StoreService {
 
             int value = Integer.parseInt(data[VALUE_INDEX]);
 
-            String operationType = data[0];
+            String operationType = String.valueOf(Fruit.TypeOperation.get(data[OPERATION_INDEX]));
             if (!Fruit.contains(operationType)) {
                 throw new RuntimeException("Incorrect operation " + operationType);
             }
