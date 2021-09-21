@@ -1,19 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.DataReader;
-import core.basesyntax.dao.DataReaderImpl;
-import core.basesyntax.dao.DataWriter;
-import core.basesyntax.dao.DataWriterImpl;
+import core.basesyntax.dao.FileReader;
+import core.basesyntax.dao.FileReaderImpl;
+import core.basesyntax.dao.FileWriter;
+import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.dao.ReportService;
 import core.basesyntax.dao.ReportServiceImpl;
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.TransactionDto;
 import core.basesyntax.services.calculation.AmountCalculator;
 import core.basesyntax.services.calculation.AmountCalculatorImpl;
 import core.basesyntax.services.data.DataParser;
 import core.basesyntax.services.data.ParserCsv;
-import core.basesyntax.services.operation.DecreaseHandler;
-import core.basesyntax.services.operation.Handler;
-import core.basesyntax.services.operation.IncreaseHandler;
+import core.basesyntax.services.operation.DecreaseOperationHandler;
+import core.basesyntax.services.operation.IncreaseOperationHandler;
+import core.basesyntax.services.operation.OperationHandler;
 import core.basesyntax.services.operation.Strategy;
 import core.basesyntax.services.operation.StrategyImpl;
 import java.util.HashMap;
@@ -25,20 +25,21 @@ public class Main {
     private static final String OUTPUT_FILE = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        Map<Operation.Type, Handler> operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put(Operation.Type.BALANCE, new IncreaseHandler());
-        operationStrategyMap.put(Operation.Type.PURCHASE, new DecreaseHandler());
-        operationStrategyMap.put(Operation.Type.RETURN, new IncreaseHandler());
-        operationStrategyMap.put(Operation.Type.SUPPLY, new IncreaseHandler());
-        DataReader readerService = new DataReaderImpl();
-        List<String> dataFromFile = readerService.readFromFile(INPUT_FILE);
-        DataParser<Operation, String> dataParser = new ParserCsv();
-        List<Operation> operations = dataParser.formatData(dataFromFile);
+        Map<TransactionDto.Type, OperationHandler> operationStrategyMap = new HashMap<>();
+        operationStrategyMap.put(TransactionDto.Type.BALANCE, new IncreaseOperationHandler());
+        operationStrategyMap.put(TransactionDto.Type.PURCHASE, new DecreaseOperationHandler());
+        operationStrategyMap.put(TransactionDto.Type.RETURN, new IncreaseOperationHandler());
+        operationStrategyMap.put(TransactionDto.Type.SUPPLY, new IncreaseOperationHandler());
+        FileReader readerService = new FileReaderImpl();
+        List<String> dataFromFile = readerService.read(INPUT_FILE);
+        DataParser<TransactionDto, String> dataParser = new ParserCsv();
+        List<TransactionDto> transactionDtos = dataParser.formatData(dataFromFile);
         Strategy strategy = new StrategyImpl(operationStrategyMap);
         AmountCalculator amountCalculator = new AmountCalculatorImpl(strategy);
-        Map<String, Integer> calculateFruits = amountCalculator.calculateDataForReport(operations);
+        Map<String, Integer> calculateFruits =
+                amountCalculator.calculateDataForReport(transactionDtos);
         ReportService reportService = new ReportServiceImpl();
-        DataWriter dataWriter = new DataWriterImpl();
-        dataWriter.write(OUTPUT_FILE, reportService.createReport(calculateFruits));
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.write(OUTPUT_FILE, reportService.createReport(calculateFruits));
     }
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-public interface DataWriter {
+public interface FileWriter {
     void write(String fileName, String report);
 }
 

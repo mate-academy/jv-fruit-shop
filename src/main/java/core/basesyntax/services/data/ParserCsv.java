@@ -1,26 +1,27 @@
 package core.basesyntax.services.data;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.TransactionDto;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserCsv implements DataParser<Operation, String> {
+public class ParserCsv implements DataParser<TransactionDto, String> {
     private static final int ITEM_INDEX_INDEX = 0;
     private static final int ITEM_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
     private static final String DATA_SPLITTER = ",";
 
     @Override
-    public List<Operation> formatData(List<String> data) {
+    public List<TransactionDto> formatData(List<String> data) {
         DataValidator dataValidator = new DataValidatorImpl();
-        List<Operation> operations = new ArrayList<>();
+        List<TransactionDto> transactionDtos = new ArrayList<>();
         for (String rawData : data) {
             String[] rawDataArray = rawData.split(DATA_SPLITTER);
             dataValidator.validate(rawDataArray);
-            operations.add(new Operation(Operation.Type.get(rawDataArray[ITEM_INDEX_INDEX]),
+            transactionDtos.add(new TransactionDto(TransactionDto
+                    .Type.get(rawDataArray[ITEM_INDEX_INDEX]),
                     rawDataArray[ITEM_INDEX],
                     Integer.parseInt(rawDataArray[AMOUNT_INDEX])));
         }
-        return operations;
+        return transactionDtos;
     }
 }
