@@ -1,18 +1,18 @@
 package model;
 
 public class TransactionDto {
-    private final String operationType;
+    private OperationTypes operationType;
     private final String fruit;
     private final int amount;
 
     public TransactionDto(String operationType, String fruit, int amount) {
-        this.operationType = operationType;
+        this.operationType = OperationTypes.valueOfShortName(operationType);
         this.fruit = fruit;
         this.amount = amount;
     }
 
     public String getOperationType() {
-        return operationType;
+        return operationType.getShortName();
     }
 
     public String getFruit() {

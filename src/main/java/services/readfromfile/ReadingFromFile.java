@@ -1,7 +1,8 @@
 package services.readfromfile;
 
-import storage.StorageTransactions;
+import java.util.List;
+import model.TransactionDto;
 
 public interface ReadingFromFile {
-    StorageTransactions readingFromFile(String filePath);
+    List<TransactionDto> readingFromFile(String filePath);
 }

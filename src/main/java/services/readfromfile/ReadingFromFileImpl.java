@@ -8,11 +8,12 @@ import java.util.List;
 import model.TransactionDto;
 import services.validation.ValidateData;
 import services.validation.ValidateDataImpl;
-import storage.StorageTransactions;
 
 public class ReadingFromFileImpl implements ReadingFromFile {
+    private static final String FIRST_LINE = "type,fruit,quantity";
+
     @Override
-    public StorageTransactions readingFromFile(String filePath) {
+    public List<TransactionDto> readingFromFile(String filePath) {
         List<String> stringsRecords;
         try {
             stringsRecords = Files.readAllLines(Path.of(filePath));
@@ -22,12 +23,12 @@ public class ReadingFromFileImpl implements ReadingFromFile {
         ValidateData validateData = new ValidateDataImpl();
         List<TransactionDto> transactionDtoList = new ArrayList<>();
         for (String stringsRecord : stringsRecords) {
-            if (stringsRecord.equals("type,fruit,quantity")) {
+            if (stringsRecord.equals(FIRST_LINE)) {
                 continue;
             }
             TransactionDto transactionDto = validateData.isDataOk(stringsRecord);
             transactionDtoList.add(transactionDto);
         }
-        return new StorageTransactions(transactionDtoList);
+        return transactionDtoList;
     }
 }

@@ -1,8 +1,9 @@
 package services.stockservice;
 
+import java.util.List;
+import model.TransactionDto;
 import storage.Stock;
-import storage.StorageTransactions;
 
 public interface StockService {
-    Stock getStock(StorageTransactions storageTransactions);
+    Stock getStock(List<TransactionDto> storageTransactions);
 }

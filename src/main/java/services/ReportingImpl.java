@@ -3,15 +3,14 @@ package services;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import model.TransactionDto;
 import services.operations.strategy.OperationsStrategy;
-import services.readfromfile.ReadingFromFile;
-import services.readfromfile.ReadingFromFileImpl;
 import services.stockservice.StockService;
 import services.stockservice.StockServiceImpl;
 import storage.Stock;
-import storage.StorageTransactions;
 
 public class ReportingImpl implements Reporting {
+    private static final String START_MESSAGE = "fruit,quantity";
     private OperationsStrategy strategyOperations;
 
     public ReportingImpl(OperationsStrategy strategyOperations) {
@@ -19,13 +18,11 @@ public class ReportingImpl implements Reporting {
     }
 
     @Override
-    public List<String> createReport(String filePath) {
-        ReadingFromFile readingFromFile = new ReadingFromFileImpl();
-        StorageTransactions storage = readingFromFile.readingFromFile(filePath);
+    public List<String> createReport(List<TransactionDto> storage) {
         StockService stockService = new StockServiceImpl(strategyOperations);
         Stock storageReport = stockService.getStock(storage);
         List<String> listReport = new ArrayList<>();
-        listReport.add("fruit,quantity");
+        listReport.add(START_MESSAGE);
         for (Map.Entry<String, Integer> entry : storageReport.getStockStorage().entrySet()) {
             listReport.add(entry.getKey() + "," + entry.getValue());
         }

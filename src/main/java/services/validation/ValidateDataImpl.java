@@ -2,27 +2,33 @@ package services.validation;
 
 import java.util.Objects;
 import java.util.function.Predicate;
+import model.OperationTypes;
 import model.TransactionDto;
 
 public class ValidateDataImpl implements ValidateData, Predicate<String[]> {
+    private static final int OPERATION_TYPE = 0;
+    private static final int FRUIT = 1;
+    private static final int AMOUNT = 2;
+    private static final int MAX_LENGTH = 3;
+
     @Override
     public TransactionDto isDataOk(String record) {
         String[] partRecord = record.split(",");
         if (!test(partRecord)) {
             throw new ValidationException("Data is invalid!");
         }
-        return new TransactionDto(partRecord[0],
-                                partRecord[1],
-                                Integer.parseInt(partRecord[2]));
+        return new TransactionDto(partRecord[OPERATION_TYPE],
+                                partRecord[FRUIT],
+                                Integer.parseInt(partRecord[AMOUNT]));
     }
 
     @Override
     public boolean test(String[] strings) {
-        return strings.length == 3
-                && (Objects.equals(strings[0], "b")
-                || Objects.equals(strings[0], "s")
-                || Objects.equals(strings[0], "p")
-                || Objects.equals(strings[0], "r"))
-                && Integer.parseInt(strings[2]) >= 0;
+        return strings.length == MAX_LENGTH
+                && (Objects.equals(strings[OPERATION_TYPE], OperationTypes.BALANCE.getShortName())
+                || Objects.equals(strings[OPERATION_TYPE], OperationTypes.SUPPLY.getShortName())
+                || Objects.equals(strings[OPERATION_TYPE], OperationTypes.PURCHASE.getShortName())
+                || Objects.equals(strings[OPERATION_TYPE], OperationTypes.RETURN.getShortName()))
+                && Integer.parseInt(strings[AMOUNT]) >= 0;
     }
 }
