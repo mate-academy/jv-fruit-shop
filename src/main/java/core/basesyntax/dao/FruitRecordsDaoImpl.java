@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class FruitStorageDaoImpl implements FruitStorageDao {
+public class FruitRecordsDaoImpl implements FruitRecordsDao {
+    private static final String HEADER = "fruit,quantity";
+    private static final String COMMA = ",";
+
     @Override
     public void saveAll(List<TransactionDto> fruitRecordsList,
                         OperationStrategy operationStrategy) {
-        fruitRecordsList.forEach(r -> FruitStorage.fruitStorage.put(r.getFruit(),
-                operationStrategy.get(r.getOperationType()).doOperation(r)));
+        fruitRecordsList.forEach(t -> FruitStorage.fruitStorage.put(t.getFruit(),
+                operationStrategy.get(t.getOperationType()).doOperation(t)));
     }
 
     @Override
@@ -23,12 +26,11 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public List<String> getAllAsList() {
-        String header = "fruit,quantity";
         List<String> dataList = getAll().entrySet()
                 .stream()
-                .map(e -> e.getKey().getFruitName() + "," + e.getValue())
+                .map(e -> e.getKey().getFruitName() + COMMA + e.getValue())
                 .collect(Collectors.toList());
-        dataList.add(0, header);
+        dataList.add(0, HEADER);
         return dataList;
     }
 }

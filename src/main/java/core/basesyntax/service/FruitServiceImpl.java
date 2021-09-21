@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitStorageDao;
+import core.basesyntax.dao.FruitRecordsDao;
 import core.basesyntax.fileservice.FileService;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.operationstrategy.OperationStrategy;
@@ -12,20 +12,20 @@ public class FruitServiceImpl implements FruitService {
     private final FileService fileService;
     private final FruitRecordParser fruitRecordParser;
     private final OperationStrategy operationStrategy;
-    private final FruitStorageDao fruitStorageDao;
+    private final FruitRecordsDao fruitRecordsDao;
 
     public FruitServiceImpl(FileService fileService, FruitRecordParser fruitRecordParser,
-                            OperationStrategy operationStrategy, FruitStorageDao fruitStorageDao) {
+                            OperationStrategy operationStrategy, FruitRecordsDao fruitRecordsDao) {
         this.fileService = fileService;
         this.fruitRecordParser = fruitRecordParser;
         this.operationStrategy = operationStrategy;
-        this.fruitStorageDao = fruitStorageDao;
+        this.fruitRecordsDao = fruitRecordsDao;
     }
 
     @Override
     public void saveFruitRecordsFromFile(Path path) {
-        List<String[]> lines = fileService.readFromFile(path);
+        List<String> lines = fileService.readFromFile(path);
         List<TransactionDto> fruitRecordsList = fruitRecordParser.parse(lines);
-        fruitStorageDao.saveAll(fruitRecordsList, operationStrategy);
+        fruitRecordsDao.saveAll(fruitRecordsList, operationStrategy);
     }
 }

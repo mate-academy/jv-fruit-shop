@@ -12,8 +12,9 @@ public class FruitRecordParserImpl implements FruitRecordParser {
     private static final int FRUITS_AMOUNT = 2;
 
     @Override
-    public List<TransactionDto> parse(List<String[]> records) {
+    public List<TransactionDto> parse(List<String> records) {
         return records.stream()
+                .map(l -> l.split(","))
                 .map(r -> new TransactionDto(OperationType.getEnumValue(r[OPERATION_TYPE]),
                         new Fruit(r[FRUIT_NAME]),
                         Integer.parseInt(r[FRUITS_AMOUNT])))

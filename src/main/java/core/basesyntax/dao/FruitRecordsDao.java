@@ -6,7 +6,7 @@ import core.basesyntax.operationstrategy.OperationStrategy;
 import java.util.List;
 import java.util.Map;
 
-public interface FruitStorageDao {
+public interface FruitRecordsDao {
     void saveAll(List<TransactionDto> fruitRecordsList, OperationStrategy operationStrategy);
 
     Map<Fruit, Integer> getAll();

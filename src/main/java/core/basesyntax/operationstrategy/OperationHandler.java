@@ -3,5 +3,5 @@ package core.basesyntax.operationstrategy;
 import core.basesyntax.model.TransactionDto;
 
 public interface OperationHandler {
-    Integer doOperation(TransactionDto fruitRecord);
+    Integer doOperation(TransactionDto transactionDto);
 }
