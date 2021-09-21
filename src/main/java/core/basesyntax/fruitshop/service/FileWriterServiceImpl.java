@@ -6,11 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriterServiceImpl implements FileWriterService {
-    public void writeToFile(String toWrite, String toFile) {
-        File file = new File(toFile);
+    public void writeToFile(String data, String path) {
+        File file = new File(path);
         try (BufferedWriter bufferedWriter =
                      new BufferedWriter(new FileWriter(file))) {
-            bufferedWriter.write(toWrite);
+            bufferedWriter.write(data);
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file" + e);
         }

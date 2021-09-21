@@ -7,7 +7,7 @@ import core.basesyntax.fruitshop.storage.Storage;
 import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private Map<OperationType, OperationHandler> operationHandlerMap;
+    private final Map<OperationType, OperationHandler> operationHandlerMap;
 
     public FruitShopServiceImpl(Map<OperationType, OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
