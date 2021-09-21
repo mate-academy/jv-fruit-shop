@@ -34,8 +34,8 @@ public class Main {
         Validator validation = new ValidatorImpl();
         List<String> inputValues = fileService.readFromFile(INPUT_FILE_PATH);
         service.TransactionData transactionData = new TransactionDataImpl(validation, strategy);
-        transactionData.parseDataToMap(inputValues, Storage.getReport());
+        transactionData.parseDataToMap(inputValues, Storage.reportMap);
         ReportService valueReport = new ReportServiceImpl();
-        fileService.writeToReportFile(valueReport.getReport(Storage.getReport()), REPORT_FILE_PATH);
+        fileService.writeToReportFile(valueReport.getReport(Storage.reportMap), REPORT_FILE_PATH);
     }
 }
