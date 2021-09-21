@@ -6,7 +6,7 @@ import service.Parse;
 import service.strategy.Handler;
 
 public class ParseImpl implements Parse {
-    private OperationStrategy strategy = new OperationStrategyImpl();
+    private final OperationStrategy strategy = new OperationStrategyImpl();
 
     @Override
     public void parseList(List<String> list) {

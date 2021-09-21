@@ -1,4 +1,5 @@
 import java.util.List;
+import service.FileReaderService;
 import service.FileWriterService;
 import service.FormReport;
 import service.InputDataValidator;
@@ -14,7 +15,7 @@ public class Main {
     private static final String OUTPUT_FILE_NAME = "src/main/res/report.csv";
 
     public static void main(String[] args) {
-        FileReaderServiceImpl fileReaderService = new FileReaderServiceImpl();
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> strings = fileReaderService.readFile(INPUT_FILE_NAME);
 
         InputDataValidator validator = new InputDataValidatorImpl();
