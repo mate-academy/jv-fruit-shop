@@ -14,6 +14,8 @@ import services.operations.strategy.OperationsStrategy;
 import services.operations.strategy.OperationsStrategyImpl;
 import services.readfromfile.ReadingFromFile;
 import services.readfromfile.ReadingFromFileImpl;
+import services.stockservice.StockService;
+import services.stockservice.StockServiceImpl;
 import services.writetofile.WriteToFile;
 import services.writetofile.WriteToFileImpl;
 
@@ -28,8 +30,10 @@ public class Main {
         String filePath = "src/main/resources/file.csv";
         ReadingFromFile readingFromFile = new ReadingFromFileImpl();
         List<TransactionDto> transactionDtos = readingFromFile.readingFromFile(filePath);
-        Reporting reporting = new ReportingImpl(strategyOperations);
-        List<String> report = reporting.createReport(transactionDtos);
+        StockService stockService = new StockServiceImpl(strategyOperations);
+        stockService.applyOperationsOnFruitsDto(transactionDtos);
+        Reporting reporting = new ReportingImpl();
+        List<String> report = reporting.createReport();
         WriteToFile writeToFile = new WriteToFileImpl();
         writeToFile.writeToFile(report);
         report.forEach(System.out::println);

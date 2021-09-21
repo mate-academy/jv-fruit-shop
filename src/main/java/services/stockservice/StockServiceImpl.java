@@ -1,32 +1,27 @@
 package services.stockservice;
 
-import java.util.HashMap;
 import java.util.List;
 import model.TransactionDto;
 import services.operations.strategy.OperationsStrategy;
 import storage.Stock;
 
 public class StockServiceImpl implements StockService {
-    private OperationsStrategy strategyOperations;
+    private final OperationsStrategy strategyOperations;
 
     public StockServiceImpl(OperationsStrategy strategyOperations) {
         this.strategyOperations = strategyOperations;
     }
 
     @Override
-    public Stock getStock(List<TransactionDto> storage) {
-        Stock storageReport = new Stock(new HashMap<>());
+    public void applyOperationsOnFruitsDto(List<TransactionDto> storage) {
         for (TransactionDto transaction : storage) {
-            if (!storageReport.getStockStorage().containsKey(transaction.getFruit())) {
-                storageReport.getStockStorage()
-                        .put(transaction.getFruit(), transaction.getAmount());
+            if (!Stock.stockStorage.containsKey(transaction.getFruit())) {
+                Stock.stockStorage.put(transaction.getFruit(), transaction.getAmount());
             }
-            storageReport.getStockStorage().put(transaction.getFruit(),
+            Stock.stockStorage.put(transaction.getFruit(),
                     strategyOperations.getOperation(
                             transaction.getOperationType()).getNewAmount(
-                            transaction, storageReport.getStockStorage()
-                                    .get(transaction.getFruit())));
+                            transaction, Stock.stockStorage.get(transaction.getFruit())));
         }
-        return storageReport;
     }
 }
