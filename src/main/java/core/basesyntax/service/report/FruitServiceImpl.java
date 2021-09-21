@@ -1,11 +1,9 @@
 package core.basesyntax.service.report;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.operation.OperationStrategy;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
     private final OperationStrategy operationStrategy;
@@ -15,14 +13,15 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public Map<Fruit, Integer> countFruitByOperation(List<TransactionDto> operations) {
-        Map<Fruit, Integer> totalFruitAmount = new HashMap<>();
+    public void saveFruitByOperation(List<TransactionDto> operations) {
         for (TransactionDto operation : operations) {
-            operationStrategy.getOperationHandler(operation.getOperationType())
-                    .setDataInStorage(totalFruitAmount,
-                            operation.getFruitType(),
-                            operation.getFruitAmount());
+            FruitStorage.fruitsDataBase.put(operation.getFruitType(), 0);
         }
-        return totalFruitAmount;
+        for (TransactionDto operation : operations) {
+            FruitStorage.fruitsDataBase.put(operation.getFruitType(),
+                    operationStrategy.getOperationHandler(operation.getOperationType())
+                    .setDataInStorage(FruitStorage.fruitsDataBase.get(operation.getFruitType()),
+                            operation.getFruitAmount()));
+        }
     }
 }

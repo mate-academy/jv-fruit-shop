@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.operation.BalanceOperationHandler;
@@ -40,9 +39,9 @@ public class Main {
         List<TransactionDto> operations = operationParser.parseOperations(inputData);
         FruitService fruitService;
         fruitService = new FruitServiceImpl(operationStrategy);
-        Map<Fruit, Integer> totalFruitAmount = fruitService.countFruitByOperation(operations);
+        fruitService.saveFruitByOperation(operations);
         DailyReportService dailyReportService = new DailyReportServiceImpl();
-        String report = dailyReportService.createReport(totalFruitAmount);
+        String report = dailyReportService.createReport();
         ReportWriter reportWriter = new ReportWriterImpl();
         reportWriter.writeReport(OUTPUT_FILE_PATH, report);
     }
