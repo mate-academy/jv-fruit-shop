@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.List;
 
 public interface ReaderService {
-    List<FruitRecord> read(String path);
+    List<FruitRecordDto> read(String path);
 }

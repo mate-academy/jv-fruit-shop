@@ -1,6 +1,6 @@
 package core.basesyntax.operation;
 
-public class OperationPurchase implements Operation {
+public class OperationHandlerPurchaseImpl implements OperationHandler {
     @Override
     public int operate(int first, int second) {
         if (first - second < 0) {

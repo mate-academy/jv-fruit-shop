@@ -1,11 +1,12 @@
-package core.basesyntax.service;
+package core.basesyntax.impl;
 
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.operation.OperationStrategy;
 import core.basesyntax.repository.FruitStorageRepository;
 import core.basesyntax.repository.FruitStorageRepositoryImpl;
-import core.basesyntax.validator.Validator;
-import core.basesyntax.validator.ValidatorImpl;
+import core.basesyntax.service.DataParser;
+import core.basesyntax.service.Validator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -22,17 +23,16 @@ public class DataParserImpl implements DataParser {
     }
 
     @Override
-    public boolean parseAndAddToStorage(List<FruitRecord> records) {
-        Map<String, Integer> recordMap = records.stream()
+    public Map<Fruit, Integer> parseDto(List<FruitRecordDto> records) {
+        Map<Fruit, Integer> recordMap = records.stream()
                 .filter(validator::validateRecord)
-                .map(record -> record.getFruit().getName())
+                .map(FruitRecordDto::getFruit)
                 .distinct()
-                .collect(Collectors.toMap(name -> name, n -> 0));
-        for (FruitRecord record : records) {
-            recordMap.put(record.getFruit().getName(), strategy.getOperation(record.getType())
-                    .operate(recordMap.get(record.getFruit().getName()), record.getAmount()));
+                .collect(Collectors.toMap(fruit -> fruit, n -> 0));
+        for (FruitRecordDto record : records) {
+            recordMap.put(record.getFruit(), strategy.getOperation(record.getType())
+                    .operate(recordMap.get(record.getFruit()), record.getAmount()));
         }
-        fruitStorageService.add(recordMap);
-        return true;
+        return recordMap;
     }
 }

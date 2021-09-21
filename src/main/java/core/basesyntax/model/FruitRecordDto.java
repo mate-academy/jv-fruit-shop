@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FruitRecord {
+public class FruitRecordDto {
     private OperationType type;
     private Fruit fruit;
     private int amount;

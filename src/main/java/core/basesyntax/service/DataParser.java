@@ -1,8 +1,10 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.List;
+import java.util.Map;
 
 public interface DataParser {
-    boolean parseAndAddToStorage(List<FruitRecord> records);
+    Map<Fruit, Integer> parseDto(List<FruitRecordDto> records);
 }

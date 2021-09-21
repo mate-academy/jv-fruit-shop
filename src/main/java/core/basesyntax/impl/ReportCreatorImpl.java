@@ -1,7 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.impl;
 
-import core.basesyntax.repository.FruitStorageRepository;
-import core.basesyntax.repository.FruitStorageRepositoryImpl;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.service.ReportCreator;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,10 +9,11 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {
-    private final FruitStorageRepository fruitStorageService;
+    private static final String TITLE_LINE = "fruit,quantity" + System.lineSeparator();
+    private final FruitStorageServiceImpl fruitStorageService;
 
     public ReportCreatorImpl() {
-        this.fruitStorageService = new FruitStorageRepositoryImpl();
+        this.fruitStorageService = new FruitStorageServiceImpl();
     }
 
     @Override
@@ -25,13 +26,10 @@ public class ReportCreatorImpl implements ReportCreator {
     }
 
     private String formReport(LocalDate date) {
-        Map<String, Integer> fruitMap = fruitStorageService.get(date);
+        Map<Fruit, Integer> fruitMap = fruitStorageService.getFromStorage(date);
         StringBuilder builder = new StringBuilder();
-        builder.append("fruit")
-                .append(",")
-                .append("quantity")
-                .append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : fruitMap.entrySet()) {
+        builder.append(TITLE_LINE);
+        for (Map.Entry<Fruit, Integer> entry : fruitMap.entrySet()) {
             builder.append(entry.getKey())
                     .append(",")
                     .append(entry.getValue())
