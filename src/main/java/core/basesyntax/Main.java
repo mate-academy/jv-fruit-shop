@@ -1,14 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileReader;
-import core.basesyntax.dao.FileReaderImpl;
-import core.basesyntax.dao.FileWriter;
-import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.CreateReportServiceImpl;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileReaderImpl;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FileWriterImpl;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
 import core.basesyntax.service.OperationStrategy;

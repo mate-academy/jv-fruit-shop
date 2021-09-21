@@ -1,4 +1,4 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 public interface FileWriter {
     void writeToFile(String report, String fileName);

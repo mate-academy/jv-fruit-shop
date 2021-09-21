@@ -1,7 +1,5 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.Validator;
-import core.basesyntax.dao.ValidatorImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.TransactionDto;
 import java.util.ArrayList;
