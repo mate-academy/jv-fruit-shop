@@ -1,7 +1,9 @@
-package core.basesyntax.service;
+package core.basesyntax.service.implementation;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.ReportMakerService;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

@@ -1,7 +1,7 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.FruitRecordDto;
 
 public interface OperationStrategy {
-    OperationHandler get(FruitRecord.Type typeOfOperation);
+    OperationHandler get(FruitRecordDto.Type typeOfOperation);
 }

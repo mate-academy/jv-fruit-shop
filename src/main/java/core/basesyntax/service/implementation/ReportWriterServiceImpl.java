@@ -1,6 +1,9 @@
-package core.basesyntax.service;
+package core.basesyntax.service.implementation;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.service.ReportMakerService;
+import core.basesyntax.service.ReportWriterService;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

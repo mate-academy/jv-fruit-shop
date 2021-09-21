@@ -1,14 +1,14 @@
 package core.basesyntax.model;
 
-public class FruitRecord {
+public class FruitRecordDto {
     private Type typeOfOperation;
     private Fruit fruit;
     private Integer amount;
 
-    public FruitRecord() {
+    public FruitRecordDto() {
     }
 
-    public FruitRecord(Type typeOfOperation, Fruit fruit, Integer amount) {
+    public FruitRecordDto(Type typeOfOperation, Fruit fruit, Integer amount) {
         this.typeOfOperation = typeOfOperation;
         this.fruit = fruit;
         this.amount = amount;
