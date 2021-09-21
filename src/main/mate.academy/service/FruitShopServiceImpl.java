@@ -14,15 +14,11 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public Map<Fruit, Integer> transfer(List<FruitRecord> transferFruitList,
-                                        OperationStrategy operationStrategy) {
-        Storage storage = new Storage();
-        Map<Fruit, Integer> fruitStorage = storage.getStorage();
+    public void transfer(List<FruitRecord> transferFruitList) {
         for (FruitRecord fruitRecord : transferFruitList) {
             String type = fruitRecord.getTypeOperation();
-            fruitStorage.put(fruitRecord.getFruit(),
-                    operationStrategy.getHandler(type).changeAmount(fruitRecord, fruitStorage));
+            Storage.storage.put(fruitRecord.getFruit(),
+                    operationStrategy.getHandler(type).changeAmount(fruitRecord, Storage.storage));
         }
-        return fruitStorage;
     }
 }

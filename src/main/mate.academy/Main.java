@@ -1,10 +1,9 @@
-import dao.FileReaderDao;
-import dao.FileReaderDaoImpl;
+import dao.FileReader;
+import dao.FileReaderImpl;
 import dao.FileWriterDao;
 import dao.FileWriterDaoImpl;
-import model.Fruit;
 import model.FruitRecord;
-import model.TypeOperation;
+import model.Operation;
 import service.FruitShopService;
 import service.FruitShopServiceImpl;
 import service.OperationStrategy;
@@ -26,24 +25,24 @@ public class Main {
     public static final String OUTPUT = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        FileReaderDao fileReaderDao = new FileReaderDaoImpl();
+        FileReader fileReader = new FileReaderImpl();
         Handler balanceHandler = new BalanceHandlerImpl();
         Handler purchaseHandler = new PurchaseHandlerImpl();
         Handler supplyHandler = new SupplyHandlerImpl();
         Handler returnHandler = new ReturnHandlerImpl();
         Map<String, Handler> handlerMap = new HashMap<>();
-        handlerMap.put(TypeOperation.b.name(), balanceHandler);
-        handlerMap.put(TypeOperation.s.name(), supplyHandler);
-        handlerMap.put(TypeOperation.p.name(), purchaseHandler);
-        handlerMap.put(TypeOperation.r.name(), returnHandler);
+        handlerMap.put(Operation.BALANCE.getOperation(), balanceHandler);
+        handlerMap.put(Operation.SUPPLY.getOperation(), supplyHandler);
+        handlerMap.put(Operation.PURCHASE.getOperation(), purchaseHandler);
+        handlerMap.put(Operation.RETURN.getOperation(), returnHandler);
         FruitParser fruitParser = new FruitParser();
-        List<String> input = fileReaderDao.getFileData(INPUT);
+        List<String> input = fileReader.getFileData(INPUT);
         List<FruitRecord> fruitRecordList = fruitParser.createDto(input);
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
-        Map<Fruit, Integer> reportMap = fruitShopService.transfer(fruitRecordList, operationStrategy);
+        fruitShopService.transfer(fruitRecordList);
         ReportService reportService = new ReportServiceImpl();
         FileWriterDao fileWriter = new FileWriterDaoImpl();
-        fileWriter.writeFile(OUTPUT, reportService.createReport(reportMap));
+        fileWriter.writeFile(OUTPUT, reportService.createReport());
     }
 }

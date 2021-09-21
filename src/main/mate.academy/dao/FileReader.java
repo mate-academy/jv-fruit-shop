@@ -2,6 +2,6 @@ package dao;
 
 import java.util.List;
 
-public interface FileReaderDao {
+public interface FileReader {
     List<String> getFileData(String fileName);
 }
