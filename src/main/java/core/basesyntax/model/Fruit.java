@@ -1,20 +1,20 @@
 package core.basesyntax.model;
 
 public class Fruit {
-    private String type;
+    private String sort;
     private int amount;
 
-    public Fruit(String type, int amount) {
-        this.type = type;
+    public Fruit(String sort, int amount) {
+        this.sort = sort;
         this.amount = amount;
     }
 
-    public String getType() {
-        return type;
+    public String getSort() {
+        return sort;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSort(String type) {
+        this.sort = sort;
     }
 
     public int getAmount() {

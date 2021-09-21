@@ -10,7 +10,7 @@ public class ReportMaker {
     public String make(List<Fruit> data) {
         StringBuilder report = new StringBuilder(REPORT_HEAD).append(System.lineSeparator());
         for (Fruit fruit : data) {
-            report.append(fruit.getType())
+            report.append(fruit.getSort())
                     .append(SEPARATOR)
                     .append(fruit.getAmount())
                     .append(System.lineSeparator());
