@@ -1,10 +1,11 @@
-package core.basesyntax.dataservice;
+package core.basesyntax.service.parser;
 
-import core.basesyntax.dao.InputDataReader;
-import core.basesyntax.dao.InputDataReaderImpl;
 import core.basesyntax.model.FruitType;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.model.TransactionDto;
+import core.basesyntax.service.reader.InputDataReader;
+import core.basesyntax.service.validator.Validator;
+import core.basesyntax.service.validator.ValidatorImpl;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,15 +17,15 @@ public class OperationParserImpl implements OperationParser {
     private final InputDataReader inputDataReader;
     private final Validator validator;
 
-    public OperationParserImpl() {
-        this.inputDataReader = new InputDataReaderImpl();
-        this.validator = new Validator();
+    public OperationParserImpl(InputDataReader inputDataReader) {
+        this.inputDataReader = inputDataReader;
+        this.validator = new ValidatorImpl();
     }
 
     @Override
-    public List<TransactionDto> parseOperations(String filePathFrom) {
+    public List<TransactionDto> parseOperations() {
         List<TransactionDto> operationsList = new ArrayList<>();
-        List<String> inputData = inputDataReader.getDataFromFile(filePathFrom);
+        List<String> inputData = inputDataReader.getDataFromFile();
         inputData.remove(INPUT_FILE_HEADER_INDEX);
         for (String data : inputData) {
             String[] split = data.split(",");
