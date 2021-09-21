@@ -1,7 +1,7 @@
 package core.basesyntax.service.operationtypes;
 
-import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.dao.FruitsDaoImpl;
+import core.basesyntax.db.FruitsDao;
+import core.basesyntax.db.FruitsDaoImpl;
 import core.basesyntax.model.Fruit;
 
 public class SupplyOperationHandler implements OperationTypeHandler {

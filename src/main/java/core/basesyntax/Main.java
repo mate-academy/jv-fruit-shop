@@ -1,8 +1,7 @@
 package core.basesyntax;
 
-//
-import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.dao.FruitsDaoImpl;
+import core.basesyntax.db.FruitsDao;
+import core.basesyntax.db.FruitsDaoImpl;
 import core.basesyntax.service.ReportMaker;
 import core.basesyntax.service.TransactionDto;
 import core.basesyntax.service.fileservice.ReadFromFile;

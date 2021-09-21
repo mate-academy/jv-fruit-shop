@@ -1,6 +1,5 @@
-package core.basesyntax.dao;
+package core.basesyntax.db;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 
