@@ -1,7 +1,10 @@
 package core.basesyntax.service;
 
-import java.nio.file.Path;
+import core.basesyntax.model.TransactionDto;
+import java.util.List;
 
 public interface FruitService {
-    void saveFruitRecordsFromFile(Path path);
+    void saveFruitRecordsFromFile(List<TransactionDto> fruitRecordsList);
+
+    List<String> buildReportToList();
 }

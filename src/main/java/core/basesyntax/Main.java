@@ -10,6 +10,7 @@ import core.basesyntax.db.FruitRecordsDaoImpl;
 import core.basesyntax.exception.ValidatorException;
 import core.basesyntax.fileservice.FileService;
 import core.basesyntax.fileservice.FileServiceImpl;
+import core.basesyntax.model.TransactionDto;
 import core.basesyntax.operationstrategy.BalanceOperationHandler;
 import core.basesyntax.operationstrategy.OperationHandler;
 import core.basesyntax.operationstrategy.OperationStrategy;
@@ -20,13 +21,12 @@ import core.basesyntax.operationstrategy.SupplyOperationHandler;
 import core.basesyntax.parser.FruitRecordParser;
 import core.basesyntax.parser.FruitRecordParserImpl;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.service.ReportBuilderService;
-import core.basesyntax.service.impl.ReportBuilderServiceImpl;
+import core.basesyntax.service.FruitServiceImpl;
 import core.basesyntax.validator.Validator;
 import core.basesyntax.validator.ValidatorImpl;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -41,17 +41,16 @@ public class Main {
         operationHandlerMap.put(RETURN, new ReturnOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FileService fileService = new FileServiceImpl();
-        FruitRecordParser fruitRecordParser = new FruitRecordParserImpl();
-        FruitRecordsDao fruitRecordsDao = new FruitRecordsDaoImpl();
         Validator<String> validator = new ValidatorImpl();
-        for (String record : fileService.readFromFile(TEST_FRUIT_SHOP_CSV)) {
+        List<String> lines = fileService.readFromFile(TEST_FRUIT_SHOP_CSV);
+        for (String record : lines) {
             validator.validate(record);
         }
-        FruitService fruitService = new FruitServiceImpl(fileService, fruitRecordParser,
-                operationStrategy, fruitRecordsDao);
-        fruitService.saveFruitRecordsFromFile(TEST_FRUIT_SHOP_CSV);
-        ReportBuilderService reportBuilderService = new ReportBuilderServiceImpl(fruitRecordsDao,
-                fileService);
-        reportBuilderService.buildReport(TEST_CSV_REPORT);
+        FruitRecordParser fruitRecordParser = new FruitRecordParserImpl();
+        List<TransactionDto> fruitRecordsList = fruitRecordParser.parse(lines);
+        FruitRecordsDao fruitRecordsDao = new FruitRecordsDaoImpl();
+        FruitService fruitService = new FruitServiceImpl(operationStrategy, fruitRecordsDao);
+        fruitService.saveFruitRecordsFromFile(fruitRecordsList);
+        fileService.writeToFile(fruitService.buildReportToList(), TEST_CSV_REPORT);
     }
 }
