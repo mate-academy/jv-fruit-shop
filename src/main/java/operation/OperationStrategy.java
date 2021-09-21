@@ -1,5 +1,5 @@
 package operation;
 
 public interface OperationStrategy {
-    OperationHandler operate(String operationType);
+    OperationHandler get(String operationType);
 }

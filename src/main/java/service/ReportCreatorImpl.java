@@ -22,7 +22,7 @@ public class ReportCreatorImpl implements ReportCreator {
         List<Record> records = recordDao.getRecords();
         for (Record record: records) {
             OperationHandler operationHandler = operationStrategy
-                    .operate(record.getOperationType());
+                    .get(record.getOperationType());
             operationHandler.apply(record);
         }
         return FruitBalance.FRUIT_BALANCE.entrySet().stream()

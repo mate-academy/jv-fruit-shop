@@ -36,7 +36,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ReportCreator reportCreator = new ReportCreatorImpl(operationStrategy);
         List<String> newReport = reportCreator.createReport();
-        FileWriter writerService = new FileWriterImpl();
-        writerService.write(newReport, REPORT_PATH);
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.write(newReport, REPORT_PATH);
     }
 }
