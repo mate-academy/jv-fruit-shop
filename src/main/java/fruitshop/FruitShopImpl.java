@@ -31,6 +31,5 @@ public class FruitShopImpl implements FruitShop {
         record.recordToMap(Storage.fruitStorageList, strategy);
         WriteFile writeFile = new WriteFileImpl();
         writeFile.writeWithMapToFile(Storage.storage, nameNewReport);
-
     }
 }

@@ -10,8 +10,6 @@ public class RecordToMapImpl implements RecordToMap {
         for (FruitRecord fruitRecord : fruitRecordList) {
             strategy.get(fruitRecord.getOperationType())
                     .setBalance(fruitRecord.getFruit(),fruitRecord.getAmount());
-
         }
-
     }
 }

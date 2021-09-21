@@ -5,5 +5,4 @@ import service.activities.TypeOfActivities;
 
 public interface ActivitiesStrategy {
     Activities get(TypeOfActivities type);
-
 }

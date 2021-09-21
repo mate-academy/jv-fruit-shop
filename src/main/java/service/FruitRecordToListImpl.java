@@ -20,5 +20,4 @@ public class FruitRecordToListImpl implements FruitRecordToList {
         }
         return fruitRecordList;
     }
-
 }

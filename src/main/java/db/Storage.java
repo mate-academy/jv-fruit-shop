@@ -9,6 +9,4 @@ import service.fruitrecord.FruitRecord;
 public class Storage {
     public static final List<FruitRecord> fruitStorageList = new ArrayList<>();
     public static final Map<String, Integer> storage = new HashMap<>();
-
-
 }

@@ -5,7 +5,6 @@ public enum TypeOfActivities {
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
-
     private String activities;
 
     TypeOfActivities(String activities) {
