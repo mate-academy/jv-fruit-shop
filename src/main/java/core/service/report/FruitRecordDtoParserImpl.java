@@ -1,6 +1,7 @@
 package core.service.report;
 
 import core.model.FruitRecordDto;
+import core.model.TypeOperations;
 import core.service.oparation.OperationHandler;
 import core.service.oparation.OperationStrategy;
 import core.service.oparation.OperationStrategyImpl;
@@ -14,6 +15,7 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
     private static final int INDEX_QUANTITY = 2;
     private Map<String, OperationHandler> operationHandlersMap;
     private FruitRecordDto fruitRecordDto;
+    private TypeOperations operationType;
 
     public FruitRecordDtoParserImpl(Map<String, OperationHandler> operationHandlersMap) {
         this.operationHandlersMap = operationHandlersMap;
@@ -23,13 +25,25 @@ public class FruitRecordDtoParserImpl implements FruitRecordDtoParser {
     public void createFruitRecordDto(List<String> strings) {
         for (String string : strings) {
             String[] tmpStrings = string.split(COMA_SEPARATOR);
-            fruitRecordDto = new FruitRecordDto(tmpStrings[INDEX_OPERATION_FOR_OPERATION_STRATEGY],
-                    tmpStrings[INDEX_FRUIT_NAME],
-                    tmpStrings[INDEX_QUANTITY]);
-            OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlersMap);
-            OperationHandler operationHandler =
-                    operationStrategy.get(fruitRecordDto.getOperationType().get());
-            operationHandler.apply(fruitRecordDto);
+            TypeOperations[] typeOperationsArray = TypeOperations.values();
+            for (TypeOperations typeOperation : typeOperationsArray) {
+                if (typeOperation.get()
+                        .equals(tmpStrings[INDEX_OPERATION_FOR_OPERATION_STRATEGY])) {
+                    operationType = typeOperation;
+                }
+            }
+            int fruitQuantity = Integer
+                    .parseInt(tmpStrings[INDEX_QUANTITY]);
+            fruitRecordDto =
+                    new FruitRecordDto(operationType, tmpStrings[INDEX_FRUIT_NAME], fruitQuantity);
+            launchOperationStrategy();
         }
+    }
+
+    private void launchOperationStrategy() {
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlersMap);
+        OperationHandler operationHandler =
+                operationStrategy.get(fruitRecordDto.getOperationType());
+        operationHandler.apply(fruitRecordDto);
     }
 }

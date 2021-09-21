@@ -11,15 +11,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public OperationHandler get(String typeOperations) {
-        TypeOperations[] enumOperationArray = TypeOperations.values();
-        OperationHandler operationHandler = null;
-        for (TypeOperations operation : enumOperationArray) {
-            if (operation.get().equals(typeOperations)) {
-                operationHandler = operationHandlersMap.get(operation.get());
-                break;
-            }
-        }
-        return operationHandler;
+    public OperationHandler get(TypeOperations typeOperations) {
+        return operationHandlersMap.get(typeOperations.get());
     }
 }

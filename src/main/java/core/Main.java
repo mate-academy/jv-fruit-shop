@@ -51,8 +51,8 @@ public class Main {
                 new FruitRecordDtoParserImpl(operationHandlersMap);
         fruitRecordDtoParser.createFruitRecordDto(readFromInputFile);
         // Create report.
-        ReportGeneratorImpl fruitShop = new ReportGeneratorImpl();
-        String reportString = fruitShop.createReport();
+        ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
+        String reportString = reportGenerator.createReport();
         // Write report ro File.
         ReportWriter reportWriter = new ReportWriterImpl();
         reportWriter.write(REPORT_FILE_CSV, reportString);

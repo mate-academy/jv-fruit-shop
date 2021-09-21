@@ -5,15 +5,10 @@ public class FruitRecordDto {
     private String fruitName;
     private Integer quantity;
 
-    public FruitRecordDto(String operationType, String fruitName, String quantity) {
-        TypeOperations[] values = TypeOperations.values();
-        for (TypeOperations value : values) {
-            if (value.get().equals(operationType)) {
-                this.operationType = value;
-            }
-        }
+    public FruitRecordDto(TypeOperations operationType, String fruitName, int quantity) {
+        this.operationType = operationType;
         this.fruitName = fruitName;
-        this.quantity = Integer.parseInt(quantity);
+        this.quantity = quantity;
     }
 
     public TypeOperations getOperationType() {

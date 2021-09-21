@@ -1,7 +1,7 @@
 package core.service.reader;
 
 import core.service.validator.FirstLineValidatorImpl;
-import core.service.validator.FollowingLineValidatorImpl;
+import core.service.validator.LineValidatorImpl;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,12 +13,12 @@ import java.util.List;
 public class ReaderServiceImpl implements ReaderService {
     private List<String> listFromInputFile;
     private FirstLineValidatorImpl firstLineValidator;
-    private FollowingLineValidatorImpl followingLineValidator;
+    private LineValidatorImpl followingLineValidator;
 
     public ReaderServiceImpl() {
         listFromInputFile = new ArrayList<>();
         firstLineValidator = new FirstLineValidatorImpl();
-        followingLineValidator = new FollowingLineValidatorImpl();
+        followingLineValidator = new LineValidatorImpl();
     }
 
     @Override

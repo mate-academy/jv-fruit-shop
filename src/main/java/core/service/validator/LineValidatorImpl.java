@@ -2,7 +2,7 @@ package core.service.validator;
 
 import core.model.TypeOperations;
 
-public class FollowingLineValidatorImpl implements Validator {
+public class LineValidatorImpl implements Validator {
     private static final int INDEX_TYPE_OPERATION = 0;
     private static final int INDEX_FRUIT_NAME = 1;
     private static final int INDEX_FRUIT_QUANTITY = 2;
