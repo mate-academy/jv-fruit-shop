@@ -1,8 +1,8 @@
 package core.basesyntax.database;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FruitsStorage {
-    public static final Map<String, Integer> fruitsStorage = new TreeMap<>();
+    public static final Set<FruitDto> fruitsStorage = new HashSet<>();
 }

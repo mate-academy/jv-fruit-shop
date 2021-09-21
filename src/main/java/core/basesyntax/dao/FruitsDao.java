@@ -1,7 +1,9 @@
 package core.basesyntax.dao;
 
-public interface FruitsDao {
-    boolean add(String[] fruits);
+import core.basesyntax.database.FruitDto;
 
-    boolean remove(String[] fruits);
+public interface FruitsDao {
+    FruitDto get(String fruit);
+
+    void put(FruitDto fruitDto);
 }
