@@ -1,7 +1,8 @@
-package core.basesyntax.service.transfer;
+package core.basesyntax.service.fruitservice;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.service.parser.DataParser;
 import core.basesyntax.service.parser.DataParserImpl;
 import core.basesyntax.service.strategy.OperationStrategy;
@@ -10,20 +11,19 @@ import core.basesyntax.service.strategy.operation.OperationHandler;
 import java.util.List;
 import java.util.Map;
 
-public class FruitTransferImpl implements FruitTransfer {
+public class FruitServiceImpl implements FruitService {
 
     @Override
-    public Map<String, Integer> transfer(String fromFileName) {
+    public void safe(String fromFileName) {
         DataParser dataParser = new DataParserImpl();
-        List<FruitRecord> fruitRecords = dataParser.parseData(fromFileName);
+        List<FruitRecordDto> fruitRecords = dataParser.parseData(fromFileName);
         Map<String, OperationHandler> operationHandlerMap = new MapInitialize().initializeMap();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        Map<String, Integer> fruitStorage = Storage.fruitStorage;
-        for (FruitRecord record : fruitRecords) {
+        Map<Fruit, Integer> fruitStorage = Storage.fruitStorage;
+        for (FruitRecordDto record : fruitRecords) {
             fruitStorage.put(record.getFruitName(),
                     operationStrategy.get(record.getOperationType())
-                            .getAmount(record, fruitStorage));
+                            .getAmount(record));
         }
-        return fruitStorage;
     }
 }

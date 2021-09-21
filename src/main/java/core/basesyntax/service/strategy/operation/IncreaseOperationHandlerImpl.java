@@ -1,13 +1,15 @@
 package core.basesyntax.service.strategy.operation;
 
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.Map;
 
 public class IncreaseOperationHandlerImpl implements OperationHandler {
 
     @Override
-    public int getAmount(FruitRecord fruitRecord, Map<String, Integer> fruitStorage) {
-        for (Map.Entry<String, Integer> fruitRecordEntry : fruitStorage.entrySet()) {
+    public int getAmount(FruitRecordDto fruitRecord) {
+        for (Map.Entry<Fruit, Integer> fruitRecordEntry : Storage.fruitStorage.entrySet()) {
             if (fruitRecordEntry.getKey().equals(fruitRecord.getFruitName())) {
                 return fruitRecordEntry.getValue() + fruitRecord.getAmount();
             }

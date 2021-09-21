@@ -1,7 +1,8 @@
 package core.basesyntax.service.parser;
 
-import core.basesyntax.dto.FruitRecordsDtoImpl;
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.service.fileservice.FruitRecordsDtoImpl;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.service.validator.Validator;
 import core.basesyntax.service.validator.ValidatorImpl;
 import java.util.ArrayList;
@@ -15,17 +16,19 @@ public class DataParserImpl implements DataParser {
     private static final int AMOUNT_INDEX = 2;
 
     @Override
-    public List<FruitRecord> parseData(String fileName) {
+    public List<FruitRecordDto> parseData(String fileName) {
         List<String> rawFruitRecords = new FruitRecordsDtoImpl().readDataFromFile(fileName);
-        List<FruitRecord> fruitRecords = new ArrayList<>();
+        List<FruitRecordDto> fruitRecords = new ArrayList<>();
         Validator validator = new ValidatorImpl();
         rawFruitRecords.remove(TITLE_INDEX);
         for (String record: rawFruitRecords) {
-            FruitRecord fruitRecord = new FruitRecord();
+            FruitRecordDto fruitRecord = new FruitRecordDto();
             String[] splitRecord = record.split(CSV_SEPARATOR);
             if (validator.validate(splitRecord)) {
+                Fruit fruit = new Fruit();
+                fruit.setFruit(splitRecord[FRUIT_INDEX]);
                 fruitRecord.setOperationType(splitRecord[OPERATION_TYPE_INDEX]);
-                fruitRecord.setFruit(splitRecord[FRUIT_INDEX]);
+                fruitRecord.setFruit(fruit);
                 fruitRecord.setAmount(Integer.parseInt(splitRecord[AMOUNT_INDEX]));
                 fruitRecords.add(fruitRecord);
             }

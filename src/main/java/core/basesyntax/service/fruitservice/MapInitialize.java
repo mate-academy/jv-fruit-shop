@@ -1,7 +1,7 @@
-package core.basesyntax.service.transfer;
+package core.basesyntax.service.fruitservice;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.service.strategy.operation.BalanceOperationHandlerImpl;
 import core.basesyntax.service.strategy.operation.DecreaseOperationHandlerImpl;
 import core.basesyntax.service.strategy.operation.IncreaseOperationHandlerImpl;
@@ -13,13 +13,13 @@ public class MapInitialize {
 
     public Map<String, OperationHandler> initializeMap() {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitRecord.OperationType.BALANCE.getType(),
+        operationHandlerMap.put(FruitRecordDto.OperationType.BALANCE.getType(),
                 new BalanceOperationHandlerImpl());
-        operationHandlerMap.put(FruitRecord.OperationType.PURCHASE.getType(),
+        operationHandlerMap.put(FruitRecordDto.OperationType.PURCHASE.getType(),
                 new DecreaseOperationHandlerImpl());
-        operationHandlerMap.put(FruitRecord.OperationType.SUPPLY.getType(),
+        operationHandlerMap.put(FruitRecordDto.OperationType.SUPPLY.getType(),
                 new IncreaseOperationHandlerImpl());
-        operationHandlerMap.put(FruitRecord.OperationType.RETURN.getType(),
+        operationHandlerMap.put(FruitRecordDto.OperationType.RETURN.getType(),
                 new IncreaseOperationHandlerImpl());
         Storage.operationHandlerMap = operationHandlerMap;
         return Storage.operationHandlerMap;

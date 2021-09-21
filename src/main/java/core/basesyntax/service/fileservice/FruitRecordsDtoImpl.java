@@ -1,4 +1,6 @@
-package core.basesyntax.dto;
+package core.basesyntax.service.fileservice;
+
+import core.basesyntax.service.fileservice.FruitRecordsDto;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

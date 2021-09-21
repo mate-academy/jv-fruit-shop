@@ -1,13 +1,14 @@
 package core.basesyntax.service.strategy.operation;
 
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.Map;
 
 public class BalanceOperationHandlerImpl implements OperationHandler {
 
     @Override
-    public int getAmount(FruitRecord fruitRecord, Map<String, Integer> fruitStorage) {
-        fruitStorage.put(fruitRecord.getFruitName(), 0);
+    public int getAmount(FruitRecordDto fruitRecord) {
+        Storage.fruitStorage.put(fruitRecord.getFruitName(), fruitRecord.getAmount());
         return fruitRecord.getAmount();
     }
 }

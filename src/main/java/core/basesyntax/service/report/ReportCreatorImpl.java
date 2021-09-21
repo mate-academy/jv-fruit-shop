@@ -1,29 +1,29 @@
 package core.basesyntax.service.report;
 
-import core.basesyntax.dto.FruitRecordsDto;
-import core.basesyntax.dto.FruitRecordsDtoImpl;
+import core.basesyntax.service.fileservice.FruitRecordsDto;
+import core.basesyntax.service.fileservice.FruitRecordsDtoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.transfer.FruitTransfer;
-import core.basesyntax.service.transfer.FruitTransferImpl;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.service.fruitservice.FruitService;
+import core.basesyntax.service.fruitservice.FruitServiceImpl;
 import java.util.Map;
 
-public class ReportImpl implements Report {
+public class ReportCreatorImpl implements Report {
 
     @Override
     public void createReport(String fromFileName, String toFilename) {
         FruitRecordsDto fruitRecordsDao = new FruitRecordsDtoImpl();
-        FruitTransfer fruitTransfer = new FruitTransferImpl();
-        fruitTransfer.transfer(fromFileName);
+        FruitService fruitTransfer = new FruitServiceImpl();
+        fruitTransfer.safe(fromFileName);
         fruitRecordsDao.writeDataToFile(toFilename, buildReport());
     }
 
     private String buildReport() {
-        Map<String, Integer> fruitStorage = Storage.fruitStorage;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity")
                 .append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : fruitStorage.entrySet()) {
-            stringBuilder.append(entry.getKey())
+        for (Map.Entry<Fruit, Integer> entry : Storage.fruitStorage.entrySet()) {
+            stringBuilder.append(entry.getKey().getFruit())
                     .append(",")
                     .append(entry.getValue())
                     .append(System.lineSeparator());

@@ -1,8 +1,8 @@
 package core.basesyntax.service.parser;
 
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.List;
 
 public interface DataParser {
-    List<FruitRecord> parseData(String fileName);
+    List<FruitRecordDto> parseData(String fileName);
 }

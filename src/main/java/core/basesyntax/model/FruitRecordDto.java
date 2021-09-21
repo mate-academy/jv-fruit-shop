@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class FruitRecord {
-    private String fruitName;
+public class FruitRecordDto {
+    private Fruit fruitName;
     private int amount;
     private String operationType;
 
-    public String getFruitName() {
+    public Fruit getFruitName() {
         return fruitName;
     }
 
@@ -19,7 +19,7 @@ public class FruitRecord {
         return operationType;
     }
 
-    public void setFruit(String fruit) {
+    public void setFruit(Fruit fruit) {
         this.fruitName = fruit;
     }
 
@@ -39,7 +39,7 @@ public class FruitRecord {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        FruitRecord that = (FruitRecord) o;
+        FruitRecordDto that = (FruitRecordDto) o;
         return amount == that.amount && Objects.equals(fruitName, that.fruitName)
                 && operationType == that.operationType;
     }
