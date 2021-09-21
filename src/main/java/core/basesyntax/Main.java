@@ -42,12 +42,12 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationTypesMap);
         FruitShopService fruitShop = new FruitShopServiceImpl(fruitDao, operationStrategy);
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> records = fileReaderService.getRecords(FROM_FILE_NAME);
+        List<String> linesFromFile = fileReaderService.getRecords(FROM_FILE_NAME);
         RecordValidator recordValidator = new RecordValidatorImpl();
         FruitRecordDtoParser fruitRecordDtoParser = new FruitRecordDtoParserImpl(recordValidator);
         FruitRecordDtoCreator fruitRecordDtoCreator =
                 new FruitRecordDtoCreatorImpl(fruitRecordDtoParser);
-        List<FruitRecordDto> fruitRecordDtos = fruitRecordDtoCreator.createRecords(records);
+        List<FruitRecordDto> fruitRecordDtos = fruitRecordDtoCreator.createRecords(linesFromFile);
         fruitShop.updateStorage(fruitRecordDtos);
         ReportMakerService reportMakerService = new ReportMakerServiceImpl(fruitDao);
         List<String> stringsToWrite = reportMakerService.makeReport();
