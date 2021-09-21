@@ -5,8 +5,14 @@ import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public class BalanceOperationHandler implements OperationHandler {
+    private final FruitDao fruitDao;
+
+    public BalanceOperationHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
+
     @Override
-    public Integer calculateNewAmount(FruitDao fruitDao, Fruit fruit, Integer amount) {
+    public Integer calculateNewAmount(Fruit fruit, Integer amount) {
         Map<Fruit, Integer> fruitsMap = fruitDao.getBalance();
         if (!fruitsMap.containsKey(fruit)
                 || fruitsMap.get(fruit).equals(amount)) {

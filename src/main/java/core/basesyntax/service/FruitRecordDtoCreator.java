@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitRecordDto;
 import java.util.List;
 
 public interface FruitRecordDtoCreator {
-    List<FruitRecordDto> parseRecords(String fileName);
+    List<FruitRecordDto> createRecords(List<String> records);
 }

@@ -1,5 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitRecordDto;
+import java.util.List;
+
 public interface FruitShopService {
-    void updateStorage(String fileName, FruitRecordDtoCreator fruitRecordDtoCreator);
+    void updateStorage(List<FruitRecordDto> fruitRecordDtos);
 }

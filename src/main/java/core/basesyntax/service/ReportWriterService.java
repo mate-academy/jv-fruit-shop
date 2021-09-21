@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.util.List;
+
 public interface ReportWriterService {
-    void createReport(String toFileName);
+    void createReportFile(List<String> stringsToWrite, String toFileName);
 }
