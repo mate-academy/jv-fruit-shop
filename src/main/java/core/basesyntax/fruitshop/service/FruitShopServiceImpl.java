@@ -13,9 +13,9 @@ public class FruitShopServiceImpl implements FruitShopService {
         StringBuilder stringBuilder = new StringBuilder("fruit,quantity");
         Set<Map.Entry<String, Integer>> entries = fruitsBalanceStatistic.entrySet();
         for (Map.Entry<String, Integer> entry : entries) {
-            stringBuilder.append("\n").append(entry.getKey()).append(",").append(entry.getValue());
+            stringBuilder.append(System.lineSeparator()).append(entry.getKey()).append(",").append(entry.getValue());
         }
-        stringBuilder.append("\n");
+        stringBuilder.append(System.lineSeparator());
         return stringBuilder.toString();
     }
 }

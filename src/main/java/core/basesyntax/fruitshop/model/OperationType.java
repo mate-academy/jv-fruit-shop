@@ -11,10 +11,6 @@ public enum OperationType {
         this.value = value;
     }
 
-    public String getValue() {
-        return value;
-    }
-
     public static OperationType valueOfLabel(String value) {
         for (OperationType o : values()) {
             if (o.value.equals(value)) {

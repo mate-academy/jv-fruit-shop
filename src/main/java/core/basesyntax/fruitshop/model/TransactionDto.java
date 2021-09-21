@@ -17,24 +17,12 @@ public class TransactionDto {
         return operationType;
     }
 
-    public void setOperationType(OperationType operationType) {
-        this.operationType = operationType;
-    }
-
     public Fruit getFruit() {
         return fruit;
     }
 
-    public void setFruit(Fruit fruit) {
-        this.fruit = fruit;
-    }
-
     public Integer getAmount() {
         return amount;
-    }
-
-    public void setAmount(Integer amount) {
-        this.amount = amount;
     }
 
     @Override
