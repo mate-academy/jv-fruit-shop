@@ -1,7 +1,8 @@
 package service;
 
+import model.Operation;
 import service.operation.Handler;
 
 public interface OperationStrategy {
-    Handler getHandler(String operation);
+    Handler getHandler(Operation operation);
 }

@@ -15,4 +15,13 @@ public enum Operation {
     public String getOperation() {
         return operation;
     }
+
+    public static Operation get(String operationType) {
+        for (Operation operation : values()) {
+            if (operation.getOperation().equals(operationType)) {
+                return operation;
+            }
+        }
+        return null;
+    }
 }

@@ -1,14 +1,14 @@
 package service.operation;
 
+import db.Storage;
 import model.Fruit;
 import model.FruitRecord;
 import java.util.Map;
 
 public class ReturnHandlerImpl implements Handler {
-
     @Override
-    public int changeAmount(FruitRecord fruitRecord, Map<Fruit, Integer> storage) {
-        for (Map.Entry<Fruit, Integer> fruitIntegerEntry : storage.entrySet()) {
+    public int changeAmount(FruitRecord fruitRecord) {
+        for (Map.Entry<Fruit, Integer> fruitIntegerEntry : Storage.storage.entrySet()) {
             if (fruitIntegerEntry.getKey().equals(fruitRecord.getFruit())) {
                 return fruitRecord.getAmount() + fruitIntegerEntry.getValue();
             }

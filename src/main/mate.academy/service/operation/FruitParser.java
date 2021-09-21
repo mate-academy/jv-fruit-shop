@@ -1,9 +1,9 @@
 package service.operation;
 
-import service.validation.Validator;
-import service.validation.ValidatorImpl;
 import model.Fruit;
 import model.FruitRecord;
+import service.validation.Validator;
+import service.validation.ValidatorImpl;
 import java.util.ArrayList;
 import java.util.List;
 

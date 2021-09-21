@@ -26,15 +26,11 @@ public class Main {
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        Handler balanceHandler = new BalanceHandlerImpl();
-        Handler purchaseHandler = new PurchaseHandlerImpl();
-        Handler supplyHandler = new SupplyHandlerImpl();
-        Handler returnHandler = new ReturnHandlerImpl();
-        Map<String, Handler> handlerMap = new HashMap<>();
-        handlerMap.put(Operation.BALANCE.getOperation(), balanceHandler);
-        handlerMap.put(Operation.SUPPLY.getOperation(), supplyHandler);
-        handlerMap.put(Operation.PURCHASE.getOperation(), purchaseHandler);
-        handlerMap.put(Operation.RETURN.getOperation(), returnHandler);
+        Map<Operation, Handler> handlerMap = new HashMap<>();
+        handlerMap.put(Operation.BALANCE,  new BalanceHandlerImpl());
+        handlerMap.put(Operation.SUPPLY, new SupplyHandlerImpl());
+        handlerMap.put(Operation.PURCHASE, new PurchaseHandlerImpl());
+        handlerMap.put(Operation.RETURN, new ReturnHandlerImpl());
         FruitParser fruitParser = new FruitParser();
         List<String> input = fileReader.getFileData(INPUT);
         List<FruitRecord> fruitRecordList = fruitParser.createDto(input);

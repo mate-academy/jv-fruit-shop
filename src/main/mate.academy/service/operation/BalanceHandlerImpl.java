@@ -1,14 +1,13 @@
 package service.operation;
 
-import model.Fruit;
+import db.Storage;
 import model.FruitRecord;
-import java.util.Map;
 
 public class BalanceHandlerImpl implements Handler {
 
     @Override
-    public int changeAmount(FruitRecord fruitRecord, Map<Fruit, Integer> storage) {
-        storage.put(fruitRecord.getFruit(), 0);
+    public int changeAmount(FruitRecord fruitRecord) {
+        Storage.storage.put(fruitRecord.getFruit(), fruitRecord.getAmount());
         return fruitRecord.getAmount();
     }
 }

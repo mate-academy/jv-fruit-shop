@@ -2,6 +2,7 @@ package service;
 
 import db.Storage;
 import model.FruitRecord;
+import model.Operation;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
@@ -14,9 +15,9 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public void transfer(List<FruitRecord> transferFruitList) {
         for (FruitRecord fruitRecord : transferFruitList) {
-            String type = fruitRecord.getTypeOperation();
+            Operation type = fruitRecord.getTypeOperation();
             Storage.storage.put(fruitRecord.getFruit(),
-                    operationStrategy.getHandler(type).changeAmount(fruitRecord, Storage.storage));
+                    operationStrategy.getHandler(type).changeAmount(fruitRecord));
         }
     }
 }
