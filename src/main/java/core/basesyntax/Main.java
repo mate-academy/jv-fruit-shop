@@ -29,7 +29,6 @@ public class Main {
         stringActivitiesMap.put("p", new Purchase());
         stringActivitiesMap.put("r", new Return());
         stringActivitiesMap.put("s", new Supply());
-
         FileService fileService = new OsFileServiceImpl();
         Strategy strategy = new StrategyImpl(stringActivitiesMap);
         Validator validation = new ValidatorImpl();
