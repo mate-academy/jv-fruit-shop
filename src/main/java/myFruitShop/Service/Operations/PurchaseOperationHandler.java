@@ -2,13 +2,13 @@ package myFruitShop.Service.Operations;
 
 import myFruitShop.FruitStorage.FruitStorage;
 import myFruitShop.model.Fruit;
-import myFruitShop.model.TransactionDto;
+import myFruitShop.model.OperationsDto;
 
 import java.util.Map;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public void applyOperation(TransactionDto data) {
+    public void applyOperation(OperationsDto data) {
         Map<Fruit,Integer> fruitStorage = FruitStorage.getStorage();
         Fruit fruit = data.getFruitType();
         Integer fruitsDemand = data.getAmount();

@@ -1,8 +1,8 @@
 package myFruitShop.Service.Operations;
 
-import myFruitShop.model.TransactionDto;
+import myFruitShop.model.OperationsDto;
 
 public interface OperationHandler {
-   public void applyOperation(TransactionDto data);
+   public void applyOperation(OperationsDto data);
 
 }

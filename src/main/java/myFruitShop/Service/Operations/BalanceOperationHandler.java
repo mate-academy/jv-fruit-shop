@@ -2,13 +2,13 @@ package myFruitShop.Service.Operations;
 
 import myFruitShop.FruitStorage.FruitStorage;
 import myFruitShop.model.Fruit;
-import myFruitShop.model.TransactionDto;
+import myFruitShop.model.OperationsDto;
 
 import java.util.Map;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override
-    public void applyOperation(TransactionDto data) {
+    public void applyOperation(OperationsDto data) {
        Map<Fruit, Integer> fruitStorage = FruitStorage.getStorage();          //we take our storage
 
        if (fruitStorage.containsKey(data.getFruitType()) && fruitStorage.get(data.getFruitType()) != 0) {  //if we had some info about that fruit before balance

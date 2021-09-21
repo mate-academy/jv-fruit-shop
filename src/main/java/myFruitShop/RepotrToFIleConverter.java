@@ -6,9 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class RepotrToFIleConverter implements ReportSupplier{
-   public File writeToFile(ReportGenerator stringReportGenerator) {
+   public File writeToFile(ReportGenerator stringReportGenerator,String reportFileName) {
        String report = stringReportGenerator.generateReport();
-       File dailyReport = new File("DailyReport");
+       File dailyReport = new File(reportFileName);
        try {
            dailyReport.createNewFile();
        } catch (IOException e) {

@@ -1,9 +1,9 @@
 package myFruitShop.Parser;
 
-import myFruitShop.model.TransactionDto;
+import myFruitShop.model.OperationsDto;
 
 import java.util.List;
 
 public interface DtoCreator {
-    List<TransactionDto> toDtoDataFormatter(List<String> rawRecords);
+    List<OperationsDto> toDtoDataFormatter(List<String> rawRecords);
 }

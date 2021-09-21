@@ -3,7 +3,11 @@ package myFruitShop.model;
 import java.util.Objects;
 
 public class Fruit {
-    String name;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
 
     public Fruit(String name) {
         this.name = name;

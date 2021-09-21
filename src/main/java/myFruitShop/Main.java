@@ -1,9 +1,11 @@
 package myFruitShop;
 
-import myFruitShop.Dao.ReadInfo;
-import myFruitShop.Dao.ReadInfoImpl1;
+import myFruitShop.Service.ReadInfo;
+import myFruitShop.Service.ReadInfoImpl1;
 import myFruitShop.Parser.DtoCreator;
 import myFruitShop.Parser.FruitRecordToDto2;
+import myFruitShop.Service.FruitShopService;
+import myFruitShop.Service.FruitShopServiceImpl;
 import myFruitShop.Service.OperationStrategy;
 import myFruitShop.Service.OperationStrategyImpl;
 import myFruitShop.Service.Operations.BalanceOperationHandler;
@@ -15,6 +17,7 @@ import myFruitShop.ValidationProces.InvalidDataException;
 import myFruitShop.ValidationProces.Validator;
 import myFruitShop.ValidationProces.ValidatorImpl;
 import myFruitShop.model.OperationType;
+import myFruitShop.model.OperationsDto;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,10 +33,10 @@ public class Main {
         operationHandlerMap.put(OperationType.SUPPLY, new SupplyOperationHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        // BankService bankService = new BankServiceImpl( new AccountDaoImpl(), commissionStrategy)
-       // bankService.transfer();         in our mb form report and input file as parameter
+
+
         ReadInfo operationReader = new ReadInfoImpl1();
-        List<String> rawDataFromFile = operationReader.readFromFile("InputDataForFruitShop");
+        List<String> rawDataFromFile = operationReader.readFromFile("src/main/java/myFruitShop/InputDataForFruitShop");
 
         Validator inputDataValidator = new ValidatorImpl();
         List<String> validFruitShopData;
@@ -43,7 +46,11 @@ public class Main {
             throw new RuntimeException("Invalid input data", e);
         }
         DtoCreator dataParser = new FruitRecordToDto2();
-        dataParser.toDtoDataFormatter(validFruitShopData);
+        List<OperationsDto> operationsDataInDto = dataParser.toDtoDataFormatter(validFruitShopData);       // dto data
 
+        OperationStrategy storageModifier = new OperationStrategyImpl(operationHandlerMap);
+        FruitShopService operationsApplier = new FruitShopServiceImpl(storageModifier);
+        operationsApplier.fruitStorageModifier(operationsDataInDto);                                      // do some staff with storage;
+        operationsApplier.fileReportBuilder("ReportForFruitShop");
     }
 }
