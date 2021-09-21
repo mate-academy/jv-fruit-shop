@@ -1,6 +1,6 @@
 package myFruitShop.Service.Operations;
 
-import myFruitShop.FruitStorage.FruitStorage;
+import myFruitShop.FruitStorage_DB.FruitStorage;
 import myFruitShop.model.Fruit;
 import myFruitShop.model.OperationsDto;
 

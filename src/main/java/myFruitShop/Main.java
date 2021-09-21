@@ -3,7 +3,7 @@ package myFruitShop;
 import myFruitShop.Service.ReadInfo;
 import myFruitShop.Service.ReadInfoImpl1;
 import myFruitShop.Parser.DtoCreator;
-import myFruitShop.Parser.FruitRecordToDto2;
+import myFruitShop.Parser.DtoCreationImpl;
 import myFruitShop.Service.FruitShopService;
 import myFruitShop.Service.FruitShopServiceImpl;
 import myFruitShop.Service.OperationStrategy;
@@ -45,7 +45,7 @@ public class Main {
         } catch (InvalidDataException e) {
             throw new RuntimeException("Invalid input data", e);
         }
-        DtoCreator dataParser = new FruitRecordToDto2();
+        DtoCreator dataParser = new DtoCreationImpl();
         List<OperationsDto> operationsDataInDto = dataParser.toDtoDataFormatter(validFruitShopData);       // dto data
 
         OperationStrategy storageModifier = new OperationStrategyImpl(operationHandlerMap);

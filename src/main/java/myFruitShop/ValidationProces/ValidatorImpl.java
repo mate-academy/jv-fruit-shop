@@ -15,6 +15,7 @@ public class ValidatorImpl implements Validator {
             if (line.split(",").length != 3) {
                 throw new InvalidDataException("Invalid Data. Not enough information about operation and details");
             }
+
             if (line.split(",")[2] == null || line.split(",")[2].isEmpty() || line.split(",")[2].contains("-")) {
                 throw new InvalidDataException("Invalid Data. Not Enough information about amount, or it`s invalid");
             }

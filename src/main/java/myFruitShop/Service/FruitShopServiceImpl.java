@@ -1,10 +1,5 @@
 package myFruitShop.Service;
 
-import myFruitShop.Parser.DtoCreator;
-import myFruitShop.ReportGenerator;
-import myFruitShop.ReportGeneratorImpl;
-import myFruitShop.ReportSupplier;
-import myFruitShop.RepotrToFIleConverter;
 import myFruitShop.model.OperationsDto;
 
 import java.io.File;
@@ -19,7 +14,7 @@ public class FruitShopServiceImpl implements  FruitShopService{
 
    public void fruitStorageModifier(List<OperationsDto> dataInDto) {
         for (OperationsDto infoLine : dataInDto) {
-            operationStrategy.get(infoLine.getOperationType()).applyOperation(infoLine);      //applying some logic to infoLone.
+            operationStrategy.get(infoLine.getOperationType()).applyOperation(infoLine);      //applying logic to infoLone.
         }                                                                                     // after loop, storage will be changed
     }
    public File fileReportBuilder(String reportFileName) {

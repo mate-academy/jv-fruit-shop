@@ -1,4 +1,4 @@
-package myFruitShop.FruitStorage;
+package myFruitShop.FruitStorage_DB;
 
 import myFruitShop.model.Fruit;
 

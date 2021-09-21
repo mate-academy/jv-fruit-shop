@@ -1,12 +1,16 @@
-package myFruitShop;
+package myFruitShop.Service;
+
+import myFruitShop.Service.ReportGenerator;
+import myFruitShop.Service.ReportSupplier;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class RepotrToFIleConverter implements ReportSupplier{
-   public File writeToFile(ReportGenerator stringReportGenerator,String reportFileName) {
+public class RepotrToFIleConverter implements ReportSupplier {
+
+   public File writeToFile(ReportGenerator stringReportGenerator, String reportFileName) {
        String report = stringReportGenerator.generateReport();
        File dailyReport = new File(reportFileName);
        try {

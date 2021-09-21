@@ -1,4 +1,6 @@
-package myFruitShop;
+package myFruitShop.Service;
+
+import myFruitShop.Service.ReportGenerator;
 
 import java.io.File;
 
