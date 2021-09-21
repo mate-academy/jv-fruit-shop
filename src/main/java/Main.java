@@ -1,9 +1,11 @@
 import java.util.List;
 import service.FileWriterService;
+import service.FormReport;
 import service.InputDataValidator;
 import service.Parse;
 import service.impl.FileReaderServiceImpl;
 import service.impl.FileWriterServiceImpl;
+import service.impl.FormReportImpl;
 import service.impl.InputDataValidatorImpl;
 import service.impl.ParseImpl;
 
@@ -22,6 +24,7 @@ public class Main {
         parse.parseList(strings);
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(OUTPUT_FILE_NAME);
+        FormReport formReport = new FormReportImpl();
+        fileWriterService.writeToFile(formReport.reportFromStorage(), OUTPUT_FILE_NAME);
     }
 }
