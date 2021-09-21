@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FruitShopDaoImpl implements FruitShopDaoCsv {
+public class FruitShopImpl implements FruitShopCsv {
     @Override
     public List<String> readFile(String fileName) {
         try {

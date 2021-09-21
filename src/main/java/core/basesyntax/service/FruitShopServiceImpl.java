@@ -8,12 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
+    private static final String FILE_NAME = "src/main/resources/report.csv";
     private static final String COLUMNS_TITLE = "fruit,quantity";
     private static final String SEPARATOR = ",";
     private static Map<Fruit, Integer> result;
     private final OperationTypeStrategy operationTypeStrategy;
-    private final FruitShopDaoImpl fruitShopDao = new FruitShopDaoImpl();
-    private String fileName = "src/main/resources/report.csv";
+    private final FruitShopImpl fruitShopDao = new FruitShopImpl();
 
     public FruitShopServiceImpl(OperationTypeStrategy operationTypeStrategy) {
         this.operationTypeStrategy = operationTypeStrategy;
@@ -29,7 +29,7 @@ public class FruitShopServiceImpl implements FruitShopService {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        fruitShopDao.writeToFile(fileName, report.toString());
+        fruitShopDao.writeToFile(FILE_NAME, report.toString());
     }
 
     @Override

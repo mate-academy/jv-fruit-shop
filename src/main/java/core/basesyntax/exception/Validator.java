@@ -1,5 +1,7 @@
 package core.basesyntax.exception;
 
+import java.util.List;
+
 public interface Validator {
-    boolean checkFile(String[] fields, String line);
+    boolean checkFile(List<String> readFile);
 }

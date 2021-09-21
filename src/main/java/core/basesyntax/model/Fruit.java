@@ -24,10 +24,7 @@ public class Fruit {
 
     @Override
     public boolean equals(Object comparedFruit) {
-        if (this == comparedFruit) {
-            return true;
-        }
-        if (comparedFruit == null) {
+        if (comparedFruit == null || getClass() != comparedFruit.getClass()) {
             return false;
         }
         Fruit fruit = (Fruit) comparedFruit;

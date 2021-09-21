@@ -17,6 +17,7 @@ public class FruitShopDataParserImpl implements FruitShopDataParser {
     @Override
     public List<TransactionDto> parse(List<String> readFile) {
         readFile.remove(WORDS_IN_TITLE);
+        validation.checkFile(readFile);
         return readFile.stream()
                 .map(this::getFromCsvRow)
                 .collect(Collectors.toList());
@@ -25,7 +26,6 @@ public class FruitShopDataParserImpl implements FruitShopDataParser {
     @Override
     public TransactionDto getFromCsvRow(String line) {
         String[] fields = line.split(",");
-        validation.checkFile(fields, line);
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setOperationType(OperationType.getOperationType(fields[TYPE]));
         transactionDto.setFruitName(new Fruit(fields[FRUITS_NAME]));

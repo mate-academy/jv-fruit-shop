@@ -33,10 +33,7 @@ public class TransactionDto {
 
     @Override
     public boolean equals(Object transaction) {
-        if (this == transaction) {
-            return true;
-        }
-        if (transaction == null) {
+        if (transaction == null || getClass() != transaction.getClass()) {
             return false;
         }
         TransactionDto transactionDto = (TransactionDto) transaction;
