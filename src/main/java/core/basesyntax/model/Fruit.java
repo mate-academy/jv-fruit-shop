@@ -19,9 +19,7 @@ public class Fruit {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         Fruit fruit = (Fruit) o;
-
         return name != null ? name.equals(fruit.name) : fruit.name == null;
     }
 
