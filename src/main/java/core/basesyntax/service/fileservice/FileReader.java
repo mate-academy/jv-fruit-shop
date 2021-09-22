@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadFromFile {
+public class FileReader {
     public List<String> read(String file) {
         try {
             return Files.readAllLines(Path.of(file));

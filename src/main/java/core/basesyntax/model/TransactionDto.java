@@ -1,6 +1,8 @@
-package core.basesyntax.service;
+package core.basesyntax.model;
 
+import core.basesyntax.service.Validator;
 import core.basesyntax.service.operationtypes.OperationStrategy;
+import core.basesyntax.service.operationtypes.Operations;
 import java.util.List;
 
 public class TransactionDto {
@@ -13,9 +15,9 @@ public class TransactionDto {
         Validator validator = new Validator();
         for (int i = 1; i < fruitsData.size(); i++) {
             String[] fruitInfo = fruitsData.get(i).split(SEPARATOR);
-            validator.dataValidate(fruitInfo);
-            strategy.get(fruitInfo[OPERATION_TYPE])
-                    .makeOperation(fruitInfo[FRUIT_TYPE], Integer.parseInt(fruitInfo[AMOUNT]));
+            validator.validate(fruitInfo);
+            strategy.get(Operations.get(fruitInfo[OPERATION_TYPE]))
+                    .apply(fruitInfo[FRUIT_TYPE], Integer.parseInt(fruitInfo[AMOUNT]));
         }
     }
 }

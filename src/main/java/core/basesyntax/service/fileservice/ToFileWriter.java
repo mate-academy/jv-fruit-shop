@@ -1,13 +1,13 @@
 package core.basesyntax.service.fileservice;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteToFile {
+// Can't rename this this class to FileWriter. Conflict with io.FileWriter
+public class ToFileWriter {
     public void writeToCsv(String report, String filename) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filename));
+            BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(filename));
             bufferedWriter.write(report);
             bufferedWriter.close();
         } catch (IOException e) {
