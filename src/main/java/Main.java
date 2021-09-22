@@ -21,7 +21,6 @@ public class Main {
     public static final String TO_FILE_PATH = "src/main/resources/dailyfruitshop.csv";
 
     public static void main(String[] args) {
-
         FileService fileService = new FileServiceImpl();
         FruitRecordParser fruitRecordParser = new FruitRecordParserImpl();
         FruitRecordDao fruitRecordDao = new FruitRecordDaoImpl();

@@ -3,7 +3,7 @@ package core.basesyntax.service.operation;
 import core.basesyntax.dao.FruitRecordDao;
 import core.basesyntax.dao.FruitRecordDaoImpl;
 import core.basesyntax.model.FruitRecord;
-import core.basesyntax.service.DateErrorException;
+import core.basesyntax.service.InputDataErrorException;
 import java.util.Map;
 
 public class PurchaseOperationHandlerImpl implements OperationHandler {
@@ -13,7 +13,7 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
         for (Map.Entry<String, Integer> e : fruitRecordDao.getFruitMap().entrySet()) {
             if (e.getKey().equals(fruitRecord.getFruitName())) {
                 if (e.getValue() < fruitRecord.getAmount()) {
-                    throw new DateErrorException("Can't purchase as stock is low");
+                    throw new InputDataErrorException("Can't purchase as stock is low");
                 }
                 e.setValue(e.getValue() - fruitRecord.getAmount());
             }

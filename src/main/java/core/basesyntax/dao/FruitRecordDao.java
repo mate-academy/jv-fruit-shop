@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface FruitRecordDao {
-
     void saveAll(List<FruitRecord> fruitRecord);
 
     FruitRecord get(String fruitName);
