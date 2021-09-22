@@ -1,10 +1,10 @@
 package service.activities;
 
 import db.Storage;
-import javax.management.openmbean.InvalidKeyException;
 import fruitrecord.FruitRecord;
+import javax.management.openmbean.InvalidKeyException;
 
-public class Purchase implements ActivityHandler {
+public class PurchaseHandler implements ActivityHandler {
     @Override
     public void apply(FruitRecord record) {
         Integer currentBalance;
@@ -14,8 +14,7 @@ public class Purchase implements ActivityHandler {
             throw new InvalidKeyException("Invalid key, " + record.getFruit());
         }
         if (currentBalance > record.getAmount()) {
-            Integer newCurrentBalance = currentBalance - record.getAmount();
-            Storage.fruitsQuantity.replace(record.getFruit(), newCurrentBalance);
+            Storage.fruitsQuantity.merge(record.getFruit(),record.getAmount(),(Integer::sum));
         } else {
             throw new RuntimeException("Operation Purchase cannot be performed with this data: "
                     + record.getAmount());

@@ -1,17 +1,17 @@
 package fruitshop;
 
 import db.Storage;
+import fruitrecord.FruitRecord;
 import java.util.List;
 import service.ActivitiesStrategy;
 import service.FileReader;
 import service.FileReaderImpl;
 import service.FruitRecordToList;
 import service.FruitRecordToListImpl;
+import service.FruitService;
+import service.FruitServiceImpl;
 import service.WriteFile;
 import service.WriteFileImpl;
-import service.WriteRecordsToDB;
-import service.WriteRecordsToDbImpl;
-import fruitrecord.FruitRecord;
 
 public class FruitShopImpl implements FruitShop {
     private ActivitiesStrategy strategy;
@@ -31,8 +31,8 @@ public class FruitShopImpl implements FruitShop {
         FruitRecordToList recordToList = new FruitRecordToListImpl();
         List<FruitRecord> fruitRecordList = recordToList.fruitRecordToList(stringFile);
         Storage.records.addAll(fruitRecordList);
-        WriteRecordsToDB record = new WriteRecordsToDbImpl();
-        record.recordToMap(Storage.records, strategy);
+        FruitService record = new FruitServiceImpl(strategy);
+        record.recordToMap(Storage.records);
         WriteFile writeFile = new WriteFileImpl();
         writeFile.writeWithMapToFile(Storage.fruitsQuantity, reportPath);
         return "Report created!";

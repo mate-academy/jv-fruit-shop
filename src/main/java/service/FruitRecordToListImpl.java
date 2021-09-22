@@ -1,8 +1,8 @@
 package service;
 
+import fruitrecord.FruitRecord;
 import java.util.ArrayList;
 import java.util.List;
-import fruitrecord.FruitRecord;
 import validator.Validator;
 import validator.ValidatorImpl;
 

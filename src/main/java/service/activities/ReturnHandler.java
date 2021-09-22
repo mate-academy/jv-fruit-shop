@@ -3,12 +3,11 @@ package service.activities;
 import db.Storage;
 import fruitrecord.FruitRecord;
 
-public class Return implements ActivityHandler {
+public class ReturnHandler implements ActivityHandler {
     @Override
     public void apply(FruitRecord record) {
         if (Storage.fruitsQuantity.containsKey(record.getFruit())) {
-            Integer newBalance = Storage.fruitsQuantity.get(record.getFruit()) + record.getAmount();
-            Storage.fruitsQuantity.replace(record.getFruit(), newBalance);
+            Storage.fruitsQuantity.merge(record.getFruit(),record.getAmount(),(Integer::sum));
         } else {
             throw new RuntimeException(
                     "Can't return the product because this product has never sold, "
