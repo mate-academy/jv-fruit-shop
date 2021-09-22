@@ -32,7 +32,6 @@ public class ParserImpl implements Parser<List<String>, List<FruitOperationDto>>
                     new Fruit(spliterator[FRUIT_INDEX]),
                     Integer.parseInt(spliterator[QUANTITY_INDEX])));
         }
-
         return fruitOperationDtoList;
     }
 }

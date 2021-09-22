@@ -16,7 +16,6 @@ public class FruitOperationDtoValidator implements Validator {
         if (data.length != MIN_LENGTH) {
             throw new ValidationException("Not enough data: " + value);
         }
-
         if (Integer.parseInt(data[QUANTITY_INDEX]) < 0) {
             throw new ValidationException("Еhe quantity must not be negative: " + value);
         }

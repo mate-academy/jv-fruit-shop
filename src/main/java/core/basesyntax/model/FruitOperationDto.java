@@ -34,5 +34,4 @@ public class FruitOperationDto {
     public void setType(TypeOperation type) {
         this.type = type;
     }
-
 }
