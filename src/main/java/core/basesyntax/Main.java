@@ -14,7 +14,7 @@ import core.basesyntax.implementation.ValidatorImpl;
 import core.basesyntax.implementation.WriterServiceImpl;
 import core.basesyntax.activity.Activities;
 import core.basesyntax.activity.ActivityHandler;
-import core.basesyntax.service.CalculateFruits;
+import core.basesyntax.service.fruitService;
 import core.basesyntax.service.Validator;
 import core.basesyntax.service.WriterService;
 import java.util.HashMap;
@@ -40,8 +40,8 @@ public class Main {
         validator.validateData(recordList);
         FileWriter fileWriter = new FileWriterFileImpl(OUTPUT_FILE);
         WriterService writerService = new WriterServiceImpl(fileWriter);
-        CalculateFruits calculateFruits =
-                new CalculateFruits(recordList, writerService, activityStrategy);
-        calculateFruits.fruitsAmountAfterWorkDay();
+        fruitService fruiTservice =
+                new fruitService(recordList, writerService, activityStrategy);
+        fruiTservice.fruitsAmountAfterWorkDay();
     }
 }
