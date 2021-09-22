@@ -1,6 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.model.TransactionDto;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.FruitShopServiceImpl;
 import core.basesyntax.service.ParserImpl;
 import core.basesyntax.service.ReportCreatorImpl;
 import core.basesyntax.service.files.FileReaderImpl;
@@ -24,15 +26,16 @@ public class Main {
         List<String> informationFromInput = new FileReaderImpl().readFile(INPUT_PATH);
         ValidatorImpl validator = new ValidatorImpl();
         validator.isValid(informationFromInput);
-        List<TransactionDto> parsedInformation = new ParserImpl().parser(informationFromInput);
         Map<TransactionDto.OperationTypes, OperationHendler> strategy = new HashMap<>();
         strategy.put(TransactionDto.OperationTypes.BALANCE, new AdditionHendlerImpl());
         strategy.put(TransactionDto.OperationTypes.PURCHASE, new SubstractionHendlerImpl());
         strategy.put(TransactionDto.OperationTypes.RETURN, new AdditionHendlerImpl());
         strategy.put(TransactionDto.OperationTypes.SUPPLY, new AdditionHendlerImpl());
         OperationsStrategy operationsStrategy = new OperationsStrategyImpl(strategy);
-        List<String> outputInformation =
-                new ReportCreatorImpl(operationsStrategy).createReport(parsedInformation);
+        FruitShopService fruitShopService = new FruitShopServiceImpl(operationsStrategy);
+        List<TransactionDto> parsedInformation = new ParserImpl().parser(informationFromInput);
+        fruitShopService.applyOperationsOnFruitsDto(parsedInformation);
+        List<String> outputInformation = new ReportCreatorImpl().createReport();
         FileWriterWithResults fileWriter = new FileWriterWithResultsImpl();
         fileWriter.writeResultToFile(OUTPUT_PATH, outputInformation);
     }

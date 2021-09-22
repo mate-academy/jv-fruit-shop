@@ -14,12 +14,12 @@ public class ParserImpl implements Parser {
     @Override
     public List<TransactionDto> parser(List<String> infoFromInputFile) {
         for (String line : infoFromInputFile) {
-            String[] splitedLine = line.split(REGEX_FOR_SPLIT);
+            String[] record = line.split(REGEX_FOR_SPLIT);
             parsedInfo.add(new TransactionDto(TransactionDto
                     .OperationTypes
-                    .getType(splitedLine[OPERATION]),
-                    splitedLine[FRUIT],
-                    Integer.parseInt(splitedLine[AMOUNT])));
+                    .getType(record[OPERATION]),
+                    record[FRUIT],
+                    Integer.parseInt(record[AMOUNT])));
         }
         return parsedInfo;
     }
