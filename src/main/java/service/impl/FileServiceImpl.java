@@ -1,25 +1,31 @@
 package service.impl;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
-import model.Fruit;
 import service.FileService;
-import service.Strategy;
 
 public class FileServiceImpl implements FileService {
-    private final Strategy strategy;
-
-    public FileServiceImpl(Strategy strategy) {
-        this.strategy = strategy;
+    @Override
+    public List<String> readFromFile(String filePath) {
+        try {
+            return Files.readAllLines(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("No such filePath " + filePath, e);
+        }
     }
 
     @Override
-    public Map<Fruit, Integer> saveDataToDb(List<TransactionDto> data) {
-        for (TransactionDto transactionDto : data) {
-            Storage.reportMap.put(transactionDto.getFruit(),strategy
-                    .getActivity(transactionDto.getOperationType())
-                    .getFruitAmount(transactionDto,Storage.reportMap));
+    public void writeToReportFile(String informationString, String filePath) {
+        File reportFile = new File(filePath);
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportFile))) {
+            bufferedWriter.write(informationString);
+        } catch (IOException e) {
+            throw new RuntimeException("No such file" + filePath);
         }
-        return Storage.reportMap;
     }
 }
