@@ -1,6 +1,6 @@
 package core.basesyntax.implementation;
 
-import core.basesyntax.file.Writer;
+import core.basesyntax.file.FileWriter;
 import core.basesyntax.service.WriterService;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.Map;
 public class WriterServiceImpl implements WriterService {
     private static final String FIELDS_NAMES = "fruit,quantity";
     private static final String COMA = ",";
-    private final Writer writer;
+    private final FileWriter fileWriter;
 
-    public WriterServiceImpl(Writer writer) {
-        this.writer = writer;
+    public WriterServiceImpl(FileWriter fileWriter) {
+        this.fileWriter = fileWriter;
     }
 
     @Override
@@ -22,6 +22,6 @@ public class WriterServiceImpl implements WriterService {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             resultList.add(entry.getKey() + COMA + entry.getValue());
         }
-        writer.write(resultList);
+        fileWriter.write(resultList);
     }
 }

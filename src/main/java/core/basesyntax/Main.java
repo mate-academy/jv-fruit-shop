@@ -3,8 +3,8 @@ package core.basesyntax;
 import core.basesyntax.activity.ActivityStrategy;
 import core.basesyntax.file.CsvFileReader;
 import core.basesyntax.file.CsvFileReaderImpl;
-import core.basesyntax.file.Writer;
-import core.basesyntax.file.WriterFileImpl;
+import core.basesyntax.file.FileWriter;
+import core.basesyntax.file.FileWriterFileImpl;
 import core.basesyntax.implementation.ActivityStrategyImpl;
 import core.basesyntax.implementation.BalanceActivityHandlerImpl;
 import core.basesyntax.implementation.PurchaseActivityHandlerImpl;
@@ -38,8 +38,8 @@ public class Main {
         List<Record> recordList = recordParser.parseRecords(inputData);
         Validator validator = new ValidatorImpl();
         validator.validateData(recordList);
-        Writer writer = new WriterFileImpl(OUTPUT_FILE);
-        WriterService writerService = new WriterServiceImpl(writer);
+        FileWriter fileWriter = new FileWriterFileImpl(OUTPUT_FILE);
+        WriterService writerService = new WriterServiceImpl(fileWriter);
         CalculateFruits calculateFruits =
                 new CalculateFruits(recordList, writerService, activityStrategy);
         calculateFruits.fruitsAmountAfterWorkDay();
