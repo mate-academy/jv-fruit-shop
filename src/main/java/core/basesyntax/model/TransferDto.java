@@ -1,4 +1,6 @@
-package core.basesyntax.servises;
+package core.basesyntax.model;
+
+import core.basesyntax.servises.OperationType;
 
 import java.util.Objects;
 
