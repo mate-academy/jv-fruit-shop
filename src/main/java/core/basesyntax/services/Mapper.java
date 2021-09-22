@@ -1,4 +1,4 @@
-package core.basesyntax.servises;
+package core.basesyntax.services;
 
 import core.basesyntax.model.TransferDto;
 import java.util.ArrayList;

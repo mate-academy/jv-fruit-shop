@@ -1,12 +1,13 @@
-package core.basesyntax.servises;
+package core.basesyntax.services;
 
 import core.basesyntax.model.TransferDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DataServiseImpl implements DataServise {
+public class DataServiceImpl implements DataService {
     private static final String HEADER = "fruit,quantity";
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<String> report(OperationStrategy operationStrategy,
@@ -17,7 +18,7 @@ public class DataServiseImpl implements DataServise {
         }
         result.add(HEADER);
         for (Map.Entry<String, Integer> entry : storage.entrySet()) {
-            result.add(entry.getKey() + "," + entry.getValue());
+            result.add(entry.getKey() + SEPARATOR + entry.getValue());
         }
         return result;
     }

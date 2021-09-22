@@ -1,21 +1,21 @@
 package core.basesyntax;
 
-import core.basesyntax.dataservises.ReadFromFiles;
-import core.basesyntax.dataservises.Reader;
-import core.basesyntax.dataservises.WriteToFile;
-import core.basesyntax.dataservises.Writer;
+import core.basesyntax.dataservices.ReadFromFiles;
+import core.basesyntax.dataservices.Reader;
+import core.basesyntax.dataservices.WriteToFile;
+import core.basesyntax.dataservices.Writer;
 import core.basesyntax.model.TransferDto;
-import core.basesyntax.operationhanlerservises.BalanceHandler;
-import core.basesyntax.operationhanlerservises.OperationHandler;
-import core.basesyntax.operationhanlerservises.PurchaseHandler;
-import core.basesyntax.operationhanlerservises.ReturnHandler;
-import core.basesyntax.operationhanlerservises.SupplayHandler;
-import core.basesyntax.servises.DataServise;
-import core.basesyntax.servises.DataServiseImpl;
-import core.basesyntax.servises.Mapper;
-import core.basesyntax.servises.OperationStrategy;
-import core.basesyntax.servises.OperationStrategyImpl;
-import core.basesyntax.servises.OperationType;
+import core.basesyntax.operationhanlerservices.BalanceHandler;
+import core.basesyntax.operationhanlerservices.OperationHandler;
+import core.basesyntax.operationhanlerservices.PurchaseHandler;
+import core.basesyntax.operationhanlerservices.ReturnHandler;
+import core.basesyntax.operationhanlerservices.SupplayHandler;
+import core.basesyntax.services.DataService;
+import core.basesyntax.services.DataServiceImpl;
+import core.basesyntax.services.Mapper;
+import core.basesyntax.services.OperationStrategy;
+import core.basesyntax.services.OperationStrategyImpl;
+import core.basesyntax.services.OperationType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +38,8 @@ public class Main {
         Map<String, Integer> storage = new HashMap<>();
         Mapper mapper = new Mapper();
         List<TransferDto> dtos = mapper.apply(reader.read());
-        DataServise dataServise = new DataServiseImpl();
-        writer.write(dataServise.report(operationStrategy, dtos, storage));
+        DataService dataService = new DataServiceImpl();
+        writer.write(dataService.report(operationStrategy, dtos, storage));
     }
 }
 

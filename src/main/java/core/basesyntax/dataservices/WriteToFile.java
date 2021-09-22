@@ -1,4 +1,4 @@
-package core.basesyntax.dataservises;
+package core.basesyntax.dataservices;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

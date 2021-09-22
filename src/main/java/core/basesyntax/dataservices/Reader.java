@@ -1,4 +1,4 @@
-package core.basesyntax.dataservises;
+package core.basesyntax.dataservices;
 
 import java.util.List;
 

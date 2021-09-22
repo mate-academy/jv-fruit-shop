@@ -1,4 +1,4 @@
-package core.basesyntax.operationhanlerservises;
+package core.basesyntax.operationhanlerservices;
 
 import core.basesyntax.model.TransferDto;
 import java.util.Map;

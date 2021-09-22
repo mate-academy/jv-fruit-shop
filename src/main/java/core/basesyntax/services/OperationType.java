@@ -1,4 +1,4 @@
-package core.basesyntax.servises;
+package core.basesyntax.services;
 
 public enum OperationType {
     BALANCE("b"),
