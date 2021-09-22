@@ -2,8 +2,8 @@ package core.basesyntax.services.impl;
 
 import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.services.OperationHandler;
 import core.basesyntax.services.ParserService;
-import core.basesyntax.strategy.Operation;
 
 public class ParserServiceImpl implements ParserService {
     public static final int OPERATION_INDEX = 0;
@@ -14,7 +14,7 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public Transaction parseData(String data) {
         String[] parseData = data.split(COMMA);
-        return new Transaction(Operation.findOperation(parseData[OPERATION_INDEX]),
+        return new Transaction(OperationHandler.findOperation(parseData[OPERATION_INDEX]),
                 new Fruit(parseData[FRUIT]), Integer.parseInt(parseData[QUALITY]));
     }
 }

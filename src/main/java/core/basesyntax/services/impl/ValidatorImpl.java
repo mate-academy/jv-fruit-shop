@@ -1,7 +1,7 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.services.OperationHandler;
 import core.basesyntax.services.Validator;
-import core.basesyntax.strategy.Operation;
 import java.util.List;
 
 public class ValidatorImpl implements Validator {
@@ -31,7 +31,7 @@ public class ValidatorImpl implements Validator {
     }
 
     private boolean checkInputRowData(String[] data) {
-        Operation.findOperation(data[OPERATION]);
+        OperationHandler.findOperation(data[OPERATION]);
         if (data.length != SIZE_TRANSLATION
                 || data[FRUIT_NAME].isBlank()
                 || Integer.parseInt(data[QUANTITY]) < 0
