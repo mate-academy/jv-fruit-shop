@@ -2,6 +2,6 @@ package service.validator;
 
 import exception.ValidationException;
 
-public interface ValidationData<T> {
+public interface DataValidator<T> {
     void validate(T value) throws ValidationException;
 }

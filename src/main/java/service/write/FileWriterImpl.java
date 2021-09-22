@@ -1,14 +1,13 @@
 package service.write;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileWriteServiceImpl implements FileWriteService {
+public class FileWriterImpl implements FileWriter {
 
     @Override
-    public void fileWriter(String data, String filePath) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
+    public void write(String data, String filePath) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(filePath))) {
             bufferedWriter.write(data);
         } catch (IOException e) {
             throw new RuntimeException("Cant write to file" + filePath);

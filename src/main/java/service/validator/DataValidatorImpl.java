@@ -2,7 +2,7 @@ package service.validator;
 
 import exception.ValidationException;
 
-public class ValidationDataImpl implements ValidationData<String> {
+public class DataValidatorImpl implements DataValidator<String> {
     private static final int VALUE_INDEX = 2;
     private static final String CSV_SEPARATOR = ",";
 

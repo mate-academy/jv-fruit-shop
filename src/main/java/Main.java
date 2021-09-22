@@ -1,5 +1,6 @@
 import dao.FruitsDao;
 import dao.FruitsDaoImpl;
+import exception.ValidationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,13 +8,14 @@ import model.Fruit;
 import service.operation.AddOperation;
 import service.operation.Calculator;
 import service.operation.SubtractionOperation;
-import service.read.FileReadImpl;
 import service.read.FileReader;
+import service.read.FileReaderImpl;
 import service.storage.StoreService;
 import service.storage.StoreServiceImpl;
-import service.validator.ValidatorProcess;
-import service.write.FileWriteService;
-import service.write.FileWriteServiceImpl;
+import service.validator.DataValidator;
+import service.validator.DataValidatorImpl;
+import service.write.FileWriter;
+import service.write.FileWriterImpl;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 
@@ -22,10 +24,16 @@ public class Main {
     private static final String OUTPUT_FILE_NAME = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        FileReader fileReader = new FileReadImpl();
+        FileReader fileReader = new FileReaderImpl();
         List<String> fruitRecords = fileReader.read(INPUT_FILE_NAME);
-        ValidatorProcess validatorProcess = new ValidatorProcess();
-        validatorProcess.checkAllList(fruitRecords);
+        DataValidator<String> dataValidator = new DataValidatorImpl();
+        for (String temp : fruitRecords) {
+            try {
+                dataValidator.validate(temp);
+            } catch (ValidationException e) {
+                throw new RuntimeException("Data is not valid" + temp, e);
+            }
+        }
 
         Map<Fruit.OperationType, Calculator> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Fruit.OperationType.BALANCE, new AddOperation());
@@ -38,7 +46,7 @@ public class Main {
         StoreService storeService = new StoreServiceImpl(operationStrategy, fruitsDao);
         storeService.applyToDb(fruitRecords);
         String report = storeService.getDbReport();
-        FileWriteService writeService = new FileWriteServiceImpl();
-        writeService.fileWriter(report, OUTPUT_FILE_NAME);
+        FileWriter writeService = new FileWriterImpl();
+        writeService.write(report, OUTPUT_FILE_NAME);
     }
 }
