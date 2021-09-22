@@ -1,37 +1,35 @@
 package core.basesyntax;
 
-import core.basesyntax.activity.ActivityTypes;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecordParser {
-    private final static int OPERATION_INDEX = 0;
-   List<Record> parseRecords(String records) {
-        String[] recordsAsStringArray = records.split("\n");
+    private static final int OPERATION_INDEX = 0;
+    private static final String COMA = ",";
+    private static final String NEW_LINE = "\n";
+
+    public List<Record> parseRecords(String records) {
+        String[] recordsAsStringArray = records.split(NEW_LINE);
         List<Record> recordList = new ArrayList<>();
         for (String record : recordsAsStringArray) {
             String activity = getActivityFromRecordString(record);
             String fruitName = getFruitNameFromRecordString(record);
             int amount = getAmountFromRecordString(record);
-            Record localRecord = new Record();
-            localRecord.setActivity(activity);
-            localRecord.setFruit(fruitName);
-            localRecord.setAmount(amount);
+            Record localRecord = new Record(activity, fruitName, amount);
             recordList.add(localRecord);
         }
         return recordList;
     }
 
-    String getActivityFromRecordString(String inputRecord) {
-       return String.valueOf(inputRecord.charAt(OPERATION_INDEX));
+    private String getActivityFromRecordString(String inputRecord) {
+        return String.valueOf(inputRecord.charAt(OPERATION_INDEX));
     }
 
-    String getFruitNameFromRecordString(String inputRecord) {
-       return inputRecord.substring(inputRecord.indexOf(",") + 1, inputRecord.lastIndexOf(","));
+    private String getFruitNameFromRecordString(String inputRecord) {
+        return inputRecord.substring(inputRecord.indexOf(COMA) + 1, inputRecord.lastIndexOf(COMA));
     }
 
-    int getAmountFromRecordString(String inputRecord) {
-       return Integer.parseInt(inputRecord.substring(inputRecord.lastIndexOf(",") + 1));
+    private int getAmountFromRecordString(String inputRecord) {
+        return Integer.parseInt(inputRecord.substring(inputRecord.lastIndexOf(COMA) + 1));
     }
 }

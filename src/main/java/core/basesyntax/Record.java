@@ -1,12 +1,15 @@
 package core.basesyntax;
 
-import core.basesyntax.activity.ActivityTypes;
-
 public class Record {
     private String activity;
     private String fruit;
     private int amount;
 
+    public Record(String activity, String fruit, int amount) {
+        this.activity = activity;
+        this.fruit = fruit;
+        this.amount = amount;
+    }
 
     public void setActivity(String activity) {
         this.activity = activity;
