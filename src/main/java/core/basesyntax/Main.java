@@ -37,7 +37,7 @@ public class Main {
         RecordParser recordParser = new RecordParser();
         List<Record> recordList = recordParser.parseRecords(inputData);
         Validator validator = new ValidatorImpl();
-        validator.validateData(recordList);
+        validator.validate(recordList);
         FileWriter fileWriter = new FileWriterFileImpl(OUTPUT_FILE);
         WriterService writerService = new WriterServiceImpl(fileWriter);
         fruitService fruiTservice =

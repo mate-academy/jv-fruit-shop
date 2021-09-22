@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ValidatorImpl implements Validator {
     @Override
-    public void validateData(List<Record> recordsList) {
+    public void validate(List<Record> recordsList) {
         for (Record record : recordsList) {
             if (record.getActivity() == null
                     || record.getFruit() == null

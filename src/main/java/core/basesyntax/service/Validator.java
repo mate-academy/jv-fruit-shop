@@ -5,5 +5,5 @@ import core.basesyntax.exceptions.ValidationException;
 import java.util.List;
 
 public interface Validator {
-    void validateData(List<Record> recordsList) throws ValidationException;
+    void validate(List<Record> recordsList) throws ValidationException;
 }
