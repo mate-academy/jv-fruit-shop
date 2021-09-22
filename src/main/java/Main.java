@@ -22,6 +22,6 @@ public class Main {
         String pathFrom = "src/main/resources/filesFruitShop.csv";
         String pathTo = "src/main/resources/report_fruit_shop.csv";
         ReportService reportService = new ReportServiceImpl(operationStrategy);
-        reportService.createReport(pathFrom, pathTo);
+        reportService.getReport(pathFrom, pathTo);
     }
 }

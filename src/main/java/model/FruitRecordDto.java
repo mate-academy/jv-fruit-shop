@@ -2,7 +2,7 @@ package model;
 
 public class FruitRecordDto {
     private Activities type;
-    private String nameGoods;
+    private String fruit;
     private int amount;
 
     public FruitRecordDto() {
@@ -16,12 +16,12 @@ public class FruitRecordDto {
         this.type = type;
     }
 
-    public String getNameGoods() {
-        return nameGoods;
+    public String getFruit() {
+        return fruit;
     }
 
-    public void setNameGoods(String nameGoods) {
-        this.nameGoods = nameGoods;
+    public void setFruit(String fruit) {
+        this.fruit = fruit;
     }
 
     public int getAmount() {

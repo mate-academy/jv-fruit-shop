@@ -3,7 +3,7 @@ package service.type.service;
 public class TypeHandlerBalance implements TypeHandler {
 
     @Override
-    public int getType(int amount) {
+    public int getType(Integer amount, Integer result) {
         return amount;
     }
 }

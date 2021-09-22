@@ -2,7 +2,7 @@ package service.type.service;
 
 public class TypeHandlerPurchase implements TypeHandler {
     @Override
-    public int getType(int amount) {
-        return amount * -1;
+    public int getType(Integer amount, Integer result) {
+        return result - amount;
     }
 }

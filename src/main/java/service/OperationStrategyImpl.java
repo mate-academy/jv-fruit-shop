@@ -12,7 +12,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public TypeHandler get(FruitRecordDto.Activities type) {
+    public TypeHandler getHandler(FruitRecordDto.Activities type) {
         return mapTypeHandler.get(type);
     }
 }

@@ -1,8 +1,7 @@
 package service;
 
 import bd.Storage;
-import dao.OperationDaoUseFileImpl;
-import model.FruitRecordDto;
+import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private OperationStrategy operationStrategy;
@@ -12,25 +11,20 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void createReport(String pathFrom, String pathTo) {
-        SourceHandler sourceHandler = new SourceHandlerFileCsv();
-        sourceHandler.readInputData(pathFrom);
-        String dataForWrite = makerReport();
-        sourceHandler.writOutputData(dataForWrite, pathTo);
+    public void getReport(String pathFrom, String pathTo) {
+        new FileReaderImpl().read(pathFrom);
+        new FruitShopServiceImpl().transfer(operationStrategy);
+        String dataForWrite = createReport();
+        new FileWriterImpl().write(dataForWrite, pathTo);
     }
 
-    private String makerReport() {
+    private String createReport() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (String tempFotName : Storage.setOfName) {
-            int result = 0;
-            stringBuilder.append(tempFotName).append(",");
-            for (FruitRecordDto tempForType :
-                    new OperationDaoUseFileImpl().getByNameGoods(tempFotName)) {
-                result += operationStrategy.get(tempForType.getType())
-                        .getType(tempForType.getAmount());
-            }
-            stringBuilder.append(result).append(System.lineSeparator());
+        for (Map.Entry<String, Integer> tempEntry : Storage.mapReport.entrySet()) {
+            stringBuilder.append(tempEntry.getKey())
+                    .append(",").append(tempEntry.getValue())
+                    .append(System.lineSeparator());
         }
-        return new String(stringBuilder);
+        return stringBuilder.toString();
     }
 }

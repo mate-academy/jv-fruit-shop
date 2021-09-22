@@ -1,5 +1,5 @@
 package service;
 
 public interface ReportService {
-    void createReport(String pathFrom, String pathTo);
+    void getReport(String pathFrom, String pathTo);
 }
