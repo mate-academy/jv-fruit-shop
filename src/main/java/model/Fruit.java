@@ -1,4 +1,4 @@
-package service.impl;
+package model;
 
 import java.util.Objects;
 

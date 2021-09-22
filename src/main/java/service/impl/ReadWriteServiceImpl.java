@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import service.FileService;
+import service.ReadWriteService;
 
-public class OsFileServiceImpl implements FileService {
+public class ReadWriteServiceImpl implements ReadWriteService {
     @Override
     public List<String> readFromFile(String filePath) {
         try {

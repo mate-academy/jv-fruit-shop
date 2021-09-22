@@ -4,19 +4,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import service.FileService;
+import service.Operation;
+import service.OperationHandler;
+import service.ReadWriteService;
 import service.ReportService;
-import service.StoreActivities;
 import service.Strategy;
+import service.TransactionDtoParse;
 import service.Validator;
-import service.impl.Balance;
-import service.impl.OsFileServiceImpl;
-import service.impl.Purchase;
+import service.impl.BalanceOperation;
+import service.impl.FileServiceImpl;
+import service.impl.PurchaseOperation;
+import service.impl.ReadWriteServiceImpl;
 import service.impl.ReportServiceImpl;
-import service.impl.Return;
-import service.impl.Storage;
+import service.impl.ReturnOperation;
 import service.impl.StrategyImpl;
-import service.impl.Supply;
-import service.impl.TransactionDataImpl;
+import service.impl.SupplyOperation;
+import service.impl.TransactionDto;
+import service.impl.TransactionDtoParseImpl;
 import service.impl.ValidatorImpl;
 
 public class Main {
@@ -24,18 +28,20 @@ public class Main {
     private static final String REPORT_FILE_PATH = "src/main/resources/reportFile";
 
     public static void main(String[] args) {
-        Map<String, StoreActivities> stringActivitiesMap = new HashMap<>();
-        stringActivitiesMap.put("b", new Balance());
-        stringActivitiesMap.put("p", new Purchase());
-        stringActivitiesMap.put("r", new Return());
-        stringActivitiesMap.put("s", new Supply());
-        FileService fileService = new OsFileServiceImpl();
-        Strategy strategy = new StrategyImpl(stringActivitiesMap);
-        Validator validation = new ValidatorImpl();
+        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.BALANCE.getOperation(), new BalanceOperation());
+        operationHandlerMap.put(Operation.PURCHASE.getOperation(), new PurchaseOperation());
+        operationHandlerMap.put(Operation.RETURN.getOperation(), new ReturnOperation());
+        operationHandlerMap.put(Operation.SUPPLY.getOperation(), new SupplyOperation());
+        ReadWriteService fileService = new ReadWriteServiceImpl();
+        Strategy strategy = new StrategyImpl(operationHandlerMap);
+        Validator validator = new ValidatorImpl();
         List<String> inputValues = fileService.readFromFile(INPUT_FILE_PATH);
-        service.TransactionData transactionData = new TransactionDataImpl(validation, strategy);
-        transactionData.parseDataToMap(inputValues, Storage.reportMap);
+        TransactionDtoParse transactionDtoParse = new TransactionDtoParseImpl(validator);
+        List<TransactionDto> parsedData = transactionDtoParse.parseData(inputValues);
+        FileService transactionData = new FileServiceImpl(strategy);
+        transactionData.saveDataToDb(parsedData);
         ReportService valueReport = new ReportServiceImpl();
-        fileService.writeToReportFile(valueReport.getReport(Storage.reportMap), REPORT_FILE_PATH);
+        fileService.writeToReportFile(valueReport.getReport(), REPORT_FILE_PATH);
     }
 }

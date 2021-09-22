@@ -1,5 +1,5 @@
 package service;
 
 public interface Strategy {
-    StoreActivities getActivity(String storeActivityType);
+    OperationHandler getActivity(String storeActivityType);
 }
