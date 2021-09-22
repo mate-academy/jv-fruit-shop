@@ -1,14 +1,15 @@
 package service.activities;
 
 import db.Storage;
+import service.fruitrecord.FruitRecord;
 
-public class Balance implements Activities {
+public class Balance implements ActivityHandler {
     @Override
-    public void setBalance(String productName, Integer productBalance) {
-        if (Storage.storage.containsKey(productName)) {
-            Storage.storage.replace(productName, productBalance);
+    public void apply(FruitRecord record) {
+        if (Storage.fruitsQuantity.containsKey(record.getFruit())) {
+            Storage.fruitsQuantity.replace(record.getFruit(), record.getAmount());
         } else {
-            Storage.storage.put(productName, productBalance);
+            Storage.fruitsQuantity.put(record.getFruit(), record.getAmount());
         }
     }
 }

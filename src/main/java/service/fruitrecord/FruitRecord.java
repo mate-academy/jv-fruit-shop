@@ -11,7 +11,6 @@ public class FruitRecord {
     private int amount;
 
     public FruitRecord(String[] fruitRecordData) {
-
         TypeOfActivities activities = TypeOfActivities.BALANCE;
         this.operationType = activities.getActivities(fruitRecordData[ACTIVITIES_INDEX]);
         this.fruit = fruitRecordData[FRUIT_NAME_INDEX];
@@ -29,5 +28,4 @@ public class FruitRecord {
     public int getAmount() {
         return amount;
     }
-
 }

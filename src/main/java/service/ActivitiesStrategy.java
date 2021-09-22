@@ -1,8 +1,8 @@
 package service;
 
-import service.activities.Activities;
+import service.activities.ActivityHandler;
 import service.activities.TypeOfActivities;
 
 public interface ActivitiesStrategy {
-    Activities get(TypeOfActivities type);
+    ActivityHandler get(TypeOfActivities type);
 }
