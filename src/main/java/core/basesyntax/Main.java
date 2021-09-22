@@ -23,7 +23,6 @@ import core.basesyntax.service.operationstrategy.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Main {
     private static final String INPUT_FILE_CSV = "src/main/resources/inputFile.csv";

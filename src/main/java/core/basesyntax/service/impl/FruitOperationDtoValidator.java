@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.ValidationException;
 import core.basesyntax.service.Validator;
-
 import java.util.List;
 
 public class FruitOperationDtoValidator implements Validator<String> {
@@ -12,7 +11,8 @@ public class FruitOperationDtoValidator implements Validator<String> {
     public void validate(List<String> dataFromFile) throws ValidationException {
         for (String value : dataFromFile) {
             if (value == null) {
-                throw new ValidationException("FruitOperationDto hasn't data. String value is null");
+                throw new ValidationException("FruitOperationDto hasn't data."
+                        + " String value is null");
             }
             String[] data = value.split(",");
 
