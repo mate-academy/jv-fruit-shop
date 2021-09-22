@@ -1,19 +1,19 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.ActivitiesType;
-import core.basesyntax.service.activityhandler.ActivityTypeHandler;
+import core.basesyntax.service.activityhandler.ActivityHandler;
 import java.util.Map;
 
 public class ActivityTypeStrategyImpl implements ActivityTypeStrategy {
-    private Map<ActivitiesType, ActivityTypeHandler> activityTypesHandlerMap;
+    private Map<ActivitiesType, ActivityHandler> activityTypesHandlerMap;
 
-    public ActivityTypeStrategyImpl(Map<ActivitiesType, ActivityTypeHandler>
+    public ActivityTypeStrategyImpl(Map<ActivitiesType, ActivityHandler>
                                             activityTypesHandlerMap) {
         this.activityTypesHandlerMap = activityTypesHandlerMap;
     }
 
     @Override
-    public ActivityTypeHandler get(ActivitiesType activitiesType) {
+    public ActivityHandler get(ActivitiesType activitiesType) {
         return activityTypesHandlerMap.get(activitiesType);
     }
 }

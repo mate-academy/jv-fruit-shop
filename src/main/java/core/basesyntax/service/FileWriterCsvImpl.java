@@ -1,34 +1,21 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 import java.util.Map;
 
-public class ActivitiesDaoCsvImpl implements ActivitiesDao {
-
+public class FileWriterCsvImpl implements FileWriterCsv {
     private static final String FRUIT = "fruit";
     private static final String QUANTITY = "quantity";
-    private static final String REGEX = ",";
-
-    @Override
-    public List<String> getActivities(String pathToFile) {
-        try {
-            return Files.readAllLines(Path.of(pathToFile));
-        } catch (IOException e) {
-            throw new RuntimeException("can't read from file " + pathToFile, e);
-        }
-    }
+    private static final String SPLITTER = ",";
 
     @Override
     public void writeReportInFile(String pathToFile, Map<String, Integer> report) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathToFile))) {
-            bufferedWriter.write(FRUIT + REGEX + QUANTITY + System.lineSeparator());
+            bufferedWriter.write(FRUIT + SPLITTER + QUANTITY + System.lineSeparator());
             for (Map.Entry<String, Integer> entry : report.entrySet()) {
-                bufferedWriter.write(entry.getKey() + REGEX
+                bufferedWriter.write(entry.getKey() + SPLITTER
                         + entry.getValue() + System.lineSeparator());
             }
         } catch (IOException e) {

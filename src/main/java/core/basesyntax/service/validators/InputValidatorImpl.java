@@ -1,6 +1,6 @@
 package core.basesyntax.service.validators;
 
-import core.basesyntax.exceptions.InputException;
+import core.basesyntax.exceptions.InvalidInputException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,10 +12,10 @@ public class InputValidatorImpl implements InputValidator {
     private static final String TYPE = "type";
     private static final String FRUIT = "fruit";
     private static final String QUANTITY = "quantity";
-    private static final String REGEX = ",";
+    private static final String SPLITTER = ",";
 
     @Override
-    public void validate(List<String> data) throws InputException {
+    public void validate(List<String> data) throws InvalidInputException {
         String head = data.get(HEAD_STRING);
         headValidation(head);
         List<String> dataToValidate = new ArrayList<>(List.copyOf(data));
@@ -25,32 +25,32 @@ public class InputValidatorImpl implements InputValidator {
         }
     }
 
-    private void headValidation(String head) throws InputException {
+    private void headValidation(String head) throws InvalidInputException {
         String[] headElements = baseValidationAndSplitter(head);
         if (!TYPE.equals(headElements[ACTIVITY_TYPE_INDEX])
                 || !FRUIT.equals(headElements[FRUIT_INDEX])
                 || !QUANTITY.equals(headElements[AMOUNT_INDEX])) {
-            throw new InputException("input head is invalid");
+            throw new InvalidInputException("input head is invalid");
         }
     }
 
-    private void activityValidation(String activity) throws InputException {
+    private void activityValidation(String activity) throws InvalidInputException {
         String[] activityElements = baseValidationAndSplitter(activity);
         if (activityElements[ACTIVITY_TYPE_INDEX].isEmpty()
                 || activityElements[FRUIT_INDEX].isEmpty()
                 || activityElements[AMOUNT_INDEX].isEmpty()
                 || Integer.parseInt(activityElements[AMOUNT_INDEX]) < 0) {
-            throw new InputException("activity parameters were invalid");
+            throw new InvalidInputException("activity parameters were invalid");
         }
     }
 
-    private String[] baseValidationAndSplitter(String dataLine) throws InputException {
+    private String[] baseValidationAndSplitter(String dataLine) throws InvalidInputException {
         if (dataLine == null) {
-            throw new InputException("dataLine was null!");
+            throw new InvalidInputException("dataLine was null!");
         }
         String[] lineElements;
-        if ((lineElements = dataLine.split(REGEX)).length != 3) {
-            throw new InputException("invalid number of elements in dataLine");
+        if ((lineElements = dataLine.split(SPLITTER)).length != 3) {
+            throw new InvalidInputException("invalid number of elements in dataLine");
         }
         return lineElements;
     }

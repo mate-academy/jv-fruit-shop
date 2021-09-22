@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.ActivitiesType;
-import core.basesyntax.service.activityhandler.ActivityTypeHandler;
+import core.basesyntax.service.activityhandler.ActivityHandler;
 
 public interface ActivityTypeStrategy {
-    ActivityTypeHandler get(ActivitiesType activitiesType);
+    ActivityHandler get(ActivitiesType activitiesType);
 }
