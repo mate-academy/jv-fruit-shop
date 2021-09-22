@@ -1,5 +1,7 @@
 package operationtype;
 
+import model.FruitRecord;
+
 public interface OperationHandler {
-    int apply(int balance, int change);
+    void apply(FruitRecord fruitRecord);
 }

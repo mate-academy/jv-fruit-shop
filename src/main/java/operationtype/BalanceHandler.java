@@ -1,9 +1,13 @@
 package operationtype;
 
+import static db.Storage.fruitValueMap;
+
+import model.FruitRecord;
+
 public class BalanceHandler implements OperationHandler {
 
     @Override
-    public int apply(int balance, int change) {
-        return change;
+    public void apply(FruitRecord fruitRecord) {
+        fruitValueMap.put(fruitRecord.getFruit(), fruitRecord.getAmount());
     }
 }

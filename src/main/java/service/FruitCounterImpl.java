@@ -1,8 +1,6 @@
 package service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import model.FruitRecord;
 
 public class FruitCounterImpl implements FruitCounter {
@@ -13,23 +11,11 @@ public class FruitCounterImpl implements FruitCounter {
     }
 
     @Override
-    public Map<String, Integer> countFruit(List<FruitRecord> recordList) {
-        Map<String, Integer> fruitValueMap = new HashMap<>();
+    public void countFruit(List<FruitRecord> fruitRecordList) {
         String operationType;
-        int fruitBalance;
-        int amount;
-        for (FruitRecord fruitRecord : recordList) {
+        for (FruitRecord fruitRecord : fruitRecordList) {
             operationType = fruitRecord.getOperationType();
-            amount = fruitRecord.getAmount();
-            if (!fruitValueMap.containsKey(fruitRecord.getFruit())) {
-                fruitValueMap.put(fruitRecord.getFruit(), amount);
-            } else {
-                fruitBalance = fruitValueMap.get(fruitRecord.getFruit());
-                fruitBalance = operationStrategy.getOperation(operationType)
-                        .apply(fruitBalance, amount);
-                fruitValueMap.put(fruitRecord.getFruit(), fruitBalance);
-            }
+            operationStrategy.getOperation(operationType).apply(fruitRecord);
         }
-        return fruitValueMap;
     }
 }

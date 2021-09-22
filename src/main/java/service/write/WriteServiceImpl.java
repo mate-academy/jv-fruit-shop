@@ -1,5 +1,7 @@
 package service.write;
 
+import static db.Storage.fruitValueMap;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,7 +12,7 @@ import java.util.Set;
 public class WriteServiceImpl implements WriteService {
 
     @Override
-    public String prepareToWrite(Map<String, Integer> fruitValueMap) {
+    public String prepareToWrite() {
         StringBuilder result = new StringBuilder();
         result.append("fruit,quantity");
         Set<Map.Entry<String, Integer>> entries = fruitValueMap.entrySet();
