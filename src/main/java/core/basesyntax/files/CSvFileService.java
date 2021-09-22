@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class CSvFileService implements FileService {
     @Override
-    public String readeDataFromFileSource(String absoluteFilePath) {
+    public String readData(String absoluteFilePath) {
         StringBuilder sourceDataInString = new StringBuilder();
         File fileToRead = new File(absoluteFilePath);
         int data;
@@ -31,7 +31,7 @@ public class CSvFileService implements FileService {
     }
 
     @Override
-    public void writeReportToFile(String dataToWrite, String absoluteFilePath) {
+    public void writeData(String dataToWrite, String absoluteFilePath) {
         File fileToWrite = new File(absoluteFilePath);
         try {
             if (!fileToWrite.exists()) {

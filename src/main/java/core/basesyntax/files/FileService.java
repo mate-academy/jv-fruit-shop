@@ -1,7 +1,7 @@
 package core.basesyntax.files;
 
 public interface FileService {
-    String readeDataFromFileSource(String absolutePath);
+    String readData(String absolutePath);
 
-    void writeReportToFile(String listOfFruits, String absoluteFilePath);
+    void writeData(String listOfFruits, String absoluteFilePath);
 }

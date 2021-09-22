@@ -2,7 +2,7 @@ package core.basesyntax.dto;
 
 import java.util.Set;
 
-public class CSvFruitRecordsValidator implements FruitRecordsValidator {
+public class CsvFruitRecordsValidator implements FruitRecordsValidator {
     private static final String RECORD_SEPARATOR = "\r\n";
     private static final String RECORD_PATTERN = "(((.+)\r\n)|((.+)\\z))+";
     private static final String RECORD_FORM_PATTER = "\\w,(\\w+),(\\d+)";

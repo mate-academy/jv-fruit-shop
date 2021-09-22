@@ -1,6 +1,6 @@
 package core.basesyntax.dto;
 
-import core.basesyntax.dao.DAoService;
+import core.basesyntax.dao.FruitDaoService;
 import core.basesyntax.dto.handlers.OperationsHandler;
 import core.basesyntax.models.Fruit;
 import core.basesyntax.models.FruitRecord;
@@ -20,9 +20,9 @@ public class Operator {
         this.typesOfOperations = typesOfOperations;
     }
 
-    public Set<Fruit> doAllOperation(List<FruitRecord> recordList, DAoService storage) {
+    public Set<Fruit> doAllOperation(List<FruitRecord> recordList, FruitDaoService storage) {
         recordList
                 .forEach(e -> typesOfOperations.get(e.getTypeOfOperation()).apply(storage, e));
-        return storage.getWholeStorageCopy();
+        return storage.getAll();
     }
 }

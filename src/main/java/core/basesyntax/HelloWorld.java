@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.DAoService;
-import core.basesyntax.dao.DAoServiceImp;
-import core.basesyntax.dto.CSvFruitRecordsValidator;
-import core.basesyntax.dto.CSvParseService;
+import core.basesyntax.dao.FruitDaoService;
+import core.basesyntax.dao.FruitDaoServiceImp;
+import core.basesyntax.dto.CsvFruitRecordsValidator;
+import core.basesyntax.dto.FruitRecordParser;
 import core.basesyntax.dto.FruitRecordsValidator;
 import core.basesyntax.dto.Operator;
 import core.basesyntax.dto.ParseService;
@@ -20,29 +20,27 @@ import java.util.List;
 import java.util.Map;
 
 public class HelloWorld {
-    private static final String destFile = "D:\\Programming\\MATE_ACCADEMY\\"
-            + "\\jv-fruit-shop\\src\\main"
+    private static final String destFile = "src\\main"
             + "\\java\\core\\basesyntax\\source\\storage.csv";
-    private static final String sourceFile = "D:\\Programming\\MATE_ACCADEMY"
-            + "\\jv-fruit-shop\\src\\main"
+    private static final String sourceFile = "src\\main"
             + "\\java\\core\\basesyntax\\source\\data.csv";
 
     public static void main(String[] args) {
         FileService fileService = new CSvFileService();
-        String dataFromFileSource = fileService.readeDataFromFileSource(sourceFile);
+        String dataFromFileSource = fileService.readData(sourceFile);
         Operator operator = new Operator();
         operatorInitialization(operator);
-        FruitRecordsValidator validator = new CSvFruitRecordsValidator();
+        FruitRecordsValidator validator = new CsvFruitRecordsValidator();
         validator.testForValid(dataFromFileSource,operator);
-        ParseService parseService = new CSvParseService();
+        ParseService parseService = new FruitRecordParser();
         List<FruitRecord> fruitRecords = parseService
-                .convertStringDataIntoFruitRecordList(dataFromFileSource);
-        DAoService storageService = new DAoServiceImp(new Storage());
+                .parseFromCsv(dataFromFileSource);
+        FruitDaoService storageService = new FruitDaoServiceImp(new Storage());
 
         operator.doAllOperation(fruitRecords, storageService);
         String dataToWrite = parseService
-                .convertStorageDataIntoWritableString(storageService.getSetOfFruitsInStorage());
-        fileService.writeReportToFile(dataToWrite, destFile);
+                .parseIntoCsv(storageService.get());
+        fileService.writeData(dataToWrite, destFile);
     }
 
     private static Operator operatorInitialization(Operator operator) {

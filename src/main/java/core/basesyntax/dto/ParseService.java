@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface ParseService {
-    List<FruitRecord> convertStringDataIntoFruitRecordList(String datInString);
+    List<FruitRecord> parseFromCsv(String datInString);
 
-    String convertStorageDataIntoWritableString(Set<Fruit> datInString);
+    String parseIntoCsv(Set<Fruit> datInString);
 }
