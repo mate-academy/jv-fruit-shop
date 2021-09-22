@@ -66,8 +66,8 @@ NOTE: if while processing transactions you detect some business logic mistakes (
 
 
 ### Validation
-For validation create separate class validator with corresponding method. You can perform it after
-File has been service.read during parsing of raw data.
+For validation create separate class Validator with corresponding method. You can perform it after
+File has been read during parsing of raw data.
 If the file has mistakes, you should throw an exception. Example of incorrect input file:
 ```text
     type,fruit,quantity
