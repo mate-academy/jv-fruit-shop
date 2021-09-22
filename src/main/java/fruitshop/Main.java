@@ -15,7 +15,6 @@ import fruitshop.service.operations.OperationHandler;
 import fruitshop.service.operations.PurchaseOperationHandler;
 import fruitshop.service.operations.ReturnOperationHandler;
 import fruitshop.service.operations.SupplyOperationHandler;
-import fruitshop.service.validators.InvalidDataException;
 import fruitshop.service.validators.OperationsValidator;
 import fruitshop.service.validators.ValidatorImpl;
 import java.util.HashMap;
@@ -23,6 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String REPORT_FILE_NAME = "ReportForFruitShop";
+    private static final String INPUT_FILE_PATH = "src/main/java/fruitshop/InputDataForFruitShop";
+
     public static void main(String[] args) {
         Map<OperationType, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(OperationType.BALANCE, new BalanceOperationHandler());
@@ -32,19 +34,14 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         InputDataReader operationReader = new InputDataReaderImpl();
         List<String> rawDataFromFile = operationReader
-                .readFromFile("src/main/java/fruitshop/InputDataForFruitShop");
+                .readFromFile(INPUT_FILE_PATH);
         OperationsValidator inputDataValidator = new ValidatorImpl();
-        List<String> validFruitShopData;
-        try {
-            validFruitShopData = inputDataValidator.validator(rawDataFromFile);
-        } catch (InvalidDataException e) {
-            throw new RuntimeException("Invalid input data", e);
-        }
+        List<String> validFruitShopData = inputDataValidator.validator(rawDataFromFile);
         DtoCreator dataParser = new DtoCreationImpl();
         List<OperationsDto> operationsDataInDto = dataParser.toDtoDataFormatter(validFruitShopData);
         OperationStrategy storageModifier = new OperationStrategyImpl(operationHandlerMap);
         FruitShopService operationsApplier = new FruitShopServiceImpl(storageModifier);
         operationsApplier.fruitStorageModifier(operationsDataInDto);
-        operationsApplier.fileReportBuilder("ReportForFruitShop");
+        operationsApplier.fileReportBuilder(REPORT_FILE_NAME);
     }
 }

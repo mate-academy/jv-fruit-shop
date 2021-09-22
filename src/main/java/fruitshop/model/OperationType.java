@@ -16,11 +16,13 @@ public enum OperationType {
     }
 
     public static OperationType valueOfLabel(String shortName) {
+        OperationType operation = null;
         for (OperationType o: values()) {
             if (o.shortName.equals(shortName)) {
-                return o;
+                operation = o;
+                break;
             }
         }
-        return null;
+        return operation;
     }
 }

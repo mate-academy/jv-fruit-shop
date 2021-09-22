@@ -19,7 +19,7 @@ public class DtoCreationImpl implements DtoCreator {
         for (String fruitRecordLine : stringsRecords) {
             String standartRecordLine = fruitRecordLine.toLowerCase(Locale.ROOT);
             String [] fruitsRecordPart = standartRecordLine.split(SIGN_TO_SPLIT_WITH);
-            if (OperationType.valueOfLabel(fruitsRecordPart[0].trim()) == null) {
+            if (OperationType.valueOfLabel(fruitsRecordPart[OPERATION_RECORD].trim()) == null) {
                 continue;
             }
             OperationsDto fruitRecordLineDto = new OperationsDto();
