@@ -10,6 +10,11 @@ public class FruitRecord<T> {
     public FruitRecord() {
     }
 
+    public FruitRecord(String fruit, int amount) {
+        this.fruit = fruit;
+        this.amount = amount;
+    }
+
     public FruitRecord(String operationType, String fruit, int amount) {
         this.operationType = operationType;
         this.fruit = fruit;
@@ -45,25 +50,22 @@ public class FruitRecord<T> {
         if (this == o) {
             return true;
         }
-        if (o == null
-                || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         FruitRecord<?> that = (FruitRecord<?>) o;
-        return Objects.equals(operationType, that.operationType)
-                && Objects.equals(fruit, that.fruit);
+        return fruit.equals(that.fruit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(operationType, fruit);
+        return Objects.hash(fruit);
     }
 
     @Override
     public String toString() {
         return "FruitRecord{"
-                + "operationType='" + operationType + '\''
-                + ", fruit='" + fruit + '\''
+                + "fruit='" + fruit + '\''
                 + ", amount=" + amount
                 + '}';
     }

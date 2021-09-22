@@ -32,19 +32,14 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Can't read file " + FileService.PATH_INPUT + "Exception: " + e);
         }
-        list.forEach(System.out::println);
-
         FruitRecordService fruitRecordService = new FruitRecordServiceImpl();
 
         List<FruitRecord> fruitRecordList = null;
         try {
             fruitRecordList = fruitRecordService.parserFruit(list);
-            fruitRecordService.save(fruitRecordList);
         } catch (ValidationException e) {
             System.out.println("Can't parse data " + "Exception: " + e);
         }
-
-        fruitRecordList.forEach(s -> System.out.println(s + "     *******"));
         Map<OperationType, OperationTypeHandler> recordMap = new HashMap<>();
         recordMap.put(OperationType.BALANCE, new BalanceOperationTypeHandler());
         recordMap.put(OperationType.PURCHASE, new PurchaseOperationTypeHandler());
@@ -53,7 +48,6 @@ public class Main {
 
         OperationTypeStrategy operationTypeStrategy = new OperationTypeStrategyImpl(recordMap);
         MarketService marketService = new MarketServiceImpl(operationTypeStrategy);
-
         try {
             marketService.applyOperations(fruitRecordList);
         } catch (ValidationException e) {
@@ -64,6 +58,5 @@ public class Main {
         List<String> report = reportService.createReport();
 
         reportService.writeReport(report, ReportService.PATH_OUTPUT);
-        report.forEach(System.out::println);
     }
 }

@@ -16,7 +16,6 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<String> createReport() {
         List<String> result = new ArrayList<>();
-        result.add(TITLE);
         for (Map.Entry<String, Integer> entry : Storage.stockStorage.entrySet()) {
             result.add(entry.getKey() + "," + entry.getValue());
         }
@@ -24,15 +23,15 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public void writeReport(List<String> report, String filePath) {
+    public void writeReport(List<String> report, String path) {
         File file = new File(PATH_OUTPUT);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
-            for (String record : report) {
-                bufferedWriter.write(record + System.lineSeparator());
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
+            bufferedWriter.append(TITLE);
+            for (String record: report) {
+                bufferedWriter.append(System.lineSeparator()).append(record);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file " + filePath, e);
+            throw new RuntimeException("can't write file", e);
         }
-
     }
 }

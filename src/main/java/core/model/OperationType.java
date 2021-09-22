@@ -12,8 +12,13 @@ public enum OperationType {
         this.shortName = shortName;
     }
 
-    public String getShortName() {
-        return shortName;
+    public static OperationType operationTypeOfShortName(String shortName) {
+        for (OperationType value : values()) {
+            if (value.shortName.equals(shortName)) {
+                return value;
+            }
+        }
+        return null;
     }
 
     public void setShortName(String shortName) {

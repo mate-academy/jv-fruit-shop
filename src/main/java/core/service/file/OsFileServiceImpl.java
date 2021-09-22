@@ -3,7 +3,6 @@ package core.service.file;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.rmi.RemoteException;
 import java.util.List;
 
 public class OsFileServiceImpl implements FileService {
@@ -18,7 +17,7 @@ public class OsFileServiceImpl implements FileService {
             records.remove(0);
             return records;
         } catch (IOException e) {
-            throw new RemoteException("Can't read file " + filePath, e);
+            throw new RuntimeException("Can't read file " + filePath, e);
         }
     }
 }

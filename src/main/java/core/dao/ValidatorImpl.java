@@ -16,7 +16,7 @@ public class ValidatorImpl implements Validator<String> {
             throw new ValidationException("Not enough data: Value: " + value);
         }
         if (Integer.parseInt(data[2]) < 0) {
-            throw new ValidationException("Quantity is not be < 0");
+            throw new ValidationException("Quantity must not be < 0");
         }
     }
 }
