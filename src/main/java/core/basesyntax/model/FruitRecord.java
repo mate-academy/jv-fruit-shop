@@ -31,11 +31,4 @@ public class FruitRecord {
                 + ", balance=" + balance
                 + '}';
     }
-
-    public enum Operation {
-        BALANCE,
-        SUPPLY,
-        PURCHASE,
-        RETURN;
-    }
 }

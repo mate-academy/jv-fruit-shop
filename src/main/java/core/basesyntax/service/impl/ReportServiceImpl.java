@@ -10,12 +10,10 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String getReport(Map<String, Integer> map) {
         StringBuilder tmp = new StringBuilder(FIRST_LINE);
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            tmp.append(System.lineSeparator())
-                    .append(entry.getKey())
-                    .append(COMMA)
-                    .append(entry.getValue());
-        }
+        map.forEach((key, value) -> tmp.append(System.lineSeparator())
+                .append(key)
+                .append(COMMA)
+                .append(value));
         return tmp.toString();
     }
 }

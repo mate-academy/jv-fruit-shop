@@ -7,8 +7,8 @@ import core.basesyntax.service.StorageService;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private final StorageService storageService;
     private final RecordService recordService;
+    private final StorageService storageService;
 
     public FruitShopServiceImpl(HandlerStorage handlerStorage) {
         this.recordService = new RecordServiceImpl();

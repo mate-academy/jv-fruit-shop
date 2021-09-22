@@ -14,9 +14,7 @@ public class StorageServiceImpl implements StorageService {
     }
 
     @Override
-    public void updateStorage(List<FruitRecord> recordList) {
-        for (FruitRecord record : recordList) {
-            operationService.setBalance(record);
-        }
+    public void updateStorage(List<FruitRecord> records) {
+        records.forEach(operationService::setBalance);
     }
 }

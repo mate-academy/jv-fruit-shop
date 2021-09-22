@@ -1,10 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.HandlerStorage;
 import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParseService;
+import core.basesyntax.service.Validator;
 
-public class ParseServiceImpl implements ParseService {
+public class ParseServiceImpl implements ParseService, Validator {
     private static final String COMMA = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
@@ -13,19 +14,21 @@ public class ParseServiceImpl implements ParseService {
 
     @Override
     public FruitRecord parseData(String data) {
-        String[] record = data.split((COMMA));
-        if (validate(record)) {
-            return new FruitRecord(HandlerStorage
-                    .getOperation(record[OPERATION_INDEX].charAt(OPERATION_INDEX)),
+        if (validate(data)) {
+            String[] record = data.split((COMMA));
+            Operation operation = Operation.get(record[OPERATION_INDEX].substring(0, 1));
+            return new FruitRecord(operation,
                     record[FRUIT_NAME_INDEX],
                     Integer.parseInt(record[QUANTITY_INDEX]));
         }
         throw new RuntimeException("Data is invalid: " + data);
     }
 
-    private boolean validate(String[] data) {
-        return data.length == REQUIRED_LENGTH
-                && data[FRUIT_NAME_INDEX].length() > 0
-                && Integer.parseInt(data[QUANTITY_INDEX]) > 0;
+    @Override
+    public boolean validate(String data) {
+        String[] line = data.split((COMMA));
+        return line.length == REQUIRED_LENGTH
+                && line[FRUIT_NAME_INDEX].length() > 0
+                && Integer.parseInt(line[QUANTITY_INDEX]) > 0;
     }
 }

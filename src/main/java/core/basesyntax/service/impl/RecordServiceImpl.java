@@ -11,10 +11,10 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public List<FruitRecord> getFruitRecords(List<String> data) {
-        List<FruitRecord> result = new ArrayList<>();
+        List<FruitRecord> tmp = new ArrayList<>();
         for (int i = 1; i < data.size(); i++) {
-            result.add(parseService.parseData(data.get(i)));
+            tmp.add(parseService.parseData(data.get(i)));
         }
-        return result;
+        return tmp;
     }
 }

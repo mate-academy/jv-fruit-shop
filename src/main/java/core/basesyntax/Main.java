@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.db.HandlerStorage;
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReaderService;
@@ -24,11 +24,11 @@ public class Main {
     private static final String OUTPUT_FILE = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        Map<FruitRecord.Operation, OperationHandler> storage = new HashMap<>();
-        storage.put(FruitRecord.Operation.BALANCE, new SetBalanceOperationImpl());
-        storage.put(FruitRecord.Operation.SUPPLY, new IncreaseBalanceOperationImpl());
-        storage.put(FruitRecord.Operation.PURCHASE, new DecreaseBalanceOperationImpl());
-        storage.put(FruitRecord.Operation.RETURN, new IncreaseBalanceOperationImpl());
+        Map<Operation, OperationHandler> storage = new HashMap<>();
+        storage.put(Operation.BALANCE, new SetBalanceOperationImpl());
+        storage.put(Operation.SUPPLY, new IncreaseBalanceOperationImpl());
+        storage.put(Operation.PURCHASE, new DecreaseBalanceOperationImpl());
+        storage.put(Operation.RETURN, new IncreaseBalanceOperationImpl());
         HandlerStorage handlerStorage = new HandlerStorage(storage);
 
         ReaderService readerService = new ReaderServiceImpl();
