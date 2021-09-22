@@ -42,6 +42,6 @@ public class Main {
         WriterService writerService = new WriterServiceImpl(fileWriter);
         fruitService fruiTservice =
                 new fruitService(recordList, writerService, activityStrategy);
-        fruiTservice.fruitsAmountAfterWorkDay();
+        fruiTservice.applyOperationsOnFruitsRecords();
     }
 }

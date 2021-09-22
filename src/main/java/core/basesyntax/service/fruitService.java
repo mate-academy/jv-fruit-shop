@@ -17,7 +17,7 @@ public class fruitService {
         this.activityStrategy = activityStrategy;
     }
 
-    public void fruitsAmountAfterWorkDay() {
+    public void applyOperationsOnFruitsRecords() {
         for (Record record : records) {
             activityStrategy.getActivity(record.getActivity())
                     .activity(record.getFruit(), record.getAmount());
