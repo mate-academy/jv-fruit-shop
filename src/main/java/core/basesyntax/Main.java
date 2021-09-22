@@ -43,5 +43,6 @@ public class Main {
         fruitService fruiTservice =
                 new fruitService(recordList, writerService, activityStrategy);
         fruiTservice.applyOperationsOnFruitsRecords();
+        fruiTservice.generateReport();
     }
 }

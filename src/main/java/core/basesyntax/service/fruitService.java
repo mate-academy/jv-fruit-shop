@@ -22,6 +22,9 @@ public class fruitService {
             activityStrategy.getActivity(record.getActivity())
                     .activity(record.getFruit(), record.getAmount());
         }
+    }
+    public void generateReport() {
         writerService.writeData(Storage.fruitStorage);
+
     }
 }
