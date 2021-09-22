@@ -12,7 +12,7 @@ public class FruitRecordDtoParserFromFileImpl implements FruitRecordDtoParser {
         FruitRecordDto fruitRecordDto = new FruitRecordDto();
         String[] lineSplit = line.split(",");
         fruitRecordDto.setType(Validator.checkType(lineSplit[ACTIVITIES_TYPE]));
-        fruitRecordDto.setFruit(Validator.checkNameGoods(line.split(",")[FRUIT]));
+        fruitRecordDto.setFruit(Validator.checkFruitName(line.split(",")[FRUIT]));
         fruitRecordDto.setAmount(Validator.checkAmount(Integer.parseInt(line.split(",")[AMOUNT])));
         return fruitRecordDto;
     }

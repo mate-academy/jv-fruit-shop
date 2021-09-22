@@ -10,11 +10,11 @@ public class Validator {
                         + "operation does not exist: " + type));
     }
 
-    public static String checkNameGoods(String nameGoods) {
-        if (nameGoods.isEmpty()) {
-            throw new RuntimeException("Product name is NOT listed");
+    public static String checkFruitName(String fruitName) {
+        if (fruitName.isEmpty()) {
+            throw new RuntimeException("Fruit name is NOT listed");
         }
-        return nameGoods;
+        return fruitName;
     }
 
     public static int checkAmount(int amount) {

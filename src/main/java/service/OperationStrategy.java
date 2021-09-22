@@ -1,8 +1,8 @@
 package service;
 
 import model.FruitRecordDto;
-import service.type.service.TypeHandler;
+import service.type.service.OperationHandler;
 
 public interface OperationStrategy {
-    TypeHandler getHandler(FruitRecordDto.Activities type);
+    OperationHandler getHandler(FruitRecordDto.Activities type);
 }

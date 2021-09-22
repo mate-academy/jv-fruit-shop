@@ -7,6 +7,6 @@ import java.util.Map;
 import model.FruitRecordDto;
 
 public class Storage {
-    public static final List<FruitRecordDto> storageFruitShop = new ArrayList<>();
-    public static final Map<String, Integer> mapReport = new HashMap<>();
+    public static final List<FruitRecordDto> records = new ArrayList<>();
+    public static final Map<String, Integer> fruitQuantity = new HashMap<>();
 }

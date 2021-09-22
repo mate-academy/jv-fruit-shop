@@ -1,6 +1,6 @@
 package service;
 
-import dao.OperationDaoUseFileImpl;
+import dao.FruitRecordDaoUseFileImpl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import model.FruitRecordDto;
@@ -12,7 +12,7 @@ public class FileReaderImpl implements FileReader {
             String line = bufferedReader.readLine();
             while (line != null) {
                 FruitRecordDto fruitRecordDto = new FruitRecordDtoParserFromFileImpl().parse(line);
-                new OperationDaoUseFileImpl().add(fruitRecordDto);
+                new FruitRecordDaoUseFileImpl().add(fruitRecordDto);
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {

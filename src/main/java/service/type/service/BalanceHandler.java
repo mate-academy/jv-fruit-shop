@@ -1,8 +1,9 @@
 package service.type.service;
 
-public class TypeHandlerPurchase implements TypeHandler {
+public class BalanceHandler implements OperationHandler {
+
     @Override
     public int getType(Integer amount, Integer result) {
-        return result - amount;
+        return amount;
     }
 }

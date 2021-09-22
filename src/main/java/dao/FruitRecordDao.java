@@ -2,6 +2,6 @@ package dao;
 
 import model.FruitRecordDto;
 
-public interface OperationDao {
+public interface FruitRecordDao {
     void add(FruitRecordDto fruitRecordDto);
 }
