@@ -4,8 +4,8 @@ import core.basesyntax.model.FruitRecord;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
-import core.basesyntax.service.impl.FruitOpValidator;
 import core.basesyntax.service.impl.FruitRecordParser;
+import core.basesyntax.service.impl.FruitRecordValidator;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.operationhandlersimpls.BalanceHandler;
 import core.basesyntax.service.impl.operationhandlersimpls.PurchaseHandler;
@@ -29,7 +29,7 @@ public class Main {
         map.put(OperationType.SUPPLY, new SupplyHandler());
         FileReaderImpl fileService = new FileReaderImpl();
         List<String> data = fileService.read(sourceFile);
-        FruitOpValidator fruitOperationValidator = new FruitOpValidator();
+        FruitRecordValidator fruitOperationValidator = new FruitRecordValidator();
         FruitRecordParser fruitOpParser = new FruitRecordParser();
         List<FruitRecord> dtoList = new ArrayList<>();
         for (String line : data) {
@@ -45,6 +45,6 @@ public class Main {
         ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
         String dataForReport = reportGenerator.generateReport();
         FileWriterImpl fileWriter = new FileWriterImpl();
-        fileWriter.recordDataToFile(resultFile, dataForReport);
+        fileWriter.write(resultFile, dataForReport);
     }
 }

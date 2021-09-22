@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.ValidationException;
 import core.basesyntax.service.interfaces.FileValidator;
 
-public class FruitOpValidator implements FileValidator<String> {
+public class FruitRecordValidator implements FileValidator<String> {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;

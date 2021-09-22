@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.interfaces.FileWriterInterface;
+import core.basesyntax.service.interfaces.FileWriter;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileWriterImpl implements FileWriterInterface {
+public class FileWriterImpl implements FileWriter {
 
     @Override
-    public void recordDataToFile(String destinationFile, String data) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destinationFile))) {
+    public void write(String destinationFile, String data) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(
+                new java.io.FileWriter(destinationFile))) {
             bufferedWriter.write(data);
         } catch (IOException e) {
             throw new RuntimeException("Unable to record data in file" + destinationFile);
