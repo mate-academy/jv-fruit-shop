@@ -50,8 +50,8 @@ public class Main {
         List<FruitRecordDto> fruitRecordDtos = fruitRecordDtoCreator.createRecords(linesFromFile);
         fruitShop.updateStorage(fruitRecordDtos);
         ReportMakerService reportMakerService = new ReportMakerServiceImpl(fruitDao);
-        List<String> stringsToWrite = reportMakerService.makeReport();
+        List<String> report = reportMakerService.makeReport();
         ReportWriterService reportWriterService = new ReportWriterServiceImpl();
-        reportWriterService.createReportFile(stringsToWrite, TO_FILE_NAME);
+        reportWriterService.write(report, TO_FILE_NAME);
     }
 }

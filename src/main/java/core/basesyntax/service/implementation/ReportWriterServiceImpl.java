@@ -10,11 +10,11 @@ import java.util.List;
 public class ReportWriterServiceImpl implements ReportWriterService {
     private static final String TABLE_HEADING = "fruit,quantity";
 
-    public void createReportFile(List<String> stringsToWrite, String toFileName) {
+    public void write(List<String> report, String toFileName) {
         String heading = TABLE_HEADING + System.lineSeparator();
         try {
             Files.write(Path.of(toFileName), heading.getBytes());
-            for (String string : stringsToWrite) {
+            for (String string : report) {
                 Files.write(Path.of(toFileName), string.getBytes(), StandardOpenOption.APPEND);
             }
         } catch (IOException e) {

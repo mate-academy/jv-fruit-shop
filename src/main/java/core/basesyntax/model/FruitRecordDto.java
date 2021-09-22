@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class FruitRecordDto {
     private Type typeOfOperation;
     private Fruit fruit;
@@ -58,5 +60,24 @@ public class FruitRecordDto {
             }
             throw new RuntimeException("Can't find type of operation " + label);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitRecordDto that = (FruitRecordDto) o;
+        return typeOfOperation == that.typeOfOperation
+                && Objects.equals(fruit, that.fruit)
+                && Objects.equals(amount, that.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(typeOfOperation, fruit, amount);
     }
 }
