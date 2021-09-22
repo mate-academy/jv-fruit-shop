@@ -8,7 +8,7 @@ import core.basesyntax.service.ShopsService;
 import java.util.List;
 
 public class ShopsServiceImpl implements ShopsService {
-    private static final int gag = 0;
+    private static final int TEMPORARY_ELEMENT = 0;
     private OperationStrategy operationStrategy;
 
     public ShopsServiceImpl(OperationStrategy operationStrategy) {
@@ -19,7 +19,7 @@ public class ShopsServiceImpl implements ShopsService {
     public void updateStorage(List<FruitOperationDto> dtos) {
         for (FruitOperationDto dto : dtos) {
             if (!Storage.fruitStorage.containsKey(dto.getFruitName())) {
-                Storage.fruitStorage.put(dto.getFruitName(), gag);
+                Storage.fruitStorage.put(dto.getFruitName(), TEMPORARY_ELEMENT);
             }
         }
         for (FruitOperationDto dto : dtos) {
@@ -29,6 +29,5 @@ public class ShopsServiceImpl implements ShopsService {
                 throw new RuntimeException("Type operation invalid.");
             }
         }
-
     }
 }

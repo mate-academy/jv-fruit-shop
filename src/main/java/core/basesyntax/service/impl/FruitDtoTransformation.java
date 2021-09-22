@@ -10,7 +10,7 @@ public class FruitDtoTransformation implements Transformation<String, FruitOpera
     private Function<String, FruitOperationDto> mapper;
 
     @Override
-    public List<FruitOperationDto> transformationToObj(List<String> dataFromFile) {
+    public List<FruitOperationDto> transform(List<String> dataFromFile) {
         mapper = new FruitOperationDtoMapper();
         return dataFromFile.stream()
                 .map(mapper::apply)

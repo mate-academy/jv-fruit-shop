@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.model.FruitOperationDto;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportWriter;
 import core.basesyntax.service.ShopsService;
 import core.basesyntax.service.Transformation;
@@ -11,7 +12,7 @@ import core.basesyntax.service.impl.FileReading;
 import core.basesyntax.service.impl.FruitDtoTransformation;
 import core.basesyntax.service.impl.FruitOperationDtoValidator;
 import core.basesyntax.service.impl.OperationStrategyImpl;
-import core.basesyntax.service.impl.ReportGenerator;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ShopsServiceImpl;
 import core.basesyntax.service.impl.WriteReportToFile;
 import core.basesyntax.service.operationstrategy.BalanceOperationHandler;
@@ -30,14 +31,10 @@ public class Main {
 
     public static void main(String[] args) {
         FileService file = new FileReading();
-        List<String> dataFromFile = file.readFile(INPUT_FILE_CSV).stream()
-                .skip(1)
-                .collect(Collectors.toList());
+        List<String> dataFromFile = file.readFile(INPUT_FILE_CSV);
 
         Validator<String> validator = new FruitOperationDtoValidator();
-        for (String dto : dataFromFile) {
-            validator.validate(dto);
-        }
+        validator.validate(dataFromFile);
 
         Transformation<String, FruitOperationDto> fruitTransformation
                 = new FruitDtoTransformation();
@@ -48,12 +45,12 @@ public class Main {
         operationHandlerMap.put(FruitOperationDto.Type.SUPPLY, new SupplyOperationHandler());
         operationHandlerMap.put(FruitOperationDto.Type.RETURN, new ReturnOperationHandler());
 
-        List<FruitOperationDto> dtos = fruitTransformation.transformationToObj(dataFromFile);
+        List<FruitOperationDto> dtos = fruitTransformation.transform(dataFromFile);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ShopsService shopsService = new ShopsServiceImpl(operationStrategy);
         shopsService.updateStorage(dtos);
 
-        ReportGenerator report = new ReportGenerator();
+        ReportGenerator report = new ReportGeneratorImpl();
         String fruitReport = report.fruitReport();
 
         ReportWriter reportWriter = new WriteReportToFile();
