@@ -1,10 +1,11 @@
 package core;
 
-import core.exception.ValidationException;
 import core.model.FruitRecord;
 import core.model.OperationType;
 import core.service.file.FileService;
 import core.service.file.OsFileServiceImpl;
+import core.service.file.WriteToFileService;
+import core.service.file.WriteToFileServiceImpl;
 import core.service.market.MarketService;
 import core.service.market.MarketServiceImpl;
 import core.service.operation.BalanceOperationTypeHandler;
@@ -14,49 +15,38 @@ import core.service.operation.ReturnOperationTypeHandler;
 import core.service.operation.SupplyOperationHandler;
 import core.service.record.FruitRecordService;
 import core.service.record.FruitRecordServiceImpl;
-import core.service.report.ReportService;
-import core.service.report.ReportServiceImpl;
+import core.service.report.CreateReportService;
+import core.service.report.CreateReportServiceImpl;
 import core.service.strategy.OperationTypeStrategy;
 import core.service.strategy.OperationTypeStrategyImpl;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final String PATH_INPUT = "src/main/resources/report_input.csv";
+    public static final String PATH_OUTPUT = "src/main/resources/report_output.csv";
+
     public static void main(String[] args) {
         FileService fileService = new OsFileServiceImpl();
-        List<String> list = null;
-        try {
-            list = fileService.readFile("src/main/resources/report_input.csv");
-        } catch (IOException e) {
-            System.out.println("Can't read file " + FileService.PATH_INPUT + "Exception: " + e);
-        }
+        List<String> list = fileService.readFile(PATH_INPUT);
         FruitRecordService fruitRecordService = new FruitRecordServiceImpl();
 
-        List<FruitRecord> fruitRecordList = null;
-        try {
-            fruitRecordList = fruitRecordService.parserFruit(list);
-        } catch (ValidationException e) {
-            System.out.println("Can't parse data " + "Exception: " + e);
-        }
         Map<OperationType, OperationTypeHandler> recordMap = new HashMap<>();
         recordMap.put(OperationType.BALANCE, new BalanceOperationTypeHandler());
         recordMap.put(OperationType.PURCHASE, new PurchaseOperationTypeHandler());
         recordMap.put(OperationType.RETURN, new ReturnOperationTypeHandler());
         recordMap.put(OperationType.SUPPLY, new SupplyOperationHandler());
 
+        List<FruitRecord> fruitRecordList = fruitRecordService.parserFruit(list);
         OperationTypeStrategy operationTypeStrategy = new OperationTypeStrategyImpl(recordMap);
         MarketService marketService = new MarketServiceImpl(operationTypeStrategy);
-        try {
-            marketService.applyOperations(fruitRecordList);
-        } catch (ValidationException e) {
-            e.printStackTrace();
-        }
+        marketService.applyOperations(fruitRecordList);
 
-        ReportService reportService = new ReportServiceImpl();
+        CreateReportService reportService = new CreateReportServiceImpl();
         List<String> report = reportService.createReport();
 
-        reportService.writeReport(report, ReportService.PATH_OUTPUT);
+        WriteToFileService writeToFileService = new WriteToFileServiceImpl();
+        writeToFileService.writeReport(report, PATH_OUTPUT);
     }
 }

@@ -6,12 +6,14 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class OsFileServiceImpl implements FileService {
+    private static final String PATH_INPUT = "src/main/resources/report_input.csv";
 
     public OsFileServiceImpl() {
     }
 
     @Override
-    public List<String> readFile(String filePath) throws IOException {
+    public List<String> readFile(String filePath) {
+        filePath = PATH_INPUT;
         try {
             List<String> records = Files.readAllLines(new File(filePath).toPath());
             records.remove(0);
