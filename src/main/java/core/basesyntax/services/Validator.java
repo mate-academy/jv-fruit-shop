@@ -1,11 +1,9 @@
 package core.basesyntax.services;
 
-import core.basesyntax.dto.Transaction;
+import java.util.List;
 
 public interface Validator {
-    boolean checkInputData(String[] data);
-
-    Transaction.Operation findOperation(String operation);
+    boolean checkInputData(List<String> listData);
 
     boolean checkOperation(int money);
 }

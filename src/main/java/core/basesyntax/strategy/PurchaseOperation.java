@@ -9,12 +9,12 @@ public class PurchaseOperation implements Operation {
     @Override
     public int apply(Transaction transaction) {
         Validator validator = new ValidatorImpl();
-        Storage.map.computeIfAbsent(transaction.getFruit().getFruitName(),
+        Storage.fruitStorageMap.computeIfAbsent(transaction.getFruit().getFruitName(),
                 k -> transaction.getQuantity());
-        int oldQuantity = Storage.map.get(transaction.getFruit().getFruitName());
+        int oldQuantity = Storage.fruitStorageMap.get(transaction.getFruit().getFruitName());
         int newQuantity = oldQuantity - transaction.getQuantity();
         if (validator.checkOperation(newQuantity)) {
-            Storage.map.put(transaction.getFruit().getFruitName(), newQuantity);
+            Storage.fruitStorageMap.put(transaction.getFruit().getFruitName(), newQuantity);
         }
         return newQuantity;
     }

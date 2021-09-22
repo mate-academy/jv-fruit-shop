@@ -7,7 +7,7 @@ public class BalanceOperation implements Operation {
     @Override
     public int apply(Transaction transaction) {
         int newQuantity = transaction.getQuantity();
-        Storage.map.put(transaction.getFruit().getFruitName(), newQuantity);
+        Storage.fruitStorageMap.put(transaction.getFruit().getFruitName(), newQuantity);
         return newQuantity;
     }
 }

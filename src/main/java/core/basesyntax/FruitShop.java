@@ -1,16 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.Transaction;
-import core.basesyntax.services.FileReader;
-import core.basesyntax.services.FileWriter;
-import core.basesyntax.services.Parser;
-import core.basesyntax.services.ReportFruit;
-import core.basesyntax.services.Validator;
-import core.basesyntax.services.impl.FileReaderImpl;
-import core.basesyntax.services.impl.FileWriterImpl;
-import core.basesyntax.services.impl.ParserImpl;
-import core.basesyntax.services.impl.ReportFruitImpl;
-import core.basesyntax.services.impl.ValidatorImpl;
+import core.basesyntax.services.FileReaderService;
+import core.basesyntax.services.FileWriterService;
+import core.basesyntax.services.ReportFruitService;
+import core.basesyntax.services.impl.FileReaderServiceImpl;
+import core.basesyntax.services.impl.FileWriterServiceImpl;
+import core.basesyntax.services.impl.ReportFruitServiceImpl;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.PurchaseOperation;
@@ -34,19 +30,12 @@ public class FruitShop {
         operationMap.put(Transaction.Operation.BALANCE, new BalanceOperation());
         operationMap.put(Transaction.Operation.PURCHASE, new PurchaseOperation());
 
-        FileReader fileReader = new FileReaderImpl();
+        FileReaderService fileReader = new FileReaderServiceImpl();
         List<String> listData = fileReader.readFromFile(INPUT_FILEPATH);
         listData.remove(removeIndex);
-        Validator validator = new ValidatorImpl();
-        Parser parser = new ParserImpl();
-        for (String row : listData) {
-            validator.checkInputData(row.split(COMMA));
-            Transaction transaction = parser.parseData(row);
-            operationMap.get(transaction.getOperation()).apply(transaction);
-        }
-        ReportFruit reportFruit = new ReportFruitImpl();
-        reportFruit.getReport();
-        FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeToFile(OUTPUT_FILEPATH, reportFruit.getReport() + System.lineSeparator());
+        ReportFruitService reportFruit = new ReportFruitServiceImpl();
+        FileWriterService fileWriter = new FileWriterServiceImpl();
+        fileWriter.writeToFile(OUTPUT_FILEPATH, reportFruit.createReport(listData, operationMap)
+                + System.lineSeparator());
     }
 }
