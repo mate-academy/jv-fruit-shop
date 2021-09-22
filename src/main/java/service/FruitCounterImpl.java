@@ -5,19 +5,18 @@ import java.util.List;
 import java.util.Map;
 import model.FruitRecord;
 
-public class StorageServiceImpl implements StorageService {
+public class FruitCounterImpl implements FruitCounter {
     private OperationStrategy operationStrategy;
 
-    public StorageServiceImpl(OperationStrategy operationStrategy) {
+    public FruitCounterImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public Map<String, Integer> processingData(List<FruitRecord> recordList) {
+    public Map<String, Integer> countFruit(List<FruitRecord> recordList) {
         Map<String, Integer> fruitValueMap = new HashMap<>();
         String operationType;
-        int fruitAmountInStorage;
-        int newAmountOfFruit;
+        int fruitBalance;
         int amount;
         for (FruitRecord fruitRecord : recordList) {
             operationType = fruitRecord.getOperationType();
@@ -25,10 +24,10 @@ public class StorageServiceImpl implements StorageService {
             if (!fruitValueMap.containsKey(fruitRecord.getFruit())) {
                 fruitValueMap.put(fruitRecord.getFruit(), amount);
             } else {
-                fruitAmountInStorage = fruitValueMap.get(fruitRecord.getFruit());
-                newAmountOfFruit = operationStrategy.getOperation(operationType)
-                        .changeFruitAmount(fruitAmountInStorage, amount);
-                fruitValueMap.put(fruitRecord.getFruit(), newAmountOfFruit);
+                fruitBalance = fruitValueMap.get(fruitRecord.getFruit());
+                fruitBalance = operationStrategy.getOperation(operationType)
+                        .apply(fruitBalance, amount);
+                fruitValueMap.put(fruitRecord.getFruit(), fruitBalance);
             }
         }
         return fruitValueMap;

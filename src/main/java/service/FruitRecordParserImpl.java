@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import model.FruitRecord;
 
-public class ParseDataImpl implements ParseData {
+public class FruitRecordParserImpl implements FruitRecordParser {
     private static final int OPERATION_TYPE = 0;
     private static final int FRUIT_TYPE = 1;
     private static final int FRUIT_QUANTITY = 2;
     private Validator validator = new ValidatorImpl();
 
-    public List<FruitRecord> recordingData(List<String[]> splitedInformationList) {
+    public List<FruitRecord> parse(List<String[]> splitedInformationList) {
         validator.validate(splitedInformationList);
         List<FruitRecord> operationList = new ArrayList<>();
         String[] splitLine;

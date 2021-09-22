@@ -1,5 +1,5 @@
 package operationtype;
 
 public interface OperationHandler {
-    int changeFruitAmount(int fruitInStorage, int amountFromOperation);
+    int apply(int balance, int change);
 }
