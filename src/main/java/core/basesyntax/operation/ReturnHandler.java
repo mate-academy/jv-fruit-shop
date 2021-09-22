@@ -3,14 +3,15 @@ package core.basesyntax.operation;
 import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.TransactionDto;
-import java.util.Map;
 
 public class ReturnHandler implements ShopOperationHandler {
     @Override
-    public Map<Fruit, Integer> getOperationResult(TransactionDto transactionDto) {
-        Fruit fruit = new Fruit(String.valueOf(transactionDto.getFruitName()));
-        FruitsStorage.fruitsStorage.put(fruit,
-                FruitsStorage.fruitsStorage.getOrDefault(fruit, 0) + transactionDto.getAmount());
-        return FruitsStorage.fruitsStorage;
+    public Integer getOperationResult(TransactionDto transactionDto) {
+        Fruit fruit = transactionDto.getFruitName();
+        Integer availableFruits = FruitsStorage.fruitsStorage.get(fruit);
+        Integer requiredFruits = transactionDto.getAmount();
+        int result = availableFruits + requiredFruits;
+        FruitsStorage.fruitsStorage.put(fruit, result);
+        return result;
     }
 }

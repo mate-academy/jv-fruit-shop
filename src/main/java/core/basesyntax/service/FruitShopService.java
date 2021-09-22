@@ -4,7 +4,7 @@ import core.basesyntax.model.TransactionDto;
 import java.util.List;
 
 public interface FruitShopService {
-    void report();
+    String report();
 
     void saveInformation(List<TransactionDto> transactionDtoList);
 }
