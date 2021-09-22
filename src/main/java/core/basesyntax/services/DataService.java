@@ -1,10 +1,10 @@
 package core.basesyntax.services;
 
-import core.basesyntax.model.TransferDto;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.List;
 import java.util.Map;
 
 public interface DataService {
-    List<String> report(OperationStrategy operationStrategy,
-                        List<TransferDto> list, Map<String, Integer> storage);
+    List<String> generateReport(OperationStrategy operationStrategy,
+                                List<FruitRecordDto> list, Map<String, Integer> storage);
 }

@@ -6,19 +6,10 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReadFromFiles implements Reader {
-    private String fromFileName;
-
-    public ReadFromFiles(String fromFileName) {
-        this.fromFileName = fromFileName;
-    }
-
-    public String getFromFileName() {
-        return fromFileName;
-    }
+public class FileReaderImpl implements FileReader {
 
     @Override
-    public List<String> read() {
+    public List<String> read(String fromFileName) {
         try {
             return Files.lines(Path.of(fromFileName))
                         .collect(Collectors.toList());

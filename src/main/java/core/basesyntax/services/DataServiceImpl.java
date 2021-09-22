@@ -1,6 +1,6 @@
 package core.basesyntax.services;
 
-import core.basesyntax.model.TransferDto;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,10 +10,10 @@ public class DataServiceImpl implements DataService {
     private static final String SEPARATOR = ",";
 
     @Override
-    public List<String> report(OperationStrategy operationStrategy,
-                               List<TransferDto> list, Map<String, Integer> storage) {
+    public List<String> generateReport(OperationStrategy operationStrategy,
+                                       List<FruitRecordDto> list, Map<String, Integer> storage) {
         List<String> result = new ArrayList<>();
-        for (TransferDto dto : list) {
+        for (FruitRecordDto dto : list) {
             operationStrategy.get(dto.getType()).apply(dto, storage);
         }
         result.add(HEADER);

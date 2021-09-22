@@ -1,10 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.dataservices.ReadFromFiles;
-import core.basesyntax.dataservices.Reader;
-import core.basesyntax.dataservices.WriteToFile;
-import core.basesyntax.dataservices.Writer;
-import core.basesyntax.model.TransferDto;
+import core.basesyntax.dataservices.FileReader;
+import core.basesyntax.dataservices.FileReaderImpl;
+import core.basesyntax.dataservices.FileWriter;
+import core.basesyntax.dataservices.FileWriterImpl;
+import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.operationhanlerservices.BalanceHandler;
 import core.basesyntax.operationhanlerservices.OperationHandler;
 import core.basesyntax.operationhanlerservices.PurchaseHandler;
@@ -32,14 +32,14 @@ public class Main {
         operationHandlerMap.put(OperationType.SUPPLY, new SupplayHandler());
         operationHandlerMap.put(OperationType.RETURN, new ReturnHandler());
         operationHandlerMap.put(OperationType.PURCHASE, new PurchaseHandler());
-        Reader reader = new ReadFromFiles(INTO_FILE);
-        Writer writer = new WriteToFile(OUT_FILE);
+        FileReader fileReader = new FileReaderImpl();
+        FileWriter fileWriter = new FileWriterImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         Map<String, Integer> storage = new HashMap<>();
         Mapper mapper = new Mapper();
-        List<TransferDto> dtos = mapper.apply(reader.read());
+        List<FruitRecordDto> dtos = mapper.apply(fileReader.read(INTO_FILE));
         DataService dataService = new DataServiceImpl();
-        writer.write(dataService.report(operationStrategy, dtos, storage));
+        fileWriter.write(dataService.generateReport(operationStrategy, dtos, storage), OUT_FILE);
     }
 }
 

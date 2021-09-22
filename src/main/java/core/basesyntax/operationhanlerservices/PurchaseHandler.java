@@ -1,15 +1,15 @@
 package core.basesyntax.operationhanlerservices;
 
-import core.basesyntax.model.TransferDto;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.Map;
 
 public class PurchaseHandler implements OperationHandler {
     @Override
-    public void apply(TransferDto transferDto, Map<String, Integer> storage) {
-        if (transferDto.getAmount() > storage.get(transferDto.getProductName())) {
+    public void apply(FruitRecordDto fruitRecordDto, Map<String, Integer> storage) {
+        if (fruitRecordDto.getAmount() > storage.get(fruitRecordDto.getFruitName())) {
             throw new RuntimeException("purchase can't be < balance");
         }
-        storage.put(transferDto.getProductName(),
-                    storage.get(transferDto.getProductName()) - transferDto.getAmount());
+        storage.put(fruitRecordDto.getFruitName(),
+                    storage.get(fruitRecordDto.getFruitName()) - fruitRecordDto.getAmount());
     }
 }

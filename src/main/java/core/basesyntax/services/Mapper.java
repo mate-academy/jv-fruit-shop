@@ -1,6 +1,6 @@
 package core.basesyntax.services;
 
-import core.basesyntax.model.TransferDto;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,12 +11,12 @@ public class Mapper {
     private static final String SEPARATOR = ",";
     private Validator validator = new ValidatorImpl();
 
-    public List<TransferDto> apply(List<String> list) {
-        List<TransferDto> data = new ArrayList<>();
+    public List<FruitRecordDto> apply(List<String> list) {
+        List<FruitRecordDto> data = new ArrayList<>();
         for (int i = 1; i < list.size(); i++) {
             String[] rows = list.get(i).split(SEPARATOR);
             validator.validate(rows);
-            TransferDto dto = new TransferDto(OperationType.fromString(rows[TYPE]),
+            FruitRecordDto dto = new FruitRecordDto(OperationType.fromString(rows[TYPE]),
                         rows[NAME], Integer.parseInt(rows[QUANTITY]));
             data.add(dto);
         }

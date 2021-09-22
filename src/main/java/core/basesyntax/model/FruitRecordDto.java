@@ -3,14 +3,14 @@ package core.basesyntax.model;
 import core.basesyntax.services.OperationType;
 import java.util.Objects;
 
-public class TransferDto {
+public class FruitRecordDto {
     private OperationType type;
-    private String productName;
+    private String fruitName;
     private int amount;
 
-    public TransferDto(OperationType type, String productName, int amount) {
+    public FruitRecordDto(OperationType type, String fruitName, int amount) {
         this.type = type;
-        this.productName = productName;
+        this.fruitName = fruitName;
         this.amount = amount;
     }
 
@@ -18,8 +18,8 @@ public class TransferDto {
         return type;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getFruitName() {
+        return fruitName;
     }
 
     public int getAmount() {
@@ -31,17 +31,17 @@ public class TransferDto {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof TransferDto)) {
+        if (!(o instanceof FruitRecordDto)) {
             return false;
         }
-        TransferDto that = (TransferDto) o;
+        FruitRecordDto that = (FruitRecordDto) o;
         return getAmount() == that.getAmount()
                     && getType() == that.getType()
-                    && Objects.equals(getProductName(), that.getProductName());
+                    && Objects.equals(getFruitName(), that.getFruitName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getType(), getProductName(), getAmount());
+        return Objects.hash(getType(), getFruitName(), getAmount());
     }
 }

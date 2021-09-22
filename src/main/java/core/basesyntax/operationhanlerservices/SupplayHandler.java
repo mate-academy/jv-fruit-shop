@@ -1,12 +1,12 @@
 package core.basesyntax.operationhanlerservices;
 
-import core.basesyntax.model.TransferDto;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.Map;
 
 public class SupplayHandler implements OperationHandler {
     @Override
-    public void apply(TransferDto transferDto, Map<String, Integer> storage) {
-        storage.put(transferDto.getProductName(),
-                    storage.get(transferDto.getProductName()) + transferDto.getAmount());
+    public void apply(FruitRecordDto fruitRecordDto, Map<String, Integer> storage) {
+        storage.put(fruitRecordDto.getFruitName(),
+                    storage.get(fruitRecordDto.getFruitName()) + fruitRecordDto.getAmount());
     }
 }
