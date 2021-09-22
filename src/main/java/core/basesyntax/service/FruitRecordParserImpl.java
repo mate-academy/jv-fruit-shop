@@ -14,11 +14,11 @@ public class FruitRecordParserImpl implements FruitRecordParser {
 
     @Override
     public List<FruitRecord> parserFruitRecords(List<String> fileLines) {
-        InputDataValidator<String> inputDataValidator = new InputDataValidatorImpl();
+        DataValidator<String> dataValidator = new DataValidatorImpl();
         for (String fileLine : fileLines) {
             try {
-                lineArray = inputDataValidator.validate(fileLine);
-            } catch (InputDataErrorException exc) {
+                lineArray = dataValidator.validate(fileLine);
+            } catch (ValidationException exc) {
                 throw new RuntimeException("Fruit Records is not valid" + fileLine, exc);
             }
             newFruitRecord = new FruitRecord(lineArray[OPERATION_TYPE],

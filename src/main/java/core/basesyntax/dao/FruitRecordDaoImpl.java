@@ -13,13 +13,6 @@ public class FruitRecordDaoImpl implements FruitRecordDao {
     }
 
     @Override
-    public FruitRecord get(String fruitName) {
-        return Storage.fruitRecordList.stream()
-                .filter(f -> f.getFruitName().equals(fruitName))
-                .findFirst().orElseThrow();
-    }
-
-    @Override
     public List<FruitRecord> getAll() {
         return Storage.fruitRecordList;
     }

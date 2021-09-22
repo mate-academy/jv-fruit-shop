@@ -7,8 +7,6 @@ import java.util.Map;
 public interface FruitRecordDao {
     void saveAll(List<FruitRecord> fruitRecord);
 
-    FruitRecord get(String fruitName);
-
     List<FruitRecord> getAll();
 
     Map<String, Integer> getFruitMap();

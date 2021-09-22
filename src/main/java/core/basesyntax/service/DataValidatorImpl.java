@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-public class InputDataValidatorImpl implements InputDataValidator<String> {
+public class DataValidatorImpl implements DataValidator<String> {
     public static final String CSV_SEPARATOR = ",";
     public static final String OPERATIONS = "sbrp";
     public static final int OPERATION_TYPE = 0;
@@ -9,25 +9,25 @@ public class InputDataValidatorImpl implements InputDataValidator<String> {
     private String[] threeElements;
 
     @Override
-    public String[] validate(String fruitRecord) throws InputDataErrorException {
+    public String[] validate(String fruitRecord) throws ValidationException {
         if (fruitRecord == null) {
-            throw new InputDataErrorException("Can't work with empty line:" + fruitRecord);
+            throw new ValidationException("Can't work with empty line:" + fruitRecord);
         }
         threeElements = fruitRecord.split(CSV_SEPARATOR);
         if (threeElements.length != 3) {
-            throw new InputDataErrorException("We need 3 data fields from "
+            throw new ValidationException("We need 3 data fields from "
                     + "a file line operation,friut_type,quantity" + fruitRecord);
         }
         if (!OPERATIONS.contains(threeElements[OPERATION_TYPE])) {
-            throw new InputDataErrorException("Can't operate "
+            throw new ValidationException("Can't operate "
                     + "unknown operation of a fruit shop" + fruitRecord);
         }
         if (Integer.parseInt(threeElements[FRUIT_AMOUNT]) < 0) {
-            throw new InputDataErrorException("Quantity of fruit "
+            throw new ValidationException("Quantity of fruit "
                     + "can't be fewer than 0" + fruitRecord);
         }
         if (!threeElements[FRUIT_NAME].matches("[a-zA-Z]+")) {
-            throw new InputDataErrorException("This is not "
+            throw new ValidationException("This is not "
                     + "an alphabetic sort fruit " + fruitRecord);
         }
         return threeElements;

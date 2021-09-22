@@ -5,7 +5,7 @@ import core.basesyntax.dao.FruitRecordDaoImpl;
 import core.basesyntax.model.FruitRecord;
 import java.util.Map;
 
-public class ReturnOperationHandlerImpl implements OperationHandler {
+public class ReturnHandlerImpl implements OperationHandler {
     @Override
     public void applyOperation(FruitRecord fruitRecord) {
         FruitRecordDao fruitRecordDao = new FruitRecordDaoImpl();
