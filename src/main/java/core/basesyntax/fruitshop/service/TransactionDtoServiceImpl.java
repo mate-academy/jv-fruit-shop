@@ -16,8 +16,8 @@ public class TransactionDtoServiceImpl implements TransactionDtoService {
     private static final List<TransactionDto> transactionList = new ArrayList<>();
     private final Validator validator = new ValidatorImpl();
 
-    public List<TransactionDto> createDto(String pathToFile) {
-        for (String fruit : new FileReaderServiceImpl().readFile(pathToFile)) {
+    public List<TransactionDto> createDto(List<String> data) {
+        for (String fruit : data) {
             String[] tmp = fruit.split(SPLIT_SEPARATOR);
             if (validator.validateTransaction(tmp)) {
                 transactionList.add(new TransactionDto(OperationType

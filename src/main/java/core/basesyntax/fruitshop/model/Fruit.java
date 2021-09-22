@@ -3,7 +3,7 @@ package core.basesyntax.fruitshop.model;
 import java.util.Objects;
 
 public class Fruit {
-    private String name;
+    private final String name;
 
     public Fruit(String name) {
         this.name = name;

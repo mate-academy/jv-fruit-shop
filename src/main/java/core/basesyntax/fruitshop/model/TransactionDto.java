@@ -3,9 +3,9 @@ package core.basesyntax.fruitshop.model;
 import java.util.Objects;
 
 public class TransactionDto {
-    private OperationType operationType;
-    private Fruit fruit;
-    private Integer amount;
+    private final OperationType operationType;
+    private final Fruit fruit;
+    private final Integer amount;
 
     public TransactionDto(OperationType operationType, Fruit fruit, Integer amount) {
         this.operationType = operationType;

@@ -5,18 +5,18 @@ public enum OperationType {
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
-    private final String value;
+    private final String label;
 
     OperationType(String value) {
-        this.value = value;
+        this.label = value;
     }
 
     public static OperationType valueOfLabel(String value) {
-        for (OperationType o : values()) {
-            if (o.value.equals(value)) {
-                return o;
+        for (OperationType type : values()) {
+            if (type.label.equals(value)) {
+                return type;
             }
         }
-        return null;
+        throw new RuntimeException("This operation doesn't exist" + value);
     }
 }

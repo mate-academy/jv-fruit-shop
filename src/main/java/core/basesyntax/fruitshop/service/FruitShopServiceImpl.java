@@ -4,6 +4,7 @@ import core.basesyntax.fruitshop.model.OperationType;
 import core.basesyntax.fruitshop.model.TransactionDto;
 import core.basesyntax.fruitshop.service.operation.OperationHandler;
 import core.basesyntax.fruitshop.storage.Storage;
+import java.util.List;
 import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
@@ -25,8 +26,8 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void applyOperationsOnTransactionDto(String pathToFile) {
-        for (TransactionDto transaction: new TransactionDtoServiceImpl().createDto(pathToFile)) {
+    public void applyOperationsOnTransactionDto(List<TransactionDto> dtoList) {
+        for (TransactionDto transaction: dtoList) {
             OperationHandler operationHandler = operationHandlerMap
                     .get(transaction.getOperationType());
             operationHandler.applyOperation(transaction);
