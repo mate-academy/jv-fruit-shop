@@ -36,9 +36,8 @@ public class Main {
         Writer writer = new WriteToFile(OUT_FILE);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         Map<String, Integer> storage = new HashMap<>();
-        List<TransferDto> dtos;
         Mapper mapper = new Mapper();
-        dtos = mapper.apply(reader.read());
+        List<TransferDto> dtos = mapper.apply(reader.read());
         DataServise dataServise = new DataServiseImpl();
         writer.write(dataServise.report(operationStrategy, dtos, storage));
     }
