@@ -33,7 +33,6 @@ public class Main {
             System.out.println("Can't read file " + FileService.PATH_INPUT + "Exception: " + e);
         }
         list.forEach(System.out::println);
-        System.out.println(list.get(0) + "$$$$$$");
 
         FruitRecordService fruitRecordService = new FruitRecordServiceImpl();
 
@@ -44,7 +43,7 @@ public class Main {
         } catch (ValidationException e) {
             System.out.println("Can't parse data " + "Exception: " + e);
         }
-        System.out.println(fruitRecordList.get(0));
+
         fruitRecordList.forEach(s -> System.out.println(s + "     *******"));
         Map<OperationType, OperationTypeHandler> recordMap = new HashMap<>();
         recordMap.put(OperationType.BALANCE, new BalanceOperationTypeHandler());
