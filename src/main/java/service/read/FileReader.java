@@ -2,6 +2,6 @@ package service.read;
 
 import java.util.List;
 
-public interface ReadService {
+public interface FileReader {
     List<String[]> read(String filePath);
 }
