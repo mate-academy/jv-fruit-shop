@@ -1,11 +1,11 @@
-package core.basesyntax.service;
+package core.basesyntax.service.fileservice;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReaderServiceImpl implements ReaderService {
+public class FileReaderImpl implements FileReader {
     private static final int FIRST_LINE = 0;
 
     @Override

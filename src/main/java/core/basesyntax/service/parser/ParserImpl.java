@@ -3,7 +3,7 @@ package core.basesyntax.service.parser;
 import core.basesyntax.exception.ValidationException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitOperationDto;
-import core.basesyntax.model.TypeOperation;
+import core.basesyntax.model.OperationType;
 import core.basesyntax.service.parser.validator.FruitOperationDtoValidator;
 import core.basesyntax.service.parser.validator.Validator;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class ParserImpl implements Parser<List<String>, List<FruitOperationDto>>
             }
             spliterator = line.split(SPLITERATOR_REGEX);
             fruitOperationDtoList.add(new FruitOperationDto(
-                    TypeOperation.valueOfLabel(spliterator[TYPE_OPERATION_INDEX]),
+                    OperationType.valueOfLabel(spliterator[TYPE_OPERATION_INDEX]),
                     new Fruit(spliterator[FRUIT_INDEX]),
                     Integer.parseInt(spliterator[QUANTITY_INDEX])));
         }

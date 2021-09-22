@@ -21,7 +21,7 @@ public class FruitShopServiceImpl implements FruitShopService {
         for (FruitOperationDto fruitOperationDto : fruitOperationDtoList) {
             Storage.storage.put(fruitOperationDto.getFruit(),
                     operationStrategy.getOperation(fruitOperationDto.getType().getShortOperation())
-                            .changeQuantity(fruitOperationDto));
+                            .apply(fruitOperationDto));
         }
     }
 

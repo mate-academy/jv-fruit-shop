@@ -5,12 +5,13 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitOperationDto;
 import java.util.Map;
 
-public class PurchaseOperation implements OperationHandler {
+public class ObtainingHandler implements OperationHandler {
+
     @Override
-    public int changeQuantity(FruitOperationDto fruitOperationDto) {
+    public int apply(FruitOperationDto fruitOperationDto) {
         for (Map.Entry<Fruit, Integer> mainStorage : Storage.storage.entrySet()) {
             if (fruitOperationDto.getFruit().equals(mainStorage.getKey())) {
-                return mainStorage.getValue() - fruitOperationDto.getQuantity();
+                return mainStorage.getValue() + fruitOperationDto.getQuantity();
             }
         }
         throw new RuntimeException("Invalid operation");
