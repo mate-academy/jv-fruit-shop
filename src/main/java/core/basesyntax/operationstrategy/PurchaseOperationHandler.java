@@ -6,8 +6,9 @@ import core.basesyntax.model.TransactionDto;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public Integer doOperation(TransactionDto transactionDto) {
-        int fruitsQuantityAfterBuy = new FruitRecordsDaoImpl().getAll()
-                .get(transactionDto.getFruit()) - transactionDto.getFruitAmount();
+        int fruitsQuantityAfterBuy = new FruitRecordsDaoImpl()
+                .getFruitAmountFromStorage(transactionDto.getFruit())
+                - transactionDto.getFruitAmount();
         if (fruitsQuantityAfterBuy < 0) {
             throw new RuntimeException("Incorrect operation: "
                     + transactionDto

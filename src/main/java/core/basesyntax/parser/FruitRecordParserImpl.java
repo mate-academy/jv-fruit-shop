@@ -1,7 +1,7 @@
 package core.basesyntax.parser;
 
-import core.basesyntax.OperationType;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.model.OperationType;
 import core.basesyntax.model.TransactionDto;
 import java.util.List;
 import java.util.stream.Collectors;

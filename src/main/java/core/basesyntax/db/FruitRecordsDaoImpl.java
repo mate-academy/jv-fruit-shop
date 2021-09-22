@@ -13,4 +13,9 @@ public class FruitRecordsDaoImpl implements FruitRecordsDao {
     public Map<Fruit, Integer> getAll() {
         return FruitStorage.fruitStorage;
     }
+
+    @Override
+    public int getFruitAmountFromStorage(Fruit fruit) {
+        return FruitStorage.fruitStorage.get(fruit);
+    }
 }

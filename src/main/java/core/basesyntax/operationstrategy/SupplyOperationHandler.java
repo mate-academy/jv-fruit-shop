@@ -6,7 +6,7 @@ import core.basesyntax.model.TransactionDto;
 public class SupplyOperationHandler implements OperationHandler {
     @Override
     public Integer doOperation(TransactionDto transactionDto) {
-        return new FruitRecordsDaoImpl().getAll().get(transactionDto.getFruit())
+        return new FruitRecordsDaoImpl().getFruitAmountFromStorage(transactionDto.getFruit())
                 + transactionDto.getFruitAmount();
     }
 }

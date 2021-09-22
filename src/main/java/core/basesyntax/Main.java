@@ -1,15 +1,16 @@
 package core.basesyntax;
 
-import static core.basesyntax.OperationType.BALANCE;
-import static core.basesyntax.OperationType.PURCHASE;
-import static core.basesyntax.OperationType.RETURN;
-import static core.basesyntax.OperationType.SUPPLY;
+import static core.basesyntax.model.OperationType.BALANCE;
+import static core.basesyntax.model.OperationType.PURCHASE;
+import static core.basesyntax.model.OperationType.RETURN;
+import static core.basesyntax.model.OperationType.SUPPLY;
 
 import core.basesyntax.db.FruitRecordsDao;
 import core.basesyntax.db.FruitRecordsDaoImpl;
 import core.basesyntax.exception.ValidatorException;
 import core.basesyntax.fileservice.FileService;
 import core.basesyntax.fileservice.FileServiceImpl;
+import core.basesyntax.model.OperationType;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.operationstrategy.BalanceOperationHandler;
 import core.basesyntax.operationstrategy.OperationHandler;
