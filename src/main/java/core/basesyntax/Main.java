@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.CalculateImpl;
 import core.basesyntax.service.ParserImpl;
+import core.basesyntax.service.ReportCreatorImpl;
 import core.basesyntax.service.files.FileReaderImpl;
 import core.basesyntax.service.files.FileWriterWithResults;
 import core.basesyntax.service.files.FileWriterWithResultsImpl;
@@ -32,7 +32,7 @@ public class Main {
         strategy.put(TransactionDto.OperationTypes.SUPPLY, new AdditionHendlerImpl());
         OperationsStrategy operationsStrategy = new OperationsStrategyImpl(strategy);
         List<String> outputInformation =
-                new CalculateImpl(operationsStrategy).calculate(parsedInformation);
+                new ReportCreatorImpl(operationsStrategy).createReport(parsedInformation);
         FileWriterWithResults fileWriter = new FileWriterWithResultsImpl();
         fileWriter.writeResultToFile(OUTPUT_PATH, outputInformation);
     }
