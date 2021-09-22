@@ -1,8 +1,6 @@
-package core.basesyntax.operation_hanler_servises;
+package core.basesyntax.operationhanlerservises;
 
 import core.basesyntax.model.TransferDto;
-import core.basesyntax.operation_hanler_servises.OperationHandler;
-
 import java.util.Map;
 
 public class PurchaseHandler implements OperationHandler {

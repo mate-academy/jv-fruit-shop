@@ -1,6 +1,6 @@
 package core.basesyntax.servises;
 
-import core.basesyntax.operation_hanler_servises.OperationHandler;
+import core.basesyntax.operationhanlerservises.OperationHandler;
 
 public interface OperationStrategy {
     public OperationHandler get(OperationType operation);

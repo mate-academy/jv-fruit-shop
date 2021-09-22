@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import core.basesyntax.servises.OperationType;
-
 import java.util.Objects;
 
 public class TransferDto {

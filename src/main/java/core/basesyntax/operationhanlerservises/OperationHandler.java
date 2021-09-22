@@ -1,7 +1,6 @@
-package core.basesyntax.operation_hanler_servises;
+package core.basesyntax.operationhanlerservises;
 
 import core.basesyntax.model.TransferDto;
-
 import java.util.Map;
 
 public interface OperationHandler {
