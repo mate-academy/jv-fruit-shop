@@ -1,19 +1,22 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.db.DataBaseFruit;
+import core.basesyntax.db.FruitDataBase;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecordDto;
+
 import java.util.Map;
 
-public class IncreaseFruitHandlerImpl implements Handler {
+public class IncreaseFruitHandlerImpl implements OperationHandler {
 
     @Override
-    public int changeAmount(FruitRecordDto fruitRecord) {
-        for (Map.Entry<Fruit, Integer> fruitInteger : DataBaseFruit.storage.entrySet()) {
+    public int apply(FruitRecordDto fruitRecord) {
+        int newAmount = 0;
+        for (Map.Entry<Fruit, Integer> fruitInteger : FruitDataBase.storage.entrySet()) {
             if (fruitInteger.getKey().equals(fruitRecord.getFruit())) {
-                return fruitInteger.getValue() + fruitRecord.getQuantity();
+                newAmount = fruitInteger.getValue() + fruitRecord.getQuantity();
             }
         }
-        throw new RuntimeException("Operation is not valid");
+        FruitDataBase.storage.put(fruitRecord.getFruit(), newAmount);
+        return newAmount;
     }
 }

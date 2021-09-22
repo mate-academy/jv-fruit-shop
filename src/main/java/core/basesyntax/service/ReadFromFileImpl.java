@@ -5,11 +5,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadFromFileImpl implements ReadFromFile {
+public class ReadFromFileImpl implements FileReader {
     private static final int FIRST_LINE_INDEX = 0;
 
     @Override
-    public List<String> fileReader(String filePath) {
+    public List<String> read(String filePath) {
         List<String> dataFromFile;
         try {
             dataFromFile = Files.readAllLines(Path.of(filePath));

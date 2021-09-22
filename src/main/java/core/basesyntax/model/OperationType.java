@@ -1,13 +1,13 @@
 package core.basesyntax.model;
 
-public enum TypeOperation {
+public enum OperationType {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
     private String shortName;
 
-    TypeOperation(String shortName) {
+    OperationType(String shortName) {
         this.shortName = shortName;
     }
 

@@ -1,19 +1,19 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitRecordDto;
-import core.basesyntax.model.TypeOperation;
+import core.basesyntax.model.OperationType;
 import core.basesyntax.operation.BalanceHandleImpl;
-import core.basesyntax.operation.Handler;
+import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.IncreaseFruitHandlerImpl;
 import core.basesyntax.operation.OperationStrategy;
 import core.basesyntax.operation.OperationStrategyImpl;
 import core.basesyntax.operation.PurchaseHandlerImpl;
+import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FruitParserImpl;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
-import core.basesyntax.service.ReadFromFile;
 import core.basesyntax.service.ReadFromFileImpl;
-import core.basesyntax.service.WriteToFile;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.WriteToFileImpl;
 import java.util.HashMap;
 import java.util.List;
@@ -24,24 +24,24 @@ public class Main {
     private static final String OUTPUT_FILE = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        ReadFromFile readFromFile = new ReadFromFileImpl();
-        List<String> list = readFromFile.fileReader(INPUT_FILE);
+        FileReader readFromFile = new ReadFromFileImpl();
+        List<String> list = readFromFile.read(INPUT_FILE);
         FruitParserImpl fruitParser = new FruitParserImpl();
-        Map<String, Handler> fruitIntegerMap = new HashMap<>();
-        fruitIntegerMap.put(TypeOperation.BALANCE.getShortName(),
+        Map<String, OperationHandler> fruitIntegerMap = new HashMap<>();
+        fruitIntegerMap.put(OperationType.BALANCE.getShortName(),
                 new BalanceHandleImpl());
-        fruitIntegerMap.put(TypeOperation.SUPPLY.getShortName(),
+        fruitIntegerMap.put(OperationType.SUPPLY.getShortName(),
                 new IncreaseFruitHandlerImpl());
-        fruitIntegerMap.put(TypeOperation.RETURN.getShortName(),
+        fruitIntegerMap.put(OperationType.RETURN.getShortName(),
                 new IncreaseFruitHandlerImpl());
-        fruitIntegerMap.put(TypeOperation.PURCHASE.getShortName(),
+        fruitIntegerMap.put(OperationType.PURCHASE.getShortName(),
                 new PurchaseHandlerImpl());
         OperationStrategy operationStrategy = new OperationStrategyImpl(fruitIntegerMap);
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
         List<FruitRecordDto> fruitRecordDtoList = fruitParser.apply(list);
         fruitShopService.save(fruitRecordDtoList);
         String report = fruitShopService.createReport();
-        WriteToFile writeToFile = new WriteToFileImpl();
-        writeToFile.writeToFile(report, OUTPUT_FILE);
+        FileWriter writeToFile = new WriteToFileImpl();
+        writeToFile.write(report, OUTPUT_FILE);
     }
 }

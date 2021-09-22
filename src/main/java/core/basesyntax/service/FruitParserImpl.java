@@ -15,10 +15,10 @@ public class FruitParserImpl implements Function<List<String>, List<FruitRecordD
     private static final String SPLIT_SYMBOL = ",";
 
     @Override
-    public List<FruitRecordDto> apply(List<String> createList) {
+    public List<FruitRecordDto> apply(List<String> records) {
         Validator validator = new ValidatorImpl();
         List<FruitRecordDto> fruitRecordList = new ArrayList<>();
-        for (String splitArray : createList) {
+        for (String splitArray : records) {
             String[] result = splitArray.split(SPLIT_SYMBOL);
             validator.validator(result);
             fruitRecordList.add(new FruitRecordDto(result[TYPE_INDEX],

@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.DataBaseFruit;
+import core.basesyntax.db.FruitDataBase;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.operation.OperationStrategy;
@@ -19,7 +19,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     public String createReport() {
         StringBuilder stringBuilder = new StringBuilder(COLUMN_NAMES)
                 .append(System.lineSeparator());
-        for (Map.Entry<Fruit, Integer> fruitIntegerEntry : DataBaseFruit.storage.entrySet()) {
+        for (Map.Entry<Fruit, Integer> fruitIntegerEntry : FruitDataBase.storage.entrySet()) {
             stringBuilder.append(fruitIntegerEntry.getKey())
                     .append(",")
                     .append(fruitIntegerEntry.getValue())
@@ -32,10 +32,10 @@ public class FruitShopServiceImpl implements FruitShopService {
     public void save(List<FruitRecordDto> fruitRecordDtos) {
         for (FruitRecordDto fruitRecordDto : fruitRecordDtos) {
             String typeOperation = fruitRecordDto.getType();
-            DataBaseFruit.storage.put(fruitRecordDto.getFruit(),
+            FruitDataBase.storage.put(fruitRecordDto.getFruit(),
                     operationStrategy
-                            .getHandel(typeOperation)
-                            .changeAmount(fruitRecordDto));
+                            .get(typeOperation)
+                            .apply(fruitRecordDto));
         }
     }
 }
