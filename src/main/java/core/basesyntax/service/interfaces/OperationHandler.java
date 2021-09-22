@@ -1,7 +1,7 @@
 package core.basesyntax.service.interfaces;
 
-import core.basesyntax.model.FruitOperation;
+import core.basesyntax.model.FruitRecord;
 
 public interface OperationHandler {
-    int apply(FruitOperation fruitOperationdto);
+    int apply(FruitRecord fruitOperationdto);
 }

@@ -8,7 +8,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     private static final String CSV_SEPARATOR = ",";
 
     @Override
-    public String createDataForReport() {
+    public String generateReport() {
         StringBuilder stringBuilder = new StringBuilder(HEADER);
         Storage.storage.forEach((key, value) -> stringBuilder.append(key.getName())
                 .append(CSV_SEPARATOR)

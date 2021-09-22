@@ -1,11 +1,11 @@
 package core.basesyntax.model;
 
-public class FruitOperation {
+public class FruitRecord {
     private String operation;
     private Fruit fruit;
     private int quantity;
 
-    public FruitOperation(String operation, Fruit fruit, int quantity) {
+    public FruitRecord(String operation, Fruit fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;

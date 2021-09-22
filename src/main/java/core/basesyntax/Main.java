@@ -1,16 +1,16 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitOperation;
+import core.basesyntax.model.FruitRecord;
 import core.basesyntax.model.OperationType;
-import core.basesyntax.service.impl.FileServiceImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
-import core.basesyntax.service.impl.FruitOpParser;
 import core.basesyntax.service.impl.FruitOpValidator;
+import core.basesyntax.service.impl.FruitRecordParser;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
-import core.basesyntax.service.impl.operationhandlersimpls.BalanceOperation;
-import core.basesyntax.service.impl.operationhandlersimpls.PurchaseOperation;
-import core.basesyntax.service.impl.operationhandlersimpls.ReturnOperation;
-import core.basesyntax.service.impl.operationhandlersimpls.SupplyOperation;
+import core.basesyntax.service.impl.operationhandlersimpls.BalanceHandler;
+import core.basesyntax.service.impl.operationhandlersimpls.PurchaseHandler;
+import core.basesyntax.service.impl.operationhandlersimpls.ReturnHandler;
+import core.basesyntax.service.impl.operationhandlersimpls.SupplyHandler;
 import core.basesyntax.service.interfaces.OperationHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,30 +23,27 @@ public class Main {
 
     public static void main(String[] args) {
         Map<OperationType, OperationHandler> map = new HashMap<>();
-        map.put(OperationType.BALANCE, new BalanceOperation());
-        map.put(OperationType.PURCHASE, new PurchaseOperation());
-        map.put(OperationType.RETURN, new ReturnOperation());
-        map.put(OperationType.SUPPLY, new SupplyOperation());
-        FileServiceImpl fileService = new FileServiceImpl();
-        List<String> data = fileService.readFile(sourceFile);
+        map.put(OperationType.BALANCE, new BalanceHandler());
+        map.put(OperationType.PURCHASE, new PurchaseHandler());
+        map.put(OperationType.RETURN, new ReturnHandler());
+        map.put(OperationType.SUPPLY, new SupplyHandler());
+        FileReaderImpl fileService = new FileReaderImpl();
+        List<String> data = fileService.read(sourceFile);
         FruitOpValidator fruitOperationValidator = new FruitOpValidator();
-        FruitOpParser fruitOpParser = new FruitOpParser();
-        List<FruitOperation> dtoList = new ArrayList<>();
+        FruitRecordParser fruitOpParser = new FruitRecordParser();
+        List<FruitRecord> dtoList = new ArrayList<>();
         for (String line : data) {
-            try {
-                fruitOperationValidator.validate(line);
-                dtoList.add(fruitOpParser.parse(line));
-            } catch (ValidationException e) {
-                throw new RuntimeException("Unale to validate " + data);
-            }
+            fruitOperationValidator.validate(line);
+            dtoList.add(fruitOpParser.parse(line));
         }
-        for (FruitOperation dto : dtoList) {
+
+        for (FruitRecord dto : dtoList) {
             OperationHandler operationHandler = map.get(OperationType
                     .getOperation(dto.getOperation()));
             operationHandler.apply(dto);
         }
         ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
-        String dataForReport = reportGenerator.createDataForReport();
+        String dataForReport = reportGenerator.generateReport();
         FileWriterImpl fileWriter = new FileWriterImpl();
         fileWriter.recordDataToFile(resultFile, dataForReport);
     }
