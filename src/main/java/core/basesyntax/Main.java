@@ -12,11 +12,11 @@ import core.basesyntax.implementation.ReturnActivityHandlerImpl;
 import core.basesyntax.implementation.SupplyActivityHandlerImpl;
 import core.basesyntax.implementation.ValidatorImpl;
 import core.basesyntax.implementation.WriterServiceImpl;
-import core.basesyntax.activity.Activities;
 import core.basesyntax.activity.ActivityHandler;
-import core.basesyntax.service.fruitService;
-import core.basesyntax.service.Validator;
 import core.basesyntax.service.WriterService;
+import core.basesyntax.activity.Activities;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.Validator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +40,8 @@ public class Main {
         validator.validate(recordList);
         FileWriter fileWriter = new FileWriterFileImpl();
         WriterService writerService = new WriterServiceImpl(fileWriter, OUTPUT_FILE);
-        fruitService fruiTservice =
-                new fruitService(recordList, writerService, activityStrategy);
+        FruitService fruiTservice =
+                new FruitService(recordList, writerService, activityStrategy);
         fruiTservice.applyOperationsOnFruitsRecords();
         fruiTservice.generateReport();
     }

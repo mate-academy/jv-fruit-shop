@@ -5,12 +5,12 @@ import core.basesyntax.Storage;
 import core.basesyntax.activity.ActivityStrategy;
 import java.util.List;
 
-public class fruitService {
+public class FruitService {
     private final WriterService writerService;
     private final ActivityStrategy activityStrategy;
     private final List<Record> records;
 
-    public fruitService(List<Record> recordList, WriterService writerService,
+    public FruitService(List<Record> recordList, WriterService writerService,
                         ActivityStrategy activityStrategy) {
         this.records = recordList;
         this.writerService = writerService;
@@ -23,8 +23,8 @@ public class fruitService {
                     .activity(record.getFruit(), record.getAmount());
         }
     }
+
     public void generateReport() {
         writerService.writeData(Storage.fruitStorage);
-
     }
 }

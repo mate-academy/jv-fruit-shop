@@ -1,7 +1,7 @@
 package core.basesyntax.implementation;
 
-import core.basesyntax.activity.ActivityStrategy;
 import core.basesyntax.activity.ActivityHandler;
+import core.basesyntax.activity.ActivityStrategy;
 import java.util.Map;
 
 public class ActivityStrategyImpl implements ActivityStrategy {

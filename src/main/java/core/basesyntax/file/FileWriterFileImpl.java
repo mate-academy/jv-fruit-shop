@@ -9,11 +9,11 @@ import java.util.List;
 public class FileWriterFileImpl implements FileWriter {
 
     @Override
-    public void write(List<String> resultList, String FilePath) {
+    public void write(List<String> resultList, String filePath) {
         try {
-            Files.write(Path.of(FilePath), resultList, StandardOpenOption.CREATE);
+            Files.write(Path.of(filePath), resultList, StandardOpenOption.CREATE);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to " + FilePath);
+            throw new RuntimeException("Can't write to " + filePath);
         }
     }
 }
