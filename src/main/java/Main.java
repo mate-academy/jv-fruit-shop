@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.Fruit;
-import service.handler.AdditionHandler;
-import service.handler.OperationHandler;
-import service.handler.SubtractionHandler;
-import service.read.FileReadService;
-import service.read.FileReadServiceImpl;
+import service.operation.AddOperation;
+import service.operation.Calculator;
+import service.operation.SubtractionOperation;
+import service.read.FileReadImpl;
+import service.read.FileReader;
 import service.storage.StoreService;
 import service.storage.StoreServiceImpl;
 import service.validator.ValidatorProcess;
@@ -22,22 +22,22 @@ public class Main {
     private static final String OUTPUT_FILE_NAME = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        FileReadService fileReader = new FileReadServiceImpl();
-        List<String> doneFileReading = fileReader.fileReader(INPUT_FILE_NAME);
+        FileReader fileReader = new FileReadImpl();
+        List<String> fruitRecords = fileReader.read(INPUT_FILE_NAME);
         ValidatorProcess validatorProcess = new ValidatorProcess();
-        validatorProcess.checkAllList(doneFileReading);
+        validatorProcess.checkAllList(fruitRecords);
 
-        Map<Fruit.TypeOperation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Fruit.TypeOperation.BALANCE, new AdditionHandler());
-        operationHandlerMap.put(Fruit.TypeOperation.PURCHASE, new SubtractionHandler());
-        operationHandlerMap.put(Fruit.TypeOperation.SUPPLY, new AdditionHandler());
-        operationHandlerMap.put(Fruit.TypeOperation.RETURN, new AdditionHandler());
+        Map<Fruit.OperationType, Calculator> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Fruit.OperationType.BALANCE, new AddOperation());
+        operationHandlerMap.put(Fruit.OperationType.PURCHASE, new SubtractionOperation());
+        operationHandlerMap.put(Fruit.OperationType.SUPPLY, new AddOperation());
+        operationHandlerMap.put(Fruit.OperationType.RETURN, new AddOperation());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FruitsDao fruitsDao = new FruitsDaoImpl();
         StoreService storeService = new StoreServiceImpl(operationStrategy, fruitsDao);
-        storeService.addToMap(doneFileReading);
-        String report = storeService.getReportFromStorage();
+        storeService.applyToDb(fruitRecords);
+        String report = storeService.getDbReport();
         FileWriteService writeService = new FileWriteServiceImpl();
         writeService.fileWriter(report, OUTPUT_FILE_NAME);
     }

@@ -6,13 +6,13 @@ import model.Fruit;
 
 public class FruitsDaoImpl implements FruitsDao {
     @Override
-    public void add(Fruit operationFruit, int value) {
-        Storage.storageFruits.put(operationFruit, value);
+    public void save(Fruit fruit, int value) {
+        Storage.storageFruits.put(fruit, value);
     }
 
     @Override
-    public int get(Fruit operationFruit) {
-        return Storage.storageFruits.getOrDefault(operationFruit, 0);
+    public int get(Fruit fruit) {
+        return Storage.storageFruits.getOrDefault(fruit, 0);
     }
 
     @Override

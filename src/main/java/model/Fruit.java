@@ -5,12 +5,12 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Fruit implements Comparable<Fruit> {
-    private TypeOperation typeOperation;
+    private OperationType operationType;
     private String fruitName;
     private int value;
 
-    public Fruit(TypeOperation typeOperation, String fruitName, int value) {
-        this.typeOperation = typeOperation;
+    public Fruit(OperationType typeOperation, String fruitName, int value) {
+        this.operationType = typeOperation;
         this.fruitName = fruitName;
         this.value = value;
     }
@@ -31,30 +31,30 @@ public class Fruit implements Comparable<Fruit> {
         this.value = value;
     }
 
-    public TypeOperation getTypeOperation() {
-        return typeOperation;
+    public OperationType getOperationType() {
+        return operationType;
     }
 
-    public void setTypeOperation(TypeOperation typeOperation) {
-        this.typeOperation = typeOperation;
+    public void setOperationType(OperationType operationType) {
+        this.operationType = operationType;
     }
 
-    public enum TypeOperation {
+    public enum OperationType {
         BALANCE("b"),
         SUPPLY("s"),
         RETURN("r"),
         PURCHASE("p");
 
-        private static final Map<String, TypeOperation> mapTypes = new HashMap<>();
+        private static final Map<String, OperationType> mapTypes = new HashMap<>();
         static {
-            for (TypeOperation type : TypeOperation.values()) {
+            for (OperationType type : OperationType.values()) {
                 mapTypes.put(type.getNameType(), type);
             }
         }
 
         private String nameType;
 
-        TypeOperation(String nameType) {
+        OperationType(String nameType) {
             this.nameType = nameType;
         }
 
@@ -66,13 +66,13 @@ public class Fruit implements Comparable<Fruit> {
             this.nameType = nameType;
         }
 
-        public static TypeOperation get(String nameType) {
+        public static OperationType get(String nameType) {
             return mapTypes.get(nameType);
         }
     }
 
     public static boolean contains(String values) {
-        for (Fruit.TypeOperation operationFruit : Fruit.TypeOperation.values()) {
+        for (OperationType operationFruit : OperationType.values()) {
             if (operationFruit.toString().equalsIgnoreCase(values)) {
                 return true;
             }
@@ -82,6 +82,9 @@ public class Fruit implements Comparable<Fruit> {
 
     @Override
     public int compareTo(Fruit operationFruit) {
+        if (fruitName == null) {
+            throw new RuntimeException("Fruit not found, value: " + fruitName);
+        }
         return fruitName.compareTo(operationFruit.getFruitName());
     }
 

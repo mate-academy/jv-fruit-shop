@@ -4,7 +4,7 @@ import java.util.Map;
 import model.Fruit;
 
 public interface FruitsDao {
-    void add(Fruit operationFruit, int value);
+    void save(Fruit operationFruit, int value);
 
     int get(Fruit operationFruit);
 

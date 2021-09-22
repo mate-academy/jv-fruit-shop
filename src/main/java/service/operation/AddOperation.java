@@ -1,6 +1,6 @@
-package service.handler;
+package service.operation;
 
-public class AdditionHandler implements OperationHandler {
+public class AddOperation implements Calculator {
     @Override
     public int calculateValue(int oldValue, int value) {
         return oldValue + value;

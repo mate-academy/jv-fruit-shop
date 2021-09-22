@@ -3,7 +3,7 @@ package service.storage;
 import java.util.List;
 
 public interface StoreService {
-    void addToMap(List<String> dataFromFile);
+    void applyToDb(List<String> dataFromFile);
 
-    String getReportFromStorage();
+    String getDbReport();
 }
