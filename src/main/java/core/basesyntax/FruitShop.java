@@ -1,12 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.dto.Transaction;
-import core.basesyntax.services.FileReaderService;
-import core.basesyntax.services.FileWriterService;
-import core.basesyntax.services.ReportFruitService;
-import core.basesyntax.services.impl.FileReaderServiceImpl;
-import core.basesyntax.services.impl.FileWriterServiceImpl;
-import core.basesyntax.services.impl.ReportFruitServiceImpl;
+import core.basesyntax.services.FileReader;
+import core.basesyntax.services.FileWriter;
+import core.basesyntax.services.FruitReportService;
+import core.basesyntax.services.impl.FileReaderImpl;
+import core.basesyntax.services.impl.FileWriterImpl;
+import core.basesyntax.services.impl.FruitReportServiceImpl;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.PurchaseOperation;
@@ -30,11 +30,11 @@ public class FruitShop {
         operationMap.put(Transaction.Operation.BALANCE, new BalanceOperation());
         operationMap.put(Transaction.Operation.PURCHASE, new PurchaseOperation());
 
-        FileReaderService fileReader = new FileReaderServiceImpl();
+        FileReader fileReader = new FileReaderImpl();
         List<String> listData = fileReader.readFromFile(INPUT_FILEPATH);
         listData.remove(removeIndex);
-        ReportFruitService reportFruit = new ReportFruitServiceImpl();
-        FileWriterService fileWriter = new FileWriterServiceImpl();
+        FruitReportService reportFruit = new FruitReportServiceImpl();
+        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(OUTPUT_FILEPATH, reportFruit.createReport(listData, operationMap)
                 + System.lineSeparator());
     }
