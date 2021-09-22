@@ -8,7 +8,7 @@ import core.basesyntax.service.OperationStrategyImpl;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.data.CsvOperationParser;
-import core.basesyntax.service.data.DataParser;
+import core.basesyntax.service.data.DataParserImpl;
 import core.basesyntax.service.file.ReaderService;
 import core.basesyntax.service.file.ReaderServiceImpl;
 import core.basesyntax.service.file.WriterService;
@@ -32,7 +32,7 @@ public class Main {
         operationStrategyMap.put(Operation.Type.RETURN, new IncreaseOperationHandler());
         ReaderService readerService = new ReaderServiceImpl();
         List<String> dataFromFile = readerService.readFromFile(FROM_FILE_CSV);
-        DataParser<Operation, String> dataParser = new CsvOperationParser();
+        DataParserImpl<Operation, String> dataParser = new CsvOperationParser();
         List<Operation> operations = dataParser.formatData(dataFromFile);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         AmountCalculator amountCalculator = new AmountCalculatorImpl(operationStrategy);

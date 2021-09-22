@@ -4,7 +4,7 @@ import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvOperationParser implements DataParser<Operation, String> {
+public class CsvOperationParser implements DataParserImpl<Operation, String> {
     private static final int TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
@@ -16,7 +16,6 @@ public class CsvOperationParser implements DataParser<Operation, String> {
         DataValidator dataValidator = new DataValidatorImpl();
         List<Operation> operations = new ArrayList<>();
         data.remove(FIRST_LINE_OF_CSV);
-
         for (String proper : data) {
             String[] properArray = proper.split(DATA_SPLITTER);
             dataValidator.validate(properArray);
