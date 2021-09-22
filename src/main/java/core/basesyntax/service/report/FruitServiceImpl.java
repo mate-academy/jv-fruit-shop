@@ -20,7 +20,7 @@ public class FruitServiceImpl implements FruitService {
         for (TransactionDto operation : operations) {
             FruitStorage.fruitsDataBase.put(operation.getFruitType(),
                     operationStrategy.getOperationHandler(operation.getOperationType())
-                    .setDataInStorage(FruitStorage.fruitsDataBase.get(operation.getFruitType()),
+                    .newAmountByOperation(FruitStorage.fruitsDataBase.get(operation.getFruitType()),
                             operation.getFruitAmount()));
         }
     }
