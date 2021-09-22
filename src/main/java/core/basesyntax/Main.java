@@ -38,8 +38,8 @@ public class Main {
         List<Record> recordList = recordParser.parseRecords(inputData);
         Validator validator = new ValidatorImpl();
         validator.validate(recordList);
-        FileWriter fileWriter = new FileWriterFileImpl(OUTPUT_FILE);
-        WriterService writerService = new WriterServiceImpl(fileWriter);
+        FileWriter fileWriter = new FileWriterFileImpl();
+        WriterService writerService = new WriterServiceImpl(fileWriter, OUTPUT_FILE);
         fruitService fruiTservice =
                 new fruitService(recordList, writerService, activityStrategy);
         fruiTservice.applyOperationsOnFruitsRecords();

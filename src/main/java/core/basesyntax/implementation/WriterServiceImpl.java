@@ -10,9 +10,11 @@ public class WriterServiceImpl implements WriterService {
     private static final String FIELDS_NAMES = "fruit,quantity";
     private static final String COMA = ",";
     private final FileWriter fileWriter;
+    private final String filePath;
 
-    public WriterServiceImpl(FileWriter fileWriter) {
+    public WriterServiceImpl(FileWriter fileWriter, String filePath) {
         this.fileWriter = fileWriter;
+        this.filePath = filePath;
     }
 
     @Override
@@ -22,6 +24,6 @@ public class WriterServiceImpl implements WriterService {
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             resultList.add(entry.getKey() + COMA + entry.getValue());
         }
-        fileWriter.write(resultList);
+        fileWriter.write(resultList, filePath);
     }
 }

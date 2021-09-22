@@ -7,18 +7,13 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class FileWriterFileImpl implements FileWriter {
-    private final String writeToFilePath;
-
-    public FileWriterFileImpl(String writeFilePath) {
-        this.writeToFilePath = writeFilePath;
-    }
 
     @Override
-    public void write(List<String> list) {
+    public void write(List<String> resultList, String FilePath) {
         try {
-            Files.write(Path.of(writeToFilePath), list, StandardOpenOption.CREATE);
+            Files.write(Path.of(FilePath), resultList, StandardOpenOption.CREATE);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to " + writeToFilePath);
+            throw new RuntimeException("Can't write to " + FilePath);
         }
     }
 }
