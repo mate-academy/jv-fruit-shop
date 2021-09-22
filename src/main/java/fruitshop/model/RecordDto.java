@@ -1,6 +1,6 @@
 package fruitshop.model;
 
-public class OperationsDto {
+public class RecordDto {
     private OperationType operationType;
     private Fruit fruitType;
     private int amount;

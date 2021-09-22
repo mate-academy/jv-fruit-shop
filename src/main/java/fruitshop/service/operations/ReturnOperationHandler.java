@@ -2,20 +2,20 @@ package fruitshop.service.operations;
 
 import fruitshop.fruitstoragedb.FruitStorage;
 import fruitshop.model.Fruit;
-import fruitshop.model.OperationsDto;
-import java.util.Map;
+import fruitshop.model.RecordDto;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public void applyOperation(OperationsDto data) {
-        Map<Fruit,Integer> fruitStorage = FruitStorage.getStorage();
+    public void applyOperation(RecordDto data) {
         Fruit fruit = data.getFruitType();
         int amountOfReturnedFruits = data.getAmount();
-        if (fruitStorage.containsKey(fruit)) {
-            Integer amountAfterReturn = fruitStorage.get(fruit) + amountOfReturnedFruits;
-            fruitStorage.replace(fruit, fruitStorage.get(fruit), amountAfterReturn);
+        if (FruitStorage.getStorage().containsKey(fruit)) {
+            Integer amountAfterReturn = FruitStorage.getStorage()
+                    .get(fruit) + amountOfReturnedFruits;
+            FruitStorage.getStorage().replace(fruit, FruitStorage.getStorage()
+                    .get(fruit), amountAfterReturn);
         } else {
-            fruitStorage.put(fruit, amountOfReturnedFruits);
+            FruitStorage.getStorage().put(fruit, amountOfReturnedFruits);
         }
     }
 }

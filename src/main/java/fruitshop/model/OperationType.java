@@ -1,12 +1,16 @@
 package fruitshop.model;
 
+import fruitshop.service.validators.InvalidDataException;
+
 public enum OperationType {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
 
+    private static final String INVALID_OPERATION_NOTIFICATION = "No such operation available";
     private final String shortName;
+
     OperationType(String shortName) {
         this.shortName = shortName;
     }
@@ -16,13 +20,11 @@ public enum OperationType {
     }
 
     public static OperationType valueOfLabel(String shortName) {
-        OperationType operation = null;
         for (OperationType o: values()) {
             if (o.shortName.equals(shortName)) {
-                operation = o;
-                break;
+                return o;
             }
         }
-        return operation;
+        throw new InvalidDataException(INVALID_OPERATION_NOTIFICATION);
     }
 }

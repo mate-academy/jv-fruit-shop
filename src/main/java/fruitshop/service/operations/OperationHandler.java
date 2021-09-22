@@ -1,7 +1,7 @@
 package fruitshop.service.operations;
 
-import fruitshop.model.OperationsDto;
+import fruitshop.model.RecordDto;
 
 public interface OperationHandler {
-    public void applyOperation(OperationsDto data);
+    public void applyOperation(RecordDto data);
 }

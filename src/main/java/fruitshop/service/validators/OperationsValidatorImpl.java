@@ -2,7 +2,7 @@ package fruitshop.service.validators;
 
 import java.util.List;
 
-public class ValidatorImpl implements OperationsValidator {
+public class OperationsValidatorImpl implements OperationsValidator {
     private static final String EMPTY_INPUT_FILE_NOTIFICATION
             = "Invalid Data. Input file is empty";
     private static final String NOT_FULL_OPERATION_INFO_NOTIFICATION

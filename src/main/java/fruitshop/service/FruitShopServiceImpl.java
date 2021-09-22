@@ -1,11 +1,6 @@
 package fruitshop.service;
 
-import fruitshop.model.OperationsDto;
-import fruitshop.service.reporthandlers.ReportGenerator;
-import fruitshop.service.reporthandlers.ReportGeneratorImpl;
-import fruitshop.service.reporthandlers.ReportSupplier;
-import fruitshop.service.reporthandlers.RepotrToFIleConverter;
-import java.io.File;
+import fruitshop.model.RecordDto;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
@@ -15,15 +10,9 @@ public class FruitShopServiceImpl implements FruitShopService {
         this.operationStrategy = operationStrategy;
     }
 
-    public void fruitStorageModifier(List<OperationsDto> dataInDto) {
-        for (OperationsDto infoLine : dataInDto) {
+    public void fruitStorageModifier(List<RecordDto> dataInDto) {
+        for (RecordDto infoLine : dataInDto) {
             operationStrategy.get(infoLine.getOperationType()).applyOperation(infoLine);
         }
-    }
-
-    public File fileReportBuilder(String reportFileName) {
-        ReportGenerator stringReport = new ReportGeneratorImpl();
-        ReportSupplier fileReport = new RepotrToFIleConverter();
-        return fileReport.writeToFile(stringReport, reportFileName);
     }
 }
