@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.activity.ActivityStrategy;
-import core.basesyntax.file.ReadFromCsvFile;
-import core.basesyntax.file.ReadFromCsvFileImpl;
+import core.basesyntax.file.CsvFileReader;
+import core.basesyntax.file.CsvFileReaderImpl;
 import core.basesyntax.file.Writer;
 import core.basesyntax.file.WriterFileImpl;
 import core.basesyntax.implementation.ActivityStrategyImpl;
@@ -32,7 +32,7 @@ public class Main {
         activities.put(Activities.PURCHASE.getActivity(), new PurchaseActivityHandlerImpl());
         activities.put(Activities.RETURN.getActivity(), new ReturnActivityHandlerImpl());
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activities);
-        ReadFromCsvFile csvReader = new ReadFromCsvFileImpl();
+        CsvFileReader csvReader = new CsvFileReaderImpl();
         String inputData = csvReader.readFromFile(INPUT_FILE);
         RecordParser recordParser = new RecordParser();
         List<Record> recordList = recordParser.parseRecords(inputData);

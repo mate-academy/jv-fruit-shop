@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ReadFromCsvFileImpl implements ReadFromCsvFile {
+public class CsvFileReaderImpl implements CsvFileReader {
     static final String CSV_FIELDS_NAMES = "type,fruit,quantity";
 
     @Override
