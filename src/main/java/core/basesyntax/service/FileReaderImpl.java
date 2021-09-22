@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadFromFileImpl implements FileReader {
+public class FileReaderImpl implements FileReader {
     private static final int FIRST_LINE_INDEX = 0;
 
     @Override
