@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.activity;
 
 public enum Activities {
     BALANCE("b"),

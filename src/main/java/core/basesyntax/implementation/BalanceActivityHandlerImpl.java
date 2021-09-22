@@ -1,7 +1,7 @@
 package core.basesyntax.implementation;
 
 import core.basesyntax.Storage;
-import core.basesyntax.service.ActivityHandler;
+import core.basesyntax.activity.ActivityHandler;
 
 public class BalanceActivityHandlerImpl implements ActivityHandler {
     @Override
