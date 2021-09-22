@@ -11,7 +11,7 @@ import service.WriteFile;
 import service.WriteFileImpl;
 import service.WriteRecordsToDB;
 import service.WriteRecordsToDbImpl;
-import service.fruitrecord.FruitRecord;
+import fruitrecord.FruitRecord;
 
 public class FruitShopImpl implements FruitShop {
     private ActivitiesStrategy strategy;

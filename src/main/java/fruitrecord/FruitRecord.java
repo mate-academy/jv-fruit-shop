@@ -1,4 +1,4 @@
-package service.fruitrecord;
+package fruitrecord;
 
 import service.activities.TypeOfActivities;
 

@@ -2,7 +2,7 @@ package service.activities;
 
 import db.Storage;
 import javax.management.openmbean.InvalidKeyException;
-import service.fruitrecord.FruitRecord;
+import fruitrecord.FruitRecord;
 
 public class Purchase implements ActivityHandler {
     @Override

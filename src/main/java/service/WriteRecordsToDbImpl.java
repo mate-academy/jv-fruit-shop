@@ -1,7 +1,7 @@
 package service;
 
 import java.util.List;
-import service.fruitrecord.FruitRecord;
+import fruitrecord.FruitRecord;
 
 public class WriteRecordsToDbImpl implements WriteRecordsToDB {
     @Override

@@ -1,6 +1,6 @@
 package service.activities;
 
-import service.fruitrecord.FruitRecord;
+import fruitrecord.FruitRecord;
 
 public interface ActivityHandler {
     void apply(FruitRecord record);

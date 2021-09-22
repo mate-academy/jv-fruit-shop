@@ -1,7 +1,7 @@
 package service.activities;
 
 import db.Storage;
-import service.fruitrecord.FruitRecord;
+import fruitrecord.FruitRecord;
 
 public class Balance implements ActivityHandler {
     @Override
