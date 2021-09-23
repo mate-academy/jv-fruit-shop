@@ -3,12 +3,12 @@ package core.basesyntax.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Operation {
+public class FruitRecordDto {
     private final Type type;
     private final String fruit;
     private final int amount;
 
-    public Operation(Type type, String fruit, int amount) {
+    public FruitRecordDto(Type type, String fruit, int amount) {
         this.type = type;
         this.fruit = fruit;
         this.amount = amount;

@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.db.FruitStorage;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +14,12 @@ public class AmountCalculatorImpl implements AmountCalculator {
     }
 
     @Override
-    public Map<String, Integer> calculateDataForReport(List<Operation> operations) {
-        Map<String, Integer> fruitsStorage = new HashMap<>();
-        for (Operation operation : operations) {
-            int newAmount = operationStrategy.get(operation.getType())
-                    .getAmount(operation, fruitsStorage);
-            fruitsStorage.put(operation.getFruit(), newAmount);
+    public Map<String, Integer> calculateDataForReport(List<FruitRecordDto> fruitRecordDtos) {
+        for (FruitRecordDto fruitRecordDto : fruitRecordDtos) {
+            int newAmount = operationStrategy.get(fruitRecordDto.getType())
+                    .getAmount(fruitRecordDto, FruitStorage.fruitsDataBase);
+            FruitStorage.fruitsDataBase.put(fruitRecordDto.getFruit(), newAmount);
         }
-        return fruitsStorage;
+        return FruitStorage.fruitsDataBase;
     }
 }

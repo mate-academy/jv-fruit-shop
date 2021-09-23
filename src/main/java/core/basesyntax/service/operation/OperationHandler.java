@@ -1,8 +1,9 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.db.FruitStorage;
+import core.basesyntax.model.FruitRecordDto;
 import java.util.Map;
 
 public interface OperationHandler {
-    int getAmount(Operation operation, Map<String, Integer> fruitsStorage);
+    int getAmount(FruitRecordDto fruitRecordDto,  Map<String, Integer> fruitsStorage);
 }

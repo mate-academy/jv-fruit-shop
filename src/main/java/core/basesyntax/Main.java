@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.FruitRecordDto;
 import core.basesyntax.service.AmountCalculator;
 import core.basesyntax.service.AmountCalculatorImpl;
 import core.basesyntax.service.OperationStrategy;
@@ -25,18 +25,18 @@ public class Main {
     private static final String TO_FILE_CSV = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        Map<Operation.Type, OperationHandler> operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put(Operation.Type.BALANCE, new IncreaseOperationHandler());
-        operationStrategyMap.put(Operation.Type.SUPPLY, new IncreaseOperationHandler());
-        operationStrategyMap.put(Operation.Type.PURCHASE, new DecreaseOperationHandler());
-        operationStrategyMap.put(Operation.Type.RETURN, new IncreaseOperationHandler());
+        Map<FruitRecordDto.Type, OperationHandler> operationStrategyMap = new HashMap<>();
+        operationStrategyMap.put(FruitRecordDto.Type.BALANCE, new IncreaseOperationHandler());
+        operationStrategyMap.put(FruitRecordDto.Type.SUPPLY, new IncreaseOperationHandler());
+        operationStrategyMap.put(FruitRecordDto.Type.PURCHASE, new DecreaseOperationHandler());
+        operationStrategyMap.put(FruitRecordDto.Type.RETURN, new IncreaseOperationHandler());
         ReaderService readerService = new ReaderServiceImpl();
         List<String> dataFromFile = readerService.readFromFile(FROM_FILE_CSV);
-        DataParser<Operation, String> dataParser = new DataParserImpl();
-        List<Operation> operations = dataParser.formatData(dataFromFile);
+        DataParser<FruitRecordDto, String> dataParser = new DataParserImpl();
+        List<FruitRecordDto> fruitRecordDtos = dataParser.formatData(dataFromFile);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         AmountCalculator amountCalculator = new AmountCalculatorImpl(operationStrategy);
-        Map<String, Integer> calculateFruits = amountCalculator.calculateDataForReport(operations);
+        Map<String, Integer> calculateFruits = amountCalculator.calculateDataForReport(fruitRecordDtos);
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
         writerService.write(TO_FILE_CSV, reportService.createReport(calculateFruits));
