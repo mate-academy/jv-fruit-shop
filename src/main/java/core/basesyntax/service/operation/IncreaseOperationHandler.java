@@ -10,7 +10,8 @@ public class IncreaseOperationHandler implements OperationHandler {
 
     @Override
     public int getAmount(FruitRecordDto fruitRecordDto, Map<String, Integer> fruitsStorage) {
-        Optional<Integer> amount = Optional.ofNullable(FruitStorage.fruitsDataBase.get(fruitRecordDto.getFruit()));
+        Optional<Integer> amount
+                = Optional.ofNullable(FruitStorage.fruitsDataBase.get(fruitRecordDto.getFruit()));
         return amount.orElse(INITIAL_AMOUNT) + fruitRecordDto.getAmount();
     }
 }

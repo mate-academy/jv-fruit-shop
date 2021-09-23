@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitRecordDto;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

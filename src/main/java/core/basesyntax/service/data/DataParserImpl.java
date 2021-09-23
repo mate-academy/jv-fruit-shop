@@ -9,8 +9,8 @@ public class DataParserImpl implements DataParser<FruitRecordDto, String> {
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
     private static final String DATA_SPLITTER = ",";
-    public static final int FIRST_LINE_OF_CSV = 0;
-    public DataValidator dataValidator = new DataValidatorImpl();
+    private static final int FIRST_LINE_OF_CSV = 0;
+    private DataValidator dataValidator = new DataValidatorImpl();
 
     public DataParserImpl(DataValidator dataValidator) {
         this.dataValidator = dataValidator;
