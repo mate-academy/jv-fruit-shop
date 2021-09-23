@@ -1,6 +1,5 @@
 package core.basesyntax.service.validators;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
