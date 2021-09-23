@@ -5,9 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FileReaderCsvImpl implements FileReaderCsv {
+public class CsvFileReaderImpl implements CsvFileReader {
     @Override
-    public List<String> getActivities(String pathToFile) {
+    public List<String> read(String pathToFile) {
         try {
             return Files.readAllLines(Path.of(pathToFile));
         } catch (IOException e) {

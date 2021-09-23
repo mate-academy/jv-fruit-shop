@@ -1,15 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.exceptions.InvalidInputException;
 import core.basesyntax.model.ActivitiesType;
 import core.basesyntax.service.ActivityService;
 import core.basesyntax.service.ActivityServiceImpl;
 import core.basesyntax.service.ActivityTypeStrategy;
 import core.basesyntax.service.ActivityTypeStrategyImpl;
-import core.basesyntax.service.FileReaderCsv;
-import core.basesyntax.service.FileReaderCsvImpl;
-import core.basesyntax.service.FileWriterCsv;
-import core.basesyntax.service.FileWriterCsvImpl;
+import core.basesyntax.service.CsvFileReader;
+import core.basesyntax.service.CsvFileReaderImpl;
+import core.basesyntax.service.CsvFileWriter;
+import core.basesyntax.service.CsvFileWriterImpl;
 import core.basesyntax.service.activityhandler.ActivityHandler;
 import core.basesyntax.service.activityhandler.BalanceHandler;
 import core.basesyntax.service.activityhandler.PurchaseHandler;
@@ -37,18 +36,18 @@ public class Main {
         activityTypeHandlerMap.put(ActivitiesType.r, returnActivityHandler);
         ActivityTypeStrategy activityTypeStrategy =
                 new ActivityTypeStrategyImpl(activityTypeHandlerMap);
-        FileReaderCsv fileReaderCsv = new FileReaderCsvImpl();
-        List<String> activities = fileReaderCsv.getActivities(FROM_FILE);
+        CsvFileReader csvFileReader = new CsvFileReaderImpl();
+        List<String> activities = csvFileReader.read(FROM_FILE);
         InputValidator validator = new InputValidatorImpl();
         try {
             validator.validate(activities);
-        } catch (InvalidInputException e) {
+        } catch (IllegalArgumentException e) {
             throw new RuntimeException(e);
         }
         Map<String, Integer> reportStorage;
         ActivityService activityService = new ActivityServiceImpl();
         reportStorage = activityService.processActivities(activityTypeStrategy, activities);
-        FileWriterCsv fileWriterCsv = new FileWriterCsvImpl();
-        fileWriterCsv.writeReportInFile(TO_FILE, reportStorage);
+        CsvFileWriter csvFileWriter = new CsvFileWriterImpl();
+        csvFileWriter.write(TO_FILE, reportStorage);
     }
 }
