@@ -43,7 +43,7 @@ Let's check in details all types of activities:
 
 ### Input file example
 ```text
-    type,fruit,quantity
+    operation,fruit,quantity
     b,banana,20
     b,apple,100
     s,banana,100
@@ -70,14 +70,14 @@ For validation create separate class Validator with corresponding method. You ca
 File has been read during parsing of raw data.
 If the file has mistakes, you should throw an exception. Example of incorrect input file:
 ```text
-    type,fruit,quantity
+    operation,fruit,quantity
     b,banana,20
     p,
     s,banana,50 
 ```
 or
 ```text
-    type,fruit,quantity
+    operation,fruit,quantity
     b,banana,20
     p,banana,-10 // Buyers will not be able to buy -10 bananas. -10 is incorrect input.
     s,banana,50 
