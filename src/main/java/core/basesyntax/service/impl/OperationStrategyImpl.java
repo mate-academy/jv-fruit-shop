@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.*;
-import core.basesyntax.service.*;
-import core.basesyntax.service.strategy.*;
-import java.util.*;
+import core.basesyntax.model.FruitRecord;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.strategy.OperationHandler;
+import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private static final String MESSAGE = "Invalid input operation";

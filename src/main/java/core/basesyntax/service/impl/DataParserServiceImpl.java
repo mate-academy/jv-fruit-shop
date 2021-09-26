@@ -1,8 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.*;
-import core.basesyntax.service.*;
-import java.util.*;
+import core.basesyntax.model.FruitRecord;
+import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.FruitOperationValidator;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataParserServiceImpl implements DataParserService<FruitRecord, String> {
     private static final int TYPE = 0;

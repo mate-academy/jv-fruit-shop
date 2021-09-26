@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.*;
-import java.util.*;
+import core.basesyntax.service.FruitOperationValidator;
+import java.util.Arrays;
 
 public class FruitOperationValidatorImpl implements FruitOperationValidator {
     private static final int AMOUNT = 2;

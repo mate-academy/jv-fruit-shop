@@ -1,6 +1,8 @@
 package core.basesyntax.model;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FruitRecord {
     private final Operation operation;

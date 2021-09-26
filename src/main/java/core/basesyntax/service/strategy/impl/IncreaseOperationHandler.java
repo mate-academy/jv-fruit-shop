@@ -1,8 +1,9 @@
 package core.basesyntax.service.strategy.impl;
 
-import core.basesyntax.model.*;
-import core.basesyntax.service.strategy.*;
-import java.util.*;
+import core.basesyntax.model.FruitRecord;
+import core.basesyntax.service.strategy.OperationHandler;
+import java.util.Map;
+import java.util.Optional;
 
 public class IncreaseOperationHandler implements OperationHandler {
     private static final Integer INITIAL_BALANCE = 0;

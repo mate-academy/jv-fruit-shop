@@ -1,7 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.*;
-import java.io.*;
+import core.basesyntax.service.WriterService;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class WriterServiceImpl implements WriterService {
     private static final String MESSAGE = "Can't write to a file: ";

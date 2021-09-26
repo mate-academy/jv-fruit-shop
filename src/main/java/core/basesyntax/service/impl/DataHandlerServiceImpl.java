@@ -1,8 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.*;
-import core.basesyntax.service.*;
-import java.util.*;
+import core.basesyntax.model.FruitRecord;
+import core.basesyntax.service.DataHandlerService;
+import core.basesyntax.service.OperationStrategy;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DataHandlerServiceImpl implements DataHandlerService {
     private final OperationStrategy operationStrategy;
