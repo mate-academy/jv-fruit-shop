@@ -1,19 +1,19 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportService;
-import java.util.Map;
+import core.basesyntax.service.*;
+import java.util.*;
 
 public class ReportServiceImpl implements ReportService {
+    private static final String INFO_LINE = "fruit,quantity";
     private static final String COMMA = ",";
-    private static final String FIRST_LINE = "fruit,quantity";
 
     @Override
-    public String getReport(Map<String, Integer> map) {
-        StringBuilder tmp = new StringBuilder(FIRST_LINE);
-        map.forEach((key, value) -> tmp.append(System.lineSeparator())
-                .append(key)
+    public String createReport(Map<String, Integer> storage) {
+        StringBuilder tmp = new StringBuilder(INFO_LINE).append(System.lineSeparator());
+        storage.forEach((key, value) -> tmp.append(key)
                 .append(COMMA)
-                .append(value));
+                .append(value)
+                .append(System.lineSeparator()));
         return tmp.toString();
     }
 }

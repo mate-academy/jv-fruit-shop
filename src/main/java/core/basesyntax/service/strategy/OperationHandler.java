@@ -1,7 +1,8 @@
 package core.basesyntax.service.strategy;
 
-import core.basesyntax.model.FruitRecord;
+import core.basesyntax.model.*;
+import java.util.*;
 
 public interface OperationHandler {
-    void setBalance(FruitRecord record);
+    int get(FruitRecord fruitRecord, Map<String, Integer> storage);
 }
