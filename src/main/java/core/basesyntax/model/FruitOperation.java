@@ -1,4 +1,6 @@
-package model;
+package core.basesyntax.model;
+
+import java.util.Objects;
 
 public class FruitOperation {
     private String type;
@@ -33,5 +35,18 @@ public class FruitOperation {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitOperation that = (FruitOperation) o;
+        return quantity == that.quantity
+                && Objects.equals(type, that.type) && Objects.equals(fruit, that.fruit);
     }
 }

@@ -1,10 +1,10 @@
-package service;
+package core.basesyntax.service;
 
+import core.basesyntax.service.inter.ReadService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
-import service.inter.ReadService;
 
 public class ReadServiceImpl implements ReadService {
     private static final int FIRST_LINE = 0;

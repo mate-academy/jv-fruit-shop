@@ -1,4 +1,4 @@
-package service.inter;
+package core.basesyntax.service.inter;
 
 import java.util.List;
 

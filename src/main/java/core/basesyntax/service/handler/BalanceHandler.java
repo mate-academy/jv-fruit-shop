@@ -1,8 +1,8 @@
-package service.handler;
+package core.basesyntax.service.handler;
 
-import db.Storage;
-import model.FruitOperation;
-import service.inter.Operation;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitOperation;
+import core.basesyntax.service.inter.Operation;
 
 public class BalanceHandler implements Operation {
 

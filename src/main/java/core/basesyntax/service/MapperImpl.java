@@ -1,7 +1,7 @@
-package service;
+package core.basesyntax.service;
 
-import model.FruitOperation;
-import service.inter.Mapper;
+import core.basesyntax.model.FruitOperation;
+import core.basesyntax.service.inter.Mapper;
 
 public class MapperImpl implements Mapper<String, FruitOperation> {
     private static final int TYPE = 0;

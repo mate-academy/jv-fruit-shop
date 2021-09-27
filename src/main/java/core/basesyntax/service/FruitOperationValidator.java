@@ -1,6 +1,6 @@
-package service;
+package core.basesyntax.service;
 
-import service.inter.Validator;
+import core.basesyntax.service.inter.Validator;
 
 public class FruitOperationValidator implements Validator<String> {
     private static final int QUANTITY = 2;

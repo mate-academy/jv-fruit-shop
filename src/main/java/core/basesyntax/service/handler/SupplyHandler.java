@@ -1,9 +1,9 @@
-package service.handler;
+package core.basesyntax.service.handler;
 
-import db.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitOperation;
+import core.basesyntax.service.inter.Operation;
 import java.util.Map;
-import model.FruitOperation;
-import service.inter.Operation;
 
 public class SupplyHandler implements Operation {
     private final Map<String, Integer> fruitsQuantity = Storage.fruitsQuantity;
