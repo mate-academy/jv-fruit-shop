@@ -1,11 +1,10 @@
 package service;
 
 import dao.Reader;
-import validator.Validator;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import validator.Validator;
 
 public class ReporterImpl implements Reporter {
     private Validator validator;
