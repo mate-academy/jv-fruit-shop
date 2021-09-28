@@ -2,6 +2,6 @@ package service;
 
 import java.util.Map;
 
-public interface Report {
+public interface Reporter {
     Map<String, Integer> report();
 }

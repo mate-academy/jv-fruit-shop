@@ -1,5 +1,7 @@
 package validator;
 
+import java.util.List;
+
 public interface Validator {
-    void validate(String input);
+    void validate(List<String> input);
 }
