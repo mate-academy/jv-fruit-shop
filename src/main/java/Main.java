@@ -3,6 +3,7 @@ import dao.ReaderImpl;
 import dao.Writer;
 import dao.WriterImpl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import service.OperationStrategy;
 import service.OperationStrategyImpl;
@@ -30,8 +31,11 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         Reader reader = new ReaderImpl();
         Validator validator = new ValidatorImpl();
-        Reporter reporter = new ReporterImpl(validator, reader, operationStrategy);
+        Reporter reporter = new ReporterImpl(validator, operationStrategy);
         Writer writer = new WriterImpl();
-        writer.reportWriter(reporter.report());
+        String inputFilePath = "src/main/resources/input.csv";
+        String reportPath = "src/main/reports/report.csv";
+        List<String> data = reader.read(inputFilePath);
+        writer.reportWriter(reporter.report(data), reportPath);
     }
 }

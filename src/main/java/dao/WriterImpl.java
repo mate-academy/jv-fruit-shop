@@ -6,12 +6,11 @@ import java.io.IOException;
 import java.util.Map;
 
 public class WriterImpl implements Writer {
-    private static final String FILE_PATH = "src/main/reports/report.csv";
 
     @Override
-    public void reportWriter(Map<String, Integer> reportMap) {
+    public void reportWriter(Map<String, Integer> reportMap, String filePath) {
         String header = "fruit,quantity";
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             writer.write(header);
             writer.newLine();
             for (Map.Entry<String, Integer> entry : reportMap.entrySet()) {

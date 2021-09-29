@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderImpl implements Reader {
-    private static final String FILE_PATH = "src/main/resources/input.csv";
 
     @Override
-    public List<String> read() {
+    public List<String> read(String fileName) {
         List<String> result = new ArrayList<>();
-        try (BufferedReader csvReader = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(fileName))) {
             csvReader.readLine();
             String row;
             while ((row = csvReader.readLine()) != null) {
