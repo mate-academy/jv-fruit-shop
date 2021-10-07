@@ -19,7 +19,6 @@ import service.ReportServiceImpl;
 import service.activity.ActivityHandler;
 import service.activity.BalanceHandler;
 import service.activity.PurchaseHandler;
-import service.activity.ReturnHandler;
 import service.activity.SupplyHandler;
 
 public class Main {
@@ -27,9 +26,10 @@ public class Main {
         Map<String, ActivityHandler> activityHandlersMap = new HashMap<>();
 
         activityHandlersMap.put("b", new BalanceHandler());
-        activityHandlersMap.put("s", new SupplyHandler());
         activityHandlersMap.put("p", new PurchaseHandler());
-        activityHandlersMap.put("r", new ReturnHandler());
+        SupplyHandler supplyHandler = new SupplyHandler();
+        activityHandlersMap.put("s", supplyHandler);
+        activityHandlersMap.put("r", supplyHandler);
 
         DaoReader daoReader = new DaoReaderImpl();
         List<String> rawData = daoReader.get("src/main/resources/basic_data.txt");
