@@ -1,9 +1,6 @@
 package core.basesyntax.dao;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,12 +14,12 @@ public class FruitDaoCSVImpl implements FruitDao {
     @Override
     public List<String> get() {
         File csvFile = new File(csvFileName);
-        try {
-            return new BufferedReader(new FileReader(csvFile))
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFile))) {
+            return csvReader
                     .lines()
                     .collect(Collectors.toList());
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("No such csv-file: " + csvFileName, e);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read such csv-file: " + csvFileName, e);
         }
     }
 }
