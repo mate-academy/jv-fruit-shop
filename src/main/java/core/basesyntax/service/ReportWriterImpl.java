@@ -16,9 +16,14 @@ public class ReportWriterImpl implements ReportWriter {
             throw new RuntimeException("Overwriting the " + fileName);
         }
         try {
+            report.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException("Can't create the file: " + fileName, e);
+        }
+        try {
             Files.write(report.toPath(), content.getBytes(), StandardOpenOption.WRITE);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file: " + fileName);
+            throw new RuntimeException("Can't write to file: " + fileName, e);
         }
     }
 }
