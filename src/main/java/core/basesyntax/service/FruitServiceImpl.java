@@ -3,16 +3,19 @@ package core.basesyntax.service;
 import core.basesyntax.dao.FruitDao;
 
 import java.util.List;
+import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
     private FruitDao fruitDao;
     private FruitParser fruitParser;
     private DataValidator dataValidator;
+    private ReportCreator reportCreator;
 
-    public FruitServiceImpl(FruitDao fruitDao, FruitParser fruitParser, DataValidator dataValidator) {
+    public FruitServiceImpl(FruitDao fruitDao, FruitParser fruitParser, DataValidator dataValidator, ReportCreator reportCreator) {
         this.fruitDao = fruitDao;
         this.fruitParser = fruitParser;
         this.dataValidator = dataValidator;
+        this.reportCreator = reportCreator;
     }
 
 
@@ -20,6 +23,8 @@ public class FruitServiceImpl implements FruitService {
     public void createReport(String source, String destination) {
         List<String> inputData = fruitDao.get();
         dataValidator.validate(inputData);
+        Map<String, Integer> fruitQuantityMap = fruitParser.parse();
+        String reportContent = reportCreator.createReport(fruitQuantityMap);
 
 
     }

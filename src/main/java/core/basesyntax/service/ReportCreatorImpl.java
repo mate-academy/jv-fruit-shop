@@ -1,14 +1,23 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitOperation;
-
-import java.util.List;
+import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {
+    private static final String COLUMN_NAMES = "fruit,quantity";
+    private static final String SEPARATOR = ",";
     @Override
-    public String createReport(List<FruitOperation> data) {
+    public String createReport(Map<String, Integer> fruitQuantityMap) {
         StringBuilder reportContent = new StringBuilder();
-        //TODO
+        reportContent.append(COLUMN_NAMES);
+
+        for (Map.Entry<String, Integer> itemFruit : fruitQuantityMap.entrySet()) {
+            reportContent
+                    .append(System.lineSeparator())
+                    .append(itemFruit.getKey())
+                    .append(SEPARATOR)
+                    .append(itemFruit.getValue());
+
+        }
         return reportContent.toString();
     }
 }
