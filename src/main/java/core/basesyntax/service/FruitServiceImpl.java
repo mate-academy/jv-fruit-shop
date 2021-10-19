@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
-
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +23,6 @@ public class FruitServiceImpl implements FruitService {
         this.reportWriter = reportWriter;
     }
 
-
     @Override
     public void createReport(String source, String destination) {
         List<String> inputData = fruitDao.get();
@@ -32,7 +30,6 @@ public class FruitServiceImpl implements FruitService {
         Map<String, Integer> fruitQuantityMap = fruitParser.parse();
         String reportContent = reportCreator.createReport(fruitQuantityMap);
         reportWriter.writeReport(destination, reportContent);
-
 
     }
 }

@@ -1,11 +1,8 @@
 package core.basesyntax.service;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.StandardOpenOption;
 
 public class ReportWriterImpl implements ReportWriter {

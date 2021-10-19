@@ -1,12 +1,24 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoCSVImpl;
-import core.basesyntax.service.*;
-import core.basesyntax.service.operation.*;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import core.basesyntax.dao.FruitDaocsv;
+import core.basesyntax.service.DataValidator;
+import core.basesyntax.service.FileValidator;
+import core.basesyntax.service.FruitParser;
+import core.basesyntax.service.FruitParserImpl;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
+import core.basesyntax.service.FruitStrategy;
+import core.basesyntax.service.FruitStrategyImpl;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.ReportCreatorImpl;
+import core.basesyntax.service.ReportWriter;
+import core.basesyntax.service.ReportWriterImpl;
+import core.basesyntax.service.operation.BalanceHandler;
+import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.operation.PurchaseHandler;
+import core.basesyntax.service.operation.ReturnHandler;
+import core.basesyntax.service.operation.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,10 +32,10 @@ public class Main {
         fruitOperationMap.put("s", new SupplyHandler());
         fruitOperationMap.put("p", new PurchaseHandler());
         fruitOperationMap.put("r", new ReturnHandler());
-        FruitDao fruitDao = new FruitDaoCSVImpl("resources\\fruitLogs.csv");
+        FruitDao fruitDao = new FruitDaocsv("resources\\fruitLogs.csv");
         FruitStrategy fruitStrategy = new FruitStrategyImpl(fruitOperationMap);
         FruitParser fruitParser = new FruitParserImpl(fruitDao, fruitStrategy);
-        DataValidator dataValidator = new CSVFileValidator();
+        DataValidator dataValidator = new FileValidator();
         ReportCreator reportCreator = new ReportCreatorImpl();
         ReportWriter reportWriter = new ReportWriterImpl();
         FruitService fruitService = new FruitServiceImpl(fruitDao, fruitParser,

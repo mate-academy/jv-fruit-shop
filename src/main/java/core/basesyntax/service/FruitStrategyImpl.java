@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.operation.OperationHandler;
-
 import java.util.Map;
 
 public class FruitStrategyImpl implements FruitStrategy {

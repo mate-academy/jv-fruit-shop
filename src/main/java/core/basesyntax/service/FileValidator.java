@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-public class CSVFileValidator implements DataValidator {
+public class FileValidator implements DataValidator {
     private static final String BALANCE = "b";
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
@@ -20,11 +20,11 @@ public class CSVFileValidator implements DataValidator {
             checkLine(splitLine);
             String operation = splitLine[0];
             String fruitName = splitLine[1];
-            String quantity = splitLine[2];
             checkOperation(operation);
             checkBalance(balancedFruit, operation, fruitName);
             balancedFruit.add(fruitName);
             checkSequence(balancedFruit, operation, fruitName);
+            String quantity = splitLine[2];
             checkQuantity(quantity);
 
         }

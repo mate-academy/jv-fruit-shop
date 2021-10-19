@@ -5,6 +5,7 @@ import java.util.Map;
 public class ReportCreatorImpl implements ReportCreator {
     private static final String COLUMN_NAMES = "fruit,quantity";
     private static final String SEPARATOR = ",";
+
     @Override
     public String createReport(Map<String, Integer> fruitQuantityMap) {
         StringBuilder reportContent = new StringBuilder();
