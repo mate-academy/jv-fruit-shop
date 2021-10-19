@@ -1,23 +1,17 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.FruitOperation;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FruitParserImpl implements FruitParser {
-    private static final String BALANCE = "b";
-    private static final String SUPPLY = "s";
-    private static final String PURCHASE = "p";
-    private static final String RETURN = "r";
     private static final String SEPARATOR = ",";
     private FruitDao fruitDao;
     private FruitStrategy fruitStrategy;
 
-    public FruitParserImpl(FruitDao fruitDao, Map<String,
-            FruitOperation.Operation> fruitOperationMap, FruitStrategy fruitStrategy) {
+    public FruitParserImpl(FruitDao fruitDao, FruitStrategy fruitStrategy) {
         this.fruitDao = fruitDao;
         this.fruitStrategy = fruitStrategy;
     }
