@@ -4,16 +4,21 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.StandardOpenOption;
 
 public class ReportWriterImpl implements ReportWriter {
     @Override
-    public void writeReport(String fileName) {
+    public void writeReport(String fileName, String content) {
         File report = new File(fileName);
-        try(BufferedWriter reportWriter = new BufferedWriter(new FileWriter(report))) {
-            //TODO
-
+        if (report.exists()) {
+            throw new RuntimeException("Overwriting the " + fileName);
+        }
+        try {
+            Files.write(report.toPath(), content.getBytes(), StandardOpenOption.WRITE);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write report to file: " + fileName, e);
+            throw new RuntimeException("Can't write to file: " + fileName);
         }
     }
 }

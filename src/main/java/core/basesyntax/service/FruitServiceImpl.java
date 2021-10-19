@@ -10,12 +10,18 @@ public class FruitServiceImpl implements FruitService {
     private FruitParser fruitParser;
     private DataValidator dataValidator;
     private ReportCreator reportCreator;
+    private ReportWriter reportWriter;
 
-    public FruitServiceImpl(FruitDao fruitDao, FruitParser fruitParser, DataValidator dataValidator, ReportCreator reportCreator) {
+    public FruitServiceImpl(FruitDao fruitDao,
+                            FruitParser fruitParser,
+                            DataValidator dataValidator,
+                            ReportCreator reportCreator,
+                            ReportWriter reportWriter) {
         this.fruitDao = fruitDao;
         this.fruitParser = fruitParser;
         this.dataValidator = dataValidator;
         this.reportCreator = reportCreator;
+        this.reportWriter = reportWriter;
     }
 
 
@@ -25,6 +31,7 @@ public class FruitServiceImpl implements FruitService {
         dataValidator.validate(inputData);
         Map<String, Integer> fruitQuantityMap = fruitParser.parse();
         String reportContent = reportCreator.createReport(fruitQuantityMap);
+        reportWriter.writeReport(destination, reportContent);
 
 
     }
