@@ -27,7 +27,7 @@ public class FruitServiceImpl implements FruitService {
     public void createReport(String source, String destination) {
         List<String> inputData = fruitDao.get();
         dataValidator.validate(inputData);
-        Map<String, Integer> fruitQuantityMap = fruitParser.parse();
+        Map<String, Integer> fruitQuantityMap = fruitParser.parse(inputData);
         String reportContent = reportCreator.createReport(fruitQuantityMap);
         reportWriter.writeReport(destination, reportContent);
 

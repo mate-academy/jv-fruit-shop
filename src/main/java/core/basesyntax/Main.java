@@ -34,7 +34,7 @@ public class Main {
         fruitOperationMap.put("r", new ReturnHandler());
         FruitDao fruitDao = new FruitDaocsv("resources\\fruitLogs.csv");
         FruitStrategy fruitStrategy = new FruitStrategyImpl(fruitOperationMap);
-        FruitParser fruitParser = new FruitParserImpl(fruitDao, fruitStrategy);
+        FruitParser fruitParser = new FruitParserImpl(fruitStrategy);
         DataValidator dataValidator = new FileValidator();
         ReportCreator reportCreator = new ReportCreatorImpl();
         ReportWriter reportWriter = new ReportWriterImpl();
