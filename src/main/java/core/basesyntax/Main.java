@@ -32,7 +32,7 @@ public class Main {
         fruitOperationMap.put("s", new SupplyHandler());
         fruitOperationMap.put("p", new PurchaseHandler());
         fruitOperationMap.put("r", new ReturnHandler());
-        FruitDao fruitDao = new FruitDaocsv("resources\\fruitLogs.csv");
+        FruitDao fruitDao = new FruitDaocsv();
         FruitStrategy fruitStrategy = new FruitStrategyImpl(fruitOperationMap);
         FruitParser fruitParser = new FruitParserImpl(fruitStrategy);
         DataValidator dataValidator = new FileValidator();
