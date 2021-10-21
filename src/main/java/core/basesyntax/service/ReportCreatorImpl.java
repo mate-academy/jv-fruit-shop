@@ -4,7 +4,6 @@ import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {
     private static final String COLUMN_NAMES = "fruit,quantity";
-    private static final String SEPARATOR = ",";
 
     @Override
     public String createReport(Map<String, Integer> fruitQuantityMap) {
@@ -15,7 +14,7 @@ public class ReportCreatorImpl implements ReportCreator {
             reportContent
                     .append(System.lineSeparator())
                     .append(itemFruit.getKey())
-                    .append(SEPARATOR)
+                    .append(FruitParserImpl.SEPARATOR)
                     .append(itemFruit.getValue());
 
         }

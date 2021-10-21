@@ -10,13 +10,12 @@ public class FileValidator implements DataValidator {
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
-    private static final String SEPARATOR = ",";
 
     @Override
     public void validate(List<String> data) {
         List<String> balancedFruit = new ArrayList<>();
         for (int i = 1; i < data.size(); i++) {
-            String[] splitLine = data.get(i).split(SEPARATOR);
+            String[] splitLine = data.get(i).split(FruitParserImpl.SEPARATOR);
             checkLine(splitLine);
             String operation = splitLine[0];
             String fruitName = splitLine[1];

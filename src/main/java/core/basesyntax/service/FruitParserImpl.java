@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitParserImpl implements FruitParser {
-    private static final String SEPARATOR = ",";
+    public static final String SEPARATOR = ",";
     private FruitStrategy fruitStrategy;
 
     public FruitParserImpl(FruitStrategy fruitStrategy) {
