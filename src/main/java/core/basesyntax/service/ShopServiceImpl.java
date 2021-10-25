@@ -28,7 +28,9 @@ public class ShopServiceImpl implements ShopService {
         int quantity = fruitDao.get(fruitName).getQuantity();
         int operation = operationStrategy.get(rowInfo.split(",")[0]).getOperation();
         if ((operation == -1 || operation == 0) && valueOfOperation > quantity) {
-            throw new RuntimeException("Can't processing operation");
+            throw new RuntimeException("Can't processing operation "
+                    + rowInfo.split(",")[0] + " with value " + valueOfOperation
+            + ". Our shop has " + quantity + " " + fruitName + "s.");
         }
         fruitDao.update(fruitName,quantity + (operation * valueOfOperation));
     }
