@@ -12,9 +12,6 @@ public class FruitDaoImpl implements FruitDao {
                 return fruitFromStorage;
             }
         }
-        if (!(fruitName.equals("apple") || fruitName.equals("banana"))) {
-            throw new RuntimeException("Invalid input value " + fruitName);
-        }
         add(fruitName);
         return get(fruitName);
     }

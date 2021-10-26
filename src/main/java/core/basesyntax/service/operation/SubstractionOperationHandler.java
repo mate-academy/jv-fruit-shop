@@ -11,11 +11,12 @@ public class SubstractionOperationHandler implements OperationHandler {
 
     @Override
     public void apply(String[] record) {
-        int newQuantity = fruitDao.get(record[1]).getQuantity() - Integer.parseInt(record[2]);
-        if (newQuantity < 0) {
-            throw new RuntimeException("Invalid purchase. "
-                    + "The store does not have the required quantity of fruits");
+        String fruitName = record[1];
+        int quantity = Integer.parseInt(record[2]);
+        if (!(fruitName.equals("apple") || fruitName.equals("banana"))) {
+            throw new RuntimeException("Invalid fruit " + fruitName);
         }
-        fruitDao.update(record[1], newQuantity);
+        int newQuantity = fruitDao.get(fruitName).getQuantity() - quantity;
+        fruitDao.update(fruitName, newQuantity);
     }
 }

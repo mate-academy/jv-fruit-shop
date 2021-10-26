@@ -11,7 +11,12 @@ public class AdditionOperationHandler implements OperationHandler {
 
     @Override
     public void apply(String[] record) {
-        int newQuantity = Integer.parseInt(record[2]) + fruitDao.get(record[1]).getQuantity();
-        fruitDao.update(record[1], newQuantity);
+        String fruitName = record[1];
+        int quantity = Integer.parseInt(record[2]);
+        if (!(fruitName.equals("apple") || fruitName.equals("banana"))) {
+            throw new RuntimeException("Invalid fruit " + fruitName);
+        }
+        int newQuantity = quantity + fruitDao.get(fruitName).getQuantity();
+        fruitDao.update(fruitName, newQuantity);
     }
 }

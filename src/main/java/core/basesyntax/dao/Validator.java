@@ -8,8 +8,7 @@ public class Validator {
     public void checkData(String filePath) {
         List<String> listOfInfo = readerService.getDataFromFile(filePath);
         String[] checkArray;
-        for (String row:listOfInfo
-             ) {
+        for (String row:listOfInfo) {
             checkArray = row.split(",");
             if (checkArray.length != 3) {
                 throw new RuntimeException("Incorrect input data from file " + filePath);
