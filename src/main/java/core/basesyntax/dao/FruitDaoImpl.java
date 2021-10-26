@@ -7,11 +7,13 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public Fruit get(String fruitName) {
-        for (Fruit fruitFromStorage:
-                Storage.fruits) {
+        for (Fruit fruitFromStorage: Storage.fruits) {
             if (fruitFromStorage.getName().equals(fruitName)) {
                 return fruitFromStorage;
             }
+        }
+        if (!(fruitName.equals("apple") || fruitName.equals("banana"))) {
+            throw new RuntimeException("Invalid input value " + fruitName);
         }
         add(fruitName);
         return get(fruitName);
@@ -26,12 +28,8 @@ public class FruitDaoImpl implements FruitDao {
     public void update(String fruitName,int quantity) {
         for (int i = 0; i < Storage.fruits.size(); i++) {
             if (Storage.fruits.get(i).getName().equals(fruitName)) {
-                Storage.fruits.get(i).setName(fruitName);
                 Storage.fruits.get(i).setQuantity(quantity);
-                return;
             }
         }
-        add(fruitName);
-        update(fruitName,quantity);
     }
 }

@@ -1,22 +1,27 @@
 package core.basesyntax.service.operation;
 
+import core.basesyntax.dao.FruitDao;
+import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<String,OperationHandler> operationHandlesMap;
+    private Map<String,OperationHandler> operationHandlesMap = new HashMap<>();
+    private FruitDao fruitDao;
 
-    public OperationStrategyImpl(Map<String, OperationHandler> operationHandlesMap) {
-        this.operationHandlesMap = operationHandlesMap;
+    public OperationStrategyImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
-    public OperationHandler get(String operation) {
-        operationHandlesMap.put("s",new SupplyOperationHandler());
-        operationHandlesMap.put("p",new PurchaseOperationHandler());
-        operationHandlesMap.put("r",new ReturnOperationHandler());
-        operationHandlesMap.put("b",new BalanceOperationHandler());
-        OperationHandler result = operationHandlesMap.get(operation) == null
-                ? new IncorrectOperationHandler() : operationHandlesMap.get(operation);
-        return result;
+    public void get(String[] record) {
+        operationHandlesMap.put("s",new AdditionOperationHandler(fruitDao));
+        operationHandlesMap.put("p",new SubstractionOperationHandler(fruitDao));
+        operationHandlesMap.put("r",new AdditionOperationHandler(fruitDao));
+        operationHandlesMap.put("b",new AdditionOperationHandler(fruitDao));
+        if (operationHandlesMap.get(record[0]) == null) {
+            throw new RuntimeException("Invalid operation \"" + record[0] + "\"");
+        }
+        operationHandlesMap.get(record[0]).apply(record);
     }
+
 }

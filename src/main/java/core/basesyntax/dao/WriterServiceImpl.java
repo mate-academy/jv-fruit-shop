@@ -12,17 +12,12 @@ public class WriterServiceImpl implements WriterService {
         try {
             toFile.createNewFile();
         } catch (IOException e) {
-            throw new RuntimeException("Can't create new file");
-        }
-        try {
-            toFile.createNewFile();
-        } catch (Exception e) {
-            throw new RuntimeException("can't create file");
+            throw new RuntimeException("Can't create file", e);
         }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFile))) {
             bufferedWriter.write(data);
         } catch (IOException e) {
-            throw new RuntimeException("can't write data");
+            throw new RuntimeException("Can't write data");
         }
     }
 }

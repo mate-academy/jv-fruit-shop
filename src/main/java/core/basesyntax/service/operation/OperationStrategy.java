@@ -1,5 +1,5 @@
 package core.basesyntax.service.operation;
 
 public interface OperationStrategy {
-    OperationHandler get(String operation);
+    void get(String[] record);
 }
