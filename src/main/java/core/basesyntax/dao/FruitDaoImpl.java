@@ -12,13 +12,13 @@ public class FruitDaoImpl implements FruitDao {
                 return fruitFromStorage;
             }
         }
-        add(fruitName);
-        return get(fruitName);
+        return null;
     }
 
     @Override
-    public void add(String fruitName) {
-        Storage.fruits.add(new Fruit.FruitBuilder().setName(fruitName).build());
+    public void add(String fruitName, int quantity) {
+        Storage.fruits.add(new Fruit.FruitBuilder()
+                .setName(fruitName).setQuantity(quantity).build());
     }
 
     @Override
