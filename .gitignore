@@ -1,3 +1,12 @@
 .idea/*
 *.iml
 target/*
+/balance_2_times.csv
+/balanceLessThanReturn.csv
+/correct.csv
+/correct.txt
+/corrupted.csv
+/emptyLineBottom.csv
+/invalid.csv
+/output.csv
+/purchaseMoreThanBalance.csv
