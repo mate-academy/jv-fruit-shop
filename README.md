@@ -1,5 +1,5 @@
 # Fruit shop
-Let's imagine that we have a fruitCrate store. Every day in the store there are a number of activities, 
+Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
 
@@ -11,7 +11,7 @@ There are four activities at the store:
 ```text
     b - balance, the remnants of fruits at the beginning of the working day
     s - supply, means you are receiving new fruits from suppliers
-    p - purchase, means someone has bought some fruitCrate
+    p - purchase, means someone has bought some fruit
     r - return, means someone who have bought the fruits now returns them back
 ```
 
@@ -43,7 +43,7 @@ Let's check in details all types of activities:
 
 ### Input file example
 ```text
-    type,fruitCrate,quantity
+    type,fruit,quantity
     b,banana,20
     b,apple,100
     s,banana,100
@@ -57,7 +57,7 @@ Let's check in details all types of activities:
 ### Expecting report file example
 We are expecting to see how many fruits are available today after the work shift in your Fruit store. 
 ```text
-    fruitCrate,quantity
+    fruit,quantity
     banana,152
     apple,90
 ```
@@ -70,14 +70,14 @@ For validation create separate class Validator with corresponding method. You ca
 File has been read during parsing of raw data.
 If the file has mistakes, you should throw an exception. Example of incorrect input file:
 ```text
-    type,fruitCrate,quantity
+    type,fruit,quantity
     b,banana,20
     p,
     s,banana,50 
 ```
 or
 ```text
-    type,fruitCrate,quantity
+    type,fruit,quantity
     b,banana,20
     p,banana,-10 // Buyers will not be able to buy -10 bananas. -10 is incorrect input.
     s,banana,50 
