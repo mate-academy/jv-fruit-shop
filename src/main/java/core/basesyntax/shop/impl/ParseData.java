@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ParseData {
     protected Map<String, Integer> parse(String filename, ReadFromFile readFromFile) {
-        String table = readFromFile.read(filename);
+        String table = readFromFile.read(filename).toLowerCase();
         ShopService shopService = new FruitShopService();
         if (!(new Validator().test(table))) {
             throw new RuntimeException("Corrupted file data");
