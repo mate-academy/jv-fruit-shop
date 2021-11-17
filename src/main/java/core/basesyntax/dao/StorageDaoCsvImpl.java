@@ -12,7 +12,7 @@ public class StorageDaoCsvImpl implements StorageDao {
             if (fruitCrate.getQuantity() < 0) {
                 throw new RuntimeException("Not enough " + fruitCrate.getName() + " to sell");
             }
-            Storage.FRUIT_CRATE_STORAGE.add(fruitCrate);
+            Storage.storage.add(fruitCrate);
         } else {
             int newQuantity = fruitCrate.getQuantity() + get(fruitCrate.getName()).getQuantity();
             get(fruitCrate.getName()).setQuantity(newQuantity);
@@ -24,7 +24,7 @@ public class StorageDaoCsvImpl implements StorageDao {
 
     @Override
     public FruitCrate get(String fruitName) {
-        return Storage.FRUIT_CRATE_STORAGE.stream()
+        return Storage.storage.stream()
                 .filter(f -> f.getName().equals(fruitName))
                 .findFirst()
                 .orElse(null);
@@ -32,6 +32,6 @@ public class StorageDaoCsvImpl implements StorageDao {
 
     @Override
     public List<FruitCrate> getAll() {
-        return new ArrayList<>(Storage.FRUIT_CRATE_STORAGE);
+        return new ArrayList<>(Storage.storage);
     }
 }
