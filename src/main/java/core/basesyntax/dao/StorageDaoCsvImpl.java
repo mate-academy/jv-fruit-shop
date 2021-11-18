@@ -7,18 +7,12 @@ import java.util.List;
 
 public class StorageDaoCsvImpl implements StorageDao {
     @Override
-    public void add(FruitCrate fruitCrate) {
+    public void update(FruitCrate fruitCrate) {
         if (get(fruitCrate.getName()) == null) {
-            if (fruitCrate.getQuantity() < 0) {
-                throw new RuntimeException("Not enough " + fruitCrate.getName() + " to sell");
-            }
             Storage.storage.add(fruitCrate);
         } else {
             int newQuantity = fruitCrate.getQuantity() + get(fruitCrate.getName()).getQuantity();
             get(fruitCrate.getName()).setQuantity(newQuantity);
-            if (newQuantity < 0) {
-                throw new RuntimeException("Not enough " + fruitCrate.getName() + " to sell");
-            }
         }
     }
 

@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface FruitShopService {
-    void runShop();
+    void runShop(String inputFilePath, String outputFilePath);
 }

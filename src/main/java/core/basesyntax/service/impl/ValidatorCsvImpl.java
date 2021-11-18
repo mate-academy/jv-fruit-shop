@@ -2,35 +2,33 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Validator;
 import core.basesyntax.service.activitiy.ActivityHandler;
-import core.basesyntax.service.activitiy.ActivityType;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ValidatorCsvImpl implements Validator {
-    private Map<ActivityType, ActivityHandler> activityHandlerMap;
+    private static final String CSV_LINE_PATTERN = "[a-z],[a-z]+,[0-9]+";
+    private final Map<String, ActivityHandler> activityHandlerMap;
 
-    public ValidatorCsvImpl(Map<ActivityType, ActivityHandler> activityHandlerMap) {
+    public ValidatorCsvImpl(Map<String, ActivityHandler> activityHandlerMap) {
         this.activityHandlerMap = activityHandlerMap;
     }
 
     public boolean validate(List<String> fileData) {
-        if (!fileData.get(0).equals("type,fruit,quantity")) {
-            return false;
+        if (fileData.isEmpty() || !fileData.get(0).equals("type,fruit,quantity")) {
+            throw new RuntimeException("INPUT DATA IS INVALID");
         }
-        List<String> dataCopy = new ArrayList<>(fileData);
-        dataCopy.remove(0);
-        Predicate<String> csvStringPredicate = s -> Pattern.matches("[bsrp],[a-z]+,[0-9]+", s)
+        Predicate<String> csvLinePredicate = line -> Pattern.matches(CSV_LINE_PATTERN, line)
                 && activityHandlerMap
-                .containsKey(ActivityType.valueOf(String.valueOf(s.charAt(0))))
-                && s.charAt(s.lastIndexOf(',') + 1) != '0';
-        List<String> collect = dataCopy.stream()
-                .filter(csvStringPredicate)
-                .collect(Collectors.toList());
-        if (!(dataCopy.size() == collect.size())) {
+                .containsKey(String.valueOf(line.charAt(0)))
+                && line.charAt(line.lastIndexOf(',') + 1) != '0';
+        long validLinesNumber = Stream.iterate(1, i -> i + 1).limit(fileData.size() - 1)
+                .map(fileData::get)
+                .filter(csvLinePredicate)
+                .count();
+        if (!(validLinesNumber + 1 == fileData.size())) {
             throw new RuntimeException("INPUT DATA IS INVALID");
         }
         return true;

@@ -2,9 +2,9 @@ package core.basesyntax.service.activitiy;
 
 import core.basesyntax.model.FruitCrate;
 
-public class BalanceHandler implements ActivityHandler {
+public class AddingHandler implements ActivityHandler {
     @Override
-    public FruitCrate getFruit(String fruitName, int quantity) {
+    public FruitCrate getFruitCrate(String fruitName, int quantity) {
         return new FruitCrate(fruitName, quantity);
     }
 }

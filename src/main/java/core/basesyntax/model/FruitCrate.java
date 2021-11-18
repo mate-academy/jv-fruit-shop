@@ -1,8 +1,8 @@
 package core.basesyntax.model;
 
 public class FruitCrate {
-    protected int quantity;
-    protected String name;
+    private final String name;
+    private int quantity;
 
     public FruitCrate(String name, int quantity) {
         this.name = name;

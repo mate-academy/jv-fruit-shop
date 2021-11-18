@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
+import core.basesyntax.model.FruitCrate;
 import core.basesyntax.service.BatchLoader;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.Reader;
@@ -28,12 +29,12 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void runShop() {
-        List<String> fileData = reader.read();
+    public void runShop(String inputFilePath, String outputFilePath) {
+        List<String> fileData = reader.readFile(inputFilePath);
         if (validator.validate(fileData)) {
-            batchLoader.loadBatch(fileData);
-            String report = reportMaker.makeReport(storageDao);
-            writer.writeToFile(report);
+            List<FruitCrate> batch = batchLoader.loadBatch(fileData);
+            String report = reportMaker.makeReport(batch);
+            writer.writeToFile(report, outputFilePath);
         }
     }
 }

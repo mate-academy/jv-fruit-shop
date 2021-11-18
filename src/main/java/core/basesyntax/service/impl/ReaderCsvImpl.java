@@ -7,15 +7,13 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ReaderCsvImpl implements Reader {
-    private static final String INPUT_FILE_PATH = "src/main/resources/input_database.csv";
-
     @Override
-    public List<String> read() {
+    public List<String> readFile(String inputFilePath) {
         List<String> lines;
         try {
-            lines = Files.readAllLines(Path.of(INPUT_FILE_PATH));
+            lines = Files.readAllLines(Path.of(inputFilePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't get data from file " + INPUT_FILE_PATH, e);
+            throw new RuntimeException("Can't get data from file " + inputFilePath, e);
         }
         return lines;
     }

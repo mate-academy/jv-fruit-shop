@@ -6,14 +6,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class WriterCsvImpl implements Writer {
-    private static final String OUTPUT_FILE_PATH = "src/main/resources/output_database.csv";
-
     @Override
-    public void writeToFile(String report) {
+    public void writeToFile(String report, String outputFilePath) {
         try {
-            Files.write(Path.of(OUTPUT_FILE_PATH), report.getBytes());
+            Files.write(Path.of(outputFilePath), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file " + OUTPUT_FILE_PATH, e);
+            throw new RuntimeException("Can't write data to file " + outputFilePath, e);
         }
     }
 }
