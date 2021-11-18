@@ -9,11 +9,17 @@ public class ParseData {
     public static final String SUPPLY = "s";
     public static final String RETURN_BACK = "r";
     public static final String PURCHASE = "p";
+    private ShopService shopService;
+    private Validator validator;
+
+    protected ParseData() {
+        shopService = new FruitShopService();
+        validator = new Validator();
+    }
 
     protected Map<String, Integer> parse(String filename, ReadFromFile readFromFile) {
         String table = readFromFile.read(filename).toLowerCase();
-        ShopService shopService = new FruitShopService();
-        if (!(new Validator().test(table))) {
+        if (!(validator.test(table))) {
             throw new RuntimeException("Corrupted file data");
         }
         table = table.replaceAll("type,\\w+,quantity\\n", "");

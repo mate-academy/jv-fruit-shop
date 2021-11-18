@@ -7,10 +7,18 @@ import core.basesyntax.shop.strategy.FileWriteStrategy;
 import java.util.Map;
 
 public class Report {
+    private ParseData parseData;
+    private ReadFromFile readFromFile;
+    private WriteToFile writeToFile;
+
+    public Report() {
+        parseData = new ParseData();
+    }
+
     public boolean createReport(String fromFilename, String toFilename) {
-        ReadFromFile readFromFile = FileReadStrategy.chooseReadFileFormat(fromFilename);
-        WriteToFile writeToFile = FileWriteStrategy.chooseWriteFileFormat(toFilename);
-        Map<String, Integer> map = new ParseData().parse(fromFilename, readFromFile);
+        readFromFile = FileReadStrategy.chooseReadFileFormat(fromFilename);
+        writeToFile = FileWriteStrategy.chooseWriteFileFormat(toFilename);
+        Map<String, Integer> map = parseData.parse(fromFilename, readFromFile);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity");
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
