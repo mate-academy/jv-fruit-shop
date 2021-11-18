@@ -1,7 +1,8 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.strategy.activity.ActivityHandler;
+import core.basesyntax.service.activity.ActivityOperation;
+import core.basesyntax.service.activity.TypeActivity;
 
 public interface ActivityStrategy {
-    ActivityHandler get(String operation);
+    ActivityOperation get(TypeActivity type);
 }

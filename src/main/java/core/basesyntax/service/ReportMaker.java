@@ -1,8 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitBox;
-import java.util.List;
+import java.util.Map;
 
 public interface ReportMaker {
-    String makingReport(List<FruitBox> data);
+    String makingReport(Map<String, Long> totalAmount);
 }

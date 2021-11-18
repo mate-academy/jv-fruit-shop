@@ -1,17 +1,18 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.strategy.activity.ActivityHandler;
+import core.basesyntax.service.activity.ActivityOperation;
+import core.basesyntax.service.activity.TypeActivity;
 import java.util.Map;
 
 public class ActivityStrategyImpl implements ActivityStrategy {
-    private final Map<String, ActivityHandler> handlerMap;
+    private final Map<TypeActivity, ActivityOperation> handlerMap;
 
-    public ActivityStrategyImpl(Map<String, ActivityHandler> handlerMap) {
+    public ActivityStrategyImpl(Map<TypeActivity, ActivityOperation> handlerMap) {
         this.handlerMap = handlerMap;
     }
 
     @Override
-    public ActivityHandler get(String operation) {
-        return handlerMap.get(operation);
+    public ActivityOperation get(TypeActivity type) {
+        return handlerMap.get(type);
     }
 }

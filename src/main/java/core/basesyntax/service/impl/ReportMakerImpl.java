@@ -1,21 +1,20 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitBox;
 import core.basesyntax.service.ReportMaker;
-import java.util.List;
+import java.util.Map;
 
 public class ReportMakerImpl implements ReportMaker {
     private static final String HEAD_OF_REPORT = "fruit,quantity";
     private static final String COMMA = ",";
 
     @Override
-    public String makingReport(List<FruitBox> fruitBoxes) {
+    public String makingReport(Map<String, Long> totalAmount) {
         StringBuilder reportBuilder = new StringBuilder(HEAD_OF_REPORT);
-        for (FruitBox fruitBox : fruitBoxes) {
+        for (Map.Entry<String, Long> entry : totalAmount.entrySet()) {
             reportBuilder.append(System.lineSeparator())
-                    .append(fruitBox.getFruitType())
+                    .append(entry.getKey())
                     .append(COMMA)
-                    .append(fruitBox.getQuantity());
+                    .append(entry.getValue());
         }
         return reportBuilder.toString();
     }
