@@ -5,14 +5,14 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitService;
 
 public class FruitServiceImpl implements FruitService {
-    private final FruitDao fruitBoxDao;
+    private final FruitDao fruitDao;
 
-    public FruitServiceImpl(FruitDao fruitBoxDao) {
-        this.fruitBoxDao = fruitBoxDao;
+    public FruitServiceImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
-    public void createFruitBox(String name) {
-        Fruit fruitBox = new Fruit(name);
-        fruitBoxDao.add(fruitBox);
+    public void createFruit(String name) {
+        Fruit fruit = new Fruit(name);
+        fruitDao.add(fruit);
     }
 }

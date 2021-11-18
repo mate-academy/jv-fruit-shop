@@ -1,8 +1,19 @@
 package core.basesyntax.service.activity;
 
 public enum TypeActivity {
-    b,
-    s,
-    p,
-    r
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
+
+    private final String name;
+
+    TypeActivity(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

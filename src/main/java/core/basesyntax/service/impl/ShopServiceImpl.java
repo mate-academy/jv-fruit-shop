@@ -1,45 +1,30 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ShopService;
-import core.basesyntax.service.activity.TypeActivity;
 import core.basesyntax.strategy.ActivityStrategy;
-import core.basesyntax.validator.Validator;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ShopServiceImpl implements ShopService {
-    private static final int INDEX_OF_ACTIVITY_TYPE = 0;
-    private static final int INDEX_OF_FRUIT_TYPE = 1;
-    private static final int INDEX_OF_QUANTITY = 2;
-    private ActivityStrategy activityStrategy;
-    private Validator validator;
+    private static final int ACTIVITY_TYPE_INDEX = 0;
+    private static final int FRUIT_TYPE_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private final ActivityStrategy activityStrategy;
+    private final FruitDao fruitDao;
 
-    public ShopServiceImpl(ActivityStrategy activityStrategy, Validator validator) {
+    public ShopServiceImpl(ActivityStrategy activityStrategy, FruitDao fruitDao) {
         this.activityStrategy = activityStrategy;
-        this.validator = validator;
+        this.fruitDao = fruitDao;
     }
 
     @Override
-    public void updatingFruitStorage(List<String> data) {
-        validator.validateData(data);
-        for (String line : data) {
-            String[] split = line.split(",");
-            TypeActivity operationType = TypeActivity.valueOf(split[INDEX_OF_ACTIVITY_TYPE]);
-            String fruitName = split[INDEX_OF_FRUIT_TYPE];
-            int value = Integer.parseInt(split[INDEX_OF_QUANTITY]);
-            activityStrategy.get(operationType).apply(fruitName, value);
-        }
+    public List<Fruit> updatingFruitStorage(List<String> fileData) {
+        IntStream.range(1, fileData.size())
+                .mapToObj(i -> fileData.get(i).split(","))
+                .forEach(data -> activityStrategy.get(data[ACTIVITY_TYPE_INDEX])
+                        .apply(data[FRUIT_TYPE_INDEX], Integer.parseInt(data[QUANTITY_INDEX])));
+        return fruitDao.getAll();
     }
-
-    @Override
-    public Map<String, Long> amountCalculator(List<Fruit> fruits) {
-        return fruits.stream()
-                .map(Fruit::getName)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-    }
-
 }
-

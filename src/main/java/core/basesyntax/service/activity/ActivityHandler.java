@@ -1,5 +1,5 @@
 package core.basesyntax.service.activity;
 
-public interface ActivityOperation {
+public interface ActivityHandler {
     void apply(String fruitName, int value);
 }

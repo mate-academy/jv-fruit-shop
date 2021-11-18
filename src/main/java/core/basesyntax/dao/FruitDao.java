@@ -8,7 +8,7 @@ public interface FruitDao {
 
     Fruit get(String fruitName);
 
-    void remove(Fruit fruit);
+    Fruit remove(Fruit fruit);
 
     List<Fruit> getAll();
 }

@@ -20,9 +20,10 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void remove(Fruit fruit) {
+    public Fruit remove(Fruit fruit) {
         Fruit fruitFromDB = get(fruit.getName());
         Storage.fruitsStorage.remove(fruitFromDB);
+        return fruitFromDB;
     }
 
     @Override
