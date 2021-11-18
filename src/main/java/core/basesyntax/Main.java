@@ -26,10 +26,10 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         Map<String, ActivityHandler> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(ActivityTypes.BALANCE.toString(), new AddingHandler());
-        activityHandlerMap.put(ActivityTypes.SUPPLY.toString(), new AddingHandler());
-        activityHandlerMap.put(ActivityTypes.RETURN.toString(), new AddingHandler());
-        activityHandlerMap.put(ActivityTypes.PURCHASE.toString(), new RemovingHandler());
+        activityHandlerMap.put(ActivityTypes.BALANCE.getLetter(), new AddingHandler());
+        activityHandlerMap.put(ActivityTypes.SUPPLY.getLetter(), new AddingHandler());
+        activityHandlerMap.put(ActivityTypes.RETURN.getLetter(), new AddingHandler());
+        activityHandlerMap.put(ActivityTypes.PURCHASE.getLetter(), new RemovingHandler());
 
         ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImpl(activityHandlerMap);
         StorageDao storageDao = new StorageDaoCsvImpl();

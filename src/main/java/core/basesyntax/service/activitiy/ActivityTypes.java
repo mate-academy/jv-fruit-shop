@@ -9,10 +9,10 @@ public enum ActivityTypes {
     private final String name;
 
     ActivityTypes(String activityTypeLetter) {
-        name = activityTypeLetter;
+        this.name = activityTypeLetter;
     }
 
-    public String toString() {
+    public String getLetter() {
         return this.name;
     }
 }
