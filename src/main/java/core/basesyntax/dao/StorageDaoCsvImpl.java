@@ -7,11 +7,7 @@ import java.util.List;
 
 public class StorageDaoCsvImpl implements StorageDao {
     @Override
-    public FruitCrate update(FruitCrate fruitCrate) {
-        FruitCrate fruitCrateToUpdate = get(fruitCrate.getName());
-        if (fruitCrateToUpdate != null) {
-            Storage.storage.remove(fruitCrateToUpdate);
-        }
+    public FruitCrate add(FruitCrate fruitCrate) {
         Storage.storage.add(fruitCrate);
         return fruitCrate;
     }

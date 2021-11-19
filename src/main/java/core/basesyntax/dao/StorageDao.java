@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitCrate;
 import java.util.List;
 
 public interface StorageDao {
-    FruitCrate update(FruitCrate fruitCrate);
+    FruitCrate add(FruitCrate fruitCrate);
 
     FruitCrate get(String fruitName);
 

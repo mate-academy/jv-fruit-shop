@@ -11,10 +11,9 @@ public class AddingHandler implements ActivityHandler {
     public FruitCrate updateFruitCrate(String fruitName, int quantity) {
         FruitCrate storedCrate = storageDao.get(fruitName);
         if (storedCrate == null) {
-            return storageDao.update(new FruitCrate(fruitName, quantity));
+            return storageDao.add(new FruitCrate(fruitName, quantity));
         }
-        FruitCrate updatedFruitCrate =
-                new FruitCrate(fruitName, storedCrate.getQuantity() + quantity);
-        return storageDao.update(updatedFruitCrate);
+        storageDao.remove(fruitName);
+        return storageDao.add(new FruitCrate(fruitName, storedCrate.getQuantity() + quantity));
     }
 }
