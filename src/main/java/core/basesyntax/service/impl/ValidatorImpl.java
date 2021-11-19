@@ -26,8 +26,7 @@ public class ValidatorImpl implements Validator {
         }
         Predicate<java.lang.String> linePredicate = line -> Pattern.matches(LINE_PATTERN, line)
                 && activityHandlerMap.containsKey(String.valueOf(line.charAt(ACTIVITY_TYPE_INDEX)))
-                && (line.charAt(line.lastIndexOf(',') + 1) != '0'
-                || line.charAt(line.lastIndexOf(',') + 1) != '-');
+                && line.charAt(line.lastIndexOf(',') + 1) != '0';
         long countOfValidLines = dataCopy.stream()
                 .filter(linePredicate)
                 .count();

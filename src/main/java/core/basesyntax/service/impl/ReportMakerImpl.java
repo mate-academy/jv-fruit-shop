@@ -10,10 +10,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ReportMakerImpl implements ReportMaker {
+    private static final String HEAD_OF_REPORT = "fruit,quantity";
+
     @Override
     public String makeReport(List<Fruit> fruits) {
         Map<String, Integer> totalAmount = calculateTotalAmount(fruits);
-        StringBuilder reportBuilder = new StringBuilder("fruit,quantity");
+        StringBuilder reportBuilder = new StringBuilder(HEAD_OF_REPORT);
         for (Map.Entry<String, Integer> entry : totalAmount.entrySet()) {
             reportBuilder.append(System.lineSeparator())
                     .append(entry.getKey())
