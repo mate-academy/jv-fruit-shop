@@ -12,15 +12,8 @@ public class ReportMakerImpl implements ReportMaker {
     private static final String COMMA = ",";
 
     @Override
-    public Map<String, Long> amountCalculator(List<Fruit> fruits) {
-        return fruits.stream()
-                .map(Fruit::getName)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-    }
-
-    @Override
     public String makeReport(List<Fruit> fruits) {
-        Map<String, Long> totalAmount = amountCalculator(fruits);
+        Map<String, Long> totalAmount = totalAmountCalculator(fruits);
         StringBuilder reportBuilder = new StringBuilder(HEAD_OF_REPORT);
         for (Map.Entry<String, Long> entry : totalAmount.entrySet()) {
             reportBuilder.append(System.lineSeparator())
@@ -29,5 +22,11 @@ public class ReportMakerImpl implements ReportMaker {
                     .append(entry.getValue());
         }
         return reportBuilder.toString();
+    }
+
+    private Map<String, Long> totalAmountCalculator(List<Fruit> fruits) {
+        return fruits.stream()
+                .map(Fruit::getName)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 }
