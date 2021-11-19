@@ -1,12 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static java.util.stream.Collectors.summingInt;
+
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportMaker;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import static java.util.stream.Collectors.summingInt;
 
 public class ReportMakerImpl implements ReportMaker {
     private static final String HEAD_OF_REPORT = "fruit,quantity";
