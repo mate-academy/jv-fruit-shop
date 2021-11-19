@@ -13,8 +13,7 @@ public class AddingHandler implements ActivityHandler {
     @Override
     public void apply(String fruitName, int value) {
         for (int i = 0; i < value; i++) {
-            Fruit fruit = new Fruit(fruitName);
-            fruitStorageDao.add(fruit);
+            fruitStorageDao.add(new Fruit(fruitName));
         }
     }
 }
