@@ -9,4 +9,6 @@ public interface StorageDao {
     FruitCrate get(String fruitName);
 
     List<FruitCrate> getAll();
+
+    FruitCrate remove(String fruitName);
 }

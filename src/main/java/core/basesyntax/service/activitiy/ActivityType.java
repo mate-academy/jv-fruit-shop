@@ -1,6 +1,6 @@
 package core.basesyntax.service.activitiy;
 
-public enum ActivityTypes {
+public enum ActivityType {
     BALANCE("b"),
     SUPPLY("s"),
     RETURN("r"),
@@ -8,7 +8,7 @@ public enum ActivityTypes {
 
     private final String name;
 
-    ActivityTypes(String activityTypeLetter) {
+    ActivityType(String activityTypeLetter) {
         this.name = activityTypeLetter;
     }
 

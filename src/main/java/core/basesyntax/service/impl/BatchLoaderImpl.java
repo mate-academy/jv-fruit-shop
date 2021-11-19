@@ -5,7 +5,7 @@ import core.basesyntax.model.FruitCrate;
 import core.basesyntax.service.BatchLoader;
 import core.basesyntax.strategy.ActivitiesStrategy;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.IntStream;
 
 public class BatchLoaderImpl implements BatchLoader {
     private static final int ACTIVITY_TYPE_INDEX = 0;
@@ -21,12 +21,11 @@ public class BatchLoaderImpl implements BatchLoader {
 
     @Override
     public List<FruitCrate> loadBatch(List<String> fileData) {
-        Stream.iterate(1, i -> i + 1).limit(fileData.size() - 1)
-                .map(i -> fileData.get(i).split(","))
-                .map(line -> activitiesStrategy.get(line[ACTIVITY_TYPE_INDEX])
-                        .getFruitCrate(line[FRUIT_NAME_INDEX],
-                                Integer.parseInt(line[QUANTITY_INDEX])))
-                .forEach(storageDao::update);
+        IntStream.range(1, fileData.size())
+                .mapToObj(i -> fileData.get(i).split(","))
+                .forEach(line -> activitiesStrategy.get(line[ACTIVITY_TYPE_INDEX])
+                        .updateFruitCrate(line[FRUIT_NAME_INDEX],
+                                Integer.parseInt(line[QUANTITY_INDEX])));
         return storageDao.getAll();
     }
 }

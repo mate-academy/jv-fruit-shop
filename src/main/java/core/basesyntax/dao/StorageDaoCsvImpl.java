@@ -8,13 +8,12 @@ import java.util.List;
 public class StorageDaoCsvImpl implements StorageDao {
     @Override
     public FruitCrate update(FruitCrate fruitCrate) {
-        if (get(fruitCrate.getName()) == null) {
-            Storage.storage.add(fruitCrate);
-        } else {
-            int newQuantity = fruitCrate.getQuantity() + get(fruitCrate.getName()).getQuantity();
-            get(fruitCrate.getName()).setQuantity(newQuantity);
+        FruitCrate fruitCrateToUpdate = get(fruitCrate.getName());
+        if (fruitCrateToUpdate != null) {
+            Storage.storage.remove(fruitCrateToUpdate);
         }
-        return get(fruitCrate.getName());
+        Storage.storage.add(fruitCrate);
+        return fruitCrate;
     }
 
     @Override
@@ -28,5 +27,14 @@ public class StorageDaoCsvImpl implements StorageDao {
     @Override
     public List<FruitCrate> getAll() {
         return new ArrayList<>(Storage.storage);
+    }
+
+    @Override
+    public FruitCrate remove(String fruitName) {
+        FruitCrate fruitCrateToRemove = get(fruitName);
+        if (fruitCrateToRemove != null) {
+            Storage.storage.remove(fruitCrateToRemove);
+        }
+        return fruitCrateToRemove;
     }
 }

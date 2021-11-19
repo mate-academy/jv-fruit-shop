@@ -9,7 +9,7 @@ import core.basesyntax.service.ReportMaker;
 import core.basesyntax.service.Validator;
 import core.basesyntax.service.Writer;
 import core.basesyntax.service.activitiy.ActivityHandler;
-import core.basesyntax.service.activitiy.ActivityTypes;
+import core.basesyntax.service.activitiy.ActivityType;
 import core.basesyntax.service.activitiy.AddingHandler;
 import core.basesyntax.service.activitiy.RemovingHandler;
 import core.basesyntax.service.impl.BatchLoaderImpl;
@@ -26,10 +26,10 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         Map<String, ActivityHandler> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(ActivityTypes.BALANCE.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityTypes.SUPPLY.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityTypes.RETURN.getLetter(), new AddingHandler());
-        activityHandlerMap.put(ActivityTypes.PURCHASE.getLetter(), new RemovingHandler());
+        activityHandlerMap.put(ActivityType.BALANCE.getLetter(), new AddingHandler());
+        activityHandlerMap.put(ActivityType.SUPPLY.getLetter(), new AddingHandler());
+        activityHandlerMap.put(ActivityType.RETURN.getLetter(), new AddingHandler());
+        activityHandlerMap.put(ActivityType.PURCHASE.getLetter(), new RemovingHandler());
 
         ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImpl(activityHandlerMap);
         StorageDao storageDao = new StorageDaoCsvImpl();
