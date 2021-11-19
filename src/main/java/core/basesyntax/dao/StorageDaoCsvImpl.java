@@ -9,7 +9,14 @@ public class StorageDaoCsvImpl implements StorageDao {
     @Override
     public FruitCrate add(FruitCrate fruitCrate) {
         Storage.storage.add(fruitCrate);
-        return fruitCrate;
+        return get(fruitCrate.getName());
+    }
+
+    @Override
+    public FruitCrate update(String fruitName, int quantity) {
+        FruitCrate undatedFruitCrate = get(fruitName);
+        undatedFruitCrate.setQuantity(quantity);
+        return get(fruitName);
     }
 
     @Override

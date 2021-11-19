@@ -14,7 +14,6 @@ public class RemovingHandler implements ActivityHandler {
                 || storedCrate.getQuantity() - quantity < 0) {
             throw new RuntimeException("Not enough " + fruitName + " to sell");
         }
-        storageDao.remove(fruitName);
-        return storageDao.add(new FruitCrate(fruitName, storedCrate.getQuantity() - quantity));
+        return storageDao.update(fruitName, storedCrate.getQuantity() - quantity);
     }
 }
