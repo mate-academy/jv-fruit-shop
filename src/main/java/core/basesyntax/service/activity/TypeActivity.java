@@ -8,8 +8,8 @@ public enum TypeActivity {
 
     private final String name;
 
-    TypeActivity(String activityTypeLetter) {
-        this.name = activityTypeLetter;
+    TypeActivity(String name) {
+        this.name = name;
     }
 
     @Override
