@@ -29,7 +29,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     public void workShop(String inputFilePath, String outputFilePath) {
         List<String> inputData = reader.readFromFile(inputFilePath);
         if (validator.validateData(inputData)) {
-            List<Fruit> fruits = shopService.updatingFruitStorage(inputData);
+            List<Fruit> fruits = shopService.updateShopWarehouse(inputData);
             String report = reportMaker.makeReport(fruits);
             writer.writeToFile(report, outputFilePath);
         }

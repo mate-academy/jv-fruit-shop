@@ -20,7 +20,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public List<Fruit> updatingFruitStorage(List<String> csvData) {
+    public List<Fruit> updateShopWarehouse(List<String> csvData) {
         IntStream.range(1, csvData.size())
                 .mapToObj(i -> csvData.get(i).split(","))
                 .forEach(data -> activityStrategy.get(data[ACTIVITY_TYPE_INDEX])

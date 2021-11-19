@@ -1,18 +1,20 @@
 package core.basesyntax.service.activity;
 
-import core.basesyntax.service.FruitService;
+import core.basesyntax.dao.FruitStorageDao;
+import core.basesyntax.model.Fruit;
 
 public class AddingHandler implements ActivityHandler {
-    private final FruitService fruitStorageService;
+    private final FruitStorageDao fruitStorageDao;
 
-    public AddingHandler(FruitService fruitStorageService) {
-        this.fruitStorageService = fruitStorageService;
+    public AddingHandler(FruitStorageDao fruitStorageDao) {
+        this.fruitStorageDao = fruitStorageDao;
     }
 
     @Override
     public void apply(String fruitName, int value) {
         for (int i = 0; i < value; i++) {
-            fruitStorageService.createFruit(fruitName);
+            Fruit fruit = new Fruit(fruitName);
+            fruitStorageDao.add(fruit);
         }
     }
 }

@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
-import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.ReportMaker;
@@ -13,7 +12,6 @@ import core.basesyntax.service.activity.ActivityHandler;
 import core.basesyntax.service.activity.AddingHandler;
 import core.basesyntax.service.activity.RemovingHandler;
 import core.basesyntax.service.activity.TypeActivity;
-import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.ReaderCsvImpl;
 import core.basesyntax.service.impl.ReportMakerImpl;
@@ -31,13 +29,13 @@ public class Main {
 
     public static void main(String[] args) {
         FruitStorageDao fruitDao = new FruitStorageDaoImpl();
-        FruitService fruitService = new FruitServiceImpl(fruitDao);
+
 
         Map<String, ActivityHandler> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(TypeActivity.BALANCE.toString(), new AddingHandler(fruitService));
+        activityHandlerMap.put(TypeActivity.BALANCE.toString(), new AddingHandler(fruitDao));
         activityHandlerMap.put(TypeActivity.PURCHASE.toString(), new RemovingHandler(fruitDao));
-        activityHandlerMap.put(TypeActivity.SUPPLY.toString(), new AddingHandler(fruitService));
-        activityHandlerMap.put(TypeActivity.RETURN.toString(), new AddingHandler(fruitService));
+        activityHandlerMap.put(TypeActivity.SUPPLY.toString(), new AddingHandler(fruitDao));
+        activityHandlerMap.put(TypeActivity.RETURN.toString(), new AddingHandler(fruitDao));
         ActivityStrategy strategy = new ActivityStrategyImpl(activityHandlerMap);
 
         Validator validator = new ValidatorImpl(activityHandlerMap);
