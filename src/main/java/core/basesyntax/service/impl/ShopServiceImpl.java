@@ -14,9 +14,9 @@ public class ShopServiceImpl implements ShopService {
     private final ActivityStrategy activityStrategy;
     private final FruitStorageDao fruitDao;
 
-    public ShopServiceImpl(ActivityStrategy activityStrategy, FruitStorageDao fruitDao) {
+    public ShopServiceImpl(ActivityStrategy activityStrategy, FruitStorageDao fruitStorageDao) {
         this.activityStrategy = activityStrategy;
-        this.fruitDao = fruitDao;
+        this.fruitDao = fruitStorageDao;
     }
 
     @Override

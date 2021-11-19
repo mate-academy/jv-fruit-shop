@@ -7,12 +7,12 @@ import core.basesyntax.service.FruitService;
 public class FruitServiceImpl implements FruitService {
     private final FruitStorageDao fruitStorageDao;
 
-    public FruitServiceImpl(FruitStorageDao fruitDao) {
-        this.fruitStorageDao = fruitDao;
+    public FruitServiceImpl(FruitStorageDao fruitStorageDao) {
+        this.fruitStorageDao = fruitStorageDao;
     }
 
-    public void createFruit(String name) {
-        Fruit fruit = new Fruit(name);
+    public void createFruit(String fruitType) {
+        Fruit fruit = new Fruit(fruitType);
         fruitStorageDao.add(fruit);
     }
 }

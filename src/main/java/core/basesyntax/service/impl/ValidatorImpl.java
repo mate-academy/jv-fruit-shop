@@ -19,9 +19,9 @@ public class ValidatorImpl implements Validator {
     }
 
     @Override
-    public boolean validateData(List<String> data) {
-        List<String> dataCopy = new ArrayList<>(data);
-        if (data.isEmpty() || !checkAndDeleteFirstLine(dataCopy)) {
+    public boolean validateData(List<String> inputData) {
+        List<String> dataCopy = new ArrayList<>(inputData);
+        if (inputData.isEmpty() || !checkAndDeleteFirstLine(dataCopy)) {
             throw new RuntimeException("Invalid input data, try again");
         }
         Predicate<String> linePredicate = line -> Pattern.matches(VALID_DATA_PATTERN, line)
@@ -30,7 +30,7 @@ public class ValidatorImpl implements Validator {
         long countOfValidLines = dataCopy.stream()
                 .filter(linePredicate)
                 .count();
-        if ((countOfValidLines + 1) != data.size()) {
+        if ((countOfValidLines + 1) != inputData.size()) {
             throw new RuntimeException("Invalid input data, try again");
         }
         return true;
