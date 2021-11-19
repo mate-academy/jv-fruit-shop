@@ -1,6 +1,6 @@
 package core.basesyntax.service.activity;
 
-public enum TypeActivity {
+public enum ActivityType {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
@@ -8,12 +8,11 @@ public enum TypeActivity {
 
     private final String name;
 
-    TypeActivity(String name) {
+    ActivityType(String name) {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return this.name;
+    public String getName() {
+        return name;
     }
 }

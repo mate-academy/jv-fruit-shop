@@ -10,23 +10,20 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ReportMakerImpl implements ReportMaker {
-    private static final String HEAD_OF_REPORT = "fruit,quantity";
-    private static final String COMMA = ",";
-
     @Override
     public String makeReport(List<Fruit> fruits) {
-        Map<String, Integer> totalAmount = totalAmountCalculator(fruits);
-        StringBuilder reportBuilder = new StringBuilder(HEAD_OF_REPORT);
+        Map<String, Integer> totalAmount = calculateTotalAmount(fruits);
+        StringBuilder reportBuilder = new StringBuilder("fruit,quantity");
         for (Map.Entry<String, Integer> entry : totalAmount.entrySet()) {
             reportBuilder.append(System.lineSeparator())
                     .append(entry.getKey())
-                    .append(COMMA)
+                    .append(",")
                     .append(entry.getValue());
         }
         return reportBuilder.toString();
     }
 
-    private Map<String, Integer> totalAmountCalculator(List<Fruit> fruits) {
+    private Map<String, Integer> calculateTotalAmount(List<Fruit> fruits) {
         return fruits.stream()
                 .map(Fruit::getName)
                 .collect(Collectors.groupingBy(Function.identity(), summingInt(x -> 1)));

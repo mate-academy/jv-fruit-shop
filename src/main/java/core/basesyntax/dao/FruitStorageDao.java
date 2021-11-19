@@ -4,7 +4,7 @@ import core.basesyntax.model.Fruit;
 import java.util.List;
 
 public interface FruitStorageDao {
-    void add(Fruit fruit);
+    Fruit add(Fruit fruit);
 
     Fruit get(String fruitName);
 

@@ -9,9 +9,9 @@ import core.basesyntax.service.ShopService;
 import core.basesyntax.service.Validator;
 import core.basesyntax.service.Writer;
 import core.basesyntax.service.activity.ActivityHandler;
+import core.basesyntax.service.activity.ActivityType;
 import core.basesyntax.service.activity.AddingHandler;
 import core.basesyntax.service.activity.RemovingHandler;
-import core.basesyntax.service.activity.TypeActivity;
 import core.basesyntax.service.impl.ReaderCsvImpl;
 import core.basesyntax.service.impl.ReportMakerImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
@@ -31,10 +31,10 @@ public class Main {
         FruitStorageDao fruitDao = new FruitStorageDaoImpl();
 
         Map<String, ActivityHandler> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(TypeActivity.BALANCE.toString(), new AddingHandler(fruitDao));
-        activityHandlerMap.put(TypeActivity.PURCHASE.toString(), new RemovingHandler(fruitDao));
-        activityHandlerMap.put(TypeActivity.SUPPLY.toString(), new AddingHandler(fruitDao));
-        activityHandlerMap.put(TypeActivity.RETURN.toString(), new AddingHandler(fruitDao));
+        activityHandlerMap.put(ActivityType.BALANCE.getName(), new AddingHandler(fruitDao));
+        activityHandlerMap.put(ActivityType.PURCHASE.getName(), new RemovingHandler(fruitDao));
+        activityHandlerMap.put(ActivityType.SUPPLY.getName(), new AddingHandler(fruitDao));
+        activityHandlerMap.put(ActivityType.RETURN.getName(), new AddingHandler(fruitDao));
         ActivityStrategy strategy = new ActivityStrategyImpl(activityHandlerMap);
 
         Validator validator = new ValidatorImpl(activityHandlerMap);
@@ -42,10 +42,10 @@ public class Main {
         Writer fileWriter = new WriterCsvImpl();
         ReportMaker reportMaker = new ReportMakerImpl();
         ShopService shopService = new ShopServiceImpl(strategy, fruitDao);
-        List<String> inputData = fileReader.readFromFile(INPUT_FILEPATH);
+        List<java.lang.String> inputData = fileReader.readFromFile(INPUT_FILEPATH);
         if (validator.validateData(inputData)) {
             List<Fruit> fruitList = shopService.updateShopWarehouse(inputData);
-            String report = reportMaker.makeReport(fruitList);
+            java.lang.String report = reportMaker.makeReport(fruitList);
             fileWriter.writeToFile(report, OUTPUT_FILEPATH);
         }
     }

@@ -7,8 +7,9 @@ import java.util.List;
 
 public class FruitStorageDaoImpl implements FruitStorageDao {
     @Override
-    public void add(Fruit fruit) {
+    public Fruit add(Fruit fruit) {
         Storage.fruitsStorage.add(fruit);
+        return get(fruit.getName());
     }
 
     @Override

@@ -10,8 +10,8 @@ import java.util.regex.Pattern;
 
 public class ValidatorImpl implements Validator {
     private static final int ACTIVITY_TYPE_INDEX = 0;
-    private static final String HEAD = "type,fruit,quantity";
-    private static final String VALID_DATA_PATTERN = "[a-z],[a-z]+,[0-9]+";
+    private static final java.lang.String INPUT_DATA_HEAD = "type,fruit,quantity";
+    private static final java.lang.String LINE_PATTERN = "[a-z],[a-z]+,[0-9]+";
     private final Map<String, ActivityHandler> activityHandlerMap;
 
     public ValidatorImpl(Map<String, ActivityHandler> activityHandlerMap) {
@@ -19,14 +19,15 @@ public class ValidatorImpl implements Validator {
     }
 
     @Override
-    public boolean validateData(List<String> inputData) {
-        List<String> dataCopy = new ArrayList<>(inputData);
-        if (inputData.isEmpty() || !checkAndDeleteFirstLine(dataCopy)) {
+    public boolean validateData(List<java.lang.String> inputData) {
+        List<java.lang.String> dataCopy = new ArrayList<>(inputData);
+        if (inputData.isEmpty() || !dataCopy.get(0).equals(INPUT_DATA_HEAD)) {
             throw new RuntimeException("Invalid input data, try again");
         }
-        Predicate<String> linePredicate = line -> Pattern.matches(VALID_DATA_PATTERN, line)
+        Predicate<java.lang.String> linePredicate = line -> Pattern.matches(LINE_PATTERN, line)
                 && activityHandlerMap.containsKey(String.valueOf(line.charAt(ACTIVITY_TYPE_INDEX)))
-                && Integer.parseInt(line.substring(line.lastIndexOf(',') + 1)) >= 0;
+                && (line.charAt(line.lastIndexOf(',') + 1) != '0'
+                || line.charAt(line.lastIndexOf(',') + 1) != '-');
         long countOfValidLines = dataCopy.stream()
                 .filter(linePredicate)
                 .count();
@@ -34,9 +35,5 @@ public class ValidatorImpl implements Validator {
             throw new RuntimeException("Invalid input data, try again");
         }
         return true;
-    }
-
-    private boolean checkAndDeleteFirstLine(List<String> data) {
-        return data.get(0).equals(HEAD);
     }
 }
