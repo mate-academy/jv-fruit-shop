@@ -30,7 +30,6 @@ public class Main {
     public static void main(String[] args) {
         FruitStorageDao fruitDao = new FruitStorageDaoImpl();
 
-
         Map<String, ActivityHandler> activityHandlerMap = new HashMap<>();
         activityHandlerMap.put(TypeActivity.BALANCE.toString(), new AddingHandler(fruitDao));
         activityHandlerMap.put(TypeActivity.PURCHASE.toString(), new RemovingHandler(fruitDao));
