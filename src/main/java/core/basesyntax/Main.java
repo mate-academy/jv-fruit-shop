@@ -3,22 +3,22 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.ReportMaker;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.Validator;
-import core.basesyntax.service.WorkImitation;
 import core.basesyntax.service.Writer;
 import core.basesyntax.service.activity.ActivityHandler;
 import core.basesyntax.service.activity.AddingHandler;
 import core.basesyntax.service.activity.RemovingHandler;
 import core.basesyntax.service.activity.TypeActivity;
 import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.ReaderCsvImpl;
 import core.basesyntax.service.impl.ReportMakerImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.service.impl.ValidatorImpl;
-import core.basesyntax.service.impl.WorkImitationImpl;
 import core.basesyntax.service.impl.WriterCsvImpl;
 import core.basesyntax.strategy.ActivityStrategy;
 import core.basesyntax.strategy.ActivityStrategyImpl;
@@ -45,8 +45,9 @@ public class Main {
         Writer fileWriter = new WriterCsvImpl();
         ReportMaker reportMaker = new ReportMakerImpl();
         ShopService shopService = new ShopServiceImpl(strategy, fruitDao);
-        WorkImitation workService =
-                new WorkImitationImpl(fileReader, fileWriter, reportMaker, validator, shopService);
-        workService.workShop(INPUT_FILEPATH, OUTPUT_FILEPATH);
+        FruitShopService fruitShopService =
+                new FruitShopServiceImpl(fileReader, fileWriter,
+                        reportMaker, validator, shopService);
+        fruitShopService.workShop(INPUT_FILEPATH, OUTPUT_FILEPATH);
     }
 }

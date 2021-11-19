@@ -27,6 +27,6 @@ public class ReportMakerImpl implements ReportMaker {
     private Map<String, Long> totalAmountCalculator(List<Fruit> fruits) {
         return fruits.stream()
                 .map(Fruit::getName)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+                .collect(Collectors.groupingBy(Function.identity(), (Collectors.counting())));
     }
 }
