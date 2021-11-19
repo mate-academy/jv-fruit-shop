@@ -4,5 +4,5 @@ import core.basesyntax.model.Fruit;
 import java.util.List;
 
 public interface ShopService {
-    List<Fruit> updatingFruitStorage(List<String> data);
+    List<Fruit> updatingFruitStorage(List<String> csvData);
 }

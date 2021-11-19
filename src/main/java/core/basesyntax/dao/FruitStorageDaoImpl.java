@@ -5,7 +5,7 @@ import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitDaoImpl implements FruitDao {
+public class FruitStorageDaoImpl implements FruitStorageDao {
     @Override
     public void add(Fruit fruit) {
         Storage.fruitsStorage.add(fruit);

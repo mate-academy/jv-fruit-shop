@@ -3,7 +3,7 @@ package core.basesyntax.dao;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 
-public interface FruitDao {
+public interface FruitStorageDao {
     void add(Fruit fruit);
 
     Fruit get(String fruitName);

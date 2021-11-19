@@ -5,19 +5,19 @@ import core.basesyntax.service.Reader;
 import core.basesyntax.service.ReportMaker;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.Validator;
-import core.basesyntax.service.WorkService;
+import core.basesyntax.service.WorkImitation;
 import core.basesyntax.service.Writer;
 import java.util.List;
 
-public class WorkServiceImpl implements WorkService {
+public class WorkImitationImpl implements WorkImitation {
     private final Reader reader;
     private final Writer writer;
     private final ReportMaker reportMaker;
     private final Validator validator;
     private final ShopService shopService;
 
-    public WorkServiceImpl(Reader reader, Writer writer,
-                           ReportMaker reportMaker, Validator validator, ShopService shopService) {
+    public WorkImitationImpl(Reader reader, Writer writer, ReportMaker reportMaker,
+                             Validator validator, ShopService shopService) {
         this.reader = reader;
         this.writer = writer;
         this.reportMaker = reportMaker;

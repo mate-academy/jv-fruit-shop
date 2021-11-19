@@ -1,12 +1,12 @@
 package core.basesyntax.service.activity;
 
-import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Fruit;
 
 public class RemovingHandler implements ActivityHandler {
-    private final FruitDao fruitDao;
+    private final FruitStorageDao fruitDao;
 
-    public RemovingHandler(FruitDao fruitDao) {
+    public RemovingHandler(FruitStorageDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 

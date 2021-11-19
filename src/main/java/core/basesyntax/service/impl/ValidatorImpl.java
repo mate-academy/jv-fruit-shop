@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Validator;
-import core.basesyntax.service.activity.TypeActivity;
+import core.basesyntax.service.activity.ActivityHandler;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
@@ -12,6 +12,11 @@ public class ValidatorImpl implements Validator {
     private static final int ACTIVITY_TYPE_INDEX = 0;
     private static final String HEAD = "type,fruit,quantity";
     private static final String VALID_DATA_PATTERN = "[a-z],[a-z]+,[0-9]+";
+    private final Map<String, ActivityHandler> activityHandlerMap;
+
+    public ValidatorImpl(Map<String, ActivityHandler> activityHandlerMap) {
+        this.activityHandlerMap = activityHandlerMap;
+    }
 
     @Override
     public boolean validateData(List<String> data) {
@@ -20,8 +25,8 @@ public class ValidatorImpl implements Validator {
             throw new RuntimeException("Invalid input data, try again");
         }
         Predicate<String> linePredicate = line -> Pattern.matches(VALID_DATA_PATTERN, line)
-                && checkValidActivityType(TypeActivity.values(), line.charAt(ACTIVITY_TYPE_INDEX))
-                && line.charAt(line.lastIndexOf(',') + 1) != '0';
+                && activityHandlerMap.containsKey(String.valueOf(line.charAt(ACTIVITY_TYPE_INDEX)))
+                && Integer.parseInt(line.substring(line.lastIndexOf(',') + 1)) >= 0;
         long countOfValidLines = dataCopy.stream()
                 .filter(linePredicate)
                 .count();
@@ -33,11 +38,5 @@ public class ValidatorImpl implements Validator {
 
     private boolean checkAndDeleteFirstLine(List<String> data) {
         return data.get(0).equals(HEAD);
-    }
-
-    private boolean checkValidActivityType(TypeActivity[] values, char line) {
-        String operation = String.valueOf(line);
-        String[] activities = Arrays.toString(values).split("");
-        return Arrays.asList(activities).contains(operation);
     }
 }
