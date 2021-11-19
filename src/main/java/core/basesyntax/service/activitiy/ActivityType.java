@@ -8,8 +8,8 @@ public enum ActivityType {
 
     private final String name;
 
-    ActivityType(String activityTypeLetter) {
-        this.name = activityTypeLetter;
+    ActivityType(String activityType) {
+        this.name = activityType;
     }
 
     public String getLetter() {
