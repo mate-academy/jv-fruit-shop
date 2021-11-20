@@ -1,21 +1,18 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.OperationService;
-import core.basesyntax.strategy.FruitList;
 
-public class Purchase implements OperationService {
-    StorageDaoImpl storageDao = new StorageDaoImpl();
-    FruitList fruitList = new FruitList();
+public class Purchase extends Operation {
 
     @Override
     public Integer operate(String fruitName, String value) {
         Fruit fruit = fruitList.getFruitByName(fruitName);
-        //System.out.println(fruits);
         int fruitsQuantity = Integer.parseInt(value);
-        int currentQuantity = storageDao.getCurrentQuantity(fruitName);
+        int currentQuantity = storageDao.getCurrentQuantity(fruit);
+        if (currentQuantity < fruitsQuantity) {
+            throw new RuntimeException("Not enough fruits to buy");
+        }
         fruit.setQuantity(currentQuantity - fruitsQuantity);
-        return storageDao.update(fruitName, currentQuantity - fruitsQuantity);
+        return storageDao.update(fruit, currentQuantity - fruitsQuantity);
     }
 }

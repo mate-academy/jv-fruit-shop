@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class CsvReportHandler implements ReportHandler {
+    private static final int TITLE_LINE_INDEX = 0;
 
     @Override
     public List<String> read(String source) {
@@ -15,6 +16,7 @@ public class CsvReportHandler implements ReportHandler {
         List<String> strings;
         try {
             strings = Files.readAllLines(fileToRead.toPath());
+            strings.remove(TITLE_LINE_INDEX);
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + source, e);
         }

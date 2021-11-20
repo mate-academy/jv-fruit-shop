@@ -13,7 +13,7 @@ public class DataFormatter {
         this.validator = reportValidator;
     }
 
-    public String formatReport(List<String> data){
+    public String formatReport(List<String> data) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(FRUIT)
                 .append(SEPARATOR)
@@ -23,7 +23,7 @@ public class DataFormatter {
         return stringBuilder.toString().trim();
     }
 
-    public List<String> formatInputData(List<String> data){
+    public List<String> formatInputData(List<String> data) {
         return data.stream()
                 .filter(validator)
                 .collect(Collectors.toList());
