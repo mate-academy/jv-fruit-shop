@@ -1,7 +1,8 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.strategy.Activity;
+import core.basesyntax.model.Activity;
 import core.basesyntax.service.ReaderService;
+import core.basesyntax.parsers.impl.ActivityParserImpl;
 
 import java.io.File;
 import java.io.IOException;

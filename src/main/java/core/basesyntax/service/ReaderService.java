@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.strategy.Activity;
+import core.basesyntax.model.Activity;
 
 import java.io.File;
 import java.util.List;

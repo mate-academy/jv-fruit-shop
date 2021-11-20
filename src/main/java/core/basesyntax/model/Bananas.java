@@ -1,4 +1,4 @@
 package core.basesyntax.model;
 
-public class Bananas extends Fruit{
+public class Bananas extends Fruits{
 }
