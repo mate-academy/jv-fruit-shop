@@ -1,7 +1,11 @@
 package core.basesyntax.dao;
 
-public interface StorageDao<K,V> {
-    V get(K key);
+import java.util.List;
+import java.util.Map;
 
-    boolean update(K key, V value);
+public interface StorageDao<K, V> {
+    Integer put(K key, V value);
+    V update(K key, V value);
+    List<Map.Entry<K, V>> get();
+    Integer getCurrentQuantity(String fruit);
 }

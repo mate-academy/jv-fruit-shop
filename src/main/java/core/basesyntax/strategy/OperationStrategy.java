@@ -7,14 +7,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategy {
-    private final Map<String, OperationService> operationsList = new HashMap<>();
+    private final Map<String, OperationService> operationsList;
 
     public OperationStrategy() {
+        operationsList = new HashMap<>();
         Arrays.stream(OperationType.values())
                 .forEach(t -> operationsList.put(t.getName(), t.getOperationType()));
     }
 
-    OperationService getService(String name){
+    public OperationService getService(String name){
         return operationsList.get(name);
     }
 }
