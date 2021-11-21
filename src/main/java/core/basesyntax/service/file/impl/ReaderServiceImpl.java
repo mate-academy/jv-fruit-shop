@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class ReaderServiceImpl implements ReaderService {
-    String filePath;
+    private String filePath;
 
     public ReaderServiceImpl(String filePath) {
         this.filePath = filePath;
@@ -24,7 +24,7 @@ public class ReaderServiceImpl implements ReaderService {
                     .skip(1)
                     .collect(Collectors.joining(" "));
         } catch (IOException e) {
-            throw new RuntimeException("Cannot find file", e);
+            throw new RuntimeException("Cannot read file: " + filePath, e);
         }
         return fileData.split(" ");
     }

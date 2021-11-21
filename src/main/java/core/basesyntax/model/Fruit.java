@@ -25,10 +25,15 @@ public class Fruit {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Fruit fruit = (Fruit) o;
-        return fruitCountInStorage == fruit.fruitCountInStorage && Objects.equals(fruitName, fruit.fruitName);
+        return fruitCountInStorage == fruit.fruitCountInStorage
+                && Objects.equals(fruitName, fruit.fruitName);
     }
 
     @Override
@@ -38,6 +43,6 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit: " + fruitName + " - " + fruitCountInStorage;
+        return fruitName + "-" + fruitCountInStorage;
     }
 }
