@@ -18,6 +18,7 @@ public class StorageServiceImpl implements StorageService {
     private final FruitWorkStrategy fruitWork;
     private final FruitDao fruitDao;
     private final StrategyService strategyService;
+    private final WriterService writerService;
 
     public StorageServiceImpl(String filePath, FruitWorkStrategy fruitWork, FruitDao fruitDao) {
         this.filePath = filePath;
@@ -25,15 +26,15 @@ public class StorageServiceImpl implements StorageService {
         this.fruitDao = fruitDao;
         fileDataValidator = new FileDataValidatorImpl();
         strategyService = new StrategyServiceImpl();
+        writerService = new WriterServiceImpl();
     }
 
     @Override
     public void workWithStorage() {
         String[] fileData = new ReaderServiceImpl(filePath).readFile();
+        ReportCreator reportCreator = new ReportCreatorImpl(fruitDao);
         fileDataValidator.checkFileData(fileData, filePath);
         strategyService.workWithStrategy(fileData, fruitWork, fruitDao);
-        ReportCreator reportCreator = new ReportCreatorImpl(fruitDao);
-        WriterService writerService = new WriterServiceImpl();
-        writerService.writeResultInFile(filePath, reportCreator);
+        writerService.writeResultInFile(filePath, reportCreator.createResultForWriting());
     }
 }

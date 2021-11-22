@@ -13,9 +13,9 @@ public class WriterServiceImpl implements WriterService {
     private static final String FILE_NAME_FOR_REPORTS = "report.csv";
 
     @Override
-    public void writeResultInFile(String filePath, ReportCreator reportCreator) {
+    public void writeResultInFile(String filePath, String resultData) {
         String spr = File.separator;
-        String reportForWriting = reportCreator.createResultForWriting();
+        String reportForWriting =resultData;
         String pathToResources = filePath.substring(0, filePath.lastIndexOf(spr) + 1);
         String pathToReportDir = pathToResources + DIRECTORY_NAME_FOR_REPORTS;
         String pathToReportFile = pathToReportDir + spr + FILE_NAME_FOR_REPORTS;
