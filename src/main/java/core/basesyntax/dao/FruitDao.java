@@ -1,11 +1,12 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
+import java.util.Optional;
 
 public interface FruitDao {
-    void add(Fruit fruit);
+    Fruit add(Fruit fruit);
 
-    Fruit get(String fruitName);
+    Optional<Fruit> get(String fruitName);
 
     void changeFruitCountInStorage(int newCount, String fruitName);
 
