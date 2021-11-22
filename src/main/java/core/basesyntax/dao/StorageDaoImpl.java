@@ -18,7 +18,7 @@ public class StorageDaoImpl implements StorageDao {
                 return fruit;
             }
         }
-        return null;
+        throw new RuntimeException(name + " not found!!");
     }
 
     @Override

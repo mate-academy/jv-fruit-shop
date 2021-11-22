@@ -6,7 +6,7 @@ import core.basesyntax.startegy.ActivitiesService;
 
 public class BalanceActivityService implements ActivitiesService {
     @Override
-    public void getActivity(String name, int quantity, StorageDao storageDao) {
+    public void doActivity(String name, int quantity, StorageDao storageDao) {
         Fruit fruit = new Fruit(name, quantity);
         storageDao.add(fruit);
     }

@@ -22,7 +22,7 @@ public class FruitStoreServiceImpl implements FruitStoreService {
             int quantity = Integer.parseInt(arrayStringLine[INDEX_OF_QUANTITY]);
             ActivitiesService activitiesService = typeActivityMap.get(ActivityType
                     .getActivityType(abbreviationActivityType));
-            activitiesService.getActivity(fruitName, quantity, storageDao);
+            activitiesService.doActivity(fruitName, quantity, storageDao);
         }
         return storageDao.getAll();
     }
