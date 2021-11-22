@@ -25,13 +25,13 @@ public class Main {
     private static final String OUTPUT_FILE_PATH = "src/main/resources/Output file";
 
     public static void main(String[] args) {
-        FruitsDao storageDao = new FruitsDaoImpl();
         Map<ActivityType, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();
         activitiesHandlerMap.put(ActivityType.BALANCE, new BalanceActivityHandler());
         activitiesHandlerMap.put(ActivityType.PURCHASE, new PurchaseActivityHandler());
         activitiesHandlerMap.put(ActivityType.RETURN, new ReturnActivityHandler());
         activitiesHandlerMap.put(ActivityType.SUPPLY, new SupplyActivityHandler());
         List<String> text = new ReaderServiceImpl().readFromFile(INPUT_FILE_PATH);
+        FruitsDao storageDao = new FruitsDaoImpl();
         ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImpl(activitiesHandlerMap);
         if (new ValidatorServiceImpl().isValid(text)) {
             List<Fruit> fruits = new FruitStoreServiceImpl(storageDao, activitiesStrategy)
