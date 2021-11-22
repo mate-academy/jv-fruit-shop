@@ -5,11 +5,11 @@ import core.basesyntax.model.Fruit;
 public class Supply extends Operation {
 
     @Override
-    public Integer operate(String fruitName, String value) {
+    public boolean operate(String fruitName, String value) {
         Fruit fruit = fruitList.getFruitByName(fruitName);
         int fruitsQuantity = Integer.parseInt(value);
-        int currentQuantity = storageDao.getCurrentQuantity(fruit);
+        int currentQuantity = fruit.getQuantity();
         fruit.setQuantity(fruitsQuantity + currentQuantity);
-        return storageDao.update(fruit, fruitsQuantity + currentQuantity);
+        return true;
     }
 }

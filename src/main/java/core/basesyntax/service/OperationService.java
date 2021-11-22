@@ -2,5 +2,5 @@ package core.basesyntax.service;
 
 public interface OperationService {
 
-    Integer operate(String fruit, String value);
+    boolean operate(String fruit, String value);
 }

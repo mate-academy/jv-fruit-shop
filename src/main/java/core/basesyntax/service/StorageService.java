@@ -13,7 +13,7 @@ public class StorageService {
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final StorageDao<Fruit, Integer> storageDao;
+    private final StorageDao<Fruit> storageDao;
     private final OperationStrategy operationStrategy;
 
     public StorageService() {

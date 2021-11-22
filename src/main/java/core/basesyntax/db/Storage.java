@@ -1,8 +1,8 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.Fruit;
-import java.util.HashMap;
+import java.util.HashSet;
 
 public class Storage {
-    public static final HashMap<Fruit, Integer> fruitStorage = new HashMap<>();
+    public static final HashSet<Fruit> fruitStorage = new HashSet<>();
 }

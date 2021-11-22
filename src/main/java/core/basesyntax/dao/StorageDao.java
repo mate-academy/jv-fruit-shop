@@ -2,13 +2,9 @@ package core.basesyntax.dao;
 
 import java.util.List;
 
-public interface StorageDao<K, V> {
+public interface StorageDao<K> {
 
-    Integer put(K key, V value);
-
-    V update(K key, V value);
+    boolean put(K key);
 
     List<K> getStorageInfo();
-
-    Integer getCurrentQuantity(K fruit);
 }
