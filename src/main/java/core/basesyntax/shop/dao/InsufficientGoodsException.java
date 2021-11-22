@@ -1,4 +1,4 @@
-package core.basesyntax.shop;
+package core.basesyntax.shop.dao;
 
 public class InsufficientGoodsException extends Exception {
     public InsufficientGoodsException(String errorMessage) {

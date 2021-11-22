@@ -1,5 +1,5 @@
 package core.basesyntax.shop.service;
 
-public interface ReadFromFile {
+public interface Reader {
     String read(String source);
 }

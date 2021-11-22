@@ -1,12 +1,12 @@
 package core.basesyntax.shop.service.impl;
 
-import core.basesyntax.shop.service.WriteToFile;
+import core.basesyntax.shop.service.Writer;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteToCsvFile implements WriteToFile {
+public class WriterToCsvFile implements Writer {
 
     @Override
     public boolean write(String toFileName, String report) {

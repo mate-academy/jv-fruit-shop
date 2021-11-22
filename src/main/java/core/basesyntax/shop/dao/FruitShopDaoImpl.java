@@ -1,11 +1,9 @@
-package core.basesyntax.shop.service.impl;
+package core.basesyntax.shop.dao;
 
-import core.basesyntax.shop.InsufficientGoodsException;
 import core.basesyntax.shop.db.FruitShopStorage;
-import core.basesyntax.shop.service.ShopDao;
 import java.util.Map;
 
-public class ShopDaoImpl implements ShopDao {
+public class FruitShopDaoImpl implements FruitShopDao {
 
     @Override
     public void add(String item, int quantity) {

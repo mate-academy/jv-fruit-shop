@@ -2,7 +2,7 @@ package core.basesyntax.shop.service;
 
 import java.util.Map;
 
-public interface ShopService {
+public interface FruitShopService {
 
     void balance(String type, Integer quantity);
 

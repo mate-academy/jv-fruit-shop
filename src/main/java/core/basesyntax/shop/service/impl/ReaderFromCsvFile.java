@@ -1,11 +1,11 @@
 package core.basesyntax.shop.service.impl;
 
-import core.basesyntax.shop.service.ReadFromFile;
+import core.basesyntax.shop.service.Reader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ReadFromCsvFile implements ReadFromFile {
+public class ReaderFromCsvFile implements Reader {
 
     @Override
     public String read(String fromFilename) {

@@ -1,15 +1,15 @@
 package core.basesyntax.shop.strategy;
 
-import core.basesyntax.shop.service.WriteToFile;
-import core.basesyntax.shop.service.impl.WriteToCsvFile;
+import core.basesyntax.shop.service.Writer;
+import core.basesyntax.shop.service.impl.WriterToCsvFile;
 
-public class FileWriteStrategy {
-    public static WriteToFile chooseWriteFileFormat(String filename) {
+public class FileWriteStrategyImpl {
+    public static Writer chooseWriteFileFormat(String filename) {
         String extension = filename.replaceAll("(.+\\.(\\w+))",
                 "$2").toLowerCase();
         switch (extension) {
             case "csv":
-                return new WriteToCsvFile();
+                return new WriterToCsvFile();
             default:
                 throw new RuntimeException("Invalid file type");
         }
