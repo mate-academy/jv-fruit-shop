@@ -7,8 +7,8 @@ import service.action.type.ActionPlusQuantityHandler;
 public class ActionStrategyImpl implements ActionStrategy {
 
     @Override
-    public ActionStrategyHandler get(String s) {
-        switch (s) {
+    public ActionStrategyHandler get(String actionType) {
+        switch (actionType) {
             case "b": //Balance
             case "r": //Return
             case "s": //Supply

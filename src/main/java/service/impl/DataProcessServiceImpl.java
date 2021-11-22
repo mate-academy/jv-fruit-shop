@@ -12,7 +12,7 @@ public class DataProcessServiceImpl implements DataProcessService {
     private static final int INDEX_OF_QUANTITY = 2;
 
     @Override
-    public boolean dataProcessing(List<String> listInput) {
+    public boolean updateStorageData(List<String> listInput) {
         for (String data : listInput) {
             String[] dataArray = data.split(",");
             ActionStrategyHandler action = ACTION_STRATEGY.get(dataArray[INDEX_OF_ACTION]);

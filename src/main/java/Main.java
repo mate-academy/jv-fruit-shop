@@ -14,7 +14,7 @@ public class Main {
         final ValidatorServiceImpl validatorService = new ValidatorServiceImpl();
         List<String> listInput = fileReader.read();
         validatorService.isValidate(listInput);
-        dataProcess.dataProcessing(listInput);
+        dataProcess.updateStorageData(listInput);
         fileWriter.write();
     }
 }

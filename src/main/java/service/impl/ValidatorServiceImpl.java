@@ -12,9 +12,11 @@ public class ValidatorServiceImpl implements ValidatorService {
         if (list.size() == 0) {
             throw new RuntimeException("File is Empty");
         }
-        list.remove(0);
-        for (String s : list) {
-            String[] strings = s.split(",");
+        if (list.get(0).equals("type,fruit,quantity")) {
+            list.remove(0);
+        }
+        for (String string : list) {
+            String[] strings = string.split(",");
             int quantity;
             try {
                 quantity = Integer.parseInt(strings[INDEX_OF_QUANTITY]);
