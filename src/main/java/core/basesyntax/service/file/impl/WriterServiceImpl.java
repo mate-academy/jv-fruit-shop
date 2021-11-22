@@ -1,6 +1,5 @@
 package core.basesyntax.service.file.impl;
 
-import core.basesyntax.service.file.ReportCreator;
 import core.basesyntax.service.file.WriterService;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +14,6 @@ public class WriterServiceImpl implements WriterService {
     @Override
     public void writeResultInFile(String filePath, String resultData) {
         String spr = File.separator;
-        String reportForWriting =resultData;
         String pathToResources = filePath.substring(0, filePath.lastIndexOf(spr) + 1);
         String pathToReportDir = pathToResources + DIRECTORY_NAME_FOR_REPORTS;
         String pathToReportFile = pathToReportDir + spr + FILE_NAME_FOR_REPORTS;
@@ -23,7 +21,7 @@ public class WriterServiceImpl implements WriterService {
         try {
             Files.createDirectories(Path.of(pathToReportDir));
             Files.write(Path.of(pathToReportFile),
-                    reportForWriting.getBytes(StandardCharsets.UTF_8));
+                    resultData.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
             e.printStackTrace();
         }
