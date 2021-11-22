@@ -4,7 +4,7 @@ import bd.LocalStorage;
 import java.util.List;
 import model.Fruit;
 
-public class ReportLocalDaoImpl implements ReportLocalDao {
+public class FruitDaoImpl implements FruitDao {
     @Override
     public List<Fruit> getListRemainder() {
         return LocalStorage.fruits;

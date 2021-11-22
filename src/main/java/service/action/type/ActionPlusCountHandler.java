@@ -1,11 +1,11 @@
 package service.action.type;
 
-import dao.ReportLocalDaoImpl;
+import dao.FruitDaoImpl;
 import java.util.List;
 import model.Fruit;
 
-public class ActionSupplyHandler extends ActionStrategyHandler {
-    private final ReportLocalDaoImpl reportLocalDao = new ReportLocalDaoImpl();
+public class ActionPlusCountHandler extends ActionStrategyHandler {
+    private final FruitDaoImpl reportLocalDao = new FruitDaoImpl();
 
     @Override
     public void doing(String[] data) {
@@ -16,6 +16,7 @@ public class ActionSupplyHandler extends ActionStrategyHandler {
                 return;
             }
         }
-        throw new RuntimeException("such fruit does not exist");
+        Fruit fruit = new Fruit(data[1], Integer.parseInt(data[2]));
+        reportLocalDao.setFruit(fruit);
     }
 }
