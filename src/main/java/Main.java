@@ -1,4 +1,4 @@
-import core.basesyntax.shop.impl.Report;
+import core.basesyntax.shop.service.impl.Report;
 
 public class Main {
     public static void main(String[] args) {

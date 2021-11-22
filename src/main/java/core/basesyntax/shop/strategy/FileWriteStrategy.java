@@ -1,7 +1,7 @@
 package core.basesyntax.shop.strategy;
 
-import core.basesyntax.shop.WriteToFile;
-import core.basesyntax.shop.impl.WriteToCsvFile;
+import core.basesyntax.shop.service.WriteToFile;
+import core.basesyntax.shop.service.impl.WriteToCsvFile;
 
 public class FileWriteStrategy {
     public static WriteToFile chooseWriteFileFormat(String filename) {

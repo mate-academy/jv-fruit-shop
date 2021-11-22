@@ -1,4 +1,4 @@
-package core.basesyntax.shop;
+package core.basesyntax.shop.service;
 
 import java.util.Map;
 

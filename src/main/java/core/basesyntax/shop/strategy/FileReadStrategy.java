@@ -1,7 +1,7 @@
 package core.basesyntax.shop.strategy;
 
-import core.basesyntax.shop.ReadFromFile;
-import core.basesyntax.shop.impl.ReadFromCsvFile;
+import core.basesyntax.shop.service.ReadFromFile;
+import core.basesyntax.shop.service.impl.ReadFromCsvFile;
 
 public class FileReadStrategy {
     public static ReadFromFile chooseReadFileFormat(String filename) {

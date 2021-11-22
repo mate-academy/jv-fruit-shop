@@ -1,6 +1,6 @@
-package core.basesyntax.shop.impl;
+package core.basesyntax.shop.service.impl;
 
-import core.basesyntax.shop.ReadFromFile;
+import core.basesyntax.shop.service.ReadFromFile;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,7 +17,7 @@ public class ReadFromCsvFile implements ReadFromFile {
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file", e);
+            throw new RuntimeException("Can't read from file" + fromFilename, e);
         }
         return csvReadBuilder.toString().trim();
     }

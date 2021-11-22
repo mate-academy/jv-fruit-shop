@@ -1,8 +1,8 @@
-package core.basesyntax.shop.impl;
+package core.basesyntax.shop.service.impl;
 
-import java.util.function.Predicate;
+import core.basesyntax.shop.service.Validator;
 
-public class Validator implements Predicate<String> {
+public class ValidatorImpl implements Validator {
     @Override
     public boolean test(String s) {
         return s.matches("(?si)^type,fruit,quantity(?m)"

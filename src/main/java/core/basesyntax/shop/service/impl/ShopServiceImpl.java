@@ -1,19 +1,19 @@
-package core.basesyntax.shop.impl;
+package core.basesyntax.shop.service.impl;
 
 import core.basesyntax.shop.InsufficientGoodsException;
-import core.basesyntax.shop.ShopDao;
-import core.basesyntax.shop.ShopService;
+import core.basesyntax.shop.service.ShopDao;
+import core.basesyntax.shop.service.ShopService;
 import java.util.Map;
 
-public class FruitShopService implements ShopService {
+public class ShopServiceImpl implements ShopService {
     private ShopDao fruitShopDao;
     private int purchased;
     private boolean appleBalanced;
     private boolean bananaBalanced;
     private boolean pearBalanced;
 
-    public FruitShopService() {
-        fruitShopDao = new FruitShopDao();
+    public ShopServiceImpl() {
+        fruitShopDao = new ShopDaoImpl();
         purchased = 0;
         appleBalanced = false;
         bananaBalanced = false;

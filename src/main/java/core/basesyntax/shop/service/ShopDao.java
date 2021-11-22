@@ -1,5 +1,6 @@
-package core.basesyntax.shop;
+package core.basesyntax.shop.service;
 
+import core.basesyntax.shop.InsufficientGoodsException;
 import java.util.Map;
 
 public interface ShopDao {
