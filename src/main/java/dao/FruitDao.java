@@ -6,5 +6,7 @@ import model.Fruit;
 public interface FruitDao {
     List<Fruit> getListRemainder();
 
-    void setFruit(Fruit fruit);
+    boolean add(Fruit fruit);
+
+    Fruit getByName(String name);
 }

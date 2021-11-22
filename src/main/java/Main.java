@@ -1,17 +1,20 @@
 import java.util.List;
-import service.DataProcessingServiceImpl;
-import service.FileCsvServiceImpl;
-import service.ValidatorServiceImpl;
+import service.FileWriterService;
+import service.impl.DataProcessServiceImpl;
+import service.impl.FileReaderServiceImpl;
+import service.impl.FileWriterServiceImpl;
+import service.impl.ValidatorServiceImpl;
 
 public class Main {
-    public static void main(String[] args) {
-        DataProcessingServiceImpl dataProcessingService = new DataProcessingServiceImpl();
-        final FileCsvServiceImpl reportCsvDao = new FileCsvServiceImpl();
-        final ValidatorServiceImpl validator = new ValidatorServiceImpl();
 
-        List<String> listInput = reportCsvDao.getActionsOfDay();
-        validator.isValidate(listInput);
-        dataProcessingService.dataProcessing(listInput);
-        reportCsvDao.setReport();
+    public static void main(String[] args) {
+        final DataProcessServiceImpl dataProcess = new DataProcessServiceImpl();
+        final FileReaderServiceImpl fileReader = new FileReaderServiceImpl();
+        final FileWriterService fileWriter = new FileWriterServiceImpl();
+        final ValidatorServiceImpl validatorService = new ValidatorServiceImpl();
+        List<String> listInput = fileReader.read();
+        validatorService.isValidate(listInput);
+        dataProcess.dataProcessing(listInput);
+        fileWriter.write();
     }
 }
