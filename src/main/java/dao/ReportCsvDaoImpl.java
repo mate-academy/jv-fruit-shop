@@ -7,8 +7,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ReportCsvDaoImpl implements ReportCsvDao {
-    private static final String INPUT_FILE_NAME = "input.csv";
-    private static final String OUTPUT_FILE_NAME = "output.csv";
+    private static final String INPUT_FILE_NAME = "src\\main\\java\\resources\\input.csv";
+    private static final String OUTPUT_FILE_NAME = "src\\main\\java\\resources\\output.csv";
     private List<String> input;
 
     @Override
