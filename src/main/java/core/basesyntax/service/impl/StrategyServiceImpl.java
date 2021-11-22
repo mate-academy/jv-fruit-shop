@@ -10,7 +10,8 @@ public class StrategyServiceImpl implements StrategyService {
     private static final int FRUIT_NUMBER_INDEX = 2;
 
     @Override
-    public void workWithStrategy(String[] fileData, FruitWorkStrategy fruitWork, FruitDao fruitDao) {
+    public void workWithStrategy(String[] fileData, FruitWorkStrategy fruitWork,
+                                 FruitDao fruitDao) {
         for (String dataLine : fileData) {
             String[] dataLineArr = dataLine.split(",");
             String key = dataLineArr[KEY_INDEX];
