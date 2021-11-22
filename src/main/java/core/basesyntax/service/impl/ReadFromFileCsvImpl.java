@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReadFromFileCvs;
+import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFromFileCvsImpl implements ReadFromFileCvs {
+public class ReadFromFileCsvImpl implements ReaderService {
     private static final String FIRST_LINE_REPORT = "type,fruit,quantity";
 
     public List<String> readFromFile(String filePath) {
