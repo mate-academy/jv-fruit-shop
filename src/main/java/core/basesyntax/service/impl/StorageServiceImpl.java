@@ -4,6 +4,7 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.service.StorageService;
 import core.basesyntax.service.StrategyService;
 import core.basesyntax.service.file.FileDataValidator;
+import core.basesyntax.service.file.ReaderService;
 import core.basesyntax.service.file.ReportCreator;
 import core.basesyntax.service.file.WriterService;
 import core.basesyntax.service.file.impl.FileDataValidatorImpl;
@@ -19,6 +20,8 @@ public class StorageServiceImpl implements StorageService {
     private final FruitDao fruitDao;
     private final StrategyService strategyService;
     private final WriterService writerService;
+    private final ReaderService readerService;
+    private final ReportCreator reportCreator;
 
     public StorageServiceImpl(String filePath, FruitWorkStrategy fruitWork, FruitDao fruitDao) {
         this.filePath = filePath;
@@ -27,12 +30,13 @@ public class StorageServiceImpl implements StorageService {
         fileDataValidator = new FileDataValidatorImpl();
         strategyService = new StrategyServiceImpl();
         writerService = new WriterServiceImpl();
+        readerService = new ReaderServiceImpl(filePath);
+        reportCreator = new ReportCreatorImpl(fruitDao);
     }
 
     @Override
     public void workWithStorage() {
-        String[] fileData = new ReaderServiceImpl(filePath).readFile();
-        ReportCreator reportCreator = new ReportCreatorImpl(fruitDao);
+        String[] fileData = readerService.readFile();
         fileDataValidator.checkFileData(fileData, filePath);
         strategyService.workWithStrategy(fileData, fruitWork, fruitDao);
         writerService.writeResultInFile(filePath, reportCreator.createResultForWriting());
