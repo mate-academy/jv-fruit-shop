@@ -6,6 +6,9 @@ public class ValidatorServiceImpl implements ValidatorService {
 
     @Override
     public void isValidate(List<String> list) {
+        if(list.size() == 0) {
+            throw new RuntimeException("File is Empty");
+        }
         list.remove(0);
         for (String s : list) {
             String[] strings = s.split(",");
