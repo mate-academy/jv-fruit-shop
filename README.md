@@ -62,13 +62,13 @@ We are expecting to see how many fruits are available today after the work shift
     apple,90
 ```
 The line above means you have 152 bananas, and 90 apples in your Fruit store after the work shift. 
-NOTE: if while processing transactions you detect some business logic mistakes (e.g not enough fruits to buy) throw an exception from service or handlers.
+NOTE: if while processing transactions you detect some business logic mistakes (e.g not enough fruits to buy) throw an core.exception from core.service or handlers.
 
 
 ### Validation
 For validation create separate class Validator with corresponding method. You can perform it after
 File has been read during parsing of raw data.
-If the file has mistakes, you should throw an exception. Example of incorrect input file:
+If the file has mistakes, you should throw an core.exception. Example of incorrect input file:
 ```text
     type,fruit,quantity
     b,banana,20
