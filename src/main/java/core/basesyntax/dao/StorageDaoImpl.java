@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao<Fruit, Integer> {
 
@@ -19,8 +18,8 @@ public class StorageDaoImpl implements StorageDao<Fruit, Integer> {
     }
 
     @Override
-    public List<Map.Entry<Fruit, Integer>> getStorageInfo() {
-        return new LinkedList<>(Storage.fruitStorage.entrySet());
+    public List<Fruit> getStorageInfo() {
+        return new LinkedList<>(Storage.fruitStorage.keySet());
     }
 
     @Override

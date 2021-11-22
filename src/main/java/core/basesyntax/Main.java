@@ -1,10 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.CsvReportHandler;
-import core.basesyntax.dao.ReportHandler;
-import core.basesyntax.service.DataFormatter;
+import core.basesyntax.service.DataParser;
 import core.basesyntax.service.ReportValidator;
 import core.basesyntax.service.StorageService;
+import core.basesyntax.service.impl.CsvReader;
+import core.basesyntax.service.impl.CsvWriter;
 import java.util.List;
 
 public class Main {
@@ -15,14 +15,11 @@ public class Main {
 
     public static void main(String[] args) {
         StorageService storageService = new StorageService();
-        ReportValidator validator = new ReportValidator();
-        DataFormatter dataFormatter = new DataFormatter(validator);
-        ReportHandler reportHandler = new CsvReportHandler();
-
-        List<String> inputData = reportHandler.read(INPUT_DATA_FILE_PATH);
-        storageService.updateStorage(dataFormatter.formatInputData(inputData));
-
-        String data = dataFormatter.formatReport(storageService.getStorageStatistic());
-        reportHandler.write(REPORT_FILE_PATH, data);
+        DataParser dataParser = new DataParser();
+        List<String> inputData = new CsvReader().read(INPUT_DATA_FILE_PATH);
+        new ReportValidator().test(inputData);
+        storageService.updateStorage(dataParser.formatInputData(inputData));
+        String data = dataParser.formatReport(storageService.getStorageStatistic());
+        new CsvWriter().write(REPORT_FILE_PATH, data);
     }
 }
