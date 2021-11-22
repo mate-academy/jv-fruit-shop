@@ -29,7 +29,6 @@ public class Report {
             throw new RuntimeException("Corrupted file data");
         }
         parseShopData.distribute(table);
-        String reportReady = parseShopData.collect(shopService.getMap());
-        return writeToFile.write(toFilename, reportReady);
+        return writeToFile.write(toFilename, parseShopData.collect(shopService.getMap()));
     }
 }
