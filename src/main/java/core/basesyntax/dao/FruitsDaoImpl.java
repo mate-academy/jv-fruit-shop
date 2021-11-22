@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 
-public class StorageDaoImpl implements StorageDao {
+public class FruitsDaoImpl implements FruitsDao {
     @Override
     public Fruit add(Fruit fruit) {
         Storage.fruits.add(fruit);
@@ -13,12 +13,10 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public Fruit get(String name) {
-        for (Fruit fruit: Storage.fruits) {
-            if (fruit.getName().equals(name)) {
-                return fruit;
-            }
-        }
-        throw new RuntimeException(name + " not found!!");
+        return Storage.fruits.stream()
+                .filter(f -> f.getName().equals(name))
+                .findFirst()
+                .get();
     }
 
     @Override

@@ -1,29 +1,35 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.dao.StorageDao;
+import core.basesyntax.activities.ActivitiesHandler;
+import core.basesyntax.activities.ActivityType;
+import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitStoreService;
-import core.basesyntax.startegy.ActivitiesService;
-import core.basesyntax.startegy.ActivityType;
+import core.basesyntax.startegy.ActivitiesStrategy;
 import java.util.List;
-import java.util.Map;
 
 public class FruitStoreServiceImpl implements FruitStoreService {
     private static final int INDEX_OF_TYPE = 0;
     private static final int INDEX_OF_FRUIT_NAME = 1;
     private static final int INDEX_OF_QUANTITY = 2;
+    private FruitsDao fruitsDao;
+    private ActivitiesStrategy activitiesStrategy;
 
-    public List<Fruit> changeBalanceFruit(List<String> text, Map<ActivityType,ActivitiesService>
-            typeActivityMap, StorageDao storageDao) {
+    public FruitStoreServiceImpl(FruitsDao fruitsDao, ActivitiesStrategy activitiesStrategy) {
+        this.fruitsDao = fruitsDao;
+        this.activitiesStrategy = activitiesStrategy;
+    }
+
+    public List<Fruit> changeBalanceFruit(List<String> text) {
         for (int i = 1; i < text.size(); i++) {
             String[] arrayStringLine = text.get(i).split(",");
             String abbreviationActivityType = arrayStringLine[INDEX_OF_TYPE];
             String fruitName = arrayStringLine[INDEX_OF_FRUIT_NAME];
             int quantity = Integer.parseInt(arrayStringLine[INDEX_OF_QUANTITY]);
-            ActivitiesService activitiesService = typeActivityMap.get(ActivityType
+            ActivitiesHandler activitiesService = activitiesStrategy.get(ActivityType
                     .getActivityType(abbreviationActivityType));
-            activitiesService.doActivity(fruitName, quantity, storageDao);
+            activitiesService.doActivity(fruitName, quantity, fruitsDao);
         }
-        return storageDao.getAll();
+        return fruitsDao.getAll();
     }
 }

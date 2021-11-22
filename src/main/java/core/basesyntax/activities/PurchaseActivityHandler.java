@@ -1,12 +1,11 @@
-package core.basesyntax.startegy.impl;
+package core.basesyntax.activities;
 
-import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.startegy.ActivitiesService;
 
-public class PurchaseActivityService implements ActivitiesService {
+public class PurchaseActivityHandler implements ActivitiesHandler {
     @Override
-    public void doActivity(String name, int quantity, StorageDao storageDao) {
+    public void doActivity(String name, int quantity, FruitsDao storageDao) {
         Fruit fruit = storageDao.get(name);
         if (quantity <= fruit.getQuantity()) {
             int newQuantity = fruit.getQuantity() - quantity;
