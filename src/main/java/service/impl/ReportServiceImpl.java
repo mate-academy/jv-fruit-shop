@@ -9,7 +9,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String report() {
         StringBuilder builder = new StringBuilder();
-        for (Map.Entry<Fruit, Integer> set : Storage.getFruits().entrySet()) {
+        for (Map.Entry<Fruit, Integer> set : Storage.fruits.entrySet()) {
             builder.append(set.getKey().getName())
                     .append(",").append(set.getValue())
                     .append("\n");

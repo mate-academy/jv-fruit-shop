@@ -1,6 +1,7 @@
-package strategy;
+package service.strategy;
 
-import db.Storage;
+import dao.DaoOption;
+import dao.DaoOptionImpl;
 import model.Fruit;
 import model.Transaction;
 
@@ -10,10 +11,10 @@ public class AddHandler implements OptionHandler {
     @Override
     public void apply(Transaction transaction) {
         Fruit fruit = new Fruit(transaction.getFruitName());
+        DaoOption dao = new DaoOptionImpl();
         int quality = transaction.getQuality();
-        int oldQuality = Storage.getFruits().containsKey(fruit)
-                ? Storage.getFruits().get(fruit) : DEFAULT_QUALITY;
+        int oldQuality = dao.getFruit(fruit).orElse(DEFAULT_QUALITY);
         quality += oldQuality;
-        Storage.getFruits().put(fruit, quality);
+        dao.add(fruit,quality);
     }
 }

@@ -19,10 +19,9 @@ public class ParserImpl implements Parser {
     @Override
     public List<Transaction> parse(List<String> fruits) {
         List<Transaction> transactions = new ArrayList<>();
-        fruits.remove(0);
+        validator.validate(fruits);
         for (String fruit : fruits) {
             String[] fruitOperation = fruit.split(",");
-            validator.validate(fruitOperation);
             transactions.add(new Transaction(fruitOperation[OPERATION_INDEX],
                     fruitOperation[FRUIT_INDEX],
                     Integer.parseInt(fruitOperation[QUALITY_INDEX])));

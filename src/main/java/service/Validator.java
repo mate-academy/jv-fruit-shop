@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 public interface Validator {
-    void validate(String[] fruits);
+    void validate(List<String> fruits);
 }
