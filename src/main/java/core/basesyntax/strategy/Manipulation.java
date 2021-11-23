@@ -1,15 +1,14 @@
 package core.basesyntax.strategy;
 
-public enum Manipulations {
+public enum Manipulation {
     RETURN("r"),
     SUPPLY("s"),
     PURCHASE("p"),
     BALANCE("b");
 
-
     private final String firstCharOfManipulation;
 
-    Manipulations(String firstCharOfManipulation) {
+    Manipulation(String firstCharOfManipulation) {
         this.firstCharOfManipulation = firstCharOfManipulation;
     }
 
@@ -17,8 +16,8 @@ public enum Manipulations {
         return firstCharOfManipulation;
     }
 
-    public static Manipulations getManipulation(String firstCharOfManipulation) {
-        for (Manipulations manipulations: Manipulations.values()) {
+    public static Manipulation getManipulation(String firstCharOfManipulation) {
+        for (Manipulation manipulations: Manipulation.values()) {
             if (manipulations.getFirstCharOfManipulation().equals(firstCharOfManipulation)) {
                 return manipulations;
             }
