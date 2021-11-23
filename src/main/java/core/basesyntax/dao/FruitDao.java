@@ -8,9 +8,9 @@ public interface FruitDao {
 
     Optional<Fruit> get(String fruitName);
 
-    void changeFruitCountInStorage(int newCount, String fruitName);
+    void updateFruitCount(int newCount, String fruitName);
 
-    int getCurrentCountFruitsInStorage(String fruitName);
+    int getFruitsCount(String fruitName);
 
-    String getAllDataFromDB();
+    String getAllData();
 }

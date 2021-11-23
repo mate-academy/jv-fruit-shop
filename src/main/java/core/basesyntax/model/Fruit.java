@@ -4,23 +4,23 @@ import java.util.Objects;
 
 public class Fruit {
     private final String fruitName;
-    private int fruitCountInStorage;
+    private int fruitCount;
 
     public Fruit(String fruitName, int fruitCountInStorage) {
         this.fruitName = fruitName;
-        this.fruitCountInStorage = fruitCountInStorage;
+        this.fruitCount = fruitCountInStorage;
     }
 
     public String getFruitName() {
         return fruitName;
     }
 
-    public int getFruitCountInStorage() {
-        return fruitCountInStorage;
+    public int getFruitCount() {
+        return fruitCount;
     }
 
-    public void setFruitCountInStorage(int fruitCountInStorage) {
-        this.fruitCountInStorage = fruitCountInStorage;
+    public void setFruitCount(int fruitCount) {
+        this.fruitCount = fruitCount;
     }
 
     @Override
@@ -32,17 +32,17 @@ public class Fruit {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return fruitCountInStorage == fruit.fruitCountInStorage
+        return fruitCount == fruit.fruitCount
                 && Objects.equals(fruitName, fruit.fruitName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fruitName, fruitCountInStorage);
+        return Objects.hash(fruitName, fruitCount);
     }
 
     @Override
     public String toString() {
-        return fruitName + "-" + fruitCountInStorage;
+        return fruitName + "-" + fruitCount;
     }
 }

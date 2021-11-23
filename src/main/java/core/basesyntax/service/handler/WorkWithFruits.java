@@ -1,7 +1,8 @@
 package core.basesyntax.service.handler;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.model.Fruit;
 
 public interface WorkWithFruits {
-    void workWithFruitInStorage(int fruitNumber, String fruitName, FruitDao fruitDao);
+    Fruit workWithFruitInStorage(int fruitNumber, String fruitName, FruitDao fruitDao);
 }

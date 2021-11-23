@@ -22,17 +22,17 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void changeFruitCountInStorage(int newCount, String fruitName) {
-        get(fruitName).ifPresent(f -> f.setFruitCountInStorage(newCount));
+    public void updateFruitCount(int newCount, String fruitName) {
+        get(fruitName).ifPresent(f -> f.setFruitCount(newCount));
     }
 
     @Override
-    public int getCurrentCountFruitsInStorage(String fruitName) {
-        return get(fruitName).get().getFruitCountInStorage();
+    public int getFruitsCount(String fruitName) {
+        return get(fruitName).get().getFruitCount();
     }
 
     @Override
-    public String getAllDataFromDB() {
+    public String getAllData() {
         return Storage.storage.toString();
     }
 }

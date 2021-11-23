@@ -4,16 +4,16 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.service.file.ReportCreator;
 import java.util.stream.Collectors;
 
-public class ReportCreatorImpl implements ReportCreator {
+public class ReportCreatorCsv implements ReportCreator {
     private final FruitDao fruitDao;
 
-    public ReportCreatorImpl(FruitDao fruitDao) {
+    public ReportCreatorCsv(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
     @Override
     public String createResultForWriting() {
-        String dataFromDb = fruitDao.getAllDataFromDB();
+        String dataFromDb = fruitDao.getAllData();
         String dataForWriting = "fruit,quantity" + System.lineSeparator();
         dataForWriting += dataFromDb.lines()
                 .map(s -> s.replaceAll(",", System.lineSeparator()))

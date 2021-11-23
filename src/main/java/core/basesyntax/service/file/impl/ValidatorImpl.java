@@ -1,17 +1,17 @@
 package core.basesyntax.service.file.impl;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.model.ParsedLineFromFileCsv;
-import core.basesyntax.service.file.FileDataValidator;
+import core.basesyntax.model.ParsedCsvLine;
+import core.basesyntax.service.file.Validator;
 import java.util.List;
 
-public class FileDataValidatorImpl implements FileDataValidator {
+public class ValidatorImpl implements Validator {
     @Override
-    public void checkFileData(List<ParsedLineFromFileCsv> dataFromFile) {
+    public void checkFileData(List<ParsedCsvLine> dataFromFile) {
         int count = 0;
 
         for (int i = 0; i < dataFromFile.size(); ) {
-            ParsedLineFromFileCsv dataLine = dataFromFile.get(i);
+            ParsedCsvLine dataLine = dataFromFile.get(i);
             if (!dataLine.getAction().isEmpty()
                     && Operation.contains(dataLine.getAction())
                     && !dataLine.getFruitName().isEmpty()

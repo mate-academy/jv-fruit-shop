@@ -7,10 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-public class ReaderCsvFile implements ReaderService {
+public class ReaderCsv implements ReaderService {
     private final String filePath;
 
-    public ReaderCsvFile(String filePath) {
+    public ReaderCsv(String filePath) {
         this.filePath = filePath;
     }
 

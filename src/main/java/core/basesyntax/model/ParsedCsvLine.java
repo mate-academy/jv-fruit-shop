@@ -1,11 +1,11 @@
 package core.basesyntax.model;
 
-public class ParsedLineFromFileCsv {
+public class ParsedCsvLine {
     private final String action;
     private final String fruitName;
     private final String number;
 
-    public ParsedLineFromFileCsv(String action, String fruitName, String number) {
+    public ParsedCsvLine(String action, String fruitName, String number) {
         this.action = action;
         this.fruitName = fruitName;
         this.number = number;

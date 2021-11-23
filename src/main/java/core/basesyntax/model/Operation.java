@@ -12,7 +12,7 @@ public enum Operation {
         this.value = value;
     }
 
-    public static Operation getOperationKey(String someOperation) {
+    public static Operation getKey(String someOperation) {
         for (Operation operation : Operation.values()) {
             if (operation.value.equals(someOperation)) {
                 return operation;
