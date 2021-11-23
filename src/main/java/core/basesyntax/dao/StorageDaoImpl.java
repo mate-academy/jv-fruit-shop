@@ -2,18 +2,36 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import java.util.LinkedList;
 import java.util.List;
 
 public class StorageDaoImpl implements StorageDao<Fruit> {
 
     @Override
-    public boolean put(Fruit fruit) {
+    public boolean add(Fruit fruit) {
         return Storage.fruitStorage.add(fruit);
     }
 
     @Override
-    public List<Fruit> getStorageInfo() {
-        return new LinkedList<>(Storage.fruitStorage);
+    public boolean update(Fruit oldValue, Fruit newValue) {
+        if (Storage.fruitStorage.remove(oldValue)) {
+            Storage.fruitStorage.add(newValue);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Fruit getFruit(String fruitName) {
+        for (Fruit fruit : Storage.fruitStorage) {
+            if (fruit.getName().equals(fruitName)) {
+                return fruit;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Fruit> getAll() {
+        return List.copyOf(Storage.fruitStorage);
     }
 }

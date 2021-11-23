@@ -1,20 +1,27 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.OperationService;
-import java.util.Arrays;
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.impl.BalanceHandler;
+import core.basesyntax.service.impl.PurchaseHandler;
+import core.basesyntax.service.impl.ReturnHandler;
+import core.basesyntax.service.impl.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategy {
-    private final Map<String, OperationService> operationsList;
+    private final Map<String, OperationHandler> operationsList;
 
-    public OperationStrategy() {
-        operationsList = new HashMap<>();
-        Arrays.stream(OperationType.values())
-                .forEach(t -> operationsList.put(t.getName(), t.getOperationType()));
+    public OperationStrategy(StorageDao<Fruit> storageDao) {
+        this.operationsList = new HashMap<>();
+        operationsList.put(OperationType.BALANCE.getName(), new BalanceHandler(storageDao));
+        operationsList.put(OperationType.SUPPLY.getName(), new SupplyHandler(storageDao));
+        operationsList.put(OperationType.PURCHASE.getName(), new PurchaseHandler(storageDao));
+        operationsList.put(OperationType.RETURN.getName(), new ReturnHandler(storageDao));
     }
 
-    public OperationService getService(String name) {
+    public OperationHandler getService(String name) {
         return operationsList.get(name);
     }
 }
