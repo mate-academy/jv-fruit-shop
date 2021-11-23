@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface OperationsHandler {
+public interface OperationHandler {
     void handleOperation(String name, int quantity);
 }

@@ -5,6 +5,7 @@ import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ResultGeneratorService;
 import java.util.List;
+import java.util.Map;
 
 public class ResultGeneratorServiceImpl implements ResultGeneratorService {
     private final FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
@@ -12,11 +13,11 @@ public class ResultGeneratorServiceImpl implements ResultGeneratorService {
     @Override
     public String generateResult(List<String> data) {
         StringBuilder result = new StringBuilder("fruit,quantity");
-        for (Fruit fruit : fruitStorageDao.getAll()) {
+        for (Map.Entry<Fruit, Integer> fruit : fruitStorageDao.getAll().entrySet()) {
             result.append(System.lineSeparator())
-                    .append(fruit.getName())
+                    .append(fruit.getKey().getName())
                     .append(",")
-                    .append(fruit.getQuantity());
+                    .append(fruit.getValue());
         }
         return result.append(System.lineSeparator()).toString();
     }

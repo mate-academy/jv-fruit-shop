@@ -1,12 +1,14 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
-import java.util.List;
+import java.util.Map;
 
 public interface FruitStorageDao {
-    boolean add(Fruit fruit);
+    boolean add(Fruit fruit, int quantity);
 
-    Fruit get(String fruitName);
+    Fruit getFruit(String fruitName);
 
-    List<Fruit> getAll();
+    Integer getQuantity(String fruitName);
+
+    Map<Fruit, Integer> getAll();
 }

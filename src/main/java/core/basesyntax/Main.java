@@ -7,13 +7,19 @@ import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ResultGeneratorServiceImpl;
 import core.basesyntax.service.impl.ValidatorImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.OperationsHandler;
-import core.basesyntax.strategy.SelectOperation;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.impl.BalanceOperationImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationImpl;
+import core.basesyntax.strategy.impl.ReturnOperationImpl;
+import core.basesyntax.strategy.impl.SupplyOperationImpl;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String INPUT_PATH = "src/main/resources/inputData.csv";
     private static final String OUTPUT_PATH = "src/main/resources/outputData.csv";
+    private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_QUANTITY = 2;
 
@@ -21,10 +27,17 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         List<String> read = readerService.read(INPUT_PATH);
         new ValidatorImpl().validate(read);
+
+        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put("b", new BalanceOperationImpl());
+        operationHandlerMap.put("s", new SupplyOperationImpl());
+        operationHandlerMap.put("r", new ReturnOperationImpl());
+        operationHandlerMap.put("p", new PurchaseOperationImpl());
+
         for (String line: read) {
             String[] splittedLine = line.split(",");
-            OperationsHandler operationsHandler
-                    = SelectOperation.getOperation(line);
+            String operation = splittedLine[INDEX_OF_OPERATION];
+            OperationHandler operationsHandler = operationHandlerMap.get(operation);
             operationsHandler.handleOperation(splittedLine[INDEX_OF_FRUIT],
                     Integer.parseInt(splittedLine[INDEX_OF_QUANTITY]));
         }
