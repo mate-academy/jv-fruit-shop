@@ -21,7 +21,7 @@ public class ValidatorServiceImpl implements ValidatorService {
             String[] arrayLine = text.get(i).split(COMMA);
             if (!(arrayLine[INDEX_OF_TYPE].matches(PATTERN_OF_FIRST_ELEMENT))
                     && !(arrayLine[INDEX_OF_FRUIT_NAME].matches(PATTERN_OF_FRUIT_NAME))
-                    && (Integer.parseInt(arrayLine[INDEX_OF_QUANTITY]) < 1)) {
+                    && (Integer.parseInt(arrayLine[INDEX_OF_QUANTITY]) < 0)) {
                 throw new RuntimeException("Data format is incorrect!");
             }
         }
