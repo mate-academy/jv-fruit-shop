@@ -15,7 +15,8 @@ public class FruitShopTransferServiceImpl implements FruitShopTransferService {
     public void updateStorageInfo(List<FruitTransaction> fruitStorages) {
         for (FruitTransaction fruitTransaction : fruitStorages) {
             operationStrategy
-                    .get(fruitTransaction.getOperation()).getOperation(fruitTransaction);
+                    .get(fruitTransaction.getOperation())
+                    .apply(fruitTransaction);
         }
     }
 }

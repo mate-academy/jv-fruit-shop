@@ -7,7 +7,7 @@ public class ValidatorImpl implements Validator {
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final String OPERATION_TYPE_EXAMPLE = "[bpsr]";
-    private static final String FRUIT_NAME_EXAMPLE = "[A-Za-z]{3,12}";
+    private static final String FRUIT_NAME_EXAMPLE = "[a-z]{3,12}";
     private static final int FRUIT_AMOUNT_INDEX = 2;
     private static final int FRUIT_AMOUNT_MINIMUM = 1;
 

@@ -5,16 +5,16 @@ import java.util.Objects;
 
 public class FruitTransaction {
     private final Operation operation;
-    private final String name;
+    private final Fruit name;
     private int amount;
 
-    public FruitTransaction(Operation operation, String type, int amount) {
+    public FruitTransaction(Operation operation, Fruit name, int amount) {
         this.operation = operation;
-        this.name = type;
+        this.name = name;
         this.amount = amount;
     }
 
-    public String getName() {
+    public Fruit getName() {
         return name;
     }
 

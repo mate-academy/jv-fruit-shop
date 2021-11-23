@@ -1,23 +1,22 @@
 package core.basesyntax.service.operationhandler.impl;
 
-import core.basesyntax.bd.dao.FruitTransactionDao;
+import core.basesyntax.bd.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operationhandler.OperationHandler;
 
 public class RemovingOperationHandler implements OperationHandler {
-    private final FruitTransactionDao fruitTransactionDao;
+    private final FruitDao fruitDao;
 
-    public RemovingOperationHandler(FruitTransactionDao fruitTransactionDao) {
-        this.fruitTransactionDao = fruitTransactionDao;
+    public RemovingOperationHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
-    public void getOperation(FruitTransaction fruit) {
-        if (fruitTransactionDao.get(fruit.getName()).getAmount() < fruit.getAmount()) {
+    public void apply(FruitTransaction fruit) {
+        if (fruitDao.getValue(fruit.getName()) < fruit.getAmount()) {
             throw new RuntimeException("Invalid operation, not enough fruits to buy");
         }
-        fruitTransactionDao.get(fruit.getName())
-                .setAmount(fruitTransactionDao.get(fruit.getName()).getAmount()
-                        - fruit.getAmount());
+        fruitDao.add(fruit.getName(), fruitDao.getValue(fruit.getName())
+                - fruit.getAmount());
     }
 }

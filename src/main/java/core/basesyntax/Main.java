@@ -1,8 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.bd.TransactionStorage;
-import core.basesyntax.bd.dao.FruitTransactionDao;
-import core.basesyntax.bd.dao.FruitTransactionDaoImpl;
+import core.basesyntax.bd.FruitStorage;
+import core.basesyntax.bd.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.FruitShopTransferService;
@@ -31,7 +30,6 @@ public class Main {
     private static final String REPORT_FILE_PATH = "output.csv";
 
     public static void main(String[] args) {
-        FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
         ReaderService readReportService = new ReadFromFileCsvImpl();
         ParseReaderService parseReaderService = new ParseReaderServiceImpl();
         CreateReportService createReportService = new CreateReportServiceImpl();
@@ -39,13 +37,13 @@ public class Main {
 
         Map<Operation, OperationHandler> operationsHandlers = new HashMap<>();
         operationsHandlers.put(Operation.BALANCE,
-                new AddingOperationHandler(fruitTransactionDao));
+                new AddingOperationHandler(new FruitDaoImpl()));
         operationsHandlers.put(Operation.PURCHASE,
-                new RemovingOperationHandler(fruitTransactionDao));
+                new RemovingOperationHandler(new FruitDaoImpl()));
         operationsHandlers.put(Operation.RETURN,
-                new AddingOperationHandler(fruitTransactionDao));
+                new AddingOperationHandler(new FruitDaoImpl()));
         operationsHandlers.put(Operation.SUPPLY,
-                new AddingOperationHandler(fruitTransactionDao));
+                new AddingOperationHandler(new FruitDaoImpl()));
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationsHandlers);
         FruitShopTransferService fruitShopTransferService
@@ -56,7 +54,7 @@ public class Main {
         if (validator.isValid(dataFromFile)) {
             List<FruitTransaction> fruits = parseReaderService.getFruitList(dataFromFile);
             fruitShopTransferService.updateStorageInfo(fruits);
-            String report = createReportService.createReport(TransactionStorage.fruits);
+            String report = createReportService.createReport(FruitStorage.FRUIT_STORAGE);
             writeReportService.writeReport(REPORT_FILE_PATH, report);
         }
     }

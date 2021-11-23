@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParseReaderService;
 import core.basesyntax.service.operationhandler.Operation;
@@ -14,14 +15,14 @@ public class ParseReaderServiceImpl implements ParseReaderService {
 
     @Override
     public List<FruitTransaction> getFruitList(List<String> dataFromFile) {
-        List<FruitTransaction> fruitList = new ArrayList<>();
+        List<FruitTransaction> transactionList = new ArrayList<>();
         for (String data : dataFromFile) {
             String[] lineData = data.split(SEPARATOR);
-            fruitList.add(new FruitTransaction(Operation.get(lineData[OPERATION_TYPE_INDEX]),
-                    lineData[FRUIT_NAME_INDEX],
+            transactionList.add(
+                    new FruitTransaction(Operation.get(lineData[OPERATION_TYPE_INDEX]),
+                    new Fruit(lineData[FRUIT_NAME_INDEX]),
                     Integer.parseInt(lineData[FRUIT_AMOUNT_INDEX])));
         }
-        return fruitList;
-
+        return transactionList;
     }
 }

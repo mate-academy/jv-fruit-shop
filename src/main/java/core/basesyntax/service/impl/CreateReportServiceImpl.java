@@ -1,21 +1,21 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CreateReportService;
-import java.util.List;
+import java.util.Map;
 
 public class CreateReportServiceImpl implements CreateReportService {
     private static final String FIRST_LINE_REPORT = "fruit,quantity";
     private static final String COMMA = ",";
 
     @Override
-    public String createReport(List<FruitTransaction> fruits) {
+    public String createReport(Map<Fruit, Integer> fruits) {
         StringBuilder dailyReport = new StringBuilder(FIRST_LINE_REPORT);
-        for (FruitTransaction fruit : fruits) {
+        for (Map.Entry<Fruit, Integer> fruit : fruits.entrySet()) {
             dailyReport.append(System.lineSeparator())
-                    .append(fruit.getName())
+                    .append(fruit.getKey())
                     .append(COMMA)
-                    .append(fruit.getAmount());
+                    .append(fruit.getValue());
         }
         return String.valueOf(dailyReport);
     }
