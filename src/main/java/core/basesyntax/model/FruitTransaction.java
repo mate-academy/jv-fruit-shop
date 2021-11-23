@@ -5,17 +5,17 @@ import java.util.Objects;
 
 public class FruitTransaction {
     private final Operation operation;
-    private final Fruit name;
+    private final Fruit fruit;
     private int amount;
 
-    public FruitTransaction(Operation operation, Fruit name, int amount) {
+    public FruitTransaction(Operation operation, Fruit fruit, int amount) {
         this.operation = operation;
-        this.name = name;
+        this.fruit = fruit;
         this.amount = amount;
     }
 
-    public Fruit getName() {
-        return name;
+    public Fruit getFruit() {
+        return fruit;
     }
 
     public int getAmount() {
@@ -39,11 +39,11 @@ public class FruitTransaction {
             return false;
         }
         FruitTransaction that = (FruitTransaction) o;
-        return Objects.equals(name, that.name);
+        return Objects.equals(fruit, that.fruit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, amount);
+        return Objects.hash(fruit, amount);
     }
 }

@@ -5,7 +5,7 @@ import core.basesyntax.model.Fruit;
 public interface FruitDao {
     void add(Fruit fruit, int amount);
 
-    Fruit get(Fruit fruit);
+    Fruit getKey(Fruit fruit);
 
     Integer getValue(Fruit fruit);
 }

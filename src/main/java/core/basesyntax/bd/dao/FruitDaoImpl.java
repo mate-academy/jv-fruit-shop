@@ -8,21 +8,22 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void add(Fruit fruit, int amount) {
-        FruitStorage.FRUIT_STORAGE.put(fruit, amount);
+        FruitStorage.fruitStorage.put(fruit, amount);
     }
 
     @Override
-    public Fruit get(Fruit fruit) {
-        return FruitStorage.FRUIT_STORAGE.keySet().stream()
-                .filter(el -> el.getName().equals(fruit.getName()))
+    public Fruit getKey(Fruit fruit) {
+        return FruitStorage.fruitStorage.keySet().stream()
+                .filter(el -> el.getName().contains(fruit.getName()))
                 .findFirst().orElse(null);
     }
 
     @Override
     public Integer getValue(Fruit fruit) {
-        return FruitStorage.FRUIT_STORAGE.entrySet().stream()
-                .filter(el -> el.getKey().getName().equals(fruit.getName()))
-                .map(Map.Entry::getValue)
-                .findFirst().orElse(null);
+        return FruitStorage.fruitStorage.containsKey(fruit)
+                ? FruitStorage.fruitStorage.entrySet().stream()
+                    .filter(el -> el.getKey().getName().contains(fruit.getName()))
+                        .map(Map.Entry::getValue)
+                        .findFirst().get() : null;
     }
 }
