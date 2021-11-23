@@ -1,11 +1,7 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
-
 public interface FruitStorageDao {
-    void addNewFruitToStorage(Fruit fruit);
+    void addNewFruitToStorage(String name, int quantity);
 
-    Fruit get(String fruitName);
-
-    void update(Fruit fruit, int quantity);
+    void update(String name, int quantity);
 }

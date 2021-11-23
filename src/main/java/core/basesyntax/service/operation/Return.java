@@ -3,10 +3,9 @@ package core.basesyntax.service.operation;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.OperationException;
-import core.basesyntax.model.Fruit;
 
 public class Return implements OperationHandler {
-    private FruitStorageDao fruitStorageDao;
+    private final FruitStorageDao fruitStorageDao;
 
     public Return(FruitStorageDao fruitStorageDao) {
         this.fruitStorageDao = fruitStorageDao;
@@ -17,7 +16,6 @@ public class Return implements OperationHandler {
         if (!Storage.fruitStorage.containsKey(fruitName)) {
             throw new OperationException("Unavailable fruit cannot be returned");
         }
-        Fruit fruit = fruitStorageDao.get(fruitName);
-        fruitStorageDao.update(fruit, quantity);
+        fruitStorageDao.update(fruitName, quantity);
     }
 }

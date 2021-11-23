@@ -1,7 +1,6 @@
 package core.basesyntax.service.report;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
@@ -11,11 +10,11 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String formReport() {
         StringBuilder reportBuilder = new StringBuilder(HEAD_OF_REPORT);
-        for (Map.Entry<String, Fruit> entry : Storage.fruitStorage.entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.fruitStorage.entrySet()) {
             reportBuilder.append(System.lineSeparator())
                     .append(entry.getKey())
                     .append(COMMA)
-                    .append(entry.getValue().getQuantity());
+                    .append(entry.getValue());
         }
         return reportBuilder.toString();
     }

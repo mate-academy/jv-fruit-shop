@@ -2,10 +2,9 @@ package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
 
 public class Supply implements OperationHandler {
-    private FruitStorageDao fruitStorageDao;
+    private final FruitStorageDao fruitStorageDao;
 
     public Supply(FruitStorageDao fruitStorageDao) {
         this.fruitStorageDao = fruitStorageDao;
@@ -13,11 +12,10 @@ public class Supply implements OperationHandler {
 
     @Override
     public void apply(String fruitName, int quantity) {
-        Fruit fruit = fruitStorageDao.get(fruitName);
         if (Storage.fruitStorage.containsKey(fruitName)) {
-            fruitStorageDao.update(fruit, quantity);
+            fruitStorageDao.update(fruitName, quantity);
         } else {
-            fruitStorageDao.addNewFruitToStorage(new Fruit(fruitName, quantity));
+            fruitStorageDao.addNewFruitToStorage(fruitName, quantity);
         }
     }
 }
