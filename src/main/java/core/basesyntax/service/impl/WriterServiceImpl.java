@@ -1,4 +1,4 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterServiceImpl implements WriterService {
-    public Boolean writeData(String toFilePath, String data) {
+    public boolean writeData(String toFilePath, String data) {
         File file = new File(toFilePath);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, false))) {
             bufferedWriter.write(data);

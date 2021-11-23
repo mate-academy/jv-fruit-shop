@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface WriterService {
-    Boolean writeData(String toFilePath, String data);
+    boolean writeData(String toFilePath, String data);
 }

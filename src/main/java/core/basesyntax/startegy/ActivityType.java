@@ -1,4 +1,4 @@
-package core.basesyntax.activities;
+package core.basesyntax.startegy;
 
 public enum ActivityType {
     BALANCE("b"),

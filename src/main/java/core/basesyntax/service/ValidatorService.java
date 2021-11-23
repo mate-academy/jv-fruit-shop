@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.List;
 
 public interface ValidatorService {
-    Boolean isValid(List<String> text);
+    boolean isValid(List<String> text);
 }

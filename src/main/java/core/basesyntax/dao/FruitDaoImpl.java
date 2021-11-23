@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 
-public class FruitsDaoImpl implements FruitsDao {
+public class FruitDaoImpl implements FruitDao {
     @Override
     public Fruit add(Fruit fruit) {
         Storage.fruits.add(fruit);

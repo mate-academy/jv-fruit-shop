@@ -1,4 +1,4 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ValidatorService;
 import java.util.List;
@@ -7,7 +7,7 @@ public class ValidatorServiceImpl implements ValidatorService {
     private static final String TITLE_TEXT = "type,fruit,quantity";
     private static final String FORMAT_TEXT = "[bpsr]{1},[a-z]{3,},\\d{1,}";
 
-    public Boolean isValid(List<String> text) {
+    public boolean isValid(List<String> text) {
         if (text.isEmpty() || !text.get(0).equals(TITLE_TEXT)) {
             throw new RuntimeException(("Incorrect input data!"));
         }
