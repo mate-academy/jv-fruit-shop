@@ -13,6 +13,8 @@ import core.basesyntax.services.impl.ParserImpl;
 import core.basesyntax.services.impl.ReportMakerImpl;
 import core.basesyntax.services.impl.ValidatorImpl;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+
 import java.util.List;
 
 public class Main {
@@ -23,7 +25,7 @@ public class Main {
         FileReader fileReader = new FileReaderImpl();
         Validator validator = new ValidatorImpl();
         Parser<TransactionDto> parser = new ParserImpl(validator);
-        OperationStrategy operationStrategy = new OperationStrategy();
+        OperationStrategy operationStrategy = new OperationStrategyImpl();
         FileWriter fileWriter = new FileWriterImpl();
         ReportMaker reportMaker = new ReportMakerImpl();
         List<String> lines = fileReader.read(INPUT_FILE_PATH);
