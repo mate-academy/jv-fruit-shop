@@ -1,0 +1,19 @@
+package shop.service.impl;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
+import shop.service.CsvReader;
+
+public class CsvReaderImpl implements CsvReader {
+    @Override
+    public List<String> read(String fileName) {
+        File fromFile = new File(fileName);
+        try {
+            return Files.readAllLines(fromFile.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException("Error while reading file ", e);
+        }
+    }
+}
