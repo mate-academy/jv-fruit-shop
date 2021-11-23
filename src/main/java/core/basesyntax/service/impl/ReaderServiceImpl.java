@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Activity;
-import core.basesyntax.service.parsers.impl.ActivityParserImpl;
 import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.parsers.impl.ActivityParserImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,7 +19,6 @@ public class ReaderServiceImpl implements ReaderService {
                     .skip(1)
                     .map(string -> string.trim())
                     .map(new ActivityParserImpl()::parse)
-                    .filter(s -> new ValidatorImpl().validate(s))
                     .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Check file " + path + " " + e);

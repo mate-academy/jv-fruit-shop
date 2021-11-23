@@ -1,13 +1,19 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Activity;
 import core.basesyntax.service.Validator;
 
 public class ValidatorImpl implements Validator {
+    public static final int VALUES_QUANTITY = 3;
+
     @Override
-    public boolean validate(Activity activity) {
-        return activity.getActivityType() != null
-                && activity.getFruit() != null
-                && activity.getQuantity() != 0;
+    public boolean validate(String[] values) {
+        if (values.length != VALUES_QUANTITY
+                || values[0] == null
+                || values[1] == null
+                || values[2] == null
+                || Integer.valueOf(values[2]) <= 0) {
+            throw new RuntimeException("Wrong values");
+        }
+        return true;
     }
 }

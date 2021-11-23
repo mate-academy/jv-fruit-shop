@@ -8,6 +8,4 @@ public interface FruitDao {
     Integer read(Fruit fruit);
 
     void update(Fruit fruits, int quantity);
-
-    void delete(Fruit fruits);
 }

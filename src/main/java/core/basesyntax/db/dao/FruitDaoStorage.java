@@ -19,9 +19,4 @@ public class FruitDaoStorage implements FruitDao {
     public void update(Fruit fruit, int quantity) {
         Storage.fruitsStorage.put(fruit, quantity);
     }
-
-    @Override
-    public void delete(Fruit fruit) {
-        Storage.fruitsStorage.remove(fruit);
-    }
 }
