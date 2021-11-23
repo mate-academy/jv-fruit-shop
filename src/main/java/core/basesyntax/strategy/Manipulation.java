@@ -6,20 +6,20 @@ public enum Manipulation {
     PURCHASE("p"),
     BALANCE("b");
 
-    private final String firstCharOfManipulation;
+    private final String firstChar;
 
-    Manipulation(String firstCharOfManipulation) {
-        this.firstCharOfManipulation = firstCharOfManipulation;
+    Manipulation(String firstChar) {
+        this.firstChar = firstChar;
     }
 
     public String getFirstCharOfManipulation() {
-        return firstCharOfManipulation;
+        return firstChar;
     }
 
     public static Manipulation getManipulation(String firstCharOfManipulation) {
-        for (Manipulation manipulations: Manipulation.values()) {
-            if (manipulations.getFirstCharOfManipulation().equals(firstCharOfManipulation)) {
-                return manipulations;
+        for (Manipulation manipulation: Manipulation.values()) {
+            if (manipulation.getFirstCharOfManipulation().equals(firstCharOfManipulation)) {
+                return manipulation;
             }
         }
         return null;

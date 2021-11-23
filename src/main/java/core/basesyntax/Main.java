@@ -11,11 +11,11 @@ import core.basesyntax.service.impl.FruitStoreServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.ValidatorServiceImpl;
-import core.basesyntax.strategy.GetManipulationType;
 import core.basesyntax.strategy.Manipulation;
 import core.basesyntax.strategy.ManipulationService;
+import core.basesyntax.strategy.ManipulationStrategy;
 import core.basesyntax.strategy.impl.BalanceManipulationService;
-import core.basesyntax.strategy.impl.GetManipulationTypeImpl;
+import core.basesyntax.strategy.impl.ManipulationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseManipulationService;
 import core.basesyntax.strategy.impl.ReturnManipulationService;
 import core.basesyntax.strategy.impl.SupplyManipulationService;
@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String OUTPUT_PATH = "src/main/resources/OutputFile";
-    private static final String INPUT_PATH = "src/main/resources/InputFile";
+    private static final String OUTPUT_PATH = "src/main/resources/outputFile.csv";
+    private static final String INPUT_PATH = "src/main/resources/inputFile.csv";
 
     public static void main(String[] args) {
         FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
@@ -42,13 +42,13 @@ public class Main {
 
         List<String> data = new FileReaderServiceImpl().readFile(INPUT_PATH);
         new ValidatorServiceImpl().isValid(data);
-        GetManipulationType getManipulationType =
-                new GetManipulationTypeImpl(manipulationServiceMap);
-        List<TransactionDto> transactionDto = new ArrayList<>();
+        ManipulationStrategy manipulationStrategy =
+                new ManipulationStrategyImpl(manipulationServiceMap);
+        List<TransactionDto> transactionDtos = new ArrayList<>();
         ParserService parserService = new ParserServiceImpl();
-        transactionDto = parserService.parseLine(data);
-        List<Fruit> fruits = new FruitStoreServiceImpl(fruitStorageDao, getManipulationType)
-                .changeBalance(transactionDto);
+        transactionDtos = parserService.parseLines(data);
+        List<Fruit> fruits = new FruitStoreServiceImpl(fruitStorageDao, manipulationStrategy)
+                .changeBalance(transactionDtos);
         String report = new ReportServiceImpl().createReport(fruits);
         new FileWriterServiceImpl().writeToFile(OUTPUT_PATH, report);
     }

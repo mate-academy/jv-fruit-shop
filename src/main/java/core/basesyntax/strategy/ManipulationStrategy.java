@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface GetManipulationType {
+public interface ManipulationStrategy {
     ManipulationService get(Manipulation manipulation);
 }

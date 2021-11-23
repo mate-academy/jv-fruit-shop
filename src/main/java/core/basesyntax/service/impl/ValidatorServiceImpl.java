@@ -20,8 +20,8 @@ public class ValidatorServiceImpl implements ValidatorService {
         for (int i = 1; i < text.size(); i++) {
             String[] arrayLine = text.get(i).split(COMMA);
             if (!(arrayLine[INDEX_OF_TYPE].matches(PATTERN_OF_FIRST_ELEMENT))
-                    && !(arrayLine[INDEX_OF_FRUIT_NAME].matches(PATTERN_OF_FRUIT_NAME))
-                    && (Integer.parseInt(arrayLine[INDEX_OF_QUANTITY]) < 0)) {
+                    || !(arrayLine[INDEX_OF_FRUIT_NAME].matches(PATTERN_OF_FRUIT_NAME))
+                    || (Integer.parseInt(arrayLine[INDEX_OF_QUANTITY]) < 0)) {
                 throw new RuntimeException("Data format is incorrect!");
             }
         }

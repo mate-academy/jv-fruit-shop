@@ -4,17 +4,17 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FruitStoreService;
-import core.basesyntax.strategy.GetManipulationType;
 import core.basesyntax.strategy.Manipulation;
 import core.basesyntax.strategy.ManipulationService;
+import core.basesyntax.strategy.ManipulationStrategy;
 import java.util.List;
 
 public class FruitStoreServiceImpl implements FruitStoreService {
     private FruitStorageDao fruitStorageDao;
-    private GetManipulationType getManipulationType;
+    private ManipulationStrategy getManipulationType;
 
     public FruitStoreServiceImpl(FruitStorageDao fruitStorageDao,
-                                 GetManipulationType getManipulationType) {
+                                 ManipulationStrategy getManipulationType) {
         this.fruitStorageDao = fruitStorageDao;
         this.getManipulationType = getManipulationType;
     }

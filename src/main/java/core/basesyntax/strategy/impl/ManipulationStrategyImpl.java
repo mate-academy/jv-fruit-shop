@@ -1,14 +1,14 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.strategy.GetManipulationType;
 import core.basesyntax.strategy.Manipulation;
 import core.basesyntax.strategy.ManipulationService;
+import core.basesyntax.strategy.ManipulationStrategy;
 import java.util.Map;
 
-public class GetManipulationTypeImpl implements GetManipulationType {
+public class ManipulationStrategyImpl implements ManipulationStrategy {
     private Map<Manipulation, ManipulationService> manipulationServiceMap;
 
-    public GetManipulationTypeImpl(Map<Manipulation, ManipulationService> manipulationServiceMap) {
+    public ManipulationStrategyImpl(Map<Manipulation, ManipulationService> manipulationServiceMap) {
         this.manipulationServiceMap = manipulationServiceMap;
     }
 
