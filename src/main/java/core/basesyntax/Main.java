@@ -1,0 +1,59 @@
+package core.basesyntax;
+
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.model.TransactionDto;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.Validator;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.ParserImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceCsvImpl;
+import core.basesyntax.service.impl.ValidatorCsvImpl;
+import core.basesyntax.service.impl.WriterServiceCsvImpl;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Main {
+    private static final String INPUT_FILE = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/output.csv";
+
+    public static void main(String[] args) {
+        ReaderService readerService = new ReaderServiceImpl();
+        List<String> readLines = readerService.readFromFile(INPUT_FILE);
+        Validator validator = new ValidatorCsvImpl();
+        Parser parser = new ParserImpl(validator);
+        List<TransactionDto> transactionDtos = new ArrayList<>();
+        for (String line : readLines) {
+            transactionDtos.add(parser.parseLine(line));
+        }
+        //Создание operationHandlerMap
+        FruitDao fruitDao = new FruitDaoImpl();
+        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put("s", new SupplyOperationHandler(fruitDao));
+        operationHandlerMap.put("b", new BalanceOperationHandler(fruitDao));
+        operationHandlerMap.put("p", new PurchaseOperationHandler(fruitDao));
+        operationHandlerMap.put("r", new ReturnOperationHandler(fruitDao));
+
+        for (TransactionDto transactionDto : transactionDtos) {
+            String operation = transactionDto.getOperation();
+            OperationHandler handler = operationHandlerMap.get(operation);
+            handler.apply(transactionDto);
+        }
+
+        ReportService reportService = new ReportServiceCsvImpl();
+        String report = reportService.formReport();
+
+        WriterService writerService = new WriterServiceCsvImpl();
+        writerService.writeToFile(report, OUTPUT_FILE);
+    }
+}
