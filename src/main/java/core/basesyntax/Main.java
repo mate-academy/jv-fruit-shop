@@ -1,8 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.CreateReport;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.Validator;
+import core.basesyntax.service.impl.CreateReportImpl;
+import core.basesyntax.service.impl.CsvFileReader;
+import core.basesyntax.service.impl.CsvFileWriter;
+import core.basesyntax.service.impl.ParserImpl;
+import core.basesyntax.service.impl.ValidatorImpl;
 import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.Strategy;
