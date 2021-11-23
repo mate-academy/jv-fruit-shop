@@ -12,7 +12,6 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.OperationHandlerMap;
 import core.basesyntax.service.report.ReportServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.util.List;
 import java.util.Map;
 

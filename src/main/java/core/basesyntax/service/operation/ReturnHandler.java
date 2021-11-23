@@ -1,7 +1,6 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitStorageDao;
-import core.basesyntax.db.Storage;
 import core.basesyntax.exception.OperationException;
 
 public class ReturnHandler implements OperationHandler {

@@ -1,7 +1,6 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitStorageDao;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +10,6 @@ public class OperationHandlerMap {
     public OperationHandlerMap(FruitStorageDao dao) {
         this.dao = dao;
     }
-
 
     public Map<String, OperationHandler> map() {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
