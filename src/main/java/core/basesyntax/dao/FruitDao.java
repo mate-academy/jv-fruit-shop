@@ -11,6 +11,4 @@ public interface FruitDao {
     void updateFruitCount(int newCount, String fruitName);
 
     int getFruitsCount(String fruitName);
-
-    String getAllData();
 }

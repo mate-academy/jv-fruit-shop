@@ -2,11 +2,17 @@ package core.basesyntax.service.handler.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.handler.WorkWithFruits;
+import core.basesyntax.service.handler.OperationHandler;
 
-public class FruitSupply implements WorkWithFruits {
+public class SupplyOperationHandler implements OperationHandler {
+    private final FruitDao fruitDao;
+
+    public SupplyOperationHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
+
     @Override
-    public Fruit workWithFruitInStorage(int fruitNumber, String fruitName, FruitDao fruitDao) {
+    public Fruit apply(int fruitNumber, String fruitName) {
         Fruit currentFruit = fruitDao.get(fruitName).orElseGet(()
                 -> fruitDao.add(new Fruit(fruitName, 0)));
         int oldCountFruit = fruitDao.getFruitsCount(fruitName);

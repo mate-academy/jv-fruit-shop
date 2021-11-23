@@ -1,18 +1,18 @@
 package core.basesyntax.model;
 
-public class ParsedCsvLine {
-    private final String action;
+public class CsvLineDto {
+    private final String operation;
     private final String fruitName;
     private final String number;
 
-    public ParsedCsvLine(String action, String fruitName, String number) {
-        this.action = action;
+    public CsvLineDto(String operation, String fruitName, String number) {
+        this.operation = operation;
         this.fruitName = fruitName;
         this.number = number;
     }
 
-    public String getAction() {
-        return action;
+    public String getOperation() {
+        return operation;
     }
 
     public String getFruitName() {

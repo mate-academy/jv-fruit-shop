@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.ParsedCsvLine;
+import core.basesyntax.model.CsvLineDto;
 import core.basesyntax.service.StorageService;
 import core.basesyntax.service.StrategyService;
-import core.basesyntax.service.file.Parse;
+import core.basesyntax.service.file.Parser;
 import core.basesyntax.service.file.ReaderService;
 import core.basesyntax.service.file.ReportCreator;
 import core.basesyntax.service.file.Validator;
@@ -21,13 +21,13 @@ public class StorageServiceImpl implements StorageService {
     private final WriterService writerService;
     private final ReaderService readerService;
     private final ReportCreator reportCreator;
-    private final Parse parse;
+    private final Parser parser;
 
     public StorageServiceImpl(String filePath, FruitWorkStrategy fruitWork,
                               FruitDao fruitDao, Validator validator,
                               StrategyService strategyService, WriterService writerService,
                               ReaderService readerService, ReportCreator reportCreator,
-                              Parse parse) {
+                              Parser parser) {
         this.filePath = filePath;
         this.fruitWork = fruitWork;
         this.fruitDao = fruitDao;
@@ -36,16 +36,16 @@ public class StorageServiceImpl implements StorageService {
         this.writerService = writerService;
         this.readerService = readerService;
         this.reportCreator = reportCreator;
-        this.parse = parse;
+        this.parser = parser;
     }
 
     @Override
     public void workWithStorage() {
-        String[] fileData = readerService.readFile();
-        List<ParsedCsvLine> listData = parse.parse(fileData);
+        String[] fileData = readerService.readFile(filePath);
+        List<CsvLineDto> listData = parser.parse(fileData);
         validator.checkFileData(listData);
-        strategyService.workWithStrategy(listData, fruitWork, fruitDao);
-        String readyToWrite = reportCreator.createResultForWriting();
+        strategyService.getStrategy(listData, fruitWork);
+        String readyToWrite = reportCreator.createReport();
         writerService.writeResultInFile(filePath, readyToWrite);
     }
 }

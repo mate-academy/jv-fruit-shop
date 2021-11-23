@@ -8,14 +8,8 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class ReaderCsv implements ReaderService {
-    private final String filePath;
-
-    public ReaderCsv(String filePath) {
-        this.filePath = filePath;
-    }
-
     @Override
-    public String[] readFile() {
+    public String[] readFile(String filePath) {
         File file = new File(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             return reader.lines()

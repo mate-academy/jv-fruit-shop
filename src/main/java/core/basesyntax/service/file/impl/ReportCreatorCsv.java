@@ -1,25 +1,18 @@
 package core.basesyntax.service.file.impl;
 
-import core.basesyntax.dao.FruitDao;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.file.ReportCreator;
-import java.util.stream.Collectors;
 
 public class ReportCreatorCsv implements ReportCreator {
-    private final FruitDao fruitDao;
-
-    public ReportCreatorCsv(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
-    }
+    private static final String FIRST_LINE = "fruit,quantity" + System.lineSeparator();
 
     @Override
-    public String createResultForWriting() {
-        String dataFromDb = fruitDao.getAllData();
-        String dataForWriting = "fruit,quantity" + System.lineSeparator();
-        dataForWriting += dataFromDb.lines()
-                .map(s -> s.replaceAll(",", System.lineSeparator()))
-                .map(s -> s.replaceAll("-", ","))
-                .map(s -> s.replaceAll("[\\[\\] ]", ""))
-                .collect(Collectors.joining());
-        return dataForWriting;
+    public String createReport() {
+        StringBuilder result = new StringBuilder(FIRST_LINE);
+        for (Fruit fruit : Storage.storage) {
+            result.append(fruit.toString()).append(System.lineSeparator());
+        }
+        return result.toString();
     }
 }

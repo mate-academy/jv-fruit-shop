@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.handler.WorkWithFruits;
+import core.basesyntax.service.handler.OperationHandler;
 
 public interface FruitWorkStrategy {
-    WorkWithFruits get(Operation key);
+    OperationHandler get(Operation key);
 }

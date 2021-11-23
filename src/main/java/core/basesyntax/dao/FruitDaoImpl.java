@@ -30,9 +30,4 @@ public class FruitDaoImpl implements FruitDao {
     public int getFruitsCount(String fruitName) {
         return get(fruitName).get().getFruitCount();
     }
-
-    @Override
-    public String getAllData() {
-        return Storage.storage.toString();
-    }
 }

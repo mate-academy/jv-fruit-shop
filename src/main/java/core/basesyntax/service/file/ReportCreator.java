@@ -1,5 +1,5 @@
 package core.basesyntax.service.file;
 
 public interface ReportCreator {
-    String createResultForWriting();
+    String createReport();
 }

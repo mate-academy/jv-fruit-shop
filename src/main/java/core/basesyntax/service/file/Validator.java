@@ -1,8 +1,8 @@
 package core.basesyntax.service.file;
 
-import core.basesyntax.model.ParsedCsvLine;
+import core.basesyntax.model.CsvLineDto;
 import java.util.List;
 
 public interface Validator {
-    void checkFileData(List<ParsedCsvLine> dataFromFile);
+    void checkFileData(List<CsvLineDto> dataFromFile);
 }
