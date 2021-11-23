@@ -14,6 +14,9 @@ public class RemovingOperation implements OperationHandler {
     public void action(Fruit fruit, int quantity) {
         isPositiveQuantity(quantity);
         int resultQuantity = fruitStorage.getQuantity(fruit) - quantity;
+        if (resultQuantity < 0) {
+            throw new RuntimeException("Can't remove " + fruit + "result quantity is negative");
+        }
         fruitStorage.update(fruit, resultQuantity);
     }
 }
