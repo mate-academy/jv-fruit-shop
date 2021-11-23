@@ -2,11 +2,11 @@ package model;
 
 public class Fruit {
     private String name;
-    private int count;
+    private int amount;
 
-    public Fruit(String name, int count) {
+    public Fruit(String name, int amount) {
         this.name = name;
-        this.count = count;
+        this.amount = amount;
     }
 
     public String getName() {
@@ -18,10 +18,10 @@ public class Fruit {
     }
 
     public int getCount() {
-        return count;
+        return amount;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setCount(int amount) {
+        this.amount = amount;
     }
 }
