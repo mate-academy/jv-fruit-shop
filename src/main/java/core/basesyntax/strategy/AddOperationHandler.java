@@ -4,10 +4,10 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.TransactionDto;
 
-public class SupplyOperationHandler implements OperationHandler {
+public class AddOperationHandler implements OperationHandler {
     private FruitDao fruitDao;
 
-    public SupplyOperationHandler(FruitDao fruitDao) {
+    public AddOperationHandler(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 

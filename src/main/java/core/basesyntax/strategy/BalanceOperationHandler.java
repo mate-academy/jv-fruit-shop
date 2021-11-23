@@ -15,7 +15,6 @@ public class BalanceOperationHandler implements OperationHandler {
     public void apply(TransactionDto transactionDto) {
         Fruit fruit = new Fruit(transactionDto.getFruitName());
         int quantity = transactionDto.getQuantity();
-
         fruitDao.add(fruit, quantity);
     }
 }
