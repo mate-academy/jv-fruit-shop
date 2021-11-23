@@ -17,10 +17,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Application {
+    private static final String INPUT_PATH = "src/main/resources/inputData.csv";
+    private static final String OUTPUT_PATH = "src/main/resources/result.csv";
+
     public static void main(String[] args) {
         ReaderFromFile reader = new ReaderFromFileImpl();
         ParserFromFile<TransactionDto> parserFromFile = new ParserFromFileImpl(new ValidatorImpl());
-        List<String> lines = reader.getData("test.CSV");
+        List<String> lines = reader.getData(INPUT_PATH);
         List<TransactionDto> transactionDto = new ArrayList<>();
         for (String line : lines) {
             transactionDto.add(parserFromFile.parseLine(line));
@@ -36,7 +39,7 @@ public class Application {
             handler.apply(transaction);
         }
         WriterToFile file = new WriterToFileImpl();
-        file.writeDataToFile("result.CSV");
+        file.writeDataToFile(OUTPUT_PATH);
 
     }
 }

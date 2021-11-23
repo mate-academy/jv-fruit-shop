@@ -3,11 +3,16 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.Validator;
 
 public class ValidatorImpl implements Validator {
+    private static byte OPERATION_INDEX = 0;
+    private static byte FRUIT_NAME_INDEX = 1;
+    private static byte QUANTITY_INDEX = 2;
+    private static byte LENGTH_OF_DATA_ARRAY = 3;
+
     @Override
     public boolean validate(String line) {
         String[] parametersFromLine = line.split(",");
-        String type = parametersFromLine[0].replaceAll(" ", "");
-        if (parametersFromLine.length != 3) {
+        String type = parametersFromLine[OPERATION_INDEX].replaceAll(" ", "");
+        if (parametersFromLine.length != LENGTH_OF_DATA_ARRAY) {
             throw new RuntimeException("Invalid date");
         }
         if (!(type.equals("b")
@@ -16,13 +21,13 @@ public class ValidatorImpl implements Validator {
                 || type.equals("r"))) {
             throw new RuntimeException("Invalid type of activities");
         }
-        if (!parametersFromLine[1].matches("[a-zA-Z]*")) {
+        if (!parametersFromLine[FRUIT_NAME_INDEX].matches("[a-zA-Z]*")) {
             throw new RuntimeException("Invalid name of fruit");
         }
         if (!parametersFromLine[2].matches("[0-9]*")) {
             throw new RuntimeException("Invalid quantity of fruit, should be numbers");
         }
-        if (Integer.parseInt(parametersFromLine[2]) < 0) {
+        if (Integer.parseInt(parametersFromLine[QUANTITY_INDEX]) < 0) {
             throw new RuntimeException("Invalid quantity of fruit, "
                     + "quantity should be more than zero");
         }

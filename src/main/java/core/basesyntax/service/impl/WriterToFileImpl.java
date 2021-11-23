@@ -11,12 +11,11 @@ import java.util.Map;
 public class WriterToFileImpl implements WriterToFile {
     @Override
     public void writeDataToFile(String pathToFile) {
-
         for (Map.Entry<Fruit, Integer> fruit : Storage.getDataBase().entrySet()) {
             try (BufferedWriter bufferedWriter =
                          new BufferedWriter((new FileWriter(pathToFile,true)))) {
                 bufferedWriter.write(fruit.toString());
-                bufferedWriter.write("\n");
+                bufferedWriter.write(System.lineSeparator());
             } catch (IOException e) {
                 throw new RuntimeException("Can't write data to file", e);
             }

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderFromFile;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +12,8 @@ public class ReaderFromFileImpl implements ReaderFromFile {
     @Override
     public List<String> getData(String pathToFile) {
         List<String> listWithData = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(pathToFile))) {
+        File file = new File(pathToFile);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             reader.readLine();
             String line = reader.readLine();
             while (line != null) {
