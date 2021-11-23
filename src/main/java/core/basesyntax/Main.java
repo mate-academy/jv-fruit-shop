@@ -9,7 +9,7 @@ import core.basesyntax.services.ReportMaker;
 import core.basesyntax.services.Validator;
 import core.basesyntax.services.impl.FileReaderImpl;
 import core.basesyntax.services.impl.FileWriterImpl;
-import core.basesyntax.services.impl.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.services.impl.ParserImpl;
 import core.basesyntax.services.impl.ReportMakerImpl;
 import core.basesyntax.services.impl.ValidatorImpl;
