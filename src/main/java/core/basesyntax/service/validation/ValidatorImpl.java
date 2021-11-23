@@ -3,7 +3,7 @@ package core.basesyntax.service.validation;
 import java.util.List;
 
 public class ValidatorImpl implements Validator {
-    private static final String COMMA = ",";
+    private static final String WORD_SEPARATOR = ",";
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final String OPERATION_TYPE_EXAMPLE = "[bpsr]";
@@ -17,7 +17,7 @@ public class ValidatorImpl implements Validator {
             throw new RuntimeException(("Incorrect input data!"));
         }
         for (String data : readReport) {
-            String[] line = data.split(COMMA);
+            String[] line = data.split(WORD_SEPARATOR);
             if (line.length != 3) {
                 throw new RuntimeException("Incorrect input data!");
             }
