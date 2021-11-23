@@ -1,3 +1,5 @@
 .idea/*
 *.iml
 target/*
+/*.csv
+/src/main/java/Main.java
