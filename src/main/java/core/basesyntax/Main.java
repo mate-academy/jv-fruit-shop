@@ -19,7 +19,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         MyRider reader = new MyRiderImpl();
-        List<String> lines = reader.readFromFile("./src/main/java/input.csv");
+        List<String> lines = reader.readFromFile("./src/main/resources/input.csv");
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
         List<TransactionDto> transactionDtoList = new ArrayList<>();
         for (String line : lines) {
@@ -38,6 +38,6 @@ public class Main {
         }
 
         String report = new ReportImpl().formReport();
-        new MyWriterImpl().writeToFile("./src/main/java/report.csv",report);
+        new MyWriterImpl().writeToFile("./src/main/resources/report.csv",report);
     }
 }
