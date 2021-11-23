@@ -21,7 +21,7 @@ public class ValidatorServiceImpl implements ValidatorService {
             try {
                 quantity = Integer.parseInt(strings[INDEX_OF_QUANTITY]);
             } catch (RuntimeException e) {
-                throw new RuntimeException("Error!! the third parameter must be a number");
+                throw new RuntimeException("Error!! the third element is invalid");
             }
             if (strings.length != NUMBER_OF_COLUMN || quantity < 0) {
                 throw new RuntimeException("Invalid data");

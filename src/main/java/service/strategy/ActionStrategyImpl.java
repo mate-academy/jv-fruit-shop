@@ -1,22 +1,17 @@
 package service.strategy;
 
+import java.util.HashMap;
 import service.action.ActionStrategyHandler;
-import service.action.type.ActionMinusQuantityHandler;
-import service.action.type.ActionPlusQuantityHandler;
 
 public class ActionStrategyImpl implements ActionStrategy {
+    private final HashMap<String, ActionStrategyHandler> actionStrategyHashMap;
+
+    public ActionStrategyImpl(HashMap<String, ActionStrategyHandler> actionStrategyHashMap) {
+        this.actionStrategyHashMap = actionStrategyHashMap;
+    }
 
     @Override
     public ActionStrategyHandler get(String actionType) {
-        switch (actionType) {
-            case "b": //Balance
-            case "r": //Return
-            case "s": //Supply
-                return new ActionPlusQuantityHandler();
-            case "p": //Purchase
-                return new ActionMinusQuantityHandler();
-            default:
-                throw new RuntimeException("Invalid action type");
-        }
+        return actionStrategyHashMap.get(actionType);
     }
 }

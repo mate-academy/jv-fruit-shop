@@ -1,6 +1,6 @@
 package service.action;
 
-public abstract class ActionStrategyHandler {
+public interface ActionStrategyHandler {
 
-    public abstract boolean doing(String fruitName, int quantity);
+    boolean doing(String fruitName, int quantity);
 }

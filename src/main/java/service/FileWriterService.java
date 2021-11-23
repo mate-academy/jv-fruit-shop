@@ -1,5 +1,5 @@
 package service;
 
 public interface FileWriterService {
-    boolean write();
+    boolean write(String outputFile);
 }

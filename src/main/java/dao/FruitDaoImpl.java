@@ -2,11 +2,12 @@ package dao;
 
 import bd.LocalStorage;
 import java.util.List;
+import java.util.Optional;
 import model.Fruit;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public List<Fruit> getListRemainder() {
+    public List<Fruit> getAll() {
         return LocalStorage.fruits;
     }
 
@@ -17,10 +18,12 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Fruit getByName(String name) {
-        return LocalStorage.fruits.stream()
-                .filter(f -> f.getName().equals(name))
-                .findFirst()
-                .orElse(null);
+    public Optional<Fruit> get(String name) {
+        for (Fruit fruit : LocalStorage.fruits) {
+            if (fruit.getName().equals(name)) {
+                return Optional.of(fruit);
+            }
+        }
+        return Optional.empty();
     }
 }

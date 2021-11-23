@@ -1,36 +1,28 @@
 package service.impl;
 
-import dao.FruitDaoImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import model.Fruit;
 import service.FileWriterService;
+import service.ReportService;
 
 public class FileWriterServiceImpl implements FileWriterService {
-    private static final String OUTPUT_FILE_NAME = "src\\main\\resources\\output.csv";
-    private static final FruitDaoImpl FRUIT_DAO = new FruitDaoImpl();
+    private final ReportService reportService;
+
+    public FileWriterServiceImpl() {
+        reportService = new ReportServiceImpl();
+    }
 
     @Override
-    public boolean write() {
-        List<String> report = creatingReport();
+    public boolean write(String outputFile) {
+        List<String> report = reportService.creatingReport();
         try {
-            Files.write(Paths.get(OUTPUT_FILE_NAME), report);
+            Files.write(Paths.get(outputFile), report);
         } catch (IOException e) {
             throw new RuntimeException("can`t write in file");
         }
         return true;
     }
 
-    private List<String> creatingReport() {
-        List<Fruit> listOfFruit = FRUIT_DAO.getListRemainder();
-        List<String> listReport = new ArrayList<>();
-        listReport.add("fruit,quantity");
-        for (Fruit fruit : listOfFruit) {
-            listReport.add(fruit.getName() + "," + fruit.getCount());
-        }
-        return listReport;
-    }
 }
