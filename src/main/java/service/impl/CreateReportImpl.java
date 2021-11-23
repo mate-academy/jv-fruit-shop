@@ -8,13 +8,13 @@ public class CreateReportImpl implements CreateReport {
     private static final String TITLE_TEXT = "fruit,quantity";
 
     public String createReport(List<Fruit> fruits) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(TITLE_TEXT).append(System.lineSeparator());
+        StringBuilder builder = new StringBuilder();
+        builder.append(TITLE_TEXT).append(System.lineSeparator());
         for (Fruit fruit : fruits) {
-            sb.append(fruit.getName()).append(",")
+            builder.append(fruit.getName()).append(",")
                     .append(fruit.getQuantity())
                     .append(System.lineSeparator());
         }
-        return sb.toString().trim();
+        return builder.toString().trim();
     }
 }

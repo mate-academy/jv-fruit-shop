@@ -34,17 +34,15 @@ public class Main {
         activityHandlerMap.put(Operation.SUPPLY, new AddOperationImpl(fruitDao));
 
         List<String> text = new FileReaderImpl().readFromFile(TEST_FILE_PATH);
-        if (new ValidatorServiceImpl().validate(text)) {
-            OperationStrategy activitiesStrategy = new OperationStrategyImpl(activityHandlerMap);
-            List<TransactionDto> transactions = new ArrayList<>();
-            Parser parser = new ParserImpl();
-            for (int i = 1; i < text.size(); i++) {
-                transactions.add(parser.parseLine(text.get(i)));
-            }
-            List<Fruit> fruits = new FruitServiceImpl(fruitDao, activitiesStrategy)
-                    .changeBalance(transactions);
-            String report = new CreateReportImpl().createReport(fruits);
-            new FileWriterImpl().writeData(REPORT_PATH, report);
+        OperationStrategy activitiesStrategy = new OperationStrategyImpl(activityHandlerMap);
+        List<TransactionDto> transactions = new ArrayList<>();
+        Parser parser = new ParserImpl();
+        for (int i = 1; i < text.size(); i++) {
+            transactions.add(parser.parseLine(text.get(i)));
         }
+        List<Fruit> fruits = new FruitServiceImpl(fruitDao, activitiesStrategy)
+                .changeBalance(transactions);
+        String report = new CreateReportImpl().createReport(fruits);
+        new FileWriterImpl().writeData(REPORT_PATH, report);
     }
 }
