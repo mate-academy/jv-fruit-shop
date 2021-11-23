@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
-
     @Override
     public List<String> readFromFile(String filePath) {
         List<String> data;
