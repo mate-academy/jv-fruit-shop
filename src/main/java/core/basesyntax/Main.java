@@ -1,17 +1,20 @@
 package core.basesyntax;
 
-import model.TransactionDto;
-import service.MyReader;
-import service.MyWriter;
-import service.MyParser;
-import service.impl.*;
-import strategy.AddOperationHandler;
-import strategy.OperationHandler;
-import strategy.PurchaseOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.TransactionDto;
+import service.MyParser;
+import service.MyReader;
+import service.MyWriter;
+import service.impl.MyParserImpl;
+import service.impl.MyReaderImpl;
+import service.impl.MyWriterImpl;
+import service.impl.ReportServiceImpl;
+import service.impl.ValidatorImpl;
+import strategy.AddOperationHandler;
+import strategy.OperationHandler;
+import strategy.PurchaseOperationHandler;
 
 public class Main {
     private static final String INPUT_PATH = "src/main/java/resources/inputFile.csv";

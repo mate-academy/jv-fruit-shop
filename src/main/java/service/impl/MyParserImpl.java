@@ -1,11 +1,10 @@
 package service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.TransactionDto;
 import service.MyParser;
 import service.Validator;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MyParserImpl implements MyParser<TransactionDto> {
     private static final int OPERATION_TYPE_INDEX = 0;

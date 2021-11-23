@@ -1,12 +1,11 @@
 package service.impl;
 
 import db.Storage;
-import model.Fruit;
-import service.ReportService;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import model.Fruit;
+import service.ReportService;
 
 public class ReportServiceImpl implements ReportService<String> {
     private static final String FIRST_LINE_IN_REPORT = "fruit,quantity";

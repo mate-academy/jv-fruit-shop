@@ -1,17 +1,14 @@
 package service.impl;
 
-import service.MyWriter;
-
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import service.MyWriter;
 
 public class MyWriterImpl implements MyWriter {
     @Override
-    public void writeToFile( List<String> report, String filePath) {
+    public void writeToFile(List<String> report, String filePath) {
         try {
             Files.write(Path.of(filePath), report);
         } catch (IOException e) {
