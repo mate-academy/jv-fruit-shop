@@ -18,11 +18,9 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public Fruit getByName(String name) {
-        for (Fruit fruit : LocalStorage.fruits) {
-            if (fruit.getName().equals(name)) {
-                return fruit;
-            }
-        }
-        return null;
+        return LocalStorage.fruits.stream()
+                .filter(f -> f.getName().equals(name))
+                .findFirst()
+                .orElse(null);
     }
 }

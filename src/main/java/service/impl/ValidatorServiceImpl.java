@@ -8,7 +8,7 @@ public class ValidatorServiceImpl implements ValidatorService {
     private static final int INDEX_OF_QUANTITY = 2;
 
     @Override
-    public boolean isValidate(List<String> list) {
+    public boolean isValidData(List<String> list) {
         if (list.size() == 0) {
             throw new RuntimeException("File is Empty");
         }

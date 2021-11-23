@@ -13,7 +13,7 @@ public class Main {
         final FileWriterService fileWriter = new FileWriterServiceImpl();
         final ValidatorServiceImpl validatorService = new ValidatorServiceImpl();
         List<String> listInput = fileReader.read();
-        validatorService.isValidate(listInput);
+        validatorService.isValidData(listInput);
         dataProcess.updateStorageData(listInput);
         fileWriter.write();
     }

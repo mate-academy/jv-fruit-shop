@@ -3,5 +3,5 @@ package service;
 import java.util.List;
 
 public interface ValidatorService {
-    boolean isValidate(List<String> list);
+    boolean isValidData(List<String> list);
 }

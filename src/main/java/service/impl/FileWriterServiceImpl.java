@@ -19,7 +19,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try {
             Files.write(Paths.get(OUTPUT_FILE_NAME), report);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("can`t write in file");
         }
         return true;
     }
