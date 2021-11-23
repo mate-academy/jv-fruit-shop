@@ -5,15 +5,15 @@ import service.Validator;
 public class ValidatorImpl implements Validator {
     @Override
     public boolean validate(String line) {
-        if (line.isEmpty()) {
-            throw new RuntimeException("File is empty");
+        if (line.isBlank()) {
+            throw new RuntimeException("Invalid File");
         }
         String [] split = line.split(",");
         int quantity;
         try {
             quantity = Integer.parseInt(split[2]);
         } catch (RuntimeException e) {
-            throw new RuntimeException("Can't parse");
+            throw new RuntimeException("We can use number");
         }
         if (quantity < 0 || split.length > 3) {
             throw new RuntimeException("No valid line");

@@ -11,6 +11,9 @@ public class PurchaseOperationHandler implements OperationHandler {
         int quantity = transactionDto.getQuantity();
         int oldQuantity = Storage.storage.get(fruit);
         int newQuality = oldQuantity - quantity;
+        if (newQuality < 0) {
+            throw new RuntimeException("Negative value");
+        }
         Storage.storage.put(fruit, newQuality);
     }
 }

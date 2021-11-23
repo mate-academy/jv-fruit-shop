@@ -29,9 +29,9 @@ public class Main {
         FileReaderService readerService = new FileReaderServiceImpl();
         Parser parser = new ParserImpl(new ValidatorImpl());
         List<String> list = readerService.readFromFile(readFromFile);
-        for (String s : list) {
-            TransactionDto t = parser.parsLine(s);
-            map.get(t.getOperation()).apply(t);
+        for (String line : list) {
+            TransactionDto transactionDto = parser.parsLine(line);
+            map.get(transactionDto.getOperation()).apply(transactionDto);
         }
         FileWriterService writerService = new FileWriterServiceImpl();
         writerService.write(writeToFile);

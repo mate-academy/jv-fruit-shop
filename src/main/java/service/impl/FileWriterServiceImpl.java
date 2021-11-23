@@ -19,7 +19,7 @@ public class FileWriterServiceImpl implements FileWriterService {
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Can't write");
         }
     }
 }

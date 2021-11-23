@@ -21,6 +21,6 @@ public class ParserImpl implements Parser {
             quantity = Integer.parseInt(sp[2]);
             return new TransactionDto(operation, fruitName, quantity);
         }
-        throw new RuntimeException("Can't parse");
+        throw new RuntimeException("Incorrect input data");
     }
 }

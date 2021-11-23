@@ -22,7 +22,7 @@ public class FileReaderServiceImpl implements FileReaderService {
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Can't read file", e);
         }
         return dataList;
     }
