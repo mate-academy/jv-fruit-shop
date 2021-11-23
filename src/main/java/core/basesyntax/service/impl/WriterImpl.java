@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterImpl implements Writer {
-
     @Override
     public boolean write(String fileName, String data) {
         File report = new File(fileName);

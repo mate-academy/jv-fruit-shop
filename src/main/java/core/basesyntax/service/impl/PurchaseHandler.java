@@ -13,12 +13,12 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public boolean operate(String fruitName, int quantity) {
-        Fruit prevFruit = storageDao.getFruit(fruitName);
-        int curr = prevFruit.getQuantity();
-        if (curr < quantity) {
+        Fruit prevFruit = storageDao.getByName(fruitName);
+        int currentQuantity = prevFruit.getQuantity();
+        if (currentQuantity < quantity) {
             throw new RuntimeException("Not enough fruits to buy");
         }
-        Fruit fruit = new Fruit(fruitName, curr - quantity);
+        Fruit fruit = new Fruit(fruitName, currentQuantity - quantity);
         return storageDao.update(prevFruit, fruit);
     }
 }

@@ -8,7 +8,6 @@ public class DataParser implements Parser {
     private static final String INPUT_TITLE_LINE = "type,fruit,quantity";
     private static final String OUTPUT_TITLE_LINE = "fruit,quantity";
     private static final String SEPARATOR = ",";
-    //private static final int TITLE_LINE_INDEX = 0;
 
     @Override
     public String formatReport(List<String> data) {
@@ -24,7 +23,5 @@ public class DataParser implements Parser {
         return data.stream()
                 .filter(l -> !l.equals(INPUT_TITLE_LINE))
                 .map(l -> l.split(SEPARATOR)).collect(Collectors.toList());
-        //data.remove(TITLE_LINE_INDEX);
-        //return data;
     }
 }

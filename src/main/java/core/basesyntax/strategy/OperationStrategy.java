@@ -14,7 +14,7 @@ public class OperationStrategy {
     private final Map<String, OperationHandler> operationsList;
 
     public OperationStrategy(StorageDao<Fruit> storageDao) {
-        this.operationsList = new HashMap<>();
+        operationsList = new HashMap<>();
         operationsList.put(OperationType.BALANCE.getName(), new BalanceHandler(storageDao));
         operationsList.put(OperationType.SUPPLY.getName(), new SupplyHandler(storageDao));
         operationsList.put(OperationType.PURCHASE.getName(), new PurchaseHandler(storageDao));

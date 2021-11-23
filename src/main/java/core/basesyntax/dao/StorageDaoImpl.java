@@ -5,7 +5,6 @@ import core.basesyntax.model.Fruit;
 import java.util.List;
 
 public class StorageDaoImpl implements StorageDao<Fruit> {
-
     @Override
     public boolean add(Fruit fruit) {
         return Storage.fruitStorage.add(fruit);
@@ -21,7 +20,7 @@ public class StorageDaoImpl implements StorageDao<Fruit> {
     }
 
     @Override
-    public Fruit getFruit(String fruitName) {
+    public Fruit getByName(String fruitName) {
         for (Fruit fruit : Storage.fruitStorage) {
             if (fruit.getName().equals(fruitName)) {
                 return fruit;

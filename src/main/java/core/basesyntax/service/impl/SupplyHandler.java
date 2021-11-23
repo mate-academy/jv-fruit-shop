@@ -13,9 +13,9 @@ public class SupplyHandler implements OperationHandler {
 
     @Override
     public boolean operate(String fruitName, int quantity) {
-        Fruit prevFruit = storageDao.getFruit(fruitName);
-        int curr = prevFruit.getQuantity();
-        Fruit fruit = new Fruit(fruitName, quantity + curr);
+        Fruit prevFruit = storageDao.getByName(fruitName);
+        int currentQuantity = prevFruit.getQuantity();
+        Fruit fruit = new Fruit(fruitName, quantity + currentQuantity);
         return storageDao.update(prevFruit, fruit);
     }
 }

@@ -4,8 +4,7 @@ public enum OperationType {
     BALANCE("b"),
     PURCHASE("p"),
     RETURN("r"),
-    SUPPLY("s")
-    ;
+    SUPPLY("s");
 
     private final String name;
 

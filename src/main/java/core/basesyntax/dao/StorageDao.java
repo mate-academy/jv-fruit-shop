@@ -1,6 +1,5 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
 import java.util.List;
 
 public interface StorageDao<K> {
@@ -8,7 +7,7 @@ public interface StorageDao<K> {
 
     boolean update(K oldValue, K newValue);
 
-    Fruit getFruit(String fruitName);
+    K getByName(String fruitName);
 
     List<K> getAll();
 }
