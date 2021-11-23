@@ -1,14 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.CreateReport;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.Parser;
-import core.basesyntax.service.Validator;
-import core.basesyntax.service.impl.CreateReportImpl;
-import core.basesyntax.service.impl.CsvFileReader;
-import core.basesyntax.service.impl.ParserImpl;
-import core.basesyntax.service.impl.ValidatorImpl;
+import core.basesyntax.service.*;
+import core.basesyntax.service.impl.*;
 import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.Strategy;
@@ -43,7 +37,9 @@ public class Main {
         }
 
         CreateReport createReport = new CreateReportImpl();
-        String report = createReport.getReport(OUTPUT_PATH);
+        FileWriter fileWriter = new CsvFileWriter();
+        String report = createReport.getReport();
+        fileWriter.write(OUTPUT_PATH, report);
         System.out.println(report);
     }
 }
