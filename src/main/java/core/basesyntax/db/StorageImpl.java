@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class StorageImpl implements Storage{
-    private final static Map<String, Integer> supplies = new HashMap<>();
+public class StorageImpl implements Storage {
+    private static final Map<String, Integer> supplies = new HashMap<>();
 
     @Override
     public Integer getAmount(String product) {

@@ -1,7 +1,6 @@
-package core.basesyntax.service.IO.IOImpl;
+package core.basesyntax.service.io.ioimpl;
 
-import core.basesyntax.service.IO.MyReader;
-
+import core.basesyntax.service.io.MyReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

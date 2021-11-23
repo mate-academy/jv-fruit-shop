@@ -1,7 +1,6 @@
-package core.basesyntax.service.IO.IOImpl;
+package core.basesyntax.service.io.ioimpl;
 
-import core.basesyntax.service.IO.MyWriter;
-
+import core.basesyntax.service.io.MyWriter;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

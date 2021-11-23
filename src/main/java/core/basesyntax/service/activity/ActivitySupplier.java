@@ -1,12 +1,12 @@
 package core.basesyntax.service.activity;
 
-import core.basesyntax.service.activity.activityImpl.Balance;
-import core.basesyntax.service.activity.activityImpl.Purchase;
-import core.basesyntax.service.activity.activityImpl.Return;
-import core.basesyntax.service.activity.activityImpl.Supply;
+import core.basesyntax.service.activity.activityimpl.Balance;
+import core.basesyntax.service.activity.activityimpl.Purchase;
+import core.basesyntax.service.activity.activityimpl.Return;
+import core.basesyntax.service.activity.activityimpl.Supply;
 
 public class ActivitySupplier {
-    public Activity getActivity (String activityAbbr, String fruitName, int amount) {
+    public Activity getActivity(String activityAbbr, String fruitName, int amount) {
         switch (activityAbbr) {
             case "s": return new Supply(fruitName, amount);
             case "p": return new Purchase(fruitName, amount);

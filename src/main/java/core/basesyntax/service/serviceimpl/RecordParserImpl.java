@@ -1,9 +1,8 @@
-package core.basesyntax.service.Impl;
+package core.basesyntax.service.serviceimpl;
 
 import core.basesyntax.service.RecordParser;
 import core.basesyntax.service.activity.Activity;
 import core.basesyntax.service.activity.ActivitySupplier;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -31,7 +30,7 @@ public class RecordParserImpl implements RecordParser {
                     return activitySupplier.getActivity(line[ACTIVITY_TYPE_INDEX],
                             line[FRUIT_NAME_INDEX],
                             Integer.parseInt(line[QUANTITY_INDEX]));
-                    })
+                })
                 .collect(Collectors.toList());
     }
 }

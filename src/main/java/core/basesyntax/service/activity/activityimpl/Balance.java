@@ -1,4 +1,4 @@
-package core.basesyntax.service.activity.activityImpl;
+package core.basesyntax.service.activity.activityimpl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.activity.Activity;

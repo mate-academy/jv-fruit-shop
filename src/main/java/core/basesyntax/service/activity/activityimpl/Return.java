@@ -1,13 +1,13 @@
-package core.basesyntax.service.activity.activityImpl;
+package core.basesyntax.service.activity.activityimpl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.activity.Activity;
 
-public class Supply implements Activity {
+public class Return implements Activity {
     private final int amount;
     private final String fruitName;
 
-    public Supply(String fruitName, int amount) {
+    public Return(String fruitName, int amount) {
         this.amount = amount;
         this.fruitName = fruitName;
     }
