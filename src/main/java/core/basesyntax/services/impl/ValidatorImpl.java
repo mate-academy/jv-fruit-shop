@@ -4,7 +4,7 @@ import core.basesyntax.exceptions.LineParseException;
 import core.basesyntax.services.Validator;
 
 public class ValidatorImpl implements Validator {
-    private static final String VALID_LINE_PATTERN = "[a-z],[A-Za-z]+,\\d+";
+    private static final String VALID_LINE_PATTERN = "[a-z],\\w+,\\d+";
 
     @Override
     public void validate(String line) throws RuntimeException {
