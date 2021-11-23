@@ -4,16 +4,16 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.OperationException;
 
-public class Return implements OperationHandler {
+public class ReturnHandler implements OperationHandler {
     private final FruitStorageDao fruitStorageDao;
 
-    public Return(FruitStorageDao fruitStorageDao) {
+    public ReturnHandler(FruitStorageDao fruitStorageDao) {
         this.fruitStorageDao = fruitStorageDao;
     }
 
     @Override
     public void apply(String fruitName, int quantity) {
-        if (!Storage.fruitStorage.containsKey(fruitName)) {
+        if (!fruitStorageDao.get(fruitName)) {
             throw new OperationException("Unavailable fruit cannot be returned");
         }
         fruitStorageDao.update(fruitName, quantity);

@@ -4,10 +4,10 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.OperationException;
 
-public class Purchase implements OperationHandler {
+public class PurchaseHandler implements OperationHandler {
     private final FruitStorageDao fruitStorageDao;
 
-    public Purchase(FruitStorageDao fruitStorageDao) {
+    public PurchaseHandler(FruitStorageDao fruitStorageDao) {
         this.fruitStorageDao = fruitStorageDao;
     }
 
@@ -16,6 +16,6 @@ public class Purchase implements OperationHandler {
         if (Storage.fruitStorage.get(fruitName) - quantity < 0) {
             throw new OperationException("You can't purchase more products than are available");
         }
-        this.fruitStorageDao.update(fruitName, -quantity);
+        fruitStorageDao.update(fruitName, -quantity);
     }
 }

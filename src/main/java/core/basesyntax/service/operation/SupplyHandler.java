@@ -3,10 +3,10 @@ package core.basesyntax.service.operation;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.db.Storage;
 
-public class Supply implements OperationHandler {
+public class SupplyHandler implements OperationHandler {
     private final FruitStorageDao fruitStorageDao;
 
-    public Supply(FruitStorageDao fruitStorageDao) {
+    public SupplyHandler(FruitStorageDao fruitStorageDao) {
         this.fruitStorageDao = fruitStorageDao;
     }
 
@@ -15,7 +15,7 @@ public class Supply implements OperationHandler {
         if (Storage.fruitStorage.containsKey(fruitName)) {
             fruitStorageDao.update(fruitName, quantity);
         } else {
-            fruitStorageDao.addNewFruitToStorage(fruitName, quantity);
+            fruitStorageDao.add(fruitName, quantity);
         }
     }
 }
