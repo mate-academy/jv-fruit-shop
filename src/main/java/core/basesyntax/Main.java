@@ -13,23 +13,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
+    public static final String FILE_PATH_TO_READ = "./src/main/resources/input.csv";
+    public static final String FILE_PATH_TO_WRITE = "./src/main/resources/report.csv";
+    private static final Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+
+    static {
+        operationHandlerMap.put("b", new BalanceOperationHandler());
+        operationHandlerMap.put("p", new PurchaseOperationHandler());
+        operationHandlerMap.put("r", new ReturnOperationHandler());
+        operationHandlerMap.put("s", new SupplyOperationHandler());
+    }
+
     public static void main(String[] args) {
+
         MyRider reader = new MyRiderImpl();
-        List<String> lines = reader.readFromFile("./src/main/resources/input.csv");
+        List<String> lines = reader.readFromFile(FILE_PATH_TO_READ);
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
         List<TransactionDto> transactionDtoList = new ArrayList<>();
         for (String line : lines) {
             transactionDtoList.add(parser.parseTo(line));
         }
-        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put("b", new BalanceOperationHandler());
-        operationHandlerMap.put("p", new PurchaseOperationHandler());
-        operationHandlerMap.put("r", new ReturnOperationHandler());
-        operationHandlerMap.put("s", new SupplyOperationHandler());
 
         for (TransactionDto transactionDto : transactionDtoList) {
             String operation = transactionDto.getOperation();
@@ -38,6 +42,6 @@ public class Main {
         }
 
         String report = new ReportImpl().formReport();
-        new MyWriterImpl().writeToFile("./src/main/resources/report.csv",report);
+        new MyWriterImpl().writeToFile(FILE_PATH_TO_WRITE,report);
     }
 }

@@ -4,9 +4,6 @@ import core.basesyntax.service.Validator;
 
 public class ValidatorImpl implements Validator {
 
-    public ValidatorImpl() {
-    }
-
     @Override
     public boolean validate(String line) {
         String[] oneLineData = line.split(",");

@@ -8,10 +8,12 @@ import java.util.Map;
 public class ReportImpl implements Report {
     @Override
     public String formReport() {
-        String result = "fruit,quantity\n";
+        StringBuilder result = new StringBuilder();
+        result.append("fruit,quantity\n");
         for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
-            result += entry.getKey().getFruitName() + "," + entry.getValue().toString() + "\n";
+            result.append(entry.getKey().getFruitName()).append(",")
+                    .append(entry.getValue().toString()).append("\n");
         }
-        return result;
+        return result.toString();
     }
 }
