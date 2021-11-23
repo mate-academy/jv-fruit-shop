@@ -2,24 +2,32 @@ package core.basesyntax.model;
 
 public class Activity {
     private ActivityType activityType;
-    private Fruits fruits;
+    private Fruit fruit;
+    private int quantity;
 
     public Activity(Builder builder) {
         this.activityType = builder.activityType;
-        this.fruits = builder.fruits;
+        this.fruit = builder.fruit;
+        this.quantity = builder.quantity;
     }
 
     public static class Builder {
         private ActivityType activityType;
-        private Fruits fruits;
+        private Fruit fruit;
+        private int quantity;
 
         public Builder setActivityType(ActivityType activityType) {
             this.activityType = activityType;
             return this;
         }
 
-        public Builder setFruit(Fruits fruits) {
-            this.fruits = fruits;
+        public Builder setFruit(Fruit fruit) {
+            this.fruit = fruit;
+            return this;
+        }
+
+        public Builder setQuantity(int quantity) {
+            this.quantity = quantity;
             return this;
         }
 
@@ -29,16 +37,24 @@ public class Activity {
 
     }
 
+    public ActivityType getActivityType() {
+        return activityType;
+    }
 
-    public Fruits getFruit() {
-        return fruits;
+    public Fruit getFruit() {
+        return fruit;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     @Override
     public String toString() {
-        return "Activity{" +
-                "activityType=" + activityType +
-                ", fruits=" + fruits +
-                '}' + System.lineSeparator();
+        return "Activity{"
+                + "activityType=" + activityType
+                + ", fruit=" + fruit
+                + ", quantity=" + quantity
+                + '}';
     }
 }

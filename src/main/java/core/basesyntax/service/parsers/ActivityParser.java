@@ -1,4 +1,4 @@
-package core.basesyntax.parsers;
+package core.basesyntax.service.parsers;
 
 import core.basesyntax.model.Activity;
 

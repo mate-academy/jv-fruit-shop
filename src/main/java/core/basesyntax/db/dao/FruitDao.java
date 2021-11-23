@@ -1,10 +1,13 @@
 package core.basesyntax.db.dao;
 
-import core.basesyntax.model.Fruits;
+import core.basesyntax.model.Fruit;
 
 public interface FruitDao {
-    void create(Fruits fruits);
-    Fruits read(Fruits fruits);
-    void update(Fruits fruits);
-    void delete(Fruits fruits);
+    void create(Fruit fruits, int quantity);
+
+    Integer read(Fruit fruit);
+
+    void update(Fruit fruits, int quantity);
+
+    void delete(Fruit fruits);
 }
