@@ -1,12 +1,13 @@
 package core.basesyntax.shop.db;
 
+import core.basesyntax.shop.model.Fruit;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FruitShopStorage {
-    private static final Map<String, Integer> FRUIT_SHOP_MAP = new HashMap<>();
+    private static final Map<Fruit, Integer> FRUIT_SHOP_MAP = new HashMap<>();
 
-    public static Map<String, Integer> getFruitShopMap() {
+    public static Map<Fruit, Integer> getFruitShopMap() {
         return FRUIT_SHOP_MAP;
     }
 }

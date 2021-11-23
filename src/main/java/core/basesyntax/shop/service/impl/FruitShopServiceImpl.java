@@ -3,82 +3,43 @@ package core.basesyntax.shop.service.impl;
 import core.basesyntax.shop.dao.FruitShopDao;
 import core.basesyntax.shop.dao.FruitShopDaoImpl;
 import core.basesyntax.shop.dao.InsufficientGoodsException;
+import core.basesyntax.shop.model.Fruit;
 import core.basesyntax.shop.service.FruitShopService;
 import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private FruitShopDao fruitShopDao;
-    private int purchased;
-    private boolean appleBalanced;
-    private boolean bananaBalanced;
-    private boolean pearBalanced;
 
     public FruitShopServiceImpl() {
         fruitShopDao = new FruitShopDaoImpl();
-        purchased = 0;
-        appleBalanced = false;
-        bananaBalanced = false;
-        pearBalanced = false;
     }
 
     @Override
-    public void balance(String item, Integer quantity) {
-        if (markBalancedTrueIfBalanced(item)) {
-            throw new RuntimeException("Balance for " + item + " has been already got");
-        }
-        fruitShopDao.add(item, quantity);
+    public void balance(Fruit fruit, Integer quantity) {
+        fruitShopDao.add(fruit, quantity);
     }
 
     @Override
-    public void supply(String item, Integer quantity) {
-        fruitShopDao.add(item, quantity);
+    public void supply(Fruit fruit, Integer quantity) {
+        fruitShopDao.add(fruit, quantity);
     }
 
     @Override
-    public void purchase(String item, Integer quantity) {
+    public void purchase(Fruit fruit, Integer quantity) {
         try {
-            fruitShopDao.subtract(item, quantity);
+            fruitShopDao.subtract(fruit, quantity);
         } catch (InsufficientGoodsException e) {
-            throw new RuntimeException("Insufficient " + item, e);
+            throw new RuntimeException("Insufficient " + fruit.getName(), e);
         }
-        purchased += quantity;
     }
 
     @Override
-    public void returnBack(String item, Integer quantity) {
-        if (quantity > purchased) {
-            throw new RuntimeException("Returned more than purchased");
-        }
-        fruitShopDao.add(item, quantity);
-        purchased -= quantity;
+    public void returnBack(Fruit fruit, Integer quantity) {
+        fruitShopDao.add(fruit, quantity);
     }
 
     @Override
-    public Map<String, Integer> getMap() {
+    public Map<Fruit, Integer> getMap() {
         return fruitShopDao.returnMap();
-    }
-
-    private boolean markBalancedTrueIfBalanced(String item) {
-        switch (item) {
-            case "apple" :
-                if (appleBalanced) {
-                    return appleBalanced;
-                }
-                appleBalanced = true;
-                return false;
-            case "banana" :
-                if (bananaBalanced) {
-                    return bananaBalanced;
-                }
-                bananaBalanced = true;
-                return false;
-            default:
-            case "pear" :
-                if (pearBalanced) {
-                    return pearBalanced;
-                }
-                pearBalanced = true;
-                return false;
-        }
     }
 }

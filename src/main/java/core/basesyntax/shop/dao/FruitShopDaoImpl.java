@@ -1,33 +1,34 @@
 package core.basesyntax.shop.dao;
 
 import core.basesyntax.shop.db.FruitShopStorage;
+import core.basesyntax.shop.model.Fruit;
 import java.util.Map;
 
 public class FruitShopDaoImpl implements FruitShopDao {
 
     @Override
-    public void add(String item, int quantity) {
-        if (FruitShopStorage.getFruitShopMap().containsKey(item)) {
+    public void add(Fruit fruit, int quantity) {
+        if (FruitShopStorage.getFruitShopMap().containsKey(fruit)) {
             FruitShopStorage.getFruitShopMap().put(
-                    item, FruitShopStorage.getFruitShopMap().get(item) + quantity);
+                    fruit, FruitShopStorage.getFruitShopMap().get(fruit) + quantity);
         } else {
-            FruitShopStorage.getFruitShopMap().put(item, quantity);
+            FruitShopStorage.getFruitShopMap().put(fruit, quantity);
         }
     }
 
     @Override
-    public void subtract(String item, int quantity) throws InsufficientGoodsException {
-        if (FruitShopStorage.getFruitShopMap().containsKey(item)
-                && FruitShopStorage.getFruitShopMap().get(item) > quantity) {
-            FruitShopStorage.getFruitShopMap().put(item,
-                    FruitShopStorage.getFruitShopMap().get(item) - quantity);
+    public void subtract(Fruit fruit, int quantity) throws InsufficientGoodsException {
+        if (FruitShopStorage.getFruitShopMap().containsKey(fruit)
+                && FruitShopStorage.getFruitShopMap().get(fruit) > quantity) {
+            FruitShopStorage.getFruitShopMap().put(fruit,
+                    FruitShopStorage.getFruitShopMap().get(fruit) - quantity);
             return;
         }
-        throw new InsufficientGoodsException("Not enough " + item);
+        throw new InsufficientGoodsException("Not enough " + fruit.getName());
     }
 
     @Override
-    public Map<String, Integer> returnMap() {
+    public Map<Fruit, Integer> returnMap() {
         return FruitShopStorage.getFruitShopMap();
     }
 }

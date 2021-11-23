@@ -1,9 +1,7 @@
 package core.basesyntax.shop.service;
 
-import java.util.Map;
-
 public interface ShopDataParser {
-    String collect(Map<String, Integer> map);
+    String collect();
 
     boolean distribute(String table);
 }

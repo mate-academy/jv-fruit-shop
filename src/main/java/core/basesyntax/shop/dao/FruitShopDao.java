@@ -1,11 +1,12 @@
 package core.basesyntax.shop.dao;
 
+import core.basesyntax.shop.model.Fruit;
 import java.util.Map;
 
 public interface FruitShopDao {
-    void add(String item, int quantity);
+    void add(Fruit fruit, int quantity);
 
-    void subtract(String item, int quantity) throws InsufficientGoodsException;
+    void subtract(Fruit fruit, int quantity) throws InsufficientGoodsException;
 
-    Map<String, Integer> returnMap();
+    Map<Fruit, Integer> returnMap();
 }

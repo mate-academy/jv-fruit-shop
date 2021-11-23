@@ -1,17 +1,20 @@
 package core.basesyntax.shop.service.impl;
 
+import core.basesyntax.shop.model.Fruit;
 import core.basesyntax.shop.service.FruitShopService;
+import core.basesyntax.shop.service.Operations;
 import core.basesyntax.shop.service.ShopDataParser;
+import core.basesyntax.shop.strategy.FruitShopStrategy;
 import core.basesyntax.shop.strategy.FruitShopStrategyImpl;
 import java.util.Map;
 
 public class ShopDataParserImpl implements ShopDataParser {
-    private FruitShopStrategyImpl fruitShopStrategy;
+    private FruitShopStrategy fruitShopStrategy;
     private FruitShopService fruitShopService;
 
-    protected ShopDataParserImpl() {
-        fruitShopStrategy = new FruitShopStrategyImpl();
-        fruitShopService = new FruitShopServiceImpl();
+    public ShopDataParserImpl(FruitShopService fruitShopService) {
+        this.fruitShopService = fruitShopService;
+        this.fruitShopStrategy = new FruitShopStrategyImpl(fruitShopService);
     }
 
     @Override
@@ -19,12 +22,15 @@ public class ShopDataParserImpl implements ShopDataParser {
         table = table.toLowerCase().replaceAll("type,\\w+,quantity\\n", "");
         String[] csvArr = table.split("\\n");
         for (String line : csvArr) {
-            String type = line.replaceAll("((^[bspr]).+)", "$2");
-            String item = line.replaceAll("([bspr],(\\w+),\\d+)", "$2");
+            String type = line.replaceAll("((^["
+                    + Operations.operationsString() + "]).+)", "$2");
+            String name = line.replaceAll("(["
+                    + Operations.operationsString() + "],(\\w+),\\d+)", "$2");
             int quantity = Integer.parseInt(
                     line.replaceAll("(.+,(\\d+)$)", "$2"));
             try {
-                fruitShopStrategy.chooseStrategy(type).invoke(fruitShopService, item, quantity);
+                fruitShopStrategy.chooseStrategy(type).invoke(fruitShopService,
+                        new Fruit(name), quantity);
             } catch (ReflectiveOperationException e) {
                 throw new RuntimeException("Can't return appropriate method", e);
             }
@@ -33,12 +39,12 @@ public class ShopDataParserImpl implements ShopDataParser {
     }
 
     @Override
-    public String collect(Map<String, Integer> map) {
+    public String collect() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity");
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+        for (Map.Entry<Fruit, Integer> entry : fruitShopService.getMap().entrySet()) {
             stringBuilder.append(System.lineSeparator())
-                    .append(entry.getKey())
+                    .append(entry.getKey().getName())
                     .append(",")
                     .append(entry.getValue());
         }
