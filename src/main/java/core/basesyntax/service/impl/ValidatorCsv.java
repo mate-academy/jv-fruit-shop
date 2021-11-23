@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Validator;
 import core.basesyntax.strategy.OperationType;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,23 +24,23 @@ public class ValidatorCsv implements Validator {
         }
 
         inputData.stream()
-          .skip(1)
-          .forEach(line -> {
-              if(!isValidLine(line)){
-                  throw new RuntimeException("Invalid input data, try again");
-              }
-          });
+                .skip(1)
+                .forEach(line -> {
+                    if (!isValidLine(line)) {
+                        throw new RuntimeException("Invalid input data, try again");
+                    }
+                });
         return true;
     }
 
     private boolean isValidLine(String line) {
         return line.matches(LINE_PATTERN)
-          && shortOperation.contains(String.valueOf(line.charAt(ACTIVITY_TYPE_INDEX)))
-          && line.charAt(line.lastIndexOf(',') + 1) != '0';
+            && shortOperation.contains(String.valueOf(line.charAt(ACTIVITY_TYPE_INDEX)))
+            && line.charAt(line.lastIndexOf(',') + 1) != '0';
     }
 
     private void initShortOperation() {
         Arrays.stream(OperationType.values())
-          .forEach(operationType -> shortOperation.add(operationType.getOperation()));
+                .forEach(operationType -> shortOperation.add(operationType.getOperation()));
     }
 }
