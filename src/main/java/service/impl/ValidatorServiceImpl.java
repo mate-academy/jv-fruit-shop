@@ -12,6 +12,7 @@ public class ValidatorServiceImpl {
         }
         for (int i = 1; i < text.size(); i++) {
             String line = text.get(i);
+
             if (!line.matches(FORMAT_TEXT)) {
                 throw new RuntimeException(("Incorrect format data!"));
             }
