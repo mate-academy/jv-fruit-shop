@@ -6,7 +6,6 @@ import core.basesyntax.service.FruitReporter;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.strategy.impl.ActivityStrategyImpl;
-
 import java.nio.file.Paths;
 import java.util.List;
 
