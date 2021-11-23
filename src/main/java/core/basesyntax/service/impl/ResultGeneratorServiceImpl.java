@@ -4,7 +4,6 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ResultGeneratorService;
-
 import java.util.List;
 
 public class ResultGeneratorServiceImpl implements ResultGeneratorService {

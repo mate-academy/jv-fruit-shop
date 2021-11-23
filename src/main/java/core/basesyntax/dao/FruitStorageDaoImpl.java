@@ -1,9 +1,7 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.db.Storage;
-
-import java.util.ArrayList;
+import core.basesyntax.model.Fruit;
 import java.util.List;
 
 public class FruitStorageDaoImpl implements FruitStorageDao {

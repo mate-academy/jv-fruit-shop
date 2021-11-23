@@ -1,9 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ResultGeneratorService;
-import core.basesyntax.service.Validator;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ResultGeneratorServiceImpl;
@@ -11,8 +9,6 @@ import core.basesyntax.service.impl.ValidatorImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationsHandler;
 import core.basesyntax.strategy.SelectOperation;
-import jdk.dynalink.Operation;
-
 import java.util.List;
 
 public class Main {
@@ -30,7 +26,7 @@ public class Main {
             OperationsHandler operationsHandler
                     = SelectOperation.getOperation(line);
             operationsHandler.handleOperation(splittedLine[INDEX_OF_FRUIT],
-                   Integer.parseInt(splittedLine[INDEX_OF_QUANTITY]));
+                    Integer.parseInt(splittedLine[INDEX_OF_QUANTITY]));
         }
         ResultGeneratorService resultGeneratorService = new ResultGeneratorServiceImpl();
         String result = resultGeneratorService.generateResult(read);
