@@ -4,5 +4,5 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.operation.OperationHandler;
 
 public interface OperationStrategy {
-    OperationHandler get(Operation.OperationKind operationKind);
+    OperationHandler get(Operation operation);
 }

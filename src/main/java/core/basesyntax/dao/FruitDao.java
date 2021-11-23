@@ -1,13 +1,12 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
-import java.math.BigDecimal;
 import java.util.Map;
 
 public interface FruitDao {
-    BigDecimal getBalance(Fruit.Type type);
+    Integer getBalance(Fruit fruit);
 
-    BigDecimal add(Fruit.Type type, BigDecimal amount);
+    Integer add(Fruit fruit, Integer amount);
 
-    Map<Fruit.Type, BigDecimal> getStorage();
+    Map<Fruit, Integer> getStorage();
 }

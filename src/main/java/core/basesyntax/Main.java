@@ -15,11 +15,11 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<Operation.OperationKind, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.OperationKind.p, new PurchaseOperationHandler());
-        operationHandlerMap.put(Operation.OperationKind.s, new SupplyOperationHandler());
-        operationHandlerMap.put(Operation.OperationKind.r, new ReturnOperationHandler());
-        operationHandlerMap.put(Operation.OperationKind.b, new BalanceOperationHandler());
+        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.p, new PurchaseOperationHandler());
+        operationHandlerMap.put(Operation.s, new SupplyOperationHandler());
+        operationHandlerMap.put(Operation.r, new ReturnOperationHandler());
+        operationHandlerMap.put(Operation.b, new BalanceOperationHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 

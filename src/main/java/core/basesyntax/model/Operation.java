@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-public class Operation {
-    public enum OperationKind {
-        s, p, r, b
-    }
+public enum Operation {
+    s, p, r, b
 }
