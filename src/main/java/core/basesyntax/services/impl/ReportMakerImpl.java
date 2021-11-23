@@ -9,7 +9,7 @@ public class ReportMakerImpl implements ReportMaker {
     private static final String SEPARATOR = ",";
 
     @Override
-    public String collectStorageStateToString() {
+    public String createReport() {
         StringBuilder result = new StringBuilder(REPORT_TABLE_COLUMNS);
         for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
             result.append(System.lineSeparator()).append(entry.getKey())

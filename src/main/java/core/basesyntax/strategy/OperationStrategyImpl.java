@@ -3,7 +3,6 @@ package core.basesyntax.strategy;
 import core.basesyntax.services.OperationHandler;
 import core.basesyntax.services.impl.AddOperationHandler;
 import core.basesyntax.services.impl.PurchaseOperationHandler;
-
 import java.util.HashMap;
 import java.util.Map;
 

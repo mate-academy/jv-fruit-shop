@@ -35,7 +35,7 @@ public class Main {
             OperationHandler operationHandler = operationStrategy.getOperationHandler(operation);
             operationHandler.apply(transactionDto);
         }
-        String report = reportMaker.collectStorageStateToString();
+        String report = reportMaker.createReport();
         fileWriter.write(OUTPUT_FILE_PATH, report);
     }
 }

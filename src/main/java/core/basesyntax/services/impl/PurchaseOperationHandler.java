@@ -6,7 +6,11 @@ import core.basesyntax.models.TransactionDto;
 import core.basesyntax.services.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    private final StorageDao storageDao = new StorageDaoImpl();
+    private final StorageDao storageDao;
+
+    public PurchaseOperationHandler() {
+        storageDao = new StorageDaoImpl();
+    }
 
     @Override
     public void apply(TransactionDto transactionDto) {
