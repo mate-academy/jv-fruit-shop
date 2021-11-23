@@ -1,7 +1,7 @@
-package core.basesyntax.strategy;
+package core.basesyntax.services;
 
 import core.basesyntax.models.TransactionDto;
 
-public interface OparationHandler {
+public interface OperationHandler {
     void apply(TransactionDto transactionDto);
 }

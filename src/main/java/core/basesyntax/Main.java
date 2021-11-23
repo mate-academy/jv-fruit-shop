@@ -3,16 +3,16 @@ package core.basesyntax;
 import core.basesyntax.models.TransactionDto;
 import core.basesyntax.services.FileReader;
 import core.basesyntax.services.FileWriter;
+import core.basesyntax.services.OperationHandler;
 import core.basesyntax.services.Parser;
 import core.basesyntax.services.ReportMaker;
 import core.basesyntax.services.Validator;
 import core.basesyntax.services.impl.FileReaderImpl;
 import core.basesyntax.services.impl.FileWriterImpl;
+import core.basesyntax.services.impl.OperationStrategy;
 import core.basesyntax.services.impl.ParserImpl;
 import core.basesyntax.services.impl.ReportMakerImpl;
 import core.basesyntax.services.impl.ValidatorImpl;
-import core.basesyntax.strategy.OparationHandler;
-import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class Main {
@@ -30,7 +30,7 @@ public class Main {
         List<TransactionDto> transactions = parser.parse(lines);
         for (TransactionDto transactionDto : transactions) {
             String operation = transactionDto.getOperation();
-            OparationHandler operationHandler = operationStrategy.getOperationHandler(operation);
+            OperationHandler operationHandler = operationStrategy.getOperationHandler(operation);
             operationHandler.apply(transactionDto);
         }
         String report = reportMaker.collectStorageStateToString();

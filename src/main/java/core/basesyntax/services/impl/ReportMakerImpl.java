@@ -2,7 +2,6 @@ package core.basesyntax.services.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.services.ReportMaker;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ReportMakerImpl implements ReportMaker {
