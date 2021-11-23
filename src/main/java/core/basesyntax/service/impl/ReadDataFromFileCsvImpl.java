@@ -1,11 +1,12 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReadDataFromFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class ReadDataFromFileCsvImpl implements core.basesyntax.service.ReadDataFromFile {
+public class ReadDataFromFileCsvImpl implements ReadDataFromFile {
     private static final String FIRST_LINE = "type,fruit,quantity";
 
     @Override

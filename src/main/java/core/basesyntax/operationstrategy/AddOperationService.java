@@ -9,10 +9,9 @@ public class AddOperationService implements OperationService {
     public void apply(OperationFruitDto operationFruitDto) {
         String nameFruit = operationFruitDto.getNameFruit();
         int quantity = operationFruitDto.getQuantity();
-        for (int i = 0; i < Storage.fruits.size(); i++) {
-            Fruit currentFruit = Storage.fruits.get(i);
-            if (currentFruit.getName().equals(nameFruit)) {
-                currentFruit.setQuantity(currentFruit.getQuantity()
+        for (Fruit fruit : Storage.fruits) {
+            if (fruit.getName().equals(nameFruit)) {
+                fruit.setQuantity(fruit.getQuantity()
                         + quantity);
                 return;
             }
