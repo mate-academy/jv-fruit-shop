@@ -1,3 +1,4 @@
+import dao.FruitDaoImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +22,10 @@ public class Main {
         Parser parser = new ParserImpl(new ValidatorImpl());
 
         Map<String, OptionHandler> options = new HashMap<>();
-        options.put("b", new AddHandler());
-        options.put("s", new AddHandler());
-        options.put("p", new PurchaseHandler());
-        options.put("r", new AddHandler());
+        options.put("b", new AddHandler(new FruitDaoImpl()));
+        options.put("s", new AddHandler(new FruitDaoImpl()));
+        options.put("p", new PurchaseHandler(new FruitDaoImpl()));
+        options.put("r", new AddHandler(new FruitDaoImpl()));
 
         List<Transaction> transactions = parser.parse(lines);
         for (Transaction transaction : transactions) {
@@ -33,8 +34,8 @@ public class Main {
             handler.apply(transaction);
         }
 
-        ReportService reportService = new ReportServiceImpl();
-        new WriterServiceImpl().writeToFile(reportService.report(),
+        ReportService reportService = new ReportServiceImpl(new FruitDaoImpl());
+        new WriterServiceImpl().writeToFile(reportService.createReport(),
                 "src/main/resources/output.csv");
     }
 }

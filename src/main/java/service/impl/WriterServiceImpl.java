@@ -9,10 +9,8 @@ import service.WriterService;
 public class WriterServiceImpl implements WriterService {
     @Override
     public void writeToFile(String report, String filePath) {
-        try (BufferedWriter br = new BufferedWriter(new FileWriter(filePath))) {
-            br.write("fruit,quantity");
-            br.newLine();
-            br.write(report);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(report);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Invalid file name: " + filePath, e);
         } catch (IOException e) {

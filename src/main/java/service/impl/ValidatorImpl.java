@@ -4,7 +4,7 @@ import java.util.List;
 import service.Validator;
 
 public class ValidatorImpl implements Validator {
-    private static final String ACTIONS = "b s p r";
+    private static final String ACTIONS = "bspr";
     private static final int EXPECTED_LENGTH = 3;
     private static final int FIRST_INDEX = 0;
     private static final int THIRD_INDEX = 2;

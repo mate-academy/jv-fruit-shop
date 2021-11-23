@@ -9,20 +9,19 @@ import java.util.List;
 import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
-
     @Override
     public List<String> readFromFile(String filePath) {
-        List<String> operations = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        List<String> lines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            while ((line = br.readLine()) != null) {
-                operations.add(line);
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Invalid file name: " + filePath, e);
         } catch (IOException e) {
             throw new RuntimeException("Read failed", e);
         }
-        return operations;
+        return lines;
     }
 }
