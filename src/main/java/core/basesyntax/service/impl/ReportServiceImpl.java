@@ -1,6 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportService;
 import java.io.FileWriter;
 
 public class ReportServiceImpl implements ReportService {
@@ -9,10 +10,11 @@ public class ReportServiceImpl implements ReportService {
     public String getReportText() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity").append(System.lineSeparator());
-        Storage.getStore().stream().forEach(fr -> stringBuilder
-                .append(fr.getName())
+        Storage.getStore().entrySet()
+                .stream().forEach(kv -> stringBuilder
+                .append(kv.getKey().getName())
                 .append(",")
-                .append(fr.getCount())
+                .append(kv.getValue())
                 .append(System.lineSeparator()));
         return stringBuilder.toString();
     }

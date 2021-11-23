@@ -1,13 +1,14 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.Fruit;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    private static List<Fruit> fruitsStore = new ArrayList<>();
+    private static Map<Fruit, Integer> fruitsStore = new HashMap<>();
 
-    public static List<Fruit> getStore() {
+    public static Map<Fruit, Integer> getStore() {
         return fruitsStore;
     }
+
 }

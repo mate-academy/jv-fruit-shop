@@ -1,6 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.FruitService;
 
 public class FruitServiceImpl implements FruitService {
 

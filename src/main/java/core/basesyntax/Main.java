@@ -1,16 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.FruitServiceImpl;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.ReaderServiceImpl;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.service.StorageServiceImpl;
 import core.basesyntax.service.Validator;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.StorageServiceImpl;
 import core.basesyntax.strategy.ActivityService;
 import core.basesyntax.strategy.ActivityStrategy;
 import core.basesyntax.strategy.impl.BalanceService;
@@ -28,7 +26,6 @@ public class Main {
         List<String> strings = readerService.readFromFile("src/main/resources/dayActivity.csv");
         strings.remove(0);
 
-        FruitDao fruitDao = new FruitDaoImpl();
         FruitService fruitService = new FruitServiceImpl();
 
         Map<String, ActivityService> activityHandlerMap = new HashMap<>();
@@ -39,7 +36,7 @@ public class Main {
 
         ActivityStrategy activityStrategy = new ActivityStrategy(activityHandlerMap);
         StorageService storageService =
-                new StorageServiceImpl(activityStrategy, fruitService, fruitDao);
+                new StorageServiceImpl(activityStrategy, fruitService);
 
         Validator validator = new Validator();
         strings.stream()
