@@ -8,6 +8,11 @@ public class FruitBalance implements WorkWithFruits {
     @Override
     public void workWithFruitInStorage(int fruitNumber, String fruitName, FruitDao fruitDao) {
         Fruit newFruit = new Fruit(fruitName, fruitNumber);
-        fruitDao.add(newFruit);
+        fruitDao.get(fruitName).ifPresentOrElse(
+                f -> {
+                    throw new RuntimeException("Fruit name should be individual. Fruit name: "
+                            + fruitName);
+                },
+                () -> fruitDao.add(newFruit));
     }
 }

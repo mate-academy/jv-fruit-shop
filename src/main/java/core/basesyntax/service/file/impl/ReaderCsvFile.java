@@ -7,25 +7,22 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-public class ReaderServiceImpl implements ReaderService {
-    private String filePath;
+public class ReaderCsvFile implements ReaderService {
+    private final String filePath;
 
-    public ReaderServiceImpl(String filePath) {
+    public ReaderCsvFile(String filePath) {
         this.filePath = filePath;
     }
 
     @Override
     public String[] readFile() {
         File file = new File(filePath);
-        String fileData = "";
-
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            fileData = reader.lines()
+            return reader.lines()
                     .skip(1)
-                    .collect(Collectors.joining(" "));
+                    .collect(Collectors.joining(" ")).split(" ");
         } catch (IOException e) {
             throw new RuntimeException("Cannot read file: " + filePath, e);
         }
-        return fileData.split(" ");
     }
 }

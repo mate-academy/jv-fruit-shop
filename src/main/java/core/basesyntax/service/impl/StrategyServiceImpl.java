@@ -1,22 +1,20 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.model.Operation;
+import core.basesyntax.model.ParsedLineFromFileCsv;
 import core.basesyntax.service.StrategyService;
 import core.basesyntax.strategy.FruitWorkStrategy;
+import java.util.List;
 
 public class StrategyServiceImpl implements StrategyService {
-    private static final int KEY_INDEX = 0;
-    private static final int FRUIT_NAME_INDEX = 1;
-    private static final int FRUIT_NUMBER_INDEX = 2;
-
     @Override
-    public void workWithStrategy(String[] fileData, FruitWorkStrategy fruitWork,
+    public void workWithStrategy(List<ParsedLineFromFileCsv> fileData, FruitWorkStrategy fruitWork,
                                  FruitDao fruitDao) {
-        for (String dataLine : fileData) {
-            String[] dataLineArr = dataLine.split(",");
-            String key = dataLineArr[KEY_INDEX];
-            String fruitName = dataLineArr[FRUIT_NAME_INDEX];
-            int fruitNumber = Integer.parseInt(dataLineArr[FRUIT_NUMBER_INDEX]);
+        for (ParsedLineFromFileCsv dataLine : fileData) {
+            Operation key = Operation.getOperationKey(dataLine.getAction());
+            String fruitName = dataLine.getFruitName();
+            int fruitNumber = Integer.parseInt(dataLine.getNumber());
             fruitWork.get(key).workWithFruitInStorage(fruitNumber, fruitName, fruitDao);
         }
     }

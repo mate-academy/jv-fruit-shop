@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class WriterServiceImpl implements WriterService {
+public class WriterCsvFile implements WriterService {
     private static final String DIRECTORY_NAME_FOR_REPORTS = "reports";
     private static final String FILE_NAME_FOR_REPORTS = "report.csv";
 

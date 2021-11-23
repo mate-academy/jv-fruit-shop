@@ -1,34 +1,29 @@
 package core.basesyntax.service.file.impl;
 
+import core.basesyntax.model.Operation;
+import core.basesyntax.model.ParsedLineFromFileCsv;
 import core.basesyntax.service.file.FileDataValidator;
+import java.util.List;
 
 public class FileDataValidatorImpl implements FileDataValidator {
-    private static final int KEY_INDEX = 0;
-    private static final int FRUIT_NAME_INDEX = 1;
-    private static final int FRUIT_NUMBER_INDEX = 2;
-
     @Override
-    public void checkFileData(String[] fileData, String filePath) {
+    public void checkFileData(List<ParsedLineFromFileCsv> dataFromFile) {
         int count = 0;
 
-        for (int i = 0; i < fileData.length; ) {
-            String[] fileLine = fileData[i].split(",");
-            if (fileLine.length == 3) {
-                if (!fileLine[KEY_INDEX].isEmpty()
-                        && fileLine[KEY_INDEX].replaceAll("[bspr]", "")
-                        .length() == 0
-                        && !fileLine[FRUIT_NAME_INDEX].isEmpty()
-                        && fileLine[FRUIT_NAME_INDEX].replaceAll("[a-z[^\\W+_]]", "")
-                        .length() == 0
-                        && !fileLine[FRUIT_NUMBER_INDEX].isEmpty()
-                        && fileLine[FRUIT_NUMBER_INDEX].replaceAll("[\\d[^A-z\\W+]]", "")
-                        .length() == 0) {
-                    count++;
-                }
+        for (int i = 0; i < dataFromFile.size(); ) {
+            ParsedLineFromFileCsv dataLine = dataFromFile.get(i);
+            if (!dataLine.getAction().isEmpty()
+                    && Operation.contains(dataLine.getAction())
+                    && !dataLine.getFruitName().isEmpty()
+                    && dataLine.getFruitName().replaceAll("[a-z[^\\W+_]]", "")
+                    .length() == 0
+                    && !dataLine.getNumber().isEmpty()
+                    && dataLine.getNumber().replaceAll("[\\d[^A-z\\W+]]", "")
+                    .length() == 0) {
+                count++;
             }
             if (count != ++i) {
-                throw new RuntimeException("Invalid data in file: \"" + filePath
-                        + "\" Line: " + (count + 2));
+                throw new RuntimeException("Invalid data in file at line: " + (count + 2));
             }
         }
     }
