@@ -4,9 +4,9 @@ import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public interface FruitDao {
-    Integer getBalance(Fruit fruit);
+    Integer get(Fruit fruit);
 
-    Integer add(Fruit fruit, Integer amount);
+    Integer update(Fruit fruit, Integer amountToAdd);
 
-    Map<Fruit, Integer> getStorage();
+    Map<Fruit, Integer> getAll();
 }

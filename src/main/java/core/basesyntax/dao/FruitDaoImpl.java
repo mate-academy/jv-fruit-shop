@@ -7,23 +7,22 @@ import java.util.Map;
 public class FruitDaoImpl implements FruitDao {
 
     @Override
-    public Integer getBalance(Fruit fruit) {
-        return Storage.storage.entrySet().stream()
-                .filter(e -> e.getKey().equals(fruit))
-                .map(Map.Entry::getValue)
-                .findFirst()
-                .orElse(0);
+    public Integer get(Fruit fruit) {
+        return Storage.storage.getOrDefault(fruit, 0);
     }
 
     @Override
-    public Integer add(Fruit fruit, Integer amount) {
-        Storage.storage.put(fruit, getBalance(fruit) + amount);
+    public Integer update(Fruit fruit, Integer amountToAdd) {
+        if (amountToAdd < 0 && Math.abs(amountToAdd) > getAll().get(fruit)) {
+            throw new RuntimeException("Storage don't have enough "
+                    + fruit.getName() + " for sale");
+        }
+        Storage.storage.put(fruit, get(fruit) + amountToAdd);
         return Storage.storage.get(fruit);
     }
 
     @Override
-    public Map<Fruit, Integer> getStorage() {
+    public Map<Fruit, Integer> getAll() {
         return Storage.storage;
     }
 }
-
