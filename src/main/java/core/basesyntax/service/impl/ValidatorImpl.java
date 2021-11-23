@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.Validator;
 
 public class ValidatorImpl implements Validator {
-    public static final int VALUES_QUANTITY = 3;
+    private static final int VALUES_QUANTITY = 3;
 
     @Override
     public boolean validate(String[] values) {

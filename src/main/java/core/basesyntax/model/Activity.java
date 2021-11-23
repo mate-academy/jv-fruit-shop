@@ -5,7 +5,7 @@ public class Activity {
     private Fruit fruit;
     private int quantity;
 
-    public Activity(Builder builder) {
+    private Activity(Builder builder) {
         this.activityType = builder.activityType;
         this.fruit = builder.fruit;
         this.quantity = builder.quantity;

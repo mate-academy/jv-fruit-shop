@@ -5,9 +5,14 @@ import core.basesyntax.service.FruitReporter;
 import java.util.Map;
 
 public class FruitReporterImpl implements FruitReporter {
+    private StringBuilder stringBuilder;
+
+    public FruitReporterImpl() {
+        stringBuilder = new StringBuilder();
+    }
+
     @Override
     public String report(Map<Fruit, Integer> fruitsStorage) {
-        StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity");
         for (Map.Entry<Fruit, Integer> fruitEntry : fruitsStorage.entrySet()) {
             stringBuilder.append(System.lineSeparator()
