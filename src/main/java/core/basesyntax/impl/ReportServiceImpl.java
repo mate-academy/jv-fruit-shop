@@ -11,12 +11,12 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport(List<Fruit> fruits) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(FRUIT).append(COMMA).append(QUANTITY).append(System.lineSeparator());
+        StringBuilder builder = new StringBuilder();
+        builder.append(FRUIT).append(COMMA).append(QUANTITY).append(System.lineSeparator());
         for (Fruit fruit : fruits) {
-            stringBuilder.append(fruit.getName()).append(COMMA)
+            builder.append(fruit.getName()).append(COMMA)
                     .append(fruit.getQuantity()).append(System.lineSeparator());
         }
-        return stringBuilder.toString().trim();
+        return builder.toString();
     }
 }
