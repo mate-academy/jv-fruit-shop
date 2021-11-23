@@ -27,11 +27,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
-        String spr = File.separator;
-        String pathPattern = "src" + spr + "main" + spr + "resources" + spr;
-        String validDataPath = pathPattern + "validData.csv";
+    private static final String spr = File.separator;
+    private static final String pathPattern = "src" + spr + "main" + spr + "resources" + spr;
+    private static final String validDataPath = pathPattern + "validData.csv";
 
+    public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
         Validator validator = new ValidatorImpl();
         StrategyService strategyService = new StrategyServiceImpl();
