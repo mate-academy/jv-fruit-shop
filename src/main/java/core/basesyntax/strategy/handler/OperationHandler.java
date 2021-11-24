@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.handler;
 
-import core.basesyntax.dto.Transaction;
+import core.basesyntax.dto.TransactionDto;
 
 public interface OperationHandler {
-    int apply(Transaction transaction);
+    boolean apply(TransactionDto transactionDto);
 }

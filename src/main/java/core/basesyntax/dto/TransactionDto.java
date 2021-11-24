@@ -1,11 +1,11 @@
 package core.basesyntax.dto;
 
-public class Transaction {
+public class TransactionDto {
     private String operation;
     private String name;
     private int quantity;
 
-    public Transaction(String operation, String name, int quantity) {
+    public TransactionDto(String operation, String name, int quantity) {
         this.operation = operation;
         this.name = name;
         this.quantity = quantity;
