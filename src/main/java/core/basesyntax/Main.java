@@ -28,9 +28,9 @@ public class Main {
         operationHandlerMap.put("r", new AddOperationHandler());
         operationHandlerMap.put("b", new BalanceOperationHandler());
         Reader reader = new CsvReaderImpl();
-        List<String> lines = reader.readFromFile(DATABASE_PATH);
+        List<String> line = reader.readFromFile(DATABASE_PATH);
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
-        List<TransactionDto> transactionDto = parser.parseLine(lines);
+        List<TransactionDto> transactionDto = parser.parseLine(line);
         for (TransactionDto transaction : transactionDto) {
             String operation = transaction.getOperation();
             OperationHandler handler = operationHandlerMap.get(operation);
