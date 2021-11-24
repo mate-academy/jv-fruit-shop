@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import shop.service.CsvWriter;
 import shop.service.ReportService;
+import shop.service.Writer;
 
-public class CsvWriterImpl implements CsvWriter {
+public class CsvWriterImpl implements Writer {
     private final ReportService reportService;
 
     public CsvWriterImpl() {

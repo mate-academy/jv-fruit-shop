@@ -2,6 +2,6 @@ package shop.service;
 
 import java.util.List;
 
-public interface CsvReader {
+public interface Reader {
     List<String> read(String fileName);
 }

@@ -1,5 +1,5 @@
 package shop.service;
 
-public interface CsvWriter {
+public interface Writer {
     boolean write(String fileName);
 }

@@ -1,5 +1,5 @@
 package shop.service.action;
 
-public interface ActionStrategyHandlers {
+public interface ActionStrategyHandler {
     ActionHandler get(String handler);
 }

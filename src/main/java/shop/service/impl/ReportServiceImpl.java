@@ -9,7 +9,6 @@ import shop.service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String FIRST_LINE = "fruit,quantity";
-    private static final String SEPARATOR = ",";
     private final FruitDao fruitDao;
 
     public ReportServiceImpl() {
@@ -21,7 +20,7 @@ public class ReportServiceImpl implements ReportService {
         List<String> listReport = new LinkedList<>();
         listReport.add(FIRST_LINE);
         for (Fruit fruit : listOfFruit) {
-            listReport.add(fruit.getName() + SEPARATOR + fruit.getCount());
+            listReport.add(fruit.getName() + "," + fruit.getCount());
         }
         return listReport;
     }

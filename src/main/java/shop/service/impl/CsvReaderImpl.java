@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
-import shop.service.CsvReader;
+import shop.service.Reader;
 
-public class CsvReaderImpl implements CsvReader {
+public class CsvReaderImpl implements Reader {
     @Override
     public List<String> read(String fileName) {
         File fromFile = new File(fileName);

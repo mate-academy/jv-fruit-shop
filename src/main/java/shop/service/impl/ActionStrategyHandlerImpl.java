@@ -2,12 +2,12 @@ package shop.service.impl;
 
 import java.util.HashMap;
 import shop.service.action.ActionHandler;
-import shop.service.action.ActionStrategyHandlers;
+import shop.service.action.ActionStrategyHandler;
 
-public class ActionStrategyHandlersImpl implements ActionStrategyHandlers {
+public class ActionStrategyHandlerImpl implements ActionStrategyHandler {
     private final HashMap<String, ActionHandler> actionStrategyHashMap;
 
-    public ActionStrategyHandlersImpl(HashMap<String, ActionHandler> actionStrategyHashMap) {
+    public ActionStrategyHandlerImpl(HashMap<String, ActionHandler> actionStrategyHashMap) {
         this.actionStrategyHashMap = actionStrategyHashMap;
     }
 

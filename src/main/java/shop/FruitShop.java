@@ -3,10 +3,10 @@ package shop;
 import java.util.HashMap;
 import java.util.List;
 import shop.model.ActionType;
-import shop.service.CsvReader;
-import shop.service.CsvWriter;
+import shop.service.Reader;
 import shop.service.UpdateDbService;
 import shop.service.Validator;
+import shop.service.Writer;
 import shop.service.action.ActionHandler;
 import shop.service.action.DecreaseActionHandler;
 import shop.service.action.IncreaseActionHandler;
@@ -27,14 +27,14 @@ public class FruitShop {
         actionMap.put(ActionType.PURCHASE.getAlias(), new DecreaseActionHandler());
 
         UpdateDbService updateDbService = new UpdateDbServiceImpl(actionMap);
-        CsvReader csvReader = new CsvReaderImpl();
-        CsvWriter csvWriter = new CsvWriterImpl();
+        Reader reader = new CsvReaderImpl();
+        Writer writer = new CsvWriterImpl();
         Validator validator = new ValidatorImpl();
 
-        List<String> parsedData = csvReader.read(INPUT_FILE_NAME);
+        List<String> parsedData = reader.read(INPUT_FILE_NAME);
         if (validator.valid(parsedData)) {
             updateDbService.updateStorage(parsedData);
-            csvWriter.write(OUTPUT_FILE_NAME);
+            writer.write(OUTPUT_FILE_NAME);
         }
     }
 
