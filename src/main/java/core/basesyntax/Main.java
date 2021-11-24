@@ -8,7 +8,7 @@ import core.basesyntax.service.ReportMaker;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.Validator;
 import core.basesyntax.service.Writer;
-import core.basesyntax.service.impl.FileWorker;
+import core.basesyntax.service.impl.FileServiceImpl;
 import core.basesyntax.service.impl.ReportMakerCsv;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.service.impl.ValidatorCsv;
@@ -27,21 +27,21 @@ public class Main {
     private static final String OUTPUT_FILEPATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        FruitStorageDao fruitDao = new FruitMapDao(Storage.map);
+        FruitStorageDao fruitDao = new FruitMapDao();
 
-        Map<String, OperationHandler> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(OperationType.BALANCE.getOperation(),
+        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(OperationType.BALANCE.getOperation(),
                 new AddOperation(fruitDao));
-        activityHandlerMap.put(OperationType.PURCHASE.getOperation(),
+        operationHandlerMap.put(OperationType.PURCHASE.getOperation(),
                 new RemovingOperation(fruitDao));
-        activityHandlerMap.put(OperationType.SUPPLY.getOperation(),
+        operationHandlerMap.put(OperationType.SUPPLY.getOperation(),
                 new AddOperation(fruitDao));
-        activityHandlerMap.put(OperationType.RETURN.getOperation(),
+        operationHandlerMap.put(OperationType.RETURN.getOperation(),
                 new AddOperation(fruitDao));
-        OperationStrategy strategy = new OperationStrategyImpl(activityHandlerMap);
+        OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
 
-        Reader fileReader = new FileWorker();
-        Writer fileWriter = new FileWorker();
+        Reader fileReader = new FileServiceImpl();
+        Writer fileWriter = new FileServiceImpl();
         ReportMaker reportMaker = new ReportMakerCsv();
         ShopService shopService = new ShopServiceImpl(strategy);
         List<String> inputData = fileReader.readFrom(INPUT_FILEPATH);
