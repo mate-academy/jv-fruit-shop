@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.operationstrategy.OperationStrategy;
 import core.basesyntax.service.DataValidator;
 
 public class DataValidatorImpl implements DataValidator {
@@ -18,11 +17,11 @@ public class DataValidatorImpl implements DataValidator {
         if (strings.length != NUMBER_OF_COLUMNS) {
             throw new RuntimeException("Line must contains 3 columns");
         }
-        if (strings[QUANTITY_INDEX].replaceAll("[0-9]","").length() != 0
+        if (!strings[QUANTITY_INDEX].matches("[0-9]+")
                 || Integer.parseInt(strings[QUANTITY_INDEX]) < 0) {
             throw new RuntimeException("File contains an invalid quantity!");
         }
-        if (!OperationStrategy.mapOperation.containsKey(strings[OPERATION_INDEX])) {
+        if (!strings[OPERATION_INDEX].matches("[bspr]")) {
             throw new RuntimeException("File contains an invalid operation!");
         }
         if (strings[FRUIT_INDEX].length() < 1) {

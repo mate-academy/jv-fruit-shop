@@ -8,11 +8,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class WriterToFileCsvImpl implements WriterToFile {
-    private static final String FIRST_LINE = "fruit,quantity";
-
     public void write(List<String> listReport, File file) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-            bufferedWriter.write(FIRST_LINE + System.lineSeparator());
             for (String string : listReport) {
                 bufferedWriter.write(string + System.lineSeparator());
             }

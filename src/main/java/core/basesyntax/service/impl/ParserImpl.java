@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.OperationFruitDto;
-import core.basesyntax.service.ParserValidData;
+import core.basesyntax.service.Parser;
 
-public class ParserValidDataImpl implements ParserValidData {
+public class ParserImpl implements Parser {
     @Override
     public OperationFruitDto parse(String stringFromFile) {
         String[] strings = stringFromFile.split(",");

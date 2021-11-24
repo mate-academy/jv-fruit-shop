@@ -1,21 +1,19 @@
 package core.basesyntax.operationstrategy;
 
-import core.basesyntax.model.OperationFruitDto;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OperationStrategy implements OperationService {
-    public static final Map<String, OperationService> mapOperation = new HashMap<>();
+public class OperationStrategy {
+    private final Map<String, OperationHandler> mapOperation = new HashMap<>();
 
-    static {
-        mapOperation.put("b", new AddOperationService());
-        mapOperation.put("s", new AddOperationService());
-        mapOperation.put("p", new ReduceOperationService());
-        mapOperation.put("r", new AddOperationService());
+    {
+        mapOperation.put("b", new AddOperationHandler());
+        mapOperation.put("s", new AddOperationHandler());
+        mapOperation.put("p", new ReduceOperationHandler());
+        mapOperation.put("r", new AddOperationHandler());
     }
 
-    @Override
-    public void apply(OperationFruitDto operationFruitDto) {
-        mapOperation.get(operationFruitDto.getOperation()).apply(operationFruitDto);
+    public OperationHandler get(String operation) {
+        return mapOperation.get(operation);
     }
 }

@@ -6,10 +6,13 @@ import core.basesyntax.service.ReportService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportServiceImp implements ReportService {
+public class ReportServiceImpl implements ReportService {
+    private static final String FIRST_LINE = "fruit,quantity";
+
     @Override
     public List<String> createReport() {
         List<String> listReport = new ArrayList<>();
+        listReport.add(FIRST_LINE);
         for (Fruit fruit : Storage.fruits) {
             listReport.add(fruit.getName() + "," + fruit.getQuantity());
         }

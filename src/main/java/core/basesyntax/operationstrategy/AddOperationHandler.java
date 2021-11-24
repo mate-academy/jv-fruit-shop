@@ -4,18 +4,18 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationFruitDto;
 
-public class ReduceOperationService implements OperationService {
+public class AddOperationHandler implements OperationHandler {
     @Override
     public void apply(OperationFruitDto operationFruitDto) {
-        String nameFruit = operationFruitDto.getNameFruit();
+        String nameFruit = operationFruitDto.getName();
         int quantity = operationFruitDto.getQuantity();
         for (Fruit fruit : Storage.fruits) {
             if (fruit.getName().equals(nameFruit)) {
-                if (fruit.getQuantity() - quantity < 0) {
-                    throw new RuntimeException("Not enough fruits to buy!");
-                }
-                fruit.setQuantity(fruit.getQuantity() - quantity);
+                fruit.setQuantity(fruit.getQuantity()
+                        + quantity);
+                return;
             }
         }
+        Storage.fruits.add(new Fruit(nameFruit, quantity));
     }
 }

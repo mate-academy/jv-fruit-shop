@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 public class OperationFruitDto {
     private String operation;
-    private String nameFruit;
+    private String name;
     private int quantity;
 
-    public OperationFruitDto(String operation, String nameFruit, int quantity) {
+    public OperationFruitDto(String operation, String name, int quantity) {
         this.operation = operation;
-        this.nameFruit = nameFruit;
+        this.name = name;
         this.quantity = quantity;
     }
 
@@ -15,8 +15,8 @@ public class OperationFruitDto {
         return operation;
     }
 
-    public String getNameFruit() {
-        return nameFruit;
+    public String getName() {
+        return name;
     }
 
     public int getQuantity() {

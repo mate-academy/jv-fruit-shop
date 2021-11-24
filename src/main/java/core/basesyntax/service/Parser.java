@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.OperationFruitDto;
 
-public interface ParserValidData {
+public interface Parser {
     OperationFruitDto parse(String string);
 }
