@@ -1,9 +1,9 @@
 package core.basesyntax;
 
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.ParserService;
+import core.basesyntax.service.CsvParserService;
 import core.basesyntax.service.ValidatorService;
-import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.CsvParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.service.impl.ValidatorServiceImpl;
@@ -22,7 +22,7 @@ public class Main {
     public static void main(String[] args) {
         List<String> dataFromFile = new ReaderServiceImpl().readFromFile(INPUT_FILE_PATH);
         ValidatorService<String> validatorService = new ValidatorServiceImpl();
-        ParserService<TransactionDto> parserService = new ParserServiceImpl(validatorService);
+        CsvParserService<TransactionDto> parserService = new CsvParserServiceImpl(validatorService);
 
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("b", new AddOperationHandler());
