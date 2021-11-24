@@ -3,10 +3,10 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.DataValidator;
 
 public class DataValidatorImpl implements DataValidator {
-    protected static final int OPERATION_INDEX = 0;
-    protected static final int FRUIT_INDEX = 1;
-    protected static final int QUANTITY_INDEX = 2;
-    protected static final int NUMBER_OF_COLUMNS = 3;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final int NUMBER_OF_COLUMNS = 3;
 
     @Override
     public boolean validate(String string) {
