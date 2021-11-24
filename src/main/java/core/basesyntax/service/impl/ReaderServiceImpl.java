@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -12,9 +11,7 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public List<String> readFromFile(String filePath) {
-        try {
-            File file = new File(filePath);
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             return bufferedReader.lines().collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read file", e);

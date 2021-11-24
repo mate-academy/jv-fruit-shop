@@ -21,10 +21,8 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public void writeReport(String report, String fileName) {
-        try {
-            FileWriter output = new FileWriter(fileName);
+        try (FileWriter output = new FileWriter(fileName)) {
             output.write(report);
-            output.close();
         } catch (Exception e) {
             throw new RuntimeException("Can't write report file!", e);
         }
