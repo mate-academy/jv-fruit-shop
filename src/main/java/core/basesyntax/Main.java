@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.Parser;
@@ -31,8 +32,8 @@ public class Main {
                 new OperationHandlerMapProvider(new FruitStorageDaoImpl()).getMap();
 
         new OperationStrategyImpl(handlerMap).calculateTransactions(transactions);
-
-        String report = new ReportServiceImpl(new FruitStorageDaoImpl()).formReport();
+        FruitStorageDao dao = new FruitStorageDaoImpl();
+        String report = new ReportServiceImpl().formReport(dao.entrySet());
         new WriterImpl().write(report, PATH_OUTPUT);
     }
 }

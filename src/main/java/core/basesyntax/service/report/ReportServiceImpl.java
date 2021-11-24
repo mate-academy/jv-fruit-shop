@@ -1,21 +1,16 @@
 package core.basesyntax.service.report;
 
-import core.basesyntax.dao.FruitStorageDao;
 import java.util.Map;
+import java.util.Set;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEAD_OF_REPORT = "fruit,quantity";
     private static final String COMMA = ",";
-    private final FruitStorageDao fruitStorageDao;
-
-    public ReportServiceImpl(FruitStorageDao fruitStorageDao) {
-        this.fruitStorageDao = fruitStorageDao;
-    }
 
     @Override
-    public String formReport() {
+    public String formReport(Set<Map.Entry<String, Integer>> entrySet) {
         StringBuilder reportBuilder = new StringBuilder(HEAD_OF_REPORT);
-        for (Map.Entry<String, Integer> entry : fruitStorageDao.entrySet()) {
+        for (Map.Entry<String, Integer> entry : entrySet) {
             reportBuilder.append(System.lineSeparator())
                     .append(entry.getKey())
                     .append(COMMA)
