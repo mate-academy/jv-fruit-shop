@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Validator;
 import core.basesyntax.model.OperationType;
+import core.basesyntax.service.Validator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
