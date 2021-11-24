@@ -30,8 +30,8 @@ public class ShopDataParserImpl implements ShopDataParser {
                     line.replaceAll("(.+,(\\d+)$)", "$2"));
             FruitShopService operationHandler = null;
             try {
-                operationHandler = fruitShopStrategy
-                        .chooseStrategy(type).getConstructor().newInstance();
+                operationHandler = fruitShopStrategy.chooseStrategy(type)
+                        .getConstructor(FruitShopDao.class).newInstance(fruitShopDao);
             } catch (ReflectiveOperationException e) {
                 throw new RuntimeException("Can't create FruitShopService implementation", e);
             }
