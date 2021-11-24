@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface ParserService<T> {
+public interface CsvParserService<T> {
     T parseLine(String line);
 }

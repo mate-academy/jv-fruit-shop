@@ -9,8 +9,12 @@ public class AddOperationHandler implements OperationHandler {
     public void apply(TransactionDto transactionDto) {
         Fruit fruit = new Fruit(transactionDto.getFruitName());
         int quantity = transactionDto.getQuantity();
-        int oldQuantity = Storage.storage.get(fruit);
-        quantity += oldQuantity;
-        Storage.storage.put(fruit, quantity);
+        if (Storage.storage.get(fruit) == null) {
+            Storage.storage.put(fruit, quantity);
+        } else {
+            int oldQuantity = Storage.storage.get(fruit);
+            quantity += oldQuantity;
+            Storage.storage.put(fruit, quantity);
+        }
     }
 }

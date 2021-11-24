@@ -1,16 +1,16 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.ParserService;
+import core.basesyntax.service.CsvParserService;
 import core.basesyntax.service.ValidatorService;
 
-public class ParserServiceImpl implements ParserService<TransactionDto> {
+public class CsvParserServiceImpl implements CsvParserService<TransactionDto> {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private final ValidatorService validatorService;
 
-    public ParserServiceImpl(ValidatorService validatorService) {
+    public CsvParserServiceImpl(ValidatorService validatorService) {
         this.validatorService = validatorService;
     }
 
