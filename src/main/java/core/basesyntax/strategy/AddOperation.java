@@ -12,7 +12,6 @@ public class AddOperation implements OperationHandler {
 
     @Override
     public void action(Fruit fruit, int quantity) {
-        isPositiveQuantity(quantity);
         int resultQuantity = fruitStorage.getQuantity(fruit) + quantity;
         fruitStorage.update(fruit, resultQuantity);
     }

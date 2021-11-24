@@ -12,7 +12,6 @@ public class RemovingOperation implements OperationHandler {
 
     @Override
     public void action(Fruit fruit, int quantity) {
-        isPositiveQuantity(quantity);
         int resultQuantity = fruitStorage.getQuantity(fruit) - quantity;
         if (resultQuantity < 0) {
             throw new RuntimeException("Can't remove " + fruit + "result quantity is negative");
