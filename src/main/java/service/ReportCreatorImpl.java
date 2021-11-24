@@ -7,10 +7,12 @@ import java.util.Map;
 import model.Fruit;
 
 public class ReportCreatorImpl implements ReportCreator {
+    private static final String TEXT_TITLE = "fruit,quantity";
+
     @Override
     public List<String> createReport() {
         List<String> report = new ArrayList<>();
-        report.add("fruit,quantity");
+        report.add(TEXT_TITLE);
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
             stringBuilder.append(entry.getKey().getName()).append(",").append(entry.getValue());

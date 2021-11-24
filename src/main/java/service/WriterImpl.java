@@ -12,7 +12,7 @@ public class WriterImpl implements Writer {
         try {
             Files.write(Path.of(filePath), report);
         } catch (IOException e) {
-            throw new RuntimeException("Data can not be written" + filePath, e);
+            throw new RuntimeException("Can't write to file" + filePath, e);
         }
     }
 }

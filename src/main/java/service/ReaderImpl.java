@@ -8,16 +8,16 @@ import java.util.List;
 
 public class ReaderImpl implements Reader {
     private String line = "";
-    private List<String> fruitData = new ArrayList<>();
 
     @Override
     public List<String> readFromFile(String filePath) {
+        List<String> fruitData = new ArrayList<>();
         try (BufferedReader readFromFile = new BufferedReader(new FileReader(filePath))) {
             while ((line = readFromFile.readLine()) != null) {
                 fruitData.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Unable to reach to the file", e);
+            throw new RuntimeException("Can`t read from file", e);
         }
         return fruitData;
     }
