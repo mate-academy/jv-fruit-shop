@@ -22,12 +22,4 @@ public class TransactionDto {
     public int getQuantity() {
         return quantity;
     }
-
-    @Override
-    public String toString() {
-        return "Transaction{"
-                + "operation='" + operation + '\''
-                + ", name='" + name + '\''
-                + ", quantity=" + quantity + '}';
-    }
 }

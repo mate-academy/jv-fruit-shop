@@ -2,19 +2,17 @@ package core.basesyntax;
 
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.Parser;
+import core.basesyntax.service.Writer;
+import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReaderImpl;
-import core.basesyntax.service.impl.ValidatorImpl;
-import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.WriterImpl;
-import core.basesyntax.service.operation.Handler;
 import core.basesyntax.service.operation.Add;
+import core.basesyntax.service.operation.Handler;
 import core.basesyntax.service.operation.Purchase;
 import core.basesyntax.service.strategy.ActionStrategy;
 import core.basesyntax.service.strategy.ActionStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,8 +31,8 @@ public class Main {
         handlers.put(PURCHASE_OPERATION, new Purchase());
         handlers.put(RETURN_OPERATION, new Add());
         handlers.put(SUPPLY_OPERATION, new Add());
-
-        Parser parser = new ParserImpl(new ValidatorImpl());
+        Parser parser = new ParserImpl();
+        Writer myWriter = new WriterImpl();
         List<String> list = new ReaderImpl().readFromFile(INPUT_FILE_DESTINATION);
         List<TransactionDto> transactionDtos = parser.parseLine(list);
         ActionStrategy actionStrategy = new ActionStrategyImpl(handlers);
@@ -42,10 +40,8 @@ public class Main {
             Handler handler = actionStrategy.get(result.getOperation());
             handler.apply(result);
         }
-
         FruitService fruitService = new FruitServiceImpl();
         String report = fruitService.createReport();
-        Writer myWriter = new WriterImpl();
         myWriter.writeToFile(report, OUTPUT_FILE_DESTINATION);
     }
 }

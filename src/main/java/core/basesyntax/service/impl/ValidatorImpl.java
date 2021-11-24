@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Validator;
-
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -9,7 +8,7 @@ public class ValidatorImpl implements Validator {
     private static final String LINE_MATCHER_REGEX = "[bprs],[a-z]*,[0-9]*";
 
     @Override
-    public void isValid(List<String> inputData) {
+    public boolean isValid(List<String> inputData) {
         if (inputData.isEmpty()) {
             throw new RuntimeException("File is empty, please try another one");
         }
@@ -18,5 +17,6 @@ public class ValidatorImpl implements Validator {
                 throw new RuntimeException("Invalid input data, try again");
             }
         }
+        return true;
     }
 }
