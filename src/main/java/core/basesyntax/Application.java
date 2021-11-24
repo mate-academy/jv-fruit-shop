@@ -5,8 +5,8 @@ import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.Reader;
-import core.basesyntax.service.impl.CreateReportServiceImpl;
-import core.basesyntax.service.impl.MyWriterImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
+import core.basesyntax.service.impl.WriterImpl;
 import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReaderImpl;
 import core.basesyntax.service.impl.ValidatorImpl;
@@ -47,7 +47,7 @@ public class Application {
             handler.apply(transaction);
         }
 
-        String report = new CreateReportServiceImpl().formReport();
-        new MyWriterImpl().writeToFile(OUTPUT_FILE_PATH, report);
+        String report = new ReportCreatorImpl().makeReport();
+        new WriterImpl().writeToFile(OUTPUT_FILE_PATH, report);
     }
 }

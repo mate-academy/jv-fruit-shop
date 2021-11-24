@@ -2,14 +2,14 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.CreateReportService;
+import core.basesyntax.service.ReportCreator;
 import java.util.Map;
 
-public class CreateReportServiceImpl implements CreateReportService {
+public class ReportCreatorImpl implements ReportCreator {
     private static final String TITLE = "fruit,quantity";
 
     @Override
-    public String formReport() {
+    public String makeReport() {
         StringBuilder report = new StringBuilder();
         report.append(TITLE).append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
