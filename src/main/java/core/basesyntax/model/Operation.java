@@ -22,11 +22,7 @@ public enum Operation {
     }
 
     public static boolean contains(String someOperation) {
-        for (Operation operation : Operation.values()) {
-            if (operation.value.equals(someOperation)) {
-                return true;
-            }
-        }
-        return false;
+        getKey(someOperation);
+        return true;
     }
 }
