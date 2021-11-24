@@ -11,7 +11,7 @@ public class Transaction {
         this.quantity = quality;
     }
 
-    public int getQuality() {
+    public int getQuantity() {
         return quantity;
     }
 

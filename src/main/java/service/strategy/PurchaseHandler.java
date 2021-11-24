@@ -15,7 +15,7 @@ public class PurchaseHandler implements OptionHandler {
     @Override
     public void apply(Transaction transaction) {
         Fruit fruit = new Fruit(transaction.getFruitName());
-        int quantity = transaction.getQuality();
+        int quantity = transaction.getQuantity();
         int oldQuantity = dao.getQuantity(fruit).orElse(DEFAULT_QUALITY);
         if (oldQuantity < quantity) {
             throw new RuntimeException("We don't have that much fruit");
