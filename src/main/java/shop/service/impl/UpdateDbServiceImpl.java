@@ -19,10 +19,9 @@ public class UpdateDbServiceImpl implements UpdateDbService {
 
     @Override
     public void updateStorage(List<String> listInput) {
-        for (String data : listInput) {
-            String[] dataArray = data.split(SEPARATOR);
-            ActionHandler action = actionStrategy.get(dataArray[ACTION_INDEX]);
-            action.update(dataArray[FRUIT_NAME_INDEX], Integer.parseInt(dataArray[COUNT_INDEX]));
-        }
+        listInput.stream().map(list -> list.split(SEPARATOR))
+                .forEach(line -> actionStrategy.get(line[ACTION_INDEX])
+                        .update(line[FRUIT_NAME_INDEX],
+                                Integer.parseInt(line[COUNT_INDEX])));
     }
 }
