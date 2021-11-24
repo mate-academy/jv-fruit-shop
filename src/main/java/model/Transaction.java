@@ -3,16 +3,16 @@ package model;
 public class Transaction {
     private String operation;
     private String fruitName;
-    private int quality;
+    private int quantity;
 
     public Transaction(String operation, String fruitName, int quality) {
         this.operation = operation;
         this.fruitName = fruitName;
-        this.quality = quality;
+        this.quantity = quality;
     }
 
     public int getQuality() {
-        return quality;
+        return quantity;
     }
 
     public String getFruitName() {
