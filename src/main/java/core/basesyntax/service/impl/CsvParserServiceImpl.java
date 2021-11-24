@@ -6,15 +6,16 @@ import core.basesyntax.service.ValidatorService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserServiceImpl implements ParserService<TransactionDto> {
+public class CsvParserServiceImpl implements ParserService<TransactionDto> {
     private static final String FIRST_LINE = "type,fruit,quantity";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final String COMMA_SEPARATOR = ",";
 
     private ValidatorService validator;
 
-    public ParserServiceImpl(ValidatorService validator) {
+    public CsvParserServiceImpl(ValidatorService validator) {
         this.validator = validator;
     }
 
@@ -26,7 +27,7 @@ public class ParserServiceImpl implements ParserService<TransactionDto> {
         List<TransactionDto> transactionDtos = new ArrayList<>();
         for (String line : list) {
             validator.validate(line);
-            String[] information = line.split(",");
+            String[] information = line.split(COMMA_SEPARATOR);
             transactionDtos.add(new TransactionDto(information[OPERATION_INDEX],
                     information[FRUIT_INDEX],
                     Integer.parseInt(information[QUANTITY_INDEX])));
