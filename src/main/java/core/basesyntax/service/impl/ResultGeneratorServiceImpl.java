@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitStorageDao;
-import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ResultGeneratorService;
 import java.util.List;
@@ -13,6 +12,7 @@ public class ResultGeneratorServiceImpl implements ResultGeneratorService {
     public ResultGeneratorServiceImpl(FruitStorageDao fruitStorageDao) {
         this.fruitStorageDao = fruitStorageDao;
     }
+
     @Override
     public String generateResult(List<String> data) {
         StringBuilder result = new StringBuilder("fruit,quantity");

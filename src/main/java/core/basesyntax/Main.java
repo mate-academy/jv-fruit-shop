@@ -45,7 +45,8 @@ public class Main {
             operationsHandler.handleOperation(splittedLine[INDEX_OF_FRUIT],
                     Integer.parseInt(splittedLine[INDEX_OF_QUANTITY]));
         }
-        ResultGeneratorService resultGeneratorService = new ResultGeneratorServiceImpl(fruitStorageDao);
+        ResultGeneratorService resultGeneratorService
+                = new ResultGeneratorServiceImpl(fruitStorageDao);
         String result = resultGeneratorService.generateResult(readData);
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(OUTPUT_PATH, result);
