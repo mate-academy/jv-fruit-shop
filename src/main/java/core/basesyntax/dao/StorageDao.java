@@ -8,4 +8,6 @@ public interface StorageDao {
     Optional<Integer> get(String name);
 
     void update(String name, Integer quantity);
+
+    boolean contains(String name);
 }

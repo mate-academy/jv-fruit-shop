@@ -16,6 +16,10 @@ public class AddOperationHandler implements OperationHandler {
     public void apply(TransactionDto transactionDto) {
         String fruitName = transactionDto.getFruitName();
         int quantity = transactionDto.getQuantity();
-        storageDao.update(fruitName, quantity);
+        if (storageDao.contains(fruitName)) {
+            storageDao.update(fruitName, quantity);
+        } else {
+            storageDao.add(fruitName, quantity);
+        }
     }
 }

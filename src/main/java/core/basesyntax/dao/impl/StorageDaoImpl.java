@@ -2,6 +2,7 @@ package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.db.Storage;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class StorageDaoImpl implements StorageDao {
@@ -19,7 +20,13 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void update(String name, Integer quantity) {
-        Integer oldQuantity = get(name).orElse(DEFAULT_VALUE);
+        Integer oldQuantity = get(name).orElseThrow(
+                () -> new NoSuchElementException("Fruit " + name + " doesn't exist"));
         add(name, oldQuantity + quantity);
+    }
+
+    @Override
+    public boolean contains(String name) {
+        return Storage.storage.containsKey(name);
     }
 }
