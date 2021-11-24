@@ -7,7 +7,6 @@ import java.util.List;
 import service.FileReaderService;
 
 public class FileReaderServiceImpl implements FileReaderService {
-
     @Override
     public List<String> read(String inputFile) {
         List<String> input;
