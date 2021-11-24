@@ -16,7 +16,7 @@ public class ParserImpl implements Parser<TransactionDto> {
     }
 
     @Override
-    public List<TransactionDto> parseLines(List<String> lines) {
+    public List<TransactionDto> parse(List<String> lines) {
         validator.validate(lines);
         List<TransactionDto> transactions = new ArrayList<>();
         IntStream.range(1, lines.size())

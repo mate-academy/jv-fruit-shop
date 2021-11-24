@@ -13,6 +13,9 @@ public class ValidatorImpl implements Validator {
         if (inputData.isEmpty()) {
             throw new ValidationException("input data is empty");
         }
+        if (!inputData.contains(INPUT_DATA_HEAD) && !inputData.contains(LINE_PATTERN)) {
+            throw new ValidationException("Invalid input data, try again");
+        }
         for (String data : inputData) {
             if (!Pattern.matches(LINE_PATTERN, data) && !data.equals(INPUT_DATA_HEAD)) {
                 throw new ValidationException("Invalid input data, try again");

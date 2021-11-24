@@ -25,7 +25,7 @@ public class Main {
 
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
 
-        List<TransactionDto> transactions = parser.parseLines(lines);
+        List<TransactionDto> transactions = parser.parse(lines);
 
         Map<String, OperationHandler> handlerMap =
                 new OperationHandlerMapProvider(new FruitStorageDaoImpl()).getMap();
