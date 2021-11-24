@@ -24,7 +24,7 @@ public class ValidatorImpl implements Validator {
         if (!parametersFromLine[FRUIT_NAME_INDEX].matches("[a-zA-Z]*")) {
             throw new RuntimeException("Invalid name of fruit");
         }
-        if (!parametersFromLine[2].matches("[0-9]*")) {
+        if (!parametersFromLine[QUANTITY_INDEX].matches("[0-9]*")) {
             throw new RuntimeException("Invalid quantity of fruit, should be numbers");
         }
         if (Integer.parseInt(parametersFromLine[QUANTITY_INDEX]) < 0) {

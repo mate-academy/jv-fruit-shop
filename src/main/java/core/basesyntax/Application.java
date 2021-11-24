@@ -1,11 +1,13 @@
 package core.basesyntax;
 
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.ParserFromFile;
+import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReaderFromFile;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterToFile;
-import core.basesyntax.service.impl.ParserFromFileImpl;
+import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReaderFromFileImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.ValidatorImpl;
 import core.basesyntax.service.impl.WriterToFileImpl;
 import core.basesyntax.stategy.AddOperationHandlerImpl;
@@ -21,25 +23,24 @@ public class Application {
     private static final String OUTPUT_PATH = "src/main/resources/result.csv";
 
     public static void main(String[] args) {
-        ReaderFromFile reader = new ReaderFromFileImpl();
-        ParserFromFile<TransactionDto> parserFromFile = new ParserFromFileImpl(new ValidatorImpl());
-        List<String> lines = reader.getData(INPUT_PATH);
-        List<TransactionDto> transactionDto = new ArrayList<>();
-        for (String line : lines) {
-            transactionDto.add(parserFromFile.parseLine(line));
-        }
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("b", new AddOperationHandlerImpl());
         operationHandlerMap.put("s", new AddOperationHandlerImpl());
         operationHandlerMap.put("r", new AddOperationHandlerImpl());
         operationHandlerMap.put("p", new PurchaseOperationHandlerImpl());
-        for (TransactionDto transaction : transactionDto) {
+        ReaderFromFile reader = new ReaderFromFileImpl();
+        Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
+        List<String> lines = reader.getData(INPUT_PATH);
+        List<TransactionDto> transactionDtos = new ArrayList<>();
+        for (int i = 1; i < lines.size(); i++) {
+            transactionDtos.add(parser.parseLine(lines.get(i)));
+            TransactionDto transaction = parser.parseLine(lines.get(i));
             String operation = transaction.getOperation();
             OperationHandler handler = operationHandlerMap.get(operation);
             handler.apply(transaction);
         }
         WriterToFile file = new WriterToFileImpl();
-        file.writeDataToFile(OUTPUT_PATH);
-
+        ReportService report = new ReportServiceImpl();
+        file.writeDataToFile(OUTPUT_PATH, report.getReport());
     }
 }

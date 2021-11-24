@@ -9,10 +9,7 @@ public class AddOperationHandlerImpl implements OperationHandler {
     public void apply(TransactionDto transactionDto) {
         Fruit fruit = new Fruit(transactionDto.getFruitName());
         int quantity = transactionDto.getQuantity();
-        Integer oldQuantity = Storage.getDataBase().get(fruit);
-        if (Storage.getDataBase().get(fruit) == null) {
-            oldQuantity = 0;
-        }
+        Integer oldQuantity = Storage.getDataBase().getOrDefault(fruit, 0);
         int newQuantity = quantity + oldQuantity;
         Storage.getDataBase().put(fruit, newQuantity);
     }

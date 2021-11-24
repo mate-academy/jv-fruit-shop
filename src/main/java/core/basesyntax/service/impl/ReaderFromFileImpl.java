@@ -14,7 +14,6 @@ public class ReaderFromFileImpl implements ReaderFromFile {
         List<String> listWithData = new ArrayList<>();
         File file = new File(pathToFile);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            reader.readLine();
             String line = reader.readLine();
             while (line != null) {
                 listWithData.add(line);
