@@ -10,6 +10,9 @@ public class CsvReaderImpl implements CsvReader {
     @Override
     public List<String> read(String fileName) {
         File fromFile = new File(fileName);
+        if (!fromFile.exists()) {
+            throw new RuntimeException("File doesn't exist");
+        }
         try {
             return Files.readAllLines(fromFile.toPath());
         } catch (IOException e) {

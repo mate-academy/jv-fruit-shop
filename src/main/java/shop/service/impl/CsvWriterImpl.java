@@ -20,7 +20,7 @@ public class CsvWriterImpl implements CsvWriter {
         try {
             Files.write(Paths.get(outputFile), report);
         } catch (IOException e) {
-            throw new RuntimeException("can`t write in file");
+            throw new RuntimeException("Can`t write in file");
         }
     }
 }
