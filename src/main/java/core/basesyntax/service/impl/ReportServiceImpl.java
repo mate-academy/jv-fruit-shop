@@ -15,7 +15,7 @@ public class ReportServiceImpl implements ReportService {
                 .append(Storage.getDataBase()
                         .entrySet()
                         .stream()
-                        .map(e -> "" + e.getKey().getFruitName()
+                        .map(e -> e.getKey().getFruitName()
                                 + "," + e.getValue() + System.lineSeparator())
                         .collect(Collectors.joining()))
                 .toString();

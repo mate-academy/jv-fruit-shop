@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class WriterToFileImpl implements WriterToFile {
     @Override
-    public void writeDataToFile(String pathToFile, String report) {
+    public void writeData(String pathToFile, String report) {
         try (BufferedWriter bufferedWriter =
                      new BufferedWriter(new FileWriter(pathToFile, true))) {
             bufferedWriter.write(report);

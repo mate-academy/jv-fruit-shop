@@ -13,7 +13,6 @@ import core.basesyntax.service.impl.WriterToFileImpl;
 import core.basesyntax.stategy.AddOperationHandlerImpl;
 import core.basesyntax.stategy.OperationHandler;
 import core.basesyntax.stategy.PurchaseOperationHandlerImpl;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +30,7 @@ public class Application {
         ReaderFromFile reader = new ReaderFromFileImpl();
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
         List<String> lines = reader.getData(INPUT_PATH);
-        List<TransactionDto> transactionDtos = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
-            transactionDtos.add(parser.parseLine(lines.get(i)));
             TransactionDto transaction = parser.parseLine(lines.get(i));
             String operation = transaction.getOperation();
             OperationHandler handler = operationHandlerMap.get(operation);
@@ -41,6 +38,6 @@ public class Application {
         }
         WriterToFile file = new WriterToFileImpl();
         ReportService report = new ReportServiceImpl();
-        file.writeDataToFile(OUTPUT_PATH, report.getReport());
+        file.writeData(OUTPUT_PATH, report.getReport());
     }
 }
