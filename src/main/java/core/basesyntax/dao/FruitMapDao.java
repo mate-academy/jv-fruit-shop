@@ -3,6 +3,8 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 
+import java.util.Map;
+
 public class FruitMapDao implements FruitStorageDao {
     private static final int INITIAL_QUANTITY = 0;
 
@@ -15,17 +17,21 @@ public class FruitMapDao implements FruitStorageDao {
     }
 
     @Override
-    public int getQuantity(Fruit fruit) {
-        checkFruit(fruit);
-        return Storage.map.get(fruit);
+    public Map<Fruit, Integer> getAll() {
+        return Storage.map;
     }
 
-    private boolean checkFruit(Fruit fruit) {
+    @Override
+    public int getQuantity(Fruit fruit) {
+        return isCreated(fruit) ? Storage.map.get(fruit) : INITIAL_QUANTITY;
+    }
+
+    private boolean isCreated(Fruit fruit) {
         if (Storage.map.containsKey(fruit)) {
-            return false;
+            return true;
         }
         Storage.map.put(fruit, INITIAL_QUANTITY);
-        return true;
+        return false;
     }
 }
 

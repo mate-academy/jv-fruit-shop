@@ -9,12 +9,12 @@ import java.util.List;
 
 public class FileServiceImpl implements Reader, Writer {
     @Override
-    public List<String> readFrom(String filePath) {
+    public List<String> read(String filePath) {
         List<String> dataFromFile;
         try {
             dataFromFile = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data readFrom file: " + filePath, e);
+            throw new RuntimeException("Can't read data read file: " + filePath, e);
         }
         return dataFromFile;
     }

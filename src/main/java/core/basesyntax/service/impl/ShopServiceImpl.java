@@ -23,7 +23,7 @@ public class ShopServiceImpl implements ShopService {
                 .forEach(data -> {
                     Fruit fruit = new Fruit(data[FRUIT_TYPE_INDEX]);
                     activityStrategy.get(data[ACTIVITY_TYPE_INDEX])
-                            .action(fruit, Integer.parseInt(data[QUANTITY_INDEX]));
+                            .apply(fruit, Integer.parseInt(data[QUANTITY_INDEX]));
                 });
     }
 }

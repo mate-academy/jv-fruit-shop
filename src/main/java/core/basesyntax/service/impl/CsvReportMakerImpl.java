@@ -4,7 +4,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportMaker;
 import java.util.Map;
 
-public class ReportMakerCsv implements ReportMaker {
+public class CsvReportMakerImpl implements ReportMaker {
     private static final String HEAD_OF_REPORT = "fruit,quantity";
 
     @Override
