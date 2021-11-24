@@ -1,10 +1,11 @@
-package service;
+package service.impl;
 
 import db.Storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import model.Fruit;
+import service.ReportCreator;
 
 public class ReportCreatorImpl implements ReportCreator {
     private static final String TEXT_TITLE = "fruit,quantity";

@@ -5,21 +5,21 @@ import java.util.List;
 import java.util.Map;
 import model.TransactionDto;
 import service.Parser;
-import service.ParserImpl;
 import service.Reader;
-import service.ReaderImpl;
-import service.ReportCreatorImpl;
-import service.ValidatorImpl;
 import service.Writer;
-import service.WriterImpl;
+import service.impl.CsvReaderImpl;
+import service.impl.ParserImpl;
+import service.impl.ReportCreatorImpl;
+import service.impl.ValidatorImpl;
+import service.impl.WriterImpl;
 import strategy.AddOperationHandler;
 import strategy.BalanceOperationHandler;
 import strategy.OperationHandler;
 import strategy.PurchaseOperationHandler;
 
 public class Main {
-    private static final String DataBasePath = "src/database.csv";
-    private static final String ReportFilePath = "src/report.csv";
+    private static final String DATABASE_PATH = "src/main/resources/database.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -27,8 +27,8 @@ public class Main {
         operationHandlerMap.put("p", new PurchaseOperationHandler());
         operationHandlerMap.put("r", new AddOperationHandler());
         operationHandlerMap.put("b", new BalanceOperationHandler());
-        Reader reader = new ReaderImpl();
-        List<String> lines = reader.readFromFile(DataBasePath);
+        Reader reader = new CsvReaderImpl();
+        List<String> lines = reader.readFromFile(DATABASE_PATH);
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
         List<TransactionDto> transactionDto = parser.parseLine(lines);
         for (TransactionDto transaction : transactionDto) {
@@ -38,6 +38,6 @@ public class Main {
         }
         List<String> report = new ReportCreatorImpl().createReport();
         Writer writer = new WriterImpl();
-        writer.writeToFile(report, ReportFilePath);
+        writer.writeToFile(report, REPORT_FILE_PATH);
     }
 }

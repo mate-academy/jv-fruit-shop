@@ -1,16 +1,22 @@
 package strategy;
 
 import db.Storage;
+import java.util.Map;
 import model.Fruit;
 import model.TransactionDto;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(TransactionDto transactionDto) {
-        Fruit fruit = new Fruit(transactionDto.getFruitName());
-        int oldQuantity = Storage.storage.get(fruit) == null ? 0 : Storage.storage.get(fruit);
+        Fruit fruitName = new Fruit(transactionDto.getFruitName());
         int quantity = transactionDto.getQuantity();
-        quantity -= oldQuantity;
-        Storage.storage.put(fruit, quantity);
+        for (Map.Entry<Fruit, Integer> fruit : Storage.storage.entrySet()) {
+            if (fruitName.equals(transactionDto.getFruitName())) {
+                if (fruit.getValue() - quantity < 0) {
+                    throw new RuntimeException("Not enough fruits in storage");
+                }
+                Storage.storage.put(fruitName, quantity);
+            }
+        }
     }
 }

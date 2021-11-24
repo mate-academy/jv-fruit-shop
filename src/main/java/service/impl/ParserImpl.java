@@ -1,9 +1,10 @@
-package service;
+package service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import model.TransactionDto;
+import service.Parser;
+import service.Validator;
 
 public class ParserImpl implements Parser<TransactionDto> {
     private Validator validator;
@@ -16,9 +17,9 @@ public class ParserImpl implements Parser<TransactionDto> {
     public List<TransactionDto> parseLine(List<String> list) {
         List<TransactionDto> transactionDtoList = new ArrayList<>();
         list.remove(0);
-        for (String line : list) {
-            validator.validator(Collections.singletonList(line));
-            String[] information = line.split(",");
+        for (String lines : list) {
+            validator.validate(lines);
+            String[] information = lines.split(",");
             transactionDtoList.add(new TransactionDto(information[0],
                     information[1],
                     Integer.parseInt(information[2])));
