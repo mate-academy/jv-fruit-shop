@@ -15,7 +15,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void handleOperation(String name, int quantity) {
         Fruit fruit = new Fruit(name);
         if (fruitStorageDao.contains(fruit)
-                && fruitStorageDao.getQuantity(fruit) - quantity > 0) {
+                && fruitStorageDao.getQuantity(fruit) - quantity >= 0) {
             fruitStorageDao.add(fruit, fruitStorageDao.getQuantity(fruit) - quantity);
         } else {
             throw new RuntimeException("Not enough fruits to buy that amount");

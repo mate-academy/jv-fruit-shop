@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ResultGeneratorService;
-import java.util.List;
 import java.util.Map;
 
 public class ResultGeneratorServiceImpl implements ResultGeneratorService {
@@ -14,13 +13,13 @@ public class ResultGeneratorServiceImpl implements ResultGeneratorService {
     }
 
     @Override
-    public String generateResult(List<String> data) {
+    public String generateResult() {
         StringBuilder result = new StringBuilder("fruit,quantity");
-        for (Map.Entry<Fruit, Integer> fruit : fruitStorageDao.getAll().entrySet()) {
+        for (Map.Entry<Fruit, Integer> entry : fruitStorageDao.getAll().entrySet()) {
             result.append(System.lineSeparator())
-                    .append(fruit.getKey().getName())
+                    .append(entry.getKey().getName())
                     .append(",")
-                    .append(fruit.getValue());
+                    .append(entry.getValue());
         }
         return result.append(System.lineSeparator()).toString();
     }

@@ -5,7 +5,6 @@ import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public class FruitStorageDaoImpl implements FruitStorageDao {
-
     @Override
     public boolean add(Fruit fruit, int quantity) {
         Storage.getFruitStorage().put(fruit, quantity);
@@ -14,7 +13,7 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public boolean contains(Fruit fruit) {
-        return Storage.getFruitStorage().containsKey(new Fruit((fruit.getName())));
+        return Storage.getFruitStorage().containsKey(fruit);
     }
 
     @Override

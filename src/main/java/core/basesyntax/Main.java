@@ -47,7 +47,7 @@ public class Main {
         }
         ResultGeneratorService resultGeneratorService
                 = new ResultGeneratorServiceImpl(fruitStorageDao);
-        String result = resultGeneratorService.generateResult(readData);
+        String result = resultGeneratorService.generateResult();
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(OUTPUT_PATH, result);
     }
