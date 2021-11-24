@@ -4,7 +4,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class ShopServiceImpl implements ShopService {
     private static final int ACTIVITY_TYPE_INDEX = 0;
@@ -18,12 +17,12 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void updateFruitsWarehouse(List<String> dataFruits) {
-        IntStream.range(1, dataFruits.size())
-                .mapToObj(i -> dataFruits.get(i).split(","))
+        dataFruits.stream()
+                .map(line -> line.split(","))
                 .forEach(data -> {
                     Fruit fruit = new Fruit(data[FRUIT_TYPE_INDEX]);
                     activityStrategy.get(data[ACTIVITY_TYPE_INDEX])
-                            .apply(fruit, Integer.parseInt(data[QUANTITY_INDEX]));
+                                .apply(fruit, Integer.parseInt(data[QUANTITY_INDEX]));
                 });
     }
 }

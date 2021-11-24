@@ -20,6 +20,7 @@ import core.basesyntax.strategy.RemoveOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
     private static final String INPUT_FILEPATH = "src/main/resources/input.csv";
@@ -45,8 +46,11 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(strategy);
         List<String> inputData = fileReader.read(INPUT_FILEPATH);
         Validator validator = new CsvValidatorImpl();
-        if (validator.isValidData(inputData)) {
-            shopService.updateFruitsWarehouse(inputData);
+        if (validator.isValid(inputData)) {
+            shopService.updateFruitsWarehouse(inputData.stream()
+                    .skip(1)
+                    .collect(Collectors.toList())
+            );
             String report = reportMaker.makeReport(fruitDao.getAll());
             fileWriter.write(report, OUTPUT_FILEPATH);
         }

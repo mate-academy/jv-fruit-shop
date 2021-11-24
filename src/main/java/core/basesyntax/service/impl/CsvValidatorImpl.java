@@ -18,7 +18,7 @@ public class CsvValidatorImpl implements Validator {
     }
 
     @Override
-    public boolean isValidData(List<String> inputData) {
+    public boolean isValid(List<String> inputData) {
         if (inputData.isEmpty() || !inputData.get(0).equals(INPUT_DATA_HEAD)) {
             throw new RuntimeException("Invalid input data");
         }
