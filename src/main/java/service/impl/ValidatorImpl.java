@@ -18,8 +18,12 @@ public class ValidatorImpl implements Validator {
         } catch (RuntimeException e) {
             throw new RuntimeException("We can't use number", e);
         }
-        if (quantity < 0 || split.length > 3) {
-            throw new RuntimeException("No valid line");
+        try {
+            if (quantity < 0 || split.length > 3) {
+                throw new RuntimeException();
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException("No valid line", e);
         }
         return true;
     }

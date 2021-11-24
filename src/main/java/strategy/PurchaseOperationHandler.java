@@ -12,7 +12,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         int oldQuantity = Storage.storage.get(fruit);
         int newQuality;
         try {
-        newQuality =  oldQuantity - quantity;
+            newQuality = oldQuantity - quantity;
         } catch (RuntimeException e) {
             throw new RuntimeException("Negative value", e);
         }
