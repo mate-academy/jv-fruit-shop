@@ -18,6 +18,7 @@ public class OperationStrategyImpl implements OperationStrategy {
         map.put("s", new PlusOperation());
         map.put("r", new PlusOperation());
     }
+
     @Override
     public OperationService getOperationService(ParseLine line) {
         return map.get(line.getOperation());

@@ -4,10 +4,11 @@ import java.util.List;
 import service.InputDataValidator;
 import service.Operation;
 
-public class InputDataValidatorImp implements InputDataValidator {
+public class InputDataValidatorImpl implements InputDataValidator {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+
     @Override
     public boolean validate(List<String> input) {
         if (input.isEmpty() || !input.get(0).equals("type,fruit,quantity")) {

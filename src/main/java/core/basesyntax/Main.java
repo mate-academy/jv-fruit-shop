@@ -9,7 +9,7 @@ import service.ReportService;
 import service.implement.FileReaderImpl;
 import service.implement.FileWriterImpl;
 import service.implement.FruitCounterImpl;
-import service.implement.LineParserImp;
+import service.implement.LineParserImpl;
 import service.implement.ReportServiceImpl;
 
 public class Main {
@@ -18,7 +18,7 @@ public class Main {
 
     public static void main(String[] args) {
         FileReader reader = new FileReaderImpl();
-        LineParser parser = new LineParserImp();
+        LineParser parser = new LineParserImpl();
         ReportService parse = new ReportServiceImpl();
         FruitCounter counter = new FruitCounterImpl();
         FileWriter writer = new FileWriterImpl();
