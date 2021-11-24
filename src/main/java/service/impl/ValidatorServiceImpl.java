@@ -8,14 +8,14 @@ public class ValidatorServiceImpl implements ValidatorService {
     private static final int INDEX_OF_QUANTITY = 2;
 
     @Override
-    public boolean isValidData(List<String> list) {
-        if (list.size() == 0) {
+    public boolean isValidData(List<String> inputData) {
+        if (inputData.size() == 0) {
             throw new RuntimeException("File is Empty");
         }
-        if (list.get(0).equals("type,fruit,quantity")) {
-            list.remove(0);
+        if (inputData.get(0).equals("type,fruit,quantity")) {
+            inputData.remove(0);
         }
-        for (String string : list) {
+        for (String string : inputData) {
             String[] strings = string.split(",");
             int quantity;
             try {

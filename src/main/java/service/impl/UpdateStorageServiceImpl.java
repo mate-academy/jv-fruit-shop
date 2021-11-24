@@ -2,6 +2,7 @@ package service.impl;
 
 import java.util.HashMap;
 import java.util.List;
+import model.Operation;
 import service.ParserService;
 import service.UpdateStorageService;
 import service.action.ActionStrategyHandler;
@@ -15,7 +16,8 @@ public class UpdateStorageServiceImpl implements UpdateStorageService {
     private final ActionStrategy actionStrategy;
     private final ParserService parserService;
 
-    public UpdateStorageServiceImpl(HashMap<String, ActionStrategyHandler> actionStrategyHashMap) {
+    public UpdateStorageServiceImpl(HashMap<Operation,
+            ActionStrategyHandler> actionStrategyHashMap) {
         parserService = new ParserServiceImpl();
         actionStrategy = new ActionStrategyImpl(actionStrategyHashMap);
     }

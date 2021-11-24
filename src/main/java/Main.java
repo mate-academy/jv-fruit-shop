@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.List;
+import model.Operation;
 import service.FileWriterService;
 import service.action.ActionStrategyHandler;
 import service.action.type.MinusQuantityHandler;
@@ -14,11 +15,11 @@ public class Main {
     private static final String OUTPUT_FILE_NAME = "src\\main\\resources\\output.csv";
 
     public static void main(String[] args) {
-        HashMap<String, ActionStrategyHandler> actionStrategyHashMap = new HashMap<>();
-        actionStrategyHashMap.put("b", new PlusQuantityHandler());
-        actionStrategyHashMap.put("s", new PlusQuantityHandler());
-        actionStrategyHashMap.put("r", new PlusQuantityHandler());
-        actionStrategyHashMap.put("p", new MinusQuantityHandler());
+        HashMap<Operation, ActionStrategyHandler> actionStrategyHashMap = new HashMap<>();
+        actionStrategyHashMap.put(Operation.B, new PlusQuantityHandler());
+        actionStrategyHashMap.put(Operation.S, new PlusQuantityHandler());
+        actionStrategyHashMap.put(Operation.R, new PlusQuantityHandler());
+        actionStrategyHashMap.put(Operation.P, new MinusQuantityHandler());
 
         final UpdateStorageServiceImpl dataProcess =
                 new UpdateStorageServiceImpl(actionStrategyHashMap);

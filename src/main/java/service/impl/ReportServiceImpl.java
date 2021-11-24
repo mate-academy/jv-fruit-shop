@@ -14,7 +14,7 @@ public class ReportServiceImpl implements ReportService {
         fruitDao = new FruitDaoImpl();
     }
 
-    public List<String> creatingReport() {
+    public List<String> createReport() {
         List<Fruit> listOfFruit = fruitDao.getAll();
         List<String> listReport = new ArrayList<>();
         listReport.add("fruit,quantity");

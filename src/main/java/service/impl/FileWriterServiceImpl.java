@@ -16,7 +16,7 @@ public class FileWriterServiceImpl implements FileWriterService {
 
     @Override
     public boolean write(String outputFile) {
-        List<String> report = reportService.creatingReport();
+        List<String> report = reportService.createReport();
         try {
             Files.write(Paths.get(outputFile), report);
         } catch (IOException e) {
