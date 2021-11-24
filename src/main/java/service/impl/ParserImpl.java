@@ -14,10 +14,10 @@ public class ParserImpl implements Parser<TransactionDto> {
     }
 
     @Override
-    public List<TransactionDto> parseLine(List<String> list) {
+    public List<TransactionDto> parseLines(List<String> lines) {
         List<TransactionDto> transactionDtoList = new ArrayList<>();
-        list.remove(0);
-        for (String line : list) {
+        lines.remove(0);
+        for (String line : lines) {
             validator.validate(line);
             String[] information = line.split(",");
             transactionDtoList.add(new TransactionDto(information[0],
