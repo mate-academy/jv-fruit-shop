@@ -22,15 +22,8 @@ public class FruitMapDao implements FruitStorageDao {
 
     @Override
     public int getQuantity(Fruit fruit) {
-        return isCreated(fruit) ? Storage.map.get(fruit) : INITIAL_QUANTITY;
-    }
-
-    private boolean isCreated(Fruit fruit) {
-        if (Storage.map.containsKey(fruit)) {
-            return true;
-        }
-        Storage.map.put(fruit, INITIAL_QUANTITY);
-        return false;
+        Storage.map.putIfAbsent(fruit, INITIAL_QUANTITY);
+        return Storage.map.get(fruit);
     }
 }
 
