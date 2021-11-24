@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import java.util.Set;
 
 public class DaoImpl implements Dao {
-
     @Override
     public Integer get(String product) {
         return Storage.supplies.get(product);

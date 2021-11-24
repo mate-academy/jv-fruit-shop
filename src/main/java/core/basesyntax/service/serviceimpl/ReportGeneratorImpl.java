@@ -1,14 +1,17 @@
 package core.basesyntax.service.serviceimpl;
 
 import core.basesyntax.dao.Dao;
-import core.basesyntax.dao.DaoImpl;
 import core.basesyntax.service.ReportGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private final Dao dao = new DaoImpl();
+    private final Dao dao;
+
+    public ReportGeneratorImpl(Dao dao) {
+        this.dao = dao;
+    }
 
     @Override
     public List<String> generate() {

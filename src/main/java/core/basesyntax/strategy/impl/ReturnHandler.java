@@ -1,11 +1,14 @@
-package core.basesyntax.model.strategy;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.Dao;
-import core.basesyntax.dao.DaoImpl;
-import core.basesyntax.model.OperationHandler;
+import core.basesyntax.strategy.OperationHandler;
 
 public class ReturnHandler implements OperationHandler {
-    private final Dao dao = new DaoImpl();
+    private final Dao dao;
+
+    public ReturnHandler(Dao dao) {
+        this.dao = dao;
+    }
 
     @Override
     public Integer apply(String fruitName, int amount) {
