@@ -3,8 +3,8 @@ package core.basesyntax.shop.strategy;
 import core.basesyntax.shop.service.Writer;
 import core.basesyntax.shop.service.impl.WriterToCsvFile;
 
-public class FileWriteStrategy {
-    public static Writer chooseWriteFileFormat(String filename) {
+public interface FileWriteStrategy {
+    static Writer chooseWriteFileFormat(String filename) {
         String extension = filename.replaceAll("(.+\\.(\\w+))",
                 "$2").toLowerCase();
         switch (extension) {

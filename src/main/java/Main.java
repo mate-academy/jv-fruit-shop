@@ -1,20 +1,26 @@
-import core.basesyntax.shop.service.ReportCreator;
+import core.basesyntax.shop.dao.FruitShopDaoImpl;
+import core.basesyntax.shop.service.Reader;
+import core.basesyntax.shop.service.ShopDataParser;
+import core.basesyntax.shop.service.Validator;
+import core.basesyntax.shop.service.Writer;
 import core.basesyntax.shop.service.impl.FruitShopServiceImpl;
-import core.basesyntax.shop.service.impl.ReportCreatorImpl;
 import core.basesyntax.shop.service.impl.ShopDataParserImpl;
 import core.basesyntax.shop.service.impl.ValidatorImpl;
+import core.basesyntax.shop.strategy.FileReadStrategy;
+import core.basesyntax.shop.strategy.FileWriteStrategy;
 
 public class Main {
     public static void main(String[] args) {
-        ReportCreator reportCreator = new ReportCreatorImpl(new ValidatorImpl(),
-                new ShopDataParserImpl(new FruitShopServiceImpl()));
-        reportCreator.createReport("correct.csv", "output.csv");
-        reportCreator.createReport("emptyLineBottom.csv", "output.csv");
-        reportCreator.createReport("corrupted.csv", "output.csv");
-        reportCreator.createReport("balanceLessThanReturn.csv", "output.csv");
-        reportCreator.createReport("purchaseMoreThanBalance.csv", "output.csv");
-        reportCreator.createReport("balance_2_times.csv", "output.csv");
-        reportCreator.createReport("invalid.csv", "output.csv");
-        reportCreator.createReport("correct.txt", "output.csv");
+        String fromFilename = "correct.csv";
+        String toFilename = "output.csv";
+        Reader reader = FileReadStrategy.chooseReadFileFormat(fromFilename);
+        Writer writer = FileWriteStrategy.chooseWriteFileFormat(toFilename);
+        Validator validator = new ValidatorImpl();
+        ShopDataParser shopDataParser = new ShopDataParserImpl(
+                new FruitShopServiceImpl(new FruitShopDaoImpl()));
+        String table = reader.read(fromFilename);
+        validator.validate(table);
+        shopDataParser.distribute(table);
+        writer.write(toFilename, shopDataParser.collect());
     }
 }

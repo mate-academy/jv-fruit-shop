@@ -2,7 +2,7 @@ package core.basesyntax.shop.model;
 
 import java.util.Objects;
 
-public class Fruit {
+public final class Fruit {
     private final String name;
 
     public Fruit(String name) {

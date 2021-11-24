@@ -1,7 +1,6 @@
 package core.basesyntax.shop.service.impl;
 
 import core.basesyntax.shop.dao.FruitShopDao;
-import core.basesyntax.shop.dao.FruitShopDaoImpl;
 import core.basesyntax.shop.dao.InsufficientGoodsException;
 import core.basesyntax.shop.model.Fruit;
 import core.basesyntax.shop.service.FruitShopService;
@@ -10,8 +9,8 @@ import java.util.Map;
 public class FruitShopServiceImpl implements FruitShopService {
     private FruitShopDao fruitShopDao;
 
-    public FruitShopServiceImpl() {
-        fruitShopDao = new FruitShopDaoImpl();
+    public FruitShopServiceImpl(FruitShopDao fruitShopDao) {
+        this.fruitShopDao = fruitShopDao;
     }
 
     @Override
@@ -40,6 +39,6 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public Map<Fruit, Integer> getMap() {
-        return fruitShopDao.returnMap();
+        return fruitShopDao.getAll();
     }
 }

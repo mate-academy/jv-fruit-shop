@@ -8,5 +8,5 @@ public interface FruitShopDao {
 
     void subtract(Fruit fruit, int quantity) throws InsufficientGoodsException;
 
-    Map<Fruit, Integer> returnMap();
+    Map<Fruit, Integer> getAll();
 }

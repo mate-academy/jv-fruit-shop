@@ -1,6 +1,5 @@
 package core.basesyntax.shop.service;
 
-import java.util.function.Predicate;
-
-public interface Validator extends Predicate<String> {
+public interface Validator {
+    boolean validate(String table);
 }
