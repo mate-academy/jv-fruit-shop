@@ -6,7 +6,6 @@ import core.basesyntax.service.ReportService;
 import java.util.Map;
 
 public class ReportServiceCsvImpl implements ReportService {
-
     @Override
     public String formReport() {
         StringBuilder stringBuilder = new StringBuilder();

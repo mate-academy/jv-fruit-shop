@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.Validator;
-import java.util.Locale;
 
 public class ParserImpl implements Parser {
     private static final int INDEX_OF_OPERATION = 0;
@@ -20,7 +19,7 @@ public class ParserImpl implements Parser {
         validator.validateLine(line);
         String[] values = line.split(",");
         String operation = values[INDEX_OF_OPERATION];
-        String fruitName = values[INDEX_OF_FRUIT_NAME].toLowerCase(Locale.ROOT);
+        String fruitName = values[INDEX_OF_FRUIT_NAME].toLowerCase();
         int amount = Integer.parseInt(values[INDEX_OF_AMOUNT]);
         return new TransactionDto(operation, fruitName, amount);
     }

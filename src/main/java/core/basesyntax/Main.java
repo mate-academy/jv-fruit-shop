@@ -46,7 +46,6 @@ public class Main {
         operationHandlerMap.put("r", new AddOperationHandler(fruitDao));
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        // getting OperationHandler from new interface
         for (TransactionDto transactionDto : transactions) {
             OperationHandler operationHandler = operationStrategy
                     .getOperationHandler(transactionDto.getOperation());
