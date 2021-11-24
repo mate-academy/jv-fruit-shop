@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.MyRider;
+import core.basesyntax.service.MyReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyRiderImpl implements MyRider {
+public class MyCsvReaderImpl implements MyReader {
     @Override
-    public ArrayList<String> readFromFile(String filePath) {
+    public List<String> readFromFile(String filePath) {
         List<String> lines = new ArrayList<>();
         File file = new File(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -20,9 +20,9 @@ public class MyRiderImpl implements MyRider {
                 value = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't read from file", e);
         }
         boolean remove = lines.remove(lines.get(0));
-        return (ArrayList<String>) lines;
+        return lines;
     }
 }

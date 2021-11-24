@@ -1,17 +1,19 @@
 package core.basesyntax.model;
 
+import core.basesyntax.strategy.OperationType;
+
 public class TransactionDto {
-    private String operation;
+    private OperationType operation;
     private String fruitName;
     private int quantity;
 
-    public TransactionDto(String operation, String fruitName, int quantiti) {
+    public TransactionDto(OperationType operation, String fruitName, int quantiti) {
         this.operation = operation;
         this.fruitName = fruitName;
         this.quantity = quantiti;
     }
 
-    public String getOperation() {
+    public OperationType getOperation() {
         return operation;
     }
 

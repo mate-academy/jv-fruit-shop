@@ -12,7 +12,7 @@ public class ReportImpl implements Report {
         result.append("fruit,quantity\n");
         for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
             result.append(entry.getKey().getFruitName()).append(",")
-                    .append(entry.getValue().toString()).append("\n");
+                    .append(entry.getValue().toString()).append(System.lineSeparator());
         }
         return result.toString();
     }
