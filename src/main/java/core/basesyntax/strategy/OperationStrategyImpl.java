@@ -13,7 +13,7 @@ public class OperationStrategyImpl implements OperationStrategy<TransactionDto> 
     }
 
     @Override
-    public void get(List<TransactionDto> transactions) {
+    public void calculateTransactions(List<TransactionDto> transactions) {
         for (TransactionDto transaction : transactions) {
             String operation = transaction.getOperation();
             OperationHandler handler = operationHandlerMap.get(operation);

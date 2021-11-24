@@ -12,7 +12,7 @@ public class ReturnHandler implements OperationHandler {
 
     @Override
     public void apply(String fruitName, int quantity) {
-        if (!fruitStorageDao.get(fruitName)) {
+        if (!fruitStorageDao.containsKey(fruitName)) {
             throw new OperationException("Unavailable fruit cannot be returned");
         }
         fruitStorageDao.update(fruitName, quantity);

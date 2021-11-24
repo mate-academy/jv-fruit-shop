@@ -1,7 +1,6 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitStorageDao;
-import core.basesyntax.db.Storage;
 import core.basesyntax.exception.OperationException;
 
 public class PurchaseHandler implements OperationHandler {
@@ -13,7 +12,7 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void apply(String fruitName, int quantity) {
-        if (Storage.fruitStorage.get(fruitName) - quantity < 0) {
+        if (fruitStorageDao.getValue(fruitName) - quantity < 0) {
             throw new OperationException("You can't purchase more products than are available");
         }
         fruitStorageDao.update(fruitName, -quantity);

@@ -9,7 +9,7 @@ import core.basesyntax.service.file.input.Reader;
 import core.basesyntax.service.file.input.ReaderImpl;
 import core.basesyntax.service.file.output.WriterImpl;
 import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.service.operation.OperationHandlerMap;
+import core.basesyntax.service.operation.OperationHandlerMapProvider;
 import core.basesyntax.service.report.ReportServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
@@ -25,14 +25,14 @@ public class Main {
 
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
 
-        List<TransactionDto> transactions = parser.parseLine(lines);
+        List<TransactionDto> transactions = parser.parseLines(lines);
 
         Map<String, OperationHandler> handlerMap =
-                new OperationHandlerMap(new FruitStorageDaoImpl()).map();
+                new OperationHandlerMapProvider(new FruitStorageDaoImpl()).getMap();
 
-        new OperationStrategyImpl(handlerMap).get(transactions);
+        new OperationStrategyImpl(handlerMap).calculateTransactions(transactions);
 
-        String report = new ReportServiceImpl().formReport();
+        String report = new ReportServiceImpl(new FruitStorageDaoImpl()).formReport();
         new WriterImpl().write(report, PATH_OUTPUT);
     }
 }
