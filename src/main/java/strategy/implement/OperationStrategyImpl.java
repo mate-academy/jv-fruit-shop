@@ -4,8 +4,8 @@ import core.basesyntax.model.ParseLine;
 import java.util.HashMap;
 import java.util.Map;
 import service.OperationService;
-import service.operationimpl.MinusOperation;
 import service.operationimpl.CreateOperation;
+import service.operationimpl.MinusOperation;
 import service.operationimpl.PlusOperation;
 import strategy.OperationStrategy;
 
