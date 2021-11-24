@@ -1,8 +1,7 @@
 package core.basesyntax.shop.strategy;
 
-import java.lang.reflect.Method;
+import core.basesyntax.shop.service.FruitShopService;
 
 public interface FruitShopStrategy {
-
-    public Method chooseStrategy(String type) throws NoSuchMethodException;
+    Class<? extends FruitShopService> chooseStrategy(String type);
 }

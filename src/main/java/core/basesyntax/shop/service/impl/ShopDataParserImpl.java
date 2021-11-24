@@ -2,20 +2,19 @@ package core.basesyntax.shop.service.impl;
 
 import static core.basesyntax.shop.service.Operations.operationsString;
 
+import core.basesyntax.shop.dao.FruitShopDao;
 import core.basesyntax.shop.model.Fruit;
 import core.basesyntax.shop.service.FruitShopService;
 import core.basesyntax.shop.service.ShopDataParser;
 import core.basesyntax.shop.strategy.FruitShopStrategy;
-import core.basesyntax.shop.strategy.FruitShopStrategyImpl;
-import java.util.Map;
 
 public class ShopDataParserImpl implements ShopDataParser {
     private FruitShopStrategy fruitShopStrategy;
-    private FruitShopService fruitShopService;
+    private FruitShopDao fruitShopDao;
 
-    public ShopDataParserImpl(FruitShopService fruitShopService) {
-        this.fruitShopService = fruitShopService;
-        this.fruitShopStrategy = new FruitShopStrategyImpl(fruitShopService);
+    public ShopDataParserImpl(FruitShopStrategy fruitShopStrategy, FruitShopDao fruitShopDao) {
+        this.fruitShopStrategy = fruitShopStrategy;
+        this.fruitShopDao = fruitShopDao;
     }
 
     @Override
@@ -29,26 +28,15 @@ public class ShopDataParserImpl implements ShopDataParser {
                     + operationsString() + "],(\\w+),\\d+)", "$2");
             int quantity = Integer.parseInt(
                     line.replaceAll("(.+,(\\d+)$)", "$2"));
+            FruitShopService operationHandler = null;
             try {
-                fruitShopStrategy.chooseStrategy(type).invoke(fruitShopService,
-                        new Fruit(name), quantity);
+                operationHandler = fruitShopStrategy
+                        .chooseStrategy(type).getConstructor().newInstance();
             } catch (ReflectiveOperationException e) {
-                throw new RuntimeException("Can't return appropriate method", e);
+                throw new RuntimeException("Can't create FruitShopService implementation", e);
             }
+            operationHandler.apply(new Fruit(name), quantity);
         }
         return true;
-    }
-
-    @Override
-    public String collect() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("fruit,quantity");
-        for (Map.Entry<Fruit, Integer> entry : fruitShopService.getMap().entrySet()) {
-            stringBuilder.append(System.lineSeparator())
-                    .append(entry.getKey().getName())
-                    .append(",")
-                    .append(entry.getValue());
-        }
-        return stringBuilder.toString();
     }
 }
