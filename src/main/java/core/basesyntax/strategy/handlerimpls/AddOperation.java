@@ -6,7 +6,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.handler.OperationHandler;
 
 public class AddOperation implements OperationHandler {
-
     @Override
     public boolean apply(TransactionDto transactionDto) {
         Fruit fruit = new Fruit(transactionDto.getName());
