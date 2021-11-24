@@ -18,8 +18,7 @@ public class ParserImpl implements Parser<TransactionDto> {
     public TransactionDto parseLine(String line) {
         validator.validate(line);
         String[] dataFromLine = line.split(",");
-        String type = dataFromLine[OPERATION_INDEX].replaceAll(" ", "");
-        return new TransactionDto(type,
+        return new TransactionDto(dataFromLine[OPERATION_INDEX],
                 dataFromLine[FRUIT_NAME_INDEX], Integer.parseInt(dataFromLine[QUANTITY_INDEX]));
     }
 }

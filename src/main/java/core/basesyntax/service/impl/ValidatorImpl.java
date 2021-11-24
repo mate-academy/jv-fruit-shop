@@ -11,7 +11,7 @@ public class ValidatorImpl implements Validator {
     @Override
     public boolean validate(String line) {
         String[] parametersFromLine = line.split(",");
-        String type = parametersFromLine[OPERATION_INDEX].replaceAll(" ", "");
+        String type = parametersFromLine[OPERATION_INDEX];
         if (parametersFromLine.length != LENGTH_OF_DATA_ARRAY) {
             throw new RuntimeException("Invalid date");
         }
