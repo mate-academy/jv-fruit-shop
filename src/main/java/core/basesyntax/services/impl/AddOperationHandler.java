@@ -15,11 +15,11 @@ public class AddOperationHandler implements OperationHandler {
     @Override
     public void apply(TransactionDto transactionDto) {
         String fruitName = transactionDto.getFruitName();
-        int quantity = transactionDto.getQuantity();
+        int quantityToAdd = transactionDto.getQuantity();
         if (storageDao.contains(fruitName)) {
-            storageDao.update(fruitName, quantity);
+            storageDao.update(fruitName, quantityToAdd);
         } else {
-            storageDao.add(fruitName, quantity);
+            storageDao.add(fruitName, quantityToAdd);
         }
     }
 }
