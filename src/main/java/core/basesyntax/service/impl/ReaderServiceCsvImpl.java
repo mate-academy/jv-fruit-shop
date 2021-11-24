@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReaderServiceImpl implements ReaderService {
+public class ReaderServiceCsvImpl implements ReaderService {
     @Override
     public List<String> readFromFile(String filePath) {
         List<String> readDate = new ArrayList<>();

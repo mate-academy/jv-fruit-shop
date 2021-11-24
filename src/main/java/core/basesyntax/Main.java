@@ -11,7 +11,7 @@ import core.basesyntax.service.Validator;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ParserImpl;
-import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceCsvImpl;
 import core.basesyntax.service.impl.ReportServiceCsvImpl;
 import core.basesyntax.service.impl.ValidatorCsvImpl;
 import core.basesyntax.service.impl.WriterServiceCsvImpl;
@@ -29,7 +29,7 @@ public class Main {
     private static final String OUTPUT_FILE = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        ReaderService readerService = new ReaderServiceImpl();
+        ReaderService readerService = new ReaderServiceCsvImpl();
         List<String> readLines = readerService.readFromFile(INPUT_FILE);
         Validator validator = new ValidatorCsvImpl();
         Parser parser = new ParserImpl(validator);
