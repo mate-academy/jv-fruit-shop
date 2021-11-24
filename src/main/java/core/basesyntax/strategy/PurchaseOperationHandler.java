@@ -7,7 +7,7 @@ import core.basesyntax.model.TransactionDto;
 public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
-    public void apply( TransactionDto transactionDto ) {
+    public void apply(TransactionDto transactionDto) {
         Fruit fruit = new Fruit(transactionDto.getFruit());
         if (Storage.fruitStorage.get(fruit) == null) {
             throw new RuntimeException("Fruit is absent, you cannot make a purchase!");
