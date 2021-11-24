@@ -18,8 +18,8 @@ import strategy.OperationHandler;
 import strategy.PurchaseOperationHandler;
 
 public class Main {
-    private static final String INPUT_PATH = "src/main/java/resources/inputFile.csv";
-    private static final String OUTPUT_PATH = "src/main/java/resources/outputFile.csv";
+    private static final String INPUT_PATH = "src/main/resources/inputFile.csv";
+    private static final String OUTPUT_PATH = "src/main/resources/outputFile.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -32,7 +32,7 @@ public class Main {
 
         MyParser<TransactionDto> myParser = new MyParserImpl(new ValidatorImpl());
 
-        List<TransactionDto> transactionDto = myParser.parseLine(lines);
+        List<TransactionDto> transactionDto = myParser.parseLines(lines);
 
         for (TransactionDto transaction : transactionDto) {
             String operation = transaction.getOperation();
