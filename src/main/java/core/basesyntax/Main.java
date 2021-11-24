@@ -16,7 +16,7 @@ import core.basesyntax.service.operationhandler.OperationHandler;
 import core.basesyntax.service.operationhandler.impl.AddOperation;
 import core.basesyntax.service.operationhandler.impl.SubtractOperation;
 import core.basesyntax.service.parser.ParserService;
-import core.basesyntax.service.parser.impl.ParserServiceImpl;
+import core.basesyntax.service.parser.impl.CsvParserService;
 import core.basesyntax.service.validator.Validator;
 import core.basesyntax.service.validator.impl.ValidatorImpl;
 import core.basesyntax.strategy.OperationStrategy;
@@ -42,7 +42,7 @@ public class Main {
         TransactionService transactionService = new TransactionServiceImpl(operationStrategy);
         ReaderService reader = new ReaderServiceImpl();
         Validator validator = new ValidatorImpl();
-        ParserService parser = new ParserServiceImpl(validator);
+        ParserService parser = new CsvParserService(validator);
         ReportService reporter = new ReportServiceImpl(storageDao);
         WriterService writer = new WriterServiceImpl();
         List<String> dataFromFile = reader.readFile(DEFAULT_INPUT_PATH);
