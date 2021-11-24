@@ -25,10 +25,9 @@ public class ParseLine {
 
     @Override
     public String toString() {
-        return "ParseLine{" +
-                "operation='" + operation + '\'' +
-                ", fruitName='" + fruitName + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "ParseLine{"
+                + "operation='" + operation + '\''
+                + ", fruitName='" + fruitName + '\''
+                + ", quantity=" + quantity + '}';
     }
 }

@@ -1,11 +1,11 @@
 package service.implement;
 
 import core.basesyntax.model.ParseLine;
+import java.util.List;
 import service.FruitCounter;
 
-import java.util.List;
-
 public class FruitCounterImpl implements FruitCounter {
+
     @Override
     public boolean fruitCounter(List<ParseLine> list) {
         for (ParseLine line: list) {

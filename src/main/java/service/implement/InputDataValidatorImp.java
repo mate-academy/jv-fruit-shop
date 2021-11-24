@@ -1,9 +1,8 @@
 package service.implement;
 
+import java.util.List;
 import service.InputDataValidator;
 import service.Operation;
-
-import java.util.List;
 
 public class InputDataValidatorImp implements InputDataValidator {
     private static final int OPERATION_INDEX = 0;
@@ -18,16 +17,16 @@ public class InputDataValidatorImp implements InputDataValidator {
         input.remove(0);
         int stringNumber = 2;
         for (String string: input) {
-          String[] values = string.split(",");
-          if (values.length != 3){
-              throw new RuntimeException("invalid data at line № " + stringNumber);
-          }
-          if (!Operation.contains(values[OPERATION_INDEX])){
-            throw new RuntimeException("invalid operation at line №" + stringNumber);
-          }
-          if (values[FRUIT_INDEX].length() <= 0 || !values[FRUIT_INDEX].matches("[a-zA-Z]+")){
-            throw new RuntimeException("invalid fruit name at line № " + stringNumber);
-          }
+            String[] values = string.split(",");
+            if (values.length != 3) {
+                throw new RuntimeException("invalid data at line № " + stringNumber);
+            }
+            if (!Operation.contains(values[OPERATION_INDEX])) {
+                throw new RuntimeException("invalid operation at line №" + stringNumber);
+            }
+            if (values[FRUIT_INDEX].length() <= 0 || !values[FRUIT_INDEX].matches("[a-zA-Z]+")) {
+                throw new RuntimeException("invalid fruit name at line № " + stringNumber);
+            }
             try {
                 int quantity = Integer.parseInt(values[QUANTITY_INDEX]);
             } catch (RuntimeException e) {
@@ -36,6 +35,5 @@ public class InputDataValidatorImp implements InputDataValidator {
             stringNumber++;
         }
         return true;
-
     }
 }

@@ -1,11 +1,8 @@
 package service.implement;
 
 import core.basesyntax.model.ParseLine;
-import service.InputDataValidator;
-import service.LineParser;
-
-import javax.xml.validation.Validator;
 import java.util.List;
+import service.LineParser;
 
 public class LineParserImp implements LineParser {
 

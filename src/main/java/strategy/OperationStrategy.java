@@ -1,7 +1,7 @@
-package Strategy;
+package strategy;
 
-import service.OperationService;
 import core.basesyntax.model.ParseLine;
+import service.OperationService;
 
 public interface OperationStrategy {
     public OperationService getOperationService(ParseLine line);

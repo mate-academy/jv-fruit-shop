@@ -12,15 +12,6 @@ public enum Operation {
         this.value = value;
     }
 
-    public static Operation getKey(String value) {
-        for (Operation operation : Operation.values()) {
-            if (operation.value.equals(value)) {
-                return operation;
-            }
-        }
-        throw new RuntimeException("Operation not found");
-    }
-
     public static boolean contains(String value) {
         for (Operation operation : Operation.values()) {
             if (operation.value.equals(value)) {

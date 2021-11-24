@@ -1,10 +1,9 @@
 package service;
 
-import Strategy.OperationStrategy;
-import Strategy.implement.OperationStrategyImpl;
 import core.basesyntax.model.ParseLine;
-
 import java.util.List;
+import strategy.OperationStrategy;
+import strategy.implement.OperationStrategyImpl;
 
 public interface FruitCounter {
     OperationStrategy strategy = new OperationStrategyImpl();

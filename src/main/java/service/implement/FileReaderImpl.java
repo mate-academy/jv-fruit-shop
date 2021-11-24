@@ -1,13 +1,12 @@
 package service.implement;
 
-import service.FileReader;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import service.FileReader;
 
-public class FileReaderImplement implements FileReader {
+public class FileReaderImpl implements FileReader {
     private List<String> input;
 
     @Override
