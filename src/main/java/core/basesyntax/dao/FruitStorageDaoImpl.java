@@ -26,7 +26,7 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
     }
 
     @Override
-    public Set<Map.Entry<String, Integer>> entrySet() {
+    public Set<Map.Entry<String, Integer>> getAll() {
         return Storage.fruitStorage.entrySet();
     }
 }

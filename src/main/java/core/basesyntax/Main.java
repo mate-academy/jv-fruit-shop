@@ -21,6 +21,7 @@ public class Main {
     public static final String PATH_OUTPUT = "src/main/resources/report_output.csv";
 
     public static void main(String[] args) {
+        FruitStorageDao dao = new FruitStorageDaoImpl();
         Reader reader = new ReaderImpl();
         List<String> lines = reader.read(PATH_INPUT);
 
@@ -29,11 +30,10 @@ public class Main {
         List<TransactionDto> transactions = parser.parse(lines);
 
         Map<String, OperationHandler> handlerMap =
-                new OperationHandlerMapProvider(new FruitStorageDaoImpl()).getMap();
+                new OperationHandlerMapProvider(dao).getMap();
 
         new OperationStrategyImpl(handlerMap).calculateTransactions(transactions);
-        FruitStorageDao dao = new FruitStorageDaoImpl();
-        String report = new ReportServiceImpl().formReport(dao.entrySet());
+        String report = new ReportServiceImpl().formReport(dao.getAll());
         new WriterImpl().write(report, PATH_OUTPUT);
     }
 }

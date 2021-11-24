@@ -12,5 +12,5 @@ public interface FruitStorageDao {
 
     void update(String name, int quantity);
 
-    Set<Map.Entry<String, Integer>> entrySet();
+    Set<Map.Entry<String, Integer>> getAll();
 }
