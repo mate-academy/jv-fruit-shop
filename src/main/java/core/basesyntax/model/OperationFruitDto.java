@@ -1,20 +1,18 @@
 package core.basesyntax.model;
 
-import core.basesyntax.operationstrategy.OperationService;
-
 public class OperationFruitDto {
-    private OperationService operationService;
+    private String operation;
     private String nameFruit;
     private int quantity;
 
-    public OperationFruitDto(OperationService operationService, String nameFruit, int quantity) {
-        this.operationService = operationService;
+    public OperationFruitDto(String operation, String nameFruit, int quantity) {
+        this.operation = operation;
         this.nameFruit = nameFruit;
         this.quantity = quantity;
     }
 
-    public OperationService getOperationService() {
-        return operationService;
+    public String getOperation() {
+        return operation;
     }
 
     public String getNameFruit() {

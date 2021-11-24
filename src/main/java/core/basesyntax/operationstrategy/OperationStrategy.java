@@ -5,17 +5,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategy implements OperationService {
-    public static final Map<String, OperationService> MAP_OPERATION = new HashMap<>();
+    public static final Map<String, OperationService> mapOperation = new HashMap<>();
 
     static {
-        MAP_OPERATION.put("b", new AddOperationService());
-        MAP_OPERATION.put("s", new AddOperationService());
-        MAP_OPERATION.put("p", new ReduceOperationService());
-        MAP_OPERATION.put("r", new AddOperationService());
+        mapOperation.put("b", new AddOperationService());
+        mapOperation.put("s", new AddOperationService());
+        mapOperation.put("p", new ReduceOperationService());
+        mapOperation.put("r", new AddOperationService());
     }
 
     @Override
     public void apply(OperationFruitDto operationFruitDto) {
-        operationFruitDto.getOperationService().apply(operationFruitDto);
+        mapOperation.get(operationFruitDto.getOperation()).apply(operationFruitDto);
     }
 }

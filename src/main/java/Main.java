@@ -1,50 +1,46 @@
 import core.basesyntax.model.OperationFruitDto;
 import core.basesyntax.operationstrategy.OperationService;
 import core.basesyntax.operationstrategy.OperationStrategy;
-import core.basesyntax.service.CheckDataValidation;
-import core.basesyntax.service.ParseValidData;
-import core.basesyntax.service.ReadDataFromFile;
-import core.basesyntax.service.WriteDataToFile;
-import core.basesyntax.service.impl.CheckDataValidationImpl;
-import core.basesyntax.service.impl.CreateReportImp;
-import core.basesyntax.service.impl.ParseValidDataImpl;
-import core.basesyntax.service.impl.ReadDataFromFileCsvImpl;
-import core.basesyntax.service.impl.WriteDataToFileCsvImpl;
+import core.basesyntax.service.DataValidator;
+import core.basesyntax.service.ParserValidData;
+import core.basesyntax.service.ReaderFromFile;
+import core.basesyntax.service.WriterToFile;
+import core.basesyntax.service.impl.DataValidatorImpl;
+import core.basesyntax.service.impl.ParserValidDataImpl;
+import core.basesyntax.service.impl.ReaderFromFileCsvImpl;
+import core.basesyntax.service.impl.ReportServiceImp;
+import core.basesyntax.service.impl.WriterToFileCsvImpl;
 import java.io.File;
 import java.util.List;
 
 public class Main {
     private static final String DEFAULT_PATH = "src/main/resources/";
-    private static final File DEFAULT_GOOD_FILE = new File(DEFAULT_PATH + "storeGood.csv");
-    private static final File DEFAULT_BAD_FILE = new File(DEFAULT_PATH + "storeBad.csv");
+    private static final File DEFAULT_READ_FILE = new File(DEFAULT_PATH + "storeGood.csv");
     private static final File DEFAULT_WRITE_FILE = new File(DEFAULT_PATH + "report.csv");
 
     public static void main(String[] args) {
-        testProject(DEFAULT_GOOD_FILE);
+        testProject(DEFAULT_READ_FILE);
         System.out.println("The first test passed!");
-        testProject(DEFAULT_BAD_FILE);
-        System.out.println("The second test must not pass!");
     }
 
     public static void testProject(File file) {
-        ReadDataFromFile listFromFile = new ReadDataFromFileCsvImpl();
-        List<String> strings = listFromFile.readFromFile(file);
+        ReaderFromFile myReaderCsv = new ReaderFromFileCsvImpl();
+        List<String> strings = myReaderCsv.read(file);
 
-        CheckDataValidation checkDataValidation = new CheckDataValidationImpl();
+        DataValidator dataValidator = new DataValidatorImpl();
         for (String string : strings) {
-            checkDataValidation.checkStringValidation(string);
+            dataValidator.validate(string);
         }
 
-        ParseValidData parseValidData = new ParseValidDataImpl();
+        ParserValidData parserValidData = new ParserValidDataImpl();
         OperationService operationService = new OperationStrategy();
         for (String string : strings) {
-            OperationFruitDto operationFruitDto = parseValidData.parseValidDataImpl(string);
+            OperationFruitDto operationFruitDto = parserValidData.parse(string);
             operationService.apply(operationFruitDto);
         }
-        List<String> report = new CreateReportImp().createSupplyReport();
-        System.out.println(report);
+        List<String> report = new ReportServiceImp().createReport();
 
-        WriteDataToFile writeDataToFile = new WriteDataToFileCsvImpl();
-        writeDataToFile.writeListToCsvFile(report, DEFAULT_WRITE_FILE);
+        WriterToFile writerToFile = new WriterToFileCsvImpl();
+        writerToFile.write(report, DEFAULT_WRITE_FILE);
     }
 }

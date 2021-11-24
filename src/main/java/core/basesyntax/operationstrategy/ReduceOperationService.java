@@ -10,10 +10,10 @@ public class ReduceOperationService implements OperationService {
         String nameFruit = operationFruitDto.getNameFruit();
         int quantity = operationFruitDto.getQuantity();
         for (Fruit fruit : Storage.fruits) {
-            if (fruit.getQuantity() - quantity < 0) {
-                throw new RuntimeException("Not enough fruits to buy!");
-            }
             if (fruit.getName().equals(nameFruit)) {
+                if (fruit.getQuantity() - quantity < 0) {
+                    throw new RuntimeException("Not enough fruits to buy!");
+                }
                 fruit.setQuantity(fruit.getQuantity() - quantity);
             }
         }
