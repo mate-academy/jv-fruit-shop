@@ -28,6 +28,8 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public int getFruitsCount(String fruitName) {
-        return get(fruitName).get().getFruitCount();
+        return get(fruitName)
+                .orElseThrow(() -> new RuntimeException("Can`t find fruit with name: " + fruitName))
+                .getFruitCount();
     }
 }
