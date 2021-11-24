@@ -19,10 +19,10 @@ public class ParserImpl implements Parser<TransactionDto> {
     }
 
     @Override
-    public List<TransactionDto> parseLine(List<String> line) {
-        validator.validate(line);
+    public List<TransactionDto> parseLine(List<String> inputData) {
+        validator.validate(inputData);
         List<TransactionDto> transactions = new ArrayList<>();
-        line.stream()
+        inputData.stream()
                 .filter(e -> !e.equals(INPUT_TITLE))
                 .map(e -> e.split(COMA_SEPARATOR))
                 .forEach(e -> transactions.add(new TransactionDto(e[INDEX_OF_OPERATION],
