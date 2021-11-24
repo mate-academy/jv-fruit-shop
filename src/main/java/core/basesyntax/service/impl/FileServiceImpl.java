@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FileWorker implements Reader, Writer {
+public class FileServiceImpl implements Reader, Writer {
     @Override
     public List<String> readFrom(String filePath) {
         List<String> dataFromFile;
