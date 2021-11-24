@@ -34,6 +34,7 @@ public class Application {
                 new ParserServiceImpl(new ValidatorServiceImpl());
 
         lines.stream()
+                .skip(1)
                 .map(parserService::parseLine)
                 .forEach(t -> operationHandlerMap.get(t.getOperation()).apply(t));
 
