@@ -1,9 +1,9 @@
-package core.basesyntax.service.activity.activityimpl;
+package core.basesyntax.model.transactionimpl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.activity.Activity;
+import core.basesyntax.model.Transaction;
 
-public class Purchase implements Activity {
+public class Purchase implements Transaction {
     private final int amount;
     private final String fruitName;
 
@@ -13,7 +13,7 @@ public class Purchase implements Activity {
     }
 
     @Override
-    public Integer execute(Storage storage) {
+    public Integer apply(Storage storage) {
         int newAmount = storage.getAmount(fruitName) - amount;
         if (newAmount < 0) {
             throw new RuntimeException("Not enough " + fruitName);

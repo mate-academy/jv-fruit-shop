@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.activity.Activity;
+import core.basesyntax.model.Record;
 import java.util.List;
 
 public interface RecordParser {
-    List<Activity> parseRecords(List<String> records);
+    List<Record> parseRecords(List<String> records);
 }

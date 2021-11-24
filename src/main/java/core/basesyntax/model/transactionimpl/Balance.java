@@ -1,9 +1,9 @@
-package core.basesyntax.service.activity.activityimpl;
+package core.basesyntax.model.transactionimpl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.activity.Activity;
+import core.basesyntax.model.Transaction;
 
-public class Balance implements Activity {
+public class Balance implements Transaction {
     private final int amount;
     private final String fruitName;
 
@@ -13,7 +13,7 @@ public class Balance implements Activity {
     }
 
     @Override
-    public Integer execute(Storage storage) {
+    public Integer apply(Storage storage) {
         return storage.setAmount(fruitName, amount);
     }
 }
