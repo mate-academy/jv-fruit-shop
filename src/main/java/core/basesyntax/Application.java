@@ -27,7 +27,8 @@ public class Application {
         ReaderService reader = new ReaderServiceImpl();
         List<String> lines = reader.readFromFile("");
 
-        ParserService<TransactionDto> parserService = new ParserServiceImpl(new ValidatorServiceImpl());
+        ParserService<TransactionDto> parserService =
+                new ParserServiceImpl(new ValidatorServiceImpl());
 
         lines.stream()
                 .map(parserService::parseLine)
