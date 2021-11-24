@@ -2,6 +2,7 @@ package shop;
 
 import java.util.HashMap;
 import java.util.List;
+import shop.model.ActionType;
 import shop.service.CsvReader;
 import shop.service.CsvWriter;
 import shop.service.UpdateDbService;
@@ -20,10 +21,10 @@ public class FruitShop {
 
     public static void main(String[] args) {
         HashMap<String, ActionHandler> actionMap = new HashMap<>();
-        actionMap.put("b", new IncreaseActionHandler());
-        actionMap.put("s", new IncreaseActionHandler());
-        actionMap.put("r", new IncreaseActionHandler());
-        actionMap.put("p", new DecreaseActionHandler());
+        actionMap.put(ActionType.BALANCE.getAlias(), new IncreaseActionHandler());
+        actionMap.put(ActionType.SUPPLY.getAlias(), new IncreaseActionHandler());
+        actionMap.put(ActionType.RETURN.getAlias(), new IncreaseActionHandler());
+        actionMap.put(ActionType.PURCHASE.getAlias(), new DecreaseActionHandler());
 
         UpdateDbService updateDbService = new UpdateDbServiceImpl(actionMap);
         CsvReader csvReader = new CsvReaderImpl();
