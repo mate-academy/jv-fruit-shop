@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import service.OperationService;
 import service.operationimpl.MinusOperation;
-import service.operationimpl.OperationCreate;
+import service.operationimpl.CreateOperation;
 import service.operationimpl.PlusOperation;
 import strategy.OperationStrategy;
 
@@ -14,11 +14,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     static {
         map.put("p", new MinusOperation());
-        map.put("b", new OperationCreate());
+        map.put("b", new CreateOperation());
         map.put("s", new PlusOperation());
         map.put("r", new PlusOperation());
     }
-
     @Override
     public OperationService getOperationService(ParseLine line) {
         return map.get(line.getOperation());

@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import service.FileWriter;
 
 public class FileWriterImpl implements FileWriter {
-
     @Override
     public boolean write(String outputString, String filePath) {
         try {

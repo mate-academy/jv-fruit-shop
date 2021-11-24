@@ -5,7 +5,6 @@ import java.util.List;
 import service.FruitCounter;
 
 public class FruitCounterImpl implements FruitCounter {
-
     @Override
     public boolean fruitCounter(List<ParseLine> parseLineList) {
         for (ParseLine line: parseLineList) {

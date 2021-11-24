@@ -8,7 +8,6 @@ import service.FileReader;
 
 public class FileReaderImpl implements FileReader {
     private List<String> input;
-
     @Override
     public List<String> read(String filePath) {
         try {
