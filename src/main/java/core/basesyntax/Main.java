@@ -5,7 +5,6 @@ import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.Validator;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ParserImpl;
@@ -20,13 +19,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FruitShopApplication {
-    public void generateReport(String filePath) {
+public class Main {
+    public void main(String[] args) {
+        String inputFilePath = "src/main/core/basesyntax/reports/activities.csv";
+        String reportFilePath = "src/main/core/basesyntax/reports/report.csv";
         FileReader fileReader = new FileReaderImpl();
-        List<String> lines = fileReader.read(filePath);
+        List<String> lines = fileReader.read(inputFilePath);
+        Parser parser = new ParserImpl(new ValidatorImpl());
         List<TransactionDto> transactionDtos = new ArrayList<>();
-        Validator validator = new ValidatorImpl();
-        Parser parser = new ParserImpl(validator);
         for (int i = 1; i < lines.size(); i++) {
             transactionDtos.add(parser.parse(lines.get(i)));
         }
@@ -41,8 +41,7 @@ public class FruitShopApplication {
             handler.apply(transaction);
         }
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.formReport();
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeToFile(report, "src/main/core/basesyntax/reports/report.csv");
+        fileWriter.writeToFile(reportService.formReport(), reportFilePath);
     }
 }

@@ -7,7 +7,6 @@ import core.basesyntax.model.TransactionDto;
 public class BalanceOperationHandler implements OperationHandler {
     @Override
     public void apply(TransactionDto transactionDto) {
-        Fruit fruit = new Fruit(transactionDto.getFruit());
-        Storage.fruitStorage.put(fruit, transactionDto.getAmount());
+        Storage.fruitStorage.put( new Fruit(transactionDto.getFruit()), transactionDto.getAmount());
     }
 }

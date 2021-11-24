@@ -9,13 +9,10 @@ import java.util.List;
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String path) {
-        List<String> lines = null;
         try {
-            lines = Files.readAllLines(Path.of(path));
+           return Files.readAllLines(Path.of(path));
         } catch (IOException e) {
             throw new RuntimeException("Unknown input path");
         }
-        lines.remove(0);
-        return lines;
     }
 }
