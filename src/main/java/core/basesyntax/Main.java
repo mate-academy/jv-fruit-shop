@@ -22,7 +22,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         FruitShopReader reader = new FruitShopReaderImpl();
-        List<String> lines = reader.read("fruits.csv");
+        List<String> lines = reader.read("./src/main/resources/fruits.csv");
         Parser<TransactionDto> parser = new ParserImpl();
         List<TransactionDto> transactions = new ArrayList<>();
         for (String line : lines) {
@@ -43,6 +43,6 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.createReport(Storage.getStorage());
         FruitShopWriter fruitShopWriter = new FruitShopWriterImpl();
-        fruitShopWriter.write(report, "fruitsReport.csv");
+        fruitShopWriter.write(report, "./src/main/resources/fruitsReport.csv");
     }
 }
