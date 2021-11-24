@@ -14,15 +14,11 @@ public class FileReaderServiceImpl implements FileReaderService {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line = reader.readLine();
             while (line != null) {
-                if (line.equals("type,fruit,quantity")) {
-                    line = reader.readLine();
-                    continue;
-                }
                 dataList.add(line);
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file", e);
+            throw new RuntimeException("Can't read from file", e);
         }
         return dataList;
     }

@@ -15,8 +15,8 @@ import strategy.PurchaseOperationHandler;
 
 public class Main {
     private static final Map<String, OperationHandler> map = new HashMap<>();
-    private static final String readFromFile = "src\\main\\resources\\fruits.csv";
-    private static final String writeToFile = "src\\main\\resources\\outFile.csv";
+    private static final String inputFilePath = "src\\main\\resources\\fruits.csv";
+    private static final String outputFilePath = "src\\main\\resources\\outFile.csv";
 
     static {
         map.put("b", new AddOperationHandler());
@@ -28,12 +28,12 @@ public class Main {
     public static void main(String[] args) {
         FileReaderService readerService = new FileReaderServiceImpl();
         Parser parser = new ParserImpl(new ValidatorImpl());
-        List<String> list = readerService.readFromFile(readFromFile);
-        for (String line : list) {
-            TransactionDto transactionDto = parser.parsLine(line);
+        List<String> lines = readerService.readFromFile(inputFilePath);
+        for (int i = 1; i < lines.size(); i++) {
+            TransactionDto transactionDto = parser.parsLine(lines.get(i));
             map.get(transactionDto.getOperation()).apply(transactionDto);
         }
         FileWriterService writerService = new FileWriterServiceImpl();
-        writerService.write(writeToFile);
+        writerService.write(outputFilePath);
     }
 }

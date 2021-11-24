@@ -10,8 +10,8 @@ import service.FileWriterService;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public void write(String fileName) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
+    public void write(String filePath) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
             bufferedWriter.write("fruit,quantity");
             bufferedWriter.newLine();
             for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
@@ -19,7 +19,7 @@ public class FileWriterServiceImpl implements FileWriterService {
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't write");
+            throw new RuntimeException("Can't write to file : " + filePath);
         }
     }
 }
