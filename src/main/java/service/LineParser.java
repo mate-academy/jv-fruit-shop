@@ -8,8 +8,7 @@ import service.implement.InputDataValidatorImp;
 public interface LineParser {
     InputDataValidator inputValidator = new InputDataValidatorImp();
     List<ParseLine> parseLineList = new LinkedList<>();
-    default List<ParseLine> lineParcer(List<String> input) {
-        return parseLineList;
-    }
+
+    List<ParseLine> lineParcer(List<String> input);
 }
 

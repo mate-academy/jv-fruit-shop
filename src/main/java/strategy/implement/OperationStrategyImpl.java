@@ -1,6 +1,8 @@
 package strategy.implement;
 
 import core.basesyntax.model.ParseLine;
+import java.util.HashMap;
+import java.util.Map;
 import service.OperationService;
 import service.operationimpl.MinusOperation;
 import service.operationimpl.OperationCreate;
@@ -8,18 +10,17 @@ import service.operationimpl.PlusOperation;
 import strategy.OperationStrategy;
 
 public class OperationStrategyImpl implements OperationStrategy {
+    private static final Map<String, OperationService> map = new HashMap<>();
+
+    static {
+        map.put("p", new MinusOperation());
+        map.put("b", new OperationCreate());
+        map.put("s", new PlusOperation());
+        map.put("r", new PlusOperation());
+    }
+
     @Override
     public OperationService getOperationService(ParseLine line) {
-        switch (line.getOperation()) {
-            case "b" :
-                return new OperationCreate();
-            case "s" :
-            case "r" :
-                return new PlusOperation();
-            case "p" :
-                return new MinusOperation();
-            default:
-                return null;
-        }
+        return map.get(line.getOperation());
     }
 }

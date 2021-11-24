@@ -10,9 +10,9 @@ public class FileReaderImpl implements FileReader {
     private List<String> input;
 
     @Override
-    public List<String> read(String fileName) {
+    public List<String> read(String filePath) {
         try {
-            input = Files.readAllLines(Path.of(fileName));
+            input = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("file not read");
         }

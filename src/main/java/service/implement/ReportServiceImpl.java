@@ -2,10 +2,10 @@ package service.implement;
 
 import core.basesyntax.model.Fruit;
 import java.util.List;
-import service.ParceOutputValueService;
+import service.ReportService;
 
-public class ParceOutputValue implements ParceOutputValueService {
-    public String storageToString(List<Fruit> storage) {
+public class ReportServiceImpl implements ReportService {
+    public String createReport(List<Fruit> storage) {
         outputString.append("fruit,quantity");
         for (Fruit fruit: storage) {
             outputString.append(System.lineSeparator())

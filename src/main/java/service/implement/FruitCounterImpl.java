@@ -7,8 +7,8 @@ import service.FruitCounter;
 public class FruitCounterImpl implements FruitCounter {
 
     @Override
-    public boolean fruitCounter(List<ParseLine> list) {
-        for (ParseLine line: list) {
+    public boolean fruitCounter(List<ParseLine> parseLineList) {
+        for (ParseLine line: parseLineList) {
             strategy.getOperationService(line).operation(line);
         }
         return true;

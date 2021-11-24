@@ -7,5 +7,5 @@ import strategy.implement.OperationStrategyImpl;
 
 public interface FruitCounter {
     OperationStrategy strategy = new OperationStrategyImpl();
-    boolean fruitCounter(List<ParseLine> list);
+    boolean fruitCounter(List<ParseLine> parseLineList);
 }

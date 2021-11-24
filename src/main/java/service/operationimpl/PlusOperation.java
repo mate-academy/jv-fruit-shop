@@ -6,7 +6,6 @@ import core.basesyntax.model.ParseLine;
 import service.OperationService;
 
 public class PlusOperation implements OperationService {
-
     @Override
     public boolean operation(ParseLine line) {
         for (Fruit storageFruit: Storage.storage) {
