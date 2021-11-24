@@ -27,10 +27,16 @@ public class TransactionDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         TransactionDto that = (TransactionDto) o;
-        return quantity == that.quantity && Objects.equals(operation, that.operation) && Objects.equals(name, that.name);
+        return quantity == that.quantity
+                && Objects.equals(operation, that.operation)
+                && Objects.equals(name, that.name);
     }
 
     @Override
@@ -40,9 +46,8 @@ public class TransactionDto {
 
     @Override
     public String toString() {
-        return "TransactionDto{ operation='" + operation + '\'' +
-                ", name='" + name + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "TransactionDto{ operation='" + operation + '\''
+                + ", name='" + name + '\''
+                + ", quantity=" + quantity + '}';
     }
 }
