@@ -1,8 +1,9 @@
 package core.basesyntax.shop.service.impl;
 
+import static core.basesyntax.shop.service.Operations.operationsString;
+
 import core.basesyntax.shop.model.Fruit;
 import core.basesyntax.shop.service.FruitShopService;
-import core.basesyntax.shop.service.Operations;
 import core.basesyntax.shop.service.ShopDataParser;
 import core.basesyntax.shop.strategy.FruitShopStrategy;
 import core.basesyntax.shop.strategy.FruitShopStrategyImpl;
@@ -23,9 +24,9 @@ public class ShopDataParserImpl implements ShopDataParser {
         String[] csvArr = table.split("\\n");
         for (String line : csvArr) {
             String type = line.replaceAll("((^["
-                    + Operations.operationsString() + "]).+)", "$2");
+                    + operationsString() + "]).+)", "$2");
             String name = line.replaceAll("(["
-                    + Operations.operationsString() + "],(\\w+),\\d+)", "$2");
+                    + operationsString() + "],(\\w+),\\d+)", "$2");
             int quantity = Integer.parseInt(
                     line.replaceAll("(.+,(\\d+)$)", "$2"));
             try {
