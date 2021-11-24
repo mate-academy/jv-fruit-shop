@@ -18,10 +18,8 @@ public class Main {
     private static final String OUTPUT_FILE = "src/main/resources/fruits-result.csv";
 
     public static void main(String[] args) {
-
         FileReader reader = new FileReaderImpl();
         List<String> inputData = reader.read(INPUT_FILE);
-
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
         List<TransactionDto> transactionDtoS = parser.parseLine(inputData);
         OperationStrategy operationStrategy = new OperationStrategyImpl();
