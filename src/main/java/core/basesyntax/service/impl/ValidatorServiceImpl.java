@@ -3,10 +3,11 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.ValidatorService;
 
 public class ValidatorServiceImpl implements ValidatorService {
+    private static final String RECORD_REGEX = "[bspr],[a-z]+,[0-9]+";
+    private static final int NUMBER_OF_PARTS = 3;
+
     @Override
     public boolean validate(String line) {
-        String[] components = line.split(",");
-        return components.length == 3 && components[0].matches("[bspr]")
-                && Integer.parseInt(components[2]) >= 0;
+        return line.split(",").length == NUMBER_OF_PARTS && line.matches(RECORD_REGEX);
     }
 }

@@ -1,9 +1,9 @@
 package core.basesyntax.model;
 
 public class TransactionDto {
-    private String operation;
-    private String fruitName;
-    private int quantity;
+    private final String operation;
+    private final String fruitName;
+    private final int quantity;
 
     public TransactionDto(String operation, String fruitName, int quantity) {
         this.operation = operation;
