@@ -1,13 +1,13 @@
 package core.basesyntax;
 
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.Parser;
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.impl.ParserImpl;
-import core.basesyntax.service.impl.ReaderImpl;
+import core.basesyntax.service.ParserService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.impl.ValidatorImpl;
-import core.basesyntax.service.impl.WriterImpl;
+import core.basesyntax.service.impl.ValidatorServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
@@ -24,16 +24,16 @@ public class Application {
         operationHandlerMap.put("p", new PurchaseOperationHandler());
         operationHandlerMap.put("b", new BalanceOperationHandler());
 
-        Reader reader = new ReaderImpl();
+        ReaderService reader = new ReaderServiceImpl();
         List<String> lines = reader.readFromFile("");
 
-        Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
+        ParserService<TransactionDto> parserService = new ParserServiceImpl(new ValidatorServiceImpl());
 
         lines.stream()
-                .map(parser::parseLine)
+                .map(parserService::parseLine)
                 .forEach(t -> operationHandlerMap.get(t.getOperation()).apply(t));
 
         String report = new ReportServiceImpl().formReport();
-        new WriterImpl().writeToFile("", report);
+        new WriterServiceImpl().writeToFile("", report);
     }
 }

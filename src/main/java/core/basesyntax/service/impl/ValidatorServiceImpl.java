@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Validator;
+import core.basesyntax.service.ValidatorService;
 
-public class ValidatorImpl implements Validator {
+public class ValidatorServiceImpl implements ValidatorService {
     @Override
     public boolean validate(String line) {
         String[] components = line.split(",");

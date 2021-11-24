@@ -1,19 +1,19 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.Parser;
-import core.basesyntax.service.Validator;
+import core.basesyntax.service.ParserService;
+import core.basesyntax.service.ValidatorService;
 
-public class ParserImpl implements Parser<TransactionDto> {
-    private Validator validator;
+public class ParserServiceImpl implements ParserService<TransactionDto> {
+    private ValidatorService validatorService;
 
-    public ParserImpl(Validator validator) {
-        this.validator = validator;
+    public ParserServiceImpl(ValidatorService validatorService) {
+        this.validatorService = validatorService;
     }
 
     @Override
     public TransactionDto parseLine(String line) {
-        if (!validator.validate(line)) {
+        if (!validatorService.validate(line)) {
             throw new RuntimeException("Invalid input format");
         }
         String[] components = line.split(",");
