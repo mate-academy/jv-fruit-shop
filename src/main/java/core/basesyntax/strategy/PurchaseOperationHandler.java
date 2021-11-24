@@ -9,11 +9,11 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void apply(TransactionDto transactionDto) {
         Fruit fruit = new Fruit(transactionDto.getFruit());
         Integer quantity = transactionDto.getQuantity();
-        Integer oldQuantity = Storage.getStorage().get(fruit);
+        Integer oldQuantity = Storage.storage.get(fruit);
         if (oldQuantity < quantity) {
             throw new RuntimeException("Not enough" + transactionDto.getFruit());
         }
         oldQuantity -= quantity;
-        Storage.add(fruit, oldQuantity);
+        Storage.storage.put(fruit, oldQuantity);
     }
 }

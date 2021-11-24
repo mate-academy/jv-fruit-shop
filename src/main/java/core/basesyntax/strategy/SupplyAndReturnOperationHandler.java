@@ -9,8 +9,8 @@ public class SupplyAndReturnOperationHandler implements OperationHandler {
     public void apply(TransactionDto transactionDto) {
         Fruit fruit = new Fruit(transactionDto.getFruit());
         Integer quantity = transactionDto.getQuantity();
-        Integer oldQuantity = Storage.getStorage().get(fruit);
+        Integer oldQuantity = Storage.storage.get(fruit);
         quantity += oldQuantity;
-        Storage.add(fruit, quantity);
+        Storage.storage.put(fruit, quantity);
     }
 }

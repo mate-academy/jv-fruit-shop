@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FruitShopReader;
+import core.basesyntax.service.FruitShopFileReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitShopReaderImpl implements FruitShopReader {
+public class FruitShopFileReaderImpl implements FruitShopFileReader {
     @Override
     public List<String> read(String fileName) {
         List<String> list = new ArrayList<>();

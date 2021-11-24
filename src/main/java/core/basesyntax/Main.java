@@ -2,14 +2,16 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.TransactionDto;
-import core.basesyntax.service.FruitShopReader;
-import core.basesyntax.service.FruitShopWriter;
+import core.basesyntax.service.FruitShopFileReader;
+import core.basesyntax.service.FruitShopFileWriter;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.impl.FruitShopReaderImpl;
-import core.basesyntax.service.impl.FruitShopWriterImpl;
+import core.basesyntax.service.Validator;
+import core.basesyntax.service.impl.FruitShopFileReaderImpl;
+import core.basesyntax.service.impl.FruitShopFileWriterImpl;
 import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.ValidatorImpl;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
@@ -21,13 +23,14 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        FruitShopReader reader = new FruitShopReaderImpl();
+        FruitShopFileReader reader = new FruitShopFileReaderImpl();
         List<String> lines = reader.read("./src/main/resources/fruits.csv");
         Parser<TransactionDto> parser = new ParserImpl();
         List<TransactionDto> transactions = new ArrayList<>();
+        Validator validator = new ValidatorImpl();
         for (String line : lines) {
-            if (parser.parseLine(line) != null) {
-                transactions.add(parser.parseLine(line));
+            if (parser.parseLine(line, validator) != null) {
+                transactions.add(parser.parseLine(line, validator));
             }
         }
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -41,8 +44,8 @@ public class Main {
             handler.apply(transaction);
         }
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.createReport(Storage.getStorage());
-        FruitShopWriter fruitShopWriter = new FruitShopWriterImpl();
+        String report = reportService.createReport(Storage.storage);
+        FruitShopFileWriter fruitShopWriter = new FruitShopFileWriterImpl();
         fruitShopWriter.write(report, "./src/main/resources/fruitsReport.csv");
     }
 }

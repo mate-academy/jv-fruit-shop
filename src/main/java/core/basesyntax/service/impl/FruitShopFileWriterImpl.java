@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FruitShopWriter;
+import core.basesyntax.service.FruitShopFileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FruitShopWriterImpl implements FruitShopWriter {
+public class FruitShopFileWriterImpl implements FruitShopFileWriter {
     @Override
     public void write(String report, String fileName) {
         File file = new File(fileName);
