@@ -1,8 +1,9 @@
 package core.basesyntax.service.validation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ValidatorImpl implements Validator {
+public class ValidatorCsvImpl implements Validator {
     private static final String WORD_SEPARATOR = ",";
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
@@ -16,7 +17,7 @@ public class ValidatorImpl implements Validator {
         if (readReport.isEmpty()) {
             throw new RuntimeException(("Incorrect input data!"));
         }
-        for (String data : readReport) {
+        for (String data : readReport.stream().skip(1).collect(Collectors.toList())) {
             String[] line = data.split(WORD_SEPARATOR);
             if (line.length != 3) {
                 throw new RuntimeException("Incorrect input data!");

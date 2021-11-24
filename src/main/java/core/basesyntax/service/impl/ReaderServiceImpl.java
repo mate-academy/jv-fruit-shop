@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromFile(String filePath) {
@@ -23,6 +22,6 @@ public class ReaderServiceImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + filePath, e);
         }
-        return readReport.stream().skip(1).collect(Collectors.toList());
+        return readReport;
     }
 }

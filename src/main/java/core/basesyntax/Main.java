@@ -18,7 +18,7 @@ import core.basesyntax.service.operationhandler.OperationHandler;
 import core.basesyntax.service.operationhandler.impl.AddingOperationHandler;
 import core.basesyntax.service.operationhandler.impl.RemovingOperationHandler;
 import core.basesyntax.service.validation.Validator;
-import core.basesyntax.service.validation.ValidatorImpl;
+import core.basesyntax.service.validation.ValidatorCsvImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
@@ -45,7 +45,7 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
 
         List<String> dataFromFile = readerService.readFromFile(INPUT_DATA_FILE_PATH);
-        Validator validator = new ValidatorImpl();
+        Validator validator = new ValidatorCsvImpl();
         validator.isValid(dataFromFile);
         List<TransactionDto> transactionDtos = parserService.parseData(dataFromFile);
         shopService.updateStorageInfo(transactionDtos);

@@ -16,13 +16,13 @@ public class ParseServiceImpl implements ParserService {
     @Override
     public List<TransactionDto> parseData(List<String> dataFromFile) {
         List<TransactionDto> transactionList = new ArrayList<>();
-        for (String data : dataFromFile) {
-            String[] lineData = data.split(SEPARATOR);
-            transactionList.add(
-                    new TransactionDto(Operation.get(lineData[OPERATION_TYPE_INDEX]),
-                    new Fruit(lineData[FRUIT_NAME_INDEX]),
-                    Integer.parseInt(lineData[FRUIT_AMOUNT_INDEX])));
-        }
+        dataFromFile.stream()
+                .skip(1)
+                .map(line -> line.split(SEPARATOR))
+                .forEach(element -> transactionList.add(
+                        new TransactionDto(Operation.get(element[OPERATION_TYPE_INDEX]),
+                        new Fruit(element[FRUIT_NAME_INDEX]),
+                        Integer.parseInt(element[FRUIT_AMOUNT_INDEX]))));
         return transactionList;
     }
 }
