@@ -6,9 +6,9 @@ import java.util.Map;
 public interface FruitStorageDao {
     boolean add(Fruit fruit, int quantity);
 
-    Fruit getFruit(String fruitName);
+    boolean contains(Fruit fruit);
 
-    Integer getQuantity(String fruitName);
+    Integer getQuantity(Fruit fruit);
 
     Map<Fruit, Integer> getAll();
 }

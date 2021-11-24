@@ -13,6 +13,9 @@ public class ValidatorImpl implements Validator {
     public boolean validate(List<String> data) {
         for (String line : data) {
             String[] splittedLine = line.split(",");
+            if (line.equals("type,fruit,quantity")) {
+                continue;
+            }
             if (splittedLine.length != REQUIRED_LENGTH
                     || splittedLine[INDEX_OF_OPERATION].length() != 1
                     || !splittedLine[INDEX_OF_OPERATION].contains("b")

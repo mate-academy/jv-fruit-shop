@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultGeneratorServiceImpl implements ResultGeneratorService {
-    private final FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
+    private final FruitStorageDao fruitStorageDao;
 
+    public ResultGeneratorServiceImpl(FruitStorageDao fruitStorageDao) {
+        this.fruitStorageDao = fruitStorageDao;
+    }
     @Override
     public String generateResult(List<String> data) {
         StringBuilder result = new StringBuilder("fruit,quantity");

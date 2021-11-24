@@ -13,23 +13,13 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
     }
 
     @Override
-    public Fruit getFruit(String fruitName) {
-        for (Fruit fruit : Storage.getFruitStorage().keySet()) {
-            if (fruit.getName().equals(fruitName)) {
-                return fruit;
-            }
-        }
-        return null;
+    public boolean contains(Fruit fruit) {
+        return Storage.getFruitStorage().containsKey(new Fruit((fruit.getName())));
     }
 
     @Override
-    public Integer getQuantity(String fruitName) {
-        for (Fruit fruit : Storage.getFruitStorage().keySet()) {
-            if (fruit.getName().equals(fruitName)) {
-                return Storage.getFruitStorage().get(fruit);
-            }
-        }
-        return null;
+    public Integer getQuantity(Fruit fruit) {
+        return Storage.getFruitStorage().get(fruit);
     }
 
     @Override
