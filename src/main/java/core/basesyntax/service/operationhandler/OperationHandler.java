@@ -1,7 +1,7 @@
 package core.basesyntax.service.operationhandler;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.TransactionDto;
 
 public interface OperationHandler {
-    void apply(FruitTransaction fruit);
+    void apply(TransactionDto fruit);
 }

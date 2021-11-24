@@ -1,8 +1,8 @@
 package core.basesyntax.service.operationhandler.impl;
 
-import core.basesyntax.bd.dao.FruitDao;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.TransactionDto;
 import core.basesyntax.service.operationhandler.OperationHandler;
 
 public class AddingOperationHandler implements OperationHandler {
@@ -13,13 +13,13 @@ public class AddingOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void apply(FruitTransaction fruit) {
-        Fruit fruitFromTransaction = fruit.getFruit();
-        if (fruitDao.getKey(fruitFromTransaction) == null) {
-            fruitDao.add(fruitFromTransaction, fruit.getAmount());
+    public void apply(TransactionDto transaction) {
+        Fruit fruit = transaction.getFruit();
+        if (!fruitDao.contains(fruit)) {
+            fruitDao.add(fruit, transaction.getAmount());
         } else {
-            fruitDao.add(fruitFromTransaction,
-                    fruitDao.getValue(fruitFromTransaction) + fruit.getAmount());
+            fruitDao.add(fruit,
+                    fruitDao.get(fruit) + transaction.getAmount());
         }
     }
 }

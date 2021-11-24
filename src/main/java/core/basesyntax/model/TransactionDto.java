@@ -1,14 +1,13 @@
 package core.basesyntax.model;
 
-import core.basesyntax.service.operationhandler.Operation;
 import java.util.Objects;
 
-public class FruitTransaction {
+public class TransactionDto {
     private final Operation operation;
     private final Fruit fruit;
     private int amount;
 
-    public FruitTransaction(Operation operation, Fruit fruit, int amount) {
+    public TransactionDto(Operation operation, Fruit fruit, int amount) {
         this.operation = operation;
         this.fruit = fruit;
         this.amount = amount;
@@ -26,10 +25,6 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -38,7 +33,7 @@ public class FruitTransaction {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        FruitTransaction that = (FruitTransaction) o;
+        TransactionDto that = (TransactionDto) o;
         return Objects.equals(fruit, that.fruit);
     }
 

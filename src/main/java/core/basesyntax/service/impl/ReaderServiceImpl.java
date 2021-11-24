@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReadFromFileCsvImpl implements ReaderService {
-
+public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromFile(String filePath) {
         List<String> readReport = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {

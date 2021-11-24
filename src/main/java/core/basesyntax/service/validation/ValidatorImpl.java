@@ -12,7 +12,7 @@ public class ValidatorImpl implements Validator {
     private static final int FRUIT_AMOUNT_MINIMUM = 1;
 
     @Override
-    public void isValid(List<String> readReport) {
+    public boolean isValid(List<String> readReport) {
         if (readReport.isEmpty()) {
             throw new RuntimeException(("Incorrect input data!"));
         }
@@ -31,5 +31,6 @@ public class ValidatorImpl implements Validator {
                 throw new RuntimeException("Incorrect fruit amount");
             }
         }
+        return true;
     }
 }

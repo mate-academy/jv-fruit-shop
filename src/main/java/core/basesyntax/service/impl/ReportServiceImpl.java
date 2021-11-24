@@ -1,19 +1,17 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.bd.FruitStorage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.CreateReportService;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
-public class CreateReportServiceImpl implements CreateReportService {
+public class ReportServiceImpl implements ReportService {
     private static final String HEAD_LINE = "fruit,quantity";
     private static final String WORD_SEPARATOR = ",";
 
     @Override
-    public String createReport() {
+    public String createReport(Map<Fruit, Integer> fruitStorage) {
         StringBuilder dailyReport = new StringBuilder(HEAD_LINE);
-        Map<Fruit, Integer> fruits = FruitStorage.fruitStorage;
-        for (Map.Entry<Fruit, Integer> fruit : fruits.entrySet()) {
+        for (Map.Entry<Fruit, Integer> fruit : fruitStorage.entrySet()) {
             dailyReport.append(System.lineSeparator())
                     .append(fruit.getKey())
                     .append(WORD_SEPARATOR)

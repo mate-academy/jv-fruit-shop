@@ -1,19 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.bd.dao.FruitDao;
-import core.basesyntax.bd.dao.FruitDaoImpl;
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CreateReportService;
-import core.basesyntax.service.FruitShopTransferService;
-import core.basesyntax.service.ParseService;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.model.Operation;
+import core.basesyntax.model.TransactionDto;
+import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ShopService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.CreateReportServiceImpl;
-import core.basesyntax.service.impl.FruitShopTransferServiceImpl;
-import core.basesyntax.service.impl.ParseReaderServiceImpl;
-import core.basesyntax.service.impl.ReadFromFileCsvImpl;
-import core.basesyntax.service.impl.WriteToFileCsvImpl;
-import core.basesyntax.service.operationhandler.Operation;
+import core.basesyntax.service.impl.ParseServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.ShopServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.service.operationhandler.OperationHandler;
 import core.basesyntax.service.operationhandler.impl.AddingOperationHandler;
 import core.basesyntax.service.operationhandler.impl.RemovingOperationHandler;
@@ -30,28 +30,26 @@ public class Main {
     private static final String REPORT_FILE_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        ReaderService readReportService = new ReadFromFileCsvImpl();
         FruitDao fruitDao = new FruitDaoImpl();
-
         Map<Operation, OperationHandler> operationsHandlers = new HashMap<>();
         operationsHandlers.put(Operation.BALANCE, new AddingOperationHandler(fruitDao));
         operationsHandlers.put(Operation.PURCHASE, new RemovingOperationHandler(fruitDao));
         operationsHandlers.put(Operation.RETURN, new AddingOperationHandler(fruitDao));
         operationsHandlers.put(Operation.SUPPLY, new AddingOperationHandler(fruitDao));
-
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationsHandlers);
-        FruitShopTransferService fruitShopTransferService
-                = new FruitShopTransferServiceImpl(operationStrategy);
-        ParseService parseReaderService = new ParseReaderServiceImpl();
-        WriterService writeReportService = new WriteToFileCsvImpl();
-        CreateReportService createReportService = new CreateReportServiceImpl();
 
-        List<String> dataFromFile = readReportService.readFromFile(INPUT_DATA_FILE_PATH);
+        ReaderService readerService = new ReaderServiceImpl();
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        ParserService parserService = new ParseServiceImpl();
+        WriterService writerService = new WriterServiceImpl();
+        ReportService reportService = new ReportServiceImpl();
+
+        List<String> dataFromFile = readerService.readFromFile(INPUT_DATA_FILE_PATH);
         Validator validator = new ValidatorImpl();
         validator.isValid(dataFromFile);
-        List<FruitTransaction> fruits = parseReaderService.getTransaction(dataFromFile);
-        fruitShopTransferService.updateStorageInfo(fruits);
-        String report = createReportService.createReport();
-        writeReportService.writeToFile(REPORT_FILE_PATH, report);
+        List<TransactionDto> transactionDtos = parserService.parseData(dataFromFile);
+        shopService.updateStorageInfo(transactionDtos);
+        String report = reportService.createReport(fruitDao.getAll());
+        writerService.writeToFile(REPORT_FILE_PATH, report);
     }
 }
