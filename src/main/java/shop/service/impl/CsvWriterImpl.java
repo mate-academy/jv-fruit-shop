@@ -15,12 +15,13 @@ public class CsvWriterImpl implements CsvWriter {
     }
 
     @Override
-    public void write(String outputFile) {
+    public boolean write(String outputFile) {
         List<String> report = reportService.makeReport();
         try {
             Files.write(Paths.get(outputFile), report);
         } catch (IOException e) {
             throw new RuntimeException("Can`t write in file");
         }
+        return true;
     }
 }

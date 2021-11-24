@@ -18,10 +18,11 @@ public class UpdateDbServiceImpl implements UpdateDbService {
     }
 
     @Override
-    public void updateStorage(List<String> listInput) {
+    public boolean updateStorage(List<String> listInput) {
         listInput.stream().map(list -> list.split(SEPARATOR))
                 .forEach(line -> actionStrategy.get(line[ACTION_INDEX])
                         .update(line[FRUIT_NAME_INDEX],
                                 Integer.parseInt(line[COUNT_INDEX])));
+        return true;
     }
 }

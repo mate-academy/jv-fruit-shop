@@ -11,7 +11,7 @@ public class DecreaseActionHandler implements ActionHandler {
     }
 
     @Override
-    public void update(String fruitName, int count) {
+    public boolean update(String fruitName, int count) {
         Fruit fruit = fruitDao.get(fruitName);
         if (fruit == null) {
             throw new RuntimeException("Storage don't have this fruit " + fruitName);
@@ -20,5 +20,6 @@ public class DecreaseActionHandler implements ActionHandler {
             throw new RuntimeException("U can't sell to many, u have " + fruit.getCount());
         }
         fruit.setCount(fruit.getCount() - count);
+        return true;
     }
 }
