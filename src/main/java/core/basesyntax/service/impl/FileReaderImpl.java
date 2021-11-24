@@ -12,7 +12,7 @@ public class FileReaderImpl implements FileReader {
         try {
            return Files.readAllLines(Path.of(path));
         } catch (IOException e) {
-            throw new RuntimeException("Unknown input path");
+            throw new RuntimeException("Can't read from file .\\" + path);
         }
     }
 }

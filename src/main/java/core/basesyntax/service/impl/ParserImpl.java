@@ -16,8 +16,8 @@ public class ParserImpl implements Parser {
 
     @Override
     public TransactionDto parse(String line) {
+        validator.validate(line);
         String[] lineElements = line.split(",");
-        validator.validate(lineElements);
         return new TransactionDto(lineElements[0],
                 lineElements[1], Integer.parseInt(lineElements[2]));
     }
