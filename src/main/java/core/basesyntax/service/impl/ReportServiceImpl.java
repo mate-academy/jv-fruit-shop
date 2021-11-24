@@ -10,7 +10,8 @@ public class ReportServiceImpl implements ReportService {
     public String formReport() {
         StringBuilder report = new StringBuilder("fruit,quantity\n");
         for (Map.Entry<Fruit, Integer> entry : Storage.fruitStorage.entrySet()) {
-            report.append(entry.getKey().getName()).append(",").append(entry.getValue()).append("\n");
+            report.append(entry.getKey().getName()).append(",")
+                    .append(entry.getValue()).append("\n");
         }
         return report.toString();
     }
