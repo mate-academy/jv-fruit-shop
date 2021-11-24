@@ -30,7 +30,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
         MyReader reader = new MyCsvReaderImpl();
         List<String> lines = reader.readFromFile(FILE_PATH_TO_READ);
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());

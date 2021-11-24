@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class MyWriterImpl implements MyWriter {
-
     @Override
     public void writeToFile(String filePath, String report) {
         File file = new File(filePath);
