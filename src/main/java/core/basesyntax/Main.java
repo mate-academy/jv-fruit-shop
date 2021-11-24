@@ -13,6 +13,7 @@ import service.impl.MyWriterImpl;
 import service.impl.ReportServiceImpl;
 import service.impl.ValidatorImpl;
 import strategy.AddOperationHandler;
+import strategy.BalanceOperationHandler;
 import strategy.OperationHandler;
 import strategy.PurchaseOperationHandler;
 
@@ -24,7 +25,7 @@ public class Main {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("s", new AddOperationHandler());
         operationHandlerMap.put("r", new AddOperationHandler());
-        operationHandlerMap.put("b", new AddOperationHandler());
+        operationHandlerMap.put("b", new BalanceOperationHandler());
         operationHandlerMap.put("p", new PurchaseOperationHandler());
         MyReader reader = new MyReaderImpl();
         List<String> lines = reader.readFromFile(INPUT_PATH);
