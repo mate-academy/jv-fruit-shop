@@ -16,6 +16,6 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void apply(TransactionDto transactionDto) {
         String fruitName = transactionDto.getFruitName();
         int quantity = transactionDto.getQuantity();
-        storageDao.updateQuantityByName(fruitName, -quantity);
+        storageDao.update(fruitName, -quantity);
     }
 }

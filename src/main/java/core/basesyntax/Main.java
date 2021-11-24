@@ -14,7 +14,6 @@ import core.basesyntax.services.impl.ReportMakerImpl;
 import core.basesyntax.services.impl.ValidatorImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.util.List;
 
 public class Main {

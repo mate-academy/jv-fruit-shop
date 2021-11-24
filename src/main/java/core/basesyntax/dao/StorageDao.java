@@ -1,9 +1,11 @@
 package core.basesyntax.dao;
 
+import java.util.Optional;
+
 public interface StorageDao {
-    void saveFruit(String name, Integer quantity);
+    void add(String name, Integer quantity);
 
-    Integer getQuantityByName(String name);
+    Optional<Integer> get(String name);
 
-    void updateQuantityByName(String name, Integer quantity);
+    void update(String name, Integer quantity);
 }
