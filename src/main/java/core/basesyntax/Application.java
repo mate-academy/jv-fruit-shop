@@ -12,7 +12,6 @@ import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,16 +28,10 @@ public class Application {
         List<String> lines = reader.readFromFile("");
 
         Parser<TransactionDto> parser = new ParserImpl(new ValidatorImpl());
-        List<TransactionDto> transactionDtos = new ArrayList<>();
-        for (int i = 1; i < lines.size(); i++) {
-            transactionDtos.add(parser.parseLine(lines.get(i)));
-        }
 
-        for (TransactionDto transaction : transactionDtos) {
-            String operation = transaction.getOperation();
-            OperationHandler handler = operationHandlerMap.get(operation);
-            handler.apply(transaction);
-        }
+        lines.stream()
+                .map(parser::parseLine)
+                .forEach(t -> operationHandlerMap.get(t.getOperation()).apply(t));
 
         String report = new ReportServiceImpl().formReport();
         new WriterImpl().writeToFile("", report);
