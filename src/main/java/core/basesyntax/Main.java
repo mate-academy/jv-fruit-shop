@@ -21,8 +21,8 @@ import java.util.Map;
 
 public class Main {
     public void main(String[] args) {
-        final String inputFilePath = "src/main/core/basesyntax/reports/activities.csv";
-        final String reportFilePath = "src/main/core/basesyntax/reports/report.csv";
+        final String inputFilePath = "src/main/resources/activities.csv";
+        final String reportFilePath = "src/main/resources/report.csv";
         FileReader fileReader = new FileReaderImpl();
         List<String> lines = fileReader.read(inputFilePath);
         Parser parser = new ParserImpl(new ValidatorImpl());
