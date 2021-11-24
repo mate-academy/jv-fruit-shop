@@ -30,7 +30,7 @@ public class Application {
         operationHandlerMap.put("b", new AddOperationHandler());
         operationHandlerMap.put("r", new AddOperationHandler());
 
-        List<TransactionDto> transactionDtos = parser.parseLine(dataFromFile);
+        List<TransactionDto> transactionDtos = parser.parseLines(dataFromFile);
         for (TransactionDto transaction : transactionDtos) {
             String operation = transaction.getOperation();
             OperationHandler handler = operationHandlerMap.get(operation);

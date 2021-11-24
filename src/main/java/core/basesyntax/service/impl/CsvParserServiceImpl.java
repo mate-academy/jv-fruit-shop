@@ -20,7 +20,7 @@ public class CsvParserServiceImpl implements ParserService<TransactionDto> {
     }
 
     @Override
-    public List<TransactionDto> parseLine(List<String> list) {
+    public List<TransactionDto> parseLines(List<String> list) {
         if (list.get(0).equals(FIRST_LINE)) {
             list.remove(0);
         }

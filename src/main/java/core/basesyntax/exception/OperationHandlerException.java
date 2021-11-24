@@ -1,4 +1,4 @@
-package core.basesyntax.strategy;
+package core.basesyntax.exception;
 
 public class OperationHandlerException extends RuntimeException {
     public OperationHandlerException(String message) {
