@@ -16,7 +16,7 @@ public enum Operation {
         return operationFirstChar;
     }
 
-    public static Operation containsOperation(String incomingOperation) {
+    public static Operation getOperation(String incomingOperation) {
         for (Operation operation : Operation.values()) {
             if (operation.getOperationFirstChar().equals(incomingOperation)) {
                 return operation;

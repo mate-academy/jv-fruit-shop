@@ -22,7 +22,7 @@ public class ParserImpl implements Parser {
         operationValidator.isOperationValid(splittedLine);
         String fruitName = splittedLine[INDEX_FRUIT_TYPE];
         Operation operationType = Operation
-                .containsOperation(splittedLine[INDEX_OPERATION_TYPE]);
+                .getOperation(splittedLine[INDEX_OPERATION_TYPE]);
         int amountOfFruits = Integer.parseInt(splittedLine[INDEX_FRUIT_AMOUNT]);
         return new TransactionDto(operationType, fruitName, amountOfFruits);
     }

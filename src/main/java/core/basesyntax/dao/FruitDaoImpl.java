@@ -13,7 +13,7 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public Integer update(Fruit fruit, Integer amountToAdd) {
-        if (amountToAdd < 0 && Math.abs(amountToAdd) > getAll().get(fruit)) {
+        if (amountToAdd < 0 && Math.abs(amountToAdd) > Storage.storage.get(fruit)) {
             throw new RuntimeException("Storage don't have enough "
                     + fruit.getName() + " for sale");
         }
