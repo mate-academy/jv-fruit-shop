@@ -1,17 +1,8 @@
 package core.basesyntax.db;
 
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
-public interface Storage {
-    Integer getAmount(String product);
-
-    Integer setAmount(String product, Integer amount);
-
-    boolean contains(String product);
-
-    Integer remove(String product);
-
-    Integer put(String product, Integer amount);
-
-    Set<String> getProductNames();
+public class Storage {
+    public static final Map<String, Integer> supplies = new HashMap<>();
 }

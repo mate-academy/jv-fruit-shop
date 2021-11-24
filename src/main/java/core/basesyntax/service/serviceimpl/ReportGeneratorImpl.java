@@ -1,19 +1,22 @@
 package core.basesyntax.service.serviceimpl;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.Dao;
+import core.basesyntax.dao.DaoImpl;
 import core.basesyntax.service.ReportGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+    private final Dao dao = new DaoImpl();
+
     @Override
-    public List<String> generate(Storage storage) {
+    public List<String> generate() {
         List<String> report = new ArrayList<>();
         report.add("fruit,quantity");
-        Set<String> fruitNames = storage.getProductNames();
+        Set<String> fruitNames = dao.getProductNames();
         for (String fruitName : fruitNames) {
-            report.add(fruitName + "," + storage.getAmount(fruitName));
+            report.add(fruitName + "," + dao.get(fruitName));
         }
         return report;
     }

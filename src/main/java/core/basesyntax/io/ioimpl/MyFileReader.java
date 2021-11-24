@@ -12,7 +12,8 @@ public class MyFileReader implements MyReader {
     @Override
     public List<String> read(String path) {
         List<String> result;
-        try (Stream<String> lines = Files.lines(Paths.get(path))) {
+        try {
+            Stream<String> lines = Files.lines(Paths.get(path));
             result = lines.collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + path, e);

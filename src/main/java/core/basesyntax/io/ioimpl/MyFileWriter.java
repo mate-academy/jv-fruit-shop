@@ -10,8 +10,8 @@ public class MyFileWriter implements MyWriter {
     @Override
     public void write(String path, List<String> content) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
-            for (String s : content) {
-                writer.write(s + System.lineSeparator());
+            for (String string : content) {
+                writer.write(string + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file " + path, e);
