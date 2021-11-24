@@ -32,8 +32,8 @@ public class Main {
         activityHandlerMap.put(Operation.PURCHASE, new PurchaseOperationImpl(fruitDao));
         activityHandlerMap.put(Operation.RETURN, new AddOperationImpl(fruitDao));
         activityHandlerMap.put(Operation.SUPPLY, new AddOperationImpl(fruitDao));
-
         List<String> text = new FileReaderImpl().readFromFile(TEST_FILE_PATH);
+        new ValidatorServiceImpl().validate(text);
         OperationStrategy activitiesStrategy = new OperationStrategyImpl(activityHandlerMap);
         List<TransactionDto> transactions = new ArrayList<>();
         Parser parser = new ParserImpl();
