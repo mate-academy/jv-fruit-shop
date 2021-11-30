@@ -3,9 +3,11 @@ Let's imagine that we have a fruit store. Every day in the store there are a num
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
 
-Your task is:
-- validate the data from file to make sure that we won't process incorrect input
-- generate a report based on the input file.
+Your tasks are:
+- read data from csv file
+- process these data 
+- generate a report based on processed data
+- write report to new csv file
 
 There are four activities at the store:
 ```text
@@ -61,25 +63,6 @@ We are expecting to see how many fruits are available today after the work shift
     banana,152
     apple,90
 ```
-The line above means you have 152 bananas, and 90 apples in your Fruit store after the work shift. 
-NOTE: if while processing transactions you detect some business logic mistakes (e.g not enough fruits to buy) throw an exception from service or handlers.
+The line above means you have 152 bananas, and 90 apples in your Fruit store after the work shift.
 
-
-### Validation
-For validation create separate class Validator with corresponding method. You can perform it after
-File has been read during parsing of raw data.
-If the file has mistakes, you should throw an exception. Example of incorrect input file:
-```text
-    type,fruit,quantity
-    b,banana,20
-    p,
-    s,banana,50 
-```
-or
-```text
-    type,fruit,quantity
-    b,banana,20
-    p,banana,-10 // Buyers will not be able to buy -10 bananas. -10 is incorrect input.
-    s,banana,50 
-```
 #### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop)
