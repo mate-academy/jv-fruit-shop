@@ -10,9 +10,8 @@ import java.io.IOException;
 public class CsvFileWriterService {
 
     public CsvFileWriterService(String filename) {
-        File file = new File("src" + File.separator + "main"
-                + File.separator + "resources" + File.separator + filename);
-        File fileAbsolutePath = new File(file.getAbsolutePath());
+        CreateAbsolutePath createAbsolutePath = new CreateAbsolutePath();
+        File fileAbsolutePath = createAbsolutePath.createFilePath(filename);
 
         try (BufferedWriter bufferedWriter =
                      new BufferedWriter(new FileWriter(fileAbsolutePath, true))) {
@@ -21,11 +20,11 @@ public class CsvFileWriterService {
             throw new RuntimeException("Can't write data to file", e);
         }
 
-        for (Fruit fruit1 :Storage.fruits) {
+        for (Fruit fruitOperation :Storage.fruits) {
             try (BufferedWriter bufferedWriter =
                          new BufferedWriter(new FileWriter(fileAbsolutePath, true))) {
-                bufferedWriter.write(fruit1.getNameFruit() + ","
-                        + fruit1.getQuantityFruit() + "\n");
+                bufferedWriter.write(fruitOperation.getNameFruit() + ","
+                        + fruitOperation.getQuantityFruit() + "\n");
             } catch (IOException e) {
                 throw new RuntimeException("Can't write data to file", e);
             }

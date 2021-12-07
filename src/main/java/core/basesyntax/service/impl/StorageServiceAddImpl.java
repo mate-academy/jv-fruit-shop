@@ -12,7 +12,7 @@ public class StorageServiceAddImpl implements StorageService {
     }
 
     @Override
-    public void operateSupply(String forFruit, Double quantity) {
+    public void operateSupply(String forFruit, Integer quantity) {
         Fruit fruit = new Fruit();
         fruit.setNameFruit(forFruit);
         fruit.setQuantityFruit(quantity);

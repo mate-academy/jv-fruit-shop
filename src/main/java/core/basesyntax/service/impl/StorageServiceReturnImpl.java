@@ -11,10 +11,10 @@ public class StorageServiceReturnImpl implements StorageService {
     }
 
     @Override
-    public void operateSupply(String forFruitName, Double quantity) {
+    public void operateSupply(String forFruitName, Integer quantity) {
         Fruit forFruit = fruitDao.get(forFruitName);
 
-        Double newQuantityFor = forFruit.getQuantityFruit() + quantity;
+        Integer newQuantityFor = forFruit.getQuantityFruit() + quantity;
         forFruit.setQuantityFruit(newQuantityFor);
 
         fruitDao.update(forFruit);

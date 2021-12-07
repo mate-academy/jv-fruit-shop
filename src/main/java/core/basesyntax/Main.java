@@ -15,8 +15,6 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
 
-        new CsvFileReaderService("FruitOperateDay.csv");
-
         StorageService storageServiceSupply = new StorageServiceSupplyImpl(new FruitDaoImpl());
         StorageService storageServicePurchase = new StorageServicePurchaseImpl(new FruitDaoImpl());
         StorageService storageServiceAdd = new StorageServiceAddImpl(new FruitDaoImpl());
@@ -27,9 +25,11 @@ public class Main {
         operationStorageMap.put("p",storageServicePurchase);
         operationStorageMap.put("r",storageServiceSupply);
 
-        List<String> operationalDay = CsvFileReaderService.getOperations();
+        CsvFileReaderService csvFileReaderService = new CsvFileReaderService();
+        List<String> operationalDay = csvFileReaderService.dataReader("FruitOperateDay.csv");
 
-        new OperatePerDay(operationalDay, operationStorageMap);
+        OperatePerDay operatePerDay = new OperatePerDay();
+        operatePerDay.createOperations(operationalDay, operationStorageMap);
 
         new CsvFileWriterService("dayOperatedBalance");
 
