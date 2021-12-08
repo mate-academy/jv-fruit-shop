@@ -4,7 +4,7 @@ import core.basesyntax.service.impl.StorageService;
 import java.util.List;
 import java.util.Map;
 
-public class OperatePerDay implements OperateDay {
+public class OperationsPerDay implements OperationDay {
     private List<String> operation;
 
     @Override

@@ -10,9 +10,9 @@ public class CsvFileReaderService {
 
     private List<String> operations = new ArrayList<>();
 
-    public List<String> dataReader(String filename) {
-        CreateAbsolutePath createAbsolutePath = new CreateAbsolutePath();
-        File fileAbsolutePath = createAbsolutePath.createFilePath(filename);
+    public List<String> readData(String filename) {
+
+        File fileAbsolutePath = new File(new File(filename).getAbsolutePath());
 
         try {
             operations = Files.readAllLines(fileAbsolutePath.toPath());

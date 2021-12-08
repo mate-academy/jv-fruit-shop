@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
-import core.basesyntax.service.OperatePerDay;
+import core.basesyntax.service.OperationsPerDay;
 import core.basesyntax.service.impl.StorageService;
 import core.basesyntax.service.impl.StorageServiceAddImpl;
 import core.basesyntax.service.impl.StorageServicePurchaseImpl;
@@ -26,12 +26,13 @@ public class Main {
         operationStorageMap.put("r",storageServiceSupply);
 
         CsvFileReaderService csvFileReaderService = new CsvFileReaderService();
-        List<String> operationalDay = csvFileReaderService.dataReader("FruitOperateDay.csv");
+        List<String> operationalDay = csvFileReaderService
+                .readData("src/main/resources/FruitOperateDay.csv");
 
-        OperatePerDay operatePerDay = new OperatePerDay();
-        operatePerDay.createOperations(operationalDay, operationStorageMap);
+        OperationsPerDay operationsPerDay = new OperationsPerDay();
+        operationsPerDay.createOperations(operationalDay, operationStorageMap);
 
-        new CsvFileWriterService("dayOperatedBalance");
+        new CsvFileWriterService("src/main/resources/dayOperatedBalance");
 
     }
 }

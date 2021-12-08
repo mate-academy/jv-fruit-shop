@@ -10,8 +10,11 @@ import java.io.IOException;
 public class CsvFileWriterService {
 
     public CsvFileWriterService(String filename) {
-        CreateAbsolutePath createAbsolutePath = new CreateAbsolutePath();
-        File fileAbsolutePath = createAbsolutePath.createFilePath(filename);
+        resultWriter(filename);
+    }
+
+    private void resultWriter(String filename) {
+        File fileAbsolutePath = new File(new File(filename).getAbsolutePath());
 
         try (BufferedWriter bufferedWriter =
                      new BufferedWriter(new FileWriter(fileAbsolutePath, true))) {
