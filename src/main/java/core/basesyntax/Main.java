@@ -4,6 +4,7 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.OperationsPerDay;
+import core.basesyntax.service.impl.CreateReportImpl;
 import core.basesyntax.service.impl.StorageService;
 import core.basesyntax.service.impl.StorageServiceAddImpl;
 import core.basesyntax.service.impl.StorageServicePurchaseImpl;
@@ -32,7 +33,8 @@ public class Main {
         OperationsPerDay operationsPerDay = new OperationsPerDay();
         operationsPerDay.createOperations(operationalDay, operationStorageMap);
 
-        new CsvFileWriterService("src/main/resources/dayOperatedBalance");
+        String report = new CreateReportImpl().reportCreator();
 
+        new CsvFileWriterService("src/main/resources/dayOperatedBalance", report);
     }
 }
