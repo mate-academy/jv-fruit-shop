@@ -7,7 +7,7 @@ import core.basesyntax.service.operation.PurchaseHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Storage {
+public class OperationStrategy {
     private final Map<String, OperationHandler> storageMap = new HashMap<>();
 
     {
@@ -20,5 +20,4 @@ public class Storage {
     public Map<String, OperationHandler> getHandlers() {
         return storageMap;
     }
-
 }

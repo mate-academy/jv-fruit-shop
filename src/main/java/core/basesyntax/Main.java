@@ -23,5 +23,3 @@ public class Main {
         store.fileService.writeFile(store.outputFileName, report);
     }
 }
-
-
