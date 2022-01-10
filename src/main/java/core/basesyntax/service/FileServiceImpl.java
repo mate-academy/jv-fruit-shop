@@ -31,8 +31,9 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void writeDataToFile(List<String> data, File file) {
-        //File file = new File(fileName);//если передавать в метод не файл, а имя файла
+    public void writeDataToFile(List<String> data, String fileFullPath) {
+        File file = new File(fileFullPath);
+        file.getParentFile().mkdirs(); //to create directories for file
         try (BufferedWriter bufferedWriter =
                      new BufferedWriter(new FileWriter(file, true))) {
             for (String lineData: data) {
@@ -42,18 +43,6 @@ public class FileServiceImpl implements FileService {
         } catch (IOException e) {
             throw new RuntimeException("IOException during writing to file " + file.getName(), e);
         }
-    }
-
-    @Override
-    public File createNewFile(String fileFullPath) {
-        File file = new File(fileFullPath);
-        file.getParentFile().mkdirs(); //to create directories for file
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
     }
 
 }

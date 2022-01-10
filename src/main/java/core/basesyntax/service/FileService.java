@@ -7,7 +7,6 @@ public interface FileService {
 
     List<String> readDataFromFile(File file);
 
-    void writeDataToFile(List<String> data, File file);
+    void writeDataToFile(List<String> data, String fileFullPath);
 
-    File createNewFile(String fileFullPath);
 }

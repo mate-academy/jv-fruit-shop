@@ -41,10 +41,9 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public void generateReport(String date) {
         String reportFullPath = inputOutputService.getReportFullPath(date);
-        File newReportFile = fileService.createNewFile(reportFullPath);
         List<String> reportList = remnantsDao.getRemnantsReportList();
         reportList.add(0, "fruit,quantity");
-        fileService.writeDataToFile(reportList, newReportFile);
+        fileService.writeDataToFile(reportList, reportFullPath);
     }
 
     private OperationTypes convertToOperationType(String operation) {
