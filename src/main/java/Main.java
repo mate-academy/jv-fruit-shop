@@ -31,7 +31,8 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlersMap);
         StoreService storeService = new StoreServiceImpl(
                 remnantsDao, inputOutputService, fileService, operationStrategy);
-        storeService.processInputFile("2022.01.02");
-        storeService.generateReport("2022.01.02");
+        String date = "2022.01.02";
+        storeService.processInputFile(date);
+        storeService.generateReport(date);
     }
 }
