@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 public interface FileService { //просто записує і зчитує з файлу будь-яку інфу
-    //FileService має використовуватись всередині твого ReportService
+    //FileService має використовуватись всередині твого StoreService
 
     //read data from csv file
     List<String> readDataFromFile(File file);

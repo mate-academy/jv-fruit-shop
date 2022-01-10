@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileServiceImpl implements FileService {
+
     @Override
     public List<String> readDataFromFile(File file) {
-        //File file = new File(fileName);//если передавать в метод не файл, а имя файла
         List<String> retList = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -55,4 +55,5 @@ public class FileServiceImpl implements FileService {
         }
         return file;
     }
+
 }

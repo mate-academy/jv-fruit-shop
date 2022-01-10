@@ -1,11 +1,11 @@
 package core.basesyntax.db;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import core.basesyntax.models.Fruit;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
 
-    public static final List<File> reports = new ArrayList<>();
+    public static final Map<Fruit, Long> fruitsRemnants = new HashMap<>();
 
 }
