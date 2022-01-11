@@ -5,5 +5,5 @@ import java.util.List;
 import model.Record;
 
 public class Storage {
-    public static final List<Record> RECORD_LIST = new ArrayList<>();
+    public static final List<Record> records = new ArrayList<>();
 }

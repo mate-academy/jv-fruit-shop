@@ -21,9 +21,11 @@ public class Main {
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
+    private static final int TITLE_INDEX = 0;
 
     public static void main(String[] args) {
         List<String> fileData = new FileReaderImpl().read(FILE_NAME_FROM);
+        fileData.remove(TITLE_INDEX);
         RecordTransformer recordTransformer = new RecordTransformerImpl();
         recordTransformer.transform(fileData);
         Map<String, ActivityHandler> activityHandlerMap = new HashMap<>();

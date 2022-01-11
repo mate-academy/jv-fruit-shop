@@ -11,6 +11,7 @@ import strategy.activity.ActivityHandler;
 
 public class ReportCreatorImpl implements ReportCreator {
     private final ActivityStrategy activityStrategy;
+    private final RecordDao recordDao = new RecordDaoImpl();
 
     public ReportCreatorImpl(ActivityStrategy activityStrategy) {
         this.activityStrategy = activityStrategy;
@@ -18,7 +19,6 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public List<String> createReport() {
-        RecordDao recordDao = new RecordDaoImpl();
         List<Record> listRecords = recordDao.getRecord();
         for (Record record:listRecords) {
             ActivityHandler activityHandler = activityStrategy.get(record.getActivityType());
