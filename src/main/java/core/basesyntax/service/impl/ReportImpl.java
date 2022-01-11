@@ -15,8 +15,8 @@ public class ReportImpl implements Report {
         List<String> report = new ArrayList<>();
         report.add(TITLE);
         for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
-            String reportString = entry.getKey().getFruitName() +
-                    "," + entry.getValue();
+            String reportString = entry.getKey().getFruitName()
+                    + "," + entry.getValue();
             report.add(reportString);
         }
         return report;

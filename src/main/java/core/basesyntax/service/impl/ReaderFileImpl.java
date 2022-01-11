@@ -11,10 +11,9 @@ public class ReaderFileImpl implements ReaderFile {
     public List<String> readFromFile(String fileName) {
         List<String> listFileRead;
         try {
-            listFileRead = Files.readAllLines(Paths.get(fileName));
+            return Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file", e);
         }
-        return listFileRead;
     }
 }
