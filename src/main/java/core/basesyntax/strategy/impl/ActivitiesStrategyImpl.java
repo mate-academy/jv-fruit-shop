@@ -18,7 +18,7 @@ public class ActivitiesStrategyImpl implements ActivitiesStrategy {
     public void operation(List<FruitOperation> fruitOperations) {
         for (FruitOperation fruit : fruitOperations) {
             ActivitiesShop activitiesShop = operationsShopMap.get(fruit.getTypeActivity());
-            activitiesShop.calculation(fruit);
+            activitiesShop.calculate(fruit);
         }
     }
 }

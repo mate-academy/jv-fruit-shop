@@ -1,22 +1,25 @@
 package core.basesyntax.model;
 
 public enum TypeActivity {
-    BALANCE, SUPPLY, PURCHASE, RETURN;
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
 
-    public static TypeActivity typeGiven(String typeOperation) {
-        switch (typeOperation) {
-            case "b":
-                return TypeActivity.BALANCE;
-            case "p":
-                return TypeActivity.PURCHASE;
-            case "s":
-                return TypeActivity.SUPPLY;
-            case "r":
-                return TypeActivity.RETURN;
-            default:
-                throw new RuntimeException("Given type is not provided in the file"
-                        + typeOperation);
+    private final String type;
+
+    TypeActivity(String type) {
+        this.type = type;
+    }
+
+    public static TypeActivity typeGiven(String type) {
+        for (TypeActivity activity : values()) {
+            if (activity.type.equals(type)) {
+                return activity;
+            }
         }
+        throw new RuntimeException("Given type is not provided in the file" + type);
     }
 }
+
 

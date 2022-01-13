@@ -3,14 +3,14 @@ package core.basesyntax;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitOperation;
 import core.basesyntax.model.TypeActivity;
-import core.basesyntax.service.FileParsering;
-import core.basesyntax.service.FileReadering;
-import core.basesyntax.service.FileReporting;
-import core.basesyntax.service.FileWritering;
-import core.basesyntax.service.impl.FileParseringImpl;
-import core.basesyntax.service.impl.FileReaderingImpl;
-import core.basesyntax.service.impl.FileReportingImpl;
-import core.basesyntax.service.impl.FileWriteringImpl;
+import core.basesyntax.service.FileParser;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileReport;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.impl.FileParserImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileReportImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.strategy.ActivitiesShop;
 import core.basesyntax.strategy.ActivitiesStrategy;
 import core.basesyntax.strategy.impl.ActivitiesStrategyImpl;
@@ -33,19 +33,19 @@ public class Main {
         operationsShopMap.put(TypeActivity.SUPPLY, new SupplyActivitiesShop());
         operationsShopMap.put(TypeActivity.RETURN, new SupplyActivitiesShop());
 
-        FileReadering readFiles = new FileReaderingImpl();
+        FileReader readFiles = new FileReaderImpl();
         List<String> strings = readFiles.readDataFromFile(INPUT_FILE);
 
-        FileParsering completeFiles = new FileParseringImpl();
-        List<FruitOperation> fruitsList = completeFiles.fileParser(strings);
+        FileParser completeFiles = new FileParserImpl();
+        List<FruitOperation> fruitsList = completeFiles.parse(strings);
 
         ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImpl(operationsShopMap);
         activitiesStrategy.operation(fruitsList);
 
-        FileReporting fileReporting = new FileReportingImpl();
-        List<String> report = fileReporting.getReport(Storage.fruits);
+        FileReport fileReport = new FileReportImpl();
+        List<String> report = fileReport.getReport(Storage.fruits);
 
-        FileWritering fileWritering = new FileWriteringImpl();
-        fileWritering.writeReportToFile(report, OUTPUT_FILE);
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeReportToFile(report, OUTPUT_FILE);
     }
 }

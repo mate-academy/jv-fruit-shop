@@ -8,7 +8,7 @@ import core.basesyntax.strategy.ActivitiesShop;
 public class BalanceActivitiesShop implements ActivitiesShop {
 
     @Override
-    public void calculation(FruitOperation inputFruit) {
+    public void calculate(FruitOperation inputFruit) {
         Storage.fruits.put(new Fruit(inputFruit.getFruit().getName()), inputFruit.getQuantity());
     }
 }

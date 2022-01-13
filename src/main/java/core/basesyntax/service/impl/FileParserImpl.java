@@ -3,14 +3,14 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitOperation;
 import core.basesyntax.model.TypeActivity;
-import core.basesyntax.service.FileParsering;
+import core.basesyntax.service.FileParser;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileParseringImpl implements FileParsering {
+public class FileParserImpl implements FileParser {
 
     @Override
-    public List<FruitOperation> fileParser(List<String> inputList) {
+    public List<FruitOperation> parse(List<String> inputList) {
         return inputList.stream()
                 .skip(1)
                 .map(this::parserToObject)

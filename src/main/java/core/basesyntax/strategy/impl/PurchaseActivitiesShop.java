@@ -8,7 +8,7 @@ import core.basesyntax.strategy.ActivitiesShop;
 public class PurchaseActivitiesShop implements ActivitiesShop {
 
     @Override
-    public void calculation(FruitOperation inputFruit) {
+    public void calculate(FruitOperation inputFruit) {
         Fruit fruit = new Fruit(inputFruit.getFruit().getName());
         Integer quantityStorage = Storage.fruits.get(fruit);
         if ((quantityStorage < inputFruit.getQuantity())) {
