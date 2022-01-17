@@ -34,7 +34,7 @@ public class FileUtils {
     public static void writeFile(List<String> content, String filePath) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
             for(String line : content) {
-                bw.write(line);
+                bw.write(line + System.lineSeparator());
             }
         }
         catch (FileNotFoundException e) {
