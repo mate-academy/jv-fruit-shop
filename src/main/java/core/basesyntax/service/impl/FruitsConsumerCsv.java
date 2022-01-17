@@ -15,10 +15,10 @@ public class FruitsConsumerCsv implements FruitsConsumer {
 
     @Override
     public void accept(List<Fruit> fruits) {
-        FileUtils.writeFile(fruitsToCsvRows(fruits), filePath);
+        FileUtils.writeFile(getCsvRowsFromFruits(fruits), filePath);
     }
 
-    private List<String> fruitsToCsvRows(List<Fruit> fruits) {
+    private List<String> getCsvRowsFromFruits(List<Fruit> fruits) {
         List<String> csvRows = fruits.stream()
                 .map(fruit -> fruit.getName() + FileUtils.COMMA_SEPARATOR + fruit.getAmount())
                 .collect(Collectors.toList());

@@ -19,7 +19,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void accept(Transaction transaction) {
+    public void apply(Transaction transaction) {
         Fruit fruit = fruitDao.get(transaction.getFruitName())
                 .orElse(new Fruit(transaction.getFruitName()));
         TransactionHandler handler = strategyMap.get(transaction.getType());

@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * Feel free to remove this class and create your own.
  */
-public class HelloWorld {
+public class MainApp {
     private static final String journalPath = "src/main/resources/daily_journal.csv";
     private static final String reportPath = "src/main/resources/daily_report.csv";
 
@@ -38,7 +38,7 @@ public class HelloWorld {
         loadTransactions(journalPath);
         TransactionService transactionService = new TransactionServiceImpl(fruitDao, strategyMap());
         for (Transaction transaction : transactionDao.get()) {
-            transactionService.accept(transaction);
+            transactionService.apply(transaction);
         }
         saveReport(reportPath);
     }

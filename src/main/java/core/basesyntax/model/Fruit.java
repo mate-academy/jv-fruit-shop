@@ -5,7 +5,8 @@ public class Fruit {
     private int amount;
 
     public Fruit(String name) {
-        this(name, 0);
+        this.name = name;
+        this.amount = 0;
     }
 
     public Fruit(String name, int amount) {
