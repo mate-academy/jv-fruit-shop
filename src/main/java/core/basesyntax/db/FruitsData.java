@@ -1,11 +1,8 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.Fruit;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class FruitsData {
-    public static Map<String, Integer> fruitMap = new HashMap<>();
-
+public final class FruitsData {
+    public static final Map<String, Integer> fruitMap = new HashMap<>();
 }

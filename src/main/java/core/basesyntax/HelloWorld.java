@@ -20,7 +20,6 @@ import core.basesyntax.strategy.PurchaseHandler;
 import core.basesyntax.strategy.ReturnHandler;
 import core.basesyntax.strategy.SupplyHandler;
 import core.basesyntax.strategy.TransactionHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,15 +29,15 @@ import java.util.stream.Collectors;
  * Feel free to remove this class and create your own.
  */
 public class HelloWorld {
-    private final static String journalPath = "src/main/resources/daily_journal.csv";
-    private final static String reportPath = "src/main/resources/daily_report.csv";
+    private static final String journalPath = "src/main/resources/daily_journal.csv";
+    private static final String reportPath = "src/main/resources/daily_report.csv";
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
         TransactionDao transactionDao = new TransactionDaoImpl();
         loadTransactions(journalPath);
         TransactionService transactionService = new TransactionServiceImpl(fruitDao, strategyMap());
-        for(Transaction transaction : transactionDao.get()) {
+        for (Transaction transaction : transactionDao.get()) {
             transactionService.accept(transaction);
         }
         saveReport(reportPath);

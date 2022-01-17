@@ -21,7 +21,7 @@ public class TransactionsSupplierCsv implements TransactionsSupplier {
                 .collect(Collectors.toList());
     }
 
-    private Transaction csvRowToTransaction (String csvRow) {
+    private Transaction csvRowToTransaction(String csvRow) {
         String[] tokens = csvRow.split(FileUtils.COMMA_SEPARATOR);
         TransactionType transactionType = TransactionType.of(tokens[0]);
         String fruitName = tokens[1];

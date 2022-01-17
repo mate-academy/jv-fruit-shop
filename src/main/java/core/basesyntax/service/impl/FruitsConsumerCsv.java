@@ -2,13 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitsConsumer;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FruitsConsumerCsv implements FruitsConsumer {
-    private final String CSV_HEADER = "fruit,quantity";
+    private static final String CSV_HEADER = "fruit,quantity";
     private final String filePath;
 
     public FruitsConsumerCsv(String filePath) {
