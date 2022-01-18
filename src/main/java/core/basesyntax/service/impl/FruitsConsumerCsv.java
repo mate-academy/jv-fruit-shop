@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitsConsumer;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FruitsConsumerCsv implements FruitsConsumer {
@@ -14,13 +15,13 @@ public class FruitsConsumerCsv implements FruitsConsumer {
     }
 
     @Override
-    public void accept(List<Fruit> fruits) {
-        FileUtils.writeFile(getCsvRowsFromFruits(fruits), filePath);
+    public void accept(Map<Fruit, Integer> fruitMap) {
+        FileUtils.writeFile(getCsvRowsFromFruits(fruitMap), filePath);
     }
 
-    private List<String> getCsvRowsFromFruits(List<Fruit> fruits) {
-        List<String> csvRows = fruits.stream()
-                .map(fruit -> fruit.getName() + FileUtils.COMMA_SEPARATOR + fruit.getAmount())
+    private List<String> getCsvRowsFromFruits(Map<Fruit, Integer> fruitMap) {
+        List<String> csvRows = fruitMap.entrySet().stream()
+                .map(e -> e.getKey().toString() + FileUtils.COMMA_SEPARATOR + e.getValue())
                 .collect(Collectors.toList());
         csvRows.add(0, CSV_HEADER);
         return csvRows;

@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
-import java.util.List;
+import java.util.Map;
 
 public interface FruitsConsumer {
-    void accept(List<Fruit> fruits);
+    void accept(Map<Fruit, Integer> fruitMap);
 }
