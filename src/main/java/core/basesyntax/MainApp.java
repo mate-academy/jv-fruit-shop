@@ -34,10 +34,8 @@ public class MainApp {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        TransactionDao transactionDao = new TransactionDaoImpl();
-        loadTransactions(journalPath);
         TransactionService transactionService = new TransactionServiceImpl(fruitDao, strategyMap());
-        for (Transaction transaction : transactionDao.get()) {
+        for (Transaction transaction : loadTransactions(journalPath)) {
             transactionService.apply(transaction);
         }
         saveReport(reportPath);
@@ -52,18 +50,14 @@ public class MainApp {
         return mapStrategy;
     }
 
-    private static void loadTransactions(String filePath) {
+    private static List<Transaction> loadTransactions(String filePath) {
         TransactionsSupplier supplier = new TransactionsSupplierCsv(filePath);
-        TransactionsData.transactions.addAll(supplier.getTransactionsList());
+        return supplier.getTransactionsList();
     }
 
     private static void saveReport(String filePath) {
         FruitsConsumer consumer = new FruitsConsumerCsv(filePath);
-        List<Fruit> fruits = FruitsData.fruitMap.entrySet()
-                .stream()
-                .map(e -> new Fruit(e.getKey(), e.getValue()))
-                .collect(Collectors.toList());
-        consumer.accept(fruits);
+        consumer.accept(FruitsData.fruitMap);
     }
 
 }
