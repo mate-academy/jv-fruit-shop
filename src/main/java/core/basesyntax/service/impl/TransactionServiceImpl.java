@@ -20,10 +20,10 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void apply(Transaction transaction) {
-        Fruit fruit = fruitDao.get(transaction.getFruitName())
-                .orElse(new Fruit(transaction.getFruitName()));
+        Fruit fruit = new Fruit(transaction.getFruitName());
+        Integer amount = fruitDao.get(fruit).orElse(0);
         TransactionHandler handler = strategyMap.get(transaction.getType());
-        handler.perform(fruit, transaction);
-        fruitDao.put(fruit);
+        Integer newAmount = handler.perform(amount, transaction);
+        fruitDao.put(fruit, newAmount);
     }
 }
