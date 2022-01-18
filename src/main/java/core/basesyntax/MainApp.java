@@ -1,12 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.TransactionDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
-import core.basesyntax.dao.impl.TransactionDaoImpl;
 import core.basesyntax.db.FruitsData;
-import core.basesyntax.db.TransactionsData;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.model.TransactionType;
 import core.basesyntax.service.FruitsConsumer;
@@ -23,7 +19,6 @@ import core.basesyntax.strategy.TransactionHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Feel free to remove this class and create your own.

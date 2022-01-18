@@ -1,8 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
-
-import java.util.Map;
 import java.util.Optional;
 
 public interface FruitDao {
