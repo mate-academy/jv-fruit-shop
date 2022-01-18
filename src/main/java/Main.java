@@ -39,4 +39,3 @@ public class Main {
         writer.reportWriter(reporter.report(data), reportPath);
     }
 }
-
