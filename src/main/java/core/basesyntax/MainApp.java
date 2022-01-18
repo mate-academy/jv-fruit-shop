@@ -54,7 +54,7 @@ public class MainApp {
 
     private static void loadTransactions(String filePath) {
         TransactionsSupplier supplier = new TransactionsSupplierCsv(filePath);
-        TransactionsData.transactions.addAll(supplier.get());
+        TransactionsData.transactions.addAll(supplier.getTransactionsList());
     }
 
     private static void saveReport(String filePath) {

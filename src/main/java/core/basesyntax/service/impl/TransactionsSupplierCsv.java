@@ -14,7 +14,7 @@ public class TransactionsSupplierCsv implements TransactionsSupplier {
     }
 
     @Override
-    public List<Transaction> get() {
+    public List<Transaction> getTransactionsList() {
         return FileUtils.readFile(filePath).stream()
                 .skip(1)
                 .map(this::csvRowToTransaction)
