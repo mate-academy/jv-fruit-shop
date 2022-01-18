@@ -3,19 +3,21 @@ package core.basesyntax.dao.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.db.FruitsData;
 import core.basesyntax.model.Fruit;
+
+import java.util.Map;
 import java.util.Optional;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public Optional<Fruit> get(String name) {
-        if (FruitsData.fruitMap.containsKey(name)) {
-            return Optional.of(new Fruit(name, FruitsData.fruitMap.get(name)));
+    public Optional<Integer> get(Fruit fruit) {
+        if (FruitsData.fruitMap.containsKey(fruit)) {
+            return Optional.of(FruitsData.fruitMap.get(fruit));
         }
         return Optional.empty();
     }
 
     @Override
-    public void put(Fruit fruit) {
-        FruitsData.fruitMap.put(fruit.getName(), fruit.getAmount());
+    public void put(Fruit fruit, int amount) {
+        FruitsData.fruitMap.put(fruit, amount);
     }
 }
