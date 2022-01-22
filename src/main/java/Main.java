@@ -1,41 +1,48 @@
-import dao.Reader;
-import dao.ReaderImpl;
-import dao.Writer;
-import dao.WriterImpl;
+import dao.FruitDao;
+import dao.FruitDaoImpl;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import service.OperationStrategy;
-import service.OperationStrategyImpl;
-import service.Reporter;
-import service.ReporterImpl;
-import service.operation.BalanceOperationHandler;
-import service.operation.OperationHandler;
-import service.operation.PurchaseOperationHandler;
-import service.operation.ReturnOperationHandler;
-import service.operation.SupplyOperationHandler;
-import validator.Validator;
-import validator.ValidatorImpl;
+import model.Fruit;
+import model.TransactionDto;
+import service.Parser;
+import service.impl.CreateReportImpl;
+import service.impl.FileReaderImpl;
+import service.impl.FileWriterImpl;
+import service.impl.FruitServiceImpl;
+import service.impl.ParserImpl;
+import service.impl.ValidatorServiceImpl;
+import strategy.Operation;
+import strategy.OperationHandler;
+import strategy.OperationStrategy;
+import strategy.impl.AddOperationImpl;
+import strategy.impl.BalanceOperationImpl;
+import strategy.impl.OperationStrategyImpl;
+import strategy.impl.PurchaseOperationImpl;
 
 public class Main {
+    private static final String TEST_FILE_PATH = "src/main/resources/testFile.csv";
+    private static final String REPORT_PATH = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
-        OperationHandler supplyHandler = new SupplyOperationHandler();
-        OperationHandler returnHandler = new ReturnOperationHandler();
-        OperationHandler purchaseHandler = new PurchaseOperationHandler();
-        OperationHandler balanceHandler = new BalanceOperationHandler();
-        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put("s", supplyHandler);
-        operationHandlerMap.put("r", returnHandler);
-        operationHandlerMap.put("p", purchaseHandler);
-        operationHandlerMap.put("b", balanceHandler);
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        Reader reader = new ReaderImpl();
-        Validator validator = new ValidatorImpl();
-        Reporter reporter = new ReporterImpl(validator, operationStrategy);
-        Writer writer = new WriterImpl();
-        String inputFilePath = "src/main/resources/input.csv";
-        String reportPath = "src/main/reports/report.csv";
-        List<String> data = reader.read(inputFilePath);
-        writer.reportWriter(reporter.report(data), reportPath);
+        FruitDao fruitDao = new FruitDaoImpl();
+        Map<Operation, OperationHandler> activityHandlerMap = new HashMap<>();
+        activityHandlerMap.put(Operation.BALANCE, new BalanceOperationImpl(fruitDao));
+        activityHandlerMap.put(Operation.PURCHASE, new PurchaseOperationImpl(fruitDao));
+        activityHandlerMap.put(Operation.RETURN, new AddOperationImpl(fruitDao));
+        activityHandlerMap.put(Operation.SUPPLY, new AddOperationImpl(fruitDao));
+        List<String> text = new FileReaderImpl().readFromFile(TEST_FILE_PATH);
+        new ValidatorServiceImpl().validate(text);
+        OperationStrategy activitiesStrategy = new OperationStrategyImpl(activityHandlerMap);
+        List<TransactionDto> transactions = new ArrayList<>();
+        Parser parser = new ParserImpl();
+        for (int i = 1; i < text.size(); i++) {
+            transactions.add(parser.parseLine(text.get(i)));
+        }
+        List<Fruit> fruits = new FruitServiceImpl(fruitDao, activitiesStrategy)
+                .changeBalance(transactions);
+        String report = new CreateReportImpl().createReport(fruits);
+        new FileWriterImpl().writeData(REPORT_PATH, report);
     }
 }
