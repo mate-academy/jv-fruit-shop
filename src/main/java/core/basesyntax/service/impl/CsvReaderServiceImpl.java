@@ -7,15 +7,13 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class CsvReaderServiceImpl implements ReaderService {
-    private static final String FILE_PATH = "src/main/resources/input.csv";
-
     @Override
-    public List<String> readFile() {
+    public List<String> readFile(String filePath) {
         List<String> dataFromFile;
         try {
-            dataFromFile = Files.readAllLines(Path.of(FILE_PATH));
+            dataFromFile = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("File not exist " + FILE_PATH, e);
+            throw new RuntimeException("Could not read data from file " + filePath, e);
         }
         return dataFromFile;
     }
