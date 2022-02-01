@@ -7,11 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
 public class CsvWriterServiceImpl implements WriterService {
-    private static final String FILE_PATH = "src/main/resources/report.csv";
 
     @Override
-    public void writeToFile(String data) {
-        File file = new File(FILE_PATH);
+    public void writeToFile(String filePath, String data) {
+        File file = new File(filePath);
         if (!file.exists()) {
             try {
                 file.createNewFile();

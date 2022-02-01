@@ -6,6 +6,7 @@ import core.basesyntax.service.DataProcess;
 import core.basesyntax.service.OperationHendler;
 import core.basesyntax.service.impl.CsvReaderServiceImpl;
 import core.basesyntax.service.impl.CsvWriterServiceImpl;
+import core.basesyntax.service.impl.DataParserImpl;
 import core.basesyntax.service.impl.DataProcessImpl;
 import core.basesyntax.service.impl.OperationHendlerBalance;
 import core.basesyntax.service.impl.OperationHendlerPurchase;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        String filePath = "src/main/resources/input.csv";
+        String inputFilePath = "src/main/resources/input.csv";
 
         FruitDaoImpl fruitDao = new FruitDaoImpl();
 
@@ -32,13 +33,14 @@ public class Main {
         operationHendlerMap.put(FruitTransaction.Operation.SUPPLY,
                                             new OperationHendlerSupply());
 
-        List<String> dataFromFile = new CsvReaderServiceImpl().readFile(filePath);
-
+        List<String> dataFromFile = new CsvReaderServiceImpl().readFile(inputFilePath);
+        List<FruitTransaction> parseredData = new DataParserImpl().parsingData(dataFromFile);
         DataProcess dataProcess = new DataProcessImpl(fruitDao, operationHendlerMap);
-        dataProcess.processingData(dataFromFile);
+        dataProcess.processingData(parseredData);
 
-        String report = new ReportGeneratorImpl(fruitDao, operationHendlerMap).reportGenerater();
+        String report = new ReportGeneratorImpl(fruitDao).generateReport();
 
-        new CsvWriterServiceImpl().writeToFile(report);
+        String reportFilePath = "src/main/resources/report.csv";
+        new CsvWriterServiceImpl().writeToFile(reportFilePath, report);
     }
 }
