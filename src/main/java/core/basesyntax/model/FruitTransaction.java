@@ -47,6 +47,13 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
+        public static Operation parse(String operation) {
+            return operation.equals(BALANCE.getOperation()) ? BALANCE
+                    : operation.equals(SUPPLY.getOperation()) ? SUPPLY
+                    : operation.equals(PURCHASE.getOperation()) ? PURCHASE
+                    : RETURN;
+        }
+
         public String getOperation() {
             return operation;
         }

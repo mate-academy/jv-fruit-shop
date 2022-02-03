@@ -1,5 +1,6 @@
 package core.basesyntax.dao;
 
+import java.util.Map;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 
@@ -18,17 +19,20 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public boolean subtractQuantityByFruit(Fruit fruit, int quantityToSubtract) {
+    public void subtractQuantityByFruit(Fruit fruit, int quantityToSubtract) {
         if (quantityToSubtract <= storage.getStorageOfFruits().get(fruit)) {
             storage.getStorageOfFruits().replace(fruit,
                     storage.getStorageOfFruits().get(fruit) - quantityToSubtract);
-            return true;
         }
-        return false;
     }
 
     @Override
     public void addQuantityByFruit(Fruit fruit, int quantityToAdd) {
         storage.getStorageOfFruits().replace(fruit, storage.getStorageOfFruits().get(fruit) + quantityToAdd);
+    }
+
+    @Override
+    public Map<Fruit, Integer> getAll() {
+        return storage.getStorageOfFruits();
     }
 }

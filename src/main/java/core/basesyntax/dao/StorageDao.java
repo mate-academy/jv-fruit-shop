@@ -1,5 +1,6 @@
 package core.basesyntax.dao;
 
+import java.util.Map;
 import core.basesyntax.model.Fruit;
 
 public interface StorageDao {
@@ -7,7 +8,9 @@ public interface StorageDao {
 
     Integer getQuantityByFruit(Fruit fruit);
 
-    boolean subtractQuantityByFruit(Fruit fruit, int quantityToSubtract);
+    void subtractQuantityByFruit(Fruit fruit, int quantityToSubtract);
 
     void addQuantityByFruit(Fruit fruit, int quantityToAdd);
+
+    Map<Fruit, Integer> getAll();
 }
