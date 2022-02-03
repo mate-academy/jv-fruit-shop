@@ -9,7 +9,7 @@ public class StorageDaoImpl implements StorageDao {
     private final Storage storage = new Storage();
 
     @Override
-    public void addFruit(Fruit fruit, int quantity) {
+    public void addNewFruit(Fruit fruit, int quantity) {
         storage.getStorageOfFruits().put(fruit, quantity);
     }
 

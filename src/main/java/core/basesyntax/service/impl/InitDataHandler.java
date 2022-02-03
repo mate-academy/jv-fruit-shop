@@ -7,6 +7,6 @@ import core.basesyntax.service.DataHandler;
 public class InitDataHandler implements DataHandler {
     @Override
     public void processData(StorageDao storageDao, Fruit fruit, int quantity) {
-        storageDao.addFruit(fruit, quantity);
+        storageDao.addNewFruit(fruit, quantity);
     }
 }
