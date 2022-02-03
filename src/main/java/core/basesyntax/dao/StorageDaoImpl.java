@@ -1,8 +1,8 @@
 package core.basesyntax.dao;
 
-import java.util.Map;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
 
@@ -28,7 +28,8 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void addQuantityByFruit(Fruit fruit, int quantityToAdd) {
-        storage.getStorageOfFruits().replace(fruit, storage.getStorageOfFruits().get(fruit) + quantityToAdd);
+        storage.getStorageOfFruits().replace(fruit,
+                storage.getStorageOfFruits().get(fruit) + quantityToAdd);
     }
 
     @Override

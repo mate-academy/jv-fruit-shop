@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
-import java.util.Map;
 import core.basesyntax.model.Fruit;
+import java.util.Map;
 
 public interface StorageDao {
     void addFruit(Fruit fruit, int quantityToAdd);

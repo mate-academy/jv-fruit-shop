@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
 import core.basesyntax.service.FileHandler;
 import core.basesyntax.strategy.StoreOperationsStrategy;
+import java.util.List;
+import java.util.Map;
 
 public class FileHandlerImpl implements FileHandler {
     public static final int INDEX_OF_OPERATION = 0;
@@ -19,7 +19,8 @@ public class FileHandlerImpl implements FileHandler {
     private final StoreOperationsStrategy activitiesStrategy;
     private final StorageDao storageDao;
 
-    public FileHandlerImpl(DataReader reader, DataWriter writer, StoreOperationsStrategy activitiesStrategy, StorageDao storageDao) {
+    public FileHandlerImpl(DataReader reader, DataWriter writer,
+                           StoreOperationsStrategy activitiesStrategy, StorageDao storageDao) {
         this.reader = reader;
         this.writer = writer;
         this.activitiesStrategy = activitiesStrategy;
@@ -35,7 +36,7 @@ public class FileHandlerImpl implements FileHandler {
 
     private Map<Fruit, Integer> countDailyActivity(List<List<String>> dailyActivity) {
         for (List<String> strings : dailyActivity) {
-            activitiesStrategy.process(FruitTransaction.Operation.parse(strings.get(INDEX_OF_OPERATION)))
+            activitiesStrategy.process(Operation.parse(strings.get(INDEX_OF_OPERATION)))
                     .processData(storageDao, new Fruit(strings.get(INDEX_OF_FRUIT_NAME)),
                             Integer.parseInt(strings.get(INDEX_OF_QUANTITY)));
         }

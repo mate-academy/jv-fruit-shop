@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import java.util.Map;
 import core.basesyntax.model.Fruit;
+import java.util.Map;
 
 public interface DataWriter {
     void writeData(Map<Fruit, Integer> data, String toFileName);

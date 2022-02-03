@@ -1,15 +1,14 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.DataReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import core.basesyntax.service.DataReader;
 
 public class DataReaderFromFile implements DataReader {
-
     @Override
     public List<List<String>> getData(String fromFileName) {
         List<List<String>> records = new ArrayList<>();

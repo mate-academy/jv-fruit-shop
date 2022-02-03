@@ -1,10 +1,8 @@
 package core.basesyntax;
 
-import java.util.HashMap;
-import java.util.Map;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataHandler;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
@@ -16,6 +14,8 @@ import core.basesyntax.service.impl.InitDataHandler;
 import core.basesyntax.service.impl.SubtractDataHandler;
 import core.basesyntax.strategy.StoreOperationsStrategy;
 import core.basesyntax.strategy.impl.StoreOperationsStrategyImpl;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Application {
     public static final String PATH_TO_FILE = "src/main/resources/daily_report.csv";
@@ -25,19 +25,20 @@ public class Application {
     private static final DataWriter writer = new DataWriterToFile();
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, DataHandler> operationDataHandlerMap = getOperationsAndRelativeHandlers();
-        StoreOperationsStrategy activitiesStrategy = new StoreOperationsStrategyImpl(operationDataHandlerMap);
+        Map<Operation, DataHandler> operationDataHandlerMap = getOperationsAndRelativeHandlers();
+        StoreOperationsStrategy activitiesStrategy
+                = new StoreOperationsStrategyImpl(operationDataHandlerMap);
         FileHandlerImpl fileHandler = new FileHandlerImpl(reader, writer,
                 activitiesStrategy, storageDao);
         fileHandler.processFiles(PATH_FROM_FILE, PATH_TO_FILE);
     }
 
-    private static Map<FruitTransaction.Operation, DataHandler> getOperationsAndRelativeHandlers() {
-        Map<FruitTransaction.Operation, DataHandler> operationDataHandlerMap = new HashMap<>();
-        operationDataHandlerMap.put(FruitTransaction.Operation.BALANCE, new InitDataHandler());
-        operationDataHandlerMap.put(FruitTransaction.Operation.SUPPLY, new AddDataHandler());
-        operationDataHandlerMap.put(FruitTransaction.Operation.RETURN, new AddDataHandler());
-        operationDataHandlerMap.put(FruitTransaction.Operation.PURCHASE, new SubtractDataHandler());
+    private static Map<Operation, DataHandler> getOperationsAndRelativeHandlers() {
+        Map<Operation, DataHandler> operationDataHandlerMap = new HashMap<>();
+        operationDataHandlerMap.put(Operation.BALANCE, new InitDataHandler());
+        operationDataHandlerMap.put(Operation.SUPPLY, new AddDataHandler());
+        operationDataHandlerMap.put(Operation.RETURN, new AddDataHandler());
+        operationDataHandlerMap.put(Operation.PURCHASE, new SubtractDataHandler());
         return operationDataHandlerMap;
     }
 }
