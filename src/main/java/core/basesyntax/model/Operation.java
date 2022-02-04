@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
@@ -12,10 +14,9 @@ public enum Operation {
     }
 
     public static Operation parse(String operation) {
-        return operation.equals(BALANCE.getOperation()) ? BALANCE
-                : operation.equals(SUPPLY.getOperation()) ? SUPPLY
-                : operation.equals(PURCHASE.getOperation()) ? PURCHASE
-                : RETURN;
+        return Arrays.stream(values())
+                .filter(o -> o.getOperation().equals(operation))
+                .findFirst().orElseThrow(() -> new RuntimeException("There is no such operation!"));
     }
 
     public String getOperation() {
