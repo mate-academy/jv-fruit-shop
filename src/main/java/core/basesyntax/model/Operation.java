@@ -16,7 +16,7 @@ public enum Operation {
     public static Operation parse(String operation) {
         return Arrays.stream(values())
                 .filter(o -> o.getOperation().equals(operation))
-                .findFirst().orElseThrow(() -> new RuntimeException("There is no such operation!"));
+                .findFirst().orElseThrow(() -> new RuntimeException("There is no such operation: " + operation));
     }
 
     public String getOperation() {
