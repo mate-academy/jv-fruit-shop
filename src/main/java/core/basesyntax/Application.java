@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataHandler;
 import core.basesyntax.service.DataReader;
@@ -20,7 +21,7 @@ import java.util.Map;
 public class Application {
     public static final String PATH_TO_FILE = "src/main/resources/daily_report.csv";
     private static final String PATH_FROM_FILE = "src/main/resources/daily_activities.csv";
-    private static final StorageDao storageDao = new StorageDaoImpl();
+    private static final StorageDao storageDao = new StorageDaoImpl(new Storage());
     private static final DataReader reader = new DataReaderFromFile();
     private static final DataWriter writer = new DataWriterToFile();
 

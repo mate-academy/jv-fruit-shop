@@ -6,7 +6,11 @@ import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
 
-    private final Storage storage = new Storage();
+    private final Storage storage;
+
+    public StorageDaoImpl(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
     public void addNewFruit(Fruit fruit, int quantity) {
