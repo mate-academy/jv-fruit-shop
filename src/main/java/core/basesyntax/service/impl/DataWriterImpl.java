@@ -9,12 +9,12 @@ import java.util.List;
 public class DataWriterImpl implements DataWriter {
 
     @Override
-    public boolean writeDataToFile(List<String> list, String filename) {
+    public boolean writeDataToFile(List<String> list, String fileName) {
         try {
-            Files.write(Path.of(filename), list);
+            Files.write(Path.of(fileName), list);
             return true;
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write data to file");
+           return false;
         }
     }
 }

@@ -11,7 +11,7 @@ public class SubtractOperationHandler implements OperationHandler {
         int amount = dailyActivity.getAmount();
         int amountPrev = Storage.storage.get(fruit);
         if (amountPrev < amount) {
-            throw new RuntimeException("There isn`t enough fruit for this operation");
+            return false;
         }
 
         Storage.storage.put(fruit, amountPrev - amount);
