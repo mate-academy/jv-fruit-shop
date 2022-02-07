@@ -1,5 +1,6 @@
-package fruitshop.service.file;
+package fruitshop.service.impl;
 
+import fruitshop.service.file.FileWriteService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

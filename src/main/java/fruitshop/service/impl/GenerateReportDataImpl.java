@@ -1,5 +1,6 @@
-package fruitshop.service;
+package fruitshop.service.impl;
 
+import fruitshop.service.GenerateReportDataService;
 import java.util.List;
 
 public class GenerateReportDataImpl implements GenerateReportDataService {

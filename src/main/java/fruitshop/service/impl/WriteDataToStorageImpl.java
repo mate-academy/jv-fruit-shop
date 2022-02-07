@@ -1,8 +1,9 @@
-package fruitshop.service.file;
+package fruitshop.service.impl;
 
 import fruitshop.db.TransactionStorage;
 import fruitshop.model.FruitTransaction;
 import fruitshop.model.Operation;
+import fruitshop.service.file.WriteDataToStorageService;
 
 public class WriteDataToStorageImpl implements WriteDataToStorageService {
     private static final String SEPARATOR = ",";
