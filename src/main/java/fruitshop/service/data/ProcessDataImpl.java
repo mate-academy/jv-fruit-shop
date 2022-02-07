@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ProcessDataImpl implements ProcessDataService {
-    private Map<String, Integer> balancesOfFruits = new HashMap<>();
-    private ReportStorage reportStorage = new ReportStorage();
+    private final Map<String, Integer> balancesOfFruits = new HashMap<>();
+    private final ReportStorage reportStorage = new ReportStorage();
 
     @Override
     public void process(List<FruitTransaction> listOfTransactions) {

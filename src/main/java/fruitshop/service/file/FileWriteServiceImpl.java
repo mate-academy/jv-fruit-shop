@@ -6,7 +6,6 @@ import java.io.IOException;
 
 public class FileWriteServiceImpl implements FileWriteService {
 
-    /* replace to NIO */
     @Override
     public void writeDataToFile(String data, String filePath) {
         try (BufferedWriter bufferedWriter

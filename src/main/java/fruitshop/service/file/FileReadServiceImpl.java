@@ -5,11 +5,11 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FileReadServiceImpl implements FileReadService {
-    private WriteDataToStorageImpl writeDataToStorage = new WriteDataToStorageImpl();
+    private final WriteDataToStorageImpl writeDataToStorage = new WriteDataToStorageImpl();
 
     @Override
     public void readDataFromFile(String filepath) {
-        String line = "";
+        String line;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filepath))) {
             while ((line = bufferedReader.readLine()) != null) {
                 writeDataToStorage.writeDate(line);

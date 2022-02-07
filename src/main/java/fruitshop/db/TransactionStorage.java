@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionStorage {
-    private static final List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+    private static final List<FruitTransaction> storage = new ArrayList<>();
 
     public void add(FruitTransaction transaction) {
-        fruitTransactionList.add(transaction);
+        storage.add(transaction);
     }
 
     public FruitTransaction get(int index) {
-        return fruitTransactionList.get(index);
+        return storage.get(index);
     }
 
     public int size() {
-        return fruitTransactionList.size();
+        return storage.size();
     }
 
     public List<FruitTransaction> getAll() {
-        return fruitTransactionList;
+        return storage;
     }
 }

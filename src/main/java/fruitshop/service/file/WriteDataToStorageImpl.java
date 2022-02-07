@@ -9,11 +9,13 @@ public class WriteDataToStorageImpl implements WriteDataToStorageService {
     private static final int INDEX_TYPE_TRANSACTION = 0;
     private static final int INDEX_NAME_TRANSACTION = 1;
     private static final int INDEX_SUM_TRANSACTION = 2;
-    private TransactionStorage transactionStorage = new TransactionStorage();
+    private final TransactionStorage transactionStorage = new TransactionStorage();
 
     @Override
     public void writeDate(String dataLine) {
-        transactionStorage.add(parseTransaction(dataLine));
+        if (!checkFirstLine(dataLine)) {
+            transactionStorage.add(parseTransaction(dataLine));
+        }
     }
 
     private FruitTransaction parseTransaction(String dataLine) {
@@ -24,5 +26,10 @@ public class WriteDataToStorageImpl implements WriteDataToStorageService {
         Operation operation = Operation.parse(currentLineDate[INDEX_TYPE_TRANSACTION]);
         fruitTransaction.setOperation(operation);
         return fruitTransaction;
+    }
+
+    private boolean checkFirstLine(String dataLine) {
+        String[] line = dataLine.split(",");
+        return line[0].length() > 1;
     }
 }
