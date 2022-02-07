@@ -14,7 +14,7 @@ public class DataWriterImpl implements DataWriter {
             Files.write(Path.of(fileName), list);
             return true;
         } catch (IOException e) {
-           return false;
+            return false;
         }
     }
 }
