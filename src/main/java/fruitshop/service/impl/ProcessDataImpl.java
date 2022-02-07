@@ -25,7 +25,7 @@ public class ProcessDataImpl implements ProcessDataService {
         for (FruitTransaction fruitTransaction : listOfTransactions) {
             balancesOfFruits.put(fruitTransaction.getFruit(),
                     operationsMap.get(fruitTransaction.getOperation())
-                            .process(fruitTransaction,balancesOfFruits));
+                            .process(fruitTransaction, checkBalance(fruitTransaction.getFruit())));
         }
     }
 
@@ -33,5 +33,9 @@ public class ProcessDataImpl implements ProcessDataService {
         for (Map.Entry<String, Integer> entry : balancesOfFruits.entrySet()) {
             reportStorage.add(entry.getKey() + "," + entry.getValue());
         }
+    }
+
+    private int checkBalance(String key) {
+        return balancesOfFruits.getOrDefault(key, 0);
     }
 }

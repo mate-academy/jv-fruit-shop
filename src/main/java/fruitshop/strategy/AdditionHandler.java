@@ -1,12 +1,11 @@
 package fruitshop.strategy;
 
 import fruitshop.model.FruitTransaction;
-import java.util.Map;
 
 public class AdditionHandler implements StrategyService {
 
     @Override
-    public int process(FruitTransaction fruitTransaction, Map<String, Integer> balancesOfFruits) {
-        return balancesOfFruits.get(fruitTransaction.getFruit()) + fruitTransaction.getQuantity();
+    public int process(FruitTransaction fruitTransaction, int optional) {
+        return optional + fruitTransaction.getQuantity();
     }
 }
