@@ -24,7 +24,7 @@ public class FruitServiceImpl implements FruitService {
         readDateDao = new ReadDateFromFileDaoImpl();
         String data = readDateDao.readDate(fromFilePath);
         processDate(data);
-        byte[] report = makeReport();
+        byte[] report = generateDataForReport();
         writeDateDao = new WriteDateToFileDaoImpl();
         writeDateDao.writeReport(report, toFilePath);
     }
@@ -41,7 +41,7 @@ public class FruitServiceImpl implements FruitService {
         }
     }
 
-    private byte[] makeReport() {
+    private byte[] generateDataForReport() {
         StringBuilder builderResult = new StringBuilder();
         builderResult.append(FRUIT_WORD).append(COMA_SEPARATOR).append(QUANTITY_WORD);
         for (Map.Entry<String, Integer> entry : Storage.fruitStorage.entrySet()) {
