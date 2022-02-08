@@ -1,13 +1,6 @@
-package shop.model;
+package shop.service;
 
-public class FruitTransaction {
-  private Operation operation;
-  private String fruit;
-  private int quantity;
-
-  // getters, setters, ...
-  
-  public enum Operation {
+public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
@@ -23,4 +16,3 @@ public class FruitTransaction {
       return operation;
     }
   }
-}
