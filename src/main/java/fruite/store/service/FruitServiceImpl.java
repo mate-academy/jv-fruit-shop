@@ -6,7 +6,6 @@ import fruite.store.dao.WriteDateDao;
 import fruite.store.dao.WriteDateToFileDaoImpl;
 import fruite.store.db.Storage;
 import fruite.store.service.strategy.StrategyType;
-
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
@@ -35,10 +34,10 @@ public class FruitServiceImpl implements FruitService {
         String[] arrayData = data.split(System.lineSeparator());
         for (int i = 1; i < arrayData.length; i++) {
             String[] temp = arrayData[i].split(COMA_SEPARATOR);
-            strategyType.doSpecialOperationOnFruits
-                    (temp[INDEX_OF_OPERATION_TYPE],
-                            temp[INDEX_OF_FRUIT_TYPE],
-                            temp[INDEX_OF_FRUIT_QUANTITY]);
+            strategyType.doSpecialOperationOnFruits(
+                    temp[INDEX_OF_OPERATION_TYPE],
+                    temp[INDEX_OF_FRUIT_TYPE],
+                    temp[INDEX_OF_FRUIT_QUANTITY]);
         }
     }
 
@@ -46,7 +45,10 @@ public class FruitServiceImpl implements FruitService {
         StringBuilder builderResult = new StringBuilder();
         builderResult.append(FRUIT_WORD).append(COMA_SEPARATOR).append(QUANTITY_WORD);
         for (Map.Entry<String, Integer> entry : Storage.fruitStorage.entrySet()) {
-            builderResult.append(System.lineSeparator()).append(entry.getKey()).append(COMA_SEPARATOR).append(entry.getValue());
+            builderResult.append(System.lineSeparator())
+                    .append(entry.getKey())
+                    .append(COMA_SEPARATOR)
+                    .append(entry.getValue());
         }
         return builderResult.toString().getBytes();
     }
