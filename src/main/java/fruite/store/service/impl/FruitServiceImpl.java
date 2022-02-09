@@ -18,7 +18,9 @@ public class FruitServiceImpl implements FruitService {
     private ReadDateService readDateDao;
     private WriteDateService writeDateDao;
 
-    public FruitServiceImpl(StrategyType strategyType, ReadDateService readDateDao, WriteDateService writeDateDao) {
+    public FruitServiceImpl(StrategyType strategyType,
+                            ReadDateService readDateDao,
+                            WriteDateService writeDateDao) {
         this.strategyType = strategyType;
         this.readDateDao = readDateDao;
         this.writeDateDao = writeDateDao;
