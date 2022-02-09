@@ -1,8 +1,9 @@
-package fruite.store.service;
+package fruite.store.service.impl;
 
-import fruite.store.dao.ReadDateDao;
-import fruite.store.dao.WriteDateDao;
 import fruite.store.db.Storage;
+import fruite.store.service.FruitService;
+import fruite.store.service.ReadDateService;
+import fruite.store.service.WriteDateService;
 import fruite.store.service.strategy.StrategyType;
 import java.util.Map;
 
@@ -14,10 +15,10 @@ public class FruitServiceImpl implements FruitService {
     private static final String QUANTITY_WORD = "quantity";
     private static final String COMA_SEPARATOR = ",";
     private StrategyType strategyType;
-    private ReadDateDao readDateDao;
-    private WriteDateDao writeDateDao;
+    private ReadDateService readDateDao;
+    private WriteDateService writeDateDao;
 
-    public FruitServiceImpl(StrategyType strategyType, ReadDateDao readDateDao, WriteDateDao writeDateDao) {
+    public FruitServiceImpl(StrategyType strategyType, ReadDateService readDateDao, WriteDateService writeDateDao) {
         this.strategyType = strategyType;
         this.readDateDao = readDateDao;
         this.writeDateDao = writeDateDao;
