@@ -1,9 +1,7 @@
 package fruite.store.service;
 
 import fruite.store.dao.ReadDateDao;
-import fruite.store.dao.ReadDateFromFileDaoImpl;
 import fruite.store.dao.WriteDateDao;
-import fruite.store.dao.WriteDateToFileDaoImpl;
 import fruite.store.db.Storage;
 import fruite.store.service.strategy.StrategyType;
 import java.util.Map;
@@ -19,18 +17,21 @@ public class FruitServiceImpl implements FruitService {
     private ReadDateDao readDateDao;
     private WriteDateDao writeDateDao;
 
+    public FruitServiceImpl(StrategyType strategyType, ReadDateDao readDateDao, WriteDateDao writeDateDao) {
+        this.strategyType = strategyType;
+        this.readDateDao = readDateDao;
+        this.writeDateDao = writeDateDao;
+    }
+
     @Override
     public void makeReportByDay(String fromFilePath, String toFilePath) {
-        readDateDao = new ReadDateFromFileDaoImpl();
         String data = readDateDao.readDate(fromFilePath);
         processDate(data);
         byte[] report = generateDataForReport();
-        writeDateDao = new WriteDateToFileDaoImpl();
         writeDateDao.writeReport(report, toFilePath);
     }
 
     private void processDate(String data) {
-        strategyType = new StrategyType();
         String[] arrayData = data.split(System.lineSeparator());
         for (int i = 1; i < arrayData.length; i++) {
             String[] temp = arrayData[i].split(COMA_SEPARATOR);
