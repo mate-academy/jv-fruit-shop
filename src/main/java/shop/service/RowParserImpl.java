@@ -2,7 +2,7 @@ package shop.service;
 
 import shop.impl.FruitTransaction;
 
-public class ParserImpl implements Parser {
+public class RowParserImpl implements RowParser {
     private static final String SEPARATOR = ",";
     private static final int OPERATION_IN_ARRAY = 0;
     private static final int FRUIT_IN_ARRAY = 1;
@@ -15,7 +15,7 @@ public class ParserImpl implements Parser {
         if (splitterLine.length != TOTAL_ELEMENTS) {
             throw new RuntimeException("Wrong input line");
         }
-        Operation operation = Operation.valueOf(splitterLine[OPERATION_IN_ARRAY]);
+        String operation = splitterLine[OPERATION_IN_ARRAY];
         String fruit = splitterLine[FRUIT_IN_ARRAY];
         int amount;
         try {
