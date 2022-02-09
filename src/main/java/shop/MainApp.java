@@ -7,15 +7,15 @@ import java.util.Map;
 import shop.impl.FruitTransaction;
 import shop.service.FileService;
 import shop.service.FileServiceImpl;
-import shop.service.RowParser;
-import shop.service.RowParserImpl;
 import shop.service.ReportWriter;
 import shop.service.ReportWriterImpl;
+import shop.service.RowParser;
+import shop.service.RowParserImpl;
+import shop.strategy.AddOperationHandler;
 import shop.strategy.BalanceOperationHandler;
 import shop.strategy.OperationHandler;
-import shop.strategy.SubtractOperationHandler;
-import shop.strategy.AddOperationHandler;
 import shop.strategy.Strategy;
+import shop.strategy.SubtractOperationHandler;
 
 public class MainApp {
     public static final String BALANCE = "b";
