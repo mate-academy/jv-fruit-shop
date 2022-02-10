@@ -10,6 +10,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReportReaderServiceImpl implements ReportReaderService {
+    private static final String SEPARATOR = ",";
+    private static final int INDEX_MARKING_OPERATION = 0;
+    private static final int INDEX_NAME_OF_FRUIT = 1;
+    private static final int INDEX_QUANTITY_OF_FRUIT = 2;
+
     @Override
     public List<FruitTransaction> readFile(String filePath) {
         List<String> inputReport;
@@ -25,11 +30,12 @@ public class ReportReaderServiceImpl implements ReportReaderService {
     }
 
     private FruitTransaction getDataLine(String line) {
-        String[] field = line.split(",");
+        String[] field = line.split(SEPARATOR);
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(fruitTransaction.getOperation(field[0]));
-        fruitTransaction.setFruit(new Fruit(field[1]));
-        fruitTransaction.setQuantity(Integer.parseInt(field[2]));
+        fruitTransaction.setOperation(fruitTransaction
+                .getOperation(field[INDEX_MARKING_OPERATION]));
+        fruitTransaction.setFruit(new Fruit(field[INDEX_NAME_OF_FRUIT]));
+        fruitTransaction.setQuantity(Integer.parseInt(field[INDEX_QUANTITY_OF_FRUIT]));
         return fruitTransaction;
     }
 }
