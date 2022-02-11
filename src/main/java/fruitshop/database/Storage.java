@@ -1,7 +1,6 @@
 package fruitshop.database;
 
 import fruitshop.model.Fruit;
-
 import java.util.HashMap;
 import java.util.Map;
 

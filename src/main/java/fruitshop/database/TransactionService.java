@@ -2,7 +2,6 @@ package fruitshop.database;
 
 import fruitshop.model.FruitTransaction;
 import fruitshop.model.SaveData;
-
 import java.util.ArrayList;
 import java.util.List;
 

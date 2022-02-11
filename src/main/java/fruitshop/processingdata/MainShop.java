@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MainShop {
-    private static final String readFromFileName = "src/main/resources/dayFile";
-    private static final String writeToFileName = "src/main/resources/fileToreport";
+    private static final String readFromFileName = "src/main/resources/dayFile.csv";
+    private static final String writeToFileName = "src/main/resources/fileToreport.csv";
     private static final String PURCHASE_ACTIVITY = "p";
     private static final String BALANCE_ACTIVITY = "b";
     private static final String SUPPLY_ACTIVITY = "s";

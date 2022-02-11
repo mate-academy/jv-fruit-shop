@@ -2,7 +2,6 @@ package fruitshop.dataservice;
 
 import fruitshop.database.Storage;
 import fruitshop.model.Fruit;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
