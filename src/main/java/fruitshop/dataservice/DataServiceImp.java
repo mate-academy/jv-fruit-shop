@@ -20,6 +20,11 @@ public class DataServiceImp implements WorkWithFile {
 
     @Override
     public void writeDataToFile(String reportFile) {
-
+        WorkWithReport supplierReport = new SupplierReport();
+        try {
+            Files.write(Path.of(reportFile), supplierReport.createReport());
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write to file" + reportFile, e);
+        }
     }
 }
