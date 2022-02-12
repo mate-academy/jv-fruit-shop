@@ -2,7 +2,6 @@ package fruitshop.service.impl;
 
 import fruitshop.service.file.FileReadService;
 import fruitshop.service.file.WriteDataToStorageService;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
