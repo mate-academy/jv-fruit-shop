@@ -3,10 +3,8 @@ package fruitshop;
 import fruitshop.db.ReportStorage;
 import fruitshop.db.TransactionStorage;
 import fruitshop.model.Operation;
-import fruitshop.service.impl.FileReadServiceImpl;
-import fruitshop.service.impl.FileWriteServiceImpl;
-import fruitshop.service.impl.GenerateReportDataImpl;
-import fruitshop.service.impl.ProcessDataImpl;
+import fruitshop.service.file.WriteDataToStorageService;
+import fruitshop.service.impl.*;
 import fruitshop.strategy.AdditionHandler;
 import fruitshop.strategy.BalanceHandler;
 import fruitshop.strategy.StrategyService;
@@ -15,7 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Application {
-    private static final FileReadServiceImpl fileReadService = new FileReadServiceImpl();
+    private static final WriteDataToStorageService writeServiceImpl = new WriteDataToStorageImpl();
+    private static final FileReadServiceImpl fileReadService = new FileReadServiceImpl(writeServiceImpl);
     private static final FileWriteServiceImpl fileWriteService = new FileWriteServiceImpl();
     private static final ProcessDataImpl processData = new ProcessDataImpl();
     private static final GenerateReportDataImpl generateReportData = new GenerateReportDataImpl();
