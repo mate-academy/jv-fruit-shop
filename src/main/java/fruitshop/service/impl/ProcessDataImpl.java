@@ -25,7 +25,8 @@ public class ProcessDataImpl implements ProcessDataService {
         for (FruitTransaction fruitTransaction : listOfTransactions) {
             balancesOfFruits.put(fruitTransaction.getFruit(),
                     operationsMap.get(fruitTransaction.getOperation())
-                            .process(fruitTransaction, checkBalance(fruitTransaction.getFruit())));
+                            .process(fruitTransaction.getQuantity(),
+                                    checkBalance(fruitTransaction.getFruit())));
         }
     }
 
