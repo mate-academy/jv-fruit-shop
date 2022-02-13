@@ -10,6 +10,7 @@ public class WriteDataToStorageImpl implements WriteDataToStorageService {
     private static final int INDEX_TYPE_TRANSACTION = 0;
     private static final int INDEX_NAME_TRANSACTION = 1;
     private static final int INDEX_SUM_TRANSACTION = 2;
+    private static final int MAXIMUM_TRANSACTION_LENGTH = 1;
     private final TransactionStorage transactionStorage = new TransactionStorage();
 
     @Override
@@ -30,7 +31,7 @@ public class WriteDataToStorageImpl implements WriteDataToStorageService {
     }
 
     private boolean checkFirstLine(String dataLine) {
-        String[] line = dataLine.split(",");
-        return line[0].length() > 1;
+        String[] line = dataLine.split(SEPARATOR);
+        return line[INDEX_TYPE_TRANSACTION].length() > MAXIMUM_TRANSACTION_LENGTH;
     }
 }
