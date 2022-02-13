@@ -15,8 +15,12 @@ public class Fruit {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Fruit fruit = (Fruit) o;
         return fruitType == fruit.fruitType;
     }
@@ -35,14 +39,23 @@ public class Fruit {
         GRAPEFRUIT("grapefruit"),
         MANGO("mango");
 
-        private String fruitType;
+        private final String asString;
 
         FruitType(String fruitType) {
-            this.fruitType = fruitType;
+            this.asString = fruitType;
         }
 
-        public String getFruitType() {
-            return fruitType;
+        public String getAsString() {
+            return asString;
+        }
+
+        public static FruitType getAsConstant(String fruitString) {
+            for (FruitType type: FruitType.values()) {
+                if (type.asString.equals(fruitString)) {
+                    return type;
+                }
+            }
+            return null;
         }
     }
 }

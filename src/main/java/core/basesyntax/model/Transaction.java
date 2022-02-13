@@ -5,7 +5,7 @@ public class Transaction {
     private final TransactionType transactionType;
     private final int quantity;
 
-    public Transaction(Fruit fruit, TransactionType transactionType, int quantity) {
+    public Transaction(TransactionType transactionType, Fruit fruit, int quantity) {
         this.fruit = fruit;
         this.transactionType = transactionType;
         this.quantity = quantity;
@@ -29,14 +29,23 @@ public class Transaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String transactionType;
+        private final String asLetter;
 
-        TransactionType (String transactionType) {
-            this.transactionType = transactionType;
+        TransactionType(String transactionType) {
+            this.asLetter = transactionType;
         }
 
-        public String getTransactionType() {
-            return this.transactionType;
+        public String getAsLetter() {
+            return this.asLetter;
+        }
+
+        public static TransactionType getAsConstant(String letter) {
+            for (TransactionType type: TransactionType.values()) {
+                if (type.asLetter.equals(letter)) {
+                    return type;
+                }
+            }
+            return null;
         }
     }
 }
