@@ -4,7 +4,11 @@ import fruite.store.db.Storage;
 import fruite.store.service.FruitService;
 import fruite.store.service.ReadDateService;
 import fruite.store.service.WriteDateService;
+import fruite.store.service.strategy.BalanceOperationType;
+import fruite.store.service.strategy.PurchaseOperationType;
+import fruite.store.service.strategy.ReturnOperationType;
 import fruite.store.service.strategy.StrategyType;
+import fruite.store.service.strategy.SupplyOperationType;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
@@ -29,9 +33,17 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public void makeReportByDay(String fromFilePath, String toFilePath) {
         String data = readDateDao.readDate(fromFilePath);
+        strategyInitilization();
         processDate(data);
         byte[] report = generateDataForReport();
         writeDateDao.writeReport(report, toFilePath);
+    }
+
+    private void strategyInitilization() {
+        StrategyType.operationTypeStrategy.put("b", new BalanceOperationType());
+        StrategyType.operationTypeStrategy.put("s", new SupplyOperationType());
+        StrategyType.operationTypeStrategy.put("p", new PurchaseOperationType());
+        StrategyType.operationTypeStrategy.put("r", new ReturnOperationType());
     }
 
     private void processDate(String data) {

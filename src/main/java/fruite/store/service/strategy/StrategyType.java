@@ -1,27 +1,19 @@
 package fruite.store.service.strategy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class StrategyType {
+    public static final Map<String, OperationType> operationTypeStrategy = new HashMap<>();
+
     public void doSpecialOperationOnFruits(String type, String fruit, String quantity) {
         Integer intQuantity = Integer.parseInt(quantity);
-        switch (type) {
-            case "b":
-                OperationType balanceOperationType = new BalanceOperationType();
-                balanceOperationType.doOpearation(fruit, intQuantity);
-                break;
-            case "s":
-                OperationType supplyOperationType = new SupplyOperationType();
-                supplyOperationType.doOpearation(fruit, intQuantity);
-                break;
-            case "p":
-                OperationType purchaseOperationType = new PurchaseOperationType();
-                purchaseOperationType.doOpearation(fruit, intQuantity);
-                break;
-            case "r":
-                OperationType returnOperationType = new ReturnOperationType();
-                returnOperationType.doOpearation(fruit, intQuantity);
-                break;
-            default:
-                throw new RuntimeException("Unknown operation");
+        for (Map.Entry<String, OperationType> entry : operationTypeStrategy.entrySet()) {
+            if (entry.getKey().equals(type)) {
+                entry.getValue().doOpearation(fruit, intQuantity);
+                return;
+            }
         }
+        throw new RuntimeException("Unknown operation: " + type);
     }
 }
