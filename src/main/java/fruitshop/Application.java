@@ -28,8 +28,8 @@ public class Application {
     private final Map<Operation, StrategyService> operationsMap = new HashMap<>();
 
     public static void main(String[] args) {
-        String fileInput = "input.csv";
-        String fileOut = "out.csv";
+        String fileInput = "src/resources/input.csv";
+        String fileOut = "src/resources/out.csv";
         Application application = new Application();
         application.generateReportToFile(fileInput, fileOut);
     }
