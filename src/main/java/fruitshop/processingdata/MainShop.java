@@ -19,23 +19,27 @@ import java.util.Map;
 public class MainShop {
     private static final String readFromFileName = "src/main/resources/dayFile.csv";
     private static final String writeToFileName = "src/main/resources/fileToreport.csv";
+    private static final Map<Operation, TypeOfActivity> operationHandlerMap = new HashMap<>();
+    private static final WorkWithFile withFile = new DataServiceImp();
+    private static final SaveData saveData = new TransactionService();
+    private static final WorkWithReport withReport = new SupplierReport();
 
     public static void main(String[] args) {
-        Map<Operation, TypeOfActivity> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.PURCHASE, new PurchaseActivity());
-        operationHandlerMap.put(Operation.BALANCE, new BalanceActivity());
-        operationHandlerMap.put(Operation.SUPPLY, new SupplyActivity());
-        operationHandlerMap.put(Operation.RETURN, new SupplyActivity());
-        WorkWithFile withFile = new DataServiceImp();
+        putOperationInMap();
         List<String> fromFileList = withFile.getDataFromFile(readFromFileName);
-        SaveData saveData = new TransactionService();
         List<FruitTransaction> fruitTransactionList = saveData.transactionData(fromFileList);
         for (FruitTransaction fruitTransact : fruitTransactionList) {
             Operation activity = fruitTransact.getOperation();
             TypeOfActivity typeActivity = operationHandlerMap.get(activity);
             typeActivity.realizeType(fruitTransact);
         }
-        WorkWithReport withReport = new SupplierReport();
         withFile.writeDataToFile(writeToFileName,withReport.createReport());
+    }
+
+    public static void putOperationInMap() {
+        operationHandlerMap.put(Operation.PURCHASE, new PurchaseActivity());
+        operationHandlerMap.put(Operation.BALANCE, new BalanceActivity());
+        operationHandlerMap.put(Operation.SUPPLY, new SupplyActivity());
+        operationHandlerMap.put(Operation.RETURN, new SupplyActivity());
     }
 }
