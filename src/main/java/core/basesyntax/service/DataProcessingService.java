@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface DataProcessingService {
-    void processingDate(List<FruitTransaction> date);
+    void processingDate(List<FruitTransaction> data);
 }

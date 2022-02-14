@@ -15,11 +15,11 @@ public class DataProcessingServiceImpl implements DataProcessingService {
     }
 
     @Override
-    public void processingDate(List<FruitTransaction> date) {
-        IntStream.range(0, date.size()).forEach(i -> {
+    public void processingDate(List<FruitTransaction> data) {
+        IntStream.range(0, data.size()).forEach(i -> {
             OperationService operationService = operationStrategy
-                    .applyOperation(date.get(i).getOperation());
-            operationService.processOperation(date.get(i));
+                    .applyOperation(data.get(i).getOperation());
+            operationService.processOperation(data.get(i));
         });
     }
 }
