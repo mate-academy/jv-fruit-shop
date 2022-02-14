@@ -12,9 +12,9 @@ public class Strategy {
     }
 
     public void performOperation(List<FruitTransaction> fruitTransactionList) {
-        for (FruitTransaction fruitTransaction : fruitTransactionList) {
+        fruitTransactionList.forEach(fruitTransaction -> {
             OperationHandler handler = handlers.get(fruitTransaction.getOperation());
             handler.apply(fruitTransaction);
-        }
+        });
     }
 }

@@ -8,8 +8,8 @@ public class AddOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction fruitTransaction) {
         Fruit fruit = new Fruit(fruitTransaction.getFruitName());
-        int oldAmount = Storage.fruitsCount.getOrDefault(fruit, 0);
-        int newAmount = oldAmount + fruitTransaction.getQuantity();
+        int newAmount = Storage.fruitsCount.getOrDefault(fruit, 0)
+                + fruitTransaction.getQuantity();
         Storage.fruitsCount.put(fruit, newAmount);
     }
 }
