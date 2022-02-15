@@ -48,7 +48,7 @@ Let's check in details all types of activities:
     type,fruit,quantity
     b,banana,20
     b,apple,100
-    s,banana,100
+    s,banana,100 
     p,banana,13
     r,apple,10 
     p,apple,20 
