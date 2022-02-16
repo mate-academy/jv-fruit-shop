@@ -2,14 +2,12 @@ package core.basesyntax;
 
 import core.basesyntax.service.DataProcess;
 import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.fileservice.WriterImp;
 import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +20,7 @@ public class Main {
                 new PurchaseOperationHandler());
         operationServiceMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         DataProcess dataProcess = new DataProcess(operationServiceMap);
-        String fileFrom = "inputFile.scv";
+        String fileFrom = "inputFile.csv";
         String data = "type,fruit,quantity\n"
                 + "b,banana,20\n"
                 + "b,apple,100\n"
@@ -32,14 +30,9 @@ public class Main {
                 + "p,apple,20\n"
                 + "p,banana,5\n"
                 + "s,banana,50";
-
-        try {
-            Files.write(new File(fileFrom).toPath(), data.getBytes());
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-
-        String fileTo = "outputFile.scv";
+        WriterImp writer = new WriterImp();
+        writer.write(fileFrom, data);
+        String fileTo = "outputFile.csv";
         dataProcess.processReport(fileFrom, fileTo);
     }
 
