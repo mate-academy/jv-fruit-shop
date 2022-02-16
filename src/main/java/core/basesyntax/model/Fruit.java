@@ -19,15 +19,15 @@ public class Fruit {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object fruit) {
+        if (this == fruit) {
             return true;
         }
-        if (!(o instanceof Fruit)) {
+        if (!(fruit instanceof Fruit)) {
             return false;
         }
-        Fruit fruit = (Fruit) o;
-        return Objects.equals(typeOfFruit, fruit.typeOfFruit);
+        Fruit thatFruit = (Fruit) fruit;
+        return Objects.equals(typeOfFruit, thatFruit.typeOfFruit);
     }
 
     @Override

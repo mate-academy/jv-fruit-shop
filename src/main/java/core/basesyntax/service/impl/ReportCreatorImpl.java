@@ -16,12 +16,12 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String createReport() {
-        StringBuilder builder = new StringBuilder(FIRST_LINE + System.lineSeparator());
+        StringBuilder builder = new StringBuilder(FIRST_LINE);
         for (Fruit fruit : storageDao.getFruitsSet()) {
-            builder.append(fruit)
+            builder.append(System.lineSeparator())
+                    .append(fruit)
                     .append(COMMA_SEPARATOR)
-                    .append(storageDao.getQuantity(fruit))
-                    .append(System.lineSeparator());
+                    .append(storageDao.getQuantity(fruit));
         }
         return builder.toString().trim();
     }
