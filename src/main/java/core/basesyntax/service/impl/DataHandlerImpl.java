@@ -11,7 +11,7 @@ public class DataHandlerImpl implements DataHandler {
     private static final int FRUIT_TYPE_POS = 1;
     private static final int QUANTITY_POS = 2;
     private static final String SPLITTER = ",";
-    private OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public DataHandlerImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;

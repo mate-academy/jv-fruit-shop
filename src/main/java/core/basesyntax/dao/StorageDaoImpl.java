@@ -14,13 +14,16 @@ public class StorageDaoImpl implements StorageDao {
     @Override
     public void addQuantity(Fruit fruit, int quantity) {
         int prevQuantity = getQuantity(fruit);
-        Storage.fruitsStorage.replace(fruit, prevQuantity + quantity);
+        Storage.fruitsStorage.put(fruit, prevQuantity + quantity);
     }
 
     @Override
     public void subtractQuantity(Fruit fruit, int quantity) {
         int prevQuantity = getQuantity(fruit);
-        Storage.fruitsStorage.replace(fruit, prevQuantity - quantity);
+        if (prevQuantity - quantity < 0) {
+            throw new RuntimeException("Balance cant be negative");
+        }
+        Storage.fruitsStorage.put(fruit, prevQuantity - quantity);
     }
 
     @Override

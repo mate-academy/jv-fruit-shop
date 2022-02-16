@@ -7,7 +7,7 @@ import core.basesyntax.service.strategy.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
 
-    private StorageDao storageDao;
+    private final StorageDao storageDao;
 
     public BalanceOperationHandler() {
         this.storageDao = new StorageDaoImpl();

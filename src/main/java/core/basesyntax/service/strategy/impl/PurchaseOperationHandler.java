@@ -7,7 +7,7 @@ import core.basesyntax.service.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
 
-    private StorageDao storageDao;
+    private final StorageDao storageDao;
 
     public PurchaseOperationHandler() {
         this.storageDao = new StorageDaoImpl();
