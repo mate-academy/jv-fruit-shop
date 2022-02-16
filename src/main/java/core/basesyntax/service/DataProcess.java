@@ -1,8 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.service.fileservice.ReaderImp;
-import core.basesyntax.service.fileservice.ReaderService;
-import core.basesyntax.service.fileservice.ReaderServiceImp;
 import core.basesyntax.service.fileservice.WriterImp;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.OperationStrategy;
@@ -12,7 +10,7 @@ import java.util.Map;
 
 public class DataProcess {
     private final ReaderImp reader;
-    private final ReaderService readerService;
+    private final TransactionService readerService;
     private final OperationStrategy operationStrategy;
     private final FillStorage fillStorage;
     private final CreatReportService creatReportService;
@@ -22,7 +20,7 @@ public class DataProcess {
         this.operationStrategy = new OperationStrategyImp(map);
         this.write = new WriterImp();
         this.reader = new ReaderImp();
-        this.readerService = new ReaderServiceImp();
+        this.readerService = new TransactionServiceImp();
         this.fillStorage = new FillStorage();
         this.creatReportService = new CreateReportServiceImp();
     }

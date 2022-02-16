@@ -1,10 +1,9 @@
-package core.basesyntax.service.fileservice;
+package core.basesyntax.service;
 
-import core.basesyntax.service.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReaderServiceImp implements ReaderService {
+public class TransactionServiceImp implements TransactionService {
     public static final String COMA_SEPARATOR = ",";
     public static final int OPERATION_INDEX = 0;
     public static final int FRUIT_INDEX = 1;
@@ -15,11 +14,11 @@ public class ReaderServiceImp implements ReaderService {
         return dataFromFile
                 .stream()
                 .skip(1)
-                .map(this::creatTransaction)
+                .map(this::createTransaction)
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction creatTransaction(String data) {
+    private FruitTransaction createTransaction(String data) {
         FruitTransaction fruitTransaction = new FruitTransaction();
         String[] line = data.split(COMA_SEPARATOR);
         fruitTransaction.setOperation(fruitTransaction
