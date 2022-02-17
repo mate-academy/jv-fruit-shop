@@ -41,7 +41,8 @@ public class Fruit {
         if (getClass() == obj.getClass()) {
             Fruit currentFruit = (Fruit) obj;
             return (currentFruit.fruitType == this.fruitType
-                    || (currentFruit.fruitType != null && currentFruit.fruitType.equals(this.fruitType)))
+                    || (currentFruit.fruitType != null
+                    && currentFruit.fruitType.equals(this.fruitType)))
                     && this.amount == currentFruit.amount;
         }
         return false;

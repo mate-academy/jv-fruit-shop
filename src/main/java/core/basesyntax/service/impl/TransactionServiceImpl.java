@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -25,7 +24,7 @@ public class TransactionServiceImpl implements TransactionService {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(fruitTransaction.getOperationType(dataArr[OPERATION_INDEX]));
         fruitTransaction.setFruitType(dataArr[FRUIT_TYPE_INDEX]);
-        fruitTransaction.setAmount(Integer.parseInt(dataArr[AMOUNT_INDEX]));
+        fruitTransaction.setAmount(Math.abs(Integer.parseInt(dataArr[AMOUNT_INDEX])));
         return fruitTransaction;
     }
 }

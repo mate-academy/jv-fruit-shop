@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,7 +13,7 @@ public class FileReaderServiceImpl implements FileReaderService {
         try {
             return Files.readAllLines(Paths.get(sourceFilePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can`t read file", e);
+            throw new RuntimeException("Can`t read file by the path " + sourceFilePath, e);
         }
     }
 }
