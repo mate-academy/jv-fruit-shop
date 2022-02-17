@@ -15,10 +15,9 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<FruitTransaction> processData(List<String> rawDataFromFile) {
-        List<FruitTransaction> fruitTransactionList = IntStream.range(1, rawDataFromFile.size())
+        return IntStream.range(1, rawDataFromFile.size())
                 .mapToObj(i -> processLine(rawDataFromFile.get(i)))
                 .collect(Collectors.toList());
-        return fruitTransactionList;
     }
 
     private FruitTransaction processLine(String line) {

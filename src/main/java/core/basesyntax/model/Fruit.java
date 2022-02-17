@@ -20,7 +20,6 @@ public class Fruit {
         this.amount = amount;
     }
 
-
     @Override
     public int hashCode() {
         int result = 17;

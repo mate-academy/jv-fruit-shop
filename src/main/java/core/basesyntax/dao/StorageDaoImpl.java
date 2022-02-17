@@ -3,6 +3,10 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class StorageDaoImpl implements StorageDao {
 
     @Override
@@ -22,5 +26,10 @@ public class StorageDaoImpl implements StorageDao {
         Fruit fruitFromStorage = get(fruit.getFruitType());
         Storage.fruits.remove(fruitFromStorage);
         add(fruit);
+    }
+
+    @Override
+    public List<Fruit> getAll() {
+        return new ArrayList<>(Storage.fruits);
     }
 }
