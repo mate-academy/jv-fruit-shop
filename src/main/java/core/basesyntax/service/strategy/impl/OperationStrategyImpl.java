@@ -7,7 +7,6 @@ import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-
     private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
     public OperationStrategyImpl(

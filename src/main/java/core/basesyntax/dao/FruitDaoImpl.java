@@ -4,8 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.Set;
 
-public class StorageDaoImpl implements StorageDao {
-
+public class FruitDaoImpl implements FruitDao {
     @Override
     public void addFruit(Fruit fruit) {
         Storage.fruitsStorage.put(fruit, 0);
