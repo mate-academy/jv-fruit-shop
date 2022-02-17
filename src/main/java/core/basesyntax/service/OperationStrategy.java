@@ -10,7 +10,7 @@ public class OperationStrategy {
     private static Map<Operation, OperationService> events = new HashMap<>(4);
 
     static {
-        events.put(Operation.RETURN, new Expense());
+        events.put(Operation.RETURN, new Income());
         events.put(Operation.BALANCE, new Income());
         events.put(Operation.PURCHASE, new Expense());
         events.put(Operation.SUPPLY, new Income());
