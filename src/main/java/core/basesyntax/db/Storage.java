@@ -5,13 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private final Map<Fruit, Integer> storageOfFruits;
+    private static final Map<Fruit, Integer> storageOfFruits;
 
-    public Storage() {
-        this.storageOfFruits = new HashMap<>();
+    static {
+        storageOfFruits = new HashMap<>();
     }
 
-    public Map<Fruit, Integer> getStorageOfFruits() {
+    private Storage() {
+    }
+
+    public static Map<Fruit, Integer> getStorageOfFruits() {
         return storageOfFruits;
     }
 }
