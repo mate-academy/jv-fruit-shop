@@ -1,26 +1,26 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.DataReader;
-import core.basesyntax.service.DataWriter;
-import core.basesyntax.service.FileHandler;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FileService;
 import core.basesyntax.strategy.StoreOperationsStrategy;
 import java.util.List;
 import java.util.Map;
 
-public class FileHandlerImpl implements FileHandler {
+public class FileServiceImpl implements FileService {
     public static final int INDEX_OF_OPERATION = 0;
     public static final int INDEX_OF_FRUIT_NAME = 1;
     public static final int INDEX_OF_QUANTITY = 2;
-    private final DataReader reader;
-    private final DataWriter writer;
+    private final FileReader reader;
+    private final FileWriter writer;
     private final StoreOperationsStrategy activitiesStrategy;
-    private final StorageDao storageDao;
+    private final FruitDao storageDao;
 
-    public FileHandlerImpl(DataReader reader, DataWriter writer,
-                           StoreOperationsStrategy activitiesStrategy, StorageDao storageDao) {
+    public FileServiceImpl(FileReader reader, FileWriter writer,
+                           StoreOperationsStrategy activitiesStrategy, FruitDao storageDao) {
         this.reader = reader;
         this.writer = writer;
         this.activitiesStrategy = activitiesStrategy;

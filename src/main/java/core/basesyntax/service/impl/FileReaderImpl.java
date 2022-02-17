@@ -1,18 +1,17 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.DataReader;
+import core.basesyntax.service.FileReader;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DataReaderFromFile implements DataReader {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<List<String>> getData(String fromFileName) {
         List<List<String>> records = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fromFileName))) {
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fromFileName))) {
             reader.lines().skip(1)
                     .forEachOrdered(line -> {
                         String[] values = line.split(",");

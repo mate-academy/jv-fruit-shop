@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.DataHandler;
+import core.basesyntax.service.OperationHandler;
 
 public interface StoreOperationsStrategy {
-    DataHandler process(Operation operation);
+    OperationHandler process(Operation operation);
 }

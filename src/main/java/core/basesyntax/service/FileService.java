@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface FileHandler {
+public interface FileService {
     void processFiles(String fromFilePath, String toFilePath);
 }

@@ -4,11 +4,11 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.Map;
 
-public class StorageDaoImpl implements StorageDao {
+public class FruitDaoImpl implements FruitDao {
 
     private final Storage storage;
 
-    public StorageDaoImpl(Storage storage) {
+    public FruitDaoImpl(Storage storage) {
         this.storage = storage;
     }
 
