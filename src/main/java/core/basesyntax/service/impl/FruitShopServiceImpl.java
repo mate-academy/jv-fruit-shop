@@ -26,9 +26,9 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public void createDayReport(String fromFile, String toFile) {
-        List<String> dataFromFile = fileReader.readData(fromFile);
+        List<String> dataFromFile = fileReader.readFromFile(fromFile);
         dataHandler.processData(dataFromFile);
         String report = reportCreator.createReport();
-        fileWriter.writeReport(report, toFile);
+        fileWriter.writeToFile(report, toFile);
     }
 }
