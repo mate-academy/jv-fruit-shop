@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SupplierReport implements WorkWithReport {
+public class ReportCreatorImpl implements ReportCreator {
     private static final String COLUMN_NAMES = "fruit,quantity";
 
     @Override

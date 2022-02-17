@@ -1,13 +1,14 @@
 package fruitshop.processingdata;
 
-import fruitshop.database.TransactionService;
-import fruitshop.dataservice.DataServiceImp;
-import fruitshop.dataservice.SupplierReport;
-import fruitshop.dataservice.WorkWithFile;
-import fruitshop.dataservice.WorkWithReport;
+import fruitshop.database.TransactionServiceImpl;
+import fruitshop.dataservice.FileReaderService;
+import fruitshop.dataservice.FileReaderServiceImpl;
+import fruitshop.dataservice.FileWriterService;
+import fruitshop.dataservice.FileWriterServiceImpl;
+import fruitshop.dataservice.ReportCreator;
+import fruitshop.dataservice.ReportCreatorImpl;
 import fruitshop.model.FruitTransaction;
-import fruitshop.model.Operation;
-import fruitshop.model.SaveData;
+import fruitshop.model.TransactionService;
 import fruitshop.strategy.BalanceActivity;
 import fruitshop.strategy.PurchaseActivity;
 import fruitshop.strategy.SupplyActivity;
@@ -19,27 +20,29 @@ import java.util.Map;
 public class MainShop {
     private static final String readFromFileName = "src/main/resources/dayFile.csv";
     private static final String writeToFileName = "src/main/resources/fileToreport.csv";
-    private static final Map<Operation, TypeOfActivity> operationHandlerMap = new HashMap<>();
-    private static final WorkWithFile withFile = new DataServiceImp();
-    private static final SaveData saveData = new TransactionService();
-    private static final WorkWithReport withReport = new SupplierReport();
+    private static final Map<String, TypeOfActivity> operationHandlerMap = new HashMap<>();
+    private static final FileReaderService readFromFile = new FileReaderServiceImpl();
+    private static final FileWriterService writeToFile = new FileWriterServiceImpl();
+    private static final TransactionService transactionService = new TransactionServiceImpl();
+    private static final ReportCreator withReport = new ReportCreatorImpl();
 
     public static void main(String[] args) {
         putOperationInMap();
-        List<String> fromFileList = withFile.getDataFromFile(readFromFileName);
-        List<FruitTransaction> fruitTransactionList = saveData.transactionData(fromFileList);
+        List<String> fromFileList = readFromFile.getDataFromFile(readFromFileName);
+        List<FruitTransaction> fruitTransactionList
+                = transactionService.transactionData(fromFileList);
         for (FruitTransaction fruitTransact : fruitTransactionList) {
-            Operation activity = fruitTransact.getOperation();
+            String activity = fruitTransact.getOperation();
             TypeOfActivity typeActivity = operationHandlerMap.get(activity);
             typeActivity.realizeType(fruitTransact);
         }
-        withFile.writeDataToFile(writeToFileName,withReport.createReport());
+        writeToFile.writeDataToFile(writeToFileName,withReport.createReport());
     }
 
     public static void putOperationInMap() {
-        operationHandlerMap.put(Operation.PURCHASE, new PurchaseActivity());
-        operationHandlerMap.put(Operation.BALANCE, new BalanceActivity());
-        operationHandlerMap.put(Operation.SUPPLY, new SupplyActivity());
-        operationHandlerMap.put(Operation.RETURN, new SupplyActivity());
+        operationHandlerMap.put("p", new PurchaseActivity());
+        operationHandlerMap.put("b", new BalanceActivity());
+        operationHandlerMap.put("s", new SupplyActivity());
+        operationHandlerMap.put("r", new SupplyActivity());
     }
 }

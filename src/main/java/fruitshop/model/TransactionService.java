@@ -2,6 +2,6 @@ package fruitshop.model;
 
 import java.util.List;
 
-public interface SaveData {
+public interface TransactionService {
     List<FruitTransaction> transactionData(List<String> readFile);
 }
