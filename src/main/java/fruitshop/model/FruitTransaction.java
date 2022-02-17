@@ -26,6 +26,5 @@ public class FruitTransaction {
     public int getQuantity() {
         return quantity;
     }
-
 }
 

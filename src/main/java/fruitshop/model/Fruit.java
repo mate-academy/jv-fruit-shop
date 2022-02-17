@@ -32,7 +32,6 @@ public class Fruit {
         Fruit castObject = (Fruit) check;
         return (this.nameFruit == castObject.nameFruit
                 || castObject.nameFruit != null && this.nameFruit.equals(castObject.nameFruit));
-
     }
 
     @Override
