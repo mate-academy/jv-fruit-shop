@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class ReaderImp implements Reader {
+public class ReaderImpl implements Reader {
     public List<String> readFromInput(String fileName) {
         List<String> recordActivitiesForDay;
         try {

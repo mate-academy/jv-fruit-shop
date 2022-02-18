@@ -1,15 +1,16 @@
-package core.basesyntax.service;
+package core.basesyntax.service.service.impl;
 
-import core.basesyntax.dao.FruitStorageDao;
-import core.basesyntax.dao.FruitStorageDaoImp;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.service.CreatReportService;
 
-public class CreateReportServiceImp implements CreatReportService {
+public class CreateReportServiceImpl implements CreatReportService {
     public static final String FIRST_COLUMN_LINE = "fruit,quantity";
     public static final String COMA_SEPARATOR = ",";
-    private final FruitStorageDao fruitStorageDao;
+    private final FruitDao fruitStorageDao;
 
-    public CreateReportServiceImp() {
-        this.fruitStorageDao = new FruitStorageDaoImp();
+    public CreateReportServiceImpl() {
+        this.fruitStorageDao = new FruitDaoImpl();
     }
 
     @Override

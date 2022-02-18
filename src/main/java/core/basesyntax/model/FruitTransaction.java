@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.model;
 
 public class FruitTransaction {
     public static final String BALANCE_MARKER = "b";

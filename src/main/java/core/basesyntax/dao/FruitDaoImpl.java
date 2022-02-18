@@ -1,20 +1,19 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitStorageDaoImp implements FruitStorageDao {
-
+public class FruitDaoImpl implements FruitDao {
     @Override
     public void add(Fruit fruit) {
-        Storage.getFruits().add(fruit);
+        FruitsStorage.getFruits().add(fruit);
     }
 
     @Override
     public Fruit get(String fruitName) {
-        return Storage.getFruits().stream()
+        return FruitsStorage.getFruits().stream()
                 .filter(f -> f.getFruitType().equals(fruitName))
                 .findFirst()
                 .get();
@@ -22,6 +21,6 @@ public class FruitStorageDaoImp implements FruitStorageDao {
 
     @Override
     public List<Fruit> getAll() {
-        return new ArrayList<>(Storage.getFruits());
+        return new ArrayList<>(FruitsStorage.getFruits());
     }
 }

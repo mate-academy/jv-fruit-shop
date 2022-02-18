@@ -4,7 +4,7 @@ import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Storage {
+public class FruitsStorage {
     private static List<Fruit> fruits = new ArrayList<>();
 
     public static List<Fruit> getFruits() {
@@ -12,6 +12,6 @@ public class Storage {
     }
 
     public static void setFruits(List<Fruit> fruits) {
-        Storage.fruits = fruits;
+        FruitsStorage.fruits = fruits;
     }
 }
