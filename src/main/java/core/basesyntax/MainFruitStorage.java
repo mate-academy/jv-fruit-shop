@@ -8,13 +8,13 @@ import core.basesyntax.service.impl.DataProcessingServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.service.impl.ReportReaderServiceImpl;
 import core.basesyntax.service.impl.ReportWriterServiceImpl;
-import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.BalanceOperationService;
+import core.basesyntax.strategy.impl.BalanceHandlerService;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-import core.basesyntax.strategy.impl.PurchaseOperationService;
-import core.basesyntax.strategy.impl.ReturnOperationService;
-import core.basesyntax.strategy.impl.SupplyOperationService;
+import core.basesyntax.strategy.impl.PurchaseHandlerService;
+import core.basesyntax.strategy.impl.ReturnHandlerService;
+import core.basesyntax.strategy.impl.SupplyHandlerService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class MainFruitStorage {
     private static final String REPORT_FILE_NAME = "src/main/resources/output_report.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationService> operationServiceMap
+        Map<FruitTransaction.Operation, OperationHandler> operationServiceMap
                 = getOperationServiceMap();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationServiceMap);
         List<FruitTransaction> fruitTransactions = new ReportReaderServiceImpl()
@@ -38,13 +38,13 @@ public class MainFruitStorage {
         reportWriterService.writeReport(report, REPORT_FILE_NAME);
     }
 
-    private static Map<FruitTransaction.Operation, OperationService> getOperationServiceMap() {
-        Map<FruitTransaction.Operation, OperationService> operationServiceMap = new HashMap<>();
-        operationServiceMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationService());
-        operationServiceMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationService());
+    private static Map<FruitTransaction.Operation, OperationHandler> getOperationServiceMap() {
+        Map<FruitTransaction.Operation, OperationHandler> operationServiceMap = new HashMap<>();
+        operationServiceMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandlerService());
+        operationServiceMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandlerService());
         operationServiceMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationService());
-        operationServiceMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationService());
+                new PurchaseHandlerService());
+        operationServiceMap.put(FruitTransaction.Operation.RETURN, new ReturnHandlerService());
         return operationServiceMap;
     }
 }

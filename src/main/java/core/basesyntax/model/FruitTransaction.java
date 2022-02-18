@@ -1,29 +1,12 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private static final String BALANCE_MARKING = "b";
-    private static final String SUPPLY_MARKING = "s";
-    private static final String PURCHASE_MARKING = "p";
-    private static final String RETURN_MARKING = "r";
     private Operation operation;
     private Fruit fruit;
     private int quantity;
 
     public Operation getOperation() {
         return operation;
-    }
-
-    public FruitTransaction.Operation getOperation(String letter) {
-        switch (letter) {
-            case BALANCE_MARKING :
-                return Operation.BALANCE;
-            case SUPPLY_MARKING :
-                return Operation.SUPPLY;
-            case RETURN_MARKING :
-                return Operation.RETURN;
-            default:
-                return Operation.PURCHASE;
-        }
     }
 
     public void setOperation(Operation operation) {
@@ -60,6 +43,15 @@ public class FruitTransaction {
 
         public String getOperation() {
             return operation;
+        }
+
+        public static Operation fromOperation(String operation) {
+            for (Operation o : Operation.values()) {
+                if (o.operation.equals(operation)) {
+                    return o;
+                }
+            }
+            return null;
         }
     }
 }

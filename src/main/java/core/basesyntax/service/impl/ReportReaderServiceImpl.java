@@ -32,8 +32,8 @@ public class ReportReaderServiceImpl implements ReportReaderService {
     private FruitTransaction getDataLine(String line) {
         String[] field = line.split(SEPARATOR);
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(fruitTransaction
-                .getOperation(field[INDEX_MARKING_OPERATION]));
+        fruitTransaction.setOperation(FruitTransaction.Operation
+                .fromOperation(field[INDEX_MARKING_OPERATION]));
         fruitTransaction.setFruit(new Fruit(field[INDEX_NAME_OF_FRUIT]));
         fruitTransaction.setQuantity(Integer.parseInt(field[INDEX_QUANTITY_OF_FRUIT]));
         return fruitTransaction;

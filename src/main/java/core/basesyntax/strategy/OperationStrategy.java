@@ -3,5 +3,5 @@ package core.basesyntax.strategy;
 import core.basesyntax.model.FruitTransaction;
 
 public interface OperationStrategy {
-    OperationService applyOperation(FruitTransaction.Operation operation);
+    OperationHandler applyOperation(FruitTransaction.Operation operation);
 }
