@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class FileWriterServiceImpl implements FileWriterService{
+public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void write(String fileName, String report) {
         try {
