@@ -13,6 +13,9 @@ public class ReaderImpl implements Reader {
         } catch (IOException e) {
             throw new RuntimeException("Cann`t read file " + fileName, e);
         }
+        if (recordActivitiesForDay.isEmpty()) {
+            throw new RuntimeException("The contents of the file cannot be empty");
+        }
         return recordActivitiesForDay;
     }
 }
