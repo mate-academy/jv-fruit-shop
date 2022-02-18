@@ -2,7 +2,7 @@ package core.basesyntax.service.operations;
 
 import core.basesyntax.db.Storage;
 
-public class Expense implements OperationService {
+public class ExpenseOperationHandler implements OperationHandler {
 
     @Override
     public void operate(String fruitName, Integer weight) {
