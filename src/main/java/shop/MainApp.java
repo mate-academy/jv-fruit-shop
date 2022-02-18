@@ -6,12 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import shop.impl.FruitTransaction;
-import shop.service.FileService;
-import shop.service.FileServiceImpl;
-import shop.service.ReportWriter;
-import shop.service.ReportWriterImpl;
-import shop.service.RowParser;
-import shop.service.RowParserImpl;
+import shop.service.*;
 import shop.strategy.AddOperationHandler;
 import shop.strategy.BalanceOperationHandler;
 import shop.strategy.OperationHandler;
@@ -35,7 +30,7 @@ public class MainApp {
     }
 
     public static void main(String[] args) {
-        FileService fileReader = new FileServiceImpl();
+        FileReaderService fileReader = new FileReaderServiceImpl();
         List<String> linesFromFile = fileReader.read(INPUT_FILE);
         List<FruitTransaction> fruitTransactionList;
         RowParser rowParser = new RowParserImpl();
@@ -47,7 +42,7 @@ public class MainApp {
         strategy.performOperation(fruitTransactionList);
         ReportWriter reportWriter = new ReportWriterImpl();
         String report = reportWriter.makeReport();
-        FileServiceImpl fileWriter = new FileServiceImpl();
+        FileWriterService fileWriter = new FileWriterServiceImpl();
         fileWriter.write(OUTPUT_FILE, report);
     }
 }
