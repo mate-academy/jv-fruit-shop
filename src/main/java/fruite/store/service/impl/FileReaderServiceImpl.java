@@ -1,13 +1,13 @@
 package fruite.store.service.impl;
 
-import fruite.store.service.ReadDateService;
+import fruite.store.service.FileReaderService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ReadDateFromFileImpl implements ReadDateService {
+public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public String readDate(String fromFileName) {
         File file = new File(fromFileName);

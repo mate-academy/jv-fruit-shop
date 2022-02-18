@@ -1,11 +1,11 @@
 package fruite.store.service.impl;
 
-import fruite.store.service.WriteDateService;
+import fruite.store.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class WriteDateToFileImpl implements WriteDateService {
+public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeReport(byte[] report, String toFileName) {
         try {
