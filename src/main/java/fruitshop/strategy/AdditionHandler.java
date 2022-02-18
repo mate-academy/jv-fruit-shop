@@ -1,6 +1,6 @@
 package fruitshop.strategy;
 
-public class AdditionHandler implements StrategyService {
+public class AdditionHandler implements OperationHandler {
 
     @Override
     public int process(int quality, int balance) {
