@@ -20,8 +20,8 @@ public class Main {
         map.put(Operation.RETURN, new ReturnOperationHandler());
         map.put(Operation.SUPPLY, new SupplyOperationHandler());
         FruitShopService fruitShopService = new FruitShopServiceImpl(map);
-        String fileFrom = "src/main/java/core/fruitshop/resources/fromFile";
-        String fileTo = "src/main/java/core/fruitshop/resources/toFile";
+        String fileFrom = "src/main/resources/fromFile";
+        String fileTo = "src/main/resources/toFile";
         fruitShopService.createDayReport(fileFrom, fileTo);
     }
 
