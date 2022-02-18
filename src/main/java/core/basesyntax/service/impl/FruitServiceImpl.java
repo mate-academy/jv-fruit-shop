@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationStrategy;
@@ -8,12 +8,12 @@ import core.basesyntax.strategy.operation.OperationHandler;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-    private StorageDao storageDao;
+    private FruitDao fruitDao;
     private OperationStrategy operationStrategy;
     private OperationHandler operationHandler;
 
-    public FruitServiceImpl(StorageDao storageDao, OperationStrategy operationStrategy) {
-        this.storageDao = storageDao;
+    public FruitServiceImpl(FruitDao fruitDao, OperationStrategy operationStrategy) {
+        this.fruitDao = fruitDao;
         this.operationStrategy = operationStrategy;
     }
 

@@ -5,7 +5,7 @@ import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StorageDaoImpl implements StorageDao {
+public class FruitDaoImpl implements FruitDao {
     @Override
     public void add(Fruit fruit) {
         Storage.fruits.add(fruit);
@@ -21,8 +21,7 @@ public class StorageDaoImpl implements StorageDao {
     @Override
     public void update(Fruit fruit) {
         Fruit fruitFromStorage = get(fruit.getFruitType());
-        Storage.fruits.remove(fruitFromStorage);
-        add(fruit);
+        fruitFromStorage.setAmount(fruit.getAmount());
     }
 
     @Override

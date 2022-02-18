@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
@@ -28,7 +28,7 @@ public class Main {
             = "src/main/java/core/basesyntax/resource/input.csv";
     private static final String REPORT_FILE_PATH
             = "src/main/java/core/basesyntax/resource/report.csv";
-    private static final StorageDao storageDao = new StorageDaoImpl();
+    private static final FruitDao FRUIT_DAO = new FruitDaoImpl();
     private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
     private static final FileWriterService fileWriterService = new FileWriterServiceImpl();
     private static final TransactionService transactionService = new TransactionServiceImpl();
@@ -48,9 +48,9 @@ public class Main {
         List<FruitTransaction> fruitsTransactionList
                 = transactionService.processData(rawDataFromFile);
         OperationStrategy operationStrategy = new OperationStrategyImpl(fruitServiceMap);
-        FruitService fruitService = new FruitServiceImpl(storageDao, operationStrategy);
+        FruitService fruitService = new FruitServiceImpl(FRUIT_DAO, operationStrategy);
         fruitService.setDataToStorage(fruitsTransactionList);
-        List<Fruit> fruitsFromStorage = storageDao.getAll();
+        List<Fruit> fruitsFromStorage = FRUIT_DAO.getAll();
         fileWriterService.write(REPORT_FILE_PATH, fruitsFromStorage);
     }
 }
