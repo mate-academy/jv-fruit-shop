@@ -5,8 +5,8 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public FruitTransaction(Operation operation, String fruit, int quantity) {
-        this.operation = operation;
+    public FruitTransaction(String operation, String fruit, int quantity) {
+        this.operation = convertOperation(operation);
         this.fruit = fruit;
         this.quantity = quantity;
     }
@@ -31,6 +31,15 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    private Operation convertOperation(String operation) {
+        for (Operation o : Operation.values()) {
+            if (o.getOperation().equals(operation)) {
+                return o;
+            }
+        }
+        throw new RuntimeException("Can't find operation");
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -45,21 +54,6 @@ public class FruitTransaction {
 
         public String getOperation() {
             return operation;
-        }
-
-        public static Operation getFullOperationName(String string) {
-            switch (string) {
-                case "b":
-                    return BALANCE;
-                case "s":
-                    return SUPPLY;
-                case "p":
-                    return PURCHASE;
-                case "r":
-                    return RETURN;
-                default:
-                    throw new RuntimeException("Incorrect data type in source file!");
-            }
         }
     }
 }

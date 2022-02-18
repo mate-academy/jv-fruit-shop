@@ -1,5 +1,3 @@
-package core.basesyntax;
-
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.sevice.ConvertReadedDataServiceImpl;
