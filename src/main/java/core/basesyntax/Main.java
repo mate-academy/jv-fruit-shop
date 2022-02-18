@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_FROM = "src/main/resources/data.csv";
+    private static final String FILE_TO = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
@@ -18,8 +21,6 @@ public class Main {
         handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
         handlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         FruitShopService fruitShopService = new FruitShopService(handlers);
-        String fileFrom = "src/main/resources/data.csv";
-        String fileTo = "src/main/resources/report.csv";
-        fruitShopService.createDailyReport(fileFrom, fileTo);
+        fruitShopService.createDailyReport(FILE_FROM, FILE_TO);
     }
 }
