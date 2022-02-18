@@ -9,13 +9,13 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<FruitTransaction> transactionData(List<String> readFile) {
-        List<FruitTransaction> transaction = new ArrayList<>();
+        List<FruitTransaction> transactions = new ArrayList<>();
         String[] temp;
         readFile.remove(0);
         for (String line : readFile) {
             temp = line.split(",");
-            transaction.add(FruitTransaction.of(temp[0],temp[1],Integer.parseInt(temp[2])));
+            transactions.add(FruitTransaction.of(temp[0],temp[1],Integer.parseInt(temp[2])));
         }
-        return transaction;
+        return transactions;
     }
 }
