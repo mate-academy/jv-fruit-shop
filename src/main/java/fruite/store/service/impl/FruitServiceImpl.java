@@ -1,14 +1,14 @@
 package fruite.store.service.impl;
 
 import fruite.store.db.Storage;
-import fruite.store.service.FruitService;
 import fruite.store.service.FileReaderService;
 import fruite.store.service.FileWriterService;
-import fruite.store.service.strategy.BalanceOperationType;
-import fruite.store.service.strategy.PurchaseOperationType;
-import fruite.store.service.strategy.ReturnOperationType;
-import fruite.store.service.strategy.StrategyType;
-import fruite.store.service.strategy.SupplyOperationType;
+import fruite.store.service.FruitService;
+import fruite.store.service.strategy.BalanceOperationHandler;
+import fruite.store.service.strategy.PurchaseOperationHandler;
+import fruite.store.service.strategy.ReturnOperationHandler;
+import fruite.store.service.strategy.StrategyHandler;
+import fruite.store.service.strategy.SupplyOperationHandler;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
@@ -18,11 +18,11 @@ public class FruitServiceImpl implements FruitService {
     private static final String FRUIT_WORD = "fruit";
     private static final String QUANTITY_WORD = "quantity";
     private static final String COMA_SEPARATOR = ",";
-    private StrategyType strategyType;
+    private StrategyHandler strategyType;
     private FileReaderService readDateDao;
     private FileWriterService writeDateDao;
 
-    public FruitServiceImpl(StrategyType strategyType,
+    public FruitServiceImpl(StrategyHandler strategyType,
                             FileReaderService readDateDao,
                             FileWriterService writeDateDao) {
         this.strategyType = strategyType;
@@ -40,10 +40,10 @@ public class FruitServiceImpl implements FruitService {
     }
 
     private void strategyInitilization() {
-        StrategyType.operationTypeStrategy.put("b", new BalanceOperationType());
-        StrategyType.operationTypeStrategy.put("s", new SupplyOperationType());
-        StrategyType.operationTypeStrategy.put("p", new PurchaseOperationType());
-        StrategyType.operationTypeStrategy.put("r", new ReturnOperationType());
+        StrategyHandler.operationTypeStrategy.put("b", new BalanceOperationHandler());
+        StrategyHandler.operationTypeStrategy.put("s", new SupplyOperationHandler());
+        StrategyHandler.operationTypeStrategy.put("p", new PurchaseOperationHandler());
+        StrategyHandler.operationTypeStrategy.put("r", new ReturnOperationHandler());
     }
 
     private void processDate(String data) {
