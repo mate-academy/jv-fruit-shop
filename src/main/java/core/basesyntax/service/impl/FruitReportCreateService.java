@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.ReportCreateService;
 import java.util.Set;
 
@@ -9,8 +10,8 @@ public class FruitReportCreateService implements ReportCreateService {
     public static final String COMMA_SEPARATOR = ",";
     private final FruitDao fruitDao;
 
-    public FruitReportCreateService(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
+    public FruitReportCreateService() {
+        this.fruitDao = new FruitDaoImpl();
     }
 
     @Override
