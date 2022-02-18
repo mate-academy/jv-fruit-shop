@@ -18,7 +18,7 @@ public class FileReadServiceImpl implements FileReadService {
         String line;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filepath))) {
             while ((line = bufferedReader.readLine()) != null) {
-                writeDataToStorageService.writeDate(line);
+                writeDataToStorageService.writeData(line);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from the file " + e);

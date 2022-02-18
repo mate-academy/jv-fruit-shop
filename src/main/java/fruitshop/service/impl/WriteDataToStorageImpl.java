@@ -14,7 +14,7 @@ public class WriteDataToStorageImpl implements WriteDataToStorageService {
     private final TransactionStorage transactionStorage = new TransactionStorage();
 
     @Override
-    public void writeDate(String dataLine) {
+    public void writeData(String dataLine) {
         if (!checkFirstLine(dataLine)) {
             transactionStorage.add(parseTransaction(dataLine));
         }
