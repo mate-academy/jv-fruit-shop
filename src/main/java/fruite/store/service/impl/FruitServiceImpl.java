@@ -32,11 +32,11 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void makeReportByDay(String fromFilePath, String toFilePath) {
-        String data = readDateDao.readDate(fromFilePath);
+        String data = readDateDao.readFromFile(fromFilePath);
         strategyInitilization();
         processDate(data);
         byte[] report = generateDataForReport();
-        writeDateDao.writeReport(report, toFilePath);
+        writeDateDao.writeToFile(report, toFilePath);
     }
 
     private void strategyInitilization() {

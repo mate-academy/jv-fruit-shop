@@ -1,5 +1,5 @@
 package fruite.store.service;
 
 public interface FileReaderService {
-    String readDate(String fromFileName);
+    String readFromFile(String fromFileName);
 }

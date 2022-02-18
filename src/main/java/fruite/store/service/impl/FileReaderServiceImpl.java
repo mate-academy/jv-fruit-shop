@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
-    public String readDate(String fromFileName) {
+    public String readFromFile(String fromFileName) {
         File file = new File(fromFileName);
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file));) {
