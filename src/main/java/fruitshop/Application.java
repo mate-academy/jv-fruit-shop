@@ -3,6 +3,10 @@ package fruitshop;
 import fruitshop.db.ReportStorage;
 import fruitshop.db.TransactionStorage;
 import fruitshop.model.Operation;
+import fruitshop.service.GenerateReportDataService;
+import fruitshop.service.data.ProcessDataService;
+import fruitshop.service.file.FileReadService;
+import fruitshop.service.file.FileWriteService;
 import fruitshop.service.file.WriteDataToStorageService;
 import fruitshop.service.impl.FileReadServiceImpl;
 import fruitshop.service.impl.FileWriteServiceImpl;
@@ -11,21 +15,22 @@ import fruitshop.service.impl.ProcessDataImpl;
 import fruitshop.service.impl.WriteDataToStorageImpl;
 import fruitshop.strategy.AdditionHandler;
 import fruitshop.strategy.BalanceHandler;
-import fruitshop.strategy.StrategyService;
+import fruitshop.strategy.OperationHandler;
+import fruitshop.strategy.OperationStrategy;
 import fruitshop.strategy.SubtractionHandler;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Application {
     private static final WriteDataToStorageService writeDataService = new WriteDataToStorageImpl();
-    private static final FileReadServiceImpl fileReadService
+    private static final FileReadService fileReadService
             = new FileReadServiceImpl(writeDataService);
-    private static final FileWriteServiceImpl fileWriteService = new FileWriteServiceImpl();
-    private static final ProcessDataImpl processData = new ProcessDataImpl();
-    private static final GenerateReportDataImpl generateReportData = new GenerateReportDataImpl();
-    private static final TransactionStorage transactionStorage = new TransactionStorage();
+    private static final FileWriteService fileWriteService = new FileWriteServiceImpl();
+    private static final GenerateReportDataService generateReportData
+            = new GenerateReportDataImpl();
     private static final ReportStorage reportStorage = new ReportStorage();
-    private final Map<Operation, StrategyService> operationsMap = new HashMap<>();
+    private static final TransactionStorage transactionStorage = new TransactionStorage();
+    private final Map<Operation, OperationHandler> operationsMap = new HashMap<>();
 
     public static void main(String[] args) {
         String fileInput = "src/resources/input.csv";
@@ -36,8 +41,10 @@ public class Application {
 
     private void generateReportToFile(String fileInput, String fileOut) {
         strategyInit();
+        OperationStrategy operationStrategy = new OperationStrategy(operationsMap);
+        ProcessDataService processData = new ProcessDataImpl(operationStrategy);
         fileReadService.readDataFromFile(fileInput);
-        processData.process(transactionStorage.getAll(),operationsMap);
+        processData.process(transactionStorage.getAll());
         String report = generateReportData.report(reportStorage.getAll());
         fileWriteService.writeDataToFile(report, fileOut);
     }
