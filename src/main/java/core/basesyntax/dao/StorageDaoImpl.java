@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StorageDaoImpl implements StorageDao {
-
     @Override
     public void add(Fruit fruit) {
         Storage.fruits.add(fruit);

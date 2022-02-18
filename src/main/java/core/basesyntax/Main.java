@@ -32,14 +32,18 @@ public class Main {
     private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
     private static final FileWriterService fileWriterService = new FileWriterServiceImpl();
     private static final TransactionService transactionService = new TransactionServiceImpl();
+    private static final Map<FruitTransaction.Operation,
+            OperationHandler> fruitServiceMap = new HashMap<>();
 
-    public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> fruitServiceMap = new HashMap<>();
+    static {
         fruitServiceMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         fruitServiceMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         fruitServiceMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
         fruitServiceMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandler());
+    }
+
+    public static void main(String[] args) {
         List<String> rawDataFromFile = fileReaderService.read(SOURCE_FILE_PATH);
         List<FruitTransaction> fruitsTransactionList
                 = transactionService.processData(rawDataFromFile);
