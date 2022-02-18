@@ -1,6 +1,6 @@
 package fruitshop.strategy;
 
-public interface StrategyService {
+public interface OperationHandler {
 
     int process(int quality, int balance);
 }
