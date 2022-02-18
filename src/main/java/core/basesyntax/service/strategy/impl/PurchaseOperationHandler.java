@@ -1,6 +1,7 @@
-package core.basesyntax.service.strategy;
+package core.basesyntax.service.strategy.impl;
 
 import core.basesyntax.dao.StorageDao;
+import core.basesyntax.service.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override

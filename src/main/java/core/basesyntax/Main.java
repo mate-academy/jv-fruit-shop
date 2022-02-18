@@ -1,18 +1,18 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.InputDao;
-import core.basesyntax.dao.InputDaoImpl;
-import core.basesyntax.dao.ReportSupplierDaoImpl;
+import core.basesyntax.dao.FileReader;
 import core.basesyntax.dao.ReportWriterDao;
+import core.basesyntax.dao.impl.CsvReaderImpl;
+import core.basesyntax.dao.impl.ReportSupplierDaoImpl;
 import core.basesyntax.service.DataProcessor;
 import core.basesyntax.service.DataProcessorImpl;
-import core.basesyntax.service.strategy.BalanceOperationHandler;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationStrategy;
-import core.basesyntax.service.strategy.OperationStrategyImpl;
-import core.basesyntax.service.strategy.PurchaseOperationHandler;
-import core.basesyntax.service.strategy.ReturnOperationHandler;
-import core.basesyntax.service.strategy.SupplyOperationHandler;
+import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.service.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.service.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.service.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class Main {
         strategyMap.put(DataProcessorImpl.OperationType.PURCHASE, new PurchaseOperationHandler());
         strategyMap.put(DataProcessorImpl.OperationType.RETURN, new ReturnOperationHandler());
 
-        final InputDao inputDao = new InputDaoImpl();
+        final FileReader inputDao = new CsvReaderImpl();
         final ReportWriterDao reportSupplier = new ReportSupplierDaoImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategyMap);
         final DataProcessor dataHandler = new DataProcessorImpl(operationStrategy);

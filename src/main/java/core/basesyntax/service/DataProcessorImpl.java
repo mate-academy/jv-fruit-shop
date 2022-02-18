@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.Arrays;
 import java.util.List;

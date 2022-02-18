@@ -1,13 +1,12 @@
-package core.basesyntax.dao;
+package core.basesyntax.dao.impl;
 
 import static core.basesyntax.db.Storage.storage;
 
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
 import java.util.NoSuchElementException;
 
 public class StorageDaoImpl implements StorageDao {
-    public StorageDaoImpl() {
-    }
 
     public void add(String fruitName, int amount) {
         try {

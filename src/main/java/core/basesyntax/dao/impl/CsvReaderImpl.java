@@ -1,15 +1,12 @@
-package core.basesyntax.dao;
+package core.basesyntax.dao.impl;
 
+import core.basesyntax.dao.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class InputDaoImpl implements InputDao {
-
-    public InputDaoImpl() {
-
-    }
+public class CsvReaderImpl implements FileReader {
 
     @Override
     public List<String> parse(String fileName) {

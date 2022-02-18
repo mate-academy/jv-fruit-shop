@@ -2,6 +2,6 @@ package core.basesyntax.dao;
 
 import java.util.List;
 
-public interface InputDao {
+public interface FileReader {
     List<String> parse(String fileName);
 }

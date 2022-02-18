@@ -1,7 +1,9 @@
-package core.basesyntax.dao;
+package core.basesyntax.dao.impl;
 
 import static core.basesyntax.db.Storage.storage;
 
+import core.basesyntax.dao.ReportSupplierDao;
+import core.basesyntax.dao.ReportWriterDao;
 import core.basesyntax.model.Fruit;
 import java.io.File;
 import java.io.IOException;
@@ -11,9 +13,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReportSupplierDaoImpl implements ReportSupplierDao, ReportWriterDao {
-
-    public ReportSupplierDaoImpl() {
-    }
 
     @Override
     public List<String> get() {
