@@ -7,13 +7,14 @@ import java.nio.file.StandardOpenOption;
 import java.util.Map;
 
 public class AddDataToFileImpl implements AddDataToFile {
+    private static final String COMMA = ",";
 
     @Override
     public void addInStorage(Map<String, Integer> fruitAndQuantity,String filePath) {
         StringBuilder builderFQ = new StringBuilder();
         for (Map.Entry<String, Integer> fruits : fruitAndQuantity.entrySet()) {
             builderFQ.append(fruits.getKey())
-                    .append(",").append(fruits.getValue())
+                    .append(COMMA).append(fruits.getValue())
                     .append(System.lineSeparator());
             try {
                 Files.write(Path.of(filePath),

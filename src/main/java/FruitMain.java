@@ -1,10 +1,12 @@
 import dao.WokWithStorageImpl;
+import dao.WorkWithStorageDB;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import service.convert.ConvertData;
 import service.convert.ConvertDataImpl;
+import service.filework.AddDataToFile;
 import service.filework.AddDataToFileImpl;
 import service.filework.GetDataFromFile;
 import service.filework.GetDataFromFileImpl;
@@ -29,8 +31,8 @@ public class FruitMain {
         StrategyImplementation implementStrategy =
                 new StrategyImplementationImpl(new HandlersStore(addPatternHandler()));
         implementStrategy.strategy(dataConvert);
-        WokWithStorageImpl storageService = new WokWithStorageImpl();
-        AddDataToFileImpl addDataService = new AddDataToFileImpl();
+        WorkWithStorageDB storageService = new WokWithStorageImpl();
+        AddDataToFile addDataService = new AddDataToFileImpl();
         addDataService.addInStorage(storageService.getAllFromStorage(),PATH_TO_REPORT);
     }
 
