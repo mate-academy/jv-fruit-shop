@@ -13,8 +13,4 @@ public class Storage {
     public Map<Fruit, Integer> getShopStorage() {
         return shopStorage;
     }
-
-    public void setShopStorage(Map<Fruit, Integer> shopStorage) {
-        this.shopStorage = shopStorage;
-    }
 }

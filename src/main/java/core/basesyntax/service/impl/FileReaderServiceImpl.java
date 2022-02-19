@@ -14,12 +14,13 @@ public class FileReaderServiceImpl implements FileReaderService {
     private static final int TYPE_OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int FRUIT_VALUE_INDEX = 2;
+    private static final int HEAD_INDEX = 0;
 
     @Override
     public List<TransactionLog> readFromFile(String filepath) {
         List<TransactionLog> transactionsList = new ArrayList<>();
         List<String> linesList = dataFromFile(filepath);
-        linesList.remove(0);
+        linesList.remove(HEAD_INDEX);
         for (String line : linesList) {
             String[] strLineArray = line.split(COMA_SEPARATOR);
             TransactionLog transaction = new TransactionLog(strLineArray[TYPE_OPERATION_INDEX],

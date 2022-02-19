@@ -27,6 +27,7 @@ public class MainFruitsService {
     static final String RETURN = "r";
     static final String SUPPLY = "s";
     static final String BALANCE = "b";
+    static final int DEFAULT_QUANTITY = 0;
 
     public static void main(String[] args) {
         Fruit apple = new Apple("apple");
@@ -34,9 +35,9 @@ public class MainFruitsService {
         Fruit orange = new Orange("orange");
 
         Map<Fruit, Integer> storageDefaultMap = new HashMap<>();
-        storageDefaultMap.put(apple, 0);
-        storageDefaultMap.put(banana, 0);
-        storageDefaultMap.put(orange, 0);
+        storageDefaultMap.put(apple, DEFAULT_QUANTITY);
+        storageDefaultMap.put(banana, DEFAULT_QUANTITY);
+        storageDefaultMap.put(orange, DEFAULT_QUANTITY);
 
         Map<String, StorageService> operationDistributionMap = new HashMap<>();
         operationDistributionMap.put(PURCHASE, new StorageReductionServiceImpl());
