@@ -7,7 +7,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.Map;
 
 public class AddDataToFileImpl implements AddDataToFile {
-    private static final String PATH_TO_REPORT = "src/main/resources/fileReportAfterDay.csv";
 
     @Override
     public void addInStorage(Map<String, Integer> fruitAndQuantity,String filePath) {
