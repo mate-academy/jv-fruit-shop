@@ -1,0 +1,8 @@
+package core.basesyntax.service;
+
+import core.basesyntax.model.TransactionDto;
+import java.util.List;
+
+public interface ParserService {
+    List<TransactionDto> parseLines(List<String> data);
+}
