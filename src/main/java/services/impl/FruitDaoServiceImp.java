@@ -11,6 +11,10 @@ import java.util.Set;
 public class FruitDaoServiceImp implements FruitDaoService {
     Storage storage = new Storage();
 
+    public FruitDaoServiceImp(Storage storage) {
+        this.storage = storage;
+    }
+
     @Override
     public void put(FruitRecord fruitRecord) {
         Set<Fruit> fruitsInStorage = storage.getFruitsInStorage();

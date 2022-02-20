@@ -2,29 +2,48 @@ package dao.impl;
 
 import dao.FileHandler;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
+import java.io.*;
+
 
 public class FileHandlerImpl implements FileHandler {
+
     @Override
-    public List<String> readFile(String fileName) {
+    public String readData(String absoluteFilePath) {
+        StringBuilder sourceDataInString = new StringBuilder();
+        File fileToRead = new File(absoluteFilePath);
+        int data;
         try {
-            return Files.readAllLines(Path.of(fileName));
+            if (!fileToRead.exists()) {
+                throw new FileNotFoundException();
+            }
+            FileReader fileReader = new FileReader(fileToRead);
+            data = fileReader.read();
+            while (data != -1) {
+                sourceDataInString.append((char) data);
+                data = fileReader.read();
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("No such file " + e);
         } catch (IOException e) {
-            throw new RuntimeException("Cannot read a file", e);
+            throw new RuntimeException("IOException " + e);
         }
+        return sourceDataInString.toString();
     }
 
     @Override
-    public void writeFile(String filename, String report) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter((filename)))) {
-            writer.write(report);
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot write to file", e);
+    public void writeData(String dataToWrite, String absoluteFilePath) {
+        File fileToWrite = new File(absoluteFilePath);
+        try {
+            if (!fileToWrite.exists()) {
+                throw new FileNotFoundException();
+            }
+            FileWriter writer = new FileWriter(fileToWrite);
+            writer.append(dataToWrite);
+            writer.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("No such file " + e);
+        } catch (Exception e) {
+            throw new RuntimeException("IOException " + e);
         }
     }
 }

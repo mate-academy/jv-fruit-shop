@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 public interface FileHandler {
-    List<String> readFile(String fileName);
-    void writeFile(String filename, String report);
+    String readData(String absolutePath);
+
+    void writeData(String listOfFruits, String absoluteFilePath);
 }
