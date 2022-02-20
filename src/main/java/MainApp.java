@@ -1,20 +1,19 @@
 import dao.FileHandler;
 import dao.impl.FileHandlerImpl;
 import db.Storage;
+import java.util.List;
+import java.util.Map;
 import model.FruitRecord;
 import model.Operator;
 import services.FruitDaoService;
 import services.OperationsHandler;
-import services.ParseCSVService;
+import services.ParseService;
 import services.handlers.BalanceOperationHandler;
 import services.handlers.PurchaseOperationHandler;
 import services.handlers.ReturnOperationHandler;
 import services.handlers.SupplyOperationHandler;
 import services.impl.FruitDaoServiceImp;
-import services.impl.ParseCSVServiceImpl;
-
-import java.util.List;
-import java.util.Map;
+import services.impl.ParseServiceImpl;
 
 public class MainApp {
     private static final String destFile = "src/main/java/resources/storage.csv";
@@ -25,11 +24,11 @@ public class MainApp {
         String dataFromFile = fileHandler.readData(sourceFile);
         Operator operator = new Operator();
         operatorInitialization(operator);
-        ParseCSVService parseCSVService = new ParseCSVServiceImpl();
-        List<FruitRecord> fruitRecords = parseCSVService.parseFromCsv(dataFromFile);
+        ParseService parseService = new ParseServiceImpl();
+        List<FruitRecord> fruitRecords = parseService.parseFromCsv(dataFromFile);
         FruitDaoService fruitDaoService = new FruitDaoServiceImp(new Storage());
         operator.doAllOperation(fruitRecords, fruitDaoService);
-        String dataToWrite = parseCSVService.parseIntoCsv(fruitDaoService.get());
+        String dataToWrite = parseService.parseIntoCsv(fruitDaoService.get());
         fileHandler.writeData(dataToWrite, destFile);
 
     }

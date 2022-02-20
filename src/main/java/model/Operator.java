@@ -1,12 +1,11 @@
 package model;
 
-import services.FruitDaoService;
-import services.OperationsHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import services.FruitDaoService;
+import services.OperationsHandler;
 
 public class Operator {
     private Map<Character, OperationsHandler> typesOfOperations = new HashMap();

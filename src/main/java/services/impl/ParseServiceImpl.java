@@ -1,15 +1,14 @@
 package services.impl;
 
-import model.Fruit;
-import model.FruitRecord;
-import services.ParseCSVService;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import model.Fruit;
+import model.FruitRecord;
+import services.ParseService;
 
-public class ParseCSVServiceImpl implements ParseCSVService {
+public class ParseServiceImpl implements ParseService {
     private static final String RECORD_SEPARATOR = "\r\n";
     private static final String DATA_SEPARATOR = ",";
     private static final int APPEND_TO_REMOVE_TITLE = 2;

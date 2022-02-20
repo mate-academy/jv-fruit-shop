@@ -1,9 +1,8 @@
 package services;
 
+import java.util.Set;
 import model.Fruit;
 import model.FruitRecord;
-
-import java.util.Set;
 
 public interface FruitDaoService {
     void put(FruitRecord fruitRecord);

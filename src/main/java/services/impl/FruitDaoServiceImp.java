@@ -1,15 +1,14 @@
 package services.impl;
 
 import db.Storage;
+import java.util.HashSet;
+import java.util.Set;
 import model.Fruit;
 import model.FruitRecord;
 import services.FruitDaoService;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class FruitDaoServiceImp implements FruitDaoService {
-    Storage storage = new Storage();
+    private Storage storage = new Storage();
 
     public FruitDaoServiceImp(Storage storage) {
         this.storage = storage;
