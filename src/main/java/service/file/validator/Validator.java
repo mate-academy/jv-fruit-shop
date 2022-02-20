@@ -1,4 +1,4 @@
-package dao.validator;
+package service.file.validator;
 
 public interface Validator {
 }

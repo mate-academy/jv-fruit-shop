@@ -1,7 +1,7 @@
 package strategy.handlers;
 
+import dao.StorageDaoImpl;
 import model.FruitModel;
-import storage.FruitStorage;
 import strategy.Strategy;
 import strategy.validator.CommodityValidator;
 
@@ -11,11 +11,12 @@ public class Balance implements Strategy, CommodityValidator {
     @Override
     public boolean doOperation(FruitModel fruitModel) {
         isFruitAmountCorrect(fruitModel, OPERATION_NAME);
-        if (FruitStorage.fruitStorage.containsKey(fruitModel.getName())) {
+        StorageDaoImpl storageDao = new StorageDaoImpl();
+        if (storageDao.containsKey(fruitModel.getName())) {
             throw new RuntimeException("Operation balance Runtime error \\n "
                     + "Fruit " + fruitModel.getName() + " already exists.");
         }
-        FruitStorage.fruitStorage.put(fruitModel.getName(), fruitModel.getAmount());
+        storageDao.put(fruitModel);
         return true;
     }
 }

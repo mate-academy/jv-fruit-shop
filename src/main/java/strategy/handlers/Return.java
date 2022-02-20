@@ -1,9 +1,7 @@
 package strategy.handlers;
 
-import static storage.FruitStorage.fruitStorage;
-
+import dao.StorageDaoImpl;
 import model.FruitModel;
-import storage.FruitStorage;
 import strategy.Strategy;
 import strategy.validator.CommodityValidator;
 import strategy.validator.StorageValidator;
@@ -15,8 +13,9 @@ public class Return implements Strategy, StorageValidator, CommodityValidator {
     public boolean doOperation(FruitModel fruitModel) {
         doesStorageContainsFruit(fruitModel, OPERATION_NAME);
         isFruitAmountCorrect(fruitModel, OPERATION_NAME);
-        int amountAfterReturn = fruitStorage.get(fruitModel.getName()) + fruitModel.getAmount();
-        FruitStorage.fruitStorage.replace(fruitModel.getName(), amountAfterReturn);
+        StorageDaoImpl storageDao = new StorageDaoImpl();
+        int amountAfterReturn = storageDao.get(fruitModel.getName()) + fruitModel.getAmount();
+        storageDao.replace(fruitModel.getName(), amountAfterReturn);
         return true;
     }
 }

@@ -2,10 +2,10 @@ package strategy;
 
 import model.FruitModel;
 
-public class Context {
+public class StrategyImpl {
     private Strategy strategy;
 
-    public Context(Strategy strategy) {
+    public StrategyImpl(Strategy strategy) {
         this.strategy = strategy;
     }
     

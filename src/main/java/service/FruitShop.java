@@ -1,13 +1,13 @@
 package service;
 
-import dao.service.FileService;
 import java.util.List;
+import service.file.FileService;
 import service.parse.ParseInput;
 import service.report.GenerateFruitReport;
 
 public class FruitShop {
-    private static final String PATH_TO_WRITE = "src/main/java/source/report.csv";
-    private static final String PATH_TO_READ = "src/main/java/source/activities.csv";
+    private static final String PATH_TO_WRITE = "src/main/resources/report.csv";
+    private static final String PATH_TO_READ = "src/main/resources/activities.csv";
 
     public static void main(String[] args) {
         FileService fileService = new FileService();

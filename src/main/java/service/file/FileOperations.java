@@ -1,8 +1,8 @@
-package dao;
+package service.file;
 
-import dao.validator.ReadValidator;
-import dao.validator.WriteValidator;
 import java.util.List;
+import service.file.validator.ReadValidator;
+import service.file.validator.WriteValidator;
 
 public interface FileOperations extends ReadValidator, WriteValidator {
     List<String> read(String fileName);

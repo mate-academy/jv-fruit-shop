@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitModel;
-import strategy.Context;
 import strategy.Strategy;
+import strategy.StrategyImpl;
 import strategy.handlers.Balance;
 import strategy.handlers.Purchase;
 import strategy.handlers.Return;
@@ -34,8 +34,9 @@ public class ProcessInputData {
 
     private void executeOperation(String[] line) {
         FruitModel fruitModel = getFruitModel(line);
-        Context context = new Context(operationsWithFruits.get(line[OPERATION_INDEX]));
-        context.executeStrategy(fruitModel);
+        StrategyImpl strategyImpl = new StrategyImpl(operationsWithFruits
+                .get(line[OPERATION_INDEX]));
+        strategyImpl.executeStrategy(fruitModel);
     }
 
     public void processInput(List<String[]> parsedData) {
