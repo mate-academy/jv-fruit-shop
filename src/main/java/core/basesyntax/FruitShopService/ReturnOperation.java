@@ -1,0 +1,11 @@
+package core.basesyntax.FruitShopService;
+
+import core.basesyntax.DB.Storage;
+import core.basesyntax.model.FruitTransaction;
+
+public class ReturnOperation implements Operation{
+    @Override
+    public void process(FruitTransaction fruitTransaction, Storage storage) {
+        storage.add(fruitTransaction, fruitTransaction.getQuantity());
+    }
+}
