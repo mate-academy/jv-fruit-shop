@@ -11,7 +11,6 @@ import core.basesyntax.service.impl.FruitDataHandler;
 import core.basesyntax.service.impl.FruitReportCreateService;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-
 import java.util.List;
 
 public class Application {
