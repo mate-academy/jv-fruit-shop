@@ -13,6 +13,10 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void makeOperation(String fruit, Integer amount) {
-        fruitDao.subtractQuantity(fruit, amount);
+        Integer oldQuantity = fruitDao.getFruitQuantity(fruit);
+        if (oldQuantity < amount) {
+            throw new RuntimeException("The quantity in Storage is less than amount for fruit" + fruit);
+        }
+        fruitDao.updateQuantity(fruit, oldQuantity - amount);
     }
 }

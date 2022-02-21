@@ -13,6 +13,7 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void makeOperation(String fruit, Integer amount) {
-        fruitDao.addQuantity(fruit, amount);
+        Integer oldQuantity = fruitDao.getFruitQuantity(fruit);
+        fruitDao.updateQuantity(fruit, oldQuantity + amount);
     }
 }
