@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.StringTransformator;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

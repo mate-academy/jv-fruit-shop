@@ -2,8 +2,8 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.impl.StringTransformatorImpl;
 import core.basesyntax.service.StringTransformator;
+import core.basesyntax.service.impl.StringTransformatorImpl;
 import core.basesyntax.strategy.FruitStrategy;
 import core.basesyntax.strategy.FruitStrategyImpl;
 import java.util.List;
