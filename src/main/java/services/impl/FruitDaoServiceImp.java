@@ -1,7 +1,6 @@
 package services.impl;
 
 import db.Storage;
-import java.util.HashSet;
 import java.util.Set;
 import model.Fruit;
 import model.FruitRecord;
@@ -16,8 +15,7 @@ public class FruitDaoServiceImp implements FruitDaoService {
 
     @Override
     public void put(FruitRecord fruitRecord) {
-        Set<Fruit> fruitsInStorage = storage.getFruitsInStorage();
-        for (Fruit fruitInStorage : fruitsInStorage) {
+        for (Fruit fruitInStorage : storage.getFruitsInStorage()) {
             if (fruitInStorage.getName().equals(fruitRecord.getNameOfFruit())) {
                 fruitInStorage.setAmount(fruitInStorage.getAmount() + fruitRecord.getAmount());
                 break;
@@ -36,11 +34,4 @@ public class FruitDaoServiceImp implements FruitDaoService {
         return storage.getFruitsInStorage();
     }
 
-    @Override
-    public Set<Fruit> getAll() {
-        Set<Fruit> fruitsInStorage = storage.getFruitsInStorage();
-        Set<Fruit> newFruits = new HashSet<>();
-        newFruits.addAll(fruitsInStorage);
-        return newFruits;
-    }
 }

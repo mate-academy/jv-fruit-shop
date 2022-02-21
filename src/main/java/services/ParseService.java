@@ -8,5 +8,5 @@ import model.FruitRecord;
 public interface ParseService {
     List<FruitRecord> parseFromCsv(String datInString);
 
-    String parseIntoCsv(Set<Fruit> datInString);
+    String parseToString(Set<Fruit> datInString);
 }

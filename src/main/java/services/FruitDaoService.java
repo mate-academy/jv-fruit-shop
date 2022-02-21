@@ -10,6 +10,4 @@ public interface FruitDaoService {
     void save(FruitRecord fruitRecord);
 
     Set<Fruit> get();
-
-    Set<Fruit> getAll();
 }

@@ -4,16 +4,16 @@ import db.Storage;
 import java.util.List;
 import java.util.Map;
 import model.FruitRecord;
-import model.Operator;
 import services.FruitDaoService;
-import services.OperationsHandler;
 import services.ParseService;
-import services.handlers.BalanceOperationHandler;
-import services.handlers.PurchaseOperationHandler;
-import services.handlers.ReturnOperationHandler;
-import services.handlers.SupplyOperationHandler;
 import services.impl.FruitDaoServiceImp;
 import services.impl.ParseServiceImpl;
+import services.strategy.OperationsHandler;
+import services.strategy.OperatorHandlerStrategy;
+import services.strategy.handlers.BalanceOperationHandler;
+import services.strategy.handlers.PurchaseOperationHandler;
+import services.strategy.handlers.ReturnOperationHandler;
+import services.strategy.handlers.SupplyOperationHandler;
 
 public class MainApp {
     private static final String destFile = "src/main/java/resources/storage.csv";
@@ -22,18 +22,19 @@ public class MainApp {
     public static void main(String[] args) {
         FileHandler fileHandler = new FileHandlerImpl();
         String dataFromFile = fileHandler.readData(sourceFile);
-        Operator operator = new Operator();
+        OperatorHandlerStrategy operator = new OperatorHandlerStrategy();
         operatorInitialization(operator);
         ParseService parseService = new ParseServiceImpl();
         List<FruitRecord> fruitRecords = parseService.parseFromCsv(dataFromFile);
         FruitDaoService fruitDaoService = new FruitDaoServiceImp(new Storage());
         operator.doAllOperation(fruitRecords, fruitDaoService);
-        String dataToWrite = parseService.parseIntoCsv(fruitDaoService.get());
+        String dataToWrite = parseService.parseToString(fruitDaoService.get());
         fileHandler.writeData(dataToWrite, destFile);
 
     }
 
-    private static Operator operatorInitialization(Operator operator) {
+    private static OperatorHandlerStrategy operatorInitialization(
+            OperatorHandlerStrategy operator) {
         Map<Character, OperationsHandler> typesOfOperations = operator.getTypesOfOperations();
         typesOfOperations.put('b', new BalanceOperationHandler());
         typesOfOperations.put('p', new PurchaseOperationHandler());

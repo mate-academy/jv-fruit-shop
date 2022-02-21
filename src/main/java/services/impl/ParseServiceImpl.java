@@ -9,21 +9,19 @@ import model.FruitRecord;
 import services.ParseService;
 
 public class ParseServiceImpl implements ParseService {
-    private static final String RECORD_SEPARATOR = "\r\n";
     private static final String DATA_SEPARATOR = ",";
     private static final int APPEND_TO_REMOVE_TITLE = 2;
 
     @Override
-    public List<FruitRecord> parseFromCsv(String datInString) {
+    public List<FruitRecord> parseFromCsv(String dataInString) {
         List<FruitRecord> listOfRecords;
-        datInString = datInString.substring(datInString.indexOf(RECORD_SEPARATOR)
+        dataInString = dataInString.substring(dataInString.indexOf(System.lineSeparator())
                 + APPEND_TO_REMOVE_TITLE);
-        String[] arrOfRecords = datInString.split(RECORD_SEPARATOR);
-        listOfRecords = Arrays.stream(arrOfRecords)
+        String[] arrOfRecords = dataInString.split(System.lineSeparator());
+        return Arrays.stream(arrOfRecords)
                 .map(String::trim)
                 .map(this::parseIntoFruitRecord)
                 .collect(Collectors.toList());
-        return listOfRecords;
     }
 
     private FruitRecord parseIntoFruitRecord(String recordInString) {
@@ -35,13 +33,13 @@ public class ParseServiceImpl implements ParseService {
     }
 
     @Override
-    public String parseIntoCsv(Set<Fruit> datInString) {
+    public String parseToString(Set<Fruit> fruitSet) {
         StringBuilder stringBuilderOfOutPutData = new StringBuilder();
-        for (Fruit fruit : datInString) {
+        for (Fruit fruit : fruitSet) {
             stringBuilderOfOutPutData.append(fruit.getName());
             stringBuilderOfOutPutData.append(DATA_SEPARATOR);
             stringBuilderOfOutPutData.append(fruit.getAmount());
-            stringBuilderOfOutPutData.append(RECORD_SEPARATOR);
+            stringBuilderOfOutPutData.append(System.lineSeparator());
         }
         return stringBuilderOfOutPutData.toString().trim();
     }
