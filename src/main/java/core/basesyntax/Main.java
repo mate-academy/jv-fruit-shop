@@ -1,7 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.FruitServiceImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
 import java.time.LocalDate;
 
 public class Main {

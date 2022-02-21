@@ -1,7 +1,11 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.service.FileService;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.StorageCleaner;
+import core.basesyntax.service.StringReportBuilder;
 
 public class FruitServiceImpl implements FruitService {
     @Override

@@ -1,7 +1,8 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.StringReportBuilder;
 import java.util.Map;
 import java.util.Set;
 
