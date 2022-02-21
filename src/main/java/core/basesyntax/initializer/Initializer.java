@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.untils.FruitTransactionComparator;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -48,6 +47,7 @@ public class Initializer {
     }
 
     private void processTransaction(FruitTransaction fruitTransaction) {
-        operationStrategy.get(fruitTransaction.getOperation()).operation(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
-  }
+        operationStrategy.get(fruitTransaction.getOperation())
+                .operation(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+    }
 }

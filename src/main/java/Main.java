@@ -12,23 +12,27 @@ import core.basesyntax.service.operation.impl.BalanceOperationImpl;
 import core.basesyntax.service.operation.impl.PurchaseOperationImpl;
 import core.basesyntax.service.operation.impl.ReturnOperationImpl;
 import core.basesyntax.service.operation.impl.SupplyOperationImpl;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    private static final String REPORT_PATH
+            = "C:\\Users\\Igor\\IdeaProjects\\jv-fruit-shop\\src\\main\\resources\\report.csv";
+
     public static void main(String[] args) {
-        String reportPath
-                = "C:\\Users\\Igor\\IdeaProjects\\jv-fruit-shop\\src\\main\\resources\\report.csv";
         Storage storage = new Storage();
         FruitDao<String, Integer> fruitDao = new FruitDaoImpl(storage);
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationImpl(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationImpl(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationImpl(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationImpl(fruitDao));
+        operationHandlerMap
+                .put(FruitTransaction.Operation.BALANCE, new BalanceOperationImpl(fruitDao));
+        operationHandlerMap
+                .put(FruitTransaction.Operation.SUPPLY, new SupplyOperationImpl(fruitDao));
+        operationHandlerMap
+                .put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationImpl(fruitDao));
+        operationHandlerMap
+                .put(FruitTransaction.Operation.RETURN, new ReturnOperationImpl(fruitDao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        FruitService fruitService = new FruitServiceImpl(fruitDao, reportPath);
+        FruitService fruitService = new FruitServiceImpl(fruitDao, REPORT_PATH);
         Initializer initializer = new Initializer(fruitService, operationStrategy);
         initializer.initStorage();
         fruitService.createReport();
