@@ -21,7 +21,7 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     public FruitShopServiceImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationStrategiesMap) {
-        this.fileReaderService = new FileReaderServiceCSV();
+        this.fileReaderService = new FileReaderServiceCsv();
         this.fileWriterService = new FileWriterServiceImpl();
         this.operationStrategy = new OperationStrategyImpl(operationStrategiesMap);
         this.dataHandler = new FruitDataHandler(operationStrategy);

@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileReaderServiceCSV implements FileReaderService {
+public class FileReaderServiceCsv implements FileReaderService {
     private static final int INDEX_OF_FIRST_LINE = 1;
 
     @Override
