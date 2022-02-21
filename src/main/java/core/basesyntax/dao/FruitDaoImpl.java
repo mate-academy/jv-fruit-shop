@@ -3,14 +3,14 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import java.util.Map;
 
-public class FruitStorageDaoImpl implements FruitStorageDao {
+public class FruitDaoImpl implements FruitDao {
     @Override
     public void add(String fruitName, int quantity) {
         Storage.fruitStorage.put(fruitName,quantity);
     }
 
     @Override
-    public int get(String key) {
+    public Integer get(String key) {
         return Storage.fruitStorage.get(key);
     }
 

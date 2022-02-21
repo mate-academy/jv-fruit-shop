@@ -2,10 +2,10 @@ package core.basesyntax.dao;
 
 import java.util.Map;
 
-public interface FruitStorageDao {
+public interface FruitDao {
     void add(String fruitName, int quantity);
 
-    int get(String key);
+    Integer get(String key);
 
     Map<String, Integer> getStorageState();
 }
