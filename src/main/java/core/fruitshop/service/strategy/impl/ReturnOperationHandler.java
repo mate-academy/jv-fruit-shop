@@ -1,25 +1,21 @@
 package core.fruitshop.service.strategy.impl;
 
 import core.fruitshop.dao.FruitDao;
-import core.fruitshop.dao.FruitDaoImpl;
+import core.fruitshop.db.Storage;
 import core.fruitshop.model.Fruit;
-import core.fruitshop.service.CalculateHandler.Calculatehandler;
-import core.fruitshop.service.CalculateHandler.CalculatehandlerImpl;
 import core.fruitshop.service.strategy.OperationHandler;
 
 public class ReturnOperationHandler implements OperationHandler {
     private final FruitDao fruitDao;
-    private final Calculatehandler calculatehandler;
 
-    public ReturnOperationHandler(FruitDao fruitDao,
-        Calculatehandler calculatehandler) {
+    public ReturnOperationHandler(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
-        this.calculatehandler = calculatehandler;
     }
 
     @Override
-    public void doOperation(String fruitType, String quantity) {
+    public void doOperation(String fruitType, String value) {
         Fruit fruit = new Fruit(fruitType);
-        calculatehandler.addQuantity(fruit, Integer.parseInt(quantity));
+        int prevQuantity = fruitDao.getQuantity(fruit);
+        Storage.fruitsStorage.put(fruit, prevQuantity + Integer.parseInt(value));
     }
 }

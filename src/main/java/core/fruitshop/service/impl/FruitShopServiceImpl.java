@@ -1,15 +1,11 @@
 package core.fruitshop.service.impl;
 
-import core.fruitshop.model.FruitTransaction;
 import core.fruitshop.service.DataHandler;
 import core.fruitshop.service.FileReader;
 import core.fruitshop.service.FileWriter;
 import core.fruitshop.service.FruitShopService;
 import core.fruitshop.service.ReportCreator;
-import core.fruitshop.service.strategy.OperationHandler;
-import core.fruitshop.service.strategy.impl.OperationStrategyImpl;
 import java.util.List;
-import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private final FileReader fileReader;
@@ -18,7 +14,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     private final FileWriter fileWriter;
 
     public FruitShopServiceImpl(FileReaderImpl fileReaderImpl, DataHandlerImpl dataHandlerImpl,
-        ReportCreatorImpl reportCreatorImpl, FileWriterImpl fileWriterImpl) {
+            ReportCreatorImpl reportCreatorImpl, FileWriterImpl fileWriterImpl) {
         this.fileReader = fileReaderImpl;
         this.dataHandler = dataHandlerImpl;
         this.reportCreator = reportCreatorImpl;
