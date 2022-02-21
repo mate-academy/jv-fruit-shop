@@ -3,7 +3,6 @@ package core.fruitshop.model;
 import java.util.Objects;
 
 public class Fruit {
-
     private String typeOfFruit;
 
     public Fruit(String typeOfFruit) {

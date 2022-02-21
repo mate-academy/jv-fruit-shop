@@ -3,7 +3,6 @@ package core.fruitshop.model;
 import java.util.Arrays;
 
 public class FruitTransaction {
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),

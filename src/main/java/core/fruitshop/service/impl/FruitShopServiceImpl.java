@@ -17,11 +17,12 @@ public class FruitShopServiceImpl implements FruitShopService {
     private final ReportCreator reportCreator;
     private final FileWriter fileWriter;
 
-    public FruitShopServiceImpl(Map<FruitTransaction.Operation, OperationHandler> map) {
-        this.fileReader = new FileReaderImpl();
-        this.dataHandler = new DataHandlerImpl(new OperationStrategyImpl(map));
-        this.reportCreator = new ReportCreatorImpl();
-        this.fileWriter = new FileWriterImpl();
+    public FruitShopServiceImpl(FileReaderImpl fileReaderImpl, DataHandlerImpl dataHandlerImpl,
+        ReportCreatorImpl reportCreatorImpl, FileWriterImpl fileWriterImpl) {
+        this.fileReader = fileReaderImpl;
+        this.dataHandler = dataHandlerImpl;
+        this.reportCreator = reportCreatorImpl;
+        this.fileWriter = fileWriterImpl;
     }
 
     @Override
