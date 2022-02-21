@@ -2,10 +2,10 @@ package strategy.handlers;
 
 import dao.StorageDaoImpl;
 import model.FruitModel;
-import strategy.Strategy;
+import strategy.OperationHandler;
 import strategy.validator.CommodityValidator;
 
-public class Balance implements Strategy, CommodityValidator {
+public class BalanceOperationHandler implements OperationHandler, CommodityValidator {
     private static final String OPERATION_NAME = "Balance";
 
     @Override
@@ -16,7 +16,7 @@ public class Balance implements Strategy, CommodityValidator {
             throw new RuntimeException("Operation balance Runtime error \\n "
                     + "Fruit " + fruitModel.getName() + " already exists.");
         }
-        storageDao.put(fruitModel);
+        storageDao.putFruitModel(fruitModel);
         return true;
     }
 }

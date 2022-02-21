@@ -4,36 +4,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitModel;
-import strategy.Strategy;
+import model.ReturnModelImpl;
+import strategy.OperationHandler;
 import strategy.StrategyImpl;
-import strategy.handlers.Balance;
-import strategy.handlers.Purchase;
-import strategy.handlers.Return;
-import strategy.handlers.Supply;
+import strategy.handlers.BalanceOperationHandler;
+import strategy.handlers.PurchaseOperationHandler;
+import strategy.handlers.ReturnOperationHandler;
+import strategy.handlers.SupplyOperationHandler;
 
 public class ProcessInputData {
     private static final int OPERATION_INDEX = 0;
-    private static final int NAME_INDEX = 1;
-    private static final int AMOUNT_INDEX = 2;
-    private final Map<String, Strategy> operationsWithFruits;
+    private final Map<String, OperationHandler> operationsWithFruits;
 
     public ProcessInputData() {
         operationsWithFruits = new HashMap<>();
-        operationsWithFruits.put("b", new Balance());
-        operationsWithFruits.put("s", new Supply());
-        operationsWithFruits.put("r", new Return());
-        operationsWithFruits.put("p", new Purchase());
-    }
-
-    private FruitModel getFruitModel(String[] line) {
-        FruitModel fruitModel = new FruitModel();
-        fruitModel.setName(line[NAME_INDEX]);
-        fruitModel.setAmount(Integer.valueOf(line[AMOUNT_INDEX]));
-        return fruitModel;
+        operationsWithFruits.put("b", new BalanceOperationHandler());
+        operationsWithFruits.put("s", new SupplyOperationHandler());
+        operationsWithFruits.put("r", new ReturnOperationHandler());
+        operationsWithFruits.put("p", new PurchaseOperationHandler());
     }
 
     private void executeOperation(String[] line) {
-        FruitModel fruitModel = getFruitModel(line);
+        ReturnModelImpl returnModel = new ReturnModelImpl();
+        FruitModel fruitModel = returnModel.getModel(line);
         StrategyImpl strategyImpl = new StrategyImpl(operationsWithFruits
                 .get(line[OPERATION_INDEX]));
         strategyImpl.executeStrategy(fruitModel);

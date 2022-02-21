@@ -3,13 +3,13 @@ package strategy;
 import model.FruitModel;
 
 public class StrategyImpl {
-    private Strategy strategy;
+    private final OperationHandler operationHandler;
 
-    public StrategyImpl(Strategy strategy) {
-        this.strategy = strategy;
+    public StrategyImpl(OperationHandler operationHandler) {
+        this.operationHandler = operationHandler;
     }
     
     public boolean executeStrategy(FruitModel fruitModel) {
-        return strategy.doOperation(fruitModel);
+        return operationHandler.doOperation(fruitModel);
     }
 }

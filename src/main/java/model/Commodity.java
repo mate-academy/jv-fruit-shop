@@ -1,7 +1,6 @@
 package model;
 
 public interface Commodity {
-
     String getName();
 
     void setName(String name);

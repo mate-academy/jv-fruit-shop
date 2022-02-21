@@ -3,11 +3,11 @@ package dao;
 import model.FruitModel;
 
 public interface StorageDao {
-    int get(String key);
+    int getAmount(String key);
 
-    boolean put(FruitModel fruitModel);
+    boolean putFruitModel(FruitModel fruitModel);
 
-    boolean replace(String name, int amount);
+    boolean replaceWithNewAmount(String name, int amount);
 
     boolean containsKey(String key);
 }

@@ -2,6 +2,6 @@ package strategy;
 
 import model.FruitModel;
 
-public interface Strategy {
+public interface OperationHandler {
     boolean doOperation(FruitModel fruitModel);
 }

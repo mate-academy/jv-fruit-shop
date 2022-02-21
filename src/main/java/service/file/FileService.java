@@ -8,7 +8,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class FileService implements FileOperations {
-
     @Override
     public List<String> read(String path) {
         List<String> lines;

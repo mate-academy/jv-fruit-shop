@@ -1,4 +1,4 @@
 package service.file.validator;
 
-public interface ReadValidator extends Validator{
+public interface ReadValidator extends Validator {
 }

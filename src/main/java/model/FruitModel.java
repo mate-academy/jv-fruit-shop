@@ -4,6 +4,11 @@ public class FruitModel implements Commodity {
     private String fruitName;
     private int amount;
 
+    public FruitModel(String fruitName, int amount) {
+        this.fruitName = fruitName;
+        this.amount = amount;
+    }
+
     @Override
     public String getName() {
         return fruitName;
