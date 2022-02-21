@@ -13,8 +13,8 @@ import java.util.List;
 
 public class WorkWithCsvFile implements WorkWithFiles {
     @Override
-    public List<String> readFromFile(String filePass) {
-        File file = new File(filePass);
+    public List<String> readFromFile(String filePath) {
+        File file = new File(filePath);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             List<String> inputFromFile = new ArrayList<>();
             String line = reader.readLine();
@@ -24,18 +24,18 @@ public class WorkWithCsvFile implements WorkWithFiles {
             }
             return inputFromFile;
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Can't find file with file name " + filePass, e);
+            throw new RuntimeException("Can't find file with file name " + filePath, e);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + filePass, e);
+            throw new RuntimeException("Can't read from file " + filePath, e);
         }
     }
 
     @Override
-    public void writeToFile(String filePass, String content) {
+    public void writeToFile(String filePath, String content) {
         try {
-            Files.write(Paths.get(filePass), content.getBytes());
+            Files.write(Paths.get(filePath), content.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + filePass, e);
+            throw new RuntimeException("Can't find file by path: " + filePath, e);
         }
     }
 }

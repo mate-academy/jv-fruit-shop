@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionServiceImpl implements TransactionService {
-    public static final String BALANCE = "b";
-    public static final String SUPPLY = "s";
-    public static final String PURCHASE = "p";
-    public static final String RETURN = "r";
     private static final String HEAD_OF_INPUT_FILE = "type,fruit,quantity";
     private static final String SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
@@ -18,14 +14,14 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<FruitTransaction> createTransactionsList(List<String> inputData) {
-        String[] separeitedData;
+        String[] separatedData;
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         inputData.remove(HEAD_OF_INPUT_FILE);
         for (String data : inputData) {
-            separeitedData = data.split(SEPARATOR);
-            fruitTransactionList.add(new FruitTransaction(separeitedData[OPERATION_INDEX],
-                    separeitedData[FRUIT_NAME_INDEX],
-                    Integer.parseInt(separeitedData[QUANTITY_INDEX])));
+            separatedData = data.split(SEPARATOR);
+            fruitTransactionList.add(new FruitTransaction(separatedData[OPERATION_INDEX],
+                    separatedData[FRUIT_NAME_INDEX],
+                    Integer.parseInt(separatedData[QUANTITY_INDEX])));
         }
         return fruitTransactionList;
     }
