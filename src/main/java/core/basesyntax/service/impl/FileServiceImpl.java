@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class FileServiceImpl implements FileService {
     @Override
-    public List<String[]> read(String incomeFile) {
+    public List<String> read(String incomeFile) {
         List<String> reader;
         try {
             reader = Files.readAllLines(Path.of(incomeFile));
@@ -20,7 +20,6 @@ public class FileServiceImpl implements FileService {
         return reader.stream()
                 .skip(1)
                 .map(s -> s.replaceAll(" ", ""))
-                .map(string -> string.split(","))
                 .collect(Collectors.toList());
     }
 

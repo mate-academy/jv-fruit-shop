@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 public interface FruitDao {
-    void putDataIntoStorage(List<String[]> data);
+    void putDataIntoStorage(List<String> data);
 
     Set<Map.Entry<Fruit, Integer>> getDataFromStorage();
 }
