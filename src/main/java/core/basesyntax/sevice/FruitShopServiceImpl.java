@@ -19,5 +19,3 @@ public class FruitShopServiceImpl implements FruitShopService {
         }
     }
 }
-
-

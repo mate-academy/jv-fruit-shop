@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    private FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
     public void operationProcess(FruitTransaction fruitTransaction) {

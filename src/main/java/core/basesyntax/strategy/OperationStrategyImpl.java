@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<FruitTransaction.Operation, OperationHandler> operationProcessMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> operationProcessMap;
 
     public OperationStrategyImpl() {
         this.operationProcessMap = new HashMap<>();
