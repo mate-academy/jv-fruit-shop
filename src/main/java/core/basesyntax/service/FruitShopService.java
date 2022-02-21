@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.util.List;
+
 public interface FruitShopService {
-    void createReport(String fileNameFrom, String fileNameTo);
+    String makeDailyReport(List<String> dataFromFile);
 }
