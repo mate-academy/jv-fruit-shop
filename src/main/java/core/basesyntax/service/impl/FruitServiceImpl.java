@@ -18,31 +18,6 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public boolean balance(String fruitName, int quantity) {
-        fruitDao.addStorage(fruitName, quantity);
-        return true;
-    }
-
-    @Override
-    public boolean supplyFruit(String fruitName, int quantity) {
-
-        fruitDao.addStorage(fruitName, quantity);
-        return true;
-    }
-
-    @Override
-    public boolean purchaseFruit(String fruit, int quantity) {
-        fruitDao.removeFromStorage(fruit, quantity);
-        return true;
-    }
-
-    @Override
-    public boolean returnFruit(String fruit, int quantity) {
-        fruitDao.addStorage(fruit, quantity);
-        return true;
-    }
-
-    @Override
     public boolean createReport() {
         Map<String, Integer> setFruit = fruitDao.getAllFruits();
         StringBuilder stringBuilder = new StringBuilder("fruit,quantity" + System.lineSeparator());

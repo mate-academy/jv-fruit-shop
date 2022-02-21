@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class FruitTransaction {
     private Operation operation;
@@ -37,6 +38,28 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FruitTransaction)) return false;
+        FruitTransaction that = (FruitTransaction) o;
+        return quantity == that.quantity && operation == that.operation && Objects.equals(fruit, that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
+    }
+
+    @Override
+    public String toString() {
+        return "FruitTransaction{" +
+                "operation=" + operation +
+                ", fruit='" + fruit + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -50,7 +73,7 @@ public class FruitTransaction {
         }
 
         public static Operation fromValue(String inputValue) {
-            return Arrays.stream(values())
+            return Arrays.stream(Operation.values())
                     .filter(value -> value.operation.equalsIgnoreCase(inputValue))
                     .findFirst()
                     .orElse(null);

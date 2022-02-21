@@ -12,7 +12,6 @@ public class FileReportService implements ReportService<Object> {
 
     @Override
     public boolean createReport(Object reportOperation) {
-
         return true;
     }
 }
