@@ -15,18 +15,19 @@ import core.basesyntax.service.strategy.TransactionStrategy;
 import core.basesyntax.service.strategy.TransactionStrategyImpl;
 import core.basesyntax.service.strategy.TransactionSupply;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-
     public static final String BALANCE = "b";
     public static final String PURCHASE = "p";
     public static final String RETURN = "r";
     public static final String SUPPLY = "s";
-    public static final String PATH_TO_WRITE_REPORT_AT = "src/main/resources/fruits.csv";
-    public static final String PATH_TO_INPUT_FILE = PATH_TO_WRITE_REPORT_AT;
+    public static final String PATH_TO_THE_FRUIT_TRANSACTIONS_FILE
+            = "src/main/resources/fruits.csv";
+    public static final String FILE_REPORT_DESTINATION = "src/main/resources/report.txt";
 
     public static void main(String[] args) {
         Map<String, TransactionHandler> transactionHandlerMap = new HashMap<>();
@@ -37,14 +38,15 @@ public class Main {
 
         FileService fileService = new FileServiceImpl();
         List<String> linesFromFile = fileService
-                .readFromFile(Path.of(PATH_TO_INPUT_FILE));
+                .readFromFile(Path.of(PATH_TO_THE_FRUIT_TRANSACTIONS_FILE));
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(
                 transactionHandlerMap);
         SaveToStorageService saveToStorageService = new SaveToStorageImpl(transactionStrategy);
         saveToStorageService.storeAll(linesFromFile);
         ReportGenerationService reportGenerationService = new ReportGenerationServiceImpl();
         String report = reportGenerationService.generateReport(Storage.storage);
-        fileService.writeToFile(report);
+        Path path = Paths.get(FILE_REPORT_DESTINATION);
+        fileService.writeToFile(report, path);
 
     }
 }

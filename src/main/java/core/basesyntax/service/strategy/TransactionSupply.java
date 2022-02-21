@@ -3,7 +3,6 @@ package core.basesyntax.service.strategy;
 import core.basesyntax.db.Storage;
 
 public class TransactionSupply implements TransactionHandler {
-
     @Override
   public void store(String[] oneTransaction) {
         if (Storage.storage.get(oneTransaction[FRUIT_INDEX]) == null) {

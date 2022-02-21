@@ -4,11 +4,9 @@ import core.basesyntax.service.FileService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 public class FileServiceImpl implements FileService {
-
     @Override
   public List<String> readFromFile(Path path) {
         try {
@@ -19,9 +17,8 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-  public boolean writeToFile(String report) {
+  public boolean writeToFile(String report, Path path) {
         byte[] stringBytes = report.getBytes();
-        Path path = Paths.get("src/main/resources/report.txt");
         try {
             Files.write(path, stringBytes);
             return true;
