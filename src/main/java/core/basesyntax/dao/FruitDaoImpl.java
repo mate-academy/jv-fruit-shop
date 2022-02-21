@@ -19,6 +19,9 @@ public class FruitDaoImpl implements FruitDao {
         if (!Storage.fruits.containsKey(fruit)) {
             throw new RuntimeException("Can't reduce the quantity of" + fruit);
         }
+        if (Storage.fruits.get(fruit) < amount) {
+            throw new RuntimeException("The quantity is less than amount for fruit" + fruit);
+        }
         Storage.fruits.put(fruit, Storage.fruits.get(fruit) - amount);
     }
 
