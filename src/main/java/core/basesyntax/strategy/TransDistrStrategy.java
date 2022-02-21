@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.model.dto.FruitDto;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.service.TransactionLog;
 
 public interface TransDistrStrategy {
-    StorageService choseStorageService(TransactionLog transactionLog);
+    StorageService choseStorageService(FruitDto transactionLog);
 }

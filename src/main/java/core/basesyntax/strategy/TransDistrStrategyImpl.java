@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.model.dto.FruitDto;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.service.TransactionLog;
 import java.util.Map;
 
 public class TransDistrStrategyImpl implements TransDistrStrategy {
@@ -12,7 +12,7 @@ public class TransDistrStrategyImpl implements TransDistrStrategy {
     }
 
     @Override
-    public StorageService choseStorageService(TransactionLog transactionLog) {
-        return operationMap.get(transactionLog.getTypeOfOperation());
+    public StorageService choseStorageService(FruitDto fruitDto) {
+        return operationMap.get(fruitDto.getTypeOfOperation());
     }
 }

@@ -1,11 +1,11 @@
-package core.basesyntax.service;
+package core.basesyntax.model.dto;
 
-public class TransactionLog {
+public class FruitDto {
     private final String typeOfOperation;
     private final String fruitName;
     private final int fruitQuantity;
 
-    public TransactionLog(String operationType, String fruitName, int fruitQuantity) {
+    public FruitDto(String operationType, String fruitName, int fruitQuantity) {
         this.typeOfOperation = operationType;
         this.fruitName = fruitName;
         this.fruitQuantity = fruitQuantity;
