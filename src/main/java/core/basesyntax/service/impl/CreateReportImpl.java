@@ -2,13 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.CreateReport;
-
 import java.util.Map;
 
 public class CreateReportImpl implements CreateReport {
     private static final String HEAD_OF_FILE = "fruit,quantity";
     private static final String SEPARATOR = ",";
-
 
     @Override
     public String createReport() {

@@ -2,14 +2,14 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.OperationHandler;
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.service.PopulatingDBService;
+import core.basesyntax.service.PopulatingDbService;
 import java.util.List;
 import java.util.Map;
 
-public class PopulatingDBServiceImpl implements PopulatingDBService {
-    public final Map<String, OperationHandler> activities;
+public class PopulatingDbServiceImpl implements PopulatingDbService {
+    private final Map<String, OperationHandler> activities;
 
-    public PopulatingDBServiceImpl(Map<String, OperationHandler> activities) {
+    public PopulatingDbServiceImpl(Map<String, OperationHandler> activities) {
         this.activities = activities;
     }
 

@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.WorkWithFiles;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkWithCSVFile implements WorkWithFiles {
+public class WorkWithCsvFile implements WorkWithFiles {
     @Override
     public List<String> readFromFile(String filePass) {
         File file = new File(filePass);

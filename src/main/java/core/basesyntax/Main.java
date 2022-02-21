@@ -7,14 +7,13 @@ import core.basesyntax.dao.ReturnOperationHandlerImpl;
 import core.basesyntax.dao.SupplyOperationHandlerImpl;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.service.CreateReport;
-import core.basesyntax.service.PopulatingDBService;
+import core.basesyntax.service.PopulatingDbService;
 import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.WorkWithFiles;
 import core.basesyntax.service.impl.CreateReportImpl;
-import core.basesyntax.service.impl.PopulatingDBServiceImpl;
+import core.basesyntax.service.impl.PopulatingDbServiceImpl;
 import core.basesyntax.service.impl.TransactionServiceImpl;
-import core.basesyntax.service.impl.WorkWithCSVFile;
-
+import core.basesyntax.service.impl.WorkWithCsvFile;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,11 +32,12 @@ public class Main {
         operationTypes.put(SUPPLY, new SupplyOperationHandlerImpl());
         operationTypes.put(RETURN, new ReturnOperationHandlerImpl());
         operationTypes.put(PURCHASE, new PurchaseOperationHandlerImpl());
-        WorkWithFiles fileWorker = new WorkWithCSVFile();
+        WorkWithFiles fileWorker = new WorkWithCsvFile();
         List<String> inputData = fileWorker.readFromFile(INPUT_FILE_NAME);
         TransactionService transactionService = new TransactionServiceImpl();
-        List<FruitTransaction> transactionList = transactionService.createTransactionsList(inputData);
-        PopulatingDBService populatingDB = new PopulatingDBServiceImpl(operationTypes);
+        List<FruitTransaction> transactionList = transactionService
+                .createTransactionsList(inputData);
+        PopulatingDbService populatingDB = new PopulatingDbServiceImpl(operationTypes);
         populatingDB.prepareDB(transactionList);
         CreateReport report = new CreateReportImpl();
         fileWorker.writeToFile(OUTPUT_FILE_NAME, report.createReport());
