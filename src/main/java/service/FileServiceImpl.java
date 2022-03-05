@@ -65,7 +65,7 @@ public class FileServiceImpl implements FileService {
         try {
             Files.write(Path.of(toFileName), data.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file " + toFileName);
+            throw new RuntimeException("Can't write data into file " + toFileName);
         }
     }
 }
