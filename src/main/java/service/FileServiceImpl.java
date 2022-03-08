@@ -47,7 +47,7 @@ public class FileServiceImpl implements FileService {
                 remainedApple = balanceApple + returnApple + supplyApple - purchaseApple;
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + fromFileName);
+            throw new RuntimeException("Can't read data from the file " + fromFileName);
         }
         String result = stringBuilder.append(FRUIT_QUANTITY)
                 .append(System.lineSeparator())
