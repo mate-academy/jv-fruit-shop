@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitFileReader implements FruitDataReader {
+public class FruitFileReader implements DataReader {
     private static final int NECESSARY_LINE_ELEMENT_NUMBER = 3;
     private static final String EMPTY_LINE = "";
     private final String fileName;
@@ -24,7 +24,7 @@ public class FruitFileReader implements FruitDataReader {
     }
 
     @Override
-    public List<String> readTransactions() {
+    public List<String> readDataLines() {
         try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(fileName))) {
             bufferedReader.readLine();
             while (bufferedReader.ready()) {

@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exceptions.IncorrectOperationException;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.ParserService;
 

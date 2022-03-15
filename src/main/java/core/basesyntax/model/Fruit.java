@@ -33,6 +33,7 @@ public class Fruit {
         this.quantity += quantity;
     }
 
+    // If purchase is bigger than fruit quantity, we throw exception
     public void subtract(int quantity) {
         if (this.quantity < quantity) {
             throw new OverPurchaseException(this);
@@ -56,7 +57,7 @@ public class Fruit {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, quantity);
+        return Objects.hash(name);
     }
 
     public String toString() {

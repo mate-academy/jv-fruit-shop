@@ -8,7 +8,7 @@ import core.basesyntax.model.OperationType;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void doOperation(Fruit fruit) {
-        if (!FruitStorage.contains(fruit)) {
+        if (!FruitStorage.fruits.contains(fruit)) {
             throw new NoSuchFruitException(OperationType.PURCHASE, fruit);
         }
         FruitStorage.fruits.stream()

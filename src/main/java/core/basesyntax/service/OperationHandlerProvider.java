@@ -1,7 +1,8 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.operation.BalanceOperationHandler;
+import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationHandlerProvider {
-    private Map<String, core.basesyntax.service.operation.OperationHandler> operationMap;
+    private final Map<String, OperationHandler> operationMap;
 
     public OperationHandlerProvider() {
         operationMap = new HashMap<>();

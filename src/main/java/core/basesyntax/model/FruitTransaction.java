@@ -1,7 +1,4 @@
-package core.basesyntax.service.impl;
-
-import core.basesyntax.model.Fruit;
-import core.basesyntax.model.OperationType;
+package core.basesyntax.model;
 
 public class FruitTransaction {
     private final OperationType operationType;

@@ -1,20 +1,22 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
 import core.basesyntax.strategy.OperationStrategy;
 
 public class TransactionServiceImpl implements TransactionService {
-    private static final OperationStrategy OPERATION_STRATEGY =
-            new OperationStrategyImpl(new OperationHandlerProvider().getOperationHandlers());
+    private final OperationStrategy operationStrategy;
     private final FruitTransaction fruitTransaction;
 
-    public TransactionServiceImpl(FruitTransaction fruitTransaction) {
+    public TransactionServiceImpl(OperationStrategy operationStrategy,
+                                  FruitTransaction fruitTransaction) {
+        this.operationStrategy = operationStrategy;
         this.fruitTransaction = fruitTransaction;
     }
 
     @Override
     public void doOperation() {
-        OPERATION_STRATEGY.process(fruitTransaction.getOperationType(),
+        operationStrategy.process(fruitTransaction.getOperationType(),
                 fruitTransaction.getFruit());
     }
 }
