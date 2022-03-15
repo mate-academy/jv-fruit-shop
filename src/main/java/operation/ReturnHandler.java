@@ -4,7 +4,7 @@ import dao.FruitShopDao;
 import dao.FruitShopDaoImpl;
 import model.Fruit;
 
-public class ReturnHandler implements OperationHandler {
+public class ReturnHandler implements Operation {
     @Override
     public void proceed(Fruit fruit) {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();

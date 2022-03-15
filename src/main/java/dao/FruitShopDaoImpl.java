@@ -1,14 +1,12 @@
 package dao;
 
 import db.Storage;
-import model.Fruit;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import model.Fruit;
 
 public class FruitShopDaoImpl implements FruitShopDao {
-
     @Override
     public void save(Fruit fruit) {
         Storage.fruits.put(fruit.getFruit(), fruit.getQuantity());

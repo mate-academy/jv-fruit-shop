@@ -1,15 +1,15 @@
 package model;
 
 public class Fruit {
-    private String operation;
+    private Operation operation;
     private String fruit;
     private int quantity;
 
-    public String getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
-    public void setOperation(String operation) {
+    public void setOperation(Operation operation) {
         this.operation = operation;
     }
 
@@ -44,7 +44,14 @@ public class Fruit {
         public String getOperation() {
             return operation;
         }
+
+        public static Operation findByAbbr(String abbr) {
+            for (Operation o : values()) {
+                if (o.getOperation().equals(abbr)) {
+                    return o;
+                }
+            }
+            return null;
+        }
     }
 }
-
-

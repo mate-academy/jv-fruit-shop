@@ -1,8 +1,7 @@
 package service;
 
-import model.Fruit;
-
 import java.util.List;
+import model.Fruit;
 
 public class ReportCreatorImpl implements ReportCreator {
     private static final String HEADER = "fruit,quantity";
