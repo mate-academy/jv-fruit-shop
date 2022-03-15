@@ -4,5 +4,5 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 
 public interface OperationStrategy {
-    void startOperation(OperationType operationType, Fruit fruit);
+    void process(OperationType operationType, Fruit fruit);
 }

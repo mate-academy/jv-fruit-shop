@@ -5,14 +5,14 @@ import core.basesyntax.exceptions.NoSuchFruitException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 
-public class ReturnOperation implements Operation {
+public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void doOperation(Fruit fruit) {
         if (!FruitStorage.contains(fruit)) {
-            throw new NoSuchFruitException(OperationType.RETURN, fruit);
+            throw new NoSuchFruitException(OperationType.SUPPLY, fruit);
         }
         FruitStorage.fruits.stream()
-                .filter(x -> x.getName().equals(fruit.getName()))
+                .filter(x -> x.equals(fruit))
                 .findFirst().get()
                 .add(fruit.getQuantity());
     }

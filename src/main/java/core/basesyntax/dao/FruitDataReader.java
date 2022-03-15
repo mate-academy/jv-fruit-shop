@@ -1,5 +1,7 @@
 package core.basesyntax.dao;
 
+import java.util.List;
+
 public interface FruitDataReader {
-    void read();
+    List<String> readTransactions();
 }

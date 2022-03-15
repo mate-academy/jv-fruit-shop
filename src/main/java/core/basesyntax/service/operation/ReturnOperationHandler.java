@@ -5,15 +5,15 @@ import core.basesyntax.exceptions.NoSuchFruitException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.OperationType;
 
-public class PurchaseOperation implements Operation {
+public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void doOperation(Fruit fruit) {
         if (!FruitStorage.contains(fruit)) {
-            throw new NoSuchFruitException(OperationType.PURCHASE, fruit);
+            throw new NoSuchFruitException(OperationType.RETURN, fruit);
         }
         FruitStorage.fruits.stream()
-                .filter(x -> x.getName().equals(fruit.getName()))
+                .filter(x -> x.equals(fruit))
                 .findFirst().get()
-                .subtract(fruit.getQuantity());
+                .add(fruit.getQuantity());
     }
 }
