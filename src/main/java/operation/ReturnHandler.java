@@ -11,8 +11,7 @@ public class ReturnHandler implements Operation {
         if (fruitShopDao.getValue(fruit) == null) {
             fruitShopDao.save(fruit);
         }
-        if (fruit.getQuantity() == 0
-                || fruit.getFruit().isEmpty()
+        if (fruit.getFruit().isEmpty()
                 || fruit.getOperation() == null
                 || fruit.getFruit() == null) {
             throw new NullPointerException("This line cannot be empty");
