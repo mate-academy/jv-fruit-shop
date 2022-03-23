@@ -15,7 +15,7 @@ public class ReaderImpl implements Reader {
             lines = Files.readAllLines(Path.of(fileName));
             line = lines.stream().skip(1).collect(Collectors.joining());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file" + fileName);
+            throw new RuntimeException("Can't read data from file." + fileName);
         }
         return line;
     }
