@@ -4,28 +4,28 @@ import db.Storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import model.Fruit;
+import model.FruitTransaction;
 
 public class FruitShopDaoImpl implements FruitShopDao {
     @Override
-    public void save(Fruit fruit) {
-        Storage.fruits.put(fruit.getFruit(), fruit.getQuantity());
+    public void save(FruitTransaction fruitTransaction) {
+        Storage.fruits.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 
     @Override
-    public Integer getValue(Fruit fruit) {
-        return Storage.fruits.get(fruit.getFruit());
+    public Integer getValue(FruitTransaction fruitTransaction) {
+        return Storage.fruits.get(fruitTransaction.getFruit());
     }
 
     @Override
-    public List<Fruit> getAll() {
-        List<Fruit> fruitList = new ArrayList<>();
+    public List<FruitTransaction> getAll() {
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
-            Fruit fruit = new Fruit();
-            fruit.setFruit(entry.getKey());
-            fruit.setQuantity(entry.getValue());
-            fruitList.add(fruit);
+            FruitTransaction fruitTransaction = new FruitTransaction();
+            fruitTransaction.setFruit(entry.getKey());
+            fruitTransaction.setQuantity(entry.getValue());
+            fruitTransactionList.add(fruitTransaction);
         }
-        return fruitList;
+        return fruitTransactionList;
     }
 }

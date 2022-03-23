@@ -1,13 +1,12 @@
 package dao;
 
 import java.util.List;
-import model.Fruit;
+import model.FruitTransaction;
 
 public interface FruitShopDao {
-    void save(Fruit fruit);
+    void save(FruitTransaction fruitTransaction);
 
-    Integer getValue(Fruit fruit);
+    Integer getValue(FruitTransaction fruitTransaction);
 
-    List<Fruit> getAll();
+    List<FruitTransaction> getAll();
 }
-

@@ -1,40 +1,50 @@
 import dao.FruitShopDao;
 import dao.FruitShopDaoImpl;
+import java.nio.file.FileSystems;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.Fruit;
+import model.FruitTransaction;
 import operation.BalanceHandler;
 import operation.Operation;
 import operation.PurchaseHandler;
 import operation.ReturnHandler;
 import operation.SupplyHandler;
+import service.FruitParser;
+import service.FruitParserImpl;
 import service.Reader;
 import service.ReaderImpl;
 import service.ReportCreator;
 import service.ReportCreatorImpl;
 import service.Writer;
 import service.WriterImpl;
+import strategy.FruitStrategy;
+import strategy.FruitStrategyImpl;
 
 public class Main {
+    private static final String FILE_SEPARATOR = FileSystems.getDefault().getSeparator();
+    private static final String INPUT_FILE = "src" + FILE_SEPARATOR
+            + "main" + FILE_SEPARATOR + "resources" + FILE_SEPARATOR + "input.csv";
+    private static final String OUTPUT_FILE = "src" + FILE_SEPARATOR
+            + "main" + FILE_SEPARATOR + "resources" + FILE_SEPARATOR + "output.csv";
+
     public static void main(String[] args) {
-        Map<Fruit.Operation, Operation> operationOperationHandlerMap = new HashMap<>();
-        operationOperationHandlerMap.put(Fruit.Operation.BALANCE, new BalanceHandler());
-        operationOperationHandlerMap.put(Fruit.Operation.PURCHASE, new PurchaseHandler());
-        operationOperationHandlerMap.put(Fruit.Operation.RETURN, new ReturnHandler());
-        operationOperationHandlerMap.put(Fruit.Operation.SUPPLY, new SupplyHandler());
+        Map<FruitTransaction.Operation, Operation> operationHashMap = new HashMap<>();
+        operationHashMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
+        operationHashMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+        operationHashMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        operationHashMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         Reader reader = new ReaderImpl();
-        String line = reader.read();
-        List<Fruit> fromCsvRow = reader.getFromCsvRow(line);
-        for (Fruit fruit : fromCsvRow) {
-            Operation operationHandler = operationOperationHandlerMap.get(fruit.getOperation());
-            operationHandler.proceed(fruit);
-        }
+        FruitParser parser = new FruitParserImpl();
+        String line = reader.read(INPUT_FILE);
+        FruitTransaction fruitTransaction = parser.getFromCsvRow(line);
+        FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHashMap);
+        fruitStrategy.get(fruitTransaction);
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
-        List<Fruit> fruitList = fruitShopDao.getAll();
+        List<FruitTransaction> fruitTransactionList = fruitShopDao.getAll();
         ReportCreator reportCreator = new ReportCreatorImpl();
-        String report = reportCreator.createReport(fruitList);
+        String report = reportCreator.createReport(fruitTransactionList);
         Writer writer = new WriterImpl();
-        writer.write(report);
+        writer.write(report, OUTPUT_FILE);
     }
 }

@@ -1,8 +1,7 @@
 package operation;
 
-import model.Fruit;
+import model.FruitTransaction;
 
 public interface Operation {
-    void proceed(Fruit fruit);
+    Operation proceed(FruitTransaction fruitTransaction);
 }
-

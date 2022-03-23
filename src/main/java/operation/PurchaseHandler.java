@@ -2,25 +2,19 @@ package operation;
 
 import dao.FruitShopDao;
 import dao.FruitShopDaoImpl;
-import model.Fruit;
+import model.FruitTransaction;
 
 public class PurchaseHandler implements Operation {
     @Override
-    public void proceed(Fruit fruit) {
-        if (fruit.getFruit().isEmpty()
-                || fruit.getOperation() == null
-                || fruit.getFruit() == null) {
-            throw new NullPointerException("This line cannot be empty");
-        }
-        if (fruit.getQuantity() < 0) {
-            throw new RuntimeException("The amount cannot be negative");
-        }
+    public Operation proceed(FruitTransaction fruitTransaction) {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
-        if (fruitShopDao.getValue(fruit) == null) {
-            return;
+        if (fruitShopDao.getValue(fruitTransaction) == null) {
+            return null;
         }
-        fruit.setQuantity(fruitShopDao.getValue(fruit) - fruit.getQuantity());
-        fruitShopDao.save(fruit);
+        fruitTransaction.setQuantity(fruitShopDao.getValue(fruitTransaction)
+                - fruitTransaction.getQuantity());
+        fruitShopDao.save(fruitTransaction);
+        return null;
     }
 }
 

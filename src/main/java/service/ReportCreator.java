@@ -1,8 +1,8 @@
 package service;
 
 import java.util.List;
-import model.Fruit;
+import model.FruitTransaction;
 
 public interface ReportCreator {
-    String createReport(List<Fruit> fruits);
+    String createReport(List<FruitTransaction> fruitTransactions);
 }
