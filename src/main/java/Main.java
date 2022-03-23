@@ -1,6 +1,7 @@
 import dao.FruitShopDao;
 import dao.FruitShopDaoImpl;
 import java.nio.file.FileSystems;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +37,16 @@ public class Main {
         operationHashMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         Reader reader = new ReaderImpl();
         FruitParser parser = new FruitParserImpl();
-        String line = reader.read(INPUT_FILE);
-        FruitTransaction fruitTransaction = parser.getFromCsvRow(line);
-        FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHashMap);
-        fruitStrategy.get(fruitTransaction);
+        List<String> stringList = reader.read(INPUT_FILE);
+        for (String string : stringList) {
+            List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+            FruitTransaction fruitTransaction = parser.getFromCsvRow(string);
+            fruitTransactionList.add(fruitTransaction);
+            for (FruitTransaction transaction : fruitTransactionList) {
+                FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHashMap);
+                fruitStrategy.proceed(transaction);
+            }
+        }
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
         List<FruitTransaction> fruitTransactionList = fruitShopDao.getAll();
         ReportCreator reportCreator = new ReportCreatorImpl();

@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 
 public class ReaderImpl implements Reader {
     @Override
-    public String read(String fileName) {
+    public List<String> read(String fileName) {
         List<String> lines;
-        String line;
+        List<String> stringList;
         try {
             lines = Files.readAllLines(Path.of(fileName));
-            line = lines.stream().skip(1).collect(Collectors.joining());
+            stringList = lines.stream().skip(1).collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file." + fileName);
         }
-        return line;
+        return stringList;
     }
 }
