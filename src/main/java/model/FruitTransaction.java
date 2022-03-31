@@ -1,9 +1,9 @@
 package model;
 
 public class FruitTransaction {
-    final Operation operation;
-    final String fruit;
-    final int quantity;
+    private Operation operation;
+    private String fruit;
+    private int quantity;
 
     public FruitTransaction(String operation, String fruit, int quantity) {
         this.operation = convertOperation(operation);
