@@ -5,7 +5,7 @@ import dao.WorkWithStorageDB;
 import model.FruitTransaction;
 
 public class ReturnHandlerImpl implements Handler {
-    final WorkWithStorageDB storageService = new WokWithStorageImpl();
+    private WorkWithStorageDB storageService = new WokWithStorageImpl();
 
     @Override
     public void handler(FruitTransaction fruitTransaction) {

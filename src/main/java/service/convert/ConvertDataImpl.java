@@ -9,7 +9,7 @@ public class ConvertDataImpl implements ConvertData {
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_FRUIT_INDEX = 2;
     private static final String COMMA = ",";
-    final List<FruitTransaction> fruitTransactions = new ArrayList<>();
+    private List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
     @Override
     public List<FruitTransaction> convert(List<String> data) {

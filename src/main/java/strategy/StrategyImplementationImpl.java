@@ -4,7 +4,7 @@ import java.util.List;
 import model.FruitTransaction;
 
 public class StrategyImplementationImpl implements StrategyImplementation {
-    final HandlersStore serviceHandler;
+    private HandlersStore serviceHandler;
 
     public StrategyImplementationImpl(HandlersStore handlersStore) {
         this.serviceHandler = handlersStore;

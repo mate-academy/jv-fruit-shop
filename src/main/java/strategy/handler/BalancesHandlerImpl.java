@@ -5,7 +5,7 @@ import dao.WorkWithStorageDB;
 import model.FruitTransaction;
 
 public class BalancesHandlerImpl implements Handler {
-    final WorkWithStorageDB storageService = new WokWithStorageImpl();
+    private WorkWithStorageDB storageService = new WokWithStorageImpl();
 
     public void handler(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() <= 0) {

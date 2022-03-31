@@ -5,7 +5,7 @@ import model.FruitTransaction;
 import strategy.handler.Handler;
 
 public class HandlersStore {
-    final Map<FruitTransaction.Operation,Handler> strategy;
+    private Map<FruitTransaction.Operation,Handler> strategy;
 
     public HandlersStore(Map<FruitTransaction.Operation, Handler> strategy) {
         this.strategy = strategy;
