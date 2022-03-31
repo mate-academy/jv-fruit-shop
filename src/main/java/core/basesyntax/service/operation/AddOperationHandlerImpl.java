@@ -12,11 +12,9 @@ public class AddOperationHandlerImpl implements OperationHandler {
 
     @Override
     public void apply(String fruitName, int quantity) {
-        if (Storage.storage.get(fruitName) == null) {
-            fruitStorageDao.add(fruitName, quantity);
-        } else {
+        if (Storage.storage.get(fruitName) != null) {
             quantity += Storage.storage.get(fruitName);
-            fruitStorageDao.add(fruitName, quantity);
         }
+        fruitStorageDao.add(fruitName, quantity);
     }
 }
