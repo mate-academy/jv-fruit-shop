@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Parser;
-import core.basesyntax.service.Validator;
 import java.util.ArrayList;
 import java.util.List;
 

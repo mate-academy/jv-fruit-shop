@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
-
 public class FruitTransaction {
     private String operation;
     private Fruit fruit;

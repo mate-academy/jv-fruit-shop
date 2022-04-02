@@ -5,7 +5,6 @@ import core.basesyntax.service.operation.AddOperationHandlerImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandlerImpl;
-
 import java.util.HashMap;
 import java.util.Map;
 
