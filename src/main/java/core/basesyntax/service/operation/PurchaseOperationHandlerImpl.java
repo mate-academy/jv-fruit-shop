@@ -1,8 +1,8 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.db.Storage;
 import core.basesyntax.exception.OperationException;
+import core.basesyntax.model.Fruit;
 
 public class PurchaseOperationHandlerImpl implements OperationHandler {
     private final StorageDao fruitStorageDao;
@@ -12,10 +12,10 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
     }
 
     @Override
-    public void apply(String fruitName, int quantity) {
-        if (Storage.storage.get(fruitName) - quantity < 0) {
+    public void apply(Fruit fruit, int quantity) {
+        if (fruitStorageDao.getValue(fruit) - quantity < 0) {
             throw new OperationException("There are no products to purchase");
         }
-        fruitStorageDao.update(fruitName, quantity);
+        fruitStorageDao.subtract(fruit, quantity);
     }
 }

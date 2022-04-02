@@ -1,11 +1,13 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class FruitTransaction {
     private String operation;
-    private String fruit;
+    private Fruit fruit;
     private int quantity;
 
-    public FruitTransaction(String operation, String fruit, int quantity) {
+    public FruitTransaction(String operation, Fruit fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -15,11 +17,11 @@ public class FruitTransaction {
         return operation;
     }
 
-    public String getFruit() {
-        return fruit;
-    }
-
     public int getQuantity() {
         return quantity;
+    }
+
+    public Fruit getFruit() {
+        return fruit;
     }
 }

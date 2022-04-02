@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.Validator;
@@ -12,22 +13,16 @@ public class ParserImpl implements Parser<FruitTransaction> {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final Validator validator;
-
-    public ParserImpl(Validator validator) {
-        this.validator = validator;
-    }
 
     @Override
     public List<FruitTransaction> parse(List<String> data) {
-        validator.validate(data);
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         data.stream()
                 .filter(t -> !t.equals(FILE_TITLE))
                 .map(t -> t.split(COMA))
                 .forEach(t -> fruitTransactions
-                        .add(new FruitTransaction((t[OPERATION_INDEX]),
-                        t[FRUIT_INDEX], Integer.parseInt(t[QUANTITY_INDEX]))));
+                        .add(new FruitTransaction((t[OPERATION_INDEX]), new Fruit(t[FRUIT_INDEX]),
+                                Integer.parseInt(t[QUANTITY_INDEX]))));
         return fruitTransactions;
     }
 }

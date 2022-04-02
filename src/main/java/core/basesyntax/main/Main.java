@@ -1,8 +1,11 @@
 package core.basesyntax.main;
 
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.Parser;
+import core.basesyntax.service.Validator;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.ParserImpl;
@@ -20,9 +23,12 @@ public class Main {
     public static void main(String[] args) {
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
         List<String> data = csvFileReaderService.readFromFile(FROM_FILE_PATH);
-        Parser<FruitTransaction> parser = new ParserImpl(new ValidatorImpl());
+        Validator validator = new ValidatorImpl();
+        validator.validate(data);
+        Parser<FruitTransaction> parser = new ParserImpl();
         List<FruitTransaction> fruitTransactions = parser.parse(data);
-        Strategy strategy = new StrategyImpl();
+        StorageDao fruitStorageDao = new StorageDaoImpl();
+        Strategy strategy = new StrategyImpl(fruitStorageDao);
 
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             String operation = fruitTransaction.getOperation();

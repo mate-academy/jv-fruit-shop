@@ -1,7 +1,7 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
 
 public class AddOperationHandlerImpl implements OperationHandler {
     private final StorageDao fruitStorageDao;
@@ -11,10 +11,11 @@ public class AddOperationHandlerImpl implements OperationHandler {
     }
 
     @Override
-    public void apply(String fruitName, int quantity) {
-        if (Storage.storage.get(fruitName) != null) {
-            quantity += Storage.storage.get(fruitName);
+    public void apply(Fruit fruit, int quantity) {
+        if (fruitStorageDao.containsKey(fruit)) {
+            fruitStorageDao.supply(fruit, quantity);
+        } else {
+            fruitStorageDao.add(fruit, quantity);
         }
-        fruitStorageDao.add(fruitName, quantity);
     }
 }

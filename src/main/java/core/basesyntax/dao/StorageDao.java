@@ -1,7 +1,19 @@
 package core.basesyntax.dao;
 
-public interface StorageDao {
-    void add(String fruit, int quantity);
+import core.basesyntax.model.Fruit;
+import java.util.Map;
+import java.util.Set;
 
-    void update(String fruit, int quantity);
+public interface StorageDao {
+    void add(Fruit fruit, int quantity);
+
+    void supply(Fruit fruit, int quantity);
+
+    void subtract(Fruit fruit, int quantity);
+
+    int getValue(Fruit fruit);
+
+    boolean containsKey(Fruit fruit);
+
+    Set<Map.Entry<Fruit, Integer>> getAll();
 }
