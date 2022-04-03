@@ -1,46 +1,37 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.DataFromDbImpl;
-import core.basesyntax.dao.DataToDb;
-import core.basesyntax.dao.DataToDbImpl;
-import core.basesyntax.model.Transaction;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DailyReport {
+    private final List<String> result = new ArrayList<>();
+    private final Map<String, Integer> fruitMap = new HashMap<>();
+    private final OperationStrategy operationStrategy = new OperationStrategyImpl();
 
-    public static final int OPERATION = 0;
-    public static final int QUANTITY = 2;
-    public static final String PURCHASE = Transaction.PURCHASE.getTransaction();
-    private List<String> result = new ArrayList<>();
-    private int quantity;
-
-    private DataFromDbImpl datafromDb = new DataFromDbImpl();
-    private DataToDb dataToDb = new DataToDbImpl();
-    private Map<String, List<String[]>> resultMap = datafromDb.readFileToMap();
-
-    public List<String> createListFronMap() {
-        for (Map.Entry entry : resultMap.entrySet()) {
-            StringBuilder stringBuilder = new StringBuilder();
-            int summ = 0;
-            List<String[]> listArrayOperation = (List<String[]>) entry.getValue();
-            for (String[] currentOperation: listArrayOperation) {
-                try {
-                    quantity = Integer.parseInt(currentOperation[QUANTITY]);
-                } catch (NumberFormatException e) {
-                    System.out.println("Error input string " + Arrays.toString(currentOperation));
-                }
-                if (PURCHASE.equals(currentOperation[OPERATION])) {
-                    quantity = quantity * (-1);
-                }
-                summ += quantity;
+    public List<String> listOperation(List<FruitTransaction> fruitTransactionList) {
+        for (FruitTransaction f: fruitTransactionList) {
+            if (fruitMap.isEmpty() || !fruitMap.containsKey(f.getFruit())) {
+                addNewPairToMap(f.getFruit());
             }
-            String res = stringBuilder.append(entry.getKey()).append(", ").append(summ).toString();
-            result.add(res);
+            int oldValue = fruitMap.get(f.getFruit());
+            int newValue = operationStrategy.get(f.getOperation())
+                    .getResultOfFruitOperation(oldValue, f.getQuantity());
+            fruitMap.replace(f.getFruit(), newValue);
+
         }
-        dataToDb.generateListToWriteFile(result);
-        return result;
+        return fruitMap.entrySet()
+                .stream()
+                .map(entry -> entry.getKey() + "," + entry.getValue())
+                .collect(Collectors.toList());
     }
+
+    private void addNewPairToMap(String name) {
+        fruitMap.put(name, 0);
+    }
+
 }

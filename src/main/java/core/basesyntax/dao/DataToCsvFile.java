@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import java.util.List;
 
-public interface DataToDb {
+public interface DataToCsvFile {
 
     String REPORT_TITLE = "fruit,quantity";
 
