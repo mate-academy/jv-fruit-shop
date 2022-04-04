@@ -17,7 +17,7 @@ public class StrategyImpl implements Strategy {
     }
 
     public Map<String, OperationHandler> getMap() {
-        operationHandlerMap = new HashMap<>();
+        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("r", new AddOperationHandlerImpl(fruitStorageDao));
         operationHandlerMap.put("p", new PurchaseOperationHandlerImpl(fruitStorageDao));
         operationHandlerMap.put("b", new BalanceOperationHandler(fruitStorageDao));

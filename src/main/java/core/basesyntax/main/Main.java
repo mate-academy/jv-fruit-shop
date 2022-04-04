@@ -35,7 +35,7 @@ public class Main {
             OperationHandler operationHandler = strategy.get(operation);
             operationHandler.apply(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
-        StringBuilder report = new ReportServiceImpl().makeReport();
+        StringBuilder report = new ReportServiceImpl().makeReport(fruitStorageDao.getAll());
         new CsvFileWriterServiceImpl().writeToFile(TO_FILE_PATH, report);
     }
 }
