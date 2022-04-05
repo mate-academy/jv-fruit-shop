@@ -5,31 +5,28 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public FruitTransaction(String operation, String fruit, int quantity) {
-        this.operation = convertOperation(operation);
-        this.fruit = fruit;
-        this.quantity = quantity;
-    }
-
     public Operation getOperation() {
         return operation;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     public String getFruit() {
         return fruit;
     }
 
+    public void setFruit(String fruit) {
+        this.fruit = fruit;
+    }
+
     public int getQuantity() {
         return quantity;
     }
 
-    private Operation convertOperation(String operation) {
-        for (Operation o : Operation.values()) {
-            if (o.getOperation().equals(operation)) {
-                return o;
-            }
-        }
-        throw new RuntimeException("Can't find operation");
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public enum Operation {
@@ -46,6 +43,15 @@ public class FruitTransaction {
 
         public String getOperation() {
             return operation;
+        }
+
+        public static Operation findByAbbr(String abbr) {
+            for (Operation o : values()) {
+                if (o.getOperation().equals(abbr)) {
+                    return o;
+                }
+            }
+            return null;
         }
     }
 }
