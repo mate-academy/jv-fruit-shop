@@ -38,14 +38,14 @@ public class Main {
         Reader reader = new ReaderImpl();
         FruitParser parser = new FruitParserImpl();
         List<String> stringList = reader.read(INPUT_FILE);
+        List<FruitTransaction> fruitsTransactionList = new ArrayList<>();
         for (String string : stringList) {
-            List<FruitTransaction> fruitTransactionList = new ArrayList<>();
             FruitTransaction fruitTransaction = parser.getFromCsvRow(string);
-            fruitTransactionList.add(fruitTransaction);
-            for (FruitTransaction transaction : fruitTransactionList) {
-                FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHashMap);
-                fruitStrategy.proceed(transaction);
-            }
+            fruitsTransactionList.add(fruitTransaction);
+        }
+        FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHashMap);
+        for (FruitTransaction transaction : fruitsTransactionList) {
+            fruitStrategy.proceed(transaction);
         }
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
         List<FruitTransaction> fruitTransactionList = fruitShopDao.getAll();
