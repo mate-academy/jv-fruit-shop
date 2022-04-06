@@ -6,7 +6,7 @@ import model.FruitTransaction;
 
 public class SupplyHandler implements Operation {
     @Override
-    public Operation proceed(FruitTransaction fruitTransaction) {
+    public boolean proceed(FruitTransaction fruitTransaction) {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
         if (fruitShopDao.getValue(fruitTransaction) == null) {
             fruitShopDao.save(fruitTransaction);
@@ -14,6 +14,6 @@ public class SupplyHandler implements Operation {
         fruitTransaction.setQuantity(fruitShopDao.getValue(fruitTransaction)
                 + fruitTransaction.getQuantity());
         fruitShopDao.save(fruitTransaction);
-        return null;
+        return false;
     }
 }
