@@ -15,6 +15,6 @@ public class BalanceHandler implements Operation {
         fruitTransaction.setQuantity(fruitShopDao.getValue(fruitTransaction)
                 + fruitTransaction.getQuantity());
         fruitShopDao.save(fruitTransaction);
-        return false;
+        return true;
     }
 }
