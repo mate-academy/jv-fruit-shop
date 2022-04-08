@@ -6,6 +6,4 @@ public interface FruitShopDao {
     void addValue(String key, Integer value);
 
     void subtractValue(String key, Integer value);
-
-    String[] getReport();
 }

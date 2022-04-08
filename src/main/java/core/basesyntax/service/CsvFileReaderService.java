@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface CsvFileReaderService {
 
-    public List<FruitTransaction> readFromFile(String filePath);
+    List<FruitTransaction> readFromFile(String filePath);
 }

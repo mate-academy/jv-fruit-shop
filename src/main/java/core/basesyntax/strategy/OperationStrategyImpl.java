@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    public static final Map<FruitTransaction.Operation,
-            OperationHandler> operationHandlerMap = new HashMap<>();
+    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
     public OperationStrategyImpl() {
+        operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
@@ -21,12 +21,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public void activity(FruitTransaction.Operation operation, String fruit, Integer quantity) {
-        for (Map.Entry<FruitTransaction.Operation, OperationHandler> entry :
-                operationHandlerMap.entrySet()) {
-            if (entry.getKey().equals(operation)) {
-                entry.getValue().process(fruit, quantity);
-            }
-        }
+    public void process(FruitTransaction.Operation operation, String fruit, Integer quantity) {
+        operationHandlerMap.get(operation).process(fruit, quantity);
     }
 }
