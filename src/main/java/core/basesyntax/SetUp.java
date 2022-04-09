@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.stratagy.OperationPerformer;
@@ -9,7 +9,7 @@ import core.basesyntax.stratagy.performers.SupplyOperationPerformer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommandService {
+public class SetUp {
 
     public Map<FruitTransaction.Operation, OperationPerformer> initPerformers() {
         Map<FruitTransaction.Operation, OperationPerformer> performers = new HashMap<>();

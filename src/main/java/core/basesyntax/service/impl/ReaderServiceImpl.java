@@ -2,18 +2,17 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileDao;
-import core.basesyntax.service.FileService;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.ReaderService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileServiceImpl implements FileService {
-
-    private FileDao fileDao = new FileDaoImpl();
+public class ReaderServiceImpl implements ReaderService {
+    private FileReader reader = new FileReaderImpl();
 
     @Override
-    public List<FruitTransaction> getData(String filePath) {
-        List<String> records = fileDao.getData(filePath);
+    public List<FruitTransaction> getTransactions(String filePath) {
+        List<String> records = reader.readLines(filePath);
         return records.stream()
                 .skip(1)
                 .map(s -> new FruitTransaction(
@@ -22,9 +21,5 @@ public class FileServiceImpl implements FileService {
                         Integer.parseInt(s.split(",")[2])))
                 .collect(Collectors.toList());
     }
-
-    @Override
-    public void writeData(String newFileName, List<String> records) {
-        fileDao.writeData(newFileName, records);
-    }
 }
+

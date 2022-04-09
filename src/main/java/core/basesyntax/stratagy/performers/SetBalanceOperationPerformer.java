@@ -1,7 +1,7 @@
 package core.basesyntax.stratagy.performers;
 
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.StorageDao;
 import core.basesyntax.stratagy.OperationPerformer;
 
 public class SetBalanceOperationPerformer implements OperationPerformer {

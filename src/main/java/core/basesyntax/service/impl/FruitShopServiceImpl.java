@@ -1,13 +1,14 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.StorageDao;
+import core.basesyntax.service.OperationService;
 import core.basesyntax.stratagy.OperationPerformerStrategy;
 import core.basesyntax.stratagy.OperationPerformerStrategyImpl;
 import java.util.List;
 
-public class FruitShopServiceImpl implements FruitShopService {
+public class FruitShopServiceImpl implements OperationService {
 
     private OperationPerformerStrategy strategy = new OperationPerformerStrategyImpl();
 
