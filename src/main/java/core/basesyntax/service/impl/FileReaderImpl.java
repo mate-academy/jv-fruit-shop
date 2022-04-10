@@ -13,7 +13,7 @@ public class FileReaderImpl implements FileReader {
         try {
             return Files.readAllLines(file.toPath());
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read", e);
+            throw new RuntimeException("Failed to read " + filePath, e);
         }
     }
 }

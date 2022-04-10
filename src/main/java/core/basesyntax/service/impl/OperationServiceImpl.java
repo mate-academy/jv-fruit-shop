@@ -8,7 +8,7 @@ import core.basesyntax.stratagy.OperationPerformerStrategy;
 import core.basesyntax.stratagy.OperationPerformerStrategyImpl;
 import java.util.List;
 
-public class FruitShopServiceImpl implements OperationService {
+public class OperationServiceImpl implements OperationService {
 
     private OperationPerformerStrategy strategy = new OperationPerformerStrategyImpl();
 

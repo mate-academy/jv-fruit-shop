@@ -19,10 +19,9 @@ public class FileWriterImpl implements FileWriter {
             for (String line : records) {
                 String separateLine = System.lineSeparator() + line;
                 Files.write(path, separateLine.getBytes(), StandardOpenOption.APPEND);
-
             }
         } catch (IOException e) {
-            throw new RuntimeException("Cant write to file", e);
+            throw new RuntimeException("Cant write to file " + filePath, e);
         }
     }
 }
