@@ -9,7 +9,6 @@ import core.basesyntax.stratagy.OperationPerformerStrategyImpl;
 import java.util.List;
 
 public class OperationServiceImpl implements OperationService {
-
     private OperationPerformerStrategy strategy = new OperationPerformerStrategyImpl();
 
     @Override
