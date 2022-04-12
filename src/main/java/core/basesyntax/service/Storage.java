@@ -18,7 +18,7 @@ public class Storage {
             }
             int oldValue = fruitMap.get(f.getFruit());
             int newValue = operationStrategy.get(f.getOperation())
-                    .getResultOfFruitOperation(oldValue, f.getQuantity());
+                    .handle(oldValue, f.getQuantity());
             fruitMap.replace(f.getFruit(), newValue);
 
         }
