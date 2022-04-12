@@ -1,23 +1,29 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationService;
-import core.basesyntax.stratagy.OperationPerformerStrategy;
-import core.basesyntax.stratagy.OperationPerformerStrategyImpl;
+import core.basesyntax.strategy.OperationPerformerStrategy;
 import java.util.List;
+import java.util.Map;
 
 public class OperationServiceImpl implements OperationService {
-    private OperationPerformerStrategy strategy = new OperationPerformerStrategyImpl();
+    private OperationPerformerStrategy strategy;
+    private StorageDao storageDao;
+
+    public OperationServiceImpl(OperationPerformerStrategy strategy, StorageDao storageDao) {
+        this.strategy = strategy;
+        this.storageDao = storageDao;
+    }
 
     @Override
-    public StorageDao processOperations(List<FruitTransaction> fruitTransactionList) {
-        StorageDao storageDao = new StorageDaoImpl();
+    public Map<Fruit, Integer> processOperations(List<FruitTransaction> fruitTransactionList) {
+
         for (FruitTransaction transaction : fruitTransactionList) {
             strategy.getOperationPerformer(transaction.getOperation())
-                    .perform(storageDao, transaction);
+                    .perform(transaction);
         }
-        return storageDao;
+        return storageDao.getAll();
     }
 }

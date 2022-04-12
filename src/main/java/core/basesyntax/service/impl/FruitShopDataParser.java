@@ -13,9 +13,9 @@ public class FruitShopDataParser implements Parser {
     private static final Integer OPERATION_INDEX = 0;
     private static final Integer FRUIT_INDEX = 1;
     private static final Integer AMOUNT_INDEX = 2;
-    private final Validator validator;
-    private Function<String, FruitTransaction.Operation> defineOperation =
+    private static final Function<String, FruitTransaction.Operation> defineOperation =
             (line) -> FruitTransaction.Operation.of(line.split(COMA)[OPERATION_INDEX]);
+    private final Validator validator;
 
     public FruitShopDataParser(Validator validator) {
         this.validator = validator;

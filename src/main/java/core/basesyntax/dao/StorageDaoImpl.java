@@ -3,10 +3,8 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.Map;
-import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao {
-
     @Override
     public void set(Fruit fruit, Integer amount) {
         Storage.data.put(fruit, amount);
@@ -30,7 +28,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public Set<Map.Entry<Fruit, Integer>> getAll() {
-        return Storage.data.entrySet();
+    public Map<Fruit, Integer> getAll() {
+        return Storage.data;
     }
 }

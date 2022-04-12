@@ -1,6 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -14,10 +15,12 @@ import core.basesyntax.service.impl.FruitShopDataParser;
 import core.basesyntax.service.impl.FruitShopRecordValidator;
 import core.basesyntax.service.impl.OperationServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.strategy.OperationPerformerStrategy;
+import core.basesyntax.strategy.OperationPerformerStrategyImpl;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
-
     private static final String SOURCE_FILE_PATH = "src/main/resources/data.csv";
     private static final String RESULT_FILE_PATH = "src/main/resources/result.csv";
 
@@ -29,8 +32,10 @@ public class Main {
         List<FruitTransaction> fruitTransactionList = parser
                 .getTransactions(records);
 
-        OperationService operationService = new OperationServiceImpl();
-        StorageDao fruitStorage = operationService.processOperations(fruitTransactionList);
+        OperationPerformerStrategy strategy = new OperationPerformerStrategyImpl();
+        OperationService operationService = new OperationServiceImpl(strategy,
+                new StorageDaoImpl());
+        Map<Fruit, Integer> fruitStorage = operationService.processOperations(fruitTransactionList);
         ReportService reportService = new ReportServiceImpl();
         List<String> fruitReport = reportService.makeReport(fruitStorage);
 

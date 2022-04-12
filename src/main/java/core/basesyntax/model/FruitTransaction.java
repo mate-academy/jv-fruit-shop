@@ -80,8 +80,10 @@ public class FruitTransaction {
                     return Operation.SUPPLY;
                 case "p":
                     return Operation.PURCHASE;
-                default:
+                case "r":
                     return Operation.RETURN;
+                default:
+                    throw new IllegalArgumentException("Invalid operation " + operation);
             }
         }
     }
