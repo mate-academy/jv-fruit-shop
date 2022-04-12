@@ -7,5 +7,7 @@ import java.util.Set;
 public interface StorageDao {
     void update(Fruit fruit, Integer quantity);
 
+    Integer getValue(Fruit fruit);
+
     Set<Map.Entry<Fruit, Integer>> getAll();
 }
