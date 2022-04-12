@@ -8,8 +8,8 @@ import core.basesyntax.service.strategy.OperationHandler;
 import java.util.List;
 
 public class OperationServiceImpl implements OperationService {
-    private OperationStrategy operationStrategy;
-    private StorageDao storageDao;
+    private final OperationStrategy operationStrategy;
+    private final StorageDao storageDao;
 
     public OperationServiceImpl(OperationStrategy operationStrategy, StorageDao storageDao) {
         this.operationStrategy = operationStrategy;

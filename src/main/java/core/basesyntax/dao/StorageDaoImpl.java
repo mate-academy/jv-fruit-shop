@@ -14,7 +14,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public Set<Map.Entry<Fruit, Integer>> getEntries() {
+    public Set<Map.Entry<Fruit, Integer>> getAll() {
         return Storage.storage.entrySet();
     }
 }

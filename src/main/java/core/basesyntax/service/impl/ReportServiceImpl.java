@@ -8,7 +8,7 @@ import java.util.Map;
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity" + System.lineSeparator();
     private static final String COMMA = ",";
-    private StorageDao storageDao;
+    private final StorageDao storageDao;
 
     public ReportServiceImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
@@ -17,7 +17,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String makeReport() {
         StringBuilder builder = new StringBuilder(HEADER);
-        for (Map.Entry<Fruit, Integer> entry : storageDao.getEntries()) {
+        for (Map.Entry<Fruit, Integer> entry : storageDao.getAll()) {
             builder.append(entry.getKey().getName())
                     .append(COMMA)
                     .append(entry.getValue())
