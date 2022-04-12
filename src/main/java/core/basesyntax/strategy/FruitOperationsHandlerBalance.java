@@ -1,6 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.strategy;
 
-public class FruitOperationsHandlerSupply implements FruitOperationsHandler {
+public class FruitOperationsHandlerBalance implements FruitOperationsHandler {
     @Override
     public int getResultOfFruitOperation(int sum, int quantity) {
         return sum + quantity;

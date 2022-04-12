@@ -1,21 +1,28 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.DataFromCsvFilrImpl;
+import core.basesyntax.dao.CsvFileService;
+import core.basesyntax.dao.CsvFilrImplService;
 import core.basesyntax.dao.DataToCsvFile;
 import core.basesyntax.dao.DataToCsvFileImpl;
 import core.basesyntax.service.DailyReport;
 import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.Storage;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        DataFromCsvFilrImpl dataFromCsv = new DataFromCsvFilrImpl();
+        CsvFileService dataFromCsv = new CsvFilrImplService();
+
         List<FruitTransaction> fruitTransactions =
                 dataFromCsv.readFileToList("src/main/resources/fullreport.csv");
+        Storage storage = new Storage();
+        Map<String, Integer> mapStorage = storage.putFruitInStorage(fruitTransactions);
         DailyReport dailyReport = new DailyReport();
-        List<String> stringsReport = dailyReport.listOperation(fruitTransactions);
+        List<String> stringsReport = dailyReport.listOperation(mapStorage);
         DataToCsvFile dataToCsvFile = new DataToCsvFileImpl();
-        dataToCsvFile.generateListToWriteFile(stringsReport);
+        System.out.println(dataToCsvFile.generateListToWriteFile(
+                stringsReport, "src/main/resources/daylireport.csv"));
 
     }
 }

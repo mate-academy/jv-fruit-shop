@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.strategy;
 
 public class FruitOperationsHandlerPurchase implements FruitOperationsHandler {
     @Override

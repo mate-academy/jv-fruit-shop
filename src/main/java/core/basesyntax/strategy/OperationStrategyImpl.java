@@ -1,10 +1,5 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.FruitOperationsHandler;
-import core.basesyntax.service.FruitOperationsHandlerBalance;
-import core.basesyntax.service.FruitOperationsHandlerPurchase;
-import core.basesyntax.service.FruitOperationsHandlerReturn;
-import core.basesyntax.service.FruitOperationsHandlerSupply;
 import core.basesyntax.service.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
