@@ -22,13 +22,13 @@ public class CsvFilrImplService implements CsvFileService {
                     String[] fruitOperation = listFromFile.get(i).split(",");
                     if (isAnOperation(fruitOperation)) {
                         FruitTransaction.Operation fruitCurrentOperation
-                                = FruitTransaction.Operation.getFruitOperstion(
+                                = FruitTransaction.Operation.getFruitOperation(
                                         fruitOperation[OPERATION_INDEX]);
                         if (fruitCurrentOperation != null) {
                             FruitTransaction fruitTransaction
                                     = new FruitTransaction(fruitCurrentOperation,
                                     fruitOperation[FRUIT_NAME_INDEX],
-                                    getQuantityInt(fruitOperation[QUANTITY_INDEX]));
+                                    Integer.parseInt(fruitOperation[QUANTITY_INDEX]));
                             fruitList.add(fruitTransaction);
                         }
 
@@ -40,19 +40,9 @@ public class CsvFilrImplService implements CsvFileService {
         return fruitList;
     }
 
-    private boolean isAnOperation(String[] strings) {
-        return strings[OPERATION_INDEX] != null
-                && strings[FRUIT_NAME_INDEX] != null
-                && strings[QUANTITY_INDEX] != null;
-    }
-
-    private int getQuantityInt(String quantity) {
-        int result;
-        try {
-            result = Integer.parseInt(quantity);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("this string is not a numeral " + quantity);
-        }
-        return result;
+    private boolean isAnOperation(String[] line) {
+        return line[OPERATION_INDEX] != null
+                && line[FRUIT_NAME_INDEX] != null
+                && line[QUANTITY_INDEX] != null;
     }
 }

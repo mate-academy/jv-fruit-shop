@@ -14,18 +14,13 @@ public class Storage {
     public Map<String, Integer> putFruitInStorage(List<FruitTransaction> fruitTransactionList) {
         for (FruitTransaction f : fruitTransactionList) {
             if (fruitMap.isEmpty() || !fruitMap.containsKey(f.getFruit())) {
-                addNewPairToMap(f.getFruit());
+                fruitMap.put(f.getFruit(), 0);
             }
-            int oldValue = fruitMap.get(f.getFruit());
-            int newValue = operationStrategy.get(f.getOperation())
-                    .handle(oldValue, f.getQuantity());
-            fruitMap.replace(f.getFruit(), newValue);
-
+            int currentQuantity = fruitMap.get(f.getFruit());
+            int newQuantity = operationStrategy.get(f.getOperation())
+                    .handle(currentQuantity, f.getQuantity());
+            fruitMap.replace(f.getFruit(), newQuantity);
         }
         return fruitMap;
-    }
-
-    private void addNewPairToMap(String name) {
-        fruitMap.put(name, 0);
     }
 }

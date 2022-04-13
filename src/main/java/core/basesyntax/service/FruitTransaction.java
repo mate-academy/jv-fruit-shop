@@ -38,7 +38,7 @@ public class FruitTransaction {
             return operation;
         }
 
-        public static Operation getFruitOperstion(String operation) {
+        public static Operation getFruitOperation(String operation) {
             FruitTransaction.Operation[] fruitOperation = FruitTransaction.Operation.values();
             for (FruitTransaction.Operation o: fruitOperation) {
                 if (o.getOperation().equals(operation)) {

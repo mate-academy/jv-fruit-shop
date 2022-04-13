@@ -10,9 +10,9 @@ public class WriteFileImpl implements WriteFile {
     @Override
     public void writeFileReport(List<String> report, String filePath) {
 
-        File outFile = new File(filePath);
+        File file = new File(filePath);
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outFile))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (String line: report) {
                 writer.write(line);
                 writer.write(System.getProperty("line.separator"));
