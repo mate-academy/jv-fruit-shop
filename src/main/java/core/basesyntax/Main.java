@@ -23,8 +23,5 @@ public class Main {
         DataToCsvFile dataToCsvFile = new DataToCsvFileImpl();
         System.out.println(dataToCsvFile.generateListToWriteFile(
                 stringsReport, "src/main/resources/daylireport.csv"));
-
-
-
     }
 }
