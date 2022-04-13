@@ -13,7 +13,7 @@ public class FruitShopDataParser implements Parser {
     private static final Integer OPERATION_INDEX = 0;
     private static final Integer FRUIT_INDEX = 1;
     private static final Integer AMOUNT_INDEX = 2;
-    private static final Function<String, FruitTransaction.Operation> defineOperation =
+    private static final Function<String, FruitTransaction.Operation> DEFINE_OPERATION =
             (line) -> FruitTransaction.Operation.of(line.split(COMA)[OPERATION_INDEX]);
     private final Validator validator;
 
@@ -27,7 +27,7 @@ public class FruitShopDataParser implements Parser {
                 .skip(1)
                 .filter(validator::isValid)
                 .map(line -> new FruitTransaction(
-                        defineOperation.apply(line),
+                        DEFINE_OPERATION.apply(line),
                         new Fruit(line.split(COMA)[FRUIT_INDEX]),
                         Integer.parseInt(line.split(COMA)[AMOUNT_INDEX])))
                 .collect(Collectors.toList());

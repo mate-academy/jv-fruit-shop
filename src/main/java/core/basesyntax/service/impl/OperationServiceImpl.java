@@ -19,7 +19,6 @@ public class OperationServiceImpl implements OperationService {
 
     @Override
     public Map<Fruit, Integer> processOperations(List<FruitTransaction> fruitTransactionList) {
-
         for (FruitTransaction transaction : fruitTransactionList) {
             strategy.getOperationPerformer(transaction.getOperation())
                     .perform(transaction);
