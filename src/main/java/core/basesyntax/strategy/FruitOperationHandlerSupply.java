@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-public class FruitOperationsHandlerBalance implements FruitOperationsHandler {
+public class FruitOperationHandlerSupply implements FruitOperationHandler {
     @Override
     public int handle(int sum, int quantity) {
         return sum + quantity;

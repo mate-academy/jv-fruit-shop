@@ -5,21 +5,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-
-    private final Map<FruitTransaction.Operation, FruitOperationsHandler> operationHandlerMap
+    private final Map<FruitTransaction.Operation, FruitOperationHandler> operationHandlerMap
             = new HashMap<>();
 
     @Override
-    public FruitOperationsHandler get(FruitTransaction.Operation operation) {
+    public FruitOperationHandler get(FruitTransaction.Operation operation) {
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new FruitOperationsHandlerBalance());
+                new FruitOperationHandlerBalance());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new FruitOperationsHandlerPurchase());
+                new FruitOperationHandlerPurchase());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new FruitOperationsHandlerReturn());
+                new FruitOperationHandlerReturn());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new FruitOperationsHandlerSupply());
-
+                new FruitOperationHandlerSupply());
         return operationHandlerMap.get(operation);
     }
 }

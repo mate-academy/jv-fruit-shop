@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface FruitOperationsHandler {
+public interface FruitOperationHandler {
     int handle(int currentQuantity, int quantity);
 }
