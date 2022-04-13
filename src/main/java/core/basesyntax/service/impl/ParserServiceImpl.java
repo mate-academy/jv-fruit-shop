@@ -5,6 +5,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class ParserServiceImpl implements ParserService {
@@ -13,9 +14,9 @@ public class ParserServiceImpl implements ParserService {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final String COMMA = ",";
-    private ValidationServiceImpl validator;
+    private final Predicate<String> validator;
 
-    public ParserServiceImpl(ValidationServiceImpl validator) {
+    public ParserServiceImpl(Predicate<String> validator) {
         this.validator = validator;
     }
 
@@ -23,7 +24,7 @@ public class ParserServiceImpl implements ParserService {
     public List<FruitTransaction> parse(List<String> lines) {
         lines.remove(HEADER_INDEX);
         return lines.stream()
-                .filter(l -> validator.test(l))
+                .filter(validator)
                 .map(this::createTransactionFromLine)
                 .collect(Collectors.toList());
     }

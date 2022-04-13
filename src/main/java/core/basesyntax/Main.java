@@ -26,8 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String DATA_PATH = "src/main/java/core/basesyntax/resources/data.csv";
-    private static final String REPORT_PATH = "src/main/java/core/basesyntax/resources/report.csv";
+    private static final String DATA_PATH = "src/main/resources/data.csv";
+    private static final String REPORT_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         StorageDao storageDao = new StorageDaoImpl();
@@ -36,13 +36,17 @@ public class Main {
         ParserService parserService = new ParserServiceImpl(validationService);
 
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
-        handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        OperationStrategy operationStrat = new OperationStrategyImpl(handlerMap);
+        handlerMap.put(FruitTransaction.Operation.BALANCE,
+                            new BalanceOperationHandler(storageDao));
+        handlerMap.put(FruitTransaction.Operation.SUPPLY,
+                            new SupplyOperationHandler(storageDao));
+        handlerMap.put(FruitTransaction.Operation.PURCHASE,
+                            new PurchaseOperationHandler(storageDao));
+        handlerMap.put(FruitTransaction.Operation.RETURN,
+                            new ReturnOperationHandler(storageDao));
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
 
-        OperationService operationService = new OperationServiceImpl(operationStrat, storageDao);
+        OperationService operationService = new OperationServiceImpl(operationStrategy);
         ReportService reportService = new ReportServiceImpl(storageDao);
         WriterService writerService = new WriterServiceImpl();
 

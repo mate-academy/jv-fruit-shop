@@ -5,15 +5,11 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 public class ValidationServiceImpl implements Predicate<String> {
-    private String pattern;
-
-    public ValidationServiceImpl() {
-        pattern = "[" + getSupportedOperations() + "],\\w+,\\d+";
-    }
+    private static final String PATTERN = "[%s],\\w+,\\d+";
 
     @Override
     public boolean test(String line) {
-        if (Pattern.matches(pattern, line)) {
+        if (Pattern.matches(String.format(PATTERN, getSupportedOperations()), line)) {
             return true;
         }
         throw new RuntimeException("Invalid data line: " + line);
