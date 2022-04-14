@@ -1,5 +1,5 @@
 package core.basesyntax.service.operation;
 
 public interface OperationHandler {
-    int operationWithFruit(int fruitTransaction, int fruitList);
+    int process(int fruitTransactionQuantity, int currentFruitQuantity);
 }

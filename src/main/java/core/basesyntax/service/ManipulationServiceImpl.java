@@ -14,18 +14,18 @@ public class ManipulationServiceImpl implements ManipulationService {
     }
 
     @Override
-    public void manipulation(List<FruitTransaction> data) {
+    public void manipulation(List<FruitTransaction> fruitTransactions) {
         FruitDao fruitDao = new FruitDaoImpl();
-        FruitService fruitService = new FruitServiceImpl();
-
-        for (FruitTransaction transaction : data) {
+        FruitService fruitService = new FruitServiceImpl(fruitDao);
+        for (FruitTransaction transaction : fruitTransactions) {
             if (fruitDao.get(transaction.getFruit()) == null) {
-                fruitDao.add(fruitService.createNewFruit(transaction.getFruit()));
+                fruitService.createNewFruit(transaction.getFruit());
             }
             Fruit fruitOperation = fruitDao.get(transaction.getFruit());
-            fruitOperation.setQuantity(strategy
+            int fruitSummary = strategy
                     .getActivity(transaction.getOperation())
-                    .operationWithFruit(transaction.getQuantity(), fruitOperation.getQuantity()));
+                    .process(transaction.getQuantity(), fruitOperation.getQuantity());
+            fruitOperation = new Fruit(fruitSummary,transaction.getFruit());
             fruitDao.update(fruitOperation);
         }
     }

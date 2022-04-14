@@ -1,9 +1,10 @@
 package core.basesyntax;
 
 import core.basesyntax.cvswork.FileReaderImpl;
-import core.basesyntax.cvswork.FileWrite;
+import core.basesyntax.cvswork.FileWriter;
 import core.basesyntax.cvswork.FileWrittenImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.LineSeparatorImpl;
 import core.basesyntax.service.ManipulationService;
 import core.basesyntax.service.ManipulationServiceImpl;
 import core.basesyntax.service.TransactionStrategy;
@@ -17,23 +18,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
+
     public static final String INPUT_FILE_PATH
-            = "src/main/java/core/basesyntax/resourse/inputFile.cvs";
+            = "src/main/java/core/basesyntax/resourse/normalFile.cvs";
     public static final String REPORT_FILE_PATH
             = "src/main/java/core/basesyntax/resourse/outFile.cvs";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = getMap();
         TransactionStrategy strategy = new TransactionStrategyImpl(operationHandlerMap);
-        List<FruitTransaction> transactionList = new FileReaderImpl().readParser(INPUT_FILE_PATH);
+        List<String> transaction = new FileReaderImpl().read(INPUT_FILE_PATH);
+        List<FruitTransaction> transactionList = new LineSeparatorImpl().separator(transaction);
         ManipulationService manipulationService = new ManipulationServiceImpl(strategy);
         manipulationService.manipulation(transactionList);
-        FileWrite fileWriter = new FileWrittenImpl();
-        fileWriter.writeFile(REPORT_FILE_PATH);
+        FileWriter fileWriter = new FileWrittenImpl();
+        fileWriter.write(REPORT_FILE_PATH);
     }
 
     private static Map<FruitTransaction.Operation, OperationHandler> getMap() {
