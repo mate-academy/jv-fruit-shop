@@ -3,10 +3,12 @@ package core.basesyntax;
 import core.basesyntax.cvswork.FileReaderImpl;
 import core.basesyntax.cvswork.FileWriter;
 import core.basesyntax.cvswork.FileWrittenImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.LineSeparatorImpl;
-import core.basesyntax.service.ManipulationService;
-import core.basesyntax.service.ManipulationServiceImpl;
+import core.basesyntax.service.FruitTransactionParserImpl;
+import core.basesyntax.service.FruitTransactionService;
+import core.basesyntax.service.FruitTransactionServiceImpl;
 import core.basesyntax.service.TransactionStrategy;
 import core.basesyntax.service.TransactionStrategyImpl;
 import core.basesyntax.service.operation.BalanceOperation;
@@ -26,12 +28,15 @@ public class Main {
             = "src/main/java/core/basesyntax/resourse/outFile.cvs";
 
     public static void main(String[] args) {
+        FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = getMap();
         TransactionStrategy strategy = new TransactionStrategyImpl(operationHandlerMap);
         List<String> transaction = new FileReaderImpl().read(INPUT_FILE_PATH);
-        List<FruitTransaction> transactionList = new LineSeparatorImpl().separator(transaction);
-        ManipulationService manipulationService = new ManipulationServiceImpl(strategy);
-        manipulationService.manipulation(transactionList);
+        List<FruitTransaction> transactionList =
+                new FruitTransactionParserImpl().parse(transaction);
+        FruitTransactionService fruitTransactionService =
+                new FruitTransactionServiceImpl(strategy, fruitDao);
+        fruitTransactionService.process(transactionList);
         FileWriter fileWriter = new FileWrittenImpl();
         fileWriter.write(REPORT_FILE_PATH);
     }

@@ -1,21 +1,21 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public class ManipulationServiceImpl implements ManipulationService {
+public class FruitTransactionServiceImpl implements FruitTransactionService {
     private TransactionStrategy strategy;
+    private FruitDao fruitDao;
 
-    public ManipulationServiceImpl(TransactionStrategy strategy) {
+    public FruitTransactionServiceImpl(TransactionStrategy strategy, FruitDao fruitDao) {
         this.strategy = strategy;
+        this.fruitDao = fruitDao;
     }
 
     @Override
-    public void manipulation(List<FruitTransaction> fruitTransactions) {
-        FruitDao fruitDao = new FruitDaoImpl();
+    public void process(List<FruitTransaction> fruitTransactions) {
         FruitService fruitService = new FruitServiceImpl(fruitDao);
         for (FruitTransaction transaction : fruitTransactions) {
             if (fruitDao.get(transaction.getFruit()) == null) {

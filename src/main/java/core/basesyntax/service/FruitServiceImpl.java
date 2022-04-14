@@ -12,7 +12,7 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void createNewFruit(String fruitName) {
-        Fruit fruit = new Fruit(0,fruitName);
+        Fruit fruit = new Fruit(0, fruitName);
         fruitDao.add(fruit);
     }
 }

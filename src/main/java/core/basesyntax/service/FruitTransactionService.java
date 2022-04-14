@@ -3,6 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public interface LineSeparator {
-    List<FruitTransaction> separator(List<String> lines);
+public interface FruitTransactionService {
+    void process(List<FruitTransaction> fruitTransactions);
 }
