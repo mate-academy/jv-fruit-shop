@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-
     private static final String INPUT_FILE_PATH
             = "src/main/java/core/basesyntax/resourse/normalFile.cvs";
     private static final String REPORT_FILE_PATH
