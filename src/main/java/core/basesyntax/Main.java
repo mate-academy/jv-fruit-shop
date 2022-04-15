@@ -22,9 +22,9 @@ import java.util.Map;
 
 public class Main {
 
-    public static final String INPUT_FILE_PATH
+    private static final String INPUT_FILE_PATH
             = "src/main/java/core/basesyntax/resourse/normalFile.cvs";
-    public static final String REPORT_FILE_PATH
+    private static final String REPORT_FILE_PATH
             = "src/main/java/core/basesyntax/resourse/outFile.cvs";
 
     public static void main(String[] args) {
