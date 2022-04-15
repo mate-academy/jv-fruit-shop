@@ -12,19 +12,19 @@ public class Fruit {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Fruit{"
-                + "quantity=" + quantity
-                + ", name='" + name + '\''
-                + '}';
-    }
-
     public int getQuantity() {
         return quantity;
     }
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Fruit{"
+                + "quantity=" + quantity
+                + ", name='" + name + '\''
+                + '}';
     }
 }

@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -26,10 +25,6 @@ public class FruitTransaction {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public enum Operation {
