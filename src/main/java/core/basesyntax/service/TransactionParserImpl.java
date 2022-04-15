@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransactionParserImpl implements TransactionParser {
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+
     @Override
     public List<FruitTransaction> parseFruitTransaction(List<String> transaction) {
         return transaction.stream()
@@ -14,12 +18,12 @@ public class TransactionParserImpl implements TransactionParser {
     }
 
     private FruitTransaction convertToTransaction(String transaction) {
-        String[] splitTransaction = transaction.split(",");
+        String[] splittedTransaction = transaction.split(",");
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation
-                .getByAbbreviation(splitTransaction[0]));
-        fruitTransaction.setFruit(splitTransaction[1]);
-        fruitTransaction.setQuantity(Integer.parseInt(splitTransaction[2]));
+                .getByAbbreviation(splittedTransaction[OPERATION_INDEX]));
+        fruitTransaction.setFruit(splittedTransaction[FRUIT_INDEX]);
+        fruitTransaction.setQuantity(Integer.parseInt(splittedTransaction[QUANTITY_INDEX]));
         return fruitTransaction;
     }
 }

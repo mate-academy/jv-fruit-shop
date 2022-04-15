@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitShopService;
-import core.basesyntax.dao.FruitShopServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceOperation;
 import core.basesyntax.operation.OperationHandler;
@@ -12,6 +10,8 @@ import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileReaderServiceImpl;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FileWriterServiceImpl;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.FruitShopServiceImpl;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.TransactionParser;

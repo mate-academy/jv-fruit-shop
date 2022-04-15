@@ -1,13 +1,13 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.dao.FruitShopService;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitShopService;
 
 public class ReturnOperation implements OperationHandler {
     private final FruitShopService fruitShopService;
 
-    public ReturnOperation(FruitShopService fruitShopDao) {
-        this.fruitShopService = fruitShopDao;
+    public ReturnOperation(FruitShopService fruitShopService) {
+        this.fruitShopService = fruitShopService;
     }
 
     @Override
