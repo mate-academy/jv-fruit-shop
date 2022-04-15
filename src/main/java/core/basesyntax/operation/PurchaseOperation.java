@@ -1,21 +1,25 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.dao.FruitShopDao;
-import core.basesyntax.dao.FruitShopDaoImpl;
+import core.basesyntax.dao.FruitShopService;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
+    private final FruitShopService fruitShopService;
+
+    public PurchaseOperation(FruitShopService fruitShopDao) {
+        this.fruitShopService = fruitShopDao;
+    }
+
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        FruitShopDao fruitShopDao = new FruitShopDaoImpl();
-        if (fruitShopDao.getStorage().containsKey(fruitTransaction.getFruit())
-                && fruitShopDao
-                .getAmount(fruitTransaction.getFruit()) >= fruitTransaction.getQuantity()) {
-            fruitShopDao.add(fruitTransaction.getFruit(),
-                    fruitShopDao.getAmount(fruitTransaction.getFruit())
+        if (fruitShopService.getStorage().containsKey(fruitTransaction.getFruit())
+                && fruitShopService.getAmount(fruitTransaction.getFruit())
+                >= fruitTransaction.getQuantity()) {
+            fruitShopService.add(fruitTransaction.getFruit(),
+                    fruitShopService.getAmount(fruitTransaction.getFruit())
                             - fruitTransaction.getQuantity());
-        } else {
-            throw new RuntimeException("Can`t sell this Fruit!");
+            return;
         }
+        throw new RuntimeException("Can`t sell this Fruit!");
     }
 }

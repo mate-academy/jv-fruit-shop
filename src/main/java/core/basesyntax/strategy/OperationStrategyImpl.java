@@ -5,7 +5,7 @@ import core.basesyntax.operation.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
     public OperationStrategyImpl(Map<FruitTransaction.Operation, OperationHandler>
                                          operationHandlerMap) {
@@ -13,7 +13,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public void proceedOperation(FruitTransaction fruitTransaction) {
+    public void proceedTransaction(FruitTransaction fruitTransaction) {
         operationHandlerMap.get(fruitTransaction.getOperation()).handle(fruitTransaction);
     }
 }
