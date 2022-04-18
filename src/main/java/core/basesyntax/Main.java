@@ -1,17 +1,20 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.CsvValidator;
 import core.basesyntax.service.FormatParserService;
 import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriteToFileService;
+import core.basesyntax.service.impl.CsvValidatorImpl;
 import core.basesyntax.service.impl.FormatParserServiceImpl;
 import core.basesyntax.service.impl.ReadFromFileServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriteToFileImpl;
-import core.basesyntax.strategy.StrategyOperation;
-import core.basesyntax.strategy.impl.StrategyOperationImpl;
+import core.basesyntax.strategy.Strategy;
+import core.basesyntax.strategy.impl.StrategyImpl;
 import java.util.List;
 
 public class Main {
@@ -22,20 +25,24 @@ public class Main {
         ReadFromFileService readFromFileService = new ReadFromFileServiceImpl();
         String inputData = readFromFileService.readFromFile(FROM_FILE_NAME);
 
+        CsvValidator validator = new CsvValidatorImpl();
+        validator.validate(inputData);
+
         FormatParserService csvFormatParserService = new FormatParserServiceImpl();
         List<FruitTransaction> fruitTransactions = csvFormatParserService.parseData(inputData);
 
-        StrategyOperation strategyOperation = new StrategyOperationImpl();
+        Strategy strategy = new StrategyImpl();
 
         for (FruitTransaction fruitTransaction : fruitTransactions) {
-            strategyOperation.handle(fruitTransaction);
+            strategy.handle(fruitTransaction);
         }
 
+        StorageDao storageDao = new StorageDaoImpl();
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.createReport(Storage.getAll());
+        String report = reportService.createReport(storageDao.getAll());
 
         WriteToFileService writeToFileService = new WriteToFileImpl();
-        writeToFileService.writeDataToFile(REPORT_FILE_NAME, report);
+        writeToFileService.writeToFile(REPORT_FILE_NAME, report);
 
     }
 }

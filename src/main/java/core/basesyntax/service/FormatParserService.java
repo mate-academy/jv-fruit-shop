@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface FormatParserService {
-    public List<FruitTransaction> parseData(String csvFormatData);
+    List<FruitTransaction> parseData(String csvFormatData);
 }

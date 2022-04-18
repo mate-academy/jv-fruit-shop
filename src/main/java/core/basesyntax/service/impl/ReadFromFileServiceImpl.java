@@ -1,24 +1,19 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReadFromFileService;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class ReadFromFileServiceImpl implements ReadFromFileService {
     @Override
     public String readFromFile(String pathToFile) {
-        StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToFile))) {
-            String value = bufferedReader.readLine();
-            while (value != null) {
-                stringBuilder.append(value).append(System.lineSeparator());
-                value = bufferedReader.readLine();
-            }
-
-            return stringBuilder.toString();
+        String readFromFile;
+        try {
+            readFromFile = Files.readString(Path.of(pathToFile));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + pathToFile, e);
+            throw new RuntimeException("Can't find file by path: " + pathToFile, e);
         }
+        return readFromFile;
     }
 }
