@@ -39,7 +39,7 @@ public class Main {
 
         StorageDao storageDao = new StorageDaoImpl();
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.createReport(storageDao.getAll());
+        String report = reportService.createReport();
 
         WriteToFileService writeToFileService = new WriteToFileImpl();
         writeToFileService.writeToFile(REPORT_FILE_NAME, report);
