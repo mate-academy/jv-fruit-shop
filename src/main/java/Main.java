@@ -22,8 +22,8 @@ import write.file.WriteToFileImpl;
 
 public class Main {
     public static void main(String[] args) {
-        final String inputFile = "src\\resources\\inputData.csv";
-        final String reportFile = "src\\resources\\reportData.csv";
+        final String inputFile = "src\\main\\resources\\inputData.csv";
+        final String reportFile = "src\\main\\resources\\reportData.csv";
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,new SupplyOperationHandler());
