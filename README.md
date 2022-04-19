@@ -65,30 +65,30 @@ We are expecting to see how many fruits are available today after the work shift
 ```
 The line above means you have 152 bananas, and 90 apples in your Fruit store after the work shift.
 
-**Hint: Think about creating some FruitTransaction model to store info from file line for more convenient data processing 
+**Hint: Think about creating some model.FruitTransaction model to store info from file line for more convenient data processing 
 (this is only a recommendation, you can use other classes / approaches to solve this task at your discretion):**
 ```java
-public class FruitTransaction {
-  private Operation operation;
+public class model.FruitTransaction {
+  private operationHandling operationHandling;
   private String fruit;
   private int quantity;
 
   // getters, setters, ...
   
-  public enum Operation {
+  public enum operationHandling {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
 
-    private String operation;
+    private String operationHandling;
 
-    Operation(String operation) {
-      this.operation = operation;
+    operationHandling(String operationHandling) {
+      this.operationHandling = operationHandling;
     }
 
     public String getOperation() {
-      return operation;
+      return operationHandling;
     }
   }
 }
