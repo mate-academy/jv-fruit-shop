@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class WriteToFileImpl implements WriteToFileService {
-
     @Override
     public void writeToFile(String pathName, String report) {
         try {
@@ -15,6 +14,6 @@ public class WriteToFileImpl implements WriteToFileService {
             throw new RuntimeException("Can't write data to file " + pathName, e);
         }
     }
-
 }
+
 

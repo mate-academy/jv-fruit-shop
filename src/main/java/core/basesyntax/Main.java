@@ -14,6 +14,7 @@ import core.basesyntax.service.impl.ReadFromFileServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriteToFileImpl;
 import core.basesyntax.strategy.Strategy;
+import core.basesyntax.strategy.StrategyOperation;
 import core.basesyntax.strategy.impl.StrategyImpl;
 import java.util.List;
 
@@ -31,14 +32,15 @@ public class Main {
         FormatParserService csvFormatParserService = new FormatParserServiceImpl();
         List<FruitTransaction> fruitTransactions = csvFormatParserService.parseData(inputData);
 
-        Strategy strategy = new StrategyImpl();
+        StorageDao storageDao = new StorageDaoImpl();
+        Strategy strategy = new StrategyImpl(storageDao);
 
         for (FruitTransaction fruitTransaction : fruitTransactions) {
-            strategy.handle(fruitTransaction);
+            StrategyOperation operation = strategy.get(fruitTransaction.getOperation().name());
+            operation.handle(fruitTransaction);
         }
 
-        StorageDao storageDao = new StorageDaoImpl();
-        ReportService reportService = new ReportServiceImpl();
+        ReportService reportService = new ReportServiceImpl(storageDao);
         String report = reportService.createReport();
 
         WriteToFileService writeToFileService = new WriteToFileImpl();

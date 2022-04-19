@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import java.util.Map;
@@ -11,7 +10,11 @@ public class ReportServiceImpl implements ReportService {
     private static final String COMMA = ",";
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
-    private StorageDao storageDao = new StorageDaoImpl();
+    private StorageDao storageDao;
+
+    public ReportServiceImpl(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
 
     @Override
     public String createReport() {
@@ -25,6 +28,5 @@ public class ReportServiceImpl implements ReportService {
         }
 
         return stringBuilder.toString();
-
     }
 }
