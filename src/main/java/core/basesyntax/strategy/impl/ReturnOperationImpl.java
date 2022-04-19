@@ -5,7 +5,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.StrategyOperation;
 
 public class ReturnOperationImpl implements StrategyOperation {
-
     private StorageDao storageDao;
 
     public ReturnOperationImpl(StorageDao storageDao) {

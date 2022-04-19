@@ -9,7 +9,6 @@ public class ReportServiceImpl implements ReportService {
     private static final String REPORT_TITLE = "fruit,quantity";
     private static final String COMMA = ",";
     private static final String LINE_SEPARATOR = System.lineSeparator();
-
     private StorageDao storageDao;
 
     public ReportServiceImpl(StorageDao storageDao) {

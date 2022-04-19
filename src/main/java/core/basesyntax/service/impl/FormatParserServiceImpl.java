@@ -10,7 +10,6 @@ import java.util.List;
 public class FormatParserServiceImpl implements FormatParserService {
     private static final String COMMA = ",";
     private static final String LINE_SEPARATOR = System.lineSeparator();
-
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
