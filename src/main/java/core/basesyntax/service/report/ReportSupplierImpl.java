@@ -14,8 +14,7 @@ public class ReportSupplierImpl implements ReportSupplier {
                     .doOperation(splitString(record)[1],
                             Integer.parseInt(splitString(record)[2]));
         }
-        ReportService reportService = new ReportServiceImpl();
-        return reportService.createReport();
+        return new ReportServiceImpl().createReport();
     }
 
     private static String[] splitString(String string) {
