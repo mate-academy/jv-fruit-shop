@@ -1,10 +1,15 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.operation.OperationService;
 import core.basesyntax.service.operation.OperationServiceImpl;
+import core.basesyntax.service.parse.ParseService;
 import core.basesyntax.service.parse.ParseServiceImpl;
+import core.basesyntax.service.read.ReadService;
 import core.basesyntax.service.read.ReadServiceImpl;
+import core.basesyntax.service.report.ReportService;
 import core.basesyntax.service.report.ReportServiceImpl;
+import core.basesyntax.service.write.WriteService;
 import core.basesyntax.service.write.WriteServiceImpl;
 import java.util.List;
 
@@ -23,11 +28,17 @@ public class Main {
     }
 
     private static void doTask(String fromFile, String toFile) {
-        List<String> readedStrings = new ReadServiceImpl().readFile(fromFile);
-        List<FruitTransaction> parsedStrings = new ParseServiceImpl().parse(readedStrings);
-        new OperationServiceImpl().justDoIt(parsedStrings);
-        String report = new ReportServiceImpl().createReport();
-        new WriteServiceImpl().write(toFile, report);
+        ReadService readService = new ReadServiceImpl();
+        ParseService parseService = new ParseServiceImpl();
+        OperationService operationService = new OperationServiceImpl();
+        ReportService reportService = new ReportServiceImpl();
+        WriteService writeService = new WriteServiceImpl();
+
+        List<String> readedStrings = readService.readFile(fromFile);
+        List<FruitTransaction> parsedStrings = parseService.parse(readedStrings);
+        operationService.justDoIt(parsedStrings);
+        String report = reportService.createReport();
+        writeService.write(toFile, report);
     }
 
 }
