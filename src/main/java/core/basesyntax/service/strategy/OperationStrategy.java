@@ -3,5 +3,5 @@ package core.basesyntax.service.strategy;
 import core.basesyntax.service.strategy.handlers.OperationHandler;
 
 public interface OperationStrategy {
-    OperationHandler get(String operaationType);
+    OperationHandler get(String operationType);
 }

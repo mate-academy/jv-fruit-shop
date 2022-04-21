@@ -1,5 +1,7 @@
 package core.basesyntax.service.strategy.handlers;
 
+import core.basesyntax.model.FruitTransaction;
+
 public interface OperationHandler {
-    void doOperation(String fruitName, Integer value);
+    void doOperation(FruitTransaction fruitTransaction);
 }

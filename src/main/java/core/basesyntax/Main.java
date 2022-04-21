@@ -1,13 +1,17 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.operation.OperationServiceImpl;
+import core.basesyntax.service.parse.ParseServiceImpl;
 import core.basesyntax.service.read.ReadServiceImpl;
-import core.basesyntax.service.report.ReportSupplierImpl;
+import core.basesyntax.service.report.ReportServiceImpl;
 import core.basesyntax.service.write.WriteServiceImpl;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         new WriteServiceImpl().write("input.csv","type,fruit,quantity\n"
-                + "b,banana,20\n"
+                + "b,banana,18\n"
                 + "b,apple,100\n"
                 + "s,banana,14\n"
                 + "p,banana,15\n"
@@ -19,8 +23,11 @@ public class Main {
     }
 
     private static void doTask(String fromFile, String toFile) {
-        new WriteServiceImpl().write(toFile, new ReportSupplierImpl().getReport(
-                new ReadServiceImpl().readFile(fromFile)));
+        List<String> readedStrings = new ReadServiceImpl().readFile(fromFile);
+        List<FruitTransaction> parsedStrings = new ParseServiceImpl().parse(readedStrings);
+        new OperationServiceImpl().justDoIt(parsedStrings);
+        String report = new ReportServiceImpl().createReport();
+        new WriteServiceImpl().write(toFile, report);
     }
 
 }
