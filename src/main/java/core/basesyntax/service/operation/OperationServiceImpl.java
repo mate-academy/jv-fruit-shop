@@ -8,7 +8,7 @@ import java.util.List;
 
 public class OperationServiceImpl implements OperationService {
     @Override
-    public void justDoIt(List<FruitTransaction> fruitTransactionList) {
+    public void process(List<FruitTransaction> fruitTransactionList) {
         OperationStrategy operationStrategy = new OperationStrategyImpl();
         for (FruitTransaction fruit : fruitTransactionList) {
             OperationHandler operationHandler = operationStrategy.get(fruit.getOperation());

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class ReadServiceImpl implements ReadService {
+public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> readFile(String fileName) {
         try {

@@ -4,16 +4,16 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParseServiceImpl implements ParseService {
+public class ParserServiceImpl implements ParserService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final int HEAD_STRING_INDEX = 0;
+    private static final int HEADER_INDEX = 0;
     private static final String COMA = ",";
 
     @Override
     public List<FruitTransaction> parse(List<String> list) {
-        list.remove(HEAD_STRING_INDEX);
+        list.remove(HEADER_INDEX);
         return list.stream()
                 .map(this::createTransactionFromLine)
                 .collect(Collectors.toList());
