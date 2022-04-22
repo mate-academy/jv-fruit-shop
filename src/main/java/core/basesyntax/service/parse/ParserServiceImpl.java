@@ -12,9 +12,9 @@ public class ParserServiceImpl implements ParserService {
     private static final String COMA = ",";
 
     @Override
-    public List<FruitTransaction> parse(List<String> list) {
-        list.remove(HEADER_INDEX);
-        return list.stream()
+    public List<FruitTransaction> parse(List<String> sourceCsvData) {
+        sourceCsvData.remove(HEADER_INDEX);
+        return sourceCsvData.stream()
                 .map(this::createTransactionFromLine)
                 .collect(Collectors.toList());
     }

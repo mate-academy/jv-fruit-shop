@@ -1,16 +1,22 @@
 package core.basesyntax.service.strategy.handlers;
 
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.NotEnoughFruitsInStorage;
-import core.basesyntax.storage.Storage;
 
 public class PurchaseOperationHandler implements OperationHandler {
+    private final StorageDao storageDao;
+
+    public PurchaseOperationHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
+
     @Override
     public void doOperation(FruitTransaction fruitTransaction) {
-        if (Storage.getByKey(fruitTransaction.getFruit()) < fruitTransaction.getQuantity()) {
+        if (storageDao.getByKey(fruitTransaction.getFruit()) < fruitTransaction.getQuantity()) {
             throw new NotEnoughFruitsInStorage("Can't do this operation");
         }
-        Storage.addToDataBase(fruitTransaction.getFruit(),
-                Storage.getByKey(fruitTransaction.getFruit()) - fruitTransaction.getQuantity());
+        storageDao.addToDataBase(fruitTransaction.getFruit(),
+                storageDao.getByKey(fruitTransaction.getFruit()) - fruitTransaction.getQuantity());
     }
 }
