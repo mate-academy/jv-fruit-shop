@@ -1,7 +1,8 @@
 package service;
 
 import java.util.List;
+import model.FruitTransaction;
 
 public interface FruitTransactionService {
-    void createNewFruitTransaction(List<String[]> fruitsInputDataList);
+    List<FruitTransaction> getFruitsTransactionsList(List<String[]> fruitsInputDataList);
 }

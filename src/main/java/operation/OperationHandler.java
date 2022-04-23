@@ -1,5 +1,5 @@
 package operation;
 
 public interface OperationHandler {
-    Integer getResult(Integer newAmount);
+    Integer applyNewAmount(String fruitName,Integer newFruitAmount);
 }

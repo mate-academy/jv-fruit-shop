@@ -12,7 +12,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public OperationHandler get(String operation) {
+    public OperationHandler getOperationHandler(String operation) {
         return operationHandlerMap.entrySet()
                 .stream()
                 .filter(op -> op.getKey().getSymbolOperation().equals(operation))

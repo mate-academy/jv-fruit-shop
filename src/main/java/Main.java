@@ -24,22 +24,28 @@ public class Main {
     public static void main(String[] args) {
         final String inputFile = "src\\main\\resources\\inputData.csv";
         final String reportFile = "src\\main\\resources\\reportData.csv";
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN,new ReturnOperationHandler());
         FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
-        FruitTransactionService fruitTransactionService =
-                new FruitTransactionServiceImpl(fruitTransactionDao);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(fruitTransactionDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(fruitTransactionDao));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(fruitTransactionDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(fruitTransactionDao));
         ReaderFromFile readerFromFile = new ReaderFromFileImpl();
         List<String[]> fruitsInputDataList = readerFromFile.readFromFile(inputFile);
-        fruitTransactionService.createNewFruitTransaction(fruitsInputDataList);
+        FruitTransactionService fruitTransactionService =
+                new FruitTransactionServiceImpl();
+        List<FruitTransaction> fruitTransactionList =
+                fruitTransactionService.getFruitsTransactionsList(fruitsInputDataList);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         TransactionService transactionService =
-                new TransactionServiceImpl(operationStrategy,fruitTransactionDao);
-        Map<String, Integer> updatedFruitsStock = transactionService.countsFruitsAfterWorkDay();
+                new TransactionServiceImpl(operationStrategy);
+        Map<String, Integer> qtyOfFruitsAfterWorkingDay
+                = transactionService.countsFruitsAfterWorkDay(fruitTransactionList);
         WriteToFile writeToFile = new WriteToFileImpl();
-        writeToFile.write(updatedFruitsStock,reportFile);
+        writeToFile.write(qtyOfFruitsAfterWorkingDay,reportFile);
     }
 }
