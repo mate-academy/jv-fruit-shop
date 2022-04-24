@@ -16,11 +16,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Map<String, Integer> countsFruitsAfterWorkDay(List<FruitTransaction>
-                                                                     fruitTransactionList) {
-        for (FruitTransaction fruitTransaction : fruitTransactionList) {
-            operationStrategy.getOperationHandler(fruitTransaction.getOperation())
-                    .applyNewAmount(fruitTransaction.getFruitName(),
-                            fruitTransaction.getQuantity());
+                                                                     fruitTransactions) {
+        for (FruitTransaction fruit : fruitTransactions) {
+            operationStrategy.getOperationHandler(fruit.getOperation())
+                    .applyNewAmount(fruit.getFruitName(),
+                            fruit.getQuantity());
         }
         return new HashMap<>(Storage.fruitTransactionStorage);
     }

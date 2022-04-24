@@ -4,5 +4,5 @@ import java.util.List;
 import model.FruitTransaction;
 
 public interface FruitTransactionService {
-    List<FruitTransaction> getFruitsTransactionsList(List<String[]> fruitsInputDataList);
+    List<FruitTransaction> getFruitsTransactions(List<String[]> data);
 }

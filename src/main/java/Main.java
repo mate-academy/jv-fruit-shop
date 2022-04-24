@@ -39,7 +39,7 @@ public class Main {
         FruitTransactionService fruitTransactionService =
                 new FruitTransactionServiceImpl();
         List<FruitTransaction> fruitTransactionList =
-                fruitTransactionService.getFruitsTransactionsList(fruitsInputDataList);
+                fruitTransactionService.getFruitsTransactions(fruitsInputDataList);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         TransactionService transactionService =
                 new TransactionServiceImpl(operationStrategy);

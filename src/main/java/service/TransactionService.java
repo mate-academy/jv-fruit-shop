@@ -5,5 +5,5 @@ import java.util.Map;
 import model.FruitTransaction;
 
 public interface TransactionService {
-    Map<String, Integer> countsFruitsAfterWorkDay(List<FruitTransaction> fruitTransactionList);
+    Map<String, Integer> countsFruitsAfterWorkDay(List<FruitTransaction> fruitTransactions);
 }
