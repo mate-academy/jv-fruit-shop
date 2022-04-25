@@ -5,18 +5,18 @@ import java.util.List;
 import model.FruitTransaction;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
-    private static final int SET_OPERATION = 0;
-    private static final int SET_FRUIT_NAME = 1;
-    private static final int SET_FRUIT_QUANTITY = 2;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_NAME_INDEX = 1;
+    private static final int FRUIT_QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> getFruitsTransactions(List<String[]> data) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (String[] line : data) {
             FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(line[SET_OPERATION]);
-            fruitTransaction.setFruitName(line[SET_FRUIT_NAME]);
-            fruitTransaction.setQuantity(Integer.parseInt(line[SET_FRUIT_QUANTITY]));
+            fruitTransaction.setOperation(line[OPERATION_INDEX]);
+            fruitTransaction.setFruitName(line[FRUIT_NAME_INDEX]);
+            fruitTransaction.setQuantity(Integer.parseInt(line[FRUIT_QUANTITY_INDEX]));
             fruitTransactionList.add(fruitTransaction);
         }
         return fruitTransactionList;
