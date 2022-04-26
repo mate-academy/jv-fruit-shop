@@ -2,8 +2,10 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.CsvFileWriterService;
-
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +24,7 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
             }
         }
     }
+
     private static List<String> getReportFromList() {
         StringBuilder builder = new StringBuilder();
         builder.append(COLUMN)

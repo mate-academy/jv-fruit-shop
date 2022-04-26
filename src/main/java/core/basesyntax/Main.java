@@ -7,12 +7,10 @@ import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionImpl;
-
-import java.util.*;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
         List<String> strings = csvFileReaderService.fileReader("src/main/resources/before.csv");
 

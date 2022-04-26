@@ -5,12 +5,11 @@ import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operations;
 import core.basesyntax.service.FruitTransaction;
-
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FruitTransactionImpl implements FruitTransaction {
-    public static FruitShopDao fruitShopDao = new FruitShopDaoImpl();
+    private static FruitShopDao fruitShopDao = new FruitShopDaoImpl();
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_NAME = 1;
     private static final int INDEX_QUANTITY = 2;
@@ -29,8 +28,8 @@ public class FruitTransactionImpl implements FruitTransaction {
                         Storage.fruitStorage.get(splitElements[INDEX_NAME]));
             }
             if (Operations.PURCHASE.getOperation().equals(splitElements[INDEX_OPERATION])) {
-               fruitShopDao.add(splitElements[INDEX_NAME],
-                       Storage.fruitStorage.get(splitElements[INDEX_NAME]) - pars);
+                fruitShopDao.add(splitElements[INDEX_NAME],
+                        Storage.fruitStorage.get(splitElements[INDEX_NAME]) - pars);
             }
             if (Operations.SUPPLY.getOperation().equals(splitElements[INDEX_OPERATION])) {
                 fruitShopDao.add(splitElements[INDEX_NAME],
@@ -42,6 +41,7 @@ public class FruitTransactionImpl implements FruitTransaction {
             }
         }
     }
+
     private static void validateDB(List<String> data) {
         if (Storage.fruitStorage.size() == 0) {
             initializationDB(data);
@@ -54,6 +54,7 @@ public class FruitTransactionImpl implements FruitTransaction {
             }
         }
     }
+
     private static List<String> getNamesFruitFromList(List<String> data) {
         List<String> assortment = new ArrayList<>();
         for (String output : data) {
@@ -62,6 +63,7 @@ public class FruitTransactionImpl implements FruitTransaction {
         }
         return assortment;
     }
+
     private static void initializationDB(List<String> data) {
         for (int i = START_FIND_ELEMENTS; i < data.size(); i++) {
             String[] splitElements = data.get(i).split(SPLIT_CHARACTER);
