@@ -5,11 +5,13 @@ import core.basesyntax.dao.StorageDaoImpl;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
+    private static final String REPORT_HEADER = "fruit,quantity\n";
+
     @Override
     public String createReport(Map<String, Integer> map) {
-        StringBuilder builder = new StringBuilder("fruit,quantity\n");
+        StringBuilder builder = new StringBuilder(REPORT_HEADER);
         StorageDao storageDao = new StorageDaoImpl();
-        storageDao.getDataBase().forEach((key, value) -> builder
+        storageDao.getAll().forEach((key, value) -> builder
                 .append(key)
                 .append(",")
                 .append(value)

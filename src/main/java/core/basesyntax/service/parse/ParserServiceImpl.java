@@ -20,9 +20,9 @@ public class ParserServiceImpl implements ParserService {
     }
 
     private FruitTransaction createTransactionFromLine(String line) {
-        String[] temp = line.split(COMA);
-        return new FruitTransaction(temp[OPERATION_INDEX],
-                temp[FRUIT_INDEX],
-                Integer.parseInt(temp[QUANTITY_INDEX]));
+        String[] data = line.split(COMA);
+        return new FruitTransaction(data[OPERATION_INDEX],
+                data[FRUIT_INDEX],
+                Integer.parseInt(data[QUANTITY_INDEX]));
     }
 }

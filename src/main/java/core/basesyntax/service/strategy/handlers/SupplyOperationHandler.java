@@ -12,8 +12,8 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void doOperation(FruitTransaction fruitTransaction) {
-        storageDao.addToDataBase(fruitTransaction.getFruit(),
-                storageDao.getByKey(fruitTransaction.getFruit())
+        storageDao.add(fruitTransaction.getFruit(),
+                storageDao.get(fruitTransaction.getFruit())
                         + fruitTransaction.getQuantity());
     }
 }

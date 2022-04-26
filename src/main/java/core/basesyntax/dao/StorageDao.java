@@ -3,9 +3,9 @@ package core.basesyntax.dao;
 import java.util.Map;
 
 public interface StorageDao {
-    Integer getByKey(String key);
+    Integer get(String key);
 
-    Map<String, Integer> getDataBase();
+    Map<String, Integer> getAll();
 
-    void addToDataBase(String key, Integer value);
+    void add(String key, Integer value);
 }

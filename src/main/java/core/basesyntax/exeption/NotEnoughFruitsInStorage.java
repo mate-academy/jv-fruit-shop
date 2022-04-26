@@ -1,4 +1,4 @@
-package core.basesyntax.model;
+package core.basesyntax.exeption;
 
 public class NotEnoughFruitsInStorage extends RuntimeException {
     public NotEnoughFruitsInStorage(String message) {

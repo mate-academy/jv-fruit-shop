@@ -25,17 +25,21 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_DATA_PATH = "src/main/resources/input.csv";
+    private static final String REPORT_PATH = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
-        new WriterServiceImpl().write("input.csv","type,fruit,quantity\n"
+
+        new WriterServiceImpl().write(INPUT_DATA_PATH,"type,fruit,quantity\n"
                 + "b,banana,18\n"
                 + "b,apple,100\n"
                 + "s,banana,14\n"
                 + "p,banana,15\n"
-                + "r,apple,100000\n"
+                + "r,apple,10\n"
                 + "p,apple,50\n"
                 + "p,banana,5\n"
                 + "s,banana,544");
-        doTask("input.csv", "report.csv");
+        doTask(INPUT_DATA_PATH, REPORT_PATH);
     }
 
     private static void doTask(String fromFile, String toFile) {
@@ -54,7 +58,7 @@ public class Main {
         List<String> data = readerService.readFile(fromFile);
         List<FruitTransaction> transactions = parserService.parse(data);
         operationService.process(transactions);
-        String report = reportService.createReport(storageDao.getDataBase());
+        String report = reportService.createReport(storageDao.getAll());
         writerService.write(toFile, report);
     }
 

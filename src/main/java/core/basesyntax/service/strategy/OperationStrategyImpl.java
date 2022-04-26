@@ -8,7 +8,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     private static Map<String, OperationHandler> map = new HashMap<>();
 
     public OperationStrategyImpl(Map<String, OperationHandler> map) {
-        OperationStrategyImpl.map = map;
+        this.map = map;
     }
 
     @Override

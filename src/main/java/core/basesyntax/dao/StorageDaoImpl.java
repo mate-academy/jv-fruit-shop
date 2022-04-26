@@ -5,17 +5,17 @@ import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
-    public Integer getByKey(String key) {
+    public Integer get(String key) {
         return Storage.dataBase.get(key);
     }
 
     @Override
-    public Map<String, Integer> getDataBase() {
+    public Map<String, Integer> getAll() {
         return Storage.dataBase;
     }
 
     @Override
-    public void addToDataBase(String key, Integer value) {
+    public void add(String key, Integer value) {
         Storage.dataBase.put(key, value);
     }
 }
