@@ -10,13 +10,13 @@ import operation.PurchaseOperationHandler;
 import operation.ReturnOperationHandler;
 import operation.SupplyOperationHandler;
 import service.FileReader;
-import service.FileReaderImpl;
 import service.FileWriter;
-import service.FileWriterImpl;
 import service.FruitService;
-import service.FruitServiceImpl;
 import service.FruitTransactionService;
-import service.FruitTransactionServiceImpl;
+import service.impl.FileReaderImpl;
+import service.impl.FileWriterImpl;
+import service.impl.FruitServiceImpl;
+import service.impl.FruitTransactionServiceImpl;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 

@@ -1,6 +1,7 @@
-package service;
+package service.impl;
 
 import model.Fruit;
+import service.FruitService;
 
 public class FruitServiceImpl implements FruitService {
     @Override
