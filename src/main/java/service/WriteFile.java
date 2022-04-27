@@ -1,5 +1,5 @@
 package service;
 
-public interface WritToCSVFile {
+public interface WriteFile {
     void write(String report);
 }

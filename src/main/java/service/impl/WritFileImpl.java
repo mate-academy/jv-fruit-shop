@@ -1,12 +1,11 @@
 package service.impl;
 
-
-import service.WritToCSVFile;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import service.WriteFile;
 
-public class WritToCSVFileImpl implements WritToCSVFile {
+public class WritFileImpl implements WriteFile {
     private static final String TO_FILE = "src/main/resources/report.csv";
 
     @Override

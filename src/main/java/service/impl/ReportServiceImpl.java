@@ -1,9 +1,9 @@
 package service.impl;
 
 import db.Storage;
+import java.util.Map;
 import model.Fruit;
 import service.ReportService;
-import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
 

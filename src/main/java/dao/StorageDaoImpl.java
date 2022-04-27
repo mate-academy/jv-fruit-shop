@@ -1,6 +1,5 @@
 package dao;
 
-
 import db.Storage;
 import model.Fruit;
 

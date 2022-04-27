@@ -1,7 +1,7 @@
 package service;
 
-import model.FruitTransaction;
 import java.util.List;
+import model.FruitTransaction;
 
 public interface OperationService {
     void calculate(List<FruitTransaction> fruitTransactions);

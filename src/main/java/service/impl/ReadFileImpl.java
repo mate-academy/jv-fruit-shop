@@ -2,22 +2,20 @@ package service.impl;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import dao.StorageDao;
-import dao.StorageDaoImpl;
-import service.ReadCSVFile;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import service.ReadFile;
 
-public class ReadCSVFileImpl implements ReadCSVFile {
+public class ReadFileImpl implements ReadFile {
     private static final String FILE_NAME = "src/main/resources/Input.csv";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private final List<String> informationFromFile;
 
-    public ReadCSVFileImpl() {
+    public ReadFileImpl() {
         informationFromFile = new ArrayList<>();
     }
 

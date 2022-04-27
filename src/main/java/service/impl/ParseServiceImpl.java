@@ -1,10 +1,10 @@
 package service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.Fruit;
 import model.FruitTransaction;
 import service.ParseService;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ParseServiceImpl implements ParseService {
     private static final int OPERATION_INDEX = 0;
@@ -16,7 +16,8 @@ public class ParseServiceImpl implements ParseService {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         list.stream()
                 .map(i -> i.split("-"))
-                .forEach(i -> fruitTransactions.add(new FruitTransaction(getOptional(i[OPERATION_INDEX]),
+                .forEach(i -> fruitTransactions.add(
+                        new FruitTransaction(getOptional(i[OPERATION_INDEX]),
                         new Fruit(i[FRUIT_INDEX]), Integer.parseInt(i[QUANTITY_INDEX]))));
         return fruitTransactions;
     }
