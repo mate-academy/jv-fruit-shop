@@ -14,5 +14,4 @@ public class App {
                 new ReaderServiceICsvImpl(), new WriterServiceCsvImpl());
         fruitTransactionService.transaction(FILE_NAME_INPUT, FILE_NAME_OUTPUT);
     }
-
 }
