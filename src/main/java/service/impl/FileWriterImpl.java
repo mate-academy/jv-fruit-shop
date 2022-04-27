@@ -4,6 +4,7 @@ import db.Storage;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.Collectors;
 import service.FileWriter;
 
 public class FileWriterImpl implements FileWriter {
@@ -17,13 +18,11 @@ public class FileWriterImpl implements FileWriter {
     }
 
     private String report() {
-        StringBuilder report = new StringBuilder("fruit,quantity");
-        for (var value : Storage.storage.entrySet()) {
-            report.append("\n")
-                    .append(value.getKey().getName())
-                    .append(",")
-                    .append(value.getValue());
-        }
-        return report.toString();
+        return new StringBuilder("fruit,quantity")
+                .append(Storage.storage.entrySet().stream().map(e -> new StringBuilder("\n")
+                        .append(e.getKey().getName())
+                        .append(",")
+                        .append(e.getValue())).collect(Collectors.joining()))
+                .toString();
     }
 }
