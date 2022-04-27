@@ -3,42 +3,30 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Operations;
 import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FruitTransactionImpl implements FruitTransaction {
-    private static FruitShopDao fruitShopDao = new FruitShopDaoImpl();
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_NAME = 1;
-    private static final int INDEX_QUANTITY = 2;
     private static final int START_FIND_ELEMENTS = 1;
     private static final int INITIALIZATION_QUANTITY_IN_DB = 0;
     private static final String SPLIT_CHARACTER = ",";
+    private static FruitShopDao fruitShopDao = new FruitShopDaoImpl();
+    private OperationStrategy operationStrategy;
+
+    public FruitTransactionImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
 
     @Override
     public void dateProcessing(List<String> data) {
         validateDB(data);
         for (int i = START_FIND_ELEMENTS; i < data.size(); i++) {
-            String[] splitElements = data.get(i).split(SPLIT_CHARACTER);
-            int pars = Integer.parseInt(splitElements[INDEX_QUANTITY]);
-            if (Operations.BALANCE.getOperation().equals(splitElements[INDEX_OPERATION])) {
-                fruitShopDao.add(splitElements[INDEX_NAME],
-                        Storage.fruitStorage.get(splitElements[INDEX_NAME]));
-            }
-            if (Operations.PURCHASE.getOperation().equals(splitElements[INDEX_OPERATION])) {
-                fruitShopDao.add(splitElements[INDEX_NAME],
-                        Storage.fruitStorage.get(splitElements[INDEX_NAME]) - pars);
-            }
-            if (Operations.SUPPLY.getOperation().equals(splitElements[INDEX_OPERATION])) {
-                fruitShopDao.add(splitElements[INDEX_NAME],
-                        Storage.fruitStorage.get(splitElements[INDEX_NAME]) + pars);
-            }
-            if (Operations.RETURN.getOperation().equals(splitElements[INDEX_OPERATION])) {
-                fruitShopDao.add(splitElements[INDEX_NAME],
-                        Storage.fruitStorage.get(splitElements[INDEX_NAME]) + pars);
-            }
+            String[] splitElement = data.get(i).split(SPLIT_CHARACTER);
+            operationStrategy.get(splitElement[INDEX_OPERATION]).getOperation(splitElement);
         }
     }
 
