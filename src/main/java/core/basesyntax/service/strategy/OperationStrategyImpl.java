@@ -1,11 +1,10 @@
 package core.basesyntax.service.strategy;
 
 import core.basesyntax.service.strategy.handlers.OperationHandler;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private static Map<String, OperationHandler> map = new HashMap<>();
+    private Map<String, OperationHandler> map;
 
     public OperationStrategyImpl(Map<String, OperationHandler> map) {
         this.map = map;
