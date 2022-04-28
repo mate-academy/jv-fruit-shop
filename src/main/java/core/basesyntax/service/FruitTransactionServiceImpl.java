@@ -29,7 +29,7 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
         List<String> lines = readerService.readFromFile(inputFile);
         List<FruitTransaction> fruits = parser.parse(lines);
         for (FruitTransaction fruit : fruits) {
-            strategy.getHandle(fruit).handle(fruit);
+            strategy.getHandler(fruit).handle(fruit);
         }
         List<FruitTransaction> resultFruits = fruitTransactionDao.getAll();
         writerService.writeToFile(outputFile, resultFruits);

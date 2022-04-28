@@ -12,10 +12,10 @@ public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        FruitTransaction newFruitTransaction = fruitTransactionDao
+        FruitTransaction fruitTransactionFromDb = fruitTransactionDao
                 .get(transaction.getFruit());
-        newFruitTransaction.setQuantity(newFruitTransaction.getQuantity()
+        fruitTransactionFromDb.setQuantity(fruitTransactionFromDb.getQuantity()
                 + transaction.getQuantity());
-        fruitTransactionDao.update(newFruitTransaction);
+        fruitTransactionDao.update(fruitTransactionFromDb);
     }
 }

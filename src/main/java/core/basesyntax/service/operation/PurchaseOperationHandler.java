@@ -12,9 +12,9 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        FruitTransaction newFruitTransaction = fruitTransactionDao.get(transaction.getFruit());
-        newFruitTransaction.setQuantity(newFruitTransaction.getQuantity()
+        FruitTransaction fruitTransactionFromDb = fruitTransactionDao.get(transaction.getFruit());
+        fruitTransactionFromDb.setQuantity(fruitTransactionFromDb.getQuantity()
                 - transaction.getQuantity());
-        fruitTransactionDao.update(newFruitTransaction);
+        fruitTransactionDao.update(fruitTransactionFromDb);
     }
 }
