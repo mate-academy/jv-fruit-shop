@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriterService;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,10 +20,12 @@ public class FileWriterServiceImpl implements FileWriterService {
         }
 
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyy, HH:mm:ss", Locale.getDefault());
+            DateTimeFormatter dtf = DateTimeFormatter
+                    .ofPattern("dd-MM-yyy, HH:mm:ss", Locale.getDefault());
             LocalDateTime localDateTime = LocalDateTime.now();
             Files.write(Paths.get(file.getPath()), data);
-            System.out.println("Finish generated report: " + localDateTime.format(dtf) + System.lineSeparator()
+            System.out.println("Finish generated report: "
+                    + localDateTime.format(dtf) + System.lineSeparator()
                     + "file name: '" + fileName + "' - save success !!");
         } catch (IOException e) {
             throw new RuntimeException("Can`t write data to file: " + fileName, e);

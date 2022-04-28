@@ -27,12 +27,18 @@ public class Fruit {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Fruit fruit = (Fruit) o;
 
-        if (quantity != fruit.quantity) return false;
+        if (quantity != fruit.quantity) {
+            return false;
+        }
         return name != null ? name.equals(fruit.name) : fruit.name == null;
     }
 

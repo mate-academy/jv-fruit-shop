@@ -1,14 +1,16 @@
 package core.basesyntax;
 
-import core.basesyntax.service.ReportService;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ParserDataService;
-import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserDataServiceImpl;
-
+import core.basesyntax.service.impl.ReportServiceImpl;
 import java.util.List;
 
 public class ShopApp {
@@ -20,7 +22,10 @@ public class ShopApp {
         List<String> listWithFile = read.readWithFile(FILE_NAME);
 
         ParserDataService parseData = new ParserDataServiceImpl();
-        parseData.parsedWithFile(listWithFile);
+        List<FruitTransaction> fruitTransactions = parseData.parsedWithFile(listWithFile);
+
+        FruitService fruitService = new FruitServiceImpl();
+        fruitService.fruitTransaction(fruitTransactions);
 
         ReportService createReport = new ReportServiceImpl();
         List<String> resultReport = createReport.generatedReport();

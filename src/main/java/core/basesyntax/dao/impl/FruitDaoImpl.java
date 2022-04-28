@@ -3,7 +3,6 @@ package core.basesyntax.dao.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
