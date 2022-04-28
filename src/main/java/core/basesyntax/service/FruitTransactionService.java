@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface FruitTransactionService {
-    void transaction(String inputFile, String outputFile);
+    void process(String inputFile, String outputFile);
 }

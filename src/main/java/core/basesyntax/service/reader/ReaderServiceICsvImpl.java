@@ -8,14 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderServiceICsvImpl implements ReaderService {
-
     @Override
     public List<String> readFromFile(String inputFile) {
-        List<String> stringListFromFile = new ArrayList<>();
+        List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
             String value = reader.readLine();
             while (value != null) {
-                stringListFromFile.add(value);
+                lines.add(value);
                 value = reader.readLine();
             }
         } catch (FileNotFoundException e) {
@@ -23,6 +22,6 @@ public class ReaderServiceICsvImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read file: " + inputFile, e);
         }
-        return stringListFromFile;
+        return lines;
     }
 }

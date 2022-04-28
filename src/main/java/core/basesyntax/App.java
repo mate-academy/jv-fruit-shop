@@ -1,14 +1,16 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitTransactionDao;
+import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.FruitTransactionServiceImpl;
-import core.basesyntax.service.StrategyImpl;
-import core.basesyntax.service.operation.BalanceOperationHandlerImpl;
+import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.service.operation.PurchaseOperationHandlerImpl;
-import core.basesyntax.service.operation.ReturnOperationHandlerImpl;
-import core.basesyntax.service.operation.SupplyOperationHandlerImpl;
+import core.basesyntax.service.operation.PurchaseOperationHandler;
+import core.basesyntax.service.operation.ReturnOperationHandler;
+import core.basesyntax.service.operation.SupplyOperationHandler;
 import core.basesyntax.service.reader.ReaderServiceICsvImpl;
 import core.basesyntax.service.writer.WriterServiceCsvImpl;
 import java.util.HashMap;
@@ -19,19 +21,21 @@ public class App {
     private static final String FILE_NAME_OUTPUT = "result.csv";
 
     public static void main(String[] args) {
+        FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
+
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandlerImpl());
+                new BalanceOperationHandler(fruitTransactionDao));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandlerImpl());
+                new SupplyOperationHandler(fruitTransactionDao));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandlerImpl());
+                new PurchaseOperationHandler(fruitTransactionDao));
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandlerImpl());
+                new ReturnOperationHandler(fruitTransactionDao));
 
         FruitTransactionService fruitTransactionService =
                 new FruitTransactionServiceImpl(new ReaderServiceICsvImpl(),
-                new WriterServiceCsvImpl(), new StrategyImpl(operationHandlerMap));
-        fruitTransactionService.transaction(FILE_NAME_INPUT, FILE_NAME_OUTPUT);
+                new WriterServiceCsvImpl(), new OperationStrategyImpl(operationHandlerMap));
+        fruitTransactionService.process(FILE_NAME_INPUT, FILE_NAME_OUTPUT);
     }
 }

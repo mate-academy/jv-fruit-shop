@@ -45,18 +45,12 @@ public class FruitTransaction {
         }
 
         public static Operation getType(String operation) {
-            switch (operation) {
-                case "b" :
-                    return FruitTransaction.Operation.BALANCE;
-                case "s" :
-                    return FruitTransaction.Operation.SUPPLY;
-                case "p" :
-                    return FruitTransaction.Operation.PURCHASE;
-                case "r" :
-                    return FruitTransaction.Operation.RETURN;
-                default:
-                    throw new RuntimeException("can't find according type of operation");
+            for (int i = 0; i < Operation.values().length; i++) {
+                if (operation.equals(Operation.values()[i].getOperation())) {
+                    return Operation.values()[i];
+                }
             }
+            throw new RuntimeException("can't find according type of operation");
         }
     }
 }
