@@ -11,19 +11,18 @@ import java.util.List;
 public class FruitServiceImpl implements FruitService {
     @Override
     public void fruitTransaction(List<FruitTransaction> fruitTransactionList) {
-
         for (FruitTransaction transaction : fruitTransactionList) {
-            switch (transaction.getOperation().getOperation()) {
-                case "b":
+            switch (transaction.getOperation().name()) {
+                case "BALANCE":
                     new BalanceHandler().getOperation(transaction.getFruit());
                     break;
-                case "s":
+                case "SUPPLY":
                     new SupplyHandler().getOperation(transaction.getFruit());
                     break;
-                case "p":
+                case "PURCHASE":
                     new PurchaseHandler().getOperation(transaction.getFruit());
                     break;
-                case "r":
+                case "RETURN":
                     new ReturnHandler().getOperation(transaction.getFruit());
                     break;
 
