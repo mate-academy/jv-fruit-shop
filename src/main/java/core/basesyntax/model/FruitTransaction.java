@@ -1,19 +1,21 @@
 package core.basesyntax.model;
 
+import core.basesyntax.service.Operation;
+
 public class FruitTransaction {
-    private String operation;
+    private Operation operation;
     private Fruit fruit;
 
-    public FruitTransaction(String operation, Fruit fruit) {
+    public FruitTransaction(Operation operation, Fruit fruit) {
         this.operation = operation;
         this.fruit = fruit;
     }
 
-    public String getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
-    public void setOperation(String operation) {
+    public void setOperation(Operation operation) {
         this.operation = operation;
     }
 

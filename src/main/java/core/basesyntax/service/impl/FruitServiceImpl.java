@@ -13,7 +13,7 @@ public class FruitServiceImpl implements FruitService {
     public void fruitTransaction(List<FruitTransaction> fruitTransactionList) {
 
         for (FruitTransaction transaction : fruitTransactionList) {
-            switch (transaction.getOperation()) {
+            switch (transaction.getOperation().getOperation()) {
                 case "b":
                     new BalanceHandler().getOperation(transaction.getFruit());
                     break;

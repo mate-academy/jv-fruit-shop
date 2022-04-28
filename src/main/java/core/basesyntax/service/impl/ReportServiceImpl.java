@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
     @Override
-
     public List<String> generatedReport() {
         FruitDao fruitDao = new FruitDaoImpl();
         List<String> storageList = fruitDao.getAll().stream()
