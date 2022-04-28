@@ -1,6 +1,8 @@
 package dao;
 
 import db.Storage;
+import java.util.Map;
+import java.util.Set;
 import model.Fruit;
 
 public class StorageDaoImpl implements StorageDao {
@@ -10,12 +12,12 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public void update(Fruit fruit, int quantity) {
-        Storage.storage.put(fruit, quantity);
+    public Integer get(Fruit fruit) {
+        return Storage.storage.get(fruit);
     }
 
     @Override
-    public Integer get(Fruit fruit) {
-        return Storage.storage.get(fruit);
+    public Set<Map.Entry<Fruit, Integer>> getSet() {
+        return Storage.storage.entrySet();
     }
 }

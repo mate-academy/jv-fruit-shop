@@ -38,7 +38,7 @@ public class Main {
         FruitTransactionService fruitTransactionService =
                 new FruitTransactionServiceImpl(fruitService, operationStrategy);
         fruitTransactionService.transfer(fileReader.read(INPUT_PATH));
-        FileWriter fileWriter = new FileWriterImpl();
+        FileWriter fileWriter = new FileWriterImpl(storageDao);
         fileWriter.write(OUTPUT_PATH);
     }
 }
