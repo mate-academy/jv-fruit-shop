@@ -16,9 +16,9 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     }
 
     @Override
-    public void process(List<String> line) {
-        for (int i = LINE_OF_FIRST_OPERATION; i < line.size(); i++) {
-            String[] splittedLine = line.get(i).split(",");
+    public void process(List<String> lines) {
+        for (int i = LINE_OF_FIRST_OPERATION; i < lines.size(); i++) {
+            String[] splittedLine = lines.get(i).split(",");
             int parseQuantityToInt = Integer.parseInt(splittedLine[QUANTITY_INDEX]);
             operationStrategy.get(splittedLine[OPERATION_INDEX])
                     .handle(splittedLine[NAME_INDEX], parseQuantityToInt);
