@@ -7,16 +7,15 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
-
     @Override
-    public List<String> fileReader(String fileName) {
-        List<String> filesData;
+    public List<String> readFromFile(String fileName) {
+        List<String> lines;
         File file = new File(fileName);
         try {
-            filesData = Files.readAllLines(file.toPath());
+            lines = Files.readAllLines(file.toPath());
         } catch (IOException e) {
             throw new RuntimeException("Can't get this file " + fileName);
         }
-        return filesData;
+        return lines;
     }
 }

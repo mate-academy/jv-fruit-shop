@@ -4,10 +4,10 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operations;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
-import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
-import core.basesyntax.service.impl.FruitTransactionImpl;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
@@ -30,13 +30,14 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
-        List<String> strings = csvFileReaderService.fileReader("src/main/resources/before.csv");
+        List<String> strings = csvFileReaderService.readFromFile("src/main/resources/before.csv");
 
-        FruitTransaction fruitTransaction = new FruitTransactionImpl(operationStrategy);
-        fruitTransaction.dateProcessing(strings);
+        FruitTransactionService fruitTransaction
+                = new FruitTransactionServiceImpl(operationStrategy);
+        fruitTransaction.process(strings);
 
         CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
-        csvFileWriterService.fileWriter("src/main/resources/after.csv");
+        csvFileWriterService.writeToFile("src/main/resources/after.csv");
 
         System.out.println(Storage.fruitStorage);
     }
