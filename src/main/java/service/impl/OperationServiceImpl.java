@@ -12,9 +12,9 @@ public class OperationServiceImpl implements OperationService {
 
     @Override
     public void calculate(List<FruitTransaction> fruitTransactions) {
+        OperationHandler operationHandler;
         for (FruitTransaction fruitTransaction : fruitTransactions) {
-            OperationHandler operationHandler
-                    = operationHandlerStrategy.get(fruitTransaction.getOperation());
+            operationHandler = operationHandlerStrategy.get(fruitTransaction.getOperation());
             operationHandler.apply(fruitTransaction);
         }
     }
