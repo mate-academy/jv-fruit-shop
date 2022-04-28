@@ -1,13 +1,13 @@
-package core.basesyntax.utils.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.utils.FileReader;
+import core.basesyntax.service.FileReaderService;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class FileReaderImpl implements FileReader {
+public class FileReaderServiceImpl implements FileReaderService {
     public List<String> readWithFile(String fileName) {
         File file = new File(fileName);
         List<String> stringList = null;

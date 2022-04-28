@@ -6,22 +6,32 @@ import core.basesyntax.model.Fruit;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public Fruit create(Fruit element) {
+    public Fruit create(String name, int quantity) {
+        return new Fruit(name, quantity);
+    }
+
+    @Override
+    public void saveToStorage(Fruit element) {
         Storage.fruits.put(element.getName(), element.getQuantity());
-        return element;
     }
 
     @Override
     public Optional<Fruit> get(Fruit key) {
-        return Optional.empty();
+        return Storage.fruits.entrySet().stream()
+                .filter(k -> key.getName().equals(k.getKey()))
+                .findFirst()
+                .map(el -> new Fruit(el.getKey(), el.getValue()));
     }
 
     @Override
     public List<Fruit> getAll() {
-        return null;
+        return Storage.fruits.entrySet().stream()
+                .map(k -> new Fruit(k.getKey(), k.getValue()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -34,8 +44,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public boolean delete(Fruit key) {
-//        return Storage.fruits.keySet().removeIf(String::isBlank);
-        return Storage.fruits.keySet().removeIf(f -> f.equals(key.getName()));
+    public boolean delete(Fruit element) {
+        return Storage.fruits.keySet().removeIf(f -> f.equals(element.getName()));
     }
 }

@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface Dao<T> {
-    T create(T element);
+    T create(String name, int quantity);
 
-    Optional<T> get(T key);
+    void saveToStorage(T element);
+
+    Optional<T> get(T element);
 
     List<T> getAll();
 
     T update(T element);
 
-    boolean delete(T key);
+    boolean delete(T element);
 }

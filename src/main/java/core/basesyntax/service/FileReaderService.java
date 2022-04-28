@@ -1,7 +1,7 @@
-package core.basesyntax.utils;
+package core.basesyntax.service;
 
 import java.util.List;
 
-public interface FileReader {
+public interface FileReaderService {
     List<String> readWithFile(String fileName);
 }
