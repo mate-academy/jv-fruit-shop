@@ -14,10 +14,12 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String report() {
         return new StringBuilder("fruit,quantity")
-                .append(storageDao.getSet().stream().map(e -> new StringBuilder("\n")
+                .append(storageDao.getSet().stream()
+                        .map(e -> new StringBuilder("\n")
                         .append(e.getKey().getName())
                         .append(",")
-                        .append(e.getValue())).collect(Collectors.joining()))
+                        .append(e.getValue()))
+                        .collect(Collectors.joining()))
                 .toString();
     }
 }
