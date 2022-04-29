@@ -9,7 +9,6 @@ import java.util.List;
 public class ParserDataServiceImpl implements ParserDataService {
     @Override
     public List<FruitTransaction> parse(List<String> dataFromFile) {
-
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < dataFromFile.size(); i++) {
             String line = dataFromFile.get(i);
