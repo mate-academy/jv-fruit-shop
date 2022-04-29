@@ -2,8 +2,8 @@ package model;
 
 import java.util.Objects;
 
-public class Fruit {
-    private String fruit;
+public final class Fruit {
+    private final String fruit;
 
     public Fruit(String fruit) {
         this.fruit = fruit;
@@ -11,10 +11,6 @@ public class Fruit {
 
     public String getFruit() {
         return fruit;
-    }
-
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
     }
 
     @Override
@@ -25,8 +21,8 @@ public class Fruit {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Fruit fruit1 = (Fruit) o;
-        return Objects.equals(fruit, fruit1.fruit);
+        Fruit other = (Fruit) o;
+        return Objects.equals(fruit, other.fruit);
     }
 
     @Override

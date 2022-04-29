@@ -6,22 +6,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import service.ReadFile;
+import service.ReadFileService;
 
-public class ReadFileImpl implements ReadFile {
-    private static final String FILE_NAME = "src/main/resources/Input.csv";
+public class ReadFileServiceImpl implements ReadFileService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final List<String> informationFromFile;
-
-    public ReadFileImpl() {
-        informationFromFile = new ArrayList<>();
-    }
+    private final List<String> informationFromFile = new ArrayList<>();
 
     @Override
-    public List<String> read() {
-        try (CSVReader reader = new CSVReader(new FileReader(FILE_NAME))) {
+    public List<String> read(String fileName) {
+        try (CSVReader reader = new CSVReader(new FileReader(fileName))) {
             String[] lineInArray;
             while ((lineInArray = reader.readNext()) != null) {
                 if (lineInArray[OPERATION_INDEX].equals("type")) {
@@ -31,7 +26,7 @@ public class ReadFileImpl implements ReadFile {
                         + lineInArray[FRUIT_INDEX] + "-" + lineInArray[QUANTITY_INDEX]);
             }
         } catch (IOException | CsvValidationException e) {
-            throw new RuntimeException("Can't read file " + FILE_NAME);
+            throw new RuntimeException("Can't read file " + fileName);
         }
         return informationFromFile;
     }

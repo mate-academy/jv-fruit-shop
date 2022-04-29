@@ -17,12 +17,12 @@ public class ParseServiceImpl implements ParseService {
         list.stream()
                 .map(i -> i.split("-"))
                 .forEach(i -> fruitTransactions.add(
-                        new FruitTransaction(getOptional(i[OPERATION_INDEX]),
+                        new FruitTransaction(getOperation(i[OPERATION_INDEX]),
                         new Fruit(i[FRUIT_INDEX]), Integer.parseInt(i[QUANTITY_INDEX]))));
         return fruitTransactions;
     }
 
-    private FruitTransaction.Operation getOptional(String option) {
+    private FruitTransaction.Operation getOperation(String option) {
         switch (option) {
             case "b":
                 return FruitTransaction.Operation.BALANCE;
@@ -30,8 +30,10 @@ public class ParseServiceImpl implements ParseService {
                 return FruitTransaction.Operation.PURCHASE;
             case "s":
                 return FruitTransaction.Operation.SUPPLY;
-            default:
+            case "r":
                 return FruitTransaction.Operation.RETURN;
+            default:
+                throw new RuntimeException();
         }
     }
 }

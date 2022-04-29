@@ -4,18 +4,17 @@ import java.util.List;
 import model.FruitTransaction;
 import service.OperationHandlerStrategy;
 import service.OperationService;
-import service.strategy.OperationHandler;
 
 public class OperationServiceImpl implements OperationService {
-    private final OperationHandlerStrategy operationHandlerStrategy
-            = new OperationHandlerStrategyImpl();
+    private final OperationHandlerStrategy operationHandlerStrategy;
+
+    public OperationServiceImpl() {
+        operationHandlerStrategy = new OperationHandlerStrategyImpl();
+    }
 
     @Override
     public void calculate(List<FruitTransaction> fruitTransactions) {
-        OperationHandler operationHandler;
-        for (FruitTransaction fruitTransaction : fruitTransactions) {
-            operationHandler = operationHandlerStrategy.get(fruitTransaction.getOperation());
-            operationHandler.apply(fruitTransaction);
-        }
+        fruitTransactions.forEach(i -> operationHandlerStrategy
+                .get(i.getOperation()).apply(i));
     }
 }

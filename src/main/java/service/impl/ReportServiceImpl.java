@@ -1,21 +1,23 @@
 package service.impl;
 
-import db.Storage;
-import java.util.Map;
-import model.Fruit;
+import dao.StorageDao;
+import dao.StorageDaoImpl;
+import java.util.stream.Collectors;
 import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
+    private StorageDao storageDao;
+
+    public ReportServiceImpl() {
+        storageDao = new StorageDaoImpl();
+    }
 
     @Override
     public String report() {
-        StringBuilder stringBuilder = new StringBuilder("fruit,quantity\n");
-        for (Map.Entry<Fruit, Integer> entry : Storage.dataBase.entrySet()) {
-            stringBuilder.append(entry.getKey().getFruit())
-                    .append(",")
-                    .append(entry.getValue().intValue())
-                    .append(System.lineSeparator());
-        }
-        return stringBuilder.toString();
+        return "fruit,quantity\n" + storageDao.addAll().stream()
+                .map(i -> i.getKey().getFruit()
+                        + "," + i.getValue()
+                        + System.lineSeparator())
+                .collect(Collectors.joining());
     }
 }
