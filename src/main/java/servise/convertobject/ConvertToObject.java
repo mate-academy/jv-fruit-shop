@@ -1,7 +1,9 @@
 package servise.convertobject;
 
+import model.FruitTransaction;
+
 import java.util.List;
 
 public interface ConvertToObject {
-    List<String> convertToObject(List<String> input);
+    List<FruitTransaction> convertToObject(List<String> input);
 }
