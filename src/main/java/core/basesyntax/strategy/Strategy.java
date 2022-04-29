@@ -16,7 +16,7 @@ public class Strategy {
         operationHandlerMap.put("r", new SupplyHandlerImpl(dao));
         operationHandlerMap.put("p", new PurchaseHandlerImpl(dao));
         operationHandlerMap.put("b", new BalanceHandler(dao));
-        operationHandlerMap.put("s", new ReturnHandlerImpl(dao));
+        operationHandlerMap.put("s", new SupplyHandlerImpl(dao));
         return operationHandlerMap;
     }
 

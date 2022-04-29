@@ -16,8 +16,8 @@ import core.basesyntax.strategy.Strategy;
 import java.util.List;
 
 public class Main {
-    private static final String SOURCE_FILE_PATH = "src/main/java/resources/input.csv";
-    private static final String RESULT_FILE_PATH = "src/main/java/resources/output.csv";
+    private static final String SOURCE_FILE_PATH = "src/main/resources/input.csv";
+    private static final String RESULT_FILE_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
         Validator validator = new ValidatorImpl();

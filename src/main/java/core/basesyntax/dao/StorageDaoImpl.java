@@ -22,6 +22,11 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
+    public boolean contain(Fruit fruit) {
+        return Storage.storage.containsKey(fruit);
+    }
+
+    @Override
     public Set<Map.Entry<Fruit, Integer>> getAll() {
         return Storage.storage.entrySet();
     }
