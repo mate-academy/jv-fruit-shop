@@ -14,12 +14,14 @@ public class Fruit {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Fruit fruit = (Fruit) o;
-
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Fruit fruit = (Fruit) object;
         return Objects.equals(name, fruit.name);
     }
 

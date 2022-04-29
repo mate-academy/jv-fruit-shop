@@ -1,5 +1,8 @@
 package core.basesyntax;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
 import servise.converter.Converter;
 import servise.converter.ConverterImp;
@@ -14,20 +17,17 @@ import strategy.OperationHandler;
 import strategy.PurchaseOperationHandler;
 import strategy.ReturnOperationHandler;
 import strategy.SupplyOperationHandler;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        String path = "src\\main\\resources\\inputData.csv";
-        String pathReport = "src\\main\\resources\\report.csv";
+        final String path = "src\\main\\resources\\inputData.csv";
+        final String pathReport = "src\\main\\resources\\report.csv";
 
         Reader readFromFile = new ReaderImp();
         List<String> inputFromFile = readFromFile.readFromFile(path);
 
         Converter convertToObject = new ConverterImp();
-        List<FruitTransaction> fruitTransactions = convertToObject.convert(inputFromFile);
+        final List<FruitTransaction> fruitTransactions = convertToObject.convert(inputFromFile);
 
         Map<String, OperationHandler> map = new HashMap<>();
         map.put("b", new BalanceOperationHandler());

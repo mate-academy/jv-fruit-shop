@@ -3,7 +3,7 @@ package strategy;
 import db.Storage;
 import model.FruitTransaction;
 
-public class SupplyOperationHandler implements OperationHandler{
+public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void process(FruitTransaction fruitTransaction) {
         Integer initialQuality = Storage.map.get(fruitTransaction.getFruit());

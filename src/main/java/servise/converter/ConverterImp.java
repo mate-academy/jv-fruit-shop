@@ -1,9 +1,9 @@
 package servise.converter;
 
-import model.Fruit;
-import model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
+import model.Fruit;
+import model.FruitTransaction;
 
 public class ConverterImp implements Converter {
     @Override

@@ -3,8 +3,6 @@ package servise.report;
 import db.Storage;
 import model.Fruit;
 
-import java.util.List;
-
 public class ReportImp implements Report {
     @Override
     public String report() {

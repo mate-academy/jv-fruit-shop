@@ -1,8 +1,7 @@
 package servise.converter;
 
-import model.FruitTransaction;
-
 import java.util.List;
+import model.FruitTransaction;
 
 public interface Converter {
     List<FruitTransaction> convert(List<String> input);
