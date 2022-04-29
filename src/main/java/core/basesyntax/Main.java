@@ -14,7 +14,6 @@ import core.basesyntax.service.strategy.PurchaseOperation;
 import core.basesyntax.service.strategy.ReturnOperation;
 import core.basesyntax.service.strategy.SupplyOperation;
 import core.basesyntax.service.strategy.TransactionStrategy;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
