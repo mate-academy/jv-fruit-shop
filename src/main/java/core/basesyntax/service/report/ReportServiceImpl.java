@@ -10,13 +10,13 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport(Set<Map.Entry<Fruit, Integer>> entrySet) {
-        StringBuilder reportMaker = new StringBuilder(COLUMNS);
+        StringBuilder report = new StringBuilder(COLUMNS);
         for (Map.Entry<Fruit, Integer> element : entrySet) {
-            reportMaker.append(LINE_SEPARATOR)
+            report.append(LINE_SEPARATOR)
                     .append(element.getKey().getName())
                     .append(",")
                     .append(element.getValue());
         }
-        return reportMaker.toString();
+        return report.toString();
     }
 }

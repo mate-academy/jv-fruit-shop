@@ -5,7 +5,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
 
 public class PurchaseHandlerImpl implements OperationHandler {
-
     private final StorageDao dao;
 
     public PurchaseHandlerImpl(StorageDao dao) {

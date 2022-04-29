@@ -22,7 +22,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public boolean contain(Fruit fruit) {
+    public boolean contains(Fruit fruit) {
         return Storage.storage.containsKey(fruit);
     }
 

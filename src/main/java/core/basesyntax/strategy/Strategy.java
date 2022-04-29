@@ -11,13 +11,13 @@ public class Strategy {
     public Strategy(StorageDao dao) {
         this.dao = dao;
         operationHandlerMap = new HashMap<>();
-    }
-
-    public Map<String, OperationHandler> getMap() {
         operationHandlerMap.put("r", new SupplyHandlerImpl(dao));
         operationHandlerMap.put("p", new PurchaseHandlerImpl(dao));
         operationHandlerMap.put("b", new BalanceHandler(dao));
         operationHandlerMap.put("s", new SupplyHandlerImpl(dao));
+    }
+
+    public Map<String, OperationHandler> getMap() {
         return operationHandlerMap;
     }
 
