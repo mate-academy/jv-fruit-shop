@@ -1,25 +1,28 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitShopDao;
-import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.service.ReportService;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
-    private FruitShopDao fruitShopDao = new FruitShopDaoImpl();
+    private FruitShopDao fruitShopDao;
+
+    public ReportServiceImpl(FruitShopDao fruitShopDao) {
+        this.fruitShopDao = fruitShopDao;
+    }
 
     @Override
     public String createReport() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(HEADER).append(System.lineSeparator());
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append(HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : fruitShopDao.getAll().entrySet()) {
-            builder.append(entry.getKey())
+            reportBuilder.append(entry.getKey())
                     .append(",")
                     .append(entry.getValue())
                     .append(System.lineSeparator());
-            return builder.toString();
+            return reportBuilder.toString();
         }
-        return builder.toString();
+        return reportBuilder.toString();
     }
 }

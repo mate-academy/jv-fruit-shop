@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operations;
 import core.basesyntax.service.CsvFileReaderService;
@@ -38,7 +39,8 @@ public class Main {
         fruitTransaction.process(strings);
 
         CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
-        csvFileWriterService.writeToFile("src/main/resources/after.csv", new ReportServiceImpl());
+        csvFileWriterService.writeToFile("src/main/resources/after.csv",
+                new ReportServiceImpl(new FruitShopDaoImpl()));
 
         System.out.println(Storage.fruitStorage);
     }
