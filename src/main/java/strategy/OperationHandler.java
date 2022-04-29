@@ -1,7 +1,7 @@
 package strategy;
 
-import model.Product;
+import model.Fruit;
 
 public interface OperationHandler {
-    public void operation(Product product, Integer quantity);
+    public void operation(Fruit fruit, Integer quantity);
 }

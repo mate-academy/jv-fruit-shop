@@ -1,9 +1,9 @@
 package model;
 
-public final class Product {
+public final class Fruit {
     private final String nameOfFruit;
 
-    public Product(String nameOfFruit) {
+    public Fruit(String nameOfFruit) {
         this.nameOfFruit = nameOfFruit;
     }
 
@@ -20,9 +20,9 @@ public final class Product {
             return false;
         }
 
-        Product product = (Product) o;
+        Fruit fruit = (Fruit) o;
 
-        return nameOfFruit.equals(product.nameOfFruit);
+        return nameOfFruit.equals(fruit.nameOfFruit);
     }
 
     @Override

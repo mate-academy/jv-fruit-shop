@@ -2,7 +2,7 @@ package model;
 
 public class Transaction {
     private String operation;
-    private Product product;
+    private Fruit fruit;
     private int quantity;
 
     public String getOperation() {
@@ -13,12 +13,12 @@ public class Transaction {
         this.operation = operation;
     }
 
-    public Product getProduct() {
-        return product;
+    public Fruit getProduct() {
+        return fruit;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct(Fruit fruit) {
+        this.fruit = fruit;
     }
 
     public int getQuantity() {

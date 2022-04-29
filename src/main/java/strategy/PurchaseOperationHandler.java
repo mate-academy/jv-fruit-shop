@@ -1,18 +1,18 @@
 package strategy;
 
-import model.Product;
+import model.Fruit;
 import storage.Storage;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public void operation(Product product, Integer quantity) {
-        Integer initialQuantity = Storage.STORAGE.get(product);
-        if (Storage.STORAGE.get(product) == null) {
+    public void operation(Fruit fruit, Integer quantity) {
+        Integer initialQuantity = Storage.STORAGE.get(fruit);
+        if (Storage.STORAGE.get(fruit) == null) {
             throw new RuntimeException("Null");
         }
-        if (Storage.STORAGE.get(product) - quantity < 0) {
-            throw new RuntimeException("Not enough of " + product + "'s");
+        if (Storage.STORAGE.get(fruit) - quantity < 0) {
+            throw new RuntimeException("Not enough of " + fruit + "'s");
         }
-        Storage.STORAGE.put(product, initialQuantity - quantity);
+        Storage.STORAGE.put(fruit, initialQuantity - quantity);
     }
 }
