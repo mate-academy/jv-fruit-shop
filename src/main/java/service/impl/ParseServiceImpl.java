@@ -33,7 +33,7 @@ public class ParseServiceImpl implements ParseService {
             case "r":
                 return FruitTransaction.Operation.RETURN;
             default:
-                throw new RuntimeException();
+                throw new RuntimeException("Unknown operation " + option);
         }
     }
 }

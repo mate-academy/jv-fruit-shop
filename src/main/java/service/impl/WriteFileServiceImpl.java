@@ -11,7 +11,7 @@ public class WriteFileServiceImpl implements WriteFileService {
         try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter(fileName))) {
             csvWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file");
+            throw new RuntimeException("Can't write to file " + fileName);
         }
     }
 }

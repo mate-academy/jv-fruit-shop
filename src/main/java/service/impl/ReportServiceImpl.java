@@ -1,15 +1,14 @@
 package service.impl;
 
 import dao.StorageDao;
-import dao.StorageDaoImpl;
 import java.util.stream.Collectors;
 import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private StorageDao storageDao;
 
-    public ReportServiceImpl() {
-        storageDao = new StorageDaoImpl();
+    public ReportServiceImpl(StorageDao storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override

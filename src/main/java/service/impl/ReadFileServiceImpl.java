@@ -12,10 +12,10 @@ public class ReadFileServiceImpl implements ReadFileService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final List<String> informationFromFile = new ArrayList<>();
 
     @Override
     public List<String> read(String fileName) {
+        List<String> informationFromFile = new ArrayList<>();
         try (CSVReader reader = new CSVReader(new FileReader(fileName))) {
             String[] lineInArray;
             while ((lineInArray = reader.readNext()) != null) {

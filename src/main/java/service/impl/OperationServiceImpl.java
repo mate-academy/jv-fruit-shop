@@ -8,8 +8,8 @@ import service.OperationService;
 public class OperationServiceImpl implements OperationService {
     private final OperationHandlerStrategy operationHandlerStrategy;
 
-    public OperationServiceImpl() {
-        operationHandlerStrategy = new OperationHandlerStrategyImpl();
+    public OperationServiceImpl(OperationHandlerStrategy operationHandlerStrategy) {
+        this.operationHandlerStrategy = operationHandlerStrategy;
     }
 
     @Override
