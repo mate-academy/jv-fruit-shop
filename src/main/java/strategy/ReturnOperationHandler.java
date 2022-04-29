@@ -1,7 +1,7 @@
 package strategy;
 
-import model.Fruit;
 import db.Storage;
+import model.Fruit;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
