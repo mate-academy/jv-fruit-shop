@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
@@ -20,32 +22,36 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "src/main/resources/database.csv";
-    private static final String REPORT_FILE_NAME = "src/main/resources/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/database.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
+    private static StorageDao storageDao = new StorageDaoImpl();
 
     public static void main(String[] args) {
-
         Map<FruitTransaction.Operation, OperationService> handlerMap = new HashMap<>();
-        handlerMap.put(FruitTransaction.Operation.BALANCE,new BalanceOperationService());
-        handlerMap.put(FruitTransaction.Operation.PURCHASE,new PurchaseOperationService());
-        handlerMap.put(FruitTransaction.Operation.RETURN,new ReturnOperationService());
-        handlerMap.put(FruitTransaction.Operation.SUPPLY,new SupplyOperationService());
+        handlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationService(storageDao));
+        handlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationService(storageDao));
+        handlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationService(storageDao));
+        handlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationService(storageDao));
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> read = fileReaderService.read(Path.of(INPUT_FILE_NAME));
+        List<String> data = fileReaderService.read(Path.of(INPUT_FILE_PATH));
 
         ParserDataService parserDataService = new ParserDataServiceImpl();
-        List<FruitTransaction> parsedData = parserDataService.parse(read);
+        List<FruitTransaction> parsedData = parserDataService.parse(data);
 
         for (FruitTransaction transaction : parsedData) {
             handlerMap.get(transaction.getOperation()).proceed(transaction);
         }
 
-        ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
+        ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl(storageDao);
         String report = reportGeneratorService.report();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.write(Path.of(REPORT_FILE_NAME), report);
+        fileWriterService.write(Path.of(REPORT_FILE_PATH), report);
 
     }
 }

@@ -2,7 +2,8 @@ package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
@@ -25,7 +26,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public HashMap<Fruit, Integer> getStorage() {
-        return new HashMap<>(Storage.fruitStorage);
+    public Set<Map.Entry<Fruit, Integer>> getAll() {
+        return Storage.fruitStorage.entrySet();
     }
 }

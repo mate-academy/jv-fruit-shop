@@ -12,32 +12,22 @@ public class ParserDataServiceImpl implements ParserDataService {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < dataFromFile.size(); i++) {
             String line = dataFromFile.get(i);
-            FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(getOperation(line));
-            fruitTransaction.setFruit(getFruit(line));
-            fruitTransaction.setQuantity(getAmount(line));
-            transactions.add(fruitTransaction);
+            transactions.add(getTransaction(line));
         }
         return transactions;
     }
 
-    private FruitTransaction.Operation getOperation(String lineFromData) {
+    private FruitTransaction getTransaction(String lineFromData) {
         String[] split = lineFromData.split(",");
+        FruitTransaction transaction = new FruitTransaction();
         for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
             if (operation.getOperation().equals(split[0])) {
-                return operation;
+                transaction.setOperation(operation);
             }
         }
-        return null;
-    }
+        transaction.setFruit(new Fruit(split[1]));
+        transaction.setQuantity(Integer.parseInt(split[2]));
+        return transaction;
 
-    private Fruit getFruit(String lineFromData) {
-        String[] split = lineFromData.split(",");
-        return new Fruit(split[1]);
-    }
-
-    private Integer getAmount(String lineFromData) {
-        String[] split = lineFromData.split(",");
-        return Integer.valueOf(split[2]);
     }
 }

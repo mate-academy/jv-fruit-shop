@@ -1,7 +1,8 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public interface StorageDao {
     void add(Fruit fruit, Integer quantity);
@@ -10,5 +11,5 @@ public interface StorageDao {
 
     int getFruitQuantity(Fruit fruit);
 
-    HashMap<Fruit, Integer> getStorage();
+    Set<Map.Entry<Fruit, Integer>> getAll();
 }

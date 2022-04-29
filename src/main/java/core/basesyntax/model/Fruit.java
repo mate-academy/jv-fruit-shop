@@ -2,8 +2,8 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class Fruit {
-    private String fruit;
+public final class Fruit {
+    private final String fruit;
 
     public Fruit(String fruit) {
         this.fruit = fruit;
@@ -11,10 +11,6 @@ public class Fruit {
 
     public String getFruit() {
         return fruit;
-    }
-
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
     }
 
     @Override
