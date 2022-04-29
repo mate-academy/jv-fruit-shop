@@ -81,14 +81,14 @@ public class FruitTransaction {
     PURCHASE("p"),
     RETURN("r");
 
-    private String strategy;
+    private String operation;
 
-    Operation(String strategy) {
-      this.strategy = strategy;
+    Operation(String operation) {
+      this.operation = operation;
     }
 
     public String getOperation() {
-      return strategy;
+      return operation;
     }
   }
 }
