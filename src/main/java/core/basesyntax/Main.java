@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import db.FileReader;
-import db.FileWriter;
-import db.Parser;
-import db.ReportMaker;
+import db.impl.FileReaderImpl;
+import db.impl.FileWriterImpl;
+import db.impl.ParserImpl;
+import db.impl.ReportMakerImpl;
 import java.util.List;
 import model.FruitTransaction;
 import storege.Storege;
@@ -15,15 +15,15 @@ public class Main {
     private static final String OUTPUT_FILE_PATH = "src/main/resources/ExpectingReportFile.csv";
 
     public static void main(String[] args) {
-        FileReader fileReader = new FileReader();
+        FileReaderImpl fileReader = new FileReaderImpl();
         List<String> data = fileReader.readFromFile(INPUT_FILE_PATH);
-        List<FruitTransaction> fruitTransactions = new Parser().parse(data);
+        List<FruitTransaction> fruitTransactions = new ParserImpl().parse(data);
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             Strategy strategy = new Strategy();
             OperationHandler operationHandler = strategy.get(fruitTransaction.getOperation());
             operationHandler.apply(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
-        new FileWriter().writeToFile(OUTPUT_FILE_PATH,
-                new ReportMaker().reportMaker(Storege.data.entrySet()));
+        new FileWriterImpl().writeToFile(OUTPUT_FILE_PATH,
+                new ReportMakerImpl().reportMaker(Storege.data.entrySet()));
     }
 }
