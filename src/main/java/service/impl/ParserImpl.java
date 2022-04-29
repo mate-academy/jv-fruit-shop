@@ -13,11 +13,12 @@ public class ParserImpl implements Parser {
     public List<FruitTransaction> parse(List<String> data) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         data.stream()
-                .filter(f -> !f.equals(HEADER_NAME))
-                .map(f -> f.split(","))
-                .forEach(f -> fruitTransactions
-                        .add(new FruitTransaction((f[0]), new Fruit(f[1]),
-                                Integer.parseInt(f[2]))));
+                .filter(fruitTransaction -> !fruitTransaction.equals(HEADER_NAME))
+                .map(fruitTransaction -> fruitTransaction.split(","))
+                .forEach(fruitTransaction -> fruitTransactions
+                        .add(new FruitTransaction((fruitTransaction[0]),
+                                new Fruit(fruitTransaction[1]),
+                                Integer.parseInt(fruitTransaction[2]))));
         return fruitTransactions;
     }
 }
