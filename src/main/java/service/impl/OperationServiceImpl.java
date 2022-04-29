@@ -2,13 +2,13 @@ package service.impl;
 
 import java.util.Map;
 import model.Operation;
-import service.ApplyStrategyService;
+import service.OperationService;
 import strategy.OperationHandler;
 
-public class ApplyStategyServiceImpl implements ApplyStrategyService {
+public class OperationServiceImpl implements OperationService {
     private Map<Operation, OperationHandler> handlerMap;
 
-    public ApplyStategyServiceImpl(Map<Operation, OperationHandler> handlerMap) {
+    public OperationServiceImpl(Map<Operation, OperationHandler> handlerMap) {
         this.handlerMap = handlerMap;
     }
 

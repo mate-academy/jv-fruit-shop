@@ -3,16 +3,16 @@ import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
-import service.ApplyStrategyService;
+import service.FileReaderService;
 import service.FileWriterService;
-import service.FilerReaderService;
 import service.FruitShopService;
+import service.OperationService;
 import service.ParseService;
 import service.ReportService;
-import service.impl.ApplyStategyServiceImpl;
 import service.impl.FileReaderServiceImpl;
 import service.impl.FileWriterServiceImpl;
 import service.impl.FruitShopServiceImpl;
+import service.impl.OperationServiceImpl;
 import service.impl.ParseServiceImpl;
 import service.impl.ReportServiceImpl;
 import strategy.BalanceOperationHandlerImpl;
@@ -32,13 +32,13 @@ public class Main {
         operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandlerImpl());
         operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandlerImpl());
         ParseService parseService = new ParseServiceImpl();
-        FilerReaderService fileReader = new FileReaderServiceImpl();
+        FileReaderService fileReader = new FileReaderServiceImpl();
         List<String> input = fileReader.getFileData(INPUT_FILE);
         List<FruitTransaction> fruitTransactionList = parseService.parse(input);
-        ApplyStrategyService applyStrategyService =
-                new ApplyStategyServiceImpl(operationHandlerMap);
-        FruitShopService fruitShopService = new FruitShopServiceImpl(applyStrategyService);
-        fruitShopService.transfer(fruitTransactionList);
+        OperationService operationService =
+                new OperationServiceImpl(operationHandlerMap);
+        FruitShopService fruitShopService = new FruitShopServiceImpl(operationService);
+        fruitShopService.process(fruitTransactionList);
         ReportService reportService = new ReportServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeFile(OUTPUT_FILE, reportService.createReport());

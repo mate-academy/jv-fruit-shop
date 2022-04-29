@@ -3,23 +3,21 @@ package service.impl;
 import java.util.List;
 import model.FruitTransaction;
 import model.Operation;
-import service.ApplyStrategyService;
 import service.FruitShopService;
-import storage.Storage;
+import service.OperationService;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private ApplyStrategyService applyStrategyService;
+    private OperationService operationService;
 
-    public FruitShopServiceImpl(ApplyStrategyService applyStrategyService) {
-        this.applyStrategyService = applyStrategyService;
+    public FruitShopServiceImpl(OperationService operationService) {
+        this.operationService = operationService;
     }
 
     @Override
-    public void transfer(List<FruitTransaction> fruitRecordList) {
+    public void process(List<FruitTransaction> fruitRecordList) {
         for (FruitTransaction fruitRecord : fruitRecordList) {
             Operation type = fruitRecord.getOperationType();
-            Storage.storage.put(fruitRecord.getFruit(),
-                    applyStrategyService.getHandler(type).changeAmount(fruitRecord));
+            operationService.getHandler(type).handle(fruitRecord);
         }
     }
 }

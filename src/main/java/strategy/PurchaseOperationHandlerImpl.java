@@ -1,18 +1,20 @@
 package strategy;
 
-import java.util.Map;
-import model.Fruit;
 import model.FruitTransaction;
 import storage.Storage;
 
 public class PurchaseOperationHandlerImpl implements OperationHandler {
     @Override
-    public int changeAmount(FruitTransaction fruitTransaction) {
-        for (Map.Entry<Fruit, Integer> fruitEntry : Storage.storage.entrySet()) {
-            if (fruitEntry.getKey().equals(fruitTransaction.getFruit())) {
-                return fruitEntry.getValue() - fruitTransaction.getQuantity();
-            }
+    public int handle(FruitTransaction fruitTransaction) {
+        Integer fruitQuantity = Storage.storage.get(fruitTransaction.getFruit());
+        if (fruitQuantity == null) {
+            throw new RuntimeException("We don't have fruit - " + fruitTransaction.getFruit());
         }
-        throw new RuntimeException("We don't have fruit -" + fruitTransaction.getFruit());
+        if (fruitQuantity < fruitTransaction.getQuantity()) {
+            throw new RuntimeException("We don't have enough fruits in storage");
+        }
+        Storage.storage.replace(fruitTransaction.getFruit(),
+                fruitQuantity - fruitTransaction.getQuantity());
+        return Storage.storage.get(fruitTransaction.getFruit());
     }
 }

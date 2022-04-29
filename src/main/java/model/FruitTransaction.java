@@ -6,7 +6,7 @@ public class FruitTransaction {
     private int quantity;
 
     public FruitTransaction(String operationType, Fruit fruit, int quantity) {
-        this.operationType = Operation.get(operationType);
+        this.operationType = Operation.getByValue(operationType);
         this.fruit = fruit;
         this.quantity = quantity;
     }

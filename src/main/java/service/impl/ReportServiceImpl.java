@@ -10,10 +10,10 @@ public class ReportServiceImpl implements ReportService {
     public String createReport() {
         StringBuilder stringBuilder = new StringBuilder("fruit,quantity")
                 .append(System.lineSeparator());
-        for (Map.Entry<Fruit, Integer> report : Storage.storage.entrySet()) {
-            stringBuilder.append(report.getKey())
+        for (Map.Entry<Fruit, Integer> record : Storage.storage.entrySet()) {
+            stringBuilder.append(record.getKey())
                     .append(",")
-                    .append(report.getValue())
+                    .append(record.getValue())
                     .append(System.lineSeparator());
         }
         return stringBuilder.toString();

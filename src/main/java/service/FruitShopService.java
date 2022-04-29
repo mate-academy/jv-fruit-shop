@@ -4,5 +4,5 @@ import java.util.List;
 import model.FruitTransaction;
 
 public interface FruitShopService {
-    void transfer(List<FruitTransaction> transferFruitList);
+    void process(List<FruitTransaction> transferFruitList);
 }
