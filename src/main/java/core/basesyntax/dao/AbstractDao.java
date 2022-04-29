@@ -3,12 +3,12 @@ package core.basesyntax.dao;
 import java.util.List;
 import java.util.Optional;
 
-public interface Dao<T> {
+public interface AbstractDao<T> {
     T create(String name, int quantity);
 
-    void saveToStorage(T element);
+    void save(T element);
 
-    Optional<T> get(T element);
+    Optional<T> get(String fruitName);
 
     List<T> getAll();
 

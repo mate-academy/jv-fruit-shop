@@ -14,14 +14,14 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void saveToStorage(Fruit element) {
+    public void save(Fruit element) {
         Storage.fruits.put(element.getName(), element.getQuantity());
     }
 
     @Override
-    public Optional<Fruit> get(Fruit key) {
+    public Optional<Fruit> get(String fruitName) {
         return Storage.fruits.entrySet().stream()
-                .filter(k -> key.getName().equals(k.getKey()))
+                .filter(k -> fruitName.equals(k.getKey()))
                 .findFirst()
                 .map(el -> new Fruit(el.getKey(), el.getValue()));
     }
@@ -34,12 +34,12 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Fruit update(Fruit element) {
+    public Fruit update(Fruit fruit) {
         Storage.fruits.entrySet().stream()
-                .filter(f -> f.getKey().equals(element.getName()))
+                .filter(f -> f.getKey().equals(fruit.getName()))
                 .findFirst()
-                .map(f -> f.setValue(f.getValue() + element.getQuantity()));
-        return element;
+                .map(f -> f.setValue(f.getValue() + fruit.getQuantity()));
+        return fruit;
     }
 
     @Override
