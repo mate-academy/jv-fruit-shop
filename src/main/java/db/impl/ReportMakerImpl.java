@@ -9,7 +9,7 @@ public class ReportMakerImpl implements ReportMaker {
     private static final String HEADER_NAME_FOR_REPORT = "fruit,quantity";
 
     @Override
-    public StringBuilder reportMaker(Set<Map.Entry<Fruit, Integer>> entrySet) {
+    public String reportMaker(Set<Map.Entry<Fruit, Integer>> entrySet) {
         StringBuilder reportMaker = new StringBuilder(HEADER_NAME_FOR_REPORT);
         for (Map.Entry<Fruit, Integer> element : entrySet) {
             reportMaker.append(System.lineSeparator())
@@ -17,6 +17,6 @@ public class ReportMakerImpl implements ReportMaker {
                     .append(",")
                     .append(element.getValue());
         }
-        return reportMaker;
+        return reportMaker.toString();
     }
 }

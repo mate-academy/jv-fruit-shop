@@ -1,5 +1,5 @@
 package db;
 
 public interface FileWriter {
-    public void writeToFile(String pathName, StringBuilder report);
+    public void writeToFile(String pathName, String report);
 }
