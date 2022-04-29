@@ -20,20 +20,20 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String INPUT_PATH = "src" + File.separator
+    public static final String INPUT_PATH = new StringBuilder("src" + File.separator
                                           + "main" + File.separator
                                           + "java" + File.separator
                                           + "core" + File.separator
                                           + "basesyntax" + File.separator
                                           + "resources" + File.separator
-                                          + "inputData.csv";
-    public static final String OUTPUT_PATH = "src" + File.separator
+                                          + "inputData.csv").toString();
+    public static final String OUTPUT_PATH = new StringBuilder("src" + File.separator
                                           + "main" + File.separator
                                           + "java" + File.separator
                                           + "core" + File.separator
                                           + "basesyntax" + File.separator
                                           + "resources" + File.separator
-                                          + "outputData.csv";
+                                          + "outputData.csv").toString();
 
     public static void main(String[] args) {
         Reader dataReader = new ReaderImpl();
@@ -53,7 +53,7 @@ public class Main {
             Parser.OperationHandler operationHandler = operationStrategy.get(line);
             operationHandler.operation(line);
         }
-        List<String> finalReport = new ReportMakerImpl().createNewReport();
+        String finalReport = new ReportMakerImpl().createNewReport();
 
         Writer writer = new WriteImpl();
         writer.writeData(finalReport, OUTPUT_PATH);

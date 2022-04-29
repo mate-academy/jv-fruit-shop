@@ -9,9 +9,9 @@ public class BalanceOperation implements Parser.OperationHandler {
 
     @Override
     public boolean operation(LineData lineData) {
-        String fruitName = lineData.getFruitName();
+        Fruit fruitName = lineData.getFruitName();
         int quantity = lineData.getQuantity();
-        Storage.store.put(new Fruit(fruitName), quantity);
+        Storage.store.put(new Fruit(fruitName.toString()), quantity);
         return true;
     }
 }

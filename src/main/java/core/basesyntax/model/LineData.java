@@ -3,9 +3,9 @@ package core.basesyntax.model;
 public class LineData {
     private Integer quantity;
     private String dailyAction;
-    private String fruitName;
+    private Fruit fruitName;
 
-    public LineData(String dailyAction, String fruit, Integer quantity) {
+    public LineData(String dailyAction, Fruit fruit, Integer quantity) {
         this.dailyAction = dailyAction;
         this.fruitName = fruit;
         this.quantity = quantity;
@@ -27,11 +27,11 @@ public class LineData {
         this.dailyAction = dailyAction;
     }
 
-    public String getFruitName() {
+    public Fruit getFruitName() {
         return fruitName;
     }
 
-    public void setFruitName(String fruitName) {
+    public void setFruitName(Fruit fruitName) {
         this.fruitName = fruitName;
     }
 }

@@ -9,7 +9,7 @@ public class SupplyOperation implements Parser.OperationHandler {
 
     @Override
     public boolean operation(LineData lineData) {
-        Fruit fruit = new Fruit(lineData.getFruitName());
+        Fruit fruit = new Fruit(lineData.getFruitName().toString());
         int quantity = lineData.getQuantity();
         int storageQuantity = Storage.store.get(fruit);
         Storage.store.put(fruit, storageQuantity + quantity);
