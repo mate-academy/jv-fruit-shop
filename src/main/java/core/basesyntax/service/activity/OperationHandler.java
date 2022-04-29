@@ -2,7 +2,6 @@ package core.basesyntax.service.activity;
 
 import java.util.List;
 
-public interface ActivityService {
-
+public interface OperationHandler {
     void activity(List<String> inputData);
 }

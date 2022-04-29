@@ -1,15 +1,15 @@
 package core.basesyntax.model;
 
 public class Fruit {
-    private String fruit;
-    private int amount = 0;
+    private String name;
+    private int amount;
 
-    public String getFruit() {
-        return fruit;
+    public String getName() {
+        return name;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getAmount() {
@@ -23,7 +23,7 @@ public class Fruit {
     @Override
     public String toString() {
         return "Fruit{"
-                + "fruit='" + fruit + '\''
+                + "name='" + name + '\''
                 + ", amount=" + amount
                 + '}';
     }

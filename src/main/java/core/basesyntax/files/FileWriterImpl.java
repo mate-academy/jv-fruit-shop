@@ -7,17 +7,15 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
-public class WriteToFileImpl implements WriteToFile {
-    private String toFileName = "output.csv";
-
+public class FileWriterImpl implements FileWriter {
     @Override
-    public void writeToFile(List<String> outputData) {
+    public void writeToFile(List<String> lines, String toFileName) {
         try {
             Path path = Paths.get(toFileName);
             Files.deleteIfExists(path);
             Files.createFile(path);
-            for (String output : outputData) {
-                Files.writeString(path, output + "\n", StandardOpenOption.APPEND);
+            for (String line : lines) {
+                Files.writeString(path, line + "\n", StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to the file " + toFileName, e);

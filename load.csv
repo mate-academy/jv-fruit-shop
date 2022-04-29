@@ -1,4 +1,4 @@
-type,fruit,quantity
+type,name,quantity
 b,banana,100
 b,apple,10
 s,banana,100

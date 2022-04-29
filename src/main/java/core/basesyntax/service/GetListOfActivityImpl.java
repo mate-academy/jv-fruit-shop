@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import core.basesyntax.operation.Operation;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,9 +10,9 @@ public class GetListOfActivityImpl implements GetListOfActivity {
     private static final int FRUIT_NAME_INDEX = 2;
 
     @Override
-    public List<String> getListOfActivity(List<String> listFromFile, String activity) {
+    public List<String> getListOfActivity(List<String> listFromFile, Operation operation) {
         return listFromFile.stream()
-                .filter(s -> s.split(",")[ACTIVITIES_INDEX].equals(activity))
+                .filter(s -> s.split(",")[ACTIVITIES_INDEX].equals(operation.getOperation()))
                 .map(s -> s.substring(FRUIT_NAME_INDEX))
                 .collect(Collectors.toList());
     }

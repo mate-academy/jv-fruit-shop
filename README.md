@@ -1,5 +1,5 @@
 # Fruit shop
-Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
+Let's imagine that we have a name store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
 
@@ -13,7 +13,7 @@ There are four activities at the store:
 ```text
     b - balance, the remnants of fruits at the beginning of the working day
     s - supply, means you are receiving new fruits from suppliers
-    p - purchase, means someone has bought some fruit
+    p - purchase, means someone has bought some name
     r - return, means someone who have bought the fruits now returns them back
 ```
 
@@ -45,7 +45,7 @@ Let's check in details all types of activities:
 
 ### Input file example
 ```text
-    type,fruit,quantity
+    type,name,quantity
     b,banana,20
     b,apple,100
     s,banana,100
@@ -59,7 +59,7 @@ Let's check in details all types of activities:
 ### Expecting report file example
 We are expecting to see how many fruits are available today after the work shift in your Fruit store. 
 ```text
-    fruit,quantity
+    name,quantity
     banana,152
     apple,90
 ```
@@ -69,8 +69,8 @@ The line above means you have 152 bananas, and 90 apples in your Fruit store aft
 (this is only a recommendation, you can use other classes / approaches to solve this task at your discretion):**
 ```java
 public class FruitTransaction {
-  private Operation activity;
-  private String fruit;
+  private Operation operation;
+  private String name;
   private int quantity;
 
   // getters, setters, ...
@@ -81,17 +81,17 @@ public class FruitTransaction {
     PURCHASE("p"),
     RETURN("r");
 
-    private String activity;
+    private String operation;
 
-    Operation(String activity) {
-      this.activity = activity;
+    Operation(String operation) {
+      this.operation = operation;
     }
 
     public String getOperation() {
-      return activity;
+      return operation;
     }
   }
 }
 ```
 
-#### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop)
+#### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/name-shop)

@@ -1,22 +1,23 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class GetListForReportImpl implements GetListForReport {
-    private static final int HEADER_INDEX = 0;
+public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
     private FruitDao fruitDao;
 
-    public GetListForReportImpl(FruitDao fruitDao) {
+    public ReportServiceImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
     @Override
     public List<String> getReport() {
-        List<String> report = fruitDao.getStorage();
-        report.add(HEADER_INDEX, HEADER);
+        List<String> report = new ArrayList<>();
+        report.add(HEADER);
+        report.addAll(fruitDao.getAll());
         return report;
     }
-
 }

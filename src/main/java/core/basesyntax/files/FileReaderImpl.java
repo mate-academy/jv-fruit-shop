@@ -6,14 +6,12 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFromFileImpl implements ReadFromFile {
-    private String fromFileName = "load.csv";
-
+public class FileReaderImpl implements FileReader {
     @Override
-    public List<String> readFromFile() {
+    public List<String> readFromFile(String fromFileName) {
         try {
-            File fromFile = new File(fromFileName);
-            return new ArrayList<>(Files.readAllLines(fromFile.toPath()));
+            File file = new File(fromFileName);
+            return new ArrayList<>(Files.readAllLines(file.toPath()));
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from the file " + fromFileName, e);
         }

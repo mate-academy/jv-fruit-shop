@@ -3,34 +3,32 @@ package core.basesyntax.service.activity;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FruitServiceImpl;
+import core.basesyntax.operation.Operation;
+import core.basesyntax.service.GetDataFromListOfActivityImpl;
 import core.basesyntax.service.GetListOfActivity;
 import core.basesyntax.service.GetListOfActivityImpl;
 import java.util.List;
 
-public class SupplyActivityService implements ActivityService {
-    private static final int FRUIT_INDEX = 0;
-    private static final int AMOUNT_INDEX = 1;
-    private static final String ACTIVITY = "s";
+public class SupplyOperationHandler implements OperationHandler {
     private FruitDao fruitDao;
 
-    public SupplyActivityService(FruitDao fruitDao) {
+    public SupplyOperationHandler(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
     @Override
     public void activity(List<String> inputData) {
         GetListOfActivity supplyListOfActivity = new GetListOfActivityImpl();
-        List<String> supplyList = supplyListOfActivity.getListOfActivity(inputData, ACTIVITY);
-        for (String s : supplyList) {
-            String fruitName = s.split(",")[FRUIT_INDEX];
-            int fruitAmount = Integer.parseInt(s.split(",")[AMOUNT_INDEX]);
+        List<String> supplyList = supplyListOfActivity.getListOfActivity(inputData, Operation.SUPPLY);
+        for (String string : supplyList) {
+            String fruitName = new GetDataFromListOfActivityImpl().getFruitName(string);
+            int fruitAmount = new GetDataFromListOfActivityImpl().getFruitAmount(string);
             if (fruitDao.get(fruitName) != null) {
                 Fruit fruit = fruitDao.get(fruitName);
                 int newFruitAmount = fruit.getAmount() + fruitAmount;
                 fruit.setAmount(newFruitAmount);
             } else {
-                new FruitServiceImpl(new FruitDaoImpl()).createNewFruit(fruitName, fruitAmount);
+                new FruitDaoImpl().addNew(fruitName, fruitAmount);
             }
         }
     }
