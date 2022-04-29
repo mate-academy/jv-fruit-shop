@@ -1,10 +1,10 @@
-package db.impl;
+package service.impl;
 
-import db.Parser;
 import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
 import model.FruitTransaction;
+import service.Parser;
 
 public class ParserImpl implements Parser {
     private static final String HEADER_NAME = "type,fruit,quantity";

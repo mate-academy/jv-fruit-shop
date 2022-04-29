@@ -1,9 +1,9 @@
-package db.impl;
+package service.impl;
 
-import db.ReportMaker;
 import java.util.Map;
 import java.util.Set;
 import model.Fruit;
+import service.ReportMaker;
 
 public class ReportMakerImpl implements ReportMaker {
     private static final String HEADER_NAME_FOR_REPORT = "fruit,quantity";

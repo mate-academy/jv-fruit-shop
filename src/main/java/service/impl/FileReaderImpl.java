@@ -1,20 +1,20 @@
-package db.impl;
+package service.impl;
 
-import db.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import service.FileReader;
 
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readFromFile(String pathName) {
-        List<String> readFromFile;
+        List<String> data;
         try {
-            readFromFile = Files.readAllLines(Path.of(pathName));
+            data = Files.readAllLines(Path.of(pathName));
         } catch (IOException e) {
             throw new RuntimeException("Can't find this file " + pathName, e);
         }
-        return readFromFile;
+        return data;
     }
 }

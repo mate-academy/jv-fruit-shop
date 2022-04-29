@@ -1,12 +1,13 @@
 package core.basesyntax;
 
-import db.impl.FileReaderImpl;
-import db.impl.FileWriterImpl;
-import db.impl.ParserImpl;
-import db.impl.ReportMakerImpl;
 import java.util.List;
 import model.FruitTransaction;
-import storege.Storege;
+import service.FileReader;
+import service.impl.FileReaderImpl;
+import service.impl.FileWriterImpl;
+import service.impl.ParserImpl;
+import service.impl.ReportMakerImpl;
+import storage.Storage;
 import strategy.OperationHandler;
 import strategy.Strategy;
 
@@ -15,16 +16,16 @@ public class Main {
     private static final String OUTPUT_FILE_PATH = "src/main/resources/ExpectingReportFile.csv";
 
     public static void main(String[] args) {
-        FileReaderImpl fileReader = new FileReaderImpl();
+        FileReader fileReader = new FileReaderImpl();
         List<String> data = fileReader.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> fruitTransactions = new ParserImpl().parse(data);
+        Strategy strategy = new Strategy();
         for (FruitTransaction fruitTransaction : fruitTransactions) {
-            Strategy strategy = new Strategy();
             OperationHandler operationHandler = strategy.get(fruitTransaction.getOperation());
             operationHandler.apply(fruitTransaction.getFruit(),
                     fruitTransaction.getQuantity());
         }
         new FileWriterImpl().writeToFile(OUTPUT_FILE_PATH,
-                new ReportMakerImpl().reportMaker(Storege.data.entrySet()));
+                new ReportMakerImpl().reportMaker(Storage.data.entrySet()));
     }
 }
