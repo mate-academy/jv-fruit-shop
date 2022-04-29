@@ -14,16 +14,13 @@ public final class Fruit {
     }
 
     @Override
-    public String toString() {
-        return "Fruit{" +
-                       "fruitName='" + fruitName + '\'' +
-                       '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Fruit fruit = (Fruit) o;
         return Objects.equals(fruitName, fruit.fruitName);
     }

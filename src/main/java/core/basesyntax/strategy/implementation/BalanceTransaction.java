@@ -4,8 +4,8 @@ import core.basesyntax.models.Fruit;
 import core.basesyntax.models.Transaction;
 import core.basesyntax.storage.Storage;
 
-public class BalanceTransaction implements TransactionHandler{
-    Storage storage = new Storage();
+public class BalanceTransaction implements TransactionHandler {
+    private Storage storage = new Storage();
 
     @Override
     public boolean handleTransaction(Transaction transaction) {

@@ -4,8 +4,8 @@ import core.basesyntax.models.Fruit;
 import core.basesyntax.models.Transaction;
 import core.basesyntax.storage.Storage;
 
-public class PurchaseTransaction implements TransactionHandler{
-    Storage storage = new Storage();
+public class PurchaseTransaction implements TransactionHandler {
+    private Storage storage = new Storage();
 
     @Override
     public boolean handleTransaction(Transaction transaction) {
@@ -18,7 +18,8 @@ public class PurchaseTransaction implements TransactionHandler{
         if (storage.get(challenger) == null) {
             throw new RuntimeException("Trying to purchase non-existing fruit!");
         }
-        if (storage.get(challenger) != null && storage.get(challenger) < transaction.getQuantity()) {
+        if (storage.get(challenger) != null
+                    && storage.get(challenger) < transaction.getQuantity()) {
             throw new RuntimeException("Not enough fruits in a shop!");
         }
         return false;
