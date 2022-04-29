@@ -11,7 +11,7 @@ public class BalanceOperationService implements OperationService {
     }
 
     @Override
-    public void proceed(FruitTransaction fruitTransaction) {
+    public void process(FruitTransaction fruitTransaction) {
         storageDao.add(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

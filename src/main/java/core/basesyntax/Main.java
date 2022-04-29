@@ -44,7 +44,7 @@ public class Main {
         List<FruitTransaction> parsedData = parserDataService.parse(data);
 
         for (FruitTransaction transaction : parsedData) {
-            handlerMap.get(transaction.getOperation()).proceed(transaction);
+            handlerMap.get(transaction.getOperation()).process(transaction);
         }
 
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl(storageDao);
