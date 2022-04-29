@@ -9,5 +9,5 @@ public interface StorageDao {
 
     Integer get(Fruit fruit);
 
-    Set<Map.Entry<Fruit, Integer>> getSet();
+    Set<Map.Entry<Fruit, Integer>> getAll();
 }

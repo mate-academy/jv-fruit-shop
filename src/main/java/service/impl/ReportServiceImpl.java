@@ -14,7 +14,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String report() {
         return new StringBuilder("fruit,quantity")
-                .append(storageDao.getSet().stream()
+                .append(storageDao.getAll().stream()
                         .map(e -> new StringBuilder("\n")
                         .append(e.getKey().getName())
                         .append(",")

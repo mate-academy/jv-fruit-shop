@@ -12,6 +12,11 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void apply(Fruit fruit, int quantity) {
+        int quantityFromDB = storageDao.get(fruit);
+        if (quantity > quantityFromDB) {
+            throw new RuntimeException("Shop don't have enough fruit, please peek less than "
+                    + quantityFromDB);
+        }
         storageDao.add(fruit, storageDao.get(fruit) - quantity);
     }
 }
