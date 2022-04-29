@@ -4,10 +4,10 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.LineInformation;
 
-public class BalanceState implements OperationHandler {
+public class BalanceOperationHandler implements OperationHandler {
 
     @Override
-    public boolean operation(LineInformation lineInformation) {
+    public boolean operate(LineInformation lineInformation) {
         String fruitName = lineInformation.getFruitName();
         int quantity = lineInformation.getQuantity();
         Storage.storage.put(new Fruit(fruitName), quantity);

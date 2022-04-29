@@ -14,7 +14,7 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(LineInformation lineInformation) {
-        String operationType = lineInformation.getDailyAction();
+        String operationType = lineInformation.getAction();
         return operationHandlerMap.get(operationType.strip());
     }
 }

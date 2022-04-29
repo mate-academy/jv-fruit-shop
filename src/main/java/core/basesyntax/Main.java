@@ -1,47 +1,49 @@
 package core.basesyntax;
 
 import core.basesyntax.model.LineInformation;
+import core.basesyntax.service.DataValidator;
 import core.basesyntax.service.DataWriter;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.Reader;
+import core.basesyntax.service.impl.DataValidatorImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReaderImpl;
 import core.basesyntax.service.impl.ReportImpl;
 import core.basesyntax.service.impl.WriteDataImpl;
-import core.basesyntax.service.strategy.BalanceState;
+import core.basesyntax.service.strategy.BalanceOperationHandler;
 import core.basesyntax.service.strategy.OperationHandler;
-import core.basesyntax.service.strategy.PurchaseOperation;
-import core.basesyntax.service.strategy.ReturnOperation;
-import core.basesyntax.service.strategy.SupplyOperation;
+import core.basesyntax.service.strategy.PurchaseOperationHandler;
+import core.basesyntax.service.strategy.ReturnOperationHandler;
+import core.basesyntax.service.strategy.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static final String INPUT_PATH
-            = "src/main/java/core/basesyntax/resources/inputData.csv";
+            = "src/main/resources/inputData.csv";
     public static final String OUTPUT_PATH
-            = "src/main/java/core/basesyntax/resources/outputData.csv";
+            = "src/main/resources/outputData.csv";
 
     public static void main(String[] args) {
         Reader dataReader = new ReaderImpl();
         List<String> dataFromFile = dataReader.readFile(INPUT_PATH);
-
-        Parser parser = new ParserImpl();
+        DataValidator dataValidator = new DataValidatorImpl();
+        Parser parser = new ParserImpl(dataValidator);
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put("s", new SupplyOperation());
-        operationHandlerMap.put("r", new ReturnOperation());
-        operationHandlerMap.put("b", new BalanceState());
-        operationHandlerMap.put("p", new PurchaseOperation());
+        operationHandlerMap.put("s", new SupplyOperationHandler());
+        operationHandlerMap.put("r", new ReturnOperationHandler());
+        operationHandlerMap.put("b", new BalanceOperationHandler());
+        operationHandlerMap.put("p", new PurchaseOperationHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         List<LineInformation> lineInformations = parser.parse(dataFromFile);
         for (LineInformation lineInformation: lineInformations) {
             OperationHandler operationHandler = operationStrategy.get(lineInformation);
-            operationHandler.operation(lineInformation);
+            operationHandler.operate(lineInformation);
         }
         List<String> finalReport = new ReportImpl().createNewReport();
 

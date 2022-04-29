@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 public class LineInformation {
     private Integer quantity;
-    private String dailyAction;
+    private String action;
     private String fruitName;
 
-    public LineInformation(String dailyAction, String fruit, Integer quantity) {
+    public LineInformation(String action, String fruit, Integer quantity) {
         this.quantity = quantity;
-        this.dailyAction = dailyAction;
+        this.action = action;
         this.fruitName = fruit;
     }
 
@@ -19,12 +19,12 @@ public class LineInformation {
         this.quantity = quantity;
     }
 
-    public String getDailyAction() {
-        return dailyAction;
+    public String getAction() {
+        return action;
     }
 
-    public void setDailyAction(String dailyAction) {
-        this.dailyAction = dailyAction;
+    public void setAction(String action) {
+        this.action = action;
     }
 
     public String getFruitName() {
