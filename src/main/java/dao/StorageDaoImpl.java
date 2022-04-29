@@ -20,3 +20,4 @@ public class StorageDaoImpl implements StorageDao {
     public Set<Map.Entry<Fruit, Integer>> getAll() {
         return Storage.storage.entrySet();
     }
+}
