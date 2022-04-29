@@ -5,7 +5,6 @@ import db.impl.FileWriterImpl;
 import db.impl.ParserImpl;
 import db.impl.ReportMakerImpl;
 import java.util.List;
-import java.util.Map;
 import model.FruitTransaction;
 import storege.Storege;
 import strategy.OperationHandler;
@@ -19,11 +18,9 @@ public class Main {
         FileReaderImpl fileReader = new FileReaderImpl();
         List<String> data = fileReader.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> fruitTransactions = new ParserImpl().parse(data);
-        Map<String, OperationHandler> handlerMap = Strategy.buildMap();
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             Strategy strategy = new Strategy();
-            OperationHandler operationHandler = strategy.get(fruitTransaction.getOperation(),
-                    handlerMap);
+            OperationHandler operationHandler = strategy.get(fruitTransaction.getOperation());
             operationHandler.apply(fruitTransaction.getFruit(),
                     fruitTransaction.getQuantity());
         }
