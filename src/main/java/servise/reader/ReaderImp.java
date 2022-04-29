@@ -1,4 +1,4 @@
-package servise.readfromfile;
+package servise.reader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,15 +8,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFromFileImpl implements ReadFromFile {
+public class ReaderImp implements Reader {
     @Override
-    public List<String> readFromFile(Path path) {
+    public List<String> readFromFile(String path) {
         List<String> list = new ArrayList<>();
-        File file = new File(String.valueOf(path));
-
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        File file = new File(path);
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 list.add(line);
             }
         } catch (IOException e) {

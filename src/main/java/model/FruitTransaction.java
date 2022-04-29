@@ -3,14 +3,11 @@ package model;
 import java.util.Objects;
 
 public class FruitTransaction {
-    private String operation;
-    private String fruit;
-    private int quantity;
+    private final String operation;
+    private final Fruit fruit;
+    private final int quantity;
 
-    public FruitTransaction() {
-    }
-
-    public FruitTransaction(String operation, String fruit, int quantity) {
+    public FruitTransaction(String operation, Fruit fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -20,20 +17,12 @@ public class FruitTransaction {
         return operation;
     }
 
-    public String getFruit() {
+    public Fruit getFruit() {
         return fruit;
-    }
-
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
     }
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     @Override
@@ -62,16 +51,5 @@ public class FruitTransaction {
         result = 31 * result + (fruit != null ? fruit.hashCode() : 0);
         result = 31 * result + quantity;
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "FruitTransaction{"
-                + "operation="
-                + operation + ", fruit='"
-                + fruit + '\''
-                + ", quantity="
-                + quantity
-                + '}';
     }
 }

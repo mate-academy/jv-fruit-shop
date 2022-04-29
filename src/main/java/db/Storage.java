@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Map;
 
 public class Storage {
-    public static final Map<String, Integer> map = new HashMap<>();
+    public static final Map<Fruit, Integer> map = new HashMap<>();
 }

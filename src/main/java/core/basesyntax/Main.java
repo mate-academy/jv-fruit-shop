@@ -1,37 +1,33 @@
 package core.basesyntax;
 
 import model.FruitTransaction;
-//import servise.calculate.CalculateFruits;
-//import servise.calculate.CalculateFruitsImp;
-import servise.convertobject.ConvertToObject;
-import servise.convertobject.ConvertToObjectImp;
-import servise.readfromfile.ReadFromFile;
-import servise.readfromfile.ReadFromFileImpl;
+import servise.converter.Converter;
+import servise.converter.ConverterImp;
+import servise.reader.Reader;
+import servise.reader.ReaderImp;
 import servise.report.Report;
 import servise.report.ReportImp;
-import servise.writefromfile.WriteToFile;
-import servise.writefromfile.WriteToFileImp;
-import strategy.*;
-
-import java.nio.file.Path;
+import servise.writer.Writer;
+import servise.writer.WriterImp;
+import strategy.BalanceOperationHandler;
+import strategy.OperationHandler;
+import strategy.PurchaseOperationHandler;
+import strategy.ReturnOperationHandler;
+import strategy.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
+        String path = "src\\main\\resources\\inputData.csv";
+        String pathReport = "src\\main\\resources\\report.csv";
 
-        Path path = Path.of("src\\main\\resources\\inputData.csv");
-        Path pathReport = Path.of("src\\main\\resources\\report.csv");
-
-        ReadFromFile readFromFile = new ReadFromFileImpl();
+        Reader readFromFile = new ReaderImp();
         List<String> inputFromFile = readFromFile.readFromFile(path);
 
-//        Map<String, OperationHandler> handlerMap = new HashMap<>();
-//        handlerMap.put("b", new BalanceOperationHandler());
-
-        ConvertToObject convertToObject = new ConvertToObjectImp();
-        List<FruitTransaction> fruitTransactions = convertToObject.convertToObject(inputFromFile);
+        Converter convertToObject = new ConverterImp();
+        List<FruitTransaction> fruitTransactions = convertToObject.convert(inputFromFile);
 
         Map<String, OperationHandler> map = new HashMap<>();
         map.put("b", new BalanceOperationHandler());
@@ -47,7 +43,7 @@ public class Main {
         Report report = new ReportImp();
         String reportString = report.report();
 
-        WriteToFile writeToFile = new WriteToFileImp();
+        Writer writeToFile = new WriterImp();
         writeToFile.writeToFile(pathReport, reportString);
     }
 }
