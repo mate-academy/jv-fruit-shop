@@ -21,7 +21,6 @@ public class ReportServiceImpl implements ReportService {
                     .append(",")
                     .append(entry.getValue())
                     .append(System.lineSeparator());
-            return reportBuilder.toString();
         }
         return reportBuilder.toString();
     }
