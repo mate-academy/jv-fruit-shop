@@ -2,7 +2,7 @@ package service.impl;
 
 import java.util.stream.Collectors;
 import service.OutputService;
-import storage.Storage;
+import db.Storage;
 
 public class OutputServiceImpl implements OutputService {
     private static final String FORMAT = "fruit,quantity";
