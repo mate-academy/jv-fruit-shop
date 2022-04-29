@@ -5,18 +5,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Strategy {
-    private final StorageDao fruitStorageDao;
+    private final StorageDao dao;
 
-    public Strategy(StorageDao fruitStorageDao) {
-        this.fruitStorageDao = fruitStorageDao;
+    public Strategy(StorageDao dao) {
+        this.dao = dao;
     }
 
     public Map<String, OperationHandler> getMap() {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put("r", new SupplyHandlerImpl(fruitStorageDao));
-        operationHandlerMap.put("p", new PurchaseHandlerImpl(fruitStorageDao));
-        operationHandlerMap.put("b", new BalanceHandler(fruitStorageDao));
-        operationHandlerMap.put("s", new ReturnHandlerImpl(fruitStorageDao));
+        operationHandlerMap.put("r", new SupplyHandlerImpl(dao));
+        operationHandlerMap.put("p", new PurchaseHandlerImpl(dao));
+        operationHandlerMap.put("b", new BalanceHandler(dao));
+        operationHandlerMap.put("s", new ReturnHandlerImpl(dao));
         return operationHandlerMap;
     }
 

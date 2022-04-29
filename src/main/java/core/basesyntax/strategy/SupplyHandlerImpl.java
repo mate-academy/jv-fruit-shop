@@ -5,18 +5,18 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
 
 public class SupplyHandlerImpl implements OperationHandler {
-    private final StorageDao fruitStorageDao;
+    private final StorageDao dao;
 
-    public SupplyHandlerImpl(StorageDao fruitStorageDao) {
-        this.fruitStorageDao = fruitStorageDao;
+    public SupplyHandlerImpl(StorageDao dao) {
+        this.dao = dao;
     }
 
     @Override
     public void apply(Fruit fruit, int quantity) {
         if (!Storage.storage.containsKey(fruit)) {
-            fruitStorageDao.add(fruit, quantity);
+            dao.add(fruit, quantity);
         } else {
-            fruitStorageDao.supply(fruit, quantity);
+            dao.supply(fruit, quantity);
         }
     }
 }

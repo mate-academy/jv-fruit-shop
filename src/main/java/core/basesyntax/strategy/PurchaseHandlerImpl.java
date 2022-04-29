@@ -6,10 +6,10 @@ import core.basesyntax.storage.Storage;
 
 public class PurchaseHandlerImpl implements OperationHandler {
 
-    private final StorageDao fruitStorageDao;
+    private final StorageDao dao;
 
-    public PurchaseHandlerImpl(StorageDao fruitStorageDao) {
-        this.fruitStorageDao = fruitStorageDao;
+    public PurchaseHandlerImpl(StorageDao dao) {
+        this.dao = dao;
     }
 
     @Override
@@ -17,6 +17,6 @@ public class PurchaseHandlerImpl implements OperationHandler {
         if (Storage.storage.get(fruit) - quantity < 0) {
             throw new RuntimeException("There are no products...");
         }
-        fruitStorageDao.take(fruit, quantity);
+        dao.take(fruit, quantity);
     }
 }
