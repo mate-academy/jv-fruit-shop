@@ -4,25 +4,26 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.operation.Operation;
-import core.basesyntax.service.GetDataFromListOfActivityImpl;
-import core.basesyntax.service.GetListOfActivity;
-import core.basesyntax.service.GetListOfActivityImpl;
+import core.basesyntax.service.DataLineServiceImpl;
+import core.basesyntax.service.SeparateOperationService;
+import core.basesyntax.service.SeparateOperationServiceImpl;
 import java.util.List;
 
-public class SupplyOperationHandler implements OperationHandler {
+public class SupplyHandler implements OperationHandler {
     private FruitDao fruitDao;
 
-    public SupplyOperationHandler(FruitDao fruitDao) {
+    public SupplyHandler(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
     @Override
     public void activity(List<String> inputData) {
-        GetListOfActivity supplyListOfActivity = new GetListOfActivityImpl();
-        List<String> supplyList = supplyListOfActivity.getListOfActivity(inputData, Operation.SUPPLY);
+        SeparateOperationService supplyListOfActivity = new SeparateOperationServiceImpl();
+        List<String> supplyList = supplyListOfActivity
+                .getListOfActivity(inputData, Operation.SUPPLY);
         for (String string : supplyList) {
-            String fruitName = new GetDataFromListOfActivityImpl().getFruitName(string);
-            int fruitAmount = new GetDataFromListOfActivityImpl().getFruitAmount(string);
+            String fruitName = new DataLineServiceImpl().getFruitName(string);
+            int fruitAmount = new DataLineServiceImpl().getFruitAmount(string);
             if (fruitDao.get(fruitName) != null) {
                 Fruit fruit = fruitDao.get(fruitName);
                 int newFruitAmount = fruit.getAmount() + fruitAmount;

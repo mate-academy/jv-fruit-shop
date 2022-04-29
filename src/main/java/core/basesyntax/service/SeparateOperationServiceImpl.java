@@ -1,11 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.operation.Operation;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GetListOfActivityImpl implements GetListOfActivity {
+public class SeparateOperationServiceImpl implements SeparateOperationService {
     private static final int ACTIVITIES_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 2;
 

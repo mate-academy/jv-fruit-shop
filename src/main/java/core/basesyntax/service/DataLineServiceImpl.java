@@ -1,8 +1,6 @@
 package core.basesyntax.service;
 
-import java.util.List;
-
-public class GetDataFromListOfActivityImpl implements GetDataFromListOfActivity {
+public class DataLineServiceImpl implements DataLineService {
     private static final int FRUIT_INDEX = 0;
     private static final int AMOUNT_INDEX = 1;
 

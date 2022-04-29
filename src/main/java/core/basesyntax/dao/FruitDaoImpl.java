@@ -3,8 +3,6 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class FruitDaoImpl implements FruitDao {

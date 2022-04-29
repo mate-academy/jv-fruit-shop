@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
-
 import java.util.ArrayList;
 import java.util.List;
 
