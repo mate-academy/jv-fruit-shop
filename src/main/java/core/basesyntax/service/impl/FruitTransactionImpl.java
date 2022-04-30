@@ -17,8 +17,8 @@ public class FruitTransactionImpl implements FruitTransaction {
         this.strategyMap = strategyMap;
     }
 
-    public void doTransaction(List<String[]> dates) {
-        for (String[] strings : dates) {
+    public void doTransaction(List<String[]> lines) {
+        for (String[] strings : lines) {
             Operation operation = Arrays.stream(Operation.values())
                     .filter(o -> o.operation.equals(strings[INDEX_OPERATION]))
                     .findFirst().get();

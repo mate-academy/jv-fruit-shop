@@ -12,13 +12,13 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public int getAmount(String key) {
-        return Storage.fruits.get(key);
+    public int getAmount(String fruit) {
+        return Storage.fruits.get(fruit);
     }
 
     @Override
-    public boolean isPresent(String key) {
-        return !Storage.fruits.containsKey(key);
+    public boolean isPresent(String fruit) {
+        return !Storage.fruits.containsKey(fruit);
     }
 
     @Override

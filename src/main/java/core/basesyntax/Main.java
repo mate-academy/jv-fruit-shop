@@ -2,16 +2,16 @@ package core.basesyntax;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.impl.StorageDaoImpl;
-import core.basesyntax.service.GeneratorReportService;
-import core.basesyntax.service.ParserDataService;
-import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.WriterService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.LineParserService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.FileReaderFileServiceImpl;
+import core.basesyntax.service.impl.FileWriterFileServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionImpl;
 import core.basesyntax.service.impl.FruitTransactionImpl.Operation;
-import core.basesyntax.service.impl.GeneratorReportServiceImpl;
-import core.basesyntax.service.impl.ParserDataServiceImpl;
-import core.basesyntax.service.impl.ReaderFileServiceImpl;
-import core.basesyntax.service.impl.WriterFileServiceImpl;
+import core.basesyntax.service.impl.LineParserServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.FruitOperation;
 import core.basesyntax.strategy.imp.BalanceFruitOperation;
 import core.basesyntax.strategy.imp.PurchaseFruitOperation;
@@ -31,14 +31,15 @@ public class Main {
         transactionMap.put(Operation.PURCHASE, new PurchaseFruitOperation(storageDao));
         transactionMap.put(Operation.RETURN, new ReturnFruitOperation(storageDao));
         transactionMap.put(Operation.SUPPLY, new SupplyFruitOperation(storageDao));
-        ReaderService readerService = new ReaderFileServiceImpl();
-        ParserDataService parserDataService = new ParserDataServiceImpl();
+        FileReaderService fileReaderService = new FileReaderFileServiceImpl();
+        LineParserService lineParserService = new LineParserServiceImpl();
         FruitTransactionImpl fruitTransactionImpl = new FruitTransactionImpl(transactionMap);
         fruitTransactionImpl
-                .doTransaction(parserDataService.parseDate(readerService.read(FILE_PATH_INITIAL)));
-        GeneratorReportService generatorReportService = new GeneratorReportServiceImpl(storageDao);
-        String report = generatorReportService.createReport();
-        WriterService writerService = new WriterFileServiceImpl();
-        writerService.write(FILE_PATH_RESULT, report);
+                .doTransaction(lineParserService.parseDate(
+                        fileReaderService.read(FILE_PATH_INITIAL)));
+        ReportService reportService = new ReportServiceImpl(storageDao);
+        String report = reportService.createReport();
+        FileWriterService fileWriterService = new FileWriterFileServiceImpl();
+        fileWriterService.write(FILE_PATH_RESULT, report);
     }
 }

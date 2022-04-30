@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.service.GeneratorReportService;
+import core.basesyntax.service.ReportService;
 import java.util.List;
 
-public class GeneratorReportServiceImpl implements GeneratorReportService {
+public class ReportServiceImpl implements ReportService {
     private final StorageDao storageDao;
 
-    public GeneratorReportServiceImpl(StorageDao storageDao) {
+    public ReportServiceImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
