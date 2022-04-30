@@ -3,13 +3,13 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.ParserDataService;
+import core.basesyntax.service.FruitTransactionParser;
+import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.service.impl.ParserDataServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import java.util.List;
 
@@ -19,13 +19,13 @@ public class ShopApp {
 
     public static void main(String[] args) {
         FileReaderService read = new FileReaderServiceImpl();
-        List<String> listWithFile = read.readWithFile(FILE_NAME);
+        List<String> listWithFile = read.readFromFile(FILE_NAME);
 
-        ParserDataService parseData = new ParserDataServiceImpl();
-        List<FruitTransaction> fruitTransactions = parseData.parsedWithFile(listWithFile);
+        FruitTransactionParser parseData = new FruitTransactionParserImpl();
+        List<FruitTransaction> fruitTransactions = parseData.parse(listWithFile);
 
-        FruitService fruitService = new FruitServiceImpl();
-        fruitService.fruitTransaction(fruitTransactions);
+        FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
+        fruitTransactionService.process(fruitTransactions);
 
         ReportService createReport = new ReportServiceImpl();
         List<String> resultReport = createReport.generatedReport();

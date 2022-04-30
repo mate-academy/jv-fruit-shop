@@ -7,14 +7,14 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
-    public List<String> readWithFile(String fileName) {
+    public List<String> readFromFile(String fileName) {
         File file = new File(fileName);
-        List<String> stringList = null;
+        List<String> lines = null;
         try {
-            stringList = Files.readAllLines(file.toPath());
+            lines = Files.readAllLines(file.toPath());
         } catch (IOException e) {
             throw new RuntimeException("File does not exist: " + fileName, e);
         }
-        return stringList;
+        return lines;
     }
 }

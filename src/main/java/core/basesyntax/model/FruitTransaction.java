@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import core.basesyntax.service.Operation;
-
 public class FruitTransaction {
     private Operation operation;
     private Fruit fruit;
@@ -33,5 +31,31 @@ public class FruitTransaction {
                 + "operation='" + operation + '\''
                 + ", fruit=" + fruit
                 + '}';
+    }
+
+    public enum Operation {
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private String operation;
+
+        Operation(String operation) {
+            this.operation = operation;
+        }
+
+        public String getOperation() {
+            return operation;
+        }
+
+        public Operation getOperationFromString(String stringOperation) {
+            for (Operation operation : Operation.values()) {
+                if (stringOperation.equals(operation.getOperation())) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("Can`t operation" + stringOperation);
+        }
     }
 }
