@@ -15,7 +15,7 @@ public class ParserServiceImpl implements ParserService {
         Transaction transaction = new Transaction();
         String[] split = line.split(SPLITTER);
         transaction.setOperation(split[OPERATION]);
-        transaction.setProduct(new Fruit(split[PRODUCT]));
+        transaction.setFruit(new Fruit(split[PRODUCT]));
         transaction.setQuantity(Integer.parseInt(split[QUANTITY]));
         return transaction;
     }

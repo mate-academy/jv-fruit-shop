@@ -1,14 +1,14 @@
 package model;
 
 public final class Fruit {
-    private final String nameOfFruit;
+    private final String name;
 
-    public Fruit(String nameOfFruit) {
-        this.nameOfFruit = nameOfFruit;
+    public Fruit(String name) {
+        this.name = name;
     }
 
-    public String getNameOfFruit() {
-        return nameOfFruit;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -22,16 +22,16 @@ public final class Fruit {
 
         Fruit fruit = (Fruit) o;
 
-        return nameOfFruit.equals(fruit.nameOfFruit);
+        return name.equals(fruit.name);
     }
 
     @Override
     public int hashCode() {
-        return nameOfFruit.hashCode();
+        return name.hashCode();
     }
 
     @Override
     public String toString() {
-        return nameOfFruit;
+        return name;
     }
 }

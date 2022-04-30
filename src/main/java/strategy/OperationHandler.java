@@ -3,5 +3,5 @@ package strategy;
 import model.Fruit;
 
 public interface OperationHandler {
-    public void operation(Fruit fruit, Integer quantity);
+    public void process(Fruit fruit, Integer quantity);
 }

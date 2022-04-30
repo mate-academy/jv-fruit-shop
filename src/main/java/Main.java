@@ -34,7 +34,7 @@ public class Main {
         for (String string : readData) {
             Transaction transaction = parserService.parse(string);
             OperationHandler operationHandler = handlersMap.get(transaction.getOperation());
-            operationHandler.operation(transaction.getProduct(), transaction.getQuantity());
+            operationHandler.process(transaction.getFruit(), transaction.getQuantity());
         }
 
         OutputService outputService = new OutputServiceImpl();

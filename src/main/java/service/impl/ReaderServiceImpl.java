@@ -9,16 +9,16 @@ import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
     @Override
-    public List<String> read(String fileName) {
+    public List<String> read(String filePath) {
         List<String> result = new ArrayList<>();
-        try (BufferedReader csvReader = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(filePath))) {
             csvReader.readLine();
             String row;
             while ((row = csvReader.readLine()) != null) {
                 result.add(row);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Unable to read file");
+            throw new RuntimeException("File not found at " + filePath, e);
         }
         return result;
     }

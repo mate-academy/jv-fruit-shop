@@ -5,10 +5,10 @@ import model.Fruit;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public void operation(Fruit fruit, Integer quantity) {
+    public void process(Fruit fruit, Integer quantity) {
         Integer initialQuantity = Storage.STORAGE.get(fruit);
         if (Storage.STORAGE.get(fruit) == null) {
-            throw new RuntimeException("Null");
+            throw new RuntimeException("No such product: " + fruit);
         }
         if (Storage.STORAGE.get(fruit) - quantity < 0) {
             throw new RuntimeException("Not enough of " + fruit + "'s");

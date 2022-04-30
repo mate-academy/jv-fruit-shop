@@ -13,11 +13,11 @@ public class Transaction {
         this.operation = operation;
     }
 
-    public Fruit getProduct() {
+    public Fruit getFruit() {
         return fruit;
     }
 
-    public void setProduct(Fruit fruit) {
+    public void setFruit(Fruit fruit) {
         this.fruit = fruit;
     }
 
@@ -27,22 +27,5 @@ public class Transaction {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private String operation;
-
-        Operation(String operation) {
-            this.operation = operation;
-        }
-
-        public String getOperation() {
-            return operation;
-        }
     }
 }

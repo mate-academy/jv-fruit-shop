@@ -5,7 +5,7 @@ import model.Fruit;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public void operation(Fruit fruit, Integer quantity) {
+    public void process(Fruit fruit, Integer quantity) {
         Integer initialQuantity = Storage.STORAGE.get(fruit);
         Storage.STORAGE.put(fruit,
                 initialQuantity == null
