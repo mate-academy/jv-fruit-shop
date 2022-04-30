@@ -1,7 +1,7 @@
 package core.basesyntax.service.activity;
 
-import java.util.List;
+import core.basesyntax.model.Fruit;
 
 public interface OperationHandler {
-    void activity(List<String> inputData);
+    void handle(Fruit fruit);
 }

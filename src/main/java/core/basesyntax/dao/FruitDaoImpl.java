@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void add(Fruit fruit) {
+    public void addFruit(Fruit fruit) {
         Storage.fruits.add(fruit);
     }
 
@@ -27,10 +27,20 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void addNew(String fruitName, int amount) {
-        Fruit fruit = new Fruit();
-        fruit.setName(fruitName);
-        fruit.setAmount(amount);
-        add(fruit);
+    public void addAmount(Fruit fruit) {
+        Storage.fruits.stream()
+                .filter(f -> f.getName().equals(fruit.getName()))
+                .findFirst()
+                .get()
+                .setAmount(get(fruit.getName()).getAmount() + fruit.getAmount());
+    }
+
+    @Override
+    public void subAmount(Fruit fruit) {
+        Storage.fruits.stream()
+                .filter(f -> f.getName().equals(fruit.getName()))
+                .findFirst()
+                .get()
+                .setAmount(get(fruit.getName()).getAmount() - fruit.getAmount());
     }
 }

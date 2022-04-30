@@ -5,7 +5,7 @@ import core.basesyntax.service.activity.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<Operation, OperationHandler> activityServiceMap;
+    private final Map<Operation, OperationHandler> activityServiceMap;
 
     public OperationStrategyImpl(Map<Operation, OperationHandler> activityServiceMap) {
         this.activityServiceMap = activityServiceMap;

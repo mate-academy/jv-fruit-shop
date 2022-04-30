@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void writeToFile(List<String> lines, String toFileName) {
+    public void writeToFile(String toFileName, List<String> lines) {
         try {
             Path path = Paths.get(toFileName);
             Files.deleteIfExists(path);
