@@ -22,7 +22,7 @@ public class Main {
         StrategyService strategyService = new StrategyServiceImpl(strategyMap);
         FruitService fruitService = new FruitServiceImpl(strategyService);
 
-        fruitService.read("src//main//resources//before.csv");
-        fruitService.write("src//main//resources//after.csv");
+        fruitService.getData("src//main//resources//before.csv");
+        fruitService.saveReport("src//main//resources//after.csv");
     }
 }

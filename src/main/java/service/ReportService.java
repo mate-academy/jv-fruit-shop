@@ -5,5 +5,5 @@ import model.FruitTransaction;
 import strategy.StrategyService;
 
 public interface ReportService {
-    String doReport(List<FruitTransaction> transactions, StrategyService strategyService);
+    String generateReport(List<FruitTransaction> transactions, StrategyService strategyService);
 }

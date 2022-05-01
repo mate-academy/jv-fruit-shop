@@ -2,7 +2,10 @@ package service.impl;
 
 import dao.DatabaseDao;
 import dao.DatabaseDaoImpl;
+import java.util.List;
+import model.FruitTransaction;
 import service.FruitService;
+import service.ParseService;
 import service.ReaderService;
 import service.ReportService;
 import service.WriterService;
@@ -14,22 +17,25 @@ public class FruitServiceImpl implements FruitService {
     private final ReaderService readerService = new ReaderServiceImpl();
     private final ReportService reportService = new ReportServiceImpl();
     private final WriterService writerService = new WriterServiceImpl();
+    private final ParseService parseService = new ParseServiceImpl();
 
     public FruitServiceImpl(StrategyService strategyService) {
         this.strategyService = strategyService;
     }
 
     @Override
-    public void read(String path) {
-        readerService.read(path);
+    public void getData(String path) {
+        List<String> readData = readerService.read(path);
+        List<FruitTransaction> parsedTransactions = parseService.parse(readData);
+        dao.addAllTransaction(parsedTransactions);
     }
 
     @Override
-    public void write(String path) {
-        writerService.write(path, doReport());
+    public void saveReport(String path) {
+        writerService.write(path, getReport());
     }
 
-    private String doReport() {
-        return reportService.doReport(dao.getFruitTransaction(), strategyService);
+    private String getReport() {
+        return reportService.generateReport(dao.getFruitTransaction(), strategyService);
     }
 }

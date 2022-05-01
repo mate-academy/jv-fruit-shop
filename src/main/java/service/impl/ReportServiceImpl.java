@@ -12,7 +12,8 @@ public class ReportServiceImpl implements ReportService {
     private static final String NEXT_LINE = "\n";
 
     @Override
-    public String doReport(List<FruitTransaction> transactions, StrategyService strategyService) {
+    public String generateReport(List<FruitTransaction> transactions,
+                                 StrategyService strategyService) {
         Map<String, Integer> reportDataMap = new HashMap<>();
         StringBuilder reportResult = new StringBuilder();
         for (FruitTransaction transaction : transactions) {

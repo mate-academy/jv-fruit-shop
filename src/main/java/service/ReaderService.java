@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 public interface ReaderService {
-    void read(String path);
+    List<String> read(String path);
 }

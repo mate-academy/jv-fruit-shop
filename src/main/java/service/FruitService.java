@@ -1,7 +1,7 @@
 package service;
 
 public interface FruitService {
-    void read(String path);
+    void getData(String path);
 
-    void write(String path);
+    void saveReport(String path);
 }
