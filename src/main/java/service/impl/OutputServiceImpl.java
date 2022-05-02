@@ -9,8 +9,8 @@ public class OutputServiceImpl implements OutputService {
 
     @Override
     public String getOutput() {
-        return FORMAT + System.lineSeparator() + Storage.STORAGE.keySet().stream()
-                .map(key -> key + "," + Storage.STORAGE.get(key))
+        return FORMAT + System.lineSeparator() + Storage.storage.keySet().stream()
+                .map(key -> key + "," + Storage.storage.get(key))
                 .collect(Collectors.joining(System.lineSeparator()));
 
     }

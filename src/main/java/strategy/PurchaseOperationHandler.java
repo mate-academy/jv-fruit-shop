@@ -6,13 +6,13 @@ import model.Fruit;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void process(Fruit fruit, Integer quantity) {
-        Integer initialQuantity = Storage.STORAGE.get(fruit);
-        if (Storage.STORAGE.get(fruit) == null) {
+        Integer initialQuantity = Storage.storage.get(fruit);
+        if (Storage.storage.get(fruit) == null) {
             throw new RuntimeException("No such product: " + fruit);
         }
-        if (Storage.STORAGE.get(fruit) - quantity < 0) {
+        if (Storage.storage.get(fruit) - quantity < 0) {
             throw new RuntimeException("Not enough of " + fruit + "'s");
         }
-        Storage.STORAGE.put(fruit, initialQuantity - quantity);
+        Storage.storage.put(fruit, initialQuantity - quantity);
     }
 }

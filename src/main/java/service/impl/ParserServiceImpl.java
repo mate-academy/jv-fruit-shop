@@ -13,10 +13,10 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public Transaction parse(String line) {
         Transaction transaction = new Transaction();
-        String[] split = line.split(SPLITTER);
-        transaction.setOperation(split[OPERATION]);
-        transaction.setFruit(new Fruit(split[PRODUCT]));
-        transaction.setQuantity(Integer.parseInt(split[QUANTITY]));
+        String[] splitData = line.split(SPLITTER);
+        transaction.setOperation(splitData[OPERATION]);
+        transaction.setFruit(new Fruit(splitData[PRODUCT]));
+        transaction.setQuantity(Integer.parseInt(splitData[QUANTITY]));
         return transaction;
     }
 }
