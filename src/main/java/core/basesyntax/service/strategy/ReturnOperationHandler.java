@@ -8,10 +8,9 @@ public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public boolean operate(LineInformation lineInformation) {
-        Fruit fruit = new Fruit(lineInformation.getFruitName());
-        int quantity = lineInformation.getQuantity();
-        int storageQuantity = Storage.storage.get(fruit);
-        Storage.storage.put(fruit, storageQuantity + quantity);
+        Fruit fruit = new Fruit(lineInformation.getFruit().toString());
+        int amount = lineInformation.getQuantity();
+        Storage.storage.put(fruit, Storage.storage.get(fruit) + amount);
         return true;
     }
 }

@@ -2,13 +2,13 @@ package core.basesyntax.model;
 
 public class LineInformation {
     private Integer quantity;
-    private String action;
-    private String fruitName;
+    private String operation;
+    private Fruit fruit;
 
-    public LineInformation(String action, String fruit, Integer quantity) {
+    public LineInformation(String action, Fruit fruit, Integer quantity) {
         this.quantity = quantity;
-        this.action = action;
-        this.fruitName = fruit;
+        this.operation = action;
+        this.fruit = fruit;
     }
 
     public int getQuantity() {
@@ -19,19 +19,19 @@ public class LineInformation {
         this.quantity = quantity;
     }
 
-    public String getAction() {
-        return action;
+    public String getOperation() {
+        return operation;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
 
-    public String getFruitName() {
-        return fruitName;
+    public Fruit getFruit() {
+        return fruit;
     }
 
-    public void setFruitName(String fruitName) {
-        this.fruitName = fruitName;
+    public void setFruit(Fruit fruit) {
+        this.fruit = fruit;
     }
 }

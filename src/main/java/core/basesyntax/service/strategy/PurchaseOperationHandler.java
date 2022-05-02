@@ -8,13 +8,12 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public boolean operate(LineInformation lineInformation) {
-        Fruit fruit = new Fruit(lineInformation.getFruitName());
-        int quantity = lineInformation.getQuantity();
-        int storageQuantity = Storage.storage.get(fruit);
-        if (quantity > storageQuantity) {
-            return false;
+        Fruit fruit = new Fruit(lineInformation.getFruit().toString());
+        int amount = lineInformation.getQuantity();
+        if (amount > Storage.storage.get(fruit)) {
+            throw new RuntimeException("Sorry, we are out of " + lineInformation.getFruit());
         }
-        Storage.storage.put(fruit, storageQuantity - quantity);
+        Storage.storage.put(fruit, Storage.storage.get(fruit) - amount);
         return true;
     }
 }

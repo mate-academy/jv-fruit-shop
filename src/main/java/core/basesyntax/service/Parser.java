@@ -4,5 +4,5 @@ import core.basesyntax.model.LineInformation;
 import java.util.List;
 
 public interface Parser {
-    List<LineInformation> parse(List<String> list);
+    List<LineInformation> parse(List<String> sourceData);
 }

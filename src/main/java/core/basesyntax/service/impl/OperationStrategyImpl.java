@@ -13,8 +13,8 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public OperationHandler get(LineInformation lineInformation) {
-        String operationType = lineInformation.getAction();
-        return operationHandlerMap.get(operationType.strip());
+    public OperationHandler get(LineInformation operation) {
+        String operationType = operation.getOperation();
+        return operationHandlerMap.get(operationType);
     }
 }

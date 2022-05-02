@@ -29,4 +29,9 @@ public class Fruit {
     public int hashCode() {
         return Objects.hash(fruitName);
     }
+
+    @Override
+    public String toString() {
+        return fruitName;
+    }
 }
