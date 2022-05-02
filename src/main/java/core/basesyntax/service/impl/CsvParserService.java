@@ -31,7 +31,6 @@ public class CsvParserService implements ParserService {
 
     private FruitTransaction initializeTransaction(String record) {
         String[] data = record.split(SPLITERATOR);
-        FruitTransaction transaction = new FruitTransaction();
         FruitTransaction.Operation operation =
                 FruitTransaction.Operation.getOperationByAlias(data[OPERATION_INDEX]);
         Fruit fruit = new Fruit(data[FRUIT_INDEX]);

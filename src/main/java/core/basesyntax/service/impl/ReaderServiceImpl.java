@@ -17,7 +17,7 @@ public class ReaderServiceImpl implements ReaderService {
         try {
             lines = Files.readAllLines(path);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file");
+            throw new RuntimeException("Can't read from file " + readPath);
         }
         return lines;
     }
