@@ -9,9 +9,8 @@ public class ReportWriterImpl implements ReportWriter {
 
     @Override
     public boolean writeReport(String report, String filePath) {
-        Path path = Paths.get(filePath);
         try {
-            Files.writeString(path, report);
+            Files.writeString(Paths.get(filePath), report);
         } catch (IOException e) {
             throw new RuntimeException("Can`t write to file in ReportWriter", e);
         }

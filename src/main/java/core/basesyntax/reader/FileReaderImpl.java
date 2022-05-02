@@ -9,9 +9,8 @@ import java.util.List;
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String fileName) {
-        Path path = Paths.get(fileName);
         try {
-            return Files.readAllLines(path);
+            return Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can`t read from file in FileReaderImpl" + e);
         }
