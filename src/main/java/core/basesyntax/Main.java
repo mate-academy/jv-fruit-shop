@@ -8,8 +8,8 @@ import servise.converter.Converter;
 import servise.converter.ConverterImp;
 import servise.reader.Reader;
 import servise.reader.ReaderImp;
-import servise.report.Report;
-import servise.report.ReportImp;
+import servise.reporter.Reporter;
+import servise.reporter.ReporterImp;
 import servise.writer.Writer;
 import servise.writer.WriterImp;
 import strategy.BalanceOperationHandler;
@@ -20,8 +20,8 @@ import strategy.SupplyOperationHandler;
 
 public class Main {
     public static void main(String[] args) {
-        final String path = "src\\main\\resources\\inputData.csv";
-        final String pathReport = "src\\main\\resources\\report.csv";
+        final String path = "src/main/resources/inputData.csv";
+        final String pathReport = "src/main/resources/report.csv";
 
         Reader readFromFile = new ReaderImp();
         List<String> inputFromFile = readFromFile.readFromFile(path);
@@ -40,7 +40,7 @@ public class Main {
             handler.process(fruits);
         }
 
-        Report report = new ReportImp();
+        Reporter report = new ReporterImp();
         String reportString = report.report();
 
         Writer writeToFile = new WriterImp();
