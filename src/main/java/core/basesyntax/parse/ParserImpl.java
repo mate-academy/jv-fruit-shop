@@ -1,5 +1,6 @@
 package core.basesyntax.parse;
 
+import core.basesyntax.models.Fruit;
 import core.basesyntax.models.Transaction;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +12,11 @@ public class ParserImpl implements Parser {
             if (string.charAt(1) != ',') {
                 continue;
             }
-            String type = string.substring(0, string.indexOf(','));
-            string = string.substring(string.indexOf(',') + 1);
-            String name = string.substring(0, string.indexOf(','));
-            string = string.substring(string.indexOf(',') + 1);
-            Integer amount = Integer.parseInt(string);
-            transactionsList.add(new Transaction(type, name, amount));
+            String[] stringsFromInput = string.split(",");
+            String type = stringsFromInput[0];
+            String name = stringsFromInput[1];
+            Integer amount = Integer.parseInt(stringsFromInput[2]);
+            transactionsList.add(new Transaction(type, new Fruit(name), amount));
         }
         return transactionsList;
     }

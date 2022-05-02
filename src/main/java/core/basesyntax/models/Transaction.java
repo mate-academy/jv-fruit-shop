@@ -2,12 +2,12 @@ package core.basesyntax.models;
 
 public final class Transaction {
     private final String type;
-    private final String name;
+    private final Fruit fruit;
     private final Integer quantity;
 
-    public Transaction(String type, String name, Integer quantity) {
+    public Transaction(String type, Fruit fruit, Integer quantity) {
         this.type = type;
-        this.name = name;
+        this.fruit = fruit;
         this.quantity = quantity;
     }
 
@@ -15,8 +15,8 @@ public final class Transaction {
         return type;
     }
 
-    public String getName() {
-        return name;
+    public Fruit getFruit() {
+        return fruit;
     }
 
     public Integer getQuantity() {

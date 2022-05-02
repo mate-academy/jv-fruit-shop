@@ -12,10 +12,7 @@ import core.basesyntax.writer.ReportWriter;
 import core.basesyntax.writer.ReportWriterImpl;
 import java.util.List;
 
-/**
- * Feel free to remove this class and create your own.
- */
-public class HelloWorld {
+public class Main {
     private static final String PATH_FROM = "src/main/resources/inputData.csv";
     private static final String PATH_TO = "src/main/resources/outputData.csv";
 

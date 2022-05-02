@@ -1,18 +1,20 @@
 package core.basesyntax.writer;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class ReportWriterImpl implements ReportWriter {
 
     @Override
     public boolean writeReport(String report, String filePath) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath, true))) {
-            bufferedWriter.write(report);
-            return true;
+        Path path = Paths.get(filePath);
+        try {
+            Files.writeString(path, report);
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write to file in ReportWriterImpl!", e);
+            throw new RuntimeException("Can`t write to file in ReportWriter", e);
         }
+        return true;
     }
 }

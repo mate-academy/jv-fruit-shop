@@ -9,7 +9,7 @@ public class PurchaseTransaction implements TransactionHandler {
 
     @Override
     public boolean handleTransaction(Transaction transaction) {
-        Fruit challenger = new Fruit(transaction.getName());
+        Fruit challenger = transaction.getFruit();
         if (storage.get(challenger) != null) {
             Integer newQuantity = storage.get(challenger) - transaction.getQuantity();
             storage.add(challenger, newQuantity);
