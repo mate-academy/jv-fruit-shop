@@ -9,7 +9,7 @@ public interface StorageDao {
 
     void remove(Fruit fruit, Integer quantity);
 
-    int getFruitQuantity(Fruit fruit);
+    int get(Fruit fruit);
 
     Set<Map.Entry<Fruit, Integer>> getAll();
 }

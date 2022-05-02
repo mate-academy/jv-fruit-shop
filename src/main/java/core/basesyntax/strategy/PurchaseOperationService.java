@@ -12,7 +12,7 @@ public class PurchaseOperationService implements OperationService {
 
     @Override
     public void process(FruitTransaction fruitTransaction) {
-        if (storageDao.getFruitQuantity(
+        if (storageDao.get(
                 fruitTransaction.getFruit()) < fruitTransaction.getQuantity()) {
             throw new RuntimeException("Not enough fruits in storage");
         }

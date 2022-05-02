@@ -24,9 +24,9 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/database.csv";
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
-    private static StorageDao storageDao = new StorageDaoImpl();
 
     public static void main(String[] args) {
+        StorageDao storageDao = new StorageDaoImpl();
         Map<FruitTransaction.Operation, OperationService> handlerMap = new HashMap<>();
         handlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationService(storageDao));

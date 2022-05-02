@@ -11,17 +11,17 @@ public class StorageDaoImpl implements StorageDao {
         if (Storage.fruitStorage.get(fruit) == null) {
             Storage.fruitStorage.put(fruit, quantity);
         } else {
-            Storage.fruitStorage.replace(fruit, getFruitQuantity(fruit) + quantity);
+            Storage.fruitStorage.replace(fruit, get(fruit) + quantity);
         }
     }
 
     @Override
     public void remove(Fruit fruit, Integer quantity) {
-        Storage.fruitStorage.replace(fruit, getFruitQuantity(fruit) - quantity);
+        Storage.fruitStorage.replace(fruit, get(fruit) - quantity);
     }
 
     @Override
-    public int getFruitQuantity(Fruit fruit) {
+    public int get(Fruit fruit) {
         return Storage.fruitStorage.get(fruit);
     }
 
