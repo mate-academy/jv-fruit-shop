@@ -2,7 +2,6 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.storage.Storage;
 
 public class SupplyHandlerImpl implements OperationHandler {
     private final StorageDao dao;
@@ -13,7 +12,7 @@ public class SupplyHandlerImpl implements OperationHandler {
 
     @Override
     public void apply(Fruit fruit, int quantity) {
-        if (!Storage.storage.containsKey(fruit)) {
+        if (!dao.contains(fruit)) {
             dao.add(fruit, quantity);
         } else {
             dao.supply(fruit, quantity);

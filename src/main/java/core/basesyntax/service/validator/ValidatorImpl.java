@@ -8,11 +8,12 @@ public class ValidatorImpl implements Validator {
     private static final String VALID_PATTERN = "[bspr],\\w+,\\d+";
 
     @Override
-    public void validate(List<String> data) {
+    public boolean validate(List<String> data) {
         for (String string : data) {
             if (!Pattern.matches(VALID_PATTERN, string) && !string.equals(COLUMNS)) {
                 throw new RuntimeException("Invalid input data");
             }
         }
+        return true;
     }
 }

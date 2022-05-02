@@ -17,11 +17,7 @@ public class Strategy {
         operationHandlerMap.put("s", new SupplyHandlerImpl(dao));
     }
 
-    public Map<String, OperationHandler> getMap() {
-        return operationHandlerMap;
-    }
-
     public OperationHandler get(String operation) {
-        return getMap().get(operation);
+        return operationHandlerMap.get(operation);
     }
 }

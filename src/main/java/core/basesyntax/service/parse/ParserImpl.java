@@ -15,7 +15,7 @@ public class ParserImpl implements Parser {
         List<FruitTransaction> fruitParsed = new ArrayList<>();
         data.stream()
                 .skip(1)
-                .map(t -> t.split(","))
+                .map(stringOfData -> stringOfData.split(","))
                 .forEach(t -> fruitParsed
                         .add(new FruitTransaction((t[OPERATION]), new Fruit(t[FRUIT]),
                                 Integer.parseInt(t[QUANTITY]))));

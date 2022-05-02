@@ -26,6 +26,10 @@ public class StorageDaoImpl implements StorageDao {
         return Storage.storage.containsKey(fruit);
     }
 
+    public Integer get(Fruit fruit) {
+        return Storage.storage.get(fruit);
+    }
+
     @Override
     public Set<Map.Entry<Fruit, Integer>> getAll() {
         return Storage.storage.entrySet();

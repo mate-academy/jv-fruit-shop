@@ -13,5 +13,7 @@ public interface StorageDao {
 
     boolean contains(Fruit fruit);
 
+    Integer get(Fruit fruit);
+
     Set<Map.Entry<Fruit, Integer>> getAll();
 }
