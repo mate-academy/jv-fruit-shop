@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ParserServiceImpl implements ParserService {
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     public ParserServiceImpl() {
     }
@@ -22,8 +25,8 @@ public class ParserServiceImpl implements ParserService {
 
     private FruitTransaction createTransactionFromLine(String line) {
         String[] data = line.split(",");
-        return new FruitTransaction(getOperationByValue(data[0]),
-                new Fruit(data[1]), Integer.parseInt(data[2]));
+        return new FruitTransaction(getOperationByValue(data[OPERATION_INDEX]),
+                new Fruit(data[FRUIT_INDEX]), Integer.parseInt(data[QUANTITY_INDEX]));
     }
 
     private FruitTransaction.Operation getOperationByValue(String value) {
