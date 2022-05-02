@@ -19,12 +19,13 @@ import strategy.ReturnOperationHandler;
 import strategy.SupplyOperationHandler;
 
 public class Main {
-    public static void main(String[] args) {
-        final String path = "src/main/resources/inputData.csv";
-        final String pathReport = "src/main/resources/report.csv";
+    private static final String PATH_INPUT_FILE = "src/main/resources/inputData.csv";
+    private static final String PATH_REPORT_FILE = "src/main/resources/report.csv";
+    private static OperationHandler handler;
 
+    public static void main(String[] args) {
         Reader readFromFile = new ReaderImp();
-        List<String> inputFromFile = readFromFile.readFromFile(path);
+        List<String> inputFromFile = readFromFile.readFromFile(PATH_INPUT_FILE);
 
         Converter convertToObject = new ConverterImp();
         final List<FruitTransaction> fruitTransactions = convertToObject.convert(inputFromFile);
@@ -36,7 +37,7 @@ public class Main {
         map.put("p", new PurchaseOperationHandler());
 
         for (FruitTransaction fruits: fruitTransactions) {
-            OperationHandler handler = map.get(fruits.getOperation());
+            handler = map.get(fruits.getOperation());
             handler.process(fruits);
         }
 
@@ -44,6 +45,6 @@ public class Main {
         String reportString = report.report();
 
         Writer writeToFile = new WriterImp();
-        writeToFile.writeToFile(pathReport, reportString);
+        writeToFile.writeToFile(PATH_REPORT_FILE, reportString);
     }
 }
