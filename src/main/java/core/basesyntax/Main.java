@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class Main {
     private static final String WAREHOUSE_DATABASE = "src/main/resources/warehouse.csv";
-    private static final String DAYLY_REPORT = "src/main/resources/report.csv";
+    private static final String DAILY_REPORT = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> handlerMap = new HashMap<>();
@@ -50,6 +50,6 @@ public class Main {
         String report = reportService.createReport(Storage.getStorage());
 
         FileWriterService writerService = new FileWriterServiceImpl();
-        writerService.write(DAYLY_REPORT, report);
+        writerService.write(DAILY_REPORT, report);
     }
 }
