@@ -15,10 +15,9 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void operate(FruitTransaction transaction) {
         Fruit fruit = transaction.getFruit();
         Integer quantity = transaction.getQuantity();
-        if (storageDao.getValue(fruit) >= quantity) {
-            storageDao.update(fruit, -quantity);
-        } else {
+        if (storageDao.getValue(fruit) < quantity) {
             throw new RuntimeException("Not enough " + fruit.getName() + " in stock");
         }
+        storageDao.compute(fruit, -quantity);
     }
 }
