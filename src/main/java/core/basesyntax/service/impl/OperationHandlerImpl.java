@@ -6,10 +6,10 @@ import core.basesyntax.service.TransactionHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
-public class FruitTransactionHandler implements TransactionHandler {
+public class OperationHandlerImpl implements TransactionHandler {
     private final OperationStrategy operationStrategy;
 
-    public FruitTransactionHandler(OperationStrategy operationStrategy) {
+    public OperationHandlerImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 

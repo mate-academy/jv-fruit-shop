@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ValidationService;
+import core.basesyntax.service.ValidatorService;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CsvValidatorService implements ValidationService {
+public class ValidatorServiceImpl implements ValidatorService {
     private static final String FILE_HEADERS = "type,fruit,quantity";
     private static final String RECORD_PATTERN = "[bprs],[a-z]+,[0-9]+";
     private static final int HEADERS_INDEX = 0;

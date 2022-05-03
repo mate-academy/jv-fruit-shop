@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class FileWriterImpl implements WriterService {
+public class WriterServiceImpl implements WriterService {
     @Override
     public void write(String filePath, List<String> data) {
         Path path = Paths.get(filePath);
