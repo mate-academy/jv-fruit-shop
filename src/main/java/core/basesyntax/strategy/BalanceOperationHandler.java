@@ -8,8 +8,6 @@ public class BalanceOperationHandler implements OperationHandler {
     public void process(Transaction transaction) {
         Integer initialQuantity = Storage.storage.get(transaction.getFruit());
         Storage.storage.put(transaction.getFruit(),
-                initialQuantity == null
-                        ? transaction.getQuantity()
-                        : initialQuantity + transaction.getQuantity());
+                initialQuantity + transaction.getQuantity());
     }
 }

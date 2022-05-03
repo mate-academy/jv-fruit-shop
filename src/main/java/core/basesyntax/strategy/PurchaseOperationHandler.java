@@ -6,11 +6,10 @@ import core.basesyntax.storage.Storage;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void process(Transaction transaction) {
-        if (Storage.storage.get(transaction.getFruit()) == null) {
+        Integer initialQuantity = Storage.storage.get(transaction.getFruit());
+        if (initialQuantity == null) {
             throw new RuntimeException("No such fruit found");
         }
-
-        Integer initialQuantity = Storage.storage.get(transaction.getFruit());
         if (initialQuantity - transaction.getQuantity() < 0) {
             throw new RuntimeException("Such a number of fruits not found");
         }
