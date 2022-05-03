@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.StorageDao;
+import core.basesyntax.db.StorageDaoImpl;
 import core.basesyntax.models.Transaction;
 import core.basesyntax.service.TransactionsCalculator;
 import core.basesyntax.strategy.BalanceTransactionHandler;
@@ -16,12 +17,8 @@ public class TransactionsCalculatorImpl implements TransactionsCalculator {
     private Map<String, TransactionHandler> transactionHandlerMap = new HashMap<>();
     private StorageDao storageDao;
 
-    public TransactionsCalculatorImpl(StorageDao storageDao) {
-        this.storageDao = storageDao;
-    }
-
     {
-        TransactionsCalculator transactionsCalculator = new TransactionsCalculatorImpl(storageDao);
+        storageDao = new StorageDaoImpl();
         transactionHandlerMap.put("b", new BalanceTransactionHandler(storageDao));
         transactionHandlerMap.put("s", new SupplyTransactionHandler(storageDao));
         transactionHandlerMap.put("r", new ReturnTransactionHandler(storageDao));

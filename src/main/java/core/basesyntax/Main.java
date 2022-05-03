@@ -30,7 +30,7 @@ public class Main {
         List<Transaction> transactionList = parse.parse(list);
 
         // Adding to storage
-        TransactionsCalculator handle = new TransactionsCalculatorImpl(storageDao);
+        TransactionsCalculator handle = new TransactionsCalculatorImpl();
         handle.handleTransactions(transactionList);
 
         // Generating report
