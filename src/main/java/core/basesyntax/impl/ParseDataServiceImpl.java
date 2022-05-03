@@ -16,9 +16,9 @@ public class ParseDataServiceImpl implements ParseDataService {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 0; i < dataFromFile.size(); i++) {
             String line = dataFromFile.get(i);
-            String [] records = line.split(",");
+            String[] records = line.split(",");
             transactions.add(new FruitTransaction(FruitTransaction.Operation
-                    .getOperation(records[OPERATION_INDEX]),
+                    .getByName(records[OPERATION_INDEX]),
                     new Fruit(records[FRUIT_INDEX]), Integer.parseInt(records[QUANTITY_INDEX])));
         }
         return transactions;

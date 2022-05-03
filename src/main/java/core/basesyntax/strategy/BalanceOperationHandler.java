@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
-public class BalanceOperationStrategy implements OperationHandler {
+public class BalanceOperationHandler implements OperationHandler {
     @Override
     public void process(FruitTransaction fruitTransaction) {
         Integer initialQuantity = Storage.fruitStorage.get(fruitTransaction.getFruit());

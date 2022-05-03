@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private Operation operation;
     private Fruit fruit;
@@ -47,19 +49,16 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
-        public static Operation getOperation(String option) {
-            switch (option) {
-                case "b":
-                    return FruitTransaction.Operation.BALANCE;
-                case "p":
-                    return FruitTransaction.Operation.PURCHASE;
-                case "s":
-                    return FruitTransaction.Operation.SUPPLY;
-                case "r":
-                    return FruitTransaction.Operation.RETURN;
-                default:
-                    throw new RuntimeException("Unknown operation " + option);
-            }
+        public String getOperation() {
+            return operation;
+        }
+
+        public static Operation getByName(String inputName) {
+            return Arrays.stream(FruitTransaction.Operation.values())
+                    .filter(o -> o.getOperation().equals(inputName))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Unknown operation: " + inputName));
         }
     }
 }
+
