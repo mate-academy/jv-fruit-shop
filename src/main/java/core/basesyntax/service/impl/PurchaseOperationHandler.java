@@ -14,5 +14,7 @@ public class PurchaseOperationHandler implements OperationHandler {
                 || initialFruitQuantity < fruitTransaction.getQuantity()) {
             throw new RuntimeException("Sorry, this quantity is not available");
         }
+        Storage.storage.put(fruitTransaction.getTransactionFruitName(),
+                initialFruitQuantity - fruitTransaction.getQuantity());
     }
 }

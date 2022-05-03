@@ -2,10 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataParserService implements core.basesyntax.service.DataParserService {
+public class DataParserServiceImpl implements DataParserService {
     @Override
     public List<FruitTransaction> parseData(List<String> data) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();

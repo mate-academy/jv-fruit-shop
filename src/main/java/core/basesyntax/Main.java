@@ -3,11 +3,11 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.impl.BalanceOperationHandler;
-import core.basesyntax.service.impl.DataParserService;
-import core.basesyntax.service.impl.FileReaderService;
-import core.basesyntax.service.impl.FileWriterService;
+import core.basesyntax.service.impl.DataParserServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.PurchaseOperationHandler;
-import core.basesyntax.service.impl.ReportCreatorService;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.service.impl.ReturnOperationHandler;
 import core.basesyntax.service.impl.SupplyOperationHandler;
 import java.util.HashMap;
@@ -24,20 +24,20 @@ public class Main {
         strategy.put("r", new ReturnOperationHandler());
         strategy.put("p", new PurchaseOperationHandler());
 
-        FileReaderService fileReaderService = new FileReaderService();
+        FileReaderServiceImpl fileReaderService = new FileReaderServiceImpl();
         List<String> readFromFile = fileReaderService
                 .readFromFile(INPUT_DATA_FILE_PATH);
 
-        DataParserService dataParserService = new DataParserService();
+        DataParserServiceImpl dataParserService = new DataParserServiceImpl();
         List<FruitTransaction> fruitTransactionList = dataParserService.parseData(readFromFile);
         for (FruitTransaction transaction : fruitTransactionList) {
             OperationHandler operationHandler = strategy.get(transaction.getOperationType());
             operationHandler.process(transaction);
         }
 
-        ReportCreatorService reportCreatorService = new ReportCreatorService();
+        ReportCreatorServiceImpl reportCreatorService = new ReportCreatorServiceImpl();
         String report = reportCreatorService.createReport();
-        core.basesyntax.service.FileWriterService fileWriterService = new FileWriterService();
+        core.basesyntax.service.FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile("DailyReport", report);
     }
 }
