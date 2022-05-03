@@ -1,6 +1,7 @@
 package service.impl;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,17 +17,16 @@ public class ReadFileServiceImpl implements ReadFileService {
     @Override
     public List<String> read(String fileName) {
         List<String> informationFromFile = new ArrayList<>();
-        try (CSVReader reader = new CSVReader(new FileReader(fileName))) {
+        try (CSVReader reader = new CSVReaderBuilder(new FileReader(fileName))
+                .withSkipLines(1)
+                .build()) {
             String[] lineInArray;
             while ((lineInArray = reader.readNext()) != null) {
-                if (lineInArray[OPERATION_INDEX].equals("type")) {
-                    continue;
-                }
                 informationFromFile.add(lineInArray[OPERATION_INDEX] + "-"
                         + lineInArray[FRUIT_INDEX] + "-" + lineInArray[QUANTITY_INDEX]);
             }
         } catch (IOException | CsvValidationException e) {
-            throw new RuntimeException("Can't read file " + fileName);
+            throw new RuntimeException("Can't read file " + fileName, e);
         }
         return informationFromFile;
     }

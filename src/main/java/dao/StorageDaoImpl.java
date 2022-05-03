@@ -12,7 +12,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public Set<Map.Entry<Fruit, Integer>> addAll() {
+    public Set<Map.Entry<Fruit, Integer>> getAll() {
         return Storage.dataBase.entrySet();
     }
 

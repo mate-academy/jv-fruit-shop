@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private Operation operation;
     private Fruit fruit;
@@ -37,10 +39,21 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private final String operation;
 
         Operation(String operation) {
             this.operation = operation;
+        }
+
+        public String getOperation() {
+            return operation;
+        }
+
+        public static FruitTransaction.Operation getByName(String inputValue) {
+            return Arrays.stream(FruitTransaction.Operation.values())
+                    .filter(o -> o.getOperation().equals(inputValue))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Unknown operation: " + inputValue));
         }
     }
 }

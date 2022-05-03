@@ -1,5 +1,7 @@
 package service.impl;
 
+import static model.FruitTransaction.Operation.getByName;
+
 import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
@@ -17,23 +19,8 @@ public class ParseServiceImpl implements ParseService {
         list.stream()
                 .map(i -> i.split("-"))
                 .forEach(i -> fruitTransactions.add(
-                        new FruitTransaction(getOperation(i[OPERATION_INDEX]),
+                        new FruitTransaction(getByName(i[OPERATION_INDEX]),
                                 new Fruit(i[FRUIT_INDEX]), Integer.parseInt(i[QUANTITY_INDEX]))));
         return fruitTransactions;
-    }
-
-    private FruitTransaction.Operation getOperation(String option) {
-        switch (option) {
-            case "b":
-                return FruitTransaction.Operation.BALANCE;
-            case "p":
-                return FruitTransaction.Operation.PURCHASE;
-            case "s":
-                return FruitTransaction.Operation.SUPPLY;
-            case "r":
-                return FruitTransaction.Operation.RETURN;
-            default:
-                throw new RuntimeException("Unknown operation " + option);
-        }
     }
 }
