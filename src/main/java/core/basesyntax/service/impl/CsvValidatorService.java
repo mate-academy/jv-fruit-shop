@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CsvValidator implements ValidationService {
+public class CsvValidatorService implements ValidationService {
     private static final String FILE_HEADERS = "type,fruit,quantity";
     private static final String RECORD_PATTERN = "[bprs],[a-z]+,[0-9]+";
     private static final int HEADERS_INDEX = 0;

@@ -2,17 +2,16 @@ package core.basesyntax;
 
 import core.basesyntax.config.Configuration;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.OperationIstrategy;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.TransactionHandler;
 import core.basesyntax.service.ValidationService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.CsvParser;
-import core.basesyntax.service.impl.CsvValidator;
-import core.basesyntax.service.impl.FileReader;
-import core.basesyntax.service.impl.FileWriter;
+import core.basesyntax.service.impl.CsvParserImpl;
+import core.basesyntax.service.impl.CsvValidatorService;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.FruitTransactionHandler;
 import core.basesyntax.service.impl.StorageDailyReport;
 import core.basesyntax.storage.StorageDao;
@@ -24,14 +23,13 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         StorageDao storageDao = new StorageDaoImpl();
-        ReaderService reader = new FileReader();
-        ValidationService csvValidator = new CsvValidator();
-        ParserService parser = new CsvParser(csvValidator);
-        OperationIstrategy operationIStrategy = new OperationIstrategy(storageDao);
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationIStrategy);
+        ReaderService reader = new FileReaderImpl();
+        ValidationService csvValidator = new CsvValidatorService();
+        ParserService parser = new CsvParserImpl(csvValidator);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(storageDao);
         TransactionHandler fruitTransactionHandler = new FruitTransactionHandler(operationStrategy);
         ReportService reportService = new StorageDailyReport();
-        WriterService writer = new FileWriter();
+        WriterService writer = new FileWriterImpl();
 
         List<String> lines = reader.read(Configuration.READ_PATH);
         List<FruitTransaction> transactionList = parser.parse(lines);

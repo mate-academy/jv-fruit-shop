@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class FileReader implements ReaderService {
+public class FileReaderImpl implements ReaderService {
     @Override
     public List<String> read(String filePath) {
         Path path = Paths.get(filePath);
