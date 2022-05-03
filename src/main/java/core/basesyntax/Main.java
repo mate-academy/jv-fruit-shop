@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.model.LineData;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.Reader;
+import core.basesyntax.service.Validator;
 import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReaderImpl;
@@ -34,7 +35,7 @@ public class Main {
     public static void main(String[] args) {
         Reader dataReader = new ReaderImpl();
         List<String> dataFromFile = dataReader.readFromFile(INPUT_PATH);
-        ValidatorImpl validator = new ValidatorImpl();
+        Validator validator = new ValidatorImpl();
         Parser parser = new ParserImpl(validator);
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put("s", new SupplyOperation());

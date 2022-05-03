@@ -8,11 +8,11 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public boolean operate(LineData lineData) {
-        Fruit fruit = new Fruit(lineData.getFruitName().toString());
+        Fruit fruit = lineData.getFruit();
         int quantity = lineData.getQuantity();
         int storageQuantity = Storage.store.get(fruit);
         if (quantity > storageQuantity) {
-            throw new RuntimeException("There no enough " + lineData.getFruitName());
+            throw new RuntimeException("There no enough " + lineData.getFruit());
         }
         Storage.store.put(fruit, storageQuantity - quantity);
         return true;

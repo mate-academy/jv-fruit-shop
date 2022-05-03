@@ -6,9 +6,9 @@ import core.basesyntax.model.LineData;
 
 public class BalanceOperation implements OperationHandler {
     public boolean operate(LineData lineData) {
-        Fruit fruitName = lineData.getFruitName();
+        Fruit fruit = lineData.getFruit();
         int quantity = lineData.getQuantity();
-        Storage.store.put(new Fruit(fruitName.toString()), quantity);
+        Storage.store.put(fruit, quantity);
         return true;
     }
 }

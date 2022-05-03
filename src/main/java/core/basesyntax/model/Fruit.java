@@ -36,6 +36,6 @@ public final class Fruit {
 
     @Override
     public String toString() {
-        return "" + fruitName;
+        return fruitName;
     }
 }

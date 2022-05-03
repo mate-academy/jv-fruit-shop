@@ -12,7 +12,8 @@ public class ReaderImpl implements Reader {
         try {
             return Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
-            throw new RuntimeException("Incorrect data in file InputData.csv or wrong file", e);
+            throw new RuntimeException("Incorrect data in file InputData.csv or wrong file. "
+                                        + fileName, e);
         }
     }
 }

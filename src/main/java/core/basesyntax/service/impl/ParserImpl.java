@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.LineData;
 import core.basesyntax.service.Parser;
+import core.basesyntax.service.Validator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +11,9 @@ public class ParserImpl implements Parser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final ValidatorImpl validator;
+    private final Validator validator;
 
-    public ParserImpl(ValidatorImpl validatorImpl) {
+    public ParserImpl(Validator validatorImpl) {
         this.validator = validatorImpl;
     }
 
