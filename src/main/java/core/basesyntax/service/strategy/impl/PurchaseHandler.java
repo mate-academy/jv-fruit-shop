@@ -14,6 +14,6 @@ public class PurchaseHandler implements OperationHandler<Fruit> {
     @Override
     public void handle(Fruit fruit) {
         fruit.setQuantity(fruit.getQuantity() * -1);
-        fruitDao.update(fruit);
+        fruitDao.save(fruit);
     }
 }

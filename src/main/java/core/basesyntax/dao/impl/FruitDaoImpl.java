@@ -4,6 +4,7 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -14,8 +15,17 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void save(Fruit element) {
-        Storage.fruits.put(element.getName(), element.getQuantity());
+    public void save(Fruit fruit) {
+        if (!Storage.fruits.containsKey(fruit.getName())) {
+            Storage.fruits.put(fruit.getName(), fruit.getQuantity());
+        } else {
+            for (Map.Entry entry : Storage.fruits.entrySet()) {
+                if (fruit.getName().equals(entry.getKey())) {
+                    int updateQuantity = (int) entry.getValue() + fruit.getQuantity();
+                    Storage.fruits.put(fruit.getName(), updateQuantity);
+                }
+            }
+        }
     }
 
     @Override

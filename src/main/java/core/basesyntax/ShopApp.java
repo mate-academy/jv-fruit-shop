@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
@@ -14,20 +16,22 @@ import core.basesyntax.service.impl.ReportServiceImpl;
 import java.util.List;
 
 public class ShopApp {
-    private static final String FILE_NAME = "src/main/resources/inputFile.csv";
+    private static final String INPUT_FILE_NAME = "src/main/resources/inputFile.csv";
     private static final String REPORT_NAME = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         FileReaderService read = new FileReaderServiceImpl();
-        List<String> listWithFile = read.readFromFile(FILE_NAME);
+        List<String> listWithFile = read.readFromFile(INPUT_FILE_NAME);
 
         FruitTransactionParser parseData = new FruitTransactionParserImpl();
         List<FruitTransaction> fruitTransactions = parseData.parse(listWithFile);
 
-        FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
+        FruitDao fruitDao = new FruitDaoImpl();
+
+        FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl(fruitDao);
         fruitTransactionService.process(fruitTransactions);
 
-        ReportService createReport = new ReportServiceImpl();
+        ReportService createReport = new ReportServiceImpl(fruitDao);
         List<String> resultReport = createReport.generatedReport();
 
         FileWriterService write = new FileWriterServiceImpl();

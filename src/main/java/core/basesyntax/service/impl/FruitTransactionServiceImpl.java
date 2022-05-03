@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.strategy.impl.BalanceHandler;
@@ -11,10 +10,14 @@ import core.basesyntax.service.strategy.impl.SupplyHandler;
 import java.util.List;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
+    private FruitDao fruitDao;
+
+    public FruitTransactionServiceImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
+
     @Override
     public void process(List<FruitTransaction> fruitTransactions) {
-        FruitDao fruitDao = new FruitDaoImpl();
-
         for (FruitTransaction transaction : fruitTransactions) {
             switch (transaction.getOperation().name()) {
                 case "BALANCE":
