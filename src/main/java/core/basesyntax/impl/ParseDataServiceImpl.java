@@ -7,30 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParseDataServiceImpl implements ParseDataService {
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+
     @Override
     public List<FruitTransaction> parse(List<String> dataFromFile) {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 0; i < dataFromFile.size(); i++) {
             String line = dataFromFile.get(i);
             String [] records = line.split(",");
-            transactions.add(new FruitTransaction(getOperation(records[0]),
-                    new Fruit(records[1]), Integer.parseInt(records[2])));
+            transactions.add(new FruitTransaction(FruitTransaction.Operation
+                    .getOperation(records[OPERATION_INDEX]),
+                    new Fruit(records[FRUIT_INDEX]), Integer.parseInt(records[QUANTITY_INDEX])));
         }
         return transactions;
-    }
-
-    private FruitTransaction.Operation getOperation(String option) {
-        switch (option) {
-            case "b":
-                return FruitTransaction.Operation.BALANCE;
-            case "p":
-                return FruitTransaction.Operation.PURCHASE;
-            case "s":
-                return FruitTransaction.Operation.SUPPLY;
-            case "r":
-                return FruitTransaction.Operation.RETURN;
-            default:
-                throw new RuntimeException("Unknown operation " + option);
-        }
     }
 }

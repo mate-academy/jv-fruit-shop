@@ -47,8 +47,19 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
-        public String getOperation() {
-            return operation;
+        public static Operation getOperation(String option) {
+            switch (option) {
+                case "b":
+                    return FruitTransaction.Operation.BALANCE;
+                case "p":
+                    return FruitTransaction.Operation.PURCHASE;
+                case "s":
+                    return FruitTransaction.Operation.SUPPLY;
+                case "r":
+                    return FruitTransaction.Operation.RETURN;
+                default:
+                    throw new RuntimeException("Unknown operation " + option);
+            }
         }
     }
 }
