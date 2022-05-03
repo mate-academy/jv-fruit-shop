@@ -6,11 +6,11 @@ import java.util.List;
 public interface FruitDao {
     void addFruit(Fruit fruit);
 
-    Fruit get(String fruitName);
+    Fruit getByName(String fruitName);
 
     List<String> getAll();
 
     void addAmount(Fruit fruit);
 
-    void subAmount(Fruit fruit);
+    void subtractAmount(Fruit fruit);
 }

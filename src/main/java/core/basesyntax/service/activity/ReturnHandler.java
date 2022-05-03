@@ -12,7 +12,7 @@ public class ReturnHandler implements OperationHandler {
 
     @Override
     public void handle(Fruit fruit) {
-        if (fruitDao.get(fruit.getName()) != null) {
+        if (fruitDao.getByName(fruit.getName()) != null) {
             fruitDao.addAmount(fruit);
         } else {
             fruitDao.addFruit(fruit);

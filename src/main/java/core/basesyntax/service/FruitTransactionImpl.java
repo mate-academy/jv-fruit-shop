@@ -13,15 +13,16 @@ public class FruitTransactionImpl implements FruitTransaction {
     private static final int FRUIT_AMOUNT_INDEX = 2;
 
     @Override
-    public void transaction(List<String> listFromFile,
+    public void processTransaction(List<String> listFromFile,
                             Map<Operation, OperationHandler> activityServiceMap) {
         for (int i = 1; i < listFromFile.size(); i++) {
             String[] line = listFromFile.get(i).split(",");
-            Fruit fruit = new Fruit();
-            fruit.setName(line[FRUIT_NAME_INDEX]);
-            fruit.setAmount(Integer.parseInt(line[FRUIT_AMOUNT_INDEX]));
             Operation operation = Operation.getOperation(line[OPERATION_INDEX]);
-            new OperationStrategyImpl(activityServiceMap).get(operation).handle(fruit);
+            Fruit fruit = new CreateFruitImpl()
+                    .createFruit(line[FRUIT_NAME_INDEX], line[FRUIT_AMOUNT_INDEX]);
+            new OperationStrategyImpl(activityServiceMap)
+                    .get(operation)
+                    .handle(fruit);
         }
     }
 }

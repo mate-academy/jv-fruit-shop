@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface FruitTransaction {
-    void transaction(List<String> listFromFile,
+    void processTransaction(List<String> listFromFile,
                      Map<Operation, OperationHandler> activityServiceMap);
 }

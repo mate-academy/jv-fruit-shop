@@ -17,7 +17,8 @@ public class Main {
         FruitDao fruitDao = new FruitDaoImpl();
         List<String> linesFromFile = new FileReaderImpl().readFromFile(fromFileName);
         MapStrategy mapStrategy = new MapStrategy();
-        new FruitTransactionImpl().transaction(linesFromFile, mapStrategy.mapStrategy(fruitDao));
+        new FruitTransactionImpl()
+                .processTransaction(linesFromFile, mapStrategy.mapStrategy(fruitDao));
         new FileWriterImpl().writeToFile(toFileName, new ReportServiceImpl(fruitDao).getReport());
     }
 }

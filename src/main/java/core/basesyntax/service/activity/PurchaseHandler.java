@@ -12,8 +12,8 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void handle(Fruit fruit) {
-        if (fruitDao.get(fruit.getName()) != null) {
-            fruitDao.subAmount(fruit);
+        if (fruitDao.getByName(fruit.getName()) != null) {
+            fruitDao.subtractAmount(fruit);
         } else {
             throw new RuntimeException("Error in input data. "
                     + "It's impossible to sell a non-existent product");

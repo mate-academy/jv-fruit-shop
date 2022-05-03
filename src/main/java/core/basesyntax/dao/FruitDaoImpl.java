@@ -12,7 +12,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Fruit get(String fruitName) {
+    public Fruit getByName(String fruitName) {
         return Storage.fruits.stream()
                 .filter(f -> f.getName().equals(fruitName))
                 .findFirst()
@@ -32,15 +32,15 @@ public class FruitDaoImpl implements FruitDao {
                 .filter(f -> f.getName().equals(fruit.getName()))
                 .findFirst()
                 .get()
-                .setAmount(get(fruit.getName()).getAmount() + fruit.getAmount());
+                .setAmount(getByName(fruit.getName()).getAmount() + fruit.getAmount());
     }
 
     @Override
-    public void subAmount(Fruit fruit) {
+    public void subtractAmount(Fruit fruit) {
         Storage.fruits.stream()
                 .filter(f -> f.getName().equals(fruit.getName()))
                 .findFirst()
                 .get()
-                .setAmount(get(fruit.getName()).getAmount() - fruit.getAmount());
+                .setAmount(getByName(fruit.getName()).getAmount() - fruit.getAmount());
     }
 }
