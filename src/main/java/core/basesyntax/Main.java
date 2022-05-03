@@ -37,9 +37,9 @@ public class Main {
         List<String> data = fileReaderService.read(INPUT_FILE_PATH);
 
         ParserService parseService = new ParserServiceImpl();
-        List<FruitTransaction> parse = parseService.parse(data);
+        List<FruitTransaction> fruitTransactions = parseService.parse(data);
 
-        for (FruitTransaction fruitTransaction : parse) {
+        for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler operationHandler = operationStrategy.get(
                     fruitTransaction.getOperation());
             operationHandler.process(fruitTransaction.getFruit(),
