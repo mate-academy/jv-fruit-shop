@@ -36,7 +36,8 @@ public class FruitServiceImpl implements FruitService {
         writerService.write(path, createReport());
     }
 
-    private String createReport() {
+    @Override
+    public String createReport() {
         return reportService.generateReport(dao.getAllFruits());
     }
 }
