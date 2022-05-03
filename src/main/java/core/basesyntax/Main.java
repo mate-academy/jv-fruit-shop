@@ -30,12 +30,10 @@ public class Main {
         operationMap.put(FruitTransfer.Operation.RETURN, new ReturnOperationHandler());
         operationMap.put(FruitTransfer.Operation.SUPPLY, new SupplyOperationHandler());
         List<String> strings = reader.readFromFile(INPUT_FILE_PATH);
-        for (String string : strings) {
-            ConvertToFruitTransferService convert = new ConvertToFruitTransferServiceImpl();
-            FruitTransfer transfer = convert.toFruitTransfer(string);
-            if (transfer != null) {
-                operationMap.get(transfer.getOperation()).process(transfer);
-            }
+        ConvertToFruitTransferService convert = new ConvertToFruitTransferServiceImpl();
+        for (int i = 1; i < strings.size(); i++) {
+            FruitTransfer transfer = convert.toFruitTransfer(strings.get(i));
+            operationMap.get(transfer.getOperation()).process(transfer);
         }
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.getReport();

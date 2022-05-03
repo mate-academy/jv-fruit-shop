@@ -20,6 +20,6 @@ public class ConvertToFruitTransferServiceImpl implements ConvertToFruitTransfer
                         Integer.parseInt(toFruitTransferArray[QUANTITY]));
             }
         }
-        return null;
+        throw new RuntimeException("Can't convert to fruitTransfer");
     }
 }

@@ -19,7 +19,7 @@ public class ReaderServiceImpl implements ReaderService {
             }
             return stringsList;
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file", e);
+            throw new RuntimeException("Can't read data from file" + fileName, e);
         }
     }
 }

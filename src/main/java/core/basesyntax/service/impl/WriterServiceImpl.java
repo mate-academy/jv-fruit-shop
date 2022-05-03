@@ -11,7 +11,7 @@ public class WriterServiceImpl implements WriterService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
             bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file", e);
+            throw new RuntimeException("Can't write to file" + path, e);
         }
     }
 }
