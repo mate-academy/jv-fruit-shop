@@ -11,7 +11,7 @@ import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.OperationHandlerImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.StorageDailyReport;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.ValidatorServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.storage.StorageDao;
@@ -28,7 +28,7 @@ public class Main {
         ParserService parser = new ParserServiceImpl(validatorService);
         OperationStrategy operationStrategy = new OperationStrategyImpl(storageDao);
         TransactionHandler fruitTransactionHandler = new OperationHandlerImpl(operationStrategy);
-        ReportService reportService = new StorageDailyReport();
+        ReportService reportService = new ReportServiceImpl();
         WriterService writer = new WriterServiceImpl();
 
         List<String> lines = reader.read(Configuration.READ_PATH);

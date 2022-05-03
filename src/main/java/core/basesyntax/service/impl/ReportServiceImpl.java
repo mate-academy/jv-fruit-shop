@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class StorageDailyReport implements ReportService {
+public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<String> makeReport(Set<Map.Entry<Fruit, Integer>> storageStatus) {
