@@ -10,13 +10,10 @@ import service.ReaderService;
 public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> read(String filePath) {
-        List<String> list;
-
         try {
-            list = new ArrayList<>(Files.readAllLines(Paths.get(filePath)));
+            return new ArrayList<>(Files.readAllLines(Paths.get(filePath)));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read the file ", e);
+            throw new RuntimeException("Can't read from the file " + filePath);
         }
-        return list;
     }
 }
