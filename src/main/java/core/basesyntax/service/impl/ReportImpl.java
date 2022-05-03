@@ -7,13 +7,13 @@ import java.util.Map;
 public class ReportImpl implements Report {
     @Override
     public String getReport() {
-        StringBuilder exitFile = new StringBuilder("Fruit, quantity" + System.lineSeparator());
+        StringBuilder report = new StringBuilder("Fruit, quantity" + System.lineSeparator());
         for (Map.Entry<String, Integer> fruit: Storage.fruitStorage.entrySet()) {
-            exitFile.append(fruit.getKey())
+            report.append(fruit.getKey())
                     .append(",")
                     .append(fruit.getValue())
                     .append(System.lineSeparator());
         }
-        return exitFile.toString();
+        return report.toString();
     }
 }
