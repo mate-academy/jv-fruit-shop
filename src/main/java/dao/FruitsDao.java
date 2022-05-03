@@ -1,7 +1,9 @@
 package dao;
 
-public interface FruitsDao {
-    void addProduct(String product, Integer count);
+import model.Fruit;
 
-    Integer getValue(String product);
+public interface FruitsDao {
+    void addProduct(Fruit fruit, Integer count);
+
+    Integer getValue(Fruit fruit);
 }

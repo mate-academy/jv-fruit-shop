@@ -1,5 +1,7 @@
 package service;
 
+import model.Fruit;
+
 public interface OperationHandler {
-    void doOperation(String key, String value);
+    void doOperation(Fruit key, String value);
 }

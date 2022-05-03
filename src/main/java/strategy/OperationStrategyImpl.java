@@ -2,6 +2,7 @@ package strategy;
 
 import java.util.HashMap;
 import java.util.Map;
+import model.Fruit;
 import service.OperationHandler;
 
 public class OperationStrategyImpl implements OperationStrategy {
@@ -17,7 +18,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public void operationCheck(String type, String key, String value) {
+    public void operationCheck(String type, Fruit key, String value) {
         operationHandlerMap.get(type).doOperation(key, value);
     }
 }
