@@ -3,6 +3,7 @@ package service.impl;
 import dao.DatabaseDao;
 import dao.DatabaseDaoImpl;
 import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
 import service.FruitService;
 import service.ParseService;
@@ -24,18 +25,18 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void getData(String path) {
-        List<String> readData = readerService.read(path);
-        List<FruitTransaction> parsedTransactions = parseService.parse(readData);
-        dao.addAllTransaction(parsedTransactions);
+    public void processData(String path) {
+        List<FruitTransaction> read = readerService.read(path);
+        Map<String, Integer> parse = parseService.parse(read, strategyService);
+        dao.addAllFruits(parse);
     }
 
     @Override
     public void saveReport(String path) {
-        writerService.write(path, getReport());
+        writerService.write(path, createReport());
     }
 
-    private String getReport() {
-        return reportService.generateReport(dao.getFruitTransaction(), strategyService);
+    private String createReport() {
+        return reportService.generateReport(dao.getFruitTransaction());
     }
 }

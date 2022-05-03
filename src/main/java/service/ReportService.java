@@ -1,9 +1,7 @@
 package service;
 
-import java.util.List;
-import model.FruitTransaction;
-import strategy.StrategyService;
+import java.util.Map;
 
 public interface ReportService {
-    String generateReport(List<FruitTransaction> transactions, StrategyService strategyService);
+    String generateReport(Map<String, Integer> fruitMap);
 }

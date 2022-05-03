@@ -13,6 +13,9 @@ import strategy.impl.SupplyOperationImpl;
 
 public class Main {
     public static void main(String[] args) {
+        final String inputFile = "src//main//resources//before.csv";
+        final String outputFile = "src//main//resources//after.csv";
+
         Map<Operation, OperationHandler> strategyMap = new HashMap<>();
         strategyMap.put(Operation.BALANCE, new BalanceOperationImpl());
         strategyMap.put(Operation.SUPPLY, new SupplyOperationImpl());
@@ -22,7 +25,7 @@ public class Main {
         StrategyService strategyService = new StrategyServiceImpl(strategyMap);
         FruitService fruitService = new FruitServiceImpl(strategyService);
 
-        fruitService.getData("src//main//resources//before.csv");
-        fruitService.saveReport("src//main//resources//after.csv");
+        fruitService.processData(inputFile);
+        fruitService.saveReport(outputFile);
     }
 }

@@ -1,17 +1,16 @@
 package dao;
 
 import db.Database;
-import java.util.List;
-import model.FruitTransaction;
+import java.util.Map;
 
 public class DatabaseDaoImpl implements DatabaseDao {
     @Override
-    public void addAllTransaction(List<FruitTransaction> fruitTransaction) {
-        Database.database.addAll(fruitTransaction);
+    public void addAllFruits(Map<String, Integer> fruitList) {
+        Database.database.putAll(fruitList);
     }
 
     @Override
-    public List<FruitTransaction> getFruitTransaction() {
+    public Map<String, Integer> getFruitTransaction() {
         return Database.database;
     }
 }

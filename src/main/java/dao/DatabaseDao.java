@@ -1,10 +1,9 @@
 package dao;
 
-import java.util.List;
-import model.FruitTransaction;
+import java.util.Map;
 
 public interface DatabaseDao {
-    void addAllTransaction(List<FruitTransaction> fruitTransaction);
+    void addAllFruits(Map<String, Integer> fruitList);
 
-    List<FruitTransaction> getFruitTransaction();
+    Map<String, Integer> getFruitTransaction();
 }

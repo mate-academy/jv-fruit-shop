@@ -7,12 +7,12 @@ import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
     @Override
-    public void write(String file, String report) {
-        try (OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(file))) {
-            osw.write(report);
-            System.out.println("Store report is saved!");
+    public void write(String fileName, String report) {
+        try (OutputStreamWriter streamWriter =
+                     new OutputStreamWriter(new FileOutputStream(fileName))) {
+            streamWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write a file");
+            throw new RuntimeException("Can't write a file " + fileName, e);
         }
     }
 }
