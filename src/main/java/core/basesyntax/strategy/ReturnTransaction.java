@@ -1,11 +1,11 @@
-package core.basesyntax.strategy.implementation;
+package core.basesyntax.strategy;
 
+import core.basesyntax.db.DatabaseImpl;
 import core.basesyntax.models.Fruit;
 import core.basesyntax.models.Transaction;
-import core.basesyntax.storage.Storage;
 
-public class SupplyTransaction implements TransactionHandler {
-    private Storage storage = new Storage();
+public class ReturnTransaction implements TransactionHandler {
+    private DatabaseImpl storage = new DatabaseImpl();
 
     @Override
     public boolean handleTransaction(Transaction transaction) {
@@ -15,7 +15,9 @@ public class SupplyTransaction implements TransactionHandler {
             storage.add(challenger, newQuantity);
             return true;
         }
-        storage.add(challenger, transaction.getQuantity());
-        return true;
+        if (storage.get(challenger) == null) {
+            throw new RuntimeException("Trying to return a fruit from another shop!");
+        }
+        return false;
     }
 }

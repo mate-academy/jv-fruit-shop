@@ -1,15 +1,15 @@
 package core.basesyntax;
 
 import core.basesyntax.models.Transaction;
-import core.basesyntax.parse.Parser;
-import core.basesyntax.parse.ParserImpl;
-import core.basesyntax.reader.FileReader;
-import core.basesyntax.reader.FileReaderImpl;
-import core.basesyntax.report.ReportGenerator;
-import core.basesyntax.report.ReportGeneratorImpl;
-import core.basesyntax.strategy.TransactionsCalculatorImpl;
-import core.basesyntax.writer.ReportWriter;
-import core.basesyntax.writer.ReportWriterImpl;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ReportWriter;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.ParserImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ReportWriterImpl;
+import core.basesyntax.service.impl.TransactionsCalculatorImpl;
 import java.util.List;
 
 public class Main {

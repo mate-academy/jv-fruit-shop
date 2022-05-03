@@ -1,5 +1,6 @@
-package core.basesyntax.writer;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReportWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

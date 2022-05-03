@@ -1,11 +1,12 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.models.Transaction;
-import core.basesyntax.strategy.implementation.BalanceTransaction;
-import core.basesyntax.strategy.implementation.PurchaseTransaction;
-import core.basesyntax.strategy.implementation.ReturnTransaction;
-import core.basesyntax.strategy.implementation.SupplyTransaction;
-import core.basesyntax.strategy.implementation.TransactionHandler;
+import core.basesyntax.service.TransactionsCalculator;
+import core.basesyntax.strategy.BalanceTransaction;
+import core.basesyntax.strategy.PurchaseTransaction;
+import core.basesyntax.strategy.ReturnTransaction;
+import core.basesyntax.strategy.SupplyTransaction;
+import core.basesyntax.strategy.TransactionHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

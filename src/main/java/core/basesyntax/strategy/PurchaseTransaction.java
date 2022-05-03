@@ -1,11 +1,11 @@
-package core.basesyntax.strategy.implementation;
+package core.basesyntax.strategy;
 
+import core.basesyntax.db.DatabaseImpl;
 import core.basesyntax.models.Fruit;
 import core.basesyntax.models.Transaction;
-import core.basesyntax.storage.Storage;
 
 public class PurchaseTransaction implements TransactionHandler {
-    private Storage storage = new Storage();
+    private DatabaseImpl storage = new DatabaseImpl();
 
     @Override
     public boolean handleTransaction(Transaction transaction) {

@@ -1,12 +1,13 @@
-package core.basesyntax.report;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.db.DatabaseImpl;
 import core.basesyntax.models.Fruit;
-import core.basesyntax.storage.Storage;
+import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEADER = "fruit,quantity";
-    private Storage storage = new Storage();
+    private DatabaseImpl storage = new DatabaseImpl();
 
     @Override
     public String generateReport() {
