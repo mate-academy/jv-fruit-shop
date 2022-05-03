@@ -37,6 +37,6 @@ public class FruitServiceImpl implements FruitService {
     }
 
     private String createReport() {
-        return reportService.generateReport(dao.getFruitTransaction());
+        return reportService.generateReport(dao.getAllFruits());
     }
 }

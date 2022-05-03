@@ -10,7 +10,7 @@ public class DatabaseDaoImpl implements DatabaseDao {
     }
 
     @Override
-    public Map<String, Integer> getFruitTransaction() {
+    public Map<String, Integer> getAllFruits() {
         return Database.database;
     }
 }
