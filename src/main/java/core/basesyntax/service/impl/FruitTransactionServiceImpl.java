@@ -18,16 +18,16 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
         for (FruitTransaction transaction : fruitTransactions) {
             switch (transaction.getOperation().name()) {
                 case "BALANCE":
-                    new BalanceHandler(fruitDao).getOperation(transaction.getFruit());
+                    new BalanceHandler(fruitDao).handle(transaction.getFruit());
                     break;
                 case "SUPPLY":
-                    new SupplyHandler(fruitDao).getOperation(transaction.getFruit());
+                    new SupplyHandler(fruitDao).handle(transaction.getFruit());
                     break;
                 case "PURCHASE":
-                    new PurchaseHandler(fruitDao).getOperation(transaction.getFruit());
+                    new PurchaseHandler(fruitDao).handle(transaction.getFruit());
                     break;
                 case "RETURN":
-                    new ReturnHandler(fruitDao).getOperation(transaction.getFruit());
+                    new ReturnHandler(fruitDao).handle(transaction.getFruit());
                     break;
 
                 default:

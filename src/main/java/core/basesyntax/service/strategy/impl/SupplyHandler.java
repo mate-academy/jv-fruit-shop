@@ -12,7 +12,7 @@ public class SupplyHandler implements OperationHandler<Fruit> {
     }
 
     @Override
-    public void getOperation(Fruit fruit) {
+    public void handle(Fruit fruit) {
         fruitDao.update(fruit);
     }
 }
