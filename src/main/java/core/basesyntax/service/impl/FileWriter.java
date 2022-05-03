@@ -7,14 +7,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class WriterServiceImpl implements WriterService {
+public class FileWriter implements WriterService {
     @Override
-    public void write(String writePath, List<String> data) {
-        Path path = Paths.get(writePath);
+    public void write(String filePath, List<String> data) {
+        Path path = Paths.get(filePath);
         try {
             Files.write(path, data);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file " + writePath);
+            throw new RuntimeException("Can't write to file " + filePath, e);
         }
     }
 }

@@ -7,15 +7,15 @@ import core.basesyntax.service.ValidationService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvParserService implements ParserService {
+public class CsvParser implements ParserService {
     private static final String SPLITERATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private final ValidationService validationService;
 
-    public CsvParserService() {
-        this.validationService = new FruitTransactionValidator();
+    public CsvParser(ValidationService validationService) {
+        this.validationService = validationService;
     }
 
     @Override

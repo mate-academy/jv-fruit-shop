@@ -3,13 +3,12 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.storage.StorageDao;
-import core.basesyntax.storage.StorageDaoImpl;
 
 public class ReturnOperationHandler implements OperationHandler {
     private final StorageDao storageDao;
 
-    public ReturnOperationHandler() {
-        storageDao = new StorageDaoImpl();
+    public ReturnOperationHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override
