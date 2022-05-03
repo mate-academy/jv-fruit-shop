@@ -8,9 +8,9 @@ public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public boolean operate(LineInformation lineInformation) {
-        Fruit fruitName = lineInformation.getFruit();
+        Fruit fruit = lineInformation.getFruit();
         int quantity = lineInformation.getQuantity();
-        Storage.storage.put(new Fruit(fruitName.toString()), quantity);
+        Storage.storage.put(fruit, quantity);
         return true;
     }
 }

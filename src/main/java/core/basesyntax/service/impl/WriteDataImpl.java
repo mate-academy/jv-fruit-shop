@@ -13,7 +13,7 @@ public class WriteDataImpl implements DataWriter {
             Files.write(Path.of(fileName), list);
             return true;
         } catch (IOException e) {
-            throw new RuntimeException("It is not possible to write this file " + fileName);
+            throw new RuntimeException("It is not possible to write this file " + fileName, e);
         }
     }
 }

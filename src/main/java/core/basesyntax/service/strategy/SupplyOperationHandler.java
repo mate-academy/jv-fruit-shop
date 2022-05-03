@@ -8,7 +8,7 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public boolean operate(LineInformation lineInformation) {
-        Fruit fruit = new Fruit(lineInformation.getFruit().toString());
+        Fruit fruit = lineInformation.getFruit();
         int amount = lineInformation.getQuantity();
         Storage.storage.put(fruit, Storage.storage.get(fruit) + amount);
         return true;
