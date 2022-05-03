@@ -1,10 +1,14 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.DatabaseImpl;
+import core.basesyntax.db.StorageDao;
 import core.basesyntax.models.Transaction;
 
-public class BalanceTransaction implements TransactionHandler {
-    private DatabaseImpl storage = new DatabaseImpl();
+public class BalanceTransactionHandler implements TransactionHandler {
+    private StorageDao storage;
+
+    public BalanceTransactionHandler(StorageDao storageDao) {
+        this.storage = storageDao;
+    }
 
     @Override
     public boolean handleTransaction(Transaction transaction) {

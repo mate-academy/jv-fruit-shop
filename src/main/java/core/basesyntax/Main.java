@@ -1,14 +1,17 @@
 package core.basesyntax;
 
+import core.basesyntax.db.StorageDao;
+import core.basesyntax.db.StorageDaoImpl;
 import core.basesyntax.models.Transaction;
+import core.basesyntax.service.ContentGenerator;
 import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.Parser;
-import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.ReportWriter;
+import core.basesyntax.service.TransactionsCalculator;
+import core.basesyntax.service.impl.ContentGeneratorImpl;
 import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ParserImpl;
-import core.basesyntax.service.impl.ReportGeneratorImpl;
-import core.basesyntax.service.impl.ReportWriterImpl;
 import core.basesyntax.service.impl.TransactionsCalculatorImpl;
 import java.util.List;
 
@@ -26,16 +29,17 @@ public class Main {
         List<Transaction> transactionList = parse.parse(list);
 
         // Adding to storage
-        TransactionsCalculatorImpl handle = new TransactionsCalculatorImpl();
+        TransactionsCalculator handle = new TransactionsCalculatorImpl();
         handle.handleTransactions(transactionList);
 
         // Generating report
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String report = reportGenerator.generateReport();
+        StorageDao storageDao = new StorageDaoImpl();
+        ContentGenerator contentGenerator = new ContentGeneratorImpl(storageDao);
+        String report = contentGenerator.generateContent();
 
         // Writing report to a file
-        ReportWriter reportWriter = new ReportWriterImpl();
-        reportWriter.writeReport(report, PATH_TO);
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.write(report, PATH_TO);
     }
 
 }
