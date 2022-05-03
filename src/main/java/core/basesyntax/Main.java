@@ -18,6 +18,7 @@ import java.util.List;
 public class Main {
     private static final String PATH_FROM = "src/main/resources/inputData.csv";
     private static final String PATH_TO = "src/main/resources/outputData.csv";
+    private static StorageDao storageDao = new StorageDaoImpl();
 
     public static void main(String[] args) {
         // Read
@@ -29,7 +30,7 @@ public class Main {
         List<Transaction> transactionList = parse.parse(list);
 
         // Adding to storage
-        TransactionsCalculator handle = new TransactionsCalculatorImpl();
+        TransactionsCalculator handle = new TransactionsCalculatorImpl(storageDao);
         handle.handleTransactions(transactionList);
 
         // Generating report

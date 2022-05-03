@@ -10,7 +10,7 @@ public class ParserImpl implements Parser {
     public List<Transaction> parse(List<String> list) {
         List<Transaction> transactionsList = new ArrayList<>();
         for (String string:list) {
-            if (string.charAt(1) != ',') {
+            if (isTransactionFormatCorrect(string)) {
                 continue;
             }
             String[] stringsFromInput = string.split(",");
@@ -20,5 +20,9 @@ public class ParserImpl implements Parser {
             transactionsList.add(new Transaction(type, new Fruit(name), amount));
         }
         return transactionsList;
+    }
+
+    private boolean isTransactionFormatCorrect(String line) {
+        return line.charAt(1) != ',';
     }
 }
