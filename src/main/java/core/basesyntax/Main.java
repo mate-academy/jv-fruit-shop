@@ -1,7 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.*;
 import core.basesyntax.service.impl.BalanceOperationHandler;
 import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
@@ -24,20 +24,20 @@ public class Main {
         strategy.put("r", new ReturnOperationHandler());
         strategy.put("p", new PurchaseOperationHandler());
 
-        FileReaderServiceImpl fileReaderService = new FileReaderServiceImpl();
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> readFromFile = fileReaderService
                 .readFromFile(INPUT_DATA_FILE_PATH);
 
-        DataParserServiceImpl dataParserService = new DataParserServiceImpl();
+        DataParserService dataParserService = new DataParserServiceImpl();
         List<FruitTransaction> fruitTransactionList = dataParserService.parseData(readFromFile);
         for (FruitTransaction transaction : fruitTransactionList) {
             OperationHandler operationHandler = strategy.get(transaction.getOperationType());
             operationHandler.process(transaction);
         }
 
-        ReportCreatorServiceImpl reportCreatorService = new ReportCreatorServiceImpl();
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
         String report = reportCreatorService.createReport();
-        core.basesyntax.service.FileWriterService fileWriterService = new FileWriterServiceImpl();
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile("DailyReport", report);
     }
 }
