@@ -1,7 +1,8 @@
-package service;
+package service.implementations;
 
 import dao.FruitsDao;
 import model.Fruit;
+import service.inerfaces.OperationHandler;
 
 public class SupplyOperationHandlerImpl implements OperationHandler {
     private FruitsDao fruitsDao;

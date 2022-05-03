@@ -1,8 +1,8 @@
-package service;
+package service.implementations;
 
 import dao.FruitsDao;
-import dao.FruitsDaoImpl;
 import model.Fruit;
+import service.inerfaces.OperationHandler;
 
 public class PurchaseOperationHandlerImpl implements OperationHandler {
     private FruitsDao fruitsDao;
@@ -13,7 +13,6 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
 
     @Override
     public void doOperation(Fruit key, String value) {
-        FruitsDao fruitsDao = new FruitsDaoImpl();
         fruitsDao.addProduct(key, fruitsDao.getValue(key) - Integer.parseInt(value));
     }
 }

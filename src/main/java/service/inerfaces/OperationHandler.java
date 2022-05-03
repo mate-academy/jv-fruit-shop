@@ -1,4 +1,4 @@
-package service;
+package service.inerfaces;
 
 import model.Fruit;
 

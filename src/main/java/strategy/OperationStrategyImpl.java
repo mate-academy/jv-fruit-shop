@@ -1,24 +1,20 @@
 package strategy;
 
-import java.util.HashMap;
 import java.util.Map;
 import model.Fruit;
-import service.OperationHandler;
+import model.FruitTransferDto;
+import service.inerfaces.OperationHandler;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private Map<String, OperationHandler> operationHandlerMap;
 
-    public OperationStrategyImpl() {
-        this.operationHandlerMap = new HashMap<>();
+    public OperationStrategyImpl(Map<String, OperationHandler> operationHandlerMap) {
+        this.operationHandlerMap = operationHandlerMap;
     }
 
     @Override
-    public void addOperation(String type, OperationHandler operation) {
-        operationHandlerMap.put(type, operation);
-    }
-
-    @Override
-    public void operationCheck(String type, Fruit key, String value) {
-        operationHandlerMap.get(type).doOperation(key, value);
+    public void handle(FruitTransferDto dto) {
+        String[] dtoArr = dto.getDto();
+        operationHandlerMap.get(dtoArr[0]).doOperation(new Fruit(dtoArr[1]), dtoArr[2]);
     }
 }

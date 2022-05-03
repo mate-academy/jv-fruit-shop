@@ -1,7 +1,8 @@
-package service;
+package service.implementations;
 
 import java.util.List;
 import java.util.regex.Pattern;
+import service.inerfaces.Validate;
 
 public class ValidateImpl implements Validate {
     public static final int INDEX_AFTER_FIRST_ROW = 1;
