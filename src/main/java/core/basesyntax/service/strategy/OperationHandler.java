@@ -2,6 +2,6 @@ package core.basesyntax.service.strategy;
 
 import core.basesyntax.model.LineData;
 
-public interface TransactionStrategy {
-    OperationHandler get(LineData lineData);
+public interface OperationHandler {
+    boolean operate(LineData lineData);
 }

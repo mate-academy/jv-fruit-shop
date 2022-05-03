@@ -10,18 +10,23 @@ public class ParserImpl implements Parser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private final ValidatorImpl validator;
+
+    public ParserImpl(ValidatorImpl validatorImpl) {
+        this.validator = validatorImpl;
+    }
 
     @Override
-    public List<LineData> parse(List<String> list) {
+    public List<LineData> parse(List<String> sourceData) {
         List<LineData> lineData = new ArrayList<>();
-        list.remove(0);
+        sourceData.remove(0);
 
-        for (String line: list) {
-            new ValidatorImpl().validate(line.trim());
-            String[] splitLine = line.split(",");
-            lineData.add(new LineData(splitLine[OPERATION_INDEX],
-                    new Fruit(splitLine[FRUIT_INDEX]),
-                               Integer.parseInt(splitLine[QUANTITY_INDEX])));
+        for (String line: sourceData) {
+            validator.validate(line.trim());
+            String[] splittedLine = line.split(",");
+            lineData.add(new LineData(splittedLine[OPERATION_INDEX],
+                    new Fruit(splittedLine[FRUIT_INDEX]),
+                    Integer.parseInt(splittedLine[QUANTITY_INDEX])));
         }
         return lineData;
     }

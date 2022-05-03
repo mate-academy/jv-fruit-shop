@@ -11,9 +11,10 @@ public class ReportMakerImpl implements ReportMaker {
     @Override
     public String createNewReport() {
         StringBuilder report = new StringBuilder();
+        StringBuilder reportValue = new StringBuilder();
         report.append(FORMAT_OF_REPORT + "\n");
         for (Map.Entry<Fruit, Integer> entry: Storage.store.entrySet()) {
-            String reportValue = entry.getKey().getFruitName() + ", " + entry.getValue();
+            reportValue.append(entry.getKey().getFruitName() + ", " + entry.getValue());
             report.append(reportValue + "\n");
         }
         return report.toString();
