@@ -27,15 +27,18 @@ public class Main {
         strategy.put("s", new SupplyOperationHandlerImpl());
         strategy.put("r", new ReturnOperationHandlerImpl());
         strategy.put("p", new PurchaseOperationHandlerImpl());
+
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> readedFromFile = fileReaderService
+        List<String> readFromFile = fileReaderService
                 .readDataFromFiletoList(INPUT_DATA_FILE_PATH);
+
         DataParserService dataParserService = new DataParserServiceImpl();
-        List<FruitTransaction> fruitTransactionList = dataParserService.parseData(readedFromFile);
+        List<FruitTransaction> fruitTransactionList = dataParserService.parseData(readFromFile);
         for (FruitTransaction transaction : fruitTransactionList) {
             OperationHandler operationHandler = strategy.get(transaction.getTypeOfTransaction());
             operationHandler.process(transaction);
         }
+
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
         String report = reportCreatorService.createReport();
         FileWriterService fileWriterService = new FileWriterServiceImpl();

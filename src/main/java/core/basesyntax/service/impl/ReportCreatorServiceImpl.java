@@ -12,7 +12,9 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append("fruit,quantity \n");
         for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
-            reportBuilder.append(entry.getKey().getName()).append(entry.getValue()).append('\n');
+            reportBuilder.append(entry.getKey().getName())
+                    .append(entry.getValue())
+                    .append('\n');
         }
         report = reportBuilder.toString();
         return report;

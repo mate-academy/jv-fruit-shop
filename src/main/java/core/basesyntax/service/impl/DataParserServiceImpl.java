@@ -8,10 +8,10 @@ import java.util.List;
 
 public class DataParserServiceImpl implements DataParserService {
     @Override
-    public List<FruitTransaction> parseData(List<String> readedFromFile) {
+    public List<FruitTransaction> parseData(List<String> readFromFile) {
         List<FruitTransaction> fruitTransactionList = new LinkedList<>();
-        for (int i = 1; i < readedFromFile.size(); i++) {
-            String[] fruitTransactionsFields = readedFromFile.get(i).split(",");
+        for (int i = 1; i < readFromFile.size(); i++) {
+            String[] fruitTransactionsFields = readFromFile.get(i).split(",");
             fruitTransactionList.add(new FruitTransaction(fruitTransactionsFields[0],
                     new Fruit(fruitTransactionsFields[1]),
                     Integer.parseInt(fruitTransactionsFields[2])));
