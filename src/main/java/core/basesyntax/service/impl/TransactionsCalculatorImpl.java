@@ -17,6 +17,10 @@ public class TransactionsCalculatorImpl implements TransactionsCalculator {
     private Map<String, TransactionHandler> transactionHandlerMap = new HashMap<>();
     private StorageDao storageDao;
 
+    public TransactionsCalculatorImpl(StorageDaoImpl storageDao) {
+        this.storageDao = storageDao;
+    }
+
     {
         storageDao = new StorageDaoImpl();
         transactionHandlerMap.put("b", new BalanceTransactionHandler(storageDao));
