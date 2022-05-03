@@ -1,4 +1,4 @@
-package strategy;
+package operation;
 
 import model.FruitTransaction;
 

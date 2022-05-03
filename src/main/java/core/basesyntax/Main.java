@@ -4,30 +4,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
+import operation.BalanceOperationHandler;
+import operation.OperationHandler;
+import operation.PurchaseOperationHandler;
+import operation.ReturnOperationHandler;
+import operation.SupplyOperationHandler;
 import servise.converter.Converter;
-import servise.converter.ConverterImp;
+import servise.converter.ConverterImpl;
 import servise.reader.Reader;
 import servise.reader.ReaderImp;
 import servise.reporter.Reporter;
-import servise.reporter.ReporterImp;
+import servise.reporter.ReporterImpl;
+import servise.strategy.StrategyOperation;
+import servise.strategy.StrategyOperationImpl;
 import servise.writer.Writer;
-import servise.writer.WriterImp;
-import strategy.BalanceOperationHandler;
-import strategy.OperationHandler;
-import strategy.PurchaseOperationHandler;
-import strategy.ReturnOperationHandler;
-import strategy.SupplyOperationHandler;
+import servise.writer.WriterImpl;
 
 public class Main {
     private static final String PATH_INPUT_FILE = "src/main/resources/inputData.csv";
     private static final String PATH_REPORT_FILE = "src/main/resources/report.csv";
-    private static OperationHandler handler;
 
     public static void main(String[] args) {
         Reader readFromFile = new ReaderImp();
         List<String> inputFromFile = readFromFile.readFromFile(PATH_INPUT_FILE);
 
-        Converter convertToObject = new ConverterImp();
+        Converter convertToObject = new ConverterImpl();
         final List<FruitTransaction> fruitTransactions = convertToObject.convert(inputFromFile);
 
         Map<String, OperationHandler> map = new HashMap<>();
@@ -37,14 +38,14 @@ public class Main {
         map.put("p", new PurchaseOperationHandler());
 
         for (FruitTransaction fruits: fruitTransactions) {
-            handler = map.get(fruits.getOperation());
-            handler.process(fruits);
+            StrategyOperation strategyOperation = new StrategyOperationImpl(map);
+            strategyOperation.getOperation(fruits).process(fruits);
         }
 
-        Reporter report = new ReporterImp();
-        String reportString = report.report();
+        Reporter reportServise = new ReporterImpl();
+        String reportString = reportServise.createReport();
 
-        Writer writeToFile = new WriterImp();
-        writeToFile.writeToFile(PATH_REPORT_FILE, reportString);
+        Writer fileWriter = new WriterImpl();
+        fileWriter.writeToFile(PATH_REPORT_FILE, reportString);
     }
 }

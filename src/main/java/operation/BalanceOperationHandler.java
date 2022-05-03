@@ -1,9 +1,9 @@
-package strategy;
+package operation;
 
 import db.Storage;
 import model.FruitTransaction;
 
-public class ReturnOperationHandler implements OperationHandler {
+public class BalanceOperationHandler implements OperationHandler {
     @Override
     public void process(FruitTransaction fruitTransaction) {
         Integer initialQuality = Storage.data.get(fruitTransaction.getFruit());
