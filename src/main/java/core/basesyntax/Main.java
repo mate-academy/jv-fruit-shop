@@ -1,6 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ParserService;
@@ -34,10 +36,18 @@ public class Main {
         FileReaderService readerService = new FileReaderServiceImpl();
         List<String> readData = readerService.read(WAREHOUSE_DATABASE);
 
-        ParserService parseService = new ParserServiceImpl();
+        ValidationService validationService = new ValidationServiceImpl();
+        List<String> validatedData = validationService.validate(readData);
 
-        ValidationService validationService = new ValidationServiceImpl(parseService, handlerMap);
-        validationService.validate(readData);
+        ParserService parserService = new ParserServiceImpl();
+
+        for (String line : validatedData) {
+            FruitTransaction fruitTransaction = parserService.parse(line);
+            OperationHandler operationHandler = handlerMap.get(fruitTransaction
+                    .getOperation().getOperationType());
+            operationHandler.process(new Fruit(fruitTransaction.getFruitName()),
+                    fruitTransaction.getQuantity());
+        }
 
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.createReport(Storage.storage);
