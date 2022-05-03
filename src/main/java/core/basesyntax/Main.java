@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String inputFilePath = "src/main/resources/input.csv";
-    private static final String outputFilePath = "src/main/resources/output.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
         StorageDao storageDao = new StorageDaoImpl();
@@ -37,7 +37,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> data = fileReaderService.readFromFile(inputFilePath);
+        List<String> data = fileReaderService.readFromFile(INPUT_FILE_PATH);
 
         ParseService parseService = new ParseServiceImpl();
         List<FruitTransaction> parse = parseService.parse(data);
@@ -52,6 +52,6 @@ public class Main {
         String report = reportService.makeReport(storageDao.getAll());
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(outputFilePath, report);
+        fileWriterService.writeToFile(OUTPUT_FILE_PATH, report);
     }
 }

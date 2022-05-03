@@ -13,7 +13,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void doOperation(Fruit fruit, Integer quantity) {
         Integer initialQuantity = storageDao.get(fruit);
-        if (initialQuantity == null || initialQuantity <= quantity) {
+        if (initialQuantity == null || initialQuantity < quantity) {
             throw new RuntimeException("Not enough fruit. You need "
                     + quantity + " fruits, but there are " + initialQuantity + " the store");
         }
