@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class ValidateImpl implements Validate {
-    private static final Pattern REGEX_FOR_DATA = Pattern.compile("[bprs],[a-z]*,[0-9]*");
     public static final int INDEX_AFTER_FIRST_ROW = 1;
+    private static final Pattern REGEX_FOR_DATA = Pattern.compile("[bprs],[a-z]*,[0-9]*");
 
     @Override
     public void validate(List<String> list) {
