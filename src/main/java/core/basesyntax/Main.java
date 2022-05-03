@@ -25,17 +25,17 @@ public class Main {
     private static final String PATH_REPORT_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        Reader readFromFile = new ReaderImp();
-        List<String> inputFromFile = readFromFile.readFromFile(PATH_INPUT_FILE);
-
-        Converter convertToObject = new ConverterImpl();
-        final List<FruitTransaction> fruitTransactions = convertToObject.convert(inputFromFile);
-
         Map<String, OperationHandler> map = new HashMap<>();
         map.put("b", new BalanceOperationHandler());
         map.put("s", new SupplyOperationHandler());
         map.put("r", new ReturnOperationHandler());
         map.put("p", new PurchaseOperationHandler());
+
+        Reader readFromFile = new ReaderImp();
+        List<String> inputFromFile = readFromFile.readFromFile(PATH_INPUT_FILE);
+
+        Converter convertToObject = new ConverterImpl();
+        List<FruitTransaction> fruitTransactions = convertToObject.convert(inputFromFile);
 
         for (FruitTransaction fruits: fruitTransactions) {
             StrategyOperation strategyOperation = new StrategyOperationImpl(map);
