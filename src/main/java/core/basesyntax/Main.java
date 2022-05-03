@@ -1,19 +1,15 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataParserService;
-import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.ReportCreatorService;
-import core.basesyntax.service.impl.BalanceOperationHandlerImpl;
-import core.basesyntax.service.impl.DataParserServiceImpl;
-import core.basesyntax.service.impl.FileReaderServiceImpl;
-import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.PurchaseOperationHandlerImpl;
-import core.basesyntax.service.impl.ReportCreatorServiceImpl;
-import core.basesyntax.service.impl.ReturnOperationHandlerImpl;
-import core.basesyntax.service.impl.SupplyOperationHandlerImpl;
+import core.basesyntax.service.impl.BalanceOperationHandler;
+import core.basesyntax.service.impl.DataParserService;
+import core.basesyntax.service.impl.FileReaderService;
+import core.basesyntax.service.impl.FileWriterService;
+import core.basesyntax.service.impl.PurchaseOperationHandler;
+import core.basesyntax.service.impl.ReportCreatorService;
+import core.basesyntax.service.impl.ReturnOperationHandler;
+import core.basesyntax.service.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,28 +19,25 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String, OperationHandler> strategy = new HashMap<>();
-        strategy.put("b", new BalanceOperationHandlerImpl());
-        strategy.put("s", new SupplyOperationHandlerImpl());
-        strategy.put("r", new ReturnOperationHandlerImpl());
-        strategy.put("p", new PurchaseOperationHandlerImpl());
+        strategy.put("b", new BalanceOperationHandler());
+        strategy.put("s", new SupplyOperationHandler());
+        strategy.put("r", new ReturnOperationHandler());
+        strategy.put("p", new PurchaseOperationHandler());
 
-        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        FileReaderService fileReaderService = new FileReaderService();
         List<String> readFromFile = fileReaderService
-                .readDataFromFiletoList(INPUT_DATA_FILE_PATH);
+                .readFromFile(INPUT_DATA_FILE_PATH);
 
-        DataParserService dataParserService = new DataParserServiceImpl();
+        DataParserService dataParserService = new DataParserService();
         List<FruitTransaction> fruitTransactionList = dataParserService.parseData(readFromFile);
         for (FruitTransaction transaction : fruitTransactionList) {
-            OperationHandler operationHandler = strategy.get(transaction.getTypeOfTransaction());
+            OperationHandler operationHandler = strategy.get(transaction.getOperationType());
             operationHandler.process(transaction);
         }
 
-        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        ReportCreatorService reportCreatorService = new ReportCreatorService();
         String report = reportCreatorService.createReport();
-        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        core.basesyntax.service.FileWriterService fileWriterService = new FileWriterService();
         fileWriterService.writeToFile("DailyReport", report);
     }
 }
-
-
-

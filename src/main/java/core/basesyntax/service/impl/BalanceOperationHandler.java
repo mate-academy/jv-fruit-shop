@@ -4,11 +4,11 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.storage.Storage;
 
-public class BalanceOperationHandlerImpl implements OperationHandler {
+public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public void process(FruitTransaction fruitTransaction) {
         Storage.storage.put(fruitTransaction.getTransactionFruitName(),
-                fruitTransaction.getTransactionFruitQuantity());
+                fruitTransaction.getQuantity());
     }
 }

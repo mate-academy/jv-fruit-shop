@@ -1,11 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.storage.Storage;
 import java.util.Map;
 
-public class ReportCreatorServiceImpl implements ReportCreatorService {
+public class ReportCreatorService implements core.basesyntax.service.ReportCreatorService {
     @Override
     public String createReport() {
         String report = new String();
@@ -16,7 +15,6 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
                     .append(entry.getValue())
                     .append('\n');
         }
-        report = reportBuilder.toString();
-        return report;
+        return reportBuilder.toString();
     }
 }

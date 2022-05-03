@@ -1,29 +1,29 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private String typeOfTransaction;
+    private String operationType;
     private Fruit fruit;
-    private int transactionFruitQuantity;
+    private int quantity;
 
     public FruitTransaction() {
-        this.typeOfTransaction = typeOfTransaction;
+        this.operationType = operationType;
         this.fruit = fruit;
-        this.transactionFruitQuantity = transactionFruitQuantity;
+        this.quantity = quantity;
     }
 
-    public FruitTransaction(String typeOfTransaction, Fruit fruit,
-                            Integer transactionFruitQuantity) {
-        this.typeOfTransaction = typeOfTransaction;
+    public FruitTransaction(String operationType, Fruit fruit,
+                            Integer quantity) {
+        this.operationType = operationType;
         this.fruit = fruit;
-        this.transactionFruitQuantity = transactionFruitQuantity;
+        this.quantity = quantity;
     }
 
-    public String getTypeOfTransaction() {
-        return typeOfTransaction;
+    public String getOperationType() {
+        return operationType;
     }
 
-    public void setTypeOfTransaction(String typeOfTransaction) {
-        this.typeOfTransaction = typeOfTransaction;
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
     }
 
     public Fruit getTransactionFruitName() {
@@ -34,11 +34,11 @@ public class FruitTransaction {
         this.fruit = fruit;
     }
 
-    public int getTransactionFruitQuantity() {
-        return transactionFruitQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setTransactionFruitQuantity(int transactionFruitQuantity) {
-        this.transactionFruitQuantity = transactionFruitQuantity;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
