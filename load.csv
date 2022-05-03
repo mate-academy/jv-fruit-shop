@@ -1,0 +1,11 @@
+type,name,quantity
+b,banana,100
+b,apple,10
+s,banana,100
+p,banana,1
+s,apple,10
+r,apple,10
+p,apple,1
+r,banana,100
+s,pineapple,1000
+s,cucumber,5
