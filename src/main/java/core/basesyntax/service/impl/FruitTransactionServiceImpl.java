@@ -29,9 +29,6 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
                 case "RETURN":
                     new ReturnHandler(fruitDao).handle(transaction.getFruit());
                     break;
-
-                default:
-                    throw new RuntimeException("Can`t be used operation !!");
             }
         }
     }
