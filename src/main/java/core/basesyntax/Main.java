@@ -12,7 +12,7 @@ import operation.SupplyOperationHandler;
 import servise.converter.Converter;
 import servise.converter.ConverterImpl;
 import servise.reader.Reader;
-import servise.reader.ReaderImp;
+import servise.reader.ReaderImpl;
 import servise.reporter.Reporter;
 import servise.reporter.ReporterImpl;
 import servise.strategy.StrategyOperation;
@@ -31,19 +31,19 @@ public class Main {
         map.put("r", new ReturnOperationHandler());
         map.put("p", new PurchaseOperationHandler());
 
-        Reader readFromFile = new ReaderImp();
+        Reader readFromFile = new ReaderImpl();
         List<String> inputFromFile = readFromFile.readFromFile(PATH_INPUT_FILE);
 
         Converter convertToObject = new ConverterImpl();
         List<FruitTransaction> fruitTransactions = convertToObject.convert(inputFromFile);
 
+        StrategyOperation strategyOperation = new StrategyOperationImpl(map);
         for (FruitTransaction fruits: fruitTransactions) {
-            StrategyOperation strategyOperation = new StrategyOperationImpl(map);
             strategyOperation.getOperation(fruits).process(fruits);
         }
 
-        Reporter reportServise = new ReporterImpl();
-        String reportString = reportServise.createReport();
+        Reporter reportService = new ReporterImpl();
+        String reportString = reportService.createReport();
 
         Writer fileWriter = new WriterImpl();
         fileWriter.writeToFile(PATH_REPORT_FILE, reportString);

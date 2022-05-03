@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReaderImp implements Reader {
+public class ReaderImpl implements Reader {
     @Override
     public List<String> readFromFile(String path) {
         List<String> list = new ArrayList<>();
