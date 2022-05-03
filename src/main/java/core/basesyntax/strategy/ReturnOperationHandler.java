@@ -6,7 +6,7 @@ import core.basesyntax.model.Fruit;
 public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void process(Fruit fruit, Integer quantity) {
-        Storage.getStorage().compute(fruit, (k, v) ->
+        Storage.storage.compute(fruit, (k, v) ->
                 (v == null) ? quantity : v + quantity);
     }
 }

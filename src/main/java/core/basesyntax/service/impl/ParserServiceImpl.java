@@ -17,7 +17,7 @@ public class ParserServiceImpl implements ParserService {
         fruitTransaction.setOperation(Arrays.stream(FruitTransaction.OperationType.values())
                 .filter(type -> type.getOperationType().equals(transactionData[OPERATION_DATA]))
                 .findFirst()
-                .orElse(null));
+                .get());
         fruitTransaction.setFruitName(transactionData[FRUIT_NAME_DATA]);
         fruitTransaction.setQuantity(Integer.parseInt(transactionData[QUANTITY_DATA]));
         return fruitTransaction;

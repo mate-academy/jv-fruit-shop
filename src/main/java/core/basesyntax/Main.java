@@ -1,16 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ValidationService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.ValidationServiceImpl;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
@@ -36,18 +36,11 @@ public class Main {
 
         ParserService parseService = new ParserServiceImpl();
 
-        for (String line : readData) {
-            if (String.valueOf(line.charAt(0)).matches("[bspr]")) {
-                FruitTransaction fruitTransaction = parseService.parse(line);
-                OperationHandler operationHandler = handlerMap.get(fruitTransaction
-                        .getOperation().getOperationType());
-                operationHandler.process(new Fruit(fruitTransaction.getFruitName()),
-                        fruitTransaction.getQuantity());
-            }
-        }
+        ValidationService validationService = new ValidationServiceImpl(parseService, handlerMap);
+        validationService.validate(readData);
 
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.createReport(Storage.getStorage());
+        String report = reportService.createReport(Storage.storage);
 
         FileWriterService writerService = new FileWriterServiceImpl();
         writerService.write(DAILY_REPORT, report);
