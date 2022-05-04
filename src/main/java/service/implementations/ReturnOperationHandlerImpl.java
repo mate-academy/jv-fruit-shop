@@ -12,7 +12,7 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
     }
 
     @Override
-    public void doOperation(Fruit key, String value) {
-        fruitsDao.addProduct(key, fruitsDao.getValue(key) + Integer.parseInt(value));
+    public void doOperation(Fruit fruit, Integer quantity) {
+        fruitsDao.addProduct(fruit, fruitsDao.getValue(fruit) + quantity);
     }
 }

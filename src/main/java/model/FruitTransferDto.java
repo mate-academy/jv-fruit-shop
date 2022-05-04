@@ -1,13 +1,25 @@
 package model;
 
 public class FruitTransferDto {
-    private String[] dto;
+    private String operationType;
+    private Fruit fruit;
+    private int quantity;
 
-    public FruitTransferDto(String[] dto) {
-        this.dto = dto;
+    public FruitTransferDto(String operationType, Fruit fruit, int quantity) {
+        this.operationType = operationType;
+        this.fruit = fruit;
+        this.quantity = quantity;
     }
 
-    public String[] getDto() {
-        return dto;
+    public String getOperationType() {
+        return operationType;
+    }
+
+    public Fruit getFruit() {
+        return fruit;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }

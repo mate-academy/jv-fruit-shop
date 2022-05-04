@@ -1,7 +1,6 @@
 package strategy;
 
 import java.util.Map;
-import model.Fruit;
 import model.FruitTransferDto;
 import service.inerfaces.OperationHandler;
 
@@ -14,7 +13,7 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public void handle(FruitTransferDto dto) {
-        String[] dtoArr = dto.getDto();
-        operationHandlerMap.get(dtoArr[0]).doOperation(new Fruit(dtoArr[1]), dtoArr[2]);
+        operationHandlerMap.get(dto.getOperationType())
+                .doOperation(dto.getFruit(), dto.getQuantity());
     }
 }

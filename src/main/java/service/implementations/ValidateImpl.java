@@ -9,7 +9,7 @@ public class ValidateImpl implements Validate {
     private static final Pattern REGEX_FOR_DATA = Pattern.compile("[bprs],[a-z]*,[0-9]*");
 
     @Override
-    public void validate(List<String> list) {
+    public boolean validate(List<String> list) {
         if (list == null || list.isEmpty()) {
             throw new RuntimeException("Empty input or null!");
         }
@@ -18,5 +18,6 @@ public class ValidateImpl implements Validate {
                 throw new RuntimeException("Invalid input!");
             }
         }
+        return true;
     }
 }

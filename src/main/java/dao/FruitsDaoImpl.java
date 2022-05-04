@@ -1,6 +1,7 @@
 package dao;
 
 import db.Storage;
+import java.util.Map;
 import model.Fruit;
 
 public class FruitsDaoImpl implements FruitsDao {
@@ -12,5 +13,10 @@ public class FruitsDaoImpl implements FruitsDao {
     @Override
     public Integer getValue(Fruit fruit) {
         return Storage.storage.get(fruit);
+    }
+
+    @Override
+    public Map<Fruit, Integer> getAll() {
+        return Storage.storage;
     }
 }

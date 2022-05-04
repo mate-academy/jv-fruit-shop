@@ -12,7 +12,7 @@ public class BalanceOperationHandlerImpl implements OperationHandler {
     }
 
     @Override
-    public void doOperation(Fruit key, String value) {
-        fruitsDao.addProduct(key, Integer.parseInt(value));
+    public void doOperation(Fruit fruit, Integer quantity) {
+        fruitsDao.addProduct(fruit, quantity);
     }
 }
