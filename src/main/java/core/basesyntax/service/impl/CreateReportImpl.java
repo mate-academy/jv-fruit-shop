@@ -6,13 +6,12 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CreateReport;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.List;
 
 public class CreateReportImpl implements CreateReport {
-    FruitDao fruitDao = new FruitDaoImpl();
-    OperationStrategy operationStrategy;
-    FruitService fruitService = new FruitServiceImpl(fruitDao, operationStrategy);
+    private final FruitDao fruitDao = new FruitDaoImpl();
+    private OperationStrategy operationStrategy;
+    private final FruitService fruitService = new FruitServiceImpl(fruitDao, operationStrategy);
 
     @Override
     public String createNewReport() {

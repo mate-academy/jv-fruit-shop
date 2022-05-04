@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.DataProcessing;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataProcessing;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataProcessingImpl implements DataProcessing {
-    OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public DataProcessingImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;

@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CreateReport;
 import core.basesyntax.service.DataProcessing;
 import core.basesyntax.service.ReaderService;
@@ -9,7 +10,6 @@ import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CreateReportImpl;
 import core.basesyntax.service.impl.DataProcessingImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
