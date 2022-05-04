@@ -5,7 +5,7 @@ import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String SPLIT_SYMBOL = ",";
-    private static final String NEXT_LINE = "\n";
+    private static final String NEXT_LINE = System.lineSeparator();
 
     @Override
     public String generateReport(Map<String, Integer> reportDataMap) {

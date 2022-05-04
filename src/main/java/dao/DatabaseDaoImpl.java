@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class DatabaseDaoImpl implements DatabaseDao {
     @Override
-    public void addAllFruits(Map<String, Integer> fruitList) {
-        Database.database.putAll(fruitList);
+    public void addFruit(String fruit, Integer quantity) {
+        Database.database.put(fruit, quantity);
     }
 
     @Override

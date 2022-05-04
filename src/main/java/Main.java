@@ -1,6 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
-import model.Operation;
+import model.FruitTransaction;
 import service.FruitService;
 import service.impl.FruitServiceImpl;
 import strategy.OperationHandler;
@@ -16,11 +16,11 @@ public class Main {
         final String inputFile = "src//main//resources//before.csv";
         final String outputFile = "src//main//resources//after.csv";
 
-        Map<Operation, OperationHandler> strategyMap = new HashMap<>();
-        strategyMap.put(Operation.BALANCE, new BalanceOperationImpl());
-        strategyMap.put(Operation.SUPPLY, new SupplyOperationImpl());
-        strategyMap.put(Operation.PURCHASE, new PurchaseOperationImpl());
-        strategyMap.put(Operation.RETURN, new ReturnOperationImpl());
+        Map<FruitTransaction.Operation, OperationHandler> strategyMap = new HashMap<>();
+        strategyMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationImpl());
+        strategyMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationImpl());
+        strategyMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationImpl());
+        strategyMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationImpl());
 
         StrategyService strategyService = new StrategyServiceImpl(strategyMap);
         FruitService fruitService = new FruitServiceImpl(strategyService);

@@ -3,7 +3,8 @@ package dao;
 import java.util.Map;
 
 public interface DatabaseDao {
-    void addAllFruits(Map<String, Integer> fruitList);
+
+    void addFruit(String fruit, Integer quantity);
 
     Map<String, Integer> getAllFruits();
 }

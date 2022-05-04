@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
-import model.Operation;
 import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
@@ -17,20 +16,20 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public List<FruitTransaction> read(String path) {
-        List<FruitTransaction> stringList = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            br.readLine();
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
+            bufferedReader.readLine();
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 String[] splitedTransaction = line.split(SPLIT_SYMBOL);
-                stringList.add(new FruitTransaction(
-                        Operation.getByValue(splitedTransaction[OPERATION_INDEX]),
+                fruitTransactions.add(new FruitTransaction(
+                        FruitTransaction.Operation.getByValue(splitedTransaction[OPERATION_INDEX]),
                         splitedTransaction[FRUIT_INDEX],
                         Integer.parseInt(splitedTransaction[QUANTITY_INDEX])));
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + path, e);
         }
-        return stringList;
+        return fruitTransactions;
     }
 }
