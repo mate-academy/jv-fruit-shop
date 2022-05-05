@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataProcessingImpl implements DataProcessing {
-    private final OperationStrategy operationStrategy;
 
     public DataProcessingImpl(OperationStrategy operationStrategy) {
-        this.operationStrategy = operationStrategy;
     }
 
     @Override
@@ -28,12 +26,5 @@ public class DataProcessingImpl implements DataProcessing {
             transactions.add(fruitTransaction);
         }
         return transactions;
-    }
-
-    @Override
-    public void updateStorage(List<FruitTransaction> transactions) {
-        for (FruitTransaction transaction : transactions) {
-            operationStrategy.getHandler(transaction.getOperation()).handle(transaction);
-        }
     }
 }

@@ -5,16 +5,14 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CreateReport;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class CreateReportImpl implements CreateReport {
     private final FruitDao fruitDao = new FruitDaoImpl();
-    private OperationStrategy operationStrategy;
-    private final FruitService fruitService = new FruitServiceImpl(fruitDao, operationStrategy);
+    private final FruitService fruitService = new FruitServiceImpl(fruitDao);
 
     @Override
-    public String createNewReport() {
+    public String createReport() {
         List<Fruit> fruits = fruitService.getAll();
         StringBuilder report = new StringBuilder("fruit,quantity");
         for (Fruit fruit : fruits) {

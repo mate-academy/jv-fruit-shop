@@ -5,11 +5,11 @@ import core.basesyntax.db.Storage;
 public class FruitDaoImpl implements FruitDao {
 
     @Override
-    public Integer get(String fruitName) {
+    public Integer getQuantity(String fruitName) {
         if (Storage.fruits.containsKey(fruitName)) {
             return Storage.fruits.get(fruitName);
         } else {
-            throw new RuntimeException("There's no such a fruit in a Storage");
+            throw new RuntimeException("There's no such a fruit in a Storage: " + fruitName);
         }
     }
 

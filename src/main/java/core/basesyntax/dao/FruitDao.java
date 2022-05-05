@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
 public interface FruitDao {
-    Integer get(String fruitName);
+    Integer getQuantity(String fruitName);
 
     void update(String fruitName, Integer amount);
 }

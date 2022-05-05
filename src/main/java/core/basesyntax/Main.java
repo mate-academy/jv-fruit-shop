@@ -41,10 +41,13 @@ public class Main {
 
         List<String> data = readerService.readFromFile(FROM_FILE);
         List<FruitTransaction> transactions = dataProcessing.convertDataIntoTransaction(data);
-        dataProcessing.updateStorage(transactions);
+
+        for (FruitTransaction transaction : transactions) {
+            operationStrategy.getHandler(transaction.getOperation()).handle(transaction);
+        }
 
         CreateReport createReport = new CreateReportImpl();
-        String report = createReport.createNewReport();
+        String report = createReport.createReport();
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(TO_FILE, report);
     }

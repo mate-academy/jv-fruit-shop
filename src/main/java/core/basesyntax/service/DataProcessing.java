@@ -6,6 +6,4 @@ import java.util.List;
 public interface DataProcessing {
 
     List<FruitTransaction> convertDataIntoTransaction(List<String> dataList);
-
-    void updateStorage(List<FruitTransaction> transactions);
 }
