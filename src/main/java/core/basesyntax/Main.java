@@ -9,7 +9,6 @@ import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.FileReaderFileServiceImpl;
 import core.basesyntax.service.impl.FileWriterFileServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionImpl;
-import core.basesyntax.service.impl.FruitTransactionImpl.Operation;
 import core.basesyntax.service.impl.LineParserServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.FruitOperation;
@@ -35,7 +34,7 @@ public class Main {
         LineParserService lineParserService = new LineParserServiceImpl();
         FruitTransactionImpl fruitTransactionImpl = new FruitTransactionImpl(transactionMap);
         fruitTransactionImpl
-                .doTransaction(lineParserService.parseDate(
+                .process(lineParserService.parseDate(
                         fileReaderService.read(FILE_PATH_INITIAL)));
         ReportService reportService = new ReportServiceImpl(storageDao);
         String report = reportService.createReport();

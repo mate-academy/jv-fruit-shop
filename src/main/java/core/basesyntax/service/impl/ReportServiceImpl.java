@@ -14,12 +14,12 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String createReport() {
         List<String> fruits = storageDao.getAll();
-        StringBuilder report = new StringBuilder();
-        report.append("fruit").append(",").append("quantity").append(System.lineSeparator());
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append("fruit").append(",").append("quantity").append(System.lineSeparator());
         for (String fruit : fruits) {
-            report.append(fruit).append(",")
+            reportBuilder.append(fruit).append(",")
                     .append(storageDao.getAmount(fruit)).append(System.lineSeparator());
         }
-        return report.toString().trim();
+        return reportBuilder.toString();
     }
 }
