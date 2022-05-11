@@ -29,37 +29,29 @@ public class FruitTransaction {
         return operation;
     }
 
-    public static Operation getOperation(String operation) {
-        if (operation.equals("b")) {
-            return Operation.BALANCE;
-        }
-        if (operation.equals("s")) {
-            return Operation.SUPPLY;
-        }
-        if (operation.equals("r")) {
-            return Operation.RETURN;
-        }
-        if (operation.equals("p")) {
-            return Operation.PURCHASE;
-        }
-        throw new RuntimeException("Invalid operation");
-    }
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String abbr;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.abbr = operation;
         }
 
         public String getOperation() {
-            return operation;
+            return abbr;
         }
 
+        public static Operation getOperation(String operation) {
+            for (Operation operation1 : Operation.values()) {
+                if (operation1.getOperation().equals(operation)) {
+                    return operation1;
+                }
+            }
+            throw new RuntimeException("Invalid operation");
+        }
     }
 }

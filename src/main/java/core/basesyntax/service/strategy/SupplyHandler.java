@@ -3,11 +3,13 @@ package core.basesyntax.service.strategy;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.StorageService;
+import core.basesyntax.service.StorageServiceImpl;
 
-public class ActivitiesHandlerSupply implements ActivitiesHandler {
+public class SupplyHandler implements OperationHandler {
+    private StorageService storageService = new StorageServiceImpl();
 
     @Override
-    public void handleActivity(StorageService storageService, FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         storageService.add(new Fruit(fruitTransaction.getFruit()), fruitTransaction.getQuantity());
     }
 }

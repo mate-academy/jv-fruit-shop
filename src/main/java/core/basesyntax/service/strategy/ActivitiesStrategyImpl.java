@@ -1,28 +1,19 @@
 package core.basesyntax.service.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.HashMap;
 import java.util.Map;
 
 public class ActivitiesStrategyImpl implements ActivitiesStrategy {
-    private Map<FruitTransaction.Operation, ActivitiesHandler> activitiesHandlerMap;
+    private Map<FruitTransaction.Operation, OperationHandler> activitiesHandlerMap;
 
-    public ActivitiesStrategyImpl() {
-        activitiesHandlerMap = new HashMap<>();
+    public ActivitiesStrategyImpl(Map<FruitTransaction.Operation,
+            OperationHandler> activitiesHandlerMap) {
+        this.activitiesHandlerMap = activitiesHandlerMap;
     }
 
-    public ActivitiesHandler get(FruitTransaction.Operation operation) {
-        switch (operation) {
-            case RETURN:
-                return new ActivitiesHandlerReturn();
-            case BALANCE:
-                return new ActivitiesHandlerBalance();
-            case PURCHASE:
-                return new ActivitiesHandlerPurchase();
-            case SUPPLY:
-                return new ActivitiesHandlerSupply();
-            default:
-                throw new RuntimeException("Invalid operation");
-        }
+    @Override
+    public OperationHandler get(FruitTransaction.Operation operation) {
+        return activitiesHandlerMap.get(operation);
     }
 }
+
