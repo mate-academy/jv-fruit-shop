@@ -10,31 +10,34 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public void add(Fruit fruit, int amount) {
-        Map<Fruit, Integer> fromStorage = storageDao.getFromStorage();
-        if (fromStorage.keySet().contains(fruit)) {
-            fromStorage.replace(new Fruit(fruit.getName()),
-                    fromStorage.get(fruit), amount + fromStorage.get(fruit));
+        Map<Fruit, Integer> fruits = storageDao.getAll();
+        if (fruits.keySet().contains(fruit)) {
+            fruits.replace(new Fruit(fruit.getName()),
+                    fruits.get(fruit), amount + fruits.get(fruit));
         } else {
-            storageDao.addToStorage(fruit, amount);
+            storageDao.add(fruit, amount);
         }
     }
 
     @Override
-    public void get(Fruit fruit, int amount) {
-        Map<Fruit, Integer> fromStorage = storageDao.getFromStorage();
-        if (!fromStorage.keySet().contains(fruit)) {
+    public int get(Fruit fruit, int amount) {
+        Map<Fruit, Integer> fruits = storageDao.getAll();
+        if (!fruits.keySet().contains(fruit)) {
             throw new RuntimeException("There is no such fruit in the store");
         }
-        if (fromStorage.get(fruit) < amount) {
+        if (fruits.get(fruit) < amount) {
             throw new RuntimeException("There is no such amount in the store. The remnant is "
-                    + fromStorage.get(fruit));
+                    + fruits.get(fruit));
         } else {
-            fromStorage.get(fruit);
+            fruits.get(fruit);
+            int remnant = storageDao.getAll().get(fruit) - amount;
+            return remnant;
+
         }
     }
 
     @Override
-    public void updateStorage(Fruit fruit, int amount) {
-        storageDao.addToStorage(fruit, amount);
+    public void update(Fruit fruit, int amount) {
+        storageDao.add(fruit, amount);
     }
 }

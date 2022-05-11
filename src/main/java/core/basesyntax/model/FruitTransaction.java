@@ -35,20 +35,20 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String abbr;
+        private String abbreviature;
 
-        Operation(String operation) {
-            this.abbr = operation;
+        Operation(String abbreviature) {
+            this.abbreviature = abbreviature;
         }
 
-        public String getOperation() {
-            return abbr;
+        public String getAbbreviature() {
+            return abbreviature;
         }
 
-        public static Operation getOperation(String operation) {
-            for (Operation operation1 : Operation.values()) {
-                if (operation1.getOperation().equals(operation)) {
-                    return operation1;
+        public static Operation getOperation(String abbreviature) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getAbbreviature().equals(abbreviature)) {
+                    return operation;
                 }
             }
             throw new RuntimeException("Invalid operation");

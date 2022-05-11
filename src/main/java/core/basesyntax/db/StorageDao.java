@@ -4,7 +4,7 @@ import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public interface StorageDao {
-    void addToStorage(Fruit fruit, int amount);
+    void add(Fruit fruit, int amount);
 
-    Map<Fruit, Integer> getFromStorage();
+    Map<Fruit, Integer> getAll();
 }

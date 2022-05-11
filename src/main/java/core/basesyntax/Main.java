@@ -10,10 +10,10 @@ import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FileWriterServiceImpl;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.FruitTransactionParserImpl;
-import core.basesyntax.service.strategy.ActivitiesStrategy;
-import core.basesyntax.service.strategy.ActivitiesStrategyImpl;
 import core.basesyntax.service.strategy.BalanceHandler;
 import core.basesyntax.service.strategy.OperationHandler;
+import core.basesyntax.service.strategy.OperationStrategy;
+import core.basesyntax.service.strategy.OperationStrategyImpl;
 import core.basesyntax.service.strategy.PurchaseHandler;
 import core.basesyntax.service.strategy.ReturnHandler;
 import core.basesyntax.service.strategy.SupplyHandler;
@@ -28,14 +28,14 @@ public class Main {
                 .readFromFile("src/main/resources/remnants-of-fruit.csv");
         FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
 
-        Map<FruitTransaction.Operation, OperationHandler> activitiesHandlerMap = new HashMap<>();
-        activitiesHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        activitiesHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        activitiesHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        activitiesHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        Map<FruitTransaction.Operation, OperationHandler> operationMap = new HashMap<>();
+        operationMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
+        operationMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+        operationMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
+        operationMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
 
         List<FruitTransaction> parser = fruitTransactionParser.parse(readFromFile);
-        ActivitiesStrategy strategy = new ActivitiesStrategyImpl(activitiesHandlerMap);
+        OperationStrategy strategy = new OperationStrategyImpl(operationMap);
         for (int i = 0; i < parser.size(); i++) {
             FruitTransaction.Operation operation = parser.get(i).getOperation();
             OperationHandler handler = strategy.get(operation);
@@ -44,13 +44,13 @@ public class Main {
 
         StorageDao storageDao = new StorageDaoImpl();
         StringBuilder report = new StringBuilder();
-        for (Map.Entry entry:storageDao.getFromStorage().entrySet()) {
+        for (Map.Entry entry:storageDao.getAll().entrySet()) {
             Fruit fruit = (Fruit) entry.getKey();
             report.append(fruit.getName()).append(", ")
                     .append(entry.getValue()).append(System.lineSeparator());
         }
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeData("src/main/resources/report.csv", report.toString());
+        fileWriterService.write("src/main/resources/report.csv", report.toString());
     }
 }

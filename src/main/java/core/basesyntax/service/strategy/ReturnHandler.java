@@ -6,7 +6,11 @@ import core.basesyntax.service.StorageService;
 import core.basesyntax.service.StorageServiceImpl;
 
 public class ReturnHandler implements OperationHandler {
-    private StorageService storageService = new StorageServiceImpl();
+    private StorageService storageService;
+
+    public ReturnHandler() {
+        storageService = new StorageServiceImpl();
+    }
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {

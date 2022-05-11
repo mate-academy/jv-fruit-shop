@@ -7,9 +7,8 @@ import java.io.IOException;
 import java.util.Collections;
 
 public class FileWriterServiceImpl implements FileWriterService {
-
     @Override
-    public void writeData(String pathToFile, String report) {
+    public void write(String pathToFile, String report) {
         try {
             File file = new File(pathToFile);
             FileWriter outputfile = new FileWriter(file);

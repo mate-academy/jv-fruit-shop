@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
-    public void addToStorage(Fruit fruit, int amount) {
+    public void add(Fruit fruit, int amount) {
         Storage.fruits.put(fruit, amount);
     }
 
     @Override
-    public Map<Fruit, Integer> getFromStorage() {
+    public Map<Fruit, Integer> getAll() {
         return Storage.fruits;
     }
 }

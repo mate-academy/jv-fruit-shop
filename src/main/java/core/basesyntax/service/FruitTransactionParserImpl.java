@@ -2,9 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int OPERATION_INDEX = 0;
@@ -24,16 +22,13 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
                     + "Header must be equal to: 'type,fruit,quantity'");
         }
         for (int i = 1; i < lines.size(); i++) {
-            List<String[]> arrayLines = lines.stream()
-                    .map(line -> line.split(","))
-                    .collect(Collectors.toList());
-            Object[] objectsInString = Arrays.stream(arrayLines.get(i)).toArray();
+            String[] splittedLine = lines.get(i).split(",");
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setOperation(FruitTransaction.Operation
-                    .getOperation(String.valueOf(objectsInString[OPERATION_INDEX])));
-            fruitTransaction.setFruit(String.valueOf(objectsInString[FRUIT_INDEX]));
+                    .getOperation(String.valueOf(splittedLine[OPERATION_INDEX])));
+            fruitTransaction.setFruit(String.valueOf(splittedLine[FRUIT_INDEX]));
             fruitTransaction.setQuantity(Integer
-                    .parseInt(String.valueOf(objectsInString[QUANTITY_INDEX])));
+                    .parseInt(String.valueOf(splittedLine[QUANTITY_INDEX])));
             fruitTransactionList.add(fruitTransaction);
         }
         return fruitTransactionList;
