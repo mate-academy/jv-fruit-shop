@@ -25,15 +25,7 @@ public class StorageServiceImpl implements StorageService {
         if (!fruits.keySet().contains(fruit)) {
             throw new RuntimeException("There is no such fruit in the store");
         }
-        if (fruits.get(fruit) < amount) {
-            throw new RuntimeException("There is no such amount in the store. The remnant is "
-                    + fruits.get(fruit));
-        } else {
-            fruits.get(fruit);
-            int remnant = storageDao.getAll().get(fruit) - amount;
-            return remnant;
-
-        }
+        return fruits.get(fruit);
     }
 
     @Override

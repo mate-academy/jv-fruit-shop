@@ -14,8 +14,13 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        int remnant = storageService
+        int totalAmount = storageService
                 .get(new Fruit(fruitTransaction.getFruit()), fruitTransaction.getQuantity());
+        int remnant = totalAmount - fruitTransaction.getQuantity();
+        if (totalAmount < fruitTransaction.getQuantity()) {
+            throw new RuntimeException("There is no such amount in the store. The amount is "
+                    + totalAmount);
+        }
         storageService.update(new Fruit(fruitTransaction.getFruit()), remnant);
     }
 }
