@@ -1,17 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Writer;
+import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriterImpl implements Writer {
+public class FileWriterImpl implements FileWriter {
     @Override
     public void write(String report, String fileName) {
-        if (report.length() == 0) {
-            throw new RuntimeException("Empty report file");
-        }
-        try (BufferedWriter csvWriter = new BufferedWriter(new FileWriter(fileName))) {
+        try (BufferedWriter csvWriter = new BufferedWriter(new java.io.FileWriter(fileName))) {
             csvWriter.write(report);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file " + fileName);

@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.OperationStrategyService;
 import core.basesyntax.service.strategy.BalanceHandler;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.PurchaseHandler;
@@ -12,7 +12,7 @@ import core.basesyntax.service.strategy.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FruitShopServiceImpl implements FruitShopService {
+public class OperationStrategyServiceImpl implements OperationStrategyService {
     private final Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
     private final StorageDao storageDao = new StorageDaoImpl();
 

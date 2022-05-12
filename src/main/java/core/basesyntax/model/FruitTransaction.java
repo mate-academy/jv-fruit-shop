@@ -34,5 +34,18 @@ public class FruitTransaction {
         Operation(String operation) {
             this.operation = operation;
         }
+
+        public String getOperation() {
+            return operation;
+        }
+
+        public static Operation findOperationByLetter(String letter) {
+            for (Operation op : Operation.values()) {
+                if (op.getOperation().equals(letter)) {
+                    return op;
+                }
+            }
+            throw new RuntimeException("Wrong Operation Index");
+        }
     }
 }

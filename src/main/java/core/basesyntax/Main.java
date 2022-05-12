@@ -3,17 +3,17 @@ package core.basesyntax;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.Operation;
-import core.basesyntax.service.Parser;
-import core.basesyntax.service.Reader;
+import core.basesyntax.service.OperationStrategyService;
 import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.OperationImpl;
-import core.basesyntax.service.impl.ParserImpl;
-import core.basesyntax.service.impl.ReaderImpl;
+import core.basesyntax.service.impl.OperationStrategyServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
-import core.basesyntax.service.impl.WriterImpl;
 import java.util.List;
 
 public class Main {
@@ -21,16 +21,16 @@ public class Main {
     private static final String TO_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        Reader readService = new ReaderImpl();
+        FileReader readService = new FileReaderImpl();
         List<String> readFile = readService.read(FROM_FILE);
-        Parser parser = new ParserImpl();
-        List<FruitTransaction> infoFromFile = parser.getInfo(readFile);
+        FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
+        List<FruitTransaction> infoFromFile = fruitTransactionParser.parse(readFile);
         StorageDao storageDao = new StorageDaoImpl();
-        FruitShopService fruitShopService = new FruitShopServiceImpl();
-        Operation operation = new OperationImpl(fruitShopService);
-        operation.calculate(infoFromFile);
+        OperationStrategyService operationStrategyService = new OperationStrategyServiceImpl();
+        Operation operation = new OperationImpl(operationStrategyService);
+        operation.process(infoFromFile);
         ReportCreator reportCreator = new ReportCreatorImpl(storageDao);
         String reportedInformation = reportCreator.report();
-        new WriterImpl().write(reportedInformation, TO_FILE);
+        new FileWriterImpl().write(reportedInformation, TO_FILE);
     }
 }
