@@ -5,13 +5,13 @@ import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FruitTransactionParser;
-import core.basesyntax.service.Operation;
+import core.basesyntax.service.FruitTransactionProcessor;
 import core.basesyntax.service.OperationStrategyService;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
-import core.basesyntax.service.impl.OperationImpl;
+import core.basesyntax.service.impl.FruitTransactionProcessorImpl;
 import core.basesyntax.service.impl.OperationStrategyServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import java.util.List;
@@ -27,10 +27,11 @@ public class Main {
         List<FruitTransaction> infoFromFile = fruitTransactionParser.parse(readFile);
         StorageDao storageDao = new StorageDaoImpl();
         OperationStrategyService operationStrategyService = new OperationStrategyServiceImpl();
-        Operation operation = new OperationImpl(operationStrategyService);
-        operation.process(infoFromFile);
+        FruitTransactionProcessor fruitTransactionProcessor = 
+                new FruitTransactionProcessorImpl(operationStrategyService);
+        fruitTransactionProcessor.process(infoFromFile);
         ReportCreator reportCreator = new ReportCreatorImpl(storageDao);
-        String reportedInformation = reportCreator.report();
+        String reportedInformation = reportCreator.createReport();
         new FileWriterImpl().write(reportedInformation, TO_FILE);
     }
 }

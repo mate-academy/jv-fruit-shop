@@ -12,7 +12,7 @@ public class ReportCreatorImpl implements ReportCreator {
     }
 
     @Override
-    public String report() {
+    public String createReport() {
         return "fruit,quantity\n" + storageDao.getAll().stream()
                 .filter(i -> i.getKey() != null && i.getValue() != null)
                 .map(i -> i.getKey().getFruit()

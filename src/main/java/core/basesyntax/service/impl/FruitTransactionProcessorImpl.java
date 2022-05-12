@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Operation;
+import core.basesyntax.service.FruitTransactionProcessor;
 import core.basesyntax.service.OperationStrategyService;
 import java.util.List;
 
-public class OperationImpl implements Operation {
+public class FruitTransactionProcessorImpl implements FruitTransactionProcessor {
     private final OperationStrategyService operationStrategyService;
 
-    public OperationImpl(OperationStrategyService operationStrategyService) {
+    public FruitTransactionProcessorImpl(OperationStrategyService operationStrategyService) {
         this.operationStrategyService = operationStrategyService;
     }
 

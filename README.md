@@ -69,7 +69,7 @@ The line above means you have 152 bananas, and 90 apples in your Fruit store aft
 (this is only a recommendation, you can use other classes / approaches to solve this task at your discretion):**
 ```java
 public class FruitTransaction {
-  private Operation operation;
+  private Operation fruitTransactionProcessor;
   private String fruit;
   private int quantity;
 
@@ -81,14 +81,14 @@ public class FruitTransaction {
     PURCHASE("p"),
     RETURN("r");
 
-    private String operation;
+    private String fruitTransactionProcessor;
 
-    Operation(String operation) {
-      this.operation = operation;
+    Operation(String fruitTransactionProcessor) {
+      this.fruitTransactionProcessor = fruitTransactionProcessor;
     }
 
     public String getOperation() {
-      return operation;
+      return fruitTransactionProcessor;
     }
   }
 }
