@@ -17,11 +17,12 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         lines.stream()
                 .filter(Objects::nonNull)
-                .map(i -> i.split(","))
-                .forEach(i -> fruitTransactions.add(
+                .map(line -> line.split(","))
+                .forEach(splittedLine -> fruitTransactions.add(
                         new FruitTransaction(FruitTransaction.Operation
-                                .findOperationByLetter(i[OPERATION_INDEX]),
-                                new Fruit(i[FRUIT_INDEX]), Integer.parseInt(i[QUANTITY_INDEX]))));
+                                .findOperationByLetter(splittedLine[OPERATION_INDEX]),
+                                new Fruit(splittedLine[FRUIT_INDEX]),
+                                Integer.parseInt(splittedLine[QUANTITY_INDEX]))));
         return fruitTransactions;
     }
 }

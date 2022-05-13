@@ -29,20 +29,20 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String letter;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getLetter() {
+            return letter;
         }
 
         public static Operation findOperationByLetter(String letter) {
-            for (Operation op : Operation.values()) {
-                if (op.getOperation().equals(letter)) {
-                    return op;
+            for (Operation operation : Operation.values()) {
+                if (operation.getLetter().equals(letter)) {
+                    return operation;
                 }
             }
             throw new RuntimeException("Wrong Operation Index");

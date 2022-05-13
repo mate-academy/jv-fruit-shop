@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileReaderImpl implements FileReader {
-
     @Override
     public List<String> read(String fileName) {
         List<String> lines;

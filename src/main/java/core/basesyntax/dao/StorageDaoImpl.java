@@ -19,7 +19,8 @@ public class StorageDaoImpl implements StorageDao {
     @Override
     public Integer get(Fruit fruit) {
         if (fruit == null) {
-            throw new RuntimeException("Fruit is null");
+            throw new RuntimeException("Fruit with such name: "
+                    + fruit.getFruit() + " doesn't exist");
         }
         return Storage.dataBase.get(fruit);
     }
