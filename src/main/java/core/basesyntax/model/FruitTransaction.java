@@ -1,7 +1,9 @@
 package core.basesyntax.model;
 
+import java.util.NoSuchElementException;
+
 public class FruitTransaction {
-    private FruitTransaction.Operation operation;
+    private Operation operation;
     private String fruit;
     private int quantity;
 
@@ -21,11 +23,11 @@ public class FruitTransaction {
         return quantity;
     }
 
-    public void setOperation(FruitTransaction.Operation operation) {
+    public void setOperation(Operation operation) {
         this.operation = operation;
     }
 
-    public FruitTransaction.Operation getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
@@ -35,17 +37,23 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String abbreviature;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.abbreviature = operation;
         }
 
-        public static FruitTransaction.Operation getOperation(String operation) {
-            return operation.equals("b") ? BALANCE
-                    : operation.equals("s") ? SUPPLY
-                    : operation.equals("p") ? PURCHASE
-                    : RETURN;
+        public String getAbbreviature() {
+            return abbreviature;
+        }
+
+        public static Operation getOperation(String abbreviature) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getAbbreviature().equals(abbreviature)) {
+                    return operation;
+                }
+            }
+            throw new NoSuchElementException("Can`t find such Operation" + abbreviature);
         }
     }
 }

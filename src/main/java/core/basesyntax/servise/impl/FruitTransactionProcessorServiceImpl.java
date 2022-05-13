@@ -1,27 +1,27 @@
 package core.basesyntax.servise.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.servise.ProcessDataService;
+import core.basesyntax.servise.FruitTransactionProcessorService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProcessDataServiceImpl implements ProcessDataService {
+public class FruitTransactionProcessorServiceImpl implements FruitTransactionProcessorService {
     private final OperationStrategy operationStrategy;
 
-    public ProcessDataServiceImpl(OperationStrategy operationStrategy) {
+    public FruitTransactionProcessorServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public String processData(List<FruitTransaction> fruitTransactions) {
+    public String process(List<FruitTransaction> fruitTransactions) {
         int amount = 0;
         StringBuilder reportBuilder = new StringBuilder("fruit,quantity" + System.lineSeparator());
-        for (String uniqueFruits : getUniqueFruitsName(fruitTransactions)) {
+        for (java.lang.String uniqueFruits : getUniqueFruitsName(fruitTransactions)) {
             for (FruitTransaction transaction : fruitTransactions) {
                 if (transaction.getFruit().equals(uniqueFruits)) {
                     amount += operationStrategy.get(transaction.getOperation())
-                            .doOperation(transaction.getQuantity());
+                            .handle(transaction.getQuantity());
                 }
             }
             reportBuilder.append(uniqueFruits)
