@@ -70,7 +70,7 @@ The line above means you have 152 bananas, and 90 apples in your Fruit store aft
 ```java
 public class FruitTransaction {
   private Operation operation;
-  private String fruit;
+  private String fruitTransaction;
   private int quantity;
 
   // getters, setters, ...
@@ -94,4 +94,4 @@ public class FruitTransaction {
 }
 ```
 
-#### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop)
+#### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruitTransaction-shop)
