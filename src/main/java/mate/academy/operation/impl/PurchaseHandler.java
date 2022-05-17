@@ -1,12 +1,15 @@
 package mate.academy.operation.impl;
 
 import mate.academy.dao.FruitDao;
-import mate.academy.dao.FruitDaoImpl;
 import mate.academy.model.FruitTransaction;
 import mate.academy.operation.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao;
+
+    public PurchaseHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
     public void getHandler(FruitTransaction fruitTransaction) {

@@ -1,5 +1,8 @@
 package mate.academy.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -35,7 +38,14 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
+        private static final Map<String, Operation> operationMap = new HashMap<>();
         private final String operation;
+
+        static {
+            for (Operation operation : Operation.values()) {
+                operationMap.put(operation.getOperation(), operation);
+            }
+        }
 
         Operation(String operation) {
             this.operation = operation;
@@ -46,13 +56,7 @@ public class FruitTransaction {
         }
 
         public static Operation get(String operation) {
-            switch (operation) {
-                case "b" : return BALANCE;
-                case "s" : return SUPPLY;
-                case "p" : return PURCHASE;
-                case "r" : return RETURN;
-                default: throw new RuntimeException("Can't find provided operation: " + operation);
-            }
+            return operationMap.get(operation);
         }
     }
 }

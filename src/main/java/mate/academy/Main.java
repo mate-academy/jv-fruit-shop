@@ -27,11 +27,12 @@ public class Main {
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
+        FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitDao));
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
@@ -46,7 +47,6 @@ public class Main {
         }
 
         WriterService writerService = new WriterServiceImpl();
-        FruitDao fruitDao = new FruitDaoImpl();
         ReportService reportService = new ReportServiceImpl();
         writerService.writeToFile(REPORT_FILE_PATH,
                  reportService.getReport(fruitDao.getAll()));
