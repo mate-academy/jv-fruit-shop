@@ -5,10 +5,12 @@ import core.basesyntax.servise.FileReaderService;
 import core.basesyntax.servise.FileWriterService;
 import core.basesyntax.servise.FruitTransactionProcessorService;
 import core.basesyntax.servise.LineParserService;
+import core.basesyntax.servise.ReportGeneratorService;
 import core.basesyntax.servise.impl.FileReaderServiceImpl;
 import core.basesyntax.servise.impl.FileWriterServiceImpl;
 import core.basesyntax.servise.impl.FruitTransactionProcessorServiceImpl;
 import core.basesyntax.servise.impl.LineParserServiceImpl;
+import core.basesyntax.servise.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceOperation;
@@ -37,8 +39,10 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
         FruitTransactionProcessorService data
                 = new FruitTransactionProcessorServiceImpl(operationStrategy);
-        String report = data.process(fruitTransactions);
+        data.process(fruitTransactions);
+        ReportGeneratorService report = new ReportGeneratorServiceImpl();
+        String generatedReport = report.generate();
         FileWriterService writer = new FileWriterServiceImpl();
-        writer.write(RESULT_FILE_PATH, report);
+        writer.write(RESULT_FILE_PATH, generatedReport);
     }
 }
