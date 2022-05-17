@@ -1,8 +1,8 @@
 package mate.academy.service;
 
 import java.util.List;
-import mate.academy.model.Fruit;
+import mate.academy.model.FruitTransaction;
 
 public interface ParseService {
-    List<Fruit> parseString(List<String> strings);
+    List<FruitTransaction> parse(List<String> strings);
 }

@@ -1,7 +1,7 @@
 package mate.academy.operation;
 
-import mate.academy.model.Fruit;
+import mate.academy.model.FruitTransaction;
 
 public interface OperationHandler {
-    void getHandler(Fruit fruit);
+    void getHandler(FruitTransaction fruitTransaction);
 }

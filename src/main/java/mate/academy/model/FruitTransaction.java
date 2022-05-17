@@ -1,6 +1,6 @@
 package mate.academy.model;
 
-public class Fruit {
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -43,6 +43,16 @@ public class Fruit {
 
         public String getOperation() {
             return operation;
+        }
+
+        public static Operation get(String operation) {
+            switch (operation) {
+                case "b" : return BALANCE;
+                case "s" : return SUPPLY;
+                case "p" : return PURCHASE;
+                case "r" : return RETURN;
+                default: throw new RuntimeException("Can't find provided operation: " + operation);
+            }
         }
     }
 }

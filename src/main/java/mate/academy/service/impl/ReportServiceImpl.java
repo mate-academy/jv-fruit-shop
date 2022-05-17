@@ -2,7 +2,7 @@ package mate.academy.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import mate.academy.model.Fruit;
+import mate.academy.model.FruitTransaction;
 import mate.academy.service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
@@ -12,14 +12,14 @@ public class ReportServiceImpl implements ReportService {
     private static final String STRINGS_SEPARATOR = System.lineSeparator();
 
     @Override
-    public String getReport(List<Fruit> fruitList) {
+    public String getReport(List<FruitTransaction> fruitTransactionList) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(TABLE_COLUMN_FIRST)
                 .append(TABLE_COLUMN_SEPARATOR)
                 .append(TABLE_COLUMN_SECOND)
                 .append(STRINGS_SEPARATOR);
         return stringBuilder
-                .append(fruitList.stream()
+                .append(fruitTransactionList.stream()
                 .map(f -> new StringBuilder().append(f.getFruit())
                         .append(TABLE_COLUMN_SEPARATOR)
                         .append(f.getQuantity())

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import mate.academy.dao.FruitDao;
 import mate.academy.dao.FruitDaoImpl;
-import mate.academy.model.Fruit;
+import mate.academy.model.FruitTransaction;
 import mate.academy.operation.OperationHandler;
 import mate.academy.operation.impl.BalanceHandler;
 import mate.academy.operation.impl.PurchaseHandler;
@@ -23,35 +23,32 @@ import mate.academy.strategy.OperationStrategy;
 import mate.academy.strategy.impl.OperationStrategyImpl;
 
 public class Main {
+    private static final String INPUT_FILE_PATH = "src/main/resources/file.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
-        //System.out.println(new ReaderServiceImpl().readFromFile("src/main/resources/file.csv"));
-        Map<Fruit.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Fruit.Operation.BALANCE, new BalanceHandler());
-        operationHandlerMap.put(Fruit.Operation.PURCHASE, new PurchaseHandler());
-        operationHandlerMap.put(Fruit.Operation.SUPPLY, new SupplyHandler());
-        operationHandlerMap.put(Fruit.Operation.RETURN, new ReturnHandler());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         ReaderService readerService = new ReaderServiceImpl();
         ParseService parseService = new ParseServiceImpl();
 
-        List<String> stringsFromFile = readerService.readFromFile("src/main/resources/file.csv");
-        List<Fruit> fruits = parseService.parseString(stringsFromFile);
+        List<String> stringsFromFile = readerService.readFromFile(INPUT_FILE_PATH);
+        List<FruitTransaction> fruitTransactions = parseService.parse(stringsFromFile);
 
-        for (Fruit fruit : fruits) {
-            operationStrategy.get(fruit.getOperation()).getHandler(fruit);
+        for (FruitTransaction fruitTransaction : fruitTransactions) {
+            operationStrategy.process(fruitTransaction.getOperation()).getHandler(fruitTransaction);
         }
 
         WriterService writerService = new WriterServiceImpl();
         FruitDao fruitDao = new FruitDaoImpl();
         ReportService reportService = new ReportServiceImpl();
-        writerService.writeToFile("src/main/resources/report.csv",
-                 reportService.getReport(fruitDao.getList()));
-
-        /* for (Map.Entry<String, FruitTransaction> entry : Storage.fruits.entrySet()) {
-            System.out.println(entry.getValue().getFruit() + " " + entry.getValue().getQuantity());
-        }*/
-
+        writerService.writeToFile(REPORT_FILE_PATH,
+                 reportService.getReport(fruitDao.getAll()));
     }
 }

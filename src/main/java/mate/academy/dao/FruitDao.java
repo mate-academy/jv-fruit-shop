@@ -1,12 +1,12 @@
 package mate.academy.dao;
 
 import java.util.List;
-import mate.academy.model.Fruit;
+import mate.academy.model.FruitTransaction;
 
 public interface FruitDao {
-    void add(Fruit fruit);
+    void add(FruitTransaction fruitTransaction);
 
-    Fruit get(String fruitName);
+    FruitTransaction get(String fruitName);
 
-    List<Fruit> getList();
+    List<FruitTransaction> getAll();
 }

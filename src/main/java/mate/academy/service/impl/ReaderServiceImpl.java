@@ -3,6 +3,7 @@ package mate.academy.service.impl;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import mate.academy.service.ReaderService;
@@ -18,8 +19,8 @@ public class ReaderServiceImpl implements ReaderService {
                 stringList.add(value);
                 value = bufferedReader.readLine();
             }
-        } catch (Exception e) {
-            throw new RuntimeException("Can't find file by path: " + filePath, e);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read data from file " + filePath, e);
         }
         return stringList;
     }

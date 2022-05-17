@@ -1,19 +1,24 @@
 package mate.academy.operation.impl;
 
+import mate.academy.dao.FruitDao;
 import mate.academy.dao.FruitDaoImpl;
-import mate.academy.model.Fruit;
+import mate.academy.model.FruitTransaction;
 import mate.academy.operation.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
+    private final FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
-    public void getHandler(Fruit fruit) {
-        FruitDaoImpl fruitDao = new FruitDaoImpl();
-        Fruit fruitInDB = fruitDao.get(fruit.getFruit());
-        if (fruitInDB == null || fruitInDB.getQuantity() - fruit.getQuantity() < 0) {
-            throw new RuntimeException(fruit.getFruit() + " quantity is not enough");
+    public void getHandler(FruitTransaction fruitTransaction) {
+        FruitTransaction fruitTransactionInDB = fruitDao.get(fruitTransaction.getFruit());
+        if (fruitTransactionInDB == null) {
+            throw new RuntimeException(fruitTransaction.getFruit() + " is not available");
         }
-        fruitInDB.setQuantity(fruitInDB.getQuantity() - fruit.getQuantity());
-        fruitDao.add(fruitInDB);
+        int diff = fruitTransactionInDB.getQuantity() - fruitTransaction.getQuantity();
+        if (diff < 0) {
+            throw new RuntimeException(fruitTransaction.getFruit() + " in shop is not enough");
+        }
+        fruitTransactionInDB.setQuantity(diff);
+        fruitDao.add(fruitTransactionInDB);
     }
 }

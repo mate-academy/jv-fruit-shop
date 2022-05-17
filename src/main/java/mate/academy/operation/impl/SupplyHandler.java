@@ -1,20 +1,22 @@
 package mate.academy.operation.impl;
 
+import mate.academy.dao.FruitDao;
 import mate.academy.dao.FruitDaoImpl;
-import mate.academy.model.Fruit;
+import mate.academy.model.FruitTransaction;
 import mate.academy.operation.OperationHandler;
 
 public class SupplyHandler implements OperationHandler {
+    private final FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
-    public void getHandler(Fruit fruit) {
-        FruitDaoImpl fruitDao = new FruitDaoImpl();
-        Fruit fruitInDB = fruitDao.get(fruit.getFruit());
-        if (fruitInDB == null) {
-            fruitDao.add(fruit);
+    public void getHandler(FruitTransaction fruitTransaction) {
+        FruitTransaction fruitTransactionInDB = fruitDao.get(fruitTransaction.getFruit());
+        if (fruitTransactionInDB == null) {
+            fruitDao.add(fruitTransaction);
         } else {
-            fruitInDB.setQuantity(fruitInDB.getQuantity() + fruit.getQuantity());
-            fruitDao.add(fruitInDB);
+            int total = fruitTransactionInDB.getQuantity() + fruitTransaction.getQuantity();
+            fruitTransactionInDB.setQuantity(total);
+            fruitDao.add(fruitTransactionInDB);
         }
     }
 }
