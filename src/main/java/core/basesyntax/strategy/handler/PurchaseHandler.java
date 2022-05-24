@@ -3,10 +3,10 @@ package core.basesyntax.strategy.handler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 
-public class ReturnHandler implements OperationHandler {
+public class PurchaseHandler implements OperationHandler {
     private final FruitService fruitService;
 
-    public ReturnHandler(FruitService fruitService) {
+    public PurchaseHandler(FruitService fruitService) {
         this.fruitService = fruitService;
     }
 
@@ -14,6 +14,6 @@ public class ReturnHandler implements OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         fruitService.update(fruitTransaction.getFruit(),
                 fruitService.getQuantity(fruitTransaction.getFruit())
-                        + fruitTransaction.getQuantity());
+                        - fruitTransaction.getQuantity());
     }
 }

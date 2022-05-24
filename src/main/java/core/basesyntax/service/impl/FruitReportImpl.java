@@ -1,19 +1,20 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitReport;
-import core.basesyntax.service.FruitService;
 import java.util.List;
 
 public class FruitReportImpl implements FruitReport {
-    private final FruitDao fruitDao = new FruitDaoImpl();
-    private final FruitService fruitService = new FruitServiceImpl(fruitDao);
+    private final FruitDao fruitDao;
+
+    public FruitReportImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
     public String getReport() {
-        List<Fruit> fruits = fruitService.getAll();
+        List<Fruit> fruits = fruitDao.getAll();
         StringBuilder report = new StringBuilder("fruit,quantity");
         for (Fruit fruit : fruits) {
             report.append(System.lineSeparator()).append(fruit.getName())

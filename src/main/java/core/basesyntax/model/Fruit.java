@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class Fruit {
     private String name;
     private int amount;
@@ -39,7 +41,7 @@ public class Fruit {
         if (amount != fruit.amount) {
             return false;
         }
-        return name != null ? name.equals(fruit.name) : fruit.name == null;
+        return Objects.equals(name, fruit.name) && Objects.equals(amount, fruit.amount);
     }
 
     @Override
