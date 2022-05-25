@@ -10,17 +10,17 @@ import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
-    public List<String> readFromFile(String fromFileName) {
+    public List<String> readFromFile(String pathToFile) {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fromFileName))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToFile))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 lines.add(line);
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Can't find file path: " + fromFileName, e);
+            throw new RuntimeException("Can't find file path: " + pathToFile, e);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + fromFileName, e);
+            throw new RuntimeException("Can't read from file " + pathToFile, e);
         }
         return lines;
     }

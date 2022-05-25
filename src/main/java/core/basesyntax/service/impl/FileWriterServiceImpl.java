@@ -7,11 +7,11 @@ import java.io.IOException;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public void writeToFile(String pathFile, String lines) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathFile))) {
-            bufferedWriter.write(lines);
+    public void writeToFile(String pathToFile, String report) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathToFile))) {
+            bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file " + pathFile, e);
+            throw new RuntimeException("Can't write to file " + pathToFile, e);
         }
     }
 }

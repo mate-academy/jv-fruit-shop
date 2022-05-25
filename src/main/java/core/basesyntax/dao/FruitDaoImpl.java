@@ -10,9 +10,8 @@ public class FruitDaoImpl implements FruitDao {
     public Integer getQuantity(String fruitName) {
         if (Storage.fruits.containsKey(fruitName)) {
             return Storage.fruits.get(fruitName);
-        } else {
-            throw new RuntimeException("There's no such a fruit in a Storage: " + fruitName);
         }
+        throw new RuntimeException("There's no such a fruit in a Storage: " + fruitName);
     }
 
     @Override

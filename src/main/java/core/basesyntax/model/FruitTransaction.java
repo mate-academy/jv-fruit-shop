@@ -39,18 +39,18 @@ public class FruitTransaction {
 
         private String letter;
 
-        Operation(String operation) {
-            this.letter = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
-        public String getOperation() {
+        public String getLetter() {
             return letter;
         }
 
         public static Operation findOperationByLetter(String letter) {
-            for (Operation op : Operation.values()) {
-                if (op.getOperation().equals(letter)) {
-                    return op;
+            for (Operation operation : Operation.values()) {
+                if (operation.getLetter().equals(letter)) {
+                    return operation;
                 }
             }
             throw new NoSuchElementException("Can't find such Operation" + letter);

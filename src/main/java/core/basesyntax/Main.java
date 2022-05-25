@@ -53,7 +53,7 @@ public class Main {
             operationStrategy.getHandler(transaction.getOperation()).handle(transaction);
         }
 
-        FruitReport fruitReport = new FruitReportImpl(fruitDao);
+        FruitReport fruitReport = new FruitReportImpl(fruitService);
         String report = fruitReport.getReport();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(TO_FILE, report);

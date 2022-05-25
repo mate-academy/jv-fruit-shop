@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FruitTransactionParserImpl implements FruitTransactionParser {
-    private static final int OPERATOR_INDEX = 0;
+    private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
@@ -16,7 +16,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
         for (String line : fruitDataList.subList(1, fruitDataList.size())) {
             FruitTransaction fruitTransaction = new FruitTransaction();
             String[] splittedLine = line.split(",");
-            String letter = splittedLine[OPERATOR_INDEX];
+            String letter = splittedLine[OPERATION_INDEX];
             String fruitName = splittedLine[FRUIT_INDEX];
             int quantity = Integer.parseInt(splittedLine[QUANTITY_INDEX]);
             fruitTransaction.setFruit(fruitName);

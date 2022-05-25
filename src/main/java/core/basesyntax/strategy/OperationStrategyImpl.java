@@ -13,7 +13,6 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandler(FruitTransaction.Operation operation) {
-
         return handlerMap.get(operation);
     }
 }
