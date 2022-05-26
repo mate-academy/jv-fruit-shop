@@ -4,5 +4,5 @@ import model.FruitTransaction;
 import operation.OperationHandler;
 
 public interface Strategy {
-    OperationHandler process(FruitTransaction.TransactionType transaction);
+    OperationHandler process(FruitTransaction.Operation operation);
 }

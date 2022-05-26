@@ -11,18 +11,17 @@ import service.ReaderService;
 public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> readFromFile(String filePath) {
-        List<String> list = new ArrayList<>();
+        List<String> lines = new ArrayList<>();
         File file = new File(filePath);
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String line = bufferedReader.readLine();
             while (line != null) {
-                list.add(line);
+                lines.add(line);
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {
             throw new RuntimeException("Cannot read from file " + filePath, e);
         }
-        return list;
+        return lines;
     }
 }

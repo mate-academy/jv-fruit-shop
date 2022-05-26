@@ -1,27 +1,20 @@
 package operation.implementation;
 
-import dao.FruitDao;
 import model.FruitTransaction;
 import operation.OperationHandler;
+import service.FruitService;
 
 public class PurchaseHandler implements OperationHandler {
-    private final FruitDao fruitDao;
+    private final FruitService fruitService;
 
-    public PurchaseHandler(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
+    public PurchaseHandler(FruitService fruitService) {
+        this.fruitService = fruitService;
     }
 
     @Override
-    public void getHandler(FruitTransaction fruitTransaction) {
-        FruitTransaction fruitTransactionInDataBase = fruitDao.get(fruitTransaction.getFruit());
-        if (fruitTransactionInDataBase == null) {
-            throw new RuntimeException(fruitTransaction.getFruit() + " is not available now");
-        }
-        int difference = fruitTransactionInDataBase.getQuantity() - fruitTransaction.getQuantity();
-        if (difference < 0) {
-            throw new RuntimeException(fruitTransaction.getFruit() + " is not enough in shop now");
-        }
-        fruitTransactionInDataBase.setQuantity(difference);
-        fruitDao.add(fruitTransactionInDataBase);
+    public void handle(FruitTransaction fruitTransaction) {
+        fruitService.add(fruitTransaction.getFruit(),
+                fruitService.getQuantity(fruitTransaction.getFruit())
+                        - fruitTransaction.getQuantity());
     }
 }

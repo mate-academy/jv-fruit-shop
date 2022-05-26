@@ -1,26 +1,20 @@
 package operation.implementation;
 
-import dao.FruitDao;
 import model.FruitTransaction;
 import operation.OperationHandler;
+import service.FruitService;
 
 public class SupplyHandler implements OperationHandler {
-    private final FruitDao fruitDao;
+    private final FruitService fruitService;
 
-    public SupplyHandler(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
+    public SupplyHandler(FruitService fruitService) {
+        this.fruitService = fruitService;
     }
 
     @Override
-    public void getHandler(FruitTransaction fruitTransaction) {
-        FruitTransaction fruitTransactionInDataBase;
-        fruitTransactionInDataBase = fruitDao.get(fruitTransaction.getFruit());
-        if (fruitTransactionInDataBase == null) {
-            fruitDao.add(fruitTransaction);
-        } else {
-            int amount = fruitTransactionInDataBase.getQuantity() + fruitTransaction.getQuantity();
-            fruitTransactionInDataBase.setQuantity(amount);
-            fruitDao.add(fruitTransactionInDataBase);
-        }
+    public void handle(FruitTransaction fruitTransaction) {
+        fruitService.add(fruitTransaction.getFruit(),
+                fruitService.getQuantity(fruitTransaction.getFruit())
+                        + fruitTransaction.getQuantity());
     }
 }

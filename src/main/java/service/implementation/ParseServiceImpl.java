@@ -6,22 +6,21 @@ import model.FruitTransaction;
 import service.ParseService;
 
 public class ParseServiceImpl implements ParseService {
-    private static final int TRANSACTION_INDEX = 0;
+    private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_TYPE_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final String PARSING_SYMBOL = ",";
 
     @Override
-    public List<FruitTransaction> parse(List<String> stringsFromFile) {
-        return stringsFromFile.subList(1, stringsFromFile.size())
-                .stream()
-                .map(s -> s.split(PARSING_SYMBOL))
-                .map(strings -> {
+    public List<FruitTransaction> parse(List<String> lines) {
+        return lines.stream()
+                .skip(1)
+                .map(s -> s.split(","))
+                .map(splittedLines -> {
                     FruitTransaction fruitTransaction = new FruitTransaction();
-                    fruitTransaction.setTransaction(FruitTransaction.TransactionType
-                            .get(strings[TRANSACTION_INDEX]));
-                    fruitTransaction.setFruit(strings[FRUIT_TYPE_INDEX]);
-                    fruitTransaction.setQuantity(Integer.parseInt(strings[QUANTITY_INDEX]));
+                    fruitTransaction.setOperation(FruitTransaction.Operation
+                            .findByLetter(splittedLines[OPERATION_INDEX]));
+                    fruitTransaction.setFruit(splittedLines[FRUIT_TYPE_INDEX]);
+                    fruitTransaction.setQuantity(Integer.parseInt(splittedLines[QUANTITY_INDEX]));
                     return fruitTransaction;
                 })
                 .collect(Collectors.toList());

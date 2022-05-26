@@ -1,19 +1,18 @@
 package model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class FruitTransaction {
-    private TransactionType transaction;
+    private Operation operation;
     private String fruit;
     private int quantity;
 
-    public TransactionType getTransaction() {
-        return transaction;
+    public Operation getOperation() {
+        return operation;
     }
 
-    public void setTransaction(TransactionType transaction) {
-        this.transaction = transaction;
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     public String getFruit() {
@@ -32,28 +31,26 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public enum TransactionType {
+    public enum Operation {
         BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
 
-        private static final Map<String, TransactionType> transactionMap = new HashMap<>();
-        private final String transaction;
+        private String letter;
 
-        static {
-            for (TransactionType transaction : TransactionType.values()) {
-                transactionMap.put(transaction.getTransaction(), transaction);
+        Operation(String letter) {
+            this.letter = letter;
+        }
+
+        public String getLetter() {
+            return letter;
+        }
+
+        public static Operation findByLetter(String letter) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getLetter().equals(letter)) {
+                    return operation;
+                }
             }
-        }
-
-        TransactionType(String transaction) {
-            this.transaction = transaction;
-        }
-
-        public String getTransaction() {
-            return transaction;
-        }
-
-        public static TransactionType get(String transaction) {
-            return transactionMap.get(transaction);
+            throw new NoSuchElementException("Can't find operation " + letter);
         }
     }
 }

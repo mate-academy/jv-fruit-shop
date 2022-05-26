@@ -1,28 +1,18 @@
 package dao;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import model.FruitTransaction;
 import storage.Storage;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void add(FruitTransaction fruitTransaction) {
-        Storage.fruitStorage.put(fruitTransaction.getFruit(), fruitTransaction);
-    }
-
-    @Override
-    public FruitTransaction get(String fruitName) {
-        return Storage.fruitStorage.get(fruitName);
-    }
-
-    @Override
-    public List<FruitTransaction> getAll() {
-        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        for (Map.Entry<String, FruitTransaction> entry : Storage.fruitStorage.entrySet()) {
-            fruitTransactionList.add(entry.getValue());
+    public Integer getQuantity(String fruitName) {
+        if (Storage.fruits.containsKey(fruitName)) {
+            return Storage.fruits.get(fruitName);
         }
-        return fruitTransactionList;
+        throw new RuntimeException("There is no such fruit in a store " + fruitName);
+    }
+
+    @Override
+    public void add(String fruitName, Integer amount) {
+        Storage.fruits.put(fruitName, amount);
     }
 }
