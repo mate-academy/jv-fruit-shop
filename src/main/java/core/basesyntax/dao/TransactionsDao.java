@@ -1,9 +1,9 @@
-package dao;
+package core.basesyntax.dao;
 
 import java.util.Map;
 
 public interface TransactionsDao {
-    void add(Map<String, Integer> inputMap);
+    void add(String fruit, Integer quantity);
 
     Map<String, Integer> get();
 }

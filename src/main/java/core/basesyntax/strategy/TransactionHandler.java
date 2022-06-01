@@ -1,5 +1,5 @@
-package strategy;
+package core.basesyntax.strategy;
 
-public interface TransactionService {
+public interface TransactionHandler {
     int dayResult(int numberOfFruitsInTheStore, int numberOfFruitsTransaction);
 }

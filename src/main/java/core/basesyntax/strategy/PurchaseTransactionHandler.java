@@ -1,6 +1,6 @@
-package strategy;
+package core.basesyntax.strategy;
 
-public class PurchaseTransactionService implements TransactionService {
+public class PurchaseTransactionHandler implements TransactionHandler {
     @Override
     public int dayResult(int numberOfFruitsInTheStore, int numberOfFruitsTransaction) {
         return numberOfFruitsInTheStore - numberOfFruitsTransaction;
