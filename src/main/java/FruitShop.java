@@ -42,13 +42,11 @@ public class FruitShop {
         ShopServiceImpl fruitShop = new ShopServiceImpl(dao, amountStrategy);
         ShopReportService reportService = new ShopReportServiceImpl(dao);
 
-        //Start read input csv record by record
-
         //CsvReadProcessor csvProcessorRead = new CsvReadProcessor();
         //csvProcessorRead.openCsv(inputCsvFilePath);
         //
         FileServiceImpl csvFileService = new FileServiceImpl();
-
+        //Start read input csv record by record
         String inputCsvFilePath = args[0];
         List<String> inputList = csvFileService.readFile(inputCsvFilePath);
 
@@ -56,16 +54,6 @@ public class FruitShop {
             String[] inArray = inCsvString.split(",");
             fruitShop.productTransaction(inArray[1],Double.valueOf(inArray[2]),inArray[0]);
         }
-
-        /*    do {
-            String fruitName = csvProcessorRead.getField(HeaderParts.FRUIT.name());
-            Double quantity
-            = Double.parseDouble(csvProcessorRead.getField(HeaderParts.QUANTITY.name()));
-            String opType = csvProcessorRead.getField(HeaderParts.TYPE.name());
-
-            fruitShop.productTransaction(fruitName,quantity, opType);
-        } while (csvProcessorRead.readNext());
-        */
 
         ArrayList<ProductAccount> balanceReport;
         balanceReport = (ArrayList<ProductAccount>)reportService.getShopBalanceReport();
@@ -83,17 +71,5 @@ public class FruitShop {
         String outCsvFilePath = args[1];
         csvFileService.writeFile(outCsvFilePath,outStringList);
 
-        //prepare csv object to write
-        /*
-        CsvWriteProcessor csvProcessorWrite = new CsvWriteProcessor();
-        csvProcessorWrite.createCsv(outCsvFilePath,
-                new String[]{HeaderParts.FRUIT.name(),
-                HeaderParts.QUANTITY.name()});
-        for (ProductAccount productAccount:balanceReport) {
-            csvProcessorWrite.setField(HeaderParts.FRUIT.name(),productAccount.getName());
-            csvProcessorWrite.setField(HeaderParts.QUANTITY.name(),
-                    productAccount.getAmount().toString());
-            csvProcessorWrite.write();
-        } */
     }
 }
