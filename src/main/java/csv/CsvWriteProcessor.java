@@ -11,9 +11,9 @@ public class CsvWriteProcessor {
     private BufferedWriter csvBufferWrite;
     private FileWriter csvFileWrite;
 
-    public void createCsv(String outCsvFilePath, String[] headers, String initDelimiter) {
+    public void createCsv(String outCsvFilePath, String[] headers) {
         try {
-            delimiter = initDelimiter;
+            delimiter = ",";
             csvFileWrite = new FileWriter(outCsvFilePath);
             csvBufferWrite = new BufferedWriter(csvFileWrite);
             this.headers = headers;

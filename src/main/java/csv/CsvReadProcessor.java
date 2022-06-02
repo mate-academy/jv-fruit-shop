@@ -12,10 +12,10 @@ public class CsvReadProcessor {
     private BufferedReader csvBufferReader;
     private FileReader csvFileReader;
 
-    public int openCsv(String inCsvFilePath,String initDelimiter) {
+    public int openCsv(String inCsvFilePath) {
 
         try {
-            delimiter = initDelimiter;
+            delimiter = ",";
             csvFileReader = new FileReader(inCsvFilePath);
             csvBufferReader = new BufferedReader(csvFileReader);
             headers = csvBufferReader.readLine().split(delimiter);
@@ -36,15 +36,14 @@ public class CsvReadProcessor {
                 return false;
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            return false;
+            throw new RuntimeException("Can't open file",e);
         }
     }
 
     public String getField(String name) {
 
         for (int i = 0;i < headers.length;i++) {
-            if (headers[i].equals(name)) {
+            if (headers[i].toUpperCase().equals(name.toUpperCase())) {
                 return fields[i];
             }
         }

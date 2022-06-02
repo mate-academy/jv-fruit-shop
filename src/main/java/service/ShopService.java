@@ -1,5 +1,5 @@
 package service;
 
 public interface ShopService {
-    void productTransaction(String productname,Double productAmount,Operation operation);
+    boolean productTransaction(String productname,Double productAmount,String operationString);
 }

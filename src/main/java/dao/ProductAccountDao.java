@@ -5,11 +5,11 @@ import model.ProductAccount;
 
 public interface ProductAccountDao {
 
-    public void add(ProductAccount product);
+    void add(ProductAccount product);
 
-    public ProductAccount get(String productName);
+    ProductAccount get(String productName);
 
-    public void update(ProductAccount product);
+    void update(ProductAccount product);
 
-    public List<ProductAccount> getBalance();
+    List<ProductAccount> getBalance();
 }

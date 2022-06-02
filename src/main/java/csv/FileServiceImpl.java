@@ -1,23 +1,39 @@
 package csv;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileRadServiceImpl implements FileRadService {
+public class FileServiceImpl implements FileRadService,FileWriteService {
     @Override
-    public List<String> readCsv(String readfilepath) {
+    public List<String> readFile(String readfilepath) {
         String csvline;
         List<String> csvfilelist = new ArrayList<>();
-        try(BufferedReader csvBufferedReader = new BufferedReader(new FileReader(readfilepath))) {
-            while ((csvline = csvBufferedReader.readLine()) != null) {
+        try (BufferedReader fileBufferedReader = new BufferedReader(new FileReader(readfilepath))) {
+            csvline = fileBufferedReader.readLine();
+            while ((csvline = fileBufferedReader.readLine()) != null) {
                 csvfilelist.add(csvline);
             }
+            return csvfilelist;
         } catch (IOException e) {
-            throw new RuntimeException("Can't open file" , e);
+            throw new RuntimeException("Can't open file", e);
         }
-        return csvfilelist;
+
+    }
+
+    @Override
+    public void writeFile(String writeFilePath, List<String> writelist) {
+        try (BufferedWriter fileBufferedWriter
+                     = new BufferedWriter(new FileWriter(writeFilePath))) {
+            for (String filestring: writelist) {
+                fileBufferedWriter.write(filestring + System.lineSeparator());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Can't open file",e);
+        }
     }
 }

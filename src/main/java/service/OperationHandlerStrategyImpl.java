@@ -2,10 +2,10 @@ package service;
 
 import java.util.Map;
 
-public class AmountStrategyImpl implements AmountStrategy {
+public class OperationHandlerStrategyImpl implements OperationHandlerStrategy {
     private Map<Operation,AmountHandler> amountHandlersMap;
 
-    public AmountStrategyImpl(Map<Operation, AmountHandler> amountHandlersMap) {
+    public OperationHandlerStrategyImpl(Map<Operation, AmountHandler> amountHandlersMap) {
         this.amountHandlersMap = amountHandlersMap;
     }
 

@@ -1,7 +1,7 @@
 package service;
 
-public enum InFields {
-    fruit,
-    quantity,
-    type;
+public enum HeaderParts {
+    FRUIT,
+    QUANTITY,
+    TYPE;
 }

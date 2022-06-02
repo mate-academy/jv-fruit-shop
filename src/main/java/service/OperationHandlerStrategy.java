@@ -1,5 +1,5 @@
 package service;
 
-public interface AmountStrategy {
+public interface OperationHandlerStrategy {
     AmountHandler get(Operation operation);
 }
