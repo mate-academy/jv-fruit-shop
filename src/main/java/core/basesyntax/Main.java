@@ -1,21 +1,21 @@
 package core.basesyntax;
 
-import db.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitTransactionService;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.FruitTransactionStrategy;
+import core.basesyntax.strategy.FruitTransactionStrategyImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
-import model.FruitTransaction;
-import service.FruitTransactionService;
-import service.impl.FruitTransactionServiceImpl;
-import service.impl.ReaderServiceImpl;
-import service.impl.ReportServiceImpl;
-import service.impl.WriterServiceImpl;
-import strategy.BalanceOperationHandler;
-import strategy.FruitTransactionStrategy;
-import strategy.FruitTransactionStrategyImpl;
-import strategy.OperationHandler;
-import strategy.PurchaseOperationHandler;
-import strategy.ReturnOperationHandler;
-import strategy.SupplyOperationHandler;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,7 +32,8 @@ public class Main {
         FruitTransactionService fruitService =
                 new FruitTransactionServiceImpl(transactionStrategy,fruitsStorage);
 
-        fruitService.addToStorage(new ReaderServiceImpl().readFromFile());
+        fruitService.getFruitTransactionFromString(new ReaderServiceImpl()
+                .readFromFile("src/main/resources/data.csv"));
         new WriterServiceImpl().writeToFile(new ReportServiceImpl()
                 .createReport(fruitsStorage.getFruitsStorage()));
     }

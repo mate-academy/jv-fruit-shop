@@ -1,10 +1,10 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
     private static final String FILE_PATH = "src/main/resources/report.csv";

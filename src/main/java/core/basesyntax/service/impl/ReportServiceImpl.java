@@ -1,10 +1,10 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReportService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     @Override
