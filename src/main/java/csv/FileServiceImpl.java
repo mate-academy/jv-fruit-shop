@@ -20,7 +20,7 @@ public class FileServiceImpl implements FileRadService,FileWriteService {
             }
             return csvfilelist;
         } catch (IOException e) {
-            throw new RuntimeException("Can't open file", e);
+            throw new RuntimeException("Can't open input csv file " + readfilepath,e);
         }
 
     }
@@ -33,7 +33,7 @@ public class FileServiceImpl implements FileRadService,FileWriteService {
                 fileBufferedWriter.write(filestring + System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't open file",e);
+            throw new RuntimeException("Can't open output file" + writeFilePath,e);
         }
     }
 }

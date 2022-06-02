@@ -2,6 +2,7 @@ package dao;
 
 import db.Storage;
 import java.util.List;
+import java.util.Optional;
 import model.ProductAccount;
 
 public class ProductAccountDaoImpl implements ProductAccountDao {
@@ -18,20 +19,21 @@ public class ProductAccountDaoImpl implements ProductAccountDao {
     }
 
     @Override
-    public ProductAccount get(String productName) {
-        if (db.products.stream().filter(a -> a.getName().equals(productName)).count() == 0) {
-            return null;
-        }
+    public Optional<ProductAccount> get(String productName) {
         return db.products.stream()
                 .filter(a -> a.getName().equals(productName))
-                .findFirst().get();
+                .findFirst();
     }
 
     @Override
     public void update(ProductAccount product) {
-        ProductAccount productFromDb = get(product.getName());
-        db.products.remove(productFromDb);
-        add(product);
+        Optional<ProductAccount> optProductAccount = get(product.getName());
+        if (optProductAccount.isPresent()) {
+            ProductAccount productFromDb = optProductAccount.get();
+            db.products.remove(productFromDb);
+            add(product);
+        }
+
     }
 
     @Override

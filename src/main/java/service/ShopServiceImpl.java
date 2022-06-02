@@ -2,6 +2,7 @@ package service;
 
 import dao.ProductAccountDaoImpl;
 import java.util.Arrays;
+import java.util.Optional;
 import model.ProductAccount;
 
 public class ShopServiceImpl implements ShopService {
@@ -14,27 +15,25 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public boolean productTransaction(String productname,
-            Double productAmount,
-            String operationString) {
-        ProductAccount productFromDb = dao.get(productname);
-        if (productFromDb == null) {
-            (new ProductAccountServiceImpl(dao)).createNewProduct(productname);
-            productFromDb = dao.get(productname);
-        }
-        Operation operationalType = Arrays.stream(Operation.values())
+    public boolean execProductTransaction(String productname,
+                                          Double productAmount,
+                                          String operationString) {
+        Optional<ProductAccount> optProductAccount = dao.get(productname);
+        Optional<Operation> optOperationType = Arrays.stream(Operation.values())
                 .filter(o -> operationString.toUpperCase().equals(o.getOperation().toUpperCase()))
-                .findFirst()
-                .get();
-        if (operationalType != null) {
+                .findFirst();
+
+        if (optProductAccount.isPresent() && optOperationType.isPresent()) {
+            ProductAccount productFromDb = optProductAccount.get();
+            Operation operationalType = optOperationType.get();
             productFromDb.setAmount(productFromDb.getAmount()
-                    + amountStrategy.get(operationalType)
-                    .getAmount(productAmount));
+                        + amountStrategy.get(operationalType)
+                        .getAmount(productAmount));
             dao.update(productFromDb);
             return true;
         } else {
             return false;
         }
     }
-
 }
+

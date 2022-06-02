@@ -1,6 +1,7 @@
 package service;
 
 import dao.ProductAccountDaoImpl;
+import java.util.ArrayList;
 import java.util.List;
 import model.ProductAccount;
 
@@ -13,7 +14,20 @@ public class ShopReportServiceImpl implements ShopReportService {
     }
 
     @Override
-    public List<ProductAccount> getShopBalanceReport() {
-        return dao.getBalance();
+    public List<String> getShopBalanceReport() {
+        List<ProductAccount> balanceReport = dao.getBalance();
+
+        List<String> outStringList = new ArrayList<String>();
+        //prepare CSV headers
+        outStringList.add((HeaderParts.FRUIT.name().toLowerCase()
+                + ","
+                + HeaderParts.QUANTITY.name().toLowerCase()));
+        //fill csv data
+        for (ProductAccount productAccount:balanceReport) {
+            outStringList.add((productAccount.getName()
+                    + ","
+                    + productAccount.getAmount().toString()));
+        }
+        return outStringList;
     }
 }
