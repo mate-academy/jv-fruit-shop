@@ -4,6 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
@@ -30,11 +31,12 @@ public class Main {
                 new FruitTransactionStrategyImpl(fruitTransactionMap);
         Storage fruitsStorage = new Storage();
         FruitTransactionService fruitService =
-                new FruitTransactionServiceImpl(transactionStrategy,fruitsStorage);
+                new FruitTransactionServiceImpl(transactionStrategy, fruitsStorage);
 
-        fruitService.getFruitTransactionFromString(new ReaderServiceImpl()
-                .readFromFile("src/main/resources/data.csv"));
+        fruitService.setOperationHandler(new ParserServiceImpl()
+                .getTransactionFromString(new ReaderServiceImpl()
+                .readFromFile("src/main/resources/data.csv")));
         new WriterServiceImpl().writeToFile(new ReportServiceImpl()
-                .createReport(fruitsStorage.getFruitsStorage()));
+                .createReport(fruitsStorage.getFruitsStorage()),"src/main/resources/report.csv");
     }
 }

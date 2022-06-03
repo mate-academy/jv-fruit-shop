@@ -1,11 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
+import java.util.List;
 
 public interface FruitTransactionService {
-    void getFruitTransactionFromString(String[] dataFromFile);
-
-    void setOperationHandler(FruitTransaction transaction);
-
-    void addToStorage(FruitTransaction transaction);
+    void setOperationHandler(List<FruitTransaction> transactions);
 }
