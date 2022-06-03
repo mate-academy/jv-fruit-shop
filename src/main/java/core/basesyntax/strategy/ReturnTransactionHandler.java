@@ -7,7 +7,7 @@ import core.basesyntax.model.FruitTransaction;
 public class ReturnTransactionHandler implements TransactionHandler {
 
     @Override
-    public void dayResult(FruitTransaction transaction, int quantityOfFruitsInStorage) {
+    public void updateFruitQuantity(FruitTransaction transaction, int quantityOfFruitsInStorage) {
         StorageDao storageDao = new StorageDaoImpl();
         storageDao.add(transaction.getFruit(),
                 quantityOfFruitsInStorage + transaction.getQuantity());

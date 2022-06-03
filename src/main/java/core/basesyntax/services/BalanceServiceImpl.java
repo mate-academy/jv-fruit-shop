@@ -19,7 +19,7 @@ public class BalanceServiceImpl implements BalanceService {
                     strategy.getTransactionService(transaction.getOperation());
             for (Map.Entry<String, Integer> entry: storageDao.get().entrySet()) {
                 if (entry.getKey().equals(transaction.getFruit())) {
-                    transactionHandler.dayResult(transaction, entry.getValue());
+                    transactionHandler.updateFruitQuantity(transaction, entry.getValue());
                 }
             }
         }

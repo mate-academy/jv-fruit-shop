@@ -3,5 +3,5 @@ package core.basesyntax.services;
 import java.util.List;
 
 public interface ReadFromFileService {
-    List<String> readDbFromFile(String fileName);
+    List<String> readFile(String fileName);
 }
