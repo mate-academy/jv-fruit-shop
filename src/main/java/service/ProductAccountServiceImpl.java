@@ -14,6 +14,5 @@ public class ProductAccountServiceImpl implements ProductAccountService {
     public void createNewProduct(String productname) {
         ProductAccount product = new ProductAccount(productname);
         dao.add(product);
-
     }
 }
