@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReadFromFileServiceImpl implements ReadFromFileService {
     @Override
-    public List<String> getDbFromFile(String fileName) {
+    public List<String> readDbFromFile(String fileName) {
         List<String> inputFromFile = new ArrayList<>();
         File file = new File(fileName);
         try {

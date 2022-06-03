@@ -1,7 +1,7 @@
 package core.basesyntax.services;
 
-import core.basesyntax.dao.TransactionsDao;
-import core.basesyntax.dao.TransactionsDaoImpl;
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +11,16 @@ public class FruitServiceImpl implements FruitService {
     private static final int FRUIT_VALUE_INDEX = 1;
     private static final int QUANTITY_VALUE_INDEX = 2;
     private static final String TITLE_STRING_OF_FILE = "type,fruit,quantity";
-    private TransactionsDao transactionsDao;
+    private StorageDao storageDao;
 
     public FruitServiceImpl() {
-        this.transactionsDao = new TransactionsDaoImpl();
+        this.storageDao = new StorageDaoImpl();
     }
 
-    public void getMapOfUniqueFruits(List<FruitTransaction> transactions) {
+    public void addUniqueFruitsToStorage(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction: transactions) {
             if (transaction.getOperation().equals(FruitTransaction.Operation.BALANCE)) {
-                transactionsDao.add(transaction.getFruit(), transaction.getQuantity());
+                storageDao.add(transaction.getFruit(), transaction.getQuantity());
             }
         }
     }

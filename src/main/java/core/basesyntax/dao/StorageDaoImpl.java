@@ -3,7 +3,7 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import java.util.Map;
 
-public class TransactionsDaoImpl implements TransactionsDao {
+public class StorageDaoImpl implements StorageDao {
     @Override
     public void add(String fruit, Integer quantity) {
         Storage.fruitsInfo.put(fruit, quantity);

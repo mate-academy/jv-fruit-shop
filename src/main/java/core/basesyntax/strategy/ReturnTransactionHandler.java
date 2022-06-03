@@ -1,8 +1,15 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.model.FruitTransaction;
+
 public class ReturnTransactionHandler implements TransactionHandler {
+
     @Override
-    public int dayResult(int numberOfFruitsInTheStore, int numberOfFruitsTransaction) {
-        return numberOfFruitsInTheStore + numberOfFruitsTransaction;
+    public void dayResult(FruitTransaction transaction, int quantityOfFruitsInStorage) {
+        StorageDao storageDao = new StorageDaoImpl();
+        storageDao.add(transaction.getFruit(),
+                quantityOfFruitsInStorage + transaction.getQuantity());
     }
 }

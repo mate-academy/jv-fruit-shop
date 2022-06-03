@@ -9,6 +9,8 @@ public class TransactionStrategy {
 
     public TransactionStrategy() {
         transactionServiceMap = new HashMap<>();
+        transactionServiceMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceTransactionHandler());
         transactionServiceMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseTransactionHandler());
         transactionServiceMap.put(FruitTransaction.Operation.RETURN,

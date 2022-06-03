@@ -4,12 +4,10 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
-public class SupplyTransactionHandler implements TransactionHandler {
-
+public class BalanceTransactionHandler implements TransactionHandler {
     @Override
     public void dayResult(FruitTransaction transaction, int quantityOfFruitsInStorage) {
         StorageDao storageDao = new StorageDaoImpl();
-        storageDao.add(transaction.getFruit(),
-                quantityOfFruitsInStorage + transaction.getQuantity());
+        storageDao.add(transaction.getFruit(), quantityOfFruitsInStorage);
     }
 }
