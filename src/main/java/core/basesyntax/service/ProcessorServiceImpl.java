@@ -2,8 +2,8 @@ package core.basesyntax.service;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.model.ProductTransaction;
-import core.basesyntax.strategy.action.ActionHandler;
 import core.basesyntax.strategy.ActionStrategy;
+import core.basesyntax.strategy.action.ActionHandler;
 import java.util.Queue;
 import java.util.stream.Collectors;
 

@@ -5,5 +5,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    public static List<Product> products = new ArrayList<>();
+    public static final List<Product> products = new ArrayList<>();
 }
