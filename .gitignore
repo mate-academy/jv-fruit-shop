@@ -1,3 +1,5 @@
 .idea/*
 *.iml
 target/*
+/src/main/resources/fruit-log.csv
+/src/main/resources/fruit-stat.csv
