@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.OperationNotFoundException;
+import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class ProductTransaction {
@@ -25,6 +27,12 @@ public class ProductTransaction {
         return quantity;
     }
 
+    public static ProductTransaction of(String operation, String product, String quantity) {
+        Operation operationOperation = Operation.getFromString(operation);
+        int quantityInteger = Integer.parseInt(quantity);
+        return new ProductTransaction(operationOperation, product, quantityInteger);
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", ProductTransaction.class.getSimpleName() + "[", "]")
@@ -48,6 +56,16 @@ public class ProductTransaction {
 
         public String getOperation() {
             return operation;
+        }
+
+        private static Operation getFromString(String operation) {
+            return Arrays.stream(Operation.values())
+                    .filter(o -> o.getOperation().equalsIgnoreCase(operation))
+                    .findFirst()
+                    .orElseThrow(() ->
+                            new OperationNotFoundException(
+                                    String.format("Error convert input string '%s' into operation",
+                                            operation)));
         }
     }
 }
