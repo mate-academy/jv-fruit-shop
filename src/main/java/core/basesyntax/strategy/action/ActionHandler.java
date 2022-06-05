@@ -1,7 +1,8 @@
 package core.basesyntax.strategy.action;
 
-import core.basesyntax.model.Record;
+import core.basesyntax.dao.ProductDao;
+import core.basesyntax.model.ProductTransaction;
 
 public interface ActionHandler {
-    void runAction(Record record);
+    void runAction(ProductDao productDao, ProductTransaction productTransaction);
 }

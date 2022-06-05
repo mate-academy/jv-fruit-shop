@@ -1,23 +1,39 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Operation;
-import core.basesyntax.model.Record;
+import core.basesyntax.model.ProductTransaction;
+import java.nio.file.Path;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class ReaderServiceImpl implements ReaderService {
     @Override
-    public Queue<Record> read(String fileName) {
+    public Queue<ProductTransaction> read(Path fileName) {
         // TODO do read from file
-        Queue<Record> records = new LinkedList<>();
-        records.add(new Record(Operation.BALANCE, "banana", 20));
-        records.add(new Record(Operation.BALANCE, "apple", 100));
-        records.add(new Record(Operation.SUPPLY, "banana", 100));
-        records.add(new Record(Operation.PURCHASE, "banana", 13));
-        records.add(new Record(Operation.RETURN, "apple", 10));
-        records.add(new Record(Operation.PURCHASE, "apple", 20));
-        records.add(new Record(Operation.PURCHASE, "banana", 5));
-        records.add(new Record(Operation.SUPPLY, "banana", 50));
-        return records;
+        Queue<ProductTransaction> productTransactions = new LinkedList<>();
+        productTransactions.add(
+                new ProductTransaction(
+                        ProductTransaction.Operation.BALANCE, "banana", 20));
+        productTransactions.add(
+                new ProductTransaction(
+                        ProductTransaction.Operation.BALANCE, "apple", 100));
+        productTransactions.add(
+                new ProductTransaction(
+                        ProductTransaction.Operation.SUPPLY, "banana", 100));
+        productTransactions.add(
+                new ProductTransaction(
+                        ProductTransaction.Operation.PURCHASE, "banana", 13));
+        productTransactions.add(
+                new ProductTransaction(
+                        ProductTransaction.Operation.RETURN, "apple", 10));
+        productTransactions.add(
+                new ProductTransaction(
+                        ProductTransaction.Operation.PURCHASE, "apple", 20));
+        productTransactions.add(
+                new ProductTransaction(
+                        ProductTransaction.Operation.PURCHASE, "banana", 5));
+        productTransactions.add(
+                new ProductTransaction(
+                        ProductTransaction.Operation.SUPPLY, "banana", 50));
+        return productTransactions;
     }
 }
