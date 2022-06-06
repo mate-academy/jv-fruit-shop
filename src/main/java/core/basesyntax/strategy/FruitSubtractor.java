@@ -1,16 +1,15 @@
 package core.basesyntax.strategy;
 
-import java.util.List;
+import core.basesyntax.db.Storage;
 
 public class FruitSubtractor implements FruitHandler {
     @Override
-    public void handle(List<String> fruitTypes, List<Integer> fruitAmount, String[] line) {
-        int currentFruitIndex = fruitTypes.indexOf(line[INDEX_FRUIT]);
-        fruitAmount.set(currentFruitIndex,
-                fruitAmount.get(currentFruitIndex)
-                        - Integer.parseInt(line[INDEX_AMOUNT]));
-        if (fruitAmount.get(currentFruitIndex) < 0) {
-            throw new RuntimeException("Do not have enough fruits for purchasing");
-        }
+    public void handle(String[] line) {
+        Storage.storage.merge(line[INDEX_FRUIT], Integer.parseInt(line[INDEX_AMOUNT]), (a, b) -> {
+            if (a - b < 0) {
+                throw new RuntimeException("Do not have enough fruits for purchasing");
+            }
+            return a - b;
+        });
     }
 }

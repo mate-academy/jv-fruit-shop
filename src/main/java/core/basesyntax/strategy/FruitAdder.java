@@ -1,13 +1,11 @@
 package core.basesyntax.strategy;
 
-import java.util.List;
+import core.basesyntax.db.Storage;
 
 public class FruitAdder implements FruitHandler {
     @Override
-    public void handle(List<String> fruitTypes, List<Integer> fruitAmount, String[] line) {
-        int currentFruitIndex = fruitTypes.indexOf(line[INDEX_FRUIT]);
-        fruitAmount.set(currentFruitIndex,
-                fruitAmount.get(currentFruitIndex)
-                        + Integer.parseInt(line[INDEX_AMOUNT]));
+    public void handle(String[] line) {
+            Storage.storage.merge(line[INDEX_FRUIT],
+                    Integer.parseInt(line[INDEX_AMOUNT]), Integer::sum);
     }
 }
