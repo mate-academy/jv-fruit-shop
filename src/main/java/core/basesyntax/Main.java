@@ -31,8 +31,8 @@ public class Main {
         ProcessorServiceImpl processor = new ProcessorServiceImpl(actionStrategy, productDao);
 
         Queue<ProductTransaction> transactions =
-                new ReaderServiceImpl().read(Setting.INPUT_FILE_NAME);
+                new ReaderServiceImpl().read(Setting.FILE_NAME_INPUT);
         processor.processing(transactions);
-        new WriterServiceImpl().write(Setting.OUTPUT_FILE_NAME, processor.report());
+        new WriterServiceImpl().write(Setting.FILE_NAME_OUTPUT, processor.report());
     }
 }

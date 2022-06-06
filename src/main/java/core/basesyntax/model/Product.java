@@ -18,9 +18,8 @@ public class Product {
         return quantity;
     }
 
-    public Product setQuantity(int quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
-        return this;
     }
 
     @Override

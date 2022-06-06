@@ -29,8 +29,8 @@ public class ProcessorServiceImpl implements ProcessorService {
     @Override
     public String report() {
         return productDao.getAll().stream()
-                .map(p -> p.getName() + Setting.FILE_LINE_SEPARATOR + p.getQuantity())
+                .map(p -> p.getName() + Setting.FIELDS_DELIMITER_IN_FILE + p.getQuantity())
                 .collect(Collectors.joining(System.lineSeparator(),
-                        Setting.FILE_HEADER_OUTPUT + System.lineSeparator(), ""));
+                        Setting.HEADER_FILE_OUTPUT + System.lineSeparator(), ""));
     }
 }

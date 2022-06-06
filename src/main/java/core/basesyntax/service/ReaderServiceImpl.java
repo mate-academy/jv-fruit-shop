@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.exception.TransactionParsingLineException;
+import core.basesyntax.exception.TransactionParsingStringException;
 import core.basesyntax.model.ProductTransaction;
 import core.basesyntax.model.Setting;
 import java.io.BufferedReader;
@@ -16,10 +16,10 @@ public class ReaderServiceImpl implements ReaderService {
         Queue<ProductTransaction> productTransactions = new LinkedList<>();
         try (BufferedReader bufferedReader =
                      new BufferedReader(new FileReader(fileName.toString()))) {
-            String line;
             int lineCount = 0;
+            String line;
             while ((line = bufferedReader.readLine()) != null) {
-                if (lineCount++ == 0 && Setting.FILE_HEADER_INPUT.equalsIgnoreCase(line)) {
+                if (lineCount++ == 0 && Setting.HEADER_FILE_INPUT.equalsIgnoreCase(line)) {
                     continue;
                 }
                 productTransactions.add(new ReaderServiceImpl().convertStringToTransaction(line));
@@ -32,14 +32,13 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
     private ProductTransaction convertStringToTransaction(String line) {
-        String[] partLine = line.split(Setting.FILE_LINE_SEPARATOR);
+        String[] partLine = line.split(Setting.FIELDS_DELIMITER_IN_FILE);
         ProductTransaction transaction;
         try {
-            transaction = ProductTransaction.of(partLine[Setting.INDEX_OPERATION],
-                    partLine[Setting.INDEX_PRODUCT],
-                    partLine[Setting.INDEX_QUANTITY]);
+            transaction = ProductTransaction.of(partLine[Setting.INDEX_FOR_OPERATION],
+                    partLine[Setting.INDEX_FOR_PRODUCT], partLine[Setting.INDEX_FOR_QUANTITY]);
         } catch (RuntimeException e) {
-            throw new TransactionParsingLineException(
+            throw new TransactionParsingStringException(
                     String.format("Error parse input line '%s'", line));
         }
         return transaction;
