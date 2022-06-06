@@ -4,6 +4,7 @@ import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.model.ProductTransaction;
 import core.basesyntax.model.Setting;
+import core.basesyntax.service.ParseServiceImpl;
 import core.basesyntax.service.ProcessorServiceImpl;
 import core.basesyntax.service.ReaderServiceImpl;
 import core.basesyntax.service.WriterServiceImpl;
@@ -15,6 +16,7 @@ import core.basesyntax.strategy.action.PurchaseHandler;
 import core.basesyntax.strategy.action.ReturnHandler;
 import core.basesyntax.strategy.action.SupplyHandler;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
@@ -30,8 +32,8 @@ public class Main {
         ActionStrategy actionStrategy = new ActionStrategyImpl(actionHandlerMap);
         ProcessorServiceImpl processor = new ProcessorServiceImpl(actionStrategy, productDao);
 
-        Queue<ProductTransaction> transactions =
-                new ReaderServiceImpl().read(Setting.FILE_NAME_INPUT);
+        List<String> data = new ReaderServiceImpl().read(Setting.FILE_NAME_INPUT);
+        Queue<ProductTransaction> transactions = new ParseServiceImpl().parse(data);
         processor.processing(transactions);
         new WriterServiceImpl().write(Setting.FILE_NAME_OUTPUT, processor.report());
     }

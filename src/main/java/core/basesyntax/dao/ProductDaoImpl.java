@@ -21,7 +21,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public void update(Product product) {
         Optional<Product> productFromStorage = get(product.getName());
-        productFromStorage.ifPresent(value -> Storage.products.remove(value));
+        productFromStorage.ifPresent(Storage.products::remove);
         add(product);
     }
 

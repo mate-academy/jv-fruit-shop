@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-import java.util.StringJoiner;
+import core.basesyntax.exception.ActionNegativeQuantityException;
 
 public class Product {
     private final String name;
@@ -19,14 +19,10 @@ public class Product {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new ActionNegativeQuantityException(
+                    String.format("You try to save negative quantity of product (%d)", quantity));
+        }
         this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", Product.class.getSimpleName() + "[", "]")
-                .add("name='" + name + "'")
-                .add("quantity=" + quantity)
-                .toString();
     }
 }

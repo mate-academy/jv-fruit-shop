@@ -1,9 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.ProductTransaction;
 import java.nio.file.Path;
-import java.util.Queue;
+import java.util.List;
 
 public interface ReaderService {
-    Queue<ProductTransaction> read(Path fileName);
+    List<String> read(Path fileName);
 }
