@@ -17,6 +17,9 @@ public class PurchaseHandler implements OperationHandler {
                 < fruitTransaction.getQuantity()) {
             throw new RuntimeException("There are no enough fruits");
         }
+        if (fruitTransaction.getQuantity() < 0) {
+            throw new RuntimeException("Purchase cannot be negative");
+        }
         storageDao.updateValues(fruitTransaction.getFruit(),
                 -fruitTransaction.getQuantity());
     }
