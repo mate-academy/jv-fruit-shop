@@ -2,7 +2,6 @@ package core.basesyntax.model;
 
 import core.basesyntax.exception.OperationNotFoundException;
 import java.util.Arrays;
-import java.util.StringJoiner;
 
 public class ProductTransaction {
     private final Operation operation;
@@ -28,18 +27,9 @@ public class ProductTransaction {
     }
 
     public static ProductTransaction of(String operation, String product, String quantity) {
-        Operation operationOperation = Operation.getFromString(operation);
+        Operation operationOperation = Operation.convertStringToOperation(operation);
         int quantityInteger = Integer.parseInt(quantity);
         return new ProductTransaction(operationOperation, product, quantityInteger);
-    }
-
-    @Override
-    public String toString() {
-        return new StringJoiner(", ", ProductTransaction.class.getSimpleName() + "[", "]")
-                .add("operation='" + operation + "'")
-                .add("product='" + product + "'")
-                .add("quantity=" + quantity)
-                .toString();
     }
 
     public enum Operation {
@@ -58,7 +48,7 @@ public class ProductTransaction {
             return operation;
         }
 
-        private static Operation getFromString(String operation) {
+        private static Operation convertStringToOperation(String operation) {
             return Arrays.stream(Operation.values())
                     .filter(o -> o.getOperation().equalsIgnoreCase(operation))
                     .findFirst()
