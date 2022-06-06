@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.strategy.FruitHandler;
-
 import java.util.List;
 import java.util.Map;
 

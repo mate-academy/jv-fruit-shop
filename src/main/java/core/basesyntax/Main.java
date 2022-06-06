@@ -10,7 +10,6 @@ import core.basesyntax.strategy.FruitAdder;
 import core.basesyntax.strategy.FruitCreator;
 import core.basesyntax.strategy.FruitHandler;
 import core.basesyntax.strategy.FruitSubtractor;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +26,6 @@ public class Main {
         strategy.put("s", new FruitAdder());
         strategy.put("r", new FruitAdder());
         strategy.put("p", new FruitSubtractor());
-
 
         List<String> info = myFileReader.getDryInfo("src/main/resources/input.csv");
         List<String> handledInfo = fruitCounter.countFruits(info, strategy);
