@@ -3,7 +3,6 @@ package core.basesyntax.strategy;
 import java.util.List;
 
 public interface FruitHandler {
-    int INDEX_OPERATION = 0;
     int INDEX_FRUIT = 1;
     int INDEX_AMOUNT = 2;
 

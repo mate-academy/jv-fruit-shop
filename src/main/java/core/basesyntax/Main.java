@@ -31,7 +31,7 @@ public class Main {
                         + "p,banana,5\n"
                         + "s,banana,50");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Could not assess the file", e);
         }
 
         List<String> info = myFileReader.getDryInfo(input);

@@ -12,8 +12,6 @@ import java.util.Map;
 
 public class FruitCounterImpl implements FruitCounter {
     private static final int INDEX_OPERATION = 0;
-    private static final int INDEX_FRUIT = 1;
-    private static final int INDEX_AMOUNT = 2;
 
     public List<String> countFruits(List<String> uncountedFruits) {
         List<String> fruitTypes = new ArrayList<>();
