@@ -12,7 +12,7 @@ public class MyFileWriterImpl implements MyFileWriter {
     public File writeReport() {
         File report = new File("src/main/resources/report.csv");
         try (BufferedWriter q = new BufferedWriter(new FileWriter(report))) {
-            for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
+            for (Map.Entry<String, Integer> entry : Storage.getStorage().entrySet()) {
                 q.write(entry.getKey() + "," + entry.getValue() + System.lineSeparator());
             }
         } catch (IOException e) {
