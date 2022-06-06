@@ -7,7 +7,8 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class MyFileReaderImpl implements MyFileReader {
-    public List<String> getDryInfo(File file) {
+    public List<String> getDryInfo(String fileName) {
+        File file = new File(fileName);
         List<String> info;
         try {
             info = Files.readAllLines(file.toPath());

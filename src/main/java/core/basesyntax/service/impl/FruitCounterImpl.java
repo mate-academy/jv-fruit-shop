@@ -13,22 +13,14 @@ import java.util.Map;
 public class FruitCounterImpl implements FruitCounter {
     private static final int INDEX_OPERATION = 0;
 
-    public List<String> countFruits(List<String> uncountedFruits) {
+    public List<String> countFruits(List<String> unhandledFruits, Map<String, FruitHandler> strategy) {
         List<String> fruitTypes = new ArrayList<>();
         List<Integer> fruitAmount = new ArrayList<>();
-        Map<String, FruitHandler> strategy = new HashMap<>();
-        strategy.put("b", new FruitCreator());
-        strategy.put("s", new FruitAdder());
-        strategy.put("r", new FruitAdder());
-        strategy.put("p", new FruitSubtractor());
 
-        for (String uncountedFruit : uncountedFruits) {
-            String[] line = uncountedFruit.split(",");
-            FruitHandler fruitHandler = strategy.get(line[INDEX_OPERATION]);
-            fruitHandler.handle(fruitTypes, fruitAmount, line);
-            /*        throw new RuntimeException("Invalid operation. "
-                           + "Allowed operations are: b - for balance, "
-                          + "s - for supply, r - for return, p - for purchase"); */
+        for (String unhandledFruit : unhandledFruits) {
+            String[] currentLine = unhandledFruit.split(",");
+            FruitHandler fruitHandler = strategy.get(currentLine[INDEX_OPERATION]);
+            fruitHandler.handle(fruitTypes, fruitAmount, currentLine);
         }
 
         List<String> countedFruits = new ArrayList<>();
