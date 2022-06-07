@@ -1,14 +1,18 @@
 package core.service.handlers;
 
 import core.dao.FruitDao;
-import core.dao.FruitDaoImpl;
 
-public class PurchaseHandler implements FruitOperationHandler {
+public class PurchaseHandler implements OperationHandler {
+    private FruitDao fruitService;
+
+    public PurchaseHandler(FruitDao fruitService) {
+        this.fruitService = fruitService;
+    }
+
     @Override
-    public void doOperation(String fruitName, int fruitsQuantity) {
-        FruitDao fruitDao = new FruitDaoImpl();
-        int fruitsQuantityInStorage = fruitDao.get(fruitName);
-        fruitsQuantityInStorage -= fruitsQuantity;
-        fruitDao.update(fruitName,fruitsQuantityInStorage);
+    public void handle(String fruitName, int quantity) {
+        int fruitsQuantityInStorage = fruitService.get(fruitName);
+        fruitsQuantityInStorage -= quantity;
+        fruitService.update(fruitName,fruitsQuantityInStorage);
     }
 }
