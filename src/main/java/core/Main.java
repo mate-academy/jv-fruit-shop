@@ -1,12 +1,19 @@
 package core;
 
+import core.dao.FruitDao;
 import core.service.CreateReportService;
-import core.service.ReadCsvService;
+import core.service.CreateReportServiceImpl;
+import core.service.CsvReaderService;
+import core.service.CsvReaderServiceImpl;
+import core.service.CsvWriterService;
+import core.service.CsvWriterServiceImpl;
+import core.service.FruitService;
+import core.service.OperationHandlerStrategy;
+import core.service.OperationHandlerStrategyImpl;
 import core.service.StorageFillingService;
-import core.service.UpdateFruitsStrategy;
-import core.service.UpdateFruitsStrategyImpl;
+import core.service.StorageFillingServiceImpl;
 import core.service.handlers.BalanceHandler;
-import core.service.handlers.FruitOperationHandler;
+import core.service.handlers.OperationHandler;
 import core.service.handlers.PurchaseHandler;
 import core.service.handlers.ReturnHandler;
 import core.service.handlers.SupplyHandler;
@@ -17,29 +24,33 @@ import java.util.Map;
 public class Main {
     private static final String FRUITS_FILE_NAME = "fruits.csv";
     private static final String REPORT_FILE_NAME = "report.csv";
+    private static final FruitDao fruitService = new FruitService();
 
     public static void main(String[] args) {
-        ReadCsvService readCsvService = new ReadCsvService();
-        List<String> fruitsOperations = readCsvService.getFruitOperations(FRUITS_FILE_NAME);
+        CsvReaderService csvReaderService = new CsvReaderServiceImpl();
+        List<String> fruitsOperations = csvReaderService.readFromFile(FRUITS_FILE_NAME);
 
-        Map<String, FruitOperationHandler> operationsHandlerMap = initOperationsHandlerMap();
-        UpdateFruitsStrategy updateFruitsStrategy =
-                new UpdateFruitsStrategyImpl(operationsHandlerMap);
+        Map<String, OperationHandler> operationsHandlerMap = initOperationsHandlerMap();
+        OperationHandlerStrategy operationHandlerStrategy =
+                new OperationHandlerStrategyImpl(operationsHandlerMap);
 
         StorageFillingService storageFillingService =
-                new StorageFillingService(updateFruitsStrategy);
+                new StorageFillingServiceImpl(operationHandlerStrategy);
         storageFillingService.fillStorage(fruitsOperations);
 
-        CreateReportService createReportService = new CreateReportService();
-        createReportService.createReport(REPORT_FILE_NAME);
+        CreateReportService createReportService = new CreateReportServiceImpl(fruitService);
+        String report = createReportService.createReport();
+
+        CsvWriterService csvWriterService = new CsvWriterServiceImpl();
+        csvWriterService.write(REPORT_FILE_NAME,report);
     }
 
-    private static Map<String, FruitOperationHandler> initOperationsHandlerMap() {
-        Map<String, FruitOperationHandler> operationsHandlerMap = new HashMap<>();
-        operationsHandlerMap.put("b", new BalanceHandler());
-        operationsHandlerMap.put("s", new SupplyHandler());
-        operationsHandlerMap.put("r", new ReturnHandler());
-        operationsHandlerMap.put("p", new PurchaseHandler());
+    private static Map<String, OperationHandler> initOperationsHandlerMap() {
+        Map<String, OperationHandler> operationsHandlerMap = new HashMap<>();
+        operationsHandlerMap.put("b", new BalanceHandler(fruitService));
+        operationsHandlerMap.put("s", new SupplyHandler(fruitService));
+        operationsHandlerMap.put("r", new ReturnHandler(fruitService));
+        operationsHandlerMap.put("p", new PurchaseHandler(fruitService));
         return operationsHandlerMap;
     }
 }
