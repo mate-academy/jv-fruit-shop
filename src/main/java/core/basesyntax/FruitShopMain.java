@@ -25,8 +25,10 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShopMain {
+    private static final String FROM_FILE = "src/main/resources/dailyOperations.csv";
+    private static final String TO_FILE = "src/main/resources/dailyReport.csv";
+
     public static void main(String[] args) {
-        String fromFile = "src/main/resources/dailyOperations.csv";
         StorageDao storageDao = new StorageDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> strategyMap =
                 new HashMap<>();
@@ -38,7 +40,7 @@ public class FruitShopMain {
                 new OperationHandlerStrategyImpl(strategyMap);
 
         Reader reader = new ReaderImpl();
-        List<String> dailyOperationsList = reader.readFromFile(fromFile);
+        List<String> dailyOperationsList = reader.readFromFile(FROM_FILE);
 
         Parser parser = new ParserImpl();
         List<FruitTransaction> fruitTransactions =
@@ -51,8 +53,7 @@ public class FruitShopMain {
         ReportCreator reportCreator = new ReportCreatorImpl(storageDao);
         String report = reportCreator.createReport();
 
-        String toFile = "src/main/resources/dailyReport.csv";
         Writer writer = new WriterImpl();
-        writer.writeToFile(report, toFile);
+        writer.writeToFile(report, TO_FILE);
     }
 }

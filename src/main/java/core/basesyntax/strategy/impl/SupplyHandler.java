@@ -16,7 +16,9 @@ public class SupplyHandler implements OperationHandler {
         if (fruitTransaction.getQuantity() < 0) {
             throw new RuntimeException("Supply cannot be negative");
         }
-        storageDao.updateValues(fruitTransaction.getFruit(),
-                fruitTransaction.getQuantity());
+        int remainingFruits = storageDao.getRemainingFruits(fruitTransaction.getFruit()) == null
+                ? 0 : storageDao.getRemainingFruits(fruitTransaction.getFruit());
+        int newQuantity = fruitTransaction.getQuantity() + remainingFruits;
+        storageDao.updateValues(fruitTransaction.getFruit(), newQuantity);
     }
 }
