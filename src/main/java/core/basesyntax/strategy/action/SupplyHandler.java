@@ -1,18 +1,17 @@
 package core.basesyntax.strategy.action;
 
-import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductStorageDao;
 import core.basesyntax.exception.ActionProductNotFoundException;
-import core.basesyntax.model.Product;
 import core.basesyntax.model.ProductTransaction;
 
 public class SupplyHandler implements ActionHandler {
     @Override
-    public void runAction(ProductDao productDao, ProductTransaction productTransaction) {
-        String productName = productTransaction.getProduct();
-        Product product = productDao.get(productName).orElseThrow(() ->
+    public void process(ProductStorageDao productStorageDao, ProductTransaction transaction) {
+        String productName = transaction.getProduct();
+        int quantity = productStorageDao.getQuantity(productName).orElseThrow(() ->
                 new ActionProductNotFoundException(String.format("Product %s not found in storage",
                         productName)));
-        product.setQuantity(product.getQuantity() + productTransaction.getQuantity());
-        productDao.update(product);
+        quantity += transaction.getQuantity();
+        productStorageDao.setQuantity(productName, quantity);
     }
 }

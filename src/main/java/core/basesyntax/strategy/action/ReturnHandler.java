@@ -1,11 +1,11 @@
 package core.basesyntax.strategy.action;
 
-import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductStorageDao;
 import core.basesyntax.model.ProductTransaction;
 
 public class ReturnHandler implements ActionHandler {
     @Override
-    public void runAction(ProductDao productDao, ProductTransaction productTransaction) {
-        new SupplyHandler().runAction(productDao, productTransaction);
+    public void process(ProductStorageDao productStorageDao, ProductTransaction transaction) {
+        new SupplyHandler().process(productStorageDao, transaction);
     }
 }

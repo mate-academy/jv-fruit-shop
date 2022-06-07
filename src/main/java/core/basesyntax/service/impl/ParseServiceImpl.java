@@ -1,26 +1,34 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.TransactionParsingStringException;
 import core.basesyntax.model.ProductTransaction;
-import core.basesyntax.model.Setting;
+import core.basesyntax.service.ParseService;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class ParseServiceImpl implements ParseService {
+    public static final String HEADER_IN_FILE = "type,fruit,quantity";
+    public static final String FIELDS_DELIMITER = ",";
+    public static final int INDEX_FOR_OPERATION = 0;
+    public static final int INDEX_FOR_PRODUCT = 1;
+    public static final int INDEX_FOR_QUANTITY = 2;
+
     @Override
     public Queue<ProductTransaction> parse(List<String> data) {
         Queue<ProductTransaction> transactionsQueue = new LinkedList<>();
         int lineCount = 0;
         for (String line : data) {
-            if (lineCount++ == 0 && Setting.HEADER_FILE_INPUT.equalsIgnoreCase(line)) {
+            if (lineCount++ == 0 && HEADER_IN_FILE.equalsIgnoreCase(line)) {
                 continue;
             }
-            String[] partLine = line.split(Setting.FIELDS_DELIMITER_IN_FILE);
+            String[] partsLine = line.split(FIELDS_DELIMITER);
             ProductTransaction transaction;
             try {
-                transaction = ProductTransaction.of(partLine[Setting.INDEX_FOR_OPERATION],
-                        partLine[Setting.INDEX_FOR_PRODUCT], partLine[Setting.INDEX_FOR_QUANTITY]);
+                transaction = ProductTransaction.of(
+                        partsLine[INDEX_FOR_OPERATION],
+                        partsLine[INDEX_FOR_PRODUCT],
+                        partsLine[INDEX_FOR_QUANTITY]);
             } catch (RuntimeException e) {
                 throw new TransactionParsingStringException(
                         String.format("Error parse input line '%s'", line));

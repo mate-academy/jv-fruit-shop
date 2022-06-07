@@ -1,5 +1,6 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.ActionNegativeQuantityException;
 import core.basesyntax.exception.OperationNotFoundException;
 import java.util.Arrays;
 
@@ -29,6 +30,11 @@ public class ProductTransaction {
     public static ProductTransaction of(String operation, String product, String quantity) {
         Operation operationOperation = Operation.convertStringToOperation(operation);
         int quantityInteger = Integer.parseInt(quantity);
+        if (quantityInteger < 0) {
+            throw new ActionNegativeQuantityException(
+                    String.format("There's negative value of quantity '%d' of product '%s'",
+                            quantityInteger, product));
+        }
         return new ProductTransaction(operationOperation, product, quantityInteger);
     }
 

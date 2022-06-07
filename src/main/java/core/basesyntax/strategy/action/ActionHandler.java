@@ -1,8 +1,8 @@
 package core.basesyntax.strategy.action;
 
-import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductStorageDao;
 import core.basesyntax.model.ProductTransaction;
 
 public interface ActionHandler {
-    void runAction(ProductDao productDao, ProductTransaction productTransaction);
+    void process(ProductStorageDao productStorageDao, ProductTransaction transaction);
 }

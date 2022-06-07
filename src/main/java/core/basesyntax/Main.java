@@ -1,13 +1,13 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.ProductDao;
-import core.basesyntax.dao.ProductDaoImpl;
+import core.basesyntax.dao.ProductStorageDao;
+import core.basesyntax.dao.ProductStorageDaoImpl;
 import core.basesyntax.model.ProductTransaction;
-import core.basesyntax.model.Setting;
-import core.basesyntax.service.ParseServiceImpl;
-import core.basesyntax.service.ProcessorServiceImpl;
-import core.basesyntax.service.ReaderServiceImpl;
-import core.basesyntax.service.WriterServiceImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.ParseServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.ActionStrategy;
 import core.basesyntax.strategy.ActionStrategyImpl;
 import core.basesyntax.strategy.action.ActionHandler;
@@ -15,12 +15,22 @@ import core.basesyntax.strategy.action.BalanceHandler;
 import core.basesyntax.strategy.action.PurchaseHandler;
 import core.basesyntax.strategy.action.ReturnHandler;
 import core.basesyntax.strategy.action.SupplyHandler;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
 public class Main {
+    public static final Path DIRECTORY_PROJECT = Path.of("").toAbsolutePath();
+    public static final Path DIRECTORY_RESOURCES =
+            Paths.get(DIRECTORY_PROJECT.toString(), "src", "main", "resources");
+    public static final Path FILE_NAME_INPUT =
+            DIRECTORY_RESOURCES.resolve("fruit-input-transactions.csv");
+    public static final Path FILE_NAME_OUTPUT =
+            DIRECTORY_RESOURCES.resolve("fruit-output-report.csv");
+
     public static void main(String[] args) {
         Map<ProductTransaction.Operation, ActionHandler> actionHandlerMap = new HashMap<>();
         actionHandlerMap.put(ProductTransaction.Operation.BALANCE, new BalanceHandler());
@@ -28,13 +38,17 @@ public class Main {
         actionHandlerMap.put(ProductTransaction.Operation.PURCHASE, new PurchaseHandler());
         actionHandlerMap.put(ProductTransaction.Operation.RETURN, new ReturnHandler());
 
-        ProductDao productDao = new ProductDaoImpl();
+        ProductStorageDao productStorageDao = new ProductStorageDaoImpl();
         ActionStrategy actionStrategy = new ActionStrategyImpl(actionHandlerMap);
-        ProcessorServiceImpl processor = new ProcessorServiceImpl(actionStrategy, productDao);
+        ReportService report = new ReportServiceImpl(productStorageDao);
 
-        List<String> data = new ReaderServiceImpl().read(Setting.FILE_NAME_INPUT);
+        List<String> data = new ReaderServiceImpl().read(FILE_NAME_INPUT);
         Queue<ProductTransaction> transactions = new ParseServiceImpl().parse(data);
-        processor.processing(transactions);
-        new WriterServiceImpl().write(Setting.FILE_NAME_OUTPUT, processor.report());
+        while (!transactions.isEmpty()) {
+            ProductTransaction productTransaction = transactions.poll();
+            ActionHandler actionHandler = actionStrategy.get(productTransaction.getOperation());
+            actionHandler.process(productStorageDao, productTransaction);
+        }
+        new WriterServiceImpl().write(FILE_NAME_OUTPUT, report.create());
     }
 }

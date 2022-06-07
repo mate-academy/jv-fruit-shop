@@ -1,14 +1,11 @@
 package core.basesyntax.strategy.action;
 
-import core.basesyntax.dao.ProductDao;
-import core.basesyntax.model.Product;
+import core.basesyntax.dao.ProductStorageDao;
 import core.basesyntax.model.ProductTransaction;
 
 public class BalanceHandler implements ActionHandler {
     @Override
-    public void runAction(ProductDao productDao, ProductTransaction productTransaction) {
-        Product product = new Product(productTransaction.getProduct());
-        product.setQuantity(productTransaction.getQuantity());
-        productDao.update(product);
+    public void process(ProductStorageDao productStorageDao, ProductTransaction transaction) {
+        productStorageDao.setQuantity(transaction.getProduct(), transaction.getQuantity());
     }
 }
