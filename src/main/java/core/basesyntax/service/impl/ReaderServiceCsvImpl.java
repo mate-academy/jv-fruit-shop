@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderServiceCsvImpl implements ReaderService {
+    public static final int TABLE_NAME = 0;
+
     @Override
     public List<String> readFromFile(String filePath) {
         List<String> transactions = new ArrayList<>();
@@ -16,7 +18,7 @@ public class ReaderServiceCsvImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + filePath);
         }
-        transactions.remove(0);
+        transactions.remove(TABLE_NAME);
         return transactions;
     }
 }

@@ -6,18 +6,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterServiceCsvImpl implements WriterService {
-    public static final String REPORT_PATH = "src/main/resources/report.csv";
 
     @Override
-    public void write(String data) {
-        StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity")
-                .append(System.lineSeparator())
-                .append(data);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(REPORT_PATH))) {
-            bufferedWriter.write(report.toString());
+    public void write(String data, String reportPath) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportPath))) {
+            bufferedWriter.write(data);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file " + REPORT_PATH);
+            throw new RuntimeException("Can't write data to file " + reportPath);
         }
     }
 }
