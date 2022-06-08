@@ -10,8 +10,8 @@ import core.service.CsvWriterServiceImpl;
 import core.service.FruitService;
 import core.service.OperationHandlerStrategy;
 import core.service.OperationHandlerStrategyImpl;
-import core.service.StorageFillingService;
-import core.service.StorageFillingServiceImpl;
+import core.service.FruitTransactionProcessorService;
+import core.service.FruitTransactionProcessorServiceImpl;
 import core.service.handlers.BalanceHandler;
 import core.service.handlers.OperationHandler;
 import core.service.handlers.PurchaseHandler;
@@ -34,9 +34,9 @@ public class Main {
         OperationHandlerStrategy operationHandlerStrategy =
                 new OperationHandlerStrategyImpl(operationsHandlerMap);
 
-        StorageFillingService storageFillingService =
-                new StorageFillingServiceImpl(operationHandlerStrategy);
-        storageFillingService.fillStorage(fruitsOperations);
+        FruitTransactionProcessorService fruitTransactionProcessorService =
+                new FruitTransactionProcessorServiceImpl(operationHandlerStrategy);
+        fruitTransactionProcessorService.fillStorage(fruitsOperations);
 
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl(fruitService);
         String report = reportCreatorService.createReport();

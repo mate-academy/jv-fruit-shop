@@ -2,13 +2,13 @@ package core.service;
 
 import java.util.List;
 
-public class StorageFillingServiceImpl implements StorageFillingService {
+public class FruitTransactionProcessorServiceImpl implements FruitTransactionProcessorService {
     private final OperationHandlerStrategy operationHandlerStrategy;
     private final int OPERATION_POS = 0;
     private final int FRUIT_NAME_POS = 1;
     private final int FRUITS_QUANTITY_POS = 2;
 
-    public StorageFillingServiceImpl(OperationHandlerStrategy operationHandlerStrategy) {
+    public FruitTransactionProcessorServiceImpl(OperationHandlerStrategy operationHandlerStrategy) {
         this.operationHandlerStrategy = operationHandlerStrategy;
     }
 
