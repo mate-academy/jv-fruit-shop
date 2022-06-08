@@ -24,8 +24,9 @@ public class ReportServiceCsvImpl implements ReportService {
     @Override
     public void writeReport(String reportPath) {
         Map<String, Integer> leftoversMap = fruitsLeftovers(fruitTransactionDao.get());
-        StringBuilder report = new StringBuilder()
-                .append("fruit,quantity")
+        StringBuilder report = fruitTransactionDao.isEmpty()
+                ? new StringBuilder()
+                : new StringBuilder("fruit,quantity")
                 .append(System.lineSeparator())
                 .append(mapToString(leftoversMap));
         writerService.write(report.toString(), reportPath);
@@ -40,6 +41,7 @@ public class ReportServiceCsvImpl implements ReportService {
                             .getOrDefault(transaction.getFruit(), 0), transaction.getQuantity());
             fruitAmount.put(transaction.getFruit(), newQuantity);
         }
+        isValidQuantity(fruitAmount);
         return fruitAmount;
     }
 
@@ -52,5 +54,14 @@ public class ReportServiceCsvImpl implements ReportService {
                     .append(System.lineSeparator());
         }
         return builder.toString();
+    }
+
+    private void isValidQuantity(Map<String, Integer> fruitAmount) {
+        for (Integer value : fruitAmount.values()) {
+            if (value < 0) {
+                throw new RuntimeException("The total amount of fruit is negative. "
+                        + "Please check transactions data");
+            }
+        }
     }
 }

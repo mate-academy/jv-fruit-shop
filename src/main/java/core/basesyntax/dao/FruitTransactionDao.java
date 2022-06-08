@@ -7,4 +7,6 @@ public interface FruitTransactionDao {
     void add(FruitTransaction fruitTransaction);
 
     List<FruitTransaction> get();
+
+    boolean isEmpty();
 }

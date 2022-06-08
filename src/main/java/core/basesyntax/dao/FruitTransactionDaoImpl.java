@@ -16,4 +16,9 @@ public class FruitTransactionDaoImpl implements FruitTransactionDao {
     public List<FruitTransaction> get() {
         return new ArrayList<>(Storage.fruitTransactions);
     }
+
+    @Override
+    public boolean isEmpty() {
+        return Storage.fruitTransactions.isEmpty();
+    }
 }

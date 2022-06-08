@@ -16,6 +16,9 @@ public class ReaderServiceCsvImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + filePath);
         }
-        return transactions;
+        if (transactions.size() != 0) {
+            return transactions;
+        }
+        throw new RuntimeException("*.csv file is empty " + filePath);
     }
 }
