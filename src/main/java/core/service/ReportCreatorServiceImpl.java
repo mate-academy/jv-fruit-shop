@@ -3,10 +3,10 @@ package core.service;
 import core.dao.FruitDao;
 import java.util.Map;
 
-public class CreateReportServiceImpl implements CreateReportService {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private FruitDao fruitService;
 
-    public CreateReportServiceImpl(FruitDao fruitService) {
+    public ReportCreatorServiceImpl(FruitDao fruitService) {
         this.fruitService = fruitService;
     }
 

@@ -1,8 +1,8 @@
 package core;
 
 import core.dao.FruitDao;
-import core.service.CreateReportService;
-import core.service.CreateReportServiceImpl;
+import core.service.ReportCreatorService;
+import core.service.ReportCreatorServiceImpl;
 import core.service.CsvReaderService;
 import core.service.CsvReaderServiceImpl;
 import core.service.CsvWriterService;
@@ -38,8 +38,8 @@ public class Main {
                 new StorageFillingServiceImpl(operationHandlerStrategy);
         storageFillingService.fillStorage(fruitsOperations);
 
-        CreateReportService createReportService = new CreateReportServiceImpl(fruitService);
-        String report = createReportService.createReport();
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl(fruitService);
+        String report = reportCreatorService.createReport();
 
         CsvWriterService csvWriterService = new CsvWriterServiceImpl();
         csvWriterService.write(REPORT_FILE_NAME,report);
