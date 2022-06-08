@@ -17,12 +17,12 @@ public class FruitTransactionProcessorServiceImpl implements FruitTransactionPro
 
     public void fillStorage(List<String> lines) {
         for (String line : lines) {
-            String[] operationData = line.split(",");
-            String operation = operationData[OPERATION_INDEX];
+            String[] splittedLine = line.split(",");
+            String operation = splittedLine[OPERATION_INDEX];
             OperationHandler operationHandler = operationHandlerStrategy.get(operation);
             if (operationHandler != null) {
-                String fruitName = operationData[FRUIT_NAME_INDEX];
-                int fruitsQuantity = Integer.parseInt(operationData[FRUITS_QUANTITY_INDEX]);
+                String fruitName = splittedLine[FRUIT_NAME_INDEX];
+                int fruitsQuantity = Integer.parseInt(splittedLine[FRUITS_QUANTITY_INDEX]);
                 operationHandler.handle(fruitName,fruitsQuantity);
             }
         }
