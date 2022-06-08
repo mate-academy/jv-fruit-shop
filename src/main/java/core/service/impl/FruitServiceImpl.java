@@ -2,7 +2,6 @@ package core.service.impl;
 
 import core.dao.FruitDao;
 import core.service.FruitService;
-
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
