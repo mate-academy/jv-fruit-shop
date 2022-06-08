@@ -4,6 +4,7 @@ import core.dao.FruitDao;
 import java.util.Map;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService {
+    private final String DELIMITER = ",";
     private FruitDao fruitService;
 
     public ReportCreatorServiceImpl(FruitDao fruitService) {
@@ -14,7 +15,7 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
         StringBuilder stringBuilder = new StringBuilder("fruit,quantity\n");
         Map<String,Integer> fruitsMap = fruitService.getAll();
         for (Map.Entry<String,Integer> entry : fruitsMap.entrySet()) {
-            stringBuilder.append(entry.getKey() + "," + entry.getValue() + "\n");
+            stringBuilder.append(entry.getKey() + DELIMITER + entry.getValue() + "\n");
         }
         return stringBuilder.toString();
     }
