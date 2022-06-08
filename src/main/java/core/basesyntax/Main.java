@@ -4,6 +4,7 @@ import core.basesyntax.dao.ProductStorageDao;
 import core.basesyntax.dao.ProductStorageDaoImpl;
 import core.basesyntax.model.ProductTransaction;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -41,6 +42,7 @@ public class Main {
         ProductStorageDao productStorageDao = new ProductStorageDaoImpl();
         ActionStrategy actionStrategy = new ActionStrategyImpl(actionHandlerMap);
         ReportService report = new ReportServiceImpl(productStorageDao);
+        WriterService writerService = new WriterServiceImpl();
 
         List<String> data = new ReaderServiceImpl().read(FILE_NAME_INPUT);
         Queue<ProductTransaction> transactions = new ParseServiceImpl().parse(data);
@@ -49,6 +51,6 @@ public class Main {
             ActionHandler actionHandler = actionStrategy.get(productTransaction.getOperation());
             actionHandler.process(productStorageDao, productTransaction);
         }
-        new WriterServiceImpl().write(FILE_NAME_OUTPUT, report.create());
+        writerService.write(FILE_NAME_OUTPUT, report.create());
     }
 }
