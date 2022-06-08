@@ -1,11 +1,11 @@
 package core.service.handlers;
 
-import core.dao.FruitDao;
+import core.service.FruitService;
 
 public class SupplyHandler implements OperationHandler {
-    private FruitDao fruitService;
+    private FruitService fruitService;
 
-    public SupplyHandler(FruitDao fruitDao) {
+    public SupplyHandler(FruitService fruitDao) {
         this.fruitService = fruitDao;
     }
 

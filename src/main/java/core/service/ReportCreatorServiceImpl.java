@@ -1,13 +1,12 @@
 package core.service;
 
-import core.dao.FruitDao;
 import java.util.Map;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String DELIMITER = ",";
-    private FruitDao fruitService;
+    private FruitService fruitService;
 
-    public ReportCreatorServiceImpl(FruitDao fruitService) {
+    public ReportCreatorServiceImpl(FruitService fruitService) {
         this.fruitService = fruitService;
     }
 
