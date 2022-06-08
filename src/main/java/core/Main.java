@@ -1,17 +1,17 @@
 package core;
 
 import core.dao.FruitDao;
-import core.service.ReportCreatorService;
-import core.service.ReportCreatorServiceImpl;
 import core.service.CsvReaderService;
 import core.service.CsvReaderServiceImpl;
 import core.service.CsvWriterService;
 import core.service.CsvWriterServiceImpl;
 import core.service.FruitService;
-import core.service.OperationHandlerStrategy;
-import core.service.OperationHandlerStrategyImpl;
 import core.service.FruitTransactionProcessorService;
 import core.service.FruitTransactionProcessorServiceImpl;
+import core.service.OperationHandlerStrategy;
+import core.service.OperationHandlerStrategyImpl;
+import core.service.ReportCreatorService;
+import core.service.ReportCreatorServiceImpl;
 import core.service.handlers.BalanceHandler;
 import core.service.handlers.OperationHandler;
 import core.service.handlers.PurchaseHandler;

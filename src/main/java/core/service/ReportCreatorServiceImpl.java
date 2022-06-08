@@ -4,7 +4,7 @@ import core.dao.FruitDao;
 import java.util.Map;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService {
-    private final String DELIMITER = ",";
+    private static final String DELIMITER = ",";
     private FruitDao fruitService;
 
     public ReportCreatorServiceImpl(FruitDao fruitService) {
