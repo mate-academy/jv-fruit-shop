@@ -1,6 +1,6 @@
-package core.service;
+package core.strategy;
 
-import core.service.handlers.OperationHandler;
+import core.strategy.handlers.OperationHandler;
 
 public interface OperationHandlerStrategy {
     OperationHandler get(String operation);

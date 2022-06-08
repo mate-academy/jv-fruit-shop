@@ -1,7 +1,6 @@
-package core.service.impl;
+package core.strategy;
 
-import core.service.OperationHandlerStrategy;
-import core.service.handlers.OperationHandler;
+import core.strategy.handlers.OperationHandler;
 import java.util.Map;
 
 public class OperationHandlerStrategyImpl implements OperationHandlerStrategy {

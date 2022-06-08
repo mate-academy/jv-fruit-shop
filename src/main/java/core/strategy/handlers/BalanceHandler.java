@@ -1,4 +1,4 @@
-package core.service.handlers;
+package core.strategy.handlers;
 
 import core.service.FruitService;
 

@@ -1,7 +1,7 @@
 package core.service.impl;
 
 import core.service.FruitTransactionProcessorService;
-import core.service.OperationHandlerStrategy;
+import core.strategy.OperationHandlerStrategy;
 import java.util.List;
 
 public class FruitTransactionProcessorServiceImpl implements FruitTransactionProcessorService {
