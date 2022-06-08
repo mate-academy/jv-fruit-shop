@@ -2,7 +2,6 @@ package core.service.impl;
 
 import core.service.FruitTransactionProcessorService;
 import core.service.OperationHandlerStrategy;
-import core.service.handlers.OperationHandler;
 import java.util.List;
 
 public class FruitTransactionProcessorServiceImpl implements FruitTransactionProcessorService {
@@ -16,15 +15,13 @@ public class FruitTransactionProcessorServiceImpl implements FruitTransactionPro
     }
 
     public void fillStorage(List<String> lines) {
+        lines.remove(0);
         for (String line : lines) {
             String[] splittedLine = line.split(",");
             String operation = splittedLine[OPERATION_INDEX];
-            OperationHandler operationHandler = operationHandlerStrategy.get(operation);
-            if (operationHandler != null) {
-                String fruitName = splittedLine[FRUIT_NAME_INDEX];
-                int fruitsQuantity = Integer.parseInt(splittedLine[FRUITS_QUANTITY_INDEX]);
-                operationHandler.handle(fruitName,fruitsQuantity);
-            }
+            String fruitName = splittedLine[FRUIT_NAME_INDEX];
+            int fruitsQuantity = Integer.parseInt(splittedLine[FRUITS_QUANTITY_INDEX]);
+            operationHandlerStrategy.get(operation).handle(fruitName,fruitsQuantity);
         }
     }
 }
