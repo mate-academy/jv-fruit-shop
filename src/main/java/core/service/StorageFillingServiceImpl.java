@@ -4,6 +4,9 @@ import java.util.List;
 
 public class StorageFillingServiceImpl implements StorageFillingService {
     private final OperationHandlerStrategy operationHandlerStrategy;
+    private final int OPERATION_POS = 0;
+    private final int FRUIT_NAME_POS = 1;
+    private final int FRUITS_QUANTITY_POS = 2;
 
     public StorageFillingServiceImpl(OperationHandlerStrategy operationHandlerStrategy) {
         this.operationHandlerStrategy = operationHandlerStrategy;
@@ -14,9 +17,9 @@ public class StorageFillingServiceImpl implements StorageFillingService {
             try {
                 fruitOperation = fruitOperation.trim();
                 String[] operationData = fruitOperation.split(",");
-                String operation = operationData[0];
-                String fruitName = operationData[1];
-                int fruitsQuantity = Integer.parseInt(operationData[2]);
+                String operation = operationData[OPERATION_POS];
+                String fruitName = operationData[FRUIT_NAME_POS];
+                int fruitsQuantity = Integer.parseInt(operationData[FRUITS_QUANTITY_POS]);
                 operationHandlerStrategy.get(operation).handle(fruitName,fruitsQuantity);
             } catch (NumberFormatException
                      | NullPointerException e) {
