@@ -14,7 +14,7 @@ public class SplitServiceImpl implements SplitService {
     @Override
     public FruitTransaction getTransactionFromRow(String line) {
         String[] splitData = line.split(",");
-        if (checkSplitData.isNotValidDataFromCsv(splitData)) {
+        if (!checkSplitData.isValidDataFromCsv(splitData)) {
             throw new RuntimeException("Bad data in *.csv file");
         }
         FruitTransaction fruitTransaction = new FruitTransaction();

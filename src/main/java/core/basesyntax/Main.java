@@ -6,14 +6,17 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.SplitService;
+import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.DataValidatorImpl;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
-import core.basesyntax.service.impl.ReaderServiceCsvImpl;
-import core.basesyntax.service.impl.ReportServiceCsvImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.SplitServiceImpl;
-import core.basesyntax.service.impl.WriterServiceCsvImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.handler.BalanceHandler;
+import core.basesyntax.strategy.handler.LeftoversHandler;
+import core.basesyntax.strategy.handler.LeftoversHandlerImpl;
 import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.PurchaseHandler;
 import core.basesyntax.strategy.handler.ReturnHandler;
@@ -32,16 +35,16 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
         SplitService splitService = new SplitServiceImpl(new DataValidatorImpl());
         FruitTransactionService transactionService =
-                new FruitTransactionServiceImpl(fruitTransactionDao, new ReaderServiceCsvImpl(),
+                new FruitTransactionServiceImpl(fruitTransactionDao, new ReaderServiceImpl(),
                         splitService);
         transactionService.addTransaction(FILE_NAME);
-        ReportService reportService =
-                new ReportServiceCsvImpl(fruitTransactionDao,
-                        operationStrategy, new WriterServiceCsvImpl());
-        reportService.writeReport(REPORT_PATH);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        LeftoversHandler leftoversHandler = new LeftoversHandlerImpl(operationStrategy);
+        ReportService reportService = new ReportServiceImpl(fruitTransactionDao, leftoversHandler);
+        WriterService writerService = new WriterServiceImpl();
+        writerService.write(reportService.getReport(), REPORT_PATH);
     }
 }

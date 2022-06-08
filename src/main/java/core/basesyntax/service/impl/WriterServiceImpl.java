@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriterServiceCsvImpl implements WriterService {
+public class WriterServiceImpl implements WriterService {
 
     @Override
     public void write(String data, String reportPath) {

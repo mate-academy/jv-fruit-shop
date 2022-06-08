@@ -5,21 +5,18 @@ import core.basesyntax.service.DataValidator;
 
 public class DataValidatorImpl implements DataValidator {
     @Override
-    public boolean isNotValidDataFromCsv(String[] data) {
+    public boolean isValidDataFromCsv(String[] data) {
         if (data.length != 3) {
-            return true;
+            return false;
         }
         FruitTransaction.Operation[] operations = FruitTransaction.Operation.values();
-        boolean valid = true;
+        boolean valid = false;
         for (FruitTransaction.Operation operation : operations) {
             if (data[SplitServiceImpl.Index.TYPE.ordinal()].equals(operation.getOperation())) {
-                valid = false;
+                valid = true;
                 break;
             }
         }
-        if (!valid && data[SplitServiceImpl.Index.QUANTITY.ordinal()].matches("\\d+")) {
-            return false;
-        }
-        return true;
+        return valid && data[SplitServiceImpl.Index.QUANTITY.ordinal()].matches("\\d+");
     }
 }

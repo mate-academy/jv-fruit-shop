@@ -8,7 +8,7 @@ import core.basesyntax.service.SplitService;
 import java.util.List;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
-    public static final int TABLE_NAME = 0;
+    private static final int TABLE_NAME = 0;
     private FruitTransactionDao fruitTransactionDao;
     private ReaderService readerService;
     private SplitService splitService;
