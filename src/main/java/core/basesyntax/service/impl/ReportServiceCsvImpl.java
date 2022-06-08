@@ -15,10 +15,10 @@ public class ReportServiceCsvImpl implements ReportService {
     private WriterService writerService;
 
     public ReportServiceCsvImpl(FruitTransactionDao fruitTransactionDao,
-                                OperationStrategy operationStrategy) {
+                                OperationStrategy operationStrategy, WriterService writerService) {
         this.fruitTransactionDao = fruitTransactionDao;
         this.operationStrategy = operationStrategy;
-        this.writerService = new WriterServiceCsvImpl();
+        this.writerService = writerService;
     }
 
     @Override
@@ -46,10 +46,11 @@ public class ReportServiceCsvImpl implements ReportService {
     private String mapToString(Map<String, Integer> amountFruits) {
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<String, Integer> amounts : amountFruits.entrySet()) {
-            builder.append(amounts.getKey()).append(",")
+            builder.append(amounts.getKey())
+                    .append(",")
                     .append(amounts.getValue())
                     .append(System.lineSeparator());
         }
-        return builder.toString().trim();
+        return builder.toString();
     }
 }

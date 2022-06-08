@@ -5,7 +5,7 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitTransactionDaoCsvImpl implements FruitTransactionDao {
+public class FruitTransactionDaoImpl implements FruitTransactionDao {
 
     @Override
     public void add(FruitTransaction fruitTransaction) {
