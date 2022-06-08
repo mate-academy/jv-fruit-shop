@@ -17,7 +17,6 @@ public class FruitTransactionProcessorServiceImpl implements FruitTransactionPro
 
     public void fillStorage(List<String> lines) {
         for (String line : lines) {
-            line = line.trim();
             String[] operationData = line.split(",");
             String operation = operationData[OPERATION_POS];
             OperationHandler operationHandler = operationHandlerStrategy.get(operation);
