@@ -1,4 +1,7 @@
-package core.service;
+package core.service.impl;
+
+import core.service.FruitService;
+import core.service.ReportCreatorService;
 
 import java.util.Map;
 
