@@ -9,7 +9,6 @@ public class FruitTransactionProcessorServiceImpl implements FruitTransactionPro
     private static final int OPERATION_POS = 0;
     private static final int FRUIT_NAME_POS = 1;
     private static final int FRUITS_QUANTITY_POS = 2;
-    private static final String DELIMITER = ",";
     private final OperationHandlerStrategy operationHandlerStrategy;
 
     public FruitTransactionProcessorServiceImpl(OperationHandlerStrategy operationHandlerStrategy) {
@@ -19,7 +18,7 @@ public class FruitTransactionProcessorServiceImpl implements FruitTransactionPro
     public void fillStorage(List<String> lines) {
         for (String line : lines) {
             line = line.trim();
-            String[] operationData = line.split(DELIMITER);
+            String[] operationData = line.split(",");
             String operation = operationData[OPERATION_POS];
             OperationHandler operationHandler = operationHandlerStrategy.get(operation);
             if (operationHandler != null) {
