@@ -32,19 +32,13 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-
         FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
-
         SplitService splitService = new SplitServiceImpl(new DataValidatorImpl());
-
         FruitTransactionService transactionService =
                 new FruitTransactionServiceImpl(fruitTransactionDao, new ReaderServiceCsvImpl(),
                         splitService);
-
         transactionService.addTransaction(FILE_NAME);
-
         ReportService reportService =
                 new ReportServiceCsvImpl(fruitTransactionDao,
                         operationStrategy, new WriterServiceCsvImpl());
