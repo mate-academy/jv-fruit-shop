@@ -1,11 +1,12 @@
 package core;
 
-import core.dao.FruitDao;
+import core.dao.FruitDaoImpl;
 import core.service.CsvReaderService;
 import core.service.CsvReaderServiceImpl;
 import core.service.CsvWriterService;
 import core.service.CsvWriterServiceImpl;
 import core.service.FruitService;
+import core.service.FruitServiceImpl;
 import core.service.FruitTransactionProcessorService;
 import core.service.FruitTransactionProcessorServiceImpl;
 import core.service.OperationHandlerStrategy;
@@ -24,7 +25,7 @@ import java.util.Map;
 public class Main {
     private static final String FRUITS_FILE_NAME = "fruits.csv";
     private static final String REPORT_FILE_NAME = "report.csv";
-    private static final FruitDao fruitService = new FruitService();
+    private static final FruitService fruitService = new FruitServiceImpl(new FruitDaoImpl());
 
     public static void main(String[] args) {
         CsvReaderService csvReaderService = new CsvReaderServiceImpl();
