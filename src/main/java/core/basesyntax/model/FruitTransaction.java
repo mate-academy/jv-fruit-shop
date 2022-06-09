@@ -48,13 +48,13 @@ public class FruitTransaction {
             this.operationType = operationType;
         }
 
-        private String getOperation() {
+        private String getOperationType() {
             return operationType;
         }
 
         public static Operation getOperationType(String type) {
             for (int i = 0; i < FruitTransaction.Operation.values().length; i++) {
-                if (FruitTransaction.Operation.values()[i].getOperation().equals(type)) {
+                if (FruitTransaction.Operation.values()[i].getOperationType().equals(type)) {
                     return FruitTransaction.Operation.values()[i];
                 }
             }

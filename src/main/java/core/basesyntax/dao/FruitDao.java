@@ -6,4 +6,6 @@ public interface FruitDao {
     void add(FruitTransaction fruitTransaction);
 
     FruitTransaction get(String fruit);
+
+    String getAll();
 }

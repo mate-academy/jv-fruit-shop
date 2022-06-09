@@ -1,19 +1,19 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.service.CreateReportService;
-import java.util.stream.Collectors;
 
 public class CreateReportServiceImpl implements CreateReportService {
-    private static final String DESCRIPTION = "fruit,quantity";
+    private static final String HEADER = "fruit,quantity";
+    private FruitDao fruitDao;
+
+    public CreateReportServiceImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
     public String createReport() {
-        String report = Storage.warehouse.stream()
-                .distinct()
-                .map(f -> System.lineSeparator() + f.getFruit()
-                        + "," + f.getQuantity())
-                .collect(Collectors.joining());
-        return DESCRIPTION + report;
+        String report = fruitDao.getAll();
+        return HEADER + report;
     }
 }

@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface FruitTransactionService {
-    void transaction(List<FruitTransaction> statistic);
+    void process(List<FruitTransaction> statistic);
 }

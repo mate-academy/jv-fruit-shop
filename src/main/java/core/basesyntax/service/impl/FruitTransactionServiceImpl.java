@@ -16,10 +16,10 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     }
 
     @Override
-    public void transaction(List<FruitTransaction> statistic) {
+    public void process(List<FruitTransaction> statistic) {
         for (int i = 0; i < statistic.size(); i++) {
             FruitTransaction fruit = statistic.get(i);
-            operationStrategy.get(fruit.getOperation()).get(fruit);
+            operationStrategy.get(fruit.getOperation()).handle(fruit);
         }
     }
 }

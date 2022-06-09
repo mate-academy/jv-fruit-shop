@@ -3,23 +3,26 @@ package core.basesyntax.operation.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.service.FruitService;
 
 public class SupplyOperationHandler implements OperationHandler {
     private FruitDao fruitDao;
+    private FruitService fruitService;
 
-    public SupplyOperationHandler(FruitDao fruitDao) {
+    public SupplyOperationHandler(FruitDao fruitDao, FruitService fruitService) {
         this.fruitDao = fruitDao;
+        this.fruitService = fruitService;
     }
 
     @Override
-    public void get(FruitTransaction fruit) {
-        FruitTransaction fruitFromDataBase = fruitDao.get(fruit.getFruit());
+    public void handle(FruitTransaction fruitTransaction) {
+        FruitTransaction fruitFromDataBase = fruitDao.get(fruitTransaction.getFruit());
         if (fruitFromDataBase == null) {
-            fruitDao.add(fruit);
+            fruitService.add(fruitTransaction);
         } else {
-            int amount = fruitFromDataBase.getQuantity() + fruit.getQuantity();
+            int amount = fruitFromDataBase.getQuantity() + fruitTransaction.getQuantity();
             fruitFromDataBase.setQuantity(amount);
-            fruitDao.add(fruitFromDataBase);
+            fruitService.add(fruitFromDataBase);
         }
     }
 }
