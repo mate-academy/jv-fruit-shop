@@ -44,7 +44,7 @@ public class Main {
         List<String> dataFromCsv = readerService.readFromFile(FILE_NAME);
         transactionService.addTransaction(dataFromCsv);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        ReportService reportService = new ReportServiceImpl(fruitTransactionDao);
+        ReportService reportService = new ReportServiceImpl();
         LeftoversHandler leftoversHandler = new LeftoversHandlerImpl(operationStrategy);
         String leftovers = leftoversHandler.getLeftovers(fruitTransactionDao.get());
         String report = reportService.getReport(leftovers);

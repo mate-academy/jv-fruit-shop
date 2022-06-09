@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface FruitTransactionService {
-    void addTransaction(List<String> dataFromCsv);
+    boolean addTransaction(List<String> dataFromCsv);
 
     List<FruitTransaction> getTransactionList();
 }
