@@ -11,10 +11,10 @@ public class ParseStatisticServiceImpl implements ParseStatisticService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parse(List<String> line) {
+    public List<FruitTransaction> parse(List<String> lines) {
         List<FruitTransaction> fruitTransactionStatistic = new ArrayList<>();
-        for (int i = 1; i < line.size(); i++) {
-            String[] splittedLine = line.get(i).split("\\W+");
+        for (int i = 1; i < lines.size(); i++) {
+            String[] splittedLine = lines.get(i).split("\\W+");
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setOperation(FruitTransaction.Operation
                     .getOperationType(splittedLine[OPERATION_INDEX]));

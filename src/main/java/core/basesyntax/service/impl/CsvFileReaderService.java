@@ -9,8 +9,7 @@ import java.util.List;
 
 public class CsvFileReaderService implements FileReaderService {
     @Override
-    public List<String> read() {
-        String filePath = "./src/main/resources/input-file.csv";
+    public List<String> read(String filePath) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader
                      = new BufferedReader(new FileReader(filePath));) {

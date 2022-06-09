@@ -27,6 +27,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final String FILE_PATH = "./src/main/resources/input-file.csv";
+    public static final String REPORT_PATH = "./src/main/resources/report.csv";
+
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImp();
         FruitService fruitService = new FruitServiceImpl(fruitDao);
@@ -44,18 +47,18 @@ public class Main {
                         new SupplyOperationHandler(fruitDao, fruitService));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FileReaderService fileReaderService = new CsvFileReaderService();
-        List<String> dataFromFile = fileReaderService.read();
+        List<String> dataFromFile = fileReaderService.read(FILE_PATH);
         ParseStatisticService parseStatisticService = new ParseStatisticServiceImpl();
         List<FruitTransaction> fruitTransactionStatistic
                 = parseStatisticService.parse(dataFromFile);
         FruitTransactionService fruitTransactionService
-                = new FruitTransactionServiceImpl(fruitDao, operationStrategy);
+                = new FruitTransactionServiceImpl(operationStrategy);
         fruitTransactionService.process(fruitTransactionStatistic);
 
-        CreateReportService createReport = new CreateReportServiceImpl(fruitDao);
+        CreateReportService createReport = new CreateReportServiceImpl(fruitService);
         String report = createReport.createReport();
         ReportWriterService reportWriterService = new CsvReportWriterService();
-        reportWriterService.writeReport(report);
+        reportWriterService.writeReport(report, REPORT_PATH);
     }
 }
 

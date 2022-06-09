@@ -8,8 +8,7 @@ import java.io.IOException;
 
 public class CsvReportWriterService implements ReportWriterService {
     @Override
-    public void writeReport(String report) {
-        String reportPath = "./src/main/resources/report.csv";
+    public void writeReport(String report, String reportPath) {
         try (BufferedWriter bufferedWriter
                      = new BufferedWriter(new FileWriter(new File(reportPath)))) {
             bufferedWriter.write(report);
