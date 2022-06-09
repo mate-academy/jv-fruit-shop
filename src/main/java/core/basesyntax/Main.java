@@ -4,10 +4,12 @@ import core.basesyntax.service.DataValidator;
 import core.basesyntax.service.FruitTransactionProcessor;
 import core.basesyntax.service.MyFileReader;
 import core.basesyntax.service.MyFileWriter;
+import core.basesyntax.service.ReportListCreator;
 import core.basesyntax.service.impl.DataValidatorImpl;
 import core.basesyntax.service.impl.FruitTransactionProcessorImpl;
 import core.basesyntax.service.impl.MyFileReaderImpl;
 import core.basesyntax.service.impl.MyFileWriterImpl;
+import core.basesyntax.service.impl.ReportListCreatorImpl;
 import core.basesyntax.strategy.FruitAdder;
 import core.basesyntax.strategy.FruitHandler;
 import core.basesyntax.strategy.FruitSubtractor;
@@ -28,10 +30,12 @@ public class Main {
                 = new FruitTransactionProcessorImpl(handlersMap);
         MyFileWriter myFileWriter = new MyFileWriterImpl();
         DataValidator dataValidator = new DataValidatorImpl();
+        ReportListCreator reportListCreator = new ReportListCreatorImpl();
 
         List<String> info = myFileReader.readFromFile("src/main/resources/input.csv");
         dataValidator.validate(info);
         fruitTransactionProcessor.process(info);
-        myFileWriter.writeToFile("src/main/resources/report.csv");
+        List<String> reportList = reportListCreator.createReportList();
+        myFileWriter.writeToFile("src/main/resources/report.csv", reportList);
     }
 }

@@ -1,10 +1,12 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.db.FruitDao;
+import core.basesyntax.db.FruitDaoImpl;
 
 public class FruitAdder implements FruitHandler {
-    @Override
+    private final FruitDao fruitDao = new FruitDaoImpl();
+
     public void handle(String fruit, int amount) {
-        FruitDao.getStorage().merge(fruit, amount, Integer::sum);
+        fruitDao.getStorage().merge(fruit, amount, Integer::sum);
     }
 }

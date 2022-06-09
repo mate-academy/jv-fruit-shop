@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
-public interface MyFileWriter {
-    void writeToFile(String pathToFile);
+import java.util.List;
 
+public interface MyFileWriter {
+    void writeToFile(String pathToFile, List<String> reportList);
 }

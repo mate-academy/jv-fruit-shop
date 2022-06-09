@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitTransactionProcessorImpl implements FruitTransactionProcessor {
-    private static final int INDEX_OPERATION = 0;
+    private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
     private static final int INDEX_AMOUNT = 2;
     private final Map<String, FruitHandler> handlersMap;
@@ -19,10 +19,10 @@ public class FruitTransactionProcessorImpl implements FruitTransactionProcessor 
         lines.remove(0);
         for (String unhandledFruit : lines) {
             String[] currentLine = unhandledFruit.split(",");
-            if (!handlersMap.containsKey(currentLine[INDEX_OPERATION])) {
+            if (!handlersMap.containsKey(currentLine[INDEX_OF_OPERATION])) {
                 throw new RuntimeException("Inappropriate operation");
             }
-            FruitHandler fruitHandler = handlersMap.get(currentLine[INDEX_OPERATION]);
+            FruitHandler fruitHandler = handlersMap.get(currentLine[INDEX_OF_OPERATION]);
             fruitHandler.handle(currentLine[INDEX_FRUIT],
                     Integer.parseInt(currentLine[INDEX_AMOUNT]));
         }
