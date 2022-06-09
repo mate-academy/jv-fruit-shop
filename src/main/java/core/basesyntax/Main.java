@@ -21,7 +21,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Main {
-
     public static void main(String[] args) {
         String inputFilePath = "src/main/resources/input.csv";
         FileReaderService fileReaderService = new CsvFileReaderServiceImpl();
@@ -31,7 +30,6 @@ public class Main {
         fruitTransactionDao.addAll(fruitTransactions);
         Storage.fruitTransactions.forEach(System.out::println);
         System.out.println();
-
         QuantityStrategy quantityStrategy = new QuantityStrategyImpl();
         FruitService fruitService = new FruitServiceImpl(quantityStrategy);
         List<Fruit> fruits = fruitService.getFruitBalance();
@@ -39,7 +37,6 @@ public class Main {
         fruitDao.addAll(fruits);
         Storage.fruits.forEach(System.out::println);
         System.out.println();
-
         String outputFilePath = "src/main/resources/output.csv";
         FileWriterService fileWriterService = new CsvFileWriteServiceImpl();
         fileWriterService.writeBalanceToFile(outputFilePath);
