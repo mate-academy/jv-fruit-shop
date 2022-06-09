@@ -2,11 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.strategy.handler.LeftoversHandler;
 
 public class ReportServiceImpl implements ReportService {
     private FruitTransactionDao fruitTransactionDao;
-    private LeftoversHandler leftoversHandler;
 
     public ReportServiceImpl(FruitTransactionDao fruitTransactionDao) {
         this.fruitTransactionDao = fruitTransactionDao;
