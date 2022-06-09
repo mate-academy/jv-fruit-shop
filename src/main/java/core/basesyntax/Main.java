@@ -23,6 +23,7 @@ import core.basesyntax.strategy.handler.ReturnHandler;
 import core.basesyntax.strategy.handler.SupplyHandler;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -35,16 +36,19 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
         SplitService splitService = new SplitServiceImpl(new DataValidatorImpl());
+        FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
         FruitTransactionService transactionService =
-                new FruitTransactionServiceImpl(fruitTransactionDao, new ReaderServiceImpl(),
-                        splitService);
-        transactionService.addTransaction(FILE_NAME);
+                new FruitTransactionServiceImpl(fruitTransactionDao, splitService);
+        ReaderServiceImpl readerService = new ReaderServiceImpl();
+        List<String> dataFromCsv = readerService.readFromFile(FILE_NAME);
+        transactionService.addTransaction(dataFromCsv);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        ReportService reportService = new ReportServiceImpl(fruitTransactionDao);
         LeftoversHandler leftoversHandler = new LeftoversHandlerImpl(operationStrategy);
-        ReportService reportService = new ReportServiceImpl(fruitTransactionDao, leftoversHandler);
+        String leftovers = leftoversHandler.getLeftovers(fruitTransactionDao.get());
+        String report = reportService.getReport(leftovers);
         WriterService writerService = new WriterServiceImpl();
-        writerService.write(reportService.getReport(), REPORT_PATH);
+        writerService.write(report, REPORT_PATH);
     }
 }

@@ -14,15 +14,13 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     private SplitService splitService;
 
     public FruitTransactionServiceImpl(FruitTransactionDao fruitTransactionDao,
-                                       ReaderService readerService, SplitService splitService) {
+                                       SplitService splitService) {
         this.fruitTransactionDao = fruitTransactionDao;
-        this.readerService = readerService;
         this.splitService = splitService;
     }
 
     @Override
-    public void addTransaction(String data) {
-        List<String> dataFromCsv = readerService.readFromFile(data);
+    public void addTransaction(List<String> dataFromCsv) {
         dataFromCsv.remove(TABLE_NAME);
         for (String row : dataFromCsv) {
             fruitTransactionDao.add(splitService.getTransactionFromRow(row));
