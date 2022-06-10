@@ -38,7 +38,6 @@ public class FruitServiceImpl implements FruitService {
                 .reduce("fruit,quantity", (row1, row2) -> row1 + row2);
     }
 
-
     private Integer calculateQuantityByStrategy(FruitTransaction fruitTransaction) {
         return operationStrategy
                 .getOperationHandler(fruitTransaction.getOperation())
