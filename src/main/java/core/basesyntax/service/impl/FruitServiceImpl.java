@@ -19,6 +19,20 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public List<Fruit> getAll(List<FruitTransaction> fruitTransactions) {
+        if (fruitTransactions == null) {
+            throw new RuntimeException("FruitTransactions cannot be null");
+        }
+        fruitTransactions.forEach(fruitTransaction -> {
+            if (fruitTransaction == null) {
+                throw new RuntimeException("FruitTransaction cannot be null");
+            }
+            if (fruitTransaction.getFruit() == null) {
+                throw new RuntimeException("Fruit cannot be null");
+            }
+            if (fruitTransaction.getFruit().getName() == null) {
+                throw new RuntimeException("Fruit name cannot be null");
+            }
+        });
         Map<String, Integer> fruitBalanceMap = fruitTransactions.stream()
                 .collect(Collectors.groupingBy(
                         fruitTransaction -> fruitTransaction.getFruit().getName(),
