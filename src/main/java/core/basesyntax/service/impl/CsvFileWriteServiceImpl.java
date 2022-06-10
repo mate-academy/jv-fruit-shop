@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 public class CsvFileWriteServiceImpl implements FileWriterService {
     @Override
     public void writeToFile(String report, String filePath) {
+        if (report == null) {
+            throw new RuntimeException("Report cannot be null");
+        }
         try (var writer = Files.newBufferedWriter(Paths.get(filePath))) {
             writer.write(report);
         } catch (IOException e) {
