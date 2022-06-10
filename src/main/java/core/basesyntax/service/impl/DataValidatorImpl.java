@@ -5,8 +5,8 @@ import java.util.List;
 
 public class DataValidatorImpl implements DataValidator {
     private static final int MIN_SIZE = 2;
-    private static final int INDEX_FIRST_LINE = 0;
-    private static final String EXPECTED_FORMAT_FIRST_LINE = "type,fruit,quantity";
+    private static final int INDEX_OF_HEADER = 0;
+    private static final String HEADER = "type,fruit,quantity";
 
     public void validate(List<String> lines) {
         if (lines.size() < MIN_SIZE) {
