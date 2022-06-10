@@ -36,7 +36,7 @@ public class FruitTransaction {
                     .collect(Collectors.toMap(Operation::getOperation, Function.identity()));
         }
 
-        private final String operation;
+        private final String letter;
 
         Operation(String operation) {
             this.operation = operation;
