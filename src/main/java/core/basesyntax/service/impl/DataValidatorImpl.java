@@ -12,7 +12,7 @@ public class DataValidatorImpl implements DataValidator {
         if (lines.size() < MIN_SIZE) {
             throw new RuntimeException("There is not enough data in your file to make any report");
         }
-        if (!lines.get(INDEX_FIRST_LINE).equals(EXPECTED_FORMAT_FIRST_LINE)) {
+        if (!lines.get(INDEX_OF_HEADER).equals(HEADER)) {
             throw new RuntimeException("First line in your file should be \"type,fruit,quantity\"");
         }
     }
