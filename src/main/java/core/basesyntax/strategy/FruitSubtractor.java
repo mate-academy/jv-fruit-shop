@@ -4,7 +4,11 @@ import core.basesyntax.db.FruitDao;
 import core.basesyntax.db.FruitDaoImpl;
 
 public class FruitSubtractor implements FruitHandler {
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao;
+
+    public FruitSubtractor() {
+        fruitDao = new FruitDaoImpl();
+    }
 
     public void handle(String fruit, int amount) {
         fruitDao.getStorage().merge(fruit, amount, (a, b) -> {
