@@ -1,9 +1,9 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.QuantityHandler;
+import core.basesyntax.strategy.OperationHandler;
 
-public class NegativeQuantityHandlerImpl implements QuantityHandler {
+public class NegativeOperationHandlerImpl implements OperationHandler {
     @Override
     public Integer getQuantity(FruitTransaction fruitTransaction) {
         if (fruitTransaction == null) {
