@@ -33,17 +33,17 @@ public class FruitTransaction {
 
         static {
             OPERATIONS_MAP = Arrays.stream(Operation.values())
-                    .collect(Collectors.toMap(Operation::getOperation, Function.identity()));
+                    .collect(Collectors.toMap(Operation::getLetter, Function.identity()));
         }
 
         private final String letter;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getLetter() {
+            return letter;
         }
 
         public static Operation retrieveByOperation(String operation) {
