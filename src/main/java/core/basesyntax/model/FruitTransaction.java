@@ -32,7 +32,7 @@ public class FruitTransaction {
         private static final Map<String, Operation> OPERATIONS_MAP;
 
         static {
-            LOOKUP_MAP = Arrays.stream(Operation.values())
+            OPERATIONS_MAP = Arrays.stream(Operation.values())
                     .collect(Collectors.toMap(Operation::getOperation, Function.identity()));
         }
 
@@ -50,10 +50,10 @@ public class FruitTransaction {
             if (operation == null) {
                 throw new RuntimeException("Fruit operation cannot be null");
             }
-            if (LOOKUP_MAP.get(operation) == null) {
+            if (OPERATIONS_MAP.get(operation) == null) {
                 throw new IllegalArgumentException("No such fruit operation type: " + operation);
             }
-            return LOOKUP_MAP.get(operation);
+            return OPERATIONS_MAP.get(operation);
         }
     }
 
