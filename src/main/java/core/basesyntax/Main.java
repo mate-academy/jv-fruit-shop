@@ -32,7 +32,7 @@ public class Main {
         System.out.println();
         QuantityStrategy quantityStrategy = new QuantityStrategyImpl();
         FruitService fruitService = new FruitServiceImpl(quantityStrategy);
-        List<Fruit> fruits = fruitService.getFruitBalance();
+        List<Fruit> fruits = fruitService.getAll();
         FruitDao fruitDao = new FruitDaoImpl();
         fruitDao.addAll(fruits);
         Storage.fruits.forEach(System.out::println);

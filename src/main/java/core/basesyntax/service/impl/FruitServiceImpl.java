@@ -18,7 +18,7 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public List<Fruit> getFruitBalance() {
+    public List<Fruit> getAll() {
         Storage.fruitTransactions.forEach(fruitTransaction -> {
             if (fruitTransaction == null) {
                 throw new RuntimeException("FruitTransaction cannot be null");
