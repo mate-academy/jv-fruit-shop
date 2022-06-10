@@ -25,7 +25,7 @@ public class Main {
         String inputFilePath = "src/main/resources/input.csv";
         FileReaderService fileReaderService = new CsvFileReaderServiceImpl();
         List<FruitTransaction> fruitTransactions =
-                fileReaderService.readTransactionsFromFile(inputFilePath);
+                fileReaderService.readFromFile(inputFilePath);
         FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
         fruitTransactionDao.addAll(fruitTransactions);
         Storage.fruitTransactions.forEach(System.out::println);

@@ -4,5 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface FileReaderService {
+//    List<FruitTransaction> readFromFile(String filePath);
     List<FruitTransaction> readFromFile(String filePath);
 }

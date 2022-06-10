@@ -46,7 +46,6 @@ public class FruitTransaction {
             return letter;
         }
 
-//        public static Operation getOperationByLetter(String letter) {
         public static Operation getOperationByLetter(String letter) {
             if (letter == null) {
                 throw new RuntimeException("Fruit operation cannot be null");

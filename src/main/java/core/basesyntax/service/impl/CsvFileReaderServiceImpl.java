@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class CsvFileReaderServiceImpl implements FileReaderService {
     @Override
-    public List<FruitTransaction> readTransactionsFromFile(String filePath) {
+    public List<FruitTransaction> readFromFile(String filePath) {
         if (filePath == null) {
             throw new RuntimeException("filePath cannot be null");
         }
