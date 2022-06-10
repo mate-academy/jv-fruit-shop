@@ -10,14 +10,6 @@ import java.nio.file.Paths;
 public class CsvFileWriteServiceImpl implements FileWriterService {
     @Override
     public void writeToFile(String filePath) {
-        Storage.fruits.forEach(fruit -> {
-            if (fruit == null) {
-                throw new RuntimeException("Fruit cannot be null");
-            }
-            if (fruit.getName() == null) {
-                throw new RuntimeException("Fruit name cannot be null");
-            }
-        });
         try (var writer = Files.newBufferedWriter(Paths.get(filePath))) {
             writer.write("fruit,quantity");
             for (Fruit fruit : Storage.fruits) {
