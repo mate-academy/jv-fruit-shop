@@ -11,6 +11,14 @@ import java.util.stream.Collectors;
 public class FruitTransactionServiceImpl implements FruitTransactionService {
     @Override
     public List<FruitTransaction> getFruitTransactions(List<String> transactions) {
+        if (transactions == null) {
+            throw new RuntimeException("Transactions cannot be null");
+        }
+        transactions.forEach(transaction -> {
+            if (transaction == null) {
+                throw new RuntimeException("Transaction cannot be null");
+            }
+        });
         return transactions.stream()
                 .dropWhile(row -> !row.contains("type,fruit,quantity"))
                 .skip(1)
