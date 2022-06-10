@@ -29,7 +29,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private static final Map<String, Operation> LOOKUP_MAP;
+        private static final Map<String, Operation> OPERATIONS_MAP;
 
         static {
             LOOKUP_MAP = Arrays.stream(Operation.values())
