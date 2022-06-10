@@ -41,7 +41,7 @@ public class CsvFileReaderServiceImpl implements FileReaderService {
             throw new IllegalArgumentException("Fruit name cannot be empty");
         }
         return new FruitTransaction(
-                Operation.retrieveByOperation(transactionFields[0]),
+                Operation.getOperationByLetter(transactionFields[0]),
                 new Fruit(transactionFields[1], Integer.parseInt(transactionFields[2])));
     }
 }

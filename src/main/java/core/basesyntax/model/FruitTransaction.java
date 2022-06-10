@@ -46,14 +46,15 @@ public class FruitTransaction {
             return letter;
         }
 
+//        public static Operation getOperationByLetter(String letter) {
         public static Operation getOperationByLetter(String letter) {
-            if (operation == null) {
+            if (letter == null) {
                 throw new RuntimeException("Fruit operation cannot be null");
             }
-            if (OPERATIONS_MAP.get(operation) == null) {
-                throw new IllegalArgumentException("No such fruit operation type: " + operation);
+            if (OPERATIONS_MAP.get(letter) == null) {
+                throw new IllegalArgumentException("No such fruit operation type: " + letter);
             }
-            return OPERATIONS_MAP.get(operation);
+            return OPERATIONS_MAP.get(letter);
         }
     }
 
