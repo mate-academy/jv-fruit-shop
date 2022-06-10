@@ -14,9 +14,6 @@ import java.util.stream.Collectors;
 public class CsvFileReaderServiceImpl implements FileReaderService {
     @Override
     public List<FruitTransaction> readFromFile(String filePath) {
-        if (filePath == null) {
-            throw new RuntimeException("filePath cannot be null");
-        }
         try (var rows = Files.lines(Paths.get(filePath))) {
             return rows
                     .dropWhile(row -> !row.contains("type,fruit,quantity"))
