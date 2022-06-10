@@ -4,17 +4,17 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.strategy.QuantityStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FruitServiceImpl implements FruitService {
-    private final QuantityStrategy quantityStrategy;
+    private final OperationStrategy operationStrategy;
 
-    public FruitServiceImpl(QuantityStrategy quantityStrategy) {
-        this.quantityStrategy = quantityStrategy;
+    public FruitServiceImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
     }
 
     @Override
@@ -43,8 +43,8 @@ public class FruitServiceImpl implements FruitService {
     }
 
     private Integer calculateQuantityByStrategy(FruitTransaction fruitTransaction) {
-        return quantityStrategy
-                .getQuantityHandler(fruitTransaction.getOperation())
+        return operationStrategy
+                .getOperationHandler(fruitTransaction.getOperation())
                 .getQuantity(fruitTransaction);
     }
 }
