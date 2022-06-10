@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface FruitService {
     List<Fruit> getAll(List<FruitTransaction> fruitTransactions);
+
+    String getFruitsReport();
 }

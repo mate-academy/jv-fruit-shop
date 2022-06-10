@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
@@ -29,6 +30,14 @@ public class FruitServiceImpl implements FruitService {
                 .sorted(Comparator.comparing(Fruit::getName))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public String getFruitsReport() {
+        return Storage.fruits.stream()
+                .map(fruit -> System.lineSeparator() + fruit.getName() + "," + fruit.getQuantity())
+                .reduce("fruit,quantity", (row1, row2) -> row1 + row2);
+    }
+
 
     private Integer calculateQuantityByStrategy(FruitTransaction fruitTransaction) {
         return operationStrategy
