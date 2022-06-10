@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 public class CsvFileWriteServiceImpl implements FileWriterService {
     @Override
-    public void writeBalanceToFile(String filePath) {
+    public void writeToFile(String filePath) {
         Storage.fruits.forEach(fruit -> {
             if (fruit == null) {
                 throw new RuntimeException("Fruit cannot be null");

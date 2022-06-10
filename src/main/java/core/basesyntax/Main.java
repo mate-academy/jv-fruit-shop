@@ -39,7 +39,7 @@ public class Main {
         System.out.println();
         String outputFilePath = "src/main/resources/output.csv";
         FileWriterService fileWriterService = new CsvFileWriteServiceImpl();
-        fileWriterService.writeBalanceToFile(outputFilePath);
+        fileWriterService.writeToFile(outputFilePath);
         String result = readFromFile("src/main/resources/output.csv");
         System.out.println(result);
     }
