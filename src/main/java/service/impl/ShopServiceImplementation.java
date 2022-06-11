@@ -1,43 +1,29 @@
 package service.impl;
 
-import dao.AccountDao;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import model.FruitTransaction;
 import service.ShopService;
+import service.StorageService;
 
 public class ShopServiceImplementation implements ShopService {
+    private final StorageService storageService;
 
-    @Override
-    public List<FruitTransaction> parse(List<String[]> list) {
-        List<FruitTransaction> transactionList = new ArrayList<>();
-        list.remove(0);
-        for (String[] string : list) {
-            switch (string[0]) {
-                case "b":
-                    transactionList.add(new FruitTransaction(FruitTransaction
-                            .Operation.BALANCE, string[1], Integer.parseInt(string[2])));
-                    break;
-                case "p":
-                    transactionList.add(new FruitTransaction(FruitTransaction
-                            .Operation.PURCHASE, string[1], Integer.parseInt(string[2])));
-                    break;
-                case "r":
-                    transactionList.add(new FruitTransaction(FruitTransaction
-                            .Operation.RETURN, string[1], Integer.parseInt(string[2])));
-                    break;
-                default:
-                    transactionList.add(new FruitTransaction(FruitTransaction
-                            .Operation.SUPPLY, string[1], Integer.parseInt(string[2])));
-                    break;
-            }
-        }
-        return transactionList;
+    public ShopServiceImplementation(StorageService storageService) {
+        this.storageService = storageService;
     }
 
     @Override
-    public List<String[]> doReport(AccountDao accountDao) {
-        List<String[]> list = accountDao.getBalance();
+    public List<FruitTransaction> parse(List<String[]> list) {
+        return list.stream()
+                .skip(1)
+                .map(i -> new FruitTransaction(i[0], i[1], Integer.parseInt(i[2])))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String[]> doReport() {
+        List<String[]> list = storageService.getBalance();
         list.add(0, new String[]{"fruit", "quantity"});
         return list;
     }

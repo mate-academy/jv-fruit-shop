@@ -1,13 +1,14 @@
-package dao;
+package service.impl;
 
 import db.Storage;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
 import service.OperationService;
-import service.impl.OperationStrategyImplementation;
+import service.StorageService;
+import strategy.OperationHandler;
 
-public class AccountDaoImplementation implements AccountDao {
+public class StorageImplementation implements StorageService {
 
     @Override
     public void add(String fruit, Integer quantity) {
@@ -38,7 +39,7 @@ public class AccountDaoImplementation implements AccountDao {
     @Override
     public void fill(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            OperationService operationService = new OperationStrategyImplementation(this)
+            OperationService operationService = new OperationHandler(this)
                     .getOperationServiceByTransaction(transaction);
             operationService.doTransaction(transaction);
         }

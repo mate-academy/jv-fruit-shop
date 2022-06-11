@@ -12,13 +12,11 @@ import service.FileService;
 public class FileServiceImplementation implements FileService {
 
     public List<String[]> read(File file) {
-        List<String[]> allRows;
         try (CSVReader reader = new CSVReader(new FileReader(file))) {
-            allRows = reader.readAll();
+            return reader.readAll();
         } catch (IOException e) {
             throw new RuntimeException("Cannot read file: " + file.getName() + e);
         }
-        return allRows;
     }
 
     public void writeFile(File file, List<String[]> list) {

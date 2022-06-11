@@ -1,11 +1,11 @@
-import dao.AccountDao;
-import dao.AccountDaoImplementation;
 import java.io.File;
 import java.util.List;
 import service.FileService;
 import service.ShopService;
+import service.StorageService;
 import service.impl.FileServiceImplementation;
 import service.impl.ShopServiceImplementation;
+import service.impl.StorageImplementation;
 
 public class Main {
     private static final String FROM_FILE = "src/main/fruit_shop.csv";
@@ -14,11 +14,11 @@ public class Main {
     public static void main(String[] args) {
         File file = new File(FROM_FILE);
         FileService fileService = new FileServiceImplementation();
-        ShopService shopService = new ShopServiceImplementation();
-        AccountDao dao = new AccountDaoImplementation();
-        dao.fill(shopService.parse(fileService.read(file)));
+        StorageService storageService = new StorageImplementation();
+        ShopService shopService = new ShopServiceImplementation(storageService);
+        storageService.fill(shopService.parse(fileService.read(file)));
         File reportFile = new File(TO_FILE);
-        List<String[]> balance = shopService.doReport(dao);
+        List<String[]> balance = shopService.doReport();
         fileService.writeFile(reportFile, balance);
     }
 }
