@@ -33,7 +33,7 @@ public class Main {
         ShopService shopService = new ShopServiceImplementation(storageService, operationHandler);
         File file = new File(FROM_FILE);
         FileService fileService = new FileServiceImplementation();
-        shopService.fill(fileService.read(file));
+        shopService.fill(fileService.readFile(file));
         File reportFile = new File(TO_FILE);
         fileService.writeFile(reportFile, shopService.doReport());
     }

@@ -5,8 +5,7 @@ import java.util.List;
 import model.FruitTransaction;
 
 public interface FileService {
-
-    List<FruitTransaction> read(File file);
+    List<FruitTransaction> readFile(File file);
 
     void writeFile(File file, List<String[]> message);
 }

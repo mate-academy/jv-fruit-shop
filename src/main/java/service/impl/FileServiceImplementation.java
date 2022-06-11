@@ -13,7 +13,7 @@ import service.FileService;
 
 public class FileServiceImplementation implements FileService {
 
-    public List<FruitTransaction> read(File file) {
+    public List<FruitTransaction> readFile(File file) {
         try (CSVReader reader = new CSVReader(new FileReader(file))) {
             return reader.readAll().stream()
                     .skip(1)

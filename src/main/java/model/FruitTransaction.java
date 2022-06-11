@@ -6,7 +6,6 @@ public class FruitTransaction {
     private int quantity;
 
     public FruitTransaction(String symbol, String fruit, int quantity) {
-
         this.operation = assignOperationBySymbol(symbol);
         this.fruit = fruit;
         this.quantity = quantity;
