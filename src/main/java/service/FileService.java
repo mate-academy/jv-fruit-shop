@@ -2,9 +2,11 @@ package service;
 
 import java.io.File;
 import java.util.List;
+import model.FruitTransaction;
 
 public interface FileService {
-    List<String[]> read(File file);
+
+    List<FruitTransaction> read(File file);
 
     void writeFile(File file, List<String[]> message);
 }

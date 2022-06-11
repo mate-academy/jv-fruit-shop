@@ -2,17 +2,17 @@ package strategy;
 
 import model.FruitTransaction;
 import service.OperationService;
-import service.impl.StorageImplementation;
+import service.StorageService;
 
 public class SubtractOperationImplementation implements OperationService {
-    private final StorageImplementation storageImplementation;
+    private final StorageService storageService;
 
-    SubtractOperationImplementation(StorageImplementation storageImplementation) {
-        this.storageImplementation = storageImplementation;
+    public SubtractOperationImplementation(StorageService storageService) {
+        this.storageService = storageService;
     }
 
     @Override
     public void doTransaction(FruitTransaction transaction) {
-        storageImplementation.subtract(transaction.getFruit(), transaction.getQuantity());
+        storageService.subtract(transaction.getFruit(), transaction.getQuantity());
     }
 }

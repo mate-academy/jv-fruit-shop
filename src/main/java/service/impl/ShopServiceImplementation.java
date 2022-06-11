@@ -1,24 +1,28 @@
 package service.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import model.FruitTransaction;
+import service.OperationService;
 import service.ShopService;
 import service.StorageService;
+import strategy.OperationHandler;
 
 public class ShopServiceImplementation implements ShopService {
     private final StorageService storageService;
+    private final OperationHandler handler;
 
-    public ShopServiceImplementation(StorageService storageService) {
+    public ShopServiceImplementation(StorageService storageService, OperationHandler handler) {
         this.storageService = storageService;
+        this.handler = handler;
     }
 
     @Override
-    public List<FruitTransaction> parse(List<String[]> list) {
-        return list.stream()
-                .skip(1)
-                .map(i -> new FruitTransaction(i[0], i[1], Integer.parseInt(i[2])))
-                .collect(Collectors.toList());
+    public void fill(List<FruitTransaction> transactions) {
+        for (FruitTransaction transaction : transactions) {
+            OperationService operationService = handler
+                    .getOperationServiceByTransaction(transaction);
+            operationService.doTransaction(transaction);
+        }
     }
 
     @Override
