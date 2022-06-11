@@ -1,9 +1,8 @@
 package dao;
 
 import db.Storage;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 import model.FruitTransaction;
 import service.OperationService;
 import service.impl.OperationStrategyImplementation;
@@ -31,14 +30,9 @@ public class AccountDaoImplementation implements AccountDao {
 
     @Override
     public List<String[]> getBalance() {
-        List<String[]> list = new ArrayList<>();
-        for (Map.Entry<String, Integer> map : Storage.fruits.entrySet()) {
-            String[] rowTable = new String[2];
-            rowTable[0] = map.getKey();
-            rowTable[1] = String.valueOf(map.getValue());
-            list.add(rowTable);
-        }
-        return list;
+        return Storage.fruits.entrySet().stream()
+                .map(i -> new String[]{i.getKey(), String.valueOf(i.getValue())})
+                .collect(Collectors.toList());
     }
 
     @Override
