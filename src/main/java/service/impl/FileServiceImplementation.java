@@ -7,24 +7,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
-import model.FruitTransaction;
 import service.FileService;
 
 public class FileServiceImplementation implements FileService {
 
-    public List<FruitTransaction> readFile(File file) {
+    public List<String[]> readFile(String filePath) {
+        File file = new File(filePath);
         try (CSVReader reader = new CSVReader(new FileReader(file))) {
-            return reader.readAll().stream()
-                    .skip(1)
-                    .map(i -> new FruitTransaction(i[0], i[1], Integer.parseInt(i[2])))
-                    .collect(Collectors.toList());
+            return reader.readAll();
         } catch (IOException e) {
             throw new RuntimeException("Cannot read file: " + file.getName() + e);
         }
     }
 
-    public void writeFile(File file, List<String[]> list) {
+    public void writeFile(String filePath, List<String[]> list) {
+        File file = new File(filePath);
         try (CSVWriter writer = new CSVWriter(new FileWriter(file))) {
             writer.writeAll(list);
         } catch (IOException e) {

@@ -2,26 +2,27 @@ package service.impl;
 
 import java.util.List;
 import model.FruitTransaction;
-import service.OperationService;
+import service.OperationHandler;
+import service.OperationStrategy;
 import service.ShopService;
 import service.StorageService;
-import strategy.OperationHandler;
 
 public class ShopServiceImplementation implements ShopService {
     private final StorageService storageService;
-    private final OperationHandler handler;
+    private final OperationStrategy operationStrategy;
 
-    public ShopServiceImplementation(StorageService storageService, OperationHandler handler) {
+    public ShopServiceImplementation(StorageService storageService,
+                                     OperationStrategy operationStrategy) {
         this.storageService = storageService;
-        this.handler = handler;
+        this.operationStrategy = operationStrategy;
     }
 
     @Override
     public void fill(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            OperationService operationService = handler
-                    .getOperationServiceByTransaction(transaction);
-            operationService.doTransaction(transaction);
+            OperationHandler operationHandler = operationStrategy
+                    .getOperationHandler(transaction.getOperation());
+            operationHandler.doTransaction(transaction);
         }
     }
 

@@ -1,40 +1,48 @@
-import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import service.FileService;
-import service.OperationService;
+import service.OperationHandler;
+import service.OperationStrategy;
+import service.ParseService;
 import service.ShopService;
 import service.StorageService;
 import service.impl.FileServiceImplementation;
+import service.impl.ParseServiceImplementation;
 import service.impl.ShopServiceImplementation;
 import service.impl.StorageImplementation;
-import strategy.AddOperationImplementation;
-import strategy.OperationHandler;
-import strategy.SetBalanceOperationImplementation;
-import strategy.SubtractOperationImplementation;
+import strategy.AddOperationHandler;
+import strategy.OperationStrategyImplementation;
+import strategy.SetBalanceOperationHandler;
+import strategy.SubtractOperationHandler;
 
 public class Main {
-    private static final String FROM_FILE = "src/main/fruit_shop.csv";
-    private static final String TO_FILE = "src/main/fruit_shop_report.csv";
+    private static final String FROM_FILE = "src/main/resources/fruit_shop.csv";
+    private static final String TO_FILE = "src/main/resources/fruit_shop_report.csv";
 
     public static void main(String[] args) {
-        StorageService storageService = new StorageImplementation();
-        Map<FruitTransaction.Operation, OperationService> mapOperation = new HashMap<>();
-        mapOperation.put(FruitTransaction.Operation.BALANCE,
-                new SetBalanceOperationImplementation(storageService));
-        mapOperation.put(FruitTransaction.Operation.PURCHASE,
-                new SubtractOperationImplementation(storageService));
-        mapOperation.put(FruitTransaction.Operation.RETURN,
-                new AddOperationImplementation(storageService));
-        mapOperation.put(FruitTransaction.Operation.SUPPLY,
-                new AddOperationImplementation(storageService));
-        OperationHandler operationHandler = new OperationHandler(mapOperation);
-        ShopService shopService = new ShopServiceImplementation(storageService, operationHandler);
-        File file = new File(FROM_FILE);
+        // 1. read data from file
         FileService fileService = new FileServiceImplementation();
-        shopService.fill(fileService.readFile(file));
-        File reportFile = new File(TO_FILE);
-        fileService.writeFile(reportFile, shopService.doReport());
+        final List<String[]> listTransactions = fileService.readFile(FROM_FILE);
+        // 2. get list of transactions by parsing String[] to FruitTransactions:
+        ParseService parseService = new ParseServiceImplementation();
+        final List<FruitTransaction> transactions = parseService.parse(listTransactions);
+        // 3. call method fill and hand data over to the storage
+        StorageService storageService = new StorageImplementation();
+        Map<FruitTransaction.Operation, OperationHandler> mapOperation = new HashMap<>();
+        mapOperation.put(FruitTransaction.Operation.BALANCE,
+                new SetBalanceOperationHandler(storageService));
+        mapOperation.put(FruitTransaction.Operation.PURCHASE,
+                new SubtractOperationHandler(storageService));
+        mapOperation.put(FruitTransaction.Operation.RETURN,
+                new AddOperationHandler(storageService));
+        mapOperation.put(FruitTransaction.Operation.SUPPLY,
+                new AddOperationHandler(storageService));
+        OperationStrategy operationStrategy = new OperationStrategyImplementation(mapOperation);
+        ShopService shopService = new ShopServiceImplementation(storageService, operationStrategy);
+        shopService.fill(transactions);
+        // 4. call method doReport and write data to the file:
+        fileService.writeFile(TO_FILE, shopService.doReport());
     }
 }

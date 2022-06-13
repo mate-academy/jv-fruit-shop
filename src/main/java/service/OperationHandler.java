@@ -2,6 +2,6 @@ package service;
 
 import model.FruitTransaction;
 
-public interface OperationService {
+public interface OperationHandler {
     void doTransaction(FruitTransaction transaction);
 }
