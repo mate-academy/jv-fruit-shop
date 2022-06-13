@@ -1,12 +1,11 @@
 package mate.academy.service.impl;
 
-import mate.academy.dao.ShopDaoImpl;
-import mate.academy.model.FruitTransaction;
-import mate.academy.service.ParseFile;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import mate.academy.dao.ShopDaoImpl;
+import mate.academy.model.FruitTransaction;
+import mate.academy.service.ParseFile;
 
 public class ParseFileImpl implements ParseFile {
     private static final int INDEX_TYPE_OPERATION = 0;
@@ -19,9 +18,9 @@ public class ParseFileImpl implements ParseFile {
         List<FruitTransaction> fruitTransactions = records.stream()
                 .skip(1)
                 .map(line -> line.trim().split(","))
-                .map(splittedLine -> new FruitTransaction(splittedLine[INDEX_TYPE_OPERATION],
-                                                          splittedLine[INDEX_FRUIT],
-                                                          Integer.parseInt(splittedLine[INDEX_QUANTITY])))
+                .map(splitLine -> new FruitTransaction(splitLine[INDEX_TYPE_OPERATION],
+                                                       splitLine[INDEX_FRUIT],
+                                                       Integer.parseInt(splitLine[INDEX_QUANTITY])))
                 .collect(Collectors.toList());
         List<String> listOfTypeOperations = new ArrayList<>();
         for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {

@@ -2,12 +2,12 @@ package mate.academy.model;
 
 public class FruitTransaction {
     private final String operation;
-    private final String fruite;
+    private final String fruit;
     private final int quantity;
 
     public FruitTransaction(String operation, String fruite, int quantity) {
         this.operation = operation;
-        this.fruite = fruite;
+        this.fruit = fruite;
         this.quantity = quantity;
     }
 
@@ -15,8 +15,8 @@ public class FruitTransaction {
         return operation;
     }
 
-    public String getFruite() {
-        return fruite;
+    public String getFruit() {
+        return fruit;
     }
 
     public int getQuantity() {
