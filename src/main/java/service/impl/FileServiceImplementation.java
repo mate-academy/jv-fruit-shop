@@ -1,7 +1,7 @@
 package service.impl;
 
 import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.CSVWriter;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -22,8 +22,11 @@ public class FileServiceImplementation implements FileService {
 
     public void writeFile(String filePath, List<String[]> list) {
         File file = new File(filePath);
-        try (CSVWriter writer = new CSVWriter(new FileWriter(file))) {
-            writer.writeAll(list);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            for (String[] data : list) {
+                writer.write(String.join(",", data));
+                writer.write(System.lineSeparator());
+            }
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file " + file.getName() + e);
         }
