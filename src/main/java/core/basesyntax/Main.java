@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
@@ -10,14 +8,7 @@ import core.basesyntax.service.StrategyChooser;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.StrategyChooserImpl;
-import core.basesyntax.strategу.Strategy;
-
-import javax.swing.text.StyledEditorKit;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,7 +19,6 @@ public class Main {
     public static void main(String[] args) {
         // getting file with data
         File input = new File(inputPath);
-        File output = new File(resultPath);
 
         //prepare service to get data
         FileReaderService fileReaded = new FileReaderImpl();
@@ -52,12 +42,13 @@ public class Main {
         //preparing data to transfer to file
         ReportWriter reportWriter = new ReportWriter();
         reportWriter.writeHead();
-        for(String key : Storage.fruits.keySet()){
-           reportWriter.writeLine(key, Storage.fruits.get(key));
+        for (String key : Storage.fruits.keySet()) {
+            reportWriter.writeLine(key, Storage.fruits.get(key));
         }
 
         //preparing service for writing report file
+        File output = new File(resultPath);
         FileWriterService fileWriter = new FileWriterImpl();
-        fileWriter.writeTheResult(output, reportWriter.report);
+        fileWriter.writeTheResult(output, reportWriter.getReport());
     }
 }

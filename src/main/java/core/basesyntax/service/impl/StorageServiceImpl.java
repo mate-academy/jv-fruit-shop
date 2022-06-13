@@ -8,7 +8,7 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public void plus(String fruit, Integer amount) {
         if (Storage.fruits.containsKey(fruit)) {
-            Integer  newAmount = Storage.fruits.get(fruit) + amount;
+            Integer newAmount = Storage.fruits.get(fruit) + amount;
             Storage.fruits.put(fruit, newAmount);
         } else {
             Storage.fruits.put(fruit, amount);

@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.StrategyChooser;
-import core.basesyntax.strategу.MinusStrategy;
-import core.basesyntax.strategу.PlusStrategy;
-import core.basesyntax.strategу.Strategy;
+import core.basesyntax.strategy.MinusStrategy;
+import core.basesyntax.strategy.PlusStrategy;
+import core.basesyntax.strategy.Strategy;
 
 public class StrategyChooserImpl implements StrategyChooser {
 
@@ -11,10 +11,10 @@ public class StrategyChooserImpl implements StrategyChooser {
     public Strategy getStrategy(String[] line) {
         String strategyLetter = line[0];
         if (strategyLetter.equals("s")
-            || strategyLetter.equals("r")
-            || strategyLetter.equals("b")) {
+                || strategyLetter.equals("r")
+                || strategyLetter.equals("b")) {
             return new PlusStrategy();
-        } else if (strategyLetter.equals("p")){
+        } else if (strategyLetter.equals("p")) {
             return new MinusStrategy();
         } else {
             throw new RuntimeException("got wrong commant to strategy");

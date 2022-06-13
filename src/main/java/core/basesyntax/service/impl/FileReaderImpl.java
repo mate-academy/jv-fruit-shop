@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import core.basesyntax.service.FileReaderService;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
