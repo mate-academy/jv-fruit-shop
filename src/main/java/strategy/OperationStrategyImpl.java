@@ -5,10 +5,10 @@ import model.FruitTransaction;
 import service.OperationHandler;
 import service.OperationStrategy;
 
-public class OperationStrategyImplementation implements OperationStrategy {
+public class OperationStrategyImpl implements OperationStrategy {
     private final Map<FruitTransaction.Operation, OperationHandler> mapServiceOperation;
 
-    public OperationStrategyImplementation(Map<FruitTransaction.Operation,
+    public OperationStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> mapServiceOperation) {
         this.mapServiceOperation = mapServiceOperation;
     }

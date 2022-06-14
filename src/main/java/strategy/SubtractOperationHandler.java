@@ -1,18 +1,18 @@
 package strategy;
 
 import model.FruitTransaction;
-import service.FruitDao;
 import service.OperationHandler;
+import service.StorageService;
 
 public class SubtractOperationHandler implements OperationHandler {
-    private final FruitDao fruitDao;
+    private final StorageService storageService;
 
-    public SubtractOperationHandler(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
+    public SubtractOperationHandler(StorageService storageService) {
+        this.storageService = storageService;
     }
 
     @Override
     public void doTransaction(FruitTransaction transaction) {
-        fruitDao.subtract(transaction.getFruit(), transaction.getQuantity());
+        storageService.subtract(transaction.getFruit(), transaction.getQuantity());
     }
 }

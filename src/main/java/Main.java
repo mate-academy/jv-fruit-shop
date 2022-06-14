@@ -1,21 +1,23 @@
+import dao.FruitDao;
+import dao.FruitDaoImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import service.CsvFileReaderService;
 import service.FileWriterService;
-import service.FruitDao;
 import service.OperationHandler;
 import service.OperationStrategy;
 import service.ParseService;
 import service.ShopService;
+import service.StorageService;
 import service.impl.CsvFileReaderServiceImpl;
 import service.impl.CsvParseServiceImpl;
 import service.impl.FileWriterServiceImpl;
-import service.impl.ShopServiceImplementation;
-import service.impl.StorageImplementation;
+import service.impl.ShopServiceImpl;
+import service.impl.StorageServiceImpl;
 import strategy.AddOperationHandler;
-import strategy.OperationStrategyImplementation;
+import strategy.OperationStrategyImpl;
 import strategy.SetBalanceOperationHandler;
 import strategy.SubtractOperationHandler;
 
@@ -29,18 +31,19 @@ public class Main {
         ParseService parseService = new CsvParseServiceImpl();
         final List<FruitTransaction> transactions =
                 parseService.parse(listTransactions.subList(1, listTransactions.size()));
-        FruitDao fruitDao = new StorageImplementation();
+        FruitDao fruitDao = new FruitDaoImpl();
+        StorageService storageService = new StorageServiceImpl(fruitDao);
         Map<FruitTransaction.Operation, OperationHandler> mapOperation = new HashMap<>();
         mapOperation.put(FruitTransaction.Operation.BALANCE,
-                new SetBalanceOperationHandler(fruitDao));
+                new SetBalanceOperationHandler(storageService));
         mapOperation.put(FruitTransaction.Operation.PURCHASE,
-                new SubtractOperationHandler(fruitDao));
+                new SubtractOperationHandler(storageService));
         mapOperation.put(FruitTransaction.Operation.RETURN,
-                new AddOperationHandler(fruitDao));
+                new AddOperationHandler(storageService));
         mapOperation.put(FruitTransaction.Operation.SUPPLY,
-                new AddOperationHandler(fruitDao));
-        OperationStrategy operationStrategy = new OperationStrategyImplementation(mapOperation);
-        ShopService shopService = new ShopServiceImplementation(fruitDao);
+                new AddOperationHandler(storageService));
+        OperationStrategy operationStrategy = new OperationStrategyImpl(mapOperation);
+        ShopService shopService = new ShopServiceImpl(storageService);
         for (FruitTransaction transaction : transactions) {
             operationStrategy.getOperationHandler(transaction.getOperation())
                     .doTransaction(transaction);

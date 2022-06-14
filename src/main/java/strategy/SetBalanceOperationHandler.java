@@ -1,18 +1,18 @@
 package strategy;
 
 import model.FruitTransaction;
-import service.FruitDao;
 import service.OperationHandler;
+import service.StorageService;
 
 public class SetBalanceOperationHandler implements OperationHandler {
-    private final FruitDao fruitDao;
+    private final StorageService storageService;
 
-    public SetBalanceOperationHandler(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
+    public SetBalanceOperationHandler(StorageService storageService) {
+        this.storageService = storageService;
     }
 
     @Override
     public void doTransaction(FruitTransaction transaction) {
-        fruitDao.set(transaction.getFruit(), transaction.getQuantity());
+        storageService.set(transaction.getFruit(), transaction.getQuantity());
     }
 }
