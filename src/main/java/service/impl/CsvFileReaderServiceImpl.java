@@ -8,7 +8,6 @@ import java.util.List;
 import service.CsvFileReaderService;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
-
     public List<String[]> readFile(String filePath) {
         File file = new File(filePath);
         try (CSVReader reader = new CSVReader(new FileReader(file))) {

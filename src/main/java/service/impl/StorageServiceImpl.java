@@ -1,12 +1,10 @@
 package service.impl;
 
 import dao.FruitDao;
-import java.util.List;
-import java.util.stream.Collectors;
 import service.StorageService;
 
 public class StorageServiceImpl implements StorageService {
-    private FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
     public StorageServiceImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
@@ -31,12 +29,5 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public void set(String fruit, Integer quantity) {
         fruitDao.add(fruit, quantity);
-    }
-
-    @Override
-    public List<String[]> getBalance() {
-        return fruitDao.getAll().stream()
-                .map(i -> new String[]{i.getKey(), String.valueOf(i.getValue())})
-                .collect(Collectors.toList());
     }
 }

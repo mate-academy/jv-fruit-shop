@@ -43,7 +43,7 @@ public class Main {
         mapOperation.put(FruitTransaction.Operation.SUPPLY,
                 new AddOperationHandler(storageService));
         OperationStrategy operationStrategy = new OperationStrategyImpl(mapOperation);
-        ShopService shopService = new ShopServiceImpl(storageService);
+        ShopService shopService = new ShopServiceImpl(fruitDao);
         for (FruitTransaction transaction : transactions) {
             operationStrategy.getOperationHandler(transaction.getOperation())
                     .doTransaction(transaction);
