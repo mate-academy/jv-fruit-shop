@@ -3,10 +3,9 @@ package service.impl;
 import db.Storage;
 import java.util.List;
 import java.util.stream.Collectors;
-import service.StorageService;
+import service.FruitDao;
 
-public class StorageImplementation implements StorageService {
-
+public class StorageImplementation implements FruitDao {
     @Override
     public void add(String fruit, Integer quantity) {
         Integer newAmount = Storage.fruits.containsKey(fruit)

@@ -1,19 +1,19 @@
 package service.impl;
 
 import java.util.List;
+import service.FruitDao;
 import service.ShopService;
-import service.StorageService;
 
 public class ShopServiceImplementation implements ShopService {
-    private final StorageService storageService;
+    private final FruitDao fruitDao;
 
-    public ShopServiceImplementation(StorageService storageService) {
-        this.storageService = storageService;
+    public ShopServiceImplementation(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
     public List<String[]> doReport() {
-        List<String[]> list = storageService.getBalance();
+        List<String[]> list = fruitDao.getBalance();
         list.add(0, new String[]{"fruit", "quantity"});
         return list;
     }
