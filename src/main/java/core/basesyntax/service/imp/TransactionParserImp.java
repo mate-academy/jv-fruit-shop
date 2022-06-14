@@ -14,8 +14,8 @@ public class TransactionParserImp implements TransactionParser {
     private static final Map<String, ProductTransaction.Operation> OPERATION_MAP = new HashMap<>();
 
     static {
-        ProductTransaction.Operation[] arrayOfAllOperatin = ProductTransaction.Operation.values();
-        Arrays.stream(arrayOfAllOperatin).forEach(x -> OPERATION_MAP.put(x.getOperation(), x));
+        ProductTransaction.Operation[] arrayOfAllOperation = ProductTransaction.Operation.values();
+        Arrays.stream(arrayOfAllOperation).forEach(x -> OPERATION_MAP.put(x.getOperation(), x));
     }
 
     @Override
