@@ -3,28 +3,20 @@ package mate.academy.service.impl;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.stream.Collectors;
 import mate.academy.dao.ShopDao;
 import mate.academy.dao.ShopDaoImpl;
 import mate.academy.service.CreateReport;
-import mate.academy.storage.Storage;
 
 public class CreateReportImpl implements CreateReport {
-    private static final String PATH_NAME = "src/main/java/mate/academy/report/report.csv";
     private final ShopDao shopDao = new ShopDaoImpl();
 
-    public void createReport() {
-        shopDao.createFileForReport();
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_NAME));
+    public void createReport(String pathNameReport) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathNameReport))) {
             writer.write("fruit, quantity");
             writer.newLine();
-            writer.write(Storage.storage.entrySet().stream()
-                                                    .map(key -> key.getKey() + "," + key.getValue())
-                                                    .collect(Collectors.joining("\n")));
-            writer.close();
+            writer.write(shopDao.getAll());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file");
+            throw new RuntimeException("Can't write to file" + pathNameReport, e);
         }
     }
 }

@@ -4,5 +4,5 @@ import java.util.List;
 import mate.academy.model.FruitTransaction;
 
 public interface ParseFile {
-    List<FruitTransaction> parseFile();
+    List<FruitTransaction> parseFile(List<String> records);
 }

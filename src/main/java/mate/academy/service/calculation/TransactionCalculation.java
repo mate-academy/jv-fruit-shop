@@ -1,8 +1,7 @@
 package mate.academy.service.calculation;
 
-import java.util.Map;
-import mate.academy.service.ParseFile;
+import mate.academy.model.FruitTransaction;
 
 public interface TransactionCalculation {
-    Map<String, Integer> calculate(ParseFile parseFile);
+    void calculate(FruitTransaction fruitTransaction);
 }
