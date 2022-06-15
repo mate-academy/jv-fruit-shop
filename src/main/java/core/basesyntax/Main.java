@@ -1,13 +1,21 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.CreatingReport;
+import core.basesyntax.service.FileHandler;
+import core.basesyntax.service.GenerationDataForStorage;
+import core.basesyntax.service.ProcessingDataFromFile;
+import core.basesyntax.service.impl.CreatingReportImpl;
+import core.basesyntax.service.impl.FileHandlerImpl;
+import core.basesyntax.service.impl.GenerationDataForStorageImpl;
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ProcessingDataFromFileImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.Balance;
 import core.basesyntax.strategy.impl.Purchase;
 import core.basesyntax.strategy.impl.ReturnFruit;
 import core.basesyntax.strategy.impl.Supply;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +25,8 @@ public class Main {
     private static final String REPORT_PATH = "src/main/java/report.csv";
 
     public static void main(String[] args) {
-        final Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
+        final Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap
+                = new HashMap<>();
         operationOperationHandlerMap.put(FruitTransaction.Operation.BALANCE, new Balance());
         operationOperationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new Purchase());
         operationOperationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnFruit());

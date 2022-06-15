@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.CreatingReport;
-
 import java.util.stream.Collectors;
 
 public class CreatingReportImpl implements CreatingReport {

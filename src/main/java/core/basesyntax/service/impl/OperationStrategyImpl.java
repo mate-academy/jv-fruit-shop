@@ -6,14 +6,15 @@ import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> operationMap;
 
-    public OperationStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap) {
-        this.operationOperationHandlerMap = operationOperationHandlerMap;
+    public OperationStrategyImpl(Map<FruitTransaction.Operation,
+            OperationHandler> operationMap) {
+        this.operationMap = operationMap;
     }
 
     @Override
     public OperationHandler get(FruitTransaction.Operation transaction) {
-        return operationOperationHandlerMap.get(transaction);
+        return operationMap.get(transaction);
     }
 }
