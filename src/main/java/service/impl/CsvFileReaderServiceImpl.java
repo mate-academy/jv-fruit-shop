@@ -5,9 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-import service.CsvFileReaderService;
+import service.FileReaderService;
 
-public class CsvFileReaderServiceImpl implements CsvFileReaderService {
+public class CsvFileReaderServiceImpl implements FileReaderService {
     public List<String[]> readFile(String filePath) {
         File file = new File(filePath);
         try (CSVReader reader = new CSVReader(new FileReader(file))) {

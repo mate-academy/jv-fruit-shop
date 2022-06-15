@@ -1,18 +1,21 @@
 package strategy;
 
+import dao.FruitDao;
 import model.FruitTransaction;
 import service.OperationHandler;
-import service.StorageService;
 
 public class AddOperationHandler implements OperationHandler {
-    private final StorageService storageService;
+    private final FruitDao fruitDao;
 
-    public AddOperationHandler(StorageService storageService) {
-        this.storageService = storageService;
+    public AddOperationHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
     public void doTransaction(FruitTransaction transaction) {
-        storageService.add(transaction.getFruit(), transaction.getQuantity());
+        Integer availableQuantity = fruitDao.get(transaction.getFruit());
+        Integer newAmount = availableQuantity != null
+                ? availableQuantity + transaction.getQuantity() : transaction.getQuantity();
+        fruitDao.add(transaction.getFruit(), newAmount);
     }
 }
