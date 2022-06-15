@@ -33,27 +33,27 @@ public class Main {
         stringTransactionHandlerMap.put("p", new PurchaseHandler());
         stringTransactionHandlerMap.put("r", new ReturnHandler());
         stringTransactionHandlerMap.put("s", new SupplyHandler());
+        FruitsDao fruitsDao = new FruitsDaoImpl();
 
         Map<FruitTransaction.Operation, OperationProcessing> operationProcessingMap =
                 new HashMap<>();
         operationProcessingMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceProcessing());
+                new BalanceProcessing(fruitsDao));
         operationProcessingMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseProcessing());
+                new PurchaseProcessing(fruitsDao));
         operationProcessingMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnProcessing());
+                new ReturnProcessing(fruitsDao));
         operationProcessingMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyProcessing());
+                new SupplyProcessing(fruitsDao));
 
-        FruitsDao fruitsDao = new FruitsDaoImpl();
         TransactionsStrategy transactionsStrategy =
                 new TransactionsStrategyImpl(stringTransactionHandlerMap);
         CsvFileReaderService fileReaderService =
-                new CsvFileReaderServiceImpl(transactionsStrategy);
+                new CsvFileReaderServiceImpl();
         OperationProcessingStrategy operationProcessingStrategy =
                 new OperationProcessingStrategyImpl(operationProcessingMap); //
         DataHandlerService dataHandlerService = new DataHandlerServiceImpl(fileReaderService,
-                operationProcessingStrategy, fruitsDao);
+                operationProcessingStrategy, fruitsDao, transactionsStrategy);
         CsvFileWriter fileWriter = new CsvFileWriterImpl(fruitsDao);
 
         dataHandlerService.handleData();
