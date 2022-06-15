@@ -15,10 +15,13 @@ public class ReportServiceImp implements ReportService {
 
     @Override
     public List<String> createReport(String header) {
-        return productDao.getAll()
+        List<String> report = productDao.getAll()
                 .entrySet()
                 .stream()
                 .map(e -> e.getKey() + SEPARATOR + e.getValue().toString())
                 .collect(Collectors.toList());
+
+        report.add(0, header);
+        return report;
     }
 }
