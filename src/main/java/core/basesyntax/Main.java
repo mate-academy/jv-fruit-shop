@@ -13,7 +13,6 @@ import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;
 import core.basesyntax.strategy.transaction.BalanceTransactionHandler;
-import core.basesyntax.strategy.transaction.FruitTransaction;
 import core.basesyntax.strategy.transaction.PurchaseTransactionHandler;
 import core.basesyntax.strategy.transaction.ReturnTransactionHandler;
 import core.basesyntax.strategy.transaction.SupplyTransactionHandler;
@@ -23,16 +22,11 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, TransactionHandler> transactionHandlersMap =
-                new HashMap<>();
-        transactionHandlersMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceTransactionHandler());
-        transactionHandlersMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyTransactionHandler());
-        transactionHandlersMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseTransactionHandler());
-        transactionHandlersMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnTransactionHandler());
+        Map<String, TransactionHandler> transactionHandlersMap = new HashMap<>();
+        transactionHandlersMap.put("b", new BalanceTransactionHandler());
+        transactionHandlersMap.put("s", new SupplyTransactionHandler());
+        transactionHandlersMap.put("p", new PurchaseTransactionHandler());
+        transactionHandlersMap.put("r", new ReturnTransactionHandler());
 
         FruitDao dao = new FruitDaoImpl();
         TransactionStrategy strategy = new TransactionStrategyImpl(transactionHandlersMap);
@@ -43,6 +37,6 @@ public class Main {
         WriterService writerService = new WriterServiceImpl();
 
         processorService.processData(readerService.readFile("src/main/resources/file.csv"));
-        writerService.writeFile(reportService.writeReport(), "src/main/resources/report.csv");
+        writerService.writeFile(reportService.makeReport(), "src/main/resources/report.csv");
     }
 }

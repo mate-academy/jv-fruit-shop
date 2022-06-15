@@ -15,7 +15,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public String writeReport() {
+    public String makeReport() {
         StringBuilder output = new StringBuilder(FIRST_COLUMN_NAME + SEPARATOR
                  + SECOND_COLUMN_NAME + LINE_SEPARATOR + dao.getAll().entrySet().stream()
                 .map(n -> n.getKey() + SEPARATOR + n.getValue() + LINE_SEPARATOR)
