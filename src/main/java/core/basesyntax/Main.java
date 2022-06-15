@@ -15,7 +15,6 @@ import core.basesyntax.strategy.impl.Balance;
 import core.basesyntax.strategy.impl.Purchase;
 import core.basesyntax.strategy.impl.ReturnFruit;
 import core.basesyntax.strategy.impl.Supply;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
