@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class CsvWriter {
-    public static void generateCsvReport(String pathname, String report) {
+    public void generateCsvReport(String pathname, String report) {
         File file = new File(pathname);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));) {
             bufferedWriter.write(report);

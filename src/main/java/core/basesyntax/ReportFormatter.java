@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ReportFormatter {
 
-    public static String formatReportAsCsvString() {
+    public String formatReportAsCsvString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity\n");
         for (Map.Entry<Fruit, Integer> entry : Warehouse.getWarehouse().entrySet()) {

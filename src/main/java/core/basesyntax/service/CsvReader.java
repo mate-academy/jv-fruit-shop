@@ -7,11 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class CsvReader {
-    public static String readFile(String filePath) {
+    public String readFile(String filePath) {
         File inputFile = new File(filePath);
         StringBuilder stringBuilder = new StringBuilder();
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 line = bufferedReader.readLine();

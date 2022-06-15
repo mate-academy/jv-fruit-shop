@@ -9,7 +9,7 @@ import java.util.List;
 
 public class LineProcessor {
 
-    public static void processLine(List<Transaction> transactionList) {
+    public void processLine(List<Transaction> transactionList) {
         for (Transaction transaction: transactionList) {
             Operation operation = transaction.getOperation();
             Fruit fruit = transaction.getFruit();

@@ -5,7 +5,7 @@ import core.basesyntax.model.Transaction;
 
 public class CsvFormatter {
 
-    public static void csvToStringArrayList(String csvString) {
+    public void csvToStringArrayList(String csvString) {
         for (String csvLine: csvString.split("\n")) {
             if (csvLine.equals("null")) {
                 continue;
