@@ -32,5 +32,4 @@ public class TransactionParserImp implements TransactionParser {
         String nameOfProduct = elements[INDEX_OF_NAME];
         return new ProductTransaction(operation, nameOfProduct, quantity);
     }
-
 }

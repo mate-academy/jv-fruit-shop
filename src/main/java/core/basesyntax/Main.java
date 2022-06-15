@@ -3,8 +3,11 @@ package core.basesyntax;
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImp;
 import core.basesyntax.model.ProductTransaction;
-import core.basesyntax.service.*;
-import core.basesyntax.service.imp.*;
+import core.basesyntax.service.imp.CsvValidatorImp;
+import core.basesyntax.service.imp.ReaderServiceImp;
+import core.basesyntax.service.imp.ReportServiceImp;
+import core.basesyntax.service.imp.TransactionParserImp;
+import core.basesyntax.service.imp.WriterServiceImp;
 import core.basesyntax.strategy.ActivitiesStrategy;
 import core.basesyntax.strategy.ActivitiesStrategyImp;
 import core.basesyntax.strategy.activities.ActivitiesHandler;
@@ -34,20 +37,10 @@ public class Main {
         ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImp(activitiesHandlerMap);
 
         List<String> records = new ReaderServiceImp().readRecords(Path.of(SOURCE_FILE_NAME));
-        records = new CSVValidatorImp(DAY_RECORDS_HEADER).validate(records);
-
-        TransactionParser transactionParser = new TransactionParserImp();
-
-        records.stream()
-                .map(transactionParser::parse)
+        records = new CsvValidatorImp(DAY_RECORDS_HEADER).validate(records);
+        new TransactionParserImp().parseAll(records)
                 .forEach(e -> activitiesStrategy.get(e.getOperation()).process(e));
-        records.clear();
-
-        ReportService reportService = new ReportServiceImp();
-        records = reportService.createReport(productDao);
-        records.add(0, REPORT_HEADER);
-
-        WriterService writerService = new WriterServiceImp();
-        writerService.writeToFile(records, Path.of(DESTINATION_FILE_NAME));
+        records = new ReportServiceImp(productDao).createReport(REPORT_HEADER);
+        new WriterServiceImp().writeToFile(records, Path.of(DESTINATION_FILE_NAME));
     }
 }

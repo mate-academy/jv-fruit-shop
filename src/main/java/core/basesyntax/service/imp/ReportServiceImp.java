@@ -7,13 +7,18 @@ import java.util.stream.Collectors;
 
 public class ReportServiceImp implements ReportService {
     private static final String SEPARATOR = ",";
+    private final ProductDao productDao;
+
+    public ReportServiceImp(ProductDao productDao) {
+        this.productDao = productDao;
+    }
 
     @Override
-    public List<String> createReport(ProductDao productDao) {
+    public List<String> createReport(String header) {
         return productDao.getAll()
                 .entrySet()
                 .stream()
-                .map(e -> e.getKey() + "," + e.getValue().toString())
+                .map(e -> e.getKey() + SEPARATOR + e.getValue().toString())
                 .collect(Collectors.toList());
     }
 }

@@ -1,12 +1,12 @@
 package core.basesyntax.service.imp;
 
-import core.basesyntax.service.CSVValidator;
+import core.basesyntax.service.CsvValidator;
 import java.util.List;
 
-public class CSVValidatorImp implements CSVValidator {
+public class CsvValidatorImp implements CsvValidator {
     private final String header;
 
-    public CSVValidatorImp(String header) {
+    public CsvValidatorImp(String header) {
         this.header = header;
     }
 
