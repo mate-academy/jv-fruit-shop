@@ -3,14 +3,8 @@ package core.basesyntax;
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImp;
 import core.basesyntax.model.ProductTransaction;
-import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.ReportService;
-import core.basesyntax.service.TransactionParser;
-import core.basesyntax.service.WriterService;
-import core.basesyntax.service.imp.ReaderServiceImp;
-import core.basesyntax.service.imp.ReportServiceImp;
-import core.basesyntax.service.imp.TransactionParserImp;
-import core.basesyntax.service.imp.WriterServiceImp;
+import core.basesyntax.service.*;
+import core.basesyntax.service.imp.*;
 import core.basesyntax.strategy.ActivitiesStrategy;
 import core.basesyntax.strategy.ActivitiesStrategyImp;
 import core.basesyntax.strategy.activities.ActivitiesHandler;
@@ -39,13 +33,11 @@ public class Main {
         activitiesHandlerMap.put(ProductTransaction.Operation.RETURN, addActivitiesHandler);
         ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImp(activitiesHandlerMap);
 
-        ReaderService readerService = new ReaderServiceImp();
-        List<String> records = readerService.readRecords(Path.of(SOURCE_FILE_NAME));
-        if (!records.remove(DAY_RECORDS_HEADER)) {
-            throw new RuntimeException("Wrong records table, expected header: " + REPORT_HEADER);
-        }
+        List<String> records = new ReaderServiceImp().readRecords(Path.of(SOURCE_FILE_NAME));
+        records = new CSVValidatorImp(DAY_RECORDS_HEADER).validate(records);
 
         TransactionParser transactionParser = new TransactionParserImp();
+
         records.stream()
                 .map(transactionParser::parse)
                 .forEach(e -> activitiesStrategy.get(e.getOperation()).process(e));
