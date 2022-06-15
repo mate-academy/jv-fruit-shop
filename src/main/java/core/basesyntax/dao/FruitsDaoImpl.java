@@ -1,8 +1,9 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
+import java.util.Map;
 
-public class FruitsDaoImpl implements FruitsDao{
+public class FruitsDaoImpl implements FruitsDao {
     @Override
     public void add(String fruit, int amount) {
         if (Storage.fruits.containsKey(fruit)) {
@@ -17,5 +18,10 @@ public class FruitsDaoImpl implements FruitsDao{
     public void subtract(String fruit, int amount) {
         Integer oldAmount = Storage.fruits.get(fruit);
         Storage.fruits.put(fruit, oldAmount - amount);
+    }
+
+    @Override
+    public Map<String, Integer> checkStorage() {
+        return Storage.fruits;
     }
 }
