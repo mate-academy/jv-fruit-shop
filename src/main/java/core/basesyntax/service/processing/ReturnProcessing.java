@@ -11,6 +11,9 @@ public class ReturnProcessing implements OperationProcessing {
 
     @Override
     public void doAction(String fruit, int amount) {
-        fruitsDao.add(fruit, amount);
+        int oldAmount = fruitsDao.get(fruit);
+        int newAmount = oldAmount + amount;
+        fruitsDao.remove(fruit);
+        fruitsDao.add(fruit, newAmount);
     }
 }

@@ -10,5 +10,7 @@ public interface FruitsDao {
 
     void remove(String fruit);
 
+    boolean isAvailable(String fruit);
+
     Map<String, Integer> getFruitsAndQuantityAsMap();
 }

@@ -6,12 +6,7 @@ import java.util.Map;
 public class FruitsDaoImpl implements FruitsDao {
     @Override
     public void add(String fruit, int amount) {
-        if (Storage.fruits.containsKey(fruit)) {
-            Integer oldAmount = Storage.fruits.get(fruit);
-            Storage.fruits.put(fruit, oldAmount + amount);
-        } else {
-            Storage.fruits.put(fruit, amount);
-        }
+        Storage.fruits.put(fruit, amount);
     }
 
     @Override
@@ -30,6 +25,11 @@ public class FruitsDaoImpl implements FruitsDao {
         } else {
             throw new RuntimeException(fruit + "is not available at the storage");
         }
+    }
+
+    @Override
+    public boolean isAvailable(String fruit) {
+        return Storage.fruits.containsKey(fruit);
     }
 
     @Override
