@@ -19,6 +19,7 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder output = new StringBuilder(FIRST_COLUMN_NAME + SEPARATOR
                  + SECOND_COLUMN_NAME + LINE_SEPARATOR + dao.getAll().entrySet().stream()
                 .map(n -> n.getKey() + SEPARATOR + n.getValue() + LINE_SEPARATOR)
+                .sorted()
                 .reduce("", (a, b) -> a + b));
         return output.delete(output.length() - LINE_SEPARATOR.length(),
                 output.length()).toString();
