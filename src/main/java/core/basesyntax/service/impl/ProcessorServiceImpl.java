@@ -21,6 +21,7 @@ public class ProcessorServiceImpl implements ProcessorService {
     @Override
     public void processData(List<String> rawData) {
         rawData.stream()
+                .skip(1)
                 .map(n -> n.split(SEPARATOR))
                 .forEach(n -> dao.update(n[FRUIT_INDEX], transactionStrategy.get(n[TYPE_INDEX])
                             .getAmount(dao.get(n[FRUIT_INDEX]),

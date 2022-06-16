@@ -10,7 +10,6 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> readFile(String fileName) {
         try {
             List<String> output = Files.readAllLines(Path.of(fileName));
-            output.remove(0);
             return output;
         } catch (IOException e) {
             throw new RuntimeException("Can't read file from path: " + fileName, e);
