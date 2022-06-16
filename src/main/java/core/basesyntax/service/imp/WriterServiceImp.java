@@ -12,7 +12,7 @@ public class WriterServiceImp implements WriterService {
         try {
             Files.write(path,lines);
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write file " + path);
+            throw new RuntimeException("Can`t write file " + path, e);
         }
     }
 }
