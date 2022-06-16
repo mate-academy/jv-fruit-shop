@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
+
 import java.util.Map;
 
 public class FruitsDaoImpl implements FruitsDao {
@@ -25,11 +26,6 @@ public class FruitsDaoImpl implements FruitsDao {
         } else {
             throw new RuntimeException(fruit + "is not available at the storage");
         }
-    }
-
-    @Override
-    public boolean isAvailable(String fruit) {
-        return Storage.fruits.containsKey(fruit);
     }
 
     @Override

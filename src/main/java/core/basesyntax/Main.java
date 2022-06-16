@@ -6,18 +6,21 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.DataHandlerService;
+import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
+import core.basesyntax.service.impl.CsvFileWriterImpl;
+import core.basesyntax.service.impl.DataHandlerServiceImpl;
+import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.processing.BalanceProcessing;
 import core.basesyntax.service.processing.OperationProcessing;
 import core.basesyntax.service.processing.PurchaseProcessing;
 import core.basesyntax.service.processing.ReturnProcessing;
 import core.basesyntax.service.processing.SupplyProcessing;
-import core.basesyntax.serviceimpl.CsvFileReaderServiceImpl;
-import core.basesyntax.serviceimpl.CsvFileWriterImpl;
-import core.basesyntax.serviceimpl.DataHandlerServiceImpl;
 import core.basesyntax.strategy.OperationProcessingStrategy;
 import core.basesyntax.strategy.OperationProcessingStrategyImpl;
 import core.basesyntax.strategy.TransactionsStrategy;
 import core.basesyntax.strategy.TransactionsStrategyImpl;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,10 +48,11 @@ public class Main {
                 new TransactionsStrategyImpl(stringTransactionHandlerMap);
         CsvFileReaderService fileReaderService =
                 new CsvFileReaderServiceImpl();
+        DataParserService parserService = new DataParserServiceImpl(fileReaderService, transactionsStrategy);
         OperationProcessingStrategy operationProcessingStrategy =
                 new OperationProcessingStrategyImpl(operationProcessingMap); //
-        DataHandlerService dataHandlerService = new DataHandlerServiceImpl(fileReaderService,
-                operationProcessingStrategy, fruitsDao, transactionsStrategy);
+        DataHandlerService dataHandlerService = new DataHandlerServiceImpl(operationProcessingStrategy,
+                parserService);
         CsvFileWriter fileWriter = new CsvFileWriterImpl(fruitsDao);
 
         dataHandlerService.handleData();
