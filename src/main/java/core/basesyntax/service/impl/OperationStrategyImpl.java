@@ -5,9 +5,14 @@ import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
+    Map<String, OperationHandler> operationHandlers;
+
+    public OperationStrategyImpl(
+            Map<String, OperationHandler> operationHandlers) {
+        this.operationHandlers = operationHandlers;
+    }
     @Override
-    public OperationHandler getStrategy(
-            Map<String, OperationHandler> operationHandlerMap, String[] line) {
-        return operationHandlerMap.get(line[0]);
+    public OperationHandler getOperationHandler(String operation) {
+        return operationHandlers.get(operation);
     }
 }

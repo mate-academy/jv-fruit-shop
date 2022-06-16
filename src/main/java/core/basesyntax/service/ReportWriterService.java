@@ -4,8 +4,4 @@ import java.util.List;
 
 public interface ReportWriterService {
     List<String[]> getReport();
-
-    void writeHead();
-
-    void writeBody(List<String[]> fruits);
 }

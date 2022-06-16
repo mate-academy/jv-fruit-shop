@@ -9,7 +9,7 @@ import java.util.List;
 public class FileWriterImpl implements FileWriterService {
 
     @Override
-    public void writeTheResult(File file, List<String[]> report) {
+    public void write(File file, List<String[]> report) {
         try (FileWriter csvWriter = new FileWriter(file)) {
             for (String[] line : report) {
                 int count = 0;
@@ -24,7 +24,7 @@ public class FileWriterImpl implements FileWriterService {
             }
             csvWriter.flush();
         } catch (IOException e) {
-            throw new RuntimeException("cant open given file", e);
+            throw new RuntimeException("cant open given file: " + file, e);
         }
     }
 }

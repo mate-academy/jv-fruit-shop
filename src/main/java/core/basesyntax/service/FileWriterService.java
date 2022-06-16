@@ -4,5 +4,5 @@ import java.io.File;
 import java.util.List;
 
 public interface FileWriterService {
-    void writeTheResult(File file, List<String[]> report);
+    void write(File file, List<String[]> report);
 }

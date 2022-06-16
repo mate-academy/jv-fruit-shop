@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportWriterImpl implements ReportWriterService {
-    private List<String[]> report = new ArrayList<>();
+    List<String[]> report = new ArrayList<>();
 
     public List<String[]> getReport() {
         writeHead();
@@ -14,13 +14,11 @@ public class ReportWriterImpl implements ReportWriterService {
         return report;
     }
 
-    public void writeHead() {
+    private void writeHead() {
         report.add(new String[]{"fruit", "quantity"});
     }
 
-    public void writeBody(List<String[]> fruits) {
-        for (String[] line : fruits) {
-            report.add(line);
+    private void writeBody(List<String[]> fruits) {
+            report.addAll(fruits);
         }
     }
-}

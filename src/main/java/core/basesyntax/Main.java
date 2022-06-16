@@ -13,8 +13,6 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.SubtractionHandler;
 import java.io.File;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -25,9 +23,6 @@ public class Main {
         // getting file with data
         File input = new File(inputPath);
 
-        //prepare service to get data
-        FileReaderService fileReaded = new FileReaderImpl();
-
         //prepare map for strategies
         Map<String, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put("s", new AdditionHandler());
@@ -36,23 +31,16 @@ public class Main {
         operationHandlers.put("p", new SubtractionHandler());
 
         //prepare service to aggregate data
-        OperationStrategy operationStrategy = new OperationStrategyImpl();
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        //all preparations are done so let's getting to rumble
         //getting data + iterator for each line + aggregating data to storage
-        List<String[]> csvEntries = fileReaded.read(input);
-        Iterator<String[]> iterator = csvEntries.iterator();
-        String[] passHead = iterator.next(); // first not needed push to iterator
-        while (iterator.hasNext()) {
-            String[] line = iterator.next();
-            operationStrategy.getStrategy(operationHandlers, line)
-                    .execute(line[1], Integer.parseInt(line[2]));
-        }
+        FileReaderService fileReadToStorage = new FileReaderImpl();
+        fileReadToStorage.read(input, operationStrategy);
 
         //data is in Storage and we're transferring it to file
         ReportWriterService reportWriter = new ReportWriterImpl();
         File output = new File(resultPath);
         FileWriterService fileWriter = new FileWriterImpl();
-        fileWriter.writeTheResult(output, reportWriter.getReport());
+        fileWriter.write(output, reportWriter.getReport());
     }
 }
