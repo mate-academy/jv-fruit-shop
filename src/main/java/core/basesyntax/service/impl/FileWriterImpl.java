@@ -10,11 +10,8 @@ public class FileWriterImpl implements FileWriterService {
 
     @Override
     public void writeTheResult(File file, List<String[]> report) {
-        FileWriter csvWriter;
-        {
-            try {
-                csvWriter = new FileWriter(file);
-                for (String[] line: report) {
+        try (FileWriter csvWriter = new FileWriter(file)){
+            for (String[] line: report) {
                     int count = 0;
                     for (String data : line) {
                         csvWriter.append(data);
@@ -26,10 +23,8 @@ public class FileWriterImpl implements FileWriterService {
                     csvWriter.append("\n");
                 }
                 csvWriter.flush();
-                csvWriter.close();
-            } catch (IOException e) {
-                throw new RuntimeException("cant open file to write");
-            }
+        } catch (IOException e) {
+            throw new RuntimeException("cant open given file", e);
         }
     }
 }
