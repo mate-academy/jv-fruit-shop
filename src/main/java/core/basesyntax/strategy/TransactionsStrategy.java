@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.transaction.TransactionHandler;
+import core.basesyntax.model.FruitTransaction;
 
 public interface TransactionsStrategy {
-    TransactionHandler get(String dataFromFile);
+    FruitTransaction.Operation get(String dataFromFile);
 }

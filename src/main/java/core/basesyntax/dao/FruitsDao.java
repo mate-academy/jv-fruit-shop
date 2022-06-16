@@ -6,7 +6,9 @@ public interface FruitsDao {
 
     void add(String fruit, int amount);
 
-    void subtract(String fruit, int amount);
+    int get(String fruit);
 
-    Map<String, Integer> checkStorage();
+    void remove(String fruit);
+
+    Map<String, Integer> getFruitsAndQuantityAsMap();
 }

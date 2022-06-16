@@ -11,6 +11,9 @@ public class PurchaseProcessing implements OperationProcessing {
 
     @Override
     public void doAction(String fruit, int amount) {
-        fruitsDao.subtract(fruit, amount);
+        int oldQuantity = fruitsDao.get(fruit);
+        int newQuantity = oldQuantity - amount;
+        fruitsDao.remove(fruit);
+        fruitsDao.add(fruit, newQuantity);
     }
 }

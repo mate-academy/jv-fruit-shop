@@ -18,7 +18,7 @@ public class CsvFileWriterImpl implements CsvFileWriter {
 
     @Override
     public void write() {
-        Map<String, Integer> stringIntegerMap = fruitsDao.checkStorage();
+        Map<String, Integer> stringIntegerMap = fruitsDao.getFruitsAndQuantityAsMap();
         for (Map.Entry<String, Integer> entry : stringIntegerMap.entrySet()) {
             try {
                 Path pathToFile = Path.of(PATH_NAME);

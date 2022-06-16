@@ -1,17 +1,17 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.transaction.TransactionHandler;
+import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 
 public class TransactionsStrategyImpl implements TransactionsStrategy {
-    private Map<String, TransactionHandler> operationMap;
+    private Map<String, FruitTransaction.Operation> operationMap;
 
-    public TransactionsStrategyImpl(Map<String, TransactionHandler> operationMap) {
+    public TransactionsStrategyImpl(Map<String, FruitTransaction.Operation> operationMap) {
         this.operationMap = operationMap;
     }
 
     @Override
-    public TransactionHandler get(String dataFromFile) {
+    public FruitTransaction.Operation get(String dataFromFile) {
         return operationMap.get(dataFromFile);
     }
 }

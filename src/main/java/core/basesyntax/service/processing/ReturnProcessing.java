@@ -1,9 +1,8 @@
 package core.basesyntax.service.processing;
 
 import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.dao.FruitsDaoImpl;
 
-public class ReturnProcessing extends FruitsDaoImpl implements OperationProcessing {
+public class ReturnProcessing implements OperationProcessing {
     private FruitsDao fruitsDao;
 
     public ReturnProcessing(FruitsDao fruitsDao) {

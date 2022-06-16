@@ -11,11 +11,6 @@ import core.basesyntax.service.processing.OperationProcessing;
 import core.basesyntax.service.processing.PurchaseProcessing;
 import core.basesyntax.service.processing.ReturnProcessing;
 import core.basesyntax.service.processing.SupplyProcessing;
-import core.basesyntax.service.transaction.BalanceHandler;
-import core.basesyntax.service.transaction.PurchaseHandler;
-import core.basesyntax.service.transaction.ReturnHandler;
-import core.basesyntax.service.transaction.SupplyHandler;
-import core.basesyntax.service.transaction.TransactionHandler;
 import core.basesyntax.serviceimpl.CsvFileReaderServiceImpl;
 import core.basesyntax.serviceimpl.CsvFileWriterImpl;
 import core.basesyntax.serviceimpl.DataHandlerServiceImpl;
@@ -28,11 +23,11 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<String, TransactionHandler> stringTransactionHandlerMap = new HashMap<>();
-        stringTransactionHandlerMap.put("b", new BalanceHandler());
-        stringTransactionHandlerMap.put("p", new PurchaseHandler());
-        stringTransactionHandlerMap.put("r", new ReturnHandler());
-        stringTransactionHandlerMap.put("s", new SupplyHandler());
+        Map<String, FruitTransaction.Operation> stringTransactionHandlerMap = new HashMap<>();
+        stringTransactionHandlerMap.put("b", FruitTransaction.Operation.BALANCE);
+        stringTransactionHandlerMap.put("p", FruitTransaction.Operation.PURCHASE);
+        stringTransactionHandlerMap.put("r", FruitTransaction.Operation.RETURN);
+        stringTransactionHandlerMap.put("s", FruitTransaction.Operation.SUPPLY);
         FruitsDao fruitsDao = new FruitsDaoImpl();
 
         Map<FruitTransaction.Operation, OperationProcessing> operationProcessingMap =
@@ -57,7 +52,7 @@ public class Main {
         CsvFileWriter fileWriter = new CsvFileWriterImpl(fruitsDao);
 
         dataHandlerService.handleData();
-        System.out.println(fruitsDao.checkStorage());
+        System.out.println(fruitsDao.getFruitsAndQuantityAsMap());
 
         fileWriter.write();
     }

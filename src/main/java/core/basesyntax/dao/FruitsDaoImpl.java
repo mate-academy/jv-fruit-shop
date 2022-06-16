@@ -15,13 +15,25 @@ public class FruitsDaoImpl implements FruitsDao {
     }
 
     @Override
-    public void subtract(String fruit, int amount) {
-        Integer oldAmount = Storage.fruits.get(fruit);
-        Storage.fruits.put(fruit, oldAmount - amount);
+    public int get(String fruit) {
+        if (Storage.fruits.containsKey(fruit)) {
+            return Storage.fruits.get(fruit);
+        } else {
+            throw new RuntimeException(fruit + "is not available at the storage");
+        }
     }
 
     @Override
-    public Map<String, Integer> checkStorage() {
+    public void remove(String fruit) {
+        if (Storage.fruits.containsKey(fruit)) {
+            Storage.fruits.remove(fruit);
+        } else {
+            throw new RuntimeException(fruit + "is not available at the storage");
+        }
+    }
+
+    @Override
+    public Map<String, Integer> getFruitsAndQuantityAsMap() {
         return Storage.fruits;
     }
 }

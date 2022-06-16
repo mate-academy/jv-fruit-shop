@@ -34,7 +34,7 @@ public class DataHandlerServiceImpl implements core.basesyntax.service.DataHandl
         Consumer<String[]> consumerForHandlingData = stringArray ->
                 fruitTransactions.add(
                         new FruitTransaction(transactionsStrategy
-                                .get(stringArray[TYPE_OF_OPERATION_INDEX]).getOperation(),
+                                .get(stringArray[TYPE_OF_OPERATION_INDEX]),
                                 stringArray[FRUIT_TITLE_INDEX],
                                 Integer.parseInt(stringArray[AMOUNT_INDEX])));
         Consumer<FruitTransaction> consumer = transaction
