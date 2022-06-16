@@ -20,7 +20,6 @@ import core.basesyntax.strategy.OperationProcessingStrategy;
 import core.basesyntax.strategy.OperationProcessingStrategyImpl;
 import core.basesyntax.strategy.TransactionsStrategy;
 import core.basesyntax.strategy.TransactionsStrategyImpl;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,12 +47,14 @@ public class Main {
                 new TransactionsStrategyImpl(stringTransactionHandlerMap);
         CsvFileReaderService fileReaderService =
                 new CsvFileReaderServiceImpl();
-        DataParserService parserService = new DataParserServiceImpl(fileReaderService, transactionsStrategy);
+        DataParserService parserService =
+                new DataParserServiceImpl(fileReaderService, transactionsStrategy);
         OperationProcessingStrategy operationProcessingStrategy =
                 new OperationProcessingStrategyImpl(operationProcessingMap); //
-        DataHandlerService dataHandlerService = new DataHandlerServiceImpl(operationProcessingStrategy,
-                parserService);
-        CsvFileWriter fileWriter = new CsvFileWriterImpl(fruitsDao);
+        DataHandlerService dataHandlerService =
+                new DataHandlerServiceImpl(operationProcessingStrategy, parserService);
+        CsvFileWriter fileWriter =
+                new CsvFileWriterImpl(fruitsDao);
 
         dataHandlerService.handleData();
         System.out.println(fruitsDao.getFruitsAndQuantityAsMap());

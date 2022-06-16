@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataHandlerService;
 import core.basesyntax.service.DataParserService;
 import core.basesyntax.strategy.OperationProcessingStrategy;
-
 import java.util.List;
 import java.util.function.Consumer;
 
