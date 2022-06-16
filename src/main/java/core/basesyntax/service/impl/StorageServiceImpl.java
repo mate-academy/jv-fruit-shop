@@ -6,7 +6,7 @@ import core.basesyntax.service.StorageService;
 public class StorageServiceImpl implements StorageService {
 
     @Override
-    public void plus(String fruit, Integer amount) {
+    public void add(String fruit, Integer amount) {
         if (Storage.fruits.containsKey(fruit)) {
             Integer newAmount = Storage.fruits.get(fruit) + amount;
             Storage.fruits.put(fruit, newAmount);
@@ -16,7 +16,7 @@ public class StorageServiceImpl implements StorageService {
     }
 
     @Override
-    public void minus(String fruit, Integer amount) {
+    public void subtract(String fruit, Integer amount) {
         if (Storage.fruits.containsKey(fruit)) {
             Storage.fruits.put(fruit, Storage.fruits.get(fruit) - amount);
         } else {

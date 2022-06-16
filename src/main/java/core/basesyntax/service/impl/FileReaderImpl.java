@@ -12,8 +12,8 @@ import java.util.List;
 public class FileReaderImpl implements FileReaderService {
     @Override
     public List<String[]> read(File input) {
-        try(FileReader fileReader = new FileReader(input)){
-            try (CSVReader reader = new CSVReader(fileReader)){
+        try (FileReader fileReader = new FileReader(input)) {
+            try (CSVReader reader = new CSVReader(fileReader)) {
                 List<String[]> csvEntries = reader.readAll();
                 return csvEntries;
             } catch (CsvException e) {

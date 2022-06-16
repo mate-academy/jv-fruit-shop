@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 public interface StorageService {
-    void plus(String fruit, Integer amount);
+    void add(String fruit, Integer amount);
 
-    void minus(String fruit, Integer amount);
+    void subtract(String fruit, Integer amount);
 }

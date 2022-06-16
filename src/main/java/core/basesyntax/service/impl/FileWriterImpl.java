@@ -10,19 +10,19 @@ public class FileWriterImpl implements FileWriterService {
 
     @Override
     public void writeTheResult(File file, List<String[]> report) {
-        try (FileWriter csvWriter = new FileWriter(file)){
-            for (String[] line: report) {
-                    int count = 0;
-                    for (String data : line) {
-                        csvWriter.append(data);
-                        if (count == 0) {
-                            csvWriter.append(",");
-                        }
-                        count++;
+        try (FileWriter csvWriter = new FileWriter(file)) {
+            for (String[] line : report) {
+                int count = 0;
+                for (String data : line) {
+                    csvWriter.append(data);
+                    if (count == 0) {
+                        csvWriter.append(",");
                     }
-                    csvWriter.append("\n");
+                    count++;
                 }
-                csvWriter.flush();
+                csvWriter.append("\n");
+            }
+            csvWriter.flush();
         } catch (IOException e) {
             throw new RuntimeException("cant open given file", e);
         }
