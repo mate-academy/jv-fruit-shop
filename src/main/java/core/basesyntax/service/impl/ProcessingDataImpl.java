@@ -13,7 +13,7 @@ public class ProcessingDataImpl implements ProcessingData {
     private static final String SPLIT_SIGN = ",";
 
     @Override
-    public List<FruitTransaction> processData(List<String> data) {
+    public List<FruitTransaction> parseData(List<String> data) {
         data.remove(FIRST_ROW);
         List<FruitTransaction> processedData = new ArrayList<>();
         data.stream()

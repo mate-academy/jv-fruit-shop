@@ -1,16 +1,10 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CreatingReport;
-import core.basesyntax.service.FileHandler;
-import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.ProcessingData;
-import core.basesyntax.service.impl.CreatingReportImpl;
-import core.basesyntax.service.impl.FileHandlerImpl;
-import core.basesyntax.service.impl.OperationStrategyImpl;
-import core.basesyntax.service.impl.ProcessingDataImpl;
+import core.basesyntax.service.*;
+import core.basesyntax.service.impl.*;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.impl.Balance;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.Purchase;
 import core.basesyntax.strategy.impl.ReturnFruit;
 import core.basesyntax.strategy.impl.Supply;
@@ -25,16 +19,16 @@ public class Main {
     public static void main(String[] args) {
         final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
                 = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new Balance());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new Purchase());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnFruit());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new Supply());
 
-        FileHandler fileHandler = new FileHandlerImpl();
-        List<String> dataFromDailyReport = fileHandler.readFile(OPERATIONS_PATH);
+        FileReadingService fileReader = new FileReadingServiceImpl();
+        List<String> dataFromDailyReport = fileReader.readFile(OPERATIONS_PATH);
 
         ProcessingData processData = new ProcessingDataImpl();
-        List<FruitTransaction> fruitTransactions = processData.processData(dataFromDailyReport);
+        List<FruitTransaction> fruitTransactions = processData.parseData(dataFromDailyReport);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         fruitTransactions.forEach(t -> operationStrategy
@@ -44,6 +38,7 @@ public class Main {
         CreatingReport creatingReport = new CreatingReportImpl();
         String report = creatingReport.createReport();
 
-        fileHandler.writeFile(REPORT_PATH, report);
+        FileWritingService fileWriter = new FileWritingServiceImpl();
+        fileWriter.writeFile(REPORT_PATH, report);
     }
 }
