@@ -24,7 +24,7 @@ public class Main {
         FileReaderService fileReaded = new FileReaderImpl();
 
         //getting data
-        List<String[]> csvEntries = fileReaded.readInput(input);
+        List<String[]> csvEntries = fileReaded.read(input);
 
         //prepare service to aggregate data
         StrategyChooser strategyChooser = new StrategyChooserImpl();

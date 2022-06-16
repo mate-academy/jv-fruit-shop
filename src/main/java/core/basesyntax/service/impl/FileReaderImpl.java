@@ -11,22 +11,18 @@ import java.util.List;
 
 public class FileReaderImpl implements FileReaderService {
     @Override
-    public List<String[]> readInput(File input) {
-        CSVReader reader = null;
-        try {
-            reader = new CSVReader(new FileReader(input));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("cant find file", e);
+    public List<String[]> read(File input) {
+        try(FileReader fileReader = new FileReader(input)){
+            try (CSVReader reader = new CSVReader(fileReader)){
+                List<String[]> csvEntries = reader.readAll();
+                return csvEntries;
+            } catch (CsvException e) {
+                throw new RuntimeException("became wrong format, not csv file", e);
+            }
+        } catch (FileNotFoundException f) {
+            throw new RuntimeException("file not fount", f);
+        } catch (IOException i) {
+            throw new RuntimeException("cant close properly the file", i);
         }
-
-        List<String[]> csvEntries = null;
-        try {
-            csvEntries = reader.readAll();
-        } catch (IOException e) {
-            throw new RuntimeException("cant read", e);
-        } catch (CsvException e) {
-            e.printStackTrace();
-        }
-        return csvEntries;
     }
 }
