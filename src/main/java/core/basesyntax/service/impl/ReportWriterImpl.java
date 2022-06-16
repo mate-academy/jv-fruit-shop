@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportWriterImpl implements ReportWriterService {
-    List<String[]> report = new ArrayList<>();
+    private final List<String[]> report = new ArrayList<>();
 
     public List<String[]> getReport() {
         writeHead();
         writeBody(Storage.getAll());
-        return report;
+        return new ArrayList<String[]>(report);
     }
 
     private void writeHead() {
@@ -19,6 +19,6 @@ public class ReportWriterImpl implements ReportWriterService {
     }
 
     private void writeBody(List<String[]> fruits) {
-            report.addAll(fruits);
-        }
+        report.addAll(fruits);
     }
+}

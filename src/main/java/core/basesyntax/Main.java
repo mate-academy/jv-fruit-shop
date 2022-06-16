@@ -20,9 +20,6 @@ public class Main {
     private static final String resultPath = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        // getting file with data
-        File input = new File(inputPath);
-
         //prepare map for strategies
         Map<String, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put("s", new AdditionHandler());
@@ -34,6 +31,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         //getting data + iterator for each line + aggregating data to storage
+        File input = new File(inputPath);
         FileReaderService fileReadToStorage = new FileReaderImpl();
         fileReadToStorage.read(input, operationStrategy);
 
