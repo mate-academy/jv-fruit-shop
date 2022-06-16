@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ProcessingDataFromFile;
+import core.basesyntax.service.ProcessingData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProcessingDataFromFileImpl implements ProcessingDataFromFile {
+public class ProcessingDataImpl implements ProcessingData {
     private static final int FIRST_ROW = 0;
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
