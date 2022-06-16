@@ -4,11 +4,11 @@ import java.util.Map;
 
 public interface FruitsDao {
 
-    void add(String fruit, int amount);
+    boolean add(String fruit, int amount);
 
     int get(String fruit);
 
-    void remove(String fruit);
+    boolean remove(String fruit);
 
     Map<String, Integer> getFruitsAndQuantityAsMap();
 }

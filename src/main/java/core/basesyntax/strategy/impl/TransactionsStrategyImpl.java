@@ -1,6 +1,7 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.TransactionsStrategy;
 import java.util.Map;
 
 public class TransactionsStrategyImpl implements TransactionsStrategy {

@@ -17,9 +17,9 @@ import core.basesyntax.service.processing.PurchaseProcessing;
 import core.basesyntax.service.processing.ReturnProcessing;
 import core.basesyntax.service.processing.SupplyProcessing;
 import core.basesyntax.strategy.OperationProcessingStrategy;
-import core.basesyntax.strategy.OperationProcessingStrategyImpl;
 import core.basesyntax.strategy.TransactionsStrategy;
-import core.basesyntax.strategy.TransactionsStrategyImpl;
+import core.basesyntax.strategy.impl.OperationProcessingStrategyImpl;
+import core.basesyntax.strategy.impl.TransactionsStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,17 +48,18 @@ public class Main {
         CsvFileReaderService fileReaderService =
                 new CsvFileReaderServiceImpl();
         DataParserService parserService =
-                new DataParserServiceImpl(fileReaderService, transactionsStrategy);
+                new DataParserServiceImpl(transactionsStrategy);
         OperationProcessingStrategy operationProcessingStrategy =
-                new OperationProcessingStrategyImpl(operationProcessingMap); //
+                new OperationProcessingStrategyImpl(operationProcessingMap);
         DataHandlerService dataHandlerService =
-                new DataHandlerServiceImpl(operationProcessingStrategy, parserService);
+                new DataHandlerServiceImpl();
         CsvFileWriter fileWriter =
-                new CsvFileWriterImpl(fruitsDao);
+                new CsvFileWriterImpl();
 
-        dataHandlerService.handleData();
+        dataHandlerService.handleData(parserService
+                .parse(fileReaderService.read("src/main/resources/operations.csv")),
+                operationProcessingStrategy);
         System.out.println(fruitsDao.getFruitsAndQuantityAsMap());
-
-        fileWriter.write();
+        fileWriter.write(fruitsDao.getFruitsAndQuantityAsMap(), "src/main/resources/report.csv");
     }
 }
