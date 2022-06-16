@@ -52,13 +52,12 @@ public class Main {
         OperationProcessingStrategy operationProcessingStrategy =
                 new OperationProcessingStrategyImpl(operationProcessingMap);
         DataHandlerService dataHandlerService =
-                new DataHandlerServiceImpl();
+                new DataHandlerServiceImpl(operationProcessingStrategy);
         CsvFileWriter fileWriter =
                 new CsvFileWriterImpl();
 
         dataHandlerService.handleData(parserService
-                .parse(fileReaderService.read("src/main/resources/operations.csv")),
-                operationProcessingStrategy);
+                .parse(fileReaderService.read("src/main/resources/operations.csv")));
         System.out.println(fruitsDao.getFruitsAndQuantityAsMap());
         fileWriter.write(fruitsDao.getFruitsAndQuantityAsMap(), "src/main/resources/report.csv");
     }
