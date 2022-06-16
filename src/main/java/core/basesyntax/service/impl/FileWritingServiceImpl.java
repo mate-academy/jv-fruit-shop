@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWritingService;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
