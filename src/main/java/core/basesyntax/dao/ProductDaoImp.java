@@ -20,5 +20,4 @@ public class ProductDaoImp implements ProductDao {
     public Map<String, Integer> getAll() {
         return new HashMap<>(Storage.product);
     }
-
 }
