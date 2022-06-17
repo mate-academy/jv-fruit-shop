@@ -1,16 +1,17 @@
 package mate.academy.service.impl;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import mate.academy.model.FruitTransaction;
-import mate.academy.service.ParseFile;
+import mate.academy.service.TransactionParser;
 
-public class ParseFileImpl implements ParseFile {
+public class TransactionParserImpl implements TransactionParser {
     private static final int INDEX_TYPE_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
     private static final int INDEX_QUANTITY = 2;
 
+    @Override
     public List<FruitTransaction> parseFile(List<String> records) {
         return records.stream()
                 .skip(1)
@@ -23,10 +24,10 @@ public class ParseFileImpl implements ParseFile {
     }
 
     private FruitTransaction checkRecords(FruitTransaction fruitTransaction) {
-        List<String> listOfTypeOperations = new ArrayList<>();
-        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            listOfTypeOperations.add(operation.getOperations());
-        }
+        List<String> listOfTypeOperations = Arrays.stream(FruitTransaction.Operation.values())
+                .map(FruitTransaction.Operation::getOperations)
+                .collect(Collectors.toList());
+
         if (!listOfTypeOperations.contains(fruitTransaction.getOperation())) {
             throw new RuntimeException("Unknown type operation");
         }

@@ -9,7 +9,7 @@ import mate.academy.service.ReadFile;
 public class ReadFileImpl implements ReadFile {
 
     @Override
-    public List<String> readFromDb(String pathName) {
+    public List<String> readFile(String pathName) {
         try {
             return Files.readAllLines(Path.of(pathName));
         } catch (IOException e) {
