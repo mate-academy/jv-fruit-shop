@@ -1,9 +1,19 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.StorageService;
+import java.util.List;
 
 public class StorageServiceImpl implements StorageService {
+
+    @Override
+    public void saveAll(List<String[]> fruits, OperationStrategy operationStrategy) {
+        for (String[] line: fruits) {
+            operationStrategy.getOperationHandler(line[0])
+                    .execute(line[1], Integer.parseInt(line[2]));
+        }
+    }
 
     @Override
     public void add(String fruit, Integer amount) {

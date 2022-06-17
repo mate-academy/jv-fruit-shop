@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportWriterService;
+import core.basesyntax.service.ReportCreator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportWriterImpl implements ReportWriterService {
+public class ReportCreatorImpl implements ReportCreator {
     private final List<String[]> report = new ArrayList<>();
 
     public List<String[]> getReport() {

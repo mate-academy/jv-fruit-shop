@@ -3,11 +3,13 @@ package core.basesyntax;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.ReportWriterService;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.StorageService;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
-import core.basesyntax.service.impl.ReportWriterImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
+import core.basesyntax.service.impl.StorageServiceImpl;
 import core.basesyntax.strategy.AdditionHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.SubtractionHandler;
@@ -28,17 +30,18 @@ public class Main {
         operationHandlers.put("p", new SubtractionHandler());
 
         //prepare service to aggregate data
+        StorageService storageService = new StorageServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         //getting data + iterator for each line + aggregating data to storage
         File input = new File(inputPath);
         FileReaderService fileReadToStorage = new FileReaderImpl();
-        fileReadToStorage.read(input, operationStrategy);
+        storageService.saveAll(fileReadToStorage.read(input), operationStrategy);
 
         //data is in Storage and we're transferring it to file
-        ReportWriterService reportWriter = new ReportWriterImpl();
+        ReportCreator reportCreator = new ReportCreatorImpl();
         File output = new File(resultPath);
         FileWriterService fileWriter = new FileWriterImpl();
-        fileWriter.write(output, reportWriter.getReport());
+        fileWriter.write(output, reportCreator.getReport());
     }
 }
