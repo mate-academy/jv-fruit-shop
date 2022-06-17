@@ -1,11 +1,16 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Model;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface ActionsDao {
-    List<Model> getAllActions();
+    void add(String fruit, Integer amount);
 
-    boolean isDoneReport(Map<String, Integer> modelAmount);
+    void update(String fruit, Integer amount);
+
+    int getAmount(String fruit);
+
+    boolean isPresentFruit(String fruit);
+
+    Set<Map.Entry<String, Integer>> getAllFruits();
 }

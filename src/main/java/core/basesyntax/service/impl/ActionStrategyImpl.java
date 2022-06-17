@@ -1,5 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ActionStrategy;
 import core.basesyntax.service.actiontype.ActionType;
 import java.util.Map;
 
