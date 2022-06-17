@@ -7,10 +7,12 @@ import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.DataHandlerService;
 import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterImpl;
 import core.basesyntax.service.impl.DataHandlerServiceImpl;
 import core.basesyntax.service.impl.DataParserServiceImpl;
+import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.service.processing.BalanceProcessing;
 import core.basesyntax.service.processing.OperationProcessing;
 import core.basesyntax.service.processing.PurchaseProcessing;
@@ -53,9 +55,10 @@ public class Main {
                 new OperationProcessingStrategyImpl(operationProcessingMap);
         DataHandlerService dataHandlerService =
                 new DataHandlerServiceImpl(operationProcessingStrategy);
-        CsvFileWriter fileWriter =
-                new CsvFileWriterImpl();
+        ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
+        reportGeneratorService.generate("src/main/resources/report.csv");
 
+        CsvFileWriter fileWriter = new CsvFileWriterImpl();
         dataHandlerService.handleData(parserService
                 .parse(fileReaderService.read("src/main/resources/operations.csv")));
         System.out.println(fruitsDao.getFruitsAndQuantityAsMap());
