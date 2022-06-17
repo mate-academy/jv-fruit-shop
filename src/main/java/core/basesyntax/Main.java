@@ -23,6 +23,7 @@ import core.basesyntax.strategy.TransactionsStrategy;
 import core.basesyntax.strategy.impl.OperationProcessingStrategyImpl;
 import core.basesyntax.strategy.impl.TransactionsStrategyImpl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -56,12 +57,13 @@ public class Main {
         DataHandlerService dataHandlerService =
                 new DataHandlerServiceImpl(operationProcessingStrategy);
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
-        reportGeneratorService.generate("src/main/resources/report.csv");
-
-        CsvFileWriter fileWriter = new CsvFileWriterImpl();
         dataHandlerService.handleData(parserService
                 .parse(fileReaderService.read("src/main/resources/operations.csv")));
+        List<String> generatedListOfFruitsAndQuantity
+                = reportGeneratorService.generate(fruitsDao.getFruitsAndQuantityAsMap());
+        System.out.println(generatedListOfFruitsAndQuantity);
         System.out.println(fruitsDao.getFruitsAndQuantityAsMap());
-        fileWriter.write(fruitsDao.getFruitsAndQuantityAsMap(), "src/main/resources/report.csv");
+        CsvFileWriter fileWriter = new CsvFileWriterImpl();
+        fileWriter.write(generatedListOfFruitsAndQuantity, "src/main/resources/report.csv");
     }
 }

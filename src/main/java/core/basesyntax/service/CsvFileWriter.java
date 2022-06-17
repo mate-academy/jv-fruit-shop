@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import java.util.Map;
+import java.util.List;
 
 public interface CsvFileWriter {
-    void write(Map<String, Integer> fruitsAtStorageMap, String pathname);
+    void write(List<String> generatedFruitReport, String pathname);
 }
