@@ -1,13 +1,13 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.StorageService;
-import core.basesyntax.service.impl.StorageServiceImpl;
+import core.basesyntax.service.StorageSupplyService;
+import core.basesyntax.service.impl.StorageSupplyServiceImpl;
 
 public class AdditionHandler implements OperationHandler {
-    private StorageService storageService = new StorageServiceImpl();
+    private StorageSupplyService storageSupplyService = new StorageSupplyServiceImpl();
 
     @Override
     public void execute(String fruit, Integer amount) {
-        storageService.add(fruit, amount);
+        storageSupplyService.add(fruit, amount);
     }
 }
