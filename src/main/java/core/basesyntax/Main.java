@@ -29,11 +29,12 @@ public class Main {
             "src/main/java/core/basesyntax/resources/fruit_shop_report.csv";
 
     public static void main(String[] args) {
+        ShopDao shopDao = new ShopDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
-        operationHandler.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        operationHandler.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        operationHandler.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        operationHandler.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        operationHandler.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(shopDao));
+        operationHandler.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(shopDao));
+        operationHandler.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(shopDao));
+        operationHandler.put(FruitTransaction.Operation.RETURN, new ReturnHandler(shopDao));
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> readFromFile = fileReaderService.readFromFile(INPUT_FILE_PATH);
@@ -42,7 +43,6 @@ public class Main {
         Strategy strategy = new StrategyImpl(operationHandler);
         lineInfo.forEach(p -> strategy.get(p.getOperation()).handle(p));
 
-        ShopDao shopDao = new ShopDaoImpl();
         ReportCreatorService reportCreator = new ReportCreatorServiceImpl(shopDao);
         String report = reportCreator.report();
 

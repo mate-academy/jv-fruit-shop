@@ -1,11 +1,14 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.dao.ShopDao;
-import core.basesyntax.dao.ShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
 public class SupplyHandler implements OperationHandler {
-    private final ShopDao shopDao = new ShopDaoImpl();
+    private final ShopDao shopDao;
+
+    public SupplyHandler(ShopDao shopDao) {
+        this.shopDao = shopDao;
+    }
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
