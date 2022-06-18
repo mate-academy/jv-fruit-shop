@@ -5,18 +5,16 @@ import core.basesyntax.dao.ShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.LineParserService;
+import core.basesyntax.service.OperationService;
 import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.LineParserServiceImpl;
+import core.basesyntax.service.impl.OperationServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseHandler;
 import core.basesyntax.strategy.ReturnHandler;
-import core.basesyntax.strategy.Strategy;
-import core.basesyntax.strategy.StrategyImpl;
 import core.basesyntax.strategy.SupplyHandler;
 import java.util.HashMap;
 import java.util.List;
@@ -38,10 +36,8 @@ public class Main {
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> infoFromFile = fileReaderService.readFile(INPUT_FILE_PATH);
-        LineParserService fruitParse = new LineParserServiceImpl();
-        List<FruitTransaction> lineInfo = fruitParse.parse(infoFromFile);
-        Strategy strategy = new StrategyImpl(operationHandler);
-        lineInfo.forEach(p -> strategy.get(p.getOperation()).handle(p));
+        OperationService operationService = new OperationServiceImpl();
+        operationService.action(operationHandler, infoFromFile);
 
         ReportCreatorService reportCreator = new ReportCreatorServiceImpl(shopDao);
         String report = reportCreator.report();
