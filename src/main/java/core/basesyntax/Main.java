@@ -37,9 +37,9 @@ public class Main {
         operationHandler.put(FruitTransaction.Operation.RETURN, new ReturnHandler(shopDao));
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> readFromFile = fileReaderService.readFromFile(INPUT_FILE_PATH);
-        LineParserService fruitTParse = new LineParserServiceImpl();
-        List<FruitTransaction> lineInfo = fruitTParse.lineInfo(readFromFile);
+        List<String> infoFromFile = fileReaderService.readFile(INPUT_FILE_PATH);
+        LineParserService fruitParse = new LineParserServiceImpl();
+        List<FruitTransaction> lineInfo = fruitParse.parse(infoFromFile);
         Strategy strategy = new StrategyImpl(operationHandler);
         lineInfo.forEach(p -> strategy.get(p.getOperation()).handle(p));
 

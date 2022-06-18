@@ -13,7 +13,7 @@ public class LineParserServiceImpl implements LineParserService {
     private static final String SEPARATOR = ",";
 
     @Override
-    public List<FruitTransaction> lineInfo(List<String> lines) {
+    public List<FruitTransaction> parse(List<String> lines) {
         lines.remove(INDEX_ZERO);
         return lines.stream()
                 .map(l -> l.split(SEPARATOR))
