@@ -11,7 +11,7 @@ public class CsvWriterImpl implements  CsvWriter {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));) {
             bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file \"" + file + "\"", e);
+            throw new RuntimeException("Can't write to file \"" + file + "\"", e);
         }
     }
 }
