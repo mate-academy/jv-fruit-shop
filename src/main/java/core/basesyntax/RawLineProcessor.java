@@ -21,7 +21,8 @@ public class RawLineProcessor {
             Fruit fruit = transaction.getFruit();
             Integer quantity = transaction.getQuantity();
 
-            OperationHandler operationHandler = OperationStrategyImpl.getOperationHandlersMap()
+            OperationStrategyImpl operationStrategy = new OperationStrategyImpl();
+            OperationHandler operationHandler = operationStrategy.getOperationHandlersMap()
                     .get(operation);
             operationHandler.processOperation(operation, fruit, quantity);
             }
