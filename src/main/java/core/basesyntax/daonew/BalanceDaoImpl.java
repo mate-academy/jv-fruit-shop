@@ -1,9 +1,8 @@
-package core.basesyntax.Dao;
+package core.basesyntax.daonew;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Product;
 import core.basesyntax.model.Transaction;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.BalanceDaoImpl;
+import core.basesyntax.daonew.BalanceDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.BalanceService;

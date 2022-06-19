@@ -1,7 +1,6 @@
-package core.basesyntax.Dao;
+package core.basesyntax.daonew;
 
 import core.basesyntax.model.Product;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +15,7 @@ public class PivotDaoImpl implements PivotDao {
         Path filePath = Path.of(fileName);
         String header = "product,quantity";
         try (FileWriter fileWriter = new FileWriter(filePath.toFile());
-             PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                PrintWriter printWriter = new PrintWriter(fileWriter)) {
             printWriter.printf(header + System.lineSeparator());
             for (String str : stringList) {
                 printWriter.printf(str + System.lineSeparator());
