@@ -1,7 +1,7 @@
 package core.basesyntax.service.handlers;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.Transaction;
 
 public interface OperationStrategy {
-    OperationHandler get(Operation operation);
+    OperationHandler get(Transaction.Operation operation);
 }

@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.service.CsvReaderImpl;
 import core.basesyntax.service.CsvWriterImpl;
+import core.basesyntax.service.TransactionParser;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,9 +11,9 @@ public class Main {
         CsvReaderImpl csvReader = new CsvReaderImpl();
         String fileContent = csvReader.readFile("src/main/java/core/basesyntax"
                 + "/resources/Input.csv");
-        RawLineProcessor rawLineProcessor = new RawLineProcessor();
+        CsvWriterImpl.TransactionProcessor rawLineProcessor = new CsvWriterImpl.TransactionProcessor();
         rawLineProcessor.fileToMap(fileContent);
-        ReportFormatter reportFormatter = new ReportFormatter();
+        TransactionParser.ReportFormatter reportFormatter = new TransactionParser.ReportFormatter();
         String report = reportFormatter.formatReportAsCsvString();
         CsvWriterImpl csvWriter = new CsvWriterImpl();
         csvWriter.generateCsvReport(reportPath, report);
