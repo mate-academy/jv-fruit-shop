@@ -5,9 +5,8 @@ import core.basesyntax.storage.Storage;
 
 public class ReturnFruitOperatin implements FruitOperation {
     @Override
-    public boolean operate(Fruit fruit) {
+    public void operate(Fruit fruit) {
         Integer currentBalance = Storage.fruitStorage.get(fruit.getName());
         Storage.fruitStorage.put(fruit.getName(), currentBalance + fruit.getQuantity());
-        return true;
     }
 }

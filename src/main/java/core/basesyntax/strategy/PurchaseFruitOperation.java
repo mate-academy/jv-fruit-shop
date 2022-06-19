@@ -5,12 +5,11 @@ import core.basesyntax.storage.Storage;
 
 public class PurchaseFruitOperation implements FruitOperation {
     @Override
-    public boolean operate(Fruit fruit) {
+    public void operate(Fruit fruit) {
         Integer currentBalance = Storage.fruitStorage.get(fruit.getName());
         if (currentBalance < fruit.getQuantity()) {
             throw new RuntimeException("Insufficient product to buy:" + fruit.getName());
         }
         Storage.fruitStorage.put(fruit.getName(), currentBalance - fruit.getQuantity());
-        return true;
     }
 }
