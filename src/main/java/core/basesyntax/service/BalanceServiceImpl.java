@@ -1,10 +1,9 @@
 package core.basesyntax.service;
 
-import core.basesyntax.Dao.PivotDao;
-import core.basesyntax.Dao.PivotDaoImpl;
+import core.basesyntax.dao.PivotDao;
+import core.basesyntax.dao.PivotDaoImpl;
 import core.basesyntax.model.Product;
 import core.basesyntax.model.Transaction;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

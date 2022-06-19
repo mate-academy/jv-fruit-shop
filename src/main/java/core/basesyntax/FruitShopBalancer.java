@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.Dao.BalanceDaoImpl;
+import core.basesyntax.dao.BalanceDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.BalanceService;
@@ -12,7 +12,6 @@ import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.PurchaseOperationHandler;
 import core.basesyntax.service.operations.ReturnOperationHandler;
 import core.basesyntax.service.operations.SupplyOperationHandler;
-
 import java.util.HashMap;
 import java.util.Map;
 

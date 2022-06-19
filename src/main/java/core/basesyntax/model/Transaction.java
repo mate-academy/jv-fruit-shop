@@ -40,10 +40,10 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "operation=" + operation +
-                ", product=" + product.getType() +
-                ", quantity=" + quantity +
-                '}';
+        return "Transaction{"
+                + "operation=" + operation
+                + ", product=" + product.getType()
+                + ", quantity=" + quantity
+                + '}';
     }
 }
