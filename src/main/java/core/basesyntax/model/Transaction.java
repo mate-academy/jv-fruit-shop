@@ -5,18 +5,10 @@ public class Transaction {
     private Fruit fruit;
     private Integer quantity;
 
-    public Transaction(String transactionString) {
-        if (transactionString.equals("null")) {
-            this.operation = null;
-            this.fruit = null;
-            this.quantity = null;
-            return;
-        }
-
-        String[] splittedCsvLine = transactionString.split(",");
-        this.operation = Operation.getOperationFromString(splittedCsvLine[0]);
-        this.fruit = new Fruit(splittedCsvLine[1]);
-        this.quantity = Integer.valueOf(splittedCsvLine[2]);
+    public Transaction(Operation operation, Fruit fruit, Integer quantity) {
+            this.operation = operation;
+            this.fruit = fruit;
+            this.quantity = quantity;
     }
 
     public Operation getOperation() {
