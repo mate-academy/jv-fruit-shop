@@ -29,9 +29,9 @@ public class FruitShopBalancer {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
-        Storage.transactions = new BalanceDaoImpl().getBalanceFromFile(BALANCE_FILE_NAME);
+        Storage storage = new Storage(new BalanceDaoImpl().getBalanceFromFile(BALANCE_FILE_NAME));
         BalanceService balanceService
-                = new BalanceServiceImpl(Storage.transactions, operationStrategy);
+                = new BalanceServiceImpl(storage.getTransactions(), operationStrategy);
 
         balanceService.exportPivotToFile(PIVOT_FILE_NAME);
     }
