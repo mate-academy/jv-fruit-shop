@@ -1,4 +1,4 @@
-package core.basesyntax.daonew;
+package core.basesyntax.dao;
 
 import core.basesyntax.model.Product;
 import java.io.FileWriter;

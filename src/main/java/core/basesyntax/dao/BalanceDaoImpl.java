@@ -1,4 +1,4 @@
-package core.basesyntax.daonew;
+package core.basesyntax.dao;
 
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Product;
