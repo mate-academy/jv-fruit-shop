@@ -1,5 +1,8 @@
 package core.basesyntax.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Transaction {
 
     public enum Operation {
@@ -23,19 +26,11 @@ public class Transaction {
         }
 
         public static Operation getOperationFromString(String operation) {
-            if (operation.equals("b")) {
-                return BALANCE;
+            Map<String, Operation> operationMap = new HashMap<>();
+            for (Operation enumOperation : Operation.values()) {
+                operationMap.put(enumOperation.getOperation(), enumOperation);
             }
-            if (operation.equals("s")) {
-                return SUPPLY;
-            }
-            if (operation.equals("p")) {
-                return PURCHASE;
-            }
-            if (operation.equals("r")) {
-                return RETURN;
-            }
-            return null;
+            return operationMap.get(operation);
         }
     }
 
