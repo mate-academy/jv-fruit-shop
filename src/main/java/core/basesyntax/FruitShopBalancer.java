@@ -7,7 +7,11 @@ import core.basesyntax.service.BalanceService;
 import core.basesyntax.service.BalanceServiceImpl;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
-import core.basesyntax.service.operations.*;
+import core.basesyntax.service.operations.BalanceOperationHandler;
+import core.basesyntax.service.operations.OperationHandler;
+import core.basesyntax.service.operations.PurchaseOperationHandler;
+import core.basesyntax.service.operations.ReturnOperationHandler;
+import core.basesyntax.service.operations.SupplyOperationHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,10 +31,9 @@ public class FruitShopBalancer {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         Storage.transactions = new BalanceDaoImpl().getBalanceFromFile(BALANCE_FILE_NAME);
-        BalanceService balanceService = new BalanceServiceImpl(Storage.transactions, operationStrategy);
+        BalanceService balanceService
+                = new BalanceServiceImpl(Storage.transactions, operationStrategy);
 
         balanceService.exportPivotToFile(PIVOT_FILE_NAME);
     }
-
-
 }
