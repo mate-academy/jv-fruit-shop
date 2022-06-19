@@ -4,9 +4,9 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 
 public class TransactionParserImpl implements TransactionParser {
-    final int OPERATION_INDEX = 0;
-    final int FRUIT_INDEX = 1;
-    final int QUANTITY_INDEX = 2;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     public Transaction.Operation getOperation(String line) {
         if (line.equals("null")) {

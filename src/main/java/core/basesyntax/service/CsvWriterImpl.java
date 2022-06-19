@@ -4,13 +4,12 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.handlers.OperationHandler;
 import core.basesyntax.service.handlers.OperationStrategyImpl;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CsvWriterImpl implements  CsvWriter {
+public class CsvWriterImpl implements CsvWriter {
     public void generateCsvReport(String pathname, String report) {
         File file = new File(pathname);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));) {
@@ -37,7 +36,7 @@ public class CsvWriterImpl implements  CsvWriter {
                 OperationStrategyImpl operationStrategy = new OperationStrategyImpl();
                 OperationHandler operationHandler = operationStrategy.get(operation);
                 operationHandler.processOperation(operation, fruit, quantity);
-                }
             }
         }
+    }
 }
