@@ -15,10 +15,6 @@ import core.basesyntax.service.impl.FruitShopImpl;
 import core.basesyntax.service.impl.OperationImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
-import core.basesyntax.strategy.impl.PurchaseOperationHandlerImpl;
-import core.basesyntax.strategy.impl.ReturnOperationHandlerImpl;
-import core.basesyntax.strategy.impl.SupplyOperationHandlerImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,17 +25,15 @@ public class Main {
 
     public static void main(String[] args) {
         Map<OperationWithFruit, OperationHandler> openFilesHandlerMap = new HashMap<>();
-        openFilesHandlerMap.put(OperationWithFruit.BALANCE, new BalanceOperationHandlerImpl());
-        openFilesHandlerMap.put(OperationWithFruit.PURCHASE, new PurchaseOperationHandlerImpl());
-        openFilesHandlerMap.put(OperationWithFruit.SUPPLY, new SupplyOperationHandlerImpl());
-        openFilesHandlerMap.put(OperationWithFruit.RETURN, new ReturnOperationHandlerImpl());
         FruitParse parseService = new FruitParseImpl();
         FileReader fileReaderService = new FileReaderImpl();
         List<String> input = fileReaderService.getDataFromFile(INPUT_FILE);
         List<TransactionInfo> fruitTransactions = parseService.parse(input);
+
         Operation operationService = new OperationImpl(openFilesHandlerMap);
         FruitShop fruitShopService = new FruitShopImpl(operationService);
         fruitShopService.process(fruitTransactions);
+
         ReportCreator reportService = new ReportCreatorImpl();
         FileWriter fileWriterService = new FileWriterImpl();
         fileWriterService.writerDataToFile(REPORT_FILE, reportService.createReport());
