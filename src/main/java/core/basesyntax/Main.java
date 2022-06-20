@@ -5,19 +5,19 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.BalanceService;
 import core.basesyntax.service.BalanceServiceImpl;
-import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.OperationStrategyImpl;
-import core.basesyntax.service.operations.BalanceOperationHandler;
-import core.basesyntax.service.operations.OperationHandler;
-import core.basesyntax.service.operations.PurchaseOperationHandler;
-import core.basesyntax.service.operations.ReturnOperationHandler;
-import core.basesyntax.service.operations.SupplyOperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.operations.BalanceOperationHandler;
+import core.basesyntax.strategy.operations.OperationHandler;
+import core.basesyntax.strategy.operations.PurchaseOperationHandler;
+import core.basesyntax.strategy.operations.ReturnOperationHandler;
+import core.basesyntax.strategy.operations.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FruitShopBalancer {
-    private static final String BALANCE_FILE_NAME = "database.csv";
-    private static final String PIVOT_FILE_NAME = "pivot.csv";
+public class Main {
+    private static final String BALANCE_FILE_NAME = "src/main/resources/database.csv";
+    private static final String PIVOT_FILE_NAME = "src/main/resources/pivot.csv";
 
     public static void main(String[] args) {
 

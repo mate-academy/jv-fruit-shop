@@ -4,6 +4,8 @@ import core.basesyntax.dao.PivotDao;
 import core.basesyntax.dao.PivotDaoImpl;
 import core.basesyntax.model.Product;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.strategy.OperationStrategy;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
