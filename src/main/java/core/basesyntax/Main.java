@@ -24,9 +24,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_ACTION_PER_DAY = "src" + File.separator + "main" + File.separator
+    private static final String FILE_ACTION_PER_DAY = "src"
+            + File.separator + "main" + File.separator
             + "resources" + File.separator + "ActionsPerDay.csv";
-    private static final String FILE_REPORT_PER_DAY = "src" + File.separator + "main" + File.separator
+    private static final String FILE_REPORT_PER_DAY = "src"
+            + File.separator + "main" + File.separator
             + "resources" + File.separator + "ReportPerDay.csv";
     private static final Map<String, ActionType> mapStrategy = new HashMap<>();
 
