@@ -14,7 +14,7 @@ public class ReadFileImpl implements ReadFile {
         try {
             lines = Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
-            throw new RuntimeException("Cant read file", e);
+            throw new RuntimeException("Cant read file" + fileName, e);
         }
         return lines;
     }

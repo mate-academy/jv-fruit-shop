@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class ActionsDaoImpl implements ActionsDao {
-    private static final int HEAD_OF_FILE = 0;
 
     @Override
     public void add(String fruit, Integer amount) {

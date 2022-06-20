@@ -12,7 +12,7 @@ public class WriteToFileImpl implements WriteToFile {
         try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write report to file", e);
+            throw new RuntimeException("Can't write report to file" + fileName, e);
         }
     }
 }

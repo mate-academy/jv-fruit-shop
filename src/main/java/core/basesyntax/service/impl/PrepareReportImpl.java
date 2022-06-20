@@ -16,6 +16,5 @@ public class PrepareReportImpl implements PrepareReport {
             builder.append(System.lineSeparator() + entry.getKey() + "," + entry.getValue());
         }
         return builder.toString();
-
     }
 }

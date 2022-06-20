@@ -1,8 +1,8 @@
 package core.basesyntax.service.actiontype;
 
-public class ActionStrategyS implements ActionType {
+public class ActionStrategyBalance implements ActionType {
     @Override
     public int getNewValue(int value) {
-        return value;
+        return 0;
     }
 }

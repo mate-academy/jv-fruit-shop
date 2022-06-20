@@ -2,18 +2,18 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.ActionsDao;
 import core.basesyntax.dao.ActionsDaoImpl;
-import core.basesyntax.model.Model;
+import core.basesyntax.modelfruit.ModelFruit;
 import core.basesyntax.service.ActionStrategy;
-import core.basesyntax.service.GetBalance;
+import core.basesyntax.service.Balance;
 import java.util.List;
 
-public class GetBalancePerDay implements GetBalance {
+public class BalancePerDay implements Balance {
     private ActionsDao actionsDao = new ActionsDaoImpl();
 
     @Override
-    public void calcBalance(List<Model> fruitsMoving, ActionStrategy mapStrategy) {
+    public void calculateBalance(List<ModelFruit> fruitsMoving, ActionStrategy mapStrategy) {
         int deltaValue;
-        for (Model fruit : fruitsMoving) {
+        for (ModelFruit fruit : fruitsMoving) {
             deltaValue = mapStrategy.get(fruit.getTypeAction()).getNewValue(fruit.getAmount());
             if (!actionsDao.isPresentFruit(fruit.getName())) {
                 actionsDao.add(fruit.getName(), fruit.getAmount());
