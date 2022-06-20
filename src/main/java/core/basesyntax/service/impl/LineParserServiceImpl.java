@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.LineParserService;
 import java.util.List;
@@ -21,7 +20,7 @@ public class LineParserServiceImpl implements LineParserService {
                     FruitTransaction fruitTransaction = new FruitTransaction();
                     fruitTransaction.setOperation(FruitTransaction.Operation
                             .getOperation(s[INDEX_ZERO]));
-                    fruitTransaction.setFruit(new Fruit(s[INDEX_FOR_FRUIT]));
+                    fruitTransaction.setFruit((s[INDEX_FOR_FRUIT]));
                     fruitTransaction.setQuantity(Integer.parseInt(s[INDEX_FOR_AMOUNT]));
                     return fruitTransaction;
                 })

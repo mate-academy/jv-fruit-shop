@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.ShopDao;
 import core.basesyntax.dao.ShopDaoImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.OperationService;
@@ -10,7 +11,14 @@ import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.OperationServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
+import core.basesyntax.strategy.BalanceHandler;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.PurchaseHandler;
+import core.basesyntax.strategy.ReturnHandler;
+import core.basesyntax.strategy.SupplyHandler;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH =
@@ -20,10 +28,16 @@ public class Main {
 
     public static void main(String[] args) {
         ShopDao shopDao = new ShopDaoImpl();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
+        operationHandler.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(shopDao));
+        operationHandler.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(shopDao));
+        operationHandler.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(shopDao));
+        operationHandler.put(FruitTransaction.Operation.RETURN, new ReturnHandler(shopDao));
+
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> infoFromFile = fileReaderService.readFile(INPUT_FILE_PATH);
         OperationService operationService = new OperationServiceImpl();
-        operationService.action(infoFromFile);
+        operationService.action(operationHandler, infoFromFile);
 
         ReportCreatorService reportCreator = new ReportCreatorServiceImpl(shopDao);
         String report = reportCreator.report();

@@ -18,7 +18,7 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
     @Override
     public String report() {
         return HEAD + LINE_SEPARATOR + shopDao.getFruits().entrySet().stream()
-                .map(i -> i.getKey().getName()
+                .map(i -> i.getKey()
                         + SEPARATOR + i.getValue()
                         + System.lineSeparator())
                 .collect(Collectors.joining());
