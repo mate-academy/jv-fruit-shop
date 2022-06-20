@@ -5,7 +5,7 @@ import core.basesyntax.service.OperationSupplier;
 import core.basesyntax.strategy.BalanceFruitOperation;
 import core.basesyntax.strategy.FruitOperation;
 import core.basesyntax.strategy.PurchaseFruitOperation;
-import core.basesyntax.strategy.ReturnFruitOperatin;
+import core.basesyntax.strategy.ReturnFruitOperation;
 import core.basesyntax.strategy.SupplyFruitOperation;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class OperationSupplierImpl implements OperationSupplier {
         operationMap.put("b", new BalanceFruitOperation());
         operationMap.put("s", new SupplyFruitOperation());
         operationMap.put("p", new PurchaseFruitOperation());
-        operationMap.put("r", new ReturnFruitOperatin());
+        operationMap.put("r", new ReturnFruitOperation());
     }
 
     @Override

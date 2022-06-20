@@ -1,16 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FileReading;
-import core.basesyntax.service.FileWriting;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FruitBuilder;
 import core.basesyntax.service.OperationSupplier;
-import core.basesyntax.service.Report;
-import core.basesyntax.service.impl.FileReadingImpl;
-import core.basesyntax.service.impl.FileWritingImpl;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.FruitBuilderImpl;
 import core.basesyntax.service.impl.OperationSupplierImpl;
-import core.basesyntax.service.impl.ReportImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import java.util.List;
 
 public class Main {
@@ -18,8 +18,8 @@ public class Main {
     private static final String PATH_OF_REPORT_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        FileReading fileReading = new FileReadingImpl();
-        List<String> readFromFile = fileReading.readFromFile(PATH_OF_INPUT_FILE);
+        FileReader fileReader = new FileReaderImpl();
+        List<String> readFromFile = fileReader.readFromFile(PATH_OF_INPUT_FILE);
 
         FruitBuilder fruitBuilder = new FruitBuilderImpl();
         List<Fruit> fruitList = fruitBuilder.buildFruit(readFromFile);
@@ -27,10 +27,10 @@ public class Main {
         OperationSupplier operationSupplier = new OperationSupplierImpl();
         fruitList.forEach(fruit -> operationSupplier.getOperation(fruit).operate(fruit));
 
-        Report report = new ReportImpl();
+        ReportCreator report = new ReportCreatorImpl();
         String resultReport = report.getReport();
 
-        FileWriting writing = new FileWritingImpl();
+        FileWriter writing = new FileWriterImpl();
         writing.writeToFile(PATH_OF_REPORT_FILE, resultReport);
     }
 }
