@@ -6,6 +6,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface OperationService {
-    void action(Map<FruitTransaction.Operation, OperationHandler> operationHandler,
-                List<String> infoFromFile);
+    void action(List<String> infoFromFile);
 }

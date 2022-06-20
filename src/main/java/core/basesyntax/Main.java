@@ -28,16 +28,10 @@ public class Main {
 
     public static void main(String[] args) {
         ShopDao shopDao = new ShopDaoImpl();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
-        operationHandler.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(shopDao));
-        operationHandler.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(shopDao));
-        operationHandler.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(shopDao));
-        operationHandler.put(FruitTransaction.Operation.RETURN, new ReturnHandler(shopDao));
-
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> infoFromFile = fileReaderService.readFile(INPUT_FILE_PATH);
         OperationService operationService = new OperationServiceImpl();
-        operationService.action(operationHandler, infoFromFile);
+        operationService.action(infoFromFile);
 
         ReportCreatorService reportCreator = new ReportCreatorServiceImpl(shopDao);
         String report = reportCreator.report();
