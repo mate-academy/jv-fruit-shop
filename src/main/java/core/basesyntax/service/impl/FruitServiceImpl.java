@@ -2,15 +2,19 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.OperationWithFruit;
 import core.basesyntax.model.TransactionInfo;
-import core.basesyntax.service.FruitShop;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Operation;
 import java.util.List;
 
-public class FruitShopImpl implements FruitShop {
+public class FruitServiceImpl implements FruitService {
     private final Operation operationService;
 
-    public FruitShopImpl(Operation operationService) {
+    public FruitServiceImpl(Operation operationService) {
         this.operationService = operationService;
+    }
+
+    public Operation getOperationService() {
+        return operationService;
     }
 
     @Override

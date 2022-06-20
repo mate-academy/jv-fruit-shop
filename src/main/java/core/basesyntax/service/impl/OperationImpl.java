@@ -1,28 +1,18 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.OperationWithFruit;
-import core.basesyntax.service.Operation;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
-import core.basesyntax.strategy.impl.PurchaseOperationHandlerImpl;
-import core.basesyntax.strategy.impl.ReturnOperationHandlerImpl;
-import core.basesyntax.strategy.impl.SupplyOperationHandlerImpl;
-import java.util.HashMap;
+import core.basesyntax.strategy.Operation;
 import java.util.Map;
 
-public class OperationImpl implements Operation {
-    private final Map<OperationWithFruit, OperationHandler> handlerMap;
+public class OperationImpl implements core.basesyntax.service.Operation {
+    private final Map<OperationWithFruit, Operation> handlerMap;
 
-    public OperationImpl(Map<OperationWithFruit, OperationHandler> openFilesHandlerMap) {
-        handlerMap = new HashMap<>();
-        handlerMap.put(OperationWithFruit.BALANCE, new BalanceOperationHandlerImpl());
-        handlerMap.put(OperationWithFruit.PURCHASE, new PurchaseOperationHandlerImpl());
-        handlerMap.put(OperationWithFruit.SUPPLY, new SupplyOperationHandlerImpl());
-        handlerMap.put(OperationWithFruit.RETURN, new ReturnOperationHandlerImpl());
+    public OperationImpl(Map<OperationWithFruit, Operation> openFilesHandlerMap) {
+        this.handlerMap = openFilesHandlerMap;
     }
 
     @Override
-    public OperationHandler getOperationHandler(OperationWithFruit operation) {
+    public Operation getOperationHandler(OperationWithFruit operation) {
         return handlerMap.get(operation);
     }
 }
