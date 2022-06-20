@@ -5,9 +5,9 @@ import core.basesyntax.service.StorageStrategy;
 import java.util.List;
 
 public class StorageStrategyImpl implements StorageStrategy {
-    private final int strategyCell = 0;
-    private final int fruitCell = 1;
-    private final int fruitAmountCell = 2;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int AMOUNT_INDEX = 2;
     private OperationStrategy operationStrategy;
 
     public StorageStrategyImpl(OperationStrategy operationStrategy) {
@@ -17,8 +17,8 @@ public class StorageStrategyImpl implements StorageStrategy {
     @Override
     public void saveAll(List<String[]> fruits) {
         for (String[] line: fruits) {
-            operationStrategy.getOperationHandler(line[strategyCell])
-                    .execute(line[fruitCell], Integer.parseInt(line[fruitAmountCell]));
+            operationStrategy.getOperationHandler(line[OPERATION_INDEX])
+                    .execute(line[FRUIT_INDEX], Integer.parseInt(line[AMOUNT_INDEX]));
         }
     }
 }
