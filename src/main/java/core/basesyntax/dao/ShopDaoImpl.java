@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.dp.Shop;
+import core.basesyntax.db.Shop;
 import java.util.Map;
 
 public class ShopDaoImpl implements ShopDao {
@@ -13,5 +13,4 @@ public class ShopDaoImpl implements ShopDao {
     public Map<String, Integer> getFruits() {
         return Shop.fruits;
     }
-
 }

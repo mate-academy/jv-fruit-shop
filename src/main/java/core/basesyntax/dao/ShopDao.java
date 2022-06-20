@@ -7,5 +7,4 @@ public interface ShopDao {
     void add(String fruit, int amount);
 
     Map<String, Integer> getFruits();
-
 }

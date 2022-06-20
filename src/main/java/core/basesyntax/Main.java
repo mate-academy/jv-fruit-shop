@@ -5,10 +5,12 @@ import core.basesyntax.dao.ShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.OperationMap;
 import core.basesyntax.service.OperationService;
 import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.OperationMapImpl;
 import core.basesyntax.service.impl.OperationServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.strategy.BalanceHandler;
@@ -22,9 +24,9 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH =
-            "src/main/java/core/basesyntax/resources/fruit_shop_input_file.csv";
+            "src/main/resources/fruit_shop_input_file.csv";
     private static final String REPORT_FILE_PATH =
-            "src/main/java/core/basesyntax/resources/fruit_shop_report.csv";
+            "src/main/resources/fruit_shop_report.csv";
 
     public static void main(String[] args) {
         ShopDao shopDao = new ShopDaoImpl();
@@ -36,14 +38,15 @@ public class Main {
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> infoFromFile = fileReaderService.readFile(INPUT_FILE_PATH);
-        OperationService operationService = new OperationServiceImpl();
-        operationService.action(operationHandler, infoFromFile);
+
+        OperationMap operationMap = new OperationMapImpl(operationHandler);
+        OperationService operationService = new OperationServiceImpl(operationMap);
+        operationService.action(infoFromFile);
 
         ReportCreatorService reportCreator = new ReportCreatorServiceImpl(shopDao);
-        String report = reportCreator.report();
+        String report = reportCreator.createReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.write(REPORT_FILE_PATH, report);
     }
 }
-
