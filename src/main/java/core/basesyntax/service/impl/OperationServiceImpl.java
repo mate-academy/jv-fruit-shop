@@ -12,7 +12,6 @@ import core.basesyntax.strategy.ReturnHandler;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.StrategyImpl;
 import core.basesyntax.strategy.SupplyHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
