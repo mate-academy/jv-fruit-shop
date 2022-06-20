@@ -21,13 +21,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
-        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
-
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl();
 
         Storage storage = new Storage(new BalanceDaoImpl().getBalanceFromFile(BALANCE_FILE_NAME));
         BalanceService balanceService
