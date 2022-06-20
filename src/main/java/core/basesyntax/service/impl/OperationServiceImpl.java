@@ -28,10 +28,6 @@ public class OperationServiceImpl implements OperationService {
         LineParserService fruitParse = new LineParserServiceImpl();
         List<FruitTransaction> lineInfo = fruitParse.parse(infoFromFile);
         Strategy strategy = new StrategyImpl(operationHandler);
-        for (int i = 0; i < lineInfo.size(); i++) {
-            FruitTransaction.Operation operation = lineInfo.get(i).getOperation();
-            OperationHandler handler = strategy.get(operation);
-            handler.handle(lineInfo.get(i));
-        }
+        lineInfo.forEach(p -> strategy.get(p.getOperation()).handle(p));
     }
 }
