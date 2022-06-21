@@ -1,7 +1,8 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.service.TransactionParser;
 
 public class TransactionParserImpl implements TransactionParser {
     private static final int OPERATION_INDEX = 0;
@@ -13,7 +14,7 @@ public class TransactionParserImpl implements TransactionParser {
             return null;
         }
         String[] splittedCsvLine = line.split(",");
-        return Transaction.Operation.getOperationFromString(splittedCsvLine[OPERATION_INDEX]);
+        return Transaction.Operation.getOperation(splittedCsvLine[OPERATION_INDEX]);
     }
 
     public Fruit getFruit(String line) {

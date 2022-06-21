@@ -2,8 +2,40 @@ package core.basesyntax.model;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class Transaction {
+    private Operation abbreviature;
+    private Fruit fruit;
+    private Integer quantity;
+
+    public Transaction(Operation operation, Fruit fruit, Integer quantity) {
+        this.abbreviature = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
+    public Operation getAbbreviature() {
+        return abbreviature;
+    }
+
+    public void setAbbreviature(Operation abbreviature) {
+        this.abbreviature = abbreviature;
+    }
+
+    public Fruit getFruit() {
+        return fruit;
+    }
+
+    public void setFruit(Fruit fruit) {
+        this.fruit = fruit;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
     public enum Operation {
         BALANCE("b"),
@@ -25,46 +57,12 @@ public class Transaction {
             this.operation = operation;
         }
 
-        public static Operation getOperationFromString(String operation) {
+        public static Operation getOperation(String abbreviature) {
             Map<String, Operation> operationMap = new HashMap<>();
             for (Operation enumOperation : Operation.values()) {
                 operationMap.put(enumOperation.getOperation(), enumOperation);
             }
-            return operationMap.get(operation);
+            return operationMap.get(abbreviature);
         }
-    }
-
-    private Operation operation;
-    private Fruit fruit;
-    private Integer quantity;
-
-    public Transaction(Operation operation, Fruit fruit, Integer quantity) {
-        this.operation = operation;
-        this.fruit = fruit;
-        this.quantity = quantity;
-    }
-
-    public Operation getOperation() {
-        return operation;
-    }
-
-    public void setOperation(Operation operation) {
-        this.operation = operation;
-    }
-
-    public Fruit getFruit() {
-        return fruit;
-    }
-
-    public void setFruit(Fruit fruit) {
-        this.fruit = fruit;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 }

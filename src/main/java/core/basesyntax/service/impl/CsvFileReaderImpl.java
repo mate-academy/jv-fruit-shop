@@ -1,4 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
+
+import core.basesyntax.service.CsvFileReader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CsvReaderImpl implements CsvReader {
+public class CsvFileReaderImpl implements CsvFileReader {
     public String readFile(String filePath) {
         File inputFile = new File(filePath);
         StringBuilder stringBuilder = new StringBuilder();

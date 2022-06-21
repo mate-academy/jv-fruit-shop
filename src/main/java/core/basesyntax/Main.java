@@ -1,22 +1,22 @@
 package core.basesyntax;
 
-import core.basesyntax.service.CsvReaderImpl;
-import core.basesyntax.service.CsvWriterImpl;
+import core.basesyntax.service.impl.CsvFileReaderImpl;
+import core.basesyntax.service.impl.CsvFileWriterImpl;
 import core.basesyntax.service.TransactionParser;
 
 public class Main {
     public static void main(String[] args) {
 
         String reportPath = "src/main/java/core/basesyntax/resources/Report.csv";
-        CsvReaderImpl csvReader = new CsvReaderImpl();
+        CsvFileReaderImpl csvReader = new CsvFileReaderImpl();
         String fileContent = csvReader.readFile("src/main/java/core/basesyntax"
                 + "/resources/Input.csv");
-        CsvWriterImpl.TransactionProcessor rawLineProcessor = new CsvWriterImpl
+        CsvFileWriterImpl.TransactionProcessor rawLineProcessor = new CsvFileWriterImpl
                                                                 .TransactionProcessor();
         rawLineProcessor.fileToMap(fileContent);
         TransactionParser.ReportFormatter reportFormatter = new TransactionParser.ReportFormatter();
         String report = reportFormatter.formatReportAsCsvString();
-        CsvWriterImpl csvWriter = new CsvWriterImpl();
-        csvWriter.generateCsvReport(reportPath, report);
+        CsvFileWriterImpl csvWriter = new CsvFileWriterImpl();
+        csvWriter.writeToFile(reportPath, report);
     }
 }
