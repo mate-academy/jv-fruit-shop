@@ -1,5 +1,7 @@
 package servicecsv;
 
+import java.util.List;
+
 public interface FileWriterService {
-    void writeToFile(String pathName, String data);
+    void writeToFile(String pathName, List<String> data);
 }

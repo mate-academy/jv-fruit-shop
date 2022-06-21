@@ -57,6 +57,6 @@ public class Main {
         System.out.println(listOfFruits);
         System.out.println(fruitsDao.getCurrentFruitAmount());
         fileWriterService.writeToFile(
-                REPORT_PATH, String.valueOf(listOfFruits));
+                REPORT_PATH, listOfFruits);
     }
 }
