@@ -2,6 +2,7 @@ package core.basesyntax.model;
 
 import java.util.HashMap;
 import java.util.Map;
+
 public class Transaction {
     private Operation abbreviature;
     private Fruit fruit;
@@ -49,16 +50,16 @@ public class Transaction {
             return operation;
         }
 
-        public void setOperation(String operation) {
-            this.operation = operation;
-        }
-
         public static Operation getOperation(String abbreviature) {
             Map<String, Operation> operationMap = new HashMap<>();
             for (Operation enumOperation : Operation.values()) {
                 operationMap.put(enumOperation.getOperation(), enumOperation);
             }
             return operationMap.get(abbreviature);
+        }
+
+        public void setOperation(String operation) {
+            this.operation = operation;
         }
     }
 }

@@ -11,16 +11,15 @@ import core.basesyntax.service.impl.TransactionProcessorImpl;
 public class Main {
     public static void main(String[] args) {
 
-        String reportPath = "src/main/java/core/basesyntax/resources/Report.csv";
-        CsvFileReaderImpl csvReader = new CsvFileReaderImpl();
-        String fileContent = csvReader.readFile("src/main/java/core/basesyntax"
+        CsvFileReaderImpl csvFileReader = new CsvFileReaderImpl();
+        String fileContent = csvFileReader.readFile("src/main/java/core/basesyntax"
                 + "/resources/Input.csv");
         TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
         transactionProcessor.fileToMap(fileContent);
-
         ReportFormatter reportFormatter = new ReportFormatterImpl();
         String report = reportFormatter.formatReportAsCsvString();
         CsvFileWriter csvWriter = new CsvFileWriterImpl();
+        String reportPath = "src/main/java/core/basesyntax/resources/Report.csv";
         csvWriter.writeToFile(reportPath, report);
     }
 }
