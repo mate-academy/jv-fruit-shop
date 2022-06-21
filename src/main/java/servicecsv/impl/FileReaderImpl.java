@@ -1,11 +1,10 @@
-package serviceCSV.impl;
-
-import serviceCSV.FileReaderService;
+package servicecsv.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import servicecsv.FileReaderService;
 
 public class FileReaderImpl implements FileReaderService {
     @Override

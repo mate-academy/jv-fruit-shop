@@ -1,8 +1,8 @@
-package Strategy;
+package strategy;
 
 import model.FruitTransaction;
 import service.FruitHandler;
 
 public interface OperationStrategy {
-    FruitHandler get (FruitTransaction.Operation operation);
+    FruitHandler get(FruitTransaction.Operation operation);
 }

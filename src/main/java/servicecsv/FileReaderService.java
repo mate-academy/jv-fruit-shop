@@ -1,4 +1,4 @@
-package serviceCSV;
+package servicecsv;
 
 import java.util.List;
 

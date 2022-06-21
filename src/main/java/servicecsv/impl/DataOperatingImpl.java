@@ -1,12 +1,11 @@
-package serviceCSV.impl;
-
-import Strategy.TransactionStrategy;
-import model.FruitTransaction;
-import serviceCSV.DataOperating;
+package servicecsv.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import model.FruitTransaction;
+import servicecsv.DataOperating;
+import strategy.TransactionStrategy;
 
 public class DataOperatingImpl implements DataOperating {
     private TransactionStrategy transactionStrategy;

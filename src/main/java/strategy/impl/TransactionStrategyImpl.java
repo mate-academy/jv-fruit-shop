@@ -1,9 +1,8 @@
-package Strategy.Impl;
-
-import Strategy.TransactionStrategy;
-import model.FruitTransaction;
+package strategy.impl;
 
 import java.util.Map;
+import model.FruitTransaction;
+import strategy.TransactionStrategy;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
     private Map<String, FruitTransaction.Operation> operationMap;
