@@ -2,10 +2,12 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.handlers.OperationHandler;
 import core.basesyntax.service.handlers.OperationStrategyImpl;
 
-public class TransactionProcessorImpl implements TransactionProcessor{
+public class TransactionProcessorImpl implements TransactionProcessor {
+        @Override
         public void fileToMap(String csvString) {
             for (String csvLine: csvString.split("\n")) {
                 if (csvLine.equals("null")) {

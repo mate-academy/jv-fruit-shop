@@ -17,10 +17,6 @@ public class Transaction {
         return abbreviature;
     }
 
-    public void setAbbreviature(Operation abbreviature) {
-        this.abbreviature = abbreviature;
-    }
-
     public Fruit getFruit() {
         return fruit;
     }

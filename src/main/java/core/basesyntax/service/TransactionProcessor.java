@@ -1,4 +1,4 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 public interface TransactionProcessor {
     void fileToMap(String csvString);

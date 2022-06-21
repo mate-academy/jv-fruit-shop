@@ -9,6 +9,7 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
+    @Override
     public Transaction.Operation getOperation(String line) {
         if (line.equals("null")) {
             return null;
@@ -17,6 +18,7 @@ public class TransactionParserImpl implements TransactionParser {
         return Transaction.Operation.getOperation(splittedCsvLine[OPERATION_INDEX]);
     }
 
+    @Override
     public Fruit getFruit(String line) {
         if (line.equals("null")) {
             return null;
@@ -25,6 +27,7 @@ public class TransactionParserImpl implements TransactionParser {
         return new Fruit(splittedCsvLine[FRUIT_INDEX]);
     }
 
+    @Override
     public Integer getQuantity(String line) {
         if (line.equals("null")) {
             return null;
