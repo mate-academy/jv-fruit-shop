@@ -27,5 +27,3 @@ public class LineParserServiceImpl implements LineParserService {
                 .collect(Collectors.toList());
     }
 }
-
-

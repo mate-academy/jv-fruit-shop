@@ -27,5 +27,4 @@ public class ShopServiceImpl implements ShopService {
         }
         return fruits.get(fruit);
     }
-
 }
