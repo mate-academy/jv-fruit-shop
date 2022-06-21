@@ -4,5 +4,5 @@ import java.util.List;
 import model.FruitTransaction;
 
 public interface DataHandler {
-    void handleData(List<FruitTransaction> fruitTransactionList);
+    List<FruitTransaction> handleData(List<String[]> transactions);
 }

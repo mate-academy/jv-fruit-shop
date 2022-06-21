@@ -1,26 +1,24 @@
 package servicecsv.impl;
 
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.Map;
+import java.util.stream.Collectors;
 import model.FruitTransaction;
 import servicecsv.DataHandler;
-import strategy.OperationStrategy;
 
 public class DataHandlerImpl implements DataHandler {
-    private OperationStrategy operationStrategy;
+    private Map<String, FruitTransaction.Operation> transactionHandlerMap;
 
-    public DataHandlerImpl(OperationStrategy operationStrategy) {
-        this.operationStrategy = operationStrategy;
+    public DataHandlerImpl(Map<String, FruitTransaction.Operation> transactionHandlerMap) {
+        this.transactionHandlerMap = transactionHandlerMap;
     }
 
     @Override
-    public void handleData(List<FruitTransaction> fruitTransactionList) {
-        Consumer<FruitTransaction> consumer = fruitTransaction ->
-                operationStrategy
-                        .get(fruitTransaction.getOperation())
-                        .handleOperation(fruitTransaction.getFruit(),
-                                fruitTransaction.getQuantity());
-        fruitTransactionList.forEach(consumer);
+    public List<FruitTransaction> handleData(List<String[]> transactions) {
+        return transactions.stream()
+                .map(i -> new FruitTransaction(
+                        transactionHandlerMap.get(i[0]), i[1], Integer.parseInt(i[2])))
+                .collect(Collectors.toList());
 
     }
 }
