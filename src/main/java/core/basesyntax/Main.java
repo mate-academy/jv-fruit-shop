@@ -1,23 +1,23 @@
 package core.basesyntax;
 
-import core.basesyntax.modelfruit.ModelFruit;
+import core.basesyntax.fruit.Fruit;
 import core.basesyntax.service.ActionStrategy;
-import core.basesyntax.service.Balance;
-import core.basesyntax.service.ParceData;
-import core.basesyntax.service.PrepareReport;
-import core.basesyntax.service.ReadFile;
-import core.basesyntax.service.WriteToFile;
+import core.basesyntax.service.BalanceCounter;
+import core.basesyntax.service.DataParcer;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.ReportMaker;
+import core.basesyntax.service.ReportWriterToFile;
 import core.basesyntax.service.actiontype.ActionStrategyBalance;
 import core.basesyntax.service.actiontype.ActionStrategyProducer;
 import core.basesyntax.service.actiontype.ActionStrategyReturner;
 import core.basesyntax.service.actiontype.ActionStrategySupplier;
 import core.basesyntax.service.actiontype.ActionType;
 import core.basesyntax.service.impl.ActionStrategyImpl;
-import core.basesyntax.service.impl.BalancePerDay;
-import core.basesyntax.service.impl.ParceDataImpl;
-import core.basesyntax.service.impl.PrepareReportImpl;
-import core.basesyntax.service.impl.ReadFileImpl;
-import core.basesyntax.service.impl.WriteToFileImpl;
+import core.basesyntax.service.impl.BalanceCounterImpl;
+import core.basesyntax.service.impl.DataParcerImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.ReportMakerImpl;
+import core.basesyntax.service.impl.ReportWriterToFileImpl;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -39,19 +39,19 @@ public class Main {
         mapStrategy.put("r", new ActionStrategyReturner());
         ActionStrategy actionStrategy = new ActionStrategyImpl(mapStrategy);
 
-        ReadFile readFile = new ReadFileImpl();
+        FileReader readFile = new FileReaderImpl();
         List<String> inputValues = readFile.getData(FILE_ACTION_PER_DAY);
 
-        ParceData parceFruitMoving = new ParceDataImpl();
-        List<ModelFruit> fruitsMoving = parceFruitMoving.getFruitsMoving(inputValues);
+        DataParcer parceFruitMoving = new DataParcerImpl();
+        List<Fruit> fruitsMoving = parceFruitMoving.getFruitsMoving(inputValues);
 
-        Balance getBalance = new BalancePerDay();
+        BalanceCounter getBalance = new BalanceCounterImpl();
         getBalance.calculateBalance(fruitsMoving, actionStrategy);
 
-        PrepareReport prepareReport = new PrepareReportImpl();
+        ReportMaker prepareReport = new ReportMakerImpl();
         String stringReport = prepareReport.makeReport();
 
-        WriteToFile writeToFile = new WriteToFileImpl();
+        ReportWriterToFile writeToFile = new ReportWriterToFileImpl();
         writeToFile.writeReportToFile(stringReport, FILE_REPORT_PER_DAY);
         System.out.println("Report was written to file: " + FILE_REPORT_PER_DAY);
     }

@@ -1,13 +1,13 @@
-package core.basesyntax.modelfruit;
+package core.basesyntax.fruit;
 
 import java.util.Objects;
 
-public class ModelFruit {
+public class Fruit {
     protected String typeAction;
     protected String name;
     protected int amount;
 
-    public ModelFruit(String typeAction, String name, int amount) {
+    public Fruit(String typeAction, String name, int amount) {
         this.typeAction = typeAction;
         this.name = name;
         this.amount = amount;
@@ -33,7 +33,7 @@ public class ModelFruit {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ModelFruit model = (ModelFruit) o;
+        Fruit model = (Fruit) o;
         return amount == model.amount
                 && Objects.equals(typeAction, model.typeAction) && Objects.equals(name, model.name);
     }
@@ -45,7 +45,7 @@ public class ModelFruit {
 
     @Override
     public String toString() {
-        return "ModelFruit{"
+        return "Fruit{"
                 + "typeAction='" + typeAction + '\''
                 + ", name='" + name + '\''
                 + ", amount=" + amount

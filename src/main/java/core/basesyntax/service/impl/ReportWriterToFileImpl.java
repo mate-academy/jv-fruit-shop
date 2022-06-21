@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.WriteToFile;
+import core.basesyntax.service.ReportWriterToFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class WriteToFileImpl implements WriteToFile {
+public class ReportWriterToFileImpl implements ReportWriterToFile {
     @Override
     public void writeReportToFile(String report, String fileName) {
         File file = new File(fileName);
