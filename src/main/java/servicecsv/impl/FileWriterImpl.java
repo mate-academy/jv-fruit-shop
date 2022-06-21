@@ -8,7 +8,6 @@ import java.util.List;
 import servicecsv.FileWriterService;
 
 public class FileWriterImpl implements FileWriterService {
-
     @Override
     public void writeToFile(String pathName, List<String> data) {
         File file = new File(pathName);

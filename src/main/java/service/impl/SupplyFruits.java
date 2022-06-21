@@ -14,7 +14,6 @@ public class SupplyFruits implements FruitHandler {
     public void handleOperation(String fruit, int amount) {
         int amountFromStorage = fruitsDao.get(fruit);
         int newAmountOfStorage = amountFromStorage + amount;
-        fruitsDao.remove(fruit);
         fruitsDao.add(fruit, newAmountOfStorage);
     }
 }

@@ -6,7 +6,6 @@ import java.util.Map;
 import servicecsv.CreateReport;
 
 public class CreateReportImpl implements CreateReport {
-
     @Override
     public List<String> createReport(Map<String, Integer> fruitsAtStorageMap) {
         List<String> report = new ArrayList<>();
