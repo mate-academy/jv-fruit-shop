@@ -5,10 +5,24 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public FruitTransaction(Operation operation, String fruit, int quantity) {
-        this.operation = operation;
+    public FruitTransaction(String letter, String fruit, int quantity) {
+        this.operation = getOperationByLetter(letter);
         this.fruit = fruit;
         this.quantity = quantity;
+    }
+
+    private Operation getOperationByLetter(String letter) {
+        switch (letter) {
+            case "s":
+                return Operation.SUPPLY;
+            case "r":
+                return Operation.RETURN;
+            case "p":
+                return Operation.PURCHASE;
+            case "b":
+            default:
+                return Operation.BALANCE;
+        }
     }
 
     public Operation getOperation() {

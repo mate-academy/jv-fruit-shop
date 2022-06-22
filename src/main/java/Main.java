@@ -4,20 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.FruitHandler;
-import service.impl.BalanceOfFruits;
-import service.impl.PurchaseFruits;
-import service.impl.SupplyFruits;
-import servicecsv.CreateReport;
-import servicecsv.DataHandler;
-import servicecsv.FileReaderService;
-import servicecsv.FileWriterService;
-import servicecsv.impl.CreateReportImpl;
-import servicecsv.impl.DataHandlerImpl;
-import servicecsv.impl.FileReaderImpl;
-import servicecsv.impl.FileWriterImpl;
+import service.CreateReport;
+import service.DataHandler;
+import service.FileReaderService;
+import service.FileWriterService;
+import service.impl.CreateReportImpl;
+import service.impl.DataHandlerImpl;
+import service.impl.FileReaderImpl;
+import service.impl.FileWriterImpl;
+import strategy.FruitHandler;
 import strategy.OperationStrategy;
+import strategy.impl.BalanceOperationHandler;
 import strategy.impl.OperationStrategyImpl;
+import strategy.impl.PurchaseOperationHandler;
+import strategy.impl.ReturnOperationHandler;
+import strategy.impl.SupplyOperationHandler;
 
 public class Main {
     private static final String OPERATION_PATH = "src/main/resources/operation.csv";
@@ -32,16 +33,20 @@ public class Main {
 
         FruitsDao fruitsDao = new FruitsDaoImpl();
         Map<FruitTransaction.Operation, FruitHandler> fruitHandlerMap = new HashMap<>();
-        fruitHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOfFruits(fruitsDao));
-        fruitHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyFruits(fruitsDao));
-        fruitHandlerMap.put(FruitTransaction.Operation.RETURN, new SupplyFruits(fruitsDao));
-        fruitHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseFruits(fruitsDao));
+        fruitHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(fruitsDao));
+        fruitHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(fruitsDao));
+        fruitHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(fruitsDao));
+        fruitHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(fruitsDao));
 
         FileReaderService fileReaderService = new FileReaderImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(fruitHandlerMap);
         DataHandler dataHandler = new DataHandlerImpl(transactionHandlerMap);
         List<FruitTransaction> list =
-                dataHandler.handleData(new FileReaderImpl().readTheFruitsStorage(OPERATION_PATH));
+                dataHandler.handleData(fileReaderService.readTheFruitsStorage(OPERATION_PATH));
         for (FruitTransaction fruitTransaction : list) {
             operationStrategy.get(fruitTransaction.getOperation())
                     .handleOperation(fruitTransaction);

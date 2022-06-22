@@ -1,13 +1,13 @@
-package service.impl;
+package strategy.impl;
 
 import dao.FruitsDao;
 import model.FruitTransaction;
-import service.FruitHandler;
+import strategy.FruitHandler;
 
-public class BalanceOfFruits implements FruitHandler {
+public class BalanceOperationHandler implements FruitHandler {
     private FruitsDao fruitsDao;
 
-    public BalanceOfFruits(FruitsDao fruitsDao) {
+    public BalanceOperationHandler(FruitsDao fruitsDao) {
         this.fruitsDao = fruitsDao;
     }
 

@@ -1,19 +1,24 @@
-package service.impl;
+package strategy.impl;
 
 import dao.FruitsDao;
 import model.FruitTransaction;
-import service.FruitHandler;
+import strategy.FruitHandler;
 
-public class PurchaseFruits implements FruitHandler {
+public class PurchaseOperationHandler implements FruitHandler {
     private FruitsDao fruitsDao;
 
-    public PurchaseFruits(FruitsDao fruitsDao) {
+    public PurchaseOperationHandler(FruitsDao fruitsDao) {
         this.fruitsDao = fruitsDao;
     }
 
     @Override
     public void handleOperation(FruitTransaction transaction) {
         int amountFromStorage = fruitsDao.get(transaction.getFruit());
+        if (amountFromStorage < transaction.getQuantity()) {
+            throw new RuntimeException(
+                    "Not enough fruits for purchasing. Only "
+                            + transaction.getQuantity() + " available");
+        }
         int newAmountFromStorage = amountFromStorage - transaction.getQuantity();
         fruitsDao.add(transaction.getFruit(), newAmountFromStorage);
     }

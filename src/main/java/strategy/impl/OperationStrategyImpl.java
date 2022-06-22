@@ -2,7 +2,7 @@ package strategy.impl;
 
 import java.util.Map;
 import model.FruitTransaction;
-import service.FruitHandler;
+import strategy.FruitHandler;
 import strategy.OperationStrategy;
 
 public class OperationStrategyImpl implements OperationStrategy {
