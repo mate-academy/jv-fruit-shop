@@ -1,9 +1,9 @@
 package dao;
 
-import service.OperationService;
+import model.Fruit;
 
 public interface StorageDao {
-    void addNewFruit(String fruit, int quantity);
+    void addNewFruit(Fruit fruit);
 
-    void changeQuantityOfFruit(String fruit, int quantity, OperationService operation);
+    void changeQuantityOfFruit(Fruit fruit);
 }

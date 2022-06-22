@@ -2,7 +2,7 @@ package service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import model.Fruit;
 import service.ReportGeneratingService;
 
 public class ReportGeneratingServiceImpl implements ReportGeneratingService {
@@ -10,11 +10,11 @@ public class ReportGeneratingServiceImpl implements ReportGeneratingService {
     private static final String CSV_SEPARATOR = ",";
 
     @Override
-    public List<String> createReport(Map<String, Integer> db) {
+    public List<String> createReport(List<Fruit> db) {
         List<String> report = new ArrayList<>();
         report.add(FIRST_LINE_OF_REPORT);
-        for (Map.Entry<String, Integer> entry : db.entrySet()) {
-            report.add(entry.getKey() + CSV_SEPARATOR + entry.getValue());
+        for (Fruit fruit : db) {
+            report.add(fruit.getFruitType() + CSV_SEPARATOR + fruit.getQuantity());
         }
         return report;
     }

@@ -1,13 +1,8 @@
 package service;
 
+import java.util.List;
+import model.Fruit;
+
 public interface ParseDataService {
-    String getOperation();
-
-    String getTypeOfFruit();
-
-    int getQuantityOfFruit();
-
-    void parseString(String s);
-
-    void clear();
+    List<Fruit> parseData(List<String> dataFromFile);
 }

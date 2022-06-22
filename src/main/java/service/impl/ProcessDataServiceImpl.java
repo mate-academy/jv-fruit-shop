@@ -4,25 +4,15 @@ import dao.StorageDao;
 import dao.StorageDaoImpl;
 import db.Storage;
 import java.util.List;
-import java.util.Map;
-import service.ParseDataService;
+import model.Fruit;
 import service.ProcessDataService;
-import strategy.OperationStrategy;
 
 public class ProcessDataServiceImpl implements ProcessDataService {
     @Override
-    public Map<String, Integer> processData(List<String> dataFromFile) {
+    public List<Fruit> processData(List<Fruit> parsedValues) {
         StorageDao storageDao = new StorageDaoImpl();
-        ParseDataService parseDataService = new ParseDataServiceImpl();
-        for (int i = 1; i < dataFromFile.size(); i++) {
-            parseDataService.parseString(dataFromFile.get(i));
-            storageDao
-                    .changeQuantityOfFruit(
-                            parseDataService.getTypeOfFruit(),
-                            parseDataService.getQuantityOfFruit(),
-                            OperationStrategy
-                                    .getOperationServiceStrategy(parseDataService.getOperation()));
-            parseDataService.clear();
+        for (Fruit fruit : parsedValues) {
+            storageDao.changeQuantityOfFruit(fruit);
         }
         return Storage.storage;
     }

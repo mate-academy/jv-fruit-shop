@@ -1,9 +1,8 @@
-package service.impl;
+package strategy;
 
 import java.util.function.IntUnaryOperator;
-import service.OperationService;
 
-public class SupplyOperationService implements OperationService {
+public class ReturnOperationService implements OperationHandler {
     @Override
     public IntUnaryOperator getActionByOperation(int quantity) {
         return x -> x + quantity;

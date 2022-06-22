@@ -1,7 +1,7 @@
-package service;
+package strategy;
 
 import java.util.function.IntUnaryOperator;
 
-public interface OperationService {
+public interface OperationHandler {
     IntUnaryOperator getActionByOperation(int quantity);
 }

@@ -1,23 +1,23 @@
 package dao;
 
 import db.Storage;
-import service.OperationService;
+import model.Fruit;
 
 public class StorageDaoImpl implements StorageDao {
-
     @Override
-    public void addNewFruit(String fruit, int quantity) {
-        Storage.storage.put(fruit, quantity);
+    public void addNewFruit(Fruit fruit) {
+        Storage.storage.add(fruit);
     }
 
     @Override
-    public void changeQuantityOfFruit(String fruit, int quantity, OperationService operation) {
-        if (Storage.storage.get(fruit) == null) {
-            addNewFruit(fruit, quantity);
-            return;
+    public void changeQuantityOfFruit(Fruit fruit) {
+        for (Fruit f : Storage.storage) {
+            if (fruit.getFruitType().equals(f.getFruitType())) {
+                f.setQuantity(fruit.getOperation()
+                        .getActionByOperation(fruit.getQuantity()).applyAsInt(f.getQuantity()));
+                return;
+            }
         }
-        Storage.storage.put(fruit,
-                operation.getActionByOperation(quantity).applyAsInt(Storage.storage.get(fruit)));
+        addNewFruit(fruit);
     }
-
 }

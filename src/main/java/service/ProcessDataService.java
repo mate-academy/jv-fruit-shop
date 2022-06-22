@@ -1,8 +1,8 @@
 package service;
 
 import java.util.List;
-import java.util.Map;
+import model.Fruit;
 
 public interface ProcessDataService {
-    Map<String, Integer> processData(List<String> dataFromFile);
+    List<Fruit> processData(List<Fruit> parsedData);
 }

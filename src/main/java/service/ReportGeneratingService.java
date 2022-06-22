@@ -1,9 +1,9 @@
 package service;
 
 import java.util.List;
-import java.util.Map;
+import model.Fruit;
 
 public interface ReportGeneratingService {
 
-    List<String> createReport(Map<String, Integer> db);
+    List<String> createReport(List<Fruit> db);
 }

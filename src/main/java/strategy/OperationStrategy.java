@@ -1,29 +1,16 @@
 package strategy;
 
-import service.OperationService;
-import service.impl.BalanceOperationService;
-import service.impl.PurchaseOperationService;
-import service.impl.ReturnOperationService;
-import service.impl.SupplyOperationService;
+import java.util.Map;
+import model.Operation;
 
 public class OperationStrategy {
-    private static final String BALANCE = "b";
-    private static final String SUPPLY = "s";
-    private static final String PURCHASE = "p";
-    private static final String RETURN = "r";
+    private static Map<Operation, OperationHandler> operationHandler = null;
 
-    public static OperationService getOperationServiceStrategy(String operation) {
-        switch (operation) {
-            case BALANCE:
-                return new BalanceOperationService();
-            case SUPPLY:
-                return new SupplyOperationService();
-            case PURCHASE:
-                return new PurchaseOperationService();
-            case RETURN:
-                return new ReturnOperationService();
-            default:
-                throw new RuntimeException("Operation: " + operation + " is not supported");
-        }
+    public static void setOperationHandler(Map<Operation, OperationHandler> operationHandler) {
+        OperationStrategy.operationHandler = operationHandler;
+    }
+
+    public static OperationHandler getOperationServiceStrategy(String operation) {
+        return operationHandler.get(Operation.getOperationByName(operation));
     }
 }
