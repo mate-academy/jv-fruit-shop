@@ -1,5 +1,7 @@
 package service;
 
+import model.FruitTransaction;
+
 public interface FruitHandler {
-    void handleOperation(String fruit, int amount);
+    void handleOperation(FruitTransaction transaction);
 }

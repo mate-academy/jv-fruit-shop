@@ -45,7 +45,7 @@ public class Main {
                 dataHandler.handleData(new FileReaderImpl().readTheFruitsStorage(OPERATION_PATH));
         for (FruitTransaction fruitTransaction : list) {
             operationStrategy.get(fruitTransaction.getOperation())
-                    .handleOperation(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+                    .handleOperation(fruitTransaction);
         }
         CreateReport reportCreator = new CreateReportImpl();
         dataHandler.handleData(fileReaderService.readTheFruitsStorage(OPERATION_PATH));

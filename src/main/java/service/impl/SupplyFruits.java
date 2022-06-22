@@ -1,6 +1,7 @@
 package service.impl;
 
 import dao.FruitsDao;
+import model.FruitTransaction;
 import service.FruitHandler;
 
 public class SupplyFruits implements FruitHandler {
@@ -11,9 +12,9 @@ public class SupplyFruits implements FruitHandler {
     }
 
     @Override
-    public void handleOperation(String fruit, int amount) {
-        int amountFromStorage = fruitsDao.get(fruit);
-        int newAmountOfStorage = amountFromStorage + amount;
-        fruitsDao.add(fruit, newAmountOfStorage);
+    public void handleOperation(FruitTransaction transaction) {
+        int amountFromStorage = fruitsDao.get(transaction.getFruit());
+        int newAmountOfStorage = amountFromStorage + transaction.getQuantity();
+        fruitsDao.add(transaction.getFruit(), newAmountOfStorage);
     }
 }
