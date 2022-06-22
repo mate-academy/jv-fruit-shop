@@ -1,8 +1,8 @@
-package service;
+package service.impl;
 
-import static service.ParsingServiceImpl.ACTIVITY_INDEX;
-import static service.ParsingServiceImpl.AMOUNT_INDEX;
-import static service.ParsingServiceImpl.FRUIT_INDEX;
+import static service.impl.ParsingServiceImpl.ACTIVITY_INDEX;
+import static service.impl.ParsingServiceImpl.AMOUNT_INDEX;
+import static service.impl.ParsingServiceImpl.FRUIT_INDEX;
 
 import java.util.Arrays;
 import java.util.function.Predicate;

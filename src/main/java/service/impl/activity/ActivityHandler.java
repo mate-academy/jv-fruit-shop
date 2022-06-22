@@ -1,4 +1,4 @@
-package service.activity;
+package service.impl.activity;
 
 import java.util.Map;
 import model.FruitRecord;

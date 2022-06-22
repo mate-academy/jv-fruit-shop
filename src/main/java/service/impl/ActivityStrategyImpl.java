@@ -1,7 +1,7 @@
-package service;
+package service.impl;
 
 import java.util.Map;
-import service.activity.ActivityHandler;
+import service.impl.activity.ActivityHandler;
 
 public class ActivityStrategyImpl implements ActivityStrategy {
     private final Map<String, ActivityHandler> activityHandlersMap;
