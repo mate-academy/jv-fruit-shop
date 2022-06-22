@@ -14,7 +14,7 @@ public class Main {
         String fromFile = "src/main/resources/from.csv";
         String toFile = "src/main/resources/to.csv";
         ReaderService readerService = new ReaderServiceImpl();
-        String[] dataFromFile = readerService.readFile(fromFile);
+        List<String> dataFromFile = readerService.readFile(fromFile);
         ProcessDataService processDataService = new ProcessDataServiceImpl();
         Map<String, Integer> db = processDataService.processData(dataFromFile);
         ReportGeneratingService reportGeneratingService = new ReportGeneratingServiceImpl();

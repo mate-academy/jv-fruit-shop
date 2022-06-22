@@ -3,6 +3,7 @@ package service.impl;
 import dao.StorageDao;
 import dao.StorageDaoImpl;
 import db.Storage;
+import java.util.List;
 import java.util.Map;
 import service.ProcessDataService;
 import strategy.OperationStrategy;
@@ -14,13 +15,14 @@ public class ProcessDataServiceImpl implements ProcessDataService {
     private static final String CSV_SEPARATOR = ",";
 
     @Override
-    public Map<String, Integer> processData(String[] dataFromFile) {
+    public Map<String, Integer> processData(List<String> dataFromFile) {
         StorageDao storageDao = new StorageDaoImpl();
-        for (int i = 1; i < dataFromFile.length; i++) {
-            String[] splitedData = dataFromFile[i].split(CSV_SEPARATOR);
-            int changesInQuantity = Integer.parseInt(splitedData[QUANTITY_OF_FRUITS])
-                    * OperationStrategy.getCahngesInQuantityByType(splitedData[TYPE_OF_OPERATION]);
-            storageDao.changeQuantityOfFruit(splitedData[TYPE_OF_FRUIT], changesInQuantity);
+        for (int i = 1; i < dataFromFile.size(); i++) {
+            String[] splitedData = dataFromFile.get(i).split(CSV_SEPARATOR);
+            storageDao
+                    .changeQuantityOfFruit(splitedData[TYPE_OF_FRUIT],
+                            Integer.parseInt(splitedData[QUANTITY_OF_FRUITS]),
+                    OperationStrategy.getOperationServiceStrategy(splitedData[TYPE_OF_OPERATION]));
         }
         return Storage.getStorage();
     }

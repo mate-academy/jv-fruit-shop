@@ -1,12 +1,30 @@
 package strategy;
 
-public class OperationStrategy {
-    private static final String PURCHASE = "p";
-    private static final int SHOULD_ADD_TO_QUANTITY = 1;
-    private static final int SHOULD_SUBSTRACT_FROM_QUANTITY = -1;
+import service.OperationService;
+import service.impl.BalanceOperationService;
+import service.impl.PurchaseOperationService;
+import service.impl.ReturnOperationService;
+import service.impl.SupplyOperationService;
 
-    public static int getCahngesInQuantityByType(String operation) {
-        return PURCHASE.equals(operation.replace(" ", ""))
-                ? SHOULD_SUBSTRACT_FROM_QUANTITY : SHOULD_ADD_TO_QUANTITY;
+public class OperationStrategy {
+    private static final String BALANCE = "b";
+    private static final String SUPPLY = "s";
+    private static final String PURCHASE = "p";
+    private static final String RETURN = "r";
+
+    public static OperationService getOperationServiceStrategy(String operation) {
+        String operationType = operation.replace(" ", "");
+        switch (operationType) {
+            case BALANCE:
+                return new BalanceOperationService();
+            case SUPPLY:
+                return new SupplyOperationService();
+            case PURCHASE:
+                return new PurchaseOperationService();
+            case RETURN:
+                return new ReturnOperationService();
+            default:
+                throw new RuntimeException("Operation: " + operationType + " is not supported");
+        }
     }
 }
