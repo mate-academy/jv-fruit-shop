@@ -1,7 +1,7 @@
 package strategy;
 
-import servise.transaction.TransactionHandler;
 import java.util.Map;
+import servise.transaction.TransactionHandler;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
     private final Map<String, TransactionHandler> transactionHandlers;

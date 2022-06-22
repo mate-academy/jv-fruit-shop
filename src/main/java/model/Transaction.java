@@ -25,11 +25,11 @@ public final class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "operation=" + operation +
-                ", item='" + item + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "Transaction{"
+                + "operation=" + operation
+                + ", item='" + item + '\''
+                + ", quantity=" + quantity
+                + '}';
     }
 
     public enum Operation {

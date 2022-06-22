@@ -1,5 +1,8 @@
 import dao.ItemDao;
 import dao.ItemDaoImpl;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import servise.FileReaderService;
 import servise.FileWriterService;
 import servise.ShopService;
@@ -15,10 +18,6 @@ import servise.transaction.impl.ReturnTransactionHandler;
 import servise.transaction.impl.SupplyTransactionHandler;
 import strategy.TransactionStrategy;
 import strategy.TransactionStrategyImpl;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 
 public class Main {
     private static final String DAILY_RECORDS_FILEPATH = "src/resources/daily_records.csv";
