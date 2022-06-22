@@ -1,17 +1,17 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.impl.CsvFileReader;
+import core.basesyntax.service.impl.CsvFileWriter;
 import core.basesyntax.service.impl.FruitReportGenerator;
 import core.basesyntax.service.impl.FruitTransactionMapper;
-import core.basesyntax.service.impl.OperationStrategy;
-import core.basesyntax.service.impl.ReadFromCsv;
-import core.basesyntax.service.impl.WriteToCsv;
+import core.basesyntax.strategy.impl.OperationStrategy;
 import java.util.List;
 
 public class AppMain {
     public static void main(String[] args) {
         List<String> transactionLines =
-                new ReadFromCsv().readFile("src/main/resources/input.csv");
+                new CsvFileReader().readFile("src/main/resources/input.csv");
         List<FruitTransaction> transactions =
                 new FruitTransactionMapper().map(transactionLines);
         System.out.println("Fruit transactions: "
@@ -29,6 +29,6 @@ public class AppMain {
                 + System.lineSeparator()
                 + report);
 
-        new WriteToCsv().writeFile("src/main/resources/report.csv", report);
+        new CsvFileWriter().writeFile("src/main/resources/report.csv", report);
     }
 }

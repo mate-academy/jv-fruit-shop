@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReadFromCsv implements FileReader {
+public class CsvFileReader implements FileReader {
     @Override
     public List<String> readFile(String filePath) {
         try (BufferedReader bufferedReader =

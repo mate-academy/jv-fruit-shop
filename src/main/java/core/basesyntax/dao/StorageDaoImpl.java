@@ -19,4 +19,3 @@ public class StorageDaoImpl implements StorageDao {
         return Storage.fruitsStore;
     }
 }
-

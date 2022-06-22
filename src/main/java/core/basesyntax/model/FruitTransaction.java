@@ -31,8 +31,8 @@ public class FruitTransaction {
 
         private String letter;
 
-        Operation(String operation) {
-            this.letter = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
         public String getLetter() {
