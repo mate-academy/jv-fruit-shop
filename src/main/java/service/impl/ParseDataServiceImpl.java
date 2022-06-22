@@ -3,8 +3,8 @@ package service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
-import strategy.OperationHandler;
 import service.ParseDataService;
+import strategy.OperationHandler;
 import strategy.OperationStrategy;
 
 public class ParseDataServiceImpl implements ParseDataService {
