@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.service.ReportGeneration;
+import core.basesyntax.service.ReportGenerationService;
 import java.util.Map;
 
-public class ReportGenerationImpl implements ReportGeneration {
+public class ReportGenerationServiceImpl implements ReportGenerationService {
     private final StorageDao storageDao;
 
-    public ReportGenerationImpl(StorageDao storageDao) {
+    public ReportGenerationServiceImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 

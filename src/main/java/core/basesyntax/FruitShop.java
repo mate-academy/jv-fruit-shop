@@ -7,12 +7,12 @@ import core.basesyntax.service.DataOperationService;
 import core.basesyntax.service.DataService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.ReportGeneration;
+import core.basesyntax.service.ReportGenerationService;
 import core.basesyntax.service.impl.DataOperationServiceImpl;
 import core.basesyntax.service.impl.DataServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.ReportGenerationImpl;
+import core.basesyntax.service.impl.ReportGenerationServiceImpl;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -51,7 +51,7 @@ public class FruitShop {
         DataOperationService dataOperationService = new DataOperationServiceImpl(operationStrategy);
         dataOperationService.processOperation(fruitTransactionList);
 
-        ReportGeneration reportGeneration = new ReportGenerationImpl(storageDao);
+        ReportGenerationService reportGeneration = new ReportGenerationServiceImpl(storageDao);
         String report = reportGeneration.getReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
