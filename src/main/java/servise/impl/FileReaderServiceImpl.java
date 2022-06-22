@@ -2,7 +2,6 @@ package servise.impl;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,8 +19,6 @@ public class FileReaderServiceImpl implements FileReaderService {
                 line = br.readLine();
             }
             return fileLines;
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("Can't find the file: " + filePath, e);
         } catch (IOException e) {
             throw new RuntimeException("Can't read the file: " + filePath, e);
         }

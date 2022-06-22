@@ -2,7 +2,6 @@ package servise.impl;
 
 import dao.ItemDao;
 import java.util.List;
-import java.util.Map;
 import servise.ShopService;
 import servise.TransactionService;
 
@@ -18,20 +17,8 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<String> records) {
         records.stream()
-                .filter(r -> !r.startsWith("type")) //without title row
+                .filter(r -> !r.startsWith("type"))
                 .map(transactionService::createTransaction)
-                .forEach(itemDao::process);
-    }
-
-    @Override
-    public String getReport() {
-        StringBuilder report = new StringBuilder("fruit,quantity");
-        for (Map.Entry<String, Integer> record : itemDao.getRecords()) {
-            report.append(System.lineSeparator())
-                    .append(record.getKey())
-                    .append(",")
-                    .append(record.getValue());
-        }
-        return report.toString();
+                .forEach(itemDao::insert);
     }
 }

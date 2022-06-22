@@ -5,9 +5,7 @@ import java.util.Set;
 import model.Transaction;
 
 public interface ItemDao {
-    int getBalance(String item);
+    void insert(Transaction transaction);
 
-    void process(Transaction transaction);
-
-    Set<Map.Entry<String, Integer>> getRecords();
+    Set<Map.Entry<String, Integer>> readAll();
 }

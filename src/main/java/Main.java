@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 import servise.FileReaderService;
 import servise.FileWriterService;
+import servise.ReportService;
 import servise.ShopService;
 import servise.TransactionService;
 import servise.impl.FileReaderServiceImpl;
 import servise.impl.FileWriterServiceImpl;
+import servise.impl.ReportServiceImpl;
 import servise.impl.ShopServiceImpl;
 import servise.impl.TransactionServiceImpl;
 import servise.transaction.TransactionHandler;
@@ -39,7 +41,8 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(itemDao, transactionService);
         shopService.process(records);
 
-        String report = shopService.getReport();
+        ReportService reportService = new ReportServiceImpl(itemDao);
+        String report = reportService.createReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeStringToFile(DAILY_REPORT_FILEPATH, report);
