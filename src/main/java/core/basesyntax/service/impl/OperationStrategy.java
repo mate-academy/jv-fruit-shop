@@ -3,9 +3,15 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 
-public class ServiceStrategy {
-    public OperationHandler getServiceStrategy(FruitTransaction transaction) {
-        switch (transaction.getOperation()) {
+public class OperationStrategy {
+    private final FruitTransaction.Operation operation;
+
+    public OperationStrategy(FruitTransaction.Operation operation) {
+        this.operation = operation;
+    }
+
+    public OperationHandler getHandler() {
+        switch (operation) {
             case BALANCE :
                 return new BalanceHandler();
             case SUPPLY :

@@ -29,27 +29,23 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String letter;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.letter = operation;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getLetter() {
+            return letter;
         }
 
         public static Operation of(String letter) {
-            switch (letter) {
-                case "b" :
-                    return Operation.BALANCE;
-                case "s" :
-                    return Operation.SUPPLY;
-                case "p" :
-                    return Operation.PURCHASE;
-                default :
-                    return Operation.RETURN;
+            for (Operation operation : Operation.values()) {
+                if (operation.getLetter().equals(letter)) {
+                    return operation;
+                }
             }
+            throw new RuntimeException("Wrong operation letter: " + letter + "!");
         }
     }
 

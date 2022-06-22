@@ -6,9 +6,10 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
+    private final StorageDao storageDao = new StorageDaoImpl();
+
     @Override
-    public void toProcess(FruitTransaction fruitTransaction) {
-        StorageDao storageDao = new StorageDaoImpl();
+    public void handler(FruitTransaction fruitTransaction) {
         storageDao.create(
                 fruitTransaction.getFruit(),
                 storageDao.get(fruitTransaction.getFruit())

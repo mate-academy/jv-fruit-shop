@@ -1,11 +1,11 @@
 package core.basesyntax.dao;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface StorageDao {
-    void create(String key, Integer value);
+    void create(String fruit, Integer quantity);
 
-    Integer get(String key);
+    Integer get(String fruit);
 
-    HashMap<String, Integer> getAll();
+    Map<String, Integer> getAll();
 }
