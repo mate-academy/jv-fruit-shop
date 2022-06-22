@@ -7,16 +7,17 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void addNewFruit(String fruit, int quantity) {
-        Storage.put(fruit, quantity);
+        Storage.storage.put(fruit, quantity);
     }
 
     @Override
     public void changeQuantityOfFruit(String fruit, int quantity, OperationService operation) {
-        if (Storage.get(fruit) == null) {
+        if (Storage.storage.get(fruit) == null) {
             addNewFruit(fruit, quantity);
             return;
         }
-        Storage.put(fruit, operation.getActionByOperation(quantity).applyAsInt(Storage.get(fruit)));
+        Storage.storage.put(fruit,
+                operation.getActionByOperation(quantity).applyAsInt(Storage.storage.get(fruit)));
     }
 
 }

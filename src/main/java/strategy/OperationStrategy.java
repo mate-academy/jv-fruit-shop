@@ -13,8 +13,7 @@ public class OperationStrategy {
     private static final String RETURN = "r";
 
     public static OperationService getOperationServiceStrategy(String operation) {
-        String operationType = operation.replace(" ", "");
-        switch (operationType) {
+        switch (operation) {
             case BALANCE:
                 return new BalanceOperationService();
             case SUPPLY:
@@ -24,7 +23,7 @@ public class OperationStrategy {
             case RETURN:
                 return new ReturnOperationService();
             default:
-                throw new RuntimeException("Operation: " + operationType + " is not supported");
+                throw new RuntimeException("Operation: " + operation + " is not supported");
         }
     }
 }
