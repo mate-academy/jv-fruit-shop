@@ -7,7 +7,6 @@ import model.FruitTransaction;
 import service.FruitHandler;
 import service.impl.BalanceOfFruits;
 import service.impl.PurchaseFruits;
-import service.impl.ReturnFruits;
 import service.impl.SupplyFruits;
 import servicecsv.CreateReport;
 import servicecsv.DataHandler;
@@ -35,7 +34,7 @@ public class Main {
         Map<FruitTransaction.Operation, FruitHandler> fruitHandlerMap = new HashMap<>();
         fruitHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOfFruits(fruitsDao));
         fruitHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyFruits(fruitsDao));
-        fruitHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnFruits(fruitsDao));
+        fruitHandlerMap.put(FruitTransaction.Operation.RETURN, new SupplyFruits(fruitsDao));
         fruitHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseFruits(fruitsDao));
 
         FileReaderService fileReaderService = new FileReaderImpl();
