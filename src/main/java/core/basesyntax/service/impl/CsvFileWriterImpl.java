@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class CsvFileWriterImpl implements CsvFileWriter {
     @Override
-    public void writeToFile(String filePath, String report) {
+    public void writeReportToFile(String filePath, String report) {
         File file = new File(filePath);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));) {
             bufferedWriter.write(report);
