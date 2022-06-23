@@ -1,4 +1,4 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service.mapper;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;

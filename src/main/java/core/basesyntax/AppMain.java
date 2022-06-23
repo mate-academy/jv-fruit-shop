@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileWriter;
 import core.basesyntax.service.impl.FruitReportGenerator;
-import core.basesyntax.service.impl.FruitTransactionMapper;
+import core.basesyntax.service.mapper.FruitTransactionMapper;
 import core.basesyntax.strategy.impl.OperationStrategy;
 import java.util.List;
 
