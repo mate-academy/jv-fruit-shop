@@ -41,23 +41,19 @@ public class Transaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String abbreviature;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String abbreviature) {
+            this.abbreviature = abbreviature;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getAbbreviature() {
+            return abbreviature;
         }
 
         public static Operation getOperation(String abbreviature) {
             Map<String, Operation> operationsMap = getOperationsMap();
             return operationsMap.get(abbreviature);
-        }
-
-        public void setOperation(String operation) {
-            this.operation = operation;
         }
     }
 }

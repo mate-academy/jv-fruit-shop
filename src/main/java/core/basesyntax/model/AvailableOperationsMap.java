@@ -8,7 +8,7 @@ public class AvailableOperationsMap {
 
     static {
         for (Transaction.Operation enumOperation : Transaction.Operation.values()) {
-            operationsMap.put(enumOperation.getOperation(), enumOperation);
+            operationsMap.put(enumOperation.getAbbreviature(), enumOperation);
         }
     }
 

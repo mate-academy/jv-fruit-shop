@@ -3,13 +3,13 @@ package core.basesyntax;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.CsvFileWriter;
-import core.basesyntax.service.ReportFormatter;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.StringListProcessor;
 import core.basesyntax.service.handlers.OperationStrategy;
 import core.basesyntax.service.handlers.OperationStrategyImpl;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
 import core.basesyntax.service.impl.CsvFileWriterImpl;
-import core.basesyntax.service.impl.ReportFormatterImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.StringListProcessorImpl;
 import java.util.List;
 
@@ -34,8 +34,8 @@ public class FruitShop {
                                                         transaction.getFruit(),
                                                         transaction.getQuantity()));
 
-        ReportFormatter reportFormatter = new ReportFormatterImpl();
-        String report = reportFormatter.formatReportAsCsvString();
+        ReportCreator reportCreator = new ReportCreatorImpl();
+        String report = reportCreator.create();
 
         CsvFileWriter csvFileWriter = new CsvFileWriterImpl();
         csvFileWriter.writeReportToFile(OUTPUT_FILE_PATH, report);
