@@ -1,17 +1,17 @@
 package core.basesyntax;
 
+import dao.StorageDao;
 import dao.StorageDaoImpl;
-import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.FruitsAmountStrategy;
+import service.FruitOperationStrategy;
 import service.GenerateReportLines;
 import service.ReadTransactions;
 import service.SplitInformation;
 import service.WriteReport;
-import service.impl.FruitsAmountStrategyImpl;
+import service.impl.FruitOperationStrategyImpl;
 import service.impl.GenerateReportLinesImpl;
 import service.impl.ReadTransactionsImpl;
 import service.impl.SplitInformationImpl;
@@ -26,21 +26,21 @@ public class Main {
     public static void main(String[] args) {
         String fromPath = "src/main/recources/ActionPerDay.csv";
         ReadTransactions readTransactions = new ReadTransactionsImpl();
-        SplitInformation splitInformation = new SplitInformationImpl(readTransactions, fromPath);
+        SplitInformation splitInformation = new SplitInformationImpl();
+        StorageDao storageDao = new StorageDaoImpl();
         Map<FruitTransaction.Operation, FruitsAmountHandler> amountHandlerMap = new HashMap<>();
-        amountHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        amountHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        amountHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        amountHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-        FruitsAmountStrategy fruitsAmountStrategy = new FruitsAmountStrategyImpl(amountHandlerMap);
-        StorageDaoImpl storageDao = new StorageDaoImpl();
-        GenerateReportLines generateReport = new GenerateReportLinesImpl(
-                storageDao,fruitsAmountStrategy);
+        amountHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(storageDao));
+        amountHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(storageDao));
+        amountHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(storageDao));
+        amountHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(storageDao));
+        FruitOperationStrategy fruitsAmountStrategy =
+                new FruitOperationStrategyImpl(storageDao,amountHandlerMap);
         WriteReport writeReport = new WriteReportImpl();
-        List<FruitTransaction> a = splitInformation
+        List<FruitTransaction> allTransactions = splitInformation
                 .createTransactionList(readTransactions.convertFromFileToList(fromPath));
-        generateReport.createReportMap(a);
-        List<String> reports = generateReport.createReport(Storage.report);
+        fruitsAmountStrategy.fillStorage(allTransactions);
+        GenerateReportLines generateReportLines = new GenerateReportLinesImpl();
+        List<String> reports = generateReportLines.createReport(storageDao.getAll());
         String toPath = "src/main/recources/TheRemainingFruit.csv";
         writeReport.fruitsReport(reports, toPath);
     }

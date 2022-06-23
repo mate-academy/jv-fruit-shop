@@ -1,5 +1,9 @@
 package dao;
 
+import java.util.Map;
+
 public interface StorageDao {
-    void add(String name, Integer amount);
+    void update(String name, Integer newAmount);
+
+    Map<String, Integer> getAll();
 }

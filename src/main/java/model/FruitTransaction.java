@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -11,6 +13,13 @@ public class FruitTransaction {
 
     public void setOperation(Operation operation) {
         this.operation = operation;
+    }
+
+    public Operation setValueForOperation(String operationName) {
+        return Arrays.stream(FruitTransaction.Operation.values())
+                .filter(o -> o.getOperation().equals(operationName))
+                .findFirst()
+                .orElseThrow();
     }
 
     public String getFruit() {
