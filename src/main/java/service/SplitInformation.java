@@ -1,7 +1,8 @@
 package service;
 
+import java.util.List;
 import model.FruitTransaction;
 
 public interface SplitInformation {
-    FruitTransaction addToTransactionList(String information);
+    List<FruitTransaction> createTransactionList(List<String> info);
 }

@@ -1,17 +1,8 @@
 package db;
 
-import java.util.ArrayList;
-import java.util.List;
-import model.FruitTransaction;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    private static List<FruitTransaction> transactions = new ArrayList<>();
-
-    public static List<FruitTransaction> getTransactions() {
-        return transactions;
-    }
-
-    public static void setTransactions(List<FruitTransaction> transactions) {
-        Storage.transactions = transactions;
-    }
+    public static final Map<String, Integer> report = new HashMap<>();
 }

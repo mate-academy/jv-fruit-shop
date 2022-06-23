@@ -1,5 +1,5 @@
 package strategy;
 
 public interface FruitsAmountHandler {
-    int getAmount(int quantity, int amount);
+    int getAmount(int quantity);
 }

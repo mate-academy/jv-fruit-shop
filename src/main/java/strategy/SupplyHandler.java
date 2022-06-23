@@ -2,7 +2,7 @@ package strategy;
 
 public class SupplyHandler implements FruitsAmountHandler {
     @Override
-    public int getAmount(int quantity, int amount) {
-        return amount + quantity;
+    public int getAmount(int quantity) {
+        return quantity;
     }
 }
