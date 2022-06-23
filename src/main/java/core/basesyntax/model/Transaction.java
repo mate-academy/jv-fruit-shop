@@ -1,6 +1,8 @@
 package core.basesyntax.model;
 
-import static core.basesyntax.model.AvailableOperationsMap.operationsMap;
+import static core.basesyntax.model.AvailableOperationsMap.getOperationsMap;
+
+import java.util.Map;
 
 public class Transaction {
     private Operation abbreviature;
@@ -50,6 +52,7 @@ public class Transaction {
         }
 
         public static Operation getOperation(String abbreviature) {
+            Map<String, Operation> operationsMap = getOperationsMap();
             return operationsMap.get(abbreviature);
         }
 

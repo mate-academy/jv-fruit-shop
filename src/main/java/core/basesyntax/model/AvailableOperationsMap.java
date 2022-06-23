@@ -4,14 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AvailableOperationsMap {
+    private static Map<String, Transaction.Operation> operationsMap = new HashMap<>();
 
-    public static Map<String, Transaction.Operation> operationsMap = new HashMap<>();
-
-    private void populateOperationsMap() {
+    static {
         for (Transaction.Operation enumOperation : Transaction.Operation.values()) {
             operationsMap.put(enumOperation.getOperation(), enumOperation);
         }
     }
 
-
+    public static Map<String, Transaction.Operation> getOperationsMap() {
+        return operationsMap;
+    }
 }
