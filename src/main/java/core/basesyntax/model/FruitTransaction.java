@@ -78,6 +78,6 @@ public class FruitTransaction {
         return Arrays.stream(Operation.values())
                 .filter(c -> c.getOperation().equals(letter))
                 .findFirst()
-                .get();
+                .orElseThrow(() -> new RuntimeException("Operation " + letter + " not found"));
     }
 }

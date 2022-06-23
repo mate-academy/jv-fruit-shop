@@ -1,17 +1,24 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperationHandlerImpl implements OperationHandler {
+    private final StorageDao storageDao;
+
+    public PurchaseOperationHandlerImpl(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
+
     @Override
     public void changeQuantity(FruitTransaction fruitTransaction) {
-        if (fruitTransaction.getQuantity() > Storage.storageMap.get(fruitTransaction.getFruit())) {
+        if (fruitTransaction.getQuantity()
+                > storageDao.getRemainFruit(fruitTransaction.getFruit())) {
             throw new RuntimeException(
                     fruitTransaction.getFruit() + " cannot be purchase. They aren`t enough.");
         }
-        Storage.storageMap.put(fruitTransaction.getFruit(),
-                Storage.storageMap.get(fruitTransaction.getFruit())
+        storageDao.updateData(fruitTransaction.getFruit(),
+                storageDao.getRemainFruit(fruitTransaction.getFruit())
                         - fruitTransaction.getQuantity());
     }
 }

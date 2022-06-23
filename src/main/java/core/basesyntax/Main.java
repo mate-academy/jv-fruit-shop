@@ -1,12 +1,12 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.ReportCreateService;
 import core.basesyntax.service.Writer;
-import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReaderImpl;
 import core.basesyntax.service.impl.ReportCreateServiceImpl;
@@ -27,27 +27,29 @@ public class Main {
     private static final String FILEPATH_DAILY_REPORT = "src/main/resources/ReportAfterDay.csv";
 
     public static void main(String[] args) {
+        StorageDao storageDao = new StorageDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
                 = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandlerImpl());
+                new BalanceOperationHandlerImpl(storageDao));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandlerImpl());
+                new PurchaseOperationHandlerImpl(storageDao));
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandlerImpl());
+                new ReturnOperationHandlerImpl(storageDao));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandlerImpl());
+                new SupplyOperationHandlerImpl(storageDao));
 
         Reader reader = new ReaderImpl();
         List<String> dataFromFile = reader.fileReader(FILEPATH_DAILY_RECORDS);
         Parser parser = new ParserImpl();
-        List<FruitTransaction> fruitTransactionList = parser.parseDataFromFile(dataFromFile);
+        List<FruitTransaction> fruitTransactionList = parser.parseData(dataFromFile);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        FruitService fruitService = new FruitServiceImpl(operationStrategy);
-        fruitService.processData(fruitTransactionList);
+        fruitTransactionList.forEach(fruitTransaction -> operationStrategy
+                .getOperationType(fruitTransaction.getOperation())
+                .changeQuantity(fruitTransaction));
 
-        ReportCreateService reportCreateService = new ReportCreateServiceImpl();
+        ReportCreateService reportCreateService = new ReportCreateServiceImpl(storageDao);
         Writer writer = new WriterImpl();
         writer.writeToFile(reportCreateService.createReport(), FILEPATH_DAILY_REPORT);
     }

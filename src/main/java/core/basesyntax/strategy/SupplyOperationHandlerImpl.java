@@ -1,13 +1,19 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
 
 public class SupplyOperationHandlerImpl implements OperationHandler {
+    private final StorageDao storageDao;
+
+    public SupplyOperationHandlerImpl(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
+
     @Override
     public void changeQuantity(FruitTransaction fruitTransaction) {
-        Storage.storageMap.put(fruitTransaction.getFruit(),
-                Storage.storageMap.get(fruitTransaction.getFruit())
+        storageDao.updateData(fruitTransaction.getFruit(),
+                storageDao.getRemainFruit(fruitTransaction.getFruit())
                         + fruitTransaction.getQuantity());
     }
 }
