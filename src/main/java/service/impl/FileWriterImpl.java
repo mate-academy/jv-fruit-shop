@@ -14,7 +14,6 @@ public class FileWriterImpl implements FileWriterService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             for (String string : data) {
                 bufferedWriter.write(string);
-                bufferedWriter.write(System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file correctly.", e);

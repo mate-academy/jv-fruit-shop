@@ -9,18 +9,13 @@ import service.FileReaderService;
 
 public class FileReaderImpl implements FileReaderService {
     @Override
-    public List<String[]> readTheFruitsStorage(String pathName) {
+    public List<String> readTheFruitsStorage(String pathName) {
         List<String> storageData;
         try {
             storageData = Files.readAllLines(Path.of(pathName));
-            storageData.remove(0);
-            List<String[]> upgrade = new ArrayList<>();
-            for (String string : storageData.toArray(new String[0])) {
-                upgrade.add(string.split(","));
-            }
-            return upgrade;
+            return storageData;
         } catch (IOException e) {
-            throw new RuntimeException("Can't extract data from file correctly " + pathName);
+            throw new RuntimeException("Can't extract data from file correctly " + pathName, e);
         }
     }
 }

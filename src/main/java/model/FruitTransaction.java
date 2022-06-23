@@ -6,23 +6,9 @@ public class FruitTransaction {
     private int quantity;
 
     public FruitTransaction(String letter, String fruit, int quantity) {
-        this.operation = getOperationByLetter(letter);
+        this.operation = Operation.getOperationByLetter(letter);
         this.fruit = fruit;
         this.quantity = quantity;
-    }
-
-    private Operation getOperationByLetter(String letter) {
-        switch (letter) {
-            case "s":
-                return Operation.SUPPLY;
-            case "r":
-                return Operation.RETURN;
-            case "p":
-                return Operation.PURCHASE;
-            case "b":
-            default:
-                return Operation.BALANCE;
-        }
     }
 
     public Operation getOperation() {
@@ -63,6 +49,15 @@ public class FruitTransaction {
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
+
+        private static Operation getOperationByLetter(String letter) {
+            for (Operation value : Operation.values()) {
+                if (value.operation.equalsIgnoreCase(letter)) {
+                    return value;
+                }
+            }
+            return null;
+        }
 
         private String operation;
 

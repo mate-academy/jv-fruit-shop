@@ -25,12 +25,6 @@ public class Main {
     private static final String REPORT_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        Map<String, FruitTransaction.Operation> transactionHandlerMap = new HashMap<>();
-        transactionHandlerMap.put("b", FruitTransaction.Operation.BALANCE);
-        transactionHandlerMap.put("s", FruitTransaction.Operation.SUPPLY);
-        transactionHandlerMap.put("r", FruitTransaction.Operation.RETURN);
-        transactionHandlerMap.put("p", FruitTransaction.Operation.PURCHASE);
-
         FruitsDao fruitsDao = new FruitsDaoImpl();
         Map<FruitTransaction.Operation, FruitHandler> fruitHandlerMap = new HashMap<>();
         fruitHandlerMap.put(FruitTransaction.Operation.BALANCE,
@@ -44,7 +38,7 @@ public class Main {
 
         FileReaderService fileReaderService = new FileReaderImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(fruitHandlerMap);
-        DataHandler dataHandler = new DataHandlerImpl(transactionHandlerMap);
+        DataHandler dataHandler = new DataHandlerImpl();
         List<FruitTransaction> list =
                 dataHandler.handleData(fileReaderService.readTheFruitsStorage(OPERATION_PATH));
         for (FruitTransaction fruitTransaction : list) {

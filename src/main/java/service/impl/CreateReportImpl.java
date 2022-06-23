@@ -10,7 +10,7 @@ public class CreateReportImpl implements CreateReport {
     public List<String> createReport(Map<String, Integer> fruitsAtStorageMap) {
         List<String> report = new ArrayList<>();
         report.add("fruits,quantity");
-        fruitsAtStorageMap.forEach((key, value) -> report.add(key + "," + value));
+        fruitsAtStorageMap.forEach((key, value) -> report.add(System.lineSeparator() + key + "," + value));
         return report;
     }
 }
