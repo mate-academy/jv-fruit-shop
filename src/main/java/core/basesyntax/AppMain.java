@@ -19,9 +19,9 @@ public class AppMain {
 
         for (FruitTransaction transaction : transactions) {
             OperationStrategy operationStrategy =
-                    new OperationStrategy(transaction.getOperation());
+                    new OperationStrategy();
             operationStrategy
-                    .getHandler()
+                    .getHandler(transaction.getOperation())
                     .handler(transaction);
         }
         String report = new FruitReportGenerator().create();
