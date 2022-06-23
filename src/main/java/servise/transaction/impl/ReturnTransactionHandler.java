@@ -1,11 +1,15 @@
 package servise.transaction.impl;
 
-import model.Transaction;
+import db.Storage;
 import servise.transaction.TransactionHandler;
 
 public class ReturnTransactionHandler implements TransactionHandler {
     @Override
-    public Transaction getTransaction(String item, int quantity) {
-        return new Transaction(Transaction.Operation.RETURN, item, quantity);
+    public void proceedTransaction(String item, int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Can't return negative quantity of " + item);
+        }
+        int quantityBeforeTransaction = Storage.items.getOrDefault(item, 0);
+        Storage.items.put(item, quantityBeforeTransaction + quantity);
     }
 }

@@ -1,17 +1,13 @@
-import dao.ItemDao;
-import dao.ItemDaoImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import servise.FileReaderService;
 import servise.FileWriterService;
 import servise.ReportService;
-import servise.ShopService;
 import servise.TransactionService;
 import servise.impl.FileReaderServiceImpl;
 import servise.impl.FileWriterServiceImpl;
 import servise.impl.ReportServiceImpl;
-import servise.impl.ShopServiceImpl;
 import servise.impl.TransactionServiceImpl;
 import servise.transaction.TransactionHandler;
 import servise.transaction.impl.BalanceTransactionHandler;
@@ -36,12 +32,10 @@ public class Main {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> records = fileReaderService.readFile(DAILY_RECORDS_FILEPATH);
 
-        ItemDao itemDao = new ItemDaoImpl();
         TransactionService transactionService = new TransactionServiceImpl(transactionStrategy);
-        ShopService shopService = new ShopServiceImpl(itemDao, transactionService);
-        shopService.process(records);
+        transactionService.process(records);
 
-        ReportService reportService = new ReportServiceImpl(itemDao);
+        ReportService reportService = new ReportServiceImpl();
         String report = reportService.createReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();

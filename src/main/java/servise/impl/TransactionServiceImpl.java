@@ -1,6 +1,6 @@
 package servise.impl;
 
-import model.Transaction;
+import java.util.List;
 import servise.TransactionService;
 import strategy.TransactionStrategy;
 
@@ -16,11 +16,14 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction createTransaction(String record) {
-        String[] recordSplit = record.split(COMMA_DELIMITER);
-        String operation = recordSplit[OPERATION_INDEX];
-        String item = recordSplit[ITEM_INDEX];
-        int quantity = Integer.parseInt(recordSplit[QUANTITY_INDEX]);
-        return transactionStrategy.get(operation).getTransaction(item, quantity);
+    public void process(List<String> records) {
+        records.remove(0);
+        for (String record : records) {
+            String[] recordSplit = record.split(COMMA_DELIMITER);
+            String operation = recordSplit[OPERATION_INDEX];
+            String item = recordSplit[ITEM_INDEX];
+            int quantity = Integer.parseInt(recordSplit[QUANTITY_INDEX]);
+            transactionStrategy.get(operation).proceedTransaction(item, quantity);
+        }
     }
 }

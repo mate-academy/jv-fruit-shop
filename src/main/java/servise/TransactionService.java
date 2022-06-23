@@ -1,7 +1,7 @@
 package servise;
 
-import model.Transaction;
+import java.util.List;
 
 public interface TransactionService {
-    Transaction createTransaction(String record);
+    void process(List<String> records);
 }
