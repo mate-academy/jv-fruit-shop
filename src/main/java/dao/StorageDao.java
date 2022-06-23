@@ -3,7 +3,9 @@ package dao;
 import model.Fruit;
 
 public interface StorageDao {
-    void addNewFruit(Fruit fruit);
+    Fruit getFruit(Fruit fruit);
 
     void changeQuantityOfFruit(Fruit fruit);
+
+    void addFruit(Fruit fruit);
 }

@@ -11,11 +11,9 @@ public class ReportWriterServiceImpl implements ReportWriterService {
     @Override
     public void writeReport(List<String> reports, String toFile) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFile))) {
-            for (int i = 0; i < reports.size() - 1; i++) {
-                bufferedWriter.write(reports.get(i));
-                bufferedWriter.write(System.lineSeparator());
+            for (String line : reports) {
+                bufferedWriter.write(line);
             }
-            bufferedWriter.write(reports.get(reports.size() - 1));
         } catch (IOException e) {
             throw new RuntimeException("File not found", e);
         }

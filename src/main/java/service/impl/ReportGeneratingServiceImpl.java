@@ -14,7 +14,8 @@ public class ReportGeneratingServiceImpl implements ReportGeneratingService {
         List<String> report = new ArrayList<>();
         report.add(FIRST_LINE_OF_REPORT);
         for (Fruit fruit : db) {
-            report.add(fruit.getFruitType() + CSV_SEPARATOR + fruit.getQuantity());
+            report.add(System.lineSeparator() + fruit.getFruitType()
+                    + CSV_SEPARATOR + fruit.getQuantity());
         }
         return report;
     }
