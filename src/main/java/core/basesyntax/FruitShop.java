@@ -24,7 +24,8 @@ public class FruitShop {
         List<String> fileContent = csvFileReader.readCsvFileToStringList(INPUT_FILE_PATH);
 
         StringListProcessor stringListProcessor = new StringListProcessorImpl();
-        List<Transaction> transactionList = stringListProcessor.stringListToFruitIntegerMap(fileContent);
+        List<Transaction> transactionList = stringListProcessor
+                .stringListToFruitIntegerMap(fileContent);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl();
         transactionList.forEach(transaction -> operationStrategy
