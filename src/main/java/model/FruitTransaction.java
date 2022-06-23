@@ -6,7 +6,7 @@ public class FruitTransaction {
     private int quantity;
 
     public FruitTransaction(String letter, String fruit, int quantity) {
-        this.operation = Operation.getOperationByLetter(letter);
+        operation = Operation.getOperationByLetter(letter);
         this.fruit = fruit;
         this.quantity = quantity;
     }
@@ -50,6 +50,12 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
+        private String operation;
+
+        Operation(String operation) {
+            this.operation = operation;
+        }
+
         private static Operation getOperationByLetter(String letter) {
             for (Operation value : Operation.values()) {
                 if (value.operation.equalsIgnoreCase(letter)) {
@@ -57,12 +63,6 @@ public class FruitTransaction {
                 }
             }
             return null;
-        }
-
-        private String operation;
-
-        Operation(String operation) {
-            this.operation = operation;
         }
 
         public String getOperation() {

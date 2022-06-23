@@ -14,6 +14,7 @@ public class DataHandlerImpl implements DataHandler {
                         (i[0]), i[1], Integer.parseInt(i[2])))
                 .collect(Collectors.toList());
     }
+
     private List<String[]> dataParser(List<String> storageData) {
         storageData.remove(0);
         List<String[]> update = new ArrayList<>();

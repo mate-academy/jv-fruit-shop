@@ -5,7 +5,7 @@ import java.util.Map;
 public interface FruitsDao {
     int get(String fruit);
 
-    void add(String fruit, int amount);
+    boolean add(String fruit, int amount);
 
     Map<String, Integer> getCurrentFruitAmount();
 }
