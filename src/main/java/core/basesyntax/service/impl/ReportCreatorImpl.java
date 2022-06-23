@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportCreator;
 import java.util.Map;
 
@@ -13,11 +12,11 @@ public class ReportCreatorImpl implements ReportCreator {
     public String createReport() {
         StringBuilder stringBuilder = new StringBuilder(HEADING)
                 .append(System.lineSeparator());
-        for (Map.Entry<Fruit, Integer> record : Storage.fruits.entrySet()) {
+        for (Map.Entry<String, Integer> record : Storage.fruits.entrySet()) {
             stringBuilder.append(record.getKey())
+                    .append(System.lineSeparator())
                     .append(SEPARATOR)
-                    .append(record.getValue())
-                    .append(System.lineSeparator());
+                    .append(record.getValue());
         }
         return stringBuilder.toString();
     }

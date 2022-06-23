@@ -3,21 +3,21 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Transaction {
-    private Fruit fruit;
+    private String fruit;
     private Operation operation;
     private int amountFruits;
 
-    public Transaction(String operation, Fruit fruit, int amountFruits) {
+    public Transaction(String operation, String fruit, int amountFruits) {
         this.fruit = fruit;
         this.operation = Operation.findOperation(operation);
         this.amountFruits = amountFruits;
     }
 
-    public Fruit getFruit() {
+    public String getFruit() {
         return fruit;
     }
 
-    public void setFruit(Fruit fruit) {
+    public void setFruit(String fruit) {
         this.fruit = fruit;
     }
 

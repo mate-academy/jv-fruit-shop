@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.Parser;
 import java.util.ArrayList;
@@ -18,12 +17,12 @@ public class ParserImpl implements Parser {
         List<Transaction> fruitRecordsList = new ArrayList<>();
         stringList.remove(INDEX_TITLE);
         for (String fruit : stringList) {
-            if (fruit.isBlank() || fruit.contains(" ")) {
-                throw new RuntimeException("Invalid input date: ");
+            if (fruit.isBlank()) {
+                throw new RuntimeException("Invalid input date: " + fruit);
             }
             String[] split = fruit.split(SPLIT_SYMBOL);
             fruitRecordsList.add(new Transaction(split[OPERATION_INDEX],
-                    new Fruit(split[FRUIT_INDEX]),
+                    (split[FRUIT_INDEX]),
                     Integer.parseInt(split[AMOUNT_INDEX])));
         }
         return fruitRecordsList;

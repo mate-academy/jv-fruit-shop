@@ -6,14 +6,14 @@ import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 
 public class OperationServiceImpl implements OperationService {
-    private final Map<Operation, OperationHandler> handleMap;
+    private final Map<Operation, OperationHandler> handlerMap;
 
     public OperationServiceImpl(Map<Operation, OperationHandler> handleMap) {
-        this.handleMap = handleMap;
+        this.handlerMap = handleMap;
     }
 
     @Override
     public OperationHandler getHandler(Operation typeOperation) {
-        return handleMap.get(typeOperation);
+        return handlerMap.get(typeOperation);
     }
 }

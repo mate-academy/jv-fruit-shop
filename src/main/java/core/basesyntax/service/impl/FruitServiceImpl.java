@@ -13,10 +13,6 @@ public class FruitServiceImpl implements FruitService {
         this.operationService = operationService;
     }
 
-    public OperationService getOperationService() {
-        return operationService;
-    }
-
     @Override
     public void process(List<Transaction> transactions) {
         for (Transaction item : transactions) {

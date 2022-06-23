@@ -1,7 +1,11 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
+import java.util.Map;
 
 public interface FruitDao {
-    void add(Fruit fruit, int amount);
+    void add(String nameFruit, int amount);
+
+    Map<String, Integer> getAll();
+
+    Integer get(String nameFruit);
 }
