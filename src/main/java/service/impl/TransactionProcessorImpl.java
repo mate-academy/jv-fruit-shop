@@ -7,7 +7,7 @@ import service.Strategy;
 import service.TransactionProcessor;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
-    private Map<Transaction.Operation, Strategy> operationStrategies;
+    private final Map<Transaction.Operation, Strategy> operationStrategies;
 
     public TransactionProcessorImpl(Map<Transaction.Operation, Strategy> operationStrategies) {
         this.operationStrategies = operationStrategies;

@@ -21,10 +21,10 @@ import strategy.SupplyStrategy;
 public class Main {
     public static void main(String[] args) {
         Map<Transaction.Operation, Strategy> operationStrategies = new HashMap<>();
-        operationStrategies.put(Transaction.Operation.b, new BalanceStrategy());
-        operationStrategies.put(Transaction.Operation.p, new PurchaseStrategy());
-        operationStrategies.put(Transaction.Operation.s, new SupplyStrategy());
-        operationStrategies.put(Transaction.Operation.r, new ReturnStrategy());
+        operationStrategies.put(Transaction.Operation.BALANCE, new BalanceStrategy());
+        operationStrategies.put(Transaction.Operation.PURCHASE, new PurchaseStrategy());
+        operationStrategies.put(Transaction.Operation.SUPPLY, new SupplyStrategy());
+        operationStrategies.put(Transaction.Operation.RETURN, new ReturnStrategy());
         ReaderService reader = new ReaderServiceImpl();
         List<String> records = reader.read("src/main/resources/test1");
         TransactionMapper mapper = new TransactionMapperImpl();

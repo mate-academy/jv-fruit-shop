@@ -1,7 +1,7 @@
 package service.impl;
 
-import static db.Storage.fruitStorage;
-
+import db.Dao;
+import db.DaoImpl;
 import java.util.Map;
 import service.ReportCreator;
 
@@ -11,12 +11,13 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String create() {
-        if (fruitStorage.isEmpty()) {
+        Dao dao = new DaoImpl();
+        if (dao.isStorageEmpty()) {
             return "";
         }
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(TITLE).append(SEPARATOR);
-        for (Map.Entry<String, Integer> entry : fruitStorage.entrySet()) {
+        for (Map.Entry<String, Integer> entry : dao.getAllEntries()) {
             String record = createRecord(entry);
             reportBuilder.append(record).append(SEPARATOR);
         }

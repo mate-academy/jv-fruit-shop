@@ -1,17 +1,18 @@
 package strategy;
 
-import static db.Storage.fruitStorage;
-
+import db.Dao;
+import db.DaoImpl;
 import service.Strategy;
 
 public class BalanceStrategy implements Strategy {
 
     @Override
     public boolean updateStorage(String fruitName, int quantity) {
-        if (fruitStorage.containsKey(fruitName)) {
+        Dao dao = new DaoImpl();
+        if (dao.isFruitPresent(fruitName)) {
             throw new RuntimeException(fruitName + " already exists in the storage");
         }
-        fruitStorage.put(fruitName, quantity);
+        dao.addEntry(fruitName, quantity);
         return true;
     }
 }

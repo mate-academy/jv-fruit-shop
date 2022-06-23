@@ -36,9 +36,28 @@ public class Transaction {
     }
 
     public enum Operation {
-        b,
-        p,
-        r,
-        s
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private String operation;
+
+        Operation(String operation) {
+            this.operation = operation;
+        }
+
+        public static Operation getFullName(String abbreviation) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getOperation().equals(abbreviation)) {
+                    return operation;
+                }
+            }
+            return null;
+        }
+
+        public String getOperation() {
+            return operation;
+        }
     }
 }
