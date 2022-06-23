@@ -1,8 +1,8 @@
 package service;
 
-import java.util.List;
 import model.FruitTransaction;
+import strategy.FruitsAmountHandler;
 
 public interface FruitOperationStrategy {
-    void fillStorage(List<FruitTransaction> fruitTransactions);
+    FruitsAmountHandler get(FruitTransaction.Operation operation);
 }

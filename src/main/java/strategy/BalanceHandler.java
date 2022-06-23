@@ -1,7 +1,6 @@
 package strategy;
 
 import dao.StorageDao;
-import db.Storage;
 
 public class BalanceHandler implements FruitsAmountHandler {
     private StorageDao storageDao;
@@ -12,6 +11,6 @@ public class BalanceHandler implements FruitsAmountHandler {
 
     @Override
     public void updateAmount(String name, Integer addNumber) {
-        storageDao.update(name, Storage.report.get(name) + addNumber);
+        storageDao.update(name, addNumber);
     }
 }

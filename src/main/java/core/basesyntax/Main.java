@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
+import service.FillStorage;
 import service.FruitOperationStrategy;
 import service.GenerateReportLines;
 import service.ReadTransactions;
 import service.SplitInformation;
 import service.WriteReport;
+import service.impl.FillStorageImpl;
 import service.impl.FruitOperationStrategyImpl;
 import service.impl.GenerateReportLinesImpl;
 import service.impl.ReadTransactionsImpl;
@@ -33,15 +35,16 @@ public class Main {
         amountHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(storageDao));
         amountHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(storageDao));
         amountHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(storageDao));
-        FruitOperationStrategy fruitsAmountStrategy =
-                new FruitOperationStrategyImpl(storageDao,amountHandlerMap);
-        WriteReport writeReport = new WriteReportImpl();
         List<FruitTransaction> allTransactions = splitInformation
                 .createTransactionList(readTransactions.convertFromFileToList(fromPath));
-        fruitsAmountStrategy.fillStorage(allTransactions);
+        FruitOperationStrategy fruitsAmountStrategy =
+                new FruitOperationStrategyImpl(amountHandlerMap);
+        FillStorage fillStorage = new FillStorageImpl(fruitsAmountStrategy, storageDao);
+        fillStorage.fillStorage(allTransactions);
         GenerateReportLines generateReportLines = new GenerateReportLinesImpl();
         List<String> reports = generateReportLines.createReport(storageDao.getAll());
         String toPath = "src/main/recources/TheRemainingFruit.csv";
+        WriteReport writeReport = new WriteReportImpl();
         writeReport.fruitsReport(reports, toPath);
     }
 }
