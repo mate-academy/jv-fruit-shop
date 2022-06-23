@@ -1,7 +1,9 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.Transaction;
+
 import java.util.List;
 
 public interface StringListProcessor {
-    void stringListToFruitIntegerMap(List<String> fileContent);
+    List<Transaction> stringListToFruitIntegerMap(List<String> fileContent);
 }
