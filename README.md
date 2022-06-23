@@ -1,5 +1,5 @@
 # Fruit shop
-Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
+Let's imagine that we have a fruit store. Every day in the store there are a number of strategy, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
 
@@ -9,7 +9,7 @@ Your tasks are:
 - generate a report based on processed data
 - write report to new csv file
 
-There are four activities at the store:
+There are four strategy at the store:
 ```text
     b - balance, the remnants of fruits at the beginning of the working day
     s - supply, means you are receiving new fruits from suppliers
@@ -17,7 +17,7 @@ There are four activities at the store:
     r - return, means someone who have bought the fruits now returns them back
 ```
 
-Let's check in details all types of activities:
+Let's check in details all types of strategy:
 1. Balance. Fruit balance at the beginning of the work shift. The following line in the file will look like:
     
     ```text
