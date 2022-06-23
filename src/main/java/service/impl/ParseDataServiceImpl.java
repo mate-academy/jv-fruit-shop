@@ -3,9 +3,8 @@ package service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
+import model.Operation;
 import service.ParseDataService;
-import strategy.OperationHandler;
-import strategy.OperationStrategy;
 
 public class ParseDataServiceImpl implements ParseDataService {
     private static final int TYPE_OF_OPERATION = 0;
@@ -26,8 +25,8 @@ public class ParseDataServiceImpl implements ParseDataService {
         return parsedData;
     }
 
-    private OperationHandler getOperation(String[] splitedString) {
-        return OperationStrategy.getOperationServiceStrategy(splitedString[TYPE_OF_OPERATION]);
+    private Operation getOperation(String[] splitedString) {
+        return Operation.getOperationByName(splitedString[TYPE_OF_OPERATION]);
     }
 
     private String getTypeOfFruit(String[] splitedString) {

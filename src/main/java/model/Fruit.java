@@ -1,13 +1,11 @@
 package model;
 
-import strategy.OperationHandler;
-
 public class Fruit {
-    private final OperationHandler operation;
+    private final Operation operation;
     private final String fruit;
     private int quantity;
 
-    public Fruit(OperationHandler operation, String typeOfFruit, int quantityOfFruit) {
+    public Fruit(Operation operation, String typeOfFruit, int quantityOfFruit) {
         this.operation = operation;
         this.fruit = typeOfFruit;
         this.quantity = quantityOfFruit;
@@ -21,7 +19,7 @@ public class Fruit {
         return fruit;
     }
 
-    public OperationHandler getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
