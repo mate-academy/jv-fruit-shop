@@ -1,16 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CsvFileWriter;
+import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
-public class CsvFileWriterImpl implements CsvFileWriter {
+public class FileWriterImpl implements FileWriter {
     @Override
-    public void writeReportToFile(String filePath, String report) {
+    public void writeToFile(String filePath, String report) {
         File file = new File(filePath);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file));) {
             bufferedWriter.write(report);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file \"" + file + "\"", e);

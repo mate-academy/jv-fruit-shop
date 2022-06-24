@@ -5,11 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private static Map<Transaction.Operation, OperationHandler> operationHandlersMap =
-                                                                    new HashMap<>();
+    private final Map<Transaction.Operation, OperationHandler> operationHandlersMap;
 
     public OperationStrategyImpl() {
-        OperationStrategyImpl.operationHandlersMap = new HashMap<>() {{
+        operationHandlersMap = new HashMap<>() {{
                 put(Transaction.Operation.BALANCE, new BalanceOperationHandler());
                 put(Transaction.Operation.SUPPLY, new SupplyOperationHandler());
                 put(Transaction.Operation.PURCHASE, new PurchaseOperationHandler());

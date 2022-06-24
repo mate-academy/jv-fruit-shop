@@ -1,16 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.CsvFileReader;
-import core.basesyntax.service.CsvFileWriter;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.StringListProcessor;
+import core.basesyntax.service.TransactionConvertor;
 import core.basesyntax.service.handlers.OperationStrategy;
 import core.basesyntax.service.handlers.OperationStrategyImpl;
-import core.basesyntax.service.impl.CsvFileReaderImpl;
-import core.basesyntax.service.impl.CsvFileWriterImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
-import core.basesyntax.service.impl.StringListProcessorImpl;
+import core.basesyntax.service.impl.TransactionConvertorImpl;
 import java.util.List;
 
 public class FruitShop {
@@ -20,24 +20,24 @@ public class FruitShop {
             + "resources/Report.csv";
 
     public static void main(String[] args) {
-        CsvFileReader csvFileReader = new CsvFileReaderImpl();
-        List<String> fileContent = csvFileReader.readCsvFileToStringList(INPUT_FILE_PATH);
+        FileReader fileReader = new FileReaderImpl();
+        List<String> fileContent = fileReader.readCsvFileToStringList(INPUT_FILE_PATH);
 
-        StringListProcessor stringListProcessor = new StringListProcessorImpl();
-        List<Transaction> transactionList = stringListProcessor
-                .stringListToFruitIntegerMap(fileContent);
+        TransactionConvertor transactionConvertor = new TransactionConvertorImpl();
+        List<Transaction> transactionList = transactionConvertor
+                .convert(fileContent);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl();
         transactionList.forEach(transaction -> operationStrategy
                                                 .get(transaction.getAbbreviature())
-                                                .processOperation(transaction.getAbbreviature(),
+                                                .handle(
                                                         transaction.getFruit(),
                                                         transaction.getQuantity()));
 
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.create();
 
-        CsvFileWriter csvFileWriter = new CsvFileWriterImpl();
-        csvFileWriter.writeReportToFile(OUTPUT_FILE_PATH, report);
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFile(OUTPUT_FILE_PATH, report);
     }
 }

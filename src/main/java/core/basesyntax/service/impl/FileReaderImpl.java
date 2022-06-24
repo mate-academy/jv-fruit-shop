@@ -1,21 +1,20 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CsvFileReader;
+import core.basesyntax.service.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class CsvFileReaderImpl implements CsvFileReader {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readCsvFileToStringList(String filePath) {
-        List<String> stringListFromCsvFile;
+        List<String> lines;
         try {
-            stringListFromCsvFile = Files.readAllLines(Path.of(filePath));
-            stringListFromCsvFile.remove(0);
+            lines = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file \"" + filePath + "\"", e);
         }
-        return stringListFromCsvFile;
+        return lines;
     }
 }

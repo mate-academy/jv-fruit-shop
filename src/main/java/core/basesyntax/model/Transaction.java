@@ -41,14 +41,14 @@ public class Transaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String abbreviature;
+        private String operation;
 
-        Operation(String abbreviature) {
-            this.abbreviature = abbreviature;
+        Operation(String operation) {
+            this.operation = operation;
         }
 
-        public String getAbbreviature() {
-            return abbreviature;
+        public String getOperation() {
+            return operation;
         }
 
         public static Operation getOperation(String abbreviature) {
