@@ -10,9 +10,10 @@ public class CsvParser implements Parser {
     private static final int FRUIT_POSITION = 1;
     private static final int AMOUNT_POSITION = 2;
     private static final int HEADER_LINES_LENGTH = 1;
+    private static final String SEPARATOR = ",";
 
     private Operation operationParse(String line) {
-        String[] data = line.split(",");
+        String[] data = line.split(SEPARATOR);
         OperationType type = null;
         for (OperationType operationType : OperationType.values()) {
             if (data[0].equals(operationType.getAbbreviation())) {
