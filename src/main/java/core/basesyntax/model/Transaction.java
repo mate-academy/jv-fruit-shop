@@ -5,18 +5,18 @@ import java.util.Map;
 
 public class Transaction {
     private static final Map<String, Transaction.Operation> operationsMap = new HashMap<>();
-    private Operation abbreviature;
+    private Operation operation;
     private Fruit fruit;
     private Integer quantity;
 
     public Transaction(Operation operation, Fruit fruit, Integer quantity) {
-        this.abbreviature = operation;
+        this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public Operation getAbbreviature() {
-        return abbreviature;
+    public Operation getOperation() {
+        return operation;
     }
 
     public Fruit getFruit() {
@@ -52,7 +52,6 @@ public class Transaction {
         }
 
         public static Operation getOperation(String abbreviature) {
-            Map<String, Operation> operationsMap = getOperationsMap();
             return operationsMap.get(abbreviature);
         }
 
@@ -60,10 +59,6 @@ public class Transaction {
             for (Transaction.Operation enumOperation : Transaction.Operation.values()) {
                 operationsMap.put(enumOperation.getOperation(), enumOperation);
             }
-        }
-
-        public static Map<String, Transaction.Operation> getOperationsMap() {
-            return operationsMap;
         }
     }
 }

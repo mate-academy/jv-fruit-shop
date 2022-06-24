@@ -7,8 +7,8 @@ import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.TransactionConvertor;
 import core.basesyntax.service.handlers.OperationStrategy;
 import core.basesyntax.service.handlers.OperationStrategyImpl;
-import core.basesyntax.service.impl.FileReaderImpl;
-import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.CsvFileReaderImpl;
+import core.basesyntax.service.impl.CsvFileWriterImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.TransactionConvertorImpl;
 import java.util.List;
@@ -20,8 +20,8 @@ public class FruitShop {
             + "resources/Report.csv";
 
     public static void main(String[] args) {
-        FileReader fileReader = new FileReaderImpl();
-        List<String> fileContent = fileReader.readCsvFileToStringList(INPUT_FILE_PATH);
+        FileReader fileReader = new CsvFileReaderImpl();
+        List<String> fileContent = fileReader.readFromFile(INPUT_FILE_PATH);
 
         TransactionConvertor transactionConvertor = new TransactionConvertorImpl();
         List<Transaction> transactionList = transactionConvertor
@@ -29,7 +29,7 @@ public class FruitShop {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl();
         transactionList.forEach(transaction -> operationStrategy
-                                                .get(transaction.getAbbreviature())
+                                                .get(transaction.getOperation())
                                                 .handle(
                                                         transaction.getFruit(),
                                                         transaction.getQuantity()));
@@ -37,7 +37,7 @@ public class FruitShop {
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.create();
 
-        FileWriter fileWriter = new FileWriterImpl();
+        FileWriter fileWriter = new CsvFileWriterImpl();
         fileWriter.writeToFile(OUTPUT_FILE_PATH, report);
     }
 }

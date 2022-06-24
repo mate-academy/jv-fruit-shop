@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionConvertorImpl implements TransactionConvertor {
-
-    public static final int TRANSACTION_INDEX = 0;
+    public static final int OPERATION_INDEX = 0;
     public static final int FRUIT_INDEX = 1;
     public static final int QUANTITY_INDEX = 2;
 
@@ -19,7 +18,7 @@ public class TransactionConvertorImpl implements TransactionConvertor {
         for (String line : lines) {
             String[] splittedLine = line.split(",");
             Transaction transaction = new Transaction(Transaction.Operation.getOperation(
-                                                splittedLine[TRANSACTION_INDEX]),
+                                                splittedLine[OPERATION_INDEX]),
                                                 new Fruit(splittedLine[FRUIT_INDEX]),
                                                 Integer.valueOf(splittedLine[QUANTITY_INDEX]));
             transactions.add(transaction);
