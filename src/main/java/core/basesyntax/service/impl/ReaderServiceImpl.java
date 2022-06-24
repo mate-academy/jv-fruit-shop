@@ -1,12 +1,12 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
 

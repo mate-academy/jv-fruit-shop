@@ -1,15 +1,16 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.model.Transaction;
+import core.basesyntax.service.TransactionHandler;
+import core.basesyntax.service.TransactionStrategy;
 import java.util.List;
 import java.util.Map;
-import model.Transaction;
-import service.Handler;
-import service.TransactionProcessor;
 
-public class TransactionProcessorImpl implements TransactionProcessor {
-    private final Map<Transaction.Operation, Handler> operationStrategies;
+public class TransactionStrategyImpl implements TransactionStrategy {
+    private final Map<Transaction.Operation, TransactionHandler> operationStrategies;
 
-    public TransactionProcessorImpl(Map<Transaction.Operation, Handler> operationStrategies) {
+    public TransactionStrategyImpl(
+            Map<Transaction.Operation, TransactionHandler> operationStrategies) {
         this.operationStrategies = operationStrategies;
     }
 
@@ -19,7 +20,7 @@ public class TransactionProcessorImpl implements TransactionProcessor {
             return false;
         }
         for (Transaction transaction : transactions) {
-            Handler strategy = pickStrategy(transaction.getOperation());
+            TransactionHandler strategy = getHandler(transaction.getOperation());
             if (strategy == null) {
                 throw new RuntimeException("missing strategy in operationStrategies map");
             }
@@ -28,7 +29,7 @@ public class TransactionProcessorImpl implements TransactionProcessor {
         return true;
     }
 
-    private Handler pickStrategy(Transaction.Operation operation) {
+    private TransactionHandler getHandler(Transaction.Operation operation) {
         return operationStrategies.get(operation);
     }
 }

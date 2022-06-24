@@ -1,4 +1,4 @@
-package db;
+package core.basesyntax.db;
 
 import java.util.Map.Entry;
 import java.util.Set;

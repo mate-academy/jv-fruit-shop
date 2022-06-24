@@ -1,10 +1,10 @@
-package strategy.handler;
+package core.basesyntax.strategy.handler;
 
-import db.Dao;
-import db.DaoImpl;
-import service.Handler;
+import core.basesyntax.db.Dao;
+import core.basesyntax.db.DaoImpl;
+import core.basesyntax.service.TransactionHandler;
 
-public class PurchaseHandler implements Handler {
+public class PurchaseHandler implements TransactionHandler {
     @Override
     public boolean updateStorage(String fruitName, int quantity) {
         Dao dao = new DaoImpl();

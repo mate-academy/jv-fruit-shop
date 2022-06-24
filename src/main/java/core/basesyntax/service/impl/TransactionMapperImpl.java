@@ -1,9 +1,9 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.model.Transaction;
+import core.basesyntax.service.TransactionMapper;
 import java.util.ArrayList;
 import java.util.List;
-import model.Transaction;
-import service.TransactionMapper;
 
 public class TransactionMapperImpl implements TransactionMapper {
     private static final int OPERATION_POSITION = 0;

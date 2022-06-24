@@ -1,9 +1,9 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
-import db.Dao;
-import db.DaoImpl;
+import core.basesyntax.db.Dao;
+import core.basesyntax.db.DaoImpl;
+import core.basesyntax.service.ReportCreator;
 import java.util.Map;
-import service.ReportCreator;
 
 public class ReportCreatorImpl implements ReportCreator {
     private static final String SEPARATOR = System.lineSeparator();

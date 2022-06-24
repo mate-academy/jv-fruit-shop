@@ -1,10 +1,10 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
 
