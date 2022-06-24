@@ -1,5 +1,5 @@
 package service;
 
-public interface Strategy {
+public interface Handler {
     boolean updateStorage(String fruitName, int quantity);
 }

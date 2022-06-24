@@ -11,9 +11,9 @@ public class DaoImpl implements Dao {
     }
 
     @Override
-    public boolean removeEntry(String fruitName, int quantity) {
+    public boolean removeEntry(String fruitName) {
         int value = Storage.fruitStorage.remove(fruitName);
-        return value == quantity;
+        return true;
     }
 
     @Override

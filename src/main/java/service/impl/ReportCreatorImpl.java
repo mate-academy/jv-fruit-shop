@@ -16,12 +16,12 @@ public class ReportCreatorImpl implements ReportCreator {
             return "";
         }
         StringBuilder reportBuilder = new StringBuilder();
-        reportBuilder.append(TITLE).append(SEPARATOR);
+        reportBuilder.append(TITLE);
         for (Map.Entry<String, Integer> entry : dao.getAllEntries()) {
             String record = createRecord(entry);
-            reportBuilder.append(record).append(SEPARATOR);
+            reportBuilder.append(SEPARATOR).append(record);
         }
-        return reportBuilder.toString().trim();
+        return reportBuilder.toString();
     }
 
     private String createRecord(Map.Entry<String, Integer> entry) {

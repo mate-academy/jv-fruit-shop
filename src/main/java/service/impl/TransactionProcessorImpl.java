@@ -3,13 +3,13 @@ package service.impl;
 import java.util.List;
 import java.util.Map;
 import model.Transaction;
-import service.Strategy;
+import service.Handler;
 import service.TransactionProcessor;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
-    private final Map<Transaction.Operation, Strategy> operationStrategies;
+    private final Map<Transaction.Operation, Handler> operationStrategies;
 
-    public TransactionProcessorImpl(Map<Transaction.Operation, Strategy> operationStrategies) {
+    public TransactionProcessorImpl(Map<Transaction.Operation, Handler> operationStrategies) {
         this.operationStrategies = operationStrategies;
     }
 
@@ -19,7 +19,7 @@ public class TransactionProcessorImpl implements TransactionProcessor {
             return false;
         }
         for (Transaction transaction : transactions) {
-            Strategy strategy = pickStrategy(transaction.getOperation());
+            Handler strategy = pickStrategy(transaction.getOperation());
             if (strategy == null) {
                 throw new RuntimeException("missing strategy in operationStrategies map");
             }
@@ -28,10 +28,7 @@ public class TransactionProcessorImpl implements TransactionProcessor {
         return true;
     }
 
-    private Strategy pickStrategy(Transaction.Operation operation) {
-        if (operationStrategies == null) {
-            throw new RuntimeException("Map operationStrategies not provided");
-        }
+    private Handler pickStrategy(Transaction.Operation operation) {
         return operationStrategies.get(operation);
     }
 }

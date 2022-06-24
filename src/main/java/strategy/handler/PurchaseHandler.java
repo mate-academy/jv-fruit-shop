@@ -1,11 +1,10 @@
-package strategy;
+package strategy.handler;
 
 import db.Dao;
 import db.DaoImpl;
-import service.Strategy;
+import service.Handler;
 
-public class PurchaseStrategy implements Strategy {
-
+public class PurchaseHandler implements Handler {
     @Override
     public boolean updateStorage(String fruitName, int quantity) {
         Dao dao = new DaoImpl();
@@ -19,7 +18,7 @@ public class PurchaseStrategy implements Strategy {
         int newQuantity = currentQuantity - quantity;
         dao.addEntry(fruitName, newQuantity);
         if (newQuantity == 0) {
-            dao.removeEntry(fruitName, newQuantity);
+            dao.removeEntry(fruitName);
         }
         return true;
     }

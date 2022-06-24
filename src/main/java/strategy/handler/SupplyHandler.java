@@ -1,11 +1,10 @@
-package strategy;
+package strategy.handler;
 
 import db.Dao;
 import db.DaoImpl;
-import service.Strategy;
+import service.Handler;
 
-public class SupplyStrategy implements Strategy {
-
+public class SupplyHandler implements Handler {
     @Override
     public boolean updateStorage(String fruitName, int quantity) {
         Dao dao = new DaoImpl();

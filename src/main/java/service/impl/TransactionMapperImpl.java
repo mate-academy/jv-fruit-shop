@@ -29,7 +29,6 @@ public class TransactionMapperImpl implements TransactionMapper {
         if (recordComponents.length != COMPONENT_NUMBER) {
             throw new RuntimeException("Invalid record");
         }
-        //String operationLabel
         Transaction.Operation operation
                 = Transaction.Operation.getFullName(recordComponents[OPERATION_POSITION]);
         String fruitName = recordComponents[FRUIT_NAME_POSITION];

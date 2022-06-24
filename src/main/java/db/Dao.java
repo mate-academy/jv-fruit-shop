@@ -6,7 +6,7 @@ import java.util.Set;
 public interface Dao {
     boolean addEntry(String fruitName, int quantity);
 
-    boolean removeEntry(String fruitName, int quantity);
+    boolean removeEntry(String fruitName);
 
     boolean isStorageEmpty();
 
