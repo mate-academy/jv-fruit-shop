@@ -1,11 +1,11 @@
-package strategy;
+package core.basesyntax.strategy;
 
-import dao.StorageDao;
+import core.basesyntax.dao.StorageDao;
 
-public class BalanceHandler implements FruitsAmountHandler {
+public class BalanceOperationHandler implements FruitsOperationHandler {
     private StorageDao storageDao;
 
-    public BalanceHandler(StorageDao storageDao) {
+    public BalanceOperationHandler(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 

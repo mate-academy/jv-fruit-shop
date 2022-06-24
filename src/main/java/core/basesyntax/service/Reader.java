@@ -1,8 +1,8 @@
-package service;
+package core.basesyntax.service;
 
 import java.util.List;
 
-public interface ReadTransactions {
+public interface Reader {
 
     List<String> convertFromFileToList(String path);
 }

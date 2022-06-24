@@ -1,11 +1,11 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.Splitter;
 import java.util.List;
 import java.util.stream.Collectors;
-import model.FruitTransaction;
-import service.SplitInformation;
 
-public class SplitInformationImpl implements SplitInformation {
+public class SplitterImpl implements Splitter {
     private static final int FIRST_ELEMENT_FROM_LINE = 0;
     private static final int SECOND_ELEMENT_FROM_LINE = 1;
     private static final int THIRD_ELEMENT_FROM_LINE = 2;

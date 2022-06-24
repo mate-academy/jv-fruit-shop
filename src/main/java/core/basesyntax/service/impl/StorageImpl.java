@@ -1,16 +1,16 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
-import dao.StorageDao;
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitOperationStrategy;
+import core.basesyntax.service.Storage;
 import java.util.List;
-import model.FruitTransaction;
-import service.FillStorage;
-import service.FruitOperationStrategy;
 
-public class FillStorageImpl implements FillStorage {
+public class StorageImpl implements Storage {
     private FruitOperationStrategy fruitOperationStrategy;
     private StorageDao storageDao;
 
-    public FillStorageImpl(FruitOperationStrategy fruitOperationStrategy, StorageDao storageDao) {
+    public StorageImpl(FruitOperationStrategy fruitOperationStrategy, StorageDao storageDao) {
         this.fruitOperationStrategy = fruitOperationStrategy;
         this.storageDao = storageDao;
     }
