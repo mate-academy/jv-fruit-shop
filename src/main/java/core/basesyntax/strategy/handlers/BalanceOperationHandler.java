@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.handlers;
 
-import core.basesyntax.model.Operation;
 import core.basesyntax.dao.ShopDao;
+import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationHandler;
 
 public class BalanceOperationHandler extends OperationHandler {

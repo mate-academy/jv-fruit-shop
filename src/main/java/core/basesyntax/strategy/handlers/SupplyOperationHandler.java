@@ -1,10 +1,8 @@
 package core.basesyntax.strategy.handlers;
 
-import core.basesyntax.model.Operation;
 import core.basesyntax.dao.ShopDao;
+import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationHandler;
-
-import java.util.Map;
 
 public class SupplyOperationHandler extends OperationHandler {
     public SupplyOperationHandler(ShopDao dao) {

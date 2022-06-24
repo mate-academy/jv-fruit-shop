@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.Operation;
 import core.basesyntax.dao.ShopDao;
+import core.basesyntax.model.Operation;
 
 public abstract class OperationHandler {
     protected final ShopDao dao;

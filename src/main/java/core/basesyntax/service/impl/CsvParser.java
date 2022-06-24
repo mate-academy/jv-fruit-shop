@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.Parser;
 import core.basesyntax.model.OperationType;
+import core.basesyntax.service.Parser;
 
 public class CsvParser implements Parser {
     private static final int FRUIT_POSITION = 1;

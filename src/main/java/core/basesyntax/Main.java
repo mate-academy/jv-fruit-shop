@@ -1,19 +1,27 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.ShopDao;
+import core.basesyntax.dao.ShopDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.model.OperationType;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileValidator;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.Reporter;
+import core.basesyntax.service.impl.CsvParser;
+import core.basesyntax.service.impl.CsvReaderImpl;
+import core.basesyntax.service.impl.CsvReporter;
+import core.basesyntax.service.impl.CsvWriterImpl;
+import core.basesyntax.service.impl.ValidateCsv;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.dao.ShopDao;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handlers.BalanceOperationHandler;
 import core.basesyntax.strategy.handlers.PurchaseOperationHandler;
 import core.basesyntax.strategy.handlers.ReturnOperationHandler;
-import core.basesyntax.dao.ShopDaoImpl;
 import core.basesyntax.strategy.handlers.SupplyOperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.model.OperationType;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -28,15 +36,14 @@ public class Main {
 
     public static void main(String[] args) {
         FileReader fileReader = new CsvReaderImpl();
-        List<String> inputData = fileReader.readFile(FROM_PATH);
+        final List<String> inputData = fileReader.readFile(FROM_PATH);
         FileValidator validator = new ValidateCsv();
         Parser parser = new CsvParser();
-        List<Operation> operations = inputData.stream()
+        final List<Operation> operations = inputData.stream()
                 .skip(1)
                 .map(parser::parse)
                 .collect(Collectors.toList());
-        Storage storage = new Storage();
-        ShopDao dao = new ShopDaoImpl(storage.shopStorage);
+        ShopDao dao = new ShopDaoImpl(Storage.shopStorage);
         handlers.put(OperationType.BALANCE, new BalanceOperationHandler(dao));
         handlers.put(OperationType.PURCHASE, new PurchaseOperationHandler(dao));
         handlers.put(OperationType.RETURN, new ReturnOperationHandler(dao));
@@ -44,7 +51,7 @@ public class Main {
         OperationStrategy strategy = new OperationStrategyImpl(handlers);
         operations.forEach(operation -> strategy.get(operation).process(operation));
         Reporter reporter = new CsvReporter();
-        List<String> report = reporter.generate(dao.getAll());
+        final List<String> report = reporter.generate(dao.getAll());
         FileWriter fileWriter = new CsvWriterImpl();
         fileWriter.writeCsv(report, TO_PATH);
     }
