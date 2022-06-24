@@ -1,8 +1,9 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.strategy.handlers;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.ShopDao;
+import core.basesyntax.dao.ShopDao;
+import core.basesyntax.strategy.OperationHandler;
+
 import java.util.Map;
 
 public class PurchaseOperationHandler extends OperationHandler {
@@ -12,11 +13,11 @@ public class PurchaseOperationHandler extends OperationHandler {
 
     @Override
     public void process(Operation operation) {
-        Map.Entry<String, Integer> shopEntry = dao.get(operation.getFruitName());
-        if (shopEntry.getValue() < operation.getAmount()) {
+        int amount = dao.get(operation.getFruitName());
+        if (amount < operation.getAmount()) {
             throw new RuntimeException("Not enough fruits");
         }
-        int newAmount = shopEntry.getValue() - operation.getAmount();
+        int newAmount = amount - operation.getAmount();
         dao.update(operation.getFruitName(), newAmount);
     }
 }

@@ -1,9 +1,10 @@
-package core.basesyntax.service;
+package core.basesyntax.dao;
 
 import java.util.Map;
+import java.util.Optional;
 
 public interface ShopDao {
-    Map.Entry<String, Integer> get(String fruit);
+    Integer get(String fruit);
 
     Map<String, Integer> getAll();
 

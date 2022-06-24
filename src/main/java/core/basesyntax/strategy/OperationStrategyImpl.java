@@ -1,7 +1,8 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.OperationHandler;
+import core.basesyntax.model.OperationType;
+
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {

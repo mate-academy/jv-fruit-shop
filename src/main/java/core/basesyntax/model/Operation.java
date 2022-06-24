@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import core.basesyntax.strategy.OperationType;
-
 public class Operation {
     private final OperationType type;
     private final String fruitName;

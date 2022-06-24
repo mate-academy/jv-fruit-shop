@@ -1,8 +1,8 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.strategy.handlers;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.ShopDao;
+import core.basesyntax.dao.ShopDao;
+import core.basesyntax.strategy.OperationHandler;
 
 public class BalanceOperationHandler extends OperationHandler {
     public BalanceOperationHandler(ShopDao dao) {
@@ -11,6 +11,9 @@ public class BalanceOperationHandler extends OperationHandler {
 
     @Override
     public void process(Operation operation) {
+        if (dao.getAll().containsKey(operation.getFruitName())) {
+            throw new RuntimeException("We couldn't process 2 balance for the same fruit");
+        }
         dao.update(operation.getFruitName(), operation.getAmount());
     }
 }
