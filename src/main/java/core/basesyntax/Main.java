@@ -27,7 +27,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Main {
     private static final Path FROM_PATH = Paths.get("src/main/resources/FruitShop.csv");
@@ -39,10 +38,7 @@ public class Main {
         final List<String> inputData = fileReader.readFile(FROM_PATH);
         FileValidator validator = new ValidateCsv();
         Parser parser = new CsvParser();
-        final List<Operation> operations = inputData.stream()
-                .skip(1)
-                .map(parser::parse)
-                .collect(Collectors.toList());
+        final List<Operation> operations = parser.parse(inputData);
         ShopDao dao = new ShopDaoImpl(Storage.shopStorage);
         handlers.put(OperationType.BALANCE, new BalanceOperationHandler(dao));
         handlers.put(OperationType.PURCHASE, new PurchaseOperationHandler(dao));
