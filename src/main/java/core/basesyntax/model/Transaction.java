@@ -1,10 +1,10 @@
 package core.basesyntax.model;
 
-import static core.basesyntax.model.AvailableOperationsMap.getOperationsMap;
-
+import java.util.HashMap;
 import java.util.Map;
 
 public class Transaction {
+    private static final Map<String, Transaction.Operation> operationsMap = new HashMap<>();
     private Operation abbreviature;
     private Fruit fruit;
     private Integer quantity;
@@ -54,6 +54,16 @@ public class Transaction {
         public static Operation getOperation(String abbreviature) {
             Map<String, Operation> operationsMap = getOperationsMap();
             return operationsMap.get(abbreviature);
+        }
+
+        static {
+            for (Transaction.Operation enumOperation : Transaction.Operation.values()) {
+                operationsMap.put(enumOperation.getOperation(), enumOperation);
+            }
+        }
+
+        public static Map<String, Transaction.Operation> getOperationsMap() {
+            return operationsMap;
         }
     }
 }

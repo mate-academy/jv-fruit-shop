@@ -18,9 +18,10 @@ public class TransactionConvertorImpl implements TransactionConvertor {
         lines.remove(0);
         for (String line : lines) {
             String[] splittedLine = line.split(",");
-            Transaction transaction = new Transaction(Transaction.Operation.getOperation(splittedLine[TRANSACTION_INDEX]),
-                                                        new Fruit(splittedLine[FRUIT_INDEX]),
-                                                        Integer.valueOf(splittedLine[QUANTITY_INDEX]));
+            Transaction transaction = new Transaction(Transaction.Operation.getOperation(
+                                                splittedLine[TRANSACTION_INDEX]),
+                                                new Fruit(splittedLine[FRUIT_INDEX]),
+                                                Integer.valueOf(splittedLine[QUANTITY_INDEX]));
             transactions.add(transaction);
         }
         return transactions;
