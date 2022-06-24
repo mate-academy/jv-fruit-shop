@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class WriterImpl implements Writer {
     @Override
-    public void fruitsReport(String report, String path) {
+    public void writeFruitsReport(String report, String path) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             writer.write(report);
         } catch (IOException e) {

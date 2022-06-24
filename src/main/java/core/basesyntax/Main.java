@@ -49,6 +49,6 @@ public class Main {
         String report = generateReportLines.createReport(storageDao.getAll());
         String toPath = "src/main/resources/TheRemainingFruit.csv";
         Writer writeReport = new WriterImpl();
-        writeReport.fruitsReport(report, toPath);
+        writeReport.writeFruitsReport(report, toPath);
     }
 }
