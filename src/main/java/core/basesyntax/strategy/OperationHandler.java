@@ -13,7 +13,7 @@ public abstract class OperationHandler {
     public abstract void process(Operation operation);
 
     protected boolean isFruitValid(String fruitName) {
-        if (!dao.getAll().containsKey(fruitName)) {
+        if (dao.get(fruitName) == null) {
             throw new RuntimeException("Unknown fruit: " + fruitName);
         }
         return true;

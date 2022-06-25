@@ -13,6 +13,10 @@ public class PurchaseOperationHandler extends OperationHandler {
     public void process(Operation operation) {
         isFruitValid(operation.getFruitName());
         int amount = dao.get(operation.getFruitName());
+        if (operation.getAmount() < 0) {
+            throw new RuntimeException("Illegal amount of fruits: " + operation.getAmount()
+                    + "for fruit: " + operation.getFruitName());
+        }
         if (amount < operation.getAmount()) {
             throw new RuntimeException("Not enough fruits for fruit: " + operation.getFruitName()
                     + " with actual amount: " + amount + " and required amount: "
