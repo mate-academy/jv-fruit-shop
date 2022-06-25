@@ -11,7 +11,7 @@ public class BalanceOperationHandler extends OperationHandler {
 
     @Override
     public void process(Operation operation) {
-        if (dao.getAll().containsKey(operation.getFruitName())) {
+        if (dao.get(operation.getFruitName()) != null) {
             throw new RuntimeException("We couldn't process 2 balance for the same fruit");
         }
         dao.update(operation.getFruitName(), operation.getAmount());

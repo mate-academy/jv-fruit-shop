@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CsvParser implements Parser {
+    private static final int OPERATION_POSITION = 0;
     private static final int FRUIT_POSITION = 1;
     private static final int AMOUNT_POSITION = 2;
     private static final int HEADER_LINES_LENGTH = 1;
@@ -16,7 +17,7 @@ public class CsvParser implements Parser {
         String[] data = line.split(SEPARATOR);
         OperationType type = null;
         for (OperationType operationType : OperationType.values()) {
-            if (data[0].equals(operationType.getAbbreviation())) {
+            if (data[OPERATION_POSITION].equals(operationType.getAbbreviation())) {
                 type = operationType;
                 break;
             }

@@ -13,7 +13,7 @@ public class ReturnOperationHandler extends OperationHandler {
     public void process(Operation operation) {
         isFruitValid(operation.getFruitName());
         if (operation.getAmount() < 0) {
-            throw new RuntimeException("Illegal amount of fruits");
+            throw new RuntimeException("Illegal amount of fruits: " + operation.getAmount());
         }
         int newAmount = dao.get(operation.getFruitName()) + operation.getAmount();
         dao.update(operation.getFruitName(), newAmount);

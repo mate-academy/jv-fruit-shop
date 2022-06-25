@@ -6,7 +6,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileValidator;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.Reporter;
@@ -36,7 +35,7 @@ public class Main {
     public static void main(String[] args) {
         FileReader fileReader = new CsvReaderImpl();
         final List<String> inputData = fileReader.readFile(FROM_PATH);
-        FileValidator validator = new ValidateCsv();
+        new ValidateCsv().isValid(inputData);
         Parser parser = new CsvParser();
         final List<Operation> operations = parser.parse(inputData);
         ShopDao dao = new ShopDaoImpl(Storage.shopStorage);

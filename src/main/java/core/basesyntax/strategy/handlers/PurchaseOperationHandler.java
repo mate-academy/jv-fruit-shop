@@ -11,9 +11,12 @@ public class PurchaseOperationHandler extends OperationHandler {
 
     @Override
     public void process(Operation operation) {
+        isFruitValid(operation.getFruitName());
         int amount = dao.get(operation.getFruitName());
         if (amount < operation.getAmount()) {
-            throw new RuntimeException("Not enough fruits");
+            throw new RuntimeException("Not enough fruits for fruit: " + operation.getFruitName()
+                    + " with actual amount: " + amount + " and required amount: "
+                    + operation.getAmount());
         }
         int newAmount = amount - operation.getAmount();
         dao.update(operation.getFruitName(), newAmount);
