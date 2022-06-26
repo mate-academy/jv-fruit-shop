@@ -16,8 +16,7 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String createReport() {
-        return HEADING + storageDao.getData()
-                .entrySet()
+        return HEADING + storageDao.getData().entrySet()
                 .stream()
                 .map(entry -> LINE_SEPARATOR
                         + entry.getKey()

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FruitParserImpl implements FruitParser {
     private static final int TITLE_INDEX = 0;
-    private static final String COMA = ",";
+    private static final String DATA_SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -17,7 +17,7 @@ public class FruitParserImpl implements FruitParser {
         lines.remove(TITLE_INDEX);
         List<FruitShopTransactions> parsedLines = new ArrayList<>();
         lines.stream()
-                .map(s -> s.split(COMA))
+                .map(s -> s.split(DATA_SEPARATOR))
                 .forEach(s -> parsedLines.add(new FruitShopTransactions(FruitShopTransactions
                         .getOperationByLetter(s[OPERATION_INDEX]),
                         s[FRUIT_INDEX],
