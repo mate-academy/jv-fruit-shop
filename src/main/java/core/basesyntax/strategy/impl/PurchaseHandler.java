@@ -13,7 +13,8 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void makeOperation(FruitShopTransactions fruitTransaction) {
-        int newQuantity = storageDao.getCurrentFruits(fruitTransaction.getFruit()) - fruitTransaction.getQuantity();
+        int newQuantity = storageDao.getCurrentFruits(fruitTransaction.getFruit())
+                - fruitTransaction.getQuantity();
         storageDao.update(fruitTransaction.getFruit(), newQuantity);
     }
 }

@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Arrays;
-
 public class FruitShopTransactions {
     private String fruit;
     private Operation operation;
@@ -63,3 +61,4 @@ public class FruitShopTransactions {
         throw new RuntimeException("Operation " + inputOperation + " not found");
     }
 }
+
