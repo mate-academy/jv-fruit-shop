@@ -20,13 +20,15 @@ public class FruitParserImpl implements FruitParser {
         }
         throw new RuntimeException("Operation " + inputOperation + " not found");
     }
+
     @Override
     public List<FruitShopTransactions> parse(List<String> lines) {
         lines.remove(TITLE_INDEX);
         List<FruitShopTransactions> parsedLines = new ArrayList<>();
         lines.stream()
                 .map(s -> s.split(DATA_SEPARATOR))
-                .forEach(s -> parsedLines.add(new FruitShopTransactions(getOperationByLetter(s[OPERATION_INDEX]),
+                .forEach(s -> parsedLines.add(new FruitShopTransactions(getOperationByLetter(
+                        s[OPERATION_INDEX]),
                         s[FRUIT_INDEX],
                         Integer.parseInt(s[QUANTITY_INDEX]))));
         return parsedLines;
