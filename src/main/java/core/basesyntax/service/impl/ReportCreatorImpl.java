@@ -25,4 +25,3 @@ public class ReportCreatorImpl implements ReportCreator {
                 .collect(Collectors.joining());
     }
 }
-

@@ -51,14 +51,5 @@ public class FruitShopTransactions {
             return operation;
         }
     }
-
-    public static Operation getOperationByLetter(String inputOperation) {
-        for (Operation operation : Operation.values()) {
-            if (operation.getOperation().equals(inputOperation)) {
-                return operation;
-            }
-        }
-        throw new RuntimeException("Operation " + inputOperation + " not found");
-    }
 }
 

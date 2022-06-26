@@ -12,13 +12,22 @@ public class FruitParserImpl implements FruitParser {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
+    public static FruitShopTransactions.Operation getOperationByLetter(String inputOperation) {
+        for (FruitShopTransactions.Operation operation : FruitShopTransactions.Operation.values()) {
+            if (operation.getOperation().equals(inputOperation)) {
+                return operation;
+            }
+        }
+        throw new RuntimeException("Operation " + inputOperation + " not found");
+    }
+
     @Override
     public List<FruitShopTransactions> parse(List<String> lines) {
         lines.remove(TITLE_INDEX);
         List<FruitShopTransactions> parsedLines = new ArrayList<>();
         lines.stream()
                 .map(s -> s.split(DATA_SEPARATOR))
-                .forEach(s -> parsedLines.add(new FruitShopTransactions(FruitShopTransactions
+                .forEach(s -> parsedLines.add(new FruitShopTransactions(FruitParserImpl
                         .getOperationByLetter(s[OPERATION_INDEX]),
                         s[FRUIT_INDEX],
                         Integer.parseInt(s[QUANTITY_INDEX]))));

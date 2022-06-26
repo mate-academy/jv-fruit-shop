@@ -4,6 +4,8 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitShopTransactions;
 import core.basesyntax.strategy.OperationHandler;
 
+import java.util.Optional;
+
 public class BalanceHandler implements OperationHandler {
     private final StorageDao storageDao;
 
@@ -13,8 +15,8 @@ public class BalanceHandler implements OperationHandler {
 
     @Override
     public void makeOperation(FruitShopTransactions fruitTransaction) {
-        int newQuantity = fruitTransaction.getQuantity()
-                + storageDao.getCurrentFruits(fruitTransaction.getFruit());
-        storageDao.update(fruitTransaction.getFruit(), newQuantity);
+        Optional<Integer> newQuantity = storageDao.getCurrentQuantity(fruitTransaction.getFruit());
+        storageDao.update(fruitTransaction.getFruit(),
+                fruitTransaction.getQuantity() + newQuantity.orElse(0));
     }
 }

@@ -4,6 +4,8 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitShopTransactions;
 import core.basesyntax.strategy.OperationHandler;
 
+import java.util.Optional;
+
 public class PurchaseHandler implements OperationHandler {
     private final StorageDao storageDao;
 
@@ -13,8 +15,11 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void makeOperation(FruitShopTransactions fruitTransaction) {
-        int newQuantity = storageDao.getCurrentFruits(fruitTransaction.getFruit())
-                - fruitTransaction.getQuantity();
-        storageDao.update(fruitTransaction.getFruit(), newQuantity);
+        Optional<Integer> newQuantity = storageDao.getCurrentQuantity(fruitTransaction.getFruit());
+        if (newQuantity.orElse(0) < fruitTransaction.getQuantity()) {
+            throw new RuntimeException("There are no enough fruits");
+        }
+        storageDao.update(fruitTransaction.getFruit(),
+                newQuantity.orElse(0) - fruitTransaction.getQuantity());
     }
 }

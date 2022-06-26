@@ -20,6 +20,8 @@ import core.basesyntax.strategy.impl.BalanceHandler;
 import core.basesyntax.strategy.impl.PurchaseHandler;
 import core.basesyntax.strategy.impl.ReturnHandler;
 import core.basesyntax.strategy.impl.SupplyHandler;
+
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +39,7 @@ public class Main {
         strategyMap.put(FruitShopTransactions.Operation.RETURN, new ReturnHandler(storageDao));
         OperationMap operationMap = new OperationMapImpl(strategyMap);
         FileReader reader = new FileReaderImpl();
-        List<String> input = reader.readFromFile(INPUT_FILE);
+        List<String> input = reader.readFromFile(Paths.get(INPUT_FILE));
         FruitParser parser = new FruitParserImpl();
         List<FruitShopTransactions> fruitShopTransactions = parser.parse(input);
         OperationService operationService = new OperationServiceImpl(operationMap);
