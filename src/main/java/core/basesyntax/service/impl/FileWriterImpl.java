@@ -7,12 +7,12 @@ import java.io.IOException;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void writerDataToFile(String report, String fileName) {
-        File file = new File(fileName);
+    public void writerDataToFile(String report, String filePath) {
+        File file = new File(filePath);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file))) {
             bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file: " + fileName, e);
+            throw new RuntimeException("Can't write data to file: " + filePath, e);
         }
     }
 }
