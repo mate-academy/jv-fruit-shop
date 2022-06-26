@@ -20,7 +20,6 @@ import core.basesyntax.strategy.impl.BalanceHandler;
 import core.basesyntax.strategy.impl.PurchaseHandler;
 import core.basesyntax.strategy.impl.ReturnHandler;
 import core.basesyntax.strategy.impl.SupplyHandler;
-
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;

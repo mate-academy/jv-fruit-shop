@@ -3,7 +3,6 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitShopTransactions;
 import core.basesyntax.strategy.OperationHandler;
-
 import java.util.Optional;
 
 public class BalanceHandler implements OperationHandler {
