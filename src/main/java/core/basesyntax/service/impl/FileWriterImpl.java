@@ -12,7 +12,7 @@ public class FileWriterImpl implements FileWriter {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file))) {
             bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file: " + filePath, e);
+            throw new RuntimeException("Can't find file by path: " + filePath, e);
         }
     }
 }
