@@ -14,7 +14,7 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void makeOperation(FruitShopTransactions fruitTransaction) {
-        Optional<Integer> newQuantity = storageDao.getCurrentQuantity(fruitTransaction.getFruit());
+        Optional<Integer> newQuantity = storageDao.getQuantity(fruitTransaction.getFruit());
         if (newQuantity.orElse(0) < fruitTransaction.getQuantity()) {
             throw new RuntimeException("There are no enough "
                     + fruitTransaction.getFruit()

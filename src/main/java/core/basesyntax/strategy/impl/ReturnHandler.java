@@ -14,7 +14,7 @@ public class ReturnHandler implements OperationHandler {
 
     @Override
     public void makeOperation(FruitShopTransactions fruitTransaction) {
-        Optional<Integer> newQuantity = storageDao.getCurrentQuantity(fruitTransaction.getFruit());
+        Optional<Integer> newQuantity = storageDao.getQuantity(fruitTransaction.getFruit());
         storageDao.update(fruitTransaction.getFruit(),
                 fruitTransaction.getQuantity() + newQuantity.orElse(0));
     }

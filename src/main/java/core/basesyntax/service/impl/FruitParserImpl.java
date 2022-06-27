@@ -2,8 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitShopTransactions;
 import core.basesyntax.service.FruitParser;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FruitParserImpl implements FruitParser {
     private static final int TITLE_INDEX = 0;
@@ -13,24 +14,25 @@ public class FruitParserImpl implements FruitParser {
     private static final int QUANTITY_INDEX = 2;
 
     private FruitShopTransactions.Operation getOperationByLetter(String inputOperation) {
-        for (FruitShopTransactions.Operation operation : FruitShopTransactions.Operation.values()) {
-            if (operation.getOperation().equals(inputOperation)) {
-                return operation;
-            }
-        }
-        throw new RuntimeException("Operation " + inputOperation + " not found");
+        return Arrays.stream(FruitShopTransactions.Operation.values())
+                .filter(operation -> operation.getOperation().equals(inputOperation))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Operation "
+                        + inputOperation
+                        + " not found"));
     }
 
     @Override
     public List<FruitShopTransactions> parse(List<String> lines) {
         lines.remove(TITLE_INDEX);
-        List<FruitShopTransactions> parsedLines = new ArrayList<>();
-        lines.stream()
+        return lines.stream()
                 .map(s -> s.split(DATA_SEPARATOR))
-                .forEach(s -> parsedLines.add(new FruitShopTransactions(getOperationByLetter(
+                    .map(s -> {
+                        return new FruitShopTransactions(getOperationByLetter(
                         s[OPERATION_INDEX]),
                         s[FRUIT_INDEX],
-                        Integer.parseInt(s[QUANTITY_INDEX]))));
-        return parsedLines;
+                        Integer.parseInt(s[QUANTITY_INDEX]));
+                    })
+                .collect(Collectors.toList());
     }
 }

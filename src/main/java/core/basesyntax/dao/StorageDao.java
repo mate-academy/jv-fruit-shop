@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface StorageDao {
     void update(String fruit, Integer quantity);
 
-    Optional<Integer> getCurrentQuantity(String fruit);
+    Optional<Integer> getQuantity(String fruit);
 
-    Map<String, Integer> getData();
+    Map<String, Integer> getAll();
 }
