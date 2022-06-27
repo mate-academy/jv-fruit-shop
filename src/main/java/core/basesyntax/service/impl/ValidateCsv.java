@@ -18,13 +18,15 @@ public class ValidateCsv implements FileValidator {
         if (!text.get(HEADER_POSITION).equals(HEADER)) {
             return false;
         }
-        Optional<Boolean> validationResult = text.stream()
+        Optional<String> validationResult = text.stream()
                 .skip(HEADER_LINES_LENGTH)
-                .map(s -> s.split(SEPARATOR).length == NORMAL_ARRAY_LENGTH
-                        && s.split(SEPARATOR)[OPERATION_POSITION].length() == ABBREVIATION_LENGTH)
-                .filter(b -> !b)
+                .filter(s -> {
+                    String[] splited = s.split(SEPARATOR);
+                    return splited.length != NORMAL_ARRAY_LENGTH
+                            && splited[OPERATION_POSITION].length() != ABBREVIATION_LENGTH;
+                })
                 .findAny();
-        if (!validationResult.orElse(true)) {
+        if (validationResult.isPresent()) {
             throw new RuntimeException("input data from file"
                     + " has unsupported format");
         }
