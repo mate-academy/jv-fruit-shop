@@ -13,7 +13,13 @@ public class PurchaseHandlerImpl implements OperationHandler {
 
     @Override
     public void applyChanges(Transaction transaction) {
-        int remaining = fruitDao.getQuantity(transaction.getNameFruit());
+        Integer remaining = fruitDao.getQuantity(transaction.getNameFruit());
+        if (remaining < transaction.getAmount()) {
+            throw new RuntimeException("There are no enough fruits");
+        }
+        if (transaction.getAmount() < 0) {
+            throw new RuntimeException("Purchase cannot be negative");
+        }
         int newQuantity = remaining - transaction.getAmount();
         fruitDao.update(transaction.getNameFruit(), newQuantity);
     }

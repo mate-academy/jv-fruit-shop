@@ -13,8 +13,12 @@ public class SupplyHandlerImpl implements OperationHandler {
 
     @Override
     public void applyChanges(Transaction transaction) {
-        int remaining = fruitDao.getQuantity(transaction.getNameFruit());
-        int newQuantity = transaction.getAmount() + remaining;
+        if (transaction.getAmount() < 0) {
+            throw new RuntimeException("Supply cannot be less than 0");
+        }
+        int remainingFruits = fruitDao.getQuantity(transaction.getNameFruit()) == null
+                ? 0 : fruitDao.getQuantity(transaction.getNameFruit());
+        int newQuantity = transaction.getAmount() + remainingFruits;
         fruitDao.update(transaction.getNameFruit(), newQuantity);
     }
 }
