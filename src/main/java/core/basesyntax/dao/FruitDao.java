@@ -3,9 +3,9 @@ package core.basesyntax.dao;
 import java.util.Map;
 
 public interface FruitDao {
-    void add(String nameFruit, int amount);
+    void update(String fruit, Integer quantity);
 
-    Map<String, Integer> getAll();
+    Integer getQuantity(String fruit);
 
-    Integer get(String nameFruit);
+    Map<String, Integer> extract();
 }

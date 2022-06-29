@@ -4,5 +4,5 @@ import core.basesyntax.model.Transaction;
 import java.util.List;
 
 public interface Parser {
-    List<Transaction> parse(List<String> stringList);
+    List<Transaction> parse(List<String> data);
 }

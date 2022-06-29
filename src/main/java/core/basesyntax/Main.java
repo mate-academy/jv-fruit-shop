@@ -1,6 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.OperationService;
@@ -24,27 +25,37 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String DESTINATION_FROM =
+            "src/main/java/core/basesyntax/resources/fileInput.csv";
+    private static final String DESTINATION_TO =
+            "src/main/java/core/basesyntax/resources/fileReport.csv";
+
     public static void main(String[] args) {
-        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.BALANCE, new BalanceHandlerImpl());
-        operationHandlerMap.put(Operation.PURCHASE, new PurchaseHandlerImpl());
-        operationHandlerMap.put(Operation.SUPPLY, new SupplyHandlerImpl());
-        operationHandlerMap.put(Operation.RETURN, new ReturnHandlerImpl());
+        FruitDao fruitDao = new FruitDaoImpl();
+        Map<Transaction.Operation, OperationHandler> mapStrategy =
+                new HashMap<>();
+        mapStrategy.put(Transaction.Operation.BALANCE, new BalanceHandlerImpl(fruitDao));
+        mapStrategy.put(Transaction.Operation.SUPPLY, new SupplyHandlerImpl(fruitDao));
+        mapStrategy.put(Transaction.Operation.PURCHASE, new PurchaseHandlerImpl(fruitDao));
+        mapStrategy.put(Transaction.Operation.RETURN, new ReturnHandlerImpl(fruitDao));
+        OperationService operationService =
+                new OperationServiceImpl(mapStrategy);
 
-        Parser parseService = new ParserImpl();
-        Reader fileReaderService = new ReaderImpl();
-        List<String> input = fileReaderService
-                .getDataFromFile("src/main/java/core/basesyntax/resources/fileInput.csv");
-        List<Transaction> fruitTransactions = parseService.parse(input);
+        Reader reader = new ReaderImpl();
+        List<String> operationServices = reader.getDataFromFile(DESTINATION_FROM);
 
-        OperationService operationService = new OperationServiceImpl(operationHandlerMap);
-        FruitService fruitShopService = new FruitServiceImpl(operationService);
-        fruitShopService.process(fruitTransactions);
+        Parser parser = new ParserImpl();
+        List<Transaction> transactions =
+                parser.parse(operationServices);
 
-        ReportCreator reportService = new ReportCreatorImpl();
-        Writer fileWriterService = new WriterImpl();
-        fileWriterService
-                .writeDataToFile("src/main/java/core/basesyntax/resources/fileReport.csv",
-                        reportService.createReport());
+        FruitService fruitService =
+                new FruitServiceImpl(operationService);
+        fruitService.process(transactions);
+
+        ReportCreator reportCreator = new ReportCreatorImpl(fruitDao);
+        String report = reportCreator.createReport();
+
+        Writer writer = new WriterImpl();
+        writer.writeDataToFile(report, DESTINATION_TO);
     }
 }

@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.OperationService;
@@ -15,9 +14,9 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void process(List<Transaction> transactions) {
-        for (Transaction item : transactions) {
-            Operation type = item.getOperation();
-            operationService.getHandler(type).applyChanges(item);
-        }
+        transactions.forEach(
+                fruitTransaction -> operationService
+                        .getHandler(fruitTransaction.getOperation())
+                        .applyChanges(fruitTransaction));
     }
 }

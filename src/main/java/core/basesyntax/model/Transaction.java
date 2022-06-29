@@ -1,66 +1,51 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
-
 public class Transaction {
-    private String fruit;
-    private Operation operation;
-    private int amountFruits;
+    private final Operation operation;
+    private final String nameFruit;
+    private final int amount;
 
-    public Transaction(String operation, String fruit, int amountFruits) {
-        this.fruit = fruit;
-        this.operation = Operation.findOperation(operation);
-        this.amountFruits = amountFruits;
-    }
-
-    public String getFruit() {
-        return fruit;
-    }
-
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
+    public Transaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.nameFruit = fruit;
+        this.amount = quantity;
     }
 
     public Operation getOperation() {
         return operation;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
+    public String getNameFruit() {
+        return nameFruit;
     }
 
-    public int getAmountFruits() {
-        return amountFruits;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAmountFruits(int amountFruits) {
-        this.amountFruits = amountFruits;
-    }
+    public enum Operation {
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+        private final String operation;
+
+        Operation(String operation) {
+            this.operation = operation;
         }
-        if (!(o instanceof Transaction)) {
-            return false;
+
+        public String getOperation() {
+            return operation;
         }
-        Transaction that = (Transaction) o;
-        return getAmountFruits() == that.getAmountFruits() && Objects.equals(getFruit(),
-                that.getFruit()) && getOperation() == that.getOperation();
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getFruit(), getOperation(), getAmountFruits());
-    }
-
-    @Override
-    public String toString() {
-        return "Transaction: "
-                + "fruit = " + fruit
-                + ", operation = " + operation
-                + ", amountFruits = " + amountFruits
-                + ".";
+    public static Operation findOperationByName(String value) {
+        for (Operation operation : Operation.values()) {
+            if (operation.getOperation().equals(value)) {
+                return operation;
+            }
+        }
+        throw new RuntimeException("Not valid operation type: " + value);
     }
 }
