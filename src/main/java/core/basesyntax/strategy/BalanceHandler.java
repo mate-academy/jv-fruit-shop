@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import java.util.Optional;
 
 public class BalanceHandler implements OperationHandler {
@@ -12,7 +12,7 @@ public class BalanceHandler implements OperationHandler {
     }
 
     @Override
-    public void operate(Fruit fruit) {
+    public void handle(FruitTransaction fruit) {
         Optional<Integer> balance = fruitDao.get(fruit.getName());
         fruitDao.add(fruit.getName(), balance.orElse(0) + fruit.getAmount());
     }
