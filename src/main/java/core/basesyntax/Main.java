@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.DeleteFirstLine;
 import core.basesyntax.service.impl.ProductParserImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
@@ -34,11 +34,11 @@ public class Main {
         OperationHandler operationHandlerReturn = new ReturnHandler(fruitDao);
         OperationHandler operationHandlerSupply = new SupplyHandler(fruitDao);
 
-        Map<Fruit.Operation, OperationHandler> handlerMap = new HashMap<>();
-        handlerMap.put(Fruit.Operation.BALANCE, operationHandlerBalance);
-        handlerMap.put(Fruit.Operation.PURCHASE, operationHandlerPurchase);
-        handlerMap.put(Fruit.Operation.RETURN, operationHandlerReturn);
-        handlerMap.put(Fruit.Operation.SUPPLY, operationHandlerSupply);
+        Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
+        handlerMap.put(FruitTransaction.Operation.BALANCE, operationHandlerBalance);
+        handlerMap.put(FruitTransaction.Operation.PURCHASE, operationHandlerPurchase);
+        handlerMap.put(FruitTransaction.Operation.RETURN, operationHandlerReturn);
+        handlerMap.put(FruitTransaction.Operation.SUPPLY, operationHandlerSupply);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
 
@@ -47,7 +47,7 @@ public class Main {
 
         new ProductParserImpl().parseAll(records)
                 .forEach(e -> operationStrategy.get(e.getOperation())
-                        .operate(e));
+                        .handle(e));
 
         records = new ReportServiceImpl(fruitDao).report(OUTPUT_TITLE);
         new WriterServiceImpl().writeToFile(records, OUTPUT_FILE);
