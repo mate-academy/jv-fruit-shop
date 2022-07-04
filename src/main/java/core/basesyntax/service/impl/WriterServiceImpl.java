@@ -9,12 +9,11 @@ import java.util.List;
 
 public class WriterServiceImpl implements WriterService {
     @Override
-    public void writeToFile(List<String> list, String toFilePath) {
+    public void writeToFile(List<String> lines, String toFilePath) {
         File outputFile = new File(toFilePath);
-
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputFile))) {
-            for (String s : list) {
-                bufferedWriter.write(s);
+            for (String line : lines) {
+                bufferedWriter.write(line);
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
