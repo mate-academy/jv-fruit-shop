@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class FruitDaoImpl implements FruitDao {
-
     @Override
     public void add(String name, Integer amount) {
         Storage.fruitStorage.put(name, amount);
