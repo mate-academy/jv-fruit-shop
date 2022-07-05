@@ -5,7 +5,7 @@ public class FruitTransaction {
     private int amount;
     private Operation operation;
 
-    public FruitTransaction(FruitTransaction.Operation operation, String name, int amount) {
+    public FruitTransaction(Operation operation, String name, int amount) {
         this.fruitName = name;
         this.amount = amount;
         this.operation = operation;
@@ -43,8 +43,8 @@ public class FruitTransaction {
 
         private final String letter;
 
-        Operation(String operation) {
-            this.letter = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
         public String getOperation() {
