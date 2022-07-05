@@ -3,7 +3,6 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.DeleteFirstLine;
 import core.basesyntax.service.impl.ProductParserImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -43,13 +42,12 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
 
         List<String> records = new ReaderServiceImpl().readFromFile((INPUT_FILE));
-        records = new DeleteFirstLine().delete(records);
 
         new ProductParserImpl().parseAll(records)
                 .forEach(e -> operationStrategy.get(e.getOperation())
                         .handle(e));
 
-        records = new ReportServiceImpl(fruitDao).report(OUTPUT_TITLE);
+        records = new ReportServiceImpl(fruitDao).createReport(OUTPUT_TITLE);
         new WriterServiceImpl().writeToFile(records, OUTPUT_FILE);
     }
 }
