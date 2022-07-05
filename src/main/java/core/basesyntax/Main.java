@@ -1,25 +1,47 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReadFromFile;
-import core.basesyntax.service.ShiftReportService;
-import core.basesyntax.service.TransactionProcessing;
-import core.basesyntax.service.WriteToFile;
-import core.basesyntax.service.impl.ReadFromFileImpl;
-import core.basesyntax.service.impl.ShiftReportServiceImpl;
-import core.basesyntax.service.impl.TransactionProcessingImpl;
-import core.basesyntax.service.impl.WriteToFileImpl;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.TransactionProcessor;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
+import core.basesyntax.service.impl.TransactionProcessorImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.impl.BalanceTransactionImpl;
+import core.basesyntax.strategy.impl.PurchaseTransactionImpl;
+import core.basesyntax.strategy.impl.ReturnTransactionImpl;
+import core.basesyntax.strategy.impl.SupplyTransactionImpl;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
+    private static Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+    private static final String transactionFilePath = "src/main/resources/transaction.csv";
+    private static final String dayReportFilePath = "src/main/resources/dayreport.csv";
+
+    public static Map<String, OperationHandler> getOperationHandlerMap() {
+        return operationHandlerMap;
+    }
+
     public static void main(String[] args) {
-        ReadFromFile readFromFile = new ReadFromFileImpl();
-        List<String> listOfTransaction = readFromFile.readFromFile();
-        TransactionProcessing transactionProcessing = new TransactionProcessingImpl();
-        transactionProcessing.transactionProcessing(listOfTransaction);
-        ShiftReportService shiftReportService = new ShiftReportServiceImpl();
-        List<String> reportList = shiftReportService.reportMaker(Storage.getFruitStore());
-        WriteToFile writeToFile = new WriteToFileImpl();
-        writeToFile.writeToFile(reportList);
+        // *** Map initialization
+        operationHandlerMap.put(Operation.BALANCE.getOperation(), new BalanceTransactionImpl());
+        operationHandlerMap.put(Operation.PURCHASE.getOperation(), new PurchaseTransactionImpl());
+        operationHandlerMap.put(Operation.SUPPLY.getOperation(), new SupplyTransactionImpl());
+        operationHandlerMap.put(Operation.RETURN.getOperation(), new ReturnTransactionImpl());
+        // *** End of Map initialization
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        List<String> listOfTransaction = fileReaderService.readFromFile(transactionFilePath);
+        TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
+        transactionProcessor.process(listOfTransaction);
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        List<String> lines = reportCreatorService.createReport(Storage.getFruitStore());
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFile(dayReportFilePath, lines);
     }
 }

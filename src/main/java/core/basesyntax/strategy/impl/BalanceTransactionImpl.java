@@ -1,15 +1,12 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.strategy.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 
-public class BalanceTransactionImpl implements FruitTransaction {
-
+public class BalanceTransactionImpl implements OperationHandler {
     @Override
-    public void getTransaction(String fruit, int quantity) {
-        Fruit currentFruit = Fruit.valueOf(fruit.toUpperCase());
-        Storage.getFruitStore().put(currentFruit, quantity);
+    public void handle(String fruit, int quantity) {
+        Storage.getFruitStore().put(fruit, quantity);
     }
 }
 
