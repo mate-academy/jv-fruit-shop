@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ProductParser;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -32,13 +31,7 @@ public class ProductParserImpl implements ProductParser {
 
     @Override
     public List<FruitTransaction> parseAll(List<String> list) {
-        List<String> newList = new ArrayList<>();
-        int index = 1;
-        for (int i = 0; i < list.size() - 1; i++) {
-            newList.add(list.get(index));
-            index++;
-        }
-        return newList.stream()
+        return list.stream()
                 .map(this::parse)
                 .collect(Collectors.toList());
     }
