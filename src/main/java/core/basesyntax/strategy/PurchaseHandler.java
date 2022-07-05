@@ -12,8 +12,8 @@ public class PurchaseHandler implements OperationHandler {
     }
 
     @Override
-    public void handle(FruitTransaction fruit) {
-        Optional<Integer> balance = fruitDao.get(fruit.getName());
-        fruitDao.add(fruit.getName(), balance.orElse(0) - fruit.getAmount());
+    public void handle(FruitTransaction fruitTransaction) {
+        Optional<Integer> balance = fruitDao.get(fruitTransaction.getName());
+        fruitDao.add(fruitTransaction.getName(), balance.orElse(0) - fruitTransaction.getAmount());
     }
 }
