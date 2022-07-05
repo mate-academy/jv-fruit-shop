@@ -6,8 +6,8 @@ import java.util.Map;
 public class OperationStrategyImpl implements OperationStrategy {
     private final Map<FruitTransaction.Operation, OperationHandler> operationsMap;
 
-    public OperationStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> map) {
-        this.operationsMap = map;
+    public OperationStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> operationsMap) {
+        this.operationsMap = operationsMap;
     }
 
     @Override
