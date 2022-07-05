@@ -13,13 +13,12 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public List<String> report(String line) {
+    public List<String> createReport(String line) {
         List<String> list = fruitDao.getAll()
                 .entrySet()
                 .stream()
                 .map(e -> e.getKey() + "," + e.getValue().toString())
                 .collect(Collectors.toList());
-
         list.add(0, line);
         return list;
     }
