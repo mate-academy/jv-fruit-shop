@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
+    private static final String OUTPUT_TITLE
+            = "fruit,quantity";
     private final FruitDao fruitDao;
 
     public ReportServiceImpl(FruitDao fruitDao) {
@@ -14,10 +16,10 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public List<String> createReport(String line) {
+    public List<String> createReport() {
         List<String> list = new ArrayList<>();
         Map<String, Integer> map = fruitDao.getAll();
-        list.add(0, line);
+        list.add(0, OUTPUT_TITLE);
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             list.add(entry.getKey() + "," + entry.getValue());
         }
