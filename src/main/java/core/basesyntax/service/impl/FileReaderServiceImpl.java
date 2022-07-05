@@ -9,10 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
-
     @Override
-    public List<String> readFromFile(String dayReportFilePath) {
-        File sourceFile = new File(dayReportFilePath);
+    public List<String> readFromFile(String filePath) {
+        File sourceFile = new File(filePath);
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(sourceFile))) {
             String lineFromFile = bufferedReader.readLine();
@@ -26,5 +25,3 @@ public class FileReaderServiceImpl implements FileReaderService {
         return lines;
     }
 }
-
-

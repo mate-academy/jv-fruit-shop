@@ -24,10 +24,6 @@ public class Main {
     private static final String transactionFilePath = "src/main/resources/transaction.csv";
     private static final String dayReportFilePath = "src/main/resources/dayreport.csv";
 
-    public static Map<String, OperationHandler> getOperationHandlerMap() {
-        return operationHandlerMap;
-    }
-
     public static void main(String[] args) {
         // *** Map initialization
         operationHandlerMap.put(Operation.BALANCE.getOperation(), new BalanceTransactionImpl());
@@ -37,7 +33,8 @@ public class Main {
         // *** End of Map initialization
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> listOfTransaction = fileReaderService.readFromFile(transactionFilePath);
-        TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
+        TransactionProcessor transactionProcessor
+                = new TransactionProcessorImpl(operationHandlerMap);
         transactionProcessor.process(listOfTransaction);
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
         List<String> lines = reportCreatorService.createReport(Storage.getFruitStore());

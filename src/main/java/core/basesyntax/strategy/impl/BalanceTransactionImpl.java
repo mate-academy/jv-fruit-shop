@@ -9,4 +9,3 @@ public class BalanceTransactionImpl implements OperationHandler {
         Storage.getFruitStore().put(fruit, quantity);
     }
 }
-
