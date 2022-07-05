@@ -23,8 +23,6 @@ public class Main {
             = "src/main/java/core/basesyntax/resources/inputFile.csv";
     private static final String OUTPUT_FILE
             = "src/main/java/core/basesyntax/resources/reportFile.csv";
-    private static final String OUTPUT_TITLE
-            = "fruit,quantity";
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
@@ -47,7 +45,7 @@ public class Main {
                 .forEach(e -> operationStrategy.get(e.getOperation())
                         .handle(e));
 
-        records = new ReportServiceImpl(fruitDao).createReport(OUTPUT_TITLE);
+        records = new ReportServiceImpl(fruitDao).createReport();
         new WriterServiceImpl().writeToFile(records, OUTPUT_FILE);
     }
 }
