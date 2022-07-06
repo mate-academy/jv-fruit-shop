@@ -1,4 +1,4 @@
-package core.basesyntax.strategy.operation;
+package core.basesyntax.strategy.handler;
 
 import core.basesyntax.model.FruitTransaction;
 

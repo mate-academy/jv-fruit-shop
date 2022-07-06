@@ -1,2 +1,7 @@
-package core.basesyntax.service;public interface CreateReport {
+package core.basesyntax.service;
+
+import java.util.List;
+
+public interface CreateReport {
+    List<String> create();
 }

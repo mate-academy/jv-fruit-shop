@@ -1,13 +1,11 @@
-package core.basesyntax.strategy.handler;
+package core.basesyntax.strategy.handler.impl;
 
 import core.basesyntax.dao.FruitShopDao;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-
-import java.util.Objects;
+import core.basesyntax.strategy.handler.OperationHandler;
 
 public class SubtractionOperationHandler implements OperationHandler {
-    private FruitShopDao fruitShopDao;
+    private final FruitShopDao fruitShopDao;
 
     public SubtractionOperationHandler(FruitShopDao fruitShopDao) {
         this.fruitShopDao = fruitShopDao;
@@ -15,13 +13,13 @@ public class SubtractionOperationHandler implements OperationHandler {
 
     @Override
     public void handler(FruitTransaction fruitTransaction) {
-        Fruit fruit;
-        if(Objects.equals(fruitShopDao.get(fruitTransaction.getFruit()).getQuantity(), 0)) {
-            fruit = new Fruit(fruitTransaction.getFruit(), -fruitTransaction.getQuantity());
+        if (fruitShopDao.get(fruitTransaction.getFruit()) == null) {
+            fruitShopDao.put(fruitTransaction.getFruit(), -fruitTransaction.getQuantity());
         } else {
-            fruit = new Fruit(fruitTransaction.getFruit(), fruitTransaction.getQuantity() - fruitShopDao.get(fruitTransaction.getFruit()).getQuantity());
+            fruitShopDao.put(fruitTransaction.getFruit(),
+                    fruitShopDao.get(fruitTransaction.getFruit())
+                            - fruitTransaction.getQuantity());
         }
-        fruitShopDao.add(fruit);
     }
 
     @Override
