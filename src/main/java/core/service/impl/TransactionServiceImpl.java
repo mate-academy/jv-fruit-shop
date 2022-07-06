@@ -11,22 +11,19 @@ public class TransactionServiceImpl implements TransactionService {
     private static final int QUANTITY_POS = 2;
 
     @Override
-    public FruitTransaction createFromString(String stringTransaction) {
-        String[] fields = stringTransaction.split(",");
-        int quantity;
-        try {
-            quantity = Integer.parseInt(fields[QUANTITY_POS]);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Value " + fields[QUANTITY_POS] + " isn`t integer", e);
-        }
-        return FruitTransaction
-                .build(fields[OPERATION_POS], fields[FRUIT_POS], quantity);
-    }
-
-    @Override
     public List<FruitTransaction> createFromList(List<String> transactions) {
+        transactions.remove(0);
         return transactions.stream()
                 .map(this::createFromString)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public FruitTransaction createFromString(String stringTransaction) {
+        String[] fields = stringTransaction.split(",");
+        FruitTransaction.Operation operation = FruitTransaction.Operation
+                .getOperationFromString(fields[OPERATION_POS]);
+        int quantity = Integer.parseInt(fields[QUANTITY_POS]);
+        return new FruitTransaction(operation, fields[FRUIT_POS], quantity);
     }
 }

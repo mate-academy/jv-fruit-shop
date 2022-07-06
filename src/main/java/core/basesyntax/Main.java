@@ -2,11 +2,12 @@ package core.basesyntax;
 
 import core.db.FruitTransaction;
 import core.db.StorageServiceImpl;
-import core.service.FruitService;
+import core.service.ReportCreatorService;
 import core.service.impl.CsvFileReaderServiceImpl;
 import core.service.impl.FileWriterServiceImpl;
-import core.service.impl.FruitServiceImpl;
+import core.service.impl.ReportCreatorServiceImpl;
 import core.service.impl.TransactionServiceImpl;
+import core.strategy.OperationStrategy;
 import java.io.File;
 import java.util.List;
 
@@ -15,14 +16,14 @@ public class Main {
     private static final String PATH_REPORT = "src/resources/report.txt";
 
     public static void main(String[] args) {
-        List<String> listTransaction = new CsvFileReaderServiceImpl().read(new File(PATH_DB));
+        List<String> fileData = new CsvFileReaderServiceImpl().readFromFile(new File(PATH_DB));
         List<FruitTransaction> transactions = new TransactionServiceImpl()
-                .createFromList(listTransaction);
-        StorageServiceImpl storageService = new StorageServiceImpl();
-        storageService.setAll(transactions);
+                .createFromList(fileData);
+        StorageServiceImpl storageService = new StorageServiceImpl(new OperationStrategy());
+        transactions.forEach(storageService::addTransaction);
 
-        FruitService fruitService = new FruitServiceImpl();
-        String balance = fruitService.getBalanceReport(storageService.getAll());
-        new FileWriterServiceImpl().write(new File(PATH_REPORT), balance);
+        ReportCreatorService fruitService = new ReportCreatorServiceImpl();
+        String balance = fruitService.createReport(storageService.getLeftovers());
+        new FileWriterServiceImpl().writeToFile(new File(PATH_REPORT), balance);
     }
 }

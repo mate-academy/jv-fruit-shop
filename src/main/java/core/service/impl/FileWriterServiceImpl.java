@@ -8,7 +8,7 @@ import java.nio.file.StandardOpenOption;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public boolean write(File file, String data) {
+    public boolean writeToFile(File file, String data) {
         try {
             Files.writeString(file.toPath(), data, StandardOpenOption.CREATE);
         } catch (IOException e) {

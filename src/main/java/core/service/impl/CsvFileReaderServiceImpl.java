@@ -9,11 +9,9 @@ import java.util.List;
 
 public class CsvFileReaderServiceImpl implements FileReaderService {
     @Override
-    public List<String> read(File file) {
+    public List<String> readFromFile(File file) {
         try {
-            List<String> strings = Files.readAllLines(file.toPath(), Charset.defaultCharset());
-            strings.remove(0);
-            return strings;
+            return Files.readAllLines(file.toPath(), Charset.defaultCharset());
         } catch (IOException e) {
             throw new RuntimeException("Unable to read file " + file, e);
         }

@@ -1,11 +1,9 @@
 package core.db;
 
-import java.util.List;
+import java.util.Map;
 
 public interface StorageService<T> {
-    List<T> getAll();
+    Map<String, Integer> addTransaction(T transaction);
 
-    int setAll(List<T> transactions);
-
-    boolean addTransaction(T transaction);
+    Map<String, Integer> getLeftovers();
 }
