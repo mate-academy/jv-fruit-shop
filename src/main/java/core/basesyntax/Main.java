@@ -20,17 +20,15 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
     private static final String transactionFilePath = "src/main/resources/transaction.csv";
     private static final String dayReportFilePath = "src/main/resources/dayreport.csv";
 
     public static void main(String[] args) {
-        // *** Map initialization
+        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE.getOperation(), new BalanceTransactionImpl());
         operationHandlerMap.put(Operation.PURCHASE.getOperation(), new PurchaseTransactionImpl());
         operationHandlerMap.put(Operation.SUPPLY.getOperation(), new SupplyTransactionImpl());
         operationHandlerMap.put(Operation.RETURN.getOperation(), new ReturnTransactionImpl());
-        // *** End of Map initialization
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> listOfTransaction = fileReaderService.readFromFile(transactionFilePath);
         TransactionProcessor transactionProcessor
