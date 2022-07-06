@@ -12,7 +12,7 @@ public class SubtractionOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void handler(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         if (fruitShopDao.get(fruitTransaction.getFruit()) == null) {
             fruitShopDao.put(fruitTransaction.getFruit(), -fruitTransaction.getQuantity());
         } else {
@@ -20,10 +20,5 @@ public class SubtractionOperationHandler implements OperationHandler {
                     fruitShopDao.get(fruitTransaction.getFruit())
                             - fruitTransaction.getQuantity());
         }
-    }
-
-    @Override
-    public String toString() {
-        return "SubtractionOperationHandler";
     }
 }

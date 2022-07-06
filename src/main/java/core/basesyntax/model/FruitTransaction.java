@@ -19,20 +19,20 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String letter;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.letter = operation;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getLetter() {
+            return letter;
         }
     }
 
     public FruitTransaction.Operation getOperation(String activity) {
         return Arrays.stream(FruitTransaction.Operation.values())
-                .filter(a -> a.getOperation().equals(activity))
+                .filter(a -> a.getLetter().equals(activity))
                 .findFirst()
                 .get();
     }

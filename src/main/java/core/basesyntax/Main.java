@@ -3,27 +3,41 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CreateReport;
-import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.TransactionsService;
-import core.basesyntax.service.TransferToStorage;
-import core.basesyntax.service.impl.CreateReportImpl;
-import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.TransactionsServiceImpl;
-import core.basesyntax.service.impl.TransferToStorageImpl;
-import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.TransactionConvertor;
+import core.basesyntax.service.TransactionProcessor;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
+import core.basesyntax.service.impl.TransactionConvertorImpl;
+import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.impl.AdditionOperationHandler;
 import core.basesyntax.strategy.handler.impl.SubtractionOperationHandler;
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static String pathToReadFile = "src"
+            + File.separator + "main"
+            + File.separator + "resources"
+            + File.separator + "outputFile.csv";
+    private static String pathToWriteFile = "src"
+            + File.separator + "main"
+            + File.separator + "resources"
+            + File.separator + "inputFile.csv";
+    private static Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
+    private static List<String> lines = new ArrayList<>();
+
     public static void main(String[] args) {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
-        ReaderService readerService = new ReaderServiceImpl();
-        Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        lines = fileReaderService.readFromFile(pathToReadFile);
         handlerMap.put(FruitTransaction.Operation.BALANCE,
                 new AdditionOperationHandler(fruitShopDao));
         handlerMap.put(FruitTransaction.Operation.SUPPLY,
@@ -32,13 +46,12 @@ public class Main {
                 new SubtractionOperationHandler(fruitShopDao));
         handlerMap.put(FruitTransaction.Operation.RETURN,
                 new AdditionOperationHandler(fruitShopDao));
-        TransactionsService transactionsService =
-                new TransactionsServiceImpl(readerService.getLines());
-        TransferToStorage transferToStorage =
-                new TransferToStorageImpl(new OperationStrategy(handlerMap));
-        transferToStorage.transfer(transactionsService.getFruitTransactions());
-        CreateReport createReport = new CreateReportImpl(fruitShopDao);
-        WriterServiceImpl writerService = new WriterServiceImpl();
-        writerService.writeToFile(createReport);
+        TransactionConvertor transactionConvertor = new TransactionConvertorImpl();
+        TransactionProcessor transactionProcessor =
+                new TransactionProcessorImpl(new OperationStrategy(handlerMap));
+        transactionProcessor.process(transactionConvertor.getFruitTransactions(lines));
+        ReportCreator reportCreator = new ReportCreatorImpl(fruitShopDao);
+        FileWriterServiceImpl writerService = new FileWriterServiceImpl();
+        writerService.writeToFile(pathToWriteFile, reportCreator.create());
     }
 }

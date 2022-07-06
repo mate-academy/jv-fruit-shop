@@ -1,11 +1,11 @@
 package core.basesyntax.dao;
 
-import java.util.List;
+import java.util.Map;
 
 public interface FruitShopDao {
     void put(String fruit, Integer quantity);
 
     Integer get(String fruit);
 
-    List<String> getAll();
+    Map<String, Integer> getAll();
 }

@@ -1,11 +1,9 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class FruitShopDaoImpl implements FruitShopDao {
-
     @Override
     public void put(String fruit, Integer quantity) {
         Storage.fruits.put(fruit, quantity);
@@ -17,9 +15,7 @@ public class FruitShopDaoImpl implements FruitShopDao {
     }
 
     @Override
-    public List<String> getAll() {
-        return Storage.fruits.entrySet().stream()
-                .map(f -> f.getKey() + "," + f.getValue())
-                .collect(Collectors.toList());
+    public Map<String, Integer> getAll() {
+        return Storage.fruits;
     }
 }
