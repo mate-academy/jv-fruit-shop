@@ -2,7 +2,6 @@ package core.service.impl;
 
 import core.db.FruitTransaction;
 import core.db.StorageService;
-import core.db.StorageServiceImpl;
 import core.service.OperationHandler;
 
 public class BalanceHandler implements OperationHandler {
