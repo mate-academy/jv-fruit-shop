@@ -2,13 +2,13 @@ import dao.FruitDao;
 import dao.FruitDaoImpl;
 import java.util.HashMap;
 import java.util.Map;
-import service.ProcessorService;
+import service.TransactionProcessorService;
 import service.ProcessorServiceImpl;
-import service.ReaderService;
+import service.FileReaderService;
 import service.ReaderServiceImpl;
 import service.ReportService;
 import service.ReportServiceImpl;
-import service.WriterService;
+import service.FileWriterService;
 import service.WriterServiceImpl;
 import strategy.TransactionStrategy;
 import strategy.TransactionStrategyImpl;
@@ -30,12 +30,12 @@ public class Main {
         FruitDao dao = new FruitDaoImpl();
         TransactionStrategy strategy = new TransactionStrategyImpl(transactionHandlersMap);
 
-        ReaderService readerService = new ReaderServiceImpl();
-        ProcessorService processorService = new ProcessorServiceImpl(dao, strategy);
+        FileReaderService readerService = new ReaderServiceImpl();
+        TransactionProcessorService processorService = new ProcessorServiceImpl(dao, strategy);
         ReportService reportService = new ReportServiceImpl(dao);
-        WriterService writerService = new WriterServiceImpl();
+        FileWriterService writerService = new WriterServiceImpl();
 
-        processorService.processData(readerService.readFile("src/main/java/resources /file.csv"));
+        processorService.process(readerService.readFile("src/main/java/resources /file.csv"));
         writerService.writeFile(reportService.makeReport(), "src/main/java/resources /file.csv");
     }
 }
