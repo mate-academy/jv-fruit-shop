@@ -5,6 +5,4 @@ import java.util.List;
 
 public interface TransactionService {
     List<FruitTransaction> createFromList(List<String> transactions);
-
-    FruitTransaction createFromString(String stringTransaction);
 }

@@ -15,22 +15,12 @@ public class StorageServiceImpl implements StorageService<FruitTransaction> {
     @Override
     public Map<String, Integer> addTransaction(FruitTransaction transaction) {
         OperationHandler handler = strategy.getOperationHandler(transaction.getOperation());
-        boolean fruitNoFound = Storage.leftovers.entrySet()
-                .stream()
-                .filter(entry -> entry.getKey().equals(transaction.getFruit()))
-                .peek(entry -> entry.setValue(entry.getValue() + handler.getSign()
-                        * transaction.getQuantity()))
-                .findFirst()
-                .isEmpty();
-        if (fruitNoFound) {
-            Storage.leftovers.put(transaction.getFruit(), handler.getSign()
-                    * transaction.getQuantity());
-        }
-        return new HashMap<>(Storage.leftovers);
+        handler.addTransaction(transaction, this);
+        return new HashMap<>(Storage.fruitsMap);
     }
 
     @Override
     public Map<String, Integer> getLeftovers() {
-        return Storage.leftovers;
+        return Storage.fruitsMap;
     }
 }

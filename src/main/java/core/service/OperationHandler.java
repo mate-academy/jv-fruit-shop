@@ -1,5 +1,9 @@
 package core.service;
 
+import core.db.FruitTransaction;
+import core.db.StorageService;
+
 public interface OperationHandler {
-    int getSign();
+    void addTransaction(FruitTransaction transaction,
+                        StorageService<FruitTransaction> storageService);
 }

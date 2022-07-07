@@ -6,24 +6,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransactionServiceImpl implements TransactionService {
-    private static final int OPERATION_POS = 0;
-    private static final int FRUIT_POS = 1;
-    private static final int QUANTITY_POS = 2;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> createFromList(List<String> transactions) {
-        transactions.remove(0);
-        return transactions.stream()
+    public List<FruitTransaction> createFromList(List<String> line) {
+        line.remove(0);
+        return line.stream()
                 .map(this::createFromString)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public FruitTransaction createFromString(String stringTransaction) {
-        String[] fields = stringTransaction.split(",");
+    private FruitTransaction createFromString(String line) {
+        String[] splitLine = line.split(",");
         FruitTransaction.Operation operation = FruitTransaction.Operation
-                .getOperationFromString(fields[OPERATION_POS]);
-        int quantity = Integer.parseInt(fields[QUANTITY_POS]);
-        return new FruitTransaction(operation, fields[FRUIT_POS], quantity);
+                .getOperationByLetter(splitLine[OPERATION_INDEX]);
+        int quantity = Integer.parseInt(splitLine[QUANTITY_INDEX]);
+        return new FruitTransaction(operation, splitLine[FRUIT_INDEX], quantity);
     }
 }

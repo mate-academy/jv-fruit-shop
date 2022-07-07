@@ -1,19 +1,19 @@
 package core.service.impl;
 
 import core.service.FileWriterService;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public boolean writeToFile(File file, String data) {
+    public void writeToFile(String pathToFile, String report) {
+        Path path = Path.of(pathToFile);
         try {
-            Files.writeString(file.toPath(), data, StandardOpenOption.CREATE);
+            Files.writeString(path, report, StandardOpenOption.CREATE);
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write file " + file.getPath(), e);
+            throw new RuntimeException("Can`t write file " + path, e);
         }
-        return true;
     }
 }

@@ -41,12 +41,12 @@ public class FruitTransaction {
             return letter;
         }
 
-        public static Operation getOperationFromString(String letter) {
+        public static Operation getOperationByLetter(String letter) {
             return Arrays.stream(Operation.values())
                     .filter(x -> x.getOperation().equals(letter))
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException(
-                            "Operation " + letter + " does not exist"));
+                            "Operation with first letter: " + letter + " does not exist"));
         }
     }
 }

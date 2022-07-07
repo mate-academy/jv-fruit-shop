@@ -4,5 +4,5 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    protected static Map<String, Integer> leftovers = new HashMap<>();
+    protected static Map<String, Integer> fruitsMap = new HashMap<>();
 }

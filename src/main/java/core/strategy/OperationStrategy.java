@@ -20,10 +20,6 @@ public class OperationStrategy {
     }
 
     public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
-        OperationHandler handler = handlers.get(operation);
-        if (handler == null) {
-            throw new RuntimeException("Operation " + operation + " is not supported");
-        }
-        return handler;
+        return handlers.get(operation);
     }
 }
