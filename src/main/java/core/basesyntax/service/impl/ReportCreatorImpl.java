@@ -5,6 +5,7 @@ import core.basesyntax.service.ReportCreator;
 import java.util.stream.Collectors;
 
 public class ReportCreatorImpl implements ReportCreator {
+    private static final String HEAD = "fruit,quantity";
     private final FruitShopDao fruitShopDao;
 
     public ReportCreatorImpl(FruitShopDao fruitShopDao) {
@@ -13,14 +14,11 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String create() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("fruit,quantity");
-        String collect = fruitShopDao.getAll().entrySet().stream()
+        return HEAD + fruitShopDao.getAll().entrySet().stream()
                 .map(f -> System.lineSeparator()
                         + f.getKey()
                         + ","
-                        + f.getValue()).collect(Collectors.joining());
-        stringBuilder.append(collect);
-        return stringBuilder.toString();
+                        + f.getValue())
+                .collect(Collectors.joining());
     }
 }

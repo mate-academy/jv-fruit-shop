@@ -17,22 +17,21 @@ import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.impl.AdditionOperationHandler;
 import core.basesyntax.strategy.handler.impl.SubtractionOperationHandler;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static String pathToReadFile = "src"
+    private static final String pathToReadFile = "src"
             + File.separator + "main"
             + File.separator + "resources"
             + File.separator + "outputFile.csv";
-    private static String pathToWriteFile = "src"
+    private static final String pathToWriteFile = "src"
             + File.separator + "main"
             + File.separator + "resources"
             + File.separator + "inputFile.csv";
     private static Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
-    private static List<String> lines = new ArrayList<>();
+    private static List<String> lines;
 
     public static void main(String[] args) {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();

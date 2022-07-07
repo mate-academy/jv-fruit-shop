@@ -13,12 +13,9 @@ public class AdditionOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        if (fruitShopDao.get(fruitTransaction.getFruit()) == null) {
-            fruitShopDao.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
-        } else {
-            fruitShopDao.put(fruitTransaction.getFruit(),
-                    fruitShopDao.get(fruitTransaction.getFruit())
-                            + fruitTransaction.getQuantity());
-        }
+        fruitShopDao.getAll().merge(
+                fruitTransaction.getFruit(),
+                fruitTransaction.getQuantity(),
+                Integer::sum);
     }
 }

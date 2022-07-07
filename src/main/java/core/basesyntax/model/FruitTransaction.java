@@ -7,8 +7,8 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public FruitTransaction(String activity, String fruit, int quantity) {
-        this.operation = getOperation(activity);
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
@@ -28,13 +28,13 @@ public class FruitTransaction {
         public String getLetter() {
             return letter;
         }
-    }
 
-    public FruitTransaction.Operation getOperation(String activity) {
-        return Arrays.stream(FruitTransaction.Operation.values())
-                .filter(a -> a.getLetter().equals(activity))
-                .findFirst()
-                .get();
+        public FruitTransaction.Operation getOperation(String letter) {
+            return Arrays.stream(FruitTransaction.Operation.values())
+                    .filter(a -> a.getLetter().equals(letter))
+                    .findFirst()
+                    .get();
+        }
     }
 
     public Operation getOperation() {

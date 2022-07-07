@@ -8,7 +8,7 @@ public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeToFile(String pathToFile, String report) {
         try {
-            Files.writeString(Path.of(pathToFile), report); //StandardOpenOption.APPEND
+            Files.writeString(Path.of(pathToFile), report);
         } catch (Exception e) {
             throw new RuntimeException("Can't write file" + e);
         }

@@ -3,21 +3,19 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.handler.OperationHandler;
 import java.util.List;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
-    private final OperationStrategy strategy;
+    private final OperationStrategy operationStrategy;
 
     public TransactionProcessorImpl(OperationStrategy operationStrategy) {
-        this.strategy = operationStrategy;
+        this.operationStrategy = operationStrategy;
     }
 
     @Override
     public void process(List<FruitTransaction> transactions) {
-        for (FruitTransaction transaction : transactions) {
-            OperationHandler operationHandler = strategy.getHandler(transaction.getOperation());
-            operationHandler.handle(transaction);
-        }
+        transactions.forEach(transaction -> operationStrategy
+                .getHandler(transaction.getOperation())
+                .handle(transaction));
     }
 }

@@ -9,11 +9,11 @@ import java.util.List;
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> readFromFile(String pathToFile) {
-        File fileToPath = new File(pathToFile);
+        File file = new File(pathToFile);
         try {
-            return Files.readAllLines(fileToPath.toPath());
+            return Files.readAllLines(file.toPath());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file" + e);
+            throw new RuntimeException("Can't read file: " + pathToFile, e);
         }
     }
 }
