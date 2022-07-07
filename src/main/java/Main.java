@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 import dao.FruitDao;
 import dao.FruitDaoImpl;
 import service.ProcessorService;
@@ -16,9 +19,6 @@ import transaction.ReturnTransactionHandler;
 import transaction.SupplyTransactionHandler;
 import transaction.TransactionHandler;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -36,8 +36,7 @@ public class Main {
         ReportService reportService = new ReportServiceImpl(dao);
         WriterService writerService = new WriterServiceImpl();
 
-
-        processorService.processData(readerService.readFile("src/main/java/resources/file.csv"));
-        writerService.writeFile(reportService.makeReport(), "/resources/report.csv");
+        processorService.processData(readerService.readFile("src/main/java/resources /file.csv"));
+        writerService.writeFile(reportService.makeReport(), "src/main/java/resources /file.csv");
     }
 }

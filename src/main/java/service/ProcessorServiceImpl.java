@@ -1,10 +1,8 @@
 package service;
 
 import dao.FruitDao;
-import strategy.TransactionStrategy;
-
-import java.time.Instant;
 import java.util.List;
+import strategy.TransactionStrategy;
 
 public class ProcessorServiceImpl implements ProcessorService {
     private static final String SEPARATOR = ",";
@@ -18,6 +16,7 @@ public class ProcessorServiceImpl implements ProcessorService {
         this.transactionStrategy = transactionStrategy;
         this.dao = dao;
     }
+
     @Override
     public void processData(List<String> rawData) {
         rawData.stream()
