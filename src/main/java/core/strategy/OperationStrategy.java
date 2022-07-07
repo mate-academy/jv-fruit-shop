@@ -10,9 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategy {
-    private final Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
+    private final Map<FruitTransaction.Operation, OperationHandler> handlers;
 
     public OperationStrategy() {
+        handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         handlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler());

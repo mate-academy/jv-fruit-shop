@@ -7,7 +7,6 @@ import core.service.impl.CsvFileReaderServiceImpl;
 import core.service.impl.FileWriterServiceImpl;
 import core.service.impl.ReportCreatorServiceImpl;
 import core.service.impl.TransactionServiceImpl;
-import core.strategy.OperationStrategy;
 import java.util.List;
 
 public class Main {
@@ -18,8 +17,8 @@ public class Main {
         List<String> fileData = new CsvFileReaderServiceImpl().readFromFile(PATH_DB);
         List<FruitTransaction> transactions = new TransactionServiceImpl()
                 .createFromList(fileData);
-        StorageServiceImpl storageService = new StorageServiceImpl(new OperationStrategy());
-        transactions.forEach(storageService::addTransaction);
+        StorageServiceImpl storageService = new StorageServiceImpl();
+        transactions.forEach(storageService::addFruit);
 
         ReportCreatorService fruitService = new ReportCreatorServiceImpl();
         String balance = fruitService.createReport(storageService.getLeftovers());
