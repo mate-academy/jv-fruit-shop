@@ -5,7 +5,7 @@ import core.basesyntax.service.ReportCreator;
 import java.util.stream.Collectors;
 
 public class ReportCreatorImpl implements ReportCreator {
-    private static final String HEAD = "fruit,quantity";
+    private static final String HEADER = "fruit,quantity";
     private final FruitShopDao fruitShopDao;
 
     public ReportCreatorImpl(FruitShopDao fruitShopDao) {
@@ -14,7 +14,7 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String create() {
-        return HEAD + fruitShopDao.getAll().entrySet().stream()
+        return HEADER + fruitShopDao.getAll().entrySet().stream()
                 .map(f -> System.lineSeparator()
                         + f.getKey()
                         + ","
