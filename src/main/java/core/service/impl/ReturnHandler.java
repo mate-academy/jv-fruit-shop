@@ -9,8 +9,8 @@ public class ReturnHandler implements OperationHandler {
     private static final int OPERATION_SIGN = 1;
     private final StorageService<FruitTransaction> storageService;
 
-    public ReturnHandler() {
-        this.storageService = new StorageServiceImpl();
+    public ReturnHandler(StorageService<FruitTransaction> storageService) {
+        this.storageService = storageService;
     }
 
     @Override

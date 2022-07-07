@@ -9,8 +9,8 @@ public class BalanceHandler implements OperationHandler {
     private static final int OPERATION_SIGN = 1;
     private final StorageService<FruitTransaction> storageService;
 
-    public BalanceHandler() {
-        this.storageService = new StorageServiceImpl();
+    public BalanceHandler(StorageService<FruitTransaction> storageService) {
+        this.storageService = storageService;
     }
 
     @Override

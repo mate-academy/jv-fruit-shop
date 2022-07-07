@@ -1,6 +1,7 @@
 package core.strategy;
 
 import core.db.FruitTransaction;
+import core.db.StorageServiceImpl;
 import core.service.OperationHandler;
 import core.service.impl.BalanceHandler;
 import core.service.impl.PurchaseHandler;
@@ -14,10 +15,10 @@ public class OperationStrategy {
 
     public OperationStrategy() {
         handlers = new HashMap<>();
-        handlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        handlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-        handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
+        handlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(new StorageServiceImpl()));
+        handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(new StorageServiceImpl()));
+        handlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler(new StorageServiceImpl()));
+        handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(new StorageServiceImpl()));
     }
 
     public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {

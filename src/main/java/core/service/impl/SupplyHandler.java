@@ -9,8 +9,8 @@ public class SupplyHandler implements OperationHandler {
     private static final int OPERATION_SIGN = 1;
     private final StorageService<FruitTransaction> storageService;
 
-    public SupplyHandler() {
-        this.storageService = new StorageServiceImpl();
+    public SupplyHandler(StorageService<FruitTransaction> storageService) {
+        this.storageService = storageService;
     }
 
     @Override

@@ -9,8 +9,8 @@ public class PurchaseHandler implements OperationHandler {
     private static final int OPERATION_SIGN = -1;
     private final StorageService<FruitTransaction> storageService;
 
-    public PurchaseHandler() {
-        this.storageService = new StorageServiceImpl();
+    public PurchaseHandler(StorageService<FruitTransaction> storageService) {
+        this.storageService = storageService;
     }
 
     @Override
