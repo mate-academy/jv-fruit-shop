@@ -9,7 +9,7 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     @Override
     public void writeToFile(String report, String toFileName) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(toFileName))) {
-            writer.write("fruit,quantity" + System.lineSeparator() + report);
+            writer.write(report);
         } catch (IOException e) {
             throw new RuntimeException("Can't write report to file by path" + toFileName, e);
         }

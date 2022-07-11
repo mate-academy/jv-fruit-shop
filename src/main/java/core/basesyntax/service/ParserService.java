@@ -3,6 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 
-public interface ShopService {
-    List<Fruit> getStatistic();
+public interface ParserService {
+    List<Fruit> parseData(List<String[]> fileInfo);
 }
