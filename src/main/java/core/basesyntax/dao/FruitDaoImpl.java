@@ -14,4 +14,12 @@ public class FruitDaoImpl implements FruitDao {
     public List<Fruit> getAll() {
         return Storage.fruits;
     }
+
+    @Override
+    public Fruit get(String fruitName) {
+        return Storage.fruits.stream()
+                .filter(fruit -> fruit.getFruitName().equals(fruitName))
+                .findFirst()
+                .get();
+    }
 }

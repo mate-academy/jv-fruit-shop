@@ -7,4 +7,6 @@ public interface FruitDao {
     void addAll(List<Fruit> fruits);
 
     List<Fruit> getAll();
+
+    Fruit get(String fruitName);
 }

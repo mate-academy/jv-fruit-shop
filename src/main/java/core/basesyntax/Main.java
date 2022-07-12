@@ -39,16 +39,16 @@ public class Main {
 
         CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
         List<String[]> readData = readerService.readFromFile(fromFilePath);
-        ParserService parserService = new ParserServiceImpl();
-        List<Fruit> fruits = parserService.parseData(readData);
         FruitDao fruitDao = new FruitDaoImpl();
-        fruitDao.addAll(fruits);
+        ParserService parserService = new ParserServiceImpl(fruitDao);
+        List<FruitTransaction> fruitTransactions = parserService.parseData(readData);
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
         ShopService service = new ShopServiceImpl(fruitDao, strategy);
-        List<Fruit> statistic = service.getStatistic();
+        service.process(fruitTransactions);
         ReportService reportService = new ReportServiceImpl();
         CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
-        String report = reportService.makeReport(statistic);
+        List<Fruit> fruits = fruitDao.getAll();
+        String report = reportService.makeReport(fruits);
         writerService.writeToFile(report, toFilePath);
     }
 }

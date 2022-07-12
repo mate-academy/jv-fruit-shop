@@ -1,8 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
+import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
@@ -16,10 +17,10 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public List<Fruit> getStatistic() {
-        List<Fruit> fruits = fruitDao.getAll();
-        fruits.forEach(fruit -> fruit.getFruitTransactions().forEach(transaction ->
-                operationStrategy.get(transaction.getOperation()).calculate(fruit, transaction)));
-        return fruits;
+    public void process(List<FruitTransaction> fruitTransactions) {
+        fruitTransactions.forEach(transaction -> {
+            OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
+            operationHandler.calculate(fruitDao.get(transaction.getFruitName()), transaction);
+        });
     }
 }

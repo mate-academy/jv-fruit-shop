@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
@@ -11,9 +12,14 @@ public class ParserServiceImpl implements ParserService {
     private static final int TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private final FruitDao fruitDao;
+
+    public ParserServiceImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
-    public List<Fruit> parseData(List<String[]> fileInfo) {
+    public List<FruitTransaction> parseData(List<String[]> fileInfo) {
         List<String[]> transactionInfo = fileInfo.stream()
                 .skip(1)
                 .map(strings -> strings[0].split(";"))
@@ -26,6 +32,8 @@ public class ParserServiceImpl implements ParserService {
                 .distinct()
                 .forEach(fruitName -> fruits.add(new Fruit(fruitName)));
 
+        fruitDao.addAll(fruits);
+
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
         transactionInfo.forEach(transaction -> {
@@ -36,10 +44,6 @@ public class ParserServiceImpl implements ParserService {
             fruitTransaction.setQuantity(Integer.parseInt(transaction[QUANTITY_INDEX]));
             fruitTransactions.add(fruitTransaction);
         });
-
-        fruits.forEach(fruit -> fruit.setFruitTransactions(fruitTransactions.stream()
-                .filter(transaction -> transaction.getFruitName().equals(fruit.getFruitName()))
-                .collect(Collectors.toList())));
-        return fruits;
+        return fruitTransactions;
     }
 }
