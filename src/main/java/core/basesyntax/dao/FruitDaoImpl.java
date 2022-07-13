@@ -25,10 +25,7 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void update(Fruit fruit) {
-        Fruit fruitToUpdate = Storage.fruits.stream()
-                .filter(item -> item.getFruitName().equals(fruit.getFruitName()))
-                .findFirst()
-                .get();
+        Fruit fruitToUpdate = get(fruit.getFruitName());
         fruitToUpdate.setQuantity(fruit.getQuantity());
     }
 }

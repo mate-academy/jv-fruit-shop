@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,21 +12,18 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public List<FruitTransaction> parseData(List<String[]> fileInfo) {
-        List<String[]> transactionInfo = fileInfo.stream()
+        return fileInfo.stream()
                 .skip(1)
-                .map(strings -> strings[0].split(";"))
+                .map(stringTransaction -> {
+                    String[] splitStrings = stringTransaction[0].split(";");
+                    FruitTransaction fruitTransaction = new FruitTransaction();
+                    fruitTransaction.setOperation(FruitTransaction.Operation
+                            .identifyOperation(splitStrings[TYPE_INDEX]));
+                    fruitTransaction.setFruitName(splitStrings[FRUIT_INDEX]);
+                    fruitTransaction
+                            .setQuantity(Integer.parseInt(splitStrings[QUANTITY_INDEX]));
+                    return fruitTransaction;
+                })
                 .collect(Collectors.toList());
-
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
-
-        transactionInfo.forEach(transaction -> {
-            FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(FruitTransaction.Operation
-                    .identifyOperation(transaction[TYPE_INDEX]));
-            fruitTransaction.setFruitName(transaction[FRUIT_INDEX]);
-            fruitTransaction.setQuantity(Integer.parseInt(transaction[QUANTITY_INDEX]));
-            fruitTransactions.add(fruitTransaction);
-        });
-        return fruitTransactions;
     }
 }
