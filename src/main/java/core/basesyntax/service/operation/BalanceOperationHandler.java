@@ -1,12 +1,19 @@
 package core.basesyntax.service.operation;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 
 public class BalanceOperationHandler implements OperationHandler {
-    @Override
-    public void calculate(Fruit fruit, FruitTransaction transaction) {
+    private FruitDao fruitDao;
 
-        fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity());
+    public BalanceOperationHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
+
+    @Override
+    public void calculate(FruitTransaction transaction) {
+        Fruit newFruit = new Fruit(transaction.getFruitName(), transaction.getQuantity());
+        fruitDao.add(newFruit);
     }
 }

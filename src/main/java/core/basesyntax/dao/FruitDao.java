@@ -4,9 +4,11 @@ import core.basesyntax.model.Fruit;
 import java.util.List;
 
 public interface FruitDao {
-    void addAll(List<Fruit> fruits);
+    void add(Fruit fruit);
+
+    Fruit get(String fruitName);
 
     List<Fruit> getAll();
 
-    Fruit get(String fruitName);
+    void update(Fruit fruit);
 }

@@ -6,13 +6,8 @@ import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void addAll(List<Fruit> fruits) {
-        Storage.fruits.addAll(fruits);
-    }
-
-    @Override
-    public List<Fruit> getAll() {
-        return Storage.fruits;
+    public void add(Fruit fruit) {
+        Storage.fruits.add(fruit);
     }
 
     @Override
@@ -21,5 +16,19 @@ public class FruitDaoImpl implements FruitDao {
                 .filter(fruit -> fruit.getFruitName().equals(fruitName))
                 .findFirst()
                 .get();
+    }
+
+    @Override
+    public List<Fruit> getAll() {
+        return Storage.fruits;
+    }
+
+    @Override
+    public void update(Fruit fruit) {
+        Fruit fruitToUpdate = Storage.fruits.stream()
+                .filter(item -> item.getFruitName().equals(fruit.getFruitName()))
+                .findFirst()
+                .get();
+        fruitToUpdate.setQuantity(fruit.getQuantity());
     }
 }
