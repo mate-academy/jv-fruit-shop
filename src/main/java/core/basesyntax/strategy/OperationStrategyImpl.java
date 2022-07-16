@@ -1,8 +1,11 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.strategy.operations.*;
-
+import core.basesyntax.strategy.operations.BalanceOperationHandler;
+import core.basesyntax.strategy.operations.OperationHandler;
+import core.basesyntax.strategy.operations.PurchaseOperationHandler;
+import core.basesyntax.strategy.operations.ReturnOperationHandler;
+import core.basesyntax.strategy.operations.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 
