@@ -5,23 +5,20 @@ import core.basesyntax.dao.PivotDaoImpl;
 import core.basesyntax.model.Product;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BalanceServiceImpl implements BalanceService {
-    private final List<Transaction> balanceDao;
     private final OperationStrategy operationStrategy;
 
-    public BalanceServiceImpl(List<Transaction> balanceDao, OperationStrategy operationStrategy) {
-        this.balanceDao = balanceDao;
+    public BalanceServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public Map<Product, Integer> getBalance() {
-        return balanceDao.stream()
+    public Map<Product, Integer> getBalance(List<Transaction> transactions) {
+        return transactions.stream()
                 .collect(Collectors.groupingBy(Transaction::getProduct))
                 .entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey,
@@ -33,12 +30,13 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public void exportPivotToFile(String pivotFileName) {
+    public void exportPivotToFile(String pivotFileName, List<String> report) {
         PivotDao pivotDao = new PivotDaoImpl();
-        pivotDao.writePivotFile(pivotFileName, this.makeBalanceReport());
+        pivotDao.writePivotFile(pivotFileName, report);
     }
 
-    private List<String> makeBalanceReport() {
-        return new PivotDaoImpl().getBalanceList(this.getBalance());
+    @Override
+    public List<String> makeBalanceReport(Map<Product, Integer> balance) {
+        return new PivotDaoImpl().getBalanceList(balance);
     }
 }
