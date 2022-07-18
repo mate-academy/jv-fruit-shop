@@ -10,28 +10,34 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BalanceDaoImpl implements BalanceDao {
+public class TransactionDaoCsvImpl implements TransactionDao {
+    private static final String BALANCE_FILE_NAME = "src/main/resources/database.csv";
 
     @Override
-    public List<Transaction> getBalanceFromFile(String fileName) {
-        Path filePath = Paths.get(fileName);
+    public List<Transaction> getAll() {
+        Path filePath = Paths.get(BALANCE_FILE_NAME);
         List<String> readFromFile;
         try {
             readFromFile = Files.readAllLines(filePath);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + fileName, e);
+            throw new RuntimeException("Can't read from file " + BALANCE_FILE_NAME, e);
         }
         return getTransactionList(readFromFile);
+    }
+
+    @Override
+    public void add(Transaction transaction) {
+
     }
 
     private List<Transaction> getTransactionList(List<String> fileLines) {
         return fileLines.stream()
                 .filter(line -> Operation.fromString(line.split(",")[0]) != null)
-                .map(this::getFromCsvRow)
+                .map(this::getTransactionFromCsvRow)
                 .collect(Collectors.toList());
     }
 
-    private Transaction getFromCsvRow(String line) {
+    private Transaction getTransactionFromCsvRow(String line) {
         String[] fields = line.split(",");
         Transaction transaction = new Transaction();
         transaction.setOperation(Operation.fromString(fields[0]));
