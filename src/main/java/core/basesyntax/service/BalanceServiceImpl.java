@@ -1,7 +1,5 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.PivotDao;
-import core.basesyntax.dao.TransactionDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Product;
 import core.basesyntax.model.Transaction;

@@ -1,8 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.PivotDaoImpl;
-import core.basesyntax.dao.TransactionDaoImpl;
-import core.basesyntax.service.*;
+import core.basesyntax.service.BalanceFileReaderServiceImpl;
+import core.basesyntax.service.BalanceService;
+import core.basesyntax.service.BalanceServiceImpl;
+import core.basesyntax.service.PivotFileWriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
 
@@ -13,7 +14,6 @@ public class Main {
         BalanceService balanceService = new BalanceServiceImpl(new OperationStrategyImpl());
 
         //1 Read data from CSV file
-       // balanceService.getTransactionsFromFile();
         new BalanceFileReaderServiceImpl().getTransactionsFromFile();
 
         //2 Process this data
@@ -23,7 +23,6 @@ public class Main {
         List<String> reportList = balanceService.makeBalanceReport();
 
         //4 Write report to new file
-//        balanceService.exportPivotToFile(reportList);
         new PivotFileWriterServiceImpl().exportPivotToFile(reportList);
     }
 }
