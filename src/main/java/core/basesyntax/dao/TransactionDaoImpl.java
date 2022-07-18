@@ -2,13 +2,12 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
-
 import java.util.List;
 
 public class TransactionDaoImpl implements TransactionDao {
     @Override
     public List<Transaction> getAll() {
-        return Storage.transactions;
+        return new TransactionDaoCsvImpl().getAll();
     }
 
     @Override
