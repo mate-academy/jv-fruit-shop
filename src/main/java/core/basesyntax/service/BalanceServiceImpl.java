@@ -11,15 +11,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BalanceServiceImpl implements BalanceService {
-    private final TransactionDao transactionDao;
-    private final PivotDao pivotDao;
     private Map<Product, Integer> balanceList;
     private final OperationStrategy operationStrategy;
 
-    public BalanceServiceImpl(TransactionDao transactionDao, PivotDao pivotDao,
-                              OperationStrategy operationStrategy) {
-        this.transactionDao = transactionDao;
-        this.pivotDao = pivotDao;
+    public BalanceServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
@@ -34,16 +29,6 @@ public class BalanceServiceImpl implements BalanceService {
                                         .get(v.getOperation())
                                         .getOperationalQuantity(v.getQuantity()))
                                 .sum()));
-    }
-
-    @Override
-    public void getTransactionsFromFile() {
-        Storage.transactions.addAll(transactionDao.getAll());
-    }
-
-    @Override
-    public void exportPivotToFile(List<String> report) {
-        pivotDao.writePivotFile(report);
     }
 
     @Override
