@@ -11,8 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        BalanceService balanceService
-                = new BalanceServiceImpl(new TransactionDaoImpl(), new PivotDaoImpl(), new OperationStrategyImpl());
+        BalanceService balanceService = new BalanceServiceImpl(new TransactionDaoImpl(),
+                                            new PivotDaoImpl(), new OperationStrategyImpl());
 
         //1 Read data from CSV file
         balanceService.getTransactionsFromFile();

@@ -16,7 +16,8 @@ public class BalanceServiceImpl implements BalanceService {
     private Map<Product, Integer> balanceList;
     private final OperationStrategy operationStrategy;
 
-    public BalanceServiceImpl(TransactionDao transactionDao, PivotDao pivotDao, OperationStrategy operationStrategy) {
+    public BalanceServiceImpl(TransactionDao transactionDao, PivotDao pivotDao,
+                              OperationStrategy operationStrategy) {
         this.transactionDao = transactionDao;
         this.pivotDao = pivotDao;
         this.operationStrategy = operationStrategy;

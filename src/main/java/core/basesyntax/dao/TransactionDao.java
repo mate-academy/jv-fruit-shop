@@ -5,5 +5,6 @@ import java.util.List;
 
 public interface TransactionDao {
     List<Transaction> getAll();
+
     void add(Transaction transaction);
 }

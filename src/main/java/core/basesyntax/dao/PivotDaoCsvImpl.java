@@ -14,7 +14,7 @@ public class PivotDaoCsvImpl implements PivotDao {
         Path filePath = Path.of(PIVOT_FILE_NAME);
         String header = "product,quantity";
         try (FileWriter fileWriter = new FileWriter(filePath.toFile());
-             PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                PrintWriter printWriter = new PrintWriter(fileWriter)) {
             printWriter.printf(header + System.lineSeparator());
             for (String str : stringList) {
                 printWriter.printf(str + System.lineSeparator());
