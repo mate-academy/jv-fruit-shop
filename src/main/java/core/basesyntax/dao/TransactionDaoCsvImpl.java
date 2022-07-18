@@ -11,16 +11,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransactionDaoCsvImpl implements TransactionDao {
-    private static final String BALANCE_FILE_NAME = "src/main/resources/database.csv";
 
     @Override
-    public List<Transaction> getAll() {
-        Path filePath = Paths.get(BALANCE_FILE_NAME);
+    public List<Transaction> getAll(String fileName) {
+        Path filePath = Paths.get(fileName);
         List<String> readFromFile;
         try {
             readFromFile = Files.readAllLines(filePath);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + BALANCE_FILE_NAME, e);
+            throw new RuntimeException("Can't read from file " + fileName, e);
         }
         return getTransactionList(readFromFile);
     }

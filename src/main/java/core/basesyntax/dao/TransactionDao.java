@@ -4,7 +4,7 @@ import core.basesyntax.model.Transaction;
 import java.util.List;
 
 public interface TransactionDao {
-    List<Transaction> getAll();
+    List<Transaction> getAll(String fileName);
 
     void add(Transaction transaction);
 }

@@ -6,8 +6,8 @@ import java.util.List;
 
 public class TransactionDaoImpl implements TransactionDao {
     @Override
-    public List<Transaction> getAll() {
-        return new TransactionDaoCsvImpl().getAll();
+    public List<Transaction> getAll(String fileName) {
+        return new TransactionDaoCsvImpl().getAll(fileName);
     }
 
     @Override
