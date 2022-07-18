@@ -1,11 +1,9 @@
 package core.basesyntax.service;
 
-import java.util.List;
+import core.basesyntax.model.Product;
+import java.util.Map;
 
 public interface BalanceService {
 
-    void calculateBalance();
-
-    List<String> makeBalanceReport();
-
+    Map<Product, Integer> calculateBalance();
 }

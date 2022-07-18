@@ -1,11 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.service.BalanceFileReaderServiceImpl;
-import core.basesyntax.service.BalanceService;
-import core.basesyntax.service.BalanceServiceImpl;
-import core.basesyntax.service.PivotFileWriterServiceImpl;
+import core.basesyntax.model.Product;
+import core.basesyntax.service.*;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
@@ -17,10 +16,10 @@ public class Main {
         new BalanceFileReaderServiceImpl().getTransactionsFromFile();
 
         //2 Process this data
-        balanceService.calculateBalance();
+        Map<Product, Integer> productBalance = balanceService.calculateBalance();
 
         //3 Generate a report on processed data
-        List<String> reportList = balanceService.makeBalanceReport();
+        List<String> reportList = new ReportServiceImpl().makeBalanceReport(productBalance);
 
         //4 Write report to new file
         new PivotFileWriterServiceImpl().exportPivotToFile(reportList);
