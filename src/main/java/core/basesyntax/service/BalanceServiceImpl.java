@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.PivotDao;
-import core.basesyntax.dao.PivotDaoImpl;
+import core.basesyntax.dao.TransactionDao;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Product;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.OperationStrategy;
@@ -10,15 +11,20 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BalanceServiceImpl implements BalanceService {
+    private final TransactionDao transactionDao;
+    private final PivotDao pivotDao;
+    private Map<Product, Integer> balanceList;
     private final OperationStrategy operationStrategy;
 
-    public BalanceServiceImpl(OperationStrategy operationStrategy) {
+    public BalanceServiceImpl(TransactionDao transactionDao, PivotDao pivotDao, OperationStrategy operationStrategy) {
+        this.transactionDao = transactionDao;
+        this.pivotDao = pivotDao;
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public Map<Product, Integer> getBalance(List<Transaction> transactions) {
-        return transactions.stream()
+    public void calculateBalance() {
+        balanceList = Storage.transactions.stream()
                 .collect(Collectors.groupingBy(Transaction::getProduct))
                 .entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey,
@@ -30,13 +36,19 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public void exportPivotToFile(String pivotFileName, List<String> report) {
-        PivotDao pivotDao = new PivotDaoImpl();
-        pivotDao.writePivotFile(pivotFileName, report);
+    public void getTransactionsFromFile() {
+        Storage.transactions.addAll(transactionDao.getAll());
     }
 
     @Override
-    public List<String> makeBalanceReport(Map<Product, Integer> balance) {
-        return new PivotDaoImpl().getBalanceList(balance);
+    public void exportPivotToFile(List<String> report) {
+        pivotDao.writePivotFile(report);
+    }
+
+    @Override
+    public List<String> makeBalanceReport() {
+        return balanceList.entrySet().stream()
+                .map(p -> (p.getKey().getType() + "," + p.getValue()))
+                .collect(Collectors.toList());
     }
 }
