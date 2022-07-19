@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class CsvFileReaderServiceImpl implements FileReaderService {
-
     @Override
     public List<String[]> readFromFile(String filePath) {
         List<String[]> fileInfo;
