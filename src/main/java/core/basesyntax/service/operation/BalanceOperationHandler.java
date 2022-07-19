@@ -12,7 +12,7 @@ public class BalanceOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void calculate(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         Fruit newFruit = new Fruit(transaction.getFruitName(), transaction.getQuantity());
         fruitDao.add(newFruit);
     }

@@ -18,7 +18,7 @@ public class ShopServiceImpl implements ShopService {
         fruitTransactions.forEach(transaction -> {
             OperationHandler operationHandler
                     = operationStrategy.get(transaction.getOperation());
-            operationHandler.calculate(transaction);
+            operationHandler.handle(transaction);
         });
     }
 }

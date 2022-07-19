@@ -3,8 +3,8 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CsvFileReaderService;
-import core.basesyntax.service.CsvFileWriterService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ShopService;
@@ -40,7 +40,7 @@ public class Main {
         String fromFilePath = "src/main/resources/input.csv";
         String toFilePath = "src/main/resources/report.csv";
 
-        CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
+        FileReaderService readerService = new CsvFileReaderServiceImpl();
         List<String[]> readData = readerService.readFromFile(fromFilePath);
 
         ParserService parserService = new ParserServiceImpl();
@@ -53,7 +53,7 @@ public class Main {
         ReportService reportService = new ReportServiceImpl(fruitDao);
         String report = reportService.makeReport();
 
-        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
+        FileWriterService writerService = new CsvFileWriterServiceImpl();
         writerService.writeToFile(report, toFilePath);
     }
 }

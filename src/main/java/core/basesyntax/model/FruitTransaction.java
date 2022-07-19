@@ -37,21 +37,25 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String letter;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.letter = operation;
         }
 
         public String getOperation() {
-            return operation;
+            return letter;
         }
 
-        public static Operation identifyOperation(String stringOperation) {
-            return Arrays.stream(FruitTransaction.Operation.values())
-                    .filter(e -> e.getOperation().equals(stringOperation))
-                    .findFirst()
-                    .get();
+        public static Operation identifyOperation(String letter) {
+            try {
+                return Arrays.stream(FruitTransaction.Operation.values())
+                        .filter(e -> e.getOperation().equals(letter))
+                        .findFirst()
+                        .get();
+            } catch (Exception e) {
+                throw new RuntimeException("Letter is invalid", e);
+            }
         }
     }
 }

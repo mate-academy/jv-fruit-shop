@@ -12,7 +12,7 @@ public class SupplyOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void calculate(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         Fruit fruit = fruitDao.get(transaction.getFruitName());
         fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity());
         fruitDao.update(fruit);

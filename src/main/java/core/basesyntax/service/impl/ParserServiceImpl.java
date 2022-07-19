@@ -14,14 +14,14 @@ public class ParserServiceImpl implements ParserService {
     public List<FruitTransaction> parseData(List<String[]> fileInfo) {
         return fileInfo.stream()
                 .skip(1)
-                .map(stringTransaction -> {
-                    String[] splitStrings = stringTransaction[0].split(";");
+                .map(line -> {
+                    String[] splittedLine = line[0].split(";");
                     FruitTransaction fruitTransaction = new FruitTransaction();
                     fruitTransaction.setOperation(FruitTransaction.Operation
-                            .identifyOperation(splitStrings[TYPE_INDEX]));
-                    fruitTransaction.setFruitName(splitStrings[FRUIT_INDEX]);
+                            .identifyOperation(splittedLine[TYPE_INDEX]));
+                    fruitTransaction.setFruitName(splittedLine[FRUIT_INDEX]);
                     fruitTransaction
-                            .setQuantity(Integer.parseInt(splitStrings[QUANTITY_INDEX]));
+                            .setQuantity(Integer.parseInt(splittedLine[QUANTITY_INDEX]));
                     return fruitTransaction;
                 })
                 .collect(Collectors.toList());
