@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class PivotDaoCsvImpl implements PivotDao {
+    private static final String PIVOT_FILE_NAME = "src/main/resources/pivot.csv";
 
     @Override
     public void writePivotFile(String fileName, List<String> stringList) {
