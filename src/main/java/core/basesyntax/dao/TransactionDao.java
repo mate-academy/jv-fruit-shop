@@ -4,5 +4,5 @@ import core.basesyntax.model.Transaction;
 import java.util.List;
 
 public interface TransactionDao {
-    List<Transaction> getAll(String fileName);
+    List<Transaction> readFromFile(String fileName);
 }

@@ -10,6 +10,6 @@ public class BalanceFileReaderServiceImpl implements BalanceFileReaderService {
 
     @Override
     public void getTransactionsFromFile() {
-        Storage.transactions.addAll(transactionDao.getAll(BALANCE_FILE_NAME));
+        Storage.transactions.addAll(transactionDao.readFromFile(BALANCE_FILE_NAME));
     }
 }

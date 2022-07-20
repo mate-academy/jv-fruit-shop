@@ -11,7 +11,7 @@ import java.util.List;
 public class TransactionDaoCsvImpl implements TransactionDao {
 
     @Override
-    public List<Transaction> getAll(String fileName) {
+    public List<Transaction> readFromFile(String fileName) {
         Path filePath = Paths.get(fileName);
         List<String> readFromFile;
         try {
