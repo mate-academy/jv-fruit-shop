@@ -8,15 +8,15 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    private final String value;
+    private final String string;
 
-    Operation(String value) {
-        this.value = value;
+    Operation(String string) {
+        this.string = string;
     }
 
-    public static Operation fromString(String s) throws IllegalArgumentException {
+    public static Operation fromLetter(String letter) {
         return Arrays.stream(Operation.values())
-                .filter(v -> v.value.equals(s))
+                .filter(v -> v.string.equals(letter))
                 .findFirst()
                 .orElse(null);
     }

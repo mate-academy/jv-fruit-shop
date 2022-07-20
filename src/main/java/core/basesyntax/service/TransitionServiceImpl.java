@@ -14,7 +14,7 @@ public class TransitionServiceImpl implements TransitionService {
     @Override
     public List<Transaction> getTransactionsList(List<String> fileLines) {
         return fileLines.stream()
-                .filter(line -> Operation.fromString(line.split(",")[OPERATION_COLUMN]) != null)
+                .filter(line -> Operation.fromLetter(line.split(",")[OPERATION_COLUMN]) != null)
                 .map(this::getTransactionFromCsvRow)
                 .collect(Collectors.toList());
     }
@@ -22,7 +22,7 @@ public class TransitionServiceImpl implements TransitionService {
     private Transaction getTransactionFromCsvRow(String line) {
         String[] fields = line.split(",");
         Transaction transaction = new Transaction();
-        transaction.setOperation(Operation.fromString(fields[OPERATION_COLUMN]));
+        transaction.setOperation(Operation.fromLetter(fields[OPERATION_COLUMN]));
         transaction.setProduct(new Product(fields[PRODUCT_COLUMN]));
         transaction.setQuantity(Integer.parseInt(fields[QUANTITY_COLUMN]));
         return transaction;
