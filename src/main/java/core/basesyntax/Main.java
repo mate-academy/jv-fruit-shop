@@ -1,12 +1,12 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.model.Product;
 import core.basesyntax.service.BalanceFileReaderServiceImpl;
 import core.basesyntax.service.BalanceService;
 import core.basesyntax.service.BalanceServiceImpl;
 import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -22,9 +22,9 @@ public class Main {
         Map<Product, Integer> productBalance = balanceService.calculateBalance();
 
         //3 Generate a report on processed data
-        List<String> reportList = new ReportServiceImpl().makeBalanceReport(productBalance);
+        String report = new ReportServiceImpl().makeReport(productBalance);
 
         //4 Write report to new file
-        new PivotFileWriterServiceImpl().exportPivotToFile(reportList);
+        new FileWriterImpl().writeToFile(report);
     }
 }
