@@ -1,8 +1,10 @@
 package core.basesyntax.strategy.operations;
 
+import core.basesyntax.model.Transaction;
+
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public int getOperationalQuantity(int quantity) {
-        return quantity * (-1);
+    public void handle(Transaction transaction) {
+        transaction.setQuantity(transaction.getQuantity());
     }
 }

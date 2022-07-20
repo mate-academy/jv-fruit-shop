@@ -16,16 +16,15 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public List<Fruit> calculateBalance(List<Transaction> transactionsFromFile) {
-        Map<Fruit, Integer> fruitIntegerMap = transactionsFromFile.stream()
+    public List<Fruit> calculateBalance(List<Transaction> transactions) {
+        transactions.forEach(t -> operationStrategy.get(t.getOperation()).handle(t));
+        Map<Fruit, Integer> result = transactions.stream()
                 .collect(Collectors.groupingBy(Transaction::getProduct)).entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey,
                         e -> e.getValue().stream()
-                                .mapToInt(v -> operationStrategy
-                                        .get(v.getOperation())
-                                        .getOperationalQuantity(v.getQuantity()))
+                                .mapToInt(Transaction::getQuantity)
                                 .sum()));
-        fruitIntegerMap.forEach(Fruit::setQuantity);
-        return new ArrayList<>(fruitIntegerMap.keySet());
+        result.forEach(Fruit::setQuantity);
+        return new ArrayList<>(result.keySet());
     }
 }
