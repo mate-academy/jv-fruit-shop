@@ -7,9 +7,11 @@ import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
     @Override
-    public List<String> makeBalanceReport(Map<Product, Integer> balance) {
-        return balance.entrySet().stream()
+    public String makeReport(Map<Product, Integer> balance) {
+        String header = "product,quantity";
+        String balanceString = balance.entrySet().stream()
                 .map(p -> (p.getKey().getType() + "," + p.getValue()))
-                .collect(Collectors.toList());
+                .collect(Collectors.joining(System.lineSeparator()));
+        return header + System.lineSeparator() + balanceString;
     }
 }
