@@ -3,7 +3,9 @@ package core.basesyntax.service;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BalanceServiceImpl implements BalanceService {

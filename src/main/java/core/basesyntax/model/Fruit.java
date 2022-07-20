@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Fruit {
-    private String type;
+    private final String type;
     private Integer quantity;
 
     public Fruit(String type) {
@@ -17,10 +17,6 @@ public class Fruit {
 
     public String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type.equals("") ? "NoTypeProduct" : type;
     }
 
     public Integer getQuantity() {

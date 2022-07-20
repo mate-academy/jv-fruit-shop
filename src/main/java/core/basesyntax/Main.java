@@ -1,13 +1,14 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FileWriterImpl;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.service.BalanceFileReaderServiceImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.Transaction;
+import core.basesyntax.service.TransactionsFileReaderServiceImpl;
 import core.basesyntax.service.BalanceService;
 import core.basesyntax.service.BalanceServiceImpl;
 import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import java.util.Map;
+import java.util.List;
 
 public class Main {
 
@@ -16,13 +17,14 @@ public class Main {
         BalanceService balanceService = new BalanceServiceImpl(new OperationStrategyImpl());
 
         //1 Read data from CSV file
-        new BalanceFileReaderServiceImpl().getTransactionsFromFile();
+        List<Transaction> transactionsFromFile =
+                new TransactionsFileReaderServiceImpl().getTransactionsFromFile();
 
         //2 Process this data
-        Map<Fruit, Integer> productBalance = balanceService.calculateBalance();
+        Storage.fruits.addAll(balanceService.calculateBalance(transactionsFromFile));
 
         //3 Generate a report on processed data
-        String report = new ReportServiceImpl().makeReport(productBalance);
+        String report = new ReportServiceImpl().makeReport(Storage.fruits);
 
         //4 Write report to new file
         new FileWriterImpl().writeToFile(report);
