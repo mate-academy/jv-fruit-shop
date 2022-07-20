@@ -24,11 +24,6 @@ public class TransactionDaoCsvImpl implements TransactionDao {
         return getTransactionList(readFromFile);
     }
 
-    @Override
-    public void add(Transaction transaction) {
-
-    }
-
     private List<Transaction> getTransactionList(List<String> fileLines) {
         return fileLines.stream()
                 .filter(line -> Operation.fromString(line.split(",")[0]) != null)
