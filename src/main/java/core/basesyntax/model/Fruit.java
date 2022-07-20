@@ -2,10 +2,10 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class Product {
+public class Fruit {
     private String type;
 
-    public Product(String type) {
+    public Fruit(String type) {
         this.type = type.equals("") ? "NoTypeProduct" : type;
     }
 
@@ -25,8 +25,8 @@ public class Product {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Product product = (Product) o;
-        return Objects.equals(type, product.type);
+        Fruit fruit = (Fruit) o;
+        return Objects.equals(type, fruit.type);
     }
 
     @Override

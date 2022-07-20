@@ -1,9 +1,9 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Product;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public interface BalanceService {
 
-    Map<Product, Integer> calculateBalance();
+    Map<Fruit, Integer> calculateBalance();
 }

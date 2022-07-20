@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Product;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
@@ -15,7 +15,7 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public Map<Product, Integer> calculateBalance() {
+    public Map<Fruit, Integer> calculateBalance() {
         return Storage.transactions.stream()
                 .collect(Collectors.groupingBy(Transaction::getProduct))
                 .entrySet().stream()

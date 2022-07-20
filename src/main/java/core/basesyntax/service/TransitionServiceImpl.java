@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
-import core.basesyntax.model.Product;
 import core.basesyntax.model.Transaction;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +23,7 @@ public class TransitionServiceImpl implements TransitionService {
         String[] fields = line.split(",");
         Transaction transaction = new Transaction();
         transaction.setOperation(Operation.fromLetter(fields[OPERATION_COLUMN]));
-        transaction.setProduct(new Product(fields[PRODUCT_COLUMN]));
+        transaction.setProduct(new Fruit(fields[PRODUCT_COLUMN]));
         transaction.setQuantity(Integer.parseInt(fields[QUANTITY_COLUMN]));
         return transaction;
     }

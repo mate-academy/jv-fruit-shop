@@ -2,15 +2,15 @@ package core.basesyntax.model;
 
 public class Transaction {
     private Operation operation;
-    private Product product;
+    private Fruit fruit;
     private int quantity;
 
     public Transaction() {
     }
 
-    public Transaction(Operation operation, Product product, int quantity) {
+    public Transaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;
-        this.product = product;
+        this.fruit = fruit;
         this.quantity = quantity;
     }
 
@@ -22,12 +22,12 @@ public class Transaction {
         this.operation = operation;
     }
 
-    public Product getProduct() {
-        return product;
+    public Fruit getProduct() {
+        return fruit;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct(Fruit fruit) {
+        this.fruit = fruit;
     }
 
     public int getQuantity() {
@@ -42,7 +42,7 @@ public class Transaction {
     public String toString() {
         return "Transaction{"
                 + "operation=" + operation
-                + ", product=" + product.getType()
+                + ", fruit=" + fruit.getType()
                 + ", quantity=" + quantity
                 + '}';
     }

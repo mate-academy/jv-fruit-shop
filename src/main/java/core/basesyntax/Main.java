@@ -1,7 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FileWriterImpl;
-import core.basesyntax.model.Product;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.BalanceFileReaderServiceImpl;
 import core.basesyntax.service.BalanceService;
 import core.basesyntax.service.BalanceServiceImpl;
@@ -19,7 +19,7 @@ public class Main {
         new BalanceFileReaderServiceImpl().getTransactionsFromFile();
 
         //2 Process this data
-        Map<Product, Integer> productBalance = balanceService.calculateBalance();
+        Map<Fruit, Integer> productBalance = balanceService.calculateBalance();
 
         //3 Generate a report on processed data
         String report = new ReportServiceImpl().makeReport(productBalance);

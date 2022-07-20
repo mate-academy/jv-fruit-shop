@@ -1,12 +1,12 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Product;
+import core.basesyntax.model.Fruit;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
     @Override
-    public String makeReport(Map<Product, Integer> balance) {
+    public String makeReport(Map<Fruit, Integer> balance) {
         String header = "product,quantity";
         String balanceString = balance.entrySet().stream()
                 .map(p -> (p.getKey().getType() + "," + p.getValue()))
