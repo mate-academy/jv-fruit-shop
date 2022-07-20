@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransitionServiceImpl implements TransitionService {
-    private final static int OPERATION_COLUMN = 0;
-    private final static int PRODUCT_COLUMN = 1;
-    private final static int QUANTITY_COLUMN = 2;
+    private static final int OPERATION_COLUMN = 0;
+    private static final int PRODUCT_COLUMN = 1;
+    private static final int QUANTITY_COLUMN = 2;
 
     @Override
     public List<Transaction> getTransactionsList(List<String> fileLines) {

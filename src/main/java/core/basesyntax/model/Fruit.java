@@ -46,9 +46,9 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{" +
-                "type='" + type + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "Fruit{"
+                + "type='" + type + '\''
+                + ", quantity=" + quantity
+                + '}';
     }
 }
