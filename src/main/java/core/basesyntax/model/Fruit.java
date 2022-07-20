@@ -4,9 +4,15 @@ import java.util.Objects;
 
 public class Fruit {
     private String type;
+    private Integer quantity;
 
     public Fruit(String type) {
         this.type = type.equals("") ? "NoTypeProduct" : type;
+    }
+
+    public Fruit(String type, Integer quantity) {
+        this.type = type.equals("") ? "NoTypeProduct" : type;
+        this.quantity = quantity;
     }
 
     public String getType() {
@@ -15,6 +21,14 @@ public class Fruit {
 
     public void setType(String type) {
         this.type = type.equals("") ? "NoTypeProduct" : type;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -32,5 +46,13 @@ public class Fruit {
     @Override
     public int hashCode() {
         return Objects.hash(type);
+    }
+
+    @Override
+    public String toString() {
+        return "Fruit{" +
+                "type='" + type + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }
