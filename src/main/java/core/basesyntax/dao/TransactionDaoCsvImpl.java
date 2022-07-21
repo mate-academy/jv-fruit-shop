@@ -1,7 +1,5 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Transaction;
-import core.basesyntax.service.TransitionServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +9,7 @@ import java.util.List;
 public class TransactionDaoCsvImpl implements TransactionDao {
 
     @Override
-    public List<Transaction> readFromFile(String fileName) {
+    public List<String> readFromFile(String fileName) {
         Path filePath = Paths.get(fileName);
         List<String> readFromFile;
         try {
@@ -19,6 +17,6 @@ public class TransactionDaoCsvImpl implements TransactionDao {
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + fileName, e);
         }
-        return new TransitionServiceImpl().getTransactionsList(readFromFile);
+        return readFromFile;
     }
 }
