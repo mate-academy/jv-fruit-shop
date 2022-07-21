@@ -8,15 +8,15 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    private final String string;
+    private final String letter;
 
-    Operation(String string) {
-        this.string = string;
+    Operation(String letter) {
+        this.letter = letter;
     }
 
     public static Operation fromLetter(String letter) {
         return Arrays.stream(Operation.values())
-                .filter(v -> v.string.equals(letter))
+                .filter(v -> v.letter.equals(letter))
                 .findFirst()
                 .orElse(null);
     }
