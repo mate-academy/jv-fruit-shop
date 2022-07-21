@@ -9,9 +9,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String makeReport(List<Fruit> fruits) {
-        String balanceString = fruits.stream()
+        String fruitsInfo = fruits.stream()
                 .map(p -> (p.getName() + "," + p.getQuantity()))
                 .collect(Collectors.joining(System.lineSeparator()));
-        return HEADER + System.lineSeparator() + balanceString;
+        return HEADER + System.lineSeparator() + fruitsInfo;
     }
 }
