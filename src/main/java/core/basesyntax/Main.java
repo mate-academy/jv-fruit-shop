@@ -11,6 +11,7 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
 
 public class Main {
+    private static final String PIVOT_FILE_NAME = "src/main/resources/pivot.csv";
 
     public static void main(String[] args) {
 
@@ -27,6 +28,6 @@ public class Main {
         String report = new ReportServiceImpl().makeReport(Storage.fruits);
 
         //4 Write report to new file
-        new FileWriterImpl().writeToFile(report);
+        new FileWriterImpl().writeToFile(PIVOT_FILE_NAME, report);
     }
 }

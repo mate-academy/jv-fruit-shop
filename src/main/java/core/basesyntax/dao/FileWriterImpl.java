@@ -9,7 +9,7 @@ public class FileWriterImpl implements core.basesyntax.dao.FileWriter {
     private static final String PIVOT_FILE_NAME = "src/main/resources/pivot.csv";
 
     @Override
-    public void writeToFile(String report) {
+    public void writeToFile(String pathToFile, String report) {
         Path filePath = Path.of(PIVOT_FILE_NAME);
         try (FileWriter fileWriter = new FileWriter(filePath.toFile());
                 PrintWriter printWriter = new PrintWriter(fileWriter)) {
