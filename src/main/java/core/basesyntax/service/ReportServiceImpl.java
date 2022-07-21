@@ -10,7 +10,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String makeReport(List<Fruit> fruits) {
         String fruitsInfo = fruits.stream()
-                .map(p -> (p.getName() + "," + p.getQuantity()))
+                .map(f -> (f.getName() + "," + f.getQuantity()))
                 .collect(Collectors.joining(System.lineSeparator()));
         return HEADER + System.lineSeparator() + fruitsInfo;
     }
