@@ -18,6 +18,7 @@ public enum Operation {
         return Arrays.stream(Operation.values())
                 .filter(v -> v.letter.equals(letter))
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new RuntimeException("Can't find an operation by letter: "
+                                                        + letter));
     }
 }
