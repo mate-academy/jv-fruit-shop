@@ -5,15 +5,6 @@ public class Transaction {
     private Fruit fruit;
     private int quantity;
 
-    public Transaction() {
-    }
-
-    public Transaction(Operation operation, Fruit fruit, int quantity) {
-        this.operation = operation;
-        this.fruit = fruit;
-        this.quantity = quantity;
-    }
-
     public Operation getOperation() {
         return operation;
     }
