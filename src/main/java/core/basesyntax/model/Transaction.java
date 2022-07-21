@@ -42,7 +42,7 @@ public class Transaction {
     public String toString() {
         return "Transaction{"
                 + "operation=" + operation
-                + ", fruit=" + fruit.getType()
+                + ", fruit=" + fruit.getName()
                 + ", quantity=" + quantity
                 + '}';
     }
