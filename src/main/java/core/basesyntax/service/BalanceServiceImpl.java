@@ -16,7 +16,7 @@ public class BalanceServiceImpl implements BalanceService {
     }
 
     @Override
-    public List<Fruit> calculateBalance(List<Transaction> transactions) {
+    public List<Fruit> process(List<Transaction> transactions) {
         transactions.forEach(t -> operationStrategy.get(t.getOperation()).handle(t));
         Map<Fruit, Integer> result = transactions.stream()
                 .collect(Collectors.groupingBy(Transaction::getProduct)).entrySet().stream()
