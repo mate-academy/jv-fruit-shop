@@ -7,11 +7,11 @@ public class Fruit {
     private Integer quantity;
 
     public Fruit(String type) {
-        this.type = type.equals("") ? "NoTypeProduct" : type;
+        this.type = type;
     }
 
     public Fruit(String type, Integer quantity) {
-        this.type = type.equals("") ? "NoTypeProduct" : type;
+        this.type = type;
         this.quantity = quantity;
     }
 
