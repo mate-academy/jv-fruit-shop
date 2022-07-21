@@ -4,6 +4,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import java.util.List;
 
-public interface BalanceService {
+public interface TransactionProcessor {
     List<Fruit> process(List<Transaction> transactions);
 }

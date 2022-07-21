@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class BalanceServiceImpl implements BalanceService {
+public class TransactionProcessorImpl implements TransactionProcessor {
     private final OperationStrategy operationStrategy;
 
-    public BalanceServiceImpl(OperationStrategy operationStrategy) {
+    public TransactionProcessorImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
