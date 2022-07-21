@@ -11,12 +11,12 @@ public class TransactionDaoCsvImpl implements TransactionDao {
     @Override
     public List<String> readFromFile(String fileName) {
         Path filePath = Paths.get(fileName);
-        List<String> readFromFile;
+        List<String> lines;
         try {
-            readFromFile = Files.readAllLines(filePath);
+            lines = Files.readAllLines(filePath);
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + fileName, e);
         }
-        return readFromFile;
+        return lines;
     }
 }
