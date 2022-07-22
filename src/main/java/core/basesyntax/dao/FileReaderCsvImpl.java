@@ -13,7 +13,6 @@ public class FileReaderCsvImpl implements FileReader {
         List<String> lines;
         try {
             lines = Files.readAllLines(filePath);
-            lines.remove(0);
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + fileName, e);
         }

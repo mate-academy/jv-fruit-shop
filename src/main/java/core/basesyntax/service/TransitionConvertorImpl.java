@@ -13,6 +13,7 @@ public class TransitionConvertorImpl implements TransitionConvertor {
 
     @Override
     public List<Transaction> convert(List<String> lines) {
+        lines.remove(0);
         return lines.stream()
                 .map(this::getTransactionFromCsvRow)
                 .collect(Collectors.toList());
