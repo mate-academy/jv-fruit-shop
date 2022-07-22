@@ -4,27 +4,13 @@ import java.util.Objects;
 
 public class Fruit {
     private final String name;
-    private Integer quantity;
 
     public Fruit(String name) {
         this.name = name;
     }
 
-    public Fruit(String name, Integer quantity) {
-        this.name = name;
-        this.quantity = quantity;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
     }
 
     @Override
@@ -48,7 +34,6 @@ public class Fruit {
     public String toString() {
         return "Fruit{"
                 + "name='" + name + '\''
-                + ", quantity=" + quantity
                 + '}';
     }
 }
