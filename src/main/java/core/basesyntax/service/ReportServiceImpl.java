@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,8 +10,8 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String makeReport(List<Fruit> fruits) {
-        String fruitsInfo = fruits.stream()
-                .map(f -> (f.getName() + "," + f.getQuantity()))
+        String fruitsInfo = Storage.fruits.entrySet().stream()
+                .map(f -> f.getKey().getName() + "," + f.getValue())
                 .collect(Collectors.joining(System.lineSeparator()));
         return HEADER + System.lineSeparator() + fruitsInfo;
     }
