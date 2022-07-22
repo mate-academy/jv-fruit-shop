@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FileReaderCsvImpl;
 import core.basesyntax.dao.FileWriterImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.TransactionProcessor;
@@ -25,10 +24,10 @@ public class Main {
                                                         .convert(stringsFromFile);
 
         //2 Process this data
-        Storage.fruits.addAll(transactionProcessor.process(transactionsFromFile));
+        transactionProcessor.process(transactionsFromFile);
 
         //3 Generate a report on processed data
-        String report = new ReportServiceImpl().makeReport(Storage.fruits);
+        String report = new ReportServiceImpl().makeReport();
 
         //4 Write report to new file
         new FileWriterImpl().writeToFile(PIVOT_FILE_NAME, report);
