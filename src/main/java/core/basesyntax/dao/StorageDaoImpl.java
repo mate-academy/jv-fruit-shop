@@ -11,12 +11,12 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public Integer get(Fruit fruit) {
+    public Integer getFruitQuantity(Fruit fruit) {
         return Storage.storage.get(fruit);
     }
 
     @Override
-    public Map<Fruit, Integer> getAll() {
+    public Map<Fruit, Integer> getFruitMap() {
         return Storage.storage;
     }
 }

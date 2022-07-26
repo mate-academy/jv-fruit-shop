@@ -10,7 +10,7 @@ import core.basesyntax.handlers.SupplyOperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.ParseService;
+import core.basesyntax.service.FruitTransactionParcer;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
@@ -37,19 +37,19 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> data = fileReaderService.readFromFile(INPUT_FILE_PATH);
+        List<String> fileData = fileReaderService.readFromFile(INPUT_FILE_PATH);
 
-        ParseService parseService = new ParseServiceImpl();
-        List<FruitTransaction> parse = parseService.parse(data);
+        FruitTransactionParcer parseService = new ParseServiceImpl();
+        List<FruitTransaction> transactions = parseService.parse(fileData);
 
-        for (FruitTransaction fruitTransaction : parse) {
+        for (FruitTransaction fruitTransaction : transactions) {
             OperationHandler operationHandler = operationStrategy.get(
                     fruitTransaction.getOperation());
             operationHandler.doOperation(fruitTransaction.getFruit(),
                     fruitTransaction.getQuantity());
         }
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.makeReport(storageDao.getAll());
+        String report = reportService.makeReport(storageDao.getFruitMap());
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(OUTPUT_FILE_PATH, report);

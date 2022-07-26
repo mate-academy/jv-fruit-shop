@@ -12,7 +12,7 @@ public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public void doOperation(Fruit fruit, Integer quantity) {
-        Integer initialQuantity = storageDao.get(fruit);
+        Integer initialQuantity = storageDao.getFruitQuantity(fruit);
         storageDao.add(fruit, quantity + (initialQuantity == null ? 0 : initialQuantity));
     }
 }

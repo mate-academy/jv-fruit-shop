@@ -2,11 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ParseService;
+import core.basesyntax.service.FruitTransactionParcer;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParseServiceImpl implements ParseService {
+public class ParseServiceImpl implements FruitTransactionParcer {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -17,11 +17,11 @@ public class ParseServiceImpl implements ParseService {
     public List<FruitTransaction> parse(List<String> data) {
         return data.stream()
                 .skip(HEADER_INDEX)
-                .map(this::lineToFruitTransaction)
+                .map(this::parceToFruitTransaction)
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction lineToFruitTransaction(String line) {
+    private FruitTransaction parceToFruitTransaction(String line) {
         String[] splitLine = line.split(COMMA);
         return new FruitTransaction(splitLine[OPERATION_INDEX],
                 new Fruit(splitLine[FRUIT_INDEX]),

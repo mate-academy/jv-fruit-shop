@@ -6,7 +6,7 @@ import java.util.Map;
 public interface StorageDao {
     void add(Fruit fruit, Integer quantity);
 
-    Integer get(Fruit fruit);
+    Integer getFruitQuantity(Fruit fruit);
 
-    Map<Fruit, Integer> getAll();
+    Map<Fruit, Integer> getFruitMap();
 }
