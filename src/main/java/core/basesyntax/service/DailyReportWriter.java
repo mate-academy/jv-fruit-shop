@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface DailyReportWriter {
-    void write();
+    void write(String toFilePath);
 }

@@ -1,44 +1,32 @@
 package core.basesyntax.model;
 
-import core.basesyntax.dao.DbReaderImpl;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class FruitTransaction {
-    private final List<String> dataFromDb;
+    private Operation operation;
+    private String fruitType;
+    private int fruitQuantity;
 
-    public FruitTransaction() {
-        this.dataFromDb = new DbReaderImpl().read();
+    public Operation getOperation() {
+        return operation;
     }
 
-    public Map<String, Integer> getDailyTurnover() {
-        Map<String, Integer> map = new HashMap<>();
-        for (String s : dataFromDb) {
-            if (s.startsWith(Operation.BALANCE.getOperation())) {
-                map.put(s.substring(2, s.indexOf(",", 2)),
-                        Integer.parseInt(s.substring(s.lastIndexOf(",") + 1)));
-            }
-            if (s.startsWith(Operation.SUPPLY.getOperation())) {
-                map.replace(s.substring(2, s.indexOf(",", 2)),
-                        map.get(s.substring(2, s.indexOf(",", 2)))
-                                + Integer.parseInt(s.substring(s.lastIndexOf(",") + 1)));
+    public void setOperation(Operation operation) {
+        this.operation = operation;
+    }
 
-            }
-            if (s.startsWith(Operation.PURCHASE.getOperation())) {
-                map.replace(s.substring(2, s.indexOf(",", 2)),
-                        map.get(s.substring(2, s.indexOf(",", 2)))
-                                - Integer.parseInt(s.substring(s.lastIndexOf(",") + 1)));
+    public String getFruitType() {
+        return fruitType;
+    }
 
-            }
-            if (s.startsWith(Operation.RETURN.getOperation())) {
-                map.replace(s.substring(2, s.indexOf(",", 2)),
-                        map.get(s.substring(2, s.indexOf(",", 2)))
-                                + Integer.parseInt(s.substring(s.lastIndexOf(",") + 1)));
+    public void setFruitType(String fruitType) {
+        this.fruitType = fruitType;
+    }
 
-            }
-        }
-        return map;
+    public int getFruitQuantity() {
+        return fruitQuantity;
+    }
+
+    public void setFruitQuantity(int fruitQuantity) {
+        this.fruitQuantity = fruitQuantity;
     }
 
     public enum Operation {
@@ -47,15 +35,14 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String letter;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.letter = operation;
         }
 
         public String getOperation() {
-            return operation;
+            return letter;
         }
-
     }
 }
