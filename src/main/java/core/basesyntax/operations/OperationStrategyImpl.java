@@ -8,6 +8,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     public OperationStrategyImpl(Map<String, OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
     }
+
     @Override
     public OperationHandler getOperation(String operationHandler) {
         return operationHandlerMap.get(operationHandler);

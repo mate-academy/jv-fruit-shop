@@ -5,5 +5,6 @@ import java.util.List;
 
 public interface DataProcessing {
     FruitsDao processData(List<String> fileData);
+
     String getColumnsNamesLine();
 }

@@ -6,8 +6,6 @@ import core.basesyntax.operations.OperationHandler;
 import core.basesyntax.operations.OperationStrategy;
 import core.basesyntax.operations.OperationStrategyImpl;
 import core.basesyntax.service.DataProcessing;
-
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +14,7 @@ public class DataProcessingImpl implements DataProcessing {
     private static final int OPERATION_INDEX = 0;
     private static final int PRODUCT_NAME_INDEX = 1;
     private static final int PRODUCT_AMOUNT_INDEX = 2;
-    private String COLUMNS_NAMES_LINE;
+    private String columnsNamesLine;
     private final Map<String, OperationHandler> operations;
     private final FruitsDao fruitsDao;
 
@@ -28,7 +26,7 @@ public class DataProcessingImpl implements DataProcessing {
     @Override
     public FruitsDao processData(List<String> fileData) {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operations);
-        COLUMNS_NAMES_LINE = fileData.get(0);
+        columnsNamesLine = fileData.get(0);
         for (int i = FIRST_DATA; i < fileData.size(); i++) {
             String[] lineData = fileData.get(i).split(",");
             int quantity = Integer.parseInt(lineData[PRODUCT_AMOUNT_INDEX]);
@@ -40,6 +38,6 @@ public class DataProcessingImpl implements DataProcessing {
 
     @Override
     public String getColumnsNamesLine() {
-        return COLUMNS_NAMES_LINE;
+        return columnsNamesLine;
     }
 }
