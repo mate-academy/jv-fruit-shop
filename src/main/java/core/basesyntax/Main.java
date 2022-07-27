@@ -11,11 +11,11 @@ import core.basesyntax.operations.impl.ReturnHandler;
 import core.basesyntax.operations.impl.SupplyHandler;
 import core.basesyntax.service.CsvFileDataHandler;
 import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.ToCsvFileReportWriter;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.impl.CsvFileDataHandlerImpl;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
-import core.basesyntax.service.impl.ToCsvFileReportWriterImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,8 +33,8 @@ public class Main {
         CsvFileDataHandler csvFileDataHandler = new CsvFileDataHandlerImpl(operationStrategy);
         csvFileDataHandler.processData(readData);
         ReportCreator reportCreator = new ReportCreatorImpl(fruitsDao);
-        ToCsvFileReportWriter toCsvFileReportWriter = new ToCsvFileReportWriterImpl();
-        toCsvFileReportWriter.writeReport("src/main/resources/report.csv",
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeReport("src/main/resources/report.csv",
                 reportCreator.createReport(),
                 csvFileDataHandler.HEADER);
 

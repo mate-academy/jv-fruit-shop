@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface ToCsvFileReportWriter {
+public interface FileWriter {
     void writeReport(String filePath, String report, String header);
 }
