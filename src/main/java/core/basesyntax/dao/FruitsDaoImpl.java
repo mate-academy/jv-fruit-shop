@@ -4,19 +4,19 @@ import core.basesyntax.db.Storage;
 
 public class FruitsDaoImpl implements FruitsDao {
     @Override
-    public void add(String fruit, int quantity) {
+    public void addProduct(String fruit, int quantity) {
         Storage.fruits.put(fruit, quantity);
     }
 
     @Override
-    public void plus(String fruit, int quantity) {
-        containsKey(fruit);
+    public void plusQuantity(String fruit, int quantity) {
+        checkKeyPresence(fruit);
         Storage.fruits.replace(fruit, getAmount(fruit) + quantity);
     }
 
     @Override
     public void subtract(String fruit, int quantity) {
-        containsKey(fruit);
+        checkKeyPresence(fruit);
         if (quantity > Storage.fruits.get(fruit)) {
             throw new RuntimeException("Can't sell more " + fruit + " products then we have");
         }
@@ -25,7 +25,7 @@ public class FruitsDaoImpl implements FruitsDao {
 
     @Override
     public int getAmount(String fruit) {
-        containsKey(fruit);
+        checkKeyPresence(fruit);
         return Storage.fruits.get(fruit);
     }
 
@@ -34,7 +34,7 @@ public class FruitsDaoImpl implements FruitsDao {
         return Storage.fruits.keySet().toArray(new String[0]);
     }
 
-    private void containsKey(String fruit) {
+    private void checkKeyPresence(String fruit) {
         if (!Storage.fruits.containsKey(fruit)) {
             throw new RuntimeException("We don't have such fruit: " + fruit);
         }

@@ -1,9 +1,9 @@
 package core.basesyntax.dao;
 
 public interface FruitsDao {
-    void add(String product, int quantity);
+    void addProduct(String product, int quantity);
 
-    void plus(String product, int quantity);
+    void plusQuantity(String product, int quantity);
 
     void subtract(String product, int quantity);
 
