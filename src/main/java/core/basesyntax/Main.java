@@ -32,9 +32,10 @@ public class Main {
         List<String> readData = new CsvFileReaderImpl().readData("src/main/resources/file.csv");
         CsvFileDataHandler csvFileDataHandler = new CsvFileDataHandlerImpl(operationStrategy);
         csvFileDataHandler.processData(readData);
-        ReportCreator reportCreator = new ReportCreatorImpl();
+        ReportCreator reportCreator = new ReportCreatorImpl(fruitsDao);
         ToCsvFileReportWriter toCsvFileReportWriter = new ToCsvFileReportWriterImpl();
-        toCsvFileReportWriter.writeReport(reportCreator.createReport(fruitsDao),
+        toCsvFileReportWriter.writeReport("src/main/resources/report.csv",
+                reportCreator.createReport(),
                 csvFileDataHandler.HEADER);
 
     }

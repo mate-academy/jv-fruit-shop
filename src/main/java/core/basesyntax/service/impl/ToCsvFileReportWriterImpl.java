@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class ToCsvFileReportWriterImpl implements ToCsvFileReportWriter {
-    private static final String FILE_PATH = "src/main/resources/report.csv";
 
     @Override
-    public void writeReport(String report, String header) {
-        File reportCsv = new File(FILE_PATH);
+    public void writeReport(String filePath, String report, String header) {
+        File reportCsv = new File(filePath);
         try {
             Files.write(reportCsv.toPath(), (header + report).getBytes());
         } catch (IOException e) {
