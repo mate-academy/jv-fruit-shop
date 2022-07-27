@@ -9,7 +9,7 @@ public class FruitsDaoImpl implements FruitsDao {
     }
 
     @Override
-    public void plusQuantity(String fruit, int quantity) {
+    public void addProductQuantity(String fruit, int quantity) {
         checkKeyPresence(fruit);
         Storage.fruits.replace(fruit, getAmount(fruit) + quantity);
     }

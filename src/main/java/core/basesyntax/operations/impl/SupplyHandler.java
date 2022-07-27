@@ -12,6 +12,6 @@ public class SupplyHandler implements OperationHandler {
 
     @Override
     public void process(String product, int quantity) {
-        fruitsDao.plusQuantity(product, quantity);
+        fruitsDao.addProductQuantity(product, quantity);
     }
 }

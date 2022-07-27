@@ -10,11 +10,11 @@ import core.basesyntax.operations.impl.PurchaseHandler;
 import core.basesyntax.operations.impl.ReturnHandler;
 import core.basesyntax.operations.impl.SupplyHandler;
 import core.basesyntax.service.CsvFileDataHandler;
-import core.basesyntax.service.FileReportCreator;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ToCsvFileReportWriter;
 import core.basesyntax.service.impl.CsvFileDataHandlerImpl;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
-import core.basesyntax.service.impl.FileReportCreatorImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.ToCsvFileReportWriterImpl;
 import java.util.HashMap;
 import java.util.List;
@@ -31,12 +31,11 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operations);
         List<String> readData = new CsvFileReaderImpl().readData("src/main/resources/file.csv");
         CsvFileDataHandler csvFileDataHandler = new CsvFileDataHandlerImpl(operationStrategy);
-        FileReportCreator fileReportCreator = new FileReportCreatorImpl();
+        csvFileDataHandler.processData(readData);
+        ReportCreator reportCreator = new ReportCreatorImpl();
         ToCsvFileReportWriter toCsvFileReportWriter = new ToCsvFileReportWriterImpl();
-        toCsvFileReportWriter.writeReport(
-                fileReportCreator.createReportFile("src/main/resources/report.csv"),
-                csvFileDataHandler.processData(readData),
-                csvFileDataHandler.COLUMNS_NAMES_LINE);
+        toCsvFileReportWriter.writeReport(reportCreator.createReport(fruitsDao),
+                csvFileDataHandler.HEADER);
 
     }
 }
