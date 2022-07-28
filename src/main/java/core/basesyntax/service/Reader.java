@@ -2,8 +2,6 @@ package core.basesyntax.service;
 
 import java.util.List;
 
-public interface DbReader {
-
+public interface Reader {
     List<String[]> read(String path);
-
 }

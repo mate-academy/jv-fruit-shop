@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParser;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,19 +11,18 @@ public class DataParserImpl implements DataParser {
     private static final int FRUIT_QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parseDatabaseInfo(List<String[]> info) {
+    public List<FruitTransaction> parseFruitTransactions(List<String[]> info) {
         return info.stream()
-                .map(strings -> {
-                    FruitTransaction fruitTransaction = new FruitTransaction();
-                    fruitTransaction.setOperation(Arrays.stream(FruitTransaction.Operation.values())
-                            .filter(e -> e.getOperation().equals(strings[OPERATION_TYPE_INDEX]))
-                            .findFirst()
-                            .orElseThrow());
-                    fruitTransaction.setFruitType(strings[FRUIT_TYPE_INDEX]);
-                    fruitTransaction
-                            .setFruitQuantity(Integer.parseInt(strings[FRUIT_QUANTITY_INDEX]));
-                    return fruitTransaction;
-                })
+                .map(this::makeFruitTransaction)
                 .collect(Collectors.toList());
+    }
+
+    public FruitTransaction makeFruitTransaction(String[] strings) {
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(FruitTransaction.Operation
+                .getOperationType(strings[OPERATION_TYPE_INDEX]));
+        fruitTransaction.setFruitType(strings[FRUIT_TYPE_INDEX]);
+        fruitTransaction.setFruitQuantity(Integer.parseInt(strings[FRUIT_QUANTITY_INDEX]));
+        return fruitTransaction;
     }
 }
