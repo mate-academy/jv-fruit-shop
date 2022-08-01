@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import service.ReadFile;
+import service.FileReader;
 
-public class ReadFileImpl implements ReadFile {
+public class ReadFileImpl implements FileReader {
     @Override
-    public List<String> read(String fileName) {
-        List<String> readFile;
+    public List<String> readFromFile(String fileName) {
+        List<String> lines;
         try {
-            readFile = Files.readAllLines(Path.of(fileName));
+            lines = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't read a file " + fileName, e);
         }
-        return readFile;
+        return lines;
     }
 }

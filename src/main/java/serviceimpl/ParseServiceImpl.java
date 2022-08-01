@@ -6,8 +6,8 @@ import model.FruitTransaction;
 import service.ParseService;
 
 public class ParseServiceImpl implements ParseService {
-    private static final int OPERATION_INDEX = 0;
-    private static final int FRUIT_NAME = 1;
+    private static final int FRUIT_NAME = 0;
+    private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final String SEPARATOR = ",";
 
@@ -15,17 +15,17 @@ public class ParseServiceImpl implements ParseService {
     public List<FruitTransaction> parseService(List<String> dataList) {
         return dataList.stream()
                 .skip(1)
-                .map(this::getDataList)
+                .map(this::getFruitTransaction)
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction getDataList(String dataList) {
-        String[] dateParse = dataList.split(SEPARATOR);
+    public FruitTransaction getFruitTransaction(String line) {
+        String[] splittedLine = line.split(SEPARATOR);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation
-                .getOperationByLetter(dateParse[OPERATION_INDEX]));
-        fruitTransaction.setFruit(dateParse[FRUIT_NAME]);
-        fruitTransaction.setQuantity(Integer.parseInt(dateParse[QUANTITY_INDEX]));
+                .getOperationByLetter(splittedLine[FRUIT_NAME]));
+        fruitTransaction.setFruit(splittedLine[FRUIT_NAME_INDEX]);
+        fruitTransaction.setQuantity(Integer.parseInt(splittedLine[QUANTITY_INDEX]));
         return fruitTransaction;
     }
 }

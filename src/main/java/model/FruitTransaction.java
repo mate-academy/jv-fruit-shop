@@ -7,6 +7,14 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
+    public FruitTransaction(String fruit, int quantity) {
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
+    public FruitTransaction() {
+    }
+
     public Operation getOperation() {
         return operation;
     }
@@ -51,7 +59,9 @@ public class FruitTransaction {
             return Arrays.stream(Operation.values())
                     .filter(x -> x.getLetter().equals(letter))
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("Not allowed operation"));
+                    .orElseThrow(() ->
+                            new RuntimeException("Not allowed operation with first letter "
+                            + letter));
         }
     }
 }

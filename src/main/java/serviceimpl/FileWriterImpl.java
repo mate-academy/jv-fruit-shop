@@ -1,14 +1,12 @@
 package serviceimpl;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
-import service.WriteToFile;
 
-public class WriteToFileImpl implements WriteToFile {
+public class FileWriterImpl implements service.FileWriter {
     @Override
-    public void write(String pathFile, String toFile) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathFile))) {
+    public void writeToFile(String report, String toFile) {
+        try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(report))) {
             writer.write(toFile);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file " + toFile, e);

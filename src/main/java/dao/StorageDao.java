@@ -1,12 +1,12 @@
 package dao;
 
 import java.util.List;
-import model.Fruit;
+import model.FruitTransaction;
 
 public interface StorageDao {
-    void update(String fruitName,Integer amount);
+    void update(String fruitName, Integer amount);
 
     Integer getFruitQuantity(String fruit);
 
-    List<Fruit> getAll();
+    List<FruitTransaction> getAll();
 }

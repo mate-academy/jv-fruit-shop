@@ -11,16 +11,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.Editor;
+import service.FileReader;
+import service.FileWriter;
 import service.ParseService;
-import service.ReadFile;
-import service.Transaction;
-import service.WriteToFile;
-import serviceimpl.EditorImpl;
+import service.ReportCreator;
+import service.TransactionProcessor;
+import serviceimpl.FileWriterImpl;
 import serviceimpl.ParseServiceImpl;
 import serviceimpl.ReadFileImpl;
+import serviceimpl.ReportCreatorImpl;
 import serviceimpl.TransactionImpl;
-import serviceimpl.WriteToFileImpl;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 
@@ -39,16 +39,16 @@ public class Main {
                 new OperationHandlerPurchase(storageDao));
         operationMap.put(FruitTransaction.Operation.RETURN,
                 new OperationHandlerReturn(storageDao));
-        ReadFile readFile = new ReadFileImpl();
-        List<String> data = readFile.read(WAY_TO_INPUT);
+        FileReader readFile = new ReadFileImpl();
+        List<String> data = readFile.readFromFile(WAY_TO_INPUT);
         ParseService parseService = new ParseServiceImpl();
         List<FruitTransaction> transactions = parseService.parseService(data);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
-        Transaction transaction = new TransactionImpl(operationStrategy);
+        TransactionProcessor transaction = new TransactionImpl(operationStrategy);
         transaction.process(transactions);
-        Editor editor = new EditorImpl(storageDao);
-        String report = editor.edit();
-        WriteToFile writeToFile = new WriteToFileImpl();
-        writeToFile.write(WAY_TO_REPORT, report);
+        ReportCreator editor = new ReportCreatorImpl(storageDao);
+        String report = editor.create();
+        FileWriter writeToFile = new FileWriterImpl();
+        writeToFile.writeToFile(WAY_TO_REPORT, report);
     }
 }
