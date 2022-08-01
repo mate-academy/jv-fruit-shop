@@ -53,8 +53,8 @@ public class FruitTransaction {
 
         private String letter;
 
-        Operation(String operation) {
-            this.letter = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
         public String getLetter() {
@@ -65,7 +65,7 @@ public class FruitTransaction {
             return Arrays.stream(FruitTransaction.Operation.values())
                     .filter(o -> o.getLetter().equals(letter))
                     .findFirst()
-                    .get();
+                    .orElseThrow(() -> new RuntimeException("This letter isn't valid " + letter));
         }
     }
 }

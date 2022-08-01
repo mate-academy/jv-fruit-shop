@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.service.ReportCreateService;
+import core.basesyntax.service.ReportCreatorService;
 import java.util.stream.Collectors;
 
-public class ReportCreateServiceImpl implements ReportCreateService {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String HEADER = "fruit,quantity";
     private final FruitDao fruitDao;
 
-    public ReportCreateServiceImpl(FruitDao fruitDao) {
+    public ReportCreatorServiceImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 

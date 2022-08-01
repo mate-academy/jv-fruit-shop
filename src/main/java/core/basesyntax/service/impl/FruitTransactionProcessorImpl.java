@@ -1,21 +1,21 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.AnalysisBalancesService;
+import core.basesyntax.service.FruitTransactionProcessor;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
-public class AnalysisBalancesServiceImpl implements AnalysisBalancesService {
+public class FruitTransactionProcessorImpl implements FruitTransactionProcessor {
     private OperationStrategy operationStrategy;
 
-    public AnalysisBalancesServiceImpl(OperationStrategy operationStrategy) {
+    public FruitTransactionProcessorImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public void processing(List<FruitTransaction> transactions) {
+    public void process(List<FruitTransaction> transactions) {
         transactions.forEach(transaction ->
                 operationStrategy.getOperationType(transaction.getOperation())
-                        .revisionOperation(transaction));
+                        .handle(transaction));
     }
 }

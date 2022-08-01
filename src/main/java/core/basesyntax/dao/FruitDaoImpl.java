@@ -4,7 +4,11 @@ import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-    private Storage storage = new Storage();
+    private Storage storage;
+
+    public FruitDaoImpl(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
     public void put(String fruitName, Integer fruitQuantity) {

@@ -7,5 +7,5 @@ public interface FruitDao {
 
     Integer get(String fruitName);
 
-    Map<String,Integer> getAll();
+    Map<String, Integer> getAll();
 }
