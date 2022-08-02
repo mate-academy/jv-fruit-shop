@@ -16,7 +16,7 @@ public class TransactionImpl implements TransactionProcessor {
     public void process(List<FruitTransaction> data) {
         for (FruitTransaction fruitTransaction : data) {
             operationStrategy.getHandler(fruitTransaction.getOperation())
-                    .handler(fruitTransaction);
+                    .handle(fruitTransaction);
         }
     }
 }

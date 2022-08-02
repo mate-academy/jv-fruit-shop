@@ -2,11 +2,12 @@ package core.basesyntax;
 
 import dao.StorageDao;
 import dao.StorageDaoImpl;
+import db.Storage;
+import handler.BalanceOperationHandler;
 import handler.OperationHandler;
-import handler.OperationHandlerBalance;
-import handler.OperationHandlerPurchase;
-import handler.OperationHandlerReturn;
-import handler.OperationHandlerSupply;
+import handler.PurchaseOperationHandler;
+import handler.ReturnOperationHandler;
+import handler.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,16 +30,16 @@ public class Main {
     private static final String WAY_TO_REPORT = "src/main/resources/CloseDay.csv";
 
     public static void main(String[] args) {
-        StorageDao storageDao = new StorageDaoImpl();
+        StorageDao storageDao = new StorageDaoImpl(new Storage());
         Map<FruitTransaction.Operation, OperationHandler> operationMap = new HashMap<>();
         operationMap.put(FruitTransaction.Operation.BALANCE,
-                new OperationHandlerBalance(storageDao));
+                new BalanceOperationHandler(storageDao));
         operationMap.put(FruitTransaction.Operation.SUPPLY,
-                new OperationHandlerSupply(storageDao));
+                new SupplyOperationHandler(storageDao));
         operationMap.put(FruitTransaction.Operation.PURCHASE,
-                new OperationHandlerPurchase(storageDao));
+                new PurchaseOperationHandler(storageDao));
         operationMap.put(FruitTransaction.Operation.RETURN,
-                new OperationHandlerReturn(storageDao));
+                new ReturnOperationHandler(storageDao));
         FileReader readFile = new ReadFileImpl();
         List<String> data = readFile.readFromFile(WAY_TO_INPUT);
         ParseService parseService = new ParseServiceImpl();

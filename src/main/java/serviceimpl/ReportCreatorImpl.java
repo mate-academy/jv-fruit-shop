@@ -1,11 +1,10 @@
 package serviceimpl;
 
 import dao.StorageDao;
-import java.util.List;
-import model.FruitTransaction;
+import java.util.stream.Collectors;
 
 public class ReportCreatorImpl implements service.ReportCreator {
-    private static final String HEAD = "fruits, quantity";
+    private static final String HEADER = "fruits, quantity";
     private final StorageDao storageDao;
 
     public ReportCreatorImpl(StorageDao storageDao) {
@@ -14,12 +13,10 @@ public class ReportCreatorImpl implements service.ReportCreator {
 
     @Override
     public String create() {
-        List<FruitTransaction> fruits = storageDao.getAll();
-        StringBuilder reportBuilder = new StringBuilder();
-        for (FruitTransaction fruit : fruits) {
-            reportBuilder.append(System.lineSeparator()).append(fruit.getFruit())
-                    .append(",").append(fruit.getQuantity());
-        }
-        return HEAD + reportBuilder.toString();
+        return HEADER + storageDao.getAll().entrySet()
+                .stream()
+                .map(e -> System.lineSeparator() + e.getKey()
+                + "," + e.getValue())
+                .collect(Collectors.joining());
     }
 }

@@ -3,15 +3,15 @@ package handler;
 import dao.StorageDao;
 import model.FruitTransaction;
 
-public class OperationHandlerBalance implements OperationHandler {
+public class BalanceOperationHandler implements OperationHandler {
     private final StorageDao storageDao;
 
-    public OperationHandlerBalance(StorageDao storageDao) {
+    public BalanceOperationHandler(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
     @Override
-    public void handler(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         storageDao.update(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

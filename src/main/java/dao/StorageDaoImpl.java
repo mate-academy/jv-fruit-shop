@@ -1,11 +1,15 @@
 package dao;
 
 import db.Storage;
-import java.util.List;
-import java.util.stream.Collectors;
-import model.FruitTransaction;
+import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
+    private Storage storage;
+
+    public StorageDaoImpl(Storage storage) {
+        this.storage = storage;
+    }
+
     @Override
     public void update(String fruitName, Integer amount) {
         Storage.storage.put(fruitName, amount);
@@ -17,9 +21,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public List<FruitTransaction> getAll() {
-        return Storage.storage.entrySet().stream()
-                .map(s -> new FruitTransaction(s.getKey(), s.getValue()))
-                .collect(Collectors.toList());
+    public Map<String, Integer> getAll() {
+        return storage.getStorage();
     }
 }

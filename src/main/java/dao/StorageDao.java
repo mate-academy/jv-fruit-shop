@@ -1,12 +1,11 @@
 package dao;
 
-import java.util.List;
-import model.FruitTransaction;
+import java.util.Map;
 
 public interface StorageDao {
     void update(String fruitName, Integer amount);
 
     Integer getFruitQuantity(String fruit);
 
-    List<FruitTransaction> getAll();
+    Map<String, Integer> getAll();
 }
