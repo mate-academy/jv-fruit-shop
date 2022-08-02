@@ -11,8 +11,8 @@ import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
-import core.basesyntax.service.impl.ParseServiceImpl;
-import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.ScvParseServiceImpl;
+import core.basesyntax.service.impl.ScvReportServiceImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
@@ -42,15 +42,16 @@ public class Main {
         FileReaderService readerService = new FileReaderServiceImpl();
         List<String> fileContent = readerService.readFromFile(fromFilePath);
 
-        ParserService parserService = new ParseServiceImpl();
+        ParserService parserService = new ScvParseServiceImpl();
         List<FruitTransaction> fruitTransactions = parserService.parse(fileContent);
 
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
         FruitShopService shopService = new FruitShopServiceImpl(strategy);
         shopService.process(fruitTransactions);
 
-        ReportService reportService = new ReportServiceImpl(fruitDao);
-        String report = reportService.getReport();
+        ReportService reportService = new ScvReportServiceImpl();
+        Map<String, Integer> info = shopService.getAll();
+        String report = reportService.getReport(info);
 
         String toFilePath = "src/main/resources/report.csv";
         FileWriterService writerService = new FileWriterServiceImpl();

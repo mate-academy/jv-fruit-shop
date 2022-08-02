@@ -5,7 +5,7 @@ import core.basesyntax.service.ParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParseServiceImpl implements ParserService {
+public class ScvParseServiceImpl implements ParserService {
     private static final int OPERATION_INDEX = 0;
     private static final int NAME_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
