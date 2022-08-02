@@ -69,28 +69,28 @@ The line above means you have 152 bananas, and 90 apples in your Fruit store aft
 (this is only a recommendation, you can use other classes / approaches to solve this task at your discretion):**
 ```java
 public class FruitTransaction {
-  private Operation operation;
-  private String fruit;
-  private int quantity;
+   private Operation operation;
+   private String fruit;
+   private int quantity;
 
-  // getters, setters, ...
-  
-  public enum Operation {
-    BALANCE("b"),
-    SUPPLY("s"),
-    PURCHASE("p"),
-    RETURN("r");
+   // getters, setters, ...
 
-    private String operation;
+   public enum Operation {
+      BALANCE("b"),
+      SUPPLY("s"),
+      PURCHASE("p"),
+      RETURN("r");
 
-    Operation(String operation) {
-      this.operation = operation;
-    }
+      private String operation;
 
-    public String getOperation() {
-      return operation;
-    }
-  }
+      Operation(String operation) {
+         this.operation = operation;
+      }
+
+      public String getOperation() {
+         return operation;
+      }
+   }
 }
 ```
 
