@@ -14,10 +14,11 @@ public class ParserServiceImpl implements ParserService {
     public List<FruitTransaction> parse(List<String> lines) {
         return lines.stream()
                 .skip(1)
-                .map(s -> s.split(","))
-                .map(s -> new FruitTransaction(FruitTransaction.Operation
-                        .getTypeOperation(s[TYPE_OF_OPERATION_INDEX]),
-                        s[NAME_OF_FRUIT_INDEX],Integer.parseInt(s[QUANTITY_OF_FRUIT_INDEX])))
+                .map(line -> line.split(","))
+                .map(splittedLine -> new FruitTransaction(FruitTransaction.Operation
+                        .getTypeOperation(splittedLine[TYPE_OF_OPERATION_INDEX]),
+                        splittedLine[NAME_OF_FRUIT_INDEX],
+                        Integer.parseInt(splittedLine[QUANTITY_OF_FRUIT_INDEX])))
                 .collect(Collectors.toList());
     }
 }

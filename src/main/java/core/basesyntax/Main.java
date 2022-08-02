@@ -34,25 +34,23 @@ public class Main {
             + File.separator + "Report.csv";
 
     public static void main(String[] args) {
-        List<String> lines;
         Map<FruitTransaction.Operation, OperationHandler> operationsMap = new HashMap<>();
         FruitDao fruitDao = new FruitDaoImpl(new Storage());
         FileReaderService readFile = new FileReaderServiceImpl();
-        lines = readFile.readFromFile(inputData);
         operationsMap.put(FruitTransaction.Operation.BALANCE, new AdditionalOperation(fruitDao));
         operationsMap.put(FruitTransaction.Operation.SUPPLY, new AdditionalOperation(fruitDao));
         operationsMap.put(FruitTransaction.Operation.PURCHASE, new SubtractionOperation(fruitDao));
         operationsMap.put(FruitTransaction.Operation.RETURN, new AdditionalOperation(fruitDao));
 
-        ParserService parseService = new ParserServiceImpl();
-
-        FruitTransactionProcessor analysisBalancesService =
+        ParserService parserService = new ParserServiceImpl();
+        List<String> lines = readFile.readFromFile(inputData);
+        FruitTransactionProcessor processor =
                 new FruitTransactionProcessorImpl(new OperationStrategy(operationsMap));
-        analysisBalancesService.process(parseService.parse(lines));
+        processor.process(parserService.parse(lines));
 
-        ReportCreatorService createService = new ReportCreatorServiceImpl(fruitDao);
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl(fruitDao);
 
-        FileWriterService writeFileService = new FileWriterServiceImpl();
-        writeFileService.writeToFile(outputData, createService.create());
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.writeToFile(outputData, reportCreatorService.create());
     }
 }
