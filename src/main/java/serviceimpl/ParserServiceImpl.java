@@ -3,17 +3,17 @@ package serviceimpl;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
-import service.ParseService;
+import service.ParserService;
 
-public class ParseServiceImpl implements ParseService {
+public class ParserServiceImpl implements ParserService {
     private static final int FRUIT_NAME = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final String SEPARATOR = ",";
 
     @Override
-    public List<FruitTransaction> parseService(List<String> dataList) {
-        return dataList.stream()
+    public List<FruitTransaction> parse(List<String> lines) {
+        return lines.stream()
                 .skip(1)
                 .map(this::getFruitTransaction)
                 .collect(Collectors.toList());
