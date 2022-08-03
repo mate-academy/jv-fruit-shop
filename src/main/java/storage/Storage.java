@@ -6,15 +6,8 @@ import java.util.Map;
 public class Storage {
     public static final Map<String, Integer> fruits = new HashMap<>();
 
-    public Map<String, Integer> getFruits() {
-        return fruits;
-    }
-
-    public void setFruits(Map<String, Integer> fruits) {
-        fruits = fruits;
-    }
-
     public Storage() {
+
     }
 
     public static String stringReport() {
@@ -26,7 +19,15 @@ public class Storage {
                 + fruit;
     }
 
-    public static void put(String name, int amount){
+    public Map<String, Integer> getFruits() {
+        return fruits;
+    }
+
+    public void setFruits(Map<String, Integer> fruits) {
+        fruits = fruits;
+    }
+
+    public static void put(String name, int amount) {
         fruits.put(name,amount);
     }
 }

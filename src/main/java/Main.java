@@ -1,7 +1,6 @@
 import controller.Controller;
-import util.FileUtil;
-
 import java.util.List;
+import util.FileUtil;
 
 public class Main {
     public static void main(String[] args) {

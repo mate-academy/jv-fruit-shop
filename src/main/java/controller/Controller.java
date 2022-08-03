@@ -31,12 +31,18 @@ public class Controller {
             switch (data[0].trim()) {
                 case "b":
                     balance(data[1], Integer.parseInt(data[2]));
+                    break;
                 case "s":
                     supply(data[1], Integer.parseInt(data[2]));
+                    break;
                 case "p":
                     purchase(data[1], Integer.parseInt(data[2]));
+                    break;
                 case "r":
                     supply(data[1], Integer.parseInt(data[2]));
+                    break;
+                default:
+                    break;
             }
         }
     }
