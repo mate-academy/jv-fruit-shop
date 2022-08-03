@@ -40,16 +40,16 @@ public class Main {
                 new PurchaseOperationHandler(storageDao));
         operationMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandler(storageDao));
-        FileReader readFile = new ReadFileImpl();
-        List<String> data = readFile.readFromFile(WAY_TO_INPUT);
-        ParserService parseService = new ParserServiceImpl();
-        List<FruitTransaction> transactions = parseService.parse(data);
+        FileReader fileReader = new ReadFileImpl();
+        List<String> data = fileReader.readFromFile(WAY_TO_INPUT);
+        ParserService parserService = new ParserServiceImpl();
+        List<FruitTransaction> transactions = parserService.parse(data);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
-        TransactionProcessor transaction = new TransactionImpl(operationStrategy);
-        transaction.process(transactions);
-        ReportCreator editor = new ReportCreatorImpl(storageDao);
-        String report = editor.create();
-        FileWriter writeToFile = new FileWriterImpl();
-        writeToFile.writeToFile(WAY_TO_REPORT, report);
+        TransactionProcessor transactionProcessor = new TransactionImpl(operationStrategy);
+        transactionProcessor.process(transactions);
+        ReportCreator reportCreator  = new ReportCreatorImpl(storageDao);
+        String report = reportCreator.create();
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFile(WAY_TO_REPORT, report);
     }
 }
