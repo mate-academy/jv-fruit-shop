@@ -47,7 +47,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
         TransactionProcessor transactionProcessor = new TransactionImpl(operationStrategy);
         transactionProcessor.process(transactions);
-        ReportCreator reportCreator  = new ReportCreatorImpl(storageDao);
+        ReportCreator reportCreator = new ReportCreatorImpl(storageDao);
         String report = reportCreator.create();
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(WAY_TO_REPORT, report);
