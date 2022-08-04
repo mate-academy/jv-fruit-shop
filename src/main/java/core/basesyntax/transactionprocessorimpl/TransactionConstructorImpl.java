@@ -1,7 +1,7 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.transactionprocessorimpl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionConstructor;
+import core.basesyntax.transactionprocessor.TransactionConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 

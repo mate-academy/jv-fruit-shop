@@ -7,22 +7,22 @@ import core.basesyntax.fileservice.FileWriter;
 import core.basesyntax.fileserviceimpl.FileReaderImpl;
 import core.basesyntax.fileserviceimpl.FileWriterImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitTransactionProcessor;
-import core.basesyntax.service.ReportCreatorService;
-import core.basesyntax.service.TransactionConstructor;
-import core.basesyntax.serviceimpl.FruitTransactionProcessorImpl;
-import core.basesyntax.serviceimpl.ReportCreatorServiceImpl;
-import core.basesyntax.serviceimpl.TransactionConstructorImpl;
+import core.basesyntax.reportservice.ReportCreatorService;
+import core.basesyntax.reportserviceimpl.ReportCreatorServiceImpl;
+import core.basesyntax.transactionprocessor.FruitTransactionProcessor;
+import core.basesyntax.transactionprocessor.TransactionConstructor;
+import core.basesyntax.transactionprocessorimpl.FruitTransactionProcessorImpl;
+import core.basesyntax.transactionprocessorimpl.TransactionConstructorImpl;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         FileReader reader = new FileReaderImpl();
-        List<String> fromFile = reader.readFromFile("src/main/resources/FruitProcesses.csv");
+        List<String> lines = reader.readFromFile("src/main/resources/FruitProcesses.csv");
 
         TransactionConstructor constructor = new TransactionConstructorImpl();
-        List<FruitTransaction> fruitTransactions = constructor.convert(fromFile);
+        List<FruitTransaction> fruitTransactions = constructor.convert(lines);
 
         FruitTransactionProcessor processor = new FruitTransactionProcessorImpl();
         processor.process(fruitTransactions);

@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.transactionprocessor;
 
 import core.basesyntax.model.FruitTransaction;
 
