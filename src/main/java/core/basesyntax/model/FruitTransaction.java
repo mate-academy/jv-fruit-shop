@@ -30,24 +30,24 @@ public class FruitTransaction {
     }
 
     public enum Operation {
-    BALANCE("b"),
-    SUPPLY("s"),
-    PURCHASE("p"),
-    RETURN("r");
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
 
-        private String operation;
+        private String letter;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
-        public static Operation getOperationBySymbol(String operation) {
-            for (Operation e: values()) {
-                if (e.operation.equals(operation)) {
-                    return e;
+        public static Operation getOperationByFirstLetter(String letter) {
+            for (Operation operation: values()) {
+                if (operation.letter.equals(letter)) {
+                    return operation;
                 }
             }
-            throw new RuntimeException("There is no such operation: " + operation);
+            throw new RuntimeException("There is no such operation with first letter: " + letter);
         }
     }
 }

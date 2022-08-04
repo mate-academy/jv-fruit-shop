@@ -1,24 +1,19 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.dao.DaoFruitStorage;
-import core.basesyntax.daoimpl.DaoFruitStorageImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.daoimpl.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class BalanceHandler implements OperationHandler {
-    private final DaoFruitStorage fruitStorage = new DaoFruitStorageImpl();
+    private final FruitDao fruitStorage = new FruitDaoImpl();
 
     @Override
-    public void apply(List<FruitTransaction> transactions) {
-        getBalanceList(transactions)
-                .forEach(t -> fruitStorage.addToFruitStorage(t.getFruitType(), t.getQuantity()));
-    }
-
-    private List<FruitTransaction> getBalanceList(List<FruitTransaction> transactions) {
-        return transactions.stream()
-        .filter(t -> t.getOperation() == FruitTransaction.Operation.BALANCE)
-        .collect(Collectors.toList());
+    public void handle(FruitTransaction transaction) {
+        if (transaction.getOperation() == FruitTransaction.Operation.BALANCE) {
+            int remainder = fruitStorage.getQuantity(transaction.getFruitType());
+            int newQuantity = remainder + transaction.getQuantity();
+            fruitStorage.add(transaction.getFruitType(), newQuantity);
+        }
     }
 }

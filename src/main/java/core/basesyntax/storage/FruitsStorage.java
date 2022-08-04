@@ -4,10 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitsStorage {
-    private static Map<String, Integer> fruitsBalance = new HashMap<>();
+    private static Map<String, Integer> fruits = new HashMap<>();
 
-    public static Map<String, Integer> accessFS() {
-        return fruitsBalance;
+    public static Map<String, Integer> getFruits() {
+        return fruits;
     }
 }
-
