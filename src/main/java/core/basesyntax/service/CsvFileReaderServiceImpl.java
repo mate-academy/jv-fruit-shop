@@ -33,7 +33,7 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
                     return false;
                 })
                 .map(line -> new FruitTransaction(getConstantOfOperation(line.split(",")[0]),
-                        Fruit.valueOf(line.split(",")[1].toUpperCase()),
+                        new Fruit(line.split(",")[1]),
                         Integer.parseInt(line.split(",")[2])))
                 .collect(Collectors.toList());
     }
