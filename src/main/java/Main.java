@@ -1,7 +1,7 @@
-import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileReaderServiceImpl;
 import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.CsvFileWriterServiceImpl;
+import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -38,7 +38,7 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
-        CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
+        FileReaderService readerService = new CsvFileReaderServiceImpl();
         List<FruitTransaction> fruitTransactions = readerService.readFromFile(INPUT_FILE_PATH);
 
         fruitTransactions

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class CsvFileReaderServiceImpl implements CsvFileReaderService {
+public class CsvFileReaderServiceImpl implements FileReaderService {
     @Override
     public List<FruitTransaction> readFromFile(String pathToFile) {
         List<String> lines;
