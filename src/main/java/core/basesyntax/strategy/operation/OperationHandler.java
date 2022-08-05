@@ -18,11 +18,11 @@ public interface OperationHandler {
     }
 
     private Integer removeOldFruitBalance(Fruit fruit) {
-        Integer oldFruitBalance = FruitStorage.fruitNumbersMap.remove(fruit);
+        Integer oldFruitBalance = FruitStorage.fruitsMap.remove(fruit);
         return oldFruitBalance == null ? 0 : oldFruitBalance;
     }
 
     private void addNewFruitBalance(Fruit fruit, Integer quantity) {
-        FruitStorage.fruitNumbersMap.put(fruit, quantity);
+        FruitStorage.fruitsMap.put(fruit, quantity);
     }
 }

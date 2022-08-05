@@ -14,7 +14,7 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     public void writeToFile(String path) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             writer.write(FILE_HEADING);
-            for (Map.Entry<Fruit, Integer> fruitData : FruitStorage.fruitNumbersMap.entrySet()) {
+            for (Map.Entry<Fruit, Integer> fruitData : FruitStorage.fruitsMap.entrySet()) {
                 writer.newLine();
                 writer.write(fruitData.getKey().getFruitName() + ","
                         + fruitData.getValue());
