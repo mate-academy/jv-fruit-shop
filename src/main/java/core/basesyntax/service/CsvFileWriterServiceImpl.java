@@ -1,26 +1,17 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.FruitStorage;
-import core.basesyntax.model.Fruit;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
-public class CsvFileWriterServiceImpl implements CsvFileWriterService {
-    private static final String FILE_HEADING = "fruit,quantity";
+public class CsvFileWriterServiceImpl implements FileWriterService {
 
     @Override
-    public void writeToFile(String path) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
-            writer.write(FILE_HEADING);
-            for (Map.Entry<Fruit, Integer> fruitData : FruitStorage.fruitsMap.entrySet()) {
-                writer.newLine();
-                writer.write(fruitData.getKey().getFruitName() + ","
-                        + fruitData.getValue());
-            }
+    public void writeToFile(String pathToFile, String report) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {
+            writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file: " + path, e);
+            throw new RuntimeException("Can't write to file: " + pathToFile, e);
         }
     }
 }

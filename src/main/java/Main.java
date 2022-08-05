@@ -1,10 +1,12 @@
 import core.basesyntax.service.CsvFileReaderServiceImpl;
-import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.CsvFileWriterServiceImpl;
 import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.FruitTransactionsService;
 import core.basesyntax.service.FruitTransactionsServiceImpl;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.ReportCreatorServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
@@ -50,8 +52,9 @@ public class Main {
                         .get(transaction.getOperation())
                         .doTransaction(transaction));
 
-        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
-        writerService.writeToFile(OUTPUT_FILE_PATH);
+        FileWriterService writerService = new CsvFileWriterServiceImpl();
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        writerService.writeToFile(OUTPUT_FILE_PATH, reportCreatorService.makeReport());
     }
 
     private static void createTransactionReport() {
