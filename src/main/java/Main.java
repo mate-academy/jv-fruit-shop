@@ -26,7 +26,6 @@ public class Main {
     public static void main(String[] args) {
         createTransactionReport();
 
-        //OperationStrategy map used to store Handlers for each operation type
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler());
@@ -39,7 +38,6 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
-        //Creating object of CsvFileReaderService in order to receive data to FruitStorage
         CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
         List<FruitTransaction> fruitTransactions = readerService.readFromFile(INPUT_FILE_PATH);
 
@@ -48,8 +46,6 @@ public class Main {
                         .get(transaction.getOperation())
                         .doTransaction(transaction));
 
-        //Creating object of CsvFileWriterService
-        //in order to place data from FruitStorage to outputFile
         CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
         writerService.writeToFile(OUTPUT_FILE_PATH);
     }
