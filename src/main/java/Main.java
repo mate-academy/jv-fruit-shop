@@ -3,6 +3,8 @@ import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.CsvFileWriterServiceImpl;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.FruitTransactionsService;
+import core.basesyntax.service.FruitTransactionsServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
@@ -39,7 +41,9 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         FileReaderService readerService = new CsvFileReaderServiceImpl();
-        List<FruitTransaction> fruitTransactions = readerService.readFromFile(INPUT_FILE_PATH);
+        FruitTransactionsService transactionsService = new FruitTransactionsServiceImpl();
+        List<FruitTransaction> fruitTransactions = transactionsService
+                .getFruitTransactions(readerService.readFromFile(INPUT_FILE_PATH));
 
         fruitTransactions
                 .forEach(transaction -> operationStrategy
