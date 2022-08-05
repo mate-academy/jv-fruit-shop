@@ -50,7 +50,7 @@ public class Main {
         fruitTransactions
                 .forEach(transaction -> operationStrategy
                         .get(transaction.getOperation())
-                        .doTransaction(transaction));
+                        .handle(transaction));
 
         FileWriterService writerService = new CsvFileWriterServiceImpl();
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();

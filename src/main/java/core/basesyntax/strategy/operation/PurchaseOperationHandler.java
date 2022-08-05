@@ -4,7 +4,7 @@ import core.basesyntax.service.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public void doTransaction(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         subtractFromBalance(transaction);
     }
 }

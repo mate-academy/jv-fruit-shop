@@ -5,7 +5,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitTransaction;
 
 public interface OperationHandler {
-    void doTransaction(FruitTransaction transaction);
+    void handle(FruitTransaction transaction);
 
     default void addToBalance(FruitTransaction transaction) {
         addNewFruitBalance(transaction.getFruit(),

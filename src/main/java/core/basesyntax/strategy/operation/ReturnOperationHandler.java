@@ -4,7 +4,7 @@ import core.basesyntax.service.FruitTransaction;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public void doTransaction(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         addToBalance(transaction);
     }
 }
