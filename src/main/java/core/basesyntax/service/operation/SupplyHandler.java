@@ -14,7 +14,7 @@ public class SupplyHandler implements OperationHandler {
     public void process(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         if (fruitDao.contains(fruit)) {
-            fruitDao.updateQuantity(fruit,
+            fruitDao.addFruit(fruit,
                     fruitDao.getQuantity(fruit) + transaction.getQuantity());
         } else {
             fruitDao.addFruit(fruit, transaction.getQuantity());

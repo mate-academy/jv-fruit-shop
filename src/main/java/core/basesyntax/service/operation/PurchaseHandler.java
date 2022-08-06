@@ -16,7 +16,7 @@ public class PurchaseHandler implements OperationHandler {
         int amount = fruitDao.getQuantity(fruit);
         int amountPurchase = transaction.getQuantity();
         if (amountPurchase <= amount) {
-            fruitDao.updateQuantity(fruit, fruitDao.getQuantity(fruit) - transaction.getQuantity());
+            fruitDao.addFruit(fruit, fruitDao.getQuantity(fruit) - transaction.getQuantity());
         } else {
             throw new RuntimeException("Can't purchase that amount of " + fruit);
         }

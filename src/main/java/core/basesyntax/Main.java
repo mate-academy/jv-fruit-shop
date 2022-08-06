@@ -5,8 +5,8 @@ import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.impl.ParserServiceImpl;
-import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.CsvParserServiceImpl;
+import core.basesyntax.service.impl.CsvReportServiceImpl;
 import core.basesyntax.service.io.ReaderService;
 import core.basesyntax.service.io.ReaderServiceImpl;
 import core.basesyntax.service.io.WriterService;
@@ -38,7 +38,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operations);
         ReaderService reader = new ReaderServiceImpl();
         List<String> list = reader.readFromFile(PATH_INPUT_FILE);
-        ParserService<FruitTransaction> parserService = new ParserServiceImpl();
+        ParserService<FruitTransaction> parserService = new CsvParserServiceImpl();
 
         for (String line : list.subList(START_LINE_OF_DATA, list.size())) {
             FruitTransaction fruitTransaction = parserService.parse(line);
@@ -48,7 +48,7 @@ public class Main {
         }
 
         Map<String, Integer> storage = fruitDao.getAll();
-        ReportService reportService = new ReportServiceImpl();
+        ReportService reportService = new CsvReportServiceImpl();
         String report = reportService.create(storage);
         WriterService writer = new WriterServiceImpl();
         writer.writeToFile(PATH_OUTPUT_FILE, report);

@@ -9,7 +9,5 @@ public interface FruitDao {
 
     int getQuantity(String fruit);
 
-    void updateQuantity(String fruit, int quantity);
-
     Map<String, Integer> getAll();
 }

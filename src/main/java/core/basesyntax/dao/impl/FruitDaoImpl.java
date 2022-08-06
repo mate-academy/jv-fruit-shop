@@ -21,16 +21,6 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void updateQuantity(String fruit, int quantity) {
-        if (!contains(fruit)) {
-            addFruit(fruit, quantity);
-        } else {
-            Storage.fruits.remove(fruit);
-            addFruit(fruit, quantity);
-        }
-    }
-
-    @Override
     public Map<String, Integer> getAll() {
         return Storage.fruits;
     }

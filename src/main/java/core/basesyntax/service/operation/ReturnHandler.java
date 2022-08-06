@@ -13,7 +13,7 @@ public class ReturnHandler implements OperationHandler {
     @Override
     public void process(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
-        fruitDao.updateQuantity(fruit,
+        fruitDao.addFruit(fruit,
                 fruitDao.getQuantity(fruit) + transaction.getQuantity());
     }
 }
