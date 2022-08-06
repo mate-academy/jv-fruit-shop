@@ -1,4 +1,4 @@
-package core.basesyntax.operation;
+package core.basesyntax.strategy;
 
 import core.basesyntax.dao.Dao;
 import core.basesyntax.dao.DaoHashMap;

@@ -1,8 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.file.FileReaderCsv;
-import core.basesyntax.reports.DailyTotals;
-import core.basesyntax.service.DataServiceCsv;
+import core.basesyntax.service.data.DataServiceCsv;
+import core.basesyntax.service.file.FileReaderCsv;
+import core.basesyntax.service.reports.DailyTotals;
 import java.util.List;
 
 public class FruitShop {

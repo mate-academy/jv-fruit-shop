@@ -1,12 +1,12 @@
-package core.basesyntax.operation;
+package core.basesyntax.strategy;
 
 import core.basesyntax.dao.Dao;
 import core.basesyntax.dao.DaoHashMap;
 
-public class SupplyOperationHandler implements OperationHandler {
+public class ReturnOperationHandler implements OperationHandler {
     private final Dao dao;
 
-    public SupplyOperationHandler(Dao dao) {
+    public ReturnOperationHandler(Dao dao) {
         this.dao = dao;
     }
 

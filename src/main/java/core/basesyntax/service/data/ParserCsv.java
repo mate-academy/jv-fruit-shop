@@ -1,4 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.service.data;
+
+import core.basesyntax.model.FruitTransaction;
 
 public class ParserCsv implements Parser<FruitTransaction> {
     public static final int INDEX_OPERATION = 0;

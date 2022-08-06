@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.model;
 
 import java.util.stream.Stream;
 
@@ -48,7 +48,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        final private String operation;
+        private String operation;
 
         Operation(String operation) {
             this.operation = operation;

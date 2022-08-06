@@ -1,7 +1,7 @@
-package core.basesyntax.reports;
+package core.basesyntax.service.reports;
 
 import core.basesyntax.dao.DaoHashMap;
-import core.basesyntax.file.FileWriterCsv;
+import core.basesyntax.service.file.FileWriterCsv;
 
 public class DailyTotals implements Report {
     @Override

@@ -1,8 +1,8 @@
-package core.basesyntax.operation;
+package core.basesyntax.strategy;
 
 import core.basesyntax.dao.Dao;
 import core.basesyntax.dao.DaoHashMap;
-import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 
 public class OperationHandlerMap {

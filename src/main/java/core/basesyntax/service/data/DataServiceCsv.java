@@ -1,7 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.service.data;
 
 import core.basesyntax.dao.DaoHashMap;
-import core.basesyntax.operation.OperationHandlerMap;
+import core.basesyntax.strategy.OperationHandlerMap;
 import java.util.List;
 
 public class DataServiceCsv implements DataService<String> {
