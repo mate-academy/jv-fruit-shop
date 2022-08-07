@@ -8,11 +8,11 @@ public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
         addNewFruitBalance(transaction.getFruit(),
-                removeOldFruitBalance(transaction.getFruit()) + transaction.getQuantity());
+                getOldFruitBalance(transaction.getFruit()) + transaction.getQuantity());
     }
 
-    private Integer removeOldFruitBalance(Fruit fruit) {
-        Integer oldFruitBalance = FruitStorage.fruitsMap.remove(fruit);
+    private Integer getOldFruitBalance(Fruit fruit) {
+        Integer oldFruitBalance = FruitStorage.fruitsMap.get(fruit);
         return oldFruitBalance == null ? 0 : oldFruitBalance;
     }
 
