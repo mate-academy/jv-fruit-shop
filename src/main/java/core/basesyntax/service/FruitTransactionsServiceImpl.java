@@ -16,11 +16,12 @@ public class FruitTransactionsServiceImpl implements FruitTransactionsService {
     public List<FruitTransaction> getFruitTransactions(List<String> lines) {
         return lines.stream()
                 .skip(LINES_TO_SKIP)
-                .map(line ->
-                        new FruitTransaction(getOperation(line
-                                .split(",")[OPERATION_INDEX]),
-                        new Fruit(line.split(",")[FRUIT_INDEX]),
-                        Integer.parseInt(line.split(",")[QUANTITY_INDEX])))
+                .map(line -> {
+                    String[] splittedLine = line.split(",");
+                    return new FruitTransaction(getOperation(splittedLine[OPERATION_INDEX]),
+                            new Fruit(splittedLine[FRUIT_INDEX]),
+                            Integer.parseInt(splittedLine[QUANTITY_INDEX]));
+                })
                 .collect(Collectors.toList());
     }
 
