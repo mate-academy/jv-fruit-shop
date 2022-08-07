@@ -17,14 +17,14 @@ public class FruitTransactionsServiceImpl implements FruitTransactionsService {
         return lines.stream()
                 .skip(LINES_TO_SKIP)
                 .map(line ->
-                        new FruitTransaction(getConstantOfOperation(line
+                        new FruitTransaction(getOperation(line
                                 .split(",")[OPERATION_INDEX]),
                         new Fruit(line.split(",")[FRUIT_INDEX]),
                         Integer.parseInt(line.split(",")[QUANTITY_INDEX])))
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction.Operation getConstantOfOperation(String operation) {
+    private FruitTransaction.Operation getOperation(String operation) {
         return Arrays.stream(FruitTransaction.Operation.values())
                 .filter(constant -> Objects.equals(constant.getOperation(), operation))
                 .findFirst()
