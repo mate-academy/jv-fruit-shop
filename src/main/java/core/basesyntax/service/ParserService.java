@@ -4,6 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 
 import java.util.List;
 
-public interface FruitService {
-    void addFruitsFromList(List<FruitTransaction> fruitTransactionList);
+public interface ParserService {
+    List<FruitTransaction> parser(List<String> data);
+
 }
