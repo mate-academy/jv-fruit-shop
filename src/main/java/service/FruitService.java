@@ -1,6 +1,6 @@
-package dao;
+package service;
 
-public interface StorageDao {
+public interface FruitService {
     void put(String name, Integer amount);
 
     Integer get(String name);

@@ -1,28 +1,28 @@
-package controller;
+package strategy;
 
-import dao.StorageDao;
-import dao.StorageDaoImpl;
 import java.util.List;
+import service.FruitService;
+import service.impl.FruitServiceImpl;
 
-public class Controller {
-    private StorageDao storageDao = new StorageDaoImpl();
+public class Strategy {
+    private FruitService fruitService = new FruitServiceImpl();
 
     public String getReport() {
-        return storageDao.getFruitReport();
+        return fruitService.getFruitReport();
     }
 
     private void balance(String name, int amount) {
-        storageDao.put(name, amount);
+        fruitService.put(name, amount);
     }
 
     private void supply(String name, int amount) {
-        int add = storageDao.get(name);
-        storageDao.put(name, add + amount);
+        int add = fruitService.get(name);
+        fruitService.put(name, add + amount);
     }
 
     private void purchase(String name, int amount) {
-        int bought = storageDao.get(name);
-        storageDao.put(name, bought - amount);
+        int bought = fruitService.get(name);
+        fruitService.put(name, bought - amount);
     }
 
     public void operation(List<String> lines) {

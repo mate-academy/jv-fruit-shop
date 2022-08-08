@@ -1,8 +1,9 @@
-package dao;
+package service.impl;
 
-import storage.Storage;
+import db.Storage;
+import service.FruitService;
 
-public class StorageDaoImpl implements StorageDao {
+public class FruitServiceImpl implements FruitService {
     @Override
     public void put(String name, Integer amount) {
         Storage.put(name, amount);

@@ -1,14 +1,18 @@
-import controller.Controller;
 import java.util.List;
+import strategy.Strategy;
 import util.FileUtil;
 
 public class Main {
+    private static final String inputUrl = "src/main/java/resources/Input.csv";
+
+    private static final String resultUrl = "src/main/java/resources/Report.csv";
+
     public static void main(String[] args) {
-        Controller controller = new Controller();
+        Strategy controller = new Strategy();
         FileUtil fileUtil = new FileUtil();
-        List<String> input = fileUtil.getLineString("src/main/java/resources/Input.csv");
+        List<String> input = fileUtil.getLineString(inputUrl);
         controller.operation(input);
         String report = controller.getReport();
-        fileUtil.writeFile("src/main/java/resources/Report.csv", report);
+        fileUtil.writeFile(resultUrl, report);
     }
 }
