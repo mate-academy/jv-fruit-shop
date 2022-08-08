@@ -1,17 +1,17 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dao.Dao;
-import core.basesyntax.dao.DaoHashMap;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 
 public class ReturnOperationHandler implements OperationHandler {
-    private final Dao dao;
+    private final FruitDao fruitDao;
 
-    public ReturnOperationHandler(Dao dao) {
-        this.dao = dao;
+    public ReturnOperationHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
-    public void performOperation(String fruit, Integer quantity) {
-        new DaoHashMap().add(fruit, dao.getQuantity(fruit) + quantity);
+    public void handle(String fruit, Integer quantity) {
+        new FruitDaoImpl().add(fruit, fruitDao.getQuantity(fruit) + quantity);
     }
 }

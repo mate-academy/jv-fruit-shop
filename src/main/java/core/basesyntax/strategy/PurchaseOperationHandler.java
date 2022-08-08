@@ -1,23 +1,23 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dao.Dao;
-import core.basesyntax.dao.DaoHashMap;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    private final Dao dao;
+    private final FruitDao fruitDao;
 
-    public PurchaseOperationHandler(Dao dao) {
-        this.dao = dao;
+    public PurchaseOperationHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
-    public void performOperation(String fruit, Integer quantity) {
-        Integer newQuantity = dao.getQuantity(fruit) - quantity;
+    public void handle(String fruit, Integer quantity) {
+        Integer newQuantity = fruitDao.getQuantity(fruit) - quantity;
         if (newQuantity < 0) {
-            System.out.println("After purchase " + fruit + " quantity " + quantity
+            throw new RuntimeException("After purchase " + fruit + " quantity " + quantity
                     + " the balance is negative");
         }
 
-        new DaoHashMap().add(fruit, newQuantity);
+        new FruitDaoImpl().add(fruit, newQuantity);
     }
 }

@@ -2,7 +2,7 @@ package core.basesyntax.service.data;
 
 import core.basesyntax.model.FruitTransaction;
 
-public class ParserCsv implements Parser<FruitTransaction> {
+public class CsvParserImpl implements Parser<FruitTransaction> {
     public static final int INDEX_OPERATION = 0;
     public static final int INDEX_FRUIT = 1;
     public static final int INDEX_QUANTITY = 2;

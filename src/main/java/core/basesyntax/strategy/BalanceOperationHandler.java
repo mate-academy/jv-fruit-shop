@@ -1,20 +1,20 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dao.Dao;
-import core.basesyntax.dao.DaoHashMap;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 
 public class BalanceOperationHandler implements OperationHandler {
-    private final Dao dao;
+    private final FruitDao fruitDao;
 
-    public BalanceOperationHandler(Dao dao) {
-        this.dao = dao;
+    public BalanceOperationHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
-    public void performOperation(String fruit, Integer quantity) {
-        if (dao.getQuantity(fruit) > 0) {
+    public void handle(String fruit, Integer quantity) {
+        if (fruitDao.getQuantity(fruit) > 0) {
             System.out.println("There are more the one of balance data on fruit " + fruit);
         }
-        new DaoHashMap().add(fruit, quantity);
+        new FruitDaoImpl().add(fruit, quantity);
     }
 }

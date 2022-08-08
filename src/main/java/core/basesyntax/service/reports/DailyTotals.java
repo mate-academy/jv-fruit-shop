@@ -1,12 +1,10 @@
 package core.basesyntax.service.reports;
 
-import core.basesyntax.dao.DaoHashMap;
-import core.basesyntax.service.file.FileWriterCsv;
+import core.basesyntax.dao.FruitDaoImpl;
 
-public class DailyTotals implements Report {
+public class DailyTotals implements ReportCreator {
     @Override
-    public void create(String path) {
-        new FileWriterCsv().writeFile(path,
-                new Queries().totalFruitBalance(new DaoHashMap().getData()));
+    public String create() {
+        return new Queries().totalFruitBalance(new FruitDaoImpl().getData());
     }
 }
