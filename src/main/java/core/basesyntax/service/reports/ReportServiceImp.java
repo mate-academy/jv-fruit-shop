@@ -2,8 +2,9 @@ package core.basesyntax.service.reports;
 
 import java.util.Map;
 
-public class Queries {
-    public String totalFruitBalance(Map<String, Integer> data) {
+public class ReportServiceImp implements ReportService {
+    @Override
+    public String create(Map<String, Integer> data) {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("fruit,quantity");
         data.forEach((key, value) -> stringBuffer

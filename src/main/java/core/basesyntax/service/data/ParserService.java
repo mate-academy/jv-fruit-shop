@@ -1,5 +1,5 @@
 package core.basesyntax.service.data;
 
-public interface Parser<T> {
+public interface ParserService<T> {
     T parser(String row);
 }

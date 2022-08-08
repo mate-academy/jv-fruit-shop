@@ -3,11 +3,11 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.data.DataServiceCsv;
-import core.basesyntax.service.file.FileReaderCsv;
+import core.basesyntax.service.data.CsvDataServiceImpl;
+import core.basesyntax.service.file.CsvFileReader;
+import core.basesyntax.service.file.CsvFileWriter;
 import core.basesyntax.service.file.FileWriter;
-import core.basesyntax.service.file.FileWriterCsv;
-import core.basesyntax.service.reports.DailyTotals;
+import core.basesyntax.service.reports.ReportServiceImp;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
@@ -34,12 +34,12 @@ public class FruitShop {
                                 new ReturnOperationHandler(fruitDao));
                     }};
 
-        List<String> activities = new FileReaderCsv().readFile(DAILY_DATA_PATH);
-        DataServiceCsv dataServiceCsv = new DataServiceCsv();
+        List<String> activities = new CsvFileReader().readFile(DAILY_DATA_PATH);
+        CsvDataServiceImpl dataServiceCsv = new CsvDataServiceImpl();
         dataServiceCsv.processData(activities, operationHandlerMap);
-        DailyTotals dailyTotals = new DailyTotals();
-        String data = dailyTotals.create();
-        FileWriter fileWriter = new FileWriterCsv();
+        ReportServiceImp reportServiceImp = new ReportServiceImp();
+        String data = reportServiceImp.create(fruitDao.getData());
+        FileWriter fileWriter = new CsvFileWriter();
         fileWriter.writeFile(DAILY_TOTAL_REPORT_PATH, data);
     }
 }
