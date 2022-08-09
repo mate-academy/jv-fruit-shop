@@ -19,6 +19,10 @@ import java.util.stream.Collectors;
 public class Main {
     private static final String READ_FROM_FILE_NAME = "src/main/resources/operations.csv";
     private static final String WRITE_TO_FILE_NAME = "src/main/resources/report.csv";
+    private static final String CHAR_FOR_SPLIT = ",";
+    private static final int INDEX_OPERATION = 0;
+    private static final int INDEX_FRUIT = 1;
+    private static final int INDEX_COUNT = 2;
 
     public static void main(String[] args) {
         Map<FruitTransaction.Activity, Operation> activityOperationMap = createHashMap();
@@ -27,14 +31,14 @@ public class Main {
 
         storageDao.readData(READ_FROM_FILE_NAME)
                 .stream()
-                .map(s -> s.split(","))
+                .map(s -> s.split(CHAR_FOR_SPLIT))
                 .map(strings -> new FruitTransaction(Arrays.stream(FruitTransaction
                                 .Activity.values())
-                        .filter(o -> o.getOperation().equals(strings[0]))
+                        .filter(o -> o.getOperation().equals(strings[INDEX_OPERATION]))
                         .findFirst()
                         .get(),
-                        strings[1],
-                        Integer.parseInt(strings[2])))
+                        strings[INDEX_FRUIT],
+                        Integer.parseInt(strings[INDEX_COUNT])))
                         .forEach(new Consumer<FruitTransaction>() {
                             @Override
                             public void accept(FruitTransaction fruitTransaction) {
@@ -59,7 +63,7 @@ public class Main {
         return storage.getAllData()
                 .entrySet()
                 .stream()
-                .map(stringIntegerEntry -> stringIntegerEntry.getKey() + ","
+                .map(stringIntegerEntry -> stringIntegerEntry.getKey() + CHAR_FOR_SPLIT
                         + stringIntegerEntry.getValue())
                 .collect(Collectors.joining(System.getProperty("line.separator")));
     }
