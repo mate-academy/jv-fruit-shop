@@ -1,9 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransaction;
-
-import java.util.List;
+import core.basesyntax.dao.FruitDao;
 
 public interface ReportService {
-    String createReport(List<FruitTransaction> fruitTransactionList);
+    String createReport(FruitDao fruitDao, OperationStrategy operationStrategy);
 }
