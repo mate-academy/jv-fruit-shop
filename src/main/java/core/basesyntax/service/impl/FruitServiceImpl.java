@@ -15,8 +15,6 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void addFruitsFromList(List<FruitTransaction> fruitTransactionList) {
-        for (FruitTransaction fruit : fruitTransactionList){
-            fruitDao.add(fruit);
-        }
+        fruitDao.add(fruitTransactionList);
     }
 }

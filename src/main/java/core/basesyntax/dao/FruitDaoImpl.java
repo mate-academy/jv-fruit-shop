@@ -8,8 +8,8 @@ import java.util.List;
 public class FruitDaoImpl implements FruitDao {
 
     @Override
-    public void add(FruitTransaction fruit) {
-        Storage.fruitStorage.add(fruit);
+    public void add(List<FruitTransaction> fruits) {
+        Storage.fruitStorage.addAll(fruits);
     }
 
     @Override

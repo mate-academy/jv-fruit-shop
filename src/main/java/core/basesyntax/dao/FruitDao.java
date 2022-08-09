@@ -5,6 +5,6 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface FruitDao {
-    void add(FruitTransaction fruit);
+    void add(List<FruitTransaction> fruits);
     List<FruitTransaction> getAll();
 }
