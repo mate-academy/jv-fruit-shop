@@ -3,8 +3,18 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.service.ParserService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.service.operations.BalanceOperationHandler;
 import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.PurchaseOperationHandler;
@@ -14,13 +24,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
     public static void main(String[] args) {
-        final String inputFile = "./src/text/input.txt";
-        final String outputFile = "./src/text/output.txt";
+        final String inputFile = "./src/resources/input.txt";
+        final String outputFile = "./src/resources/output.txt";
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
@@ -37,7 +44,7 @@ public class Main {
 
         ParserService parserService = new ParserServiceImpl();
         FruitDao fruitDao = new FruitDaoImpl();
-        // invoke FruitServiceImpl, that will add result fruits into Storage throw fruitDao, create report
+
         FruitService fruitService = new FruitServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         fruitService.transactions(fruitDao, parserService.parse(dataFromFile), operationStrategy);
