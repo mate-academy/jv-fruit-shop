@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private final FruitDao fruitDao;
@@ -18,6 +17,6 @@ public class PurchaseOperationHandler implements OperationHandler {
                     + " the balance is negative");
         }
 
-        new FruitDaoImpl().add(fruit, newQuantity);
+        fruitDao.add(fruit, newQuantity);
     }
 }

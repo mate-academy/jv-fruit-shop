@@ -4,6 +4,8 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.data.CsvDataServiceImpl;
+import core.basesyntax.service.data.CsvOperationServiceImpl;
+import core.basesyntax.service.data.OperationService;
 import core.basesyntax.service.file.CsvFileReader;
 import core.basesyntax.service.file.CsvFileWriter;
 import core.basesyntax.service.file.FileWriter;
@@ -36,9 +38,12 @@ public class FruitShop {
 
         List<String> activities = new CsvFileReader().readFile(DAILY_DATA_PATH);
         CsvDataServiceImpl dataServiceCsv = new CsvDataServiceImpl();
-        dataServiceCsv.processData(activities, operationHandlerMap);
-        ReportServiceImp reportServiceImp = new ReportServiceImp();
-        String data = reportServiceImp.create(fruitDao.getData());
+        List<FruitTransaction> fruitTransactions = dataServiceCsv.processData(activities);
+        OperationService operationService =
+                new CsvOperationServiceImpl(fruitDao, operationHandlerMap);
+        operationService.processOperation(fruitTransactions);
+        ReportServiceImp reportServiceImp = new ReportServiceImp(fruitDao);
+        String data = reportServiceImp.create();
         FileWriter fileWriter = new CsvFileWriter();
         fileWriter.writeFile(DAILY_TOTAL_REPORT_PATH, data);
     }
