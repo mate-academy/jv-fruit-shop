@@ -5,7 +5,7 @@ import core.basesyntax.model.Transaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CreateTransactionsImpl implements CreateTransactions {
+public class FruitTransactionsParcerImpl implements FruitTransactionsParcer {
     private static final String SEPARATOR = ",";
     private static final int TITLE_LINE = 1;
     private static final int TYPE_OPERATION_INDEX = 0;
@@ -13,7 +13,7 @@ public class CreateTransactionsImpl implements CreateTransactions {
     private static final int FRUIT_QUANTITY = 2;
 
     @Override
-    public List<Transaction> getAllTransactions(List<String> readLine) {
+    public List<Transaction> transactionsParcer(List<String> readLine) {
         return readLine.stream()
                 .skip(TITLE_LINE)
                 .map(s -> s.split(SEPARATOR))

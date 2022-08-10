@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.separator.CreateTransactionsImpl;
+import core.basesyntax.separator.FruitTransactionsParcerImpl;
 import core.basesyntax.service.fileoperation.CreateReport;
 import core.basesyntax.service.fileoperation.CsvFileWriter;
 import core.basesyntax.service.fileoperation.TransactionProcessing;
@@ -34,11 +34,10 @@ public class Main {
                 .inputFile("src/main/resources/input.csv");
         TransactionProcessing processor =
                 new TransactionProcessingImpl(new StrategyOperationImpl(typeOperationMap));
-        processor.transactionProcessing(new CreateTransactionsImpl()
-                .getAllTransactions(readInputFile));
-        CreateReport report = new CreateReportImpl();
+        processor.transactionProcessing(new FruitTransactionsParcerImpl()
+                .transactionsParcer(readInputFile));
+        CreateReport report = new CreateReportImpl(new StringBuilder(), storageDao);
         CsvFileWriter writer = new CsvFileWriterImpl();
-        writer.writeFile("src/main/resources/output.csv");
-        System.out.println(report.getReport());
+        writer.writeFile("src/main/resources/output.csv", report.getReport());
     }
 }

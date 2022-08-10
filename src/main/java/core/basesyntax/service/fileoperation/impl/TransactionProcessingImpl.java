@@ -13,9 +13,9 @@ public class TransactionProcessingImpl implements TransactionProcessing {
     }
 
     @Override
-    public void transactionProcessing(List<Transaction> transaction) {
-        for (Transaction tr : transaction) {
-            strategyOperation.getOperationHandler(tr.getType()).operation(tr);
+    public void transactionProcessing(List<Transaction> transactions) {
+        for (Transaction transaction : transactions) {
+            strategyOperation.getOperationHandler(transaction.getType()).operation(transaction);
         }
     }
 }

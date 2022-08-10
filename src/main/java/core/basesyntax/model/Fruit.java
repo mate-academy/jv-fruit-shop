@@ -3,24 +3,24 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Fruit {
-    private final String nameFruit;
-    private Integer quantityFruits;
+    private final String name;
+    private Integer quantity;
 
-    public Fruit(String nameFruit, Integer quantityFruits) {
-        this.nameFruit = nameFruit;
-        this.quantityFruits = quantityFruits;
+    public Fruit(String name, Integer quantity) {
+        this.name = name;
+        this.quantity = quantity;
     }
 
     public String getName() {
-        return nameFruit;
+        return name;
     }
 
     public Integer getAmountFruit() {
-        return quantityFruits;
+        return quantity;
     }
 
-    public void setAmountFruit(Integer quantityFruits) {
-        this.quantityFruits = quantityFruits;
+    public void setAmountFruit(Integer quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -32,12 +32,12 @@ public class Fruit {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return Objects.equals(nameFruit, fruit.nameFruit)
-                && Objects.equals(quantityFruits, fruit.quantityFruits);
+        return Objects.equals(name, fruit.name)
+                && Objects.equals(quantity, fruit.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nameFruit, quantityFruits);
+        return Objects.hash(name, quantity);
     }
 }

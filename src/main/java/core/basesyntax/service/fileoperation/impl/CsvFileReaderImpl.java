@@ -15,7 +15,7 @@ public class CsvFileReaderImpl implements CsvFileReader {
             return reader.lines()
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Can't find this fileoperation " + filePath, e);
+            throw new RuntimeException("Can't read data from file " + filePath, e);
         }
     }
 }
