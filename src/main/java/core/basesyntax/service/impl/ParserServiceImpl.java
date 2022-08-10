@@ -7,22 +7,22 @@ import java.util.List;
 import java.util.Optional;
 
 public class ParserServiceImpl implements ParserService {
-    private final int operationIndex = 0;
-    private final int fruitNameIndex = 1;
-    private final int fruitQuantityIndex = 2;
+    private final int OPERATION_INDEX = 0;
+    private final int FRUIT_NAME_INDEX = 1;
+    private final int FRUIT_QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parser(List<String> data) {
-        List<FruitTransaction> fruits = new ArrayList<>();
+    public List<FruitTransaction> parse(List<String> data) {
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String string : data) {
             String[] splittedData = string.split(",");
             Optional<FruitTransaction.Operation> operationName =
-                    FruitTransaction.Operation.get(splittedData[operationIndex]);
+                    FruitTransaction.Operation.get(splittedData[OPERATION_INDEX]);
             FruitTransaction fruit = new FruitTransaction(operationName.get(),
-                    splittedData[fruitNameIndex],
-                    Integer.parseInt(splittedData[fruitQuantityIndex]));
-            fruits.add(fruit);
+                    splittedData[FRUIT_NAME_INDEX],
+                    Integer.parseInt(splittedData[FRUIT_QUANTITY_INDEX]));
+            fruitTransactions.add(fruit);
         }
-        return fruits;
+        return fruitTransactions;
     }
 }
