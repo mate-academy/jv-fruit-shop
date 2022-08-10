@@ -8,11 +8,11 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void add(List<FruitTransaction> fruits) {
-        Storage.fruitStorage.addAll(fruits);
+        Storage.fruits.addAll(fruits);
     }
 
     @Override
     public List<FruitTransaction> getAll() {
-        return Storage.fruitStorage;
+        return Storage.fruits;
     }
 }

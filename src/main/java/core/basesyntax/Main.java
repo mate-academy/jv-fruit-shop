@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * Feel free to remove this class and create your own.
  */
-public class HelloWorld {
+public class Main {
     public static void main(String[] args) {
         final String inputFile = "./src/text/input.txt";
         final String outputFile = "./src/text/output.txt";
@@ -45,7 +45,7 @@ public class HelloWorld {
 
         ParserService parserService = new ParserServiceImpl();
         FruitDao fruitDao = new FruitDaoImpl();
-        fruitDao.add(parserService.parser(dataFromFile));
+        fruitDao.add(parserService.parse(dataFromFile));
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ReportService report = new ReportServiceImpl();

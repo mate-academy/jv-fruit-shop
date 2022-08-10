@@ -5,6 +5,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    public static final List<FruitTransaction> fruitStorage = new ArrayList<>();
-
+    public static final List<FruitTransaction> fruits = new ArrayList<>();
 }
