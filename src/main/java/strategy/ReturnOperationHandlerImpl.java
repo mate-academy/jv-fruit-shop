@@ -10,7 +10,7 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
         this.storageDao = storageDao;
     }
 
-    public void changeQuantity(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         storageDao.updateData(fruitTransaction.getFruit(),
                 storageDao.getRemainFruit(fruitTransaction.getFruit())
                         + fruitTransaction.getQuantity());

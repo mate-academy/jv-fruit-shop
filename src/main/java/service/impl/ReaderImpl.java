@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import service.Reader;
+import service.FileReader;
 
-public class ReaderImpl implements Reader {
+public class ReaderImpl implements FileReader {
     @Override
-    public List<String> fileReader(String filePath) {
+    public List<String> read(String filePath) {
         List<String> dataShop;
         try {
             dataShop = Files.readAllLines(Path.of(filePath));

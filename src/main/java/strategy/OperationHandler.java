@@ -3,5 +3,5 @@ package strategy;
 import model.FruitTransaction;
 
 public interface OperationHandler {
-    void changeQuantity(FruitTransaction fruitTransaction);
+    void handle(FruitTransaction fruitTransaction);
 }

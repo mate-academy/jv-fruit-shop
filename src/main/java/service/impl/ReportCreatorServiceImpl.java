@@ -2,14 +2,14 @@ package service.impl;
 
 import dao.StorageDao;
 import java.util.stream.Collectors;
-import service.ReportCreateService;
+import service.ReportCreatorService;
 
-public class ReportCreateServiceImpl implements ReportCreateService {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String SPLITERATOR = ",";
     private static final String TITLE = "fruit,quantity";
     private final StorageDao storageDao;
 
-    public ReportCreateServiceImpl(StorageDao storageDao) {
+    public ReportCreatorServiceImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
