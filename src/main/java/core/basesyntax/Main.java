@@ -26,8 +26,8 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        final String inputFile = "./src/resources/input.txt";
-        final String outputFile = "./src/resources/output.txt";
+        final String inputFile = "./src/main/resources/input.txt";
+        final String outputFile = "./src/main/resources/output.txt";
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
