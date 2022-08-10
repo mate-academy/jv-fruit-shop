@@ -1,12 +1,14 @@
-package core.basesyntax.transactionprocessorimpl;
+package core.basesyntax.strategy;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.daoimpl.FruitDaoImpl;
+import core.basesyntax.db.FruitDao;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.transactionprocessor.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
-    private final FruitDao fruitStorage = new FruitDaoImpl();
+    private final FruitDao fruitStorage;
+
+    public PurchaseHandler(FruitDao fruitStorage) {
+        this.fruitStorage = fruitStorage;
+    }
 
     @Override
     public void handle(FruitTransaction transaction) {

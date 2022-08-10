@@ -1,15 +1,15 @@
-package core.basesyntax.reportserviceimpl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.reportservice.ReportCreatorService;
+import core.basesyntax.service.ReportCreatorService;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService {
-    private static final String HEADING = "fruit,quantity";
+    private static final String HEADER = "fruit,quantity";
 
     @Override
     public String createReport(Map<String, Integer> fruits) {
-        return HEADING + System.lineSeparator() + getFruitsRemainder(fruits);
+        return HEADER + System.lineSeparator() + getFruitsRemainder(fruits);
     }
 
     private String getFruitsRemainder(Map<String, Integer> fruitsRemainder) {
@@ -17,6 +17,6 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
                 .map(e -> {
                     return "" + e.getKey() + "," + e.getValue();
                 })
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }

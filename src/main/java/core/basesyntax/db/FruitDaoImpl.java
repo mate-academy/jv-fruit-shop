@@ -1,7 +1,5 @@
-package core.basesyntax.daoimpl;
+package core.basesyntax.db;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.storage.FruitsStorage;
 import java.util.Map;
 import java.util.Optional;
 

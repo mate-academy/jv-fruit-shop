@@ -1,8 +1,8 @@
-package core.basesyntax.transactionprocessor;
+package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public interface TransactionConstructor {
+public interface TransactionConvertor {
     List<FruitTransaction> convert(List<String> lines);
 }

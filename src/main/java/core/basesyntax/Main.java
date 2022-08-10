@@ -1,18 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.daoimpl.FruitDaoImpl;
-import core.basesyntax.fileservice.FileReader;
-import core.basesyntax.fileservice.FileWriter;
-import core.basesyntax.fileserviceimpl.FileReaderImpl;
-import core.basesyntax.fileserviceimpl.FileWriterImpl;
+import core.basesyntax.db.FruitDao;
+import core.basesyntax.db.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.reportservice.ReportCreatorService;
-import core.basesyntax.reportserviceimpl.ReportCreatorServiceImpl;
-import core.basesyntax.transactionprocessor.FruitTransactionProcessor;
-import core.basesyntax.transactionprocessor.TransactionConstructor;
-import core.basesyntax.transactionprocessorimpl.FruitTransactionProcessorImpl;
-import core.basesyntax.transactionprocessorimpl.TransactionConstructorImpl;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FruitTransactionProcessor;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.TransactionConvertor;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.FruitTransactionProcessorImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
+import core.basesyntax.service.impl.TransactionConvertorImpl;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
 import java.util.Map;
 
@@ -21,10 +22,11 @@ public class Main {
         FileReader reader = new FileReaderImpl();
         List<String> lines = reader.readFromFile("src/main/resources/FruitProcesses.csv");
 
-        TransactionConstructor constructor = new TransactionConstructorImpl();
+        TransactionConvertor constructor = new TransactionConvertorImpl();
         List<FruitTransaction> fruitTransactions = constructor.convert(lines);
 
-        FruitTransactionProcessor processor = new FruitTransactionProcessorImpl();
+        FruitTransactionProcessor processor =
+                new FruitTransactionProcessorImpl(new OperationStrategyImpl());
         processor.process(fruitTransactions);
 
         FruitDao fruitDao = new FruitDaoImpl();
