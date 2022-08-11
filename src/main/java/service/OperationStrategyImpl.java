@@ -1,8 +1,7 @@
 package service;
 
-import service.operation.Operation;
-
 import java.util.Map;
+import service.operation.Operation;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private Map<ProductTransaction.Operation, Operation> operationMap;

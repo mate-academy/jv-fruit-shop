@@ -5,12 +5,12 @@ import dao.ProductDaoImpl;
 import model.Product;
 import service.ProductTransaction;
 
-public class SupplyOperation implements Operation{
+public class SupplyOperation implements Operation {
     private final ProductDao productDao = new ProductDaoImpl();
 
     @Override
     public void doOperation(ProductTransaction transaction) {
-        int newQuantity = productDao.get(transaction.getProductName()).getProductCount()
+        int newQuantity = productDao.get(transaction.getProductName()).getCount()
                 + transaction.getQuantity();
         productDao.update(new Product(transaction.getProductName(), newQuantity));
     }

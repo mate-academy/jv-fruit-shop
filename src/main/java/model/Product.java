@@ -1,29 +1,27 @@
 package model;
 
-import java.math.BigDecimal;
-
 public class Product {
-    private String productName;
-    private int productCount;
+    private String name;
+    private int count;
 
     public Product(String productName, int productCount) {
-        this.productCount = productCount;
-        this.productName = productName;
+        this.count = productCount;
+        this.name = productName;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public int getProductCount() {
-        return productCount;
+    public int getCount() {
+        return count;
     }
 
-    public void setProductCount(int productCount) {
-        this.productCount = productCount;
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 }

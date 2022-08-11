@@ -1,17 +1,16 @@
 package dao;
 
 import db.Storage;
-import model.Product;
-
 import java.util.List;
 import java.util.Objects;
+import model.Product;
 
-public class ProductDaoImpl implements ProductDao{
+public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product get(String productName) {
         return Storage.products.stream()
-                .filter(p -> Objects.equals(p.getProductName(), productName))
+                .filter(p -> Objects.equals(p.getName(), productName))
                 .findFirst().get();
     }
 
@@ -22,7 +21,7 @@ public class ProductDaoImpl implements ProductDao{
 
     @Override
     public void update(Product product) {
-        Product productToRemove = get(product.getProductName());
+        Product productToRemove = get(product.getName());
         Storage.products.remove(productToRemove);
         Storage.products.add(product);
     }

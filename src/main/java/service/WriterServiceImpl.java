@@ -2,13 +2,11 @@ package service;
 
 import dao.ProductDao;
 import dao.ProductDaoImpl;
-import db.Storage;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriterServiceImpl implements WriterService{
+public class WriterServiceImpl implements WriterService {
     private static final String INITIAL_FORMAT = "name,quantity\n";
     private static final String FORMAT = "%s,%s\n";
     private final ProductDao productDao = new ProductDaoImpl();
@@ -22,7 +20,7 @@ public class WriterServiceImpl implements WriterService{
             BufferedWriter finalBufferedWriter = bufferedWriter;
             productDao.getAll().forEach(i -> {
                 try {
-                    finalBufferedWriter.write(String.format(FORMAT, i.getProductName(), i.getProductCount()));
+                    finalBufferedWriter.write(String.format(FORMAT, i.getName(), i.getCount()));
                 } catch (IOException e) {
                     throw new RuntimeException("Can't write data to file", e);
                 }

@@ -11,7 +11,7 @@ public class ReturnOperation implements Operation {
     @Override
     public void doOperation(ProductTransaction transaction) {
         int newQuantity = transaction.getQuantity()
-                + productDao.get(transaction.getProductName()).getProductCount();
+                + productDao.get(transaction.getProductName()).getCount();
 
         productDao.update(new Product(transaction.getProductName(), newQuantity));
     }
