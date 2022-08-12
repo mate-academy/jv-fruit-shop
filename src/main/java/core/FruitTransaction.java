@@ -1,10 +1,6 @@
 package core;
 
 public class FruitTransaction {
-    private static final String BALANCE_OPERATION = "b";
-    private static final String SUPPLY_OPERATION = "s";
-    private static final String PURCHASE_OPERATION = "p";
-    private static final String RETURN_OPERATION = "r";
     private Activity activity;
     private String fruit;
     private Integer count;
@@ -46,10 +42,10 @@ public class FruitTransaction {
      *     r - return, means someone who have bought the fruits now returns them back
      */
     public enum Activity {
-        BALANCE(BALANCE_OPERATION),
-        SUPPLY(SUPPLY_OPERATION),
-        PURCHASE(PURCHASE_OPERATION),
-        RETURN(RETURN_OPERATION);
+        BALANCE("b"),
+        PURCHASE("p"),
+        RETURN("r"),
+        SUPPLY("s");
 
         private String operation;
 

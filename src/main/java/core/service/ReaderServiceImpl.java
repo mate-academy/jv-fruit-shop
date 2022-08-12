@@ -1,16 +1,20 @@
-package core.dao;
+package core.service;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StorageDaoImpl implements StorageDao {
+public class ReaderServiceImpl implements ReaderService {
+    private String fileName;
+
+    public ReaderServiceImpl(String fileName) {
+        this.fileName = fileName;
+    }
+
     @Override
-    public List<String> readData(String fileName) {
+    public List<String> readFromFile() {
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line = bufferedReader.readLine();
@@ -22,14 +26,5 @@ public class StorageDaoImpl implements StorageDao {
             throw new RuntimeException("Can`t read data from file " + fileName, e);
         }
         return lines;
-    }
-
-    @Override
-    public void writeData(String fileName, String data) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
-            bufferedWriter.write(data);
-        } catch (IOException e) {
-            throw new RuntimeException("Can`t write data to file " + fileName, e);
-        }
     }
 }
