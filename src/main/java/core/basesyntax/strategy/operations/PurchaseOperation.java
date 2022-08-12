@@ -4,10 +4,15 @@ import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.Fruit;
 
 public class PurchaseOperation implements OperationHandler {
+    private FruitsDao fruitsDao;
+
+    public PurchaseOperation(FruitsDao fruitsDao) {
+        this.fruitsDao = fruitsDao;
+    }
+
     @Override
-    public void runOperation(FruitsDao fruitsDao, String fruitName, int quantity) {
+    public void handle(String fruitName, int quantity) {
         Fruit fruit = fruitsDao.getFruit(fruitName);
         fruit.setQuantity(fruit.getQuantity() - quantity);
-        fruitsDao.update(fruit);
     }
 }

@@ -2,21 +2,25 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.CreateReport;
+import core.basesyntax.service.ReportCreator;
 import java.util.List;
 
-public class CreateReportImpl implements CreateReport {
-    private static final String REPORT_TITLE = "fruit,quantity";
+public class ReportCreatorImpl implements ReportCreator {
     private FruitsDao fruitsDao;
 
-    public CreateReportImpl(FruitsDao fruitsDao) {
+    public ReportCreatorImpl(FruitsDao fruitsDao) {
         this.fruitsDao = fruitsDao;
     }
 
     @Override
-    public String get() {
+    public String createHeader(String firstColumn, String secondColumn) {
+        return firstColumn + "," + secondColumn;
+    }
+
+    @Override
+    public String create(String header) {
         List<Fruit> fruits = fruitsDao.getAll();
-        StringBuilder reportBuilder = new StringBuilder(REPORT_TITLE);
+        StringBuilder reportBuilder = new StringBuilder(header);
         for (Fruit fruit : fruits) {
             reportBuilder.append(System.lineSeparator())
                     .append(fruit.getName())

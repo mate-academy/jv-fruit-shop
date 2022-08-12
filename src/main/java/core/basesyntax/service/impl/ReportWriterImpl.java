@@ -7,12 +7,12 @@ import java.nio.file.Files;
 
 public class ReportWriterImpl implements ReportWriter {
     @Override
-    public void writeToFile(String report, String pathname) {
-        File file = new File(pathname);
+    public void writeToFile(String report, String filePath) {
+        File file = new File(filePath);
         try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file", e);
+            throw new RuntimeException("Can't write to file " + filePath, e);
         }
     }
 }

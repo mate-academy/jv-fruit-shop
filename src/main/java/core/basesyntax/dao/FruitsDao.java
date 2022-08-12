@@ -9,6 +9,4 @@ public interface FruitsDao {
     Fruit getFruit(String fruit);
 
     List<Fruit> getAll();
-
-    void update(Fruit fruit);
 }

@@ -1,26 +1,22 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataProcessing;
+import core.basesyntax.service.FruitTransactionsProcessor;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
-public class DataProcessingImpl implements DataProcessing {
-    private FruitsDao fruitsDao;
+public class FruitTransactionsProcessorImpl implements FruitTransactionsProcessor {
     private OperationStrategy operationStrategy;
 
-    public DataProcessingImpl(FruitsDao fruitsDao, OperationStrategy operationStrategy) {
-        this.fruitsDao = fruitsDao;
+    public FruitTransactionsProcessorImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public void run(List<FruitTransaction> fruitTransactions) {
+    public void process(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             operationStrategy.get(fruitTransaction.getOperation())
-                    .runOperation(fruitsDao,
-                            fruitTransaction.getFruit(),
+                    .handle(fruitTransaction.getFruit(),
                             fruitTransaction.getQuantity());
         }
     }

@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private Operation[] operations = Operation.values();
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -48,7 +47,7 @@ public class FruitTransaction {
     }
 
     public FruitTransaction.Operation getOperationByLetter(String activity) {
-        for (Operation operation : operations) {
+        for (Operation operation : Operation.values()) {
             if (operation.getOperation().equals(activity)) {
                 return operation;
             }

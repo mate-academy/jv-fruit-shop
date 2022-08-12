@@ -21,10 +21,4 @@ public class FruitsDaoImpl implements FruitsDao {
     public List<Fruit> getAll() {
         return Storage.fruits;
     }
-
-    @Override
-    public void update(Fruit fruit) {
-        Storage.fruits.remove(fruit);
-        add(fruit);
-    }
 }
