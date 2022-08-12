@@ -10,14 +10,9 @@ public class ParserServiceImpl implements ParserService {
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
     private static final int INDEX_COUNT = 2;
-    private List<String> dataFromFile;
-
-    public ParserServiceImpl(List<String> dataFromFile) {
-        this.dataFromFile = dataFromFile;
-    }
 
     @Override
-    public List<FruitTransaction> parse() {
+    public List<FruitTransaction> parse(List<String> dataFromFile) {
         return dataFromFile.stream()
                 .map(s -> s.split(CHAR_FOR_SPLIT))
                 .map(strings -> new FruitTransaction(Arrays.stream(FruitTransaction

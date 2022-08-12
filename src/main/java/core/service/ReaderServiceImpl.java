@@ -7,14 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
-    private String fileName;
-
-    public ReaderServiceImpl(String fileName) {
-        this.fileName = fileName;
-    }
-
     @Override
-    public List<String> readFromFile() {
+    public List<String> readFromFile(String fileName) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             String line = bufferedReader.readLine();

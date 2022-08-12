@@ -5,14 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterServiceImpl implements WriterService {
-    private String fileName;
-
-    public WriterServiceImpl(String fileName) {
-        this.fileName = fileName;
-    }
-
     @Override
-    public void writeToFile(String report) {
+    public void writeToFile(String fileName, String report) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             bufferedWriter.write(report);
         } catch (IOException e) {

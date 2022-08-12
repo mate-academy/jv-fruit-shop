@@ -25,12 +25,12 @@ public class Main {
     public static void main(String[] args) {
         Storage storage = new StorageImpl();
         activityOperationMap = createHashMap(storage);
-        List<String> dataFromFile = new ReaderServiceImpl(READ_FROM_FILE_NAME).readFromFile();
-        List<FruitTransaction> fruitTransactions = new ParserServiceImpl(dataFromFile).parse();
+        List<String> dataFromFile = new ReaderServiceImpl().readFromFile(READ_FROM_FILE_NAME);
+        List<FruitTransaction> fruitTransactions = new ParserServiceImpl().parse(dataFromFile);
         performOperations(fruitTransactions);
-        String report = new ReportServiceImpl(storage).create();
-        WriterService writerService = new WriterServiceImpl(WRITE_TO_FILE_NAME);
-        writerService.writeToFile(report);
+        String report = new ReportServiceImpl().create(storage.getAllData());
+        WriterService writerService = new WriterServiceImpl();
+        writerService.writeToFile(WRITE_TO_FILE_NAME, report);
     }
 
     private static Map<FruitTransaction.Activity, Operation> createHashMap(Storage storage) {
@@ -47,8 +47,9 @@ public class Main {
     }
 
     private static void performOperations(List<FruitTransaction> fruitTransactions) {
+        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(activityOperationMap);
         fruitTransactions.forEach(fruitTransaction ->
-                new OperationStrategyImpl(activityOperationMap)
+                operationStrategy
                 .get(fruitTransaction.getActivity())
                 .performOperation(fruitTransaction));
     }
