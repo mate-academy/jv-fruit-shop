@@ -7,7 +7,7 @@ r,apple,10
 p,apple,20
 p,banana,5
 s,banana,50
-b,blackberry,80
+s,blackberry,80
 r,blackberry,8
 s,blackberry,18
 p,blackberry,4

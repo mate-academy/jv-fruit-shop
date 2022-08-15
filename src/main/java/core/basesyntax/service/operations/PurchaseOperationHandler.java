@@ -11,12 +11,13 @@ public class PurchaseOperationHandler implements OperationHandler {
     }
 
     @Override
-    public int getQuantity(int quantity) {
-        return -quantity;
-    }
-
-    @Override
     public void process(FruitTransaction transaction) {
+        Integer quantityInStorage = fruitDao.get(transaction.getFruit());
+        if (quantityInStorage == null || quantityInStorage - transaction.getQuantity() < 0) {
+            throw new RuntimeException("Not enough " + transaction.getFruit() + " in shop.");
+        } else {
+            fruitDao.add(transaction.getFruit(), quantityInStorage - transaction.getQuantity());
+        }
 
     }
 }

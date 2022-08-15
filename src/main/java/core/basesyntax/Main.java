@@ -3,14 +3,12 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitService;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -28,6 +26,7 @@ public class Main {
     public static void main(String[] args) {
         final String inputFile = "./src/main/resources/input.txt";
         final String outputFile = "./src/main/resources/output.txt";
+
         FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
@@ -43,17 +42,16 @@ public class Main {
         List<String> dataFromFile = readerService.readFromCsvFile(inputFile);
 
         ParserService parserService = new ParserServiceImpl();
+        List<FruitTransaction> transactionList = parserService.parse(dataFromFile);
 
-        FruitService fruitService = new FruitServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        for (FruitTransaction transaction : transactionList) {
+            operationStrategy.get(transaction.getOperation()).process(transaction);
+        }
 
-
-        fruitService.transactions(fruitDao, parserService.parse(dataFromFile), operationStrategy);
-
-        ReportService report = new ReportServiceImpl();
-        String resultReport = report.createReport(fruitDao);
+        ReportService report = new ReportServiceImpl(fruitDao);
+        String resultReport = report.createReport();
         WriterService writer = new WriterServiceImpl();
         writer.writeToCsvFile(resultReport, outputFile);
     }
-
 }

@@ -5,5 +5,7 @@ import java.util.Map;
 public interface FruitDao {
     void add(String fruitName, Integer fruitQuantity);
 
-    Map<String, Integer> getFromStorage();
+    Integer get(String fruitName);
+
+    Map<String, Integer> getAll();
 }

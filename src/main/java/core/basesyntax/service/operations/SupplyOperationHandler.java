@@ -12,11 +12,11 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void process(FruitTransaction transaction) {
-
-    }
-
-    @Override
-    public int getQuantity(int quantity) {
-        return quantity;
+        Integer quantityInStorage = fruitDao.get(transaction.getFruit());
+        if (quantityInStorage != null) {
+            fruitDao.add(transaction.getFruit(), quantityInStorage + transaction.getQuantity());
+        } else {
+            fruitDao.add(transaction.getFruit(), transaction.getQuantity());
+        }
     }
 }
