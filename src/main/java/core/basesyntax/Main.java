@@ -28,25 +28,26 @@ public class Main {
     public static void main(String[] args) {
         final String inputFile = "./src/main/resources/input.txt";
         final String outputFile = "./src/main/resources/output.txt";
-
+        FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler());
+                new BalanceOperationHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler());
+                new SupplyOperationHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler());
+                new PurchaseOperationHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler());
+                new ReturnOperationHandler(fruitDao));
 
         ReaderService readerService = new ReaderServiceImpl();
         List<String> dataFromFile = readerService.readFromCsvFile(inputFile);
 
         ParserService parserService = new ParserServiceImpl();
-        FruitDao fruitDao = new FruitDaoImpl();
 
         FruitService fruitService = new FruitServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+
+
         fruitService.transactions(fruitDao, parserService.parse(dataFromFile), operationStrategy);
 
         ReportService report = new ReportServiceImpl();

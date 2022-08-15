@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-
+// переробити, щоб брався один елемент або додавався один елемент із списку
     @Override
     public void add(String fruitName, Integer fruitQuantity) {
         Storage.fruits.put(fruitName, fruitQuantity);
