@@ -1,8 +1,7 @@
 package core.basesyntax.service;
 
+import java.util.Map;
+
 public interface ReportCreator {
-    String createHeader(String firstColumn, String secondColumn);
-
-    String create(String header);
-
+    String create(Map<String, Integer> data);
 }

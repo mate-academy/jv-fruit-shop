@@ -12,9 +12,9 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     private static final int FRUIT_QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> get(List<String> inputData) {
-        inputData.remove(TITLE_LINE_INDEX);
-        return inputData.stream()
+    public List<FruitTransaction> get(List<String> data) {
+        data.remove(TITLE_LINE_INDEX);
+        return data.stream()
                 .map(this::getTransaction)
                 .collect(Collectors.toList());
     }

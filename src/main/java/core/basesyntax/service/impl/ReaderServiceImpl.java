@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class ReaderServiceCsvImpl implements ReaderService {
+public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public List<String> read(String filePath) {

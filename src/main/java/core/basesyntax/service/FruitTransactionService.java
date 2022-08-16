@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface FruitTransactionService {
-    List<FruitTransaction> get(List<String> inputData);
+    List<FruitTransaction> get(List<String> data);
 }
