@@ -36,7 +36,8 @@ public class TransactionParserImpl implements TransactionParser {
             case "r":
                 return FruitTransaction.Operation.RETURN;
             default:
-                throw new RuntimeException("Incorrect type of activity in the source file: " + string);
+                throw new RuntimeException("Incorrect type of activity in the source file: "
+                        + string);
         }
     }
 }

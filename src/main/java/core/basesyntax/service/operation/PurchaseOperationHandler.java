@@ -15,8 +15,10 @@ public class PurchaseOperationHandler implements OperationHandler {
         int negativeQuantity = - transaction.getQuantity();
         if ((fruitDao.getQuantity(transaction.getFruit()) - transaction.getQuantity()) >= 0) {
             fruitDao.merge(transaction.getFruit(), negativeQuantity);
-        } else throw new RuntimeException(
-                "Invalid purchase value. Purchase value should be <= "
-                + fruitDao.getQuantity(transaction.getFruit()));
+        } else {
+            throw new RuntimeException(
+                    "Invalid purchase value. Purchase value should be <= "
+                    + fruitDao.getQuantity(transaction.getFruit()));
+        }
     }
 }

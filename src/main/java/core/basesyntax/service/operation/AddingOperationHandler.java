@@ -3,7 +3,7 @@ package core.basesyntax.service.operation;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 
-public class AddingOperationHandler implements OperationHandler{
+public class AddingOperationHandler implements OperationHandler {
     private FruitDao fruitDao;
 
     public AddingOperationHandler(FruitDao fruitDao) {

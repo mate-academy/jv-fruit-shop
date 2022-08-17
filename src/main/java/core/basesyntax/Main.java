@@ -6,25 +6,23 @@ import core.basesyntax.io.ReaderImpl;
 import core.basesyntax.io.ReportWriter;
 import core.basesyntax.io.ReportWriterImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.service.operation.AddingOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.strategy.OperationStratategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        String pathToInputFile = "src/main/resources/InputFile.csv";
-        Reader reader = new ReaderImpl();
-        List<String> stringList = reader.readFromFile(pathToInputFile);
-        TransactionParser transactionParser = new TransactionParserImpl();
-        List<FruitTransaction> transactions = transactionParser.getTransactions(stringList);
 
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
         handlerMap.put(FruitTransaction.Operation.BALANCE,
@@ -38,6 +36,12 @@ public class Main {
 
         OperationStratategy strategy = new OperationStrategyImpl(handlerMap);
         FruitShopService fruitShopService = new FruitShopServiceImpl(strategy);
+
+        String pathToInputFile = "src/main/resources/InputFile.csv";
+        Reader reader = new ReaderImpl();
+        List<String> stringList = reader.readFromFile(pathToInputFile);
+        TransactionParser transactionParser = new TransactionParserImpl();
+        List<FruitTransaction> transactions = transactionParser.getTransactions(stringList);
         fruitShopService.process(transactions);
 
         ReportCreator reportCreator = new ReportCreatorImpl();
