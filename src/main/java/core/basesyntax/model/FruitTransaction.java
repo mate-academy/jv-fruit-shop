@@ -5,6 +5,15 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
+    public FruitTransaction() {
+    }
+
     public Operation getOperation() {
         return operation;
     }
@@ -35,14 +44,14 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String action;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String action) {
+            this.action = action;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getAction() {
+            return action;
         }
     }
 }
