@@ -1,4 +1,7 @@
-package service;
+package services.transaction.model;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProductTransaction {
     private Operation operation;
@@ -29,14 +32,23 @@ public class ProductTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private static final Map<String, Operation> SHORT_FORM = new HashMap<>();
+
+        static {
+            for (Operation e : values()) {
+                SHORT_FORM.put(e.operation, e);
+            }
+        }
+
+        private final String operation;
 
         Operation(String operation) {
             this.operation = operation;
         }
 
-        public String getOperation() {
-            return operation;
+        public static Operation getOperation(String value) {
+            return SHORT_FORM.get(value);
         }
+
     }
 }

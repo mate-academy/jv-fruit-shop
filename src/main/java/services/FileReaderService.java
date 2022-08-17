@@ -1,7 +1,7 @@
-package service;
+package services;
 
 import java.util.List;
 
-public interface ReaderService {
+public interface FileReaderService {
     List<String> readFromFile(String fromFile);
 }
