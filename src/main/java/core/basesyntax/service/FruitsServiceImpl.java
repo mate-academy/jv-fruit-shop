@@ -1,43 +1,33 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.service.csvfileservice.ReaderService;
-import core.basesyntax.service.csvfileservice.WriterService;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
+import java.util.List;
 import java.util.Map;
 
 public class FruitsServiceImpl implements FruitsService {
-    private FruitsDao fruitsDao;
+    private static final String TITLE_FOR_REPORT = "fruit,quantity";
+    private FruitDao fruitDao;
     private OperationStrategy operationStrategy;
-    private ReaderService readerService;
-    private WriterService writerService;
 
-    public FruitsServiceImpl(FruitsDao fruitsDao,
-                             OperationStrategy operationStrategy,
-                             ReaderService readerService,
-                             WriterService writerService) {
-        this.fruitsDao = fruitsDao;
+    public FruitsServiceImpl(FruitDao fruitDao,
+                             OperationStrategy operationStrategy) {
+        this.fruitDao = fruitDao;
         this.operationStrategy = operationStrategy;
-        this.readerService = readerService;
-        this.writerService = writerService;
     }
 
     @Override
-    public void generateFruitsReport() {
-        makeFruitsDailyUpdate();
-        Map<String, Integer> fruits = fruitsDao.getStorageData();
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("fruit,quantity").append(System.lineSeparator());
+    public String generateFruitsReport(List<FruitTransaction> fruitTransactionList) {
+        fruitTransactionList.forEach(f -> operationStrategy.getOperation(f.getOperation())
+                        .updateFruitsQuantity(f));
+        Map<String, Integer> fruits = fruitDao.getStorageData();
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append(TITLE_FOR_REPORT).append(System.lineSeparator());
         for (Map.Entry<String, Integer> fruit : fruits.entrySet()) {
-            stringBuilder.append(fruit.getKey()).append(",").append(fruit.getValue())
+            reportBuilder.append(fruit.getKey()).append(",").append(fruit.getValue())
                     .append(System.lineSeparator());
         }
-        writerService.writeDataToCsv(stringBuilder.toString());
-    }
-
-    private void makeFruitsDailyUpdate() {
-        readerService.getFruitTransactionsFromCsv()
-                .forEach(f -> operationStrategy.getOperation(f.getOperation())
-                        .updateFruitsQuantity(f));
+        return reportBuilder.toString();
     }
 }

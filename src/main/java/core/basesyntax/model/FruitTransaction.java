@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -29,20 +31,26 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    public Operation getOperationByFirstLetter(String firstLetter) {
+        return Arrays.stream(Operation.values())
+                .filter(o -> o.getFirstLetter().equals(firstLetter))
+                .findFirst().get();
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String firstLetter;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String firstLetter) {
+            this.firstLetter = firstLetter;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getFirstLetter() {
+            return firstLetter;
         }
     }
 }
