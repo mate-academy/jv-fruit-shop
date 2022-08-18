@@ -1,6 +1,6 @@
 package core.operations;
 
-import core.FruitTransaction;
+import core.model.FruitTransaction;
 import core.storage.Storage;
 
 public class SupplyOperation implements Operation {

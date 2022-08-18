@@ -1,5 +1,6 @@
-package core.service;
+package core.service.impl;
 
+import core.service.ReportService;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -12,6 +13,6 @@ public class ReportServiceImpl implements ReportService {
             .stream()
             .map(stringIntegerEntry -> stringIntegerEntry.getKey() + CHAR_FOR_SPLIT
                     + stringIntegerEntry.getValue())
-            .collect(Collectors.joining(System.getProperty("line.separator")));
+            .collect(Collectors.joining(System.lineSeparator()));
     }
 }

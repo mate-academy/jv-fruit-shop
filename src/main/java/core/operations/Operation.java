@@ -1,6 +1,6 @@
 package core.operations;
 
-import core.FruitTransaction;
+import core.model.FruitTransaction;
 
 public interface Operation {
     void performOperation(FruitTransaction fruitTransaction);

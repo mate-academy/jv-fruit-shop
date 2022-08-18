@@ -1,6 +1,7 @@
-package core.service;
+package core.service.impl;
 
-import core.FruitTransaction;
+import core.model.FruitTransaction;
+import core.service.ParserService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,6 +1,6 @@
 package core.strategy;
 
-import core.FruitTransaction;
+import core.model.FruitTransaction;
 import core.operations.Operation;
 
 public interface OperationStrategy {

@@ -1,17 +1,19 @@
 package core;
 
+import core.model.FruitTransaction;
 import core.operations.BalanceOperation;
 import core.operations.Operation;
 import core.operations.PurchaseOperation;
 import core.operations.ReturnOperation;
 import core.operations.SupplyOperation;
-import core.service.ParserServiceImpl;
-import core.service.ReaderServiceImpl;
-import core.service.ReportServiceImpl;
 import core.service.WriterService;
-import core.service.WriterServiceImpl;
+import core.service.impl.ParserServiceImpl;
+import core.service.impl.ReaderServiceImpl;
+import core.service.impl.ReportServiceImpl;
+import core.service.impl.WriterServiceImpl;
 import core.storage.Storage;
 import core.storage.StorageImpl;
+import core.strategy.OperationStrategy;
 import core.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +49,7 @@ public class Main {
     }
 
     private static void performOperations(List<FruitTransaction> fruitTransactions) {
-        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(activityOperationMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(activityOperationMap);
         fruitTransactions.forEach(fruitTransaction ->
                 operationStrategy
                 .get(fruitTransaction.getActivity())

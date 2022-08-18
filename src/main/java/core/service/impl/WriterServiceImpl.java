@@ -1,5 +1,6 @@
-package core.service;
+package core.service.impl;
 
+import core.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

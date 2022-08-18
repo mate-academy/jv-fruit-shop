@@ -1,6 +1,6 @@
 package core.service;
 
-import core.FruitTransaction;
+import core.model.FruitTransaction;
 import java.util.List;
 
 public interface ParserService {

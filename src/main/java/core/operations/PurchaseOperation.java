@@ -1,6 +1,6 @@
 package core.operations;
 
-import core.FruitTransaction;
+import core.model.FruitTransaction;
 import core.storage.Storage;
 
 public class PurchaseOperation implements Operation {
@@ -12,6 +12,6 @@ public class PurchaseOperation implements Operation {
 
     @Override
     public void performOperation(FruitTransaction fruitTransaction) {
-        storage.removeFromStorage(fruitTransaction.getFruit(), fruitTransaction.getCount());
+        storage.remove(fruitTransaction.getFruit(), fruitTransaction.getCount());
     }
 }

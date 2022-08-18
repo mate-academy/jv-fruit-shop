@@ -1,5 +1,6 @@
-package core.service;
+package core.service.impl;
 
+import core.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
