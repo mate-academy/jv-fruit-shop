@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -44,14 +46,23 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String action;
+        private String firstLetter;
 
         Operation(String action) {
-            this.action = action;
+            this.firstLetter = action;
         }
 
-        public String getAction() {
-            return action;
+        public String getFirstLetter() {
+            return firstLetter;
+        }
+
+        public FruitTransaction.Operation getOperationByFirstLetter(String string) {
+            Operation[] operations = Operation.values();
+            return Arrays.stream(operations)
+                    .filter(v -> v.getFirstLetter().equals(string))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException(
+                            "Incorrect action type: \"" + string + "\" in the source file"));
         }
     }
 }

@@ -9,13 +9,13 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String createReport(Map<String, Integer> dataFromStorage) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(HEADER);
-        dataFromStorage.forEach((key, value) -> stringBuilder
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append(HEADER);
+        dataFromStorage.forEach((key, value) -> reportBuilder
                 .append(System.lineSeparator())
                 .append(key)
                 .append(DELIMITER)
                 .append(value));
-        return stringBuilder.toString();
+        return reportBuilder.toString();
     }
 }

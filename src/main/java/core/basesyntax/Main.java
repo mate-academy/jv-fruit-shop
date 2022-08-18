@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.io.Reader;
-import core.basesyntax.io.ReaderImpl;
+import core.basesyntax.io.FileReader;
+import core.basesyntax.io.FileReaderImpl;
 import core.basesyntax.io.ReportWriter;
 import core.basesyntax.io.ReportWriterImpl;
 import core.basesyntax.model.FruitTransaction;
@@ -23,7 +23,6 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
         handlerMap.put(FruitTransaction.Operation.BALANCE,
                 new AddingOperationHandler(new FruitDaoImpl()));
@@ -33,20 +32,16 @@ public class Main {
                 new AddingOperationHandler(new FruitDaoImpl()));
         handlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler(new FruitDaoImpl()));
-
         OperationStratategy strategy = new OperationStrategyImpl(handlerMap);
         FruitShopService fruitShopService = new FruitShopServiceImpl(strategy);
-
         String pathToInputFile = "src/main/resources/InputFile.csv";
-        Reader reader = new ReaderImpl();
-        List<String> stringList = reader.readFromFile(pathToInputFile);
+        FileReader fileReader = new FileReaderImpl();
+        List<String> stringList = fileReader.readFromFile(pathToInputFile);
         TransactionParser transactionParser = new TransactionParserImpl();
         List<FruitTransaction> transactions = transactionParser.getTransactions(stringList);
         fruitShopService.process(transactions);
-
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport(new FruitDaoImpl().getAll());
-
         String pathToReport = "src/main/resources/report.csv";
         ReportWriter reportWriter = new ReportWriterImpl();
         reportWriter.writeToFile(report, pathToReport);

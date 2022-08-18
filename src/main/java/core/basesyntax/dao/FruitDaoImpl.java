@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public int merge(String fruit, int quantity) {
+    public int add(String fruit, int quantity) {
         return Storage.fruitsQuantity
                 .merge(fruit, quantity, Integer::sum);
     }

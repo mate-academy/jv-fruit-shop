@@ -7,37 +7,25 @@ import java.util.stream.Collectors;
 
 public class TransactionParserImpl implements TransactionParser {
     private static final int LINES_TO_SKIP = 1;
+    private static final int ACTION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> getTransactions(List<String> transactions) {
         return transactions.stream()
                 .skip(LINES_TO_SKIP)
-                .map(this::getFromCsvRow)
+                .map(this::getTransaction)
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction getFromCsvRow(String transaction) {
+    private FruitTransaction getTransaction(String line) {
         FruitTransaction fruitTransaction = new FruitTransaction();
-        String[] strings = transaction.split(",");
-        fruitTransaction.setOperation(operationRecognaizer(strings[0]));
-        fruitTransaction.setFruit(strings[1]);
-        fruitTransaction.setQuantity(Integer.parseInt(strings[2]));
+        String[] strings = line.split(",");
+        fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE
+                .getOperationByFirstLetter(strings[ACTION_INDEX]));
+        fruitTransaction.setFruit(strings[FRUIT_INDEX]);
+        fruitTransaction.setQuantity(Integer.parseInt(strings[QUANTITY_INDEX]));
         return fruitTransaction;
-    }
-
-    private FruitTransaction.Operation operationRecognaizer(String string) {
-        switch (string) {
-            case "b":
-                return FruitTransaction.Operation.BALANCE;
-            case "s":
-                return FruitTransaction.Operation.SUPPLY;
-            case "p":
-                return FruitTransaction.Operation.PURCHASE;
-            case "r":
-                return FruitTransaction.Operation.RETURN;
-            default:
-                throw new RuntimeException("Incorrect type of activity in the source file: "
-                        + string);
-        }
     }
 }

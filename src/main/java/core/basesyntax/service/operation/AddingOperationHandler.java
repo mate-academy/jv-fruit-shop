@@ -11,7 +11,7 @@ public class AddingOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void processOperation(FruitTransaction transaction) {
-        fruitDao.merge(transaction.getFruit(), transaction.getQuantity());
+    public void handle(FruitTransaction transaction) {
+        fruitDao.add(transaction.getFruit(), transaction.getQuantity());
     }
 }
