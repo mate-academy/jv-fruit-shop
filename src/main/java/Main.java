@@ -19,6 +19,8 @@ import services.operation.ReturnOperation;
 import services.operation.SupplyOperation;
 import services.transaction.ProductTransactionMapper;
 import services.transaction.ProductTransactionMapperImpl;
+import services.transaction.TransactionService;
+import services.transaction.TransactionServiceImpl;
 import services.transaction.model.ProductTransaction;
 
 public class Main {
@@ -36,9 +38,10 @@ public class Main {
         ProductTransactionMapper mapper = new ProductTransactionMapperImpl();
         WriterService writer = new WriterServiceImpl();
         ReportService report = new ReportServiceImpl();
+        TransactionService trService = new TransactionServiceImpl(strategy);
 
         FruitService fruitService =
-                new FruitServiceImpl(reader, writer, mapper, strategy, productDao, report);
+                new FruitServiceImpl(reader, writer, mapper, productDao, report, trService);
 
         String fromFile = "src/main/java/data.csv";
         String toFile = "report.csv";

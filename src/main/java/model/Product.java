@@ -27,15 +27,15 @@ public class Product {
     }
 
     @Override
-    public boolean equals(Object product) {
-        if (product == this) {
+    public boolean equals(Object object) {
+        if (object == this) {
             return true;
         }
-        if (product == null) {
+        if (object == null) {
             return false;
         }
-        if (product.getClass().equals(Product.class)) {
-            Product product1 = (Product) product;
+        if (object.getClass().equals(Product.class)) {
+            Product product1 = (Product) object;
             return this.name.equals(product1.name) && this.count == product1.count;
         }
         return false;
