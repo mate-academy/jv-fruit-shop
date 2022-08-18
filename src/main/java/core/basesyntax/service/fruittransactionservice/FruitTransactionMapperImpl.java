@@ -4,19 +4,19 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FruitTransactionOperation implements TransactionOperation {
+public class FruitTransactionMapperImpl implements FruitTransactionMapper {
     private static final int INDEX_OF_OPERATION_TYPE = 0;
     private static final int INDEX_OF_FRUIT_TYPE = 1;
     private static final int INDEX_OF_FRUIT_QUANTITY = 2;
 
     @Override
-    public List<FruitTransaction> convertDataToFruitTransaction(List<String> lines) {
+    public List<FruitTransaction> getFruitTransactions(List<String> lines) {
         return lines.stream()
                 .skip(1)
-                .map(this::convertLineToFruitTransaction).collect(Collectors.toList());
+                .map(this::getFruitTransaction).collect(Collectors.toList());
     }
 
-    private FruitTransaction convertLineToFruitTransaction(String line) {
+    private FruitTransaction getFruitTransaction(String line) {
         String[] fields = line.split(",");
         FruitTransaction fruitTransaction = new FruitTransaction();
         FruitTransaction.Operation operation = fruitTransaction
