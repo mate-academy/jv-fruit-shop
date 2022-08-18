@@ -2,9 +2,9 @@ package services;
 
 import dao.ProductDao;
 import java.util.List;
+import services.transaction.ProductTransactionMapper;
 import services.transaction.TransactionService;
 import services.transaction.TransactionServiceImpl;
-import services.transaction.ProductTransactionMapper;
 import services.transaction.model.ProductTransaction;
 
 public class FruitServiceImpl implements FruitService {
@@ -18,7 +18,10 @@ public class FruitServiceImpl implements FruitService {
     private TransactionService transactionService;
     private ReportService reportService;
 
-    public FruitServiceImpl(FileReaderService reader, WriterService writerService, ProductTransactionMapper unboxer, OperationStrategy strategy, ProductDao productDao, ReportService reportService) {
+    public FruitServiceImpl(FileReaderService reader, WriterService writerService,
+                            ProductTransactionMapper unboxer,
+                            OperationStrategy strategy, ProductDao productDao,
+                            ReportService reportService) {
         this.reader = reader;
         this.writerService = writerService;
         this.unboxer = unboxer;

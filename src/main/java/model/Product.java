@@ -1,9 +1,9 @@
 package model;
 
 public class Product {
+    private static final String FORMAT = "%s,%s";
     private String name;
     private int count;
-    private static final String FORMAT = "%s,%s";
 
     public Product(String name, int count) {
         this.count = count;
