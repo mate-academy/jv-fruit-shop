@@ -32,23 +32,21 @@ public class ProductTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private static final Map<String, Operation> SHORT_FORM = new HashMap<>();
+        private static final Map<String, Operation> OPERATION_MAP = new HashMap<>();
+        private final String operation;
 
         static {
             for (Operation e : values()) {
-                SHORT_FORM.put(e.operation, e);
+                OPERATION_MAP.put(e.operation, e);
             }
         }
-
-        private final String operation;
 
         Operation(String operation) {
             this.operation = operation;
         }
 
         public static Operation getOperation(String value) {
-            return SHORT_FORM.get(value);
+            return OPERATION_MAP.get(value);
         }
-
     }
 }

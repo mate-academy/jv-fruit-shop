@@ -12,7 +12,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void processing(List<ProductTransaction> productTransactions) {
+    public void process(List<ProductTransaction> productTransactions) {
         productTransactions.forEach(transaction ->
                 strategy.get(transaction.getOperation()).handle(transaction));
     }

@@ -15,7 +15,6 @@ public class ReturnOperation implements OperationHandler {
     public void handle(ProductTransaction transaction) {
         int newQuantity = transaction.getQuantity()
                 + productDao.get(transaction.getProductName()).getCount();
-
         productDao.update(new Product(transaction.getProductName(), newQuantity));
     }
 }

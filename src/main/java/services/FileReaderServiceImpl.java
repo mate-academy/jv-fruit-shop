@@ -6,15 +6,14 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
-
     @Override
     public List<String> readFromFile(String filePath) {
-        List<String> fileData;
+        List<String> lines;
         try {
-            fileData = Files.readAllLines(Path.of(filePath));
+            lines = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + filePath, e);
         }
-        return fileData;
+        return lines;
     }
 }

@@ -6,7 +6,6 @@ import java.util.Objects;
 import model.Product;
 
 public class ProductDaoImpl implements ProductDao {
-
     @Override
     public Product get(String productName) {
         return Storage.products.stream()
