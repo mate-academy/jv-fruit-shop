@@ -13,7 +13,7 @@ public class FruitTransactionProcessorImpl implements FruitTransactionProcessor 
 
     @Override
     public void makeDailyFruitsUpdate(List<FruitTransaction> fruitTransactionList) {
-        fruitTransactionList.forEach(f -> operationStrategy.getOperation(f.getOperation())
-                .handle(f));
+        fruitTransactionList.forEach(t -> operationStrategy.getOperation(t.getOperation())
+                .handle(t));
     }
 }

@@ -1,15 +1,9 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitDao;
 import java.util.Map;
 
 public class FruitsServiceImpl implements FruitsService {
     private static final String TITLE_FOR_REPORT = "fruit,quantity";
-    private FruitDao fruitDao;
-
-    public FruitsServiceImpl(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
-    }
 
     @Override
     public String generateFruitsReport(Map<String, Integer> fruits) {

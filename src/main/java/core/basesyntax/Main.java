@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String NAME_OF_FILE_TO_READ = "src/main/resources/input_data.csv";
-    private static final String NAME_OF_FILE_TO_WRITE = "src/main/resources/output_data.csv";
+    private static final String FILE_TO_READ = "src/main/resources/input_data.csv";
+    private static final String FILE_TO_WRITE = "src/main/resources/output_data.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, FruitOperationHandler> operationsMap = new HashMap<>();
@@ -39,18 +39,19 @@ public class Main {
         operationsMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyFruitOperationHandler(fruitDao));
 
+        FileReaderServiceImpl fileReaderService = new FileReaderServiceImpl();
         FruitTransactionMapper fruitTransactionMapper = new FruitTransactionMapperImpl();
         List<FruitTransaction> fruitTransactionList = fruitTransactionMapper
-                .getFruitTransactions(new FileReaderServiceImpl()
-                        .readFromFile(NAME_OF_FILE_TO_READ));
+                .getFruitTransactions(fileReaderService.readFromFile(FILE_TO_READ));
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
         FruitTransactionProcessor fruitTransactionProcessor =
                 new FruitTransactionProcessorImpl(operationStrategy);
         fruitTransactionProcessor.makeDailyFruitsUpdate(fruitTransactionList);
 
-        FruitsService fruitsService = new FruitsServiceImpl(fruitDao);
+        FruitsService fruitsService = new FruitsServiceImpl();
         String fruitsReport = fruitsService.generateFruitsReport(FruitsStorage.getFruits());
-        new FileWriterServiceImpl().writeToFile(fruitsReport, NAME_OF_FILE_TO_WRITE);
+        FileWriterServiceImpl fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.writeToFile(fruitsReport, FILE_TO_WRITE);
     }
 }
