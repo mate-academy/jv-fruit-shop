@@ -43,12 +43,10 @@ public class Main {
         FileReaderServiceImpl fileReaderService = new FileReaderServiceImpl();
         List<FruitTransaction> fruitTransactionList = fruitTransactionMapper
                 .getFruitTransactions(fileReaderService.readFromFile(FILE_TO_READ));
-
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
         FruitTransactionProcessor fruitTransactionProcessor =
                 new FruitTransactionProcessorImpl(operationStrategy);
         fruitTransactionProcessor.makeDailyFruitsUpdate(fruitTransactionList);
-
         FruitsService fruitsService = new FruitsServiceImpl();
         String fruitsReport = fruitsService.generateFruitsReport(FruitsStorage.getFruits());
         FileWriterServiceImpl fileWriterService = new FileWriterServiceImpl();
