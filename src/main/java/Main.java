@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import services.FileReaderService;
 import services.FileReaderServiceImpl;
+import services.FileWriterService;
+import services.FileWriterServiceImpl;
 import services.FruitService;
 import services.FruitServiceImpl;
 import services.OperationStrategy;
 import services.OperationStrategyImpl;
 import services.ReportService;
 import services.ReportServiceImpl;
-import services.WriterService;
-import services.WriterServiceImpl;
 import services.operation.BalanceOperation;
 import services.operation.OperationHandler;
 import services.operation.PurchaseOperation;
@@ -36,7 +36,7 @@ public class Main {
         OperationStrategy strategy = new OperationStrategyImpl(operationMap);
         FileReaderService reader = new FileReaderServiceImpl();
         ProductTransactionMapper mapper = new ProductTransactionMapperImpl();
-        WriterService writer = new WriterServiceImpl();
+        FileWriterService writer = new FileWriterServiceImpl();
         ReportService report = new ReportServiceImpl();
         TransactionService trService = new TransactionServiceImpl(strategy);
 

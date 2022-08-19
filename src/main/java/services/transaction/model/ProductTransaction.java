@@ -33,16 +33,16 @@ public class ProductTransaction {
         RETURN("r");
 
         private static final Map<String, Operation> OPERATION_MAP = new HashMap<>();
-        private final String operation;
+        private final String firstLetter;
 
         static {
             for (Operation e : values()) {
-                OPERATION_MAP.put(e.operation, e);
+                OPERATION_MAP.put(e.firstLetter, e);
             }
         }
 
         Operation(String operation) {
-            this.operation = operation;
+            this.firstLetter = operation;
         }
 
         public static Operation getOperation(String value) {

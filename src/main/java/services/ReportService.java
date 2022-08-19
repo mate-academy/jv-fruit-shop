@@ -4,5 +4,5 @@ import java.util.List;
 import model.Product;
 
 public interface ReportService {
-    String report(List<Product> products);
+    String createReport(List<Product> products);
 }

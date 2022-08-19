@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriterServiceImpl implements WriterService {
+public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeToFile(String toFile, String report) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFile))) {
