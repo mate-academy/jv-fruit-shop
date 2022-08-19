@@ -28,7 +28,6 @@ public class Mane {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-
         Map<FruitTransaction.Operation, FruitOperationHandler> operationMap = new HashMap<>();
         operationMap.put(FruitTransaction.Operation.BALANCE, new FruitBalance(fruitDao));
         operationMap.put(FruitTransaction.Operation.SUPPLY, new FruitSupply(fruitDao));

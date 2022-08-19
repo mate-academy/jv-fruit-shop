@@ -19,7 +19,6 @@ public class FruitTransaction {
         return this.quantity;
     }
 
-
     public void setOperation(Operation operation) {
         this.operation = operation;
     }
@@ -44,7 +43,7 @@ public class FruitTransaction {
             this.firstLetter = operation;
         }
 
-        public Operation getOperationByLetter(String operation){
+        public Operation getOperationByLetter(String operation) {
             return Arrays.stream(Operation.values())
                     .filter(o -> o.getOperation().equals(operation))
                     .findAny()
