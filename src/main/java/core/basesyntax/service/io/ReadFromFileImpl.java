@@ -9,16 +9,16 @@ import java.util.List;
 public class ReadFromFileImpl implements ReadFromFile {
     @Override
     public List<String> readeFromFile(String pathToFile) {
-        List<String> list = new ArrayList<>();
+        List<String> lists = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToFile))) {
             String data = bufferedReader.readLine();
             while (data != null) {
-                list.add(data);
+                lists.add(data);
                 data = bufferedReader.readLine();
             }
         } catch (IOException e) {
             throw new RuntimeException("Can not read from file: " + pathToFile, e);
         }
-        return list;
+        return lists;
     }
 }

@@ -19,15 +19,9 @@ public class FruitTransaction {
         return this.quantity;
     }
 
+
     public void setOperation(Operation operation) {
         this.operation = operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = Arrays.stream(Operation.values())
-                .filter(o -> o.getOperation().equals(operation))
-                .findAny()
-                .get();
     }
 
     public void setFruit(String fruit) {
@@ -44,14 +38,22 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String firstLetter;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.firstLetter = operation;
         }
 
-        public String getOperation() {
-            return operation;
+        public Operation getOperationByLetter(String operation){
+            return Arrays.stream(Operation.values())
+                    .filter(o -> o.getOperation().equals(operation))
+                    .findAny()
+                    .orElseThrow(() ->
+                            new RuntimeException("Could not find this operation: " + operation));
+        }
+
+        private String getOperation() {
+            return firstLetter;
         }
     }
 }
