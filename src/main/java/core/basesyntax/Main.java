@@ -35,7 +35,7 @@ public class Main {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        FileReader fileReader = new FileReaderImpl();
+        final FileReader fileReader = new FileReaderImpl();
         handlerMap.put(FruitTransaction.Operation.BALANCE, new AddOperation(fruitDao));
         handlerMap.put(FruitTransaction.Operation.SUPPLY, new AddOperation(fruitDao));
         handlerMap.put(FruitTransaction.Operation.PURCHASE, new SubtractOperation(fruitDao));
