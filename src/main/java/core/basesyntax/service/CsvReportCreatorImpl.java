@@ -3,11 +3,11 @@ package core.basesyntax.service;
 import core.basesyntax.dao.FruitDao;
 import java.util.stream.Collectors;
 
-public class CsvReportCreationImpl implements ReportCreation {
+public class CsvReportCreatorImpl implements ReportCreator {
     private static final String HEADER = "fruit,quantity";
     private final FruitDao fruitDao;
 
-    public CsvReportCreationImpl(FruitDao fruitDao) {
+    public CsvReportCreatorImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
