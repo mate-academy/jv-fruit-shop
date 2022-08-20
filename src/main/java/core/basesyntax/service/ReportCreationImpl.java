@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitShopDao;
-
 import java.util.stream.Collectors;
 
 public class ReportCreationImpl implements ReportCreation {

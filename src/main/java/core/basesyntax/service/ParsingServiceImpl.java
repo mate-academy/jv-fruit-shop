@@ -9,7 +9,6 @@ public class ParsingServiceImpl implements ParsingService {
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
-
     @Override
     public List<FruitTransaction> getFruitTransactions(List<String> lines) {
         return lines.stream()

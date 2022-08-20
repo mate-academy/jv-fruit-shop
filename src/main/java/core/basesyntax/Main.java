@@ -1,14 +1,25 @@
 package core.basesyntax;
 
+import static java.io.File.separator;
 import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.*;
+import core.basesyntax.service.AddOperation;
+import core.basesyntax.service.FileReadingService;
+import core.basesyntax.service.FileReadingServiceImpl;
+import core.basesyntax.service.FileWritingServiceImpl;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.ParsingService;
+import core.basesyntax.service.ParsingServiceImpl;
+import core.basesyntax.service.ReportCreation;
+import core.basesyntax.service.ReportCreationImpl;
+import core.basesyntax.service.SubtractOperation;
+import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.TransactionServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static java.io.File.separator;
 
 public class Main {
     private static final String PATH_TO_INPUT_FILE = "src"
