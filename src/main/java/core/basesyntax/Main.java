@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import static java.io.File.separator;
+
 import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
