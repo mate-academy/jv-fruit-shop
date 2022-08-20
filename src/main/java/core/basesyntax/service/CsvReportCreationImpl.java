@@ -1,19 +1,19 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitShopDao;
+import core.basesyntax.dao.FruitDao;
 import java.util.stream.Collectors;
 
-public class ReportCreationImpl implements ReportCreation {
+public class CsvReportCreationImpl implements ReportCreation {
     private static final String HEADER = "fruit,quantity";
-    private final FruitShopDao fruitShopDao;
+    private final FruitDao fruitDao;
 
-    public ReportCreationImpl(FruitShopDao fruitShopDao) {
-        this.fruitShopDao = fruitShopDao;
+    public CsvReportCreationImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
     public String create() {
-        return HEADER + fruitShopDao.getAll().entrySet().stream()
+        return HEADER + fruitDao.getAll().entrySet().stream()
                 .map(f -> System.lineSeparator()
                         + f.getKey()
                         + ","

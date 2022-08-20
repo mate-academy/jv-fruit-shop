@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import java.util.Map;
 
-public interface FruitShopDao {
+public interface FruitDao {
     void put(String fruit, Integer quantity);
 
     Integer get(String fruit);

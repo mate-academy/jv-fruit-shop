@@ -1,18 +1,18 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitShopDao;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 
 public class AddOperation implements OperationHandler {
-    private final FruitShopDao fruitShopDao;
+    private final FruitDao fruitDao;
 
-    public AddOperation(FruitShopDao fruitShopDao) {
-        this.fruitShopDao = fruitShopDao;
+    public AddOperation(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        fruitShopDao.getAll().merge(
+        fruitDao.getAll().merge(
                 fruitTransaction.getFruit(),
                 fruitTransaction.getQuantity(),
                 Integer::sum);
