@@ -12,23 +12,22 @@ import core.basesyntax.service.FileReaderImpl;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FileWriterImpl;
 import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.SubtractOperation;
 import core.basesyntax.service.ParsingService;
 import core.basesyntax.service.ReportCreation;
+import core.basesyntax.service.SubtractOperation;
 import core.basesyntax.service.TransactionParsingServiceImpl;
-import core.basesyntax.service.TransactionServiceImpl;
 import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.TransactionServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String PATH_TO_INPUT_FILE = "src"
+    private static final String PATH_INPUT_FILE = "src"
             + separator + "main"
             + separator + "resources"
             + separator + "InputFile.csv";
-    private static final String PATH_TO_REPORT_FILE = "src"
+    private static final String PATH_REPORT_FILE = "src"
             + separator + "main"
             + separator + "resources"
             + separator + "ReportFile.csv";
@@ -37,7 +36,6 @@ public class Main {
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
         FileReader fileReader = new FileReaderImpl();
-        List<String> lines = fileReader.readFromFile(PATH_TO_INPUT_FILE);
         handlerMap.put(FruitTransaction.Operation.BALANCE, new AddOperation(fruitDao));
         handlerMap.put(FruitTransaction.Operation.SUPPLY, new AddOperation(fruitDao));
         handlerMap.put(FruitTransaction.Operation.PURCHASE, new SubtractOperation(fruitDao));
@@ -45,9 +43,9 @@ public class Main {
         ParsingService parsingService = new TransactionParsingServiceImpl();
         TransactionService transactionService =
                 new TransactionServiceImpl(new OperationStrategyImpl(handlerMap));
-        transactionService.process(parsingService.parse(lines));
+        transactionService.process(parsingService.parse(fileReader.readFromFile(PATH_INPUT_FILE)));
         ReportCreation reportCreation = new CsvReportCreationImpl(fruitDao);
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeToFile(PATH_TO_REPORT_FILE, reportCreation.create());
+        fileWriter.writeToFile(PATH_REPORT_FILE, reportCreation.create());
     }
 }
