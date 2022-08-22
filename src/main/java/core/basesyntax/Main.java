@@ -5,7 +5,6 @@ import core.basesyntax.dao.DaoFromFileStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.servce.Calculations;
 import core.basesyntax.storage.filestorage.FileStorage;
-
 import java.util.Map;
 
 public class Main {

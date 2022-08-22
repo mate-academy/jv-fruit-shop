@@ -4,7 +4,6 @@ import core.basesyntax.dao.Dao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitMovement;
 import core.basesyntax.model.MovementType;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

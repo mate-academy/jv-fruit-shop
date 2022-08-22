@@ -7,12 +7,12 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitMovement;
 import core.basesyntax.model.MovementType;
 import core.basesyntax.storage.DataBase;
-
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,6 +35,7 @@ public class FileStorage extends DataBase {
     }
 
     {
+        movementOfFruits = new ArrayList<>();
         init();
     }
 
@@ -73,16 +74,17 @@ public class FileStorage extends DataBase {
             Fruit fruit = new Fruit(record[FRUIT_NAME]);
             MovementType type = getType(record[TYPE]);
             int value = Integer.parseInt(record[FRUIT_VALUE]);
-            movementOfFruits.add(new FruitMovement(fruit, type, value));
+            FruitMovement fruitMovement = new FruitMovement(fruit, type, value);
+            movementOfFruits.add(fruitMovement);
         }
     }
 
     private static List<String[]> readCsvFile() {
-        try(CSVReader csvReader = new CSVReaderBuilder(new FileReader(FileStorage.FILE_NAME))
+        try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(FileStorage.FILE_NAME))
                 .withSkipLines(1)
-                .build();) {
+                .build()) {
             return csvReader.readAll();
-        }  catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new RuntimeException("File not found: " + FILE_NAME, e);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -110,8 +112,8 @@ public class FileStorage extends DataBase {
             case "r":
                 return MovementType.RETURN;
             default:
-                throw new RuntimeException("The file contains wrong data." +
-                        " First symbol can only be 'b','s','p' or 'r'");
+                throw new RuntimeException("The file contains wrong data."
+                        + " First symbol can only be 'b','s','p' or 'r'");
         }
     }
 }

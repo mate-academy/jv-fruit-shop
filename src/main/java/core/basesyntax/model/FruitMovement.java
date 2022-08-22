@@ -22,6 +22,4 @@ public final class FruitMovement {
     public int getAmount() {
         return amount;
     }
-
-
 }

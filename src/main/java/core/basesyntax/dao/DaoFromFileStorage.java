@@ -3,11 +3,10 @@ package core.basesyntax.dao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitMovement;
 import core.basesyntax.storage.filestorage.FileStorage;
-
 import java.util.List;
 import java.util.Map;
 
-public class DaoFromFileStorage implements Dao{
+public class DaoFromFileStorage implements Dao {
     private final FileStorage storage;
 
     public DaoFromFileStorage(FileStorage storage) {
