@@ -2,7 +2,6 @@ package core.basesyntax.service.report;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.List;
 
 public class TransactionServiceImpl implements TransactionService {
