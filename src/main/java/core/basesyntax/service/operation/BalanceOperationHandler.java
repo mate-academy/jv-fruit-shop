@@ -3,10 +3,10 @@ package core.basesyntax.service.operation;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 
-public class FruitBalance implements FruitOperationHandler {
+public class BalanceOperationHandler implements FruitOperationHandler {
     private final FruitDao fruitDao;
 
-    public FruitBalance(FruitDao fruitDao) {
+    public BalanceOperationHandler(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
