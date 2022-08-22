@@ -4,15 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class WriterServiceImpl implements WriterService {
+public class FileWriterImpl implements FileWriter {
     private CsvReportService csvReportService;
 
-    public WriterServiceImpl(CsvReportService csvReportService) {
+    public FileWriterImpl(CsvReportService csvReportService) {
         this.csvReportService = csvReportService;
     }
 
     @Override
-    public void writeReportToFile(String toFile) {
+    public void writeToFile(String toFile) {
         File file = new File(toFile);
         try {
             file.createNewFile();

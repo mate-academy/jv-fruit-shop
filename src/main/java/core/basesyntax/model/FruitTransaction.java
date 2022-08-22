@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class FruitTransaction extends Fruit {
-    private String type;
+    private String name;
     private int quantity;
     private Operation operation;
 
@@ -19,27 +19,27 @@ public class FruitTransaction extends Fruit {
             return false;
         }
         FruitTransaction that = (FruitTransaction) o;
-        return type.equals(that.type);
+        return name.equals(that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), type);
+        return Objects.hash(super.hashCode(), name);
     }
 
     @Override
     public String toString() {
-        return "type = " + type + " , quantity =" + quantity + ", operation = " + operation;
+        return "type = " + name + " , quantity =" + quantity + ", operation = " + operation;
     }
 
     @Override
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
     @Override
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

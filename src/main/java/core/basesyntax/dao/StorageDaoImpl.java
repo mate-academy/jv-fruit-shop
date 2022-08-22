@@ -7,15 +7,11 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void add(Fruit fruit) {
-        Storage.fruits.put(fruit.getType(), fruit);
+        Storage.fruits.put(fruit.getName(), fruit);
     }
 
     @Override
     public Fruit get(String fruit) {
-        return Storage.fruits.entrySet().stream()
-                .filter(f -> f.getKey().equals(fruit))
-                .map(f -> f.getValue())
-                .findFirst()
-                .get();
+        return Storage.fruits.get(fruit);
     }
 }

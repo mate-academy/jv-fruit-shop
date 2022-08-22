@@ -6,17 +6,17 @@ import core.basesyntax.service.cvs.CsvParseService;
 import core.basesyntax.service.cvs.CsvParseServiceImpl;
 import core.basesyntax.service.cvs.CsvReportService;
 import core.basesyntax.service.cvs.CsvReportServiceImpl;
-import core.basesyntax.service.cvs.ReaderService;
-import core.basesyntax.service.cvs.ReaderServiceImpl;
-import core.basesyntax.service.cvs.WriterService;
-import core.basesyntax.service.cvs.WriterServiceImpl;
+import core.basesyntax.service.cvs.FileReader;
+import core.basesyntax.service.cvs.FileReaderImpl;
+import core.basesyntax.service.cvs.FileWriter;
+import core.basesyntax.service.cvs.FileWriterImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
-import core.basesyntax.service.report.FruitReportService;
-import core.basesyntax.service.report.FruitReportServiceImpl;
+import core.basesyntax.service.report.TransactionService;
+import core.basesyntax.service.report.TransactionServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
@@ -28,23 +28,17 @@ public class Main {
     public static final String FILE_REPORT = "src\\resources\\fruit-shop-report.csv";
 
     public static void main(String[] args) {
-        //read file
-        ReaderService read = new ReaderServiceImpl();
-        List<String> fileIn = read.readFromFile(FILE_IN);
-        //csv -> List
-        CsvParseService csvFileReaderService = new CsvParseServiceImpl();
-        List<FruitTransaction> fruits = csvFileReaderService.getFruitsFromCsv(fileIn);
-        //allFruits to Storage
-        Map<Operation, OperationHandler> map = getMapStategy();
-        OperationStrategy operationStrategy = new OperationStrategyImpl(map);
-        FruitReportService fruitServiceN = new FruitReportServiceImpl(operationStrategy);
-        fruitServiceN.handleAll(fruits);
-        //getReport
-        CsvReportService w = new CsvReportServiceImpl();
-        String report = w.getReport();
-        //writeReport to File
-        WriterService wr = new WriterServiceImpl(w);
-        wr.writeReportToFile(FILE_REPORT);
+        FileReader read = new FileReaderImpl();
+        List<String> dataFromFile = read.readFromFile(FILE_IN);
+        CsvParseService csvParseService = new CsvParseServiceImpl();
+        List<FruitTransaction> transactions = csvParseService.parse(dataFromFile);
+        Map<Operation, OperationHandler> strategyMap = getMapStategy();
+        OperationStrategy operationStrategy = new OperationStrategyImpl(strategyMap);
+        TransactionService transactionService = new TransactionServiceImpl(operationStrategy);
+        transactionService.process(transactions);
+        CsvReportService csvReportService = new CsvReportServiceImpl();
+        FileWriter fileWriter = new FileWriterImpl(csvReportService);
+        fileWriter.writeToFile(FILE_REPORT);
     }
 
     public static Map<Operation, OperationHandler> getMapStategy() {

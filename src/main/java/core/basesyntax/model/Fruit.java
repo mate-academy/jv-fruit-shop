@@ -3,15 +3,15 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Fruit {
-    private String type;
+    private String name;
     private int quantity;
 
-    public String getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getQuantity() {
@@ -24,7 +24,7 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{" + "type='" + type + '\'' + ", quantity=" + quantity + '}';
+        return "Fruit{" + "type='" + name + '\'' + ", quantity=" + quantity + '}';
     }
 
     @Override
@@ -36,11 +36,11 @@ public class Fruit {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return Objects.equals(type, fruit.type);
+        return Objects.equals(name, fruit.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type);
+        return Objects.hash(name);
     }
 }

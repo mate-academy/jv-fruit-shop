@@ -12,7 +12,7 @@ public class CsvParseServiceImpl implements CsvParseService {
     private static final int INDEX_QUANTITY = 2;
 
     @Override
-    public List<FruitTransaction> getFruitsFromCsv(List<String> infoFromFile) {
+    public List<FruitTransaction> parse(List<String> infoFromFile) {
         return infoFromFile.stream()
                 .skip(HEADER_CSV)
                 .map(z -> getFromCsvRow(z))
@@ -23,7 +23,7 @@ public class CsvParseServiceImpl implements CsvParseService {
         String[] fields = line.split(",");
         FruitTransaction fruit = new FruitTransaction();
         fruit.setOperation(Operation.getOperationEnum(fields[INDEX_OPERATION]));
-        fruit.setType(fields[INDEX_TYPE]);
+        fruit.setName(fields[INDEX_TYPE]);
         fruit.setQuantity(Integer.parseInt(fields[INDEX_QUANTITY]));
         return fruit;
     }

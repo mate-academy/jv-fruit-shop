@@ -5,6 +5,6 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.Map;
 
-public interface FruitReportService {
-    Map<String, Fruit> handleAll(List<FruitTransaction> fruits);
+public interface TransactionService {
+    void process(List<FruitTransaction> transactions);
 }
