@@ -1,11 +1,11 @@
 package core.basesyntax.model;
 
-public final class FruitsMovement {
+public final class FruitMovement {
     private final Fruit fruit;
     private final MovementType type;
     private final int amount;
 
-    public FruitsMovement(Fruit fruit, MovementType type, int amount) {
+    public FruitMovement(Fruit fruit, MovementType type, int amount) {
         this.fruit = fruit;
         this.type = type;
         this.amount = amount;

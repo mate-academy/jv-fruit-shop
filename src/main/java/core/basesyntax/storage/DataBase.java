@@ -1,11 +1,13 @@
 package core.basesyntax.storage;
 
-import core.basesyntax.model.FruitsMovement;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitMovement;
 
 import java.util.List;
 
 public abstract class DataBase {
-    protected List<FruitsMovement> movementOfFruits;
+    protected List<FruitMovement> movementOfFruits;
 
-    public abstract List<FruitsMovement> getAllTransactions();
+    public abstract List<FruitMovement> getTransactionOf(Fruit fruit);
+    public abstract List<Fruit> getAllFruits();
 }
