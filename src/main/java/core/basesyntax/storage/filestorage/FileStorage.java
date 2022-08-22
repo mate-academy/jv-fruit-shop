@@ -5,6 +5,7 @@ import core.basesyntax.model.FruitMovement;
 import core.basesyntax.storage.DataBase;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FileStorage extends DataBase {
@@ -33,5 +34,10 @@ public class FileStorage extends DataBase {
         return movementOfFruits.stream()
                 .map(FruitMovement::getFruit)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void saveReport(Map<Fruit, Integer> results) {
+
     }
 }

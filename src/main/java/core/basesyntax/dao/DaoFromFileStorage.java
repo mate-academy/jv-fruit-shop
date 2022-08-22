@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DaoFromFileStorage implements Dao{
-    private FileStorage storage;
+    private final FileStorage storage;
 
     public DaoFromFileStorage(FileStorage storage) {
         this.storage = storage;
@@ -16,16 +16,16 @@ public class DaoFromFileStorage implements Dao{
 
     @Override
     public List<Fruit> getAllFruits() {
-        return null;
+        return storage.getAllFruits();
     }
 
     @Override
     public List<FruitMovement> getTransactionsOff(Fruit fruit) {
-        return null;
+        return storage.getTransactionOf(fruit);
     }
 
     @Override
     public void saveResults(Map<Fruit, Integer> results) {
-
+        storage.saveReport(results);
     }
 }
