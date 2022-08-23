@@ -1,26 +1,25 @@
 package core.basesyntax.servce;
 
-import core.basesyntax.dao.Dao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitMovement;
 import core.basesyntax.model.MovementType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Calculations {
-    private final Dao dao;
-
-    public Calculations(Dao dao) {
-        this.dao = dao;
-    }
-
-    public Map<Fruit, Integer> generateReport() {
+    public Map<Fruit, Integer> generateReport(List<FruitMovement> fruitsMovements) {
         Map<Fruit, Integer> report = new HashMap<>();
-        List<Fruit> fruits = dao.getAllFruits();
+        List<Fruit> fruits = fruitsMovements.stream()
+                .map(FruitMovement::getFruit)
+                .distinct()
+                .collect(Collectors.toList());
         for (Fruit fruit : fruits) {
-            List<FruitMovement> fruitsMovements = dao.getTransactionsOff(fruit);
-            int amount = getResultOf(fruitsMovements);
+            List<FruitMovement> movementOf = fruitsMovements.stream()
+                    .filter(f -> fruit.equals(f.getFruit()))
+                    .collect(Collectors.toList());
+            int amount = getResultOf(movementOf);
             report.put(fruit, amount);
         }
         return report;
