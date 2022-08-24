@@ -8,5 +8,4 @@ import java.util.Map;
 public class DataBase {
     public static final List<FruitTransaction> transitions = new ArrayList<>();
     public static final Map<String, Integer> fruitsAmount = new HashMap<>();
-    public static final String FILE_NAME = "dataOfFruitShop.csv";
 }

@@ -12,8 +12,8 @@ public class DataReadingImpl implements DataReading {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public void readData() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(DataBase.FILE_NAME))) {
+    public void readData(String fileName) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line = null;
             FruitTransaction data = null;
             reader.readLine();
@@ -25,7 +25,7 @@ public class DataReadingImpl implements DataReading {
             }
 
         } catch (IOException e) {
-            throw new RuntimeException("Can't read fata from file: " + DataBase.FILE_NAME, e);
+            throw new RuntimeException("Can't read fata from file: " + fileName, e);
         }
     }
 }

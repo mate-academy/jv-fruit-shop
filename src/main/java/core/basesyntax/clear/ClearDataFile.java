@@ -1,5 +1,5 @@
 package core.basesyntax.clear;
 
 public interface ClearDataFile {
-    void cleaningData();
+    void cleaningData(String fileName);
 }

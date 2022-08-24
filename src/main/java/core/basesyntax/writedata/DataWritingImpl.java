@@ -14,7 +14,7 @@ public class DataWritingImpl implements DataWriting {
     private ClearDataFile clearDataFile = new ClearDataFileImpl();
 
     @Override
-    public void writeData() {
+    public void writeData(String fileName) {
         String[] strings = new String[DataBase.fruitsAmount.size() + 1];
         strings[TITLE] = "fruit,quantity";
         int index = 1;
@@ -22,15 +22,15 @@ public class DataWritingImpl implements DataWriting {
             strings[index] = entry.getKey() + "," + entry.getValue();
             index++;
         }
-        clearDataFile.cleaningData();
-        File file = new File(DataBase.FILE_NAME);
+        clearDataFile.cleaningData(fileName);
+        File file = new File(fileName);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             for (String data : strings) {
                 writer.write(data + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file"
-                    + DataBase.FILE_NAME, e);
+                    + fileName, e);
         }
     }
 }

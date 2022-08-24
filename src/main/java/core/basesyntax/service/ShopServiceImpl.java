@@ -13,9 +13,9 @@ public class ShopServiceImpl implements ShopService {
     private DataWriting dataWriting = new DataWritingImpl();
 
     @Override
-    public void servicing() {
-        dataReading.readData();
+    public void servicing(String fileName) {
+        dataReading.readData(fileName);
         processData.processingData();
-        dataWriting.writeData();
+        dataWriting.writeData(fileName);
     }
 }
