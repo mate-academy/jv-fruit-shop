@@ -19,7 +19,7 @@ public class DataReadingImpl implements DataReading {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] strings = line.split(",");
-                data = new FruitTransaction(strings[OPERATION_INDEX].replaceAll(" ", ""),
+                data = new FruitTransaction(strings[OPERATION_INDEX],
                     strings[FRUIT_INDEX], Integer.parseInt(strings[QUANTITY_INDEX]));
                 DataBase.transitions.add(data);
             }

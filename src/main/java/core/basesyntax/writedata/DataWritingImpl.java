@@ -3,6 +3,7 @@ package core.basesyntax.writedata;
 import core.basesyntax.DataBase;
 import core.basesyntax.clear.ClearDataFile;
 import core.basesyntax.clear.ClearDataFileImpl;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
