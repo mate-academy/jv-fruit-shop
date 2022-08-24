@@ -1,16 +1,14 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.db.StorageFruits;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class FruitServiceImpl implements FruitService {
-    public FruitDao fruitDao;
+    private FruitDao fruitDao;
 
     public FruitServiceImpl() {
     }
