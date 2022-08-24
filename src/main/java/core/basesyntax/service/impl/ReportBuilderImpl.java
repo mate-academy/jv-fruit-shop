@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import static core.basesyntax.enums.Operation.BALANCE;
 import static core.basesyntax.enums.Operation.PURCHASE;
@@ -6,13 +6,14 @@ import static core.basesyntax.enums.Operation.RETURN;
 import static core.basesyntax.enums.Operation.SUPPLY;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ReportBuilder;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class ReportBuilderImpl implements ReportBuilder {
-    private static final java.lang.String COMMA = ",";
-    private static final java.lang.String TITLE_RECORD = "fruit,quantity" + System.lineSeparator();
+    private static final String COMMA = ",";
+    private static final String TITLE_RECORD = "fruit,quantity" + System.lineSeparator();
 
     @Override
     public List<String> getReport(List<FruitTransaction> transactions) {

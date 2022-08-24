@@ -1,9 +1,8 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.enums.Operation;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,11 +12,9 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
-    public List<FruitTransaction> getTransactions(String fileName) {
-        List<String> records = fruitDao.getRecords(fileName);
+    public List<FruitTransaction> getTransactions(List<String> records) {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String record : records) {
             if (record.equals(TITLE)) {
