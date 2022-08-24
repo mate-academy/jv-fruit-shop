@@ -1,18 +1,17 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.RecordsReader;
+import core.basesyntax.service.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecordsReaderImpl implements RecordsReader {
+public class CsvFileReader implements FileReader {
     @Override
     public List<String> readFile(String inputFileName) {
         try (BufferedReader transactionReader =
-                     new BufferedReader(new FileReader(inputFileName))) {
+                     new BufferedReader(new java.io.FileReader(inputFileName))) {
             List<String> records = new ArrayList<>();
             String currentLine = transactionReader.readLine();
             while (currentLine != null) {

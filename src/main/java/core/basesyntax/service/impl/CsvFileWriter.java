@@ -1,19 +1,18 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportWriter;
+import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class ReportWriterImpl implements ReportWriter {
+public class CsvFileWriter implements FileWriter {
     @Override
     public void writeReport(String targetFileName, List<String> report) {
         try {
             File reportFile = new File(targetFileName);
             reportFile.createNewFile();
-            BufferedWriter reportWriter = new BufferedWriter(new FileWriter(reportFile));
+            BufferedWriter reportWriter = new BufferedWriter(new java.io.FileWriter(reportFile));
             for (String reportLine : report) {
                 reportWriter.write(reportLine);
                 reportWriter.flush();
