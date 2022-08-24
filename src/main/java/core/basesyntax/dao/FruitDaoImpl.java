@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public List<String> getRecords(java.lang.String inputFileName) {
+    public List<String> getRecords(String inputFileName) {
         try (BufferedReader transactionReader = new BufferedReader(new FileReader(inputFileName))) {
             List<String> records = new ArrayList<>();
             String currentLine = transactionReader.readLine();
@@ -29,18 +29,18 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void writeReport(java.lang.String targetFileName, List<java.lang.String> report) {
+    public void writeReport(String targetFileName, List<String> report) {
         try {
             File reportFile = new File(targetFileName);
             reportFile.createNewFile();
             BufferedWriter reportWriter = new BufferedWriter(new FileWriter(reportFile));
-            for (java.lang.String reportLine : report) {
+            for (String reportLine : report) {
                 reportWriter.write(reportLine);
                 reportWriter.flush();
             }
             reportWriter.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't write report to file: " + targetFileName, e);
         }
     }
 }
