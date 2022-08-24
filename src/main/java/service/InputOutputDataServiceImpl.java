@@ -17,7 +17,9 @@ public class InputOutputDataServiceImpl implements InputOutputDataService {
     private static final int APPLE = 2;
     private static final String TITLE_FOR_REPORT = "fruit,quantity";
     FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
+    StringValidatorService validatorService = new StringValidatorServiceImpl();
     StorageDao storageDao = new StorageDaoImpl();
+
 
     @Override
     public void readDataFromFile(String fileName) {
@@ -29,30 +31,26 @@ public class InputOutputDataServiceImpl implements InputOutputDataService {
             throw new RuntimeException("Can't read file");
         }
         for (String stringFromFile : dataFromFile) {
-            storageDao.putTransfer(fruitTransactionService.createFruitTransaction(stringFromFile));
+            if (validatorService.isStringValid(stringFromFile)) {
+                storageDao.addTransaction(fruitTransactionService.createFruitTransaction(stringFromFile));
+            }
         }
     }
 
     @Override
     public void createReportInFile(String fileName) {
-        Stream<FruitTransaction> fruits = storageDao.getAllTransaction().stream()
-                .map(f -> {
-                    if (f.getOperation() == FruitTransaction.Operation.RETURN) {
-                        f.setQuantity(f.getQuantity() * (-1));
-                    }
-                    return f;
-                });
-        int amountOfBananas = fruits
-                .filter(f -> f.getFruit() == "banana")
+        int amountOfApples = storageDao.getAllTransaction().stream()
+                .filter(f -> f.getFruit().equals("apple"))
                 .mapToInt(FruitTransaction::getQuantity)
                 .sum();
-        int amountOfApples = fruits
-                .filter(f -> f.getFruit() == "apple")
+        int amountOfBananas = storageDao.getAllTransaction().stream()
+                .filter(f -> f.getFruit().equals("banana"))
                 .mapToInt(FruitTransaction::getQuantity)
                 .sum();
         String[] report = new String[LINES_IN_REPORT];
-        report[TITLE] = TITLE_FOR_REPORT;
-        report[BANANA] = new StringBuilder().append("banana,").append(amountOfBananas).toString();
+        report[TITLE] = TITLE_FOR_REPORT + System.lineSeparator();
+        report[BANANA] = new StringBuilder().append("banana, ")
+                .append(amountOfBananas).append(System.lineSeparator()).toString();
         report[APPLE] = new StringBuilder().append("apple,").append(amountOfApples).toString();
         File file = new File(fileName);
         try {
@@ -68,4 +66,7 @@ public class InputOutputDataServiceImpl implements InputOutputDataService {
             }
         }
     }
+
+
+
 }

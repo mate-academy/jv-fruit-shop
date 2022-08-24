@@ -64,4 +64,10 @@ public class FruitTransaction {
       return operation;
     }
   }
+
+  @Override
+  public String toString() {
+    StringBuilder stringBuilder = new StringBuilder();
+    return stringBuilder.append(operation).append("-").append(fruit).append("-").append(quantity).toString();
+  }
 }

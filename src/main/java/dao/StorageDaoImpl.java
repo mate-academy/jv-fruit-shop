@@ -7,7 +7,7 @@ import model.FruitTransaction;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
-    public void putTransfer(FruitTransaction transaction) {
+    public void addTransaction(FruitTransaction transaction) {
         Storage.storage.add(transaction);
     }
 
