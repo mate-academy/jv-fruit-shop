@@ -15,6 +15,9 @@ public class Parser implements CsvParser {
     @Override
     public List<FruitMovement> parse(List<String[]> input) {
         List<FruitMovement> result = new ArrayList<>();
+        if (input == null || input.isEmpty()) {
+            return result;
+        }
         for (String[] record : input) {
             Fruit fruit = new Fruit(record[FRUIT_NAME]);
             MovementType type = getType(record[TYPE]);

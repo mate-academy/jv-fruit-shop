@@ -12,6 +12,10 @@ public class CompilerOfReport implements ReportCreator {
     public String createReport(Map<Fruit, Integer> results) {
         StringBuilder builder = new StringBuilder();
         builder.append(REPORT_TOPIC).append(System.lineSeparator());
+        if (results == null || results.isEmpty()) {
+            return builder.toString();
+        }
+
         for (Fruit fruit : results.keySet()) {
             builder.append(fruit).append(SEPARATOR).append(results.get(fruit));
             builder.append(System.lineSeparator());

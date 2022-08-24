@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 public class Calculations {
     public Map<Fruit, Integer> generateReport(List<FruitMovement> fruitsMovements) {
         Map<Fruit, Integer> report = new HashMap<>();
+        if (fruitsMovements == null || fruitsMovements.isEmpty()) {
+            return report;
+        }
         List<Fruit> fruits = fruitsMovements.stream()
                 .map(FruitMovement::getFruit)
                 .distinct()
