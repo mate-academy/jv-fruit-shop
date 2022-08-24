@@ -12,8 +12,23 @@ public class ShopServiceImpl implements ShopService {
     private ProcessData processData = new ProcessDataImpl();
     private DataWriting dataWriting = new DataWritingImpl();
 
+    public void setDataReading(DataReading dataReading) {
+        this.dataReading = dataReading;
+    }
+
+    public void setProcessData(ProcessData processData) {
+        this.processData = processData;
+    }
+
+    public void setDataWriting(DataWriting dataWriting) {
+        this.dataWriting = dataWriting;
+    }
+
     @Override
     public void servicing(String fileName) {
+        setDataReading(new DataReadingImpl());
+        setProcessData(new ProcessDataImpl());
+        setDataWriting(new DataWritingImpl());
         dataReading.readData(fileName);
         processData.processingData();
         dataWriting.writeData(fileName);
