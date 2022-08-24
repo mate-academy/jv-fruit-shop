@@ -1,9 +1,9 @@
-package dao;
+package dao.impl;
 
-import java.util.List;
+import dao.StorageDao;
 import db.Storage;
+import java.util.List;
 import model.FruitTransaction;
-
 
 public class StorageDaoImpl implements StorageDao {
     @Override

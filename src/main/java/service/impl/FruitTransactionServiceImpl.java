@@ -1,7 +1,7 @@
-package service;
+package service.impl;
 
-import dao.StorageDaoImpl;
 import model.FruitTransaction;
+import service.FruitTransactionService;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
     private static final int TYPE_OF_TRANSACTION = 0;
@@ -9,13 +9,10 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     private static final int AMOUNT = 2;
     private static final String NEGATIVE_TRANSACTION = "p";
     private static final String DELIMITER = ",";
-    StorageDaoImpl dao = new StorageDaoImpl();
 
     @Override
-    public FruitTransaction createFruitTransaction(String stringFromFile) {
-        return new FruitTransaction(getTypeTransactionFromString(stringFromFile),
-                getTypeOfFruitFromString(stringFromFile),
-                getAmountFromString(stringFromFile));
+    public FruitTransaction createFruitTransaction(String string) {
+        return new FruitTransaction(getType(string), getFruit(string), getAmount(string));
     }
 
     @Override
@@ -26,22 +23,17 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
         return new FruitTransaction(type, fruit, quantity);
     }
 
-    @Override
-    public void doTransaction(FruitTransaction transaction) {
-        dao.addTransaction(transaction);
-    }
-
-    private String getTypeTransactionFromString(String string) {
+    private String getType(String string) {
         return string.split(DELIMITER)[TYPE_OF_TRANSACTION];
     }
 
-    private String getTypeOfFruitFromString(String string) {
+    private String getFruit(String string) {
         return string.split(DELIMITER)[TYPE_OF_FRUIT];
     }
 
-    private int getAmountFromString(String string) {
+    private int getAmount(String string) {
         int amount = Integer.parseInt(string.split(DELIMITER)[AMOUNT]);
-        if (getTypeTransactionFromString(string).equals(NEGATIVE_TRANSACTION) && amount > 0) {
+        if (getType(string).equals(NEGATIVE_TRANSACTION) && amount > 0) {
             return amount * -1;
         }
         return amount;
