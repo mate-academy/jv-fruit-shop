@@ -1,9 +1,9 @@
-package core.basesyntax.servce.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitMovement;
 import core.basesyntax.model.MovementType;
-import core.basesyntax.servce.Parser;
+import core.basesyntax.service.Parser;
 import java.util.ArrayList;
 import java.util.List;
 

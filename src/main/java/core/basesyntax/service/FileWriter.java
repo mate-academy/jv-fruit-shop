@@ -1,4 +1,4 @@
-package core.basesyntax.servce;
+package core.basesyntax.service;
 
 public interface FileWriter {
 

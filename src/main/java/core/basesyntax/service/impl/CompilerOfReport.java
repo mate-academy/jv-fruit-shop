@@ -1,7 +1,8 @@
-package core.basesyntax.servce.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.servce.ReportCreator;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.storage.Dao;
 import java.util.Map;
 
 public class CompilerOfReport implements ReportCreator {
@@ -9,9 +10,10 @@ public class CompilerOfReport implements ReportCreator {
     private static final String SEPARATOR = ",";
 
     @Override
-    public String createReport(Map<Fruit, Integer> results) {
+    public String generateReport(Dao dao) {
         StringBuilder builder = new StringBuilder();
         builder.append(REPORT_TOPIC).append(System.lineSeparator());
+        Map<Fruit, Integer> results = dao.getBalance();
         if (results == null || results.isEmpty()) {
             return builder.toString();
         }

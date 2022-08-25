@@ -3,10 +3,6 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.model.FruitMovement;
 import core.basesyntax.strategy.PostingGoods;
 import core.basesyntax.strategy.Strategy;
-import core.basesyntax.strategy.impl.PostingBalanceOfFruits;
-import core.basesyntax.strategy.impl.PostingPurchaseOfFruit;
-import core.basesyntax.strategy.impl.PostingReturnOfFruit;
-import core.basesyntax.strategy.impl.PostingSupplyOfFruit;
 
 public class PostingStrategy implements Strategy {
     public PostingGoods getPostingAccordingMovement(FruitMovement movement) {

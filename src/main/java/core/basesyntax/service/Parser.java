@@ -1,4 +1,4 @@
-package core.basesyntax.servce;
+package core.basesyntax.service;
 
 import core.basesyntax.model.FruitMovement;
 import java.util.List;
