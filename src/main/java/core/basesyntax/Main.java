@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         setShopService(new ShopServiceImpl());
-        shopService.servicing("dataOfFruitShop.csv");
+        shopService.servicing("dataOfFruitShop.csv", "reportOfFruitShop.csv");
     }
 
 }
