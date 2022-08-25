@@ -57,7 +57,7 @@ public class Main {
         FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
         storageDao.clearDataBase();
         System.out.println("DB before: " + storageDao.getAllTransaction().toString());
-        if (stringValidatorService.isStringValid(listFromFile, title)) {
+        if (stringValidatorService.isStringValid(listFromFile)) {
             for (String oneLine : listFromFile) {
                 FruitTransaction transaction = fruitTransactionService
                         .createFruitTransaction(oneLine);
@@ -70,9 +70,8 @@ public class Main {
         WriterService writerService = new WriterServiceImpl();
         writerService.createReport(storageDao.getAllTransaction(), firstReport);
         //Return 10 bananas and perches 5 apples
-        storageDao.addTransaction(fruitTransactionService.createFruitTransaction("b",
-                "banana", 10));
-        storageDao.addTransaction(fruitTransactionService.createFruitTransaction("p", "apple", 5));
+        storageDao.addTransaction(fruitTransactionService.createFruitTransaction("b,banana,10"));
+        storageDao.addTransaction(fruitTransactionService.createFruitTransaction("p,apple,5"));
         //Create new report to new file
         writerService.createReport(storageDao.getAllTransaction(), secondReport);
         System.out.println("DB after changes: " + System.lineSeparator()

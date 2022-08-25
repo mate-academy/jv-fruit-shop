@@ -29,10 +29,6 @@ public class FruitTransaction {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
     public int getQuantity() {
         return quantity;
     }

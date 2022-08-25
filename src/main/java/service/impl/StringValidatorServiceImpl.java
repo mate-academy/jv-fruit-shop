@@ -13,8 +13,8 @@ public class StringValidatorServiceImpl implements StringValidatorService {
     private static final String[] TYPE_OF_FRUITS = new String[] {"banana", "apple"};
 
     @Override
-    public boolean isStringValid(List<String> data, String title) {
-        if (data.get(0).equals(title)) {
+    public boolean isStringValid(List<String> data) {
+        if (!isStringValid(data.get(0))) {
             data.remove(0);
         }
         return data.stream().allMatch(this::isStringValid);
