@@ -1,5 +1,5 @@
 package core.basesyntax.writedata;
 
-public interface DataWriting {
+public interface DataWriter {
     void writeData(String fileName, String dataReport);
 }

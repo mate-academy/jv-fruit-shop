@@ -9,21 +9,21 @@ import core.basesyntax.readdata.DataReader;
 import core.basesyntax.readdata.DataReaderImpl;
 import core.basesyntax.report.ReportData;
 import core.basesyntax.report.ReportDataImpl;
-import core.basesyntax.writedata.DataWriting;
-import core.basesyntax.writedata.DataWritingImpl;
+import core.basesyntax.writedata.DataWriter;
+import core.basesyntax.writedata.DataWriterImpl;
 import java.util.List;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private DataReader dataReading;
     private ProcessData processData;
-    private DataWriting dataWriting;
+    private DataWriter dataWriting;
     private DataParser dataParser;
     private ReportData reportData;
 
     public ShopServiceImpl(ReportDataImpl reportData, DataParserImpl dataParser,
                            DataReaderImpl dataReading, ProcessDataImpl processData,
-                           DataWritingImpl dataWriting) {
+                           DataWriterImpl dataWriting) {
         this.dataReading = dataReading;
         this.processData = processData;
         this.dataWriting = dataWriting;

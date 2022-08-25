@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class DataWritingImpl implements DataWriting {
+public class DataWriterImpl implements DataWriter {
 
     @Override
     public void writeData(String fileReport, String dataReports) {
