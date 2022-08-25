@@ -1,16 +1,14 @@
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.dao.FruitTransactionDao;
-import core.basesyntax.dao.FruitTransactionsDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
-import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ParcerService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.StoreService;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriteServiceImpl;
-import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ParcerServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.StoreServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
@@ -25,32 +23,36 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_FROM_NAME
+            = "src/main/resources/morningInfo.csv";
+    private static final String FILE_TO_NAME
+            = "src/main/resources/dailyReport.csv";
+
     public static void main(String[] args) {
         // create and fill the strategy map
         Map<FruitTransaction.Operation, DailyOperationHandler> operationHandlerMap
                 = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(
+                new FruitDaoImpl()));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(
+                new FruitDaoImpl()));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(
+                new FruitDaoImpl()));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation(
+                new FruitDaoImpl()));
 
         //read data from csv file
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
-        List<FruitTransaction> fruitTransactions = csvFileReaderService.readTransactionFromFile();
+        List<String> sourceData = csvFileReaderService.readFromFile(FILE_FROM_NAME);
 
-        //add all daily transactions to temporary storage StorageFruitTransaction
-        FruitTransactionDao fruitTransactionDao = new FruitTransactionsDaoImpl();
-        fruitTransactionDao.add(fruitTransactions);
-        fruitTransactions = fruitTransactionDao.getAllTransaction();
-
-        //create List of fruits in Storage
-        FruitService fruitService = new FruitServiceImpl(new FruitDaoImpl());
-        fruitService.createFruit(fruitTransactions);
+        //parse transactions from strings with data
+        ParcerService parserService = new ParcerServiceImpl();
+        List<FruitTransaction> fruitTransactions = parserService.parseTransactions(sourceData);
 
         //process this data
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         StoreService storeService = new StoreServiceImpl(new FruitDaoImpl(), operationStrategy);
-        List<Fruit> fruitsInStock = storeService.fruitTransaction(fruitTransactions);
+        List<Fruit> fruitsInStock = storeService.processTransaction(fruitTransactions);
 
         //generate a report based on processed data
         ReportService reportService = new ReportServiceImpl();
@@ -58,7 +60,6 @@ public class Main {
 
         //write report to new csv file
         CsvFileWriterService csvFileWriterService = new CsvFileWriteServiceImpl();
-        csvFileWriterService.writeReportToFile(report);
-
+        csvFileWriterService.writeReportToFile(report, FILE_TO_NAME);
     }
 }

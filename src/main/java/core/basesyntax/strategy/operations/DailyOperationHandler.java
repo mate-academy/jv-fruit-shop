@@ -1,5 +1,7 @@
 package core.basesyntax.strategy.operations;
 
+import core.basesyntax.model.FruitTransaction;
+
 public interface DailyOperationHandler {
-    public int getQuantity(int quantity);
+    public void apply(FruitTransaction dailyTransaction);
 }

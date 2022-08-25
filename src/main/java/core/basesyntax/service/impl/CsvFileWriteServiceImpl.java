@@ -4,20 +4,14 @@ import core.basesyntax.service.CsvFileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class CsvFileWriteServiceImpl implements CsvFileWriterService {
     @Override
-    public void writeReportToFile(String report) {
-        LocalDate localDate = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyy");
-        String fileToName = "src/main/resources/report"
-                + localDate.format(formatter) + ".csv";
+    public void writeReportToFile(String report, String fileName) {
         try {
-            Files.write(Path.of(fileToName), report.getBytes());
+            Files.write(Path.of(fileName), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write report to file " + fileToName, e);
+            throw new RuntimeException("Can't write report to file " + fileName, e);
         }
     }
 }

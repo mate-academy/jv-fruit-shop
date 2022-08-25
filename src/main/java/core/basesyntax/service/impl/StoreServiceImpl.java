@@ -17,14 +17,9 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public List<Fruit> fruitTransaction(List<FruitTransaction> dailyTransactions) {
-        int amountFruits;
-
+    public List<Fruit> processTransaction(List<FruitTransaction> dailyTransactions) {
         for (FruitTransaction dailyTransaction : dailyTransactions) {
-            amountFruits = operationStrategy.get(dailyTransaction.getOperation())
-                    .getQuantity(dailyTransaction.getQuantity());
-            fruitDao.get(dailyTransaction.getFruitName()).setQuantity(
-                    fruitDao.get(dailyTransaction.getFruitName()).getQuantity() + amountFruits);
+            operationStrategy.get(dailyTransaction.getOperation()).apply(dailyTransaction);
         }
         return fruitDao.getAll();
     }

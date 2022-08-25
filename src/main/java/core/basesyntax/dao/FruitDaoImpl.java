@@ -22,11 +22,4 @@ public class FruitDaoImpl implements FruitDao {
     public List<Fruit> getAll() {
         return new ArrayList<>(StorageFruits.fruits);
     }
-
-    @Override
-    public void update(Fruit fruit) {
-        Fruit fruitFromDb = get(fruit.getFruitName());
-        StorageFruits.fruits.remove(fruitFromDb);
-        StorageFruits.fruits.add(fruit);
-    }
 }
