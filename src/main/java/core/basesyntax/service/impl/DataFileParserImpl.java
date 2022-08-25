@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataFileParserImpl implements DataFileParser<FruitOperation> {
-    private static final String FILE_TITLE = "type,fruit,quantity";
     private static final String SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int NAME_INDEX = 1;
@@ -18,12 +17,20 @@ public class DataFileParserImpl implements DataFileParser<FruitOperation> {
     @Override
     public List<FruitOperation> parseDataFile(List<String> data) {
         List<FruitOperation> fruitOperations = new ArrayList<>();
-        data.stream()
-                .filter(d -> !d.equals(FILE_TITLE))
-                .map(d -> d.split(SEPARATOR))
-                .forEach(d -> fruitOperations.add(new FruitOperation(d[OPERATION_INDEX],
-                        new Fruit(d[NAME_INDEX]),
-                        Integer.parseInt(d[AMOUNT_INDEX]))));
+
+        for (String line : data.subList(1, data.size())) {
+            FruitOperation fruitOperation = new FruitOperation();
+            String[] splitLine = line.split(SEPARATOR);
+            String letter = splitLine[OPERATION_INDEX];
+            String name = splitLine[NAME_INDEX];
+            int amount = Integer.parseInt(splitLine[AMOUNT_INDEX]);
+
+            fruitOperation.setOperation(letter);
+            fruitOperation.setFruit(new Fruit(name));
+            fruitOperation.setAmount(amount);
+
+            fruitOperations.add(fruitOperation);
+        }
         return fruitOperations;
     }
 }

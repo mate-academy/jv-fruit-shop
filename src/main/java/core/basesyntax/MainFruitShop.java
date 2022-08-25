@@ -11,7 +11,7 @@ import core.basesyntax.service.impl.DataFileParserImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitReportImpl;
-import core.basesyntax.strategy.OperationDefinitionImpl;
+import core.basesyntax.strategy.StrategyOperationImpl;
 import core.basesyntax.strategy.Strategy;
 
 import java.util.List;
@@ -26,9 +26,11 @@ public class MainFruitShop {
 
         DataFileParser<FruitOperation> operationDataFileParser = new DataFileParserImpl();
         List<FruitOperation> fruitOperations = operationDataFileParser.parseDataFile(data);
+        fruitOperations.stream().forEach(System.out::println);
+
 
         StorageDao fruitStorageDao = new StorageDaoImpl();
-        Strategy strategy = new OperationDefinitionImpl(fruitStorageDao);
+        Strategy strategy = new StrategyOperationImpl(fruitStorageDao);
 
         for (FruitOperation fruitOperation: fruitOperations) {
             String operation = fruitOperation.getOperation();

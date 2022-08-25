@@ -10,11 +10,11 @@ import core.basesyntax.service.impl.SupplyOperationImpl;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OperationDefinitionImpl implements Strategy{
+public class StrategyOperationImpl implements Strategy{
     private final StorageDao fruitStorageDao;
     private Map<String, CalculateOperation> operationHandlerMap;
 
-    public OperationDefinitionImpl(StorageDao fruitStorageDao) {
+    public StrategyOperationImpl(StorageDao fruitStorageDao) {
         this.fruitStorageDao = fruitStorageDao;
     }
 
