@@ -6,11 +6,11 @@ import java.util.Map;
 import java.util.Set;
 
 public interface StorageDao {
-    void add(Fruit fruit, int quantity);
+    void add(Fruit fruit, int amount);
 
-    void supply(Fruit fruit, int quantity);
+    void supply(Fruit fruit, int amount);
 
-    void subtract(Fruit fruit, int quantity);
+    void subtract(Fruit fruit, int amount);
 
     int getValue(Fruit fruit);
 

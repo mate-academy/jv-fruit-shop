@@ -8,17 +8,17 @@ import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao{
     @Override
-    public void add(Fruit fruit, int quantity) {
-        Storage.storage.put(fruit, quantity);
+    public void add(Fruit fruit, int amount) {
+        Storage.storage.put(fruit, amount);
     }
 
-    @Override public void supply(Fruit fruit, int quantity) {
-        Storage.storage.put(fruit, Storage.storage.get(fruit) + quantity);
+    @Override public void supply(Fruit fruit, int amount) {
+        Storage.storage.put(fruit, Storage.storage.get(fruit) + amount);
     }
 
     @Override
-    public void subtract(Fruit fruit, int quantity) {
-        Storage.storage.put(fruit, Storage.storage.get(fruit) - quantity);
+    public void subtract(Fruit fruit, int amount) {
+        Storage.storage.put(fruit, Storage.storage.get(fruit) - amount);
     }
 
     @Override
