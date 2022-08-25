@@ -1,10 +1,15 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitOperation;
+import core.basesyntax.service.CalculateOperation;
 import core.basesyntax.service.DataFileParser;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.impl.DataFileParserImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.strategy.OperationDefinitionImpl;
+import core.basesyntax.strategy.Strategy;
 
 import java.util.List;
 
@@ -19,7 +24,14 @@ public class MainFruitShop {
         DataFileParser<FruitOperation> operationDataFileParser = new DataFileParserImpl();
         List<FruitOperation> fruitOperations = operationDataFileParser.parseDataFile(data);
 
+        StorageDao fruitStorageDao = new StorageDaoImpl();
+        Strategy strategy = new OperationDefinitionImpl(fruitStorageDao);
 
+        for (FruitOperation fruitOperation: fruitOperations) {
+            String operation = fruitOperation.getOperation();
+            CalculateOperation calculateOperation = strategy.get(operation);
+            calculateOperation.getCalculateFruit(fruitOperation.getFruit(), fruitOperation.getQuantity());
+        }
 
 
     }

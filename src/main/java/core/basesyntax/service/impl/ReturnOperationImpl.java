@@ -5,14 +5,18 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CalculateOperation;
 
 public class ReturnOperationImpl implements CalculateOperation {
-    private SupplyOperationImpl supplyOperation;
+    private final StorageDao fruitStorageDao;
 
-    public ReturnOperationImpl(SupplyOperationImpl supplyOperation) {
-        this.supplyOperation = supplyOperation;
+    public ReturnOperationImpl(StorageDao fruitStorageDao) {
+        this.fruitStorageDao = fruitStorageDao;
     }
 
     @Override
     public void getCalculateFruit(Fruit fruit, int amount) {
-        supplyOperation.getCalculateFruit(fruit, amount);
+        if (fruitStorageDao.containsKey(fruit)) {
+            fruitStorageDao.supply(fruit, amount);
+        } else {
+            fruitStorageDao.add(fruit, amount);
+        }
     }
 }
