@@ -1,8 +1,8 @@
 package core.basesyntax.service.strategy;
 
-public class ActivityPurchaseImpl implements ActivityStrategy {
+public class ReturnActivityHandlerImpl implements ActivityHandler {
     @Override
     public int prepareCount(int value) {
-        return value * (-1);
+        return value;
     }
 }

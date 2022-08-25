@@ -1,5 +1,5 @@
 package core.basesyntax.service.strategy;
 
-public interface ActivityStrategy {
+public interface ActivityHandler {
     int prepareCount(int value);
 }

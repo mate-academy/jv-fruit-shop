@@ -1,6 +1,6 @@
 package core.basesyntax.service.strategy;
 
-public class ActivityBalanceImpl implements ActivityStrategy {
+public class BalanceActivityHandlerImpl implements ActivityHandler {
     @Override
     public int prepareCount(int value) {
         return value;

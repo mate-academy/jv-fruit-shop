@@ -4,7 +4,7 @@ import core.basesyntax.model.Activity;
 import core.basesyntax.model.TypeActivity;
 import core.basesyntax.service.ActivityParse;
 import core.basesyntax.service.ActivityParseImpl;
-import core.basesyntax.service.strategy.data.CharToActivity;
+import core.basesyntax.service.maps.DecodeShortActivity;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ActivityDaoCsvImpl implements ActivityDao {
-    private static final Map<String, TypeActivity> CHAR_TO_ACTIVITY = CharToActivity.getMap();
+    private static final Map<String, TypeActivity> CHAR_TO_ACTIVITY = DecodeShortActivity.getMap();
     private final ActivityParse activityParse;
 
     public ActivityDaoCsvImpl() {

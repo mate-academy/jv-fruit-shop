@@ -1,10 +1,10 @@
-package core.basesyntax.service.strategy.data;
+package core.basesyntax.service.maps;
 
 import core.basesyntax.model.TypeActivity;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CharToActivity {
+public class DecodeShortActivity {
     public static final Map<String, TypeActivity> map = new HashMap<>();
 
     static {
