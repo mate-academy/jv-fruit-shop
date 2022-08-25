@@ -6,13 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    public static Map<Fruit, Integer> storage = new HashMap<>();
-
-    public Map<Fruit, Integer> getStorage() {
-        return storage;
-    }
-
-    public void setStorage(Map<Fruit, Integer> storage) {
-        this.storage = storage;
-    }
+    public static final Map<Fruit, Integer> storage = new HashMap<>();
 }
+

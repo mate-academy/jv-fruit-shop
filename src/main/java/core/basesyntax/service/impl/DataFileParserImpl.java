@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitOperation;
 import core.basesyntax.service.DataFileParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataFileParserImpl implements DataFileParser<FruitTransaction> {
+public class DataFileParserImpl implements DataFileParser<FruitOperation> {
     private static final String FILE_TITLE = "type,fruit,quantity";
     private static final String SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
@@ -16,14 +16,14 @@ public class DataFileParserImpl implements DataFileParser<FruitTransaction> {
 
 
     @Override
-    public List<FruitTransaction> parseDataFile(List<String> data) {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+    public List<FruitOperation> parseDataFile(List<String> data) {
+        List<FruitOperation> fruitOperations = new ArrayList<>();
         data.stream()
-                .filter(t -> !t.equals(FILE_TITLE))
-                .map(t -> t.split(SEPARATOR))
-                .forEach(t -> fruitTransactions
-                        .add(new FruitTransaction((t[OPERATION_INDEX]), new Fruit(t[NAME_INDEX]),
-                                Integer.parseInt(t[AMOUNT_INDEX]))));
-        return fruitTransactions;
+                .filter(d -> !d.equals(FILE_TITLE))
+                .map(d -> d.split(SEPARATOR))
+                .forEach(d -> fruitOperations.add(new FruitOperation(d[OPERATION_INDEX],
+                        new Fruit(d[NAME_INDEX]),
+                        Integer.parseInt(d[AMOUNT_INDEX]))));
+        return fruitOperations;
     }
 }
