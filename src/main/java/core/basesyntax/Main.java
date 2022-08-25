@@ -11,6 +11,11 @@ import core.basesyntax.servce.impl.CompilerOfReport;
 import core.basesyntax.servce.impl.FruitMovementParser;
 import core.basesyntax.servce.impl.CsvFileReader;
 import core.basesyntax.servce.impl.Writer;
+import core.basesyntax.storage.Dao;
+import core.basesyntax.storage.FruitStorage;
+import core.basesyntax.strategy.Strategy;
+import core.basesyntax.strategy.impl.PostingStrategy;
+
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +28,11 @@ public class Main {
         List<String[]> sourceData = reader.readCsvFile(SOURCE_FILE_NAME);
         Parser parser = new FruitMovementParser();
         List<FruitMovement> fruitMovements = parser.parse(sourceData);
+        Dao dao = new FruitStorage();
+        Strategy strategy = new PostingStrategy();
+        for (FruitMovement movement: fruitMovements) {
+            strategy.getPostingAccordingMovement(movement).makePosting(movement, dao);
+        }
 
 
         Map<Fruit, Integer> dayResults = new Calculations().generateReport(fruitMovements);
