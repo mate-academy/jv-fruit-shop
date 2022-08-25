@@ -13,19 +13,22 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ActivityDaoCsvImpl implements ActivityDao {
-    private static final String FILE_NAME = "data2508202.csv";
     private static final Map<String, TypeActivity> CHAR_TO_ACTIVITY = CharToActivity.getMap();
-    private final ActivityParse activityParse = new ActivityParseImpl();
+    private final ActivityParse activityParse;
+
+    public ActivityDaoCsvImpl() {
+        activityParse = new ActivityParseImpl();
+    }
 
     @Override
-    public List<Activity> getAll() {
+    public List<Activity> getAll(String fileName) {
         try {
-            return Files.readAllLines(Path.of(FILE_NAME)).stream()
+            return Files.readAllLines(Path.of(fileName)).stream()
                 .filter(l -> l != null && CHAR_TO_ACTIVITY.get(l.substring(0,1)) != null)
-                .map(l -> activityParse.toActivity(l))
+                .map(activityParse::toActivity)
                 .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("File not found " + FILE_NAME);
+            throw new RuntimeException("File not found " + fileName);
         }
     }
 }

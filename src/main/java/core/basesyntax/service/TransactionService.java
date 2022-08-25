@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.dao.ActivityDao;
 import core.basesyntax.dao.ActivityDaoCsvImpl;
 import core.basesyntax.dao.ReportDao;
-import core.basesyntax.dao.ReportDaoImpl;
+import core.basesyntax.dao.ReportDaoCsvImpl;
 import core.basesyntax.model.Activity;
 import core.basesyntax.model.TypeActivity;
 import core.basesyntax.service.strategy.ActivityStrategy;
@@ -19,11 +19,11 @@ public class TransactionService {
 
     public TransactionService() {
         activityDao = new ActivityDaoCsvImpl();
-        reportDao = new ReportDaoImpl();
+        reportDao = new ReportDaoCsvImpl();
     }
 
-    public void createReport() {
-        Map<String, Integer> dataReport = activityDao.getAll().stream()
+    public void createReport(String fileName) {
+        Map<String, Integer> dataReport = activityDao.getAll(fileName).stream()
                 .collect(Collectors.groupingBy(
                         Activity::getFruit,
                         Collectors.summingInt(v ->
@@ -32,6 +32,6 @@ public class TransactionService {
                                     .prepareCount(v.getCount())
                         )
                 ));
-        reportDao.write(dataReport);
+        reportDao.saveReport(dataReport);
     }
 }
