@@ -5,16 +5,17 @@ import core.basesyntax.model.Operation;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CsvParseServiceImpl implements CsvParseService {
-    private static final int HEADER_CSV = 1;
+public class CsvParserServiceImpl implements CsvParserService {
+    private static final int HEADER_ROW = 1;
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_TYPE = 1;
+
     private static final int INDEX_QUANTITY = 2;
 
     @Override
-    public List<FruitTransaction> parse(List<String> infoFromFile) {
-        return infoFromFile.stream()
-                .skip(HEADER_CSV)
+    public List<FruitTransaction> parse(List<String> data) {
+        return data.stream()
+                .skip(HEADER_ROW)
                 .map(z -> getFromCsvRow(z))
                 .collect(Collectors.toList());
     }

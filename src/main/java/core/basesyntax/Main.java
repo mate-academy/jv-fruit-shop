@@ -2,8 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.cvs.CsvParseService;
-import core.basesyntax.service.cvs.CsvParseServiceImpl;
+import core.basesyntax.service.cvs.CsvParserService;
+import core.basesyntax.service.cvs.CsvParserServiceImpl;
 import core.basesyntax.service.cvs.CsvReportService;
 import core.basesyntax.service.cvs.CsvReportServiceImpl;
 import core.basesyntax.service.cvs.FileReader;
@@ -29,9 +29,9 @@ public class Main {
 
     public static void main(String[] args) {
         FileReader read = new FileReaderImpl();
-        List<String> dataFromFile = read.readFromFile(FILE_IN);
-        CsvParseService csvParseService = new CsvParseServiceImpl();
-        List<FruitTransaction> transactions = csvParseService.parse(dataFromFile);
+        List<String> dataFromFile = read.read(FILE_IN);
+        CsvParserService csvParserService = new CsvParserServiceImpl();
+        List<FruitTransaction> transactions = csvParserService.parse(dataFromFile);
         Map<Operation, OperationHandler> strategyMap = getMapStategy();
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategyMap);
         TransactionService transactionService = new TransactionServiceImpl(operationStrategy);

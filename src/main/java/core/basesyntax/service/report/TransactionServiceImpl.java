@@ -13,8 +13,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
-        for (FruitTransaction fruit : transactions) {
-            operationStrategy.get(fruit.getOperation()).handle(fruit);
+        for (FruitTransaction fruitTransaction : transactions) {
+            operationStrategy.get(fruitTransaction.getOperation()).handle(fruitTransaction);
         }
     }
 }

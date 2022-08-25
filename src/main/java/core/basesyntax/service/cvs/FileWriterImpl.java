@@ -17,12 +17,12 @@ public class FileWriterImpl implements FileWriter {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            throw new RuntimeException("Can't create a file: " + toFile);
+            throw new RuntimeException("Can't create a file: " + toFile, e);
         }
         try {
             Files.write(file.toPath(), csvReportService.getReport().getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to a file: " + toFile);
+            throw new RuntimeException("Can't write data to a file: " + toFile, e);
         }
     }
 }
