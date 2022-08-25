@@ -14,7 +14,7 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> getTransactions(List<String> records) {
+    public List<FruitTransaction> parse(List<String> records) {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String record : records) {
             if (record.equals(TITLE)) {

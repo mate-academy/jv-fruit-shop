@@ -1,20 +1,19 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.enums.TurnoverType;
+import core.basesyntax.enums.Operation;
 import core.basesyntax.hadler.OperationHandler;
-import core.basesyntax.hadler.impl.AddOperationHandler;
-import core.basesyntax.hadler.impl.SubtractOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
+import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
+    private final Map<Operation, OperationHandler> handlersMap;
+
+    public OperationStrategyImpl(Map<Operation, OperationHandler> handlersMap) {
+        this.handlersMap = handlersMap;
+    }
+
     @Override
-    public OperationHandler getOperationHandler(TurnoverType type) {
-        switch (type) {
-            case ADD:
-                return new AddOperationHandler();
-            case SUBTRACT:
-            default:
-                return new SubtractOperationHandler();
-        }
+    public OperationHandler get(Operation operation) {
+        return handlersMap.get(operation);
     }
 }
