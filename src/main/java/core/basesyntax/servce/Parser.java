@@ -3,6 +3,6 @@ package core.basesyntax.servce;
 import core.basesyntax.model.FruitMovement;
 import java.util.List;
 
-public interface CsvParser {
+public interface Parser {
     List<FruitMovement> parse(List<String[]> input);
 }

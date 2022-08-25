@@ -3,11 +3,11 @@ package core.basesyntax.servce.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitMovement;
 import core.basesyntax.model.MovementType;
-import core.basesyntax.servce.CsvParser;
+import core.basesyntax.servce.Parser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Parser implements CsvParser {
+public class FruitMovementParser implements Parser {
     private static final int TYPE = 0;
     private static final int FRUIT_NAME = 1;
     private static final int FRUIT_VALUE = 2;
