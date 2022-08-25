@@ -1,11 +1,11 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.DataBase;
+import java.util.Map;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
-    public void processingOperation(String fruit, int quantity) {
-        Integer amount = DataBase.fruitsAmount.get(fruit) + quantity;
-        DataBase.fruitsAmount.put(fruit, amount);
+    public void processingOperation(String fruit, int quantity, Map<String, Integer> values) {
+        Integer amount = values.get(fruit) + quantity;
+        values.put(fruit, amount);
     }
 }
