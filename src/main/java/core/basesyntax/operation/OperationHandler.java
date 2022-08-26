@@ -1,7 +1,7 @@
 package core.basesyntax.operation;
 
-import java.util.Map;
+import core.basesyntax.FruitTransaction;
 
 public interface OperationHandler {
-    void processingOperation(String fruit, int quantity, Map<String, Integer> values);
+    void processingOperation(FruitTransaction transaction);
 }

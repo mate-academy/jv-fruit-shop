@@ -1,23 +1,18 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.operation.BalanceOperationHandler;
+import core.basesyntax.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
-import core.basesyntax.operation.PurchaseOperationHandler;
-import core.basesyntax.operation.ReturnOperationHandler;
-import core.basesyntax.operation.SupplyOperationHandler;
+import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
+    private Map<FruitTransaction.Operation, OperationHandler> handlers;
+
+    public OperationStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> handlers) {
+        this.handlers = handlers;
+    }
+
     @Override
-    public OperationHandler get(String operation) {
-        switch (operation) {
-            case "p":
-                return new PurchaseOperationHandler();
-            case "r":
-                return new ReturnOperationHandler();
-            case "s":
-                return new SupplyOperationHandler();
-            default:
-                return new BalanceOperationHandler();
-        }
+    public OperationHandler get(FruitTransaction.Operation operation) {
+        return handlers.get(operation);
     }
 }

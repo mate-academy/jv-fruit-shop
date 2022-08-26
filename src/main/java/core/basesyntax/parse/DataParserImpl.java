@@ -1,6 +1,7 @@
 package core.basesyntax.parse;
 
 import core.basesyntax.FruitTransaction;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +16,10 @@ public class DataParserImpl implements DataParser {
         return lines.stream()
                 .map(s -> s.split(SPLITTER))
                 .map(strings -> new FruitTransaction(
-                        strings[OPERATION_INDEX],
+                        Arrays.stream(FruitTransaction.Operation.values())
+                                .filter(operation -> operation.getOperation()
+                                        .equals(strings[OPERATION_INDEX]))
+                                .findFirst().get(),
                         strings[FRUIT_INDEX],
                         Integer.parseInt(strings[QUANTITY_INDEX])))
                 .collect(Collectors.toList());
