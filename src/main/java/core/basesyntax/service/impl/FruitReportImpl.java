@@ -1,10 +1,8 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitReport;
 import core.basesyntax.service.FruitService;
-
 import java.util.List;
 
 public class FruitReportImpl implements FruitReport {

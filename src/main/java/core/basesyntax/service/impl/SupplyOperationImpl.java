@@ -14,8 +14,7 @@ public class SupplyOperationImpl implements CalculateOperation {
     @Override
     public void getCalculateFruit(FruitOperation fruitOperation) {
         fruitService.update(fruitOperation.getFruit(),
-                fruitService.getAmount(fruitOperation.getFruit() +
-                        fruitOperation.getAmount()));
+                fruitOperation.getAmount() + fruitService.getAmount(fruitOperation.getFruit()));
 
     }
 }

@@ -4,7 +4,6 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

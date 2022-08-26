@@ -46,6 +46,7 @@ public class Fruit {
         if (amount != fruit.amount) {
             return false;
         }
-        return Objects.equals(name, fruit.name) && Objects.equals(amount, fruit.amount);
+        return Objects.equals(name, fruit.name)
+                && Objects.equals(amount, fruit.amount);
     }
 }

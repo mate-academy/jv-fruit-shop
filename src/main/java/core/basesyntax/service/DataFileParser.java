@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitOperation;
 import java.util.List;
 
-public interface DataFileParser<T> {
-    List<T> parseDataFile(List<String> data);
+public interface DataFileParser {
+    List<FruitOperation> parseDataFile(List<String> data);
 }
