@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.FruitMovement;
+import core.basesyntax.model.MovementType;
 
 public interface Strategy {
-    PostingGoods getPostingAccordingMovement(FruitMovement movement);
+    GoodHandler getPostingAccordingMovement(MovementType type);
 }

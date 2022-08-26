@@ -3,7 +3,7 @@ package core.basesyntax.storage;
 import core.basesyntax.model.Fruit;
 import java.util.Map;
 
-public interface Dao {
+public interface FruitDao {
     Map<Fruit, Integer> getBalance();
 
     int getAmount(Fruit fruit);

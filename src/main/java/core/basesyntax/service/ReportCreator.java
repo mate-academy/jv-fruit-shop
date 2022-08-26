@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.storage.Dao;
+import core.basesyntax.model.Fruit;
+import java.util.Map;
 
 public interface ReportCreator {
-    String generateReport(Dao dao);
+    String generateReport(Map<Fruit, Integer> results);
 }

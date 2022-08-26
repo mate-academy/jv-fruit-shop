@@ -2,13 +2,13 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitMovement;
-import core.basesyntax.storage.Dao;
-import core.basesyntax.strategy.PostingGoods;
+import core.basesyntax.storage.FruitDao;
+import core.basesyntax.strategy.GoodHandler;
 
-public class PostingReturnOfFruit implements PostingGoods {
+public class PostingReturnOfFruit implements GoodHandler {
 
     @Override
-    public void makePosting(FruitMovement movement, Dao dao) {
+    public void makePosting(FruitMovement movement, FruitDao dao) {
         Fruit fruit = movement.getFruit();
         int currentAmount = dao.getAmount(fruit);
         currentAmount += movement.getAmount();
