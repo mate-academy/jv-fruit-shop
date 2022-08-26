@@ -44,10 +44,6 @@ public class FruitTransaction {
         Operation(String operation) {
             this.operation = operation;
         }
-
-        public String getOperation() {
-            return operation;
-        }
     }
 
     @Override

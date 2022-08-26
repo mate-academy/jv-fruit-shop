@@ -22,7 +22,6 @@ public class Main {
         final String inputFile = "src/main/resources/input.csv";
         final String firstReport = "src/main/resources/report1.csv";
         final String secondReport = "src/main/resources/report2.csv";
-        final String title = "type,fruit,quantity";
         //Test
         //Create file for test
         String[] strings = new String[] {"type,fruit,quantity", "b,banana,20", "b,apple,100",
@@ -70,8 +69,14 @@ public class Main {
         WriterService writerService = new WriterServiceImpl();
         writerService.createReport(storageDao.getAllTransaction(), firstReport);
         //Return 10 bananas and perches 5 apples
-        storageDao.addTransaction(fruitTransactionService.createFruitTransaction("b,banana,10"));
-        storageDao.addTransaction(fruitTransactionService.createFruitTransaction("p,apple,5"));
+        String lineFirst = "b,banana,10";
+        String lineSecond = "p,apple,5";
+        if (stringValidatorService.isStringValid(lineFirst)) {
+            storageDao.addTransaction(fruitTransactionService.createFruitTransaction(lineFirst));
+        }
+        if (stringValidatorService.isStringValid(lineSecond)) {
+            storageDao.addTransaction(fruitTransactionService.createFruitTransaction(lineSecond));
+        }
         //Create new report to new file
         writerService.createReport(storageDao.getAllTransaction(), secondReport);
         System.out.println("DB after changes: " + System.lineSeparator()

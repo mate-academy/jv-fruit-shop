@@ -17,11 +17,11 @@ public class WriterServiceImpl implements WriterService {
     @Override
     public void createReport(List<FruitTransaction> transactions, String fileName) {
         int amountOfApples = transactions.stream()
-                .filter(f -> f.getFruit().equals("apple"))
+                .filter(f -> f.getFruit().equals(APPLE))
                 .mapToInt(FruitTransaction::getQuantity)
                 .sum();
         int amountOfBananas = transactions.stream()
-                .filter(f -> f.getFruit().equals("banana"))
+                .filter(f -> f.getFruit().equals(BANANA))
                 .mapToInt(FruitTransaction::getQuantity)
                 .sum();
         StringBuilder stringBuilder = new StringBuilder();
