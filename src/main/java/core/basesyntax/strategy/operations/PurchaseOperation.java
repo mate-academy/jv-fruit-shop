@@ -12,9 +12,13 @@ public class PurchaseOperation implements DailyOperationHandler {
 
     @Override
     public void apply(FruitTransaction dailyTransaction) {
-        int amountFruits;
-        amountFruits = dailyTransaction.getQuantity();
-        fruitDao.get(dailyTransaction.getFruitName()).setQuantity(
-                fruitDao.get(dailyTransaction.getFruitName()).getQuantity() - amountFruits);
+        int amountFruits = dailyTransaction.getQuantity();
+        int amountFruitsInStock = fruitDao.get(dailyTransaction.getFruitName()).getQuantity();
+        if (amountFruitsInStock - amountFruits < 0) {
+            throw new RuntimeException("Not enough fruit in stock, we have "
+                    + amountFruitsInStock + ", but you sell " + amountFruits);
+        }
+        fruitDao.get(dailyTransaction.getFruitName())
+                .setQuantity(amountFruitsInStock - amountFruits);
     }
 }

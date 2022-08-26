@@ -12,8 +12,7 @@ public class ReturnOperation implements DailyOperationHandler {
 
     @Override
     public void apply(FruitTransaction dailyTransaction) {
-        int amountFruits;
-        amountFruits = dailyTransaction.getQuantity();
+        int amountFruits = dailyTransaction.getQuantity();
         fruitDao.get(dailyTransaction.getFruitName()).setQuantity(
                 fruitDao.get(dailyTransaction.getFruitName()).getQuantity() + amountFruits);
     }

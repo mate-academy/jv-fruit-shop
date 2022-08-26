@@ -2,10 +2,12 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParcerService;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ParcerServiceImpl implements ParcerService {
+    private static final int HEADER = 1;
     private static final String DATA_SEPARATOR = ",";
     private static final int COLUMN_WITH_OPERATION = 0;
     private static final int COLUMN_WITH_NAME = 1;
@@ -14,7 +16,7 @@ public class ParcerServiceImpl implements ParcerService {
     @Override
     public List<FruitTransaction> parseTransactions(List<String> transactions) {
         return transactions.stream()
-                .skip(1)
+                .skip(HEADER)
                 .map(this::getFromStringRow)
                 .collect(Collectors.toList());
     }
@@ -30,16 +32,9 @@ public class ParcerServiceImpl implements ParcerService {
     }
 
     private FruitTransaction.Operation parseOperation(String operationMarker) {
-        switch (operationMarker) {
-            case "b":
-                return FruitTransaction.Operation.BALANCE;
-            case "s":
-                return FruitTransaction.Operation.SUPPLY;
-            case "p":
-                return FruitTransaction.Operation.PURCHASE;
-            case "r":
-            default :
-                return FruitTransaction.Operation.RETURN;
-        }
+        return Arrays.stream(FruitTransaction.Operation.values())
+                .filter(o -> o.getOperation().equals(operationMarker))
+                .findFirst().orElseThrow(() ->
+                        new RuntimeException("Unknown daily operation in file " + operationMarker));
     }
 }

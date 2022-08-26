@@ -6,5 +6,4 @@ import java.util.List;
 
 public class StorageFruits {
     public static final List<Fruit> fruits = new ArrayList<>();
-
 }

@@ -1,3 +1,4 @@
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
@@ -30,16 +31,17 @@ public class Main {
 
     public static void main(String[] args) {
         // create and fill the strategy map
+        FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, DailyOperationHandler> operationHandlerMap
                 = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(
-                new FruitDaoImpl()));
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(
-                new FruitDaoImpl()));
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(
-                new FruitDaoImpl()));
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation(
-                new FruitDaoImpl()));
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperation(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperation(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperation(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperation(fruitDao));
 
         //read data from csv file
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
@@ -51,7 +53,7 @@ public class Main {
 
         //process this data
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        StoreService storeService = new StoreServiceImpl(new FruitDaoImpl(), operationStrategy);
+        StoreService storeService = new StoreServiceImpl(fruitDao, operationStrategy);
         List<Fruit> fruitsInStock = storeService.processTransaction(fruitTransactions);
 
         //generate a report based on processed data
