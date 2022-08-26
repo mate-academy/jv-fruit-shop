@@ -3,36 +3,28 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class StorageDaoImpl implements StorageDao{
-    @Override
-    public void add(Fruit fruit, int amount) {
-        Storage.storage.put(fruit, amount);
-    }
 
-    @Override public void supply(Fruit fruit, int amount) {
-        Storage.storage.put(fruit, Storage.storage.get(fruit) + amount);
+    @Override
+    public void update(String fruitName, Integer amount) {
+        Storage.fruitsStorage.put(fruitName, amount);
     }
 
     @Override
-    public void subtract(Fruit fruit, int amount) {
-        Storage.storage.put(fruit, Storage.storage.get(fruit) - amount);
+    public Integer getAmount(String fruitName) {
+        if (Storage.fruitsStorage.containsKey(fruitName)) {
+            return Storage.fruitsStorage.get(fruitName);
+        }
+        throw new RuntimeException("There's no such a fruit in a Storage: " + fruitName);
     }
 
     @Override
-    public int getValue(Fruit fruit) {
-        return Storage.storage.get(fruit);
-    }
-
-    @Override
-    public boolean containsKey(Fruit fruit) {
-        return Storage.storage.containsKey(fruit);
-    }
-
-    @Override
-    public Set<Map.Entry<Fruit, Integer>> getAll() {
-        return Storage.storage.entrySet();
+    public List<Fruit> getAll() {
+        return Storage.fruitsStorage.entrySet().stream()
+                .map(i -> new Fruit(i.getKey(),i.getValue()))
+                .collect(Collectors.toList());
     }
 }

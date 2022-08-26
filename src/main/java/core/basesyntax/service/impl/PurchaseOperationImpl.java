@@ -2,20 +2,21 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitOperation;
 import core.basesyntax.service.CalculateOperation;
+import core.basesyntax.service.FruitService;
 
 public class PurchaseOperationImpl implements CalculateOperation {
-    private final StorageDao fruitStorageDao;
+    private final FruitService fruitService;
 
-    public PurchaseOperationImpl(StorageDao fruitStorageDao) {
-        this.fruitStorageDao = fruitStorageDao;
+    public PurchaseOperationImpl(FruitService fruitService) {
+        this.fruitService = fruitService;
     }
 
     @Override
-    public void getCalculateFruit(Fruit fruit, int amount) {
-        if (fruitStorageDao.getValue(fruit) - amount < 0) {
-            throw new RuntimeException("There is no sale operation");
-        }
-        fruitStorageDao.subtract(fruit, amount);
+    public void getCalculateFruit(FruitOperation fruitOperation) {
+             fruitService.update(fruitOperation.getFruit(),
+             fruitService.getAmount(fruitOperation.getFruit())-
+                     fruitOperation.getAmount());
     }
 }

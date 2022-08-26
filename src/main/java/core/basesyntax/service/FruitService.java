@@ -1,9 +1,10 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
+
 import java.util.List;
 
-public interface StorageDao {
+public interface FruitService {
     void update(String fruitName, Integer amount);
 
     Integer getAmount(String fruitName);

@@ -1,48 +1,59 @@
 package core.basesyntax.model;
 
+import java.util.NoSuchElementException;
+
 public class FruitOperation {
-  private String operation;
-  private Fruit fruit;
+  private Operation operation;
+  private String fruit;
   private int amount;
 
-  public FruitOperation(){}
-
-  public FruitOperation(String operation, Fruit fruit, int amount) {
-    this.operation = operation;
-    this.fruit = fruit;
-    this.amount = amount;
-  }
-
-  public String getOperation() {
+  public Operation getOperation() {
     return operation;
   }
 
-  public Fruit getFruit() {
+  public void setOperation(Operation operation) {
+    this.operation = operation;
+  }
+
+  public String getFruit() {
     return fruit;
+  }
+
+  public void setFruit(String fruit) {
+    this.fruit = fruit;
   }
 
   public int getAmount() {
     return amount;
   }
 
-  public void setOperation(String operation) {
-    this.operation = operation;
-  }
-
-  public void setFruit(Fruit fruit) {
-    this.fruit = fruit;
-  }
-
   public void setAmount(int amount) {
     this.amount = amount;
   }
 
-  @Override
-  public String toString() {
-    return "FruitOperation{" +
-            "operation='" + operation + '\'' +
-            ", fruit=" + fruit +
-            ", amount=" + amount +
-            '}';
+  public enum Operation {
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
+
+    private String letter;
+
+    Operation(String letter) {
+      this.letter = letter;
+    }
+
+    public String getLetter() {
+      return letter;
+    }
+
+    public static Operation defineOperationByLetter(String letter) {
+      for (Operation operation : Operation.values()) {
+        if (operation.getLetter().equals(letter)) {
+          return operation;
+        }
+      }
+      throw new NoSuchElementException("Can't find such Operation" + letter);
+    }
   }
 }
