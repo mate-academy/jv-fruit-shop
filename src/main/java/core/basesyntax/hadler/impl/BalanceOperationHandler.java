@@ -1,7 +1,6 @@
 package core.basesyntax.hadler.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.enums.Operation;
 import core.basesyntax.hadler.OperationHandler;
 import core.basesyntax.model.FruitTransaction;
 
@@ -14,7 +13,6 @@ public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        transaction.getOperation().equals(Operation.BALANCE);
         storageDao.save(transaction.getFruit(), transaction.getQuantity());
     }
 }

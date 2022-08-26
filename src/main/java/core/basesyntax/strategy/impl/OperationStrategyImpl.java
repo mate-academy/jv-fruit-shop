@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.enums.Operation;
 import core.basesyntax.hadler.OperationHandler;
+import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
 

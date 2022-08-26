@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.enums.Operation;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class TransactionParserImpl implements TransactionParser {
     public List<FruitTransaction> parse(List<String> records) {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String record : records) {
-            if (record.equals(TITLE)) {
+            if (record.equals(TITLE) || record.isEmpty()) {
                 continue;
             }
             transactions.add(parseRecord(record));

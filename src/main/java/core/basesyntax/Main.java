@@ -1,26 +1,24 @@
 package core.basesyntax;
 
-import static core.basesyntax.enums.Operation.BALANCE;
-import static core.basesyntax.enums.Operation.PURCHASE;
-import static core.basesyntax.enums.Operation.RETURN;
-import static core.basesyntax.enums.Operation.SUPPLY;
+import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
+import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
+import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
+import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
-import core.basesyntax.enums.Operation;
 import core.basesyntax.hadler.OperationHandler;
 import core.basesyntax.hadler.impl.BalanceOperationHandler;
-import core.basesyntax.hadler.impl.PurchaseOperationHandler;
-import core.basesyntax.hadler.impl.ReturnOperationHandler;
-import core.basesyntax.hadler.impl.SupplyOperationHandler;
+import core.basesyntax.hadler.impl.DecreaseOperationHandler;
+import core.basesyntax.hadler.impl.IncreaseOperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.TransactionParser;
-import core.basesyntax.service.impl.CsvFileWriterImpl;
 import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.FruitShopService;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
@@ -36,11 +34,12 @@ public class Main {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputData = fileReader.readFile(inputFile);
         StorageDao storageDao = new StorageDaoImpl();
-        Map<Operation, OperationHandler> handlerMap = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
         handlerMap.put(BALANCE, new BalanceOperationHandler(storageDao));
-        handlerMap.put(SUPPLY, new SupplyOperationHandler(storageDao));
-        handlerMap.put(PURCHASE, new PurchaseOperationHandler(storageDao));
-        handlerMap.put(RETURN, new ReturnOperationHandler(storageDao));
+        handlerMap.put(SUPPLY, new DecreaseOperationHandler(storageDao));
+        OperationHandler increaseOperationHandler = new IncreaseOperationHandler(storageDao);
+        handlerMap.put(PURCHASE, increaseOperationHandler);
+        handlerMap.put(RETURN, increaseOperationHandler);
         OperationStrategy strategy = new OperationStrategyImpl(handlerMap);
         TransactionParser transactionParser = new TransactionParserImpl();
         List<FruitTransaction> transactions = transactionParser.parse(inputData);
@@ -52,7 +51,7 @@ public class Main {
         Map<String, Integer> balance = shopService.getBalance();
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport(balance);
-        FileWriter fileWriter = new CsvFileWriterImpl();
+        FileWriter fileWriter = new FileWriterImpl();
         String toFile = "report.csv";
         fileWriter.writeReport(toFile, report);
     }

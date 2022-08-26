@@ -4,10 +4,10 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.hadler.OperationHandler;
 import core.basesyntax.model.FruitTransaction;
 
-public class PurchaseOperationHandler implements OperationHandler {
+public class DecreaseOperationHandler implements OperationHandler {
     private final StorageDao storageDao;
 
-    public PurchaseOperationHandler(StorageDao storageDao) {
+    public DecreaseOperationHandler(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
@@ -15,6 +15,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void handle(FruitTransaction transaction) {
         int storageQuantity = storageDao.getQuantity(transaction.getFruit());
         storageDao.save(transaction.getFruit(),
-                storageQuantity - transaction.getQuantity());
+                    storageQuantity + transaction.getQuantity());
+
     }
 }

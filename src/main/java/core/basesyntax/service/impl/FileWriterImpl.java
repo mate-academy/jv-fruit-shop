@@ -5,16 +5,18 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 
-public class CsvFileWriterImpl implements FileWriter {
+public class FileWriterImpl implements FileWriter {
     @Override
     public void writeReport(String toFile, String report) {
+        File reportFile = new File(toFile);
         try {
-            File reportFile = new File(toFile);
             reportFile.createNewFile();
-            BufferedWriter reportWriter = new BufferedWriter(new java.io.FileWriter(reportFile));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't create file: " + toFile, e);
+        }
+        try (BufferedWriter reportWriter = new BufferedWriter(new java.io.FileWriter(reportFile))) {
             reportWriter.write(report);
             reportWriter.flush();
-            reportWriter.close();
         } catch (IOException e) {
             throw new RuntimeException("Can't write report to file: " + toFile, e);
         }
