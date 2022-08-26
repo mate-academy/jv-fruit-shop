@@ -6,20 +6,10 @@ public class FruitTransaction {
     private int quantity;
 
     public FruitTransaction(String type, String fruit, int quantity) {
-        switch (type) {
-            case "b":
-                operation = Operation.BALANCE;
-                break;
-            case "s":
-                operation = Operation.SUPPLY;
-                break;
-            case "p":
-                operation = Operation.PURCHASE;
-                break;
-            case "r":
-                operation = Operation.RETURN;
-                break;
-            default:
+        for (Operation operationType : Operation.values()) {
+            if (operationType.getOperation().equals(type)) {
+                operation = operationType;
+            }
         }
         this.fruit = fruit;
         this.quantity = quantity;
@@ -43,6 +33,10 @@ public class FruitTransaction {
 
         Operation(String operation) {
             this.operation = operation;
+        }
+
+        public String getOperation() {
+            return operation;
         }
     }
 
