@@ -1,35 +1,26 @@
 package core.basesyntax.service;
 
 import core.basesyntax.FruitTransaction;
+import core.basesyntax.lib.Inject;
 import core.basesyntax.parse.DataParser;
-import core.basesyntax.parse.DataParserImpl;
 import core.basesyntax.process.ProcessData;
-import core.basesyntax.process.ProcessDataImpl;
 import core.basesyntax.readdata.DataReader;
-import core.basesyntax.readdata.DataReaderImpl;
 import core.basesyntax.report.ReportData;
-import core.basesyntax.report.ReportDataImpl;
 import core.basesyntax.writedata.DataWriter;
-import core.basesyntax.writedata.DataWriterImpl;
 import java.util.List;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
+    @Inject
     private DataReader dataReading;
+    @Inject
     private ProcessData processData;
+    @Inject
     private DataWriter dataWriting;
+    @Inject
     private DataParser dataParser;
+    @Inject
     private ReportData reportData;
-
-    public ShopServiceImpl(ReportDataImpl reportData, DataParserImpl dataParser,
-                           DataReaderImpl dataReading, ProcessDataImpl processData,
-                           DataWriterImpl dataWriting) {
-        this.dataReading = dataReading;
-        this.processData = processData;
-        this.dataWriting = dataWriting;
-        this.dataParser = dataParser;
-        this.reportData = reportData;
-    }
 
     @Override
     public void servicing(String fileStartDay, String fileReport) {
