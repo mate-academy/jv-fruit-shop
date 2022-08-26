@@ -15,7 +15,6 @@ public class SupplyOperationHandlerImpl implements OperationHandler {
     public void handle(FruitOperation fruitOperation) {
         fruitService.update(fruitOperation.getFruit(),
                 fruitOperation.getAmount() + fruitService.getAmount(fruitOperation.getFruit()));
-
     }
 }
 

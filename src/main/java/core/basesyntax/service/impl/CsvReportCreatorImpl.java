@@ -5,12 +5,12 @@ import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReportCreator;
 import java.util.List;
 
-public class FruitReportImpl implements ReportCreator {
+public class CsvReportCreatorImpl implements ReportCreator {
     private static final String REPORT_TITLE = "fruit,balance";
     private static final String SEPARATOR = ",";
     private final FruitService fruitService;
 
-    public FruitReportImpl(FruitService fruitService) {
+    public CsvReportCreatorImpl(FruitService fruitService) {
         this.fruitService = fruitService;
     }
 
@@ -18,7 +18,7 @@ public class FruitReportImpl implements ReportCreator {
     public String makeReport() {
         List<Fruit> fruitList = fruitService.getAll();
         StringBuilder report = new StringBuilder(REPORT_TITLE);
-        for (Fruit fruit:fruitList) {
+        for (Fruit fruit : fruitList) {
             report.append(System.lineSeparator())
                     .append(fruit.getName())
                     .append(SEPARATOR)

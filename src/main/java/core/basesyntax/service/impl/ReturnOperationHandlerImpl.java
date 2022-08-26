@@ -13,7 +13,7 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
 
     @Override
     public void handle(FruitOperation fruitOperation) {
-        fruitService.update(fruitOperation.getFruit(),fruitOperation.getAmount()
+        fruitService.update(fruitOperation.getFruit(), fruitOperation.getAmount()
                 + fruitService.getAmount(fruitOperation.getFruit()));
     }
 }

@@ -10,10 +10,10 @@ import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.impl.BalanceOperationHandlerImpl;
+import core.basesyntax.service.impl.CsvReportCreatorImpl;
 import core.basesyntax.service.impl.CsvTransactionParserImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.FruitReportImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.PurchaseOperationHandlerImpl;
 import core.basesyntax.service.impl.ReturnOperationHandlerImpl;
@@ -53,7 +53,7 @@ public class MainFruitShop {
             strategy.get(fruitOperation.getOperation()).handle(fruitOperation);
         }
 
-        ReportCreator report = new FruitReportImpl(fruitService);
+        ReportCreator report = new CsvReportCreatorImpl(fruitService);
         String reportByDay = report.makeReport();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(OUTPUT_DATA_FILE,reportByDay);
