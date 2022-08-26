@@ -1,18 +1,18 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitOperation;
-import core.basesyntax.service.CalculateOperation;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.OperationHandler;
 
-public class ReturnOperationImpl implements CalculateOperation {
+public class ReturnOperationHandlerImpl implements OperationHandler {
     private final FruitService fruitService;
 
-    public ReturnOperationImpl(FruitService fruitService) {
+    public ReturnOperationHandlerImpl(FruitService fruitService) {
         this.fruitService = fruitService;
     }
 
     @Override
-    public void getCalculateFruit(FruitOperation fruitOperation) {
+    public void handle(FruitOperation fruitOperation) {
         fruitService.update(fruitOperation.getFruit(),fruitOperation.getAmount()
                 + fruitService.getAmount(fruitOperation.getFruit()));
     }

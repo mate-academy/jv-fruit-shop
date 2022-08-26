@@ -3,21 +3,21 @@ package core.basesyntax;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitOperation;
-import core.basesyntax.service.CalculateOperation;
-import core.basesyntax.service.DataFileParser;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.FruitReport;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.BalanceOperationImpl;
-import core.basesyntax.service.impl.DataFileParserImpl;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.impl.BalanceOperationHandlerImpl;
+import core.basesyntax.service.impl.CsvTransactionParserImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitReportImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.service.impl.PurchaseOperationImpl;
-import core.basesyntax.service.impl.ReturnOperationImpl;
-import core.basesyntax.service.impl.SupplyOperationImpl;
+import core.basesyntax.service.impl.PurchaseOperationHandlerImpl;
+import core.basesyntax.service.impl.ReturnOperationHandlerImpl;
+import core.basesyntax.service.impl.SupplyOperationHandlerImpl;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.StrategyImpl;
 import java.util.HashMap;
@@ -33,27 +33,27 @@ public class MainFruitShop {
         StorageDao storageDao = new StorageDaoImpl();
         FruitService fruitService = new FruitServiceImpl(storageDao);
 
-        Map<FruitOperation.Operation, CalculateOperation> operationCalculateMap = new HashMap<>();
+        Map<FruitOperation.Operation, OperationHandler> operationCalculateMap = new HashMap<>();
         operationCalculateMap.put(FruitOperation.Operation.SUPPLY,
-                new SupplyOperationImpl(fruitService));
+                new SupplyOperationHandlerImpl(fruitService));
         operationCalculateMap.put(FruitOperation.Operation.PURCHASE,
-                new PurchaseOperationImpl(fruitService));
+                new PurchaseOperationHandlerImpl(fruitService));
         operationCalculateMap.put(FruitOperation.Operation.RETURN,
-                new ReturnOperationImpl(fruitService));
+                new ReturnOperationHandlerImpl(fruitService));
         operationCalculateMap.put(FruitOperation.Operation.BALANCE,
-                new BalanceOperationImpl(fruitService));
+                new BalanceOperationHandlerImpl(fruitService));
 
         Strategy strategy = new StrategyImpl(operationCalculateMap);
-        DataFileParser operationDataFileParser = new DataFileParserImpl();
+        TransactionParser operationDataFileParser = new CsvTransactionParserImpl();
 
         List<String> data = fileReaderService.readFromFile(INPUT_DATA_FILE);
         List<FruitOperation> fruitOperations = operationDataFileParser.parseDataFile(data);
 
         for (FruitOperation fruitOperation : fruitOperations) {
-            strategy.get(fruitOperation.getOperation()).getCalculateFruit(fruitOperation);
+            strategy.get(fruitOperation.getOperation()).handle(fruitOperation);
         }
 
-        FruitReport report = new FruitReportImpl(fruitService);
+        ReportCreator report = new FruitReportImpl(fruitService);
         String reportByDay = report.makeReport();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(OUTPUT_DATA_FILE,reportByDay);

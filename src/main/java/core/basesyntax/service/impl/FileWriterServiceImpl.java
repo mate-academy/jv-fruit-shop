@@ -7,9 +7,9 @@ import java.io.IOException;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public void writeToFile(String toFileName, String report) {
+    public void writeToFile(String toFileName, String data) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFileName))) {
-            bufferedWriter.write(report);
+            bufferedWriter.write(data);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file " + toFileName, e);
         }

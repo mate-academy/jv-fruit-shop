@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FruitReport;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ReportCreator;
 import java.util.List;
 
-public class FruitReportImpl implements FruitReport {
+public class FruitReportImpl implements ReportCreator {
     private static final String REPORT_TITLE = "fruit,balance";
     private static final String SEPARATOR = ",";
     private final FruitService fruitService;

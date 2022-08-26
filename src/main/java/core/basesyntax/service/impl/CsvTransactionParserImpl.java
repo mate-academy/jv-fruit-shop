@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitOperation;
-import core.basesyntax.service.DataFileParser;
+import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataFileParserImpl implements DataFileParser {
+public class CsvTransactionParserImpl implements TransactionParser {
     private static final int OPERATION_INDEX = 0;
     private static final int NAME_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;

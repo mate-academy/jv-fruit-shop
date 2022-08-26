@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StorageDaoImpl implements StorageDao {
-
     @Override
     public void update(String fruitName, Integer amount) {
         Storage.fruitsStorage.put(fruitName, amount);
