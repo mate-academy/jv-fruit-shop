@@ -16,11 +16,11 @@ public class CsvParserServiceImpl implements CsvParserService {
     public List<FruitTransaction> parse(List<String> data) {
         return data.stream()
                 .skip(HEADER_ROW)
-                .map(z -> getFromCsvRow(z))
+                .map(z -> parseCsvRowToTransaction(z))
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction getFromCsvRow(String line) {
+    private FruitTransaction parseCsvRowToTransaction(String line) {
         String[] fields = line.split(",");
         FruitTransaction fruit = new FruitTransaction();
         fruit.setOperation(Operation.getOperationEnum(fields[INDEX_OPERATION]));

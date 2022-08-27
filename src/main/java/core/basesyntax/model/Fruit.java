@@ -6,6 +6,14 @@ public class Fruit {
     private String name;
     private int quantity;
 
+    public Fruit() {
+    }
+
+    public Fruit(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
+
     public String getName() {
         return name;
     }
@@ -24,7 +32,7 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{" + "type='" + name + '\'' + ", quantity=" + quantity + '}';
+        return "Fruit type = " + name + " , quantity= " + quantity;
     }
 
     @Override
@@ -36,11 +44,11 @@ public class Fruit {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return Objects.equals(name, fruit.name);
+        return quantity == fruit.quantity && Objects.equals(name, fruit.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(name, quantity);
     }
 }

@@ -24,12 +24,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String FILE_IN = "src\\resources\\fruit-shop.csv";
-    public static final String FILE_REPORT = "src\\resources\\fruit-shop-report.csv";
+    public static final String FILE_IN = "src/resources/fruit-shop.csv";
+    public static final String FILE_REPORT = "src/resources/fruit-shop-report.csv";
 
     public static void main(String[] args) {
-        FileReader read = new FileReaderImpl();
-        List<String> dataFromFile = read.read(FILE_IN);
+        FileReader reader = new FileReaderImpl();
+        List<String> dataFromFile = reader.read(FILE_IN);
         CsvParserService csvParserService = new CsvParserServiceImpl();
         List<FruitTransaction> transactions = csvParserService.parse(dataFromFile);
         Map<Operation, OperationHandler> strategyMap = getMapStategy();

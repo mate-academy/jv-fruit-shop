@@ -7,14 +7,10 @@ import core.basesyntax.model.FruitTransaction;
 public class SupplyOperationHandler implements OperationHandler {
 
     @Override
-    public Fruit handle(FruitTransaction fruitTransaction) {
-        if (!Storage.fruits.containsKey(fruitTransaction.getName())) {
-            Storage.fruits.put(fruitTransaction.getName(), fruitTransaction);
-            return fruitTransaction;
-        }
-        Fruit fruit = Storage.fruits.get(fruitTransaction.getName());
-        fruit.setQuantity(fruitTransaction.getQuantity() + fruit.getQuantity());
-        Storage.fruits.put(fruitTransaction.getName(), fruit);
-        return fruit;
+    public void handle(FruitTransaction fruitTransaction) {
+        Fruit fruit = new Fruit(fruitTransaction.getName(), fruitTransaction.getQuantity());
+        Storage.fruits.merge(fruit.getName(), fruit, (fr1, fr2) -> fr1 == null ? fruit
+                : new Fruit(fruit.getName(), Storage.fruits.get(fruit.getName()).getQuantity()
+                + fruit.getQuantity()));
     }
 }
