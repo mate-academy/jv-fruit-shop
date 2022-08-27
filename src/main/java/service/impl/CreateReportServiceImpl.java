@@ -1,9 +1,8 @@
 package service.impl;
 
+import java.util.List;
 import model.FruitTransaction;
 import service.CreateReportService;
-
-import java.util.List;
 
 public class CreateReportServiceImpl implements CreateReportService {
     private static final String TITLE_FOR_REPORT = "fruit,quantity";
