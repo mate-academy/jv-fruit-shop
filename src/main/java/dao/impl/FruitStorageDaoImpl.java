@@ -2,9 +2,8 @@ package dao.impl;
 
 import dao.FruitStorageDao;
 import db.FruitStorage;
-import model.FruitTransaction;
-
 import java.util.Map;
+import model.FruitTransaction;
 
 public class FruitStorageDaoImpl implements FruitStorageDao {
     @Override

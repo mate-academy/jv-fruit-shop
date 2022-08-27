@@ -1,17 +1,18 @@
 package core.basesyntax;
 
-import dao.StorageDao;
-import dao.impl.StorageDaoImpl;
+import dao.FruitStorageDao;
+import dao.impl.FruitStorageDaoImpl;
 import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
-import service.CreateReportService;
 import service.FruitTransactionService;
 import service.ReaderService;
+import service.ReportService;
 import service.StringValidatorService;
 import service.WriterService;
-import service.impl.CreateReportServiceImpl;
 import service.impl.FruitTransactionServiceImpl;
 import service.impl.ReaderServiceImpl;
+import service.impl.ReportServiceImpl;
 import service.impl.StringValidatorServiceImpl;
 import service.impl.WriterServiceImpl;
 
@@ -23,21 +24,23 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         List<String> listFromFile = readerService.readFromFile(inputFile);
         //Validate strings and fill in a database
-        StorageDao storageDao = new StorageDaoImpl();
+        FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
         StringValidatorService stringValidatorService = new StringValidatorServiceImpl();
         FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
         if (stringValidatorService.isStringValid(listFromFile)) {
             for (String oneLine : listFromFile) {
                 FruitTransaction transaction = fruitTransactionService
                         .createFruitTransaction(oneLine);
-                storageDao.addTransaction(transaction);
+                fruitStorageDao.addTransaction(transaction);
             }
         }
+        //Get data from database
+        Map<String, Integer> data = fruitStorageDao.getData();
         //Create report
-        WriterService writerService = new WriterServiceImpl();
-        CreateReportService createReportService = new CreateReportServiceImpl();
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.createReport(data);
         //Write report to file
-        String report = createReportService.createReport(storageDao.getAllTransaction());
+        WriterService writerService = new WriterServiceImpl();
         writerService.writeReport(report, firstReport);
     }
 }
