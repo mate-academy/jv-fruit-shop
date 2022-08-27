@@ -7,18 +7,17 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportDaoCsvImpl implements ReportDao {
-    private static final String FILE_NAME = "report.csv";
+    private static final String CSV_SEPARATOR = ",";
 
     @Override
-    public void saveReport(Map<String, Integer> data) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
+    public void saveReport(Map<String, Integer> data, String fileName) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName, true))) {
             bufferedWriter.write("fruit,quantity" + System.lineSeparator());
-            String report = data.keySet().stream()
-                    .map(k -> k + "," + data.get(k))
-                    .collect(Collectors.joining(System.lineSeparator()));
-            bufferedWriter.write(report);
+            bufferedWriter.write(data.keySet().stream()
+                    .map(k -> k + CSV_SEPARATOR + data.get(k))
+                    .collect(Collectors.joining(System.lineSeparator())));
         } catch (IOException e) {
-            throw new RuntimeException("File not found " + FILE_NAME);
+            throw new RuntimeException("File not found " + fileName);
         }
     }
 }

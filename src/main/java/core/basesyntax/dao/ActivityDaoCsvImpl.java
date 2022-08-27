@@ -2,33 +2,36 @@ package core.basesyntax.dao;
 
 import core.basesyntax.model.Activity;
 import core.basesyntax.model.TypeActivity;
-import core.basesyntax.service.ActivityParse;
-import core.basesyntax.service.ActivityParseImpl;
-import core.basesyntax.service.maps.DecodeShortActivity;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ActivityDaoCsvImpl implements ActivityDao {
-    private static final Map<String, TypeActivity> CHAR_TO_ACTIVITY = DecodeShortActivity.getMap();
-    private final ActivityParse activityParse;
-
-    public ActivityDaoCsvImpl() {
-        activityParse = new ActivityParseImpl();
-    }
+public class ActivityDaoCsvImpl implements ActivityDaoCsv {
+    private static final int INDEX_CHAR_ACTIVITY = 0;
+    private static final int INDEX_FRUIT = 1;
+    private static final int INDEX_COUNT = 2;
+    private static final String CSV_SEPARATOR = ",";
 
     @Override
     public List<Activity> getAll(String fileName) {
         try {
             return Files.readAllLines(Path.of(fileName)).stream()
-                .filter(l -> l != null && CHAR_TO_ACTIVITY.get(l.substring(0,1)) != null)
-                .map(activityParse::toActivity)
+                .filter(l -> l != null && TypeActivity.getByLabel(l.substring(0,1)) != null)
+                .map(this::parseActivity)
                 .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("File not found " + fileName);
         }
+    }
+
+    public Activity parseActivity(String string) {
+        String[] array = string.split(CSV_SEPARATOR);
+        return new Activity(
+                TypeActivity.getByLabel(array[INDEX_CHAR_ACTIVITY]),
+                array[INDEX_FRUIT],
+                Integer.parseInt(array[INDEX_COUNT])
+        );
     }
 }
