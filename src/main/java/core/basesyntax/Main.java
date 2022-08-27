@@ -33,9 +33,10 @@ public class Main {
                 storageDao.addTransaction(transaction);
             }
         }
-        //Create report to file from DB
+        //Create report
         WriterService writerService = new WriterServiceImpl();
         CreateReportService createReportService = new CreateReportServiceImpl();
+        //Write report to file
         String report = createReportService.createReport(storageDao.getAllTransaction());
         writerService.writeReport(report, firstReport);
     }
