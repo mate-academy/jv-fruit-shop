@@ -4,10 +4,12 @@ import dao.StorageDao;
 import dao.impl.StorageDaoImpl;
 import java.util.List;
 import model.FruitTransaction;
+import service.CreateReportService;
 import service.FruitTransactionService;
 import service.ReaderService;
 import service.StringValidatorService;
 import service.WriterService;
+import service.impl.CreateReportServiceImpl;
 import service.impl.FruitTransactionServiceImpl;
 import service.impl.ReaderServiceImpl;
 import service.impl.StringValidatorServiceImpl;
@@ -33,6 +35,8 @@ public class Main {
         }
         //Create report to file from DB
         WriterService writerService = new WriterServiceImpl();
-        writerService.createReport(storageDao.getAllTransaction(), firstReport);
+        CreateReportService createReportService = new CreateReportServiceImpl();
+        String report = createReportService.createReport(storageDao.getAllTransaction());
+        writerService.writeReport(report, firstReport);
     }
 }

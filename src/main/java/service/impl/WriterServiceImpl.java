@@ -9,26 +9,8 @@ import model.FruitTransaction;
 import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
-    private static final String TITLE_FOR_REPORT = "fruit,quantity";
-    private static final String BANANA = "banana";
-    private static final String APPLE = "apple";
-    private static final String SEPARATOR = ",";
-
     @Override
-    public void createReport(List<FruitTransaction> transactions, String fileName) {
-        int amountOfApples = transactions.stream()
-                .filter(f -> f.getFruit().equals(APPLE))
-                .mapToInt(FruitTransaction::getQuantity)
-                .sum();
-        int amountOfBananas = transactions.stream()
-                .filter(f -> f.getFruit().equals(BANANA))
-                .mapToInt(FruitTransaction::getQuantity)
-                .sum();
-        StringBuilder stringBuilder = new StringBuilder();
-        String report = stringBuilder.append(TITLE_FOR_REPORT).append(System.lineSeparator())
-                .append(BANANA).append(SEPARATOR).append(amountOfBananas)
-                .append(System.lineSeparator())
-                .append(APPLE).append(SEPARATOR).append(amountOfApples).toString();
+    public void writeReport(String report, String fileName) {
         File file = new File(fileName);
         if (file.exists()) {
             file.delete();
@@ -41,7 +23,7 @@ public class WriterServiceImpl implements WriterService {
         try {
             Files.write(file.toPath(), report.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file", e);
+            throw new RuntimeException("Can't write data to file " + fileName, e);
         }
     }
 }
