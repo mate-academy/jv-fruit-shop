@@ -13,20 +13,14 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
 
     @Override
     public FruitTransaction createFruitTransaction(String string) {
-        return new FruitTransaction(getType(string), getFruit(string), getAmount(string));
+        String[] elements = string.split(DELIMITER);
+        return new FruitTransaction(elements[TYPE_OF_TRANSACTION], elements[TYPE_OF_FRUIT],
+                getAmount(elements[TYPE_OF_TRANSACTION], elements[AMOUNT]));
     }
 
-    private String getType(String string) {
-        return string.split(DELIMITER)[TYPE_OF_TRANSACTION];
-    }
-
-    private String getFruit(String string) {
-        return string.split(DELIMITER)[TYPE_OF_FRUIT];
-    }
-
-    private int getAmount(String string) {
+    private int getAmount(String type, String amount) {
         AmountStrategy amountStrategy = new AmountStrategy();
-        AmountService amountService = amountStrategy.getAmountService(getType(string));
-        return amountService.getAmount(Integer.parseInt(string.split(DELIMITER)[AMOUNT]));
+        AmountService amountService = amountStrategy.getAmountService(type);
+        return amountService.getAmount(Integer.parseInt(amount));
     }
 }
