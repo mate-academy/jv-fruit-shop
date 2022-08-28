@@ -7,11 +7,11 @@ import core.basesyntax.dao.ActivityDaoDbImpl;
 import core.basesyntax.dao.ReportDao;
 import core.basesyntax.dao.ReportDaoCsvImpl;
 import core.basesyntax.service.ActivityStrategyImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.TransactionServiceImpl;
 import core.basesyntax.service.maps.ActivityToOperation;
-import core.basesyntax.service.strategy.ReportService;
-import core.basesyntax.service.strategy.ReportServiceImpl;
 
 public class Main {
     public static void main(String[] args) {

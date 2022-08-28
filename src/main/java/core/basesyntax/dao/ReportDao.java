@@ -1,7 +1,5 @@
 package core.basesyntax.dao;
 
-import java.util.Map;
-
 public interface ReportDao {
-    void saveReport(Map<String, Integer> data, String file);
+    void saveReport(String data, String file);
 }

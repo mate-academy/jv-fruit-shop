@@ -4,7 +4,6 @@ import core.basesyntax.dao.ActivityDaoCsv;
 import core.basesyntax.dao.ActivityDaoDb;
 import core.basesyntax.dao.ReportDao;
 import core.basesyntax.model.Activity;
-import core.basesyntax.service.strategy.ReportService;
 
 public class TransactionServiceImpl implements TransactionService {
     private final ActivityDaoCsv activityDaoCsv;
