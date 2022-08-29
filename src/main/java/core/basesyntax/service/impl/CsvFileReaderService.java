@@ -15,6 +15,7 @@ public class CsvFileReaderService implements FileReaderService {
         List<String> list;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             list = bufferedReader.lines()
+                    .skip(1)
                     .collect(Collectors.toList());
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File " + file + " does not exist.", e);
