@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.model.Activity;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.strategy.Strategy;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ParserServiceImpl implements ParserService {
     @Override

@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReportGeneratorService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import core.basesyntax.service.ReportGeneratorService;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
 

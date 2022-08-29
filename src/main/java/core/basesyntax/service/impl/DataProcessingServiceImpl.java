@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.db.StorageFruits;
 import core.basesyntax.model.Activity;
 import core.basesyntax.service.DataProcessingService;
+import java.util.List;
+import java.util.Map;
 
 public class DataProcessingServiceImpl implements DataProcessingService {
     private Map<String, Integer> result;
