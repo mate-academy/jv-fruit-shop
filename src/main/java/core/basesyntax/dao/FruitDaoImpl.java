@@ -2,6 +2,7 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
+import java.util.Optional;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
@@ -10,19 +11,10 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Fruit get(String fruitName) {
-        Fruit fruit;
-        boolean isFruitInStore = Storage.fruits.stream()
-                .anyMatch(f -> f.getFruitName().equals(fruitName));
-        if (isFruitInStore) {
-            fruit = Storage.fruits.stream()
-                    .filter(f -> f.getFruitName().equals(fruitName))
-                    .findFirst()
-                    .get();
-        } else {
-            fruit = new Fruit(fruitName, 0);
-            add(fruit);
-        }
-        return fruit;
+    public Optional<Fruit> getByName(String fruitName) {
+
+        return Storage.fruits.stream()
+                .filter(f -> f.getName().equals(fruitName))
+                .findFirst();
     }
 }

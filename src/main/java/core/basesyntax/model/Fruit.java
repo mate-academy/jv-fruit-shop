@@ -3,24 +3,24 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Fruit {
-    private String fruitName;
+    private String name;
     private int amount;
 
-    public Fruit(String fruitName, int amount) {
-        this.fruitName = fruitName;
+    public Fruit(String name, int amount) {
+        this.name = name;
         this.amount = amount;
     }
 
-    public String getFruitName() {
-        return fruitName;
+    public String getName() {
+        return name;
     }
 
     public int getAmount() {
         return amount;
     }
 
-    public void setFruitName(String fruitName) {
-        this.fruitName = fruitName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setAmount(int amount) {
@@ -37,18 +37,18 @@ public class Fruit {
         }
         Fruit fruit = (Fruit) o;
         return getAmount() == fruit.getAmount()
-                && Objects.equals(getFruitName(), fruit.getFruitName());
+                && Objects.equals(getName(), fruit.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFruitName(), getAmount());
+        return Objects.hash(getName(), getAmount());
     }
 
     @Override
     public String toString() {
         return "Fruit{"
-                + "fruitName='" + fruitName + '\''
+                + "fruitName='" + name + '\''
                 + ", amount=" + amount
                 + '}';
     }

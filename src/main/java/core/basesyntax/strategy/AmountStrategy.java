@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface TransactionStrategy {
+public interface AmountStrategy {
     AmountHandler get(String operationCode);
 }

@@ -1,12 +1,20 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.Reader;
+import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ReaderService;
+import core.basesyntax.service.impl.WriterService;
 import core.basesyntax.strategy.AmountHandler;
-import core.basesyntax.strategy.impl.BalanceAmount;
-import core.basesyntax.strategy.impl.PurchaseAmount;
-import core.basesyntax.strategy.impl.ReturnAmount;
-import core.basesyntax.strategy.impl.SupplyAmount;
+import core.basesyntax.strategy.AmountStrategy;
+import core.basesyntax.strategy.impl.AmountStrategyImpl;
+import core.basesyntax.strategy.impl.BalanceAmountHandler;
+import core.basesyntax.strategy.impl.PurchaseAmountHandler;
+import core.basesyntax.strategy.impl.ReturnAmountHandler;
+import core.basesyntax.strategy.impl.SupplyAmountHandler;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,12 +24,16 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String, AmountHandler> amountHandlerMap = new HashMap<>();
-        amountHandlerMap.put("b", new BalanceAmount());
-        amountHandlerMap.put("p", new PurchaseAmount());
-        amountHandlerMap.put("r", new ReturnAmount());
-        amountHandlerMap.put("s", new SupplyAmount());
+        amountHandlerMap.put("b", new BalanceAmountHandler());
+        amountHandlerMap.put("p", new PurchaseAmountHandler());
+        amountHandlerMap.put("r", new ReturnAmountHandler());
+        amountHandlerMap.put("s", new SupplyAmountHandler());
 
-        FruitService fruitService = new FruitServiceImpl(INPUT_FILE, OUTPUT_FILE, amountHandlerMap);
-        fruitService.fruitService();
+        FruitDao fruitDao = new FruitDaoImpl();
+        Reader reader = new ReaderService();
+        Writer writer = new WriterService();
+        AmountStrategy strategy = new AmountStrategyImpl(amountHandlerMap);
+        FruitService fruitService = new FruitServiceImpl(strategy, fruitDao, reader, writer);
+        fruitService.processData(INPUT_FILE, OUTPUT_FILE);
     }
 }
