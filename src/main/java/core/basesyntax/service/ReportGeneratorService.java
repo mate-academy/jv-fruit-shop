@@ -1,4 +1,4 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service;
 
 import java.util.List;
 import java.util.Map;

@@ -1,9 +1,9 @@
-package core.basesyntax.strategy.impl;
+package core.basesyntax.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import core.basesyntax.strategy.ReportGeneratorService;
+import core.basesyntax.service.ReportGeneratorService;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
 
