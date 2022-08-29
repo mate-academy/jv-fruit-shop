@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operation;
@@ -28,6 +28,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r"),
         SUPPLY("s");
+
         private String operation;
 
         Operation(String operation) {

@@ -1,5 +1,6 @@
-package core.basesyntax.storage;
+package core.basesyntax.model.serviceimpl;
 
+import core.basesyntax.model.service.DataBase;
 import java.util.HashMap;
 import java.util.Map;
 

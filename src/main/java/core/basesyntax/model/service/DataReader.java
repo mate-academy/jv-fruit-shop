@@ -1,4 +1,4 @@
-package core.basesyntax.readdata;
+package core.basesyntax.model.service;
 
 import java.util.List;
 

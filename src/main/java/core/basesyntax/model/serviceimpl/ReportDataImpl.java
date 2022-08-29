@@ -1,5 +1,6 @@
-package core.basesyntax.report;
+package core.basesyntax.model.serviceimpl;
 
+import core.basesyntax.model.service.ReportData;
 import java.util.Map;
 import java.util.stream.Collectors;
 

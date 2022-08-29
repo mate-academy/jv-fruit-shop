@@ -1,7 +1,7 @@
-package core.basesyntax.operation;
+package core.basesyntax.model.strategy.handler;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.storage.DataBase;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.service.DataBase;
 
 public class ReturnOperationHandler implements OperationHandler {
     private DataBase dataBase;

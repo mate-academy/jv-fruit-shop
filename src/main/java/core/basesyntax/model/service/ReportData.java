@@ -1,4 +1,4 @@
-package core.basesyntax.report;
+package core.basesyntax.model.service;
 
 import java.util.Map;
 

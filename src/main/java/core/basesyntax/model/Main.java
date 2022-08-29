@@ -1,18 +1,18 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
-import core.basesyntax.operation.BalanceOperationHandler;
-import core.basesyntax.operation.OperationHandler;
-import core.basesyntax.operation.PurchaseOperationHandler;
-import core.basesyntax.operation.ReturnOperationHandler;
-import core.basesyntax.operation.SupplyOperationHandler;
-import core.basesyntax.parse.DataParserImpl;
-import core.basesyntax.readdata.DataReaderImpl;
-import core.basesyntax.report.ReportDataImpl;
-import core.basesyntax.storage.DataBaseImpl;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.writedata.DataWriter;
-import core.basesyntax.writedata.DataWriterImpl;
+import core.basesyntax.model.service.DataWriter;
+import core.basesyntax.model.serviceimpl.DataBaseImpl;
+import core.basesyntax.model.serviceimpl.DataParserImpl;
+import core.basesyntax.model.serviceimpl.DataReaderImpl;
+import core.basesyntax.model.serviceimpl.DataWriterImpl;
+import core.basesyntax.model.serviceimpl.ReportDataImpl;
+import core.basesyntax.model.strategy.OperationStrategy;
+import core.basesyntax.model.strategy.OperationStrategyImpl;
+import core.basesyntax.model.strategy.handler.BalanceOperationHandler;
+import core.basesyntax.model.strategy.handler.OperationHandler;
+import core.basesyntax.model.strategy.handler.PurchaseOperationHandler;
+import core.basesyntax.model.strategy.handler.ReturnOperationHandler;
+import core.basesyntax.model.strategy.handler.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,6 @@ public class Main {
         String dataReport = new ReportDataImpl().createDataReport(dataBase.getAll());
         DataWriter dataWriter = new DataWriterImpl();
         dataWriter.writeData(REPORT_FILE, dataReport);
-
     }
 
     private static Map<FruitTransaction.Operation,
