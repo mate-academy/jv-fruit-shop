@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import core.basesyntax.model.Activity;
+import core.basesyntax.service.DataProcessingService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.impl.CsvFileReaderService;
+import core.basesyntax.service.impl.DataProcessingServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.impl.BalanceStrategy;
@@ -37,5 +39,8 @@ public class Main {
 
         ParserService parserService = new ParserServiceImpl();
         List<Activity> activities = parserService.parse(strings, operationStrategies);
+
+        DataProcessingService dataProcessingService = new DataProcessingServiceImpl();
+        Map<String, Integer> stringIntegerMap = dataProcessingService.processTheData(activities);
     }
 }
