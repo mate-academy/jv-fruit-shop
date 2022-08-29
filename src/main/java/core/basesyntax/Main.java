@@ -2,8 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.db.StorageDao;
 import core.basesyntax.db.StorageDaoImpl;
-import core.basesyntax.service.*;
-import core.basesyntax.service_impl.*;
+import core.basesyntax.service.FruitStoreDao;
+import core.basesyntax.service.Reader;
+import core.basesyntax.service.ReportHandler;
+import core.basesyntax.service.Writer;
+import core.basesyntax.serviceimpl.CsvReaderImpl;
+import core.basesyntax.serviceimpl.CsvWriterImpl;
+import core.basesyntax.serviceimpl.FruitStoreDaoImpl;
+import core.basesyntax.serviceimpl.FruitStoreReportHandler;
 import core.basesyntax.strategy.FruitOperation;
 import core.basesyntax.strategy.impl.FruitBalanceOperation;
 import core.basesyntax.strategy.impl.FruitPurchaseOperation;

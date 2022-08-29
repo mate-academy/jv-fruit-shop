@@ -1,8 +1,7 @@
-package core.basesyntax.service_impl;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.StorageDao;
 import core.basesyntax.service.ReportHandler;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

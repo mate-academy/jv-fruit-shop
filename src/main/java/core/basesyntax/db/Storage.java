@@ -10,7 +10,7 @@ public class Storage {
         fruitsAmount = new HashMap<>();
     }
 
-     Map<String, Integer> getFruitsAmount() {
+    Map<String, Integer> getFruitsAmount() {
         return fruitsAmount;
     }
 }
