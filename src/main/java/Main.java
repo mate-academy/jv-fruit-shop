@@ -3,46 +3,46 @@ import dao.StorageDaoImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.Fruits;
+import model.FruitTransaction;
 import service.CreatorReportService;
 import service.FileReaderService;
 import service.FileWriterService;
-import service.ParserService;
+import service.FruitTransactionParserService;
 import service.impl.CreatorReportServiceImpl;
 import service.impl.FileReaderServiceImpl;
 import service.impl.FileWriterServiceImpl;
-import service.impl.ParserServiceImpl;
+import service.impl.FruitTransactionParserServiceImpl;
 import strategy.Strategy;
 import strategy.StrategyImpl;
 import strategy.operations.OperationHandler;
-import strategy.operations.impl.BalanceOperation;
-import strategy.operations.impl.PurchaseOperation;
-import strategy.operations.impl.ReturnOperation;
-import strategy.operations.impl.SupplyOperation;
+import strategy.operations.impl.BalanceOperationHandlerImpl;
+import strategy.operations.impl.PurchaseOperationHandlerImpl;
+import strategy.operations.impl.ReturnOperationHandlerImpl;
+import strategy.operations.impl.SupplyOperationHandlerImpl;
 
 public class Main {
-    private static final String INPUT_FILEPATH = "src/main/java/files/Input.csv";
-    private static final String REPORT_FILEPATH = "src/main/java/files/Report.csv";
+    private static final String INPUT_FILEPATH = "src/main/resources/Input.csv";
+    private static final String REPORT_FILEPATH = "src/main/resources/Report.csv";
 
     public static void main(String[] args) {
         StorageDao storageDao = new StorageDaoImpl();
-        Map<Fruits.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Fruits.Operation.BALANCE,
-                new BalanceOperation(storageDao));
-        operationHandlerMap.put(Fruits.Operation.PURCHASE,
-                new PurchaseOperation(storageDao));
-        operationHandlerMap.put(Fruits.Operation.RETURN,
-                new ReturnOperation(storageDao));
-        operationHandlerMap.put(Fruits.Operation.SUPPLY,
-                new SupplyOperation(storageDao));
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandlerImpl(storageDao));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandlerImpl(storageDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandlerImpl(storageDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandlerImpl(storageDao));
 
         FileReaderService fileReader = new FileReaderServiceImpl();
         List<String> dateFromFile = fileReader.readFromFile(INPUT_FILEPATH);
-        ParserService parserService = new ParserServiceImpl();
-        List<Fruits> fruitTransactionList = parserService.parse(dateFromFile);
+        FruitTransactionParserService parserService = new FruitTransactionParserServiceImpl();
+        List<FruitTransaction> fruitTransactionList = parserService.parse(dateFromFile);
         Strategy operationStrategy = new StrategyImpl(operationHandlerMap);
         fruitTransactionList.forEach(f -> operationStrategy
-                .getOperationTypeFruit(f.getOperation())
+                .get(f.getOperation())
                 .handler(f));
         CreatorReportService creatorReportService = new CreatorReportServiceImpl(storageDao);
         FileWriterService fileWriterService = new FileWriterServiceImpl();

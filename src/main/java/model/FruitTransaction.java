@@ -3,15 +3,18 @@ package model;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Fruits {
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private Integer quantity;
 
-    public Fruits(Operation operation, String fruit, Integer quantity) {
+    public FruitTransaction(Operation operation, String fruit, Integer quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
+    }
+
+    public FruitTransaction() {
     }
 
     public Operation getOperation() {
@@ -46,7 +49,7 @@ public class Fruits {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Fruits that = (Fruits) o;
+        FruitTransaction that = (FruitTransaction) o;
         return operation.equals(that.operation)
                 && fruit.equals(that.fruit)
                 && quantity.equals(that.quantity);
@@ -71,13 +74,13 @@ public class Fruits {
         public String getOperation() {
             return operation;
         }
-    }
 
-    public static Operation getOperationType(String letterOfType) {
-        return Arrays.stream(Operation.values())
-                .filter(l -> l.getOperation().equals(letterOfType.trim()))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Operation "
-                        + letterOfType + " can`t be found"));
+        public static Operation getOperationType(String letterOfType) {
+            return Arrays.stream(Operation.values())
+                    .filter(l -> l.getOperation().equals(letterOfType.trim()))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Operation "
+                            + letterOfType + " can`t be found"));
+        }
     }
 }

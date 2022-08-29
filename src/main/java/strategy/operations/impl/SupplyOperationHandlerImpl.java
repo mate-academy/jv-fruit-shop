@@ -1,17 +1,18 @@
 package strategy.operations.impl;
 
 import dao.StorageDao;
-import model.Fruits;
+import model.FruitTransaction;
 import strategy.operations.OperationHandler;
 
-public class ReturnOperation implements OperationHandler {
+public class SupplyOperationHandlerImpl implements OperationHandler {
     private StorageDao storageDao;
 
-    public ReturnOperation(StorageDao storageDao) {
+    public SupplyOperationHandlerImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
-    public void handler(Fruits fruitTransaction) {
+    @Override
+    public void handler(FruitTransaction fruitTransaction) {
         storageDao.update(fruitTransaction.getFruit(),
                 storageDao.remainder(fruitTransaction.getFruit())
                         + fruitTransaction.getQuantity());
