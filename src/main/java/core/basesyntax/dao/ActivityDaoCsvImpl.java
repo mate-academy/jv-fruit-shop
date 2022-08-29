@@ -2,6 +2,7 @@ package core.basesyntax.dao;
 
 import core.basesyntax.model.Activity;
 import core.basesyntax.model.TypeActivity;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,11 +14,13 @@ public class ActivityDaoCsvImpl implements ActivityDaoCsv {
     private static final int INDEX_FRUIT = 1;
     private static final int INDEX_COUNT = 2;
     private static final String CSV_SEPARATOR = ",";
+    private static final String RESOURCES_PATH = "src" + File.separator + "main" + File.separator
+            + "resources" + File.separator;
 
     @Override
     public List<Activity> getAll(String fileName) {
         try {
-            return Files.readAllLines(Path.of(fileName)).stream()
+            return Files.readAllLines(Path.of(RESOURCES_PATH + fileName)).stream()
                 .filter(l -> l != null && TypeActivity.getByLabel(l.substring(0,1)) != null)
                 .map(this::parseActivity)
                 .collect(Collectors.toList());

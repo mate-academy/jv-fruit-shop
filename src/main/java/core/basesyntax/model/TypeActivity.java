@@ -23,8 +23,4 @@ public enum TypeActivity {
     public static TypeActivity getByLabel(String label) {
         return BY_LABEL.get(label);
     }
-
-    public int getSign() {
-        return this == PURCHASE ? -1 : 1;
-    }
 }
