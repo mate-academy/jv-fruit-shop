@@ -4,8 +4,11 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import core.basesyntax.model.Activity;
 import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.ParserService;
 import core.basesyntax.service.impl.CsvFileReaderService;
+import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.impl.BalanceStrategy;
 import core.basesyntax.strategy.impl.PurchaseStrategy;
@@ -31,5 +34,8 @@ public class Main {
         operationStrategies.put("s", new SupplyStrategy());
         operationStrategies.put("p", new PurchaseStrategy());
         operationStrategies.put("r", new ReturnStrategy());
+
+        ParserService parserService = new ParserServiceImpl();
+        List<Activity> activities = parserService.parse(strings, operationStrategies);
     }
 }
