@@ -1,9 +1,9 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import service.ReportService;
+import core.basesyntax.service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String TITLE_FOR_REPORT = "fruit,quantity";

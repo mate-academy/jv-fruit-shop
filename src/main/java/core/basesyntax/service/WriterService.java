@@ -1,4 +1,4 @@
-package service;
+package core.basesyntax.service;
 
 public interface WriterService {
     void writeReport(String report, String fileName);

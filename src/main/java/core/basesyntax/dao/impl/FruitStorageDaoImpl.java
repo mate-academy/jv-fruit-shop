@@ -1,9 +1,9 @@
-package dao.impl;
+package core.basesyntax.dao.impl;
 
-import dao.FruitStorageDao;
-import db.FruitStorage;
+import core.basesyntax.dao.FruitStorageDao;
+import core.basesyntax.db.FruitStorage;
 import java.util.Map;
-import model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public class FruitStorageDaoImpl implements FruitStorageDao {
     @Override

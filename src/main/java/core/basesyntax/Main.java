@@ -1,20 +1,20 @@
 package core.basesyntax;
 
-import dao.FruitStorageDao;
-import dao.impl.FruitStorageDaoImpl;
+import core.basesyntax.dao.FruitStorageDao;
+import core.basesyntax.dao.impl.FruitStorageDaoImpl;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
-import service.FruitTransactionService;
-import service.ReaderService;
-import service.ReportService;
-import service.StringValidatorService;
-import service.WriterService;
-import service.impl.FruitTransactionServiceImpl;
-import service.impl.ReaderServiceImpl;
-import service.impl.ReportServiceImpl;
-import service.impl.StringValidatorServiceImpl;
-import service.impl.WriterServiceImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitTransactionService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ValidatorService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.ValidatorServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,12 +25,12 @@ public class Main {
         List<String> listFromFile = readerService.readFromFile(inputFile);
         //Validate strings and fill in a database
         FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
-        StringValidatorService stringValidatorService = new StringValidatorServiceImpl();
+        ValidatorService validatorService = new ValidatorServiceImpl();
         FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
-        if (stringValidatorService.isStringValid(listFromFile)) {
+        if (validatorService.validateData(listFromFile)) {
             for (String oneLine : listFromFile) {
                 FruitTransaction transaction = fruitTransactionService
-                        .createFruitTransaction(oneLine);
+                        .processTransactionFromLine(oneLine);
                 fruitStorageDao.addTransaction(transaction);
             }
         }

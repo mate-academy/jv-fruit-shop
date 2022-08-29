@@ -1,7 +1,7 @@
-package dao;
+package core.basesyntax.dao;
 
 import java.util.Map;
-import model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public interface FruitStorageDao {
     void addTransaction(FruitTransaction transaction);

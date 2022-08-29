@@ -1,6 +1,6 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
-import service.AmountService;
+import core.basesyntax.service.AmountService;
 
 public class ReturnAmountService implements AmountService {
     @Override

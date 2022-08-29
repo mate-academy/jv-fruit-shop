@@ -1,9 +1,9 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
 import java.util.List;
-import service.StringValidatorService;
+import core.basesyntax.service.ValidatorService;
 
-public class StringValidatorServiceImpl implements StringValidatorService {
+public class ValidatorServiceImpl implements ValidatorService {
     private static final int TITLE_INDEX = 0;
     private static final int TYPE = 0;
     private static final int FRUIT = 1;
@@ -12,10 +12,9 @@ public class StringValidatorServiceImpl implements StringValidatorService {
     private static final String TITLE_STRING = "type,fruit,quantity";
     private static final String SEPARATOR = ",";
     private static final String[] TYPE_OF_TRANSACTION = new String[] {"b", "s", "p", "r"};
-    private static final String[] TYPE_OF_FRUITS = new String[] {"banana", "apple"};
 
     @Override
-    public boolean isStringValid(List<String> data) {
+    public boolean validateData(List<String> data) {
         if (!data.get(TITLE_INDEX).equals(TITLE_STRING)) {
             return false;
         }
@@ -23,15 +22,13 @@ public class StringValidatorServiceImpl implements StringValidatorService {
         return data.stream().allMatch(this::isStringValid);
     }
 
-    @Override
-    public boolean isStringValid(String string) {
+    private boolean isStringValid(String string) {
         if (string == null) {
             return false;
         }
         String[] elements = string.split(SEPARATOR);
         return emptyLineValidator(string) && amountOfElementsValidator(elements)
                 && typeOfTransactionValidator(elements[TYPE])
-                && typeOfFruitValidator(elements[FRUIT])
                 && amountValidator(elements[AMOUNT]);
     }
 
@@ -46,16 +43,6 @@ public class StringValidatorServiceImpl implements StringValidatorService {
     private boolean typeOfTransactionValidator(String type) {
         boolean valid = false;
         for (String typeFromArray : TYPE_OF_TRANSACTION) {
-            if (typeFromArray.equals(type)) {
-                valid = true;
-            }
-        }
-        return valid;
-    }
-
-    private boolean typeOfFruitValidator(String type) {
-        boolean valid = false;
-        for (String typeFromArray : TYPE_OF_FRUITS) {
             if (typeFromArray.equals(type)) {
                 valid = true;
             }

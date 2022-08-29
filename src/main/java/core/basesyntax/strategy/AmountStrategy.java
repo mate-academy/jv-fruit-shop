@@ -1,10 +1,10 @@
-package strategy;
+package core.basesyntax.strategy;
 
-import service.AmountService;
-import service.impl.BalanceAmountService;
-import service.impl.PurchaseAmountService;
-import service.impl.ReturnAmountService;
-import service.impl.SupplyAmountService;
+import core.basesyntax.service.AmountService;
+import core.basesyntax.service.impl.BalanceAmountService;
+import core.basesyntax.service.impl.PurchaseAmountService;
+import core.basesyntax.service.impl.ReturnAmountService;
+import core.basesyntax.service.impl.SupplyAmountService;
 
 public class AmountStrategy {
     public AmountService getAmountService(String operation) {
