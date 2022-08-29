@@ -11,6 +11,9 @@ import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
     private static final String DIVIDER = ",";
+    private static final int OPERATION_INDEX = 0;
+    private static final int NAME_INDEX = 1;
+    private static final int AMOUNT_INDEX = 2;
     private final String inputFile;
     private final String outputFile;
     private final FruitTransaction fruitTransaction;
@@ -28,9 +31,9 @@ public class FruitServiceImpl implements FruitService {
         List<String> inputFruits = reader.readFromFile(inputFile);
         for (int i = 1; i < inputFruits.size(); i++) {
             String[] fruitIncoming = inputFruits.get(i).split(DIVIDER);
-            String operation = fruitIncoming[0];
-            String fruitName = fruitIncoming[1];
-            int fruitAmount = Integer.parseInt(fruitIncoming[2]);
+            String operation = fruitIncoming[OPERATION_INDEX];
+            String fruitName = fruitIncoming[NAME_INDEX];
+            int fruitAmount = Integer.parseInt(fruitIncoming[AMOUNT_INDEX]);
             fruitTransaction.fruitTransaction(fruitName, operation, fruitAmount);
         }
         Writer writer = new WriterService(outputFile, Storage.fruits);
