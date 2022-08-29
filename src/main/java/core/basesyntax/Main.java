@@ -1,23 +1,25 @@
 package core.basesyntax;
 
+import core.basesyntax.model.Activity;
+import core.basesyntax.service.DataProcessingService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.ParserService;
+import core.basesyntax.service.ReportGeneratorService;
+import core.basesyntax.service.impl.CsvFileReaderService;
+import core.basesyntax.service.impl.CsvFileWriterService;
+import core.basesyntax.service.impl.DataProcessingServiceImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
+import core.basesyntax.strategy.Strategy;
+import core.basesyntax.strategy.impl.BalanceStrategy;
+import core.basesyntax.strategy.impl.PurchaseStrategy;
+import core.basesyntax.strategy.impl.ReturnStrategy;
+import core.basesyntax.strategy.impl.SupplyStrategy;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import core.basesyntax.model.Activity;
-import core.basesyntax.service.DataProcessingService;
-import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.ParserService;
-import core.basesyntax.service.impl.CsvFileReaderService;
-import core.basesyntax.service.impl.DataProcessingServiceImpl;
-import core.basesyntax.service.impl.ParserServiceImpl;
-import core.basesyntax.strategy.ReportGeneratorService;
-import core.basesyntax.strategy.Strategy;
-import core.basesyntax.strategy.impl.BalanceStrategy;
-import core.basesyntax.strategy.impl.PurchaseStrategy;
-import core.basesyntax.strategy.impl.ReportGeneratorServiceImpl;
-import core.basesyntax.strategy.impl.ReturnStrategy;
-import core.basesyntax.strategy.impl.SupplyStrategy;
 
 public class Main {
     public static void main(String[] args) {
@@ -47,5 +49,10 @@ public class Main {
 
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
         List<String> outputStrings = reportGeneratorService.generate(stringIntegerMap);
+
+        File outputFile = new File(folder, "output.csv");
+
+        FileWriterService fileWriterService = new CsvFileWriterService();
+        fileWriterService.writeReport(outputFile, outputStrings);
     }
 }
