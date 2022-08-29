@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
-        File folder = new File("src\\main\\java\\core\\basesyntax\\resources");
+        File folder = new File("src\\main\\resources");
         File inputFile = new File(folder, "input.csv");
 
         File outputFile = new File(folder, "output.csv");
