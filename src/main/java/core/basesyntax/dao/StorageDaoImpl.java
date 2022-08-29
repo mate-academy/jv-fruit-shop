@@ -1,17 +1,17 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 
 public class StorageDaoImpl implements StorageDao {
 
     @Override
-    public void add(Fruit fruit) {
-        Storage.fruits.put(fruit.getName(), fruit);
+    public void add(FruitTransaction fruit) {
+        Storage.fruits.put(fruit.getName(), fruit.getQuantity());
     }
 
     @Override
-    public Fruit get(String fruit) {
+    public Integer get(String fruit) {
         return Storage.fruits.get(fruit);
     }
 }

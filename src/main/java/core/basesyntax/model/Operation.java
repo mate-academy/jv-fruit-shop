@@ -20,12 +20,4 @@ public enum Operation {
         }
         return null;
     }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
 }

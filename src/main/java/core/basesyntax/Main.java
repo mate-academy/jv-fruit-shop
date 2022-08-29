@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.cvs.CsvParserService;
@@ -24,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String FILE_IN = "src/resources/fruit-shop.csv";
-    public static final String FILE_REPORT = "src/resources/fruit-shop-report.csv";
+    private static final String FILE_IN = "src/resources/fruit-shop.csv";
+    private static final String FILE_REPORT = "src/resources/fruit-shop-report.csv";
 
     public static void main(String[] args) {
         FileReader reader = new FileReaderImpl();
@@ -37,11 +38,12 @@ public class Main {
         TransactionService transactionService = new TransactionServiceImpl(operationStrategy);
         transactionService.process(transactions);
         CsvReportService csvReportService = new CsvReportServiceImpl();
-        FileWriter fileWriter = new FileWriterImpl(csvReportService);
-        fileWriter.writeToFile(FILE_REPORT);
+        String report = csvReportService.getReport(Storage.fruits);
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFile(FILE_REPORT, report);
     }
 
-    public static Map<Operation, OperationHandler> getMapStategy() {
+    private static Map<Operation, OperationHandler> getMapStategy() {
         Map<Operation, OperationHandler> map = new HashMap<>();
         map.put(Operation.BALANCE, new BalanceOperationHandler());
         map.put(Operation.SUPPLY, new SupplyOperationHandler());

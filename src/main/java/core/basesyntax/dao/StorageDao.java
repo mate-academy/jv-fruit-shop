@@ -1,9 +1,9 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 
 public interface StorageDao {
-    void add(Fruit fruit);
+    void add(FruitTransaction fruit);
 
-    Fruit get(String fruit);
+    Integer get(String fruit);
 }

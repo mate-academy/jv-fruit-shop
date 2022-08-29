@@ -9,14 +9,13 @@ public class CsvParserServiceImpl implements CsvParserService {
     private static final int HEADER_ROW = 1;
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_TYPE = 1;
-
     private static final int INDEX_QUANTITY = 2;
 
     @Override
     public List<FruitTransaction> parse(List<String> data) {
         return data.stream()
                 .skip(HEADER_ROW)
-                .map(z -> parseCsvRowToTransaction(z))
+                .map(this::parseCsvRowToTransaction)
                 .collect(Collectors.toList());
     }
 
