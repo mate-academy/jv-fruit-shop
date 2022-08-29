@@ -1,7 +1,9 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.ActivityDaoDb;
-import core.basesyntax.model.Activity;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.strategy.TypeActivityStrategy;
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
@@ -9,11 +11,12 @@ public class ReportServiceImpl implements ReportService {
     private static final String CSV_HEAD_REPORT = "fruit,quantity";
     private static final String CSV_END_LINE = System.lineSeparator();
     private final ActivityDaoDb activityDaoDb;
-    private final ActivityStrategy activityStrategy;
+    private final TypeActivityStrategy typeActivityStrategy;
 
-    public ReportServiceImpl(ActivityDaoDb activityDaoDb, ActivityStrategy activityStrategy) {
+    public ReportServiceImpl(ActivityDaoDb activityDaoDb,
+                             TypeActivityStrategy typeActivityStrategy) {
         this.activityDaoDb = activityDaoDb;
-        this.activityStrategy = activityStrategy;
+        this.typeActivityStrategy = typeActivityStrategy;
     }
 
     @Override
@@ -21,9 +24,9 @@ public class ReportServiceImpl implements ReportService {
         return CSV_HEAD_REPORT + CSV_END_LINE
             + activityDaoDb.getAll().stream()
                     .collect(Collectors.groupingBy(
-                            Activity::getFruit,
+                            FruitTransaction::getFruit,
                             Collectors.summingInt(v ->
-                                    activityStrategy.get(v.getType()).prepareCount(v.getCount())
+                                typeActivityStrategy.get(v.getType()).prepareCount(v.getCount())
                             )
                     ))
                     .entrySet().stream()

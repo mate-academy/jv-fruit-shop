@@ -1,4 +1,4 @@
-package core.basesyntax.service.strategy;
+package core.basesyntax.service.strategy.handlers;
 
 public class BalanceActivityHandlerImpl implements ActivityHandler {
     @Override

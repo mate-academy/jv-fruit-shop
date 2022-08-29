@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class Activity {
+public class FruitTransaction {
     private TypeActivity type;
     private String fruit;
     private int count;
 
-    public Activity(TypeActivity type, String fruit, int count) {
+    public FruitTransaction(TypeActivity type, String fruit, int count) {
         this.type = type;
         this.fruit = fruit;
         this.count = count;
@@ -33,10 +33,10 @@ public class Activity {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Activity activity = (Activity) o;
-        return count == activity.count
-                && type == activity.type
-                && Objects.equals(fruit, activity.fruit);
+        FruitTransaction fruitTransaction = (FruitTransaction) o;
+        return count == fruitTransaction.count
+                && type == fruitTransaction.type
+                && Objects.equals(fruit, fruitTransaction.fruit);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Activity {
 
     @Override
     public String toString() {
-        return "Activity{"
+        return "FruitTransaction{"
                 + "type=" + type
                 + ", fruit='" + fruit + '\''
                 + ", count=" + count

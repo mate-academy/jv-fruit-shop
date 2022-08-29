@@ -1,4 +1,4 @@
-package core.basesyntax.service.strategy;
+package core.basesyntax.service.strategy.handlers;
 
 public class ReturnActivityHandlerImpl implements ActivityHandler {
     @Override

@@ -1,4 +1,4 @@
-package core.basesyntax.service.strategy;
+package core.basesyntax.service.strategy.handlers;
 
 public class SupplyActivityHandlerImpl implements ActivityHandler {
     @Override

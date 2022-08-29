@@ -1,18 +1,18 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Activity;
+import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityDaoDbImpl implements ActivityDaoDb {
     @Override
-    public void add(Activity activity) {
-        Storage.db.add(activity);
+    public void add(FruitTransaction fruitTransaction) {
+        Storage.db.add(fruitTransaction);
     }
 
     @Override
-    public List<Activity> getAll() {
+    public List<FruitTransaction> getAll() {
         return new ArrayList<>(Storage.db);
     }
 }

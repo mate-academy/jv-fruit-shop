@@ -1,10 +1,10 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Activity;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface ActivityDaoDb {
-    void add(Activity activity);
+    void add(FruitTransaction fruitTransaction);
 
-    List<Activity> getAll();
+    List<FruitTransaction> getAll();
 }

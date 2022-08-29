@@ -1,9 +1,9 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.Activity;
+import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    public static final List<Activity> db = new ArrayList<>();
+    public static final List<FruitTransaction> db = new ArrayList<>();
 }

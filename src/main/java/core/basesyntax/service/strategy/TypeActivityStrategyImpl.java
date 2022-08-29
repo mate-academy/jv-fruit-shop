@@ -1,13 +1,13 @@
-package core.basesyntax.service;
+package core.basesyntax.service.strategy;
 
 import core.basesyntax.model.TypeActivity;
-import core.basesyntax.service.strategy.ActivityHandler;
+import core.basesyntax.service.strategy.handlers.ActivityHandler;
 import java.util.Map;
 
-public class ActivityStrategyImpl implements ActivityStrategy {
+public class TypeActivityStrategyImpl implements TypeActivityStrategy {
     private final Map<TypeActivity, ActivityHandler> map;
 
-    public ActivityStrategyImpl(Map<TypeActivity, ActivityHandler> map) {
+    public TypeActivityStrategyImpl(Map<TypeActivity, ActivityHandler> map) {
         this.map = map;
     }
 
