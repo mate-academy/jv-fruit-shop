@@ -11,9 +11,11 @@ import core.basesyntax.service.ParserService;
 import core.basesyntax.service.impl.CsvFileReaderService;
 import core.basesyntax.service.impl.DataProcessingServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.strategy.ReportGeneratorService;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.impl.BalanceStrategy;
 import core.basesyntax.strategy.impl.PurchaseStrategy;
+import core.basesyntax.strategy.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.strategy.impl.ReturnStrategy;
 import core.basesyntax.strategy.impl.SupplyStrategy;
 
@@ -42,5 +44,8 @@ public class Main {
 
         DataProcessingService dataProcessingService = new DataProcessingServiceImpl();
         Map<String, Integer> stringIntegerMap = dataProcessingService.processTheData(activities);
+
+        ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
+        List<String> outputStrings = reportGeneratorService.generate(stringIntegerMap);
     }
 }
