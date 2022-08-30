@@ -4,8 +4,8 @@ import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ReadFromFile;
 import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReadFromFileImpl;
-import model.Transaction;
-import strategy.*;
+import core.basesyntax.model.Transaction;
+import core.basesyntax.strategy.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,5 +31,6 @@ public class Main {
             OperationHandler operationHandler = strategy.getByOperation(transaction.getOperation());
             operationHandler.apply(transaction);
         }
+
     }
 }

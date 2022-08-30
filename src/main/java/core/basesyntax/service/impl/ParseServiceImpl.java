@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ParseService;
-import model.Fruit;
-import model.Transaction;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Transaction;
 
 import java.util.List;
 import java.util.stream.Collectors;

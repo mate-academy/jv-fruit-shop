@@ -1,8 +1,8 @@
-package strategy;
+package core.basesyntax.strategy;
 
-import model.Fruit;
-import model.Transaction;
-import storage.Storage;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Transaction;
+import core.basesyntax.storage.Storage;
 
 public class PurchaseOperationImpl implements OperationHandler {
     @Override

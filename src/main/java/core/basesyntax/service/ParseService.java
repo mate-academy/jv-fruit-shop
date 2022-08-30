@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 
-import model.Transaction;
+import core.basesyntax.model.Transaction;
 
 import java.util.List;
 
