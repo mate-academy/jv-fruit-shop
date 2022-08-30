@@ -3,7 +3,7 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 
-import java.util.List;
+import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
@@ -17,7 +17,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public List<Fruit> getAll() {
-        return null;
+    public Set<Fruit> getAll() {
+        return Storage.storage.keySet();
     }
 }
