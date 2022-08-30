@@ -37,7 +37,7 @@ public class FruitTransaction {
 
         public static Operation getOperation(String operation) {
             for (Operation type : values()) {
-                if (type.operation.equals(operation)){
+                if (type.operation.equals(operation)) {
                     return type;
                 }
             }

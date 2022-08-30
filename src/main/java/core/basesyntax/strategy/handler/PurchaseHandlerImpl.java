@@ -10,6 +10,7 @@ public class PurchaseHandlerImpl implements TransactionHandler {
     public PurchaseHandlerImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
+
     @Override
     public void makeTransaction(FruitTransaction transaction) {
         Fruit fruit = new Fruit(transaction.getFruit());

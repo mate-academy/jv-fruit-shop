@@ -16,7 +16,6 @@ import core.basesyntax.strategy.handler.PurchaseHandlerImpl;
 import core.basesyntax.strategy.handler.ReturnHandlerImpl;
 import core.basesyntax.strategy.handler.SupplyHandlerImpl;
 import core.basesyntax.strategy.handler.TransactionHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +23,7 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_DATA_FILE = "src/main/resources/input_data.csv";
     private static final String OUTPUT_DATA_FILE = "src/main/resources/output_data.csv";
+
     public static void main(String[] args) {
         StorageDao storageDao = new StorageDaoImpl();
 
@@ -42,7 +42,8 @@ public class Main {
                 = new FruitTransactionParserServiceImpl();
 
         List<String> dataFromFile = csvFileReaderService.readFile(INPUT_DATA_FILE);
-        List<FruitTransaction> fruitTransactions = transactionParserService.parseDataFromList(dataFromFile);
+        List<FruitTransaction> fruitTransactions
+                = transactionParserService.parseDataFromList(dataFromFile);
 
         Strategy strategy
                 = new StrategyImpl(transactionHandlerMap);
