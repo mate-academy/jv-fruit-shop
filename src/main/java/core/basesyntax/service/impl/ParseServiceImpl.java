@@ -22,7 +22,8 @@ public class ParseServiceImpl implements ParseService {
 
     private Transaction getTransaction(String string) {
         String[] splittedStrings = string.split(COMA);
-        return new Transaction(splittedStrings[ZERO_INDEX].trim(), new Fruit(splittedStrings[FIRST_INDEX].trim()),
+        return new Transaction(splittedStrings[ZERO_INDEX].trim(),
+                new Fruit(splittedStrings[FIRST_INDEX].trim()),
                 Integer.parseInt(splittedStrings[SECOND_INDEX].trim()));
     }
 }
