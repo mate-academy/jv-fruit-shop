@@ -1,6 +1,6 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.strategy.impl;
 
-import core.basesyntax.service.AmountService;
+import core.basesyntax.strategy.AmountService;
 
 public class BalanceAmountService implements AmountService {
     @Override

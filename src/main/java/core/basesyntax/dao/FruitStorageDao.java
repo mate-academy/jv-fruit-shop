@@ -1,10 +1,11 @@
 package core.basesyntax.dao;
 
-import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
+import java.util.Map;
+import java.util.Set;
 
 public interface FruitStorageDao {
     void addTransaction(FruitTransaction transaction);
 
-    Map<String, Integer> getData();
+    Set<Map.Entry<String, Integer>> getData();
 }

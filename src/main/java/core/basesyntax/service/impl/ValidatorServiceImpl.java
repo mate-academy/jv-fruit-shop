@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import java.util.List;
 import core.basesyntax.service.ValidatorService;
+import java.util.List;
 
 public class ValidatorServiceImpl implements ValidatorService {
     private static final int TITLE_INDEX = 0;
@@ -19,10 +19,10 @@ public class ValidatorServiceImpl implements ValidatorService {
             return false;
         }
         data.remove(TITLE_INDEX);
-        return data.stream().allMatch(this::isStringValid);
+        return data.stream().allMatch(this::validateLine);
     }
 
-    private boolean isStringValid(String string) {
+    private boolean validateLine(String string) {
         if (string == null) {
             return false;
         }
@@ -41,13 +41,12 @@ public class ValidatorServiceImpl implements ValidatorService {
     }
 
     private boolean typeOfTransactionValidator(String type) {
-        boolean valid = false;
         for (String typeFromArray : TYPE_OF_TRANSACTION) {
             if (typeFromArray.equals(type)) {
-                valid = true;
+                return true;
             }
         }
-        return valid;
+        return false;
     }
 
     private boolean amountValidator(String amount) {

@@ -1,10 +1,9 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.WriterService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
-import core.basesyntax.service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
     @Override

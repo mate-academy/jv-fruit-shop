@@ -1,23 +1,24 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.AmountService;
-import core.basesyntax.service.impl.BalanceAmountService;
-import core.basesyntax.service.impl.PurchaseAmountService;
-import core.basesyntax.service.impl.ReturnAmountService;
-import core.basesyntax.service.impl.SupplyAmountService;
+import core.basesyntax.strategy.impl.BalanceAmountService;
+import core.basesyntax.strategy.impl.PurchaseAmountService;
+import core.basesyntax.strategy.impl.ReturnAmountService;
+import core.basesyntax.strategy.impl.SupplyAmountService;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AmountStrategy {
+    private Map<String, AmountService> amountServices;
+
+    {
+        amountServices = new HashMap<>();
+        amountServices.put("b", new BalanceAmountService());
+        amountServices.put("s", new SupplyAmountService());
+        amountServices.put("p", new PurchaseAmountService());
+        amountServices.put("r", new ReturnAmountService());
+    }
+
     public AmountService getAmountService(String operation) {
-        switch (operation) {
-            case ("b"):
-                return new BalanceAmountService();
-            case ("s"):
-                return new SupplyAmountService();
-            case ("p"):
-                return new PurchaseAmountService();
-            case ("r"):
-            default:
-                return new ReturnAmountService();
-        }
+        return amountServices.get(operation);
     }
 }
