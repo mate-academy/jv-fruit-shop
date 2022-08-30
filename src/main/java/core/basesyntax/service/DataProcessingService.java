@@ -1,9 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Activity;
+import core.basesyntax.model.Transaction;
 import java.util.List;
-import java.util.Map;
 
 public interface DataProcessingService {
-    Map<String, Integer> processTheData(List<Activity> activities);
+    void processTheData(List<Transaction> activities);
 }

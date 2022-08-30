@@ -1,16 +1,16 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGeneratorService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
-
     @Override
-    public List<String> generate(Map<String, Integer> stringIntegerMap) {
+    public List<String> generate() {
         List<String> strings = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : stringIntegerMap.entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
             strings.add(entry.getKey() + "," + entry.getValue());
         }
         return strings;

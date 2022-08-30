@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class CsvFileWriterService implements FileWriterService {
-
     @Override
     public void writeReport(File outputFile, List<String> strings) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputFile))) {

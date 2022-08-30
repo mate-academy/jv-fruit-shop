@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Activity;
+import core.basesyntax.model.Transaction;
 import core.basesyntax.service.DataProcessingService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
@@ -22,9 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FOLDER = "src/main/resources";
+    private static final String INPUT_FILE = "input.csv";
+    private static final String OUTPUT_FILE = "output.csv";
+
     public static void main(String[] args) {
-        File folder = new File("src/main/resources");
-        File inputFile = new File(folder, "input.csv");
+        File inputFile = new File(FOLDER, INPUT_FILE);
 
         FileReaderService csvFileReaderService = new CsvFileReaderService();
         List<String> strings = csvFileReaderService.read(inputFile);
@@ -42,15 +45,15 @@ public class Main {
         operationStrategies.put("r", new ReturnStrategy());
 
         ParserService parserService = new ParserServiceImpl();
-        List<Activity> activities = parserService.parse(strings, operationStrategies);
+        List<Transaction> transactions = parserService.parse(strings, operationStrategies);
 
         DataProcessingService dataProcessingService = new DataProcessingServiceImpl();
-        Map<String, Integer> stringIntegerMap = dataProcessingService.processTheData(activities);
+        dataProcessingService.processTheData(transactions);
 
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
-        List<String> outputStrings = reportGeneratorService.generate(stringIntegerMap);
+        List<String> outputStrings = reportGeneratorService.generate();
 
-        File outputFile = new File(folder, "output.csv");
+        File outputFile = new File(FOLDER, OUTPUT_FILE);
 
         FileWriterService fileWriterService = new CsvFileWriterService();
         fileWriterService.writeReport(outputFile, outputStrings);

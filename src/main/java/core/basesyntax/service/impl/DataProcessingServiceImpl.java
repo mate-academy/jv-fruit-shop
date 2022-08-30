@@ -1,19 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.StorageFruits;
-import core.basesyntax.model.Activity;
+import core.basesyntax.model.Transaction;
 import core.basesyntax.service.DataProcessingService;
 import java.util.List;
-import java.util.Map;
 
 public class DataProcessingServiceImpl implements DataProcessingService {
-    private Map<String, Integer> result;
-
     @Override
-    public Map<String, Integer> processTheData(List<Activity> activities) {
-        for (Activity activity : activities) {
-            activity.getStrategy().makeOperation(activity.getFruit(), activity.getValue());
+    public void processTheData(List<Transaction> transactions) {
+        for (Transaction transaction : transactions) {
+            transaction.getStrategy().makeOperation(transaction.getFruit(), transaction.getValue());
         }
-        return StorageFruits.fruits;
     }
 }

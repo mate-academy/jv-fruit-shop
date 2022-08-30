@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 import core.basesyntax.strategy.Strategy;
 
-public class Activity {
+public class Transaction {
     private Strategy strategy;
     private String fruit;
     private int value;
 
-    public Activity(Strategy strategy, String fruit, int value) {
+    public Transaction(Strategy strategy, String fruit, int value) {
         this.strategy = strategy;
         this.fruit = fruit;
         this.value = value;
