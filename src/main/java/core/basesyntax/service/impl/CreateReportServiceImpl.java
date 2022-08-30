@@ -7,7 +7,7 @@ import java.util.Map;
 public class CreateReportServiceImpl implements CreateReportService {
     private static final String HEADER_FRUIT = "fruit";
     private static final String HEADER_QUANTITY = "quantity";
-    private static final String COMA = "fruit";
+    private static final String COMA = ",";
 
     @Override
     public String createReport(Map<Fruit, Integer> storage) {

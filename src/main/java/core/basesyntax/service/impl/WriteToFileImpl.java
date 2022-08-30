@@ -1,11 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.WriteToFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.StandardOpenOption;
 
 public class WriteToFileImpl implements WriteToFile {
     @Override
