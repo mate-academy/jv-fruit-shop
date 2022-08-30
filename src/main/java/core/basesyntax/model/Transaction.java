@@ -18,7 +18,7 @@ public class Transaction {
     }
 
     public void setOperation(String operation) {
-        operation = operation;
+        this.operation = operation;
     }
 
     public Fruit getFruit() {
