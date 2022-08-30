@@ -1,12 +1,12 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.dao.FruitsDao;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.services.ReportCreator;
 
 public class ReportCreatorImpl implements ReportCreator {
-    private final FruitsDao fruitsDao;
+    private final FruitDao fruitsDao;
 
-    public ReportCreatorImpl(FruitsDao fruitsDao) {
+    public ReportCreatorImpl(FruitDao fruitsDao) {
         this.fruitsDao = fruitsDao;
     }
 

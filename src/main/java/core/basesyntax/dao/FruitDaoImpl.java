@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 
-public class FruitsDaoImpl implements FruitsDao {
+public class FruitDaoImpl implements FruitDao {
     @Override
     public void addProduct(String fruit, int quantity) {
         Storage.fruits.put(fruit, quantity);

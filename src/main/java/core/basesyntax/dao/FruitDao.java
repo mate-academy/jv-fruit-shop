@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-public interface FruitsDao {
+public interface FruitDao {
     void addProduct(String product, int quantity);
 
     void addProductQuantity(String product, int quantity);

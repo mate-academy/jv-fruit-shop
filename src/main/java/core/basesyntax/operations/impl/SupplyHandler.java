@@ -1,12 +1,12 @@
 package core.basesyntax.operations.impl;
 
-import core.basesyntax.dao.FruitsDao;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.operations.OperationHandler;
 
 public class SupplyHandler implements OperationHandler {
-    private final FruitsDao fruitsDao;
+    private final FruitDao fruitsDao;
 
-    public SupplyHandler(FruitsDao fruitsDao) {
+    public SupplyHandler(FruitDao fruitsDao) {
         this.fruitsDao = fruitsDao;
     }
 

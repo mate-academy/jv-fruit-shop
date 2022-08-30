@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.dao.FruitsDaoImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.operations.OperationHandler;
 import core.basesyntax.operations.OperationStrategy;
 import core.basesyntax.operations.OperationStrategyImpl;
@@ -21,8 +21,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String PATH_FROM_FILE
+            = "src/main/java/core/basesyntax/resources/file.csv";
+    private static final String PATH_TO_FILE
+            = "src/main/java/core/basesyntax/resources/report.csv";
+
     public static void main(String[] args) {
-        FruitsDao fruitsDao = new FruitsDaoImpl();
+        FruitDao fruitsDao = new FruitDaoImpl();
         Map<String, OperationHandler> operations = new HashMap<>();
         operations.put("b", new BalanceHandler(fruitsDao));
         operations.put("s", new SupplyHandler(fruitsDao));
@@ -30,12 +35,12 @@ public class Main {
         operations.put("p", new PurchaseHandler(fruitsDao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operations);
         List<String> readData = new CsvFileReaderImpl()
-                .readData("src/main/java/core/basesyntax/resources/file.csv");
+                .readData(PATH_FROM_FILE);
         CsvFileDataHandler csvFileDataHandler = new CsvFileDataHandlerImpl(operationStrategy);
         csvFileDataHandler.processData(readData);
         ReportCreator reportCreator = new ReportCreatorImpl(fruitsDao);
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeReport("src/main/java/core/basesyntax/resources/report.csv",
+        fileWriter.writeReport(PATH_TO_FILE,
                 reportCreator.createReport(),
                 csvFileDataHandler.HEADER);
     }
