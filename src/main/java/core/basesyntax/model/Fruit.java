@@ -1,10 +1,12 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public final class Fruit {
     private final String fruit;
 
-    public Fruit() {
-        this.fruit = new String();
+    public Fruit(String fruit) {
+        this.fruit = fruit;
     }
 
     public String getFruit() {
@@ -13,11 +15,18 @@ public final class Fruit {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(fruit);
     }
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Fruit newFruit = (Fruit) obj;
+        return fruit.equals(newFruit.fruit);
     }
 }
