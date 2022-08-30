@@ -13,6 +13,6 @@ public class OperationReturnImpl implements Operation {
 
     @Override
     public void executeOperation(FruitTransaction fruitTransaction) {
-        storage.add(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        storage.supply(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

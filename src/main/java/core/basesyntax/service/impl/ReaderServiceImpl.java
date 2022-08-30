@@ -4,13 +4,12 @@ import core.basesyntax.service.ReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> readFromFile(String fileName) {
-        List<String> list = new ArrayList<>();
+        List<String> list;
         try {
             list = Files.readAllLines(Path.of(fileName));
             return list;
