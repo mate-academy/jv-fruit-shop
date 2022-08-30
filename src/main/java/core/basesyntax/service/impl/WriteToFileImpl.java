@@ -12,12 +12,12 @@ public class WriteToFileImpl implements WriteToFile {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            throw new RuntimeException("Can't create file " + filePath + e);
+            throw new RuntimeException("Can't create file " + filePath, e);
         }
         try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file " + filePath + e);
+            throw new RuntimeException("Can't write to file " + filePath, e);
         }
         return true;
     }
