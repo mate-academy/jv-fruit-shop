@@ -1,8 +1,9 @@
 package core.strategy;
 
-import core.model.Fruit;
-import core.storage.DataBase;
+import java.util.Map;
 
 public interface FruitStrategy {
-    void execute(DataBase dataBase, Fruit fruit, Integer quantity);
+    OperationHandler getByOperation(String operation);
+
+    Map<String, OperationHandler> getMap();
 }

@@ -1,5 +1,7 @@
 package core.service;
 
+import java.util.List;
+
 public interface ReportHandlingService {
-    void createReportLine();
+    List<String> createReport();
 }

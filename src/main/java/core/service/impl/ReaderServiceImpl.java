@@ -13,7 +13,7 @@ public class ReaderServiceImpl implements ReaderService {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Can't read file by path:" + filePath, e);
+            throw new RuntimeException("Can't read file by path: " + filePath, e);
         } catch (IOException e) {
             throw new RuntimeException("Can't read lines from the file.", e);
         }

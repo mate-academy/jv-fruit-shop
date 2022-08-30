@@ -7,12 +7,11 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class WriterServiceImpl implements WriterService {
-    private static final String REPORT_FILEPATH = "src/main/java/resources/report.csv";
 
     @Override
-    public void writeTo(List<String> list) {
+    public void writeTo(Path path, List<String> list) {
         try {
-            Files.write(Path.of(REPORT_FILEPATH), list);
+            Files.write(path, list);
         } catch (IOException e) {
             throw new RuntimeException("Can't write information to the file.", e);
         }

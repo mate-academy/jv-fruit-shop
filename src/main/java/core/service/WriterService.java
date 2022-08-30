@@ -1,7 +1,8 @@
 package core.service;
 
+import java.nio.file.Path;
 import java.util.List;
 
 public interface WriterService {
-    void writeTo(List<String> list);
+    void writeTo(Path path, List<String> list);
 }

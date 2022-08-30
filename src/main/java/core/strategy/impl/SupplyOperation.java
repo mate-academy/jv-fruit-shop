@@ -2,9 +2,9 @@ package core.strategy.impl;
 
 import core.model.Fruit;
 import core.storage.DataBase;
-import core.strategy.FruitStrategy;
+import core.strategy.OperationHandler;
 
-public class SupplyOperation implements FruitStrategy {
+public class SupplyOperation implements OperationHandler {
     @Override
     public void execute(DataBase dataBase, Fruit fruit, Integer quantity) {
         dataBase.append(fruit, quantity);
