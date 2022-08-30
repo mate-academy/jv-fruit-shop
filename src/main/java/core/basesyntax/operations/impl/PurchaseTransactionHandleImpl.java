@@ -2,12 +2,12 @@ package core.basesyntax.operations.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.Operation;
+import core.basesyntax.operations.TransactionHandle;
 
-public class OperationPurschaseImpl implements Operation {
+public class PurchaseTransactionHandleImpl implements TransactionHandle {
     private StorageDao storage;
 
-    public OperationPurschaseImpl(StorageDao storage) {
+    public PurchaseTransactionHandleImpl(StorageDao storage) {
         this.storage = storage;
     }
 

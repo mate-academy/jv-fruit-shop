@@ -2,16 +2,16 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.Operation;
-import core.basesyntax.operations.impl.OperationBalanceImpl;
-import core.basesyntax.operations.impl.OperationPurschaseImpl;
-import core.basesyntax.operations.impl.OperationReturnImpl;
-import core.basesyntax.operations.impl.OperationSupplyImpl;
+import core.basesyntax.operations.TransactionHandle;
+import core.basesyntax.operations.impl.BalanceTransactionHandleImpl;
+import core.basesyntax.operations.impl.PurchaseTransactionHandleImpl;
+import core.basesyntax.operations.impl.ReturnTransactionHandleImpl;
+import core.basesyntax.operations.impl.SupplyTransactionHandleImpl;
 import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<FruitTransaction.Operation, Operation> operationHandler = new HashMap<>();
+    private Map<FruitTransaction.Operation, TransactionHandle> operationHandler = new HashMap<>();
     private StorageDao storage;
 
     public OperationStrategyImpl(StorageDao storage) {
@@ -20,7 +20,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public Operation get(FruitTransaction.Operation operation) {
+    public TransactionHandle get(FruitTransaction.Operation operation) {
         if (!operationHandler.containsKey(operation)) {
             throw new RuntimeException("Wrong operation ->" + operation);
         }
@@ -29,13 +29,13 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     private void fillMap() {
         operationHandler.put(FruitTransaction.Operation.BALANCE,
-                new OperationBalanceImpl(storage));
+                new BalanceTransactionHandleImpl(storage));
         operationHandler.put(FruitTransaction.Operation.SUPPLY,
-                new OperationSupplyImpl(storage));
+                new SupplyTransactionHandleImpl(storage));
         operationHandler.put(FruitTransaction.Operation.RETURN,
-                new OperationReturnImpl(storage));
+                new ReturnTransactionHandleImpl(storage));
         operationHandler.put(FruitTransaction.Operation.PURCHASE,
-                new OperationPurschaseImpl(storage));
+                new PurchaseTransactionHandleImpl(storage));
 
     }
 }

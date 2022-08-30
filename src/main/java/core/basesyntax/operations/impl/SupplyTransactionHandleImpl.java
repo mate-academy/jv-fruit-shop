@@ -2,17 +2,17 @@ package core.basesyntax.operations.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.Operation;
+import core.basesyntax.operations.TransactionHandle;
 
-public class OperationBalanceImpl implements Operation {
+public class SupplyTransactionHandleImpl implements TransactionHandle {
     private StorageDao storage;
 
-    public OperationBalanceImpl(StorageDao storage) {
+    public SupplyTransactionHandleImpl(StorageDao storage) {
         this.storage = storage;
     }
 
     @Override
     public void executeOperation(FruitTransaction fruitTransaction) {
-        storage.add(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        storage.supply(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }
