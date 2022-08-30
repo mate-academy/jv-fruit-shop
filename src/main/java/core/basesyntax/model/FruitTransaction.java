@@ -1,13 +1,11 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
-
 public class FruitTransaction {
     private TypeActivity type;
-    private String fruit;
+    private Fruit fruit;
     private int count;
 
-    public FruitTransaction(TypeActivity type, String fruit, int count) {
+    public FruitTransaction(TypeActivity type, Fruit fruit, int count) {
         this.type = type;
         this.fruit = fruit;
         this.count = count;
@@ -17,38 +15,31 @@ public class FruitTransaction {
         return type;
     }
 
-    public String getFruit() {
+    public void setType(TypeActivity type) {
+        this.type = type;
+    }
+
+    public Fruit getFruit() {
         return fruit;
+    }
+
+    public void setFruit(Fruit fruit) {
+        this.fruit = fruit;
     }
 
     public int getCount() {
         return count;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FruitTransaction fruitTransaction = (FruitTransaction) o;
-        return count == fruitTransaction.count
-                && type == fruitTransaction.type
-                && Objects.equals(fruit, fruitTransaction.fruit);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, fruit, count);
+    public void setCount(int count) {
+        this.count = count;
     }
 
     @Override
     public String toString() {
         return "FruitTransaction{"
                 + "type=" + type
-                + ", fruit='" + fruit + '\''
+                + ", fruit=" + fruit.toString()
                 + ", count=" + count
                 + '}';
     }

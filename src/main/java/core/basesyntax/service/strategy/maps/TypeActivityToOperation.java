@@ -1,5 +1,6 @@
 package core.basesyntax.service.strategy.maps;
 
+import core.basesyntax.dao.ActivityDaoDb;
 import core.basesyntax.model.TypeActivity;
 import core.basesyntax.service.strategy.handlers.ActivityHandler;
 import core.basesyntax.service.strategy.handlers.BalanceActivityHandlerImpl;
@@ -10,16 +11,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TypeActivityToOperation {
-    private static final Map<TypeActivity, ActivityHandler> map = new HashMap<>();
+    private final Map<TypeActivity, ActivityHandler> map = new HashMap<>();
 
-    static {
-        map.put(TypeActivity.BALANCE, new BalanceActivityHandlerImpl());
-        map.put(TypeActivity.SUPPLY, new SupplyActivityHandlerImpl());
-        map.put(TypeActivity.PURCHASE, new PurchaseActivityHandlerImpl());
-        map.put(TypeActivity.RETURN, new ReturnActivityHandlerImpl());
+    public TypeActivityToOperation(ActivityDaoDb activityDaoDb) {
+        map.put(TypeActivity.BALANCE, new BalanceActivityHandlerImpl(activityDaoDb));
+        map.put(TypeActivity.SUPPLY, new SupplyActivityHandlerImpl(activityDaoDb));
+        map.put(TypeActivity.PURCHASE, new PurchaseActivityHandlerImpl(activityDaoDb));
+        map.put(TypeActivity.RETURN, new ReturnActivityHandlerImpl(activityDaoDb));
     }
 
-    public static Map<TypeActivity, ActivityHandler> getMap() {
+    public Map<TypeActivity, ActivityHandler> getMap() {
         return map;
     }
 }

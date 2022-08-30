@@ -2,17 +2,17 @@ package core.basesyntax.service.strategy;
 
 import core.basesyntax.model.TypeActivity;
 import core.basesyntax.service.strategy.handlers.ActivityHandler;
-import java.util.Map;
+import core.basesyntax.service.strategy.maps.TypeActivityToOperation;
 
 public class TypeActivityStrategyImpl implements TypeActivityStrategy {
-    private final Map<TypeActivity, ActivityHandler> map;
+    private final TypeActivityToOperation typeActivityToOperation;
 
-    public TypeActivityStrategyImpl(Map<TypeActivity, ActivityHandler> map) {
-        this.map = map;
+    public TypeActivityStrategyImpl(TypeActivityToOperation typeActivityToOperation) {
+        this.typeActivityToOperation = typeActivityToOperation;
     }
 
     @Override
-    public ActivityHandler get(TypeActivity typeActivity) {
-        return map.get(typeActivity);
+    public ActivityHandler strategy(TypeActivity typeActivity) {
+        return typeActivityToOperation.getMap().get(typeActivity);
     }
 }

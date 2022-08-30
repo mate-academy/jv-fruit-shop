@@ -1,5 +1,7 @@
 package core.basesyntax.service.strategy.handlers;
 
+import core.basesyntax.model.FruitTransaction;
+
 public interface ActivityHandler {
-    int prepareCount(int value);
+    void calculate(FruitTransaction value);
 }
