@@ -11,7 +11,6 @@ import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
     private static final String DIVIDER = ",";
-    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
     private static final int OPERATION_INDEX = 0;
     private static final int NAME_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
@@ -43,6 +42,6 @@ public class FruitServiceImpl implements FruitService {
                     .orElseGet(() -> fruitDao.add(new Fruit(fruitName, STARTING_AMOUNT)));
             fruit.setAmount(strategy.get(operation).changeAmount(fruit, fruitAmount));
         }
-        writerService.writeToFile(reportService.report(HEADER, DIVIDER), outputFile);
+        writerService.writeToFile(reportService.report(), outputFile);
     }
 }
