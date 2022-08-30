@@ -18,4 +18,3 @@ public class ReaderServiceImpl implements ReaderService {
         return list;
     }
 }
-
