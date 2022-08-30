@@ -10,8 +10,4 @@ public class Storage {
     public static Map<Fruit, Integer> getStorage() {
         return storage;
     }
-
-    public static void setStorage(Map<Fruit, Integer> storage) {
-        Storage.storage = storage;
-    }
 }

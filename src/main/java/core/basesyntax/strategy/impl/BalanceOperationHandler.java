@@ -11,7 +11,7 @@ public class BalanceOperationHandler implements OperationHandler {
         Fruit fruit = transaction.getFruit();
         Integer currentQuantity = Storage.getStorage().get(fruit);
         Storage.getStorage().put(fruit, currentQuantity == null
-                ? currentQuantity = transaction.getQuantity()
+                ? transaction.getQuantity()
                 : currentQuantity + transaction.getQuantity());
     }
 }
