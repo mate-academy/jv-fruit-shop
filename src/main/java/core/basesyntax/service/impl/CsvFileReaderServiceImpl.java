@@ -1,4 +1,4 @@
-package core.basesyntax.service.serviceimpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.CsvFileReaderService;
 import java.io.BufferedReader;
@@ -11,7 +11,7 @@ import java.util.List;
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     @Override
     public List<String> readData(String fileName) {
-        File file = new File("src/main/resources/" + fileName);
+        File file = new File(fileName);
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String value = reader.readLine();
