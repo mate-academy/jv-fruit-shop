@@ -1,8 +1,9 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.handler;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.strategy.OperationHandler;
 
 public class SupplyOperationHandler implements OperationHandler {
 
