@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
@@ -10,16 +10,18 @@ public class ParseServiceImpl implements ParseService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final String REGEX = ",";
+
     @Override
     public List<Transaction> parseLine(List<String> lines) {
-        List<Transaction> parsed_lines = new ArrayList<>();
+        List<Transaction> parsedLines = new ArrayList<>();
         for (String line : lines) {
-            String[] split = line.split(",");
+            String[] split = line.split(REGEX);
             String operation = split[OPERATION_INDEX];
             Fruit fruit = new Fruit(split[FRUIT_INDEX]);
             int quantity = Integer.parseInt(split[QUANTITY_INDEX]);
-            parsed_lines.add(new Transaction(operation, fruit, quantity));
+            parsedLines.add(new Transaction(operation, fruit, quantity));
         }
-        return parsed_lines;
+        return parsedLines;
     }
 }

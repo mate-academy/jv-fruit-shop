@@ -5,7 +5,6 @@ public class Transaction {
     private Fruit fruit;
     private Integer quantity;
 
-
     public Transaction(String operation, Fruit fruit, Integer quantity) {
         this.operation = operation;
         this.fruit = fruit;
