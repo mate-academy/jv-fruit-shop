@@ -1,20 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.CreateReportService;
-import core.basesyntax.service.ParseService;
-import core.basesyntax.service.ReadFromFile;
-import core.basesyntax.service.impl.CreateReportServiceImpl;
-import core.basesyntax.service.impl.ParseServiceImpl;
-import core.basesyntax.service.impl.ReadFromFileImpl;
-import core.basesyntax.service.impl.WriteToFileImpl;
-import core.basesyntax.strategy.BalanceOperationImpl;
+import core.basesyntax.service.ParserService;
+import core.basesyntax.service.Reader;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReaderImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
+import core.basesyntax.service.impl.WriterImpl;
+import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.PurchaseOperationImpl;
-import core.basesyntax.strategy.ReturnOperationImpl;
-import core.basesyntax.strategy.SupplyOperationImpl;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,27 +28,25 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String, OperationHandler> map = new HashMap<>();
-        map.put(BALANCE, new BalanceOperationImpl());
-        map.put(PURCHASE, new PurchaseOperationImpl());
-        map.put(RETURN, new ReturnOperationImpl());
-        map.put(SUPPLY, new SupplyOperationImpl());
+        map.put(BALANCE, new BalanceOperationHandler());
+        map.put(PURCHASE, new PurchaseOperationHandler());
+        map.put(RETURN, new ReturnOperationHandler());
+        map.put(SUPPLY, new SupplyOperationHandler());
 
         OperationStrategy strategy = new OperationStrategy(map);
 
-        ReadFromFile readFromFile = new ReadFromFileImpl();
-        List<String> lines = readFromFile.readFromFile(INPUT_DATA_PATH);
+        Reader reader = new ReaderImpl();
+        List<String> lines = reader.readFromFile(INPUT_DATA_PATH);
 
-        ParseService parseService = new ParseServiceImpl();
-        List<Transaction> transactions = parseService.transactionsParser(lines);
+        ParserService parserService = new ParserServiceImpl();
+        List<Transaction> transactions = parserService.parse(lines);
 
         for (Transaction transaction : transactions) {
             OperationHandler operationHandler = strategy.getByOperation(transaction.getOperation());
             operationHandler.apply(transaction);
         }
-        WriteToFileImpl writeToFile = new WriteToFileImpl();
-        CreateReportService createReportService = new CreateReportServiceImpl();
-        writeToFile.writeToFile(OUTPUT_DATA_PATH,
-                createReportService.createReport(Storage.storage));
+        WriterImpl writeToFile = new WriterImpl();
+        ReportCreator reportCreator = new ReportCreatorImpl();
+        writeToFile.writeToFile(OUTPUT_DATA_PATH, reportCreator.createReport());
     }
-
 }
