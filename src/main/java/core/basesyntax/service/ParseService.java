@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
-mport core.basesyntax.model.Transaction;
+
+import model.Transaction;
 
 import java.util.List;
 
