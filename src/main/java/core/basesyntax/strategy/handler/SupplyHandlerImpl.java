@@ -1,8 +1,22 @@
 package core.basesyntax.strategy.handler;
 
-public class SupplyHandlerImpl implements TransactionHandler {
-    @Override
-    public void makeTransaction() {
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 
+public class SupplyHandlerImpl implements TransactionHandler<FruitTransaction> {
+    private final StorageDao storageDao;
+
+    public SupplyHandlerImpl(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
+
+    @Override
+    public void makeTransaction(FruitTransaction transaction) {
+        Fruit fruit = new Fruit(transaction.getFruit());
+        Integer amount = storageDao.getAmount(fruit);
+        if (storageDao.getAmount(fruit) > transaction.getAmount()) {
+            storageDao.update(fruit,amount + transaction.getAmount());
+        }
     }
 }

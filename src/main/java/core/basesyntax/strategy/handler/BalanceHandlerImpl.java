@@ -1,8 +1,19 @@
 package core.basesyntax.strategy.handler;
 
-public class BalanceHandlerImpl implements TransactionHandler {
-    @Override
-    public void makeTransaction() {
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 
+public class BalanceHandlerImpl implements TransactionHandler<FruitTransaction> {
+    private final StorageDao storageDao;
+
+    public BalanceHandlerImpl(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
+
+    @Override
+    public void makeTransaction(FruitTransaction transaction) {
+        storageDao.update(new Fruit(transaction.getFruit()), transaction.getAmount());
     }
 }

@@ -1,5 +1,5 @@
 package core.basesyntax.strategy.handler;
 
-public interface TransactionHandler {
-    void makeTransaction();
+public interface TransactionHandler<T> {
+    void makeTransaction(T transaction);
 }
