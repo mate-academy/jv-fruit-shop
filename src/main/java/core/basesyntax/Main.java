@@ -1,10 +1,22 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.*;
-import core.basesyntax.serviceImpl.*;
-import core.basesyntax.strategy.*;
-
+import core.basesyntax.service.WriteToFileService;
+import core.basesyntax.service.CreateFileService;
+import core.basesyntax.service.ParseService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.serviceImpl.WriteToFileServiceImpl;
+import core.basesyntax.serviceImpl.CreateFileServiceImpl;
+import core.basesyntax.serviceImpl.ParseServiceImpl;
+import core.basesyntax.serviceImpl.ReaderServiceImpl;
+import core.basesyntax.serviceImpl.ReportServiceImpl;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
