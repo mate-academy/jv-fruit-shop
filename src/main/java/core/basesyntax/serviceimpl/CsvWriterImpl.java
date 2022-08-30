@@ -9,6 +9,9 @@ import java.util.Collections;
 public class CsvWriterImpl implements CsvWriter {
     @Override
     public File write(String content, String filePath) {
+        if (content == null) {
+            throw new RuntimeException("Content cannot be null, you should write something");
+        }
         File output = new File(filePath);
         try {
             Files.write(output.toPath(), Collections.singleton(content));
