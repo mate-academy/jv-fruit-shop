@@ -10,9 +10,9 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
         return lines.stream()
-				.skip(1)
-				.map(l -> splitLine(l))
-				.collect(Collectors.toList());
+            .skip(1)
+            .map(l -> splitLine(l))
+            .collect(Collectors.toList());
     }
 
     private FruitTransaction splitLine(String line) {
