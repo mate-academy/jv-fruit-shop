@@ -4,9 +4,11 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Reader;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReaderService;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterService;
 import core.basesyntax.strategy.AmountHandler;
 import core.basesyntax.strategy.AmountStrategy;
@@ -32,8 +34,10 @@ public class Main {
         FruitDao fruitDao = new FruitDaoImpl();
         Reader reader = new ReaderService();
         Writer writer = new WriterService();
+        ReportService reportService = new ReportServiceImpl();
         AmountStrategy strategy = new AmountStrategyImpl(amountHandlerMap);
-        FruitService fruitService = new FruitServiceImpl(strategy, fruitDao, reader, writer);
+        FruitService fruitService = new FruitServiceImpl(
+                strategy, fruitDao, reader, writer, reportService);
         fruitService.processData(INPUT_FILE, OUTPUT_FILE);
     }
 }
