@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.impl.ParserImpl;
+import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
@@ -32,7 +32,7 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         List<String> lines = readerService.readFromFile(INPUT_FILE_PATH);
 
-        List<Transaction> transactions = new ParserImpl().parse(lines);
+        List<Transaction> transactions = new ParseServiceImpl().parse(lines);
 
         for (Transaction transaction : transactions) {
             OperationHandler handler = operationStrategy.getByOperation(transaction.getOperation());

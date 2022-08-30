@@ -2,11 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.ParseService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParserImpl implements Parser {
+public class ParseServiceImpl implements ParseService {
     private static final String DATA_SPLITTER = ",";
     private static final int TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
