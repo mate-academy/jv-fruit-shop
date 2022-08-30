@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ParsedFileImpl implements ParsedFile {
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<Transaction> parsedList(List<String> listFromParsed) {
         listFromParsed.remove(0);
         return listFromParsed.stream()
-                .map(l -> l.split(","))
+                .map(l -> l.split(SEPARATOR))
                 .map(this::build)
                 .collect(Collectors.toList());
     }

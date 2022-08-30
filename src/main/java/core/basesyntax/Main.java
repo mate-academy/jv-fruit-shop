@@ -21,7 +21,7 @@ public class Main {
 
     public static void main(String[] args) {
         Map<Transaction.Operation, OperationHandler> map = new HashMap<>();
-        initialize(map);
+        putValues(map);
         OperationStrategy operationStrategy = new OperationStrategy(map);
         List<String> stringList = new ReaderImpl().read(INPUT_FILE_PATH);
         List<Transaction> transactions = new ParsedFileImpl().parsedList(stringList);
@@ -35,7 +35,7 @@ public class Main {
 
     }
 
-    private static void initialize(Map<Transaction.Operation, OperationHandler> map) {
+    private static void putValues(Map<Transaction.Operation, OperationHandler> map) {
         map.put(Transaction.Operation.BALANCE, new BalanceOperationHandler());
         map.put(Transaction.Operation.SUPPLY, new SupplyOperationHandler());
         map.put(Transaction.Operation.RETURN, new ReturnOperationHandler());
