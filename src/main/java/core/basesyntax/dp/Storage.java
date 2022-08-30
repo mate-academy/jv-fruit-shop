@@ -1,4 +1,4 @@
-package core.basesyntax.storage;
+package core.basesyntax.dp;
 
 import core.basesyntax.model.Fruit;
 import java.util.HashMap;

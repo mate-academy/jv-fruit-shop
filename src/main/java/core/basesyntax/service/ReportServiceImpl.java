@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
+import core.basesyntax.dp.Storage;
 import core.basesyntax.service.impl.ReportService;
-import core.basesyntax.storage.Storage;
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
