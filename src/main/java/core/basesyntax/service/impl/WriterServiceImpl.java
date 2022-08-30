@@ -10,23 +10,10 @@ public class WriterServiceImpl implements WriterService {
     @Override
     public void writeToFile(String report, String filePath) {
         File file = new File(filePath);
-        if (file.exists()) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, false))) {
-                writer.write("");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            writer.write(report);
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
+            bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Cant write data to file", e);
+            throw new RuntimeException("Can't write to file by path: " + filePath, e);
         }
     }
 }

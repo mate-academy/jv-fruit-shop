@@ -17,19 +17,15 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "src/main/resources/database.csv";
-    private static final String OUTPUT_FILE_NAME = "src/main/resources/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/database.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> handlersMap = new HashMap<>();
-        handlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        handlersMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        handlersMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        handlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+        Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
+        initialize(handlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
 
-        OperationStrategy operationStrategy = new OperationStrategyImpl(handlersMap);
-
-        List<String> dataSheet = new ReaderServiceImpl().readFromFile(INPUT_FILE_NAME);
+        List<String> dataSheet = new ReaderServiceImpl().readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> transactions = new TransactionParserServiceImpl().parse(dataSheet);
 
         for (FruitTransaction transaction : transactions) {
@@ -38,6 +34,15 @@ public class Main {
         }
 
         String report = new ReportServiceImpl().generateReport();
-        new WriterServiceImpl().writeToFile(report, OUTPUT_FILE_NAME);
+        new WriterServiceImpl().writeToFile(report, OUTPUT_FILE_PATH);
+
+    }
+
+    private static void initialize(Map<FruitTransaction.Operation, OperationHandler> map) {
+        map.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
+        map.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        map.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        map.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
     }
 }
+

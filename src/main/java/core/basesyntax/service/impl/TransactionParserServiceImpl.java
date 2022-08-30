@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionParserServiceImpl implements TransactionParserService {
+    private static final String SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -14,7 +15,7 @@ public class TransactionParserServiceImpl implements TransactionParserService {
     public List<FruitTransaction> parse(List<String> dataSheet) {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < dataSheet.size(); i++) {
-            String[] fields = dataSheet.get(i).split(",");
+            String[] fields = dataSheet.get(i).split(SEPARATOR);
 
             FruitTransaction transaction = new FruitTransaction();
             transaction.setFruit(new Fruit(fields[FRUIT_INDEX]));
