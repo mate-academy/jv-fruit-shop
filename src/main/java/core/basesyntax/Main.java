@@ -17,17 +17,24 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
-        Map<String, OperationHandler> map = new HashMap<>();
-        map.put("b", new BalanceOperationHandler());
-        map.put("p", new PurchaseOperationHandler());
-        map.put("r", new ReturnOperationHandler());
-        map.put("s", new SupplyOperationStrategy());
+    public static final String BALANCE = "b";
+    public static final String SUPPLY = "s";
+    public static final String RETURN = "r";
+    public static final String PURCHASE = "p";
+    public static final String INPUT_FILE = "src/main/resources/Input.csv";
+    public static final String OUTPUT_FILE = "src/main/resources/Output.csv";
 
-        OperationStrategy strategy = new OperationStrategy(map);
+    public static void main(String[] args) {
+        Map<String, OperationHandler> operations = new HashMap<>();
+        operations.put(BALANCE, new BalanceOperationHandler());
+        operations.put(PURCHASE, new PurchaseOperationHandler());
+        operations.put(RETURN, new ReturnOperationHandler());
+        operations.put(SUPPLY, new SupplyOperationStrategy());
+
+        OperationStrategy strategy = new OperationStrategy(operations);
 
         ReaderService readerService = new ReaderServiceImpl();
-        List<String> lines = readerService.readFromFile("src/main/resourses/Input.csv");
+        List<String> lines = readerService.readFromFile(INPUT_FILE);
 
         List<Transaktion> transaktions = new ParserImpl().parse(lines);
 
@@ -38,6 +45,6 @@ public class Main {
 
         String report = new ReportServiceImpl().getReport();
 
-        new WriterServiceImpl().writeToFile(report, "src/main/resourses/output.csv");
+        new WriterServiceImpl().writeToFile(report, OUTPUT_FILE);
     }
 }

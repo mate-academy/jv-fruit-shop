@@ -15,6 +15,5 @@ public class PurchaseOperationHandler implements OperationHandler {
         } else {
             throw new RuntimeException("Quantity " + fruit.getName() + " is not enough");
         }
-
     }
 }
