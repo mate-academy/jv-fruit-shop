@@ -1,8 +1,7 @@
-package core.basesyntax.serviceImpl;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.service.CreateFileService;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
