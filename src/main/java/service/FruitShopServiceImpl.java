@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 import model.FruitDto;
 import storage.FruitShopRepo;
 
+import static service.OperationType.BALANCE;
+
 public class FruitShopServiceImpl implements FruitShopService {
     private final FruitShopRepo fruitShopRepoImpl;
 
@@ -18,12 +20,12 @@ public class FruitShopServiceImpl implements FruitShopService {
         List<FruitDto> fruitsWithBalance = getFruitsWithBalanceType(fruitsFromFile);
         fruitsFromFile.removeAll(fruitsWithBalance);
         for (FruitDto fruitDto : fruitsFromFile) {
-            String operationType = fruitDto.getTypeOfOperation();
+            OperationType operationType = fruitDto.getTypeOfOperation();
             int value = fruitDto.getValue();
-            for (FruitDto fruitDto1 : fruitsWithBalance) {
-                if (fruitDto.getFruitName().equals(fruitDto1.getFruitName())) {
-                    fruitDto1.setValue(parseTypeOfOperation(
-                            operationType, value, fruitDto1.getValue()));
+            for (FruitDto fruit : fruitsWithBalance) {
+                if (fruitDto.getFruitName().equals(fruit.getFruitName())) {
+                    fruit.setValue(parseTypeOfOperation(
+                            operationType, value, fruit.getValue()));
                 }
             }
         }
@@ -34,15 +36,15 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     private List<FruitDto> getFruitsWithBalanceType(List<FruitDto> fruitsFromFile) {
         return fruitsFromFile.stream()
-                .filter(i -> i.getTypeOfOperation().equals("b"))
+                .filter(i -> i.getTypeOfOperation().equals(BALANCE))
                 .collect(Collectors.toList());
     }
 
-    private int parseTypeOfOperation(String operationType, int value, int balance) {
+    private int parseTypeOfOperation(OperationType operationType, int value, int balance) {
         switch (operationType) {
-            case "b":
+            case BALANCE:
                 return balance;
-            case "p":
+            case PURCHASE:
                 return balance - value;
             default:
                 return balance + value;

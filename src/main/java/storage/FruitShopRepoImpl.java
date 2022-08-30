@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitDto;
+import service.OperationType;
 
 public class FruitShopRepoImpl implements FruitShopRepo {
+    private static final int OPERATION_TYPE_INDEX = 0;
+    private static final int FRUIT_NAME_INDEX = 1;
+    private static final int FRUIT_COUNT_INDEX = 2;
     private final FileReaderService fileReaderServiceImpl;
     private final FileWriterService fileWriterServiceImpl;
 
@@ -21,9 +25,10 @@ public class FruitShopRepoImpl implements FruitShopRepo {
         List<FruitDto> fruitDtoList = new ArrayList<>();
         for (String info : infoFromFile) {
             String[] elementOfParsedInfoFromFile = info.split(",");
-            fruitDtoList.add(new FruitDto(elementOfParsedInfoFromFile[0],
-                    elementOfParsedInfoFromFile[1],
-                    Integer.parseInt(elementOfParsedInfoFromFile[2])));
+            fruitDtoList.add(new FruitDto(
+                    OperationType.findOperationType(elementOfParsedInfoFromFile[OPERATION_TYPE_INDEX]),
+                    elementOfParsedInfoFromFile[FRUIT_NAME_INDEX],
+                    Integer.parseInt(elementOfParsedInfoFromFile[FRUIT_COUNT_INDEX])));
         }
         return fruitDtoList;
     }

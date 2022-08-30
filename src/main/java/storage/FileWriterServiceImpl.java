@@ -8,17 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileWriterServiceImpl implements FileWriterService {
+    private static final String PATH_TO_OUTPUT_FILE = "src/main/resources/output.csv";
+    private static final String FIRST_DOC_ROW = "fruit,quantity";
 
     @Override
     public void writeToFile(List<String> fruitDataToWrite) {
         List<String> toWrite = new ArrayList<>();
-        toWrite.add("fruit,quantity");
+        toWrite.add(FIRST_DOC_ROW);
         toWrite.addAll(fruitDataToWrite);
-        Path path = new File("src/main/resources/output.csv").toPath();
+        File file = new File(PATH_TO_OUTPUT_FILE);
+        Path path = file.toPath();
         try {
             Files.write(path, toWrite, StandardOpenOption.WRITE);
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            throw new RuntimeException(String.format("Can't write to file %s", file), ex);
         }
     }
 }

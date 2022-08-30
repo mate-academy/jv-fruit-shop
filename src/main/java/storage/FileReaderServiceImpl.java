@@ -16,7 +16,7 @@ public class FileReaderServiceImpl implements FileReaderService {
             parsedInfo.remove(0);
             return parsedInfo;
         } catch (IOException e) {
-            throw new RuntimeException("Can`t read file", e);
+            throw new RuntimeException(String.format("Can't read from file %s", FILE_INPUT), e);
         }
     }
 }
