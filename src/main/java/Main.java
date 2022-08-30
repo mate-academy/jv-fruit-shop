@@ -56,6 +56,6 @@ public class Main {
         String dayReport = reportCreatorService.createReport();
 
         FileWriterService fileWriterService = new CsvFileWriterServiceImpl();
-        fileWriterService.writeToFile(OUTPUT_DATA_FILE,dayReport);
+        fileWriterService.writeToFile(OUTPUT_DATA_FILE, dayReport);
     }
 }

@@ -15,6 +15,6 @@ public class ReturnHandlerImpl implements TransactionHandler {
     public void makeTransaction(FruitTransaction transaction) {
         Fruit fruit = new Fruit(transaction.getFruit());
         Integer amount = storageDao.getAmount(fruit);
-        storageDao.update(fruit,amount + transaction.getAmount());
+        storageDao.update(fruit, amount + transaction.getAmount());
     }
 }

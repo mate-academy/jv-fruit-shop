@@ -14,8 +14,8 @@ public class FruitTransactionParserServiceImpl implements TransactionParserServi
 
     @Override
     public List<FruitTransaction> parseDataFromList(List<String> data) {
-
-        return data.subList(1, data.size()).stream()
+        return data.stream()
+                .skip(1)
                 .map(s -> s.split(SEPARATOR))
                 .map(s -> new FruitTransaction(
                         FruitTransaction.Operation.getOperation(

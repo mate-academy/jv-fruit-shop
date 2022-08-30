@@ -16,7 +16,7 @@ public class PurchaseHandlerImpl implements TransactionHandler {
         Fruit fruit = new Fruit(transaction.getFruit());
         Integer amount = storageDao.getAmount(fruit);
         if (storageDao.getAmount(fruit) > transaction.getAmount()) {
-            storageDao.update(fruit,amount - transaction.getAmount());
+            storageDao.update(fruit, amount - transaction.getAmount());
         }
     }
 }

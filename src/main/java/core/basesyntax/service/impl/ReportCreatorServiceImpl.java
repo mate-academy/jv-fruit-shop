@@ -20,8 +20,7 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
         return CSV_FIRST_LINE
                 + data.stream().map(
                         fruit -> fruit.getName()
-                                + "," + storageDao.getAmount(fruit)
-                                + System.lineSeparator())
-                .collect(Collectors.joining());
+                                + "," + storageDao.getAmount(fruit))
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }
