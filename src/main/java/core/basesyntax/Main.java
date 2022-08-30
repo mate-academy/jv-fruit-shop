@@ -4,8 +4,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.parsing.FileParserImpl;
 import core.basesyntax.service.servise.Reader;
 import core.basesyntax.service.servise.impl.ReaderImpl;
-import core.basesyntax.service.servise.impl.WriterImpl;
 import core.basesyntax.service.servise.impl.ReportGeneratorImpl;
+import core.basesyntax.service.servise.impl.WriterImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
