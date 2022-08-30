@@ -7,7 +7,7 @@ import core.basesyntax.service.ReportCreatorService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReportCreatorServiceImpl implements ReportCreatorService<List<Fruit>> {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String CSV_FIRST_LINE = "fruit,quantity" + System.lineSeparator();
     private final StorageDao storageDao;
 
@@ -16,7 +16,8 @@ public class ReportCreatorServiceImpl implements ReportCreatorService<List<Fruit
     }
 
     @Override
-    public String createReport(List<Fruit> data) {
+    public String createReport() {
+        List<Fruit> data = storageDao.getAll();
         return CSV_FIRST_LINE
                 + data.stream().map(
                         fruit -> fruit.getName()

@@ -4,7 +4,7 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 
-public class SupplyHandlerImpl implements TransactionHandler<FruitTransaction> {
+public class SupplyHandlerImpl implements TransactionHandler {
     private final StorageDao storageDao;
 
     public SupplyHandlerImpl(StorageDao storageDao) {

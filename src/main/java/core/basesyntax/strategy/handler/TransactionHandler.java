@@ -1,5 +1,7 @@
 package core.basesyntax.strategy.handler;
 
-public interface TransactionHandler<T> {
-    void makeTransaction(T transaction);
+import core.basesyntax.model.FruitTransaction;
+
+public interface TransactionHandler {
+    void makeTransaction(FruitTransaction transaction);
 }

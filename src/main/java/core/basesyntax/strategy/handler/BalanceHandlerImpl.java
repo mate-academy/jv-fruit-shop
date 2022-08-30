@@ -1,11 +1,10 @@
 package core.basesyntax.strategy.handler;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 
-public class BalanceHandlerImpl implements TransactionHandler<FruitTransaction> {
+public class BalanceHandlerImpl implements TransactionHandler {
     private final StorageDao storageDao;
 
     public BalanceHandlerImpl(StorageDao storageDao) {
