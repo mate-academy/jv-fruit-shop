@@ -20,7 +20,7 @@ public class CsvFileReaderService implements FileReaderService {
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File " + file + " does not exist.", e);
         } catch (IOException e) {
-            throw new RuntimeException("Stream already closet", e);
+            throw new RuntimeException("Stream already closed", e);
         }
         return list;
     }
