@@ -13,7 +13,6 @@ public class ReturnMovementHandler implements GoodHandler {
 
     @Override
     public void makePosting(FruitMovement movement) {
-        fruitDao.updateBalance(movement.getFruit(),
-                fruitDao.getAmount(movement.getFruit()) + movement.getAmount());
+        fruitDao.addToAmount(movement.getFruit(), movement.getAmount());
     }
 }

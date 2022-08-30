@@ -23,6 +23,7 @@ import core.basesyntax.strategy.impl.SupplyMovementHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Main {
     private static final String SOURCE_FILE_NAME = "src/main/resources/inputFileExample.csv";
@@ -39,9 +40,9 @@ public class Main {
         for (FruitMovement movement: fruitMovements) {
             strategy.getHandlerForMovement(movement.getType()).makePosting(movement);
         }
-        Map<Fruit, Integer> results = fruitDao.getBalance();
+        Set<Map.Entry<Fruit, Integer>> entries = fruitDao.getEntries();
         ReportCreator reporter = new CompilerOfReport();
-        String report = reporter.generateReport(results);
+        String report = reporter.generateReport(entries);
         FileWriterReport writer = new Writer();
         writer.writeToFile(report, REPORT_FILE_NAME);
     }
