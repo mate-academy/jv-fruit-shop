@@ -1,10 +1,14 @@
 package core.basesyntax;
 
+import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ReadFromFile;
+import core.basesyntax.service.impl.CreateReportServiceImpl;
 import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReadFromFileImpl;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.service.impl.WriteToFileImpl;
+import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.*;
 
 import java.util.HashMap;
@@ -31,6 +35,8 @@ public class Main {
             OperationHandler operationHandler = strategy.getByOperation(transaction.getOperation());
             operationHandler.apply(transaction);
         }
-
+        WriteToFileImpl writeToFile = new WriteToFileImpl();
+        CreateReportService createReportService = new CreateReportServiceImpl();
+        writeToFile.writeToFile("src/main/java/resource/report.csv", createReportService.createReport(Storage.storage));
     }
 }
