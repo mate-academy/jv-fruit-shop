@@ -8,10 +8,9 @@ import core.basesyntax.strategy.OperationHandler;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        Fruit fruit = transaction.getFruit();
-        Integer currentQuantity = Storage.storage.get(fruit);
+        Integer currentQuantity = Storage.storage.get(transaction.getFruit());
         if (currentQuantity >= transaction.getCount()) {
-        Storage.storage.put(fruit, currentQuantity - transaction.getCount());
+        Storage.storage.put(transaction.getFruit(), currentQuantity - transaction.getCount());
         }
     }
 }
