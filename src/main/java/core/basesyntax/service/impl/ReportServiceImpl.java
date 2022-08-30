@@ -10,7 +10,7 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public String getReport() {
 		return HEADER + System.lineSeparator() +
-				Storage.storage
+				Storage.getStorage()
 				.entrySet()
 				.stream()
 				.map(f -> f.getKey().getName() + "," + f.getValue())
