@@ -1,4 +1,4 @@
-package core.basesyntax.service.implementation;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
 
