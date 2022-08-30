@@ -2,9 +2,9 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import java.util.Map;
+import java.util.Set;
 
 public class FruitDaoImpl implements FruitDao {
-
     @Override
     public void put(String fruit, Integer quantity) {
         Storage.fruits.put(fruit, quantity);
@@ -25,7 +25,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Map<String, Integer> getAll() {
-        return Storage.fruits;
+    public Set<Map.Entry<String, Integer>> getEntries() {
+        return Storage.fruits.entrySet();
     }
 }

@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import java.util.Map;
+import java.util.Set;
 
 public interface FruitDao {
     void put(String fruit, Integer quantity);
@@ -9,6 +10,6 @@ public interface FruitDao {
 
     void addition(String fruit, int quantity);
 
-    Map<String, Integer> getAll();
+    Set<Map.Entry<String, Integer>> getEntries();
 
 }

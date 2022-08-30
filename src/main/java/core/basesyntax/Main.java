@@ -31,7 +31,7 @@ public class Main {
         List<FruitTransaction> fruitTransactions = new ParserServiceImpl()
                 .parse(dataFromFile);
         performOperations(fruitTransactions);
-        String report = new ReportServiceImpl().prepareReport(fruitDao.getAll());
+        String report = new ReportServiceImpl().prepareReport(fruitDao.getEntries());
         FileDataWriter writerService = new FileDataWriterImpl();
         writerService.writeData(FILE_OUTPUT_PATH, report);
     }
