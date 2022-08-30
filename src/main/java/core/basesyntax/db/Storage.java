@@ -1,12 +1,11 @@
-package core.basesyntax.storage;
+package core.basesyntax.db;
 
 import core.basesyntax.model.Fruit;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    public static Map<Fruit, Integer> storage = new HashMap<>();
+    private static Map<Fruit, Integer> storage = new HashMap<>();
 
     public static void put(Fruit fruit, Integer quantity) {
         storage.put(fruit, quantity);
