@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Writer;
+import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriterService implements Writer {
+public class WriterServiceImpl implements WriterService {
     @Override
     public void writeToFile(String report, String outputFilePath) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputFilePath))) {

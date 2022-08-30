@@ -3,9 +3,9 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.Reader;
+import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.Writer;
+import core.basesyntax.service.WriterService;
 import core.basesyntax.strategy.AmountStrategy;
 import java.util.List;
 
@@ -19,21 +19,21 @@ public class FruitServiceImpl implements FruitService {
     private final ReportService reportService;
     private final AmountStrategy strategy;
     private final FruitDao fruitDao;
-    private final Reader reader;
-    private final Writer writer;
+    private final ReaderService readerService;
+    private final WriterService writerService;
 
-    public FruitServiceImpl(AmountStrategy strategy, FruitDao fruitDao,
-                            Reader reader, Writer writer, ReportService reportService) {
+    public FruitServiceImpl(AmountStrategy strategy, FruitDao fruitDao, ReaderService readerService,
+                            WriterService writerService, ReportService reportService) {
         this.strategy = strategy;
         this.fruitDao = fruitDao;
-        this.reader = reader;
-        this.writer = writer;
+        this.readerService = readerService;
+        this.writerService = writerService;
         this.reportService = reportService;
     }
 
     @Override
     public void processData(String inputFile, String outputFile) {
-        List<String> inputFruits = reader.readFromFile(inputFile);
+        List<String> inputFruits = readerService.readFromFile(inputFile);
         for (int i = 1; i < inputFruits.size(); i++) {
             String[] fruitIncoming = inputFruits.get(i).split(DIVIDER);
             String operation = fruitIncoming[OPERATION_INDEX];
@@ -43,6 +43,6 @@ public class FruitServiceImpl implements FruitService {
                     .orElseGet(() -> fruitDao.add(new Fruit(fruitName, STARTING_AMOUNT)));
             fruit.setAmount(strategy.get(operation).changeAmount(fruit, fruitAmount));
         }
-        writer.writeToFile(reportService.report(HEADER, DIVIDER), outputFile);
+        writerService.writeToFile(reportService.report(HEADER, DIVIDER), outputFile);
     }
 }
