@@ -6,13 +6,13 @@ import core.basesyntax.strategy.Strategy;
 import java.util.Map;
 
 public class PostingStrategy implements Strategy {
-    private final Map<MovementType, GoodHandler> strategies;
+    private final Map<MovementType, GoodHandler> handlerMap;
 
-    public PostingStrategy(Map<MovementType, GoodHandler> strategies) {
-        this.strategies = strategies;
+    public PostingStrategy(Map<MovementType, GoodHandler> handlerMap) {
+        this.handlerMap = handlerMap;
     }
 
-    public GoodHandler getPostingAccordingMovement(MovementType type) {
-        return strategies.get(type);
+    public GoodHandler getHandlerForMovement(MovementType type) {
+        return handlerMap.get(type);
     }
 }

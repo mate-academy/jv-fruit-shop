@@ -2,27 +2,24 @@ package core.basesyntax.storage.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.FruitDao;
+import java.util.HashMap;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-    private final Database<Fruit> db;
-
-    public FruitDaoImpl() {
-        db = new Database<>();
-    }
+    private static final Map<Fruit, Integer> dataBase = new HashMap<>();
 
     @Override
     public Map<Fruit, Integer> getBalance() {
-        return db.getBalance();
+        return Map.copyOf(dataBase);
     }
 
     @Override
     public int getAmount(Fruit fruit) {
-        return db.getAmount(fruit);
+        return dataBase.get(fruit);
     }
 
     @Override
     public void updateBalance(Fruit fruit, int amount) {
-        db.updateBalance(fruit, amount);
+        dataBase.put(fruit, amount);
     }
 }

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FruitMovementParser implements Parser {
-    private static final int TYPE = 0;
-    private static final int FRUIT_NAME = 1;
-    private static final int FRUIT_VALUE = 2;
+    private static final int OPERATOIN_TYPE_INDEX = 0;
+    private static final int FRUIT_NAME_INDEX = 1;
+    private static final int FRUIT_AMOUNT_INDEX = 2;
 
     @Override
     public List<FruitMovement> parse(List<String[]> input) {
@@ -19,16 +19,16 @@ public class FruitMovementParser implements Parser {
             return result;
         }
         for (String[] record : input) {
-            Fruit fruit = new Fruit(record[FRUIT_NAME]);
-            MovementType type = getType(record[TYPE]);
-            int value = Integer.parseInt(record[FRUIT_VALUE]);
+            Fruit fruit = new Fruit(record[FRUIT_NAME_INDEX]);
+            MovementType type = getType(record[OPERATOIN_TYPE_INDEX]);
+            int value = Integer.parseInt(record[FRUIT_AMOUNT_INDEX]);
             FruitMovement fruitMovement = new FruitMovement(fruit, type, value);
             result.add(fruitMovement);
         }
         return result;
     }
 
-    private static MovementType getType(String symbol) {
+    private MovementType getType(String symbol) {
         switch (symbol) {
             case "b":
                 return MovementType.BALANCE;
