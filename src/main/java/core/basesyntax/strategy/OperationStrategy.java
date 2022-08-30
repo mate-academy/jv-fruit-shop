@@ -8,9 +8,11 @@ public class OperationStrategy {
     public OperationStrategy(Map<String, OperationHandler> map) {
         this.map = map;
     }
+
     public OperationHandler getByOperation(String operation) {
         return map.get(operation);
     }
+
     public boolean contains(String operation) {
         return map.containsKey(operation);
     }

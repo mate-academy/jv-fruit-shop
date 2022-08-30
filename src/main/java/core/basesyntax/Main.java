@@ -1,13 +1,5 @@
 package core.basesyntax;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import core.basesyntax.model.FruitType;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.storage.Storage;
@@ -16,6 +8,13 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.SupplyOperation;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -40,10 +39,12 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException("File not found", e);
         }
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("output-report.csv"))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(
+                new FileWriter("output-report.csv"))) {
             bufferedWriter.write("fruit,quantity\n");
-            for (FruitType fruits : Storage.storage.keySet()) {
-                bufferedWriter.write(fruits.toString().toLowerCase() + "," + Storage.storage.get(fruits));
+            for (FruitType fruits : Storage.getStorage().keySet()) {
+                bufferedWriter.write(fruits.toString().toLowerCase()
+                        + "," + Storage.getStorage().get(fruits));
                 bufferedWriter.write("\n");
             }
         } catch (IOException e) {

@@ -6,7 +6,8 @@ import core.basesyntax.storage.Storage;
 public class SupplyOperation implements OperationHandler {
     @Override
     public void apply(Transaction transaction) {
-        int curentQuantity = Storage.storage.get(transaction.getFruit().getType());
-        Storage.storage.put(transaction.getFruit().getType(), curentQuantity + transaction.getQuantity());
+        int curentQuantity = Storage.getStorage().get(transaction.getFruit().getType());
+        Storage.getStorage().put(transaction.getFruit()
+                .getType(), curentQuantity + transaction.getQuantity());
     }
 }

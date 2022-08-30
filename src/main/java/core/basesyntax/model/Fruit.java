@@ -17,9 +17,8 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{" +
-                "type='" + type + '\'' +
-                '}';
+        return "Fruit{"
+                + "type='" + type + '\'' + '}';
     }
 
     @Override
