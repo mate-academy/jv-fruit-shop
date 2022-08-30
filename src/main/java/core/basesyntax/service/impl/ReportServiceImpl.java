@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,7 @@ public class ReportServiceImpl implements ReportService {
     public String create(Map<Fruit, Integer> storage) {
         List<String> reportList = new ArrayList<>();
         reportList.add(HEAD_REPORT);
-        for(Map.Entry<Fruit, Integer> entry : storage.entrySet()) {
+        for (Map.Entry<Fruit, Integer> entry : storage.entrySet()) {
             reportList.add(entry.getKey().getName() + "," + entry.getValue());
         }
         return reportList.stream().collect(Collectors.joining(System.lineSeparator()));

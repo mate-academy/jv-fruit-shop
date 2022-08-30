@@ -1,6 +1,5 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
@@ -10,7 +9,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void apply(FruitTransaction transaction) {
         Integer currentQuantity = Storage.storage.get(transaction.getFruit());
         if (currentQuantity >= transaction.getCount()) {
-        Storage.storage.put(transaction.getFruit(), currentQuantity - transaction.getCount());
+            Storage.storage.put(transaction.getFruit(), currentQuantity - transaction.getCount());
         }
     }
 }

@@ -12,15 +12,13 @@ import core.basesyntax.strategy.impl.OperationStrategy;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
-
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private final static String INPUT_FILE_NAME = "Input.csv";
-    private final static String OUTPUT_FILE_NAME = "Output.csv";
+    private static final String INPUT_FILE_NAME = "src/main/resources/Input.csv";
+    private static final String OUTPUT_FILE_NAME = "src/main/resources/Output.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> mapOperationHandler = new HashMap<>();

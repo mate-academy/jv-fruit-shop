@@ -39,10 +39,15 @@ public class FruitTransaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FruitTransaction that = (FruitTransaction) o;
-        return Objects.equals(operation, that.operation) && Objects.equals(fruit, that.fruit) && Objects.equals(count, that.count);
+        return Objects.equals(operation, that.operation) && Objects.equals(fruit, that.fruit)
+                && Objects.equals(count, that.count);
     }
 
     @Override
@@ -52,11 +57,11 @@ public class FruitTransaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "operation='" + operation + '\'' +
-                ", fruit=" + fruit +
-                ", count=" + count +
-                '}';
+        return "Transaction{"
+                + "operation='" + operation + '\''
+                + ", fruit=" + fruit
+                + ", count=" + count
+                + '}';
     }
 
 }
