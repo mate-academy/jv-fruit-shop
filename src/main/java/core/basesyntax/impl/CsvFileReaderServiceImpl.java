@@ -1,6 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.impl;
 
-import core.basesyntax.service.impl.FileReaderService;
+import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderServiceImpl implements FileReaderService {
-
     public List<String> readFromFile(String fileName) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {

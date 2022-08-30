@@ -1,4 +1,4 @@
-package core.basesyntax.dp;
+package core.basesyntax.db;
 
 import core.basesyntax.model.Fruit;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ public class Storage {
         return storage.get(fruit);
     }
 
-    public static Map<Fruit, Integer> getStorage() {
+    public static Map<Fruit, Integer> getAll() {
         return storage;
     }
 }

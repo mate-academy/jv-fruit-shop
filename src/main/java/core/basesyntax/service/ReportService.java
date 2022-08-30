@@ -1,6 +1,5 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service;
 
 public interface ReportService {
-
     String getReport();
 }
