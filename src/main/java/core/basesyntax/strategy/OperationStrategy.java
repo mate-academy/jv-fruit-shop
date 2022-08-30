@@ -10,16 +10,16 @@ public class OperationStrategy {
     public void operationStrategy(FruitTransaction transaction) {
         switch (transaction.getOperation()) {
             case BALANCE:
-                new BalanceOperationHandler().handle(transaction);
+                new BalanceOperationHandler().apply(transaction);
                 break;
             case SUPPLY:
-                new SupplyOperationHandler().handle(transaction);
+                new SupplyOperationHandler().apply(transaction);
                 break;
             case RETURN:
-                new ReturnOperationHandler().handle(transaction);
+                new ReturnOperationHandler().apply(transaction);
                 break;
             case PURCHASE:
-                new PurchaseOperationHandler().handle(transaction);
+                new PurchaseOperationHandler().apply(transaction);
                 break;
             default:
                 throw new RuntimeException("Incorrect transaction type: "

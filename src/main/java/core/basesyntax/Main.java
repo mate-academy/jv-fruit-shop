@@ -2,9 +2,9 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.parsing.FileParserImpl;
-import core.basesyntax.service.servise.FileReader;
-import core.basesyntax.service.servise.impl.FileReaderImpl;
-import core.basesyntax.service.servise.impl.FileWriterImpl;
+import core.basesyntax.service.servise.Reader;
+import core.basesyntax.service.servise.impl.ReaderImpl;
+import core.basesyntax.service.servise.impl.WriterImpl;
 import core.basesyntax.service.servise.impl.ReportGeneratorImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        FileReader reader = new FileReaderImpl();
+        Reader reader = new ReaderImpl();
         List<String> recordsFromFile = reader.read(RECORDS_FILE_NAME);
         List<FruitTransaction> transactions = new FileParserImpl()
                 .parse(recordsFromFile);
@@ -25,6 +25,6 @@ public class Main {
         }
 
         String report = new ReportGeneratorImpl().report();
-        new FileWriterImpl().createReportFile(report, REPORT_FILE_NAME);
+        new WriterImpl().createReportFile(report, REPORT_FILE_NAME);
     }
 }

@@ -2,6 +2,6 @@ package core.basesyntax.service.servise;
 
 import java.util.List;
 
-public interface FileReader {
+public interface Reader {
     List<String> read(String fileName);
 }

@@ -13,7 +13,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder report = new StringBuilder()
                 .append(HEADER).append(System.lineSeparator());
 
-        for (Map.Entry<String, Integer> pair : Storage.STORAGE.entrySet()) {
+        for (Map.Entry<String, Integer> pair : Storage.storage.entrySet()) {
             report.append(pair.getKey()).append(DATA_SEPARATOR)
                     .append(pair.getValue()).append(System.lineSeparator());
         }
