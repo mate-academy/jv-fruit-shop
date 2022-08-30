@@ -1,12 +1,12 @@
 package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.StorageDao;
-import core.basesyntax.service.FruitStoreDao;
+import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.strategy.FruitOperation;
 import java.util.List;
 import java.util.Map;
 
-public class FruitStoreDaoImpl implements FruitStoreDao {
+public class FruitTransactionImpl implements FruitTransaction {
     private static final String DATA_DELIMITER = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;

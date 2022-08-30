@@ -8,11 +8,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FruitStoreReportHandler implements ReportHandler {
+    private static final String REPORT_HEAD = "fruit,quantity";
+
     @Override
     public String makeReport(StorageDao storageDao) {
         Map<String, Integer> fruits = storageDao.getFruitsAmount();
         List<String> report = new ArrayList<>();
-        report.add("fruit,quantity");
+        report.add(REPORT_HEAD);
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
             report.add(entry.getKey() + "," + entry.getValue());
         }

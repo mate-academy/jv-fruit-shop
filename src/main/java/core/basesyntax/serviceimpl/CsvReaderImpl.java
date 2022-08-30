@@ -1,14 +1,14 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.service.Reader;
+import core.basesyntax.service.CsvReader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class CsvReaderImpl implements Reader {
+public class CsvReaderImpl implements CsvReader {
     @Override
-    public List<String> read(String filePath) {
+    public List<String> readFromFile(String filePath) {
         File file = new File(filePath);
         try {
             return Files.readAllLines(file.toPath());
