@@ -48,7 +48,6 @@ public class Transaction {
                 + ", quantity=" + quantity + '}';
     }
 
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
