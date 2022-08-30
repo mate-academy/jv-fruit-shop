@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
@@ -12,19 +11,17 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void subtract(FruitTransaction fruitTransaction) {
-        if (fruitTransaction.getQuantity() > Storage.fruits.get(fruitTransaction.getFruit())) {
+    public void subtract(String fruit, int quantity) {
+        if (quantity > Storage.fruits.get(fruit)) {
             throw new RuntimeException("We can't sell you more than "
-                    + Storage.fruits.get(fruitTransaction.getFruit()));
+                    + Storage.fruits.get(fruit));
         }
-        Storage.fruits.put(fruitTransaction.getFruit(),
-                Storage.fruits.get(fruitTransaction.getFruit()) - fruitTransaction.getQuantity());
+        Storage.fruits.put(fruit, Storage.fruits.get(fruit) - quantity);
     }
 
     @Override
-    public void addition(FruitTransaction fruitTransaction) {
-        Storage.fruits.put(fruitTransaction.getFruit(),
-                Storage.fruits.get(fruitTransaction.getFruit()) + fruitTransaction.getQuantity());
+    public void addition(String fruit, int quantity) {
+        Storage.fruits.put(fruit, Storage.fruits.get(fruit) + quantity);
     }
 
     @Override

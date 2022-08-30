@@ -11,8 +11,8 @@ import core.basesyntax.operation.SupplyOperationHandler;
 import core.basesyntax.service.FileDataWriter;
 import core.basesyntax.service.implementation.FileDataWriterImpl;
 import core.basesyntax.service.implementation.FileReaderImpl;
-import core.basesyntax.service.implementation.ProcessDataImpl;
-import core.basesyntax.service.implementation.ReportDataImpl;
+import core.basesyntax.service.implementation.ParserServiceImpl;
+import core.basesyntax.service.implementation.ReportServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
@@ -28,10 +28,10 @@ public class Main {
         FruitDao fruitDao = new FruitDaoImpl();
         operations = createHashMap(fruitDao);
         List<String> dataFromFile = new FileReaderImpl().readAllDataOfFile(FILE_READ_PATH);
-        List<FruitTransaction> fruitTransactions = new ProcessDataImpl()
-                .processedDataOfFruitsFile(dataFromFile);
+        List<FruitTransaction> fruitTransactions = new ParserServiceImpl()
+                .parse(dataFromFile);
         performOperations(fruitTransactions);
-        String report = new ReportDataImpl().report(fruitDao.getAll());
+        String report = new ReportServiceImpl().prepareReport(fruitDao.getAll());
         FileDataWriter writerService = new FileDataWriterImpl();
         writerService.writeData(FILE_OUTPUT_PATH, report);
     }
@@ -41,7 +41,7 @@ public class Main {
         fruitTransactions.forEach(fruitTransaction ->
                 operationStrategy
                         .get(fruitTransaction.getOperation())
-                        .operation(fruitTransaction));
+                        .handle(fruitTransaction));
     }
 
     private static Map<FruitTransaction.Operation, OperationHandler>

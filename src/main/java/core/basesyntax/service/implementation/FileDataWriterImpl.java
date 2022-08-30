@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 public class FileDataWriterImpl implements FileDataWriter {
-
     @Override
     public void writeData(String path, String data) {
         try {

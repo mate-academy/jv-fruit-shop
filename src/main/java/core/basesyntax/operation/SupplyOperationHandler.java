@@ -11,7 +11,7 @@ public class SupplyOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void operation(FruitTransaction fruitTransaction) {
-        fruitDao.addition(fruitTransaction);
+    public void handle(FruitTransaction fruitTransaction) {
+        fruitDao.addition(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }
