@@ -5,6 +5,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportCreatorService;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService {
@@ -17,7 +18,7 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
 
     @Override
     public String createReport() {
-        List<Fruit> data = storageDao.getAll();
+        Set<Fruit> data = storageDao.getAll();
         return CSV_FIRST_LINE
                 + data.stream().map(
                         fruit -> fruit.getName()
