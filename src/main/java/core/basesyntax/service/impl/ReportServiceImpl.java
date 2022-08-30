@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String RECORD_DIVIDER = ",";
-    private static final String HEADER = "type,fruit,quantity";
+    private static final String HEADER = "fruit,quantity";
 
     @Override
     public String createReport(Map<Fruit, Integer> fruitsDataMap) {

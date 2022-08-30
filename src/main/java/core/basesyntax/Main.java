@@ -7,7 +7,7 @@ import core.basesyntax.service.FileParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.FileParserServiceImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
@@ -46,7 +46,7 @@ public class Main {
                 new ReturnOperationHandler(storage));
         ReaderService readerService = new ReaderServiceImpl();
         List<String> dataFromFile = readerService.readFromFile(READ_FROM_FILE_PATH);
-        FileParserService fileParserService = new FileParserServiceImpl();
+        FileParserService fileParserService = new ParserServiceImpl();
         List<FruitTransaction> transactions = fileParserService.getFruitTransaction(dataFromFile);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         for (FruitTransaction fruitTransaction : transactions) {

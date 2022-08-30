@@ -5,7 +5,7 @@ import core.basesyntax.service.FileParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileParserServiceImpl implements FileParserService {
+public class ParserServiceImpl implements FileParserService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
