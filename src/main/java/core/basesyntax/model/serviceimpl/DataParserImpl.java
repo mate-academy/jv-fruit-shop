@@ -15,18 +15,20 @@ public class DataParserImpl implements DataParser {
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
         return lines.stream()
-                .map(s -> s.split(SPLITTER))
-                .map(DataParserImpl::parsingOperation)
+                .map(this::parseLine)
                 .collect(Collectors.toList());
     }
 
-    private static FruitTransaction parsingOperation(String[] lines) {
-        return new FruitTransaction(
+    private FruitTransaction parseLine(String line) {
+        String[] splitted = line.split(SPLITTER);
+        FruitTransaction.Operation operation =
                 Arrays.stream(FruitTransaction.Operation.values())
-                        .filter(operation -> operation.getOperation()
-                                .equals(lines[OPERATION_INDEX]))
-                        .findFirst().get(),lines[FRUIT_INDEX],
-                                Integer.parseInt(lines[QUANTITY_INDEX]));
+                        .filter(o -> o.getOperation().equals(splitted[OPERATION_INDEX]))
+                        .findFirst()
+                        .get();
+        String fruitName = splitted[FRUIT_INDEX];
+        int amount = Integer.parseInt(splitted[QUANTITY_INDEX]);
+        return new FruitTransaction(operation, fruitName, amount);
     }
 
 }

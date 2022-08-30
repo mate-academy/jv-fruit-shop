@@ -1,11 +1,12 @@
 package core.basesyntax.model.service;
 
 import java.util.Map;
+import java.util.Set;
 
-public interface DataBase {
+public interface Storage {
     void add(String fruit, Integer quantity);
 
     void remove(String fruit, Integer quantity);
 
-    Map<String, Integer> getAll();
+    Set<Map.Entry<String, Integer>> getEntrySet();
 }

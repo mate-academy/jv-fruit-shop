@@ -1,12 +1,12 @@
 package core.basesyntax.model.strategy.handler;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.service.DataBase;
+import core.basesyntax.model.service.Storage;
 
 public class ReturnOperationHandler implements OperationHandler {
-    private DataBase dataBase;
+    private Storage dataBase;
 
-    public ReturnOperationHandler(DataBase dataBase) {
+    public ReturnOperationHandler(Storage dataBase) {
         this.dataBase = dataBase;
     }
 

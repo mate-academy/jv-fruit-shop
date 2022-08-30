@@ -1,7 +1,8 @@
 package core.basesyntax.model.service;
 
 import java.util.Map;
+import java.util.Set;
 
 public interface ReportData {
-    String createDataReport(Map<String, Integer> values);
+    String createDataReport(Set<Map.Entry<String, Integer>> entries);
 }

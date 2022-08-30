@@ -1,15 +1,12 @@
 package core.basesyntax.model.serviceimpl;
 
-import core.basesyntax.model.service.DataBase;
+import core.basesyntax.model.service.Storage;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
-public class DataBaseImpl implements DataBase {
-    private HashMap<String, Integer> storage;
-
-    public DataBaseImpl() {
-        this.storage = new HashMap<>();
-    }
+public class StorageImpl implements Storage {
+    private Map<String, Integer> storage = new HashMap<>();
 
     @Override
     public void add(String fruit, Integer quantity) {
@@ -27,7 +24,7 @@ public class DataBaseImpl implements DataBase {
     }
 
     @Override
-    public Map<String, Integer> getAll() {
-        return storage;
+    public Set<Map.Entry<String, Integer>> getEntrySet() {
+        return storage.entrySet();
     }
 }
