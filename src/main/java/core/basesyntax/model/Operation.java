@@ -5,7 +5,10 @@ public class Operation {
     private String fruit;
     private int amount;
 
-    public Operation() {
+    public Operation(OperationType operationType, String fruit, int amount) {
+        this.operationType = operationType;
+        this.fruit = fruit;
+        this.amount = amount;
     }
 
     public enum OperationType {
@@ -20,7 +23,7 @@ public class Operation {
             this.abbreviation = abbreviation;
         }
 
-        public OperationType getOperationTypeByAbbreviation(String abbreviation) {
+        public static OperationType getOperationTypeByAbbreviation(String abbreviation) {
             for (OperationType type : values()) {
                 if (type.abbreviation.equals(abbreviation)){
                     return type;

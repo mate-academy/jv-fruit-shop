@@ -1,4 +1,4 @@
-package core.basesyntax.implementation;
+package core.basesyntax.service.implementation;
 
 import core.basesyntax.service.FileReaderService;
 
@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FileReaderServiceImpl implements FileReaderService {
+public class CsvFileReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> readFile(String path) {
         try {
