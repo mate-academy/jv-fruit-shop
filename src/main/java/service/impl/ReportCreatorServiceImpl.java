@@ -2,14 +2,14 @@ package service.impl;
 
 import dao.StorageDao;
 import java.util.stream.Collectors;
-import service.CreatorReportService;
+import service.ReportCreatorService;
 
-public class CreatorReportServiceImpl implements CreatorReportService {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String FIRST_ROW = "fruit,quantity";
     private static final String SEPARATOR = ",";
     private final StorageDao storageDao;
 
-    public CreatorReportServiceImpl(StorageDao storageDao) {
+    public ReportCreatorServiceImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 

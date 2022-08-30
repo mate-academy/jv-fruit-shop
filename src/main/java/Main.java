@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.CreatorReportService;
 import service.FileReaderService;
 import service.FileWriterService;
 import service.FruitTransactionParserService;
-import service.impl.CreatorReportServiceImpl;
+import service.ReportCreatorService;
 import service.impl.FileReaderServiceImpl;
 import service.impl.FileWriterServiceImpl;
 import service.impl.FruitTransactionParserServiceImpl;
+import service.impl.ReportCreatorServiceImpl;
 import strategy.Strategy;
 import strategy.StrategyImpl;
 import strategy.operations.OperationHandler;
@@ -44,7 +44,7 @@ public class Main {
         fruitTransactionList.forEach(f -> operationStrategy
                 .get(f.getOperation())
                 .handler(f));
-        CreatorReportService creatorReportService = new CreatorReportServiceImpl(storageDao);
+        ReportCreatorService creatorReportService = new ReportCreatorServiceImpl(storageDao);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(creatorReportService.createReport(), REPORT_FILEPATH);
     }
