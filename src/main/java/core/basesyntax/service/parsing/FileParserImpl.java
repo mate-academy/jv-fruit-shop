@@ -17,8 +17,7 @@ public class FileParserImpl implements FileParser {
         return records.stream()
                 .map(r -> r.split(DATA_SEPARATOR))
                 .map(record -> new FruitTransaction(operationIdentity(record[OPERATION_TYPE]),
-                        record[FRUIT_TYPE],
-                        Integer.parseInt(record[QUANTITY])))
+                        record[FRUIT_TYPE], Integer.parseInt(record[QUANTITY])))
                 .collect(Collectors.toList());
     }
 
