@@ -1,11 +1,48 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-	private Operation operation;
-	private String fruit;
+	private String operation;
+	private Fruit fruit;
 	private int quantity;
 
-	// getters, setters, ...
+	public FruitTransaction(String operation, Fruit fruit, int quantity) {
+		this.operation = operation;
+		this.fruit = fruit;
+		this.quantity = quantity;
+	}
+
+	public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
+
+	public Fruit getFruit() {
+		return fruit;
+	}
+
+	public void setFruit(Fruit fruit) {
+		this.fruit = fruit;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	@Override
+	public String toString() {
+		return "FruitTransaction{" +
+				"operation=" + operation +
+				", fruit='" + fruit + '\'' +
+				", quantity=" + quantity +
+				'}';
+	}
 
 	public enum Operation {
 		BALANCE("b"),
