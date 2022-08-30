@@ -7,17 +7,17 @@ import java.nio.file.Files;
 
 public class WriteToFileImpl implements WriteToFile {
     @Override
-    public boolean writeToFile(String fileName, String report) {
-        File file = new File(fileName);
+    public boolean writeToFile(String filePath, String report) {
+        File file = new File(filePath);
         try {
             file.createNewFile();
         } catch (IOException e) {
-            throw new RuntimeException("Can't create file " + fileName + e);
+            throw new RuntimeException("Can't create file " + filePath + e);
         }
         try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file " + fileName + e);
+            throw new RuntimeException("Can't write to file " + filePath + e);
         }
         return true;
     }
