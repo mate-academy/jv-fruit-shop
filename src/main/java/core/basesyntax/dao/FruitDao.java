@@ -1,5 +1,7 @@
 package core.basesyntax.dao;
 
+import java.util.Map;
+
 public interface FruitDao {
     void set(String product, int quantity);
 
@@ -9,5 +11,5 @@ public interface FruitDao {
 
     int get(String product);
 
-    String[] getFruitsNames();
+    Map<String, Integer> getAll();
 }

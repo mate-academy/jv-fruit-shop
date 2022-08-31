@@ -41,7 +41,6 @@ public class Main {
         ReportCreator reportCreator = new ReportCreatorImpl(fruitsDao);
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeReport(PATH_TO_FILE,
-                reportCreator.createReport(),
-                reportCreator.HEADER);
+                reportCreator.createReport());
     }
 }

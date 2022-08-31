@@ -1,6 +1,8 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
@@ -15,8 +17,8 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void subtract(String fruit, int quantity) {
-        if (quantity > Storage.fruits.get(fruit)) {
-            throw new RuntimeException("Can't sell more " + fruit + " then we have");
+        if (Storage.fruits.get(fruit) == null || quantity > Storage.fruits.get(fruit)) {
+            throw new RuntimeException("No fruits for purchase");
         }
         Storage.fruits.replace(fruit, get(fruit) - quantity);
     }
@@ -28,8 +30,8 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public String[] getFruitsNames() {
-        return Storage.fruits.keySet().toArray(new String[0]);
+    public Map<String, Integer> getAll() {
+        return new HashMap<>(Storage.fruits);
     }
 
     private void checkKeyPresence(String fruit) {
