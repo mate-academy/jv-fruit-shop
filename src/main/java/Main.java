@@ -25,12 +25,12 @@ public class Main {
     public static final String DAILY_OPERATIONS_FILE
             = "src/main/java/resourses/dailyoperations.csv";
     public static final String DAILY_REPORT_FILE
-            = "src/main/java/resourses/dailyreport.csv";
+            = "src/main/java/resours    es/dailyreport.csv";
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
         Path pathInput = Paths.get(DAILY_OPERATIONS_FILE);
-        List<String> fruitTransactionsString = readerService.csvRead(pathInput);
+        List<String> fruitTransactionsString = readerService.read(pathInput);
         ParserTransactionsService parseTransactions = new ParserTransactionsServiceImpl();
         List<FruitTransaction> fruitTransactions = parseTransactions.parse(fruitTransactionsString);
         ProcessDataService processDataService = new ProcessDataServiceImpl();
@@ -38,7 +38,7 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
         Path pathOutput = Paths.get(DAILY_REPORT_FILE);
-        writerService.csvWrite(pathOutput, reportService.report(Storage.dataBase));
+        writerService.write(pathOutput, reportService.report(Storage.dataBase));
     }
 
     private static Map<FruitTransaction.Operation, OperationHandler> newOperationsMap() {

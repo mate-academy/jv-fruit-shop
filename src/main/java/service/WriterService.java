@@ -3,5 +3,5 @@ package service;
 import java.nio.file.Path;
 
 public interface WriterService {
-    void csvWrite(Path path, String string);
+    void write(Path path, String string);
 }
