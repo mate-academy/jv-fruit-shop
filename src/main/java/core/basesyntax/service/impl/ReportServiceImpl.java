@@ -11,7 +11,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String getReport() {
         String report = Storage.getData().entrySet().stream()
-                .map(totalFruits -> totalFruits.getKey() + COMMA + totalFruits.getValue()
+                .map(totalFruits -> totalFruits.getKey().getName() + COMMA + totalFruits.getValue()
                         + System.lineSeparator())
                 .collect(Collectors.joining());
         return HEADERS + System.lineSeparator() + report;
