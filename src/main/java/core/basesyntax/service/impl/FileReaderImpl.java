@@ -8,13 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-    private static final int HEAD_OF_INPUT = 0;
 
     @Override
     public List<String> read(File file) {
         List<String> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file))) {
-            bufferedReader.readLine();
             String operation = bufferedReader.readLine();
             while (operation != null) {
                 list.add(operation);

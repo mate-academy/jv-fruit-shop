@@ -5,7 +5,7 @@ import core.basesyntax.storage.Storage;
 import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private static final String HEAD_OF_REPORT = "fruit,quantity\n";
+    private static final String HEAD_OF_REPORT = "fruit,quantity";
     private static final String SEPARATOR = ",";
 
     @Override
@@ -16,6 +16,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
                         .append(SEPARATOR).append(mapValues.getValue().toString())
                         .append(System.lineSeparator()).toString())
                 .collect(Collectors.joining());
-        return new StringBuilder(HEAD_OF_REPORT).append(report).toString();
+        return new StringBuilder(HEAD_OF_REPORT)
+                .append(System.lineSeparator())
+                .append(report).toString();
     }
 }

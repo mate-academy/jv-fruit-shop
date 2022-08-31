@@ -21,13 +21,13 @@ public class Transaction {
             return operation;
         }
 
-        public static Operation fromString(String letter) {
+        public static Operation getFromString(String letter) {
             for (Operation operation : Operation.values()) {
                 if (operation.getOperation().equals(letter)) {
                     return operation;
                 }
             }
-            throw new RuntimeException("Unknown symbol op operation");
+            throw new RuntimeException("Unknown symbol of operation");
         }
 
     }

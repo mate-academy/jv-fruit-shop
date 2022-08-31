@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.model.Transaction;
 import java.util.List;
 
-public interface DataOperationHandler {
-    List<Transaction> handle(List<String> operationList);
+public interface TransactionParser {
+    List<Transaction> parse(List<String> operationList);
 
 }

@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.DataOperationHandler;
 import core.basesyntax.service.FileReader;
+import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ReportWriterImpl;
@@ -27,8 +27,8 @@ public class Main {
                 .put(Transaction.Operation.RETURN, new ReturnOperationHandlerImpl());
         File input = new File("src/main/resources/input.csv");
         FileReader reader = new FileReaderImpl();
-        DataOperationHandler operationHandler = new TransactionParserImpl();
-        List<Transaction> list = operationHandler.handle(reader.read(input));
+        TransactionParser transactionParser = new TransactionParserImpl();
+        List<Transaction> list = transactionParser.parse(reader.read(input));
         for (Transaction transaction : list) {
             OperationStrategy.operationMap
                     .get(transaction.getOperation())
