@@ -3,14 +3,16 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
+import java.util.Map;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(Transaction transaction) {
+        Map<Fruit, Integer> fruitsMap = Storage.getFruitsMap();
         Fruit fruit = transaction.getFruit();
-        Integer currentQuantity = Storage.getFruitsMap().get(fruit);
+        Integer currentQuantity = fruitsMap.get(fruit);
         if (currentQuantity >= transaction.getQuantity()) {
-            Storage.getFruitsMap().put(fruit, currentQuantity - transaction.getQuantity());
+            fruitsMap.put(fruit, currentQuantity - transaction.getQuantity());
         }
     }
 }

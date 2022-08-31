@@ -1,7 +1,9 @@
 package core.basesyntax.model;
 
-public class Fruit {
-    private String name;
+import java.util.Objects;
+
+public final class Fruit {
+    private final String name;
 
     public Fruit(String name) {
         this.name = name;
@@ -11,10 +13,6 @@ public class Fruit {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public String toString() {
         return "Fruit{"
@@ -22,4 +20,20 @@ public class Fruit {
                 + '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Fruit fruit = (Fruit) o;
+        return Objects.equals(getName(), fruit.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName());
+    }
 }

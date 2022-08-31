@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.Writer;
-import core.basesyntax.service.impl.FileParsedImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterImpl;
@@ -17,8 +17,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String READ_PATH = "src/main/java/fruits";
+    private static final String WRITE_PATH = "src/main/java/core/basesyntax/newFIle";
+
     public static void main(String[] args) {
-        List<String> list = new ReaderImpl().read("src/main/java/fruits");
+        List<String> list = new ReaderImpl().read(READ_PATH);
 
         Map<Transaction.Operation, OperationHandler> map = new HashMap<>();
         map.put(Transaction.Operation.PURCHASE, new PurchaseOperationHandler());
@@ -26,7 +29,7 @@ public class Main {
         map.put(Transaction.Operation.RETURN, new ReturnOperationHandler());
         map.put(Transaction.Operation.SUPPLY, new SupplyOperationHandler());
 
-        List<Transaction> transactions = new FileParsedImpl().parse(list);
+        List<Transaction> transactions = new ParserServiceImpl().parse(list);
         OperationStrategy operationStrategy = new OperationStrategy(map);
         for (Transaction transaction : transactions) {
             OperationHandler handler = operationStrategy.getByOperation(transaction.getOperation());
@@ -35,7 +38,7 @@ public class Main {
 
         String report = new ReportServiceImpl().getReport();
         Writer writer = new WriterImpl();
-        writer.write(report, "src/main/java/core/basesyntax/newFIle");
+        writer.write(report, WRITE_PATH);
     }
 }
 

@@ -13,8 +13,7 @@ public class ReaderImpl implements Reader {
     public List<String> read(String path) {
         File file = new File(path);
         List<String> list = new ArrayList<>();
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 list.add(line);
