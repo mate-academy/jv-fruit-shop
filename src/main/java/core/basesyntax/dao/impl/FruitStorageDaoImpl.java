@@ -2,19 +2,16 @@ package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 import java.util.Set;
 
 public class FruitStorageDaoImpl implements FruitStorageDao {
     @Override
-    public void addTransaction(FruitTransaction transaction) {
-        String key = transaction.getFruit();
-        int value = transaction.getQuantity();
-        if (FruitStorage.storage.containsKey(key)) {
-            FruitStorage.storage.put(key, FruitStorage.storage.get(key) + value);
+    public void addData(String fruit, int quantity) {
+        if (FruitStorage.storage.containsKey(fruit)) {
+            FruitStorage.storage.put(fruit, FruitStorage.storage.get(fruit) + quantity);
         } else {
-            FruitStorage.storage.put(key, value);
+            FruitStorage.storage.put(fruit, quantity);
         }
     }
 

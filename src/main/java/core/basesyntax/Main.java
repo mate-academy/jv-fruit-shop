@@ -36,7 +36,7 @@ public class Main {
                 String[] dataFromLine = parsingService.parseTransactionLine(oneLine);
                 FruitTransaction transaction = fruitTransactionService
                         .createTransaction(dataFromLine);
-                fruitStorageDao.addTransaction(transaction);
+                fruitStorageDao.addData(transaction.getFruit(), transaction.getQuantity());
             }
         }
         //Get data from database
