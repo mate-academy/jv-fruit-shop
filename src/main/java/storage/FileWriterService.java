@@ -1,7 +1,8 @@
 package storage;
 
+import java.io.File;
 import java.util.List;
 
 public interface FileWriterService {
-    void writeToFile(List<String> toWriteData);
+    File writeToFile(List<String> toWriteData);
 }

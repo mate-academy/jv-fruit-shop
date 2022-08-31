@@ -12,16 +12,17 @@ public class FileWriterServiceImpl implements FileWriterService {
     private static final String FIRST_DOC_ROW = "fruit,quantity";
 
     @Override
-    public void writeToFile(List<String> fruitDataToWrite) {
+    public File writeToFile(List<String> fruitDataToWrite) {
         List<String> toWrite = new ArrayList<>();
         toWrite.add(FIRST_DOC_ROW);
         toWrite.addAll(fruitDataToWrite);
         File file = new File(PATH_TO_OUTPUT_FILE);
         Path path = file.toPath();
         try {
-            Files.write(path, toWrite, StandardOpenOption.WRITE);
+            Files.write(path, toWrite);
         } catch (Exception ex) {
             throw new RuntimeException(String.format("Can't write to file %s", file), ex);
         }
+        return  file;
     }
 }

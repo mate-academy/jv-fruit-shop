@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import java.io.File;
 import java.util.List;
 import model.FruitDto;
 import service.FruitShopService;
@@ -13,12 +14,13 @@ import storage.FruitShopRepoImpl;
 
 public class Main {
     public static void main(String[] args) {
+        File FILE_INPUT = new File("src/main/resources/input.csv");
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         FruitShopRepo fruitShopRepo = new FruitShopRepoImpl(fileReaderService, fileWriterService);
         FruitShopService fruitShopService = new FruitShopServiceImpl(fruitShopRepo);
-        List<FruitDto> fruitDtoList = fruitShopService.processingData();
-        fruitDtoList.forEach(System.out::println);
+        File OUTPUT = fruitShopService.processingData(FILE_INPUT);
+        System.out.println(OUTPUT);
 
     }
 }

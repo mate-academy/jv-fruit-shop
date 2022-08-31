@@ -1,5 +1,6 @@
 package storage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +21,8 @@ public class FruitShopRepoImpl implements FruitShopRepo {
     }
 
     @Override
-    public List<FruitDto> getFruitsFromFile() {
-        List<String> infoFromFile = fileReaderServiceImpl.getInfoFromFile();
+    public List<FruitDto> getFruitsFromFile(File file) {
+        List<String> infoFromFile = fileReaderServiceImpl.getInfoFromFile(file);
         List<FruitDto> fruitDtoList = new ArrayList<>();
         for (String info : infoFromFile) {
             String[] elementOfParsedInfoFromFile = info.split(",");
@@ -35,11 +36,11 @@ public class FruitShopRepoImpl implements FruitShopRepo {
     }
 
     @Override
-    public void writeData(List<FruitDto> fruitDtoList) {
+    public File writeData(List<FruitDto> fruitDtoList) {
         List<String> fruitDataToWrite = fruitDtoList.stream()
                 .map(i -> i.getFruitName() + "," + i.getValue())
                 .collect(Collectors.toList());
 
-        fileWriterServiceImpl.writeToFile(fruitDataToWrite);
+       return fileWriterServiceImpl.writeToFile(fruitDataToWrite);
     }
 }

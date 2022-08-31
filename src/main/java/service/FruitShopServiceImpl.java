@@ -2,6 +2,7 @@ package service;
 
 import static service.OperationType.BALANCE;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitDto;
@@ -15,8 +16,8 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public List<FruitDto> processingData() {
-        List<FruitDto> fruitsFromFile = fruitShopRepoImpl.getFruitsFromFile();
+    public File processingData(File file) {
+        List<FruitDto> fruitsFromFile = fruitShopRepoImpl.getFruitsFromFile(file);
         List<FruitDto> fruitsWithBalance = getFruitsWithBalanceType(fruitsFromFile);
         fruitsFromFile.removeAll(fruitsWithBalance);
         for (FruitDto fruitDto : fruitsFromFile) {
@@ -30,8 +31,8 @@ public class FruitShopServiceImpl implements FruitShopService {
             }
         }
 
-        fruitShopRepoImpl.writeData(fruitsWithBalance);
-        return fruitsFromFile;
+
+        return fruitShopRepoImpl.writeData(fruitsWithBalance);
     }
 
     private List<FruitDto> getFruitsWithBalanceType(List<FruitDto> fruitsFromFile) {

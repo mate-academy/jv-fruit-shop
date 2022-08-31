@@ -1,10 +1,11 @@
 package storage;
 
+import java.io.File;
 import java.util.List;
 import model.FruitDto;
 
 public interface FruitShopRepo {
-    List<FruitDto> getFruitsFromFile();
+    List<FruitDto> getFruitsFromFile(File file);
 
-    void writeData(List<FruitDto> fruitDtoList);
+    File writeData(List<FruitDto> fruitDtoList);
 }

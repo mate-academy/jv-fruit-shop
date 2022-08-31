@@ -1,9 +1,8 @@
 package service;
 
-import java.util.List;
-import model.FruitDto;
+import java.io.File;
 
 public interface FruitShopService {
 
-    List<FruitDto> processingData();
+    File processingData(File file);
 }
