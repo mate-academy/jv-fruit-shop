@@ -4,11 +4,10 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ProcessDataServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handler.BalanceOperationHandler;
 import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.PurchaseOperationHandler;
@@ -30,11 +29,7 @@ public class Main {
         handlerMap.put(Operation.RETURN, new ReturnOperationHandler());
         List<String> inputData = new ReaderServiceImpl().readFromFile(FILE_PATH_FROM);
         List<Transaction> transactions = new ParserServiceImpl().parseLine(inputData);
-        OperationStrategy strategy = new OperationStrategyImpl(handlerMap);
-        for (Transaction transaction : transactions) {
-            OperationHandler handler = strategy.getOperation(transaction.getOperation());
-            handler.apply(transaction);
-        }
+        new ProcessDataServiceImpl().processData(transactions, handlerMap);
         String report = new ReportServiceImpl().createReport();
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(report, FILE_PATH_TO);

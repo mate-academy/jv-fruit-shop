@@ -14,10 +14,10 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder builder = new StringBuilder();
         builder.append(REPORT_HEADER + System.lineSeparator());
         for (Map.Entry<Fruit, Integer> line : Storage.storage.entrySet()) {
-            builder.append(line.getKey().getName()
-                    + SPLITTER
-                    + line.getValue()
-                    + System.lineSeparator());
+            builder.append(line.getKey().getName())
+                    .append(SPLITTER)
+                    .append(line.getValue())
+                    .append(System.lineSeparator());
         }
         return builder.toString();
     }

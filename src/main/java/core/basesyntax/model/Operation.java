@@ -12,7 +12,16 @@ public enum Operation {
         this.operation = operation;
     }
 
-    public String getOperation() {
-        return operation;
+    public static Operation getOperation(String operation) {
+        switch (operation) {
+            case "b" :
+                return Operation.BALANCE;
+            case "s" :
+                return Operation.SUPPLY;
+            case "p" :
+                return Operation.PURCHASE;
+            default:
+                return Operation.RETURN;
+        }
     }
 }

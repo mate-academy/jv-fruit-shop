@@ -7,6 +7,12 @@ public class Transaction {
     private Fruit fruit;
     private Integer quantity;
 
+    public Transaction(Operation operation, Fruit fruit, Integer quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
     public Operation getOperation() {
         return operation;
     }

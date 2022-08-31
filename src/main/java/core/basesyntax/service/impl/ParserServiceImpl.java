@@ -16,27 +16,11 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<Transaction> parseLine(List<String> inputData) {
         List<Transaction> transactions = new ArrayList<>();
-        for (int i = 1; i < inputData.size(); i++) {
-            String[] fields = inputData.get(i).split(SPLITTER);
-
-            Transaction transaction = new Transaction();
-            transaction.setFruit(new Fruit(fields[FRUIT_INDEX]));
-            transaction.setQuantity(Integer.parseInt(fields[QUANTITY_INDEX]));
-
-            String operation = fields[OPERATION_INDEX];
-            if (operation.equals(Operation.BALANCE.getOperation())) {
-                transaction.setOperation(Operation.BALANCE);
-            }
-            if (operation.equals(Operation.RETURN.getOperation())) {
-                transaction.setOperation(Operation.RETURN);
-            }
-            if (operation.equals(Operation.PURCHASE.getOperation())) {
-                transaction.setOperation(Operation.PURCHASE);
-            }
-            if (operation.equals(Operation.SUPPLY.getOperation())) {
-                transaction.setOperation(Operation.SUPPLY);
-            }
-            transactions.add(transaction);
+        for (String line : inputData) {
+            String[] parsedLines = line.split(SPLITTER);
+            transactions.add(new Transaction(Operation.getOperation(parsedLines[OPERATION_INDEX]),
+                    new Fruit(parsedLines[FRUIT_INDEX]),
+                    Integer.parseInt(parsedLines[QUANTITY_INDEX])));
         }
         return transactions;
     }
