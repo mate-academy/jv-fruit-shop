@@ -5,15 +5,14 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 
 public class BalaceOperationHandler implements OperationHandler {
-
     @Override
-    public void getResultOperation(FruitTransaction fruitTransaction) {
+    public void apply(FruitTransaction fruitTransaction) {
         Fruit currentFruit = fruitTransaction.getFruit();
-        if (!Storage.stogare.containsKey(currentFruit.getName())) {
-            Storage.stogare.put(currentFruit, fruitTransaction.getQuantity());
+        if (!Storage.storage.containsKey(currentFruit.getName())) {
+            Storage.storage.put(currentFruit, fruitTransaction.getQuantity());
         } else {
-            int currentRemainder = Storage.stogare.get(currentFruit);
-            Storage.stogare.put(currentFruit, currentRemainder + fruitTransaction.getQuantity());
+            int currentRemainder = Storage.storage.get(currentFruit);
+            Storage.storage.put(currentFruit, currentRemainder + fruitTransaction.getQuantity());
         }
     }
 }

@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface CreateFileServise {
+public interface FileCreationService {
     void createFile(String fileName);
 }
