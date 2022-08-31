@@ -1,12 +1,13 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.Strategy;
 
 public class SupplyStrategy implements Strategy {
     @Override
-    public void makeOperation(String fruit, int value) {
-        Integer previousValue = Storage.fruits.get(fruit);
-        Storage.fruits.put(fruit, previousValue + value);
+    public void makeOperation(Transaction transaction) {
+        Integer previousValue = Storage.fruits.get(transaction.getFruit());
+        Storage.fruits.put(transaction.getFruit(), previousValue + transaction.getValue());
     }
 }
