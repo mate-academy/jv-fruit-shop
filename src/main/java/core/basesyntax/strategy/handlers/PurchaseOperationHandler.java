@@ -8,10 +8,10 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         Fruit fruit = transaction.getFruit();
-        if (!Storage.storage.containsKey(fruit)) {
-            Storage.storage.put(fruit, (-1 * transaction.getQuantity()));
+        Integer currentQuantity = Storage.storage.get(fruit);
+        if (currentQuantity == null || currentQuantity < transaction.getQuantity()) {
+            throw new RuntimeException("Product is out of stock");
         } else {
-            Integer currentQuantity = Storage.storage.get(fruit);
             Storage.storage.put(fruit, currentQuantity - transaction.getQuantity());
         }
     }
