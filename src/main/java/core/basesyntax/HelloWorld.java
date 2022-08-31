@@ -7,7 +7,7 @@ import core.basesyntax.operation.PurchaseOperationHandler;
 import core.basesyntax.operation.ReturnOperationHandler;
 import core.basesyntax.operation.SupplyOperationHandler;
 import core.basesyntax.service.FileCreationService;
-import core.basesyntax.service.ParseService;
+import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
@@ -36,7 +36,7 @@ public class HelloWorld {
 
         ReaderService readerService = new ReaderServiceImpl();
         List<String> lines = readerService.readData(FILE_WITH_DAY_ACTIVITIES);
-        ParseService parserService = new ParserServiceImpl();
+        ParserService parserService = new ParserServiceImpl();
         List<FruitTransaction> fruitTransactions = parserService.parseLines(lines);
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler handler = strategy

@@ -2,11 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ParseService;
+import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserServiceImpl implements ParseService {
+public class ParserServiceImpl implements ParserService {
     private static final String SEPARATOR = ",";
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
