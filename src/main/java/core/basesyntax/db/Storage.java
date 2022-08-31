@@ -3,11 +3,12 @@ package core.basesyntax.db;
 import core.basesyntax.model.Fruit;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Storage {
-    private static Map<Fruit, Integer> storage = new HashMap<>();
+    public static final Map<Fruit, Integer> storage = new HashMap<>();
 
-    public static Map<Fruit, Integer> getAll() {
-        return storage;
+    public static Set<Map.Entry<Fruit, Integer>> getAll() {
+        return storage.entrySet();
     }
 }
