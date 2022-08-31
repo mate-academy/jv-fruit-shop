@@ -14,18 +14,15 @@ public class ParserServiceImpl implements ParserService {
     private static final String REGEX = ",";
 
     @Override
-    public List<Transaction> parse(List<String> transactions) {
-        return transactions.stream()
+    public List<Transaction> parse(List<String> lines) {
+        return lines.stream()
                 .skip(1)
-                .map(this::getTransactionFromString)
+                .map(s -> s.split(REGEX))
+                .map(s ->
+                        new Transaction(
+                                s[INDEX_OF_COMMAND].trim(),
+                                new Fruit(s[INDEX_OF_FRUIT_NAME].trim()),
+                                Integer.parseInt(s[INDEX_OF_COUNT])))
                 .collect(Collectors.toList());
-    }
-
-    private Transaction getTransactionFromString(String value) {
-        String[] words = value.split(REGEX);
-        return new Transaction(
-                words[INDEX_OF_COMMAND].trim(),
-                new Fruit(words[INDEX_OF_FRUIT_NAME].trim()),
-                Integer.parseInt(words[INDEX_OF_COUNT]));
     }
 }
