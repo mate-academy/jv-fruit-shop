@@ -20,6 +20,16 @@ public class Transaction {
         public String getOperation() {
             return operation;
         }
+
+        public static Operation fromString(String letter) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getOperation().equals(letter)) {
+                    return operation;
+                }
+            }
+            return null;
+        }
+
     }
 
     public Transaction(Operation operation, Fruit fruit, int quantity) {
@@ -30,6 +40,10 @@ public class Transaction {
 
     public void setOperation(Operation operation) {
         this.operation = operation;
+    }
+
+    public Operation getOperation() {
+        return operation;
     }
 
     public Fruit getFruit() {
@@ -50,10 +64,9 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "FruitShop{" +
-                "fruit=" + fruit +
-                ", operation=" + operation +
-                ", quantity=" + quantity +
-                '}';
+        return "FruitShop{"
+                + "fruit=" + fruit
+                + ", operation=" + operation
+                + ", quantity=" + quantity + '}';
     }
 }
