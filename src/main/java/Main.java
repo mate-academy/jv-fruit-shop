@@ -33,8 +33,8 @@ public class Main {
         List<String> readData = readerService.read(pathInput);
         ParserTransactionsService parserTransactionsService = new ParserTransactionsServiceImpl();
         List<FruitTransaction> fruitTransactions = parserTransactionsService.parse(readData);
-        ProcessDataService processDataService = new ProcessDataServiceImpl();
-        processDataService.processData(fruitTransactions, fillMap());
+        ProcessDataService processDataService = new ProcessDataServiceImpl(fillMap());
+        processDataService.processData(fruitTransactions);
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
         Path pathOutput = Paths.get(DAILY_REPORT_FILE);

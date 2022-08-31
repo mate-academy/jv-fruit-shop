@@ -7,11 +7,16 @@ import service.ProcessDataService;
 import strategy.handler.OperationHandler;
 
 public class ProcessDataServiceImpl implements ProcessDataService {
+    private Map<FruitTransaction.Operation, OperationHandler> operations;
+
+    public ProcessDataServiceImpl(Map<FruitTransaction.Operation, OperationHandler> operations) {
+        this.operations = operations;
+    }
+
     @Override
-    public void processData(List<FruitTransaction> list,
-                            Map<FruitTransaction.Operation, OperationHandler> operationsMap) {
+    public void processData(List<FruitTransaction> list) {
         for (FruitTransaction fruitTransaction : list) {
-            operationsMap.get(fruitTransaction.getOperation()).apply(fruitTransaction);
+            operations.get(fruitTransaction.getOperation()).apply(fruitTransaction);
         }
     }
 }
