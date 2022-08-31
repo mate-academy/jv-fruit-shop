@@ -1,8 +1,8 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.strategy.AmountService;
+import core.basesyntax.strategy.TransactionHandler;
 
-public class PurchaseAmountService implements AmountService {
+public class PurchaseTransactionHandler implements TransactionHandler {
     @Override
     public int getAmount(int amount) {
         if (amount > 0) {

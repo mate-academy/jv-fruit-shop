@@ -12,7 +12,7 @@ public class ReaderServiceImpl implements ReaderService {
         try {
             return Files.readAllLines(new File(fileName).toPath());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read a file " + fileName);
+            throw new RuntimeException("Can't read a file " + fileName, e);
         }
     }
 }

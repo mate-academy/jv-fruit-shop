@@ -4,14 +4,12 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.impl.FruitStorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ExecuteTransactionService;
-import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ParsingService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ValidatorService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ExecuteTransactionServiceImpl;
-import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 import core.basesyntax.service.impl.ParsingServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -30,16 +28,13 @@ public class Main {
         List<String> listFromFile = readerService.readFromFile(inputFile);
         FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
         ValidatorService validatorService = new ValidatorServiceImpl();
-        FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
+        ParsingService fruitTransactionService = new ParsingServiceImpl();
         ExecuteTransactionService executeTransactionService = new ExecuteTransactionServiceImpl();
         ParsingService parsingService = new ParsingServiceImpl();
         // Validate strings
         if (validatorService.validateData(listFromFile)) {
-            // Read data from string
-            List<String[]> parsedData = parsingService.parseData(listFromFile);
             // Create transactions
-            List<FruitTransaction> transactions = fruitTransactionService
-                    .createTransactions(parsedData);
+            List<FruitTransaction> transactions = parsingService.createTransactions(listFromFile);
             // Fill in DB
             executeTransactionService.executeTransactions(transactions);
         }

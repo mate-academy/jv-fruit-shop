@@ -23,6 +23,10 @@ public class FruitTransaction {
         return quantity;
     }
 
+    public Operation getOperation() {
+        return operation;
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -38,12 +42,5 @@ public class FruitTransaction {
         public String getOperation() {
             return operation;
         }
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        return stringBuilder.append(operation).append(":").append(fruit).append(":")
-                .append(quantity).toString();
     }
 }
