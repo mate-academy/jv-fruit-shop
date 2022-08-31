@@ -17,13 +17,18 @@ public class ParserServiceImpl implements FileParserService {
     public List<FruitTransaction> getFruitTransaction(List<String> fruitsDataFromFile) {
         return fruitsDataFromFile.stream()
                 .skip(HEADER)
-                .map(s -> s.split(COMMA))
-                .map(t -> new FruitTransaction(Arrays.stream(FruitTransaction.Operation.values())
-                    .filter(o -> o.getOperation().equals(t[OPERATION_INDEX]))
-                    .findFirst()
-                    .get(),
-                        t[FRUIT_NAME_INDEX],
-                        Integer.parseInt(t[QUANTITY_INDEX])))
+                .map(dataLine -> dataLine.split(COMMA))
+                .map(splittedLine -> new FruitTransaction(getOperationFromSplittedLine(
+                        splittedLine[OPERATION_INDEX]),
+                        splittedLine[FRUIT_NAME_INDEX],
+                        Integer.parseInt(splittedLine[QUANTITY_INDEX])))
                     .collect(Collectors.toList());
+    }
+
+    private FruitTransaction.Operation getOperationFromSplittedLine(String operationType) {
+        return Arrays.stream(FruitTransaction.Operation.values())
+                .filter(o -> o.getOperation().equals(operationType))
+                .findFirst()
+                .get();
     }
 }
