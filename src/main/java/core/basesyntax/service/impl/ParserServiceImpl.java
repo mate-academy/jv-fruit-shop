@@ -6,7 +6,7 @@ import core.basesyntax.service.ParseService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseServiceImpl implements ParseService {
+public class ParserServiceImpl implements ParseService {
     private static final String SEPARATOR = ",";
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
