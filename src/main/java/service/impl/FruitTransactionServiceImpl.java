@@ -16,25 +16,12 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     public List<FruitTransaction> parseFruitTransactions(List<String> inputData) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (String inputString : inputData) {
-            if (inputString.startsWith("b") || inputString.startsWith("s")
-                    || inputString.startsWith("r") || inputString.startsWith("p")) {
                 String[] parameters = inputString.split(SPLITTER);
                 FruitTransaction fruitTransaction = new FruitTransaction();
                 fruitTransaction.setFruitName(parameters[FRUIT_NAME]);
                 fruitTransaction.setQuantity(Integer.parseInt(parameters[QUANITY]));
                 String operationType = parameters[OPERATION_TYPE];
-                if (operationType.equals(Operation.BALANCE.getOperation())) {
-                    fruitTransaction.setOperation(Operation.BALANCE);
-                }
-                if (operationType.equals(Operation.SUPPLY.getOperation())) {
-                    fruitTransaction.setOperation(Operation.SUPPLY);
-                }
-                if (operationType.equals(Operation.PURCHASE.getOperation())) {
-                    fruitTransaction.setOperation(Operation.PURCHASE);
-                }
-                if (operationType.equals(Operation.RETURN.getOperation())) {
-                    fruitTransaction.setOperation(Operation.RETURN);
-                }
+                fruitTransaction.setOperation(getOperation(String operation));
                 fruitTransactionList.add(fruitTransaction);
             }
         }
