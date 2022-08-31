@@ -7,16 +7,16 @@ import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String START_MESSAGE = "fruit,quantity";
-    private static final String REGEX = ",";
-    private StringBuilder builder = new StringBuilder()
-            .append(START_MESSAGE)
-            .append(System.lineSeparator());
+    private static final String COMMA = ",";
 
     @Override
     public String getReport() {
+        StringBuilder builder = new StringBuilder()
+                .append(START_MESSAGE)
+                .append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> position : Storage.storage.entrySet()) {
             builder.append(position.getKey().getName())
-                    .append(REGEX)
+                    .append(COMMA)
                     .append(position.getValue())
                     .append(System.lineSeparator());
         }

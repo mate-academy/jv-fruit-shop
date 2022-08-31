@@ -30,7 +30,7 @@ public class Main {
         OperationStrategy strategy = new OperationStrategy(map);
 
         ReaderService readerService = new ReaderServiceImpl();
-        List<String> lines = readerService.readeFromFile(FILE_NAME_INPUT);
+        List<String> lines = readerService.readFromFile(FILE_NAME_INPUT);
 
         List<Transaction> transactions = new ParserServiceImpl().parse(lines);
 
