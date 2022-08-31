@@ -16,12 +16,12 @@ public class TransactionParserImpl implements TransactionParser {
     public List<FruitTransaction> parse(List<String> records) {
         return records.stream()
                 .map(r -> r.split(DATA_SEPARATOR))
-                .map(record -> new FruitTransaction(operationIdentity(record[OPERATION_TYPE]),
+                .map(record -> new FruitTransaction(getOperation(record[OPERATION_TYPE]),
                         record[FRUIT_TYPE], Integer.parseInt(record[QUANTITY])))
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction.Operation operationIdentity(String operation) {
+    private FruitTransaction.Operation getOperation(String operation) {
         return Arrays.stream(FruitTransaction.Operation.values())
                 .filter(v -> v.getOperationIndex().equals(operation))
                 .findFirst()

@@ -11,7 +11,7 @@ import core.basesyntax.service.impl.ReaderImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.WriterImpl;
 import core.basesyntax.service.parsing.TransactionParserImpl;
-import core.basesyntax.strategy.ApplyStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class Main {
         List<FruitTransaction> transactions = new TransactionParserImpl()
                 .parse(recordsFromFile);
 
-        ApplyStrategy strategy = new ApplyStrategy(getOperations());
+        OperationStrategy strategy = new OperationStrategy(getOperations());
         for (FruitTransaction transaction : transactions) {
             strategy.operationStrategy(transaction);
         }
