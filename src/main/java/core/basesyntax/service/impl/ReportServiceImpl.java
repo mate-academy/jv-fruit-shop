@@ -8,7 +8,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReport() {
-        StringBuilder stringBuilder = new StringBuilder(HEADER + System.lineSeparator());
+        StringBuilder stringBuilder = new StringBuilder(HEADER).append(System.lineSeparator());
         Storage.getAll().forEach((key, value) ->
                 stringBuilder.append(key.getName()).append(",")
                         .append(value).append(System.lineSeparator()));
