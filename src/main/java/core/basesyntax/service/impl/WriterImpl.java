@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterImpl implements Writer {
-
     @Override
     public void write(String report, String path) {
         File outputFile = new File(path);

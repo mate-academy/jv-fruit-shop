@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String READ_PATH = "src/main/java/fruits";
-    private static final String WRITE_PATH = "src/main/java/core/basesyntax/newFIle";
+    private static final String READ_PATH = "src/main/resources/fruits.csv";
+    private static final String WRITE_PATH = "src/main/resources/newFIle.csv";
 
     public static void main(String[] args) {
         List<String> list = new ReaderImpl().read(READ_PATH);
