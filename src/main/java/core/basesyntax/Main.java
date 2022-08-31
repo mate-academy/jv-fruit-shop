@@ -2,12 +2,12 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FileReader;
-import core.basesyntax.service.InsertDataToBase;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.ReportGeneration;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
-import core.basesyntax.service.impl.InsertDataToBaseImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.service.impl.ReportGenerationImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.strategy.OperationHandler;
@@ -40,8 +40,8 @@ public class Main {
         List transactions = transactionParser.transactionParser(list);
 
         /* Insert data to Storage with counting */
-        InsertDataToBase insertDataToBase =
-                new InsertDataToBaseImpl(new OperationHandlerImplStrategy(operationHandlerMap));
+        TransactionService insertDataToBase =
+                new TransactionServiceImpl(new OperationHandlerImplStrategy(operationHandlerMap));
         insertDataToBase.addTransferToStorage(transactions);
 
         /* Generate report */
