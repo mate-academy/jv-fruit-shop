@@ -10,6 +10,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final String COMMA = ",";
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
@@ -20,7 +21,7 @@ public class ParserServiceImpl implements ParserService {
     }
 
     private FruitTransaction convertToFruitTransaction(String line) {
-        String[] resultLine = line.split(",");
+        String[] resultLine = line.split(COMMA);
         return new FruitTransaction(
                 resultLine[OPERATION_INDEX],
                 new Fruit(resultLine[FRUIT_INDEX]),
