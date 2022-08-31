@@ -18,7 +18,7 @@ public class FruitServiceImpl implements FruitService {
     public void processTransactions(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.forEach(fruitTransaction
                 -> operationHandlerMap.get(fruitTransaction.getOperation())
-                .processedTransaction(fruitTransaction));
+                .proceed(fruitTransaction));
     }
 
     @Override

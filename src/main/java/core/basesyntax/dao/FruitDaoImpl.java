@@ -1,30 +1,30 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitData;
+import core.basesyntax.model.Fruit;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void add(FruitData fruitData) {
-        if (Storage.FRUITS.containsKey(fruitData.getFruitName())) {
-            FruitData data = Storage.FRUITS.get(fruitData.getFruitName());
-            data.setQuantity(data.getQuantity() + fruitData.getQuantity());
+    public void put(Fruit fruit) {
+        if (Storage.FRUITS.containsKey(fruit.getFruitName())) {
+            Fruit data = Storage.FRUITS.get(fruit.getFruitName());
+            data.setQuantity(data.getQuantity() + fruit.getQuantity());
             Storage.FRUITS.put(data.getFruitName(), data);
         } else {
-            Storage.FRUITS.put(fruitData.getFruitName(), fruitData);
+            Storage.FRUITS.put(fruit.getFruitName(), fruit);
         }
     }
 
     @Override
-    public void remove(FruitData fruitData) {
-        if (Storage.FRUITS.containsKey(fruitData.getFruitName())) {
-            FruitData data = Storage.FRUITS.get(fruitData.getFruitName());
-            data.setQuantity(data.getQuantity() - fruitData.getQuantity());
+    public void subtract(Fruit fruit) {
+        if (Storage.FRUITS.containsKey(fruit.getFruitName())) {
+            Fruit data = Storage.FRUITS.get(fruit.getFruitName());
+            data.setQuantity(data.getQuantity() - fruit.getQuantity());
             if (data.getQuantity() < 0) {
                 throw new RuntimeException("Can't remove more then exists in storage.\nFruit: "
-                        + fruitData.getFruitName()
+                        + fruit.getFruitName()
                         + " in storage: " + data.getQuantity() + ". Quantity for removal requested "
-                        + fruitData.getQuantity());
+                        + fruit.getQuantity());
             }
             Storage.FRUITS.put(data.getFruitName(), data);
         } else {
@@ -33,7 +33,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public FruitData get(String fruitName) {
+    public Fruit get(String fruitName) {
         return Storage.FRUITS.get(fruitName);
     }
 

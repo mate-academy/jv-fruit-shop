@@ -1,12 +1,11 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.FruitData;
+import core.basesyntax.model.Fruit;
 
 public interface FruitDao {
+    void put(Fruit fruitData);
 
-    void add(FruitData fruitData);
+    void subtract(Fruit fruitData);
 
-    void remove(FruitData fruitData);
-
-    FruitData get(String fruitName);
+    Fruit get(String fruitName);
 }

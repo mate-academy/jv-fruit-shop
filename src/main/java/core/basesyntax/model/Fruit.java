@@ -2,11 +2,11 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public class FruitData {
+public class Fruit {
     private final String fruitName;
     private int quantity;
 
-    public FruitData(String fruit, int quantity) {
+    public Fruit(String fruit, int quantity) {
         this.fruitName = fruit;
         this.quantity = quantity;
     }
@@ -34,10 +34,10 @@ public class FruitData {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof FruitData)) {
+        if (!(o instanceof Fruit)) {
             return false;
         }
-        FruitData fruitData1 = (FruitData) o;
+        Fruit fruitData1 = (Fruit) o;
         return getQuantity() == fruitData1.getQuantity() && Objects.equals(getFruitName(),
                 fruitData1.getFruitName());
     }

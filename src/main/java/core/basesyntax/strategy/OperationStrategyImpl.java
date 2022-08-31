@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-
     private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
     public OperationStrategyImpl(Map<FruitTransaction.Operation,
@@ -13,7 +12,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public OperationHandler getStrategy(FruitTransaction.Operation operation) {
+    public OperationHandler getHandler(FruitTransaction.Operation operation) {
         return operationHandlerMap.get(operation);
     }
 }

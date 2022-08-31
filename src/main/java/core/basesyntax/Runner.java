@@ -5,17 +5,18 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
-import core.basesyntax.service.FruitDataParserService;
+import core.basesyntax.service.FruitTransactionParserService;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
-import core.basesyntax.service.impl.CsvWriterServiceImpl;
-import core.basesyntax.service.impl.FruitDataParserServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionParserServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.FruitBalanceHandler;
 import core.basesyntax.strategy.impl.FruitPurchaseHandler;
 import core.basesyntax.strategy.impl.FruitReturnHandler;
 import core.basesyntax.strategy.impl.FruitSupplyHandler;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,11 +37,11 @@ public class Runner {
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new FruitSupplyHandler(fruitDao));
 
-        CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
+        CsvFileReaderService readerService = new FileReaderServiceImpl();
         List<String> data = readerService.readData(INPUT_FILE);
         System.out.println("List of data: " + data);
 
-        FruitDataParserService parserService = new FruitDataParserServiceImpl();
+        FruitTransactionParserService parserService = new FruitTransactionParserServiceImpl();
         List<FruitTransaction> transactions = parserService.parse(data);
         System.out.println("Parsed data: " + transactions);
 
@@ -49,7 +50,7 @@ public class Runner {
 
         String report = fruitService.createReport(transactions);
 
-        CsvFileWriterService csvWriterService = new CsvWriterServiceImpl();
+        CsvFileWriterService csvWriterService = new WriterServiceImpl();
         csvWriterService.writeToFile(report, REPORT_FILE);
     }
 }
