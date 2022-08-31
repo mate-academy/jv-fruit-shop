@@ -12,12 +12,10 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String generateReport() {
         StringBuilder builder = new StringBuilder();
-        builder.append(REPORT_HEADER + System.lineSeparator());
-
+        builder.append(REPORT_HEADER).append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> map : Storage.getStorage().entrySet()) {
-            String reportLine = map.getKey().getName() + SEPARATOR + map.getValue()
-                    + System.lineSeparator();
-            builder.append(reportLine);
+            builder.append(map.getKey().getName()).append(SEPARATOR)
+                    .append(map.getValue()).append(System.lineSeparator());
         }
         return builder.toString();
     }
