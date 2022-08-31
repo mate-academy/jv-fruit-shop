@@ -17,7 +17,8 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void subtract(String fruit, int quantity) {
-        if (Storage.fruits.get(fruit) == null || quantity > Storage.fruits.get(fruit)) {
+        checkKeyPresence(fruit);
+        if (quantity > Storage.fruits.get(fruit)) {
             throw new RuntimeException("No fruits for purchase");
         }
         Storage.fruits.replace(fruit, get(fruit) - quantity);
