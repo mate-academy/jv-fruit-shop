@@ -4,27 +4,25 @@ import core.basesyntax.db.Storage;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void addProduct(String fruit, int quantity) {
+    public void set(String fruit, int quantity) {
         Storage.fruits.put(fruit, quantity);
     }
 
     @Override
-    public void addProductQuantity(String fruit, int quantity) {
-        checkKeyPresence(fruit);
-        Storage.fruits.replace(fruit, getAmount(fruit) + quantity);
+    public void add(String fruit, int quantity) {
+        Storage.fruits.replace(fruit, get(fruit) + quantity);
     }
 
     @Override
     public void subtract(String fruit, int quantity) {
-        checkKeyPresence(fruit);
         if (quantity > Storage.fruits.get(fruit)) {
             throw new RuntimeException("Can't sell more " + fruit + " then we have");
         }
-        Storage.fruits.replace(fruit, getAmount(fruit) - quantity);
+        Storage.fruits.replace(fruit, get(fruit) - quantity);
     }
 
     @Override
-    public int getAmount(String fruit) {
+    public int get(String fruit) {
         checkKeyPresence(fruit);
         return Storage.fruits.get(fruit);
     }

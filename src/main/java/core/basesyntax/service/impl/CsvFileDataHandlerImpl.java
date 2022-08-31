@@ -1,7 +1,7 @@
-package core.basesyntax.services.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.operations.OperationStrategy;
-import core.basesyntax.services.CsvFileDataHandler;
+import core.basesyntax.service.CsvFileDataHandler;
 import java.util.List;
 
 public class CsvFileDataHandlerImpl implements CsvFileDataHandler {
@@ -20,7 +20,7 @@ public class CsvFileDataHandlerImpl implements CsvFileDataHandler {
         for (int i = FIRST_DATA; i < fileData.size(); i++) {
             String[] lineData = fileData.get(i).split(",");
             int quantity = Integer.parseInt(lineData[PRODUCT_AMOUNT_INDEX]);
-            operationStrategy.getOperation(lineData[OPERATION_INDEX])
+            operationStrategy.getOperationHandler(lineData[OPERATION_INDEX])
                     .process(lineData[PRODUCT_NAME_INDEX], quantity);
         }
     }

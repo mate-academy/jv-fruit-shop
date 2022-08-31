@@ -1,13 +1,13 @@
 package core.basesyntax.dao;
 
 public interface FruitDao {
-    void addProduct(String product, int quantity);
+    void set(String product, int quantity);
 
-    void addProductQuantity(String product, int quantity);
+    void add(String product, int quantity);
 
     void subtract(String product, int quantity);
 
-    int getAmount(String product);
+    int get(String product);
 
     String[] getFruitsNames();
 }

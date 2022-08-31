@@ -9,32 +9,32 @@ import core.basesyntax.operations.impl.BalanceHandler;
 import core.basesyntax.operations.impl.PurchaseHandler;
 import core.basesyntax.operations.impl.ReturnHandler;
 import core.basesyntax.operations.impl.SupplyHandler;
-import core.basesyntax.services.CsvFileDataHandler;
-import core.basesyntax.services.FileWriter;
-import core.basesyntax.services.ReportCreator;
-import core.basesyntax.services.impl.CsvFileDataHandlerImpl;
-import core.basesyntax.services.impl.CsvFileReaderImpl;
-import core.basesyntax.services.impl.FileWriterImpl;
-import core.basesyntax.services.impl.ReportCreatorImpl;
+import core.basesyntax.service.CsvFileDataHandler;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.CsvFileDataHandlerImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     private static final String PATH_FROM_FILE
-            = "src/main/java/core/basesyntax/resources/file.csv";
+            = "src/main/resources/file.csv";
     private static final String PATH_TO_FILE
-            = "src/main/java/core/basesyntax/resources/report.csv";
+            = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         FruitDao fruitsDao = new FruitDaoImpl();
-        Map<String, OperationHandler> operations = new HashMap<>();
-        operations.put("b", new BalanceHandler(fruitsDao));
-        operations.put("s", new SupplyHandler(fruitsDao));
-        operations.put("r", new ReturnHandler(fruitsDao));
-        operations.put("p", new PurchaseHandler(fruitsDao));
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operations);
-        List<String> readData = new CsvFileReaderImpl()
+        Map<String, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put("b", new BalanceHandler(fruitsDao));
+        operationHandlers.put("s", new SupplyHandler(fruitsDao));
+        operationHandlers.put("r", new ReturnHandler(fruitsDao));
+        operationHandlers.put("p", new PurchaseHandler(fruitsDao));
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        List<String> readData = new FileReaderImpl()
                 .readData(PATH_FROM_FILE);
         CsvFileDataHandler csvFileDataHandler = new CsvFileDataHandlerImpl(operationStrategy);
         csvFileDataHandler.processData(readData);
@@ -42,6 +42,6 @@ public class Main {
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeReport(PATH_TO_FILE,
                 reportCreator.createReport(),
-                csvFileDataHandler.HEADER);
+                reportCreator.HEADER);
     }
 }

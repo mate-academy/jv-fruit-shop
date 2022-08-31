@@ -12,6 +12,6 @@ public class ReturnHandler implements OperationHandler {
 
     @Override
     public void process(String product, int quantity) {
-        fruitsDao.addProductQuantity(product, quantity);
+        fruitsDao.add(product, quantity);
     }
 }

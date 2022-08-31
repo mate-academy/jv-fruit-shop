@@ -1,7 +1,7 @@
-package core.basesyntax.services.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.services.ReportCreator;
+import core.basesyntax.service.ReportCreator;
 
 public class ReportCreatorImpl implements ReportCreator {
     private final FruitDao fruitsDao;
@@ -15,7 +15,7 @@ public class ReportCreatorImpl implements ReportCreator {
         StringBuilder reportBuilder = new StringBuilder();
         for (String fruit: fruitsDao.getFruitsNames()) {
             reportBuilder.append(System.lineSeparator()).append(fruit)
-                    .append(",").append(fruitsDao.getAmount(fruit));
+                    .append(",").append(fruitsDao.get(fruit));
         }
         return reportBuilder.toString();
     }
