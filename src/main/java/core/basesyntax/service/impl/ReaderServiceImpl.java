@@ -1,9 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.strategy.OperationStrategy;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

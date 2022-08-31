@@ -1,24 +1,16 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitType;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.SupplyOperation;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
