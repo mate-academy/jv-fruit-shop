@@ -30,9 +30,9 @@ public class Main {
             = "src/main/java/homework/resourses/dailyreport.csv";
 
     public static void main(String[] args) {
-        ReaderService file = new ReaderServiceImpl();
+        ReaderService readerService = new ReaderServiceImpl();
         Path pathInput = Paths.get(DAILY_OPERATIONS_FILE);
-        List<String> fruitTransactionsString = file.csvRead(pathInput);
+        List<String> fruitTransactionsString = readerService.csvRead(pathInput);
         ParserTransactionsService parseTransactions = new ParserTransactionsServiceImpl();
         List<FruitTransaction> fruitTransactions = parseTransactions.parse(fruitTransactionsString);
         ProcessDataService processDataService = new ProcessDataServiceImpl();
