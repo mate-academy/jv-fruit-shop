@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.model.OperationsList;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.servise.DataOperationHandler;
 import core.basesyntax.servise.FileReader;
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        File input = new File( "src/main/resources/input");
+        File input = new File("src/main/resources/input");
         FileReader reader = new FileReaderImpl();
         DataOperationHandler operationHandler = new DataOperationHandlerImpl();
         reader.read(input);
