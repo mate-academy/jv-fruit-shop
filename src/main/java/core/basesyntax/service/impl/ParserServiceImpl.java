@@ -10,6 +10,7 @@ public class ParserServiceImpl implements ParseService {
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_QUANTITY = 2;
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<Transaction> parse(List<String> lines) {
@@ -20,7 +21,7 @@ public class ParserServiceImpl implements ParseService {
     }
 
     private Transaction getTransaction(String line) {
-        String[] fields = line.split(",");
+        String[] fields = line.split(SEPARATOR);
         return new Transaction(fields[INDEX_OF_OPERATION],
                 new Fruit(fields[INDEX_OF_FRUIT]),
                 Integer.parseInt(fields[INDEX_OF_QUANTITY]));
