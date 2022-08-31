@@ -38,7 +38,7 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
         Path pathOutput = Paths.get(DAILY_REPORT_FILE);
-        writerService.write(pathOutput, reportService.report(Storage.dataBase));
+        writerService.write(pathOutput, reportService.report());
     }
 
     private static Map<FruitTransaction.Operation, OperationHandler> fillMap() {
