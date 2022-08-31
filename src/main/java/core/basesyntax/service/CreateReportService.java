@@ -4,6 +4,6 @@ import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public interface CreateReportService {
-    String createReport(Map<Fruit, Integer> storage);
+    String createReport();
 }
 

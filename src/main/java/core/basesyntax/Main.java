@@ -4,6 +4,7 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.ParseService;
 import core.basesyntax.service.Reader;
+import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.CreateReportServiceImpl;
 import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReadFromFileImpl;
@@ -42,9 +43,9 @@ public class Main {
             OperationHandler operationHandler = strategy.getByOperation(transaction.getOperation());
             operationHandler.apply(transaction);
         }
-        WriteToFileImpl writeToFile = new WriteToFileImpl();
+        Writer writeToFile = new WriteToFileImpl();
         CreateReportService createReportService = new CreateReportServiceImpl();
         writeToFile.writeToFile(OUTPUT_PATH,
-                createReportService.createReport(Storage.storage));
+                createReportService.createReport());
     }
 }
