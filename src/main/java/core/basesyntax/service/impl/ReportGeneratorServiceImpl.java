@@ -10,6 +10,7 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     @Override
     public List<String> generate() {
         List<String> strings = new ArrayList<>();
+        strings.add("fruit,quantity");
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
             strings.add(entry.getKey() + "," + entry.getValue());
         }
