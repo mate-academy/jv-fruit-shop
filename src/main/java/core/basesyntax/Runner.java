@@ -44,7 +44,7 @@ public class Runner {
         List<FruitTransaction> transactions = parserService.parse(data);
         System.out.println("Parsed data: " + transactions);
 
-        FruitService fruitService = new FruitServiceImpl(operationHandlerMap);
+        FruitService fruitService = new FruitServiceImpl(operationHandlerMap,fruitDao);
         fruitService.processTransactions(transactions);
 
         String report = fruitService.createReport();

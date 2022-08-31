@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
@@ -13,9 +12,10 @@ public class FruitServiceImpl implements FruitService {
     private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
     private final FruitDao fruitDao;
 
-    public FruitServiceImpl(Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap) {
+    public FruitServiceImpl(Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap,
+                            FruitDao fruitDao) {
         this.operationHandlerMap = operationHandlerMap;
-        fruitDao = new FruitDaoImpl();
+        this.fruitDao = fruitDao;
     }
 
     @Override
