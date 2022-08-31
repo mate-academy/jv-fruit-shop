@@ -10,7 +10,7 @@ public class ParseServiceImpl implements ParseService {
     private static final int TYPE_OF_OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final String SPLIT_SYMBOL = ",";
+    private static final String COMMA = ",";
 
     @Override
     public List<FruitTransaction> parse(List<String> list) {
