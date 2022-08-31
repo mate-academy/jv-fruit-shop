@@ -1,44 +1,42 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class Fruit {
-    private FruitType type;
+    private String name;
 
-    public Fruit(FruitType type) {
-        this.type = type;
+    public Fruit(String name) {
+        this.name = name;
     }
 
-    public FruitType getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(FruitType type) {
-        this.type = type;
+    public void getName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Fruit{"
-                + "type='" + type + '\'' + '}';
+                + "name='" + name + '\'' + '}';
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(name);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    public static Fruit of(String fruitName) {
-        switch (fruitName) {
-            case "banana" :
-                return new Fruit(FruitType.BANANA);
-            case "apple" :
-                return new Fruit(FruitType.APPLE);
-            default :
-                return null;
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
         }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Fruit fruit = (Fruit) o;
+        return Objects.equals(name, fruit.name);
     }
 }

@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INTPUT_FILE_NAME = "input.csv";
-    private static final String OUTPUT_FILE_NAME = "output-report.csv";
+    private static final String INTPUT_FILE_NAME = "src/main/resoursec/input.csv";
+    private static final String OUTPUT_FILE_NAME = "src/main/resoursec/output-report.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> map = new HashMap<>();
@@ -29,7 +29,7 @@ public class Main {
         OperationStrategy strategy = new OperationStrategy(map);
 
         ReaderService readerService = new ReaderServiceImpl();
-        List<String> lines = readerService.readByFile(INTPUT_FILE_NAME);
+        List<String> lines = readerService.readFromFile(INTPUT_FILE_NAME);
 
         List<Transaction> transactions = new ParserServiceImpl().parse(lines);
 

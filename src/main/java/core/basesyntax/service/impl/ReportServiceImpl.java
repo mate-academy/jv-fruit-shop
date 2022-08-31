@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitType;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.storage.Storage;
 
@@ -13,7 +13,7 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder stringBuilder = new StringBuilder()
                 .append(HEADER)
                 .append(System.lineSeparator());
-        for (FruitType fruits : Storage.getStorage().keySet()) {
+        for (Fruit fruits : Storage.getStorage().keySet()) {
             stringBuilder.append(fruits.toString().toLowerCase())
                     .append(REGEX)
                     .append(Storage.getStorage().get(fruits))

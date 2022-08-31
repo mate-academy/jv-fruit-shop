@@ -3,15 +3,15 @@ package core.basesyntax.model;
 public class Transaction {
     private String operation;
     private Fruit fruit;
-    private Integer quantity;
+    private int quantity;
 
     public Transaction() {
     }
 
-    public Transaction(String[] data) {
-        this.operation = data[0];
-        this.fruit = Fruit.of(data[1]);
-        this.quantity = Integer.parseInt(data[2]);
+    public Transaction(String operation, Fruit fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
     }
 
     public String getOperation() {
