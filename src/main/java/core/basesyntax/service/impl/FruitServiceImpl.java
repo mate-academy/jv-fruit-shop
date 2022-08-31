@@ -22,7 +22,7 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public String createReport(List<FruitTransaction> fruitTransactions) {
+    public String createReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruits,quantity");
         Storage.FRUITS.values().forEach(fruitData

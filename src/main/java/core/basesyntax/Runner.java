@@ -16,7 +16,6 @@ import core.basesyntax.strategy.impl.FruitBalanceHandler;
 import core.basesyntax.strategy.impl.FruitPurchaseHandler;
 import core.basesyntax.strategy.impl.FruitReturnHandler;
 import core.basesyntax.strategy.impl.FruitSupplyHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +47,7 @@ public class Runner {
         FruitService fruitService = new FruitServiceImpl(operationHandlerMap);
         fruitService.processTransactions(transactions);
 
-        String report = fruitService.createReport(transactions);
+        String report = fruitService.createReport();
 
         CsvFileWriterService csvWriterService = new WriterServiceImpl();
         csvWriterService.writeToFile(report, REPORT_FILE);

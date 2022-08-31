@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParserService;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FruitTransactionParserServiceImpl implements FruitTransactionParserService {
@@ -11,12 +12,6 @@ public class FruitTransactionParserServiceImpl implements FruitTransactionParser
     private static final int QUANTITY_INDEX = 2;
     private static final String SPLITTER = ",";
 
-    /**
-     * better run through each value of your enum and search through its operation field
-     * you can use Stream API
-     * @param list
-     * @return
-     */
     @Override
     public List<FruitTransaction> parse(List<String> list) {
         List<FruitTransaction> parsedTransaction = new ArrayList<>();
@@ -31,23 +26,22 @@ public class FruitTransactionParserServiceImpl implements FruitTransactionParser
         return parsedTransaction;
     }
 
-    /**
-     * better remove and do it through Stream API inside upper method
-     * @param operationLetter
-     * @return
-     */
     private FruitTransaction.Operation getOperation(String operationLetter) {
-        switch (operationLetter) {
-            case "b":
-                return FruitTransaction.Operation.BALANCE;
-            case "r":
-                return FruitTransaction.Operation.RETURN;
-            case "p":
-                return FruitTransaction.Operation.PURCHASE;
-            case "s":
-                return FruitTransaction.Operation.SUPPLY;
-            default:
-                throw new RuntimeException("Can't find letter " + operationLetter + " in file");
-        }
+        return Arrays.stream(FruitTransaction.Operation.values())
+                .filter(o -> o.getOperation().equals(operationLetter))
+                .findFirst().orElseThrow(() ->
+                        new RuntimeException("Don't have this kind of operation " + operationLetter));
+//        switch (operationLetter) {
+//            case "b":
+//                return FruitTransaction.Operation.BALANCE;
+//            case "r":
+//                return FruitTransaction.Operation.RETURN;
+//            case "p":
+//                return FruitTransaction.Operation.PURCHASE;
+//            case "s":
+//                return FruitTransaction.Operation.SUPPLY;
+//            default:
+//                throw new RuntimeException("Can't find letter " + operationLetter + " in file");
+//        }
     }
 }
