@@ -24,6 +24,7 @@ import strategy.SupplyOperationHandlerImpl;
 public class Main {
     public static final String INPUT_FILE = "src/main/resources/input.csv";
     public static final String OUTPUT_FILE = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandlerImpl());
