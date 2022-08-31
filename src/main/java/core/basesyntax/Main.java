@@ -5,11 +5,10 @@ import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.ParseService;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.Writer;
-import core.basesyntax.service.impl.CreateReportServiceImpl;
+import core.basesyntax.service.impl.ReportCreatorService;
 import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReadFromFileImpl;
 import core.basesyntax.service.impl.WriteToFileImpl;
-import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.BalanceOperationImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -44,7 +43,7 @@ public class Main {
             operationHandler.apply(transaction);
         }
         Writer writeToFile = new WriteToFileImpl();
-        CreateReportService createReportService = new CreateReportServiceImpl();
+        CreateReportService createReportService = new ReportCreatorService();
         writeToFile.writeToFile(OUTPUT_PATH,
                 createReportService.createReport());
     }

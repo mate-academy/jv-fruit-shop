@@ -6,7 +6,7 @@ import core.basesyntax.storage.Storage;
 
 import java.util.Map;
 
-public class CreateReportServiceImpl implements CreateReportService {
+public class ReportCreatorService implements CreateReportService {
     @Override
     public String createReport() {
         StringBuilder stringBuilder = new StringBuilder();
