@@ -2,14 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FileReader;
-import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.ReportGeneration;
 import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
-import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.service.impl.ReportGenerationImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.OperationHandlerImplBalance;
 import core.basesyntax.strategy.impl.OperationHandlerImplPurchase;
