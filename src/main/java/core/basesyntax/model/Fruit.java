@@ -38,13 +38,4 @@ public final class Fruit {
                 + '\''
                 + '}';
     }
-
-    @Override
-    protected Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't clone fruit: " + name, e);
-        }
-    }
 }

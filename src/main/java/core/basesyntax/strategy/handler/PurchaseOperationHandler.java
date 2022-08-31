@@ -9,7 +9,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void apply(Transaction transaction) {
         Fruit fruit = transaction.getFruit();
         Integer currentQuantity = Storage.storage.get(fruit);
-        if (Storage.storage.get(fruit) >= transaction.getQuantity()) {
+        if (currentQuantity >= transaction.getQuantity()) {
             Storage.storage.put(fruit, currentQuantity - transaction.getQuantity());
         } else {
             throw new RuntimeException("Not enough fruit for sale");

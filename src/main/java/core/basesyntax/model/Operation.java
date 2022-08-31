@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
@@ -12,16 +14,11 @@ public enum Operation {
         this.operation = operation;
     }
 
-    public static Operation getOperation(String operation) {
-        switch (operation) {
-            case "b" :
-                return Operation.BALANCE;
-            case "s" :
-                return Operation.SUPPLY;
-            case "p" :
-                return Operation.PURCHASE;
-            default:
-                return Operation.RETURN;
-        }
+    public static Operation getOperation(String inputOperation) {
+        return Arrays.stream(Operation.values())
+                .filter(s -> s.operation.equals(inputOperation))
+                .reduce((t1, t2) -> t1)
+                .orElseThrow(() -> new RuntimeException("Can't find current enum"
+                        + inputOperation));
     }
 }

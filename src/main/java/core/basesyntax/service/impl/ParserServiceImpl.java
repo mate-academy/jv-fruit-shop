@@ -14,8 +14,9 @@ public class ParserServiceImpl implements ParserService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<Transaction> parseLine(List<String> inputData) {
+    public List<Transaction> parseLines(List<String> inputData) {
         List<Transaction> transactions = new ArrayList<>();
+        inputData.remove(0);
         for (String line : inputData) {
             String[] parsedLines = line.split(SPLITTER);
             transactions.add(new Transaction(Operation.getOperation(parsedLines[OPERATION_INDEX]),
