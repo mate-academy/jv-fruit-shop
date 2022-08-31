@@ -5,17 +5,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ReaderServiceImpl implements ReaderService {
-    private static final int HEADER = 1;
 
     @Override
     public List<String> readFromFile(String filePath) {
         try {
-            return Files.readAllLines(Path.of(filePath)).stream()
-                    .skip(HEADER)
-                    .collect(Collectors.toList());
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file with path" + filePath, e);
         }

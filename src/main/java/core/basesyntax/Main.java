@@ -51,7 +51,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         for (FruitTransaction fruitTransaction : transactions) {
             OperationHandler operationHandler = operationStrategy
-                    .get(fruitTransaction.getOperation());
+                    .getByOperation(fruitTransaction.getOperation());
             operationHandler.applyOperation(fruitTransaction);
         }
         ReportService reportService = new ReportServiceImpl();

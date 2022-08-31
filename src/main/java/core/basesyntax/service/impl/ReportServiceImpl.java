@@ -3,18 +3,19 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import java.util.Map;
+import java.util.Set;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String RECORD_DIVIDER = ",";
+    private static final String COMMA = ",";
     private static final String HEADER = "fruit,quantity";
 
     @Override
-    public String createReport(Map<Fruit, Integer> fruitsDataMap) {
+    public String createReport(Set<Map.Entry<Fruit, Integer>> fruitsDataMap) {
         StringBuilder stringBuilder = new StringBuilder().append(HEADER);
-        for (Map.Entry<Fruit, Integer> record : fruitsDataMap.entrySet()) {
+        for (Map.Entry<Fruit, Integer> record : fruitsDataMap) {
             stringBuilder.append(System.lineSeparator())
                     .append(record.getKey().getName())
-                    .append(RECORD_DIVIDER)
+                    .append(COMMA)
                     .append(record.getValue());
         }
         return stringBuilder.toString();
