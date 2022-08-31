@@ -21,10 +21,14 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_FILE_PATH = "src" + File.separator + "main" + File.separator
+            + "resources" + File.separator + "input.csv";
+    private static final String OUTPUT_FILE_PATH = "src" + File.separator + "main" + File.separator
+            + "resources" + File.separator + "output.csv";
+
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
-        String inputFilePath = "Input" + File.separator + "Input.csv";
-        List<String> strings = readerService.readFromFile(inputFilePath);
+        List<String> strings = readerService.readFromFile(INPUT_FILE_PATH);
         Map<String, OperationHandler> map = new HashMap<>();
         map.put("b", new BalanceOperationHandler());
         map.put("s", new SupplyOperationHandler());
@@ -40,7 +44,6 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.makeReport();
         WriterService writerService = new WriterServiceImpl();
-        String outputFilePath = "Output" + File.separator + "Output.csv";
-        writerService.writeToFile(report, outputFilePath);
+        writerService.writeToFile(report, OUTPUT_FILE_PATH);
     }
 }
