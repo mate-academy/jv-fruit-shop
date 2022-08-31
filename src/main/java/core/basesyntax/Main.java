@@ -32,7 +32,7 @@ public class Main {
         List<String> inputData = new ReaderServiceImpl().readFromFile(FILE_PATH_FROM);
         List<Transaction> transactions = new ParserServiceImpl().parseLines(inputData);
         OperationStrategy strategy = new OperationStrategyImpl(handlerMap);
-        new ProcessDataServiceImpl().processData(transactions, strategy);
+        new ProcessDataServiceImpl(strategy).processData(transactions);
         String report = new ReportServiceImpl().createReport();
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(report, FILE_PATH_TO);
