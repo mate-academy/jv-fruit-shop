@@ -22,11 +22,17 @@ public class FruitStorageServiceImpl implements FruitStorageService {
         if (handlersMap == null) {
             throw new RuntimeException("Can`t call method 'process' if handlersMap is null");
         }
+        if (data == null || data.size() == 0) {
+            throw new RuntimeException("Can't process data because input data is null or empty");
+        }
         data.remove(REPORT_HEAD_INDEX);
         String[] splitData;
         for (String dataRow : data) {
             splitData = dataRow.split(DATA_DELIMITER);
             FruitOperationHandler handler = handlersMap.get(splitData[OPERATION_INDEX]);
+            if (handler == null) {
+                throw new RuntimeException("Input data is incorrect");
+            }
             handler.operate(splitData[FRUIT_INDEX], Integer.parseInt(splitData[AMOUNT_INDEX]));
         }
     }
