@@ -12,7 +12,7 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder report = new StringBuilder();
         report.append(HEADER).append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> fruit : dataBase.entrySet()) {
-            report.append(fruit.getKey().getFruit())
+            report.append(fruit.getKey().getTitle())
                     .append(",")
                     .append(fruit.getValue())
                     .append(System.lineSeparator());

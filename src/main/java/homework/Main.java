@@ -5,18 +5,15 @@ import homework.dao.WriteService;
 import homework.dao.impl.ReaderServiceImpl;
 import homework.dao.impl.WriterServiceImpl;
 import homework.model.FruitTransaction;
-import homework.service.ParseTransactionsService;
+import homework.service.ParserTransactionsService;
 import homework.service.ProcessDataService;
 import homework.service.ReportService;
-import homework.service.impl.ParseTransactionsServiceImpl;
+import homework.service.impl.ParserTransactionsServiceImpl;
 import homework.service.impl.ProcessDataServiceImpl;
 import homework.service.impl.ReportServiceImpl;
 import homework.storage.Storage;
-import homework.strategy.handler.BalanceOperationHandlerImpl;
-import homework.strategy.handler.OperationHandler;
-import homework.strategy.handler.PurchaseOperationHandlerImpl;
-import homework.strategy.handler.ReturnOperationHandlerImpl;
-import homework.strategy.handler.SupplyOperationHandlerImpl;
+import homework.strategy.handler.*;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -32,15 +29,15 @@ public class Main {
     public static void main(String[] args) {
         ReadService file = new ReaderServiceImpl();
         Path pathInput = Paths.get(DAILY_OPERATIONS_FILE);
-        List<String> fruitTransactionsString = file.read(pathInput);
-        ParseTransactionsService parseTransactions = new ParseTransactionsServiceImpl();
+        List<String> fruitTransactionsString = file.csvRead(pathInput);
+        ParserTransactionsService parseTransactions = new ParserTransactionsServiceImpl();
         List<FruitTransaction> fruitTransactions = parseTransactions.parse(fruitTransactionsString);
         ProcessDataService processDataService = new ProcessDataServiceImpl();
         processDataService.processData(fruitTransactions, newOperationsMap());
         ReportService reportService = new ReportServiceImpl();
         WriteService writeService = new WriterServiceImpl();
         Path pathOutput = Paths.get(DAILY_REPORT_FILE);
-        writeService.write(pathOutput, reportService.report(Storage.dataBase));
+        writeService.csvWrite(pathOutput, reportService.report(Storage.dataBase));
     }
 
     private static Map<FruitTransaction.Operation, OperationHandler> newOperationsMap() {

@@ -3,14 +3,14 @@ package homework.model;
 import java.util.Objects;
 
 public final class Fruit {
-    private final String fruit;
+    private final String title;
 
-    public Fruit(String fruit) {
-        this.fruit = fruit;
+    public Fruit(String title) {
+        this.title = title;
     }
 
-    public String getFruit() {
-        return fruit;
+    public String getTitle() {
+        return title;
     }
 
     @Override
@@ -22,12 +22,12 @@ public final class Fruit {
             return false;
         }
         Fruit fruit1 = (Fruit) o;
-        return Objects.equals(fruit, fruit1.fruit);
+        return Objects.equals(title, fruit1.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fruit);
+        return Objects.hash(title);
     }
 
     @Override
@@ -35,7 +35,7 @@ public final class Fruit {
         try {
             return super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't clone fruit: " + fruit, e);
+            throw new RuntimeException("Can't clone fruit: " + title, e);
         }
     }
 }

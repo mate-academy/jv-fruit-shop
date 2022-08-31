@@ -7,7 +7,7 @@ import java.nio.file.Path;
 
 public class WriterServiceImpl implements WriteService {
     @Override
-    public void write(Path path, String string) {
+    public void csvWrite(Path path, String string) {
         try {
             Files.writeString(path, string);
         } catch (IOException e) {

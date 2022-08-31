@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ReaderServiceImpl implements ReadService {
     @Override
-    public List<String> read(Path path) {
+    public List<String> csvRead(Path path) {
         try {
             return Files.readAllLines(path);
         } catch (IOException e) {
