@@ -1,6 +1,6 @@
-package core.basesyntax.model.serviceimpl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.model.service.DataWriter;
+import core.basesyntax.service.DataWriter;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,7 +1,7 @@
-package core.basesyntax.model.strategy.handler;
+package core.basesyntax.strategy.handler;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.service.Storage;
+import core.basesyntax.storage.Storage;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private Storage dataBase;

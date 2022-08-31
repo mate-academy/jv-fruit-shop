@@ -1,6 +1,6 @@
-package core.basesyntax.model.serviceimpl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.model.service.ReportData;
+import core.basesyntax.service.ReportData;
 import java.util.Map;
 import java.util.Set;
 
