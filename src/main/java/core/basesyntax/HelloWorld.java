@@ -36,8 +36,8 @@ public class HelloWorld {
 
         ReaderService readerService = new ReaderServiceImpl();
         List<String> lines = readerService.readData(FILE_WITH_DAY_ACTIVITIES);
-        ParseService parseService = new ParserServiceImpl();
-        List<FruitTransaction> fruitTransactions = parseService.parseLines(lines);
+        ParseService parserService = new ParserServiceImpl();
+        List<FruitTransaction> fruitTransactions = parserService.parseLines(lines);
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler handler = strategy
                     .getByOperation(fruitTransaction.getOperation());
