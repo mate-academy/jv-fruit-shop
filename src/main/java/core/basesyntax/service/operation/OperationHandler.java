@@ -6,5 +6,4 @@ import core.basesyntax.model.FruitTransaction;
 public interface OperationHandler {
     Fruit updateStorage(FruitTransaction fruitTransaction);
 
-
 }

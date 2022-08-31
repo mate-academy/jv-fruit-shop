@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.service.strategy.OperationStrategy;
-
 import java.util.List;
 
 public class TransactionProcessingServiceImpl implements TransactionProcessingService {

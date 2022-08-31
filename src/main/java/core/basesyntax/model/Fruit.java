@@ -33,8 +33,12 @@ public class Fruit {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Fruit fruit = (Fruit) o;
         return amount == fruit.amount && Objects.equals(name, fruit.name);
     }
@@ -44,11 +48,4 @@ public class Fruit {
         return Objects.hash(name, amount);
     }
 
-    @Override
-    public String toString() {
-        return "Fruit{" +
-                "name='" + name + '\'' +
-                ", amount=" + amount +
-                '}';
-    }
 }

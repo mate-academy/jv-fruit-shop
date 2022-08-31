@@ -52,5 +52,6 @@ public class FruitTransaction {
         public String getLetter() {
             return letter;
         }
+
     }
 }

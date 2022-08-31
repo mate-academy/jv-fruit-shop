@@ -11,9 +11,10 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     private static final int FRUIT_AMOUNT_INDEX = 2;
 
     @Override
-    public FruitTransaction createNewFruitTransaction(String FruitTransactionString) {
-        String[] fields = FruitTransactionString.split(SEPARATOR);
-        FruitTransaction.Operation operation = FruitTransaction.getOperationByLetter(fields[OPERATION_INDEX]);
+    public FruitTransaction createNewFruitTransaction(String line) {
+        String[] fields = line.split(SEPARATOR);
+        FruitTransaction.Operation operation =
+                FruitTransaction.getOperationByLetter(fields[OPERATION_INDEX]);
         return FruitTransaction.of(operation,
                 Fruit.of(fields[FRUIT_NAME_INDEX], Integer.parseInt(fields[FRUIT_AMOUNT_INDEX])));
     }
