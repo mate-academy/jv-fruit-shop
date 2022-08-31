@@ -1,12 +1,16 @@
-package core.basesyntax.parser;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserImpl implements Parser {
+public class ParserServiceImpl implements ParserService {
     private static final String DELIMITER = ",";
+    private static final int SPLIT_QUANTITY = 2;
+    private static final int SPLIT_FRUIT_NAME = 1;
+    private static final int SPLIT_OPERATION_TYPE = 0;
 
     @Override
     public List<Transaction> parse(String data) {
@@ -21,9 +25,9 @@ public class ParserImpl implements Parser {
         String fruitName;
         String operationType;
         int quantity;
-        quantity = Integer.parseInt(data.split(DELIMITER)[2].trim());
-        fruitName = data.split(DELIMITER)[1].trim();
-        operationType = data.split(DELIMITER)[0].trim();
+        quantity = Integer.parseInt(data.split(DELIMITER)[SPLIT_QUANTITY].trim());
+        fruitName = data.split(DELIMITER)[SPLIT_FRUIT_NAME].trim();
+        operationType = data.split(DELIMITER)[SPLIT_OPERATION_TYPE].trim();
         return new Transaction(new Fruit(fruitName), quantity, operationType);
     }
 }

@@ -1,6 +1,7 @@
-package core.basesyntax.reportservice;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {

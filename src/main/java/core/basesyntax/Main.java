@@ -1,15 +1,15 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.parser.ParserImpl;
-import core.basesyntax.reader.Reader;
-import core.basesyntax.reader.ReaderImpl;
-import core.basesyntax.reportservice.ReportService;
-import core.basesyntax.reportservice.ReportServiceImpl;
-import core.basesyntax.storage.Storage;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.OperationServiceStrategy;
-import core.basesyntax.writer.Writer;
-import core.basesyntax.writer.WriterImpl;
 import java.util.List;
 
 public class Main {
@@ -17,10 +17,10 @@ public class Main {
     private static final String OUTPUT_FILE_NAME = "report.csv";
 
     public static void main(String[] args) {
-        Reader reader = new ReaderImpl();
-        String data = reader.read(INPUT_FILE_NAME);
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        String data = fileReaderService.readFromFile(INPUT_FILE_NAME);
         Storage storage = new Storage();
-        List<Transaction> transactionList = new ParserImpl().parse(data);
+        List<Transaction> transactionList = new ParserServiceImpl().parse(data);
         OperationServiceStrategy operationServiceStrategy = new OperationServiceStrategy();
         for (Transaction transaction : transactionList) {
             operationServiceStrategy
@@ -28,7 +28,8 @@ public class Main {
                     .interact(transaction);
         }
         ReportService reportService = new ReportServiceImpl();
-        Writer writer = new WriterImpl();
-        writer.write(reportService.createReport(Storage.getAll()), OUTPUT_FILE_NAME);
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.writeToFile(reportService
+                .createReport(Storage.getAll()), OUTPUT_FILE_NAME);
     }
 }

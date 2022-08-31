@@ -1,14 +1,15 @@
-package core.basesyntax.writer;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileWriterService;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriterImpl implements Writer {
+public class FileWriterServiceImpl implements FileWriterService {
 
     @Override
-    public void write(String data, String toFile) {
+    public void writeToFile(String data, String toFile) {
         File outputFile = new File(toFile);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             writer.write(data);

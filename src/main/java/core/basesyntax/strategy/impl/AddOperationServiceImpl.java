@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationService;
 
 public class AddOperationServiceImpl implements OperationService {
