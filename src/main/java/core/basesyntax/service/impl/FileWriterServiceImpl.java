@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriterServiceImpl implements FileWriterService {
-
     @Override
     public void writeToFile(String data, String toFile) {
         File outputFile = new File(toFile);

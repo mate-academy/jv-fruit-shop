@@ -5,11 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static Map<Fruit, Integer> fruitMap;
-
-    public Storage() {
-        fruitMap = new HashMap<>();
-    }
+    private static Map<Fruit, Integer> fruitMap = new HashMap<>();
 
     public static void add(Fruit fruit, Integer integer) {
         fruitMap.put(fruit,integer);

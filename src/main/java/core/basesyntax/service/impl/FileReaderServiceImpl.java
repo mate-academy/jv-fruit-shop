@@ -13,7 +13,6 @@ public class FileReaderServiceImpl implements FileReaderService {
         File file = new File(fileName);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String value = reader.readLine();
-            value = reader.readLine();
             while (value != null) {
                 builder.append(value).append(System.lineSeparator());
                 value = reader.readLine();

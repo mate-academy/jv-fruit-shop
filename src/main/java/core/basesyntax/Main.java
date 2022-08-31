@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
@@ -13,13 +12,14 @@ import core.basesyntax.strategy.OperationServiceStrategy;
 import java.util.List;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "input.csv";
-    private static final String OUTPUT_FILE_NAME = "report.csv";
+    private static final String INPUT_FILE_NAME
+            = "src/main/java/core/basesyntax/resources/input.csv";
+    private static final String OUTPUT_FILE_NAME
+            = "src/main/java/core/basesyntax/resources/report.csv";
 
     public static void main(String[] args) {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         String data = fileReaderService.readFromFile(INPUT_FILE_NAME);
-        Storage storage = new Storage();
         List<Transaction> transactionList = new ParserServiceImpl().parse(data);
         OperationServiceStrategy operationServiceStrategy = new OperationServiceStrategy();
         for (Transaction transaction : transactionList) {
@@ -30,6 +30,6 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(reportService
-                .createReport(Storage.getAll()), OUTPUT_FILE_NAME);
+                .createReport(), OUTPUT_FILE_NAME);
     }
 }

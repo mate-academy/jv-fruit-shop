@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import java.util.Map;
@@ -10,14 +11,14 @@ public class ReportServiceImpl implements ReportService {
     private static final String DELIMITER = ",";
 
     @Override
-    public String createReport(Map<Fruit, Integer> fruitMap) {
+    public String createReport() {
         StringBuilder builder = new StringBuilder();
         builder.append(FRUIT_COLUMN_TITLE)
                 .append(DELIMITER)
                 .append(QUANTITY_COLUMN_TITLE)
                 .append(System.lineSeparator());
 
-        for (Map.Entry<Fruit, Integer> entry : fruitMap.entrySet()) {
+        for (Map.Entry<Fruit, Integer> entry : Storage.getAll().entrySet()) {
             builder.append(entry.getKey().getName())
                     .append(DELIMITER)
                     .append(entry.getValue())

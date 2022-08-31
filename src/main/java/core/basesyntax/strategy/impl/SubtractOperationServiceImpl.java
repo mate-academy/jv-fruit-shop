@@ -8,12 +8,11 @@ import java.util.NoSuchElementException;
 public class SubtractOperationServiceImpl implements OperationService {
     @Override
     public void interact(Transaction transaction) {
-        int quantity;
         if (Storage.get(transaction.getFruit()) != null) {
-            quantity = Storage.get(transaction.getFruit()) - transaction.getQuantity();
+            int quantity = Storage.get(transaction.getFruit()) - transaction.getQuantity();
             Storage.add(transaction.getFruit(), quantity);
         } else {
-            throw new NoSuchElementException(transaction.getFruit() + " Can`t subtract null");
+            throw new NoSuchElementException("There is no such fruit in storage");
         }
     }
 }
