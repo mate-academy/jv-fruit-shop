@@ -1,7 +1,7 @@
-package core.basesyntax.service.servise.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.servise.ReportGenerator;
+import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
@@ -9,7 +9,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     private static final String DATA_SEPARATOR = ",";
 
     @Override
-    public String report() {
+    public String makeReport() {
         StringBuilder report = new StringBuilder()
                 .append(HEADER).append(System.lineSeparator());
 

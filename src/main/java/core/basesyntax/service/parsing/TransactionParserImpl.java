@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-public class FileParserImpl implements FileParser {
+public class TransactionParserImpl implements TransactionParser {
     private static final String DATA_SEPARATOR = ",";
     private static final int OPERATION_TYPE = 0;
     private static final int FRUIT_TYPE = 1;
