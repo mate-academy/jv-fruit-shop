@@ -1,7 +1,6 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
@@ -12,11 +11,9 @@ public class PurchaseOperationHandler implements OperationHandler {
     }
 
     @Override
-    public Fruit updateStorage(FruitTransaction fruitTransaction) {
-        Fruit fruitFromTransaction = fruitTransaction.getFruit();
-        Fruit fruitFromStorage = fruitDao.getFruit(fruitFromTransaction.getName());
-        fruitFromStorage.setAmount(fruitFromStorage.getAmount()
-                - fruitFromTransaction.getAmount());
-        return fruitFromStorage;
+    public void handle(FruitTransaction fruitTransaction) {
+        int amountFromStorage = fruitDao.getFruitAmount(fruitTransaction.getFruit());
+        fruitDao.addToStorage(fruitTransaction.getFruit(),
+                amountFromStorage - fruitTransaction.getAmount());
     }
 }

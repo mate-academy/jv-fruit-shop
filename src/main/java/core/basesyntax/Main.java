@@ -6,14 +6,14 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.FruitTransactionCollector;
+import core.basesyntax.service.FruitTransactionParser;
+import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
-import core.basesyntax.service.impl.FruitTransactionCollectorImpl;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.impl.TransactionProcessingServiceImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
@@ -46,17 +46,17 @@ public class Main {
         FileReader reader = new FileReaderImpl();
         List<String> inputStrings = reader.readFromFile(INPUT_FILE_PATH);
 
-        FruitTransactionCollector collector = new FruitTransactionCollectorImpl();
+        FruitTransactionParser parser = new FruitTransactionParserImpl();
         List<FruitTransaction> fruitTransactions =
-                collector.collectFruitTransactions(inputStrings);
+                parser.parse(inputStrings);
 
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlersMap);
-        TransactionProcessingService processingService =
-                new TransactionProcessingServiceImpl(strategy);
-        processingService.calculate(fruitTransactions);
+        FruitTransactionService fruitTransactionService =
+                new FruitTransactionServiceImpl(strategy);
+        fruitTransactionService.process(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.getReport(Storage.fruits);
+        String report = reportService.createReport(Storage.fruits);
 
         FileWriter writer = new FileWriterImpl();
         writer.writeToFile(report, OUTPUT_FILE_PATH);

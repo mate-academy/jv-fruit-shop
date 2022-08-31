@@ -4,19 +4,13 @@ import java.util.Arrays;
 
 public class FruitTransaction {
     private Operation operation;
-    private Fruit fruit;
+    private String fruit;
+    private int amount;
 
-    private FruitTransaction(Operation operation, Fruit fruit) {
+    private FruitTransaction(Operation operation, String fruit, int amount) {
         this.operation = operation;
         this.fruit = fruit;
-    }
-
-    public Fruit getFruit() {
-        return fruit;
-    }
-
-    public void setFruit(Fruit fruit) {
-        this.fruit = fruit;
+        this.amount = amount;
     }
 
     public Operation getOperation() {
@@ -27,8 +21,24 @@ public class FruitTransaction {
         this.operation = operation;
     }
 
-    public static FruitTransaction of(Operation operation, Fruit fruit) {
-        return new FruitTransaction(operation, fruit);
+    public String getFruit() {
+        return fruit;
+    }
+
+    public void setFruit(String fruit) {
+        this.fruit = fruit;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public static FruitTransaction of(Operation operation, String fruit, int amount) {
+        return new FruitTransaction(operation, fruit, amount);
     }
 
     public static Operation getOperationByLetter(String firstLetter) {
