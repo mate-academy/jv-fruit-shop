@@ -2,18 +2,16 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
-import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
 
     @Override
     public String getReport() {
-        return HEADER
-                + System.lineSeparator()
-                + Storage.getAll().entrySet().stream()
-                        .map(f -> f.getKey().getName() + "," + f.getValue())
-                        .map((f) -> f + System.lineSeparator())
-                        .collect(Collectors.joining());
+        StringBuilder stringBuilder = new StringBuilder(HEADER + System.lineSeparator());
+        Storage.getAll().forEach((key, value) ->
+                stringBuilder.append(key.getName()).append(",")
+                        .append(value).append(System.lineSeparator()));
+        return stringBuilder.toString();
     }
 }
