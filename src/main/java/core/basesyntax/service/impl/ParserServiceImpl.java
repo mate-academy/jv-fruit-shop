@@ -11,18 +11,19 @@ public class ParserServiceImpl implements ParserService {
     private static final int INDEX_OF_COMMAND = 0;
     private static final int INDEX_OF_FRUIT_NAME = 1;
     private static final int INDEX_OF_COUNT = 2;
+    private static final int SKIP_HEADERS = 1;
     private static final String REGEX = ",";
 
     @Override
     public List<Transaction> parse(List<String> lines) {
         return lines.stream()
-                .skip(1)
-                .map(s -> s.split(REGEX))
-                .map(s ->
+                .skip(SKIP_HEADERS)
+                .map(line -> line.split(REGEX))
+                .map(parametersArray ->
                         new Transaction(
-                                s[INDEX_OF_COMMAND].trim(),
-                                new Fruit(s[INDEX_OF_FRUIT_NAME].trim()),
-                                Integer.parseInt(s[INDEX_OF_COUNT])))
+                                parametersArray[INDEX_OF_COMMAND],
+                                new Fruit(parametersArray[INDEX_OF_FRUIT_NAME]),
+                                Integer.parseInt(parametersArray[INDEX_OF_COUNT])))
                 .collect(Collectors.toList());
     }
 }

@@ -12,9 +12,9 @@ import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.operations.BalanceOperationHandler;
-import core.basesyntax.strategy.operations.PurchaseOperation;
-import core.basesyntax.strategy.operations.ReturnOperation;
-import core.basesyntax.strategy.operations.SupplyOperation;
+import core.basesyntax.strategy.operations.PurchaseOperationHandler;
+import core.basesyntax.strategy.operations.ReturnOperationHandler;
+import core.basesyntax.strategy.operations.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,9 +32,9 @@ public class App {
     public static void main(String[] args) {
         Map<String, OperationHandler> commands = new HashMap<>();
         commands.put(BALANCE, new BalanceOperationHandler());
-        commands.put(PURCHASE, new PurchaseOperation());
-        commands.put(SUPPLY, new SupplyOperation());
-        commands.put(RETURN, new ReturnOperation());
+        commands.put(PURCHASE, new PurchaseOperationHandler());
+        commands.put(SUPPLY, new SupplyOperationHandler());
+        commands.put(RETURN, new ReturnOperationHandler());
 
         OperationStrategy strategy = new OperationStrategy(commands);
 
