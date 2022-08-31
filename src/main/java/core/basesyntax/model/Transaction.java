@@ -1,11 +1,11 @@
 package core.basesyntax.model;
 
-public class Transaktion {
+public class Transaction {
     private String operation;
     private Fruit fruit;
     private Integer quantity;
 
-    public Transaktion(String operation, Fruit fruit, Integer quantity) {
+    public Transaction(String operation, Fruit fruit, Integer quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;

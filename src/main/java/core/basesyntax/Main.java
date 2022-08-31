@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Transaktion;
+import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
@@ -36,11 +36,11 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         List<String> lines = readerService.readFromFile(INPUT_FILE);
 
-        List<Transaktion> transaktions = new ParserImpl().parse(lines);
+        List<Transaction> transactions = new ParserImpl().parse(lines);
 
-        for (Transaktion transaktion : transaktions) {
-            OperationHandler handler = strategy.getByOperation(transaktion.getOperation());
-            handler.apply(transaktion);
+        for (Transaction transaction : transactions) {
+            OperationHandler handler = strategy.getByOperation(transaction.getOperation());
+            handler.apply(transaction);
         }
 
         String report = new ReportServiceImpl().getReport();

@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Transaktion;
+import core.basesyntax.model.Transaction;
 import java.util.List;
 
 public interface Parser {
-    List<Transaktion> parse(List<String> lines);
+    List<Transaction> parse(List<String> lines);
 }
