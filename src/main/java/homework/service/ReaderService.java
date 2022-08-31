@@ -1,8 +1,8 @@
-package homework.dao;
+package homework.service;
 
 import java.nio.file.Path;
 import java.util.List;
 
-public interface ReadService {
+public interface ReaderService {
     List<String> csvRead(Path path);
 }

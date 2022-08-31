@@ -1,12 +1,12 @@
-package homework.dao.impl;
+package homework.service.impl;
 
-import homework.dao.ReadService;
+import homework.service.ReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReaderServiceImpl implements ReadService {
+public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> csvRead(Path path) {
         try {

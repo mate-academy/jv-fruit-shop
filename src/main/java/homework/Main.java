@@ -1,9 +1,9 @@
 package homework;
 
-import homework.dao.ReadService;
-import homework.dao.WriteService;
-import homework.dao.impl.ReaderServiceImpl;
-import homework.dao.impl.WriterServiceImpl;
+import homework.service.ReaderService;
+import homework.service.WriterService;
+import homework.service.impl.ReaderServiceImpl;
+import homework.service.impl.WriterServiceImpl;
 import homework.model.FruitTransaction;
 import homework.service.ParserTransactionsService;
 import homework.service.ProcessDataService;
@@ -30,7 +30,7 @@ public class Main {
             = "src/main/java/homework/resourses/dailyreport.csv";
 
     public static void main(String[] args) {
-        ReadService file = new ReaderServiceImpl();
+        ReaderService file = new ReaderServiceImpl();
         Path pathInput = Paths.get(DAILY_OPERATIONS_FILE);
         List<String> fruitTransactionsString = file.csvRead(pathInput);
         ParserTransactionsService parseTransactions = new ParserTransactionsServiceImpl();
@@ -38,9 +38,9 @@ public class Main {
         ProcessDataService processDataService = new ProcessDataServiceImpl();
         processDataService.processData(fruitTransactions, newOperationsMap());
         ReportService reportService = new ReportServiceImpl();
-        WriteService writeService = new WriterServiceImpl();
+        WriterService writerService = new WriterServiceImpl();
         Path pathOutput = Paths.get(DAILY_REPORT_FILE);
-        writeService.csvWrite(pathOutput, reportService.report(Storage.dataBase));
+        writerService.csvWrite(pathOutput, reportService.report(Storage.dataBase));
     }
 
     private static Map<FruitTransaction.Operation, OperationHandler> newOperationsMap() {

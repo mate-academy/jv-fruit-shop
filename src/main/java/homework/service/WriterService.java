@@ -1,7 +1,7 @@
-package homework.dao;
+package homework.service;
 
 import java.nio.file.Path;
 
-public interface WriteService {
+public interface WriterService {
     void csvWrite(Path path, String string);
 }
