@@ -10,7 +10,7 @@ public class FileWriterImpl implements FileWriter {
     public void writeReport(String filePath, String report) {
         File file = new File(filePath);
         try {
-            Files.write(file.toPath(), (report).getBytes());
+            Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("Can't write report to file " + file.getName(), e);
         }
