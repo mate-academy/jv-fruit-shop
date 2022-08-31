@@ -6,7 +6,6 @@ import java.util.List;
 public class ValidatorServiceImpl implements ValidatorService {
     private static final int TITLE_INDEX = 0;
     private static final int TYPE = 0;
-    private static final int FRUIT = 1;
     private static final int AMOUNT = 2;
     private static final int VALID_LENGTH = 3;
     private static final String TITLE_STRING = "type,fruit,quantity";
