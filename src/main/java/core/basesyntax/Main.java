@@ -24,7 +24,7 @@ public class Main {
     private static final String SUPPLY = "s";
     private static final String RETURN = "r";
 
-    public static void main(String[] args) throws RuntimeException {
+    public static void main(String[] args) {
         Map<String, OperationHandler> map = new HashMap<>();
         map.put(BALANCE, new BalanceOperationHandler());
         map.put(PURCHASE, new PurchaseOperationHandler());
@@ -40,7 +40,7 @@ public class Main {
 
         List<Transaction> transactions = new ParserServiceImpl().parse(lines);
 
-        for (Transaction transaction: transactions) {
+        for (Transaction transaction : transactions) {
             OperationHandler handler = strategy
                     .getByOperation(transaction.getOperation());
             handler.apply(transaction);

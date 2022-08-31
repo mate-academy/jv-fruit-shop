@@ -7,7 +7,7 @@ import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public void apply(Transaction transaction) throws RuntimeException {
+    public void apply(Transaction transaction) {
         Fruit fruit = transaction.getFruit();
         Integer currentQuantity = Storage.get(fruit);
         if (currentQuantity - transaction.getQuantity() < 0) {
