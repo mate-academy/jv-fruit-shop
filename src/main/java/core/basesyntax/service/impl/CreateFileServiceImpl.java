@@ -14,7 +14,7 @@ public class CreateFileServiceImpl implements CreateFileService {
         try {
             Files.createFile(Path.of(fileName));
         } catch (IOException e) {
-            throw new RuntimeException("Can't create file", e);
+            throw new RuntimeException("Can't create file " + fileName, e);
         }
     }
 }

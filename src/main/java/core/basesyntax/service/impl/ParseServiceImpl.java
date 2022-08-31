@@ -13,7 +13,7 @@ public class ParseServiceImpl implements ParseService {
     private static final String REGEX = ",";
 
     @Override
-    public List<Transaction> parseLine(List<String> lines) {
+    public List<Transaction> parse(List<String> lines) {
         List<Transaction> parsedLines = new ArrayList<>();
         for (String line : lines) {
             String[] split = line.split(REGEX);

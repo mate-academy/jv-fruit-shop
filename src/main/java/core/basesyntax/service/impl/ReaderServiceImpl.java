@@ -10,7 +10,7 @@ public class ReaderServiceImpl implements ReaderService {
     private static final int INDEX_TITLE_LINE = 0;
 
     @Override
-    public List<String> readData(String fileName) {
+    public List<String> readFromFile(String fileName) {
         List<String> lines;
         try {
             lines = Files.readAllLines(Paths.get(fileName));
