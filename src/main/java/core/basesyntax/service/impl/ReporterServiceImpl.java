@@ -10,11 +10,11 @@ public class ReporterServiceImpl implements ReporterService {
 
     @Override
     public String createReport(Set<Map.Entry<String, Integer>> data) {
-        StringBuilder builder = new StringBuilder(HEADER_TITLE);
+        StringBuilder stringBuilder = new StringBuilder(HEADER_TITLE);
         for (Map.Entry<String, Integer> fruit : data) {
-            builder.append(System.lineSeparator())
+            stringBuilder.append(System.lineSeparator())
                     .append(fruit.getKey() + COMA + fruit.getValue());
         }
-        return builder.toString();
+        return stringBuilder.toString();
     }
 }

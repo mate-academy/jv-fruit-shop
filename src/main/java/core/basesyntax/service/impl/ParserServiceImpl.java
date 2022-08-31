@@ -19,11 +19,15 @@ public class ParserServiceImpl implements ParserService {
         return data.stream()
                 .map(s -> s.split(COMA))
                 .map(v -> new FruitTransaction(
-                        Arrays.stream(FruitTransaction.Operation.values())
-                        .filter(o -> o.getOperation().equals(v[INDEX_OF_OPERATION]))
-                        .findFirst().get(),
+                        getTransaction(v),
                         v[INDEX_OF_FRUIT],
                         Integer.parseInt(v[INDEX_OF_AMOUNT])))
                 .collect(Collectors.toList());
+    }
+
+    private FruitTransaction.Operation getTransaction(String[] strings) {
+        return Arrays.stream(FruitTransaction.Operation.values())
+                .filter(o -> o.getOperation().equals(strings[INDEX_OF_OPERATION]))
+                .findFirst().get();
     }
 }
