@@ -9,6 +9,10 @@ public class BalanceOperation implements OperationStrategy {
     @Override
     public void apply(Transaction transaction) {
         Fruit fruit = transaction.getFruit();
-        Storage.storageDate.put(fruit, transaction.getQuantity());
+        Integer currentCount = Storage.storageDate.get(fruit);
+        Storage.storageDate.put(
+                fruit, currentCount == null
+                        ? transaction.getQuantity()
+                : currentCount + transaction.getQuantity());
     }
 }
