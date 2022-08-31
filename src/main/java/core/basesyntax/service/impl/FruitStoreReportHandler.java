@@ -12,15 +12,14 @@ public class FruitStoreReportHandler implements ReportHandler {
     private final StorageDao storageDao;
 
     public FruitStoreReportHandler(StorageDao storageDao) {
-        if (storageDao == null) {
-            throw new RuntimeException("Can't create FruitStoreReportHandler "
-                    + "with input StorageDao - null");
-        }
         this.storageDao = storageDao;
     }
 
     @Override
     public String makeReport() {
+        if (storageDao == null) {
+            throw new RuntimeException("Can't call method 'makeReport' if storageDao is null");
+        }
         Map<String, Integer> fruits = storageDao.getAll();
         List<String> report = new ArrayList<>();
         report.add(REPORT_HEAD);

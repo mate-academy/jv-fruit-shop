@@ -14,15 +14,14 @@ public class FruitStorageServiceImpl implements FruitStorageService {
     private final Map<String, FruitOperationHandler> handlersMap;
 
     public FruitStorageServiceImpl(Map<String, FruitOperationHandler> handlersMap) {
-        if (handlersMap == null) {
-            throw new RuntimeException("Can`t create FruitStorageServiceImpl "
-                    + "with input map - null");
-        }
         this.handlersMap = handlersMap;
     }
 
     @Override
     public void process(List<String> data) {
+        if (handlersMap == null) {
+            throw new RuntimeException("Can`t call method 'process' if handlersMap is null");
+        }
         data.remove(REPORT_HEAD_INDEX);
         String[] splitData;
         for (String dataRow : data) {
