@@ -14,6 +14,10 @@ public class FruitStorageServiceImpl implements FruitStorageService {
     private final Map<String, FruitOperationHandler> handlersMap;
 
     public FruitStorageServiceImpl(Map<String, FruitOperationHandler> handlersMap) {
+        if (handlersMap == null) {
+            throw new RuntimeException("Can`t create FruitStorageServiceImpl "
+                    + "with input map - null");
+        }
         this.handlersMap = handlersMap;
     }
 
