@@ -20,9 +20,9 @@ import java.util.Map;
 public class App {
 
     private static final String INPUT_DATA_PATH
-            = "/home/aos/IdeaProjects/jv-fruit-shop/src/main/java/resources/fileFrom.csv";
+            = "src/main/java/resources/fileFrom.csv";
     private static final String OUTPUT_DATA_PATH
-            = "/home/aos/IdeaProjects/jv-fruit-shop/src/main/java/resources/report.csv";
+            = "src/main/java/resources/report.csv";
     private static final String BALANCE = "b";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
@@ -34,6 +34,7 @@ public class App {
         commands.put(PURCHASE, new PurchaseOperation());
         commands.put(SUPPLY, new SupplyOperation());
         commands.put(RETURN, new ReturnOperation());
+
         OperationStrategyImpl strategy = new OperationStrategyImpl(commands);
 
         FileReaderServiceImpl fileReaderService = new FileReaderServiceImpl();
