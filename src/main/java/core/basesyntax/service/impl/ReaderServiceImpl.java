@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
-    private static final int INDEX_TITLE_LINE = 0;
 
     @Override
     public List<String> readFromFile(String fileName) {
@@ -17,7 +16,6 @@ public class ReaderServiceImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + fileName, e);
         }
-        lines.remove(INDEX_TITLE_LINE);
         return lines;
     }
 }

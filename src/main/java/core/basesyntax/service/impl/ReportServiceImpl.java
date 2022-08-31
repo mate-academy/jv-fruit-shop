@@ -8,7 +8,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReport() {
-        StringBuilder report = new StringBuilder("fruit, quantity");
+        StringBuilder report = new StringBuilder("fruit,quantity");
         Storage.storage.forEach((k, v) -> report.append(System.lineSeparator())
                 .append(k)
                 .append(SEPARATOR)

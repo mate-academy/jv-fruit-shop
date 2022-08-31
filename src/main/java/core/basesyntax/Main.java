@@ -3,12 +3,12 @@ package core.basesyntax;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.CreateFileService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.ParseService;
+import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.CreateFileServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.ParseServiceImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.BalanceOperationHandler;
@@ -37,7 +37,7 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         List<String> lines = readerService.readFromFile(INPUT_FILE_PATH);
 
-        ParseService parseService = new ParseServiceImpl();
+        ParserService parseService = new ParserServiceImpl();
         List<Transaction> transactions = parseService.parse(lines);
 
         for (Transaction transaction : transactions) {
