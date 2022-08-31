@@ -3,7 +3,6 @@ package storage;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +22,6 @@ public class FileWriterServiceImpl implements FileWriterService {
         } catch (Exception ex) {
             throw new RuntimeException(String.format("Can't write to file %s", file), ex);
         }
-        return  file;
+        return file;
     }
 }

@@ -31,7 +31,6 @@ public class FruitShopServiceImpl implements FruitShopService {
             }
         }
 
-
         return fruitShopRepoImpl.writeData(fruitsWithBalance);
     }
 

@@ -41,6 +41,6 @@ public class FruitShopRepoImpl implements FruitShopRepo {
                 .map(i -> i.getFruitName() + "," + i.getValue())
                 .collect(Collectors.toList());
 
-       return fileWriterServiceImpl.writeToFile(fruitDataToWrite);
+        return fileWriterServiceImpl.writeToFile(fruitDataToWrite);
     }
 }
