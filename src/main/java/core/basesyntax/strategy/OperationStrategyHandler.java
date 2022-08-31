@@ -2,18 +2,14 @@ package core.basesyntax.strategy;
 
 import java.util.Map;
 
-public class OperationStrategy {
+public class OperationStrategyHandler {
     private Map<String, OperationHandler> map;
 
-    public OperationStrategy(Map<String, OperationHandler> map) {
+    public OperationStrategyHandler(Map<String, OperationHandler> map) {
         this.map = map;
     }
 
     public OperationHandler getByOperation(String operation) {
         return map.get(operation);
-    }
-
-    public boolean contains(String operation) {
-        return map.containsKey(operation);
     }
 }

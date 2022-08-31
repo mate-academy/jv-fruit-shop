@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.storage.Storage;
+import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
@@ -13,10 +14,10 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder stringBuilder = new StringBuilder()
                 .append(HEADER)
                 .append(System.lineSeparator());
-        for (Fruit fruits : Storage.getStorage().keySet()) {
-            stringBuilder.append(fruits.toString().toLowerCase())
+        for (Map.Entry<Fruit, Integer> map : Storage.getStorage().entrySet()) {
+            stringBuilder.append(map.getKey().getName())
                     .append(REGEX)
-                    .append(Storage.getStorage().get(fruits))
+                    .append(map.getValue())
                     .append(System.lineSeparator());
         }
         return stringBuilder.toString();

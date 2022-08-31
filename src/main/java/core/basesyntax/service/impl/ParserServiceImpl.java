@@ -13,16 +13,16 @@ public class ParserServiceImpl implements ParserService {
     private static final int INDEX_QUANTITY = 2;
 
     @Override
-    public List<Transaction> parse(List<String> data) {
+    public List<Transaction> parse(List<String> lines) {
         List<Transaction> transactions = new ArrayList<>();
-        data.stream()
+        lines.stream()
                 .skip(1)
                 .map(d -> d.split(REGEX))
-                .forEach(fiel -> {
+                .forEach(data -> {
                     Transaction transaction = new Transaction();
-                    transaction.setOperation(fiel[INDEX_OPERATION]);
-                    transaction.setFruit(new Fruit(fiel[INDEX_FRUIT]));
-                    transaction.setQuantity(Integer.parseInt(fiel[INDEX_QUANTITY]));
+                    transaction.setOperation(data[INDEX_OPERATION]);
+                    transaction.setFruit(new Fruit(data[INDEX_FRUIT]));
+                    transaction.setQuantity(Integer.parseInt(data[INDEX_QUANTITY]));
                     transactions.add(transaction);
                 });
         return transactions;
