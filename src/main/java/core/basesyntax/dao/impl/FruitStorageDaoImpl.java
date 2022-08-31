@@ -6,9 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class FruitStorageDaoImpl implements FruitStorageDao {
-    // apdata
     @Override
-    public void addData(String fruit, int quantity) {
+    public void update(String fruit, int quantity) {
         if (FruitStorage.storage.containsKey(fruit)) {
             FruitStorage.storage.put(fruit, FruitStorage.storage.get(fruit) + quantity);
         } else {
@@ -17,7 +16,7 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
     }
 
     @Override
-    public Set<Map.Entry<String, Integer>> getData() {
+    public Set<Map.Entry<String, Integer>> getEntries() {
         return FruitStorage.storage.entrySet();
     }
 }
