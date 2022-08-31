@@ -2,13 +2,13 @@ package core.basesyntax;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParserService;
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.Writer;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ParserServiceImpl;
-import core.basesyntax.service.impl.ReaderImpl;
-import core.basesyntax.service.impl.ReportCreatorImpl;
-import core.basesyntax.service.impl.WriterImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -36,8 +36,8 @@ public class Main {
 
         OperationStrategy strategy = new OperationStrategy(map);
 
-        Reader reader = new ReaderImpl();
-        List<String> lines = reader.readFromFile(INPUT_DATA_PATH);
+        ReaderService readerService = new ReaderServiceImpl();
+        List<String> lines = readerService.readFromFile(INPUT_DATA_PATH);
 
         ParserService parserService = new ParserServiceImpl();
         List<Transaction> transactions = parserService.parse(lines);
@@ -46,8 +46,8 @@ public class Main {
             OperationHandler operationHandler = strategy.getByOperation(transaction.getOperation());
             operationHandler.apply(transaction);
         }
-        Writer writer = new WriterImpl();
-        ReportCreator reportCreator = new ReportCreatorImpl();
-        writer.writeToFile(OUTPUT_DATA_PATH, reportCreator.createReport());
+        WriterService writerService = new WriterServiceImpl();
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        writerService.writeToFile(OUTPUT_DATA_PATH, reportCreatorService.createReport());
     }
 }
