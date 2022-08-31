@@ -13,7 +13,7 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
         int fruitLeft = dataBase.get(fruit);
         if (fruitLeft < fruitNeed) {
             throw new RuntimeException("Not enought " + fruit
-                    + ". Remain: " + dataBase.get(fruit)
+                    + ". Remain: " + fruitLeft
                     + ". Need: " + fruitNeed + ".");
         }
         dataBase.put(fruit, fruitLeft - fruitNeed);
