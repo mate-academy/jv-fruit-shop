@@ -16,8 +16,8 @@ public enum Operation {
 
     public static Operation getOperation(String inputOperation) {
         return Arrays.stream(Operation.values())
-                .filter(s -> s.operation.equals(inputOperation))
-                .reduce((t1, t2) -> t1)
+                .filter(o -> o.operation.equals(inputOperation))
+                .findFirst()
                 .orElseThrow(() -> new RuntimeException("Can't find current enum"
                         + inputOperation));
     }
