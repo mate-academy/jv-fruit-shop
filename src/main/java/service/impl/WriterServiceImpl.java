@@ -1,9 +1,9 @@
-package homework.service.impl;
+package service.impl;
 
-import homework.service.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
     @Override

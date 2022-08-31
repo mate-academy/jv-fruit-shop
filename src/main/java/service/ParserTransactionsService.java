@@ -1,7 +1,7 @@
-package homework.service;
+package service;
 
-import homework.model.FruitTransaction;
 import java.util.List;
+import model.FruitTransaction;
 
 public interface ParserTransactionsService {
     List<FruitTransaction> parse(List<String> strings);

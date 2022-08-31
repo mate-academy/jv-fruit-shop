@@ -1,33 +1,31 @@
-package homework;
-
-import homework.service.ReaderService;
-import homework.service.WriterService;
-import homework.service.impl.ReaderServiceImpl;
-import homework.service.impl.WriterServiceImpl;
-import homework.model.FruitTransaction;
-import homework.service.ParserTransactionsService;
-import homework.service.ProcessDataService;
-import homework.service.ReportService;
-import homework.service.impl.ParserTransactionsServiceImpl;
-import homework.service.impl.ProcessDataServiceImpl;
-import homework.service.impl.ReportServiceImpl;
-import homework.storage.Storage;
-import homework.strategy.handler.BalanceOperationHandlerImpl;
-import homework.strategy.handler.OperationHandler;
-import homework.strategy.handler.PurchaseOperationHandlerImpl;
-import homework.strategy.handler.ReturnOperationHandlerImpl;
-import homework.strategy.handler.SupplyOperationHandlerImpl;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.FruitTransaction;
+import service.ParserTransactionsService;
+import service.ProcessDataService;
+import service.ReaderService;
+import service.ReportService;
+import service.WriterService;
+import service.impl.ParserTransactionsServiceImpl;
+import service.impl.ProcessDataServiceImpl;
+import service.impl.ReaderServiceImpl;
+import service.impl.ReportServiceImpl;
+import service.impl.WriterServiceImpl;
+import storage.Storage;
+import strategy.handler.BalanceOperationHandlerImpl;
+import strategy.handler.OperationHandler;
+import strategy.handler.PurchaseOperationHandlerImpl;
+import strategy.handler.ReturnOperationHandlerImpl;
+import strategy.handler.SupplyOperationHandlerImpl;
 
 public class Main {
     public static final String DAILY_OPERATIONS_FILE
-            = "src/main/java/homework/resourses/dailyoperations.csv";
+            = "src/main/java/resourses/dailyoperations.csv";
     public static final String DAILY_REPORT_FILE
-            = "src/main/java/homework/resourses/dailyreport.csv";
+            = "src/main/java/resourses/dailyreport.csv";
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();

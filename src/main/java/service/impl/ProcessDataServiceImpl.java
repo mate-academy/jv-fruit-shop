@@ -1,10 +1,10 @@
-package homework.service.impl;
+package service.impl;
 
-import homework.model.FruitTransaction;
-import homework.service.ProcessDataService;
-import homework.strategy.handler.OperationHandler;
 import java.util.List;
 import java.util.Map;
+import model.FruitTransaction;
+import service.ProcessDataService;
+import strategy.handler.OperationHandler;
 
 public class ProcessDataServiceImpl implements ProcessDataService {
     @Override

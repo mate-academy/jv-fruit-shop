@@ -1,8 +1,8 @@
-package homework.strategy.handler;
+package strategy.handler;
 
-import static homework.storage.Storage.dataBase;
+import static storage.Storage.dataBase;
 
-import homework.model.FruitTransaction;
+import model.FruitTransaction;
 
 public class BalanceOperationHandlerImpl implements OperationHandler {
     @Override

@@ -1,9 +1,9 @@
-package homework.service;
+package service;
 
-import homework.model.FruitTransaction;
-import homework.strategy.handler.OperationHandler;
 import java.util.List;
 import java.util.Map;
+import model.FruitTransaction;
+import strategy.handler.OperationHandler;
 
 public interface ProcessDataService {
     void processData(List<FruitTransaction> list,

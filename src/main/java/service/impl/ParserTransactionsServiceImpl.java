@@ -1,11 +1,11 @@
-package homework.service.impl;
+package service.impl;
 
-import homework.model.Fruit;
-import homework.model.FruitTransaction;
-import homework.service.ParserTransactionsService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import model.Fruit;
+import model.FruitTransaction;
+import service.ParserTransactionsService;
 
 public class ParserTransactionsServiceImpl implements ParserTransactionsService {
     public static final String SEPARATOR = ",";

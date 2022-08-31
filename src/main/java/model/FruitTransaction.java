@@ -1,4 +1,4 @@
-package homework.model;
+package model;
 
 public class FruitTransaction {
     private Operation operation;

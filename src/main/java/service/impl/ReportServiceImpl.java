@@ -1,8 +1,8 @@
-package homework.service.impl;
+package service.impl;
 
-import homework.model.Fruit;
-import homework.service.ReportService;
 import java.util.Map;
+import model.Fruit;
+import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     public static final String HEADER = "fruit,quantity";

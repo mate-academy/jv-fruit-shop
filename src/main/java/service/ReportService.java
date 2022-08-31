@@ -1,7 +1,7 @@
-package homework.service;
+package service;
 
-import homework.model.Fruit;
 import java.util.Map;
+import model.Fruit;
 
 public interface ReportService {
     public String report(Map<Fruit, Integer> dataBase);

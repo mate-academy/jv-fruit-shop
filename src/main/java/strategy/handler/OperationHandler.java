@@ -1,6 +1,6 @@
-package homework.strategy.handler;
+package strategy.handler;
 
-import homework.model.FruitTransaction;
+import model.FruitTransaction;
 
 public interface OperationHandler {
     void apply(FruitTransaction fruitTransaction);

@@ -1,9 +1,9 @@
-package homework.strategy.handler;
+package strategy.handler;
 
-import static homework.storage.Storage.dataBase;
+import static storage.Storage.dataBase;
 
-import homework.model.Fruit;
-import homework.model.FruitTransaction;
+import model.Fruit;
+import model.FruitTransaction;
 
 public class PurchaseOperationHandlerImpl implements OperationHandler {
     @Override

@@ -1,4 +1,4 @@
-package homework.service;
+package service;
 
 import java.nio.file.Path;
 import java.util.List;
