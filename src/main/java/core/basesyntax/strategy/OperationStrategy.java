@@ -4,6 +4,7 @@ import java.util.Map;
 
 public class OperationStrategy {
     private final Map<String, OperationHandler> map;
+
     public OperationStrategy(Map<String, OperationHandler> map) {
         this.map = map;
     }
