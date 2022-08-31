@@ -3,7 +3,7 @@ package homework.model;
 import java.util.Objects;
 
 public final class Fruit {
-    private String fruit;
+    private final String fruit;
 
     public Fruit(String fruit) {
         this.fruit = fruit;
