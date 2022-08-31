@@ -11,7 +11,7 @@ public class WriterServiceImpl implements WriterService {
         try {
             Files.writeString(path, string);
         } catch (IOException e) {
-            throw new RuntimeException("Can't writ to file: " + path, e);
+            throw new RuntimeException("Can't write to file: " + path, e);
         }
     }
 }
