@@ -1,11 +1,10 @@
-package core.basesyntax.dao.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.WriteDataToFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class WriteDataToFileImpl implements WriteDataToFile {
+public class FileWriter implements core.basesyntax.service.FileWriter {
     @Override
     public void writeDataToFile(String report, String path) {
         File file = new File(path);

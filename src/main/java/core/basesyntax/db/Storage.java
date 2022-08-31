@@ -1,9 +1,9 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.Transaction;
-import java.util.ArrayList;
-import java.util.List;
+import core.basesyntax.model.Fruit;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    public static final List<Transaction> transactions = new ArrayList<>();
+    public static final Map<Fruit,Integer> fruits = new HashMap<>();
 }
