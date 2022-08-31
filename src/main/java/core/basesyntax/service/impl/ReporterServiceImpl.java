@@ -2,20 +2,19 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReporterService;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 public class ReporterServiceImpl implements ReporterService {
-    private static final String HEADER_TITLE = "fruit, quantity";
-    private static final String SPLITTER = ",";
+    private static final String HEADER_TITLE = "fruit,quantity";
+    private static final String COMA = ",";
 
     @Override
-    public String createReport(Map<String, Integer> data) {
-        StringBuilder builder = new StringBuilder();
-        return builder.append(HEADER_TITLE)
-                .append(System.lineSeparator())
-                .append(data.entrySet().stream()
-                    .map(s -> s.getKey() + SPLITTER + s.getValue())
-                    .collect(Collectors.joining(System.lineSeparator())))
-                .toString();
+    public String createReport(Set<Map.Entry<String, Integer>> data) {
+        StringBuilder builder = new StringBuilder(HEADER_TITLE);
+        for (Map.Entry<String, Integer> fruit : data) {
+            builder.append(System.lineSeparator())
+                    .append(fruit.getKey() + COMA + fruit.getValue());
+        }
+        return builder.toString();
     }
 }

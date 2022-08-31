@@ -12,7 +12,7 @@ public class SupplyTransactionHandleImpl implements TransactionHandle {
     }
 
     @Override
-    public void executeOperation(FruitTransaction fruitTransaction) {
+    public void executeTransaction(FruitTransaction fruitTransaction) {
         storage.supply(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

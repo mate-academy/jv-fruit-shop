@@ -12,7 +12,7 @@ public class BalanceTransactionHandleImpl implements TransactionHandle {
     }
 
     @Override
-    public void executeOperation(FruitTransaction fruitTransaction) {
+    public void executeTransaction(FruitTransaction fruitTransaction) {
         storage.add(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

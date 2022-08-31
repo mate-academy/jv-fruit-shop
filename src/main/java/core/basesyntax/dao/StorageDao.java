@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import java.util.Map;
+import java.util.Set;
 
 public interface StorageDao {
     void add(String fruit, Integer amount);
@@ -9,5 +10,5 @@ public interface StorageDao {
 
     void remove(String fruit, Integer amount);
 
-    Map<String, Integer> getData();
+    Set<Map.Entry<String, Integer>> getEntries();
 }

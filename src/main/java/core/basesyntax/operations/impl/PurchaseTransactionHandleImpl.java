@@ -12,7 +12,7 @@ public class PurchaseTransactionHandleImpl implements TransactionHandle {
     }
 
     @Override
-    public void executeOperation(FruitTransaction fruitTransaction) {
+    public void executeTransaction(FruitTransaction fruitTransaction) {
         storage.remove(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

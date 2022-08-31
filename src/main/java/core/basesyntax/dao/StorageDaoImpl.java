@@ -2,6 +2,7 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import java.util.Map;
+import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
@@ -16,17 +17,18 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void remove(String fruit, Integer amount) {
-        if (Storage.storage.get(fruit) < amount) {
+        Integer currentAmount = Storage.storage.get(fruit);
+        if (currentAmount < amount) {
             throw new RuntimeException("Can't remove fruit from the db: fruit-> " + fruit
                     + " amount -> " + amount
-                    + ", because fruit amount in the db is -> " + Storage.storage.get(fruit));
+                    + ", because fruit amount in the db is -> " + currentAmount);
         }
         Storage.storage.put(fruit, Storage.storage.get(fruit) == null
-                ? amount : Storage.storage.get(fruit) - amount);
+                ? amount : currentAmount - amount);
     }
 
     @Override
-    public Map<String, Integer> getData() {
-        return Storage.storage;
+    public Set<Map.Entry<String, Integer>> getEntries() {
+        return Storage.storage.entrySet();
     }
 }

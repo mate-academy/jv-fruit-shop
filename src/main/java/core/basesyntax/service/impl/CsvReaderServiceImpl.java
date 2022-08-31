@@ -10,8 +10,7 @@ public class CsvReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> readFromFile(String fileName) {
         try {
-            List<String> data = Files.readAllLines(Path.of(fileName));
-            return data;
+            return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + fileName + " ", e);
         }
