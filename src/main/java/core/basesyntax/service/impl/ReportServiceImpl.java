@@ -10,7 +10,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String getReport() {
         StringBuilder stringBuilder = new StringBuilder(HEADER).append(System.lineSeparator());
-        Storage.getAll().stream().forEach(f -> stringBuilder
+        Storage.getAll().forEach(f -> stringBuilder
                         .append(f.getKey().getName())
                         .append(COMMA).append(f.getValue())
                         .append(System.lineSeparator()));
