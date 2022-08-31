@@ -12,7 +12,7 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromFile(String fileName) {
         List<String> lines = new ArrayList<>();
         try  {
-            Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8) ;
+            return Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8) ;
 
         } catch (IOException e) {
             throw new RuntimeException("file " + fileName + " could not be read", e);
