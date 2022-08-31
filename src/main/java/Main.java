@@ -25,14 +25,14 @@ public class Main {
     public static final String DAILY_OPERATIONS_FILE
             = "src/main/java/resourses/dailyoperations.csv";
     public static final String DAILY_REPORT_FILE
-            = "src/main/java/resours    es/dailyreport.csv";
+            = "src/main/java/resourses/dailyreport.csv";
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
         Path pathInput = Paths.get(DAILY_OPERATIONS_FILE);
         List<String> readData = readerService.read(pathInput);
-        ParserTransactionsService parseTransactions = new ParserTransactionsServiceImpl();
-        List<FruitTransaction> fruitTransactions = parseTransactions.parse(readData);
+        ParserTransactionsService parserTransactionsService = new ParserTransactionsServiceImpl();
+        List<FruitTransaction> fruitTransactions = parserTransactionsService.parse(readData);
         ProcessDataService processDataService = new ProcessDataServiceImpl();
         processDataService.processData(fruitTransactions, fillMap());
         ReportService reportService = new ReportServiceImpl();
