@@ -1,15 +1,15 @@
 package core.basesyntax;
 
-import core.basesyntax.db.StorageDao;
-import core.basesyntax.db.StorageDaoImpl;
-import core.basesyntax.service.CsvReader;
-import core.basesyntax.service.CsvWriter;
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.service.FruitStorageService;
+import core.basesyntax.service.Reader;
 import core.basesyntax.service.ReportHandler;
-import core.basesyntax.service.impl.CsvReaderImpl;
-import core.basesyntax.service.impl.CsvWriterImpl;
+import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.FruitStorageServiceImpl;
 import core.basesyntax.service.impl.FruitStoreReportHandler;
+import core.basesyntax.service.impl.ReaderImpl;
+import core.basesyntax.service.impl.WriterImpl;
 import core.basesyntax.strategy.FruitOperationHandler;
 import core.basesyntax.strategy.impl.FruitBalanceOperationHandler;
 import core.basesyntax.strategy.impl.FruitPurchaseOperationHandler;
@@ -32,14 +32,14 @@ public class Main {
         operationHandlers.put("p", new FruitPurchaseOperationHandler(storageDao));
         operationHandlers.put("r", new FruitReturnOperationHandler(storageDao));
 
-        CsvReader reader = new CsvReaderImpl();
-        CsvWriter writer = new CsvWriterImpl();
-        ReportHandler reportHandler = new FruitStoreReportHandler();
-        FruitStorageService fruitStorageService = new FruitStorageServiceImpl();
+        Reader reader = new ReaderImpl();
+        Writer writer = new WriterImpl();
+        ReportHandler reportHandler = new FruitStoreReportHandler(storageDao);
+        FruitStorageService fruitStorageService = new FruitStorageServiceImpl(operationHandlers);
 
         List<String> readData = reader.readFromFile(INPUT_PATH);
-        fruitStorageService.process(readData, operationHandlers);
-        String report = reportHandler.makeReport(storageDao);
+        fruitStorageService.process(readData);
+        String report = reportHandler.makeReport();
         writer.write(report, OUTPUT_PATH);
     }
 }

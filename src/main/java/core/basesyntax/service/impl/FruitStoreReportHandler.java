@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.StorageDao;
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.service.ReportHandler;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +9,15 @@ import java.util.stream.Collectors;
 
 public class FruitStoreReportHandler implements ReportHandler {
     private static final String REPORT_HEAD = "fruit,quantity";
+    private final StorageDao storageDao;
+
+    public FruitStoreReportHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
 
     @Override
-    public String makeReport(StorageDao storageDao) {
-        Map<String, Integer> fruits = storageDao.getStorage();
+    public String makeReport() {
+        Map<String, Integer> fruits = storageDao.getAll();
         List<String> report = new ArrayList<>();
         report.add(REPORT_HEAD);
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {

@@ -1,4 +1,4 @@
-package core.basesyntax.db;
+package core.basesyntax.dao;
 
 import java.util.Map;
 
@@ -9,5 +9,5 @@ public interface StorageDao {
 
     void remove(String fruit, int amount);
 
-    Map<String, Integer> getStorage();
+    Map<String, Integer> getAll();
 }

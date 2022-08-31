@@ -1,6 +1,6 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.db.StorageDao;
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.strategy.FruitOperationHandler;
 
 public class FruitSupplyOperationHandler implements FruitOperationHandler {
