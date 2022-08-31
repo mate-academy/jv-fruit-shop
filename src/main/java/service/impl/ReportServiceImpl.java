@@ -4,7 +4,7 @@ import db.Storage;
 import java.util.Map;
 import service.ReportService;
 
-public class ReportServiceImpl implements ReportService {
+public class CsvReportServiceImpl implements ReportService {
     private static final String REPORT_HEADER = "fruit,quantity";
     private static final String COMMA_CHARACTER = ",";
 
