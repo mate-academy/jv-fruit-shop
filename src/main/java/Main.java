@@ -14,7 +14,6 @@ import service.impl.ProcessDataServiceImpl;
 import service.impl.ReaderServiceImpl;
 import service.impl.ReportServiceImpl;
 import service.impl.WriterServiceImpl;
-import storage.Storage;
 import strategy.handler.BalanceOperationHandlerImpl;
 import strategy.handler.OperationHandler;
 import strategy.handler.PurchaseOperationHandlerImpl;
