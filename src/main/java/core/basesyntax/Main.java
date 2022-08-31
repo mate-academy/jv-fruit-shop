@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.ParseService;
-import core.basesyntax.service.ReadFromFile;
+import core.basesyntax.service.Reader;
 import core.basesyntax.service.impl.CreateReportServiceImpl;
 import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReadFromFileImpl;
@@ -32,7 +32,7 @@ public class Main {
 
         OperationStrategy strategy = new OperationStrategy(map);
 
-        ReadFromFile readFromFile = new ReadFromFileImpl();
+        Reader readFromFile = new ReadFromFileImpl();
         List<String> lines = readFromFile.readFromFile(INPUT_PATH);
 
         ParseService parseService = new ParseServiceImpl();

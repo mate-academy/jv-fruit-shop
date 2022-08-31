@@ -12,4 +12,3 @@ public class SupplyOperationImpl implements OperationHandler {
         Storage.storage.put(fruit, currentQuantity + transaction.getQuantity());
     }
 }
-
