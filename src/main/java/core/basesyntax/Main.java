@@ -11,13 +11,14 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE = "src/main/java/core/basesyntax/resources/input.csv";
-    private static final String REPORT_FILE = "src/main/java/core/basesyntax/resources/report.csv";
+    private static final String INPUT_FILE = "src/main/java/resources/input.csv";
+    private static final String REPORT_FILE = "src/main/java/resources/report.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> strategyMap = new HashMap<>();
@@ -25,11 +26,15 @@ public class Main {
         strategyMap.put("p", new PurchaseOperationHandler());
         strategyMap.put("r", new ReturnOperationHandler());
         strategyMap.put("s", new SupplyOperationHandler());
+
+        OperationStrategy operationStrategy = new OperationStrategy(strategyMap);
+
         List<Transaction> transactions = new ParserServiceImpl()
                 .parseToTransaction(new ReaderServiceImpl()
                         .readFromFile(INPUT_FILE));
         for (Transaction transaction : transactions) {
-            strategyMap.get(transaction.getActivities())
+            operationStrategy
+                    .getByOperation(transaction.getOperation())
                     .apply(transaction);
         }
         String report = new ReportServiceImpl().getReport();

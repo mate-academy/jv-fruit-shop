@@ -3,12 +3,12 @@ package core.basesyntax.model;
 public class Transaction {
     private Fruit fruit;
     private Integer amount;
-    private String activities;
+    private String operation;
 
-    public Transaction(String activities, Fruit fruit, Integer amount) {
+    public Transaction(String operation, Fruit fruit, Integer amount) {
         this.fruit = fruit;
         this.amount = amount;
-        this.activities = activities;
+        this.operation = operation;
     }
 
     public Fruit getFruit() {
@@ -27,11 +27,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public String getActivities() {
-        return activities;
+    public String getOperation() {
+        return operation;
     }
 
-    public void setActivities(String activities) {
-        this.activities = activities;
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
 }
