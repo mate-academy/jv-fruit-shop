@@ -12,8 +12,11 @@ import homework.service.impl.ParserTransactionsServiceImpl;
 import homework.service.impl.ProcessDataServiceImpl;
 import homework.service.impl.ReportServiceImpl;
 import homework.storage.Storage;
-import homework.strategy.handler.*;
-
+import homework.strategy.handler.BalanceOperationHandlerImpl;
+import homework.strategy.handler.OperationHandler;
+import homework.strategy.handler.PurchaseOperationHandlerImpl;
+import homework.strategy.handler.ReturnOperationHandlerImpl;
+import homework.strategy.handler.SupplyOperationHandlerImpl;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
