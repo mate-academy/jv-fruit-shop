@@ -5,8 +5,8 @@ import java.util.Map;
 public class OperationStrategy {
     private final Map<String, OperationHandler> handlerMap;
 
-    public OperationStrategy(Map<String, OperationHandler> operations) {
-        this.handlerMap = operations;
+    public OperationStrategy(Map<String, OperationHandler> handlerMap) {
+        this.handlerMap = handlerMap;
     }
 
     public OperationHandler getByOperation(String operation) {

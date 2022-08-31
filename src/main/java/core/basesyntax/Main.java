@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.CsvFileReaderServiceImpl;
-import core.basesyntax.impl.CsvFileWriterServiceImpl;
+import core.basesyntax.impl.FileReaderServiceImpl;
+import core.basesyntax.impl.FileWriterServiceImpl;
 import core.basesyntax.impl.ParserServiceImpl;
 import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.model.Transaction;
@@ -24,7 +24,7 @@ public class Main {
         Map<String, OperationHandler> map = new HashMap<>();
         initializeMap(map);
         OperationStrategy strategy = new OperationStrategy(map);
-        FileReaderService readerService = new CsvFileReaderServiceImpl();
+        FileReaderService readerService = new FileReaderServiceImpl();
         List<String> lines = readerService.readFromFile(INPUT_FILE_NAME);
         List<Transaction> transactions = new ParserServiceImpl().parse(lines);
         for (Transaction transaction : transactions) {
@@ -32,10 +32,10 @@ public class Main {
             handler.apply(transaction);
         }
         String report = new ReportServiceImpl().getReport();
-        new CsvFileWriterServiceImpl().writeToFile(OUTPUT_FILE_NAME, report);
+        new FileWriterServiceImpl().writeToFile(OUTPUT_FILE_NAME, report);
     }
 
-    public static void initializeMap(Map<String, OperationHandler> map) {
+    private static void initializeMap(Map<String, OperationHandler> map) {
         map.put("b", new BalanceOperationHandler());
         map.put("s", new SupplyOperationHandler());
         map.put("p", new PurchaseOperationHandler());
