@@ -34,7 +34,7 @@ public class Main {
             OperationHandler handler = operationStrategy.getByOperation(transaction.getOperation());
             handler.apply(transaction);
         }
-        String report = new ReportServiceImpl().create(Storage.storage);
+        String report = new ReportServiceImpl().create(Storage.storage.entrySet());
         new WriteServiceImpl().writeToFile(OUTPUT_FILE_NAME, report);
     }
 }

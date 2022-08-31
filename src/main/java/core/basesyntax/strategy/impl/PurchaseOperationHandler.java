@@ -10,6 +10,9 @@ public class PurchaseOperationHandler implements OperationHandler {
         Integer currentQuantity = Storage.storage.get(transaction.getFruit());
         if (currentQuantity >= transaction.getCount()) {
             Storage.storage.put(transaction.getFruit(), currentQuantity - transaction.getCount());
+        } else {
+            throw new RuntimeException("Unfortunately, we only have " + currentQuantity
+                    + Storage.storage.get(transaction.getFruit().getName()));
         }
     }
 }
