@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportService;
 import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String SEPARATOR = ",";
