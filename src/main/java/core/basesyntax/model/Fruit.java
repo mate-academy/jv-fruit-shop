@@ -19,9 +19,7 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{"
-                + "name='" + name + '\''
-                + '}';
+        return name;
     }
 
     @Override

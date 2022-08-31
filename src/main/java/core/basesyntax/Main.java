@@ -15,7 +15,6 @@ import core.basesyntax.strategy.handler.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.prefs.BackingStoreException;
 
 public class Main {
     private static final String INPUT_FILE_NAME = "src/main/resources/fruits_shop.csv";
@@ -25,7 +24,7 @@ public class Main {
     private static final String SUPPLY = "s";
     private static final String RETURN = "r";
 
-    public static void main(String[] args) throws BackingStoreException {
+    public static void main(String[] args) throws RuntimeException {
         Map<String, OperationHandler> map = new HashMap<>();
         map.put(BALANCE, new BalanceOperationHandler());
         map.put(PURCHASE, new PurchaseOperationHandler());
@@ -50,6 +49,5 @@ public class Main {
         String report = new ReportServiceImpl().getReport();
 
         new WriterServiceImpl().writeToFile(OUTPUT_FILE_NAME, report);
-
     }
 }
