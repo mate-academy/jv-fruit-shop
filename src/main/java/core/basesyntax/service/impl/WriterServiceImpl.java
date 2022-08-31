@@ -7,12 +7,12 @@ import java.io.IOException;
 
 public class WriterServiceImpl implements WriterService {
     @Override
-    public void writeToFile(String report, String outputFileName) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(
-                    new FileWriter(outputFileName, true))) {
+    public void writeToFile(String report, String reportFileName) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(
+                reportFileName, true))) {
             bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't writ to this file: " + outputFileName, e);
+            throw new RuntimeException("Can't writ to this file: " + reportFileName, e);
         }
     }
 }

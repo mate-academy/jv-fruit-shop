@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class Main {
     private static final String FILE_NAME_INPUT = "src/main/resources/dataInput.csv";
-    private static final String FILE_NAME_OUTPUT = "src/main/resources/dataOutput.csv";
+    private static final String FILE_NAME_REPORT = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> map = new HashMap<>();
@@ -40,8 +40,7 @@ public class Main {
         }
 
         String report = new ReportServiceImpl().getReport();
-        System.out.println(report);
 
-        new WriterServiceImpl().writeToFile(report, FILE_NAME_OUTPUT);
+        new WriterServiceImpl().writeToFile(report, FILE_NAME_REPORT);
     }
 }

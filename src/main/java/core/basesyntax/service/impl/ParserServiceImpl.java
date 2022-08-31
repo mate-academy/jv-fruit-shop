@@ -15,15 +15,13 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<Transaction> parse(List<String> lines) {
         List<Transaction> transactions = new ArrayList<>();
-        for (int i = 1; i < lines.size(); i++) {
-            String line = lines.get(i);
-            String[] fields = line.split(REGEX);
+        lines.stream().skip(1).map(line -> line.split(REGEX)).forEach(fields -> {
             Transaction transaction = new Transaction();
             transaction.setOperation(fields[OPERATION]);
             transaction.setFruit(new Fruit(fields[FRUIT]));
             transaction.setQuantity(Integer.parseInt(fields[QUANTITY]));
             transactions.add(transaction);
-        }
+        });
         return transactions;
     }
 }
