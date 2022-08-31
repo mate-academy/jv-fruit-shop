@@ -3,6 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.Transaction;
 import java.util.List;
 
-public interface InsertDataToBase {
-    void addTransferToStorage(List<Transaction> transactions);
+public interface TransactionParser {
+    List<Transaction> transactionParser(List<String> list);
 }
