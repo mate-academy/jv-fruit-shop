@@ -4,9 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import service.WriterService;
+import service.FileWriterService;
 
-public class WriterServiceImpl implements WriterService {
+public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeToFile(String report, String filePath) {
         File file = new File(filePath);

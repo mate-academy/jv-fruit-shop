@@ -15,15 +15,14 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     @Override
     public List<FruitTransaction> parseFruitTransactions(List<String> inputData) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        for (String inputString : inputData) {
-                String[] parameters = inputString.split(SPLITTER);
-                FruitTransaction fruitTransaction = new FruitTransaction();
-                fruitTransaction.setFruitName(parameters[FRUIT_NAME]);
-                fruitTransaction.setQuantity(Integer.parseInt(parameters[QUANITY]));
-                String operationType = parameters[OPERATION_TYPE];
-                fruitTransaction.setOperation(getOperation(String operation));
-                fruitTransactionList.add(fruitTransaction);
-            }
+        for (int i = 1; i < inputData.size(); i++) {
+            String[] parameters = inputData.get(i).split(SPLITTER);
+            FruitTransaction fruitTransaction = new FruitTransaction();
+            fruitTransaction.setFruitName(parameters[FRUIT_NAME_INDEX]);
+            fruitTransaction.setQuantity(Integer.parseInt(parameters[QUANITY_INDEX]));
+            Operation operation = Operation.getOperation(parameters[OPERATION_TYPE_INDEX]);
+            fruitTransaction.setOperation(operation);
+            fruitTransactionList.add(fruitTransaction);
         }
         return fruitTransactionList;
     }

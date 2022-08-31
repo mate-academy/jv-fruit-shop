@@ -1,18 +1,19 @@
 package core.basesyntax;
 
+import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import model.FruitTransaction.Operation;
+import service.FileWriterService;
 import service.FruitTransactionService;
 import service.ReaderService;
 import service.ReportService;
-import service.WriterService;
+import service.impl.CsvReportServiceImpl;
+import service.impl.FileWriterServiceImpl;
 import service.impl.FruitTransactionServiceImpl;
 import service.impl.ReaderServiceImpl;
-import service.impl.ReportServiceImpl;
-import service.impl.WriterServiceImpl;
 import strategy.OperationHandler;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
@@ -42,9 +43,9 @@ public class Main {
                     .getOperationHandler(fruitTransaction.getOperation());
             operationHandler.apply(fruitTransaction);
         }
-        ReportService reportService = new ReportServiceImpl();
-        String report = reportService.getReport();
-        WriterService writerService = new WriterServiceImpl();
+        ReportService reportService = new CsvReportServiceImpl();
+        String report = reportService.createReport(Storage.fruitsStorage);
+        FileWriterService writerService = new FileWriterServiceImpl();
         writerService.writeToFile(report, OUTPUT_FILE_PATH);
     }
 }

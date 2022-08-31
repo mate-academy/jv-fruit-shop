@@ -10,6 +10,9 @@ public class PurchaseHandlerImpl implements OperationHandler {
         String fruitName = fruitTransaction.getFruitName();
         Integer storageFruitQuanity = Storage.fruitsStorage.get(fruitName);
         int transactionQuantity = fruitTransaction.getQuantity();
+        if (storageFruitQuanity - transactionQuantity < 0) {
+            throw new RuntimeException("No enough :" + fruitName);
+        }
         Storage.fruitsStorage.replace(fruitName, storageFruitQuanity - transactionQuantity);
     }
 }

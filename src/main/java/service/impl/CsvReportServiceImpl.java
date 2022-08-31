@@ -9,7 +9,7 @@ public class CsvReportServiceImpl implements ReportService {
     private static final String COMMA_CHARACTER = ",";
 
     @Override
-    public String getReport() {
+    public String createReport(Map<String, Integer> data) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(REPORT_HEADER);
         for (Map.Entry<String, Integer> storage : Storage.fruitsStorage.entrySet()) {

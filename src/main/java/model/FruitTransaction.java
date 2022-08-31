@@ -41,8 +41,21 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
-        public String getOperation() {
-            return operation;
+        public static Operation getOperation(String operation) {
+            if (operation.equals(BALANCE.operation)) {
+                return BALANCE;
+            }
+            if (operation.equals(SUPPLY.operation)) {
+                return SUPPLY;
+            }
+            if (operation.equals(PURCHASE.operation)) {
+                return PURCHASE;
+            }
+            if (operation.equals(RETURN.operation)) {
+                return RETURN;
+            }
+            throw new RuntimeException("Invalid input " + operation);
         }
+
     }
 }
