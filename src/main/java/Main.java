@@ -22,9 +22,9 @@ import strategy.handler.SupplyOperationHandlerImpl;
 
 public class Main {
     public static final String DAILY_OPERATIONS_FILE
-            = "src/main/java/resources/dailyoperations.csv";
+            = "src/main/resources/dailyoperations.csv";
     public static final String DAILY_REPORT_FILE
-            = "src/main/java/resources/dailyreport.csv";
+            = "src/main/resources/dailyreport.csv";
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
