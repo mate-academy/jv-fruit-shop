@@ -11,7 +11,7 @@ public class OperationStrategy {
         this.operations = operations;
     }
 
-    public void operationStrategy(FruitTransaction transaction) {
+    public void process(FruitTransaction transaction) {
         OperationHandler operation = operations.get(transaction.getOperation());
         operation.apply(transaction);
     }

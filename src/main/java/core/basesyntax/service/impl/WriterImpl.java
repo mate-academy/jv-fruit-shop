@@ -11,7 +11,7 @@ public class WriterImpl implements Writer {
         try {
             Files.write(Path.of(reportFileName), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't create file: " + reportFileName);
+            throw new RuntimeException("Can't create file: " + reportFileName, e);
         }
     }
 }

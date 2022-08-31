@@ -30,7 +30,7 @@ public class Main {
 
         OperationStrategy strategy = new OperationStrategy(getOperations());
         for (FruitTransaction transaction : transactions) {
-            strategy.operationStrategy(transaction);
+            strategy.process(transaction);
         }
 
         String report = new ReportGeneratorImpl().makeReport();
