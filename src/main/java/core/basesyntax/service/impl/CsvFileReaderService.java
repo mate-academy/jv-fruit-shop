@@ -18,9 +18,9 @@ public class CsvFileReaderService implements FileReaderService {
                     .skip(1)
                     .collect(Collectors.toList());
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File " + file + " does not exist.", e);
+            throw new RuntimeException("File " + file.getName() + " does not exist.", e);
         } catch (IOException e) {
-            throw new RuntimeException("Stream already closed", e);
+            throw new RuntimeException("Could not read from file " + file.getName(), e);
         }
         return list;
     }
