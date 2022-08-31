@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FruitTransactionParserServiceImpl implements TransactionParserService {
-
     private static final String SEPARATOR = ",";
     private static final int OPERATION_ABBREVIATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;

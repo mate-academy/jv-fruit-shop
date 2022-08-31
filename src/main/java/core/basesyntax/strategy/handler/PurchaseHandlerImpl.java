@@ -18,5 +18,10 @@ public class PurchaseHandlerImpl implements TransactionHandler {
         if (storageDao.getAmount(fruit) > transaction.getAmount()) {
             storageDao.update(fruit, amount - transaction.getAmount());
         }
+        throw new RuntimeException("Cannot do purchase for " + transaction.getAmount()
+                        + ", amount: "
+                        + storageDao.getAmount(fruit) + " of "
+                        + fruit.getName()
+                        + " is not enough");
     }
 }

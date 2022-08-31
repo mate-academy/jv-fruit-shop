@@ -4,7 +4,6 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportCreatorService;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String CSV_FIRST_LINE = "fruit,quantity" + System.lineSeparator();
@@ -17,10 +16,14 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
     @Override
     public String createReport() {
         Set<Fruit> data = storageDao.getAll();
-        return CSV_FIRST_LINE
-                + data.stream().map(
-                        fruit -> fruit.getName()
-                                + "," + storageDao.getAmount(fruit))
-                .collect(Collectors.joining(System.lineSeparator()));
+        StringBuilder stringBuilder = new StringBuilder(CSV_FIRST_LINE);
+        for (Fruit fruit : data) {
+            stringBuilder
+                    .append(fruit.getName())
+                    .append(",")
+                    .append(storageDao.getAmount(fruit))
+                    .append(System.lineSeparator());
+        }
+        return stringBuilder.toString();
     }
 }
