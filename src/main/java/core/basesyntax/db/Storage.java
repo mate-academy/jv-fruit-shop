@@ -7,7 +7,7 @@ import java.util.Map;
 public class Storage {
     private static Map<Fruit, Integer> storage = new HashMap<>();
 
-    public static Map<Fruit, Integer> getStorage() {
+    public static Map<Fruit, Integer> getAll() {
         return storage;
     }
 }

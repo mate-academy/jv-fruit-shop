@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ParserServiceImpl implements ParserService {
+    private static final int a = 0;
+    private static final int b = 1;
+    private static final int c = 2;
+
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
         return lines.stream()

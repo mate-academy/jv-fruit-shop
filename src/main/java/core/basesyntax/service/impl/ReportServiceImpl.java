@@ -11,7 +11,7 @@ public class ReportServiceImpl implements ReportService {
     public String getReport() {
         return HEADER
                 + System.lineSeparator()
-                + Storage.getStorage().entrySet().stream()
+                + Storage.getAll().entrySet().stream()
                         .map(f -> f.getKey().getName() + "," + f.getValue())
                         .map((f) -> f + System.lineSeparator())
                         .collect(Collectors.joining());
