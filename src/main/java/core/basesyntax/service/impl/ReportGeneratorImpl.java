@@ -1,21 +1,20 @@
-package core.basesyntax.servise.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.servise.ReportGenerator;
+import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.storage.Storage;
 import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEAD_OF_REPORT = "fruit,quantity\n";
-    private static final String LINE_SEPARATOR = "\n";
     private static final String SEPARATOR = ",";
 
     @Override
     public String generateReport() {
         String report = Storage.storage.entrySet().stream()
-                .map(n -> new StringBuilder()
-                        .append(n.getKey().getFruit())
-                        .append(SEPARATOR).append(n.getValue().toString())
-                        .append(LINE_SEPARATOR).toString())
+                .map(mapValues -> new StringBuilder()
+                        .append(mapValues.getKey().getName())
+                        .append(SEPARATOR).append(mapValues.getValue().toString())
+                        .append(System.lineSeparator()).toString())
                 .collect(Collectors.joining());
         return new StringBuilder(HEAD_OF_REPORT).append(report).toString();
     }

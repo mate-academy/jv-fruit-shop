@@ -27,7 +27,7 @@ public class Transaction {
                     return operation;
                 }
             }
-            return null;
+            throw new RuntimeException("Unknown symbol op operation");
         }
 
     }
