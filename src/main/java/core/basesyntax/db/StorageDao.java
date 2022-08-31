@@ -9,5 +9,5 @@ public interface StorageDao {
 
     void remove(String fruit, int amount);
 
-    Map<String, Integer> getFruitsAmount();
+    Map<String, Integer> getStorage();
 }

@@ -4,17 +4,17 @@ import core.basesyntax.db.StorageDao;
 import core.basesyntax.db.StorageDaoImpl;
 import core.basesyntax.service.CsvReader;
 import core.basesyntax.service.CsvWriter;
-import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.FruitStorageService;
 import core.basesyntax.service.ReportHandler;
-import core.basesyntax.serviceimpl.CsvReaderImpl;
-import core.basesyntax.serviceimpl.CsvWriterImpl;
-import core.basesyntax.serviceimpl.FruitStoreReportHandler;
-import core.basesyntax.serviceimpl.FruitTransactionImpl;
-import core.basesyntax.strategy.FruitOperation;
-import core.basesyntax.strategy.impl.FruitBalanceOperation;
-import core.basesyntax.strategy.impl.FruitPurchaseOperation;
-import core.basesyntax.strategy.impl.FruitReturnOperation;
-import core.basesyntax.strategy.impl.FruitSupplyOperation;
+import core.basesyntax.service.impl.CsvReaderImpl;
+import core.basesyntax.service.impl.CsvWriterImpl;
+import core.basesyntax.service.impl.FruitStorageServiceImpl;
+import core.basesyntax.service.impl.FruitStoreReportHandler;
+import core.basesyntax.strategy.FruitOperationHandler;
+import core.basesyntax.strategy.impl.FruitBalanceOperationHandler;
+import core.basesyntax.strategy.impl.FruitPurchaseOperationHandler;
+import core.basesyntax.strategy.impl.FruitReturnOperationHandler;
+import core.basesyntax.strategy.impl.FruitSupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,20 +24,21 @@ public class Main {
     private static final String OUTPUT_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        Map<String, FruitOperation> operationsStrategies = new HashMap<>();
-        operationsStrategies.put("b", new FruitBalanceOperation());
-        operationsStrategies.put("s", new FruitSupplyOperation());
-        operationsStrategies.put("p", new FruitPurchaseOperation());
-        operationsStrategies.put("r", new FruitReturnOperation());
-
         StorageDao storageDao = new StorageDaoImpl();
+
+        Map<String, FruitOperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put("b", new FruitBalanceOperationHandler(storageDao));
+        operationHandlers.put("s", new FruitSupplyOperationHandler(storageDao));
+        operationHandlers.put("p", new FruitPurchaseOperationHandler(storageDao));
+        operationHandlers.put("r", new FruitReturnOperationHandler(storageDao));
+
         CsvReader reader = new CsvReaderImpl();
         CsvWriter writer = new CsvWriterImpl();
         ReportHandler reportHandler = new FruitStoreReportHandler();
-        FruitTransaction fruitStoreDao = new FruitTransactionImpl();
+        FruitStorageService fruitStorageService = new FruitStorageServiceImpl();
 
         List<String> readData = reader.readFromFile(INPUT_PATH);
-        fruitStoreDao.process(readData, operationsStrategies, storageDao);
+        fruitStorageService.process(readData, operationHandlers);
         String report = reportHandler.makeReport(storageDao);
         writer.write(report, OUTPUT_PATH);
     }

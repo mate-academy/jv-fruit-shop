@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.StorageDao;
 import core.basesyntax.service.ReportHandler;
@@ -12,7 +12,7 @@ public class FruitStoreReportHandler implements ReportHandler {
 
     @Override
     public String makeReport(StorageDao storageDao) {
-        Map<String, Integer> fruits = storageDao.getFruitsAmount();
+        Map<String, Integer> fruits = storageDao.getStorage();
         List<String> report = new ArrayList<>();
         report.add(REPORT_HEAD);
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {

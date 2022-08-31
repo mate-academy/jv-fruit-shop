@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.CsvWriter;
 import java.io.File;
