@@ -15,11 +15,9 @@ import storage.ParserServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        int indexOfHeadElement = 0;
         File fileInput = new File("src/main/resources/input.csv");
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> infoFromFile = fileReaderService.getInfoFromFile(fileInput);
-        infoFromFile.remove(indexOfHeadElement);
         ParserService parserService = new ParserServiceImpl(fileReaderService);
         List<FruitTransaction> parsedInfo = parserService.getFruitsFromFile(infoFromFile);
         FruitShopService fruitShopService = new FruitShopServiceImpl(parserService);
