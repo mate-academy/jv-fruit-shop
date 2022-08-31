@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class ReportWriterImpl implements ReportWriter {
     @Override
-    public File write(String report) {
+    public void write(String report) {
         File file = new File("src/main/resources/report.csv");
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
@@ -17,7 +17,5 @@ public class ReportWriterImpl implements ReportWriter {
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file", e);
         }
-
-        return file;
     }
 }

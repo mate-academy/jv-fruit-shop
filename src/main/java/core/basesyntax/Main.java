@@ -14,19 +14,16 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        File input = new File("C:\\Users\\Thousandfold\\IdeaProjects"
-                + "\\jv-fruit-shop\\src\\main\\resources\\input");
+        File input = new File( "src/main/resources/input");
         FileReader reader = new FileReaderImpl();
         DataOperationHandler operationHandler = new DataOperationHandlerImpl();
         reader.read(input);
         List<Transaction> list = operationHandler.handle();
-        System.out.println(OperationsList.list);
         for (Transaction transaction : list) {
             OperationStrategy.getOperation(transaction);
         }
-        File file = new ReportWriterImpl().write(new ReportGeneratorImpl()
+        new ReportWriterImpl().write(new ReportGeneratorImpl()
                 .generateReport());
-        System.out.println(file);
     }
 
 }
