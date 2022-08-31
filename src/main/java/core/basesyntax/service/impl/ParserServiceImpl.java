@@ -22,6 +22,8 @@ public class ParserServiceImpl implements ParserService {
     private FruitTransaction convertToFruitTransaction(String line) {
         String[] resultLine = line.split(",");
         return new FruitTransaction(
-                resultLine[OPERATION_INDEX], new Fruit(resultLine[FRUIT_INDEX]), Integer.parseInt(resultLine[QUANTITY_INDEX]));
+                resultLine[OPERATION_INDEX],
+                new Fruit(resultLine[FRUIT_INDEX]),
+                Integer.parseInt(resultLine[QUANTITY_INDEX]));
     }
 }
