@@ -11,8 +11,8 @@ public class PurchaseOperationHandler implements OperationHandler {
         Integer currentQuantity = Storage.storage.get(fruit);
         if (currentQuantity == null || currentQuantity < transaction.getQuantity()) {
             throw new RuntimeException("Product is out of stock");
-        } else {
-            Storage.storage.put(fruit, currentQuantity - transaction.getQuantity());
         }
+        Storage.storage.put(fruit, currentQuantity - transaction.getQuantity());
     }
 }
+
