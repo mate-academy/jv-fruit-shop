@@ -12,6 +12,10 @@ public class FruitStoreReportHandler implements ReportHandler {
     private final StorageDao storageDao;
 
     public FruitStoreReportHandler(StorageDao storageDao) {
+        if (storageDao == null) {
+            throw new RuntimeException("Can't create FruitStoreReportHandler "
+                    + "with input StorageDao - null");
+        }
         this.storageDao = storageDao;
     }
 
