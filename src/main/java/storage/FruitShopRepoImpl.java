@@ -26,7 +26,8 @@ public class FruitShopRepoImpl implements FruitShopRepo {
         for (String info : infoFromFile) {
             String[] elementOfParsedInfoFromFile = info.split(",");
             fruitDtoList.add(new FruitDto(
-                    OperationType.findOperationType(elementOfParsedInfoFromFile[OPERATION_TYPE_INDEX]),
+                    OperationType.findOperationType(
+                            elementOfParsedInfoFromFile[OPERATION_TYPE_INDEX]),
                     elementOfParsedInfoFromFile[FRUIT_NAME_INDEX],
                     Integer.parseInt(elementOfParsedInfoFromFile[FRUIT_COUNT_INDEX])));
         }

@@ -1,11 +1,11 @@
 package service;
 
+import static service.OperationType.BALANCE;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitDto;
 import storage.FruitShopRepo;
-
-import static service.OperationType.BALANCE;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private final FruitShopRepo fruitShopRepoImpl;

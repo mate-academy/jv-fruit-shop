@@ -18,10 +18,14 @@ public enum OperationType {
 
     public static OperationType findOperationType(String operationType) {
         switch (operationType) {
-            case "b": return BALANCE;
-            case "p": return PURCHASE;
-            case "r": return RETURN;
-            default: return SUPPLY;
+            case "b":
+                return BALANCE;
+            case "p":
+                return PURCHASE;
+            case "r":
+                return RETURN;
+            default:
+                return SUPPLY;
         }
     }
 }
