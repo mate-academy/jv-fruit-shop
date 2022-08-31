@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.storage.Storage;
-
 import java.util.Map;
 
 public class ReportCreatorService implements CreateReportService {
