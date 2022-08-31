@@ -6,13 +6,12 @@ import java.util.List;
 import service.FileWriterService;
 
 public class FileWriterServiceImpl implements FileWriterService {
-    private static final String PATH_TO_OUTPUT_FILE = "src/main/resources/output.csv";
 
     @Override
-    public File writeToFile(List<String> fruitDataToWrite) {
-        File output = new File(PATH_TO_OUTPUT_FILE);
+    public File writeToFile(String fruitDataToWrite,String fileToWrite) {
+        File output = new File(fileToWrite);
         try {
-            Files.write(output.toPath(), fruitDataToWrite);
+            Files.write(output.toPath(),List.of(fruitDataToWrite.split(" ")));
         } catch (Exception ex) {
             throw new RuntimeException(
                     String.format("Can't write to file %s", fruitDataToWrite), ex);

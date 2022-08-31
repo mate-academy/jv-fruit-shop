@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.io.File;
 import java.util.List;
 import model.FruitTransaction;
 import service.FileReaderService;
@@ -15,16 +14,17 @@ import storage.ParserServiceImpl;
 
 public class Main {
     public static void main(String[] args) {
-        File fileInput = new File("src/main/resources/input.csv");
+        String fileName = "src/main/resources/input.csv";
+        String fileNameToWrite = "src/main/resources/output.csv";
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> infoFromFile = fileReaderService.getInfoFromFile(fileInput);
+        List<String> infoFromFile = fileReaderService.getInfoFromFile(fileName);
         ParserService parserService = new ParserServiceImpl(fileReaderService);
         List<FruitTransaction> parsedInfo = parserService.getFruitsFromFile(infoFromFile);
         FruitShopService fruitShopService = new FruitShopServiceImpl(parserService);
         List<FruitTransaction> procesedFruit = fruitShopService.processingData(parsedInfo);
         ReportCreatorService reportCreatorService = new ReportCreatorService();
-        List<String> readyToWriteInFile = reportCreatorService.prepearingDataToWrite(procesedFruit);
+        String readyToWriteInFile = reportCreatorService.prepearingDataToWrite(procesedFruit);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(readyToWriteInFile);
+        fileWriterService.writeToFile(readyToWriteInFile, fileNameToWrite);
     }
 }

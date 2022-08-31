@@ -10,7 +10,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int FRUIT_COUNT_INDEX = 2;
-    private static final int INDEX_OF_HEAD_ELEMENT = 0;
+    private static final int INDEX_HEADER = 0;
     private final FileReaderService fileReaderServiceImpl;
 
     public ParserServiceImpl(FileReaderService fileReaderServiceImpl) {
@@ -20,7 +20,7 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<FruitTransaction> getFruitsFromFile(List<String> info) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        info.remove(INDEX_OF_HEAD_ELEMENT);
+        info.remove(INDEX_HEADER);
         for (String infoFromFile : info) {
             String[] elementOfParsedInfoFromFile = infoFromFile.split(",");
             fruitTransactionList.add(new FruitTransaction(
