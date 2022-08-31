@@ -5,36 +5,25 @@ import core.basesyntax.model.Fruit;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void put(Fruit fruit) {
-        if (Storage.FRUITS.containsKey(fruit.getFruitName())) {
-            Fruit data = Storage.FRUITS.get(fruit.getFruitName());
-            data.setQuantity(data.getQuantity() + fruit.getQuantity());
-            Storage.FRUITS.put(data.getFruitName(), data);
-        } else {
-            Storage.FRUITS.put(fruit.getFruitName(), fruit);
-        }
+    public void put(Fruit fruit, int quantity) {
+        Storage.fruits.put(fruit, quantity);
     }
 
     @Override
-    public void subtract(Fruit fruit) {
-        if (Storage.FRUITS.containsKey(fruit.getFruitName())) {
-            Fruit data = Storage.FRUITS.get(fruit.getFruitName());
-            data.setQuantity(data.getQuantity() - fruit.getQuantity());
-            if (data.getQuantity() < 0) {
-                throw new RuntimeException("Can't remove more then exists in storage.\nFruit: "
-                        + fruit.getFruitName()
-                        + " in storage: " + data.getQuantity() + ". Quantity for removal requested "
-                        + fruit.getQuantity());
-            }
-            Storage.FRUITS.put(data.getFruitName(), data);
-        } else {
-            throw new RuntimeException("Fruit does not exists");
-        }
+    public void addQuantity(Fruit fruit, int quantity) {
+        Storage.fruits.put(fruit, Storage.fruits.get(fruit) + quantity);
     }
 
     @Override
-    public Fruit get(String fruitName) {
-        return Storage.FRUITS.get(fruitName);
+    public void subtract(Fruit fruit, int quantity) {
+        if (quantity > Storage.fruits.get(fruit)) {
+            throw new RuntimeException("Not enough fruits in shop");
+        }
+        Storage.fruits.put(fruit, Storage.fruits.get(fruit) - quantity);
     }
 
+    @Override
+    public int get(Fruit fruit) {
+        return Storage.fruits.get(fruit);
+    }
 }

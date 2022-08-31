@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParserService;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class FruitTransactionParserServiceImpl implements FruitTransactionParser
             FruitTransaction.Operation operation = getOperation(splitData[OPERATION_TYPE_INDEX]);
             String fruitName = splitData[FRUIT_NAME_INDEX];
             int quantity = Integer.parseInt(splitData[QUANTITY_INDEX]);
-            parsedTransaction.add(new FruitTransaction(operation, fruitName, quantity));
+            parsedTransaction.add(new FruitTransaction(operation, new Fruit(fruitName), quantity));
         }
         return parsedTransaction;
     }

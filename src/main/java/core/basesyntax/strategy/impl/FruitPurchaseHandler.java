@@ -14,13 +14,7 @@ public class FruitPurchaseHandler implements OperationHandler {
 
     @Override
     public void proceed(FruitTransaction fruitTransaction) {
-        int incomeAmount = fruitTransaction.getQuantity();
-        int fruitsTotalBalance = fruitDao.get(fruitTransaction.getFruitName()).getQuantity();
-        if (fruitsTotalBalance - incomeAmount < 0) {
-            throw new RuntimeException("Not enough fruits in shop");
-        }
-
-        fruitDao.subtract(new Fruit(fruitTransaction.getFruitName(),
-                fruitTransaction.getQuantity()));
+        fruitDao.subtract(new Fruit(fruitTransaction.getFruit().getFruitName()),
+                fruitTransaction.getQuantity());
     }
 }

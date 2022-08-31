@@ -14,7 +14,7 @@ public class FruitSupplyHandler implements OperationHandler {
 
     @Override
     public void proceed(FruitTransaction fruitTransaction) {
-        fruitDao.put(new Fruit(fruitTransaction.getFruitName(),
-                fruitTransaction.getQuantity()));
+        fruitDao.addQuantity(new Fruit(fruitTransaction.getFruit().getFruitName()),
+                fruitTransaction.getQuantity());
     }
 }

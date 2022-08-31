@@ -1,16 +1,15 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class FruitTransaction {
     private Operation operation;
-    private String fruitName;
+    private Fruit fruit;
     private int quantity;
 
-    public FruitTransaction() {
-    }
-
-    public FruitTransaction(Operation operation, String fruitName, int quantity) {
+    public FruitTransaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;
-        this.fruitName = fruitName;
+        this.fruit = fruit;
         this.quantity = quantity;
     }
 
@@ -22,12 +21,12 @@ public class FruitTransaction {
         this.operation = operation;
     }
 
-    public String getFruitName() {
-        return fruitName;
+    public Fruit getFruit() {
+        return fruit;
     }
 
-    public void setFruitName(String fruitName) {
-        this.fruitName = fruitName;
+    public void setFruit(Fruit fruit) {
+        this.fruit = fruit;
     }
 
     public int getQuantity() {
@@ -36,14 +35,6 @@ public class FruitTransaction {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return "FruitTransaction{"
-                + "operation=" + operation
-                + ", fruit='" + fruitName + '\''
-                + ", quantity=" + quantity + '}';
     }
 
     public enum Operation {
@@ -61,5 +52,32 @@ public class FruitTransaction {
         public String getOperation() {
             return operation;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "FruitTransaction{" + "operation=" + operation
+                + ", fruit=" + fruit
+                + ", quantity=" + quantity + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof FruitTransaction)) {
+            return false;
+        }
+        FruitTransaction that = (FruitTransaction) o;
+        return getQuantity() == that.getQuantity()
+                && getOperation() == that.getOperation()
+                && Objects.equals(getFruit(), that.getFruit());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getOperation(),
+                getFruit(), getQuantity());
     }
 }

@@ -3,9 +3,11 @@ package core.basesyntax.dao;
 import core.basesyntax.model.Fruit;
 
 public interface FruitDao {
-    void put(Fruit fruitData);
+    void put(Fruit fruitData, int quantity);
 
-    void subtract(Fruit fruitData);
+    void addQuantity(Fruit fruit, int quantity);
 
-    Fruit get(String fruitName);
+    void subtract(Fruit fruitData, int quantity);
+
+    int get(Fruit fruitName);
 }
