@@ -2,6 +2,12 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitType;
 import core.basesyntax.model.Transaction;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
@@ -14,9 +20,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INTPUT_FILE_NAME = "input.csv";
+    private static final String OUTPUT_FILE_NAME = "output-report.csv";
+
     public static void main(String[] args) {
         Map<String, OperationHandler> map = new HashMap<>();
         map.put("b", new BalanceOperation());
@@ -26,29 +36,16 @@ public class Main {
 
         OperationStrategy strategy = new OperationStrategy(map);
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("input.csv"))) {
-            bufferedReader.readLine();
-            String line = "";
-            while ((line = bufferedReader.readLine()) != null) {
-                String[] data = line.split(",");
-                Transaction transaction = new Transaction(data);
-                if (strategy.contains(transaction.getOperation())) {
-                    strategy.getByOperation(transaction.getOperation()).apply(transaction);
-                }
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("File not found", e);
+        ReaderService readerService = new ReaderServiceImpl();
+        List<String> lines = readerService.readByFile(INTPUT_FILE_NAME);
+
+        List<Transaction> transactions = new ParserServiceImpl().parse(lines);
+
+        for (Transaction transaktion : transactions) {
+            OperationHandler operationHandler = strategy.getByOperation(transaktion.getOperation());
+            operationHandler.apply(transaktion);
         }
-        try (BufferedWriter bufferedWriter = new BufferedWriter(
-                new FileWriter("output-report.csv"))) {
-            bufferedWriter.write("fruit,quantity\n");
-            for (FruitType fruits : Storage.getStorage().keySet()) {
-                bufferedWriter.write(fruits.toString().toLowerCase()
-                        + "," + Storage.getStorage().get(fruits));
-                bufferedWriter.write("\n");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Can't write to file", e);
-        }
+        String report = new ReportServiceImpl().getReport();
+        new WriterServiceImpl().writeToFile(report, OUTPUT_FILE_NAME);
     }
 }
