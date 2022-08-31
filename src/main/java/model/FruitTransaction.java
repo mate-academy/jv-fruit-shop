@@ -2,15 +2,15 @@ package model;
 
 import service.OperationType;
 
-public class FruitDto {
+public class FruitTransaction {
     private OperationType typeOfOperation;
     private String fruitName;
     private int value;
 
-    public FruitDto() {
+    public FruitTransaction() {
     }
 
-    public FruitDto(OperationType typeOfOperation, String fruitName, int value) {
+    public FruitTransaction(OperationType typeOfOperation, String fruitName, int value) {
         this.typeOfOperation = typeOfOperation;
         this.fruitName = fruitName;
         this.value = value;

@@ -1,9 +1,10 @@
-package storage;
+package service.impl;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import service.FileReaderService;
 
 public class FileReaderServiceImpl implements FileReaderService {
     private static final int INDEX_OF_HEAD_ELEMENT = 0;
