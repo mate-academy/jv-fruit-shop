@@ -9,12 +9,10 @@ import java.util.List;
 public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> readFromFile(String fileName) {
-        List<String> fruitInfo;
         try {
-            fruitInfo = Files.readAllLines(Path.of(fileName));
+            return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't get data from file " + fileName, e);
         }
-        return fruitInfo;
     }
 }

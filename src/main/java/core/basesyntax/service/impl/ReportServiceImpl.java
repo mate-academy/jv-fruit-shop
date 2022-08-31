@@ -9,11 +9,10 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String makeReport() {
         StringBuilder builder = new StringBuilder();
-        builder.append("fruit,quantity" + System.lineSeparator());
+        builder.append("fruit,quantity").append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
-            String reportLine = entry.getKey().getName() + "," + entry.getValue()
-                    + System.lineSeparator();
-            builder.append(reportLine);
+            builder.append(entry.getKey().getName()).append(",")
+                    .append(entry.getValue()).append(System.lineSeparator());
         }
         return builder.toString();
     }
