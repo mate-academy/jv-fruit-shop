@@ -1,20 +1,20 @@
-package core;
+package core.basesyntax;
 
-import core.service.ProcessingService;
-import core.service.ReaderService;
-import core.service.ReportHandlingService;
-import core.service.WriterService;
-import core.service.impl.ProcessingServiceImpl;
-import core.service.impl.ReaderServiceImpl;
-import core.service.impl.ReportHandlingServiceImpl;
-import core.service.impl.WriterServiceImpl;
-import core.strategy.FruitStrategy;
-import core.strategy.FruitStrategyImpl;
-import core.strategy.OperationHandler;
-import core.strategy.impl.BalanceOperation;
-import core.strategy.impl.PurchaseOperation;
-import core.strategy.impl.ReturnOperation;
-import core.strategy.impl.SupplyOperation;
+import core.basesyntax.service.ProcessingService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.ProcessingServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.strategy.FruitStrategy;
+import core.basesyntax.strategy.FruitStrategyImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.impl.BalanceOperation;
+import core.basesyntax.strategy.impl.PurchaseOperation;
+import core.basesyntax.strategy.impl.ReturnOperation;
+import core.basesyntax.strategy.impl.SupplyOperation;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
@@ -31,15 +31,15 @@ public class Main {
 
         FruitStrategy fruitStrategy = new FruitStrategyImpl(strategyMap);
 
-        ProcessingService processingService = new ProcessingServiceImpl();
-        processingService.process(fruitStrategy,queries);
+        ProcessingService processingService =
+                new ProcessingServiceImpl(fruitStrategy, queries, strategyMap);
+        processingService.process();
 
-        ReportHandlingService report = new ReportHandlingServiceImpl();
+        ReportService report = new ReportServiceImpl();
         List<String> reportList = report.createReport();
 
         WriterService writerService = new WriterServiceImpl();
         writerService.writeTo(Path.of(REPORT_FILEPATH), reportList);
-
     }
 
     public static Map<String, OperationHandler> createHashMapOperations() {

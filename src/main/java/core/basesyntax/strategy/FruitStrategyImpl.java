@@ -1,16 +1,12 @@
-package core.strategy;
+package core.basesyntax.strategy;
 
 import java.util.Map;
 
 public class FruitStrategyImpl implements FruitStrategy {
-    private Map<String, OperationHandler> map;
+    private final Map<String, OperationHandler> map;
 
     public FruitStrategyImpl(Map<String, OperationHandler> map) {
         this.map = map;
-    }
-
-    public Map<String, OperationHandler> getMap() {
-        return map;
     }
 
     @Override

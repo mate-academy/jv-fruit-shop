@@ -1,20 +1,20 @@
-package core.model;
+package core.basesyntax.model;
 
 import java.util.Objects;
 
 public class Fruit {
-    private String fruit;
+    private String name;
 
     public Fruit(String fruit) {
-        this.fruit = fruit;
+        this.name = fruit;
     }
 
-    public String getFruit() {
-        return fruit;
+    public String getName() {
+        return name;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -26,16 +26,16 @@ public class Fruit {
             return false;
         }
         Fruit fruit1 = (Fruit) o;
-        return Objects.equals(fruit, fruit1.fruit);
+        return Objects.equals(name, fruit1.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fruit);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
-        return fruit;
+        return name;
     }
 }
