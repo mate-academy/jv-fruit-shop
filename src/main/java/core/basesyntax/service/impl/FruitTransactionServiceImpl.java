@@ -4,6 +4,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.strategy.AmountService;
 import core.basesyntax.strategy.AmountStrategy;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
     private static final int TYPE_OF_TRANSACTION = 0;
@@ -16,10 +18,14 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     }
 
     @Override
-    public FruitTransaction createTransaction(String[] transactionData) {
-        return new FruitTransaction(transactionData[TYPE_OF_TRANSACTION],
-                transactionData[TYPE_OF_FRUIT], getAmount(transactionData[TYPE_OF_TRANSACTION],
-                transactionData[AMOUNT]));
+    public List<FruitTransaction> createTransactions(List<String[]> data) {
+        List<FruitTransaction> transactions = new ArrayList<>();
+        for (String[] onePieceOfData : data) {
+            transactions.add(new FruitTransaction(onePieceOfData[TYPE_OF_TRANSACTION],
+                    onePieceOfData[TYPE_OF_FRUIT], getAmount(onePieceOfData[TYPE_OF_TRANSACTION],
+                    onePieceOfData[AMOUNT])));
+        }
+        return transactions;
     }
 
     private int getAmount(String type, String amount) {

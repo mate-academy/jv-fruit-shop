@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.util.List;
+
 public interface ParsingService {
-    String[] parseTransactionLine(String line);
+    List<String[]> parseData(List<String> data);
 }
