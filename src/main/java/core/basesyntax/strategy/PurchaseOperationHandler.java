@@ -10,8 +10,8 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(Transaction transaction) {
         Fruit fruit = transaction.getFruit();
-        Integer currentQuantity = Optional.of(Storage.get(fruit))
-                .orElseThrow(NoSuchElementException::new);
-        Storage.put(fruit, currentQuantity - transaction.getQuantity());
+        Integer currentQuantity = Storage.get(fruit);
+        Storage.put(fruit, Optional.of(currentQuantity - transaction.getQuantity())
+                .orElseThrow(NoSuchElementException::new));
     }
 }
