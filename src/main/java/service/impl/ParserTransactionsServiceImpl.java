@@ -24,7 +24,7 @@ public class ParserTransactionsServiceImpl implements ParserTransactionsService 
                     .filter(v -> v.getOperation().equals(operationString))
                     .findFirst()
                     .orElseThrow(() ->
-                            new RuntimeException("Nof find operation " + operationString));
+                            new RuntimeException("Operation not found:" + operationString));
             String title = transaction[NAME_INDEX];
             int quantity = Integer.parseInt(transaction[AMOUNT_INDEX]);
             transactions.add(new FruitTransaction(operation, new Fruit(title), quantity));
