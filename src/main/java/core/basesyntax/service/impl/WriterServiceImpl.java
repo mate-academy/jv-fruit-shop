@@ -1,17 +1,16 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.WriterService;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 
 public class WriterServiceImpl implements WriterService {
 
     @Override
-    public void writeTo(Path path, List<String> list) {
-        try {
-            Files.write(path, list);
+    public void writeTo(String path, String report) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
+            bufferedWriter.write(report);
         } catch (IOException e) {
             throw new RuntimeException("Can't write information to the file.", e);
         }

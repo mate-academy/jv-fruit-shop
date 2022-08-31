@@ -11,6 +11,6 @@ public class FruitStrategyImpl implements FruitStrategy {
 
     @Override
     public OperationHandler getByOperation(String operation) {
-        return map.get(operation);
+        return map.getOrDefault(operation, null);
     }
 }

@@ -15,7 +15,6 @@ import core.basesyntax.strategy.impl.BalanceOperation;
 import core.basesyntax.strategy.impl.PurchaseOperation;
 import core.basesyntax.strategy.impl.ReturnOperation;
 import core.basesyntax.strategy.impl.SupplyOperation;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,15 +30,14 @@ public class Main {
 
         FruitStrategy fruitStrategy = new FruitStrategyImpl(strategyMap);
 
-        ProcessingService processingService =
-                new ProcessingServiceImpl(fruitStrategy, queries, strategyMap);
+        ProcessingService processingService = new ProcessingServiceImpl(fruitStrategy, queries);
         processingService.process();
 
-        ReportService report = new ReportServiceImpl();
-        List<String> reportList = report.createReport();
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.createReport();
 
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeTo(Path.of(REPORT_FILEPATH), reportList);
+        writerService.writeTo(REPORT_FILEPATH, report);
     }
 
     public static Map<String, OperationHandler> createHashMapOperations() {
