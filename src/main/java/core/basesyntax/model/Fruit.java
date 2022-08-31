@@ -3,20 +3,19 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Fruit {
-    private final String fruitName;
+    private final String name;
 
-    public Fruit(String fruit) {
-        this.fruitName = fruit;
+    public Fruit(String name) {
+        this.name = name;
     }
 
-    public String getFruitName() {
-        return fruitName;
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return "Fruit{"
-                + "fruitName='" + fruitName + '}';
+        return name;
     }
 
     @Override
@@ -28,11 +27,11 @@ public class Fruit {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return Objects.equals(getFruitName(), fruit.getFruitName());
+        return Objects.equals(getName(), fruit.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFruitName());
+        return Objects.hash(getName());
     }
 }

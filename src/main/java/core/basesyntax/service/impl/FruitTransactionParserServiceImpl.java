@@ -15,16 +15,16 @@ public class FruitTransactionParserServiceImpl implements FruitTransactionParser
 
     @Override
     public List<FruitTransaction> parse(List<String> list) {
-        List<FruitTransaction> parsedTransaction = new ArrayList<>();
+        List<FruitTransaction> parsedTransactions = new ArrayList<>();
 
         for (int i = 1; i < list.size(); i++) {
             String[] splitData = list.get(i).split(SPLITTER);
             FruitTransaction.Operation operation = getOperation(splitData[OPERATION_TYPE_INDEX]);
             String fruitName = splitData[FRUIT_NAME_INDEX];
             int quantity = Integer.parseInt(splitData[QUANTITY_INDEX]);
-            parsedTransaction.add(new FruitTransaction(operation, new Fruit(fruitName), quantity));
+            parsedTransactions.add(new FruitTransaction(operation, new Fruit(fruitName), quantity));
         }
-        return parsedTransaction;
+        return parsedTransactions;
     }
 
     private FruitTransaction.Operation getOperation(String operationLetter) {

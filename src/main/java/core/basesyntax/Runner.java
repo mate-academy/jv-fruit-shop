@@ -3,14 +3,14 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CsvFileReaderService;
-import core.basesyntax.service.CsvFileWriterService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitTransactionParserService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionParserServiceImpl;
-import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.FruitBalanceHandler;
 import core.basesyntax.strategy.impl.FruitPurchaseHandler;
@@ -36,7 +36,7 @@ public class Runner {
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new FruitSupplyHandler(fruitDao));
 
-        CsvFileReaderService readerService = new FileReaderServiceImpl();
+        FileReaderService readerService = new FileReaderServiceImpl();
         List<String> data = readerService.readData(INPUT_FILE);
         System.out.println("List of data: " + data);
 
@@ -49,7 +49,7 @@ public class Runner {
 
         String report = fruitService.createReport();
 
-        CsvFileWriterService csvWriterService = new WriterServiceImpl();
+        FileWriterService csvWriterService = new FileWriterServiceImpl();
         csvWriterService.writeToFile(report, REPORT_FILE);
     }
 }

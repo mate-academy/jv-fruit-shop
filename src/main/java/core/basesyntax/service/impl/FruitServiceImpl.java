@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
@@ -10,9 +11,11 @@ import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
     private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private final FruitDao fruitDao;
 
     public FruitServiceImpl(Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
+        fruitDao = new FruitDaoImpl();
     }
 
     @Override
@@ -26,7 +29,7 @@ public class FruitServiceImpl implements FruitService {
     public String createReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruits,quantity");
-        for (Map.Entry<Fruit, Integer> fruit : Storage.fruits.entrySet()) {
+        for (Map.Entry<Fruit, Integer> fruit : fruitDao.getAll().entrySet()) {
             stringBuilder.append(System.lineSeparator())
                     .append(fruit.getKey())
                     .append(",")
