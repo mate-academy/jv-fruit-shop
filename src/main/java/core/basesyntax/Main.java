@@ -38,11 +38,11 @@ public class Main {
         operationStrategies.put("p", new PurchaseStrategy());
         operationStrategies.put("r", new ReturnStrategy());
 
-        ParserService parserService = new ParserServiceImpl();
-        List<Transaction> transactions = parserService.parse(strings, operationStrategies);
+        ParserService parserService = new ParserServiceImpl(operationStrategies);
+        List<Transaction> transactions = parserService.parse(strings);
 
         DataProcessingService dataProcessingService = new DataProcessingServiceImpl();
-        dataProcessingService.processTheData(transactions);
+        dataProcessingService.processData(transactions);
 
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
         List<String> outputStrings = reportGeneratorService.generate();

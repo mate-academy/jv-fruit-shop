@@ -12,16 +12,22 @@ public class ParserServiceImpl implements ParserService {
     private static final int OPERATION_INDEX = 0;
     private static final int NAME_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
+    private final Map<String, Strategy> strategies;
+
+    public ParserServiceImpl(Map<String, Strategy> strategies) {
+        this.strategies = strategies;
+    }
 
     @Override
-    public List<Transaction> parse(List<String> strings, Map<String, Strategy> strategies) {
+    public List<Transaction> parse(List<String> strings) {
         List<Transaction> transactions = new ArrayList<>();
         for (String string : strings) {
+            String[] stringParts = string.split(DIVIDER);
             transactions.add(
                     new Transaction(
-                            strategies.get(string.split(DIVIDER)[OPERATION_INDEX]),
-                            string.split(DIVIDER)[NAME_INDEX],
-                            Integer.parseInt(string.split(DIVIDER)[AMOUNT_INDEX]))
+                            strategies.get(stringParts[OPERATION_INDEX]),
+                            stringParts[NAME_INDEX],
+                            Integer.parseInt(stringParts[AMOUNT_INDEX]))
             );
         }
         return transactions;

@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface ParserService {
-    List<Transaction> parse(List<String> list, Map<String, Strategy> operationStrategies);
+    List<Transaction> parse(List<String> list);
 }
