@@ -21,8 +21,8 @@ public final class Fruit {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Fruit fruit1 = (Fruit) o;
-        return Objects.equals(title, fruit1.title);
+        Fruit fruit = (Fruit) o;
+        return Objects.equals(title, fruit.title);
     }
 
     @Override
