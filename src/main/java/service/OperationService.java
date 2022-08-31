@@ -6,4 +6,3 @@ import strategy.OperationHandler;
 public interface OperationService {
     OperationHandler getHandler(Operation operation);
 }
-
