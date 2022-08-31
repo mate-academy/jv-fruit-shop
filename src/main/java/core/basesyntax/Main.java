@@ -8,7 +8,9 @@ import core.basesyntax.dao.impl.ReadDataFromFileImpl;
 import core.basesyntax.dao.impl.WriteDataToFileImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.GetStorageStatistic;
+import core.basesyntax.service.ReportGeneration;
 import core.basesyntax.service.impl.GetStorageStatisticImpl;
+import core.basesyntax.service.impl.ReportGenerationImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.OperationHandlerImplBalance;
 import core.basesyntax.strategy.impl.OperationHandlerImplPurchase;
@@ -44,8 +46,12 @@ public class Main {
         Map<String,Integer> resultOfStatistic =
                 getStorageStatistic.getStorageStatistic(Storage.transactions);
 
+        /* Generate report */
+        ReportGeneration reportGeneration = new ReportGenerationImpl();
+        String report = reportGeneration.generateReport(resultOfStatistic);
+
         /* Write result to csv file */
         WriteDataToFile writeDataToFile = new WriteDataToFileImpl();
-        writeDataToFile.writeDataToFile(resultOfStatistic, writeTo);
+        writeDataToFile.writeDataToFile(report, writeTo);
     }
 }
