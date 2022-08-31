@@ -4,5 +4,5 @@ import core.basesyntax.model.TypeActivity;
 import core.basesyntax.service.strategy.handlers.ActivityHandler;
 
 public interface TypeActivityStrategy {
-    ActivityHandler strategy(TypeActivity typeActivity);
+    ActivityHandler getHandlerByTypeActivity(TypeActivity typeActivity);
 }

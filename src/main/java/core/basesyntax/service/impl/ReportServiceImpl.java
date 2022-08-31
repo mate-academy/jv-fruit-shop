@@ -17,7 +17,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String makeReport() {
         return CSV_HEAD_REPORT + CSV_END_LINE
-            + activityDaoDb.getAll().entrySet().stream()
+            + activityDaoDb.getAll().stream()
                     .map(e -> e.getKey().getName() + CSV_SEPARATOR + e.getValue())
                     .collect(Collectors.joining(CSV_END_LINE));
     }

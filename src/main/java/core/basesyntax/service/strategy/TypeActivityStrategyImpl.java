@@ -12,7 +12,7 @@ public class TypeActivityStrategyImpl implements TypeActivityStrategy {
     }
 
     @Override
-    public ActivityHandler strategy(TypeActivity typeActivity) {
+    public ActivityHandler getHandlerByTypeActivity(TypeActivity typeActivity) {
         return typeActivityToOperation.getMap().get(typeActivity);
     }
 }

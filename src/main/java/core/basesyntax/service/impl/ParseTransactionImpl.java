@@ -18,7 +18,6 @@ public class ParseTransactionImpl implements ParseTransaction {
     @Override
     public List<FruitTransaction> processing(List<String> list) {
         return list.stream()
-                .filter(Objects::nonNull)
                 .map(this::parseFruitTransaction)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

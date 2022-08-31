@@ -2,20 +2,21 @@ package core.basesyntax;
 
 import core.basesyntax.dao.ActivityDaoDb;
 import core.basesyntax.dao.ActivityDaoDbImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ContentReader;
 import core.basesyntax.service.ContentWriter;
 import core.basesyntax.service.ParseTransaction;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.impl.ContentReaderImpl;
 import core.basesyntax.service.impl.ContentWriterImpl;
 import core.basesyntax.service.impl.ParseTransactionImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.service.strategy.TypeActivityStrategy;
 import core.basesyntax.service.strategy.TypeActivityStrategyImpl;
+import core.basesyntax.service.strategy.handlers.ActivityHandler;
 import core.basesyntax.service.strategy.maps.TypeActivityToOperation;
 import java.io.File;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -31,10 +32,12 @@ public class Main {
         String resourcesPath = "src" + File.separator + "main" + File.separator
                 + "resources" + File.separator;
 
-        TransactionService transactionService = new TransactionServiceImpl(contentReader,
-                    contentWriter, parseTransaction, reportService, typeActivityStrategy);
-
-        transactionService.moveDataFromFileToDb(resourcesPath + "data2508202.csv");
-        transactionService.createReport(resourcesPath + "report.csv");
+        List<String> list = contentReader.read(resourcesPath + "data2508202.csv");
+        for (FruitTransaction fruitTransaction : parseTransaction.processing(list)) {
+            ActivityHandler handler = typeActivityStrategy
+                    .getHandlerByTypeActivity(fruitTransaction.getType());
+            handler.calculate(fruitTransaction);
+        }
+        contentWriter.write(reportService.makeReport(), resourcesPath + "report.csv");
     }
 }
