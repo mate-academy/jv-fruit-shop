@@ -4,6 +4,7 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
@@ -19,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_DATA_PATH = "src/main/java/resource/data.csv";
-    private static final String OUTPUT_DATA_PATH = "src/main/java/resource/report.csv";
+    private static final String INPUT_DATA_PATH = "src/main/resources/data.csv";
+    private static final String OUTPUT_DATA_PATH = "src/main/resources/report.csv";
     private static final String BALANCE = "b";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
@@ -45,8 +46,8 @@ public class Main {
             OperationHandler operationHandler = strategy.getByOperation(transaction.getOperation());
             operationHandler.apply(transaction);
         }
-        WriterImpl writeToFile = new WriterImpl();
+        Writer writer = new WriterImpl();
         ReportCreator reportCreator = new ReportCreatorImpl();
-        writeToFile.writeToFile(OUTPUT_DATA_PATH, reportCreator.createReport());
+        writer.writeToFile(OUTPUT_DATA_PATH, reportCreator.createReport());
     }
 }
