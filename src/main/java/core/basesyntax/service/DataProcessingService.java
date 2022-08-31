@@ -4,5 +4,5 @@ import core.basesyntax.model.Transaction;
 import java.util.List;
 
 public interface DataProcessingService {
-    void processTheData(List<Transaction> activities);
+    void processData(List<Transaction> activities);
 }

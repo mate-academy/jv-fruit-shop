@@ -6,9 +6,9 @@ import java.util.List;
 
 public class DataProcessingServiceImpl implements DataProcessingService {
     @Override
-    public void processTheData(List<Transaction> transactions) {
+    public void processData(List<Transaction> transactions) {
         for (Transaction transaction : transactions) {
-            transaction.getStrategy().makeOperation(transaction.getFruit(), transaction.getValue());
+            transaction.getStrategy().makeOperation(transaction);
         }
     }
 }
