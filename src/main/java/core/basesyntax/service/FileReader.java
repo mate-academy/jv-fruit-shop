@@ -6,5 +6,5 @@ import java.nio.file.Files;
 import java.util.List;
 
 public interface FileReader {
-    public List<String> readToFile(String pathToFile);
+    public List<String> readFromFile(String pathToFile);
 }

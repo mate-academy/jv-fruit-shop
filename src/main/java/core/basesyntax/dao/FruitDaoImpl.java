@@ -11,7 +11,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Fruit getAmountOfFruits(String name) {
+    public Fruit getFruit(String name) {
         return Storage.fruits.stream()
                 .filter(f -> f.getName().equals(name))
                 .findFirst().get();

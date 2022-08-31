@@ -1,11 +1,22 @@
 package core.basesyntax.model;
 
-public class FruitTransaction extends Fruit {
-    private Operation operation;
+import java.util.Arrays;
 
-    private FruitTransaction(String name, int amount, Operation operation) {
-        super(name, amount);
+public class FruitTransaction {
+    private Operation operation;
+    private Fruit fruit;
+
+    private FruitTransaction(Operation operation, Fruit fruit) {
         this.operation = operation;
+        this.fruit = fruit;
+    }
+
+    public Fruit getFruit() {
+        return fruit;
+    }
+
+    public void setFruit(Fruit fruit) {
+        this.fruit = fruit;
     }
 
     public Operation getOperation() {
@@ -16,11 +27,30 @@ public class FruitTransaction extends Fruit {
         this.operation = operation;
     }
 
-    public static FruitTransaction of(String name, int amount, Operation operation) {
-        return new FruitTransaction(name, amount, operation);
+    public static FruitTransaction of(Operation operation, Fruit fruit) {
+        return new FruitTransaction(operation, fruit);
+    }
+
+    public static Operation getOperationByLetter(String firstLetter) {
+        return Arrays.stream(Operation.values())
+                .filter(o -> o.getLetter().equals(firstLetter))
+                .findFirst().get();
     }
 
     public enum Operation {
-        b, s, p, r;
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private final String letter;
+
+        Operation(String letter) {
+            this.letter = letter;
+        }
+
+        public String getLetter() {
+            return letter;
+        }
     }
 }

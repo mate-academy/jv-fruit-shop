@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 
@@ -12,8 +13,8 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     @Override
     public FruitTransaction createNewFruitTransaction(String FruitTransactionString) {
         String[] fields = FruitTransactionString.split(SEPARATOR);
-        return FruitTransaction.of(fields[FRUIT_NAME_INDEX],
-                Integer.parseInt(fields[OPERATION_INDEX]),
-                FruitTransaction.Operation.valueOf((fields[FRUIT_AMOUNT_INDEX])));
+        FruitTransaction.Operation operation = FruitTransaction.getOperationByLetter(fields[OPERATION_INDEX]);
+        return FruitTransaction.of(operation,
+                Fruit.of(fields[FRUIT_NAME_INDEX], Integer.parseInt(fields[FRUIT_AMOUNT_INDEX])));
     }
 }

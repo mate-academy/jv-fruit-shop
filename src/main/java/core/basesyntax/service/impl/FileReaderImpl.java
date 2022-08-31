@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FileReaderImpl implements FileReader {
     @Override
-    public List<String> readToFile(String pathToFile) {
+    public List<String> readFromFile(String pathToFile) {
         try {
             return Files.readAllLines(Path.of(pathToFile));
         } catch (IOException e) {

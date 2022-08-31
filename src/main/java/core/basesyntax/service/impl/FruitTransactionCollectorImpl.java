@@ -14,7 +14,8 @@ public class FruitTransactionCollectorImpl implements FruitTransactionCollector 
     public List<FruitTransaction> collectFruitTransactions(List<String> lines) {
         return lines.stream()
                 .skip(1)
-                .map(transactionService::createNewFruitTransaction)
+                .map(fruitTransactionString
+                        -> transactionService.createNewFruitTransaction(fruitTransactionString))
                 .collect(Collectors.toList());
     }
 }

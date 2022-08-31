@@ -2,11 +2,11 @@ package core.basesyntax.model;
 
 import java.util.Objects;
 
-public abstract class Fruit {
+public class Fruit {
     private String name;
     private int amount;
 
-    public Fruit(String name, int amount) {
+    private Fruit(String name, int amount) {
         this.name = name;
         this.amount = amount;
     }
@@ -25,6 +25,10 @@ public abstract class Fruit {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public static Fruit of(String name, int amount) {
+        return new Fruit(name, amount);
     }
 
     @Override
