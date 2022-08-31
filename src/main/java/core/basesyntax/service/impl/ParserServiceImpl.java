@@ -11,11 +11,11 @@ public class ParserServiceImpl implements ParserService {
     public List<FruitTransaction> parse(List<String> lines) {
         return lines.stream()
             .skip(1)
-            .map(l -> splitLine(l))
+            .map(l -> convertToFruitTransaction(l))
             .collect(Collectors.toList());
     }
 
-    private FruitTransaction splitLine(String line) {
+    private FruitTransaction convertToFruitTransaction(String line) {
         String[] resultLine = line.split(",");
         return new FruitTransaction(
                 resultLine[0], new Fruit(resultLine[1]), Integer.parseInt(resultLine[2]));
