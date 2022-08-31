@@ -1,6 +1,6 @@
 package homework.strategy;
 
-import homework.service.impl.FruitTransaction.Operation;
+import homework.model.FruitTransaction.Operation;
 import homework.strategy.handler.OperationHandler;
 
 public interface OperationStrategy {

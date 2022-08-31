@@ -1,13 +1,15 @@
 package homework.strategy;
 
-import homework.service.impl.FruitTransaction;
+import homework.model.FruitTransaction;
 import homework.strategy.handler.OperationHandler;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    public static final Map<FruitTransaction.Operation, OperationHandler> operationsMap
-            = new HashMap<>();
+    private Map<FruitTransaction.Operation, OperationHandler> operationsMap;
+
+    public OperationStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> operationsMap) {
+        this.operationsMap = operationsMap;
+    }
 
     @Override
     public OperationHandler get(FruitTransaction.Operation type) {

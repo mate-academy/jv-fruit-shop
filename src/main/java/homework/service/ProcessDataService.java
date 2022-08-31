@@ -1,6 +1,6 @@
 package homework.service;
 
-import homework.service.impl.FruitTransaction;
+import homework.model.FruitTransaction;
 import homework.strategy.handler.OperationHandler;
 import java.util.List;
 import java.util.Map;

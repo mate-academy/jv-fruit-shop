@@ -1,6 +1,6 @@
 package homework.service;
 
-import homework.service.impl.FruitTransaction;
+import homework.model.FruitTransaction;
 import java.util.List;
 
 public interface ParseTransactionsService {

@@ -1,8 +1,7 @@
 package homework.strategy.handler;
 
-import homework.service.impl.FruitTransaction;
+import homework.model.FruitTransaction;
 
 public interface OperationHandler {
     void apply(FruitTransaction fruitTransaction);
-
 }

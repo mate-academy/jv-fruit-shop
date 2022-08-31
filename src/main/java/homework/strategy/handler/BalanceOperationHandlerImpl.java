@@ -2,7 +2,7 @@ package homework.strategy.handler;
 
 import static homework.storage.Storage.dataBase;
 
-import homework.service.impl.FruitTransaction;
+import homework.model.FruitTransaction;
 
 public class BalanceOperationHandlerImpl implements OperationHandler {
     @Override

@@ -1,5 +1,6 @@
 package homework.service.impl;
 
+import homework.model.FruitTransaction;
 import homework.service.ProcessDataService;
 import homework.strategy.handler.OperationHandler;
 import java.util.List;
