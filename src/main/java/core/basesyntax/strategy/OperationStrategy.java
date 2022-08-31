@@ -1,7 +1,15 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.Transaction;
+import java.util.Map;
 
-public interface OperationStrategy {
-    void apply(Transaction transaction);
+public class OperationStrategy {
+    private final Map<String, OperationHandler> handlers;
+
+    public OperationStrategy(Map<String, OperationHandler> handlers) {
+        this.handlers = handlers;
+    }
+
+    public OperationHandler getByOperation(String operation) {
+        return handlers.get(operation);
+    }
 }

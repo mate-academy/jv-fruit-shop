@@ -6,15 +6,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class FileWriterServiceImpl implements FileWriterService {
-
     @Override
     public void write(String report, String filePath) {
         File file = new File(filePath);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file in " + filePath, e);
-        }
         try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {

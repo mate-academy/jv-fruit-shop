@@ -3,13 +3,13 @@ package core.basesyntax.strategy.operations;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationHandler;
 
-public class ReturnOperation implements OperationStrategy {
+public class ReturnOperation implements OperationHandler {
     @Override
     public void apply(Transaction transaction) {
         Fruit fruit = transaction.getFruit();
-        Integer count = Storage.storageDate.get(fruit);
-        Storage.storageDate.put(fruit, count + transaction.getQuantity());
+        Integer count = Storage.storage.get(fruit);
+        Storage.storage.put(fruit, count + transaction.getQuantity());
     }
 }
