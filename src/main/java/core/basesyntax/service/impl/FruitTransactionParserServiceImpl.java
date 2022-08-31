@@ -30,18 +30,7 @@ public class FruitTransactionParserServiceImpl implements FruitTransactionParser
         return Arrays.stream(FruitTransaction.Operation.values())
                 .filter(o -> o.getOperation().equals(operationLetter))
                 .findFirst().orElseThrow(() ->
-                        new RuntimeException("Don't have this kind of operation " + operationLetter));
-//        switch (operationLetter) {
-//            case "b":
-//                return FruitTransaction.Operation.BALANCE;
-//            case "r":
-//                return FruitTransaction.Operation.RETURN;
-//            case "p":
-//                return FruitTransaction.Operation.PURCHASE;
-//            case "s":
-//                return FruitTransaction.Operation.SUPPLY;
-//            default:
-//                throw new RuntimeException("Can't find letter " + operationLetter + " in file");
-//        }
+                        new RuntimeException("Don't have this kind of operation "
+                                + operationLetter));
     }
 }
