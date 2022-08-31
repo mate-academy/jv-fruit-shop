@@ -16,11 +16,8 @@ public class ParserTransactionsServiceImpl implements ParserTransactionsService 
     @Override
     public List<FruitTransaction> parse(List<String> strings) {
         List<FruitTransaction> transactions = new ArrayList<>();
-        String[] transaction;
-        String title;
-        int quantity;
         for (int i = 1; i < strings.size(); i++) {
-            transaction = strings.get(i).split(SEPARATOR);
+            String[] transaction = strings.get(i).split(SEPARATOR);
             String operationString = transaction[OPERATION_INDEX];
             FruitTransaction.Operation operation
                     = Arrays.stream(FruitTransaction.Operation.values())
@@ -28,8 +25,8 @@ public class ParserTransactionsServiceImpl implements ParserTransactionsService 
                     .findFirst()
                     .orElseThrow(() ->
                             new RuntimeException("Nof find operation " + operationString));
-            title = transaction[NAME_INDEX];
-            quantity = Integer.parseInt(transaction[AMOUNT_INDEX]);
+            String title = transaction[NAME_INDEX];
+            int quantity = Integer.parseInt(transaction[AMOUNT_INDEX]);
             transactions.add(new FruitTransaction(operation, new Fruit(title), quantity));
         }
         return transactions;

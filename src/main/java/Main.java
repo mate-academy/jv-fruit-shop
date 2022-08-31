@@ -30,18 +30,18 @@ public class Main {
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
         Path pathInput = Paths.get(DAILY_OPERATIONS_FILE);
-        List<String> fruitTransactionsString = readerService.read(pathInput);
+        List<String> readData = readerService.read(pathInput);
         ParserTransactionsService parseTransactions = new ParserTransactionsServiceImpl();
-        List<FruitTransaction> fruitTransactions = parseTransactions.parse(fruitTransactionsString);
+        List<FruitTransaction> fruitTransactions = parseTransactions.parse(readData);
         ProcessDataService processDataService = new ProcessDataServiceImpl();
-        processDataService.processData(fruitTransactions, newOperationsMap());
+        processDataService.processData(fruitTransactions, fillMap());
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
         Path pathOutput = Paths.get(DAILY_REPORT_FILE);
         writerService.write(pathOutput, reportService.report(Storage.dataBase));
     }
 
-    private static Map<FruitTransaction.Operation, OperationHandler> newOperationsMap() {
+    private static Map<FruitTransaction.Operation, OperationHandler> fillMap() {
         Map<FruitTransaction.Operation, OperationHandler> operations = new HashMap<>();
         operations.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandlerImpl());
         operations.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandlerImpl());

@@ -29,13 +29,4 @@ public final class Fruit {
     public int hashCode() {
         return Objects.hash(title);
     }
-
-    @Override
-    protected Object clone() {
-        try {
-            return super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Can't clone fruit: " + title, e);
-        }
-    }
 }
