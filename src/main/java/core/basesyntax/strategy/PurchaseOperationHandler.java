@@ -11,6 +11,8 @@ public class PurchaseOperationHandler implements OperationHandler {
         Integer currentQuantity = Storage.getStorage().get(fruit);
         if (currentQuantity >= fruitTransaction.getQuantity()) {
             Storage.getStorage().put(fruit, currentQuantity - fruitTransaction.getQuantity());
+        } else {
+            throw new RuntimeException("Currently unavailable");
         }
     }
 }
