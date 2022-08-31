@@ -1,11 +1,11 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.FileReaderServiceImpl;
-import core.basesyntax.impl.FileWriterServiceImpl;
-import core.basesyntax.impl.ParserServiceImpl;
-import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
