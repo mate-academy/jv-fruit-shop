@@ -5,7 +5,6 @@ import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategy {
-
     private Map<Transaction.Operation, OperationHandler> map;
 
     public OperationStrategy(Map<Transaction.Operation, OperationHandler> map) {
