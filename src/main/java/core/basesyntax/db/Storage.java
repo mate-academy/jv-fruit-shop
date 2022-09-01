@@ -18,5 +18,4 @@ public class Storage {
     public static Map<Fruit, Integer> getData() {
         return storage;
     }
-
 }
