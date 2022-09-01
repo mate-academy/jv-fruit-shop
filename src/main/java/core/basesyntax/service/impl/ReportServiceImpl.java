@@ -10,10 +10,10 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReport() {
-        String report = Storage.getData().entrySet().stream()
-                .map(totalFruits -> totalFruits.getKey().getName() + COMMA + totalFruits.getValue()
-                        + System.lineSeparator())
-                .collect(Collectors.joining());
+        StringBuilder report = new StringBuilder();
+        Storage.getData().entrySet().stream()
+                .forEach(totalFruits -> report.append(totalFruits.getKey().getName() + COMMA + totalFruits.getValue()
+                        + System.lineSeparator()));
         return HEADERS + System.lineSeparator() + report;
     }
 }
