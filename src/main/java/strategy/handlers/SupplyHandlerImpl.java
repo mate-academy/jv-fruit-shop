@@ -6,11 +6,11 @@ import strategy.OperationHandler;
 
 public class SupplyHandlerImpl implements OperationHandler {
     @Override
-    public void apply(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruitName();
-        int storageFruitQuanity = Storage.fruitsStorage.get(fruitName);
-        int transactionQuantity = fruitTransaction.getQuantity();
-        Storage.fruitsStorage.replace(fruitName, storageFruitQuanity == null ? 0 : storageFruitQuantity 
-                           + transactionQuantity);
+        Integer storageFruitQuantity = Storage.fruitsStorage.get(fruitName);
+        Integer transactionQuantity = fruitTransaction.getQuantity();
+        Storage.fruitsStorage.replace(fruitName,
+                storageFruitQuantity == null ? 0 : storageFruitQuantity + transactionQuantity);
     }
 }

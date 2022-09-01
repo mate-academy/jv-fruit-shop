@@ -41,7 +41,7 @@ public class Main {
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
             OperationHandler operationHandler = operationStrategy
                     .getOperationHandler(fruitTransaction.getOperation());
-            operationHandler.apply(fruitTransaction);
+            operationHandler.handle(fruitTransaction);
         }
         ReportService reportService = new CsvReportServiceImpl();
         String report = reportService.createReport(Storage.fruitsStorage);
