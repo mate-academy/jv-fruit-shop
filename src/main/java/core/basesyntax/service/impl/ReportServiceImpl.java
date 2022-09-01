@@ -9,11 +9,9 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReport() {
-        StringBuilder report = new StringBuilder();
+        StringBuilder report = new StringBuilder(HEADERS).append(System.lineSeparator());
         Storage.getData().entrySet().stream()
-                .forEach(totalFruits -> report.append(totalFruits.getKey().getName()
-                        + COMMA + totalFruits.getValue()
-                        + System.lineSeparator()));
-        return HEADERS + System.lineSeparator() + report;
+                .forEach(totalFruits -> report.append(new StringBuilder(totalFruits.getKey().getName()).append(COMMA).append(totalFruits.getValue()).append(System.lineSeparator()));
+        return report.toString();
     }
 }
