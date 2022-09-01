@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Transaction;
+import core.basesyntax.dto.Transaction;
 import core.basesyntax.service.DataProcessingService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;

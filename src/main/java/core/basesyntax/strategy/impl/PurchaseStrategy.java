@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Transaction;
+import core.basesyntax.dto.Transaction;
 import core.basesyntax.strategy.Strategy;
 
 public class PurchaseStrategy implements Strategy {

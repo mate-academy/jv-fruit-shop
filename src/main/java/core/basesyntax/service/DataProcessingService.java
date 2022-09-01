@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Transaction;
+import core.basesyntax.dto.Transaction;
 import java.util.List;
 
 public interface DataProcessingService {

@@ -1,4 +1,4 @@
-package core.basesyntax.model;
+package core.basesyntax.dto;
 
 import core.basesyntax.strategy.Strategy;
 

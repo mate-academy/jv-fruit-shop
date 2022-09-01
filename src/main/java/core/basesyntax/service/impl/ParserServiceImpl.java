@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Transaction;
+import core.basesyntax.dto.Transaction;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.strategy.Strategy;
 import java.util.ArrayList;
