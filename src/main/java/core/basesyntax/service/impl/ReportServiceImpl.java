@@ -11,7 +11,9 @@ public class ReportServiceImpl implements ReportService {
     public String getReport() {
         StringBuilder report = new StringBuilder(HEADERS).append(System.lineSeparator());
         Storage.getData().entrySet().stream()
-                .forEach(totalFruits -> report.append(new StringBuilder(totalFruits.getKey().getName()).append(COMMA).append(totalFruits.getValue()).append(System.lineSeparator())));
+                .forEach(totalFruits -> report.append(new StringBuilder(totalFruits.getKey()
+                        .getName()).append(COMMA).append(totalFruits.getValue())
+                        .append(System.lineSeparator())));
         return report.toString();
     }
 }
