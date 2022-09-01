@@ -13,6 +13,6 @@ public class PurchaseHandlerImpl implements OperationHandler {
         if (storageFruitQuanity - transactionQuantity < 0) {
             throw new RuntimeException("No enough :" + fruitName);
         }
-        Storage.fruitsStorage.replace(fruitName, storageFruitQuanity - transactionQuantity);
+        Storage.fruitsStorage.put(fruitName, storageFruitQuanity - transactionQuantity);
     }
 }
