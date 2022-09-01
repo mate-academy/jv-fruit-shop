@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
-import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADERS = "fruit,quantity";
@@ -12,7 +11,8 @@ public class ReportServiceImpl implements ReportService {
     public String getReport() {
         StringBuilder report = new StringBuilder();
         Storage.getData().entrySet().stream()
-                .forEach(totalFruits -> report.append(totalFruits.getKey().getName() + COMMA + totalFruits.getValue()
+                .forEach(totalFruits -> report.append(totalFruits.getKey().getName()
+                        + COMMA + totalFruits.getValue()
                         + System.lineSeparator()));
         return HEADERS + System.lineSeparator() + report;
     }
