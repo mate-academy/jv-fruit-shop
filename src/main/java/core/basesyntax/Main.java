@@ -2,18 +2,18 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.impl.CsvFileReaderServiceImpl;
-import core.basesyntax.impl.CsvFileWriterServiceImpl;
-import core.basesyntax.impl.ParseServiceImpl;
-import core.basesyntax.impl.ReportServiceImpl;
+import core.basesyntax.impl.CsvReportServiceImpl;
+import core.basesyntax.impl.FileReaderServiceImpl;
+import core.basesyntax.impl.FileWriterServiceImpl;
+import core.basesyntax.impl.TransactionCsvParseServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceOperationHandler;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperationHandler;
 import core.basesyntax.operation.ReturnOperationHandler;
 import core.basesyntax.operation.SupplyOperationHandler;
-import core.basesyntax.service.CsvFileReaderService;
-import core.basesyntax.service.CsvFileWriterService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.strategy.OperationStrategy;
@@ -40,21 +40,21 @@ public class Main {
                 new ReturnOperationHandler(fruitDao));
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        ParseService<FruitTransaction> parseService = new ParseServiceImpl();
-        CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
+        ParseService<FruitTransaction> parseService = new TransactionCsvParseServiceImpl();
+        FileReaderService readerService = new FileReaderServiceImpl();
         List<String> lines = readerService.readFromFile(INPUT_FILE_PATH);
         for (String raw : lines.subList(DATA_START_INDEX, lines.size())) {
             FruitTransaction fruitTransaction = parseService.parse(raw);
             OperationHandler operationHandler =
                     operationStrategy.get(fruitTransaction.getOperation());
-            operationHandler.apply(fruitTransaction);
+            operationHandler.handle(fruitTransaction);
         }
 
         Map<String, Integer> fruitStorage = fruitDao.getAll();
-        ReportService reportService = new ReportServiceImpl();
+        ReportService reportService = new CsvReportServiceImpl();
         String finalReport = reportService.createReport(fruitStorage);
 
-        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
+        FileWriterService writerService = new FileWriterServiceImpl();
         writerService.writeToFile(OUTPUT_FILE_PATH, finalReport);
     }
 }

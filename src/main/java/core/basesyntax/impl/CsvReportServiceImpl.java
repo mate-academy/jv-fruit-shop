@@ -3,7 +3,7 @@ package core.basesyntax.impl;
 import core.basesyntax.service.ReportService;
 import java.util.Map;
 
-public class ReportServiceImpl implements ReportService {
+public class CsvReportServiceImpl implements ReportService {
     private static final String REPORT_TITLE = "fruit,quantity";
     private static final String DELIMITER = ",";
 
