@@ -10,10 +10,8 @@ import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromFile(String fileName) {
-        List<String> lines = new ArrayList<>();
         try {
-            return Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
-
+            return Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
             throw new RuntimeException("file " + fileName + " could not be read", e);
         }
