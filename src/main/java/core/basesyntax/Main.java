@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "src/main/java/resources/database.csv";
-    private static final String OUTPUT_FILE_NAME = "src/main/java/resources/report.csv";
+    private static final String INPUT_FILE_NAME = "src/main/resources/database.csv";
+    private static final String OUTPUT_FILE_NAME = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<Transaction.Operation, OperationHandler> handlerMap = new HashMap<>();

@@ -4,6 +4,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ParserServiceImpl implements ParserService {
@@ -19,19 +20,14 @@ public class ParserServiceImpl implements ParserService {
             Transaction transaction = new Transaction();
             transaction.setFruit(new Fruit(column[FRUIT_COLUMN]));
             transaction.setSum(Integer.parseInt(column[QUANTITY_COLUMN]));
-            String operation = column[OPERATION_COLUMN];
-            if (operation.equals(Transaction.Operation.BALANCE.getOperation())) {
-                transaction.setOperation(Transaction.Operation.BALANCE);
-            }
-            if (operation.equals(Transaction.Operation.RETURN.getOperation())) {
-                transaction.setOperation(Transaction.Operation.RETURN);
-            }
-            if (operation.equals(Transaction.Operation.PURCHASE.getOperation())) {
-                transaction.setOperation(Transaction.Operation.PURCHASE);
-            }
-            if (operation.equals(Transaction.Operation.SUPPLY.getOperation())) {
-                transaction.setOperation(Transaction.Operation.SUPPLY);
-            }
+            String operationValue = column[OPERATION_COLUMN];
+
+            Transaction.Operation operation;
+            operation = Arrays.stream(Transaction.Operation.values())
+                    .filter(o -> o.getOperation().equals(operationValue))
+                    .findFirst()
+                    .get();
+            transaction.setOperation(operation);
             transactions.add(transaction);
         }
         return transactions;

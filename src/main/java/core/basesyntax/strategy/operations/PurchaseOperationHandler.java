@@ -9,7 +9,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void apply(Transaction transaction) {
         Fruit fruit = transaction.getFruit();
         if (!Storage.storage.containsKey(fruit)) {
-            Storage.storage.put(fruit, (-transaction.getSum()));
+            throw new RuntimeException(fruit + " is out of stock");
         } else {
             Integer currentQuantity = Storage.storage.get(fruit) - transaction.getSum();
             Storage.storage.put(fruit, currentQuantity);
