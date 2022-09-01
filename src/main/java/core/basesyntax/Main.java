@@ -13,9 +13,9 @@ import java.util.List;
 
 public class Main {
     private static final String INPUT_FILE_NAME
-            = "src/main/java/core/basesyntax/resources/input.csv";
+            = "src/main/resources/input.csv";
     private static final String OUTPUT_FILE_NAME
-            = "src/main/java/core/basesyntax/resources/report.csv";
+            = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         FileReaderService fileReaderService = new FileReaderServiceImpl();

@@ -16,19 +16,16 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<Transaction> parse(String data) {
         List<Transaction> list = new ArrayList<>();
-        for (String value : data.split(System.lineSeparator())) {
-            if (value.equals(data.split(System.lineSeparator())[FIRST_LINE_INDEX])) {
-                continue;
-            }
-            list.add(getTransaction(value));
+        for (int i = 1; i < data.split(System.lineSeparator()).length; i++) {
+            list.add(getTransaction(data.split(System.lineSeparator())[i]));
         }
         return list;
     }
 
     private Transaction getTransaction(String data) {
-        String[] splitted = data.split(DELIMITER);
-        return new Transaction(new Fruit(splitted[SPLIT_FRUIT_NAME]),
-                Integer.parseInt(splitted[SPLIT_QUANTITY]),
-                splitted[SPLIT_OPERATION_TYPE]);
+        String[] splitData = data.split(DELIMITER);
+        return new Transaction(new Fruit(splitData[SPLIT_FRUIT_NAME]),
+                Integer.parseInt(splitData[SPLIT_QUANTITY]),
+                splitData[SPLIT_OPERATION_TYPE]);
     }
 }
