@@ -1,4 +1,4 @@
-# Fruit shop
+# model.Fruit shop
 Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
@@ -18,7 +18,7 @@ There are four activities at the store:
 ```
 
 Let's check in details all types of activities:
-1. Balance. Fruit balance at the beginning of the work shift. The following line in the file will look like:
+1. Balance. model.Fruit balance at the beginning of the work shift. The following line in the file will look like:
     
     ```text
        b,banana,100  
@@ -57,13 +57,13 @@ Let's check in details all types of activities:
 ```
 
 ### Expecting report file example
-We are expecting to see how many fruits are available today after the work shift in your Fruit store. 
+We are expecting to see how many fruits are available today after the work shift in your model.Fruit store. 
 ```text
     fruit,quantity
     banana,152
     apple,90
 ```
-The line above means you have 152 bananas, and 90 apples in your Fruit store after the work shift.
+The line above means you have 152 bananas, and 90 apples in your model.Fruit store after the work shift.
 
 **Hint: Think about creating some FruitTransaction model to store info from file line for more convenient data processing 
 (this is only a recommendation, you can use other classes / approaches to solve this task at your discretion):**
