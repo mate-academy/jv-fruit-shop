@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILEPATH_DAILY_RECORDS = "src/main/resources/DataDuringDay.csv";
+    private static final String FILEPATH_DAILY_RECORD = "src/main/resources/DataDuringDay.csv";
     private static final String FILEPATH_DAILY_REPORT = "src/main/resources/ReportAfterDay.csv";
 
     public static void main(String[] args) {
@@ -40,7 +40,7 @@ public class Main {
                 new SupplyOperationHandlerImpl(storageDao));
 
         Reader reader = new ReadImpl();
-        List<String> dataFromFile = reader.fileReader(FILEPATH_DAILY_RECORDS);
+        List<String> dataFromFile = reader.fileReader(FILEPATH_DAILY_RECORD);
         Parse parser = new ParserImpl();
         List<FruitTransaction> fruitTransactionList = parser.parseData(dataFromFile);
 
