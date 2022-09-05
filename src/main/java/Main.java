@@ -6,12 +6,10 @@ import model.FruitTransaction;
 import service.FileReaderService;
 import service.FileWriterService;
 import service.FruitShopService;
-import service.ProcessDataService;
 import service.ReportService;
 import service.impl.FileReaderServiceImpl;
 import service.impl.FileWriterServiceImpl;
 import service.impl.FruitShopServiceImpl;
-import service.impl.ProcessDataServiceImpl;
 import service.impl.ReportServiceImpl;
 import strategy.BalanceOperationHandler;
 import strategy.OperationHandler;
@@ -38,15 +36,12 @@ public class Main {
         operationHandlerMap
                 .put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        ProcessDataService processDataService = new ProcessDataServiceImpl();
-        List<String> listFromInputFile = fileReaderService.getFileData(INPUT_FILE);
-        List<FruitTransaction> listOfRefactoredData
-                = processDataService.processData(listFromInputFile);
+        List<String> listFromInputFile = fileReaderService.readFromFile(INPUT_FILE);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
-        fruitShopService.process(listOfRefactoredData);
+        fruitShopService.process(listFromInputFile);
         ReportService reportService = new ReportServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeDataToFile(OUT_PUT_FILE, reportService.createReport());
+        fileWriterService.writeToFile(OUT_PUT_FILE, reportService.createReport());
     }
 }

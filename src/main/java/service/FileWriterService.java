@@ -1,5 +1,5 @@
 package service;
 
 public interface FileWriterService {
-    void writeDataToFile(String filename, String report);
+    void writeToFile(String filename, String report);
 }
