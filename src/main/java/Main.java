@@ -39,7 +39,7 @@ public class Main {
                 .put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         ProcessDataService processDataService = new ProcessDataServiceImpl();
-        List<String> listFromInputFile = fileReaderService.getFileData(INPUT_FILE);
+        List<String> listFromInputFile = fileReaderService.readFromFile(INPUT_FILE);
         List<FruitTransaction> listOfRefactoredData
                 = processDataService.processData(listFromInputFile);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
@@ -47,6 +47,6 @@ public class Main {
         fruitShopService.process(listOfRefactoredData);
         ReportService reportService = new ReportServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeDataToFile(OUT_PUT_FILE, reportService.createReport());
+        fileWriterService.writeToFile(OUT_PUT_FILE, reportService.createReport());
     }
 }

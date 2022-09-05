@@ -8,7 +8,7 @@ import service.FileReaderService;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
-    public List<String> getFileData(String filename) {
+    public List<String> readFromFile(String filename) {
         try {
             return Files.readAllLines(Path.of(filename));
         } catch (IOException e) {

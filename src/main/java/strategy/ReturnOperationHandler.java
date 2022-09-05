@@ -5,7 +5,7 @@ import model.FruitTransaction;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public int operationHandle(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         Integer fruitQuantity = Storage.storage.get(fruitTransaction.getFruit());
         if (fruitQuantity == null) {
             throw new RuntimeException("We didn`t sell such fruit: "
@@ -13,6 +13,6 @@ public class ReturnOperationHandler implements OperationHandler {
         }
         Storage.storage.replace(fruitTransaction.getFruit(),
                 fruitQuantity + fruitTransaction.getQuantity());
-        return Storage.storage.get(fruitTransaction.getFruit());
+        Storage.storage.get(fruitTransaction.getFruit());
     }
 }
