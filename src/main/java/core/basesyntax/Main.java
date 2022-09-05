@@ -7,9 +7,9 @@ import core.basesyntax.service.CreateReport;
 import core.basesyntax.service.Parse;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.Writer;
+import core.basesyntax.service.impl.CreateReportImpl;
 import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReadImpl;
-import core.basesyntax.service.impl.CreateReportImpl;
 import core.basesyntax.service.impl.WriterImpl;
 import core.basesyntax.strategy.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.OperationHandler;
@@ -18,7 +18,6 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperationHandlerImpl;
 import core.basesyntax.strategy.ReturnOperationHandlerImpl;
 import core.basesyntax.strategy.SupplyOperationHandlerImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

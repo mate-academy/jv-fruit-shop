@@ -2,8 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.service.CreateReport;
-
-
 import java.util.stream.Collectors;
 
 public class CreateReportImpl implements CreateReport {
@@ -16,7 +14,7 @@ public class CreateReportImpl implements CreateReport {
     }
 
     @Override
-    public  String reportCreate() {
+    public String reportCreate() {
         return TITLE + storageDao.getStorage()
                 .entrySet()
                 .stream()
