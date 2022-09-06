@@ -4,13 +4,13 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CreateReport;
-import core.basesyntax.service.Parse;
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.Writer;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.Parser;
 import core.basesyntax.service.impl.CreateReportImpl;
+import core.basesyntax.service.impl.FileReadImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ParserImpl;
-import core.basesyntax.service.impl.ReadImpl;
-import core.basesyntax.service.impl.WriterImpl;
 import core.basesyntax.strategy.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -39,19 +39,19 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandlerImpl(storageDao));
 
-        Reader reader = new ReadImpl();
-        List<String> dataFromFile = reader.fileReader(FILEPATH_DAILY_RECORD);
-        Parse parser = new ParserImpl();
-        List<FruitTransaction> fruitTransactionList = parser.parseData(dataFromFile);
+        FileReader reader = new FileReadImpl();
+        List<String> dataFromFile = reader.listDataDuringDay(FILEPATH_DAILY_RECORD);
+        Parser parser = new ParserImpl();
+        List<FruitTransaction> fruitTransactionList = parser.parserData(dataFromFile);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         fruitTransactionList.forEach(fruitTransaction -> operationStrategy
-                .getOperationType(fruitTransaction.getOperation())
-                .changeQuantity(fruitTransaction));
+                .getOperationHandler(fruitTransaction.getOperation())
+                .handle(fruitTransaction));
 
         CreateReport createReport = new CreateReportImpl(storageDao);
-        Writer writer = new WriterImpl();
-        writer.writerReportFile(createReport.reportCreate(), FILEPATH_DAILY_REPORT);
+        FileWriter writer = new FileWriterImpl();
+        writer.writerReportFile(createReport.create(), FILEPATH_DAILY_REPORT);
 
     }
 }

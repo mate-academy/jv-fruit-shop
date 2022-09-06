@@ -11,9 +11,9 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
     }
 
     @Override
-    public void changeQuantity(FruitTransaction fruitTransaction) {
-        storageDao.updateData(fruitTransaction.getFruit(),
-                storageDao.getRemainFruit(fruitTransaction.getFruit())
+    public void handle(FruitTransaction fruitTransaction) {
+        storageDao.update(fruitTransaction.getFruit(),
+                storageDao.getQuantity(fruitTransaction.getFruit())
                         + fruitTransaction.getQuantity());
     }
 }

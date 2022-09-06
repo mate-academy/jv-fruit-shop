@@ -3,9 +3,9 @@ package core.basesyntax.dao;
 import java.util.Map;
 
 public interface StorageDao {
-    void updateData(String fruit, Integer quantity);
+    void update(String fruit, Integer quantity);
 
-    Integer getRemainFruit(String fruit);
+    Integer getQuantity(String fruit);
 
     Map<String, Integer> getStorage();
 }

@@ -14,7 +14,7 @@ public class CreateReportImpl implements CreateReport {
     }
 
     @Override
-    public String reportCreate() {
+    public String create() {
         return TITLE + storageDao.getStorage()
                 .entrySet()
                 .stream()
