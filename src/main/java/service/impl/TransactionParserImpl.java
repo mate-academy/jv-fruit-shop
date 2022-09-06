@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
 import model.Transaction;
-import service.ParserService;
+import service.TransactionParser;
 
-public class ParserServiceImpl implements ParserService {
+public class TransactionParserImpl implements TransactionParser {
     private static final int INFO_INPUT_LINE_INDEX = 0;
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
@@ -19,7 +19,7 @@ public class ParserServiceImpl implements ParserService {
         for (String input : inputList) {
             String[] inputSplited = input.split(",");
             transactions.add(new Transaction(
-                    Transaction.Operation.valueOfLabel(inputSplited[OPERATION_INDEX]),
+                    Transaction.Operation.getByLabel(inputSplited[OPERATION_INDEX]),
                     new Fruit(inputSplited[FRUIT_INDEX]),
                     Integer.parseInt(inputSplited[QUANTITY_INDEX])
             ));

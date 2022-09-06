@@ -6,7 +6,7 @@ import model.Fruit;
 public interface FruitDao {
     void update(Fruit fruit, Integer quantity);
 
-    Integer getQuantityOf(Fruit fruit);
+    Integer getQuantity(Fruit fruit);
 
     Map<Fruit, Integer> getAll();
 }

@@ -12,7 +12,7 @@ public class BalanceHandler implements TransactionHandler {
     }
 
     @Override
-    public void apply(Transaction transaction) {
+    public void execute(Transaction transaction) {
         fruitDao.update(transaction.getFruit(), transaction.getQuantity());
     }
 }

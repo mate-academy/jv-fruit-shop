@@ -12,7 +12,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Integer getQuantityOf(Fruit fruit) {
+    public Integer getQuantity(Fruit fruit) {
         return Storage.fruits.entrySet().stream()
                 .filter(f -> f.getKey().equals(fruit))
                 .map(Map.Entry::getValue)

@@ -41,10 +41,10 @@ public class Transaction {
             return label;
         }
 
-        public static Operation valueOfLabel(String label) {
+        public static Operation getByLabel(String label) {
             return Arrays.stream(values())
                     .filter(o -> o.label.equals(label))
-                    .findFirst()
+                    .findAny()
                     .get();
         }
     }

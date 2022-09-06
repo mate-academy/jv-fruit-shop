@@ -13,12 +13,13 @@ public class PurchaseHandler implements TransactionHandler {
     }
 
     @Override
-    public void apply(Transaction transaction) {
+    public void execute(Transaction transaction) {
         Fruit fruit = transaction.getFruit();
-        Integer fruitQuantity = fruitDao.getQuantityOf(fruit);
+        Integer fruitQuantity = fruitDao.getQuantity(fruit);
         Integer transactionFruitQuantity = transaction.getQuantity();
         if (fruitQuantity < transactionFruitQuantity) {
-            throw new RuntimeException("Not enough " + fruit.getName() + "s in stock.");
+            throw new RuntimeException("Not enough " + fruit.getName() + "s in stock. "
+                    + "Only " + fruitQuantity + " available.");
         }
         fruitDao.update(fruit, fruitQuantity - transactionFruitQuantity);
     }

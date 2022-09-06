@@ -1,7 +1,7 @@
-package service.strategy;
+package service;
 
 import model.Transaction;
 
-public interface TransactionHandler {
+public interface TransactionExecutor {
     void execute(Transaction transaction);
 }
