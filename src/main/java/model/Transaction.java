@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Transaction {
     private final Operation operation;
@@ -47,5 +48,24 @@ public class Transaction {
                     .findAny()
                     .get();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Transaction that = (Transaction) o;
+        return quantity == that.quantity
+                && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
     }
 }
