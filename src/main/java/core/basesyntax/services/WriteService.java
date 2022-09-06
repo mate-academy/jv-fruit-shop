@@ -1,5 +1,15 @@
 package core.basesyntax.services;
 
-public interface WriteService {
-    void writeFile(String toFile, String report);
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+public class WriteService {
+
+    public void writeFile(String toPath, String report) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toPath, true))) {
+            bufferedWriter.write(report);
+        } catch (Exception e) {
+            throw new RuntimeException("Can't write data to file " + report, e);
+        }
+    }
 }
