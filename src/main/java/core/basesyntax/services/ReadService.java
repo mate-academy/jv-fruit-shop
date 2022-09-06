@@ -1,23 +1,17 @@
 package core.basesyntax.services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class ReadService {
 
-    public List<String> readFile(String fromFile) {
-        List<String> dataList = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fromFile))) {
-            String value = bufferedReader.readLine();
-            while (value != null) {
-                dataList.add(value);
-                value = bufferedReader.readLine();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    public List<String> readFromFile(String fromFile) {
+        try  {
+            return Files.readAllLines(Paths.get(fromFile));
+        } catch (IOException e) {
+            throw new RuntimeException("file " + fromFile + " could not be read", e);
         }
-        return dataList;
     }
 }

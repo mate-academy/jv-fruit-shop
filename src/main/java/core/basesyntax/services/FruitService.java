@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface FruitService {
     List<FruitTransaction> getTransaction(List<String> transaction);
-    String createReport(Map<String, Integer> fruits);
+    String createReport();
 }

@@ -1,7 +1,15 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.FruitTransaction;
+import java.util.Map;
 
-public interface OperationStrategy {
-    void apply(FruitTransaction fruitTransaction);
+public class OperationStrategy {
+    private final Map<String, OperationHandler> map;
+
+    public OperationStrategy(Map<String, OperationHandler> map) {
+        this.map = map;
+    }
+
+    public OperationHandler getByOperation(String operation) {
+        return map.get(operation);
+    }
 }

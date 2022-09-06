@@ -5,7 +5,7 @@ import java.io.FileWriter;
 
 public class WriteService {
 
-    public void writeFile(String toPath, String report) {
+    public void writeToFile(String toPath, String report) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toPath, true))) {
             bufferedWriter.write(report);
         } catch (Exception e) {

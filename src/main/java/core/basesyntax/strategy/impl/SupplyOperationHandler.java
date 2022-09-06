@@ -1,0 +1,17 @@
+package core.basesyntax.strategy.impl;
+
+import core.basesyntax.dao.FruitStorageDao;
+import core.basesyntax.dao.FruitStorageDaoImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
+
+public class SupplyOperationHandler implements OperationHandler {
+    private final FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
+
+    @Override
+    public void apply(FruitTransaction fruitTransaction) {
+        String fruit = fruitTransaction.getFruit();
+        fruitStorageDao.put(fruit, fruitTransaction.getQuantity());
+    }
+}
