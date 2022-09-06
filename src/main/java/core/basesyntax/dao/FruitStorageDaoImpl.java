@@ -8,7 +8,8 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public void put(String fruit, Integer amount) {
-        Integer currentQuantity = Storage.fruitList.get(fruit) == null ? 0 : Storage.fruitList.get(fruit);
+        Integer currentQuantity = Storage.fruitList.get(fruit) == null ? 0
+                : Storage.fruitList.get(fruit);
         Storage.fruitList.put(fruit, currentQuantity + amount);
     }
 

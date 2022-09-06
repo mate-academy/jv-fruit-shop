@@ -11,14 +11,13 @@ import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "src/main/java/core/basesyntax/resources/data.txt";
-    private static final String OUTPUT_FILE_NAME = "src/main/java/core/basesyntax/resources/report.txt";
+    private static final String INPUT_FILE = "src/main/java/core/basesyntax/resources/data.txt";
+    private static final String OUTPUT_FILE = "src/main/java/core/basesyntax/resources/report.txt";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> map = new HashMap<>();
@@ -27,14 +26,14 @@ public class Main {
         FruitService fruitService = new FruitServiceImpl();
         WriteService writeService = new WriteService();
 
-        List<String> dataList = new ReadService().readFromFile(INPUT_FILE_NAME);
+        List<String> dataList = new ReadService().readFromFile(INPUT_FILE);
         List<FruitTransaction> fruitTransactionList = fruitService.getTransaction(dataList);
         for (FruitTransaction fruitTransaction: fruitTransactionList) {
             OperationHandler handler = strategy.getByOperation(fruitTransaction.getOperation());
             handler.apply(fruitTransaction);
         }
         String report = fruitService.createReport();
-        writeService.writeToFile(OUTPUT_FILE_NAME, report);
+        writeService.writeToFile(OUTPUT_FILE, report);
     }
 
     private static void initializeMap(Map<String, OperationHandler> map) {

@@ -3,7 +3,6 @@ package core.basesyntax.services;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,9 +19,9 @@ public class FruitServiceImpl implements FruitService {
         return transaction.stream()
                 .skip(1)
                 .map(s -> s.split(COMMA))
-                .map(t -> new FruitTransaction(t[OPERATION_INDEX]
-                        , t[FRUIT_NAME_INDEX]
-                        , Integer.parseInt(t[AMOUNT_INDEX])))
+                .map(t -> new FruitTransaction(t[OPERATION_INDEX],
+                        t[FRUIT_NAME_INDEX],
+                        Integer.parseInt(t[AMOUNT_INDEX])))
                 .collect(Collectors.toList());
     }
 

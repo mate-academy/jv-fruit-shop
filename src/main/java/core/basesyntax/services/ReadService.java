@@ -8,7 +8,7 @@ import java.util.List;
 public class ReadService {
 
     public List<String> readFromFile(String fromFile) {
-        try  {
+        try {
             return Files.readAllLines(Paths.get(fromFile));
         } catch (IOException e) {
             throw new RuntimeException("file " + fromFile + " could not be read", e);
