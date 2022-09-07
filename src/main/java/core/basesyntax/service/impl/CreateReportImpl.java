@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.service.CreateReport;
+import core.basesyntax.service.ReportCreator;
 import java.util.stream.Collectors;
 
-public class CreateReportImpl implements CreateReport {
+public class CreateReportImpl implements ReportCreator {
     private static final String SPLITERATOR = ",";
     private static final String TITLE = "fruit,quantity";
     private final StorageDao storageDao;

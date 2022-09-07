@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void writerReportFile(String report, String pathFile) {
+    public void write(String report, String pathFile) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(pathFile))) {
             bufferedWriter.write(report);
         } catch (IOException e) {

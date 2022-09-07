@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CreateReport;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.Parser;
@@ -40,7 +40,7 @@ public class Main {
                 new SupplyOperationHandlerImpl(storageDao));
 
         FileReader reader = new FileReadImpl();
-        List<String> dataFromFile = reader.listDataDuringDay(FILEPATH_DAILY_RECORD);
+        List<String> dataFromFile = reader.read(FILEPATH_DAILY_RECORD);
         Parser parser = new ParserImpl();
         List<FruitTransaction> fruitTransactionList = parser.parserData(dataFromFile);
 
@@ -49,9 +49,9 @@ public class Main {
                 .getOperationHandler(fruitTransaction.getOperation())
                 .handle(fruitTransaction));
 
-        CreateReport createReport = new CreateReportImpl(storageDao);
+        ReportCreator createReport = new CreateReportImpl(storageDao);
         FileWriter writer = new FileWriterImpl();
-        writer.writerReportFile(createReport.create(), FILEPATH_DAILY_REPORT);
+        writer.write(createReport.create(), FILEPATH_DAILY_REPORT);
 
     }
 }

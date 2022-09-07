@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReadImpl implements FileReader {
-    public List<String> listDataDuringDay(String file) {
+    public List<String> read(String file) {
         try {
             return Files.readAllLines(Path.of(file));
         } catch (IOException e) {
