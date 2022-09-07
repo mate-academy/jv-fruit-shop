@@ -17,13 +17,16 @@ public class TransactionParserImpl implements TransactionParser {
         inputList.remove(INFO_INPUT_LINE_INDEX);
         List<Transaction> transactions = new ArrayList<>();
         for (String input : inputList) {
-            String[] inputSplited = input.split(",");
-            transactions.add(new Transaction(
-                    Transaction.Operation.getByLabel(inputSplited[OPERATION_INDEX]),
-                    new Fruit(inputSplited[FRUIT_INDEX]),
-                    Integer.parseInt(inputSplited[QUANTITY_INDEX])
-            ));
+            transactions.add(createNewTransaction(input.split(",")));
         }
         return transactions;
+    }
+
+    private Transaction createNewTransaction(String[] inputSplited) {
+        return new Transaction(
+                Transaction.Operation.getByLabel(inputSplited[OPERATION_INDEX]),
+                new Fruit(inputSplited[FRUIT_INDEX]),
+                Integer.parseInt(inputSplited[QUANTITY_INDEX])
+        );
     }
 }
