@@ -4,12 +4,12 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.service.ReportCreator;
 import java.util.stream.Collectors;
 
-public class CreateReportImpl implements ReportCreator {
+public class ReportCreatorImpl implements ReportCreator {
     private static final String SPLITERATOR = ",";
     private static final String TITLE = "fruit,quantity";
     private final StorageDao storageDao;
 
-    public CreateReportImpl(StorageDao storageDao) {
+    public ReportCreatorImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 

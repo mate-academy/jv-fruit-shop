@@ -7,10 +7,10 @@ import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.impl.CreateReportImpl;
-import core.basesyntax.service.impl.FileReadImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ParserImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.strategy.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -39,17 +39,17 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandlerImpl(storageDao));
 
-        FileReader reader = new FileReadImpl();
+        FileReader reader = new FileReaderImpl();
         List<String> dataFromFile = reader.read(FILEPATH_DAILY_RECORD);
         Parser parser = new ParserImpl();
-        List<FruitTransaction> fruitTransactionList = parser.parserData(dataFromFile);
+        List<FruitTransaction> fruitTransactionList = parser.parseData(dataFromFile);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         fruitTransactionList.forEach(fruitTransaction -> operationStrategy
                 .getOperationHandler(fruitTransaction.getOperation())
                 .handle(fruitTransaction));
 
-        ReportCreator createReport = new CreateReportImpl(storageDao);
+        ReportCreator createReport = new ReportCreatorImpl(storageDao);
         FileWriter writer = new FileWriterImpl();
         writer.write(createReport.create(), FILEPATH_DAILY_REPORT);
 

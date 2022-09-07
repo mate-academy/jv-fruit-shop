@@ -6,11 +6,11 @@ import java.io.IOException;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void write(String report, String pathFile) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(pathFile))) {
-            bufferedWriter.write(report);
+    public void write(String data, String file) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file))) {
+            bufferedWriter.write(data);
         } catch (IOException e) {
-            throw new RuntimeException("Report cannot be write to file " + pathFile, e);
+            throw new RuntimeException("Report cannot be write to file " + file, e);
         }
     }
 }

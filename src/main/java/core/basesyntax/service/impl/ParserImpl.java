@@ -13,7 +13,7 @@ public class ParserImpl implements Parser {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parserData(List<String> input) {
+    public List<FruitTransaction> parseData(List<String> input) {
         input.remove(FIRST_STRING_INDEX);
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         input.stream()
