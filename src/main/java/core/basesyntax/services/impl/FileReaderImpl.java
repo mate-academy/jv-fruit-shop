@@ -1,12 +1,12 @@
-package core.basesyntax.services;
+package core.basesyntax.services.impl;
 
+import core.basesyntax.services.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class ReadService {
-
+public class FileReaderImpl implements FileReader {
     public List<String> readFromFile(String fromFile) {
         try {
             return Files.readAllLines(Paths.get(fromFile));

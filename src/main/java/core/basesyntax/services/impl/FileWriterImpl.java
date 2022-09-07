@@ -1,9 +1,9 @@
-package core.basesyntax.services;
+package core.basesyntax.services.impl;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-public class WriteService {
+public class FileWriterImpl implements core.basesyntax.services.FileWriter {
 
     public void writeToFile(String toPath, String report) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toPath, true))) {
