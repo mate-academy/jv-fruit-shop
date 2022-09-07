@@ -3,9 +3,9 @@ package service.impl;
 import db.Storage;
 import java.util.Map;
 import model.Fruit;
-import service.ReportService;
+import service.CsvReportService;
 
-public class ReportServiceImpl implements ReportService {
+public class CsvReportServiceImpl implements CsvReportService {
     @Override
     public String createReport() {
         StringBuilder stringBuilder = new StringBuilder("fruit,quantity")

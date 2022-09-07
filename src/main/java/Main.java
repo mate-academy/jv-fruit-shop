@@ -6,11 +6,11 @@ import model.FruitTransaction;
 import service.FileReaderService;
 import service.FileWriterService;
 import service.FruitShopService;
-import service.ReportService;
+import service.CsvReportService;
 import service.impl.FileReaderServiceImpl;
 import service.impl.FileWriterServiceImpl;
 import service.impl.FruitShopServiceImpl;
-import service.impl.ReportServiceImpl;
+import service.impl.CsvReportServiceImpl;
 import strategy.BalanceOperationHandler;
 import strategy.OperationHandler;
 import strategy.OperationStrategy;
@@ -40,7 +40,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
         fruitShopService.process(listFromInputFile);
-        ReportService reportService = new ReportServiceImpl();
+        CsvReportService reportService = new CsvReportServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(OUT_PUT_FILE, reportService.createReport());
     }
