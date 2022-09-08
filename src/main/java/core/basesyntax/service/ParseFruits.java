@@ -7,5 +7,4 @@ public interface ParseFruits {
     List<FruitTransaction> parse(List<String> lines);
 
     FruitTransaction transaction(String line);
-
 }
