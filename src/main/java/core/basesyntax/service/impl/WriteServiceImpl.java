@@ -11,10 +11,6 @@ public class WriteServiceImpl implements WriteService {
         File file = new File(report);
         try {
             file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Failed to create file" + report);
-        }
-        try {
             Files.write(file.toPath(),filePath.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("Failed to write file: " + filePath

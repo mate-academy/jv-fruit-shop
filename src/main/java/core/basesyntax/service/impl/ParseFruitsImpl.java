@@ -22,7 +22,7 @@ public class ParseFruitsImpl implements ParseFruits {
     public FruitTransaction transaction(String line) {
         String[] splitLine = line.split(",");
         FruitTransaction.Operation findOperation =
-                FruitTransaction.getFindOperation(splitLine[OPERATION_INDEX]);
+                FruitTransaction.getOperation(splitLine[OPERATION_INDEX]);
         return new FruitTransaction(findOperation, splitLine[FRUIT_INDEX],
                 Integer.parseInt(splitLine[FRUIT_QUANTITY_INDEX]));
     }

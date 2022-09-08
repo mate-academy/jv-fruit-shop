@@ -12,20 +12,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public OperationHandler getStrategy(FruitTransaction.Operation operation) {
+    public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
         return operationHandlerMap.get(operation);
-    }
-
-    public static void initialization(Map<FruitTransaction.Operation,
-            OperationHandler> operationHandlerMap) {
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler());
-
     }
 }

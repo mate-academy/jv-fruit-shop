@@ -13,10 +13,6 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation getOperation() {
-        return operation;
-    }
-
     public String getFruit() {
         return fruit;
     }
@@ -34,8 +30,11 @@ public class FruitTransaction {
                 + '}';
     }
 
-    public static Operation getFindOperation(String firstOperation) {
+    public Operation getOperation() {
+        return operation;
+    }
 
+    public static Operation getOperation(String firstOperation) {
         return Arrays.stream(Operation.values())
                .filter(o -> o.getOperation().equals(firstOperation))
                .findFirst()
