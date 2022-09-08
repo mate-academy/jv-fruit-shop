@@ -10,7 +10,7 @@ import core.basesyntax.services.impl.FruitTransactionParserImpl;
 import core.basesyntax.services.impl.ReportServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
-import core.basesyntax.strategy.impl.OperationStrategy;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
@@ -19,13 +19,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE = "src/main/java/core/basesyntax/resources/data.txt";
-    private static final String OUTPUT_FILE = "src/main/java/core/basesyntax/resources/report.txt";
+    private static final String INPUT_FILE = "src/resources/data.txt";
+    private static final String OUTPUT_FILE = "src/resources/report.txt";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> map = new HashMap<>();
         initializeMap(map);
-        OperationStrategy strategy = new OperationStrategy(map);
+        OperationStrategyImpl strategy = new OperationStrategyImpl(map);
         FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
         ReportService reportService = new ReportServiceImpl(new FruitStorageDaoImpl());
         FileWriterImpl fileWriterImpl = new FileWriterImpl();
