@@ -17,7 +17,8 @@ public class ParseServiceImpl implements ParseService {
         List<Transaction> resultData = new ArrayList<>();
         data.remove(HEADER_INDEX);
         data.stream().map(s -> s.split(SEPARATOR))
-                .forEach(s -> resultData.add(new Transaction(Transaction.findOperationByName(s[TYPE_OPERATION_INDEX]),
+                .forEach(s -> resultData.add(
+                        new Transaction(Transaction.findOperationByName(s[TYPE_OPERATION_INDEX]),
                         s[GOODS_NAME_INDEX], Integer.parseInt(s[QUANTITY_INDEX]))));
         return resultData;
     }
