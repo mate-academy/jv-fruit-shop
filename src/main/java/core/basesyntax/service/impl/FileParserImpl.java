@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Transaction;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FileParser;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,8 +26,9 @@ public class FileParserImpl implements FileParser {
                 new Fruit(splitArray[FRUIT_INDEX]),
                 Integer.parseInt(splitArray[QUANTITY_INDEX]));
     }
+
     private Transaction.Operation detectOperation(String name) {
-        for (Transaction.Operation operation : Transaction.Operation.values()){
+        for (Transaction.Operation operation : Transaction.Operation.values()) {
             if (operation.getFirstLetter().equals(name)) {
                 return operation;
             }

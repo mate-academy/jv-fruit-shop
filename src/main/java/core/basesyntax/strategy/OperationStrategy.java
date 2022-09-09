@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.Transaction;
-
 import java.util.Map;
 
 public class OperationStrategy {
