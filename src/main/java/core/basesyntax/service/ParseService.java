@@ -1,5 +1,9 @@
 package core.basesyntax.service;
 
-public interface ParseService {
+import core.basesyntax.model.Transaction;
 
+import java.util.List;
+
+public interface ParseService {
+    List<Transaction> parser(List<String> data);
 }
