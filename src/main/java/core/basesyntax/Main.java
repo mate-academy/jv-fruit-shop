@@ -35,7 +35,7 @@ public class Main {
                 .getTransaction(dataList);
         for (FruitTransaction fruitTransaction: fruitTransactionList) {
             OperationHandler handler = strategy.getByOperation(fruitTransaction.getOperation());
-            handler.handler(fruitTransaction);
+            handler.handle(fruitTransaction);
         }
         String report = reportService.createReport();
         fileWriterImpl.writeToFile(OUTPUT_FILE, report);
