@@ -1,7 +1,6 @@
-package core.basesyntax.service.Impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ConvertWriteDataService;
-
 import java.util.Map;
 
 public class ConvertWriteDataServiceImpl implements ConvertWriteDataService {

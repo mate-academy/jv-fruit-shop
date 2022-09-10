@@ -5,14 +5,13 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ConvertWriteDataService;
 import core.basesyntax.service.FileWriteService;
 import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.Impl.ConvertReadDataServiceImpl;
-import core.basesyntax.service.Impl.ConvertWriteDataServiceImpl;
-import core.basesyntax.service.Impl.FileReadServiceImpl;
 import core.basesyntax.service.FileReadService;
-import core.basesyntax.service.Impl.FileWriteServiceImpl;
-import core.basesyntax.service.Impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.ConvertReadDataServiceImpl;
+import core.basesyntax.service.impl.ConvertWriteDataServiceImpl;
+import core.basesyntax.service.impl.FileReadServiceImpl;
+import core.basesyntax.service.impl.FileWriteServiceImpl;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.strategy.Impl.OperationStrategyImpl;
-
 import java.util.List;
 
 public class FruitShop {

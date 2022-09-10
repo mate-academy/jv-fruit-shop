@@ -1,8 +1,7 @@
-package core.basesyntax.service.Impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ConvertReadDataService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,8 +17,8 @@ public class ConvertReadDataServiceImpl implements ConvertReadDataService {
         dataFromFile.remove(DATA_TO_REMOVE_INDEX);
         return dataFromFile.stream()
                 .map(s -> s.split(SPLITTER))
-                .map(s -> new Transaction(s[OPERATION_INDEX], s[FRUIT_NAME_INDEX]
-                        , Integer.parseInt(s[QUANTITY_INDEX])))
+                .map(s -> new Transaction(s[OPERATION_INDEX], s[FRUIT_NAME_INDEX],
+                        Integer.parseInt(s[QUANTITY_INDEX])))
                 .collect(Collectors.toList());
     }
 }
