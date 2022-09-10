@@ -11,7 +11,7 @@ import core.basesyntax.service.impl.ConvertWriteDataServiceImpl;
 import core.basesyntax.service.impl.FileReadServiceImpl;
 import core.basesyntax.service.impl.FileWriteServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
-import core.basesyntax.strategy.Impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.List;
 
 public class FruitShop {
