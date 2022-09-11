@@ -1,28 +1,20 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.OperationProcessor;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<Operation, OperationProcessor> operationProcessMap;
+    private final Map<Transaction.Operation, OperationProcessor> operationProcessMap;
 
-    public OperationStrategyImpl() {
-        this.operationProcessMap = new HashMap<>();
-        operationProcessMap.put(Operation.BALANCE,
-                new QuantityAddOperationProcessor());
-        operationProcessMap.put(Operation.SUPPLY,
-                new QuantityAddOperationProcessor());
-        operationProcessMap.put(Operation.PURCHASE,
-                new PurchaseOperationProcessor());
-        operationProcessMap.put(Operation.RETURN,
-                new QuantityAddOperationProcessor());
+    public OperationStrategyImpl(Map<Transaction.Operation,
+            OperationProcessor> operationProcessMap) {
+        this.operationProcessMap = operationProcessMap;
     }
 
     @Override
-    public OperationProcessor get(Operation fruitOperation) {
+    public OperationProcessor get(Transaction.Operation fruitOperation) {
         return operationProcessMap.get(fruitOperation);
     }
 }

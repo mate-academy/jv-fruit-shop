@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.TransactionParser;
 import java.util.List;
@@ -18,7 +17,7 @@ public class TransactionParserImpl implements TransactionParser {
         data.remove(DATA_TO_REMOVE_INDEX);
         return data.stream()
                 .map(s -> s.split(SPLITTER))
-                .map(s -> new Transaction(Operation.getByCode(s[OPERATION_INDEX]),
+                .map(s -> new Transaction(Transaction.Operation.getByCode(s[OPERATION_INDEX]),
                         s[FRUIT_NAME_INDEX], Integer.parseInt(s[QUANTITY_INDEX])))
                 .collect(Collectors.toList());
     }

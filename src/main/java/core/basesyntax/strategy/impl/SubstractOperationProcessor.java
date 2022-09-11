@@ -1,15 +1,18 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.strategy.OperationProcessor;
 
-public class PurchaseOperationProcessor implements OperationProcessor {
-    private final FruitDao fruitDao = new FruitDaoImpl();
+public class SubstractOperationProcessor implements OperationProcessor {
+    private final FruitDao fruitDao;
+
+    public SubstractOperationProcessor(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
-    public void processOperation(Transaction fruitTransaction) {
+    public void process(Transaction fruitTransaction) {
         int amountOfFruit = fruitDao.get(fruitTransaction.getProductName())
                 - fruitTransaction.getQuantity();
         if (amountOfFruit < 0) {

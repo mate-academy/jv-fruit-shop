@@ -16,7 +16,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     public void runTransaction(List<Transaction> list) {
         for (Transaction fruitTransaction : list) {
             operationStrategy.get(fruitTransaction.getOperation())
-                    .processOperation(fruitTransaction);
+                    .process(fruitTransaction);
         }
     }
 }
