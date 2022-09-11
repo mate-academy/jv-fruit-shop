@@ -15,12 +15,11 @@ public class TransactionParserImpl implements TransactionParser {
 
     @Override
     public List<Transaction> getTransactions(List<String> data) {
-
         data.remove(DATA_TO_REMOVE_INDEX);
         return data.stream()
                 .map(s -> s.split(SPLITTER))
-                .map(s -> new Transaction(Operation.getByCode(s[OPERATION_INDEX]), s[FRUIT_NAME_INDEX],
-                        Integer.parseInt(s[QUANTITY_INDEX])))
+                .map(s -> new Transaction(Operation.getByCode(s[OPERATION_INDEX]),
+                        s[FRUIT_NAME_INDEX], Integer.parseInt(s[QUANTITY_INDEX])))
                 .collect(Collectors.toList());
     }
 }

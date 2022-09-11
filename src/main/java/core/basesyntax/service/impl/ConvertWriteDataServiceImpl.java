@@ -8,6 +8,7 @@ public class ConvertWriteDataServiceImpl implements ConvertWriteDataService {
     private static final String TITLE_STRING = "fruit,quantity";
     private static final String SEPARATOR = ",";
     private Map<String, Integer> fruitStorageState;
+
     @Override
     public String getReport() {
         fruitStorageState = new FruitDaoImpl().getStorageState();

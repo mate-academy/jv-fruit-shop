@@ -1,18 +1,16 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ConvertWriteDataService;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.service.impl.ConvertWriteDataServiceImpl;
 import core.basesyntax.service.impl.FileReadServiceImpl;
 import core.basesyntax.service.impl.FileWriteServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-
+import core.basesyntax.service.impl.TransactionParserImpl;
 import java.util.List;
 
 public class FruitShop {
