@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public class Transaction {
     private Operation typeOperation;
-    private String descriptionOfGoods;
+    private String product;
     private int quantity;
 
-    public Transaction(Operation typeOperation, String descriptionOfGoods, int quantity) {
+    public Transaction(Operation typeOperation, String product, int quantity) {
         this.typeOperation = typeOperation;
-        this.descriptionOfGoods = descriptionOfGoods;
+        this.product = product;
         this.quantity = quantity;
     }
 
@@ -17,8 +17,8 @@ public class Transaction {
         return typeOperation;
     }
 
-    public String getDescriptionOfGoods() {
-        return descriptionOfGoods;
+    public String getProduct() {
+        return product;
     }
 
     public int getQuantity() {
@@ -29,8 +29,8 @@ public class Transaction {
         this.typeOperation = typeOperation;
     }
 
-    public void setDescriptionOfGoods(String descriptionOfGoods) {
-        this.descriptionOfGoods = descriptionOfGoods;
+    public void setProduct(String product) {
+        this.product = product;
     }
 
     public void setQuantity(int quantity) {
