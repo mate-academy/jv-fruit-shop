@@ -2,8 +2,8 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParseService;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ParseServiceImpl implements ParseService {
     private static final int TYPE_OPERATION_INDEX = 0;

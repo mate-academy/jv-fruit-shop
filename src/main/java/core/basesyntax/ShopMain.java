@@ -3,21 +3,29 @@ package core.basesyntax;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.ExportDataService;
+import core.basesyntax.service.ImportDataService;
+import core.basesyntax.service.OperationProcessing;
+import core.basesyntax.service.OperationProcessingStrategy;
+import core.basesyntax.service.ParseService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.ExportDataServiceImpl;
+import core.basesyntax.service.impl.ImportDataServiceImpl;
+import core.basesyntax.service.impl.OperationProcessingImpl;
+import core.basesyntax.service.impl.OperationProcessingStrategyImpl;
+import core.basesyntax.service.impl.ParseServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.TransactionsHandling;
 import core.basesyntax.strategy.impl.BalanceHandlingImpl;
 import core.basesyntax.strategy.impl.PurchaseHandlingImpl;
 import core.basesyntax.strategy.impl.ReturnHandlingImpl;
 import core.basesyntax.strategy.impl.SupplyHandlingImpl;
-
-import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ShopMain {
-    private static final String FROM_FILE = "src/main/resources/daily_transaction.csv";
+    private static final String FROM_FILE = "src/main/resources/daily_transactions.csv";
     private static final String TO_FILE = "src/main/resources/daily_report.csv";
 
     public static void main(String[] args) {
@@ -33,7 +41,7 @@ public class ShopMain {
                 new OperationProcessingStrategyImpl(strategy);
         //Import data
         ImportDataService reader = new ImportDataServiceImpl();
-        List<String> dailyTransactionList = reader.ReaderFromCsvFile(FROM_FILE);
+        List<String> dailyTransactionList = reader.readFromCsvFile(FROM_FILE);
         //Parse data
         ParseService parserService = new ParseServiceImpl();
         List<Transaction> transactionList = parserService.parser(dailyTransactionList);

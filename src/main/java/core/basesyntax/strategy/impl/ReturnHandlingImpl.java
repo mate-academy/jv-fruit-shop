@@ -10,6 +10,7 @@ public class ReturnHandlingImpl implements TransactionsHandling {
     public ReturnHandlingImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
+
     @Override
     public void applyTransaction(Transaction transaction) {
         if (transaction.getQuantity() < 0) {
