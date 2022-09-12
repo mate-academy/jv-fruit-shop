@@ -8,7 +8,7 @@ import java.util.List;
 
 public class  ImportDataServiceImpl implements ImportDataService {
     @Override
-    public List<String> ReaderFromFile(String path) {
+    public List<String> ReaderFromCsvFile(String path) {
         try {
             return Files.readAllLines(Path.of(path));
         } catch (IOException e) {
