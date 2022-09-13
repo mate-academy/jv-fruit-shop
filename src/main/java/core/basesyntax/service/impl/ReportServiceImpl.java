@@ -15,7 +15,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public String report() {
+    public String createReport() {
         return HEADING + storageDao.getAllData()
                 .entrySet()
                 .stream()

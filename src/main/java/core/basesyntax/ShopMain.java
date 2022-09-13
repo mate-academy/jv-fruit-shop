@@ -3,23 +3,23 @@ package core.basesyntax;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.ExportDataService;
-import core.basesyntax.service.ImportDataService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.OperationProcessing;
 import core.basesyntax.service.OperationProcessingStrategy;
-import core.basesyntax.service.ParseService;
+import core.basesyntax.service.TransactionParseService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.impl.ExportDataServiceImpl;
-import core.basesyntax.service.impl.ImportDataServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.OperationProcessingImpl;
 import core.basesyntax.service.impl.OperationProcessingStrategyImpl;
-import core.basesyntax.service.impl.ParseServiceImpl;
+import core.basesyntax.service.impl.TransactionParseServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.strategy.TransactionsHandling;
-import core.basesyntax.strategy.impl.BalanceHandlingImpl;
-import core.basesyntax.strategy.impl.PurchaseHandlingImpl;
-import core.basesyntax.strategy.impl.ReturnHandlingImpl;
-import core.basesyntax.strategy.impl.SupplyHandlingImpl;
+import core.basesyntax.strategy.TransactionsHandler;
+import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationHandlerImpl;
+import core.basesyntax.strategy.impl.ReturnOperationHandlerImpl;
+import core.basesyntax.strategy.impl.SupplyOperationHandlerImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,19 +31,19 @@ public class ShopMain {
     public static void main(String[] args) {
         //Creation of instances of objects dao, map strategy, operation processing services
         StorageDao storageDao = new StorageDaoImpl();
-        Map<Transaction.Operation, TransactionsHandling> strategy =
+        Map<Transaction.Operation, TransactionsHandler> strategy =
                 new HashMap<>();
-        strategy.put(Transaction.Operation.BALANCE, new BalanceHandlingImpl(storageDao));
-        strategy.put(Transaction.Operation.SUPPLY, new SupplyHandlingImpl(storageDao));
-        strategy.put(Transaction.Operation.PURCHASE, new PurchaseHandlingImpl(storageDao));
-        strategy.put(Transaction.Operation.RETURN, new ReturnHandlingImpl(storageDao));
+        strategy.put(Transaction.Operation.BALANCE, new BalanceOperationHandlerImpl(storageDao));
+        strategy.put(Transaction.Operation.SUPPLY, new SupplyOperationHandlerImpl(storageDao));
+        strategy.put(Transaction.Operation.PURCHASE, new PurchaseOperationHandlerImpl(storageDao));
+        strategy.put(Transaction.Operation.RETURN, new ReturnOperationHandlerImpl(storageDao));
         OperationProcessingStrategy operationProcessingStrategy =
                 new OperationProcessingStrategyImpl(strategy);
         //Import data
-        ImportDataService reader = new ImportDataServiceImpl();
+        FileReaderService reader = new FileReaderServiceImpl();
         List<String> dailyTransactionList = reader.readFromCsvFile(FROM_FILE);
         //Parse data
-        ParseService parserService = new ParseServiceImpl();
+        TransactionParseService parserService = new TransactionParseServiceImpl();
         List<Transaction> transactionList = parserService.parser(dailyTransactionList);
         //Operation processing
         OperationProcessing operationProcessing =
@@ -51,9 +51,9 @@ public class ShopMain {
         operationProcessing.processingData(transactionList);
         //Create report
         ReportService reportService = new ReportServiceImpl(storageDao);
-        String report = reportService.report();
+        String report = reportService.createReport();
         //Export data
-        ExportDataService writer = new ExportDataServiceImpl();
+        FileWriterService writer = new FileWriterServiceImpl();
         writer.writeToCsvFile(report, TO_FILE);
     }
 }

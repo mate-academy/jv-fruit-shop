@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
-    public void updateDataStorage(String descriptionOfGoods, Integer quantity) {
-        Storage.storage.put(descriptionOfGoods, quantity);
+    public void update(String product, Integer quantity) {
+        Storage.storage.put(product, quantity);
     }
 
     @Override

@@ -2,12 +2,12 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.strategy.TransactionsHandling;
+import core.basesyntax.strategy.TransactionsHandler;
 
-public class ReturnHandlingImpl implements TransactionsHandling {
+public class ReturnOperationHandlerImpl implements TransactionsHandler {
     private final StorageDao storageDao;
 
-    public ReturnHandlingImpl(StorageDao storageDao) {
+    public ReturnOperationHandlerImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
@@ -19,6 +19,6 @@ public class ReturnHandlingImpl implements TransactionsHandling {
         int remainingGoods = storageDao.getRemainingGoods(transaction.getProduct()) != null
                 ? storageDao.getRemainingGoods(transaction.getProduct()) : 0;
         int newQuantity = transaction.getQuantity() + remainingGoods;
-        storageDao.updateDataStorage(transaction.getProduct(), newQuantity);
+        storageDao.update(transaction.getProduct(), newQuantity);
     }
 }

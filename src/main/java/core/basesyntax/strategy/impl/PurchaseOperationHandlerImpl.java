@@ -2,12 +2,12 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.strategy.TransactionsHandling;
+import core.basesyntax.strategy.TransactionsHandler;
 
-public class PurchaseHandlingImpl implements TransactionsHandling {
+public class PurchaseOperationHandlerImpl implements TransactionsHandler {
     private final StorageDao storageDao;
 
-    public PurchaseHandlingImpl(StorageDao storageDao) {
+    public PurchaseOperationHandlerImpl(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
@@ -18,6 +18,6 @@ public class PurchaseHandlingImpl implements TransactionsHandling {
             throw new RuntimeException("Not enough goods");
         }
         int newQuantity = remainingGoods - transaction.getQuantity();
-        storageDao.updateDataStorage(transaction.getProduct(), newQuantity);
+        storageDao.update(transaction.getProduct(), newQuantity);
     }
 }

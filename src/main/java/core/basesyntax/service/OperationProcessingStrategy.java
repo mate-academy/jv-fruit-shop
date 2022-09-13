@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Transaction;
-import core.basesyntax.strategy.TransactionsHandling;
+import core.basesyntax.strategy.TransactionsHandler;
 
 public interface OperationProcessingStrategy {
-    TransactionsHandling get(Transaction.Operation transaction);
+    TransactionsHandler get(Transaction.Operation transaction);
 }

@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface ExportDataService {
+public interface FileWriterService {
     void writeToCsvFile(String report, String destination);
 }
