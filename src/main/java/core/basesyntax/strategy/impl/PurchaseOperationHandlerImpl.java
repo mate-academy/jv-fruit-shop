@@ -12,7 +12,7 @@ public class PurchaseOperationHandlerImpl implements TransactionsHandler {
     }
 
     @Override
-    public void applyTransaction(Transaction transaction) {
+    public void handle(Transaction transaction) {
         Integer remainingGoods = storageDao.getRemainingGoods(transaction.getProduct());
         if (remainingGoods < transaction.getQuantity()) {
             throw new RuntimeException("Not enough goods");

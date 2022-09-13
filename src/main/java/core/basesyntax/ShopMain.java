@@ -5,15 +5,15 @@ import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.OperationProcessing;
+import core.basesyntax.service.OperationProcessor;
 import core.basesyntax.service.OperationProcessingStrategy;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.TransactionParseService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.OperationProcessingImpl;
+import core.basesyntax.service.impl.OperationProcessingServiceImpl;
 import core.basesyntax.service.impl.OperationProcessingStrategyImpl;
-import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.CsvReportServiceImpl;
 import core.basesyntax.service.impl.TransactionParseServiceImpl;
 import core.basesyntax.strategy.TransactionsHandler;
 import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
@@ -41,19 +41,19 @@ public class ShopMain {
                 new OperationProcessingStrategyImpl(strategy);
         //Import data
         FileReaderService reader = new FileReaderServiceImpl();
-        List<String> dailyTransactionList = reader.readFromCsvFile(FROM_FILE);
+        List<String> dailyTransactionList = reader.read(FROM_FILE);
         //Parse data
         TransactionParseService parserService = new TransactionParseServiceImpl();
         List<Transaction> transactionList = parserService.parser(dailyTransactionList);
         //Operation processing
-        OperationProcessing operationProcessing =
-                new OperationProcessingImpl(operationProcessingStrategy);
-        operationProcessing.processingData(transactionList);
+        OperationProcessor operationProcessor =
+                new OperationProcessingServiceImpl(operationProcessingStrategy);
+        operationProcessor.process(transactionList);
         //Create report
-        ReportService reportService = new ReportServiceImpl(storageDao);
+        ReportService reportService = new CsvReportServiceImpl(storageDao);
         String report = reportService.createReport();
         //Export data
         FileWriterService writer = new FileWriterServiceImpl();
-        writer.writeToCsvFile(report, TO_FILE);
+        writer.write(report, TO_FILE);
     }
 }

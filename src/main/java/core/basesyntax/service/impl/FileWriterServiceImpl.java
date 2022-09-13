@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public void writeToCsvFile(String inputReport, String destinationPath) {
+    public void write(String inputReport, String destinationPath) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(destinationPath))) {
             bufferedWriter.write(inputReport);
         } catch (IOException e) {

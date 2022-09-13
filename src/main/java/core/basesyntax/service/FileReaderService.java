@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.List;
 
 public interface FileReaderService {
-    List<String> readFromCsvFile(String path);
+    List<String> read(String path);
 }

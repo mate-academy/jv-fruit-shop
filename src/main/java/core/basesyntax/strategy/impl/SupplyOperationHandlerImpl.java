@@ -12,7 +12,7 @@ public class SupplyOperationHandlerImpl implements TransactionsHandler {
     }
 
     @Override
-    public void applyTransaction(Transaction transaction) {
+    public void handle(Transaction transaction) {
         if (transaction.getQuantity() < 0) {
             throw new RuntimeException("Supply can't be negative");
         }
