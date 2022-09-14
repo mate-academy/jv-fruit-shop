@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.operations.Operation;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class ReaderServiceImpl implements ReaderService{
     private FruitTransaction getFromString(String line){
         String[] fields = line.split(",");
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(Operations.valueOf(fields[0]));
+        fruitTransaction.setOperation(Operation.valueOf(fields[0]));
         fruitTransaction.setFruit(fields[1]);
         fruitTransaction.setQuantity(Integer.parseInt(fields[2]));
         return fruitTransaction;

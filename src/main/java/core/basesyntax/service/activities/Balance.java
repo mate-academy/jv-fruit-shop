@@ -1,7 +1,5 @@
 package core.basesyntax.service.activities;
 
-import core.basesyntax.model.Fruit;
-
 import java.util.List;
 
 public interface Balance {
