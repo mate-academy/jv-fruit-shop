@@ -1,10 +1,13 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
+
+import java.util.List;
 
 public class ShopServiceImpl implements ShopService{
     @Override
-    public void transfer(Fruit fruitType, Integer amount) {
+    public void transaction(List<FruitTransaction> fruitTransactions) {
 
     }
+}
 }

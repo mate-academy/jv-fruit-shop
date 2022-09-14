@@ -12,12 +12,13 @@ public class FruitDaoCsvImpl implements FruitDao{
     public static final String FILE_NAME = "fruitdata.csv";
 
     @Override
-    public List<Fruit> get() {
+    public List<String> get() {
         try {
             List<String> fruits = Files.readAllLines(Path.of(FILE_NAME));
         } catch (IOException e) {
             throw new RuntimeException("Can't get data from file " + FILE_NAME, e);
         }
+        return fr;
     }
 
     @Override

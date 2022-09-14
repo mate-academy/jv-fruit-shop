@@ -1,11 +1,12 @@
 package core.basesyntax.dao;
 
-import java.io.File;
+import core.basesyntax.model.Fruit;
+
 import java.util.List;
 
-public class FruitDaoImpl implements FruitDao {
+public class FruitDaoImpl implements FruitDao{
     @Override
-    public List get() {
+    public List<Fruit> get() {
         return null;
     }
 

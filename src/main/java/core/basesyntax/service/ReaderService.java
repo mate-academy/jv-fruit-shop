@@ -4,9 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 
 import java.util.List;
 
-public interface ShopService {
-
-    void transaction(List<FruitTransaction> fruitTransactions);
-
-
+public interface ReaderService {
+    public List<FruitTransaction> readFromFile(String filePath);
 }
