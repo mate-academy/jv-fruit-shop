@@ -1,13 +1,13 @@
 package service.transaction;
 
-import model.FruitTransaction;
-
 import java.util.Map;
+import model.FruitTransaction;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
     private Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap;
 
-    public TransactionStrategyImpl(Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap) {
+    public TransactionStrategyImpl(Map<FruitTransaction.Operation,
+            TransactionHandler> transactionHandlerMap) {
         this.transactionHandlerMap = transactionHandlerMap;
     }
 

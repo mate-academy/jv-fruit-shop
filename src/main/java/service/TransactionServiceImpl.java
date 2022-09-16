@@ -18,7 +18,8 @@ public class TransactionServiceImpl implements TransactionService {
     private final Map<String, Integer> storage = new HashMap<>();
     private final Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap;
 
-    public TransactionServiceImpl(Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap) {
+    public TransactionServiceImpl(Map<FruitTransaction.Operation,
+            TransactionHandler> transactionHandlerMap) {
         this.transactionHandlerMap = transactionHandlerMap;
     }
 
@@ -42,10 +43,13 @@ public class TransactionServiceImpl implements TransactionService {
 
     private void executeTransactions() {
         for (FruitTransaction transaction : transactions) {
-            TransactionStrategy transactionStrategy = new TransactionStrategyImpl(transactionHandlerMap);
-            TransactionHandler transactionHandler = transactionStrategy.get(transaction.getOperation());
-            int transactionResult = transactionHandler.
-                    getTransactionResult(storage.getOrDefault(transaction.getFruit(), 0), transaction.getQuantity());
+            TransactionStrategy transactionStrategy =
+                    new TransactionStrategyImpl(transactionHandlerMap);
+            TransactionHandler transactionHandler =
+                    transactionStrategy.get(transaction.getOperation());
+            int transactionResult = transactionHandler
+                    .getTransactionResult(storage.getOrDefault(transaction.getFruit(), 0),
+                            transaction.getQuantity());
             storage.put(transaction.getFruit(), transactionResult);
         }
     }
@@ -60,7 +64,8 @@ public class TransactionServiceImpl implements TransactionService {
     private FruitTransaction createTransaction(String line) {
         String[] splitedLine = line.split(SIGN_SEPARATOR);
         FruitTransaction fruitTransaction = new FruitTransaction();
-        FruitTransaction.Operation operation = FruitTransaction.Operation.getOperationByLetter(splitedLine[OPERATION_INDEX]);
+        FruitTransaction.Operation operation =
+                fruitTransaction.getOperationByLetter(splitedLine[OPERATION_INDEX]);
         fruitTransaction.setOperation(operation);
         fruitTransaction.setFruit(splitedLine[FRUIT_INDEX]);
         fruitTransaction.setQuantity(Integer.parseInt(splitedLine[QUANTITY_INDEX]));
