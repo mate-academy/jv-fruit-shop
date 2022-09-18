@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitE;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operations.Operation;
 
@@ -29,7 +30,7 @@ public class ReaderServiceImpl implements ReaderService{
         String[] fields = line.split(",");
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(Operation.valueOf(fields[0]));
-        fruitTransaction.setFruit(fields[1]);
+        fruitTransaction.setFruit(FruitE.valueOf(fields[1]));
         fruitTransaction.setQuantity(Integer.parseInt(fields[2]));
         return fruitTransaction;
     }

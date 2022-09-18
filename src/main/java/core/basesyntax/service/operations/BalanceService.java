@@ -7,7 +7,8 @@ public class BalanceService implements Operations{
     /**
      * save to the Storage remnants of fruits at the beginning of the working day
      */
-    public void balance(FruitTransaction fruit) {
-        Storage.fruits.put(fruit.getFruit(),fruit.getQuantity());
+    @Override
+    public void realization(FruitTransaction fruit) {
+        );
     }
 }
