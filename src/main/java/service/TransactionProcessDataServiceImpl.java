@@ -7,58 +7,47 @@ import java.util.Map;
 import model.FruitTransaction;
 import service.transaction.TransactionHandler;
 import service.transaction.TransactionStrategy;
-import service.transaction.TransactionStrategyImpl;
 
-public class TransactionServiceImpl implements TransactionService {
+public class TransactionProcessDataServiceImpl implements TransactionProcessDataService {
     private static final String SIGN_SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final List<FruitTransaction> transactions = new ArrayList<>();
-    private final Map<String, Integer> storage = new HashMap<>();
     private final Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap;
 
-    public TransactionServiceImpl(Map<FruitTransaction.Operation,
+    public TransactionProcessDataServiceImpl(Map<FruitTransaction.Operation,
             TransactionHandler> transactionHandlerMap) {
         this.transactionHandlerMap = transactionHandlerMap;
     }
 
     @Override
-    public void processData(List<String> data) {
-        parseDataToTransactions(data);
-        executeTransactions();
+    public Map<String, Integer> processData(List<String> data) {
+        List<FruitTransaction> fruitTransactions = parseDataToTransactions(data);
+        return executeTransactions(fruitTransactions);
     }
 
-    @Override
-    public String generateReport() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<String, Integer> line : storage.entrySet()) {
-            stringBuilder.append(line.getKey())
-                    .append(",")
-                    .append(line.getValue())
-                    .append(System.lineSeparator());
-        }
-        return stringBuilder.toString();
-    }
-
-    private void executeTransactions() {
+    private Map<String, Integer> executeTransactions(List<FruitTransaction> transactions) {
+        Map<String, Integer> result = new HashMap<>();
         for (FruitTransaction transaction : transactions) {
             TransactionStrategy transactionStrategy =
-                    new TransactionStrategyImpl(transactionHandlerMap);
+                    new TransactionStrategy(transactionHandlerMap);
             TransactionHandler transactionHandler =
                     transactionStrategy.get(transaction.getOperation());
             int transactionResult = transactionHandler
-                    .getTransactionResult(storage.getOrDefault(transaction.getFruit(), 0),
+                    .getTransactionResult(result.getOrDefault(transaction.getFruit(), 0),
                             transaction.getQuantity());
-            storage.put(transaction.getFruit(), transactionResult);
+            result.put(transaction.getFruit(), transactionResult);
         }
+        return result;
     }
 
-    private void parseDataToTransactions(List<String> data) {
-        for (String line : data) {
-            FruitTransaction fruitTransaction = createTransaction(line);
+    private List<FruitTransaction> parseDataToTransactions(List<String> data) {
+        List<FruitTransaction> transactions = new ArrayList<>();
+        for (int i = 1; i < data.size(); i++) {
+            FruitTransaction fruitTransaction = createTransaction(data.get(i));
             transactions.add(fruitTransaction);
         }
+        return transactions;
     }
 
     private FruitTransaction createTransaction(String line) {
