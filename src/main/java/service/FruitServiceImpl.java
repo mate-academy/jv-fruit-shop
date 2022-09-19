@@ -8,6 +8,7 @@ import model.FruitTransaction;
 import strategy.OperationStrategy;
 
 public class FruitServiceImpl implements FruitService {
+    private static final String REPORT_TITLE = "fruit,quantity";
     private FruitQuantityStorageDao storageDao;
     private OperationStrategy operationStrategy;
 
@@ -17,15 +18,15 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public List<FruitTransaction> getReport(List<FruitTransaction> transactions) {
+    public String getReport(List<FruitTransaction> transactions) {
         transactions.forEach(c -> operationStrategy
                 .get(c.getTypeOperation())
                 .getOperationQuantity(c));
-        return transactions.stream()
+        String report = transactions.stream()
                 .map(FruitTransaction::getName)
                 .distinct()
-                .map(s -> new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        s,storageDao.get(s)))
-                .collect(Collectors.toList());
+                .map(s -> s + "," + storageDao.get(s))
+                .collect(Collectors.joining(System.lineSeparator()));
+        return REPORT_TITLE + System.lineSeparator() + report;
     }
 }

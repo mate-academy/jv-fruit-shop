@@ -13,7 +13,7 @@ public class ParseFruitTransactionImpl implements ParseFruitTransaction {
     private final int quantityFruit = 2;
 
     @Override
-    public List<FruitTransaction> getParseFruitTransaction(List<String> rowFruitTransaction) {
+    public List<FruitTransaction> parseToFruitTransactions(List<String> rowFruitTransaction) {
         return rowFruitTransaction.stream()
                 .filter(c -> c.matches(skipTitleFile))
                 .map(this::getFruitFromCsvRow)

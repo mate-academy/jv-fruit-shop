@@ -4,5 +4,5 @@ import java.util.List;
 import model.FruitTransaction;
 
 public interface ParseFruitTransaction {
-    List<FruitTransaction> getParseFruitTransaction(List<String> rowFruitTransaction);
+    List<FruitTransaction> parseToFruitTransactions(List<String> rowFruitTransaction);
 }

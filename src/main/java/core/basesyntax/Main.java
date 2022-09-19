@@ -24,27 +24,27 @@ import strategy.operationhandlers.SupplyOperationHandlerImpl;
  * Feel free to remove this class and create your own.
  */
 public class Main {
-    private static String fileToWrite = "src/main/resources/outputdate/report.csv";
-    private static String fileToRead = "src/main/resources/input/fruit.csv";
-    private static OperationHandler balance = new BalanceOperationHandlerImpl();
-    private static OperationHandler supply = new SupplyOperationHandlerImpl();
-    private static OperationHandler retur = new ReturnOperationHandlerImpl();
-    private static OperationHandler purchase = new PurchaseOperationHandlerImpl();
-    private static Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
-    private static FruitServiceReaderCsv readCsv = new FruitServiceReaderCsvImp();
-    private static ParseFruitTransaction parse = new ParseFruitTransactionImpl();
-    private static FruitServiceWriterCsv fruitWriterCsv = new FruitServiceWriterCsvImpl();
+    private static final String FILE_TO_WRITE = "src/main/resources/outputdate/report.csv";
+    private static final String FILE_TO_READ = "src/main/resources/input/fruit.csv";
 
     public static void main(String[] args) {
+        OperationHandler balance = new BalanceOperationHandlerImpl();
+        OperationHandler supply = new SupplyOperationHandlerImpl();
+        OperationHandler retur = new ReturnOperationHandlerImpl();
+        OperationHandler purchase = new PurchaseOperationHandlerImpl();
+        Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
+        FruitServiceReaderCsv readCsv = new FruitServiceReaderCsvImp();
+        ParseFruitTransaction parse = new ParseFruitTransactionImpl();
         map.put(FruitTransaction.Operation.BALANCE,balance);
         map.put(FruitTransaction.Operation.SUPPLY,supply);
         map.put(FruitTransaction.Operation.RETURN,retur);
         map.put(FruitTransaction.Operation.PURCHASE,purchase);
-        List<String> readFromFileCsv = readCsv.readFromFileCsv(fileToRead);
-        List<FruitTransaction> list = parse.getParseFruitTransaction(readFromFileCsv);
+        FruitServiceWriterCsv fruitWriterCsv = new FruitServiceWriterCsvImpl();
+        List<String> readFromFileCsv = readCsv.readFromFileCsv(FILE_TO_READ);
+        List<FruitTransaction> list = parse.parseToFruitTransactions(readFromFileCsv);
         OperationStrategy strategy = new OperationStrategyImpl(map);
         FruitService fruitService = new FruitServiceImpl(strategy);
-        List<FruitTransaction> reportFruitBalance = fruitService.getReport(list);
-        fruitWriterCsv.writeToFileCsv(reportFruitBalance,fileToWrite);
+        String report = fruitService.getReport(list);
+        fruitWriterCsv.writeToFileCsv(report, FILE_TO_WRITE);
     }
 }
