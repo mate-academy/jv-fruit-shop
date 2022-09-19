@@ -24,8 +24,8 @@ public class FruitServiceImpl implements FruitService {
         return transactions.stream()
                 .map(FruitTransaction::getName)
                 .distinct()
-                .map(c -> new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                        c,storageDao.get(c)))
+                .map(s -> new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                        s,storageDao.get(s)))
                 .collect(Collectors.toList());
     }
 }
