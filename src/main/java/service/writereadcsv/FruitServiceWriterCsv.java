@@ -1,10 +1,9 @@
 package service.writereadcsv;
 
 import java.util.List;
-import model.Fruit;
+import model.FruitTransaction;
 
 public interface FruitServiceWriterCsv {
-    void write(Fruit fruit);
 
-    void writeAll(List<Fruit> list);
+    void writeToFileCsv(List<FruitTransaction> list, String fileToPath);
 }

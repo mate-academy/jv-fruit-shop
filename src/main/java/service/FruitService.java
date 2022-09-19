@@ -1,8 +1,8 @@
 package service;
 
 import java.util.List;
-import model.Fruit;
+import model.FruitTransaction;
 
 public interface FruitService {
-    List<Fruit> getReport(List<Fruit> fruits);
+    List<FruitTransaction> getReport(List<FruitTransaction> transactions);
 }

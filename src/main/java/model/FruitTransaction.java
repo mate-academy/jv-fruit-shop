@@ -1,11 +1,11 @@
 package model;
 
-public class Fruit {
+public class FruitTransaction {
     private Operation typeOperation;
     private String name;
     private int quantity;
 
-    public Fruit(Operation typeOperation, String name, int quantity) {
+    public FruitTransaction(Operation typeOperation, String name, int quantity) {
         this.typeOperation = typeOperation;
         this.name = name;
         this.quantity = quantity;
