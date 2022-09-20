@@ -3,8 +3,7 @@ package core.basesyntax.fruitentry;
 import core.basesyntax.fruitentrytransaction.FruitEntryTransaction;
 import core.basesyntax.fruitentrytransaction.OperationStrategy;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Optional;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class FruitEntryService {
@@ -18,5 +17,9 @@ public class FruitEntryService {
                 .orElse(new FruitEntry(transaction.getFruitName()));
         fruitEntry.setQuantity(fruitEntry.getQuantity() + signedQuantityChange);
         fruitEntryRepository.save(fruitEntry);
+    }
+
+    public List<FruitEntry> getAllFruitEntries() {
+        return fruitEntryRepository.getAll();
     }
 }
