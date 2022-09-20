@@ -3,6 +3,8 @@ package core.basesyntax.fruitentrytransaction;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Optional;
+
 @Getter
 @AllArgsConstructor
 public class FruitEntryTransaction {
@@ -16,14 +18,23 @@ public class FruitEntryTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String name;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String name) {
+            this.name = name;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getName() {
+            return name;
+        }
+
+        public static Optional<Operation> findByName(String name){
+            for(Operation operation : Operation.values()){
+                if(operation.name.equals(name)){
+                    return Optional.of(operation);
+                }
+            }
+            return Optional.empty();
         }
     }
 }

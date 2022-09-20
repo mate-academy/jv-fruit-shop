@@ -11,7 +11,7 @@ public class FruitEntryService {
     private final FruitEntryRepository fruitEntryRepository;
     private final OperationStrategy operationStrategy;
 
-    public void makeTransaction(FruitEntryTransaction transaction) {
+    public void applyTransaction(FruitEntryTransaction transaction) {
         int quantitySign = operationStrategy.get(transaction.getOperation()).getOperationSign();
         int signedQuantityChange = transaction.getQuantity() * quantitySign;
         FruitEntry fruitEntry = fruitEntryRepository.getByFruitName(transaction.getFruitName())
@@ -22,6 +22,10 @@ public class FruitEntryService {
         }
         fruitEntry.setQuantity(newQuantity);
         fruitEntryRepository.save(fruitEntry);
+    }
+
+    public void applyAllTransactions(List<FruitEntryTransaction> fruitEntryTransactions) {
+        fruitEntryTransactions.forEach(this::applyTransaction);
     }
 
     public List<FruitEntry> getAllFruitEntries() {
