@@ -1,9 +1,8 @@
 package core.basesyntax.fruitentrytransaction;
 
+import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.util.Optional;
 
 @Getter
 @AllArgsConstructor
@@ -28,9 +27,9 @@ public class FruitEntryTransaction {
             return name;
         }
 
-        public static Optional<Operation> findByName(String name){
-            for(Operation operation : Operation.values()){
-                if(operation.name.equals(name)){
+        public static Optional<Operation> findByName(String name) {
+            for (Operation operation : Operation.values()) {
+                if (operation.name.equals(name)) {
                     return Optional.of(operation);
                 }
             }

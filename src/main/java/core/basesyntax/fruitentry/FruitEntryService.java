@@ -3,8 +3,8 @@ package core.basesyntax.fruitentry;
 import core.basesyntax.fruitentry.exception.NotEnoughQuantityException;
 import core.basesyntax.fruitentrytransaction.FruitEntryTransaction;
 import core.basesyntax.fruitentrytransaction.OperationStrategy;
-import lombok.RequiredArgsConstructor;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class FruitEntryService {

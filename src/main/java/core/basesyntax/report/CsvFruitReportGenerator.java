@@ -1,19 +1,18 @@
 package core.basesyntax.report;
 
 import core.basesyntax.fruitentry.FruitEntryService;
-import lombok.RequiredArgsConstructor;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class CsvFruitReportGenerator implements FileReportGenerator {
-    private final FruitEntryService fruitEntryService;
-    private final String tokenSeparator;
     private static final List<String> REPORT_HEADING_TOKENS = List.of("fruit", "quantity");
     private static final String EMPTY_REPORT = "";
+    private final FruitEntryService fruitEntryService;
+    private final String tokenSeparator;
 
     @Override
     public void generateFileReport(Path pathToReport) {

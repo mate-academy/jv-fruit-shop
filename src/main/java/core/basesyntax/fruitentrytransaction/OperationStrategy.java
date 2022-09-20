@@ -1,10 +1,8 @@
 package core.basesyntax.fruitentrytransaction;
 
-import lombok.RequiredArgsConstructor;
-
 import core.basesyntax.fruitentrytransaction.operation.OperationHandler;
-
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class OperationStrategy {

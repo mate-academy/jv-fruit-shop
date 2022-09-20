@@ -2,7 +2,6 @@ package core.basesyntax.fruitentry.impl;
 
 import core.basesyntax.fruitentry.FruitEntry;
 import core.basesyntax.fruitentry.FruitEntryRepository;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
