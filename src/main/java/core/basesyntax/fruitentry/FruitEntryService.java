@@ -1,5 +1,6 @@
 package core.basesyntax.fruitentry;
 
+import core.basesyntax.fruitentry.exception.NotEnoughQuantityException;
 import core.basesyntax.fruitentrytransaction.FruitEntryTransaction;
 import core.basesyntax.fruitentrytransaction.OperationStrategy;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +16,11 @@ public class FruitEntryService {
         int signedQuantityChange = transaction.getQuantity() * quantitySign;
         FruitEntry fruitEntry = fruitEntryRepository.getByFruitName(transaction.getFruitName())
                 .orElse(new FruitEntry(transaction.getFruitName()));
-        fruitEntry.setQuantity(fruitEntry.getQuantity() + signedQuantityChange);
+        int newQuantity = fruitEntry.getQuantity() + signedQuantityChange;
+        if (newQuantity < 0) {
+            throw new NotEnoughQuantityException("Quantity can't be negative");
+        }
+        fruitEntry.setQuantity(newQuantity);
         fruitEntryRepository.save(fruitEntry);
     }
 
