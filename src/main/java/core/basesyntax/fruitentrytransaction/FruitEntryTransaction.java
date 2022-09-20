@@ -1,11 +1,11 @@
-package core.basesyntax.fruitentry.dto;
+package core.basesyntax.fruitentrytransaction;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class FruitEntryTransactionDto {
+public class FruitEntryTransaction {
     private final Operation operation;
     private final String fruitName;
     private final int quantity;
