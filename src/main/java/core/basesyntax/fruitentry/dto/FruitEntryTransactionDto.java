@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class FruitEntryTransactionDto {
     private final Operation operation;
-    private final String fruit;
+    private final String fruitName;
     private final int quantity;
 
     public enum Operation {
