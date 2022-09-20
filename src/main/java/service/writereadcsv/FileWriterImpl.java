@@ -4,8 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class FruitServiceWriterCsvImpl implements FruitServiceWriterCsv {
-
+public class FileWriterImpl implements FileWriter {
     @Override
     public void writeToFileCsv(String report, String fileToPath) {
         File file = new File(fileToPath);

@@ -5,7 +5,6 @@ import dao.FruitQuantityStorageDaoImpl;
 import model.FruitTransaction;
 
 public class SupplyOperationHandlerImpl implements OperationHandler {
-
     private FruitQuantityStorageDao dao = new FruitQuantityStorageDaoImpl();
 
     @Override

@@ -1,6 +1,5 @@
 package service.writereadcsv;
 
-public interface FruitServiceWriterCsv {
-
+public interface FileWriter {
     void writeToFileCsv(String report, String fileToPath);
 }

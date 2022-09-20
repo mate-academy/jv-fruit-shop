@@ -2,6 +2,6 @@ package service.writereadcsv;
 
 import java.util.List;
 
-public interface FruitServiceReaderCsv {
+public interface FileReader {
     List<String> readFromFileCsv(String filePath);
 }
