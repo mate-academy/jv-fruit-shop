@@ -8,4 +8,8 @@ import lombok.Data;
 public class FruitEntry {
     private String fruitName;
     private int quantity;
+
+    public FruitEntry(String fruitName) {
+        this(fruitName, 0);
+    }
 }
