@@ -3,7 +3,6 @@ package core.basesyntax;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import model.FruitTransaction;
 import service.FruitService;
 import service.FruitServiceImpl;
@@ -47,5 +46,5 @@ public class Main {
         FruitService fruitService = new FruitServiceImpl(strategy);
         String report = fruitService.getReport(list);
         fruitWriterCsv.writeToFileCsv(report, FILE_TO_WRITE);
-       }
+    }
 }
