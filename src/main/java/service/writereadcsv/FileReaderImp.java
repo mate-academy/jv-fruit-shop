@@ -8,12 +8,10 @@ import java.util.List;
 public class FileReaderImp implements FileReader {
     @Override
     public List<String> readFromFileCsv(String filePath) {
-        List<String> fruitsList;
         try {
-            fruitsList = Files.readAllLines(Path.of(filePath));
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + filePath, e);
         }
-        return fruitsList;
     }
 }

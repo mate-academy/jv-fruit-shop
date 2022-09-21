@@ -1,17 +1,16 @@
 package service.writereadcsv;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class FileWriterImpl implements FileWriter {
     @Override
     public void writeToFileCsv(String report, String fileToPath) {
-        File file = new File(fileToPath);
         try {
-            Files.write(file.toPath(), report.getBytes());
+            Files.write(Path.of(fileToPath), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to the file " + file.getPath(), e);
+            throw new RuntimeException("Can't write data to the file " + fileToPath, e);
         }
     }
 }

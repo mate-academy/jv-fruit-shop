@@ -1,12 +1,14 @@
 package model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
-    private Operation typeOperation;
+    private Operation operation;
     private String name;
     private int quantity;
 
-    public FruitTransaction(Operation typeOperation, String name, int quantity) {
-        this.typeOperation = typeOperation;
+    public FruitTransaction(Operation operation, String name, int quantity) {
+        this.operation = operation;
         this.name = name;
         this.quantity = quantity;
     }
@@ -19,15 +21,15 @@ public class FruitTransaction {
         return quantity;
     }
 
-    public Operation getTypeOperation() {
-        return typeOperation;
+    public Operation getOperation() {
+        return operation;
     }
 
     @Override
     public String toString() {
         return "Fruit {" + "name ='" + name + '\''
                 + ", quantity = " + quantity
-                + ", Operation = " + typeOperation + '}';
+                + ", Operation = " + operation + '}';
     }
 
     public enum Operation {
@@ -36,14 +38,22 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String operationCode;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String operationCode) {
+            this.operationCode = operationCode;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getOperationCode() {
+            return operationCode;
+        }
+
+        public static FruitTransaction.Operation getByCode(String operationCode) {
+            return Arrays.stream(FruitTransaction.Operation.values())
+                    .filter(c -> c.getOperationCode().equals(operationCode))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Activities at the store is not valid, "
+                            + "add new activity to Enum (Operation)"));
         }
     }
 }

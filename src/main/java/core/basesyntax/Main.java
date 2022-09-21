@@ -1,50 +1,43 @@
 package core.basesyntax;
 
-import java.util.HashMap;
+import dao.FruitStorageDao;
+import dao.FruitStorageDaoImpl;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.FruitService;
-import service.FruitServiceImpl;
-import service.parsefruitransaction.ParseFruitTransaction;
-import service.parsefruitransaction.ParseFruitTransactionImpl;
+import service.fruittransactionparser.FruitTransactionParser;
+import service.fruittransactionparser.FruitTransactionParserImpl;
+import service.report.ReportService;
+import service.report.ReportServiceImpl;
+import service.transactionexecutor.TransactionExecutor;
+import service.transactionexecutor.TransactionExecutorImpl;
 import service.writereadcsv.FileReader;
 import service.writereadcsv.FileReaderImp;
 import service.writereadcsv.FileWriter;
 import service.writereadcsv.FileWriterImpl;
-import strategy.OperationStrategy;
-import strategy.OperationStrategyImpl;
-import strategy.operationhandlers.BalanceOperationHandlerImpl;
-import strategy.operationhandlers.OperationHandler;
-import strategy.operationhandlers.PurchaseOperationHandlerImpl;
-import strategy.operationhandlers.ReturnOperationHandlerImpl;
-import strategy.operationhandlers.SupplyOperationHandlerImpl;
+import strategy.operationmap.OperationMapImpl;
+import strategy.operationstrategy.OperationStrategy;
+import strategy.operationstrategy.OperationStrategyImpl;
+import strategy.transactionhandlers.TransactionHandler;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
     private static final String FILE_TO_WRITE = "src/main/resources/outputdate/report.csv";
     private static final String FILE_TO_READ = "src/main/resources/input/fruit.csv";
 
     public static void main(String[] args) {
-        OperationHandler balance = new BalanceOperationHandlerImpl();
-        OperationHandler supply = new SupplyOperationHandlerImpl();
-        OperationHandler retur = new ReturnOperationHandlerImpl();
-        OperationHandler purchase = new PurchaseOperationHandlerImpl();
-        Map<FruitTransaction.Operation, OperationHandler> map = new HashMap<>();
         FileReader readCsv = new FileReaderImp();
-        ParseFruitTransaction parse = new ParseFruitTransactionImpl();
-        map.put(FruitTransaction.Operation.BALANCE,balance);
-        map.put(FruitTransaction.Operation.SUPPLY,supply);
-        map.put(FruitTransaction.Operation.RETURN,retur);
-        map.put(FruitTransaction.Operation.PURCHASE,purchase);
-        FileWriter fruitWriterCsv = new FileWriterImpl();
         List<String> readFromFileCsv = readCsv.readFromFileCsv(FILE_TO_READ);
+        FruitTransactionParser parse = new FruitTransactionParserImpl();
         List<FruitTransaction> list = parse.parseToFruitTransactions(readFromFileCsv);
+        Map<FruitTransaction.Operation, TransactionHandler> map = new OperationMapImpl()
+                .getOperationMap();
         OperationStrategy strategy = new OperationStrategyImpl(map);
-        FruitService fruitService = new FruitServiceImpl(strategy);
-        String report = fruitService.getReport(list);
-        fruitWriterCsv.writeToFileCsv(report, FILE_TO_WRITE);
+        TransactionExecutor executor = new TransactionExecutorImpl(strategy);
+        executor.executeTransaction(list);
+        FruitStorageDao dao = new FruitStorageDaoImpl();
+        ReportService reportService = new ReportServiceImpl(dao);
+        String reportToWrite = reportService.getReport();
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFileCsv(reportToWrite,FILE_TO_WRITE);
     }
 }
