@@ -4,6 +4,8 @@ import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReaderServiceImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.WriterServiceImpl;
 import core.basesyntax.service.operations.BalanceService;
 import core.basesyntax.service.operations.Operation;
 import core.basesyntax.service.operations.Operations;
@@ -30,13 +32,15 @@ public class Main {
 
         ReaderService readerService = new ReaderServiceImpl();
         ShopService shopService = new ShopServiceImpl(new OperationsStrategyImpl(operationOperationsMap));
-        shopService.transaction( readerService.readFromFile("type,fruit,quantity" +
+        shopService.transaction( readerService.readFromString("type,fruit,quantity" +
                 "b,banana,20" +
                 "b,apple,100" +
                 "s,banana,100" +
                 "p,banana,13" +
                 "r,apple,10"));
-
+        WriterService writerService = new WriterServiceImpl();
+        writerService.writeToFile().forEach(s -> System.out.println());
     }
+
 }
 

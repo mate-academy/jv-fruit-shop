@@ -1,13 +1,17 @@
 package core.basesyntax.model;
 
-public class Fruit {
-    private Integer amount;
+public enum Fruit {
 
-    public Integer getAmount() {
-        return amount;
+    BANANA("banana"),
+    APPLE("apple");
+
+    private final String fruitTitle;
+
+    Fruit(String operationTitle){
+        this.fruitTitle = operationTitle;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public String getFruitTitle() {
+        return fruitTitle;
     }
 }

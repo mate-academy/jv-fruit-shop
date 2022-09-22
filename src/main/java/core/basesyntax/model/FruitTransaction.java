@@ -4,7 +4,7 @@ import core.basesyntax.service.operations.Operation;
 
 public class FruitTransaction {
   private Operation operation;
-  private FruitE fruit;
+  private Fruit fruit;
   private int quantity;
 
   public Operation getOperation() {
@@ -15,11 +15,11 @@ public class FruitTransaction {
     this.operation = operation;
   }
 
-  public FruitE getFruit() {
+  public Fruit getFruit() {
     return fruit;
   }
 
-  public void setFruit(FruitE fruit) {
+  public void setFruit(Fruit fruit) {
     this.fruit = fruit;
   }
 
