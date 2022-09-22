@@ -13,7 +13,6 @@ import core.basesyntax.service.operations.OperationsStrategyImpl;
 import core.basesyntax.service.operations.PurchaseService;
 import core.basesyntax.service.operations.ReturnService;
 import core.basesyntax.service.operations.SupplyService;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,15 +30,16 @@ public class Main {
         operationOperationsMap.put(Operation.R, returnService);
 
         ReaderService readerService = new ReaderServiceImpl();
-        ShopService shopService = new ShopServiceImpl(new OperationsStrategyImpl(operationOperationsMap));
-        shopService.transaction( readerService.readFromString("b,banana,20"+ System.lineSeparator() +
-                "b,apple,100" + System.lineSeparator() +
-                "s,banana,100" + System.lineSeparator() +
-                "p,banana,13" + System.lineSeparator() +
-                "r,apple,10"));
+        ShopService shopService = new ShopServiceImpl(
+                new OperationsStrategyImpl(operationOperationsMap));
+        shopService.transaction(readerService.readFromString(
+                "b,banana,20" + System.lineSeparator()
+                + "b,apple,100" + System.lineSeparator()
+                + "s,banana,100" + System.lineSeparator()
+                + "p,banana,13" + System.lineSeparator()
+                + "r,apple,10"));
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile().forEach(System.out::println);
     }
-
 }
 

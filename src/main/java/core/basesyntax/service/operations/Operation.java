@@ -7,10 +7,11 @@ public enum Operation {
     S("SUPPLY");
     private final String operationTitle;
 
-    Operation(String operationTitle){
+    Operation(String operationTitle) {
         this.operationTitle = operationTitle;
     }
-    public String getTitle(){
+
+    public String getTitle() {
         return operationTitle;
     }
 
