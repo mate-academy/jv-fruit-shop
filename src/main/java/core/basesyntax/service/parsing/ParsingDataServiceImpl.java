@@ -35,6 +35,6 @@ public class ParsingDataServiceImpl implements ParsingDataService {
         String[] splitLines = line.split(",");
         int count = operationStrategy.get(splitLines[OPERATOR])
                 .getOperation(Integer.parseInt(splitLines[FRUIT_COUNT]));
-        storageDao.update(splitLines[1], storageDao.getCountFruit(splitLines[FRUIT]) + count);
+        storageDao.update(splitLines[FRUIT], storageDao.getCountFruit(splitLines[FRUIT]) + count);
     }
 }
