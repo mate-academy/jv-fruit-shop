@@ -25,21 +25,20 @@ public class Main {
         ReturnService returnService = new ReturnService();
 
         Map<Operation, Operations> operationOperationsMap = new HashMap<>();
-        operationOperationsMap.put(Operation.BALANCE, balanceService);
-        operationOperationsMap.put(Operation.PURCHASE, purchaseService);
-        operationOperationsMap.put(Operation.SUPPLY, supplyService);
-        operationOperationsMap.put(Operation.RETURN, returnService);
+        operationOperationsMap.put(Operation.B, balanceService);
+        operationOperationsMap.put(Operation.P, purchaseService);
+        operationOperationsMap.put(Operation.S, supplyService);
+        operationOperationsMap.put(Operation.R, returnService);
 
         ReaderService readerService = new ReaderServiceImpl();
         ShopService shopService = new ShopServiceImpl(new OperationsStrategyImpl(operationOperationsMap));
-        shopService.transaction( readerService.readFromString("type,fruit,quantity" +
-                "b,banana,20" +
-                "b,apple,100" +
-                "s,banana,100" +
-                "p,banana,13" +
+        shopService.transaction( readerService.readFromString("b,banana,20"+ System.lineSeparator() +
+                "b,apple,100" + System.lineSeparator() +
+                "s,banana,100" + System.lineSeparator() +
+                "p,banana,13" + System.lineSeparator() +
                 "r,apple,10"));
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile().forEach(s -> System.out.println());
+        writerService.writeToFile().forEach(System.out::println);
     }
 
 }

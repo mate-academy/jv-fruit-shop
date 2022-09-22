@@ -1,14 +1,17 @@
 package core.basesyntax.service.operations;
 
 public enum Operation {
-    BALANCE("b"),
-    PURCHASE("p"),
-    RETURN("r"),
-    SUPPLY("s");
+    B("BALANCE"),
+    P("PURCHASE"),
+    R("RETURN"),
+    S("SUPPLY");
     private final String operationTitle;
 
     Operation(String operationTitle){
         this.operationTitle = operationTitle;
+    }
+    public String getTitle(){
+        return operationTitle;
     }
 
     public String getOperationTitle() {

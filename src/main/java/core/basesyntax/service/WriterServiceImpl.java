@@ -20,6 +20,6 @@ public class WriterServiceImpl implements WriterService{
     private String getFromMap(Map.Entry<Fruit,Integer> set){
         String fruit = set.getKey().toString().toLowerCase();
         String quantity = set.getValue().toString();
-        return fruit + ", " + quantity + System.lineSeparator();
+        return fruit + "," + quantity;
     }
 }

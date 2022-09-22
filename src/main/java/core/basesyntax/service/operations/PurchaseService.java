@@ -1,6 +1,7 @@
 package core.basesyntax.service.operations;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
@@ -8,7 +9,7 @@ public class PurchaseService implements Operations{
     /**
      * Take some amount of some fruits from storage
      */
-    FruitDao fruitDao;
+    FruitDao fruitDao = new FruitDaoImpl();
     @Override
     public void realization(FruitTransaction fruitTransaction) {
         int beginAmount;
