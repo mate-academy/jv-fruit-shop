@@ -22,19 +22,14 @@ public class ParsingDataServiceImpl implements ParsingDataService {
 
     @Override
     public void parsingFromList(List<String> fruits) {
-        Map<String, OperationHandler> operationHandlersMap = new HashMap<>();
-        operationHandlersMap.put("b", new BalanceOperationHandler());
-        operationHandlersMap.put("p", new PurchaseOperationHandler());
-        operationHandlersMap.put("r", new ReturnOperationHandler());
-        operationHandlersMap.put("s", new SupplyOperationHandler());
-        operationStrategy = new OperationStrategyImpl(operationHandlersMap);
+
         fruits.stream().skip(1).forEach(this::parsingLine);
     }
 
     private void parsingLine(String line) {
         String[] splitLines = line.split(",");
-        int count = operationStrategy.get(splitLines[OPERATOR])
-                .getOperation(Integer.parseInt(splitLines[FRUIT_COUNT]));
-        storageDao.update(splitLines[FRUIT], storageDao.getCountFruit(splitLines[FRUIT]) + count);
+    //    int count = operationStrategy.get(splitLines[OPERATOR])
+        //        .getOperation(Integer.parseInt(splitLines[FRUIT_COUNT]));
+     //   storageDao.update(splitLines[FRUIT], storageDao.getCountFruit(splitLines[FRUIT]) + count);
     }
 }
