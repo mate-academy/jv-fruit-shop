@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import jdk.dynalink.Operation;
+import java.util.Arrays;
 
 public class FruitTransaction {
     private Operation operation;
@@ -11,24 +11,35 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
-    }
-
     public String getFruit() {
         return fruit;
-    }
-
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public FruitTransaction setOperation(Operation operation) {
+        this.operation = operation;
+        return this;
+    }
+
+    public FruitTransaction setOperation(String operation) {
+        this.operation = Arrays.stream(Operation.values())
+                .filter(o -> o.getOperation().equals(operation))
+                .findFirst()
+                .get();
+        return this;
+    }
+
+    public FruitTransaction setFruit(String fruit) {
+        this.fruit = fruit;
+        return this;
+    }
+
+    public FruitTransaction setQuantity(int quantity) {
         this.quantity = quantity;
+        return this;
     }
 
     @Override
