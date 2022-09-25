@@ -30,7 +30,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public String getAllFruitsFromStorage() {
+     public String getAllFruitsFromStorage() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<String, Integer> entry : Storage.fruitsStorage.entrySet()) {
             stringBuilder.append(entry.getKey())

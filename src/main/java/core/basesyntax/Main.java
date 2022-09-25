@@ -7,10 +7,17 @@ import core.basesyntax.service.TransactionParseService;
 import core.basesyntax.service.TransactionParseServiceImpl;
 import core.basesyntax.service.filesoperation.FileReader;
 import core.basesyntax.service.filesoperation.FileReaderImpl;
-import core.basesyntax.service.operationwithfruits.*;
+import core.basesyntax.service.filesoperation.FileWrite;
+import core.basesyntax.service.filesoperation.FileWriteImpl;
+import core.basesyntax.service.operationwithfruits.BalanceOperationHandler;
+import core.basesyntax.service.operationwithfruits.OperationHandler;
+import core.basesyntax.service.operationwithfruits.PurchaseOperationHandler;
+import core.basesyntax.service.operationwithfruits.ReturnOperationHandler;
+import core.basesyntax.service.operationwithfruits.SupplyOperationHandler;
+import core.basesyntax.service.report.CsvReportServiceImpl;
+import core.basesyntax.service.report.ReportService;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,26 +29,22 @@ public class Main {
     public static void main(String[] arg) {
         StorageDao storageDao = new StorageDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> strategy = new HashMap<>();
-        strategy.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        strategy.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        strategy.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        strategy.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        strategy.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(storageDao));
+        strategy.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(storageDao));
+        strategy.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler(storageDao));
+        strategy.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(storageDao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategy);
-
-
-        //Import data
         FileReader fileReader = new FileReaderImpl();
         List<String> dailyTransactionList = fileReader.read(INPUT_FILE);
-        //Parse transactions
         TransactionParseService parserService = new TransactionParseServiceImpl();
-        List<FruitTransaction> transactionList = parserService.transactionParse(dailyTransactionList);
-        //Transaction processing
+        List<FruitTransaction> transactionList = parserService
+                .transactionParse(dailyTransactionList);
         for (FruitTransaction fruitTransaction: transactionList) {
-            strategy.get(fruitTransaction.getOperation());
-         }
-
-
-        System.out.println("test");
-
+            operationStrategy.get(fruitTransaction.getOperation()).getOperation(fruitTransaction);
+        }
+        ReportService reportService = new CsvReportServiceImpl(storageDao);
+        String report = reportService.createReport();
+        FileWrite fileWriter = new FileWriteImpl();
+        fileWriter.writer(REPORT_FILE,report);
     }
 }
