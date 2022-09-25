@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String REPORT_TITLE = "fruit,quantity";
-    private static final String SIPARATOR = ",";
+    private static final String SEPARATOR = ",";
 
     @Override
     public String createReport(Map<String, Integer> fruitStorage) {
@@ -14,7 +14,7 @@ public class ReportServiceImpl implements ReportService {
         for (Map.Entry<String, Integer> entry: fruitStorage.entrySet()) {
             reportBuilder.append(System.lineSeparator())
                     .append(entry.getKey())
-                    .append(SIPARATOR)
+                    .append(SEPARATOR)
                     .append(entry.getValue());
         }
         return reportBuilder.toString();

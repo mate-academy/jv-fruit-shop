@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_PATH = "src/main/resources/example.csv";
-    private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/example.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/report.csv";
     private static final int DATA_START_INDEX = 1;
 
     public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class Main {
             FruitTransaction fruitTransaction = parseService.parse(raw);
             OperationHandler operationHandler =
                     operationStrategy.get(fruitTransaction.getOperation());
-            operationHandler.handler(fruitTransaction);
+            operationHandler.handle(fruitTransaction);
         }
 
         Map<String, Integer> fruitStorage = fruitDao.getAll();

@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-
     @Override
     public void addFruit(String fruit, Integer quantity) {
         Storage.fruitStorage.put(fruit, quantity);

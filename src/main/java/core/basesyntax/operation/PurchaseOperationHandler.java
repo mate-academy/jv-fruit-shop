@@ -11,7 +11,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void handler(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int amount = fruitDao.getQuantity(fruit);
         int purchaseAmount = transaction.getQuantity();
