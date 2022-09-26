@@ -4,23 +4,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransactionParseServiceImpl implements TransactionParseService {
-    private static final int OPERATOR = 0;
-    private static final int FRUIT = 1;
-    private static final int FRUIT_COUNT = 2;
+    private static final int OPERATOR_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int COUNT_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> transactionParse(List<String> dailyTransactionList) {
+    public List<FruitTransaction> parse(List<String> dailyTransactionList) {
         return dailyTransactionList.stream()
                 .skip(1)
-                .map(this::parsingLine).collect(Collectors.toList());
+                .map(this::parsingLine)
+                .collect(Collectors.toList());
     }
 
     private FruitTransaction parsingLine(String line) {
         String[] splitLines = line.split(",");
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(fruitTransaction.convertOperation(splitLines[OPERATOR]));
-        fruitTransaction.setFruit(splitLines[FRUIT]);
-        fruitTransaction.setQuantity(Integer.parseInt(splitLines[FRUIT_COUNT]));
+        fruitTransaction.setOperation(fruitTransaction
+                .convertOperation(splitLines[OPERATOR_INDEX]));
+        fruitTransaction.setFruit(splitLines[FRUIT_INDEX]);
+        fruitTransaction.setQuantity(Integer.parseInt(splitLines[COUNT_INDEX]));
         return fruitTransaction;
     }
 }

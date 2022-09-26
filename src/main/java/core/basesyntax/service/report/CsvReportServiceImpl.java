@@ -1,6 +1,8 @@
 package core.basesyntax.service.report;
 
 import core.basesyntax.dao.StorageDao;
+import core.basesyntax.db.Storage;
+import java.util.Map;
 
 public class CsvReportServiceImpl implements ReportService {
     private static final String REPORT_HEADER = "fruit,quantity";
@@ -13,9 +15,14 @@ public class CsvReportServiceImpl implements ReportService {
     @Override
     public String createReport() {
         StringBuilder stringBuilder = new StringBuilder();
-        return stringBuilder.append(REPORT_HEADER)
-                .append(System.lineSeparator())
-                .append(storageDao.getAllFruitsFromStorage())
-                .toString();
+        stringBuilder.append(REPORT_HEADER)
+                .append(System.lineSeparator());
+        for (Map.Entry<String, Integer> entry : Storage.fruitsStorage.entrySet()) {
+            stringBuilder.append(entry.getKey())
+                    .append(",")
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
+        }
+        return stringBuilder.toString();
     }
 }

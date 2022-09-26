@@ -9,5 +9,4 @@ public interface StorageDao {
 
     Integer getCountFruit(String fruit);
 
-    String getAllFruitsFromStorage();
 }

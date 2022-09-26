@@ -38,13 +38,13 @@ public class Main {
         List<String> dailyTransactionList = fileReader.read(INPUT_FILE);
         TransactionParseService parserService = new TransactionParseServiceImpl();
         List<FruitTransaction> transactionList = parserService
-                .transactionParse(dailyTransactionList);
+                .parse(dailyTransactionList);
         for (FruitTransaction fruitTransaction: transactionList) {
             operationStrategy.get(fruitTransaction.getOperation()).getOperation(fruitTransaction);
         }
         ReportService reportService = new CsvReportServiceImpl(storageDao);
         String report = reportService.createReport();
         FileWrite fileWriter = new FileWriteImpl();
-        fileWriter.writer(REPORT_FILE,report);
+        fileWriter.write(REPORT_FILE,report);
     }
 }

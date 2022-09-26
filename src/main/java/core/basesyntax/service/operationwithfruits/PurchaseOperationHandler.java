@@ -12,6 +12,10 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void getOperation(FruitTransaction transaction) {
+        if (transaction.getQuantity() > storageDao.getCountFruit(transaction.getFruit())) {
+            throw new RuntimeException("The quantity exceeds its availability for "
+                    + transaction.getFruit());
+        }
         storageDao.update(transaction.getFruit(),
                 storageDao.getCountFruit(transaction.getFruit())
                         - transaction.getQuantity());
