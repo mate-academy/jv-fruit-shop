@@ -12,18 +12,18 @@ public enum Operation {
     }
 
     public static Operation getEnumByTitle(String s) {
-      switch (s){
-          case "b":
-              return BALANCE;
-          case "p":
-              return PURCHASE;
-          case "r":
-              return RETURN;
-          case "s":
-              return SUPPLY;
-          default:
-              throw new RuntimeException("Unknown operation: " + s);
-      }
+        switch (s) {
+            case "b":
+                return BALANCE;
+            case "p":
+                return PURCHASE;
+            case "r":
+                return RETURN;
+            case "s":
+                return SUPPLY;
+            default:
+                throw new RuntimeException("Unknown operation: " + s);
+        }
     }
 
     public String getOperationTitle() {

@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.io.File;
 import java.util.List;
 

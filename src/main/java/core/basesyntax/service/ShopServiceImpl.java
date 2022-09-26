@@ -3,9 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operations.Operation;
 import core.basesyntax.service.operations.OperationHandler;
-import core.basesyntax.service.operations.OperationStrategy;
 import core.basesyntax.service.operations.OperationsStrategyImpl;
-import java.util.List;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
@@ -18,7 +16,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public OperationHandler transaction(FruitTransaction fruitTransactions) {
-      return operationsStrategy.chooseOperation(fruitTransactions.getOperation());
+        return operationsStrategy.chooseOperation(fruitTransactions.getOperation());
     }
 }
 
