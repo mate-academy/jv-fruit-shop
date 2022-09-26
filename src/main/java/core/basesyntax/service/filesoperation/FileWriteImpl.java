@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriteImpl implements FileWrite {
-
     @Override
     public void write(String filePath, String data) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
