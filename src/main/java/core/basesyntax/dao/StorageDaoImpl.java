@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
+import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     private static final Integer DEFAULT_COUNT = 0;
@@ -26,5 +27,9 @@ public class StorageDaoImpl implements StorageDao {
             createFruit(fruit);
         }
         return Storage.fruitsStorage.get(fruit);
+    }
+
+    public Map<String, Integer> getAllFruitsFromStorage() {
+        return Storage.fruitsStorage;
     }
 }
