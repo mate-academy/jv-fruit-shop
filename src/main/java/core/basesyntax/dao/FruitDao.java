@@ -1,15 +1,13 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 
 public interface FruitDao {
-    int getFruitAmount(FruitTransaction fruitTransaction);
+    int getAmount(String fruitName);
 
-    void add(FruitTransaction fruitTransaction);
+    void add(String fruitName, int quantity);
 
-    void changeAmount(FruitTransaction fruitTransaction, int newAmount);
+    void changeAmount(String fruitName, int newAmount);
 
-    HashMap<Fruit, Integer> getStorage();
+    HashMap<String, Integer> getStorageData();
 }

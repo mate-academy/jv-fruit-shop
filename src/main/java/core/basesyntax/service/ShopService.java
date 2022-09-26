@@ -1,9 +1,11 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.operations.OperationHandler;
+
 import java.util.List;
 
 public interface ShopService {
 
-    void transaction(List<FruitTransaction> fruitTransactions);
+    OperationHandler transaction(FruitTransaction fruitTransactions);
 }

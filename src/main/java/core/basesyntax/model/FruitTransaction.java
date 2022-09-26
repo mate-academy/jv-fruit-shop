@@ -4,12 +4,12 @@ import core.basesyntax.service.operations.Operation;
 
 public class FruitTransaction {
     private Operation operation;
-    private Fruit fruit;
+    private String fruitName;
     private int quantity;
 
-    public FruitTransaction(Operation operation, Fruit fruit, int quantity) {
+    public FruitTransaction(Operation operation, String fruitName, int quantity) {
         this.operation = operation;
-        this.fruit = fruit;
+        this.fruitName = fruitName;
         this.quantity = quantity;
     }
 
@@ -21,12 +21,12 @@ public class FruitTransaction {
         this.operation = operation;
     }
 
-    public Fruit getFruit() {
-        return fruit;
+    public String getFruit() {
+        return fruitName;
     }
 
-    public void setFruit(Fruit fruit) {
-        this.fruit = fruit;
+    public void setFruit(String fruitName) {
+        this.fruitName = fruitName;
     }
 
     public int getQuantity() {

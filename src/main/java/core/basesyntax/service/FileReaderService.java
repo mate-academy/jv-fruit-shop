@@ -1,8 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
+
+import java.io.File;
 import java.util.List;
 
-public interface ReaderService {
-    List<FruitTransaction> readFromString(String filePath);
+public interface FileReaderService {
+    List<FruitTransaction> read(File file);
 }
