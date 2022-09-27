@@ -1,6 +1,5 @@
 package core.basesyntax.service;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
