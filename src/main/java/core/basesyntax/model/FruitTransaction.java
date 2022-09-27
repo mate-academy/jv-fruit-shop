@@ -37,4 +37,3 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 }
-

@@ -7,12 +7,13 @@ import core.basesyntax.model.FruitTransaction;
 public class BalanceHandler implements OperationHandler {
     private final FruitDao fruitDao;
 
-    public BalanceHandler() {
-        this.fruitDao = new FruitDaoImpl();
+    public BalanceHandler(FruitDao fruitDao) {
+
+        this.fruitDao = fruitDao;
     }
 
     @Override
-    public void doOperation(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         fruitDao.add(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

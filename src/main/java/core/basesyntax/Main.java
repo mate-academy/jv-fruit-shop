@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileReaderServiceImpl;
@@ -21,10 +23,11 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        BalanceHandler balanceService = new BalanceHandler();
-        PurchaseService purchaseService = new PurchaseService();
-        SupplyService supplyService = new SupplyService();
-        ReturnService returnService = new ReturnService();
+        FruitDao fruitDao = new FruitDaoImpl();
+        BalanceHandler balanceService = new BalanceHandler(fruitDao);
+        PurchaseService purchaseService = new PurchaseService(fruitDao);
+        SupplyService supplyService = new SupplyService(fruitDao);
+        ReturnService returnService = new ReturnService(fruitDao);
 
         Map<Operation, OperationHandler> operationOperationsMap = new HashMap<>();
         operationOperationsMap.put(Operation.BALANCE, balanceService);
@@ -35,24 +38,22 @@ public class Main {
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
 
-        fileWriterService.writeToFile(inputFile, "b,banana,20" + System.lineSeparator()
+        fileWriterService.writeToFile(inputFile.toString(), "b,banana,20" + System.lineSeparator()
                 + "b,apple,100" + System.lineSeparator()
                 + "s,banana,100" + System.lineSeparator()
                 + "p,banana,13" + System.lineSeparator()
                 + "r,apple,10");
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<FruitTransaction> fruitTransactionList = fileReaderService.read(inputFile);
+        List<FruitTransaction> fruitTransactionList = fileReaderService.read(inputFile.toString());
 
         fruitTransactionList.forEach(fruitTransaction -> new ShopServiceImpl(operationOperationsMap)
                 .transaction(fruitTransaction)
-                .doOperation(fruitTransaction));
+                .handle(fruitTransaction));
 
         File outputFile = new File("outputData.csv");
         FileWriterService writerService = new FileWriterServiceImpl();
         OutputDataService outputDataService = new OutputDataServiceImpl();
-        writerService.writeToFile(outputFile, outputDataService.toStringConverter());
-
+        writerService.writeToFile(outputFile.toString(), outputDataService.toStringConverter());
     }
 }
-

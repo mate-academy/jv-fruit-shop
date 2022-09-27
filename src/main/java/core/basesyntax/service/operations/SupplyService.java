@@ -5,13 +5,13 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
 public class SupplyService implements OperationHandler {
-    /**
-     * Add some amount of some fruits to storage
-     */
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao;
+    public SupplyService(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
-    public void doOperation(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         int beginAmount = fruitDao.getAmount(fruitTransaction.getFruit());
         int newAmount;
         newAmount = beginAmount + fruitTransaction.getQuantity();

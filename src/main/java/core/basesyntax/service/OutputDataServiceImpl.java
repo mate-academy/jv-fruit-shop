@@ -26,4 +26,3 @@ public class OutputDataServiceImpl implements OutputDataService {
         return fruitName + "," + quantity + System.lineSeparator();
     }
 }
-

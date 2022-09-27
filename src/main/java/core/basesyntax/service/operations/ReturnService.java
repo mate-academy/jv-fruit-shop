@@ -1,14 +1,16 @@
 package core.basesyntax.service.operations;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 
 public class ReturnService implements OperationHandler {
-    /**
-     * return some amount of fruis back to storage
-     */
+    private final FruitDao fruitDao;
+    public ReturnService(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
     @Override
-    public void doOperation(FruitTransaction fruitTransaction) {
-        SupplyService supplyService = new SupplyService();
-        supplyService.doOperation(fruitTransaction);
+    public void handle(FruitTransaction fruitTransaction) {
+        SupplyService supplyService = new SupplyService(fruitDao);
+        supplyService.handle(fruitTransaction);
     }
 }

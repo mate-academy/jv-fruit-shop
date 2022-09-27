@@ -12,6 +12,5 @@ public class OperationsStrategyImpl implements OperationStrategy {
     @Override
     public OperationHandler chooseOperation(Operation operation) {
         return operationOperationsMap.get(operation);
-
     }
 }

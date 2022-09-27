@@ -11,8 +11,8 @@ public enum Operation {
         this.operationTitle = operationTitle;
     }
 
-    public static Operation getEnumByTitle(String s) {
-        switch (s) {
+    public static Operation getEnumByTitle(String title) {
+        switch (title) {
             case "b":
                 return BALANCE;
             case "p":
@@ -22,7 +22,7 @@ public enum Operation {
             case "s":
                 return SUPPLY;
             default:
-                throw new RuntimeException("Unknown operation: " + s);
+                throw new RuntimeException("Unknown operation: " + title);
         }
     }
 
