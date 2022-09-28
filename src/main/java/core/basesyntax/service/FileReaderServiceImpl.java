@@ -1,12 +1,9 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.operations.Operation;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override

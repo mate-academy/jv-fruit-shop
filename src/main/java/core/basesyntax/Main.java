@@ -48,7 +48,8 @@ public class Main {
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         InputDataService inputDataService = new InputDataServiceImpl();
-        List <FruitTransaction> fruitTransactionList = inputDataService.stringToFruitTransactionConverter(fileReaderService.read(inputFile.toString()));
+        List<FruitTransaction> fruitTransactionList = inputDataService
+                .stringToFruitTransactionConverter(fileReaderService.read(inputFile.toString()));
 
         fruitTransactionList.forEach(fruitTransaction -> new ShopServiceImpl(operationOperationsMap)
                 .transaction(fruitTransaction)

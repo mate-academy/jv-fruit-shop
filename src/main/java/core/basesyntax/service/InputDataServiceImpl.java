@@ -2,11 +2,10 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operations.Operation;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InputDataServiceImpl implements InputDataService{
+public class InputDataServiceImpl implements InputDataService {
     @Override
     public List<FruitTransaction> stringToFruitTransactionConverter(List<String> inputText) {
         return inputText.stream()
