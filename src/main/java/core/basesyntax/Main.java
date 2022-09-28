@@ -7,6 +7,8 @@ import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileReaderServiceImpl;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FileWriterServiceImpl;
+import core.basesyntax.service.InputDataService;
+import core.basesyntax.service.InputDataServiceImpl;
 import core.basesyntax.service.OutputDataService;
 import core.basesyntax.service.OutputDataServiceImpl;
 import core.basesyntax.service.ShopServiceImpl;
@@ -45,7 +47,8 @@ public class Main {
                 + "r,apple,10");
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<FruitTransaction> fruitTransactionList = fileReaderService.read(inputFile.toString());
+        InputDataService inputDataService = new InputDataServiceImpl();
+        List <FruitTransaction> fruitTransactionList = inputDataService.stringToFruitTransactionConverter(fileReaderService.read(inputFile.toString()));
 
         fruitTransactionList.forEach(fruitTransaction -> new ShopServiceImpl(operationOperationsMap)
                 .transaction(fruitTransaction)
