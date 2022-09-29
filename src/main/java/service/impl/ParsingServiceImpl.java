@@ -1,9 +1,9 @@
-package Service.Impl;
+package service.impl;
 
-import Service.ParsinService;
+import service.ParsingService;
 import model.FruitTransaction;
 
-public class ParsingServiceImpl implements ParsinService {
+public class ParsingServiceImpl implements ParsingService {
     private static final String SPLITTER = ",";
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT = 1;

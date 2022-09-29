@@ -3,8 +3,12 @@ package dao;
 import java.util.Map;
 
 public interface FruitsDao {
-    void addFruit(String Fruit, int quantity);
+
+    void addFruit(String fruit, int quantity);
+
     int getQuantityByFruit(String fruit);
-    Boolean contains(String Fruit);
+
+    Boolean contains(String fruit);
+
     Map<String, Integer> getAll();
 }

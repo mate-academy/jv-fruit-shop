@@ -1,4 +1,4 @@
-package Storage;
+package storage;
 
 import java.util.HashMap;
 import java.util.Map;

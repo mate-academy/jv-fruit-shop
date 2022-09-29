@@ -1,9 +1,7 @@
-package Service;
+package service;
 
 import model.FruitTransaction;
 
-import java.util.List;
-
-public interface ParsinService {
+public interface ParsingService {
     FruitTransaction parse(String line);
 }

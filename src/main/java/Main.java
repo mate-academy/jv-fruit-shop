@@ -1,19 +1,22 @@
-import OpareationHandler.*;
-import Service.Impl.ParsingServiceImpl;
-import Service.Impl.ReadingServiceImpl;
-import Service.Impl.ReportServiceImpl;
-import Service.Impl.WritingServiceImpl;
-import Service.ParsinService;
-import Service.ReadingService;
-import Service.ReportService;
-import Service.WritingService;
+
+import opareation_handler.OperationHandler;
+import opareation_handler.BalanceHandler;
+import opareation_handler.PurchaseHandler;
+import opareation_handler.ReturnHandler;
+import opareation_handler.SupplyHandler;
+import service.impl.ParsingServiceImpl;
+import service.impl.ReadingServiceImpl;
+import service.impl.ReportServiceImpl;
+import service.impl.WritingServiceImpl;
+import service.ParsingService;
+import service.ReadingService;
+import service.ReportService;
+import service.WritingService;
 import dao.FruitDaoImpl;
 import dao.FruitsDao;
 import model.FruitTransaction;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
-
-import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,17 +35,18 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyHandler(fruitsDao));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurcheseHandler(fruitsDao));
+                new PurchaseHandler(fruitsDao));
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnHandler(fruitsDao));
         ReadingService readed = new ReadingServiceImpl();
-        ParsinService parsed = new ParsingServiceImpl();
+        ParsingService parsed = new ParsingServiceImpl();
         List<String> list = readed.readFromFile(FROM_FILE_PATH);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         for (String line: list.subList(START_INDEX, list.size())) {
             FruitTransaction fruitTransaction = parsed.parse(line);
-            OperationHandler operationHandler =  operationStrategy.get(fruitTransaction.getOperation());
+            OperationHandler operationHandler =  operationStrategy
+                    .get(fruitTransaction.getOperation());
             operationHandler.handle(fruitTransaction);
         }
 

@@ -1,6 +1,6 @@
-package Service.Impl;
+package service.impl;
 
-import Service.WritingService;
+import service.WritingService;
 
 import java.io.IOException;
 import java.nio.file.Files;

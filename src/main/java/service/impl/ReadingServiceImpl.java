@@ -1,6 +1,6 @@
-package Service.Impl;
+package service.impl;
 
-import Service.ReadingService;
+import service.ReadingService;
 
 import java.io.IOException;
 import java.nio.file.Files;

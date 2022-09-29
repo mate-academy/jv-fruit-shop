@@ -1,6 +1,6 @@
-package Service.Impl;
+package service.impl;
 
-import Service.ReportService;
+import service.ReportService;
 
 import java.util.Map;
 

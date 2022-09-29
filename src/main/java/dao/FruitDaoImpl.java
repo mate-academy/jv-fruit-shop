@@ -1,14 +1,13 @@
 package dao;
 
-import Storage.Storage;
-
+import storage.Storage;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitsDao {
 
     @Override
-    public void addFruit(String Fruit, int quantity) {
-        Storage.fruitsStorage.put(Fruit, quantity);
+    public void addFruit(String fruit, int quantity) {
+        Storage.fruitsStorage.put(fruit, quantity);
     }
 
     @Override
