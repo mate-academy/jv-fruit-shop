@@ -1,8 +1,7 @@
 package service.impl;
 
-import service.ReportService;
-
 import java.util.Map;
+import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";

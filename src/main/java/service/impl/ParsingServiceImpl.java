@@ -1,7 +1,7 @@
 package service.impl;
 
-import service.ParsingService;
 import model.FruitTransaction;
+import service.ParsingService;
 
 public class ParsingServiceImpl implements ParsingService {
     private static final String SPLITTER = ",";

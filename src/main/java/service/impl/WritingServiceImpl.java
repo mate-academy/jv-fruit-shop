@@ -9,11 +9,11 @@ import java.nio.file.Path;
 public class WritingServiceImpl implements WritingService {
 
     @Override
-    public void writeToFile(String text, String FilePath) {
+    public void writeToFile(String text, String filePath) {
         try {
-            Files.write(Path.of(FilePath), text.getBytes());
+            Files.write(Path.of(filePath), text.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Cant write to this file: " + FilePath, e);
+            throw new RuntimeException("Cant write to this file: " + filePath, e);
         }
     }
 }
