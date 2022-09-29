@@ -1,7 +1,7 @@
 package dao;
 
-import storage.Storage;
 import java.util.Map;
+import storage.Storage;
 
 public class FruitDaoImpl implements FruitsDao {
 
