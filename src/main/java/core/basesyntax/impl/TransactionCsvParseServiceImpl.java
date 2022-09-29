@@ -10,17 +10,12 @@ public class TransactionCsvParseServiceImpl implements ParseService<FruitTransac
     private static final String DELIMITER = ",";
 
     @Override
-    public FruitTransaction parse(String lines) {
-        String[] data = lines.split(DELIMITER);
-        String operation = data[OPERATION_INDEX].trim();
-        String fruit = data[FRUIT_INDEX].trim();
-        int quantity = Integer.parseInt(data[QUANTITY_INDEX].trim());
-        if (quantity < 0) {
-            throw new RuntimeException("Error! Quantity can't have a negative value.");
-        }
-        return new FruitTransaction()
-                .setOperation(operation)
-                .setFruit(fruit)
-                .setQuantity(quantity);
+    public FruitTransaction parse(String line) {
+        String[] separatedLine = line.split(DELIMITER);
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(separatedLine[OPERATION_INDEX]);
+        fruitTransaction.setFruit(separatedLine[FRUIT_INDEX]);
+        fruitTransaction.setQuantity(Integer.parseInt(separatedLine[QUANTITY_INDEX]));
+        return fruitTransaction;
     }
 }
