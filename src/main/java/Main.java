@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import dao.FruitDaoImpl;
 import dao.FruitsDao;
 import model.FruitTransaction;
@@ -14,9 +17,6 @@ import service.impl.ParsingServiceImpl;
 import service.impl.ReadingServiceImpl;
 import service.impl.ReportServiceImpl;
 import service.impl.WritingServiceImpl;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 
@@ -44,7 +44,7 @@ public class Main {
 
         for (String line: list.subList(START_INDEX, list.size())) {
             FruitTransaction fruitTransaction = parsed.parse(line);
-            OperationHandler operationHandler =  operationStrategy
+            OperationHandler operationHandler = operationStrategy
                     .get(fruitTransaction.getOperation());
             operationHandler.handle(fruitTransaction);
         }
