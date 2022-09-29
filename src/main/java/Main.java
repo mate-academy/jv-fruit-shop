@@ -1,11 +1,11 @@
 import dao.FruitDaoImpl;
 import dao.FruitsDao;
 import model.FruitTransaction;
+import opareation.OperationHandler;
 import opareation.BalanceHandler;
 import opareation.PurchaseHandler;
 import opareation.ReturnHandler;
 import opareation.SupplyHandler;
-import opareation.OperationHandler;
 import service.ParsingService;
 import service.ReadingService;
 import service.ReportService;
@@ -15,10 +15,10 @@ import service.impl.ReadingServiceImpl;
 import service.impl.ReportServiceImpl;
 import service.impl.WritingServiceImpl;
 import strategy.OperationStrategy;
-import strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import strategy.OperationStrategyImpl;
 
 public class Main {
     private static final String FROM_FILE_PATH = "src/main/java/fruitsInfo.csv";
