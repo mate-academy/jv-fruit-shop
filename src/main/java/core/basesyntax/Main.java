@@ -18,7 +18,6 @@ import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.PurchaseService;
 import core.basesyntax.service.operations.ReturnService;
 import core.basesyntax.service.operations.SupplyService;
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,28 +35,29 @@ public class Main {
         operationOperationsMap.put(Operation.PURCHASE, purchaseService);
         operationOperationsMap.put(Operation.SUPPLY, supplyService);
         operationOperationsMap.put(Operation.RETURN, returnService);
-        File inputFile = new File("inputData.csv");
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
 
-        fileWriterService.writeToFile(inputFile.toString(), "b,banana,20" + System.lineSeparator()
-                + "b,apple,100" + System.lineSeparator()
-                + "s,banana,100" + System.lineSeparator()
-                + "p,banana,13" + System.lineSeparator()
-                + "r,apple,10");
+        fileWriterService.writeToFile("/home/nata/IdeaProjects/jv-fruit-shop/inputData.csv",
+                "b,banana,20" + System.lineSeparator()
+                        + "b,apple,100" + System.lineSeparator()
+                        + "s,banana,100" + System.lineSeparator()
+                        + "p,banana,13" + System.lineSeparator()
+                        + "r,apple,20");
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         InputDataService inputDataService = new InputDataServiceImpl();
         List<FruitTransaction> fruitTransactionList = inputDataService
-                .stringToFruitTransactionConverter(fileReaderService.read(inputFile.toString()));
+                .stringToFruitTransactionConverter(fileReaderService
+                        .read("/home/nata/IdeaProjects/jv-fruit-shop/inputData.csv"));
 
         fruitTransactionList.forEach(fruitTransaction -> new ShopServiceImpl(operationOperationsMap)
                 .transaction(fruitTransaction)
                 .handle(fruitTransaction));
 
-        File outputFile = new File("outputData.csv");
         FileWriterService writerService = new FileWriterServiceImpl();
         OutputDataService outputDataService = new OutputDataServiceImpl();
-        writerService.writeToFile(outputFile.toString(), outputDataService.toStringConverter());
+        writerService.writeToFile("/home/nata/IdeaProjects/jv-fruit-shop/outputData.csv",
+                outputDataService.toStringConverter());
     }
 }

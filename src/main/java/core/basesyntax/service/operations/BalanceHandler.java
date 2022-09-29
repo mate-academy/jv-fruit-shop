@@ -7,7 +7,6 @@ public class BalanceHandler implements OperationHandler {
     private final FruitDao fruitDao;
 
     public BalanceHandler(FruitDao fruitDao) {
-
         this.fruitDao = fruitDao;
     }
 

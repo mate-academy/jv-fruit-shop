@@ -10,7 +10,6 @@ public class ShopServiceImpl implements ShopService {
     private final OperationsStrategyImpl operationsStrategy;
 
     public ShopServiceImpl(Map<Operation, OperationHandler> operationOperationHandlerMap) {
-
         operationsStrategy = new OperationsStrategyImpl(operationOperationHandlerMap);
     }
 
