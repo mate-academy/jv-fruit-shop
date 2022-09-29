@@ -1,8 +1,8 @@
 import dao.FruitDaoImpl;
 import dao.FruitsDao;
 import model.FruitTransaction;
-import opareation.OperationHandler;
 import opareation.BalanceHandler;
+import opareation.OperationHandler;
 import opareation.PurchaseHandler;
 import opareation.ReturnHandler;
 import opareation.SupplyHandler;
@@ -14,10 +14,10 @@ import service.impl.ParsingServiceImpl;
 import service.impl.ReadingServiceImpl;
 import service.impl.ReportServiceImpl;
 import service.impl.WritingServiceImpl;
-import strategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 
 public class Main {
