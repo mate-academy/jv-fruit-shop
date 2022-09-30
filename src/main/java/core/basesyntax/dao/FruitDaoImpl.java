@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import java.util.HashMap;
 
 public class FruitDaoImpl implements FruitDao {
-
     @Override
     public int getAmount(String fruitName) {
         return Storage.getFruits().get(fruitName);
