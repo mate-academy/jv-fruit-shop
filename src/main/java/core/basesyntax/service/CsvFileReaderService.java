@@ -22,10 +22,11 @@ public class CsvFileReaderService implements ReaderService {
         try (FileReader fileReader = new FileReader(file);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             List<FruitTransaction> transactions = new ArrayList<>();
+            bufferedReader.readLine();
             String line = bufferedReader.readLine();
             while (line != null) {
                 final String[] data = line.split(",");
-                Operation operation = Operation.valueOf(data[OPERATION_INDEX]);
+                Operation operation = Operation.get(data[OPERATION_INDEX]);
                 Fruit fruit = new Fruit(data[FRUIT_INDEX]);
                 int quantity = Integer.parseInt(data[QUANTITY_INDEX]);
                 transactions.add(new FruitTransaction(operation, fruit, quantity));
