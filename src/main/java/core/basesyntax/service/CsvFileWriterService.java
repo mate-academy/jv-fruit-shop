@@ -9,8 +9,10 @@ public class CsvFileWriterService implements WriterService {
     @Override
     public void writeToFile(final String data, final String filePath) {
         File file = new File(filePath);
-        try (FileWriter fileWriter = new FileWriter(file);
-             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+        try (
+                FileWriter fileWriter = new FileWriter(file);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)
+        ) {
             bufferedWriter.write("");
             bufferedWriter.write(data);
         } catch (IOException e) {

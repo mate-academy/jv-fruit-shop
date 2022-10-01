@@ -13,7 +13,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseOperationStrategy;
 import core.basesyntax.strategy.ReturnOperationStrategy;
 import core.basesyntax.strategy.SupplyOperationStrategy;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -27,8 +26,8 @@ import java.util.Map;
  */
 public class Main {
     public static void main(final String[] args) {
-        String transactionsPath = "src/main/resources/transactions.csv";
-        String reportPath = "src/main/resources/report.csv";
+        final String transactionsPath = "src/main/resources/transactions.csv";
+        final String reportPath = "src/main/resources/report.csv";
         Map<Operation, OperationStrategy> operations = new HashMap<>();
         operations.put(Operation.PURCHASE, new PurchaseOperationStrategy());
         operations.put(Operation.BALANCE, new BalanceOperationStrategy());
@@ -41,13 +40,15 @@ public class Main {
 
         List<FruitTransaction> transactions = reader.readFromFile(transactionsPath);
         String report = fruitService.generateReport(transactions);
-        writer.writeToFile(report,reportPath);
+        writer.writeToFile(report, reportPath);
 
         File reportFile = new File(reportPath);
-        try(FileReader fileReader = new FileReader(reportFile);
-            BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+        try (
+                FileReader fileReader = new FileReader(reportFile);
+                BufferedReader bufferedReader = new BufferedReader(fileReader)
+        ) {
             String line = bufferedReader.readLine();
-            while (line != null){
+            while (line != null) {
                 System.out.println(line);
                 line = bufferedReader.readLine();
             }
@@ -55,7 +56,5 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException("File " + e + " not found.");
         }
-
-
     }
 }

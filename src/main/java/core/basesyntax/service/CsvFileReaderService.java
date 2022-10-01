@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,8 +18,10 @@ public class CsvFileReaderService implements ReaderService {
     @Override
     public List<FruitTransaction> readFromFile(final String filePath) {
         File file = new File(filePath);
-        try (FileReader fileReader = new FileReader(file);
-             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+        try (
+                FileReader fileReader = new FileReader(file);
+                BufferedReader bufferedReader = new BufferedReader(fileReader)
+        ) {
             List<FruitTransaction> transactions = new ArrayList<>();
             bufferedReader.readLine();
             String line = bufferedReader.readLine();
