@@ -3,6 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -26,16 +27,23 @@ public class CsvFileReaderService implements ReaderService {
             bufferedReader.readLine();
             String line = bufferedReader.readLine();
             while (line != null) {
-                final String[] data = line.split(",");
-                Operation operation = Operation.get(data[OPERATION_INDEX]);
-                Fruit fruit = new Fruit(data[FRUIT_INDEX]);
-                int quantity = Integer.parseInt(data[QUANTITY_INDEX]);
-                transactions.add(new FruitTransaction(operation, fruit, quantity));
+                transactions.add(getTransaction(line));
                 line = bufferedReader.readLine();
             }
             return transactions;
         } catch (IOException e) {
             throw new RuntimeException("File " + e + " not found.");
         }
+    }
+
+    private FruitTransaction getTransaction(String line) {
+        if (line != null) {
+            final String[] data = line.split(",");
+            Operation operation = Operation.get(data[OPERATION_INDEX]);
+            Fruit fruit = new Fruit(data[FRUIT_INDEX]);
+            int quantity = Integer.parseInt(data[QUANTITY_INDEX]);
+            return new FruitTransaction(operation, fruit, quantity);
+        }
+        throw new RuntimeException("Line is null.");
     }
 }
