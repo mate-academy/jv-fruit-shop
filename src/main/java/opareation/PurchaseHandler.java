@@ -12,7 +12,7 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        if (transaction.getQuantity() <= fruitsDao
+        if (transaction.getQuantity() < fruitsDao
                 .getQuantityByFruit(transaction.getFruit())) {
             fruitsDao.addFruit(transaction.getFruit(), fruitsDao
                     .getQuantityByFruit(transaction.getFruit())

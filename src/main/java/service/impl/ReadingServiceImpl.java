@@ -16,7 +16,6 @@ public class ReadingServiceImpl implements ReadingService {
         } catch (IOException e) {
             throw new RuntimeException("Cant read from this file: " + filePath);
         }
-
         return list;
     }
 }

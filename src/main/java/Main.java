@@ -21,8 +21,8 @@ import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 
 public class Main {
-    private static final String FROM_FILE_PATH = "src/main/java/fruitsInfo.csv";
-    private static final String TO_FILE_PATH = "src/main/java/report.csv";
+    private static final String FROM_FILE_PATH = "src/main/java/resources/fruitsInfo.csv";
+    private static final String TO_FILE_PATH = "src/main/java/resources/report.csv";
     private static final int START_INDEX = 1;
 
     public static void main(String[] args) {
