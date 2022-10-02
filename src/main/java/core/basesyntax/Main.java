@@ -2,17 +2,17 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.BalanceOperationHandler;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitServiceImpl;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.PurchaseOperationHandler;
 import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReturnOperationHandler;
+import core.basesyntax.service.SupplyOperationHandler;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.strategy.BalanceOperationStrategy;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.PurchaseOperationStrategy;
-import core.basesyntax.strategy.ReturnOperationStrategy;
-import core.basesyntax.strategy.SupplyOperationStrategy;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -21,18 +21,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
     public static void main(final String[] args) {
         final String transactionsPath = "src/main/resources/transactions.csv";
         final String reportPath = "src/main/resources/report.csv";
-        Map<Operation, OperationStrategy> operations = new HashMap<>();
-        operations.put(Operation.PURCHASE, new PurchaseOperationStrategy());
-        operations.put(Operation.BALANCE, new BalanceOperationStrategy());
-        operations.put(Operation.RETURN, new ReturnOperationStrategy());
-        operations.put(Operation.SUPPLY, new SupplyOperationStrategy());
+        Map<Operation, OperationHandler> operations = new HashMap<>();
+        operations.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        operations.put(Operation.BALANCE, new BalanceOperationHandler());
+        operations.put(Operation.RETURN, new ReturnOperationHandler());
+        operations.put(Operation.SUPPLY, new SupplyOperationHandler());
 
         ReaderService reader = new CsvFileReaderService();
         WriterService writer = new CsvFileWriterService();

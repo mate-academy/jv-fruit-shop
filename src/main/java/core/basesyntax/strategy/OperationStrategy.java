@@ -1,5 +1,8 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.OperationHandler;
+
 public interface OperationStrategy {
-    int calculate(final int number);
+    OperationHandler get(Operation operation);
 }

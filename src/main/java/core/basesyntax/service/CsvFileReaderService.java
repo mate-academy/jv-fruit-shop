@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
