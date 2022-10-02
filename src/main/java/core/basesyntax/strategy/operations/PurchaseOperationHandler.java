@@ -8,7 +8,13 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void handle(Transaction transaction) {
         Fruit fruit = transaction.getProduct();
-        Storage.fruits.put(fruit,
-                Storage.fruits.getOrDefault(fruit, 0) - transaction.getQuantity());
+        int amount = Storage.fruits.getOrDefault(fruit, 0);
+        int purchaseAmount = transaction.getQuantity();
+        if (purchaseAmount <= amount) {
+            Storage.fruits.put(fruit,
+                    Storage.fruits.getOrDefault(fruit, 0) - transaction.getQuantity());
+        } else {
+            throw new RuntimeException("Error! Can't purchase required amount of " + fruit);
+        }
     }
 }

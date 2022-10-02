@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.db.Storage;
 import java.util.stream.Collectors;
 
-public class ReportServiceImpl implements ReportService {
+public class CsvReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
 
     @Override

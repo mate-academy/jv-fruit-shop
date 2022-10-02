@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileReaderCsvImpl;
+import core.basesyntax.dao.FileReaderImpl;
 import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.ReportServiceImpl;
+import core.basesyntax.service.CsvReportServiceImpl;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.TransactionProcessorImpl;
 import core.basesyntax.service.TransitionConvertorImpl;
@@ -17,11 +17,11 @@ public class Main {
     public static void main(String[] args) {
         TransactionProcessor transactionProcessor =
                 new TransactionProcessorImpl(new OperationStrategyImpl());
-        List<String> stringsFromFile = new FileReaderCsvImpl().readFromFile(BALANCE_FILE_NAME);
+        List<String> stringsFromFile = new FileReaderImpl().readFromFile(BALANCE_FILE_NAME);
         List<Transaction> transactionsFromFile = new TransitionConvertorImpl()
                 .convert(stringsFromFile);
         transactionProcessor.process(transactionsFromFile);
-        String report = new ReportServiceImpl().makeReport();
+        String report = new CsvReportServiceImpl().makeReport();
         new FileWriterImpl().writeToFile(PIVOT_FILE_NAME, report);
     }
 }

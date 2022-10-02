@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class FileReaderCsvImpl implements FileReader {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readFromFile(String fileName) {
         Path filePath = Paths.get(fileName);
