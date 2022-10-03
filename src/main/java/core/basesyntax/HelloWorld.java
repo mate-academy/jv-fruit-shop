@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class HelloWorld {
-    private static final String filePath = "src/main/java/core/basesyntax/resourse/report.cvs";
+    private static final String FILE_PATH = "src/main/java/core/basesyntax/resourse/report.cvs";
     private static final String INPUT = "src/main/java/core/basesyntax/resourse/fruitsInfo.csv";
 
     public static void main(String[] args) {
@@ -41,9 +41,8 @@ public class HelloWorld {
         }
 
         String report = new CreateReportImpl().getReport();
-        System.out.println(report);
         WriteData writeData = new WriteDataImpl();
-        writeData.writeToFile(report,filePath);
+        writeData.writeToFile(report,FILE_PATH);
 
     }
 }
