@@ -6,8 +6,14 @@ import core.basesyntax.model.FruitTransaction;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        int existingAmount = Storage.storage.get(fruitTransaction.getFruit());
+        int purchaseAmount = fruitTransaction.getQuantity();
+        if (purchaseAmount > existingAmount) {
+            throw new RuntimeException("Not enough fruits in the storage."
+                    + " Existing amount:" + existingAmount
+                    + " is less than Purchase amount:" + existingAmount);
+        }
         Storage.storage.put(fruitTransaction.getFruit(),
-                Storage.storage.get(fruitTransaction.getFruit())
-                        - fruitTransaction.getQuantity());
+                existingAmount - purchaseAmount);
     }
 }
