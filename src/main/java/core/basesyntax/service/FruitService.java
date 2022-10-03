@@ -5,5 +5,4 @@ import java.util.List;
 
 public interface FruitService {
     String generateReport(List<FruitTransaction> transactions);
-
 }

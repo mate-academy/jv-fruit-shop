@@ -30,15 +30,12 @@ public class Main {
         operations.put(Operation.BALANCE, new BalanceOperationHandler());
         operations.put(Operation.RETURN, new ReturnOperationHandler());
         operations.put(Operation.SUPPLY, new SupplyOperationHandler());
-
         ReaderService reader = new CsvFileReaderService();
         WriterService writer = new CsvFileWriterService();
         FruitService fruitService = new FruitServiceImpl(operations);
-
         List<FruitTransaction> transactions = reader.readFromFile(transactionsPath);
         String report = fruitService.generateReport(transactions);
         writer.writeToFile(report, reportPath);
-
         File reportFile = new File(reportPath);
         try (
                 FileReader fileReader = new FileReader(reportFile);
@@ -49,7 +46,6 @@ public class Main {
                 System.out.println(line);
                 line = bufferedReader.readLine();
             }
-
         } catch (IOException e) {
             throw new RuntimeException("File " + e + " not found.");
         }

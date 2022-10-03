@@ -24,5 +24,4 @@ public final class FruitTransaction {
     public int getQuantity() {
         return quantity;
     }
-
 }

@@ -21,9 +21,7 @@ public final class Fruit {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
         final Fruit fruit = (Fruit) o;
-
         return Objects.equals(name, fruit.name);
     }
 
