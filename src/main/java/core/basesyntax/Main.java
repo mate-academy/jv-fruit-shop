@@ -10,12 +10,12 @@ import core.basesyntax.service.TransactionProcessorImpl;
 import core.basesyntax.service.TransitionConvertorImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operations.BalanceOperationHandler;
+import core.basesyntax.strategy.operations.OperationHandler;
 import core.basesyntax.strategy.operations.PurchaseOperationHandler;
 import core.basesyntax.strategy.operations.ReturnOperationHandler;
 import core.basesyntax.strategy.operations.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     private static final String PIVOT_FILE_NAME = "src/main/resources/pivot.csv";
@@ -32,8 +32,8 @@ public class Main {
         new FileWriterImpl().writeToFile(PIVOT_FILE_NAME, report);
     }
 
-    private static Map<Operation, BalanceOperationHandler> createOperationHandlerMap() {
-        HashMap<Operation, BalanceOperationHandler> operationHandlerMap = new HashMap<>();
+    private static HashMap<Operation, OperationHandler> createOperationHandlerMap() {
+        HashMap<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
         operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
