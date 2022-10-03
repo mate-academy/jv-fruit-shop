@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.BalanceOperationHandler;
 import core.basesyntax.service.CsvFileReaderService;
@@ -33,8 +32,9 @@ public class Main {
         ReaderService reader = new CsvFileReaderService();
         WriterService writer = new CsvFileWriterService();
         FruitService fruitService = new FruitServiceImpl(operations);
-        List<FruitTransaction> transactions = reader.readFromFile(transactionsPath);
-        String report = fruitService.generateReport(transactions);
+        List<String> fileData = reader.readFromFile(transactionsPath);
+        fruitService.addToStorage(fileData);
+        String report = fruitService.generateReport();
         writer.writeToFile(report, reportPath);
         File reportFile = new File(reportPath);
         try (
