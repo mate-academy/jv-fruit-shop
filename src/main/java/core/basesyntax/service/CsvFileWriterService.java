@@ -13,7 +13,6 @@ public class CsvFileWriterService implements WriterService {
                 FileWriter fileWriter = new FileWriter(file);
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)
         ) {
-            bufferedWriter.write("");
             bufferedWriter.write(data);
         } catch (IOException e) {
             throw new RuntimeException("File " + e + " not found.");
