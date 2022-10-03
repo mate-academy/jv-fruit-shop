@@ -16,6 +16,7 @@ import core.basesyntax.strategy.operations.ReturnOperationHandler;
 import core.basesyntax.strategy.operations.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String PIVOT_FILE_NAME = "src/main/resources/pivot.csv";
@@ -32,7 +33,7 @@ public class Main {
         new FileWriterImpl().writeToFile(PIVOT_FILE_NAME, report);
     }
 
-    private static HashMap<Operation, OperationHandler> createOperationHandlerMap() {
+    private static Map<Operation, OperationHandler> createOperationHandlerMap() {
         HashMap<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
