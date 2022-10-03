@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.29">
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/HelloWorld.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/model/FruitTransaction.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/db/Storage.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/impl/ParseFruitsImpl.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/impl/CreateReportImpl.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/impl/WriteDataImpl.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/impl/ReadDataImpl.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/ReadData.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/WriteData.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/CreateReport.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/ParseFruits.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/OperationHandler.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/ReturnHandler.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/BalanceHandler.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/OperationStrategyImpl.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/PurchaseHandler.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/SupplyHandler.java">
+</file>
+<file name="/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/OperationStrategy.java">
+</file>
+</checkstyle>

@@ -1,0 +1,20 @@
+#Mon Oct 03 19:45:44 EEST 2022
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/HelloWorld.java=1664815481504
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/db/Storage.java=1664634082684
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/model/FruitTransaction.java=1664815535816
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/CreateReport.java=1664804950137
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/ParseFruits.java=1664804888118
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/ReadData.java=1664804634487
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/WriteData.java=1664804898596
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/impl/CreateReportImpl.java=1664811380515
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/impl/ParseFruitsImpl.java=1664810567439
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/impl/ReadDataImpl.java=1664812665499
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/impl/WriteDataImpl.java=1664815531431
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/BalanceHandler.java=1664804842257
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/OperationHandler.java=1664804842259
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/OperationStrategy.java=1664815505558
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/OperationStrategyImpl.java=1664815522584
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/PurchaseHandler.java=1664804842253
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/ReturnHandler.java=1664804842255
+/Users/admin/mate-academy/jv-fruit-shop/src/main/java/core/basesyntax/service/strategy/SupplyHandler.java=1664804842256
+configuration*?=68D96A4132041871E75977C9886CCC48FCDE3800
