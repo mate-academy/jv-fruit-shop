@@ -6,6 +6,12 @@ import core.basesyntax.model.FruitTransaction;
 public class PurchaseHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        Storage.storageFruits.put(transaction.getFruit(), transaction.getQuantity());
+        String fruitName = transaction.getFruit();
+        Integer storageFruitQuantity = Storage.storageFruits.get(fruitName);
+        int fruitQuantity = transaction.getQuantity();
+        if (storageFruitQuantity - fruitQuantity < 0) {
+            throw new RuntimeException("Not enough " + fruitName);
+        }
+        Storage.storageFruits.put(fruitName, storageFruitQuantity - fruitQuantity);
     }
 }

@@ -11,10 +11,6 @@ public class WriteDataImpl implements WriteData {
         File file = new File(filePath);
         try {
             file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file " + filePath, e);
-        }
-        try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("Failed to write file: " + filePath
