@@ -24,8 +24,10 @@ public class Main {
 
     public static void main(String[] args) {
         TransactionProcessor transactionProcessor =
-                new TransactionProcessorImpl(new OperationStrategyImpl());
-        List<String> stringsFromFile = new FileReaderImpl().readFromFile(BALANCE_FILE_NAME);
+                new TransactionProcessorImpl(new
+                        OperationStrategyImpl(createOperationHandlerMap()));
+        List<String> stringsFromFile = new FileReaderImpl()
+                .readFromFile(BALANCE_FILE_NAME);
         List<Transaction> transactionsFromFile = new TransitionConvertorImpl()
                 .convert(stringsFromFile);
         transactionProcessor.process(transactionsFromFile);
