@@ -25,14 +25,6 @@ public class FruitTransaction {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setOperation(Operation operation) {
-        this.operation = operation;
-    }
-
     public void setFruit(Fruit fruit) {
         this.fruit = fruit;
     }

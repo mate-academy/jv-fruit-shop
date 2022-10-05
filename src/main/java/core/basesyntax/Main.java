@@ -6,14 +6,25 @@ import core.basesyntax.fileservice.CsvFileReaderService;
 import core.basesyntax.fileservice.CsvFileWriterService;
 import core.basesyntax.fileservice.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.fileservice.impl.CsvFileWriterServiceImpl;
-import core.basesyntax.sevrice.FruitTransactionParser;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.sevrice.CsvFruitTransactionParser;
+import core.basesyntax.sevrice.FruitService;
+import core.basesyntax.sevrice.impl.FruitServiceImpl;
 import core.basesyntax.sevrice.ReportCreator;
-import core.basesyntax.sevrice.impl.CsvFruitTransactionParser;
-import core.basesyntax.strategy.strategyimpl.OperationStrategyImpl;
+import core.basesyntax.sevrice.impl.CsvFruitTransactionParserImpl;
 import core.basesyntax.sevrice.impl.ReportCreatorImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.strategyimpl.BalanceOperationHandler;
+import core.basesyntax.strategy.strategyimpl.OperationStrategyImpl;
+import core.basesyntax.strategy.strategyimpl.PurchaseOperationHandler;
+import core.basesyntax.strategy.strategyimpl.ReturnOperationHandler;
+import core.basesyntax.strategy.strategyimpl.SupplyOperationHandler;
+
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final Path READ_FROM_FILE = Path.of("src/main/resources/dailyActivities.csv");
@@ -21,14 +32,27 @@ public class Main {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        OperationStrategy operationExecutor = new OperationStrategyImpl();
-        FruitTransactionParser infoParser = new CsvFruitTransactionParser();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
+                = new HashMap<>() {
+            {
+                put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao));
+                put(FruitTransaction.Operation.PURCHASE,
+                        new PurchaseOperationHandler(fruitDao));
+                put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitDao));
+                put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitDao));
+            }
+        };
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
+        List<String> strings = csvFileReaderService.readFromFile(READ_FROM_FILE);
+        CsvFruitTransactionParser csvFruitTransactionParser = new CsvFruitTransactionParserImpl();
+        List<FruitTransaction> parse = csvFruitTransactionParser.parse(strings);
+        FruitService fruitService = new FruitServiceImpl(fruitDao, operationStrategy);
+        for (FruitTransaction transaction : parse) {
+            fruitService.calculate(transaction);
+        }
+        ReportCreator creator = new ReportCreatorImpl(fruitDao);
         CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
-        ReportCreator reportMaker = new ReportCreatorImpl(fruitDao);
-
-        List<String> textFromSource = csvFileReaderService.readFromFile(READ_FROM_FILE);
-        infoParser.parse(textFromSource).forEach(operationExecutor::execute);
-        csvFileWriterService.writeToFile(reportMaker.createReport(), WRITE_TO_FILE);
+        csvFileWriterService.writeToFile(creator.createReport(), WRITE_TO_FILE);
     }
 }

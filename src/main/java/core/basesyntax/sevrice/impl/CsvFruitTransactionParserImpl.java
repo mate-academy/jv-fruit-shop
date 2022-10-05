@@ -2,11 +2,11 @@ package core.basesyntax.sevrice.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.sevrice.FruitTransactionParser;
+import core.basesyntax.sevrice.CsvFruitTransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvFruitTransactionParser implements FruitTransactionParser {
+public class CsvFruitTransactionParserImpl implements CsvFruitTransactionParser {
     private static final int OPERATION = 0;
     private static final int FRUIT = 1;
     private static final int HEADER_INDEX = 0;
