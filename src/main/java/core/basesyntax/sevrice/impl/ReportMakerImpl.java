@@ -23,5 +23,5 @@ public class ReportMakerImpl implements ReportMaker {
                 .append(DELIMITER)
                 .append(quantity)));
         return report.toString();
-        }
+    }
 }

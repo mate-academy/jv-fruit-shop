@@ -14,27 +14,27 @@ public class FruitTransaction {
     }
 
     public Operation getOperation() {
-    return operation;
-  }
+        return operation;
+    }
 
     public Fruit getFruit() {
-    return fruit;
-  }
+        return fruit;
+    }
 
     public int getQuantity() {
-    return quantity;
-  }
+        return quantity;
+    }
 
     public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
+        this.quantity = quantity;
+    }
 
     public void setOperation(Operation operation) {
-      this.operation = operation;
+        this.operation = operation;
     }
 
     public void setFruit(Fruit fruit) {
-      this.fruit = fruit;
+        this.fruit = fruit;
     }
 
     public enum Operation {
@@ -46,11 +46,11 @@ public class FruitTransaction {
         private final String operation;
 
         Operation(String operation) {
-          this.operation = operation;
+            this.operation = operation;
         }
 
         public String getOperation() {
-          return operation;
+            return operation;
         }
 
         public static Operation getByOperation(String operator) {
