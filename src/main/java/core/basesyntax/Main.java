@@ -7,8 +7,8 @@ import core.basesyntax.service.CsvFruitTransactionParserImpl;
 import core.basesyntax.service.CsvReportCreatorImpl;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileReaderImpl;
-import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.FileWriterImpl;
+import core.basesyntax.service.FileWrite;
+import core.basesyntax.service.FileWriteImpl;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.PurchaseOperationHandler;
@@ -48,7 +48,7 @@ public class Main {
         Map<String, Integer> map = storage.getStorage();
         ReportCreator reportCreator = new CsvReportCreatorImpl();
         String report = reportCreator.createReport(map);
-        FileWriter fileWriter = new FileWriterImpl();
+        FileWrite fileWriter = new FileWriteImpl();
         fileWriter.writeDataToFile(report, "result.csv");
     }
 }
