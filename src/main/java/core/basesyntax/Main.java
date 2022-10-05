@@ -30,7 +30,5 @@ public class Main {
         List<String> textFromSource = csvFileReaderService.readFromFile(READ_FROM_FILE);
         infoParser.parseToFruitTransactionList(textFromSource).forEach(operationExecutor::execute);
         csvFileWriterService.writeToFile(reportMaker.createReport(), WRITE_TO_FILE);
-        csvFileWriterService.writeToFile("report", WRITE_TO_FILE);
-
     }
 }
