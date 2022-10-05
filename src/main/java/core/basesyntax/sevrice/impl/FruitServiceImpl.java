@@ -7,8 +7,8 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 
 public class FruitServiceImpl implements FruitService {
-private FruitDao fruitDao;
-private OperationStrategy operationStrategy;
+    private FruitDao fruitDao;
+    private OperationStrategy operationStrategy;
 
     public FruitServiceImpl(FruitDao fruitDao, OperationStrategy operationStrategy) {
         this.fruitDao = fruitDao;

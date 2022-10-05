@@ -5,7 +5,7 @@ import core.basesyntax.sevrice.ReportCreator;
 
 public class ReportCreatorImpl implements ReportCreator {
     private static final String DELIMITER = ",";
-    private final String NEW_FIRST_LINE = "fruit,quantity";
+    private static final String NEW_FIRST_LINE = "fruit,quantity";
     private final FruitDao fruitDao;
 
     public ReportCreatorImpl(FruitDao fruitDao) {
