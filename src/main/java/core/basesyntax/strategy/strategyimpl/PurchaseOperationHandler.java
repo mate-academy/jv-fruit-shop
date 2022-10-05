@@ -3,12 +3,12 @@ package core.basesyntax.strategy.strategyimpl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.OperationHandler;
 
-public class PurchaseOperationService implements OperationService {
+public class PurchaseOperationHandler implements OperationHandler {
     private FruitDao fruitDao;
 
-    public PurchaseOperationService(FruitDao fruitDao) {
+    public PurchaseOperationHandler(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 

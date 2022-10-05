@@ -1,7 +1,7 @@
-package core.basesyntax.sevrice;
+package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
 
-public interface OperationExecutor {
+public interface OperationStrategy {
     void execute(FruitTransaction transaction);
 }

@@ -1,12 +1,13 @@
 package core.basesyntax.sevrice.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.sevrice.OperationExecutor;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.sevrice.ReportCreator;
+import core.basesyntax.strategy.strategyimpl.OperationStrategyImpl;
 
 public class ReportCreatorImpl implements ReportCreator {
     private static final String DELIMITER = ",";
-    private final OperationExecutor operationExecutor = new OperationExecutorImpl();
+    private final OperationStrategy operationExecutor = new OperationStrategyImpl();
     private final String newFirstLine = "fruit,quantity";
     private final FruitDao fruitDao;
 

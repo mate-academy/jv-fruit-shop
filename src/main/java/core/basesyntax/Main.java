@@ -7,10 +7,10 @@ import core.basesyntax.fileservice.CsvFileWriterService;
 import core.basesyntax.fileservice.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.fileservice.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.sevrice.FruitTransactionParser;
-import core.basesyntax.sevrice.OperationExecutor;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.sevrice.ReportCreator;
 import core.basesyntax.sevrice.impl.CsvFruitTransactionParser;
-import core.basesyntax.sevrice.impl.OperationExecutorImpl;
+import core.basesyntax.strategy.strategyimpl.OperationStrategyImpl;
 import core.basesyntax.sevrice.impl.ReportCreatorImpl;
 import java.nio.file.Path;
 import java.util.List;
@@ -21,7 +21,7 @@ public class Main {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        OperationExecutor operationExecutor = new OperationExecutorImpl();
+        OperationStrategy operationExecutor = new OperationStrategyImpl();
         FruitTransactionParser infoParser = new CsvFruitTransactionParser();
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
         CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
