@@ -18,7 +18,8 @@ public class OperationExecutorImpl implements OperationExecutor {
             = new HashMap<>() {
                 {
                     put(FruitTransaction.Operation.BALANCE, new BalanceOperationService(fruitDao));
-                    put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationService(fruitDao));
+                    put(FruitTransaction.Operation.PURCHASE,
+                            new PurchaseOperationService(fruitDao));
                     put(FruitTransaction.Operation.SUPPLY, new SupplyOperationService(fruitDao));
                     put(FruitTransaction.Operation.RETURN, new ReturnOperationService(fruitDao));
                 }
