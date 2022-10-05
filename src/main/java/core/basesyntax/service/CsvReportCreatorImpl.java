@@ -6,10 +6,10 @@ public class CsvReportCreatorImpl implements ReportCreator {
     @Override
     public String createReport(Map<String, Integer> data) {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry m: data.entrySet()) {
-            stringBuilder.append(m.getKey())
+        for (Map.Entry entry: data.entrySet()) {
+            stringBuilder.append(entry.getKey())
                     .append(",")
-                    .append(m.getValue())
+                    .append(entry.getValue())
                     .append("\n");
         }
         return stringBuilder.toString();

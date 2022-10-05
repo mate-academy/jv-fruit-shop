@@ -1,6 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
+import static core.basesyntax.db.Storage.getStorage;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.BalanceOperationHandler;
 import core.basesyntax.service.CsvFruitTransactionParserImpl;
@@ -17,19 +18,12 @@ import core.basesyntax.service.RetureOperationHandler;
 import core.basesyntax.service.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<String> morningBalance = new ArrayList<>();
-        Collections.addAll(morningBalance, "b,banana,200", "b,apple,100",
-                "s,banana,100", "p,banana,50", "r,apple,10", "p,apple,70",
-                "p,banana,50", "s,banana,50", "b,ananas,150", "s,ananas,50",
-                "p,ananas,100", "r,ananas,20");
         FileReader fileReader = new FileReaderImpl();
         List<String> dataFromFile = fileReader.readFromFile("file.csv");
         FruitTransactionParser transactionParser = new CsvFruitTransactionParserImpl();
@@ -44,8 +38,7 @@ public class Main {
             operationStrategy.get(transaction.getOperation().getOperationString())
                     .apply(transaction);
         });
-        Storage storage = new Storage();
-        Map<String, Integer> map = storage.getStorage();
+        Map<String, Integer> map = getStorage();
         ReportCreator reportCreator = new CsvReportCreatorImpl();
         String report = reportCreator.createReport(map);
         FileWrite fileWriter = new FileWriteImpl();

@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFruitTransactionParserImpl implements FruitTransactionParser {
+    public static final int ZERO_INDEX = 0;
+    public static final int FIRST_INDEX = 1;
+    public static final int SEKOND_INDEX = 2;
+
     @Override
     public List<FruitTransaction> parse(List<String> transactions) {
-
         List<FruitTransaction> resultList = new ArrayList<>();
         for (String transaction : transactions) {
             String[] splitedLine = transaction.split(",");
-            System.out.println(splitedLine[0]);
-            FruitTransaction ft = new FruitTransaction();
             FruitTransaction.Operation operation =
-                    new FruitTransaction().getOperation().get(splitedLine[0]);
-            String fruit = splitedLine[1];
-            int amount = Integer.parseInt(splitedLine[2]);
-            FruitTransaction fruitTransaction = new FruitTransaction(
-                    operation, fruit, amount);
-            resultList.add(fruitTransaction);
+                    new FruitTransaction().getOperation().get(splitedLine[ZERO_INDEX]);
+            String fruit = splitedLine[FIRST_INDEX];
+            int amount = Integer.parseInt(splitedLine[SEKOND_INDEX]);
+            resultList.add(new FruitTransaction(
+                    operation, fruit, amount));
         }
         return resultList;
     }
