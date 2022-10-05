@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Fruit {
-    String name;
+    private String name;
 
     public Fruit(String name) {
         this.name = name;
@@ -19,8 +19,12 @@ public class Fruit {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Fruit fruit = (Fruit) o;
         return getName().equals(fruit.getName());
     }

@@ -1,7 +1,6 @@
-package core.basesyntax.fileService.impl;
+package core.basesyntax.fileservice.impl;
 
-import core.basesyntax.fileService.CsvFileReaderService;
-
+import core.basesyntax.fileservice.CsvFileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

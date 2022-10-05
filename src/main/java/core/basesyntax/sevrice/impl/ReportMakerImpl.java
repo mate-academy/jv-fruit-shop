@@ -6,9 +6,9 @@ import core.basesyntax.sevrice.ReportMaker;
 
 public class ReportMakerImpl implements ReportMaker {
     private static final String DELIMITER = ",";
-private final OperationExecutor operationExecutor = new OperationExecutorImpl();
-private final String newFirstLine = "fruit,quantity";
-private final FruitDao fruitDao;
+    private final OperationExecutor operationExecutor = new OperationExecutorImpl();
+    private final String newFirstLine = "fruit,quantity";
+    private final FruitDao fruitDao;
 
     public ReportMakerImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
@@ -22,7 +22,6 @@ private final FruitDao fruitDao;
                 .append(fruit.getName())
                 .append(DELIMITER)
                 .append(quantity)));
-            return report.toString();
+        return report.toString();
         }
-
 }

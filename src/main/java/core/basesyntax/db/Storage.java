@@ -1,7 +1,6 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.Fruit;
-
 import java.util.HashMap;
 import java.util.Map;
 

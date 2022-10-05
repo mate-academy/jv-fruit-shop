@@ -2,20 +2,18 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
-import core.basesyntax.fileService.CsvFileReaderService;
-import core.basesyntax.fileService.CsvFileWriterService;
-import core.basesyntax.fileService.impl.CsvFileReaderServiceImpl;
-import core.basesyntax.fileService.impl.CsvFileWriterServiceImpl;
+import core.basesyntax.fileservice.CsvFileReaderService;
+import core.basesyntax.fileservice.CsvFileWriterService;
+import core.basesyntax.fileservice.impl.CsvFileReaderServiceImpl;
+import core.basesyntax.fileservice.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.sevrice.InfoParser;
 import core.basesyntax.sevrice.OperationExecutor;
 import core.basesyntax.sevrice.ReportMaker;
 import core.basesyntax.sevrice.impl.InfoParserImpl;
 import core.basesyntax.sevrice.impl.OperationExecutorImpl;
 import core.basesyntax.sevrice.impl.ReportMakerImpl;
-
 import java.nio.file.Path;
 import java.util.List;
-
 
 public class Main {
     private static final Path READ_FROM_FILE = Path.of("src/main/resources/dailyActivities.csv");
