@@ -7,7 +7,6 @@ import core.basesyntax.service.CsvFruitTransactionParserImpl;
 import core.basesyntax.service.CsvReportCreatorImpl;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileReaderImpl;
-import core.basesyntax.service.FileWrite;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FileWriterImpl;
 import core.basesyntax.service.FruitTransactionParser;
@@ -31,8 +30,6 @@ public class Main {
                 "s,banana,100", "p,banana,50", "r,apple,10", "p,apple,70",
                 "p,banana,50", "s,banana,50", "b,ananas,150", "s,ananas,50",
                 "p,ananas,100", "r,ananas,20");
-        FileWrite fileWrite = new FileWrite();
-        fileWrite.write(morningBalance, "file.csv");
         FileReader fileReader = new FileReaderImpl();
         List<String> dataFromFile = fileReader.readFromFile("file.csv");
         FruitTransactionParser transactionParser = new CsvFruitTransactionParserImpl();
