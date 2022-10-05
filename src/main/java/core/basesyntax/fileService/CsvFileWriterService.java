@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.fileService;
 
 import java.nio.file.Path;
 
