@@ -6,12 +6,12 @@ import core.basesyntax.fileservice.CsvFileReaderService;
 import core.basesyntax.fileservice.CsvFileWriterService;
 import core.basesyntax.fileservice.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.fileservice.impl.CsvFileWriterServiceImpl;
-import core.basesyntax.sevrice.InfoParser;
+import core.basesyntax.sevrice.FruitTransactionParser;
 import core.basesyntax.sevrice.OperationExecutor;
-import core.basesyntax.sevrice.ReportMaker;
-import core.basesyntax.sevrice.impl.InfoParserImpl;
+import core.basesyntax.sevrice.ReportCreator;
+import core.basesyntax.sevrice.impl.CsvFruitTransactionParser;
 import core.basesyntax.sevrice.impl.OperationExecutorImpl;
-import core.basesyntax.sevrice.impl.ReportMakerImpl;
+import core.basesyntax.sevrice.impl.ReportCreatorImpl;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -22,13 +22,13 @@ public class Main {
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
         OperationExecutor operationExecutor = new OperationExecutorImpl();
-        InfoParser infoParser = new InfoParserImpl();
+        FruitTransactionParser infoParser = new CsvFruitTransactionParser();
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
         CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
-        ReportMaker reportMaker = new ReportMakerImpl(fruitDao);
+        ReportCreator reportMaker = new ReportCreatorImpl(fruitDao);
 
         List<String> textFromSource = csvFileReaderService.readFromFile(READ_FROM_FILE);
-        infoParser.parseToFruitTransactionList(textFromSource).forEach(operationExecutor::execute);
+        infoParser.parse(textFromSource).forEach(operationExecutor::execute);
         csvFileWriterService.writeToFile(reportMaker.createReport(), WRITE_TO_FILE);
     }
 }

@@ -2,15 +2,15 @@ package core.basesyntax.sevrice.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.sevrice.OperationExecutor;
-import core.basesyntax.sevrice.ReportMaker;
+import core.basesyntax.sevrice.ReportCreator;
 
-public class ReportMakerImpl implements ReportMaker {
+public class ReportCreatorImpl implements ReportCreator {
     private static final String DELIMITER = ",";
     private final OperationExecutor operationExecutor = new OperationExecutorImpl();
     private final String newFirstLine = "fruit,quantity";
     private final FruitDao fruitDao;
 
-    public ReportMakerImpl(FruitDao fruitDao) {
+    public ReportCreatorImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 

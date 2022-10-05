@@ -38,10 +38,10 @@ public class FruitTransaction {
     }
 
     public enum Operation {
-    BALANCE("b"),
-    SUPPLY("s"),
-    PURCHASE("p"),
-    RETURN("r");
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
 
         private final String operation;
 

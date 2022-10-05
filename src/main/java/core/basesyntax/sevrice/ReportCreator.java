@@ -1,5 +1,5 @@
 package core.basesyntax.sevrice;
 
-public interface ReportMaker {
+public interface ReportCreator {
     public String createReport();
 }
