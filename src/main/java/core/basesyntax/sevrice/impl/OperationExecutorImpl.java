@@ -17,10 +17,10 @@ public class OperationExecutorImpl implements OperationExecutor {
     private final Map<FruitTransaction.Operation, OperationService> operationServiceMap
             = new HashMap<>() {
                 {
-            put(FruitTransaction.Operation.BALANCE, new BalanceOperationService(fruitDao));
-            put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationService(fruitDao));
-            put(FruitTransaction.Operation.SUPPLY, new SupplyOperationService(fruitDao));
-            put(FruitTransaction.Operation.RETURN, new ReturnOperationService(fruitDao));
+                    put(FruitTransaction.Operation.BALANCE, new BalanceOperationService(fruitDao));
+                    put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationService(fruitDao));
+                    put(FruitTransaction.Operation.SUPPLY, new SupplyOperationService(fruitDao));
+                    put(FruitTransaction.Operation.RETURN, new ReturnOperationService(fruitDao));
                 }
             };
 
