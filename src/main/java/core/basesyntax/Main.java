@@ -34,11 +34,14 @@ public class Main {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
                 = new HashMap<>() {
                     {
-                        put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao));
+                        put(FruitTransaction.Operation.BALANCE,
+                                new BalanceOperationHandler(fruitDao));
                         put(FruitTransaction.Operation.PURCHASE,
-                            new PurchaseOperationHandler(fruitDao));
-                        put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitDao));
-                        put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitDao));
+                                new PurchaseOperationHandler(fruitDao));
+                        put(FruitTransaction.Operation.SUPPLY,
+                                new SupplyOperationHandler(fruitDao));
+                        put(FruitTransaction.Operation.RETURN,
+                                new ReturnOperationHandler(fruitDao));
                     }
                 };
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
