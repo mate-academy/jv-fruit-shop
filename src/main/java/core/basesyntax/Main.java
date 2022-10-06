@@ -20,14 +20,14 @@ import core.basesyntax.strategy.strategyimpl.OperationStrategyImpl;
 import core.basesyntax.strategy.strategyimpl.PurchaseOperationHandler;
 import core.basesyntax.strategy.strategyimpl.ReturnOperationHandler;
 import core.basesyntax.strategy.strategyimpl.SupplyOperationHandler;
-import java.nio.file.Path;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final Path READ_FROM_FILE = Path.of("src/main/resources/dailyActivities.csv");
-    private static final Path WRITE_TO_FILE = Path.of("src/main/resources/report.csv");
+    private static final String READ_FROM_FILE = "src/main/resources/dailyActivities.csv";
+    private static final String WRITE_TO_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();

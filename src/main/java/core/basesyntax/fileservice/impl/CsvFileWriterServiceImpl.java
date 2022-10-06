@@ -7,9 +7,9 @@ import java.nio.file.Path;
 
 public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     @Override
-    public void writeToFile(String info, Path path) {
+    public void writeToFile(String info, String path) {
         try {
-            Files.write(path, info.getBytes());
+            Files.write(Path.of(path), info.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("Can't write info to file");
         }
