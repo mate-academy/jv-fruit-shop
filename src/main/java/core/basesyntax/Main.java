@@ -20,7 +20,6 @@ import core.basesyntax.strategy.strategyimpl.OperationStrategyImpl;
 import core.basesyntax.strategy.strategyimpl.PurchaseOperationHandler;
 import core.basesyntax.strategy.strategyimpl.ReturnOperationHandler;
 import core.basesyntax.strategy.strategyimpl.SupplyOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
