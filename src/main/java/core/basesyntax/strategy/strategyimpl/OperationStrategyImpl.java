@@ -3,12 +3,11 @@ package core.basesyntax.strategy.strategyimpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.HashMap;
+
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
-            = new HashMap<>();
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
     public OperationStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationHandlerMap) {
