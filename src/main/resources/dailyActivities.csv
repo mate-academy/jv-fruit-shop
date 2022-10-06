@@ -1,0 +1,17 @@
+type,fruit,quantity
+b,tomato,100
+b,banana,20
+b,apple,100
+b,pineapple,78
+s,banana,100
+s,tomato,340
+p,banana,13
+p,pineapple,23
+r,apple,10
+p,apple,20
+p,tomato,400
+r,pineapple,39
+p,banana,5
+s,banana,50
+r,tomato,66
+p,pineapple,40
