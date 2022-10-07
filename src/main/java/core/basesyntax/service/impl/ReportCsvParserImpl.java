@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportCsvParser;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
