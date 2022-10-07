@@ -6,7 +6,6 @@ import core.basesyntax.service.OperationProcessing;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 
-
 public class OperationProcessingImpl implements OperationProcessing {
     private FruitDao fruitDao;
     private OperationStrategy operationStrategy;
