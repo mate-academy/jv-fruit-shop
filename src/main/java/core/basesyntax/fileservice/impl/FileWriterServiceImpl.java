@@ -11,7 +11,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try {
             Files.write(Path.of(path), info.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write information to file");
+            throw new RuntimeException("Can't write information to file with path: "  + path, e);
         }
     }
 }
