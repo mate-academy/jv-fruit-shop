@@ -49,7 +49,7 @@ public class Main {
         List<FruitTransaction> parse = reportCsvParser.parse(strings);
         OperationProcessing fruitService = new OperationProcessingImpl(fruitDao, operationStrategy);
         for (FruitTransaction transaction : parse) {
-            fruitService.count(transaction);
+            fruitService.process(transaction);
         }
         ReportGenerator creator = new ReportGeneratorImpl(fruitDao);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
