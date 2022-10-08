@@ -19,6 +19,5 @@ public class OperationProcessingImpl implements OperationProcessing {
     public void process(FruitTransaction fruitTransaction) {
         OperationHandler handler = operationStrategy.get(fruitTransaction.getOperation());
         handler.handle(fruitTransaction);
-
     }
 }
