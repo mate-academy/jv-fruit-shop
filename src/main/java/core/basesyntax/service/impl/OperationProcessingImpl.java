@@ -16,7 +16,7 @@ public class OperationProcessingImpl implements OperationProcessing {
     }
 
     @Override
-    public void count(FruitTransaction fruitTransaction) {
+    public void process(FruitTransaction fruitTransaction) {
         OperationHandler handler = operationStrategy.get(fruitTransaction.getOperation());
         handler.handle(fruitTransaction);
 
