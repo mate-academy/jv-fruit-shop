@@ -15,11 +15,11 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String generateReport() {
         StringBuilder report = new StringBuilder(NEW_FIRST_LINE);
-        fruitDao.getAll().forEach(((fruit, quantity)
+        fruitDao.getAll().forEach((fruit, quantity)
                 -> report.append(System.lineSeparator())
                 .append(fruit.getName())
                 .append(DELIMITER)
-                .append(quantity)));
+                .append(quantity));
         return report.toString();
     }
 }
