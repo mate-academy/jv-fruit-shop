@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 
-public interface OperationProcessing {
+public interface OperationProcessor {
     void process(FruitTransaction fruitTransaction);
 }
