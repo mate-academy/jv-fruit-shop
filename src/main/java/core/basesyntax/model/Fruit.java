@@ -27,6 +27,6 @@ public final class Fruit {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName());
+        return Objects.hash(name);
     }
 }
