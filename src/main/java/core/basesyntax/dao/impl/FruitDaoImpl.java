@@ -13,11 +13,7 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public Integer getQuantity(Fruit fruit) {
-        return Storage.fruits.entrySet().stream()
-                .filter(k -> k.getKey().equals(fruit))
-                .map(Map.Entry::getValue)
-                .findFirst()
-                .get();
+        return Storage.fruits.get(fruit);
     }
 
     @Override
