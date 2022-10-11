@@ -30,18 +30,11 @@ public class Main {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>() {
-            {
-                put(FruitTransaction.Operation.BALANCE,
-                        new BalanceOperationHandler(fruitDao));
-                put(FruitTransaction.Operation.PURCHASE,
-                        new PurchaseOperationHandler(fruitDao));
-                put(FruitTransaction.Operation.SUPPLY,
-                        new SupplyOperationHandler(fruitDao));
-                put(FruitTransaction.Operation.RETURN,
-                        new ReturnOperationHandler(fruitDao));
-            }
-        };
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
+                = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(fruitDao),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitDao),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitDao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> strings = fileReaderService.readFromFile(READ_FROM_FILE);
