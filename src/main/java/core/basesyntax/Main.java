@@ -7,10 +7,10 @@ import core.basesyntax.fileservice.FileWriterService;
 import core.basesyntax.fileservice.impl.FileReaderServiceImpl;
 import core.basesyntax.fileservice.impl.FileWriterServiceImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationProcessing;
+import core.basesyntax.service.OperationProcessor;
 import core.basesyntax.service.ReportCsvParser;
 import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.impl.OperationProcessingImpl;
+import core.basesyntax.service.impl.OperationProcessorImpl;
 import core.basesyntax.service.impl.ReportCsvParserImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.strategy.OperationHandler;
@@ -39,7 +39,7 @@ public class Main {
         List<String> strings = fileReaderService.readFromFile(READ_FROM_FILE);
         ReportCsvParser reportCsvParser = new ReportCsvParserImpl();
         List<FruitTransaction> parse = reportCsvParser.parse(strings);
-        OperationProcessing fruitService = new OperationProcessingImpl(fruitDao, operationStrategy);
+        OperationProcessor fruitService = new OperationProcessorImpl(fruitDao, operationStrategy);
         for (FruitTransaction transaction : parse) {
             fruitService.process(transaction);
         }
