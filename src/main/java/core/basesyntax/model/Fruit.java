@@ -22,7 +22,7 @@ public final class Fruit {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return getName().equals(fruit.getName());
+        return name().equals(fruit.getName());
     }
 
     @Override
