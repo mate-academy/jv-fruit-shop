@@ -14,9 +14,8 @@ public class ReporterServiceImpl implements ReporterService {
         StringBuilder builder = new StringBuilder();
         builder.append(FIRST_LINE).append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> row : Storage.storage.entrySet()) {
-            String reportLine = row.getKey().getName() + CSV_COLUMNS_SPLITTER +
-                    row.getValue() +
-                    System.lineSeparator();
+            String reportLine = row.getKey().getName() + CSV_COLUMNS_SPLITTER
+                    + row.getValue() + System.lineSeparator();
             builder.append(reportLine);
         }
         return builder.toString();
