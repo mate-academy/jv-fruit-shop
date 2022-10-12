@@ -14,11 +14,12 @@ import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.Map;
 
 public class OperationProcessorImpl implements OperationProcessor {
-    private static FruitDao fruitDao = new FruitDaoImpl();
+    private static FruitDao fruitDao;
     private OperationStrategy operationStrategy;
     public static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
     static {
+        FruitDao fruitDao = new FruitDaoImpl();
         operationHandlerMap = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(fruitDao),
                 FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitDao),
