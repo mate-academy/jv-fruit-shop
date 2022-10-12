@@ -8,15 +8,15 @@ import core.basesyntax.fileservice.FileWriterService;
 import core.basesyntax.fileservice.impl.FileReaderServiceImpl;
 import core.basesyntax.fileservice.impl.FileWriterServiceImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationProcessing;
+import core.basesyntax.service.OperationProcessor;
 import core.basesyntax.service.ReportCsvParser;
 import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.impl.OperationProcessingImpl;
+import core.basesyntax.service.impl.OperationProcessorImpl;
 import core.basesyntax.service.impl.ReportCsvParserImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-import static core.basesyntax.service.impl.OperationProcessingImpl.operationHandlerMap;
+import static core.basesyntax.service.impl.OperationProcessorImpl.operationHandlerMap;
 
 public class Main {
     private static final String READ_FROM_FILE = "src/main/resources/activities.csv";
