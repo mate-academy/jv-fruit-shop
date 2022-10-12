@@ -10,11 +10,10 @@ import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
-
 import java.util.Map;
 
 public class OperationProcessorImpl implements OperationProcessor {
-    private static FruitDao fruitDao;
+    private FruitDao fruitDao;
     private OperationStrategy operationStrategy;
     public static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
