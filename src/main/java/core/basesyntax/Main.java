@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.util.List;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.fileservice.FileReaderService;
@@ -17,6 +16,7 @@ import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import static core.basesyntax.service.impl.OperationProcessorImpl.operationHandlerMap;
+import java.util.List;
 
 public class Main {
     private static final String READ_FROM_FILE = "src/main/resources/activities.csv";
