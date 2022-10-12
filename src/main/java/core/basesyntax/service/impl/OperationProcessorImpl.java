@@ -12,7 +12,6 @@ import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.Map;
 
-
 public class OperationProcessorImpl implements OperationProcessor {
     private static FruitDao fruitDao = new FruitDaoImpl();
     private OperationStrategy operationStrategy;
