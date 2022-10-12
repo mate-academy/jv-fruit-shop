@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import java.util.Map;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
