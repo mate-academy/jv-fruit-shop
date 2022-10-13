@@ -14,7 +14,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String generateReport() {
-        StringBuilder report = new StringBuilder(REPORT_FIRST_LINE );
+        StringBuilder report = new StringBuilder(REPORT_FIRST_LINE);
         fruitDao.getAll().entrySet().stream()
                         .forEach(e -> report.append(e.getKey()).append(",")
                                 .append(e.getValue()).append(System.lineSeparator()));
