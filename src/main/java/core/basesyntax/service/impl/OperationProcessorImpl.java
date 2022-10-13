@@ -13,21 +13,27 @@ import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.Map;
 
 public class OperationProcessorImpl implements OperationProcessor {
-    private FruitDao fruitDao;
-    private OperationStrategy operationStrategy;
-    public static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private static final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private static FruitDao fruitDao = new FruitDaoImpl();
+    private static OperationStrategy operationStrategy;
 
     static {
-        FruitDao fruitDao = new FruitDaoImpl();
         operationHandlerMap = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(fruitDao),
                 FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitDao),
                 FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitDao));
     }
 
+    public OperationProcessorImpl() {
+    }
+
     public OperationProcessorImpl(FruitDao fruitDao, OperationStrategy operationStrategy) {
         this.fruitDao = fruitDao;
         this.operationStrategy = operationStrategy;
+    }
+
+    public Map<FruitTransaction.Operation, OperationHandler> getOperationHandlerMap() {
+        return operationHandlerMap;
     }
 
     @Override
