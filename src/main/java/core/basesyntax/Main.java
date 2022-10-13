@@ -17,7 +17,7 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.List;
-import java.util.Map;;
+import java.util.Map;
 
 public class Main {
     private static final String READ_FROM_FILE = "src/main/resources/activities.csv";
