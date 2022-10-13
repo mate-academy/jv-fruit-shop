@@ -14,7 +14,7 @@ public class ReportCsvParserImpl implements ReportCsvParser {
 
     @Override
     public List<FruitTransaction> parse(List<String> data) {
-        return dataFromFile.stream()
+        return data.stream()
                 .skip(1)
                 .map(e -> e.split(DELIMITER))
                 .map(this::createTransaction)
