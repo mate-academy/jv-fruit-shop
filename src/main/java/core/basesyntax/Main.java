@@ -25,7 +25,8 @@ public class Main {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        Map<FruitTransaction.Operation, OperationHandler> map = new OperationStrategyImpl().getOperationHandlerMap();
+        Map<FruitTransaction.Operation, OperationHandler> map 
+            = new OperationStrategyImpl().getOperationHandlerMap();
         OperationStrategy operationStrategy = new OperationStrategyImpl(map);
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
