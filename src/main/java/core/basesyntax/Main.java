@@ -20,28 +20,27 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String DATA_FILE = "src/main/resources/activities.csv";
-    private static final String REPORT_FILE = "src/main/resources/report.csv";
+    private static final String READ_FROM_FILE = "src/main/resources/activities.csv";
+    private static final String WRITE_TO_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
-                = new OperationProcessorImpl().getOperationHandlerMap();
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        Map<FruitTransaction.Operation, OperationHandler> map = new OperationStrategyImpl().getOperationHandlerMap();
+        OperationStrategy operationStrategy = new OperationStrategyImpl(map);
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> strings = fileReaderService.readFromFile(DATA_FILE);
+        List<String> strings = fileReaderService.readFromFile(READ_FROM_FILE);
 
         ReportCsvParser reportCsvParser = new ReportCsvParserImpl();
-        List<FruitTransaction> transactions = reportCsvParser.parse(strings);
+        List<FruitTransaction> parse = reportCsvParser.parse(strings);
 
         OperationProcessor fruitService = new OperationProcessorImpl(fruitDao, operationStrategy);
-        for (FruitTransaction transaction : transactions) {
+        for (FruitTransaction transaction : parse) {
             fruitService.process(transaction);
         }
 
-        ReportGenerator generator = new ReportGeneratorImpl(fruitDao);
+        ReportGenerator creator = new ReportGeneratorImpl(fruitDao);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(generator.generateReport(), REPORT_FILE);
+        fileWriterService.writeToFile(creator.generateReport(), WRITE_TO_FILE);
     }
 }
