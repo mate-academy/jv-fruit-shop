@@ -18,7 +18,8 @@ public class OperationProcessorImpl implements OperationProcessor {
     private static OperationStrategy operationStrategy;
 
     static {
-        operationHandlerMap = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao),
+        operationHandlerMap = 
+            Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(fruitDao),
                 FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitDao),
                 FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitDao));
