@@ -23,7 +23,7 @@ public class ReportCsvParserImpl implements ReportCsvParser {
 
     private FruitTransaction createTransaction(String[] splitedString) {
         return new FruitTransaction(
-                FruitTransaction.Operation.getByOperation(splitedString[OPERATION_INDEX]),
+                FruitTransaction.Operation.getByCode(splitedString[OPERATION_INDEX]),
                 new Fruit(splitedString[FRUIT_INDEX]),
                 Integer.parseInt(splitedString[AMOUNT_INDEX]));
     }
