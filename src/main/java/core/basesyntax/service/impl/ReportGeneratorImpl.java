@@ -5,7 +5,7 @@ import core.basesyntax.service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String DELIMITER = ",";
-    private static final String NEW_FIRST_LINE = "fruit,quantity";
+    private static final String REPORT_FIRST_LINE = "fruit,quantity";
     private final FruitDao fruitDao;
 
     public ReportGeneratorImpl(FruitDao fruitDao) {
@@ -14,7 +14,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String generateReport() {
-        StringBuilder report = new StringBuilder(NEW_FIRST_LINE);
+        StringBuilder report = new StringBuilder(REPORT_FIRST_LINE );
         fruitDao.getAll().entrySet().stream()
                         .forEach(e -> report.append(e.getKey()).append(",")
                                 .append(e.getValue()).append(System.lineSeparator()));
