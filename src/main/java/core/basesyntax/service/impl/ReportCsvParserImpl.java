@@ -13,7 +13,7 @@ public class ReportCsvParserImpl implements ReportCsvParser {
     private static final String DELIMITER = ",";
 
     @Override
-    public List<FruitTransaction> parse(List<String> dataFromFile) {
+    public List<FruitTransaction> parse(List<String> data) {
         return dataFromFile.stream()
                 .skip(1)
                 .map(e -> e.split(DELIMITER))
