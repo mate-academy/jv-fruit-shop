@@ -13,10 +13,11 @@ import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.OperationProcessorImpl;
 import core.basesyntax.service.impl.ReportCsvParserImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-import static core.basesyntax.service.impl.OperationProcessorImpl.operationHandlerMap;
 import java.util.List;
+import java.util.Map;;
 
 public class Main {
     private static final String READ_FROM_FILE = "src/main/resources/activities.csv";
@@ -24,15 +25,21 @@ public class Main {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
+                = new OperationProcessorImpl().getOperationHandlerMap();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> strings = fileReaderService.readFromFile(READ_FROM_FILE);
+
         ReportCsvParser reportCsvParser = new ReportCsvParserImpl();
         List<FruitTransaction> parse = reportCsvParser.parse(strings);
+
         OperationProcessor fruitService = new OperationProcessorImpl(fruitDao, operationStrategy);
         for (FruitTransaction transaction : parse) {
             fruitService.process(transaction);
         }
+
         ReportGenerator creator = new ReportGeneratorImpl(fruitDao);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(creator.generateReport(), WRITE_TO_FILE);
