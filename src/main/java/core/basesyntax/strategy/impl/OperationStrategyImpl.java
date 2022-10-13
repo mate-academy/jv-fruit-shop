@@ -19,13 +19,13 @@ public class OperationStrategyImpl implements OperationStrategy {
                 FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitDao));
     }
 
-    public Map<FruitTransaction.Operation, OperationHandler> getOperationHandlerMap() {
-        return operationHandlerMap;
-    }
-
     public OperationStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
+    }
+    
+        public Map<FruitTransaction.Operation, OperationHandler> getOperationHandlerMap() {
+        return operationHandlerMap;
     }
 
     @Override
