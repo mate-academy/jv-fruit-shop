@@ -15,33 +15,37 @@ import core.basesyntax.service.impl.ReportCsvParserImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.*;
+
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String READ_FROM_FILE = "src/main/resources/activities.csv";
-    private static final String WRITE_TO_FILE = "src/main/resources/report.csv";
+    private static final String DATA_FILE = "src/main/resources/activities.csv";
+    private static final String REPORT_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        Map<FruitTransaction.Operation, OperationHandler> map 
-            = new OperationStrategyImpl().getOperationHandlerMap();
-        OperationStrategy operationStrategy = new OperationStrategyImpl(map);
-
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
+                = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(fruitDao),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitDao),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitDao));
+        
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> strings = fileReaderService.readFromFile(READ_FROM_FILE);
+        List<String> strings = fileReaderService.readFromFile(DATA_FILE);
 
         ReportCsvParser reportCsvParser = new ReportCsvParserImpl();
-        List<FruitTransaction> parse = reportCsvParser.parse(strings);
+        List<FruitTransaction> transactions = reportCsvParser.parse(strings);
 
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         OperationProcessor fruitService = new OperationProcessorImpl(fruitDao, operationStrategy);
-        for (FruitTransaction transaction : parse) {
+        for (FruitTransaction transaction : transactions) {
             fruitService.process(transaction);
         }
 
-        ReportGenerator creator = new ReportGeneratorImpl(fruitDao);
+        ReportGenerator generator = new ReportGeneratorImpl(fruitDao);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(creator.generateReport(), WRITE_TO_FILE);
+        fileWriterService.writeToFile(generator.generateReport(), REPORT_FILE);
     }
 }
