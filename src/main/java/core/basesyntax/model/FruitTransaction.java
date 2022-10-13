@@ -35,20 +35,20 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String operationCode;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String operationCode) {
+            this.operationCode = operationCode;
         }
 
         public String getOperation() {
-            return operation;
+            return operationCode;
         }
 
-        public static Operation getByOperation(String operator) {
+        public static Operation getByCode(String operator) {
             return Arrays.stream(values())
                     .filter(o -> o.getOperation().equals(operator))
-                    .findFirst()
+                    .findAny()
                     .get();
         }
     }
