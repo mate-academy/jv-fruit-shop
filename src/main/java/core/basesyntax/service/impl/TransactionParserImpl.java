@@ -11,10 +11,14 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int OPERATION_TYPE = 0;
     private static final int FRUIT_NAME = 1;
     private static final int COUNT = 2;
-    private static final OperationValidator validator = new OperationValidatorImpl();
+    private final OperationValidator validator;
+
+    public TransactionParserImpl(OperationValidator operationValidator) {
+        this.validator = operationValidator;
+    }
 
     @Override
-    public List<FruitTransaction> transactionParser(List<String> list) {
+    public List<FruitTransaction> parseTransactions(List<String> list) {
         String [] parsedData;
         Fruit fruit = new Fruit("");
         List<FruitTransaction> transactions = new ArrayList<>();
@@ -22,7 +26,7 @@ public class TransactionParserImpl implements TransactionParser {
             parsedData = list.get(i).split(",");
             fruit.setName(parsedData[FRUIT_NAME]);
             transactions.add(new FruitTransaction(
-                    validator.valid(parsedData[OPERATION_TYPE]),
+                    validator.validate(parsedData[OPERATION_TYPE]),
                     new Fruit(parsedData[FRUIT_NAME]), Integer.parseInt(parsedData[COUNT])));
         }
         return transactions;

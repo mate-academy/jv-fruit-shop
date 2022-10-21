@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ReportGeneration;
+import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
 
-public class ReportGenerationImpl implements ReportGeneration {
+public class ReportGenerationImpl implements ReportGenerator {
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String CSV_COLUMNS_SPLITTER = ",";
 

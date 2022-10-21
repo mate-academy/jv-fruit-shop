@@ -6,7 +6,7 @@ import core.basesyntax.service.OperationValidator;
 public class OperationValidatorImpl implements OperationValidator {
 
     @Override
-    public String valid(String operation) {
+    public String validate(String operation) {
         for (Operation enumOperation : Operation.values()) {
             if (enumOperation.chooseOperation().equals(operation)) {
                 return operation;

@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface OperationValidator {
-    String valid(String operation);
+    String validate(String operation);
 }

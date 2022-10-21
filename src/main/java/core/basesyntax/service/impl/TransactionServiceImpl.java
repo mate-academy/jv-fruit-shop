@@ -3,13 +3,13 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
-import core.basesyntax.strategy.HandlerOperationStrategy;
+import core.basesyntax.strategy.OperationHandlerStrategy;
 import java.util.List;
 
 public class TransactionServiceImpl implements TransactionService {
-    private final HandlerOperationStrategy operationHandlerStrategy;
+    private final OperationHandlerStrategy operationHandlerStrategy;
 
-    public TransactionServiceImpl(HandlerOperationStrategy operationHandlerStrategy) {
+    public TransactionServiceImpl(OperationHandlerStrategy operationHandlerStrategy) {
         this.operationHandlerStrategy = operationHandlerStrategy;
     }
 

@@ -1,8 +1,8 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.strategy.HandlerOperation;
+import core.basesyntax.strategy.OperationHandler;
 
-public class HandlerOperationImplReturn implements HandlerOperation {
+public class OperationHandlerImplBalance implements OperationHandler {
     @Override
     public int apply(int balance, int count) {
         return balance + count;
