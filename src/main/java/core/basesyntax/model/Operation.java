@@ -16,4 +16,3 @@ public enum Operation {
         return operation;
     }
 }
-

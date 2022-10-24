@@ -20,10 +20,10 @@ import core.basesyntax.service.impl.ReportGenerationImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.impl.OperationHandlerImplBalance;
-import core.basesyntax.strategy.impl.OperationHandlerImplPurchase;
-import core.basesyntax.strategy.impl.OperationHandlerImplReturn;
-import core.basesyntax.strategy.impl.OperationHandlerImplSupply;
+import core.basesyntax.strategy.impl.OperationHandlerImplBalanceImpl;
+import core.basesyntax.strategy.impl.OperationHandlerImplPurchaseImpl;
+import core.basesyntax.strategy.impl.OperationHandlerImplReturnImpl;
+import core.basesyntax.strategy.impl.OperationHandlerImplSupplyImpl;
 import core.basesyntax.strategy.impl.OperationHandlerStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
@@ -37,10 +37,10 @@ public class Main {
     public static void main(String[] args) {
 
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(BALANCE.chooseOperation(), new OperationHandlerImplBalance());
-        operationHandlerMap.put(PURCHASE.chooseOperation(), new OperationHandlerImplPurchase());
-        operationHandlerMap.put(RETURN.chooseOperation(), new OperationHandlerImplReturn());
-        operationHandlerMap.put(SUPPLY.chooseOperation(), new OperationHandlerImplSupply());
+        operationHandlerMap.put(BALANCE.chooseOperation(), new OperationHandlerImplBalanceImpl());
+        operationHandlerMap.put(PURCHASE.chooseOperation(), new OperationHandlerImplPurchaseImpl());
+        operationHandlerMap.put(RETURN.chooseOperation(), new OperationHandlerImplReturnImpl());
+        operationHandlerMap.put(SUPPLY.chooseOperation(), new OperationHandlerImplSupplyImpl());
 
         FileReader getDataBase = new FileReaderImpl();
         List<String> list = getDataBase.readFromFile(WRITE_FROM);

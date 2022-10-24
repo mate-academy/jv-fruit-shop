@@ -15,9 +15,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void addTransferToStorage(List<FruitTransaction> transactions) {
-        FruitTransaction transaction;
-        for (FruitTransaction fruitTransaction : transactions) {
-            transaction = fruitTransaction;
+        for (FruitTransaction transaction : transactions) {
             if (!FruitStorage.fruitStorage.containsKey(transaction.getFruit())) {
                 FruitStorage.fruitStorage.put(
                         transaction.getFruit(),

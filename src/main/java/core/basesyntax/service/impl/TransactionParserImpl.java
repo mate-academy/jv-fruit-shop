@@ -11,6 +11,7 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int OPERATION_TYPE = 0;
     private static final int FRUIT_NAME = 1;
     private static final int COUNT = 2;
+    private static final String SEPARATOR = ",";
     private final OperationValidator validator;
 
     public TransactionParserImpl(OperationValidator operationValidator) {
@@ -20,11 +21,9 @@ public class TransactionParserImpl implements TransactionParser {
     @Override
     public List<FruitTransaction> parseTransactions(List<String> list) {
         String [] parsedData;
-        Fruit fruit = new Fruit("");
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < list.size(); i++) {
-            parsedData = list.get(i).split(",");
-            fruit.setName(parsedData[FRUIT_NAME]);
+            parsedData = list.get(i).split(SEPARATOR);
             transactions.add(new FruitTransaction(
                     validator.validate(parsedData[OPERATION_TYPE]),
                     new Fruit(parsedData[FRUIT_NAME]), Integer.parseInt(parsedData[COUNT])));
