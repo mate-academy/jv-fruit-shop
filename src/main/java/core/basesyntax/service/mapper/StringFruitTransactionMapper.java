@@ -1,7 +1,6 @@
 package core.basesyntax.service.mapper;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.function.Function;
 
 public class StringFruitTransactionMapper implements Function<String, FruitTransaction> {

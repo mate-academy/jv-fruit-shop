@@ -24,7 +24,7 @@ public class FruitShopStorageDao implements StorageDao {
         int oldValue = fruitStorage.getContent().get(key);
         if (quantity > oldValue) {
             throw new RuntimeException("You can't remove from storage more than it have (have "
-                    + oldValue +  ")");
+                    + oldValue + ")");
         }
         fruitStorage.getContent().put(key, oldValue - quantity);
     }
