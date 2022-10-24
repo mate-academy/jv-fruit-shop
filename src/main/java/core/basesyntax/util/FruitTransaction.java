@@ -1,4 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.util;
+
+import core.basesyntax.strategy.Operation;
 
 public class FruitTransaction {
     private static final int TRANSACTION_FORMAT_OPERATION_INDEX = 0;

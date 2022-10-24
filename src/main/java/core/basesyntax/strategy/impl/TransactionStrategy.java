@@ -1,15 +1,15 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.StorageDao;
-import core.basesyntax.service.FruitTransaction;
-import core.basesyntax.service.TransactionProcessor;
+import core.basesyntax.util.FruitTransaction;
+import core.basesyntax.strategy.TransactionProcessor;
 
 import java.util.List;
 
-public class TransactionService implements TransactionProcessor {
+public class TransactionStrategy implements TransactionProcessor {
     private final StorageDao storageDao;
 
-    public TransactionService(StorageDao storageDao) {
+    public TransactionStrategy(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 

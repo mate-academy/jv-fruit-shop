@@ -1,7 +1,6 @@
 package core.basesyntax.db;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Stream;
 
 public class StorageDao {
@@ -19,9 +18,5 @@ public class StorageDao {
 
     public Stream<Map.Entry<String, Integer>> getStorageStream() {
         return Storage.fruitStorage.entrySet().stream();
-    }
-
-    public Set<Map.Entry<String, Integer>> getStorageEntrySet() {
-        return Storage.fruitStorage.entrySet();
     }
 }
