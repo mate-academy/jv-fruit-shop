@@ -1,9 +1,8 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.StorageDao;
-import core.basesyntax.util.FruitTransaction;
 import core.basesyntax.strategy.TransactionProcessor;
-
+import core.basesyntax.util.FruitTransaction;
 import java.util.List;
 
 public class TransactionStrategy implements TransactionProcessor {
@@ -29,6 +28,8 @@ public class TransactionStrategy implements TransactionProcessor {
             case RETURN:
                 addToStorage(fruitTransaction);
                 break;
+            default:
+                throw new RuntimeException("No strategy for this case");
         }
     }
 

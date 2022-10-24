@@ -3,10 +3,9 @@ package core.basesyntax;
 import core.basesyntax.db.StorageDao;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.CsvReader;
 import core.basesyntax.service.impl.CsvWriter;
 import core.basesyntax.strategy.impl.TransactionStrategy;
-import core.basesyntax.service.impl.CsvReader;
-
 import java.util.List;
 
 /**
