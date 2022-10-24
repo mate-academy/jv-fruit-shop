@@ -1,10 +1,10 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.ReporterServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.StrategyImpl;
 import core.basesyntax.strategy.operation.Operation;
@@ -28,12 +28,12 @@ public class Main {
         map.put(Transaction.Operation.PURCHASE, new Purchase());
         Strategy operationStrategy = new StrategyImpl(map);
         List<String> data = new FileReaderServiceImpl().readFromFile(INPUT_FILE_NAME);
-        List<Transaction> transactions = new DataParserServiceImpl().parse(data);
+        List<Transaction> transactions = new TransactionParserImpl().parse(data);
         for (Transaction transaction : transactions) {
             Operation handler = operationStrategy.getByOperation(transaction.getOperation());
             handler.apply(transaction);
         }
-        String report = new ReporterServiceImpl().getReport();
+        String report = new ReportServiceImpl().getReport();
         new FileWriterServiceImpl().writeToFile(report, OUTPUT_FILE_NAME);
     }
 }

@@ -2,13 +2,13 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exeption.OperationNotFoundExeption;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.DataSupplierService;
+import core.basesyntax.service.OperationMapper;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class DataSupplierServiceImpl implements DataSupplierService {
+public class OperationMapperImpl implements OperationMapper {
     @Override
-    public Transaction.Operation getOperationByName(String operationFromFile) {
+    public Transaction.Operation mapToEnumValue(String operationFromFile) {
         Optional<Transaction.Operation> optionalOperation =
                 Arrays.stream(Transaction.Operation.values())
                         .filter(o -> o.getOperation().equals(operationFromFile))
