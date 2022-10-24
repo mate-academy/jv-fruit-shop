@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FileLineReaderServiceImpl implements FileLineReaderService {
+public class FileLinesReaderServiceImpl implements FileLinesReaderService {
     @Override
     public List<String> readFile(String path) {
         Path pathToInput = Path.of(path);
