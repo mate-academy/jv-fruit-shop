@@ -35,7 +35,7 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
-        public String getOperation() {
+        public String getOperationSymbol() {
             return operation;
         }
     }

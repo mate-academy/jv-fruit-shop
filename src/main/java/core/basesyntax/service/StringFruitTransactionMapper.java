@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 
 import java.util.function.Function;
 
-public class RecordFruitTransactionMapper implements Function<String, FruitTransaction> {
+public class StringFruitTransactionMapper implements Function<String, FruitTransaction> {
     private static final int OPERATION_TYPE_COLUMN = 0;
     private static final int FRUIT_TYPE_COLUMN = 1;
     private static final int QUANTITY_COLUMN = 2;
@@ -16,7 +16,7 @@ public class RecordFruitTransactionMapper implements Function<String, FruitTrans
         String operationSymbol = recordParts[OPERATION_TYPE_COLUMN];
         FruitTransaction.Operation operation = null;
         for (FruitTransaction.Operation value : FruitTransaction.Operation.values()) {
-            if (value.getOperation().equals(operationSymbol)) {
+            if (value.getOperationSymbol().equals(operationSymbol)) {
                 operation = value;
             }
         }
