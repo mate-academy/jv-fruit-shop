@@ -2,10 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationService;
-import core.basesyntax.operation.impl.OperationServiceBalanceImpl;
 import core.basesyntax.operation.impl.OperationServicePurchaseImpl;
-import core.basesyntax.operation.impl.OperationServiceReturnImpl;
-import core.basesyntax.operation.impl.OperationServiceSupplyImpl;
+import core.basesyntax.operation.impl.OperationServiceAddFruitImpl;
 import core.basesyntax.service.impl.CsvReaderServiceImpl;
 import core.basesyntax.service.impl.CsvWriterServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionParserServiceImpl;
@@ -22,10 +20,10 @@ public class Main {
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationService> operation = new HashMap<>();
-        operation.put(FruitTransaction.Operation.BALANCE, new OperationServiceBalanceImpl());
+        operation.put(FruitTransaction.Operation.BALANCE, new OperationServiceAddFruitImpl());
         operation.put(FruitTransaction.Operation.PURCHASE, new OperationServicePurchaseImpl());
-        operation.put(FruitTransaction.Operation.RETURN, new OperationServiceReturnImpl());
-        operation.put(FruitTransaction.Operation.SUPPLY, new OperationServiceSupplyImpl());
+        operation.put(FruitTransaction.Operation.RETURN, new OperationServiceAddFruitImpl());
+        operation.put(FruitTransaction.Operation.SUPPLY, new OperationServiceAddFruitImpl());
 
         List<String> lineInfo = new CsvReaderServiceImpl().read(INPUT_FILE_PATH);
         List<FruitTransaction> fruits = new FruitTransactionParserServiceImpl().analyse(lineInfo);

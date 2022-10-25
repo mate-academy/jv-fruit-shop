@@ -5,7 +5,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationService;
 
-public class OperationServiceSupplyImpl implements OperationService {
+public class OperationServiceAddFruitImpl implements OperationService {
     @Override
     public void apply(FruitTransaction fruitTransaction) {
         Fruit fruit = fruitTransaction.getFruit();
