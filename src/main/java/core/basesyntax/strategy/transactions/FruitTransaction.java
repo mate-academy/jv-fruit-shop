@@ -1,4 +1,4 @@
-package core.basesyntax.util;
+package core.basesyntax.strategy.transactions;
 
 import core.basesyntax.strategy.Operation;
 
@@ -18,19 +18,9 @@ public class FruitTransaction {
     public FruitTransaction(String fromList) {
         String[] split = fromList.split(CSV_FORMAT_SEPARATOR);
 
-        operation = getOperationByCharCode(split[TRANSACTION_FORMAT_OPERATION_INDEX]);
+        operation = Operation.getOperationByCode(split[TRANSACTION_FORMAT_OPERATION_INDEX]);
         fruitName = split[TRANSACTION_FORMAT_NAME_INDEX];
         valueOfFruit = Integer.valueOf(split[TRANSACTION_FORMAT_VALUE_INDEX]);
-    }
-
-    private Operation getOperationByCharCode(String code) {
-        switch (code) {
-            case BALANCE_CODE_CHAR: return Operation.BALANCE;
-            case SUPPLY_CODE_CHAR: return Operation.SUPPLY;
-            case PURCHASE_CODE_CHAR: return Operation.PURCHASE;
-            case RETURN_CODE_CHAR: return Operation.RETURN;
-            default: throw new RuntimeException("Wrong csv format");
-        }
     }
 
     public Operation getOperation() {
