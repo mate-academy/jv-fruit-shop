@@ -2,8 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationService;
-import core.basesyntax.operation.impl.OperationServicePurchaseImpl;
 import core.basesyntax.operation.impl.OperationServiceAddFruitImpl;
+import core.basesyntax.operation.impl.OperationServicePurchaseImpl;
 import core.basesyntax.service.impl.CsvReaderServiceImpl;
 import core.basesyntax.service.impl.CsvWriterServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionParserServiceImpl;
