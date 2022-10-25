@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.activity.ActivityHandler;
+import core.basesyntax.service.impl.activity.ActivityHandler;
 import java.util.Map;
 
 public class ActivityStrategyImpl implements ActivityStrategy {

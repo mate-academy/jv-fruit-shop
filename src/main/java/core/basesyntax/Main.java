@@ -5,13 +5,13 @@ import core.basesyntax.service.FruitService;
 import core.basesyntax.service.impl.DataReaderImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReportWriterImpl;
+import core.basesyntax.service.impl.activity.ActivityHandler;
+import core.basesyntax.service.impl.activity.BalanceActivity;
+import core.basesyntax.service.impl.activity.PurchaseActivity;
+import core.basesyntax.service.impl.activity.ReturnActivity;
+import core.basesyntax.service.impl.activity.SupplyActivity;
 import core.basesyntax.strategy.ActivityStrategy;
 import core.basesyntax.strategy.ActivityStrategyImpl;
-import core.basesyntax.strategy.activity.ActivityHandler;
-import core.basesyntax.strategy.activity.BalanceActivity;
-import core.basesyntax.strategy.activity.PurchaseActivity;
-import core.basesyntax.strategy.activity.ReturnActivity;
-import core.basesyntax.strategy.activity.SupplyActivity;
 import java.util.HashMap;
 import java.util.Map;
 
