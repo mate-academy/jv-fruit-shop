@@ -9,7 +9,7 @@ public class ReportGeneratorServiceImpl extends StorageAccess implements ReportG
     private static final String JOINER = ",";
 
     @Override
-    public String reportGenerator() {
+    public String generateReport() {
         return REPORT_HEADER + storage.getStorage().entrySet().stream()
                                         .map(i -> i.getKey() + JOINER + i.getValue())
                                         .collect(Collectors.joining(System.lineSeparator()));

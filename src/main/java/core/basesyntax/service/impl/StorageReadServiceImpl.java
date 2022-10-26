@@ -1,26 +1,23 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.DataService;
 import core.basesyntax.service.StorageReadService;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.List;
 
 public class StorageReadServiceImpl implements StorageReadService {
     private static final String EXCEPTION_MESSAGE = "Can't read this file ";
-    private DataService dataService = new DataServiceImpl();
 
     @Override
-    public void readData(File file) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                dataService.proceedData(line);
-                line = bufferedReader.readLine();
-            }
+    public List<String> readData(File file) {
+        List<String> dataFromFile;
+        try {
+            dataFromFile = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new RuntimeException(EXCEPTION_MESSAGE + file);
         }
+        return dataFromFile;
     }
 }
