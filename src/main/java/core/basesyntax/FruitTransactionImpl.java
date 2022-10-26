@@ -4,31 +4,32 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.StorageActions;
 import core.basesyntax.service.Writer;
-import core.basesyntax.service.impl.ReaderImpl;
-import core.basesyntax.service.impl.StorageActionsImpl;
-import core.basesyntax.service.impl.WriterImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import java.util.Map;
 
 public class FruitTransactionImpl implements FruitTransaction {
     private final OperationStrategy strategy;
+    private final StorageActions storageActions;
+    private final Reader reader;
+    private final Writer writer;
 
-    FruitTransactionImpl(OperationStrategy strategy) {
+    FruitTransactionImpl(OperationStrategy strategy, StorageActions storageActions,
+                         Reader reader, Writer writer) {
         this.strategy = strategy;
+        this.storageActions = storageActions;
+        this.reader = reader;
+        this.writer = writer;
     }
 
     @Override
     public List<String> getDayData() {
-        Reader reader = new ReaderImpl();
         return reader.readFromFile();
     }
 
     @Override
     public void processData(List<String> dayData) {
-        List<String> data = dayData;
-        data.remove(0);
-        for (String datum : data) {
+        for (String datum : dayData) {
             String fruitType = datum.split(",")[1];
             Integer quantity = Integer.parseInt(datum.split(",")[2]);
             String procedure = strategy.getHandler(datum).getProcedure();
@@ -37,7 +38,6 @@ public class FruitTransactionImpl implements FruitTransaction {
     }
 
     private void operateStorage(String procedure, String fruitType, Integer quantity) {
-        StorageActions storageActions = new StorageActionsImpl();
         if (procedure.equals("Addition")) {
             storageActions.addToStorage(fruitType, quantity);
         } else {
@@ -58,7 +58,6 @@ public class FruitTransactionImpl implements FruitTransaction {
 
     @Override
     public void writeData(String report) {
-        Writer writer = new WriterImpl();
         writer.writeToFile(report);
     }
 

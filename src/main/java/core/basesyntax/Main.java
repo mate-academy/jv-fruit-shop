@@ -5,6 +5,9 @@ import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseHandler;
 import core.basesyntax.operation.ReturnHandler;
 import core.basesyntax.operation.SupplyHandler;
+import core.basesyntax.service.impl.ReaderImpl;
+import core.basesyntax.service.impl.StorageActionsImpl;
+import core.basesyntax.service.impl.WriterImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
@@ -20,7 +23,9 @@ public class Main {
         operationHandlerMap.put(FruitTransactionImpl.Operation.SUPPLY, new SupplyHandler());
 
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
-        FruitTransaction fruitTransaction = new FruitTransactionImpl(strategy);
+        FruitTransaction fruitTransaction = new FruitTransactionImpl(strategy,
+                new StorageActionsImpl(), new ReaderImpl(), new WriterImpl());
+
         List<String> dayStatistics = fruitTransaction.getDayData();
         fruitTransaction.processData(dayStatistics);
         String report = fruitTransaction.generateReport();

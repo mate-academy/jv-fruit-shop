@@ -12,7 +12,10 @@ public class ReaderImpl implements Reader {
     @Override
     public List<String> readFromFile() {
         try {
-            return Files.readAllLines(Path.of("src/main/java/resources/inputFileExample.csv"));
+            List<String> list = Files.readAllLines(
+                    Path.of("src/main/java/resources/inputFileExample.csv"));
+            list.remove(0);
+            return list;
         } catch (IOException e) {
             throw new RuntimeException("Can't get the info from the file " + FILE_EXAMPLE_CSV, e);
         }
