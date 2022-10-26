@@ -11,7 +11,12 @@ public class SupplyHandler implements OperationsHandler {
 
     @Override
     public void doOperation(String fruitName, Integer quantity) {
-        Integer previousQuantity = storageDao.get(fruitName);
+        Integer previousQuantity;
+        try {
+            previousQuantity = storageDao.get(fruitName);
+        } catch (RuntimeException e) {
+            previousQuantity = 0;
+        }
         Integer newQuantity = previousQuantity + quantity;
         storageDao.set(fruitName, newQuantity);
     }

@@ -11,6 +11,9 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public Integer get(String fruitName) {
+        if (!Storage.storage.containsKey(fruitName)) {
+            throw new RuntimeException("There is no " + fruitName + " in the storage");
+        }
         return Storage.storage.get(fruitName);
     }
 
