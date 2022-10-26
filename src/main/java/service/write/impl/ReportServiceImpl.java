@@ -1,8 +1,9 @@
-package service.write;
+package service.write.impl;
 
 import db.Storage;
 import java.util.Map;
 import java.util.Set;
+import service.write.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String LINE_SEPARATOR = System.lineSeparator();

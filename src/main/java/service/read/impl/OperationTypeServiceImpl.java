@@ -1,6 +1,7 @@
-package service.read;
+package service.read.impl;
 
 import model.FruitTransaction;
+import service.read.OperationTypeService;
 
 public class OperationTypeServiceImpl implements OperationTypeService {
     @Override

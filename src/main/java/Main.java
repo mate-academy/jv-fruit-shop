@@ -1,5 +1,5 @@
 import dao.StorageDao;
-import dao.StorageDaoImpl;
+import dao.impl.StorageDaoImpl;
 import db.Storage;
 import java.util.HashMap;
 import java.util.List;
@@ -11,15 +11,15 @@ import service.operations.PurchaseHandler;
 import service.operations.ReturnHandler;
 import service.operations.SupplyHandler;
 import service.process.ProcessTransactionsService;
-import service.process.ProcessTransactionsServiceImpl;
+import service.process.impl.ProcessTransactionsServiceImpl;
 import service.read.ProcessFileContent;
-import service.read.ProcessFileContentImpl;
 import service.read.ReadFileService;
-import service.read.ReadFileServiceImpl;
+import service.read.impl.ProcessFileContentImpl;
+import service.read.impl.ReadFileServiceImpl;
 import service.strategy.OperationsStrategy;
-import service.strategy.OperationsStrategyImpl;
+import service.strategy.impl.OperationsStrategyImpl;
 import service.write.WriterService;
-import service.write.WriterServiceImpl;
+import service.write.impl.WriterServiceImpl;
 
 public class Main {
     private static Map<FruitTransaction.Operation,

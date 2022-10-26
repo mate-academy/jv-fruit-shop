@@ -1,8 +1,9 @@
-package service.process;
+package service.process.impl;
 
 import java.util.List;
 import model.FruitTransaction;
 import service.operations.OperationsHandler;
+import service.process.ProcessTransactionsService;
 import service.strategy.OperationsStrategy;
 
 public class ProcessTransactionsServiceImpl implements ProcessTransactionsService {

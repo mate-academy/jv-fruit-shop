@@ -1,10 +1,12 @@
-package service.write;
+package service.write.impl;
 
 import dao.StorageDao;
-import dao.StorageDaoImpl;
+import dao.impl.StorageDaoImpl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import service.write.ReportService;
+import service.write.WriterService;
 
 public class WriterServiceImpl implements WriterService {
     private static final String DIRECTORY_PATH = "src/main/resources/";

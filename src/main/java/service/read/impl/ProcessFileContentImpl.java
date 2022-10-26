@@ -1,8 +1,10 @@
-package service.read;
+package service.read.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
+import service.read.OperationTypeService;
+import service.read.ProcessFileContent;
 
 public class ProcessFileContentImpl implements ProcessFileContent {
     private static final String CSV_SEPARATOR = ",";

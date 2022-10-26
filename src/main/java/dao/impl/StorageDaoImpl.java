@@ -1,5 +1,6 @@
-package dao;
+package dao.impl;
 
+import dao.StorageDao;
 import db.Storage;
 import java.util.Map;
 
