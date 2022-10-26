@@ -5,20 +5,20 @@ import java.util.Map;
 import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao {
-    private static final Storage STORAGE = new Storage();
+    private static final Map<String, Integer> FRUIT_MAP = new Storage().getFruits();
 
     @Override
     public Integer getValue(String key) {
-        return STORAGE.getFruits().get(key);
+        return FRUIT_MAP.get(key);
     }
 
     @Override
-    public void putValue(String key, Integer value) {
-        STORAGE.getFruits().put(key, value);
+    public Integer putValue(String key, Integer value) {
+        return FRUIT_MAP.put(key, value);
     }
 
     @Override
     public Set<Map.Entry<String, Integer>> getEntrySet() {
-        return STORAGE.getFruits().entrySet();
+        return FRUIT_MAP.entrySet();
     }
 }

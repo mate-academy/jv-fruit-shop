@@ -8,15 +8,11 @@ import java.nio.file.StandardOpenOption;
 
 public class ReportWriterImpl implements ReportWriter {
     @Override
-    public void writeReport(String path, String report) {
+    public void writeReport(String report, String path) {
         writeToFile(Path.of(path), report);
     }
 
     private void writeToFile(Path path, String data) {
-        if (data.equals(data.trim())) {
-            data = data + System.lineSeparator();
-        }
-
         try {
             Files.writeString(path, data, StandardOpenOption.CREATE);
         } catch (IOException e) {
