@@ -1,10 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.StorageActions;
+import core.basesyntax.service.StorageActionsService;
 import java.util.Map;
 
-public class StorageActionsImpl implements StorageActions {
+public class StorageActionsServiceImpl implements StorageActionsService {
+    private static final String EXCEPTION_MESSAGE = "No such fruit category ";
 
     @Override
     public void removeFromStorage(String fruitType, int quantity) {
@@ -17,7 +18,7 @@ public class StorageActionsImpl implements StorageActions {
                 }
             }
         } else {
-            throw new RuntimeException("No such fruitCategory " + fruitType);
+            throw new RuntimeException(EXCEPTION_MESSAGE + fruitType);
         }
     }
 

@@ -1,22 +1,25 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.FruitTransactionImpl;
+import core.basesyntax.model.Operation;
 import core.basesyntax.operation.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<FruitTransactionImpl.Operation, OperationHandler> operationHandlerMap;
+    private static final String SEPARATOR = ",";
+    private static final int OPERATION_INDEX = 0;
 
-    public OperationStrategyImpl(Map<FruitTransactionImpl.Operation,
+    private Map<Operation, OperationHandler> operationHandlerMap;
+
+    public OperationStrategyImpl(Map<Operation,
             OperationHandler> operationOperationHandlerMap) {
         this.operationHandlerMap = operationOperationHandlerMap;
     }
 
     @Override
     public OperationHandler getHandler(String line) {
-        String type = line.split(",")[0];
+        String type = line.split(SEPARATOR)[OPERATION_INDEX];
 
-        for (Map.Entry<FruitTransactionImpl.Operation,
+        for (Map.Entry<Operation,
                 OperationHandler> entry :operationHandlerMap.entrySet()) {
             if (entry.getKey().getOperation().equals(type)) {
                 return entry.getValue();
