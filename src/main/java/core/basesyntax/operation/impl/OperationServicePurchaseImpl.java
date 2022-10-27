@@ -12,7 +12,8 @@ public class OperationServicePurchaseImpl implements OperationService {
         if (FruitStorage.storage.containsKey(fruit)) {
             int newCount = FruitStorage.storage.get(fruit) - fruitTransaction.getQuantity();
             if (newCount < 0) {
-                throw new RuntimeException("Something went wrong. There is not enough fruit in storage");
+                throw new RuntimeException("Something went wrong."
+                        + " There is not enough fruit in storage");
             }
             FruitStorage.storage.put(fruit, newCount);
         } else {
