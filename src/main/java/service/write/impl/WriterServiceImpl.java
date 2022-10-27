@@ -15,9 +15,8 @@ public class WriterServiceImpl implements WriterService {
     private StorageDao storageDao = new StorageDaoImpl();
 
     @Override
-    public void writeToFile(String filename) {
+    public void writeToFile(String filename, String report) {
         File file = new File(DIRECTORY_PATH + filename);
-        String report = reportService.createReport(storageDao.getAll());
         try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {

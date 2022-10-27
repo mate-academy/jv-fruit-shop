@@ -1,8 +1,8 @@
 package service.read.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import service.read.ReadFileService;
 
@@ -11,12 +11,10 @@ public class ReadFileServiceImpl implements ReadFileService {
 
     @Override
     public List<String> readFromFile(String filePath) {
-        File file = new File(filePath);
         try {
-            List<String> transactions = Files.readAllLines(file.toPath());
-            return transactions;
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException(CANT_READ_MESSAGE + file);
+            throw new RuntimeException(CANT_READ_MESSAGE + filePath);
         }
     }
 }

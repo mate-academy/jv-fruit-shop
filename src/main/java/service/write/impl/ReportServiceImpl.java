@@ -1,5 +1,7 @@
 package service.write.impl;
 
+import dao.StorageDao;
+import dao.impl.StorageDaoImpl;
 import db.Storage;
 import java.util.Map;
 import java.util.Set;
@@ -9,9 +11,11 @@ public class ReportServiceImpl implements ReportService {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String CSV_SEPARATOR = ",";
     private static final String START_MESSAGE = "fruit,quantity";
+    private StorageDao storageDao = new StorageDaoImpl();
 
     @Override
-    public String createReport(Map<String, Integer> storage) {
+    public String createReport() {
+        Map<String, Integer> storage = storageDao.getAll();
         Set<String> keySet = storage.keySet();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(START_MESSAGE);

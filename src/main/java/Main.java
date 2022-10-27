@@ -18,7 +18,9 @@ import service.read.impl.ProcessFileContentImpl;
 import service.read.impl.ReadFileServiceImpl;
 import service.strategy.OperationsStrategy;
 import service.strategy.impl.OperationsStrategyImpl;
+import service.write.ReportService;
 import service.write.WriterService;
+import service.write.impl.ReportServiceImpl;
 import service.write.impl.WriterServiceImpl;
 
 public class Main {
@@ -26,6 +28,7 @@ public class Main {
             OperationsHandler> operationOperationsHandlerMap = new HashMap<>();
     private static StorageDao storageDao = new StorageDaoImpl();
     private static ReadFileService readerService = new ReadFileServiceImpl();
+    private static ReportService reportService = new ReportServiceImpl();
     private static ProcessFileContent processFileService = new ProcessFileContentImpl();
     private static WriterService writerService = new WriterServiceImpl();
     private static OperationsStrategy operationsStrategy =
@@ -50,6 +53,7 @@ public class Main {
         processTransactionsService.processTransactions(transactions);
         System.out.println(Storage.storage);
         String toFileName = "result.csv";
-        writerService.writeToFile(toFileName);
+        String report = reportService.createReport();
+        writerService.writeToFile(toFileName, report);
     }
 }

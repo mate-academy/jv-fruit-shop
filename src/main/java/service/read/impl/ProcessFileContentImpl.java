@@ -22,9 +22,7 @@ public class ProcessFileContentImpl implements ProcessFileContent {
     public List<FruitTransaction> processFile(List<String> fileContent) {
         String[] columnNames = fileContent.get(TYPES_INDEX).split(CSV_SEPARATOR);
         int[] typeIndexes = getTypesIndexes(columnNames);
-        List<String> transactions = fileContent;
-        transactions.remove(TYPES_INDEX);
-        return transactions.stream()
+        return fileContent.stream().skip(TYPES_INDEX)
                 .map(e -> e.split(CSV_SEPARATOR))
                 .map(e -> new FruitTransaction(
                         operationTypeService.getOperation(e[typeIndexes[TYPE_INDEX]]),
