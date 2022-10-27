@@ -17,11 +17,6 @@ public class OperationStrategyImpl implements OperationStrategy {
     @Override
     public OperationHandler getHandler(String line) {
         String type = line.split(SEPARATOR)[OPERATION_INDEX];
-        for (Operation operation : Operation.values()) {
-            if (operation.getOperation().equals(type)) {
-                return operationHandlerMap.get(operation);
-            }
-        }
-        return null;
+        return operationHandlerMap.get(Operation.getOperationFromString(type));
     }
 }
