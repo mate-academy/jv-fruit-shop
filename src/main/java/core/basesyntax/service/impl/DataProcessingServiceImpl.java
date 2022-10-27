@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.DataProcessingService;
-import core.basesyntax.service.OperationSelector;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
@@ -15,8 +15,8 @@ public class DataProcessingServiceImpl implements DataProcessingService {
         data.remove(0);
         for (String line : data) {
             String[] dataToProcess = line.split(DATA_SEPARATOR);
-            OperationSelector operationSelector = strategy.get(dataToProcess[OPERATION_TYPE]);
-            operationSelector.valueOperation(dataToProcess[FRUIT_TYPE],
+            OperationHandler operationHandler = strategy.get(dataToProcess[OPERATION_TYPE]);
+            operationHandler.valueOperation(dataToProcess[FRUIT_TYPE],
                             Integer.parseInt(dataToProcess[QUANTITY]));
         }
     }

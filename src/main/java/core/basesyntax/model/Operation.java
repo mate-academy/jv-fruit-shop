@@ -14,4 +14,13 @@ public enum Operation {
     public String getOperation() {
         return operation;
     }
+
+    public static Operation provideOperation(String operationType) {
+        for (Operation operation : Operation.values()) {
+            if (operation.getOperation().equals(operationType)) {
+                return operation;
+            }
+        }
+        throw new RuntimeException("Can't find such operator " + operationType);
+    }
 }
