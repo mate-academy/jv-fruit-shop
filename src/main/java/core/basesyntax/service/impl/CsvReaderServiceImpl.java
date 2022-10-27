@@ -9,12 +9,11 @@ import java.util.List;
 public class CsvReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> read(String path) {
-        List<String> infoLines;
         try {
-            infoLines = Files.readAllLines(Path.of(path));
+            List<String> infoLines = Files.readAllLines(Path.of(path));
+            return infoLines;
         } catch (IOException e) {
             throw new RuntimeException("Can't read info from - " + path, e);
         }
-        return infoLines;
     }
 }
