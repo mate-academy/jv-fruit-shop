@@ -7,10 +7,6 @@ public class FruitTransaction {
     private static final int TRANSACTION_FORMAT_NAME_INDEX = 1;
     private static final int TRANSACTION_FORMAT_VALUE_INDEX = 2;
     private static final String CSV_FORMAT_SEPARATOR = ",";
-    private static final String BALANCE_CODE_CHAR = "b";
-    private static final String SUPPLY_CODE_CHAR = "s";
-    private static final String PURCHASE_CODE_CHAR = "p";
-    private static final String RETURN_CODE_CHAR = "r";
     private final Operation operation;
     private final String fruitName;
     private final Integer valueOfFruit;
