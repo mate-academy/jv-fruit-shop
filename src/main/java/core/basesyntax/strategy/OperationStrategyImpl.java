@@ -1,6 +1,5 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.Operation;
 import core.basesyntax.operation.OperationHandler;
 import java.util.Map;
 
@@ -18,11 +17,9 @@ public class OperationStrategyImpl implements OperationStrategy {
     @Override
     public OperationHandler getHandler(String line) {
         String type = line.split(SEPARATOR)[OPERATION_INDEX];
-
-        for (Map.Entry<Operation,
-                OperationHandler> entry :operationHandlerMap.entrySet()) {
-            if (entry.getKey().getOperation().equals(type)) {
-                return entry.getValue();
+        for (Operation operation : Operation.values()) {
+            if (operation.getOperation().equals(type)) {
+                return operationHandlerMap.get(operation);
             }
         }
         return null;

@@ -1,5 +1,5 @@
 package core.basesyntax.operation;
 
 public interface OperationHandler {
-    String getProcedure();
+    void operateStorage(String fruitType, Integer quantity);
 }

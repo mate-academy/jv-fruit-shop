@@ -1,9 +1,11 @@
 package core.basesyntax.operation;
 
+import core.basesyntax.db.Storage;
+
 public class SupplyHandler implements OperationHandler {
 
     @Override
-    public String getProcedure() {
-        return "Addition";
+    public void operateStorage(String fruitType, Integer quantity) {
+        Storage.storageContents.put(fruitType,Storage.storageContents.get(fruitType) + quantity);
     }
 }

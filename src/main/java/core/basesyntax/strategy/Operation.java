@@ -1,4 +1,4 @@
-package core.basesyntax.model;
+package core.basesyntax.strategy;
 
 public enum Operation {
     BALANCE("b"),
@@ -6,7 +6,7 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    private String operation;
+    private final String operation;
 
     Operation(String operation) {
         this.operation = operation;

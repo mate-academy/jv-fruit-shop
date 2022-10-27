@@ -12,10 +12,7 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> readFromFile(String pathFromFile) {
         try {
-            List<String> list = Files.readAllLines(
-                    Path.of(pathFromFile));
-            list.remove(0);
-            return list;
+            return Files.readAllLines(Path.of(pathFromFile));
         } catch (IOException e) {
             throw new RuntimeException(exceptionMessage + pathFromFile, e);
         }
