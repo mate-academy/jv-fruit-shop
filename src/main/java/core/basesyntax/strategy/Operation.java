@@ -17,7 +17,6 @@ public enum Operation {
     }
 
     public static Operation getOperationFromString(String value) {
-
         for (Operation operation : Operation.values()) {
             if (operation.getOperation().equals(value)) {
                 return operation;

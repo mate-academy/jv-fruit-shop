@@ -42,13 +42,11 @@ public class Main {
 
         List<String> dayStatistics = readerService.readFromFile(readFromPath);
         processingService.removeHeading(dayStatistics);
-
         for (String datum : dayStatistics) {
             String fruitType = datum.split(SEPARATOR)[FRUIT_TYPE_INDEX];
             Integer quantity = Integer.parseInt(datum.split(SEPARATOR)[QUANTITY_INDEX]);
             strategy.getHandler(datum).operateStorage(fruitType,quantity);
         }
-
         String report = reportService.generate();
         writerService.writeToFile(report, writeToPath);
     }
