@@ -15,6 +15,7 @@ public class ProcessFileContentImpl implements ProcessFileContent {
     private static final int TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int FRUIT_QUANTITY_INDEX = 2;
+    private static final int FIRST_LINE = 1;
 
     private final OperationTypeService operationTypeService = new OperationTypeServiceImpl();
 
@@ -22,7 +23,7 @@ public class ProcessFileContentImpl implements ProcessFileContent {
     public List<FruitTransaction> processFile(List<String> fileContent) {
         String[] columnNames = fileContent.get(TYPES_INDEX).split(CSV_SEPARATOR);
         int[] typeIndexes = getTypesIndexes(columnNames);
-        return fileContent.stream().skip(TYPES_INDEX)
+        return fileContent.stream().skip(FIRST_LINE)
                 .map(e -> e.split(CSV_SEPARATOR))
                 .map(e -> new FruitTransaction(
                         operationTypeService.getOperation(e[typeIndexes[TYPE_INDEX]]),
