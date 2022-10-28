@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Store;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReaderService;
@@ -7,7 +8,6 @@ import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.db.Store;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceOperationImpl;
