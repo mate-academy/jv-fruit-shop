@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FruitService;
-import core.basesyntax.strategy.OperationService;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
 
 public class FruitServiceImpl implements FruitService {
     private static final String COMMA = ",";
@@ -16,14 +16,14 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void getReport(StringBuilder data) {
-        String[] dataToArray = data.toString().split(System.lineSeparator());
+    public void getReport(String data) {
+        String[] dataToArray = data.split(System.lineSeparator());
         for (String lineInArr : dataToArray) {
             String[] arrWithOperatorAndFruitQuantity = lineInArr.split(COMMA);
             String operation = arrWithOperatorAndFruitQuantity[OPERATION_INDEX];
             String fruitName = arrWithOperatorAndFruitQuantity[FRUIT_NAME_INDEX];
             String quantity = arrWithOperatorAndFruitQuantity[QUANTITY_INDEX];
-            OperationService operationService = operationStrategy.getOperation(operation);
+            OperationStrategyImpl operationService = operationStrategy.getOperation(operation);
             operationService.getResultBalance(fruitName, Integer.parseInt(quantity));
         }
     }

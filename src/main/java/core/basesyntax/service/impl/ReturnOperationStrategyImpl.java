@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.storage.Store;
-import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.OperationStrategyImpl;
 
-public class PurchaseOperationServiceImpl implements OperationService {
+public class ReturnOperationStrategyImpl implements OperationStrategyImpl {
     @Override
     public void getResultBalance(String fruitName, int value) {
         int oldVale = Store.FRUIT_STORAGE.get(fruitName);
-        int newValue = oldVale - value;
+        int newValue = oldVale + value;
         Store.FRUIT_STORAGE.put(fruitName, newValue);
     }
 }

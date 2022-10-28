@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface OperationService {
+public interface OperationStrategyImpl {
     void getResultBalance(String fruitName, int value);
 }

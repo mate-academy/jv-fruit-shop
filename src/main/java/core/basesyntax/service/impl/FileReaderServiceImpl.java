@@ -13,7 +13,7 @@ public class FileReaderServiceImpl implements ReaderService {
     }
 
     @Override
-    public StringBuilder read() {
+    public String read() {
         StringBuilder builder = new StringBuilder();
         try (bufferedReader) {
             String line = bufferedReader.readLine();
@@ -24,6 +24,6 @@ public class FileReaderServiceImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException(CANT_READ + e);
         }
-        return builder;
+        return builder.toString();
     }
 }
