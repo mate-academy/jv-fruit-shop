@@ -1,6 +1,6 @@
 package core.basesyntax.strategy.operation;
 
-import core.basesyntax.storage.Store;
+import core.basesyntax.db.Store;
 
 public class SupplyOperationImpl implements OperationHandler {
     @Override

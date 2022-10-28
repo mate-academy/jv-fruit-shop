@@ -7,7 +7,7 @@ import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.storage.Store;
+import core.basesyntax.db.Store;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceOperationImpl;
