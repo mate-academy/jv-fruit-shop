@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dao.GetFruitShopActivities;
+import core.basesyntax.dao.ParseFruitAction;
+import core.basesyntax.dao.impl.GetFruitShopActivitiesImpl;
+import core.basesyntax.dao.impl.ParseFruitActionImpl;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.WriteInFileService;
-import core.basesyntax.strategy.FruitShopTransaction;
-import core.basesyntax.strategy.GetFruitShopActivities;
-import core.basesyntax.strategy.impl.FruitShopTransactionImpl;
-import core.basesyntax.strategy.impl.GetFruitShopActivitiesImpl;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -16,13 +16,13 @@ public class FruitShopServiceImpl implements FruitShopService {
     private static final String PATH_FROM = "dataFrom.csv";
     private static final String PATH_TO = "dataTo.csv";
     private final ReadFromFileService readFromFileService;
-    private final FruitShopTransaction fruitShopTransaction;
+    private final ParseFruitAction parseFruitAction;
     private final WriteInFileService writeInFileService;
     private final GetFruitShopActivities getFruitShopActivities;
 
     public FruitShopServiceImpl() {
         readFromFileService = new ReadFromFileServiceImpl();
-        fruitShopTransaction = new FruitShopTransactionImpl();
+        parseFruitAction = new ParseFruitActionImpl();
         writeInFileService = new WriteInFileServiceImpl();
         getFruitShopActivities = new GetFruitShopActivitiesImpl();
     }
@@ -31,10 +31,9 @@ public class FruitShopServiceImpl implements FruitShopService {
     public String getReportAfterWorkingDay() {
         String dataFromFile = readFromFileService.readFromFile(PATH_FROM);
         String[] activities = getFruitShopActivities.getActivities(dataFromFile);
-        Map<String, Integer> dataForReport = fruitShopTransaction.fruitTransaction(activities);
+        Map<String, Integer> dataForReport = parseFruitAction.parseFruit(activities);
         return dataForReport.keySet().stream()
-                .map(key -> key + WORDS_SPLITERATOR + dataForReport.get(key)
-                        + END_LINE)
+                .map(key -> key + WORDS_SPLITERATOR + dataForReport.get(key) + END_LINE)
                 .collect(Collectors.joining());
     }
 

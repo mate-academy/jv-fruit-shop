@@ -1,6 +1,6 @@
-package core.basesyntax.strategy.impl;
+package core.basesyntax.dao.impl;
 
-import core.basesyntax.strategy.GetFruitShopActivities;
+import core.basesyntax.dao.GetFruitShopActivities;
 
 public class GetFruitShopActivitiesImpl implements GetFruitShopActivities {
     private static final String END_LINE = System.lineSeparator();

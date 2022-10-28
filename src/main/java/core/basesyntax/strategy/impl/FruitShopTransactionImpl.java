@@ -1,60 +1,42 @@
 package core.basesyntax.strategy.impl;
 
+import core.basesyntax.strategy.BalanceStrategy;
 import core.basesyntax.strategy.FruitShopTransaction;
-import java.util.HashMap;
+import core.basesyntax.strategy.PurchaseStrategy;
+import core.basesyntax.strategy.ReturnStrategy;
+import core.basesyntax.strategy.SupplyStrategy;
 import java.util.Map;
 
 public class FruitShopTransactionImpl implements FruitShopTransaction {
-    private static final String WORDS_SPLITERATOR = ",";
-    private static final int ACTIVITY_TYPE_INDEX = 0;
-    private static final int FRUIT_INDEX = 1;
-    private static final int QUANTITY_INDEX = 2;
     private static final String BALANCE = "b";
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
+    private final BalanceStrategy balanceStrategy;
+    private final SupplyStrategy supplyStrategy;
+    private final ReturnStrategy returnStrategy;
+    private final PurchaseStrategy purchaseStrategy;
 
-    @Override
-    public Map<String, Integer> fruitTransaction(String[] activity) {
-        Map<String, Integer> dataForReport = new HashMap<>();
-        String[] activityData;
-        String activityType;
-        String fruit;
-        int quantity;
-        for (String data : activity) {
-            activityData = data.split(WORDS_SPLITERATOR);
-            activityType = activityData[ACTIVITY_TYPE_INDEX];
-            fruit = activityData[FRUIT_INDEX];
-            quantity = Integer.parseInt(activityData[QUANTITY_INDEX]);
-            doActivity(dataForReport, activityType, fruit, quantity);
-        }
-        return dataForReport;
+    public FruitShopTransactionImpl() {
+        balanceStrategy = new BalanceStrategyImpl();
+        supplyStrategy = new SupplyStrategyImpl();
+        returnStrategy = new ReturnStrategyImpl();
+        purchaseStrategy = new PurchaseStrategyImpl();
     }
 
-    private void doActivity(Map<String, Integer> dataForReport, String activityType,
-                            String fruit, Integer quantity) {
+    @Override
+    public void fruitTransaction(Map<String, Integer> dataForReport,
+                                 String activityType, String fruit, int quantity) {
         switch (activityType) {
-            case BALANCE:
-            case SUPPLY:
-            case RETURN:
-                if (existFruit(dataForReport, fruit)) {
-                    dataForReport.put(fruit, quantity);
-                } else {
-                    dataForReport.replace(fruit, dataForReport.get(fruit) + quantity);
-                }
+            case BALANCE: balanceStrategy.action(dataForReport, fruit, quantity);
                 break;
-            case PURCHASE:
-                if (existFruit(dataForReport, fruit)) {
-                    dataForReport.put(fruit, -quantity);
-                } else {
-                    dataForReport.replace(fruit, dataForReport.get(fruit) - quantity);
-                }
+            case SUPPLY: supplyStrategy.action(dataForReport, fruit, quantity);
+                break;
+            case RETURN:returnStrategy.action(dataForReport, fruit, quantity);
+                break;
+            case PURCHASE: purchaseStrategy.action(dataForReport, fruit, quantity);
                 break;
             default: throw new RuntimeException("Invalid data!");
         }
-    }
-
-    private boolean existFruit(Map<String, Integer> dataForReport, String fruit) {
-        return !dataForReport.containsKey(fruit);
     }
 }
