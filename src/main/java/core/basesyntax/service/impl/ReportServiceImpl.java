@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.StorageDao;
-import core.basesyntax.service.StorageLiner;
+import core.basesyntax.service.ReportService;
 
-public class ResultLinerImpl implements StorageLiner {
+public class ReportServiceImpl implements ReportService {
     private static final String CSV_SEPARATOR = ",";
 
     @Override

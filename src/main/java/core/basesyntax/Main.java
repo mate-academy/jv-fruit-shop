@@ -2,19 +2,19 @@ package core.basesyntax;
 
 import core.basesyntax.db.StorageDao;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.StorageLiner;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvReader;
 import core.basesyntax.service.impl.CsvWriter;
-import core.basesyntax.service.impl.ResultLinerImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.Operation;
-import core.basesyntax.strategy.impl.TransactionStrategyImpl;
-import core.basesyntax.strategy.transactions.TransactionFunction;
-import core.basesyntax.strategy.transactions.TransactionProducer;
-import core.basesyntax.strategy.transactions.impl.AdderProducer;
-import core.basesyntax.strategy.transactions.impl.ReduceProducer;
-import core.basesyntax.strategy.transactions.impl.SaverProducer;
-import core.basesyntax.strategy.transactions.impl.TransactionFunctionImpl;
+import core.basesyntax.strategy.impl.TransactionServiceImpl;
+import core.basesyntax.strategy.transactions.FruitTransactionParser;
+import core.basesyntax.strategy.transactions.TransactionHandler;
+import core.basesyntax.strategy.transactions.impl.AdderHandler;
+import core.basesyntax.strategy.transactions.impl.FruitTransactionParserImpl;
+import core.basesyntax.strategy.transactions.impl.ReduceHandler;
+import core.basesyntax.strategy.transactions.impl.SaverHandler;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,28 +22,33 @@ import java.util.List;
  * Feel free to remove this class and create your own.
  */
 public class Main {
+    public static final int numberOfTitleInCsv = 1;
+    public static final String exampleFile = "example.csv";
+    public static final String titleForCsv = "fruit,quantity";
+    public static final String resultTargetFile = "sms.csv";
+
     public static void main(String[] args) {
-        ReaderService readerService = new CsvReader(1);
+        ReaderService readerService = new CsvReader();
         StorageDao storageDao = new StorageDao();
-        List<String> strings = readerService.readFile("example.csv");
-        TransactionFunction transactionFunction = new TransactionFunctionImpl();
-        TransactionStrategyImpl transactionStrategyImpl =
-                new TransactionStrategyImpl(getTransactionMap(storageDao));
+        List<String> strings = readerService.readFile(exampleFile, numberOfTitleInCsv);
+        FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
+        TransactionServiceImpl transactionStrategyImpl =
+                new TransactionServiceImpl(getTransactionMap(storageDao));
         transactionStrategyImpl
-                .distributeTransactions(transactionFunction.apply(strings));
-        WriterService writer = new CsvWriter("fruit,quantity");
-        StorageLiner storageLiner = new ResultLinerImpl();
-        String linesToFile = storageLiner.getLines(storageDao);
-        writer.saveFromStorageToFile("sms.file", linesToFile);
+                .applyTransactions(fruitTransactionParser.parse(strings));
+        WriterService writer = new CsvWriter(titleForCsv);
+        ReportService reportService = new ReportServiceImpl();
+        String linesToFile = reportService.getLines(storageDao);
+        writer.saveToFile(resultTargetFile, linesToFile);
     }
 
-    private static HashMap<Operation, TransactionProducer>
+    private static HashMap<Operation, TransactionHandler>
             getTransactionMap(StorageDao storageDao) {
-        HashMap<Operation, TransactionProducer> transactionMap = new HashMap<>();
-        transactionMap.put(Operation.BALANCE, new SaverProducer(storageDao));
-        transactionMap.put(Operation.PURCHASE, new ReduceProducer(storageDao));
-        transactionMap.put(Operation.SUPPLY, new AdderProducer(storageDao));
-        transactionMap.put(Operation.RETURN, new AdderProducer(storageDao));
+        HashMap<Operation, TransactionHandler> transactionMap = new HashMap<>();
+        transactionMap.put(Operation.BALANCE, new SaverHandler(storageDao));
+        transactionMap.put(Operation.PURCHASE, new ReduceHandler(storageDao));
+        transactionMap.put(Operation.SUPPLY, new AdderHandler(storageDao));
+        transactionMap.put(Operation.RETURN, new AdderHandler(storageDao));
         return transactionMap;
     }
 }

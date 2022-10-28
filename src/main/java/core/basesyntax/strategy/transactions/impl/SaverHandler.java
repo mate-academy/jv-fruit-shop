@@ -2,12 +2,12 @@ package core.basesyntax.strategy.transactions.impl;
 
 import core.basesyntax.db.StorageDao;
 import core.basesyntax.strategy.transactions.FruitTransaction;
-import core.basesyntax.strategy.transactions.TransactionProducer;
+import core.basesyntax.strategy.transactions.TransactionHandler;
 
-public class SaverProducer implements TransactionProducer {
+public class SaverHandler implements TransactionHandler {
     private final StorageDao storageDao;
 
-    public SaverProducer(StorageDao storageDao) {
+    public SaverHandler(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 

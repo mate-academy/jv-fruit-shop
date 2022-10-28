@@ -13,7 +13,7 @@ public class CsvWriter implements WriterService {
     }
 
     @Override
-    public void saveFromStorageToFile(String filePath, String linesToFile) {
+    public void saveToFile(String filePath, String linesToFile) {
         Path path = Path.of(filePath);
         if (!Files.isReadable(path)) {
             createNewFile(path);

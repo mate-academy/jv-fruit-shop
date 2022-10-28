@@ -3,6 +3,6 @@ package core.basesyntax.strategy;
 import core.basesyntax.strategy.transactions.FruitTransaction;
 import java.util.List;
 
-public interface TransactionStrategy {
-    void distributeTransactions(List<FruitTransaction> actions);
+public interface TransactionService {
+    void applyTransactions(List<FruitTransaction> actions);
 }
