@@ -8,17 +8,16 @@ import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.WriteInFileService;
 import core.basesyntax.service.impl.ReadFromFileServiceImpl;
 import core.basesyntax.service.impl.WriteInFileServiceImpl;
-
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Main {
     private static final String END_LINE = System.lineSeparator();
-    public static final String COLUMNS = "fruit,quantity";
+    private static final String COLUMNS = "fruit,quantity";
     private static final String WORDS_SPLITERATOR = ",";
     private static final String PATH_FROM = "src/main/resources/dataFrom.csv";
     private static final String PATH_TO = "src/main/resources/dataTo.csv";
-    
+
     public static void main(String[] args) {
         ReadFromFileService readFromFileService = new ReadFromFileServiceImpl();
         ParseFruitAction parseFruitAction = new ParseFruitActionImpl();
