@@ -2,7 +2,7 @@ package service.operations;
 
 import dao.StorageDao;
 
-public class BalanceHandler implements OperationsHandler {
+public class BalanceHandler implements OperationHandler {
     private StorageDao storageDao;
 
     public BalanceHandler(StorageDao storageDao) {
@@ -11,6 +11,6 @@ public class BalanceHandler implements OperationsHandler {
 
     @Override
     public void doOperation(String fruitName, Integer quantity) {
-        storageDao.set(fruitName, quantity);
+        storageDao.setQuantity(fruitName, quantity);
     }
 }

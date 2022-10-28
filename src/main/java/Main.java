@@ -6,18 +6,18 @@ import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import service.operations.BalanceHandler;
-import service.operations.OperationsHandler;
+import service.operations.OperationHandler;
 import service.operations.PurchaseHandler;
 import service.operations.ReturnHandler;
 import service.operations.SupplyHandler;
-import service.process.ProcessTransactionsService;
-import service.process.impl.ProcessTransactionsServiceImpl;
-import service.read.ProcessFileContent;
-import service.read.ReadFileService;
-import service.read.impl.ProcessFileContentImpl;
-import service.read.impl.ReadFileServiceImpl;
-import service.strategy.OperationsStrategy;
-import service.strategy.impl.OperationsStrategyImpl;
+import service.process.FruitTransactionService;
+import service.process.impl.FruitTransactionServiceImpl;
+import service.read.FileReader;
+import service.read.FruitTransactionParser;
+import service.read.impl.FileReaderImpl;
+import service.read.impl.FruitTransactionParserImpl;
+import service.strategy.OperationStrategy;
+import service.strategy.impl.OperationStrategyImpl;
 import service.write.ReportService;
 import service.write.WriterService;
 import service.write.impl.ReportServiceImpl;
@@ -25,16 +25,22 @@ import service.write.impl.WriterServiceImpl;
 
 public class Main {
     private static Map<FruitTransaction.Operation,
-            OperationsHandler> operationOperationsHandlerMap = new HashMap<>();
+            OperationHandler> operationOperationsHandlerMap = new HashMap<>();
     private static StorageDao storageDao = new StorageDaoImpl();
-    private static ReadFileService readerService = new ReadFileServiceImpl();
+    private static FileReader fileReader = new FileReaderImpl();
     private static ReportService reportService = new ReportServiceImpl();
-    private static ProcessFileContent processFileService = new ProcessFileContentImpl();
+    private static String CSV_SEPARATOR = ",";
+    private static String OPERATION_TYPE_NAME = "type";
+    private static String FRUIT_QUANTITY_NAME = "quantity";
+    private static String FRUIT_NAME = "fruit";
+    private static FruitTransactionParser fruitTransactionParser =
+            new FruitTransactionParserImpl(CSV_SEPARATOR, OPERATION_TYPE_NAME,
+                    FRUIT_QUANTITY_NAME, FRUIT_NAME);
     private static WriterService writerService = new WriterServiceImpl();
-    private static OperationsStrategy operationsStrategy =
-            new OperationsStrategyImpl(operationOperationsHandlerMap);
-    private static ProcessTransactionsService processTransactionsService =
-            new ProcessTransactionsServiceImpl(operationsStrategy);
+    private static OperationStrategy operationStrategy =
+            new OperationStrategyImpl(operationOperationsHandlerMap);
+    private static FruitTransactionService fruitTransactionService =
+            new FruitTransactionServiceImpl(operationStrategy);
 
     public static void main(String[] args) {
         operationOperationsHandlerMap.put(FruitTransaction.Operation.PURCHASE,
@@ -46,14 +52,16 @@ public class Main {
         operationOperationsHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyHandler(storageDao));
 
-        String filePath = "src/main/resources/input.csv";
-        List<String> fileContent = readerService.readFromFile(filePath);
+        String directoryPath = "src/main/resources/";
+        String fromFileName = "input.csv";
+        List<String> fileContent = fileReader.readFromFile(directoryPath, fromFileName);
+
         System.out.println(fileContent);
-        List<FruitTransaction> transactions = processFileService.processFile(fileContent);
-        processTransactionsService.processTransactions(transactions);
+        List<FruitTransaction> transactions = fruitTransactionParser.parse(fileContent);
+        fruitTransactionService.processTransactions(transactions);
         System.out.println(Storage.storage);
         String toFileName = "result.csv";
         String report = reportService.createReport();
-        writerService.writeToFile(toFileName, report);
+        writerService.writeToFile(directoryPath, toFileName, report);
     }
 }

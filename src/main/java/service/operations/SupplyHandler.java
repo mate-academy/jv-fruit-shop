@@ -2,7 +2,7 @@ package service.operations;
 
 import dao.StorageDao;
 
-public class SupplyHandler implements OperationsHandler {
+public class SupplyHandler implements OperationHandler {
     private StorageDao storageDao;
 
     public SupplyHandler(StorageDao storageDao) {
@@ -13,11 +13,11 @@ public class SupplyHandler implements OperationsHandler {
     public void doOperation(String fruitName, Integer quantity) {
         Integer previousQuantity;
         try {
-            previousQuantity = storageDao.get(fruitName);
+            previousQuantity = storageDao.getQuantity(fruitName);
         } catch (RuntimeException e) {
             previousQuantity = 0;
         }
         Integer newQuantity = previousQuantity + quantity;
-        storageDao.set(fruitName, newQuantity);
+        storageDao.setQuantity(fruitName, newQuantity);
     }
 }

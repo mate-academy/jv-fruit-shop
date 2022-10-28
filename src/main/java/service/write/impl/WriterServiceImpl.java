@@ -6,16 +6,14 @@ import java.nio.file.Files;
 import service.write.WriterService;
 
 public class WriterServiceImpl implements WriterService {
-    private static final String DIRECTORY_PATH = "src/main/resources/";
-    private static final String CANT_WRITE_MESSAGE = "Can't write to file: ";
 
     @Override
-    public void writeToFile(String filename, String report) {
-        File file = new File(DIRECTORY_PATH + filename);
+    public void writeToFile(String pathToFile, String filename, String report) {
+        File file = new File(pathToFile + filename);
         try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException(CANT_WRITE_MESSAGE + file);
+            throw new RuntimeException("Can't write to file: " + file);
         }
     }
 }

@@ -6,12 +6,12 @@ import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
-    public void set(String fruitName, Integer quantity) {
+    public void setQuantity(String fruitName, Integer quantity) {
         Storage.storage.put(fruitName, quantity);
     }
 
     @Override
-    public Integer get(String fruitName) {
+    public Integer getQuantity(String fruitName) {
         if (!Storage.storage.containsKey(fruitName)) {
             throw new RuntimeException("There is no " + fruitName + " in the storage");
         }

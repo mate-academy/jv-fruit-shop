@@ -1,5 +1,5 @@
 package service.operations;
 
-public interface OperationsHandler {
+public interface OperationHandler {
     void doOperation(String fruitName, Integer quantity);
 }
