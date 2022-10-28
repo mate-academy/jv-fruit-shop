@@ -1,9 +1,8 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.strategy.operation;
 
 import core.basesyntax.storage.Store;
-import core.basesyntax.strategy.OperationStrategyImpl;
 
-public class ReturnOperationStrategyImpl implements OperationStrategyImpl {
+public class ReturnOperationImpl implements OperationHandler {
     @Override
     public void getResultBalance(String fruitName, int value) {
         int oldVale = Store.FRUIT_STORAGE.get(fruitName);

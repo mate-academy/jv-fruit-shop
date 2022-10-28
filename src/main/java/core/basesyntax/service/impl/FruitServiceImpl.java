@@ -2,7 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.operation.OperationHandler;
 
 public class FruitServiceImpl implements FruitService {
     private static final String COMMA = ",";
@@ -23,8 +23,8 @@ public class FruitServiceImpl implements FruitService {
             String operation = arrWithOperatorAndFruitQuantity[OPERATION_INDEX];
             String fruitName = arrWithOperatorAndFruitQuantity[FRUIT_NAME_INDEX];
             String quantity = arrWithOperatorAndFruitQuantity[QUANTITY_INDEX];
-            OperationStrategyImpl operationService = operationStrategy.getOperation(operation);
-            operationService.getResultBalance(fruitName, Integer.parseInt(quantity));
+            OperationHandler operationHandler = operationStrategy.getOperation(operation);
+            operationHandler.getResultBalance(fruitName, Integer.parseInt(quantity));
         }
     }
 }

@@ -4,16 +4,17 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.BalanceOperationStrategyImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.service.impl.PurchaseOperationStrategyImpl;
-import core.basesyntax.service.impl.ReturnOperationStrategyImpl;
-import core.basesyntax.service.impl.SupplyOperationStrategyImpl;
 import core.basesyntax.storage.Store;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.operation.BalanceOperationImpl;
+import core.basesyntax.strategy.operation.OperationHandler;
+import core.basesyntax.strategy.operation.PurchaseOperationImpl;
+import core.basesyntax.strategy.operation.ReturnOperationImpl;
+import core.basesyntax.strategy.operation.SupplyOperationImpl;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -28,15 +29,15 @@ public class Main {
     private static final String toFile = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        Map<String, OperationStrategyImpl> operationServiceMap = new HashMap<>();
+        Map<String, OperationHandler> operationServiceMap = new HashMap<>();
         operationServiceMap.put(Operation.BALANCE.getOperation(),
-                new BalanceOperationStrategyImpl());
+                new BalanceOperationImpl());
         operationServiceMap.put(Operation.SUPPLY.getOperation(),
-                new SupplyOperationStrategyImpl());
+                new SupplyOperationImpl());
         operationServiceMap.put(Operation.PURCHASE.getOperation(),
-                new PurchaseOperationStrategyImpl());
+                new PurchaseOperationImpl());
         operationServiceMap.put(Operation.RETURN.getOperation(),
-                new ReturnOperationStrategyImpl());
+                new ReturnOperationImpl());
         ReaderService readerService;
         String readData;
         try {
@@ -46,7 +47,7 @@ public class Main {
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File don't found");
         }
-        OperationStrategy operationStrategy = new OperationStrategy(operationServiceMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationServiceMap);
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
         fruitService.getReport(readData);
         WriterService writerService;

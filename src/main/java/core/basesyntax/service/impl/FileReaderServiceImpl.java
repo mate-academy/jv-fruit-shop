@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class FileReaderServiceImpl implements ReaderService {
-    private static final String CANT_READ = "Can't read from file. ";
     private final BufferedReader bufferedReader;
 
     public FileReaderServiceImpl(BufferedReader bufferedReader) {
@@ -22,7 +21,7 @@ public class FileReaderServiceImpl implements ReaderService {
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException(CANT_READ + e);
+            throw new RuntimeException("Can't read from file. " + e);
         }
         return builder.toString();
     }

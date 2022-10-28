@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class FileWriterServiceImpl implements WriterService {
-    private static final String CANT_WRITE = "Can't write to file. ";
     private static final String COMMA = ",";
     private static final String PREDEFINED_LINE = "fruit,quantity";
     private final BufferedWriter bufferedWriter;
@@ -26,7 +25,7 @@ public class FileWriterServiceImpl implements WriterService {
                 bufferedWriter.write(entry.getKey() + COMMA + entry.getValue());
             }
         } catch (IOException e) {
-            throw new RuntimeException(CANT_WRITE + e);
+            throw new RuntimeException("Can't write to file. " + e);
         }
     }
 }

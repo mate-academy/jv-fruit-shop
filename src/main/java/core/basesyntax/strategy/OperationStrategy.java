@@ -1,15 +1,7 @@
 package core.basesyntax.strategy;
 
-import java.util.Map;
+import core.basesyntax.strategy.operation.OperationHandler;
 
-public class OperationStrategy {
-    private final Map<String, OperationStrategyImpl> operationServiceMap;
-
-    public OperationStrategy(Map<String, OperationStrategyImpl> operationServiceMap) {
-        this.operationServiceMap = operationServiceMap;
-    }
-
-    public OperationStrategyImpl getOperation(String key) {
-        return operationServiceMap.get(key);
-    }
+public interface OperationStrategy {
+    OperationHandler getOperation(String key);
 }
