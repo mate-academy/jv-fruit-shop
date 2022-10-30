@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import core.basesyntax.enums.Operation;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;

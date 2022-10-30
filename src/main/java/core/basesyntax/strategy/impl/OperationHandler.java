@@ -1,7 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
 
-public interface OperationService {
+public interface OperationHandler {
     void operationWithFruitTransaction(FruitTransaction fruitTransaction);
 }

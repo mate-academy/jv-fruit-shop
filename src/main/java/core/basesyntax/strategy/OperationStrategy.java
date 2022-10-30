@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.Operation;
-import core.basesyntax.service.OperationService;
+import core.basesyntax.enums.Operation;
+import core.basesyntax.strategy.impl.OperationHandler;
 
 public interface OperationStrategy {
-    public OperationService get(Operation operation);
+    public OperationHandler get(Operation operation);
 }

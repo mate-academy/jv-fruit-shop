@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.enums.Operation;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitTransactionData;
 import java.util.ArrayList;
 import java.util.List;

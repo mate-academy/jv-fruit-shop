@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.service.Report;
+import core.basesyntax.service.ReportMaker;
 
-public class ReportImpl implements Report {
+public class ReportMakerImpl implements ReportMaker {
     private static final String STRING_SEPARATOR = ",";
     private static final String DATA_TYPE_MAKER = "fruit" + STRING_SEPARATOR + "quantity";
     private FruitDao fruitDao = new FruitDaoImpl();

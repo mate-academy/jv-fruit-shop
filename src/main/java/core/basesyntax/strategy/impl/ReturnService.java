@@ -1,11 +1,10 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationService;
 
-public class ReturnService implements OperationService {
+public class ReturnService implements OperationHandler {
     private FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
