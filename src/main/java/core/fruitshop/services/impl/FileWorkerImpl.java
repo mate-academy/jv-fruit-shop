@@ -13,9 +13,7 @@ public class FileWorkerImpl implements FileWorker {
     @Override
     public List<String> readFromFile(String fileName) {
         try {
-            List<String> strings = Files.readAllLines(Paths.get(fileName));
-            System.out.println("Successfully read data from " + fileName);
-            return strings;
+            return Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Something went wrong when reading from file " + fileName);
         }
@@ -30,7 +28,6 @@ public class FileWorkerImpl implements FileWorker {
                 writer.write(entry.getKey() + columnSeparator + entry.getValue());
                 writer.newLine();
             }
-            System.out.println("Successfully wrote data to " + fileName);
         } catch (IOException exception) {
             throw new RuntimeException("Something went wrong when writing to file " + fileName);
         }

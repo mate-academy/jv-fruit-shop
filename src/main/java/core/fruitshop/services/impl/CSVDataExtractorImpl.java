@@ -16,14 +16,11 @@ public class CSVDataExtractorImpl implements DataExtractor {
     private static final String INCORRECT_TYPE_EXCEPTION = "Incorrect operation type. " +
             "Expected: " + BALANCE + ","
             + SUPPLY + "," + RETURN + "or" + PURCHASE + ", but was: ";
-    private final String columnSeparator;
+    private static final String COLUMN_SEPARATOR = ",";
     private String[] stringToParse;
-    public CSVDataExtractorImpl(String columnSeparator) {
-        this.columnSeparator = columnSeparator;
-    }
 
     public FruitTransaction parse(String stringToParse) {
-       this.stringToParse = stringToParse.split(columnSeparator);
+       this.stringToParse = stringToParse.split(COLUMN_SEPARATOR);
         return new FruitTransaction(getOperationType(),
                 getProductName(), getProductAmount());
     }
