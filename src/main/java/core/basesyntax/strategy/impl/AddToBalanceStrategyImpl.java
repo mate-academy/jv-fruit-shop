@@ -6,7 +6,7 @@ import core.basesyntax.strategy.AddToBalanceStrategy;
 public class AddToBalanceStrategyImpl implements AddToBalanceStrategy {
     @Override
     public void action(String fruit, Integer quantity) {
-        if (existFruit(Storage.fruits, fruit)) {
+        if (existFruit(fruit)) {
             Storage.fruits.put(fruit, quantity);
         } else {
             Storage.fruits.replace(fruit, Storage.fruits.get(fruit) + quantity);

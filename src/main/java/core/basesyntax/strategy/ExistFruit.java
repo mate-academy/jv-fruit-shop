@@ -1,9 +1,9 @@
 package core.basesyntax.strategy;
 
-import java.util.Map;
+import core.basesyntax.dao.impl.Storage;
 
 public interface ExistFruit {
-    default boolean existFruit(Map<String, Integer> dataForReport, String fruit) {
-        return !dataForReport.containsKey(fruit);
+    default boolean existFruit(String fruit) {
+        return !Storage.fruits.containsKey(fruit);
     }
 }
