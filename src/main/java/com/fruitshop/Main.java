@@ -18,18 +18,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         List<String> list = new FileCsvReaderImpl().readFromCsv(FILE_TO_READ.getPath());
-        System.out.println(list);
-
         Map<String, Fruit> fruitMap = new ParseFruitNamesImpl().getFruitNamesMap(list);
-        System.out.println(fruitMap);
-
         fruitMap = new FruitShopSupplierImpl().fillTheMap(list);
-        System.out.println(fruitMap);
-
-        String aaa = new ResultMessage().makeMessage();
-        System.out.println(aaa);
-
-        new FileCsvWriterImpl().writeInFile(aaa, FILE_TO_WRITE_IN.getPath());
-
+        String message = new ResultMessage().makeMessage();
+        new FileCsvWriterImpl().writeInFile(message, FILE_TO_WRITE_IN.getPath());
     }
 }
