@@ -3,7 +3,6 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.strategy.AddToBalanceStrategy;
 import core.basesyntax.strategy.FruitShopTransaction;
 import core.basesyntax.strategy.PurchaseStrategy;
-import java.util.Map;
 
 public class FruitShopTransactionImpl implements FruitShopTransaction {
     private static final String BALANCE = "b";
@@ -19,16 +18,15 @@ public class FruitShopTransactionImpl implements FruitShopTransaction {
     }
 
     @Override
-    public void fruitTransaction(Map<String, Integer> dataForReport,
-                                 String activityType, String fruit, int quantity) {
+    public void fruitTransaction(String activityType, String fruit, int quantity) {
         switch (activityType) {
             case BALANCE:
             case SUPPLY:
             case RETURN:
-                addToBalanceStrategy.action(dataForReport, fruit, quantity);
+                addToBalanceStrategy.action(fruit, quantity);
                 break;
             case PURCHASE:
-                purchaseStrategy.action(dataForReport, fruit, quantity);
+                purchaseStrategy.action(fruit, quantity);
                 break;
             default: throw new RuntimeException("Invalid data!");
         }

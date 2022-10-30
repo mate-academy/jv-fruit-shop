@@ -7,6 +7,10 @@ public class GetFruitShopActivitiesImpl implements GetFruitShopActivities {
 
     @Override
     public String[] getActivities(String dataFromFile) {
-        return dataFromFile.split(END_LINE);
+        if (dataFromFile != null) {
+            return dataFromFile.split(END_LINE);
+        } else {
+            throw new RuntimeException("Empty data!");
+        }
     }
 }

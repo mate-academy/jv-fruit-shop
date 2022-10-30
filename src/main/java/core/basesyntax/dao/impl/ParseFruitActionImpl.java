@@ -3,8 +3,6 @@ package core.basesyntax.dao.impl;
 import core.basesyntax.dao.ParseFruitAction;
 import core.basesyntax.strategy.FruitShopTransaction;
 import core.basesyntax.strategy.impl.FruitShopTransactionImpl;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ParseFruitActionImpl implements ParseFruitAction {
     private static final String WORDS_SPLITERATOR = ",";
@@ -18,8 +16,10 @@ public class ParseFruitActionImpl implements ParseFruitAction {
     }
 
     @Override
-    public Map<String, Integer> parseFruit(String[] activity) {
-        Map<String, Integer> dataForReport = new HashMap<>();
+    public void parseFruit(String[] activity) {
+        if (activity == null) {
+            throw new RuntimeException("Empty data!");
+        }
         String[] activityData;
         String activityType;
         String fruit;
@@ -29,8 +29,7 @@ public class ParseFruitActionImpl implements ParseFruitAction {
             activityType = activityData[ACTIVITY_TYPE_INDEX];
             fruit = activityData[FRUIT_INDEX];
             quantity = Integer.parseInt(activityData[QUANTITY_INDEX]);
-            fruitShopTransaction.fruitTransaction(dataForReport, activityType, fruit, quantity);
+            fruitShopTransaction.fruitTransaction(activityType, fruit, quantity);
         }
-        return dataForReport;
     }
 }

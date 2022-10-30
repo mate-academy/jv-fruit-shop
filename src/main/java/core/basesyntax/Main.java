@@ -10,7 +10,6 @@ import core.basesyntax.service.WriteInFileService;
 import core.basesyntax.service.impl.ReadFromFileServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriteInFileServiceImpl;
-import java.util.Map;
 
 public class Main {
     private static final String PATH_FROM = "src/main/resources/dataFrom.csv";
@@ -24,10 +23,10 @@ public class Main {
         String[] activities = getFruitShopActivities.getActivities(dataFromFile);
 
         ParseFruitAction parseFruitAction = new ParseFruitActionImpl();
-        Map<String, Integer> dataForReport = parseFruitAction.parseFruit(activities);
+        parseFruitAction.parseFruit(activities);
 
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.getReport(dataForReport);
+        String report = reportService.getReport();
 
         WriteInFileService writeInFileService = new WriteInFileServiceImpl();
         writeInFileService.writeInFile(report, PATH_TO);
