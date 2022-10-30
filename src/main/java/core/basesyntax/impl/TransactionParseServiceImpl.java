@@ -15,16 +15,16 @@ public class TransactionParseServiceImpl implements TransactionParseService {
 
     @Override
     public List<FruitTransaction> parseInputData(List<String> inputData) {
-        List<FruitTransaction> transactions = new ArrayList<>();
+        List<FruitTransaction> activities = new ArrayList<>();
         for (String items : inputData) {
             String[] data = items.split(DATA_SPLITTER);
-            String operationType = data[OPERATION_TYPE_INDEX];
+            String activityType = data[OPERATION_TYPE_INDEX];
             String fruitName = data[FRUIT_TYPE_INDEX];
             int quantity = Integer.parseInt(data[FRUIT_QUANTITY_INDEX]);
-            FruitTransaction transaction = new FruitTransaction(Operation
-                    .getOperation(operationType), new Fruit(fruitName), quantity);
-            transactions.add(transaction);
+            FruitTransaction activity = new FruitTransaction(Operation
+                    .getOperation(activityType), new Fruit(fruitName), quantity);
+            activities.add(activity);
         }
-        return transactions;
+        return activities;
     }
 }
