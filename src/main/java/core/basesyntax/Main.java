@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_PATH = "src/main/java/core/basesyntax/files/input.csv";
-    private static final String REPORT_FILE_PATH = "src/main/java/core/basesyntax/files/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<Operation, OperationHandler> operationMap = new HashMap<>();
