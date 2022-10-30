@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.db.StorageDao;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvReader;
 import core.basesyntax.service.impl.CsvWriter;
@@ -12,7 +13,7 @@ import core.basesyntax.strategy.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.transactions.FruitTransactionParser;
 import core.basesyntax.strategy.transactions.TransactionHandler;
 import core.basesyntax.strategy.transactions.impl.AdderHandler;
-import core.basesyntax.strategy.transactions.impl.FruitTransactionParserImpl;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.strategy.transactions.impl.ReduceHandler;
 import core.basesyntax.strategy.transactions.impl.SaverHandler;
 import java.util.HashMap;
@@ -32,13 +33,13 @@ public class Main {
         StorageDao storageDao = new StorageDao();
         List<String> strings = readerService.readFile(exampleFile, numberOfTitleInCsv);
         FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
-        TransactionServiceImpl transactionStrategyImpl =
+        TransactionService transactionService =
                 new TransactionServiceImpl(getTransactionMap(storageDao));
-        transactionStrategyImpl
+        transactionService
                 .applyTransactions(fruitTransactionParser.parse(strings));
         WriterService writer = new CsvWriter(titleForCsv);
         ReportService reportService = new ReportServiceImpl();
-        String linesToFile = reportService.getLines(storageDao);
+        String linesToFile = reportService.createReport(storageDao);
         writer.saveToFile(resultTargetFile, linesToFile);
     }
 

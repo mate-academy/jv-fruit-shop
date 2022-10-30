@@ -12,7 +12,7 @@ public class SaverHandler implements TransactionHandler {
     }
 
     @Override
-    public void produceTransaction(FruitTransaction fruitTransaction) {
+    public void apply(FruitTransaction fruitTransaction) {
         storageDao.add(fruitTransaction.getFruitName(),
                 fruitTransaction.getValueOfFruit());
     }

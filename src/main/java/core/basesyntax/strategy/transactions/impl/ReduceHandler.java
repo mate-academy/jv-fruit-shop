@@ -12,7 +12,7 @@ public class ReduceHandler implements TransactionHandler {
     }
 
     @Override
-    public void produceTransaction(FruitTransaction fruitTransaction) {
+    public void apply(FruitTransaction fruitTransaction) {
         Integer oldValue = storageDao.getValue(fruitTransaction.getFruitName());
         Integer newValue = oldValue - fruitTransaction.getValueOfFruit();
         storageDao.setValue(fruitTransaction.getFruitName(),

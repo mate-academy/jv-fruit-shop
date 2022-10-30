@@ -9,10 +9,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CsvReader implements ReaderService {
-    private int linesAmountToSkip;
 
     @Override
     public List<String> readFile(String filePath) {
+        return readFile(filePath, 0);
+    }
+
+    public List<String> readFile(String filePath, int linesAmountToSkip) {
         try (BufferedReader bufferedReader = Files.newBufferedReader(Path.of(filePath))) {
             return bufferedReader.lines()
                     .skip(linesAmountToSkip)
@@ -20,14 +23,5 @@ public class CsvReader implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can`t read file " + filePath, e);
         }
-    }
-
-    public List<String> readFile(String filePath, int linesAmountToSkip) {
-        this.linesAmountToSkip = linesAmountToSkip;
-        return readFile(filePath);
-    }
-
-    public void setLinesAmountToSkip(int linesAmountToSkip) {
-        this.linesAmountToSkip = linesAmountToSkip;
     }
 }

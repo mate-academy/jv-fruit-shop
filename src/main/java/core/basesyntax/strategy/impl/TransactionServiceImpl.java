@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.strategy.Operation;
-import core.basesyntax.strategy.TransactionService;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.strategy.transactions.FruitTransaction;
 import core.basesyntax.strategy.transactions.TransactionHandler;
 import java.util.HashMap;
@@ -15,11 +15,11 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     public void applyTransactions(List<FruitTransaction> actions) {
-        actions.forEach(this::transactionStrategy);
+        actions.forEach(this::handleTransaction);
     }
 
-    private void transactionStrategy(FruitTransaction fruitTransaction) {
+    private void handleTransaction(FruitTransaction fruitTransaction) {
         transactionMap.get(fruitTransaction.getOperation())
-                .produceTransaction(fruitTransaction);
+                .apply(fruitTransaction);
     }
 }

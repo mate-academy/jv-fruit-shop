@@ -1,5 +1,5 @@
 package core.basesyntax.strategy.transactions;
 
 public interface TransactionHandler {
-    void produceTransaction(FruitTransaction fruitTransactionImpl);
+    void apply(FruitTransaction fruitTransactionImpl);
 }
