@@ -4,7 +4,6 @@ import dao.StorageDao;
 import dao.impl.StorageDaoImpl;
 import db.Storage;
 import java.util.Map;
-import java.util.Set;
 import service.write.ReportService;
 
 public class ReportServiceImpl implements ReportService {
@@ -15,16 +14,14 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport() {
-        Map<String, Integer> storage = storageDao.getAll();
-        Set<String> keySet = storage.keySet();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(START_MESSAGE);
-        for (String key : keySet) {
-            stringBuilder.append(LINE_SEPARATOR)
-                    .append(key)
-                    .append(CSV_SEPARATOR)
-                    .append(Storage.storage.get(key));
-        }
+        storageDao.getAll().stream()
+                .map(Map.Entry::getKey)
+                .forEach(e -> stringBuilder.append(LINE_SEPARATOR)
+                        .append(e)
+                        .append(CSV_SEPARATOR)
+                        .append(Storage.storage.get(e)));
         return stringBuilder.toString();
     }
 }

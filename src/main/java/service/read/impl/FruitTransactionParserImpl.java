@@ -39,7 +39,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
                 .collect(Collectors.toList());
     }
 
-    public int[] getColumnIndexes(String[] columnNames) {
+    private int[] getColumnIndexes(String[] columnNames) {
         int[] result = new int[columnNames.length];
         for (int i = 0; i < columnNames.length; i++) {
             if (columnNames[i].equals(operationTypeName)) {

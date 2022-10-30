@@ -3,6 +3,7 @@ package dao.impl;
 import dao.StorageDao;
 import db.Storage;
 import java.util.Map;
+import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
@@ -19,7 +20,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public Map<String, Integer> getAll() {
-        return Storage.storage;
+    public Set<Map.Entry<String, Integer>> getAll() {
+        return Map.copyOf(Storage.storage).entrySet();
     }
 }
