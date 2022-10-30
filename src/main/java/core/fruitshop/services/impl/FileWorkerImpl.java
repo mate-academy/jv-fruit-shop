@@ -1,7 +1,6 @@
 package core.fruitshop.services.impl;
 
 import core.fruitshop.services.FileWorker;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,8 +19,10 @@ public class FileWorkerImpl implements FileWorker {
     }
 
     @Override
-    public void writeToFile(String fileName, String header, String columnSeparator, Map<String, Integer> data) {
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(fileName))) {
+    public void writeToFile(String fileName, String header,
+                            String columnSeparator, Map<String, Integer> data) {
+        try (BufferedWriter writer =
+                     Files.newBufferedWriter(Paths.get(fileName))) {
             writer.write(header);
             writer.newLine();
             for (Map.Entry<String, Integer> entry : data.entrySet()) {

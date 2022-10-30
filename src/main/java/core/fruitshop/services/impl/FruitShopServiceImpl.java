@@ -26,11 +26,12 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public void processData(String fileName) {
         for (String line : fileWorker.readFromFile(fileName)) {
-            if(line.contains(DATA_FILE_HEADER)) {
+            if (line.contains(DATA_FILE_HEADER)) {
                 continue;
             }
             FruitTransaction transaction = dataExtractor.parse(line);
-            operationStrategy.getStrategy(transaction.getType()).handle(transaction.getProductName(),
+            operationStrategy.getStrategy(transaction.getType())
+                    .handle(transaction.getProductName(),
                     transaction.getAmount());
         }
         System.out.println("Successfully processed data from " + fileName);

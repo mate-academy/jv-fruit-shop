@@ -7,8 +7,8 @@ import core.fruitshop.exceptions.ProductAmountException;
 public class StorageDaoImpl implements StorageDao {
     private static final String AMOUNT_LESS_THEN_ZERO_EXCEPTION
             = "Amount can't be less then zero for product ";
-    private static final String AMOUNT_TO_MINUS_INCORRECT_EXCEPTION = "Amount to minus can't be " +
-            "greater then current amount: ";
+    private static final String AMOUNT_TO_MINUS_INCORRECT_EXCEPTION = "Amount to minus can't be "
+            + "greater then current amount: ";
     private static final String NOT_EXISTS_EXCEPTION = " doesn't exist in storage";
 
     @Override

@@ -5,7 +5,7 @@ import core.fruitshop.exceptions.IncorrectOperationTypeException;
 import core.fruitshop.model.FruitTransaction;
 import core.fruitshop.services.DataExtractor;
 
-public class CSVDataExtractorImpl implements DataExtractor {
+public class CsvDataExtractorImpl implements DataExtractor {
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int PRODUCT_NAME_INDEX = 1;
     private static final int PRODUCT_AMOUNT_INDEX = 2;
@@ -13,14 +13,14 @@ public class CSVDataExtractorImpl implements DataExtractor {
     private static final String SUPPLY = "s";
     private static final String RETURN = "r";
     private static final String PURCHASE = "p";
-    private static final String INCORRECT_TYPE_EXCEPTION = "Incorrect operation type. " +
-            "Expected: " + BALANCE + ","
+    private static final String INCORRECT_TYPE_EXCEPTION = "Incorrect operation type. "
+            + "Expected: " + BALANCE + ","
             + SUPPLY + "," + RETURN + "or" + PURCHASE + ", but was: ";
     private static final String COLUMN_SEPARATOR = ",";
     private String[] stringToParse;
 
     public FruitTransaction parse(String stringToParse) {
-       this.stringToParse = stringToParse.split(COLUMN_SEPARATOR);
+        this.stringToParse = stringToParse.split(COLUMN_SEPARATOR);
         return new FruitTransaction(getOperationType(),
                 getProductName(), getProductAmount());
     }

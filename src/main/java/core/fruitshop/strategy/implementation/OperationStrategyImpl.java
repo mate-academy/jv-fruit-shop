@@ -3,7 +3,6 @@ package core.fruitshop.strategy.implementation;
 import core.fruitshop.OperationType;
 import core.fruitshop.strategy.interfaces.OperationHandler;
 import core.fruitshop.strategy.interfaces.OperationStrategy;
-
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
