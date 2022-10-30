@@ -8,14 +8,14 @@ import java.util.Map;
 public class DataBaseManagerImpl implements DataBaseManager {
 
     public void addToDB(String typeOfFruit, Fruit fruit) {
-        DataBase.fruitsInShop.put(typeOfFruit, fruit);
+        DataBase.currentDataBase().put(typeOfFruit, fruit);
     }
 
     public Fruit getFromDB(String keyFruit) {
-        return DataBase.fruitsInShop.get(keyFruit);
+        return DataBase.currentDataBase().get(keyFruit);
     }
 
     public Map<String,Fruit> getAllDB() {
-        return DataBase.fruitsInShop;
+        return DataBase.currentDataBase();
     }
 }

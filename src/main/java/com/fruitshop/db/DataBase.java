@@ -5,5 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DataBase {
-    public static Map<String, Fruit> fruitsInShop = new HashMap<>();
+    private static Map<String, Fruit> fruitsInShop = new HashMap<>();
+
+    public static Map<String, Fruit> currentDataBase() {
+        return fruitsInShop;
+    }
 }
