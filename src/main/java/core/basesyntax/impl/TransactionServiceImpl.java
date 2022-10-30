@@ -2,7 +2,6 @@ package core.basesyntax.impl;
 
 import static core.basesyntax.db.FruitStorage.storage;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.OperationStrategy;
@@ -19,17 +18,19 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void addToStorage(List<FruitTransaction> activities) {
         for (FruitTransaction activity : activities) {
-            Fruit fruit = activity.getFruit();
-            int inputQuantity = activity.getQuantity();
-            if (!storage.containsKey(fruit)) {
-                storage.put(fruit, inputQuantity);
+            if (storage.containsKey(activity.getFruit())) {
+                replaceValue(activity);
             } else {
-                int currentQuantity = storage.get(fruit);
-                Operation activityType = activity.getOperation();
-                int newQuantity = operationStrategy.get(activityType)
-                        .apply(currentQuantity, inputQuantity);
-                storage.replace(fruit, newQuantity);
+                storage.put(activity.getFruit(), activity.getQuantity());
             }
         }
+    }
+
+    private void replaceValue(FruitTransaction activity) {
+        Operation activityType = activity.getOperation();
+        int currentQuantity = storage.get(activity.getFruit());
+        int newQuantity = operationStrategy.get(activityType)
+                .apply(currentQuantity, activity.getQuantity());
+        storage.replace(activity.getFruit(), newQuantity);
     }
 }
