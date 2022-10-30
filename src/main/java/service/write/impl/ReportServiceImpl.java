@@ -2,7 +2,6 @@ package service.write.impl;
 
 import dao.StorageDao;
 import dao.impl.StorageDaoImpl;
-import db.Storage;
 import java.util.Map;
 import service.write.ReportService;
 
@@ -21,7 +20,7 @@ public class ReportServiceImpl implements ReportService {
                 .forEach(e -> stringBuilder.append(LINE_SEPARATOR)
                         .append(e)
                         .append(CSV_SEPARATOR)
-                        .append(Storage.storage.get(e)));
+                        .append(storageDao.getQuantity(e)));
         return stringBuilder.toString();
     }
 }
