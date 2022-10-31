@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.NoSuchOperationException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
@@ -15,7 +16,7 @@ public class FruitTransactionParserServiceImpl implements DataParserService {
     private static final int FRUIT_COUNT_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> analyse(List<String> fruitInfo) {
+    public List<FruitTransaction> parse(List<String> fruitInfo) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (int i = 1; i < fruitInfo.size(); i++) {
             String[] parsedLine = fruitInfo.get(i).split(SEPARATED_VALUE);
@@ -34,6 +35,6 @@ public class FruitTransactionParserServiceImpl implements DataParserService {
                         .filter(x -> x.getOperation().equals(value))
                         .findFirst();
         return operation.orElseThrow(
-                () -> new RuntimeException("Can't found operation by this value" + value));
+                () -> new NoSuchOperationException("Can't found operation by this value" + value));
     }
 }
