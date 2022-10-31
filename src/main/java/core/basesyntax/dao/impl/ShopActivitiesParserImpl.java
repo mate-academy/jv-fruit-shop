@@ -1,8 +1,8 @@
 package core.basesyntax.dao.impl;
 
-import core.basesyntax.dao.ParseShopActivities;
+import core.basesyntax.dao.ShopActivitiesParser;
 
-public class ParseShopActivitiesImpl implements ParseShopActivities {
+public class ShopActivitiesParserImpl implements ShopActivitiesParser {
     private static final String END_LINE = System.lineSeparator();
 
     @Override

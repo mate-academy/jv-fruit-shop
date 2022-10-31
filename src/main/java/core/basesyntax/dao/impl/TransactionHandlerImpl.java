@@ -1,9 +1,9 @@
 package core.basesyntax.dao.impl;
 
-import core.basesyntax.dao.ProcessTransaction;
+import core.basesyntax.dao.TransactionHandler;
 import core.basesyntax.db.Storage;
 
-public class ProcessTransactionImpl implements ProcessTransaction {
+public class TransactionHandlerImpl implements TransactionHandler {
     @Override
     public void addToBalance(String fruit, Integer quantity) {
         if (!Storage.fruits.containsKey(fruit)) {

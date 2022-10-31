@@ -1,15 +1,15 @@
 package core.basesyntax.service.handler.impl;
 
-import core.basesyntax.dao.ProcessTransaction;
-import core.basesyntax.dao.impl.ProcessTransactionImpl;
+import core.basesyntax.dao.TransactionHandler;
+import core.basesyntax.dao.impl.TransactionHandlerImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.handler.OperationHandler;
 
 public class BalanceHandler implements OperationHandler {
-    private final ProcessTransaction processTransaction;
+    private final TransactionHandler processTransaction;
 
     public BalanceHandler() {
-        processTransaction = new ProcessTransactionImpl();
+        processTransaction = new TransactionHandlerImpl();
     }
 
     @Override

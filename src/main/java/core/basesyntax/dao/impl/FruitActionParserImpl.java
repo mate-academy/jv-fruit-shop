@@ -1,13 +1,14 @@
 package core.basesyntax.dao.impl;
 
-import core.basesyntax.dao.ParseFruitAction;
+import core.basesyntax.dao.FruitActionParser;
+import core.basesyntax.dao.exception.NoSuchEnumValue;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class ParseFruitActionImpl implements ParseFruitAction {
+public class FruitActionParserImpl implements FruitActionParser {
     private static final String WORDS_SPLITERATOR = ",";
     private static final int ACTIVITY_TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
@@ -36,6 +37,6 @@ public class ParseFruitActionImpl implements ParseFruitAction {
                 Arrays.stream(FruitTransaction.Operation.values())
                         .filter(o -> o.getOperation().equals(fileOperation))
                         .findFirst();
-        return optionalOperation.orElseThrow(RuntimeException::new);
+        return optionalOperation.orElseThrow(() -> new NoSuchEnumValue("No such action"));
     }
 }

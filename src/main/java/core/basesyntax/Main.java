@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.ParseFruitAction;
-import core.basesyntax.dao.ParseShopActivities;
-import core.basesyntax.dao.impl.ParseFruitActionImpl;
-import core.basesyntax.dao.impl.ParseShopActivitiesImpl;
+import core.basesyntax.dao.FruitActionParser;
+import core.basesyntax.dao.ShopActivitiesParser;
+import core.basesyntax.dao.impl.FruitActionParserImpl;
+import core.basesyntax.dao.impl.ShopActivitiesParserImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
@@ -30,7 +30,7 @@ public class Main {
         FileReaderService readFromFileService = new FileReaderServiceImpl();
         String dataFromFile = readFromFileService.readFile(PATH_FROM);
 
-        ParseShopActivities getFruitShopActivities = new ParseShopActivitiesImpl();
+        ShopActivitiesParser getFruitShopActivities = new ShopActivitiesParserImpl();
         String[] activities = getFruitShopActivities.parseActivities(dataFromFile);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap = new HashMap<>();
@@ -39,7 +39,7 @@ public class Main {
         operationHandlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlersMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
 
-        ParseFruitAction parseFruitAction = new ParseFruitActionImpl();
+        FruitActionParser parseFruitAction = new FruitActionParserImpl();
         List<FruitTransaction> transactions = parseFruitAction.parseAction(activities);
 
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationHandlersMap);
@@ -49,7 +49,7 @@ public class Main {
         String report = reportService.getReport();
 
         FileWriterService writeInFileService = new FileWriterServiceImpl();
-        writeInFileService.writeInFile(report, PATH_TO);
+        writeInFileService.writeToFile(report, PATH_TO);
         System.out.println(readFromFileService.readFile(PATH_TO));
     }
 }

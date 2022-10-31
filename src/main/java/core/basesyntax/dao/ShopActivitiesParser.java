@@ -1,5 +1,5 @@
 package core.basesyntax.dao;
 
-public interface ParseShopActivities {
+public interface ShopActivitiesParser {
     String[] parseActivities(String dataFromFile);
 }
