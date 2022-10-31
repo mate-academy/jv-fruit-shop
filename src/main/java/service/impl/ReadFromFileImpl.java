@@ -2,9 +2,9 @@ package service.impl;
 
 import service.ReadFromFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class ReadFromFileImpl implements ReadFromFile {
     @Override
     public List<String> readFormFile(String filePath) {
         try {
-            this.activitiesOfDay = Files.readAllLines(new File(filePath).toPath());
+            this.activitiesOfDay = Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
             throw new RuntimeException("No such file found!");
         }

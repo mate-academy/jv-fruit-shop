@@ -20,10 +20,17 @@ public class WriteToFileImpl implements WriteToFile {
 
     @Override
     public void writeToFile(String filePath, String splitter) {
-        Path path = new File(filePath).toPath();
+        File file = new File(filePath);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        Path path = file.toPath();
         try {
-            Files.writeString(path,"fruit,quantity" + System.lineSeparator(),
-                    StandardOpenOption.APPEND);
+            Files.writeString(path,"fruit,quantity" + System.lineSeparator());
         } catch (IOException e) {
             throw new RuntimeException("Can't find such file" + filePath);
         }
