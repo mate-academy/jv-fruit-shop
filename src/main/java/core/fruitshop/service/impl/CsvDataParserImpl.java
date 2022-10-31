@@ -1,18 +1,22 @@
-package core.fruitshop.services.impl;
+package core.fruitshop.service.impl;
 
 import core.fruitshop.OperationType;
 import core.fruitshop.model.FruitTransaction;
-import core.fruitshop.services.DataExtractor;
+import core.fruitshop.service.DataParser;
 
-public class CsvDataExtractorImpl implements DataExtractor {
+public class CsvDataParserImpl implements DataParser {
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int PRODUCT_NAME_INDEX = 1;
     private static final int PRODUCT_AMOUNT_INDEX = 2;
-    private static final String COLUMN_SEPARATOR = ",";
+    private final String columnSeparator;
     private String[] stringToParse;
 
+    public CsvDataParserImpl(String columnSeparator) {
+        this.columnSeparator = columnSeparator;
+    }
+
     public FruitTransaction parse(String stringToParse) {
-        this.stringToParse = stringToParse.split(COLUMN_SEPARATOR);
+        this.stringToParse = stringToParse.split(columnSeparator);
         return new FruitTransaction(getOperationType(),
                 getProductName(), getProductAmount());
     }

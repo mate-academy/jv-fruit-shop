@@ -1,23 +1,27 @@
 import core.fruitshop.OperationType;
 import core.fruitshop.dao.StorageDao;
 import core.fruitshop.dao.StorageDaoImpl;
-import core.fruitshop.services.DataExtractor;
-import core.fruitshop.services.FileWorker;
-import core.fruitshop.services.FruitShopService;
-import core.fruitshop.services.impl.CsvDataExtractorImpl;
-import core.fruitshop.services.impl.FileWorkerImpl;
-import core.fruitshop.services.impl.FruitShopServiceImpl;
+import core.fruitshop.model.FruitTransaction;
+import core.fruitshop.service.DataParser;
+import core.fruitshop.service.FileWorker;
+import core.fruitshop.service.impl.CsvDataParserImpl;
+import core.fruitshop.service.impl.FileWorkerImpl;
 import core.fruitshop.strategy.implementation.BalanceOperationHandler;
 import core.fruitshop.strategy.implementation.OperationStrategyImpl;
 import core.fruitshop.strategy.implementation.PurchaseOperationHandler;
 import core.fruitshop.strategy.implementation.ReturnSupplyOperationHandler;
 import core.fruitshop.strategy.interfaces.OperationHandler;
 import core.fruitshop.strategy.interfaces.OperationStrategy;
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String COLUMN_SEPARATOR = ",";
     private static final String DATA_FILE_PATH = "src/main/resources/data.csv";
+    private static final String DATA_FILE_HEADER = "type,fruit,quantity";
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
+    private static final String REPORT_HEADER = "fruit,quantity";
 
     public static void main(String[] args) {
         StorageDao storageDao = new StorageDaoImpl();
@@ -28,11 +32,31 @@ public class Main {
                         OperationType.RETURN, returnSupplyHandler,
                         OperationType.SUPPLY, returnSupplyHandler);
         FileWorker fileWorker = new FileWorkerImpl();
-        DataExtractor dataExtractor = new CsvDataExtractorImpl();
+        DataParser dataExtractor = new CsvDataParserImpl(COLUMN_SEPARATOR);
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
-        FruitShopService fruitShopService = new FruitShopServiceImpl(fileWorker,
-                dataExtractor, operationStrategy);
-        fruitShopService.processData(DATA_FILE_PATH);
-        fruitShopService.createReport(REPORT_FILE_PATH);
+        List<String> data;
+        try {
+            data = fileWorker.readFromFile(DATA_FILE_PATH);
+        } catch (IOException e) {
+            throw new RuntimeException("Something went wrong "
+                    + "when reading data from " + DATA_FILE_PATH);
+        }
+        for (String line : data) {
+            if (line.contains(DATA_FILE_HEADER)) {
+                continue;
+            }
+            FruitTransaction transaction = dataExtractor.parse(line);
+            operationStrategy.getStrategy(transaction.getType())
+                    .handle(transaction.getProductName(),
+                            transaction.getAmount());
+        }
+        try {
+            fileWorker.writeToFile(REPORT_FILE_PATH, REPORT_HEADER,
+                    COLUMN_SEPARATOR, storageDao.dumpData());
+        } catch (IOException e) {
+            throw new RuntimeException("Something went wrong "
+                    + "when writing report to "
+                    + REPORT_FILE_PATH);
+        }
     }
 }

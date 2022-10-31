@@ -1,7 +1,7 @@
-package core.fruitshop.services;
+package core.fruitshop.service;
 
 import core.fruitshop.model.FruitTransaction;
 
-public interface DataExtractor {
+public interface DataParser {
     FruitTransaction parse(String stringToParse);
 }

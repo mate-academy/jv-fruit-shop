@@ -1,6 +1,6 @@
-package core.fruitshop.services.impl;
+package core.fruitshop.service.impl;
 
-import core.fruitshop.services.FileWorker;
+import core.fruitshop.service.FileWorker;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,17 +10,13 @@ import java.util.Map;
 
 public class FileWorkerImpl implements FileWorker {
     @Override
-    public List<String> readFromFile(String fileName) {
-        try {
-            return Files.readAllLines(Paths.get(fileName));
-        } catch (IOException e) {
-            throw new RuntimeException("Something went wrong when reading from file " + fileName);
-        }
+    public List<String> readFromFile(String fileName) throws IOException {
+        return Files.readAllLines(Paths.get(fileName));
     }
 
     @Override
     public void writeToFile(String fileName, String header,
-                            String columnSeparator, Map<String, Integer> data) {
+                            String columnSeparator, Map<String, Integer> data) throws IOException {
         try (BufferedWriter writer =
                      Files.newBufferedWriter(Paths.get(fileName))) {
             writer.write(header);
@@ -29,8 +25,6 @@ public class FileWorkerImpl implements FileWorker {
                 writer.write(entry.getKey() + columnSeparator + entry.getValue());
                 writer.newLine();
             }
-        } catch (IOException exception) {
-            throw new RuntimeException("Something went wrong when writing to file " + fileName);
         }
     }
 }
