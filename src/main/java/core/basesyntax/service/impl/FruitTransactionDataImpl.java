@@ -21,7 +21,8 @@ public class FruitTransactionDataImpl implements FruitTransactionData {
                 .map(i -> i.split(STRING_SEPARATOR))
                 .forEach(i -> fruitTransactions
                         .add(new FruitTransaction(Operation
-                                .getFromEqualString(i[OPERATION_INDEX]), i[FRUIT_TYPE_INDEX], Integer.parseInt(i[2]))));
+                                .getFromEqualString(i[OPERATION_INDEX]),
+                                i[FRUIT_TYPE_INDEX], Integer.parseInt(i[2]))));
         return fruitTransactions;
     }
 }
