@@ -14,12 +14,12 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
     @Override
     public void changeQuantity(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity()
-                > storageDao.getRemainFruit(fruitTransaction.getFruit())) {
+                > storageDao.getFruitBalance(fruitTransaction.getFruit())) {
             throw new RuntimeException(
                     fruitTransaction.getFruit() + "Can't purchase.");
         }
         storageDao.updateData(fruitTransaction.getFruit(),
-                storageDao.getRemainFruit(fruitTransaction.getFruit())
+                storageDao.getFruitBalance(fruitTransaction.getFruit())
                         - fruitTransaction.getQuantity());
     }
 }

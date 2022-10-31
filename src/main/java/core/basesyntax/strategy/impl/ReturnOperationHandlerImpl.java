@@ -14,7 +14,7 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
     @Override
     public void changeQuantity(FruitTransaction fruitTransaction) {
         storageDao.updateData(fruitTransaction.getFruit(),
-                storageDao.getRemainFruit(fruitTransaction.getFruit())
+                storageDao.getFruitBalance(fruitTransaction.getFruit())
                         + fruitTransaction.getQuantity());
     }
 }

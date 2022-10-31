@@ -10,7 +10,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public Integer getRemainFruit(String fruit) {
+    public Integer getFruitBalance(String fruit) {
         return Storage.storageMap.get(fruit);
     }
 

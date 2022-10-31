@@ -4,7 +4,6 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
-import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ParserServiceImpl;
@@ -39,8 +38,7 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandlerImpl(storageDao));
 
-        ReaderService reader = new ReaderServiceImpl();
-        List<String> dataFromFile = reader.fileReader(FILEPATH_INPUT);
+        List<String> dataFromFile = new ReaderServiceImpl().fileReader(FILEPATH_INPUT);
         ParserService parser = new ParserServiceImpl();
         List<FruitTransaction> fruitTransactionList = parser.parseData(dataFromFile);
 
