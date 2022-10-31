@@ -5,7 +5,7 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
 public class ReturnService implements OperationHandler {
-    private FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
     public void operationWithFruitTransaction(FruitTransaction fruitTransaction) {

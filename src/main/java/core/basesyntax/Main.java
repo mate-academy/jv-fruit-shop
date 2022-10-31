@@ -34,19 +34,19 @@ public class Main {
         operationServiceMap.put(Operation.PURCHASE, new PurchaseService());
 
         ShopFileReader shopFileReader = new ShopFileReaderImpl();
-        List<String> listReadFile = shopFileReader.readFromFile(INPUT_FILE_PATH);
+        List<String> dataFromFile = shopFileReader.readFromFile(INPUT_FILE_PATH);
 
         FruitTransactionData fruitTransactionData = new FruitTransactionDataImpl();
         List<FruitTransaction> fruitTransactions
-                = fruitTransactionData.createFruitTransactionEqualFile(listReadFile);
+                = fruitTransactionData.parseDataFromFile(dataFromFile);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationServiceMap);
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
         fruitService.doOperationService(fruitTransactions);
 
-        ReportMaker report = new ReportMakerImpl();
-        String report1 = report.makeReport();
+        ReportMaker reportMaker = new ReportMakerImpl();
+        String report = reportMaker.makeReport();
         ReportWriteToFile reportWriteToFile = new ReportWriteToFileImpl();
-        reportWriteToFile.writeReportToFile(report1);
+        reportWriteToFile.writeToFile(report);
     }
 }

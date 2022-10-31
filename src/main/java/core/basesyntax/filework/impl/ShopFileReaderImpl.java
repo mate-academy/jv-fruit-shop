@@ -13,7 +13,7 @@ public class ShopFileReaderImpl implements ShopFileReader {
         try {
             return Files.readAllLines(file.toPath());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file", e);
+            throw new RuntimeException("Can't read from file: " + file, e);
         }
     }
 }

@@ -9,5 +9,5 @@ public interface FruitDao {
 
     Optional<Fruit> get(String fruitType);
 
-    List<Fruit> getStorage();
+    List<Fruit> getAll();
 }

@@ -6,7 +6,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 
 public class BalanceService implements OperationHandler {
-    private FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
     public void operationWithFruitTransaction(FruitTransaction fruitTransaction) {

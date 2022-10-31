@@ -19,7 +19,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public List<Fruit> getStorage() {
+    public List<Fruit> getAll() {
         return Storage.fruitStore;
     }
 }
