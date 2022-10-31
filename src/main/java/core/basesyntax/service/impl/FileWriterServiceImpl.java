@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.WriteInFileService;
+import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class WriteInFileServiceImpl implements WriteInFileService {
+public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeInFile(String data, String path) {
         try {

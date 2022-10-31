@@ -1,35 +1,41 @@
 package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.ParseFruitAction;
-import core.basesyntax.strategy.FruitShopTransaction;
-import core.basesyntax.strategy.impl.FruitShopTransactionImpl;
+import core.basesyntax.model.FruitTransaction;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 public class ParseFruitActionImpl implements ParseFruitAction {
     private static final String WORDS_SPLITERATOR = ",";
     private static final int ACTIVITY_TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final FruitShopTransaction fruitShopTransaction;
-
-    public ParseFruitActionImpl() {
-        this.fruitShopTransaction = new FruitShopTransactionImpl();
-    }
 
     @Override
-    public void parseFruit(String[] activity) {
+    public List<FruitTransaction> parseAction(String[] activity) {
         if (activity == null) {
             throw new RuntimeException("Empty data!");
         }
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         String[] activityData;
-        String activityType;
-        String fruit;
-        int quantity;
         for (String data : activity) {
             activityData = data.split(WORDS_SPLITERATOR);
-            activityType = activityData[ACTIVITY_TYPE_INDEX];
-            fruit = activityData[FRUIT_INDEX];
-            quantity = Integer.parseInt(activityData[QUANTITY_INDEX]);
-            fruitShopTransaction.fruitTransaction(activityType, fruit, quantity);
+            FruitTransaction transaction = new FruitTransaction();
+            transaction.setFruit(activityData[FRUIT_INDEX]);
+            transaction.setQuantity(Integer.parseInt(activityData[QUANTITY_INDEX]));
+            transaction.setOperation(getEnumValue(activityData[ACTIVITY_TYPE_INDEX]));
+            fruitTransactions.add(transaction);
         }
+        return fruitTransactions;
+    }
+
+    public FruitTransaction.Operation getEnumValue(String fileOperation) {
+        Optional<FruitTransaction.Operation> optionalOperation =
+                Arrays.stream(FruitTransaction.Operation.values())
+                        .filter(o -> o.getOperation().equals(fileOperation))
+                        .findFirst();
+        return optionalOperation.orElseThrow(RuntimeException::new);
     }
 }

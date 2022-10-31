@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReadFromFileService;
+import core.basesyntax.service.FileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ReadFromFileServiceImpl implements ReadFromFileService {
+public class FileReaderServiceImpl implements FileReaderService {
 
     @Override
-    public String readFromFile(String path) {
+    public String readFile(String path) {
         String dataFromFile = "";
         try {
             dataFromFile = Files.readString(Path.of(path));
