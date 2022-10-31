@@ -1,9 +1,10 @@
 package com.fruitshop.servicesimpl;
 
 import com.fruitshop.fruitsmodels.Fruit;
+import com.fruitshop.services.ResultMessage;
 import java.util.Map;
 
-public class ResultMessage {
+public class ResultMessageImpl implements ResultMessage {
 
     public static final String COMMA = ",";
     public static final String TITLE_TO_FILE = "fruit,quantity";

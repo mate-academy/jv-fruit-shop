@@ -5,7 +5,7 @@ import com.fruitshop.servicesimpl.FileCsvReaderImpl;
 import com.fruitshop.servicesimpl.FileCsvWriterImpl;
 import com.fruitshop.servicesimpl.FruitShopSupplierImpl;
 import com.fruitshop.servicesimpl.ParseFruitNamesImpl;
-import com.fruitshop.servicesimpl.ResultMessage;
+import com.fruitshop.servicesimpl.ResultMessageImpl;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -20,7 +20,7 @@ public class Main {
         List<String> list = new FileCsvReaderImpl().readFromCsv(FILE_TO_READ.getPath());
         Map<String, Fruit> fruitMap = new ParseFruitNamesImpl().getFruitNamesMap(list);
         fruitMap = new FruitShopSupplierImpl().fillTheMap(list);
-        String message = new ResultMessage().makeMessage();
+        String message = new ResultMessageImpl().makeMessage();
         new FileCsvWriterImpl().writeInFile(message, FILE_TO_WRITE_IN.getPath());
     }
 }

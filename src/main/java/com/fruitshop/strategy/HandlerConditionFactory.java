@@ -1,10 +1,6 @@
-package com.fruitshop.servicesimpl;
+package com.fruitshop.strategy;
 
-import com.fruitshop.strategy.Handler;
-import com.fruitshop.strategy.HandlerBalance;
-import com.fruitshop.strategy.HandlerPurchase;
-import com.fruitshop.strategy.HandlerReturned;
-import com.fruitshop.strategy.HandlerSupply;
+import com.fruitshop.servicesimpl.ShopOperations;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
