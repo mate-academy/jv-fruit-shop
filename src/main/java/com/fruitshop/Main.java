@@ -1,6 +1,6 @@
 package com.fruitshop;
 
-import com.fruitshop.fruitsmodels.Fruit;
+import com.fruitshop.model.Fruit;
 import com.fruitshop.servicesimpl.FileCsvReaderImpl;
 import com.fruitshop.servicesimpl.FileCsvWriterImpl;
 import com.fruitshop.servicesimpl.FruitShopSupplierImpl;

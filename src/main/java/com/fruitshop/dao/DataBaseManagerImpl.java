@@ -1,12 +1,10 @@
-package com.fruitshop.servicesimpl;
+package com.fruitshop.dao;
 
 import com.fruitshop.db.DataBase;
-import com.fruitshop.fruitsmodels.Fruit;
-import com.fruitshop.services.DataBaseManager;
+import com.fruitshop.model.Fruit;
 import java.util.Map;
 
 public class DataBaseManagerImpl implements DataBaseManager {
-
     public void addToDB(String typeOfFruit, Fruit fruit) {
         DataBase.currentDataBase().put(typeOfFruit, fruit);
     }

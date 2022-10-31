@@ -1,6 +1,6 @@
 package com.fruitshop.strategy;
 
-import com.fruitshop.servicesimpl.DataBaseManagerImpl;
+import com.fruitshop.dao.DataBaseManagerImpl;
 
 public class HandlerBalance implements Handler {
     private DataBaseManagerImpl data = new DataBaseManagerImpl();

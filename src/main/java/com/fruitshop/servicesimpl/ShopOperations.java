@@ -5,7 +5,6 @@ public enum ShopOperations {
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
-
     private String operator;
 
     ShopOperations(String operator) {

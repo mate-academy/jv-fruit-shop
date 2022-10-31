@@ -1,6 +1,6 @@
-package com.fruitshop.services;
+package com.fruitshop.dao;
 
-import com.fruitshop.fruitsmodels.Fruit;
+import com.fruitshop.model.Fruit;
 import java.util.Map;
 
 public interface DataBaseManager {

@@ -1,11 +1,10 @@
-package com.fruitshop.fruitsmodels;
+package com.fruitshop.model;
 
 public class Fruit {
     private int balance;
     private int supply;
     private int purchase;
     private int returned;
-
     private int quantityLeft;
 
     public int getQuantityLeft() {
@@ -58,5 +57,3 @@ public class Fruit {
                 + '}';
     }
 }
-
-

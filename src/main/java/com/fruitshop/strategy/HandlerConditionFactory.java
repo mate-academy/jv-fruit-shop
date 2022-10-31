@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class HandlerConditionFactory {
-
     private final Map<String, Handler> conditions = new HashMap<>();
 
     public HandlerConditionFactory() {
