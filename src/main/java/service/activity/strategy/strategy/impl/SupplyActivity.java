@@ -1,7 +1,7 @@
-package service.strategy_of_activities.strategyImpl;
+package service.activity.strategy.strategy.impl;
 
 import dao.impl.AddToStorageImpl;
-import service.strategy_of_activities.DoActivities;
+import service.activity.strategy.DoActivities;
 
 public class SupplyActivity implements DoActivities {
 

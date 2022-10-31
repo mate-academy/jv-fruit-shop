@@ -2,14 +2,12 @@ package service.impl;
 
 import dao.StorageEnternce;
 import dao.impl.EntrenceToStorage;
-import service.WriteToFile;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.Map;
+import service.WriteToFile;
 
 public class WriteToFileImpl implements WriteToFile {
     private StorageEnternce storage;

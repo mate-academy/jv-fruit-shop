@@ -1,17 +1,16 @@
 package service.impl;
 
-import service.ReadFromFile;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import service.ReadFromFile;
 
 public class ReadFromFileImpl implements ReadFromFile {
     private List<String> activitiesOfDay;
 
-    public ReadFromFileImpl(){
+    public ReadFromFileImpl() {
         this.activitiesOfDay = new ArrayList<>();
     }
 

@@ -1,7 +1,7 @@
-package service.strategy_of_activities.strategyImpl;
+package service.activity.strategy.strategy.impl;
 
-import service.strategy_of_activities.DoActivities;
-import service.strategy_of_activities.StrategyOfActivities;
+import service.activity.strategy.DoActivities;
+import service.activity.strategy.StrategyOfActivities;
 
 public class StrategyOfActivitiesImpl implements StrategyOfActivities {
     private static final String BALACE = "b";

@@ -1,4 +1,4 @@
-package service.strategy_of_activities;
+package service.activity.strategy;
 
 public interface DoActivities {
     void doActivity(String fruit, Integer number);
