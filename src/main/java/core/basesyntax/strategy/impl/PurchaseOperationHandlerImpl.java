@@ -16,7 +16,7 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
         if (fruitTransaction.getQuantity()
                 > storageDao.getRemainFruit(fruitTransaction.getFruit())) {
             throw new RuntimeException(
-                    fruitTransaction.getFruit() + " cannot be purchase. They aren`t enough.");
+                    fruitTransaction.getFruit() + "Can't purchase.");
         }
         storageDao.updateData(fruitTransaction.getFruit(),
                 storageDao.getRemainFruit(fruitTransaction.getFruit())
