@@ -1,6 +1,5 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.TransactionParseService;
@@ -22,7 +21,7 @@ public class TransactionParseServiceImpl implements TransactionParseService {
             String fruitName = data[FRUIT_TYPE_INDEX];
             int quantity = Integer.parseInt(data[FRUIT_QUANTITY_INDEX]);
             FruitTransaction activity = new FruitTransaction(Operation
-                    .getOperation(activityType), new Fruit(fruitName), quantity);
+                    .getOperation(activityType), fruitName, quantity);
             activities.add(activity);
         }
         return activities;

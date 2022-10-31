@@ -1,4 +1,4 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
 import java.io.File;
@@ -14,9 +14,9 @@ public class FileReaderServiceImpl implements FileReaderService {
         try {
             file.createNewFile();
             report = Files.readAllLines(file.toPath());
+            return report;
         } catch (IOException e) {
             throw new RuntimeException("Can't create file " + fromFileName);
         }
-        return report;
     }
 }

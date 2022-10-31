@@ -1,19 +1,19 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.impl.CreateReportServiceImpl;
-import core.basesyntax.impl.FileReaderServiceImpl;
-import core.basesyntax.impl.FileWriterServiceImpl;
-import core.basesyntax.impl.OperationStrategyImpl;
-import core.basesyntax.impl.TransactionParseServiceImpl;
-import core.basesyntax.impl.TransactionServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.impl.CreateReportServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.TransactionParseServiceImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class Main {
 
         List<String> input = new FileReaderServiceImpl().readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> actions = new TransactionParseServiceImpl().parseInputData(input);
-        new TransactionServiceImpl(new OperationStrategyImpl(operationMap)).addToStorage(actions);
+        new FruitStorageDaoImpl(new OperationStrategyImpl(operationMap)).addToStorage(actions);
 
         String report = new CreateReportServiceImpl().createReport(FruitStorage.storage);
         new FileWriterServiceImpl().writeToFile(REPORT_FILE_PATH, report);

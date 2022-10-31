@@ -1,17 +1,16 @@
-package core.basesyntax.impl;
+package core.basesyntax.dao;
 
 import static core.basesyntax.db.FruitStorage.storage;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.TransactionService;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
-public class TransactionServiceImpl implements TransactionService {
+public class FruitStorageDaoImpl implements FruitStorageDao {
     private final OperationStrategy operationStrategy;
 
-    public TransactionServiceImpl(OperationStrategy operationStrategy) {
+    public FruitStorageDaoImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
