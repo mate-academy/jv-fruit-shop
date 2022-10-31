@@ -6,12 +6,14 @@ public class PurchaseStrategy extends FruitShopStrategy {
 
     @Override
     public void apply(FruitTransaction transaction) {
-        try {
-            storageDao.subtract(transaction.getFruit(), transaction.getQuantity());
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Error purchasing "
-                    + transaction.getQuantity() + " "
-                    + transaction.getFruit() + "(s)", e);
+        int currentQuantity = storageDao.get(transaction.getFruit())
+                .orElseThrow(()
+                        -> new RuntimeException("Theres no such fruit: "
+                        + transaction.getFruit()));
+        if (transaction.getQuantity() > currentQuantity) {
+            throw new RuntimeException("You can't remove from storage more than it have (have "
+                    + currentQuantity + ")");
         }
+        storageDao.subtract(transaction.getFruit(), transaction.getQuantity());
     }
 }

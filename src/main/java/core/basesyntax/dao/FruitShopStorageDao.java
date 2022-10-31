@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
+import java.util.OptionalInt;
 
 public class FruitShopStorageDao implements StorageDao {
     private final Storage fruitStorage = Storage.getInstance();
@@ -18,14 +19,12 @@ public class FruitShopStorageDao implements StorageDao {
 
     @Override
     public void subtract(String key, int quantity) {
-        if (!fruitStorage.getContent().containsKey(key)) {
-            throw new RuntimeException("Theres no such fruit: " + key);
-        }
         int oldValue = fruitStorage.getContent().get(key);
-        if (quantity > oldValue) {
-            throw new RuntimeException("You can't remove from storage more than it have (have "
-                    + oldValue + ")");
-        }
         fruitStorage.getContent().put(key, oldValue - quantity);
+    }
+
+    @Override
+    public OptionalInt get(String key) {
+        return OptionalInt.of(fruitStorage.getContent().get(key));
     }
 }
