@@ -5,8 +5,8 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public String getOperation() {
-        return operation.getOperation();
+    public FruitTransaction.Operation getOperation() {
+        return operation;
     }
 
     public void setOperation(Operation operation) {

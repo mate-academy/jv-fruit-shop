@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 public class TransactionServiceImpl implements TransactionService {
-    private final Map<String, OperationHandler> operationHandlerMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
-    public TransactionServiceImpl(Map<String, OperationHandler> operationHandlerMap) {
+    public TransactionServiceImpl(Map<FruitTransaction.Operation,
+            OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
     }
 

@@ -17,18 +17,21 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "output.csv";
+
     public static void main(String[] args) {
-        Map<String, OperationHandler> operations = new HashMap<>();
-        operations.put("b", new OperationHandlerBalanceImpl());
-        operations.put("s", new OperationHandlerImplSupply());
-        operations.put("p", new OperationHandlerPurchaseImpl());
-        operations.put("r", new OperationHandlerReturnImpl());
-        List<String> fruitTransations = new FileReaderImpl().read("src/main/resources/input.csv");
+        Map<FruitTransaction.Operation, OperationHandler> operations = new HashMap<>();
+        operations.put(FruitTransaction.Operation.BALANCE, new OperationHandlerBalanceImpl());
+        operations.put(FruitTransaction.Operation.SUPPLY, new OperationHandlerImplSupply());
+        operations.put(FruitTransaction.Operation.PURCHASE, new OperationHandlerPurchaseImpl());
+        operations.put(FruitTransaction.Operation.RETURN, new OperationHandlerReturnImpl());
+        List<String> fruitTransations = new FileReaderImpl().read(INPUT_FILE_PATH);
         List<FruitTransaction> parse = new TransactionParserImpl().parse(fruitTransations);
         TransactionService service = new TransactionServiceImpl(operations);
         service.handleTransaction(parse);
         String report = new ReportServiceImpl().generateReport();
-        String path = "output.csv";
+        String path = OUTPUT_FILE_PATH;
         new FileWriterImpl().writeDate(path,report);
     }
 }
