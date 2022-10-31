@@ -1,13 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Store;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.FruitService;
+import core.basesyntax.service.DataParserService;
 import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceOperationImpl;
@@ -41,21 +42,22 @@ public class Main {
         ReaderService readerService;
         String readData;
         try {
-            readerService = new FileReaderServiceImpl(new BufferedReader(new FileReader(fromFile))
-            );
+            readerService = new FileReaderServiceImpl(
+                    new BufferedReader(new FileReader(fromFile)));
             readData = readerService.read();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File don't found");
+            throw new RuntimeException("File not found");
         }
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationServiceMap);
-        FruitService fruitService = new FruitServiceImpl(operationStrategy);
-        fruitService.getReport(readData);
+        DataParserService dataParserService = new DataParserServiceImpl(operationStrategy);
+        Map<String, Integer> parseDataMap = dataParserService.parseData(readData);
+        ReportGeneratorService generatorService = new ReportGeneratorServiceImpl();
+        String report = generatorService.generateReport(parseDataMap);
         WriterService writerService;
         try {
-            writerService = new FileWriterServiceImpl(new BufferedWriter(
-                    new FileWriter(toFile))
-            );
-            writerService.write(Store.FRUIT_STORAGE);
+            writerService = new FileWriterServiceImpl(
+                    new BufferedWriter(new FileWriter(toFile)));
+            writerService.write(report);
         } catch (IOException e) {
             throw new RuntimeException("Cannot create file");
         }
