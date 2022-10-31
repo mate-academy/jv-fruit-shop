@@ -12,7 +12,6 @@ public class FileReaderServiceImpl implements FileReaderService {
         File file = new File(fromFileName);
         List<String> report;
         try {
-            file.createNewFile();
             report = Files.readAllLines(file.toPath());
             return report;
         } catch (IOException e) {

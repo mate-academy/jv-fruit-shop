@@ -30,8 +30,10 @@ public class Main {
         operationMap.put(Operation.RETURN, new ReturnOperationHandler());
 
         List<String> input = new FileReaderServiceImpl().readFromFile(INPUT_FILE_PATH);
-        List<FruitTransaction> actions = new TransactionParseServiceImpl().parseInputData(input);
-        new FruitStorageDaoImpl(new OperationStrategyImpl(operationMap)).addToStorage(actions);
+        List<FruitTransaction> fruitTransactions = new TransactionParseServiceImpl()
+                .parseInputData(input);
+        new FruitStorageDaoImpl(new OperationStrategyImpl(operationMap))
+                .addToStorage(fruitTransactions);
 
         String report = new CreateReportServiceImpl().createReport(FruitStorage.storage);
         new FileWriterServiceImpl().writeToFile(REPORT_FILE_PATH, report);

@@ -11,7 +11,6 @@ public class FileWriterServiceImpl implements FileWriterService {
     public void writeToFile(String toFileName, String report) {
         File file = new File(toFileName);
         try {
-            file.createNewFile();
             Files.write(file.toPath(), report.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
             throw new RuntimeException("Can't create file " + toFileName);
