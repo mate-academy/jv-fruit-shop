@@ -1,4 +1,4 @@
-package com.fruitshop.enums;
+package com.fruitshop.servicesimpl;
 
 public enum ShopOperations {
     BALANCE("b"),

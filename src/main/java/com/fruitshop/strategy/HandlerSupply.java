@@ -7,6 +7,8 @@ public class HandlerSupply implements Handler {
 
     @Override
     public void putInDb(String key, String value) {
-        data.getFromDB(key).setSupply(Integer.parseInt(value));
+        data.getFromDB(key)
+                .setSupply(data.getFromDB(key)
+                        .getSupply() + Integer.parseInt(value));
     }
 }

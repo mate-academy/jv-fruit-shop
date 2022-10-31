@@ -7,6 +7,8 @@ public class HandlerPurchase implements Handler {
 
     @Override
     public void putInDb(String key, String value) {
-        data.getFromDB(key).setPurchase(Integer.parseInt(value));
+        data.getFromDB(key)
+                .setPurchase(data.getFromDB(key)
+                        .getPurchase() + Integer.parseInt(value));
     }
 }

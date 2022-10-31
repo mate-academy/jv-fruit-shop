@@ -1,6 +1,5 @@
 package com.fruitshop.servicesimpl;
 
-import com.fruitshop.enums.ShopOperations;
 import com.fruitshop.strategy.Handler;
 import com.fruitshop.strategy.HandlerBalance;
 import com.fruitshop.strategy.HandlerPurchase;

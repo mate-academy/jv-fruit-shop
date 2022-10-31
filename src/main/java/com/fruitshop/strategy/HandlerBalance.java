@@ -7,6 +7,8 @@ public class HandlerBalance implements Handler {
 
     @Override
     public void putInDb(String key, String value) {
-        data.getFromDB(key).setBalance(Integer.parseInt(value));
+        data.getFromDB(key)
+                .setBalance(data.getFromDB(key)
+                        .getBalance() + Integer.parseInt(value));
     }
 }

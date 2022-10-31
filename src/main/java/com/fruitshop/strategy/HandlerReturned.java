@@ -7,6 +7,8 @@ public class HandlerReturned implements Handler {
 
     @Override
     public void putInDb(String key, String value) {
-        data.getFromDB(key).setReturned(Integer.parseInt(value));
+        data.getFromDB(key)
+                .setReturned(data.getFromDB(key)
+                        .getReturned() + Integer.parseInt(value));
     }
 }

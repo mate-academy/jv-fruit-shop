@@ -13,7 +13,7 @@ public class Fruit {
     }
 
     public void setQuantityLeft(int quantityLeft) {
-        this.quantityLeft += quantityLeft;
+        this.quantityLeft = quantityLeft;
     }
 
     public int getBalance() {
@@ -21,7 +21,7 @@ public class Fruit {
     }
 
     public void setBalance(int balance) {
-        this.balance += balance;
+        this.balance = balance;
     }
 
     public int getSupply() {
@@ -29,7 +29,7 @@ public class Fruit {
     }
 
     public void setSupply(int supply) {
-        this.supply += supply;
+        this.supply = supply;
     }
 
     public int getPurchase() {
@@ -37,7 +37,7 @@ public class Fruit {
     }
 
     public void setPurchase(int purchase) {
-        this.purchase += purchase;
+        this.purchase = purchase;
     }
 
     public int getReturned() {
@@ -45,7 +45,7 @@ public class Fruit {
     }
 
     public void setReturned(int returned) {
-        this.returned += returned;
+        this.returned = returned;
     }
 
     @Override
