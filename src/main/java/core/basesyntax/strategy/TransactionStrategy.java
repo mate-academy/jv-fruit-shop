@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.handler.TransactionHandler;
+import core.basesyntax.strategy.handlers.TransactionHandler;
 import core.basesyntax.model.FruitTransaction;
 
 public interface TransactionStrategy {
