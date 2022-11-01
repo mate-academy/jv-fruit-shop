@@ -7,14 +7,12 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class DataReaderCsvImpl implements DataReader {
-    private static final String DATA_PATH = "src/main/java/resources/fruits.csv";
-
     @Override
-    public List<String> read() {
+    public List<String> read(String filePath) {
         try {
-            return Files.readAllLines(Path.of(DATA_PATH));
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("can't read data from file: " + DATA_PATH);
+            throw new RuntimeException("can't read data from file: " + filePath);
         }
     }
 }

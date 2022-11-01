@@ -15,12 +15,12 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Integer get(String fruit) {
+    public Integer getQuantity(String fruit) {
         return Storage.fruitStorage.get(fruit);
     }
 
     @Override
     public Map<String, Integer> getStorage() {
-        return null;
+        return Storage.fruitStorage;
     }
 }

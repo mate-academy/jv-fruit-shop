@@ -22,9 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String DATA_PATH = "src/main/java/resources/fruits.csv";
+    private static final String REPORT_PATH = "src/main/java/resources/report.csv";
+
     public static void main(String[] args) {
         DataReader dataReader = new DataReaderCsvImpl();
-        final List<String> inputData = dataReader.read();
+        final List<String> inputData = dataReader.read(DATA_PATH);
         final ParseFruitTransaction fruitTransaction = new ParseFruitTransactionImpl();
         Map<Operation, OperationHandler> operationsMap = new HashMap<>();
         operationsMap.put(Operation.BALANCE, new OperationHandlerBalance());
@@ -36,6 +39,6 @@ public class Main {
         fruitTransaction.parseFruitTransaction(inputData, operationStrategy);
         DataWriter dataWriter = new DataWriterCsvImpl();
         Reporter reporter = new ReporterImpl();
-        dataWriter.write(reporter.doReport(Storage.fruitStorage));
+        dataWriter.write(reporter.doReport(Storage.fruitStorage), REPORT_PATH);
     }
 }

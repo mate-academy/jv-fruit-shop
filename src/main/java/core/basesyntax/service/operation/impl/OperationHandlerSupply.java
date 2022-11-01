@@ -8,7 +8,7 @@ public class OperationHandlerSupply implements OperationHandler {
 
     @Override
     public void doOperation(String fruit, Integer quantity) {
-        Integer oldQuantity = fruitDao.get(fruit);
+        Integer oldQuantity = fruitDao.getQuantity(fruit);
         fruitDao.updateQuantity(fruit, oldQuantity + quantity);
     }
 }

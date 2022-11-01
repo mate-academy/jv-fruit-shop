@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface DataWriter {
-    void write(String data);
+    void write(String data, String filePath);
 }

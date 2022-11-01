@@ -7,7 +7,7 @@ public interface FruitDao {
 
     void updateQuantity(String fruit, Integer quantity);
 
-    Integer get(String fruit);
+    Integer getQuantity(String fruit);
 
     Map<String, Integer> getStorage();
 }
