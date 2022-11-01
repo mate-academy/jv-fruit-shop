@@ -2,8 +2,8 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.handlers.TransactionHandler;
-import core.basesyntax.handlers.impl.SaveTransactionHandler;
 import core.basesyntax.handlers.impl.RemoveTransactionHandler;
+import core.basesyntax.handlers.impl.SaveTransactionHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.TransactionStrategy;
 import java.util.HashMap;
