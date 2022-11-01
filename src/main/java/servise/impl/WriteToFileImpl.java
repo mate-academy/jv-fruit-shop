@@ -1,4 +1,4 @@
-package service.impl;
+package servise.impl;
 
 import dao.StorageEnternce;
 import dao.impl.EntrenceToStorage;
