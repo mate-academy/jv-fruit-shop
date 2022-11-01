@@ -10,13 +10,18 @@ import java.util.Map;
 
 public class FileWorkerImpl implements FileWorker {
     @Override
-    public List<String> readFromFile(String fileName) throws IOException {
-        return Files.readAllLines(Paths.get(fileName));
+    public List<String> readFromFile(String fileName) {
+        try {
+            return Files.readAllLines(Paths.get(fileName));
+        } catch (IOException e) {
+            throw new RuntimeException("Something went wrong "
+                    + "when reading data from " + fileName);
+        }
     }
 
     @Override
     public void writeToFile(String fileName, String header,
-                            String columnSeparator, Map<String, Integer> data) throws IOException {
+                            String columnSeparator, Map<String, Integer> data) {
         try (BufferedWriter writer =
                      Files.newBufferedWriter(Paths.get(fileName))) {
             writer.write(header);
@@ -25,6 +30,10 @@ public class FileWorkerImpl implements FileWorker {
                 writer.write(entry.getKey() + columnSeparator + entry.getValue());
                 writer.newLine();
             }
+        } catch (IOException e) {
+            throw new RuntimeException("Something went wrong "
+                    + "when writing report to "
+                    + fileName);
         }
     }
 }

@@ -12,7 +12,6 @@ import core.fruitshop.strategy.implementation.PurchaseOperationHandler;
 import core.fruitshop.strategy.implementation.ReturnSupplyOperationHandler;
 import core.fruitshop.strategy.interfaces.OperationHandler;
 import core.fruitshop.strategy.interfaces.OperationStrategy;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -35,12 +34,7 @@ public class Main {
         DataParser dataExtractor = new CsvDataParserImpl(COLUMN_SEPARATOR);
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
         List<String> data;
-        try {
-            data = fileWorker.readFromFile(DATA_FILE_PATH);
-        } catch (IOException e) {
-            throw new RuntimeException("Something went wrong "
-                    + "when reading data from " + DATA_FILE_PATH);
-        }
+        data = fileWorker.readFromFile(DATA_FILE_PATH);
         for (String line : data) {
             if (line.contains(DATA_FILE_HEADER)) {
                 continue;
@@ -50,13 +44,9 @@ public class Main {
                     .handle(transaction.getProductName(),
                             transaction.getAmount());
         }
-        try {
-            fileWorker.writeToFile(REPORT_FILE_PATH, REPORT_HEADER,
-                    COLUMN_SEPARATOR, storageDao.dumpData());
-        } catch (IOException e) {
-            throw new RuntimeException("Something went wrong "
-                    + "when writing report to "
-                    + REPORT_FILE_PATH);
-        }
+
+        fileWorker.writeToFile(REPORT_FILE_PATH, REPORT_HEADER,
+                COLUMN_SEPARATOR, storageDao.dumpData());
+
     }
 }
