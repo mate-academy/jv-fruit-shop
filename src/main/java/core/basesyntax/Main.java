@@ -14,9 +14,10 @@ import java.util.List;
 
 public class Main {
     private static final String FRUITS_CSV_FILEPATH = "src/main/resources/fruits.csv";
-    private static final String COMMA = ",";
+    private static final String SEPARATOR = ",";
     private static final String REPORT_CSV_FILEPATH = "src/main/resources/report.csv";
     private static final String CSV_OUTPUT_HEADER = "fruit,quantity";
+    private static final int HEADER_INDEX = 0;
 
     public static void main(String[] args) {
         List<String> fileContents = new ReaderServiceImpl().readFromFile(FRUITS_CSV_FILEPATH);
@@ -24,16 +25,18 @@ public class Main {
         FruitStorage storage = new FruitStorage();
         TransactionStrategy strategy = new TransactionStrategyImpl(storage);
 
-        for (int i = 1; i < fileContents.size(); i++) {
-            String line = fileContents.get(i);
+        fileContents.remove(HEADER_INDEX);
+        for (String line : fileContents) {
             FruitTransaction transaction = lineParser.extractOperationType(line);
-            TransactionHandler transactionHandler = strategy.get(transaction.getOperation());
-            transactionHandler.process(transaction);
+            if (transaction != null) {
+                TransactionHandler transactionHandler = strategy.get(transaction.getOperation());
+                transactionHandler.process(transaction);
+            }
         }
 
         List<String> reportList = new ArrayList<>();
         reportList.add(CSV_OUTPUT_HEADER);
-        storage.getStorage().forEach((key, value) -> reportList.add(key + COMMA + value));
+        storage.getStorage().forEach((key, value) -> reportList.add(key + SEPARATOR + value));
         new WriterServiceImpl().writeToFile(reportList, REPORT_CSV_FILEPATH);
     }
 }
