@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.List;
 import service.WriteToFile;
 
 public class WriteToFileImpl implements WriteToFile {
@@ -17,7 +18,10 @@ public class WriteToFileImpl implements WriteToFile {
     }
 
     @Override
-    public void writeToFile(String filePath, String splitter) {
+    public boolean writeToFile(String filePath, List<String> report) {
+        if (report == null) {
+            return false;
+        }
         File file = new File(filePath);
         if (!file.exists()) {
             try {
@@ -32,8 +36,7 @@ public class WriteToFileImpl implements WriteToFile {
         } catch (IOException e) {
             throw new RuntimeException("Can't find such file" + filePath);
         }
-        storage.getStorage().entrySet().stream()
-                .map(e -> e.getKey() + splitter + e.getValue() + System.lineSeparator())
+        report.stream()
                 .forEach(s -> {
                     try {
                         Files.writeString(path, s, StandardOpenOption.APPEND);
@@ -41,5 +44,6 @@ public class WriteToFileImpl implements WriteToFile {
                         throw new RuntimeException("Can't find such file" + filePath);
                     }
                 });
+        return true;
     }
 }

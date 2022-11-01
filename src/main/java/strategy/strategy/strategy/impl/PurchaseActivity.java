@@ -1,10 +1,10 @@
-package service.activity.strategy.strategy.impl;
+package strategy.strategy.strategy.impl;
 
 import dao.IsInStorage;
 import dao.impl.SubstrackFromStorageImpl;
 import dao.impl.TestOfPresent;
 import java.util.NoSuchElementException;
-import service.activity.strategy.DoActivities;
+import strategy.DoActivities;
 
 public class PurchaseActivity implements DoActivities {
 

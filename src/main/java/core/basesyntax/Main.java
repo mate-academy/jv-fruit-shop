@@ -4,21 +4,35 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import service.ConvertData;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import service.CreatReport;
 import service.ReadFromFile;
+import service.WriteToDB;
 import service.WriteToFile;
-import service.activity.strategy.StrategyOfActivities;
-import service.activity.strategy.strategy.impl.StrategyOfActivitiesImpl;
-import service.impl.ConvertDataFromList;
 import service.impl.ReadFromFileImpl;
+import service.impl.ReportCreator;
+import service.impl.WriteToDbFromList;
 import service.impl.WriteToFileImpl;
+import strategy.DoActivities;
+import strategy.strategy.strategy.impl.BalaceReadActivity;
+import strategy.strategy.strategy.impl.PurchaseActivity;
+import strategy.strategy.strategy.impl.ReturnActivity;
+import strategy.strategy.strategy.impl.SupplyActivity;
 
 public class Main {
+    private static final String SPLITTER = ",";
+    private static final String DATA_FILE = "src/main/resources/file.txt";
+    private static final String REPORT_FILE = "src/main/resources/report.txt";
+    private static final String BALANCE = "b";
+    private static final String SUPPLY = "s";
+    private static final String PURCHASE = "p";
+    private static final String RETURN = "r";
+
     public static void main(String[] args) {
-        String splitter = ",";
-        String dataFile = "src/main/resources/file.txt";
         try {
-            Path path = Path.of(dataFile);
+            Path path = Path.of(DATA_FILE);
             Files.writeString(path,"type,fruit,quantity" + System.lineSeparator());
             Files.writeString(path, "b,banana,20" + System.lineSeparator(),
                     StandardOpenOption.APPEND);
@@ -39,15 +53,19 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        String reportFile = "src/main/resources/report.txt";
-        ConvertData converter = new ConvertDataFromList(splitter);
+        Map<String, DoActivities> strategyMap = new HashMap<>();
+        strategyMap.put(BALANCE, new BalaceReadActivity());
+        strategyMap.put(SUPPLY, new SupplyActivity());
+        strategyMap.put(PURCHASE, new PurchaseActivity());
+        strategyMap.put(RETURN, new ReturnActivity());
         ReadFromFile reader = new ReadFromFileImpl();
-        StrategyOfActivities strategy = new StrategyOfActivitiesImpl();
-        reader.readFormFile(dataFile).stream()
-                .map(converter::converteData)
-                .forEachOrdered(s -> strategy.rightActivity(s[0]).doActivity(s[1],
-                       Integer.parseInt(s[2])));
+        List<String> activities = reader.readFormFile(DATA_FILE);
+        WriteToDB activityWriter = new WriteToDbFromList(SPLITTER);
+        activityWriter.writeToDB(activities, strategyMap);
+        CreatReport reporter = new ReportCreator();
+        List<String> report = reporter.creatReport();
         WriteToFile writer = new WriteToFileImpl();
-        writer.writeToFile(reportFile, splitter);
+        writer.writeToFile(REPORT_FILE, report);
+
     }
 }

@@ -21,7 +21,6 @@ public class ReadFromFileImpl implements ReadFromFile {
         } catch (IOException e) {
             throw new RuntimeException("No such file found!");
         }
-        activitiesOfDay.remove(0);
         return activitiesOfDay;
     }
 }

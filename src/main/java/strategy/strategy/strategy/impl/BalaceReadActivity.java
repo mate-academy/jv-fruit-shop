@@ -1,7 +1,7 @@
-package service.activity.strategy.strategy.impl;
+package strategy.strategy.strategy.impl;
 
 import dao.impl.AddToStorageImpl;
-import service.activity.strategy.DoActivities;
+import strategy.DoActivities;
 
 public class BalaceReadActivity implements DoActivities {
 
