@@ -12,10 +12,10 @@ import service.impl.ReportCreator;
 import service.impl.WriteToDbFromList;
 import service.impl.WriteToFileImpl;
 import strategy.DoActivities;
-import strategy.strategy.strategy.impl.BalaceReadActivity;
-import strategy.strategy.strategy.impl.PurchaseActivity;
-import strategy.strategy.strategy.impl.ReturnActivity;
-import strategy.strategy.strategy.impl.SupplyActivity;
+import strategy.strategy.impl.BalaceReadActivity;
+import strategy.strategy.impl.PurchaseActivity;
+import strategy.strategy.impl.ReturnActivity;
+import strategy.strategy.impl.SupplyActivity;
 
 public class Main {
     private static final String SPLITTER = ",";

@@ -1,4 +1,4 @@
-package strategy.strategy.strategy.impl;
+package strategy.strategy.impl;
 
 import dao.impl.TestOfPresent;
 import strategy.DoActivities;
