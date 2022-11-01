@@ -1,17 +1,17 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.FruitTransaction;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FruitStorage {
-    private final List<FruitTransaction> storage;
+    private final Map<String, Integer> storage;
 
     public FruitStorage() {
-        this.storage = new ArrayList<>();
+        this.storage = new HashMap<>();
     }
 
-    public List<FruitTransaction> getStorage() {
+    public Map<String, Integer> getStorage() {
         return storage;
     }
 }
+
