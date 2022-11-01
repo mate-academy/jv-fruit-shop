@@ -2,8 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
-import jdk.dynalink.Operation;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +18,8 @@ public class DataParserServiceImpl implements DataParserService {
             String[] fruitTransactionAttributes = linesFromInputFile.get(i).split(REGEX);
             FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
             for (FruitTransaction.Operation operationType : FruitTransaction.Operation.values()) {
-                if (operationType.getOperation().equals(fruitTransactionAttributes[OPERATION_INDEX])) {
+                if (operationType.getOperation()
+                        .equals(fruitTransactionAttributes[OPERATION_INDEX])) {
                     operation = operationType;
                     break;
                 }

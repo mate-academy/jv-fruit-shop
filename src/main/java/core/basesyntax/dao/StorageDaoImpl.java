@@ -3,8 +3,7 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
-public class StorageDaoImpl implements StorageDao{
-
+public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void addFruitQuantity(FruitTransaction fruitTransaction) {
@@ -24,6 +23,4 @@ public class StorageDaoImpl implements StorageDao{
     public void putFruit(FruitTransaction fruit) {
         Storage.fruits.put(fruit.getFruit(), fruit.getQuantity());
     }
-
-
 }

@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportCreatorService;
-
 import java.util.Map;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService {
@@ -15,7 +14,8 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
         StringBuilder report = new StringBuilder(HEAD);
         report.append(LINE_SEPARATOR);
         for (Map.Entry<String, Integer> fruit : Storage.fruits.entrySet()) {
-            report.append(fruit.getKey()).append(COMMA).append(fruit.getValue()).append(LINE_SEPARATOR);
+            report.append(fruit.getKey()).append(COMMA)
+                    .append(fruit.getValue()).append(LINE_SEPARATOR);
         }
         return report.toString();
     }
