@@ -1,6 +1,6 @@
 package com.fruitshop.servicesimpl;
 
-import com.fruitshop.dao.DataBaseManagerImpl;
+import com.fruitshop.dao.FruitDaoImpl;
 import com.fruitshop.model.Fruit;
 import com.fruitshop.services.FruitShopSupplier;
 import com.fruitshop.strategy.HandlerConditionFactory;
@@ -15,7 +15,7 @@ public class FruitShopSupplierImpl implements FruitShopSupplier {
     public static final int AMOUNT_INDEX = 2;
     public static final int HEADER_INDEX = 0;
 
-    private final DataBaseManagerImpl dataBaseManagerImpl = new DataBaseManagerImpl();
+    private final FruitDaoImpl fruitDao = new FruitDaoImpl();
     private final HandlerConditionFactory handler = new HandlerConditionFactory();
 
     public Map<String, Fruit> fillTheMap(List<String> listWithFruits) {
@@ -29,6 +29,6 @@ public class FruitShopSupplierImpl implements FruitShopSupplier {
                             + " is not in handler list"))
                     .putInDb(indexArray[FRUIT_INDEX],indexArray[AMOUNT_INDEX]);
         }
-        return dataBaseManagerImpl.getAllDB();
+        return fruitDao.getAll();
     }
 }

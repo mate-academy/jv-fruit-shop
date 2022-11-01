@@ -1,14 +1,14 @@
 package com.fruitshop.strategy;
 
-import com.fruitshop.dao.DataBaseManagerImpl;
+import com.fruitshop.dao.FruitDaoImpl;
 
 public class HandlerBalance implements Handler {
-    private DataBaseManagerImpl data = new DataBaseManagerImpl();
+    private final FruitDaoImpl fruitDao = new FruitDaoImpl();
 
     @Override
     public void putInDb(String key, String value) {
-        data.getFromDB(key)
-                .setBalance(data.getFromDB(key)
+        fruitDao.get(key)
+                .setBalance(fruitDao.get(key)
                         .getBalance() + Integer.parseInt(value));
     }
 }

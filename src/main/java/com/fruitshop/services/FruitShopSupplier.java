@@ -7,4 +7,3 @@ import java.util.Map;
 public interface FruitShopSupplier {
     Map<String, Fruit> fillTheMap(List<String> listWithFruits);
 }
-

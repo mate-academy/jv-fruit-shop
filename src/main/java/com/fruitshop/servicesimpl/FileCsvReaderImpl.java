@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileCsvReaderImpl implements FileCsvReader {
-    private List<String> listOfCsvFile = new ArrayList<>();
+    private final List<String> listOfCsvFile = new ArrayList<>();
 
-    public List<String> readFromCsv(String filePath) {
+    public List<String> readFromFile(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String input = reader.readLine();
             while (input != null) {

@@ -1,14 +1,14 @@
 package com.fruitshop.strategy;
 
-import com.fruitshop.dao.DataBaseManagerImpl;
+import com.fruitshop.dao.FruitDaoImpl;
 
 public class HandlerSupply implements Handler {
-    private DataBaseManagerImpl data = new DataBaseManagerImpl();
+    private final FruitDaoImpl fruitDao = new FruitDaoImpl();
 
     @Override
     public void putInDb(String key, String value) {
-        data.getFromDB(key)
-                .setSupply(data.getFromDB(key)
+        fruitDao.get(key)
+                .setSupply(fruitDao.get(key)
                         .getSupply() + Integer.parseInt(value));
     }
 }
