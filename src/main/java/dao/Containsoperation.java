@@ -1,5 +1,5 @@
 package dao;
 
-public interface IsInStorage {
+public interface Containsoperation {
     boolean isInStorage(String fruit);
 }

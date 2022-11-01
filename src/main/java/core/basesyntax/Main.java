@@ -12,7 +12,7 @@ import service.impl.ReportCreator;
 import service.impl.WriteToDbFromList;
 import service.impl.WriteToFileImpl;
 import strategy.DoActivities;
-import strategy.strategy.impl.BalaceReadActivity;
+import strategy.strategy.impl.BalanceReadActivity;
 import strategy.strategy.impl.PurchaseActivity;
 import strategy.strategy.impl.ReturnActivity;
 import strategy.strategy.impl.SupplyActivity;
@@ -28,7 +28,7 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String, DoActivities> strategyMap = new HashMap<>();
-        strategyMap.put(BALANCE, new BalaceReadActivity());
+        strategyMap.put(BALANCE, new BalanceReadActivity());
         strategyMap.put(SUPPLY, new SupplyActivity());
         strategyMap.put(PURCHASE, new PurchaseActivity());
         strategyMap.put(RETURN, new ReturnActivity());
@@ -40,6 +40,5 @@ public class Main {
         List<String> report = reporter.creatReport();
         WriteToFile writer = new WriteToFileImpl();
         writer.writeToFile(REPORT_FILE, report);
-
     }
 }
