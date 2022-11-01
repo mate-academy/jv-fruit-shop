@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.services.OperationHandler;
+import core.basesyntax.service.OperationHandler;
 
 public class OperationHandlerBalanceImpl implements OperationHandler {
     @Override

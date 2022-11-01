@@ -1,13 +1,14 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.services.OperationHandler;
-import core.basesyntax.services.TransactionService;
-import core.basesyntax.services.impl.FileReaderImpl;
-import core.basesyntax.services.impl.FileWriterImpl;
-import core.basesyntax.services.impl.ReportServiceImpl;
-import core.basesyntax.services.impl.TransactionParserImpl;
-import core.basesyntax.services.impl.TransactionServiceImpl;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.OperationValidatorImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.OperationHandlerBalanceImpl;
 import core.basesyntax.strategy.OperationHandlerImplSupply;
 import core.basesyntax.strategy.OperationHandlerPurchaseImpl;
@@ -21,17 +22,28 @@ public class Main {
     private static final String OUTPUT_FILE_PATH = "output.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> operations = new HashMap<>();
-        operations.put(FruitTransaction.Operation.BALANCE, new OperationHandlerBalanceImpl());
-        operations.put(FruitTransaction.Operation.SUPPLY, new OperationHandlerImplSupply());
-        operations.put(FruitTransaction.Operation.PURCHASE, new OperationHandlerPurchaseImpl());
-        operations.put(FruitTransaction.Operation.RETURN, new OperationHandlerReturnImpl());
+        Map<String, FruitTransaction.Operation> operations = new HashMap<>();
+        operations.put("b",FruitTransaction.Operation.BALANCE);
+        operations.put("s",FruitTransaction.Operation.SUPPLY);
+        operations.put("r",FruitTransaction.Operation.RETURN);
+        operations.put("p",FruitTransaction.Operation.PURCHASE);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE,
+                new OperationHandlerBalanceImpl());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
+                new OperationHandlerImplSupply());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
+                new OperationHandlerPurchaseImpl());
+        operationHandlers.put(FruitTransaction.Operation.RETURN,
+                new OperationHandlerReturnImpl());
         List<String> fruitTransations = new FileReaderImpl().read(INPUT_FILE_PATH);
-        List<FruitTransaction> parse = new TransactionParserImpl().parse(fruitTransations);
-        TransactionService service = new TransactionServiceImpl(operations);
+        OperationValidatorImpl operationValidator = new OperationValidatorImpl(operations);
+        List<FruitTransaction> parse = new TransactionParserImpl(operationValidator)
+                .parse(fruitTransations);
+        TransactionService service = new TransactionServiceImpl(operationHandlers);
         service.handleTransaction(parse);
         String report = new ReportServiceImpl().generateReport();
         String path = OUTPUT_FILE_PATH;
-        new FileWriterImpl().writeDate(path,report);
+        new FileWriterImpl().writeData(path,report);
     }
 }

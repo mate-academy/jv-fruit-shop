@@ -1,4 +1,4 @@
-package core.basesyntax.services;
+package core.basesyntax.service;
 
 public interface OperationHandler {
     int operate(int balance, int count);

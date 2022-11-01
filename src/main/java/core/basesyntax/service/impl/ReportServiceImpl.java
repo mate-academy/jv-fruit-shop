@@ -1,7 +1,7 @@
-package core.basesyntax.services.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.database.Storage;
-import core.basesyntax.services.ReportService;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {

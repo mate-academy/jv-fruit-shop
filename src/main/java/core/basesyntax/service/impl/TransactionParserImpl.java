@@ -1,17 +1,22 @@
-package core.basesyntax.services.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.services.OperationValidator;
+import core.basesyntax.service.OperationValidator;
+import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionParserImpl implements core.basesyntax.services.TransactionParser {
+public class TransactionParserImpl implements TransactionParser {
     private static final String UTF8_BOM = "\uFEFF";
     private static final String COMA_SEPARATOR = ",";
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_QUANTITY = 2;
-    private OperationValidator validator = new OperationValidatorImpl();
+    private OperationValidator validator;
+
+    public TransactionParserImpl(OperationValidator validator) {
+        this.validator = validator;
+    }
 
     @Override
     public List<FruitTransaction> parse(List<String> list) {
