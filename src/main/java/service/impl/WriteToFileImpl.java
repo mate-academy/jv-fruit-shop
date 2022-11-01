@@ -1,9 +1,9 @@
 package service.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 import service.WriteToFile;
@@ -15,15 +15,7 @@ public class WriteToFileImpl implements WriteToFile {
         if (report == null) {
             return false;
         }
-        File file = new File(filePath);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        Path path = file.toPath();
+        Path path = Paths.get(filePath);
         try {
             Files.writeString(path,"fruit,quantity" + System.lineSeparator());
         } catch (IOException e) {
