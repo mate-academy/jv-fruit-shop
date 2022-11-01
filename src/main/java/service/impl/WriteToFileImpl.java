@@ -1,7 +1,5 @@
-package servise.impl;
+package service.impl;
 
-import dao.StorageEnternce;
-import dao.impl.EntrenceToStorage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,11 +9,6 @@ import java.util.List;
 import service.WriteToFile;
 
 public class WriteToFileImpl implements WriteToFile {
-    private StorageEnternce storage;
-
-    public WriteToFileImpl() {
-        storage = new EntrenceToStorage();
-    }
 
     @Override
     public boolean writeToFile(String filePath, List<String> report) {

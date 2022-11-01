@@ -11,10 +11,10 @@ import service.CreatReport;
 import service.ReadFromFile;
 import service.WriteToDB;
 import service.WriteToFile;
-import servise.impl.ReadFromFileImpl;
-import servise.impl.ReportCreator;
-import servise.impl.WriteToDbFromList;
-import servise.impl.WriteToFileImpl;
+import service.impl.ReadFromFileImpl;
+import service.impl.ReportCreator;
+import service.impl.WriteToDbFromList;
+import service.impl.WriteToFileImpl;
 import strategy.DoActivities;
 import strategy.strategy.strategy.impl.BalaceReadActivity;
 import strategy.strategy.strategy.impl.PurchaseActivity;
@@ -31,28 +31,6 @@ public class Main {
     private static final String RETURN = "r";
 
     public static void main(String[] args) {
-        try {
-            Path path = Path.of(DATA_FILE);
-            Files.writeString(path,"type,fruit,quantity" + System.lineSeparator());
-            Files.writeString(path, "b,banana,20" + System.lineSeparator(),
-                    StandardOpenOption.APPEND);
-            Files.writeString(path, "b,apple,100" + System.lineSeparator(),
-                    StandardOpenOption.APPEND);
-            Files.writeString(path,"s,banana,100" + System.lineSeparator(),
-                    StandardOpenOption.APPEND);
-            Files.writeString(path,"p,banana,13" + System.lineSeparator(),
-                    StandardOpenOption.APPEND);
-            Files.writeString(path,"r,apple,10" + System.lineSeparator(),
-                    StandardOpenOption.APPEND);
-            Files.writeString(path,"p,apple,20" + System.lineSeparator(),
-                    StandardOpenOption.APPEND);
-            Files.writeString(path,"p,banana,5" + System.lineSeparator(),
-                    StandardOpenOption.APPEND);
-            Files.writeString(path,"s,banana,50" + System.lineSeparator(),
-                    StandardOpenOption.APPEND);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         Map<String, DoActivities> strategyMap = new HashMap<>();
         strategyMap.put(BALANCE, new BalaceReadActivity());
         strategyMap.put(SUPPLY, new SupplyActivity());

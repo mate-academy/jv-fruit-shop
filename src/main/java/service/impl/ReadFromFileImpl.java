@@ -1,4 +1,4 @@
-package servise.impl;
+package service.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
