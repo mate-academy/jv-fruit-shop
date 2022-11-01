@@ -7,7 +7,7 @@ public class OperationHandlerBalance implements OperationHandler {
     private FruitDaoImpl fruitDao = new FruitDaoImpl();
 
     @Override
-    public void doOperation(String fruit, Integer quantity) {
+    public void operate(String fruit, Integer quantity) {
         fruitDao.addFruit(fruit, quantity);
     }
 }

@@ -12,7 +12,7 @@ public class DataReaderCsvImpl implements DataReader {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("can't read data from file: " + filePath);
+            throw new RuntimeException("Can't read data from file: " + filePath);
         }
     }
 }

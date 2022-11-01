@@ -17,7 +17,7 @@ public class ParseFruitTransactionImpl implements ParseFruitTransaction {
         for (String data: inputData) {
             String[] splitData = data.split(DATA_SEPARATOR);
             OperationHandler operationHandler = operation.get(splitData[OPERATION_INDEX]);
-            operationHandler.doOperation(splitData[FRUIT_INDEX],
+            operationHandler.operate(splitData[FRUIT_INDEX],
                     Integer.valueOf(splitData[QUANTITY_INDEX]));
         }
     }

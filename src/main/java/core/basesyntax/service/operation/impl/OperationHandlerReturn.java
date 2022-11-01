@@ -7,7 +7,7 @@ public class OperationHandlerReturn implements OperationHandler {
     private FruitDaoImpl fruitDao = new FruitDaoImpl();
 
     @Override
-    public void doOperation(String fruit, Integer quantity) {
+    public void operate(String fruit, Integer quantity) {
         Integer oldQuantity = fruitDao.getQuantity(fruit);
         fruitDao.updateQuantity(fruit, oldQuantity + quantity);
     }

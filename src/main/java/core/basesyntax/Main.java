@@ -34,11 +34,10 @@ public class Main {
         operationsMap.put(Operation.PURCHASE, new OperationHandlerPurchase());
         operationsMap.put(Operation.SUPPLY, new OperationHandlerSupply());
         operationsMap.put(Operation.RETURN, new OperationHandlerReturn());
-        OperationStrategy operationStrategy = new OperationStrategyImpl();
-        operationStrategy.fillOperationsList(operationsMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
         fruitTransaction.parseFruitTransaction(inputData, operationStrategy);
         DataWriter dataWriter = new DataWriterCsvImpl();
         Reporter reporter = new ReporterImpl();
-        dataWriter.write(reporter.doReport(Storage.fruitStorage), REPORT_PATH);
+        dataWriter.write(reporter.createReport(Storage.fruitStorage), REPORT_PATH);
     }
 }

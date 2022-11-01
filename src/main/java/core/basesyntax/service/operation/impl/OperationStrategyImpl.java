@@ -8,8 +8,7 @@ import java.util.Map;
 public class OperationStrategyImpl implements OperationStrategy {
     private Map<Operation, OperationHandler> strategies;
 
-    @Override
-    public void fillOperationsList(Map<Operation, OperationHandler> strategies) {
+    public OperationStrategyImpl(Map<Operation, OperationHandler> strategies) {
         this.strategies = strategies;
     }
 
