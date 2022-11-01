@@ -13,7 +13,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public String makeReport() {
+    public String createReport() {
         StringBuilder builder = new StringBuilder(HEADER);
         storageDao.getAll().forEach(entry -> {
             builder.append(entry.getKey().getName())

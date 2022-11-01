@@ -18,7 +18,6 @@ import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.SupplyOperationHandler;
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +42,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> data = fileReaderService.readFromFile(new File(DATA_PATH));
+        List<String> data = fileReaderService.readFromFile(DATA_PATH);
 
         FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
         List<FruitTransaction> transactions = fruitTransactionParser.parse(data);
@@ -52,9 +51,9 @@ public class Main {
                 operationStrategy.getHandlerByOperation(tx.getOperation()).execute(tx));
 
         ReportService reportService = new ReportServiceImpl(storageDao);
-        String report = reportService.makeReport();
+        String report = reportService.createReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(report, new File(REPORT_PATH));
+        fileWriterService.writeToFile(report, REPORT_PATH);
     }
 }
