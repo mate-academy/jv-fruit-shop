@@ -6,7 +6,6 @@ import core.basesyntax.service.ReportGeneratorService;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     private static final String DELIMITER = ",";
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String HEADER = "fruit,quantity";
     private final StorageDao storage;
 
@@ -19,7 +18,7 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
         StringBuilder report = new StringBuilder();
         report.append(HEADER);
         for (Fruit key : storage.getAllKeys()) {
-            report.append(LINE_SEPARATOR).append(key.getName())
+            report.append(System.lineSeparator()).append(key.getName())
                     .append(DELIMITER).append(storage.get(key));
         }
         return report.toString();
