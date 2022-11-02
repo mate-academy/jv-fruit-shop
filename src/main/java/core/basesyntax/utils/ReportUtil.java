@@ -1,15 +1,13 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.utils;
 
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.service.ReportService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportServiceImpl implements ReportService {
+public class ReportUtil {
     private static final String CSV_OUTPUT_HEADER = "fruit,quantity";
     private static final String SEPARATOR = ",";
 
-    @Override
     public List<String> generateReport(FruitStorage storage) {
         List<String> reportList = new ArrayList<>();
         reportList.add(CSV_OUTPUT_HEADER);

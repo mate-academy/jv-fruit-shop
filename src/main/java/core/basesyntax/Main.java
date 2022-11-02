@@ -9,12 +9,12 @@ import core.basesyntax.handlers.impl.PurchaseTransactionHandler;
 import core.basesyntax.handlers.impl.ReturnTransactionHandler;
 import core.basesyntax.handlers.impl.SupplyTransactionHandler;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.ListProcessServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.impl.TransactionStrategyImpl;
+import core.basesyntax.utils.ListUtil;
+import core.basesyntax.utils.ReportUtil;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +28,8 @@ public class Main {
         final List<String> fileContent = new ReaderServiceImpl().readFromFile(FRUITS_CSV_FILEPATH);
         final TransactionStrategy strategy = new TransactionStrategyImpl(initStrategyMap(storage));
 
-        new ListProcessServiceImpl().processList(fileContent, strategy);
-        List<String> reportList = new ReportServiceImpl().generateReport(storage);
+        new ListUtil().processList(fileContent, strategy);
+        List<String> reportList = new ReportUtil().generateReport(storage);
         new WriterServiceImpl().writeToFile(reportList, REPORT_CSV_FILEPATH);
     }
 
