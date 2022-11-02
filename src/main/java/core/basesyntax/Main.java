@@ -29,7 +29,8 @@ public class Main {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitDao));
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperation(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation(fruitDao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
