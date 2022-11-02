@@ -1,13 +1,13 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.ReportWriterService;
 import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.DataReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
-import core.basesyntax.service.impl.ReportWriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceOperationStrategy;
@@ -39,9 +39,9 @@ public class Main {
         OperationStrategy operationStrategy =
                 new OperationStrategyImpl(operationStrategyMap);
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
-        fruitService.processFruitTransactionsList(fruitTransactionsList);
+        fruitService.processFruitTransactions(fruitTransactionsList);
         String report = new ReportCreatorServiceImpl().createReport();
-        ReportWriterService reportWriterService = new ReportWriterServiceImpl();
-        reportWriterService.writeReportToFile(REPORT_PATH, report);
+        FileWriter reportWriterService = new FileWriterImpl();
+        reportWriterService.writeFile(REPORT_PATH, report);
     }
 }

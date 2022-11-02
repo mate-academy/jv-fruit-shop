@@ -8,11 +8,10 @@ public class OperationTypeIdentifierImpl implements OperationTypeIdentifier {
     @Override
     public FruitTransaction.Operation identifyOperationType(String inputOperation) {
         for (FruitTransaction.Operation operationType : FruitTransaction.Operation.values()) {
-            if (operationType.getOperation()
-                    .equals(inputOperation)) {
+            if (operationType.getOperation().equals(inputOperation)) {
                 return operationType;
             }
         }
-        throw new RuntimeException("Invalid input operation type");
+        throw new RuntimeException("Invalid input operation type: " + inputOperation);
     }
 }
