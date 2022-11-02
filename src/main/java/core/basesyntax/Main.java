@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import dao.FruitStorageDao;
+import dao.impl.FruitStorageDaoImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,16 +29,17 @@ public class Main {
     private static final String RETURN = "r";
 
     public static void main(String[] args) {
+        FruitStorageDao storageDao = new FruitStorageDaoImpl();
         Map<String, DoActivities> strategyMap = new HashMap<>();
-        strategyMap.put(BALANCE, new BalanceReadActivity());
-        strategyMap.put(SUPPLY, new SupplyActivity());
-        strategyMap.put(PURCHASE, new PurchaseActivity());
-        strategyMap.put(RETURN, new ReturnActivity());
+        strategyMap.put(BALANCE, new BalanceReadActivity(storageDao));
+        strategyMap.put(SUPPLY, new SupplyActivity(storageDao));
+        strategyMap.put(PURCHASE, new PurchaseActivity(storageDao));
+        strategyMap.put(RETURN, new ReturnActivity(storageDao));
         ReadFromFile reader = new ReadFromFileImpl();
         List<String> activities = reader.readFormFile(DATA_FILE);
         WriteToDB activityWriter = new WriteToDbFromList(SPLITTER);
         activityWriter.writeToDB(activities, strategyMap);
-        CreatReport reporter = new ReportCreator();
+        CreatReport reporter = new ReportCreator(storageDao);
         List<String> report = reporter.creatReport();
         WriteToFile writer = new WriteToFileImpl();
         writer.writeToFile(REPORT_FILE, report);

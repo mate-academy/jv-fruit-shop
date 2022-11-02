@@ -1,17 +1,18 @@
 package service.impl;
 
-import db.Storage;
+import dao.FruitStorageDao;
 import java.util.List;
-import java.util.stream.Collectors;
 import service.CreatReport;
 
 public class ReportCreator implements CreatReport {
-    private static final String SPLITERATOR = ",";
+    private final FruitStorageDao storageDao;
+
+    public ReportCreator(FruitStorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
 
     @Override
     public List<String> creatReport() {
-        return Storage.storage.entrySet().stream()
-                .map(e -> e.getKey() + SPLITERATOR + e.getValue() + System.lineSeparator())
-                .collect(Collectors.toList());
+        return storageDao.getAll();
     }
 }

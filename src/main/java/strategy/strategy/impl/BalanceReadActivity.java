@@ -1,12 +1,17 @@
 package strategy.strategy.impl;
 
-import dao.impl.OperatorForDbMap;
+import dao.FruitStorageDao;
 import strategy.DoActivities;
 
 public class BalanceReadActivity implements DoActivities {
+    private FruitStorageDao storageDao;
+
+    public BalanceReadActivity(FruitStorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
 
     @Override
     public void doActivity(String fruit, Integer number) {
-        OperatorForDbMap.operator.writeToStorage(fruit, number);
+        storageDao.save(fruit, number);
     }
 }
