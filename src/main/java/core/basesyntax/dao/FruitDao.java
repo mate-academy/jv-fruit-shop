@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Set;
 
 public interface FruitDao {
-    Integer getValue(Fruit key);
+    Integer getQuantity(Fruit fruit);
 
-    Integer putValue(String key, Integer value);
+    Integer add(String fruitName, Integer quantity);
 
     Set<Map.Entry<Fruit, Integer>> getEntrySet();
 }

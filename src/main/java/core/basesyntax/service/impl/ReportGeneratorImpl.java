@@ -9,7 +9,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     private static final String CONTENT_SEPARATOR = ",";
     private static final String REPORT_FIRST_LINE = "fruit" + CONTENT_SEPARATOR + "quantity";
 
-    public String report(FruitDao storageDao) {
+    public String generateReport(FruitDao storageDao) {
         StringBuilder report = new StringBuilder();
         report.append(REPORT_FIRST_LINE);
         for (Map.Entry<Fruit, Integer> entry : storageDao.getEntrySet()) {

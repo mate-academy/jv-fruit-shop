@@ -7,13 +7,13 @@ import java.util.Set;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public Integer getValue(Fruit key) {
-        return Storage.fruits.get(key);
+    public Integer getQuantity(Fruit fruit) {
+        return Storage.fruits.get(fruit);
     }
 
     @Override
-    public Integer putValue(String key, Integer value) {
-        return Storage.fruits.put(new Fruit(key), value);
+    public Integer add(String fruitName, Integer quantity) {
+        return Storage.fruits.put(new Fruit(fruitName), quantity);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class ReportWriterServiceImpl implements ReportWriterService {
         try {
             Files.writeString(Path.of(path), report, StandardOpenOption.CREATE);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to the file by path: " + path);
+            throw new RuntimeException("Can't write to the file by path: " + path, e);
         }
     }
 }

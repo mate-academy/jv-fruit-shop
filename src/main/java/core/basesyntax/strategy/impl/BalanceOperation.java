@@ -5,10 +5,14 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
 public class BalanceOperation implements OperationHandler {
-    private final FruitDao storageDao = new FruitDaoImpl();
+    private final FruitDao storageDao;
+
+    public BalanceOperation() {
+        this.storageDao = new FruitDaoImpl();
+    }
 
     @Override
     public void doCalculation(FruitTransaction fruitTransaction) {
-        storageDao.putValue(fruitTransaction.getFruit().getType(), fruitTransaction.getQuantity());
+        storageDao.add(fruitTransaction.getFruit().getType(), fruitTransaction.getQuantity());
     }
 }
