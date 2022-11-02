@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.CsvReportGenerator;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
-public class CsvReportGeneratorImpl implements ReportGenerator {
+public class CsvReportGeneratorImpl implements CsvReportGenerator {
     private static final String CSV_SPLITTER = ",";
     private static final String CSV_HEAD_ROW = "fruit,quantity";
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";

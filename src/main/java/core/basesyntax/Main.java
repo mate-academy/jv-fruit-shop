@@ -4,8 +4,8 @@ import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.impl.FruitShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReader;
+import core.basesyntax.service.CsvReportGenerator;
 import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
 import core.basesyntax.service.impl.CsvReportGeneratorImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
@@ -37,7 +37,7 @@ public class Main {
         fruitShopService.transaction(fruitTransactions);
         //generate report
         FruitShopDao fruitStorage = new FruitShopDaoImpl();
-        ReportGenerator reportGenerator = new CsvReportGeneratorImpl();
-        reportGenerator.generateCsvReport(fruitStorage.getAll());
+        CsvReportGenerator csvReportGenerator = new CsvReportGeneratorImpl();
+        csvReportGenerator.generateCsvReport(fruitStorage.getAll());
     }
 }

@@ -9,7 +9,7 @@ public class BalanceOperationHandler implements OperationHandler {
     @Override
     public void operate(FruitTransaction fruitTransaction) {
         FruitShopDao fruitStorage = new FruitShopDaoImpl();
-        fruitStorage.add(fruitTransaction.getFruit().getFruitName(),
-                fruitTransaction.getFruit().getQuantity());
+        fruitStorage.add(fruitTransaction.getFruit(),
+                fruitTransaction.getQuantity());
     }
 }
