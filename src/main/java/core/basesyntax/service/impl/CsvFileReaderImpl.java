@@ -1,12 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitTransactionDao;
-import core.basesyntax.dao.impl.FruitTransactionDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderImpl implements CsvFileReader {
@@ -28,17 +27,17 @@ public class CsvFileReaderImpl implements CsvFileReader {
     }
 
     private List<FruitTransaction> saveData(List<String> fruitTransactionList) {
-        FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (int i = FIRST_SCV_VALUE_INDEX; i < fruitTransactionList.size(); i++) {
             String[] singleDataLine = fruitTransactionList.get(i).split(CSV_SPLITTER);
-            fruitTransactionDao.add(
+            fruitTransactions.add(
                     new FruitTransaction(
                             FruitTransaction.Operation
                                     .valueOfLabel(singleDataLine[OPERATION_INDEX]),
                             singleDataLine[PRODUCT_NAME_INDEX],
                             Integer.parseInt(singleDataLine[AMOUNT_INDEX])));
         }
-        return fruitTransactionDao.getAll();
+        return fruitTransactions;
     }
 
 }
