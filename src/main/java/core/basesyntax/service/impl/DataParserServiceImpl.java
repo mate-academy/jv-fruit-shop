@@ -2,6 +2,8 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.OperationTypeIdentifier;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,16 +16,11 @@ public class DataParserServiceImpl implements DataParserService {
     @Override
     public List<FruitTransaction> getFruitsToList(List<String> linesFromInputFile) {
         List<FruitTransaction> fruitTransactionsList = new ArrayList<>();
+        OperationTypeIdentifier operationTypeIdentifier = new OperationTypeIdentifierImpl();
         for (int i = 1; i < linesFromInputFile.size(); i++) {
             String[] fruitTransactionAttributes = linesFromInputFile.get(i).split(REGEX);
-            FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
-            for (FruitTransaction.Operation operationType : FruitTransaction.Operation.values()) {
-                if (operationType.getOperation()
-                        .equals(fruitTransactionAttributes[OPERATION_INDEX])) {
-                    operation = operationType;
-                    break;
-                }
-            }
+            FruitTransaction.Operation operation = operationTypeIdentifier
+                    .identifyOperationType(fruitTransactionAttributes[OPERATION_INDEX]);
             String fruit = fruitTransactionAttributes[FRUIT_NAME_INDEX];
             int quantity = Integer.parseInt(fruitTransactionAttributes[QUANTITY_INDEX]);
             fruitTransactionsList.add(new FruitTransaction(operation, fruit, quantity));
