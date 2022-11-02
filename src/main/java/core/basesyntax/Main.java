@@ -31,7 +31,8 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
         CsvFileReader csvFileReader = new CsvFileReaderImpl();
-        fruitShopService.transaction(csvFileReader.readFile(Path.of("src/main/resources/data.csv")));
+        fruitShopService.transaction(csvFileReader
+                .readFile(Path.of("src/main/resources/data.csv")));
         //generate report
         FruitShopDao fruitStorage = new FruitShopDaoImpl();
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
