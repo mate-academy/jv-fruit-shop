@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.handlers.TransactionHandler;
 import core.basesyntax.handlers.impl.RemoveTransactionHandler;
@@ -45,8 +47,10 @@ public class Main {
             TransactionHandler> initStrategyMap(FruitStorage storage) {
         Map<FruitTransaction.Operation, TransactionHandler> strategyMap = new HashMap<>();
 
-        TransactionHandler saveHandler = new SaveTransactionHandler(storage);
-        TransactionHandler removeHandler = new RemoveTransactionHandler(storage);
+        StorageDao storageDao = new StorageDaoImpl(storage);
+        TransactionHandler saveHandler = new SaveTransactionHandler(storageDao);
+        TransactionHandler removeHandler = new RemoveTransactionHandler(storageDao);
+
         strategyMap.put(FruitTransaction.Operation.BALANCE, saveHandler);
         strategyMap.put(FruitTransaction.Operation.RETURN, saveHandler);
         strategyMap.put(FruitTransaction.Operation.PURCHASE, removeHandler);
