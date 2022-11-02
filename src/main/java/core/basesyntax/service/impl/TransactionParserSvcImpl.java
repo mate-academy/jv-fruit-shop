@@ -18,10 +18,10 @@ public class TransactionParserSvcImpl implements TransactionParserSvc {
         fileData.remove(HEADER_LINE_INDEX);
         return fileData.stream()
                 .map(s -> s.split(DELIMITER))
-                .map(sArray -> new FruitTransaction(
-                                FruitTransaction.Operation.fromString(sArray[TRANSACTION_TYPE_INDEX]),
-                                new Fruit(sArray[FRUIT_NAME_INDEX]),
-                                Integer.parseInt(sArray[FRUIT_AMOUNT_INDEX])))
+                .map(e -> new FruitTransaction(
+                                FruitTransaction.Operation.fromString(e[TRANSACTION_TYPE_INDEX]),
+                                new Fruit(e[FRUIT_NAME_INDEX]),
+                                Integer.parseInt(e[FRUIT_AMOUNT_INDEX])))
                 .collect(Collectors.toList());
     }
 }

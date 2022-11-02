@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class Fruit {
-    String name;
+    private String name;
 
     public Fruit(String name) {
         this.name = name;
@@ -11,10 +11,6 @@ public class Fruit {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
