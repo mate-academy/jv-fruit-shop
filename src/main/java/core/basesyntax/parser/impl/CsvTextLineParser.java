@@ -10,38 +10,27 @@ public class CsvTextLineParser implements TextLineParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final String BALANCE_SYMBOL = "b";
-    private static final String SUPPLY_SYMBOL = "s";
-    private static final String PURCHASE_SYMBOL = "p";
-    private static final String RETURN_SYMBOL = "r";
 
     @Override
-    public FruitTransaction extractOperationType(String line) {
+    public FruitTransaction extractTransaction(String line) {
         String[] lineArray = line.split(SEPARATOR);
 
         if (lineArray.length != CSV_COLUMN_COUNT) {
             throw new RuntimeException(INVALID_LINE_FORMAT);
         }
 
-        FruitTransaction.Operation operation;
-        String fruit = lineArray[FRUIT_INDEX];
-        int quantity = Integer.parseInt(lineArray[QUANTITY_INDEX]);
+        String symbol = lineArray[OPERATION_INDEX].trim();
+        String fruit = lineArray[FRUIT_INDEX].trim();
+        int quantity = Integer.parseInt(lineArray[QUANTITY_INDEX].trim());
+        return new FruitTransaction(parseOperation(symbol), fruit, quantity);
+    }
 
-        switch (lineArray[OPERATION_INDEX]) {
-            case BALANCE_SYMBOL:
-                operation = FruitTransaction.Operation.BALANCE;
-                break;
-            case SUPPLY_SYMBOL:
-                operation = FruitTransaction.Operation.SUPPLY;
-                break;
-            case PURCHASE_SYMBOL:
-                operation = FruitTransaction.Operation.PURCHASE;
-                break;
-            case RETURN_SYMBOL:
-                operation = FruitTransaction.Operation.RETURN;
-                break;
-            default: operation = null;
+    private FruitTransaction.Operation parseOperation(String symbol) {
+        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+            if (operation.getOperation().equals(symbol)) {
+                return operation;
+            }
         }
-        return new FruitTransaction(operation, fruit, quantity);
+        return null;
     }
 }

@@ -14,7 +14,8 @@ public class WriterServiceImpl implements WriterService {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
             for (String line : list) {
-                writer.append(line).append(System.lineSeparator());
+                writer.append(line);
+                writer.newLine();
             }
             writer.close();
         } catch (IOException e) {
