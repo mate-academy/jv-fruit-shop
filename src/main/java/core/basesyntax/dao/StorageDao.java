@@ -1,9 +1,9 @@
 package core.basesyntax.dao;
 
 public interface StorageDao {
-    Integer readQuantity(String product);
+    Integer getQuantity(String product);
 
-    void updateProduct(String product, Integer quantity);
+    void update(String product, Integer quantity);
 
-    void deleteProduct(String product);
+    void delete(String product);
 }

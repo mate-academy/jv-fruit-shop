@@ -1,23 +1,21 @@
 package core.basesyntax.handlers.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.handlers.TransactionHandler;
 import core.basesyntax.model.FruitTransaction;
 
-public class SaveTransactionHandler implements TransactionHandler {
+public class CommonSavingHandler {
     private final StorageDao storageDao;
 
-    public SaveTransactionHandler(StorageDao storageDao) {
+    public CommonSavingHandler(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
-    @Override
     public void process(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int quantityToAdd = transaction.getQuantity();
-        int newQuantity = storageDao.readQuantity(fruit) != null
-                ? storageDao.readQuantity(fruit) + quantityToAdd
+        int newQuantity = storageDao.getQuantity(fruit) != null
+                ? storageDao.getQuantity(fruit) + quantityToAdd
                 : quantityToAdd;
-        storageDao.updateProduct(fruit, newQuantity);
+        storageDao.update(fruit, newQuantity);
     }
 }
