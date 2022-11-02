@@ -15,9 +15,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void transaction(Path csvFile) {
-        CsvFileReader fileReader = new CsvFileReaderImpl();
-        List<FruitTransaction> fruitTransactions = fileReader.readFile(csvFile);
+    public void transaction(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.forEach(l -> operationStrategy
                 .getOperation(l.getOperation())
                 .operate(l));
