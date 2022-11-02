@@ -1,9 +1,8 @@
-package core.basesyntax.parser.impl;
+package core.basesyntax.utils;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.parser.TextLineParser;
 
-public class CsvTextLineParser implements TextLineParser {
+public class CsvParserUtil {
     private static final String INVALID_LINE_FORMAT = "The line has wrong format";
     private static final String SEPARATOR = ",";
     private static final int CSV_COLUMN_COUNT = 3;
@@ -11,7 +10,6 @@ public class CsvTextLineParser implements TextLineParser {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
-    @Override
     public FruitTransaction extractTransaction(String line) {
         String[] lineArray = line.split(SEPARATOR);
 

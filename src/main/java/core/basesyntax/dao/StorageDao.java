@@ -1,7 +1,13 @@
 package core.basesyntax.dao;
 
+import java.util.Map;
+import java.util.Optional;
+
 public interface StorageDao {
-    Integer getQuantity(String product);
+
+    Map<String, Integer> getStorage();
+
+    Optional<Integer> getQuantity(String product);
 
     void update(String product, Integer quantity);
 

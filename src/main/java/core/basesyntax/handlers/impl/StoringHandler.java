@@ -13,9 +13,8 @@ public class StoringHandler {
     public void handle(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int quantityToAdd = transaction.getQuantity();
-        int newQuantity = storageDao.getQuantity(fruit) != null
-                ? storageDao.getQuantity(fruit) + quantityToAdd
-                : quantityToAdd;
+        int quantityStored = storageDao.getQuantity(fruit).orElse(0);
+        int newQuantity = quantityStored + quantityToAdd;
         storageDao.update(fruit, newQuantity);
     }
 }

@@ -17,14 +17,13 @@ public class PurchaseTransactionHandler implements TransactionHandler {
     public void handle(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int quantityToRemove = transaction.getQuantity();
-        if (storageDao.getQuantity(fruit) != null) {
-            if (storageDao.getQuantity(fruit) >= quantityToRemove) {
-                storageDao.update(fruit, storageDao.getQuantity(fruit) - quantityToRemove);
-            } else {
-                throw new RuntimeException(NOT_ENOUGH_FRUITS);
-            }
+        int quantityStored = storageDao.getQuantity(fruit)
+                .orElseThrow(() -> new RuntimeException(NO_SUCH_FRUIT));
+
+        if (quantityStored >= quantityToRemove) {
+            storageDao.update(fruit, quantityStored - quantityToRemove);
         } else {
-            throw new RuntimeException(NO_SUCH_FRUIT);
+            throw new RuntimeException(NOT_ENOUGH_FRUITS);
         }
     }
 }

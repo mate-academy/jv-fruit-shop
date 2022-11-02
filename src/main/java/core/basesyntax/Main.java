@@ -24,19 +24,19 @@ public class Main {
     private static final String REPORT_CSV_FILEPATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        final FruitStorage storage = new FruitStorage();
+        final StorageDao storageDao = new FruitStorageDao(new FruitStorage());
         final List<String> fileContent = new ReaderServiceImpl().readFromFile(FRUITS_CSV_FILEPATH);
-        final TransactionStrategy strategy = new TransactionStrategyImpl(initStrategyMap(storage));
+        final TransactionStrategy strategy
+                = new TransactionStrategyImpl(initStrategyMap(storageDao));
 
         new ListUtil().processList(fileContent, strategy);
-        List<String> reportList = new ReportUtil().generateReport(storage);
+        List<String> reportList = new ReportUtil().generateReport(storageDao);
         new WriterServiceImpl().writeToFile(reportList, REPORT_CSV_FILEPATH);
     }
 
     private static Map<FruitTransaction.Operation,
-            TransactionHandler> initStrategyMap(FruitStorage storage) {
+            TransactionHandler> initStrategyMap(StorageDao storageDao) {
         Map<FruitTransaction.Operation, TransactionHandler> strategyMap = new HashMap<>();
-        StorageDao storageDao = new FruitStorageDao(storage);
 
         TransactionHandler supplyHandler = new SupplyTransactionHandler(storageDao);
         TransactionHandler purchaseHandler = new PurchaseTransactionHandler(storageDao);
