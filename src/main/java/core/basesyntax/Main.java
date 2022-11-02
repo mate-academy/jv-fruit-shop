@@ -23,6 +23,7 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE = "src/main/resources/database.csv";
+    private static final String FILE_REPORT_PATH = "src/main/resources/fileReport.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -51,6 +52,6 @@ public class Main {
         String report = reportGenerator.generateReport();
 
         FileWriter write = new FileWriterImpl();
-        write.writeToFile(report);
+        write.writeToFile(FILE_REPORT_PATH, report);
     }
 }

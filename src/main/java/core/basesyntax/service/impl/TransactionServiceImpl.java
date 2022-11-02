@@ -16,6 +16,6 @@ public class TransactionServiceImpl implements TransactionService {
     public void addOperationToStorage(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.stream()
                 .forEach(i -> operationStrategy.get(i.getOperation())
-                        .operationHandlerOfFruitTransaction(i));
+                        .handle(i));
     }
 }

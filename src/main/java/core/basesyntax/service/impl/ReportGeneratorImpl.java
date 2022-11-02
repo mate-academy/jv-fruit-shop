@@ -16,10 +16,10 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder builder = new StringBuilder();
         builder.append(FRUIT_QUANTITY).append(System.lineSeparator());
         List<Fruit> allFruit = fruitDao.getAll();
-        for (int i = 0; i < allFruit.size(); i++) {
-            builder.append(allFruit.get(i).getTypeOfFruit())
+        for (Fruit fruit : allFruit) {
+            builder.append(fruit.getTypeOfFruit())
                     .append(COMMA)
-                    .append(allFruit.get(i).getQuantity())
+                    .append(fruit.getQuantity())
                     .append(System.lineSeparator());
         }
         return builder.toString();
