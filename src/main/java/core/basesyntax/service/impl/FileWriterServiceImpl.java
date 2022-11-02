@@ -18,7 +18,6 @@ public class FileWriterServiceImpl implements DataWriterService {
     public void writeData(List<String> dataList) {
         try {
             Files.write(Path.of(fileName), dataList, StandardOpenOption.CREATE);
-            System.out.println("Data has been written successfully!");
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file " + fileName, e);
         }

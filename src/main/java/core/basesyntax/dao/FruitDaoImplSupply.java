@@ -1,10 +1,9 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.StorageUpdateService;
 
-public class StorageSupplyServiceImpl implements StorageUpdateService {
+public class FruitDaoImplSupply implements FruitDao {
     @Override
     public Fruit update(Fruit fruit, Integer amount) {
         Integer totalAmount = amount;

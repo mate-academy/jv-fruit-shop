@@ -1,7 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
 
-public interface StorageUpdateService {
+public interface FruitDao {
     Fruit update(Fruit fruit, Integer amount);
 }

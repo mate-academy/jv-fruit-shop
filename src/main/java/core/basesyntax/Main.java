@@ -1,5 +1,10 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImplBalance;
+import core.basesyntax.dao.FruitDaoImplPurchase;
+import core.basesyntax.dao.FruitDaoImplReturn;
+import core.basesyntax.dao.FruitDaoImplSupply;
 import core.basesyntax.enums.DataFormatTypes;
 import core.basesyntax.enums.InputDataTypes;
 import core.basesyntax.enums.OutputDataTypes;
@@ -8,16 +13,11 @@ import core.basesyntax.service.DataProcessingService;
 import core.basesyntax.service.DataReaderService;
 import core.basesyntax.service.DataWriterService;
 import core.basesyntax.service.ReportingService;
-import core.basesyntax.service.StorageUpdateService;
 import core.basesyntax.service.impl.CsvFormatDataProcessingServiceImpl;
 import core.basesyntax.service.impl.CsvReportServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ScreenWriterServiceImpl;
-import core.basesyntax.service.impl.StorageBalanceServiceImpl;
-import core.basesyntax.service.impl.StoragePurchaseServiceImpl;
-import core.basesyntax.service.impl.StorageReturnServiceImpl;
-import core.basesyntax.service.impl.StorageSupplyServiceImpl;
 import core.basesyntax.strategy.ServiceStrategy;
 import core.basesyntax.strategy.Strategy;
 import java.io.File;
@@ -39,27 +39,23 @@ public class Main {
         // 1. read data
         Strategy<InputDataTypes, DataReaderService>
                 readerStrategy = new ServiceStrategy<>(getReaderStrategyMap());
-        DataReaderService readerService = readerStrategy.getService(SOURCE_TYPE)
-                .orElseThrow(() -> new RuntimeException("Unsupported reader service type"));
+        DataReaderService readerService = readerStrategy.getService(SOURCE_TYPE);
         List<String> inputData = readerService.readData(SOURCE_LOCATION);
         // 2. processing data
         Strategy<DataFormatTypes, DataProcessingService>
                 processingStrategy = new ServiceStrategy<>(getProcessingFormatMap());
         DataProcessingService
-                processingService = processingStrategy.getService(CSV_FORMAT_TYPE)
-                        .orElseThrow(() -> new RuntimeException("Unsupported data format type"));
+                processingService = processingStrategy.getService(CSV_FORMAT_TYPE);
         processingService.processingData(inputData);
         // 3. build report
         Strategy<DataFormatTypes, ReportingService>
                 reportStrategy = new ServiceStrategy<>(getReportingStrategyMap());
-        ReportingService reportingService = reportStrategy.getService(CSV_FORMAT_TYPE)
-                .orElseThrow(() -> new RuntimeException("Unsupported reporting format type"));
+        ReportingService reportingService = reportStrategy.getService(CSV_FORMAT_TYPE);
         List<String> report = reportingService.generateReport();
         // 4. write data
         Strategy<OutputDataTypes, DataWriterService>
                 writerStrategy = new ServiceStrategy<>(getWriterStrategyMap());
-        DataWriterService writerService = writerStrategy.getService(RECEIVER_TYPE)
-                .orElseThrow(() -> new RuntimeException("Unsupported writing service type"));
+        DataWriterService writerService = writerStrategy.getService(RECEIVER_TYPE);
         writerService.writeData(report);
     }
 
@@ -93,19 +89,19 @@ public class Main {
         return REPORTS_DIRECTORY + File.separator + LocalDate.now() + FILE_REPORT_EXTENSION;
     }
 
-    private static Map<String, StorageUpdateService> getConvertedUpdateOperationStrategyMap(
-            Map<UpdateOperations, StorageUpdateService> strategyMap) {
+    private static Map<String, FruitDao> getConvertedUpdateOperationStrategyMap(
+            Map<UpdateOperations, FruitDao> strategyMap) {
         return strategyMap.entrySet().stream()
                 .collect(Collectors.toMap(e -> e.getKey().getOperation(), Map.Entry::getValue));
 
     }
 
-    private static Map<UpdateOperations, StorageUpdateService> getUpdateOperationStrategyMap() {
+    private static Map<UpdateOperations, FruitDao> getUpdateOperationStrategyMap() {
         return Map.of(
-                UpdateOperations.BALANCE, new StorageBalanceServiceImpl(),
-                UpdateOperations.SUPPLY, new StorageSupplyServiceImpl(),
-                UpdateOperations.PURCHASE, new StoragePurchaseServiceImpl(),
-                UpdateOperations.RETURN, new StorageReturnServiceImpl()
+                UpdateOperations.BALANCE, new FruitDaoImplBalance(),
+                UpdateOperations.SUPPLY, new FruitDaoImplSupply(),
+                UpdateOperations.PURCHASE, new FruitDaoImplPurchase(),
+                UpdateOperations.RETURN, new FruitDaoImplReturn()
         );
     }
 }

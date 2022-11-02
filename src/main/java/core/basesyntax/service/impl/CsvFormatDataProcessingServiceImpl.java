@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.DataProcessingService;
-import core.basesyntax.service.StorageUpdateService;
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +11,9 @@ public class CsvFormatDataProcessingServiceImpl implements DataProcessingService
     private static final int OPERATION_IDX = 0;
     private static final int FRUIT_NAME_IDX = 1;
     private static final int AMOUNT_IDX = 2;
-    private final Map<String, StorageUpdateService> strategyMap;
+    private final Map<String, FruitDao> strategyMap;
 
-    public CsvFormatDataProcessingServiceImpl(Map<String, StorageUpdateService> strategyMap) {
+    public CsvFormatDataProcessingServiceImpl(Map<String, FruitDao> strategyMap) {
         this.strategyMap = strategyMap;
     }
 
