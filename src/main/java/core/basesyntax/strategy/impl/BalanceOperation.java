@@ -7,8 +7,8 @@ import core.basesyntax.model.FruitTransaction;
 public class BalanceOperation implements OperationHandler {
     private final FruitDao storageDao;
 
-    public BalanceOperation() {
-        this.storageDao = new FruitDaoImpl();
+    public BalanceOperation(FruitDao fruitDao) {
+        this.storageDao = fruitDao;
     }
 
     @Override

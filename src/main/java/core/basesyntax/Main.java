@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
@@ -24,11 +25,12 @@ public class Main {
     public static final String REPORT_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
+        FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(fruitDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation(fruitDao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         List<FruitTransaction> fruitTransactions = new FruitTransactionParserImpl()

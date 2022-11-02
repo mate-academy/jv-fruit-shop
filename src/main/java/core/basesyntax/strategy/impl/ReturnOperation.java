@@ -7,8 +7,8 @@ import core.basesyntax.model.FruitTransaction;
 public class ReturnOperation implements OperationHandler {
     private final FruitDao storageDao;
 
-    public ReturnOperation() {
-        this.storageDao = new FruitDaoImpl();
+    public ReturnOperation(FruitDao fruitDao) {
+        this.storageDao = fruitDao;
     }
 
     @Override
