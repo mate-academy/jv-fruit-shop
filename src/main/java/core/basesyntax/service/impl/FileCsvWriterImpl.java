@@ -9,7 +9,7 @@ public class FileCsvWriterImpl implements FileCsvWriter {
     @Override
     public void writeToFile(String content, String filePath) {
         try {
-            Files.write(Path.of(filePath), content.getBytes());
+            Files.writeString(Path.of(filePath), content);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file " + filePath, e);
         }

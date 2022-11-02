@@ -24,7 +24,6 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
                         operationStrategy.get(transaction.getOperation())
                                 .apply(FruitStorage.fruitStorage.get(transaction.getFruit()),
                                         transaction.getAmount()));
-
             }
         }
     }

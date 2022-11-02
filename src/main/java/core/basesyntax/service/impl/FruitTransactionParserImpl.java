@@ -24,7 +24,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
         String[] parseData;
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (int i = START_POINT; i < list.size(); i++) {
-            parseData = list.get(i).split(",");
+            parseData = list.get(i).split(SEPARATOR);
             fruitTransactionList.add(new FruitTransaction(
                     operationValidator.validate(parseData[OPERATION_TYPE]),
                     new Fruit(parseData[FRUIT_NAME]), Integer.parseInt(parseData[COUNT])));
