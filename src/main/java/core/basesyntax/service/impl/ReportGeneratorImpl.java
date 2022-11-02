@@ -11,14 +11,13 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     public String report(FruitDao storageDao) {
         StringBuilder report = new StringBuilder();
-        report.append(REPORT_FIRST_LINE)
-                .append(System.lineSeparator());
+        report.append(REPORT_FIRST_LINE);
         for (Map.Entry<Fruit, Integer> entry : storageDao.getEntrySet()) {
-            report.append(entry.getKey().getType())
+            report.append(System.lineSeparator())
+                    .append(entry.getKey().getType())
                     .append(CONTENT_SEPARATOR)
-                    .append(entry.getValue())
-                    .append(System.lineSeparator());
+                    .append(entry.getValue());
         }
-        return report.toString().trim();
+        return report.toString();
     }
 }
