@@ -20,8 +20,7 @@ public class FileReaderServiceImpl implements FileReaderService {
             lines = Files.readAllLines(filePath);
         } catch (IOException e) {
             throw new RuntimeException(
-                    String.format("Unable to read file \"%s\" ", filePath) + e
-            );
+                    String.format("Unable to read file \"%s\" ", filePath), e);
         }
         return lines;
     }

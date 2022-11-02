@@ -18,8 +18,7 @@ public class FileWriterServiceImpl implements FileWriterService {
             Files.write(filePath, data.getBytes());
         } catch (IOException e) {
             throw new RuntimeException(
-                    String.format("Unable to write file \"%s\" ", filePath) + e
-            );
+                    String.format("Unable to write file \"%s\" ", filePath), e);
         }
     }
 }
