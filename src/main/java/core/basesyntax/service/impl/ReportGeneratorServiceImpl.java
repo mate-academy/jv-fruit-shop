@@ -2,15 +2,15 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ReportGeneratorSvc;
+import core.basesyntax.service.ReportGeneratorService;
 
-public class ReportGeneratorSvcImpl implements ReportGeneratorSvc {
+public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     private static final String DELIMITER = ",";
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String HEADER = "fruit,quantity";
     private final StorageDao storage;
 
-    public ReportGeneratorSvcImpl(StorageDao storage) {
+    public ReportGeneratorServiceImpl(StorageDao storage) {
         this.storage = storage;
     }
 

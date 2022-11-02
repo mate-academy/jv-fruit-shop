@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileReaderSvc;
+import core.basesyntax.service.FileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class FileReaderSvcImpl implements FileReaderSvc {
+public class FileReaderServiceImpl implements FileReaderService {
     private final Path filePath;
 
-    public FileReaderSvcImpl(Path filePath) {
+    public FileReaderServiceImpl(Path filePath) {
         this.filePath = filePath;
     }
 

@@ -5,7 +5,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.TransactionService;
-import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.strategy.OperationHandler;
 import java.util.List;
 
 public class TransactionServiceImpl implements TransactionService {

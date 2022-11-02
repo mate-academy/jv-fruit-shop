@@ -2,11 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionParserSvc;
+import core.basesyntax.service.TransactionParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TransactionParserSvcImpl implements TransactionParserSvc {
+public class TransactionParserServiceImpl implements TransactionParserService {
     private static final String DELIMITER = ",";
     private static final int TRANSACTION_TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;

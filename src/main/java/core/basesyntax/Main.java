@@ -4,17 +4,17 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.impl.FileReaderSvcImpl;
-import core.basesyntax.service.impl.FileWriterSvcImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
-import core.basesyntax.service.impl.ReportGeneratorSvcImpl;
-import core.basesyntax.service.impl.TransactionParserSvcImpl;
+import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
+import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import core.basesyntax.service.impl.TransactionServiceImpl;
-import core.basesyntax.service.operation.BalanceOperationHandler;
-import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.service.operation.PurchaseOperationHandler;
-import core.basesyntax.service.operation.ReturnOperationHandler;
-import core.basesyntax.service.operation.SupplyOperationHandler;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
@@ -34,11 +34,11 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
         OperationStrategy strategyMap = new OperationStrategyImpl(operationHandlerMap);
 
-        List<String> data = new FileReaderSvcImpl(Path.of(INPUT_FILE_PATH)).readFile();
-        List<FruitTransaction> transactionsList = new TransactionParserSvcImpl().parse(data);
+        List<String> data = new FileReaderServiceImpl(Path.of(INPUT_FILE_PATH)).readFile();
+        List<FruitTransaction> transactionsList = new TransactionParserServiceImpl().parse(data);
         new TransactionServiceImpl(strategyMap, STORAGE_DAO).applyTransactions(transactionsList);
-        new FileWriterSvcImpl(Path.of(OUTPUT_FILE_PATH))
-                .writeToFile(new ReportGeneratorSvcImpl(STORAGE_DAO).generateReport());
+        new FileWriterServiceImpl(Path.of(OUTPUT_FILE_PATH))
+                .writeToFile(new ReportGeneratorServiceImpl(STORAGE_DAO).generateReport());
         ;
     }
 }
