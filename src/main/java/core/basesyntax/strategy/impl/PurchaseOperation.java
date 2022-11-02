@@ -10,6 +10,7 @@ public class PurchaseOperation implements OperationHandler {
     public PurchaseOperation() {
         this.storageDao = new FruitDaoImpl();
     }
+
     @Override
     public void doCalculation(FruitTransaction fruitTransaction) {
         Integer currentQuantity = storageDao.getQuantity(fruitTransaction.getFruit());

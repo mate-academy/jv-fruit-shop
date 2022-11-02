@@ -36,6 +36,7 @@ public class Main {
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
         fruitService.processData(fruitTransactions);
         new ReportWriterServiceImpl()
-                .writeReport(new ReportGeneratorImpl().generateReport(new FruitDaoImpl()), REPORT_PATH);
+                .writeReport(new ReportGeneratorImpl()
+                        .generateReport(new FruitDaoImpl()), REPORT_PATH);
     }
 }
