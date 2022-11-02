@@ -12,7 +12,7 @@ public class DataReaderServiceImpl implements DataReaderService {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read input file", e);
+            throw new RuntimeException("Can't read input file! Invalid path: " + filePath, e);
         }
     }
 }
