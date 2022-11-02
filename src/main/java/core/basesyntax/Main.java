@@ -40,14 +40,14 @@ public class Main {
         operationHandlerMap.put(PURCHASE.getOperation(), new PurchaseHandlerImpl());
         operationHandlerMap.put(RETURN.getOperation(), new ReturnHandlerImpl());
         operationHandlerMap.put(SUPPLY.getOperation(), new SupplyHandlerImpl());
-        FileReader readDB = new FileReaderImpl();
-        List<String> dataBaseFromFile = readDB.dataFromFile(READ_FROM);
+        FileReader fileReader = new FileReaderImpl();
+        List<String> dataBaseFromFile = fileReader.readFromFile(READ_FROM);
         TransitionParser transitionParser = new TransitionParserImpl(validator);
         List<FruitTransition> fruitTransitionList
                 = transitionParser.parseTransition(dataBaseFromFile);
-        TransitionService insert
+        TransitionService transitionService
                 = new TransitionServiceImpl(new OperationHandlerStrategyImpl(operationHandlerMap));
-        insert.doTransition(fruitTransitionList);
+        transitionService.doTransition(fruitTransitionList);
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport(FruitStorage.storage);
         FileWriter fileWriter = new FileWriterImpl();
