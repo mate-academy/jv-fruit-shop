@@ -3,18 +3,21 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.impl.FruitShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.impl.CsvFileReaderImpl;
+import core.basesyntax.service.impl.CsvReportGeneratorImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
-import core.basesyntax.service.impl.ReportGeneratorImpl;
-import core.basesyntax.service.operations.BalanceOperationHandler;
 import core.basesyntax.service.operations.OperationHandler;
-import core.basesyntax.service.operations.PurchaseOperationHandler;
-import core.basesyntax.service.operations.SupplyOprationHandler;
+import core.basesyntax.service.operations.impl.BalanceOperationHandler;
+import core.basesyntax.service.operations.impl.PurchaseOperationHandler;
+import core.basesyntax.service.operations.impl.SupplyOprationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -25,12 +28,16 @@ public class Main {
                 new PurchaseOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOprationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new SupplyOprationHandler());
+        //
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
-        fruitShopService.transaction(Path.of("src/main/resources/data.csv"));
+        CsvFileReader csvFileReader = new CsvFileReaderImpl();
+        List<FruitTransaction> fruitTransactions = csvFileReader
+                .readFile(Path.of("src/main/resources/data.csv"));
+        fruitShopService.transaction(fruitTransactions);
         //generate report
         FruitShopDao fruitStorage = new FruitShopDaoImpl();
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        reportGenerator.generateReport(fruitStorage.getAll());
+        ReportGenerator reportGenerator = new CsvReportGeneratorImpl();
+        reportGenerator.generateCsvReport(fruitStorage.getAll());
     }
 }

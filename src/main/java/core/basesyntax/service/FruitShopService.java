@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
-import java.nio.file.Path;
+import core.basesyntax.model.FruitTransaction;
+import java.util.List;
 
 public interface FruitShopService {
-    void transaction(Path csvFile);
+    void transaction(List<FruitTransaction> fruitTransactions);
 }

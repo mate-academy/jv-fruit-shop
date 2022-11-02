@@ -6,20 +6,20 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
-public class ReportGeneratorImpl implements ReportGenerator {
+public class CsvReportGeneratorImpl implements ReportGenerator {
     private static final String CSV_SPLITTER = ",";
     private static final String CSV_HEAD_ROW = "fruit,quantity";
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     @Override
-    public void generateReport(Map<String, Integer> data) {
+    public void generateCsvReport(Map<String, Integer> data) {
         StringBuilder reportStringBuilder = new StringBuilder();
         reportStringBuilder.append(CSV_HEAD_ROW);
-        data.entrySet().forEach(s -> reportStringBuilder
+        data.forEach((fruit, quantity) -> reportStringBuilder
                 .append(System.lineSeparator())
-                .append(s.getKey())
+                .append(fruit)
                 .append(CSV_SPLITTER)
-                .append(s.getValue()));
+                .append(quantity));
         byte[] reportData = reportStringBuilder.toString().getBytes();
         try {
             Files.write(Path.of(REPORT_FILE_PATH), reportData);
