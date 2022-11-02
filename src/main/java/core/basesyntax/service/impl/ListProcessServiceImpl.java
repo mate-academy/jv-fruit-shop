@@ -17,7 +17,7 @@ public class ListProcessServiceImpl implements ListProcessService {
             FruitTransaction transaction = new CsvTextLineParser().extractTransaction(line);
             if (transaction != null) {
                 TransactionHandler transactionHandler = strategy.get(transaction.getOperation());
-                transactionHandler.process(transaction);
+                transactionHandler.handle(transaction);
             }
         }
     }

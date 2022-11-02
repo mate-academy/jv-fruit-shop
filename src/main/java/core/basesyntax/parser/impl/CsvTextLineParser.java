@@ -22,10 +22,10 @@ public class CsvTextLineParser implements TextLineParser {
         String symbol = lineArray[OPERATION_INDEX].trim();
         String fruit = lineArray[FRUIT_INDEX].trim();
         int quantity = Integer.parseInt(lineArray[QUANTITY_INDEX].trim());
-        return new FruitTransaction(parseOperation(symbol), fruit, quantity);
+        return new FruitTransaction(getOperation(symbol), fruit, quantity);
     }
 
-    private FruitTransaction.Operation parseOperation(String symbol) {
+    private FruitTransaction.Operation getOperation(String symbol) {
         for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
             if (operation.getOperation().equals(symbol)) {
                 return operation;

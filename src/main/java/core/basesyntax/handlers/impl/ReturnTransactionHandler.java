@@ -4,15 +4,15 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.handlers.TransactionHandler;
 import core.basesyntax.model.FruitTransaction;
 
-public class ReturnTransactionHandler implements TransactionHandler{
-    private final CommonSavingHandler commonSavingHandler;
+public class ReturnTransactionHandler implements TransactionHandler {
+    private final StoringHandler storingHandler;
 
     public ReturnTransactionHandler(StorageDao storageDao) {
-        commonSavingHandler = new CommonSavingHandler(storageDao);
+        storingHandler = new StoringHandler(storageDao);
     }
 
     @Override
-    public void process(FruitTransaction transaction) {
-        commonSavingHandler.process(transaction);
+    public void handle(FruitTransaction transaction) {
+        storingHandler.handle(transaction);
     }
 }
