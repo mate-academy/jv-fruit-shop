@@ -9,6 +9,7 @@ public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void operate(FruitTransaction fruitTransaction) {
         FruitShopDao fruitShopStorage = new FruitShopDaoImpl();
-        fruitShopStorage.supply(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        fruitShopStorage.supply(fruitTransaction.getFruit().getFruitName(),
+                fruitTransaction.getFruit().getQuantity());
     }
 }
