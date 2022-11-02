@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.impl.FruitTransactionDaoImpl;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReader;
 import java.io.IOException;
@@ -35,8 +36,8 @@ public class CsvFileReaderImpl implements CsvFileReader {
                     new FruitTransaction(
                             FruitTransaction.Operation
                                     .valueOfLabel(singleDataLine[OPERATION_INDEX]),
-                            singleDataLine[PRODUCT_NAME_INDEX],
-                            Integer.parseInt(singleDataLine[AMOUNT_INDEX])));
+                            new Fruit(singleDataLine[PRODUCT_NAME_INDEX],
+                                    Integer.parseInt(singleDataLine[AMOUNT_INDEX]))));
         }
         return fruitTransactionDao.getAll();
     }
