@@ -19,9 +19,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitShop {
-    public static final String RESOURCES_DIRECTORY = "src/main/resources";
-    public static final Path INPUT_CSV_FILE = Path.of(RESOURCES_DIRECTORY, "/input_basic.csv");
-    public static final Path OUTPUT_CSV_FILE = Path.of(RESOURCES_DIRECTORY, "/report.csv");
+    private static final String RESOURCES_DIRECTORY = "src/main/resources";
+    private static final Path INPUT_CSV_FILE = Path.of(RESOURCES_DIRECTORY, "/input_basic.csv");
+    private static final Path OUTPUT_CSV_FILE = Path.of(RESOURCES_DIRECTORY, "/report.csv");
 
     public static void main(String[] args) {
         FruitShopStorageDaoImpl storageDao = new FruitShopStorageDaoImpl();

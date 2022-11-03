@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
-    public static final String LINE_SEPARATOR = System.lineSeparator();
-    public static final String ROW_DELIMITER = ",";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String ROW_DELIMITER = ",";
 
     public String generate(List<FruitReport> reportList) {
         return reportList
