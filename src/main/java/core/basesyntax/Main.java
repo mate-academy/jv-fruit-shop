@@ -9,15 +9,19 @@ import core.basesyntax.service.impl.ReadFromFileImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.service.impl.WriteToFileImpl;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.impl.*;
-
+import core.basesyntax.strategy.impl.OperationHandlerBalance;
+import core.basesyntax.strategy.impl.OperationHandlerPurchase;
+import core.basesyntax.strategy.impl.OperationHandlerReturn;
+import core.basesyntax.strategy.impl.OperationHandlerSupply;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_PATH_READ = "src/main/java/core/basesyntax/resources/inputFile.csv";
-    private static final String FILE_PATH_WRITE = "src/main/java/core/basesyntax/resources/outputFile.csv";
+    private static final String FILE_PATH_READ = "src/main/java/core/"
+            + "basesyntax/resources/inputFile.csv";
+    private static final String FILE_PATH_WRITE = "src/main/java/core"
+            + "/basesyntax/resources/outputFile.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> strategies = new HashMap<>();
