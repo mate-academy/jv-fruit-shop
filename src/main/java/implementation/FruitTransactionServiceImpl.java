@@ -1,10 +1,9 @@
-package Implementation;
+package implementation;
 
-import Service.FruitService;
-import Strategy.Strategy;
 import core.basesyntax.FruitTransaction;
-
 import java.util.List;
+import service.FruitService;
+import strategy.Strategy;
 
 public class FruitTransactionServiceImpl implements FruitService {
     private final Strategy operationStrategy;

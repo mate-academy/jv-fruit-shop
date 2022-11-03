@@ -1,12 +1,10 @@
-package Implementation;
-
-import Service.FileReader;
+package implementation;
 
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import service.FileReader;
 
 public class FileReaderImpl implements FileReader {
     @Override
@@ -14,7 +12,7 @@ public class FileReaderImpl implements FileReader {
         try {
             return Files.readAllLines(Path.of(pathToFile));
         } catch (IOException e) {
-            throw new RuntimeException();
+            throw new RuntimeException("Can't read data from file " + pathToFile, e);
         }
     }
 }

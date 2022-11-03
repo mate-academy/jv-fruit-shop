@@ -1,36 +1,36 @@
 package core.basesyntax;
 
-import DAO.DAOFruit;
-import DAO.DAOFruitImplem;
-import Implementation.FileReaderImpl;
-import Implementation.FileWriterImpl;
-import Implementation.FruitTransactionParserImpl;
-import Implementation.FruitTransactionServiceImpl;
-import Implementation.ReportServiceImpl;
-import Operations.BalanceOperation;
-import Operations.OperationHandler;
-import Operations.PurchaseOperation;
-import Operations.ReturnOperation;
-import Operations.SupplyOperation;
-import Service.FileReader;
-import Service.FileWriter;
-import Service.FruitParser;
-import Service.FruitService;
-import Service.ReportService;
-import Strategy.OperationStrategy;
-import Strategy.Strategy;
-
+import dao.DaoFruit;
+import dao.FruitImplemDao;
+import implementation.FileReaderImpl;
+import implementation.FileWriterImpl;
+import implementation.FruitTransactionParserImpl;
+import implementation.FruitTransactionServiceImpl;
+import implementation.ReportServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import operations.BalanceOperation;
+import operations.OperationHandler;
+import operations.PurchaseOperation;
+import operations.ReturnOperation;
+import operations.SupplyOperation;
+import service.FileReader;
+import service.FileWriter;
+import service.FruitParser;
+import service.FruitService;
+import service.ReportService;
+import strategy.Strategy;
 
 /**
  * Feel free to remove this class and create your own.
  */
 public class HelloWorld {
+    private static final String INPUT_PATH_TOFILE = "src/main/resources/input.csv";
+    private static final String OUTPUT_PATH_TOFILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        DAOFruit fruitDao = new DAOFruitImplem();
+        DaoFruit fruitDao = new FruitImplemDao();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap = new HashMap<>();
         operationHandlersMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperation(fruitDao));
@@ -42,7 +42,7 @@ public class HelloWorld {
                 new ReturnOperation(fruitDao));
         FileReader fileReader = new FileReaderImpl();
 
-        List<String> inputStrings = fileReader.readFromFile( "src/main/java/core/basesyntax/resources/input.csv");
+        List<String> inputStrings = fileReader.readFromFile(INPUT_PATH_TOFILE);
 
         FruitParser parser = new FruitTransactionParserImpl();
         List<FruitTransaction> fruitTransactions =
@@ -57,7 +57,7 @@ public class HelloWorld {
         String report = reportService.writeReport(Storage.fruits);
 
         FileWriter writer = new FileWriterImpl();
-        writer.writeToFile(report,             "src/main/java/core/basesyntax/resources/report.csv");
+        writer.writeToFile(report, OUTPUT_PATH_TOFILE);
 
     }
 }

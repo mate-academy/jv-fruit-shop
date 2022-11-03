@@ -1,12 +1,12 @@
-package Operations;
+package operations;
 
-import DAO.DAOFruit;
 import core.basesyntax.FruitTransaction;
+import dao.DaoFruit;
 
 public class ReturnOperation implements OperationHandler {
-    private final DAOFruit fruitDao;
+    private final DaoFruit fruitDao;
 
-    public ReturnOperation(DAOFruit fruitDao) {
+    public ReturnOperation(DaoFruit fruitDao) {
         this.fruitDao = fruitDao;
     }
 

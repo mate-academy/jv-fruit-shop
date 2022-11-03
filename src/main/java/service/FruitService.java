@@ -1,7 +1,6 @@
-package Service;
+package service;
 
 import core.basesyntax.FruitTransaction;
-
 import java.util.List;
 
 public interface FruitService {

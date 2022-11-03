@@ -1,12 +1,12 @@
-package Operations;
+package operations;
 
-import DAO.DAOFruit;
 import core.basesyntax.FruitTransaction;
+import dao.DaoFruit;
 
 public class BalanceOperation implements OperationHandler {
-    private final DAOFruit fruitDao;
+    private final DaoFruit fruitDao;
 
-    public BalanceOperation(DAOFruit fruitDao) {
+    public BalanceOperation(DaoFruit fruitDao) {
         this.fruitDao = fruitDao;
     }
 

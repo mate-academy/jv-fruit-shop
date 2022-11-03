@@ -1,8 +1,8 @@
-package DAO;
+package dao;
 
 import core.basesyntax.Storage;
 
-public class DAOFruitImplem implements DAOFruit{
+public class FruitImplemDao implements DaoFruit {
     @Override
     public void addFruits(String fruit, int amount) {
         Storage.fruits.put(fruit, amount);

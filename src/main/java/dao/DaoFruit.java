@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-public interface DAOFruit {
+public interface DaoFruit {
     void addFruits(String fruit, int amount);
 
     int getAmountOfFruit(String fruit);

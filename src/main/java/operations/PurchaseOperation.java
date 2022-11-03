@@ -1,14 +1,14 @@
-package Operations;
+package operations;
 
-import DAO.DAOFruit;
 import core.basesyntax.FruitTransaction;
+import dao.DaoFruit;
 
 public class PurchaseOperation implements OperationHandler {
-        private final DAOFruit fruitDao;
+    private final DaoFruit fruitDao;
 
-    public PurchaseOperation(DAOFruit fruitDao) {
-            this.fruitDao = fruitDao;
-        }
+    public PurchaseOperation(DaoFruit fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
     public void handle(FruitTransaction transaction) {

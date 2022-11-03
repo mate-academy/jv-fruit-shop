@@ -1,10 +1,9 @@
-package Implementation;
+package implementation;
 
-import Service.FruitParser;
 import core.basesyntax.FruitTransaction;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import service.FruitParser;
 
 public class FruitTransactionParserImpl implements FruitParser {
     private static final String SEPARATOR = ",";
