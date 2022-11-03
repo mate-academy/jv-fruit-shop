@@ -12,12 +12,8 @@ import com.basesyntax.services.impl.TransactionProcessorImpl;
 import com.basesyntax.strategy.impl.StrategyImpl;
 
 public class Main {
-
     public static void main(String[] args) {
-        CsvFileReaderImpl fileReader = new CsvFileReaderImpl();
-        fileReader.acceptFile("src/input.csv");
         StrategyImpl strategy = new StrategyImpl();
-
         strategy.addStrategyType(Operation.BALANCE.getOperation(),
                 new OperationHandlerBalanceImpl());
         strategy.addStrategyType(Operation.RETURN.getOperation(),
@@ -27,11 +23,11 @@ public class Main {
         strategy.addStrategyType(Operation.PURCHASE.getOperation(),
                 new OperationHandlerPurchaseImpl());
 
+        CsvFileReaderImpl fileReader = new CsvFileReaderImpl("src/input.csv");
         TransactionProcessorImpl transactionProcessor = new TransactionProcessorImpl();
         transactionProcessor.processingData(fileReader.getAcceptedFileAsList(), strategy);
 
-        CsvFileWriterImpl fileWriter = new CsvFileWriterImpl();
-        fileWriter.createFile("src/report.csv");
+        CsvFileWriterImpl fileWriter = new CsvFileWriterImpl("src/report.csv");
         fileWriter.createReportFile(new StorageImpl().getStorageAsList());
     }
 }

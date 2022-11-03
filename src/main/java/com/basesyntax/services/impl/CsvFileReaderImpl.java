@@ -12,9 +12,8 @@ public class CsvFileReaderImpl implements CsvFileReader {
     private File acceptedFile;
     private List<String> fileAsList;
 
-    @Override
-    public void acceptFile(String pathName) {
-        acceptedFile = new File(pathName);
+    public CsvFileReaderImpl(String pathName) {
+        this.acceptedFile = new File(pathName);
     }
 
     @Override

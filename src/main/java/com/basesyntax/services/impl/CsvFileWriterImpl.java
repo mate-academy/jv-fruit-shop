@@ -8,18 +8,17 @@ import java.io.IOException;
 import java.util.List;
 
 public class CsvFileWriterImpl implements CsvFileWriter {
-    private static final String NEW_LINE = System.lineSeparator();
+    private static final String LINE_SEPARATOR = System.lineSeparator();
     private File acceptedPathName;
 
-    @Override
-    public void createFile(String pathName) {
+    public CsvFileWriterImpl(String pathName) {
         acceptedPathName = new File(pathName);
     }
 
     @Override
     public void createReportFile(List<String> dataList) {
-        StringBuilder stringBuilder = new StringBuilder("fruit,quantity" + NEW_LINE);
-        dataList.stream().sorted().forEach(m -> stringBuilder.append(m).append(NEW_LINE));
+        StringBuilder stringBuilder = new StringBuilder("fruit,quantity" + LINE_SEPARATOR);
+        dataList.stream().sorted().forEach(m -> stringBuilder.append(m).append(LINE_SEPARATOR));
         FileWriter writerForReport;
         try {
             writerForReport = new FileWriter(acceptedPathName);
