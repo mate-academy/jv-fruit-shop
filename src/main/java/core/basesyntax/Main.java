@@ -42,11 +42,12 @@ public class Main {
         CsvTransactionParser csvTransactionParser = new CsvTransactionParserImpl();
         List<FruitTransaction> fruitTransactions = csvTransactionParser.csvParse(fileReader
                 .readFile(CSV_FILE_PATH));
-        TransactionService transactionService = new TransactionServiceImpl(operationStrategy, fruitStorageDao);
+        TransactionService transactionService =
+                new TransactionServiceImpl(operationStrategy, fruitStorageDao);
         transactionService.transaction(fruitTransactions);
         CsvReportGenerator csvReportGenerator = new CsvReportGeneratorImpl();
         byte[] csvReportBytes = csvReportGenerator.generateCsvReport(fruitStorageDao.getAll());
-        FIleWriter fIleWriter = new FileWriterImpl();
-        fIleWriter.writeFile(CSV_REPORT_PATH, csvReportBytes);
+        FIleWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeFile(CSV_REPORT_PATH, csvReportBytes);
     }
 }

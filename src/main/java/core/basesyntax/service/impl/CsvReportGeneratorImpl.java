@@ -17,6 +17,6 @@ public class CsvReportGeneratorImpl implements CsvReportGenerator {
                 .append(fruit)
                 .append(CSV_SPLITTER)
                 .append(quantity));
-       return reportStringBuilder.toString().getBytes();
+        return reportStringBuilder.toString().getBytes();
     }
 }

@@ -12,7 +12,8 @@ public class TransactionServiceImpl implements TransactionService {
     private final OperationStrategy operationStrategy;
     private final FruitStorageDao fruitStorageDao;
 
-    public TransactionServiceImpl(OperationStrategy operationStrategy, FruitStorageDao fruitStorageDao) {
+    public TransactionServiceImpl(OperationStrategy operationStrategy,
+                                  FruitStorageDao fruitStorageDao) {
         this.operationStrategy = operationStrategy;
         this.fruitStorageDao = fruitStorageDao;
     }
@@ -24,11 +25,12 @@ public class TransactionServiceImpl implements TransactionService {
             if (fruitStorageDao.get(transaction.getFruit()) == null) {
                 fruitStorageDao
                         .add(transaction.getFruit(), operation
-                                .operate(DEFAULT_EMPTY_VALUE,transaction.getQuantity()));
+                                .operate(DEFAULT_EMPTY_VALUE, transaction.getQuantity()));
             }
             fruitStorageDao
                     .add(transaction.getFruit(), operation
-                            .operate(fruitStorageDao.get(transaction.getFruit()), transaction.getQuantity()));
+                            .operate(fruitStorageDao.get(transaction.getFruit()),
+                                    transaction.getQuantity()));
         }
     }
 }
