@@ -1,4 +1,4 @@
-package implementation;
+package service.implementation;
 
 import java.util.List;
 import model.FruitTransaction;

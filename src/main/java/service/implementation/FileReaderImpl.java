@@ -1,4 +1,6 @@
-package service;
+package service.implementation;
+
+import service.FileReader;
 
 import java.io.IOException;
 import java.nio.file.Files;
