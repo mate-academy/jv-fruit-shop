@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
@@ -29,14 +30,15 @@ public class Main {
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationServiceMap = new HashMap<>();
+        FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
         operationServiceMap.put(FruitTransaction.Operation.BALANCE,
-                new OperationBalance(new FruitStorageDaoImpl()));
+                new OperationBalance(fruitStorageDao));
         operationServiceMap.put(FruitTransaction.Operation.SUPPLY,
-                new OperationSupply(new FruitStorageDaoImpl()));
+                new OperationSupply(fruitStorageDao));
         operationServiceMap.put(FruitTransaction.Operation.RETURN,
-                new OperationReturn(new FruitStorageDaoImpl()));
+                new OperationReturn(fruitStorageDao));
         operationServiceMap.put(FruitTransaction.Operation.PURCHASE,
-                new OperationPurchase(new FruitStorageDaoImpl()));
+                new OperationPurchase(fruitStorageDao));
 
         FileReader reader = new FileReaderImpl();
         List<String> fromFile = reader.readFromFile(READ_FROM_FILE_PATH);
