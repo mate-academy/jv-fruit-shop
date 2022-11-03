@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.service.ReportGeneratorService;
-
 import java.util.stream.Collectors;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
