@@ -17,7 +17,7 @@ public class ReadFileImpl implements ReadFile {
                 TemporalListOfOperations.temporalData.add(strCurrentLine.split(COMMA));
             }
         } catch (IOException e) {
-            System.out.println("Can't read from file. " + e);
+            System.out.println("Can't read from file. " + path + e);
         }
     }
 }
