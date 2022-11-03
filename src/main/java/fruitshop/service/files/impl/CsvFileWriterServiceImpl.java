@@ -10,7 +10,7 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
         try {
             Files.writeString(targetFile, data);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cannot write to file: ", e);
         }
     }
 }

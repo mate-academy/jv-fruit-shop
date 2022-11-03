@@ -12,7 +12,7 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
         try {
             return String.join(LINE_SEPARATOR, Files.readAllLines(csvFilePath));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cannot read from file: ", e);
         }
     }
 }
