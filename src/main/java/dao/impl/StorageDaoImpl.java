@@ -17,7 +17,7 @@ public class StorageDaoImpl implements StorageDao {
     public List<String> getAll() {
         return DataBase.storage.entrySet()
                 .stream()
-                .map(e -> e.getKey() + "," + e.getValue() + System.lineSeparator())
+                .map(i -> i.getKey() + "," + i.getValue() + System.lineSeparator())
                 .collect(Collectors.toList());
     }
 
