@@ -9,11 +9,7 @@ import java.util.List;
 
 public class CsvFileWriterImpl implements CsvFileWriter {
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    private File acceptedPathName;
-
-    public CsvFileWriterImpl(String pathName) {
-        acceptedPathName = new File(pathName);
-    }
+    private final File acceptedPathName = new File("src/report.csv");
 
     @Override
     public void createReportFile(List<String> dataList) {
