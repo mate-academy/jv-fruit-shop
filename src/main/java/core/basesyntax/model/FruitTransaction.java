@@ -40,7 +40,7 @@ public class FruitTransaction {
         }
 
         public static Operation valueOfLabel(String label) {
-            for (Operation operation : values()) {
+            for (Operation operation : Operation.values()) {
                 if (operation.getOperation().equals(label)) {
                     return operation;
                 }
