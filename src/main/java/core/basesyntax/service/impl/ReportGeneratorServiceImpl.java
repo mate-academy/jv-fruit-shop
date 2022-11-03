@@ -13,12 +13,11 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(PREDEFINED_LINE);
         Set<Map.Entry<String, Integer>> entries = fruitStorageMap.entrySet();
-        for (Map.Entry<String, Integer> entry : entries) {
-            stringBuilder.append(System.lineSeparator());
-            stringBuilder.append(entry.getKey())
-                    .append(COMMA)
-                    .append(entry.getValue());
-        }
+        entries.stream().forEach(e -> stringBuilder
+                .append(System.lineSeparator())
+                .append(e.getKey())
+                .append(COMMA)
+                .append(e.getValue()));
         return stringBuilder.toString();
     }
 }
