@@ -8,7 +8,7 @@ import myfirstproject.model.Fruit;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void saveFruit(Fruit fruit, int value) {
+    public void save(Fruit fruit, int value) {
         CustomDataBase.storage.put(fruit, value);
     }
 

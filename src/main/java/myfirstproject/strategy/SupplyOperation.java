@@ -1,10 +1,14 @@
 package myfirstproject.strategy;
 
+import myfirstproject.dao.FruitDao;
+import myfirstproject.dao.impl.FruitDaoImpl;
 import myfirstproject.model.Fruit;
 
 public class SupplyOperation implements OperationHandler {
+    private final FruitDao fruitDao = new FruitDaoImpl();
+
     @Override
     public void changeValue(Fruit fruit, int value) {
-        FRUIT_DAO.saveFruit(fruit, FRUIT_DAO.getQuantity(fruit) + value);
+        fruitDao.save(fruit, fruitDao.getQuantity(fruit) + value);
     }
 }

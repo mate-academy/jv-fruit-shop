@@ -1,6 +1,8 @@
 package myfirstproject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import myfirstproject.dao.FruitDao;
 import myfirstproject.dao.impl.FruitDaoImpl;
@@ -25,13 +27,14 @@ public class Application {
         final ReadFile reader = new ReadFileImpl();
         final WriteFile writer = new WriteFileImpl();
         final SeparationOfOperations separation = new SeparationOfOperations();
-        Map<String, OperationHandler> operation = new HashMap<>();
+        final List<String[]> temporalList = new ArrayList<>();
+        final Map<String, OperationHandler> operation = new HashMap<>();
         operation.put(Operation.BALANCE.getOperation(), new BalanceOperation());
         operation.put(Operation.SUPPLY.getOperation(), new SupplyOperation());
         operation.put(Operation.PURCHASE.getOperation(), new PurchaseOperation());
         operation.put(Operation.RETURN.getOperation(), new ReturnOperation());
-        reader.readFile(PATH_TO_DB);
-        separation.toDoEachOperation(operation);
+        reader.readFile(temporalList, PATH_TO_DB);
+        separation.toDoEachOperation(temporalList, operation);
         writer.writeToFile(PATH_TO_RESULT, fruitDao.getAll());
     }
 }
