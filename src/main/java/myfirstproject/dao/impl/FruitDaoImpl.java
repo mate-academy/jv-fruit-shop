@@ -2,23 +2,23 @@ package myfirstproject.dao.impl;
 
 import java.util.HashMap;
 import java.util.Map;
-import myfirstproject.dao.DataBaseDao;
+import myfirstproject.dao.FruitDao;
 import myfirstproject.db.CustomDataBase;
 import myfirstproject.model.Fruit;
 
-public class DataBaseDaoImpl implements DataBaseDao {
+public class FruitDaoImpl implements FruitDao {
     @Override
-    public void saveDataToCustomDB(Fruit fruit, int value) {
+    public void saveFruit(Fruit fruit, int value) {
         CustomDataBase.storage.put(fruit, value);
     }
 
     @Override
-    public Map<Fruit, Integer> getAllRecords() {
+    public Map<Fruit, Integer> getAll() {
         return new HashMap<>(CustomDataBase.storage);
     }
 
     @Override
-    public Integer getRecordFromDB(Fruit fruit) {
+    public Integer getQuantity(Fruit fruit) {
         return CustomDataBase.storage.get(fruit);
     }
 }
