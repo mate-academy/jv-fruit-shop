@@ -13,7 +13,7 @@ public class BalanceOperationHandlerImpl implements OperationHandler {
 
     @Override
     public void operationWithFruitTransaction(FruitTransaction fruitTransaction) {
-        fruitDao.getAll().merge(
+        fruitDao.merge(
                 fruitTransaction.getFruit(),
                 fruitTransaction.getQuantity(),
                 Integer::sum);
