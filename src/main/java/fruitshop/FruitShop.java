@@ -1,6 +1,7 @@
 package fruitshop;
 
 import fruitshop.dao.FruitShopStorageDaoImpl;
+import fruitshop.model.FruitReport;
 import fruitshop.model.Operation;
 import fruitshop.service.files.impl.CsvFileReaderServiceImpl;
 import fruitshop.service.files.impl.CsvFileWriterServiceImpl;
@@ -16,6 +17,7 @@ import fruitshop.strategy.operation.handlers.impl.SupplyOperation;
 import fruitshop.strategy.operation.impl.OperationStrategyImpl;
 import java.nio.file.Path;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FruitShop {
@@ -25,23 +27,20 @@ public class FruitShop {
 
     public static void main(String[] args) {
         FruitShopStorageDaoImpl storageDao = new FruitShopStorageDaoImpl();
-        new TransactionRowParserImpl(storageDao)
-                .parse(new CsvParserImpl()
-                        .parse(new CsvFileReaderServiceImpl()
-                                .readFromFile(INPUT_CSV_FILE)
-                )
-        );
+        String data = new CsvFileReaderServiceImpl().readFromFile(INPUT_CSV_FILE);
+        List<List<String>> csvParsedRows = new CsvParserImpl().parse(data);
+        TransactionRowParserImpl transactionRowParser = new TransactionRowParserImpl(storageDao);
+        transactionRowParser.parse(csvParsedRows);
         Map<Operation, ? super OperationHandler> handlers = new HashMap<>();
         handlers.put(Operation.BALANCE, new BalanceOperation());
         handlers.put(Operation.PURCHASE, new PurchaseOperation());
         handlers.put(Operation.RETURN, new ReturnOperation());
         handlers.put(Operation.SUPPLY, new SupplyOperation());
         OperationStrategyImpl operationStrategy = new OperationStrategyImpl(handlers);
-        new CsvFileWriterServiceImpl()
-                .writeToFile(OUTPUT_CSV_FILE, new ReportGeneratorServiceImpl()
-                        .generate(
-                                new TransactionsCalculatorServiceImpl(
-                                        operationStrategy, storageDao
-                                ).calculate()));
+        List<FruitReport> calculatedReport =
+                new TransactionsCalculatorServiceImpl(operationStrategy, storageDao).calculate();
+        String generatedReportOutput = new ReportGeneratorServiceImpl().generate(calculatedReport);
+        CsvFileWriterServiceImpl fileWriterService = new CsvFileWriterServiceImpl();
+        fileWriterService.writeToFile(OUTPUT_CSV_FILE, generatedReportOutput);
     }
 }
