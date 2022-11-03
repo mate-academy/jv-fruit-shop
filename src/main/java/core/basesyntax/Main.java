@@ -41,22 +41,22 @@ public class Main {
         operationHandlerMap.put(FruitOperation.SUPPLY.getOperation(),
                 new SupplyOperationHandlerImpl());
 
-        FileCsvReader getData = new FileCsvReaderImpl();
-        List<String> list = getData.readFromFile(WRITE_FROM);
+        FileCsvReader fileCsvReader = new FileCsvReaderImpl();
+        List<String> list = fileCsvReader.readFromFile(WRITE_FROM);
 
         FruitTransactionParser fruitTransactionParser =
                 new FruitTransactionParserImpl(operationValidator);
         List<FruitTransaction> fruitTransactionList =
                 fruitTransactionParser.parseFruitTransactions(list);
 
-        FruitTransactionService insertData =
+        FruitTransactionService fruitTransactionService =
                 new FruitTransactionServiceImpl(new OperationStrategyImpl(operationHandlerMap));
-        insertData.addToStorage(fruitTransactionList);
+        fruitTransactionService.addToStorage(fruitTransactionList);
 
         ContentGenerator contentGenerator = new ContentGeneratorImpl();
         String content = contentGenerator.generateContent(FruitStorage.fruitStorage);
 
-        FileCsvWriter writeData = new FileCsvWriterImpl();
-        writeData.writeToFile(content, WRITE_TO);
+        FileCsvWriter fileCsvWriter = new FileCsvWriterImpl();
+        fileCsvWriter.writeToFile(content, WRITE_TO);
     }
 }
