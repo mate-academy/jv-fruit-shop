@@ -5,14 +5,14 @@ import strategy.GeneralOperation;
 import strategy.TransactionHandler;
 
 public class PurchaseHandler implements GeneralOperation {
-    private final TransactionHandler processTransaction;
+    private final TransactionHandler transactionHandler;
 
     public PurchaseHandler() {
-        processTransaction = new TransactionHandlerImpl();
+        transactionHandler = new TransactionHandlerImpl();
     }
 
     @Override
     public void generalOperation(FruitTransaction transaction) {
-        processTransaction.takeFromBalance(transaction.getFruit(), transaction.getQuantity());
+        transactionHandler.takeFromBalance(transaction.getFruit(), transaction.getQuantity());
     }
 }
