@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import dao.DaoFruit;
 import dao.FruitImplemDao;
+import db.Storage;
 import implementation.FileReaderImpl;
 import implementation.FileWriterImpl;
 import implementation.FruitTransactionParserImpl;
@@ -10,6 +11,7 @@ import implementation.ReportServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.FruitTransaction;
 import operations.BalanceOperation;
 import operations.OperationHandler;
 import operations.PurchaseOperation;

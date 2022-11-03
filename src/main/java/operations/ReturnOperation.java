@@ -1,7 +1,7 @@
 package operations;
 
-import core.basesyntax.FruitTransaction;
 import dao.DaoFruit;
+import model.FruitTransaction;
 
 public class ReturnOperation implements OperationHandler {
     private final DaoFruit fruitDao;

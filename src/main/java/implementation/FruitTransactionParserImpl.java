@@ -1,8 +1,8 @@
 package implementation;
 
-import core.basesyntax.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
+import model.FruitTransaction;
 import service.FruitParser;
 
 public class FruitTransactionParserImpl implements FruitParser {

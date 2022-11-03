@@ -1,6 +1,6 @@
 package dao;
 
-import core.basesyntax.Storage;
+import db.Storage;
 
 public class FruitImplemDao implements DaoFruit {
     @Override

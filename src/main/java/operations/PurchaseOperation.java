@@ -1,7 +1,7 @@
 package operations;
 
-import core.basesyntax.FruitTransaction;
 import dao.DaoFruit;
+import model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
     private final DaoFruit fruitDao;
@@ -18,7 +18,7 @@ public class PurchaseOperation implements OperationHandler {
         if (purchaseAmount <= amount) {
             fruitDao.addFruits(fruit, amount - purchaseAmount);
         } else {
-            throw new RuntimeException();
+            throw new RuntimeException("Can`t add fruits");
         }
     }
 }

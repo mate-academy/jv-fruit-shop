@@ -1,7 +1,7 @@
 package service;
 
-import core.basesyntax.FruitTransaction;
 import java.util.List;
+import model.FruitTransaction;
 
 public interface FruitParser {
     List<FruitTransaction> parse(List<String> lines);

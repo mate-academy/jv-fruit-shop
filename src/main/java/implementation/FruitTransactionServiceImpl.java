@@ -1,7 +1,7 @@
 package implementation;
 
-import core.basesyntax.FruitTransaction;
 import java.util.List;
+import model.FruitTransaction;
 import service.FruitService;
 import strategy.Strategy;
 

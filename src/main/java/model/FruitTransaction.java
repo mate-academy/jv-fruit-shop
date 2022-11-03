@@ -1,4 +1,4 @@
-package core.basesyntax;
+package model;
 
 import java.util.Arrays;
 

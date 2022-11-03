@@ -1,7 +1,7 @@
 package operations;
 
-import core.basesyntax.FruitTransaction;
 import dao.DaoFruit;
+import model.FruitTransaction;
 
 public class SupplyOperation implements OperationHandler {
     private final DaoFruit fruitDao;

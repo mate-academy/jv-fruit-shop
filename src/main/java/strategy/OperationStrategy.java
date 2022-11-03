@@ -1,6 +1,6 @@
 package strategy;
 
-import core.basesyntax.FruitTransaction;
+import model.FruitTransaction;
 import operations.OperationHandler;
 
 public interface OperationStrategy {

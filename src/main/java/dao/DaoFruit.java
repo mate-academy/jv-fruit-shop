@@ -5,4 +5,3 @@ public interface DaoFruit {
 
     int getAmountOfFruit(String fruit);
 }
-
