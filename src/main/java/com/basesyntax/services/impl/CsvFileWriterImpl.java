@@ -10,6 +10,7 @@ import java.util.List;
 public class CsvFileWriterImpl implements CsvFileWriter {
     private static final String NEW_LINE = System.lineSeparator();
     private File acceptedPathName;
+
     @Override
     public void createFile(String pathName) {
         acceptedPathName = new File(pathName);
