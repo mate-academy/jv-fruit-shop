@@ -14,7 +14,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     public List<FruitTransaction> parseData(List<String> dataFromFile) {
         return dataFromFile.stream()
                 .skip(1)
-                .map(l -> l.split(","))
+                .map(line -> line.split(","))
                 .map(s ->
                         new FruitTransaction(FruitTransaction.Operation
                                 .getOperation(s[TYPE_OPERATION_INDEX]),

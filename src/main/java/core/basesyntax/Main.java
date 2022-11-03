@@ -6,6 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.fileservice.FileReaderService;
 import core.basesyntax.service.fileservice.FileReaderServiceImpl;
 import core.basesyntax.service.fileservice.FileWriterService;
 import core.basesyntax.service.fileservice.FileWriterServiceImpl;
@@ -28,8 +29,8 @@ public class Main {
             OperationHandler> handlerMap = new HashMap<>();
 
     public static void main(String[] args) {
-        FruitDao fruitDao = new FruitDaoImpl();
-        final FileReaderServiceImpl fileReader = new FileReaderServiceImpl();
+        final FruitDao fruitDao = new FruitDaoImpl();
+        final FileReaderService fileReader = new FileReaderServiceImpl();
         handlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandlerImpl(fruitDao));
         handlerMap.put(FruitTransaction.Operation.SUPPLY,
@@ -39,13 +40,13 @@ public class Main {
         handlerMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandlerImpl(fruitDao));
 
-        FruitTransactionParser parsingService = new FruitTransactionParserImpl();
+        FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
         TransactionService transactionService =
                 new TransactionServiceImpl(new OperationStrategyImpl(handlerMap));
-        transactionService.doOperationService(parsingService
+        transactionService.doOperationService(fruitTransactionParser
                 .parseData(fileReader.readFile(READ_FROM)));
-        ReportService reportCreator = new ReportServiceImpl(fruitDao);
+        ReportService reportService = new ReportServiceImpl(fruitDao);
         FileWriterService fileWriter = new FileWriterServiceImpl();
-        fileWriter.writeDataToFile(WRITE_TO, reportCreator.getReport());
+        fileWriter.writeDataToFile(WRITE_TO, reportService.getReport());
     }
 }

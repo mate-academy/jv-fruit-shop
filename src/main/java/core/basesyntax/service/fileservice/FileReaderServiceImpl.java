@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
-
     @Override
     public List<String> readFile(String path) {
         File file = new File(path);
