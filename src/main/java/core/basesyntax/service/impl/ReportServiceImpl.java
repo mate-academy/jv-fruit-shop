@@ -13,7 +13,7 @@ public class ReportServiceImpl implements ReportService {
     private static final String SPLITTER = ",";
 
     @Override
-    public String report() {
+    public String createReport() {
         String report = NAME_OF_COLUMNS;
         report += STORAGE.keySet().stream()
                 .map(k -> k.getName() + SPLITTER + STORAGE.get(k) + LINE_END)

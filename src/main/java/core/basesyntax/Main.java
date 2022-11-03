@@ -44,7 +44,7 @@ public class Main {
         shopService.processData(fruitTransactions);
         ReportService reportService = new ReportServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeFile(reportService.report(), pathReportFile);
-        System.out.println(reportService.report());
+        fileWriterService.writeFile(reportService.createReport(), pathReportFile);
+        System.out.println(reportService.createReport());
     }
 }
