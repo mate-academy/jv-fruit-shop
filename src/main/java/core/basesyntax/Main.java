@@ -12,7 +12,9 @@ import core.basesyntax.service.fileservice.FileWriterServiceImpl;
 import core.basesyntax.service.fileservice.ReportService;
 import core.basesyntax.service.fileservice.ReportServiceImpl;
 import core.basesyntax.service.impl.AddOperationHandlerImpl;
+import core.basesyntax.service.impl.BalanceOperationHandlerImpl;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
+import core.basesyntax.service.impl.ReturnOperationHandlerImpl;
 import core.basesyntax.service.impl.SubtractOperationHandlerImpl;
 import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -29,13 +31,13 @@ public class Main {
         FruitDao fruitDao = new FruitDaoImpl();
         final FileReaderServiceImpl fileReader = new FileReaderServiceImpl();
         handlerMap.put(FruitTransaction.Operation.BALANCE,
-                new AddOperationHandlerImpl(fruitDao));
+                new BalanceOperationHandlerImpl(fruitDao));
         handlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new AddOperationHandlerImpl(fruitDao));
         handlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new SubtractOperationHandlerImpl(fruitDao));
         handlerMap.put(FruitTransaction.Operation.RETURN,
-                new AddOperationHandlerImpl(fruitDao));
+                new ReturnOperationHandlerImpl(fruitDao));
 
         FruitTransactionParser parsingService = new FruitTransactionParserImpl();
         TransactionService transactionService =
