@@ -16,12 +16,12 @@ import operations.PurchaseOperation;
 import operations.ReturnOperation;
 import operations.SupplyOperation;
 import service.FileReader;
-import service.impl.FileReaderImpl;
 import service.FileWriter;
-import service.impl.FileWriterImpl;
 import service.FruitParser;
 import service.FruitService;
 import service.ReportService;
+import service.impl.FileReaderImpl;
+import service.impl.FileWriterImpl;
 import strategy.Strategy;
 
 /**
