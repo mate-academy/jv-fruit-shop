@@ -8,10 +8,7 @@ public class FruitTransaction {
     private int quantity;
 
     public FruitTransaction(String operation, String fruit, int quantity) {
-        this.operation = Arrays.stream(Operation.values())
-                .filter(o -> o.getOperation().equals(operation))
-                .findFirst()
-                .get();
+        this.operation = getOperationValue(operation);
         this.fruit = fruit;
         this.quantity = quantity;
     }
@@ -26,6 +23,13 @@ public class FruitTransaction {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    private Operation getOperationValue(String operation) {
+        return Arrays.stream(Operation.values())
+                .filter(o -> o.getOperation().equals(operation))
+                .findFirst()
+                .get();
     }
 
     public enum Operation {
