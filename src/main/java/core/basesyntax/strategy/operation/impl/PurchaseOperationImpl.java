@@ -1,6 +1,5 @@
 package core.basesyntax.strategy.operation.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.strategy.operation.OperationHandler;
 
 public class PurchaseOperationImpl implements OperationHandler {

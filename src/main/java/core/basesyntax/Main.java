@@ -29,7 +29,7 @@ public class Main {
     private static final String fromFile = "src/main/resources/input.csv";
     private static final String toFile = "src/main/resources/output.csv";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Map<String, OperationHandler> operationServiceMap = new HashMap<>();
         operationServiceMap.put(Operation.BALANCE.getOperation(),
                 new BalanceOperationImpl());
@@ -60,7 +60,7 @@ public class Main {
                     new BufferedWriter(new FileWriter(toFile)));
             writerService.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't create file");
+            throw new RuntimeException("Can't create file: ", e);
         }
     }
 }
