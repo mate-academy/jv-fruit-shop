@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     public static final String LINE_SEPARATOR = System.lineSeparator();
+    public static final String ROW_DELIMITER = ",";
 
     public String generate(List<FruitReport> reportList) {
         return reportList
                     .stream()
-                    .map(r -> r.getFruitName() + "," + r.getQuantity())
+                    .map(r -> r.getFruitName() + ROW_DELIMITER + r.getQuantity())
                     .collect(Collectors.joining(LINE_SEPARATOR));
     }
 }
