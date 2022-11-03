@@ -1,7 +1,8 @@
 package fruitshop.service.files;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public interface CsvFileReaderService {
-    String readFromFile(Path csvFilePath);
+    List<String> readFromFile(Path csvFilePath);
 }

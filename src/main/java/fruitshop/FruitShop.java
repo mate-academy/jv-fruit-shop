@@ -6,9 +6,8 @@ import fruitshop.model.Operation;
 import fruitshop.service.files.impl.CsvFileReaderServiceImpl;
 import fruitshop.service.files.impl.CsvFileWriterServiceImpl;
 import fruitshop.service.impl.ReportGeneratorServiceImpl;
+import fruitshop.service.impl.TransactionRowParserImpl;
 import fruitshop.service.impl.TransactionsCalculatorServiceImpl;
-import fruitshop.service.parsers.impl.CsvParserImpl;
-import fruitshop.service.parsers.impl.TransactionRowParserImpl;
 import fruitshop.strategy.operation.OperationHandler;
 import fruitshop.strategy.operation.handlers.impl.BalanceOperation;
 import fruitshop.strategy.operation.handlers.impl.PurchaseOperation;
@@ -27,10 +26,9 @@ public class FruitShop {
 
     public static void main(String[] args) {
         FruitShopStorageDaoImpl storageDao = new FruitShopStorageDaoImpl();
-        String data = new CsvFileReaderServiceImpl().readFromFile(INPUT_CSV_FILE);
-        List<List<String>> csvParsedRows = new CsvParserImpl().parse(data);
+        List<String> data = new CsvFileReaderServiceImpl().readFromFile(INPUT_CSV_FILE);
         TransactionRowParserImpl transactionRowParser = new TransactionRowParserImpl(storageDao);
-        transactionRowParser.parse(csvParsedRows);
+        transactionRowParser.parse(data);
         Map<Operation, ? super OperationHandler> handlers = new HashMap<>();
         handlers.put(Operation.BALANCE, new BalanceOperation());
         handlers.put(Operation.PURCHASE, new PurchaseOperation());
