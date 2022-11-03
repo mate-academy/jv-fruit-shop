@@ -1,7 +1,7 @@
-package com.basesyntax.dao;
+package com.basesyntax.strategy;
 
 import com.basesyntax.model.Fruit;
 
 public interface OperationHandler {
-    Fruit apply(Fruit fruit, int amount);
+    void apply(Fruit fruit, int amount);
 }

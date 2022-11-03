@@ -9,16 +9,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CsvFileReaderImpl implements CsvFileReader {
-    private File acceptedFile;
-    private List<String> fileAsList;
-
-    public CsvFileReaderImpl(String pathName) {
-        this.acceptedFile = new File(pathName);
-    }
+    private final File acceptedFile = new File("src/source/input.csv");
 
     @Override
     public List<String> getAcceptedFileAsList() {
         FileReader acceptedFileReader;
+        List<String> fileAsList;
         try {
             acceptedFileReader = new FileReader(acceptedFile);
             fileAsList = new BufferedReader(acceptedFileReader)

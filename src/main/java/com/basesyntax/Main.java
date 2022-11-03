@@ -1,14 +1,14 @@
 package com.basesyntax;
 
-import com.basesyntax.dao.impl.OperationHandlerBalanceImpl;
-import com.basesyntax.dao.impl.OperationHandlerPurchaseImpl;
-import com.basesyntax.dao.impl.OperationHandlerReturnImpl;
-import com.basesyntax.dao.impl.OperationHandlerSupplyImpl;
 import com.basesyntax.db.impl.StorageImpl;
 import com.basesyntax.enums.Operation;
 import com.basesyntax.services.impl.CsvFileReaderImpl;
 import com.basesyntax.services.impl.CsvFileWriterImpl;
 import com.basesyntax.services.impl.TransactionProcessorImpl;
+import com.basesyntax.strategy.impl.OperationHandlerBalanceImpl;
+import com.basesyntax.strategy.impl.OperationHandlerPurchaseImpl;
+import com.basesyntax.strategy.impl.OperationHandlerReturnImpl;
+import com.basesyntax.strategy.impl.OperationHandlerSupplyImpl;
 import com.basesyntax.strategy.impl.StrategyImpl;
 
 public class Main {
@@ -23,7 +23,7 @@ public class Main {
         strategy.addStrategyType(Operation.PURCHASE.getOperation(),
                 new OperationHandlerPurchaseImpl());
 
-        CsvFileReaderImpl fileReader = new CsvFileReaderImpl("src/input.csv");
+        CsvFileReaderImpl fileReader = new CsvFileReaderImpl();
         TransactionProcessorImpl transactionProcessor = new TransactionProcessorImpl();
         transactionProcessor.processingData(fileReader.getAcceptedFileAsList(), strategy);
 

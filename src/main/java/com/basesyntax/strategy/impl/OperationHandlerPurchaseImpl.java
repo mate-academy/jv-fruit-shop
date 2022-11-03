@@ -1,25 +1,27 @@
-package com.basesyntax.dao.impl;
+package com.basesyntax.strategy.impl;
 
-import com.basesyntax.dao.OperationHandler;
+import com.basesyntax.dao.FruitDao;
+import com.basesyntax.dao.FruitDaoImpl;
 import com.basesyntax.db.impl.StorageImpl;
 import com.basesyntax.model.Fruit;
+import com.basesyntax.strategy.OperationHandler;
 
 public class OperationHandlerPurchaseImpl implements OperationHandler {
+    private final FruitDao fruitDao = new FruitDaoImpl();
+
     @Override
-    public Fruit apply(Fruit fruit, int amount) {
+    public void apply(Fruit fruit, int amount) {
         if (new StorageImpl().getStorage().containsKey(fruit)) {
-            int balance = new StorageImpl().getStorage().get(fruit);
-            if (new StorageImpl().getStorage().get(fruit) < amount) {
+            int balance = fruitDao.getAmountCurrentFruitInShop(fruit);
+            if (balance < amount) {
                 throw new RuntimeException("There is not enough fruits in the shop. Balance:"
-                        + new StorageImpl().getStorage().get(fruit)
+                        + fruitDao.getAmountCurrentFruitInShop(fruit)
                         + " You want purchase: " + amount);
             } else {
-                new StorageImpl().getStorage().replace(fruit, balance - amount);
-                return fruit;
+                fruitDao.update(fruit, balance - amount);
             }
         } else {
             throw new RuntimeException("There is not current fruit in the shop: " + fruit);
         }
-
     }
 }
