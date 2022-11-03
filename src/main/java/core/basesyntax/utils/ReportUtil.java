@@ -11,7 +11,7 @@ public class ReportUtil {
     public List<String> generateReport(StorageDao storageDao) {
         List<String> reportList = new ArrayList<>();
         reportList.add(CSV_OUTPUT_HEADER);
-        storageDao.getStorage().forEach((key, value) -> reportList.add(key + SEPARATOR + value));
+        storageDao.getAll().forEach((key, value) -> reportList.add(key + SEPARATOR + value));
         return reportList;
     }
 }

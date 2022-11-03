@@ -4,8 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface StorageDao {
-
-    Map<String, Integer> getStorage();
+    Map<String, Integer> getAll();
 
     Optional<Integer> getQuantity(String product);
 

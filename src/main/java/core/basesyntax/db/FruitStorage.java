@@ -14,4 +14,3 @@ public class FruitStorage {
         return storage;
     }
 }
-

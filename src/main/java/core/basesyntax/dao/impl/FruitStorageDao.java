@@ -13,7 +13,7 @@ public class FruitStorageDao implements StorageDao {
     }
 
     @Override
-    public Map<String, Integer> getStorage() {
+    public Map<String, Integer> getAll() {
         return storage.getStorage();
     }
 
