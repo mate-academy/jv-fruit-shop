@@ -1,11 +1,11 @@
-package services.impl;
+package service.impl;
 
 import db.Storage;
 import java.util.List;
 import models.Fruit;
 import models.FruitTransaction;
-import services.TransactionService;
-import strategies.OperationStrategy;
+import service.TransactionService;
+import strategy.OperationStrategy;
 
 public class TransactionServiceImpl implements TransactionService {
     private OperationStrategy operationStrategy;

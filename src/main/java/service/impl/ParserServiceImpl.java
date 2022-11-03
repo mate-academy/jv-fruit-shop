@@ -1,10 +1,10 @@
-package services.impl;
+package service.impl;
 
 import java.util.LinkedList;
 import java.util.List;
 import models.Fruit;
 import models.FruitTransaction;
-import services.ParserService;
+import service.ParserService;
 
 public class ParserServiceImpl implements ParserService {
     private static final String SPLITERATOR = ",";

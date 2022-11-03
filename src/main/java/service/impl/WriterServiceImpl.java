@@ -1,9 +1,9 @@
-package services.impl;
+package service.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import services.WriterService;
+import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
     @Override

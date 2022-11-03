@@ -1,4 +1,4 @@
-package services.operationhandler;
+package service.handler;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
