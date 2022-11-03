@@ -3,7 +3,7 @@ package core.basesyntax.dao;
 import core.basesyntax.model.Fruit;
 
 public interface FruitStorageDao {
-    Integer getValue(Fruit key);
+    Integer getQuantity(Fruit fruit);
 
-    Integer put(Fruit key, Integer value);
+    Integer put(Fruit fruit, Integer quantity);
 }

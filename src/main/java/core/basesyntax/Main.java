@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
@@ -15,9 +16,9 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationBalance;
 import core.basesyntax.strategy.impl.OperationPurchase;
+import core.basesyntax.strategy.impl.OperationReturn;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.OperationSupply;
-import core.basesyntax.strategy.impl.OperrationReturn;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,15 +29,19 @@ public class Main {
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationServiceMap = new HashMap<>();
-        operationServiceMap.put(FruitTransaction.Operation.BALANCE, new OperationBalance());
-        operationServiceMap.put(FruitTransaction.Operation.SUPPLY, new OperationSupply());
-        operationServiceMap.put(FruitTransaction.Operation.RETURN, new OperrationReturn());
-        operationServiceMap.put(FruitTransaction.Operation.PURCHASE, new OperationPurchase());
+        operationServiceMap.put(FruitTransaction.Operation.BALANCE,
+                new OperationBalance(new FruitStorageDaoImpl()));
+        operationServiceMap.put(FruitTransaction.Operation.SUPPLY,
+                new OperationSupply(new FruitStorageDaoImpl()));
+        operationServiceMap.put(FruitTransaction.Operation.RETURN,
+                new OperationReturn(new FruitStorageDaoImpl()));
+        operationServiceMap.put(FruitTransaction.Operation.PURCHASE,
+                new OperationPurchase(new FruitStorageDaoImpl()));
 
         FileReader reader = new FileReaderImpl();
         List<String> fromFile = reader.readFromFile(READ_FROM_FILE_PATH);
-        for (String s : fromFile) {
-            System.out.println(s);
+        for (String line : fromFile) {
+            System.out.println(line);
         }
         System.out.println("=================");
         List<FruitTransaction> transactions =

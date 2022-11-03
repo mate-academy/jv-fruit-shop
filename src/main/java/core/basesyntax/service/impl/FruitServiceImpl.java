@@ -15,7 +15,7 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public void doOperation(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.stream()
-                .forEach(i -> operationStrategy.getOperation(i.getOperation())
-                        .operationWithFruitTransaction(i));
+                .forEach(transaction -> operationStrategy.getOperation(transaction.getOperation())
+                        .operationWithFruitTransaction(transaction));
     }
 }
