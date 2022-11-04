@@ -4,14 +4,15 @@ import dao.impl.StorageDaoImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import service.CsvReaderService;
-import service.CsvWriterService;
-import service.ReportCreateService;
-import service.TransactionToDataBase;
-import sevice.impl.CsvReader;
-import sevice.impl.CsvWriter;
+import service.FileReaderService;
+import service.FileWriterService;
+import service.ReportService;
+import service.TransactionService;
+import sevice.impl.FileReader;
+import sevice.impl.FileWriter;
 import sevice.impl.ReportCreator;
-import sevice.impl.TransactionToDataBaseImpl;
+import sevice.impl.TransactionServiceImpl;
+import strategy.ChooserStrategy;
 import strategy.TransactionStrategy;
 import strategy.strategyimpl.BalanceTransaction;
 import strategy.strategyimpl.PurchaseTransaction;
@@ -34,13 +35,15 @@ public class Main {
         strategyMap.put(SUPPLY, new SupplyTransaction(storageDao));
         strategyMap.put(PURCHASE, new PurchaseTransaction(storageDao));
         strategyMap.put(RETURN, new ReturnTransaction(storageDao));
-        CsvReaderService reader = new CsvReader();
+        FileReaderService reader = new FileReader();
         List<String> transaction = reader.readFromFile(DATA_FILE);
-        TransactionToDataBase transactionsToFile = new TransactionToDataBaseImpl(SPLITTER);
+        ChooserStrategy chooserStrategy = new ChooserStrategy(strategyMap);
+        TransactionService transactionsToFile =
+                new TransactionServiceImpl(SPLITTER, chooserStrategy);
         transactionsToFile.transactionToDataBase(transaction, strategyMap);
-        ReportCreateService reportCreator = new ReportCreator(storageDao);
+        ReportService reportCreator = new ReportCreator(storageDao);
         List<String> report = reportCreator.createReport();
-        CsvWriterService writer = new CsvWriter();
+        FileWriterService writer = new FileWriter();
         writer.writeToFile(RESULT_FILE, report);
     }
 }

@@ -2,17 +2,19 @@ package sevice.impl;
 
 import java.util.List;
 import java.util.Map;
-import service.TransactionToDataBase;
+import service.TransactionService;
+import strategy.ChooserStrategy;
 import strategy.TransactionStrategy;
 
-public class TransactionToDataBaseImpl implements TransactionToDataBase {
-    private static final int INDEX_OF_TRANSACTION = 0;
+public class TransactionServiceImpl implements TransactionService {
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_QUANTITY = 2;
     private String spliterator;
+    private ChooserStrategy chooserStrategy;
 
-    public TransactionToDataBaseImpl(String spliterator) {
+    public TransactionServiceImpl(String spliterator, ChooserStrategy chooserStrategy) {
         this.spliterator = spliterator;
+        this.chooserStrategy = chooserStrategy;
     }
 
     @Override
@@ -23,8 +25,7 @@ public class TransactionToDataBaseImpl implements TransactionToDataBase {
         }
         data.stream()
                 .map(s -> s.split(spliterator))
-                .forEach(s -> strategyMap.get(s[INDEX_OF_TRANSACTION])
-                                .doTransaction(s[INDEX_OF_FRUIT],
+                .forEach(s -> chooserStrategy.getStrategy(s).apply(s[INDEX_OF_FRUIT],
                         Integer.parseInt(s[INDEX_OF_QUANTITY])));
         return true;
     }

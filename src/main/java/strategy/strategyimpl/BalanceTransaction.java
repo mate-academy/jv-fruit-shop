@@ -11,7 +11,7 @@ public class BalanceTransaction implements TransactionStrategy {
     }
 
     @Override
-    public void doTransaction(String fruit, int quantity) {
+    public void apply(String fruit, int quantity) {
         storageDao.add(fruit, quantity);
     }
 }

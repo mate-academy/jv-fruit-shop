@@ -2,9 +2,9 @@ package sevice.impl;
 
 import dao.StorageDao;
 import java.util.List;
-import service.ReportCreateService;
+import service.ReportService;
 
-public class ReportCreator implements ReportCreateService {
+public class ReportCreator implements ReportService {
     private StorageDao storageDao;
 
     public ReportCreator(StorageDao storageDao) {

@@ -11,7 +11,7 @@ public class SupplyTransaction implements TransactionStrategy {
     }
 
     @Override
-    public void doTransaction(String fruit, int quantity) {
+    public void apply(String fruit, int quantity) {
         if (!storageDao.hasFruit(fruit)) {
             storageDao.add(fruit, quantity);
         } else {

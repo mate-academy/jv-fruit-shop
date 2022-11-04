@@ -12,7 +12,7 @@ public class PurchaseTransaction implements TransactionStrategy {
     }
 
     @Override
-    public void doTransaction(String fruit, int quantity) {
+    public void apply(String fruit, int quantity) {
         if (!storageDao.hasFruit(fruit)) {
             throw new NoSuchElementException("There is no such fruit" + fruit);
         }

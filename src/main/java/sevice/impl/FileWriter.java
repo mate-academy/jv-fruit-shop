@@ -6,9 +6,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
-import service.CsvWriterService;
+import service.FileWriterService;
 
-public class CsvWriter implements CsvWriterService {
+public class FileWriter implements FileWriterService {
     private static final int HEADER_INDEX = 0;
     private static final String HEADER = "fruit,quantity" + System.lineSeparator();
 

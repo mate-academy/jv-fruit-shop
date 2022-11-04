@@ -5,9 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
-import service.CsvReaderService;
+import service.FileReaderService;
 
-public class CsvReader implements CsvReaderService {
+public class FileReader implements FileReaderService {
 
     public List<String> readFromFile(String filePath) {
         List<String> dataFromFile;

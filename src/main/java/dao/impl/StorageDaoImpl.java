@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StorageDaoImpl implements StorageDao {
+    private static final String SEPEARATOR = ",";
+
     @Override
     public int get(String fruit) {
         return DataBase.storage.get(fruit);
@@ -17,7 +19,7 @@ public class StorageDaoImpl implements StorageDao {
     public List<String> getAll() {
         return DataBase.storage.entrySet()
                 .stream()
-                .map(i -> i.getKey() + "," + i.getValue() + System.lineSeparator())
+                .map(i -> i.getKey() + SEPEARATOR + i.getValue() + System.lineSeparator())
                 .collect(Collectors.toList());
     }
 
