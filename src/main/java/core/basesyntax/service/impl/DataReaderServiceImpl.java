@@ -12,7 +12,7 @@ public class DataReaderServiceImpl implements DataReaderService {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("", e);
+            throw new RuntimeException("Can't read file " + filePath, e);
         }
     }
 }
