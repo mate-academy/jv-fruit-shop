@@ -12,6 +12,6 @@ public class OperationTypeIdentifierImpl implements OperationTypeIdentifier {
                 return operationType;
             }
         }
-        throw new RuntimeException("");
+        throw new RuntimeException("No such operation type: " + inputOperation);
     }
 }

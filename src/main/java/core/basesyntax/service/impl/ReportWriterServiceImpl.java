@@ -11,7 +11,7 @@ public class ReportWriterServiceImpl implements ReportWriterService {
         try {
             Files.writeString(Path.of(path), report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write report to file", e);
+            throw new RuntimeException("Can't write report to file " + path, e);
         }
     }
 }

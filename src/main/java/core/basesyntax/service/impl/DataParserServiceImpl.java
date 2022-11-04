@@ -8,6 +8,7 @@ import java.util.List;
 
 public class DataParserServiceImpl implements DataParserService {
     private static final String COMMA = ",";
+    private static final int FIRST_OPERATION_INDEX= 1;
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -16,7 +17,7 @@ public class DataParserServiceImpl implements DataParserService {
     public List<FruitTransaction> getFruitsToList(List<String> linesFromInputFile) {
         List<FruitTransaction> fruitTransactionsList = new ArrayList<>();
         OperationTypeIdentifier operationTypeIdentifier = new OperationTypeIdentifierImpl();
-        for (int i = 1; i < linesFromInputFile.size(); i++) {
+        for (int i = FIRST_OPERATION_INDEX; i < linesFromInputFile.size(); i++) {
             String[] fruitTransactionAttributes = linesFromInputFile.get(i).split(COMMA);
             FruitTransaction.Operation operation = operationTypeIdentifier
                     .identifyOperationType(fruitTransactionAttributes[OPERATION_INDEX]);
