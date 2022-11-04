@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface OperationHandler {
-    int newAmount(int oldAmount, int quantityFromTransaction);
+    int handle(int oldAmount, int quantityFromTransaction);
 }

@@ -13,7 +13,7 @@ public class OperationStrategy {
         this.operationHandlerMap = operationServiceMap;
     }
 
-    public core.basesyntax.service.OperationHandler get(FruitTransaction.Operation operation) {
+    public OperationHandler get(FruitTransaction.Operation operation) {
         return operationHandlerMap.get(operation);
     }
 }

@@ -14,10 +14,10 @@ import core.basesyntax.service.impl.MakerTransactionsImpl;
 import core.basesyntax.service.impl.ParserDataImpl;
 import core.basesyntax.service.impl.ReaderFromCsvService;
 import core.basesyntax.service.impl.WriterToCsvService;
-import core.basesyntax.service.impl.operation.service.BalanceHandler;
-import core.basesyntax.service.impl.operation.service.PurchaserHandler;
-import core.basesyntax.service.impl.operation.service.ReturnerHandler;
-import core.basesyntax.service.impl.operation.service.SupplierHandler;
+import core.basesyntax.service.impl.operation.service.BalanceOperationHandler;
+import core.basesyntax.service.impl.operation.service.PurchaserOperationHandler;
+import core.basesyntax.service.impl.operation.service.ReturnerOperationHandler;
+import core.basesyntax.service.impl.operation.service.SupplierOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.List;
@@ -29,10 +29,11 @@ public class Main {
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaserHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnerHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplierHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaserOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnerOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplierOperationHandler());
         ReaderService readerService = new ReaderFromCsvService();
         List<String> data = readerService.readData(INPUT_FILE_NAME);
         ParserData parserData = new ParserDataImpl();

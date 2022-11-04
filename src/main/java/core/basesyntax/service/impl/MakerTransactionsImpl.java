@@ -21,6 +21,6 @@ public class MakerTransactionsImpl implements MakerTransaction {
         transactions.stream()
                 .forEach(t -> fruitsDao.save(t.getFruit(),
                         operationStrategy.get(t.getOperation())
-                                .newAmount(fruitsDao.get(t.getFruit()), t.getQuantity())));
+                                .handle(fruitsDao.get(t.getFruit()), t.getQuantity())));
     }
 }
