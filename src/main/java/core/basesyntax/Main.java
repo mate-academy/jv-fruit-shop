@@ -35,7 +35,7 @@ public class Main {
                 new SupplyOperationStrategy());
         List<String> dataLines = new DataReaderServiceImpl().readFile(INPUT);
         List<FruitTransaction> fruitTransactionsList = new DataParserServiceImpl()
-                .getFruitsToList(dataLines);
+                .parseFruits(dataLines);
         OperationStrategy operationStrategy =
                 new OperationStrategyImpl(operationStrategyMap);
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
