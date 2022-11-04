@@ -25,9 +25,10 @@ public class Main {
 
         CsvFileReaderImpl fileReader = new CsvFileReaderImpl();
         TransactionProcessorImpl transactionProcessor = new TransactionProcessorImpl();
-        transactionProcessor.processingData(fileReader.getAcceptedFileAsList(), strategy);
+        transactionProcessor.processingData(fileReader
+                .getAcceptedFileAsList("src/source/input.csv"), strategy);
 
         CsvFileWriterImpl fileWriter = new CsvFileWriterImpl();
-        fileWriter.createReportFile(new StorageImpl().getStorageAsList());
+        fileWriter.createReportFile("src/report.csv", new StorageImpl().getStorageAsList());
     }
 }
