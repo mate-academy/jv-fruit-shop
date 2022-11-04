@@ -1,8 +1,8 @@
 package core.basesyntax.servises;
 
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.models.FruitTransaction;
 import java.util.List;
 
 public interface ParselToTransition {
-    List<FruitTransition> parseToFruit(List<String> list);
+    List<FruitTransaction> interfaceTransactionParser(List<String> list);
 }

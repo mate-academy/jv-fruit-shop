@@ -2,22 +2,22 @@ package core.basesyntax;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
-import core.basesyntax.handler.Handler;
-import core.basesyntax.handler.impl.Balance;
-import core.basesyntax.handler.impl.Purchase;
-import core.basesyntax.handler.impl.Return;
-import core.basesyntax.handler.impl.Supply;
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.handler.OperationHandler;
+import core.basesyntax.handler.impl.BalanceHandler;
+import core.basesyntax.handler.impl.PurchaseHandler;
+import core.basesyntax.handler.impl.ReturnHandler;
+import core.basesyntax.handler.impl.SupplyHandler;
+import core.basesyntax.models.FruitTransaction;
+import core.basesyntax.servises.FileReader;
+import core.basesyntax.servises.FileWriter;
 import core.basesyntax.servises.FruitService;
 import core.basesyntax.servises.ParselToTransition;
-import core.basesyntax.servises.ReadFromFile;
 import core.basesyntax.servises.ReportCreator;
-import core.basesyntax.servises.WriteToFile;
+import core.basesyntax.servises.impl.FileReaderImpl;
+import core.basesyntax.servises.impl.FileWriterImpl;
 import core.basesyntax.servises.impl.FruitServiceImpl;
 import core.basesyntax.servises.impl.ParseToTransitionImpl;
-import core.basesyntax.servises.impl.ReadFromFileImpl;
 import core.basesyntax.servises.impl.ReportCreatorImpl;
-import core.basesyntax.servises.impl.WriteToFileImpl;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.impl.StrategyImpl;
 import java.util.HashMap;
@@ -31,26 +31,26 @@ public class Main {
     public static void main(String[] args) {
         StorageDao dao = new StorageDaoImpl();
 
-        Map<FruitTransition.Operation, Handler> handlerMap = new HashMap<>();
-        handlerMap.put(FruitTransition.Operation.BALANCE, new Balance(dao));
-        handlerMap.put(FruitTransition.Operation.RETURN, new Return(dao));
-        handlerMap.put(FruitTransition.Operation.SUPPLY, new Supply(dao));
-        handlerMap.put(FruitTransition.Operation.PURCHASE, new Purchase(dao));
+        Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
+        handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(dao));
+        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(dao));
+        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(dao));
+        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(dao));
 
-        ReadFromFile read = new ReadFromFileImpl();
+        FileReader read = new FileReaderImpl();
         List<String> strings = read.readFromFile(PATH_FROM);
 
         ParselToTransition parse = new ParseToTransitionImpl();
-        List<FruitTransition> fruitTransitions = parse.parseToFruit(strings);
+        List<FruitTransaction> fruitTransitions = parse.interfaceTransactionParser(strings);
 
         Strategy strategy = new StrategyImpl(handlerMap);
         FruitService fruitTransition = new FruitServiceImpl(strategy);
-        fruitTransition.doOperationService(fruitTransitions);
+        fruitTransition.applyTransaction(fruitTransitions);
 
         ReportCreator creator = new ReportCreatorImpl();
         String report = creator.createReport();
 
-        WriteToFile writeToFile = new WriteToFileImpl();
+        FileWriter writeToFile = new FileWriterImpl();
         writeToFile.write(report, OUTPUT_FILE);
 
     }

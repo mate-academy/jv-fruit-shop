@@ -1,8 +1,8 @@
 package core.basesyntax.servises;
 
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.models.FruitTransaction;
 import java.util.List;
 
 public interface FruitService {
-    public void doOperationService(List<FruitTransition> list);
+    public void applyTransaction(List<FruitTransaction> list);
 }

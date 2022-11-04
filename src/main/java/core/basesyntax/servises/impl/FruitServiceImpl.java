@@ -1,6 +1,6 @@
 package core.basesyntax.servises.impl;
 
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.servises.FruitService;
 import core.basesyntax.strategy.Strategy;
 import java.util.List;
@@ -13,8 +13,8 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void doOperationService(List<FruitTransition> list) {
+    public void applyTransaction(List<FruitTransaction> list) {
         list.stream().forEach(i -> strategy.get(i.getOperation())
-                .doOperation(i));
+                .handle(i));
     }
 }

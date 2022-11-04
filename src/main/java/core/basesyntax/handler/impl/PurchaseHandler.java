@@ -1,18 +1,18 @@
 package core.basesyntax.handler.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.handler.Handler;
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.handler.OperationHandler;
+import core.basesyntax.models.FruitTransaction;
 
-public class Purchase implements Handler {
+public class PurchaseHandler implements OperationHandler {
     private StorageDao dao;
 
-    public Purchase(StorageDao dao) {
+    public PurchaseHandler(StorageDao dao) {
         this.dao = dao;
     }
 
     @Override
-    public void doOperation(FruitTransition transition) {
+    public void handle(FruitTransaction transition) {
         if (dao.getFromStorage(transition.getFruit()) >= transition.getAmount()) {
             dao.addToStorage(transition.getFruit(),
                     dao.getFromStorage(transition.getFruit()) - transition.getAmount());

@@ -3,12 +3,12 @@ package core.basesyntax.models;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class FruitTransition {
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int amount;
 
-    public FruitTransition(Operation operation, String fruit, int amount) {
+    public FruitTransaction(Operation operation, String fruit, int amount) {
         this.operation = operation;
         this.fruit = fruit;
         this.amount = amount;
@@ -46,7 +46,7 @@ public class FruitTransition {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        FruitTransition that = (FruitTransition) o;
+        FruitTransaction that = (FruitTransaction) o;
         return amount == that.amount
                 && Objects.equals(operation, that.operation)
                 && Objects.equals(fruit, that.fruit);

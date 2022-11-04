@@ -10,8 +10,8 @@ public class ReportCreatorImpl implements ReportCreator {
     private static final String SEPARATOR = ",";
     private static final String SYSTEM_SEPARATOR = System.lineSeparator();
     private static final String START = "fruit,quantity";
-    private StorageDao dao = new StorageDaoImpl();
-    private HashMap<String,Integer> storage = dao.getAll();
+    private static final StorageDao dao = new StorageDaoImpl();
+    private static final HashMap<String,Integer> storage = dao.getAll();
 
     @Override
     public String createReport() {

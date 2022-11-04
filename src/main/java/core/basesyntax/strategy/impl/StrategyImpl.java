@@ -1,20 +1,20 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.handler.Handler;
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.handler.OperationHandler;
+import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.strategy.Strategy;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StrategyImpl implements Strategy {
-    private Map<FruitTransition.Operation, Handler> operationsMap = new HashMap<>();
+    private Map<FruitTransaction.Operation, OperationHandler> operationsMap = new HashMap<>();
 
-    public StrategyImpl(Map<FruitTransition.Operation, Handler> operationsMap) {
+    public StrategyImpl(Map<FruitTransaction.Operation, OperationHandler> operationsMap) {
         this.operationsMap = operationsMap;
     }
 
     @Override
-    public Handler get(FruitTransition.Operation operation) {
+    public OperationHandler get(FruitTransaction.Operation operation) {
         return operationsMap.get(operation);
     }
 }
