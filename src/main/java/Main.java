@@ -12,7 +12,7 @@ import sevice.impl.FileReader;
 import sevice.impl.FileWriter;
 import sevice.impl.ReportCreator;
 import sevice.impl.TransactionServiceImpl;
-import strategy.ChooserStrategy;
+import strategy.OperationStrategy;
 import strategy.TransactionStrategy;
 import strategy.strategyimpl.BalanceTransaction;
 import strategy.strategyimpl.PurchaseTransaction;
@@ -37,9 +37,9 @@ public class Main {
         strategyMap.put(RETURN, new ReturnTransaction(storageDao));
         FileReaderService reader = new FileReader();
         List<String> transaction = reader.readFromFile(DATA_FILE);
-        ChooserStrategy chooserStrategy = new ChooserStrategy(strategyMap);
+        OperationStrategy operationStrategy = new OperationStrategy(strategyMap);
         TransactionService transactionsToFile =
-                new TransactionServiceImpl(SPLITTER, chooserStrategy);
+                new TransactionServiceImpl(SPLITTER, operationStrategy);
         transactionsToFile.transactionToDataBase(transaction, strategyMap);
         ReportService reportCreator = new ReportCreator(storageDao);
         List<String> report = reportCreator.createReport();
