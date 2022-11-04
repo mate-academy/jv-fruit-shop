@@ -14,7 +14,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public void processFruitTransaction(FruitTransaction fruitTransaction) {
+    public void getOperation(FruitTransaction fruitTransaction) {
         operationStrategyMap.get(fruitTransaction.getOperation())
                 .processFruitTransactionOperation(fruitTransaction);
     }
