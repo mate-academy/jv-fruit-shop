@@ -13,7 +13,7 @@ public class WriteToFileImpl implements WriteToFile {
         Path filePath = Path.of(path);
         try {
             Files.write(filePath, report.getBytes(StandardCharsets.UTF_8));
-            return filePath.toString();
+            return "Data was written to file " + filePath;
         } catch (IOException e) {
             throw new RuntimeException("Can`t write to file: " + path, e);
         }

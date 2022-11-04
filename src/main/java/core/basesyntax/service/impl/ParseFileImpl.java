@@ -13,16 +13,17 @@ public class ParseFileImpl implements ParseFile {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parseData(List<String> input) {
-        input.remove(INDEX_FIRST_LINE);
+    public List<FruitTransaction> parseData(List<String> data) {
+        data.remove(INDEX_FIRST_LINE);
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        input.stream()
+        data.stream()
                 .map(s -> s.split(COMMA))
                 .forEach(strings -> fruitTransactionList
-                        .add(new FruitTransaction(FruitTransaction
-                                .findOperation(strings[OPERATION_INDEX]),
+                        .add(new FruitTransaction(
+                                FruitTransaction.findOperation(strings[OPERATION_INDEX]),
                                 strings[FRUIT_TYPE_INDEX],
                                 Integer.parseInt(strings[QUANTITY_INDEX]))));
         return fruitTransactionList;
+
     }
 }

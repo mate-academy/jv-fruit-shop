@@ -15,7 +15,10 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
         return HEAD_LINE + storage.getFruitStorage()
                 .entrySet()
                 .stream()
-                .map(i -> i.getKey() + COMMA + i.getValue())
+                .map(r -> System.lineSeparator()
+                        + r.getKey()
+                        + COMMA
+                        + r.getValue())
                 .collect(Collectors.joining());
     }
 }
