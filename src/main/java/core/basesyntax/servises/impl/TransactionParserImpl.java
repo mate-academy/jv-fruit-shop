@@ -1,11 +1,11 @@
 package core.basesyntax.servises.impl;
 
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.servises.ParselToTransition;
+import core.basesyntax.servises.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseToTransitionImpl implements ParselToTransition {
+public class TransactionParserImpl implements TransactionParser {
     private static final String SPLIT = ",";
     private static final int OPERAION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;

@@ -11,13 +11,13 @@ import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.servises.FileReader;
 import core.basesyntax.servises.FileWriter;
 import core.basesyntax.servises.FruitService;
-import core.basesyntax.servises.ParselToTransition;
 import core.basesyntax.servises.ReportCreator;
+import core.basesyntax.servises.TransactionParser;
 import core.basesyntax.servises.impl.FileReaderImpl;
 import core.basesyntax.servises.impl.FileWriterImpl;
 import core.basesyntax.servises.impl.FruitServiceImpl;
-import core.basesyntax.servises.impl.ParseToTransitionImpl;
 import core.basesyntax.servises.impl.ReportCreatorImpl;
+import core.basesyntax.servises.impl.TransactionParserImpl;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.impl.StrategyImpl;
 import java.util.HashMap;
@@ -40,7 +40,7 @@ public class Main {
         FileReader read = new FileReaderImpl();
         List<String> strings = read.readFromFile(PATH_FROM);
 
-        ParselToTransition parse = new ParseToTransitionImpl();
+        TransactionParser parse = new TransactionParserImpl();
         List<FruitTransaction> fruitTransitions = parse.interfaceTransactionParser(strings);
 
         Strategy strategy = new StrategyImpl(handlerMap);
