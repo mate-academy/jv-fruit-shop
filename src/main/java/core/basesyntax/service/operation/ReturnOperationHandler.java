@@ -1,13 +1,16 @@
-package core.basesyntax.service.operations;
+package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 
 public class ReturnOperationHandler implements OperationHandler {
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao;
+
+    public ReturnOperationHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
     public void getOperation(FruitTransaction fruitTransaction) {

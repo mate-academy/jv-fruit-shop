@@ -7,11 +7,13 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-    private final ProcessDataService processDataService = new ProcessDataServiceImpl();
+    private final ProcessDataService processDataService;
     private final OperationStrategy operationStrategy;
 
-    public FruitServiceImpl(OperationStrategy operationStrategy) {
+    public FruitServiceImpl(OperationStrategy operationStrategy,
+                            ProcessDataService processDataService) {
         this.operationStrategy = operationStrategy;
+        this.processDataService = processDataService;
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class ProcessDataServiceImpl implements ProcessDataService {
         File file = new File(filePath);
         List<String> inputData;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            inputData = Files.readAllLines(file.toPath());
+            inputData = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't read the file", e);
         }

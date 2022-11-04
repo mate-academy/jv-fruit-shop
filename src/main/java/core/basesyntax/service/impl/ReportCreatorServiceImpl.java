@@ -1,15 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ReportGenerationService;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import core.basesyntax.service.ReportCreatorService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportGenerationServiceImpl implements ReportGenerationService {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String LINE_SEPARATOR = ",";
     private static final String REPORT_HEAD = "fruit,quantity\n";
 
@@ -26,18 +22,5 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
                     .toString());
         }
         return reportList;
-    }
-
-    @Override
-    public void saveReport(List<String> reportList, String toFilePath) {
-        File report = new File(toFilePath);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(report, true))) {
-            for (String line : reportList) {
-                bufferedWriter.write(line);
-                bufferedWriter.flush();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Cannot write data to file", e);
-        }
     }
 }
