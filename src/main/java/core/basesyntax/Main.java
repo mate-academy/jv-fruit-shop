@@ -1,13 +1,15 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.ReportWriterService;
+import core.basesyntax.service.impl.DataProcessServiceImpl;
+import core.basesyntax.service.impl.DataReaderServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.service.impl.ProcessDataServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.service.impl.ReportWriterServiceImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
@@ -25,19 +27,20 @@ public class Main {
     private static final String TO_FILE_PATH = "src/main/resources/reportExample.csv";
 
     public static void main(String[] args) {
+        FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> fruitTransactionMap = new HashMap<>();
         fruitTransactionMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler(new FruitDaoImpl()));
+                new BalanceOperationHandler(fruitDao));
         fruitTransactionMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler(new FruitDaoImpl()));
+                new SupplyOperationHandler(fruitDao));
         fruitTransactionMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler(new FruitDaoImpl()));
+                new PurchaseOperationHandler(fruitDao));
         fruitTransactionMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler(new FruitDaoImpl()));
+                new ReturnOperationHandler(fruitDao));
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(fruitTransactionMap);
         FruitService fruitService = new FruitServiceImpl(operationStrategy,
-                new ProcessDataServiceImpl());
+                new DataReaderServiceImpl(), new DataProcessServiceImpl());
         fruitService.calculateFruits(FROM_FILE_PATH);
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
         List<String> reportList = reportCreatorService.createReport(new FruitDaoImpl().getAll());
