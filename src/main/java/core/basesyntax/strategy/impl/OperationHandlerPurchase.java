@@ -14,7 +14,7 @@ public class OperationHandlerPurchase implements OperationHandler {
     @Override
     public void valueOperation(String key, int value) {
         int oldValue = storage.getFruitBalance(key);
-        int newValue = oldValue + value;
+        int newValue = oldValue - value;
         storage.addFruit(key, newValue);
     }
 }
