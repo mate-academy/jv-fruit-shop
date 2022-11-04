@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class FruitDaoImpl implements FruitsDao {
     @Override
-    public void put(String fruitName, int amount) {
+    public void save(String fruitName, int amount) {
         Storage.fruitsStorage.put(fruitName, amount);
     }
 
@@ -18,7 +18,7 @@ public class FruitDaoImpl implements FruitsDao {
     }
 
     @Override
-    public Set<Map.Entry<String, Integer>> getEntrySet() {
+    public Set<Map.Entry<String, Integer>> getAll() {
         return Storage.fruitsStorage.entrySet();
     }
 

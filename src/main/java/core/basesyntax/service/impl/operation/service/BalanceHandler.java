@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl.operation.service;
 
-import core.basesyntax.service.OperationService;
+import core.basesyntax.service.OperationHandler;
 
-public class ReturnerService implements OperationService {
+public class BalanceHandler implements OperationHandler {
     @Override
     public int newAmount(int oldAmount, int quantityFromTransaction) {
         return oldAmount + quantityFromTransaction;
