@@ -13,9 +13,6 @@ import core.basesyntax.strategy.operation.impl.BalanceOperationImpl;
 import core.basesyntax.strategy.operation.impl.PurchaseOperationImpl;
 import core.basesyntax.strategy.operation.impl.ReturnOperationImpl;
 import core.basesyntax.strategy.operation.impl.SupplyOperationImpl;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +28,7 @@ public class FileServiceImpl implements FileService {
         return toFile;
     }
 
-    public void doTransaction() {
+    public Map<String, OperationHandler> prepareAndGetOperationData() {
         Map<String, OperationHandler> operationServiceMap = new HashMap<>();
         operationServiceMap.put(Operation.BALANCE.getOperation(),
                 new BalanceOperationImpl());
@@ -41,23 +38,32 @@ public class FileServiceImpl implements FileService {
                 new PurchaseOperationImpl());
         operationServiceMap.put(Operation.RETURN.getOperation(),
                 new ReturnOperationImpl());
-        ReaderService readerService;
-        String readData;
-        readerService = new FileReaderServiceImpl();
-        readData = readerService.read();
+        return operationServiceMap;
+    }
+
+    public String readData() {
+        ReaderService readerService = new FileReaderServiceImpl();
+        return readerService.read();
+    }
+
+    public String processFruitsData(Map<String, OperationHandler> operationServiceMap,
+                                    String data) {
+        if (operationServiceMap == null || data == null || data.isBlank()) {
+            throw new IllegalArgumentException("Input data is not correct");
+        }
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationServiceMap);
         DataTransactionParser dataTransactionParser =
                 new DataTransactionParserImpl(operationStrategy);
-        Map<String, Integer> parseDataMap = dataTransactionParser.parseDataTransaction(readData);
+        Map<String, Integer> parseDataMap = dataTransactionParser.parseDataTransaction(data);
         ReportGeneratorService generatorService = new ReportGeneratorServiceImpl();
-        String report = generatorService.generateReport(parseDataMap);
-        WriterService writerService;
-        try {
-            writerService = new FileWriterServiceImpl(
-                    new BufferedWriter(new FileWriter(toFile)));
-            writerService.write(report);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file: ", e);
+        return generatorService.generateReport(parseDataMap);
+    }
+
+    public void createResultFile(String report) {
+        if (report == null || report.isBlank()) {
+            throw new IllegalArgumentException("Input data is not correct");
         }
+        WriterService writerService = new FileWriterServiceImpl();
+        writerService.write(report);
     }
 }

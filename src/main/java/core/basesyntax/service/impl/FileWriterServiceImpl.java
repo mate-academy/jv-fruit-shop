@@ -8,11 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriterServiceImpl implements WriterService {
-    private final BufferedWriter bufferedWriter;
-
-    public FileWriterServiceImpl(BufferedWriter bufferedWriter) {
-        this.bufferedWriter = bufferedWriter;
-    }
 
     @Override
     public void write(String generatedData) {
