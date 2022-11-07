@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static core.basesyntax.service.impl.FileServiceImpl.getToFile;
-
 import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,8 +8,8 @@ import java.io.IOException;
 public class FileWriterServiceImpl implements WriterService {
 
     @Override
-    public void write(String generatedData) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(getToFile()))) {
+    public void write(String generatedData, String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(generatedData);
             writer.flush();
         } catch (IOException e) {

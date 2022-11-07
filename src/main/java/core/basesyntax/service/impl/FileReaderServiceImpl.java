@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import static core.basesyntax.service.impl.FileServiceImpl.getFromFile;
-
 import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,9 +8,9 @@ import java.io.IOException;
 public class FileReaderServiceImpl implements ReaderService {
 
     @Override
-    public String read() {
+    public String read(String filePath) {
         StringBuilder builder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(getFromFile()))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line = reader.readLine();
             while (line != null) {
                 builder.append(line).append(System.lineSeparator());

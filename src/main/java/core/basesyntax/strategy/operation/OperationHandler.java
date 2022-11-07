@@ -3,7 +3,7 @@ package core.basesyntax.strategy.operation;
 import core.basesyntax.db.Storage;
 
 public interface OperationHandler {
-    void getResultBalance(String fruitName, int value);
+    void applyOperation(String fruitName, int value);
 
     default Integer getBalanceFromFruitName(String fruitName) {
         return Storage.FRUIT_STORAGE.get(fruitName);

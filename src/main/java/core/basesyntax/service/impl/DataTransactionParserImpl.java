@@ -26,7 +26,7 @@ public class DataTransactionParserImpl implements DataTransactionParser {
             String fruitName = arrWithOperatorAndFruitQuantity[FRUIT_NAME_INDEX];
             String quantity = arrWithOperatorAndFruitQuantity[QUANTITY_INDEX];
             OperationHandler operationHandler = operationStrategy.getOperation(operation);
-            operationHandler.getResultBalance(fruitName, Integer.parseInt(quantity));
+            operationHandler.applyOperation(fruitName, Integer.parseInt(quantity));
         }
         return Storage.FRUIT_STORAGE;
     }

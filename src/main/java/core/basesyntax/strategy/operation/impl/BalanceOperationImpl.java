@@ -4,7 +4,7 @@ import core.basesyntax.strategy.operation.OperationHandler;
 
 public class BalanceOperationImpl implements OperationHandler {
     @Override
-    public void getResultBalance(String fruitName, int value) {
+    public void applyOperation(String fruitName, int value) {
         if (getBalanceFromFruitName(fruitName) == null) {
             putNewBalanceToFruit(fruitName, value);
             return;
