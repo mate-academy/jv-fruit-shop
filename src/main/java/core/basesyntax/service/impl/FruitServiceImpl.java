@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.DataTransactionParser;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReaderService;
@@ -19,7 +20,8 @@ public class FruitServiceImpl implements FruitService {
         if (operationServiceMap == null || data == null || data.isBlank()) {
             throw new IllegalArgumentException("Input data is not correct");
         }
-        Map<String, Integer> parseDataMap = dataTransactionParser.parseDataTransaction(data);
+        dataTransactionParser.parseDataTransaction(data);
+        Map<String, Integer> parseDataMap = Storage.FRUIT_STORAGE;
         ReportGeneratorService generatorService = new ReportGeneratorServiceImpl();
         return generatorService.generateReport(parseDataMap);
     }

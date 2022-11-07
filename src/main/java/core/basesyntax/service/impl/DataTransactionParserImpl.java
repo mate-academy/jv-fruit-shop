@@ -1,10 +1,8 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.DataTransactionParser;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.operation.OperationHandler;
-import java.util.Map;
 
 public class DataTransactionParserImpl implements DataTransactionParser {
     private static final String COMMA = ",";
@@ -18,7 +16,7 @@ public class DataTransactionParserImpl implements DataTransactionParser {
     }
 
     @Override
-    public Map<String, Integer> parseDataTransaction(String data) {
+    public void parseDataTransaction(String data) {
         String[] dataToArray = data.split(System.lineSeparator());
         for (String lineInArr : dataToArray) {
             String[] arrWithOperatorAndFruitQuantity = lineInArr.split(COMMA);
@@ -28,6 +26,5 @@ public class DataTransactionParserImpl implements DataTransactionParser {
             OperationHandler operationHandler = operationStrategy.getOperation(operation);
             operationHandler.applyOperation(fruitName, Integer.parseInt(quantity));
         }
-        return Storage.FRUIT_STORAGE;
     }
 }
