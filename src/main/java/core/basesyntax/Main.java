@@ -41,7 +41,7 @@ public class Main {
         ReportGeneratorService report = new ReportGeneratorServiceImpl();
         String reportText = report.reportGenerate();
         WriteToFile write = new WriteToFileImpl();
-        String writingResult = write.write(reportText, FILE_PATH_WRITE);
+        boolean writingResult = write.write(reportText, FILE_PATH_WRITE);
         System.out.println(writingResult);
     }
 }

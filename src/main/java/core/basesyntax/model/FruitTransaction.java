@@ -14,7 +14,7 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation getOperation() {
+    public Operation getCurrentOperation() {
         return operation;
     }
 

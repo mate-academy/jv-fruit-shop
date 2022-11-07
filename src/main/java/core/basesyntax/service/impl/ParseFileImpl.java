@@ -24,6 +24,5 @@ public class ParseFileImpl implements ParseFile {
                                 strings[FRUIT_TYPE_INDEX],
                                 Integer.parseInt(strings[QUANTITY_INDEX]))));
         return fruitTransactionList;
-
     }
 }

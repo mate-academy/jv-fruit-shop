@@ -15,10 +15,10 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void apply(List<FruitTransaction> transactions) {
-        for (FruitTransaction i : transactions) {
+        for (FruitTransaction transaction : transactions) {
             OperationHandler operationHandler = operationStrategy
-                    .getOperationType(i.getOperation().getOperation());
-            operationHandler.valueOperation(i.getFruit(), i.getQuantity());
+                    .getOperationType(transaction.getCurrentOperation().getOperation());
+            operationHandler.valueOperation(transaction.getFruit(), transaction.getQuantity());
         }
     }
 }
