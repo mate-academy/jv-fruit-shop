@@ -26,6 +26,7 @@ public class Main {
 
     public static void main(String[] args) {
         FileReader readCsv = new FileReaderImp();
+        int a = 0;
         List<String> readFromFileCsv = readCsv.readFromFileCsv(FILE_TO_READ);
         FruitTransactionParser parse = new FruitTransactionParserImpl();
         List<FruitTransaction> list = parse.parseToFruitTransactions(readFromFileCsv);
