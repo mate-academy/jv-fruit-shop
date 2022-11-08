@@ -1,14 +1,10 @@
 package core.basesyntax.service;
 
-import core.basesyntax.strategy.operation.OperationHandler;
-import java.util.Map;
+import core.basesyntax.service.impl.FruitTransaction;
+import java.util.List;
 
 public interface FruitService {
-    String readData(String filePath);
-
-    String processFruitsData(
-            Map<String, OperationHandler> operationServiceMap,
-             String data, DataTransactionParser dataTransactionParser);
+    void applyFruitTransactions(List<FruitTransaction> fruitTransaction);
 
     void createResultFile(String report, String filePath);
 }

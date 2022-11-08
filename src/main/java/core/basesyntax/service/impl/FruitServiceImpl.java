@@ -1,29 +1,19 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.service.DataTransactionParser;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.strategy.operation.OperationHandler;
-import java.util.Map;
+import core.basesyntax.strategy.OperationStrategy;
+import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-    public String readData(String filePath) {
-        ReaderService readerService = new FileReaderServiceImpl();
-        return readerService.read(filePath);
+    private OperationStrategy operationStrategy;
+
+    public FruitServiceImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
     }
 
-    public String processFruitsData(Map<String, OperationHandler> operationServiceMap,
-                                    String data, DataTransactionParser dataTransactionParser) {
-        if (operationServiceMap == null || data == null || data.isBlank()) {
-            throw new IllegalArgumentException("Input data is not correct");
-        }
-        dataTransactionParser.parseDataTransaction(data);
-        Map<String, Integer> parseDataMap = Storage.FRUIT_STORAGE;
-        ReportGeneratorService generatorService = new ReportGeneratorServiceImpl();
-        return generatorService.generateReport(parseDataMap);
+    public void applyFruitTransactions(List<FruitTransaction> fruitTransactions) {
+        fruitTransactions.forEach(operationStrategy::processOperation);
     }
 
     public void createResultFile(String report, String filePath) {
