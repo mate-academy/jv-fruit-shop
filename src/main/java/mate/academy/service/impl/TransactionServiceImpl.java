@@ -7,16 +7,18 @@ import java.util.Map;
 import mate.academy.model.FruitTransaction;
 import mate.academy.service.TransactionService;
 import mate.academy.strategy.ActivityStrategy;
-import mate.academy.strategy.ActivityStrategyImpl;
 import mate.academy.strategy.activities.ActivityHandler;
 
 public class TransactionServiceImpl implements TransactionService {
+    private ActivityStrategy activityStrategy;
+
+    public TransactionServiceImpl(ActivityStrategy activityStrategy) {
+        this.activityStrategy = activityStrategy;
+    }
 
     @Override
     public Map<String, Integer> processedData(
-            List<FruitTransaction> fruitTransactionList,Map<FruitTransaction.Operation,
-            ActivityHandler> activityHandlerMap) {
-        ActivityStrategy activityStrategy = new ActivityStrategyImpl(activityHandlerMap);
+            List<FruitTransaction> fruitTransactionList) {
 
         for (FruitTransaction fruitTransaction :fruitTransactionList) {
             ActivityHandler activityHandler = activityStrategy.get(fruitTransaction.getOperation());

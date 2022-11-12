@@ -3,9 +3,9 @@ package mate.academy.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 import mate.academy.model.FruitTransaction;
-import mate.academy.service.ParseFromString;
+import mate.academy.service.ParseService;
 
-public class ParseFromStringImpl implements ParseFromString {
+public class ParseServiceImpl implements ParseService {
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_QUANTITY = 2;

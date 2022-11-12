@@ -6,14 +6,16 @@ import java.util.Map;
 import mate.academy.model.FruitTransaction;
 import mate.academy.service.FileReaderService;
 import mate.academy.service.FileWriterService;
-import mate.academy.service.ParseFromString;
+import mate.academy.service.ParseService;
 import mate.academy.service.ReportCreatorService;
 import mate.academy.service.TransactionService;
 import mate.academy.service.impl.CsvFileReaderServiceImpl;
 import mate.academy.service.impl.CsvFileWriterServiceImpl;
-import mate.academy.service.impl.ParseFromStringImpl;
+import mate.academy.service.impl.ParseServiceImpl;
 import mate.academy.service.impl.ReportCreatorServiceImpl;
 import mate.academy.service.impl.TransactionServiceImpl;
+import mate.academy.strategy.ActivityStrategy;
+import mate.academy.strategy.ActivityStrategyImpl;
 import mate.academy.strategy.activities.ActivityHandler;
 import mate.academy.strategy.activities.AddActivityHandler;
 import mate.academy.strategy.activities.SubtractActivityHandler;
@@ -32,12 +34,12 @@ public class Main {
         FileReaderService fileReaderService = new CsvFileReaderServiceImpl();
         List<String> dataFromFile = fileReaderService.readFromFile(FILE_NAME);
 
-        ParseFromString parseFromString = new ParseFromStringImpl();
+        ParseService parseFromString = new ParseServiceImpl();
         List<FruitTransaction> fruitTransactions = parseFromString.parse(dataFromFile);
 
-        TransactionService transactionService = new TransactionServiceImpl();
-        Map<String, Integer> fruitsMap = transactionService.processedData(fruitTransactions,
-                activityHandlerMap);
+        ActivityStrategy activityStrategy = new ActivityStrategyImpl(activityHandlerMap);
+        TransactionService transactionService = new TransactionServiceImpl(activityStrategy);
+        Map<String, Integer> fruitsMap = transactionService.processedData(fruitTransactions);
 
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
         String report = reportCreatorService.createReport(fruitsMap);

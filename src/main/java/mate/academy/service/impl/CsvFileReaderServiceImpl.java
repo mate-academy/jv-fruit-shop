@@ -7,7 +7,6 @@ import java.util.List;
 import mate.academy.service.FileReaderService;
 
 public class CsvFileReaderServiceImpl implements FileReaderService {
-
     @Override
     public List<String> readFromFile(String filePath) {
         List<String> dataFromFile;
