@@ -5,8 +5,8 @@ public class FruitTransaction {
     private final String fruit;
     private final Integer quantity;
 
-    public FruitTransaction(String operation, String fruit, Integer quantity) {
-        this.operation = Operation.valueOf(operation);
+    public FruitTransaction(Operation operation, String fruit, Integer quantity) {
+        this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }

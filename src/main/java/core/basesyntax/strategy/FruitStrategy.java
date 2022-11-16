@@ -1,11 +1,18 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.service.FruitTransaction;
-import core.basesyntax.service.StorageService;
+import core.basesyntax.service.FruitTransaction.Operation;
+import java.util.Map;
 
-public class FruitStrategy<FruitTransaction> implements IFruitStrategy<FruitTransaction>{
+public class FruitStrategy implements IFruitStrategy {
+    private final Map<String, Operation> listOperations;
+
+    public FruitStrategy(Map<String, Operation> listOperations) {
+        this.listOperations = listOperations;
+    }
+
     @Override
-    public void add(FruitTransaction fruitTransaction) {
-
+    public FruitTransaction chooseOperation(String operation, String fruit, Integer quantity) {
+        return new FruitTransaction(listOperations.get(operation), fruit, quantity);
     }
 }
