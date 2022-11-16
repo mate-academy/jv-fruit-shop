@@ -27,8 +27,7 @@ public class FruitTransaction {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
-        RETURN("r")
-        ;
+        RETURN("r");
         private final String operation;
         Operation(String op) {
             operation = op;
