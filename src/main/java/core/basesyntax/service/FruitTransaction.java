@@ -1,6 +1,4 @@
-package service;
-
-import jdk.dynalink.Operation;
+package core.basesyntax.service;
 
 public class FruitTransaction {
     private final Operation operation;
@@ -25,7 +23,7 @@ public class FruitTransaction {
         return quantity;
     }
 
-    private enum Operation {
+    public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
