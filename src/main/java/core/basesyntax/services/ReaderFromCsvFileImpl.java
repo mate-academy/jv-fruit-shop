@@ -1,0 +1,18 @@
+package core.basesyntax.services;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.util.List;
+
+public class ReaderFromCsvFileImpl implements ReaderFromCsvFile {
+    @Override
+    public List<String> readFromFile(String filePath) {
+        File file = new File(filePath);
+        try {
+            return Files.readAllLines(file.toPath());
+        }
+        catch (IOException e) {
+            throw new RuntimeException("Transactions file " + filePath + " not found", e);
+        }
+    }
+}
