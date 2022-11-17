@@ -1,10 +1,10 @@
 package core.basesyntax.service.operations;
 
-import core.basesyntax.service.FruitTransaction;
+import static core.basesyntax.db.Storage.storage;
 
 public class Return implements IOperation {
     @Override
-    public FruitTransaction.Operation getOperation() {
-        return FruitTransaction.Operation.RETURN;
+    public void makeOperation(String key, Integer value) {
+        storage.put(key, storage.get(key) + value);
     }
 }

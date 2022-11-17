@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface IStorageService {
-    void operation(FruitTransaction fruitTransaction);
+    void operation(String operation, String fruit, Integer quantity);
 }

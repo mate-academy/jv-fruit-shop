@@ -1,27 +1,16 @@
 package core.basesyntax.service;
 
-import static core.basesyntax.db.Storage.storage;
+import core.basesyntax.strategy.FruitStrategy;
 
 public class StorageService implements IStorageService {
+    private final FruitStrategy fruitStrategy;
+
+    public StorageService(FruitStrategy fruitStrategy) {
+        this.fruitStrategy = fruitStrategy;
+    }
+
     @Override
-    public void operation(FruitTransaction fruitTransaction) {
-        int tmp;
-        switch (fruitTransaction.getOperation()) {
-            case BALANCE:
-            case SUPPLY:
-            case RETURN:
-                if (storage.containsKey(fruitTransaction.getFruit())) {
-                    tmp = storage.get(fruitTransaction.getFruit()) + fruitTransaction.getQuantity();
-                } else {
-                    tmp = fruitTransaction.getQuantity();
-                }
-                break;
-            case PURCHASE:
-                tmp = storage.get(fruitTransaction.getFruit()) - fruitTransaction.getQuantity();
-                break;
-            default:
-                throw new RuntimeException("Unknown operation");
-        }
-        storage.put(fruitTransaction.getFruit(), tmp);
+    public void operation(String operation, String fruit, Integer quantity) {
+        fruitStrategy.chooseOperation(operation, fruit, quantity);
     }
 }
