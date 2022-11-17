@@ -29,7 +29,8 @@ public class Main {
         String[] tmp;
         for (int i = 1; i < daysOperations.size(); i++) {
             tmp = daysOperations.get(i).split(",");
-            fruitTransaction = fruitStrategy.chooseOperation(tmp[0], tmp[1], Integer.parseInt(tmp[2]));
+            fruitTransaction =
+                    fruitStrategy.chooseOperation(tmp[0], tmp[1], Integer.parseInt(tmp[2]));
             storageService.operation(fruitTransaction);
         }
         storageDao.putData();

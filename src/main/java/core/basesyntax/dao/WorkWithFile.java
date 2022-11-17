@@ -1,16 +1,15 @@
 package core.basesyntax.dao;
 
+import static core.basesyntax.db.Storage.storage;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.FileReader;
 import java.util.Map;
-
-
-import static core.basesyntax.db.Storage.storage;
 
 public class WorkWithFile implements IStorageDao {
     private static final String PATH_INPUT = "src/main/resources/input.csv";
@@ -36,7 +35,8 @@ public class WorkWithFile implements IStorageDao {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(PATH_OUTPUT))) {
             bufferedWriter.write(HEADER);
             for (Map.Entry<String, Integer> entry: storage.entrySet()) {
-                bufferedWriter.write(entry.getKey() + "," + entry.getValue() + System.lineSeparator());
+                bufferedWriter.write(entry.getKey() + ","
+                                       + entry.getValue() + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("File not found " + e);
