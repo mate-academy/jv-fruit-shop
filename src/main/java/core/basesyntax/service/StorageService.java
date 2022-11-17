@@ -11,6 +11,10 @@ public class StorageService implements IStorageService {
 
     @Override
     public void operation(String operation, String fruit, Integer quantity) {
-        fruitStrategy.chooseOperation(operation, fruit, quantity);
+        if (operation != null && fruit != null && quantity != null) {
+            fruitStrategy.chooseOperation(operation, fruit, quantity);
+        } else {
+            throw new RuntimeException("Wrong data");
+        }
     }
 }
