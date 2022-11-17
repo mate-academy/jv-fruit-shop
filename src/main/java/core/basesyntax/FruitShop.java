@@ -10,14 +10,18 @@ import core.basesyntax.services.TransactionService;
 import core.basesyntax.services.TransactionServiceImpl;
 import core.basesyntax.services.TransactionStrategy;
 import core.basesyntax.services.TransactionStrategyImpl;
-import core.basesyntax.services.transaction.*;
-
+import core.basesyntax.services.transaction.BalanceTransaction;
+import core.basesyntax.services.transaction.PurchaseTransaction;
+import core.basesyntax.services.transaction.ReturnTransaction;
+import core.basesyntax.services.transaction.SupplyTransaction;
+import core.basesyntax.services.transaction.Transaction;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FruitShop {
     private static final String FRUIT_TRANSACTION_FILE_NAME = "src/main/resources/transactions.csv";
     private static final String FRUIT_REPORT_FILE_NAME = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, Transaction> transactionMap = new HashMap<>();
         transactionMap.put(FruitTransaction.Operation.BALANCE, new BalanceTransaction());

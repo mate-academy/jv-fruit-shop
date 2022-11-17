@@ -19,7 +19,8 @@ public class FruitTransactionDaoImpl implements FruitTransactionDao {
         for (int i = 1; i < lines.size(); i++) {
             String[] split = lines.get(i).split(VALUES_SEPARATOR);
             FruitTransactionsStorage.fruitTransactions
-                    .add(new FruitTransaction(FruitTransaction.Operation.getOperationByCode(split[OPERATION]),
+                    .add(new FruitTransaction(FruitTransaction
+                            .Operation.getOperationByCode(split[OPERATION]),
                             split[FRUIT],
                             Integer.parseInt(split[QUANTITY])));
         }

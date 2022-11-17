@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.dbreport.ReportStorage;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
