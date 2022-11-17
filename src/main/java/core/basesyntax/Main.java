@@ -32,5 +32,6 @@ public class Main {
             fruitTransaction = fruitStrategy.chooseOperation(tmp[0], tmp[1], Integer.parseInt(tmp[2]));
             storageService.operation(fruitTransaction);
         }
+        storageDao.putData();
     }
 }
