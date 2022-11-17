@@ -1,11 +1,14 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.IStorageDao;
+import core.basesyntax.dao.WorkWithFile;
 import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.IStorageService;
 import core.basesyntax.service.StorageService;
 import core.basesyntax.strategy.FruitStrategy;
 import core.basesyntax.strategy.IFruitStrategy;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,21 +23,14 @@ public class Main {
         listOperations.put("r", FruitTransaction.Operation.RETURN);
         IFruitStrategy fruitStrategy = new FruitStrategy(listOperations);
         IStorageService storageService = new StorageService();
-        FruitTransaction fruitTransaction = fruitStrategy.chooseOperation("b", "banana", 150);
-        storageService.operation(fruitTransaction);
-        fruitTransaction = fruitStrategy.chooseOperation("b", "banana", 150);
-        storageService.operation(fruitTransaction);
-        fruitTransaction = fruitStrategy.chooseOperation("b","banana",20);
-        storageService.operation(fruitTransaction);
-        fruitTransaction = fruitStrategy.chooseOperation("b","apple",100);
-        storageService.operation(fruitTransaction);
-        fruitTransaction = fruitStrategy.chooseOperation("p","banana",13);
-        storageService.operation(fruitTransaction);
-        fruitTransaction = fruitStrategy.chooseOperation("r","apple",10);
-        storageService.operation(fruitTransaction);
-        fruitTransaction = fruitStrategy.chooseOperation("p","apple",20);
-        storageService.operation(fruitTransaction);
-        fruitTransaction = fruitStrategy.chooseOperation("s","banana",50);
-        storageService.operation(fruitTransaction);
+        IStorageDao storageDao = new WorkWithFile();
+        FruitTransaction fruitTransaction;
+        List<String> daysOperations = storageDao.getData();
+        String[] tmp;
+        for (int i = 1; i < daysOperations.size(); i++) {
+            tmp = daysOperations.get(i).split(",");
+            fruitTransaction = fruitStrategy.chooseOperation(tmp[0], tmp[1], Integer.parseInt(tmp[2]));
+            storageService.operation(fruitTransaction);
+        }
     }
 }

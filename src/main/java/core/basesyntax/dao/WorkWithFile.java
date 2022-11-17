@@ -1,13 +1,30 @@
 package core.basesyntax.dao;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.FileReader;
+
 public class WorkWithFile implements IStorageDao {
+    private static final String PATH_INPUT = "src/main/resources/input.csv";
+    private static final String PATH_OUPUT = "/src/main/java/resources/ouput.csv";
+
     @Override
-    public String getData(){
-        return "";
+    public List<String> getData() {
+        List<String> operations = new ArrayList<>();
+        String tmp;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(PATH_INPUT))) {
+            while ((tmp = bufferedReader.readLine()) != null) {
+                operations.add(tmp);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("File not found " + e);
+        }
+        return operations;
     }
 
     @Override
-    public String putData() {
-        return "";
+    public void putData() {
     }
 }

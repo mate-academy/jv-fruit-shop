@@ -1,6 +1,8 @@
 package core.basesyntax.dao;
 
+import java.util.List;
+
 public interface IStorageDao {
-    String getData();
-    String putData();
+    List<String> getData();
+    void putData();
 }
