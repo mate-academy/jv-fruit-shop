@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileReaderImpl;
 import core.basesyntax.dao.FileReader;
+import core.basesyntax.dao.FileReaderImpl;
 import core.basesyntax.dao.FileWriter;
 import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.service.ServiceReport;
