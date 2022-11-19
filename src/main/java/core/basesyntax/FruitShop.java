@@ -10,10 +10,10 @@ import core.basesyntax.services.FruitShopServiceImpl;
 import core.basesyntax.services.TransactionStrategy;
 import core.basesyntax.services.TransactionStrategyImpl;
 import core.basesyntax.services.transaction.BalanceOperationHandler;
+import core.basesyntax.services.transaction.OperationHandler;
 import core.basesyntax.services.transaction.PurchaseOperationHandler;
 import core.basesyntax.services.transaction.ReturnOperationHandler;
 import core.basesyntax.services.transaction.SupplyOperationHandler;
-import core.basesyntax.services.transaction.OperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +30,8 @@ public class FruitShop {
         transactionMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
 
         FruitTransactionCsvParser fruitTransactionDao = new FruitTransactionCsvParserImpl();
-        List<FruitTransaction> parsedTransactions = fruitTransactionDao.parse(FRUIT_TRANSACTION_FILE_NAME);
+        List<FruitTransaction> parsedTransactions = fruitTransactionDao
+                .parse(FRUIT_TRANSACTION_FILE_NAME);
 
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(transactionMap);
         FruitShopService transactionService = new FruitShopServiceImpl(transactionStrategy);

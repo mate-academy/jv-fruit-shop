@@ -3,7 +3,6 @@ package core.basesyntax.dao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.FileReader;
 import core.basesyntax.services.FileReaderImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class FruitTransactionCsvParserImpl implements FruitTransactionCsvParser 
         ArrayList<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             String[] split = lines.get(i).split(VALUES_SEPARATOR);
-           fruitTransactions
+            fruitTransactions
                     .add(new FruitTransaction(FruitTransaction
                             .Operation.getOperationByCode(split[OPERATION]),
                             split[FRUIT],

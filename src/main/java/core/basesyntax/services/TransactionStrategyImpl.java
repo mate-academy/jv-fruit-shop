@@ -7,7 +7,8 @@ import java.util.Map;
 public class TransactionStrategyImpl implements TransactionStrategy {
     private final Map<FruitTransaction.Operation, OperationHandler> transactionMap;
 
-    public TransactionStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> transactionMap) {
+    public TransactionStrategyImpl(Map<FruitTransaction.Operation,
+            OperationHandler> transactionMap) {
         this.transactionMap = transactionMap;
     }
 
