@@ -34,14 +34,14 @@ public class Main {
         StorageServiceImpl storageService =
                 new StorageServiceImpl(new OperatioHandlerStrategyImpl(listOperations));
 
-        FileReader getInfoDao = new FileReaderImpl();
-        List<String> daysOperations = getInfoDao.getData(PATH_INPUT);
+        FileReader fileReader = new FileReaderImpl();
+        List<String> daysOperations = fileReader.read(PATH_INPUT);
         for (int i = 1; i < daysOperations.size(); i++) {
             String[] tmp = daysOperations.get(i).split(",");
             storageService.operation(tmp[0], tmp[1], Integer.parseInt(tmp[2]));
         }
-        FileWriter putInfoDao = new FileWriterImpl();
+        FileWriter fileWriter = new FileWriterImpl();
         ServiceReport serviceReport = new ServiceReportImpl();
-        putInfoDao.putData(PATH_OUTPUT, serviceReport.makeReport());
+        fileWriter.write(PATH_OUTPUT, serviceReport.makeReport());
     }
 }
