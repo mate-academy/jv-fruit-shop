@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.GetFromFile;
-import core.basesyntax.dao.IGetInfoDao;
-import core.basesyntax.dao.IPutInfoDao;
-import core.basesyntax.dao.PutInFile;
+import core.basesyntax.dao.FileReaderImpl;
+import core.basesyntax.dao.FileReader;
+import core.basesyntax.dao.FileWriter;
+import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.service.ServiceReport;
 import core.basesyntax.service.ServiceReportImpl;
 import core.basesyntax.service.StorageServiceImpl;
@@ -34,13 +34,13 @@ public class Main {
         StorageServiceImpl storageService =
                 new StorageServiceImpl(new OperatioHandlerStrategyImpl(listOperations));
 
-        IGetInfoDao getInfoDao = new GetFromFile();
+        FileReader getInfoDao = new FileReaderImpl();
         List<String> daysOperations = getInfoDao.getData(PATH_INPUT);
         for (int i = 1; i < daysOperations.size(); i++) {
             String[] tmp = daysOperations.get(i).split(",");
             storageService.operation(tmp[0], tmp[1], Integer.parseInt(tmp[2]));
         }
-        IPutInfoDao putInfoDao = new PutInFile();
+        FileWriter putInfoDao = new FileWriterImpl();
         ServiceReport serviceReport = new ServiceReportImpl();
         putInfoDao.putData(PATH_OUTPUT, serviceReport.makeReport());
     }

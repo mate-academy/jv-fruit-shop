@@ -4,7 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class PutInFile implements IPutInfoDao {
+public class FileWriterImpl implements FileWriter {
     @Override
     public void putData(String path, String report) {
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path))) {
