@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.service.model.FruitTransaction;
 import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.strategy.OperatioHandlerStrategyImpl;
 
@@ -11,17 +12,21 @@ public class StorageServiceImpl implements StorageService {
     }
 
     @Override
-    public void operation(String operation, String fruit, Integer quantity) {
-        if (checkData(operation, fruit, quantity)) {
-            OperationHandler operationHandler = handlerStrategy.chooseOperation(operation);
-            operationHandler.handle(fruit, quantity);
+    public void operation(FruitTransaction fruitTransaction) {
+        if (checkData(fruitTransaction)) {
+            OperationHandler operationHandler =
+                    handlerStrategy.chooseOperation(fruitTransaction.getTypeOperation());
+            operationHandler.handle(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         } else {
             throw new RuntimeException("Wrong data");
         }
     }
 
-    private boolean checkData(String operation, String fruit, Integer quantity) {
-        return operation != null && fruit != null && quantity != null
-                && operation.length() == 1 && !fruit.isEmpty() && quantity < Integer.MAX_VALUE >> 2;
+    private boolean checkData(FruitTransaction fruitTransaction) {
+        return fruitTransaction.getTypeOperation() != null
+                && fruitTransaction.getFruit() != null
+                && fruitTransaction.getQuantity() != null
+                && !fruitTransaction.getFruit().isEmpty()
+                && fruitTransaction.getQuantity() < Integer.MAX_VALUE >> 4;
     }
 }
