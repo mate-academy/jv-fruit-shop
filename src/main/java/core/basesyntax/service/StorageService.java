@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.service.operations.IOperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 
-public class StorageService implements IStorageService {
+public class FruitShopServiceImpl implements FruitShopService {
     private final OperationHandlerStrategy handlerStrategy;
 
     public StorageService(OperationHandlerStrategy handlerStrategy) {
