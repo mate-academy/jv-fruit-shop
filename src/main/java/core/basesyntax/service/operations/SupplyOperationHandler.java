@@ -2,9 +2,9 @@ package core.basesyntax.service.operations;
 
 import static core.basesyntax.db.Storage.storage;
 
-public class BalanceOperationHanler implements IOperationHandler {
+public class SupplyOperationHandler implements IOperationHandler {
     @Override
     public void handle(String key, Integer value) {
-        storage.put(key, value);
+        storage.put(key, (storage.get(key) != null ? storage.get(key) : 0) + value);
     }
 }

@@ -8,11 +8,11 @@ import core.basesyntax.service.IServiceReport;
 import core.basesyntax.service.IStorageService;
 import core.basesyntax.service.ServiceReport;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.service.operations.BalanceOperationHanler;
+import core.basesyntax.service.operations.BalanceOperationHandler;
 import core.basesyntax.service.operations.IOperationHandler;
-import core.basesyntax.service.operations.PurchaseOperationHanler;
-import core.basesyntax.service.operations.ReturnOperationHanler;
-import core.basesyntax.service.operations.SupplyOperationHanler;
+import core.basesyntax.service.operations.PurchaseOperationHandler;
+import core.basesyntax.service.operations.ReturnOperationHandler;
+import core.basesyntax.service.operations.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 import java.util.HashMap;
 import java.util.List;
@@ -27,10 +27,10 @@ public class Main {
 
     public static void main(String[] args) {
         Map<String, IOperationHandler> listOperations = new HashMap<>();
-        listOperations.put("b", new BalanceOperationHanler());
-        listOperations.put("s", new SupplyOperationHanler());
-        listOperations.put("p", new PurchaseOperationHanler());
-        listOperations.put("r", new ReturnOperationHanler());
+        listOperations.put("b", new BalanceOperationHandler());
+        listOperations.put("s", new SupplyOperationHandler());
+        listOperations.put("p", new PurchaseOperationHandler());
+        listOperations.put("r", new ReturnOperationHandler());
 
         IStorageService storageService =
                 new StorageService(new OperationHandlerStrategy(listOperations));
