@@ -43,6 +43,6 @@ public class Main {
         }
         IPutInfoDao putInfoDao = new PutInFile();
         IServiceReport serviceReport = new ServiceReport();
-        putInfoDao.putData(PATH_OUTPUT, serviceReport.report());
+        putInfoDao.putData(PATH_OUTPUT, serviceReport.makeReport());
     }
 }

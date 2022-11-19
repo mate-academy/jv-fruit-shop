@@ -8,7 +8,7 @@ public class ServiceReport implements IServiceReport {
     private static final String HEADER = "fruit,quantity\n";
 
     @Override
-    public String report() {
+    public String makeReport() {
         StringBuilder stringBuilder = new StringBuilder(HEADER);
         for (Map.Entry<String, Integer> entry: storage.entrySet()) {
             stringBuilder.append(entry.getKey()).append(",").append(entry.getValue()).append("\n");
