@@ -1,5 +1,5 @@
 package core.basesyntax.dao;
 
 public interface FruitReportDao {
-    void put(String fileName);
+    void createReport(String fileName);
 }

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class ReaderFromCsvFileImpl implements ReaderFromCsvFile {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readFromFile(String filePath) {
         File file = new File(filePath);
