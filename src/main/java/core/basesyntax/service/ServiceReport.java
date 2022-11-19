@@ -1,12 +1,12 @@
 package core.basesyntax.service;
 
-import java.util.Map;
-
-
 import static core.basesyntax.db.Storage.storage;
+
+import java.util.Map;
 
 public class ServiceReport implements IServiceReport {
     private static final String HEADER = "fruit,quantity\n";
+
     @Override
     public String report() {
         StringBuilder stringBuilder = new StringBuilder(HEADER);

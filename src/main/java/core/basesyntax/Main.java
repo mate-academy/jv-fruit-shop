@@ -9,7 +9,7 @@ import core.basesyntax.service.IStorageService;
 import core.basesyntax.service.ServiceReport;
 import core.basesyntax.service.StorageService;
 import core.basesyntax.service.operations.BalanceOperationHanler;
-import core.basesyntax.service.operations.OperationHandler;
+import core.basesyntax.service.operations.IOperationHandler;
 import core.basesyntax.service.operations.PurchaseOperationHanler;
 import core.basesyntax.service.operations.ReturnOperationHanler;
 import core.basesyntax.service.operations.SupplyOperationHanler;
@@ -24,14 +24,16 @@ import java.util.Map;
 public class Main {
     private static final String PATH_INPUT = "src/main/resources/input.csv";
     private static final String PATH_OUTPUT = "src/main/resources/output.csv";
+
     public static void main(String[] args) {
-        Map<String, OperationHandler> listOperations = new HashMap<>();
+        Map<String, IOperationHandler> listOperations = new HashMap<>();
         listOperations.put("b", new BalanceOperationHanler());
         listOperations.put("s", new SupplyOperationHanler());
         listOperations.put("p", new PurchaseOperationHanler());
         listOperations.put("r", new ReturnOperationHanler());
 
-        IStorageService storageService = new StorageService(new OperationHandlerStrategy(listOperations));
+        IStorageService storageService =
+                new StorageService(new OperationHandlerStrategy(listOperations));
 
         IGetInfoDao getInfoDao = new GetFromFile();
         List<String> daysOperations = getInfoDao.getData(PATH_INPUT);

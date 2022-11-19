@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.operations.OperationHandler;
+import core.basesyntax.service.operations.IOperationHandler;
 
 public interface IOperationHandlerStrategy {
-    OperationHandler chooseOperation(String operation);
+    IOperationHandler chooseOperation(String operation);
 }

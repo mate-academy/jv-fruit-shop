@@ -1,19 +1,19 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.operations.OperationHandler;
+import core.basesyntax.service.operations.IOperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 
 public class StorageService implements IStorageService {
-    private final OperationHandlerStrategy fruitStrategy;
+    private final OperationHandlerStrategy handlerStrategy;
 
-    public StorageService(OperationHandlerStrategy fruitStrategy) {
-        this.fruitStrategy = fruitStrategy;
+    public StorageService(OperationHandlerStrategy handlerStrategy) {
+        this.handlerStrategy = handlerStrategy;
     }
 
     @Override
     public void operation(String operation, String fruit, Integer quantity) {
         if (checkData(operation, fruit, quantity)) {
-            OperationHandler operationHandler = fruitStrategy.chooseOperation(operation);
+            IOperationHandler operationHandler = handlerStrategy.chooseOperation(operation);
             operationHandler.handle(fruit, quantity);
         } else {
             throw new RuntimeException("Wrong data");
