@@ -2,14 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CreateReport;
-import core.basesyntax.service.CsvFileReader;
-import core.basesyntax.service.CsvFileWriter;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWrite;
 import core.basesyntax.service.FruitTransactionParser;
-import core.basesyntax.service.impl.CreateReportImpl;
-import core.basesyntax.service.impl.CsvFileReaderImpl;
-import core.basesyntax.service.impl.CsvFileWriterImpl;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriteImpl;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceHandler;
@@ -23,7 +23,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        CsvFileReader service = new CsvFileReaderImpl();
+        FileReader service = new FileReaderImpl();
         List<String> strings = service.readInputFile("src/main/resources/input_file.csv");
         FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -39,9 +39,9 @@ public class Main {
             operationHandler.apply(fruitTransaction);
         }
         Map<String, Integer> map = Storage.getStorageMap();
-        CreateReport createReport = new CreateReportImpl();
-        String report = createReport.getReport(map);
-        CsvFileWriter reportFile = new CsvFileWriterImpl();
-        reportFile.writeReportInFile(report, "src/main/resources/report_file.csv");
+        ReportCreator createReport = new ReportCreatorImpl();
+        String report = createReport.createReport(map);
+        FileWrite reportFile = new FileWriteImpl();
+        reportFile.writeToFile(report, "src/main/resources/report_file.csv");
     }
 }

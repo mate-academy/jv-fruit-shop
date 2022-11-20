@@ -8,6 +8,10 @@ public class PurchaseHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         int previousQuantity = Storage.getStorageMap().get(transaction.getFruit());
+        if (previousQuantity < transaction.getQuantity()) {
+            throw new RuntimeException("The amount of fruits "
+                    + transaction.getFruit() + " less to sell");
+        }
         Storage.getStorageMap().put(transaction.getFruit(),
                 previousQuantity - transaction.getQuantity());
     }

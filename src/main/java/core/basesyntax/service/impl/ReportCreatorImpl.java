@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CreateReport;
+import core.basesyntax.service.ReportCreator;
 import java.util.Map;
 
-public class CreateReportImpl implements CreateReport {
+public class ReportCreatorImpl implements ReportCreator {
     @Override
-    public String getReport(Map<String, Integer> map) {
+    public String createReport(Map<String, Integer> map) {
         StringBuilder report = new StringBuilder("fruit,quantity");
         report.append(System.lineSeparator());
         for (Map.Entry entry: map.entrySet()) {

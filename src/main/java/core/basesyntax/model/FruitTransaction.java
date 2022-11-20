@@ -56,17 +56,10 @@ public class FruitTransaction {
         }
 
         public static Operation get(String operationString) {
-            if (operationString.equals("b")) {
-                return BALANCE;
-            }
-            if (operationString.equals("s")) {
-                return SUPPLY;
-            }
-            if (operationString.equals("p")) {
-                return PURCHASE;
-            }
-            if (operationString.equals("r")) {
-                return RETURN;
+            for (Operation element: Operation.values()) {
+                if (element.operationString.equals(operationString)) {
+                    return element;
+                }
             }
             return null;
         }
