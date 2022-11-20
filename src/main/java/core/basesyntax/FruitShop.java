@@ -1,10 +1,12 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitReportDao;
-import core.basesyntax.dao.FruitReportDaoImpl;
 import core.basesyntax.dao.FruitTransactionCsvParser;
 import core.basesyntax.dao.FruitTransactionCsvParserImpl;
+import core.basesyntax.dao.ReportCreator;
+import core.basesyntax.dao.ReportCreatorImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.services.FileCreator;
+import core.basesyntax.services.FileCreatorImpl;
 import core.basesyntax.services.FruitShopService;
 import core.basesyntax.services.FruitShopServiceImpl;
 import core.basesyntax.services.TransactionStrategy;
@@ -31,7 +33,7 @@ public class FruitShop {
 
         FruitTransactionCsvParser fruitTransactionDao = new FruitTransactionCsvParserImpl();
         List<FruitTransaction> parsedTransactions = fruitTransactionDao
-                .parse(FRUIT_TRANSACTION_FILE_NAME);
+                 .parse(FRUIT_TRANSACTION_FILE_NAME);
 
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(transactionMap);
         FruitShopService transactionService = new FruitShopServiceImpl(transactionStrategy);
@@ -40,7 +42,8 @@ public class FruitShop {
             transactionService.doTransaction(transaction);
         }
 
-        FruitReportDao fruitReportDao = new FruitReportDaoImpl();
-        fruitReportDao.createReport(FRUIT_REPORT_FILE_NAME);
+        ReportCreator reportCreator = new ReportCreatorImpl();
+        FileCreator fileCreator = new FileCreatorImpl();
+        fileCreator.put(reportCreator.createReport(), FRUIT_REPORT_FILE_NAME);
     }
 }
