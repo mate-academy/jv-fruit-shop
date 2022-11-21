@@ -1,13 +1,13 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.impl.TransactionParserImpl;
+import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 import core.basesyntax.strategy.OperationHandlerStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceHandler;
