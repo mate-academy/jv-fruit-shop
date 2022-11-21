@@ -47,9 +47,4 @@ public class FruitTransaction {
             throw new IllegalArgumentException("Wrong operation code.");
         }
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(fruit, operation, quantity);
-    }
 }
