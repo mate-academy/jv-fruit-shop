@@ -28,41 +28,28 @@ public class FruitTransaction {
     public enum Operation {
         BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
 
-        private String operation;
+        private String code;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.code = operation;
         }
 
         public String getOperation() {
-            return operation;
+            return code;
         }
 
-        public static Operation getOperationByCode(String code) {
+        public static Operation getByCode(String code) {
             for (Operation o : Operation.values()) {
-                if (o.operation.equalsIgnoreCase(code)) {
+                if (o.code.equalsIgnoreCase(code)) {
                     return o;
                 }
             }
-            throw new RuntimeException("Wrong operation code.");
+            throw new IllegalArgumentException("Wrong operation code.");
         }
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(fruit, operation, quantity);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FruitTransaction transaction = (FruitTransaction) o;
-        return Objects.equals(fruit, transaction.fruit) && operation == transaction.operation
-                && quantity == transaction.quantity;
     }
 }

@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseHandler implements OperationHandler {
-
     @Override
     public void operate(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
@@ -14,8 +13,8 @@ public class PurchaseHandler implements OperationHandler {
             Storage.fruits.put(transaction.getFruit(), fruitAmount - purchaseFruitAmount);
         } else {
             throw new RuntimeException(
-                    "Sorry, we can't sold you " + purchaseFruitAmount + " " + fruit 
-                    + ". You can by only " + fruitAmount);
+                    "Impossible operation. Purchase amount = " + purchaseFruitAmount + " " + fruit 
+                    + ". Actual amount = " + fruitAmount);
         }
     }
 }

@@ -1,10 +1,10 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataProcessor;
+import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.impl.DataProcessorImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -33,10 +33,10 @@ public class Main {
 
         FileReader reader = new FileReaderImpl();
         List<String> transactions = reader.readData(READ_FILE);
-        DataProcessor processor = new DataProcessorImpl();
-        List<FruitTransaction> processedData = processor.process(transactions);
+        TransactionParser parser = new TransactionParserImpl();
+        List<FruitTransaction> parsedData = parser.process(transactions);
 
-        for (FruitTransaction data : processedData) {
+        for (FruitTransaction data : parsedData) {
             OperationHandler operationHandler = strategy.get(data.getOperation());
             operationHandler.operate(data);
         }
