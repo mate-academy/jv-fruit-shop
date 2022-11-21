@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
     @Override
-    public void apply(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         int previousQuantity = Storage.getStorageMap().get(transaction.getFruit());
         if (previousQuantity < transaction.getQuantity()) {
             throw new RuntimeException("The amount of fruits "

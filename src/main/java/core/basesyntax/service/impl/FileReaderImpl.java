@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-
     @Override
     public List<String> readInputFile(String fileName) {
         List<String> dateInputFile;
@@ -15,7 +14,7 @@ public class FileReaderImpl implements FileReader {
             dateInputFile = Files.readAllLines(Path.of(fileName));
             dateInputFile.remove(0);
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + Path.of(fileName), e);
+            throw new RuntimeException("Can't find file by path: " + fileName, e);
         }
         return dateInputFile;
     }

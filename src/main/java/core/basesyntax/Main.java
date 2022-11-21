@@ -36,7 +36,7 @@ public class Main {
         for (FruitTransaction fruitTransaction: fruitTransactionList) {
             OperationHandler operationHandler = operationStrategy
                     .get(fruitTransaction.getOperation().getOperationString());
-            operationHandler.apply(fruitTransaction);
+            operationHandler.handle(fruitTransaction);
         }
         Map<String, Integer> map = Storage.getStorageMap();
         ReportCreator createReport = new ReportCreatorImpl();

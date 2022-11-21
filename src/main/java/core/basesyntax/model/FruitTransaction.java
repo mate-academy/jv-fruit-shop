@@ -12,7 +12,6 @@ public class FruitTransaction {
     }
 
     public FruitTransaction() {
-
     }
 
     public Operation getOperation() {

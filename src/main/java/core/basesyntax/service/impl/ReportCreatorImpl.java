@@ -16,5 +16,4 @@ public class ReportCreatorImpl implements ReportCreator {
         }
         return report.toString();
     }
-
 }
