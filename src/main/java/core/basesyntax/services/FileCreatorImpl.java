@@ -6,7 +6,7 @@ import java.nio.file.Files;
 
 public class FileCreatorImpl implements FileCreator {
     @Override
-    public void put(String report, String filePath) {
+    public void createFile(String report, String filePath) {
         File file = new File(filePath);
         try {
             Files.writeString(file.toPath(), report);

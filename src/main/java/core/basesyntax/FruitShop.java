@@ -44,6 +44,6 @@ public class FruitShop {
 
         ReportCreator reportCreator = new ReportCreatorImpl();
         FileCreator fileCreator = new FileCreatorImpl();
-        fileCreator.put(reportCreator.createReport(), FRUIT_REPORT_FILE_NAME);
+        fileCreator.createFile(reportCreator.createReport(), FRUIT_REPORT_FILE_NAME);
     }
 }

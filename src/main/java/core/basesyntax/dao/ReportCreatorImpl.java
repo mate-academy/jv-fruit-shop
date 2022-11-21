@@ -4,7 +4,6 @@ import core.basesyntax.dbreport.Report;
 import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {
-
     @Override
     public String createReport() {
         String eol = System.getProperty("line.separator");
