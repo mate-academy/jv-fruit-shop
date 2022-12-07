@@ -1,22 +1,20 @@
 package core.basesyntax.services.imp;
 
-import core.basesyntax.services.WriterService;
+import core.basesyntax.services.FileWriteService;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriterServiceImpl implements WriterService {
+public class WriterServiceImpl implements FileWriteService {
     @Override
-    public void writeReportToFile(String report) {
-        File file = new File("FileName.csv");
-        try {
+    public void writeReportToFile(String filePath, String text) {
+        File file = new File(filePath);
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file,true))) {
             file.createNewFile();
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file,true));
-            bufferedWriter.write(report);
-            bufferedWriter.close();
+            bufferedWriter.write(text);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cant write text to file",e);
         }
     }
 }

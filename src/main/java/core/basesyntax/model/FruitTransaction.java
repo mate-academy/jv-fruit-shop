@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    ;
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -50,21 +49,6 @@ public class FruitTransaction {
 
         public String getOperation() {
             return operation;
-        }
-
-        public Operation getOperationByCode(String stringOperation) {
-            switch (stringOperation) {
-                case "b":
-                    return BALANCE;
-                case "s":
-                    return SUPPLY;
-                case "p":
-                    return PURCHASE;
-                case "r":
-                    return RETURN;
-                default:
-                    throw new RuntimeException("Cant get operation from string");
-            }
         }
     }
 }
