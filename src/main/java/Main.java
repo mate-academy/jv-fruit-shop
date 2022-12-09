@@ -1,68 +1,52 @@
-import dao.CsvTransactionDao;
-import dao.CsvTransactionDaoImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.DataConverter;
-import service.DataProcessor;
+import model.Operation;
+import service.FileService;
 import service.ReportGenerator;
-import service.impl.DataConverterImpl;
-import service.impl.DataProcessorImpl;
+import service.TransactionParser;
+import service.TransactionProcessor;
+import service.impl.FileServiceImpl;
 import service.impl.ReportGeneratorImpl;
+import service.impl.TransactionParserImpl;
+import service.impl.TransactionProcessorImpl;
 import strategy.OperationStrategy;
-import strategy.OperationStrategyImpl;
-import strategy.handler.BalanceHandler;
 import strategy.handler.OperationHandler;
-import strategy.handler.PurchaseHandler;
-import strategy.handler.ReturnHandler;
-import strategy.handler.SupplyHandler;
+import strategy.handler.impl.BalanceHandler;
+import strategy.handler.impl.PurchaseHandler;
+import strategy.handler.impl.ReturnHandler;
+import strategy.handler.impl.SupplyHandler;
+import strategy.impl.OperationStrategyImpl;
 
 public class Main {
-    private static final String FOLDER_NAME = "statistic";
-    private static final String TRANSACTION_FILE_NAME = "transactions.csv";
-    private static final String REPORT_FILE_NAME = "report.csv";
+    private static final String TRANSACTION_FILE = "src/main/resources/transactions.csv";
+    private static final String REPORT_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        CsvTransactionDao csvTransactionDao = new CsvTransactionDaoImpl();
-        csvTransactionDao.createDaoFolder(FOLDER_NAME);
-        csvTransactionDao.createFile(TRANSACTION_FILE_NAME, FOLDER_NAME);
+        FileService fileService = new FileServiceImpl();
 
-        String dayTransactions = "type,fruit,quantity" + System.lineSeparator()
-                + "b,banana,20" + System.lineSeparator()
-                + "b,apple,100" + System.lineSeparator()
-                + "s,banana,100" + System.lineSeparator()
-                + "p,banana,13" + System.lineSeparator()
-                + "r,apple,10" + System.lineSeparator()
-                + "p,apple,20" + System.lineSeparator()
-                + "p,banana,5" + System.lineSeparator()
-                + "s,banana,50";
+        List<String> stringOfTransactions = fileService
+                .readFromFile(TRANSACTION_FILE);
 
-        csvTransactionDao.writeToFile(dayTransactions, TRANSACTION_FILE_NAME, FOLDER_NAME);
+        TransactionParser transactionParser = new TransactionParserImpl();
+        List<FruitTransaction> fruitTransactions = transactionParser
+                .parseData(stringOfTransactions);
 
-        List<String> stringOfTransactions = csvTransactionDao
-                .readFromFile(TRANSACTION_FILE_NAME, FOLDER_NAME);
-
-        DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> fruitTransactions = dataConverter.convertData(stringOfTransactions);
-
-        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put("b", new BalanceHandler());
-        operationHandlerMap.put("s", new SupplyHandler());
-        operationHandlerMap.put("p", new PurchaseHandler());
-        operationHandlerMap.put("r", new ReturnHandler());
+        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.BALANCE, new BalanceHandler());
+        operationHandlerMap.put(Operation.SUPPLY, new SupplyHandler());
+        operationHandlerMap.put(Operation.PURCHASE, new PurchaseHandler());
+        operationHandlerMap.put(Operation.RETURN, new ReturnHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
-        DataProcessor dataProcessor = new DataProcessorImpl(operationStrategy);
-        Map<String, Integer> operationResult = dataProcessor.process(fruitTransactions);
+        TransactionProcessor transactionProcessor = new TransactionProcessorImpl(operationStrategy);
+        Map<String, Integer> operationResult = transactionProcessor.process(fruitTransactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String report = reportGenerator.createReport(operationResult);
+        String report = reportGenerator.generateReport(operationResult);
 
-        csvTransactionDao.createFile(REPORT_FILE_NAME, FOLDER_NAME);
-
-        csvTransactionDao.writeToFile(report, REPORT_FILE_NAME, FOLDER_NAME);
-
+        fileService.writeToFile(report, REPORT_FILE);
     }
 }

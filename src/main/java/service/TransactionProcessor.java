@@ -4,6 +4,6 @@ import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 
-public interface DataProcessor {
+public interface TransactionProcessor {
     Map<String, Integer> process(List<FruitTransaction> fruitTransactions);
 }

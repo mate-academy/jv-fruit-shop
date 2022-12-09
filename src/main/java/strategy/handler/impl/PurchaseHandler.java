@@ -1,12 +1,13 @@
-package strategy.handler;
+package strategy.handler.impl;
 
 import model.FruitTransaction;
+import strategy.handler.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
     @Override
     public FruitTransaction getOperationResult(FruitTransaction fruitTransaction) {
-        int fruitQuantityFromDb = fruitTransaction.getQuantity();
-        fruitTransaction.setQuantity(-fruitQuantityFromDb);
+        int fruitQuantity = fruitTransaction.getQuantity();
+        fruitTransaction.setQuantity(-fruitQuantity);
         return fruitTransaction;
     }
 }

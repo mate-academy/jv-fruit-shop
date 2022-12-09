@@ -7,12 +7,13 @@ import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String START_OF_REPORT = "fruit,quantity";
+    private static final String COMMA = ",";
 
     @Override
-    public String createReport(Map<String, Integer> transactionResultMap) {
+    public String generateReport(Map<String, Integer> transactionResultMap) {
         return START_OF_REPORT + System.lineSeparator()
                 + transactionResultMap.entrySet().stream()
-                        .map(e -> e.getKey() + "," + e.getValue())
+                        .map(e -> e.getKey() + COMMA + e.getValue())
                         .collect(joining(System.lineSeparator()));
     }
 }
