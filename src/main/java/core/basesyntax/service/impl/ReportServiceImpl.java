@@ -3,13 +3,11 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
-
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit, quantity";
     private static final String LINE_SEPARATOR = System.lineSeparator();
-
 
     @Override
     public String createReport() {

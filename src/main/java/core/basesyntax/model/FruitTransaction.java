@@ -1,18 +1,16 @@
 package core.basesyntax.model;
 
-import jdk.dynalink.Operation;
-
 import java.util.Objects;
 
 public class FruitTransaction {
     private Operation operation;
     private Fruit fruit;
-    private int Quantity;
+    private int quantity;
 
     public FruitTransaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 
     public Operation getOperation() {
@@ -32,34 +30,41 @@ public class FruitTransaction {
     }
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
-        Quantity = quantity;
+        this.quantity = quantity;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         FruitTransaction that = (FruitTransaction) o;
-        return Quantity == that.Quantity && Objects.equals(operation, that.operation) && Objects.equals(fruit, that.fruit);
+        return quantity == that.quantity
+                && Objects.equals(operation, that.operation)
+                && Objects.equals(fruit, that.fruit);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(operation, fruit, Quantity);
+        return Objects.hash(operation, fruit, quantity);
     }
 
     @Override
     public String toString() {
-        return "FruitTransaction{" +
-                "operation=" + operation +
-                ", fruit=" + fruit +
-                ", Quantity=" + Quantity +
-                '}';
+        return "FruitTransaction{"
+                + "operation=" + operation
+                + ", fruit=" + fruit
+                + ", Quantity=" + quantity
+                + '}';
     }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),

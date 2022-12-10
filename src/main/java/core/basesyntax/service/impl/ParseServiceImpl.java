@@ -3,15 +3,13 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParseService;
-
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class ParseServiceImpl implements ParseService {
     private static final int TYPE_OPERATION_INDEX = 0;
-    public static final int FRUIT_INDEX = 1;
-    public static final int QUANTITY_INDEX = 2;
+    private static final int QUANTITY_INDEX = 2;
+    private static final int FRUIT_INDEX = 1;
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
