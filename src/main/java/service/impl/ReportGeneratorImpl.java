@@ -13,7 +13,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String generateReport(Map<String, Integer> transactionResultMap) {
         return START_OF_REPORT + System.lineSeparator()
                 + transactionResultMap.entrySet().stream()
-                        .map(e -> e.getKey() + COMMA + e.getValue())
-                        .collect(joining(System.lineSeparator()));
+                .filter(e -> e.getKey() != null && e.getValue() != null)
+                .map(e -> e.getKey() + COMMA + e.getValue())
+                .collect(joining(System.lineSeparator()));
     }
 }

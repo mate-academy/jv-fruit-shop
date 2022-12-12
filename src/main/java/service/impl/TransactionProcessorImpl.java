@@ -1,8 +1,7 @@
 package service.impl;
 
 import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.mapping;
-import static java.util.stream.Collectors.reducing;
+import static java.util.stream.Collectors.summingInt;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,6 @@ public class TransactionProcessorImpl implements TransactionProcessor {
                 .map(fruitTransaction -> operationStrategy.get(fruitTransaction.getOperation())
                         .getOperationResult(fruitTransaction))
                 .collect(groupingBy(FruitTransaction::getFruit,
-                        mapping(FruitTransaction::getQuantity,
-                                reducing(0, Integer::sum))));
+                        summingInt(FruitTransaction::getQuantity)));
     }
 }

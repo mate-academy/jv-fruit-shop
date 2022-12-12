@@ -3,6 +3,7 @@ package service.impl;
 import static java.util.stream.Collectors.toList;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 import model.FruitTransaction;
 import service.TransactionParser;
@@ -15,10 +16,11 @@ public class TransactionParserImpl implements TransactionParser {
 
     @Override
     public List<FruitTransaction> parseData(List<String> fruitTransactions) {
+        Predicate<String> nonNullPredicate = Objects::nonNull;
         Predicate<String> transactionPredicate = s -> s.split(COMMA)[OPERATION_INDEX].length() == 1
                 && Character.isLetter(s.charAt(OPERATION_INDEX));
         return fruitTransactions.stream()
-                .filter(transactionPredicate)
+                .filter(nonNullPredicate.and(transactionPredicate))
                 .map(s -> createFruitTransaction(s.split(COMMA)))
                 .collect(toList());
     }
