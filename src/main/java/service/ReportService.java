@@ -1,5 +1,8 @@
 package service;
 
+import java.util.List;
+import model.FruitTransaction;
+
 public interface ReportService {
-    boolean createReport();
+    String createReport(List<FruitTransaction> fruitTransactions);
 }

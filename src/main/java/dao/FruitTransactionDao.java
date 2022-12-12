@@ -4,7 +4,7 @@ import java.util.List;
 import model.FruitTransaction;
 
 public interface FruitTransactionDao {
-    boolean add(FruitTransaction fruitTransaction);
+    boolean addAll(List<FruitTransaction> fruitTransactions);
 
     List<FruitTransaction> getAll();
 }

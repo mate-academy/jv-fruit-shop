@@ -1,0 +1,13 @@
+type,fruit,quantity
+b,banana,60
+b,pineapple,40
+b,apple,60
+p,apple,20
+p,banana,10
+p,pineapple,30
+s,banana,20
+s,pineapple,30
+s,apple,60
+r,banana,10
+r,pineapple,5
+r,apple,6

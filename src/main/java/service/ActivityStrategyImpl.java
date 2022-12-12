@@ -19,8 +19,7 @@ public class ActivityStrategyImpl implements ActivityStrategy {
 
     @Override
     public FruitTransaction.Operation getOperation(String operation) {
-        return operationActivityHandlerMap.entrySet().stream()
-                .map(Map.Entry::getKey)
+        return operationActivityHandlerMap.keySet().stream()
                 .filter(k -> k.getOperation().contains(operation))
                 .findAny()
                 .orElseThrow(() -> new RuntimeException("Passed wrong operation:" + operation));
