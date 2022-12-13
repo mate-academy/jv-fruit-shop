@@ -16,7 +16,7 @@ public class TransactionHandlerImpl implements TransactionHandler {
     @Override
     public void takeFromBalance(String fruit, Integer quantity) {
         if (!Storage.fruitsStorage.containsKey(fruit)) {
-            Storage.fruitsStorage.put(fruit, -quantity);
+            Storage.fruitsStorage.put(fruit, quantity);
         } else {
             Storage.fruitsStorage
                     .replace(fruit,Storage.fruitsStorage.get(fruit) - quantity);

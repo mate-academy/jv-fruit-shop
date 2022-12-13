@@ -52,5 +52,4 @@ public class Main {
         fileWriterService.writeToFile(report, REPORT_FILE_PATH);
         System.out.println(readerService.readFile(REPORT_FILE_PATH));
     }
-
 }
