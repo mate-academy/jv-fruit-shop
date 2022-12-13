@@ -13,7 +13,6 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReport() {
-
         String report = COLUMNS;
         report += STORAGE.keySet().stream()
                 .map(key -> key + LINE_SPLITTER + STORAGE.get(key) + END_LINE)

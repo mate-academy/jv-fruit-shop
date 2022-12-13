@@ -1,10 +1,10 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.GeneralOperation;
+import core.basesyntax.strategy.HandlerAllOperation;
 import core.basesyntax.strategy.TransactionHandler;
 
-public class PurchaseHandler implements GeneralOperation {
+public class PurchaseHandler implements HandlerAllOperation {
     private final TransactionHandler transactionHandler;
 
     public PurchaseHandler() {
@@ -12,8 +12,7 @@ public class PurchaseHandler implements GeneralOperation {
     }
 
     @Override
-    public void generalOperation(FruitTransaction transaction) {
+    public void handlerAllOperation(FruitTransaction transaction) {
         transactionHandler.takeFromBalance(transaction.getFruit(), transaction.getQuantity());
-
     }
 }

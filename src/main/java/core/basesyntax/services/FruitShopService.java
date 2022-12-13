@@ -4,5 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface FruitShopService {
-    void transfer(List<FruitTransaction> fruitTransactions);
+    void execute(List<FruitTransaction> fruitTransactions);
 }
+

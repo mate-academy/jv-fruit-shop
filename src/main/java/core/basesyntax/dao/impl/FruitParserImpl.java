@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class FruitParserImpl implements FruitParser {
-
     private static final String LINE_SEPARATOR = ",";
     private static final int NAME_INDEX = 0;
     private static final int FRUIT_INDEX = 1;

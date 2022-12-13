@@ -11,7 +11,6 @@ public class TransactionHandlerImpl implements TransactionHandler {
         } else {
             Storage.fruitsStorage.replace(fruit, Storage.fruitsStorage.get(fruit) + quantity);
         }
-
     }
 
     @Override
@@ -22,6 +21,5 @@ public class TransactionHandlerImpl implements TransactionHandler {
             Storage.fruitsStorage
                     .replace(fruit,Storage.fruitsStorage.get(fruit) - quantity);
         }
-
     }
 }
