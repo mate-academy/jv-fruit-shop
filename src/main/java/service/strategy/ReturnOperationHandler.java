@@ -3,7 +3,7 @@ package service.strategy;
 import db.Storage;
 import model.FruitTransaction;
 
-public class ReturnOperationHandler implements OperationHandler{
+public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public void operate(FruitTransaction transaction) {

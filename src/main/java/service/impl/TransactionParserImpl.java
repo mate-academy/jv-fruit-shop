@@ -1,10 +1,9 @@
 package service.impl;
 
-import model.FruitTransaction;
-import service.TransactionParser;
-
 import java.util.ArrayList;
 import java.util.List;
+import model.FruitTransaction;
+import service.TransactionParser;
 
 public class TransactionParserImpl implements TransactionParser {
     private static final int OPERATION_INDEX = 0;
@@ -22,11 +21,11 @@ public class TransactionParserImpl implements TransactionParser {
             fruitTransaction.setFruit(split[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(split[QUANTITY_INDEX]));
 
-            if(split[OPERATION_INDEX].equals("b")) {
+            if (split[OPERATION_INDEX].equals("b")) {
                 fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-            } else if(split[OPERATION_INDEX].equals("s")) {
+            } else if (split[OPERATION_INDEX].equals("s")) {
                 fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-            } else if(split[OPERATION_INDEX].equals("p")) {
+            } else if (split[OPERATION_INDEX].equals("p")) {
                 fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
             } else {
                 fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
