@@ -13,25 +13,23 @@ public class TransactionParserImpl implements TransactionParser {
     @Override
     public List<FruitTransaction> parseAll(List<String> stringList) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-
         for (String fruitTransactions: stringList) {
             String[] split = fruitTransactions.split(",");
-
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setFruit(split[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(split[QUANTITY_INDEX]));
-
-            if (split[OPERATION_INDEX].equals("b")) {
-                fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-            } else if (split[OPERATION_INDEX].equals("s")) {
-                fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-            } else if (split[OPERATION_INDEX].equals("p")) {
-                fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-            } else {
-                fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-            }
+            fruitTransaction.setOperation(getOperation(split[OPERATION_INDEX]));
             fruitTransactionList.add(fruitTransaction);
         }
         return fruitTransactionList;
+    }
+
+    private FruitTransaction.Operation getOperation(String code) {
+        for (FruitTransaction.Operation operation: FruitTransaction.Operation.values()) {
+            if (operation.getOperation().equals(code)) {
+                return operation;
+            }
+        }
+        throw new RuntimeException("No such element found");
     }
 }

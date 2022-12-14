@@ -20,8 +20,9 @@ import service.strategy.SupplyOperationHandler;
 
 public class Main {
     public static void main(String[] args) {
+        String fileName = "src\\resources\\file.csv";
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> fruitList = fileReaderService.readFromFile("file.csv");
+        List<String> fruitList = fileReaderService.readFromFile(fileName);
 
         TransactionParser transactionParser = new TransactionParserImpl();
 
@@ -47,7 +48,8 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.makeReport();
 
+        String filePath = "src\\resources\\result.csv";
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(report);
+        fileWriterService.writeToFile(report, filePath);
     }
 }

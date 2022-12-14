@@ -8,11 +8,10 @@ import java.nio.file.StandardOpenOption;
 import service.FileWriterService;
 
 public class FileWriterServiceImpl implements FileWriterService {
-    private static final String PATH_NAME = "src\\resources\\result.csv";
 
     @Override
-    public void writeToFile(String result) {
-        File file = new File(PATH_NAME);
+    public void writeToFile(String result, String fileName) {
+        File file = new File(fileName);
         try {
             Files.write(file.toPath(), result.getBytes(StandardCharsets.UTF_8),
                     StandardOpenOption.APPEND);
