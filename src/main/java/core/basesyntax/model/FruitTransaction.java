@@ -1,8 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Arrays;
-import java.util.Optional;
-
 public class FruitTransaction {
     private String fruit;
     private Operation operation;
@@ -45,14 +42,6 @@ public class FruitTransaction {
 
         public String getOperation() {
             return operation;
-        }
-
-        public static Operation getEnum(String fileOperation) {
-            Optional<FruitTransaction.Operation> optionalOperation =
-                    Arrays.stream(FruitTransaction.Operation.values())
-                            .filter(o -> o.getOperation().equals(fileOperation))
-                            .findFirst();
-            return optionalOperation.orElseThrow(() -> new NullPointerException("No such action"));
         }
     }
 }

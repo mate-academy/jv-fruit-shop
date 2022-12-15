@@ -1,19 +1,16 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitParser;
-import core.basesyntax.dao.ShopParser;
-import core.basesyntax.dao.impl.FruitParserImpl;
-import core.basesyntax.dao.impl.ShopParserImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.services.FruitShopService;
+import core.basesyntax.services.OperationHandler;
+import core.basesyntax.services.OperationStrategy;
 import core.basesyntax.services.ReaderService;
-import core.basesyntax.services.ReportService;
+import core.basesyntax.services.ReportMaker;
 import core.basesyntax.services.WriterService;
-import core.basesyntax.services.impl.FruitShopServiceImpl;
+import core.basesyntax.services.impl.FruitTransactionParserImpl;
+import core.basesyntax.services.impl.OperationStrategyImpl;
 import core.basesyntax.services.impl.ReaderServiceImpl;
-import core.basesyntax.services.impl.ReportServiceImpl;
+import core.basesyntax.services.impl.ReportMakerImpl;
 import core.basesyntax.services.impl.WriterServiceImpl;
-import core.basesyntax.strategy.HandlerAllOperation;
 import core.basesyntax.strategy.impl.BalanceHandler;
 import core.basesyntax.strategy.impl.PurchaseHandler;
 import core.basesyntax.strategy.impl.ReturnHandler;
@@ -28,25 +25,28 @@ public class Main {
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
-        String dateFromFile = readerService.readFile(INPUT_FILE_PATH);
+        List<String> dateFromFile = readerService.readFile(INPUT_FILE_PATH);
 
-        ShopParser shopParser = new ShopParserImpl();
-        String[] parsedDate = shopParser.parse(dateFromFile);
-
-        Map<FruitTransaction.Operation, HandlerAllOperation> operationHandlersMap = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap = new HashMap<>();
         operationHandlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         operationHandlersMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         operationHandlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlersMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
 
-        FruitParser parseFruit = new FruitParserImpl();
-        List<FruitTransaction> fruitTransactions = parseFruit.parse(parsedDate);
+        FruitTransactionParserImpl parser = new FruitTransactionParserImpl();
+        List<FruitTransaction> fruitTransactionsList =
+                parser.getFruitTransactionsList(dateFromFile);
 
-        FruitShopService fruitShopService = new FruitShopServiceImpl(operationHandlersMap);
-        fruitShopService.execute(fruitTransactions);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlersMap);
 
-        ReportService reportService = new ReportServiceImpl();
-        String report = reportService.getReport();
+        for (FruitTransaction fruitTransaction : fruitTransactionsList) {
+            OperationHandler handler = operationStrategy
+                    .get(fruitTransaction.getOperation());
+            handler.operate(fruitTransaction);
+        }
+
+        ReportMaker reportMakerMaker = new ReportMakerImpl();
+        String report = reportMakerMaker.createReport();
 
         WriterService fileWriterService = new WriterServiceImpl();
         fileWriterService.writeToFile(report, REPORT_FILE_PATH);

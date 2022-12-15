@@ -1,18 +1,14 @@
 package core.basesyntax.strategy.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.HandlerAllOperation;
-import core.basesyntax.strategy.TransactionHandler;
+import core.basesyntax.services.OperationHandler;
 
-public class BalanceHandler implements HandlerAllOperation {
-    private final TransactionHandler processTransaction;
-
-    public BalanceHandler() {
-        processTransaction = new TransactionHandlerImpl();
-    }
+public class BalanceHandler implements OperationHandler {
 
     @Override
-    public void handlerAllOperation(FruitTransaction transaction) {
-        processTransaction.addToBalance(transaction.getFruit(), transaction.getQuantity());
+    public void operate(FruitTransaction fruitTransaction) {
+        Storage.fruitsStorage
+                .put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }
