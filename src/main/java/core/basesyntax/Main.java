@@ -45,8 +45,8 @@ public class Main {
             handler.operate(fruitTransaction);
         }
 
-        ReportMaker reportMakerMaker = new ReportMakerImpl();
-        String report = reportMakerMaker.createReport();
+        ReportMaker reportMaker = new ReportMakerImpl();
+        String report = reportMaker.makeReport();
 
         WriterService fileWriterService = new WriterServiceImpl();
         fileWriterService.writeToFile(report, REPORT_FILE_PATH);

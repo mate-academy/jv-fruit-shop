@@ -12,7 +12,7 @@ public class ReportMakerImpl implements ReportMaker {
     private static final String LINE_SPLITTER = ",";
 
     @Override
-    public String createReport() {
+    public String makeReport() {
         String report = COLUMNS;
         report += STORAGE.keySet().stream()
                 .map(key -> key + LINE_SPLITTER + STORAGE.get(key) + END_LINE)

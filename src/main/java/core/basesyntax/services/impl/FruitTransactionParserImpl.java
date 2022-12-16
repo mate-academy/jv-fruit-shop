@@ -2,10 +2,10 @@ package core.basesyntax.services.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.FruitTransactionParser;
-import java.util.AbstractMap;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class FruitTransactionParserImpl implements FruitTransactionParser {
@@ -40,7 +40,6 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
 
     private Map<String, FruitTransaction.Operation> createMapFromEnumOperations() {
         return Arrays.stream(FruitTransaction.Operation.values())
-                .map(e -> new AbstractMap.SimpleEntry<>(e.getOperation(), e))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .collect(Collectors.toMap(FruitTransaction.Operation::getCode, Function.identity()));
     }
 }
