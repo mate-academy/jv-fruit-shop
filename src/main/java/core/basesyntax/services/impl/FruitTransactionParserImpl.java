@@ -40,6 +40,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
 
     private Map<String, FruitTransaction.Operation> createMapFromEnumOperations() {
         return Arrays.stream(FruitTransaction.Operation.values())
-                .collect(Collectors.toMap(FruitTransaction.Operation::getCode, Function.identity()));
+                .collect(Collectors.toMap(FruitTransaction.Operation::getCode,
+                        Function.identity()));
     }
 }
