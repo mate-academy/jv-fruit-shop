@@ -1,5 +1,6 @@
 package service.impl;
 
+import static java.util.stream.Collectors.filtering;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingInt;
 
@@ -10,6 +11,7 @@ import service.TransactionProcessor;
 import strategy.OperationStrategy;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
+    private static final Integer UPPER_BOUND = 1000;
     private final OperationStrategy operationStrategy;
 
     public TransactionProcessorImpl(OperationStrategy operationStrategy) {
@@ -22,6 +24,7 @@ public class TransactionProcessorImpl implements TransactionProcessor {
                 .map(fruitTransaction -> operationStrategy.get(fruitTransaction.getOperation())
                         .getOperationResult(fruitTransaction))
                 .collect(groupingBy(FruitTransaction::getFruit,
-                        summingInt(FruitTransaction::getQuantity)));
+                        filtering(fruitTransaction -> fruitTransaction.getQuantity() < UPPER_BOUND,
+                                summingInt(FruitTransaction::getQuantity))));
     }
 }
