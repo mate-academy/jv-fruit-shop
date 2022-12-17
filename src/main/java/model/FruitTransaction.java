@@ -1,11 +1,9 @@
 package model;
 
-import java.math.BigDecimal;
-
 public class FruitTransaction {
     private Operation operation;
     private Fruit fruit;
-    private BigDecimal amount;
+    private Integer amount;
 
     public Operation getOperation() {
         return operation;
@@ -15,11 +13,11 @@ public class FruitTransaction {
         this.operation = operation;
     }
 
-    public BigDecimal getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
@@ -34,7 +32,7 @@ public class FruitTransaction {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        return stringBuilder.append(System.lineSeparator()).append(operation.getOperation())
+        return stringBuilder.append(System.lineSeparator()).append(operation.operationAbbreviation)
                 .append(",").append(fruit.getName()).append(",").append(amount).toString();
     }
 
@@ -44,14 +42,19 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String operationAbbreviation;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String operationAbbreviation) {
+            this.operationAbbreviation = operationAbbreviation;
         }
 
-        public String getOperation() {
-            return operation;
+        public static FruitTransaction.Operation getOperation(String value) {
+            for (Operation operation : Operation.values()) {
+                if (operation.operationAbbreviation.contains(value)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("Operation not found with value: " + value);
         }
     }
 }

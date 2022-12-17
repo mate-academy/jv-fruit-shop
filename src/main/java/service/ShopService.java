@@ -1,7 +1,9 @@
 package service;
 
-public interface ShopService {
-    boolean addTransactions();
+import java.util.List;
+import model.FruitTransaction;
 
-    boolean createReport();
+public interface ShopService {
+    boolean processTransactions(List<FruitTransaction> transactions);
+
 }

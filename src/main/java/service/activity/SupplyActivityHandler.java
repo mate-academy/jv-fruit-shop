@@ -1,22 +1,24 @@
 package service.activity;
 
-import java.math.BigDecimal;
-import java.util.Map;
+import dao.FruitStorageDao;
 import model.Fruit;
 import model.FruitTransaction;
 
 public class SupplyActivityHandler implements ActivityHandler {
-    @Override
-    public Map<Fruit, BigDecimal> doActivity(Map<Fruit, BigDecimal> fruitBigDecimalMap,
-                                             FruitTransaction fruitTransaction) {
-        Fruit fruit = fruitTransaction.getFruit();
-        BigDecimal amount = fruitTransaction.getAmount();
-        if (!fruitBigDecimalMap.containsKey(fruit)) {
-            fruitBigDecimalMap.put(fruit, amount);
-        } else {
-            fruitBigDecimalMap.replace(fruit, (fruitBigDecimalMap.get(fruit).add(amount)));
-        }
-        return fruitBigDecimalMap;
+    private FruitStorageDao fruitStorageDao;
+
+    public SupplyActivityHandler(FruitStorageDao fruitStorageDao) {
+        this.fruitStorageDao = fruitStorageDao;
     }
 
+    @Override
+    public boolean handle(FruitTransaction fruitTransaction) {
+        Fruit fruit = fruitTransaction.getFruit();
+        Integer supplyAmount = fruitTransaction.getAmount();
+        if (fruitStorageDao.getAmountByFruit(fruit) == null) {
+            return fruitStorageDao.add(fruit, supplyAmount);
+        }
+        return fruitStorageDao.update(fruit,
+                fruitStorageDao.getAmountByFruit(fruit) + supplyAmount);
+    }
 }

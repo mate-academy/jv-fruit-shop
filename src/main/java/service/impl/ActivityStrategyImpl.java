@@ -1,7 +1,8 @@
-package service;
+package service.impl;
 
 import java.util.Map;
 import model.FruitTransaction;
+import service.ActivityStrategy;
 import service.activity.ActivityHandler;
 
 public class ActivityStrategyImpl implements ActivityStrategy {
@@ -15,13 +16,5 @@ public class ActivityStrategyImpl implements ActivityStrategy {
     @Override
     public ActivityHandler getHandler(FruitTransaction.Operation operation) {
         return operationActivityHandlerMap.get(operation);
-    }
-
-    @Override
-    public FruitTransaction.Operation getOperation(String operation) {
-        return operationActivityHandlerMap.keySet().stream()
-                .filter(k -> k.getOperation().contains(operation))
-                .findAny()
-                .orElseThrow(() -> new RuntimeException("Passed wrong operation:" + operation));
     }
 }

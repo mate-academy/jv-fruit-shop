@@ -1,21 +1,21 @@
 package service.activity;
 
-import java.math.BigDecimal;
-import java.util.Map;
-import model.Fruit;
+import dao.FruitStorageDao;
 import model.FruitTransaction;
 
 public class BalanceActivityHandler implements ActivityHandler {
+    private FruitStorageDao fruitStorageDao;
+
+    public BalanceActivityHandler(FruitStorageDao fruitStorageDao) {
+        this.fruitStorageDao = fruitStorageDao;
+    }
 
     @Override
-    public Map<Fruit, BigDecimal> doActivity(Map<Fruit, BigDecimal> fruitBigDecimalMap,
-                                             FruitTransaction fruitTransaction) {
-        Fruit fruit = fruitTransaction.getFruit();
-        if (fruitBigDecimalMap.containsKey(fruit)) {
-            throw new RuntimeException("Balance information already has, fruit: "
-                    + fruit.getName());
+    public boolean handle(FruitTransaction fruitTransaction) {
+        if (fruitStorageDao.getAmountByFruit(fruitTransaction.getFruit()) != null) {
+            throw new RuntimeException("Balance information about fruit already has, fruit: "
+                    + fruitTransaction.getFruit().getName());
         }
-        fruitBigDecimalMap.put(fruit, fruitTransaction.getAmount());
-        return fruitBigDecimalMap;
+        return fruitStorageDao.add(fruitTransaction.getFruit(), fruitTransaction.getAmount());
     }
 }

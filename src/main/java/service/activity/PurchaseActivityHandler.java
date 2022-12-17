@@ -1,24 +1,28 @@
 package service.activity;
 
-import java.math.BigDecimal;
-import java.util.Map;
+import dao.FruitStorageDao;
 import model.Fruit;
 import model.FruitTransaction;
 
 public class PurchaseActivityHandler implements ActivityHandler {
+    private FruitStorageDao fruitStorageDao;
+
+    public PurchaseActivityHandler(FruitStorageDao fruitStorageDao) {
+        this.fruitStorageDao = fruitStorageDao;
+    }
+
     @Override
-    public Map<Fruit, BigDecimal> doActivity(Map<Fruit, BigDecimal> fruitBigDecimalMap,
-                                             FruitTransaction fruitTransaction) {
+    public boolean handle(FruitTransaction fruitTransaction) {
         Fruit fruit = fruitTransaction.getFruit();
-        BigDecimal amount = fruitTransaction.getAmount();
-        if (!fruitBigDecimalMap.containsKey(fruit)) {
+        Integer purchaseAmount = fruitTransaction.getAmount();
+        if (fruitStorageDao.getAmountByFruit(fruit) == null) {
             throw new RuntimeException("Missing information about fruit balance, fruit: "
                     + fruit.getName());
-        } else if (fruitBigDecimalMap.get(fruit).compareTo(amount) < 0) {
-            throw new RuntimeException("Purchased can't be more than the amount, amount: "
-                    + fruitBigDecimalMap.get(fruit) + ", purchase: " + amount);
+        } else if (fruitStorageDao.getAmountByFruit(fruit).compareTo(purchaseAmount) < 0) {
+            throw new RuntimeException("The purchase can't be more than the amount, amount: "
+                    + fruitStorageDao.getAmountByFruit(fruit) + ", purchase: " + purchaseAmount);
         }
-        fruitBigDecimalMap.replace(fruit, (fruitBigDecimalMap.get(fruit).subtract(amount)));
-        return fruitBigDecimalMap;
+        return fruitStorageDao.update(fruit,
+                fruitStorageDao.getAmountByFruit(fruit) - purchaseAmount);
     }
 }
