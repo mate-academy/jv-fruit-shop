@@ -14,8 +14,7 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public boolean update(Fruit fruit, Integer amount) {
-        Storage.fruitStorage.replace(fruit, amount);
-        return true;
+        return Storage.fruitStorage.replace(fruit, Storage.fruitStorage.get(fruit), amount);
     }
 
     @Override

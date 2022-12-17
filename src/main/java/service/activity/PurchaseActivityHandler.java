@@ -15,14 +15,14 @@ public class PurchaseActivityHandler implements ActivityHandler {
     public boolean handle(FruitTransaction fruitTransaction) {
         Fruit fruit = fruitTransaction.getFruit();
         Integer purchaseAmount = fruitTransaction.getAmount();
-        if (fruitStorageDao.getAmountByFruit(fruit) == null) {
-            throw new RuntimeException("Missing information about fruit balance, fruit: "
-                    + fruit.getName());
-        } else if (fruitStorageDao.getAmountByFruit(fruit).compareTo(purchaseAmount) < 0) {
-            throw new RuntimeException("The purchase can't be more than the amount, amount: "
-                    + fruitStorageDao.getAmountByFruit(fruit) + ", purchase: " + purchaseAmount);
+        Integer currentAmount = fruitStorageDao.getAmountByFruit(fruit);
+        if (fruitStorageDao.getAmountByFruit(fruit) == null
+                || currentAmount.compareTo(purchaseAmount) < 0) {
+            throw new RuntimeException("Missing information about fruit balance "
+                    + "or wrong purchase amount, fruit: "
+                    + fruit.getName() + ", amount: " + currentAmount
+                    + ", purchase: " + purchaseAmount);
         }
-        return fruitStorageDao.update(fruit,
-                fruitStorageDao.getAmountByFruit(fruit) - purchaseAmount);
+        return fruitStorageDao.update(fruit,currentAmount - purchaseAmount);
     }
 }
