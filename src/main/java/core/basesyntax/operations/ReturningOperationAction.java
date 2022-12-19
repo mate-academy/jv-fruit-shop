@@ -8,9 +8,9 @@ public class ReturningOperationAction implements OperationAction {
         String fruit = fruitTransaction.getFruit();
         Integer supplingValue = fruitTransaction.getQuantity();
 
-        if (StorageInformation.shopReport.containsKey(fruit)) {
-            supplingValue = StorageInformation.shopReport.get(fruit) + supplingValue;
+        if (StorageInformation.getShopReport().containsKey(fruit)) {
+            supplingValue = StorageInformation.getShopReport().get(fruit) + supplingValue;
         }
-        StorageInformation.shopReport.put(fruit, supplingValue);
+        StorageInformation.getShopReport().put(fruit, supplingValue);
     }
 }

@@ -17,7 +17,8 @@ public class ReportServiceImpl implements ReportService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.append("fruit,quantity");
             bufferedWriter.newLine();
-            for (Map.Entry<String, Integer> storage : StorageInformation.shopReport.entrySet()) {
+            for (Map.Entry<String, Integer> storage
+                    : StorageInformation.getShopReport().entrySet()) {
                 bufferedWriter.append(storage.getKey() + "," + storage.getValue());
                 bufferedWriter.newLine();
             }

@@ -9,10 +9,11 @@ public class PurchasingOperationAction implements OperationAction {
         String fruit = fruitTransaction.getFruit();
         Integer purchaseQuantity = fruitTransaction.getQuantity();
 
-        if (StorageInformation.shopReport.containsKey(fruit)
-                && StorageInformation.shopReport.get(fruit) > purchaseQuantity) {
-            Integer purchaseResult = StorageInformation.shopReport.get(fruit) - purchaseQuantity;
-            StorageInformation.shopReport.put(fruit, purchaseResult);
+        if (StorageInformation.getShopReport().containsKey(fruit)
+                && StorageInformation.getShopReport().get(fruit) > purchaseQuantity) {
+            Integer purchaseResult = StorageInformation.getShopReport().get(fruit)
+                    - purchaseQuantity;
+            StorageInformation.getShopReport().put(fruit, purchaseResult);
         }
     }
 }

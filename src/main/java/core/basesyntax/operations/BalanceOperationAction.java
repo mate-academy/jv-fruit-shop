@@ -8,6 +8,6 @@ public class BalanceOperationAction implements OperationAction {
     public void makeShopOperation(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         Integer fruitQuantity = fruitTransaction.getQuantity();
-        StorageInformation.shopReport.put(fruit, fruitQuantity);
+        StorageInformation.putShopReport(fruit, fruitQuantity);
     }
 }
