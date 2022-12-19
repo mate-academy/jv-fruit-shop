@@ -30,7 +30,7 @@ public class ParseServiceImpl implements ParseService {
         return fruitTransaction;
     }
 
-    private boolean isNumber (String str) {
+    private boolean isNumber(String str) {
         return str.matches(ONLY_NUMERIC);
     }
 }
