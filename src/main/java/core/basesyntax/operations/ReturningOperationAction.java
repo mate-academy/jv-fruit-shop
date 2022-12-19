@@ -1,7 +1,7 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.storage.StorageInformation;
 import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.storage.StorageInformation;
 
 public class ReturningOperationAction implements OperationAction {
     public void makeShopOperation(FruitTransaction fruitTransaction) {
