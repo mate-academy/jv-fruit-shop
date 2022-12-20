@@ -8,11 +8,11 @@ import java.io.IOException;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
+    private final static String filePath = "src" + File.separator + "main"
+            + File.separator + "sources" + File.separator + "report.csv";
+
     @Override
     public void generateReport() {
-        String filePath = "src" + File.separator + "main" + File.separator + "java"
-                + File.separator + "core" + File.separator + "basesyntax"
-                + File.separator + "files" + File.separator + "report.csv";
         File file = new File(filePath);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.append("fruit,quantity");

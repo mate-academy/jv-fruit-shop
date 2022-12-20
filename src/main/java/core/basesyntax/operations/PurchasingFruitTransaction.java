@@ -1,11 +1,10 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.storage.StorageInformation;
 
-public class PurchasingOperationAction implements OperationAction {
+public class PurchasingFruitTransaction implements FruitTransaction {
     @Override
-    public void makeShopOperation(FruitTransaction fruitTransaction) {
+    public void execute(core.basesyntax.service.FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         Integer purchaseQuantity = fruitTransaction.getQuantity();
 
