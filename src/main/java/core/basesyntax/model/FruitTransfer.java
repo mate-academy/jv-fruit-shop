@@ -1,16 +1,14 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
-
 public class FruitTransfer {
     private Operation operation;
     private Fruit fruit;
-    private int remainder;
+    private int amount;
 
     public FruitTransfer(Operation operation, Fruit fruit, int remainder) {
         this.operation = operation;
         this.fruit = fruit;
-        this.remainder = remainder;
+        this.amount = remainder;
     }
 
     public Operation getOperation() {
@@ -29,30 +27,12 @@ public class FruitTransfer {
         this.fruit = fruit;
     }
 
-    public int getRemainder() {
-        return remainder;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setRemainder(int remainder) {
-        this.remainder = remainder;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof FruitTransfer)) {
-            return false;
-        }
-        FruitTransfer that = (FruitTransfer) o;
-        return remainder == that.remainder && operation == that.operation
-                && Objects.equals(fruit, that.fruit);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(operation, fruit, remainder);
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public enum Operation {
@@ -69,6 +49,5 @@ public class FruitTransfer {
         public String getOperation() {
             return operation;
         }
-
     }
 }

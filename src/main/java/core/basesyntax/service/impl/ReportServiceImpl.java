@@ -9,7 +9,7 @@ public class ReportServiceImpl implements ReportService {
     private static final String FIRST_LINE = "fruit, quantity";
 
     @Override
-    public String report() {
+    public String generateReport() {
         StringBuilder stringBuilder = new StringBuilder(FIRST_LINE).append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> fruitIntegerEntry: Storage.storageMap.entrySet()) {
             String reportLine = fruitIntegerEntry.getKey().getName() + ","

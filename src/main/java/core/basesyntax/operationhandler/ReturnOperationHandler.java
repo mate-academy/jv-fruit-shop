@@ -7,9 +7,9 @@ import core.basesyntax.model.FruitTransfer;
 public class ReturnOperationHandler implements OperationHandler {
 
     @Override
-    public void app(FruitTransfer transfer) {
+    public void apply(FruitTransfer transfer) {
         Fruit fruit = transfer.getFruit();
         Integer currentValue = Storage.storageMap.get(fruit);
-        Storage.storageMap.put(fruit,currentValue + transfer.getRemainder());
+        Storage.storageMap.put(fruit,currentValue + transfer.getAmount());
     }
 }

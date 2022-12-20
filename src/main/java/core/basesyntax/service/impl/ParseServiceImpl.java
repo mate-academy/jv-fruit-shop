@@ -12,7 +12,7 @@ public class ParseServiceImpl implements ParseService {
     private static final int REMAINDER_INDEX = 2;
 
     @Override
-    public List<FruitTransfer> getParse(List<String> list) {
+    public List<FruitTransfer> parseFruitTransfers(List<String> list) {
         return list.stream()
                 .skip(1)
                 .map(this::getFruitTransfer)
