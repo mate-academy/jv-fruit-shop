@@ -10,8 +10,8 @@ public class FruitTransaction {
     private final int quantity;
 
     static {
-        for (Operation o : Operation.values()) {
-            operations.put(o.getOperation(), o);
+        for (Operation operationType : Operation.values()) {
+            operations.put(operationType.getOperation(), operationType);
         }
     }
 
