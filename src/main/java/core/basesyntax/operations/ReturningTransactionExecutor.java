@@ -1,9 +1,8 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.storage.StorageInformation;
+import core.basesyntax.storageq.StorageInformation;
 
-public class SupplingFruitTransaction implements FruitTransaction {
-    @Override
+public class ReturningTransactionExecutor implements TransactionExecutor {
     public void execute(core.basesyntax.service.FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         Integer supplingValue = fruitTransaction.getQuantity();
@@ -11,6 +10,6 @@ public class SupplingFruitTransaction implements FruitTransaction {
         if (StorageInformation.getShopReport().containsKey(fruit)) {
             supplingValue = StorageInformation.getShopReport().get(fruit) + supplingValue;
         }
-        StorageInformation.putShopReport(fruit, supplingValue);
+        StorageInformation.getShopReport().put(fruit, supplingValue);
     }
 }

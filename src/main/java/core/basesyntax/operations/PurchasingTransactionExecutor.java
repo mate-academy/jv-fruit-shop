@@ -1,8 +1,8 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.storage.StorageInformation;
+import core.basesyntax.storageq.StorageInformation;
 
-public class PurchasingFruitTransaction implements FruitTransaction {
+public class PurchasingTransactionExecutor implements TransactionExecutor {
     @Override
     public void execute(core.basesyntax.service.FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();

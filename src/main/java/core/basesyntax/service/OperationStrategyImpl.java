@@ -1,13 +1,14 @@
 package core.basesyntax.service;
 
-import core.basesyntax.operations.FruitTransaction;
+import core.basesyntax.operations.TransactionExecutor;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<core.basesyntax.service.FruitTransaction.Operation, FruitTransaction> operations;
+    private Map<core.basesyntax.service.FruitTransaction.Operation, TransactionExecutor> operations;
     private core.basesyntax.service.FruitTransaction fruitTransaction;
 
-    public OperationStrategyImpl(Map<core.basesyntax.service.FruitTransaction.Operation, FruitTransaction> operations,
+    public OperationStrategyImpl(Map<core.basesyntax.service.FruitTransaction.Operation,
+            TransactionExecutor> operations,
                                  core.basesyntax.service.FruitTransaction fruitTransaction) {
         this.operations = operations;
         this.fruitTransaction = fruitTransaction;

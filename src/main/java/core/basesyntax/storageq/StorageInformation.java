@@ -1,4 +1,4 @@
-package core.basesyntax.storage;
+package core.basesyntax.storageq;
 
 import java.util.HashMap;
 import java.util.Map;
