@@ -5,10 +5,10 @@ public class FruitTransfer {
     private Fruit fruit;
     private int amount;
 
-    public FruitTransfer(Operation operation, Fruit fruit, int remainder) {
+    public FruitTransfer(Operation operation, Fruit fruit, int amount) {
         this.operation = operation;
         this.fruit = fruit;
-        this.amount = remainder;
+        this.amount = amount;
     }
 
     public Operation getOperation() {

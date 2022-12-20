@@ -5,7 +5,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransfer;
 
 public class ReturnOperationHandler implements OperationHandler {
-
     @Override
     public void apply(FruitTransfer transfer) {
         Fruit fruit = transfer.getFruit();
