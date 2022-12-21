@@ -20,7 +20,7 @@ public class CsvDataParserImpl implements DataParser {
                 .skip(1)
                 .map(line -> line.split(DATA_SEPARATOR))
                 .map(splittedLine -> new FruitTransaction.FruitTransactionBuilder()
-                        .setOperation(Operation.getOperation(splittedLine[OPERATION_INDEX]))
+                        .setOperation(Operation.getOperationByLetter(splittedLine[OPERATION_INDEX]))
                         .setFruit(splittedLine[FRUIT_NAME_INDEX])
                         .setQuantity(Integer.parseInt(splittedLine[QUANTITY_INDEX]))
                         .build())

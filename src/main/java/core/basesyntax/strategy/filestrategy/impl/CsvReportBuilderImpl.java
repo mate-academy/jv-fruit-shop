@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.strategy.filestrategy.ReportBuilder;
 import core.basesyntax.strategy.operationstrategy.OperationCalculator;
-import core.basesyntax.strategy.operationstrategy.OperationCalculatorHandler;
+import core.basesyntax.strategy.operationstrategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +12,11 @@ import java.util.Map;
 public class CsvReportBuilderImpl implements ReportBuilder {
     private static final String HEADER = "fruit,quantity";
     private static final String DATA_SEPARATOR = ",";
-    private static final OperationCalculatorHandler operationHandler
-            = new OperationCalculatorHandler();
+    private final OperationStrategy operationStrategy;
+
+    public CsvReportBuilderImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
 
     @Override
     public String buildReport(List<FruitTransaction> transactions) {
@@ -32,7 +35,7 @@ public class CsvReportBuilderImpl implements ReportBuilder {
         Map<String, Integer> dataMap = new HashMap<>();
         for (FruitTransaction transaction : transactions) {
             Operation operation = transaction.getOperation();
-            OperationCalculator calculator = operationHandler.getOperationCalculator(operation);
+            OperationCalculator calculator = operationStrategy.getOperationCalculator(operation);
             String fruitName = transaction.getFruit();
             int operationQuantity = transaction.getQuantity();
             int currentQuantity = operation == Operation.BALANCE ? 0 : dataMap.get(fruitName);

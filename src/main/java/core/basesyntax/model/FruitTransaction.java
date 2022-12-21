@@ -59,26 +59,26 @@ public class FruitTransaction {
         RETURN("r");
 
         private static final Map<String, Operation> operations = new HashMap<>();
-        private final String operation;
+        private final String letter;
 
         static {
             for (Operation operationType : Operation.values()) {
-                operations.put(operationType.getOperation(), operationType);
+                operations.put(operationType.getLetter(), operationType);
             }
         }
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
-        public static Operation getOperation(String operation) {
-            Optional<Operation> optionalOperation = Optional.of(operations.get(operation));
+        public static Operation getOperationByLetter(String letter) {
+            Optional<Operation> optionalOperation = Optional.of(operations.get(letter));
             return optionalOperation.orElseThrow(
-                    () -> new RuntimeException("Invalid operation: " + operation));
+                    () -> new RuntimeException("Invalid letter: " + letter));
         }
 
-        public String getOperation() {
-            return operation;
+        public String getLetter() {
+            return letter;
         }
     }
 }
