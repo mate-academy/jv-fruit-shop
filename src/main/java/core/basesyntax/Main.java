@@ -10,7 +10,9 @@ import core.basesyntax.service.ShopServiceImpl;
 import java.util.List;
 
 public class Main {
-    private static final String FROM_FILE_NAME = "fromFruits.csv";
+    private static final String FROM_FILE_NAME =
+            "C:/Users/roman/OneDrive/Рабочий стол/projects/"
+                    + "jv-fruit-shop/src/main/resources/fromFruits.csv";
     private static final FruitsDao FRUITS_DAO = new FruitsDaoCsvImpl();
     private static final Shop<FruitTransaction> SHOP = new ShopFruits();
     private static ShopService shopService;

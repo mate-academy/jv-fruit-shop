@@ -13,8 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FruitsDaoCsvImpl implements FruitsDao {
-    private static final String FROM_FILE_NAME = "fromFruits.csv";
-    private static final String TO_FILE_NAME = "toFruits.csv";
+    private static final String FROM_FILE_NAME =
+            "C:/Users/roman/OneDrive/Рабочий стол/projects/"
+                    + "jv-fruit-shop/src/main/resources/fromFruits.csv";
+    private static final String TO_FILE_NAME =
+            "C:/Users/roman/OneDrive/Рабочий стол/projects/"
+                    + "jv-fruit-shop/src/main/resources/toFruits.csv";
     private static final File TO_FILE = new File(TO_FILE_NAME);
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
