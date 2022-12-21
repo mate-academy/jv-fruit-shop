@@ -27,8 +27,8 @@ public class Main {
         final TransactionInvocation transactionInvocation = new TransactionInvocationImpl();
         FileService fileService = new FileServiceImpl();
         List<String> list = fileService.readFromFile(transactionsFileName);
-        final Map<FruitTransaction.Operation, TransactionExecutor> operationsMap = new HashMap<>();
         final List<FruitTransaction> fruitTransactionList = transactionParserService.parse(list);
+        final Map<FruitTransaction.Operation, TransactionExecutor> operationsMap = new HashMap<>();
         operationsMap.put(FruitTransaction.Operation.BALANCE, new BalanceTransactionExecutor());
         operationsMap.put(FruitTransaction.Operation.PURCHASE, new PurchasingTransactionExecutor());
         operationsMap.put(FruitTransaction.Operation.RETURN, new ReturningTransactionExecutor());
