@@ -18,7 +18,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public List<String> readFromFile(String fileName) {
-        List<String> transactions = new ArrayList<>();
+        List<String> lines = new ArrayList<>();
         Path filePath = Paths.get(fileName);
         try (BufferedReader bufferedReader = Files.newBufferedReader(filePath)) {
             String line = bufferedReader.readLine();
