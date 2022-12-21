@@ -5,7 +5,7 @@ import java.util.List;
 
 public class TransactionParserServiceImpl implements TransactionParserService {
     @Override
-    public List<FruitTransaction> parse(List<String> list) {
+    public List<FruitTransaction> parse(List<String> lines) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
 
         for (String line : list) {
