@@ -8,7 +8,7 @@ public class TransactionParserServiceImpl implements TransactionParserService {
     public List<FruitTransaction> parse(List<String> list) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
 
-        for (String transaction : list) {
+        for (String line : list) {
             String[] transactionArr = transaction.split(",");
             FruitTransaction fruitTransaction = new FruitTransaction();
             try {
