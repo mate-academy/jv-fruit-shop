@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface TransactionInvocation {
-    void invokeTransaction(List<core.basesyntax.service.FruitTransaction> fruitTransactionList,
-                           Map<core.basesyntax.service.FruitTransaction.Operation,
-                                   TransactionExecutor> operationsMap);
+    void invokeTransaction(List<FruitTransaction> fruitTransactionList,
+                           Map<FruitTransaction.Operation, TransactionExecutor> operationsMap);
 }

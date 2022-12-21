@@ -19,16 +19,15 @@ public class FileServiceImpl implements FileService {
     @Override
     public List<String> readFromFile(String fileName) {
         List<String> transactions = new ArrayList<>();
-        Path pathToFile = Paths.get(directory + fileName);
-
-        try (BufferedReader bufferedReader = Files.newBufferedReader(pathToFile)) {
+        Path filePath = Paths.get(directory + fileName);
+        try (BufferedReader bufferedReader = Files.newBufferedReader(filePath)) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 transactions.add(line);
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Can't read file " + filePath, e);
         }
         return transactions;
     }
@@ -45,7 +44,7 @@ public class FileServiceImpl implements FileService {
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Can't read file " + filePath, e);
         }
     }
 }

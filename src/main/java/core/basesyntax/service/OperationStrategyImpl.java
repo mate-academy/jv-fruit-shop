@@ -4,19 +4,17 @@ import core.basesyntax.operations.TransactionExecutor;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<core.basesyntax.service.FruitTransaction.Operation, TransactionExecutor> operations;
-    private core.basesyntax.service.FruitTransaction fruitTransaction;
+    private Map<FruitTransaction.Operation, TransactionExecutor> operations;
+    private FruitTransaction fruitTransaction;
 
-    public OperationStrategyImpl(Map<core.basesyntax.service.FruitTransaction.Operation,
-            TransactionExecutor> operations,
-                                 core.basesyntax.service.FruitTransaction fruitTransaction) {
+    public OperationStrategyImpl(Map<FruitTransaction.Operation, TransactionExecutor> operations,
+                                 FruitTransaction fruitTransaction) {
         this.operations = operations;
         this.fruitTransaction = fruitTransaction;
     }
 
     @Override
-    public void getOperation(core.basesyntax.service.FruitTransaction.Operation operation) {
+    public void getOperation(FruitTransaction.Operation operation) {
         operations.get(operation).execute(fruitTransaction);
-
     }
 }

@@ -30,6 +30,6 @@ public class TransactionParserServiceImpl implements TransactionParserService {
                 return operation;
             }
         }
-        throw new RuntimeException("Such Operation is not exist in enum");
+        throw new RuntimeException(value + " - operation is not exist in enum");
     }
 }

@@ -6,11 +6,10 @@ import java.util.Map;
 
 public class TransactionInvocationImpl implements TransactionInvocation {
     @Override
-    public void invokeTransaction(List<core.basesyntax.service.FruitTransaction>
-                                              fruitTransactionList,
-                                  Map<core.basesyntax.service.FruitTransaction.Operation,
+    public void invokeTransaction(List<FruitTransaction> fruitTransactionList,
+                                  Map<FruitTransaction.Operation,
                                           TransactionExecutor> operationsMap) {
-        for (core.basesyntax.service.FruitTransaction fruitTransaction : fruitTransactionList) {
+        for (FruitTransaction fruitTransaction : fruitTransactionList) {
             new OperationStrategyImpl(operationsMap, fruitTransaction)
                     .getOperation(fruitTransaction.getOperation());
         }
