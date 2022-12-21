@@ -2,18 +2,12 @@ package core.basesyntax.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class FruitTransaction {
-    public static final Map<String, Operation> operations = new HashMap<>();
     private final Operation operation;
     private final String fruit;
     private final int quantity;
-
-    static {
-        for (Operation operationType : Operation.values()) {
-            operations.put(operationType.getOperation(), operationType);
-        }
-    }
 
     private FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
@@ -64,10 +58,23 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
+        private static final Map<String, Operation> operations = new HashMap<>();
         private final String operation;
+
+        static {
+            for (Operation operationType : Operation.values()) {
+                operations.put(operationType.getOperation(), operationType);
+            }
+        }
 
         Operation(String operation) {
             this.operation = operation;
+        }
+
+        public static Operation getOperation(String operation) {
+            Optional<Operation> optionalOperation = Optional.of(operations.get(operation));
+            return optionalOperation.orElseThrow(
+                    () -> new RuntimeException("Invalid operation: " + operation));
         }
 
         public String getOperation() {

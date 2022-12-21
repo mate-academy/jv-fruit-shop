@@ -1,4 +1,4 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.filestrategy;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;

@@ -1,7 +1,8 @@
-package core.basesyntax.strategy.impl;
+package core.basesyntax.strategy.filestrategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.DataParser;
+import core.basesyntax.model.FruitTransaction.Operation;
+import core.basesyntax.strategy.filestrategy.DataParser;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,12 +16,13 @@ public class CsvDataParserImpl implements DataParser {
     @Override
     public List<FruitTransaction> parseData(String data) {
         String[] lines = data.split(System.lineSeparator());
-        return Arrays.stream(lines, 1, lines.length)
-                .map(l -> l.split(DATA_SEPARATOR))
-                .map(l -> new FruitTransaction.FruitTransactionBuilder()
-                        .setOperation(FruitTransaction.operations.get(l[OPERATION_INDEX]))
-                        .setFruit(l[FRUIT_NAME_INDEX])
-                        .setQuantity(Integer.parseInt(l[QUANTITY_INDEX]))
+        return Arrays.stream(lines)
+                .skip(1)
+                .map(line -> line.split(DATA_SEPARATOR))
+                .map(splittedLine -> new FruitTransaction.FruitTransactionBuilder()
+                        .setOperation(Operation.getOperation(splittedLine[OPERATION_INDEX]))
+                        .setFruit(splittedLine[FRUIT_NAME_INDEX])
+                        .setQuantity(Integer.parseInt(splittedLine[QUANTITY_INDEX]))
                         .build())
                 .collect(Collectors.toList());
     }

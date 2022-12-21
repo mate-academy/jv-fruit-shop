@@ -7,9 +7,9 @@ import java.nio.file.Path;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
-    public String readFromFile(Path path) {
+    public String readFromFile(String path) {
         try {
-            return Files.readString(path);
+            return Files.readString(Path.of(path));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + path, e);
         }

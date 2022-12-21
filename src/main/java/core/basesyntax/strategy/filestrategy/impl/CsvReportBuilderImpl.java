@@ -1,7 +1,10 @@
-package core.basesyntax.strategy.impl;
+package core.basesyntax.strategy.filestrategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.ReportBuilder;
+import core.basesyntax.model.FruitTransaction.Operation;
+import core.basesyntax.strategy.filestrategy.ReportBuilder;
+import core.basesyntax.strategy.operationstrategy.OperationCalculator;
+import core.basesyntax.strategy.operationstrategy.OperationCalculatorHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +12,8 @@ import java.util.Map;
 public class CsvReportBuilderImpl implements ReportBuilder {
     private static final String HEADER = "fruit,quantity";
     private static final String DATA_SEPARATOR = ",";
+    private static final OperationCalculatorHandler operationHandler
+            = new OperationCalculatorHandler();
 
     @Override
     public String buildReport(List<FruitTransaction> transactions) {
@@ -26,26 +31,13 @@ public class CsvReportBuilderImpl implements ReportBuilder {
     private Map<String, Integer> processData(List<FruitTransaction> transactions) {
         Map<String, Integer> dataMap = new HashMap<>();
         for (FruitTransaction transaction : transactions) {
-            FruitTransaction.Operation operation = transaction.getOperation();
+            Operation operation = transaction.getOperation();
+            OperationCalculator calculator = operationHandler.getOperationCalculator(operation);
             String fruitName = transaction.getFruit();
-            int quantity = transaction.getQuantity();
-            int newAmount;
-            switch (operation) {
-                case BALANCE:
-                    dataMap.put(fruitName, quantity);
-                    break;
-                case SUPPLY:
-                case RETURN:
-                    newAmount = dataMap.get(fruitName) + quantity;
-                    dataMap.put(fruitName, newAmount);
-                    break;
-                case PURCHASE:
-                    newAmount = dataMap.get(fruitName) - quantity;
-                    dataMap.put(fruitName, newAmount);
-                    break;
-                default:
-                    throw new RuntimeException("Invalid operation type " + operation);
-            }
+            int operationQuantity = transaction.getQuantity();
+            int currentQuantity = operation == Operation.BALANCE ? 0 : dataMap.get(fruitName);
+            int newAmount = calculator.calculate(currentQuantity, operationQuantity);
+            dataMap.put(fruitName, newAmount);
         }
         return dataMap;
     }
