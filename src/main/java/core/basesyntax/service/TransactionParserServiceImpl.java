@@ -11,12 +11,7 @@ public class TransactionParserServiceImpl implements TransactionParserService {
         for (String line : list) {
             String[] transactionArr = transaction.split(",");
             FruitTransaction fruitTransaction = new FruitTransaction();
-            try {
                 fruitTransaction.setOperation(parseOperation(transactionArr[0]));
-            } catch (RuntimeException e) {
-                System.out.println(e);
-                continue;
-            }
             fruitTransaction.setFruit(transactionArr[1]);
             fruitTransaction.setQuantity(Integer.parseInt(transactionArr[2]));
             fruitTransactionList.add(fruitTransaction);
