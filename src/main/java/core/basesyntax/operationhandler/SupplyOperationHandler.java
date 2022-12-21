@@ -10,7 +10,7 @@ public class SupplyOperationHandler implements OperationHandler {
         Fruit fruit = transfer.getFruit();
         Integer currentValue = Storage.storageMap.get(fruit);
         if (currentValue == null) {
-            throw new RuntimeException("current value can't be null");
+            currentValue = 0;;
         }
         Storage.storageMap.put(fruit,currentValue + transfer.getAmount());
     }
