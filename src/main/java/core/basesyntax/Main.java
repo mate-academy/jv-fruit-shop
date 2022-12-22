@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import static core.basesyntax.db.Storage.fruits;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.OperationHandler;
@@ -37,6 +39,11 @@ public class Main {
         strategies.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandlerImpl());
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategies);
         System.out.println(strategies);
-
+        for (FruitTransaction fruitTransaction : fruitTransactionsList) {
+            OperationHandler handler = operationStrategy
+                    .get(fruitTransaction.getOperation());
+            handler.operate(fruitTransaction);
+            System.out.println(fruits);
+        }
     }
 }
