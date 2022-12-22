@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import static core.basesyntax.db.Storage.fruits;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.OperationHandler;
@@ -42,11 +40,9 @@ public class Main {
             OperationHandler handler = operationStrategy
                     .get(fruitTransaction.getOperation());
             handler.operate(fruitTransaction);
-            System.out.println(fruits);
         }
         ReportMaker reportMaker = new ReportMakerImpl();
         String report = reportMaker.createReport();
-        System.out.println(report);
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(report, reportCsvPath);
     }
