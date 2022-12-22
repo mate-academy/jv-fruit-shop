@@ -10,8 +10,8 @@ public class TransactionInvocationImpl implements TransactionInvocation {
                                   Map<FruitTransaction.Operation,
                                           TransactionExecutor> operationsMap) {
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
-            new OperationStrategyImpl(operationsMap, fruitTransaction)
-                    .useOperation(fruitTransaction.getOperation());
+            operationStrategy.get(fruitTransaction.getOperation())
+                    .execute(fruitTransaction);
         }
     }
 }
