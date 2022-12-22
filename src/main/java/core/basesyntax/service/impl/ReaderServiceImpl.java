@@ -13,7 +13,7 @@ public class ReaderServiceImpl implements ReaderService {
         try {
             dataFromCsvInput = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("No such file in directory" + filePath);
+            throw new RuntimeException(String.format("No such file in directory %s",filePath));
         }
         return dataFromCsvInput;
     }

@@ -8,10 +8,12 @@ import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportMaker;
+import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportMakerImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.service.impl.handlers.BalanceOperationHandlerImpl;
 import core.basesyntax.service.impl.handlers.PurchaseOperationHandlerImpl;
 import core.basesyntax.service.impl.handlers.ReturnOperationHandlerImpl;
@@ -45,5 +47,7 @@ public class Main {
         ReportMaker reportMaker = new ReportMakerImpl();
         String report = reportMaker.createReport();
         System.out.println(report);
+        WriterService writerService = new WriterServiceImpl();
+        writerService.writeToFile(report, reportCsvPath);
     }
 }
