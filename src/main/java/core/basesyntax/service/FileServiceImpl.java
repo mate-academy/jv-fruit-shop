@@ -1,21 +1,15 @@
 package core.basesyntax.service;
 
-import core.basesyntax.storageq.StorageInformation;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class FileServiceImpl implements FileService {
-    private static final String directory = "src" + File.separator + "main" + File.separator
-            + "sources" + File.separator;
-
     @Override
     public List<String> readFromFile(String fileName) {
         List<String> lines = new ArrayList<>();
@@ -23,26 +17,21 @@ public class FileServiceImpl implements FileService {
         try (BufferedReader bufferedReader = Files.newBufferedReader(filePath)) {
             String line = bufferedReader.readLine();
             while (line != null) {
-                transactions.add(line);
+                lines.add(line);
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + filePath, e);
         }
-        return transactions;
+        return lines;
     }
 
     @Override
-    public void writeToFile(String fileName) {
-        Path filePath = Paths.get(directory + fileName);
+    public void writeToFile(String fileName, String text) {
+        Path filePath = Paths.get(fileName);
         try (BufferedWriter bufferedWriter = Files.newBufferedWriter(filePath)) {
-            bufferedWriter.append("fruit,quantity");
+            bufferedWriter.append(text);
             bufferedWriter.newLine();
-            for (Map.Entry<String, Integer> storage
-                    : StorageInformation.getShopReport().entrySet()) {
-                bufferedWriter.append(storage.getKey() + "," + storage.getValue());
-                bufferedWriter.newLine();
-            }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + filePath, e);
         }
