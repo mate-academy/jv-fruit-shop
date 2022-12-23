@@ -1,8 +1,11 @@
 package core.basesyntax.service.operation;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+
 public class BalanceOperationHandler implements OperationHandler {
     @Override
-    public int getOperation(int quantity) {
-        return quantity;
+    public void handle(FruitTransaction transaction) {
+        Storage.reportMap.put(transaction.getFruit(), transaction.getQuantity());
     }
 }

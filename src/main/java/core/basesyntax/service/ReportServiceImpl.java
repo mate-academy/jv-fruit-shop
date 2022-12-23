@@ -2,7 +2,7 @@ package core.basesyntax.service;
 
 import java.util.Map;
 
-public class ShopServiceImpl implements ShopService {
+public class ReportServiceImpl implements ReportService {
     private static final StringBuilder TITLE_FOR_RESULT = new StringBuilder("fruit,quantity");
     private static final String NEW_LINE = System.lineSeparator();
     private static final String BANANA = "banana";
