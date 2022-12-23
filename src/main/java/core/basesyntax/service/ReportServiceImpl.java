@@ -14,7 +14,7 @@ public class ReportServiceImpl implements ReportService {
             stringBuilder.append(NEW_LINE)
                     .append(element.getKey())
                     .append(PUNCTUATION_MARK)
-                    .append(reportMap.get(element.getKey()));
+                    .append(element.getValue());
         }
         return stringBuilder.toString();
     }

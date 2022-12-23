@@ -1,22 +1,32 @@
 package core.basesyntax.model;
 
 public enum Operation {
-    BALANCE,
-    SUPPLY,
-    PURCHASE,
-    RETURN;
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
+
+    private final String operation;
+
+    Operation(String operation) {
+        this.operation = operation;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
 
     public static Operation getByCode(String operation) {
-        Operation useOperation = null;
-        if (BALANCE.toString().startsWith(operation)) {
-            useOperation = BALANCE;
-        } else if (SUPPLY.toString().startsWith(operation)) {
-            useOperation = SUPPLY;
-        } else if (PURCHASE.toString().startsWith(operation)) {
-            useOperation = PURCHASE;
-        } else if (RETURN.toString().startsWith(operation)) {
-            useOperation = RETURN;
+        switch (operation) {
+            case "b":
+                return Operation.BALANCE;
+            case "s":
+                return Operation.SUPPLY;
+            case "p":
+                return Operation.PURCHASE;
+            case "r":
+                return Operation.RETURN;
+            default: return null;
         }
-        return useOperation;
     }
 }

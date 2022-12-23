@@ -18,14 +18,14 @@ public class CsvFileReaderImpl implements CsvFileReader {
 
     @Override
     public List<FruitTransaction> readTransactions(String fromFileName) {
-        List<String> fruits = new ArrayList<>();
+        List<String> lines = new ArrayList<>();
         try {
-            fruits = Files.readAllLines(Path.of(fromFileName));
+            lines = Files.readAllLines(Path.of(fromFileName));
         } catch (IOException e) {
             throw new RuntimeException(ERROR_MESSAGE + fromFileName, e);
         }
-        fruits.remove(OPERATION_INDEX);
-        return fruits.stream()
+        lines.remove(OPERATION_INDEX);
+        return lines.stream()
                 .map(line -> parseTransaction(line.trim()))
                 .collect(Collectors.toList());
     }
@@ -33,7 +33,7 @@ public class CsvFileReaderImpl implements CsvFileReader {
     private FruitTransaction parseTransaction(String line) {
         String[] fields = line.split(SPLIT_SYMBOL);
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(Operation.getByCode(fields[OPERATION_INDEX].toUpperCase()));
+        fruitTransaction.setOperation(Operation.getByCode(fields[OPERATION_INDEX]));
         fruitTransaction.setFruit(fields[FRUIT_INDEX]);
         fruitTransaction.setQuantity(Integer.parseInt(fields[QUANTITY_INDEX]));
         return fruitTransaction;
