@@ -3,6 +3,6 @@ package core.basesyntax.dao;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public interface FruitsDao {
-    List<FruitTransaction> readDataFromFruitsCsv(String fromFileName);
+public interface CsvFileReader {
+    List<FruitTransaction> readTransactions(String fromFileName);
 }

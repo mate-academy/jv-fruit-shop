@@ -6,16 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ReportDaoImpl implements ReportDao {
-    private static final String TO_FILE_NAME = "src/main/resources/toFile.csv";
-    private static final File TO_FILE = new File(TO_FILE_NAME);
+    private static final String ERROR_MESSAGE = "Can`t write data to CSV file ";
 
     @Override
-    public void writeReportToCsvFile(String report) {
+    public void writeReportToCsvFile(String report, File toFile) {
         try (BufferedWriter bufferedWriter =
-                     new BufferedWriter(new FileWriter(TO_FILE, true))) {
+                     new BufferedWriter(new FileWriter(toFile))) {
             bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write data to CSV file " + TO_FILE_NAME);
+            throw new RuntimeException(ERROR_MESSAGE + toFile, e);
         }
     }
 }
