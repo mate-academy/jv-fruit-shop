@@ -6,10 +6,10 @@ import core.basesyntax.services.strategy.OperationHandler;
 
 public class PurchaseHandlerOperation implements OperationHandler {
     @Override
-    public void operation(FruitTransaction fruitTransaction) {
-        String fruits = fruitTransaction.getFruit();
-        int quantityFruits = fruitTransaction.getQuantity();
-        int quantity = DataStorage.fruitsStorageMap.get(fruits);
-        DataStorage.fruitsStorageMap.put(fruits, quantity - quantityFruits);
+    public void operate(FruitTransaction fruitTransaction) {
+        String fruit = fruitTransaction.getFruit();
+        int transactionQuantity = fruitTransaction.getQuantity();
+        int storageQuantity = DataStorage.fruitsStorageMap.get(fruit);
+        DataStorage.fruitsStorageMap.put(fruit, storageQuantity - transactionQuantity);
     }
 }

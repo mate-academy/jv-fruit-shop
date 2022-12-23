@@ -6,7 +6,7 @@ import core.basesyntax.services.strategy.OperationHandler;
 
 public class SupplyHandlerOperation implements OperationHandler {
     @Override
-    public void operation(FruitTransaction fruitTransaction) {
+    public void operate(FruitTransaction fruitTransaction) {
         String fruits = fruitTransaction.getFruit();
         int quantityFruits = fruitTransaction.getQuantity();
         if (DataStorage.fruitsStorageMap.containsKey(fruits)) {

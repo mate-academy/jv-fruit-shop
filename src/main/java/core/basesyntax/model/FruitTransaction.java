@@ -3,7 +3,7 @@ package core.basesyntax.model;
 public class FruitTransaction {
     private String fruit;
     private int quantity;
-    private Type type;
+    private Operation operation;
 
     public String getFruit() {
         return fruit;
@@ -21,28 +21,28 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Type getType() {
-        return type;
+    public Operation getOperation() {
+        return operation;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
-    public enum Type {
+    public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
 
-        private final String typeOperation;
+        private final String code;
 
-        Type(String typeOperation) {
-            this.typeOperation = typeOperation;
+        Operation(String code) {
+            this.code = code;
         }
 
-        public String getTypeOperation() {
-            return typeOperation;
+        public String getCode() {
+            return code;
         }
     }
 }
