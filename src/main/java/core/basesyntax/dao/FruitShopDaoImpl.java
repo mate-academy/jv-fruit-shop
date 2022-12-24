@@ -1,8 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.impl.ReaderServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
