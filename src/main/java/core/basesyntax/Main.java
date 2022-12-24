@@ -3,9 +3,11 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
@@ -19,8 +21,9 @@ public class Main {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
         ShopService shopService = new ShopServiceImpl();
         ReportService reportService = new ReportServiceImpl();
+        ReaderService readerService = new ReaderServiceImpl();
         WriterService writerService = new WriterServiceImpl();
-        String dataFromFile = fruitShopDao.getFromFile(FILE_FROM_NAME);
+        String dataFromFile = readerService.readFromFile(FILE_FROM_NAME);
         List<FruitTransaction> fruits = fruitShopDao.fruitFromString(dataFromFile);
         for (FruitTransaction fruit : fruits) {
             shopService.transaction(fruit);

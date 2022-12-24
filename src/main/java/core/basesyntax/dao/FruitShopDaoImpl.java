@@ -9,12 +9,6 @@ import java.util.List;
 public class FruitShopDaoImpl implements FruitShopDao {
 
     @Override
-    public String getFromFile(String fileName) {
-        ReaderService readerService = new ReaderServiceImpl();
-        return readerService.readFromFile(fileName);
-    }
-
-    @Override
     public List<FruitTransaction> fruitFromString(String dataFromFile) {
         String[] fromFile = dataFromFile.split("\r\n");
         List<FruitTransaction> fruitList = new ArrayList<>();
