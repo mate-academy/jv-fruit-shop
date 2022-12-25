@@ -14,8 +14,8 @@ import core.basesyntax.service.impl.WriterServiceImpl;
 import java.util.List;
 
 public class Main {
-    private static final String FILE_FROM_NAME = "src/main/java/core/basesyntax/FruitShopInfo.csv";
-    private static final String FILE_TO_NAME = "src/main/java/core/basesyntax/FruitShopReport.csv";
+    private static final String FILE_FROM_NAME = "src/main/resources/FruitShopInfo.csv";
+    private static final String FILE_TO_NAME = "src/main/resources/FruitShopReport.csv";
 
     public static void main(String[] args) {
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
