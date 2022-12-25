@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FruitShopDaoImpl implements FruitShopDao {
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> fruitFromString(String dataFromFile) {
@@ -14,9 +17,10 @@ public class FruitShopDaoImpl implements FruitShopDao {
             String[] splited = line.split(",");
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction
-                    .setOperation(FruitTransaction.Operation.getOperationByCode(splited[0]));
-            fruitTransaction.setFruit(splited[1]);
-            fruitTransaction.setQuantity(Integer.parseInt(splited[2]));
+                    .setOperation(FruitTransaction.Operation
+                            .getOperationByCode(splited[OPERATION_INDEX]));
+            fruitTransaction.setFruit(splited[FRUIT_INDEX]);
+            fruitTransaction.setQuantity(Integer.parseInt(splited[QUANTITY_INDEX]));
             fruitList.add(fruitTransaction);
         }
         return fruitList;
