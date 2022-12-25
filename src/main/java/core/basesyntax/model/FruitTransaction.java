@@ -51,5 +51,14 @@ public class FruitTransaction {
         public String getOperation() {
             return operation;
         }
+
+        public static Operation getByCode(String operation) {
+            for (Operation o : Operation.values()) {
+                if (o.operation.equalsIgnoreCase(operation)) {
+                    return o;
+                }
+            }
+            throw new IllegalArgumentException("Wrong operation code.");
+        }
     }
 }

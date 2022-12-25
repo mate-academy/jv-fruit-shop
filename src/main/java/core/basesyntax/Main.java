@@ -5,12 +5,12 @@ import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.ReportMaker;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.ReportMakerImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.service.impl.handlers.BalanceOperationHandlerImpl;
 import core.basesyntax.service.impl.handlers.PurchaseOperationHandlerImpl;
@@ -38,11 +38,11 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategies);
         for (FruitTransaction fruitTransaction : fruitTransactionsList) {
             OperationHandler handler = operationStrategy
-                    .get(fruitTransaction.getOperation());
+                    .getHandler(fruitTransaction.getOperation());
             handler.operate(fruitTransaction);
         }
-        ReportMaker reportMaker = new ReportMakerImpl();
-        String report = reportMaker.createReport();
+        ReportCreator reportCreator = new ReportCreatorImpl();
+        String report = reportCreator.createReport();
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(report, reportCsvPath);
     }

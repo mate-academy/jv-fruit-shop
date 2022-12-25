@@ -7,14 +7,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterServiceImpl implements WriterService {
-
     @Override
     public void writeToFile(String report, String filePath) {
         File file = new File(filePath);
         try (BufferedWriter buff = new BufferedWriter(new FileWriter(file))) {
             buff.write(report);
         } catch (IOException e) {
-            throw new RuntimeException(String.format("No such file in directory %s", filePath));
+            throw new RuntimeException(String.format("No such file or directory %s %s",
+                    filePath, e));
         }
     }
 }

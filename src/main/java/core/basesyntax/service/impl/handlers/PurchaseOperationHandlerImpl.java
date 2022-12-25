@@ -7,7 +7,9 @@ import core.basesyntax.service.OperationHandler;
 public class PurchaseOperationHandlerImpl implements OperationHandler {
     @Override
     public void operate(FruitTransaction fruitTransaction) {
-        Storage.fruits.put(fruitTransaction.getFruit(),
-                Storage.fruits.get(fruitTransaction.getFruit()) - fruitTransaction.getQuantity());
+        Storage.fruits.merge(
+                fruitTransaction.getFruit(),
+                fruitTransaction.getQuantity(),
+                (oldValue, newValue) -> oldValue - newValue);
     }
 }

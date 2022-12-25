@@ -14,7 +14,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public OperationHandler get(FruitTransaction.Operation operation) {
+    public OperationHandler getHandler(FruitTransaction.Operation operation) {
         return operationStrategies.get(operation);
     }
 }
