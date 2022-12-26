@@ -13,9 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
-
     @Override
-    public void transaction(FruitTransaction fruitTransaction) {
+    public void makeTransaction(FruitTransaction fruitTransaction) {
         Map<FruitTransaction.Operation, OperationHandler> strategies = new HashMap<>();
         strategies.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         strategies.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationStrategy());

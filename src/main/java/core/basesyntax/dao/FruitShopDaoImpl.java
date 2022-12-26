@@ -10,7 +10,7 @@ public class FruitShopDaoImpl implements FruitShopDao {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> fruitFromString(String dataFromFile) {
+    public List<FruitTransaction> parseTransactions(String dataFromFile) {
         String[] fromFile = dataFromFile.split("\r\n");
         List<FruitTransaction> fruitList = new ArrayList<>();
         for (String line : fromFile) {

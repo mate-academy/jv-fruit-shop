@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     @Override
-    public String report() {
+    public String writeReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit").append(",").append("quantity");
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
