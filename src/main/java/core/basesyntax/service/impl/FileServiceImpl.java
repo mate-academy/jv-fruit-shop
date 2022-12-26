@@ -11,8 +11,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public String readFromFile(String fromFileName) {
         StringBuilder builder = new StringBuilder();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(fromFileName));
+        try (BufferedReader reader = new BufferedReader(new FileReader(fromFileName))) {
             String line = reader.readLine();
             while (line != null) {
                 builder.append(line).append(System.lineSeparator());

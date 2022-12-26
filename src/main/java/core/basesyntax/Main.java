@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitShopDao;
-import core.basesyntax.dao.FruitShopDaoImpl;
+import core.basesyntax.dao.TransactionParser;
+import core.basesyntax.dao.TransactionParserImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.ReportService;
@@ -16,7 +16,7 @@ public class Main {
     private static final String FILE_TO_NAME = "src/main/resources/FruitShopReport.csv";
 
     public static void main(String[] args) {
-        FruitShopDao transactionParser = new FruitShopDaoImpl();
+        TransactionParser transactionParser = new TransactionParserImpl();
         ShopService shopService = new ShopServiceImpl();
         ReportService reportService = new ReportServiceImpl();
         FileService fileService = new FileServiceImpl();
@@ -26,7 +26,7 @@ public class Main {
         for (FruitTransaction fruit : fruitTransactionList) {
             shopService.makeTransaction(fruit);
         }
-        String report = reportService.writeReport();
+        String report = reportService.createReport();
         fileService.writeToFile(FILE_TO_NAME, report);
     }
 }

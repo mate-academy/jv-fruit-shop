@@ -3,6 +3,6 @@ package core.basesyntax.dao;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public interface FruitShopDao {
+public interface TransactionParser {
     List<FruitTransaction> parseTransactions(String dataFromFile);
 }

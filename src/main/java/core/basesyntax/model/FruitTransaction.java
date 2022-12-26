@@ -43,14 +43,14 @@ public class FruitTransaction {
 
         public static Operation getOperationByCode(String code) {
             for (Operation op : values()) {
-                if (op.getOperation().equals(code)) {
+                if (op.getCode().equals(code)) {
                     return op;
                 }
             }
             throw new RuntimeException("code is not supported");
         }
 
-        public String getOperation() {
+        public String getCode() {
             return code;
         }
     }
