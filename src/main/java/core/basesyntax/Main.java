@@ -1,8 +1,5 @@
 package core.basesyntax;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.operations.SupplyOperation;
@@ -20,21 +17,24 @@ import core.basesyntax.service.impl.CreateExportInfoImpl;
 import core.basesyntax.service.impl.ReadFromCsvFileImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        ReadFromFile fileReader = new ReadFromCsvFileImpl();
-        List<String> importInfo = fileReader.readFromFile("src/main/resources/importFile.csv");
-        ImportOperations importOperations = new ImportOperationsImpl();
-        List<String[]> listOfOperations = importOperations.getOperations(importInfo);
-
-        Map<String, Operation> operationMap = new HashMap<>();
+        final Map<String, Operation> operationMap = new HashMap<>();
         operationMap.put("s", new SupplyOperation());
         operationMap.put("r", new ReturnOperation());
         operationMap.put("b", new BalanceOperation());
         operationMap.put("p", new PurchaseOperation());
         OperationStrategy fruitOperationStrategy = new OperationStrategyImpl(operationMap);
 
+        ReadFromFile fileReader = new ReadFromCsvFileImpl();
+        List<String> importInfo = fileReader.readFromFile("src/main/resources/importFile.csv");
+
+        ImportOperations importOperations = new ImportOperationsImpl();
+        List<String[]> listOfOperations = importOperations.getOperations(importInfo);
         DoOperations doOperations = new DoOperationImpl(fruitOperationStrategy);
         doOperations.closeAllOperations(listOfOperations);
         CreateExportInfo exportReport = new CreateExportInfoImpl();

@@ -1,8 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ImportOperations;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
