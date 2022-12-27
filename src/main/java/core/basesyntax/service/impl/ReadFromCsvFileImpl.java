@@ -1,12 +1,11 @@
-package core.basesyntax.serviceImpl;
-
-import core.basesyntax.service.ReadFromFile;
+package core.basesyntax.service.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import core.basesyntax.service.ReadFromFile;
 
 public class ReadFromCsvFileImpl implements ReadFromFile {
     @Override
@@ -15,7 +14,7 @@ public class ReadFromCsvFileImpl implements ReadFromFile {
         try {
             return Files.readAllLines(path);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't find file by path: " + filePath, e);
         }
     }
 }

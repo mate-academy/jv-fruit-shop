@@ -1,10 +1,8 @@
-package core.basesyntax.serviceImpl;
-
-import core.basesyntax.service.CreateExportInfo;
-
-import java.util.Map;
+package core.basesyntax.service.impl;
 
 import static core.basesyntax.db.Storage.fruitStorage;
+import java.util.Map;
+import core.basesyntax.service.CreateExportInfo;
 
 public class CreateExportInfoImpl implements CreateExportInfo {
     @Override

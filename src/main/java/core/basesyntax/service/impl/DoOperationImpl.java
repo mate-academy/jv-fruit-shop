@@ -1,18 +1,18 @@
-package core.basesyntax.serviceImpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.DoOperations;
 import core.basesyntax.operations.Operation;
-import core.basesyntax.service.FruitOperationStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 
 import java.util.List;
 
 public class DoOperationImpl implements DoOperations {
-    private final FruitOperationStrategy fruitOperationStrategy;
+    private final OperationStrategy fruitOperationStrategy;
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
 
-    public DoOperationImpl (FruitOperationStrategy fruitOperationStrategy) {
+    public DoOperationImpl (OperationStrategy fruitOperationStrategy) {
         this.fruitOperationStrategy = fruitOperationStrategy;
     }
 
