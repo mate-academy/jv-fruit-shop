@@ -2,10 +2,10 @@ package core.basesyntax.service.impl;
 
 import static core.basesyntax.db.Storage.fruitStorage;
 
-import core.basesyntax.service.CreateExportInfo;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
-public class CreateExportInfoImpl implements CreateExportInfo {
+public class ReportServiceImpl implements ReportService {
     @Override
     public String createReport() {
         StringBuilder stringBuilder = new StringBuilder();
