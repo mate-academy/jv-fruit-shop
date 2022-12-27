@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class    Main {
+public class Main {
     public static void main(String[] args) {
         final Map<String, Operation> operationMap = new HashMap<>();
         operationMap.put("s", new SupplyOperation());
@@ -35,8 +35,9 @@ public class    Main {
 
         OperationsParserService importOperations = new OperationsParserServiceImpl();
         List<String[]> listOfOperations = importOperations.parseOperations(importInfo);
-        OperationsExecutorService doOperations = new OperationsExecutorServiceImpl(fruitOperationStrategy);
-        doOperations.executeOperations(listOfOperations);
+        OperationsExecutorService operationsExecutorService
+                = new OperationsExecutorServiceImpl(fruitOperationStrategy);
+        operationsExecutorService.executeOperations(listOfOperations);
         ReportService exportReport = new ReportServiceImpl();
         String report = exportReport.createReport();
         FileWriterService writeFile = new FileWriterServiceImpl();
