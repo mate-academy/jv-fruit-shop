@@ -1,6 +1,8 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.operations.Operation;
+import core.basesyntax.strategy.OperationStrategy;
+
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
