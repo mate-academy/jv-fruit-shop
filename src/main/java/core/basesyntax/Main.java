@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-
 import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.Operation;
 import core.basesyntax.operations.Operational;
