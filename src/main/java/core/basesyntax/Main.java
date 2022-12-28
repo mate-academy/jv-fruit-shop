@@ -1,7 +1,9 @@
 package core.basesyntax;
 
+
 import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.Operation;
+import core.basesyntax.operations.Operational;
 import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
@@ -23,24 +25,24 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        final Map<String, Operation> operationMap = new HashMap<>();
-        operationMap.put("s", new SupplyOperation());
-        operationMap.put("r", new ReturnOperation());
-        operationMap.put("b", new BalanceOperation());
-        operationMap.put("p", new PurchaseOperation());
+        final Map<String, Operational> operationMap = new HashMap<>();
+        operationMap.put(Operation.SUPPLY.getOperation(), new SupplyOperation());
+        operationMap.put(Operation.RETURN.getOperation(), new ReturnOperation());
+        operationMap.put(Operation.BALANCE.getOperation(), new BalanceOperation());
+        operationMap.put(Operation.PURCHASE.getOperation(), new PurchaseOperation());
         OperationStrategy fruitOperationStrategy = new OperationStrategyImpl(operationMap);
-
         FileReaderService fileReader = new FileReaderServiceImpl();
-        List<String> importInfo = fileReader.readFromFile("src/main/resources/importFile.csv");
-
         OperationsParserService importOperations = new OperationsParserServiceImpl();
-        List<String[]> listOfOperations = importOperations.parseOperations(importInfo);
+        FileWriterService writeFile = new FileWriterServiceImpl();
         OperationsExecutorService operationsExecutorService
                 = new OperationsExecutorServiceImpl(fruitOperationStrategy);
-        operationsExecutorService.executeOperations(listOfOperations);
         ReportService exportReport = new ReportServiceImpl();
+
+        List<String> importInfo = fileReader.readFromFile("src/main/resources/importFile.csv");
+        List<String[]> listOfOperations = importOperations.parseOperations(importInfo);
+        operationsExecutorService.executeOperations(listOfOperations);
         String report = exportReport.createReport();
-        FileWriterService writeFile = new FileWriterServiceImpl();
+
         writeFile.writeToFile(report, "src/main/resources/exportFile.csv");
     }
 }

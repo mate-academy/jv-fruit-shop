@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.operations.Operation;
+import core.basesyntax.operations.Operational;
 
 public interface OperationStrategy {
-    Operation get(String typeOfOperation);
+    Operational get(String typeOfOperation);
 }
