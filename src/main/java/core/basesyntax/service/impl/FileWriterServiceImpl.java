@@ -11,7 +11,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try {
             Files.write(Paths.get(createdFilePath), text.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + filePath, e);
+            throw new RuntimeException("Can't find file by path: " + createdFilePath, e);
         }
     }
 }
