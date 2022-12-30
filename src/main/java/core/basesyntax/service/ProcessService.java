@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.util.Map;
+
 public interface ProcessService {
-    String getReport(String lines);
+    StringBuilder getQuantity(String lines, Map<String, Integer> fruitMap);
 }
