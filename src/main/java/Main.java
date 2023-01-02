@@ -19,9 +19,11 @@ import service.operations.ReturnOperationHandler;
 import service.operations.SupplyOperationHandler;
 
 public class Main {
+    public static final String FILE_PATH = "src/Main/resources/FruitShop.csv";
+
     public static void main(String[] args) {
         ReaderService fileReader = new ReaderServiceImpl();
-        List<String> dataFromFile = fileReader.readFromFile("src/Main/resources/FruitShop.csv");
+        List<String> dataFromFile = fileReader.readFromFile(FILE_PATH);
         TransactionParser transactionParser = new TransactionParserImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> strategies = new HashMap<>();
