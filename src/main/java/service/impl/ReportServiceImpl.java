@@ -21,8 +21,8 @@ public class ReportServiceImpl implements ReportService {
             }
         }
 
-        return "fruit,quantity" + System.lineSeparator() +
-                BANANA + "," + sumOfBananas + System.lineSeparator() +
-                APPLE + "," + sumOfApples + System.lineSeparator();
+        return "fruit,quantity" + System.lineSeparator()
+                + BANANA + "," + sumOfBananas + System.lineSeparator()
+                + APPLE + "," + sumOfApples + System.lineSeparator();
     }
 }
