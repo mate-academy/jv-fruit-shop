@@ -11,7 +11,7 @@ import core.basesyntax.services.strategy.OperationHandler;
 import core.basesyntax.services.strategy.OperationStrategy;
 import core.basesyntax.services.strategy.impl.BalanceHandlerOperation;
 import core.basesyntax.services.strategy.impl.OperationStrategyImpl;
-import core.basesyntax.services.strategy.impl.PurchaseHandlerOperation;
+import core.basesyntax.services.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.services.strategy.impl.ReturnHandlerOperation;
 import core.basesyntax.services.strategy.impl.SupplyHandlerOperation;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class Main {
 
     public static void main(String[] args) {
         FileService fileReadService = new FileServiceImpl();
-        List<String> dataFromFile = fileReadService.dataFromFile(INPUT_FILE_PATH);
+        List<String> dataFromFile = fileReadService.parseDataFromFile(INPUT_FILE_PATH);
 
         Map<FruitTransaction.Operation, OperationHandler> typeOperationHandlerMap = new HashMap<>();
         typeOperationHandlerMap.put(FruitTransaction
@@ -32,18 +32,18 @@ public class Main {
         typeOperationHandlerMap.put(FruitTransaction
                 .Operation.SUPPLY, new SupplyHandlerOperation());
         typeOperationHandlerMap.put(FruitTransaction
-                .Operation.PURCHASE, new PurchaseHandlerOperation());
+                .Operation.PURCHASE, new PurchaseOperationHandler());
         typeOperationHandlerMap.put(FruitTransaction
                 .Operation.RETURN, new ReturnHandlerOperation());
 
         TransactionParser parser = new TransactionParserImpl();
-        List<FruitTransaction> fruitTransactionsToList = parser.transaction(dataFromFile);
+        List<FruitTransaction> fruitTransactionsToList = parser.parse(dataFromFile);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(typeOperationHandlerMap);
 
         for (FruitTransaction fruitTransaction : fruitTransactionsToList) {
             OperationHandler handler = operationStrategy.get(fruitTransaction.getOperation());
-            handler.operate(fruitTransaction);
+            handler.handle(fruitTransaction);
         }
 
         ReportService reportService = new ReportServiceImpl();

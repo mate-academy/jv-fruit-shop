@@ -6,14 +6,11 @@ import core.basesyntax.services.strategy.OperationHandler;
 
 public class SupplyHandlerOperation implements OperationHandler {
     @Override
-    public void operate(FruitTransaction fruitTransaction) {
-        String fruits = fruitTransaction.getFruit();
+    public void handle(FruitTransaction fruitTransaction) {
+        String fruit = fruitTransaction.getFruit();
         int quantityFruits = fruitTransaction.getQuantity();
-        if (DataStorage.fruitsStorageMap.containsKey(fruits)) {
-            int previousQuantity = DataStorage.fruitsStorageMap.get(fruits);
-            DataStorage.fruitsStorageMap.put(fruits, previousQuantity + quantityFruits);
-        } else {
-            DataStorage.fruitsStorageMap.put(fruits, quantityFruits);
-        }
+        int previousQuantity = DataStorage.fruitsStorageMap.get(fruit);
+        DataStorage.fruitsStorageMap.merge(fruit, quantityFruits, (oldVal, value)
+                -> previousQuantity + quantityFruits);
     }
 }

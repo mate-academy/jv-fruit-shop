@@ -10,14 +10,14 @@ import java.util.List;
 
 public class FileServiceImpl implements FileService {
     @Override
-    public List<String> dataFromFile(String pathName) {
-        List<String> dataFile;
+    public List<String> parseDataFromFile(String pathName) {
+        List<String> lines;
         try {
-            dataFile = Files.readAllLines(Path.of(pathName));
+            lines = Files.readAllLines(Path.of(pathName));
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file: " + pathName, e);
         }
-        return dataFile;
+        return lines;
     }
 
     @Override

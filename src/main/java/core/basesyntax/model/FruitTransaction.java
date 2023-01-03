@@ -41,8 +41,13 @@ public class FruitTransaction {
             this.code = code;
         }
 
-        public String getCode() {
-            return code;
+        public static Operation getByCode(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.code.equals(code)) {
+                    return operation;
+                }
+            }
+            return null;
         }
     }
 }
