@@ -52,6 +52,6 @@ public class FruitTransaction {
                 return operationType;
             }
         }
-        return null;
+        throw new RuntimeException("Can't find Operation type for this String " + operationChar);
     }
 }

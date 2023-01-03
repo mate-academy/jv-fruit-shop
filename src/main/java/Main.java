@@ -19,11 +19,12 @@ import service.operations.ReturnOperationHandler;
 import service.operations.SupplyOperationHandler;
 
 public class Main {
-    public static final String FILE_PATH = "src/Main/resources/FruitShop.csv";
+    public static final String FILE_PATH_READ_FROM = "src/Main/resources/FruitShop.csv";
+    public static final String FILE_PATH_WRIRTE_TO = "src/Main/resources/FruitShopReport.csv";
 
     public static void main(String[] args) {
         ReaderService fileReader = new ReaderServiceImpl();
-        List<String> dataFromFile = fileReader.readFromFile(FILE_PATH);
+        List<String> dataFromFile = fileReader.readFromFile(FILE_PATH_READ_FROM);
         TransactionParser transactionParser = new TransactionParserImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> strategies = new HashMap<>();
@@ -43,6 +44,6 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.createReport();
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile(report, "src/Main/resources/FruitShopReport.csv");
+        writerService.writeToFile(report, FILE_PATH_WRIRTE_TO);
     }
 }
