@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class WriterServiceImpl implements FileWriterService {
+public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeDataToFile(String report, String path) {
         try {

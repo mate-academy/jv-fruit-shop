@@ -2,22 +2,22 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.StorageUpdaterService;
-import core.basesyntax.strategy.StorageService;
-import core.basesyntax.strategy.StorageStrategy;
+import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class StorageUpdaterServiceImpl implements StorageUpdaterService {
-    private StorageStrategy strategy;
+    private OperationStrategy strategy;
 
     public StorageUpdaterServiceImpl() {
-        strategy = new StorageStrategy();
+        strategy = new OperationStrategy();
     }
 
     @Override
     public void updateStorage(List<FruitTransaction> fruitTransactions) {
-        StorageService storageService;
+        OperationService storageService;
         for (FruitTransaction transaction : fruitTransactions) {
-            storageService = strategy.getStorageService(transaction);
+            storageService = strategy.getOperationService(transaction);
             storageService.updateStorage(transaction);
         }
     }
