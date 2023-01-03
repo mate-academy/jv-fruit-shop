@@ -17,8 +17,8 @@ public class DataParserServiceImpl implements DataParserService {
         String[] lines = data.split(System.lineSeparator());
         Arrays.stream(lines)
                 .skip(1)
-                .forEach(l -> {
-                    String[] splitLine = l.split(",");
+                .forEach(line -> {
+                    String[] splitLine = line.split(",");
                     FruitTransaction transaction = new FruitTransaction();
                     transaction.setOperation(splitLine[OPERATION_INDEX]);
                     transaction.setFruit(splitLine[GOODS_INDEX]);

@@ -1,22 +1,22 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.impl.BalanceStorageService;
-import core.basesyntax.strategy.impl.PurchaseStorageService;
-import core.basesyntax.strategy.impl.ReturnStorageService;
-import core.basesyntax.strategy.impl.SupplyStorageService;
+import core.basesyntax.strategy.impl.BalanceStorageServiceImpl;
+import core.basesyntax.strategy.impl.PurchaseStorageServiceImpl;
+import core.basesyntax.strategy.impl.ReturnStorageServiceImpl;
+import core.basesyntax.strategy.impl.SupplyStorageServiceImpl;
 
 public class StorageStrategy {
     public StorageService getStorageService(FruitTransaction transaction) {
         switch (transaction.getOperation().toString()) {
             case "BALANCE":
-                return new BalanceStorageService();
+                return new BalanceStorageServiceImpl();
             case "SUPPLY":
-                return new SupplyStorageService();
+                return new SupplyStorageServiceImpl();
             case "PURCHASE":
-                return new PurchaseStorageService();
+                return new PurchaseStorageServiceImpl();
             case "RETURN":
-                return new ReturnStorageService();
+                return new ReturnStorageServiceImpl();
             default:
                 throw new UnsupportedOperationException(
                         "Operation " + transaction.getOperation() + " is not supported");

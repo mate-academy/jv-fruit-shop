@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.FileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ReaderServiceImpl implements ReaderService {
+public class ReaderServiceImpl implements FileReaderService {
     public String readFromFile(String fileName) {
         try {
             return Files.readString(Path.of(fileName));
