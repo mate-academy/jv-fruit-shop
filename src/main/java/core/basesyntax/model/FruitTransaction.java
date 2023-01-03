@@ -9,15 +9,6 @@ public class FruitTransaction {
         return operation;
     }
 
-    @Override
-    public String toString() {
-        return "FruitTransaction{" +
-                "operation=" + operation +
-                ", fruit='" + fruit + '\'' +
-                ", quantity=" + quantity +
-                '}';
-    }
-
     public void setOperation(String operation) {
         for (Operation o : Operation.values()) {
             if (operation.equals(o.getOperation())) {

@@ -9,7 +9,6 @@ import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.StorageService;
 import core.basesyntax.strategy.StorageStrategy;
-
 import java.util.List;
 
 public class Main {

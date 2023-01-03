@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.WriterService;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,6 +9,7 @@ import java.util.Map;
 
 public class WriterServiceImpl implements WriterService {
     private static final String HEADER = "fruit,quantity";
+
     @Override
     public void writeDataToFile(String path) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
@@ -19,7 +19,7 @@ public class WriterServiceImpl implements WriterService {
                 writer.write(entry.getKey() + ',' + entry.getValue());
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't write data to file " + e);
         }
     }
 }

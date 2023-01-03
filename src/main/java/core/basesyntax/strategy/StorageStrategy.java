@@ -6,8 +6,6 @@ import core.basesyntax.strategy.impl.PurchaseStorageService;
 import core.basesyntax.strategy.impl.ReturnStorageService;
 import core.basesyntax.strategy.impl.SupplyStorageService;
 
-import javax.swing.*;
-
 public class StorageStrategy {
     public StorageService getStorageService(FruitTransaction transaction) {
         switch (transaction.getOperation().toString()) {
