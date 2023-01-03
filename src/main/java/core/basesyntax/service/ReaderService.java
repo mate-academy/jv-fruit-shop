@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface ReaderService {
-    String read(String path);
+    String readFromFile(String path);
 }

@@ -1,33 +1,40 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataSplitService;
+import core.basesyntax.service.DataParserService;
 import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportBuilderService;
+import core.basesyntax.service.StorageUpdaterService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.DataSplitServiceImpl;
+import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportBuilderServiceImpl;
+import core.basesyntax.service.impl.StorageUpdaterServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.StorageService;
-import core.basesyntax.strategy.StorageStrategy;
 import java.util.List;
 
 public class Main {
-    public static final String READ_FROM_FILE = "src/main/resources/data.csv";
-    public static final String WRITE_TO_FILE = "src/main/resources/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/data.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
+    private static final ReaderService readerService;
+    private static final DataParserService dataParserService;
+    private static final StorageUpdaterService storageUpdaterService;
+    private static final ReportBuilderService reportBuilderService;
+    private static final WriterService writerService;
+
+    static {
+        readerService = new ReaderServiceImpl();
+        dataParserService = new DataParserServiceImpl();
+        storageUpdaterService = new StorageUpdaterServiceImpl();
+        reportBuilderService = new ReportBuilderServiceImpl();
+        writerService = new WriterServiceImpl();
+    }
 
     public static void main(String[] args) {
-        ReaderService reader = new ReaderServiceImpl();
-        DataSplitService dataSplit = new DataSplitServiceImpl();
-        WriterService writer = new WriterServiceImpl();
-        StorageStrategy strategy = new StorageStrategy();
-        StorageService storageService;
-
-        String readData = reader.read(READ_FROM_FILE);
-        List<FruitTransaction> transactions = dataSplit.splitData(readData);
-        for (FruitTransaction transaction : transactions) {
-            storageService = strategy.getStorageService(transaction);
-            storageService.updateStorage(transaction);
-        }
-        writer.writeDataToFile(WRITE_TO_FILE);
+        String inputData = readerService.readFromFile(INPUT_FILE_PATH);
+        List<FruitTransaction> transactions = dataParserService.parseData(inputData);
+        storageUpdaterService.updateStorage(transactions);
+        String report = reportBuilderService.buildReport();
+        writerService.writeDataToFile(report, OUTPUT_FILE_PATH);
     }
 }

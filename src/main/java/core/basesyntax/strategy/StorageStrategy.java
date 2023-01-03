@@ -9,15 +9,17 @@ import core.basesyntax.strategy.impl.SupplyStorageService;
 public class StorageStrategy {
     public StorageService getStorageService(FruitTransaction transaction) {
         switch (transaction.getOperation().toString()) {
+            case "BALANCE":
+                return new BalanceStorageService();
             case "SUPPLY":
                 return new SupplyStorageService();
             case "PURCHASE":
                 return new PurchaseStorageService();
             case "RETURN":
                 return new ReturnStorageService();
-            case "BALANCE":
             default:
-                return new BalanceStorageService();
+                throw new UnsupportedOperationException(
+                        "Operation " + transaction.getOperation() + " is not supported");
         }
     }
 }

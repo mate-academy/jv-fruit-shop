@@ -10,11 +10,7 @@ public class FruitTransaction {
     }
 
     public void setOperation(String operation) {
-        for (Operation o : Operation.values()) {
-            if (operation.equals(o.getOperation())) {
-                this.operation = o;
-            }
-        }
+        this.operation = Operation.getOperationByLetter(operation);
     }
 
     public String getFruit() {
@@ -45,8 +41,13 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
-        public String getOperation() {
-            return operation;
+        public static Operation getOperationByLetter(String letter) {
+            for (Operation current: Operation.values()) {
+                if (current.operation.equals(letter)) {
+                    return current;
+                }
+            }
+            throw new RuntimeException("Can't find an operation by letter " + letter);
         }
     }
 }
