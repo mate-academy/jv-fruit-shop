@@ -10,14 +10,12 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public String readFromFile(String path) {
-        String lines;
         try {
-            lines = Files.readString(Path.of(path));
+            return Files.readString(Path.of(path));
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Can't find file " + path, e);
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from the file " + path, e);
         }
-        return lines;
     }
 }

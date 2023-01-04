@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionsListService;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TransactionsListServiceImpl implements TransactionsListService {
     private static final int OPERATION_TYPE_INDEX = 0;
@@ -13,19 +13,17 @@ public class TransactionsListServiceImpl implements TransactionsListService {
     private static final String COMMA_DELIMITER = ",";
 
     @Override
-    public List<FruitTransaction> getTransactionsList(String lines, Map<String, Integer> fruitMap) {
-        List<FruitTransaction> fruitTransactionsList = new ArrayList<>();
-        String[] splitLines = lines.split(System.lineSeparator());
-        for (int i = 1; i < splitLines.length; i++) {
-            String[] splittedLine = splitLines[i].trim().split(COMMA_DELIMITER);
-            FruitTransaction fruitTransaction = new FruitTransaction.FruitTransactionBuilder()
-                    .setOperation(FruitTransaction.Operation
-                            .getOperationByLetter(splittedLine[OPERATION_TYPE_INDEX]))
-                    .setFruit(splittedLine[FRUIT_TYPE_INDEX])
-                    .setQuantity(Integer.parseInt(splittedLine[AMOUNT_INDEX]))
-                    .build();
-            fruitTransactionsList.add(fruitTransaction);
-        }
-        return fruitTransactionsList;
+    public List<FruitTransaction> getTransactionsList(String data) {
+        String[] splitLines = data.split(System.lineSeparator());
+        return IntStream.range(1, splitLines.length)
+                .mapToObj(i -> splitLines[i]
+                        .trim().split(COMMA_DELIMITER))
+                .map(splittedLine -> new FruitTransaction.FruitTransactionBuilder()
+                .setOperation(FruitTransaction.Operation
+                        .getOperationByLetter(splittedLine[OPERATION_TYPE_INDEX]))
+                .setFruit(splittedLine[FRUIT_TYPE_INDEX])
+                .setQuantity(Integer.parseInt(splittedLine[AMOUNT_INDEX]))
+                .build())
+                .collect(Collectors.toList());
     }
 }

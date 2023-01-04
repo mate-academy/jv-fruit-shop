@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface FruitStorageCheckService {
 
-    Map<String, Integer> checkStorage(List<FruitTransaction> fruitTransactions);
+    Map<String, Integer> updateStorage(List<FruitTransaction> fruitTransactions);
 }

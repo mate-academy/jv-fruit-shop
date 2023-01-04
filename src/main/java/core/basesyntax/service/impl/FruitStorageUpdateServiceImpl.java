@@ -8,15 +8,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FruitStorageCheckServiceImpl implements FruitStorageCheckService {
+public class FruitStorageUpdateServiceImpl implements FruitStorageCheckService {
     private OperationStrategy operationStrategy;
 
-    public FruitStorageCheckServiceImpl(OperationStrategy operationStrategy) {
+    public FruitStorageUpdateServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public Map<String, Integer> checkStorage(List<FruitTransaction> fruitTransactions) {
+    public Map<String, Integer> updateStorage(List<FruitTransaction> fruitTransactions) {
         Map<String, Integer> resultFruitMap = new HashMap<>();
         for (FruitTransaction transaction : fruitTransactions) {
             FruitTransaction.Operation operation = transaction.getOperation();

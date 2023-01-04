@@ -1,56 +1,57 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.CsvWriteService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.TransactionsListService;
 import core.basesyntax.service.impl.CsvWriteServiceImpl;
-import core.basesyntax.service.impl.FruitStorageCheckServiceImpl;
+import core.basesyntax.service.impl.FruitStorageUpdateServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.TransactionsListServiceImpl;
 import core.basesyntax.strategy.CountStrategy;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.BalanceServiceStrategyImpl;
-import core.basesyntax.strategy.impl.PurchaseServiceStrategyImpl;
-import core.basesyntax.strategy.impl.ReturnServiceStrategyImpl;
-import core.basesyntax.strategy.impl.SupplyServiceStrategyImpl;
+import core.basesyntax.strategy.impl.BalanceCountStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseCountStrategyImpl;
+import core.basesyntax.strategy.impl.ReturnCountStrategyImpl;
+import core.basesyntax.strategy.impl.SupplyCountStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String PATH_FROM_FILE = "src/main/resources/file.csv";
-    private static final String PATH_TO_FILE = "src/main/resources/report.csv";
-    private static final ReaderServiceImpl readerService = new ReaderServiceImpl();
-    private static final TransactionsListServiceImpl processService
+    private static final String INPUT_FILE_PATH = "src/main/resources/data.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
+    private static final ReaderService readerService = new ReaderServiceImpl();
+    private static final TransactionsListService processService
             = new TransactionsListServiceImpl();
     private static final ReportServiceImpl reportService = new ReportServiceImpl();
-    private static final CsvWriteServiceImpl writeService = new CsvWriteServiceImpl();
-    private static final Storage storage = new Storage();
+    private static final CsvWriteService writeService = new CsvWriteServiceImpl();
     private static final Map<FruitTransaction.Operation, CountStrategy> countStrategyMap
             = new HashMap<>();
     private static final OperationStrategy operationStrategy
             = new OperationStrategy(countStrategyMap);
-    private static final FruitStorageCheckServiceImpl fruitStorageCheckService
-            = new FruitStorageCheckServiceImpl(operationStrategy);
+    private static final FruitStorageUpdateServiceImpl fruitStorageUpdateService
+            = new FruitStorageUpdateServiceImpl(operationStrategy);
     private static Map<String, Integer> resultMap = new HashMap<>();
 
     static {
         countStrategyMap.put(
-                FruitTransaction.Operation.BALANCE, new BalanceServiceStrategyImpl());
+                FruitTransaction.Operation.BALANCE, new BalanceCountStrategyImpl());
         countStrategyMap.put(
-                FruitTransaction.Operation.SUPPLY, new SupplyServiceStrategyImpl());
+                FruitTransaction.Operation.SUPPLY, new SupplyCountStrategyImpl());
         countStrategyMap.put(
-                FruitTransaction.Operation.PURCHASE, new PurchaseServiceStrategyImpl());
+                FruitTransaction.Operation.PURCHASE, new PurchaseCountStrategyImpl());
         countStrategyMap.put(
-                FruitTransaction.Operation.RETURN, new ReturnServiceStrategyImpl());
+                FruitTransaction.Operation.RETURN, new ReturnCountStrategyImpl());
     }
 
     public static void main(String[] args) {
-        String lines = readerService.readFromFile(PATH_FROM_FILE);
+        String fileData = readerService.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> transactionsList
-                = processService.getTransactionsList(lines, storage.getFruitMap());
-        resultMap = fruitStorageCheckService.checkStorage(transactionsList);
+                = processService.getTransactionsList(fileData);
+        resultMap = fruitStorageUpdateService.updateStorage(transactionsList);
         String report = reportService.getReport(resultMap);
-        writeService.writeReport(PATH_TO_FILE, report);
+        writeService.writeReport(REPORT_FILE_PATH, report);
     }
 }

@@ -60,13 +60,13 @@ public class FruitTransaction {
             this.operationLetter = letter;
         }
 
-        public static Operation getOperationByLetter(String letter) throws RuntimeException {
+        public static Operation getOperationByLetter(String letter) {
             for (Operation operation : Operation.values()) {
                 if (operation.operationLetter.equals(letter)) {
                     return operation;
                 }
             }
-            throw new RuntimeException("Wrong letter: " + letter);
+            throw new RuntimeException("Wrong operation letter inserted: " + letter);
         }
 
         public String getLetter() {
