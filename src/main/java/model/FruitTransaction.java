@@ -1,13 +1,14 @@
 package model;
 
-public class Fruit {
+public class FruitTransaction {
     private String fruitName;
-    private int fruitCount;
+    private int quantity;
     private Operation operation;
 
-    public Fruit(String fruitName, int fruitCount) {
+    public FruitTransaction(Operation operation, String fruitName, int fruitCount) {
         this.fruitName = fruitName;
-        this.fruitCount = fruitCount;
+        this.quantity = fruitCount;
+        this.operation = operation;
     }
 
     public Operation getOperation() {
@@ -26,11 +27,11 @@ public class Fruit {
         this.fruitName = fruitName;
     }
 
-    public int getFruitCount() {
-        return fruitCount;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setFruitCount(int fruitCount) {
-        this.fruitCount = fruitCount;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
