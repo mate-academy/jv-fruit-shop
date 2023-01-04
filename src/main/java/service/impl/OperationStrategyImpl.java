@@ -2,19 +2,19 @@ package service.impl;
 
 import java.util.Map;
 import model.Operation;
-import service.OperationHandle;
+import service.OperationHandler;
 import service.OperationStrategy;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<Operation, OperationHandle> operationHandlerMap;
+    private final Map<Operation, OperationHandler> operationHandlerMap;
 
     public OperationStrategyImpl(Map<Operation,
-            OperationHandle> operationHandlerMap) {
+            OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
     }
 
     @Override
-    public OperationHandle get(Operation type) {
+    public OperationHandler get(Operation type) {
         return operationHandlerMap.get(type);
     }
 }

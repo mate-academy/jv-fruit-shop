@@ -6,40 +6,40 @@ import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
 import service.FileService;
-import service.OperationHandle;
+import service.OperationHandler;
 import service.OperationStrategy;
 import service.ReportService;
 import service.impl.FileServiceImpl;
 import service.impl.OperationStrategyImpl;
 import service.impl.ReportServiceImpl;
 import service.impl.TransactionParseImpl;
-import service.operations.BalanceOperationImpl;
-import service.operations.PurchaseOperationImpl;
-import service.operations.ReturnOperationImpl;
-import service.operations.SupplyOperationImpl;
+import service.operations.BalanceOperationHandler;
+import service.operations.PurchaseOperationHandler;
+import service.operations.ReturnOperationHandler;
+import service.operations.SupplyOperationHandler;
 
 public class Main {
     public static final String FILE_NAME = "src/main/resources/Fruits.csv";
     public static final String FILE_REPORT = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        Map<Operation, OperationHandle> strategies = new HashMap<>();
-        strategies.put(Operation.BALANCE, new BalanceOperationImpl());
-        strategies.put(Operation.PURCHASE, new PurchaseOperationImpl());
-        strategies.put(Operation.SUPPLY, new SupplyOperationImpl());
-        strategies.put(Operation.RETURN, new ReturnOperationImpl());
+        Map<Operation, OperationHandler> strategies = new HashMap<>();
+        strategies.put(Operation.BALANCE, new BalanceOperationHandler());
+        strategies.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        strategies.put(Operation.SUPPLY, new SupplyOperationHandler());
+        strategies.put(Operation.RETURN, new ReturnOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategies);
         FileService fileService = new FileServiceImpl();
         List<String> dataFromFile = fileService.read(FILE_NAME);
         List<FruitTransaction> transactionList = new TransactionParseImpl().parse(dataFromFile);
 
         for (FruitTransaction fruitTransaction : transactionList) {
-            OperationHandle handler = operationStrategy
+            OperationHandler handler = operationStrategy
                     .get(fruitTransaction.getOperation());
-            handler.operation(fruitTransaction);
+            handler.handle(fruitTransaction);
         }
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.report();
+        String report = reportService.generateReport();
         fileService.write(FILE_REPORT, report);
     }
 }

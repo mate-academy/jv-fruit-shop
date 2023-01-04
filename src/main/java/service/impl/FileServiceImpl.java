@@ -9,7 +9,6 @@ import java.util.List;
 import service.FileService;
 
 public class FileServiceImpl implements FileService {
-
     @Override
     public List<String> read(String filePath) {
         File file = new File(filePath);
@@ -21,12 +20,11 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void write(String reportPath, String report) {
-        File fileReport = new File(reportPath);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileReport))) {
-            bufferedWriter.write(report);
+    public void write(String filePath, String text) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
+            bufferedWriter.write(text);
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write data to file " + reportPath, e);
+            throw new RuntimeException("Can`t write data to file " + filePath, e);
         }
     }
 }
