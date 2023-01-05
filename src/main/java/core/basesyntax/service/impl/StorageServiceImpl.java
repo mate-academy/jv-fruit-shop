@@ -1,23 +1,24 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitStorageCheckService;
+import core.basesyntax.service.StorageService;
 import core.basesyntax.strategy.CountStrategy;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FruitStorageUpdateServiceImpl implements FruitStorageCheckService {
-    private OperationStrategy operationStrategy;
+public class StorageServiceImpl implements StorageService {
+    private final OperationStrategy operationStrategy;
+    private final Storage storage = new Storage();
 
-    public FruitStorageUpdateServiceImpl(OperationStrategy operationStrategy) {
+    public StorageServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public Map<String, Integer> updateStorage(List<FruitTransaction> fruitTransactions) {
-        Map<String, Integer> resultFruitMap = new HashMap<>();
+    public Map<String, Integer> update(List<FruitTransaction> fruitTransactions) {
+        Map<String, Integer> fruitMap = storage.getFruitMap();
         for (FruitTransaction transaction : fruitTransactions) {
             FruitTransaction.Operation operation = transaction.getOperation();
             CountStrategy countStrategy = operationStrategy.getCountStrategyMap(operation);
@@ -27,11 +28,11 @@ public class FruitStorageUpdateServiceImpl implements FruitStorageCheckService {
             if (operation == FruitTransaction.Operation.BALANCE) {
                 currentQuantity = 0;
             } else {
-                currentQuantity = resultFruitMap.get(fruitName);
+                currentQuantity = fruitMap.get(fruitName);
             }
             int newAmount = countStrategy.count(currentQuantity, operationQuantity);
-            resultFruitMap.put(fruitName, newAmount);
+            fruitMap.put(fruitName, newAmount);
         }
-        return resultFruitMap;
+        return fruitMap;
     }
 }

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ReaderServiceImpl implements ReaderService {
+public class CsvReaderServiceImpl implements ReaderService {
 
     @Override
     public String readFromFile(String path) {

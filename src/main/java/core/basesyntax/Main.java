@@ -3,12 +3,12 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvWriteService;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.TransactionsListService;
+import core.basesyntax.service.TransactionsService;
+import core.basesyntax.service.impl.CsvReaderServiceImpl;
 import core.basesyntax.service.impl.CsvWriteServiceImpl;
-import core.basesyntax.service.impl.FruitStorageUpdateServiceImpl;
-import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.impl.TransactionsListServiceImpl;
+import core.basesyntax.service.impl.StorageServiceImpl;
+import core.basesyntax.service.impl.TransactionsServiceImpl;
 import core.basesyntax.strategy.CountStrategy;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceCountStrategyImpl;
@@ -22,18 +22,17 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/data.csv";
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
-    private static final ReaderService readerService = new ReaderServiceImpl();
-    private static final TransactionsListService processService
-            = new TransactionsListServiceImpl();
+    private static final ReaderService readerService = new CsvReaderServiceImpl();
+    private static final TransactionsService processService
+            = new TransactionsServiceImpl();
     private static final ReportServiceImpl reportService = new ReportServiceImpl();
     private static final CsvWriteService writeService = new CsvWriteServiceImpl();
     private static final Map<FruitTransaction.Operation, CountStrategy> countStrategyMap
             = new HashMap<>();
     private static final OperationStrategy operationStrategy
             = new OperationStrategy(countStrategyMap);
-    private static final FruitStorageUpdateServiceImpl fruitStorageUpdateService
-            = new FruitStorageUpdateServiceImpl(operationStrategy);
-    private static Map<String, Integer> resultMap = new HashMap<>();
+    private static final StorageServiceImpl fruitStorageUpdateService
+            = new StorageServiceImpl(operationStrategy);
 
     static {
         countStrategyMap.put(
@@ -48,10 +47,10 @@ public class Main {
 
     public static void main(String[] args) {
         String fileData = readerService.readFromFile(INPUT_FILE_PATH);
-        List<FruitTransaction> transactionsList
-                = processService.getTransactionsList(fileData);
-        resultMap = fruitStorageUpdateService.updateStorage(transactionsList);
-        String report = reportService.getReport(resultMap);
+        List<FruitTransaction> transactions
+                = processService.getTransactions(fileData);
+        Map<String, Integer> fruitStorage = fruitStorageUpdateService.update(transactions);
+        String report = reportService.getReport(fruitStorage);
         writeService.writeReport(REPORT_FILE_PATH, report);
     }
 }
