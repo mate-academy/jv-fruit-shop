@@ -1,7 +1,6 @@
-package core.basesyntax.service_Impl;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.service.ReaderService;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

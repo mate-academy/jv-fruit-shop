@@ -14,8 +14,8 @@ public class OperationHandlerPurchase implements OperationHandler {
             Storage.fruitsStorage.put(fruitInStorage, (currentQtyInStorage - purchaseQty));
         } else {
             throw new RuntimeException(
-                    "Quantity of " + fruitInStorage + " in storage " + currentQtyInStorage + ". " +
-                            "Purchase quantity is " + purchaseQty + ".");
+                    "Quantity of " + fruitInStorage + " in storage " + currentQtyInStorage
+                            + ". " + "Purchase quantity is " + purchaseQty + ".");
         }
     }
 }
