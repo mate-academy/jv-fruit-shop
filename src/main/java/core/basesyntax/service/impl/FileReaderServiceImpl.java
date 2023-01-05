@@ -10,7 +10,7 @@ public class FileReaderServiceImpl implements FileReaderService {
         try {
             return Files.readString(Path.of(fileName));
         } catch (IOException e) {
-            throw new RuntimeException("Can`t read data from file: ", e);
+            throw new RuntimeException("Can`t read data from file: " + fileName, e);
         }
     }
 }

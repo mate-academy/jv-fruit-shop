@@ -35,19 +35,19 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String letter;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
         public static Operation getOperationByLetter(String letter) {
             for (Operation current: Operation.values()) {
-                if (current.operation.equals(letter)) {
+                if (current.letter.equals(letter)) {
                     return current;
                 }
             }
-            throw new RuntimeException("Can't find an operation by letter " + letter);
+            throw new RuntimeException("Can't find an letter by letter " + letter);
         }
     }
 }

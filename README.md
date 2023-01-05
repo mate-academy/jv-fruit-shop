@@ -79,7 +79,7 @@ processing
 
 ```java
 public class FruitTransaction {
-    private Operation operation;
+    private Operation letter;
     private String fruit;
     private int quantity;
 
@@ -91,14 +91,14 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String letter;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String letter) {
+            this.letter = letter;
         }
 
         public String getOperation() {
-            return operation;
+            return letter;
         }
     }
 }

@@ -1,25 +1,25 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.impl.BalanceOperationServiceImpl;
-import core.basesyntax.strategy.impl.PurchaseOperationServiceImpl;
-import core.basesyntax.strategy.impl.ReturnOperationServiceImpl;
-import core.basesyntax.strategy.impl.SupplyOperationServiceImpl;
+import core.basesyntax.strategy.impl.BalanceOperationService;
+import core.basesyntax.strategy.impl.PurchaseOperationService;
+import core.basesyntax.strategy.impl.ReturnOperationService;
+import core.basesyntax.strategy.impl.SupplyOperationService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class OperationStrategy {
-    public OperationService getOperationService(FruitTransaction transaction) {
-        switch (transaction.getOperation().toString()) {
-            case "BALANCE":
-                return new BalanceOperationServiceImpl();
-            case "SUPPLY":
-                return new SupplyOperationServiceImpl();
-            case "PURCHASE":
-                return new PurchaseOperationServiceImpl();
-            case "RETURN":
-                return new ReturnOperationServiceImpl();
-            default:
-                throw new UnsupportedOperationException(
-                        "Operation " + transaction.getOperation() + " is not supported");
-        }
+    private static final Map<String, OperationHandler> operations = new HashMap<>();
+
+    static {
+        operations.put("BALANCE", new BalanceOperationService());
+        operations.put("SUPPLY", new SupplyOperationService());
+        operations.put("PURCHASE", new PurchaseOperationService());
+        operations.put("RETURN", new ReturnOperationService());
+    }
+
+    public OperationHandler getOperationService(FruitTransaction transaction) {
+        return operations.get(transaction.getOperation().toString());
     }
 }
