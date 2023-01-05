@@ -19,11 +19,11 @@ public class FruitTransactionParserServiceImpl implements FruitTransactionParser
         String[] lines = data.split(System.lineSeparator());
         Arrays.stream(lines)
                 .skip(1)
-                .forEach(parseTransaction());
+                .forEach(parseLines());
         return transactions;
     }
 
-    private Consumer<String> parseTransaction() {
+    private Consumer<String> parseLines() {
         return line -> {
             String[] splittedLine = line.split(",");
             FruitTransaction transaction = new FruitTransaction();
