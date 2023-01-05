@@ -11,7 +11,7 @@ public class OperationStrategy {
         this.countStrategyMap = countStrategyMap;
     }
 
-    public CountStrategy getCountStrategyMap(FruitTransaction.Operation operation) {
+    public CountStrategy getCountStrategy(FruitTransaction.Operation operation) {
         Optional<CountStrategy> optionalCountStrategy
                 = Optional.of(countStrategyMap.get(operation));
         return optionalCountStrategy

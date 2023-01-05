@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionsService;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class TransactionsServiceImpl implements TransactionsService {
     private static final int OPERATION_TYPE_INDEX = 0;
@@ -15,14 +15,14 @@ public class TransactionsServiceImpl implements TransactionsService {
     @Override
     public List<FruitTransaction> getTransactions(String data) {
         String[] lines = data.split(System.lineSeparator());
-        return IntStream.range(1, lines.length)
-                .mapToObj(i -> lines[i]
-                        .trim().split(COMMA_DELIMITER))
-                .map(splittedLine -> new FruitTransaction.FruitTransactionBuilder()
+        return Arrays.stream(lines)
+                .skip(1)
+                .map(line -> line.trim().split(COMMA_DELIMITER))
+                .map(splitLine -> new FruitTransaction.FruitTransactionBuilder()
                 .setOperation(FruitTransaction.Operation
-                        .getOperationByLetter(splittedLine[OPERATION_TYPE_INDEX]))
-                .setFruit(splittedLine[FRUIT_TYPE_INDEX])
-                .setQuantity(Integer.parseInt(splittedLine[AMOUNT_INDEX]))
+                        .getOperationByLetter(splitLine[OPERATION_TYPE_INDEX]))
+                .setFruit(splitLine[FRUIT_TYPE_INDEX])
+                .setQuantity(Integer.parseInt(splitLine[AMOUNT_INDEX]))
                 .build())
                 .collect(Collectors.toList());
     }

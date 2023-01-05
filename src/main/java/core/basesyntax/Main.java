@@ -1,11 +1,11 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CsvWriteService;
-import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.TransactionsService;
-import core.basesyntax.service.impl.CsvReaderServiceImpl;
-import core.basesyntax.service.impl.CsvWriteServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.StorageServiceImpl;
 import core.basesyntax.service.impl.TransactionsServiceImpl;
@@ -22,11 +22,11 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/data.csv";
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
-    private static final ReaderService readerService = new CsvReaderServiceImpl();
-    private static final TransactionsService processService
+    private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
+    private static final TransactionsService transactionsService
             = new TransactionsServiceImpl();
     private static final ReportServiceImpl reportService = new ReportServiceImpl();
-    private static final CsvWriteService writeService = new CsvWriteServiceImpl();
+    private static final FileWriterService fileWriterService = new FileWriterServiceImpl();
     private static final Map<FruitTransaction.Operation, CountStrategy> countStrategyMap
             = new HashMap<>();
     private static final OperationStrategy operationStrategy
@@ -46,11 +46,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        String fileData = readerService.readFromFile(INPUT_FILE_PATH);
+        String fileData = fileReaderService.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> transactions
-                = processService.getTransactions(fileData);
+                = transactionsService.getTransactions(fileData);
         Map<String, Integer> fruitStorage = fruitStorageUpdateService.update(transactions);
         String report = reportService.getReport(fruitStorage);
-        writeService.writeReport(REPORT_FILE_PATH, report);
+        fileWriterService.writeReport(REPORT_FILE_PATH, report);
     }
 }

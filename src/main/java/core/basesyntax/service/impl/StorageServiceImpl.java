@@ -21,15 +21,11 @@ public class StorageServiceImpl implements StorageService {
         Map<String, Integer> fruitMap = storage.getFruitMap();
         for (FruitTransaction transaction : fruitTransactions) {
             FruitTransaction.Operation operation = transaction.getOperation();
-            CountStrategy countStrategy = operationStrategy.getCountStrategyMap(operation);
+            CountStrategy countStrategy = operationStrategy.getCountStrategy(operation);
             String fruitName = transaction.getFruit();
             int operationQuantity = transaction.getQuantity();
-            int currentQuantity;
-            if (operation == FruitTransaction.Operation.BALANCE) {
-                currentQuantity = 0;
-            } else {
-                currentQuantity = fruitMap.get(fruitName);
-            }
+            int currentQuantity =
+                    operation == FruitTransaction.Operation.BALANCE ? 0 : fruitMap.get(fruitName);
             int newAmount = countStrategy.count(currentQuantity, operationQuantity);
             fruitMap.put(fruitName, newAmount);
         }
