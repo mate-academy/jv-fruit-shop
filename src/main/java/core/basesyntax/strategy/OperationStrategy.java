@@ -5,7 +5,6 @@ import core.basesyntax.strategy.impl.BalanceOperationService;
 import core.basesyntax.strategy.impl.PurchaseOperationService;
 import core.basesyntax.strategy.impl.ReturnOperationService;
 import core.basesyntax.strategy.impl.SupplyOperationService;
-
 import java.util.HashMap;
 import java.util.Map;
 

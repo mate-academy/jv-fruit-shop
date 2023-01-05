@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportBuilderService;
 import java.util.Map;
-import java.util.Vector;
 
 public class ReportBuilderServiceImpl implements ReportBuilderService {
     private static final String HEADER = "fruit,quantity";
