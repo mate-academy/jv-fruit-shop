@@ -10,7 +10,12 @@ import core.basesyntax.service_Impl.ReportServiceImpl;
 import core.basesyntax.service_Impl.TransactionsServiceImpl;
 import core.basesyntax.service_Impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.strategy.operation.*;
+import core.basesyntax.strategy.operation.OperationHandler;
+import core.basesyntax.strategy.operation.OperationHandlerBalance;
+import core.basesyntax.strategy.operation.OperationHandlerPurchase;
+import core.basesyntax.strategy.operation.OperationHandlerSupply;
+import core.basesyntax.strategy.operation.OperationHandlerReturn;
+
 
 import java.util.HashMap;
 import java.util.List;
