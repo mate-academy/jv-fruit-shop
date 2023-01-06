@@ -2,13 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParserService;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class FruitTransactionParserServiceImpl implements FruitTransactionParserService {
     private static final int OPERATION_INDEX = 0;
@@ -29,10 +25,10 @@ public class FruitTransactionParserServiceImpl implements FruitTransactionParser
     private FruitTransaction parseLine(String line) {
         String[] splittedLine = line.split(",");
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.getOperationByLetter(splittedLine[OPERATION_INDEX]));
+        transaction.setOperation(FruitTransaction.Operation
+                .getOperationByLetter(splittedLine[OPERATION_INDEX]));
         transaction.setFruit(splittedLine[FRUIT_INDEX]);
         transaction.setQuantity(Integer.parseInt(splittedLine[AMOUNT_INDEX]));
         return transaction;
     }
-
 }

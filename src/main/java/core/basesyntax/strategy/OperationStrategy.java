@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategy {
-    private static final Map<FruitTransaction.Operation, OperationHandler> operations = new HashMap<>();
+    private static final Map<FruitTransaction.Operation,
+            OperationHandler> operations = new HashMap<>();
 
     static {
         operations.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
