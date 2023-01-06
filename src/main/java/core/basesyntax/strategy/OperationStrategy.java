@@ -1,24 +1,24 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.impl.BalanceOperationService;
-import core.basesyntax.strategy.impl.PurchaseOperationService;
-import core.basesyntax.strategy.impl.ReturnOperationService;
-import core.basesyntax.strategy.impl.SupplyOperationService;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategy {
-    private static final Map<String, OperationHandler> operations = new HashMap<>();
+    private static final Map<FruitTransaction.Operation, OperationHandler> operations = new HashMap<>();
 
     static {
-        operations.put("BALANCE", new BalanceOperationService());
-        operations.put("SUPPLY", new SupplyOperationService());
-        operations.put("PURCHASE", new PurchaseOperationService());
-        operations.put("RETURN", new ReturnOperationService());
+        operations.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
+        operations.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        operations.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+        operations.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
     }
 
-    public OperationHandler getOperationService(FruitTransaction transaction) {
-        return operations.get(transaction.getOperation().toString());
+    public OperationHandler getHandler(FruitTransaction transaction) {
+        return operations.get(transaction.getOperation());
     }
 }
