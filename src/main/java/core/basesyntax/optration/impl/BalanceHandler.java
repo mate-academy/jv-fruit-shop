@@ -1,8 +1,8 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.optration.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitsTranslation;
-import core.basesyntax.service.OperationHandler;
+import core.basesyntax.optration.OperationHandler;
 
 public class BalanceHandler implements OperationHandler {
     @Override

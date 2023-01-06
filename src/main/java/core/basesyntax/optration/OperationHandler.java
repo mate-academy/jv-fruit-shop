@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.optration;
 
 import core.basesyntax.model.FruitsTranslation;
 

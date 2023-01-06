@@ -1,19 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileReader;
-import core.basesyntax.dao.FileWritter;
-import core.basesyntax.dao.ReportCreator;
-import core.basesyntax.dao.impl.FileReaderImpl;
-import core.basesyntax.dao.impl.FileWritterImpl;
-import core.basesyntax.dao.impl.ReportCreatorImpl;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWritter;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWritterImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.model.FruitsTranslation;
-import core.basesyntax.service.OperationHandler;
+import core.basesyntax.optration.OperationHandler;
 import core.basesyntax.service.TransactionService;
-import core.basesyntax.service.impl.BalanceHandler;
-import core.basesyntax.service.impl.OperationStrategyImpl;
-import core.basesyntax.service.impl.PurchaseHandler;
-import core.basesyntax.service.impl.ReturnHandler;
-import core.basesyntax.service.impl.SupplyHandler;
+import core.basesyntax.optration.impl.BalanceHandler;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.optration.impl.PurchaseHandler;
+import core.basesyntax.optration.impl.ReturnHandler;
+import core.basesyntax.optration.impl.SupplyHandler;
 import core.basesyntax.service.impl.TransactionServiseImpl;
 import java.util.HashMap;
 import java.util.List;
@@ -50,9 +50,9 @@ public class Main {
             operationHandler.getOperationResult(fruitTransaction);
         }
         ReportCreator reportService = new ReportCreatorImpl();
-        String dataToWtite = reportService.doReport();
+        String report = reportService.doReport();
 
         FileWritter writerService = new FileWritterImpl();
-        writerService.writeData(dataToWtite, WRITE_FILE);
+        writerService.writeData(report, WRITE_FILE);
     }
 }
