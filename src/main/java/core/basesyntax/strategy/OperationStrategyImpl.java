@@ -2,7 +2,6 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitsTranslation;
 import core.basesyntax.optration.OperationHandler;
-
 import java.util.Map;
 import jdk.dynalink.Operation;
 

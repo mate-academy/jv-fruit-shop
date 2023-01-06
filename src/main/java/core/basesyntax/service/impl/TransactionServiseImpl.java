@@ -21,7 +21,8 @@ public class TransactionServiseImpl implements TransactionService {
     private FruitsTranslation processes(String data) {
         String[] fruitsProcess = data.split(",");
         return new FruitsTranslation(
-                FruitsTranslation.Operation.getByCode(fruitsProcess[INDEX_FRUIT_EMPTY]), fruitsProcess[INDEX_FRUIT_OPERATION_FIRST],
+                FruitsTranslation.Operation.getByCode(fruitsProcess[INDEX_FRUIT_EMPTY]),
+                fruitsProcess[INDEX_FRUIT_OPERATION_FIRST],
                 Integer.parseInt(fruitsProcess[INDEX_FRUIT_OPERATION_SECOND]));
     }
 }
