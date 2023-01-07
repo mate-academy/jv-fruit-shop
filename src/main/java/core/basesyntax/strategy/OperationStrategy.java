@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.optration.OperationHandler;
-import jdk.dynalink.Operation;
+import core.basesyntax.operation.Operation;
+import core.basesyntax.operation.OperationHandler;
 
 public interface OperationStrategy {
     OperationHandler get(Operation operation);

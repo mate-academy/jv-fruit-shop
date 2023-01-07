@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitsTranslation;
+import core.basesyntax.operation.Operation;
 import core.basesyntax.service.TransactionService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,7 @@ public class TransactionServiseImpl implements TransactionService {
     private FruitsTranslation processes(String data) {
         String[] fruitsProcess = data.split(",");
         return new FruitsTranslation(
-                FruitsTranslation.Operation.getByCode(fruitsProcess[INDEX_FRUIT_EMPTY]),
+                Operation.getByCode(fruitsProcess[INDEX_FRUIT_EMPTY]),
                 fruitsProcess[INDEX_FRUIT_OPERATION_FIRST],
                 Integer.parseInt(fruitsProcess[INDEX_FRUIT_OPERATION_SECOND]));
     }

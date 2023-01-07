@@ -1,8 +1,8 @@
-package core.basesyntax.optration.impl;
+package core.basesyntax.operation.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitsTranslation;
-import core.basesyntax.optration.OperationHandler;
+import core.basesyntax.operation.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
     @Override
@@ -15,7 +15,9 @@ public class PurchaseHandler implements OperationHandler {
             Storage.fruitsMap.put(resultFruits, (currentQtyInStorage - purchaseQty));
         } else {
             throw new RuntimeException(
-                    "can't get operation result.Purchase quantity is " + purchaseQty + "!");
+                    "Can't get operation result. Purchase quantity: "
+                            + purchaseQty + ", while currently in storage: "
+                    + currentQtyInStorage);
         }
     }
 }

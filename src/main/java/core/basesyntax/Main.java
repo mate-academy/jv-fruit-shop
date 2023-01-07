@@ -1,17 +1,18 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitsTranslation;
-import core.basesyntax.optration.OperationHandler;
-import core.basesyntax.optration.impl.BalanceHandler;
-import core.basesyntax.optration.impl.PurchaseHandler;
-import core.basesyntax.optration.impl.ReturnHandler;
-import core.basesyntax.optration.impl.SupplyHandler;
+import core.basesyntax.operation.Operation;
+import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.operation.impl.BalanceHandler;
+import core.basesyntax.operation.impl.PurchaseHandler;
+import core.basesyntax.operation.impl.ReturnHandler;
+import core.basesyntax.operation.impl.SupplyHandler;
 import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWritter;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.impl.FileReaderImpl;
-import core.basesyntax.service.impl.FileWritterImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.TransactionServiseImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -24,17 +25,16 @@ public class Main {
     private static final String WRITE_FILE = "src/main/resources/reportFile.csv";
 
     public static void main(String[] args) {
-        Map<FruitsTranslation.Operation, OperationHandler>
-                operationOperationHandlerMap = new HashMap<>();
-        operationOperationHandlerMap.put(FruitsTranslation.Operation.BALANCE,
+        Map<Operation, OperationHandler> operationOperationHandlerMap =
+                new HashMap<>();
+        operationOperationHandlerMap.put(Operation.BALANCE,
                 new BalanceHandler());
-        operationOperationHandlerMap.put(FruitsTranslation.Operation.SUPPLY,
+        operationOperationHandlerMap.put(Operation.SUPPLY,
                 new SupplyHandler());
-        operationOperationHandlerMap.put(FruitsTranslation.Operation.PURCHASE,
+        operationOperationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseHandler());
-        operationOperationHandlerMap.put(FruitsTranslation.Operation.RETURN,
+        operationOperationHandlerMap.put(Operation.RETURN,
                 new ReturnHandler());
-
         FileReader readerService = new FileReaderImpl();
         List<String> dataFromInputFile = readerService.readData(READ_FILE);
 
@@ -49,10 +49,11 @@ public class Main {
                     operationStrategy.get(fruitTransaction.getOperation());
             operationHandler.getOperationResult(fruitTransaction);
         }
+
         ReportCreator reportService = new ReportCreatorImpl();
         String report = reportService.doReport();
 
-        FileWritter writerService = new FileWritterImpl();
+        FileWriter writerService = new FileWriterImpl();
         writerService.writeData(report, WRITE_FILE);
     }
 }

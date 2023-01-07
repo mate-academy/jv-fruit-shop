@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-import java.util.Arrays;
+import core.basesyntax.operation.Operation;
 import java.util.Objects;
 
 public class FruitsTranslation {
@@ -31,7 +31,6 @@ public class FruitsTranslation {
     }
 
     public Operation getOperation() {
-
         return operation;
     }
 
@@ -56,30 +55,6 @@ public class FruitsTranslation {
         return quantity == that.quantity
                 && operation == that.operation
                 && Objects.equals(fruit, that.fruit);
-    }
-
-    public enum Operation implements jdk.dynalink.Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private final String code;
-
-        Operation(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public static Operation getByCode(String code) {
-            return Arrays.stream(values())
-                    .filter(o -> o.getCode().equals(code))
-                    .findFirst()
-                    .orElseThrow(() -> new RuntimeException("Can't find operation " + code));
-        }
     }
 }
 

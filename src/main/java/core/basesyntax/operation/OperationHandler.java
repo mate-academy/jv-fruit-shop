@@ -1,4 +1,4 @@
-package core.basesyntax.optration;
+package core.basesyntax.operation;
 
 import core.basesyntax.model.FruitsTranslation;
 

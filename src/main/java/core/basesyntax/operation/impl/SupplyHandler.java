@@ -1,8 +1,8 @@
-package core.basesyntax.optration.impl;
+package core.basesyntax.operation.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitsTranslation;
-import core.basesyntax.optration.OperationHandler;
+import core.basesyntax.operation.OperationHandler;
 
 public class SupplyHandler implements OperationHandler {
     @Override
