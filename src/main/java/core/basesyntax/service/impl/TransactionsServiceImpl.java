@@ -11,7 +11,7 @@ public class TransactionsServiceImpl implements FruitTransactionParser {
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
     private static final String LINE_SEPARATOR = ",";
-    public static final int HEADER = 1;
+    private static final int HEADER = 1;
 
     @Override
     public List<FruitTransaction> parse(String data) {
@@ -20,11 +20,11 @@ public class TransactionsServiceImpl implements FruitTransactionParser {
                 .skip(HEADER)
                 .map(line -> line.trim().split(LINE_SEPARATOR))
                 .map(splittedLine -> new FruitTransaction.FruitTransactionBuilder()
-                .setOperation(FruitTransaction.Operation
-                        .getOperationByLetter(splittedLine[OPERATION_INDEX]))
-                .setFruit(splittedLine[FRUIT_INDEX])
-                .setQuantity(Integer.parseInt(splittedLine[AMOUNT_INDEX]))
-                .build())
+                        .setOperation(FruitTransaction.Operation
+                                .getOperationByLetter(splittedLine[OPERATION_INDEX]))
+                        .setFruit(splittedLine[FRUIT_INDEX])
+                        .setQuantity(Integer.parseInt(splittedLine[AMOUNT_INDEX]))
+                        .build())
                 .collect(Collectors.toList());
     }
 }
