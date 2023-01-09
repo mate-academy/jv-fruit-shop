@@ -3,14 +3,14 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.TransactionsService;
+import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.StorageServiceImpl;
 import core.basesyntax.service.impl.TransactionsServiceImpl;
-import core.basesyntax.strategy.CountStrategy;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationCalculator;
+import core.basesyntax.strategy.OperationCalculatorStrategy;
 import core.basesyntax.strategy.impl.BalanceCountStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseCountStrategyImpl;
 import core.basesyntax.strategy.impl.ReturnCountStrategyImpl;
@@ -23,14 +23,14 @@ public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/data.csv";
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
     private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
-    private static final TransactionsService transactionsService
+    private static final FruitTransactionParser transactionsService
             = new TransactionsServiceImpl();
     private static final ReportServiceImpl reportService = new ReportServiceImpl();
     private static final FileWriterService fileWriterService = new FileWriterServiceImpl();
-    private static final Map<FruitTransaction.Operation, CountStrategy> countStrategyMap
+    private static final Map<FruitTransaction.Operation, OperationCalculator> countStrategyMap
             = new HashMap<>();
-    private static final OperationStrategy operationStrategy
-            = new OperationStrategy(countStrategyMap);
+    private static final OperationCalculatorStrategy operationStrategy
+            = new OperationCalculatorStrategy(countStrategyMap);
     private static final StorageServiceImpl fruitStorageUpdateService
             = new StorageServiceImpl(operationStrategy);
 
@@ -48,7 +48,7 @@ public class Main {
     public static void main(String[] args) {
         String fileData = fileReaderService.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> transactions
-                = transactionsService.getTransactions(fileData);
+                = transactionsService.parse(fileData);
         Map<String, Integer> fruitStorage = fruitStorageUpdateService.update(transactions);
         String report = reportService.getReport(fruitStorage);
         fileWriterService.writeReport(REPORT_FILE_PATH, report);

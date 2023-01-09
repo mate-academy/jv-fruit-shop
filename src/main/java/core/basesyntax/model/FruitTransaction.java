@@ -54,15 +54,15 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operationLetter;
+        private final String letter;
 
         Operation(String letter) {
-            this.operationLetter = letter;
+            this.letter = letter;
         }
 
         public static Operation getOperationByLetter(String letter) {
             for (Operation operation : Operation.values()) {
-                if (operation.operationLetter.equals(letter)) {
+                if (operation.letter.equals(letter)) {
                     return operation;
                 }
             }
@@ -70,7 +70,7 @@ public class FruitTransaction {
         }
 
         public String getLetter() {
-            return operationLetter;
+            return letter;
         }
     }
 }

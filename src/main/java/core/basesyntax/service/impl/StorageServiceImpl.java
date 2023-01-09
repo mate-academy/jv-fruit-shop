@@ -3,17 +3,18 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.strategy.CountStrategy;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationCalculator;
+import core.basesyntax.strategy.OperationCalculatorStrategy;
 import java.util.List;
 import java.util.Map;
 
 public class StorageServiceImpl implements StorageService {
-    private final OperationStrategy operationStrategy;
-    private final Storage storage = new Storage();
+    private final OperationCalculatorStrategy operationStrategy;
+    private final Storage storage;
 
-    public StorageServiceImpl(OperationStrategy operationStrategy) {
+    public StorageServiceImpl(OperationCalculatorStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
+        storage = new Storage();
     }
 
     @Override
@@ -21,7 +22,7 @@ public class StorageServiceImpl implements StorageService {
         Map<String, Integer> fruitMap = storage.getFruitMap();
         for (FruitTransaction transaction : fruitTransactions) {
             FruitTransaction.Operation operation = transaction.getOperation();
-            CountStrategy countStrategy = operationStrategy.getCountStrategy(operation);
+            OperationCalculator countStrategy = operationStrategy.getCountStrategy(operation);
             String fruitName = transaction.getFruit();
             int operationQuantity = transaction.getQuantity();
             int currentQuantity =

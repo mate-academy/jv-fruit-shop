@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface CountStrategy {
+public interface OperationCalculator {
     int count(int currentAmount, int operationAmount);
 }

@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileReaderServiceImpl implements FileReaderService {
-
     @Override
     public String readFromFile(String path) {
         try {
