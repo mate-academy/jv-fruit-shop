@@ -2,17 +2,17 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.StorageService;
+import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.strategy.OperationCalculator;
 import core.basesyntax.strategy.OperationCalculatorStrategy;
 import java.util.List;
 import java.util.Map;
 
-public class StorageServiceImpl implements StorageService {
+public class TransactionProcessingServiceImpl implements TransactionProcessingService {
     private final OperationCalculatorStrategy operationStrategy;
     private final Storage storage;
 
-    public StorageServiceImpl(OperationCalculatorStrategy operationStrategy) {
+    public TransactionProcessingServiceImpl(OperationCalculatorStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
         storage = new Storage();
     }

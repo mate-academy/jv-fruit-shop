@@ -13,9 +13,7 @@ public class OperationCalculatorStrategy {
     }
 
     public OperationCalculator getCountStrategy(FruitTransaction.Operation operation) {
-        Optional<OperationCalculator> optionalCountStrategy
-                = Optional.of(countStrategyMap.get(operation));
-        return optionalCountStrategy
+        return Optional.of(countStrategyMap.get(operation))
                 .orElseThrow(() -> new RuntimeException("Wrong operation type -> " + operation));
     }
 }

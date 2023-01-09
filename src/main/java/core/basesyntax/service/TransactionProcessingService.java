@@ -4,6 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.Map;
 
-public interface StorageService {
+public interface TransactionProcessingService {
     Map<String, Integer> update(List<FruitTransaction> fruitTransactions);
 }
