@@ -4,6 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitTransactionParser;
+import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -31,7 +32,7 @@ public class Main {
             = new HashMap<>();
     private static final OperationCalculatorStrategy operationStrategy
             = new OperationCalculatorStrategy(countStrategyMap);
-    private static final TransactionProcessingServiceImpl fruitStorageUpdateService
+    private static final TransactionProcessingService fruitStorageUpdateService
             = new TransactionProcessingServiceImpl(operationStrategy);
 
     static {
