@@ -37,37 +37,3 @@ public class FruitServiceImpl implements FruitService {
         System.out.println(Storage.fruits);
     }
 }
-
-//        List<Fruit> fruitTransactionSet = notSortedList.stream().filter(x -> x.getOperation() == FruitTransaction.Operation.BALANCE
-//                        || x.getOperation() == FruitTransaction.Operation.SUPPLY).map(x -> !clearList.contains(x.getFruit()) ? clearList.add(new Fruit(x.getQuantity(),x.getFruit())) : clearList.indexOf());
-//                .collect(Collectors.toList());
-//        notSortedList.stream().filter(x -> x.getOperation() == FruitTransaction.Operation.BALANCE
-//                        || x.getOperation() == FruitTransaction.Operation.SUPPLY)
-//
-//                .collect(Collectors.toSet());
-//        for (int i = 0; i < fruitTransactionSet.size() - 1; i++) {
-//            for (int j = 0; j < fruitTransactionSet.size(); j++) {
-//                if (fruitTransactionSet.get(i).getFruit().equals(fruitTransactionSet.get(j).getFruit())) {
-//                    FruitTransaction fruitTransaction = new FruitTransaction();
-//                    fruitTransaction.setQuantity(fruitTransactionSet.get(i).getQuantity() + fruitTransactionSet.get(j).getQuantity());
-//                    fruitTransaction.setFruit(fruitTransaction.getFruit());
-//                    fruitTransaction.setOperation();
-//                    clearList.add(fruitTransactionSet.get(i).setQuantity(fruitTransactionSet.get(i).getQuantity() + fruitTransactionSet.get(j).getQuantity()));
-//                }
-//            }
-//        }
-
-//                        || x.getOperation() == FruitTransaction.Operation.SUPPLY)
-//                .map(x -> x.getOperation() == FruitTransaction.Operation.BALANCE
-//                        || x.getOperation() == FruitTransaction.Operation.SUPPLY
-//                        ? fruitTransactionSet.add(x) : fruitTransactionSet.)
-
-//         notSortedList.stream()
-//                .map(x -> x.getOperation() == FruitTransaction.Operation.BALANCE
-//                        || x.getOperation() == FruitTransaction.Operation.SUPPLY
-//                        ? x.getQuantity() : 0)
-//                .collect(Collectors.toList());
-//       Set<FruitTransaction> clearList = null;
-//        return null;
-//    }
-//}

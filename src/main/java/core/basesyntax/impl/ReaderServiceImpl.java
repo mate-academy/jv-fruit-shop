@@ -14,7 +14,6 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<FruitTransaction> readFromFile(String filePath) {
         File file = new File(filePath);
-        List<FruitTransaction> all = fruitDao.getAll(file);
-        return all;
+        return fruitDao.getAll(file);
     }
 }

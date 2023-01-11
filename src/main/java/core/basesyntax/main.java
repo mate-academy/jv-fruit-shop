@@ -5,8 +5,10 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.impl.FileWriterServiceImpl;
 import core.basesyntax.impl.FruitServiceImpl;
 import core.basesyntax.impl.ReaderServiceImpl;
+import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.*;
@@ -35,6 +37,8 @@ public class main {
         List<FruitTransaction> inputData = new ReaderServiceImpl().readFromFile(INPUT_FILE_NAME);
         FruitService fruitService = new FruitServiceImpl(fruitDao,operationStrategy);
         fruitService.calculateFruit(inputData);
+        ReportService reportService = new ReportServiceImpl();
+        reportService.createReport();
 
 
 
