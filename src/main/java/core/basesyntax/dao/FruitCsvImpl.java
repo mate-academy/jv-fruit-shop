@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,11 @@ public class FruitCsvImpl implements FruitDao {
     private FruitTransaction getFruitFromCsvRow(String line) {
         String[] fields = line.split(",");
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.valueOf(fields[0]));
+        FruitTransaction.Operation operation = Arrays.stream(FruitTransaction.Operation.values())
+                .filter(x -> x.getOperation().equals(fields[0]))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Can't find this operation"));
+        fruitTransaction.setOperation(operation);
         fruitTransaction.setFruit(fields[1]);
         fruitTransaction.setQuantity(Integer.parseInt(fields[2]));
         return fruitTransaction;

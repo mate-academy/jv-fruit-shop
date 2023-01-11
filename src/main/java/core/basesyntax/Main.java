@@ -27,13 +27,13 @@ public class Main {
         Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap
                 = new HashMap<>();
         operationOperationHandlerMap
-                .put(FruitTransaction.Operation.b, new BalanceStrategyOperationImpl());
+                .put(FruitTransaction.Operation.BALANCE, new BalanceStrategyOperationImpl());
         operationOperationHandlerMap
-                .put(FruitTransaction.Operation.s, new SupplyStrategyOperationImpl());
+                .put(FruitTransaction.Operation.SUPPLY, new SupplyStrategyOperationImpl());
         operationOperationHandlerMap
-                .put(FruitTransaction.Operation.p, new PurposeStrategyOperationImpl());
+                .put(FruitTransaction.Operation.PURCHASE, new PurposeStrategyOperationImpl());
         operationOperationHandlerMap
-                .put(FruitTransaction.Operation.r, new ReturnStrategyOperationImpl());
+                .put(FruitTransaction.Operation.RETURN, new ReturnStrategyOperationImpl());
         OperationStrategy operationStrategy
                 = new OperationStrategyImpl(operationOperationHandlerMap);
         //read
