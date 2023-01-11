@@ -7,6 +7,7 @@ import core.basesyntax.impl.FruitServiceImpl;
 import core.basesyntax.impl.ReaderServiceImpl;
 import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.strategy.OperationHandler;
@@ -38,7 +39,9 @@ public class main {
         FruitService fruitService = new FruitServiceImpl(fruitDao,operationStrategy);
         fruitService.calculateFruit(inputData);
         ReportService reportService = new ReportServiceImpl();
-        reportService.createReport();
+        List<String[]> report = reportService.createReport();
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.parse(report);
 
 
 
