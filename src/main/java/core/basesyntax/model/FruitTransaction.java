@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-public class FruitTransaction{
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -9,17 +9,16 @@ public class FruitTransaction{
         return operation;
     }
 
-    @Override
-    public String toString() {
-        return "FruitTransaction{" +
-                "operation=" + operation +
-                ", fruit='" + fruit + '\'' +
-                ", quantity=" + quantity +
-                '}';
-    }
-
     public void setOperation(Operation operation) {
         this.operation = operation;
+    }
+
+    @Override
+    public String toString() {
+        return "FruitTransaction{"
+                + "operation=" + operation
+                + ", fruit='" + fruit + '\''
+                + ", quantity=" + quantity + '}';
     }
 
     public String getFruit() {
@@ -37,7 +36,6 @@ public class FruitTransaction{
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    // getters, setters, ...
 
     public enum Operation {
         b("BALANCE"),
