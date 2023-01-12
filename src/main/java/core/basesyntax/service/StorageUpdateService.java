@@ -1,8 +1,8 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public interface StorageDao {
+public interface StorageUpdateService {
     void updateValue(List<FruitTransaction> fruitTransactions);
 }

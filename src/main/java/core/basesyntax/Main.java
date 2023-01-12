@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.service.StorageUpdateService;
+import core.basesyntax.service.impl.StorageUpdateServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Main {
     private static final DataReader DATA_READER = new DataReaderImpl();
-    private static final StorageDao STORAGE_DAO = new StorageDaoImpl();
+    private static final StorageUpdateService STORAGE_DAO = new StorageUpdateServiceImpl();
     private static final GetListOfTransactions LIST_OF_TRANSACTIONS
             = new GetListOfTransactionsImpl();
     private static final DataWriter DATA_WRITER = new DataWriterImpl();
