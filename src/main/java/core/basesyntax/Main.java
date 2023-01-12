@@ -24,7 +24,7 @@ public class Main {
     private static final ReportGenerator reportGenerator = new ReportGeneratorImpl();
     private static final WriteFileService writeFileService = new WriteFileServiceImpl();
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
-    private static final String REPORT_FILE_PATH = "";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         String dataFromCsv = readFileService.readFromFile(Path.of(INPUT_FILE_PATH));
