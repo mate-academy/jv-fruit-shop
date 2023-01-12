@@ -1,16 +1,16 @@
 package core.basesyntax;
 
-import core.basesyntax.service.StorageUpdateService;
-import core.basesyntax.service.impl.StorageUpdateServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
 import core.basesyntax.service.GetListOfTransactions;
 import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.StorageUpdateService;
 import core.basesyntax.service.impl.DataReaderImpl;
 import core.basesyntax.service.impl.DataWriterImpl;
 import core.basesyntax.service.impl.GetListOfTransactionsImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
+import core.basesyntax.service.impl.StorageUpdateServiceImpl;
 import java.util.List;
 
 public class Main {
