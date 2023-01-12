@@ -11,7 +11,7 @@ public class ReadFromFileImpl implements ReadFromFile {
         try {
             return Files.readString(path);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file", e);
+            throw new RuntimeException("Can't read data from file: " + path, e);
         }
     }
 }
