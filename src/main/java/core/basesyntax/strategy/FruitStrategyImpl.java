@@ -1,18 +1,15 @@
 package core.basesyntax.strategy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FruitStrategyImpl {
     public FruitService getFruitService(String operation) {
-        switch (operation) {
-            case "p":
-                return new Purchase();
-            case "r":
-                return new Return();
-            case "s":
-                return new Supply();
-            case "b":
-                return new Balance();
-            default:
-                throw new RuntimeException("Incorrect case of operation " + operation);
-        }
+        Map<String, FruitService> keyStorage = new HashMap<>();
+        keyStorage.put("b", new Balance());
+        keyStorage.put("p", new Purchase());
+        keyStorage.put("r", new Return());
+        keyStorage.put("s", new Supply());
+        return keyStorage.get(operation);
     }
 }
