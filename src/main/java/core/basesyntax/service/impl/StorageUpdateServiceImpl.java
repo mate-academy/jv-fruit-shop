@@ -18,13 +18,13 @@ public class StorageUpdateServiceImpl implements StorageUpdateService {
     }
 
     @Override
-    public void updateValue(List<FruitTransaction> fruitTransactions) {
+    public void update(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction e : fruitTransactions) {
-            if (Storage.fruitMap.containsKey(e.getFruitType())) {
+            if (Storage.fruits.containsKey(e.getFruitType())) {
                 OperationHandler operation = strategy.getOperationImpl(e.getOperation());
-                operation.updateAmountInStorage(e);
+                operation.process(e);
             } else {
-                Storage.fruitMap.put(e.getFruitType(), e.getAmount());
+                Storage.fruits.put(e.getFruitType(), e.getAmount());
             }
         }
     }

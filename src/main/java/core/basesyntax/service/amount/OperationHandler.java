@@ -3,5 +3,5 @@ package core.basesyntax.service.amount;
 import core.basesyntax.model.FruitTransaction;
 
 public interface OperationHandler {
-    void updateAmountInStorage(FruitTransaction fruitTransaction);
+    void process(FruitTransaction fruitTransaction);
 }

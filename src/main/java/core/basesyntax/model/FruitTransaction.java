@@ -5,7 +5,7 @@ public class FruitTransaction {
     private Operation operation;
     private int amount;
 
-    public FruitTransaction(FruitTransactionBuilder fruitTransactionBuilder) {
+    private FruitTransaction(FruitTransactionBuilder fruitTransactionBuilder) {
         this.fruitType = fruitTransactionBuilder.fruitType;
         this.operation = fruitTransactionBuilder.operation;
         this.amount = fruitTransactionBuilder.amount;
@@ -15,24 +15,12 @@ public class FruitTransaction {
         return fruitType;
     }
 
-    public void setFruitType(String fruitType) {
-        this.fruitType = fruitType;
-    }
-
     public Operation getOperation() {
         return operation;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
-    }
-
     public int getAmount() {
         return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public static class FruitTransactionBuilder {

@@ -11,7 +11,7 @@ public class ReportCreatorImpl implements ReportCreator {
     @Override
     public String createReport() {
         StringBuilder builder = new StringBuilder(HEADER).append(System.lineSeparator());
-        for (Map.Entry<String, Integer> element : Storage.fruitMap.entrySet()) {
+        for (Map.Entry<String, Integer> element : Storage.fruits.entrySet()) {
             builder.append(element.getKey())
                     .append(SPLITTER)
                     .append(element.getValue())

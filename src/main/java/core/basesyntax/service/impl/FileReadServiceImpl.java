@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.DataReader;
+import core.basesyntax.service.FileReadService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class DataReaderImpl implements DataReader {
+public class FileReadServiceImpl implements FileReadService {
     @Override
-    public String readData(String fromFile) {
+    public String readFromFile(String path) {
         StringBuilder builder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fromFile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String data = reader.readLine();
             while (data != null) {
                 builder.append(data).append(System.lineSeparator());
