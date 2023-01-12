@@ -23,8 +23,6 @@ public class FruitTransactionStrategy {
     }
 
     public FruitTransaction getTransaction(String transaction) {
-        FruitTransaction fruitTransaction = transactionStrategyMap.get(transaction);
-        return fruitTransaction;
+        return transactionStrategyMap.get(transaction);
     }
-
 }

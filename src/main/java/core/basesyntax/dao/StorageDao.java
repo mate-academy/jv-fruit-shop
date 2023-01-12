@@ -1,8 +1,9 @@
 package core.basesyntax.dao;
 
 public interface StorageDao {
-    int getQuantity(String fruit);
+    int getData(String fruit);
 
-    void putInStorage(String fruit, int quantity);
+    void putInData(String fruit, int quantity);
 
+    void updateData(String fruit, int newQuantity);
 }

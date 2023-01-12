@@ -9,6 +9,6 @@ public class BalanceTransaction implements FruitTransaction {
 
     @Override
     public void implementTransactionWithFruit(String fruit, int quantity) {
-        storageDao.putInStorage(fruit, quantity);
+        storageDao.putInData(fruit, quantity);
     }
 }
