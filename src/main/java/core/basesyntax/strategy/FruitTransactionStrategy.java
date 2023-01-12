@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitTransactionStrategy {
-    private static final Map<String, FruitTransaction> transactionStrategyMap;
+    private static final Map<String, FruitTransactionHandler> transactionStrategyMap;
     private static final int INDEX_TRANSACTION = 0;
     private static final int INDEX_FRUIT = 1;
     private static final int INDEX_QUANTITY = 2;
@@ -22,7 +22,7 @@ public class FruitTransactionStrategy {
         transactionStrategyMap.put("r", new ReturnTransaction());
     }
 
-    public FruitTransaction getTransaction(String transaction) {
+    public FruitTransactionHandler getTransaction(String transaction) {
         return transactionStrategyMap.get(transaction);
     }
 }

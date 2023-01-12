@@ -2,10 +2,10 @@ package core.basesyntax.service.impl;
 
 import static core.basesyntax.db.FruitStorage.storageFruits;
 
-import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.ReportCreatorService;
 import java.util.Map;
 
-public class ReportCreatorImpl implements ReportCreator {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String HEADER = "fruit,quantity";
     private static final char SEPARATOR = ',';
 

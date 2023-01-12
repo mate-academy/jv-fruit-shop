@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.DataParserService;
-import core.basesyntax.strategy.FruitTransaction;
+import core.basesyntax.strategy.FruitTransactionHandler;
 import core.basesyntax.strategy.FruitTransactionStrategy;
 import java.util.List;
 
@@ -20,9 +20,9 @@ public class DataParserServiceImpl implements DataParserService {
             String transaction = partsTransaction[TRANSACTION_INDEX];
             String fruit = partsTransaction[FRUIT_INDEX];
             int quantity = Integer.parseInt(partsTransaction[QUANTITY_INDEX]);
-            FruitTransaction fruitTransaction =
+            FruitTransactionHandler fruitTransaction =
                     fruitTransactionStrategy.getTransaction(transaction);
-            fruitTransaction.implementTransactionWithFruit(fruit, quantity);
+            fruitTransaction.handleTransaction(fruit, quantity);
         }
     }
 }
