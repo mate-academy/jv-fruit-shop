@@ -19,11 +19,12 @@ public class Main {
     private static final TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
     private static  ReportGenerator reportGenerator;
     private static WriteFileService writeFileService;
-    private static final String PATH_TO_FILE = "src/main/resources/input.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
     public static void main(String[] args) {
-        String dataFromCsv = readFileService.readFromFile(Path.of(PATH_TO_FILE));
+        String dataFromCsv = readFileService.readFromFile(Path.of(INPUT_FILE_PATH));
         List<FruitTransaction> transactions = fruitTransactionParser.parseTransactions(dataFromCsv);
         transactionProcessor.process(transactions);
         String report = reportGenerator.generateReport();
+
     }
 }
