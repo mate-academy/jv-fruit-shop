@@ -1,6 +1,8 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
-public class Return implements FruitService {
+import core.basesyntax.strategy.FruitService;
+
+public class ReturnImpl implements FruitService {
     @Override
     public int calculateFruits(int startAmount, int amountToOperate) {
         return startAmount + amountToOperate;

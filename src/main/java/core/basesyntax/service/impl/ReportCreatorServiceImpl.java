@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.GenerateReport;
+import core.basesyntax.service.ReportCreatorService;
 import java.util.Map;
 
-public class GenerateReportImpl implements GenerateReport {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String HEADER = "fruit,quantity";
     private static final String DELIMITER = ",";
 
-    public String generateReport(Map<String, Integer> mapFruit) {
+    public String createReport(Map<String, Integer> mapFruit) {
         StringBuilder report = new StringBuilder(HEADER);
         for (Map.Entry<String, Integer> entry : mapFruit.entrySet()) {
             report.append(System.lineSeparator())

@@ -1,19 +1,19 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.CalculateData;
-import core.basesyntax.strategy.FruitStrategyImpl;
+import core.basesyntax.service.DataProcessorService;
+import core.basesyntax.strategy.impl.FruitStrategyImpl;
 import java.util.List;
 import java.util.Map;
 
-public class CalculateDataImpl implements CalculateData {
-    static final int OPERATION_INDEX = 0;
-    static final int FRUIT_INDEX = 1;
-    static final int AMOUNT_INDEX = 2;
-    private FruitStrategyImpl fruitStrategy = new FruitStrategyImpl();
+public class DataProcessorServiceImpl implements DataProcessorService {
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int AMOUNT_INDEX = 2;
+    private static final FruitStrategyImpl fruitStrategy = new FruitStrategyImpl();
 
     @Override
-    public Map<String, Integer> calculateData(List<String[]> lines) {
+    public Map<String, Integer> processData(List<String[]> lines) {
         for (String[] line: lines) {
             String key = line[FRUIT_INDEX];
             int oldAmount = Storage.mapFruits.getOrDefault(key, 0);
