@@ -1,18 +1,20 @@
 package core.basesyntax;
 
+import core.basesyntax.impl.ConvertToCsvServiceImpl;
 import core.basesyntax.impl.FileWriterServiceImpl;
 import core.basesyntax.impl.FruitServiceImpl;
 import core.basesyntax.impl.ReaderServiceImpl;
 import core.basesyntax.impl.ReportServiceImpl;
+import core.basesyntax.impl.TransactionServiceImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ConvertToCsvService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.ReportService;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceStrategyOperationImpl;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-import core.basesyntax.strategy.impl.PurposeStrategyOperationImpl;
+import core.basesyntax.strategy.impl.PurchaseStrategyOperationImpl;
 import core.basesyntax.strategy.impl.ReturnStrategyOperationImpl;
 import core.basesyntax.strategy.impl.SupplyStrategyOperationImpl;
 import java.util.HashMap;
@@ -31,21 +33,23 @@ public class Main {
         operationOperationHandlerMap
                 .put(FruitTransaction.Operation.SUPPLY, new SupplyStrategyOperationImpl());
         operationOperationHandlerMap
-                .put(FruitTransaction.Operation.PURCHASE, new PurposeStrategyOperationImpl());
+                .put(FruitTransaction.Operation.PURCHASE, new PurchaseStrategyOperationImpl());
         operationOperationHandlerMap
                 .put(FruitTransaction.Operation.RETURN, new ReturnStrategyOperationImpl());
         OperationStrategy operationStrategy
                 = new OperationStrategyImpl(operationOperationHandlerMap);
         //read
-        List<FruitTransaction> readFromFile = new ReaderServiceImpl().readFromFile(inputFileName);
+        List<String> readFromFile = new ReaderServiceImpl().readFromFile(inputFileName);
         //process data
+        List<FruitTransaction> transactionService = new TransactionServiceImpl()
+                .convertStringToFruitTransaction(readFromFile);
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
-        fruitService.calculateFruit(readFromFile);
+        fruitService.calculateFruit(transactionService);
         //report create
-        ReportService reportService = new ReportServiceImpl();
-        List<String[]> report = reportService.createReport();
+        ConvertToCsvService convertToCsvService = new ConvertToCsvServiceImpl();
+        String report = new ReportServiceImpl().createReport(convertToCsvService.convertedList());
         //write report data
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.parse(report,outFileName);
+        fileWriterService.writeToFile(report,outFileName);
     }
 }

@@ -1,18 +1,29 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.dao.FruitCsvImpl;
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReaderService;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
-    private final FruitDao fruitDao = new FruitCsvImpl();
 
     @Override
-    public List<FruitTransaction> readFromFile(String filePath) {
+    public List<String> readFromFile(String filePath) {
         File file = new File(filePath);
-        return fruitDao.getAll(file);
+        List<String> fruits = new ArrayList<>();
+        String line;
+        try (BufferedReader br =
+                     new BufferedReader(new FileReader(file))) {
+            br.readLine();
+            while ((line = br.readLine()) != null) {
+                fruits.add(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read data from file " + file.getPath(), e);
+        }
+        return fruits;
     }
 }
