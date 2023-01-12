@@ -1,7 +1,7 @@
-package core.basesyntax.service.transactionOperations;
+package core.basesyntax.Service.TransactionOperations;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.Dao.FruitDao;
+import core.basesyntax.Model.FruitTransaction;
 import java.util.List;
 
 public class FruitTransactionCreationServiceImpl implements FruitTransactionCreationService {

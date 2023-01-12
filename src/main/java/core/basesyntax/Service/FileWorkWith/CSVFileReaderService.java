@@ -1,4 +1,4 @@
-package core.basesyntax.service.fileWorkWith;
+package core.basesyntax.Service.FileWorkWith;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package core.basesyntax.dao;
+package core.basesyntax.Dao;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.Model.FruitTransaction;
 import java.util.List;
 
 public interface FruitDao {

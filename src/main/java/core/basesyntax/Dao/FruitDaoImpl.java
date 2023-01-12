@@ -1,7 +1,7 @@
-package core.basesyntax.dao;
+package core.basesyntax.Dao;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.Db.Storage;
+import core.basesyntax.Model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

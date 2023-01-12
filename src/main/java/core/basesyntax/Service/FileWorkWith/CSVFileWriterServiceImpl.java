@@ -1,6 +1,6 @@
-package core.basesyntax.service.fileWorkWith;
+package core.basesyntax.Service.FileWorkWith;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.Model.FruitTransaction;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
