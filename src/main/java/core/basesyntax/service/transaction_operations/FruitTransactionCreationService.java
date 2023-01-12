@@ -1,4 +1,4 @@
-package core.basesyntax.Service.TransactionOperations;
+package core.basesyntax.service.transaction_operations;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
-package core.basesyntax.Dao;
+package core.basesyntax.dao;
 
-import core.basesyntax.Db.Storage;
-import core.basesyntax.Model.FruitTransaction;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +14,7 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public List<FruitTransaction> getFirst(String operation) {
-       return Storage.transactions.stream()
+        return Storage.transactions.stream()
                 .filter(transaction -> transaction.getOperation().getOperation().equals(operation))
                 .collect(Collectors.toList());
     }

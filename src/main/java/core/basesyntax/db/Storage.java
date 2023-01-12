@@ -1,6 +1,6 @@
-package core.basesyntax.Db;
+package core.basesyntax.db;
 
-import core.basesyntax.Model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
