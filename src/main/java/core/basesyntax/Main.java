@@ -22,29 +22,29 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final FileReadService dataReader = new FileReadServiceImpl();
-    private static final Map<Operation, OperationHandler> OPERATION_MAP = new HashMap<>();
+    private static final FileReadService fileReadService = new FileReadServiceImpl();
+    private static final Map<Operation, OperationHandler> operationsMap = new HashMap<>();
     private static final StorageUpdateService storageUpdateService
-            = new StorageUpdateServiceImpl(OPERATION_MAP);
-    private static final DataParserService listOfTransactions
+            = new StorageUpdateServiceImpl(operationsMap);
+    private static final DataParserService dataParserService
             = new DataParserServiceImpl();
-    private static final FileWriteService dataWriter = new FileWriteServiceImpl();
+    private static final FileWriteService fileWriteService = new FileWriteServiceImpl();
     private static final ReportCreator reportCreator = new ReportCreatorImpl();
     private static final String INPUT_PATH = "src/main/resources/data.csv";
     private static final String OUTPUT_PATH = "src/main/resources/report.csv";
 
     static {
-        OPERATION_MAP.put(Operation.BALANCE, new BalanceHandlerImpl());
-        OPERATION_MAP.put(Operation.SUPPLY, new SupplyHandlerImpl());
-        OPERATION_MAP.put(Operation.PURCHASE, new PurchaseHandlerImpl());
-        OPERATION_MAP.put(Operation.RETURN, new ReturnHandlerImpl());
+        operationsMap.put(Operation.BALANCE, new BalanceHandlerImpl());
+        operationsMap.put(Operation.SUPPLY, new SupplyHandlerImpl());
+        operationsMap.put(Operation.PURCHASE, new PurchaseHandlerImpl());
+        operationsMap.put(Operation.RETURN, new ReturnHandlerImpl());
     }
 
     public static void main(String[] args) {
-        String data = dataReader.readFromFile(INPUT_PATH);
-        List<FruitTransaction> fruitTransactions = listOfTransactions.getTransactions(data);
+        String data = fileReadService.readFromFile(INPUT_PATH);
+        List<FruitTransaction> fruitTransactions = dataParserService.getTransactions(data);
         storageUpdateService.update(fruitTransactions);
         String report = reportCreator.createReport();
-        dataWriter.writeToFile(OUTPUT_PATH, report);
+        fileWriteService.writeToFile(OUTPUT_PATH, report);
     }
 }
