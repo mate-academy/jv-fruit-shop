@@ -8,11 +8,11 @@ import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
-    public List<String> readFromFile(String pathToFileForRead) {
+    public List<String> readFromFile(String path) {
         try {
-            return Files.readAllLines(Path.of(pathToFileForRead));
+            return Files.readAllLines(Path.of(path));
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + pathToFileForRead, e);
+            throw new RuntimeException("Can't find file by path: " + path, e);
         }
     }
 }
