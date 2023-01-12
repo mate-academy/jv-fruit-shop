@@ -2,18 +2,17 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.DataProcessorService;
-import core.basesyntax.strategy.impl.FruitStrategyImpl;
+import core.basesyntax.strategy.FruitStrategy;
 import java.util.List;
-import java.util.Map;
 
 public class DataProcessorServiceImpl implements DataProcessorService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
-    private static final FruitStrategyImpl fruitStrategy = new FruitStrategyImpl();
+    private static final FruitStrategy fruitStrategy = new FruitStrategy();
 
     @Override
-    public Map<String, Integer> processData(List<String[]> lines) {
+    public void processData(List<String[]> lines) {
         for (String[] line: lines) {
             String key = line[FRUIT_INDEX];
             int oldAmount = Storage.mapFruits.getOrDefault(key, 0);
@@ -22,6 +21,5 @@ public class DataProcessorServiceImpl implements DataProcessorService {
                     fruitStrategy.getFruitService(line[OPERATION_INDEX].trim())
                             .calculateFruits(oldAmount, newAmount));
         }
-        return Storage.mapFruits;
     }
 }
