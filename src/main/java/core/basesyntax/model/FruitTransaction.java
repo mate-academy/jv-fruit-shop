@@ -47,7 +47,8 @@ public class FruitTransaction {
                     return o;
                 }
             }
-            throw new RuntimeException("Can't find this type of operation with key: " + operationLetter);
+            throw new RuntimeException("Can't find this type of operation with key: "
+                    + operationLetter);
         }
     }
 }

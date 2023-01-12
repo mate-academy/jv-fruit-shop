@@ -7,7 +7,8 @@ import core.basesyntax.strategy.OperationHandler;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void operate(FruitTransaction fruitTransaction) {
-        if (Storage.FRUITS_MAP.get(fruitTransaction.getFruit()) - fruitTransaction.getQuantity() < 0) {
+        if (Storage.FRUITS_MAP.get(fruitTransaction.getFruit())
+                - fruitTransaction.getQuantity() < 0) {
             throw new RuntimeException("We don't have enough fruits " + fruitTransaction.getFruit()
                     + ". Needed: " + fruitTransaction.getQuantity() + ", we have: "
                     + Storage.FRUITS_MAP.get(fruitTransaction.getFruit()));

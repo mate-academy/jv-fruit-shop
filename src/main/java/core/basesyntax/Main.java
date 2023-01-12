@@ -1,16 +1,16 @@
 package core.basesyntax;
 
-import core.basesyntax.service.ReadFromFile;
-import core.basesyntax.service.WriteToFile;
-import core.basesyntax.service.impl.ReadFromFileImpl;
-import core.basesyntax.service.impl.WriteToFileImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitParser;
+import core.basesyntax.service.ReadFromFile;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.TransactionProcessor;
+import core.basesyntax.service.WriteToFile;
 import core.basesyntax.service.impl.FruitParserImpl;
+import core.basesyntax.service.impl.ReadFromFileImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
+import core.basesyntax.service.impl.WriteToFileImpl;
 import core.basesyntax.storage.Storage;
 import java.nio.file.Path;
 import java.util.List;
