@@ -5,10 +5,10 @@ import core.basesyntax.service.ReadFileService;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.WriteFileService;
 import core.basesyntax.service.impl.ReadFileServiceImpl;
-import core.basesyntax.strategy.FruitTransactionParser;
-import core.basesyntax.strategy.TransactionProcessor;
-import core.basesyntax.strategy.impl.FruitTransactionParserImpl;
-import core.basesyntax.strategy.impl.TransactionProcessorImpl;
+import core.basesyntax.service.FruitTransactionParser;
+import core.basesyntax.service.TransactionProcessor;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
+import core.basesyntax.service.impl.TransactionProcessorImpl;
 
 import java.nio.file.Path;
 import java.util.List;
