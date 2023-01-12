@@ -5,7 +5,6 @@ import core.basesyntax.strategy.impl.PurchaseTransaction;
 import core.basesyntax.strategy.impl.ReturnTransaction;
 import core.basesyntax.strategy.impl.SupplyTransaction;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FruitTransactionStrategy {
@@ -23,15 +22,9 @@ public class FruitTransactionStrategy {
         transactionStrategyMap.put("r", new ReturnTransaction());
     }
 
-    public void considerTransactionWithFruit(List<String> fruitConsider) {
-        FruitTransaction fruitTransaction;
-        for (int i = 1; i < fruitConsider.size(); i++) {
-            String[] partsTransaction = fruitConsider.get(i).split(SEPARATOR);
-            String transaction = partsTransaction[INDEX_TRANSACTION];
-            String fruit = partsTransaction[INDEX_FRUIT];
-            int quantity = Integer.parseInt(partsTransaction[INDEX_QUANTITY]);
-            fruitTransaction = transactionStrategyMap.get(transaction);
-            fruitTransaction.implementTransactionWithFruit(fruit, quantity);
-        }
+    public FruitTransaction getTransaction(String transaction) {
+        FruitTransaction fruitTransaction = transactionStrategyMap.get(transaction);
+        return fruitTransaction;
     }
+
 }
