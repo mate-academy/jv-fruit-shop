@@ -10,13 +10,12 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String makeReport(Map<String, Integer> dataFromStorage) {
         StringBuilder builder = new StringBuilder();
-        builder.append(HEADER)
-                .append(System.lineSeparator());
+        builder.append(HEADER);
         for (Map.Entry<String, Integer> map : dataFromStorage.entrySet()) {
-            builder.append(map.getKey())
+            builder.append(System.lineSeparator())
+                    .append(map.getKey())
                     .append(REGEX)
-                    .append(map.getValue())
-                    .append(System.lineSeparator());
+                    .append(map.getValue());
         }
         return builder.toString().trim();
     }

@@ -25,10 +25,10 @@ public class Main {
     private static final WriteToFile writeToFile = new WriteToFileImpl();
 
     public static void main(String[] args) {
-        List<FruitTransaction> transaction = fruitParser
+        List<FruitTransaction> transactions = fruitParser
                 .parseData(readFromFile.readFile(Path.of(PATH_FROM)));
-        transactionProcessor.doTransaction(transaction);
-        String makeReport = reportGenerator.makeReport(Storage.FRUITS_MAP);
-        writeToFile.writeFile(Path.of(PATH_TO), makeReport);
+        transactionProcessor.doTransaction(transactions);
+        String report = reportGenerator.makeReport(Storage.FRUITS_MAP);
+        writeToFile.writeFile(Path.of(PATH_TO), report);
     }
 }

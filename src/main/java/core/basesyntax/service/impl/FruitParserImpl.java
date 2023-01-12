@@ -17,11 +17,11 @@ public class FruitParserImpl implements FruitParser {
         return Arrays
                 .stream(dataFromFile.split(System.lineSeparator()))
                 .skip(1)
-                .map(this::fruitTransactionCreation)
+                .map(this::createFruitTransaction)
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction fruitTransactionCreation(String data) {
+    private FruitTransaction createFruitTransaction(String data) {
         String[] splitedData = data.split(REGEX);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction
