@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitTransactionStrategy {
-    static final Map<String, FruitTransaction> transactionStrategyMap;
+    private static final Map<String, FruitTransaction> transactionStrategyMap;
     private static final int INDEX_TRANSACTION = 0;
     private static final int INDEX_FRUIT = 1;
     private static final int INDEX_QUANTITY = 2;
