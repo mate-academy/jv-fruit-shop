@@ -8,7 +8,6 @@ import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
-import core.basesyntax.strategy.FruitTransactionStrategy;
 import java.util.List;
 
 public class Main {
@@ -20,7 +19,6 @@ public class Main {
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> fruitConsider = fileReaderService.readFromFile(INPUT_FILE_PATH);
-        FruitTransactionStrategy fruitTransactionStrategy = new FruitTransactionStrategy();
         DataParserService stringParser = new DataParserServiceImpl();
         stringParser.parseData(fruitConsider);
         ReportCreator reportCreator = new ReportCreatorImpl();
@@ -28,5 +26,4 @@ public class Main {
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(report, OUTPUT_FILE_PATH);
     }
-
 }

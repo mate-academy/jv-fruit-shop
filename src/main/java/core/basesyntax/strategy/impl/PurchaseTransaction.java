@@ -5,11 +5,10 @@ import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.strategy.FruitTransaction;
 
 public class PurchaseTransaction implements FruitTransaction {
-    private StorageDao storageDao = new StorageDaoImpl();
+    private final StorageDao storageDao = new StorageDaoImpl();
 
     @Override
     public void implementTransactionWithFruit(String fruit, int quantity) {
         storageDao.updateData(fruit, (storageDao.getData(fruit) - quantity));
-
     }
 }

@@ -12,7 +12,6 @@ public class DataParserServiceImpl implements DataParserService {
     private static final String SEPARATOR = ",";
     private static final FruitTransactionStrategy fruitTransactionStrategy
             = new FruitTransactionStrategy();
-    private FruitTransaction fruitTransaction;
 
     @Override
     public void parseData(List<String> fruitConsider) {
@@ -21,7 +20,8 @@ public class DataParserServiceImpl implements DataParserService {
             String transaction = partsTransaction[TRANSACTION_INDEX];
             String fruit = partsTransaction[FRUIT_INDEX];
             int quantity = Integer.parseInt(partsTransaction[QUANTITY_INDEX]);
-            fruitTransaction = fruitTransactionStrategy.getTransaction(transaction);
+            FruitTransaction fruitTransaction =
+                    fruitTransactionStrategy.getTransaction(transaction);
             fruitTransaction.implementTransactionWithFruit(fruit, quantity);
         }
     }
