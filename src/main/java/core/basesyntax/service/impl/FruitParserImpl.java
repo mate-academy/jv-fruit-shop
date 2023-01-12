@@ -13,7 +13,7 @@ public class FruitParserImpl implements FruitParser {
     private static final int INDEX_QUANTITY = 2;
 
     @Override
-    public List<FruitTransaction> createTransaction(String dataFromFile) {
+    public List<FruitTransaction> parseData(String dataFromFile) {
         return Arrays
                 .stream(dataFromFile.split(System.lineSeparator()))
                 .skip(1)

@@ -1,6 +1,6 @@
-package core.basesyntax.csv.reader.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.csv.reader.WriteToFile;
+import core.basesyntax.service.WriteToFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,6 +14,5 @@ public class WriteToFileImpl implements WriteToFile {
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file", e);
         }
-
     }
 }

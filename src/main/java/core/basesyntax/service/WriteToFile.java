@@ -1,4 +1,4 @@
-package core.basesyntax.csv.reader;
+package core.basesyntax.service;
 
 import java.nio.file.Path;
 

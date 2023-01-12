@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.csv.reader.ReadFromFile;
-import core.basesyntax.csv.reader.WriteToFile;
-import core.basesyntax.csv.reader.impl.ReadFromFileImpl;
-import core.basesyntax.csv.reader.impl.WriteToFileImpl;
+import core.basesyntax.service.ReadFromFile;
+import core.basesyntax.service.WriteToFile;
+import core.basesyntax.service.impl.ReadFromFileImpl;
+import core.basesyntax.service.impl.WriteToFileImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitParser;
 import core.basesyntax.service.ReportGenerator;
@@ -26,9 +26,9 @@ public class Main {
 
     public static void main(String[] args) {
         List<FruitTransaction> transaction = fruitParser
-                .createTransaction(readFromFile.readFile(Path.of(PATH_FROM)));
+                .parseData(readFromFile.readFile(Path.of(PATH_FROM)));
         transactionProcessor.doTransaction(transaction);
-        String makeReport = reportGenerator.makeReport(Storage.fruits);
+        String makeReport = reportGenerator.makeReport(Storage.FRUITS_MAP);
         writeToFile.writeFile(Path.of(PATH_TO), makeReport);
     }
 }

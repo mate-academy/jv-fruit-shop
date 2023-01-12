@@ -1,6 +1,6 @@
-package core.basesyntax.csv.reader.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.csv.reader.ReadFromFile;
+import core.basesyntax.service.ReadFromFile;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
