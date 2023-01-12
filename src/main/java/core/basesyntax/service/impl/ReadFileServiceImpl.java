@@ -11,9 +11,9 @@ public class ReadFileServiceImpl implements ReadFileService {
     private static final int FILE_HEADER_LINE = 1;
 
     @Override
-    public List<String> readFromFile(Path path) {
+    public List<String> readFromFile(String path) {
         try {
-            return Files.readAllLines(path).stream()
+            return Files.readAllLines(Path.of(path)).stream()
                     .skip(FILE_HEADER_LINE).collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException(

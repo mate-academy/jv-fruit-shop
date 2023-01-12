@@ -11,12 +11,11 @@ import core.basesyntax.service.impl.ReadFileServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.service.impl.WriteFileServiceImpl;
-import java.nio.file.Path;
 import java.util.List;
 
 public class Main {
-    private static final Path PATH_TO_INPUT_FILE = Path.of("src/main/resources/input.csv");
-    private static final Path PATH_TO_REPORT_FILE = Path.of("src/main/resources/report.csv");
+    private static final String PATH_TO_INPUT_FILE = "src/main/resources/input.csv";
+    private static final String PATH_TO_REPORT_FILE = "src/main/resources/report.csv";
     private static final ReadFileService readFileService =
             new ReadFileServiceImpl();
     private static final FruitTransactionParser fruitTransactionParser =
