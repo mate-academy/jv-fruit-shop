@@ -7,10 +7,7 @@ import core.basesyntax.service.FileReadService;
 import core.basesyntax.service.FileWriteService;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.StorageUpdateService;
-import core.basesyntax.service.amount.BalanceHandlerImpl;
-import core.basesyntax.service.amount.OperationHandler;
-import core.basesyntax.service.amount.PurchaseHandlerImpl;
-import core.basesyntax.service.amount.SupplyHandlerImpl;
+import core.basesyntax.service.amount.*;
 import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.FileReadServiceImpl;
 import core.basesyntax.service.impl.FileWriteServiceImpl;
@@ -36,7 +33,7 @@ public class Main {
         OPERATION_MAP.put(Operation.BALANCE, new BalanceHandlerImpl());
         OPERATION_MAP.put(Operation.SUPPLY, new SupplyHandlerImpl());
         OPERATION_MAP.put(Operation.PURCHASE, new PurchaseHandlerImpl());
-        OPERATION_MAP.put(Operation.RETURN, new PurchaseHandlerImpl());
+        OPERATION_MAP.put(Operation.RETURN, new ReturnHandlerImpl());
     }
 
     public static void main(String[] args) {
