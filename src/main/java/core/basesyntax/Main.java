@@ -3,14 +3,14 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.file_work_with.CsvFileReaderService;
-import core.basesyntax.service.file_work_with.CsvFileReaderServiceImpl;
-import core.basesyntax.service.file_work_with.CsvFileWriterService;
-import core.basesyntax.service.file_work_with.CsvFileWriterServiceImpl;
-import core.basesyntax.service.transaction_operations.FruitTransactionCreationService;
-import core.basesyntax.service.transaction_operations.FruitTransactionCreationServiceImpl;
-import core.basesyntax.service.transaction_operations.FruitTransactionReportMaker;
-import core.basesyntax.service.transaction_operations.FruitTransactionReportMakerImpl;
+import core.basesyntax.service.file.work.CsvFileReaderService;
+import core.basesyntax.service.file.work.CsvFileReaderServiceImpl;
+import core.basesyntax.service.file.work.CsvFileWriterService;
+import core.basesyntax.service.file.work.CsvFileWriterServiceImpl;
+import core.basesyntax.service.operations.FruitTransactionCreationService;
+import core.basesyntax.service.operations.FruitTransactionCreationServiceImpl;
+import core.basesyntax.service.operations.FruitTransactionReportMaker;
+import core.basesyntax.service.operations.FruitTransactionReportMakerImpl;
 import java.util.List;
 
 public class Main {

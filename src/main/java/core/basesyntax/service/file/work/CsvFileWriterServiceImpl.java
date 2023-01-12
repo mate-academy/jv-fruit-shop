@@ -1,4 +1,4 @@
-package core.basesyntax.service.file_work_with;
+package core.basesyntax.service.file.work;
 
 import core.basesyntax.model.FruitTransaction;
 import java.io.FileWriter;
@@ -11,7 +11,7 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     public void writeToFile(String writeToFilePath, List<FruitTransaction> data) {
         try (PrintWriter printWriter = new PrintWriter(new FileWriter(writeToFilePath))) {
             data.stream()
-                    .map(this::convertToCSV)
+                    .map(this::convertToCsv)
                     .forEach(printWriter::println);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to this path: "
@@ -19,7 +19,7 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
         }
     }
 
-    private String convertToCSV(FruitTransaction transaction) {
+    private String convertToCsv(FruitTransaction transaction) {
         return String.join(",", transaction.getFruit(), String.valueOf(transaction.getQuantity()));
     }
 }

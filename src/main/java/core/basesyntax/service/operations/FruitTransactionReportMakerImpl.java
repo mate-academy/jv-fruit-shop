@@ -1,4 +1,4 @@
-package core.basesyntax.service.transaction_operations;
+package core.basesyntax.service.operations;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;

@@ -1,4 +1,4 @@
-package core.basesyntax.service.file_work_with;
+package core.basesyntax.service.file.work;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
