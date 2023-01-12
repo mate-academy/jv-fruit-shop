@@ -9,10 +9,6 @@ import java.util.Map;
 
 public class FruitTransactionStrategy {
     private static final Map<String, FruitTransactionHandler> transactionStrategyMap;
-    private static final int INDEX_TRANSACTION = 0;
-    private static final int INDEX_FRUIT = 1;
-    private static final int INDEX_QUANTITY = 2;
-    private static final String SEPARATOR = ",";
 
     static {
         transactionStrategyMap = new HashMap<>();

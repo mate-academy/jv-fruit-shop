@@ -14,16 +14,15 @@ public class Main {
     private static final String INPUT_FILE_PATH
             = "src/main/resources/transaction.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
+    private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
+    private static final DataParserService stringParser = new DataParserServiceImpl();
+    private static final ReportCreatorService reportCreator = new ReportCreatorServiceImpl();
+    private static final FileWriterService fileWriterService = new FileWriterServiceImpl();
 
     public static void main(String[] args) {
-
-        FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> fruitConsider = fileReaderService.readFromFile(INPUT_FILE_PATH);
-        DataParserService stringParser = new DataParserServiceImpl();
         stringParser.parseData(fruitConsider);
-        ReportCreatorService reportCreator = new ReportCreatorServiceImpl();
         String report = reportCreator.createReport();
-        FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(report, OUTPUT_FILE_PATH);
     }
 }

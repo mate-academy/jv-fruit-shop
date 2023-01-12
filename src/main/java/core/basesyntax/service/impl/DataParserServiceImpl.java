@@ -10,8 +10,11 @@ public class DataParserServiceImpl implements DataParserService {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final String SEPARATOR = ",";
-    private static final FruitTransactionStrategy fruitTransactionStrategy
-            = new FruitTransactionStrategy();
+    private final FruitTransactionStrategy fruitTransactionStrategy;
+
+    public DataParserServiceImpl() {
+        fruitTransactionStrategy = new FruitTransactionStrategy();
+    }
 
     @Override
     public void parseData(List<String> fruitConsider) {
