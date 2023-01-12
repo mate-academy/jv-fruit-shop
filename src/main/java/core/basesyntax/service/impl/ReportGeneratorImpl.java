@@ -6,6 +6,7 @@ import java.util.Map;
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String REGEX = ",";
     private static final String HEADER = "fruit,amount";
+
     @Override
     public String makeReport(Map<String, Integer> dataFromStorage) {
         StringBuilder builder = new StringBuilder();
