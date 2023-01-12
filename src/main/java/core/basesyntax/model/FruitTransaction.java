@@ -54,13 +54,4 @@ public class FruitTransaction {
             return null;
         }
     }
-
-    @Override
-    public String toString() {
-        return "FruitTransaction{" +
-                "operation=" + operation +
-                ", fruit='" + fruit + '\'' +
-                ", quantity=" + quantity +
-                '}';
-    }
 }
