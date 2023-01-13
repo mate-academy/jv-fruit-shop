@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.DataParserService;
 import core.basesyntax.strategy.FruitTransactionHandler;
 import core.basesyntax.strategy.FruitTransactionStrategy;
+import core.basesyntax.strategy.FruitTransactionStrategyImpl;
 import java.util.List;
 
 public class DataParserServiceImpl implements DataParserService {
@@ -13,7 +14,7 @@ public class DataParserServiceImpl implements DataParserService {
     private final FruitTransactionStrategy fruitTransactionStrategy;
 
     public DataParserServiceImpl() {
-        fruitTransactionStrategy = new FruitTransactionStrategy();
+        fruitTransactionStrategy = new FruitTransactionStrategyImpl();
     }
 
     @Override
