@@ -11,7 +11,7 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> readFile(String path) {
         List<String> dateFromFile;
         try {
-            dateFromFile = Files.readAllLines(Path.of("src/main/java/resources/dataInplut.csv"));
+            dateFromFile = Files.readAllLines(Path.of("src/main/java/resources/dataInput.csv"));
         } catch (IOException e) {
             throw new RuntimeException("Can not read data, please check file:" + path, e);
         }

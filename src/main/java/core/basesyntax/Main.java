@@ -11,16 +11,14 @@ import core.basesyntax.services.impl.OperationStrategyImpl;
 import core.basesyntax.services.impl.ReaderServiceImpl;
 import core.basesyntax.services.impl.ReportMakerImpl;
 import core.basesyntax.services.impl.WriterServiceImpl;
-import core.basesyntax.strategy.impl.BalanceHandler;
-import core.basesyntax.strategy.impl.PurchaseHandler;
-import core.basesyntax.strategy.impl.ReturnHandler;
-import core.basesyntax.strategy.impl.SupplyHandler;
+import core.basesyntax.strategy.impl.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_PATH = "src/main/java/resources/dataInplut.csv";
+    private static final String INPUT_FILE_PATH = "src/main/java/resources/dataInput.csv";
     private static final String REPORT_FILE_PATH = "src/main/java/resources/dataReport.csv";
 
     public static void main(String[] args) {
@@ -33,17 +31,7 @@ public class Main {
         operationHandlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlersMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
 
-        FruitTransactionParserImpl parser = new FruitTransactionParserImpl();
-        List<FruitTransaction> fruitTransactionsList =
-                parser.getFruitTransactionsList(dateFromFile);
-
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlersMap);
-
-        for (FruitTransaction fruitTransaction : fruitTransactionsList) {
-            OperationHandler handler = operationStrategy
-                    .get(fruitTransaction.getOperation());
-            handler.operate(fruitTransaction);
-        }
+        new ProcessingService().process(dateFromFile, operationHandlersMap);
 
         ReportMaker reportMaker = new ReportMakerImpl();
         String report = reportMaker.makeReport();

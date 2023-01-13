@@ -15,8 +15,7 @@ public class ReportMakerImpl implements ReportMaker {
     public String makeReport() {
         String report = COLUMNS;
         report += STORAGE.keySet().stream()
-                .map(key -> key + LINE_SPLITTER + STORAGE.get(key) + END_LINE)
-                .collect(Collectors.joining());
+                .map(key -> key + LINE_SPLITTER + STORAGE.get(key) + END_LINE).collect(Collectors.joining());
         return report;
     }
 }
