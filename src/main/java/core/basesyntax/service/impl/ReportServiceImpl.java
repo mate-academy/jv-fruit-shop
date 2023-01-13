@@ -9,8 +9,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReport(Map<String, Integer> storage) {
-        StringBuilder reportBuilder = new StringBuilder();
-        reportBuilder.append(HEADER);
+        StringBuilder reportBuilder = new StringBuilder(HEADER);
         for (Map.Entry<String, Integer> entry : storage.entrySet()) {
             reportBuilder.append(System.lineSeparator())
                     .append(entry.getKey())

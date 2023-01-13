@@ -6,8 +6,8 @@ import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void updateQuantity(String fruit, int quantity) {
-        FruitStorage.fruitStorage.merge(fruit, quantity, Integer::sum);
+    public void saveFruit(String fruit, int quantity) {
+        FruitStorage.fruitStorage.put(fruit, quantity);
     }
 
     @Override
@@ -16,12 +16,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public boolean containsFruit(String fruit) {
-        return FruitStorage.fruitStorage.containsKey(fruit);
-    }
-
-    @Override
-    public Map<String, Integer> getStorage() {
+    public Map<String, Integer> getAll() {
         return FruitStorage.fruitStorage;
     }
 }

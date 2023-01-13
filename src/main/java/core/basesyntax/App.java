@@ -41,7 +41,7 @@ public class App {
                 new ReturnOperationHandler());
         List<String> data = FILE_READER_SERVICE.readAllLines(INPUT_FILE_PATH);
         PROCESS_DATA_SERVICE.processData(data, operationHandlerMap);
-        Map<String, Integer> fruitStorage = FRUIT_DAO.getStorage();
+        Map<String, Integer> fruitStorage = FRUIT_DAO.getAll();
         String report = REPORT_SERVICE.getReport(fruitStorage);
         FILE_WRITER_SERVICE.writeToFile(OUTPUT_FILE_PATH, report);
     }
