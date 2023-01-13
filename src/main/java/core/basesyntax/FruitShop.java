@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.serviceimpl.ParserServiceImpl;
 import core.basesyntax.serviceimpl.ReaderServiceImpl;
@@ -8,7 +7,6 @@ import core.basesyntax.serviceimpl.ReportServiceImpl;
 import core.basesyntax.serviceimpl.WriterServiceImpl;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.StrategyImpl;
-
 import java.util.List;
 
 public class FruitShop {

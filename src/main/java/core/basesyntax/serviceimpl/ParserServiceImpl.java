@@ -1,6 +1,5 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParserService;
@@ -18,14 +17,17 @@ public class ParserServiceImpl implements ParserService {
     public List<Transaction> parse(List<String> data) {
         List<Transaction> transactions = new ArrayList<>();
         Transaction transaction = new Transaction();
-        data.forEach(d -> {String[] column = d.split(SEPARATOR);
-            transaction.setSum(Integer.parseInt(column[QUANTITY_COLUMN]));
-            transaction.setFruit(column[FRUIT_COLUMN]);
-            transaction.setOperation(Arrays.stream(Operation.values())
-                    .filter(o -> o.getOperation().equals(column[OPERATION_COLUMN]))
-                    .findFirst()
-                    .get());
-            transactions.add(transaction);});
+        data.stream()
+                .forEach(d -> {
+                    String[] column = d.split(SEPARATOR);
+                    transaction.setSum(Integer.parseInt(column[QUANTITY_COLUMN]));
+                    transaction.setFruit(column[FRUIT_COLUMN]);
+                    transaction.setOperation(Arrays.stream(Operation.values())
+                            .filter(o -> o.getOperation().equals(column[OPERATION_COLUMN]))
+                            .findFirst()
+                            .get());
+                    transactions.add(transaction); }
+                );
         return transactions;
     }
 }
