@@ -24,8 +24,8 @@ public class DataParserServiceImpl implements DataParserService {
                     fruit, quantity);
         };
 
-        fromFile.remove(HEADER_INDEX);
         return fromFile.stream()
+                .skip(1)
                 .map(madeTransaction)
                 .collect(Collectors.toList());
     }

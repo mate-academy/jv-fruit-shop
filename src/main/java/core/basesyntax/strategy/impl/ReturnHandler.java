@@ -2,6 +2,7 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.FruitTransactionHandler;
 
 public class ReturnHandler implements FruitTransactionHandler {
@@ -12,8 +13,9 @@ public class ReturnHandler implements FruitTransactionHandler {
     }
 
     @Override
-    public void handleTransaction(String fruit, int quantity) {
-        fruitDao.saveQuantity(fruit, (fruitDao.getQuantityByName(fruit)
-                + quantity));
+    public void handleTransaction(FruitTransaction fruitTransaction) {
+        fruitDao.saveQuantity(fruitTransaction.getFruit(),
+                (fruitDao.getQuantityByName(fruitTransaction.getFruit())
+                        + fruitTransaction.getQuantity()));
     }
 }

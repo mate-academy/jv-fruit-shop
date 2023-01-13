@@ -19,7 +19,7 @@ public class DataTransactionServiceImpl implements DataTransactionService {
         for (FruitTransaction transaction : fruitTransactions) {
             FruitTransactionHandler fruitTransaction =
                     fruitTransactionStrategy.getTransaction(transaction.getOperation());
-            fruitTransaction.handleTransaction(transaction.getFruit(), transaction.getQuantity());
+            fruitTransaction.handleTransaction(transaction);
         }
     }
 }
