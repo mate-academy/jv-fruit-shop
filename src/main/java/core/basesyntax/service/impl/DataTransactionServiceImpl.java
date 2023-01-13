@@ -1,19 +1,19 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.DataTransactionService;
 import core.basesyntax.strategy.FruitTransactionHandler;
 import core.basesyntax.strategy.FruitTransactionStrategy;
-import core.basesyntax.strategy.FruitTransactionStrategyImpl;
+import core.basesyntax.strategy.impl.FruitTransactionStrategyImpl;
 import java.util.List;
 
-public class DataParserServiceImpl implements DataParserService {
+public class DataTransactionServiceImpl implements DataTransactionService {
     private static final int TRANSACTION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final String SEPARATOR = ",";
     private final FruitTransactionStrategy fruitTransactionStrategy;
 
-    public DataParserServiceImpl() {
+    public DataTransactionServiceImpl() {
         fruitTransactionStrategy = new FruitTransactionStrategyImpl();
     }
 

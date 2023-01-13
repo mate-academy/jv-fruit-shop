@@ -4,10 +4,10 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.strategy.FruitTransactionHandler;
 
-public class SupplyTransaction implements FruitTransactionHandler {
+public class SupplyHandler implements FruitTransactionHandler {
     private final StorageDao storageDao;
 
-    public SupplyTransaction() {
+    public SupplyHandler() {
         this.storageDao = new StorageDaoImpl();
     }
 

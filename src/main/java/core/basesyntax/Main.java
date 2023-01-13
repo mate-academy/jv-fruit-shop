@@ -1,10 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.DataTransactionService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ReportCreatorService;
-import core.basesyntax.service.impl.DataParserServiceImpl;
+import core.basesyntax.service.impl.DataTransactionServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
@@ -15,7 +15,7 @@ public class Main {
             = "src/main/resources/transaction.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
     private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
-    private static final DataParserService stringParser = new DataParserServiceImpl();
+    private static final DataTransactionService stringParser = new DataTransactionServiceImpl();
     private static final ReportCreatorService reportCreator = new ReportCreatorServiceImpl();
     private static final FileWriterService fileWriterService = new FileWriterServiceImpl();
 

@@ -4,15 +4,15 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.strategy.FruitTransactionHandler;
 
-public class PurchaseTransaction implements FruitTransactionHandler {
+public class ReturnHandler implements FruitTransactionHandler {
     private final StorageDao storageDao;
 
-    public PurchaseTransaction() {
+    public ReturnHandler() {
         this.storageDao = new StorageDaoImpl();
     }
 
     @Override
     public void handleTransaction(String fruit, int quantity) {
-        storageDao.updateData(fruit, (storageDao.getData(fruit) - quantity));
+        storageDao.updateData(fruit, (storageDao.getData(fruit) + quantity));
     }
 }
