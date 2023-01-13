@@ -22,18 +22,21 @@ public class Main {
     private static final String REPORT_FILE_PATH = "src/main/java/resources/dataReport.csv";
 
     public static void main(String[] args) {
-        ReaderService readerService = new ReaderServiceImpl();
+
         Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap = new HashMap<>();
         operationHandlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         operationHandlersMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         operationHandlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlersMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+
+        ReaderService readerService = new ReaderServiceImpl();
         List<String> dateFromFile = readerService.readFile(INPUT_FILE_PATH);
 
         new ProcessingService().process(dateFromFile, operationHandlersMap);
 
         ReportMaker reportMaker = new ReportMakerImpl();
         String report = reportMaker.makeReport();
+        System.out.println(report);
 
         WriterService fileWriterService = new WriterServiceImpl();
         fileWriterService.writeToFile(report, REPORT_FILE_PATH);
