@@ -41,23 +41,23 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operationStr;
+        private final String operation;
 
         Operation(String operationStr) {
-            this.operationStr = operationStr;
+            this.operation = operationStr;
         }
 
-        public String getOperationStr() {
-            return operationStr;
+        public String getOperationByChar() {
+            return operation;
         }
 
         public static Operation getOperationStrChar(String operationStr) {
             for (Operation element : Operation.values()) {
-                if (element.operationStr.equals(operationStr)) {
+                if (element.operation.equals(operationStr)) {
                     return element;
                 }
             }
-            throw new RuntimeException();
+            throw new RuntimeException("Can't convert operation");
         }
     }
 }

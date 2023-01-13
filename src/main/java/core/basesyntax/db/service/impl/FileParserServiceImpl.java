@@ -1,16 +1,16 @@
-package core.basesyntax.db.strategy.handler.impl;
+package core.basesyntax.db.service.impl;
 
 import core.basesyntax.db.model.FruitTransaction;
-import core.basesyntax.db.service.FruitParserService;
+import core.basesyntax.db.service.FileParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitParserServiceImpl implements FruitParserService {
+public class FileParserServiceImpl implements FileParserService {
 
     @Override
-    public List<FruitTransaction> parse(List<String> input) {
+    public List<FruitTransaction> parse(List<String> inputFile) {
         List<FruitTransaction> resultList = new ArrayList<>();
-        for (String transaction: input) {
+        for (String transaction: inputFile) {
             String[] arr = transaction.split(",");
             FruitTransaction.Operation operation =
                     FruitTransaction.Operation.getOperationStrChar(arr[0]);

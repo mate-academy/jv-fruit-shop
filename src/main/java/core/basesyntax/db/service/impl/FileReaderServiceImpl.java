@@ -1,4 +1,4 @@
-package core.basesyntax.db.strategy.handler.impl;
+package core.basesyntax.db.service.impl;
 
 import core.basesyntax.db.service.FileReaderService;
 import java.io.IOException;

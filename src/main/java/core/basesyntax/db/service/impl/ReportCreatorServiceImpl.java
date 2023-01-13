@@ -1,13 +1,13 @@
-package core.basesyntax.db.strategy.handler.impl;
+package core.basesyntax.db.service.impl;
 
-import core.basesyntax.db.service.FIleProcessorService;
+import core.basesyntax.db.service.ReportCreatorService;
 import java.util.Map;
 
-public class FileProcessorServiceImpl implements FIleProcessorService {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     @Override
     public String getReport(Map<String, Integer> map) {
         StringBuilder report = new StringBuilder("fruit, quantity").append(System.lineSeparator());
-        for (Map.Entry entry: map.entrySet()) {
+        for (Map.Entry<String, Integer> entry: map.entrySet()) {
             report.append(entry.getKey())
                     .append(",")
                     .append(entry.getValue())

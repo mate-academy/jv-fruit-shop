@@ -2,6 +2,6 @@ package core.basesyntax.db.service;
 
 import java.util.Map;
 
-public interface FIleProcessorService {
+public interface ReportCreatorService {
     String getReport(Map<String, Integer> map);
 }
