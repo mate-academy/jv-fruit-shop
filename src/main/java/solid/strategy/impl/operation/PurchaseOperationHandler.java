@@ -1,6 +1,5 @@
 package solid.strategy.impl.operation;
 
-import java.util.Map;
 import solid.exception.ProductNotFoundException;
 import solid.model.FruitTransaction;
 import solid.strategy.OperationHandler;
@@ -10,13 +9,10 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         isAvailability(transaction);
-        FruitStorage.fruits.get(transaction.getFruit());
-        for (Map.Entry<String, Integer> fruit : FruitStorage.fruits.entrySet()) {
-            if (fruit.getKey().equals(transaction.getFruit())) {
-                fruit.setValue(fruit.getValue() - transaction.getQuantity());
-                break;
-            }
-        }
+        int fruitsStorageValue = FruitStorage.fruits.get(transaction.getFruit());
+        FruitStorage.fruits.put(transaction.getFruit(),
+                fruitsStorageValue - transaction.getQuantity());
+
     }
 
     private void isAvailability(FruitTransaction transaction) {
@@ -24,7 +20,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         if (FruitStorage.fruits.containsKey(transactionFruit)) {
             if (FruitStorage.fruits.get(transactionFruit) < transaction.getQuantity()) {
                 throw new ProductNotFoundException("Not enough fruit, but you can buy "
-                            + transaction.getQuantity());
+                        + transaction.getQuantity());
             }
             return;
         }
