@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_PATH = "src/main/resources/dataInput.csv";
-    private static final String REPORT_FILE_PATH = "src/main/resources/dataReport.csv";
+    private static final String INPUT_FILE_PATH = "src/main/java/resources/dataInplut.csv";
+    private static final String REPORT_FILE_PATH = "src/main/java/resources/dataReport.csv";
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
