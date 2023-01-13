@@ -1,9 +1,10 @@
 package core.basesyntax.dao.impl;
 
-import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.db.Storage;
+import java.util.Map;
 
-public class StorageDaoImpl implements StorageDao {
+public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void addFruit(String fruit, Integer quantity) {
@@ -23,5 +24,10 @@ public class StorageDaoImpl implements StorageDao {
     @Override
     public void mergeQuantity(String fruit, int quantity) {
         Storage.fruitStorage.merge(fruit, quantity, Integer::sum);
+    }
+
+    @Override
+    public Map<String, Integer> getStorage() {
+        return Storage.fruitStorage;
     }
 }

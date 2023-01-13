@@ -1,16 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 
-public class FileReaderServiceImpl implements FileReaderService {
+public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public List<String> readAllLines(String filePath) {
+    public void writeToFile(String filePath, String report) {
         try {
-            return Files.readAllLines(Path.of(filePath));
+            Files.write(Path.of(filePath), report.getBytes());
         } catch (IOException ioe) {
             throw new RuntimeException("Can't find file by path: " + filePath, ioe);
         }

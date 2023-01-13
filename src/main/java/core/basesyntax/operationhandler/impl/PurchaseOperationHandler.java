@@ -8,11 +8,12 @@ public class PurchaseOperationHandler extends OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int quantity = fruitTransaction.getQuantity();
-        int storageQuantity = storageDao.getQuantity(fruit);
-        if (quantity >= storageQuantity) {
-            storageDao.mergeQuantity(fruit, -quantity);
+        int storageQuantity = fruitDao.getQuantity(fruit);
+        if (storageQuantity >= quantity) {
+            fruitDao.mergeQuantity(fruit, -quantity);
         } else {
-            throw new RuntimeException("Can't purchase required quantity of " + fruit + ": " + quantity + "."
+            throw new RuntimeException("Can't purchase required quantity of " + fruit
+                    + ": " + quantity + "."
                     + "Quantity in storage: " + storageQuantity);
         }
     }

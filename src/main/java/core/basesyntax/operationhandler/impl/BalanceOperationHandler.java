@@ -6,6 +6,6 @@ import core.basesyntax.operationhandler.OperationHandler;
 public class BalanceOperationHandler extends OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        storageDao.addFruit(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        fruitDao.addFruit(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

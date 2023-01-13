@@ -8,10 +8,10 @@ public class ReturnOperationHandler extends OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int quantity = fruitTransaction.getQuantity();
-        if (!storageDao.containsFruit(fruit)) {
-            storageDao.addFruit(fruit, quantity);
+        if (!fruitDao.containsFruit(fruit)) {
+            fruitDao.addFruit(fruit, quantity);
         } else {
-            storageDao.mergeQuantity(fruit, quantity);
+            fruitDao.mergeQuantity(fruit, quantity);
         }
     }
 }

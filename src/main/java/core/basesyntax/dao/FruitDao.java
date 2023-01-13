@@ -1,6 +1,8 @@
 package core.basesyntax.dao;
 
-public interface StorageDao {
+import java.util.Map;
+
+public interface FruitDao {
     void addFruit(String fruit, Integer quantity);
 
     Integer getQuantity(String fruit);
@@ -8,4 +10,6 @@ public interface StorageDao {
     void mergeQuantity(String fruit, int quantity);
 
     boolean containsFruit(String fruit);
+
+    Map<String, Integer> getStorage();
 }
