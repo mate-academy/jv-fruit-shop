@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FruitTransactionParserImpl implements FruitTransactionParser {
+    private static final String ELEMENT_SEPARATOR = ",";
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -15,16 +16,22 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     public List<FruitTransaction> transformToTransaction(List<String> lines) {
         return lines.stream()
                 .filter(line -> lineValidator(line))
-                .map(line -> toTransaction(line))
+                .map(line -> lineToTransaction(line))
                 .collect(Collectors.toList());
     }
 
     private boolean lineValidator(String line) {
-        return line.split(",")[OPERATION_TYPE_INDEX].length() == 1;
+        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+            if (operation.getOperation()
+                    .equals(line.split(ELEMENT_SEPARATOR)[OPERATION_TYPE_INDEX])) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private FruitTransaction toTransaction(String line) {
-        String[] fields = line.split(",");
+    private FruitTransaction lineToTransaction(String line) {
+        String[] fields = line.split(ELEMENT_SEPARATOR);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(parceOperation(fields[OPERATION_TYPE_INDEX]));
         fruitTransaction.setFruit(fields[FRUIT_INDEX]);

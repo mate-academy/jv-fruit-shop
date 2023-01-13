@@ -16,7 +16,7 @@ public class FruitAccountingDaoImpl implements FruitAccountingDao {
     }
 
     @Override
-    public void updateQuantity(String fruit, Integer quantity) {
+    public void updateData(String fruit, Integer quantity) {
         FruitStorage.fruits.put(fruit, quantity);
     }
 }

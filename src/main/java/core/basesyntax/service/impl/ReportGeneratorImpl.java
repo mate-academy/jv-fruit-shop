@@ -8,7 +8,6 @@ import java.util.Map;
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String REPORT_TITLE = "fruit,quantity" + System.lineSeparator();
     private static final String ELEMENT_SEPARATOR = ",";
-
     private FruitAccountingDao fruitAccountingDao;
     private StringBuilder builder;
 
@@ -23,12 +22,5 @@ public class ReportGeneratorImpl implements ReportGenerator {
                     .append(System.lineSeparator());
         }
         return builder.toString();
-
-        /*return fruitAccountingDao.getMapEntry().stream()
-                .map(m -> builder.append(m.getKey())
-                        .append(",")
-                        .append(m.getValue())
-                        .append(System.lineSeparator()))
-                .collect(Collectors.joining());*/
     }
 }

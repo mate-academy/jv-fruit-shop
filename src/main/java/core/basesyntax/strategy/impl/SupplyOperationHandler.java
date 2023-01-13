@@ -13,6 +13,6 @@ public class SupplyOperationHandler implements OperationHandler {
         fruitAccountingDao = new FruitAccountingDaoImpl();
         Integer currentQuantity = fruitAccountingDao.getQuantity(transaction.getFruit());
         Integer newQuantity = currentQuantity + transaction.getQuantity();
-        fruitAccountingDao.updateQuantity(transaction.getFruit(), newQuantity);
+        fruitAccountingDao.updateData(transaction.getFruit(), newQuantity);
     }
 }

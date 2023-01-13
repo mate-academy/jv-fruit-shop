@@ -8,5 +8,5 @@ public interface FruitAccountingDao {
 
     Integer getQuantity(String fruit);
 
-    void updateQuantity(String fruit, Integer quantity);
+    void updateData(String fruit, Integer quantity);
 }
