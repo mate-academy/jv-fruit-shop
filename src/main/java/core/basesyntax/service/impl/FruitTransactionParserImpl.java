@@ -2,19 +2,18 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int OPERATION_KEY_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
-    private static final int FRUIT_QUANTITY_INDEX = 0;
+    private static final int FRUIT_QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> toTransactions(String dataFromFile) {
         List<FruitTransaction> transactions = new ArrayList<>();
-        String[] dataFromLines = dataFromFile.split("\r\n");
+        String[] dataFromLines = dataFromFile.split("\n");
         for (int i = 1; i < dataFromLines.length; i++) {
             transactions.add(parseTransaction(dataFromLines[i]));
         }

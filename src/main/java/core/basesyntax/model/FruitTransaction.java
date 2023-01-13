@@ -45,11 +45,9 @@ public class FruitTransaction {
             for (Operation operation : Operation.values()) {
                 if (operationKey.equals(operation.operationKey)) {
                     return operation;
-                } else {
-                    throw new RuntimeException("No operations with such operationKey available");
                 }
             }
-            return null;
+            throw new RuntimeException("No operations with such operationKey available");
         }
     }
 }
