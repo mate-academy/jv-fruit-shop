@@ -1,18 +1,25 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.dao.FruitAccountingDao;
-import core.basesyntax.dao.FruitAccountingDaoImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    private FruitAccountingDao fruitAccountingDao;
+    private static final int MIN_QUANTITY = 0;
+    private FruitDao fruitDao;
+
+    {
+        fruitDao = new FruitDaoImpl();
+    }
 
     @Override
     public void handle(FruitTransaction transaction) {
-        fruitAccountingDao = new FruitAccountingDaoImpl();
-        Integer currentQuantity = fruitAccountingDao.getQuantity(transaction.getFruit());
+        Integer currentQuantity = fruitDao.getQuantity(transaction.getFruit());
         Integer newQuantity = currentQuantity - transaction.getQuantity();
-        fruitAccountingDao.updateData(transaction.getFruit(), newQuantity);
+        if (newQuantity < MIN_QUANTITY) {
+            new RuntimeException("Quantity can't be less than " + MIN_QUANTITY);
+        }
+        fruitDao.updateData(transaction.getFruit(), newQuantity);
     }
 }

@@ -22,11 +22,16 @@ public class Main {
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
 
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        {
+            operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                    new BalanceOperationHandler());
+            operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                    new SupplyOperationHandler());
+            operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                    new PurchaseOperationHandler());
+            operationHandlerMap.put(FruitTransaction.Operation.RETURN,
+                    new ReturnOperationHandler());
+        }
 
         List<String> dataFromFile = new FileReaderServiceImpl().readFromFile(INPUT_FILE_PATH_NAME);
         List<FruitTransaction> transactions = new FruitTransactionParserImpl()

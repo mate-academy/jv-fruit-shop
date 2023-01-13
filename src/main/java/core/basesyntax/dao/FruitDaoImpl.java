@@ -4,7 +4,7 @@ import core.basesyntax.db.FruitStorage;
 import java.util.Map;
 import java.util.Set;
 
-public class FruitAccountingDaoImpl implements FruitAccountingDao {
+public class FruitDaoImpl implements FruitDao {
     @Override
     public Set<Map.Entry<String, Integer>> getMapEntry() {
         return FruitStorage.fruits.entrySet();
