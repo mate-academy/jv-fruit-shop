@@ -10,8 +10,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     private static final Map<FruitTransaction.Operation, OperationHandler>
             operationOperationHandlerMap = new HashMap<>();
 
-    @Override
-    public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
+    {
         operationOperationHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler());
         operationOperationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
@@ -20,6 +19,10 @@ public class OperationStrategyImpl implements OperationStrategy {
                 new PurchaseOperationHandler());
         operationOperationHandlerMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandler());
+    }
+
+    @Override
+    public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
         return operationOperationHandlerMap.get(operation);
     }
 }
