@@ -14,7 +14,7 @@ public class ReportMakerImpl implements ReportMaker {
     @Override
     public String makeReport() {
         String report = COLUMNS;
-        report += STORAGE.keySet().stream()
+        report += STORAGE.entrySet().stream()
                 .map(key -> key + LINE_SPLITTER + STORAGE.get(key) + END_LINE)
                 .collect(Collectors.joining());
         return report;
