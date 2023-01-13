@@ -47,10 +47,6 @@ public class FruitTransaction {
             this.operation = operationStr;
         }
 
-         /*public String getOperationByChar() {
-            return operation;
-        }*/
-
         public static Operation getOperationStrChar(String operationStr) {
             for (Operation element : Operation.values()) {
                 if (element.operation.equals(operationStr)) {
