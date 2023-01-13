@@ -15,10 +15,6 @@ import solid.service.impl.TransactionProcessorImpl;
 import solid.service.impl.WriteFileServiceImpl;
 
 public class Main {
-    private static final String FILE_WRITE_PATH =
-            "src/main/resources/result.csv";
-    private static final String FILE_READ_PATH =
-            "src/main/resources/date.csv";
     private static final FileReadServiceImpl FILE_READ_SERVICE =
             new FileReadServiceImpl();
     private static final FruitTransactionParser FRUIT_TRANSACTION_PARSER =
@@ -31,8 +27,10 @@ public class Main {
             new WriteFileServiceImpl();
 
     public static void main(String[] args) {
-        File outputFile = new File(FILE_WRITE_PATH);
-        String dataFromFile = FILE_READ_SERVICE.readFromFile(Path.of(FILE_READ_PATH));
+        String fileWritePath = "src/main/resources/result.csv";
+        File outputFile = new File(fileWritePath);
+        String fileReadPath = "src/main/resources/date.csv";
+        String dataFromFile = FILE_READ_SERVICE.readFromFile(Path.of(fileReadPath));
         List<FruitTransaction> transactions = FRUIT_TRANSACTION_PARSER.toTransaction(dataFromFile);
         TRANSACTION_PROCESSOR.process(transactions);
         String report = REPORT_GENERATOR.generate();
