@@ -1,9 +1,9 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.strategy.impl.BalanceImpl;
-import core.basesyntax.strategy.impl.PurchaseImpl;
-import core.basesyntax.strategy.impl.ReturnImpl;
-import core.basesyntax.strategy.impl.SupplyImpl;
+import core.basesyntax.strategy.impl.BalanceFruitCalculatorService;
+import core.basesyntax.strategy.impl.PurchaseFruitCalculatorService;
+import core.basesyntax.strategy.impl.ReturnFruitCalculatorService;
+import core.basesyntax.strategy.impl.SupplyFruitCalculatorService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,10 +12,10 @@ public class FruitStrategy {
 
     static {
         keyStorage = new HashMap<>();
-        keyStorage.put("b", new BalanceImpl());
-        keyStorage.put("p", new PurchaseImpl());
-        keyStorage.put("r", new ReturnImpl());
-        keyStorage.put("s", new SupplyImpl());
+        keyStorage.put("b", new BalanceFruitCalculatorService());
+        keyStorage.put("p", new PurchaseFruitCalculatorService());
+        keyStorage.put("r", new ReturnFruitCalculatorService());
+        keyStorage.put("s", new SupplyFruitCalculatorService());
     }
 
     public FruitCalculatorService getFruitService(String operation) {
