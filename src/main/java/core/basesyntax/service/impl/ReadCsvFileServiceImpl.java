@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReadFileService;
+import core.basesyntax.service.ReadCsvFileService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReadFileServiceImpl implements ReadFileService {
+public class ReadCsvFileServiceImpl implements ReadCsvFileService {
     private static final int FILE_HEADER_LINE = 1;
 
     @Override

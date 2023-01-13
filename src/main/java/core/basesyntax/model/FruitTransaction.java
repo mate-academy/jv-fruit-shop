@@ -29,14 +29,14 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String letter;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.letter = operation;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getLetter() {
+            return letter;
         }
     }
 }

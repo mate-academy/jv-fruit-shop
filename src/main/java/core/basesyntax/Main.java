@@ -1,13 +1,13 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitTransactionParser;
-import core.basesyntax.service.ReadFileService;
+import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.ReadCsvFileService;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.WriteFileService;
-import core.basesyntax.service.impl.FruitTransactionParserImpl;
-import core.basesyntax.service.impl.ReadFileServiceImpl;
+import core.basesyntax.service.impl.DataParserServiceImpl;
+import core.basesyntax.service.impl.ReadCsvFileServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.service.impl.WriteFileServiceImpl;
@@ -16,10 +16,10 @@ import java.util.List;
 public class Main {
     private static final String PATH_TO_INPUT_FILE = "src/main/resources/input.csv";
     private static final String PATH_TO_REPORT_FILE = "src/main/resources/report.csv";
-    private static final ReadFileService readFileService =
-            new ReadFileServiceImpl();
-    private static final FruitTransactionParser fruitTransactionParser =
-            new FruitTransactionParserImpl();
+    private static final ReadCsvFileService readFileService =
+            new ReadCsvFileServiceImpl();
+    private static final DataParserService fruitTransactionParser =
+            new DataParserServiceImpl();
     private static final TransactionProcessor transactionProcessor =
             new TransactionProcessorImpl();
     private static final ReportGenerator reportGenerator =
@@ -30,8 +30,9 @@ public class Main {
     public static void main(String[] args) {
         List<String> dataFromFile = readFileService.readFromFile(PATH_TO_INPUT_FILE);
         List<FruitTransaction> fruitTransactions =
-                fruitTransactionParser.toTransaction(dataFromFile);
+                fruitTransactionParser.parseData(dataFromFile);
         transactionProcessor.process(fruitTransactions);
-        writeFileService.writeToFile(PATH_TO_REPORT_FILE, reportGenerator.generateReport());
+        String report = reportGenerator.generateReport();
+        writeFileService.writeToFile(PATH_TO_REPORT_FILE, report);
     }
 }
