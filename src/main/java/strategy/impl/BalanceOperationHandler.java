@@ -7,6 +7,10 @@ import strategy.OperationHandler;
 public class BalanceOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        FruitStorage.fruits.put(transaction.getFruit(), transaction.getQuantity());
+        int balance = transaction.getQuantity();
+        if (balance < 0) {
+            throw new RuntimeException("Balance can't be negative: " + balance);
+        }
+        FruitStorage.fruits.put(transaction.getFruit(), balance);
     }
 }
