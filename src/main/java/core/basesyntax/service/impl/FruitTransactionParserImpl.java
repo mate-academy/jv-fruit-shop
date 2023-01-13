@@ -13,8 +13,8 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> transformToTransaction(List<String> lines) {
-        return lines.stream()
+    public List<FruitTransaction> transformToTransaction(List<String> transactions) {
+        return transactions.stream()
                 .filter(this::lineValidator)
                 .map(this::lineToTransaction)
                 .collect(Collectors.toList());
