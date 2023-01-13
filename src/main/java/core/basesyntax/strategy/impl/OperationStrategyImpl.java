@@ -21,7 +21,8 @@ public class OperationStrategyImpl implements OperationStrategy {
                 return new ReturnOperationHandler();
             case SUPPLY:
                 return new SupplyOperationHandler();
-            default: throw new RuntimeException("No such operation: " + operation);
+            default:
+                throw new RuntimeException("No such operation: " + operation);
         }
     }
 }

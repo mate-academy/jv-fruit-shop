@@ -16,7 +16,8 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     @Override
     public List<FruitTransaction> parseTransactions(String transactions) {
         String[] transactionsArray = transactions.split(System.lineSeparator());
-        return Arrays.stream(transactionsArray, SKIP_TITLE_INDEX, transactionsArray.length)
+        return Arrays.stream(transactionsArray)
+                .skip(SKIP_TITLE_INDEX)
                 .map(this::parseTransaction)
                 .collect(Collectors.toList());
     }
