@@ -8,8 +8,7 @@ public class SupplyOperation implements CalculateOperation {
 
     @Override
     public void count(FruitTransaction transaction) {
-        StorageOfData.fruitsData.put(transaction.getFruit(),
-                StorageOfData.fruitsData.get(transaction.getFruit())
-                + transaction.getQuantity());
+        StorageOfData.fruitsData.compute(transaction.getFruit(),
+                (key, value) -> value == null ? 1 : value + transaction.getQuantity());
     }
 }

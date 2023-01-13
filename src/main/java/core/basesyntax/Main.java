@@ -14,19 +14,20 @@ import core.basesyntax.service.impl.WriterOperationServiceImpl;
 import java.util.List;
 
 public class Main {
-    private static final ReaderOperationService readerOperation = new ReaderOperationServiceImpl();
-    private static final DataTransactionService dataTransaction = new DataTransactionServiceImpl();
-    private static final UpdateDataStorageService updateStorage =
-            new UpdateDataStorageServiceImpl();
-    private static final ReportBuilderService buildReport = new ReportBuilderServiceImpl();
-
-    private static final WriterOperationService writerOperation = new WriterOperationServiceImpl();
+    private static final String READ_FROM_FILE = "src/main/resources/data.csv";
+    private static final String WRITE_TO_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        String data = readerOperation.readDataFromFile("src/main/resources/data.csv");
-        List<FruitTransaction> fruitTransactions = dataTransaction.getData(data);
+        ReaderOperationService readerOperation = new ReaderOperationServiceImpl();
+        DataTransactionService dataTransaction = new DataTransactionServiceImpl();
+        UpdateDataStorageService updateStorage = new UpdateDataStorageServiceImpl();
+        ReportBuilderService buildReport = new ReportBuilderServiceImpl();
+        WriterOperationService writerOperation = new WriterOperationServiceImpl();
+
+        String data = readerOperation.readDataFromFile(READ_FROM_FILE);
+        List<FruitTransaction> fruitTransactions = dataTransaction.turnDataToTransactions(data);
         updateStorage.updateData(fruitTransactions);
         String report = buildReport.buildReport();
-        writerOperation.writeData(report,"src/main/resources/report.csv");
+        writerOperation.writeData(report,WRITE_TO_FILE);
     }
 }
