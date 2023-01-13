@@ -22,15 +22,25 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_PATH_FROM = "src/main/data/input.csv";
+    private static final String FILE_PATH_TO = "src/main/data/report.csv";
+    private static final String BALANCE_OPERATION = "b";
+    private static final String RETURN_OPERATION = "r";
+    private static final String SUPPLY_OPERATION = "s";
+    private static final String PURCHASE_OPERATION = "p";
+    private static final FileReaderService service = new FileReaderServiceImpl();
+    private static final FileParserService fruitParserService = new FileParserServiceImpl();
+    private static final Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+    private static final Map<String, Integer> map = Storage.getStorage();
+    private static final ReportCreatorService createReport = new ReportCreatorServiceImpl();
+    private static final FileWriterService reportFile = new FileWriterServiceImpl();
+
     public static void main(String[] args) {
-        FileReaderService service = new FileReaderServiceImpl();
-        List<String> strings = service.readFromFile("src/main/data/input.csv");
-        FileParserService fruitParserService = new FileParserServiceImpl();
-        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put("b", new BalanceOperationHandler());
-        operationHandlerMap.put("r", new ReturnOperationHandler());
-        operationHandlerMap.put("s", new SupplyOperationHandler());
-        operationHandlerMap.put("p", new PurchaseOperationHandler());
+        List<String> strings = service.readFromFile(FILE_PATH_FROM);
+        operationHandlerMap.put(BALANCE_OPERATION, new BalanceOperationHandler());
+        operationHandlerMap.put(RETURN_OPERATION, new ReturnOperationHandler());
+        operationHandlerMap.put(SUPPLY_OPERATION, new SupplyOperationHandler());
+        operationHandlerMap.put(PURCHASE_OPERATION, new PurchaseOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         List<FruitTransaction> fruitTransactionList = fruitParserService.parse(strings);
         for (FruitTransaction fruitTransaction: fruitTransactionList) {
@@ -38,11 +48,8 @@ public class Main {
                     .get(fruitTransaction.getOperation().getOperationByChar());
             operationHandler.apply(fruitTransaction);
         }
-        Map<String, Integer> map = Storage.getStorage();
-        ReportCreatorService createReport = new ReportCreatorServiceImpl();
         String report = createReport.getReport(map);
-        FileWriterService reportFile = new FileWriterServiceImpl();
-        reportFile.writeToFile(report, "src/main/data/report.csv");
+        reportFile.writeToFile(report, FILE_PATH_TO);
     }
 }
 
