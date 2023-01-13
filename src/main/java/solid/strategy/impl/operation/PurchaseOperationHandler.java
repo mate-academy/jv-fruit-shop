@@ -10,6 +10,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         isAvailability(transaction);
+        FruitStorage.fruits.get(transaction.getFruit());
         for (Map.Entry<String, Integer> fruit : FruitStorage.fruits.entrySet()) {
             if (fruit.getKey().equals(transaction.getFruit())) {
                 fruit.setValue(fruit.getValue() - transaction.getQuantity());
@@ -19,16 +20,15 @@ public class PurchaseOperationHandler implements OperationHandler {
     }
 
     private void isAvailability(FruitTransaction transaction) {
-        for (Map.Entry<String, Integer> fruit : FruitStorage.fruits.entrySet()) {
-            if (fruit.getKey().equals(transaction.getFruit())) {
-                if (fruit.getValue() < transaction.getQuantity()) {
-                    throw new ProductNotFoundException("Not enough fruit, but you can buy "
-                            + fruit.getValue());
-                }
-                return;
+        String transactionFruit = transaction.getFruit();
+        if (FruitStorage.fruits.containsKey(transactionFruit)) {
+            if (FruitStorage.fruits.get(transactionFruit) < transaction.getQuantity()) {
+                throw new ProductNotFoundException("Not enough fruit, but you can buy "
+                            + transaction.getQuantity());
             }
+            return;
         }
         throw new ProductNotFoundException("Sorry, but these fruits not available at the moment "
-                + transaction.getFruit());
+                + transactionFruit);
     }
 }
