@@ -5,18 +5,13 @@ import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public int getData(String fruit) {
+    public int getQuantityByName(String fruit) {
         return FruitStorage.storageFruits.get(fruit);
     }
 
     @Override
-    public void putInData(String fruit, int quantity) {
+    public void saveQuantity(String fruit, int quantity) {
         FruitStorage.storageFruits.put(fruit, quantity);
-    }
-
-    @Override
-    public void updateData(String fruit, int newQuantity) {
-        FruitStorage.storageFruits.put(fruit, newQuantity);
     }
 
     @Override

@@ -13,6 +13,6 @@ public class BalanceHandler implements FruitTransactionHandler {
 
     @Override
     public void handleTransaction(String fruit, int quantity) {
-        fruitDaoDao.putInData(fruit, quantity);
+        fruitDaoDao.saveQuantity(fruit, quantity);
     }
 }

@@ -13,6 +13,7 @@ public class PurchaseHandler implements FruitTransactionHandler {
 
     @Override
     public void handleTransaction(String fruit, int quantity) {
-        fruitDaoDao.updateData(fruit, (fruitDaoDao.getData(fruit) - quantity));
+        fruitDaoDao.saveQuantity(fruit, (fruitDaoDao.getQuantityByName(fruit)
+                - quantity));
     }
 }

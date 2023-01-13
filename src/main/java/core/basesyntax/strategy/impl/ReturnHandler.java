@@ -13,6 +13,7 @@ public class ReturnHandler implements FruitTransactionHandler {
 
     @Override
     public void handleTransaction(String fruit, int quantity) {
-        fruitDao.updateData(fruit, (fruitDao.getData(fruit) + quantity));
+        fruitDao.saveQuantity(fruit, (fruitDao.getQuantityByName(fruit)
+                + quantity));
     }
 }
