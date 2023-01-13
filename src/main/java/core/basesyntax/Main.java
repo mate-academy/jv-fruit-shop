@@ -24,22 +24,23 @@ import java.util.Map;
 public class Main {
     private static final String FILE_PATH_FROM = "src/main/resources/input.csv";
     private static final String FILE_PATH_TO = "src/main/resources/report.csv";
-    private static final String BALANCE_OPERATION = "b";
-    private static final String RETURN_OPERATION = "r";
-    private static final String SUPPLY_OPERATION = "s";
-    private static final String PURCHASE_OPERATION = "p";
     private static final FileReaderService service = new FileReaderServiceImpl();
     private static final FileParserService fruitParserService = new FileParserServiceImpl();
-    private static final Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+    private static final Map<FruitTransaction.Operation,
+            OperationHandler> operationHandlerMap = new HashMap<>();
     private static final Map<String, Integer> map = Storage.getStorage();
     private static final ReportCreatorService createReport = new ReportCreatorServiceImpl();
     private static final FileWriterService reportFile = new FileWriterServiceImpl();
 
     static {
-        operationHandlerMap.put(BALANCE_OPERATION, new BalanceOperationHandler());
-        operationHandlerMap.put(RETURN_OPERATION, new ReturnOperationHandler());
-        operationHandlerMap.put(SUPPLY_OPERATION, new SupplyOperationHandler());
-        operationHandlerMap.put(PURCHASE_OPERATION, new PurchaseOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler());
     }
 
     public static void main(String[] args) {
