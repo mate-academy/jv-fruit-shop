@@ -12,10 +12,10 @@ public class ReportCreatorImpl implements ReportCreator {
     public String createReport() {
         StringBuilder builder = new StringBuilder(HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> element : Storage.fruits.entrySet()) {
-            builder.append(element.getKey())
+            builder.append(System.lineSeparator())
+                    .append(element.getKey())
                     .append(SPLITTER)
-                    .append(element.getValue())
-                    .append(System.lineSeparator());
+                    .append(element.getValue());
         }
         return builder.toString();
     }

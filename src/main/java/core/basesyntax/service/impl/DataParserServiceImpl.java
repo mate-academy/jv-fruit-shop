@@ -23,20 +23,19 @@ public class DataParserServiceImpl implements DataParserService {
 
     private FruitTransaction lineToFruitTransaction(String transaction) {
         String[] split = transaction.split(SPLIT_SYMBOL);
-        FruitTransaction fruitTransaction = new FruitTransaction
+        return new FruitTransaction
                 .FruitTransactionBuilder()
                 .setOperation(getOperationByLetter(split[OPERATION_INDEX]))
                 .setFruitType(split[FRUIT_TYPE_INDEX])
                 .setAmount(Integer.parseInt(split[AMOUNT_INDEX]))
                 .build();
-        return fruitTransaction;
     }
 
     private Operation getOperationByLetter(String letter) {
         Operation[] values = Operation.values();
-        for (Operation e : values) {
-            if (e.getOperation().equals(letter)) {
-                return e;
+        for (Operation operation : values) {
+            if (operation.getOperation().equals(letter)) {
+                return operation;
             }
         }
         throw new RuntimeException("Can`t find operation " + letter);

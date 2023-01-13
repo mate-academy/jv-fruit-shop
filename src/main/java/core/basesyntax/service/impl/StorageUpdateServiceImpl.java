@@ -19,7 +19,7 @@ public class StorageUpdateServiceImpl implements StorageUpdateService {
     @Override
     public void update(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction transaction : fruitTransactions) {
-            OperationHandler operation = strategy.getOperationImpl(transaction.getOperation());
+            OperationHandler operation = strategy.getOperationHandler(transaction.getOperation());
             operation.process(transaction);
         }
     }
