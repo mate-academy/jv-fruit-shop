@@ -11,7 +11,6 @@ public class DataParserServiceImpl implements DataParserService {
     private static final int TRANSACTION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final int HEADER_INDEX = 0;
 
     @Override
     public List<FruitTransaction> toTransactions(List<String> fromFile) {
