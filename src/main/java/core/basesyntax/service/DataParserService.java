@@ -3,6 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public interface DataTransactionService {
-    void parseData(List<FruitTransaction> fruitConsider);
+public interface DataParserService {
+    List<FruitTransaction> toTransactions(List<String> fromFile);
 }
