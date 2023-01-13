@@ -19,7 +19,6 @@ public class FruitTransaction {
         Arrays.stream(Operation.values())
                 .filter(value -> value.getOperation().equals(operation))
                 .findFirst().ifPresent(value -> this.operation = value);
-
     }
 
     public String getFruit() {
