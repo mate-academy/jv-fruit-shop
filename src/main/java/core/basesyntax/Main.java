@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import static core.basesyntax.db.FruitDao.storage;
-
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.ReadFileService;
