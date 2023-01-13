@@ -42,7 +42,6 @@ public class Main {
         operationHandlerMap.put(PURCHASE_OPERATION, new PurchaseOperationHandler());
     }
 
-
     public static void main(String[] args) {
         List<String> strings = service.readFromFile(FILE_PATH_FROM);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
