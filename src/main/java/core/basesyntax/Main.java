@@ -2,12 +2,12 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.model.FruitTransaction;
+import core.basesyntax.db.service.FileCsvReaderService;
 import core.basesyntax.db.service.FileParserService;
-import core.basesyntax.db.service.FileReaderService;
 import core.basesyntax.db.service.FileWriterService;
 import core.basesyntax.db.service.ReportCreatorService;
+import core.basesyntax.db.service.impl.FileCsvReaderServiceImpl;
 import core.basesyntax.db.service.impl.FileParserServiceImpl;
-import core.basesyntax.db.service.impl.FileReaderServiceImpl;
 import core.basesyntax.db.service.impl.FileWriterServiceImpl;
 import core.basesyntax.db.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.db.strategy.OperationHandler;
@@ -24,11 +24,11 @@ import java.util.Map;
 public class Main {
     private static final String FILE_PATH_FROM = "src/main/resources/input.csv";
     private static final String FILE_PATH_TO = "src/main/resources/report.csv";
-    private static final FileReaderService service = new FileReaderServiceImpl();
+    private static final FileCsvReaderService service = new FileCsvReaderServiceImpl();
     private static final FileParserService fruitParserService = new FileParserServiceImpl();
     private static final Map<FruitTransaction.Operation,
             OperationHandler> operationHandlerMap = new HashMap<>();
-    private static final Map<String, Integer> map = Storage.getStorage();
+    private static final Map<String, Integer> map = Storage.getAll();
     private static final ReportCreatorService createReport = new ReportCreatorServiceImpl();
     private static final FileWriterService reportFile = new FileWriterServiceImpl();
 

@@ -7,8 +7,8 @@ import core.basesyntax.db.strategy.OperationHandler;
 public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        int previousQuantity = Storage.getStorage().get(transaction.getFruit());
-        Storage.getStorage().put(transaction.getFruit(),
+        int previousQuantity = Storage.getAll().get(transaction.getFruit());
+        Storage.getAll().put(transaction.getFruit(),
                 previousQuantity + transaction.getQuantity());
     }
 }

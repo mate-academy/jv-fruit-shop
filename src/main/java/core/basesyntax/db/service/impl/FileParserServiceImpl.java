@@ -2,8 +2,8 @@ package core.basesyntax.db.service.impl;
 
 import core.basesyntax.db.model.FruitTransaction;
 import core.basesyntax.db.service.FileParserService;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FileParserServiceImpl implements FileParserService {
     private static final String REGEX = ",";
@@ -13,15 +13,18 @@ public class FileParserServiceImpl implements FileParserService {
 
     @Override
     public List<FruitTransaction> parse(List<String> inputFile) {
-        List<FruitTransaction> resultList = new ArrayList<>();
-        for (String transaction: inputFile) {
-            String[] arr = transaction.split(REGEX);
-            FruitTransaction.Operation operation =
-                    FruitTransaction.Operation.getOperationStrChar(arr[INDEX_OPERATION]);
-            String fruit = arr[INDEX_FRUIT];
-            int quantity = Integer.parseInt(arr[INDEX_QUANTITY]);
-            resultList.add(new FruitTransaction(operation, fruit, quantity));
-        }
-        return resultList;
+        return inputFile.stream()
+                .map(this::toTransaction)
+                .collect(Collectors.toList());
+    }
+
+    private FruitTransaction toTransaction(String line) {
+        String[] splitLine = line.split(REGEX);
+        FruitTransaction transaction = new FruitTransaction();
+        transaction.setOperation(FruitTransaction.Operation
+                .getOperationStrChar(splitLine[INDEX_OPERATION]));
+        transaction.setFruit(splitLine[INDEX_FRUIT]);
+        transaction.setQuantity(Integer.parseInt(splitLine[INDEX_QUANTITY]));
+        return transaction;
     }
 }

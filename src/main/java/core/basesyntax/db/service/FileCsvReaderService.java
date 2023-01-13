@@ -2,6 +2,6 @@ package core.basesyntax.db.service;
 
 import java.util.List;
 
-public interface FileReaderService {
+public interface FileCsvReaderService {
     List<String> readFromFile(String fileName);
 }

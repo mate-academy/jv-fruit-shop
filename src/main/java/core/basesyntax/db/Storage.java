@@ -11,11 +11,11 @@ public class Storage {
         storage.put(fruit.getFruit(), quantity);
     }
 
-    public static Integer getFruit(FruitTransaction fruit) {
+    public static Integer getQuantity(FruitTransaction fruit) {
         return storage.get(fruit);
     }
 
-    public static Map<String, Integer> getStorage() {
+    public static Map<String, Integer> getAll() {
         return storage;
     }
 }
