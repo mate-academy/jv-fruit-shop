@@ -12,7 +12,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder builder = new StringBuilder();
         builder.append(HEADER);
         for (Map.Entry<String, Integer> fruit : Storage.fruits.entrySet()) {
-            builder.append("\n")
+            builder.append(System.lineSeparator())
                     .append(fruit.getKey())
                     .append(",")
                     .append(fruit.getValue());

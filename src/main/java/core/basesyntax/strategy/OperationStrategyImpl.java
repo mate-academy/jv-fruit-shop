@@ -5,22 +5,24 @@ import core.basesyntax.strategy.impl.BalanceOperationStrategy;
 import core.basesyntax.strategy.impl.PurchaseOperationStrategy;
 import core.basesyntax.strategy.impl.ReturnOperationStrategy;
 import core.basesyntax.strategy.impl.SupplyOperationStrategy;
-import java.util.AbstractMap;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class OperationStrategyImpl {
-    private static Map<FruitTransaction.Operation, OperationStrategy> strategies = Stream.of(
-            new AbstractMap.SimpleEntry<>(FruitTransaction.Operation.BALANCE,
-                    new BalanceOperationStrategy()),
-            new AbstractMap.SimpleEntry<>(FruitTransaction.Operation.PURCHASE,
-                    new PurchaseOperationStrategy()),
-            new AbstractMap.SimpleEntry<>(FruitTransaction.Operation.RETURN,
-                    new ReturnOperationStrategy()),
-            new AbstractMap.SimpleEntry<>(FruitTransaction.Operation.SUPPLY,
-                    new SupplyOperationStrategy()))
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    private static Map<FruitTransaction.Operation, OperationStrategy> strategies = new HashMap<>();
+
+    static {
+        strategies = Map.of(
+                FruitTransaction.Operation.BALANCE,
+                        new BalanceOperationStrategy(),
+                FruitTransaction.Operation.PURCHASE,
+                        new PurchaseOperationStrategy(),
+                FruitTransaction.Operation.RETURN,
+                        new ReturnOperationStrategy(),
+                FruitTransaction.Operation.SUPPLY,
+                        new SupplyOperationStrategy()
+        );
+    }
 
     public OperationStrategy getOperationStrategy(FruitTransaction transaction) {
         return strategies.get(transaction.getOperation());
