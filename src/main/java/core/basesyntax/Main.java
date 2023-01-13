@@ -48,7 +48,7 @@ public class Main {
         List<FruitTransaction> fruitTransactionList = fruitParserService.parse(strings);
         for (FruitTransaction fruitTransaction: fruitTransactionList) {
             OperationHandler operationHandler = operationStrategy
-                    .get(fruitTransaction.getOperation().getOperationByChar());
+                    .get(fruitTransaction.getOperation());
             operationHandler.apply(fruitTransaction);
         }
         String report = createReport.getReport(map);
