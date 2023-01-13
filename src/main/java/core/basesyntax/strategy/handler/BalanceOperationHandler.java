@@ -8,6 +8,10 @@ public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
-        FruitStorage.getStorage().put(transaction.getFruit(), transaction.getQuantity());
+        if (transaction.getQuantity() < 0) {
+            throw new RuntimeException("Balance must be positive! " + transaction.getQuantity());
+        } else {
+            FruitStorage.getStorage().put(transaction.getFruit(), transaction.getQuantity());
+        }
     }
 }

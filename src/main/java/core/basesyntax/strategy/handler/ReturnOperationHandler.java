@@ -8,7 +8,12 @@ public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         int fruitsBefore = FruitStorage.getStorage().get(transaction.getFruit());
-        FruitStorage.getStorage()
-                .put(transaction.getFruit(), fruitsBefore + transaction.getQuantity());
+        int fruitsToStorage = transaction.getQuantity();
+        if (fruitsToStorage < 0) {
+            throw new RuntimeException("Returned fruits quantity must be positive value");
+        } else {
+            FruitStorage.getStorage()
+                    .put(transaction.getFruit(), fruitsBefore + fruitsToStorage);
+        }
     }
 }
