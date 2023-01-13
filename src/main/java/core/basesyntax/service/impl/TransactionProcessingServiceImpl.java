@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class
-TransactionProcessingServiceImpl implements TransactionProcessingService {
+            TransactionProcessingServiceImpl implements TransactionProcessingService {
     private final OperationHandlerStrategy operationStrategy;
     private final Storage storage;
 
