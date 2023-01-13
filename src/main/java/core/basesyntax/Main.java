@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_PATH_FROM = "src/main/data/input.csv";
-    private static final String FILE_PATH_TO = "src/main/data/report.csv";
+    private static final String FILE_PATH_FROM = "src/main/resources/input.csv";
+    private static final String FILE_PATH_TO = "src/main/resources/report.csv";
     private static final String BALANCE_OPERATION = "b";
     private static final String RETURN_OPERATION = "r";
     private static final String SUPPLY_OPERATION = "s";
@@ -35,12 +35,16 @@ public class Main {
     private static final ReportCreatorService createReport = new ReportCreatorServiceImpl();
     private static final FileWriterService reportFile = new FileWriterServiceImpl();
 
-    public static void main(String[] args) {
-        List<String> strings = service.readFromFile(FILE_PATH_FROM);
+    static {
         operationHandlerMap.put(BALANCE_OPERATION, new BalanceOperationHandler());
         operationHandlerMap.put(RETURN_OPERATION, new ReturnOperationHandler());
         operationHandlerMap.put(SUPPLY_OPERATION, new SupplyOperationHandler());
         operationHandlerMap.put(PURCHASE_OPERATION, new PurchaseOperationHandler());
+    }
+
+
+    public static void main(String[] args) {
+        List<String> strings = service.readFromFile(FILE_PATH_FROM);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         List<FruitTransaction> fruitTransactionList = fruitParserService.parse(strings);
         for (FruitTransaction fruitTransaction: fruitTransactionList) {
