@@ -12,9 +12,9 @@ public class ReaderOperationServiceImpl implements ReaderOperationService {
         try {
             return Files.readString(Path.of(fromFile));
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found!", e);
+            throw new RuntimeException("File " + fromFile + " not found!", e);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file", e);
+            throw new RuntimeException("Can't read from file" + fromFile, e);
         }
     }
 }

@@ -5,7 +5,6 @@ import core.basesyntax.service.ReportBuilderService;
 import java.util.Map;
 
 public class ReportBuilderServiceImpl implements ReportBuilderService {
-
     @Override
     public String buildReport() {
         StringBuilder builder = new StringBuilder("fruit,quantity");
