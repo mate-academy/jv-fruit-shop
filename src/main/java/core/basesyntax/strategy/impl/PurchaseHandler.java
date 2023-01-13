@@ -1,18 +1,18 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.strategy.FruitTransactionHandler;
 
 public class PurchaseHandler implements FruitTransactionHandler {
-    private final StorageDao storageDao;
+    private final FruitDao fruitDaoDao;
 
     public PurchaseHandler() {
-        this.storageDao = new StorageDaoImpl();
+        this.fruitDaoDao = new FruitDaoImpl();
     }
 
     @Override
     public void handleTransaction(String fruit, int quantity) {
-        storageDao.updateData(fruit, (storageDao.getData(fruit) - quantity));
+        fruitDaoDao.updateData(fruit, (fruitDaoDao.getData(fruit) - quantity));
     }
 }
