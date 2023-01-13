@@ -10,7 +10,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         int quantity = fruitTransaction.getQuantity();
         int storageQuantity = fruitDao.getQuantity(fruit);
         if (checkQuantity(storageQuantity, quantity)) {
-            fruitDao.mergeQuantity(fruit, -quantity);
+            fruitDao.updateQuantity(fruit, -quantity);
         } else {
             throw new RuntimeException("Can't purchase required quantity of " + fruit
                     + ": " + quantity + ". "

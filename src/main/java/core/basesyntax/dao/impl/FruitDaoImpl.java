@@ -5,10 +5,9 @@ import core.basesyntax.db.FruitStorage;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-
     @Override
-    public void addFruit(String fruit, Integer quantity) {
-        FruitStorage.fruitStorage.put(fruit, quantity);
+    public void updateQuantity(String fruit, int quantity) {
+        FruitStorage.fruitStorage.merge(fruit, quantity, Integer::sum);
     }
 
     @Override
@@ -19,11 +18,6 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public boolean containsFruit(String fruit) {
         return FruitStorage.fruitStorage.containsKey(fruit);
-    }
-
-    @Override
-    public void mergeQuantity(String fruit, int quantity) {
-        FruitStorage.fruitStorage.merge(fruit, quantity, Integer::sum);
     }
 
     @Override

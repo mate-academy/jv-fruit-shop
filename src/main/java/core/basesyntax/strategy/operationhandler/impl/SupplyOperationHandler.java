@@ -8,11 +8,7 @@ public class SupplyOperationHandler implements OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int quantity = fruitTransaction.getQuantity();
-        if (fruitDao.containsFruit(fruit)) {
-            fruitDao.mergeQuantity(fruit, quantity);
-        } else {
-            fruitDao.addFruit(fruit, quantity);
-        }
+        fruitDao.updateQuantity(fruit, quantity);
 
     }
 }

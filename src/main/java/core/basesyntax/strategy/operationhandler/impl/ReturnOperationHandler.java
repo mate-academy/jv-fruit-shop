@@ -8,10 +8,6 @@ public class ReturnOperationHandler implements OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int quantity = fruitTransaction.getQuantity();
-        if (!fruitDao.containsFruit(fruit)) {
-            fruitDao.addFruit(fruit, quantity);
-        } else {
-            fruitDao.mergeQuantity(fruit, quantity);
-        }
+        fruitDao.updateQuantity(fruit, quantity);
     }
 }
