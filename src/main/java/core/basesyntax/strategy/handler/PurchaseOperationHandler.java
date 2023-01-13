@@ -7,11 +7,11 @@ import core.basesyntax.strategy.OperationHandler;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        int fruitsBefore = FruitStorage.getStorage().get(transaction.getFruit());
+        int balance = FruitStorage.getStorage().get(transaction.getFruit());
         int fruitsToRemove = transaction.getQuantity();
-        if (fruitsBefore < fruitsToRemove) {
-            throw new RuntimeException("Not enough fruits in storage");
+        if (balance < fruitsToRemove) {
+            throw new RuntimeException("Not enough fruits in storage.You have: " + balance);
         }
-        FruitStorage.getStorage().put(transaction.getFruit(), fruitsBefore - fruitsToRemove);
+        FruitStorage.getStorage().put(transaction.getFruit(), balance - fruitsToRemove);
     }
 }
