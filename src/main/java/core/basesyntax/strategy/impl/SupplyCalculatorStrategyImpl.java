@@ -2,9 +2,9 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.strategy.OperationCalculator;
 
-public class BalanceHandlerStrategyImpl implements OperationCalculator {
+public class SupplyCalculatorStrategyImpl implements OperationCalculator {
     @Override
     public int count(int currentAmount, int operationAmount) {
-        return operationAmount;
+        return currentAmount + operationAmount;
     }
 }

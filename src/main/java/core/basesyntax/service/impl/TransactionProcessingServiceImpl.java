@@ -4,16 +4,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.strategy.OperationCalculator;
-import core.basesyntax.strategy.impl.OperationHandlerStrategy;
+import core.basesyntax.strategy.impl.OperationCalculatorStrategy;
 import java.util.List;
 import java.util.Map;
 
-public class
-            TransactionProcessingServiceImpl implements TransactionProcessingService {
-    private final OperationHandlerStrategy operationStrategy;
+public class TransactionProcessingServiceImpl implements TransactionProcessingService {
+    private final OperationCalculatorStrategy operationStrategy;
     private final Storage storage;
 
-    public TransactionProcessingServiceImpl(OperationHandlerStrategy operationStrategy) {
+    public TransactionProcessingServiceImpl(OperationCalculatorStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
         storage = new Storage();
     }

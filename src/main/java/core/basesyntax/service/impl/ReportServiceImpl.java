@@ -8,9 +8,8 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReport(Map<String, Integer> fruitMap) {
-        StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity")
-                .append(System.lineSeparator());
+        StringBuilder report = new StringBuilder("fruit,quantity");
+        report.append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : fruitMap.entrySet()) {
             report
                     .append(entry.getKey())

@@ -14,17 +14,26 @@ public class TransactionsServiceImpl implements FruitTransactionParser {
     @Override
     public List<FruitTransaction> parse(String data) {
         String[] lines = data.split(System.lineSeparator());
-        return Arrays.stream(lines)
+        List<String[]> splited =
+                Arrays.stream(lines)
                 .skip(1)
                 .map(line -> line
                         .trim()
                         .split(","))
-                .map(splittedLine -> new FruitTransaction.FruitTransactionBuilder()
+                .collect(Collectors.toList());
+        return fruitTransactionBuilder(splited);
+
+    }
+
+    private List<FruitTransaction> fruitTransactionBuilder(List<String[]> listOfString) {
+        return listOfString.stream().map(splittedLine ->
+                        new FruitTransaction.FruitTransactionBuilder()
                         .setOperation(FruitTransaction.Operation
                                 .getOperationByLetter(splittedLine[INDEX_OF_OPERATION_TYPE]))
                         .setFruit(splittedLine[INDEX_OF_FRUIT_NAME])
                         .setQuantity(Integer.parseInt(splittedLine[INDEX_OF_AMOUNT]))
                         .build())
-                .collect(Collectors.toList());
+                        .collect(Collectors.toList());
     }
+
 }

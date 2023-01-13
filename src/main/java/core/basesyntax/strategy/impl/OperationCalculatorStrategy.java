@@ -5,10 +5,10 @@ import core.basesyntax.strategy.OperationCalculator;
 import java.util.Map;
 import java.util.Optional;
 
-public class OperationHandlerStrategy {
+public class OperationCalculatorStrategy {
     private final Map<FruitTransaction.Operation, OperationCalculator> countStrategyMap;
 
-    public OperationHandlerStrategy(Map<FruitTransaction.Operation,
+    public OperationCalculatorStrategy(Map<FruitTransaction.Operation,
             OperationCalculator> countStrategyMap) {
         this.countStrategyMap = countStrategyMap;
     }

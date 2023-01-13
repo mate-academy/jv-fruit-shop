@@ -11,11 +11,11 @@ import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.TransactionProcessingServiceImpl;
 import core.basesyntax.service.impl.TransactionsServiceImpl;
 import core.basesyntax.strategy.OperationCalculator;
-import core.basesyntax.strategy.impl.BalanceHandlerStrategyImpl;
-import core.basesyntax.strategy.impl.OperationHandlerStrategy;
-import core.basesyntax.strategy.impl.PurchaseHandlerStrategyImpl;
-import core.basesyntax.strategy.impl.ReturnHandlerStrategyImpl;
-import core.basesyntax.strategy.impl.SupplyHandlerStrategyImpl;
+import core.basesyntax.strategy.impl.BalanceOperationCalculatorImpl;
+import core.basesyntax.strategy.impl.OperationCalculatorStrategy;
+import core.basesyntax.strategy.impl.PurchaseCalculatorStrategyImpl;
+import core.basesyntax.strategy.impl.ReturnCalculatorStrategyImpl;
+import core.basesyntax.strategy.impl.SupplyCalculatorStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,20 +32,20 @@ public class Main {
     private static final FileWriterService fileWriterService = new FileWriterServiceImpl();
     private static final Map<FruitTransaction.Operation, OperationCalculator> countStrategyMap
             = new HashMap<>();
-    private static final OperationHandlerStrategy operationStrategy
-            = new OperationHandlerStrategy(countStrategyMap);
+    private static final OperationCalculatorStrategy operationStrategy
+            = new OperationCalculatorStrategy(countStrategyMap);
     private static final TransactionProcessingService fruitStorageUpdateService
             = new TransactionProcessingServiceImpl(operationStrategy);
 
     static {
         countStrategyMap.put(
-                FruitTransaction.Operation.BALANCE, new BalanceHandlerStrategyImpl());
+                FruitTransaction.Operation.BALANCE, new BalanceOperationCalculatorImpl());
         countStrategyMap.put(
-                FruitTransaction.Operation.SUPPLY, new SupplyHandlerStrategyImpl());
+                FruitTransaction.Operation.SUPPLY, new SupplyCalculatorStrategyImpl());
         countStrategyMap.put(
-                FruitTransaction.Operation.PURCHASE, new PurchaseHandlerStrategyImpl());
+                FruitTransaction.Operation.PURCHASE, new PurchaseCalculatorStrategyImpl());
         countStrategyMap.put(
-                FruitTransaction.Operation.RETURN, new ReturnHandlerStrategyImpl());
+                FruitTransaction.Operation.RETURN, new ReturnCalculatorStrategyImpl());
     }
 
     public static void main(String[] args) {
