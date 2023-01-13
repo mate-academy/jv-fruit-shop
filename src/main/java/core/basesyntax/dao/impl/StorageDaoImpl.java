@@ -14,4 +14,14 @@ public class StorageDaoImpl implements StorageDao {
     public Integer getQuantity(String fruit) {
         return Storage.fruitStorage.get(fruit);
     }
+
+    @Override
+    public boolean containsFruit(String fruit) {
+        return Storage.fruitStorage.containsKey(fruit);
+    }
+
+    @Override
+    public void mergeQuantity(String fruit, int quantity) {
+        Storage.fruitStorage.merge(fruit, quantity, Integer::sum);
+    }
 }
