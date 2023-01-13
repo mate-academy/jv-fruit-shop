@@ -13,7 +13,7 @@ public class ReaderServiceImpl implements ReaderService {
         try {
             dateFromFile = Files.readAllLines(Path.of(path));
         } catch (IOException e) {
-            throw new RuntimeException("Can not read data from file" + path, e);
+            throw new RuntimeException("Can not read data, please check file:" + path, e);
         }
         return dateFromFile;
     }
