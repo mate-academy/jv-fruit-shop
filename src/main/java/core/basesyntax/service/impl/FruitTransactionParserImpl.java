@@ -13,7 +13,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     @Override
     public List<FruitTransaction> toTransactions(String dataFromFile) {
         List<FruitTransaction> transactions = new ArrayList<>();
-        String[] dataFromLines = dataFromFile.split("\n");
+        String[] dataFromLines = dataFromFile.split(System.lineSeparator());
         for (int i = 1; i < dataFromLines.length; i++) {
             transactions.add(parseTransaction(dataFromLines[i]));
         }

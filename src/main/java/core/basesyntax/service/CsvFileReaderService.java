@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.nio.file.Path;
+
 public interface CsvFileReaderService {
-    String readFromFile(String filePath);
+    String readFromFile(Path filePath);
 }

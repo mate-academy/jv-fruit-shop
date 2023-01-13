@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.nio.file.Path;
+
 public interface CsvFileWriterService {
-    void writerToFile(String dataToAdd, String filePath);
+    void writerToFile(Path pathToFile, String dataToAdd);
 }

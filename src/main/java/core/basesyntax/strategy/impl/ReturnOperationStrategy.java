@@ -7,7 +7,7 @@ import core.basesyntax.strategy.OperationStrategy;
 public class ReturnOperationStrategy implements OperationStrategy {
     @Override
     public void calculate(FruitTransaction transaction) {
-        Storage.fruits.replace(transaction.getFruit(), Storage.fruits.get(transaction.getFruit()),
-                Storage.fruits.get(transaction.getFruit()) + transaction.getQuantity());
+        Storage.fruits.compute(transaction.getFruit(),
+                (k, v) -> (v == null) ? 1 : v + transaction.getQuantity());
     }
 }
