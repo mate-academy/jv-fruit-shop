@@ -5,12 +5,12 @@ import core.basesyntax.services.OperationHandler;
 import core.basesyntax.services.OperationStrategy;
 import core.basesyntax.services.impl.FruitTransactionParserImpl;
 import core.basesyntax.services.impl.OperationStrategyImpl;
-
 import java.util.List;
 import java.util.Map;
 
 public class ProcessingService {
-    public void process(List<String> dateFromFile, Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap){
+    public void process(List<String> dateFromFile, Map<FruitTransaction.Operation,
+            OperationHandler> operationHandlersMap) {
         FruitTransactionParserImpl parser = new FruitTransactionParserImpl();
         List<FruitTransaction> fruitTransactionsList =
                 parser.getFruitTransactionsList(dateFromFile);
