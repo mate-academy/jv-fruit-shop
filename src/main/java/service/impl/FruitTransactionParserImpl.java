@@ -13,7 +13,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
 
     @Override
     public List<FruitTransaction> toTransactions(String data) {
-        List<FruitTransaction> list = new ArrayList<>();
+        List<FruitTransaction> transactions = new ArrayList<>();
         String[] lines = data.split(System.lineSeparator());
         for (int i = FIRST_VALUE_LINE_INDEX; i < lines.length; i++) {
             String[] fields = lines[i].split(",");
@@ -23,8 +23,8 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
             int quantity = Integer.parseInt(fields[QUANTITY_FIELD_INDEX]);
             FruitTransaction fruitTransaction =
                     new FruitTransaction(operation, fruit, quantity);
-            list.add(fruitTransaction);
+            transactions.add(fruitTransaction);
         }
-        return list;
+        return transactions;
     }
 }
