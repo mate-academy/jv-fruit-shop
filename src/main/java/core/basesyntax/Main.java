@@ -31,7 +31,7 @@ public class Main {
         String dataFromCsv = readFileService.readFromFile(Path.of(INPUT_FILE_PATH));
         List<FruitTransaction> transactions = fruitTransactionParser.parseTransactions(dataFromCsv);
         transactionProcessor.process(transactions);
-        String report = reportGenerator.generateReport(storage);
+        String report = reportGenerator.generateReport();
         writeFileService.writeToFile(report, Path.of(REPORT_FILE_PATH));
     }
 }
