@@ -7,7 +7,7 @@ import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private static final int MIN_QUANTITY = 0;
-    private FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
     {
         fruitDao = new FruitDaoImpl();
@@ -18,8 +18,8 @@ public class PurchaseOperationHandler implements OperationHandler {
         Integer currentQuantity = fruitDao.getQuantity(transaction.getFruit());
         Integer newQuantity = currentQuantity - transaction.getQuantity();
         if (newQuantity < MIN_QUANTITY) {
-            new RuntimeException("Quantity can't be less than " + MIN_QUANTITY);
+            throw new RuntimeException("Quantity can't be less than " + MIN_QUANTITY);
         }
-        fruitDao.updateData(transaction.getFruit(), newQuantity);
+        fruitDao.updateQuantity(transaction.getFruit(), newQuantity);
     }
 }

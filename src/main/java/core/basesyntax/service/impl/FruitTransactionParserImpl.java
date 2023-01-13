@@ -15,8 +15,8 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     @Override
     public List<FruitTransaction> transformToTransaction(List<String> lines) {
         return lines.stream()
-                .filter(line -> lineValidator(line))
-                .map(line -> lineToTransaction(line))
+                .filter(this::lineValidator)
+                .map(this::lineToTransaction)
                 .collect(Collectors.toList());
     }
 
@@ -31,17 +31,17 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     }
 
     private FruitTransaction lineToTransaction(String line) {
-        String[] fields = line.split(ELEMENT_SEPARATOR);
         FruitTransaction fruitTransaction = new FruitTransaction();
+        String[] fields = line.split(ELEMENT_SEPARATOR);
         fruitTransaction.setOperation(parceOperation(fields[OPERATION_TYPE_INDEX]));
         fruitTransaction.setFruit(fields[FRUIT_INDEX]);
         fruitTransaction.setQuantity(Integer.parseInt(fields[QUANTITY_INDEX]));
         return fruitTransaction;
     }
 
-    private FruitTransaction.Operation parceOperation(String operation) {
+    private FruitTransaction.Operation parceOperation(String operationAbbreviation) {
         return Arrays.stream(FruitTransaction.Operation.values())
-                .filter(o -> o.getOperation().equals(operation))
+                .filter(o -> o.getOperation().equals(operationAbbreviation))
                 .findFirst()
                 .orElseThrow();
     }

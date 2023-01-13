@@ -9,15 +9,14 @@ public class ReportGeneratorImpl implements ReportGenerator {
     private static final String REPORT_TITLE = "fruit,quantity";
     private static final String ELEMENT_SEPARATOR = ",";
     private FruitDao fruitDao;
-    private StringBuilder builder;
 
     {
         fruitDao = new FruitDaoImpl();
-        builder = new StringBuilder(REPORT_TITLE);
     }
 
     @Override
     public String generate() {
+        StringBuilder builder = new StringBuilder(REPORT_TITLE);
         for (Map.Entry<String, Integer> entry : fruitDao.getMapEntry()) {
             builder.append(System.lineSeparator())
                     .append(entry.getKey())
