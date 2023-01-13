@@ -11,7 +11,7 @@ import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.TransactionProcessingServiceImpl;
 import core.basesyntax.service.impl.TransactionsServiceImpl;
 import core.basesyntax.strategy.OperationCalculator;
-import core.basesyntax.strategy.impl.BalanceOperationCalculatorImpl;
+import core.basesyntax.strategy.impl.BalanceOperationCalculator;
 import core.basesyntax.strategy.impl.OperationCalculatorStrategy;
 import core.basesyntax.strategy.impl.PurchaseCalculatorStrategyImpl;
 import core.basesyntax.strategy.impl.ReturnCalculatorStrategyImpl;
@@ -39,7 +39,7 @@ public class Main {
 
     static {
         countStrategyMap.put(
-                FruitTransaction.Operation.BALANCE, new BalanceOperationCalculatorImpl());
+                FruitTransaction.Operation.BALANCE, new BalanceOperationCalculator());
         countStrategyMap.put(
                 FruitTransaction.Operation.SUPPLY, new SupplyCalculatorStrategyImpl());
         countStrategyMap.put(
@@ -52,8 +52,8 @@ public class Main {
         String fileData = fileReaderService.readFile(INPUT_FILE_PATH);
         List<FruitTransaction> transactions
                 = transactionsService.parse(fileData);
-        Map<String, Integer> fruitStorage = fruitStorageUpdateService.update(transactions);
-        String report = reportService.getReport(fruitStorage);
+        fruitStorageUpdateService.update(transactions);
+        String report = reportService.getReport();
         fileWriterService.writeReport(REPORT_FILE_PATH, report);
     }
 }
