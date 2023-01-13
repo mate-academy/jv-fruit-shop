@@ -16,15 +16,17 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
         List<FruitTransaction> transactions = new ArrayList<>();
         String[] lines = data.split(System.lineSeparator());
         for (int i = FIRST_VALUE_LINE_INDEX; i < lines.length; i++) {
-            String[] fields = lines[i].split(",");
-            FruitTransaction.Operation operation =
-                    FruitTransaction.Operation.fromString(fields[OPERATION_FIELD_INDEX]);
-            String fruit = fields[FRUIT_FIELD_INDEX];
-            int quantity = Integer.parseInt(fields[QUANTITY_FIELD_INDEX]);
-            FruitTransaction fruitTransaction =
-                    new FruitTransaction(operation, fruit, quantity);
-            transactions.add(fruitTransaction);
+            transactions.add(parseTransaction(lines[i]));
         }
         return transactions;
+    }
+
+    private FruitTransaction parseTransaction(String line) {
+        String[] fields = line.split(",");
+        FruitTransaction.Operation operation =
+                FruitTransaction.Operation.fromString(fields[OPERATION_FIELD_INDEX]);
+        String fruit = fields[FRUIT_FIELD_INDEX];
+        int quantity = Integer.parseInt(fields[QUANTITY_FIELD_INDEX]);
+        return new FruitTransaction(operation, fruit, quantity);
     }
 }
