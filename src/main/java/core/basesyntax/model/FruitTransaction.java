@@ -5,7 +5,7 @@ import java.util.Objects;
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
-    private int quantity;
+    private Integer quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
@@ -13,28 +13,20 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation getOperation() {
-        return operation;
+    public FruitTransaction() {
+
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
+    public Operation getOperation() {
+        return operation;
     }
 
     public String getFruit() {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     @Override
@@ -46,7 +38,7 @@ public class FruitTransaction {
             return false;
         }
         FruitTransaction that = (FruitTransaction) fruitTransaction;
-        return quantity == that.quantity && operation == that.operation
+        return Objects.equals(quantity, that.quantity) && operation == that.operation
                 && Objects.equals(fruit, that.fruit);
     }
 

@@ -5,10 +5,6 @@ import core.basesyntax.service.TransactionProcessorService;
 import java.util.Map;
 
 public class SelloutService implements TransactionProcessorService {
-    public SelloutService(FruitTransaction transaction, Map<String, Integer> fruits) {
-        process(transaction, fruits);
-    }
-
     @Override
     public void process(FruitTransaction transaction, Map<String, Integer> fruits) {
         String key = transaction.getFruit();
