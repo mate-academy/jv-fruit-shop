@@ -12,8 +12,7 @@ public class SummaryData {
 
     public List<Transaction> getTotalResult(List<Transaction> transactions) {
         List<Transaction> listResult = new ArrayList<>();
-        Map<String, List<Transaction>> mapGroupFruit = transactions
-                .stream()
+        Map<String, List<Transaction>> mapGroupFruit = transactions.stream()
                 .collect(Collectors.groupingBy(Transaction::getFruit));
         for (String key : mapGroupFruit.keySet()) {
             Transaction fruit = new Transaction(key, QUANTITY_ZERO);

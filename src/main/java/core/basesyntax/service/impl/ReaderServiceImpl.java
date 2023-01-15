@@ -16,10 +16,11 @@ public class ReaderServiceImpl implements ReaderService {
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
     private static final int INDEX_QUANTITY = 2;
+    private static final String COMMA_SEPARATOR = ",";
 
-    private Transaction getFruitTransaction(String line) {
+    private Transaction getTransaction(String line) {
         List<Operation> operations = new OperationDaoImpl().getListOperations();
-        String[] fields = line.split(",");
+        String[] fields = line.split(COMMA_SEPARATOR);
         Transaction transaction = new Transaction(fields[INDEX_FRUIT],
                 Integer.parseInt(fields[INDEX_QUANTITY].trim()));
         for (Operation operation : operations) {
@@ -40,10 +41,9 @@ public class ReaderServiceImpl implements ReaderService {
             throw new RuntimeException("Can't get data from file " + FILE_NAME);
         }
         list.remove(INDEX_FIRST_LINE);
-        return list
-                .stream()
+        return list.stream()
                 .filter(l -> !l.isEmpty())
-                .map(this::getFruitTransaction)
+                .map(this::getTransaction)
                 .collect(Collectors.toList());
     }
 }
