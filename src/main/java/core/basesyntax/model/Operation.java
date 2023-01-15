@@ -12,13 +12,13 @@ public enum Operation {
         this.operation = operation;
     }
 
-    public static Operation getOperation(String operationLetter) {
+    public static Operation getOperation(String sign) {
         for (Operation newOperation: Operation.values()) {
-            if (operationLetter.equals(newOperation.operation)) {
+            if (sign.trim().equals(newOperation.operation)) {
                 return newOperation;
             }
         }
         throw new RuntimeException("Can't find operation "
-                + operationLetter);
+                + sign);
     }
 }
