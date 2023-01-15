@@ -1,12 +1,11 @@
 package core.basesyntax.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReportFormatterImpl implements ReportFormatter {
     @Override
@@ -14,13 +13,11 @@ public class ReportFormatterImpl implements ReportFormatter {
         FruitDao fruitDao = new FruitDaoImpl();
         List<String> report = new ArrayList<>();
 
-        report.add("```text" + System.lineSeparator() 
-                + "    fruit,quantity");
+        report.add("fruit,quantity");
         List<Fruit> fruitList = fruitDao.getFruitList();
         for (Fruit fruit : fruitList) {
-            report.add("    " + fruit.getName() + ',' + fruit.getQuantity());
+            report.add(fruit.getName() + ',' + fruit.getQuantity());
         }
-        report.add("```");
         return report;
     }
 }

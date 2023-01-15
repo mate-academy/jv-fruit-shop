@@ -12,9 +12,9 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     @Override
     public FruitTransaction newFruitTransaction(String line) {
         String[] dividedLine = line.split(",");
-            FruitTransaction fruitTransaction = new FruitTransaction(dividedLine[NAME_INDEX].strip(), 
-                    Integer.parseInt(dividedLine[QUANTITY_INDEX].strip()), 
-                    Operation.valueOfLabel(dividedLine[OPERATION_INDEX].strip()));
+        FruitTransaction fruitTransaction = new FruitTransaction(dividedLine[NAME_INDEX].strip(), 
+                Integer.parseInt(dividedLine[QUANTITY_INDEX].strip()), 
+                Operation.valueOfLabel(dividedLine[OPERATION_INDEX].strip()));
         return fruitTransaction;
     }
 }

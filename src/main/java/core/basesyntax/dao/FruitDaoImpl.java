@@ -1,11 +1,10 @@
 package core.basesyntax.dao;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
 
 public class FruitDaoImpl implements FruitDao {
     @Override

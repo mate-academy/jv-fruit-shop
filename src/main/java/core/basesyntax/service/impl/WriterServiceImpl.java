@@ -1,12 +1,11 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-
-import core.basesyntax.service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
     @Override
@@ -14,7 +13,7 @@ public class WriterServiceImpl implements WriterService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
             Iterator<String> iterator = reportLines.iterator();
             bufferedWriter.write(iterator.next());
-            while(iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 bufferedWriter.newLine();
                 bufferedWriter.write(iterator.next());
             }

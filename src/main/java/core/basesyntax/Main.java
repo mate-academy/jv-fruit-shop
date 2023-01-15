@@ -1,9 +1,5 @@
 package core.basesyntax;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
@@ -24,13 +20,16 @@ import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH = 
             "src/main/resources/inputFile.csv";
     private static final String REPORT_FILE_PATH = 
             "src/main/resources/reportFile.csv";  
-    private static final Map<Operation, OperationHandler> strategyMap = new HashMap<>();;
+    private static final Map<Operation, OperationHandler> strategyMap = new HashMap<>();
     
     static {
         strategyMap.put(Operation.BALANCE, new BalanceOperationHandler());
@@ -48,9 +47,11 @@ public class Main {
         ReportFormatter reportFormatter = new ReportFormatterImpl();
 
         List<String> inputFileContent = readerService.readFromFile(INPUT_FILE_PATH);
-        for (int i = 2; i < inputFileContent.size() - 1; i++) {
-            FruitTransaction fruitTransaction = fruitTransactionService.newFruitTransaction(inputFileContent.get(i));
-            Fruit newFruitEntry = operationStrategy.get(fruitTransaction.getOperation()).performOperation(fruitTransaction);
+        for (int i = 1; i < inputFileContent.size(); i++) {
+            FruitTransaction fruitTransaction = fruitTransactionService
+                    .newFruitTransaction(inputFileContent.get(i));
+            Fruit newFruitEntry = operationStrategy.get(fruitTransaction
+                    .getOperation()).performOperation(fruitTransaction);
             fruitDao.add(newFruitEntry);
         }
         List<String> report = reportFormatter.makeReport();
