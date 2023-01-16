@@ -6,16 +6,16 @@ import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 import java.util.List;
 
-public class TransitionServiceImpl implements FruitTransactionService {
+public class FruitTransactionServiceImpl implements FruitTransactionService {
     private final OperationHandlerStrategy operationHandlerStrategy;
 
-    public TransitionServiceImpl(OperationHandlerStrategy operationHandlerStrategy) {
+    public FruitTransactionServiceImpl(OperationHandlerStrategy operationHandlerStrategy) {
         this.operationHandlerStrategy = operationHandlerStrategy;
     }
 
     @Override
-    public void process(List<FruitTransaction> fruitTransitionList) {
-        for (FruitTransaction transition : fruitTransitionList) {
+    public void process(List<FruitTransaction> fruitTransitions) {
+        for (FruitTransaction transition : fruitTransitions) {
             if (!FruitStorage.storage.containsKey(transition.getFruit())) {
                 FruitStorage.storage.put(transition.getFruit(), transition.getCount());
             } else {

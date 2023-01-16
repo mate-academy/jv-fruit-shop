@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class TransitionParserImpl implements FruitTransactionParser {
+public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int INDEX_OF_OPERATION_TYPE = 0;
     private static final int INDEX_OF_FRUIT_TYPE = 1;
     private static final int INDEX_OF_COUNT = 2;
     private static final String SPLITTER = ",";
     private final OperationValidator validator;
 
-    public TransitionParserImpl(OperationValidator validator) {
+    public FruitTransactionParserImpl(OperationValidator validator) {
         this.validator = validator;
     }
 
