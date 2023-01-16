@@ -6,12 +6,13 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public class ReturnOperationHandler implements OperationHandler {
-    FruitDao dao = new FruitDaoImpl();
+    private FruitDao dao = new FruitDaoImpl();
 
     @Override
     public void handle(List<FruitTransaction> balanceList) {
         for (FruitTransaction currentFruitBalanceTransaction : balanceList) {
-            List<FruitTransaction> supplyList = dao.getFruitOperationsList("r", currentFruitBalanceTransaction.getFruit());
+            List<FruitTransaction> supplyList = dao.getFruitOperationsList("r",
+                    currentFruitBalanceTransaction.getFruit());
             for (FruitTransaction tr : supplyList) {
                 int amountToAdd = tr.getQuantity();
                 int currentAmount = currentFruitBalanceTransaction.getQuantity();

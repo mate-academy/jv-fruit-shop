@@ -15,7 +15,8 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public List<FruitTransaction> getByOperation(String operation) {
         return Storage.transactions.stream()
-                .filter(transaction -> transaction.getOperation().toString().equalsIgnoreCase(operation))
+                .filter(transaction -> transaction.getOperation().toString()
+                        .equalsIgnoreCase(operation))
                 .collect(Collectors.toList());
     }
 
