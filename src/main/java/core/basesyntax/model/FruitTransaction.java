@@ -3,12 +3,27 @@ package core.basesyntax.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FruitTransaction extends Fruit {
+public class FruitTransaction {
+    private String name;
+    private Integer quantity;
     private Operation operation;
 
-    public FruitTransaction(String name, int quantity, Operation operation) {
-        super(name, quantity);
+    public FruitTransaction(String name, Integer quantity, Operation operation) {
+        this.name = name;
+        this.quantity = quantity;
         this.operation = operation;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public Operation getOperation() {
+        return operation;
     }
 
     public enum Operation {
@@ -21,30 +36,22 @@ public class FruitTransaction extends Fruit {
 
         static {
             for (Operation o : values()) {
-                BY_LABEL.put(o.operation, o);
+                BY_LABEL.put(o.label, o);
             }
         }
 
-        private String operation;
+        private String label;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String label) {
+            this.label = label;
         }
 
-        public String getOperation() {
-            return operation;
+        public String getLabel() {
+            return label;
         }   
 
-        public static Operation valueOfLabel(String label) {
+        public static Operation getByLabel(String label) {
             return BY_LABEL.get(label);
         }
-    }
-
-    public Operation getOperation() {
-        return operation;
-    }
-
-    public void setOperation(Operation operation) {
-        this.operation = operation;
     }
 }

@@ -1,20 +1,27 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.FruitTransactionService;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import java.util.List;
+import java.util.Map;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
-    private static final int NAME_INDEX = 1;
-    private static final int QUANTITY_INDEX = 2;
-    private static final int OPERATION_INDEX = 0;
-
     @Override
-    public FruitTransaction newFruitTransaction(String line) {
-        String[] dividedLine = line.split(",");
-        FruitTransaction fruitTransaction = new FruitTransaction(dividedLine[NAME_INDEX].strip(), 
-                Integer.parseInt(dividedLine[QUANTITY_INDEX].strip()), 
-                Operation.valueOfLabel(dividedLine[OPERATION_INDEX].strip()));
-        return fruitTransaction;
+    public void execute(List<FruitTransaction> transactions, 
+            Map<Operation, OperationHandler> strategyMap) {
+        OperationStrategy operationStrategy = new OperationStrategyImpl(strategyMap);
+        FruitDao fruitDao = new FruitDaoImpl();
+        
+        for (FruitTransaction transaction : transactions) {
+            Integer newQuantity = operationStrategy.get(transaction.getOperation())
+                    .getNewQuantityForFruit(transaction);
+            fruitDao.replaceValue(transaction.getName(), newQuantity);
+        }
     }
 }
