@@ -1,18 +1,18 @@
 package core.basesyntax;
 
-import static core.basesyntax.model.FruitOperation.BALANCE;
-import static core.basesyntax.model.FruitOperation.PURCHASE;
-import static core.basesyntax.model.FruitOperation.RETURN;
-import static core.basesyntax.model.FruitOperation.SUPPLY;
+import static core.basesyntax.model.FruitTransaction.FruitOperation.BALANCE;
+import static core.basesyntax.model.FruitTransaction.FruitOperation.PURCHASE;
+import static core.basesyntax.model.FruitTransaction.FruitOperation.RETURN;
+import static core.basesyntax.model.FruitTransaction.FruitOperation.SUPPLY;
 
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.model.FruitTransition;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FruitTransactionParser;
+import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.OperationValidator;
 import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.TransitionParser;
-import core.basesyntax.service.TransitionService;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.OperationValidatorImpl;
@@ -30,27 +30,27 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String READ_FROM = "src/main/resources/input.csv";
-    private static final String WRITE_TO = "src/main/resources/output.csv";
-    private static final OperationValidator validator = new OperationValidatorImpl();
 
     public static void main(String[] args) {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(BALANCE.getOperation(), new BalanceHandlerImpl());
-        operationHandlerMap.put(PURCHASE.getOperation(), new PurchaseHandlerImpl());
-        operationHandlerMap.put(RETURN.getOperation(), new ReturnHandlerImpl());
-        operationHandlerMap.put(SUPPLY.getOperation(), new SupplyHandlerImpl());
+        operationHandlerMap.put(BALANCE.getFirstLetter(), new BalanceHandlerImpl());
+        operationHandlerMap.put(PURCHASE.getFirstLetter(), new PurchaseHandlerImpl());
+        operationHandlerMap.put(RETURN.getFirstLetter(), new ReturnHandlerImpl());
+        operationHandlerMap.put(SUPPLY.getFirstLetter(), new SupplyHandlerImpl());
         FileReader fileReader = new FileReaderImpl();
-        List<String> dataBaseFromFile = fileReader.readFromFile(READ_FROM);
-        TransitionParser transitionParser = new TransitionParserImpl(validator);
-        List<FruitTransition> fruitTransitionList
-                = transitionParser.parseTransition(dataBaseFromFile);
-        TransitionService transitionService
+        String readFrom = "src/main/resources/input.csv";
+        String writeTo = "src/main/resources/output.csv";
+        OperationValidator validator = new OperationValidatorImpl();
+        List<String> data = fileReader.readFromFile(readFrom);
+        FruitTransactionParser transitionParser = new TransitionParserImpl(validator);
+        List<FruitTransaction> fruitTransitionList
+                = transitionParser.parse(data);
+        FruitTransactionService transitionService
                 = new TransitionServiceImpl(new OperationHandlerStrategyImpl(operationHandlerMap));
-        transitionService.doTransition(fruitTransitionList);
+        transitionService.process(fruitTransitionList);
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport(FruitStorage.storage);
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeDataToFile(report, WRITE_TO);
+        fileWriter.writeToFile(report, writeTo);
     }
 }

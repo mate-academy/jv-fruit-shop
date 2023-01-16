@@ -7,7 +7,7 @@ import java.nio.file.Path;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void writeDataToFile(String report, String pathToFile) {
+    public void writeToFile(String report, String pathToFile) {
         try {
             Files.write(Path.of(pathToFile), report.getBytes());
         } catch (IOException e) {

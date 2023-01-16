@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
 public interface OperationHandler {
-    int apply(int balance, int count);
+    int handle(int balance, int count);
 }

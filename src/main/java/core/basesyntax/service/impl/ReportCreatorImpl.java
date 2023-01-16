@@ -10,15 +10,15 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String createReport(Map<Fruit, Integer> storage) {
-        StringBuilder dataToWrite = new StringBuilder();
-        dataToWrite.append(REPORT_HEADER)
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append(REPORT_HEADER)
                 .append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> entry : storage.entrySet()) {
-            dataToWrite.append(entry.getKey().getType())
+            reportBuilder.append(entry.getKey().getType())
                     .append(REPORT_LINE_SPLITTER)
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        return dataToWrite.toString();
+        return reportBuilder.toString();
     }
 }

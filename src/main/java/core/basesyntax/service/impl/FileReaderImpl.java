@@ -8,11 +8,11 @@ import java.util.List;
 
 public class FileReaderImpl implements FileReader {
     @Override
-    public List<String> readFromFile(String filePath) {
+    public List<String> readFromFile(String pathToFile) {
         try {
-            return Files.readAllLines(Path.of(filePath));
+            return Files.readAllLines(Path.of(pathToFile));
         } catch (IOException e) {
-            throw new RuntimeException("No such file in this directory " + filePath);
+            throw new RuntimeException("No such file in this directory " + pathToFile);
         }
     }
 }

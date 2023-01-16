@@ -1,14 +1,15 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.UnknownOperationException;
-import core.basesyntax.model.FruitOperation;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationValidator;
 
 public class OperationValidatorImpl implements OperationValidator {
     @Override
     public String validate(String operation) {
-        for (FruitOperation fruitOperation : FruitOperation.values()) {
-            if (fruitOperation.getOperation().equals(operation)) {
+        for (FruitTransaction.FruitOperation fruitOperation : FruitTransaction
+                .FruitOperation.values()) {
+            if (fruitOperation.getFirstLetter().equals(operation)) {
                 return operation;
             }
         }
