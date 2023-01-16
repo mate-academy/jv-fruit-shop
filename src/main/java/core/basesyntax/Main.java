@@ -21,30 +21,31 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE = "src/main/resources/input.csv";
-    private static final String REPORT_FILE = "src/main/resources/output.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/output.csv";
+    private static final Map<FruitTransaction.Operation, OperationHandler> operationsMap = Map.of(
+            FruitTransaction.Operation.BALANCE, new CreditOperationProcessor(),
+            FruitTransaction.Operation.SUPPLY, new CreditOperationProcessor(),
+            FruitTransaction.Operation.PURCHASE, new DebitOperationProcessor(),
+            FruitTransaction.Operation.RETURN, new CreditOperationProcessor()
+    );
+    private static final FileReadService fileReadService = new FileReadServiceImpl();
+    private static final FruitTransactionParser fruitTransactionParser =
+            new FruitTransactionParserImpl();
+    private static final OperationStrategy operationStrategy =
+            new OperationStrategyImpl(operationsMap);
+    private static final TransactionsProcessor transactionsProcessor =
+            new TransactionsProcessorImpl(operationStrategy);
+    private static final ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> operationsMap = Map.of(
-                FruitTransaction.Operation.BALANCE, new CreditOperationProcessor(),
-                FruitTransaction.Operation.SUPPLY, new CreditOperationProcessor(),
-                FruitTransaction.Operation.PURCHASE, new DebitOperationProcessor(),
-                FruitTransaction.Operation.RETURN, new CreditOperationProcessor()
-        );
-        FileReadService fileReadService = new FileReadServiceImpl();
-        List<String> data = fileReadService.readFromFile(Path.of(INPUT_FILE));
-
-        FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
+        List<String> data = fileReadService.readFromFile(Path.of(INPUT_FILE_PATH));
         List<FruitTransaction> fruitRecords = fruitTransactionParser.toTransactions(data);
-
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
-        TransactionsProcessor transactionsProcessor =
-                new TransactionsProcessorImpl(operationStrategy);
         Map<String, Integer> map = transactionsProcessor.process(fruitRecords);
 
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         FileWriteService fileWriteService = new FileWriteServiceImpl();
-        fileWriteService.writeToFile(Path.of(REPORT_FILE), reportGenerator.generateReport(map));
+        fileWriteService.writeToFile(Path.of(REPORT_FILE_PATH),
+                reportGenerator.generateReport(map));
     }
 
 }
