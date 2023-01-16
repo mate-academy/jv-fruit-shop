@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransactionDto;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceOperationStrategyImpl;
@@ -23,7 +23,7 @@ public class TransactionHandler {
     }
 
     public void handle(Map<String, Integer> fruits,
-                       List<FruitTransactionDto> fruitTransactionDtos) {
+                       List<FruitTransaction> fruitTransactionDtos) {
         fruitTransactionDtos.forEach(t -> {
             String fruitName = t.getFruit();
             int currentBalance = fruits.get(fruitName) == null ? 0 : fruits.get(fruitName);

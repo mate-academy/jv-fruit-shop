@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 import com.opencsv.bean.CsvBindByPosition;
 
-public class FruitTransactionDto {
+public class FruitTransaction {
     @CsvBindByPosition(position = 0)
     private String operation;
     @CsvBindByPosition(position = 1)
