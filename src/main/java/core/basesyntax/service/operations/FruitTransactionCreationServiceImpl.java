@@ -2,6 +2,7 @@ package core.basesyntax.service.operations;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
+
 import java.util.List;
 
 public class FruitTransactionCreationServiceImpl implements FruitTransactionCreationService {
@@ -14,22 +15,21 @@ public class FruitTransactionCreationServiceImpl implements FruitTransactionCrea
     @Override
     public void createTransactions(List<String[]> data) {
         FruitTransaction transaction;
-        FruitTransaction.Operation operation;
+        FruitTransaction.Operation operation = null;
         String fruit;
         int amount;
         for (String[] parameters : data) {
-            if (parameters[0].equals(FruitTransaction.Operation.BALANCE.getOperation())) {
-                operation = FruitTransaction.Operation.BALANCE;
-            } else if (parameters[0].equals(FruitTransaction.Operation.PURCHASE.getOperation())) {
-                operation = FruitTransaction.Operation.PURCHASE;
-            } else if (parameters[0].equals(FruitTransaction.Operation.RETURN.getOperation())) {
-                operation = FruitTransaction.Operation.RETURN;
-            } else {
-                operation = FruitTransaction.Operation.SUPPLY;
-            }
-            fruit = parameters[1];
-            amount = Integer.parseInt(parameters[2]);
             transaction = new FruitTransaction();
+            String operationValue = parameters[0];
+            String fruitType = parameters[1];
+            int fruitQuantity = Integer.parseInt(parameters[2]);
+            for (FruitTransaction.Operation op : FruitTransaction.Operation.values()) {
+                if (op.toString().equalsIgnoreCase(operationValue)) {
+                    operation = op;
+                }
+            }
+            fruit = fruitType;
+            amount = fruitQuantity;
             transaction.setFruit(fruit);
             transaction.setOperation(operation);
             transaction.setQuantity(amount);

@@ -2,33 +2,22 @@ package core.basesyntax.service.operations;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitTransactionReportMakerImpl implements FruitTransactionReportMaker {
+    private OperationStrategy operationStrategy;
+
+    public FruitTransactionReportMakerImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
+
     @Override
     public List<FruitTransaction> makeReport(FruitDao dao) {
-        List<FruitTransaction> balanceList = dao.getFirst("b");
-        for (FruitTransaction currentFruitTransaction : balanceList) {
-            List<FruitTransaction> supplyList = dao.get("s", currentFruitTransaction.getFruit());
-            List<FruitTransaction> returnList = dao.get("r", currentFruitTransaction.getFruit());
-            List<FruitTransaction> purchaseList = dao.get("p", currentFruitTransaction.getFruit());
-
-            for (FruitTransaction tr : supplyList) {
-                int amountToAdd = tr.getQuantity();
-                int currentAmount = currentFruitTransaction.getQuantity();
-                currentFruitTransaction.setQuantity(currentAmount + amountToAdd);
-            }
-            for (FruitTransaction tr : returnList) {
-                int amountToReturn = tr.getQuantity();
-                int currentAmount = currentFruitTransaction.getQuantity();
-                currentFruitTransaction.setQuantity(currentAmount + amountToReturn);
-            }
-            for (FruitTransaction tr : purchaseList) {
-                int amountToRemove = tr.getQuantity();
-                int currentAmount = currentFruitTransaction.getQuantity();
-                currentFruitTransaction.setQuantity(currentAmount - amountToRemove);
-            }
-        }
+        List<FruitTransaction> balanceList = dao.getByOperation("b");
+        operationStrategy.get(FruitTransaction.Operation.SUPPLY).handle(balanceList);
+        operationStrategy.get(FruitTransaction.Operation.PURCHASE).handle(balanceList);
+        operationStrategy.get(FruitTransaction.Operation.RETURN).handle(balanceList);
         return balanceList;
     }
 }

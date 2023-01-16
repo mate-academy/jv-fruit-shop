@@ -11,15 +11,13 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     public void writeToFile(String writeToFilePath, List<FruitTransaction> data) {
         try (PrintWriter printWriter = new PrintWriter(new FileWriter(writeToFilePath))) {
             data.stream()
-                    .map(this::convertToCsv)
+                    .map(transaction -> String.join(",",
+                            transaction.getFruit(),
+                            String.valueOf(transaction.getQuantity())))
                     .forEach(printWriter::println);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to this path: "
                     + writeToFilePath, e);
         }
-    }
-
-    private String convertToCsv(FruitTransaction transaction) {
-        return String.join(",", transaction.getFruit(), String.valueOf(transaction.getQuantity()));
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 public interface FruitDao {
     void add(FruitTransaction transaction);
 
-    List<FruitTransaction> getFirst(String operation);
+    List<FruitTransaction> getByOperation(String operation);
     
-    List<FruitTransaction> get(String operation, String fruit);
+    List<FruitTransaction> getFruitOperationsList(String operation, String fruit);
 }

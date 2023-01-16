@@ -21,6 +21,11 @@ public class FruitTransaction {
         public String getOperation() {
             return operation;
         }
+
+        @Override
+        public String toString() {
+            return operation;
+        }
     }
 
     public Operation getOperation() {
