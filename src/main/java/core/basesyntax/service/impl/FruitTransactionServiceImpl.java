@@ -14,8 +14,8 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     }
 
     @Override
-    public void process(List<FruitTransaction> fruitTransitions) {
-        for (FruitTransaction transition : fruitTransitions) {
+    public void process(List<FruitTransaction> fruitTransactions) {
+        for (FruitTransaction transition : fruitTransactions) {
             if (!FruitStorage.storage.containsKey(transition.getFruit())) {
                 FruitStorage.storage.put(transition.getFruit(), transition.getCount());
             } else {

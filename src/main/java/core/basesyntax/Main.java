@@ -42,12 +42,12 @@ public class Main {
         OperationValidator validator = new OperationValidatorImpl();
         List<String> data = fileReader.readFromFile(readFrom);
         FruitTransactionParser transitionParser = new FruitTransactionParserImpl(validator);
-        List<FruitTransaction> fruitTransitions
+        List<FruitTransaction> fruitTransactions
                 = transitionParser.parse(data.toString());
         FruitTransactionService transitionService
                 = new FruitTransactionServiceImpl(
-                        new OperationHandlerStrategyImpl(operationHandlerMap));
-        transitionService.process(fruitTransitions);
+                new OperationHandlerStrategyImpl(operationHandlerMap));
+        transitionService.process(fruitTransactions);
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport(FruitStorage.storage);
         FileWriter fileWriter = new FileWriterImpl();
