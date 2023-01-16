@@ -12,7 +12,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
             pw.write(report);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Can't find file by path: " + filePath, e);
+            throw new RuntimeException("Can't write data to file : " + filePath, e);
         }
     }
 }

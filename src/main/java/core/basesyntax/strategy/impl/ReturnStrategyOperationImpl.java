@@ -7,9 +7,16 @@ import core.basesyntax.strategy.OperationHandler;
 public class ReturnStrategyOperationImpl implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        String fruitName = transaction.getFruit();
-        int returnQuantity = transaction.getQuantity();
-        int oldQuantity = Storage.fruits.get(fruitName);
-        Storage.fruits.put(fruitName, oldQuantity + returnQuantity);
+        if (transaction.getFruit() != null || transaction.getOperation() != null
+                || Storage.fruits.get(transaction.getFruit()) != null) {
+            String fruitName = transaction.getFruit();
+            int resultQuantity = Storage.fruits.get(fruitName) + transaction.getQuantity();
+            if (resultQuantity < 0) {
+                throw new RuntimeException("Quantity can't be negative: " + transaction.getFruit());
+            }
+            Storage.fruits.put(fruitName, resultQuantity);
+        } else {
+            throw new RuntimeException("Fruit can't be null");
+        }
     }
 }

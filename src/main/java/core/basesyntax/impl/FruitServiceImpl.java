@@ -14,8 +14,8 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void calculateFruit(List<FruitTransaction> fruits) {
-        for (FruitTransaction fruitTransaction : fruits) {
+    public void calculateFruit(List<FruitTransaction> fruitTransactions) {
+        for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler operationHandler = operationStrategy
                     .get(fruitTransaction.getOperation());
             operationHandler.handle(fruitTransaction);

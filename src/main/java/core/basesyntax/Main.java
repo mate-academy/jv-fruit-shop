@@ -1,13 +1,13 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.ConvertToCsvServiceImpl;
+import core.basesyntax.impl.ConverterServiceImpl;
+import core.basesyntax.impl.FileReaderServiceImpl;
 import core.basesyntax.impl.FileWriterServiceImpl;
 import core.basesyntax.impl.FruitServiceImpl;
-import core.basesyntax.impl.ReaderServiceImpl;
 import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.impl.TransactionServiceImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ConvertToCsvService;
+import core.basesyntax.service.ConverterService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationHandler;
@@ -39,17 +39,17 @@ public class Main {
         OperationStrategy operationStrategy
                 = new OperationStrategyImpl(operationOperationHandlerMap);
         //read
-        List<String> readFromFile = new ReaderServiceImpl().readFromFile(inputFileName);
+        List<String> readFromFile = new FileReaderServiceImpl().readFromFile(inputFileName);
         //process data
-        List<FruitTransaction> transactionService = new TransactionServiceImpl()
+        List<FruitTransaction> fruitTransactions = new TransactionServiceImpl()
                 .convertStringToFruitTransaction(readFromFile);
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
-        fruitService.calculateFruit(transactionService);
+        fruitService.calculateFruit(fruitTransactions);
         //report create
-        ConvertToCsvService convertToCsvService = new ConvertToCsvServiceImpl();
-        String report = new ReportServiceImpl().createReport(convertToCsvService.convertedList());
+        ConverterService convertToCsvService = new ConverterServiceImpl();
+        String report = new ReportServiceImpl().createReport(convertToCsvService.convertList());
         //write report data
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(report,outFileName);
+        fileWriterService.writeToFile(report, outFileName);
     }
 }

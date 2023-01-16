@@ -9,10 +9,19 @@ public class BalanceStrategyOperationImpl implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        String fruitName = transaction.getFruit();
-        int balanceQuantity = transaction.getQuantity();
-        int oldQuantity = Storage.fruits.get(fruitName)
-                != null ? Storage.fruits.get(fruitName) : ZERO;
-        Storage.fruits.put(fruitName, oldQuantity + balanceQuantity);
+        if (transaction.getFruit() != null || transaction.getOperation() != null
+                || Storage.fruits.get(transaction.getFruit()) != null) {
+            String fruitName = transaction.getFruit();
+            int balanceQuantity = transaction.getQuantity();
+            int oldQuantity = Storage.fruits.get(fruitName)
+                    != null ? Storage.fruits.get(fruitName) : ZERO;
+            int resultQuantity = oldQuantity + balanceQuantity;
+            if (resultQuantity < 0) {
+                throw new RuntimeException("Quantity can't be negative: " + transaction.getFruit());
+            }
+            Storage.fruits.put(fruitName, resultQuantity);
+        } else {
+            throw new RuntimeException("Fruit can't be null");
+        }
     }
 }

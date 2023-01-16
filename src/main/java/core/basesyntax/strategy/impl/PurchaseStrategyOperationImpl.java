@@ -8,9 +8,16 @@ public class PurchaseStrategyOperationImpl implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        String fruitName = transaction.getFruit();
-        int purchaseQuantity = transaction.getQuantity();
-        int oldQuantity = Storage.fruits.get(fruitName);
-        Storage.fruits.put(fruitName, oldQuantity - purchaseQuantity);
+        if (transaction.getFruit() != null || transaction.getOperation() != null
+                || Storage.fruits.get(transaction.getFruit()) != null) {
+            String fruitName = transaction.getFruit();
+            int resultQuantity = Storage.fruits.get(fruitName) - transaction.getQuantity();
+            if (resultQuantity < 0) {
+                throw new RuntimeException("Quantity can't be negative: " + transaction.getFruit());
+            }
+            Storage.fruits.put(fruitName, resultQuantity);
+        } else {
+            throw new RuntimeException("Fruit can't be null");
+        }
     }
 }
