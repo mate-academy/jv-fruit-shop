@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.strategy.impl.AdditionToStorageService;
 import core.basesyntax.service.strategy.impl.InitialFruitsService;
-import core.basesyntax.service.strategy.impl.SelloutService;
+import core.basesyntax.service.strategy.impl.TranactionProcessorServiceImpl;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +17,7 @@ public class TransactionProcessorStrategy implements TransactionProcessor {
                     new InitialFruitsService().process(transaction, fruits);
                     break;
                 case PURCHASE:
-                    new SelloutService().process(transaction, fruits);
+                    new TranactionProcessorServiceImpl().process(transaction, fruits);
                     break;
                 case SUPPLY:
                 case RETURN:

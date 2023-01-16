@@ -4,10 +4,10 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionProcessorService;
 import java.util.Map;
 
-public class SelloutService implements TransactionProcessorService {
+public class TranactionProcessorServiceImpl implements TransactionProcessorService {
     @Override
     public void process(FruitTransaction transaction, Map<String, Integer> fruits) {
-        String key = transaction.getFruit();
-        fruits.put(key, fruits.get(key) - transaction.getQuantity());
+        String fruit = transaction.getFruit();
+        fruits.put(fruit, fruits.get(fruit) - transaction.getQuantity());
     }
 }
