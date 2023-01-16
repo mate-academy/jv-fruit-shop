@@ -11,13 +11,11 @@ import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.FruitTransactionService;
-import core.basesyntax.service.OperationValidator;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
-import core.basesyntax.service.impl.OperationValidatorImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceHandler;
@@ -39,11 +37,10 @@ public class Main {
         FileReader fileReader = new FileReaderImpl();
         String readFrom = "src/main/resources/input.csv";
         String writeTo = "src/main/resources/output.csv";
-        OperationValidator validator = new OperationValidatorImpl();
         List<String> data = fileReader.readFromFile(readFrom);
-        FruitTransactionParser transitionParser = new FruitTransactionParserImpl(validator);
+        FruitTransactionParser transitionParser = new FruitTransactionParserImpl();
         List<FruitTransaction> fruitTransactions
-                = transitionParser.parse(data.toString());
+                = transitionParser.parse(data);
         FruitTransactionService transitionService
                 = new FruitTransactionServiceImpl(
                 new OperationHandlerStrategyImpl(operationHandlerMap));
