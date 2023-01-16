@@ -44,7 +44,7 @@ public class Main {
         List<String> data = fileReader.readFromFile(readFrom);
         FruitTransactionParser transitionParser = new TransitionParserImpl(validator);
         List<FruitTransaction> fruitTransitionList
-                = transitionParser.parse(data);
+                = transitionParser.parse(data.toString());
         FruitTransactionService transitionService
                 = new TransitionServiceImpl(new OperationHandlerStrategyImpl(operationHandlerMap));
         transitionService.process(fruitTransitionList);

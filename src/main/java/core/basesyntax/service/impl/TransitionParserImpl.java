@@ -6,6 +6,8 @@ import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.OperationValidator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TransitionParserImpl implements FruitTransactionParser {
     private static final int INDEX_OF_OPERATION_TYPE = 0;
@@ -19,16 +21,25 @@ public class TransitionParserImpl implements FruitTransactionParser {
     }
 
     @Override
+    public List<FruitTransaction> parse(String data) {
+        String[] lines = data.split(System.lineSeparator());
+        return Stream.of(lines)
+                .skip(1)
+                .map(this::parse)
+                .flatMap(x -> x.stream())
+                .collect(Collectors.toList());
+    }
+
     public List<FruitTransaction> parse(List<String> dataFromFile) {
         String[] data;
-        List<FruitTransaction> fruitTransitionList = new ArrayList<>();
+        List<FruitTransaction> fruitTransitions = new ArrayList<>();
         for (int i = 1; i < dataFromFile.size(); i++) {
             data = dataFromFile.get(i).split(SPLITTER);
-            fruitTransitionList
+            fruitTransitions
                     .add(new FruitTransaction(validator.validate(data[INDEX_OF_OPERATION_TYPE]),
                             new Fruit(data[INDEX_OF_FRUIT_TYPE]),
                             Integer.parseInt(data[INDEX_OF_COUNT])));
         }
-        return fruitTransitionList;
+        return fruitTransitions;
     }
 }
