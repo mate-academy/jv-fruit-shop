@@ -4,24 +4,24 @@ import model.Fruit;
 
 public class FruitTransaction {
     private String transactionName;
-    private Fruit getFruit;
-    private int getAmount;
+    private Fruit fruit;
+    private int quantity;
 
     public FruitTransaction(String transactionName, Fruit getFruit, int getAmount) {
         this.transactionName = transactionName;
-        this.getFruit = getFruit;
-        this.getAmount = getAmount;
+        this.fruit = getFruit;
+        this.quantity = getAmount;
     }
 
     public String getTransactionName() {
         return transactionName;
     }
 
-    public Fruit getGetFruit() {
-        return getFruit;
+    public Fruit getFruit() {
+        return fruit;
     }
 
-    public int getGetAmount() {
-        return getAmount;
+    public int getQuantity() {
+        return quantity;
     }
 }

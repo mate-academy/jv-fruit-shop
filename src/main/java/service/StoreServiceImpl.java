@@ -6,11 +6,11 @@ import model.Fruit;
 
 public class StoreServiceImpl implements StoreService {
     @Override
-    public String getReport() {
+    public String getService() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit, quantity");
         for (Map.Entry<Fruit, Integer> entry : Storage.fruits.entrySet()) {
-            stringBuilder.append("\n")
+            stringBuilder.append(System.lineSeparator())
                     .append(entry.getKey().getFruitName())
                     .append(",").append(entry.getValue());
         }

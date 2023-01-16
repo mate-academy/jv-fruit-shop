@@ -5,12 +5,10 @@ import service.FruitTransaction;
 
 public class ReturnSupplyTransactionHandler implements TransactionHandler {
     @Override
-    public int operate(FruitTransaction fruitTransaction) {
-        int currentFruitAmount = Storage.fruits.get(fruitTransaction.getGetFruit());
-        int newFruitAmount = currentFruitAmount + fruitTransaction.getGetAmount();
+    public void operate(FruitTransaction fruitTransaction) {
+        int currentFruitAmount = Storage.fruits.get(fruitTransaction.getFruit());
+        int newFruitAmount = currentFruitAmount + fruitTransaction.getQuantity();
 
-        Storage.fruits.put(fruitTransaction.getGetFruit(),newFruitAmount);
-
-        return newFruitAmount;
+        Storage.fruits.put(fruitTransaction.getFruit(),newFruitAmount);
     }
 }

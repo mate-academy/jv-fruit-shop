@@ -1,5 +1,5 @@
 package service;
 
-public interface Validator {
+public interface TransactionParser {
     FruitTransaction parse(String line);
 }
