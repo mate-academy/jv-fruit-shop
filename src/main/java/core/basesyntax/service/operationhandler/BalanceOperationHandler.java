@@ -6,6 +6,10 @@ public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public void makeOperation(String name, int quantity, StorageDao storageDao) {
-        storageDao.add(name, quantity);
+        if (quantity >= 0) {
+            storageDao.add(name, quantity);
+        } else {
+            throw new RuntimeException(name + " quantity is not correct");
+        }
     }
 }

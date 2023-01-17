@@ -7,7 +7,11 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void makeOperation(String name, int quantity, StorageDao storageDao) {
         int quantityFromDb = storageDao.get(name);
-        int quantityToDb = quantityFromDb - quantity;
-        storageDao.update(name, quantityToDb);
+        if ((quantityFromDb >= quantity) && (quantity >= 0)) {
+            int quantityToDb = quantityFromDb - quantity;
+            storageDao.update(name, quantityToDb);
+        } else {
+            throw new RuntimeException(name + " quantity is not correct");
+        }
     }
 }

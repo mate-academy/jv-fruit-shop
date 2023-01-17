@@ -7,7 +7,12 @@ public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void makeOperation(String name, int quantity, StorageDao storageDao) {
         int quantityFromDb = storageDao.get(name);
-        int quantityToDb = quantityFromDb + quantity;
-        storageDao.update(name, quantityToDb);
+        if (quantity >= 0) {
+            int quantityToDb = quantityFromDb + quantity;
+            storageDao.update(name, quantityToDb);
+        } else {
+            throw new RuntimeException(name + " quantity is not correct");
+        }
+
     }
 }
