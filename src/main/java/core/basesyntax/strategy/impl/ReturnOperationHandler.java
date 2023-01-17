@@ -15,7 +15,8 @@ public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
         Integer currentQuantity = fruitDao.getQuantity(transaction.getName());
-        Integer newQuantity = ((currentQuantity == null) ? 0 : currentQuantity) + transaction.getQuantity();
+        Integer newQuantity = ((currentQuantity == null) ? 0 : currentQuantity) 
+                + transaction.getQuantity();
         fruitDao.replaceValue(transaction.getName(), newQuantity);
     }
 }
