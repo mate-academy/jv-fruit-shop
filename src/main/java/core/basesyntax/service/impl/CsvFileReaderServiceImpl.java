@@ -11,15 +11,15 @@ public class CsvFileReaderServiceImpl implements FileReaderService {
     private static final int HEADER_LINE_INDEX = 1;
 
     @Override
-    public List<FruitTransaction> readDataFile(String fileName) {
+    public List<FruitTransaction> readFromFile(String pathToFile) {
         try {
-            return new CsvToBeanBuilder(new FileReader(fileName))
+            return new CsvToBeanBuilder(new FileReader(pathToFile))
                     .withType(FruitTransaction.class)
                     .withSkipLines(HEADER_LINE_INDEX)
                     .build()
                     .parse();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Can't read file " + fileName, e);
+            throw new RuntimeException("Can't read file " + pathToFile, e);
         }
     }
 }

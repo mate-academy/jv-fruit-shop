@@ -6,19 +6,19 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    private final String operation;
+    private final String firstLetter;
 
     Operation(String operation) {
-        this.operation = operation;
+        this.firstLetter = operation;
     }
 
-    public static Operation getOperation(String sign) {
-        for (Operation newOperation: Operation.values()) {
-            if (sign.trim().equals(newOperation.operation)) {
-                return newOperation;
+    public static Operation getOperationByFirstLetter(String firstLetter) {
+        for (Operation operation: Operation.values()) {
+            if (firstLetter.trim().equals(operation.firstLetter)) {
+                return operation;
             }
         }
-        throw new RuntimeException("Can't find operation "
-                + sign);
+        throw new RuntimeException("Can't find operation by first letter "
+                + firstLetter);
     }
 }
