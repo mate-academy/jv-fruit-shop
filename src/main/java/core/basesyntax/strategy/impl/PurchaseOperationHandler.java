@@ -6,11 +6,16 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    @Override
-    public Integer getNewQuantityForFruit(FruitTransaction fruitTransaction) {
-        FruitDao fruitDao = new FruitDaoImpl();
+    private FruitDao fruitDao;
+    
+    public PurchaseOperationHandler() {
+        fruitDao = new FruitDaoImpl();
+    }
 
-        Integer currentQuantity = fruitDao.getQuantity(fruitTransaction.getName());
-        return ((currentQuantity == null) ? 0 : currentQuantity) - fruitTransaction.getQuantity();
+    @Override
+    public void handle(FruitTransaction transaction) {
+        Integer currentQuantity = fruitDao.getQuantity(transaction.getName());
+        Integer newQuantity = ((currentQuantity == null) ? 0 : currentQuantity) - transaction.getQuantity();
+        fruitDao.replaceValue(transaction.getName(), newQuantity);
     }
 }

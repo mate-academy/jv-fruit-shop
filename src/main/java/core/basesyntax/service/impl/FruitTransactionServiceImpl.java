@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.FruitTransactionService;
@@ -16,12 +14,9 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     public void execute(List<FruitTransaction> transactions, 
             Map<Operation, OperationHandler> strategyMap) {
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategyMap);
-        FruitDao fruitDao = new FruitDaoImpl();
         
         for (FruitTransaction transaction : transactions) {
-            Integer newQuantity = operationStrategy.get(transaction.getOperation())
-                    .getNewQuantityForFruit(transaction);
-            fruitDao.replaceValue(transaction.getName(), newQuantity);
+            operationStrategy.get(transaction.getOperation()).handle(transaction);
         }
     }
 }

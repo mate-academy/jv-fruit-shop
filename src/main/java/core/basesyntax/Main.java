@@ -35,14 +35,14 @@ public class Main {
 
     public static void main(String[] args) {
         FileService fileService = new FileServiceImpl();
-        ReportMaker reportFormatter = new ReportMakerImpl();
+        ReportMaker reportMaker = new ReportMakerImpl();
         TransactionParser transactionParser = new TransactionParserImpl();
         FruitTransactionService transactionService = new FruitTransactionServiceImpl();
 
         List<String> inputFileContent = fileService.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> transactions = transactionParser.parse(inputFileContent);
         transactionService.execute(transactions, strategyMap);
-        List<String> report = reportFormatter.makeReport();
+        List<String> report = reportMaker.makeReport();
         fileService.writeToFile(report, REPORT_FILE_PATH);
     }
 }
