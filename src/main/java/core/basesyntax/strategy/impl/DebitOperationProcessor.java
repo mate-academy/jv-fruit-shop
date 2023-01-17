@@ -9,13 +9,14 @@ public class DebitOperationProcessor implements OperationHandler {
 
     @Override
     public int get(FruitTransaction fruitTransaction, Map<String, Integer> fruits) {
+        String fruit = fruitTransaction.getFruit();
         Optional<Integer> quantityOptional =
-                Optional.ofNullable(fruits.get(fruitTransaction.getFruit()));
+                Optional.ofNullable(fruits.get(fruit));
         int amount = quantityOptional.orElseThrow(() ->
                 new RuntimeException("No such fruit was found."))
                 - fruitTransaction.getQuantity();
         if (amount < 0) {
-            throw new RuntimeException("Not enough " + fruitTransaction.getFruit() + " for sale.");
+            throw new RuntimeException("Not enough " + fruit + " for sale.");
         }
         return amount;
     }

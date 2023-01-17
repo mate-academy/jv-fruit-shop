@@ -37,13 +37,12 @@ public class Main {
     private static final TransactionsProcessor transactionsProcessor =
             new TransactionsProcessorImpl(operationStrategy);
     private static final ReportGenerator reportGenerator = new ReportGeneratorImpl();
+    private static final FileWriteService fileWriteService = new FileWriteServiceImpl();
 
     public static void main(String[] args) {
         List<String> data = fileReadService.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> fruitTransactions = fruitTransactionParser.toTransactions(data);
         Map<String, Integer> fruitsMap = transactionsProcessor.process(fruitTransactions);
-
-        FileWriteService fileWriteService = new FileWriteServiceImpl();
         fileWriteService.writeToFile(Path.of(REPORT_FILE_PATH),
                 reportGenerator.generateReport(fruitsMap));
     }

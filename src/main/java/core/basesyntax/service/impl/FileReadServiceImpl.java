@@ -11,10 +11,11 @@ public class FileReadServiceImpl implements FileReadService {
     @Override
     public List<String> readFromFile(String fileName) {
         List<String> data;
+        Path path = Path.of(fileName);
         try {
-            data = Files.readAllLines(Path.of(fileName));
+            data = Files.readAllLines(path);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + Path.of(fileName), e);
+            throw new RuntimeException("Can't read data from file " + path, e);
         }
         if (data.size() != 0) {
             data.remove(0);
