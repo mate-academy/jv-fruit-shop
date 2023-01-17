@@ -1,8 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportGenerator;
-
-import java.util.Arrays;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
@@ -14,9 +12,11 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
         StringBuilder reportGenerator = new StringBuilder(HEADER + System.lineSeparator());
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
-            reportGenerator.append(entry.getKey()).append(SEPARATOR).append(entry.getValue()).append(System.lineSeparator());
+            reportGenerator.append(entry.getKey())
+                    .append(SEPARATOR)
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
         }
-
         return reportGenerator.toString();
     }
 }
