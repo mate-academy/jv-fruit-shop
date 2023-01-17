@@ -1,28 +1,28 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionsProcessor;
+import core.basesyntax.service.FruitTransactionProcessor;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TransactionsProcessorImpl implements TransactionsProcessor {
+public class FruitTransactionProcessorImpl implements FruitTransactionProcessor {
     private final OperationStrategy operationStrategy;
 
-    public TransactionsProcessorImpl(OperationStrategy operationStrategy) {
+    public FruitTransactionProcessorImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
     public Map<String, Integer> process(List<FruitTransaction> fruitTransactions) {
-        Map<String, Integer> hashMap = new HashMap<>();
+        Map<String, Integer> fruitsMap = new HashMap<>();
         fruitTransactions.forEach(fruitTransaction -> {
-            int handleQuantity = operationStrategy
+            int quantity = operationStrategy
                     .getOperationHandler(fruitTransaction.getOperation())
-                    .get(fruitTransaction, hashMap);
-            hashMap.put(fruitTransaction.getFruit(), handleQuantity);
+                    .calculate(fruitTransaction, fruitsMap);
+            fruitsMap.put(fruitTransaction.getFruit(), quantity);
         });
-        return hashMap;
+        return fruitsMap;
     }
 }

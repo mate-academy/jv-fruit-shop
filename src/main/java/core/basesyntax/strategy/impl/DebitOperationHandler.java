@@ -1,17 +1,16 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationCalculator;
 import java.util.Map;
 import java.util.Optional;
 
-public class DebitOperationProcessor implements OperationHandler {
-
+public class DebitOperationHandler implements OperationCalculator {
     @Override
-    public int get(FruitTransaction fruitTransaction, Map<String, Integer> fruits) {
+    public int calculate(FruitTransaction fruitTransaction, Map<String, Integer> fruitsMap) {
         String fruit = fruitTransaction.getFruit();
         Optional<Integer> quantityOptional =
-                Optional.ofNullable(fruits.get(fruit));
+                Optional.ofNullable(fruitsMap.get(fruit));
         int amount = quantityOptional.orElseThrow(() ->
                 new RuntimeException("No such fruit was found."))
                 - fruitTransaction.getQuantity();
