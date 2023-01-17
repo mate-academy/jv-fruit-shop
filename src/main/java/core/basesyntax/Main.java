@@ -4,20 +4,18 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.ReportService;
-import core.basesyntax.service.impl.*;
-
+import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionHandlerImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
 import java.util.List;
 
 public class Main {
     private static final String INPUT_DATA_PATH = "src/main/resources/inputData.csv";
     private static final String OUTPUT_DATA_PATH = "src/main/resources/report.csv";
 
-
     public static void main(String[] args) {
         FileReaderService fileReaderService = new CsvFileReaderServiceImpl();
-        //ReportService reportService = new CsvReportServiceImpl();
         List<FruitTransaction> fruitTransactions
                 = fileReaderService.readFromFile(INPUT_DATA_PATH);
         FruitTransactionHandlerImpl fruitTransactionHandlerImpl = new FruitTransactionHandlerImpl();
@@ -26,6 +24,5 @@ public class Main {
         String report = reportGenerator.generate(Storage.FRUITS);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(OUTPUT_DATA_PATH,report);
-        //reportService.generateReport(Storage.FRUITS, OUTPUT_DATA_PATH);
     }
 }

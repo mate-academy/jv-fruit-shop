@@ -1,11 +1,6 @@
 package core.basesyntax.service.impl;
 
-import com.opencsv.CSVWriter;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.ReportGenerator;
-
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
