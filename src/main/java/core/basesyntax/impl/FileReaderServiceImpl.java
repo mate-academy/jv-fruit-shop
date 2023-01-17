@@ -13,17 +13,17 @@ public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> readFromFile(String filePath) {
         File file = new File(filePath);
-        List<String> fruits = new ArrayList<>();
+        List<String> lines = new ArrayList<>();
         String line;
         try (BufferedReader br =
                      new BufferedReader(new FileReader(file))) {
             br.readLine();
             while ((line = br.readLine()) != null) {
-                fruits.add(line);
+                lines.add(line);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + file.getPath(), e);
         }
-        return fruits;
+        return lines;
     }
 }

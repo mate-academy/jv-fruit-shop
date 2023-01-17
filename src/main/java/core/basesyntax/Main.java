@@ -46,8 +46,8 @@ public class Main {
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
         fruitService.calculateFruit(fruitTransactions);
         //report create
-        ConverterService convertToCsvService = new ConverterServiceImpl();
-        String report = new ReportServiceImpl().createReport(convertToCsvService.convertList());
+        ConverterService converterService = new ConverterServiceImpl();
+        String report = new ReportServiceImpl().createReport(converterService.convertList());
         //write report data
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(report, outFileName);
