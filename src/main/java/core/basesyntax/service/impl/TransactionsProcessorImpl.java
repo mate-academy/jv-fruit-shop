@@ -15,9 +15,9 @@ public class TransactionsProcessorImpl implements TransactionsProcessor {
     }
 
     @Override
-    public Map<String, Integer> process(List<FruitTransaction> fruitRecords) {
+    public Map<String, Integer> process(List<FruitTransaction> fruitTransactions) {
         Map<String, Integer> hashMap = new HashMap<>();
-        fruitRecords.forEach(fruitTransaction -> {
+        fruitTransactions.forEach(fruitTransaction -> {
             int handleQuantity = operationStrategy
                     .getOperationHandler(fruitTransaction.getOperation())
                     .get(fruitTransaction, hashMap);

@@ -39,13 +39,13 @@ public class Main {
     private static final ReportGenerator reportGenerator = new ReportGeneratorImpl();
 
     public static void main(String[] args) {
-        List<String> data = fileReadService.readFromFile(Path.of(INPUT_FILE_PATH));
-        List<FruitTransaction> fruitRecords = fruitTransactionParser.toTransactions(data);
-        Map<String, Integer> map = transactionsProcessor.process(fruitRecords);
+        List<String> data = fileReadService.readFromFile(INPUT_FILE_PATH);
+        List<FruitTransaction> fruitTransactions = fruitTransactionParser.toTransactions(data);
+        Map<String, Integer> fruitsMap = transactionsProcessor.process(fruitTransactions);
 
         FileWriteService fileWriteService = new FileWriteServiceImpl();
         fileWriteService.writeToFile(Path.of(REPORT_FILE_PATH),
-                reportGenerator.generateReport(map));
+                reportGenerator.generateReport(fruitsMap));
     }
 
 }

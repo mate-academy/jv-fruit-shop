@@ -37,21 +37,21 @@ public class FruitTransaction {
 
         static {
             Arrays.stream(values())
-                    .forEach(operation -> OPERATION_MAP.put(operation.getType(), operation));
+                    .forEach(operation -> OPERATION_MAP.put(operation.getFirstLetter(), operation));
         }
 
-        private final String type;
+        private final String firstLetter;
 
-        Operation(String typeKey) {
-            this.type = typeKey;
+        Operation(String firstLetter) {
+            this.firstLetter = firstLetter;
         }
 
-        public static Operation get(String type) {
-            return OPERATION_MAP.get(type);
+        public static Operation get(String firstLetter) {
+            return OPERATION_MAP.get(firstLetter);
         }
 
-        public String getType() {
-            return type;
+        public String getFirstLetter() {
+            return firstLetter;
         }
     }
 }

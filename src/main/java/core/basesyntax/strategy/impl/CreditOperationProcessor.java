@@ -8,8 +8,9 @@ import java.util.Optional;
 public class CreditOperationProcessor implements OperationHandler {
 
     @Override
-    public int get(FruitTransaction fruitRecord, Map<String, Integer> fruits) {
-        Optional<Integer> optional = Optional.ofNullable(fruits.get(fruitRecord.getFruit()));
-        return optional.orElse(0) + fruitRecord.getQuantity();
+    public int get(FruitTransaction fruitTransaction, Map<String, Integer> fruits) {
+        Integer currentQuantity = Optional.ofNullable(fruits.get(fruitTransaction.getFruit()))
+                .orElse(0);
+        return currentQuantity + fruitTransaction.getQuantity();
     }
 }
