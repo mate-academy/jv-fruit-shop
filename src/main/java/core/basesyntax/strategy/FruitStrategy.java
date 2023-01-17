@@ -1,5 +1,6 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.strategy.impl.BalanceFruitCalculatorService;
 import core.basesyntax.strategy.impl.PurchaseFruitCalculatorService;
 import core.basesyntax.strategy.impl.ReturnFruitCalculatorService;
@@ -8,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStrategy {
-    private static final Map<String, FruitCalculatorService> keyStorage;
+    public static final Map<String, FruitCalculatorService> keyStorage;
 
     static {
         keyStorage = new HashMap<>();
@@ -19,6 +20,12 @@ public class FruitStrategy {
     }
 
     public FruitCalculatorService getFruitService(String operation) {
+        if (operation == null || operation.isEmpty()) {
+            throw new FruitShopException("String operation should not be null or empty");
+        }
+        if (!keyStorage.containsKey(operation)) {
+            throw new FruitShopException("Operation is wrong");
+        }
         return keyStorage.get(operation);
     }
 }

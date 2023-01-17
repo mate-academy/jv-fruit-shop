@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.service.DataProcessorService;
 import core.basesyntax.strategy.FruitStrategy;
 import java.util.List;
@@ -13,10 +14,18 @@ public class DataProcessorServiceImpl implements DataProcessorService {
 
     @Override
     public void processData(List<String[]> lines) {
+        if (lines == null || lines.size() < 1) {
+            throw new FruitShopException("The input data is null or empty");
+        }
         for (String[] line: lines) {
             String key = line[FRUIT_INDEX];
+            boolean isOperation = fruitStrategy.keyStorage
+                    .containsKey(line[OPERATION_INDEX].trim());
             int oldAmount = Storage.mapFruits.getOrDefault(key, 0);
             int newAmount = Integer.parseInt(line[AMOUNT_INDEX]);
+            if (!isOperation) {
+                throw new FruitShopException("The operation string is incorrect");
+            }
             Storage.mapFruits.put(line[FRUIT_INDEX].trim(),
                     fruitStrategy.getFruitService(line[OPERATION_INDEX].trim())
                             .calculateFruits(oldAmount, newAmount));

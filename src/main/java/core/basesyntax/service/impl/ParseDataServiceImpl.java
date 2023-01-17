@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.service.ParseDataService;
 import java.util.Arrays;
 import java.util.List;
@@ -10,11 +11,13 @@ public class ParseDataServiceImpl implements ParseDataService {
 
     @Override
     public List<String[]> parseData(String data) {
+        if (data == null || data.length() < 1) {
+            throw new FruitShopException("Enter correct string");
+        }
         String[] splittedBySeparator = data.split(System.lineSeparator());
-        List<String[]> lines = Arrays.stream(splittedBySeparator)
+        return Arrays.stream(splittedBySeparator)
                 .skip(1)
                 .map(w -> w.split(DELIMITER))
                 .collect(Collectors.toList());
-        return lines;
     }
 }

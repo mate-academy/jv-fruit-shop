@@ -6,9 +6,9 @@ import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ParseDataService;
 import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.impl.DataProcessorServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ParseDataServiceImpl;
-import core.basesyntax.service.impl.ReadFromFileImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class Main {
     private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        FileReaderService readFromFile = new ReadFromFileImpl();
+        FileReaderService readFromFile = new FileReaderServiceImpl();
         ParseDataService parseDataService = new ParseDataServiceImpl();
         DataProcessorService dataProcessorService = new DataProcessorServiceImpl();
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
