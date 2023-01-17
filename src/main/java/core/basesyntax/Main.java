@@ -23,6 +23,6 @@ public class Main {
         ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.generate(Storage.FRUITS);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(OUTPUT_DATA_PATH,report);
+        fileWriterService.writeToFile(OUTPUT_DATA_PATH, report);
     }
 }

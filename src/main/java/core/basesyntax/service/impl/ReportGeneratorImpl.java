@@ -18,7 +18,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-
         return reportGenerator.toString();
     }
 }
