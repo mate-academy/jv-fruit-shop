@@ -3,13 +3,18 @@ package core.basesyntax.service.operationhandler;
 import core.basesyntax.dao.StorageDao;
 
 public class PurchaseOperationHandler implements OperationHandler {
+    private StorageDao storageDao;
+
+    public PurchaseOperationHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
 
     @Override
-    public void makeOperation(String name, int quantity, StorageDao storageDao) {
+    public void makeOperation(String name, int quantity) {
         int quantityFromDb = storageDao.get(name);
-        if ((quantityFromDb >= quantity) && (quantity >= 0)) {
-            int quantityToDb = quantityFromDb - quantity;
-            storageDao.update(name, quantityToDb);
+        int quantityToDb = quantityFromDb - quantity;
+        if (quantityToDb >= 0) {
+            storageDao.add(name, quantityToDb);
         } else {
             throw new RuntimeException(name + " quantity is not correct");
         }

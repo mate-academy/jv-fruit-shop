@@ -17,12 +17,8 @@ public class FruitTransaction {
         return this.operation;
     }
 
-    public void setOperation(String value) {
-        for (Operation o : Operation.values()) {
-            if (value.equals(o.getOperation())) {
-                this.operation = o;
-            }
-        }
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     public void setFruit(String fruit) {
@@ -39,14 +35,23 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String code;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.code = operation;
+        }
+
+        static Operation getByCode(String code) {
+            for (Operation o : Operation.values()) {
+                if (code.equals(o.getOperation())) {
+                    return o;
+                }
+            }
+            return null;
         }
 
         public String getOperation() {
-            return operation;
+            return code;
         }
     }
 }

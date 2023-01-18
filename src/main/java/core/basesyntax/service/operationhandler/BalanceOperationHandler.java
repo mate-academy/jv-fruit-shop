@@ -3,9 +3,14 @@ package core.basesyntax.service.operationhandler;
 import core.basesyntax.dao.StorageDao;
 
 public class BalanceOperationHandler implements OperationHandler {
+    private StorageDao storageDao;
+
+    public BalanceOperationHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
 
     @Override
-    public void makeOperation(String name, int quantity, StorageDao storageDao) {
+    public void makeOperation(String name, int quantity) {
         if (quantity >= 0) {
             storageDao.add(name, quantity);
         } else {
