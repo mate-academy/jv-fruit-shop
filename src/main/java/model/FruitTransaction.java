@@ -1,22 +1,22 @@
 package model;
 
 public class FruitTransaction {
-    private StoreOperation operation;
+    private StoreOperation storeOperation;
     private String fruit;
     private int quantity;
 
-    public FruitTransaction(StoreOperation operation, String fruit, int quantity) {
-        this.operation = operation;
+    public FruitTransaction(StoreOperation storeOperation, String fruit, int quantity) {
+        this.storeOperation = storeOperation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public StoreOperation getOperation() {
-        return operation;
+    public StoreOperation getStoreOperation() {
+        return storeOperation;
     }
 
-    public void setOperation(StoreOperation operation) {
-        this.operation = operation;
+    public void setStoreOperation(StoreOperation storeOperation) {
+        this.storeOperation = storeOperation;
     }
 
     public String getFruit() {

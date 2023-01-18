@@ -27,6 +27,9 @@ public enum StoreOperation {
     }
 
     public static StoreOperation valueOfOperation(String storeOperation) {
-        return OPERATION_BY_LETTER.get(storeOperation);
+        if (OPERATION_BY_LETTER.containsKey(storeOperation)) {
+            return OPERATION_BY_LETTER.get(storeOperation);
+        }
+        throw new RuntimeException("This is unknown operation");
     }
 }
