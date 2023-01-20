@@ -1,2 +1,5 @@
-package core.basesyntax.service.operation;public interface OperationHandler {
+package core.basesyntax.service.operation;
+
+public interface OperationHandler {
+    int getOperationAction(int quantity);
 }
