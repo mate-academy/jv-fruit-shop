@@ -1,24 +1,32 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.processing.FruitReport;
 import core.basesyntax.processing.FruitTransaction;
 import core.basesyntax.processing.FruitTransactionImpl;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.FileServiceImpl;
 import java.util.List;
-import java.util.Map;
 
 public class FruitShop {
-    private String fromFilePath;
-    private String toFilePath;
-    private final FileService fileService = new FileServiceImpl();
-    private final FruitTransaction fruitTransaction = new FruitTransactionImpl();
-    private final FruitReport fruitReport = new FruitReport();
 
-    public void process() {
+    public void processing() {
+        FileService fileService = new FileServiceImpl();
+        String fromFilePath = "src/main/resources/input.csv";
         List<String> activities = fileService.readFromFile(fromFilePath);
-        Map<String, Integer> storage = fruitTransaction.storage(activities);
-        String report = fruitReport.getFruitReport(storage);
+
+        FruitTransaction fruitTransaction = new FruitTransactionImpl();
+        fruitTransaction.processing(activities);
+
+        FruitReport fruitReport = new FruitReport();
+        String report = fruitReport.getFruitReport(Storage.getFruits());
+
+        String toFilePath = "src/main/resources/report.csv";
         fileService.writeInFile(report, toFilePath);
+    }
+
+    public static void main(String[] args) {
+        FruitShop fruitShop = new FruitShop();
+        fruitShop.processing();
     }
 }
