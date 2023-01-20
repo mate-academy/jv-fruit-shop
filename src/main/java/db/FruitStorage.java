@@ -1,9 +1,8 @@
 package db;
 
-import java.util.ArrayList;
-import java.util.List;
-import model.FruitTransaction;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FruitStorage {
-    public static final List<FruitTransaction> fruitStore = new ArrayList<>();
+    public static final Map<String, Integer> storage = new HashMap<>();
 }

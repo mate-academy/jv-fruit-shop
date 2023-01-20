@@ -9,27 +9,27 @@ public enum StoreOperation {
     PURCHASE("p"),
     RETURN("r");
 
-    private static final Map<String, StoreOperation> OPERATION_BY_LETTER = new HashMap<>();
+    private static final Map<String, StoreOperation> OPERATION_BY_CODE = new HashMap<>();
     static {
         for (StoreOperation o : values()) {
-            OPERATION_BY_LETTER.put(o.storeOperation, o);
+            OPERATION_BY_CODE.put(o.code, o);
         }
     }
 
-    private String storeOperation;
+    private String code;
 
-    StoreOperation(String storeOperation) {
-        this.storeOperation = storeOperation;
+    StoreOperation(String code) {
+        this.code = code;
     }
 
     public String getStoreOperation() {
-        return storeOperation;
+        return code;
     }
 
-    public static StoreOperation valueOfOperation(String storeOperation) {
-        if (OPERATION_BY_LETTER.containsKey(storeOperation)) {
-            return OPERATION_BY_LETTER.get(storeOperation);
+    public static StoreOperation getByCode(String code) {
+        if (OPERATION_BY_CODE.containsKey(code)) {
+            return OPERATION_BY_CODE.get(code);
         }
-        throw new RuntimeException("This is unknown operation");
+        throw new RuntimeException("This is unknown operation code: " + code);
     }
 }
