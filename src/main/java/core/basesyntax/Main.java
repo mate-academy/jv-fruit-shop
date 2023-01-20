@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import dao.FruitStoreDao;
-import dao.FruitStoreDaoImpl;
+import dao.FruitShopService;
+import dao.FruitShopServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +40,8 @@ public class Main {
         StoreOperationStrategy operationStrategy = new StoreOperationStrategyImpl(handlerMap);
 
         // Processing of data and adding to Storage
-        FruitStoreDao fruitStoreDao = new FruitStoreDaoImpl();
-        fruitStoreDao.addDataToStorage(transactions, operationStrategy);
+        FruitShopService fruitStoreDao = new FruitShopServiceImpl(operationStrategy);
+        fruitStoreDao.addDataToStorage(transactions);
 
         // Creating report list
         ReportService reportService = new ReportServiceImpl();

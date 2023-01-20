@@ -6,18 +6,18 @@ import model.FruitTransaction;
 import model.StoreOperation;
 
 public class TransactionParser {
-    private static final int OPERATION = 0;
-    private static final int FRUIT = 1;
-    private static final int AMOUNT = 2;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int AMOUNT_INDEX = 2;
     private static final String COMA = ",";
-    private List<FruitTransaction> transactions = new ArrayList<>();
 
     public List<FruitTransaction> parse(List<String> dataList) {
+        List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < dataList.size(); i++) {
+            String[] splitedRecord = dataList.get(i).split(COMA);
             transactions.add(new FruitTransaction(StoreOperation
-                    .getByCode(dataList.get(i).split(COMA)[OPERATION]),
-                    dataList.get(i).split(COMA)[FRUIT],
-                    Integer.parseInt(dataList.get(i).split(COMA)[AMOUNT])));
+                    .getByCode(splitedRecord[OPERATION_INDEX]), splitedRecord[FRUIT_INDEX],
+                    Integer.parseInt(splitedRecord[AMOUNT_INDEX])));
         }
         return transactions;
     }
