@@ -19,7 +19,6 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public Map<String, String> calculateBalance(List<FruitTransaction> transaction) {
-
         return transaction.stream()
                 .collect(groupingBy(FruitTransaction::getFruit, collectingAndThen(toList(),
                         list -> {
@@ -30,5 +29,4 @@ public class FruitServiceImpl implements FruitService {
                         return quantityTotal.toString();
                         })));
     }
-
 }

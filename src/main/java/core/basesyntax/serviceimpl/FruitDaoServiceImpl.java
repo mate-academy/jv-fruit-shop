@@ -6,7 +6,6 @@ import core.basesyntax.service.FruitDaoService;
 import java.util.List;
 
 public class FruitDaoServiceImpl implements FruitDaoService {
-
     @Override
     public void add(List<FruitTransaction> transaction) {
 
@@ -15,7 +14,6 @@ public class FruitDaoServiceImpl implements FruitDaoService {
 
     @Override
     public List<FruitTransaction> get() {
-
         return Storage.transaction;
     }
 }

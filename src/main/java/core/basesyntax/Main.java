@@ -25,6 +25,9 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class Main {
+    public static final String FILE_INPUT = "src/main/resources/input.csv";
+    public static final String FILE_REPORT = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         // create and fill the strategy map
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -38,9 +41,9 @@ public class Main {
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
         fruitDaoService.add(parseLine.getFruitTransaction(csvFileReaderService
-                .readDatFromFileCsv("src/main/resources/input.csv")));
+                .readDatFromFileCsv(FILE_INPUT)));
         CsvFileWriterService csvFileWriteService = new CsvFileWriterServiceImpl();
         csvFileWriteService.writeDataToFileCsv(fruitService.calculateBalance(fruitDaoService.get()),
-                "src/main/resources/report.csv");
+                FILE_REPORT);
     }
 }

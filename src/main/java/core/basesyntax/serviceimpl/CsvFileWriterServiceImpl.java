@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Map;
 
 public class CsvFileWriterServiceImpl implements CsvFileWriterService {
-
     @Override
     public void writeDataToFileCsv(Map<String, String> lines, String filePath) {
 

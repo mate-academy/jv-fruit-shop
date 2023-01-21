@@ -41,9 +41,9 @@ public class FruitTransaction {
 
         public static Operation getOperationByValue(String operation) {
 
-            for (Operation o:Operation.values()) {
-                if (o.getOperation().equals(operation)) {
-                    return o;
+            for (Operation oneOperation:Operation.values()) {
+                if (oneOperation.getOperation().equals(operation)) {
+                    return oneOperation;
                 }
             }
             throw new RuntimeException("Can't find enum value:" + operation);

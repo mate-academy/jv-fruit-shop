@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
-
     @Override
     public List<String> readDatFromFileCsv(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
