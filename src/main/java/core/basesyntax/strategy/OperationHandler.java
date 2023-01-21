@@ -1,5 +1,8 @@
 package core.basesyntax.strategy;
 
+import java.util.Map;
+
 public interface OperationHandler {
-    void calculateFruitQuantity(String fruit, Integer newQuantity);
+
+    void process(String fruit, int quantity, Map<String, Integer> storage);
 }
