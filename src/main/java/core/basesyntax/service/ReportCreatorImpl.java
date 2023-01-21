@@ -1,19 +1,17 @@
 package core.basesyntax.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {
     private static final String REPORT_TITLE = "fruit,quantity";
 
     @Override
-    public List<String> createReport(Map<String, Integer> fruits) {
-        List<String> report = new ArrayList<>();
-        report.add(REPORT_TITLE);
+    public String createReport(Map<String, Integer> fruits) {
+        StringBuilder report = new StringBuilder(REPORT_TITLE);
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
-            report.add(entry.getKey() + "," + entry.getValue());
+            report.append(System.lineSeparator())
+                    .append(entry.getKey()).append(",").append(entry.getValue());
         }
-        return report;
+        return report.toString();
     }
 }

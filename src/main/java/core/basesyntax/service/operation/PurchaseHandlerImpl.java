@@ -7,10 +7,12 @@ public class PurchaseHandlerImpl implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
-        if (Storage.fruits.containsKey(fruit)) {
-            Storage.fruits.put(fruit, Storage.fruits.get(fruit) - fruitTransaction.getQuantity());
+        Integer amount = fruitTransaction.getQuantity();
+        if (Storage.fruits.get(fruit) >= amount) {
+            Storage.fruits.put(fruit, Storage.fruits.get(fruit) - amount);
         } else {
-            Storage.fruits.put(fruit, - fruitTransaction.getQuantity());
+            throw new RuntimeException(
+                    "There is not enough fruits for the purchase in the Storage");
         }
     }
 }

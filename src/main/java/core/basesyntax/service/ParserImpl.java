@@ -13,7 +13,7 @@ public class ParserImpl implements Parser {
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        for (int i = lines.size() - 1; i > 0; i--) {
+        for (int i = 1; i < lines.size(); i++) {
             fruitTransactions.add(parseLine(lines.get(i)));
         }
         return fruitTransactions;

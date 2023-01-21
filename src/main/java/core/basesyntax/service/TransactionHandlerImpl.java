@@ -2,11 +2,15 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.strategy.TransactionStrategy;
+import core.basesyntax.strategy.TransactionStrategyImpl;
 import java.util.List;
 
 public class TransactionHandlerImpl implements TransactionHandler {
-    private static final TransactionStrategy strategy = new TransactionStrategy();
+    private TransactionStrategyImpl strategy;
+
+    public TransactionHandlerImpl(TransactionStrategyImpl strategy) {
+        this.strategy = strategy;
+    }
 
     @Override
     public void handle(List<FruitTransaction> fruitTransactions) {
