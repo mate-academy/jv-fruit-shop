@@ -15,7 +15,6 @@ import core.basesyntax.serviceimpl.CsvFileReaderServiceImpl;
 import core.basesyntax.serviceimpl.CsvFileWriterServiceImpl;
 import core.basesyntax.serviceimpl.FruitDaoServiceImpl;
 import core.basesyntax.serviceimpl.FruitServiceImpl;
-import core.basesyntax.serviceimpl.OperationStrategyImpl;
 import core.basesyntax.serviceimpl.ParseLineImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
@@ -35,13 +34,14 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategy
+                .OperationStrategyImpl(operationHandlerMap);
         FruitDaoService fruitDaoService = new FruitDaoServiceImpl();
         ParseLineService parseLine = new ParseLineImpl();
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
         fruitDaoService.add(parseLine.getFruitTransaction(csvFileReaderService
-                .readDatFromFileCsv(FILE_INPUT)));
+                .readDataFromFileCsv(FILE_INPUT)));
         CsvFileWriterService csvFileWriteService = new CsvFileWriterServiceImpl();
         csvFileWriteService.writeDataToFileCsv(fruitService.calculateBalance(fruitDaoService.get()),
                 FILE_REPORT);

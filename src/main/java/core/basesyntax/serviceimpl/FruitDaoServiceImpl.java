@@ -9,11 +9,11 @@ public class FruitDaoServiceImpl implements FruitDaoService {
     @Override
     public void add(List<FruitTransaction> transaction) {
 
-        Storage.fruitTransaction.addAll(transaction);
+        Storage.fruitTransactions.addAll(transaction);
     }
 
     @Override
     public List<FruitTransaction> get() {
-        return Storage.fruitTransaction;
+        return Storage.fruitTransactions;
     }
 }
