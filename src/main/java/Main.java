@@ -36,7 +36,6 @@ public class Main {
         fruitTransactionData.forEach(f -> fruitTransactionProcessor.get(f.getOperation())
                 .handle(f));
         String report = new ReportServiceImpl().getReport(Storage.fruits);
-        System.out.println(report);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.write(report, REPORT_FILE_PATH);
     }
