@@ -3,11 +3,11 @@ package service.impl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import service.WriterService;
+import service.FileWriterService;
 
-public class WriterServiceImpl implements WriterService {
+public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public void writeToFile(String report, String reportFilePath) {
+    public void write(String report, String reportFilePath) {
         try {
             Files.writeString(Path.of(reportFilePath), report);
         } catch (IOException e) {

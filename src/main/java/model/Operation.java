@@ -15,4 +15,13 @@ public enum Operation {
     public String getOperation() {
         return operation;
     }
+
+    public static Operation parseOperation(String stringOperation) {
+        for (Operation each : values()) {
+            if (each.operation.equals(stringOperation)) {
+                return each;
+            }
+        }
+        throw new RuntimeException("This operation is not listed");
+    }
 }
