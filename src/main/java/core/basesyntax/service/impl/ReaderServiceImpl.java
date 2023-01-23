@@ -17,7 +17,7 @@ public class ReaderServiceImpl implements ReaderService {
                     .skip(TABLE_TITTLE_INDEX)
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Cant get data from file " + filePath, e);
+            throw new RuntimeException("Can't get data from file " + filePath, e);
         }
     }
 }

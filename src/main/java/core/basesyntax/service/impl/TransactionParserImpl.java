@@ -12,7 +12,7 @@ public class TransactionParserImpl implements TransactionParser {
 
     @Override
     public List<FruitTransaction> parse(List<String> transaction) {
-        List<FruitTransaction> parsedTransaction = new ArrayList<>();
+        List<FruitTransaction> parsedTransactions = new ArrayList<>();
         for (String strings : transaction) {
             FruitTransaction fruitTransaction = new FruitTransaction();
             String[] splittedData = strings.split(",");
@@ -20,8 +20,8 @@ public class TransactionParserImpl implements TransactionParser {
                     .getByCode(splittedData[OPERATION_INDEX]));
             fruitTransaction.setFruit(splittedData[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(splittedData[QUANTITY_INDEX]));
-            parsedTransaction.add(fruitTransaction);
+            parsedTransactions.add(fruitTransaction);
         }
-        return parsedTransaction;
+        return parsedTransactions;
     }
 }
