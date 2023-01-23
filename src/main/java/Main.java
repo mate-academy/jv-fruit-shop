@@ -1,4 +1,3 @@
-import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class Main {
                 .parseList(data);
         fruitTransactionData.forEach(f -> fruitTransactionProcessor.get(f.getOperation())
                 .handle(f));
-        String report = new ReportServiceImpl().getReport(Storage.fruits);
+        String report = new ReportServiceImpl().getReport();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.write(report, REPORT_FILE_PATH);
     }
