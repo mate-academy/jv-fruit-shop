@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface FruitTransactionParserService {
 
-    List<FruitReport> dataforReport(List<FruitTransaction> readFromFile);
+    List<FruitReport> prepareDataForReport(List<FruitTransaction> readFromFile);
 }

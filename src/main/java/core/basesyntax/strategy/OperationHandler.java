@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
-import java.util.Map;
+import core.basesyntax.model.FruitTransaction;
 
 public interface OperationHandler {
 
-    void process(String fruit, int quantity, Map<String, Integer> storage);
+    void process(FruitTransaction transaction);
 }
