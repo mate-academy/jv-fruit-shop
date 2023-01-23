@@ -3,11 +3,14 @@ package core.service.impl;
 import core.model.FruitTransaction;
 import core.service.TransactionHandler;
 import core.strategy.OperationStrategy;
-import core.strategy.OperationStrategyImpl;
 import java.util.List;
 
 public class TransactionHandlerImpl implements TransactionHandler {
-    private static final OperationStrategy strategy = new OperationStrategyImpl();
+    private final OperationStrategy strategy;
+
+    public TransactionHandlerImpl(OperationStrategy strategy) {
+        this.strategy = strategy;
+    }
 
     @Override
     public void handle(List<FruitTransaction> parseList) {

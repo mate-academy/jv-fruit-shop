@@ -21,7 +21,7 @@ public class DataParserServiceImpl implements DataParserService {
         return transactions;
     }
 
-    public FruitTransaction parseLine(String line) {
+    private FruitTransaction parseLine(String line) {
         FruitTransaction fruitTransaction = new FruitTransaction();
         String[] activities = line.split(COMA);
         fruitTransaction.setFruit(activities[FRUIT_INDEX]);

@@ -1,22 +1,18 @@
 package core.strategy;
 
 import core.model.FruitTransaction;
+import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+
+    public OperationStrategyImpl(Map<FruitTransaction.Operation,
+            OperationHandler> operationHandlerMap) {
+        this.operationHandlerMap = operationHandlerMap;
+    }
 
     @Override
     public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
-        switch (operation) {
-            case BALANCE:
-                return new BalanceOperationHandler();
-            case SUPPLY:
-                return new SupplyOperationHandler();
-            case PURCHASE:
-                return new PurchaseOperationHandler();
-            case RETURN:
-                return new ReturnOperationHandler();
-            default:
-                throw new RuntimeException("Unknown operation " + operation);
-        }
+        return operationHandlerMap.get(operation);
     }
 }
