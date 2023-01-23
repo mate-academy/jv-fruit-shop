@@ -17,15 +17,15 @@ public class FruitShop {
     public void processing() {
         Reader reader = new ReaderImpl();
         String fromFilePath = "src/main/resources/input.csv";
-        List<FruitTransaction> readFromFile = reader.readFromFile(fromFilePath);
+        List<FruitTransaction> fruitTransactions = reader.readFromFile(fromFilePath);
 
         FruitTransactionParserService fruitTransactionParserService
                 = new FruitTransactionParserServiceImpl();
-        List<FruitReport> dataforReport =
-                fruitTransactionParserService.prepareDataForReport(readFromFile);
+        List<FruitReport> dataForReport =
+                fruitTransactionParserService.prepareDataForReport(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.createReport(dataforReport);
+        String report = reportService.createReport(dataForReport);
 
         Writer writer = new WriterImpl();
         String toFilePath = "src/main/resources/report.csv";

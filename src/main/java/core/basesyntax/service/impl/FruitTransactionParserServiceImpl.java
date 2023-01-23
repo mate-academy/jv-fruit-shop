@@ -4,6 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitReport;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParserService;
+import core.basesyntax.strategy.CreatorStrategyMap;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +13,8 @@ public class FruitTransactionParserServiceImpl implements FruitTransactionParser
 
     @Override
     public List<FruitReport> prepareDataForReport(List<FruitTransaction> readFromFile) {
-        OperationStrategy operationStrategy = new OperationStrategy();
+        OperationStrategy operationStrategy =
+                new OperationStrategy(new CreatorStrategyMap().getOperationStrategyMap());
         for (FruitTransaction element : readFromFile) {
             operationStrategy.getOperationHandler(element.getOperation())
                     .process(element);

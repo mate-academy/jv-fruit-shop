@@ -8,7 +8,13 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void process(FruitTransaction transaction) {
-        Storage.fruits.replace(transaction.getFruit(), Storage.fruits.get(transaction.getFruit()),
-                Storage.fruits.get(transaction.getFruit()) - transaction.getQuantity());
+        if (Storage.fruits.get(transaction.getFruit()) > transaction.getQuantity()) {
+            Storage.fruits.replace(transaction.getFruit(),
+                    Storage.fruits.get(transaction.getFruit()),
+                    Storage.fruits.get(transaction.getFruit()) - transaction.getQuantity());
+        } else {
+            throw new RuntimeException("Not enough quantity of "
+                    + transaction.getFruit() + "on storage.");
+        }
     }
 }
