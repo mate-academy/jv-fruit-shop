@@ -21,10 +21,16 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
+    public List<FruitTransaction> get() {
+        return new ArrayList<>(Storage.transactions);
+    }
+
+    @Override
     public List<FruitTransaction> getFruitOperationsList(String operation, String fruit) {
         List<FruitTransaction> list = new ArrayList<>();
         for (FruitTransaction tr : Storage.transactions) {
-            if (tr.getFruit().equals(fruit) && tr.getOperation().toString().equals(operation)) {
+            if (tr.getFruit().equals(fruit)
+                    && tr.getOperation().toString().equals(operation)) {
                 list.add(tr);
             }
         }

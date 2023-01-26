@@ -9,14 +9,13 @@ public class SupplyOperationHandler implements OperationHandler {
     private FruitDao dao = new FruitDaoImpl();
 
     @Override
-    public void handle(List<FruitTransaction> balanceList) {
-        for (FruitTransaction currentFruitBalanceTransaction : balanceList) {
-            List<FruitTransaction> supplyList = dao.getFruitOperationsList("s",
-                    currentFruitBalanceTransaction.getFruit());
-            for (FruitTransaction tr : supplyList) {
-                int amountToAdd = tr.getQuantity();
-                int currentAmount = currentFruitBalanceTransaction.getQuantity();
-                currentFruitBalanceTransaction.setQuantity(currentAmount + amountToAdd);
+    public void handle(FruitTransaction transaction) {
+        List<FruitTransaction> balance = dao.getByOperation("b");
+        for (FruitTransaction balanceFruit : balance) {
+            if (balanceFruit.getFruit().equals(transaction.getFruit())) {
+                int balanceFruitQuantity = balanceFruit.getQuantity();
+                int quantityToAdd = transaction.getQuantity();
+                balanceFruit.setQuantity(balanceFruitQuantity + quantityToAdd);
             }
         }
     }

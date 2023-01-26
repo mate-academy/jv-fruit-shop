@@ -9,14 +9,15 @@ public class PurchaseOperationHandler implements OperationHandler {
     private FruitDao dao = new FruitDaoImpl();
 
     @Override
-    public void handle(List<FruitTransaction> balanceList) {
-        for (FruitTransaction currentFruitBalanceTransaction : balanceList) {
-            List<FruitTransaction> purchaseList = dao.getFruitOperationsList("p",
-                    currentFruitBalanceTransaction.getFruit());
-            for (FruitTransaction tr : purchaseList) {
-                int amountToRemove = tr.getQuantity();
-                int currentAmount = currentFruitBalanceTransaction.getQuantity();
-                currentFruitBalanceTransaction.setQuantity(currentAmount - amountToRemove);
+    public void handle(FruitTransaction transaction) {
+        List<FruitTransaction> balance = dao.getByOperation("b");
+        for (FruitTransaction balanceFruit : balance) {
+            if (balanceFruit.getFruit().equals(transaction.getFruit())) {
+                int balanceFruitQuantity = balanceFruit.getQuantity();
+                int quantityToRemove = transaction.getQuantity();
+                if (balanceFruitQuantity >= quantityToRemove) {
+                    balanceFruit.setQuantity(balanceFruitQuantity - quantityToRemove);
+                }
             }
         }
     }
