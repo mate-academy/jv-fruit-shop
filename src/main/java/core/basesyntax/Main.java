@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_PATH = "src/main/java/core/basesyntax/resources/initial";
-    private static final String REPORT_FILE_PATH = "src/main/java/core/basesyntax/resources/report";
+    private static final String INPUT_FILE_PATH = "src/main/resources/initial";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -44,9 +44,8 @@ public class Main {
             handler.perfomOperation(fruitTransaction);
         }
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.createReport(fruitTransactionsList);
-        System.out.println(report);
+        String report = reportService.createReport();
         WriteService toFile = new WriteServiceImpl();
-        toFile.writeToFile(report, REPORT_FILE_PATH);
+        toFile.writeToFile(report,REPORT_FILE_PATH);
     }
 }

@@ -29,13 +29,13 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation getOperationValue(String operationChar) {
+    public Operation getOperationByCode(String code) {
         for (Operation operationType : Operation.values()) {
-            if (operationType.operation.equals(operationChar)) {
+            if (operationType.code.equals(code)) {
                 return operationType;
             }
         }
-        throw new RuntimeException("Couldn't find operation for this characrter " + operationChar);
+        throw new RuntimeException("Couldn't find operation for this characrter " + code);
     }
 
     public enum Operation {
@@ -44,14 +44,14 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private final String code;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.code = operation;
         }
 
         public String getOperation() {
-            return operation;
+            return code;
         }
     }
 }
