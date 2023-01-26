@@ -6,7 +6,8 @@ import core.basesyntax.service.FruitTransactionOperationsCalculator;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
-public class FruitTransactionOperationsCalculatorImpl implements FruitTransactionOperationsCalculator {
+public class FruitTransactionOperationsCalculatorImpl
+        implements FruitTransactionOperationsCalculator {
     private OperationStrategy operationStrategy;
 
     public FruitTransactionOperationsCalculatorImpl(OperationStrategy operationStrategy) {

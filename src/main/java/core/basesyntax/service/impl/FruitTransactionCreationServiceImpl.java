@@ -6,10 +6,10 @@ import core.basesyntax.service.FruitTransactionCreationService;
 import java.util.List;
 
 public class FruitTransactionCreationServiceImpl implements FruitTransactionCreationService {
-    private FruitDao dao;
     private static String operationValue = "b";
     private static String fruitType = "";
     private static int fruitQuantity = 0;
+    private FruitDao dao;
 
     public FruitTransactionCreationServiceImpl(FruitDao dao) {
         this.dao = dao;
