@@ -1,11 +1,10 @@
-package core.basesyntax.impl;
+package core.basesyntax.service;
 
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.SeparateService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeparateServiceImpl implements SeparateService {
+public class TransactionParserImpl implements TransactionParser {
     private static final String SEPARATE = ",";
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;

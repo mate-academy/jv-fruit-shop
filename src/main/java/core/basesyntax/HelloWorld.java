@@ -1,11 +1,11 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.OperationStrategyImpl;
-import core.basesyntax.impl.ReaderServiceImpl;
-import core.basesyntax.impl.SeparateServiceImpl;
-import core.basesyntax.impl.WriterServiceImpl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.service.ReaderServiceImpl;
+import core.basesyntax.service.TransactionParserImpl;
+import core.basesyntax.service.WriterServiceImpl;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
@@ -30,7 +30,7 @@ public class HelloWorld {
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
         List<String> stringsTransactions = new ReaderServiceImpl()
                 .readData(INPUT_FILE);
-        List<Transaction> transactionList = new SeparateServiceImpl()
+        List<Transaction> transactionList = new TransactionParserImpl()
                 .parseTransactionList(stringsTransactions);
         for (Transaction transaction : transactionList) {
             OperationHandler handler = strategy.get(transaction.getOperation());

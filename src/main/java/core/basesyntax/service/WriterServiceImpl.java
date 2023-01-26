@@ -1,14 +1,12 @@
-package core.basesyntax.impl;
+package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.WriterService;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Map;
 
 public class WriterServiceImpl implements WriterService {
-
     @Override
     public void writeFile(String filePath) {
         File csvOutputFile = new File(filePath);

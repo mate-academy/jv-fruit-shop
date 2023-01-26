@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
-
     @Override
     public void calculate(Transaction transaction) {
         int oldQuantity = Storage.fruitsStorage.get(transaction.getFruit());
