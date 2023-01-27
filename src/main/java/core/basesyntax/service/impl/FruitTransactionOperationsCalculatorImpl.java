@@ -18,19 +18,8 @@ public class FruitTransactionOperationsCalculatorImpl
     public List<FruitTransaction> process(FruitDao dao) {
         List<FruitTransaction> transactions = dao.get();
         for (FruitTransaction transaction : transactions) {
-            if (transaction.getOperation().toString().equalsIgnoreCase("b")) {
-                operationStrategy.get(FruitTransaction.Operation.BALANCE).handle(transaction);
-            }
-            if (transaction.getOperation().toString().equalsIgnoreCase("s")) {
-                operationStrategy.get(FruitTransaction.Operation.SUPPLY).handle(transaction);
-            }
-            if (transaction.getOperation().toString().equalsIgnoreCase("p")) {
-                operationStrategy.get(FruitTransaction.Operation.PURCHASE).handle(transaction);
-            }
-            if (transaction.getOperation().toString().equalsIgnoreCase("r")) {
-                operationStrategy.get(FruitTransaction.Operation.RETURN).handle(transaction);
-            }
+            operationStrategy.get(transaction.getOperation()).handle(transaction);
         }
-        return dao.getByOperation("b");
+        return dao.getByOperation(FruitTransaction.Operation.BALANCE);
     }
 }

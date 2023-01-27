@@ -25,6 +25,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String fileToReadPath = "src/main/resources/readFromFile.csv";
+    private static final String fileToWritePath = "src/main/resources/storeToFile.csv";
+
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlersMap = new HashMap<>();
         operationHandlersMap.put(FruitTransaction.Operation.PURCHASE,
@@ -45,10 +48,10 @@ public class Main {
                 = new FruitTransactionCreationServiceImpl(dao);
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
         List<String[]> fileData = fileReaderService
-                .readFile("src/main/resources/readFromFile.csv");
+                .readFile(fileToReadPath);
         transactionService.createTransactions(fileData);
         List<FruitTransaction> updatedBalance = operationsCalculator.process(dao);
         String report = reportGeneratorService.generate(updatedBalance);
-        fileWriterService.writeToFile("src/main/resources/storeToFile.csv", report);
+        fileWriterService.writeToFile(fileToWritePath, report);
     }
 }

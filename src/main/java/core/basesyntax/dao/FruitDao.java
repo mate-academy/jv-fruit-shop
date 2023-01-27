@@ -8,7 +8,7 @@ public interface FruitDao {
 
     List<FruitTransaction> get();
 
-    List<FruitTransaction> getByOperation(String operation);
+    List<FruitTransaction> getByOperation(FruitTransaction.Operation operation);
 
     List<FruitTransaction> getFruitOperationsList(String operation, String fruit);
 }

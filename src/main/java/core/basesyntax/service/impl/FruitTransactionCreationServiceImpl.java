@@ -9,7 +9,7 @@ public class FruitTransactionCreationServiceImpl implements FruitTransactionCrea
     private static String operationValue = "b";
     private static String fruitType = "";
     private static int fruitQuantity = 0;
-    private FruitDao dao;
+    private final FruitDao dao;
 
     public FruitTransactionCreationServiceImpl(FruitDao dao) {
         this.dao = dao;

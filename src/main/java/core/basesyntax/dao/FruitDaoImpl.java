@@ -13,10 +13,10 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public List<FruitTransaction> getByOperation(String operation) {
+    public List<FruitTransaction> getByOperation(FruitTransaction.Operation operation) {
         return Storage.transactions.stream()
-                .filter(transaction -> transaction.getOperation().toString()
-                        .equalsIgnoreCase(operation))
+                .filter(transaction -> transaction.getOperation()
+                        .equals(operation))
                 .collect(Collectors.toList());
     }
 
