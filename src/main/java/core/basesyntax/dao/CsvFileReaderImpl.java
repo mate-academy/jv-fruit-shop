@@ -1,7 +1,8 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
+import core.basesyntax.service.ParseTransactionService;
+import core.basesyntax.service.ParseTransactionServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,10 +12,8 @@ import java.util.stream.Collectors;
 
 public class CsvFileReaderImpl implements CsvFileReader {
     private static final String ERROR_MESSAGE = "Can`t read data from CSV file ";
-    private static final String SPLIT_SYMBOL = ",";
     private static final int OPERATION_INDEX = 0;
-    private static final int FRUIT_INDEX = 1;
-    private static final int QUANTITY_INDEX = 2;
+    private ParseTransactionService parseTransactionService = new ParseTransactionServiceImpl();
 
     @Override
     public List<FruitTransaction> readTransactions(String fromFileName) {
@@ -26,16 +25,7 @@ public class CsvFileReaderImpl implements CsvFileReader {
         }
         lines.remove(OPERATION_INDEX);
         return lines.stream()
-                .map(line -> parseTransaction(line.trim()))
+                .map(line -> parseTransactionService.parseTransaction(line.trim()))
                 .collect(Collectors.toList());
-    }
-
-    private FruitTransaction parseTransaction(String line) {
-        String[] fields = line.split(SPLIT_SYMBOL);
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(Operation.getByCode(fields[OPERATION_INDEX]));
-        fruitTransaction.setFruit(fields[FRUIT_INDEX]);
-        fruitTransaction.setQuantity(Integer.parseInt(fields[QUANTITY_INDEX]));
-        return fruitTransaction;
     }
 }

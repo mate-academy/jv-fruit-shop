@@ -26,7 +26,8 @@ public enum Operation {
                 return Operation.PURCHASE;
             case "r":
                 return Operation.RETURN;
-            default: return null;
+            default:
+                throw new RuntimeException("Operation is no found " + operation);
         }
     }
 }
