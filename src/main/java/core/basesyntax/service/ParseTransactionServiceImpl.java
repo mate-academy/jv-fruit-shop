@@ -2,6 +2,8 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParseTransactionServiceImpl implements ParseTransactionService {
     private static final String SPLIT_SYMBOL = ",";
@@ -13,9 +15,18 @@ public class ParseTransactionServiceImpl implements ParseTransactionService {
     public FruitTransaction parseTransaction(String line) {
         String[] fields = line.split(SPLIT_SYMBOL);
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(Operation.getByCode(fields[OPERATION_INDEX]));
+        fruitTransaction.setOperation(Operation.getByCode(fields[OPERATION_INDEX].trim()));
         fruitTransaction.setFruit(fields[FRUIT_INDEX]);
         fruitTransaction.setQuantity(Integer.parseInt(fields[QUANTITY_INDEX]));
         return fruitTransaction;
+    }
+
+    public List<FruitTransaction> parseStringTransactions(String transactions) {
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        String[] splitTransactions = transactions.split(System.lineSeparator());
+        for (String splitTransaction : splitTransactions) {
+            fruitTransactions.add(parseTransaction(splitTransaction));
+        }
+        return fruitTransactions;
     }
 }
