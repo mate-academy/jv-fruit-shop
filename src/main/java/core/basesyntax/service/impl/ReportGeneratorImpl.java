@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportService {
     private static final String SEPARATE = ", ";
+
     @Override
     public String generateReport() {
         StringBuilder report = new StringBuilder();
