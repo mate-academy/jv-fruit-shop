@@ -45,7 +45,7 @@ public class Main {
         }
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.createReport();
-        WriteService toFile = new WriteServiceImpl();
-        toFile.writeToFile(report,REPORT_FILE_PATH);
+        WriteService writeService = new WriteServiceImpl();
+        writeService.writeToFile(report, REPORT_FILE_PATH);
     }
 }
