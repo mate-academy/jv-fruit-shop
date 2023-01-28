@@ -1,16 +1,17 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.OperationStrategyImpl;
-import core.basesyntax.impl.ReaderServiceImpl;
-import core.basesyntax.impl.ReportServiceImpl;
-import core.basesyntax.impl.TransactionParserImpl;
-import core.basesyntax.impl.WriterServiceImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
@@ -25,12 +26,12 @@ public class Main {
     private static final String REPORT_PATH = "src/main/java/resources/report.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
+        operationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
         //
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ReaderService readerService = new ReaderServiceImpl();
@@ -48,6 +49,5 @@ public class Main {
         //
         String report = reportService.generate();
         writerService.writeToFile(REPORT_PATH, report);
-
     }
 }
