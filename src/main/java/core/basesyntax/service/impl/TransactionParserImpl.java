@@ -13,11 +13,11 @@ public class TransactionParserImpl implements TransactionParser {
     public static final String SEPARATOR = ",";
 
     @Override
-    public List<FruitTransaction> parse(List<String> transaction) {
+    public List<FruitTransaction> parse(List<String> transactionsStrings) {
         List<FruitTransaction> parsedTransactions = new ArrayList<>();
-        for (String string : transaction) {
+        for (String transactionStrings : transactionsStrings) {
             FruitTransaction fruitTransaction = new FruitTransaction();
-            String[] splittedString = string.split(SEPARATOR);
+            String[] splittedString = transactionStrings.split(SEPARATOR);
             fruitTransaction.setOperation(Operation
                     .getByCode(splittedString[OPERATION_INDEX]));
             fruitTransaction.setFruit(splittedString[FRUIT_INDEX]);

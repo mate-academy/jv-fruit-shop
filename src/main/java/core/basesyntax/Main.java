@@ -39,8 +39,8 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
         //
-        List<String> readedData = readerService.readFromFile(FILE_PATH);
-        List<FruitTransaction> fruitTransactionsList = transactionParser.parse(readedData);
+        List<String> readFromFile = readerService.readFromFile(FILE_PATH);
+        List<FruitTransaction> fruitTransactionsList = transactionParser.parse(readFromFile);
         for (FruitTransaction fruitTransaction : fruitTransactionsList) {
             OperationHandler operationHandler = operationStrategy
                     .getOperationHandler(fruitTransaction.getOperation());
