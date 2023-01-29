@@ -3,13 +3,13 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.TransactionHandler;
-import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.impl.TransactionHandlerImpl;
-import core.basesyntax.service.impl.TransactionServiceImpl;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -39,12 +39,12 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         List<String> inputData = readerService.readFromFile(INPUT_FILE_PATH);
 
-        TransactionService transactionService = new TransactionServiceImpl();
+        TransactionParser transactionService = new TransactionParserImpl();
         List<FruitTransaction> fruitTransactions = transactionService.toTransaction(inputData);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        TransactionHandler transactionHandler = new TransactionHandlerImpl(operationStrategy);
-        transactionHandler.parse(fruitTransactions);
+        FruitShopService transactionHandler = new FruitShopServiceImpl(operationStrategy);
+        transactionHandler.processTransactions(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.report();
