@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class WriteServiceImpl implements WriterService {
-    private static final String fileName = "src/main/resources/results.csv";
+    private static final String fileName = "src/main/resources/result.csv";
 
     @Override
     public void writeToFile() {
