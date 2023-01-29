@@ -1,14 +1,13 @@
-package core.basesyntax.service.Impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.Calculate;
-
+import core.basesyntax.service.CalculateService;
 import java.util.List;
 
-public class CalculateImpl implements Calculate {
+public class CalculateServiceImpl implements CalculateService {
 
     @Override
-    public void calculateQuantity (List<String> listOfOperations) {
+    public void calculateQuantity(List<String> listOfOperations) {
         String[] parser;
         for (int i = 1; i < listOfOperations.size(); i++) {
             parser = listOfOperations.get(i).split(",");
