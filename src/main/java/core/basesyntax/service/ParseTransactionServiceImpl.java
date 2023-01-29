@@ -11,8 +11,7 @@ public class ParseTransactionServiceImpl implements ParseTransactionService {
     private static final int QUANTITY_INDEX = 2;
     private static final int OPERATION_INDEX = 0;
 
-    @Override
-    public FruitTransaction parseTransaction(String line) {
+    private FruitTransaction parseTransaction(String line) {
         String[] fields = line.split(SPLIT_SYMBOL);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(Operation.getByCode(fields[OPERATION_INDEX].trim()));
@@ -21,6 +20,7 @@ public class ParseTransactionServiceImpl implements ParseTransactionService {
         return fruitTransaction;
     }
 
+    @Override
     public List<FruitTransaction> parseStringTransactions(String transactions) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         String[] splitTransactions = transactions.split(System.lineSeparator());
