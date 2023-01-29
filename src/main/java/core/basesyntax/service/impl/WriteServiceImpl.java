@@ -10,7 +10,7 @@ public class WriteServiceImpl implements WriterService {
     @Override
     public void writeToFile(String fileName, String report) {
         try {
-            Files.write(Path.of(fileName),report.toString().getBytes());
+            Files.write(Path.of(fileName), report.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("Can`t write result file");
         }
