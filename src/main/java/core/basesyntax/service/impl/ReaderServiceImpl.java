@@ -7,15 +7,14 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
-    private static final String fileName = "src/main/resources/database.csv";
     private List<String> operations;
 
     @Override
-    public List<String> readFromFile() {
+    public List<String> readFromFile(String inputFileName) {
         try {
-            operations = Files.readAllLines(Path.of(fileName));
+            operations = Files.readAllLines(Path.of(inputFileName));
         } catch (IOException e) {
-            throw new RuntimeException("Can`t read date from file " + fileName + e);
+            throw new RuntimeException("Can`t read date from file " + inputFileName + e);
         }
         return operations;
     }
