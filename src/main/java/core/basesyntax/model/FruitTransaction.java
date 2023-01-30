@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
 
     private Operation operation;
@@ -20,6 +22,13 @@ public class FruitTransaction {
 
         public String getOperation() {
             return operation;
+        }
+
+        public static Operation getFromString(String operation) {
+            return Arrays.stream(values())
+                    .filter(value -> value.getOperation().equals(operation))
+                    .findFirst()
+                    .get();
         }
 
         @Override
