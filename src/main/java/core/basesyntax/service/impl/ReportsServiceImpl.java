@@ -14,5 +14,4 @@ public class ReportsServiceImpl implements ReportService {
         }
         return report.toString();
     }
-    
 }
