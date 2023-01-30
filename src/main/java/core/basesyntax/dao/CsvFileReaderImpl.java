@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.service.ParseTransactionService;
+import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.ParseTransactionServiceImpl;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +11,7 @@ import java.util.List;
 public class CsvFileReaderImpl implements CsvFileReader {
     private static final String ERROR_MESSAGE = "Can`t read data from CSV file ";
     private static final int OPERATION_INDEX = 0;
-    private ParseTransactionService parseTransactionService = new ParseTransactionServiceImpl();
+    private FruitTransactionParser parseTransactionService = new ParseTransactionServiceImpl();
 
     @Override
     public String readTransactions(String fromFileName) {

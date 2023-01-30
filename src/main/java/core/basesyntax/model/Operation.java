@@ -6,18 +6,18 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    private final String operation;
+    private final String firstLetter;
 
     Operation(String operation) {
-        this.operation = operation;
+        this.firstLetter = operation;
     }
 
-    public String getOperation() {
-        return operation;
+    public String getFirstLetter() {
+        return firstLetter;
     }
 
-    public static Operation getByCode(String operation) {
-        switch (operation) {
+    public static Operation getByFirstLetter(String firstLetter) {
+        switch (firstLetter) {
             case "b":
                 return Operation.BALANCE;
             case "s":
@@ -27,7 +27,7 @@ public enum Operation {
             case "r":
                 return Operation.RETURN;
             default:
-                throw new RuntimeException("Operation is no found " + operation);
+                throw new RuntimeException("Operation is no found " + firstLetter);
         }
     }
 }
