@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileWriteServiceImpl implements FileWriterService {
+public class FileWriterServiceImpl implements FileWriterService {
     private static final String ERROR_MESSAGE = "Can`t write data to file ";
 
     @Override

@@ -2,17 +2,17 @@ package core.basesyntax;
 
 import core.basesyntax.dao.CsvFileReader;
 import core.basesyntax.dao.CsvFileReaderImpl;
-import core.basesyntax.dao.FileWriteServiceImpl;
 import core.basesyntax.dao.FileWriterService;
+import core.basesyntax.dao.FileWriterServiceImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitTransactionParser;
+import core.basesyntax.service.FruitTransactionParserImpl;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.FruitTransactionServiceImpl;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
-import core.basesyntax.service.FruitTransactionParserImpl;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
@@ -30,7 +30,7 @@ public class Main {
     private static final String toFile = new String(toFileName);
     private static final CsvFileReader fruitsDao = new CsvFileReaderImpl();
     private static final ReportService reportService = new ReportServiceImpl();
-    private static final FileWriterService fileWriteService = new FileWriteServiceImpl();
+    private static final FileWriterService fileWriteService = new FileWriterServiceImpl();
 
     public static void main(String[] args) {
         Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
