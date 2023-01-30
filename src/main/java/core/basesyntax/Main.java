@@ -12,7 +12,7 @@ import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.FruitTransactionServiceImpl;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
-import core.basesyntax.service.ParseTransactionServiceImpl;
+import core.basesyntax.service.FruitTransactionParserImpl;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
@@ -39,7 +39,7 @@ public class Main {
         operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
         operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
         String fruitTransactions = fruitsDao.readTransactions(fromFileName);
-        FruitTransactionParser parseTransactionService = new ParseTransactionServiceImpl();
+        FruitTransactionParser parseTransactionService = new FruitTransactionParserImpl();
         List<FruitTransaction> fruitTransactionList = parseTransactionService
                 .parse(fruitTransactions);
 

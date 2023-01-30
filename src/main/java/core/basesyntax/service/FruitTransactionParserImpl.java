@@ -5,7 +5,7 @@ import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseTransactionServiceImpl implements FruitTransactionParser {
+public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final String SPLIT_SYMBOL = ",";
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
