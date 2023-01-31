@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.service.*.;
-import core.basesyntax.service.impl.*.;
+import core.basesyntax.service.*;
+import core.basesyntax.service.impl.*;
 import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.PurchaseHandler;
 import core.basesyntax.strategy.ReturnHandler;
