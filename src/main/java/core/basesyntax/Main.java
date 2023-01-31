@@ -1,16 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataProcessForStorageService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.FruitTransactionsCalculatorService;
+import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.ReportBuilderService;
-import core.basesyntax.service.impl.DataProcessForStorageImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.FruitTransactionsCalculatorServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.ReportBuilderServiceImpl;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.PurchaseOperationHandlerImpl;
@@ -34,15 +34,20 @@ public class Main {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> readData = fileReaderService.read(inputFilePath);
 
-        DataProcessForStorageService dataProcess = new DataProcessForStorageImpl();
-        dataProcess.processReadData(readData);
+        FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
+        List<FruitTransaction> fruitTransactionsList = fruitTransactionParser
+                .getFruitTransactionsList(readData);
 
-        FruitTransactionsCalculatorService calculator =
-                new FruitTransactionsCalculatorServiceImpl();
-        Map<String, Integer> fruitsAmounts = calculator.calculateMap(strategies);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(strategies);
+
+        for (FruitTransaction transaction : fruitTransactionsList) {
+            OperationHandler handler = operationStrategy
+                    .get(transaction.getOperation());
+            handler.updateAmount(transaction);
+        }
 
         ReportBuilderService reportBuilderService = new ReportBuilderServiceImpl();
-        String report = reportBuilderService.createReport(fruitsAmounts);
+        String report = reportBuilderService.createReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeDataToFile(report, reportFilePath);

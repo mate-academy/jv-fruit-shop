@@ -4,15 +4,6 @@ public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
-    private int transactionId;
-
-    public int getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
-    }
 
     public Operation getOperation() {
         return operation;
@@ -69,7 +60,6 @@ public class FruitTransaction {
         return "FruitTransaction{"
                 + "operation=" + operation
                 + ", fruit='" + fruit + '\''
-                + ", quantity=" + quantity
-                + ", transactionId=" + transactionId + '}';
+                + ", quantity=" + quantity + '}';
     }
 }
