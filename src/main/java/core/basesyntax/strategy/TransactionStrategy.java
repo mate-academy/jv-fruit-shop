@@ -8,12 +8,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TransactionStrategy {
-    public Map<String,TransactionService> getTransactionService() {
-        Map<String,TransactionService> transactionServiceMap = new HashMap<>();
+    private final Map<String,TransactionService> transactionServiceMap = new HashMap<>();
+
+    public TransactionStrategy() {
         transactionServiceMap.put("b", new BalanceTransactionService());
         transactionServiceMap.put("p", new PurchaseTransactionService());
         transactionServiceMap.put("s", new SupplyTransactionService());
         transactionServiceMap.put("r", new ReturnTransactionService());
+    }
+
+    public Map<String,TransactionService> getTransactionService() {
         return transactionServiceMap;
     }
 }

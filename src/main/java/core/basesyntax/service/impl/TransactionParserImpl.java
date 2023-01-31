@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionParserImpl implements TransactionParser {
+
     @Override
     public List<String[]> parseInputDate(List<String> listOfOperations) {
         List<String[]> result = new ArrayList<>();
