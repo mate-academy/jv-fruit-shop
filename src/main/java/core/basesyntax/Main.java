@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportService;
@@ -20,8 +21,8 @@ public class Main {
         ReportService reportService = new ReportsServiceImpl();
         TransactionParser transactionParser = new TransactionParserImpl();
         List<String> dateFromFile = fileService.readFromFile(INPUT_FILE);
-        List<String[]> parsedInputDate = transactionParser.parseInputDate(dateFromFile);
-        storageService.process(parsedInputDate);
+        List<FruitTransaction> fruitTransactions = transactionParser.parseInputDate(dateFromFile);
+        storageService.process(fruitTransactions);
         String report = reportService.createReport();
         fileService.writeToFile(OUTPUT_FILE, report);
     }
