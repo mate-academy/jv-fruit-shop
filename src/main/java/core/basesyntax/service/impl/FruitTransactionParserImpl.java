@@ -15,12 +15,20 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
 
     @Override
     public List<FruitTransaction> getFruitTransactionsList(List<String> readData) {
-        return readData.stream()
+        if (readData == null || readData.isEmpty()) {
+            throw new RuntimeException("The list of transactions is empty."
+                    + "Please enter valid data");
+        }
+        List<FruitTransaction> fruitTransactions = readData.stream()
                 .map(s -> s.split(SPLITTER))
                 .filter(a -> a.length == FIELDS_COUNT
-                && getOperationsNames().contains(a[OPERATION_INDEX]))
-                .map(s -> createFruitTransaction(s))
+                        && getOperationsNames().contains(a[OPERATION_INDEX]))
+                .map(this::createFruitTransaction)
                 .collect(Collectors.toList());
+        if (fruitTransactions.isEmpty()) {
+            throw new RuntimeException("No suitable transactions in the list");
+        }
+        return fruitTransactions;
     }
 
     private FruitTransaction createFruitTransaction(String[] transactionData) {
@@ -34,7 +42,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
 
     private List<String> getOperationsNames() {
         return Arrays.stream(FruitTransaction.Operation.values())
-                .map(o -> o.getOperation())
+                .map(FruitTransaction.Operation::getOperation)
                 .collect(Collectors.toList());
     }
 }

@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
     public void writeDataToFile(String report, String filePath) {
+        if (report == null || filePath == null) {
+            throw new RuntimeException("Please enter valid report and path");
+        }
         try {
             Files.writeString(Paths.get(filePath), report);
         } catch (IOException e) {

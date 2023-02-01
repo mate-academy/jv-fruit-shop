@@ -10,7 +10,7 @@ public class ReportBuilderServiceImpl implements ReportBuilderService {
 
     @Override
     public String createReport() {
-        if (Storage.fruitStorage == null || Storage.fruitStorage.isEmpty()) {
+        if (Storage.fruitStorage.isEmpty()) {
             throw new RuntimeException("Please enter valid data");
         }
         StringBuilder builder = new StringBuilder(HEADER);

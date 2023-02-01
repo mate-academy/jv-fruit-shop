@@ -9,6 +9,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     public OperationStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationHandlerMap) {
+        if (operationHandlerMap == null || operationHandlerMap.isEmpty()) {
+            throw new RuntimeException("Please provide valid operationHandlerMap");
+        }
         this.operationHandlerMap = operationHandlerMap;
     }
 

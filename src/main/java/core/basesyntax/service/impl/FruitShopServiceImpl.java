@@ -10,6 +10,11 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public void processTransactions(List<FruitTransaction> fruitTransactionsList,
                                     OperationStrategy operationStrategy) {
+        if (fruitTransactionsList == null || fruitTransactionsList.isEmpty()
+                || operationStrategy == null) {
+            throw new RuntimeException("Incorrect data. "
+                    + "Please enter valid list of transactions and operation strategy");
+        }
         for (FruitTransaction transaction : fruitTransactionsList) {
             OperationHandler handler = operationStrategy
                     .get(transaction.getOperation());
