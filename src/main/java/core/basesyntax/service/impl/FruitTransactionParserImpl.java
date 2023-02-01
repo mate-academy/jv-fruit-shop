@@ -21,13 +21,9 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
         }
         List<FruitTransaction> fruitTransactions = readData.stream()
                 .map(s -> s.split(SPLITTER))
-                .filter(a -> a.length == FIELDS_COUNT
-                        && getOperationsNames().contains(a[OPERATION_INDEX]))
+                .skip(1)
                 .map(this::createFruitTransaction)
                 .collect(Collectors.toList());
-        if (fruitTransactions.isEmpty()) {
-            throw new RuntimeException("No suitable transactions in the list");
-        }
         return fruitTransactions;
     }
 

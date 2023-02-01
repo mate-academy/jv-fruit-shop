@@ -7,14 +7,14 @@ import core.basesyntax.strategy.operation.OperationHandler;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
+    private OperationStrategy operationStrategy;
+
+    public FruitShopServiceImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
+
     @Override
-    public void processTransactions(List<FruitTransaction> fruitTransactionsList,
-                                    OperationStrategy operationStrategy) {
-        if (fruitTransactionsList == null || fruitTransactionsList.isEmpty()
-                || operationStrategy == null) {
-            throw new RuntimeException("Incorrect data. "
-                    + "Please enter valid list of transactions and operation strategy");
-        }
+    public void processTransactions(List<FruitTransaction> fruitTransactionsList) {
         for (FruitTransaction transaction : fruitTransactionsList) {
             OperationHandler handler = operationStrategy
                     .get(transaction.getOperation());

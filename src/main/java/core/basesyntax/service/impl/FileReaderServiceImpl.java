@@ -13,7 +13,7 @@ public class FileReaderServiceImpl implements FileReaderService {
             List<String> readData = Files.readAllLines(Path.of(filePath));
             return readData;
         } catch (IOException e) {
-            throw new RuntimeException("Can't read the file", e);
+            throw new RuntimeException("Can't read the file" + filePath, e);
         }
     }
 }

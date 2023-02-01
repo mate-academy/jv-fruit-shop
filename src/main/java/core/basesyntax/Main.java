@@ -5,12 +5,12 @@ import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitTransactionParser;
-import core.basesyntax.service.ReportBuilderService;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
-import core.basesyntax.service.impl.ReportBuilderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceOperationHandlerImpl;
@@ -42,12 +42,11 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategies);
 
-        FruitShopService fruitShopService = new FruitShopServiceImpl();
-        fruitShopService.processTransactions(fruitTransactionsList,
-                operationStrategy);
+        FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
+        fruitShopService.processTransactions(fruitTransactionsList);
 
-        ReportBuilderService reportBuilderService = new ReportBuilderServiceImpl();
-        String report = reportBuilderService.createReport();
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.createReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeDataToFile(report, reportFilePath);

@@ -10,9 +10,6 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
         int currentAmount = Storage.fruitStorage.getOrDefault(currentFruit, 0);
         int transactionAmount = fruitTransaction.getQuantity();
         int updatedAmount = currentAmount + transactionAmount;
-        if (updatedAmount < 0) {
-            throw new RuntimeException("Fruit quantity cannot be negative!");
-        }
         Storage.fruitStorage.put(currentFruit, updatedAmount);
     }
 }
