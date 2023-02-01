@@ -3,10 +3,12 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.ReportBuilderService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.ReportBuilderServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
@@ -40,11 +42,9 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategies);
 
-        for (FruitTransaction transaction : fruitTransactionsList) {
-            OperationHandler handler = operationStrategy
-                    .get(transaction.getOperation());
-            handler.updateAmount(transaction);
-        }
+        FruitShopService fruitShopService = new FruitShopServiceImpl();
+        fruitShopService.processTransactions(fruitTransactionsList,
+                operationStrategy);
 
         ReportBuilderService reportBuilderService = new ReportBuilderServiceImpl();
         String report = reportBuilderService.createReport();
