@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeValueAmountException;
 import core.basesyntax.exceptions.NoExistFruitInStorageException;
 
-public class PurchaseTransaction implements TransactionHandler {
+public class SupplyTransaction implements TransactionHandler {
     @Override
     public void callTransaction(String fruit, int amount) {
         if (amount < 0) {
@@ -15,15 +15,7 @@ public class PurchaseTransaction implements TransactionHandler {
         if (fruitAmount == null) {
             throw new NoExistFruitInStorageException(fruit);
         }
-        if (fruitAmount < amount) {
-            throw new RuntimeException(
-                    "Impossible purchase more fruit then exit in storage. In storage: "
-                    + fruitAmount
-                    + ", purchase amount: "
-                    + amount
-            );
-        }
 
-        Storage.fruits.put(fruit, fruitAmount - amount);
+        Storage.fruits.put(fruit, fruitAmount + amount);
     }
 }

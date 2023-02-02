@@ -1,12 +1,8 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.Fruit;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public interface Storage {
-    void put(Fruit fruit);
-
-    Fruit get(String fruitName);
-
-    List<Fruit> getAll();
+public class Storage {
+    public static final Map<String, Integer> fruits = new HashMap<>();
 }

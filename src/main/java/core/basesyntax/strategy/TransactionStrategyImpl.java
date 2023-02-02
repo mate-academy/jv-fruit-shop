@@ -1,17 +1,20 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.transaction.TransactionHandler;
 import java.util.Map;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
-    private Map<String, TransactionHandler> transactionHandlerMap;
+    private Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap;
 
-    public TransactionStrategyImpl(Map<String, TransactionHandler> transactionHandlerMap) {
+    public TransactionStrategyImpl(
+            Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap
+    ) {
         this.transactionHandlerMap = transactionHandlerMap;
     }
 
     @Override
-    public TransactionHandler getHandler(String transactionType) {
-        return transactionHandlerMap.get(transactionType);
+    public TransactionHandler getHandler(FruitTransaction.Operation operation) {
+        return transactionHandlerMap.get(operation);
     }
 }
