@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
-import core.basesyntax.service.OperationHandler;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportMaker;
@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String inputFilePath = "src/main/resources/testFile.csv";
-    private static final String reportFilePath = "src/main/resources/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/inputFile.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> strategies = new HashMap<>();
@@ -32,7 +32,7 @@ public class Main {
         strategies.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
 
         ReaderService readerService = new ReaderServiceImpl();
-        List<String> dataFromFile = readerService.readFromFile(inputFilePath);
+        List<String> dataFromFile = readerService.readFromFile(INPUT_FILE_PATH);
 
         FruitTransactionParser parser = new FruitTransactionParserImpl();
         List<FruitTransaction> fruitTransactionsList
@@ -50,6 +50,6 @@ public class Main {
         String report = reportMaker.createReport();
 
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile(report, reportFilePath);
+        writerService.writeToFile(report, REPORT_FILE_PATH);
     }
 }
