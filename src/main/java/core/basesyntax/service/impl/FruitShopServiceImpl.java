@@ -8,13 +8,13 @@ import java.util.List;
 public class FruitShopServiceImpl implements FruitShopService {
     private TransactionStrategy transactionStrategy;
 
-    public FruitShopServiceImpl() {
-        this.transactionStrategy = new TransactionStrategy();
+    public FruitShopServiceImpl(TransactionStrategy transactionStrategy) {
+        this.transactionStrategy = transactionStrategy;
     }
 
     @Override
     public void process(List<FruitTransaction> listOfOperations) {
-        listOfOperations.forEach(s -> transactionStrategy.getTransactionService()
-                .get(s.getOperation()).makeTransaction(s.getFruit(),s.getQuantity()));
+        listOfOperations.forEach(s -> transactionStrategy.getTransactionService(s.getOperation())
+                .makeTransaction(s.getFruit(),s.getQuantity()));
     }
 }

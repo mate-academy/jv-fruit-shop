@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface TransactionService {
+public interface OperationHandler {
     void makeTransaction(String fruits, int number);
 }
