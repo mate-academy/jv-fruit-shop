@@ -1,8 +1,8 @@
-package core.basesyntax.servicesimpl;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.OperationHandler;
-import core.basesyntax.services.OperationStrategy;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {

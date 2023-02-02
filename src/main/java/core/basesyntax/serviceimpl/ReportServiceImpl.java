@@ -1,7 +1,7 @@
-package core.basesyntax.servicesimpl;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.services.ReportService;
+import core.basesyntax.service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     @Override

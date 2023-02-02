@@ -1,28 +1,28 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.BalanceOperationHandler;
-import core.basesyntax.operations.OperationHandler;
-import core.basesyntax.operations.PurchaseOperationHandler;
-import core.basesyntax.operations.ReturnOperationHandler;
-import core.basesyntax.operations.SupplyOperationHandler;
-import core.basesyntax.services.OperationStrategy;
-import core.basesyntax.services.ReadService;
-import core.basesyntax.services.ReportService;
-import core.basesyntax.services.TransactionParser;
-import core.basesyntax.services.WriteService;
-import core.basesyntax.servicesimpl.OperationStrategyImpl;
-import core.basesyntax.servicesimpl.ReadServiceImpl;
-import core.basesyntax.servicesimpl.ReportServiceImpl;
-import core.basesyntax.servicesimpl.TransactionParserImpl;
-import core.basesyntax.servicesimpl.WriteServiceImpl;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReadService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.WriteService;
+import core.basesyntax.serviceimpl.OperationStrategyImpl;
+import core.basesyntax.serviceimpl.ReadServiceImpl;
+import core.basesyntax.serviceimpl.ReportServiceImpl;
+import core.basesyntax.serviceimpl.TransactionParserImpl;
+import core.basesyntax.serviceimpl.WriteServiceImpl;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_PATH = "src/main/java/core/basesyntax/files/data.csv";
-    private static final String REPORT_FILE_PATH = "src/main/java/core/basesyntax/files/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/data.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
