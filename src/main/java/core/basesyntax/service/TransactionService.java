@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.transaction.TransactionHandler;
+import core.basesyntax.model.FruitTransaction;
 
 public interface TransactionService {
-    void handleTransaction(TransactionHandler transactionHandler, String fruitName, int amount);
+    void handleTransaction(FruitTransaction fruitTransaction);
 }

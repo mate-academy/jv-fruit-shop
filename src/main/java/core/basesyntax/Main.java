@@ -10,10 +10,10 @@ import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;
 import core.basesyntax.transaction.BalanceTransaction;
+import core.basesyntax.transaction.OperationHandler;
 import core.basesyntax.transaction.PurchaseTransaction;
 import core.basesyntax.transaction.ReturnTransaction;
 import core.basesyntax.transaction.SupplyTransaction;
-import core.basesyntax.transaction.TransactionHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         String filePath = "src/resources/input.csv";
-        Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> transactionHandlerMap = new HashMap<>();
         transactionHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceTransaction());
         transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyTransaction());
         transactionHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnTransaction());
@@ -29,16 +29,12 @@ public class Main {
 
         ReaderService reader = new ReaderServiceImpl();
         List<FruitTransaction> transactionList = reader.read(filePath);
-        TransactionService transactionService = new TransactionServiceImpl();
+        TransactionService transactionService = new TransactionServiceImpl(transactionHandlerMap);
         TransactionStrategy transactionStrategy
                 = new TransactionStrategyImpl(transactionHandlerMap);
 
         for (FruitTransaction transaction : transactionList) {
-            transactionService.handleTransaction(
-                    transactionStrategy.getHandler(transaction.getOperation()),
-                    transaction.getFruit(),
-                    transaction.getQuantity()
-            );
+            transactionService.handleTransaction(transaction);
         }
 
         String reportFilePath = "src/resources/report.csv";

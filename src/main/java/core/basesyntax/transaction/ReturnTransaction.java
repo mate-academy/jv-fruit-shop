@@ -4,9 +4,9 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeValueAmountException;
 import core.basesyntax.exceptions.NoExistFruitInStorageException;
 
-public class ReturnTransaction implements TransactionHandler {
+public class ReturnTransaction implements OperationHandler {
     @Override
-    public void callTransaction(String fruit, int amount) {
+    public void handle(String fruit, int amount) {
         if (amount < 0) {
             throw new NegativeValueAmountException(amount);
         }

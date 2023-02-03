@@ -2,9 +2,9 @@ package core.basesyntax.transaction;
 
 import core.basesyntax.db.Storage;
 
-public class BalanceTransaction implements TransactionHandler {
+public class BalanceTransaction implements OperationHandler {
     @Override
-    public void callTransaction(String fruit, int amount) {
+    public void handle(String fruit, int amount) {
         if (amount < 0) {
             throw new RuntimeException(
                     "Impossible set balance less than 0. Amount: "
