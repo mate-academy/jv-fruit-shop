@@ -33,7 +33,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
         return fruitTransaction;
     }
 
-    private final Map<String, FruitTransaction.Operation> mapFromEnumOperations =
+    final private Map<String, FruitTransaction.Operation> mapFromEnumOperations =
             FruitTransaction.createMapFromEnumOperations();
 
 }
