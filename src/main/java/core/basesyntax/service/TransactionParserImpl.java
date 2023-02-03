@@ -41,7 +41,6 @@ public class TransactionParserImpl implements TransactionParser {
             fruitTransaction.setFruit(array[TYPE_OF_FRUIT]);
             fruitTransaction.setQuantity(Integer.parseInt(array[QUANTITY]));
             fruitTransactionsList.add(fruitTransaction);
-
         }
         return fruitTransactionsList;
     }

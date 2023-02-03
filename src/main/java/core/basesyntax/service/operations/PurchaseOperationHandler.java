@@ -6,10 +6,10 @@ import core.basesyntax.model.FruitTransaction;
 public class PurchaseOperationHandler implements OperationHandler{
     @Override
     public void proceedOperation(FruitTransaction fruitTransaction) {
-        Integer fruitQuantityBeforePurchase = Storage.fruits.get(fruitTransaction.getFruit());
+        Integer fruitQuantityBeforePurchase = Storage.report.get(fruitTransaction.getFruit());
         int fruitQuantityAfterPurchase = fruitQuantityBeforePurchase - fruitTransaction.getQuantity();
         if (fruitQuantityAfterPurchase > 0) {
-            Storage.fruits.put(fruitTransaction.getFruit(), fruitQuantityAfterPurchase);
+            Storage.report.put(fruitTransaction.getFruit(), fruitQuantityAfterPurchase);
         }
     }
 }
