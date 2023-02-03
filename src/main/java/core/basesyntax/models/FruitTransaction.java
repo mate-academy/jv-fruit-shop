@@ -1,5 +1,9 @@
 package core.basesyntax.models;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class FruitTransaction {
     private FruitTransaction.Operation operation;
     private String fruit;
@@ -44,5 +48,11 @@ public class FruitTransaction {
         public String getOperation() {
             return operation;
         }
+    }
+
+    private Map<String, Operation> createMapFromEnumOperations() {
+        return Arrays.stream(FruitTransaction.Operation.values())
+                .collect(Collectors.toMap(FruitTransaction.Operation::getOperation,
+                        operation -> operation));
     }
 }

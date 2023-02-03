@@ -9,6 +9,9 @@ public class PurchaseHandler implements OperationHandler {
         String fruitName = fruitTransaction.getFruit();
         int quantityOfParchedFruits = fruitTransaction.getQuantity();
         int oldQuantity = Storage.fruits.get(fruitName);
+        if (oldQuantity < quantityOfParchedFruits) {
+            throw new IllegalArgumentException("Not enough fruits available");
+        }
         Storage.fruits.put(fruitName, oldQuantity - quantityOfParchedFruits);
     }
 }
