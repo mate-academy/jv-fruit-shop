@@ -1,4 +1,4 @@
-package core.basesyntax.service.readAndWriteToFile;
+package core.basesyntax.service.readandwritetofile;
 
 import java.util.List;
 

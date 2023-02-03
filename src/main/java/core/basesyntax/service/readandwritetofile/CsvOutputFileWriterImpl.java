@@ -1,4 +1,4 @@
-package core.basesyntax.service.readAndWriteToFile;
+package core.basesyntax.service.readandwritetofile;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -37,8 +37,5 @@ public class CsvOutputFileWriterImpl implements CsvOutputFileWriter {
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file",e);
         }
-
-
-
     }
 }
