@@ -50,9 +50,8 @@ public class FruitTransaction {
         }
     }
 
-    private Map<String, Operation> createMapFromEnumOperations() {
-        return Arrays.stream(FruitTransaction.Operation.values())
-                .collect(Collectors.toMap(FruitTransaction.Operation::getOperation,
-                        operation -> operation));
+    public static Map<String, Operation> createMapFromEnumOperations() {
+        return Arrays.stream(Operation.values())
+                .collect(Collectors.toMap(Operation::getOperation, operation -> operation));
     }
 }

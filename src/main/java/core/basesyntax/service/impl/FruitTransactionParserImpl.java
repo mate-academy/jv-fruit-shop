@@ -13,11 +13,6 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final Map<String, FruitTransaction.Operation> mapFromEnumOperations;
-
-    public FruitTransactionParserImpl() {
-        mapFromEnumOperations = createMapFromEnumOperations();
-    }
 
     @Override
     public List<FruitTransaction> getFruitTransactionsList(List<String> data) {
@@ -39,9 +34,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
         return fruitTransaction;
     }
 
-    private Map<String, FruitTransaction.Operation> createMapFromEnumOperations() {
-        return Arrays.stream(FruitTransaction.Operation.values())
-                .collect(Collectors.toMap(FruitTransaction.Operation::getOperation,
-                        operation -> operation));
-    }
+    private final Map<String, FruitTransaction.Operation> mapFromEnumOperations =
+            FruitTransaction.createMapFromEnumOperations();
+
 }
