@@ -1,18 +1,14 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.service.CsvTransactionParser;
-import core.basesyntax.service.CsvTransactionParserImpl;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class DataReaderImpl implements DataReader {
+public class CsvDataReaderImpl implements CsvDataReader {
     private static final String FILEPATH =
             "src/main/resources/InputFile.csv";
-    private final CsvTransactionParser csvTransactionParser = new CsvTransactionParserImpl();
 
     @Override
     public List<String> readFromFile() {

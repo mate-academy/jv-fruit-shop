@@ -11,6 +11,9 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    public FruitTransaction() {
+    }
+
     public Operation getOperation() {
         return operation;
     }
