@@ -28,7 +28,7 @@ public class FruitTransaction {
             return Arrays.stream(values())
                     .filter(value -> value.getOperation().equals(operation))
                     .findFirst()
-                    .get();
+                    .orElseThrow();
         }
 
         @Override

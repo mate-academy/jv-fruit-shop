@@ -16,9 +16,14 @@ public class PurchaseOperationHandler implements OperationHandler {
             if (balanceFruit.getFruit().equals(transaction.getFruit())) {
                 int balanceFruitQuantity = balanceFruit.getQuantity();
                 int quantityToRemove = transaction.getQuantity();
-                if (balanceFruitQuantity >= quantityToRemove) {
-                    balanceFruit.setQuantity(balanceFruitQuantity - quantityToRemove);
+                if (balanceFruitQuantity < quantityToRemove) {
+                    throw new RuntimeException("Cant purchase "
+                            + quantityToRemove
+                            + " " + transaction.getFruit()
+                            + " fruit, because shop has only "
+                            + balanceFruitQuantity);
                 }
+                balanceFruit.setQuantity(balanceFruitQuantity - quantityToRemove);
             }
         }
     }
