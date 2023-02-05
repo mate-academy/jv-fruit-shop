@@ -20,7 +20,8 @@ public class FruitTransactionCreationServiceImpl implements FruitTransactionCrea
         FruitTransaction transaction;
         for (String[] parameters : data) {
             transaction = new FruitTransaction();
-            FruitTransaction.Operation operation = FruitTransaction.Operation.getFromString(parameters[FIRST_POSITION]);
+            FruitTransaction.Operation operation
+                    = FruitTransaction.Operation.getFromString(parameters[FIRST_POSITION]);
             String fruitType = parameters[SECOND_POSITION];
             int fruitQuantity = Integer.parseInt(parameters[THIRD_POSITION]);
             transaction.setFruit(fruitType);
