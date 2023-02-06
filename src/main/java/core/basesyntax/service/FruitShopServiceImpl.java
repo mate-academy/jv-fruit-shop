@@ -6,7 +6,8 @@ import core.basesyntax.strategy.handlers.OperationHandler;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
+
     public FruitShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
@@ -14,7 +15,8 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public void operationProvider(List<FruitTransaction> fruitTransaction) {
         for (FruitTransaction transaction : fruitTransaction) {
-            OperationHandler operationHandler = operationStrategy.getHandler(transaction.getOperation());
+            OperationHandler operationHandler =
+                    operationStrategy.getHandler(transaction.getOperation());
             operationHandler.handle(transaction);
         }
     }
