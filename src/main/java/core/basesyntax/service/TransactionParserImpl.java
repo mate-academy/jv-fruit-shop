@@ -14,7 +14,8 @@ public class TransactionParserImpl implements TransactionParser {
         for (int i = 1; i < lines.size(); i++) {
             String[] array = lines.get(i).split(",");
             FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(FruitTransaction.Operation.getByCode(array[OPERATION_INDEX]));
+            fruitTransaction.setOperation(FruitTransaction.Operation.getByCode(
+                    array[OPERATION_INDEX]));
             fruitTransaction.setFruit(array[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(array[QUANTITY]));
             dataList.add(fruitTransaction);
