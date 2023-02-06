@@ -16,5 +16,4 @@ public class OperationStrategyImpl implements OperationStrategy {
     public OperationHandler getHandler(FruitTransaction.Operation operation) {
         return operationHandlerMap.get(operation);
     }
-
 }

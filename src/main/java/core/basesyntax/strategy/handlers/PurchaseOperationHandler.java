@@ -14,8 +14,7 @@ public class PurchaseOperationHandler implements OperationHandler {
             throw new RuntimeException("There's not enough of "
                     + fruitTransaction.getFruit()
                     + " to conduct such operation");
-        } else {
-            Storage.fruitsQuantity.put(fruitTransaction.getFruit(), fruitQuantityAfterPurchase);
         }
+        Storage.fruitsQuantity.put(fruitTransaction.getFruit(), fruitQuantityAfterPurchase);
     }
 }

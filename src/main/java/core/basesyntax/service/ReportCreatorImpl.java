@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ReportCreatorServiceImpl implements ReportCreatorService {
+public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String createReport(Map<String, Integer> fruits) {

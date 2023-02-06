@@ -38,23 +38,19 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String code;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String code) {
+            this.code = code;
         }
 
-        public String getOperation() {
-            return operation;
-        }
-
-        public static Operation getByCode(String startsWith) {
+        public static Operation getByCode(String code) {
             for (Operation operation : Operation.values()) {
-                if (startsWith.equals(operation.getOperation())) {
+                if (code.equals(operation.code)) {
                     return operation;
                 }
             }
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("No operation with such code! " + code);
         }
     }
 }

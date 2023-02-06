@@ -2,14 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.database.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CsvFileReaderImpl;
-import core.basesyntax.service.CsvFileWriterImpl;
+import core.basesyntax.service.FileWriterImpl;
 import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileReaderImpl;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.FruitShopServiceImpl;
-import core.basesyntax.service.ReportCreatorService;
-import core.basesyntax.service.ReportCreatorServiceImpl;
+import core.basesyntax.service.ReportCreatorImpl;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionParserImpl;
 import core.basesyntax.strategy.OperationStrategy;
@@ -23,11 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_FILE_CSV = "src/main/resources/InputFile.csv";
+    private static final String OUTPUT_FILE_CSV = "src/main/resources/OutputFile.csv";
 
     public static void main(String[] args) {
-        String inputFilePath = "src/main/resources/InputFile.csv";
-        FileReader dataReader = new CsvFileReaderImpl();
-        List<String> transactions = dataReader.readFromFile(inputFilePath);
+        FileReader dataReader = new FileReaderImpl();
+        List<String> transactions = dataReader.readFromFile(INPUT_FILE_CSV);
 
         BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler();
         SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();
@@ -42,19 +43,18 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, supplyOperationHandler);
 
         List<FruitTransaction> fruitTransaction =
-                transactionParser.getFruitTransaction(transactions);
+                transactionParser.parseFruitTransactions(transactions);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
-        fruitShopService.operationProvider(fruitTransaction);
+        fruitShopService.provideOperation(fruitTransaction);
 
-        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        ReportCreator reportCreatorService = new ReportCreatorImpl();
         String report = reportCreatorService.createReport(Storage.fruitsQuantity);
 
-        String outputFilePath = "src/main/resources/OutputFile.csv";
-        FileWriter fileWriter = new CsvFileWriterImpl();
-        fileWriter.writeToFile(report, outputFilePath);
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFile(report, OUTPUT_FILE_CSV);
     }
 }
 

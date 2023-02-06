@@ -13,7 +13,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void operationProvider(List<FruitTransaction> fruitTransaction) {
+    public void provideOperation(List<FruitTransaction> fruitTransaction) {
         for (FruitTransaction transaction : fruitTransaction) {
             OperationHandler operationHandler =
                     operationStrategy.getHandler(transaction.getOperation());
