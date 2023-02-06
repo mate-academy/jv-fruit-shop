@@ -38,10 +38,23 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private final String operation;
 
         Operation(String operation) {
             this.operation = operation;
+        }
+
+        public String getOperation() {
+            return operation;
+        }
+
+        public Operation fromString(String startsWith) {
+            for (Operation operation : Operation.values()) {
+                if (startsWith.equals(operation.getOperation())) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException();
         }
     }
 }

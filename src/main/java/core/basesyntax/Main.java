@@ -2,18 +2,22 @@ package core.basesyntax;
 
 import core.basesyntax.database.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.CsvFileReaderImpl;
+import core.basesyntax.service.CsvFileWriterImpl;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.FruitShopServiceImpl;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.ReportCreatorServiceImpl;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionParserImpl;
-import core.basesyntax.service.operations.BalanceOperationHandler;
-import core.basesyntax.service.operations.OperationHandler;
-import core.basesyntax.service.operations.OperationStrategy;
-import core.basesyntax.service.operations.OperationStrategyImpl;
-import core.basesyntax.service.operations.PurchaseOperationHandler;
-import core.basesyntax.service.operations.SupplyOperationHandler;
-import core.basesyntax.service.readandwritetofile.CsvFileReader;
-import core.basesyntax.service.readandwritetofile.CsvFileReaderImpl;
-import core.basesyntax.service.readandwritetofile.CsvOutputFileWriter;
-import core.basesyntax.service.readandwritetofile.CsvOutputFileWriterImpl;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.handlers.BalanceOperationHandler;
+import core.basesyntax.strategy.handlers.OperationHandler;
+import core.basesyntax.strategy.handlers.PurchaseOperationHandler;
+import core.basesyntax.strategy.handlers.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +25,9 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        CsvFileReader dataReader = new CsvFileReaderImpl();
-        List<String> transactions = dataReader.readFromFile();
+        String inputFilePath = "src/main/resources/InputFile.csv";
+        FileReader dataReader = new CsvFileReaderImpl();
+        List<String> transactions = dataReader.readFromFile(inputFilePath);
 
         BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler();
         SupplyOperationHandler supplyOperationHandler = new SupplyOperationHandler();
@@ -41,13 +46,15 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
-        for (FruitTransaction fruTrans : fruitTransaction) {
-            OperationHandler operationHandler = operationStrategy.getOperation(fruTrans);
-            operationHandler.proceedOperation(fruTrans);
-        }
-        CsvOutputFileWriter csvOutputFileWriter = new CsvOutputFileWriterImpl();
-        csvOutputFileWriter.createCscWithTitle();
-        csvOutputFileWriter.saveReportToCsv(Storage.report);
+        FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
+        fruitShopService.operationProvider(fruitTransaction);
+
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        String report = reportCreatorService.createReport(Storage.fruitsQuantity);
+
+        String outputFilePath = "src/main/resources/OutputFile.csv";
+        FileWriter fileWriter = new CsvFileWriterImpl();
+        fileWriter.writeToFile(report, outputFilePath);
     }
 }
 
