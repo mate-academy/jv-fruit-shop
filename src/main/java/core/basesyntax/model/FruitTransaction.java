@@ -48,7 +48,7 @@ public class FruitTransaction {
             return operation;
         }
 
-        public Operation fromString(String startsWith) {
+        public static Operation getByCode(String startsWith) {
             for (Operation operation : Operation.values()) {
                 if (startsWith.equals(operation.getOperation())) {
                     return operation;

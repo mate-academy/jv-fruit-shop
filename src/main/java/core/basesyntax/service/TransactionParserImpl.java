@@ -10,18 +10,16 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int QUANTITY = 2;
 
     public List<FruitTransaction> getFruitTransaction(List<String> transactions) {
-
-        List<FruitTransaction> fruitTransactionsList = new ArrayList<>();
+        List<FruitTransaction> dataList = new ArrayList<>();
         for (int i = 1; i < transactions.size(); i++) {
             String[] array = transactions.get(i).split(",");
             FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(
-                    FruitTransaction.Operation.BALANCE.fromString(array[OPERATION_TYPE]));
+            fruitTransaction.setOperation(FruitTransaction.Operation.getByCode(array[OPERATION_TYPE]));
             fruitTransaction.setFruit(array[TYPE_OF_FRUIT]);
             fruitTransaction.setQuantity(Integer.parseInt(array[QUANTITY]));
-            fruitTransactionsList.add(fruitTransaction);
+            dataList.add(fruitTransaction);
         }
-        return fruitTransactionsList;
+        return dataList;
     }
 }
 
