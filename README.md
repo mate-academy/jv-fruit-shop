@@ -89,7 +89,7 @@ public class FruitTransaction {
     }
 
     public String getOperation() {
-       eturn operation;r
+       return operation;
     }
   }
 }
