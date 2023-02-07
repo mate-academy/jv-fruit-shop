@@ -6,9 +6,9 @@ import core.basesyntax.service.FruitTransactionCreationService;
 import java.util.List;
 
 public class FruitTransactionCreationServiceImpl implements FruitTransactionCreationService {
-    private static final int FIRST_POSITION = 0;
-    private static final int SECOND_POSITION = 1;
-    private static final int THIRD_POSITION = 2;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_TYPE_INDEX = 1;
+    private static final int FRUIT_QUANTITY_INDEX = 2;
     private final FruitDao dao;
 
     public FruitTransactionCreationServiceImpl(FruitDao dao) {
@@ -21,9 +21,9 @@ public class FruitTransactionCreationServiceImpl implements FruitTransactionCrea
         for (String[] parameters : data) {
             transaction = new FruitTransaction();
             FruitTransaction.Operation operation
-                    = FruitTransaction.Operation.getFromString(parameters[FIRST_POSITION]);
-            String fruitType = parameters[SECOND_POSITION];
-            int fruitQuantity = Integer.parseInt(parameters[THIRD_POSITION]);
+                    = FruitTransaction.Operation.getFromString(parameters[OPERATION_INDEX]);
+            String fruitType = parameters[FRUIT_TYPE_INDEX];
+            int fruitQuantity = Integer.parseInt(parameters[FRUIT_QUANTITY_INDEX]);
             transaction.setFruit(fruitType);
             transaction.setOperation(operation);
             transaction.setQuantity(fruitQuantity);

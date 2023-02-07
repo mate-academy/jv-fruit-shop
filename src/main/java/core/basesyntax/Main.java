@@ -47,8 +47,7 @@ public class Main {
         FruitTransactionCreationService transactionService
                 = new FruitTransactionCreationServiceImpl(dao);
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
-        List<String[]> fileData = fileReaderService
-                .readFile(fileToReadPath);
+        List<String[]> fileData = fileReaderService.readFile(fileToReadPath);
         transactionService.createTransactions(fileData);
         List<FruitTransaction> updatedBalance = operationsCalculator.process(dao);
         String report = reportGeneratorService.generate(updatedBalance);
