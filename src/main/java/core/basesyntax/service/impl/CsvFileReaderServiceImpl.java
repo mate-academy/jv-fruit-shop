@@ -9,6 +9,7 @@ import java.util.List;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     private static final String DELIMITER = ",";
+    
     @Override
     public List<String[]> readFile(String readFromFilePath) {
         List<String[]> data = new ArrayList<>();
