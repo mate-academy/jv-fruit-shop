@@ -1,22 +1,20 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.TransactionsDao;
-import core.basesyntax.dao.TransactionsDaoCsvImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ParseCsv;
+import core.basesyntax.service.TransactionParser;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ParseCsvImpl implements ParseCsv {
-    public static final int INDEX_OF_OPERATION = 0;
-    public static final int INDEX_OF_FRUIT = 1;
-    public static final int INDEX_OF_QUANTITY = 2;
-    private final TransactionsDao transactionsDao = new TransactionsDaoCsvImpl();
+public class TransactionParserImpl implements TransactionParser {
+    private static final int INDEX_OF_OPERATION = 0;
+    private static final int INDEX_OF_FRUIT = 1;
+    private static final int INDEX_OF_QUANTITY = 2;
 
     @Override
-    public void getTransactions(List<String> csvStrings) {
-        csvStrings.stream()
+    public List<FruitTransaction> getTransactions(List<String> csvStrings) {
+        return csvStrings.stream()
                 .map(this::parseTransaction)
-                .forEach(transactionsDao::addTransaction);
+                .collect(Collectors.toList());
     }
 
     private FruitTransaction parseTransaction(String csvLine) {

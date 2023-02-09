@@ -9,7 +9,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     private final Map<String, Integer> warehouse = new WarehouseDaoImpl().getWarehouse();
 
     @Override
-    public void getOperationResult(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         int warehouseHasCodeBeforeCalculation = warehouse.hashCode();
         warehouse.entrySet().stream()
                 .filter(e -> e.getKey().equals(transaction.getFruit()))

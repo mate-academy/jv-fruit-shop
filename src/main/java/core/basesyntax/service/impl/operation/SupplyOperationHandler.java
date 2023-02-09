@@ -9,7 +9,7 @@ public class SupplyOperationHandler implements OperationHandler {
     private final Map<String, Integer> warehouse = new WarehouseDaoImpl().getWarehouse();
 
     @Override
-    public void getOperationResult(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         warehouse.entrySet().stream()
                 .filter(e -> e.getKey().equals(transaction.getFruit()))
                 .forEach(e -> e.setValue(e.getValue() + transaction.getQuantity()));

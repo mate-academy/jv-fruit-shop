@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.util.Map;
 
-public interface CreateReport {
+public interface ReportCreate {
     String getReport(Map<String, Integer> leftovers);
 }

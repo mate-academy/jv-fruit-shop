@@ -6,7 +6,7 @@ import core.basesyntax.service.OperationHandler;
 public class ReturnOperationHandler implements OperationHandler {
 
     @Override
-    public void getOperationResult(FruitTransaction transaction) {
-        new SupplyOperationHandler().getOperationResult(transaction);
+    public void handle(FruitTransaction transaction) {
+        new SupplyOperationHandler().handle(transaction);
     }
 }
