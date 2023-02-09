@@ -1,8 +1,8 @@
-package core.basesyntax.service.activity;
+package core.basesyntax.service.handler;
 
 import java.math.BigDecimal;
 
-public interface CategoryActivity {
+public interface HandlerByActivity {
 
     BigDecimal getSumFruits(BigDecimal bigDecimalActivity);
 

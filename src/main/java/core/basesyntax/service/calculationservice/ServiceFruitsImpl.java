@@ -1,8 +1,8 @@
-package core.basesyntax.service.servicefructs;
+package core.basesyntax.service.calculationservice;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.entity.FruitTransaction;
-import core.basesyntax.service.strategyactivity.StrategySumByActivity;
+import core.basesyntax.service.handlerservice.HandlerService;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -10,17 +10,17 @@ import java.util.Map;
 
 public class ServiceFruitsImpl implements ServiceFruits {
     private final FruitsDao fruitsStorageDao;
-    private final StrategySumByActivity realizeByActivityFruits;
+    private final HandlerService realizeByActivityFruits;
 
     public ServiceFruitsImpl(FruitsDao fruitsStorageDao,
-                             StrategySumByActivity realizeByActivityFruits) {
+                             HandlerService realizeByActivityFruits) {
         this.fruitsStorageDao = fruitsStorageDao;
         this.realizeByActivityFruits = realizeByActivityFruits;
     }
 
     @Override
-    public String summaryOfTheDay(String nameFruit) {
-        Map<String, BigDecimal> map = summaryByCategories(nameFruit);
+    public String calculationFruits(String nameFruit) {
+        Map<String, BigDecimal> map = handlerActivity(nameFruit);
         BigDecimal resultActivity = new BigDecimal(0);
         for (Map.Entry<String, BigDecimal> l : map.entrySet()) {
             resultActivity = resultActivity
@@ -30,7 +30,7 @@ public class ServiceFruitsImpl implements ServiceFruits {
         return nameFruit + " " + resultActivity;
     }
 
-    private Map<String, BigDecimal> summaryByCategories(String nameFruit) {
+    private Map<String, BigDecimal> handlerActivity(String nameFruit) {
         BigDecimal bigDecimal = new BigDecimal(0);
         Map<String, BigDecimal> mapResult = new HashMap<>();
         Map<String, List<FruitTransaction>> mapFruits = fruitsStorageDao

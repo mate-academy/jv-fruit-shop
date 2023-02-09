@@ -1,4 +1,4 @@
-package core.basesyntax.service.separator;
+package core.basesyntax.service.parser;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.entity.FruitTransaction;
@@ -6,16 +6,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeparationFruitsInImpl implements SeparationFruits {
-    private final FruitsDao fruitsStorageDao;
+public class TransactionParserImpl implements TransactionParser {
 
-    public SeparationFruitsInImpl(FruitsDao fruitsStorageDao) {
-        this.fruitsStorageDao = fruitsStorageDao;
+    private FruitsDao fruitsDao;
+
+    public TransactionParserImpl(FruitsDao fruitsDao) {
+        this.fruitsDao = fruitsDao;
     }
 
-    public List<FruitTransaction> separationFruits(List<String> str,
-                                                   String fruits,
-                                                   boolean useDataBase) {
+    @Override
+    public List<FruitTransaction> parser(List<String> str, String fruits, boolean putDataBase) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (String d : str) {
             String[] split = d.split(",");
@@ -27,8 +27,8 @@ public class SeparationFruitsInImpl implements SeparationFruits {
                 fruitTransaction.setActivity(activity.trim());
                 fruitTransaction.setFruit(fruit.trim());
                 fruitTransaction.setQuantity(quantity);
-                if (useDataBase) {
-                    fruitsStorageDao.addListFruitsStorage(fruitTransaction);
+                if (putDataBase) {
+                    fruitsDao.addListFruitsStorage(fruitTransaction);
                 }
                 fruitTransactionList.add(fruitTransaction);
             }
