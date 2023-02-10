@@ -10,8 +10,10 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        warehouse.entrySet().stream()
-                .filter(e -> e.getKey().equals(transaction.getFruit()))
-                .forEach(e -> e.setValue(e.getValue() + transaction.getQuantity()));
+        for (Map.Entry<String, Integer> entry : warehouse.entrySet()) {
+            if (entry.getKey().equals(transaction.getFruit())) {
+                entry.setValue(entry.getValue() + transaction.getQuantity());
+            }
+        }
     }
 }

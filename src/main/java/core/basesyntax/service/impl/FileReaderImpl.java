@@ -18,7 +18,7 @@ public class FileReaderImpl implements FileReader {
             .skip(HEADER_LINE)
             .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file " + fileName);
+            throw new RuntimeException("Can't read file " + fileName, e);
         }
     }
 }

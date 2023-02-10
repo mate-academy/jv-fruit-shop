@@ -10,16 +10,16 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        int warehouseHasCodeBeforeCalculation = warehouse.hashCode();
-        warehouse.entrySet().stream()
-                .filter(e -> e.getKey().equals(transaction.getFruit()))
-                .filter(e -> e.getValue() >= transaction.getQuantity())
-                .forEach(e -> e.setValue(e.getValue() - transaction.getQuantity()));
-        if (warehouseHasCodeBeforeCalculation == warehouse.hashCode()) {
+        int currentFruitQuantity = warehouse.get(transaction.getFruit());
+        int newFruitQuantity = currentFruitQuantity - transaction.getQuantity();
+        String fruit = transaction.getFruit();
+        if (currentFruitQuantity >= transaction.getQuantity()) {
+            warehouse.put(fruit, newFruitQuantity);
+        } else {
             throw new RuntimeException(transaction.getQuantity()
                     + " "
                     + transaction.getFruit()
-                    + " required, only "
+                    + " required, but only "
                     + warehouse.get(transaction.getFruit())
                     + " available, operation not possible");
         }

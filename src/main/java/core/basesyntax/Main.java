@@ -6,17 +6,16 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.ReportCreate;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
-import core.basesyntax.service.impl.ReportCreateImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.service.impl.operation.BalanceOperationHandler;
 import core.basesyntax.service.impl.operation.PurchaseOperationHandler;
-import core.basesyntax.service.impl.operation.ReturnOperationHandler;
 import core.basesyntax.service.impl.operation.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -37,16 +36,18 @@ public class Main {
         operationStrategyMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler());
         operationStrategyMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler());
+                new SupplyOperationHandler());
         FileReader readCsv = new FileReaderImpl();
         List<String> csvStrings = readCsv.read(INPUT_FILE_NAME);
-        TransactionParser transactionParser = new TransactionParserImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationStrategyMap);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
-        shopService.processTransactions(transactionParser.getTransactions(csvStrings));
-        ReportCreate report = new ReportCreateImpl();
+        TransactionParser transactionParser = new TransactionParserImpl();
+        List<FruitTransaction> transactions = transactionParser.getTransactions(csvStrings);
+        shopService.processTransactions(transactions);
+        WarehouseDao warehouse = new WarehouseDaoImpl();
+        ReportCreator reportCreator = new ReportCreatorImpl(warehouse);
+        String report = reportCreator.getReport(warehouse.getWarehouse());
         FileWriter fileWriter = new FileWriterImpl();
-        WarehouseDao warehouseDao = new WarehouseDaoImpl();
-        fileWriter.write(report.getReport(warehouseDao.getWarehouse()), REPORT_FILE_NAME);
+        fileWriter.write(report, REPORT_FILE_NAME);
     }
 }
