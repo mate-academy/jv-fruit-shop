@@ -48,7 +48,6 @@ public class Main {
 
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.report();
-        System.out.println(report);
 
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(report);

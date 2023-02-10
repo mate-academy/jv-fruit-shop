@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String TITLE = "fruit,quantity\n";
+    private static final String TITLE = "fruit,quantity";
     private static final String SEPARATOR = ",";
     private static final Map<String, Integer> STORAGE = FruitStorage.fruits;
 
@@ -14,7 +14,7 @@ public class ReportServiceImpl implements ReportService {
     public String report() {
         String report = TITLE;
         report += STORAGE.keySet().stream()
-                .map(k -> k + SEPARATOR + STORAGE.get(k) + System.lineSeparator())
+                .map(k -> System.lineSeparator() + k + SEPARATOR + STORAGE.get(k))
                 .collect(Collectors.joining());
         return report;
     }
