@@ -1,8 +1,8 @@
 package service;
 
-import fruitscontent.FruitsContent;
+import fruitscontent.FruitTransaction;
 import java.util.List;
 
 public interface FruitShopService {
-    void processOfOperations(List<FruitsContent> parsedData);
+    void processOfOperations(List<FruitTransaction> parsedData);
 }

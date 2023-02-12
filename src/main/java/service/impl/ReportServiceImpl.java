@@ -14,7 +14,7 @@ public class ReportServiceImpl implements ReportService {
     public String report() {
         String report = TITLE;
         report += STORAGE.keySet().stream()
-                .map(k -> k + SEPARATOR + STORAGE.get(k) + System.lineSeparator())
+                .map(fruit -> fruit + SEPARATOR + STORAGE.get(fruit) + System.lineSeparator())
                 .collect(Collectors.joining());
         return report;
     }

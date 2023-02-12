@@ -1,6 +1,6 @@
 package fruitscontent;
 
-public class FruitsContent {
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;

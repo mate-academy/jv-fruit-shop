@@ -1,7 +1,7 @@
 package strategy;
 
-import fruitscontent.FruitsContent;
+import fruitscontent.FruitTransaction;
 
 public interface OperationHandler {
-    void handle(FruitsContent transaction);
+    void handle(FruitTransaction transaction);
 }

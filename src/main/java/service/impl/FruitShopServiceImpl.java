@@ -1,6 +1,6 @@
 package service.impl;
 
-import fruitscontent.FruitsContent;
+import fruitscontent.FruitTransaction;
 import java.util.List;
 import service.FruitShopService;
 import strategy.OperationStrategy;
@@ -13,8 +13,8 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void processOfOperations(List<FruitsContent> parsedData) {
-        for (FruitsContent line : parsedData) {
+    public void processOfOperations(List<FruitTransaction> parsedData) {
+        for (FruitTransaction line : parsedData) {
             operationStrategy.get(line.getOperation()).handle(line);
         }
     }

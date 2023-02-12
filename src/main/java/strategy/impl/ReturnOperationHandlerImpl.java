@@ -1,12 +1,12 @@
 package strategy.impl;
 
 import db.FruitStorage;
-import fruitscontent.FruitsContent;
+import fruitscontent.FruitTransaction;
 import strategy.OperationHandler;
 
 public class ReturnOperationHandlerImpl implements OperationHandler {
     @Override
-    public void handle(FruitsContent transaction) {
+    public void handle(FruitTransaction transaction) {
         int oldQuantity = FruitStorage.fruits.get(transaction.getFruit());
         FruitStorage.fruits.put(transaction.getFruit(), oldQuantity + transaction.getQuantity());
     }

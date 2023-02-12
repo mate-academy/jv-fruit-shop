@@ -1,4 +1,4 @@
-import fruitscontent.FruitsContent;
+import fruitscontent.FruitTransaction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,24 +22,25 @@ import strategy.impl.SupplyOperationHandlerImpl;
 
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
 
-        Map<FruitsContent.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitsContent.Operation.BALANCE,
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandlerImpl());
-        operationHandlerMap.put(FruitsContent.Operation.PURCHASE,
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandlerImpl());
-        operationHandlerMap.put(FruitsContent.Operation.SUPPLY,
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandlerImpl());
-        operationHandlerMap.put(FruitsContent.Operation.RETURN,
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandlerImpl());
 
         ReaderService readerService = new ReaderServiceImpl();
         List<String> inputData = readerService.readFromFile(INPUT_FILE_PATH);
 
         ParserOperationService transactionService = new ParserOperationServiceImpl();
-        List<FruitsContent> fruitTransactions =
+        List<FruitTransaction> fruitTransactions =
                 transactionService.parseContentForOperations(inputData);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
@@ -51,6 +52,6 @@ public class Main {
         System.out.println(report);
 
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile(report);
+        writerService.writeToFile(report, OUTPUT_FILE_PATH);
     }
 }
