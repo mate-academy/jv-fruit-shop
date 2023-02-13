@@ -29,15 +29,16 @@ public class Main {
     private static final String REPORT_FILE_NAME = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
+        WarehouseDao warehouseDao = new WarehouseDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler());
+                new BalanceOperationHandler(warehouseDao));
         operationStrategyMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler());
+                new SupplyOperationHandler(warehouseDao));
         operationStrategyMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler());
+                new PurchaseOperationHandler(warehouseDao));
         operationStrategyMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler());
+                new ReturnOperationHandler(warehouseDao));
         FileReader readCsv = new FileReaderImpl();
         List<String> csvStrings = readCsv.read(INPUT_FILE_NAME);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationStrategyMap);
@@ -45,7 +46,6 @@ public class Main {
         TransactionParser transactionParser = new TransactionParserImpl();
         List<FruitTransaction> transactions = transactionParser.getTransactions(csvStrings);
         shopService.processTransactions(transactions);
-        WarehouseDao warehouseDao = new WarehouseDaoImpl();
         ReportCreator reportCreator = new ReportCreatorImpl(warehouseDao);
         String report = reportCreator.getReport(warehouseDao.getLeftovers());
         FileWriter fileWriter = new FileWriterImpl();

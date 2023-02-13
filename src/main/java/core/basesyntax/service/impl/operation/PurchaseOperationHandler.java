@@ -1,12 +1,15 @@
 package core.basesyntax.service.impl.operation;
 
 import core.basesyntax.dao.WarehouseDao;
-import core.basesyntax.dao.WarehouseDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    private final WarehouseDao warehouseDao = new WarehouseDaoImpl();
+    private WarehouseDao warehouseDao;
+
+    public PurchaseOperationHandler(WarehouseDao warehouseDao) {
+        this.warehouseDao = warehouseDao;
+    }
 
     @Override
     public void handle(FruitTransaction transaction) {
