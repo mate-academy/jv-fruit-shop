@@ -10,6 +10,6 @@ public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        warehouseDao.addLeftovers(transaction.getFruit(), transaction.getQuantity());
+        warehouseDao.updateQuantity(transaction.getFruit(), transaction.getQuantity());
     }
 }

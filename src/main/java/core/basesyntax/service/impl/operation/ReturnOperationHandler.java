@@ -5,7 +5,7 @@ import core.basesyntax.dao.WarehouseDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 
-public class SupplyOperationHandler implements OperationHandler {
+public class ReturnOperationHandler implements OperationHandler {
     private final WarehouseDao warehouseDao = new WarehouseDaoImpl();
 
     @Override
@@ -19,3 +19,4 @@ public class SupplyOperationHandler implements OperationHandler {
         }
     }
 }
+
