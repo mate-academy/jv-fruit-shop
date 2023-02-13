@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FileWriterImpl implements FileWriter {
-
     @Override
     public void write(String text, String fileName) {
         Path path = Paths.get(fileName);

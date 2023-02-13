@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class WarehouseDaoImpl implements WarehouseDao {
     @Override
-    public void updateQuantity(String fruit, Integer quantity) {
+    public void setQuantity(String fruit, Integer quantity) {
         warehouse.put(fruit, quantity);
     }
 
@@ -17,13 +17,8 @@ public class WarehouseDaoImpl implements WarehouseDao {
     }
 
     @Override
-    public String getFruitFromDb(String fruit) {
-        for (Map.Entry<String, Integer> entry : warehouse.entrySet()) {
-            if (entry.getKey().equals(fruit)) {
-                return entry.getKey();
-            }
-        }
-        throw new RuntimeException("Can't find fruit \"" + fruit + "\" in data base");
+    public boolean isPresent(String fruit) {
+        return warehouse.containsKey(fruit);
     }
 
     @Override

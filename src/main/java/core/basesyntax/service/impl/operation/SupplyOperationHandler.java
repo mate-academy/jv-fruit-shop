@@ -10,12 +10,12 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        String fruitFromDb = warehouseDao.getFruitFromDb(transaction.getFruit());
         int quantityFromDb = warehouseDao.getQuantity(transaction.getFruit());
-        if (fruitFromDb == null) {
-            warehouseDao.updateQuantity(transaction.getFruit(), transaction.getQuantity());
+        String fruit = transaction.getFruit();
+        if (warehouseDao.isPresent(fruit)) {
+            warehouseDao.setQuantity(fruit, quantityFromDb + transaction.getQuantity());
         } else {
-            warehouseDao.updateQuantity(fruitFromDb, quantityFromDb + transaction.getQuantity());
+            warehouseDao.setQuantity(fruit, transaction.getQuantity());
         }
     }
 }
