@@ -1,0 +1,6 @@
+fruit,quantity
+banana,152
+apricot,12
+apple,90
+watermelon,8
+grape,15
