@@ -1,0 +1,13 @@
+type,fruit,quantity
+b,banana,20
+b,apple,100
+b,kivi,100
+s,banana,100
+p,kivi,100
+p,banana,13
+r,apple,10
+p,apple,20
+p,banana,5
+s,kivi,5
+s,kivi,20
+s,banana,50
