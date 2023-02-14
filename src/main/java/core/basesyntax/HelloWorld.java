@@ -3,7 +3,11 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitsDaoImpl;
 import core.basesyntax.service.calculationservice.FruitService;
 import core.basesyntax.service.calculationservice.FruitsServiceImpl;
-import core.basesyntax.service.handler.*;
+import core.basesyntax.service.handler.BalanceOperation;
+import core.basesyntax.service.handler.OperationHandler;
+import core.basesyntax.service.handler.PurchaseOperation;
+import core.basesyntax.service.handler.ReturnOperation;
+import core.basesyntax.service.handler.SupplyOperation;
 import core.basesyntax.service.handlerservice.HandlerServiceImpl;
 import core.basesyntax.service.nio.FileService;
 import core.basesyntax.service.nio.FileServiceImpl;
@@ -34,7 +38,8 @@ public class HelloWorld {
         handler.put("s", new SupplyOperation());
         handler.put("r", new ReturnOperation());
         handler.put("p", new PurchaseOperation());
-        FruitService serviceFruits = new FruitsServiceImpl(new FruitsDaoImpl(), new HandlerServiceImpl(handler));
+        FruitService serviceFruits = new FruitsServiceImpl(new FruitsDaoImpl(),
+                new HandlerServiceImpl(handler));
 
         String banana = serviceFruits.calculationFruits("banana");
         String apple = serviceFruits.calculationFruits("apple");
