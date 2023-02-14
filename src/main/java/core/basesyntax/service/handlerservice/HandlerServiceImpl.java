@@ -1,17 +1,17 @@
 package core.basesyntax.service.handlerservice;
 
-import core.basesyntax.service.handler.HandlerByActivity;
+import core.basesyntax.service.handler.OperationHandler;
 import java.util.Map;
 
 public class HandlerServiceImpl implements HandlerService {
-    private final Map<String, HandlerByActivity> stringStrategyActivityMap;
+    private final Map<String, OperationHandler> stringStrategyActivityMap;
 
-    public HandlerServiceImpl(Map<String, HandlerByActivity> stringStrategyActivityMap) {
+    public HandlerServiceImpl(Map<String, OperationHandler> stringStrategyActivityMap) {
         this.stringStrategyActivityMap = stringStrategyActivityMap;
     }
 
     @Override
-    public HandlerByActivity getSumFruit(String activity) {
+    public OperationHandler getSumFruit(String activity) {
         return stringStrategyActivityMap.get(activity);
     }
 }

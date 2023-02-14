@@ -1,5 +1,5 @@
 package core.basesyntax.service.calculationservice;
 
-public interface ServiceFruits {
+public interface FruitService {
     String calculationFruits(String nameFruit);
 }

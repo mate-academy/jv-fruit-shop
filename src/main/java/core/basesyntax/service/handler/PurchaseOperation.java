@@ -2,10 +2,9 @@ package core.basesyntax.service.handler;
 
 import java.math.BigDecimal;
 
-public class Purchase implements HandlerByActivity {
-
+public class PurchaseOperation implements OperationHandler {
     @Override
-    public BigDecimal getSumFruits(BigDecimal bigDecimalActivity) {
+    public BigDecimal handle(BigDecimal bigDecimalActivity) {
         return bigDecimalActivity.negate();
     }
 }
