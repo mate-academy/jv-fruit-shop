@@ -1,6 +1,5 @@
 package core.basesyntax.service.parser;
 
-import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.entity.FruitTransaction;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,17 +8,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TransactionParserImpl implements TransactionParser {
-
     public static final int ACTIVITY_POSITION = 0;
     public static final int FRUIT_POSITION = 1;
     public static final int QUANTITY_POSITION = 2;
-    private final FruitsDao fruitsDao;
 
-    public TransactionParserImpl(FruitsDao fruitsDao) {
-        this.fruitsDao = fruitsDao;
-    }
-
-    public void parse(List<String> str, String nameFruit) {
+    public List<FruitTransaction> parse(List<String> str, String nameFruit) {
         BigDecimal bigDecimal = new BigDecimal(0);
         List<FruitTransaction> result = new ArrayList<>();
         Map<String, List<FruitTransaction>> mapFruits = processingStringList(str).stream()
@@ -35,9 +28,9 @@ public class TransactionParserImpl implements TransactionParser {
             fruit.setActivity(map.getKey());
             fruit.setQuantity(bigDecimal);
             result.add(fruit);
-            fruitsDao.addFruitsStorage(fruit);
             bigDecimal = new BigDecimal(0);
         }
+        return result;
     }
 
     private List<FruitTransaction> processingStringList(List<String> str) {

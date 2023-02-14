@@ -1,6 +1,8 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.dao.FruitsDaoImpl;
+import core.basesyntax.entity.FruitTransaction;
 import core.basesyntax.service.calculationservice.FruitService;
 import core.basesyntax.service.calculationservice.FruitsServiceImpl;
 import core.basesyntax.service.handler.BalanceOperation;
@@ -28,10 +30,14 @@ public class HelloWorld {
         FileService fileService = new FileServiceImpl();
         List<String> stringList = fileService.read(IN_FILE);
 
-        TransactionParserImpl transactionParser = new TransactionParserImpl(new FruitsDaoImpl());
+        TransactionParserImpl transactionParser = new TransactionParserImpl();
+        FruitsDao fruitsDao = new FruitsDaoImpl();
 
-        transactionParser.parse(stringList, "banana");
-        transactionParser.parse(stringList, "apple");
+        List<FruitTransaction> banana1 = transactionParser.parse(stringList, "banana");
+        List<FruitTransaction> apple1 = transactionParser.parse(stringList, "apple");
+
+        banana1.forEach(banana -> fruitsDao.addFruitsStorage(banana));
+        apple1.forEach(apple -> fruitsDao.addFruitsStorage(apple));
 
         Map<String, OperationHandler> handler = new HashMap<>();
         handler.put("b", new BalanceOperation());
