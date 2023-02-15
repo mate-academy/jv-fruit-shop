@@ -2,11 +2,12 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParser;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class TransactionParserImpl implements TransactionParser {
+    private static final int HEAD_LINE = 0;
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
     private static final int INDEX_AMOUNT = 2;
@@ -16,13 +17,21 @@ public class TransactionParserImpl implements TransactionParser {
     @Override
     public List<FruitTransaction> parseLine(List<String> data) {
         isValidData(data);
-        List<FruitTransaction> resultList = new ArrayList<>();
-        data.stream()
-                .filter(e -> !e.equals("type,fruit,quantity"))
-                .map(e -> e.split(SEPARATOR))
-                .forEach(e -> resultList.add(new FruitTransaction(e[INDEX_OPERATION],
-                        e[INDEX_FRUIT], Integer.parseInt(e[INDEX_AMOUNT]))));
-        return resultList;
+        return data.stream()
+                .skip(HEAD_LINE)
+                .map(this::parseLineToFruitTransaction)
+                .collect(Collectors.toList());
+    }
+
+    private FruitTransaction parseLineToFruitTransaction(String line) {
+        String[] splitLine = line.split(SEPARATOR);
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(
+                FruitTransaction.Operation.getOperation(splitLine[INDEX_OPERATION])
+        );
+        fruitTransaction.setFruit(splitLine[INDEX_FRUIT]);
+        fruitTransaction.setQuantity(Integer.parseInt(splitLine[INDEX_AMOUNT]));
+        return fruitTransaction;
     }
 
     public void isValidData(List<String> inputData) {

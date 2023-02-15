@@ -3,7 +3,7 @@ package core.basesyntax.service.operation;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 
-public class PurchaseImpl implements Handler {
+public class PurchaseHandlerImpl implements Handler {
     @Override
     public void apply(FruitTransaction transaction) {
         int allAmount = FruitStorage.fruitStorage.get(transaction.getFruit())
