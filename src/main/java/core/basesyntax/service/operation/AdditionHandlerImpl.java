@@ -5,13 +5,18 @@ import core.basesyntax.model.FruitTransaction;
 
 public class AdditionHandlerImpl implements Handler {
     @Override
-    public void apply(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
+        FruitStorage.put(transaction.getFruit(), calculateQuantity(transaction));
+    }
+
+    public static int calculateQuantity(FruitTransaction transaction) {
+        int quantity = 0;
         if (FruitStorage.fruitStorage.get(transaction.getFruit()) == null) {
-            FruitStorage.fruitStorage.put(transaction.getFruit(), transaction.getQuantity());
+            quantity = transaction.getQuantity();
         } else {
-            int newQuantity = transaction.getQuantity()
+            quantity = transaction.getQuantity()
                     + FruitStorage.fruitStorage.get(transaction.getFruit());
-            FruitStorage.fruitStorage.put(transaction.getFruit(), newQuantity);
         }
+        return quantity;
     }
 }

@@ -9,4 +9,5 @@ public class FruitStorage {
     public static void put(String fruit, Integer quantity) {
         fruitStorage.put(fruit, quantity);
     }
+
 }

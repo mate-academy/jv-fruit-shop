@@ -30,11 +30,11 @@ public class Main {
         TransactionParser parser = new TransactionParserImpl();
         FileWriteService writeService = new FileWriteServiceImpl();
         List<String> data = new FilerReadServiceImpl().readFromFile(INPUT_FILE);
-        List<FruitTransaction> transactionList = parser.parseLine(data);
+        List<FruitTransaction> transactionList = parser.parseList(data);
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
         for (FruitTransaction result : transactionList) {
             Handler handler = operationStrategy.get(result.getOperation());
-            handler.apply(result);
+            handler.handle(result);
         }
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport();

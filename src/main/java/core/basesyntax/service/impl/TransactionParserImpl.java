@@ -15,7 +15,7 @@ public class TransactionParserImpl implements TransactionParser {
     private static final String VALID_DATA = "[bprs],[a-z]*,[0-9]*";
 
     @Override
-    public List<FruitTransaction> parseLine(List<String> data) {
+    public List<FruitTransaction> parseList(List<String> data) {
         isValidData(data);
         return data.stream()
                 .skip(HEAD_LINE)
@@ -27,7 +27,7 @@ public class TransactionParserImpl implements TransactionParser {
         String[] splitLine = line.split(SEPARATOR);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(
-                FruitTransaction.Operation.getOperation(splitLine[INDEX_OPERATION])
+                FruitTransaction.Operation.getByCode(splitLine[INDEX_OPERATION])
         );
         fruitTransaction.setFruit(splitLine[INDEX_FRUIT]);
         fruitTransaction.setQuantity(Integer.parseInt(splitLine[INDEX_AMOUNT]));
@@ -35,9 +35,6 @@ public class TransactionParserImpl implements TransactionParser {
     }
 
     public void isValidData(List<String> inputData) {
-        if (inputData.isEmpty()) {
-            throw new RuntimeException("File is empty");
-        }
         for (String str : inputData) {
             if (!Pattern.matches(VALID_DATA, str) && !str.equals("type,fruit,quantity")) {
                 throw new RuntimeException("Invalid input data");

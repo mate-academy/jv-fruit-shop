@@ -12,7 +12,6 @@ public class FruitTransaction {
     }
 
     public FruitTransaction() {
-
     }
 
     public Operation getOperation() {
@@ -45,23 +44,23 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String code;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String code) {
+            this.code = code;
         }
 
-        public String getOperationCode() {
-            return operation;
+        public String getCode() {
+            return code;
         }
 
-        public static Operation getOperation(String operation) {
-            for (Operation op : Operation.values()) {
-                if (operation.equals(op.getOperationCode())) {
-                    return op;
+        public static Operation getByCode(String code) {
+            for (Operation c : Operation.values()) {
+                if (code.equals(c.getCode())) {
+                    return c;
                 }
             }
-            throw new RuntimeException("This code " + operation + " is incorrect!");
+            throw new RuntimeException("This code " + code + " is incorrect!");
         }
     }
 }

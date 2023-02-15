@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface TransactionParser {
-    List<FruitTransaction> parseLine(List<String> data);
+    List<FruitTransaction> parseList(List<String> data);
 }
