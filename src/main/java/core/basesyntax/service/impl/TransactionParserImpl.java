@@ -17,8 +17,8 @@ public class TransactionParserImpl implements TransactionParser {
     @Override
     public List<FruitTransaction> parseList(List<String> data) {
         isValidData(data);
+        data.remove(0);
         return data.stream()
-                .skip(HEAD_LINE)
                 .map(this::parseLineToFruitTransaction)
                 .collect(Collectors.toList());
     }

@@ -55,9 +55,9 @@ public class FruitTransaction {
         }
 
         public static Operation getByCode(String code) {
-            for (Operation c : Operation.values()) {
-                if (code.equals(c.getCode())) {
-                    return c;
+            for (Operation op :values()) {
+                if (op.getCode().equals(code)) {
+                    return op;
                 }
             }
             throw new RuntimeException("This code " + code + " is incorrect!");
