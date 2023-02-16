@@ -2,7 +2,6 @@ package core.basesyntax.operation;
 
 import core.basesyntax.database.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operation.OperationHandler;
 
 public class BalanceOperation implements OperationHandler {
 
