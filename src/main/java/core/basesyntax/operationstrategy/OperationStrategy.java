@@ -1,12 +1,13 @@
-package core.basesyntax.operationStrategy;
+package core.basesyntax.operationstrategy;
 
-import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
+import java.util.Map;
 
 public class OperationStrategy {
-    Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
-    public OperationStrategy(Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap) {
+    public OperationStrategy(Map<FruitTransaction.Operation,
+            OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
     }
 

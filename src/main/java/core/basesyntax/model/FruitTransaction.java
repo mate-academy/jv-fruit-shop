@@ -37,11 +37,11 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
-        public static Operation getByCharacter(String character) {
+        public static Operation getByCharacter(String ch) {
             return Arrays.stream(values())
-                    .filter(operation -> operation.getOperation().equals(character))
+                    .filter(operation -> operation.getOperation().equals(ch))
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("No such operation exists: " + character));
+                    .orElseThrow(() -> new RuntimeException("No such operation exists: " + ch));
         }
 
         public String getOperation() {

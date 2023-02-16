@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface CsvReportService {
+public interface ReportInCsvService {
     String getReport();
 }
