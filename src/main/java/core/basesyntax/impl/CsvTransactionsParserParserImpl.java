@@ -1,7 +1,7 @@
 package core.basesyntax.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvTransactionsParser;
 
@@ -14,11 +14,10 @@ public class CsvTransactionsParserParserImpl implements CsvTransactionsParser {
 
     @Override
     public List<FruitTransaction> parseTransactions(List<String> transactions) {
-        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        for (int i = TITLE_POSITION; i < transactions.size(); i++) {
-            fruitTransactionList.add(parseLine(transactions.get(i)));
-        }
-        return fruitTransactionList;
+        return transactions.stream()
+                .skip(TITLE_POSITION)
+                .map(this::parseLine)
+                .collect(Collectors.toList());
     }
 
     private FruitTransaction parseLine(String line) {
