@@ -22,8 +22,8 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setOperatin(String operationSign) {
-        this.operation = convertSignToOperation(operationSign);
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     public String getFruit() {
@@ -40,6 +40,11 @@ public class FruitTransaction {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return operation.getCode() + ", " + fruit + ", " + amount;
     }
 
     public enum Operation {
@@ -60,12 +65,17 @@ public class FruitTransaction {
     }
 
     private Operation convertSignToOperation(String operationSign) {
-        return switch (operationSign) {
-            case BALANCE_SIGN -> Operation.BALANCE;
-            case SUPPLY_SIGN -> Operation.SUPPLY;
-            case PURCHASE_SIGN -> Operation.PURCHASE;
-            case RETURN_SIGN -> Operation.RETURN;
-            default -> throw new NoSuchElementException("There is no such operation.");
-        };
+        switch (operationSign) {
+            case BALANCE_SIGN:
+                return Operation.BALANCE;
+            case SUPPLY_SIGN:
+                return Operation.SUPPLY;
+            case PURCHASE_SIGN:
+                return Operation.PURCHASE;
+            case RETURN_SIGN:
+                return Operation.RETURN;
+            default:
+                throw new NoSuchElementException("There is no such operation.");
+        }
     }
 }

@@ -1,7 +1,9 @@
+import model.FruitTransaction;
 import service.CsvFileReaderService;
 import service.FileReaderService;
 
 import java.io.File;
+import java.util.List;
 
 public class Main {
 
@@ -9,6 +11,6 @@ public class Main {
         String pathToInputDataFile = "src/main/resources/inputData.csv";
         File inputData = new File(pathToInputDataFile);
         FileReaderService csvFileReader = new CsvFileReaderService();
-        System.out.println(csvFileReader.getTransactionListFromFile(inputData));
+        List<FruitTransaction> fruitTransactions = csvFileReader.getTransactionsFromFile(inputData);
     }
 }

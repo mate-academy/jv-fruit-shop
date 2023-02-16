@@ -15,7 +15,7 @@ public class CsvFileReaderService implements FileReaderService {
     private static final int AMOUNT_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> getTransactionListFromFile(File inputFile) {
+    public List<FruitTransaction> getTransactionsFromFile(File inputFile) {
         try {
             List<String> inputData = Files.readAllLines(inputFile.toPath());
             return convertToFruitTransaction(inputData);
