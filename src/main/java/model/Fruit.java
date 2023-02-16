@@ -2,8 +2,8 @@ package model;
 
 import java.util.Objects;
 
-public class Fruit {
-    private String name;
+public final class Fruit {
+    private final String name;
 
     public Fruit(String name) {
         this.name = name;
@@ -11,10 +11,6 @@ public class Fruit {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

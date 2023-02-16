@@ -15,4 +15,13 @@ public enum ActivityType {
     public String getActivity() {
         return activity;
     }
+
+    public static ActivityType getByCode(String activity) {
+        for (ActivityType activityType : values()) {
+            if (activityType.getActivity().equals(activity)) {
+                return activityType;
+            }
+        }
+        throw new RuntimeException("There is no such activity" + activity);
+    }
 }

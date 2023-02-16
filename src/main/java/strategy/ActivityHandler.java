@@ -1,5 +1,7 @@
 package strategy;
 
+import model.FruitTransaction;
+
 public interface ActivityHandler {
-    int count(int balance, int amount);
+    void handle(FruitTransaction transaction);
 }

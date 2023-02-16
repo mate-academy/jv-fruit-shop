@@ -1,10 +1,14 @@
 package strategy.impl;
 
+import db.FruitStorage;
+import model.FruitTransaction;
 import strategy.ActivityHandler;
 
 public class ReturnActivityHandler implements ActivityHandler {
     @Override
-    public int count(int balance, int amount) {
-        return balance + amount;
+    public void handle(FruitTransaction transaction) {
+        int currentAmount = FruitStorage.fruitStorage.get(transaction.getFruit());
+        FruitStorage.fruitStorage.put(
+                transaction.getFruit(), currentAmount + transaction.getAmount());
     }
 }

@@ -1,21 +1,21 @@
 package model;
 
 public class FruitTransaction {
-    private String activityType;
+    private ActivityType activityType;
     private Fruit fruit;
     private Integer amount;
 
-    public FruitTransaction(String activityType, Fruit fruit, Integer amount) {
+    public FruitTransaction(ActivityType activityType, Fruit fruit, Integer amount) {
         this.activityType = activityType;
         this.fruit = fruit;
         this.amount = amount;
     }
 
-    public String getActivityType() {
+    public ActivityType getActivityType() {
         return activityType;
     }
 
-    public void setActivityType(String activityType) {
+    public void setActivityType(ActivityType activityType) {
         this.activityType = activityType;
     }
 

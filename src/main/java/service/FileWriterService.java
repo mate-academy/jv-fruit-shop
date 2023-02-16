@@ -1,5 +1,5 @@
 package service;
 
-public interface CsvFileWriterService {
+public interface FileWriterService {
     void writeToFile(String filePath, String report);
 }

@@ -4,5 +4,5 @@ import java.util.List;
 import model.FruitTransaction;
 
 public interface FruitService {
-    void putInStorage(List<FruitTransaction> transactionList);
+    void processTransaction(List<FruitTransaction> transactionList);
 }

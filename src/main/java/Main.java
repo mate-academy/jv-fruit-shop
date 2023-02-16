@@ -4,17 +4,15 @@ import java.util.List;
 import java.util.Map;
 import model.ActivityType;
 import model.FruitTransaction;
-import service.ActivityChecker;
-import service.CsvFileReaderService;
-import service.CsvFileWriterService;
-import service.DataParser;
+import service.FileReaderService;
+import service.FileWriterService;
 import service.FruitService;
+import service.FruitTransactionParser;
 import service.ReportService;
-import service.impl.ActivityCheckerImpl;
-import service.impl.CsvFileReaderServiceImpl;
-import service.impl.CsvFileWriterServiceImpl;
-import service.impl.DataParserImpl;
+import service.impl.FileReaderServiceImpl;
+import service.impl.FileWriterServiceImpl;
 import service.impl.FruitServiceImpl;
+import service.impl.FruitTransactionParserImpl;
 import service.impl.ReportServiceImpl;
 import strategy.ActivityHandler;
 import strategy.ActivityStrategy;
@@ -31,27 +29,26 @@ public class Main {
             "src/main/resources/fruit-shop-report.csv";
 
     public static void main(String[] args) {
-        Map<String, ActivityHandler> activityHandlerMap = new HashMap<>();
+        Map<ActivityType, ActivityHandler> activityHandlerMap = new HashMap<>();
         activityHandlerMap.put(
-                ActivityType.BALANCE.getActivity(), new BalanceActivityHandler());
+                ActivityType.BALANCE, new BalanceActivityHandler());
         activityHandlerMap.put(
-                ActivityType.SUPPLY.getActivity(), new SupplyActivityHandler());
+                ActivityType.SUPPLY, new SupplyActivityHandler());
         activityHandlerMap.put(
-                ActivityType.PURCHASE.getActivity(), new PurchaceActivityHandler());
+                ActivityType.PURCHASE, new PurchaceActivityHandler());
         activityHandlerMap.put(
-                ActivityType.RETURN.getActivity(), new ReturnActivityHandler());
+                ActivityType.RETURN, new ReturnActivityHandler());
 
-        CsvFileReaderService fileReader = new CsvFileReaderServiceImpl();
-        ActivityChecker activityChecker = new ActivityCheckerImpl();
-        DataParser dataParser = new DataParserImpl(activityChecker);
+        FileReaderService fileReader = new FileReaderServiceImpl();
+        FruitTransactionParser dataParser = new FruitTransactionParserImpl();
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activityHandlerMap);
         FruitService fruitService = new FruitServiceImpl(activityStrategy);
         ReportService reportService = new ReportServiceImpl();
-        CsvFileWriterService fileWriter = new CsvFileWriterServiceImpl();
+        FileWriterService fileWriter = new FileWriterServiceImpl();
 
         List<String> inputLines = fileReader.readFromFile(FROM_FILE_PATH);
-        List<FruitTransaction> transactionList = dataParser.splitToCategories(inputLines);
-        fruitService.putInStorage(transactionList);
+        List<FruitTransaction> transactionList = dataParser.parse(inputLines);
+        fruitService.processTransaction(transactionList);
         String report = reportService.createReport(FruitStorage.fruitStorage);
         fileWriter.writeToFile(TO_FILE_PATH, report);
         System.out.println(report);

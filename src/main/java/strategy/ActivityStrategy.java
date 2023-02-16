@@ -1,5 +1,7 @@
 package strategy;
 
+import model.ActivityType;
+
 public interface ActivityStrategy {
-    ActivityHandler getActivity(String activity);
+    ActivityHandler getHandler(ActivityType activity);
 }
