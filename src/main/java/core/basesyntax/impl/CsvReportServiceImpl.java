@@ -10,7 +10,8 @@ public class CsvReportServiceImpl implements CsvReportService {
 
     @Override
     public String getReport() {
-        return TITLE + Storage.fruitStorage.entrySet().stream()
+        return TITLE + Storage.fruitStorage.entrySet()
+                .stream()
                 .map(s -> s.getKey() + DATA_SEPARATOR + s.getValue() + System.lineSeparator())
                 .collect(Collectors.joining());
     }
