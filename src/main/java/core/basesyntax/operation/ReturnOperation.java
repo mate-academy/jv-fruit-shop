@@ -1,10 +1,10 @@
-package core.basesyntax.operationimpl;
+package core.basesyntax.operation;
 
 import core.basesyntax.database.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 
-public class SupplyOperation implements OperationHandler {
+public class ReturnOperation implements OperationHandler {
 
     @Override
     public void handleOperation(FruitTransaction transaction) {
