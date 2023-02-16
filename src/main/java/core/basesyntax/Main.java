@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import core.basesyntax.impl.CsvFileReaderServiceImpl;
-import core.basesyntax.impl.CsvFileReportWriterServiceImpl;
+import core.basesyntax.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.impl.CsvReportServiceImpl;
 import core.basesyntax.impl.CsvTransactionsParserParserImpl;
 import core.basesyntax.impl.FruitShopServiceImpl;
@@ -51,7 +51,7 @@ public class Main {
         CsvReportService csvReportService = new CsvReportServiceImpl();
         String report = csvReportService.getReport();
 
-        CsvFileWriterService csvFileWriterService = new CsvFileReportWriterServiceImpl();
+        CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
         csvFileWriterService.writeToFile(report, TO_FILE_PATH);
     }
 }
