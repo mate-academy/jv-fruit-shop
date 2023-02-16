@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Arrays;
-
 public class FruitTransaction {
     private final Operation operation;
     private final String fruit;
@@ -37,11 +35,13 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
-        public static Operation getByCharacter(String ch) {
-            return Arrays.stream(values())
-                    .filter(operation -> operation.getOperation().equals(ch))
-                    .findFirst()
-                    .orElseThrow(() -> new RuntimeException("No such operation exists: " + ch));
+        public static Operation getByCharacter(String character) {
+            for (Operation operation : values()) {
+                if (operation.getOperation().equals(character)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("No such operation exists: " + character);
         }
 
         public String getOperation() {
