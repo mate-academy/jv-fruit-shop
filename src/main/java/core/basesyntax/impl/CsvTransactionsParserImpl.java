@@ -6,25 +6,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CsvTransactionsParserImpl implements CsvTransactionsParser {
-    private final int operationPosition = 0;
-    private final int fruitPosition = 1;
-    private final int quantityPosition = 2;
-    private final int titlePosition = 1;
-    private final String dataSeparator = ",";
+    private static final int OPERATION_POSITION = 0;
+    private static final int FRUIT_POSITION = 1;
+    private static final int QUANTITY_POSITION = 2;
+    private static final int TITLE_POSITION = 1;
+    private static final String DATA_SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> parseTransactions(List<String> transactions) {
         return transactions.stream()
-                .skip(titlePosition)
+                .skip(TITLE_POSITION)
                 .map(this::parseLine)
                 .collect(Collectors.toList());
     }
 
     private FruitTransaction parseLine(String line) {
-        String[] data = line.split(dataSeparator);
+        String[] data = line.split(DATA_SEPARATOR);
         return new FruitTransaction(
-                FruitTransaction.Operation.getByCharacter(data[operationPosition]),
-                data[fruitPosition],
-                Integer.parseInt(data[quantityPosition]));
+                FruitTransaction.Operation.getByCharacter(data[OPERATION_POSITION]),
+                data[FRUIT_POSITION],
+                Integer.parseInt(data[QUANTITY_POSITION]));
     }
 }
