@@ -14,8 +14,8 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public void transactionProcess(List<FruitTransaction> transactionsList) {
-        transactionsList.forEach(fruitTransaction ->
-                operationStrategy.get(fruitTransaction.getOperation())
-                .handleOperation(fruitTransaction));
+        for (FruitTransaction fruitTransaction : transactionsList) {
+            operationStrategy.handleOperation(fruitTransaction);
+        }
     }
 }
