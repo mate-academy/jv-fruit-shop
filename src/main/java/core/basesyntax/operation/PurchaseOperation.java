@@ -4,10 +4,9 @@ import core.basesyntax.database.Storage;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
-
     @Override
     public void handleOperation(FruitTransaction transaction) {
-        int oldQuantity = Storage.getFruitStorage().get(transaction.getFruit());
+        int oldQuantity = Storage.getFruitStorage().getOrDefault(transaction.getFruit(), 0);
         if (oldQuantity < transaction.getQuantity()) {
             throw new RuntimeException("Not enough fruit. The transaction could not be completed.");
         }
