@@ -1,9 +1,8 @@
 package core.basesyntax.impl;
 
+import core.basesyntax.exception.FileException;
 import core.basesyntax.service.FileValidation;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 public class CsvFileValidationImpl implements FileValidation {
     private static final String VALID_CSV_EXAMPLE =
@@ -27,15 +26,13 @@ public class CsvFileValidationImpl implements FileValidation {
 
     private void fileExists(File file) {
         if (!file.exists()) {
-            throw new RuntimeException(new FileNotFoundException("File does not exist: "
-                    + file.getAbsolutePath()));
+            throw new FileException("File does not exist: " + file.getAbsolutePath());
         }
     }
 
     private void fileReadable(File file) {
         if (!file.canRead()) {
-            throw new RuntimeException(new IOException("File is not readable: "
-                    + file.getAbsolutePath()));
+            throw new FileException("File is not readable: " + file.getAbsolutePath());
         }
     }
 
