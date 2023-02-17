@@ -51,7 +51,8 @@ public class CsvTransactionsParserImpl implements CsvTransactionsParser {
         try {
             int quantity = Integer.parseInt(quantityCell);
             if (quantity <= 0) {
-                throw new IllegalArgumentException("Quantity can't be <= 0. Actual quantity: " + quantityCell);
+                throw new IllegalArgumentException("Quantity can't be <= 0. Actual quantity: "
+                        + quantityCell);
             }
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid quantity: " + quantityCell + e);
