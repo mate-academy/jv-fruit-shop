@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.impl.CsvFileValidationImpl;
 import core.basesyntax.impl.CsvTransactionsParserImpl;
 import core.basesyntax.impl.FileReaderServiceImpl;
 import core.basesyntax.impl.FileWriterServiceImpl;
@@ -14,6 +15,7 @@ import core.basesyntax.operation.SupplyOperation;
 import core.basesyntax.operationstrategy.OperationStrategy;
 import core.basesyntax.service.CsvTransactionsParser;
 import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileValidation;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportInCsvService;
@@ -37,6 +39,9 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+
+        FileValidation fileValidation = new CsvFileValidationImpl();
+        fileValidation.validateFile(FROM_FILE_PATH);
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> processedData = fileReaderService.readCsvFile(FROM_FILE_PATH);
