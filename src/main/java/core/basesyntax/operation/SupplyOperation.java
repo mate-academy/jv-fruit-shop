@@ -6,8 +6,10 @@ import core.basesyntax.model.FruitTransaction;
 public class SupplyOperation implements OperationHandler {
     @Override
     public void handleOperation(FruitTransaction transaction) {
-        int oldQuantity = Storage.getFruitStorage().getOrDefault(transaction.getFruit(), 0);
-        Storage.getFruitStorage().put(transaction.getFruit(),
-                oldQuantity + transaction.getQuantity());
+        Storage.getFruitStorage().merge(
+                transaction.getFruit(),
+                transaction.getQuantity(),
+                Integer::sum
+        );
     }
 }
