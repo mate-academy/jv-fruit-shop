@@ -1,7 +1,8 @@
-import db.Storage;
 import model.FruitTransaction;
 import service.CsvFileReaderService;
+import service.CsvFileWriterService;
 import service.FileReaderService;
+import service.FileWriterService;
 import service.ReportService;
 import service.ReportServiceImpl;
 import service.TransactionStrategy;
@@ -41,5 +42,9 @@ public class Main {
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(transactionHandlerMap);
         ReportService reportService = new ReportServiceImpl(transactionStrategy);
         reportService.createReport(fruitTransactions);
+        String pathToReportFile = "src/main/resources/report.txt";
+        File report = new File(pathToReportFile);
+        FileWriterService fileWriterService = new CsvFileWriterService();
+        fileWriterService.saveToFile(report);
     }
 }
