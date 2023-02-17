@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileWriterServiceImpl implements FileWriterService {
-
     @Override
     public void writeToFile(String data, String toFilePath) {
         try {
