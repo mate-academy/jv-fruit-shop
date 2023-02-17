@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 public class FileReaderServiceImpl implements FileReaderService {
 
     @Override
-    public List<String> readCsvFile(String fromFileName) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(fromFileName))) {
+    public List<String> readCsvFile(String fromFilePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fromFilePath))) {
             return reader.lines().collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + fromFileName, e);
+            throw new RuntimeException("Can't read data from file " + fromFilePath, e);
         }
     }
 }
