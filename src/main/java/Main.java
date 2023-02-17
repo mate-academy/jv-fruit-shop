@@ -1,6 +1,9 @@
+import db.Storage;
 import model.FruitTransaction;
 import service.CsvFileReaderService;
 import service.FileReaderService;
+import service.ReportService;
+import service.ReportServiceImpl;
 import service.TransactionStrategy;
 import service.TransactionStrategyImpl;
 import service.transaction.BalanceTransactionHandler;
@@ -36,5 +39,7 @@ public class Main {
         transactionHandlerMap.put(FruitTransaction.Operation.RETURN, returnTransactionHandler);
         transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY, supplyTransactionHandler);
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(transactionHandlerMap);
+        ReportService reportService = new ReportServiceImpl(transactionStrategy);
+        reportService.createReport(fruitTransactions);
     }
 }
