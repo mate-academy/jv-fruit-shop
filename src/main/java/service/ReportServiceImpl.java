@@ -1,8 +1,7 @@
 package service;
 
-import model.FruitTransaction;
-
 import java.util.List;
+import model.FruitTransaction;
 
 public class ReportServiceImpl implements ReportService {
     private final TransactionStrategy transactionStrategy;

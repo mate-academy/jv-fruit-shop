@@ -18,7 +18,7 @@ public class FruitTransaction {
         this.amount = amount;
     }
 
-    public Operation getOperation () {
+    public Operation getOperation() {
         return operation;
     }
 

@@ -1,12 +1,11 @@
 package service;
 
-import model.FruitTransaction;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
+import model.FruitTransaction;
 
 public class CsvFileReaderService implements FileReaderService {
     private static final String REGEX_TO_SPLIT_STRING = ",";
@@ -23,7 +22,7 @@ public class CsvFileReaderService implements FileReaderService {
     public void readFile(File inputFile) {
         List<String> data = read(inputFile);
         data.stream()
-            .forEach(System.out::println);
+                .forEach(System.out::println);
     }
 
     private List<FruitTransaction> convertToFruitTransaction(List<String> inputData) {
