@@ -16,12 +16,14 @@ public class CsvFileReaderService implements FileReaderService {
 
     @Override
     public List<FruitTransaction> getTransactionsFromFile(File inputFile) {
-        try {
-            List<String> inputData = Files.readAllLines(inputFile.toPath());
-            return convertToFruitTransaction(inputData);
-        } catch (IOException e) {
-            throw new RuntimeException("Can’t read file", e);
-        }
+        return convertToFruitTransaction(read(inputFile));
+    }
+
+    @Override
+    public void readFile(File inputFile) {
+        List<String> data = read(inputFile);
+        data.stream()
+            .forEach(System.out::println);
     }
 
     private List<FruitTransaction> convertToFruitTransaction(List<String> inputData) {
@@ -31,5 +33,13 @@ public class CsvFileReaderService implements FileReaderService {
                                                 a[FRUIT_NAME_INDEX],
                                                 Integer.parseInt(a[AMOUNT_INDEX])))
                 .collect(Collectors.toList());
+    }
+
+    private List<String> read(File file) {
+        try {
+            return Files.readAllLines(file.toPath());
+        } catch (IOException e) {
+            throw new RuntimeException("Can’t read file", e);
+        }
     }
 }

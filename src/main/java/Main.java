@@ -42,9 +42,10 @@ public class Main {
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(transactionHandlerMap);
         ReportService reportService = new ReportServiceImpl(transactionStrategy);
         reportService.createReport(fruitTransactions);
-        String pathToReportFile = "src/main/resources/report.txt";
+        String pathToReportFile = "src/main/resources/report.csv";
         File report = new File(pathToReportFile);
         FileWriterService fileWriterService = new CsvFileWriterService();
         fileWriterService.saveToFile(report);
+        csvFileReader.readFile(report);
     }
 }
