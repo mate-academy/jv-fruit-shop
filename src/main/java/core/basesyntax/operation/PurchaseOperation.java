@@ -9,6 +9,14 @@ public class PurchaseOperation implements OperationHandler {
         Storage.getFruitStorage().merge(
                 transaction.getFruit(),
                 transaction.getQuantity(),
-                (oldValue, newValue) -> oldValue - newValue);
+                PurchaseOperation::purchaseOperation);
+    }
+
+    private static Integer purchaseOperation(Integer oldValue, Integer newValue) {
+        int result = oldValue - newValue;
+        if (result < 0) {
+            throw new RuntimeException("Not enough fruit. The transaction could not be completed.");
+        }
+        return result;
     }
 }
