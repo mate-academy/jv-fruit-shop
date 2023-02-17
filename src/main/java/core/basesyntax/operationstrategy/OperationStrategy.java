@@ -12,11 +12,11 @@ public class OperationStrategy {
         this.operationHandlerMap = operationHandlerMap;
     }
 
-    private OperationHandler get(FruitTransaction fruitTransaction) {
-        return operationHandlerMap.get(fruitTransaction.getOperation());
-    }
-
     public void handleOperation(FruitTransaction fruitTransaction) {
         get(fruitTransaction).handleOperation(fruitTransaction);
+    }
+
+    private OperationHandler get(FruitTransaction fruitTransaction) {
+        return operationHandlerMap.get(fruitTransaction.getOperation());
     }
 }
