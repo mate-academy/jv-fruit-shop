@@ -10,7 +10,7 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public Integer getAmount(String fruit) {
-        return Storage.storage.get(fruit);
+        return Storage.storage.getOrDefault(fruit, 0);
     }
 
     @Override
