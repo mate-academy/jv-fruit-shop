@@ -29,23 +29,23 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String operation;
+        private final String code;
 
-        Operation(String operation) {
-            this.operation = operation;
+        Operation(String code) {
+            this.code = code;
         }
 
-        public static Operation getByCharacter(String character) {
+        public static Operation getByCode(String code) {
             for (Operation operation : values()) {
-                if (operation.getOperation().equals(character)) {
+                if (operation.getCode().equals(code)) {
                     return operation;
                 }
             }
-            throw new RuntimeException("No such operation exists: " + character);
+            throw new RuntimeException("No such operation exists: " + code);
         }
 
-        public String getOperation() {
-            return operation;
+        public String getCode() {
+            return code;
         }
     }
 }
