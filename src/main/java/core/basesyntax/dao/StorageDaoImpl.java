@@ -2,7 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
-
 import java.util.stream.Collectors;
 
 public class StorageDaoImpl implements StorageDao {
@@ -27,7 +26,8 @@ public class StorageDaoImpl implements StorageDao {
             Storage.fruitStorage.put(transaction.getFruitName(), transaction.getQuantity());
         }
         Integer currentQuantity = Storage.fruitStorage.get(transaction.getFruitName());
-        Storage.fruitStorage.put(transaction.getFruitName(), transaction.getQuantity() + currentQuantity);
+        Storage.fruitStorage.put(transaction.getFruitName(), transaction.getQuantity()
+                + currentQuantity);
     }
 
     @Override
@@ -39,6 +39,4 @@ public class StorageDaoImpl implements StorageDao {
                     return builder.toString();
                 }).collect(Collectors.joining(System.lineSeparator()));
     }
-
-
 }

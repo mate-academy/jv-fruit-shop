@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ConverterService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
