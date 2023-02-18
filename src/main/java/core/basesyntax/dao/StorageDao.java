@@ -6,4 +6,5 @@ public interface StorageDao {
     void addToStorage(Transaction transaction);
     void removeFromStorage(Transaction transaction);
     void updateStorage(Transaction transaction);
+    String getInformation();
 }

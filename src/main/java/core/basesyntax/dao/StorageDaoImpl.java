@@ -3,6 +3,8 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
 
+import java.util.stream.Collectors;
+
 public class StorageDaoImpl implements StorageDao {
     @Override
     public void addToStorage(Transaction transaction) {
@@ -26,6 +28,16 @@ public class StorageDaoImpl implements StorageDao {
         }
         Integer currentQuantity = Storage.fruitStorage.get(transaction.getFruitName());
         Storage.fruitStorage.put(transaction.getFruitName(), transaction.getQuantity() + currentQuantity);
+    }
+
+    @Override
+    public String getInformation() {
+        return Storage.fruitStorage.entrySet().stream()
+                .map(e -> {
+                    StringBuilder builder = new StringBuilder();
+                    builder.append(e.getKey()).append(",").append(e.getValue());
+                    return builder.toString();
+                }).collect(Collectors.joining(System.lineSeparator()));
     }
 
 
