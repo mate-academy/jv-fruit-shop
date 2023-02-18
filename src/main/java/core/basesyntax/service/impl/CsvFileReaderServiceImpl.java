@@ -8,13 +8,15 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class CsvFileReaderServiceImpl implements FileReaderService {
+    private static final int TITLE_LINE_INDEX = 0;
+
     @Override
     public List<String> readFromFile(String fromFile) {
         File file = new File(fromFile);
         List<String> transactions;
         try {
             transactions = Files.readAllLines(file.toPath());
-            transactions.remove(0);
+            transactions.remove(TITLE_LINE_INDEX);
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + file + e);
         }
