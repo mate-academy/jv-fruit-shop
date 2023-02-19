@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Transaction;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
@@ -31,12 +31,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public String getInformation() {
-        return Storage.fruitStorage.entrySet().stream()
-                .map(e -> {
-                    StringBuilder builder = new StringBuilder();
-                    builder.append(e.getKey()).append(",").append(e.getValue());
-                    return builder.toString();
-                }).collect(Collectors.joining(System.lineSeparator()));
+    public Map<String, Integer> getMapHandler() {
+        return Storage.fruitStorage;
     }
 }

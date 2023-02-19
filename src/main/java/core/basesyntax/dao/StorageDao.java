@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.Transaction;
+import java.util.Map;
 
 public interface StorageDao {
     void addToStorage(Transaction transaction);
@@ -9,5 +10,5 @@ public interface StorageDao {
 
     void updateStorage(Transaction transaction);
 
-    String getInformation();
+    Map<String, Integer> getMapHandler();
 }

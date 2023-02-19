@@ -11,7 +11,7 @@ public class ConverterTransactionServiceImp implements ConverterService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<Transaction> convertFromStringToFunction(List<String> transactions) {
+    public List<Transaction> convertFromString(List<String> transactions) {
         return transactions.stream()
                 .map(s -> s.split(","))
                 .map(t -> {

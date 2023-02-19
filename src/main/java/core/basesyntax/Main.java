@@ -29,7 +29,7 @@ public class Main {
         List<String> readFromFile = readerService.readFromFile("transaction.csv");
 
         ConverterService converterService = new ConverterTransactionServiceImp();
-        List<Transaction> transactions = converterService.convertFromStringToFunction(readFromFile);
+        List<Transaction> transactions = converterService.convertFromString(readFromFile);
 
         StorageDao storageDao = new StorageDaoImpl();
         TransactionStrategy transactionStrategy =
@@ -37,7 +37,8 @@ public class Main {
         transactionStrategy.processTransaction(transactions);
 
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.getReportFruitStorage(storageDao.getInformation());
+        String infoForReport = reportService.getInfoForReport(storageDao.getMapHandler());
+        String report = reportService.getReportFruitStorage(infoForReport);
 
         FileWriterService writerService = new CsvFileWriterServiceImpl();
         writerService.writeToFile(report, "report.csv");
