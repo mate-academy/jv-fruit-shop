@@ -6,7 +6,7 @@ import core.basesyntax.service.ConverterService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ConverterTransactionServiceImp implements ConverterService {
+public class ConverterTransactionServiceImpl implements ConverterService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;

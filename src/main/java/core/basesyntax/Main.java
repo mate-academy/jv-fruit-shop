@@ -8,7 +8,7 @@ import core.basesyntax.service.ConverterService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.impl.ConverterTransactionServiceImp;
+import core.basesyntax.service.impl.ConverterTransactionServiceImpl;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -32,7 +32,7 @@ public class Main {
         List<String> readFromFile = readerService
                 .readFromFile(READ_FILE_PATH);
 
-        ConverterService converterService = new ConverterTransactionServiceImp();
+        ConverterService converterService = new ConverterTransactionServiceImpl();
         List<Transaction> transactions = converterService.convertFromString(readFromFile);
 
         StorageDao storageDao = new StorageDaoImpl();
@@ -40,8 +40,8 @@ public class Main {
                 new TransactionStrategyImpl(initHandlerMap(storageDao));
         transactionStrategy.processTransactions(transactions);
 
-        ReportService reportService = new ReportServiceImpl(storageDao);
-        String report = reportService.getReport();
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.getReport(storageDao.getFruitsFromStorage());
 
         FileWriterService writerService = new CsvFileWriterServiceImpl();
         writerService.writeToFile(report, WRITE_FILE_PATH);

@@ -12,6 +12,12 @@ public class PurchaseTransactionHandler implements TransactionHandler {
 
     @Override
     public void handle(Transaction transaction) {
-        storageDao.removeFromStorage(transaction.getFruitName(), transaction.getQuantity());
+        Integer currentQuantity = storageDao.getFruitsFromStorage()
+                .get(transaction.getFruitName());
+        int difference = currentQuantity - transaction.getQuantity();
+        if (difference < 0) {
+            throw new RuntimeException(transaction.getFruitName() + " not enough at the storage");
+        }
+        storageDao.updateStorage(transaction.getFruitName(), difference);
     }
 }
