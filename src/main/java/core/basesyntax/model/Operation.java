@@ -14,13 +14,12 @@ public enum Operation {
         this.code = code;
     }
 
-    public static Operation getByCode(String operation) {
-        switch (operation) {
-            case "b": return Operation.BALANCE;
-            case "s": return Operation.SUPPLY;
-            case "p": return Operation.PURCHASE;
-            case "r": return Operation.RETURN;
-            default: throw new NoSuchElementException("Operation " + operation + " doesn't exist");
+    public static Operation getByCode(String code) {
+        for(Operation operation : Operation.values()) {
+            if (operation.code.equals(code)) {
+                return operation;
+            }
         }
+        throw new NoSuchElementException("Operation " + code + " doesn't exist");
     }
 }
