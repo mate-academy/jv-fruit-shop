@@ -7,22 +7,16 @@ import java.util.List;
 import java.util.Map;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
-    private Map<Operation, TransactionHandler> transactionHandlerMap;
+    private Map<Operation, TransactionHandler> handlerMap;
 
     public TransactionStrategyImpl(Map<Operation, TransactionHandler> transactionHandlerMap) {
-        this.transactionHandlerMap = transactionHandlerMap;
+        this.handlerMap = transactionHandlerMap;
     }
 
     @Override
-    public void processTransaction(List<Transaction> transactions) {
+    public void processTransactions(List<Transaction> transactions) {
         for (Transaction transaction : transactions) {
-            get(transaction.getOperation()).makeTransaction(transaction);
+            handlerMap.get(transaction.getOperation()).handle(transaction);
         }
     }
-
-    @Override
-    public TransactionHandler get(Operation operation) {
-        return transactionHandlerMap.get(operation);
-    }
-
 }

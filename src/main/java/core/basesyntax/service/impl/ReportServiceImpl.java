@@ -15,13 +15,13 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String getReport() {
         StringBuilder builder = new StringBuilder("fruit,quantity");
-        String infoForRepo = getInfoForReport(storageDao.getMapHandler());
+        String infoForRepo = getInfoForReport();
         builder.append(System.lineSeparator()).append(infoForRepo);
         return builder.toString();
     }
 
-    private String getInfoForReport(Map<String, Integer> mapHandler) {
-        return mapHandler.entrySet().stream()
+    private String getInfoForReport() {
+        return storageDao.getMapHandler().entrySet().stream()
                 .map(e -> {
                     StringBuilder builder = new StringBuilder();
                     builder.append(e.getKey()).append(",").append(e.getValue());

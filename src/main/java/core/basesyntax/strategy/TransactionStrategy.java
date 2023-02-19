@@ -6,7 +6,5 @@ import core.basesyntax.service.transaction.TransactionHandler;
 import java.util.List;
 
 public interface TransactionStrategy {
-    void processTransaction(List<Transaction> transactions);
-
-    TransactionHandler get(Operation operation);
+    void processTransactions(List<Transaction> transactions);
 }
