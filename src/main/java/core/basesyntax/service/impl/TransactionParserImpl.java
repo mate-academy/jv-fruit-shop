@@ -1,4 +1,4 @@
-package core.basesyntax.serviceImpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
@@ -13,7 +13,7 @@ public class TransactionParserImpl implements TransactionParser {
 
     @Override
     public List<FruitTransaction> parse(List<String> transactions) {
-         return transactions.stream()
+        return transactions.stream()
                 .skip(1)
                 .map(this::getFruitTransaction)
                 .collect(Collectors.toList());
@@ -21,8 +21,8 @@ public class TransactionParserImpl implements TransactionParser {
 
     private FruitTransaction getFruitTransaction(String line) {
         String[] split = line.split(",");
-        return new FruitTransaction(Operation.getByCode(split[INDEX_OF_OPERATION])
-                ,split[INDEX_OF_NAME],
+        return new FruitTransaction(Operation.getByCode(split[INDEX_OF_OPERATION]),
+                split[INDEX_OF_NAME],
                 Integer.parseInt(split[INDEX_OF_AMONG]));
     }
 }

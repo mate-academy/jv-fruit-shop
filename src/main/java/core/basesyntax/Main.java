@@ -6,21 +6,21 @@ import core.basesyntax.operations.BalanceOperationHandler;
 import core.basesyntax.operations.PurchaseOperationHandler;
 import core.basesyntax.operations.ReturnOperationHandler;
 import core.basesyntax.operations.SupplyOperationHandler;
-import core.basesyntax.service.*;
-import core.basesyntax.serviceImpl.FileServiceImpl;
-import core.basesyntax.serviceImpl.OperationStrategyImpl;
-import core.basesyntax.serviceImpl.ReportServiceImpl;
-import core.basesyntax.serviceImpl.TransactionParserImpl;
-
-import java.io.File;
+import core.basesyntax.service.FileService;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.impl.FileServiceImpl;
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
+
     private static final String INPUT_FILE_PATH = "src/main/java/resources/inputdata.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/java/resources/outputdata.csv";
 
