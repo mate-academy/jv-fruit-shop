@@ -1,14 +1,21 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.service.ReportService;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
+    private StorageDao storageDao;
+
+    public ReportServiceImpl(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
+
     @Override
-    public String getReportFruitStorage(Map<String, Integer> mapHandler) {
+    public String getReport() {
         StringBuilder builder = new StringBuilder("fruit,quantity");
-        String infoForRepo = getInfoForReport(mapHandler);
+        String infoForRepo = getInfoForReport(storageDao.getMapHandler());
         builder.append(System.lineSeparator()).append(infoForRepo);
         return builder.toString();
     }
