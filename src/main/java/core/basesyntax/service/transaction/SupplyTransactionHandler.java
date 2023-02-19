@@ -12,6 +12,6 @@ public class SupplyTransactionHandler implements TransactionHandler {
 
     @Override
     public void makeTransaction(Transaction transaction) {
-        storageDao.updateStorage(transaction);
+        storageDao.updateStorage(transaction.getFruitName(), transaction.getQuantity());
     }
 }

@@ -6,28 +6,27 @@ import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
-    public void addToStorage(Transaction transaction) {
-        Storage.fruitStorage.put(transaction.getFruitName(), transaction.getQuantity());
+    public void addToStorage(String fruit, int quantity) {
+        Storage.fruitStorage.put(fruit, quantity);
     }
 
     @Override
-    public void removeFromStorage(Transaction transaction) {
-        Integer currentQuantity = Storage.fruitStorage.get(transaction.getFruitName());
-        int difference = currentQuantity - transaction.getQuantity();
+    public void removeFromStorage(String fruit, int quantity) {
+        Integer currentQuantity = Storage.fruitStorage.get(fruit);
+        int difference = currentQuantity - quantity;
         if (difference < 0) {
-            throw new RuntimeException(transaction.getFruitName() + " not enough at the storage");
+            throw new RuntimeException(fruit + " not enough at the storage");
         }
-        Storage.fruitStorage.put(transaction.getFruitName(), difference);
+        Storage.fruitStorage.put(fruit, difference);
     }
 
     @Override
-    public void updateStorage(Transaction transaction) {
-        if (!Storage.fruitStorage.containsKey(transaction.getFruitName())) {
-            Storage.fruitStorage.put(transaction.getFruitName(), transaction.getQuantity());
+    public void updateStorage(String fruit, int quantity) {
+        if (!Storage.fruitStorage.containsKey(fruit)) {
+            Storage.fruitStorage.put(fruit, quantity);
         }
-        Integer currentQuantity = Storage.fruitStorage.get(transaction.getFruitName());
-        Storage.fruitStorage.put(transaction.getFruitName(), transaction.getQuantity()
-                + currentQuantity);
+        Integer currentQuantity = Storage.fruitStorage.get(fruit);
+        Storage.fruitStorage.put(fruit, quantity + currentQuantity);
     }
 
     @Override
