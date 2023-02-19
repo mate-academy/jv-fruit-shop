@@ -24,10 +24,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String READ_FILE_PATH = "src/main/resources/transaction.csv";
+    private static final String WRITE_FILE_PATH = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         FileReaderService readerService = new CsvFileReaderServiceImpl();
         List<String> readFromFile = readerService
-                .readFromFile("src/main/resources/transaction.csv");
+                .readFromFile(READ_FILE_PATH);
 
         ConverterService converterService = new ConverterTransactionServiceImp();
         List<Transaction> transactions = converterService.convertFromString(readFromFile);
@@ -35,14 +38,13 @@ public class Main {
         StorageDao storageDao = new StorageDaoImpl();
         TransactionStrategy transactionStrategy =
                 new TransactionStrategyImpl(initHandlerMap(storageDao));
-        transactionStrategy.processTransaction(transactions);
+        transactionStrategy.processTransactions(transactions);
 
-        ReportService reportService = new ReportServiceImpl();
-        String infoForReport = reportService.getInfoForReport(storageDao.getMapHandler());
-        String report = reportService.getReportFruitStorage(infoForReport);
+        ReportService reportService = new ReportServiceImpl(storageDao);
+        String report = reportService.getReport();
 
         FileWriterService writerService = new CsvFileWriterServiceImpl();
-        writerService.writeToFile(report, "src/main/resources/report.csv");
+        writerService.writeToFile(report, WRITE_FILE_PATH);
     }
 
     private static Map<Operation, TransactionHandler> initHandlerMap(StorageDao storageDao) {

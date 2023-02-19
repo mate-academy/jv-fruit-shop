@@ -1,6 +1,5 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Transaction;
 import java.util.Map;
 
 public interface StorageDao {

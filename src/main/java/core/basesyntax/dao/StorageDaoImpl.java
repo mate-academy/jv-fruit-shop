@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Transaction;
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
