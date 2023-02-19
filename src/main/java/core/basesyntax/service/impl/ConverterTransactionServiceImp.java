@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ConverterService;
 import java.util.List;
@@ -14,11 +15,13 @@ public class ConverterTransactionServiceImp implements ConverterService {
     public List<Transaction> convertFromString(List<String> transactions) {
         return transactions.stream()
                 .map(s -> s.split(","))
-                .map(t -> {
-                    String operation = t[OPERATION_INDEX];
-                    String fruit = t[FRUIT_NAME_INDEX];
-                    int quantity = Integer.parseInt(t[QUANTITY_INDEX]);
-                    return new Transaction(operation, fruit, quantity);
-                }).collect(Collectors.toList());
+                .map(this::parseToTransaction).collect(Collectors.toList());
+    }
+
+    private Transaction parseToTransaction(String[] line) {
+        String operation = line[OPERATION_INDEX];
+        String fruit = line[FRUIT_NAME_INDEX];
+        int quantity = Integer.parseInt(line[QUANTITY_INDEX]);
+        return new Transaction(Operation.getByCode(operation), fruit, quantity);
     }
 }

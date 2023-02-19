@@ -5,8 +5,8 @@ public class Transaction {
     private String fruitName;
     private int quantity;
 
-    public Transaction(String operation, String fruitName, int quantity) {
-        this.operation = Operation.getByCode(operation);
+    public Transaction(Operation operation, String fruitName, int quantity) {
+        this.operation = operation;
         this.fruitName = fruitName;
         this.quantity = quantity;
     }
