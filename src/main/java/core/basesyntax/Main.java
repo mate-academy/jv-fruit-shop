@@ -26,7 +26,8 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         FileReaderService readerService = new CsvFileReaderServiceImpl();
-        List<String> readFromFile = readerService.readFromFile("transaction.csv");
+        List<String> readFromFile = readerService
+                .readFromFile("src/main/resources/transaction.csv");
 
         ConverterService converterService = new ConverterTransactionServiceImp();
         List<Transaction> transactions = converterService.convertFromString(readFromFile);
@@ -41,7 +42,7 @@ public class Main {
         String report = reportService.getReportFruitStorage(infoForReport);
 
         FileWriterService writerService = new CsvFileWriterServiceImpl();
-        writerService.writeToFile(report, "report.csv");
+        writerService.writeToFile(report, "src/main/resources/report.csv");
     }
 
     private static Map<Operation, TransactionHandler> initHandlerMap(StorageDao storageDao) {
