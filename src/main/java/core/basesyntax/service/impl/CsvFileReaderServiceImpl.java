@@ -17,7 +17,7 @@ public class CsvFileReaderServiceImpl implements FileReaderService {
             transactions = Files.readAllLines(file.toPath());
             transactions.remove(TITLE_LINE_INDEX);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + file + e);
+            throw new RuntimeException("Can't read from file " + file, e);
         }
         return transactions;
     }

@@ -11,7 +11,7 @@ public class PurchaseTransactionHandler implements TransactionHandler {
     }
 
     @Override
-    public void makeTransaction(Transaction transaction) {
+    public void handle(Transaction transaction) {
         storageDao.removeFromStorage(transaction.getFruitName(), transaction.getQuantity());
     }
 }

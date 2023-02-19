@@ -11,7 +11,7 @@ public class BalanceTransactionHandler implements TransactionHandler {
     }
 
     @Override
-    public void makeTransaction(Transaction transaction) {
+    public void handle(Transaction transaction) {
         storageDao.addToStorage(transaction.getFruitName(), transaction.getQuantity());
     }
 }
