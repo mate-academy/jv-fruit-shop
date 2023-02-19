@@ -6,14 +6,14 @@ import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
     @Override
-    public String getReportFruitStorage(String information) {
+    public String getReportFruitStorage(Map<String, Integer> mapHandler) {
         StringBuilder builder = new StringBuilder("fruit,quantity");
-        builder.append(System.lineSeparator()).append(information);
+        String infoForRepo = getInfoForReport(mapHandler);
+        builder.append(System.lineSeparator()).append(infoForRepo);
         return builder.toString();
     }
 
-    @Override
-    public String getInfoForReport(Map<String, Integer> mapHandler) {
+    private String getInfoForReport(Map<String, Integer> mapHandler) {
         return mapHandler.entrySet().stream()
                 .map(e -> {
                     StringBuilder builder = new StringBuilder();
