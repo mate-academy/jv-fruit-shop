@@ -11,7 +11,7 @@ public class TransactionParserImpl implements TransactionParser {
     public static final int QUANTITY_POSITION = 2;
 
     @Override
-    public List<FruitTransaction> processingStringList(List<String> str) {
+    public List<FruitTransaction> parser(List<String> str) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (String d : str) {
             String[] split = d.split(",");

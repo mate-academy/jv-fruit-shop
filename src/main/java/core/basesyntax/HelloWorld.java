@@ -34,7 +34,7 @@ public class HelloWorld {
         List<String> stringList = fileService.read(IN_FILE);
         TransactionParserImpl transactionParser = new TransactionParserImpl();
         List<FruitTransaction> fruitTransactionList = transactionParser
-                .processingStringList(stringList);
+                .parser(stringList);
         FruitService fruitService = new FruitsServiceImpl(new FruitsDaoImpl(),
                 new HandlerServiceImpl(handler));
         fruitService.processTransactions(fruitTransactionList);
