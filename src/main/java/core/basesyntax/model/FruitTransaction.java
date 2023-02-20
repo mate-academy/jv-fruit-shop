@@ -5,21 +5,10 @@ public class FruitTransaction {
     private Fruit fruit;
     private int quantity;
 
-    public FruitTransaction(String operation, String fruit, String quantity) {
-        for (Operation o: Operation.values()) {
-            if (o.getCode().equals(operation)) {
-                this.operation = o;
-                break;
-            }
-        }
-
-        for (Fruit f: Fruit.values()) {
-            if (f.getName().equals(fruit)) {
-                this.fruit = f;
-            }
-        }
-
-        this.quantity = Integer.parseInt(quantity);
+    public FruitTransaction(Operation operation, Fruit fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
     }
 
     public Fruit getFruit() {

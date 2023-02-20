@@ -13,8 +13,8 @@ public class SupplyOperationImpl implements OperationHandler {
 
     @Override
     public void registerTransaction(FruitTransaction transaction) {
-        if (storageDao.containsFruit(transaction.getFruit())) {
-            int currentQty = storageDao.checkAvailableQuantity(transaction.getFruit());
+        if (storageDao.getQuantity(transaction.getFruit()) != 0) {
+            int currentQty = storageDao.getQuantity(transaction.getFruit());
             storageDao.add(transaction.getFruit(), currentQty + transaction.getQuantity());
         } else {
             storageDao.add(transaction.getFruit(), transaction.getQuantity());

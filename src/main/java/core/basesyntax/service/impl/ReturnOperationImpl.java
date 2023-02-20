@@ -13,7 +13,7 @@ public class ReturnOperationImpl implements OperationHandler {
 
     @Override
     public void registerTransaction(FruitTransaction transaction) {
-        int currentQty = storageDao.checkAvailableQuantity(transaction.getFruit());
+        int currentQty = storageDao.getQuantity(transaction.getFruit());
         storageDao.add(transaction.getFruit(), currentQty + transaction.getQuantity());
     }
 }
