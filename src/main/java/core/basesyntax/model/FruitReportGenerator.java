@@ -1,16 +1,16 @@
 package core.basesyntax.model;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperatorStrategy;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BinaryOperator;
 
 public class FruitReportGenerator {
-    private final OperationHandler operationHandler;
+    private final OperatorStrategy operatorStrategy;
 
     public FruitReportGenerator() {
-        operationHandler = new OperationHandler();
+        operatorStrategy = new OperatorStrategy();
     }
 
     public String generateReport() {
@@ -18,8 +18,8 @@ public class FruitReportGenerator {
         for (FruitTransaction transaction : Storage.transactions) {
             String fruitName = transaction.getFruit().getName();
             int value = transaction.getQuantity();
-            BinaryOperator<Integer> operator = operationHandler
-                    .handleOperation(transaction.getOperation());
+            BinaryOperator<Integer> operator = operatorStrategy
+                    .getOperator(transaction.getOperation());
             int prevValue = fruitMap.getOrDefault(fruitName, 0);
             int result = operator.apply(prevValue, value);
             fruitMap.put(fruitName, result);
