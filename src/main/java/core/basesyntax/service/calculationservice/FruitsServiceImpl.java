@@ -5,28 +5,34 @@ import core.basesyntax.entity.FruitTransaction;
 import core.basesyntax.service.handlerservice.HandlerService;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class FruitsServiceImpl implements FruitService {
-    private final FruitsDao fruitsStorageDao;
-    private final HandlerService realizeByActivityFruits;
+    private FruitsDao fruitsDao;
+    private HandlerService realizeByActivityFruits;
 
-    public FruitsServiceImpl(FruitsDao fruitsStorageDao,
-                             HandlerService realizeByActivityFruits) {
-        this.fruitsStorageDao = fruitsStorageDao;
+    public FruitsServiceImpl(FruitsDao fruitsDao, HandlerService realizeByActivityFruits) {
+        this.fruitsDao = fruitsDao;
         this.realizeByActivityFruits = realizeByActivityFruits;
     }
 
     @Override
-    public String calculationFruits(String nameFruit) {
-        List<FruitTransaction> allListFruits = fruitsStorageDao.getAllListFruits(nameFruit);
-
-        BigDecimal resultActivity = new BigDecimal(0);
-        for (FruitTransaction fruits : allListFruits) {
-            resultActivity = resultActivity
-                    .add(realizeByActivityFruits
-                            .getSumFruit(fruits.getActivity())
-                            .handle(fruits.getQuantity()));
+    public void processTransactions(List<FruitTransaction> transactions) {
+        Map<String, List<FruitTransaction>> map = mapFruits(transactions);
+        for (Map.Entry<String, List<FruitTransaction>> fruit : map.entrySet()) {
+            BigDecimal bigDecimal = new BigDecimal(0);
+            for (int i = 0; i < fruit.getValue().size(); i++) {
+                bigDecimal = bigDecimal.add(realizeByActivityFruits
+                        .getSumFruit(fruit.getValue().get(i).getActivity())
+                        .handle(fruit.getValue().get(i).getQuantity()));
+            }
+            fruitsDao.addFruitsStorage(fruit.getKey() + " " + bigDecimal);
         }
-        return nameFruit + " " + resultActivity;
+    }
+
+    private Map<String, List<FruitTransaction>> mapFruits(List<FruitTransaction> str) {
+        return str.stream()
+                .collect(Collectors.groupingBy(FruitTransaction::getFruit));
     }
 }

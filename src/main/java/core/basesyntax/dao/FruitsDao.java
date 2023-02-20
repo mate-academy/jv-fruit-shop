@@ -1,10 +1,9 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.entity.FruitTransaction;
 import java.util.List;
 
 public interface FruitsDao {
-    void addFruitsStorage(FruitTransaction stringListFruits);
+    void addFruitsStorage(String stringListFruits);
 
-    List<FruitTransaction> getAllListFruits(String fruit);
+    List<String> getAllFruits();
 }

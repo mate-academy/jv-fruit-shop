@@ -1,5 +1,8 @@
 package core.basesyntax.service.calculationservice;
 
+import core.basesyntax.entity.FruitTransaction;
+import java.util.List;
+
 public interface FruitService {
-    String calculationFruits(String nameFruit);
+    void processTransactions(List<FruitTransaction> transactions);
 }

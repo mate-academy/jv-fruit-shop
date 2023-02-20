@@ -4,36 +4,14 @@ import core.basesyntax.entity.FruitTransaction;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class TransactionParserImpl implements TransactionParser {
     public static final int ACTIVITY_POSITION = 0;
     public static final int FRUIT_POSITION = 1;
     public static final int QUANTITY_POSITION = 2;
 
-    public List<FruitTransaction> parse(List<String> str, String nameFruit) {
-        BigDecimal bigDecimal = new BigDecimal(0);
-        List<FruitTransaction> result = new ArrayList<>();
-        Map<String, List<FruitTransaction>> mapFruits = processingStringList(str).stream()
-                .filter(t -> t.getFruit()
-                        .equalsIgnoreCase(nameFruit.trim()))
-                .collect(Collectors.groupingBy(FruitTransaction::getActivity));
-        for (Map.Entry<String, List<FruitTransaction>> map : mapFruits.entrySet()) {
-            for (int i = 0; i < map.getValue().size(); i++) {
-                bigDecimal = bigDecimal.add(map.getValue().get(i).getQuantity());
-            }
-            FruitTransaction fruit = new FruitTransaction();
-            fruit.setFruit(nameFruit);
-            fruit.setActivity(map.getKey());
-            fruit.setQuantity(bigDecimal);
-            result.add(fruit);
-            bigDecimal = new BigDecimal(0);
-        }
-        return result;
-    }
-
-    private List<FruitTransaction> processingStringList(List<String> str) {
+    @Override
+    public List<FruitTransaction> processingStringList(List<String> str) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (String d : str) {
             String[] split = d.split(",");

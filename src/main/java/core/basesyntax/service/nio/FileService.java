@@ -5,5 +5,5 @@ import java.util.List;
 public interface FileService {
     List<String> read(String pathFromRepository);
 
-    void write(String string, String path);
+    void write(String path);
 }
