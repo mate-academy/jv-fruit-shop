@@ -12,6 +12,7 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromCsvFile(String filePath) {
         Path path = Paths.get(filePath);
         List<String> transactions;
+
         try {
             transactions = Files.readAllLines(path);
             transactions.remove(0);

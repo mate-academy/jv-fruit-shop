@@ -32,7 +32,7 @@ public class TransactionParserImpl implements TransactionParser {
             }
 
             if (parsedOperation == null) {
-                continue;
+                throw new RuntimeException("Unsupported operation type: " + operation);
             } else {
                 transactionList.add(
                         new FruitTransaction(parsedOperation, parsedFruit, parsedQuantity));
