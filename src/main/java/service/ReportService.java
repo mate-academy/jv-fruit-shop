@@ -5,5 +5,5 @@ import model.FruitTransaction;
 
 public interface ReportService {
 
-    void createReport(List<FruitTransaction> transactions);
+    public List<String> createReport(List<FruitTransaction> transactions);
 }

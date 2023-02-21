@@ -41,11 +41,11 @@ public class Main {
         TransactionStrategy transactionStrategy =
                             new TransactionStrategyImpl(transactionHandlerMap);
         ReportService reportService = new ReportServiceImpl(transactionStrategy);
-        reportService.createReport(fruitTransactions);
-        String pathToReportFile = "src/main/resources/report.csv";
-        File report = new File(pathToReportFile);
+        List<String> report = reportService.createReport(fruitTransactions);
+        String pathToReportFile = "src/main/resources/reportFile.csv";
+        File reportFile = new File(pathToReportFile);
         FileWriterService fileWriterService = new CsvFileWriterService();
-        fileWriterService.saveToFile(report);
-        csvFileReader.readFile(report);
+        fileWriterService.saveToFile(reportFile);
+        csvFileReader.readFile(reportFile);
     }
 }
