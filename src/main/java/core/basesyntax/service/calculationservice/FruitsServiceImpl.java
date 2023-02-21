@@ -3,7 +3,6 @@ package core.basesyntax.service.calculationservice;
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.entity.FruitTransaction;
 import core.basesyntax.service.handlerservice.HandlerService;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,15 +18,16 @@ public class FruitsServiceImpl implements FruitService {
 
     @Override
     public void processTransactions(List<FruitTransaction> transactions) {
+
         Map<String, List<FruitTransaction>> map = mapFruits(transactions);
         for (Map.Entry<String, List<FruitTransaction>> fruit : map.entrySet()) {
-            BigDecimal bigDecimal = new BigDecimal(0);
+            Integer result = 0;
             for (int i = 0; i < fruit.getValue().size(); i++) {
-                bigDecimal = bigDecimal.add(realizeByActivityFruits
-                        .getSumFruit(fruit.getValue().get(i).getActivity())
+                result = Integer.sum(result, realizeByActivityFruits
+                        .getHandler(fruit.getValue().get(i).getOperation())
                         .handle(fruit.getValue().get(i).getQuantity()));
             }
-            fruitsDao.addFruitsStorage(fruit.getKey() + " " + bigDecimal);
+            fruitsDao.addFruit(fruit.getKey(), result);
         }
     }
 

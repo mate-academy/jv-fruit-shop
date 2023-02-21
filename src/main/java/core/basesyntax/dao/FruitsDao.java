@@ -1,9 +1,9 @@
 package core.basesyntax.dao;
 
-import java.util.List;
+import java.util.Map;
 
 public interface FruitsDao {
-    void addFruitsStorage(String stringListFruits);
+    void addFruit(String fruit, int quantity);
 
-    List<String> getAllFruits();
+    Map<String, Integer> getAllFruits();
 }
