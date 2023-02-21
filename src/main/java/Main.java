@@ -45,7 +45,7 @@ public class Main {
         String pathToReportFile = "src/main/resources/reportFile.csv";
         File reportFile = new File(pathToReportFile);
         FileWriterService fileWriterService = new CsvFileWriterService();
-        fileWriterService.saveToFile(reportFile);
+        fileWriterService.saveToFile(reportFile, report);
         csvFileReader.readFile(reportFile);
     }
 }

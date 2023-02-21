@@ -1,8 +1,9 @@
 package service;
 
 import java.io.File;
+import java.util.List;
 
 public interface FileWriterService {
 
-    void saveToFile(File report);
+    File saveToFile(File reportFile, List<String> report);
 }
