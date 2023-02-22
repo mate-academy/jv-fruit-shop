@@ -20,8 +20,8 @@ public class HelloWorld {
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
-    private static final String INPUT_FILE = "input.txt";
-    private static final String OUTPUT_FILE = "output.txt";
+    private static final String INPUT_FILE = "src/main/resources/input.txt";
+    private static final String OUTPUT_FILE = "src/main/resources/output.txt";
 
     public static void main(String[] args) {
 
