@@ -1,9 +1,8 @@
 package service;
 
-import model.FruitTransaction;
-
 import java.util.List;
 import java.util.stream.Collectors;
+import model.FruitTransaction;
 
 public class FruitTransactionConverterImpl implements FruitTransactionConverter {
     private static final String REGEX_TO_SPLIT_STRING = ",";

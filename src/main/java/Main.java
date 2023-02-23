@@ -34,16 +34,21 @@ public class Main {
                                         new SupplyTransactionHandler();
 
     public static void main(String[] args) {
-        transactionHandlerMap.put(FruitTransaction.Operation.BALANCE, balanceTransactionHandler);
-        transactionHandlerMap.put(FruitTransaction.Operation.PURCHASE, purchaseTransactionHandler);
-        transactionHandlerMap.put(FruitTransaction.Operation.RETURN, returnTransactionHandler);
-        transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY, supplyTransactionHandler);
+        transactionHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                                    balanceTransactionHandler);
+        transactionHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                                    purchaseTransactionHandler);
+        transactionHandlerMap.put(FruitTransaction.Operation.RETURN,
+                                    returnTransactionHandler);
+        transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                                    supplyTransactionHandler);
         String pathToInputDataFile = "src/main/resources/inputData.csv";
         File inputData = new File(pathToInputDataFile);
         FileReaderService csvFileReader = new CsvFileReaderService();
         List<String> dataFromFile = csvFileReader.readFile(inputData);
         FruitTransactionConverter converter = new FruitTransactionConverterImpl();
-        List<FruitTransaction> fruitTransactions = converter.convertToFruitTransaction(dataFromFile);
+        List<FruitTransaction> fruitTransactions =
+                            converter.convertToFruitTransaction(dataFromFile);
         TransactionStrategy transactionStrategy =
                             new TransactionStrategyImpl(transactionHandlerMap);
         ReportService reportService = new ReportServiceImpl(transactionStrategy);
