@@ -1,7 +1,6 @@
 package core.basesyntax.db;
 
 import core.basesyntax.exception.OutputWriteException;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

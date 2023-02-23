@@ -6,7 +6,6 @@ import core.basesyntax.service.FruitsHolderService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReportMakerService;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {

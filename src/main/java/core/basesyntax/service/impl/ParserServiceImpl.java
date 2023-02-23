@@ -4,7 +4,6 @@ import core.basesyntax.db.InputReader;
 import core.basesyntax.db.InputReaderImpl;
 import core.basesyntax.exception.ParserException;
 import core.basesyntax.service.ParserService;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

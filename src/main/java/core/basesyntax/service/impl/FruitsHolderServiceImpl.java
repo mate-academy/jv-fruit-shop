@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.FruitsHolderException;
 import core.basesyntax.service.FruitsHolderService;
-
 import java.util.HashMap;
 import java.util.Map;
 

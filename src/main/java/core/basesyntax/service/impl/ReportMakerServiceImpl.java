@@ -4,7 +4,6 @@ import core.basesyntax.db.OutputWriter;
 import core.basesyntax.db.OutputWriterImpl;
 import core.basesyntax.exception.ReportMakerException;
 import core.basesyntax.service.ReportMakerService;
-
 import java.util.Map;
 import java.util.stream.Collectors;
 
