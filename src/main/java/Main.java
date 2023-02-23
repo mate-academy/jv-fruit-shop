@@ -9,6 +9,8 @@ import service.FileReaderService;
 import service.FileWriterService;
 import service.FruitTransactionConverter;
 import service.FruitTransactionConverterImpl;
+import service.Printer;
+import service.PrinterImpl;
 import service.ReportService;
 import service.ReportServiceImpl;
 import service.TransactionStrategy;
@@ -50,6 +52,8 @@ public class Main {
         File reportFile = new File(pathToReportFile);
         FileWriterService fileWriterService = new CsvFileWriterService();
         fileWriterService.saveToFile(reportFile, report);
-        System.out.println(csvFileReader.readFile(reportFile));
+        List<String> readReport = csvFileReader.readFile(reportFile);
+        Printer printer = new PrinterImpl();
+        printer.print(readReport);
     }
 }
