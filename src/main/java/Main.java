@@ -7,6 +7,8 @@ import service.CsvFileReaderService;
 import service.CsvFileWriterService;
 import service.FileReaderService;
 import service.FileWriterService;
+import service.FruitTransactionConverter;
+import service.FruitTransactionConverterImpl;
 import service.ReportService;
 import service.ReportServiceImpl;
 import service.TransactionStrategy;
@@ -37,7 +39,9 @@ public class Main {
         String pathToInputDataFile = "src/main/resources/inputData.csv";
         File inputData = new File(pathToInputDataFile);
         FileReaderService csvFileReader = new CsvFileReaderService();
-        List<FruitTransaction> fruitTransactions = csvFileReader.getTransactionsFromFile(inputData);
+        List<String> dataFromFile = csvFileReader.readFile(inputData);
+        FruitTransactionConverter converter = new FruitTransactionConverterImpl();
+        List<FruitTransaction> fruitTransactions = converter.convertToFruitTransaction(dataFromFile);
         TransactionStrategy transactionStrategy =
                             new TransactionStrategyImpl(transactionHandlerMap);
         ReportService reportService = new ReportServiceImpl(transactionStrategy);
@@ -46,6 +50,6 @@ public class Main {
         File reportFile = new File(pathToReportFile);
         FileWriterService fileWriterService = new CsvFileWriterService();
         fileWriterService.saveToFile(reportFile, report);
-        csvFileReader.readFile(reportFile);
+        System.out.println(csvFileReader.readFile(reportFile));
     }
 }
