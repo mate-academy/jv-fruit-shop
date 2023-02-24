@@ -1,32 +1,25 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitTransactionDao;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitOperationService;
+import core.basesyntax.service.FruitTransactionHandler;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.strategy.FruitTransactionStrategy;
+import java.util.List;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
-    private final FruitTransactionDao transactionDao;
     private final FruitTransactionStrategy fruitTransactionStrategy;
 
-    public FruitTransactionServiceImpl(FruitTransactionDao transactionDao) {
-        this.transactionDao = transactionDao;
+    public FruitTransactionServiceImpl() {
         fruitTransactionStrategy = new FruitTransactionStrategy();
     }
 
     @Override
-    public void add(FruitTransaction transaction) {
-        transactionDao.add(transaction);
-        String fruitName = transaction.getFruit().getName();
-        int value = transaction.getQuantity();
-        int prevValue = Storage.fruitMap.getOrDefault(fruitName, 0);
+    public void processTransactions(List<FruitTransaction> transactions) {
+        for (FruitTransaction transaction : transactions) {
+            FruitTransactionHandler fruitTransactionHandler = fruitTransactionStrategy
+                    .getFruitTransactionService(transaction.getOperation());
 
-        FruitOperationService fruitOperationService = fruitTransactionStrategy
-                .getFruitOperationService(transaction.getOperation());
-
-        int result = fruitOperationService.performOperation(prevValue, value);
-        transactionDao.putFruitIntoMap(fruitName, result);
+            fruitTransactionHandler.handle(transaction);
+        }
     }
 }
