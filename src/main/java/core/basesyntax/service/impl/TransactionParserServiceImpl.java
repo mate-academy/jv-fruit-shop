@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
@@ -22,7 +21,8 @@ public class TransactionParserServiceImpl implements TransactionParserService {
         for (String line : lines) {
             String[] splitLine = line.split(",");
             FruitTransaction transaction = new FruitTransaction();
-            transaction.setOperation(FruitTransaction.Operation.of(splitLine[OPERATION_TYPE_INDEX]));
+            transaction.setOperation(FruitTransaction.Operation
+                    .of(splitLine[OPERATION_TYPE_INDEX]));
             transaction.setFruit(new Fruit(splitLine[FRUIT_NAME_INDEX]));
             transaction.setQuantity(Integer.parseInt(splitLine[OPERATION_VALUE_INDEX]));
             fruitTransactionService.add(transaction);

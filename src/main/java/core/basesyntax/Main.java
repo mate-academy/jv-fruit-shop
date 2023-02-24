@@ -19,11 +19,13 @@ public class Main {
 
     public static void main(String[] args) {
         FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
-        FruitTransactionService transactionService = new FruitTransactionServiceImpl(fruitTransactionDao);
+        FruitTransactionService transactionService
+                = new FruitTransactionServiceImpl(fruitTransactionDao);
 
         ReaderService readerService = new ReaderServiceImpl();
         String readData = readerService.readFromFile(INPUT_FILE_PATH);
-        TransactionParserService transactionParserService = new TransactionParserServiceImpl(transactionService);
+        TransactionParserService transactionParserService
+                = new TransactionParserServiceImpl(transactionService);
         transactionParserService.parseTransactions(readData);
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
         String report = reportGeneratorService.generateReport();

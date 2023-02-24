@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitTransactionDao;
-import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitOperationService;
@@ -25,7 +24,7 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
         int prevValue = Storage.fruitMap.getOrDefault(fruitName, 0);
 
         FruitOperationService fruitOperationService = fruitTransactionStrategy
-            .getFruitOperationService(transaction.getOperation());
+                .getFruitOperationService(transaction.getOperation());
 
         int result = fruitOperationService.performOperation(prevValue, value);
         transactionDao.putFruitIntoMap(fruitName, result);
