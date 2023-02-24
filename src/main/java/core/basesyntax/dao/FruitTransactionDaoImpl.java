@@ -8,4 +8,9 @@ public class FruitTransactionDaoImpl implements FruitTransactionDao {
     public void add(FruitTransaction transaction) {
         Storage.transactions.add(transaction);
     }
+
+    @Override
+    public void putFruitIntoMap(String fruitName, Integer count) {
+        Storage.fruitMap.put(fruitName, count);
+    }
 }
