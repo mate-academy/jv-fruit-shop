@@ -1,18 +1,13 @@
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import service.CsvFileReaderService;
 import service.CsvFileWriterService;
 import service.FileReaderService;
 import service.FileWriterService;
-import service.FruitTransactionConverter;
-import service.FruitTransactionConverterImpl;
-import service.Printer;
-import service.PrinterImpl;
-import service.ReportService;
-import service.ReportServiceImpl;
+import service.FruitShopService;
+import service.FruitShopServiceImpl;
 import service.TransactionStrategy;
 import service.TransactionStrategyImpl;
 import service.transaction.BalanceTransactionHandler;
@@ -24,41 +19,28 @@ import service.transaction.TransactionHandler;
 public class Main {
     public static final Map<FruitTransaction.Operation,
                         TransactionHandler> transactionHandlerMap = new HashMap<>();
-    public static final TransactionHandler balanceTransactionHandler =
-                                        new BalanceTransactionHandler();
-    public static final TransactionHandler purchaseTransactionHandler =
-                                        new PurchaseTransactionHandler();
-    public static final TransactionHandler returnTransactionHandler =
-                                        new ReturnTransactionHandler();
-    public static final TransactionHandler supplyTransactionHandler =
-                                        new SupplyTransactionHandler();
+    public static final File INPUT_FILE =
+                            new File("src/main/resources/inputData.csv");
+    public static final File REPORT_FILE =
+                            new File("src/main/resources/reportFile.csv");
 
     public static void main(String[] args) {
         transactionHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                                    balanceTransactionHandler);
+                                    new BalanceTransactionHandler());
         transactionHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                                    purchaseTransactionHandler);
+                                    new PurchaseTransactionHandler());
         transactionHandlerMap.put(FruitTransaction.Operation.RETURN,
-                                    returnTransactionHandler);
+                                    new ReturnTransactionHandler());
         transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                                    supplyTransactionHandler);
-        String pathToInputDataFile = "src/main/resources/inputData.csv";
-        File inputData = new File(pathToInputDataFile);
-        FileReaderService csvFileReader = new CsvFileReaderService();
-        List<String> dataFromFile = csvFileReader.readFile(inputData);
-        FruitTransactionConverter converter = new FruitTransactionConverterImpl();
-        List<FruitTransaction> fruitTransactions =
-                            converter.convertToFruitTransaction(dataFromFile);
+                                    new SupplyTransactionHandler());
         TransactionStrategy transactionStrategy =
-                            new TransactionStrategyImpl(transactionHandlerMap);
-        ReportService reportService = new ReportServiceImpl(transactionStrategy);
-        List<String> report = reportService.createReport(fruitTransactions);
-        String pathToReportFile = "src/main/resources/reportFile.csv";
-        File reportFile = new File(pathToReportFile);
-        FileWriterService fileWriterService = new CsvFileWriterService();
-        fileWriterService.saveToFile(reportFile, report);
-        List<String> readReport = csvFileReader.readFile(reportFile);
-        Printer printer = new PrinterImpl();
-        printer.print(readReport);
+                new TransactionStrategyImpl(transactionHandlerMap);
+        FileReaderService csvFileReader = new CsvFileReaderService();
+        FileWriterService csvFileWriter = new CsvFileWriterService();
+        FruitShopService fruitShopService =
+                new FruitShopServiceImpl(transactionStrategy,
+                                        csvFileReader,
+                                        csvFileWriter);
+        fruitShopService.generateDailyReport(INPUT_FILE, REPORT_FILE);
     }
 }

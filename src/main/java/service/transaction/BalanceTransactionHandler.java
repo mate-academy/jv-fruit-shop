@@ -4,6 +4,6 @@ public class BalanceTransactionHandler implements TransactionHandler {
 
     @Override
     public Integer calculateRemnant(Integer remnant, Integer amount) {
-        return remnant + amount;
+        return amount;
     }
 }

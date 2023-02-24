@@ -10,8 +10,7 @@ public class CsvFileWriterService implements FileWriterService {
 
     @Override
     public File saveToFile(File reportFile, List<String> report) {
-        report.stream()
-                .forEach(l -> write(reportFile, l));
+        report.forEach(l -> write(reportFile, l));
         return reportFile;
     }
 
