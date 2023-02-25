@@ -18,7 +18,6 @@ public class FruitsServiceImpl implements FruitService {
 
     @Override
     public void processTransactions(List<FruitTransaction> transactions) {
-
         Map<String, List<FruitTransaction>> map = mapFruits(transactions);
         for (Map.Entry<String, List<FruitTransaction>> fruit : map.entrySet()) {
             Integer result = 0;

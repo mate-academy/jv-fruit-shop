@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.dao.FruitsDaoImpl;
 import core.basesyntax.entity.FruitTransaction;
 import core.basesyntax.entity.FruitTransaction.Operation;
@@ -16,6 +15,7 @@ import core.basesyntax.service.nio.FileService;
 import core.basesyntax.service.nio.FileServiceImpl;
 import core.basesyntax.service.parser.TransactionParser;
 import core.basesyntax.service.parser.TransactionParserImpl;
+import core.basesyntax.service.report.ReportServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,14 +35,15 @@ public class App {
         FileService fileService = new FileServiceImpl();
         List<String> read = fileService.read(IN_FILE);
         TransactionParser transactionParser = new TransactionParserImpl();
-        List<FruitTransaction> parser = transactionParser.parser(read);
+        List<FruitTransaction> transactions = transactionParser.parse(read);
         FruitService fruitService = new FruitsServiceImpl(new FruitsDaoImpl(),
                 new HandlerServiceImpl(mapOperation));
-        fruitService.processTransactions(parser);
-        FruitsDao fruitsDao = new FruitsDaoImpl();
-        Map<String, Integer> allFruits = fruitsDao.getAllFruits();
+        fruitService.processTransactions(transactions);
 
-        fileService.write(OUT_FILE, allFruits);
+        ReportServiceImpl reportService = new ReportServiceImpl(new FruitsDaoImpl());
+
+        String str = reportService.reportAllFruits();
+        fileService.write(OUT_FILE, str);
 
     }
 }

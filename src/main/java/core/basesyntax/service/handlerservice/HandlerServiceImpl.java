@@ -5,15 +5,15 @@ import core.basesyntax.service.handler.OperationHandler;
 import java.util.Map;
 
 public class HandlerServiceImpl implements HandlerService {
-    private final Map<FruitTransaction.Operation, OperationHandler> stringStrategyActivityMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> handlers;
 
     public HandlerServiceImpl(Map<FruitTransaction.Operation,
-            OperationHandler> stringStrategyActivityMap) {
-        this.stringStrategyActivityMap = stringStrategyActivityMap;
+            OperationHandler> handlers) {
+        this.handlers = handlers;
     }
 
     @Override
     public OperationHandler getHandler(FruitTransaction.Operation activity) {
-        return stringStrategyActivityMap.get(activity);
+        return handlers.get(activity);
     }
 }

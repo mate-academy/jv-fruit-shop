@@ -11,18 +11,18 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String operation;
+        private String code;
 
         Operation(String operation) {
-            this.operation = operation;
+            this.code = operation;
         }
 
         public String getOperation() {
-            return operation;
+            return code;
         }
 
         public void setOperation(String operation) {
-            this.operation = operation;
+            this.code = operation;
         }
     }
 
