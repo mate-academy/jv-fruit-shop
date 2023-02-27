@@ -15,6 +15,9 @@ public class FruitTransaction {
     private FruitService fruitService;
 
     public void chooseStrategy(List<String> line) {
+        if (line == null) {
+            throw new RuntimeException("List must contain rows from file, but was null");
+        }
         String[] separateLine;
         for (String s : line) {
             separateLine = s.split(CSV_SEPARATOR);

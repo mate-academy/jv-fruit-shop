@@ -6,6 +6,9 @@ public class PurchaseService implements FruitService {
 
     @Override
     public void moveFruit(String fruit, Integer amount) {
-        FRUIT_DAO.takeAway(fruit, amount);
+        if (fruit == null || amount == null) {
+            throw new RuntimeException("Incorrect input data in Purchase action");
+        }
+        FRUIT_DAO.remove(fruit, amount);
     }
 }
