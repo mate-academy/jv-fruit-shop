@@ -23,7 +23,7 @@ public class ReportServiceImpl implements ReportService {
                                             .distinct()
                                             .collect(Collectors.toList());
         return fruitList.stream()
-                        .map(f -> f + "," + storageDao.getAmount(f))
+                        .map(fruit -> fruit + "," + storageDao.getAmount(fruit))
                         .collect(Collectors.toList());
     }
 
@@ -32,7 +32,7 @@ public class ReportServiceImpl implements ReportService {
                 transactionStrategy.get(transaction.getOperation());
         int amountFromStorage = storageDao.getAmount(transaction.getFruit());
         int newAmount = transactionHandler.calculateRemnant(amountFromStorage,
-                transaction.getAmount());
+                                                        transaction.getAmount());
         storageDao.add(transaction.getFruit(), newAmount);
     }
 }

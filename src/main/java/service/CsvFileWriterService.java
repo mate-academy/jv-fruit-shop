@@ -7,10 +7,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class CsvFileWriterService implements FileWriterService {
-
     @Override
     public File saveToFile(File reportFile, List<String> report) {
-        report.forEach(l -> write(reportFile, l));
+        report.forEach(line -> write(reportFile, line));
         return reportFile;
     }
 

@@ -13,10 +13,10 @@ public class FruitTransactionConverterImpl implements FruitTransactionConverter 
     @Override
     public List<FruitTransaction> convertToFruitTransaction(List<String> inputData) {
         return inputData.stream()
-                .map(s -> s.split(REGEX_TO_SPLIT_STRING))
-                .map(a -> new FruitTransaction(a[OPERATION_SIGN_INDEX],
-                        a[FRUIT_NAME_INDEX],
-                        Integer.parseInt(a[AMOUNT_INDEX])))
+                .map(string -> string.split(REGEX_TO_SPLIT_STRING))
+                .map(array -> new FruitTransaction(array[OPERATION_SIGN_INDEX],
+                        array[FRUIT_NAME_INDEX],
+                        Integer.parseInt(array[AMOUNT_INDEX])))
                 .collect(Collectors.toList());
     }
 }

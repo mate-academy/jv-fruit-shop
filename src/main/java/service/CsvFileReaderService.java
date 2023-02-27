@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class CsvFileReaderService implements FileReaderService {
-
     @Override
     public List<String> readFile(File inputFile) {
         try {
