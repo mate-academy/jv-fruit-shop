@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.exeption.FruitShopExeption;
 import core.basesyntax.service.FruitService;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ public class FruitTransaction {
 
     public void chooseStrategy(List<String> line) {
         if (line == null) {
-            throw new RuntimeException("List must contain rows from file, but was null");
+            throw new FruitShopExeption("List must contain rows from file, but was null");
         }
         String[] separateLine;
         for (String s : line) {
@@ -30,24 +31,24 @@ public class FruitTransaction {
     private void checkData(String[] separateLine) {
         fruitService = strategy.get(separateLine[OPERATION_INDEX]);
         if (separateLine.length != WORDS_IN_LINE) {
-            throw new RuntimeException("In csv file line mast contain 3 words, but was: "
+            throw new FruitShopExeption("In csv file line mast contain 3 words, but was: "
                     + separateLine.length);
         }
         if (fruitService == null) {
-            throw new RuntimeException("Inexplicable operation with fruit: "
+            throw new FruitShopExeption("Inexplicable operation with fruit: "
                     + separateLine[OPERATION_INDEX]);
         }
         if (separateLine[FRUIT_INDEX].length() == 0) {
-            throw new RuntimeException("In csv file all line mast contain fruit value");
+            throw new FruitShopExeption("In csv file all line mast contain fruit value");
         }
         try {
             Integer amount = Integer.valueOf(separateLine[AMOUNT_INDEX]);
         } catch (NumberFormatException e) {
-            throw new RuntimeException("In csv file all line mast contain positive value"
+            throw new FruitShopExeption("In csv file all line mast contain positive value"
                     + "on amount position, but was " + separateLine[AMOUNT_INDEX]);
         }
         if (separateLine[AMOUNT_INDEX].length() <= 0) {
-            throw new RuntimeException("In csv file all line mast contain positive value"
+            throw new FruitShopExeption("In csv file all line mast contain positive value"
                     + "on amount position, but was " + separateLine[AMOUNT_INDEX]);
         }
     }

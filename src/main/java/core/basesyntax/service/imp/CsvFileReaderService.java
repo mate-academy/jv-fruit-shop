@@ -1,5 +1,7 @@
 package core.basesyntax.service.imp;
 
+import core.basesyntax.exeption.FruitShopExeption;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -16,7 +18,7 @@ public class CsvFileReaderService {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             line = bufferedReader.readLine();
             if (line == null) {
-                throw new RuntimeException("File " + fileName + " is empty");
+                throw new FruitShopExeption("File " + fileName + " is empty");
             }
             while (line != null) {
                 line = bufferedReader.readLine();
@@ -25,7 +27,7 @@ public class CsvFileReaderService {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + file, e);
+            throw new FruitShopExeption("Can't read from file " + file);
         }
         return listFromFile;
     }

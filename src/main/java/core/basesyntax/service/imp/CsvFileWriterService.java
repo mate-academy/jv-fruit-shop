@@ -1,6 +1,7 @@
 package core.basesyntax.service.imp;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exeption.FruitShopExeption;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -20,7 +21,7 @@ public class CsvFileWriterService {
                         + fruit.getValue() + System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't write in file " + file, e);
+            throw new FruitShopExeption("Can't write in file " + file);
         }
     }
 }
