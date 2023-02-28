@@ -1,17 +1,17 @@
-package core.basesyntax.db;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.exception.InputReadException;
+import core.basesyntax.service.Reader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class InputReaderImpl implements InputReader {
+public class ReaderImpl implements Reader {
     @Override
-    public String readInputCsv(String pathToFile) {
+    public String readFrom(String pathToFile) {
         if (pathToFile == null) {
-            throw new InputReadException("Argument is null");
+            throw new RuntimeException("Argument is null");
         }
         File file = new File(pathToFile);
         StringBuilder result = new StringBuilder();
@@ -22,9 +22,9 @@ public class InputReaderImpl implements InputReader {
                 value = br.readLine();
             }
         } catch (FileNotFoundException e) {
-            throw new InputReadException("Can't find file " + pathToFile, e);
+            throw new RuntimeException("Can't find file " + pathToFile, e);
         } catch (IOException e) {
-            throw new InputReadException("Can't read from file " + pathToFile, e);
+            throw new RuntimeException("Can't read from file " + pathToFile, e);
         }
         return result.toString().trim();
     }

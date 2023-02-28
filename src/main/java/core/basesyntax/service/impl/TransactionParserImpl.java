@@ -1,16 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.InputReader;
-import core.basesyntax.db.InputReaderImpl;
-import core.basesyntax.exception.ParserException;
-import core.basesyntax.service.ParserService;
+import core.basesyntax.service.Reader;
+import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class ParserServiceImpl implements ParserService {
+public class TransactionParserImpl implements TransactionParser {
     private static final String COLUMNS_SEPARATOR = ",";
     private static final String TYPE_COLUMN_NAME = "type";
     private static final String FRUIT_COLUMN_NAME = "fruit";
@@ -19,27 +17,26 @@ public class ParserServiceImpl implements ParserService {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final String ONLY_NUMS_REGEX = "[0-9]+";
-    private final InputReader inputReader;
+    private final Reader reader;
 
-    public ParserServiceImpl() {
-        this.inputReader = new InputReaderImpl();
+    public TransactionParserImpl() {
+        this.reader = new ReaderImpl();
     }
 
     @Override
-    public List<List<String>> parseDataFromCsv(String inputFilePath) {
-        if (inputFilePath == null) {
-            throw new ParserException("Argument must not be null");
+    public List<List<String>> parse(String data) {
+        if (data == null) {
+            throw new RuntimeException("Argument must not be null");
         }
-        String data = inputReader.readInputCsv(inputFilePath);
         List<String> dataSplit = new ArrayList<>(List.of(data.split(System.lineSeparator())));
         if (!isColumnsValid(dataSplit.get(0))) {
-            throw new ParserException("Invalid columns in input file");
+            throw new RuntimeException("Invalid columns in input file");
         }
         dataSplit.remove(0);
         return dataSplit.stream()
                 .map(l -> {
                     if (!isRowValid(l)) {
-                        throw new ParserException("Invalid row: " + l);
+                        throw new RuntimeException("Invalid row: " + l);
                     }
                     return Arrays.stream(l.split(COLUMNS_SEPARATOR)).collect(Collectors.toList());
                 })
