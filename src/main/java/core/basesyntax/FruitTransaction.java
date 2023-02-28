@@ -2,9 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.exeption.FruitShopExeption;
 import core.basesyntax.service.FruitService;
-import java.util.HashMap;
+import core.basesyntax.stragegyfactory.StrategyFactory;
 import java.util.List;
-import java.util.Map;
 
 public class FruitTransaction {
     private static final String CSV_SEPARATOR = ",";
@@ -12,31 +11,29 @@ public class FruitTransaction {
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
     private static final int WORDS_IN_LINE = 3;
-    private final Map<String, FruitService> strategy = new HashMap<>();
-    private FruitService fruitService;
 
     public void chooseStrategy(List<String> line) {
         if (line == null) {
             throw new FruitShopExeption("List must contain rows from file, but was null");
         }
+        line.stream().forEach(this::lineProcessing);
+    }
+
+    private void lineProcessing(String line) {
         String[] separateLine;
-        for (String s : line) {
-            separateLine = s.split(CSV_SEPARATOR);
-            checkData(separateLine);
-            fruitService.moveFruit(separateLine[FRUIT_INDEX],
-                    Integer.parseInt(separateLine[AMOUNT_INDEX]));
-        }
+        separateLine = line.split(CSV_SEPARATOR);
+        StrategyFactory strategyFactory = new StrategyFactory();
+        checkData(separateLine);
+        FruitService fruitService = strategyFactory
+                .getFruitService(Operation.getByCode(separateLine[OPERATION_INDEX]));
+        fruitService.moveFruit(separateLine[FRUIT_INDEX],
+                Integer.parseInt(separateLine[AMOUNT_INDEX]));
     }
 
     private void checkData(String[] separateLine) {
-        fruitService = strategy.get(separateLine[OPERATION_INDEX]);
         if (separateLine.length != WORDS_IN_LINE) {
             throw new FruitShopExeption("In csv file line mast contain 3 words, but was: "
                     + separateLine.length);
-        }
-        if (fruitService == null) {
-            throw new FruitShopExeption("Inexplicable operation with fruit: "
-                    + separateLine[OPERATION_INDEX]);
         }
         if (separateLine[FRUIT_INDEX].length() == 0) {
             throw new FruitShopExeption("In csv file all line mast contain fruit value");
@@ -53,10 +50,6 @@ public class FruitTransaction {
         }
     }
 
-    public Map<String, FruitService> getStrategy() {
-        return strategy;
-    }
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -71,6 +64,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation getByCode(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("No operation with code " + code + " found");
         }
     }
 }
