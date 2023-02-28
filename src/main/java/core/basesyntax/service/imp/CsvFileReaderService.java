@@ -16,7 +16,7 @@ public class CsvFileReaderService {
         File file = new File(fileName);
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             line = bufferedReader.readLine();
-            if (line == null) {
+            if (line == null || line.length() == 0) {
                 throw new FruitShopExeption("File " + fileName + " is empty");
             }
             while (line != null) {
