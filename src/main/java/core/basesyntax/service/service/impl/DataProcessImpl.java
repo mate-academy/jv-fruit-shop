@@ -32,7 +32,8 @@ public class DataProcessImpl implements DataProcess {
     public void processReport(String fileFrom, String fileTo) {
         List<String> dataFromFile = reader.read(fileFrom);
         fillStorage.fill(dataFromFile);
-        List<FruitTransaction> fruitTransactions = readerService.createListTransaction(dataFromFile);
+        List<FruitTransaction> fruitTransactions =
+                readerService.createListTransaction(dataFromFile);
         processTransaction(fruitTransactions);
         write.write(fileTo, createReportService.createReport());
     }
