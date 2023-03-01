@@ -6,8 +6,8 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-    public static final String FILE_FORMAT = "csv";
-    public static final int SEPARATOR_INDEX = 1;
+    private static final String FILE_FORMAT = "csv";
+    private static final int SEPARATOR_INDEX = 1;
 
     public List<String> read(String fileName) {
         checkFileName(fileName);

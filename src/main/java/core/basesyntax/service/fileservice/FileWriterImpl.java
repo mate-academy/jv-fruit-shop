@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class FileWriterImpl implements FileWriter {
-    public static final String FILE_FORMAT = "csv";
-    public static final int SEPARATOR_INDEX = 1;
+    private static final String FILE_FORMAT = "csv";
+    private static final int SEPARATOR_INDEX = 1;
 
     public void write(String fileName, String inputData) {
         checkInputData(fileName, inputData);
