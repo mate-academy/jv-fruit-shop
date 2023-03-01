@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Writer;
+import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriterImpl implements Writer {
+public class WriterServiceImpl implements WriterService {
     @Override
     public void write(String toWrite, String toFile) {
         if (toWrite == null || toFile == null) {

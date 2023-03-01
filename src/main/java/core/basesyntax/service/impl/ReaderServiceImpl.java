@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Reader;
+import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ReaderImpl implements Reader {
+public class ReaderServiceImpl implements ReaderService {
     @Override
     public String readFrom(String pathToFile) {
         if (pathToFile == null) {

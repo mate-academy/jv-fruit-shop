@@ -1,17 +1,16 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitTransaction;
-import core.basesyntax.dao.impl.FruitTransactionImpl;
-import core.basesyntax.service.FruitShop;
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.ReportMaker;
-import core.basesyntax.service.TransactionParser;
-import core.basesyntax.service.Writer;
-import core.basesyntax.service.impl.FruitShopImpl;
-import core.basesyntax.service.impl.ReaderImpl;
-import core.basesyntax.service.impl.ReportMakerImpl;
-import core.basesyntax.service.impl.TransactionParserImpl;
-import core.basesyntax.service.impl.WriterImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportMakerService;
+import core.basesyntax.service.TransactionParserService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportMakerServiceImpl;
+import core.basesyntax.service.impl.TransactionParserServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
@@ -33,16 +32,17 @@ public class HelloWorld {
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        Reader reader = new ReaderImpl();
-        TransactionParser transactionParser = new TransactionParserImpl();
-        FruitShop fruitShop = new FruitShopImpl(
-                new OperationStrategyImpl(operationHandlerMap), new FruitTransactionImpl()
+        ReaderService readerService = new ReaderServiceImpl();
+        TransactionParserService transactionParserService = new TransactionParserServiceImpl();
+        FruitShopService fruitShopService = new FruitShopServiceImpl(
+                new OperationStrategyImpl(operationHandlerMap)
         );
-        ReportMaker reportMaker = new ReportMakerImpl();
-        Writer writer = new WriterImpl();
-        List<List<String>> parsed = transactionParser.parse(reader.readFrom(INPUT_FILE));
-        Map<String, Integer> preparedMap = fruitShop.report(parsed);
-        String preparedReport = reportMaker.make(preparedMap);
-        writer.write(preparedReport, OUTPUT_FILE);
+        ReportMakerService reportMakerService = new ReportMakerServiceImpl();
+        WriterService writerService = new WriterServiceImpl();
+        List<FruitTransaction> parsed =
+                transactionParserService.parse(readerService.readFrom(INPUT_FILE));
+        Map<String, Integer> preparedMap = fruitShopService.report(parsed);
+        String preparedReport = reportMakerService.make(preparedMap);
+        writerService.write(preparedReport, OUTPUT_FILE);
     }
 }

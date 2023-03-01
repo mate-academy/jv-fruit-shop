@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.util.Map;
 
-public interface ReportMaker {
+public interface ReportMakerService {
     String make(Map<String, Integer> fruitsMap);
 }

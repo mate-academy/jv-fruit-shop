@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.TransactionParser;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.TransactionParserService;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class TransactionParserImpl implements TransactionParser {
+public class TransactionParserServiceImpl implements TransactionParserService {
     private static final String COLUMNS_SEPARATOR = ",";
     private static final String TYPE_COLUMN_NAME = "type";
     private static final String FRUIT_COLUMN_NAME = "fruit";
@@ -17,14 +17,14 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final String ONLY_NUMS_REGEX = "[0-9]+";
-    private final Reader reader;
+    private final ReaderService readerService;
 
-    public TransactionParserImpl() {
-        this.reader = new ReaderImpl();
+    public TransactionParserServiceImpl() {
+        this.readerService = new ReaderServiceImpl();
     }
 
     @Override
-    public List<List<String>> parse(String data) {
+    public List<FruitTransaction> parse(String data) {
         if (data == null) {
             throw new RuntimeException("Argument must not be null");
         }
@@ -38,7 +38,11 @@ public class TransactionParserImpl implements TransactionParser {
                     if (!isRowValid(l)) {
                         throw new RuntimeException("Invalid row: " + l);
                     }
-                    return Arrays.stream(l.split(COLUMNS_SEPARATOR)).collect(Collectors.toList());
+                    String[] row = l.split(COLUMNS_SEPARATOR);
+                    String operation = row[TYPE_INDEX];
+                    String fruitName = row[FRUIT_INDEX];
+                    int quantity = Integer.parseInt(row[QUANTITY_INDEX]);
+                    return new FruitTransaction(operation, fruitName, quantity);
                 })
                 .collect(Collectors.toList());
     }
