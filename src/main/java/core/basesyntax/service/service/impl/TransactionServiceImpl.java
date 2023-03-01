@@ -13,7 +13,7 @@ public class TransactionServiceImpl implements TransactionService {
     public static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> creatListTransaction(List<String> dataFromFile) {
+    public List<FruitTransaction> createListTransaction(List<String> dataFromFile) {
         if (dataFromFile == null || dataFromFile.isEmpty()) {
             throw new RuntimeException("Data from input file can`t be empty");
         }
