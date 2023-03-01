@@ -1,32 +1,34 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import core.basesyntax.exeption.FruitShopExeption;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.stragegyfactory.StrategyFactory;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class FruitTransaction {
+public class TransactionParserService {
+
     private static final String CSV_SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
     private static final int WORDS_IN_LINE = 3;
 
-    public void chooseStrategy(List<String> line) {
+    public List<FruitTransaction> parseFruitTransaction(List<String> line) {
         if (line == null) {
             throw new FruitShopExeption("List must contain rows from file, but was null");
         }
-        line.stream().forEach(this::lineProcessing);
+        return line.stream()
+                .map(this::lineProcessing)
+                .collect(Collectors.toList());
     }
 
-    private void lineProcessing(String line) {
+    private FruitTransaction lineProcessing(String line) {
         String[] separateLine;
         separateLine = line.split(CSV_SEPARATOR);
-        StrategyFactory strategyFactory = new StrategyFactory();
         checkData(separateLine);
-        FruitService fruitService = strategyFactory
-                .getFruitService(Operation.getByCode(separateLine[OPERATION_INDEX]));
-        fruitService.moveFruit(separateLine[FRUIT_INDEX],
+        return new FruitTransaction(FruitTransaction.Operation
+                .getByCode(separateLine[OPERATION_INDEX]),
+                separateLine[FRUIT_INDEX],
                 Integer.parseInt(separateLine[AMOUNT_INDEX]));
     }
 
@@ -50,29 +52,4 @@ public class FruitTransaction {
         }
     }
 
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private final String code;
-
-        Operation(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public static Operation getByCode(String code) {
-            for (Operation operation : Operation.values()) {
-                if (operation.getCode().equals(code)) {
-                    return operation;
-                }
-            }
-            throw new IllegalArgumentException("No operation with code " + code + " found");
-        }
-    }
 }

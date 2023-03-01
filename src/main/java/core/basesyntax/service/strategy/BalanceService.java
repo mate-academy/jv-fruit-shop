@@ -3,7 +3,7 @@ package core.basesyntax.service.strategy;
 import core.basesyntax.dao.Storage;
 import core.basesyntax.exeption.FruitShopExeption;
 
-public class ReturnService extends OperationHandler {
+public class BalanceService extends OperationHandler {
 
     @Override
     public void moveFruit(String fruit, Integer amount) {

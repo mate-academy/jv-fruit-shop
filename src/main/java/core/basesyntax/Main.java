@@ -1,7 +1,11 @@
 package core.basesyntax;
 
-import core.basesyntax.service.imp.CsvFileReaderService;
-import core.basesyntax.service.imp.CsvFileWriterService;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.CsvFileReaderService;
+import core.basesyntax.service.CsvFileWriterService;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.ReportMakerService;
+import core.basesyntax.service.TransactionParserService;
 import java.util.List;
 
 public class Main {
@@ -12,10 +16,17 @@ public class Main {
         CsvFileReaderService csvFileReaderService = new CsvFileReaderService();
         List<String> linesFromFile = csvFileReaderService.readFile(READ_FILE_NAME);
 
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.chooseStrategy(linesFromFile);
+        TransactionParserService fruitTransaction = new TransactionParserService();
+        List<FruitTransaction> listFruitTransaction =
+                fruitTransaction.parseFruitTransaction(linesFromFile);
+
+        FruitShopService fruitShopService = new FruitShopService();
+        fruitShopService.processFruitTransaction(listFruitTransaction);
+
+        ReportMakerService reportMakerService = new ReportMakerService();
+        String report = reportMakerService.createReport();
 
         CsvFileWriterService csvFileWriterService = new CsvFileWriterService();
-        csvFileWriterService.writeFile(WRITE_FILE_NAME);
+        csvFileWriterService.writeFile(WRITE_FILE_NAME, report);
     }
 }

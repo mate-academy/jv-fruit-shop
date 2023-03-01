@@ -1,4 +1,4 @@
-package core.basesyntax.service.imp;
+package core.basesyntax.service;
 
 import core.basesyntax.exeption.FruitShopExeption;
 import java.io.BufferedReader;
