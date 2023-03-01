@@ -28,17 +28,12 @@ public class FruitTransaction {
         }
 
         public static Operation getByCode(String s) {
-            if (BALANCE.getCode().equals(s)) {
-                return BALANCE;
-            } else if (SUPPLY.getCode().equals(s)) {
-                return SUPPLY;
-            } else if (PURCHASE.getCode().equals(s)) {
-                return PURCHASE;
-            } else if (RETURN.getCode().equals(s)) {
-                return RETURN;
-            } else {
-                throw new RuntimeException("Operation type not supported: " + s);
+            for (Operation o: new Operation[]{BALANCE, SUPPLY, PURCHASE, RETURN}) {
+                if (o.getCode().equals(s)) {
+                    return o;
+                }
             }
+            throw new RuntimeException("Operation type not supported: " + s);
         }
     }
 

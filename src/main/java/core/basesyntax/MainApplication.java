@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HelloWorld {
+public class MainApplication {
     private static final String INPUT_FILE = "src/main/resources/input.txt";
     private static final String OUTPUT_FILE = "src/main/resources/output.txt";
 

@@ -5,7 +5,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
-
     private static final int DEFAULT_VALUE = 0;
 
     @Override
