@@ -6,7 +6,7 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 
 public class OperationHandlerOfPurchase implements OperationHandler {
-    public static final int QUANTITY_MARKER = 0;
+    private static final int QUANTITY_MARKER = 0;
     private final FruitDao storageDao;
 
     public OperationHandlerOfPurchase() {

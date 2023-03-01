@@ -6,10 +6,10 @@ import core.basesyntax.service.FillStorage;
 import java.util.List;
 
 public class FillStorageImpl implements FillStorage {
-    public static final String HEADER_LINE = "type,fruit,quantity";
-    public static final String SEPARATOR = ",";
-    public static final int FRUIT_INDEX = 1;
-    public static final int DEFAULT_QUANTITY = 0;
+    private static final String HEADER_LINE = "type,fruit,quantity";
+    private static final String SEPARATOR = ",";
+    private static final int FRUIT_INDEX = 1;
+    private static final int DEFAULT_QUANTITY = 0;
 
     public void fill(List<String> data) {
         if (data == null) {

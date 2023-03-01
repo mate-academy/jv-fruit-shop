@@ -5,8 +5,8 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.CreateReportService;
 
 public class CreateReportServiceImpl implements CreateReportService {
-    public static final String HEADER_LINE = "fruit,quantity";
-    public static final String SEPARATOR = ",";
+    private static final String HEADER_LINE = "fruit,quantity";
+    private static final String SEPARATOR = ",";
     private final FruitDao storageDao;
 
     public CreateReportServiceImpl() {
