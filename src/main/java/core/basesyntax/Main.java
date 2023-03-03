@@ -1,12 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.service.operation.OperationHandlerOfBalance;
-import core.basesyntax.service.operation.OperationHandlerOfPurchase;
-import core.basesyntax.service.operation.OperationHandlerOfReturn;
-import core.basesyntax.service.operation.OperationHandlerOfSupply;
-import core.basesyntax.service.service.impl.DataProcessImpl;
+import core.basesyntax.service.service.impl.DataProcessServiceImpl;
+import core.basesyntax.service.strategy.OperationHandler;
+import core.basesyntax.service.strategy.OperationHandlerOfBalance;
+import core.basesyntax.service.strategy.OperationHandlerOfPurchase;
+import core.basesyntax.service.strategy.OperationHandlerOfReturn;
+import core.basesyntax.service.strategy.OperationHandlerOfSupply;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +25,7 @@ public class Main {
         operationServiceMap.put(FruitTransaction.Operation.RETURN,
                 new OperationHandlerOfReturn());
 
-        DataProcessImpl dataProcess = new DataProcessImpl(operationServiceMap);
+        DataProcessServiceImpl dataProcess = new DataProcessServiceImpl(operationServiceMap);
         dataProcess.processReport(INPUT_FILE, OUTPUT_FILE);
     }
 }

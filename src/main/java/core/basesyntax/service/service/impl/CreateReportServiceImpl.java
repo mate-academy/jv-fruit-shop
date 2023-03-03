@@ -1,7 +1,7 @@
 package core.basesyntax.service.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.service.CreateReportService;
 
 public class CreateReportServiceImpl implements CreateReportService {
@@ -22,8 +22,8 @@ public class CreateReportServiceImpl implements CreateReportService {
         report.append(HEADER_LINE);
         storageDao.getAll()
                 .stream()
-                .map(frt -> frt.getFruitName() + SEPARATOR + frt.getQuantity())
-                .forEach(str -> report.append(System.lineSeparator()).append(str));
+                .map(fruit -> fruit.getName() + SEPARATOR + fruit.getQuantity())
+                .forEach(string -> report.append(System.lineSeparator()).append(string));
         return report.toString();
     }
 }

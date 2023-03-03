@@ -2,30 +2,30 @@ package core.basesyntax.service.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CreateReportService;
-import core.basesyntax.service.DataProcess;
+import core.basesyntax.service.DataProcessService;
 import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.fileservice.FileReaderImpl;
 import core.basesyntax.service.fileservice.FileWriterImpl;
-import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.service.operation.OperationStrategy;
-import core.basesyntax.service.operation.OperationStrategyImpl;
+import core.basesyntax.service.strategy.OperationHandler;
+import core.basesyntax.service.strategy.OperationStrategy;
+import core.basesyntax.service.strategy.OperationStrategyImpl;
 import java.util.List;
 import java.util.Map;
 
-public class DataProcessImpl implements DataProcess {
+public class DataProcessServiceImpl implements DataProcessService {
     private final FileReaderImpl reader;
     private final TransactionService readerService;
     private final OperationStrategy operationStrategy;
-    private final FillStorageImpl fillStorage;
+    private final FillStorageServiceImpl fillStorage;
     private final CreateReportService createReportService;
-    private final FileWriterImpl write;
+    private final FileWriterImpl writer;
 
-    public DataProcessImpl(Map<FruitTransaction.Operation, OperationHandler> map) {
+    public DataProcessServiceImpl(Map<FruitTransaction.Operation, OperationHandler> map) {
         this.operationStrategy = new OperationStrategyImpl(map);
-        this.write = new FileWriterImpl();
+        this.writer = new FileWriterImpl();
         this.reader = new FileReaderImpl();
         this.readerService = new TransactionServiceImpl();
-        this.fillStorage = new FillStorageImpl();
+        this.fillStorage = new FillStorageServiceImpl();
         this.createReportService = new CreateReportServiceImpl();
     }
 
@@ -35,11 +35,12 @@ public class DataProcessImpl implements DataProcess {
         List<FruitTransaction> fruitTransactions =
                 readerService.createListTransaction(dataFromFile);
         processTransaction(fruitTransactions);
-        write.write(fileTo, createReportService.createReport());
+        writer.write(fileTo, createReportService.createReport());
     }
 
     private void processTransaction(List<FruitTransaction> transactions) {
         transactions
-                .forEach(trans -> operationStrategy.get(trans.getOperation()).update(trans));
+                .forEach(transaction ->
+                        operationStrategy.get(transaction.getOperation()).update(transaction));
     }
 }

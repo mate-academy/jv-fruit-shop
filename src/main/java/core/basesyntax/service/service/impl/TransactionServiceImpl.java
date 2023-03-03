@@ -2,6 +2,8 @@ package core.basesyntax.service.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.validator.Validator;
+import core.basesyntax.service.validator.ValidatorImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +13,11 @@ public class TransactionServiceImpl implements TransactionService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private final Validator validator;
+
+    public TransactionServiceImpl() {
+        this.validator = new ValidatorImpl();
+    }
 
     @Override
     public List<FruitTransaction> createListTransaction(List<String> dataFromFile) {
@@ -30,22 +37,10 @@ public class TransactionServiceImpl implements TransactionService {
         String operation = line[OPERATION_INDEX].replaceAll("\\W", "");
         String fruit = line[FRUIT_INDEX].replaceAll("\\W", "");
         String quantity = line[QUANTITY_INDEX].replaceAll("\\D", "");
-        checkTransaction(operation, fruit, quantity);
-        fruitTransaction.setOperation(fruitTransaction.getOperationLetter(operation));
+        validator.checkTransaction(operation, fruit, quantity);
+        fruitTransaction.setOperation(FruitTransaction.Operation.getOperationLetter(operation));
         fruitTransaction.setFruit(fruit);
         fruitTransaction.setQuantity(Integer.parseInt(quantity));
         return fruitTransaction;
-    }
-
-    private void checkTransaction(String operation, String fruit, String quantity) {
-        if (operation.equals("")) {
-            throw new RuntimeException("Activity type is empty.");
-        }
-        if (fruit.equals("")) {
-            throw new RuntimeException("Fruit name is empty.");
-        }
-        if (quantity.equals("")) {
-            throw new RuntimeException("Quantity value is empty.");
-        }
     }
 }

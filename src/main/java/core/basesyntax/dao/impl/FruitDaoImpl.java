@@ -1,5 +1,6 @@
-package core.basesyntax.dao;
+package core.basesyntax.dao.impl;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class FruitDaoImpl implements FruitDao {
     public Fruit get(String fruitName) {
         return Storage.getFruits()
                 .stream()
-                .filter(frt -> frt.getFruitName().equals(fruitName))
+                .filter(fruit -> fruit.getName().equals(fruitName))
                 .findFirst()
                 .orElseThrow(() ->
                         new RuntimeException("Can't get value of fruit " + fruitName));

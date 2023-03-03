@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface DataProcess {
+public interface DataProcessService {
     void processReport(String fileFrom, String fileTo);
 }

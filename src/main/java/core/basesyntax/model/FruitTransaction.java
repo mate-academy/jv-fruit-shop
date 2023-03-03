@@ -11,15 +11,6 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public FruitTransaction.Operation getOperationLetter(String letter) {
-        for (Operation value : Operation.values()) {
-            if (value.operation.equals(letter)) {
-                return value;
-            }
-        }
-        throw new RuntimeException("Wrong operation type");
-    }
-
     public Operation getOperation() {
         return operation;
     }
@@ -76,8 +67,13 @@ public class FruitTransaction {
             this.operation = operation;
         }
 
-        public String getOperation() {
-            return operation;
+        public static FruitTransaction.Operation getOperationLetter(String letter) {
+            for (Operation value : Operation.values()) {
+                if (value.operation.equals(letter)) {
+                    return value;
+                }
+            }
+            throw new RuntimeException("Wrong operation type");
         }
     }
 }

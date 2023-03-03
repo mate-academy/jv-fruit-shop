@@ -1,26 +1,24 @@
-package core.basesyntax.service.operation;
+package core.basesyntax.service.strategy;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.validator.Validator;
+import core.basesyntax.service.validator.ValidatorImpl;
 
 public class OperationHandlerOfBalance implements OperationHandler {
-    private static final int QUANTITY_MARKER = 0;
+    private final Validator validator;
     private final FruitDao storageDao;
 
     public OperationHandlerOfBalance() {
         this.storageDao = new FruitDaoImpl();
+        this.validator = new ValidatorImpl();
     }
 
     @Override
     public void update(FruitTransaction fruitTransaction) {
-        if (fruitTransaction == null) {
-            throw new RuntimeException("Fruit transaction can`t be null");
-        }
-        if (fruitTransaction.getQuantity() < QUANTITY_MARKER) {
-            throw new RuntimeException("Balance can`t be negative");
-        }
+        validator.validateFruitTransaction(fruitTransaction);
 
         Fruit fruit = storageDao.get(fruitTransaction.getFruit());
         fruit.setQuantity(fruitTransaction.getQuantity());
