@@ -73,7 +73,8 @@ public class FruitTransaction {
                     return value;
                 }
             }
-            throw new RuntimeException("Wrong operation type");
+            throw new IllegalArgumentException("Can't deduce operation from this letter: "
+                    + letter);
         }
     }
 }

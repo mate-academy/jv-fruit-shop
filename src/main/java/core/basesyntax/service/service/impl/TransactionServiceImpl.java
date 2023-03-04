@@ -3,12 +3,10 @@ package core.basesyntax.service.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.validator.Validator;
-import core.basesyntax.service.validator.ValidatorImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransactionServiceImpl implements TransactionService {
-    private static final String HEADER_LINE = "type,fruit,quantity";
     private static final String SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
@@ -16,16 +14,16 @@ public class TransactionServiceImpl implements TransactionService {
     private final Validator validator;
 
     public TransactionServiceImpl() {
-        this.validator = new ValidatorImpl();
+        this.validator = new Validator();
     }
 
     @Override
     public List<FruitTransaction> createListTransaction(List<String> dataFromFile) {
         if (dataFromFile == null || dataFromFile.isEmpty()) {
-            throw new RuntimeException("Data from input file can`t be empty");
+            throw new IllegalArgumentException("Data from input file can`t be empty");
         }
-        dataFromFile.remove(HEADER_LINE);
-        return dataFromFile
+
+        return dataFromFile.subList(1, dataFromFile.size())
                 .stream()
                 .map(this::createTransaction)
                 .collect(Collectors.toList());

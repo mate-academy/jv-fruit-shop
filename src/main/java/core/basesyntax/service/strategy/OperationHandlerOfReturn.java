@@ -5,7 +5,6 @@ import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.validator.Validator;
-import core.basesyntax.service.validator.ValidatorImpl;
 
 public class OperationHandlerOfReturn implements OperationHandler {
     private final Validator validator;
@@ -13,13 +12,12 @@ public class OperationHandlerOfReturn implements OperationHandler {
 
     public OperationHandlerOfReturn() {
         this.storageDao = new FruitDaoImpl();
-        this.validator = new ValidatorImpl();
+        this.validator = new Validator();
     }
 
     @Override
     public void update(FruitTransaction fruitTransaction) {
         validator.validateFruitTransaction(fruitTransaction);
-
         Fruit fruit = storageDao.get(fruitTransaction.getFruit());
         int fruitAmount = fruit.getQuantity();
         fruit.setQuantity(fruitAmount + fruitTransaction.getQuantity());

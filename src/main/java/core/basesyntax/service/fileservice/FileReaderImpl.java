@@ -1,7 +1,6 @@
 package core.basesyntax.service.fileservice;
 
 import core.basesyntax.service.validator.Validator;
-import core.basesyntax.service.validator.ValidatorImpl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +10,7 @@ public class FileReaderImpl implements FileReader {
     private final Validator validator;
 
     public FileReaderImpl() {
-        this.validator = new ValidatorImpl();
+        this.validator = new Validator();
     }
 
     public List<String> read(String fileName) {

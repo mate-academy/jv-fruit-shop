@@ -16,7 +16,7 @@ public class CreateReportServiceImpl implements CreateReportService {
     @Override
     public String createReport() {
         if (storageDao.getAll().isEmpty()) {
-            throw new RuntimeException("Can`t create report from empty fruits storage.");
+            throw new IllegalArgumentException("Can`t create report from empty fruits storage.");
         }
         StringBuilder report = new StringBuilder();
         report.append(HEADER_LINE);
