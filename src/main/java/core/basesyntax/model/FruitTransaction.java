@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -43,6 +45,13 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public Operation getOperation(String operator) {
+            return Arrays.stream(Operation.values())
+                    .filter(s -> s.getCode().equals(operator))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("wrong operator index"));
         }
     }
 }

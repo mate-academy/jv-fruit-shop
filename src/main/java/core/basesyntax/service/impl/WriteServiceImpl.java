@@ -1,16 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.WriteService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class CsvFileWriterServiceImpl implements FileWriter {
+public class WriteServiceImpl implements WriteService {
     @Override
     public void write(String report, String toFile) {
-        if (report.isEmpty() || report.isBlank()) {
-            throw new RuntimeException("Report is empty");
-        }
         try {
             Files.writeString(Paths.get(toFile), report);
         } catch (IOException e) {

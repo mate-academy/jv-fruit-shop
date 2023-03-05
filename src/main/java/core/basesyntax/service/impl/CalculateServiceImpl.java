@@ -2,24 +2,24 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.StockBalance;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CalculateData;
-import core.basesyntax.strategy.FruitsCalculatorStrategy;
+import core.basesyntax.service.CalculateService;
+import core.basesyntax.strategy.OperationHandlerStrategy;
 import java.util.List;
 
-public class CalculateDataServiceImpl implements CalculateData {
-    private FruitsCalculatorStrategy fruitsCalculatorStrategy;
+public class CalculateServiceImpl implements CalculateService {
+    private OperationHandlerStrategy operationHandlerStrategy;
 
     @Override
     public void create(List<FruitTransaction> list) {
-        fruitsCalculatorStrategy = new FruitsCalculatorStrategy();
+        operationHandlerStrategy = new OperationHandlerStrategy();
         for (FruitTransaction itemList : list) {
             if (!StockBalance.STOCK_BALANCE.containsKey(itemList.getFruit())
                     && itemList.getOperation() == FruitTransaction.Operation.BALANCE) {
-                int newQuantity = fruitsCalculatorStrategy.putPreviousPeriodQuantity(
-                        itemList.getQuantity(), itemList.getOperation());
+                int newQuantity = operationHandlerStrategy.calculateQuantity(
+                        0, itemList.getQuantity(), itemList.getOperation());
                 StockBalance.STOCK_BALANCE.put(itemList.getFruit(), newQuantity);
             } else {
-                int newQuantity = fruitsCalculatorStrategy.calculateQuantity(
+                int newQuantity = operationHandlerStrategy.calculateQuantity(
                         StockBalance.STOCK_BALANCE.get(itemList.getFruit()),
                         itemList.getQuantity(), itemList.getOperation());
                 StockBalance.STOCK_BALANCE.put(itemList.getFruit(), newQuantity);

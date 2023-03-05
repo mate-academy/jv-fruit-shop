@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.StockBalance;
-import core.basesyntax.service.GenerateReport;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
-public class GenerateBalanceServiceImpl implements GenerateReport {
+public class ReportServiceImpl implements ReportService {
     private static final String COLUMN_NAMES = "fruit,quantity";
     private static final String DELIMITER = ",";
 

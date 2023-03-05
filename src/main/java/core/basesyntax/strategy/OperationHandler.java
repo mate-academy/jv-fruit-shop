@@ -1,7 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface OperationStrategy {
+public interface OperationHandler {
     int calculateQuantity(int quantityBefore, int quantityCurrent);
-
-    int putPreviousPeriodQuantity(int quantity);
 }
