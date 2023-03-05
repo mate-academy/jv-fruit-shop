@@ -1,14 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReader;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvFileReaderImpl implements FileReader {
+public class CsvFileReaderServiceImpl implements FileReader {
     private File file;
 
     @Override
@@ -17,7 +16,7 @@ public class CsvFileReaderImpl implements FileReader {
         try {
             readAllLines = Files.readAllLines(file.toPath());
         } catch (IOException e) {
-            throw new RuntimeException("can't read file " + file, e);
+            throw new RuntimeException("Can't find file by path: " + file, e);
         }
         return readAllLines;
     }

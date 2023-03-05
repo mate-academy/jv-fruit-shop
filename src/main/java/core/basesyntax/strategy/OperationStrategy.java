@@ -1,2 +1,5 @@
-package core.basesyntax.strategy;public class OperationStrategy {
+package core.basesyntax.strategy;
+
+public interface OperationStrategy {
+    int calculateQuantity(int quantityBefore, int quantityCurrent);
 }

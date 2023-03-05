@@ -1,2 +1,7 @@
-package core.basesyntax.service;public interface GanarateBalance {
+package core.basesyntax.service;
+
+import java.util.Map;
+
+public interface GenerateReport {
+    String get(Map<String, Integer> balance);
 }
