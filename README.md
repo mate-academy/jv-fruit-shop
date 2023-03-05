@@ -76,13 +76,13 @@ public class FruitTransaction {
   // getters, setters, ...
   
   public enum Operation {
-    BALANCE("b"),
-    SUPPLY("s"),
-    PURCHASE("p"),
-    RETURN("r");
+     BALANCE("b"),
+     SUPPLY("s"),
+     PURCHASE("p"),
+     RETURN("r");
 
-    private String code;
-
+     private String code;
+  }
     Operation(String code) {
       this.code = code;
     }
@@ -91,7 +91,8 @@ public class FruitTransaction {
       return code;
     }
   }
-}
+
+
 ```
 
 #### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop)
