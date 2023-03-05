@@ -7,10 +7,11 @@ import core.basesyntax.strategy.FruitsCalculatorStrategy;
 import java.util.List;
 
 public class CalculateDataServiceImpl implements CalculateData {
+    private FruitsCalculatorStrategy fruitsCalculatorStrategy;
 
     @Override
     public void create(List<FruitTransaction> list) {
-        FruitsCalculatorStrategy fruitsCalculatorStrategy = new FruitsCalculatorStrategy();
+        fruitsCalculatorStrategy = new FruitsCalculatorStrategy();
         for (FruitTransaction itemList : list) {
             if (!StockBalance.STOCK_BALANCE.containsKey(itemList.getFruit())
                     && itemList.getOperation() == FruitTransaction.Operation.BALANCE) {

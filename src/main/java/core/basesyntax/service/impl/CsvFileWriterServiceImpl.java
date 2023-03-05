@@ -8,6 +8,9 @@ import java.nio.file.Paths;
 public class CsvFileWriterServiceImpl implements FileWriter {
     @Override
     public void write(String report, String toFile) {
+        if (report.isEmpty() || report.isBlank()) {
+            throw new RuntimeException("Report is empty");
+        }
         try {
             Files.writeString(Paths.get(toFile), report);
         } catch (IOException e) {
