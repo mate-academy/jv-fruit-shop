@@ -7,4 +7,9 @@ public class OperationStrategyPurchaseImpl implements OperationStrategy {
     public int calculateQuantity(int quantityBefore, int currentQuantity) {
         return quantityBefore - currentQuantity;
     }
+
+    @Override
+    public int putPreviousPeriodQuantity(int quantity) {
+        return quantity;
+    }
 }

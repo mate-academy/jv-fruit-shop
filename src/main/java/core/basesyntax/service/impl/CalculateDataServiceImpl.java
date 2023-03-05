@@ -14,7 +14,7 @@ public class CalculateDataServiceImpl implements CalculateData {
         for (FruitTransaction itemList : list) {
             if (!StockBalance.STOCK_BALANCE.containsKey(itemList.getFruit())
                     && itemList.getOperation() == FruitTransaction.Operation.BALANCE) {
-                int newQuantity = fruitsCalculatorStrategy.calculateQuantity(0,
+                int newQuantity = fruitsCalculatorStrategy.putPreviousPeriodQuantity(
                         itemList.getQuantity(), itemList.getOperation());
                 StockBalance.STOCK_BALANCE.put(itemList.getFruit(), newQuantity);
             } else {

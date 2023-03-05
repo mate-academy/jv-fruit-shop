@@ -15,6 +15,11 @@ public class FruitsCalculatorStrategy {
         return operationStrategy.calculateQuantity(quantityBefore, current);
     }
 
+    public int putPreviousPeriodQuantity(int current, FruitTransaction.Operation operation) {
+        OperationStrategy operationStrategy = mapFruitsTransactionOperations().get(operation);
+        return operationStrategy.putPreviousPeriodQuantity(current);
+    }
+
     private Map<FruitTransaction.Operation,
             OperationStrategy> mapFruitsTransactionOperations() {
         Map<FruitTransaction.Operation, OperationStrategy> map = new HashMap<>();
