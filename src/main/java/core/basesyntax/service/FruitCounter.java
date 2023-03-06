@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.Fruit;
 
-public interface ReportCounter {
+public interface FruitCounter {
     Fruit[] countReport();
 }

@@ -3,16 +3,16 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.FruitsTransactions;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ReportCounter;
+import core.basesyntax.service.FruitCounter;
 import core.basesyntax.strategy.StrategyOptions;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ReportCounterImpl implements ReportCounter {
+public class FruitCounterImpl implements FruitCounter {
     private StrategyOptions strategyOptions;
 
-    public ReportCounterImpl(StrategyOptions strategyOptions) {
+    public FruitCounterImpl(StrategyOptions strategyOptions) {
         this.strategyOptions = strategyOptions;
     }
 
