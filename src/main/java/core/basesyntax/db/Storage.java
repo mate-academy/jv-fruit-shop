@@ -3,6 +3,6 @@ package core.basesyntax.db;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StockBalance {
+public class Storage {
     public static final Map<String, Integer> STOCK_BALANCE = new HashMap<>();
 }

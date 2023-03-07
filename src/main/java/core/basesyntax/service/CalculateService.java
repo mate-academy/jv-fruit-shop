@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface CalculateService {
-    public void create(List<FruitTransaction> list);
+    public void put(List<FruitTransaction> list);
 }

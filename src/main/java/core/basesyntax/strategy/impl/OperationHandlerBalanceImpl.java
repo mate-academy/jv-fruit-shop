@@ -1,18 +1,26 @@
 package core.basesyntax.strategy.impl;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
 public class OperationHandlerBalanceImpl implements OperationHandler {
+    private Storage storage;
+
+    public OperationHandlerBalanceImpl(Storage storage) {
+        this.storage = storage;
+    }
+
     @Override
-    public int calculateQuantity(int quantityBefore, int balance) {
-        if (quantityBefore != 0) {
-            throw new RuntimeException("QuantityBefore must be 0, but ii is "
-                    + quantityBefore);
+    public void handle(FruitTransaction transaction) {
+        validation(transaction.getQuantity());
+        storage.STOCK_BALANCE.put(transaction.getFruit(), transaction.getQuantity());
+    }
+
+    private void validation(int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Balance shouldn't be less 0. But it is "
+                    + quantity);
         }
-        if (balance < 0) {
-            throw new RuntimeException("Balance quantity must be over or equal 0, but it is "
-                    + balance);
-        }
-        return balance;
     }
 }

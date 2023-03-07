@@ -47,11 +47,12 @@ public class FruitTransaction {
             return code;
         }
 
-        public Operation getOperation(String operator) {
+        public static Operation getByCode(String code) {
             return Arrays.stream(Operation.values())
-                    .filter(s -> s.getCode().equals(operator))
+                    .filter(s -> s.getCode().equals(code))
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("wrong operator index"));
+                    .orElseThrow(() -> new RuntimeException("Operation code '"
+                            + code + "' doesn't exist"));
         }
     }
 }

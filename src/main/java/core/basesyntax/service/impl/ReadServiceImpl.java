@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadServiceImpl implements ReadService {
-
     @Override
     public List<String> read(File file) {
         List<String> readAllLines = new ArrayList<>();

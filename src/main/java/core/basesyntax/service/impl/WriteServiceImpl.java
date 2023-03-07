@@ -7,9 +7,9 @@ import java.nio.file.Paths;
 
 public class WriteServiceImpl implements WriteService {
     @Override
-    public void write(String report, String toFile) {
+    public void write(String content, String toFile) {
         try {
-            Files.writeString(Paths.get(toFile), report);
+            Files.writeString(Paths.get(toFile), content);
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file: " + toFile, e);
         }
