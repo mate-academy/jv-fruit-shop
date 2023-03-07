@@ -1,0 +1,12 @@
+type,fruit,quantity
+        b,apple,100
+        b,orange,500
+        b,mango,81
+        r,pear,205
+        b,plum,101
+        r,apple,10
+        p,apple,20
+        p,mango,10
+        p,orange,35
+        p,pear,5
+        p,pear,9
