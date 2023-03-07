@@ -1,10 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.FruitsTransactions;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitDto;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitCounter;
 import core.basesyntax.strategy.StrategyOptions;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -17,18 +18,17 @@ public class FruitCounterImpl implements FruitCounter {
     }
 
     @Override
-    public Fruit[] countReport() {
-        Map<String, List<FruitTransaction>> collect = FruitsTransactions.Storage
+    public List<FruitDto> countReport() {
+        Map<String, List<FruitTransaction>> collect = Storage.storage
                 .stream().collect(Collectors.groupingBy(FruitTransaction::getFruit));
-        Fruit[] fruits = new Fruit[collect.size()];
-        int index = 0;
+        List<FruitDto> fruits = new ArrayList<>();
         for (Map.Entry<String, List<FruitTransaction>> entry: collect.entrySet()) {
-            fruits[index] = new Fruit(entry.getKey(), 0);
+            FruitDto fruitDto = new FruitDto(entry.getKey(), 0);
             for (FruitTransaction element : entry.getValue()) {
-                fruits[index] = strategyOptions.get(element.getOperation())
-                        .getCount(element, fruits[index]);
+                strategyOptions.get(element.getOperation())
+                        .applyAction(element, fruitDto);
             }
-            index++;
+            fruits.add(fruitDto);
         }
         return fruits;
     }

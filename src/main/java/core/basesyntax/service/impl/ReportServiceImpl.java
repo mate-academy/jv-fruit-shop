@@ -1,14 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ReportCreated;
+import core.basesyntax.model.FruitDto;
+import core.basesyntax.service.ReportService;
+import java.util.List;
 
-public class ReportCreatedImpl implements ReportCreated {
+public class ReportServiceImpl implements ReportService {
     @Override
-    public String createReport(Fruit[] fruits) {
+    public String createReport(List<FruitDto> fruits) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity").append(System.lineSeparator());
-        for (Fruit element: fruits) {
+        for (FruitDto element: fruits) {
             stringBuilder.append(element.getFruit()).append(",")
                     .append(element.getQuantity()).append(System.lineSeparator());
         }

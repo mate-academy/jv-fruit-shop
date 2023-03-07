@@ -1,29 +1,27 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.FruitsTransactions;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Saved;
+import core.basesyntax.service.SaveService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SavedImpl implements Saved {
-    private static final String MESSAGE_DELIMITER = "///";
+public class SaveServiceImpl implements SaveService {
     private static final String DELIMITER_BY_SENTENCE = ",";
 
     @Override
-    public List<FruitTransaction> saveToDb(String string) {
+    public List<FruitTransaction> saveToDb(List<String> string) {
         List<FruitTransaction> transactions = new ArrayList<>();
-        String[] sentence = string.split(MESSAGE_DELIMITER);
         String[] message;
-        for (int i = 1; i < sentence.length; i++) {
-            message = sentence[i].split(DELIMITER_BY_SENTENCE);
+        for (int i = 1; i < string.size(); i++) {
+            message = string.get(i).split(DELIMITER_BY_SENTENCE);
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setOperation(getOperation(message[0]));
             fruitTransaction.setFruit(message[1]);
             fruitTransaction.setQuantity(Integer.parseInt(message[2]));
             transactions.add(fruitTransaction);
         }
-        FruitsTransactions.Storage.addAll(transactions);
+        Storage.storage.addAll(transactions);
         return transactions;
     }
 

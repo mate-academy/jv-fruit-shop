@@ -1,13 +1,12 @@
 package core.basesyntax.actions;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitDto;
 import core.basesyntax.model.FruitTransaction;
 
 public class SupplyAction implements DoingAction {
 
     @Override
-    public Fruit getCount(FruitTransaction transaction, Fruit fruit) {
+    public void applyAction(FruitTransaction transaction, FruitDto fruit) {
         fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity());
-        return fruit;
     }
 }
