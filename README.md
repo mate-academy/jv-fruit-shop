@@ -1,4 +1,4 @@
-# Fruit shop
+f# Fruit shop
 Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
@@ -68,30 +68,7 @@ The line above means you have 152 bananas, and 90 apples in your Fruit store aft
 **Hint: Think about creating some FruitTransaction model to store info from file line for more convenient data processing 
 (this is only a recommendation, you can use other classes / approaches to solve this task at your discretion):**
 ```java
-public class FruitTransaction {
-  private Operation operation;
-  private String fruit;
-  private int quantity;
 
-  // getters, setters, ...
-  
-  public enum Operation {
-    BALANCE("b"),
-    SUPPLY("s"),
-    PURCHASE("p"),
-    RETURN("r");
-
-    private String code;
-
-    Operation(String code) {
-      this.code = code;
-    }
-
-    public String getCode() {
-      return code;
-    }
-  }
-}
 ```
 
 #### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop)
