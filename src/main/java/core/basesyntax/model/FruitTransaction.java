@@ -44,5 +44,14 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation fromCode(String code) {
+            for (Operation b : Operation.values()) {
+                if (b.code.equalsIgnoreCase(code)) {
+                    return b;
+                }
+            }
+            return null;
+        }
     }
 }
