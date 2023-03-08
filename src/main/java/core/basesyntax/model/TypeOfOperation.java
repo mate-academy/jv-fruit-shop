@@ -16,9 +16,9 @@ public enum TypeOfOperation {
         return code;
     }
 
-    public static core.basesyntax.model.TypeOfOperation getByCode(String string) {
-        for (core.basesyntax.model.TypeOfOperation type
-                : core.basesyntax.model.TypeOfOperation.values()) {
+    public static TypeOfOperation getByCode(String string) {
+        for (TypeOfOperation type
+                : TypeOfOperation.values()) {
             if (string.equals(type.getCode())) {
                 return type;
             }
