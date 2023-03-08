@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.StorageTransactionsDao;
-
+import core.basesyntax.service.StorageTransactions;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class StorageTransactionsDaoImpl implements StorageTransactionsDao {
+public class StorageTransactionsImpl implements StorageTransactions {
     @Override
     public List<String[]> convertFileIntoList(File inputFile) {
         List<String> inputData;
