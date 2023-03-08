@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParser;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +18,8 @@ public class TransactionParserImpl implements TransactionParser {
                 .map(this::parseTransaction)
                 .collect(Collectors.toList());
     }
-    private FruitTransaction parseTransaction(String line){
+
+    private FruitTransaction parseTransaction(String line) {
         FruitTransaction fruitTransaction = new FruitTransaction();
         String[] parseTransaction = line.split(",");
         String operator = parseTransaction[OPERATION_TYPE_INDEX].trim();
