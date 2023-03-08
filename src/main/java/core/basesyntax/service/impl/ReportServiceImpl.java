@@ -1,24 +1,24 @@
 package core.basesyntax.service.impl;
 
-import static core.basesyntax.db.Storage.getStorage;
-
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.CalculationService;
+import core.basesyntax.service.FormingReport;
+import core.basesyntax.service.ReadWriteOperations;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.StorageTransactions;
-import core.basesyntax.strategy.CalculationService;
-import core.basesyntax.strategy.CalculationServiceImpl;
 import java.io.File;
 import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
-    private final StorageTransactions storageTransactions = new StorageTransactionsImpl();
+    private final ReadWriteOperations readWriteOperations = new ReadWriteOperationsImpl();
     private final CalculationService calculationService = new CalculationServiceImpl();
+    private final FormingReport formingReport = new FormingReportImpl();
 
     @Override
     public File sendReport(File input) {
-        List<String[]> listOfData = storageTransactions.convertFileIntoList(input);
+        List<String> listOfData = readWriteOperations.readInfoFromFile(input);
         calculationService.initializationStorage(listOfData);
         calculationService.calculation(listOfData);
-        String textOfReport = storageTransactions.formingReport(getStorage());
-        return storageTransactions.sentReport(textOfReport);
+        String textOfReport = formingReport.formingReport(Storage.getStorage());
+        return readWriteOperations.writeReport(textOfReport);
     }
 }
