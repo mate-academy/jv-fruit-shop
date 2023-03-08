@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.CreateReportMessage;
-import core.basesyntax.service.CreateTheReport;
 import core.basesyntax.service.WriteTheReportToDataBase;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,7 +9,7 @@ import java.util.Map;
 
 public class WriteTheReportToDataBaseImpl implements WriteTheReportToDataBase {
     private static final String REPORT_FILE_NAME = "report.csv";
-    CreateReportMessage createReportMessage = new CreateReportMessageImpl();
+    private final CreateReportMessage createReportMessage = new CreateReportMessageImpl();
 
     @Override
     public void write(Map<String, Integer> toWrite) {
