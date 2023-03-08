@@ -1,6 +1,6 @@
-package core.basesyntax.calculation;
+package core.basesyntax.strategy;
 
-import core.basesyntax.db.Operation;
+import core.basesyntax.model.Operation;
 import core.basesyntax.db.StorageTransactions;
 import java.util.List;
 import java.util.Map;

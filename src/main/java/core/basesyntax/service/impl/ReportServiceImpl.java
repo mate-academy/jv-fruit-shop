@@ -1,9 +1,10 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.calculation.CalculationService;
-import core.basesyntax.calculation.CalculationServiceImpl;
-import core.basesyntax.dao.StorageTransactionsDao;
-import core.basesyntax.dao.StorageTransactionsDaoImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.strategy.CalculationService;
+import core.basesyntax.strategy.CalculationServiceImpl;
+import core.basesyntax.service.StorageTransactionsDao;
+import core.basesyntax.service.StorageTransactionsDaoImpl;
 import core.basesyntax.db.StorageTransactions;
 import java.io.File;
 import java.util.List;

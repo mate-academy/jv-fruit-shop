@@ -1,4 +1,4 @@
-package core.basesyntax.calculation;
+package core.basesyntax.strategy;
 
 import java.util.List;
 

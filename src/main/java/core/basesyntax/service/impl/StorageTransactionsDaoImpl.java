@@ -1,4 +1,6 @@
-package core.basesyntax.dao;
+package core.basesyntax.service.impl;
+
+import core.basesyntax.service.StorageTransactionsDao;
 
 import java.io.File;
 import java.io.IOException;
