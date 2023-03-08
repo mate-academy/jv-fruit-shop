@@ -18,7 +18,8 @@ public class CreateTheReportImpl implements CreateTheReport {
         for (String[] str : list) {
             if (!str[TYPE_INDEX].equals(WORD_TO_IGNORE)) {
                 actionsStrategy.get(TypeOfOperation.getByCode(str[TYPE_INDEX]))
-                        .getAmountAfterAction(str[FRUIT_INDEX], Integer.parseInt(str[AMOUNT_INDEX]));
+                        .getAmountAfterAction(str[FRUIT_INDEX],
+                                Integer.parseInt(str[AMOUNT_INDEX]));
             }
         }
     }
