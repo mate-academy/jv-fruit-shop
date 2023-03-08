@@ -12,8 +12,8 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport() {
-        return "fruit,quantity" + System.lineSeparator() +
-                storageDao.getAll().entrySet().stream()
+        return "fruit,quantity" + System.lineSeparator()
+                + storageDao.getAll().entrySet().stream()
                         .map(entry -> entry.getKey() + "," + entry.getValue())
                         .collect(Collectors.joining(System.lineSeparator()));
 

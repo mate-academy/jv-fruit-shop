@@ -14,6 +14,4 @@ public class BalanceOperationHandlerImpl implements OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         storageDao.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
-
-
 }
