@@ -50,7 +50,7 @@ public class FruitTransaction {
         public static Operation getByCode(String code) {
             return Arrays.stream(Operation.values())
                     .filter(s -> s.getCode().equals(code))
-                    .findFirst()
+                    .findAny()
                     .orElseThrow(() -> new RuntimeException("Operation code '"
                             + code + "' doesn't exist"));
         }

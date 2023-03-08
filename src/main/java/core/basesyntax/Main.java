@@ -45,10 +45,9 @@ public class Main {
         TransactionParser parser = new TransactionParserImpl();
         List<FruitTransaction> fruitsTransactions
                 = parser.parse(fruitsOperations);
-
-        CalculateService calculateServiceReport
+        CalculateService calculateService
                 = new CalculateServiceImpl(new OperationHandlerStrategy(handlerMap));
-        calculateServiceReport.put(fruitsTransactions);
+        calculateService.process(fruitsTransactions);
         ReportService reportService = new ReportServiceImpl(storage);
         String report = reportService.getReport();
         WriteService writeService = new WriteServiceImpl();

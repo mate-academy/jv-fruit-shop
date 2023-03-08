@@ -14,7 +14,7 @@ public class CalculateServiceImpl implements CalculateService {
     }
 
     @Override
-    public void put(List<FruitTransaction> list) {
+    public void process(List<FruitTransaction> list) {
         for (FruitTransaction transaction : list) {
             OperationHandler handler = operationHandlerStrategy.get(transaction);
             handler.handle(transaction);

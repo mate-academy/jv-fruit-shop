@@ -13,16 +13,16 @@ public class OperationHandlerSupplyImpl implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
+        validation(transaction);
         int quantityBeforeSupply = storage.STOCK_BALANCE.get(transaction.getFruit());
         int quantityAfterSupply = quantityBeforeSupply + transaction.getQuantity();
-        validation(quantityAfterSupply);
         storage.STOCK_BALANCE.put(transaction.getFruit(), quantityAfterSupply);
     }
 
-    private void validation(int quantityAfterSupply) {
-        if (quantityAfterSupply <= 0) {
+    private void validation(FruitTransaction transaction) {
+        if (transaction.getQuantity() < 0) {
             throw new RuntimeException("The supply quantity must be over 0. But it is "
-                    + quantityAfterSupply);
+                    + transaction.getQuantity());
         }
     }
 }
