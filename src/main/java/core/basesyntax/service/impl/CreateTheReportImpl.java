@@ -16,11 +16,10 @@ public class CreateTheReportImpl implements CreateTheReport {
     @Override
     public void add(List<String[]> list) {
         for (String[] str : list) {
-            if (str[TYPE_INDEX].equals(WORD_TO_IGNORE)) {
-                continue;
+            if (!str[TYPE_INDEX].equals(WORD_TO_IGNORE)) {
+                actionsStrategy.get(TypeOfOperation.getByCode(str[TYPE_INDEX]))
+                        .getAmountAfterAction(str[FRUIT_INDEX], Integer.parseInt(str[AMOUNT_INDEX]));
             }
-            actionsStrategy.get(TypeOfOperation.getByCode(str[TYPE_INDEX]))
-                    .getAmountAfterAction(str[FRUIT_INDEX], Integer.parseInt(str[AMOUNT_INDEX]));
         }
     }
 }
