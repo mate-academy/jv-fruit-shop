@@ -6,13 +6,13 @@ public class CalculationStrategy {
     public CalculationService getCalculationServiceByLetter(FruitTransaction transaction) {
         switch (transaction.getOperation()) {
             case BALANCE:
-                return new Balance();
+                return new BalanceTransaction();
             case SUPPLY:
-                return new Supply();
+                return new SupplyTransaction();
             case PURCHASE:
-                return new Purchase();
+                return new PurchaseTransaction();
             default:
-                return new Return();
+                return new ReturnTransaction();
         }
     }
 }
