@@ -1,25 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReadWriteOperations;
+import core.basesyntax.service.WriterService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
-import java.util.List;
 
-public class ReadWriteOperationsImpl implements ReadWriteOperations {
-    @Override
-    public List<String> readInfoFromFile(File inputFile) {
-        List<String> inputData;
-        try {
-            inputData = Files.readAllLines(inputFile.toPath());
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read the file " + inputFile);
-        }
-        return inputData;
-    }
-
+public class WriterServiceImpl implements WriterService {
     @Override
     public File writeReport(String data) {
         String nameFile = "Report " + LocalDate.now();
