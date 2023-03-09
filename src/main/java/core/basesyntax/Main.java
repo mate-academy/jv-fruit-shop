@@ -24,10 +24,10 @@ public class Main {
         WriterService writerService = new WriterServiceImpl();
         FruitCalculatorImpl calculationFruits = new FruitCalculatorImpl();
         File dataFile = new File(FILE_NAME);
-        List<String> listOfData = readerService.readInfoFromFile(dataFile);
-        List<FruitTransaction> parsedData = parser.parseData(listOfData);
+        List<String> listOfData = readerService.readFileToList(dataFile);
+        List<FruitTransaction> parsedData = parser.createTransaction(listOfData);
         calculationFruits.calculate(parsedData);
-        String textOfReport = reportMakerService.reportMaker(Storage.STORAGE);
-        writerService.writeReport(textOfReport);
+        String textOfReport = reportMakerService.generateReportText(Storage.STORAGE);
+        writerService.writeReportToFile(textOfReport);
     }
 }

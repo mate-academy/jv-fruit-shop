@@ -14,7 +14,7 @@ public class TransactionParserServiceImpl implements TransactionParserService {
     private static final String COMA = ",";
 
     @Override
-    public List<FruitTransaction> parseData(List<String> data) {
+    public List<FruitTransaction> createTransaction(List<String> data) {
         data.remove(INDEX_FIRST_LINE);
         return data.stream()
                 .map(i -> i.split(COMA))

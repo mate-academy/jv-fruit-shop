@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class WriterServiceImpl implements WriterService {
     @Override
-    public File writeReport(String data) {
+    public File writeReportToFile(String data) {
         String nameFile = "Report " + LocalDate.now();
         File reportFile = new File(nameFile);
         try {

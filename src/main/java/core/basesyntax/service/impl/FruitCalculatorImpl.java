@@ -13,7 +13,7 @@ public class FruitCalculatorImpl implements FruitCalculator {
         for (FruitTransaction fruitTransaction : parsedString) {
             CALCULATION_STRATEGY
                     .getCalculationServiceByLetter(fruitTransaction)
-                    .transaction(fruitTransaction);
+                    .calculateAndStore(fruitTransaction);
         }
     }
 }

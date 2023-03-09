@@ -8,7 +8,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
     private static final char COMA = ',';
 
     @Override
-    public String reportMaker(Map<String, Integer> info) {
+    public String generateReportText(Map<String, Integer> info) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(TABLE_HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : info.entrySet()) {

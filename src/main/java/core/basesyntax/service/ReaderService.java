@@ -4,5 +4,5 @@ import java.io.File;
 import java.util.List;
 
 public interface ReaderService {
-    List<String> readInfoFromFile(File inputFile);
+    List<String> readFileToList(File inputFile);
 }
