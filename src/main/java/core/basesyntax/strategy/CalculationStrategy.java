@@ -4,12 +4,12 @@ import core.basesyntax.model.FruitTransaction;
 
 public class CalculationStrategy {
     public CalculationService getCalculationServiceByLetter(FruitTransaction transaction) {
-        switch (transaction.getOperation().getCode()) {
-            case "b":
+        switch (transaction.getOperation()) {
+            case BALANCE:
                 return new Balance();
-            case "s":
+            case SUPPLY:
                 return new Supply();
-            case "p":
+            case PURCHASE:
                 return new Purchase();
             default:
                 return new Return();
