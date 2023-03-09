@@ -1,13 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.CsvFileWriter;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class CsvFileWriterImpl implements CsvFileWriter {
-    private static final String LINE_SEPARATOR = System.lineSeparator();
     private final String filePath;
 
     public CsvFileWriterImpl(String filePath) {
@@ -15,16 +13,11 @@ public class CsvFileWriterImpl implements CsvFileWriter {
     }
 
     @Override
-    public void write(List<String> content) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write(String.join(LINE_SEPARATOR, content));
+    public void write(String string) {
+        try {
+            Files.writeString(Path.of(filePath), string);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file '" + filePath + '\'');
+            throw new RuntimeException("Can't write to file " + filePath + '\'', e);
         }
-    }
-
-    @Override
-    public String getFileName() {
-        return filePath;
     }
 }

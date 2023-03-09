@@ -21,9 +21,4 @@ public class CsvFileReaderImpl implements CsvFileReader {
             throw new RuntimeException("Can't find the file '" + filePath + '\'', e);
         }
     }
-
-    @Override
-    public String getFileName() {
-        return filePath;
-    }
 }

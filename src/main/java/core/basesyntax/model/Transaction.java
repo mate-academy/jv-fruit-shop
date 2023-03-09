@@ -1,9 +1,11 @@
 package core.basesyntax.model;
 
+import core.basesyntax.model.FruitTransaction.Operation;
+
 public interface Transaction {
     String getProductName();
 
-    Operation getOperationType();
+    Operation getOperation();
 
     int getQuantity();
 }
