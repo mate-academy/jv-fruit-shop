@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Calculation;
+import core.basesyntax.service.CalculationFruits;
 import core.basesyntax.strategy.CalculationStrategy;
 import java.util.List;
 
-public class CalculationImpl implements Calculation {
+public class CalculationFruitsImpl implements CalculationFruits {
     private static final CalculationStrategy CALCULATION_STRATEGY = new CalculationStrategy();
 
     @Override

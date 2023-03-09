@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.util.Map;
 
-public interface FormingReport {
+public interface ReportMakerService {
     String formingReport(Map<String, Integer> info);
 }
