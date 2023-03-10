@@ -13,9 +13,9 @@ public class CsvFileWriterImpl implements CsvFileWriter {
     }
 
     @Override
-    public void write(String string) {
+    public void write(String csvFormattedReport) {
         try {
-            Files.writeString(Path.of(filePath), string);
+            Files.writeString(Path.of(filePath), csvFormattedReport);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file " + filePath + '\'', e);
         }

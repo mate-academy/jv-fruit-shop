@@ -1,6 +1,8 @@
 package core.basesyntax.model;
 
-public class FruitTransaction implements Transaction {
+import java.util.Arrays;
+
+public class FruitTransaction {
     private final Operation operation;
     private final String productName;
     private final int quantity;
@@ -11,17 +13,14 @@ public class FruitTransaction implements Transaction {
         this.quantity = quantity;
     }
 
-    @Override
     public String getProductName() {
         return productName;
     }
 
-    @Override
     public Operation getOperation() {
         return operation;
     }
 
-    @Override
     public int getQuantity() {
         return quantity;
     }
@@ -40,6 +39,14 @@ public class FruitTransaction implements Transaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation getByCode(String operationCode) {
+            return Arrays.stream(values())
+                    .filter(operation -> operation.getCode().equals(operationCode))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Invalid operation code '"
+                            + operationCode + '\''));
         }
     }
 }

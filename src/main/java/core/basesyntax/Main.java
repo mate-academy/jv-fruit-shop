@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Transaction;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.ReportService;
@@ -47,9 +46,10 @@ public class Main {
         List<String> stringTransactionsList = csvFileReader.read();
 
         TransactionParser transactionParser = new TransactionParserImpl();
-        List<Transaction> transactions = transactionParser.parseTransaction(stringTransactionsList);
+        List<FruitTransaction> fruitTransactions = transactionParser
+                .parseTransactions(stringTransactionsList);
 
-        transactionHandler.handleTransactions(transactions);
+        transactionHandler.handleTransactions(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl(FruitStorage.storage);
 

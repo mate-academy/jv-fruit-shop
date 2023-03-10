@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.model.Transaction;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 
@@ -9,11 +9,15 @@ public class PurchaseOperationHandler implements OperationHandler {
     private final Map<String, Integer> storage = FruitStorage.storage;
 
     @Override
-    public void handleOperation(Transaction transaction) {
-        String productName = transaction.getProductName();
-        int quantity = transaction.getQuantity();
-        storage.put(productName, storage.containsKey(productName)
-                ? storage.get(productName) - quantity
-                : -quantity);
+    public void handleOperation(FruitTransaction transaction) {
+        if (!storage.containsKey(transaction.getProductName())
+                || storage.get(transaction.getProductName()) < transaction.getQuantity()) {
+            throw new RuntimeException("Can't handle PURCHASE transaction for the '"
+                    + transaction.getProductName() + "' with value '" + transaction.getQuantity()
+                    + "'. Available quantity is: "
+                    + (storage.getOrDefault(transaction.getProductName(), 0)));
+        }
+        storage.merge(transaction.getProductName(), transaction.getQuantity(),
+                (storageValue, transactionValue) -> storageValue - transactionValue);
     }
 }
