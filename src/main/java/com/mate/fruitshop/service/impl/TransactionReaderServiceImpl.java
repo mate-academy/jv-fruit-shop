@@ -6,17 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionReaderServiceImpl implements TransactionReaderService {
+
+    public static final String DELIMITER = ",";
+    public static final int OPERATION_CODE_INDEX = 0;
+    public static final int FRUIT_NAME_INDEX = 1;
+    public static final int QUANTITY_INDEX = 2;
+
     @Override
     public List<Transaction> read(List<String> lines) {
         List<Transaction> transactions = new ArrayList<>();
         for (String line : lines) {
-            String[] values = line.split(",");
-            Transaction.Operation operation = Transaction.Operation.getOperationByCode(values[0]);
+            String[] values = line.split(DELIMITER);
+            Transaction.Operation operation =
+                    Transaction.Operation.getOperationByCode(values[OPERATION_CODE_INDEX]);
             if (operation == null) {
                 continue;
             }
-            String fruitName = values[1];
-            int quantity = Integer.parseInt(values[2]);
+            String fruitName = values[FRUIT_NAME_INDEX];
+            int quantity = Integer.parseInt(values[QUANTITY_INDEX]);
             transactions.add(new Transaction(operation, fruitName, quantity));
         }
         return transactions;

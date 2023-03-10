@@ -9,7 +9,7 @@ import java.util.List;
 public class FruitStorageDaoImpl implements FruitStorageDao {
     @Override
     public FruitEntry getEntryByFruitName(String fruitName) {
-        return Storage.getFruits().stream()
+        return Storage.FRUITS.stream()
                 .filter(f -> f.getFruitName().equals(fruitName))
                 .findFirst()
                 .orElse(null);
@@ -17,11 +17,11 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public boolean addFruitEntry(FruitEntry fruitEntry) {
-        return Storage.getFruits().add(fruitEntry);
+        return Storage.FRUITS.add(fruitEntry);
     }
 
     @Override
     public List<FruitEntry> getAllFruitEntries() {
-        return Collections.unmodifiableList(Storage.getFruits());
+        return Collections.unmodifiableList(Storage.FRUITS);
     }
 }
