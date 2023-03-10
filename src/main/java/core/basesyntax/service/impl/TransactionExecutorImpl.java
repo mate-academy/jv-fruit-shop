@@ -2,7 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionExecutor;
-import core.basesyntax.service.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class TransactionExecutorImpl implements TransactionExecutor {
