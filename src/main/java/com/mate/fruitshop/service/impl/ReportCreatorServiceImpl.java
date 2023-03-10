@@ -19,6 +19,6 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
                     .append(entry.getQuantity())
                     .append(System.lineSeparator());
         }
-        return strBuilder.toString().stripTrailing();
+        return strBuilder.toString();
     }
 }
