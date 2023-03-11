@@ -17,7 +17,7 @@ public class PurchaseOperationHandler implements OperationHandler {
                     + "'. Available quantity is: "
                     + (storage.getOrDefault(transaction.getProductName(), 0)));
         }
-        storage.merge(transaction.getProductName(), transaction.getQuantity(),
-                (storageValue, transactionValue) -> storageValue - transactionValue);
+        storage.put(transaction.getProductName(),
+                storage.get(transaction.getProductName()) - transaction.getQuantity());
     }
 }
