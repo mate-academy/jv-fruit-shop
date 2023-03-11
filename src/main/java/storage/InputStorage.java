@@ -3,13 +3,13 @@ package storage;
 import java.util.List;
 
 public class InputStorage {
-    private final List<String> inputData;
+    private static List<String> inputData;
 
-    public InputStorage(List<String> inputData) {
-        this.inputData = inputData;
+    public static void setInputData(List<String> inputData) {
+        InputStorage.inputData = inputData;
     }
 
-    public List<String> getInputData() {
+    public static List<String> getInputData() {
         return inputData;
     }
 }

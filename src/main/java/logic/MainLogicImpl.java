@@ -14,12 +14,18 @@ public class MainLogicImpl implements MainLogic {
 
     @Override
     public void generateReport(String inputFilePath, String reportFilePath) {
+        System.out.println("Making report from file " + inputFilePath + "\n");
+
         inputStorageService.saveInput(inputFilePath);
-        List<String> inputData = inputStorageService.getStorageData().getInputData();
+        List<String> inputData = inputStorageService.getStorageData();
 
         new DataProcessorImpl().makeProcessedData(inputData);
 
+        FalseChecker.checkData();
+
         String report = new ReportServiceImpl().getReport();
         writerService.writeToFile(report, reportFilePath);
+
+        System.out.println("Report creation finished, check " + reportFilePath);
     }
 }

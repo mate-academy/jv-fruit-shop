@@ -17,6 +17,7 @@ public class DataStorageServiceImpl implements DataStorageService {
         return fruitMap.get(key);
     }
 
+    @Override
     public Map<String, Integer> getFruitMap() {
         return fruitMap;
     }
