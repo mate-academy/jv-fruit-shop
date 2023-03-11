@@ -1,0 +1,28 @@
+package core.basesyntax.strategy.impl;
+
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.ReportStrategy;
+import core.basesyntax.strategy.operationHandlers.BalanceOperation;
+import core.basesyntax.strategy.operationHandlers.PurchaseOperation;
+import core.basesyntax.strategy.operationHandlers.ReturnOperation;
+import core.basesyntax.strategy.operationHandlers.SupplyOperation;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class ReportStrategyImpl implements ReportStrategy {
+    private final Map<FruitTransaction.Operation, OperationHandler> strategy = new HashMap<>();
+
+    public ReportStrategyImpl() {
+        strategy.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        strategy.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        strategy.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        strategy.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+    }
+
+    @Override
+    public OperationHandler getHandler(FruitTransaction.Operation operation) {
+        return strategy.get(operation);
+    }
+}
