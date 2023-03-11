@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.model;
 
 public enum Operation {
     BALANCE("b", FruitsDirection.INCOMING.fruitsDirection),

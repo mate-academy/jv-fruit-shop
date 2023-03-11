@@ -1,6 +1,4 @@
-package core.basesyntax.service;
-
-import core.basesyntax.model.Fruit;
+package core.basesyntax.model;
 
 public class Transaction {
     private Operation operation;
