@@ -2,16 +2,15 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitTransactionParser;
+import core.basesyntax.service.GridReadService;
 import core.basesyntax.service.GridWriteService;
 import core.basesyntax.service.ValueOfFruit;
 import core.basesyntax.service.impl.CsvGridReadService;
-import core.basesyntax.service.GridReadService;
 import core.basesyntax.service.impl.CsvGridWriteService;
 import core.basesyntax.service.impl.RowFruitTransactionParser;
 import core.basesyntax.service.impl.RowValueOfFruit;
 import core.basesyntax.strategy.ReportStrategy;
 import core.basesyntax.strategy.impl.ReportStrategyImpl;
-
 import java.io.File;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,7 @@ public class HelloWorld {
         // Report creating
         GridWriteService gridWriteService = new CsvGridWriteService(new File(REPORT_FILE_PATH));
         ValueOfFruit valueOfFruit = new RowValueOfFruit();
-        gridWriteService.WriteLines(
+        gridWriteService.writeLines(
                 Storage.entryStream()
                         .map(e -> (String[])valueOfFruit.valueOf(e.getKey(), e.getValue()))
                         .collect(Collectors.toList()),

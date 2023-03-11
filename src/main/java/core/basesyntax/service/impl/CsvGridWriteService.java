@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.GridWriteService;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,7 +17,7 @@ public class CsvGridWriteService implements GridWriteService {
     }
 
     @Override
-    public void WriteLines(List<String[]> lines, String[] titles) {
+    public void writeLines(List<String[]> lines, String[] titles) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             for (int i = 0; i < titles.length; i++) {

@@ -3,11 +3,10 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.ReportStrategy;
-import core.basesyntax.strategy.operationHandlers.BalanceOperation;
-import core.basesyntax.strategy.operationHandlers.PurchaseOperation;
-import core.basesyntax.strategy.operationHandlers.ReturnOperation;
-import core.basesyntax.strategy.operationHandlers.SupplyOperation;
-
+import core.basesyntax.strategy.handlers.BalanceOperation;
+import core.basesyntax.strategy.handlers.PurchaseOperation;
+import core.basesyntax.strategy.handlers.ReturnOperation;
+import core.basesyntax.strategy.handlers.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
 

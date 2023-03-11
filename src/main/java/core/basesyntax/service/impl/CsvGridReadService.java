@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.GridReadService;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,10 +13,10 @@ import java.util.stream.Stream;
 
 public class CsvGridReadService implements GridReadService {
     private static final String SEPARATOR = ",";
-    String[] titles;
-    List<String[]> rows;
+    private String[] titles;
+    private List<String[]> rows;
 
-    public CsvGridReadService(File file)  {
+    public CsvGridReadService(File file) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             titles = bufferedReader.readLine().split(SEPARATOR);
             rows = new ArrayList<>();
