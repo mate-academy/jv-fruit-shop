@@ -1,0 +1,10 @@
+type,fruit,quantity
+b,banana,200
+b,apple,100
+s,banana,10
+p,banana,30
+r,apple,10
+s,apple,40
+p,banana,5
+s,apple,45
+s,apple,500
