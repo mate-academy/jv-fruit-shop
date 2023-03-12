@@ -1,5 +1,5 @@
 package fileservice;
 
-public interface WriteDataInFileService {
+public interface WriteFileService {
     void write(String file, String content);
 }

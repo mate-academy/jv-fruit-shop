@@ -1,5 +1,5 @@
-import fileservice.CsvFileReadServiceImpl;
-import fileservice.WriteDataInFileServiceImpl;
+import fileservice.CsvReadFileServiceImpl;
+import fileservice.CsvWriteFileServiceImpl;
 import fruittransaction.FruitTransaction;
 import java.util.HashMap;
 import java.util.List;
@@ -28,18 +28,18 @@ public class Main {
         map.put(FruitTransaction.Operation.SUPPLY, operationHandlerSupply);
 
         OperationStrategyImpl operationStrategy = new OperationStrategyImpl(map);
-        CsvFileReadServiceImpl csvFileReadService = new CsvFileReadServiceImpl();
+        CsvReadFileServiceImpl csvReadFileService = new CsvReadFileServiceImpl();
         TransactionParserImpl transactionParser = new TransactionParserImpl();
         TransactionExecutorImpl transactionExecutor
                 = new TransactionExecutorImpl(operationStrategy);
         ReportServiceImpl reportService = new ReportServiceImpl();
-        WriteDataInFileServiceImpl writeDataInFileService = new WriteDataInFileServiceImpl();
+        CsvWriteFileServiceImpl csvWriteFileService = new CsvWriteFileServiceImpl();
 
-        List<String> listForParsing = csvFileReadService.read("src/main/java/resource/test.csv");
+        List<String> listForParsing = csvReadFileService.read("src/main/java/resource/test.csv");
         List<FruitTransaction> completeFruitsObjectList = transactionParser.parse(listForParsing);
         transactionExecutor.execute(completeFruitsObjectList);
         String completeContentForNewFile = reportService.createReport();
-        writeDataInFileService.write("src/main/java/resource/Result.csv",
+        csvWriteFileService.write("src/main/java/resource/Result.csv",
                 completeContentForNewFile);
     }
 }

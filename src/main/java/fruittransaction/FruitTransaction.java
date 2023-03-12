@@ -1,5 +1,7 @@
 package fruittransaction;
 
+import errors.InvalidCodeException;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -39,6 +41,15 @@ public class FruitTransaction {
 
         Operation(String code) {
             this.code = code;
+        }
+
+        public static Operation getOperationByCode(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new InvalidCodeException("Incorrect code for operations" + code);
         }
 
         public String getCode() {

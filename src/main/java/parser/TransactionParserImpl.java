@@ -14,29 +14,15 @@ public class TransactionParserImpl implements TransactionParser {
         List<FruitTransaction> completeParseList = new ArrayList<>();
         for (String line : lines) {
             String[] splitLineFromLines = line.split(",");
-            FruitTransaction fruitsObjectForCompleteList = new FruitTransaction();
-
-            if (splitLineFromLines[INDEX_FOR_OPERATION]
-                    .equals(FruitTransaction.Operation.BALANCE.getCode())) {
-                fruitsObjectForCompleteList
-                        .setOperation(FruitTransaction.Operation.BALANCE);
-            } else if (splitLineFromLines[INDEX_FOR_OPERATION]
-                    .equals(FruitTransaction.Operation.SUPPLY.getCode())) {
-                fruitsObjectForCompleteList
-                        .setOperation(FruitTransaction.Operation.SUPPLY);
-            } else if (splitLineFromLines[INDEX_FOR_OPERATION]
-                    .equals(FruitTransaction.Operation.PURCHASE.getCode())) {
-                fruitsObjectForCompleteList
-                        .setOperation(FruitTransaction.Operation.PURCHASE);
-            } else {
-                fruitsObjectForCompleteList
-                        .setOperation(FruitTransaction.Operation.RETURN);
-            }
-            fruitsObjectForCompleteList
+            FruitTransaction transaction = new FruitTransaction();
+            FruitTransaction.Operation operationByCode = FruitTransaction.Operation
+                            .getOperationByCode(splitLineFromLines[INDEX_FOR_OPERATION]);
+            transaction.setOperation(operationByCode);
+            transaction
                     .setFruit(splitLineFromLines[INDEX_FOR_FRUITS]);
-            fruitsObjectForCompleteList
+            transaction
                     .setQuantity(Integer.parseInt(splitLineFromLines[INDEX_FOR_QUANTITY]));
-            completeParseList.add(fruitsObjectForCompleteList);
+            completeParseList.add(transaction);
         }
         return completeParseList;
     }

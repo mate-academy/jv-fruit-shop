@@ -2,6 +2,6 @@ package fileservice;
 
 import java.util.List;
 
-public interface CsvFileService {
+public interface ReadFileService {
     List read(String file);
 }
