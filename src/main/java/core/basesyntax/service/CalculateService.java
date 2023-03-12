@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.StorageTransaction;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface CalculateService {
-    void calculate(List<StorageTransaction> transactions);
+    void calculate(List<FruitTransaction> transactions);
 }

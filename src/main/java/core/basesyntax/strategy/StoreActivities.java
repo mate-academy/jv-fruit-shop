@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.StorageTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public interface StoreActivities {
-    void doActivity(StorageTransaction transaction);
+    void doActivity(FruitTransaction transaction);
 }

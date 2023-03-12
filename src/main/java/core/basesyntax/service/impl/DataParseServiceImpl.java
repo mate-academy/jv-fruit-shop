@@ -2,10 +2,12 @@ package core.basesyntax.service.impl;
 
 import static java.lang.Integer.parseInt;
 
-import core.basesyntax.model.StorageTransaction;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParseService;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class DataParseServiceImpl implements DataParseService {
@@ -15,19 +17,20 @@ public class DataParseServiceImpl implements DataParseService {
     public static final String PATTERN = ",";
 
     @Override
-    public List<StorageTransaction> getParsedData(List<String> data) {
+    public List<FruitTransaction> getParsedData(List<String> data) {
         return data.stream()
-                .map(d -> d.split(PATTERN))
-                .map(strings -> new StorageTransaction(getTypeActivity(strings[ACTIVITY_INDEX]),
+                .map(line -> line.split(PATTERN))
+                .map(strings -> new FruitTransaction(getTypeActivity(strings[ACTIVITY_INDEX]),
                         strings[FRUIT_INDEX], parseInt(strings[QUANTITY_INDEX])))
                 .collect(Collectors.toList());
 
     }
 
-    public StorageTransaction.Operation getTypeActivity(String code) {
-        return Arrays.stream(StorageTransaction.Operation.values())
-                .filter(t -> t.getCode().equals(code))
-                .findFirst()
-                .get();
+    public FruitTransaction.Operation getTypeActivity(String code) {
+        Optional<FruitTransaction.Operation> first =
+                Arrays.stream(FruitTransaction.Operation.values())
+                .filter(type -> type.getCode().equals(code))
+                .findFirst();
+        return first.orElseThrow(() -> new NoSuchElementException("Can't find such element"));
     }
 }
