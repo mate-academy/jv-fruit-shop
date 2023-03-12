@@ -1,7 +1,8 @@
 package parser;
 
+import fruittransaction.FruitTransaction;
 import java.util.List;
 
 public interface TransactionParser {
-    List parse(List<String> lines);
+    List<FruitTransaction> parse(List<String> lines);
 }

@@ -16,13 +16,16 @@ public class TransactionParserImpl implements TransactionParser {
             String[] splitLineFromLines = line.split(",");
             FruitTransaction fruitsObjectForCompleteList = new FruitTransaction();
 
-            if (splitLineFromLines[INDEX_FOR_OPERATION].equals("b")) {
+            if (splitLineFromLines[INDEX_FOR_OPERATION]
+                    .equals(FruitTransaction.Operation.BALANCE.getCode())) {
                 fruitsObjectForCompleteList
                         .setOperation(FruitTransaction.Operation.BALANCE);
-            } else if (splitLineFromLines[INDEX_FOR_OPERATION].equals("s")) {
+            } else if (splitLineFromLines[INDEX_FOR_OPERATION]
+                    .equals(FruitTransaction.Operation.SUPPLY.getCode())) {
                 fruitsObjectForCompleteList
                         .setOperation(FruitTransaction.Operation.SUPPLY);
-            } else if (splitLineFromLines[INDEX_FOR_OPERATION].equals("p")) {
+            } else if (splitLineFromLines[INDEX_FOR_OPERATION]
+                    .equals(FruitTransaction.Operation.PURCHASE.getCode())) {
                 fruitsObjectForCompleteList
                         .setOperation(FruitTransaction.Operation.PURCHASE);
             } else {
@@ -38,4 +41,3 @@ public class TransactionParserImpl implements TransactionParser {
         return completeParseList;
     }
 }
-

@@ -1,15 +1,21 @@
 package transactionexecutor;
 
-import db.Storage;
 import fruittransaction.FruitTransaction;
 import java.util.List;
+import strategy.OperationStrategy;
 
 public class TransactionExecutorImpl implements TransactionExecutor {
-    private Storage objectForStorage = new Storage();
-    private final OperationSupplyImpl operationSupply = new OperationSupplyImpl();
+    private OperationStrategy operationStrategy;
+    
+    public TransactionExecutorImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
 
     @Override
     public void execute(List<FruitTransaction> transactions) {
-        objectForStorage.setStorage(operationSupply.startOperation(transactions));
+        for (FruitTransaction transaction : transactions) {
+            OperationHandler handler = operationStrategy.get(transaction.getOperation());
+            handler.handle(transaction);
+        }
     }
 }

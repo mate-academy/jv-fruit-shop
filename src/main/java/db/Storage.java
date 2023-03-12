@@ -10,7 +10,7 @@ public class Storage {
         return storage;
     }
 
-    public void setStorage(Map<String, Integer> storage) {
-        this.storage = storage;
+    public static void put(String fruit, Integer amount) {
+        storage.put(fruit, amount);
     }
 }

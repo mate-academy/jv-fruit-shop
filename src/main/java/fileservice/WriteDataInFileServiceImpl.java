@@ -2,35 +2,12 @@ package fileservice;
 
 import errors.ErrorWritingDataToFile;
 import errors.InvalidFileExtension;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
-public class FileServiceImpl implements FileService {
-    @Override
-    public List<String> read(String file) {
-        if (!file.endsWith(".csv")) {
-            throw new InvalidFileExtension("Wrong file extension.");
-        }
-
-        List<String> dataFromCsvFile = new ArrayList();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                dataFromCsvFile.add(line);
-            }
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read file", e);
-        }
-
-        return dataFromCsvFile;
-    }
-
+public class WriteDataInFileServiceImpl implements WriteDataInFileService {
     @Override
     public void write(String file, String content) {
         if (!file.endsWith(".csv")) {
