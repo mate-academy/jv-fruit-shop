@@ -1,0 +1,54 @@
+CONSTANTS with existing input files for testing:
+
+    private static final String TWO_FRUITS_FILE
+            = "src/main/resources/IncomingReports/TwoFruits.csv";
+
+    private static final String THREE_FRUITS_FILE
+            = "src/main/resources/IncomingReports/ThreeFruits.csv";
+
+    private static final String NO_LEGEND_FILE
+            = "src/main/resources/IncomingReports/NoLegendInput.csv";
+
+    private static final String NO_BALANCE_FILE
+            = "src/main/resources/IncomingReports/MissedBalance.csv";
+
+    private static final String EMPTY_FILE
+            = "src/main/resources/IncomingReports/EmptyInput.csv";
+
+    private static final String BROKEN_FILE
+            = "src/main/resources/IncomingReports/BrokenInput.csv";
+
+    private static final String FALSE_DATA_FILE
+            = "src/main/resources/IncomingReports/FalsifiedData.csv";
+
+    private static final String NULL_FILE
+            = null;
+
+    private static final String INVALID_FILE
+            = "&812375ba^_^";
+
+CONSTANTS for report file name:
+
+    private static final String REPORT_FILE
+            = "src/main/resources/OutGoingReports/Report.csv";
+
+    private static final String REPORT_FILE
+            = "src/main/resources/OutGoingReports/NormReport.csv";
+
+    private static final String INVALID_REPORT_FILE
+            = "///^_^|||";
+
+List of global calls to test execution of entire program:
+
+//        mainLogic.generateReport(TWO_FRUITS_FILE);
+//        mainLogic.generateReport(THREE_FRUITS_FILE);
+//        mainLogic.generateReport(THREE_FRUITS_FILE, REPORT_FILE);
+//        mainLogic.generateReport(THREE_FRUITS_FILE, NULL_FILE);
+//        mainLogic.generateReport(THREE_FRUITS_FILE, INVALID_REPORT_FILE);
+//        mainLogic.generateReport(NO_LEGEND_FILE);
+//        mainLogic.generateReport(NO_BALANCE_FILE);
+//        mainLogic.generateReport(EMPTY_FILE);
+//        mainLogic.generateReport(BROKEN_FILE);
+//        mainLogic.generateReport(FALSE_DATA_FILE);
+//        mainLogic.generateReport(NULL_FILE);
+//        mainLogic.generateReport(INVALID_FILE);

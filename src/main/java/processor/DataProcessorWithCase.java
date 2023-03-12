@@ -3,12 +3,13 @@ package processor;
 import java.util.List;
 import model.Operation;
 import model.ReportException;
-import service.general.DataPreparationService;
-import service.general.DataStorageService;
+import service.DataPreparationService;
+import service.DataStorageService;
 import service.impl.DataPreparationServiceImpl;
 import service.impl.DataStorageServiceImpl;
 
-public class DataProcessorImpl implements DataProcessor {
+@Deprecated
+public class DataProcessorWithCase implements DataProcessor {
     private static final String DATA_SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int NAME_INDEX = 1;

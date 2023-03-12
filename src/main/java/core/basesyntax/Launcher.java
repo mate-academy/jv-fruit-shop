@@ -4,14 +4,17 @@ package core.basesyntax;
     + Process data by specified storage keys;
     + Check lines for consistent data "[bspr],\w++,\d++";
     + Form a String report from calculated data in storage;
-    + Write the report in "./res/OutGoingReports/Report.csv", make sure to overwrite it.
+    + Write the report in "./res/OutGoingReports/Report.csv", make sure to overwrite it;
+    + Perform additional checks for input/output files, negative values, etc.
 */
 
 import logic.MainLogic;
 import logic.MainLogicImpl;
 
 public class Launcher {
-    private static final String TWO_FRUITS_FILE = "./res/IncomingReports/TwoFruits.csv";
+    private static final String TWO_FRUITS_FILE
+            = "src/main/resources/IncomingReports/TwoFruits.csv";
+
     private static final MainLogic mainLogic = new MainLogicImpl();
 
     public static void main(String[] args) {

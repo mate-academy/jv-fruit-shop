@@ -2,17 +2,17 @@ package service.impl;
 
 import java.util.List;
 import model.ReportException;
-import service.general.DataPreparationService;
-import service.general.InputStorageService;
+import service.DataPreparationService;
+import service.InputStorageService;
 
 public class DataPreparationServiceImpl implements DataPreparationService {
     private static final String LEGEND_REGEX = "\\w++,\\w++,\\w++";
     private static final String CORRECT_DATA_REGEX = "[bspr],\\w++,\\d++";
     private static final int LEGEND_INDEX = 0;
+    private final InputStorageService storageService = new InputStorageServiceImpl();
 
     @Override
     public boolean getDataPrepared() {
-        InputStorageService storageService = new InputStorageServiceImpl();
         List<String> inputData = storageService.getStorageData();
         if (inputData.isEmpty()) {
             throw new ReportException("Incoming file has no data");

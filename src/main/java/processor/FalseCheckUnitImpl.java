@@ -5,6 +5,7 @@ import java.util.Set;
 import model.ReportException;
 import service.impl.DataStorageServiceImpl;
 
+@Deprecated
 public class FalseCheckUnitImpl implements FalseCheckUnit {
     private static final Set<Map.Entry<String, Integer>> ENTRIES =
             new DataStorageServiceImpl().getFruitMap().entrySet();

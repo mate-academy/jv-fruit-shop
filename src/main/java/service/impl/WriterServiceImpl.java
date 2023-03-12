@@ -3,7 +3,7 @@ package service.impl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import service.general.WriterService;
+import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
 

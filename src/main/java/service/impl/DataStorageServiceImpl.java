@@ -1,7 +1,7 @@
 package service.impl;
 
 import java.util.Map;
-import service.general.DataStorageService;
+import service.DataStorageService;
 import storage.DataStorage;
 
 public class DataStorageServiceImpl implements DataStorageService {

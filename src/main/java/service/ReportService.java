@@ -1,4 +1,4 @@
-package service.general;
+package service;
 
 public interface ReportService {
     String getReport();

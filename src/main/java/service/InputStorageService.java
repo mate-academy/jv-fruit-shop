@@ -1,10 +1,10 @@
-package service.general;
+package service;
 
 import java.util.List;
 
 public interface InputStorageService {
 
-    void saveInput(String filePath);
+    void saveInput(List<String> input);
 
     List<String> getStorageData();
 }
