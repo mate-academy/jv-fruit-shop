@@ -1,0 +1,25 @@
+CONSTANTS with existing input files for testing:
+    private static final String TWO_FRUITS_FILE = "./res/IncomingReports/TwoFruits.csv";
+    private static final String THREE_FRUITS_FILE = "./res/IncomingReports/ThreeFruits.csv";
+    private static final String NO_LEGEND_FILE = "./res/IncomingReports/NoLegendInput.csv";
+    private static final String NO_BALANCE_FILE = "./res/IncomingReports/MissedBalance.csv";
+    private static final String EMPTY_FILE = "./res/IncomingReports/EmptyInput.csv";
+    private static final String BROKEN_FILE = "./res/IncomingReports/BrokenInput.csv";
+    private static final String FALSE_DATA_FILE = "./res/IncomingReports/FalsifiedData.csv";
+    private static final String NULL_FILE = null;
+    private static final String INVALID_FILE = "&812375ba^^";
+
+CONSTANT for report file name:
+    private static final String REPORT_FILE = "./res/OutGoingReports/Report.csv";
+
+List of global calls to execute entire program:
+    mainLogic.generateReport(TWO_FRUITS_FILE);
+    mainLogic.generateReport(THREE_FRUITS_FILE);
+    mainLogic.generateReport(THREE_FRUITS_FILE);
+    mainLogic.generateReport(NO_LEGEND_FILE);
+    mainLogic.generateReport(NO_BALANCE_FILE);
+    mainLogic.generateReport(EMPTY_FILE);
+    mainLogic.generateReport(BROKEN_FILE);
+    mainLogic.generateReport(FALSE_DATA_FILE);
+    mainLogic.generateReport(NULL_FILE);
+    mainLogic.generateReport(INVALID_FILE);

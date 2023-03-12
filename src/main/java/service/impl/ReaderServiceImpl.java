@@ -9,6 +9,9 @@ import service.general.ReaderService;
 public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> readFile(String filePath) {
+        if (filePath == null) {
+            throw new RuntimeException("Null argument passed as incoming file");
+        }
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {

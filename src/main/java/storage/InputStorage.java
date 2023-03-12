@@ -5,8 +5,8 @@ import java.util.List;
 public class InputStorage {
     private static List<String> inputData;
 
-    public static void setInputData(List<String> inputData) {
-        InputStorage.inputData = inputData;
+    public static void setInputData(List<String> input) {
+        InputStorage.inputData = input;
     }
 
     public static List<String> getInputData() {

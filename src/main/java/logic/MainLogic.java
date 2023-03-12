@@ -1,5 +1,7 @@
 package logic;
 
 public interface MainLogic {
-    void generateReport(String filePath, String reportFilePath);
+    void generateReport(String inputFilePath);
+
+    void generateReport(String inputFilePath, String reportFilePath);
 }

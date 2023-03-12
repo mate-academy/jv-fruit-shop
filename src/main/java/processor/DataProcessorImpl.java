@@ -49,17 +49,18 @@ public class DataProcessorImpl implements DataProcessor {
     }
 
     private void supplyOrReturn() {
-        if (fruitAmount == null) {
-            throw new ReportException("Balance had not been set for " + fruitName);
-        }
+        checkBalance();
         storageService.putValue(fruitName, fruitAmount + operationAmount);
     }
 
     private void purchase() {
+        checkBalance();
+        storageService.putValue(fruitName, fruitAmount - operationAmount);
+    }
+
+    private void checkBalance() {
         if (fruitAmount == null) {
             throw new ReportException("Balance had not been set for " + fruitName);
         }
-        storageService.putValue(fruitName, fruitAmount - operationAmount);
     }
 }
-
