@@ -4,6 +4,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.FruitStrategy;
 
+import java.util.List;
+
 public class FruitServiceImpl implements FruitService {
     private FruitStrategy fruitStrategy;
 
@@ -12,8 +14,10 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void transfer(FruitTransaction transaction) {
-         fruitStrategy.get(transaction.getOperation())
-                 .getActivities(transaction.getFruit(), transaction.getQuantity());
+    public void action(List<FruitTransaction> transaction) {
+        for (FruitTransaction fruitTransaction : transaction) {
+            fruitStrategy.get(fruitTransaction.getOperation())
+                    .getActivities(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        }
     }
 }

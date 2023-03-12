@@ -21,23 +21,29 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static ReadService readService = new ReadServiceImpl();
-    private static ProcessService processService = new ProcessServiceImpl();
+
+
 
     public static void main(String[] args) {
 
 
-//        Map<FruitTransaction.Operation, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();
-//        activitiesHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceActivitiesHandler());
-//        activitiesHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseActivitiesHandler());
-//        activitiesHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyActivitiesHandler());
-//        activitiesHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnActivitiesHandler());
-//
-//        FruitStrategy fruitStrategy = new FruitStrategyImpl(activitiesHandlerMap);
-//        FruitService fruitService = new FruitServiceImpl(fruitStrategy);
+        Map<FruitTransaction.Operation, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();
+        activitiesHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceActivitiesHandler());
+        activitiesHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseActivitiesHandler());
+        activitiesHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyActivitiesHandler());
+        activitiesHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnActivitiesHandler());
 
+        FruitStrategy fruitStrategy = new FruitStrategyImpl(activitiesHandlerMap);
+
+
+        ReadService readService = new ReadServiceImpl();
         List<String> strings = readService.readFromFile("src/main/file.csv");
+
+        ProcessService processService = new ProcessServiceImpl();
         List<FruitTransaction> process = processService.process(strings);
+
+        FruitService fruitService = new FruitServiceImpl(fruitStrategy);
+        fruitService.action(process);
 
     }
 
