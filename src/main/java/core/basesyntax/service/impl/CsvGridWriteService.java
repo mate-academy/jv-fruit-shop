@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.Grid;
 import core.basesyntax.service.GridWriteService;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,17 +18,17 @@ public class CsvGridWriteService implements GridWriteService {
     }
 
     @Override
-    public void writeLines(List<String[]> lines, String[] titles) {
+    public void writeLines(Grid grid) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
-            for (int i = 0; i < titles.length; i++) {
-                bufferedWriter.write(titles[i]
-                        + (i == titles.length - 1 ? "" : SEPARATOR));
+            for (int i = 0; i < grid.getTitles().length; i++) {
+                bufferedWriter.write(grid.getTitles()[i]
+                        + (i == grid.getTitles().length - 1 ? "" : SEPARATOR));
             }
             bufferedWriter.write(System.lineSeparator());
-            for (int i = 0; i < lines.size(); i++) {
+            for (int i = 0; i < grid.getRows().size(); i++) {
                 StringBuilder builder = new StringBuilder();
-                String[] values = lines.get(i);
+                String[] values = grid.getRows().get(i);
                 for (int j = 0; j < values.length; j++) {
                     builder.append(values[j])
                             .append(j == values.length - 1 ? "" : SEPARATOR);

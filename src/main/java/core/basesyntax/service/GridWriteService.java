@@ -1,7 +1,9 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.Grid;
+
 import java.util.List;
 
 public interface GridWriteService {
-    void writeLines(List<String[]> lines, String[] titles);
+    void writeLines(Grid grid);
 }

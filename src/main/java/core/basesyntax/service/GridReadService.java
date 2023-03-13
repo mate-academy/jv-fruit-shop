@@ -1,9 +1,7 @@
 package core.basesyntax.service;
 
-import java.util.List;
+import core.basesyntax.model.Grid;
 
 public interface GridReadService {
-    String[] getTitles();
-
-    List<String[]> getRows();
+    Grid getGrid();
 }

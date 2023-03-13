@@ -7,10 +7,14 @@ import core.basesyntax.strategy.impl.ReportStrategyImpl;
 import java.util.List;
 
 public class TransactionsEvaluateServiceImpl implements TransactionsEvaluateService {
-    private ReportStrategy strategy = new ReportStrategyImpl();
+    private ReportStrategy strategy;
+
+    public TransactionsEvaluateServiceImpl(ReportStrategy strategy) {
+        this.strategy = strategy;
+    }
 
     @Override
     public void evaluate(List<FruitTransaction> transactions) {
-        transactions.forEach(t -> strategy.process(t));
+        transactions.forEach(strategy::process);
     }
 }
