@@ -18,6 +18,7 @@
         </maven.checkstyle.plugin.configLocation>
     </properties>
 
+
     <dependencies>
     </dependencies>
     <build>
