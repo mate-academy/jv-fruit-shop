@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@FunctionalInterface
 public interface FruitTransactionParser<T> {
     FruitTransaction parse(T value);
 

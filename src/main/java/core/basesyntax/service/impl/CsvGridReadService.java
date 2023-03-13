@@ -35,22 +35,6 @@ public class CsvGridReadService implements GridReadService {
     }
 
     @Override
-    public String getValue(int rowIndex, String title) {
-        String[] row = rows.get(rowIndex);
-        for (int i = 0; i < titles.length; i++) {
-            if (titles[i].equals(title)) {
-                return row[i];
-            }
-        }
-        throw new NoSuchElementException("Row with title " + title + "doesn't exist!");
-    }
-
-    @Override
-    public int getRowsCount() {
-        return rows.size();
-    }
-
-    @Override
     public List<String[]> getRows() {
         return rows;
     }

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@FunctionalInterface
 public interface ValueOfFruit<T> {
     T valueOf(String fruit, int amount);
 
