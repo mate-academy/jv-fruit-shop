@@ -13,6 +13,7 @@ import java.util.List;
 public class CsvGridReadService implements GridReadService {
     private static final String SEPARATOR = ",";
     private Grid grid;
+
     public CsvGridReadService(File file) {
         grid = readGrid(file);
     }

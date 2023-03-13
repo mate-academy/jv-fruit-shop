@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionsEvaluateService;
 import core.basesyntax.strategy.ReportStrategy;
-import core.basesyntax.strategy.impl.ReportStrategyImpl;
 import java.util.List;
 
 public class TransactionsEvaluateServiceImpl implements TransactionsEvaluateService {
