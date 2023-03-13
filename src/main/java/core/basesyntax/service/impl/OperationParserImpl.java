@@ -15,7 +15,9 @@ public class OperationParserImpl implements OperationParser {
 
     @Override
     public List<FruitTransaction> parseOperation(List<String> data) {
-        data.remove(HEADER);
+        if (isHeader(data)) {
+            data.remove(HEADER);
+        }
         return data.stream()
                 .map(i -> i.split(SPLITTER))
                 .map(i -> new FruitTransaction(getTransaction(i[OPERATION_INDEX]),
@@ -25,7 +27,14 @@ public class OperationParserImpl implements OperationParser {
 
     private FruitTransaction.Operation getTransaction(String code) {
         return Arrays.stream(FruitTransaction.Operation.values())
-                .filter(i -> i.getCode().equals(code))
+                .filter(t -> t.getCode().equals(code))
                 .findFirst().get();
+    }
+
+    private boolean isHeader(List<String> data) {
+        return Arrays.stream(FruitTransaction.Operation.values())
+                .anyMatch(i -> !data.get(HEADER)
+                        .split(SPLITTER)[OPERATION_INDEX]
+                        .contains(i.getCode()));
     }
 }
