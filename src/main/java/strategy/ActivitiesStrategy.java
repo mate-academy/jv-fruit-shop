@@ -1,6 +1,6 @@
-package service;
+package strategy;
 
-import service.activities.ActivitiesHandler;
+import strategy.activities.ActivitiesHandler;
 
 public interface ActivitiesStrategy {
     ActivitiesHandler get(String firstChar);

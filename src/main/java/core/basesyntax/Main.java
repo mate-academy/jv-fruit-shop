@@ -4,19 +4,20 @@ import dao.FruitDaoCsvImpl;
 import java.util.HashMap;
 import java.util.Map;
 import model.FruitStore;
-import service.ActivitiesStrategyImpl;
 import service.FruitStoreService;
-import service.FruitStoreServiceImpl;
-import service.activities.ActivitiesHandler;
-import service.activities.BalanceHandler;
-import service.activities.PurchaseHandler;
-import service.activities.ReturnHandler;
-import service.activities.SupplyHandler;
+import service.impl.FruitStoreServiceImpl;
+import strategy.ActivitiesStrategyImpl;
+import strategy.activities.ActivitiesHandler;
+import strategy.activities.BalanceHandler;
+import strategy.activities.PurchaseHandler;
+import strategy.activities.ReturnHandler;
+import strategy.activities.SupplyHandler;
 
 public class Main {
     private static Map<String, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();
     private static FruitStoreService fruitStoreService = new FruitStoreServiceImpl(
-            new FruitDaoCsvImpl("database.csv", "report.csv"),
+            new FruitDaoCsvImpl("./src/main/resources/database.csv",
+                    "./src/main/resources/report.csv"),
             new ActivitiesStrategyImpl(activitiesHandlerMap),
             new FruitStore());
 

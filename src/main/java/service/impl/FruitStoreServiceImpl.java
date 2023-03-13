@@ -1,10 +1,12 @@
-package service;
+package service.impl;
 
 import dao.FruitDao;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import model.FruitStore;
+import service.FruitStoreService;
+import strategy.ActivitiesStrategy;
 
 public class FruitStoreServiceImpl implements FruitStoreService {
     private static final String SEPARATOR = ",";
@@ -41,7 +43,7 @@ public class FruitStoreServiceImpl implements FruitStoreService {
         for (String line : inputData) {
             String[] data = line.split(SEPARATOR);
             if (fruitStore.getSupplies().containsKey(data[1])) {
-                int amount = strategy.get(data[0]).operation(Integer.valueOf(data[2]))
+                int amount = strategy.get(data[0].trim()).operation(Integer.valueOf(data[2]))
                         + fruitStore.getSupplies().get(data[1]);
                 fruitStore.getSupplies().replace(data[1], amount);
             } else {
