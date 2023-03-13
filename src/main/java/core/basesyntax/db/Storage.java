@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    public static final String[] DEFAULT_TITLES = {"fruit","quantity"};
+    public static final String[] DEFAULT_TITLES = {"fruit", "quantity"};
     private static Map<String, Integer> fruits = new HashMap<>();
 
     public static void add(String fruit, Integer amount) {
