@@ -41,7 +41,7 @@ public class Main {
         List<String> strings = readService.readFromFile(PATH_FROM_FILE);
 
         ProcessService processService = new ProcessServiceImpl();
-        List<FruitTransaction> process = processService.process(strings);
+        List<FruitTransaction> process = processService.modelSetUp(strings);
 
         FruitService fruitService = new FruitServiceImpl(fruitStrategy);
         fruitService.action(process);

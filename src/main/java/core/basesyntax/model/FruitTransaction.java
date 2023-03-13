@@ -41,7 +41,7 @@ public class FruitTransaction {
 
         public static Operation getOperationByCode(String code) {
             for (Operation operation : Operation.values()) {
-                if (operation.getCode().equals(code)) {
+                if (code.contains(operation.getCode())) {
                     return operation;
                 }
             }
