@@ -1,10 +1,10 @@
-package service.impl;
+package dao.impl;
 
+import dao.InputDao;
 import java.util.List;
-import service.InputStorageService;
 import storage.InputStorage;
 
-public class InputStorageServiceImpl implements InputStorageService {
+public class InputDaoImpl implements InputDao {
 
     @Override
     public void saveInput(List<String> input) {
@@ -15,5 +15,4 @@ public class InputStorageServiceImpl implements InputStorageService {
     public List<String> getStorageData() {
         return InputStorage.getInputData();
     }
-
 }

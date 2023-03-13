@@ -9,6 +9,9 @@ CONSTANTS with existing input files for testing:
     private static final String NO_LEGEND_FILE
             = "src/main/resources/IncomingReports/NoLegendInput.csv";
 
+    private static final String STRANGE_BALANCE_FILE
+            = "src/main/resources/IncomingReports/StrangeBalanceInput.csv";
+
     private static final String NO_BALANCE_FILE
             = "src/main/resources/IncomingReports/MissedBalance.csv";
 

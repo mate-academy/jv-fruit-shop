@@ -1,8 +1,8 @@
-package service;
+package dao;
 
 import java.util.Map;
 
-public interface DataStorageService {
+public interface DataDao {
     void putValue(String key, Integer value);
 
     Integer getValue(String key);

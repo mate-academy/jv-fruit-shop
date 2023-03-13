@@ -1,16 +1,20 @@
 package processor.strategy.operation;
 
-import service.DataStorageService;
-import service.impl.DataStorageServiceImpl;
-import storage.OperationalStorage;
+import dao.DataDao;
+import dao.impl.DataDaoImpl;
+import processor.strategy.buffer.OperationBufferManager;
 
 public class Balance implements Transaction {
-    private final DataStorageService dataStorageService = new DataStorageServiceImpl();
+    private final DataDao dataDao = new DataDaoImpl();
 
     @Override
     public void handleOperation() {
-        String fruit = OperationalStorage.getFruit();
-        Integer balance = OperationalStorage.getOperationAmount();
-        dataStorageService.putValue(fruit, balance);
+        String fruit = OperationBufferManager.getFruit();
+        Integer balance = OperationBufferManager.getOperationAmount();
+        if (dataDao.getValue(fruit) != null) {
+            System.out.println("ATTENTION! Balance operation occurred more than once for: "
+                    + fruit + "!\nCheck your storage workflow!");
+        }
+        dataDao.putValue(fruit, balance);
     }
 }

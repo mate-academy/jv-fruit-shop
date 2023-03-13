@@ -1,11 +1,11 @@
-package service.impl;
+package dao.impl;
 
+import dao.DataDao;
 import java.util.Map;
-import service.DataStorageService;
 import storage.DataStorage;
 
-public class DataStorageServiceImpl implements DataStorageService {
-    private final Map<String, Integer> fruitMap = DataStorage.getFruitMap();
+public class DataDaoImpl implements DataDao {
+    private final Map<String, Integer> fruitMap = DataStorage.FRUIT_MAP;
 
     @Override
     public void putValue(String key, Integer value) {

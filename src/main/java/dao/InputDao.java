@@ -1,8 +1,8 @@
-package service;
+package dao;
 
 import java.util.List;
 
-public interface InputStorageService {
+public interface InputDao {
 
     void saveInput(List<String> input);
 

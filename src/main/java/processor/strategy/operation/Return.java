@@ -1,21 +1,21 @@
 package processor.strategy.operation;
 
-import model.ReportException;
-import service.DataStorageService;
-import service.impl.DataStorageServiceImpl;
-import storage.OperationalStorage;
+import dao.DataDao;
+import dao.impl.DataDaoImpl;
+import exception.ReportException;
+import processor.strategy.buffer.OperationBufferManager;
 
 public class Return implements Transaction {
-    private final DataStorageService dataStorageService = new DataStorageServiceImpl();
+    private final DataDao dataDao = new DataDaoImpl();
 
     @Override
     public void handleOperation() {
-        String fruit = OperationalStorage.getFruit();
-        Integer storedAmount = OperationalStorage.getStoredAmount();
+        String fruit = OperationBufferManager.getFruit();
+        Integer storedAmount = OperationBufferManager.getStoredAmount();
         if (storedAmount == null) {
             throw new ReportException("Balance had not been set for " + fruit);
         }
-        Integer resultingAmount = storedAmount + OperationalStorage.getOperationAmount();
-        dataStorageService.putValue(fruit, resultingAmount);
+        Integer resultingAmount = storedAmount + OperationBufferManager.getOperationAmount();
+        dataDao.putValue(fruit, resultingAmount);
     }
 }
