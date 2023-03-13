@@ -5,15 +5,15 @@ import core.basesyntax.exception.FruitStoreException;
 import core.basesyntax.model.FruitNegotiation;
 import core.basesyntax.strategy.UnaryOperation;
 
-public class ApplayPurchase implements UnaryOperation {
+public class ApplyPurchase implements UnaryOperation {
     private FruitNegotiation myFruit;
 
-    public ApplayPurchase(FruitNegotiation fruit) {
+    public ApplyPurchase(FruitNegotiation fruit) {
         this.myFruit = fruit;
     }
 
     @Override
-    public void applay() {
+    public void apply() {
         if (Storage.storage.containsKey(myFruit.getFruit())) {
             if (Storage.storage.get(myFruit.getFruit()).intValue() >= myFruit.getQuantity()) {
                 Storage.storage.put(myFruit.getFruit(),

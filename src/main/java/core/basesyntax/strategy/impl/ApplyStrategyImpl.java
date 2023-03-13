@@ -2,23 +2,23 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.exception.FruitStoreException;
 import core.basesyntax.model.FruitNegotiation;
-import core.basesyntax.strategy.ApplayStrategy;
+import core.basesyntax.strategy.ApplyStrategy;
 
-public class ApplayStrategyImpl implements ApplayStrategy {
+public class ApplyStrategyImpl implements ApplyStrategy {
     @Override
     public void process(FruitNegotiation fruit) {
         switch (fruit.getOperation()) {
             case BALANCE:
-                new ApplayBalance(fruit).applay();
+                new ApplyBalance(fruit).apply();
                 break;
             case PURCHASE:
-                new ApplayPurchase(fruit).applay();
+                new ApplyPurchase(fruit).apply();
                 break;
             case RETURN:
-                new ApplayReturn(fruit).applay();
+                new ApplyReturn(fruit).apply();
                 break;
             case SUPPLY:
-                new ApplaySupplay(fruit).applay();
+                new ApplySupplay(fruit).apply();
                 break;
             default:
                 throw new FruitStoreException("Missing type of operation " + fruit.getOperation());

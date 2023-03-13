@@ -4,15 +4,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitNegotiation;
 import core.basesyntax.strategy.UnaryOperation;
 
-public class ApplayBalance implements UnaryOperation {
+public class ApplyBalance implements UnaryOperation {
     private FruitNegotiation myFruit;
 
-    public ApplayBalance(FruitNegotiation fruit) {
+    public ApplyBalance(FruitNegotiation fruit) {
         this.myFruit = fruit;
     }
 
     @Override
-    public void applay() {
+    public void apply() {
         Storage.storage.put(myFruit.getFruit(),myFruit.getQuantity());
     }
 }
