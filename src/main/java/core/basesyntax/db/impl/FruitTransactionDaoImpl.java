@@ -1,15 +1,7 @@
 package core.basesyntax.db.impl;
 
-import core.basesyntax.db.FruitTransactionDao;
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitTransaction;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class FruitTransactionDaoImpl implements FruitTransactionDao {
-
+public class FruitTransactionDaoImpl{
+/*
     @Override
     public void saveAll(List<FruitTransaction> fruitTransactions) {
         Storage.listFruitTransactions.addAll(fruitTransactions);
@@ -44,6 +36,6 @@ public class FruitTransactionDaoImpl implements FruitTransactionDao {
 
         return fruitList;
     }
-
+*/
 
 }

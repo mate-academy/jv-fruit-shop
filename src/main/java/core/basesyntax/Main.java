@@ -1,42 +1,42 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.FruitInputServiceImpl;
-import core.basesyntax.service.impl.FruitOutputServiceImpl;
+import core.basesyntax.service.ParserService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.impl.CommandHandler;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
-public static void  main(String[] args) {
+    private static final String INPUT_FILE_PATH = "input.csv";
+    private static final String OUTPUT_FILE_PATH = "output.csv";
+    private static final Map<FruitTransaction.Operation, OperationHandler> operationStrategies = new CommandHandler().initHandlers();
 
-    /*Map<String, FruitService> operationStrategies = new HashMap<>();
-    operationStrategies.put("Read", new FruitInputServiceImpl());
-    operationStrategies.put("Write", new FruitOutputServiceImpl());
-*/
+    public static void main(String[] args) {
 
-    // FruitService fruitService = new FruitServiceImpl(operationStrategies);
+        ReaderService readerService = new ReaderServiceImpl();
+        ParserService fruitTransactionParser = new ParserServiceImpl();
+        ReportService reportService = new ReportServiceImpl();
+        WriterService writerService = new WriterServiceImpl();
 
-    List<String> dataFromFile = fileReader.readFromFile(inputFilePath);
-    List<FruitTransaction> fruitTransactionsList
-            = parser.getFruitTransactionsList(dataFromFile);
-    OperationStrategy operationStrategy = new OperationStrategyImpl(strategies);
-    for (FruitTransaction fruitTransaction : fruitTransactionsList) {
-        OperationHandler handler = operationStrategy
-                .get(fruitTransaction.getOperation());
-        handler.operate(fruitTransaction);
+        List<String> records = readerService.read(INPUT_FILE_PATH);
+        List<FruitTransaction> fruitTransactions = fruitTransactionParser.parse(records);
+
+        for (FruitTransaction fruitTransaction : fruitTransactions) {
+            OperationHandler handler = operationStrategies
+                    .get(fruitTransaction.getOperation());
+            handler.handle(fruitTransaction);
+        }
+
+        String report = reportService.createReport();
+        writerService.writeToFile(report, OUTPUT_FILE_PATH);
     }
-    String report = reportService.createReport();
-    writerService.writeToFile(report, reportFilePath);
-
-
-
-}
-
 }
