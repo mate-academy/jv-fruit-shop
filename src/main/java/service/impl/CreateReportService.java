@@ -11,7 +11,7 @@ public class CreateReportService implements service.CreateReportService {
     public String report() {
         StringBuilder builder = new StringBuilder();
         builder.append(TITLE).append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.FRUITS.entrySet()) {
             builder.append(entry.getKey())
                     .append(COMMA)
                     .append(entry.getValue())

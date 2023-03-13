@@ -7,7 +7,7 @@ import strategy.TransactionHandler;
 public class ReturnHandler implements TransactionHandler {
     @Override
     public void handler(FruitTransaction transaction) {
-        Storage.fruits.put(transaction.getFruit(),
-                transaction.getQuantity() + Storage.fruits.get(transaction.getFruit()));
+        Storage.FRUITS.put(transaction.getFruit(),
+                transaction.getQuantity() + Storage.FRUITS.get(transaction.getFruit()));
     }
 }

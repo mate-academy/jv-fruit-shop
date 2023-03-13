@@ -7,6 +7,6 @@ import strategy.TransactionHandler;
 public class BalanceHandler implements TransactionHandler {
     @Override
     public void handler(FruitTransaction transaction) {
-        Storage.fruits.put(transaction.getFruit(), transaction.getQuantity());
+        Storage.FRUITS.put(transaction.getFruit(), transaction.getQuantity());
     }
 }

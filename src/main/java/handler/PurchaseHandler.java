@@ -7,8 +7,8 @@ import strategy.TransactionHandler;
 public class PurchaseHandler implements TransactionHandler {
     @Override
     public void handler(FruitTransaction transaction) {
-        Storage.fruits.put(transaction.getFruit(),
-                Storage.fruits.get(transaction.getFruit())
+        Storage.FRUITS.put(transaction.getFruit(),
+                Storage.FRUITS.get(transaction.getFruit())
                         - transaction.getQuantity());
     }
 }
