@@ -14,6 +14,9 @@ import com.mate.fruitshop.service.impl.TransactionsProcessingServiceImpl;
 import java.util.List;
 
 public class Main {
+    public static final String INPUT_FILE_DIR = "src/main/resources/inputData.csv";
+    public static final String REPORT_FILE_DIR = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         CsvReaderService csvReader = new CsvReaderServiceImpl();
         TransactionParserService transactionReader = new TransactionParserServiceImpl();
@@ -22,10 +25,10 @@ public class Main {
         ReportCreatorService reportCreator = new ReportCreatorServiceImpl();
         ReportWriter writer = new ReportWriterImpl();
 
-        List<String> csvLines = csvReader.read("data/inputData.csv");
+        List<String> csvLines = csvReader.read(INPUT_FILE_DIR);
         List<Transaction> transactions = transactionReader.read(csvLines);
         transactionsProcessor.process(transactions);
         String report = reportCreator.createReport();
-        writer.writeReportToFile(report, "data/report.csv");
+        writer.writeReportToFile(report, REPORT_FILE_DIR);
     }
 }

@@ -13,13 +13,13 @@ public class ProcessReturnTransaction implements TransactionProcessingStrategy {
     }
 
     @Override
-    public boolean process(Transaction transaction) {
+    public void process(Transaction transaction) {
         FruitEntry fruitEntry = dao.getEntryByFruitName(transaction.getFruitName());
         if (fruitEntry == null) {
-            return dao.addFruitEntry(new FruitEntry(transaction.getFruitName(),
+            dao.addFruitEntry(new FruitEntry(transaction.getFruitName(),
                     transaction.getQuantity()));
+            return;
         }
         fruitEntry.setQuantity(fruitEntry.getQuantity() + transaction.getQuantity());
-        return true;
     }
 }

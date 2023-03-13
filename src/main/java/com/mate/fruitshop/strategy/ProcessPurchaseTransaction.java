@@ -13,12 +13,11 @@ public class ProcessPurchaseTransaction implements TransactionProcessingStrategy
     }
 
     @Override
-    public boolean process(Transaction transaction) {
+    public void process(Transaction transaction) {
         FruitEntry fruitEntry = dao.getEntryByFruitName(transaction.getFruitName());
-        if (fruitEntry != null) {
-            fruitEntry.setQuantity(fruitEntry.getQuantity() - transaction.getQuantity());
-            return true;
+        if (fruitEntry == null || transaction.getQuantity() > fruitEntry.getQuantity()) {
+            throw new RuntimeException("Purchase larger than available stock");
         }
-        return false;
+        fruitEntry.setQuantity(fruitEntry.getQuantity() - transaction.getQuantity());
     }
 }

@@ -16,7 +16,7 @@ public class CsvReaderServiceImpl implements CsvReaderService {
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = Files.newBufferedReader(inputFile)) {
             while (bufferedReader.ready()) {
-                lines.add(bufferedReader.readLine().stripLeading().stripTrailing());
+                lines.add(bufferedReader.readLine().trim());
             }
         } catch (IOException e) {
             throw new RuntimeException("Unable to read from file:" + inputFileDir, e);
