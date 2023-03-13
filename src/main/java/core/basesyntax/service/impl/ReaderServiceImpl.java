@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
     @Override
-    public List<String> fileRead(String fileName) {
+    public List<String> read(String fileName) {
         List<String> result = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line = reader.readLine();

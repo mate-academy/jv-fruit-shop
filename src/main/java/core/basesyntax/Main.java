@@ -23,11 +23,11 @@ public class Main {
     private static final StorageCalculator storageCalculator = new StorageCalculatorImpl();
 
     public static void main(String[] args) {
-        List<String> list = fileReaderService.fileRead(INPUT_FILE_PATH);
+        List<String> list = fileReaderService.read(INPUT_FILE_PATH);
         List<FruitTransaction> data = operationParser.parseOperation(list);
         storageCalculator.calculate(data);
         String report = reportGenerator.getReport();
-        fileWriterService.fileWrite(report, OUTPUT_FILE_PATH);
+        fileWriterService.write(report, OUTPUT_FILE_PATH);
         System.out.println(report);
     }
 }
