@@ -1,11 +1,10 @@
 package service;
 
 import dao.FruitDao;
-import model.FruitStore;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import model.FruitStore;
 
 public class FruitStoreServiceImpl implements FruitStoreService {
     private static final String SEPARATOR = ",";
@@ -13,7 +12,9 @@ public class FruitStoreServiceImpl implements FruitStoreService {
     private ActivitiesStrategy strategy;
     private FruitStore fruitStore;
 
-    public FruitStoreServiceImpl(FruitDao fruitDao, ActivitiesStrategy strategy, FruitStore fruitStore) {
+    public FruitStoreServiceImpl(FruitDao fruitDao,
+                                 ActivitiesStrategy strategy,
+                                 FruitStore fruitStore) {
         this.fruitDao = fruitDao;
         this.strategy = strategy;
         this.fruitStore = fruitStore;

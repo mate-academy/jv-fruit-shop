@@ -1,6 +1,8 @@
 package core.basesyntax;
 
 import dao.FruitDaoCsvImpl;
+import java.util.HashMap;
+import java.util.Map;
 import model.FruitStore;
 import service.ActivitiesStrategyImpl;
 import service.FruitStoreService;
@@ -10,9 +12,6 @@ import service.activities.BalanceHandler;
 import service.activities.PurchaseHandler;
 import service.activities.ReturnHandler;
 import service.activities.SupplyHandler;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class Main {
     private static Map<String, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();
