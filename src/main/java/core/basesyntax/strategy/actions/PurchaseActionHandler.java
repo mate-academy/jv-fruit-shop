@@ -1,9 +1,9 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.actions;
 
 import java.util.Map;
 import java.util.Optional;
 
-public class PurchaseReportService implements ReportService {
+public class PurchaseActionHandler implements ActionHandler {
     @Override
     public void apply(Map<String, Integer> map, String data) {
         String key = data.split(SPLITTER, 2)[0];

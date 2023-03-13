@@ -1,8 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.service.ActionReader;
-import core.basesyntax.service.CsvHandler;
-import core.basesyntax.service.CsvHandlerImpl;
+import core.basesyntax.strategy.ActionReaderStrategy;
+import core.basesyntax.service.CsvManager;
+import core.basesyntax.service.CsvManagerImpl;
 import java.util.Map;
 
 public class Main {
@@ -10,8 +10,8 @@ public class Main {
         Map<String, Integer> shopStock;
         String from = "src/main/resources/test.csv";
         String to = "src/main/resources/";
-        ActionReader actionReader = new ActionReader();
-        CsvHandler csvHandler = new CsvHandlerImpl();
+        ActionReaderStrategy actionReader = new ActionReaderStrategy();
+        CsvManager csvHandler = new CsvManagerImpl();
         shopStock = actionReader.inputDataToMap(from);
         csvHandler.report(shopStock, to);
     }

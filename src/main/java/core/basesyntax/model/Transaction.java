@@ -1,10 +1,10 @@
 package core.basesyntax.model;
 
-public class Action {
+public class Transaction {
     private final String action;
     private final String data;
 
-    public Action(String action, String data) {
+    public Transaction(String action, String data) {
         this.action = action;
         this.data = data;
     }

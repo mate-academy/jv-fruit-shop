@@ -1,34 +1,36 @@
-package core.basesyntax.service;
+package core.basesyntax.strategy;
 
-import core.basesyntax.model.Action;
-import core.basesyntax.strategy.BaseReportService;
-import core.basesyntax.strategy.PurchaseReportService;
-import core.basesyntax.strategy.ReportService;
-import core.basesyntax.strategy.SupplyReportService;
+import core.basesyntax.model.Transaction;
+import core.basesyntax.service.CsvManagerImpl;
+import core.basesyntax.strategy.actions.ActionHandler;
+import core.basesyntax.strategy.actions.BaseActionHandler;
+import core.basesyntax.strategy.actions.PurchaseActionHandler;
+import core.basesyntax.strategy.actions.SupplyActionHandler;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ActionReader {
-    private static final CsvHandlerImpl mapHandler = new CsvHandlerImpl();
+public class ActionReaderStrategy {
+    private static final CsvManagerImpl mapHandler = new CsvManagerImpl();
 
     public Map<String, Integer> inputDataToMap(String path) {
         Map<String, Integer> stock = new HashMap<>();
-        List<Action> actionList = mapHandler.read(path);
+        List<Transaction> actionList = mapHandler.read(path);
         actionList.forEach(a -> {
-            ReportService reportService;
+            ActionHandler reportService;
             String action = a.getAction();
             String data = a.getData();
             switch (action) {
                 case "b":
-                    reportService = new BaseReportService();
+                    reportService = new BaseActionHandler();
                     break;
                 case "s":
                 case "r":
-                    reportService = new SupplyReportService();
+                    reportService = new SupplyActionHandler();
                     break;
                 case "p":
-                    reportService = new PurchaseReportService();
+                    reportService = new PurchaseActionHandler();
                     break;
                 default:
                     throw new RuntimeException(

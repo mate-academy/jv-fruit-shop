@@ -1,8 +1,8 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.actions;
 
 import java.util.Map;
 
-public interface ReportService {
+public interface ActionHandler {
 
     String SPLITTER = ",";
     void apply(Map<String, Integer> map, String data);

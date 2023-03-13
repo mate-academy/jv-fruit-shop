@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Action;
+import core.basesyntax.model.Transaction;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class CsvHandlerImpl implements CsvHandler {
+public class CsvManagerImpl implements CsvManager {
     @Override
     //Returns a map in format "action" - "data"
-    public List<Action> read(String path) {
-        List<Action> allLines = new ArrayList<>();
+    public List<Transaction> read(String path) {
+        List<Transaction> allLines = new ArrayList<>();
         try {
             List<String> allLinesString = Files.readAllLines(Paths.get(path));
             if (allLinesString.size() < 1) {
@@ -23,7 +23,7 @@ public class CsvHandlerImpl implements CsvHandler {
             }
             for (int i = 1; i < allLinesString.size(); i++) {
                 String[] line = allLinesString.get(i).split(",", 2);
-                allLines.add(new Action(line[0], line[1]));
+                allLines.add(new Transaction(line[0], line[1]));
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read ", e);
