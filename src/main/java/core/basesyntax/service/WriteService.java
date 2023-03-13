@@ -1,10 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransaction;
-
-import java.io.File;
-import java.util.List;
+import java.util.Map;
 
 public interface WriteService {
-    void writeFile(List<FruitTransaction> transactions, File toFile);
+    void writeFile(Map<String, Integer> storage, String path);
 }

@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.FruitStrategy;
-
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
@@ -17,7 +16,7 @@ public class FruitServiceImpl implements FruitService {
     public void action(List<FruitTransaction> transaction) {
         for (FruitTransaction fruitTransaction : transaction) {
             fruitStrategy.get(fruitTransaction.getOperation())
-                    .getActivities(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+                    .activities(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
     }
 }

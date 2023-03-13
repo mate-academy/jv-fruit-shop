@@ -1,9 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.dao.StorageDaoImpl;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReadService;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadServiceImpl implements ReadService {
-    private StorageDaoImpl storageDao;
     @Override
     public List<String> readFromFile(String filePath) {
         List<String> list = new ArrayList<>();

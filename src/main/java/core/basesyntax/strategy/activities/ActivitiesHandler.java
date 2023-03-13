@@ -1,5 +1,5 @@
 package core.basesyntax.strategy.activities;
 
 public interface ActivitiesHandler {
-    void getActivities(String fruitType, Integer amount);
+    void activities(String fruitType, Integer amount);
 }
