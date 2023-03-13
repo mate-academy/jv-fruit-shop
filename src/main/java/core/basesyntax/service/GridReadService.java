@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 public interface GridReadService {
     String[] getTitles();
@@ -9,5 +9,5 @@ public interface GridReadService {
 
     int getRowsCount();
 
-    Stream<String[]> stream();
+    List<String[]> getRows();
 }

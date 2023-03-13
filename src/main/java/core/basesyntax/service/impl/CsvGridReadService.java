@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Stream;
 
 public class CsvGridReadService implements GridReadService {
     private static final String SEPARATOR = ",";
@@ -52,7 +51,7 @@ public class CsvGridReadService implements GridReadService {
     }
 
     @Override
-    public Stream<String[]> stream() {
-        return rows.stream();
+    public List<String[]> getRows() {
+        return rows;
     }
 }

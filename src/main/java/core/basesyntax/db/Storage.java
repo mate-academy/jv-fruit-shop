@@ -2,7 +2,6 @@ package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class Storage {
     public static final String[] DEFAULT_TITLES = {"fruit","quantity"};
@@ -21,7 +20,7 @@ public class Storage {
                 Storage.fruits.get(fruit) + amount);
     }
 
-    public static Stream<Map.Entry<String, Integer>> entryStream() {
-        return fruits.entrySet().stream();
+    public static Map<String, Integer> getFruits() {
+        return fruits;
     }
 }
