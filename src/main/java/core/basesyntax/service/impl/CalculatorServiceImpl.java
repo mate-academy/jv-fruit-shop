@@ -1,12 +1,16 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.StorageTransaction;
-import core.basesyntax.service.CalculateService;
-import core.basesyntax.strategy.TransactionStrategy;
+import core.basesyntax.service.CalculatorService;
+import core.basesyntax.strategy.Strategy;
 import java.util.List;
 
-public class CalculateServiceImpl implements CalculateService {
-    private final TransactionStrategy strategy = new TransactionStrategy();
+public class CalculatorServiceImpl implements CalculatorService {
+    private final Strategy strategy;
+
+    public CalculatorServiceImpl(Strategy strategy) {
+        this.strategy = strategy;
+    }
 
     @Override
     public void calculate(List<StorageTransaction> transactions) {

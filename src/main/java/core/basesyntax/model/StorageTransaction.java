@@ -1,18 +1,20 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class StorageTransaction {
-    private TypeActivity typeActivity;
+    private Operation operation;
     private String fruit;
     private int quantity;
 
-    public StorageTransaction(TypeActivity typeActivities, String fruit, int quantity) {
-        this.typeActivity = typeActivities;
+    public StorageTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public TypeActivity getTypeActivity() {
-        return typeActivity;
+    public Operation getOperation() {
+        return operation;
     }
 
     public String getFruit() {
@@ -23,7 +25,7 @@ public class StorageTransaction {
         return quantity;
     }
 
-    public enum TypeActivity {
+    public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
@@ -31,8 +33,15 @@ public class StorageTransaction {
 
         private String code;
 
-        TypeActivity(String code) {
+        Operation(String code) {
             this.code = code;
+        }
+
+        public static Operation getOperation(String code) {
+            return Arrays.stream(Operation.values())
+                    .filter(t -> t.getCode().equals(code))
+                    .findFirst()
+                    .get();
         }
 
         public String getCode() {

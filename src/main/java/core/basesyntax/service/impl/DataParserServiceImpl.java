@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.StorageTransaction;
 import core.basesyntax.service.DataParserService;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,15 +16,8 @@ public class DataParserServiceImpl implements DataParserService {
         return data.stream()
                 .map(d -> d.split(PATTERN))
                 .map(d -> new StorageTransaction(
-                        getTypeActivity(d[ACTIVITY_INDEX]), d[FRUIT_INDEX],
-                        Integer.parseInt(d[QUANTITY_INDEX])))
+                        StorageTransaction.Operation.getOperation(d[ACTIVITY_INDEX]),
+                        d[FRUIT_INDEX], Integer.parseInt(d[QUANTITY_INDEX])))
                 .collect(Collectors.toList());
-    }
-
-    private StorageTransaction.TypeActivity getTypeActivity(String code) {
-        return Arrays.stream(StorageTransaction.TypeActivity.values())
-                .filter(t -> t.getCode().equals(code))
-                .findFirst()
-                .get();
     }
 }
