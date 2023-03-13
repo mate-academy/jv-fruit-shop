@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.util.Map;
 
 public class CsvWriter {
-    private static final String PATH = "src/main/java/core/basesyntax/Result.csv";
+    private static final String PATH = "src/main/resources/Result.csv";
 
     private BufferedWriter writer;
 
