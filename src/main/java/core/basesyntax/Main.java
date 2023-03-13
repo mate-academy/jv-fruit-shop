@@ -1,8 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.strategy.ActionReaderStrategy;
 import core.basesyntax.service.CsvManager;
 import core.basesyntax.service.CsvManagerImpl;
+import core.basesyntax.strategy.ActionReaderStrategy;
 import java.util.Map;
 
 public class Main {
