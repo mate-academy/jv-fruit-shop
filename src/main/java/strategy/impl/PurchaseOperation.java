@@ -9,7 +9,6 @@ public class PurchaseOperation implements StrategyOperation {
     public void apply(TransactionDto transactionDto) {
         int oldQuantity = Storage.storage.get(transactionDto.getFruitName());
         int newQuantity = oldQuantity - transactionDto.getQuantity();
-
         if (oldQuantity < transactionDto.getQuantity() || oldQuantity == 0) {
             throw new RuntimeException("Not enough fruits to sell");
         } else {

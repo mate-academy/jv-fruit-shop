@@ -14,7 +14,6 @@ public class ReaderServiceImpl implements ReaderService {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             String line = bufferedReader.readLine();
             while (line != null) {
-
                 result.add(line);
                 line = bufferedReader.readLine();
             }
