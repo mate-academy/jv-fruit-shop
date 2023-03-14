@@ -1,11 +1,11 @@
 package core.basesyntax.strategy.actions;
 
-import java.util.Map;
+import core.basesyntax.service.impl.FruitTransaction;
+import core.basesyntax.storage.Storage;
 
 public interface ActionHandler {
-    String SPLITTER = ",";
 
-    void apply(Map<String, Integer> map, String data);
+    void apply(Storage storage, String fruit, Integer quantity);
 
-    boolean isApplicable(String action);
+    boolean isApplicable(FruitTransaction.Operation action);
 }

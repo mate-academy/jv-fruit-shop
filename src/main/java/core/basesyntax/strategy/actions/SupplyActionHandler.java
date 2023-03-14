@@ -1,17 +1,16 @@
 package core.basesyntax.strategy.actions;
 
-import java.util.Map;
+import core.basesyntax.service.impl.FruitTransaction;
+import core.basesyntax.storage.Storage;
 
 public class SupplyActionHandler implements ActionHandler {
     @Override
-    public void apply(Map<String, Integer> map, String data) {
-        String[] values = data.split(SPLITTER, 2);
-        Integer value = Integer.parseInt(values[1]) + map.get(values[0]);
-        map.put(values[0], value);
+    public void apply(Storage storage, String fruit, Integer quantity) {
+        storage.plus(fruit, quantity);
     }
 
     @Override
-    public boolean isApplicable(String action) {
-        return "s".equals(action);
+    public boolean isApplicable(FruitTransaction.Operation action) {
+        return FruitTransaction.Operation.SUPPLY == action;
     }
 }

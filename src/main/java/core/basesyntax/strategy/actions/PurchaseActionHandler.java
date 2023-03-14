@@ -1,23 +1,16 @@
 package core.basesyntax.strategy.actions;
 
-import java.util.Map;
-import java.util.Optional;
+import core.basesyntax.service.impl.FruitTransaction;
+import core.basesyntax.storage.Storage;
 
 public class PurchaseActionHandler implements ActionHandler {
     @Override
-    public void apply(Map<String, Integer> map, String data) {
-        String[] values = data.split(SPLITTER, 2);
-        Integer purchasedAmount = Integer.parseInt(values[1]);
-        Integer initialAmount = Optional.ofNullable(map.get(values[0]))
-                .orElseThrow(() -> new RuntimeException("Fruit index does not exist"));
-        if (purchasedAmount > initialAmount) {
-            throw new RuntimeException("Can't purchase more than there is in stock");
-        }
-        map.put(values[0], initialAmount - purchasedAmount);
+    public void apply(Storage storage, String fruit, Integer quantity) {
+        storage.plus(fruit, -quantity);
     }
 
     @Override
-    public boolean isApplicable(String action) {
-        return "p".equals(action);
+    public boolean isApplicable(FruitTransaction.Operation action) {
+        return FruitTransaction.Operation.PURCHASE == action;
     }
 }
