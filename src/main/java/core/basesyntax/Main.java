@@ -1,18 +1,31 @@
 package core.basesyntax;
 
-import core.basesyntax.service.CsvManager;
-import core.basesyntax.service.CsvManagerImpl;
-import core.basesyntax.strategy.ActionReaderStrategy;
+import core.basesyntax.service.ActionReader;
+import core.basesyntax.strategy.actions.ActionHandler;
+import core.basesyntax.strategy.actions.BaseActionHandler;
+import core.basesyntax.strategy.actions.PurchaseActionHandler;
+import core.basesyntax.strategy.actions.SupplyActionHandler;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String from = "src/main/resources/test.csv";
+    private static final String to = "src/main/resources/";
+
     public static void main(String[] args) {
         Map<String, Integer> shopStock;
-        String from = "src/main/resources/test.csv";
-        String to = "src/main/resources/";
-        ActionReaderStrategy actionReader = new ActionReaderStrategy();
-        CsvManager csvHandler = new CsvManagerImpl();
-        shopStock = actionReader.inputDataToMap(from);
-        csvHandler.report(shopStock, to);
+        List<ActionHandler> possibleActions = allPossibleActions();
+        ActionReader actionReader = new ActionReader();
+        shopStock = actionReader.inputDataToMap(possibleActions, from);
+        actionReader.outputMapToFile(shopStock, to);
+    }
+
+    private static List<ActionHandler> allPossibleActions() {
+        List<ActionHandler> possibleActions = new ArrayList<>();
+        possibleActions.add(new BaseActionHandler());
+        possibleActions.add(new PurchaseActionHandler());
+        possibleActions.add(new SupplyActionHandler());
+        return possibleActions;
     }
 }

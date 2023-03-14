@@ -12,21 +12,24 @@ import java.util.List;
 import java.util.Map;
 
 public class CsvManagerImpl implements CsvManager {
+    private static final String SPLIT_KEY = ",";
+    private static final int ACTION_INDEX = 0;
+    private static final int DATA_INDEX = 1;
+
     @Override
-    //Returns a map in format "action" - "data"
     public List<Transaction> read(String path) {
         List<Transaction> allLines = new ArrayList<>();
         try {
             List<String> allLinesString = Files.readAllLines(Paths.get(path));
             if (allLinesString.size() < 1) {
-                throw new NullPointerException("File is empty");
+                throw new NullPointerException("File is empty: " + path);
             }
             for (int i = 1; i < allLinesString.size(); i++) {
-                String[] line = allLinesString.get(i).split(",", 2);
-                allLines.add(new Transaction(line[0], line[1]));
+                String[] line = allLinesString.get(i).split(SPLIT_KEY, 2);
+                allLines.add(new Transaction(line[ACTION_INDEX], line[DATA_INDEX]));
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read ", e);
+            throw new RuntimeException("Can't read file: " + path);
         }
         return allLines;
     }
@@ -42,7 +45,7 @@ public class CsvManagerImpl implements CsvManager {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(builder.toString());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write ", e);
+            throw new RuntimeException("Can't write to file: " + file);
         }
     }
 }
