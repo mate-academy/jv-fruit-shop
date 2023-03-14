@@ -38,10 +38,10 @@ public class Main {
                 readerService.readFromFile(INPUT_FILE));
         FruitShopService fruitShopService = new FruitShopServiceImpl(
                 new OperationStrategyImpl(operationHandlerMap));
-        Map<String, Integer> preparedMap = fruitShopService.process(parsed);
+        Map<String, Integer> processedMap = fruitShopService.process(parsed);
 
         ReportCreatorService reportMakerService = new ReportCreatorServiceImpl();
-        String preparedReport = reportMakerService.createReport(preparedMap);
+        String preparedReport = reportMakerService.createReport(processedMap);
 
         CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
         writerService.writeToFile(OUTPUT_FILE, preparedReport);
