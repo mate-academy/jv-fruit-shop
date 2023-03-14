@@ -13,12 +13,12 @@ import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.Strategy;
-import core.basesyntax.strategy.Transaction;
+import core.basesyntax.strategy.TransactionHandler;
 import core.basesyntax.strategy.TransactionStrategy;
-import core.basesyntax.strategy.impl.BalanceTransaction;
-import core.basesyntax.strategy.impl.PurchaseTransaction;
-import core.basesyntax.strategy.impl.ReturnTransaction;
-import core.basesyntax.strategy.impl.SupplyTransaction;
+import core.basesyntax.strategy.impl.BalanceTransactionHandler;
+import core.basesyntax.strategy.impl.PurchaseTransactionHandler;
+import core.basesyntax.strategy.impl.ReturnTransactionHandler;
+import core.basesyntax.strategy.impl.SupplyTransactionHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,11 +28,11 @@ public class Application {
     private static final String OUTPUT_PATH = "src/main/resources/output.cvs";
 
     public static void main(String[] args) {
-        Map<StorageTransaction.Operation, Transaction> operations = new HashMap<>();
-        operations.put(StorageTransaction.Operation.BALANCE, new BalanceTransaction());
-        operations.put(StorageTransaction.Operation.RETURN, new ReturnTransaction());
-        operations.put(StorageTransaction.Operation.SUPPLY, new SupplyTransaction());
-        operations.put(StorageTransaction.Operation.PURCHASE, new PurchaseTransaction());
+        Map<StorageTransaction.Operation, TransactionHandler> operations = new HashMap<>();
+        operations.put(StorageTransaction.Operation.BALANCE, new BalanceTransactionHandler());
+        operations.put(StorageTransaction.Operation.RETURN, new ReturnTransactionHandler());
+        operations.put(StorageTransaction.Operation.SUPPLY, new SupplyTransactionHandler());
+        operations.put(StorageTransaction.Operation.PURCHASE, new PurchaseTransactionHandler());
 
         Strategy strategy = new TransactionStrategy(operations);
         ReaderService readerService = new ReaderServiceImpl();
@@ -44,7 +44,7 @@ public class Application {
         List<String> data = readerService.readData(INPUT_PATH);
         List<StorageTransaction> transactions = parserService.parse(data);
         calculatorService.calculate(transactions);
-        String report = reportMakerService.makeReport(Storage.STORAGE);
+        String report = reportMakerService.makeReport(Storage.storage);
         writerService.writeData(report, OUTPUT_PATH);
     }
 }

@@ -11,7 +11,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
     @Override
     public String makeReport(Map<String, Integer> data) {
         StringBuilder report = new StringBuilder(HEADER);
-        for (Map.Entry<String, Integer> pair : Storage.STORAGE.entrySet()) {
+        for (Map.Entry<String, Integer> pair : Storage.storage.entrySet()) {
             report.append(System.lineSeparator())
                     .append(pair.getKey())
                     .append(SEPARATOR)

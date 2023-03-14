@@ -10,10 +10,12 @@ public class DataParserServiceImpl implements DataParserService {
     public static final int FRUIT_INDEX = 1;
     public static final int QUANTITY_INDEX = 2;
     public static final String PATTERN = ",";
+    private static final int HEADER_ROW = 1;
 
     @Override
     public List<StorageTransaction> parse(List<String> data) {
         return data.stream()
+                .skip(HEADER_ROW)
                 .map(d -> d.split(PATTERN))
                 .map(d -> new StorageTransaction(
                         StorageTransaction.Operation.getOperation(d[ACTIVITY_INDEX]),

@@ -15,7 +15,7 @@ public class CalculatorServiceImpl implements CalculatorService {
     @Override
     public void calculate(List<StorageTransaction> transactions) {
         for (StorageTransaction transaction : transactions) {
-            strategy.getTransaction(transaction).doTransaction(transaction);
+            strategy.getHandler(transaction).handle(transaction);
         }
     }
 }
