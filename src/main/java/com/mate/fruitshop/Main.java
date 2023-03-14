@@ -19,6 +19,6 @@ public class Main {
         new TransactionsProcessingServiceImpl().process(transactions);
         String report = new ReportCreatorServiceImpl()
                 .createReport(new FruitStorageDaoImpl().getAll());
-        new WriterServiceImpl().writeToCsv(report, REPORT_FILE_NAME);
+        new WriterServiceImpl().write(report, REPORT_FILE_NAME);
     }
 }

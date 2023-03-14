@@ -11,7 +11,7 @@ public class WriterServiceImpl implements WriterService {
     public static final String DEFAULT_REPORT_NAME = "src/main/resources/report.csv";
 
     @Override
-    public void writeToCsv(String report, String reportFileDir) {
+    public void write(String report, String reportFileDir) {
         Path reportFile;
         try {
             reportFile = Paths.get(reportFileDir);
