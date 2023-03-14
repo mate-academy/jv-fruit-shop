@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import java.util.Map;
 
 public class ReportService {
     private static final String ANNOTATION = "fruit,quantity";
@@ -12,10 +11,10 @@ public class ReportService {
     public String generateReport() {
         StringBuilder result = new StringBuilder();
         result.append(ANNOTATION).append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : fruitDao.getEntrySet()) {
-            result.append(entry.getKey())
+        for (FruitDao.FruitDto fruit : fruitDao.getFruits()) {
+            result.append(fruit.getFruit())
                     .append(SEPARATOR)
-                    .append(entry.getValue())
+                    .append(fruit.getAmount())
                     .append(System.lineSeparator());
         }
         return result.toString();

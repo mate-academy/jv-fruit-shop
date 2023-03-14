@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
-import java.util.Map;
-import java.util.Set;
+import java.util.List;
 
 public interface FruitDao {
 
@@ -11,5 +10,23 @@ public interface FruitDao {
 
     boolean isContains(String fruit);
 
-    Set<Map.Entry<String,Integer>> getEntrySet();
+    List<FruitDto> getFruits();
+
+    final class FruitDto {
+        private final String fruit;
+        private final int amount;
+
+        public FruitDto(String fruit, int amount) {
+            this.fruit = fruit;
+            this.amount = amount;
+        }
+
+        public String getFruit() {
+            return fruit;
+        }
+
+        public int getAmount() {
+            return amount;
+        }
+    }
 }

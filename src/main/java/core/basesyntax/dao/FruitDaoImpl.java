@@ -1,8 +1,9 @@
 package core.basesyntax.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FruitDaoImpl implements FruitDao {
     private static final Map<String, Integer> storage = new HashMap<>();
@@ -23,7 +24,9 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Set<Map.Entry<String, Integer>> getEntrySet() {
-        return storage.entrySet();
+    public List<FruitDto> getFruits() {
+        return storage.entrySet().stream()
+                .map(e -> new FruitDto(e.getKey(), e.getValue()))
+                .collect(Collectors.toList());
     }
 }

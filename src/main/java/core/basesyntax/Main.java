@@ -15,10 +15,10 @@ public class Main {
     public static void main(String[] args) {
         List<String> dataFromFile = FileReaderService.readFromFile(INPUT_FILE_NAME);
         ParserService parserService = new ParserService();
-        List<FruitTransaction> listFruitsTransaction =
+        List<FruitTransaction> listFruitTransactions =
                 parserService.convertToListFruitTransaction(dataFromFile);
         TransactionService transactionService = new TransactionService();
-        transactionService.processing(listFruitsTransaction);
+        transactionService.processing(listFruitTransactions);
         ReportService reportService = new ReportService();
         FileWriterService.writeToFile(REPORT_FILE_NAME, reportService.generateReport());
     }
