@@ -1,27 +1,25 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.exception.FruitStoreException;
-import core.basesyntax.model.FruitNegotiation;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.ApplyStrategy;
+import core.basesyntax.strategy.UnaryOperation;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ApplyStrategyImpl implements ApplyStrategy {
+    private Map<FruitTransaction.Operation, UnaryOperation> strategy = new HashMap<>();
+
+    public ApplyStrategyImpl() {
+        strategy.put(FruitTransaction.Operation.BALANCE, new ApplyBalance());
+        strategy.put(FruitTransaction.Operation.PURCHASE, new ApplyPurchase());
+        strategy.put(FruitTransaction.Operation.RETURN, new ApplyReturn());
+        strategy.put(FruitTransaction.Operation.SUPPLY, new ApplySupplay());
+    }
+
     @Override
-    public void process(FruitNegotiation fruit) {
-        switch (fruit.getOperation()) {
-            case BALANCE:
-                new ApplyBalance(fruit).apply();
-                break;
-            case PURCHASE:
-                new ApplyPurchase(fruit).apply();
-                break;
-            case RETURN:
-                new ApplyReturn(fruit).apply();
-                break;
-            case SUPPLY:
-                new ApplySupplay(fruit).apply();
-                break;
-            default:
-                throw new FruitStoreException("Missing type of operation " + fruit.getOperation());
-        }
+    public void process(FruitTransaction fruit) {
+        strategy.entrySet().stream()
+                .filter(s -> s.getKey() == fruit.getOperation())
+                .forEach(e -> e.getValue().apply(fruit));
     }
 }

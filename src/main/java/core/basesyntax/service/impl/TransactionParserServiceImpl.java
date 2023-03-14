@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitNegotiation;
-import core.basesyntax.service.NegotiationParserService;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.TransactionParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NegotiationParserServiceImpl implements NegotiationParserService {
+public class TransactionParserServiceImpl implements TransactionParserService {
     private static final String DELIMITER = ",";
     private static final int ARRAY_SIZE = 3;
     private static final int FIELD_TYPE = 0;
@@ -13,13 +13,13 @@ public class NegotiationParserServiceImpl implements NegotiationParserService {
     private static final int FIELD_QUANTITY = 2;
 
     @Override
-    public List<FruitNegotiation> createNegotiation(List<String> records) {
-        List<FruitNegotiation> parsedRecords = new ArrayList<>();
+    public List<FruitTransaction> parse(List<String> records) {
+        List<FruitTransaction> parsedRecords = new ArrayList<>();
         for (int i = 0; i < records.size(); i++) {
             var buffer = records.get(i).split(DELIMITER);
             if (buffer.length == ARRAY_SIZE && buffer[FIELD_TYPE].length() == FIELD_NAME) {
-                parsedRecords.add(new FruitNegotiation(
-                        FruitNegotiation.Operation.getCode(buffer[FIELD_TYPE].trim()),
+                parsedRecords.add(new FruitTransaction(
+                        FruitTransaction.Operation.getCode(buffer[FIELD_TYPE].trim()),
                         buffer[FIELD_NAME].trim(),
                         Integer.parseInt(buffer[FIELD_QUANTITY].trim())));
             }

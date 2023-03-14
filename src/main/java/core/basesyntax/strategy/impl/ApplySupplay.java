@@ -1,23 +1,17 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitNegotiation;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.UnaryOperation;
 
 public class ApplySupplay implements UnaryOperation {
-    private FruitNegotiation myFruit;
-
-    public ApplySupplay(FruitNegotiation fruit) {
-        this.myFruit = fruit;
-    }
-
     @Override
-    public void apply() {
-        if (Storage.storage.containsKey(myFruit.getFruit())) {
-            Storage.storage.put(myFruit.getFruit(),
-                    Storage.storage.get(myFruit.getFruit()).intValue() + myFruit.getQuantity());
+    public void apply(FruitTransaction fruit) {
+        if (Storage.storage.containsKey(fruit.getFruit())) {
+            Storage.storage.put(fruit.getFruit(),
+                    Storage.storage.get(fruit.getFruit()).intValue() + fruit.getQuantity());
         } else {
-            Storage.storage.put(myFruit.getFruit(),myFruit.getQuantity());
+            Storage.storage.put(fruit.getFruit(),fruit.getQuantity());
         }
     }
 }

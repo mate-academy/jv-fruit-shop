@@ -1,33 +1,33 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitNegotiation;
-import core.basesyntax.service.FruitEvaluator;
-import core.basesyntax.service.NegotiationParserService;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.ReportGenerateService;
+import core.basesyntax.service.ReportGeneratorService;
+import core.basesyntax.service.TransactionEvaluator;
+import core.basesyntax.service.TransactionParserService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.FruitEvaluatorImpl;
-import core.basesyntax.service.impl.NegotiationParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.ReportGenerateServiceImpl;
+import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
+import core.basesyntax.service.impl.TransactionEvaluatorImpl;
+import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import java.util.List;
 
 public class MainApp {
     private static final String INPUT_CSV = "input.csv";
-    private static final String OTPUT_CSV = "results.csv";
+    private static final String OUTPUT_CSV = "results.csv";
+    private static ReaderService readerService = new ReaderServiceImpl();
+    private static TransactionParserService parser = new TransactionParserServiceImpl();
+    private static TransactionEvaluator evaluationFruits = new TransactionEvaluatorImpl();
+    private static ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
+    private static WriterService writerService = new WriterServiceImpl();
 
     public static void main(String[] args) {
-        ReaderService readerService = new ReaderServiceImpl();
-        NegotiationParserService parser = new NegotiationParserServiceImpl();
-        FruitEvaluator evaluationFruits = new FruitEvaluatorImpl();
-        ReportGenerateService reportGenerateService = new ReportGenerateServiceImpl();
-        WriterService writerService = new WriterServiceImpl();
         List<String> recordsOfData = readerService.readFileToList(INPUT_CSV);
-        List<FruitNegotiation> parsedData = parser.createNegotiation(recordsOfData);
+        List<FruitTransaction> parsedData = parser.parse(recordsOfData);
         evaluationFruits.evaluate(parsedData);
-        String dataOfReport = reportGenerateService.generateReportText(Storage.storage);
-        writerService.writeReportToFile(OTPUT_CSV, dataOfReport);
+        String dataOfReport = reportGeneratorService.generateReportText(Storage.storage);
+        writerService.writeReportToFile(OUTPUT_CSV, dataOfReport);
     }
 }

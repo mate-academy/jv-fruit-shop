@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 import core.basesyntax.exception.FruitStoreException;
 
-public class FruitNegotiation {
+public class FruitTransaction {
     private Operation operation;
     private String fruitName;
     private int quantity;
 
-    public FruitNegotiation(Operation operation, String fruitName, int quantity) {
+    public FruitTransaction(Operation operation, String fruitName, int quantity) {
         this.operation = operation;
         this.fruitName = fruitName;
         this.quantity = quantity;
@@ -59,7 +59,7 @@ public class FruitNegotiation {
                     return operation;
                 }
             }
-            throw new FruitStoreException("Unknowing code of operation signature " + code);
+            throw new FruitStoreException("Unknown opcode signature : " + code);
         }
     }
 }

@@ -2,29 +2,18 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exception.FruitStoreException;
-import core.basesyntax.model.FruitNegotiation;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.UnaryOperation;
 
 public class ApplyPurchase implements UnaryOperation {
-    private FruitNegotiation myFruit;
-
-    public ApplyPurchase(FruitNegotiation fruit) {
-        this.myFruit = fruit;
-    }
-
     @Override
-    public void apply() {
-        if (Storage.storage.containsKey(myFruit.getFruit())) {
-            if (Storage.storage.get(myFruit.getFruit()).intValue() >= myFruit.getQuantity()) {
-                Storage.storage.put(myFruit.getFruit(),
-                        Storage.storage.get(myFruit.getFruit()).intValue() - myFruit.getQuantity());
-            } else {
-                throw new FruitStoreException("Can't selling " + myFruit.getFruit()
-                        + " the quantity of which is less on the balance than in query");
-            }
-        } else {
-            throw new FruitStoreException("Can't selling " + myFruit.getFruit()
-                    + " fruit that don't getting on balance before");
+    public void apply(FruitTransaction fruit) {
+        if (!Storage.storage.containsKey(fruit.getFruit())
+                || Storage.storage.get(fruit.getFruit()).intValue() < fruit.getQuantity()) {
+            throw new FruitStoreException("Can't selling " + fruit.getFruit()
+                    + " the quantity of which is less or absent on the balance than in query");
         }
+        Storage.storage.put(fruit.getFruit(),
+                        Storage.storage.get(fruit.getFruit()).intValue() - fruit.getQuantity());
     }
 }
