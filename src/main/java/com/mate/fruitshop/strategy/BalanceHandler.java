@@ -5,19 +5,21 @@ import com.mate.fruitshop.dao.impl.FruitStorageDaoImpl;
 import com.mate.fruitshop.model.FruitEntry;
 import com.mate.fruitshop.model.Transaction;
 
-public class ProcessPurchaseTransaction implements TransactionProcessingStrategy {
+public class BalanceHandler implements TransactionProcessingStrategy {
     private final FruitStorageDao dao;
 
-    public ProcessPurchaseTransaction() {
+    public BalanceHandler() {
         this.dao = new FruitStorageDaoImpl();
     }
 
     @Override
     public void process(Transaction transaction) {
         FruitEntry fruitEntry = dao.getByName(transaction.getFruitName());
-        if (fruitEntry == null || transaction.getQuantity() > fruitEntry.getQuantity()) {
-            throw new RuntimeException("Purchase larger than available stock");
+        if (fruitEntry == null) {
+            dao.add(new FruitEntry(transaction.getFruitName(),
+                    transaction.getQuantity()));
+            return;
         }
-        fruitEntry.setQuantity(fruitEntry.getQuantity() - transaction.getQuantity());
+        fruitEntry.setQuantity(transaction.getQuantity());
     }
 }

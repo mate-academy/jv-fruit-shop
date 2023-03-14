@@ -5,10 +5,10 @@ import com.mate.fruitshop.dao.impl.FruitStorageDaoImpl;
 import com.mate.fruitshop.model.FruitEntry;
 import com.mate.fruitshop.model.Transaction;
 
-public class ProcessSupplyTransaction implements TransactionProcessingStrategy {
+public class SupplyHandler implements TransactionProcessingStrategy {
     private final FruitStorageDao dao;
 
-    public ProcessSupplyTransaction() {
+    public SupplyHandler() {
         this.dao = new FruitStorageDaoImpl();
     }
 

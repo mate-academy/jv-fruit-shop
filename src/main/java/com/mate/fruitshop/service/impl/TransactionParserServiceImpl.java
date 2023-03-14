@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionParserServiceImpl implements TransactionParserService {
-
     public static final String DELIMITER = ",";
     public static final int OPERATION_CODE_INDEX = 0;
     public static final int FRUIT_NAME_INDEX = 1;

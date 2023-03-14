@@ -2,10 +2,10 @@ package com.mate.fruitshop.service.impl;
 
 import com.mate.fruitshop.model.Transaction;
 import com.mate.fruitshop.service.TransactionsProcessingService;
-import com.mate.fruitshop.strategy.ProcessBalanceTransaction;
-import com.mate.fruitshop.strategy.ProcessPurchaseTransaction;
-import com.mate.fruitshop.strategy.ProcessReturnTransaction;
-import com.mate.fruitshop.strategy.ProcessSupplyTransaction;
+import com.mate.fruitshop.strategy.BalanceHandler;
+import com.mate.fruitshop.strategy.PurchaseHandler;
+import com.mate.fruitshop.strategy.ReturnHandler;
+import com.mate.fruitshop.strategy.SupplyHandler;
 import com.mate.fruitshop.strategy.TransactionProcessingStrategy;
 import java.util.HashMap;
 import java.util.List;
@@ -16,10 +16,10 @@ public class TransactionsProcessingServiceImpl implements TransactionsProcessing
 
     public TransactionsProcessingServiceImpl() {
         this.strategyMap = new HashMap<>();
-        this.strategyMap.put(Transaction.Operation.BALANCE, new ProcessBalanceTransaction());
-        this.strategyMap.put(Transaction.Operation.PURCHASE, new ProcessPurchaseTransaction());
-        this.strategyMap.put(Transaction.Operation.SUPPLY, new ProcessSupplyTransaction());
-        this.strategyMap.put(Transaction.Operation.RETURN, new ProcessReturnTransaction());
+        this.strategyMap.put(Transaction.Operation.BALANCE, new BalanceHandler());
+        this.strategyMap.put(Transaction.Operation.PURCHASE, new PurchaseHandler());
+        this.strategyMap.put(Transaction.Operation.SUPPLY, new SupplyHandler());
+        this.strategyMap.put(Transaction.Operation.RETURN, new ReturnHandler());
     }
 
     @Override

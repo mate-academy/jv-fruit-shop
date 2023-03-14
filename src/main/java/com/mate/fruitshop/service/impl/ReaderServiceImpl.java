@@ -1,6 +1,6 @@
 package com.mate.fruitshop.service.impl;
 
-import com.mate.fruitshop.service.CsvReaderService;
+import com.mate.fruitshop.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvReaderServiceImpl implements CsvReaderService {
+public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> read(String inputFileDir) {
         Path inputFile = Paths.get(inputFileDir);

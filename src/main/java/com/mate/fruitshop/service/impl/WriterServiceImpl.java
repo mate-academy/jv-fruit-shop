@@ -1,13 +1,13 @@
 package com.mate.fruitshop.service.impl;
 
-import com.mate.fruitshop.service.CsvWriter;
+import com.mate.fruitshop.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class CsvWriterImpl implements CsvWriter {
+public class WriterServiceImpl implements WriterService {
     public static final String DEFAULT_REPORT_NAME = "src/main/resources/report.csv";
 
     @Override

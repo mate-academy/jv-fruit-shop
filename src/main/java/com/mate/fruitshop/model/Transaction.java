@@ -36,9 +36,9 @@ public class Transaction {
         }
 
         public static Operation getOperationByCode(String code) {
-            for (Operation op : Operation.values()) {
-                if (op.operationCode.equals(code)) {
-                    return op;
+            for (Operation operation : Operation.values()) {
+                if (operation.operationCode.equals(code)) {
+                    return operation;
                 }
             }
             return null;
