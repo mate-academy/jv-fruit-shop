@@ -3,6 +3,11 @@ package core.basesyntax;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.FruitTransaction;
+import core.basesyntax.service.impl.FruitTransactionGenerator;
+import core.basesyntax.service.impl.FruitTransactionGeneratorImpl;
+import core.basesyntax.service.impl.ReportCreator;
+import core.basesyntax.service.impl.ReportCreatorImpl;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
 
@@ -13,12 +18,16 @@ public class Main {
     public static void main(String[] args) {
 
         FileReaderImpl fileReaderImpl = new FileReaderImpl();
-        List<FruitTransaction> fruitTransactionList = fileReaderImpl.readFromFile(PATH_TO_FILE);
-        fruitTransactionList.forEach(t -> new OperationStrategyImpl()
-                .get(t.getOperation()).handle(t));
-        FileWriterImpl fileWriterImpl = new FileWriterImpl(PATH_FOR_RESULT);
-        fileWriterImpl.writeToFile();
-
+        FruitTransactionGenerator generator = new FruitTransactionGeneratorImpl();
+        OperationStrategy operationStrategy = new OperationStrategyImpl();
+        FileWriterImpl fileWriterImpl = new FileWriterImpl();
+        ReportCreator reportCreator = new ReportCreatorImpl();
+        List<String[]> dataFromFile = fileReaderImpl.readFromFile(PATH_TO_FILE);
+        List<FruitTransaction> fruitTransactionList = generator
+                .createFruitTransaction(dataFromFile);
+        fruitTransactionList.forEach(f -> operationStrategy.get(f.getOperation()).handle(f));
+        String report = reportCreator.createReport();
+        fileWriterImpl.writeToFile(PATH_FOR_RESULT, report);
     }
 }
 

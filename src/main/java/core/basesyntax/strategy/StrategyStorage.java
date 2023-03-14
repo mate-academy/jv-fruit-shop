@@ -17,14 +17,6 @@ public class StrategyStorage {
                 new ReturnOperationStrategy());
     }
 
-    public HashMap<String, OperationHandler> getStrategyStorage() {
-        return strategyStorage;
-    }
-
-    public void setStrategyStorage(HashMap<String, OperationHandler> strategyStorage) {
-        this.strategyStorage = strategyStorage;
-    }
-
     public OperationHandler getStrategy(String data) {
         return strategyStorage.get(data);
     }

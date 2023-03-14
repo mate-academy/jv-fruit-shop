@@ -6,8 +6,8 @@ import core.basesyntax.service.impl.FruitTransaction;
 public class PurchaseOperationStrategy implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        Storage.getFruitShop().replace(transaction.getFruit(),
-                Storage.getFruitShop().get(transaction.getFruit())
+        Storage.getFruitStorge().replace(transaction.getFruit(),
+                Storage.getFruitStorge().get(transaction.getFruit())
                 - transaction.getQuantity());
     }
 }

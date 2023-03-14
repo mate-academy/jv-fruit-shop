@@ -6,18 +6,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileWriterImpl implements FileWriter {
-    private String path;
     private BufferedWriter writer;
 
-    public FileWriterImpl(String path) {
-        this.path = path;
-    }
-
-    public void writeToFile() {
+    public void writeToFile(String pathToFile, String data) {
         {
             try {
-                writer = Files.newBufferedWriter(Path.of(path));
-                writer.write(new ReportCreatorImpl().createReport());
+                writer = Files.newBufferedWriter(Path.of(pathToFile));
+                writer.write(data);
                 writer.flush();
             } catch (IOException e) {
                 throw new RuntimeException("Can't write to file", e);

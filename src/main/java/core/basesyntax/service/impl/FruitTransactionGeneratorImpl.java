@@ -1,13 +1,16 @@
 package core.basesyntax.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class FruitTransactionGeneratorImpl implements FruitTransactionGenerator {
     @Override
-    public FruitTransaction createFruitTransaction(String[] metadata) {
-        FruitTransaction.Operation operation = FruitTransaction
+    public List<FruitTransaction> createFruitTransaction(List<String[]> metadata) {
+        return metadata.stream()
+                .map(t ->
+                new FruitTransaction(FruitTransaction
                 .Operation
-                .getByCodeOperation(metadata[0]);
-        String name = metadata[1];
-        int quantity = Integer.parseInt(metadata[2]);
-        return new FruitTransaction(operation, name,quantity);
+                .getByCode(t[0]), t[1], Integer.parseInt(t[2])))
+                .collect(Collectors.toList());
     }
 }

@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import java.util.List;
+
 public interface FruitTransactionGenerator {
-    FruitTransaction createFruitTransaction(String[] metadata);
+    List<FruitTransaction> createFruitTransaction(List<String[]> metadata);
 }
