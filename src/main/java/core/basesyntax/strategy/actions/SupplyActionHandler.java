@@ -12,6 +12,6 @@ public class SupplyActionHandler implements ActionHandler {
 
     @Override
     public boolean isApplicable(String action) {
-        return action.equals("s");
+        return "s".equals(action);
     }
 }

@@ -12,6 +12,6 @@ public class BaseActionHandler implements ActionHandler {
 
     @Override
     public boolean isApplicable(String action) {
-        return action.equals("b");
+        return "b".equals(action);
     }
 }
