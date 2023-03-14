@@ -23,21 +23,18 @@ import java.util.List;
 public class FruitShopMain {
     private static final String SOURCE_FILE_PATH = "src/source.csv";
     private static final String REPORT_FILE_PATH = "src/report.csv";
+    private static GridReadService gridReadService = new CsvGridReadService();
+    private static FruitTransactionParser parser = new RowFruitTransactionParser();
+    private static TransactionsEvaluateService evaluateService =
+            new TransactionsEvaluateServiceImpl(new ReportStrategyImpl());
+    private static GridWriteService gridWriteService = new CsvGridWriteService();
+    private static ValueOfFruit valueOfFruit = new RowValueOfFruit();
 
     public static void main(String[] args) {
-        // Services creation
-        GridReadService gridReadService = new CsvGridReadService(new File(SOURCE_FILE_PATH));
-        FruitTransactionParser parser = new RowFruitTransactionParser();
-        TransactionsEvaluateService evaluateService =
-                new TransactionsEvaluateServiceImpl(new ReportStrategyImpl());
-        GridWriteService gridWriteService = new CsvGridWriteService(new File(REPORT_FILE_PATH));
-        // Processing transactions
         List<FruitTransaction> fruitTransactions =
-                parser.parse(gridReadService.getGrid().getRows());
+                parser.parse(gridReadService.getGrid(SOURCE_FILE_PATH).getRows());
         evaluateService.evaluate(fruitTransactions);
-        // Report creating
-        ValueOfFruit valueOfFruit = new RowValueOfFruit();
         List<String[]> lines = valueOfFruit.valueOf(Storage.getFruits());
-        gridWriteService.writeLines(new Grid(Storage.DEFAULT_TITLES, lines));
+        gridWriteService.write(REPORT_FILE_PATH, new Grid(Storage.DEFAULT_TITLES, lines));
     }
 }

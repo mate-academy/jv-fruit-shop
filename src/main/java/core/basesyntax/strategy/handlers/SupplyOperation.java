@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationHandler;
 
 public class SupplyOperation implements OperationHandler {
     @Override
-    public void proccessTransaction(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         Storage.change(transaction.getFruit(), transaction.getQuantity());
     }
 }

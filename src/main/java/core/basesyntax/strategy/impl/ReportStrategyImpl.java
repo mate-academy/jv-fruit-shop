@@ -21,8 +21,7 @@ public class ReportStrategyImpl implements ReportStrategy {
     }
 
     @Override
-    public void process(FruitTransaction transaction) {
-        strategy.get(transaction.getOperation())
-                .proccessTransaction(transaction);
+    public OperationHandler getHandlerByOperation(FruitTransaction.Operation operation) {
+        return strategy.get(operation);
     }
 }

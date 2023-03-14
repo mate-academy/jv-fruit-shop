@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 
 @FunctionalInterface
 public interface OperationHandler {
-    void proccessTransaction(FruitTransaction transaction);
+    void handle(FruitTransaction transaction);
 }

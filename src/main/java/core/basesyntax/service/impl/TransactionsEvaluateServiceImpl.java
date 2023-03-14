@@ -14,6 +14,7 @@ public class TransactionsEvaluateServiceImpl implements TransactionsEvaluateServ
 
     @Override
     public void evaluate(List<FruitTransaction> transactions) {
-        transactions.forEach(strategy::process);
+        transactions.forEach(t ->
+                strategy.getHandlerByOperation(t.getOperation()).handle(t));
     }
 }

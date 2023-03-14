@@ -14,17 +14,9 @@ public class CsvGridReadService implements GridReadService {
     private static final String SEPARATOR = ",";
     private Grid grid;
 
-    public CsvGridReadService(File file) {
-        grid = readGrid(file);
-    }
-
     @Override
-    public Grid getGrid() {
-        return grid;
-    }
-
-    private Grid readGrid(File file) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+    public Grid getGrid(String path) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             String[] titles = bufferedReader.readLine().split(SEPARATOR);
             List<String[]> rows = new ArrayList<>();
             while (bufferedReader.ready()) {
@@ -32,9 +24,9 @@ public class CsvGridReadService implements GridReadService {
             }
             return new Grid(titles, rows);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File " + file.getPath() + " doesn't exist!");
+            throw new RuntimeException("File " + path + " doesn't exist!");
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read " + file.getPath() + " file!");
+            throw new RuntimeException("Failed to read " + path + " file!");
         }
     }
 }

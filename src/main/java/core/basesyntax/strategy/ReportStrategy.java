@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 
 @FunctionalInterface
 public interface ReportStrategy {
-    void process(FruitTransaction transaction);
+    OperationHandler getHandlerByOperation(FruitTransaction.Operation operation);
 }
