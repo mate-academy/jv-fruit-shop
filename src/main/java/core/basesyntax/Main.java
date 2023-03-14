@@ -4,8 +4,10 @@ import dao.FruitDaoCsvImpl;
 import java.util.HashMap;
 import java.util.Map;
 import model.FruitStore;
-import service.FruitStoreService;
-import service.impl.FruitStoreServiceImpl;
+import service.CreateReportService;
+import service.ProcessData;
+import service.impl.CreateReportServiceImpl;
+import service.impl.ProcessDataImpl;
 import strategy.ActivitiesStrategyImpl;
 import strategy.activities.ActivitiesHandler;
 import strategy.activities.BalanceHandler;
@@ -15,11 +17,16 @@ import strategy.activities.SupplyHandler;
 
 public class Main {
     private static Map<String, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();
-    private static FruitStoreService fruitStoreService = new FruitStoreServiceImpl(
-            new FruitDaoCsvImpl("./src/main/resources/database.csv",
-                    "./src/main/resources/report.csv"),
+    private static FruitStore fruitStore = new FruitStore();
+
+    private static CreateReportService createReportService = new CreateReportServiceImpl(
+            new FruitDaoCsvImpl("./src/main/resources/report.csv"),
+            fruitStore);
+
+    private static ProcessData processData = new ProcessDataImpl(
+            new FruitDaoCsvImpl("./src/main/resources/database.csv"),
             new ActivitiesStrategyImpl(activitiesHandlerMap),
-            new FruitStore());
+            fruitStore);
 
     public static void main(String[] args) {
         activitiesHandlerMap.put("b", new BalanceHandler());
@@ -27,7 +34,7 @@ public class Main {
         activitiesHandlerMap.put("p", new PurchaseHandler());
         activitiesHandlerMap.put("r", new ReturnHandler());
 
-        fruitStoreService.processInputData();
-        fruitStoreService.generateReport();
+        processData.processInputData();
+        createReportService.generateReport();
     }
 }

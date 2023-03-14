@@ -6,30 +6,28 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FruitDaoCsvImpl implements FruitDao {
-    private final String readFromFilePath;
-    private final String writeToFilePath;
+    private final String filePath;
 
-    public FruitDaoCsvImpl(String readFromFilePath, String writeToFilePath) {
-        this.readFromFilePath = readFromFilePath;
-        this.writeToFilePath = writeToFilePath;
+    public FruitDaoCsvImpl(String filePath) {
+        this.filePath = filePath;
     }
 
     @Override
     public void add(String content) {
-        create(writeToFilePath);
+        create(filePath);
         try {
-            Files.write(Path.of(writeToFilePath), content.getBytes());
+            Files.write(Path.of(filePath), content.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write information to this file " + writeToFilePath);
+            throw new RuntimeException("Can't write information to this file " + filePath);
         }
     }
 
     @Override
     public List<String> get() {
         try {
-            return Files.readAllLines(Path.of(readFromFilePath));
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read information from this file " + readFromFilePath);
+            throw new RuntimeException("Can't read information from this file " + filePath);
         }
     }
 
