@@ -29,11 +29,11 @@ public class Fruit {
         this.type = type;
     }
 
-    public static enum ACTIVITY {
+    public enum ACTIVITY {
         BALANCE, EXPIRED, PURCHASE, RETURN, SUPPLY;
     }
 
-    public static enum TYPE {
+    public enum TYPE {
         APPLE, BANANA, ORANGE, MANGO;
     }
 }
