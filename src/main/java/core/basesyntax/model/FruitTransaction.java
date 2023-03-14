@@ -42,7 +42,7 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation getByCodeOperation(String code) {
+        public static Operation getOperationByCode(String code) {
             return Arrays.stream(Operation.values())
                     .filter(c -> c.getCode().equals(code))
                     .findFirst()

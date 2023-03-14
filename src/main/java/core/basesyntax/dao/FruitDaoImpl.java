@@ -19,7 +19,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public boolean isContains(String fruit) {
+    public boolean contains(String fruit) {
         return storage.containsKey(fruit);
     }
 

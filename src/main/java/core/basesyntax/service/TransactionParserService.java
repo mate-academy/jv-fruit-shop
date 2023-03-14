@@ -5,7 +5,7 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParserService {
+public class TransactionParserService {
     private static final String SEPARATOR = ",";
     private static final int OPERATOR_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
@@ -13,7 +13,7 @@ public class ParserService {
     private static final int COUNT_WORDS = 3;
     private static final String ANNOTATION = "type,fruit,quantity";
 
-    public List<FruitTransaction> convertToListFruitTransaction(List<String> strings) {
+    public List<FruitTransaction> parse(List<String> strings) {
         if (strings == null) {
             throw new FruitException("Incoming string list is null");
         }
@@ -21,6 +21,21 @@ public class ParserService {
         return strings.stream()
                 .map(this::getFromString)
                 .collect(Collectors.toList());
+    }
+
+    private List<String> clearAnnotationCsvFile(List<String> strings) {
+        return strings.stream()
+                .filter(s -> !ANNOTATION.equals(s))
+                .collect(Collectors.toList());
+    }
+
+    private FruitTransaction getFromString(String string) {
+        String [] partsTransaction = string.split(SEPARATOR);
+        checkPartsTransaction(partsTransaction);
+        return new FruitTransaction(
+                FruitTransaction.Operation.getOperationByCode(partsTransaction[OPERATOR_INDEX]),
+                partsTransaction[FRUIT_INDEX],
+                Integer.parseInt(partsTransaction[AMOUNT_INDEX]));
     }
 
     private void checkPartsTransaction(String[] partsTransaction) {
@@ -41,20 +56,5 @@ public class ParserService {
         if (amount < 0) {
             throw new FruitException("Amount value cannot be negative");
         }
-    }
-
-    private FruitTransaction getFromString(String string) {
-        String [] partsTransaction = string.split(SEPARATOR);
-        checkPartsTransaction(partsTransaction);
-        return new FruitTransaction(
-                FruitTransaction.Operation.getByCodeOperation(partsTransaction[OPERATOR_INDEX]),
-                partsTransaction[FRUIT_INDEX],
-                Integer.parseInt(partsTransaction[AMOUNT_INDEX]));
-    }
-
-    private List<String> clearAnnotationCsvFile(List<String> strings) {
-        return strings.stream()
-                .filter(s -> !ANNOTATION.equals(s))
-                .collect(Collectors.toList());
     }
 }

@@ -1,13 +1,12 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 
-public abstract class OperationService {
+public abstract class Operation {
     protected final FruitDao fruitDao;
 
-    public OperationService() {
-        fruitDao = new FruitDaoImpl();
+    public Operation(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     public abstract void executeOperation(String fruit, int amount);
