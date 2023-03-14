@@ -10,8 +10,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String getReport() {
-        StringBuilder report = new StringBuilder();
-        report.append(HEADER);
+        StringBuilder report = new StringBuilder(HEADER);
         for (Map.Entry<String, Integer> entry: Storage.STORAGE.entrySet()) {
             report.append(System.lineSeparator())
                     .append(entry.getKey())
