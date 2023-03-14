@@ -33,7 +33,7 @@ public class FruitShopMain {
         List<FruitTransaction> fruitTransactions =
                 parser.parse(gridReadService.getGrid(SOURCE_FILE_PATH).getRows());
         evaluateService.evaluate(fruitTransactions);
-        List<String[]> lines = valueOfFruit.valueOf(Storage.getFruits());
+        List<String[]> lines = valueOfFruit.valueOf(Storage.fruits);
         gridWriteService.write(REPORT_FILE_PATH, new Grid(Storage.DEFAULT_TITLES, lines));
     }
 }
