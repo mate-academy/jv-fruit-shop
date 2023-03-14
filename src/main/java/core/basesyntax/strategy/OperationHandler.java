@@ -1,4 +1,4 @@
-package core.basesyntax.service.operation;
+package core.basesyntax.strategy;
 
 public interface OperationHandler {
     String COMMA_SEPARATOR = ",";

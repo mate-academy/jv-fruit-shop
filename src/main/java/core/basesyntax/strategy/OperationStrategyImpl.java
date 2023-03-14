@@ -1,16 +1,15 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.service.operation.Operations;
 import java.util.List;
+import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
     @Override
-    public void accept(List<String> data) {
+    public void accept(List<String> data, Map<String, OperationHandler> operationHandlerMap) {
         data.remove(0);
         for (String value : data) {
             int indexOfSeparator = value.indexOf(OperationHandler.COMMA_SEPARATOR);
-            Operations.OPERATIONS.get(value.substring(0, indexOfSeparator))
+            operationHandlerMap.get(value.substring(0, indexOfSeparator))
                     .accept(value.substring(indexOfSeparator + 1));
         }
     }
