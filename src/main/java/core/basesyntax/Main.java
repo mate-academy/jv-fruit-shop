@@ -1,9 +1,5 @@
 package core.basesyntax;
 
-import handler.BalanceHandler;
-import handler.PurchaseHandler;
-import handler.ReturnHandler;
-import handler.SupplyHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,16 +10,20 @@ import service.ReaderService;
 import service.WriterService;
 import service.impl.CreateReportService;
 import service.impl.FruitShopServiceImpl;
-import service.impl.OperationStrategyImpl;
 import service.impl.ParserServiceImpl;
 import service.impl.ReaderServiceImpl;
 import service.impl.WriterServiceImpl;
 import strategy.OperationStrategy;
+import strategy.OperationStrategyImpl;
 import strategy.TransactionHandler;
+import strategy.handler.BalanceHandler;
+import strategy.handler.PurchaseHandler;
+import strategy.handler.ReturnHandler;
+import strategy.handler.SupplyHandler;
 
 public class Main {
-    private static final String INPUT_DATA = "src/main/java/resources/input.csv";
-    private static final String OUTPUT_DATA = "src/main/java/resources/output.csv";
+    private static final String INPUT_DATA = "src/main/resources/input.csv";
+    private static final String OUTPUT_DATA = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap = new HashMap<>();

@@ -14,9 +14,8 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public void calculate(List<FruitTransaction> parsedData) {
-
         for (FruitTransaction transaction : parsedData) {
-            operationStrategy.get(transaction.getOperation()).handler(transaction);
+            operationStrategy.get(transaction.getOperation()).handle(transaction);
         }
     }
 }
