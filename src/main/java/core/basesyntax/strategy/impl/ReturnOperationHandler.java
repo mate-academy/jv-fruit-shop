@@ -8,6 +8,6 @@ public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void activity(FruitTransaction fruitTransaction) {
         int amount = Storage.getOrDefault(fruitTransaction.getFruit(), DEFAULT_VALUE);
-        Storage.put(fruitTransaction.getFruit(), amount + Storage.get(fruitTransaction.getFruit()));
+        Storage.put(fruitTransaction.getFruit(), amount + fruitTransaction.getQuantity());
     }
 }

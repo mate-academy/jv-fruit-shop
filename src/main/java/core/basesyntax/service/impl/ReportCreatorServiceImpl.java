@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportCreatorService;
-
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -17,6 +16,6 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
         return TITLE + System.lineSeparator()
                 + fruits.entrySet().stream()
                 .map(e -> e.getKey() + COMMA_SEPARATOR + e.getValue() + System.lineSeparator())
-                .collect(Collectors.joining());
+                .collect(Collectors.joining()).trim();
     }
 }

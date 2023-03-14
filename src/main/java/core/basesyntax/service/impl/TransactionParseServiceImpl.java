@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParseService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,6 @@ public class TransactionParseServiceImpl implements TransactionParseService {
         if (!isFirsRowValid(lines)) {
             throw new RuntimeException("Invalid names of columns");
         }
-
         lines.remove(FIRST_LINE_INDEX);
         return lines.stream()
                 .map(this::rowToFruitTransaction)
