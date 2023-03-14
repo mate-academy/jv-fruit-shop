@@ -31,8 +31,8 @@ public class MainApplication {
         ReaderService reader = new ReaderServiceImpl();
         FruitDao fruitDao = new FruitDaoImpl();
         TransactionStrategy strategy = new TransactionStrategyImpl(handlers);
-        FruitService fruitService = new FruitServiceImpl(reader, fruitDao, strategy);
-        fruitService.updateAll(fruitService.get(INPUT_FILE));
+        FruitService fruitService = new FruitServiceImpl(fruitDao, strategy);
+        fruitService.updateAll(reader.read(INPUT_FILE));
         WriterService reportWriter = new WriterServiceImpl();
         reportWriter.write(OUTPUT_FILE);
     }

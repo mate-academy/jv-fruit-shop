@@ -4,7 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface FruitService {
-    List<FruitTransaction> get(String fileName);
-
     void updateAll(List<FruitTransaction> transactions);
 }
