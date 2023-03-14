@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class StorageTransaction {
     private Operation operation;
@@ -41,7 +42,7 @@ public class StorageTransaction {
             return Arrays.stream(Operation.values())
                     .filter(t -> t.getCode().equals(code))
                     .findFirst()
-                    .get();
+                    .orElseThrow(() -> new NoSuchElementException("There is no such operation"));
         }
 
         public String getCode() {
