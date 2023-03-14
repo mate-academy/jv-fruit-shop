@@ -12,7 +12,8 @@ public class ParseServiceImpl implements ParserService {
         return strings.stream()
                 .map(line -> {
                     String[] parts = line.split(",");
-                    return new FruitTransaction(FruitTransaction.Operation.valueOf(parts[0]),
+                    return new FruitTransaction(
+                            FruitTransaction.Operation.valueOf(parts[0]),
                             parts[1],
                             Integer.parseInt(parts[2]));
                 })
