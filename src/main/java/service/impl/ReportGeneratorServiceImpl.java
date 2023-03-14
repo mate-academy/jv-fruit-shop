@@ -2,9 +2,9 @@ package service.impl;
 
 import db.Storage;
 import java.util.Map;
-import service.ReportGenerateService;
+import service.ReportGeneratorService;
 
-public class ReportGenerateServiceImpl implements ReportGenerateService {
+public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     private static final char COMMA = ',';
     private static final String TITLE = "fruit,quantity";
 

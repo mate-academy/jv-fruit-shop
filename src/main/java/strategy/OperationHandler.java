@@ -1,5 +1,7 @@
 package strategy;
 
+import model.FruitTransaction;
+
 public interface OperationHandler {
-    void getAmount(String name, int amount);
+    void calculate(FruitTransaction transaction);
 }
