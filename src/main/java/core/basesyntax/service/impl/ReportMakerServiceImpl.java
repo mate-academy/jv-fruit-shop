@@ -5,6 +5,7 @@ import core.basesyntax.service.ReportMakerService;
 
 public class ReportMakerServiceImpl implements ReportMakerService {
     private static final StringBuilder REPORT = new StringBuilder("fruit,quantity\n");
+
     @Override
     public String createReport() {
         Storage.FRUIT_STORAGE
