@@ -36,7 +36,7 @@ public class FruitTransaction {
         }
 
         public static Operation getByCode(String s) {
-            for (Operation o : new Operation[]{BALANCE, SUPPLY, PURCHASE, RETURN}) {
+            for (Operation o : Operation.values()) {
                 if (o.getCode().equals(s)) {
                     return o;
                 }
