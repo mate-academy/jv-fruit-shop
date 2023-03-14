@@ -7,7 +7,6 @@ import core.basesyntax.strategy.handler.impl.BalanceHandler;
 import core.basesyntax.strategy.handler.impl.PurchaseHandler;
 import core.basesyntax.strategy.handler.impl.ReturnHandler;
 import core.basesyntax.strategy.handler.impl.SupplyHandler;
-
 import java.util.HashMap;
 import java.util.Map;
 
