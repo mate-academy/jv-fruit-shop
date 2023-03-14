@@ -6,10 +6,10 @@ import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.TransactionHandler;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.ParseDataHandlerImpl;
 import core.basesyntax.service.impl.ParseDataServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionHandlerImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -24,10 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_PATH
-            = pathFix("src/main/java/core/basesyntax/resources/fruits.csv");
-    private static final String OUT_FILE_PATH
-            = pathFix("src/main/java/core/basesyntax/resources/report.csv");
+    private static final String INPUT_FILE_PATH = pathFix("src/main/resources/fruits.csv");
+    private static final String OUT_FILE_PATH = pathFix("src/main/resources/report.csv");
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -39,7 +37,7 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         ParseDataService parseDataService = new ParseDataServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        TransactionHandler transactionHandler = new ParseDataHandlerImpl(operationStrategy);
+        TransactionHandler transactionHandler = new TransactionHandlerImpl(operationStrategy);
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
 
@@ -47,7 +45,6 @@ public class Main {
         List<FruitTransaction> fruitTransactions = parseDataService.parseData(inputData);
         transactionHandler.parse(fruitTransactions);
         String report = reportService.report();
-        System.out.println(report);
         writerService.writeToFile(OUT_FILE_PATH, report);
     }
 

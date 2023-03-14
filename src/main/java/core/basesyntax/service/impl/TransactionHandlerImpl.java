@@ -5,17 +5,17 @@ import core.basesyntax.service.TransactionHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
-public class ParseDataHandlerImpl implements TransactionHandler {
+public class TransactionHandlerImpl implements TransactionHandler {
     private final OperationStrategy operationStrategy;
 
-    public ParseDataHandlerImpl(OperationStrategy operationStrategy) {
+    public TransactionHandlerImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
     public void parse(List<FruitTransaction> transactionList) {
         for (FruitTransaction transaction : transactionList) {
-            operationStrategy.get(transaction.getOperation()).action(transaction);
+            operationStrategy.get(transaction.getOperation()).handle(transaction);
         }
     }
 }

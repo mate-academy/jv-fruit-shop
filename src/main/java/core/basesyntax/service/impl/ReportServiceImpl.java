@@ -14,8 +14,8 @@ public class ReportServiceImpl implements ReportService {
         result.append(TITLE).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
             result.append(entry.getKey())
-                 .append(SEPARATOR)
-                 .append(entry.getValue())
+                    .append(SEPARATOR)
+                    .append(entry.getValue())
                     .append(System.lineSeparator());
         }
         return result.toString().trim();
