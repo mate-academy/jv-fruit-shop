@@ -30,7 +30,7 @@ public class Fruit {
     }
 
     public static enum ACTIVITY {
-        EXPIRED, PURCHASE, RETURN, SUPPLY;
+        BALANCE, EXPIRED, PURCHASE, RETURN, SUPPLY;
     }
 
     public static enum TYPE {
