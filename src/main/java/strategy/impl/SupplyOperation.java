@@ -7,8 +7,8 @@ import strategy.StrategyOperation;
 public class SupplyOperation implements StrategyOperation {
     @Override
     public void apply(TransactionDto transactionDto) {
-        int oldQuantity = Storage.storage.get(transactionDto.getFruitName());
-        int newQuantity = oldQuantity + transactionDto.getQuantity();
+        int newQuantity = Storage.storage.get(transactionDto.getFruitName())
+                + transactionDto.getQuantity();
         Storage.storage.put(transactionDto.getFruitName(), newQuantity);
     }
 }

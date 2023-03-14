@@ -1,18 +1,16 @@
 package model;
 
 public class TransactionDto {
-    private final String operation;
-    private final String fruitName;
-    private final int quantity;
+    private Operation operation;
+    private String fruitName;
+    private int quantity;
 
-    public TransactionDto(String operation, String fruitName, int quantity) {
-        this.operation = operation;
-        this.fruitName = fruitName;
-        this.quantity = quantity;
+    public Operation getOperation() {
+        return operation;
     }
 
-    public String getOperation() {
-        return operation;
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     public String getFruitName() {
@@ -23,20 +21,37 @@ public class TransactionDto {
         return quantity;
     }
 
+    public void setFruitName(String fruitName) {
+        this.fruitName = fruitName;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
 
-        private String type;
+        private String operation;
 
-        Operation(String type) {
-            this.type = type;
+        Operation(String operation) {
+            this.operation = operation;
         }
 
-        public String getType() {
-            return type;
+        public String getOperation() {
+            return operation;
+        }
+
+        public static Operation getByCode(String type) {
+            for (Operation operation : values()) {
+                if (operation.getOperation().equals(type)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("Incorrect code " + type);
         }
     }
 }

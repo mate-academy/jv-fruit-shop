@@ -1,5 +1,7 @@
 package service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import model.TransactionDto;
 import service.ParserOperation;
 
@@ -10,20 +12,16 @@ public class ParserOperationImpl implements ParserOperation {
     private static final int SECOND_INDEX = 2;
 
     @Override
-    public TransactionDto parserOperation(String line) {
-        String[] splitLine = line.split(SEPARATOR);
-        if (splitLine.length < 3) {
-            throw new IllegalArgumentException("Invalid input string format");
+    public List<TransactionDto> parserOperation(List<String> line) {
+        List<TransactionDto> parsedTransaction = new ArrayList<>();
+        for (String strings : line) {
+            TransactionDto transactionDto = new TransactionDto();
+            String[] splited = strings.split(SEPARATOR);
+            transactionDto.setOperation(TransactionDto.Operation.getByCode(splited[ZERO_INDEX]));
+            transactionDto.setFruitName(splited[FIRST_INDEX]);
+            transactionDto.setQuantity(Integer.parseInt(splited[SECOND_INDEX]));
+            parsedTransaction.add(transactionDto);
         }
-        String operation = splitLine[ZERO_INDEX];
-        String fruitName = splitLine[FIRST_INDEX];
-        int quantity;
-        try {
-            quantity = Integer.parseInt(splitLine[SECOND_INDEX]);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid input string format, "
-                    + "quantity is not a valid integer");
-        }
-        return new TransactionDto(operation, fruitName, quantity);
+        return parsedTransaction;
     }
 }

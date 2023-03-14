@@ -1,7 +1,8 @@
 package service;
 
+import java.util.List;
 import model.TransactionDto;
 
 public interface ParserOperation {
-    TransactionDto parserOperation(String line);
+    List<TransactionDto> parserOperation(List<String> line);
 }
