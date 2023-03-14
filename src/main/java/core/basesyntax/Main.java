@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-
     private static final String PATH_FROM_FILE = "src/main/file.csv";
     private static final String PATH_TO_FILE = "src/main/toFile.csv";
 

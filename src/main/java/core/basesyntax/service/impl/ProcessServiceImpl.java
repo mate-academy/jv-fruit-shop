@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProcessServiceImpl implements ProcessService {
+    private static final String COMMA = ",";
+    private static final int TYPE_ACTION = 0;
+    private static final int FRUIT = 1;
+    private static final int AMOUNT_OF_FRUIT = 2;
 
     @Override
     public List<FruitTransaction> getTransactions(List<String> lines) {
@@ -14,18 +18,12 @@ public class ProcessServiceImpl implements ProcessService {
                 .skip(skipFirstLine)
                 .map(s -> transformation(s))
                 .collect(Collectors.toList());
-
     }
 
     private FruitTransaction transformation(String line) {
-        final String comma = ",";
-        final int typeAction = 0;
-        final int fruit = 1;
-        final int amountOfFruit = 2;
-
-        String[] lineSplit = line.split(comma);
+        String[] lineSplit = line.split(COMMA);
         return new FruitTransaction(FruitTransaction.Operation
-                .getOperationByCode(lineSplit[typeAction]),
-                lineSplit[fruit], Integer.parseInt(lineSplit[amountOfFruit]));
+                .getOperationByCode(lineSplit[TYPE_ACTION]),
+                lineSplit[FRUIT], Integer.parseInt(lineSplit[AMOUNT_OF_FRUIT]));
     }
 }

@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.util.Map;
 
 public class WriteServiceImpl implements WriteService {
+    private static final char COMMA = ',';
+    private static final String FRUIT = "fruit";
+    private static final String QUANTITY = "quantity";
+
     @Override
     public void writeToFile(Map<String, Integer> storage, String path) {
         File file = new File(path);
@@ -19,17 +23,14 @@ public class WriteServiceImpl implements WriteService {
     }
 
     private StringBuilder createReport(Map<String, Integer> storage) {
-        final char comma = ',';
-        final String fruit = "fruit";
-        final String quantity = "quantity";
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(fruit)
-                .append(comma)
-                .append(quantity)
+        stringBuilder.append(FRUIT)
+                .append(COMMA)
+                .append(QUANTITY)
                 .append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : storage.entrySet()) {
             stringBuilder.append(entry.getKey())
-                    .append(comma)
+                    .append(COMMA)
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
