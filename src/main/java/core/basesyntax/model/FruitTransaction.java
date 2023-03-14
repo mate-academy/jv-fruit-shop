@@ -1,41 +1,28 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
 
-    public Operation getOperation() {
-        return operation;
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
+    public Operation getOperation() {
+        return operation;
     }
 
     public String getFruit() {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return "FruitTransaction{"
-                + "operation=" + operation
-                + ", fruit='" + fruit + '\''
-                + ", quantity=" + quantity
-                + '}';
     }
 
     public enum Operation {
@@ -44,7 +31,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String code;
+        private final String code;
 
         Operation(String code) {
             this.code = code;
@@ -54,11 +41,11 @@ public class FruitTransaction {
             return code;
         }
 
-        @Override
-        public String toString() {
-            return "Operation{"
-                    + "code='" + code + '\''
-                    + '}';
+        public static Operation getByCode(String operationCode) {
+            return Arrays.stream(Operation.values())
+                    .filter(e -> e.getCode().equals(operationCode))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Code is invalid: " + operationCode));
         }
     }
 }

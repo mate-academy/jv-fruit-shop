@@ -18,8 +18,8 @@ import core.basesyntax.strategy.TransactionStrategy;
 import java.util.List;
 
 public class MainApplication {
-    private static final String INPUT_FILE = "database.csv";
-    private static final String OUTPUT_FILE = "report.csv";
+    private static final String INPUT_FILE = "src/main/resources/database.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/report.csv";
     private static List<OperationHandler> handlers;
     private static TransactionDao transactionDao;
     private static FruitDao fruitDao;

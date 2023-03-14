@@ -11,8 +11,9 @@ import java.util.stream.Collectors;
 public class TransactionDaoCsvImpl implements TransactionDao {
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
-    private static final int INDEX_QUANTITY = 2;
+    private static final int INDEX_AMOUNT = 2;
     private static final int INDEX_FROM_CSV_SKIP = 1;
+    private static final String SEPARATOR = ",";
 
     @Override
     public void add(FruitTransaction transaction) {
@@ -34,26 +35,10 @@ public class TransactionDaoCsvImpl implements TransactionDao {
     }
 
     private FruitTransaction getFromCsvRow(String line) {
-        String[] fields = line.split(",");
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        switch (fields[INDEX_OPERATION].trim()) {
-            case ("b"):
-                fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-                break;
-            case ("s"):
-                fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-                break;
-            case ("r"):
-                fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-                break;
-            case ("p"):
-                fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + fields[INDEX_OPERATION]);
-        }
-        fruitTransaction.setFruit(fields[INDEX_FRUIT]);
-        fruitTransaction.setQuantity(Integer.parseInt(fields[INDEX_QUANTITY]));
-        return fruitTransaction;
+        String[] fields = line.split(SEPARATOR);
+        String operation = fields[INDEX_OPERATION].trim();
+        String fruit = fields[INDEX_FRUIT];
+        int amount = Integer.parseInt(fields[INDEX_AMOUNT]);
+        return new FruitTransaction(FruitTransaction.Operation.getByCode(operation), fruit, amount);
     }
 }

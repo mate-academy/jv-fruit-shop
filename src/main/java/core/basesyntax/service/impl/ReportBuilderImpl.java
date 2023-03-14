@@ -20,6 +20,6 @@ public class ReportBuilderImpl implements ReportBuilder {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 }
