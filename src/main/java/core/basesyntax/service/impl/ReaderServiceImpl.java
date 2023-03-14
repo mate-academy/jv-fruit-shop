@@ -1,14 +1,14 @@
-package core.basesyntax.dao;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.repository.TransactionDB;
+import core.basesyntax.service.ReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TransactionDaoCsvImpl implements TransactionDao {
+public class ReaderServiceImpl implements ReaderService {
     private static final int INDEX_OPERATION = 0;
     private static final int INDEX_FRUIT = 1;
     private static final int INDEX_AMOUNT = 2;
@@ -16,12 +16,7 @@ public class TransactionDaoCsvImpl implements TransactionDao {
     private static final String SEPARATOR = ",";
 
     @Override
-    public void add(FruitTransaction transaction) {
-        TransactionDB.transactions.add(transaction);
-    }
-
-    @Override
-    public List<FruitTransaction> get(String fileName) {
+    public List<FruitTransaction> read(String fileName) {
         List<String> transactions;
         try {
             transactions = Files.readAllLines(Path.of(fileName));

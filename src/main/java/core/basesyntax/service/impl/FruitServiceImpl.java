@@ -1,37 +1,32 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.TransactionDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ReaderService;
 import core.basesyntax.strategy.TransactionStrategy;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-    private final TransactionDao transactionDao;
     private final TransactionStrategy transactionStrategy;
     private final FruitDao fruitDao;
+    private final ReaderService reader;
 
-    public FruitServiceImpl(TransactionDao transactionDao,
+    public FruitServiceImpl(ReaderService reader,
             FruitDao fruitDao,
             TransactionStrategy transactionStrategy) {
-        this.transactionDao = transactionDao;
+        this.reader = reader;
         this.fruitDao = fruitDao;
         this.transactionStrategy = transactionStrategy;
     }
 
     @Override
-    public void add(FruitTransaction transaction) {
-        transactionDao.add(transaction);
-    }
-
-    @Override
     public List<FruitTransaction> get(String fileName) {
-        return transactionDao.get(fileName);
+        return reader.read(fileName);
     }
 
     @Override
-    public void update(List<FruitTransaction> transactions) {
+    public void updateAll(List<FruitTransaction> transactions) {
         int fruitQuantity;
         for (FruitTransaction transaction : transactions) {
             fruitQuantity = transactionStrategy

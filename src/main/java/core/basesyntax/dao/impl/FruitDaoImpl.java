@@ -1,5 +1,6 @@
-package core.basesyntax.dao;
+package core.basesyntax.dao.impl;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.repository.FruitDB;
 import java.util.Map;
 

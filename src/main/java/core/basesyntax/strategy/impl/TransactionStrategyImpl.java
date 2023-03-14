@@ -1,4 +1,4 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.service.operation.DefaultOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
