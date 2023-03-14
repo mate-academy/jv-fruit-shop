@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
-public interface OperationStrategy {
+import core.basesyntax.service.impl.FruitTransaction;
 
-    void execute(String fruit, int quantity);
+public interface OperationStrategy {
+    OperationHandler get(FruitTransaction.Operation operation);
 }
