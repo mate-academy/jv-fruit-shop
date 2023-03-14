@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.service.ActionReader;
+import core.basesyntax.service.impl.ActionReaderImpl;
 import core.basesyntax.strategy.actions.ActionHandler;
 import core.basesyntax.strategy.actions.BaseActionHandler;
 import core.basesyntax.strategy.actions.PurchaseActionHandler;
@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         Map<String, Integer> shopStock;
         List<ActionHandler> possibleActions = allPossibleActions();
-        ActionReader actionReader = new ActionReader();
+        ActionReaderImpl actionReader = new ActionReaderImpl();
         shopStock = actionReader.inputDataToMap(possibleActions, FROM);
         actionReader.outputMapToFile(shopStock, TO);
     }
