@@ -1,7 +1,7 @@
 package core.basesyntax.services;
 
-import java.nio.file.Path;
+import java.util.Map;
 
 public interface ShopReportService {
-    void createReport(Path inputDataPath, Path reportDataPath);
+    byte[] generateReport(Map<String, Integer> processedData);
 }
