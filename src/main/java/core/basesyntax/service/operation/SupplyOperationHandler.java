@@ -1,13 +1,13 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.model.FruitTransaction;
-
-import java.math.BigDecimal;
-
-public class SupplyOperationHandler implements OperationHandler{
-
+public class SupplyOperationHandler implements OperationHandler {
     @Override
     public int doCalculation(int amount) {
         return amount;
+    }
+
+    @Override
+    public boolean isApplicable(String operation) {
+        return "s".equalsIgnoreCase(operation);
     }
 }

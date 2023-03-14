@@ -1,19 +1,24 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.operation.DefaultOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.strategy.TransactionStrategy;
-
-import java.util.Map;
+import java.util.List;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
-    private Map<FruitTransaction.Operation, OperationHandler> operationsMap;
+    private final List<OperationHandler> handlerList;
+    private final DefaultOperationHandler defaultHandler;
 
-    public TransactionStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> operationsMap) {
-        this.operationsMap = operationsMap;
+    public TransactionStrategyImpl(List<OperationHandler> handlerList) {
+        this.handlerList = handlerList;
+        defaultHandler = new DefaultOperationHandler();
     }
+
     @Override
-    public OperationHandler get(FruitTransaction.Operation type) {
-        return operationsMap.get(type);
+    public OperationHandler get(String operation) {
+        return handlerList.stream()
+                .filter(h -> h.isApplicable(operation))
+                .findFirst()
+                .orElse(defaultHandler);
     }
 }

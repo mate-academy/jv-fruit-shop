@@ -1,11 +1,10 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.repository.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
-
+import core.basesyntax.repository.TransactionDB;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,11 +16,7 @@ public class TransactionDaoCsvImpl implements TransactionDao {
 
     @Override
     public void add(FruitTransaction transaction) {
-        FruitStorage.transactions.add(transaction);
-    }
-    @Override
-    public void addAll(List<FruitTransaction> transactions) {
-        FruitStorage.transactions.addAll(transactions);
+        TransactionDB.transactions.add(transaction);
     }
 
     @Override
@@ -38,32 +33,25 @@ public class TransactionDaoCsvImpl implements TransactionDao {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public void updateStock(String fruit, int amount) {
-        int newAmount = amount;
-        if (FruitStorage.fruitsOnStock.get(fruit) != null) {
-            newAmount = (FruitStorage.fruitsOnStock.get(fruit)) + amount;
-        }
-        FruitStorage.fruitsOnStock.put(fruit, newAmount);
-    }
-
     private FruitTransaction getFromCsvRow(String line) {
         String[] fields = line.split(",");
         FruitTransaction fruitTransaction = new FruitTransaction();
-        switch(fields[INDEX_OPERATION].trim()) {
-            case("b"):
+        switch (fields[INDEX_OPERATION].trim()) {
+            case ("b"):
                 fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
                 break;
-            case("s"):
+            case ("s"):
                 fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
                 break;
-            case("r"):
+            case ("r"):
                 fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
                 break;
-            case("p"):
+            case ("p"):
                 fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
                 break;
-            }
+            default:
+                throw new IllegalStateException("Unexpected value: " + fields[INDEX_OPERATION]);
+        }
         fruitTransaction.setFruit(fields[INDEX_FRUIT]);
         fruitTransaction.setQuantity(Integer.parseInt(fields[INDEX_QUANTITY]));
         return fruitTransaction;
