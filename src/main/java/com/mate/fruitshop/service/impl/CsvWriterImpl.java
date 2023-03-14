@@ -1,27 +1,26 @@
 package com.mate.fruitshop.service.impl;
 
-import com.mate.fruitshop.service.ReportWriter;
+import com.mate.fruitshop.service.CsvWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class ReportWriterImpl implements ReportWriter {
-    public static final String DEFAULT_REPORT_DIR = "src/main/resources/report.csv";
+public class CsvWriterImpl implements CsvWriter {
+    public static final String DEFAULT_REPORT_NAME = "src/main/resources/report.csv";
 
     @Override
-    public boolean writeReportToFile(String report, String reportFileDir) {
+    public void writeToCsv(String report, String reportFileDir) {
         Path reportFile;
         try {
             reportFile = Paths.get(reportFileDir);
         } catch (Exception e) {
-            reportFile = Paths.get(DEFAULT_REPORT_DIR);
+            reportFile = Paths.get(DEFAULT_REPORT_NAME);
         }
 
         try (BufferedWriter writer = Files.newBufferedWriter(reportFile)) {
             writer.write(report);
-            return true;
         } catch (IOException e) {
             throw new RuntimeException("Unable to write report to:"
                     + reportFile, e);

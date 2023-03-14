@@ -4,9 +4,9 @@ import com.mate.fruitshop.model.FruitEntry;
 import java.util.List;
 
 public interface FruitStorageDao {
-    FruitEntry getEntryByFruitName(String fruitName);
+    FruitEntry getByName(String fruitName);
 
-    boolean addFruitEntry(FruitEntry fruitEntry);
+    void add(FruitEntry fruitEntry);
 
-    List<FruitEntry> getAllFruitEntries();
+    List<FruitEntry> getAll();
 }

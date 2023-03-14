@@ -20,4 +20,9 @@ public class FruitEntry {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return fruitName + "," + quantity;
+    }
 }

@@ -15,11 +15,15 @@ public class TransactionParserServiceImpl implements TransactionParserService {
     public static final int TABLE_TITLE_INDEX = 0;
 
     @Override
-    public List<Transaction> read(List<String> lines) {
+    public List<Transaction> parse(List<String> lines) {
+        if (lines == null || lines.size() < 1) {
+            throw new RuntimeException("Empty data list");
+        }
         List<Transaction> transactions = new ArrayList<>();
+        lines.remove(TABLE_TITLE_INDEX);
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
-            if (i != TABLE_TITLE_INDEX && !line.matches(CORRECT_REGEX)) {
+            if (!line.matches(CORRECT_REGEX)) {
                 throw new RuntimeException("Incorrect data on line: " + i);
             }
             String[] values = line.split(DELIMITER);

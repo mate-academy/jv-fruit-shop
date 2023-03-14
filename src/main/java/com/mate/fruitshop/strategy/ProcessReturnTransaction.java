@@ -14,9 +14,9 @@ public class ProcessReturnTransaction implements TransactionProcessingStrategy {
 
     @Override
     public void process(Transaction transaction) {
-        FruitEntry fruitEntry = dao.getEntryByFruitName(transaction.getFruitName());
+        FruitEntry fruitEntry = dao.getByName(transaction.getFruitName());
         if (fruitEntry == null) {
-            dao.addFruitEntry(new FruitEntry(transaction.getFruitName(),
+            dao.add(new FruitEntry(transaction.getFruitName(),
                     transaction.getQuantity()));
             return;
         }
