@@ -7,12 +7,13 @@ import strategy.TransactionHandler;
 public class PurchaseHandler implements TransactionHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        if ((transaction.getQuantity() > Storage.fruits
-                .get(Storage.fruits.get(transaction.getFruit())))) {
-            throw new RuntimeException("Storage hasn't enough products to purchase");
+        int realQuantity = Storage.fruits.get(transaction.getFruit());
+        int quantityToPurchase =
+                Storage.fruits.get(transaction.getFruit()) - transaction.getQuantity();
+        if (quantityToPurchase < 0) {
+            throw new RuntimeException("Storage doesn't have enough products to sell");
+        } else {
+            Storage.fruits.put(transaction.getFruit(), quantityToPurchase);
         }
-        Storage.fruits.put(transaction.getFruit(),
-                Storage.fruits.get(transaction.getFruit())
-                        - transaction.getQuantity());
     }
 }
