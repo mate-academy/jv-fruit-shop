@@ -7,11 +7,13 @@ import core.basesyntax.strategy.handler.OperationHandler;
 public class PurchaseHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
+        String fruit = transaction.getFruit();
         int currentQuantity = Storage.STORAGE
-                .getOrDefault(transaction.getFruit(), 0);
+                .getOrDefault(fruit, 0);
         int transactionQuantity = transaction.getQuantity();
         if (transactionQuantity > currentQuantity) {
-            throw new RuntimeException("The value of product in Storage is "
+            throw new RuntimeException("Not enough " + fruit + " in stock."
+                    + " The value is "
                     + currentQuantity + " and you want to purchase "
                     + transactionQuantity);
         }
