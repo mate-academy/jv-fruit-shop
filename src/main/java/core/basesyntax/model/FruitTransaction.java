@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
   private Operation operation;
   private String fruit;
@@ -37,6 +39,14 @@ public class FruitTransaction {
 
     public String getCode() {
       return code;
+    }
+
+    public static Operation getOperationByCode(String code) {
+      return Arrays.stream(Operation.values())
+              .filter(c -> c.getCode().equals(code))
+              .findFirst()
+              .orElseThrow(() -> new RuntimeException("Unknown code operation \""
+                      + code + "\""));
     }
   }
 }

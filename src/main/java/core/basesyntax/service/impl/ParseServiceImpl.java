@@ -10,13 +10,12 @@ public class ParseServiceImpl implements ParserService {
     @Override
     public List<FruitTransaction> parse(List<String> strings) {
         return strings.stream()
-                .map(line -> {
-                    String[] parts = line.split(",");
-                    return new FruitTransaction(
-                            FruitTransaction.Operation.valueOf(parts[0]),
-                            parts[1],
-                            Integer.parseInt(parts[2]));
-                })
+                .map(string -> string.split(","))
+                .map(parts -> new FruitTransaction(
+                        FruitTransaction.Operation.getOperationByCode(parts[0]),
+                        parts[1],
+                        Integer.parseInt(parts[2])
+                ))
                 .collect(Collectors.toList());
     }
 }
