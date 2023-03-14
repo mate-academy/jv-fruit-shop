@@ -7,8 +7,8 @@ import core.basesyntax.service.FruitOperation;
 public class FruitPurchaseOperation implements FruitOperation {
     @Override
     public void fruitOperate(FruitTransaction fruitTransaction) {
-        Storage.fruitsStorage.put(fruitTransaction.getFruit(),
-                Storage.fruitsStorage
+        Storage.FRUIT_STORAGE.put(fruitTransaction.getFruit(),
+                Storage.FRUIT_STORAGE
                         .get(fruitTransaction.getFruit()) - fruitTransaction.getQuantity());
     }
 }

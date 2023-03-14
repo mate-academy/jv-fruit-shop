@@ -7,7 +7,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
     @Override
     public String createReport() {
         StringBuilder report = new StringBuilder("fruit,quantity\n");
-        Storage.fruitsStorage
+        Storage.FRUIT_STORAGE
                 .forEach((key, value) -> report.append(key).append(",").append(value).append("\n"));
         return report.toString().trim();
     }

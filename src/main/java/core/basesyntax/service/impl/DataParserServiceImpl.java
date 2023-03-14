@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 public class DataParserServiceImpl implements DataParserService {
     private static final String DELIMITER = ",";
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     public List<FruitTransaction> parseData(List<String> list) {
         return list.stream()
@@ -18,12 +21,12 @@ public class DataParserServiceImpl implements DataParserService {
                     FruitTransaction.Operation operation = Arrays
                             .stream(FruitTransaction.Operation.values())
                             .filter(value -> value.getCode()
-                                    .equals(data[0].trim()))
+                                    .equals(data[OPERATION_INDEX].trim()))
                             .findFirst()
                             .orElseThrow(() -> new RuntimeException("No such operation"));
                     newFruitTransaction.setOperation(operation);
-                    newFruitTransaction.setFruit(data[1]);
-                    newFruitTransaction.setQuantity(Integer.parseInt(data[2].trim()));
+                    newFruitTransaction.setFruit(data[FRUIT_INDEX]);
+                    newFruitTransaction.setQuantity(Integer.parseInt(data[QUANTITY_INDEX].trim()));
                     return newFruitTransaction;
                 }).collect(Collectors.toList());
     }

@@ -7,6 +7,6 @@ import core.basesyntax.service.FruitOperation;
 public class FruitBalanceOperation implements FruitOperation {
     @Override
     public void fruitOperate(FruitTransaction fruitTransaction) {
-        Storage.fruitsStorage.put(fruitTransaction.getFruit(),fruitTransaction.getQuantity());
+        Storage.FRUIT_STORAGE.put(fruitTransaction.getFruit(),fruitTransaction.getQuantity());
     }
 }
