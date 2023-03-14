@@ -15,16 +15,13 @@ public class FruitTransaction {
         return operation;
     }
 
-
     public String getFruit() {
         return fruit;
     }
 
-
     public int getQuantity() {
         return quantity;
     }
-
 
     public enum Operation {
         BALANCE("b"),
@@ -40,11 +37,11 @@ public class FruitTransaction {
 
         public static Operation getByCode(String s) {
             for (Operation o : new Operation[]{BALANCE, SUPPLY, PURCHASE, RETURN}) {
-                if (o.getCode().equals(s)){
+                if (o.getCode().equals(s)) {
                     return o;
                 }
             }
-            throw  new RuntimeException("This type of operation is not supported");
+            throw new RuntimeException("This type of operation is not supported");
         }
 
         public String getCode() {

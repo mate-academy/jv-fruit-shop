@@ -17,7 +17,6 @@ import core.basesyntax.service.ReportService;
 import core.basesyntax.service.TransactionParserService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.strategy.OperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +24,7 @@ import java.util.Map;
 public class DataProcessor {
     private static final String INPUT_FILE = "src/main/resources/input.csv";
     private static final String SUM_FILE = "src/main/resources/sum.csv";
+
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());

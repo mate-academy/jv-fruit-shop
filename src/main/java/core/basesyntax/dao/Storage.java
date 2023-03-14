@@ -15,6 +15,6 @@ public class Storage {
     }
 
     public static int getOrDefault(String fruitName, int defaultValue) {
-        return  map.getOrDefault(fruitName, defaultValue);
+        return map.getOrDefault(fruitName, defaultValue);
     }
 }

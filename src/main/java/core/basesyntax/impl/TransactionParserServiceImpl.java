@@ -2,7 +2,6 @@ package core.basesyntax.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParserService;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,13 +16,14 @@ public class TransactionParserServiceImpl implements TransactionParserService {
     private static final int SECOND_INDEX = 1;
     private static final int THIRD_INDEX = 2;
     private static final String REGEX = "[0-9]+";
+
     @Override
     public List<FruitTransaction> parse(String dataFromCsv) {
         if (dataFromCsv == null) {
             throw new RuntimeException("Input param is null");
         }
         List<String> data = new ArrayList<>(List.of(dataFromCsv.split(System.lineSeparator())));
-        if(!isColumnsValid(data.get(0))) {
+        if (!isColumnsValid(data.get(0))) {
             throw new RuntimeException("Incorrect format of file");
         }
         return data

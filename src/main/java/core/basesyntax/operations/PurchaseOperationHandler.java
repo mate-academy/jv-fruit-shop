@@ -6,6 +6,7 @@ import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private static final int DEFAULT_QUANTITY = 0;
+
     @Override
     public void operation(FruitTransaction fruitTransaction) {
         int amount = Storage.getOrDefault(fruitTransaction.getFruit(), DEFAULT_QUANTITY);
