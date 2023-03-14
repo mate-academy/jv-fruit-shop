@@ -41,12 +41,12 @@ public class Main {
         List<String> strings = readService.readFromFile(PATH_FROM_FILE);
 
         ProcessService processService = new ProcessServiceImpl();
-        List<FruitTransaction> process = processService.modelSetUp(strings);
+        List<FruitTransaction> process = processService.getTransactions(strings);
 
         FruitService fruitService = new FruitServiceImpl(fruitStrategy);
-        fruitService.action(process);
+        fruitService.usageOfStrategy(process);
 
         WriteService writeService = new WriteServiceImpl();
-        writeService.writeFile(Storage.fruitStorage, PATH_TO_FILE);
+        writeService.writeToFile(Storage.fruitStorage, PATH_TO_FILE);
     }
 }

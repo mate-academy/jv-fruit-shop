@@ -14,8 +14,7 @@ public class ReadServiceImpl implements ReadService {
     public List<String> readFromFile(String filePath) {
         List<String> list = new ArrayList<>();
         File file = new File(filePath);
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String value = bufferedReader.readLine();
             while (value != null) {
                 list.add(value);

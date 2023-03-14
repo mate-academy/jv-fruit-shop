@@ -7,25 +7,25 @@ import java.util.stream.Collectors;
 
 public class ProcessServiceImpl implements ProcessService {
 
-    private static final String REGEX = ",";
-    private static final int TYPE_ACTION = 0;
-    private static final int FRUIT = 1;
-    private static final int AMOUNT_OF_FRUIT = 2;
-    private static final String IGNORE = "type";
-
     @Override
-    public List<FruitTransaction> modelSetUp(List<String> list) {
-        return list.stream()
-                .filter(s -> s != null && !s.contains(IGNORE))
+    public List<FruitTransaction> getTransactions(List<String> lines) {
+        final int skipFirstLine = 1;
+        return lines.stream()
+                .skip(skipFirstLine)
                 .map(s -> transformation(s))
                 .collect(Collectors.toList());
 
     }
 
     private FruitTransaction transformation(String line) {
-        String[] lineSplit = line.split(REGEX);
+        final String comma = ",";
+        final int typeAction = 0;
+        final int fruit = 1;
+        final int amountOfFruit = 2;
+
+        String[] lineSplit = line.split(comma);
         return new FruitTransaction(FruitTransaction.Operation
-                .getOperationByCode(lineSplit[TYPE_ACTION]),
-                lineSplit[FRUIT], Integer.parseInt(lineSplit[AMOUNT_OF_FRUIT]));
+                .getOperationByCode(lineSplit[typeAction]),
+                lineSplit[fruit], Integer.parseInt(lineSplit[amountOfFruit]));
     }
 }

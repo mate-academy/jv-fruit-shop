@@ -7,7 +7,7 @@ public class BalanceActivitiesHandler implements ActivitiesHandler {
     private StorageDao storageDao = new StorageDaoImpl();
 
     @Override
-    public void activities(String fruitType, Integer amount) {
+    public void changeFruit(String fruitType, Integer amount) {
         if (storageDao.get(fruitType) == null) {
             storageDao.add(fruitType, amount);
             return;

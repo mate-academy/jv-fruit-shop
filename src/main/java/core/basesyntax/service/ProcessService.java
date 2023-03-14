@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface ProcessService {
-    List<FruitTransaction> modelSetUp(List<String> list);
+    List<FruitTransaction> getTransactions(List<String> list);
 }

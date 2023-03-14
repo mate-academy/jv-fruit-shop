@@ -13,10 +13,10 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void action(List<FruitTransaction> transaction) {
+    public void usageOfStrategy(List<FruitTransaction> transaction) {
         for (FruitTransaction fruitTransaction : transaction) {
-            fruitStrategy.get(fruitTransaction.getOperation())
-                    .activities(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+            fruitStrategy.getHandler(fruitTransaction.getOperation())
+                    .changeFruit(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
     }
 }
