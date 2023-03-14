@@ -1,11 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.impl.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileWriter;
+import core.basesyntax.service.impl.DataParseServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
 import core.basesyntax.strategy.operation.PurchaseOperationHandler;
@@ -17,21 +15,18 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final File ACTIVITIES = new File("src/main/resources/activities.csv");
-    public static final File REPORT = new File("src/main/resources/report.csv");
-    public static final Map<String, OperationHandler> OPERATIONS = new HashMap<>();
+    private static final File ACTIVITIES = new File("src/main/resources/activities.csv");
+    private static final File REPORT = new File("src/main/resources/report.csv");
+    private static final Map<String, OperationHandler> OPERATIONS = new HashMap<>();
 
     public static void main(String[] args) {
-        fill();
-        FileReaderService csvFileReader = new CsvFileReader();
-        List<String> data = csvFileReader.readFromFile(ACTIVITIES);
+        List<String> data = new CsvFileReader().readFromFile(ACTIVITIES);
+        List<String[]> parsedData = new DataParseServiceImpl().parseData(data);
 
         fill();
-        OperationStrategy operationStrategy = new OperationStrategyImpl();
-        operationStrategy.accept(data, OPERATIONS);
+        new OperationStrategyImpl().accept(parsedData, OPERATIONS);
 
-        FileWriterService csvFileWriter = new CsvFileWriter();
-        csvFileWriter.writeToFile(REPORT);
+        new CsvFileWriter().writeToFile(REPORT);
     }
 
     public static void fill() {
