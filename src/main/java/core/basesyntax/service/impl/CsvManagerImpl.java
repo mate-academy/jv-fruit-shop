@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.CsvManager;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
