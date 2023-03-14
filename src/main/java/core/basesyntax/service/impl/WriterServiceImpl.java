@@ -17,6 +17,7 @@ public class WriterServiceImpl implements WriterService {
         } catch (IOException e) {
             throw new RuntimeException("Can't create file",e);
         }
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(report);
         } catch (IOException e) {
