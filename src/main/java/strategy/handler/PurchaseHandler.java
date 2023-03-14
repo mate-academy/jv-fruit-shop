@@ -13,6 +13,5 @@ public class PurchaseHandler implements TransactionHandler {
             throw new RuntimeException("Storage doesn't have enough products to sell");
         }
         Storage.fruits.put(transaction.getFruit(), quantityAfterPurchase);
-        }
     }
 }
