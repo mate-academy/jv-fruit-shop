@@ -12,11 +12,6 @@ public class WriterServiceImpl implements WriterService {
         Path filePath;
         try {
             filePath = Path.of(reportPath);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Unable to perform operations with " + reportPath, e);
-        }
-
-        try {
             Files.deleteIfExists(filePath);
             Files.write(filePath, report.getBytes());
         } catch (IOException e) {
