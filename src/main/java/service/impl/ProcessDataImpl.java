@@ -1,8 +1,9 @@
 package service.impl;
 
-import dao.FruitDao;
+import dao.ReaderService;
+import java.util.ArrayList;
 import java.util.List;
-import model.FruitStore;
+import model.FruitTransaction;
 import service.ProcessData;
 import strategy.ActivitiesStrategy;
 
@@ -12,31 +13,33 @@ public class ProcessDataImpl implements ProcessData {
     private static final int FRUIT_POSITION = 1;
     private static final int QUANTITY_POSITION = 2;
     private static final String SEPARATOR = ",";
-    private FruitDao fruitDao;
+    private ReaderService readerService;
     private ActivitiesStrategy strategy;
-    private FruitStore fruitStore;
 
-    public ProcessDataImpl(FruitDao fruitDao, ActivitiesStrategy strategy, FruitStore fruitStore) {
-        this.fruitDao = fruitDao;
+    public ProcessDataImpl(ReaderService readerService, ActivitiesStrategy strategy) {
+        this.readerService = readerService;
         this.strategy = strategy;
-        this.fruitStore = fruitStore;
     }
 
     @Override
     public void processInputData() {
-        List<String> inputData = fruitDao.get();
+        List<String> inputData = readerService.get();
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         inputData.remove(INDEX_OF_TITLE);
         for (String line : inputData) {
             String[] data = line.split(SEPARATOR);
-            if (fruitStore.getSupplies().containsKey(data[FRUIT_POSITION])) {
-                int amount = strategy.get(data[OPERATION_POSITION].trim())
-                        .operation(Integer.valueOf(data[QUANTITY_POSITION]))
-                        + fruitStore.getSupplies().get(data[FRUIT_POSITION]);
-                fruitStore.getSupplies().replace(data[FRUIT_POSITION], amount);
-            } else {
-                fruitStore.getSupplies().put(data[FRUIT_POSITION],
-                        Integer.valueOf(data[QUANTITY_POSITION]));
-            }
+            FruitTransaction fruitTransaction = new FruitTransaction(data[OPERATION_POSITION],
+                    data[FRUIT_POSITION],
+                    Integer.valueOf(data[QUANTITY_POSITION]));
+            fruitTransactions.add(fruitTransaction);
+        }
+        pushInfoToDatabase(fruitTransactions);
+    }
+
+    private void pushInfoToDatabase(List<FruitTransaction> fruitTransactions) {
+        for (FruitTransaction fruitTransaction : fruitTransactions) {
+            strategy.get(fruitTransaction.getOperationCharacter().trim())
+                    .operation(fruitTransaction);
         }
     }
 }

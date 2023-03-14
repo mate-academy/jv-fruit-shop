@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import dao.FruitDaoCsvImpl;
+import dao.impl.ReaderServiceImpl;
+import dao.impl.WriterServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
-import model.FruitStore;
 import service.CreateReportService;
 import service.ProcessData;
 import service.impl.CreateReportServiceImpl;
@@ -17,16 +17,13 @@ import strategy.activities.SupplyHandler;
 
 public class Main {
     private static Map<String, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();
-    private static FruitStore fruitStore = new FruitStore();
 
     private static CreateReportService createReportService = new CreateReportServiceImpl(
-            new FruitDaoCsvImpl("./src/main/resources/report.csv"),
-            fruitStore);
+            new WriterServiceImpl("./src/main/resources/report.csv"));
 
     private static ProcessData processData = new ProcessDataImpl(
-            new FruitDaoCsvImpl("./src/main/resources/database.csv"),
-            new ActivitiesStrategyImpl(activitiesHandlerMap),
-            fruitStore);
+            new ReaderServiceImpl("./src/main/resources/database.csv"),
+            new ActivitiesStrategyImpl(activitiesHandlerMap));
 
     public static void main(String[] args) {
         activitiesHandlerMap.put("b", new BalanceHandler());

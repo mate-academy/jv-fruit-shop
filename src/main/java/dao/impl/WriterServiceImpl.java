@@ -1,14 +1,14 @@
-package dao;
+package dao.impl;
 
+import dao.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 
-public class FruitDaoCsvImpl implements FruitDao {
+public class WriterServiceImpl implements WriterService {
     private final String filePath;
 
-    public FruitDaoCsvImpl(String filePath) {
+    public WriterServiceImpl(String filePath) {
         this.filePath = filePath;
     }
 
@@ -19,15 +19,6 @@ public class FruitDaoCsvImpl implements FruitDao {
             Files.write(Path.of(filePath), content.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("Can't write information to this file " + filePath);
-        }
-    }
-
-    @Override
-    public List<String> get() {
-        try {
-            return Files.readAllLines(Path.of(filePath));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read information from this file " + filePath);
         }
     }
 

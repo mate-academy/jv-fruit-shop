@@ -1,26 +1,23 @@
 package service.impl;
 
-import dao.FruitDao;
+import dao.WriterService;
+import db.FruitStore;
 import java.util.Map;
 import java.util.stream.Collectors;
-import model.FruitStore;
 import service.CreateReportService;
 
 public class CreateReportServiceImpl implements CreateReportService {
     private static final String TITLE = "fruit,quantity";
     private static final String SEPARATOR = ",";
-    private FruitDao fruitDao;
-    private FruitStore fruitStore;
+    private WriterService writerService;
 
-    public CreateReportServiceImpl(FruitDao fruitDao,
-                                   FruitStore fruitStore) {
-        this.fruitDao = fruitDao;
-        this.fruitStore = fruitStore;
+    public CreateReportServiceImpl(WriterService writerService) {
+        this.writerService = writerService;
     }
 
     @Override
     public void generateReport() {
-        Map<String, Integer> supplies = fruitStore.getSupplies();
+        Map<String, Integer> supplies = FruitStore.supplies;
         String report = supplies.entrySet()
                 .stream()
                 .map(entry -> entry.getKey()
@@ -29,6 +26,6 @@ public class CreateReportServiceImpl implements CreateReportService {
                 .collect(Collectors.joining(System.lineSeparator(),
                         TITLE + System.lineSeparator(),
                         ""));
-        fruitDao.add(report);
+        writerService.add(report);
     }
 }
