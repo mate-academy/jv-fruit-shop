@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Grid;
 import core.basesyntax.service.GridWriteService;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class CsvGridWriteService implements GridWriteService {
             }
             bufferedWriter.flush();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File " + path+ " doesn't exist!");
+            throw new RuntimeException("File " + path + " doesn't exist!");
         } catch (IOException e) {
             throw new RuntimeException("Failed to write to" + path + " file!");
         }

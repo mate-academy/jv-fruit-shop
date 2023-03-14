@@ -14,7 +14,6 @@ import core.basesyntax.service.impl.RowFruitTransactionParser;
 import core.basesyntax.service.impl.RowValueOfFruit;
 import core.basesyntax.service.impl.TransactionsEvaluateServiceImpl;
 import core.basesyntax.strategy.impl.ReportStrategyImpl;
-import java.io.File;
 import java.util.List;
 
 /**
