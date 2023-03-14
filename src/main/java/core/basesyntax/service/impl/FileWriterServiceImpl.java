@@ -7,9 +7,9 @@ import java.nio.file.Files;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public void write(File file, String text) {
+    public void write(File file, String data) {
         try {
-            Files.writeString(file.toPath(), text);
+            Files.writeString(file.toPath(), data);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file: " + file.toPath());
         }
