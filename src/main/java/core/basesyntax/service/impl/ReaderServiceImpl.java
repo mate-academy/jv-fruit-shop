@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReaderServiceImpl implements ReaderService {
+    private static final String SPLIT = ",";
+
     @Override
     public List<String[]> read(String fileName) {
         List<String> informationFromFile = new ArrayList<>();
@@ -22,7 +24,7 @@ public class ReaderServiceImpl implements ReaderService {
             throw new RuntimeException("Can't read information from file " + fileName);
         }
         return informationFromFile.stream()
-                .map(e -> e.split(","))
+                .map(e -> e.split(SPLIT))
                 .collect(Collectors.toList());
     }
 }
