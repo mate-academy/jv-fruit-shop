@@ -11,7 +11,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
     @Override
     public String report() {
         return HEAD_STRING + System.lineSeparator()
-                + Storage.STORAGE.entrySet().stream()
+                + Storage.storage.entrySet().stream()
                         .map(entry -> entry.getKey() + SEPARATOR + entry.getValue())
                         .collect(Collectors.joining(System.lineSeparator()));
     }
