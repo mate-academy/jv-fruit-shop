@@ -31,7 +31,7 @@ public class Main {
                 .parseDataToFruitTransaction(dataFromFile);
         fruitCalculator
                 .calculateTotalQuantity(parsedDataFromFile);
-        String report = reportMaker.generateReport(CalculationStorage.CALCULATION_STORAGE);
+        String report = reportMaker.generateReport(CalculationStorage.calculationStorage);
         writer.writeDataToFile(report, TO_FILE_NAME);
     }
 }

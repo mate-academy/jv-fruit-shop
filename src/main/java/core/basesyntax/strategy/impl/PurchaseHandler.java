@@ -8,7 +8,7 @@ public class PurchaseHandler implements OperationHandler {
     @Override
     public void calculateAndAddToStorage(FruitTransaction transaction) {
         int newAmount = transaction.getQuantity()
-                - CalculationStorage.CALCULATION_STORAGE.get(transaction.getFruit());
-        CalculationStorage.CALCULATION_STORAGE.put(transaction.getFruit(), newAmount);
+                - CalculationStorage.calculationStorage.get(transaction.getFruit());
+        CalculationStorage.calculationStorage.put(transaction.getFruit(), newAmount);
     }
 }

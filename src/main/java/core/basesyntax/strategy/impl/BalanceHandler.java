@@ -7,7 +7,7 @@ import core.basesyntax.strategy.OperationHandler;
 public class BalanceHandler implements OperationHandler {
     @Override
     public void calculateAndAddToStorage(FruitTransaction transaction) {
-        CalculationStorage.CALCULATION_STORAGE
+        CalculationStorage.calculationStorage
                 .put(transaction.getFruit(), transaction.getQuantity());
     }
 }
