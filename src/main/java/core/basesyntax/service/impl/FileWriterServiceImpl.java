@@ -4,25 +4,30 @@ import core.basesyntax.service.FileWriterService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 
 public class FileWriterServiceImpl implements FileWriterService {
-    private final String path;
+    private final Path path;
 
-    public FileWriterServiceImpl(String path) {
+    public FileWriterServiceImpl(Path path) {
         this.path = path;
     }
 
     @Override
     public void writeReportToFile(String report) {
-        String fileName = "report-" + LocalDateTime.now() + ".csv";
-        File fileReport = new File(path + fileName);
+        Path fileName =
+                Path.of(path.toString()
+                        + File.separator
+                        + "report-"
+                        + LocalDateTime.now()
+                        + ".csv");
         try {
-            fileReport.createNewFile();
-            Files.write(fileReport.toPath(),report.getBytes(), StandardOpenOption.APPEND);
+            Files.createFile(fileName);
+            Files.write(fileName,report.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't create file at " + path, e);
         }
     }
 }

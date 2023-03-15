@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportMakerServiceImpl implements ReportMakerService {
+    private static final String COMMA = ",";
     private final FileWriterService fileWriterService;
 
     public ReportMakerServiceImpl(FileWriterService fileWriterService) {
@@ -19,7 +20,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
         report.append(storage
                 .entrySet()
                 .stream()
-                .map(k -> String.join(",",List.of(k.getKey(),String.valueOf(k.getValue()))))
+                .map(k -> String.join(COMMA,List.of(k.getKey(),String.valueOf(k.getValue()))))
                 .collect(Collectors.joining(System.lineSeparator())));
         fileWriterService.writeReportToFile(report.toString());
     }

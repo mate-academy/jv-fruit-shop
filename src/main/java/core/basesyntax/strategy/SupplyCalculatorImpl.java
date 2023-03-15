@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
-public class SupplyCalculator implements TypeCalculatorStrategy {
+public class SupplyCalculatorImpl implements TypeCalculatorStrategy {
     @Override
     public void calculate(FruitTransaction transaction) {
         int prevFruitQuantity = Storage.storage.get(transaction.getFruit());

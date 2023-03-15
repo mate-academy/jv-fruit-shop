@@ -12,7 +12,7 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     private static final int COUNT = 2;
 
     @Override
-    public List<FruitTransaction> makeTransaction(List<String> transactions) {
+    public List<FruitTransaction> createFruitTransactions(List<String> transactions) {
         List<FruitTransaction> transactionsObjs = new ArrayList<>();
         for (String transaction : transactions) {
             String[] splitTransaction = transaction.split(COMMA);
