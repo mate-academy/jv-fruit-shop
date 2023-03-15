@@ -25,7 +25,7 @@ public class Main {
         List<String[]> dataFromFile = fileReaderImpl.readFromFile(PATH_TO_FILE);
         List<FruitTransaction> fruitTransactionList = generator
                 .createFruitTransaction(dataFromFile);
-        fruitTransactionList.forEach(f -> operationStrategy.get(f.getOperation()).handle(f));
+        fruitTransactionList.forEach(ft -> operationStrategy.get(ft.getOperation()).handle(ft));
         String report = reportCreator.createReport();
         fileWriterImpl.writeToFile(PATH_FOR_RESULT, report);
     }

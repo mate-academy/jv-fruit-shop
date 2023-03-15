@@ -5,7 +5,6 @@ import static core.basesyntax.db.Storage.getFruitStorge;
 import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {
-
     @Override
     public String createReport() {
         StringBuilder report = new StringBuilder("fruit, quantity" + System.lineSeparator());

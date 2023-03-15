@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-
     @Override
     public List<String[]> readFromFile(String pathToFile) {
         List<String[]> dataFromFile = new ArrayList<>();
