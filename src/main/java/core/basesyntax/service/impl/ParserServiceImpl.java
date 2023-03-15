@@ -32,6 +32,4 @@ public class ParserServiceImpl implements ParserService {
         }
         return fruitTransactionList;
     }
-
-
 }

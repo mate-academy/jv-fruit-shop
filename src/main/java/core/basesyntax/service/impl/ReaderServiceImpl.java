@@ -23,6 +23,5 @@ public class ReaderServiceImpl implements ReaderService {
             throw new RuntimeException("There is IOException: ", e);
         }
         return records;
-
     }
 }

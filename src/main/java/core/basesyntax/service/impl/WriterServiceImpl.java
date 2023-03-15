@@ -15,5 +15,4 @@ public class WriterServiceImpl implements WriterService {
             throw new RuntimeException("There is IOException: ", e);
         }
     }
-
 }

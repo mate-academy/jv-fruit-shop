@@ -16,5 +16,4 @@ public class CommandHandler {
         operationStrategies.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         return operationStrategies;
     }
-
 }
