@@ -2,7 +2,6 @@ package core.basesyntax.db.impl;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.Fruit;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
