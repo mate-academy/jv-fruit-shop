@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConverterDataServiceImpl implements ConverterDataService {
-    private static final String LINE_SEPARATOR = ",";
 
     @Override
     public List<String> convert(String data) {
