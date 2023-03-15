@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.impl.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.actions.ActionHandler;
 import java.util.Map;
 
