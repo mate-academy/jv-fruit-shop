@@ -7,11 +7,13 @@ import core.basesyntax.service.operation.TransactionHandler;
 import java.util.List;
 
 public class TransactionHandlerImpl implements TransactionHandler {
+    private OperationHandler operationHandler;
+
     @Override
     public void parse(List<FruitTransaction> fruitTransactionList,
                       OperationStrategy operationStrategy) {
         for (int i = 0; i < fruitTransactionList.size(); i++) {
-            OperationHandler operationHandler = operationStrategy.get(fruitTransactionList.get(i)
+            operationHandler = operationStrategy.get(fruitTransactionList.get(i)
                     .getOperation());
             operationHandler.operation(fruitTransactionList.get(i));
         }
