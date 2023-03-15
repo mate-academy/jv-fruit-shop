@@ -16,15 +16,8 @@ public class DataParserImpl implements DataParser {
     public List<FruitTransaction> parseDataToFruitTransaction(List<String> data) {
         return data.stream()
             .map(d -> d.split(LINE_SPLITTER))
-            .map(dat -> new FruitTransaction(getOperation(dat[OPERATION_INDEX]),
+            .map(dat -> new FruitTransaction(FruitTransaction.getOperation(dat[OPERATION_INDEX]),
                     dat[FRUIT_INDEX], Integer.parseInt(dat[QUANTITY_INDEX])))
             .collect(Collectors.toList());
-    }
-
-    private FruitTransaction.Operation getOperation(String code) {
-        return Arrays.stream(FruitTransaction.Operation.values())
-            .filter(i -> i.getCode().equals(code))
-            .findAny()
-            .get();
     }
 }

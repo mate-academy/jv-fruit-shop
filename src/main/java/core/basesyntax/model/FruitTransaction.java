@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private final Operation operation;
     private final String fruit;
@@ -21,6 +23,13 @@ public class FruitTransaction {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public static FruitTransaction.Operation getOperation(String code) {
+        return Arrays.stream(FruitTransaction.Operation.values())
+            .filter(i -> i.getCode().equals(code))
+            .findAny()
+            .get();
     }
 
     public enum Operation {
