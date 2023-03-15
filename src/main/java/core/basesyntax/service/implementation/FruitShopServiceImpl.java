@@ -14,7 +14,8 @@ public class FruitShopServiceImpl implements FruitShopService {
         OperationHandler operationHandler;
         for (FruitTransaction transaction: fruitTransactions) {
             operationHandler = factoryStrategy.getFruitService(transaction.getOperation());
-            operationHandler.handleFruitOperation(transaction.getFruit(), transaction.getQuantity());
+            operationHandler.handleFruitOperation(transaction.getFruit(),
+                    transaction.getQuantity());
         }
     }
 }
