@@ -56,10 +56,16 @@ public class FruitTransaction {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FruitTransaction)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof FruitTransaction)) {
+            return false;
+        }
         FruitTransaction that = (FruitTransaction) o;
-        return getQuantity() == that.getQuantity() && getOperation() == that.getOperation() && getFruit().equals(that.getFruit());
+        return getQuantity() == that.getQuantity()
+                && getOperation() == that.getOperation()
+                && getFruit().equals(that.getFruit());
     }
 
     @Override

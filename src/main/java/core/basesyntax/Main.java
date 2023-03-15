@@ -11,14 +11,14 @@ import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.CommandHandler;
-
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH = "input.csv";
     private static final String OUTPUT_FILE_PATH = "output.csv";
-    private static final Map<FruitTransaction.Operation, OperationHandler> operationStrategies = new CommandHandler().initHandlers();
+    private static final Map<FruitTransaction.Operation, OperationHandler> operationStrategies
+            = new CommandHandler().initHandlers();
 
     public static void main(String[] args) {
 
