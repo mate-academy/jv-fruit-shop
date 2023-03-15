@@ -25,34 +25,33 @@ public class Main {
     private static final String toFile = "src/main/resources/fruitshop_report.csv";
 
     public static void main(String[] args) {
+        FruitShopDaoImpl fruitShopDao = new FruitShopDaoImpl();
+
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitShopDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitShopDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitShopDao));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.EXPIRED, new ExpiredOperationHandler());
+                new PurchaseOperationHandler(fruitShopDao));
+        operationHandlerMap.put(FruitTransaction.Operation.EXPIRED,
+                new ExpiredOperationHandler(fruitShopDao));
 
         ReaderServiceImpl readerService = new ReaderServiceImpl();
-        String readedDataFromFile = readerService.readData(fromFile);
-
         ConverterDataServiceImpl converterDataService = new ConverterDataServiceImpl();
-        List<String> convertedDataFromFile = converterDataService.convert(readedDataFromFile);
-
         FruitServiceImpl fruitService = new FruitServiceImpl();
+        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        CreateReportServiceImpl createReportService = new CreateReportServiceImpl();
+        WriteDataServiceImpl writeDataService = new WriteDataServiceImpl();
+
+        String readedDataFromFile = readerService.readData(fromFile);
+        List<String> convertedDataFromFile = converterDataService.convert(readedDataFromFile);
         List<FruitTransaction> fruitTransactionList =
                 fruitService.addNewFruit(convertedDataFromFile);
-
-        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         for (int i = 0; i < fruitTransactionList.size(); i++) {
             OperationHandler operationHandler = operationStrategy.get(fruitTransactionList.get(i).getOperation());
             operationHandler.operation(fruitTransactionList.get(i));
         }
-
-        CreateReportServiceImpl createReportService = new CreateReportServiceImpl();
         String report = createReportService.createReport(Storage.fruits);
-
-        WriteDataServiceImpl writeDataService = new WriteDataServiceImpl();
         writeDataService.writeDataToFile(report, toFile);
     }
 }
