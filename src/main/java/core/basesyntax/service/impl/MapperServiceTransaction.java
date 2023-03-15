@@ -1,18 +1,18 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Mapper;
+import core.basesyntax.service.MapperService;
 
-public class CsvToFruitTransactionMapper implements Mapper<String, FruitTransaction> {
+public class MapperServiceTransaction implements MapperService<String, FruitTransaction> {
     private final int operationCodeColumn;
     private final int fruitColumn;
     private final int amountColumn;
     private final String csvSeparator;
 
-    public CsvToFruitTransactionMapper(int operationCodeColumn,
-                                       int fruitColumn,
-                                       int amountColumn,
-                                       String csvSeparator) {
+    public MapperServiceTransaction(int operationCodeColumn,
+                                    int fruitColumn,
+                                    int amountColumn,
+                                    String csvSeparator) {
         this.operationCodeColumn = operationCodeColumn;
         this.fruitColumn = fruitColumn;
         this.amountColumn = amountColumn;

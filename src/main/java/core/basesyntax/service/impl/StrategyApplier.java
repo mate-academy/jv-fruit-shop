@@ -1,8 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Dao;
+import core.basesyntax.db.DaoService;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.SaveStrategy;
 
 public class StrategyApplier {
     private final StrategySelector selector;
@@ -11,16 +10,10 @@ public class StrategyApplier {
         this.selector = selector;
     }
 
-    public void apply(SaveStrategy<Dao<String, Integer>, FruitTransaction> strategy,
-                      FruitTransaction transaction,
-                      Dao<String, Integer> dao) {
-        strategy.save(dao, transaction);
-    }
-
     public void applyAll(Iterable<FruitTransaction> transactions,
-                         Dao<String, Integer> dao) {
+                         DaoService<String, Integer> daoService) {
         for (FruitTransaction transaction : transactions) {
-            selector.selectStrategy(transaction.getOperation()).save(transaction, dao);
+            selector.selectStrategy(transaction.getOperation()).save(transaction, daoService);
         }
     }
 }

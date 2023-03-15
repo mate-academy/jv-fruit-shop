@@ -3,7 +3,7 @@ package core.basesyntax.db;
 import java.util.Collection;
 import java.util.Map;
 
-public interface Dao<K,V> {
+public interface DaoService<K,V> {
     void create(K key, V value);
 
     void update(K key, V value);

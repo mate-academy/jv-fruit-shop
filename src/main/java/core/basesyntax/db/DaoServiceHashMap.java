@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.management.openmbean.KeyAlreadyExistsException;
 
-public class BalanceStorage<K, V> implements Dao<K,V> {
+public class DaoServiceHashMap<K, V> implements DaoService<K,V> {
     private Map<K,V> memory;
 
-    public BalanceStorage() {
+    public DaoServiceHashMap() {
         this.memory = new HashMap<>();
     }
 

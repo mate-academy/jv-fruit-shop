@@ -1,24 +1,24 @@
 package core.basesyntax;
 
-import core.basesyntax.db.BalanceStorage;
-import core.basesyntax.db.Dao;
+import core.basesyntax.db.DaoService;
+import core.basesyntax.db.DaoServiceHashMap;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.Mapper;
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.Writer;
-import core.basesyntax.service.impl.CsvReader;
-import core.basesyntax.service.impl.CsvReportGenerator;
-import core.basesyntax.service.impl.CsvToFruitTransactionMapper;
-import core.basesyntax.service.impl.CsvWrighter;
+import core.basesyntax.service.MapperService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.MapperServiceTransaction;
+import core.basesyntax.service.impl.ReaderServiceCsv;
+import core.basesyntax.service.impl.ReportServiceCsv;
 import core.basesyntax.service.impl.StrategyApplier;
 import core.basesyntax.service.impl.StrategySelector;
+import core.basesyntax.service.impl.WriterServiceCsv;
 import core.basesyntax.strategy.SaveStrategy;
-import core.basesyntax.strategy.impl.TransactionStrategyBalance;
-import core.basesyntax.strategy.impl.TransactionStrategyPurchase;
-import core.basesyntax.strategy.impl.TransactionStrategyReturn;
-import core.basesyntax.strategy.impl.TransactionStrategySupply;
+import core.basesyntax.strategy.impl.SaveStrategyBalance;
+import core.basesyntax.strategy.impl.SaveStrategyPurchase;
+import core.basesyntax.strategy.impl.SaveStrategyReturn;
+import core.basesyntax.strategy.impl.SaveStrategySupply;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
@@ -38,30 +38,30 @@ public class Main {
             new HashMap<>();
 
     static {
-        STRATEGY_FOR_OPERATION.put(Operation.SUPPLY, new TransactionStrategySupply());
-        STRATEGY_FOR_OPERATION.put(Operation.PURCHASE, new TransactionStrategyPurchase());
-        STRATEGY_FOR_OPERATION.put(Operation.BALANCE, new TransactionStrategyBalance());
-        STRATEGY_FOR_OPERATION.put(Operation.RETURN, new TransactionStrategyReturn());
+        STRATEGY_FOR_OPERATION.put(Operation.SUPPLY, new SaveStrategySupply());
+        STRATEGY_FOR_OPERATION.put(Operation.PURCHASE, new SaveStrategyPurchase());
+        STRATEGY_FOR_OPERATION.put(Operation.BALANCE, new SaveStrategyBalance());
+        STRATEGY_FOR_OPERATION.put(Operation.RETURN, new SaveStrategyReturn());
         HEADER = "fruit" + CSV_SEPARATOR + "quantity";
     }
 
     public static void main(String[] args) {
-        final Reader<File, String> reader = new CsvReader();
-        final List<String> lines = reader.readLines(new File(FILE_SOURCE));
+        final ReaderService<File, String> readerService = new ReaderServiceCsv();
+        final List<String> lines = readerService.readLines(new File(FILE_SOURCE));
         lines.remove(0); //removing the header
-        final Mapper<String, FruitTransaction> mapper = new CsvToFruitTransactionMapper(
+        final MapperService<String, FruitTransaction> mapperService = new MapperServiceTransaction(
                 OPERATION_CODE_COLUMN,
                 FRUIT_COLUMN,
                 AMOUNT_COLUMN,
                 CSV_SEPARATOR
         );
-        final List<FruitTransaction> mappedTransactions = mapper.mapAll(lines);
-        final Dao<String, Integer> storage = new BalanceStorage<>();
+        final List<FruitTransaction> mappedTransactions = mapperService.mapAll(lines);
+        final DaoService<String, Integer> storage = new DaoServiceHashMap<>();
         final StrategySelector strategySelector = new StrategySelector(STRATEGY_FOR_OPERATION);
         final StrategyApplier strategyApplier = new StrategyApplier(strategySelector);
         strategyApplier.applyAll(mappedTransactions, storage);
-        final ReportGenerator reportGenerator = new CsvReportGenerator(HEADER, CSV_SEPARATOR);
-        final Writer writer = new CsvWrighter();
-        writer.writeLines(reportGenerator.generateReport(storage), new File(FILE_TARGET));
+        final ReportService reportService = new ReportServiceCsv(HEADER, CSV_SEPARATOR);
+        final WriterService writerService = new WriterServiceCsv();
+        writerService.writeLines(reportService.generateReport(storage), new File(FILE_TARGET));
     }
 }
