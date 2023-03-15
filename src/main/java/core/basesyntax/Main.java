@@ -41,8 +41,8 @@ public class Main {
                 new OperationStrategyImpl(operationHandlerMap));
         Map<String, Integer> processedMap = fruitShopService.process(parsed);
 
-        ReportCreatorService reportMakerService = new ReportCreatorServiceImpl();
-        String preparedReport = reportMakerService.createReport(processedMap);
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        String preparedReport = reportCreatorService.createReport(processedMap);
 
         CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
         writerService.writeToFile(OUTPUT_FILE, preparedReport);
