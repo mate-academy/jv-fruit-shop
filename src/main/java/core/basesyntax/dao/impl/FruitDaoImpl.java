@@ -11,6 +11,9 @@ public class FruitDaoImpl implements FruitDao {
         if (FruitDB.fruitsOnStock.get(fruit) != null) {
             newAmount = (FruitDB.fruitsOnStock.get(fruit)) + amount;
         }
+        if (newAmount < 0) {
+            throw new RuntimeException("Client wants to buy more products than are available");
+        }
         FruitDB.fruitsOnStock.put(fruit, newAmount);
     }
 

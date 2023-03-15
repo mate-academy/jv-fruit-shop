@@ -1,24 +1,20 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.service.operation.DefaultOperationHandler;
-import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.model.TransactionDto;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.TransactionStrategy;
-import java.util.List;
+import java.util.Map;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
-    private final List<OperationHandler> handlerList;
-    private final DefaultOperationHandler defaultHandler;
+    private final Map<TransactionDto.Operation, OperationHandler> operationsMap;
 
-    public TransactionStrategyImpl(List<OperationHandler> handlerList) {
-        this.handlerList = handlerList;
-        defaultHandler = new DefaultOperationHandler();
+    public TransactionStrategyImpl(Map<TransactionDto.Operation,
+            OperationHandler> operationsMap) {
+        this.operationsMap = operationsMap;
     }
 
     @Override
-    public OperationHandler get(String operation) {
-        return handlerList.stream()
-                .filter(h -> h.isApplicable(operation))
-                .findFirst()
-                .orElse(defaultHandler);
+    public OperationHandler get(TransactionDto.Operation operation) {
+        return operationsMap.get(operation);
     }
 }

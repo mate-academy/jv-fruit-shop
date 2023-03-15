@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 import java.util.Arrays;
 
-public class FruitTransaction {
+public class TransactionDto {
     private Operation operation;
     private String fruit;
     private int quantity;
 
-    public FruitTransaction(Operation operation, String fruit, int quantity) {
+    public TransactionDto(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;

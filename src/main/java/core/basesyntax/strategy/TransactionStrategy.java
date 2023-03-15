@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.model.TransactionDto;
 
 public interface TransactionStrategy {
-    OperationHandler get(String operation);
+    OperationHandler get(TransactionDto.Operation operation);
 }
