@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.List;
 
 public interface ReaderService {
-    List<String> readFromFile(String filename);
+    List<String> readFromFile(String pathToFile);
 }

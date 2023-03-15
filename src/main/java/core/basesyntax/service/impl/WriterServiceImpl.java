@@ -7,11 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterServiceImpl implements WriterService {
-    private static final String PATH_TO_OUTPUT_FILE = "src/main/resources/";
-
     @Override
-    public void writeToFile(String fileName, String report) {
-        File file = new File(PATH_TO_OUTPUT_FILE + fileName);
+    public void writeToFile(String pathToFile, String report) {
+        File file = new File(pathToFile);
         try {
             file.createNewFile();
         } catch (IOException e) {
