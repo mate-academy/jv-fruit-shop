@@ -15,7 +15,7 @@ public class FruitStorage {
         fruitMap.put(fruitName, quantity);
     }
 
-    public static Set<String> getKeys() {
-        return fruitMap.keySet();
+    public static Set<Map.Entry<String, Integer>> getEntries() {
+        return fruitMap.entrySet();
     }
 }
