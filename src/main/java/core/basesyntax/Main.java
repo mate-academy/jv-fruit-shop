@@ -34,14 +34,16 @@ public class Main {
     private static final int AMOUNT_COLUMN = 2;
     private static final String CSV_SEPARATOR = ",";
     private static final String HEADER;
+    private static final DaoService<String, Integer> STORAGE;
     private static final Map<Operation, SaveStrategy> STRATEGY_FOR_OPERATION =
             new HashMap<>();
 
     static {
-        STRATEGY_FOR_OPERATION.put(Operation.SUPPLY, new SaveStrategySupply());
-        STRATEGY_FOR_OPERATION.put(Operation.PURCHASE, new SaveStrategyPurchase());
-        STRATEGY_FOR_OPERATION.put(Operation.BALANCE, new SaveStrategyBalance());
-        STRATEGY_FOR_OPERATION.put(Operation.RETURN, new SaveStrategyReturn());
+        STORAGE = new DaoServiceHashMap<>();
+        STRATEGY_FOR_OPERATION.put(Operation.SUPPLY, new SaveStrategySupply(STORAGE));
+        STRATEGY_FOR_OPERATION.put(Operation.PURCHASE, new SaveStrategyPurchase(STORAGE));
+        STRATEGY_FOR_OPERATION.put(Operation.BALANCE, new SaveStrategyBalance(STORAGE));
+        STRATEGY_FOR_OPERATION.put(Operation.RETURN, new SaveStrategyReturn(STORAGE));
         HEADER = "fruit" + CSV_SEPARATOR + "quantity";
     }
 
@@ -56,12 +58,11 @@ public class Main {
                 CSV_SEPARATOR
         );
         final List<FruitTransaction> mappedTransactions = mapperService.mapAll(lines);
-        final DaoService<String, Integer> storage = new DaoServiceHashMap<>();
         final StrategySelector strategySelector = new StrategySelector(STRATEGY_FOR_OPERATION);
         final StrategyApplier strategyApplier = new StrategyApplier(strategySelector);
-        strategyApplier.applyAll(mappedTransactions, storage);
+        strategyApplier.applyAll(mappedTransactions);
         final ReportService reportService = new ReportServiceCsv(HEADER, CSV_SEPARATOR);
         final WriterService writerService = new WriterServiceCsv();
-        writerService.writeLines(reportService.generateReport(storage), new File(FILE_TARGET));
+        writerService.writeLines(reportService.generateReport(STORAGE), new File(FILE_TARGET));
     }
 }
