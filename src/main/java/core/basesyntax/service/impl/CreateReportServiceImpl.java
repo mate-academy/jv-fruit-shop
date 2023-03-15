@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class CreateReportServiceImpl implements CreateReportService {
     private static final String LINE_SEPARATOR = ",";
-    private static final String FIRST_ROW = "fruits, quantity";
+    private static final String FIRST_ROW = "fruits,quantity";
 
     @Override
     public String createReport(Map<String, Integer> data) {
