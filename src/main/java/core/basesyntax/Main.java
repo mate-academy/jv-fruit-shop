@@ -14,13 +14,13 @@ import core.basesyntax.service.impl.WriterServiceImpl;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        ReaderService reader = new ReaderServiceImpl();
-        ParserService parser = new ParseServiceImpl();
-        FruitShopService fruitShopService = new FruitShopServiceImpl();
-        ReportMakerService reportMakerService = new ReportMakerServiceImpl();
-        WriterService writer = new WriterServiceImpl();
+    private static final ReaderService reader = new ReaderServiceImpl();
+    private static final ParserService parser = new ParseServiceImpl();
+    private static final FruitShopService fruitShopService = new FruitShopServiceImpl();
+    private static final ReportMakerService reportMakerService = new ReportMakerServiceImpl();
+    private static final WriterService writer = new WriterServiceImpl();
 
+    public static void main(String[] args) {
         List<String> stringsFromFile = reader.readFromFile("input.csv");
         List<FruitTransaction> transactions = parser.parse(stringsFromFile);
         fruitShopService.processData(transactions);
