@@ -1,5 +1,8 @@
 package service;
 
+import java.util.List;
+import model.FruitTransaction;
+
 public interface ProcessData {
-    void processInputData();
+    List<FruitTransaction> parseInputData(List<String> inputData);
 }

@@ -1,13 +1,19 @@
 package core.basesyntax;
 
-import dao.impl.ReaderServiceImpl;
-import dao.impl.WriterServiceImpl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import model.FruitTransaction;
 import service.CreateReportService;
+import service.FruitShopService;
 import service.ProcessData;
+import service.ReaderService;
+import service.WriterService;
 import service.impl.CreateReportServiceImpl;
+import service.impl.FruitShopServiceImpl;
 import service.impl.ProcessDataImpl;
+import service.impl.ReaderServiceImpl;
+import service.impl.WriterServiceImpl;
 import strategy.ActivitiesStrategyImpl;
 import strategy.activities.ActivitiesHandler;
 import strategy.activities.BalanceHandler;
@@ -16,14 +22,19 @@ import strategy.activities.ReturnHandler;
 import strategy.activities.SupplyHandler;
 
 public class Main {
+    private static final String FILE_TO_READ_PATH = "./src/main/resources/database.csv";
+    private static final String FILE_TO_WRITE_PATH = "./src/main/resources/report.csv";
     private static Map<String, ActivitiesHandler> activitiesHandlerMap = new HashMap<>();
 
-    private static CreateReportService createReportService = new CreateReportServiceImpl(
-            new WriterServiceImpl("./src/main/resources/report.csv"));
+    private static ReaderService reader = new ReaderServiceImpl();
+    private static ProcessData processData = new ProcessDataImpl();
 
-    private static ProcessData processData = new ProcessDataImpl(
-            new ReaderServiceImpl("./src/main/resources/database.csv"),
+    private static FruitShopService fruitShopService = new FruitShopServiceImpl(
             new ActivitiesStrategyImpl(activitiesHandlerMap));
+
+    private static CreateReportService createReportService = new CreateReportServiceImpl();
+
+    private static WriterService writer = new WriterServiceImpl();
 
     public static void main(String[] args) {
         activitiesHandlerMap.put("b", new BalanceHandler());
@@ -31,7 +42,10 @@ public class Main {
         activitiesHandlerMap.put("p", new PurchaseHandler());
         activitiesHandlerMap.put("r", new ReturnHandler());
 
-        processData.processInputData();
-        createReportService.generateReport();
+        List<String> inputData = reader.read(FILE_TO_READ_PATH);
+        List<FruitTransaction> fruitTransactions = processData.parseInputData(inputData);
+        fruitShopService.processData(fruitTransactions);
+        String report = createReportService.generateReport();
+        writer.write(FILE_TO_WRITE_PATH, report);
     }
 }

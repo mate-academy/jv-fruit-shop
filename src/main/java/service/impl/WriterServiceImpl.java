@@ -1,19 +1,13 @@
-package dao.impl;
+package service.impl;
 
-import dao.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
-    private final String filePath;
-
-    public WriterServiceImpl(String filePath) {
-        this.filePath = filePath;
-    }
-
     @Override
-    public void add(String content) {
+    public void write(String filePath, String content) {
         create(filePath);
         try {
             Files.write(Path.of(filePath), content.getBytes());
