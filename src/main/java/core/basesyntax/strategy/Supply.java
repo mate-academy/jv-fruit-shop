@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 
 public class Supply implements OperationHandler {
     @Override
-    public void operationWithFruits(String fruit, Integer quantity) {
+    public void handleFruitOperation(String fruit, Integer quantity) {
         if (Storage.fruits.containsKey(fruit)) {
             Storage.put(fruit, Storage.get(fruit) + quantity);
             return;

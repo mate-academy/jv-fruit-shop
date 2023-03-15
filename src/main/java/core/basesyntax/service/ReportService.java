@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.Map;
 
 public interface ReportService {
-    String report(Map<String, Integer> fruitsMap);
+    String generateReport(Map<String, Integer> fruitsMap);
 }

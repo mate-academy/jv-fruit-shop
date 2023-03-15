@@ -9,12 +9,12 @@ import java.util.List;
 public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
-    public void processFruitTransaction(List<FruitTransaction> fruitTransactions) {
+    public void processFruitTransactions(List<FruitTransaction> fruitTransactions) {
         FactoryStrategy factoryStrategy = new FactoryStrategy();
         OperationHandler operationHandler;
         for (FruitTransaction transaction: fruitTransactions) {
             operationHandler = factoryStrategy.getFruitService(transaction.getOperation());
-            operationHandler.operationWithFruits(transaction.getFruit(), transaction.getQuantity());
+            operationHandler.handleFruitOperation(transaction.getFruit(), transaction.getQuantity());
         }
     }
 }

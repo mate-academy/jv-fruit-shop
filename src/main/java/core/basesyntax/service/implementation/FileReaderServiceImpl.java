@@ -1,6 +1,6 @@
 package core.basesyntax.service.implementation;
 
-import core.basesyntax.exeption.MyShopExceptions;
+import core.basesyntax.exeption.FruitShopExceptions;
 import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,7 +24,7 @@ public class FileReaderServiceImpl implements FileReaderService {
                 }
             }
         } catch (IOException e) {
-            throw new MyShopExceptions("Can't find file");
+            throw new FruitShopExceptions("Can't find file");
         }
         return listFromFile;
     }

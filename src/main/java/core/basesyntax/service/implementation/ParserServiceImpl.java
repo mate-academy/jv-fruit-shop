@@ -12,13 +12,13 @@ public class ParserServiceImpl implements ParserService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parseFruitTransaction(List<String> line) {
+    public List<FruitTransaction> parseFruitTransactions(List<String> line) {
         return line.stream()
-                .map(this::fruitTransaction)
+                .map(this::fruitTransactionParser)
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction fruitTransaction(String line) {
+    private FruitTransaction fruitTransactionParser(String line) {
         String[] splitLine = line.split(COMMA_SPLITTER);
         return new FruitTransaction(FruitTransaction.Operation
                 .getByOperationCode(splitLine[COMMAND_INDEX]),

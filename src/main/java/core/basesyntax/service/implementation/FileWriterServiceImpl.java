@@ -1,6 +1,6 @@
 package core.basesyntax.service.implementation;
 
-import core.basesyntax.exeption.MyShopExceptions;
+import core.basesyntax.exeption.FruitShopExceptions;
 import core.basesyntax.service.FileWriterService;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,7 +14,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(infoToWrite);
         } catch (IOException e) {
-            throw new MyShopExceptions("Can't write to file:" + file);
+            throw new FruitShopExceptions("Can't write to file:" + file);
         }
     }
 }

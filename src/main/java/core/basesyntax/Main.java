@@ -24,13 +24,13 @@ public class Main {
 
         ParserService parserService = new ParserServiceImpl();
         List<FruitTransaction> fruitTransactionList
-                = parserService.parseFruitTransaction(stringFromFile);
+                = parserService.parseFruitTransactions(stringFromFile);
 
         FruitShopService fruitShopService = new FruitShopServiceImpl();
-        fruitShopService.processFruitTransaction(fruitTransactionList);
+        fruitShopService.processFruitTransactions(fruitTransactionList);
 
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.report(Storage.fruits);
+        String report = reportService.generateReport(Storage.fruits);
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(REPORT_FILE_PATH, report);

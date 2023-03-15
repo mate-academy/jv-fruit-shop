@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-import core.basesyntax.exeption.MyShopExceptions;
+import core.basesyntax.exeption.FruitShopExceptions;
 
 public class FruitTransaction {
     private final Operation operation;
@@ -47,7 +47,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new MyShopExceptions("Incorrect operation code: " + code);
+            throw new FruitShopExceptions("Incorrect operation code: " + code);
         }
     }
 }
