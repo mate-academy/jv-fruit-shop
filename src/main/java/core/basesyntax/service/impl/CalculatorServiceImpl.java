@@ -16,7 +16,7 @@ public class CalculatorServiceImpl implements CalculatorService {
     @Override
     public void calculate(List<FruitTransaction> transactionList) {
         for (FruitTransaction fruitTransaction : transactionList) {
-            chooseStrategyHandler.getHandler(fruitTransaction).operation(fruitTransaction);
+            chooseStrategyHandler.getHandler(fruitTransaction).calculateFruit(fruitTransaction);
         }
     }
 }

@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationImpl implements OperationHandler {
     @Override
-    public void operation(FruitTransaction fruitTransaction) {
+    public void calculateFruit(FruitTransaction fruitTransaction) {
         int countOfFruit = StorageOfFruits.fruitStorage.get(fruitTransaction.getFruit());
         if (countOfFruit >= fruitTransaction.getQuantity()) {
             StorageOfFruits.fruitStorage.put(fruitTransaction.getFruit(),

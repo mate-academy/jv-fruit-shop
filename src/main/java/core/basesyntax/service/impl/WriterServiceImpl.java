@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterServiceImpl implements WriterService {
-
     @Override
     public void write(String resultData, String nameOfFile) {
         File file = new File(nameOfFile);
@@ -17,6 +16,5 @@ public class WriterServiceImpl implements WriterService {
             throw new RuntimeException("Can`t write to file", e);
         }
     }
-
 }
 
