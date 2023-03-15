@@ -19,8 +19,9 @@ public class ReturnOperationHandler implements OperationHandler {
             throw new FruitShopOperationException("Can't do a operation, because our model is "
                     + "empty!");
         }
-        int amount = Storage.fruits.get(fruitTransaction.getFruit());
+        String fruit = fruitTransaction.getFruit();
+        int amount = fruitShopDao.get(fruit);
         int result = amount + fruitTransaction.getQuantity();
-        fruitShopDao.add(fruitTransaction.getFruit(), result);
+        fruitShopDao.add(fruit, result);
     }
 }
