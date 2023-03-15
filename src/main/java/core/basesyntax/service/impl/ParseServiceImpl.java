@@ -5,7 +5,7 @@ import core.basesyntax.service.ParseService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitServiceImpl implements ParseService {
+public class ParseServiceImpl implements ParseService {
     private static final int INDEX_OF_QUANTITY = 2;
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_OPERATION = 0;

@@ -9,7 +9,7 @@ import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriteDataService;
 import core.basesyntax.service.impl.CreateReportServiceImpl;
-import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriteDataServiceImpl;
 import core.basesyntax.service.operation.OperationHandler;
@@ -43,7 +43,7 @@ public class Main {
                 new PurchaseOperationHandler(fruitShopDao));
 
         ReaderService readerService = new ReaderServiceImpl();
-        ParseService fruitService = new FruitServiceImpl();
+        ParseService fruitService = new ParseServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         TransactionHandler transactionHandler = new TransactionHandlerImpl();
         CreateReportService createReportService = new CreateReportServiceImpl();
