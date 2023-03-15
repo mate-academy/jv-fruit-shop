@@ -11,9 +11,9 @@ public class FruitShopDaoImpl implements FruitShopDao {
     }
 
     @Override
-    public FruitTransaction get(FruitTransaction.TYPE type) {
+    public FruitTransaction get(FruitTransaction fruitTransaction) {
         return Storage.fruits.stream()
-                .filter(a -> a.getType().equals(type))
+                .filter(a -> a.getFruit().equals(fruitTransaction.getFruit()))
                 .findFirst()
                 .get();
     }
