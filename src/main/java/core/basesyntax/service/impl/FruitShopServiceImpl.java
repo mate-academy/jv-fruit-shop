@@ -8,11 +8,12 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private final StorageDao storageDao = new StorageDaoImpl();
+    private final StorageDao storageDao;
     private final OperationStrategy operationStrategy;
 
     public FruitShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
+        this.storageDao = new StorageDaoImpl();
     }
 
     @Override

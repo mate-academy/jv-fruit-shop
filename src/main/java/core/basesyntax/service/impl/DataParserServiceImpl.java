@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitTransform;
+import core.basesyntax.service.DataParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FruitTransformImpl implements FruitTransform {
+public class DataParserServiceImpl implements DataParserService {
     private static final String SEPARATOR = ",";
     private static final int TRANSACTION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;

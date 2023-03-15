@@ -1,4 +1,4 @@
-package core.basesyntax.service.handler;
+package core.basesyntax.strategy.handler;
 
 public interface OperationHandler {
 
