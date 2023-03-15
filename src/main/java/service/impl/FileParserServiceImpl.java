@@ -1,7 +1,7 @@
 package service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import model.FruitTransaction;
 import service.FileParserService;
 
@@ -13,18 +13,13 @@ public class FileParserServiceImpl implements FileParserService {
 
     @Override
     public List<FruitTransaction> parseFileInformation(List<String> lines) {
-        List<FruitTransaction> transactions = new ArrayList<>();
-        for (String line : lines) {
-            if (checkBeforeParse(line)) {
-                String[] partsOfLine = line.split(SEPARATOR);
-                FruitTransaction receivedTransaction = new FruitTransaction(FruitTransaction
-                         .Operation.getOperationByCommand(partsOfLine[INDEX_OF_OPERATION]),
-                               partsOfLine[INDEX_OF_FRUIT],
-                         Integer.parseInt(partsOfLine[INDEX_OF_QUANTITY]));
-                transactions.add(receivedTransaction);
-            }
-        }
-        return transactions;
+        return lines.stream()
+                .map(line -> line.split(SEPARATOR))
+                .map(partsOfLine -> new FruitTransaction(FruitTransaction.Operation
+                        .getOperationByCommand(partsOfLine[INDEX_OF_OPERATION]),
+                        partsOfLine[INDEX_OF_FRUIT],
+                        Integer.parseInt(partsOfLine[INDEX_OF_QUANTITY])))
+                .collect(Collectors.toList());
     }
 
     public boolean checkBeforeParse(String line) {
