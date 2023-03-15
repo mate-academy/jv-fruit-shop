@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
+import java.util.List;
 
 public interface FruitService {
-    void addNewFruit(Fruit.TYPE type, Integer value, Fruit.ACTIVITY activity);
+    void addNewFruit(List<String[]> data);
 }
