@@ -10,7 +10,7 @@ public class WriterServiceImpl implements WriterService {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Sorry can't add report to " + fileName, e);
+            throw new RuntimeException("Sorry can't write report to " + fileName, e);
         }
     }
 }

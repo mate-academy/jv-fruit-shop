@@ -2,15 +2,20 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CalculatorService;
-import core.basesyntax.strategy.Strategy;
+import core.basesyntax.strategy.impl.StrategyStorageImpl;
 import java.util.List;
 
 public class CalculatorServiceImpl implements CalculatorService {
-    private static final Strategy STRATEGY = new Strategy();
+    private final StrategyStorageImpl strategy;
+
+    public CalculatorServiceImpl(StrategyStorageImpl strategy) {
+        this.strategy = strategy;
+    }
 
     @Override
     public void calculate(List<FruitTransaction> order) {
         order.stream()
-                .forEach(transaction -> STRATEGY.getStrategy(transaction).calculate(transaction));
+                .forEach(transaction -> strategy.getStrategy(transaction)
+                        .handle(transaction));
     }
 }

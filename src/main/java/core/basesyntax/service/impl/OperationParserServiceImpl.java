@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationParser;
+import core.basesyntax.service.OperationParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OperationParserImpl implements OperationParser {
+public class OperationParserServiceImpl implements OperationParserService {
     private static final int HEADER = 1;
     private static final String SPLITTER = ",";
     private static final int OPERATION_INDEX = 0;
