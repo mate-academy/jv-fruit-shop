@@ -7,9 +7,6 @@ import core.basesyntax.strategy.handler.OperationHandler;
 public class SupplyHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        int currentQuantity = Storage.storage
-                .getOrDefault(transaction.getFruit(), 0);
-        Storage.storage.put(transaction.getFruit(),
-                currentQuantity + transaction.getQuantity());
+        AdderToStorage.add(transaction);
     }
 }
