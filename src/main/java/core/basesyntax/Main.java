@@ -5,12 +5,12 @@ import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportCreatorService;
-import core.basesyntax.service.TransactionParseService;
+import core.basesyntax.service.TransactionParserService;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
-import core.basesyntax.service.impl.TransactionParseServiceImpl;
+import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
@@ -34,8 +34,8 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
 
         CsvFileReaderService readerService = new CsvFileReaderImpl();
-        TransactionParseService transactionParseService = new TransactionParseServiceImpl();
-        List<FruitTransaction> parsed = transactionParseService.parse(
+        TransactionParserService transactionParserService = new TransactionParserServiceImpl();
+        List<FruitTransaction> parsed = transactionParserService.parse(
                 readerService.readFromFile(INPUT_FILE));
         FruitShopService fruitShopService = new FruitShopServiceImpl(
                 new OperationStrategyImpl(operationHandlerMap));

@@ -16,7 +16,7 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public Map<String, Integer> process(List<FruitTransaction> parsed) {
-        parsed.forEach(t -> operationStrategy.get(t.getOperation()).activity(t));
+        parsed.forEach(t -> operationStrategy.get(t.getOperation()).doActivity(t));
         return Storage.getMap();
     }
 }

@@ -1,17 +1,17 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionParseService;
+import core.basesyntax.service.TransactionParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TransactionParseServiceImpl implements TransactionParseService {
-    public static final int FIRST_LINE_INDEX = 0;
-    public static final String DEFAULT_TITLE = "type,fruit,quantity";
-    public static final int TYPE_INDEX = 0;
-    public static final int FRUIT_INDEX = 1;
-    public static final int QUANTITY_INDEX = 2;
-    public static final String COMMA_SEPARATOR = ",";
+public class TransactionParserServiceImpl implements TransactionParserService {
+    private static final int FIRST_LINE_INDEX = 0;
+    private static final String DEFAULT_TITLE = "type,fruit,quantity";
+    private static final int TYPE_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final String COMMA_SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
