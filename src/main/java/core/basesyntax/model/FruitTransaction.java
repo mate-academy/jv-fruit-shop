@@ -17,19 +17,19 @@ public class FruitTransaction {
         return operation;
     }
 
+    public static FruitTransaction.Operation getOperation(String code) {
+        return Arrays.stream(FruitTransaction.Operation.values())
+            .filter(i -> i.getCode().equals(code))
+            .findAny()
+            .get();
+    }
+
     public String getFruit() {
         return fruit;
     }
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public static FruitTransaction.Operation getOperation(String code) {
-        return Arrays.stream(FruitTransaction.Operation.values())
-            .filter(i -> i.getCode().equals(code))
-            .findAny()
-            .get();
     }
 
     public enum Operation {
