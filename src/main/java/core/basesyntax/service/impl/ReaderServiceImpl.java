@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
+    private static final String WHITE_SPACE = " ";
+
     @Override
     public List<String> readData(String fromFile) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fromFile))){
@@ -17,7 +19,7 @@ public class ReaderServiceImpl implements ReaderService {
             StringBuilder data = new StringBuilder();
             String line = bufferedReader.readLine();
             while (line != null && !line.isEmpty()) {
-                data.append(line).append(" "); //TODO: Magick number
+                data.append(line).append(WHITE_SPACE);
                 listData.add(data.toString());
                 line = bufferedReader.readLine();
             }
