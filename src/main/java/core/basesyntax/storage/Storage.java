@@ -16,12 +16,17 @@ public class Storage {
 
     public void plus(String fruit, Integer quantity) {
         Integer initialAmount = fruits.get(fruit);
+        fruits.put(fruit, initialAmount + quantity);
+    }
+
+    public void minus(String fruit, Integer quantity) {
+        Integer initialAmount = fruits.get(fruit);
         if (initialAmount == null) {
             throw new RuntimeException("Can't purchase not existent fruit");
         }
         if (quantity > initialAmount) {
             throw new RuntimeException("Can't remove more than there is in stock");
         }
-        fruits.put(fruit, initialAmount + quantity);
+        fruits.put(fruit, initialAmount - quantity);
     }
 }

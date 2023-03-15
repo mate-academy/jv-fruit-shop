@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportMakerService;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ReportMakerServiceImpl implements ReportMakerService {
 
@@ -9,11 +10,10 @@ public class ReportMakerServiceImpl implements ReportMakerService {
 
     @Override
     public String report(Map<String, Integer> report) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(HEAD_LINER);
-        report.forEach((key, value) -> builder
-                .append(System.lineSeparator())
-                .append(key).append(", ").append(value));
-        return builder.toString();
+        return HEAD_LINER + report
+                .entrySet()
+                .stream()
+                .map(e -> System.lineSeparator() + e.getKey() + ", " + e.getValue())
+                .collect(Collectors.joining());
     }
 }

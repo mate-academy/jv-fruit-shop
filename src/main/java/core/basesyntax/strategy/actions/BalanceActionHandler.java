@@ -2,14 +2,14 @@ package core.basesyntax.strategy.actions;
 
 import core.basesyntax.storage.Storage;
 
-public class SupplyActionHandler implements ActionHandler {
+public class BalanceActionHandler implements ActionHandler {
     @Override
     public void apply(Storage storage, String fruit, Integer quantity) {
-        storage.plus(fruit, quantity);
+        storage.put(fruit, quantity);
     }
 
     @Override
     public String getCorrespondingAction() {
-        return "s";
+        return "b";
     }
 }

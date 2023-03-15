@@ -10,7 +10,7 @@ public class WriterServiceImpl implements WriterService {
 
     @Override
     public void write(String data, String path) {
-        File file = new File(path + "out.csv");
+        File file = new File(path);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(data);
         } catch (IOException e) {

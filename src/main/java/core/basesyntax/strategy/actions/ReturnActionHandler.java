@@ -1,6 +1,5 @@
 package core.basesyntax.strategy.actions;
 
-import core.basesyntax.service.impl.FruitTransaction;
 import core.basesyntax.storage.Storage;
 
 public class ReturnActionHandler implements ActionHandler {
@@ -10,7 +9,7 @@ public class ReturnActionHandler implements ActionHandler {
     }
 
     @Override
-    public boolean isApplicable(FruitTransaction.Operation action) {
-        return FruitTransaction.Operation.RETURN == action;
+    public String getCorrespondingAction() {
+        return "r";
     }
 }
