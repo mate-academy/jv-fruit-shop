@@ -38,7 +38,7 @@ public class Main {
         List<FruitTransaction> transactions = fileParserService.parseFileInformation(lines);
         FruitShopService fruitShopService =
                 new FruitShopServiceImpl(new OperatorStrategyImpl(operationHandlerMap));
-        fruitShopService.startFruitsOperations(transactions);
+        fruitShopService.processTransactions(transactions);
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.createReport();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
