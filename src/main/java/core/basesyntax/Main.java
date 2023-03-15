@@ -47,8 +47,8 @@ public class Main {
         WriterService writerService = new WriterServiceImpl();
 
         List<String> list = readerService.readFromFile(READ_FILE_PATH);
-        List<FruitTransaction> fruitTransactions = fruitTransform.transform(list);
-        fruitShopService.calculate(fruitTransactions);
+        List<FruitTransaction> fruitTransactions = fruitTransform.parseToTransaction(list);
+        fruitShopService.processData(fruitTransactions);
         List<String> reportList = reportService.createReport();
         writerService.writeToFile(WRITE_FILE_PATH,reportList);
     }

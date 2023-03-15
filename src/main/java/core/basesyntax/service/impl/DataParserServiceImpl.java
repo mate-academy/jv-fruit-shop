@@ -13,7 +13,7 @@ public class DataParserServiceImpl implements DataParserService {
     private static final int SKIP_LINES_NUMBER = 1;
 
     @Override
-    public List<FruitTransaction> transform(List<String> strings) {
+    public List<FruitTransaction> parseToTransaction(List<String> strings) {
         return strings.stream().skip(SKIP_LINES_NUMBER)
                 .map(this::transformString)
                 .collect(Collectors.toList());
