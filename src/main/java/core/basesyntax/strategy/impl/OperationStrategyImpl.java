@@ -11,18 +11,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<String, OperationHandler> handlerMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> handlerMap;
 
     public OperationStrategyImpl() {
         handlerMap = new HashMap<>();
-        handlerMap.put(FruitTransaction.Operation.BALANCE.getCode(), new BalanceHandler());
-        handlerMap.put(FruitTransaction.Operation.SUPPLY.getCode(), new SupplyHandler());
-        handlerMap.put(FruitTransaction.Operation.PURCHASE.getCode(), new PurchaseHandler());
-        handlerMap.put(FruitTransaction.Operation.RETURN.getCode(), new ReturnHandler());
+        handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
+        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
+        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
     }
 
     @Override
-    public OperationHandler getHandler(FruitTransaction transaction) {
-        return handlerMap.get(transaction.getOperation().getCode());
+    public OperationHandler getHandler(FruitTransaction.Operation operation) {
+        return handlerMap.get(operation);
     }
 }

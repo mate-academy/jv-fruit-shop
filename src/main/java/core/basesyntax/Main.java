@@ -27,7 +27,6 @@ public class Main {
         List<FruitTransaction> transactions = parser.parse(stringsFromFile);
         fruitShopService.processData(transactions);
         String report = reportMakerService.report();
-        System.out.println(report);
         writer.writeToFile(PATH_TO_REPORT_FILE, report);
     }
 }
