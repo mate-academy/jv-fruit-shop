@@ -1,6 +1,8 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.CalculatorStrategy;
+import core.basesyntax.strategy.TypeCalculatorStrategy;
 import java.util.List;
 
 public class CalculatorStrategyImpl implements CalculatorStrategy {

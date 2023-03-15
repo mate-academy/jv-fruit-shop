@@ -7,15 +7,17 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
+    private static final int HEADER = 0;
+
     @Override
-    public List<String> fileToStringList(Path filePath) {
+    public List<String> readToList(String filePath) {
         List<String> list;
         try {
-            list = Files.readAllLines(filePath);
+            list = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't find file by path: " + filePath,e);
         }
-        list.remove(0);
+        list.remove(HEADER);
         return list;
     }
 }

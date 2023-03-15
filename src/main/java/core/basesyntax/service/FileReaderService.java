@@ -1,8 +1,7 @@
 package core.basesyntax.service;
 
-import java.nio.file.Path;
 import java.util.List;
 
 public interface FileReaderService {
-    List<String> fileToStringList(Path filePath);
+    List<String> readToList(String filePath);
 }

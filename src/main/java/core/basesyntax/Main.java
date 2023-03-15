@@ -12,24 +12,23 @@ import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitCalculationServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 import core.basesyntax.service.impl.ReportMakerServiceImpl;
-import core.basesyntax.strategy.BalanceCalculatorImpl;
 import core.basesyntax.strategy.CalculatorStrategy;
-import core.basesyntax.strategy.CalculatorStrategyImpl;
-import core.basesyntax.strategy.PurchaseCalculatorImpl;
-import core.basesyntax.strategy.ReturnCalculatorImpl;
-import core.basesyntax.strategy.SupplyCalculatorImpl;
 import core.basesyntax.strategy.TypeCalculatorStrategy;
-import java.nio.file.Path;
+import core.basesyntax.strategy.impl.BalanceCalculatorImpl;
+import core.basesyntax.strategy.impl.CalculatorStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseCalculatorImpl;
+import core.basesyntax.strategy.impl.ReturnCalculatorImpl;
+import core.basesyntax.strategy.impl.SupplyCalculatorImpl;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    private static final Path INPUT = Path.of("src/main/resources/test.csv");
-    private static final Path path = Path.of("src/main/resources/");
+    private static final String INPUT = "src/main/resources/test.csv";
+    private static final String path = "src/main/resources/";
 
     public static void main(String[] args) {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> fruits = fileReaderService.fileToStringList(INPUT);
+        List<String> fruits = fileReaderService.readToList(INPUT);
         FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
         List<TypeCalculatorStrategy> fruitCalculatorStrategies = new ArrayList<>();
         fruitCalculatorStrategies.add(new BalanceCalculatorImpl());
@@ -43,8 +42,8 @@ public class Main {
         FruitCalculationService fruitCalculationService =
                 new FruitCalculationServiceImpl(calculatorStrategyImpl);
         fruitCalculationService.addToStorage(fruitTransactions);
-        FileWriterService fileWriterService = new FileWriterServiceImpl(path);
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
         ReportMakerService reportMakerService = new ReportMakerServiceImpl(fileWriterService);
-        reportMakerService.createReport(Storage.storage);
+        reportMakerService.createReport(Storage.storage, path);
     }
 }
