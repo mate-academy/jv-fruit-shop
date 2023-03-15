@@ -1,9 +1,8 @@
 package strategy;
 
 import handlers.OperationTypeHandler;
-import model.FruitTransaction;
-
 import java.util.Map;
+import model.FruitTransaction;
 
 public class StrategyImpl implements StrategyChoosing {
     private final Map<FruitTransaction.Operation, OperationTypeHandler> strategy;

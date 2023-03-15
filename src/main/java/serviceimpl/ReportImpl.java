@@ -1,9 +1,8 @@
 package serviceimpl;
 
 import db.Storage;
-import service.ReportService;
-
 import java.util.Map;
+import service.ReportService;
 
 public class ReportImpl implements ReportService {
     private static final String TITLE = "fruit,quantity";

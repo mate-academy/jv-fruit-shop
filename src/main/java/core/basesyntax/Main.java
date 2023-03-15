@@ -5,6 +5,10 @@ import handlers.OperationTypeHandler;
 import handlers.PurchaseHandler;
 import handlers.ReturnHandler;
 import handlers.SupplyHandler;
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
 import service.ReportService;
 import service.TransactionParserService;
@@ -14,10 +18,6 @@ import serviceimpl.TransactionParserImpl;
 import serviceimpl.WriterImpl;
 import strategy.StrategyChoosing;
 import strategy.StrategyImpl;
-import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Main {
     private static final File INPUT_FILE = new File("src/main/java/resources/input.csv");

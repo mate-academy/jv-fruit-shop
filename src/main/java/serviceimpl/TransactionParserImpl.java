@@ -1,12 +1,11 @@
 package serviceimpl;
 
 import db.Storage;
+import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
 import service.TransactionParserService;
 import strategy.StrategyChoosing;
-
-import java.util.List;
-import java.util.Map;
 
 public class TransactionParserImpl implements TransactionParserService {
     private static final int FIRST_VALID_LINE = 1;
