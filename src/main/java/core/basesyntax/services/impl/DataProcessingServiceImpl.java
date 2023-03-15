@@ -1,4 +1,4 @@
-package core.basesyntax.servicesimpl;
+package core.basesyntax.services.impl;
 
 import core.basesyntax.services.DataProcessingService;
 import core.basesyntax.strategy.OperationStrategy;

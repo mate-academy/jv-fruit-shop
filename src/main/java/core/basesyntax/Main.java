@@ -6,18 +6,18 @@ import core.basesyntax.services.CsvFileWriterService;
 import core.basesyntax.services.DataParcerService;
 import core.basesyntax.services.DataProcessingService;
 import core.basesyntax.services.ShopReportService;
-import core.basesyntax.servicesimpl.CsvFileReaderServiceImpl;
-import core.basesyntax.servicesimpl.CsvFileWriterServiceImpl;
-import core.basesyntax.servicesimpl.DataParcerServiceImpl;
-import core.basesyntax.servicesimpl.DataProcessingServiceImpl;
-import core.basesyntax.servicesimpl.ShopReportServiceImpl;
-import core.basesyntax.strategy.OperarionHandlerPurchase;
+import core.basesyntax.services.impl.CsvFileReaderServiceImpl;
+import core.basesyntax.services.impl.CsvFileWriterServiceImpl;
+import core.basesyntax.services.impl.DataParcerServiceImpl;
+import core.basesyntax.services.impl.DataProcessingServiceImpl;
+import core.basesyntax.services.impl.ShopReportServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationHandlerBalance;
-import core.basesyntax.strategy.OperationHandlerReturn;
-import core.basesyntax.strategy.OperationHandlersSupply;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.OperarionHandlerPurchase;
+import core.basesyntax.strategy.impl.OperationHandlerBalance;
+import core.basesyntax.strategy.impl.OperationHandlerReturn;
+import core.basesyntax.strategy.impl.OperationHandlersSupply;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
@@ -27,8 +27,8 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class Main {
-    public static final String INPUT_DATA_PATH = "src/main/resources/FruitShopInputData.csv";
-    public static final String REPORT_DATA_PATH = "src/main/resources/FruitShopOutputData.csv";
+    private static final String INPUT_DATA_PATH = "src/main/resources/FruitShopInputData.csv";
+    private static final String REPORT_DATA_PATH = "src/main/resources/FruitShopOutputData.csv";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();

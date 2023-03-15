@@ -1,12 +1,12 @@
-package core.basesyntax.servicesimpl;
+package core.basesyntax.services.impl;
 
 import core.basesyntax.services.ShopReportService;
 import java.util.Map;
 
 public class ShopReportServiceImpl implements ShopReportService {
-    public static final String LINE_SEPARATOR = System.lineSeparator();
-    public static final String VALUE_SEPARATOR = ",";
-    public static final String TITLE_ROW = "fruit,quantity";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String VALUE_SEPARATOR = ",";
+    private static final String TITLE_ROW = "fruit,quantity";
 
     @Override
     public byte[] generateReport(Map<String, Integer> processedData) {
