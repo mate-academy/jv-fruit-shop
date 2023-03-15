@@ -13,10 +13,10 @@ import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.TransactionStrategy;
-import core.basesyntax.strategy.impl.BalanceHandler;
-import core.basesyntax.strategy.impl.PurchaseHandler;
-import core.basesyntax.strategy.impl.ReturnHandler;
-import core.basesyntax.strategy.impl.SupplyHandler;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import core.basesyntax.strategy.impl.TransactionStrategyImpl;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +28,10 @@ public class MainApplication {
 
     private static void initializeMap() {
         operationsMap = Map.of(
-                TransactionDto.Operation.RETURN, new ReturnHandler(),
-                TransactionDto.Operation.BALANCE, new BalanceHandler(),
-                TransactionDto.Operation.PURCHASE, new PurchaseHandler(),
-                TransactionDto.Operation.SUPPLY, new SupplyHandler());
+                TransactionDto.Operation.RETURN, new ReturnOperationHandler(),
+                TransactionDto.Operation.BALANCE, new BalanceOperationHandler(),
+                TransactionDto.Operation.PURCHASE, new PurchaseOperationHandler(),
+                TransactionDto.Operation.SUPPLY, new SupplyOperationHandler());
     }
 
     public static void main(String[] args) {
