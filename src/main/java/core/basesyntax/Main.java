@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_PATH = "input.csv";
-    private static final String OUTPUT_FILE_PATH = "output.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
     private static final Map<FruitTransaction.Operation, OperationHandler> operationStrategies
             = new CommandHandler().initHandlers();
 
