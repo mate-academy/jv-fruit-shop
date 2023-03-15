@@ -1,9 +1,9 @@
 package core.basesyntax.db;
 
-import javax.management.openmbean.KeyAlreadyExistsException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import javax.management.openmbean.KeyAlreadyExistsException;
 
 public class BalanceStorage<K, V> implements Dao<K,V> {
     private Map<K,V> memory;
@@ -33,10 +33,5 @@ public class BalanceStorage<K, V> implements Dao<K,V> {
     @Override
     public Collection<Map.Entry<K,V>> getAll() {
         return memory.entrySet();
-    }
-
-    @Override
-    public void clear() {
-        memory.clear();
     }
 }

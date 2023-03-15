@@ -4,24 +4,27 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Mapper;
 
 public class CsvToFruitTransactionMapper implements Mapper<String, FruitTransaction> {
-    private final int OPERATION_CODE_COLUMN;
-    private final int FRUIT_COLUMN;
-    private final int AMOUNT_COLUMN;
-    private final String STRING_SEPARATOR;
+    private final int operationCodeColumn;
+    private final int fruitColumn;
+    private final int amountColumn;
+    private final String csvSeparator;
 
-    public CsvToFruitTransactionMapper(int operationCodeColumn, int fruitColumn, int amountColumn, String stringSeparator) {
-        OPERATION_CODE_COLUMN = operationCodeColumn;
-        FRUIT_COLUMN = fruitColumn;
-        AMOUNT_COLUMN = amountColumn;
-        STRING_SEPARATOR = stringSeparator;
+    public CsvToFruitTransactionMapper(int operationCodeColumn,
+                                       int fruitColumn,
+                                       int amountColumn,
+                                       String csvSeparator) {
+        this.operationCodeColumn = operationCodeColumn;
+        this.fruitColumn = fruitColumn;
+        this.amountColumn = amountColumn;
+        this.csvSeparator = csvSeparator;
     }
 
     @Override
     public FruitTransaction map(String from) {
-        final String[] parsed = from.split(STRING_SEPARATOR);
+        final String[] parsed = from.split(csvSeparator);
         return new FruitTransaction(
-                parsed[OPERATION_CODE_COLUMN],
-                parsed[FRUIT_COLUMN],
-                Integer.parseInt(parsed[AMOUNT_COLUMN]));
+                parsed[operationCodeColumn],
+                parsed[fruitColumn],
+                Integer.parseInt(parsed[amountColumn]));
     }
 }

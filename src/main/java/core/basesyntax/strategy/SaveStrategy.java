@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface SaveStrategy<T, Dao> {
-    void save(T value, Dao storage);
+public interface SaveStrategy<T, S> {
+    void save(T value, S storage);
 }
