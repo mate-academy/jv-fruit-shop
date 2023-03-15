@@ -12,7 +12,7 @@ public class ReportDataImpl implements ReportData {
     public String creatReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(TITLE_FOR_RESIT).append(System.lineSeparator());
-        Storage.getFruitsMap()
+        Storage.fruits
                 .entrySet()
                 .stream()
                 .map(e -> stringBuilder.append(e.getKey())

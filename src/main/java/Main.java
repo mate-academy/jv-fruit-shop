@@ -22,6 +22,9 @@ import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 
 public class Main {
+    private static final String inputFile = "src/main/resources/InputData.csv";
+    private static final String outputFile = "src/main/resources/OutputData.csv";
+
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
         handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
@@ -35,11 +38,11 @@ public class Main {
         TransactionHandler transactionHandler = new TransactionHandlerImpl(operationStrategy);
         ReportData reportData = new ReportDataImpl();
 
-        List<String> dataFromFile = readerData.read(Path.of("src/main/resources/InputData.csv"));
+        List<String> dataFromFile = readerData.read(Path.of(inputFile));
         List<FruitTransaction> parseData = parser.parse(dataFromFile);
         transactionHandler.parse(parseData);
-        String s = reportData.creatReport();
+        String creatReport = reportData.creatReport();
         WriterData writerData = new CsvFileWriterService();
-        writerData.write(s, "src/main/resources/OutputData.csv");
+        writerData.write(creatReport, outputFile);
     }
 }
