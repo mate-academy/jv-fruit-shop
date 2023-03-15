@@ -2,7 +2,12 @@ package core.basesyntax.model;
 
 public class Fruit {
     private String name;
-    private int count;
+    private int quantity;
+
+    public Fruit(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
 
     public String getName() {
         return name;
@@ -12,11 +17,11 @@ public class Fruit {
         this.name = name;
     }
 
-    public int getCount() {
-        return count;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
