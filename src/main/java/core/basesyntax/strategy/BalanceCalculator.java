@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 public class BalanceCalculator implements TypeCalculatorStrategy {
     @Override
     public void calculate(FruitTransaction transaction) {
-        Storage.STORAGE.put(transaction.getFruit(),
+        Storage.storage.put(transaction.getFruit(),
                 transaction.getQuantity());
     }
 

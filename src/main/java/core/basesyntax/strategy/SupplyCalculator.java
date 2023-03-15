@@ -6,8 +6,8 @@ import core.basesyntax.model.FruitTransaction;
 public class SupplyCalculator implements TypeCalculatorStrategy {
     @Override
     public void calculate(FruitTransaction transaction) {
-        int prevFruitQuantity = Storage.STORAGE.get(transaction.getFruit());
-        Storage.STORAGE.put(transaction.getFruit(),
+        int prevFruitQuantity = Storage.storage.get(transaction.getFruit());
+        Storage.storage.put(transaction.getFruit(),
                 transaction.getQuantity() + prevFruitQuantity);
     }
 

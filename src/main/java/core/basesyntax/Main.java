@@ -42,6 +42,6 @@ public class Main {
         fruitCalculationService.addToStorage(fruitTransactions);
         FileWriterService fileWriterService = new FileWriterServiceImpl("src/main/resources/");
         ReportMakerService reportMakerService = new ReportMakerServiceImpl(fileWriterService);
-        reportMakerService.createReport(Storage.STORAGE);
+        reportMakerService.createReport(Storage.storage);
     }
 }

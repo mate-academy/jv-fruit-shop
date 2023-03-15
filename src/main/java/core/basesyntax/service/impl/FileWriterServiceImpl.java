@@ -15,7 +15,7 @@ public class FileWriterServiceImpl implements FileWriterService {
     }
 
     @Override
-    public File writeReportToFile(String report) {
+    public void writeReportToFile(String report) {
         String fileName = "report-" + LocalDateTime.now() + ".csv";
         File fileReport = new File(path + fileName);
         try {
@@ -24,6 +24,5 @@ public class FileWriterServiceImpl implements FileWriterService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return fileReport;
     }
 }
