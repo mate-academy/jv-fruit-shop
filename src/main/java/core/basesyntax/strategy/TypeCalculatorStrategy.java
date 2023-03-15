@@ -5,5 +5,4 @@ import java.util.function.Predicate;
 
 public interface TypeCalculatorStrategy extends Predicate<FruitTransaction.Operation> {
     void calculate(FruitTransaction transaction);
-
 }
