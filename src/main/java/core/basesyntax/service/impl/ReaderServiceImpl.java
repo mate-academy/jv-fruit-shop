@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exceptions.ReadDataFromFileException;
 import core.basesyntax.service.ReaderService;
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class ReaderServiceImpl implements ReaderService {
         try {
             return Files.readAllLines(file.toPath());
         } catch (IOException e) {
-            throw new ReadDataFromFileException("Can't read data from file " + pathToFile, e);
+            throw new RuntimeException("Can't read data from file " + pathToFile, e);
         }
     }
 }

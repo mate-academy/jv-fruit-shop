@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import core.basesyntax.exceptions.CodeNotFoundException;
-
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -68,7 +66,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new CodeNotFoundException("The passed code does not exist " + code);
+            throw new RuntimeException("The passed code does not exist " + code);
         }
     }
 }
