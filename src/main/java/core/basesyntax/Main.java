@@ -1,14 +1,21 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ConverterDataService;
+import core.basesyntax.service.CreateReportService;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.WriteDataService;
 import core.basesyntax.service.impl.ConverterDataServiceImpl;
 import core.basesyntax.service.impl.CreateReportServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriteDataServiceImpl;
 import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.operation.OperationStrategy;
 import core.basesyntax.service.operation.impl.BalanceOperationHandler;
 import core.basesyntax.service.operation.impl.ExpiredOperationHandler;
 import core.basesyntax.service.operation.impl.OperationStrategyImpl;
@@ -24,7 +31,7 @@ public class Main {
     private static final String toFile = "src/main/resources/fruitshop_report.csv";
 
     public static void main(String[] args) {
-        FruitShopDaoImpl fruitShopDao = new FruitShopDaoImpl();
+        FruitShopDao fruitShopDao = new FruitShopDaoImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
@@ -38,12 +45,12 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.EXPIRED,
                 new ExpiredOperationHandler(fruitShopDao));
 
-        ReaderServiceImpl readerService = new ReaderServiceImpl();
-        ConverterDataServiceImpl converterDataService = new ConverterDataServiceImpl();
-        FruitServiceImpl fruitService = new FruitServiceImpl();
-        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        CreateReportServiceImpl createReportService = new CreateReportServiceImpl();
-        WriteDataServiceImpl writeDataService = new WriteDataServiceImpl();
+        ReaderService readerService = new ReaderServiceImpl();
+        ConverterDataService converterDataService = new ConverterDataServiceImpl();
+        FruitService fruitService = new FruitServiceImpl();
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        CreateReportService createReportService = new CreateReportServiceImpl();
+        WriteDataService writeDataService = new WriteDataServiceImpl();
 
         String readedDataFromFile = readerService.readData(fromFile);
         List<String> convertedDataFromFile = converterDataService.convert(readedDataFromFile);
