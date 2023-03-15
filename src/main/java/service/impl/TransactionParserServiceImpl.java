@@ -3,9 +3,9 @@ package service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
-import service.FileParserService;
+import service.TransactionParserService;
 
-public class FileParserServiceImpl implements FileParserService {
+public class TransactionParserServiceImpl implements TransactionParserService {
     private static final String SEPARATOR = ",";
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT = 1;
@@ -15,6 +15,7 @@ public class FileParserServiceImpl implements FileParserService {
     public List<FruitTransaction> parseFileInformation(List<String> lines) {
         return lines.stream()
                 .map(line -> line.split(SEPARATOR))
+                .filter(this::checkBeforeParse)
                 .map(partsOfLine -> new FruitTransaction(FruitTransaction.Operation
                         .getOperationByCommand(partsOfLine[INDEX_OF_OPERATION]),
                         partsOfLine[INDEX_OF_FRUIT],
@@ -22,7 +23,7 @@ public class FileParserServiceImpl implements FileParserService {
                 .collect(Collectors.toList());
     }
 
-    public boolean checkBeforeParse(String line) {
-        return line != null && line.length() == 3;
+    public boolean checkBeforeParse(String[] lines) {
+        return lines != null && lines.length == 3;
     }
 }

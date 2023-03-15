@@ -11,7 +11,7 @@ public class PurchaseHandler implements OperationHandler {
                 || transaction.getQuantity() < 0) {
             throw new RuntimeException("Invalid information can't be add to Storage");
         }
-        if (!Storage.fruits.containsKey(transaction.getFruit())) {
+        if (!Storage.getFruits().containsKey(transaction.getFruit())) {
             throw new RuntimeException("We don't have such fruit " + transaction.getFruit()
                     + " in our shop");
         }

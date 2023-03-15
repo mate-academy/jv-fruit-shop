@@ -11,7 +11,7 @@ public class ReturnHandler implements OperationHandler {
                 || transaction.getQuantity() < 0) {
             throw new RuntimeException("Invalid information can't be add to Storage");
         }
-        if (Storage.fruits.containsKey(transaction.getFruit())) {
+        if (Storage.getFruits().containsKey(transaction.getFruit())) {
             Storage.put(transaction.getFruit(), transaction.getQuantity()
                     + Storage.get(transaction.getFruit()));
         } else {

@@ -13,7 +13,8 @@ public class FileWriterServiceImpl implements FileWriterService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(writeToFile))) {
             bufferedWriter.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write any information to the file! " + e);
+            throw new RuntimeException("Can't write any information to the file! "
+                    + outputFilePath + " " + e);
         }
     }
 }
