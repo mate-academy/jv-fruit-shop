@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TransactionServiceImpl implements TransactionService {
@@ -16,23 +15,22 @@ public class TransactionServiceImpl implements TransactionService {
     public List<FruitTransaction> createTransactions(List<String> fileLines) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String fileLine : fileLines) {
+            if (fileLine.isEmpty()) {
+                continue;
+            }
             String[] transactionInfo = fileLine.split(REGEX);
-            String operationType = transactionInfo[OPERATION_TYPE_INDEX];
-            String fruitName = transactionInfo[FRUIT_NAME_INDEX].toLowerCase();
-            int amount = Integer.parseInt(transactionInfo[QUANTITY_INDEX]);
-
-            FruitTransaction.Operation operation =
-                    Arrays.stream(FruitTransaction.Operation.values())
-                        .filter(o -> o.getCode().equalsIgnoreCase(operationType))
-                        .findFirst()
-                        .orElseThrow(() -> new RuntimeException("Wrong type of operation "
-                            + transactionInfo[OPERATION_TYPE_INDEX]));
-
-            FruitTransaction fruitTransaction = new FruitTransaction(
-                    operation,
-                    fruitName,
-                    amount);
-            fruitTransactions.add(fruitTransaction);
+            int amount = 0;
+            try {
+                amount = Integer.parseInt(transactionInfo[QUANTITY_INDEX]);
+            } catch (NumberFormatException e) {
+                throw new RuntimeException(
+                        "Invalid quantity of product from file to create transaction "
+                        + transactionInfo[QUANTITY_INDEX]);
+            }
+            fruitTransactions.add(new FruitTransaction(
+                    FruitTransaction.Operation.getByCode(transactionInfo[OPERATION_TYPE_INDEX]),
+                    transactionInfo[FRUIT_NAME_INDEX].toLowerCase(),
+                    amount));
         }
         return fruitTransactions;
     }

@@ -3,16 +3,19 @@ package core.basesyntax;
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.impl.ProductDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileWorkerService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.TransactionService;
-import core.basesyntax.service.impl.FileWorkerServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
-import core.basesyntax.strategy.impl.DefaultOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
@@ -22,22 +25,19 @@ import java.util.Map;
 
 public class Main {
     private static final String FILE_READ_FROM = "src/main/resources/data.csv";
-    private static final String BALANCE_OPERATION = "BALANCE";
-    private static final String PURCHASE_OPERATION = "PURCHASE";
-    private static final String SUPPLY_OPERATION = "SUPPLY";
-    private static final String RETURN_OPERATION = "RETURN";
+    private static final String FILE_WRITE_TO = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        Map<String, OperationHandler> handlers = new HashMap<>();
-        handlers.put(BALANCE_OPERATION, new BalanceOperationHandler());
-        handlers.put(PURCHASE_OPERATION, new PurchaseOperationHandler());
-        handlers.put(SUPPLY_OPERATION, new SupplyOperationHandler());
-        handlers.put(RETURN_OPERATION, new ReturnOperationHandler());
+        Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
+        handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
+        handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+        handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        handlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         OperationHandlerStrategy operationStrategy =
-                new OperationHandlerStrategy(handlers, new DefaultOperationHandler());
+                new OperationHandlerStrategy(handlers);
 
-        FileWorkerService fileWorker = new FileWorkerServiceImpl();
-        List<String> fileLines = fileWorker.readFromFile(FILE_READ_FROM);
+        FileReaderService fileReader = new FileReaderServiceImpl();
+        List<String> fileLines = fileReader.readFromFile(FILE_READ_FROM);
 
         TransactionService transactionService = new TransactionServiceImpl();
         List<FruitTransaction> transactions = transactionService.createTransactions(fileLines);
@@ -46,6 +46,10 @@ public class Main {
         fruitService.handleTransactions(transactions);
 
         ProductDao productDao = new ProductDaoImpl();
-        fileWorker.createReport(productDao.getAllProducts());
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        List<String> report = reportCreatorService.createReport(productDao.getAllProducts());
+
+        FileWriterService fileWriter = new FileWriterServiceImpl();
+        fileWriter.writeToFile(FILE_WRITE_TO, report);
     }
 }

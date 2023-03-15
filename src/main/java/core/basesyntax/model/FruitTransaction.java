@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -33,6 +35,14 @@ public class FruitTransaction {
 
         Operation(String code) {
             this.code = code;
+        }
+
+        public static Operation getByCode(String code) {
+            return Arrays.stream(Operation.values())
+                    .filter(o -> o.getCode().equalsIgnoreCase(code))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Wrong type of operation "
+                            + "\'" + code + "\'"));
         }
 
         public String getCode() {

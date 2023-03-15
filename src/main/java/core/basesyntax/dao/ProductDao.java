@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-import java.util.List;
+import java.util.Map;
 
 public interface ProductDao {
     void updateAmount(String fruitName, int quantity);
@@ -9,5 +9,5 @@ public interface ProductDao {
 
     void subtractAmount(String fruitName, int quantity);
 
-    List<String> getAllProducts();
+    Map<String, Integer> getAllProducts();
 }
