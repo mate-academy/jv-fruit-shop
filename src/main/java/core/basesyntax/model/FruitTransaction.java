@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import core.basesyntax.exception.FruitShopOperationException;
-
 public class FruitTransaction {
     private int quantity;
     private Operation operation;
@@ -27,7 +25,6 @@ public class FruitTransaction {
 
     public enum Operation {
         BALANCE("b"),
-        EXPIRED("e"),
         PURCHASE("p"),
         RETURN("r"),
         SUPPLY("s");
@@ -44,7 +41,7 @@ public class FruitTransaction {
 
         public static Operation getOperation(String operationCode) {
             if (operationCode == null || operationCode.equals("")) {
-                throw new FruitShopOperationException("Wrong operation sign: " + operationCode);
+                throw new RuntimeException("Wrong operation sign: " + operationCode);
             }
             for (Operation o : Operation.values()) {
                 if (o.getCode().equals(operationCode)) {

@@ -1,7 +1,6 @@
 package core.basesyntax.service.operation.impl;
 
 import core.basesyntax.dao.FruitShopDao;
-import core.basesyntax.exception.FruitShopOperationException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operation.OperationHandler;
 
@@ -15,7 +14,7 @@ public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void operation(FruitTransaction fruitTransaction) {
         if (fruitTransaction == null) {
-            throw new FruitShopOperationException("Can't do a operation, because our model is "
+            throw new RuntimeException("Can't do a operation, because our model is "
                     + "empty!");
         }
         String fruit = fruitTransaction.getFruit();

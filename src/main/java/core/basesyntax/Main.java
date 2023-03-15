@@ -4,24 +4,23 @@ import core.basesyntax.dao.FruitShopDao;
 import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ConverterDataService;
 import core.basesyntax.service.CreateReportService;
-import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriteDataService;
-import core.basesyntax.service.impl.ConverterDataServiceImpl;
 import core.basesyntax.service.impl.CreateReportServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriteDataServiceImpl;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.OperationStrategy;
+import core.basesyntax.service.operation.TransactionHandler;
 import core.basesyntax.service.operation.impl.BalanceOperationHandler;
-import core.basesyntax.service.operation.impl.ExpiredOperationHandler;
 import core.basesyntax.service.operation.impl.OperationStrategyImpl;
 import core.basesyntax.service.operation.impl.PurchaseOperationHandler;
 import core.basesyntax.service.operation.impl.ReturnOperationHandler;
 import core.basesyntax.service.operation.impl.SupplyOperationHandler;
+import core.basesyntax.service.operation.impl.TransactionHandlerImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,25 +41,18 @@ public class Main {
                 new ReturnOperationHandler(fruitShopDao));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler(fruitShopDao));
-        operationHandlerMap.put(FruitTransaction.Operation.EXPIRED,
-                new ExpiredOperationHandler(fruitShopDao));
 
         ReaderService readerService = new ReaderServiceImpl();
-        ConverterDataService converterDataService = new ConverterDataServiceImpl();
-        FruitService fruitService = new FruitServiceImpl();
+        ParseService fruitService = new FruitServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        TransactionHandler transactionHandler = new TransactionHandlerImpl();
         CreateReportService createReportService = new CreateReportServiceImpl();
         WriteDataService writeDataService = new WriteDataServiceImpl();
 
         String readedDataFromFile = readerService.readData(fromFile);
-        List<String> convertedDataFromFile = converterDataService.convert(readedDataFromFile);
         List<FruitTransaction> fruitTransactionList =
-                fruitService.addNewFruit(convertedDataFromFile);
-        for (int i = 0; i < fruitTransactionList.size(); i++) {
-            OperationHandler operationHandler = operationStrategy.get(fruitTransactionList.get(i)
-                    .getOperation());
-            operationHandler.operation(fruitTransactionList.get(i));
-        }
+                fruitService.parse(readedDataFromFile);
+        transactionHandler.parse(fruitTransactionList, operationStrategy);
         String report = createReportService.createReport(Storage.fruits);
         writeDataService.writeDataToFile(report, toFile);
     }
