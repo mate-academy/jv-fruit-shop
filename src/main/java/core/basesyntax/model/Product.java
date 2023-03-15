@@ -1,10 +1,10 @@
 package core.basesyntax.model;
 
-public class Fruit {
+public class Product {
     private String name;
     private int quantity;
 
-    public Fruit(String name, int quantity) {
+    public Product(String name, int quantity) {
         this.name = name;
         this.quantity = quantity;
     }

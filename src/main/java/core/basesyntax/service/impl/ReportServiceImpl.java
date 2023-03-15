@@ -1,22 +1,28 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.db.ProductStorage;
+import core.basesyntax.model.Product;
 import core.basesyntax.service.ReportService;
-import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
     private static final String REPORT_HEADER = "fruit,quantity";
     private static final String SEPARATOR = ",";
 
+    private final ProductStorage productStorage;
+
+    public ReportServiceImpl(ProductStorage productStorage) {
+        this.productStorage = productStorage;
+    }
+
     @Override
-    public String generateReport(List<Fruit> fruitList) {
+    public String generateReport() {
         StringBuilder report = new StringBuilder();
         report.append(REPORT_HEADER)
                 .append(System.lineSeparator());
-        for (Fruit fruit : fruitList) {
-            report.append(fruit.getName())
+        for (Product product : productStorage.getAll()) {
+            report.append(product.getName())
                     .append(SEPARATOR)
-                    .append(fruit.getQuantity())
+                    .append(product.getQuantity())
                     .append(System.lineSeparator());
         }
         return report.toString();
