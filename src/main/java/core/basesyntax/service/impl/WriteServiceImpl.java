@@ -1,15 +1,12 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.WriteService;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import service.WriteService;
 
 public class WriteServiceImpl implements WriteService {
-    private static final String OUTPUT_HEADER = "fruit,quantity";
-    private static final String NEW_LINE = "\n";
-    private static final String SEPARATOR = ",";
 
     @Override
     public void writeToFile(String filePath, String report) {

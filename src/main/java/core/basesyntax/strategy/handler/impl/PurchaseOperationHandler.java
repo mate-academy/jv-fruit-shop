@@ -1,10 +1,10 @@
-package strategy.impl;
+package core.basesyntax.strategy.handler.impl;
 
-import db.Storage;
-import model.TransactionDto;
-import strategy.StrategyOperation;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.TransactionDto;
+import core.basesyntax.strategy.handler.OperationHandler;
 
-public class PurchaseOperation implements StrategyOperation {
+public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(TransactionDto transactionDto) {
         int newQuantity = Storage.storage.get(transactionDto.getFruitName())

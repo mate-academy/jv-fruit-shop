@@ -1,11 +1,11 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
     @Override
@@ -19,9 +19,6 @@ public class ReaderServiceImpl implements ReaderService {
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + e);
-        }
-        if (result.isEmpty()) {
-            throw new RuntimeException(String.format("File is empty: %s", filePath));
         }
         return result;
     }

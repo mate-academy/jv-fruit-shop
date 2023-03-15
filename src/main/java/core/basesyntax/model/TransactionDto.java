@@ -1,4 +1,4 @@
-package model;
+package core.basesyntax.model;
 
 public class TransactionDto {
     private Operation operation;
