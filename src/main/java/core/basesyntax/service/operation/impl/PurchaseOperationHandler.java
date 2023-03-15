@@ -7,6 +7,7 @@ import core.basesyntax.service.operation.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private FruitShopDaoImpl fruitShopDao;
+
     @Override
     public void operation(FruitTransaction fruitTransaction) {
         int amount = Storage.fruits.get(fruitTransaction.getFruit());

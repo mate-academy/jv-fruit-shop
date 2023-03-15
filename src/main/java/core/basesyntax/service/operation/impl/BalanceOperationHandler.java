@@ -6,7 +6,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operation.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
-    FruitShopDaoImpl fruitShopDao;
+    private FruitShopDaoImpl fruitShopDao;
+
     @Override
     public void operation(FruitTransaction fruitTransaction) {
         fruitShopDao.add(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
