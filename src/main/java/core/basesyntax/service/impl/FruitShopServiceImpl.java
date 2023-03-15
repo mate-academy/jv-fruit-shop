@@ -1,4 +1,4 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -15,11 +15,11 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public Map<String, Integer> report(List<FruitTransaction> parsed) {
+    public Map<String, Integer> finalReport(List<FruitTransaction> parsed) {
         if (parsed == null) {
             throw new RuntimeException("None of the arguments must be null");
         }
-        parsed.forEach(t -> operationStrategy.get(t.getOperation()).operation(t));
+        parsed.forEach(t -> operationStrategy.get(t.getOperation()).operate(t));
         return Storage.getMap();
     }
 }

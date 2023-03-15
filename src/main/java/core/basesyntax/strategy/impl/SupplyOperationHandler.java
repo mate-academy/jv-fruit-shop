@@ -1,4 +1,4 @@
-package core.basesyntax.operations;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -8,7 +8,7 @@ public class SupplyOperationHandler implements OperationHandler {
     private static final int DEFAULT_QUANTITY = 0;
 
     @Override
-    public void operation(FruitTransaction fruitTransaction) {
+    public void operate(FruitTransaction fruitTransaction) {
         int amount = Storage.getOrDefault(fruitTransaction.getFruit(), DEFAULT_QUANTITY);
         Storage.put(fruitTransaction.getFruit(), amount + fruitTransaction.getQuantity());
     }

@@ -1,22 +1,22 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.FruitShopServiceImpl;
-import core.basesyntax.impl.ReaderServiceImpl;
-import core.basesyntax.impl.ReportServiceImpl;
-import core.basesyntax.impl.TransactionParserServiceImpl;
-import core.basesyntax.impl.WriterServiceImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operations.BalanceOperationHandler;
-import core.basesyntax.operations.OperationStrategyImpl;
-import core.basesyntax.operations.PurchaseOperationHandler;
-import core.basesyntax.operations.ReturnOperationHandler;
-import core.basesyntax.operations.SupplyOperationHandler;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.TransactionParserService;
 import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionParserServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class DataProcessor {
         WriterService writerService = new WriterServiceImpl();
         List<FruitTransaction> parsed =
                 transactionParserService.parse(readerService.readFrom(INPUT_FILE));
-        Map<String, Integer> preparedMap = fruitShopService.report(parsed);
+        Map<String, Integer> preparedMap = fruitShopService.finalReport(parsed);
         String preparedReport = reportService.makeReport(preparedMap);
         writerService.write(preparedReport, SUM_FILE);
     }

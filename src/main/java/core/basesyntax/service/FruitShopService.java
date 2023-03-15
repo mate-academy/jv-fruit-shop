@@ -5,5 +5,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface FruitShopService {
-    Map<String, Integer> report(List<FruitTransaction> parsed);
+    Map<String, Integer> finalReport(List<FruitTransaction> parsed);
 }

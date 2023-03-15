@@ -1,4 +1,4 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParserService;
@@ -26,8 +26,7 @@ public class TransactionParserServiceImpl implements TransactionParserService {
         if (!isColumnsValid(data.get(0))) {
             throw new RuntimeException("Incorrect format of file");
         }
-        return data
-                .stream()
+        return data.stream()
                 .skip(1)
                 .map(el -> {
                     if (!isRowValid(el)) {

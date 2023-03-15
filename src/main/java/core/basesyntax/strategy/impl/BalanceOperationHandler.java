@@ -1,4 +1,4 @@
-package core.basesyntax.operations;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override
-    public void operation(FruitTransaction fruitTransaction) {
+    public void operate(FruitTransaction fruitTransaction) {
         Storage.put(fruitTransaction.getFruit(),fruitTransaction.getQuantity());
     }
 }
