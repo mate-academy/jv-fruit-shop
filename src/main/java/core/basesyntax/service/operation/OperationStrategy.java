@@ -6,6 +6,5 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface OperationStrategy {
-    //Map<FruitTransaction.Operation, OperationHandler> operationStrategy = new HashMap<>();
     OperationHandler get(FruitTransaction.Operation operation);
 }
