@@ -47,7 +47,7 @@ public class Main {
 
         ProductDao productDao = new ProductDaoImpl();
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
-        List<String> report = reportCreatorService.createReport(productDao.getAllProducts());
+        String report = reportCreatorService.createReport(productDao.getAllProducts());
 
         FileWriterService fileWriter = new FileWriterServiceImpl();
         fileWriter.writeToFile(FILE_WRITE_TO, report);
