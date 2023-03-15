@@ -1,8 +1,8 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 
 public interface FruitShopDao {
-    void add(Fruit fruit);
-    Fruit get(Fruit.TYPE type);
+    void add(FruitTransaction fruit);
+    FruitTransaction get(FruitTransaction.TYPE type);
 }

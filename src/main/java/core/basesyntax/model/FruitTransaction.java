@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-public class Fruit {
+public class FruitTransaction {
     private Integer value;
     private ACTIVITY activity;
     private TYPE type;
