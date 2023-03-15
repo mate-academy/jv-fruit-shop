@@ -51,5 +51,14 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation getOperation(String operationCode) {
+            for (Operation o : Operation.values()) {
+                if (o.equals(operationCode)) {
+                    return o;
+                }
+            }
+            throw new RuntimeException("Cannot find this operation: " + operationCode);
+        }
     }
 }
