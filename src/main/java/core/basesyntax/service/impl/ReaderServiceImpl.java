@@ -11,9 +11,7 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromFile(String pathToFile) {
         File file = new File(pathToFile);
         try {
-            List<String> lines = Files.readAllLines(file.toPath());
-            lines.remove(0);
-            return lines;
+            return Files.readAllLines(file.toPath());
         } catch (FileNotFoundException e){
             throw new RuntimeException("File not found", e);
         } catch (IOException e) {
