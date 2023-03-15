@@ -8,12 +8,10 @@ import java.io.IOException;
 public class WriteServiceImpl implements WriteService {
     @Override
     public void writeToFile(String result, String nameFileTo) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(nameFileTo));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nameFileTo))) {
             writer.write(result);
-            writer.close();
         } catch (IOException e) {
-            throw new RuntimeException("Cant write data to file " + nameFileTo + " " + e);
+            throw new RuntimeException("Can't write data to file " + nameFileTo, e);
         }
     }
 }

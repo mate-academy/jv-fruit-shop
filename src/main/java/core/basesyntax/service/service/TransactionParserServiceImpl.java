@@ -1,11 +1,10 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service.service;
 
 import core.basesyntax.service.model.FruitTransaction;
-import core.basesyntax.service.service.CreateTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CreateTransactionImpl implements CreateTransaction {
+public class TransactionParserServiceImpl implements TransactionParserService {
     public static final int INDEX_OPTION = 0;
     public static final int INDEX_FRUIT_NAME = 1;
     public static final int INDEX_VALUE = 2;

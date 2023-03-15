@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.db.Storage;
-import core.basesyntax.service.service.ResultService;
+import core.basesyntax.service.service.ReportService;
 import java.util.Map;
 
-public class ResultServiceImpl implements ResultService {
+public class ReportServiceImpl implements ReportService {
     private static final String TITLE_OF_REPORT = "fruit,quantity";
     private static final String COMA = ",";
 
     @Override
-    public String createResult() {
+    public String createReport() {
         StringBuilder result = new StringBuilder();
         result.append(TITLE_OF_REPORT);
         for (Map.Entry<String, Integer> entry: Storage.storage.entrySet()) {

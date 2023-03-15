@@ -21,7 +21,7 @@ public class ReaderServiceImpl implements ReaderService {
                 text = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read information from file " + fileName);
+            throw new RuntimeException("Can't read information from file " + fileName, e);
         }
         return informationFromFile.stream()
                 .map(e -> e.split(SPLIT))

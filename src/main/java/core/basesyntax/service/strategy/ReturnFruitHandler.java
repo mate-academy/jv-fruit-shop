@@ -1,8 +1,8 @@
-package core.basesyntax.service.operation;
+package core.basesyntax.service.strategy;
 
 import core.basesyntax.service.model.FruitTransaction;
 
-public class ReturnFruitService implements FruitService {
+public class ReturnFruitHandler implements FruitHandler {
     @Override
     public void apply(FruitTransaction fruitTransaction) {
         int balance = storage.storage.get(fruitTransaction.getFruit());
