@@ -7,14 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShopDaoImpl implements FruitShopDao {
+
     @Override
     public void add(String fruit, Integer value) {
         Storage.fruits.put(fruit, value);
     }
-
-    @Override
-    public Map<String, Integer> get() {
-        return Storage.fruits;
-    }
-
 }
