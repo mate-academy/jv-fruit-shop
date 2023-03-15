@@ -1,14 +1,20 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.FruitTransaction;
 import core.basesyntax.database.StorageOfFruits;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationImpl implements OperationHandler {
     @Override
     public void operation(FruitTransaction fruitTransaction) {
-        int countOfFruit = StorageOfFruits.get(fruitTransaction.getFruit());
-        StorageOfFruits.add(fruitTransaction.getFruit(),
-                countOfFruit - fruitTransaction.getQuantity());
+        int countOfFruit = StorageOfFruits.fruitStorage.get(fruitTransaction.getFruit());
+        if (countOfFruit >= fruitTransaction.getQuantity()) {
+            StorageOfFruits.fruitStorage.put(fruitTransaction.getFruit(),
+                    countOfFruit - fruitTransaction.getQuantity());
+        } else {
+            throw new RuntimeException("Not enough "
+                    + fruitTransaction.getFruit() + " in storage "
+                    + countOfFruit + ", want to buy " + fruitTransaction.getQuantity());
+        }
     }
 }

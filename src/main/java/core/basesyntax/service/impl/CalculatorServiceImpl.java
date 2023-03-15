@@ -1,22 +1,22 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.service.FruitService;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.CalculatorService;
 import core.basesyntax.strategy.ChooseStrategyHandler;
 import core.basesyntax.strategy.impl.ChooseStrategyHandlerImpl;
 import java.util.List;
 
-public class FruitServiceImpl implements FruitService {
+public class CalculatorServiceImpl implements CalculatorService {
     private ChooseStrategyHandler chooseStrategyHandler;
 
-    public FruitServiceImpl(ChooseStrategyHandlerImpl chooseStrategyHandlerImpl) {
+    public CalculatorServiceImpl(ChooseStrategyHandlerImpl chooseStrategyHandlerImpl) {
         this.chooseStrategyHandler = chooseStrategyHandlerImpl;
     }
 
     @Override
-    public void chooseStrategy(List<FruitTransaction> transactionList) {
+    public void calculate(List<FruitTransaction> transactionList) {
         for (FruitTransaction fruitTransaction : transactionList) {
-            chooseStrategyHandler.get(fruitTransaction).operation(fruitTransaction);
+            chooseStrategyHandler.getHandler(fruitTransaction).operation(fruitTransaction);
         }
     }
 }

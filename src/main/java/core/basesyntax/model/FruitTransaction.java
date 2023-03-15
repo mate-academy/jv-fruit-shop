@@ -1,11 +1,17 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
-import java.util.Objects;
+import java.util.Arrays;
 
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
+
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
 
     public Operation getOperation() {
         return operation;
@@ -48,12 +54,11 @@ public class FruitTransaction {
         }
 
         public static Operation getOperation(String s) {
-            for (Operation o : new Operation[]{BALANCE, SUPPLY, PURCHASE, RETURN}) {
-                if (Objects.equals(o.getCode(), s)) {
-                    return o;
-                }
-            }
-            throw new RuntimeException("Can`t find operation with code: " + s);
+            return Arrays.stream(Operation.values())
+                    .filter(t -> t.getCode().equals(s.trim()))
+                    .findFirst()
+                    .orElseThrow(() ->
+                            new RuntimeException("Can`t find operation with code: " + s));
         }
     }
 }

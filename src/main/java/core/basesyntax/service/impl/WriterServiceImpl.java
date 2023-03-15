@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.WriteToFile;
+import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteToFileImpl implements WriteToFile {
+public class WriterServiceImpl implements WriterService {
 
     @Override
     public void write(String resultData, String nameOfFile) {
@@ -14,7 +14,7 @@ public class WriteToFileImpl implements WriteToFile {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(resultData);
         } catch (IOException e) {
-            throw new RuntimeException("Cant write to file", e);
+            throw new RuntimeException("Can`t write to file", e);
         }
     }
 
