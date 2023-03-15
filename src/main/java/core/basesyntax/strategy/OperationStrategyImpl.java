@@ -1,19 +1,27 @@
 package core.basesyntax.strategy;
 
-import java.util.List;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.operation.BalanceOperationHandler;
+import core.basesyntax.strategy.operation.OperationHandler;
+import core.basesyntax.strategy.operation.PurchaseOperationHandler;
+import core.basesyntax.strategy.operation.ReturnOperationHandler;
+import core.basesyntax.strategy.operation.SupplyOperationHandler;
+import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private static final int OPERATION_INDEX = 0;
-    private static final int FRUIT_INDEX = 1;
-    private static final int QUANTITY_INDEX = 2;
+    private static final Map<FruitTransaction.Operation,
+            OperationHandler> operations = new HashMap<>();
 
-    @Override
-    public void accept(List<String[]> data, Map<String, OperationHandler> operationHandlerMap) {
-        for (String[] value : data) {
-            operationHandlerMap.get(value[OPERATION_INDEX])
-                    .accept(value[FRUIT_INDEX], value[QUANTITY_INDEX]);
-        }
+    public OperationStrategyImpl() {
+        operations.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
+        operations.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        operations.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+        operations.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
     }
 
+    @Override
+    public OperationHandler getHandlerByTransaction(FruitTransaction transactions) {
+        return operations.get(transactions.getOperation());
+    }
 }

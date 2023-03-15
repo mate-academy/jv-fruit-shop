@@ -1,38 +1,37 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataParseService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.TransactionProcessingService;
 import core.basesyntax.service.impl.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileWriter;
 import core.basesyntax.service.impl.DataParseServiceImpl;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.strategy.operation.BalanceOperationHandler;
-import core.basesyntax.strategy.operation.PurchaseOperationHandler;
-import core.basesyntax.strategy.operation.ReturnOperationHandler;
-import core.basesyntax.strategy.operation.SupplyOperationHandler;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
+import core.basesyntax.service.impl.TransactionProcessingServiceImpl;
 import java.io.File;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
-    private static final File ACTIVITIES = new File("src/main/resources/activities.csv");
-    private static final File REPORT = new File("src/main/resources/report.csv");
-    private static final Map<String, OperationHandler> OPERATIONS = new HashMap<>();
+    private static final File activitiesCsv = new File("src/main/resources/activities.csv");
+    private static final File reportCsv = new File("src/main/resources/report.csv");
 
     public static void main(String[] args) {
-        List<String> data = new CsvFileReader().readFromFile(ACTIVITIES);
-        List<String[]> parsedData = new DataParseServiceImpl().parseData(data);
+        FileReaderService csvFileReader = new CsvFileReader();
+        List<String> data = csvFileReader.readFromFile(activitiesCsv);
 
-        fill();
-        new OperationStrategyImpl().accept(parsedData, OPERATIONS);
+        DataParseService dataParseService = new DataParseServiceImpl();
+        List<FruitTransaction> transactions = dataParseService.parseData(data);
 
-        new CsvFileWriter().writeToFile(REPORT);
-    }
+        TransactionProcessingService transactionProcessing = new TransactionProcessingServiceImpl();
+        transactionProcessing.accept(transactions);
 
-    public static void fill() {
-        OPERATIONS.put("b", new BalanceOperationHandler());
-        OPERATIONS.put("s", new SupplyOperationHandler());
-        OPERATIONS.put("p", new PurchaseOperationHandler());
-        OPERATIONS.put("r", new ReturnOperationHandler());
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        List<String> report = reportCreatorService.getReport();
+
+        FileWriterService csvFileWriter = new CsvFileWriter();
+        csvFileWriter.writeToFile(reportCsv, report);
     }
 }

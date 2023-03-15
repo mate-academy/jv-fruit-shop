@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
-import java.util.List;
-import java.util.Map;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.operation.OperationHandler;
 
 public interface OperationStrategy {
-    void accept(List<String[]> data, Map<String, OperationHandler> operationHandlerMap);
+    OperationHandler getHandlerByTransaction(FruitTransaction transaction);
 }
