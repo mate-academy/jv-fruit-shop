@@ -15,7 +15,6 @@ import core.basesyntax.service.operation.impl.OperationStrategyImpl;
 import core.basesyntax.service.operation.impl.PurchaseOperationHandler;
 import core.basesyntax.service.operation.impl.ReturnOperationHandler;
 import core.basesyntax.service.operation.impl.SupplyOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,9 +27,12 @@ public class Main {
         FruitShopDaoImpl fruitShopDao = new FruitShopDaoImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitShopDao));
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitShopDao));
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitShopDao));
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(fruitShopDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(fruitShopDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(fruitShopDao));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler(fruitShopDao));
         operationHandlerMap.put(FruitTransaction.Operation.EXPIRED,
@@ -48,7 +50,8 @@ public class Main {
         List<FruitTransaction> fruitTransactionList =
                 fruitService.addNewFruit(convertedDataFromFile);
         for (int i = 0; i < fruitTransactionList.size(); i++) {
-            OperationHandler operationHandler = operationStrategy.get(fruitTransactionList.get(i).getOperation());
+            OperationHandler operationHandler = operationStrategy.get(fruitTransactionList.get(i)
+                    .getOperation());
             operationHandler.operation(fruitTransactionList.get(i));
         }
         String report = createReportService.createReport(Storage.fruits);
