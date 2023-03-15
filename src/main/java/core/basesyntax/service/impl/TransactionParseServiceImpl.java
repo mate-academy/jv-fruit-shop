@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class TransactionParseServiceImpl implements TransactionParseService {
     public static final int FIRST_LINE_INDEX = 0;
-    public static final String DEFAULT_FIRST_LINE = "type,fruit,quantity";
+    public static final String DEFAULT_TITLE = "type,fruit,quantity";
     public static final int TYPE_INDEX = 0;
     public static final int FRUIT_INDEX = 1;
     public static final int QUANTITY_INDEX = 2;
@@ -28,7 +28,7 @@ public class TransactionParseServiceImpl implements TransactionParseService {
     }
 
     private boolean isFirsRowValid(List<String> lines) {
-        return lines.stream().anyMatch(l -> l.equals(DEFAULT_FIRST_LINE));
+        return lines.get(FIRST_LINE_INDEX).equals(DEFAULT_TITLE);
     }
 
     private FruitTransaction rowToFruitTransaction(String line) {
