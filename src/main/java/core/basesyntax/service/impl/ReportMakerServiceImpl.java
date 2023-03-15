@@ -8,7 +8,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
     public String createReport() {
         StringBuilder report = new StringBuilder("fruit,quantity\n");
         Storage.FRUIT_STORAGE
-                .forEach((key, value) -> report.append(key).append(",").append(value).append("\n"));
+                .forEach((key, value) -> report.append(key).append(",").append(value).append(System.lineSeparator()));
         return report.toString().trim();
     }
 }
