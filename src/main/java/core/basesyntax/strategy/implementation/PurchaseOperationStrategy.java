@@ -23,6 +23,5 @@ public class PurchaseOperationStrategy implements OperationStrategy {
                     + " fruits, but there are only " + amount + " fruits in the store");
         }
         FruitStorage.put(fruit, amount - quantity);
-
     }
 }

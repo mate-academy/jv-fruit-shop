@@ -5,8 +5,7 @@ import core.basesyntax.service.FruitShopReportService;
 import java.util.Set;
 
 public class FruitShopReportServiceImpl implements FruitShopReportService {
-
-    private static final String REPORT_HEADER = "fruit, quantity\n";
+    private static final String REPORT_HEADER = "fruit, quantity" + System.lineSeparator();
     private static final String REPORT_SEPARATOR = ", ";
     private static final String REPORT_NEW_LINE = "\n";
 
