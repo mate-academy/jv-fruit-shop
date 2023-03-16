@@ -34,10 +34,9 @@ public class Main {
         List<String> stringsFromFile = readFromFile.readFromFile(FILE_PATH);
         List<FruitTransaction> fruitTransactions = parseFile.parse(stringsFromFile);
 
-        for (FruitTransaction fruit : fruitTransactions) {
-            OperationHandler opHandler = strategy.get(fruit.getOperation());
-            opHandler.initializeOperation(fruit);
-        }
+        fruitTransactions.stream()
+                .forEach(fruit -> strategy.get(fruit.getOperation()).initializeOperation(fruit));
+
         String finalReport = reportService.generateReport();
         writeToFile.writeInFile(OUTPUT_FILE_PATH, finalReport);
     }
