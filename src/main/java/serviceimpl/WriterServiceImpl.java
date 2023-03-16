@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import service.WriterService;
 
-public class WriterImpl implements WriterService {
+public class WriterServiceImpl implements WriterService {
 
     @Override
     public void write(File outputFileName, String report) {

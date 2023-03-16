@@ -14,22 +14,24 @@ import service.ReaderService;
 import service.ReportService;
 import service.TransactionParserService;
 import service.WriterService;
-import serviceimpl.ReaderImpl;
-import serviceimpl.ReportImpl;
-import serviceimpl.TransactionParserImpl;
-import serviceimpl.WriterImpl;
-import strategy.StrategyChoosing;
-import strategy.StrategyImpl;
+import serviceimpl.ReaderServiceImpl;
+import serviceimpl.ReportServiceImpl;
+import serviceimpl.TransactionParserServiceImpl;
+import serviceimpl.WriterServiceImpl;
+import strategy.OperationStrategy;
+import strategy.OperationStrategyImpl;
 
 public class Main {
     private static final File INPUT_FILE = new File("src/main/java/resources/input.csv");
     private static final File OUTPUT_FILE = new File("src/main/java/resources/output.csv");
-    private static ReaderService reader = new ReaderImpl();
-    private static WriterService writer = new WriterImpl();
-    private static ReportService reporting = new ReportImpl();
+    private static final int FIRST_VALID_LINE = 1;
+    private static ReaderService reader = new ReaderServiceImpl();
+    private static WriterService writer = new WriterServiceImpl();
+
+    private static ReportService reporting = new ReportServiceImpl();
     private static Map<FruitTransaction.Operation, OperationTypeHandler> strategy = new HashMap<>();
-    private static StrategyChoosing strategyChoosing = new StrategyImpl(strategy);
-    private static TransactionParserService parser = new TransactionParserImpl(strategyChoosing);
+    private static OperationStrategy operationStrategy = new OperationStrategyImpl(strategy);
+    private static TransactionParserService parser = new TransactionParserServiceImpl();
 
     public static void main(String[] args) {
         strategy.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
@@ -38,7 +40,11 @@ public class Main {
         strategy.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
 
         List<String> content = reader.read(INPUT_FILE);
-        parser.saveToStorage(content);
+        for (int i = FIRST_VALID_LINE; i < content.size(); i++) {
+            FruitTransaction fruitTransaction = parser.saveToStorage(content.get(i));
+            operationStrategy.getHandlerByOperation(fruitTransaction.getOperation())
+                    .handle(fruitTransaction);
+        }
         String report = reporting.newReport();
         writer.write(OUTPUT_FILE, report);
     }

@@ -4,7 +4,7 @@ import db.Storage;
 import java.util.Map;
 import service.ReportService;
 
-public class ReportImpl implements ReportService {
+public class ReportServiceImpl implements ReportService {
     private static final String TITLE = "fruit,quantity";
     private static final String DATA_SEPARATOR = ",";
 

@@ -6,7 +6,7 @@ import model.FruitTransaction;
 public class PurchaseHandler implements OperationTypeHandler {
 
     @Override
-    public void handler(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         String key = fruitTransaction.getFruit();
         int value = fruitTransaction.getQuantity();
         Integer currentQuantity = Storage.storage.get(key);
@@ -19,8 +19,7 @@ public class PurchaseHandler implements OperationTypeHandler {
         }
         if (value < 0) {
             throw new RuntimeException("Wrong input: [" + value + "]. Can't be negative!");
-        } else {
-            Storage.storage.put(key, currentQuantity - value);
         }
+        Storage.storage.put(key, currentQuantity - value);
     }
 }
