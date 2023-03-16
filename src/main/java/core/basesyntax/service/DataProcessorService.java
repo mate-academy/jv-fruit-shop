@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.util.List;
 
-public interface ProcessDataFromFile {
+public interface DataProcessorService {
     List<String[]> processData(List<String> data);
 }

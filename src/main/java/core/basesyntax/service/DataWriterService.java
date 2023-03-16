@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.util.Map;
 
-public interface WriteReportToFile {
+public interface DataWriterService {
     void writeData(Map<String, Integer> fruits, String filePath);
 }

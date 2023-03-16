@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ProcessDataFromFile;
+import core.basesyntax.service.DataProcessorService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProcessDataFromFileImpl implements ProcessDataFromFile {
+public class DataProcessorServiceImpl implements DataProcessorService {
     private static final String SEPARATOR = ",";
 
     @Override

@@ -2,12 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.ProcessDataFromFile;
-import core.basesyntax.service.ReadDataFromFile;
-import core.basesyntax.service.WriteReportToFile;
-import core.basesyntax.service.impl.ProcessDataFromFileImpl;
-import core.basesyntax.service.impl.ReadDataFromFileImpl;
-import core.basesyntax.service.impl.WriteReportToFileImpl;
+import core.basesyntax.service.DataProcessorService;
+import core.basesyntax.service.DataReaderService;
+import core.basesyntax.service.DataWriterService;
+import core.basesyntax.service.StrategyApplicationService;
+import core.basesyntax.service.impl.DataProcessorServiceImpl;
+import core.basesyntax.service.impl.DataReaderServiceImpl;
+import core.basesyntax.service.impl.DataWriterServiceImpl;
+import core.basesyntax.service.impl.StrategyApplicationServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handlers.BalanceOperationHandler;
@@ -18,13 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final Integer OPERATION_INDEX = 0;
-    private static final Integer FRUIT_INDEX = 1;
-    private static final Integer QUANTITY_INDEX = 2;
     private static final String FILE_PATH_TO_READ =
-            "src/main/java/core/basesyntax/resources/input.csv";
+            "src/main/resources/input.csv";
     private static final String FILE_PATH_TO_WRITE =
-            "src/main/java/core/basesyntax/resources/report.csv";
+            "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         OperationStrategy operationStrategy = new OperationStrategyImpl(Map.of(
@@ -34,18 +33,17 @@ public class Main {
                 Operation.RETURN, new ReturnOperationHandler()
         ));
 
-        ReadDataFromFile readDataFromFile = new ReadDataFromFileImpl();
+        DataReaderService readDataFromFile = new DataReaderServiceImpl();
         final List<String> readData = readDataFromFile.readData(FILE_PATH_TO_READ);
 
-        ProcessDataFromFile processDataFromFile = new ProcessDataFromFileImpl();
+        DataProcessorService processDataFromFile = new DataProcessorServiceImpl();
         final List<String[]> processData = processDataFromFile.processData(readData);
 
-        for (String[] item : processData) {
-            operationStrategy.get(Operation.getByCode(item[OPERATION_INDEX]))
-                    .apply(item[FRUIT_INDEX], Integer.parseInt(item[QUANTITY_INDEX]));
-        }
+        StrategyApplicationService strategyApplicationService =
+                new StrategyApplicationServiceImpl(operationStrategy);
+        strategyApplicationService.applyOperationStrategy(processData);
 
-        WriteReportToFile writeReportToFile = new WriteReportToFileImpl();
+        DataWriterService writeReportToFile = new DataWriterServiceImpl();
         writeReportToFile.writeData(Storage.fruits, FILE_PATH_TO_WRITE);
     }
 }
