@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.FruitShopException;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -51,7 +53,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            return null;
+            throw new FruitShopException("Can`t find operation!");
         }
     }
 }
