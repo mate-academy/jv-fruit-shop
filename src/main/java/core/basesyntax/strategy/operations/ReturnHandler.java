@@ -1,6 +1,6 @@
 package core.basesyntax.strategy.operations;
 
-import core.basesyntax.db.FruitMap;
+import core.basesyntax.db.Storage;
 import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handlers.OperationHandler;
@@ -15,12 +15,12 @@ public class ReturnHandler implements OperationHandler {
             throw new FruitShopException(fruitTransaction.getQuantity()
                     + " is invalid quantity!");
         }
-        if (!FruitMap.fruitMap.containsKey(fruitTransaction.getFruit())) {
+        if (!Storage.storage.containsKey(fruitTransaction.getFruit())) {
             throw new FruitShopException(fruitTransaction.getFruit()
                     + " don`t exist in data base!");
         }
-        FruitMap.fruitMap.put(fruitTransaction.getFruit(),
-                FruitMap.fruitMap.get(fruitTransaction.getFruit())
+        Storage.storage.put(fruitTransaction.getFruit(),
+                Storage.storage.get(fruitTransaction.getFruit())
                         + fruitTransaction.getQuantity());
     }
 }

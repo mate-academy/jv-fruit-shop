@@ -13,7 +13,7 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
         try {
             return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            throw new FruitShopException("Can`t read from file!");
+            throw new FruitShopException("Can`t read from file: " + fileName);
         }
     }
 }

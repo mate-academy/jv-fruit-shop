@@ -14,7 +14,7 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
         try {
             Files.writeString(Path.of(fileName), message);
         } catch (IOException e) {
-            throw new FruitShopException("Can`t write in file!");
+            throw new FruitShopException("Can`t write in file: " + fileName);
         }
     }
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.strategy.operations;
 
-import core.basesyntax.db.FruitMap;
+import core.basesyntax.db.Storage;
 import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handlers.OperationHandler;
@@ -14,8 +14,8 @@ public class SupplyHandler implements OperationHandler {
         if (fruitTransaction.getQuantity() <= 0) {
             throw new FruitShopException(fruitTransaction.getQuantity() + " is invalid quantity!");
         }
-        FruitMap.fruitMap.put(fruitTransaction.getFruit(),
-                FruitMap.fruitMap.get(fruitTransaction.getFruit())
+        Storage.storage.put(fruitTransaction.getFruit(),
+                Storage.storage.get(fruitTransaction.getFruit())
                         + fruitTransaction.getQuantity());
     }
 }

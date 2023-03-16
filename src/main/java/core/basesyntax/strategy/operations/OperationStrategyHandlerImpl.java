@@ -8,8 +8,8 @@ import java.util.Map;
 public class OperationStrategyHandlerImpl implements OperationStrategyHandler {
     private static Map<FruitTransaction.Operation, OperationHandler> operationHanlderMap;
 
-    public OperationStrategyHandlerImpl(Map<FruitTransaction.Operation, OperationHandler>
-                                     operationHanlderMap) {
+    public OperationStrategyHandlerImpl(
+            Map<FruitTransaction.Operation, OperationHandler> operationHanlderMap) {
         this.operationHanlderMap = operationHanlderMap;
     }
 
