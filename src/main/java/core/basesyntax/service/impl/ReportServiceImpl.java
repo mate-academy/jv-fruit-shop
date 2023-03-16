@@ -9,7 +9,7 @@ public class ReportServiceImpl implements ReportService {
     private static final String SEPARATOR = ",";
 
     @Override
-    public String report() {
+    public String createReport() {
         StringBuilder result = new StringBuilder();
         result.append(TITLE).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {

@@ -44,7 +44,7 @@ public class Main {
         List<String> inputData = readerService.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> fruitTransactions = parseDataService.parseData(inputData);
         transactionHandler.parse(fruitTransactions);
-        String report = reportService.report();
+        String report = reportService.createReport();
         writerService.writeToFile(OUT_FILE_PATH, report);
     }
 
