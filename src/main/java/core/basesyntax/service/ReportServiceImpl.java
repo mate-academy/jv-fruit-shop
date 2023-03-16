@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.FruitMap;
+import core.basesyntax.service.interfaces.ReportService;
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {

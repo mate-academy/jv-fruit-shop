@@ -5,12 +5,12 @@ import core.basesyntax.service.CsvFileReaderServiceImpl;
 import core.basesyntax.service.CsvFileWriterServiceImpl;
 import core.basesyntax.service.ParserFromCsvServiceImpl;
 import core.basesyntax.service.ReportServiceImpl;
-import core.basesyntax.strategy.BalanceStrategy;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.strategy.PurchaseStrategy;
-import core.basesyntax.strategy.ReturnStrategy;
-import core.basesyntax.strategy.SupplyStrategy;
+import core.basesyntax.strategy.handlers.OperationHandler;
+import core.basesyntax.strategy.operations.BalanceHandler;
+import core.basesyntax.strategy.operations.OperationStrategyImpl;
+import core.basesyntax.strategy.operations.PurchaseStrategy;
+import core.basesyntax.strategy.operations.ReturnStrategy;
+import core.basesyntax.strategy.operations.SupplyStrategy;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +20,7 @@ public class Main {
     private static final CsvFileReaderServiceImpl readFromFile = new CsvFileReaderServiceImpl();
     private static final ParserFromCsvServiceImpl parseFile = new ParserFromCsvServiceImpl();
     private static final Map<FruitTransaction.Operation, OperationHandler> getStrategy = Map.of(
-            FruitTransaction.Operation.BALANCE, new BalanceStrategy(),
+            FruitTransaction.Operation.BALANCE, new BalanceHandler(),
             FruitTransaction.Operation.PURCHASE, new PurchaseStrategy(),
             FruitTransaction.Operation.SUPPLY, new SupplyStrategy(),
             FruitTransaction.Operation.RETURN, new ReturnStrategy()

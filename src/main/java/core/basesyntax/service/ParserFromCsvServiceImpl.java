@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.interfaces.ParserFromCsvService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

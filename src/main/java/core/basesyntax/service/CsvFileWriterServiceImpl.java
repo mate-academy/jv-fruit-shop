@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.exception.FruitShopException;
+import core.basesyntax.service.interfaces.CsvFileWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
