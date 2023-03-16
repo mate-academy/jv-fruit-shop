@@ -1,8 +1,9 @@
-package core.basesyntax.handlers;
+package core.basesyntax.strategy.handlers;
 
 import core.basesyntax.db.Storage;
 
-public class BalanceOperationHandler implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
+
     @Override
     public void apply(String fruit, Integer quantity) {
         if (Storage.get(fruit) == null) {
