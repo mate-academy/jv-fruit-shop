@@ -5,22 +5,22 @@ import core.basesyntax.dao.FruitShopDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CreateReportService;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriteDataService;
 import core.basesyntax.service.impl.CreateReportServiceImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriteDataServiceImpl;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.OperationStrategy;
-import core.basesyntax.service.operation.TransactionHandler;
 import core.basesyntax.service.operation.impl.BalanceOperationHandler;
 import core.basesyntax.service.operation.impl.OperationStrategyImpl;
 import core.basesyntax.service.operation.impl.PurchaseOperationHandler;
 import core.basesyntax.service.operation.impl.ReturnOperationHandler;
 import core.basesyntax.service.operation.impl.SupplyOperationHandler;
-import core.basesyntax.service.operation.impl.TransactionHandlerImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,14 +45,14 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         ParseService fruitService = new ParseServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        TransactionHandler transactionHandler = new TransactionHandlerImpl();
+        FruitService transactionHandler = new FruitServiceImpl();
         CreateReportService createReportService = new CreateReportServiceImpl();
         WriteDataService writeDataService = new WriteDataServiceImpl();
 
         String readedDataFromFile = readerService.readData(fromFile);
         List<FruitTransaction> fruitTransactionList =
                 fruitService.parse(readedDataFromFile);
-        transactionHandler.parse(fruitTransactionList, operationStrategy);
+        transactionHandler.processFruit(fruitTransactionList, operationStrategy);
         String report = createReportService.createReport(Storage.fruits);
         writeDataService.writeDataToFile(report, toFile);
     }
