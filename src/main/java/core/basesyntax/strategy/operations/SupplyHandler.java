@@ -5,7 +5,7 @@ import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handlers.OperationHandler;
 
-public class ReturnStrategy implements OperationHandler {
+public class SupplyHandler implements OperationHandler {
     @Override
     public void initializeOperation(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getFruit() == null) {

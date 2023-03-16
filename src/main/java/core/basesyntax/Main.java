@@ -7,10 +7,10 @@ import core.basesyntax.service.ParserFromCsvServiceImpl;
 import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.strategy.handlers.OperationHandler;
 import core.basesyntax.strategy.operations.BalanceHandler;
-import core.basesyntax.strategy.operations.OperationStrategyImpl;
-import core.basesyntax.strategy.operations.PurchaseStrategy;
-import core.basesyntax.strategy.operations.ReturnStrategy;
-import core.basesyntax.strategy.operations.SupplyStrategy;
+import core.basesyntax.strategy.operations.OperationStrategyHandlerImpl;
+import core.basesyntax.strategy.operations.PurchaseHandler;
+import core.basesyntax.strategy.operations.ReturnHandler;
+import core.basesyntax.strategy.operations.SupplyHandler;
 import java.util.List;
 import java.util.Map;
 
@@ -21,11 +21,12 @@ public class Main {
     private static final ParserFromCsvServiceImpl parseFile = new ParserFromCsvServiceImpl();
     private static final Map<FruitTransaction.Operation, OperationHandler> getStrategy = Map.of(
             FruitTransaction.Operation.BALANCE, new BalanceHandler(),
-            FruitTransaction.Operation.PURCHASE, new PurchaseStrategy(),
-            FruitTransaction.Operation.SUPPLY, new SupplyStrategy(),
-            FruitTransaction.Operation.RETURN, new ReturnStrategy()
+            FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+            FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+            FruitTransaction.Operation.RETURN, new ReturnHandler()
     );
-    private static final OperationStrategyImpl strategy = new OperationStrategyImpl(getStrategy);
+    private static final OperationStrategyHandlerImpl strategy =
+            new OperationStrategyHandlerImpl(getStrategy);
     private static final CsvFileWriterServiceImpl writeToFile = new CsvFileWriterServiceImpl();
     private static final ReportServiceImpl reportService = new ReportServiceImpl();
 
