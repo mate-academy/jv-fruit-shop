@@ -51,7 +51,7 @@ public class FruitTransaction {
             return Arrays.stream(Operation.values())
                     .filter(o -> code.equalsIgnoreCase(o.code))
                     .findFirst()
-                    .orElse(null);
+                    .orElseThrow(() -> new RuntimeException("Invalid code!"));
         }
     }
 }

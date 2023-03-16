@@ -6,7 +6,7 @@ import service.ReportService;
 
 public class ReportImpl implements ReportService {
     private static final String TITLE = "fruit,quantity";
-    private static final String DATA_SEPARATOR = ";";
+    private static final String DATA_SEPARATOR = ",";
 
     @Override
     public String newReport() {

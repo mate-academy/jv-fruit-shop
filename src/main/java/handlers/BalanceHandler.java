@@ -7,6 +7,12 @@ public class BalanceHandler implements OperationTypeHandler {
 
     @Override
     public void handler(FruitTransaction fruitTransaction) {
-        Storage.storage.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        String key = fruitTransaction.getFruit();
+        int value = fruitTransaction.getQuantity();
+        if (value < 0) {
+            throw new RuntimeException("Wrong input: [" + value + "]. Can't be negative!");
+        } else {
+            Storage.storage.put(key, value);
+        }
     }
 }

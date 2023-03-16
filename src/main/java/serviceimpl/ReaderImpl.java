@@ -14,9 +14,10 @@ public class ReaderImpl implements ReaderService {
     public List<String> read(File inputFileName) {
         List<String> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFileName))) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
+            String line = bufferedReader.readLine();
+            while (line != null) {
                 list.add(line);
+                line = bufferedReader.readLine();
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File " + inputFileName + " not found!", e);

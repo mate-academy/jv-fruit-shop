@@ -16,6 +16,9 @@ public class PurchaseHandler implements OperationTypeHandler {
         if (currentQuantity < value) {
             throw new RuntimeException("Can't purchase " + value + " " + key
                     + "! Only " + currentQuantity + " on the balance");
+        }
+        if (value < 0) {
+            throw new RuntimeException("Wrong input: [" + value + "]. Can't be negative!");
         } else {
             Storage.storage.put(key, currentQuantity - value);
         }
