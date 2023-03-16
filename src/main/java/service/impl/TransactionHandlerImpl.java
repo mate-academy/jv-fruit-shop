@@ -1,6 +1,5 @@
 package service.impl;
 
-import handler.OperationHandler;
 import java.util.List;
 import model.FruitTransaction;
 import service.TransactionHandler;
@@ -14,11 +13,9 @@ public class TransactionHandlerImpl implements TransactionHandler {
     }
 
     @Override
-    public void parse(List<FruitTransaction> fruitTransactions) {
+    public void proccesFruitTransaction(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction transaction : fruitTransactions) {
-            FruitTransaction.Operation operation = transaction.getOperation();
-            OperationHandler operationHandler = operationStrategy.get(operation);
-            operationHandler.add(transaction);
+            operationStrategy.get(transaction.getOperation()).add(transaction);
         }
     }
 }

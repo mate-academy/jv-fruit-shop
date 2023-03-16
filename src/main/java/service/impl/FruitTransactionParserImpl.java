@@ -3,9 +3,9 @@ package service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
-import service.Parser;
+import service.FruitTransactionParserService;
 
-public class CsvFileParserImpl implements Parser {
+public class FruitTransactionParserImpl implements FruitTransactionParserService {
     private static final int INDEX_TITLE = 0;
     private static final String SEPARATOR = ",";
     private static final int INDEX_CODE = 0;

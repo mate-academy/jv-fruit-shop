@@ -1,4 +1,4 @@
-package handler;
+package strategy.handler;
 
 import model.FruitTransaction;
 

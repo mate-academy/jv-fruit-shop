@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Map;
+
 public interface ReportData {
-    String creatReport();
+    String creatReport(Map<String, Integer> storage);
 }

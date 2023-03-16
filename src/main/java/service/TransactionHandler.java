@@ -4,5 +4,5 @@ import java.util.List;
 import model.FruitTransaction;
 
 public interface TransactionHandler {
-    void parse(List<FruitTransaction> fruitTransactions);
+    void proccesFruitTransaction(List<FruitTransaction> fruitTransactions);
 }

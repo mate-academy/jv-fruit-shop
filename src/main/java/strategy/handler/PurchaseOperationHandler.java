@@ -1,15 +1,22 @@
-package handler;
+package strategy.handler;
 
+import dao.FruitsDao;
 import db.Storage;
 import model.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
+    private FruitsDao fruitsDao;
+
+    public PurchaseOperationHandler(FruitsDao fruitsDao) {
+        this.fruitsDao = fruitsDao;
+    }
+
     @Override
     public void add(FruitTransaction fruitTransaction) {
         isValidFruit(fruitTransaction.getFruit());
-        int quantityInDataBase = Storage.fruits.get(fruitTransaction.getFruit());
+        int quantityInDataBase = fruitsDao.get(fruitTransaction.getFruit());
         if (fruitTransaction.getQuantity() <= quantityInDataBase) {
-            Storage.fruits.put(fruitTransaction.getFruit(),
+            fruitsDao.add(fruitTransaction.getFruit(),
                     quantityInDataBase - fruitTransaction.getQuantity());
         } else {
             throw new RuntimeException("Not enough " + fruitTransaction.getFruit());

@@ -1,6 +1,6 @@
 package service.impl;
 
-import db.Storage;
+import java.util.Map;
 import java.util.stream.Collectors;
 import service.ReportData;
 
@@ -9,10 +9,10 @@ public class ReportDataImpl implements ReportData {
     private static final String SEPARATOR = ",";
 
     @Override
-    public String creatReport() {
+    public String creatReport(Map<String, Integer> storage) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(TITLE_FOR_RESIT).append(System.lineSeparator());
-        Storage.fruits
+        storage
                 .entrySet()
                 .stream()
                 .map(e -> stringBuilder.append(e.getKey())
