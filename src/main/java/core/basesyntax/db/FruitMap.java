@@ -1,7 +1,8 @@
 package core.basesyntax.db;
 
-public interface FruitMap {
-    void put(String fruit, int quantity);
+import java.util.HashMap;
+import java.util.Map;
 
-    int get(String fruit);
+public class FruitMap {
+    public static final Map<String, Integer> fruitMap = new HashMap<>();
 }

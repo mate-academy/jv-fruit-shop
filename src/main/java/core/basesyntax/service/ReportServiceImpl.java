@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.FruitMapImpl;
+import core.basesyntax.db.FruitMap;
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
@@ -9,7 +9,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String generateReport() {
-        return FruitMapImpl.fruitMap.entrySet().stream()
+        return FruitMap.fruitMap.entrySet().stream()
                 .map(e -> e.getKey() + SEPARATOR + e.getValue())
                 .collect(Collectors.joining(System.lineSeparator(), HEADER
                         + System.lineSeparator(), System.lineSeparator()));

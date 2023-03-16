@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.FruitMapImpl;
+import core.basesyntax.db.FruitMap;
 import core.basesyntax.exception.FruitShopException;
 import core.basesyntax.model.FruitTransaction;
 
@@ -13,6 +13,6 @@ public class BalanceStrategy implements OperationHandler {
         if (fruitTransaction.getQuantity() <= 0) {
             throw new FruitShopException(fruitTransaction.getQuantity() + " is invalid quantity!");
         }
-        FruitMapImpl.fruitMap.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        FruitMap.fruitMap.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }
