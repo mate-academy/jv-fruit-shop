@@ -1,13 +1,13 @@
 package core.basesyntax.service;
 
 import core.basesyntax.exception.FruitShopException;
-import core.basesyntax.service.interfaces.CsvFileWriter;
+import core.basesyntax.service.interfaces.CsvFileWriterService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class CsvFileWriterServiceImpl implements CsvFileWriter {
+public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     @Override
     public void writeInFile(String fileName, String message) {
         File file = new File(fileName);

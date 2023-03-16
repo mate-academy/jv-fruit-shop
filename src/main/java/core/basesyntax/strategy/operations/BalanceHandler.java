@@ -11,7 +11,7 @@ public class BalanceHandler implements OperationHandler {
         if (fruitTransaction.getFruit() == null) {
             throw new FruitShopException("Invalid input data");
         }
-        if (fruitTransaction.getQuantity() <= 0) {
+        if (fruitTransaction.getQuantity() < 0) {
             throw new FruitShopException(fruitTransaction.getQuantity() + " is invalid quantity!");
         }
         FruitMap.fruitMap.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
