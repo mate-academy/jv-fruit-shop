@@ -1,8 +1,7 @@
-package core.basesyntax.service.Impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ReportGeneratorService;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
