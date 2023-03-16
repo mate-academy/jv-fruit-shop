@@ -44,5 +44,6 @@ public class Main {
         WriterService fileWriterService = new WriterServiceImpl();
         fileWriterService.write(report, OUTPUT_FILE_PATH);
         System.out.println("Fruit shop report: " + System.lineSeparator() + report);
+        System.lineSeparator();
     }
 }
