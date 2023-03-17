@@ -25,8 +25,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String INPUT_FILE_NAME = "src/main/java/core/basesyntax/resources/input.csv";
-    public static final String TO_FILE_NAME = "src/main/java/core/basesyntax/resources/report.csv";
+    public static final String INPUT_FILE_NAME = "src/main/java/core/basesyntax/"
+            + "resources/input.csv";
+    public static final String TO_FILE_NAME = "src/main/java/core/basesyntax/"
+            + "resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
