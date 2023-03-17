@@ -8,13 +8,13 @@ public class ReportMakerServiceImpl implements ReportMakerService {
     private static final char TABLE_SEPARATOR = ',';
 
     @Override
-    public String generateReport(Map<String, Integer> calculations) {
+    public String generateReport(Map<String, Integer> data) {
         StringBuilder report = new StringBuilder();
         report.append(TABLE_HEADER).append(System.lineSeparator());
-        for (Map.Entry<String, Integer> calculation : calculations.entrySet()) {
-            report.append(calculation.getKey())
+        for (Map.Entry<String, Integer> pair : data.entrySet()) {
+            report.append(pair.getKey())
                 .append(TABLE_SEPARATOR)
-                .append(calculation.getValue())
+                .append(pair.getValue())
                     .append(System.lineSeparator());
         }
         return report.toString();

@@ -14,9 +14,11 @@ public class DataParserServiceImpl implements DataParserService {
     @Override
     public List<FruitTransaction> parseDataToFruitTransaction(List<String> data) {
         return data.stream()
-            .map(d -> d.split(LINE_SPLITTER))
-            .map(dat -> new FruitTransaction(FruitTransaction.getOperation(dat[OPERATION_INDEX]),
-                    dat[FRUIT_INDEX], Integer.parseInt(dat[QUANTITY_INDEX])))
-            .collect(Collectors.toList());
+                .skip(1)
+                .map(d -> d.split(LINE_SPLITTER))
+                .map(d -> new FruitTransaction(FruitTransaction
+                    .Operation.getOperation(d[OPERATION_INDEX]),
+                    d[FRUIT_INDEX], Integer.parseInt(d[QUANTITY_INDEX])))
+                .collect(Collectors.toList());
     }
 }

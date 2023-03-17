@@ -7,8 +7,12 @@ import core.basesyntax.strategy.OperationHandler;
 public class PurchaseHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        int newAmount = transaction.getQuantity()
-                - FruitStorage.calculationStorage.get(transaction.getFruit());
-        FruitStorage.calculationStorage.put(transaction.getFruit(), newAmount);
+        if (transaction.getQuantity() > FruitStorage.fruitStorage.get(transaction.getFruit())) {
+            throw new RuntimeException("Not enough "
+                    + transaction.getFruit() + "'s on store to purchase");
+        }
+        int newAmount = FruitStorage.fruitStorage.get(transaction.getFruit())
+                - transaction.getQuantity();
+        FruitStorage.fruitStorage.put(transaction.getFruit(), newAmount);
     }
 }

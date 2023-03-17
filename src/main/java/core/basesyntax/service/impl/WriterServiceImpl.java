@@ -14,7 +14,7 @@ public class WriterServiceImpl implements WriterService {
             report.createNewFile();
             Files.write(report.toPath(), data.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
-            throw new RuntimeException("Can't create new file or write to to it", e);
+            throw new RuntimeException("Can't create new file or write to" + fileName, e);
         }
     }
 }

@@ -25,10 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String INPUT_FILE_NAME = "src/main/java/core/basesyntax/"
-            + "resources/input.csv";
-    public static final String TO_FILE_NAME = "src/main/java/core/basesyntax/"
-            + "resources/report.csv";
+    public static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
+    public static final String TO_FILE_NAME = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
@@ -52,7 +50,7 @@ public class Main {
                 .parseDataToFruitTransaction(dataFromFile);
         fruitService
                 .calculateTotalQuantity(parsedDataFromFile);
-        String report = reportMakerService.generateReport(FruitStorage.calculationStorage);
+        String report = reportMakerService.generateReport(FruitStorage.fruitStorage);
         writerService.writeDataToFile(report, TO_FILE_NAME);
     }
 }
