@@ -14,16 +14,19 @@ import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.CalculateStrategy;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.impl.*;
-
+import core.basesyntax.strategy.impl.BalanceHandler;
+import core.basesyntax.strategy.impl.CalculateStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseHandler;
+import core.basesyntax.strategy.impl.ReturnHandler;
+import core.basesyntax.strategy.impl.SupplyHandler;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String INPUT_FILE_NAME = "input.csv";
-    public static final String TO_FILE_NAME = "report.csv";
+    public static final String INPUT_FILE_NAME = "src/main/java/core/basesyntax/resources/input.csv";
+    public static final String TO_FILE_NAME = "src/main/java/core/basesyntax/resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();

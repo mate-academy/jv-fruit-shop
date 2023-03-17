@@ -9,7 +9,8 @@ import java.util.Map;
 public class CalculateStrategyImpl implements CalculateStrategy {
     private Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
 
-    public CalculateStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> operationHandlers) {
+    public CalculateStrategyImpl(Map<FruitTransaction.Operation,
+                OperationHandler> operationHandlers) {
         this.operationHandlers = operationHandlers;
     }
 
