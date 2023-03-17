@@ -4,7 +4,7 @@ import core.basesyntax.service.ReportMakerService;
 import java.util.Map;
 
 public class ReportMakerServiceImpl implements ReportMakerService {
-    private static final String TABLE_HEADER = "fruit, quantity";
+    private static final String TABLE_HEADER = "fruit,quantity";
     private static final char TABLE_SEPARATOR = ',';
 
     @Override
