@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportMaker;
+import core.basesyntax.service.ReportMakerService;
 import java.util.Map;
 
-public class ReportMakerImpl implements ReportMaker {
+public class ReportMakerServiceImpl implements ReportMakerService {
     private static final String TABLE_HEADER = "fruit, quantity";
     private static final char TABLE_SEPARATOR = ',';
 

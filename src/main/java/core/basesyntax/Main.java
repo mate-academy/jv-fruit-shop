@@ -1,17 +1,17 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.Reader;
-import core.basesyntax.dao.Writer;
-import core.basesyntax.dao.impl.ReaderImpl;
-import core.basesyntax.dao.impl.WriterImpl;
-import core.basesyntax.db.CalculationStorage;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataParser;
-import core.basesyntax.service.FruitCalculator;
-import core.basesyntax.service.ReportMaker;
-import core.basesyntax.service.impl.DataParserImpl;
-import core.basesyntax.service.impl.FruitCalculatorImpl;
-import core.basesyntax.service.impl.ReportMakerImpl;
+import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ReportMakerService;
+import core.basesyntax.service.impl.DataParserServiceImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import java.io.File;
 import java.util.List;
 
@@ -20,18 +20,18 @@ public class Main {
     public static final String TO_FILE_NAME = "report.csv";
 
     public static void main(String[] args) {
-        Reader reader = new ReaderImpl();
-        Writer writer = new WriterImpl();
-        FruitCalculator fruitCalculator = new FruitCalculatorImpl();
-        DataParser dataParser = new DataParserImpl();
-        ReportMaker reportMaker = new ReportMakerImpl();
+        ReaderService readerService = new ReaderServiceImpl();
+        WriterService writerService = new WriterServiceImpl();
+        FruitService fruitService = new FruitServiceImpl();
+        DataParserService dataParserService = new DataParserServiceImpl();
+        ReportMakerService reportMakerService = new ReportMakerServiceImpl();
         File file = new File(INPUT_FILE_NAME);
-        List<String> dataFromFile = reader.readDataFromFile(file);
-        List<FruitTransaction> parsedDataFromFile = dataParser
+        List<String> dataFromFile = readerService.readDataFromFile(file);
+        List<FruitTransaction> parsedDataFromFile = dataParserService
                 .parseDataToFruitTransaction(dataFromFile);
-        fruitCalculator
+        fruitService
                 .calculateTotalQuantity(parsedDataFromFile);
-        String report = reportMaker.generateReport(CalculationStorage.calculationStorage);
-        writer.writeDataToFile(report, TO_FILE_NAME);
+        String report = reportMakerService.generateReport(FruitStorage.calculationStorage);
+        writerService.writeDataToFile(report, TO_FILE_NAME);
     }
 }
