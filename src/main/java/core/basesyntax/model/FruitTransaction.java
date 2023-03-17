@@ -44,8 +44,8 @@ public class FruitTransaction {
         public static FruitTransaction.Operation getOperation(String code) {
             return Arrays.stream(FruitTransaction.Operation.values())
                     .filter(i -> i.getCode().equals(code))
-                    .findAny()
-                    .get();
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("What the fuck"));
         }
     }
 }
