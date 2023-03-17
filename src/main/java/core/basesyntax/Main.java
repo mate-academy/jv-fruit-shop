@@ -17,8 +17,8 @@ import core.basesyntax.strategy.impl.CalculationStrategyImpl;
 import java.util.List;
 
 public class Main {
-    private static final String INPUT = "src/main/java/resources/input.csv";
-    private static final String path = "src/main/java/resources/";
+    private static final String INPUT_FILE_NAME = "src/main/java/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/java/resources/";
 
     public static void main(String[] args) {
         CalculationStrategy calculationStrategy = new CalculationStrategyImpl();
@@ -27,12 +27,14 @@ public class Main {
         TransactionEvaluatorService transactionEvaluator =
                 new TransactionEvaluatorServiceImpl(calculationStrategy);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        ReportGeneratorService reportGenerator = new ReportGeneratorServiceImpl(fileWriterService);
+        ReportGeneratorService reportGenerator = new ReportGeneratorServiceImpl();
 
-        List<String> fruitsList = fileReaderService.readToList(INPUT);
+        List<String> fruitsList = fileReaderService.readToList(INPUT_FILE_NAME);
         List<FruitTransaction> transactions = transactionParserService
                 .parseToFruitTransaction(fruitsList);
         transactionEvaluator.addToStorage(transactions);
-        reportGenerator.generateReport(Storage.storage, path);
+        String report = reportGenerator.generateReport(Storage.storage, OUTPUT_FILE_PATH);
+        fileWriterService.writeReportToFile(report, OUTPUT_FILE_PATH);
+
     }
 }
