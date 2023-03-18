@@ -22,7 +22,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl();
         FileWriterImpl fileWriterImpl = new FileWriterImpl();
         ReportCreator reportCreator = new ReportCreatorImpl();
-        List<String[]> dataFromFile = fileReaderImpl.readFromFile(PATH_TO_FILE);
+        List<String> dataFromFile = fileReaderImpl.readFromFile(PATH_TO_FILE);
         List<FruitTransaction> fruitTransactionList = generator
                 .createFruitTransaction(dataFromFile);
         fruitTransactionList.forEach(ft -> operationStrategy.get(ft.getOperation()).handle(ft));

@@ -9,8 +9,9 @@ public class FruitTransactionGeneratorImpl implements FruitTransactionGenerator 
     private static final int INDEX_OF_FRUIT_QUANTITY = 2;
 
     @Override
-    public List<FruitTransaction> createFruitTransaction(List<String[]> metadata) {
+    public List<FruitTransaction> createFruitTransaction(List<String> metadata) {
         return metadata.stream()
+                .map(s -> s.split(","))
                 .map(t ->
                 new FruitTransaction(FruitTransaction
                 .Operation

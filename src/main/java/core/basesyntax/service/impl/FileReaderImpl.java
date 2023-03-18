@@ -10,14 +10,13 @@ import java.util.List;
 
 public class FileReaderImpl implements FileReader {
     @Override
-    public List<String[]> readFromFile(String pathToFile) {
-        List<String[]> dataFromFile = new ArrayList<>();
+    public List<String> readFromFile(String pathToFile) {
+        List<String> dataFromFile = new ArrayList<>();
         try (BufferedReader br = Files
                 .newBufferedReader(Path.of(pathToFile), StandardCharsets.US_ASCII)) {
             String line = br.readLine();
             while (line != null) {
-                String[] attributes = line.split(",");
-                dataFromFile.add(attributes);
+                dataFromFile.add(line);
                 line = br.readLine();
             }
         } catch (IOException e) {
