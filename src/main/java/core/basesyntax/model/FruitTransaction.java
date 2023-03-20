@@ -3,7 +3,6 @@ package core.basesyntax.model;
 import java.util.Arrays;
 
 public class FruitTransaction {
-
     private Operation operation;
     private String fruit;
     private int quantity;
