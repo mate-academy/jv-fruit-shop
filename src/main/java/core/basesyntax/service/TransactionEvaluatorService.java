@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface TransactionEvaluatorService {
-    void addToStorage(List<FruitTransaction> transactions);
+    void process(List<FruitTransaction> transactions);
 }

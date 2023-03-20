@@ -7,8 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
-    private static final int DESCRIPTION_LINE = 0;
-
     @Override
     public List<String> readToList(String filePath) {
         List<String> list;
@@ -17,7 +15,6 @@ public class FileReaderServiceImpl implements FileReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't find file by path: " + filePath, e);
         }
-        list.remove(DESCRIPTION_LINE);
         return list;
     }
 }

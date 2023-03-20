@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Main {
     private static final String INPUT_FILE_NAME = "src/main/java/resources/input.csv";
-    private static final String OUTPUT_FILE_PATH = "src/main/java/resources/";
+    private static final String OUTPUT_FILE_PATH = "src/main/java/resources/output.csv";
 
     public static void main(String[] args) {
         CalculationStrategy calculationStrategy = new CalculationStrategyImpl();
@@ -32,9 +32,8 @@ public class Main {
         List<String> fruitsList = fileReaderService.readToList(INPUT_FILE_NAME);
         List<FruitTransaction> transactions = transactionParserService
                 .parseToFruitTransaction(fruitsList);
-        transactionEvaluator.addToStorage(transactions);
-        String report = reportGenerator.generateReport(Storage.storage, OUTPUT_FILE_PATH);
+        transactionEvaluator.process(transactions);
+        String report = reportGenerator.generateReport(Storage.storage);
         fileWriterService.writeReportToFile(report, OUTPUT_FILE_PATH);
-
     }
 }

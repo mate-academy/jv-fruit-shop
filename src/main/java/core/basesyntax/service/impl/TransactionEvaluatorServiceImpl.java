@@ -13,7 +13,7 @@ public class TransactionEvaluatorServiceImpl implements TransactionEvaluatorServ
     }
 
     @Override
-    public void addToStorage(List<FruitTransaction> transactions) {
+    public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             strategy.calculate(transaction);
         }
