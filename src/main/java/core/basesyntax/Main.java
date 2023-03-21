@@ -43,11 +43,11 @@ public class Main {
         List<String> inputData = readerService.readFromFile(Path.of(INPUT_DATA_PATH));
 
         DataParcerService dataParcerService = new DataParcerServiceImpl();
-        List<String[]> parcedData = dataParcerService.parceDataFromCsv(inputData);
+        List<String[]> parsedData = dataParcerService.parceDataFromCsv(inputData);
 
         DataProcessingService dataProcessingService =
                 new DataProcessingServiceImpl(operationStrategy);
-        Map<String, Integer> processedData = dataProcessingService.processData(parcedData);
+        Map<String, Integer> processedData = dataProcessingService.processData(parsedData);
 
         ShopReportService reportService = new ShopReportServiceImpl();
         byte[] report = reportService.generateReport(processedData);
