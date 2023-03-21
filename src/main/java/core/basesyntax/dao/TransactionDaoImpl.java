@@ -13,8 +13,8 @@ public class TransactionDaoImpl implements TransactionDao {
             new TransactionStrategyImpl();
 
     @Override
-    public void addFruits(String fruitName, Integer quantity) {
-        Storage.fruitsStorage.put(fruitName, quantity);
+    public void addFruits(Fruit fruit, Integer quantity) {
+        Storage.fruitsStorage.put(new Fruit(fruit.getName()), quantity);
     }
 
     @Override
@@ -25,10 +25,11 @@ public class TransactionDaoImpl implements TransactionDao {
     @Override
     public void addAll(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction transaction : fruitTransactions) {
-            Integer fruits = getFruits(transaction.getFruit());
+            Fruit fruit = new Fruit(transaction.getFruit());
+            Integer quantity = Storage.fruitsStorage.get(fruit);
             Integer currentQuantity = transactionStrategy.getTransaction(transaction.getOperation())
-                    .getCurrentQuantity(fruits, transaction.getQuantity());
-            addFruits(transaction.getFruit(), currentQuantity);
+                    .getCurrentQuantity(quantity, transaction.getQuantity());
+            addFruits(fruit, currentQuantity);
         }
     }
 }
