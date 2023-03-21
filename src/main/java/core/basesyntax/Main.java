@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitShopStrategyImpl;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReadDataService;
@@ -12,13 +11,14 @@ import core.basesyntax.service.impl.BalanceOperationHandler;
 import core.basesyntax.service.impl.PurchaseOperationHandler;
 import core.basesyntax.service.impl.ReturnOperationHandler;
 import core.basesyntax.service.impl.SupplyOperationHandler;
+import core.basesyntax.strategy.impl.FruitShopStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_DATE_NAME = "Fruit.csv";
-    private static final String FILE_REPORT_NAME = "FruitShop.csv";
+    private static final String FILE_DATE_NAME = "src/main/resources/FruitShopData.csv";
+    private static final String FILE_REPORT_NAME = "src/main/resources/FruitShopReport.csv";
     private static final String OPERATION_BALANCE = "b";
     private static final String OPERATION_PURCHASE = "p";
     private static final String OPERATION_RETURN = "r";
@@ -36,8 +36,8 @@ public class Main {
                 new FruitShopStrategyImpl(operationHandlerMap);
         ReportService reportService = new ReportService();
         WriteToFileService writeToFileService = new WriteToFileService();
-        List<String> date = readDataService.readFromFile(FILE_DATE_NAME);
-        List<FruitTransaction> fruitTransactionList = parser.getFruitTransaction(date);
+        List<String> data = readDataService.readFromFile(FILE_DATE_NAME);
+        List<FruitTransaction> fruitTransactionList = parser.getFruitTransaction(data);
         for (FruitTransaction transaction : fruitTransactionList) {
             OperationHandler handler = fruitShopStrategyImpl.get(transaction.getOperation());
             handler.handle(transaction);

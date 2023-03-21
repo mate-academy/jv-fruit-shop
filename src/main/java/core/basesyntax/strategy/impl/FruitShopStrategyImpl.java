@@ -1,5 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.strategy.impl;
 
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.strategy.FruitShopStrategy;
 import java.util.Map;
 
 public class FruitShopStrategyImpl implements FruitShopStrategy {
