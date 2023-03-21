@@ -1,20 +1,15 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.MyFileReader;
-import core.basesyntax.service.MyFileReaderImpl;
-import core.basesyntax.strategy.ActivityHandlerStrategy;
+import core.basesyntax.service.FruitShopServiceImpl;
+import core.basesyntax.service.interfaces.FruitShopService;
+import core.basesyntax.service.interfaces.strategy.TransactionStrategy;
+import core.basesyntax.service.transactions.TransactionStrategyImpl;
 
 public class Main {
     public static void main(String[] args) {
-        MyFileReader myFileReader = new MyFileReaderImpl();
-        myFileReader.readFromFile("src/main/resources/input.csv");
-
-        ActivityHandlerStrategy activityHandlerStrategy = new ActivityHandlerStrategy();
-
-        for (FruitTransaction fruitTransaction : Storage.dataFromFile) {
-            System.out.println(fruitTransaction);
-        }
+        FruitShopService fruitShopService = new FruitShopServiceImpl();
+        fruitShopService.createReport("src/main/resources/input.csv");
+        System.out.println(Storage.fruitsStorage);
     }
 }
