@@ -19,17 +19,17 @@ import java.util.Map;
 public class Main {
     private static final String FILE_DATE_NAME = "Fruit.csv";
     private static final String FILE_REPORT_NAME = "FruitShop.csv";
-    private static final String BALANCE = "b";
-    private static final String PURCHASE = "p";
-    private static final String RETURN = "r";
-    private static final String SUPPLY = "s";
+    private static final String OPERATION_BALANCE = "b";
+    private static final String OPERATION_PURCHASE = "p";
+    private static final String OPERATION_RETURN = "r";
+    private static final String OPERATION_SUPPLY = "s";
 
     public static void main(String[] args) {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(PURCHASE, new PurchaseOperationHandler());
-        operationHandlerMap.put(RETURN, new ReturnOperationHandler());
-        operationHandlerMap.put(SUPPLY, new SupplyOperationHandler());
+        operationHandlerMap.put(OPERATION_BALANCE, new BalanceOperationHandler());
+        operationHandlerMap.put(OPERATION_PURCHASE, new PurchaseOperationHandler());
+        operationHandlerMap.put(OPERATION_RETURN, new ReturnOperationHandler());
+        operationHandlerMap.put(OPERATION_SUPPLY, new SupplyOperationHandler());
         ReadDataService readDataService = new ReadDataService();
         ParserService parser = new ParserService();
         FruitShopStrategyImpl fruitShopStrategyImpl =
