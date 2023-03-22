@@ -1,7 +1,6 @@
 package core.basesyntax.service.fileReader;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.interfaces.ParseDataFromFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,8 @@ public class ParseDataFromFileImpl implements ParseDataFromFile {
         for (String transaction : fruitsTransactions) {
             FruitTransaction fruitTransaction = new FruitTransaction();
             String[] splitTransaction = transaction.split(SEPARATOR);
-            fruitTransaction.setOperation(new FindTransactionTypeImpl().operationType(splitTransaction[OPERATION_TYPE]));
+            fruitTransaction.setOperation(new FindTransactionTypeImpl()
+                    .operationType(splitTransaction[OPERATION_TYPE]));
             fruitTransaction.setFruit(splitTransaction[FRUIT_TYPE]);
             fruitTransaction.setQuantity(Integer.parseInt(splitTransaction[FRUITS_QUANTITY]));
             parsedData.add(fruitTransaction);

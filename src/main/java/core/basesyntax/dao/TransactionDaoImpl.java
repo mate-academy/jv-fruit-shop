@@ -7,6 +7,7 @@ import core.basesyntax.service.interfaces.strategy.TransactionStrategy;
 import core.basesyntax.service.transactions.TransactionStrategyImpl;
 
 import java.util.List;
+import java.util.Map;
 
 public class TransactionDaoImpl implements TransactionDao {
     private static final TransactionStrategy transactionStrategy =
@@ -31,5 +32,14 @@ public class TransactionDaoImpl implements TransactionDao {
                     .getCurrentQuantity(quantity, transaction.getQuantity());
             add(fruit, currentQuantity);
         }
+    }
+@Override
+    public String getAll() {
+        StringBuilder builder = new StringBuilder();
+        for (Map.Entry<Fruit, Integer> fruit : Storage.fruitsStorage.entrySet()) {
+            builder.append(fruit.getKey().getName())
+                    .append(" ").append(fruit.getValue()).append(System.lineSeparator());
+        }
+        return builder.toString();
     }
 }

@@ -11,4 +11,6 @@ public interface TransactionDao {
     Integer get(String fruit);
 
     void addAll(List<FruitTransaction> fruitTransactions);
+
+    String getAll();
 }

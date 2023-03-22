@@ -1,7 +1,5 @@
 package core.basesyntax.service.fileReader;
 
-import core.basesyntax.service.interfaces.ReadFromFile;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
