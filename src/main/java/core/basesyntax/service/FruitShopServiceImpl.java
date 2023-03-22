@@ -10,6 +10,7 @@ import core.basesyntax.service.filereader.ReadFromFileImpl;
 import core.basesyntax.service.filewriter.WriteToFile;
 import core.basesyntax.service.filewriter.WriteToFileImpl;
 import core.basesyntax.service.interfaces.FruitShopService;
+import core.basesyntax.service.interfaces.strategy.TransactionStrategy;
 import core.basesyntax.service.transactions.BalanceTransactionHandler;
 import core.basesyntax.service.transactions.PurchaseTransactionHandler;
 import core.basesyntax.service.transactions.ReturnTransactionHandler;
@@ -22,19 +23,16 @@ public class FruitShopServiceImpl implements FruitShopService {
     private static final ReadFromFile readFromFile = new ReadFromFileImpl();
     private static final ParseDataFromFile parseDataFromFile = new ParseDataFromFileImpl();
     private static final WriteToFile writeToFile = new WriteToFileImpl();
+    private static final TransactionStrategy transaction = new TransactionStrategyImpl();
 
     @Override
     public void createReport(String fileName) {
         List<String> dataFromFile = readFromFile.dataFromFile(fileName);
 
-        TransactionStrategyImpl.handlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceTransactionHandler());
-        TransactionStrategyImpl.handlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnTransactionHandler());
-        TransactionStrategyImpl.handlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseTransactionHandler());
-        TransactionStrategyImpl.handlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyTransactionHandler());
+        transaction.addToMap(FruitTransaction.Operation.BALANCE, new BalanceTransactionHandler());
+        transaction.addToMap(FruitTransaction.Operation.RETURN, new ReturnTransactionHandler());
+        transaction.addToMap(FruitTransaction.Operation.PURCHASE, new PurchaseTransactionHandler());
+        transaction.addToMap(FruitTransaction.Operation.SUPPLY, new SupplyTransactionHandler());
 
         List<FruitTransaction> parsedDataFromFile = parseDataFromFile
                 .parsedFruitsTransactions(dataFromFile);
