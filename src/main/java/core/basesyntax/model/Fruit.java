@@ -19,8 +19,12 @@ public class Fruit {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Fruit)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Fruit)) {
+            return false;
+        }
         Fruit fruit = (Fruit) o;
         return getName().equals(fruit.getName());
     }
@@ -32,8 +36,8 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{" +
-                "name='" + name + '\'' +
-                '}';
+        return "Fruit{" + "name='"
+                + name + '\''
+                + '}';
     }
 }

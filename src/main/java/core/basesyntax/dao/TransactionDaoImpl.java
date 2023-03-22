@@ -5,7 +5,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.interfaces.strategy.TransactionStrategy;
 import core.basesyntax.service.transactions.TransactionStrategyImpl;
-
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +32,8 @@ public class TransactionDaoImpl implements TransactionDao {
             add(fruit, currentQuantity);
         }
     }
-@Override
+
+    @Override
     public String getAll() {
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<Fruit, Integer> fruit : Storage.fruitsStorage.entrySet()) {

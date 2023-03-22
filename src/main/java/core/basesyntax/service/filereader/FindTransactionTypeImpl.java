@@ -1,4 +1,4 @@
-package core.basesyntax.service.fileReader;
+package core.basesyntax.service.filereader;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.interfaces.FindTransactionType;

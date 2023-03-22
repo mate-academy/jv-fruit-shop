@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitShopServiceImpl;
 import core.basesyntax.service.interfaces.FruitShopService;
 
