@@ -31,5 +31,6 @@ public class FruitShopServiceImpl implements FruitShopService {
         TransactionStrategyImpl.handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyTransactionHandler());
 
         transactionDao.addAll(parsedDataFromFile);
+
     }
 }
