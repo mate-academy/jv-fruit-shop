@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.interfaces.strategy.TransactionStrategy;
-import core.basesyntax.service.transactions.TransactionStrategyImpl;
 import java.util.List;
 import java.util.Map;
 

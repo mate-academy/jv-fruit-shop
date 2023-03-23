@@ -1,7 +1,6 @@
 package core.basesyntax.service.filewriter;
 
 import core.basesyntax.dao.TransactionDao;
-import core.basesyntax.dao.TransactionDaoImpl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

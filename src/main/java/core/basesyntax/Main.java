@@ -11,12 +11,11 @@ import core.basesyntax.service.filewriter.FileWriter;
 import core.basesyntax.service.filewriter.FileWriterImpl;
 import core.basesyntax.service.interfaces.strategy.TransactionHandler;
 import core.basesyntax.service.interfaces.strategy.TransactionStrategy;
+import core.basesyntax.service.transactions.BalanceTransactionHandler;
 import core.basesyntax.service.transactions.PurchaseTransactionHandler;
 import core.basesyntax.service.transactions.ReturnTransactionHandler;
 import core.basesyntax.service.transactions.SupplyTransactionHandler;
 import core.basesyntax.service.transactions.TransactionStrategyImpl;
-import core.basesyntax.service.transactions.BalanceTransactionHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,17 +23,14 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE = "src/main/resources/input.csv";
     private static final String REPORT_FILE = "src/main/resources/report.csv";
-    private static final FileReader fileReader = new FileReaderImpl();
-    private static final FileWriter fileWriter =
-            new FileWriterImpl(new TransactionDaoImpl());
-    private static final FileParser fileParser = new FileParserImpl();
-    private static final TransactionDao transactionDao =
-            new TransactionDaoImpl(new TransactionStrategyImpl(createOperationsMap()));
 
     public static void main(String[] args) {
-        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(createOperationsMap());
-        TransactionDao transactionDao1 = new TransactionDaoImpl(transactionStrategy);
-        FileWriter fileWriter1 = new FileWriterImpl(transactionDao1);
+        TransactionStrategy transactionStrategy =
+                new TransactionStrategyImpl(createOperationsMap());
+        TransactionDao transactionDao = new TransactionDaoImpl(transactionStrategy);
+        FileWriter fileWriter = new FileWriterImpl(transactionDao);
+        FileReader fileReader = new FileReaderImpl();
+        FileParser fileParser = new FileParserImpl();
         List<String> dataFromFile = fileReader.dataFromFile(INPUT_FILE);
         List<FruitTransaction> parsedDataFromFile =
                 fileParser.parsedFruitTransactions(dataFromFile);
