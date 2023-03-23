@@ -7,17 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadDataService {
-
-    public List<String> readFromFile(String fromFileName) {
+    public List<String> readFromFile(String fromFileName) throws IOException {
         List<String> data = new ArrayList<>();
         String value = null;
+        BufferedReader br = null;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fromFileName));
+            br = new BufferedReader(new FileReader(fromFileName));
             while ((value = br.readLine()) != null) {
                 data.add(value);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + fromFileName, e);
+        } finally {
+            if (br != null) {
+                br.close();
+            }
         }
         return data;
     }

@@ -5,7 +5,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 
 public class ReturnOperationHandler implements OperationHandler {
-
     @Override
     public void handle(FruitTransaction transaction) {
         Integer balance = Storage.storage.get(transaction.getFruit());

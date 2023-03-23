@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParserService {
+public class ParseService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
-    public List<FruitTransaction> getFruitTransaction(List<String> list) {
+    public List<FruitTransaction> getFruitTransactions(List<String> list) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         List<String[]> data = list.stream()
                  .map(l -> l.split(","))
