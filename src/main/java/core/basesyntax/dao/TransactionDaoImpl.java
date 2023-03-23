@@ -14,19 +14,19 @@ public class TransactionDaoImpl implements TransactionDao {
 
     @Override
     public void add(Fruit fruit, Integer quantity) {
-        Storage.fruitsStorage.put(new Fruit(fruit.getName()), quantity);
+        Storage.fruitStorage.put(new Fruit(fruit.getName()), quantity);
     }
 
     @Override
     public Integer get(String fruit) {
-        return Storage.fruitsStorage.get(fruit);
+        return Storage.fruitStorage.get(fruit);
     }
 
     @Override
     public void addAll(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction transaction : fruitTransactions) {
             Fruit fruit = new Fruit(transaction.getFruit());
-            Integer quantity = Storage.fruitsStorage.get(fruit);
+            Integer quantity = Storage.fruitStorage.get(fruit);
             Integer currentQuantity = transactionStrategy.getTransaction(transaction.getOperation())
                     .getCurrentQuantity(quantity, transaction.getQuantity());
             add(fruit, currentQuantity);
@@ -36,9 +36,11 @@ public class TransactionDaoImpl implements TransactionDao {
     @Override
     public String getAll() {
         StringBuilder builder = new StringBuilder();
-        for (Map.Entry<Fruit, Integer> fruit : Storage.fruitsStorage.entrySet()) {
+        for (Map.Entry<Fruit, Integer> fruit : Storage.fruitStorage.entrySet()) {
             builder.append(fruit.getKey().getName())
-                    .append(" ").append(fruit.getValue()).append(System.lineSeparator());
+                    .append(" ")
+                    .append(fruit.getValue())
+                    .append(System.lineSeparator());
         }
         return builder.toString();
     }
