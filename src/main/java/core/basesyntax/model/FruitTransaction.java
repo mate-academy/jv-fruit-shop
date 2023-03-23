@@ -9,8 +9,8 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
+    public void setOperation(String value) {
+        this.operation = Operation.valueOf(value);
     }
 
     public Fruit getFruit() {

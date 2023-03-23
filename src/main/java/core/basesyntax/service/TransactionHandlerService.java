@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
-public interface TransactionHandlerService {
+import java.util.List;
 
+public interface TransactionHandlerService {
+    List<String> getReport(List<String> listInputData);
 }

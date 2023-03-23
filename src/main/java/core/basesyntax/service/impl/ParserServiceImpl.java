@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
 
 public class ParserServiceImpl implements ParserService {
@@ -9,21 +11,14 @@ public class ParserServiceImpl implements ParserService {
     private static final String SPLIT_SYMBOL = ",";
     private String[] arrayParameters;
 
-    @Override
-    public String getType(String line) {
-        arrayParameters = line.split(SPLIT_SYMBOL);
-        return arrayParameters[TYPE_INDEX];
-    }
 
     @Override
-    public String getFruit(String line) {
+    public FruitTransaction getDataFromLine(String line) {
         arrayParameters = line.split(SPLIT_SYMBOL);
-        return arrayParameters[FRUIT_INDEX];
-    }
-
-    @Override
-    public int getQuantity(String line) {
-        arrayParameters = line.split(SPLIT_SYMBOL);
-        return Integer.parseInt(arrayParameters[QUANTITY_INDEX]);
+        FruitTransaction fruitTransaction = new FruitTransaction();
+//        fruitTransaction.setOperation(new FruitTransaction.Operation(TYPE_INDEX));
+        fruitTransaction.setFruit(new Fruit(arrayParameters[FRUIT_INDEX]));
+        fruitTransaction.setQuantity(Integer.parseInt(arrayParameters[QUANTITY_INDEX]));
+        return null;
     }
 }

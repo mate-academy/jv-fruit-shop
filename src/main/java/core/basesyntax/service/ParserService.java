@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
+
 public interface ParserService {
-    String getType(String line);
-    String getFruit(String line);
-    int getQuantity(String line);
+    FruitTransaction getDataFromLine(String line);
 }
