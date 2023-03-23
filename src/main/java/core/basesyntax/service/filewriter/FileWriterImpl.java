@@ -7,7 +7,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class FileWriterImpl implements FileWriter {
-    private static final TransactionDao transactionDao = new TransactionDaoImpl();
+    private final TransactionDao transactionDao;
+
+    public FileWriterImpl(TransactionDao transactionDao) {
+        this.transactionDao = transactionDao;
+    }
 
     @Override
     public void writeToFile(String reportFileName) {

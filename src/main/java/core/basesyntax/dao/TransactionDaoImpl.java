@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 public class TransactionDaoImpl implements TransactionDao {
-    private static final TransactionStrategy transactionStrategy =
-            new TransactionStrategyImpl();
+    private final TransactionStrategy transactionStrategy;
+
+    public TransactionDaoImpl(TransactionStrategy transactionStrategy) {
+        this.transactionStrategy = transactionStrategy;
+    }
 
     @Override
     public void add(Fruit fruit, Integer quantity) {
@@ -37,10 +40,8 @@ public class TransactionDaoImpl implements TransactionDao {
     public String getAll() {
         StringBuilder builder = new StringBuilder();
         for (Map.Entry<Fruit, Integer> fruit : Storage.fruitStorage.entrySet()) {
-            builder.append(fruit.getKey().getName())
-                    .append(" ")
-                    .append(fruit.getValue())
-                    .append(System.lineSeparator());
+            builder.append(String.format("%s %s%s", fruit.getKey().getName(),
+                    fruit.getValue(),System.lineSeparator()));
         }
         return builder.toString();
     }
