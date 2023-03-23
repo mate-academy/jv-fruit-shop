@@ -3,6 +3,6 @@ package core.basesyntax.service.filereader;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public interface ParseDataFromFile {
+public interface FileParser {
     List<FruitTransaction> parsedFruitsTransactions(List<String> fruitsTransactions);
 }

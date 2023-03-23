@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class WriteToFileImpl implements WriteToFile {
+public class FileWriterImpl implements FileWriter {
     private static final TransactionDao transactionDao = new TransactionDaoImpl();
 
     @Override

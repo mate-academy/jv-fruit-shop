@@ -3,12 +3,12 @@ package core.basesyntax.service;
 import core.basesyntax.dao.TransactionDao;
 import core.basesyntax.dao.TransactionDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.filereader.ParseDataFromFile;
-import core.basesyntax.service.filereader.ParseDataFromFileImpl;
-import core.basesyntax.service.filereader.ReadFromFile;
-import core.basesyntax.service.filereader.ReadFromFileImpl;
-import core.basesyntax.service.filewriter.WriteToFile;
-import core.basesyntax.service.filewriter.WriteToFileImpl;
+import core.basesyntax.service.filereader.FileParser;
+import core.basesyntax.service.filereader.FileParserImpl;
+import core.basesyntax.service.filereader.FileReader;
+import core.basesyntax.service.filereader.FileReaderImpl;
+import core.basesyntax.service.filewriter.FileWriter;
+import core.basesyntax.service.filewriter.FileWriterImpl;
 import core.basesyntax.service.interfaces.FruitShopService;
 import core.basesyntax.service.interfaces.strategy.TransactionStrategy;
 import core.basesyntax.service.transactions.BalanceTransactionHandler;
@@ -20,9 +20,9 @@ import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private static final TransactionDao transactionDao = new TransactionDaoImpl();
-    private static final ReadFromFile readFromFile = new ReadFromFileImpl();
-    private static final ParseDataFromFile parseDataFromFile = new ParseDataFromFileImpl();
-    private static final WriteToFile writeToFile = new WriteToFileImpl();
+    private static final FileReader readFromFile = new FileReaderImpl();
+    private static final FileParser parseDataFromFile = new FileParserImpl();
+    private static final FileWriter writeToFile = new FileWriterImpl();
     private static final TransactionStrategy transaction = new TransactionStrategyImpl();
 
     @Override

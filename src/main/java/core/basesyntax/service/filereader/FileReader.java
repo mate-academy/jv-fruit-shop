@@ -2,6 +2,6 @@ package core.basesyntax.service.filereader;
 
 import java.util.List;
 
-public interface ReadFromFile {
+public interface FileReader {
     List<String> dataFromFile(String fileName);
 }

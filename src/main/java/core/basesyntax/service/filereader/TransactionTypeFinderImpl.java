@@ -1,9 +1,9 @@
 package core.basesyntax.service.filereader;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.interfaces.FindTransactionType;
+import core.basesyntax.service.interfaces.TransactionTypeFinder;
 
-public class FindTransactionTypeImpl implements FindTransactionType {
+public class TransactionTypeFinderImpl implements TransactionTypeFinder {
     @Override
     public FruitTransaction.Operation operationType(String operation) {
         for (FruitTransaction.Operation fruitOperation : FruitTransaction.Operation.values()) {
