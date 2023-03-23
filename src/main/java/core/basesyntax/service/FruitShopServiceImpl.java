@@ -19,11 +19,19 @@ import core.basesyntax.service.transactions.TransactionStrategyImpl;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private static final TransactionDao transactionDao = new TransactionDaoImpl();
-    private static final FileReader readFromFile = new FileReaderImpl();
-    private static final FileParser parseDataFromFile = new FileParserImpl();
-    private static final FileWriter writeToFile = new FileWriterImpl();
-    private static final TransactionStrategy transaction = new TransactionStrategyImpl();
+    private final TransactionDao transactionDao;
+    private final FileReader readFromFile;
+    private final FileParser parseDataFromFile;
+    private final FileWriter writeToFile;
+    private final TransactionStrategy transaction;
+
+    public FruitShopServiceImpl() {
+        transactionDao = new TransactionDaoImpl();
+        readFromFile = new FileReaderImpl();
+        parseDataFromFile = new FileParserImpl();
+        writeToFile = new FileWriterImpl();
+        transaction = new TransactionStrategyImpl();
+    }
 
     @Override
     public void createReport(String fileName) {

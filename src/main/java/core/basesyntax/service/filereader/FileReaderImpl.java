@@ -10,8 +10,7 @@ public class FileReaderImpl implements FileReader {
     @Override
     public List<String> dataFromFile(String fileName) {
         List<String> dataFromFile = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new java.io.FileReader(fileName));
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fileName))) {
             reader.readLine();
             String value = reader.readLine();
             while (value != null) {
