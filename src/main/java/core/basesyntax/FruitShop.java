@@ -1,20 +1,43 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.TransactionHandlerService;
+import core.basesyntax.service.TransactionHandler;
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.TransactionHandlerServiceImpl;
-
-import java.io.File;
+import core.basesyntax.service.impl.TransactionHandlerImpl;
+import core.basesyntax.service.impl.WriteServiceImpl;
+import core.basesyntax.service.impl.transactions.BalanceHandlerImpl;
+import core.basesyntax.service.impl.transactions.PurchaseHandlerImpl;
+import core.basesyntax.service.impl.transactions.ReturnHandlerImpl;
+import core.basesyntax.service.impl.transactions.SupplyHandlerImpl;
+import core.basesyntax.strategy.TransactionStrategy;
+import core.basesyntax.strategy.TransactionStrategyImpl;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FruitShop {
     public static void main(String[] args) {
-        File file = new File("src/main/resources/file.txt");
-        ReaderService readerService = new ReaderServiceImpl();
-        List<String> list =readerService.readFromFile(file);
+        Map<String, OperationHandler> operationHandlerServiceMap = new HashMap<>();
+        operationHandlerServiceMap.put(FruitTransaction.Operation.BALANCE.getValue(),
+                new BalanceHandlerImpl());
+        operationHandlerServiceMap.put(FruitTransaction.Operation.PURCHASE.getValue(),
+                new PurchaseHandlerImpl());
+        operationHandlerServiceMap.put(FruitTransaction.Operation.SUPPLY.getValue(),
+                new SupplyHandlerImpl());
+        operationHandlerServiceMap.put(FruitTransaction.Operation.RETURN.getValue(),
+                new ReturnHandlerImpl());
 
-        TransactionHandlerService transactionHandlerService = new TransactionHandlerServiceImpl();
-        List<String> report = transactionHandlerService.getReport(list);
+        TransactionStrategy transactionStrategy =
+                new TransactionStrategyImpl(operationHandlerServiceMap);
+        TransactionHandler transactionHandler =
+                new TransactionHandlerImpl(new StorageDaoImpl(), transactionStrategy);
+
+        ReaderService readerService = new ReaderServiceImpl();
+        List<String> list = readerService.readFromFile();
+        List<String> report = transactionHandler.getReport(list);
+        new WriteServiceImpl().writeIntoFile(report);
     }
 }

@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private Map<Fruit, Integer> storage = new HashMap<>();
+    private static final Map<Fruit, Integer> storage = new HashMap<>();
 
-    public Map<Fruit, Integer> getStorage() {
+    public static Map<Fruit, Integer> getStorage() {
         return storage;
     }
 }

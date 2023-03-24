@@ -1,5 +1,7 @@
 package core.basesyntax.strategy;
 
-public interface TransactionStrategy {
+import core.basesyntax.service.OperationHandler;
 
+public interface TransactionStrategy {
+    OperationHandler get(String key);
 }
