@@ -9,21 +9,16 @@ import java.util.List;
 
 public class ReadDataServiceImpl implements ReadDataService {
     @Override
-    public List<String> readFromFile(String fromFileName) throws IOException {
+    public List<String> readFromFile(String fromFileName) {
         List<String> data = new ArrayList<>();
-        String value = null;
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader(fromFileName));
+        try (BufferedReader newBr = new BufferedReader(new FileReader(fromFileName))) {
+            BufferedReader br = new BufferedReader(new FileReader(fromFileName));
+            String value;
             while ((value = br.readLine()) != null) {
                 data.add(value);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + fromFileName, e);
-        } finally {
-            if (br != null) {
-                br.close();
-            }
         }
         return data;
     }

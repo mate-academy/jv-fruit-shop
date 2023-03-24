@@ -13,19 +13,20 @@ public enum Operation {
     }
 
     public static Operation fromCode(String code) {
-        switch (code) {
-            case "b":
-                return BALANCE;
-            case "s":
-                return SUPPLY;
-            case "p":
-                return PURCHASE;
-            case "r":
-                return RETURN;
-            default: {
-                return null;
-            }
+        Operation operation = null;
+        if (code.equals(BALANCE.getCode())) {
+            operation = BALANCE;
         }
+        if (code.equals(SUPPLY.getCode())) {
+            operation = SUPPLY;
+        }
+        if (code.equals(PURCHASE.getCode())) {
+            operation = PURCHASE;
+        }
+        if (code.equals(RETURN.getCode())) {
+            operation = RETURN;
+        }
+        return operation;
     }
 
     public String getCode() {

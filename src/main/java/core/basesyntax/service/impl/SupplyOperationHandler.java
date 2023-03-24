@@ -7,8 +7,8 @@ import core.basesyntax.service.OperationHandler;
 public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        Integer balance = Storage.storage.get(transaction.getFruit());
-        Integer result = (balance == null ? 0 : balance) + transaction.getQuantity();
+        Integer balance = Storage.storage.getOrDefault(transaction.getFruit(), 0);
+        Integer result = balance + transaction.getQuantity();
         Storage.storage.put(transaction.getFruit(), result);
     }
 }

@@ -17,7 +17,6 @@ import core.basesyntax.service.impl.SupplyOperationHandler;
 import core.basesyntax.service.impl.WriteToFileServiceImpl;
 import core.basesyntax.strategy.FruitShopStrategy;
 import core.basesyntax.strategy.impl.FruitShopStrategyImpl;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +25,7 @@ public class Main {
     private static final String FILE_DATE_NAME = "src/main/resources/FruitShopData.csv";
     private static final String FILE_REPORT_NAME = "src/main/resources/FruitShopReport.csv";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
