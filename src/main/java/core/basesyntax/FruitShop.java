@@ -37,6 +37,9 @@ public class FruitShop {
 
         ReaderService readerService = new ReaderServiceImpl();
         List<String> list = readerService.readFromFile();
+        if (list.size() == 0) {
+            throw new RuntimeException("The document is empty");
+        }
         List<String> report = transactionHandler.getReport(list);
         new WriteServiceImpl().writeIntoFile(report);
     }
