@@ -8,9 +8,14 @@ import core.basesyntax.service.ReadDataService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriteToFileService;
 import core.basesyntax.service.impl.BalanceOperationHandler;
+import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.PurchaseOperationHandler;
+import core.basesyntax.service.impl.ReadDataServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.ReturnOperationHandler;
 import core.basesyntax.service.impl.SupplyOperationHandler;
+import core.basesyntax.service.impl.WriteToFileServiceImpl;
+import core.basesyntax.strategy.FruitShopStrategy;
 import core.basesyntax.strategy.impl.FruitShopStrategyImpl;
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,17 +27,17 @@ public class Main {
     private static final String FILE_REPORT_NAME = "src/main/resources/FruitShopReport.csv";
 
     public static void main(String[] args) throws IOException {
-        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.BALANCE.getCode(), new BalanceOperationHandler());
-        operationHandlerMap.put(Operation.PURCHASE.getCode(), new PurchaseOperationHandler());
-        operationHandlerMap.put(Operation.RETURN.getCode(), new ReturnOperationHandler());
-        operationHandlerMap.put(Operation.SUPPLY.getCode(), new SupplyOperationHandler());
-        ReadDataService readDataService = new ReadDataService();
-        ParseService parser = new ParseService();
-        FruitShopStrategyImpl fruitShopStrategyImpl =
+        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
+        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
+        ReadDataService readDataService = new ReadDataServiceImpl();
+        ParseService parser = new ParseServiceImpl();
+        FruitShopStrategy fruitShopStrategyImpl =
                 new FruitShopStrategyImpl(operationHandlerMap);
-        ReportService reportService = new ReportService();
-        WriteToFileService writeToFileService = new WriteToFileService();
+        ReportService reportService = new ReportServiceImpl();
+        WriteToFileService writeToFileService = new WriteToFileServiceImpl();
         List<String> data = readDataService.readFromFile(FILE_DATE_NAME);
         List<FruitTransaction> fruitTransactionList = parser.getFruitTransactions(data);
         for (FruitTransaction transaction : fruitTransactionList) {

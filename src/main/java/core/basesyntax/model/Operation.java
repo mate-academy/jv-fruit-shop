@@ -12,6 +12,22 @@ public enum Operation {
         this.code = code;
     }
 
+    public static Operation fromCode(String code) {
+        switch (code) {
+            case "b":
+                return BALANCE;
+            case "s":
+                return SUPPLY;
+            case "p":
+                return PURCHASE;
+            case "r":
+                return RETURN;
+            default: {
+                return null;
+            }
+        }
+    }
+
     public String getCode() {
         return code;
     }
