@@ -2,12 +2,12 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ReportCreationService;
+import core.basesyntax.service.GenerateReportService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class ReportCreationServiceImpl implements ReportCreationService {
+public class GenerateGenerateReportServiceImpl implements GenerateReportService {
     private static final String COMA_SYMBOL = ",";
     private final List<String> finalReport = new ArrayList<>();
 

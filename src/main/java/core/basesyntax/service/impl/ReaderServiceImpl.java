@@ -12,8 +12,8 @@ import java.util.List;
 public class ReaderServiceImpl implements ReaderService {
 
     @Override
-    public List<String> readFromFile() {
-        File file = new File("src/main/resources/inputdata.csv");
+    public List<String> readFromFile(String path) {
+        File file = new File(path);
         List<String> listLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;

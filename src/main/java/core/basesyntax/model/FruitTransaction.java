@@ -1,18 +1,16 @@
 package core.basesyntax.model;
 
-import core.basesyntax.service.OperationHandler;
-
 public class FruitTransaction {
-    private OperationHandler operationHandler;
+    private Operation operation;
     private Fruit fruit;
     private int quantity;
 
-    public OperationHandler getOperationHandler() {
-        return operationHandler;
+    public Operation getOperation() {
+        return operation;
     }
 
-    public void setOperation(OperationHandler operationHandler) {
-        this.operationHandler = operationHandler;
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     public Fruit getFruit() {
