@@ -1,17 +1,16 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.RecordingService;
+import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class RecordingServiceImpl implements RecordingService {
+public class FileWriterImpl implements FileWriter {
     @Override
     public void writeIntoFile(List<String> listData, String path) {
         File file = new File(path);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file))) {
             for (String data : listData) {
                 bufferedWriter.write(data);
                 bufferedWriter.newLine();

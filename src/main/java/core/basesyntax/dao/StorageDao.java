@@ -8,4 +8,5 @@ public interface StorageDao {
     Integer getQuantity(Fruit fruit);
 
     int size();
+
 }

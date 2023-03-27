@@ -9,6 +9,17 @@ public class FruitTransaction {
         return operation;
     }
 
+    public Operation getOperationFromValue(String value) {
+        Operation[] operations = Operation.values();
+        for (int i = 0; i < operations.length;) {
+            if (value.equals(operations[i].getValue())) {
+                return operations[i];
+            }
+            i++;
+        }
+        return null;
+    }
+
     public void setOperation(Operation operation) {
         this.operation = operation;
     }
