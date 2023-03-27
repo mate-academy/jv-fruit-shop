@@ -8,4 +8,3 @@ public class BalanceHandlerImpl implements OperationHandler {
         return quantity;
     }
 }
-

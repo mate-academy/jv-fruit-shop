@@ -3,7 +3,6 @@ package core.basesyntax.service.impl.transactions;
 import core.basesyntax.service.OperationHandler;
 
 public class PurchaseHandlerImpl implements OperationHandler {
-
     @Override
     public int getBalance(int storageBalance, int quantity) {
         int balance = storageBalance - quantity;
