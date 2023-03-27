@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 
 public class StorageDaoImpl implements StorageDao {
-
     @Override
     public Fruit add(Fruit fruit, int quantity) {
         Storage.getStorage().put(fruit, quantity);
@@ -13,10 +12,7 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public Integer getQuantity(Fruit fruit) {
-        if (Storage.getStorage().containsKey(fruit)) {
-            return Storage.getStorage().get(fruit);
-        }
-        return null;
+        return Storage.getStorage().get(fruit);
     }
 
     @Override
