@@ -1,7 +1,6 @@
 package core.basesyntax.service.implementation;
 
 import core.basesyntax.service.WriteToFileService;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;

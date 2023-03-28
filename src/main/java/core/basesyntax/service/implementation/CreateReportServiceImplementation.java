@@ -2,14 +2,14 @@ package core.basesyntax.service.implementation;
 
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CreateReportServiceImplementation implements CreateReportService {
-    private OperationStrategy operationStrategy;
+
     private static final int START_INDEX = 3;
+    private OperationStrategy operationStrategy;
 
     public CreateReportServiceImplementation(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
@@ -19,17 +19,19 @@ public class CreateReportServiceImplementation implements CreateReportService {
     public String createReport(String dataFromFile) {
         Map<String, Integer> fruitsMap = new HashMap<>();
         String newLineString;
-        String[] comaSplitArray;
 
         newLineString = Arrays.toString(dataFromFile.split(System.lineSeparator()));
         newLineString = newLineString.replaceAll("\\[|\\]", "");
         newLineString = newLineString.replaceAll(" ", "");
+
+        String[] comaSplitArray;
+
         comaSplitArray = newLineString.split(",");
 
-        for (int i = START_INDEX;i < comaSplitArray.length;i+=3) {
+        for (int i = START_INDEX;i < comaSplitArray.length;i += 3) {
             if (fruitsMap.containsKey(comaSplitArray[i + 1])) {
-                fruitsMap.put(comaSplitArray[i + 1], fruitsMap.get(comaSplitArray[i + 1]) +
-                        operationStrategy.get(comaSplitArray[i])
+                fruitsMap.put(comaSplitArray[i + 1], fruitsMap.get(comaSplitArray[i + 1])
+                        + operationStrategy.get(comaSplitArray[i])
                         .getValueByOperation(Integer.parseInt(comaSplitArray[i + 2])));
             } else {
                 fruitsMap.put(comaSplitArray[i + 1], operationStrategy.get(comaSplitArray[i])

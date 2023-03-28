@@ -1,4 +1,4 @@
-package core.basesyntax.service.operationHandler;
+package core.basesyntax.service.operationhandler;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override

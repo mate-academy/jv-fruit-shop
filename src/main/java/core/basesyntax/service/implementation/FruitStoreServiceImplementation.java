@@ -5,7 +5,6 @@ import core.basesyntax.service.FruitStoreService;
 import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.WriteToFileService;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImplementation;
 
 public class FruitStoreServiceImplementation implements FruitStoreService {
     private OperationStrategy operationStrategy;
