@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CreateReportServiceImplementation implements CreateReportService {
-
     private static final int START_INDEX = 3;
     private OperationStrategy operationStrategy;
 
@@ -28,7 +27,7 @@ public class CreateReportServiceImplementation implements CreateReportService {
 
         comaSplitArray = newLineString.split(",");
 
-        for (int i = START_INDEX;i < comaSplitArray.length;i += 3) {
+        for (int i = START_INDEX; i < comaSplitArray.length; i += 3) {
             if (fruitsMap.containsKey(comaSplitArray[i + 1])) {
                 fruitsMap.put(comaSplitArray[i + 1], fruitsMap.get(comaSplitArray[i + 1])
                         + operationStrategy.get(comaSplitArray[i])
