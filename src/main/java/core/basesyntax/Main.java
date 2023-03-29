@@ -46,6 +46,7 @@ public class Main {
                 new FruitStoreServiceImplementation(operationStrategy, readFromFileService,
                                                     createReportService, writeToFileService);
 
-        fruitStoreService.createReportFile("startFile.csv", "resultFile.csv");
+        fruitStoreService.createReportFile("src/main/resources/startFile.csv",
+                "src/main/resources/resultFile.csv");
     }
 }
