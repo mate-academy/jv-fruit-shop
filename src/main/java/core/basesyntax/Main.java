@@ -1,12 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitStore;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CreateReportService;
-import core.basesyntax.service.FruitStoreService;
 import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.WriteToFileService;
 import core.basesyntax.service.implementation.CreateReportServiceImplementation;
-import core.basesyntax.service.implementation.FruitStoreServiceImplementation;
 import core.basesyntax.service.implementation.ReadFromFileServiceImplementation;
 import core.basesyntax.service.implementation.WriteToFileServiceImplementation;
 import core.basesyntax.service.operationhandler.BalanceOperationHandler;
@@ -23,13 +21,13 @@ public class Main {
     public static void main(String[] args) {
         Map<String, OperationHandler> operationHandlersMap = new HashMap<>();
 
-        operationHandlersMap.put(FruitStore.Operation.BALANCE.getOperation(),
+        operationHandlersMap.put(FruitTransaction.Operation.BALANCE.getOperation(),
                 new BalanceOperationHandler());
-        operationHandlersMap.put(FruitStore.Operation.PURCHASE.getOperation(),
+        operationHandlersMap.put(FruitTransaction.Operation.PURCHASE.getOperation(),
                 new PurchaseOperationHandler());
-        operationHandlersMap.put(FruitStore.Operation.RETURN.getOperation(),
+        operationHandlersMap.put(FruitTransaction.Operation.RETURN.getOperation(),
                 new ReturnOperationHandler());
-        operationHandlersMap.put(FruitStore.Operation.SUPPLY.getOperation(),
+        operationHandlersMap.put(FruitTransaction.Operation.SUPPLY.getOperation(),
                 new SupplyOperationHandler());
 
         OperationStrategy operationStrategy =
@@ -42,11 +40,8 @@ public class Main {
         CreateReportService createReportService =
                 new CreateReportServiceImplementation(operationStrategy);
 
-        FruitStoreService fruitStoreService =
-                new FruitStoreServiceImplementation(operationStrategy, readFromFileService,
-                                                    createReportService, writeToFileService);
-
-        fruitStoreService.createReportFile("src/main/resources/startFile.csv",
-                "src/main/resources/resultFile.csv");
+        String dataFromFile = readFromFileService.readFromFile("src/main/resources/startFile.csv");
+        String report = createReportService.createReport(dataFromFile);
+        writeToFileService.writeToFile(report, "src/main/resources/resultFile.csv");
     }
 }
