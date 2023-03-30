@@ -9,6 +9,5 @@ public class ReturnOperationHandler implements OperationHandler {
         int quantity = FruitStorage.fruitStorage.get(fruitTransaction.getFruit())
                 + fruitTransaction.getQuantity();
         FruitStorage.put(fruitTransaction.getFruit(), quantity);
-
     }
 }
