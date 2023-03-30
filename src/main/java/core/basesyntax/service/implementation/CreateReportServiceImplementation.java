@@ -17,17 +17,14 @@ public class CreateReportServiceImplementation implements CreateReportService {
     @Override
     public String createReport(String dataFromFile) {
         Map<String, Integer> fruitsMap = new HashMap<>();
-        String newLineString;
 
-        newLineString = Arrays.toString(dataFromFile.split(System.lineSeparator()));
+        String newLineString = Arrays.toString(dataFromFile.split(System.lineSeparator()));
         newLineString = newLineString.replaceAll("\\[|\\]", "");
-        newLineString = newLineString.replaceAll(" ", "");
 
-        String[] comaSplitArray;
-
-        comaSplitArray = newLineString.split(",");
+        String[] comaSplitArray = newLineString.split(",");
 
         for (int i = START_INDEX; i < comaSplitArray.length; i += 3) {
+            comaSplitArray[i] = comaSplitArray[i].replaceAll(" ", "");
             if (fruitsMap.containsKey(comaSplitArray[i + 1])) {
                 fruitsMap.put(comaSplitArray[i + 1], fruitsMap.get(comaSplitArray[i + 1])
                         + operationStrategy.get(comaSplitArray[i])
