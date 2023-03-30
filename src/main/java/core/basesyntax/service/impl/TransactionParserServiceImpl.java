@@ -16,8 +16,8 @@ public class TransactionParserServiceImpl implements TransactionParserService {
 
     @Override
     public List<FruitTransaction> parseList(List<String> data) {
-        isValidData(data);
         data.remove(HEAD_LINE_INDEX);
+        isValidData(data);
         return data.stream()
                 .map(this::parseLineToFruitTransaction)
                 .collect(Collectors.toList());
@@ -34,11 +34,11 @@ public class TransactionParserServiceImpl implements TransactionParserService {
         return fruitTransaction;
     }
 
-    public void isValidData(List<String> inputData) {
+    private void isValidData(List<String> inputData) {
         for (String str : inputData) {
             if (!Pattern.matches(VALID_DATA_EXPRESSION, str)
                     && !str.equals("type,fruit,quantity")) {
-                throw new RuntimeException("Invalid input data");
+                throw new RuntimeException("Invalid input data: " + str);
             }
         }
     }
