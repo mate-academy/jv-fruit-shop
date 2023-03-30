@@ -8,12 +8,6 @@ public class FruitTransaction {
     public FruitTransaction() {
     }
 
-    public FruitTransaction(Operation operation, String fruit, int quantity) {
-        this.operation = operation;
-        this.fruit = fruit;
-        this.quantity = quantity;
-    }
-
     public Operation getOperation() {
         return operation;
     }
@@ -60,7 +54,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("This code " + code + " is unavailable.");
+            throw new IllegalArgumentException("This code " + code + " is unavailable.");
         }
     }
 }
