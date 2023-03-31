@@ -10,7 +10,7 @@ public class PurchaseOperationHandler implements OperationHandler {
                 - fruitTransaction.getQuantity();
         if (quantity < 0) {
             throw new RuntimeException("Don't have enough "
-                    +  fruitTransaction.getFruit() + "(s). Should be at least: "
+                    + fruitTransaction.getFruit() + "(s). Should be at least: "
                     + fruitTransaction.getQuantity() + ". But is: "
                     + FruitStorage.fruitStorage.get(fruitTransaction.getFruit()) + ".");
         }
