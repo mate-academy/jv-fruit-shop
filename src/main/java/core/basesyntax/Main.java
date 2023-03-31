@@ -3,11 +3,9 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.TransactionExecutionService;
 import core.basesyntax.service.TransactionParserService;
-import core.basesyntax.service.impl.FileReaderServiceImpl;
-import core.basesyntax.service.impl.FileWriterServiceImpl;
-import core.basesyntax.service.impl.ReportCreatorServiceImpl;
-import core.basesyntax.service.impl.TransactionParserServiceImpl;
+import core.basesyntax.service.impl.*;
 import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
@@ -34,10 +32,8 @@ public class Main {
         List<String> data = new FileReaderServiceImpl().readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> transactionList = parser.parseList(data);
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
-        for (FruitTransaction result : transactionList) {
-            OperationHandler operationHandler = operationStrategy.get(result.getOperation());
-            operationHandler.handle(result);
-        }
+        TransactionExecutionService transactionExecution = new TransactionExecutionServiceImpl();
+        transactionExecution.executeTransaction(transactionList, operationStrategy);
         ReportCreatorService reportCreator = new ReportCreatorServiceImpl();
         String report = reportCreator.createReport();
         writeService.writeToFile(report, OUTPUT_FILE_PATH);
