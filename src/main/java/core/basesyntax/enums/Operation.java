@@ -1,6 +1,6 @@
 package core.basesyntax.enums;
 
-public enum Operations {
+public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
@@ -8,7 +8,7 @@ public enum Operations {
 
     private String operation;
 
-    Operations(String operation) {
+    Operation(String operation) {
         this.operation = operation;
     }
 

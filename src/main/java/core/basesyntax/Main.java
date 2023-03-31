@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.enums.Operations;
+import core.basesyntax.enums.Operation;
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.WriteToFileService;
@@ -21,13 +21,13 @@ public class Main {
     public static void main(String[] args) {
         Map<String, OperationHandler> operationHandlersMap = new HashMap<>();
 
-        operationHandlersMap.put(Operations.BALANCE.getOperation(),
+        operationHandlersMap.put(Operation.BALANCE.getOperation(),
                 new BalanceOperationHandler());
-        operationHandlersMap.put(Operations.PURCHASE.getOperation(),
+        operationHandlersMap.put(Operation.PURCHASE.getOperation(),
                 new PurchaseOperationHandler());
-        operationHandlersMap.put(Operations.RETURN.getOperation(),
+        operationHandlersMap.put(Operation.RETURN.getOperation(),
                 new ReturnOperationHandler());
-        operationHandlersMap.put(Operations.SUPPLY.getOperation(),
+        operationHandlersMap.put(Operation.SUPPLY.getOperation(),
                 new SupplyOperationHandler());
 
         OperationStrategy operationStrategy =
