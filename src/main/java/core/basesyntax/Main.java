@@ -2,12 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.enums.Operation;
-import core.basesyntax.service.CreateReportService;
-import core.basesyntax.service.ReadFromFileService;
-import core.basesyntax.service.WriteToFileService;
-import core.basesyntax.service.impl.CreateReportServiceImpl;
-import core.basesyntax.service.impl.ReadFromFileServiceImpl;
-import core.basesyntax.service.impl.WriteToFileServiceImpl;
+import core.basesyntax.service.*;
+import core.basesyntax.service.impl.*;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
@@ -44,15 +40,20 @@ public class Main {
         OperationStrategy operationStrategy =
                 new OperationStrategyImpl(operationHandlersMap);
 
+        TransactionParseService transactionParseService = new TransactionParseServiceImpl();
+        FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
+
         ReadFromFileService readFromFileService =
                 new ReadFromFileServiceImpl();
         WriteToFileService writeToFileService =
                 new WriteToFileServiceImpl();
         CreateReportService createReportService =
-                new CreateReportServiceImpl(operationStrategy);
+                new CreateReportServiceImpl(new TransactionParseServiceImpl()
+                        , new FruitShopServiceImpl(operationStrategy));
 
         String dataFromFile = readFromFileService.readFromFile(START_FILE_PATH);
-        String report = createReportService.createReport(dataFromFile);
+        fruitShopService.processOfOperations(transactionParseService.parseList(dataFromFile));
+        String report = createReportService.createReport();
         writeToFileService.writeToFile(report, RESULT_FILE_PATH);
     }
 }
