@@ -8,13 +8,13 @@ import core.basesyntax.service.WriteToFileService;
 import core.basesyntax.service.impl.CreateReportServiceImpl;
 import core.basesyntax.service.impl.ReadFromFileServiceImpl;
 import core.basesyntax.service.impl.WriteToFileServiceImpl;
-import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
 

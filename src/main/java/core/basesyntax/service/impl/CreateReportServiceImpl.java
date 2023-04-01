@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.FruitStorage;
 import core.basesyntax.enums.Operation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CreateReportService;
@@ -33,18 +32,19 @@ public class CreateReportServiceImpl implements CreateReportService {
 
         for (int i = START_INDEX; i < comaSplitArray.length; i += 3) {
             comaSplitArray[i] = comaSplitArray[i].replaceAll(SPACE_REGEX, "");
-            fruitModel = new FruitTransaction(Operation.fromString(comaSplitArray[i]), comaSplitArray[i + 1],
+            fruitModel = new FruitTransaction(Operation.fromString(comaSplitArray[i]),
+                    comaSplitArray[i + 1],
                     Integer.parseInt(comaSplitArray[i + 2]));
             if (fruitsMap.containsKey(comaSplitArray[i + 1])) {
                 fruitsMap.put(fruitModel.getFruit(), operationStrategy
                                 .get(fruitModel.getOperation().getOperation())
                         .calculateValueByOperation(fruitModel)
-                        );
+                );
             } else {
                 fruitsMap.put(fruitModel.getFruit(), operationStrategy
                         .get(fruitModel.getOperation().getOperation())
                         .calculateValueByOperation(fruitModel)
-                        );
+                );
             }
         }
 
