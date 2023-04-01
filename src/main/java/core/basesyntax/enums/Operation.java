@@ -15,4 +15,13 @@ public enum Operation {
     public String getOperation() {
         return operation;
     }
+
+    public static Operation fromString(String text) {
+        for (Operation operation : Operation.values()) {
+            if (operation.operation.equalsIgnoreCase(text)) {
+                return operation;
+            }
+        }
+        return null;
+    }
 }

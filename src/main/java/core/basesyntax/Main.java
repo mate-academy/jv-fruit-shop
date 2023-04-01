@@ -1,24 +1,35 @@
 package core.basesyntax;
 
+import core.basesyntax.db.FruitStorage;
 import core.basesyntax.enums.Operation;
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.WriteToFileService;
-import core.basesyntax.service.implementation.CreateReportServiceImplementation;
-import core.basesyntax.service.implementation.ReadFromFileServiceImplementation;
-import core.basesyntax.service.implementation.WriteToFileServiceImplementation;
-import core.basesyntax.service.operationhandler.BalanceOperationHandler;
-import core.basesyntax.service.operationhandler.OperationHandler;
-import core.basesyntax.service.operationhandler.PurchaseOperationHandler;
-import core.basesyntax.service.operationhandler.ReturnOperationHandler;
-import core.basesyntax.service.operationhandler.SupplyOperationHandler;
+import core.basesyntax.service.impl.CreateReportServiceImpl;
+import core.basesyntax.service.impl.ReadFromFileServiceImpl;
+import core.basesyntax.service.impl.WriteToFileServiceImpl;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImplementation;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    private static final String START_FILE_PATH = "src/main/resources/startFile.csv";
+    private static final String RESULT_FILE_PATH = "src/main/resources/resultFile.csv";
+    private static final int APPLE_QUANTITY = 1000;
+    private static final int BANANA_QUANTITY = 2000;
+    private static final int ORANGE_QUANTITY = 500;
+
     public static void main(String[] args) {
+        FruitStorage.fruitsStorage.put("apple", APPLE_QUANTITY);
+        FruitStorage.fruitsStorage.put("banana", BANANA_QUANTITY);
+        FruitStorage.fruitsStorage.put("orange", ORANGE_QUANTITY);
+
         Map<String, OperationHandler> operationHandlersMap = new HashMap<>();
 
         operationHandlersMap.put(Operation.BALANCE.getOperation(),
@@ -31,17 +42,17 @@ public class Main {
                 new SupplyOperationHandler());
 
         OperationStrategy operationStrategy =
-                new OperationStrategyImplementation(operationHandlersMap);
+                new OperationStrategyImpl(operationHandlersMap);
 
         ReadFromFileService readFromFileService =
-                new ReadFromFileServiceImplementation();
+                new ReadFromFileServiceImpl();
         WriteToFileService writeToFileService =
-                new WriteToFileServiceImplementation();
+                new WriteToFileServiceImpl();
         CreateReportService createReportService =
-                new CreateReportServiceImplementation(operationStrategy);
+                new CreateReportServiceImpl(operationStrategy);
 
-        String dataFromFile = readFromFileService.readFromFile("src/main/resources/startFile.csv");
+        String dataFromFile = readFromFileService.readFromFile(START_FILE_PATH);
         String report = createReportService.createReport(dataFromFile);
-        writeToFileService.writeToFile(report, "src/main/resources/resultFile.csv");
+        writeToFileService.writeToFile(report, RESULT_FILE_PATH);
     }
 }

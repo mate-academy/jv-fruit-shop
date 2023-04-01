@@ -1,12 +1,12 @@
 type,fruit,quantity
 b,banana,2000
 b,apple,1000
+b,orange,500
 s,banana,100
 p,banana,13
 r,apple,10
 p,apple,20
 p,banana,5
 s,banana,50
-b,orange,50
 p,orange,30
 r,orange,10

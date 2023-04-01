@@ -1,11 +1,11 @@
-package core.basesyntax.service.implementation;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReadFromFileService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ReadFromFileServiceImplementation implements ReadFromFileService {
+public class ReadFromFileServiceImpl implements ReadFromFileService {
     @Override
     public String readFromFile(String fromFileName) {
         try {
