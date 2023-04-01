@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import core.basesyntax.enums.Operation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionParseService;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TransactionParseServiceImpl implements TransactionParseService {
     private static final String BRACKETS_REGEX = "\\[|\\]";
