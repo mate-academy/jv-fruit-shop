@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.Operation;
+import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.impl.AddBiOperation;
 import core.basesyntax.strategy.impl.SubtractBiOperation;
 import java.util.Map;

@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import core.basesyntax.Operation;
-
 public class Transaction {
     private Operation operation;
     private Fruit fruit;

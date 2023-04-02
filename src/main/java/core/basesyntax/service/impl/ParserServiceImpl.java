@@ -1,18 +1,18 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.Operation;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParserService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParserServiceCsv implements ParserService<Transaction> {
+public class ParserServiceImpl implements ParserService<Transaction> {
     private static final String DEFAULT_DELIMITER = " ";
     private String delimiter;
 
-    public ParserServiceCsv() {
+    public ParserServiceImpl() {
         this.delimiter = DEFAULT_DELIMITER;
     }
 
@@ -20,7 +20,7 @@ public class ParserServiceCsv implements ParserService<Transaction> {
         return delimiter;
     }
 
-    public ParserServiceCsv setDelimiter(String delimiter) {
+    public ParserServiceImpl setDelimiter(String delimiter) {
         this.delimiter = delimiter;
         return this;
     }

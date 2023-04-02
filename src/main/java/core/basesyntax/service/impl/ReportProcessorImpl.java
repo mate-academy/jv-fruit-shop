@@ -41,6 +41,11 @@ public class ReportProcessorImpl implements ReportProcessor<String> {
             biOperation = biOperationSupplier.getOperation(t.getOperation());
             result = biOperation.apply(result, t.getQuantity());
         }
+        if (result < 0) {
+            throw new RuntimeException("Something went wrong... The result for "
+                    + transactionList.get(0).getFruit().getName()
+                    + " is " + result);
+        }
         return result;
     }
 }
