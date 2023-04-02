@@ -9,21 +9,29 @@ public class Fruit {
         this.name = name;
     }
 
-    public static Fruit of(String name){
+    public static Fruit of(String name) {
         return new Fruit(name);
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return "Fruit{" +
-                "name='" + name + '\'' +
-                '}';
+        return "Fruit{"
+                + "name='" + name + '\''
+                + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Fruit fruit = (Fruit) o;
         return Objects.equals(name, fruit.name);
     }

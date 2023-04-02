@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-import core.basesyntax.strategy.Operation;
+import core.basesyntax.Operation;
 
 public class Transaction {
     private Operation operation;
@@ -42,10 +42,10 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "operation=" + operation +
-                ", fruit=" + fruit +
-                ", quantity=" + quantity +
-                '}';
+        return "Transaction{"
+                + "operation=" + operation
+                + ", fruit=" + fruit
+                + ", quantity=" + quantity
+                + '}';
     }
 }
