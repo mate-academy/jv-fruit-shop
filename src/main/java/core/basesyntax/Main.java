@@ -56,8 +56,7 @@ public class Main {
         WriteToFileService writeToFileService =
                 new WriteToFileServiceImpl();
         CreateReportService createReportService =
-                new CreateReportServiceImpl(new TransactionParseServiceImpl(),
-                        new FruitShopServiceImpl(operationStrategy));
+                new CreateReportServiceImpl();
 
         String dataFromFile = readFromFileService.readFromFile(START_FILE_PATH);
         fruitShopService.processOfOperations(transactionParseService.parseList(dataFromFile));
