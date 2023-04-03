@@ -1,29 +1,16 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.Transaction;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Storage {
-    private final Map<Fruit, List<Transaction>> transactionsData;
+    private Map<Fruit, Integer> remnantData;
 
-    private Storage(Map<Fruit, List<Transaction>> transactionsData) {
-        this.transactionsData = transactionsData;
+    public Storage(Map<Fruit, Integer> remnantData) {
+        this.remnantData = remnantData;
     }
 
-    private static Map<Fruit, List<Transaction>> getTransactionsMap(
-            List<Transaction> transactionList) {
-        return transactionList.stream()
-                .collect(Collectors.groupingBy(Transaction::getFruit));
-    }
-
-    public static Storage of(List<Transaction> transactionList) {
-        return new Storage(getTransactionsMap(transactionList));
-    }
-
-    public Map<Fruit, List<Transaction>> getTransactionsData() {
-        return transactionsData;
+    public Map<Fruit, Integer> get() {
+        return remnantData;
     }
 }

@@ -6,9 +6,11 @@ import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ParserService;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ParserServiceImpl implements ParserService<Transaction> {
+public class ParserServiceImpl implements ParserService<Map
+        <Fruit, List<Transaction>>, List<String>> {
     private static final String DEFAULT_DELIMITER = " ";
     private String delimiter;
 
@@ -34,12 +36,13 @@ public class ParserServiceImpl implements ParserService<Transaction> {
     }
 
     @Override
-    public List<Transaction> parse(List<String> stringList) {
+    public Map<Fruit, List<Transaction>> parse(List<String> stringList) {
         return stringList.stream()
                 .map(s -> s.split(delimiter))
                 .skip(1)
                 .map(s -> new Transaction(getOperation(s[0]),
                         Fruit.of(s[1]), Integer.parseInt(s[2])))
-                .collect(Collectors.toList());
+                .collect(Collectors.groupingBy(Transaction::getFruit));
     }
+
 }
