@@ -1,8 +1,9 @@
-package service;
+package service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
+import service.ParseService;
 
 public class ParseImpl implements ParseService {
     private static final String COMMA = ",";

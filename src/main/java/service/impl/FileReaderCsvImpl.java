@@ -1,9 +1,10 @@
-package service;
+package service.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import service.FileReaderService;
 
 public class FileReaderCsvImpl implements FileReaderService {
     @Override
@@ -11,7 +12,7 @@ public class FileReaderCsvImpl implements FileReaderService {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't get data from file ");
+            throw new RuntimeException("Can't find file by path: " + filePath, e);
         }
     }
 }

@@ -1,8 +1,10 @@
-package service;
+package service.impl;
 
 import java.util.List;
 import model.FruitTransaction;
+import service.TransactionHandlerService;
 import service.operation.OperationHandler;
+import strategy.OperationStrategy;
 
 public class TransactionHandlerImpl implements TransactionHandlerService {
     private OperationStrategy operationStrategy;
@@ -12,7 +14,7 @@ public class TransactionHandlerImpl implements TransactionHandlerService {
     }
 
     @Override
-    public void transactionHandle(List<FruitTransaction> transactions) {
+    public void handleTransactions(List<FruitTransaction> transactions) {
         if (transactions == null || transactions.isEmpty()) {
             throw new RuntimeException("Your data is empty!");
         } else {

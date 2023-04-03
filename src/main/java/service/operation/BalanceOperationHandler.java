@@ -6,6 +6,10 @@ import model.FruitTransaction;
 public class BalanceOperationHandler implements OperationHandler {
     @Override
     public void operation(FruitTransaction transaction) {
-        Storage.fruits.put(transaction.getFruitName(), transaction.getQuantity());
+        if (transaction.getQuantity() >= 0) {
+            Storage.fruits.put(transaction.getFruitName(), transaction.getQuantity());
+        } else {
+            throw new RuntimeException("Quantity is less than 0");
+        }
     }
 }

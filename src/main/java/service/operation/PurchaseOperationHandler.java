@@ -16,7 +16,7 @@ public class PurchaseOperationHandler implements OperationHandler {
             throw new RuntimeException("Fruit shop can't purchase you "
                     + transaction.getFruitName() + " in quantity "
                     + transactionFruitQuantity + " because shop has only "
-                    + currentFruitQuantity);
+                    + currentFruitQuantity + " fruits");
         }
     }
 }

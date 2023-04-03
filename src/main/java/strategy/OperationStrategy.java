@@ -1,4 +1,4 @@
-package service;
+package strategy;
 
 import model.FruitTransaction;
 import service.operation.OperationHandler;
