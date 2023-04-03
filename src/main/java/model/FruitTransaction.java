@@ -53,7 +53,7 @@ public class FruitTransaction {
                     return value;
                 }
             }
-            throw new RuntimeException("Incorrect transaction type");
+            throw new RuntimeException("Incorrect operation code: " + code);
         }
     }
 }

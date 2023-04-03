@@ -1,21 +1,21 @@
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.FileReaderCsvImpl;
 import service.FileReaderService;
-import service.FileWriterCsvImpl;
 import service.FileWriterService;
-import service.OperationStrategy;
-import service.OperationStrategyImpl;
-import service.ParseImpl;
 import service.ParseService;
-import service.TransactionHandlerImpl;
 import service.TransactionHandlerService;
+import service.impl.FileReaderCsvImpl;
+import service.impl.FileWriterCsvImpl;
+import service.impl.ParseImpl;
+import service.impl.TransactionHandlerImpl;
 import service.operation.BalanceOperationHandler;
 import service.operation.OperationHandler;
 import service.operation.PurchaseOperationHandler;
 import service.operation.ReturnOperationHandler;
 import service.operation.SupplyOperationHandler;
+import strategy.OperationStrategy;
+import strategy.OperationStrategyImpl;
 
 public class Main {
     private static final String inputFilePath = "src/main/resources/inputFile.csv";
@@ -36,7 +36,7 @@ public class Main {
         List<FruitTransaction> transactions = parse.parse(dataFromFile);
         TransactionHandlerService transactionHandler =
                 new TransactionHandlerImpl(operationStrategy);
-        transactionHandler.transactionHandle(transactions);
+        transactionHandler.handleTransactions(transactions);
         fileWriter.fileWriter(outputFilePath);
     }
 }
