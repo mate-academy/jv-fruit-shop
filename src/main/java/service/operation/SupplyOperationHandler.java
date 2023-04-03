@@ -5,7 +5,7 @@ import model.FruitTransaction;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
-    public void operation(FruitTransaction transaction) {
+    public void getOperation(FruitTransaction transaction) {
         int currentFruitQuantity = Storage.fruits.get(transaction.getFruitName());
         int transactionFruitQuantity = transaction.getQuantity();
         if (transactionFruitQuantity > 0) {

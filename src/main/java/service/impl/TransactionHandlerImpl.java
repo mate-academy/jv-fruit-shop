@@ -15,14 +15,10 @@ public class TransactionHandlerImpl implements TransactionHandlerService {
 
     @Override
     public void handleTransactions(List<FruitTransaction> transactions) {
-        if (transactions == null || transactions.isEmpty()) {
-            throw new RuntimeException("Your data is empty!");
-        } else {
-            for (FruitTransaction fruitTransaction : transactions) {
-                OperationHandler operationHandler = operationStrategy.getOperationStrategy(
-                        fruitTransaction.getType());
-                operationHandler.operation(fruitTransaction);
-            }
+        for (FruitTransaction fruitTransaction : transactions) {
+            OperationHandler operationHandler = operationStrategy.getOperationStrategy(
+                    fruitTransaction.getType());
+            operationHandler.getOperation(fruitTransaction);
         }
     }
 }
