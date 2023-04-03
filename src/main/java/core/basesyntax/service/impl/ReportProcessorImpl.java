@@ -3,10 +3,10 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ReportProcessor;
-import core.basesyntax.strategy.BiOperation;
-import core.basesyntax.strategy.BiOperationSupplier;
+import core.basesyntax.strategy.BiFunctionSupplier;
 import java.util.List;
 import java.util.Map;
+import java.util.function.ToIntBiFunction;
 import java.util.stream.Collectors;
 
 public class ReportProcessorImpl implements ReportProcessor<String> {
@@ -35,11 +35,11 @@ public class ReportProcessorImpl implements ReportProcessor<String> {
 
     private int getReportForOneFruit(List<Transaction> transactionList) {
         int result = 0;
-        BiOperation biOperation;
-        BiOperationSupplier biOperationSupplier = new BiOperationSupplier();
+        ToIntBiFunction<Integer, Integer> biFunction;
+        BiFunctionSupplier biFunctionSupplier = new BiFunctionSupplier();
         for (Transaction t : transactionList) {
-            biOperation = biOperationSupplier.getOperation(t.getOperation());
-            result = biOperation.apply(result, t.getQuantity());
+            biFunction = biFunctionSupplier.getFunction(t.getOperation());
+            result = biFunction.applyAsInt(result, t.getQuantity());
         }
         if (result < 0) {
             throw new RuntimeException("Something went wrong... The result for "
