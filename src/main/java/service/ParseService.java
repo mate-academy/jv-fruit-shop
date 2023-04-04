@@ -3,6 +3,6 @@ package service;
 import java.util.List;
 import model.FruitTransaction;
 
-public interface ParserService {
+public interface ParseService {
     List<FruitTransaction> parseTransactions(List<String> list);
 }

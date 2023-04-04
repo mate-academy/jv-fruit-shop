@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 public interface WriteService {
-    void writeFile(String fileName, String content);
+    void writeFile(String fileName, List<String> content);
 }

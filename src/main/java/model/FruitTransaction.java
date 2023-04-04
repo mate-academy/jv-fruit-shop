@@ -54,6 +54,5 @@ public class FruitTransaction {
                     .findFirst()
                     .get();
         }
-
     }
 }
