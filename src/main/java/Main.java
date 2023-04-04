@@ -3,11 +3,13 @@ import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import service.ParserService;
-import service.ReaderService;
-import service.WriterService;
+import service.ReadService;
+import service.ReportService;
+import service.WriteService;
 import service.impl.ParserServiceImpl;
-import service.impl.ReaderServiceImpl;
-import service.impl.WriterServiceImpl;
+import service.impl.ReadServiceImpl;
+import service.impl.ReportServiceImpl;
+import service.impl.WriteServiceImpl;
 import strategy.BalanceOperationHandler;
 import strategy.FruitStrategy;
 import strategy.FruitStrategyImpl;
@@ -18,6 +20,9 @@ import strategy.SupplyOperationHandler;
 
 public class Main {
     public static void main(String[] args) {
+        final String InputFile = "src/main/resources/inputData.csv";
+        final String outputFile = "src/main/resources/report.csv";
+
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
@@ -27,17 +32,20 @@ public class Main {
 
         FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHandlerMap);
         ParserService parser = new ParserServiceImpl();
-        ReaderService reader = new ReaderServiceImpl();
+        ReadService reader = new ReadServiceImpl();
 
-        List<String> stringsFromInputData = reader.get();
+        List<String> stringsFromInputData = reader.readFile(InputFile);
 
-        List<FruitTransaction> fruitTransactions = parser.parseTransaction(stringsFromInputData);
+        List<FruitTransaction> fruitTransactions = parser.parseTransactions(stringsFromInputData);
 
         for (FruitTransaction transaction : fruitTransactions) {
             fruitStrategy.get(transaction.getOperation()).operate(transaction);
         }
 
-        WriterService writer = new WriterServiceImpl();
-        writer.getReport();
+        ReportService reportService = new ReportServiceImpl();
+        List<String> report = reportService.getReport();
+
+        WriteService writer = new WriteServiceImpl();
+        writer.writeFile(report.toString(), outputFile);
     }
 }

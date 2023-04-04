@@ -4,7 +4,6 @@ import java.util.Map;
 import model.FruitTransaction;
 
 public class FruitStrategyImpl implements FruitStrategy {
-
     private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
     public FruitStrategyImpl(Map<FruitTransaction.Operation,
