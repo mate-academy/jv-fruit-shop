@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 
 public class ParserServiceImpl implements ParserService<Map
         <Fruit, List<Transaction>>, List<String>> {
+    private static final int OPERATION_MARK_INDEX = 0;
+    private static final int FRUIT_NAME_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
     private static final String DEFAULT_DELIMITER = " ";
     private String delimiter;
 
@@ -40,8 +43,8 @@ public class ParserServiceImpl implements ParserService<Map
         return stringList.stream()
                 .map(s -> s.split(delimiter))
                 .skip(1)
-                .map(s -> new Transaction(getOperation(s[0]),
-                        Fruit.of(s[1]), Integer.parseInt(s[2])))
+                .map(s -> new Transaction(getOperation(s[OPERATION_MARK_INDEX]),
+                        Fruit.of(s[FRUIT_NAME_INDEX]), Integer.parseInt(s[QUANTITY_INDEX])))
                 .collect(Collectors.groupingBy(Transaction::getFruit));
     }
 

@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface TransactionsProcessor<T, K> {
+public interface TransactionsService<T, K> {
     K process(T data);
 }

@@ -10,8 +10,7 @@ public class BiFunctionSupplier {
     private Map<Operation, ToIntBiFunction<Integer, Integer>> operations;
 
     public BiFunctionSupplier() {
-        this.operations = Map.of(Operation.BALANCE, new AddBiFunction(),
-                Operation.RETURN, new AddBiFunction(),
+        this.operations = Map.of(Operation.RETURN, new AddBiFunction(),
                 Operation.SUPPLY, new AddBiFunction(),
                 Operation.PURCHASE, new SubtractBiFunction());
     }

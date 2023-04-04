@@ -4,22 +4,22 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.TransactionsProcessor;
+import core.basesyntax.service.TransactionsService;
 import core.basesyntax.strategy.BiFunctionSupplier;
 import java.util.List;
 import java.util.Map;
-import java.util.function.ToIntBiFunction;
 import java.util.stream.Collectors;
 
-public class TransactionsProcessorImpl implements TransactionsProcessor
+public class TransactionsServiceImpl implements TransactionsService
         <Map<Fruit, List<Transaction>>, Storage> {
+    private static final int ZERO_INDEX = 0;
     private Storage storage;
 
     @Override
     public Storage process(Map<Fruit, List<Transaction>> transactionsData) {
         storage = new Storage(getRemnants(transactionsData));
         transactionsData.forEach((key, value) -> storage.get()
-                .put(key, getReportForOneFruit(value)));
+                .put(key, getReportForOneFruit(value, storage.get().get(key))));
         return storage;
     }
 
@@ -30,19 +30,19 @@ public class TransactionsProcessorImpl implements TransactionsProcessor
                 .collect(Collectors.toMap(Transaction::getFruit, Transaction::getQuantity));
     }
 
-    private int getReportForOneFruit(List<Transaction> transactionList) {
-        int result = 0;
-        ToIntBiFunction<Integer, Integer> biFunction;
+    private int getReportForOneFruit(List<Transaction> transactionList, int remnant) {
+        final int[] result = {remnant};
         BiFunctionSupplier biFunctionSupplier = new BiFunctionSupplier();
-        for (Transaction t : transactionList) {
-            biFunction = biFunctionSupplier.getFunction(t.getOperation());
-            result = biFunction.applyAsInt(result, t.getQuantity());
-        }
-        if (result < 0) {
+        transactionList.stream()
+                .filter(t -> !t.getOperation().equals(Operation.BALANCE))
+                .forEach(t -> result[ZERO_INDEX] = biFunctionSupplier
+                        .getFunction(t.getOperation())
+                        .applyAsInt(result[ZERO_INDEX], t.getQuantity()));
+        if (result[ZERO_INDEX] < 0) {
             throw new RuntimeException("Something went wrong... The result for "
-                    + transactionList.get(0).getFruit().getName()
-                    + " is " + result);
+                    + transactionList.get(ZERO_INDEX).getFruit().getName()
+                    + " is " + result[ZERO_INDEX]);
         }
-        return result;
+        return result[ZERO_INDEX];
     }
 }

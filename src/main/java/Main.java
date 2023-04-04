@@ -1,16 +1,16 @@
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ParserService;
-import core.basesyntax.service.ReportProcessor;
-import core.basesyntax.service.TransactionsProcessor;
-import core.basesyntax.service.impl.FileReaderImpl;
-import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionsService;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
-import core.basesyntax.service.impl.ReportProcessorImpl;
-import core.basesyntax.service.impl.TransactionsProcessorImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionsServiceImpl;
 import java.util.List;
 import java.util.Map;
 
@@ -21,17 +21,17 @@ public class Main {
     public static final String HEADER = "fruit,quantity";
 
     public static void main(String[] args) {
-        FileReader reader = new FileReaderImpl();
+        FileReaderService reader = new FileReaderServiceImpl();
         List<String> linesFromCsv = reader.read(DATA_FILE_NAME);
         ParserService<Map<Fruit, List<Transaction>>, List<String>> parserService =
                 new ParserServiceImpl().setDelimiter(CSV_PARSER_DELIMITER);
         Map<Fruit, List<Transaction>> transactions = parserService.parse(linesFromCsv);
-        TransactionsProcessor<Map<Fruit, List<Transaction>>, Storage> transactionsProcessor =
-                new TransactionsProcessorImpl();
-        Storage storage = transactionsProcessor.process(transactions);
-        ReportProcessor<Storage, String> reportProcessor = new ReportProcessorImpl();
-        String report = reportProcessor.getReport(storage, HEADER);
-        FileWriter<String> writer = new FileWriterImpl();
+        TransactionsService<Map<Fruit, List<Transaction>>, Storage> transactionsService =
+                new TransactionsServiceImpl();
+        Storage storage = transactionsService.process(transactions);
+        ReportService<Storage, String> reportService = new ReportServiceImpl();
+        String report = reportService.getReport(storage, HEADER);
+        FileWriterService<String> writer = new FileWriterServiceImpl();
         writer.write(report, REPORT_FILE_NAME);
     }
 }
