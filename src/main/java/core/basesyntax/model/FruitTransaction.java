@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
-
 public class FruitTransaction {
     private final String fruitName;
     private int quantity;

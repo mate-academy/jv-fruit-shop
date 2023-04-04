@@ -1,4 +1,4 @@
-package core.basesyntax.Service;
+package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
@@ -19,7 +19,8 @@ public class ToFruitTransactionImp implements ToFruitTransaction {
 
     private FruitTransaction getFruitTransaction(String line) {
         String[] string = line.split(",");
-        return new FruitTransaction(FruitTransaction.Operation.getByCode(string[INDEX_OF_OPERATION]),
+        return new FruitTransaction(FruitTransaction
+                .Operation.getByCode(string[INDEX_OF_OPERATION]),
                 string[INDEX_OF_NAME],
                 Integer.parseInt(string[INDEX_OF_AMONG]));
     }

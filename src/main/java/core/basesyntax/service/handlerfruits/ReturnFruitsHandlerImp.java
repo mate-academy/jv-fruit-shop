@@ -1,9 +1,9 @@
-package core.basesyntax.Service.HandlerFruits;
+package core.basesyntax.service.handlerfruits;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
-public class SupplyFruitsHandlerImp implements FruitsHandler {
+public class ReturnFruitsHandlerImp implements FruitsHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
         Storage.fruits.put(fruitTransaction.getFruitName(),

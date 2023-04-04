@@ -1,4 +1,4 @@
-package core.basesyntax.Service.InputOutput;
+package core.basesyntax.service.inputoutput;
 
 import java.io.IOException;
 import java.nio.file.Files;

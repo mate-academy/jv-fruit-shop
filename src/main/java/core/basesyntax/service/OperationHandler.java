@@ -1,7 +1,7 @@
-package core.basesyntax.Service;
+package core.basesyntax.service;
 
-import core.basesyntax.Service.HandlerFruits.FruitsHandler;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.handlerfruits.FruitsHandler;
 
 public interface OperationHandler {
     FruitsHandler getEnum(FruitTransaction.Operation type);
