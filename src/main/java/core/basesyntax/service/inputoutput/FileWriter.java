@@ -1,5 +1,5 @@
 package core.basesyntax.service.inputoutput;
 
-public interface FileWriteOutput {
+public interface FileWriter {
     void write(String filePath, String text);
 }

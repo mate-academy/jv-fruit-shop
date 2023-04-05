@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.db.Storage;
 import java.util.Map;
 
-public class OutputServiceImp implements OutputService {
+public class ReportServiceImp implements ReportService {
     public static final String HEAD = "fruit,quantity";
     public static final String SEPARATOR = System.lineSeparator();
 

@@ -1,21 +1,21 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.OperationHandlerImp;
-import core.basesyntax.service.OutputService;
-import core.basesyntax.service.OutputServiceImp;
+import core.basesyntax.service.OperationHandlerStrategy;
+import core.basesyntax.service.OperationHandlerStrategyImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportServiceImp;
 import core.basesyntax.service.ToFruitTransaction;
 import core.basesyntax.service.ToFruitTransactionImp;
 import core.basesyntax.service.handlerfruits.BalanceFruitsHandlerImp;
-import core.basesyntax.service.handlerfruits.FruitsHandler;
+import core.basesyntax.service.handlerfruits.OperationHandler;
 import core.basesyntax.service.handlerfruits.PurchaseFruitsHandlerImp;
 import core.basesyntax.service.handlerfruits.ReturnFruitsHandlerImp;
 import core.basesyntax.service.handlerfruits.SupplyFruitsHandlerImp;
-import core.basesyntax.service.inputoutput.FileReadInput;
-import core.basesyntax.service.inputoutput.FileReadInputImp;
-import core.basesyntax.service.inputoutput.FileWriteOutput;
-import core.basesyntax.service.inputoutput.FileWriteOutputImp;
+import core.basesyntax.service.inputoutput.FileReader;
+import core.basesyntax.service.inputoutput.FileReaderImp;
+import core.basesyntax.service.inputoutput.FileWriter;
+import core.basesyntax.service.inputoutput.FileWriterImp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,15 +27,15 @@ public class Main {
             "src/main/java/core/basesyntax/inputOutputFiles/outputFileFruits.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, FruitsHandler> handlerMap = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
         handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceFruitsHandlerImp());
         handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseFruitsHandlerImp());
         handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyFruitsHandlerImp());
         handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnFruitsHandlerImp());
-        OperationHandler operationHandler = new OperationHandlerImp(handlerMap);
+        OperationHandlerStrategy operationHandler = new OperationHandlerStrategyImpl(handlerMap);
 
-        FileReadInput fileReadInput = new FileReadInputImp();
-        FileWriteOutput fileWriteOutput = new FileWriteOutputImp();
+        FileReader fileReadInput = new FileReaderImp();
+        FileWriter fileWriteOutput = new FileWriterImp();
 
         List<String> linesFruitsString = fileReadInput.readFile(INPUT_FILE_FRUIT);
         ToFruitTransaction toFruitTransaction = new ToFruitTransactionImp();
@@ -43,12 +43,12 @@ public class Main {
                 toFruitTransaction.linesToFruitTransaction(linesFruitsString);
 
         for (FruitTransaction fruitTransaction : transactionList) {
-            FruitsHandler handler = operationHandler
-                    .getEnum(fruitTransaction.getOperation());
+            OperationHandler handler = operationHandler
+                    .get(fruitTransaction.getOperation());
             handler.handle(fruitTransaction);
         }
 
-        OutputService reportService = new OutputServiceImp();
+        ReportService reportService = new ReportServiceImp();
         String report = reportService.outputString();
         fileWriteOutput.write(OUTPUT_FILE_FRUIT, report);
     }

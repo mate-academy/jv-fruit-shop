@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface OutputService {
+public interface ReportService {
     String outputString();
 }
