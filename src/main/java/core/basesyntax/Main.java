@@ -22,9 +22,9 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_FRUIT =
-            "src/main/java/core/basesyntax/inputOutputFiles/inputFileFruits.csv";
+            "src/main/resources/inputFileFruits.csv";
     private static final String OUTPUT_FILE_FRUIT =
-            "src/main/java/core/basesyntax/inputOutputFiles/outputFileFruits.csv";
+            "src/main/resources/outputFileFruits.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
