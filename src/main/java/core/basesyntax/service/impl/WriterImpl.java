@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class WriterToCsvImpl implements Writer {
+public class WriterImpl implements Writer {
     @Override
     public void writeReport(String path, List<String> list) {
         try {

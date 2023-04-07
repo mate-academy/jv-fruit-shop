@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ParseService;
+import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class ParseServiceImpl implements ParseService {
+public class CsvTransactionParserImpl implements TransactionParser {
     private static final int FIRST_LINE_TO_READ = 1;
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;

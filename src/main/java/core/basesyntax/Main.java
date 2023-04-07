@@ -1,18 +1,20 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ParseService;
-import core.basesyntax.service.Transaction;
-import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
+import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.TransactionProcessor;
+import core.basesyntax.service.impl.CsvTransactionParserImpl;
 import core.basesyntax.service.impl.FinalReport;
-import core.basesyntax.service.impl.ParseServiceImpl;
-import core.basesyntax.service.impl.StrategyProviderImpl;
-import core.basesyntax.service.impl.TransactionImpl;
-import core.basesyntax.service.impl.WriterToCsvImpl;
-import core.basesyntax.strategy.OperationStrategyBalance;
-import core.basesyntax.strategy.OperationStrategyPurchase;
-import core.basesyntax.strategy.OperationStrategyReturn;
-import core.basesyntax.strategy.OperationStrategySupply;
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ReaderImpl;
+import core.basesyntax.service.impl.TransactionProcessorImpl;
+import core.basesyntax.service.impl.WriterImpl;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.List;
 
 public class Main {
@@ -20,24 +22,25 @@ public class Main {
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        StrategyProviderImpl strategyProvider = new StrategyProviderImpl();
-        strategyProvider.setStrategy(FruitTransaction.Operation.BALANCE,
-                new OperationStrategyBalance());
-        strategyProvider.setStrategy(FruitTransaction.Operation.PURCHASE,
-                new OperationStrategyPurchase());
-        strategyProvider.setStrategy(FruitTransaction.Operation.RETURN,
-                new OperationStrategyReturn());
-        strategyProvider.setStrategy(FruitTransaction.Operation.SUPPLY,
-                new OperationStrategySupply());
-        CsvFileReaderServiceImpl readerService = new CsvFileReaderServiceImpl();
+        FruitDao fruitDao = new FruitDaoImpl();
+        OperationStrategyImpl strategy = new OperationStrategyImpl();
+        strategy.setStrategy(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(fruitDao));
+        strategy.setStrategy(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(fruitDao));
+        strategy.setStrategy(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(fruitDao));
+        strategy.setStrategy(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(fruitDao));
+        ReaderImpl readerService = new ReaderImpl();
         List<String> readFile = readerService.readFile(DATA_FILE_PATH);
-        ParseService parseService = new ParseServiceImpl();
-        List<FruitTransaction> transactions = parseService.fruitTransaction(readFile);
-        Transaction transaction = new TransactionImpl();
-        transaction.transaction(transactions, strategyProvider);
+        TransactionParser transactionParser = new CsvTransactionParserImpl();
+        List<FruitTransaction> transactions = transactionParser.fruitTransaction(readFile);
+        TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
+        transactionProcessor.transaction(transactions, strategy);
         FinalReport report = new FinalReport();
         List<String> reportToWrite = report.getReport();
-        WriterToCsvImpl writer = new WriterToCsvImpl();
+        WriterImpl writer = new WriterImpl();
         writer.writeReport(REPORT_FILE_PATH, reportToWrite);
     }
 }

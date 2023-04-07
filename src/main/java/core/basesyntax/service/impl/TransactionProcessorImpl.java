@@ -1,16 +1,16 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.StrategyProvider;
-import core.basesyntax.service.Transaction;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.TransactionProcessor;
 import java.util.List;
 
-public class TransactionImpl implements Transaction {
+public class TransactionProcessorImpl implements TransactionProcessor {
     @Override
     public void transaction(List<FruitTransaction> fruitTransactions,
-                            StrategyProvider strategyProvider) {
+                            OperationStrategy operationStrategy) {
         for (FruitTransaction transaction : fruitTransactions) {
-            strategyProvider.getStrategy(transaction.getOperation())
+            operationStrategy.getStrategy(transaction.getOperation())
                     .calculate(transaction.getFruit(), transaction.getQuantity());
         }
     }
