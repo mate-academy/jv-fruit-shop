@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class FruitTransaction {
+    private static final int ALLOWED_QUANTITY = 0;
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -29,6 +30,9 @@ public class FruitTransaction {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < ALLOWED_QUANTITY) {
+            throw new RuntimeException("Quantity can't be negative");
+        }
         this.quantity = quantity;
     }
 

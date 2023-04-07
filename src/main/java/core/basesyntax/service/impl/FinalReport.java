@@ -1,18 +1,19 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.ReportsService;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class EndOfTheDayReport implements ReportsService {
-    private final String FIRST_LINE = "fruit,quantity";
+public class FinalReport implements ReportsService {
+    private static final String FIRST_LINE = "fruit,quantity";
+
     @Override
     public List<String> getReport() {
+        FruitDaoImpl storage = new FruitDaoImpl();
         List<String> report = new ArrayList<>();
         report.add(FIRST_LINE);
-        Storage.getFruitsStorage()
+        storage.getStorage()
                 .forEach((key, value) -> report.add(key + "," + value));
         return report;
     }

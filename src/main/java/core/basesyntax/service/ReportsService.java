@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.List;
 
 public interface ReportsService {
-     List<String> getReport();
+    List<String> getReport();
 }

@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
+import java.util.List;
 
 public interface Transaction {
-    void transaction(FruitTransaction fruitTransaction, StrategyController controller);
+    void transaction(List<FruitTransaction> transactions, StrategyProvider controller);
 }
