@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.WriterService;
-
+import core.basesyntax.service.WriterToFileService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class WriterServiceImpl implements WriterService {
+public class WriterToFileServiceImpl implements WriterToFileService {
+
     @Override
     public void writeToFile(List<String> list, String filePath) {
         File file = new File(filePath);
