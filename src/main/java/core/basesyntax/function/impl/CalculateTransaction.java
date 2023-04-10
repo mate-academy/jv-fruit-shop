@@ -11,14 +11,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class CompleteTransaction implements Function<FruitTransaction, FruitQuantity> {
+public class CalculateTransaction implements Function<FruitTransaction, FruitQuantity> {
     private static final String BALANCE_TRANSACTION = "b";
     private static final String SUPPLY_TRANSACTION = "s";
     private static final String PURCHASE_TRANSACTION = "p";
     private static final String RETURN_TRANSACTION = "r";
     private static final Map<String, FruitTransactionAction> strategy = new HashMap<>();
 
-    public CompleteTransaction() {
+    public CalculateTransaction() {
         strategy.put(BALANCE_TRANSACTION, new FruitTransactionActionBalanceImpl());
         strategy.put(SUPPLY_TRANSACTION, new FruitTransactionActionSupplyImpl());
         strategy.put(PURCHASE_TRANSACTION, new FruitTransactionActionPurchaseImpl());

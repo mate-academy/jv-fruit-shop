@@ -1,20 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.DaoGetFruitTransaction;
-import core.basesyntax.dao.DaoSetFruitTransaction;
-import core.basesyntax.dao.DaoSetList;
-import core.basesyntax.dao.impl.DaoGetFruitTransactionImpl;
-import core.basesyntax.dao.impl.DaoSetFruitTransactionImpl;
-import core.basesyntax.dao.impl.DaoSetListImpl;
-import core.basesyntax.function.impl.DailyBalanceToFruitTransactionList;
+import core.basesyntax.dao.SaveAllRecords;
+import core.basesyntax.dao.impl.SaveAllRecordsImpl;
+import core.basesyntax.function.impl.ListStringsToFruitTransactions;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CheckDailyBalance;
-import core.basesyntax.service.DailyBalanceFileGenerator;
+import core.basesyntax.service.BalanceListCreator;
+import core.basesyntax.service.CalculateBalanceService;
+import core.basesyntax.service.CheckPositiveBalanceService;
 import core.basesyntax.service.ReaderFromFileService;
-import core.basesyntax.service.impl.CheckDailyBalanceImpl;
-import core.basesyntax.service.impl.DailyBalanceCalculatorImpl;
-import core.basesyntax.service.impl.DailyBalanceFileGeneratorImpl;
+import core.basesyntax.service.WriterToFileService;
+import core.basesyntax.service.impl.BalanceListCreatorImpl;
+import core.basesyntax.service.impl.CalculateBalanceServiceImpl;
+import core.basesyntax.service.impl.CheckPositiveBalanceServiceImpl;
 import core.basesyntax.service.impl.ReaderFromFileServiceImpl;
+import core.basesyntax.service.impl.WriterToFileServiceImpl;
 import java.util.List;
 import java.util.Map;
 
@@ -24,22 +23,21 @@ public class Main {
 
     public static void main(String[] args) {
         ReaderFromFileService readerService = new ReaderFromFileServiceImpl();
-        List<String> linesFromFile = readerService.readFromFile(INPUT_FILE);
-        DaoSetList setListStringToDB = new DaoSetListImpl();
-        setListStringToDB.apply(linesFromFile);
-        DailyBalanceCalculatorImpl reportGenerator = new DailyBalanceCalculatorImpl();
-        DaoGetFruitTransaction getFruitTransactionFromDb = new DaoGetFruitTransactionImpl();
-        Map<String, Integer> dailyBalance
-                = reportGenerator.calculateBalance(getFruitTransactionFromDb.apply());
-        CheckDailyBalance checkBalance = new CheckDailyBalanceImpl();
-        checkBalance.isOk(dailyBalance);
-        DaoSetFruitTransaction setFruitTransactionToDb = new DaoSetFruitTransactionImpl();
-        DailyBalanceToFruitTransactionList dailyBalanceToFruitTransactionList
-                = new DailyBalanceToFruitTransactionList();
-        List<FruitTransaction> dailyBalanceList
-                = dailyBalanceToFruitTransactionList.apply(dailyBalance);
-        setFruitTransactionToDb.apply(dailyBalanceList);
-        DailyBalanceFileGenerator dailyBalanceFileGenerator = new DailyBalanceFileGeneratorImpl();
-        dailyBalanceFileGenerator.apply(REPORT_FILE);
+        List<String> listFromFile = readerService.readFromFile(INPUT_FILE);
+        ListStringsToFruitTransactions listStringsToFruitTransactions
+                = new ListStringsToFruitTransactions();
+        List<FruitTransaction> fruitTransactions
+                = listStringsToFruitTransactions.apply(listFromFile);
+        CalculateBalanceService calculateBalanceService = new CalculateBalanceServiceImpl();
+        Map<String, Integer> fruitBalance = calculateBalanceService.calculate(fruitTransactions);
+        CheckPositiveBalanceService checkPositiveBalanceService
+                = new CheckPositiveBalanceServiceImpl();
+        checkPositiveBalanceService.isPositive(fruitBalance);
+        SaveAllRecords saveAllRecords = new SaveAllRecordsImpl();
+        saveAllRecords.save(fruitBalance);
+        BalanceListCreator balanceListCreator = new BalanceListCreatorImpl();
+        List<String> reportList = balanceListCreator.create(fruitBalance);
+        WriterToFileService writerService = new WriterToFileServiceImpl();
+        writerService.writeToFile(reportList, REPORT_FILE);
     }
 }

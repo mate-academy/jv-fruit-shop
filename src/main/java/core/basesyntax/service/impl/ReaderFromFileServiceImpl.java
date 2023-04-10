@@ -15,7 +15,7 @@ public class ReaderFromFileServiceImpl implements ReaderFromFileService {
             strings = Files.readAllLines(file.toPath());
             return strings;
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from " + filePath, e);
+            throw new RuntimeException("Can't read from file" + filePath, e);
         }
     }
 }

@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CheckDailyBalance;
+import core.basesyntax.service.CheckPositiveBalanceService;
 import java.util.Map;
 
-public class CheckDailyBalanceImpl implements CheckDailyBalance {
+public class CheckPositiveBalanceServiceImpl implements CheckPositiveBalanceService {
 
     @Override
-    public boolean isOk(Map<String, Integer> dailyBalance) {
-        for (Map.Entry<String, Integer> entry : dailyBalance.entrySet()) {
+    public boolean isPositive(Map<String, Integer> balance) {
+        for (Map.Entry<String, Integer> entry : balance.entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
             if (value < 0) {
