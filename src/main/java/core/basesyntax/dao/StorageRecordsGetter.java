@@ -2,6 +2,6 @@ package core.basesyntax.dao;
 
 import java.util.Map;
 
-public interface GetAllRecords {
+public interface StorageRecordsGetter {
     Map<String,Integer> get();
 }

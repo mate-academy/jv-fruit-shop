@@ -1,6 +1,5 @@
 package core.basesyntax.function.impl;
 
-import core.basesyntax.model.FruitQuantity;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.FruitTransactionAction;
 import core.basesyntax.strategy.impl.FruitTransactionActionBalanceImpl;
@@ -11,14 +10,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class CalculateTransaction implements Function<FruitTransaction, FruitQuantity> {
+public class TransactionCalculator implements Function<FruitTransaction, Map<String, Integer>> {
     private static final String BALANCE_TRANSACTION = "b";
     private static final String SUPPLY_TRANSACTION = "s";
     private static final String PURCHASE_TRANSACTION = "p";
     private static final String RETURN_TRANSACTION = "r";
     private static final Map<String, FruitTransactionAction> strategy = new HashMap<>();
 
-    public CalculateTransaction() {
+    private FruitTransactionAction action;
+
+    public TransactionCalculator() {
         strategy.put(BALANCE_TRANSACTION, new FruitTransactionActionBalanceImpl());
         strategy.put(SUPPLY_TRANSACTION, new FruitTransactionActionSupplyImpl());
         strategy.put(PURCHASE_TRANSACTION, new FruitTransactionActionPurchaseImpl());
@@ -26,10 +27,10 @@ public class CalculateTransaction implements Function<FruitTransaction, FruitQua
     }
 
     @Override
-    public FruitQuantity apply(FruitTransaction fruitTransaction) {
-        FruitTransactionAction action;
+    public Map<String, Integer> apply(FruitTransaction fruitTransaction) {
         action = strategy.get(fruitTransaction.getOperation().getCode());
-        return new FruitQuantity(fruitTransaction.getFruit(),
-                action.transactionAction(fruitTransaction));
+        Map<String, Integer> fruitQuantity = new HashMap<>();
+        fruitQuantity.put(fruitTransaction.getFruit(), action.transactionAction(fruitTransaction));
+        return fruitQuantity;
     }
 }

@@ -1,19 +1,19 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.WriterToFileService;
+import core.basesyntax.service.FileWriterService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class WriterToFileServiceImpl implements WriterToFileService {
+public class FileWriterServiceImpl implements FileWriterService {
 
     @Override
-    public void writeToFile(List<String> list, String filePath) {
+    public void writeToFile(List<String> strings, String filePath) {
         File file = new File(filePath);
         try {
-            Files.write(Paths.get(filePath), list);
+            Files.write(Paths.get(filePath), strings);
         } catch (IOException e) {
             throw new RuntimeException("Can`t write to file " + filePath, e);
         }

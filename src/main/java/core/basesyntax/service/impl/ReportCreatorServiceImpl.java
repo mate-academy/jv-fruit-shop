@@ -1,21 +1,24 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.GetAllRecords;
-import core.basesyntax.dao.impl.GetAllRecordsImpl;
-import core.basesyntax.service.BalanceListCreator;
+import core.basesyntax.dao.StorageRecordsGetter;
+import core.basesyntax.dao.impl.StorageRecordsGetterImpl;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.ReportCreatorService;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class BalanceListCreatorImpl implements BalanceListCreator {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String CSV_REPORT_TITLE = "fruit,quantity";
     private static final int TITLE_INDEX = 0;
     private static final String FRUIT_TRANSACTION_SEPARATOR = ",";
 
+    private static final StorageRecordsGetter storageRecordsGetter = new StorageRecordsGetterImpl();
+    private static final FileWriterService writerService = new FileWriterServiceImpl();
+
     @Override
-    public List<String> create(Map<String, Integer> itemsQuantity) {
-        GetAllRecords getAllRecords = new GetAllRecordsImpl();
-        Map<String, Integer> reportMap = getAllRecords.get();
+    public void create(String fileName) {
+        Map<String, Integer> reportMap = storageRecordsGetter.get();
         List<String> dailyReportList = reportMap
                 .entrySet()
                 .stream()
@@ -24,6 +27,6 @@ public class BalanceListCreatorImpl implements BalanceListCreator {
                         + entry.getValue())
                 .collect(Collectors.toList());
         dailyReportList.add(TITLE_INDEX, CSV_REPORT_TITLE);
-        return dailyReportList;
+        writerService.writeToFile(dailyReportList, fileName);
     }
 }
