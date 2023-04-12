@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriterService;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,7 +10,6 @@ public class FileWriterServiceImpl implements FileWriterService {
 
     @Override
     public void writeToFile(List<String> strings, String filePath) {
-        File file = new File(filePath);
         try {
             Files.write(Paths.get(filePath), strings);
         } catch (IOException e) {

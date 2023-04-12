@@ -5,10 +5,10 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public FruitTransaction(String code, String fruit, String quantity) {
+    public FruitTransaction(String code, String fruit, Integer quantity) {
         this.operation = getTransactionName(code);
         this.fruit = fruit;
-        this.quantity = Integer.parseInt(quantity);
+        this.quantity = quantity;
     }
 
     private Operation getTransactionName(String code) {

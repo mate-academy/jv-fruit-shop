@@ -1,8 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.StorageRecordsGetter;
-import core.basesyntax.dao.impl.StorageRecordsGetterImpl;
-import core.basesyntax.service.FileWriterService;
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.service.ReportCreatorService;
 import java.util.List;
 import java.util.Map;
@@ -13,20 +12,19 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final int TITLE_INDEX = 0;
     private static final String FRUIT_TRANSACTION_SEPARATOR = ",";
 
-    private static final StorageRecordsGetter storageRecordsGetter = new StorageRecordsGetterImpl();
-    private static final FileWriterService writerService = new FileWriterServiceImpl();
+    private static final StorageDao storageDao = new StorageDaoImpl();
 
     @Override
-    public void create(String fileName) {
-        Map<String, Integer> reportMap = storageRecordsGetter.get();
-        List<String> dailyReportList = reportMap
+    public List<String> create() {
+        Map<String, Integer> reportMap = storageDao.getAll();
+        List<String> dailyReport = reportMap
                 .entrySet()
                 .stream()
                 .map(entry -> entry.getKey()
                         + FRUIT_TRANSACTION_SEPARATOR
                         + entry.getValue())
                 .collect(Collectors.toList());
-        dailyReportList.add(TITLE_INDEX, CSV_REPORT_TITLE);
-        writerService.writeToFile(dailyReportList, fileName);
+        dailyReport.add(TITLE_INDEX, CSV_REPORT_TITLE);
+        return dailyReport;
     }
 }
