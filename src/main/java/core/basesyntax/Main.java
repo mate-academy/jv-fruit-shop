@@ -3,15 +3,15 @@ package core.basesyntax;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CalculationService;
-import core.basesyntax.service.CsvFileReaderService;
-import core.basesyntax.service.CsvFileWriterService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.TransactionParserService;
 import core.basesyntax.service.impl.CalculationServiceImpl;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
-import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.impl.TransactionParserServiceImpl;
+import core.basesyntax.service.impl.CsvReportServiceImpl;
+import core.basesyntax.service.impl.TransactionCsvParserServiceImpl;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;
 import core.basesyntax.strategy.transaction.BalanceTransactionHandler;
@@ -38,13 +38,13 @@ public class Main {
         transactionHandlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseTransactionHandler());
 
-        CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
-        TransactionParserService transactionParserService = new TransactionParserServiceImpl();
+        FileReaderService readerService = new CsvFileReaderServiceImpl();
+        TransactionParserService transactionParserService = new TransactionCsvParserServiceImpl();
         TransactionStrategy transactionStrategy =
                 new TransactionStrategyImpl(transactionHandlerMap);
         CalculationService calculationService = new CalculationServiceImpl(transactionStrategy);
-        ReportService reportService = new ReportServiceImpl();
-        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
+        ReportService reportService = new CsvReportServiceImpl();
+        FileWriterService writerService = new CsvFileWriterServiceImpl();
 
         List<String> readFromFile = readerService.readFromFile(INPUT_FILE_NAME);
         List<FruitTransaction> parseData = transactionParserService.parse(readFromFile);

@@ -5,7 +5,7 @@ import core.basesyntax.service.TransactionParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionParserServiceImpl implements TransactionParserService {
+public class TransactionCsvParserServiceImpl implements TransactionParserService {
     private static final String LINE_SEPARATOR = ",";
     private static int OPERATION_INDEX = 0;
     private static int FRUIT_INDEX = 1;

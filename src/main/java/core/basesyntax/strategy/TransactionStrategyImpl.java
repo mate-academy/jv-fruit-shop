@@ -13,7 +13,7 @@ public class TransactionStrategyImpl implements TransactionStrategy {
     }
 
     @Override
-    public void process(FruitTransaction transaction) {
-        transactionHandlerMap.get(transaction.getOperation()).operate(transaction);
+    public TransactionHandler get(FruitTransaction.Operation transaction) {
+        return transactionHandlerMap.get(transaction);
     }
 }

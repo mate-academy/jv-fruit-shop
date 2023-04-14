@@ -5,7 +5,7 @@ import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseTransactionHandler implements TransactionHandler {
     @Override
-    public void operate(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         if (Storage.fruitMap.get(transaction.getFruit()) < transaction.getQuantity()) {
             throw new RuntimeException("Not enough fruits in storage");
         }
