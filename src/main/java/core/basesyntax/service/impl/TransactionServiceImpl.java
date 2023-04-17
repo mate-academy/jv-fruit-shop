@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionServiceImpl implements TransactionService {
     private static final String LINE_SEPARATOR = ",";

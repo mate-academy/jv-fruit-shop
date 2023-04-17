@@ -1,6 +1,3 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.ReportService;
@@ -19,10 +16,15 @@ import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import core.basesyntax.strategy.impl.TransactionHandlerImpl;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
-    private static final String INPUT_PATH = "src/main/java/core/basesyntax/resources/inputData.csv";
-    private static final String OUTPUT_PATH = "src/main/java/core/basesyntax/resources/report.csv";
+    private static final String INPUT_PATH =
+            "src/main/java/core/basesyntax/resources/inputData.csv";
+    private static final String OUTPUT_PATH =
+            "src/main/java/core/basesyntax/resources/report.csv";
 
     public static void main(String[] args) {
 

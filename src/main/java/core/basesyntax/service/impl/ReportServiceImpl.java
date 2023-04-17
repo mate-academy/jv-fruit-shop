@@ -1,10 +1,9 @@
 package core.basesyntax.service.impl;
 
-
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 import java.util.stream.Collectors;
-import core.basesyntax.service.ReportService;
-import core.basesyntax.db.Storage;
 
 public class ReportServiceImpl implements ReportService {
     private static final String REPORT_TITLE = "fruit,quantity\n";
