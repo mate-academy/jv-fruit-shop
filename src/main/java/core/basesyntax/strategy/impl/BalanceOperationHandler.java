@@ -5,10 +5,15 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
+    private final Storage storage;
+
+    public BalanceOperationHandler() {
+        this.storage = new Storage();
+    }
 
     @Override
     public void transaction(FruitTransaction fruitTransaction) {
-        Storage.fruitsStorage.put(fruitTransaction.getFruit(),
+        storage.getFruitsStorage().put(fruitTransaction.getFruit(),
                 fruitTransaction.getQuantity());
     }
 }
