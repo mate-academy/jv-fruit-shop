@@ -6,7 +6,6 @@ import core.basesyntax.strategy.TransactionHandler;
 import java.util.List;
 
 public class TransactionHandlerImpl implements TransactionHandler {
-
     private final OperationStrategy operationStrategy;
 
     public TransactionHandlerImpl(OperationStrategy operationStrategy) {
@@ -16,7 +15,7 @@ public class TransactionHandlerImpl implements TransactionHandler {
     @Override
     public void parse(List<FruitTransaction> parseList) {
         for (FruitTransaction line : parseList) {
-            operationStrategy.get(line.getOperation()).transaction(line);
+            operationStrategy.get(line.getOperation()).operateFruits(line);
         }
     }
 }
