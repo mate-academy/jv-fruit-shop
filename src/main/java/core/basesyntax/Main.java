@@ -25,12 +25,11 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_PATH =
-            "src/main/java/core/basesyntax/resources/inputData.csv";
+            "src/main/resources/inputData.csv";
     private static final String OUTPUT_PATH =
-            "src/main/java/core/basesyntax/resources/report.csv";
+            "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-
         Map<FruitTransaction.Operation, OperationHandler> operationsHandlerMap = new HashMap<>();
         operationsHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler());
@@ -57,6 +56,5 @@ public class Main {
 
         WriteToFileService writeToFileService = new WriteToFileServiceImpl();
         writeToFileService.writeToFile(OUTPUT_PATH, report);
-
     }
 }
