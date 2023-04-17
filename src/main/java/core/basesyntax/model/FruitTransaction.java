@@ -32,7 +32,6 @@ public class FruitTransaction {
     }
 
     public enum Operation {
-
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
@@ -56,26 +55,6 @@ public class FruitTransaction {
             }
             throw new RuntimeException("code operation does not found");
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof FruitTransaction)) {
-            return false;
-        }
-
-        FruitTransaction that = (FruitTransaction) o;
-
-        if (quantity != that.quantity) {
-            return false;
-        }
-        if (fruitName != null ? fruitName.equals(that.fruitName) : that.fruitName == null) {
-            return operation == that.operation;
-        }
-        return false;
     }
 
     @Override

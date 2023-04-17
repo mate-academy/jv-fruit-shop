@@ -49,7 +49,7 @@ public class Main {
         }
 
         ReportService reportService = new ReportServiceImp();
-        String report = reportService.outputString();
+        String report = reportService.createReport();
         fileWriteOutput.write(OUTPUT_FILE_FRUIT, report);
     }
 }

@@ -8,7 +8,7 @@ public class ReportServiceImp implements ReportService {
     public static final String SEPARATOR = System.lineSeparator();
 
     @Override
-    public String outputString() {
+    public String createReport() {
         StringBuilder reportBuilder = new StringBuilder(HEAD).append(SEPARATOR);
         for (Map.Entry key : Storage.fruits.entrySet()) {
             reportBuilder.append(key.getKey().toString())

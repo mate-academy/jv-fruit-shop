@@ -5,13 +5,11 @@ import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseFruitsHandlerImp implements OperationHandler {
     @Override
-    public void handle(FruitTransaction fruitTransaction) {
-        Integer lastSum = Storage.fruits.get(fruitTransaction.getFruitName());
-
+    public void handle(FruitTransaction fruitTransaction) throws RuntimeException {
         if (fruitTransaction.getQuantity() == 0) {
-            throw new RuntimeException("cannot be taken from zero!");
+            throw new RuntimeException("Quantity zero, impossible to take away!");
         }
-
+        Integer lastSum = Storage.fruits.get(fruitTransaction.getFruitName());
         Storage.fruits.put(fruitTransaction.getFruitName(),
                 lastSum - fruitTransaction.getQuantity());
     }
