@@ -1,28 +1,28 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
-import service.ReadFromFileService;
-import service.ReportService;
-import service.TransactionService;
-import service.WriteToFileService;
-import service.impl.ReadFromFileServiceImpl;
-import service.impl.ReportServiceImpl;
-import service.impl.TransactionServiceImpl;
-import service.impl.WriteToFileServiceImpl;
-import strategy.OperationHandler;
-import strategy.OperationStrategy;
-import strategy.TransactionHandler;
-import strategy.impl.BalanceOperationHandler;
-import strategy.impl.OperationStrategyImpl;
-import strategy.impl.PurchaseOperationHandler;
-import strategy.impl.ReturnOperationHandler;
-import strategy.impl.SupplyOperationHandler;
-import strategy.impl.TransactionHandlerImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ReadFromFileService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.WriteToFileService;
+import core.basesyntax.service.impl.ReadFromFileServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
+import core.basesyntax.service.impl.WriteToFileServiceImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.TransactionHandler;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
+import core.basesyntax.strategy.impl.TransactionHandlerImpl;
 
 public class Main {
-    private static final String INPUT_PATH = "src/main/java/resources/inputData.csv";
-    private static final String OUTPUT_PATH = "src/main/java/resources/report.csv";
+    private static final String INPUT_PATH = "src/main/java/core/basesyntax/resources/inputData.csv";
+    private static final String OUTPUT_PATH = "src/main/java/core/basesyntax/resources/report.csv";
 
     public static void main(String[] args) {
 

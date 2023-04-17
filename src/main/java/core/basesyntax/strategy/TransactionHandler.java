@@ -1,7 +1,7 @@
-package strategy;
+package core.basesyntax.strategy;
 
 import java.util.List;
-import model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public interface TransactionHandler {
 

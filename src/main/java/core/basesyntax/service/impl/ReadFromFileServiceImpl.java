@@ -1,10 +1,10 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import service.ReadFromFileService;
+import core.basesyntax.service.ReadFromFileService;
 
 public class ReadFromFileServiceImpl implements ReadFromFileService {
 

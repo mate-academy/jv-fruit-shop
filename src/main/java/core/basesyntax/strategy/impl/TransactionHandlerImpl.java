@@ -1,9 +1,9 @@
-package strategy.impl;
+package core.basesyntax.strategy.impl;
 
 import java.util.List;
-import model.FruitTransaction;
-import strategy.OperationStrategy;
-import strategy.TransactionHandler;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.TransactionHandler;
 
 public class TransactionHandlerImpl implements TransactionHandler {
 
