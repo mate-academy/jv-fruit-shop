@@ -1,12 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.db.Storage.fruitData;
+
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.Transfer;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.Map;
-
-import static core.basesyntax.db.Storage.fruitData;
 
 public class TransferImpl implements Transfer {
     private static final int OPERATION_INDEX = 0;
@@ -15,9 +14,9 @@ public class TransferImpl implements Transfer {
     private static final String REPORT_HEADER = "fruit,quantity";
 
     @Override
-    public String report(Map<String,Integer> fruitData) {
+    public String report(Map<String, Integer> fruitData) {
         StringBuilder report = new StringBuilder(REPORT_HEADER);
-        for (Map.Entry<String,Integer> entry : fruitData.entrySet()) {
+        for (Map.Entry<String, Integer> entry : fruitData.entrySet()) {
             report.append(System.lineSeparator())
                     .append(entry.getKey())
                     .append(",").append(entry.getValue());
@@ -44,13 +43,12 @@ public class TransferImpl implements Transfer {
                 Integer fruitAmountInfo = fruitData.get(fruit.getFruit());
                 fruitAmountInfo += operationStrategy.get(fruit.getOperation())
                         .process(fruit.getAmount());
-                //Handling Purchase operation
                 if (fruitAmountInfo < 0) {
                     throw new RuntimeException(fruit.getFruit() + " balance can't be negative");
                 }
-                fruitData.replace(fruit.getFruit(),fruitAmountInfo);
+                fruitData.replace(fruit.getFruit(), fruitAmountInfo);
             } else {
-                fruitData.put(fruit.getFruit(),fruit.getAmount());
+                fruitData.put(fruit.getFruit(), fruit.getAmount());
             }
         }
     }

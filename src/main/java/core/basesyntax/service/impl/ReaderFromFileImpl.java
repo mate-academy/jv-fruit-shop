@@ -1,10 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReaderFromCsvFile;
+import core.basesyntax.service.ReaderFromFile;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
-import java.io.*;
-
-public class ReaderFromCsvFileImpl implements ReaderFromCsvFile {
+public class ReaderFromFileImpl implements ReaderFromFile {
     @Override
     public String[] readFromFile(String fileName) {
         File file = new File(fileName);
