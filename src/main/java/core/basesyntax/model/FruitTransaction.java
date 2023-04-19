@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-public class Fruit {
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int amount;
@@ -42,18 +42,12 @@ public class Fruit {
         }
 
         public static Operation getCode(String code) {
-            switch (code) {
-                case ("b"):
-                    return Operation.BALANCE;
-                case ("s"):
-                    return Operation.SUPPLY;
-                case ("p"):
-                    return Operation.PURCHASE;
-                case ("r"):
-                    return Operation.RETURN;
-                default:
-                    return null;
+            for (Operation operation : values()) {
+                if (operation.code.equals(code)) {
+                    return operation;
+                }
             }
+            return null;
         }
     }
 }

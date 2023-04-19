@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 
 public interface OperationStrategy {
-    Operation get(Fruit.Operation operation);
+    OperationHandler get(FruitTransaction.Operation operation);
 }
