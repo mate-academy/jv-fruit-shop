@@ -9,7 +9,7 @@ public class ParserImpl implements Parser {
     private static final int AMOUNT_INDEX = 2;
 
     @Override
-    public FruitTransaction splitLine(String line) {
+    public FruitTransaction parse(String line) {
         String[] splitter = line.split(",");
         FruitTransaction fruit = new FruitTransaction();
         fruit.setOperation(FruitTransaction.Operation.getCode(splitter[OPERATION_INDEX]));

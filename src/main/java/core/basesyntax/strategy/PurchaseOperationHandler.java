@@ -15,8 +15,6 @@ public class PurchaseOperationHandler implements OperationHandler {
                         + "balance can't be negative");
             }
             fruitData.replace(fruitTransaction.getFruit(),fruitAmountInfo);
-        } else {
-            fruitData.put(fruitTransaction.getFruit(), fruitTransaction.getAmount());
         }
     }
 }

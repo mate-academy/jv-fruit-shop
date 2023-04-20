@@ -2,10 +2,12 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReaderFromFile;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.Transfer;
 import core.basesyntax.service.WriterToFile;
+import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReaderFromFileImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.TransferImpl;
@@ -17,8 +19,11 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -34,11 +39,16 @@ public class Main {
         String toFile = "src/main/resources/resultTestFile.csv";
         ReaderFromFile readerFromCsvFile = new ReaderFromFileImpl();
         WriterToFile writerToCsvFile = new WriterToFileImpl();
-        Transfer transfer = new TransferImpl();
+        Transfer transfer = new TransferImpl(operationStrategy);
         ReportService reportService = new ReportServiceImpl();
+        Parser parser = new ParserImpl();
 
         String[] infoData = readerFromCsvFile.readFromFile(fromFile);
-        transfer.generateInfo(infoData, operationStrategy);
+        List<FruitTransaction> transactions = Arrays.stream(infoData)
+                .skip(1)
+                .map(parser::parse)
+                .collect(Collectors.toList());
+        transfer.generateInfo(transactions);
         String reportData = reportService.report(Storage.fruitData);
         writerToCsvFile.writeToFile(toFile,reportData);
     }
