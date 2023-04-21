@@ -17,8 +17,7 @@ public class PurchaseOperationHandler implements OperationHandler {
             }
             fruitData.replace(fruitTransaction.getFruit(), fruitAmountInfo);
         } else {
-            fruitData.getOrDefault(fruitTransaction.getFruit(),
-                    fruitTransaction.getAmount());
+            throw new RuntimeException(fruitTransaction.getFruit() + "are not available");
         }
     }
 }
