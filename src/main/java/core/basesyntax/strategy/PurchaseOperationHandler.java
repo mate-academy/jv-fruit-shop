@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import static core.basesyntax.db.Storage.fruitData;
+
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {

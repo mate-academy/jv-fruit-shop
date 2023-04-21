@@ -17,7 +17,8 @@ public class ParserImpl implements Parser {
                 .map(line -> {
                     String[] splitter = line.split(",");
                     FruitTransaction fruit = new FruitTransaction();
-                    fruit.setOperation(FruitTransaction.Operation.getCode(splitter[OPERATION_INDEX]));
+                    fruit.setOperation(FruitTransaction.Operation
+                            .getCode(splitter[OPERATION_INDEX]));
                     String fruitOperation = splitter[FRUIT_INDEX];
                     fruit.setFruit(fruitOperation);
                     fruit.setAmount(Integer.parseInt(splitter[AMOUNT_INDEX]));
