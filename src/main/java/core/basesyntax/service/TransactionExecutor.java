@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public interface Transfer {
+public interface TransactionExecutor {
 
-    void generateInfo(List<FruitTransaction> info);
+    void execute(List<FruitTransaction> transactions);
 }

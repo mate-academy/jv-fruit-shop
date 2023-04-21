@@ -5,22 +5,23 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReaderFromFileImpl implements ReaderFromFile {
     @Override
-    public String[] readFromFile(String fileName) {
+    public List<String> readFromFile(String fileName) {
         File file = new File(fileName);
-        StringBuilder stringBuilder = new StringBuilder();
+        List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String value = reader.readLine();
             while (value != null) {
-                stringBuilder.append(value).append(System.lineSeparator());
+                lines.add(value);
                 value = reader.readLine();
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't find file by path: " + fileName, e);
         }
-        return stringBuilder.toString()
-                .split(System.lineSeparator());
+        return lines;
     }
 }

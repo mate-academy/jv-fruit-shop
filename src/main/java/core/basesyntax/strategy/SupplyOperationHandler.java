@@ -8,7 +8,8 @@ public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void process(FruitTransaction fruitTransaction) {
         if (fruitData.containsKey(fruitTransaction.getFruit())) {
-            Integer fruitAmountInfo = fruitData.get(fruitTransaction.getFruit());
+            Integer fruitAmountInfo = fruitData.getOrDefault(fruitTransaction.getFruit(),
+                    fruitTransaction.getAmount());
             fruitAmountInfo += fruitTransaction.getAmount();
             fruitData.replace(fruitTransaction.getFruit(),fruitAmountInfo);
         } else {

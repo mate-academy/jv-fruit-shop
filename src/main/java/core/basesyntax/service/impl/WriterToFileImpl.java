@@ -8,10 +8,10 @@ import java.io.IOException;
 
 public class WriterToFileImpl implements WriterToFile {
     @Override
-    public void writeToFile(String toFileName, String report) {
+    public void writeToFile(String toFileName, String content) {
         File reportFile = new File(toFileName);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(reportFile))) {
-            bufferedWriter.write(report);
+            bufferedWriter.write(content);
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file by path" + reportFile, e);
         }

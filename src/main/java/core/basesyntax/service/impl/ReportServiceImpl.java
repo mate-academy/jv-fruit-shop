@@ -7,7 +7,7 @@ public class ReportServiceImpl implements ReportService {
     private static final String REPORT_HEADER = "fruit,quantity";
 
     @Override
-    public String report(Map<String, Integer> fruitData) {
+    public String generateReport(Map<String, Integer> fruitData) {
         StringBuilder report = new StringBuilder(REPORT_HEADER);
         for (Map.Entry<String, Integer> entry : fruitData.entrySet()) {
             report.append(System.lineSeparator())
