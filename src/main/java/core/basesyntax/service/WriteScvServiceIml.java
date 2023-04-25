@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class WriteScvServiceIml implements WriteScvService{
+public class WriteScvServiceIml implements WriteScvService {
     @Override
     public void writeDataScvFile(List<FruitTransaction> fruitTransactionList, String fileName) {
         File file = new File(fileName);
@@ -23,7 +23,7 @@ public class WriteScvServiceIml implements WriteScvService{
                 fileWriter.write(fruit.getFruit() + "," + fruit.getQuantity() + "\n");
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file",e);
+            throw new RuntimeException("Can't write to file", e);
         }
     }
 }

@@ -4,8 +4,8 @@ import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.FruitTransactionDaoIml;
 import core.basesyntax.model.FruitTransaction;
 
-public class PurchaseOperation implements OperationHandler{
-   private FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoIml();
+public class PurchaseOperation implements OperationHandler {
+    private FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoIml();
 
     @Override
     public void Operation(FruitTransaction fruitTransaction) {

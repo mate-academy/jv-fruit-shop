@@ -14,6 +14,7 @@ public class BalanceOperation implements OperationHandler {
 
     @Override
     public void Operation(FruitTransaction fruitTransaction) {
-       fruitTransactionService.createNewFruitTransaction(fruitTransaction.getFruit(),fruitTransaction.getQuantity());
+        fruitTransactionService.createNewFruitTransaction(fruitTransaction.getFruit()
+                , fruitTransaction.getQuantity());
     }
 }

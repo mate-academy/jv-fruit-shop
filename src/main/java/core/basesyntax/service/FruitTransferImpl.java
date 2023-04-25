@@ -1,6 +1,5 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.strategy.OperationStrategy;
 
@@ -19,13 +18,8 @@ public class FruitTransferImpl implements FruitTransfer {
     @Override
     public void transfer() {
         List<FruitTransaction> fruitTransactions = readScvService.readFromFileInputCsv();
-
         for (FruitTransaction fruit : fruitTransactions) {
             operationStrategy.get(fruit.getOperation()).Operation(fruit);
         }
-
-//        fruitTransactions.forEach(f -> {
-//            operationStrategy.get(f.getOperation()).Operation(fruitTransaction);
-//        });
     }
 }

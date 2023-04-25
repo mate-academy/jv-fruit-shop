@@ -17,16 +17,12 @@ public class Main {
         operationMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         operationMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-
         OperationStrategy operationStrategy = new OperationStrategyImp(operationMap);
         ReadScvService readScvService = new ReadScvServiceImpl();
-        FruitTransferImpl fruitTransfer = new FruitTransferImpl(operationStrategy,readScvService);
-
+        FruitTransferImpl fruitTransfer = new FruitTransferImpl(operationStrategy, readScvService);
         fruitTransfer.transfer();
         ReportService report = new ReportServiceImpl();
         report.createReport();
 
     }
-
-
 }
