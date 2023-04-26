@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,5 +1,5 @@
-package core.basesyntax.model;
 
+package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operation;
@@ -30,7 +30,6 @@ public class FruitTransaction {
         this.operation = operation;
     }
 
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -60,10 +59,10 @@ public class FruitTransaction {
 
     @Override
     public String toString() {
-        return "FruitTransaction{" +
-                "operation=" + operation +
-                ", fruit='" + fruit + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "FruitTransaction{"
+                + "operation=" + operation
+                + ", fruit='" + fruit + '\''
+                + ", quantity=" + quantity
+                + '}';
     }
 }

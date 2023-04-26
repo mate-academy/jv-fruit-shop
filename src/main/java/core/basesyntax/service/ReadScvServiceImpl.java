@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

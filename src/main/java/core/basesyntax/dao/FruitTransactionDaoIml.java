@@ -2,7 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.List;
 
 public class FruitTransactionDaoIml implements FruitTransactionDao {

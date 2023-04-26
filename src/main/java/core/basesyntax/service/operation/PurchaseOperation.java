@@ -8,7 +8,7 @@ public class PurchaseOperation implements OperationHandler {
     private FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoIml();
 
     @Override
-    public void Operation(FruitTransaction fruitTransaction) {
+    public void operation(FruitTransaction fruitTransaction) {
         FruitTransaction getFt = fruitTransactionDao.get(fruitTransaction.getFruit());
         int fruitQuantity = getFt.getQuantity() - fruitTransaction.getQuantity();
         getFt.setQuantity(fruitQuantity);
