@@ -1,20 +1,19 @@
 package core.basesyntax.service.fruitshop.impl;
 
-import core.basesyntax.dao.csv.CsvDao;
-import core.basesyntax.dao.storage.StorageDao;
+import core.basesyntax.dao.csv.CsvFileHandlerDao;
+import core.basesyntax.dao.storage.FruitStorageDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.fruitshop.FruitShopService;
-import core.basesyntax.utils.Operation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FruitShopServiceImpl implements FruitShopService {
     private static final String ALREADY_EXIST_EXCEPTION = "Already exist";
-    private static final String NOT_ENOUGH_EXCEPTION = "There is not enough fruits!";
+    private static final String NOT_ENOUGH_FRUITS_EXCEPTION = "There is not enough fruits!";
     private static final long SKIP_FIRST_ROW = 1L;
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
@@ -22,12 +21,14 @@ public class FruitShopServiceImpl implements FruitShopService {
     private static final String SPLIT_SYMBOL = ",";
     private static final String FIRST_ROW_IN_REPORT = "fruit,quantity";
     private static final int FIRST_ROW_INDEX = 0;
-    private StorageDao storageDao;
-    private CsvDao csvDao;
+    private final String readFilePath;
+    private final String writeFilePath;
+    private final FruitStorageDao fruitStorageDao;
+    private final CsvFileHandlerDao csvFileHandlerDao;
 
     @Override
     public List<FruitTransaction> readAllFromCsv() {
-        return csvDao.readCsv()
+        return csvFileHandlerDao.readCsv(readFilePath)
             .stream()
             .skip(SKIP_FIRST_ROW)
             .map(this::mapToFruitTransaction)
@@ -36,53 +37,50 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public void exportReport() {
-        List<String> mappedReport = mapToExport(storageDao.getAll());
-        csvDao.writeToCsv(mappedReport);
+        List<String> report = generateReport(fruitStorageDao.getAll());
+        csvFileHandlerDao.writeToCsv(writeFilePath, report);
     }
 
     @Override
-    public void balance(String fruit, int quantity) {
-        if (storageDao.checkIfExist(fruit)) {
+    public int balance(String fruit, int quantity) {
+        if (fruitStorageDao.isFruitInStorage(fruit)) {
             throw new RuntimeException(ALREADY_EXIST_EXCEPTION);
         }
-        storageDao.put(fruit, quantity);
+        return fruitStorageDao.addFruitQuantity(fruit, quantity);
     }
 
     @Override
-    public void supply(String fruit, int quantity) {
-        if (!storageDao.checkIfExist(fruit)) {
-            storageDao.put(fruit, quantity);
-            return;
+    public int supply(String fruit, int quantity) {
+        if (!fruitStorageDao.isFruitInStorage(fruit)) {
+            return fruitStorageDao.addFruitQuantity(fruit, quantity);
         }
-        int newQuantity = storageDao.getQuantityByKey(fruit) + quantity;
-        storageDao.put(fruit, newQuantity);
+        return fruitStorageDao.merge(fruit, quantity, Integer::sum);
     }
 
     @Override
-    public void purchase(String fruit, int quantity) {
-        if (!storageDao.isEnoughFruits(fruit, quantity)) {
-            throw new RuntimeException(NOT_ENOUGH_EXCEPTION);
+    public int purchase(String fruit, int quantity) {
+        if (!fruitStorageDao.hasSufficientFruitQuantity(fruit, quantity)) {
+            throw new RuntimeException(NOT_ENOUGH_FRUITS_EXCEPTION);
         }
-        int newQuantity = storageDao.getQuantityByKey(fruit) - quantity;
-        storageDao.put(fruit, newQuantity);
+        return fruitStorageDao.merge(fruit, quantity, (a, b) -> a - b);
     }
 
     @Override
-    public void returnFruits(String fruit, int quantity) {
-        supply(fruit, quantity);
+    public int returnFruits(String fruit, int quantity) {
+        return supply(fruit, quantity);
     }
 
     private FruitTransaction mapToFruitTransaction(String row) {
         String[] strings = row.split(SPLIT_SYMBOL);
         return FruitTransaction
             .builder()
-            .operation(Operation.byCode(strings[OPERATION_INDEX]))
+            .operation(FruitTransaction.Operation.byCode(strings[OPERATION_INDEX]))
             .fruit(strings[FRUIT_INDEX])
             .quantity(Integer.parseInt(strings[QUANTITY_INDEX]))
             .build();
     }
 
-    private List<String> mapToExport(Map<String, Integer> storageMap) {
+    private List<String> generateReport(Map<String, Integer> storageMap) {
         List<String> resultList = new ArrayList<>();
         resultList.add(FIRST_ROW_INDEX, FIRST_ROW_IN_REPORT);
         List<String> preparedStorageData = storageMap.entrySet()

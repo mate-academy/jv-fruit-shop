@@ -1,9 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.csv.CsvDao;
-import core.basesyntax.dao.csv.impl.CsvDaoImpl;
-import core.basesyntax.dao.storage.StorageDao;
-import core.basesyntax.dao.storage.impl.StorageDaoImpl;
+import core.basesyntax.dao.csv.CsvFileHandlerDao;
+import core.basesyntax.dao.csv.impl.CsvFileHandlerDaoImpl;
+import core.basesyntax.dao.storage.FruitStorageDao;
+import core.basesyntax.dao.storage.impl.FruitStorageDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.fruitshop.FruitShopService;
 import core.basesyntax.service.fruitshop.impl.FruitShopServiceImpl;
@@ -14,40 +15,42 @@ import core.basesyntax.service.operation.impl.ReturnOperationHandler;
 import core.basesyntax.service.operation.impl.SupplyOperationHandler;
 import core.basesyntax.strategy.FruitShopStrategy;
 import core.basesyntax.strategy.impl.FruitShopStrategyImpl;
-import core.basesyntax.utils.Operation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Work {
-    private static FruitShopService fruitShopService;
-    private static List<FruitTransaction> fruitTransactionList;
-    private final FruitShopStrategy fruitShopStrategy;
-
-    {
-        StorageDao storageDao = new StorageDaoImpl();
-        CsvDao csvDao = new CsvDaoImpl();
-        fruitShopService = new FruitShopServiceImpl(storageDao, csvDao);
-        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler(fruitShopService));
-        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler(fruitShopService));
-        operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler(fruitShopService));
-        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler(fruitShopService));
-        fruitShopStrategy = new FruitShopStrategyImpl(operationHandlerMap);
-        fruitTransactionList = fruitShopService.readAllFromCsv();
-
-    }
 
     public static void main(String[] args) {
-        Work work = new Work();
-        work.startWork();
+        String readFilePath = "src/main/java/core/basesyntax/csv/database.csv";
+        String writeFilePath = "src/main/java/core/basesyntax/csv/report.csv";
+        Storage storage = new Storage();
+        FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl(storage);
+        CsvFileHandlerDao csvFileHandlerDao = new CsvFileHandlerDaoImpl();
+        FruitShopService fruitShopService = new FruitShopServiceImpl(
+                readFilePath, writeFilePath, fruitStorageDao, csvFileHandlerDao);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(
+                FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(fruitShopService));
+        operationHandlerMap.put(
+                FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(fruitShopService));
+        operationHandlerMap.put(
+                FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(fruitShopService));
+        operationHandlerMap.put(
+                FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(fruitShopService));
+        FruitShopStrategy fruitShopStrategy = new FruitShopStrategyImpl(operationHandlerMap);
+        List<FruitTransaction> fruitTransactionList = fruitShopService.readAllFromCsv();
+
+        startWork(fruitTransactionList, fruitShopStrategy);
         fruitShopService.exportReport();
     }
 
-    public void startWork() {
+    public static void startWork(List<FruitTransaction> fruitTransactionList,
+                                 FruitShopStrategy fruitShopStrategy) {
         fruitTransactionList.forEach(fruitTransaction -> fruitShopStrategy
                 .get(fruitTransaction.getOperation())
                 .operation(fruitTransaction.getFruit(), fruitTransaction.getQuantity()));

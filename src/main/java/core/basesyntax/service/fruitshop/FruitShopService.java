@@ -8,11 +8,11 @@ public interface FruitShopService {
 
     void exportReport();
 
-    void balance(String fruit, int quantity);
+    int balance(String fruit, int quantity);
 
-    void supply(String fruit, int quantity);
+    int supply(String fruit, int quantity);
 
-    void purchase(String fruit, int quantity);
+    int purchase(String fruit, int quantity);
 
-    void returnFruits(String fruit, int quantity);
+    int returnFruits(String fruit, int quantity);
 }
