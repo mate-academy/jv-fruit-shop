@@ -1,13 +1,11 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitTransactionDao;
-import core.basesyntax.dao.impl.FruitTransactionDaoIml;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
-import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 
 public class BalanceOperation implements OperationHandler {
-    private  FruitTransactionDao fruitTransactionDao ;
+    private FruitTransactionDao fruitTransactionDao;
     private FruitTransactionService fruitTransactionService;
 
     public BalanceOperation(FruitTransactionDao fruitTransactionDao,

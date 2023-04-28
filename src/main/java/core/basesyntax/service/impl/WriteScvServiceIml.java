@@ -1,12 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.WriteScvService;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+
 
 public class WriteScvServiceIml implements WriteScvService {
     @Override

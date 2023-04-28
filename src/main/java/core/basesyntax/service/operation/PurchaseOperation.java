@@ -1,7 +1,6 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitTransactionDao;
-import core.basesyntax.dao.impl.FruitTransactionDaoIml;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {

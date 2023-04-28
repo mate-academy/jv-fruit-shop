@@ -5,9 +5,13 @@ import core.basesyntax.dao.impl.FruitTransactionDaoIml;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.WriteScvService;
-import core.basesyntax.service.impl.*;
 import core.basesyntax.service.ReadScvService;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
+import core.basesyntax.service.impl.FruitTransferImpl;
+import core.basesyntax.service.impl.ReadScvServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriteScvServiceIml;
 import core.basesyntax.service.operation.BalanceOperation;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperation;
@@ -21,11 +25,9 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoIml();
-        WriteScvService writeScvService = new WriteScvServiceIml();
         ReadScvService readScvService = new ReadScvServiceImpl();
         FruitTransactionService fruitTransactionService =
                 new FruitTransactionServiceImpl(fruitTransactionDao);
-
         Map<FruitTransaction.Operation, OperationHandler> operationMap = new HashMap<>();
         operationMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperation(fruitTransactionDao, fruitTransactionService));
@@ -35,7 +37,7 @@ public class Main {
                 new PurchaseOperation(fruitTransactionDao));
         operationMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperation(fruitTransactionDao));
-
+        WriteScvService writeScvService = new WriteScvServiceIml();
         OperationStrategy operationStrategy = new OperationStrategyImp(operationMap);
         FruitTransferImpl fruitTransfer = new FruitTransferImpl(operationStrategy, readScvService);
         fruitTransfer.transfer();
