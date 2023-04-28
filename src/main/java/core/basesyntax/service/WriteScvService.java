@@ -4,6 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface WriteScvService {
-    void writeDataScvFile(List<FruitTransaction> fruitTransactionList, String fileName);
-
+    void writeDataScvFile(String data, String fileName);
 }

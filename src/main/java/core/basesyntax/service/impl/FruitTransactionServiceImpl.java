@@ -1,7 +1,8 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitTransactionService;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
     private FruitTransactionDao fruitTransactionDao;

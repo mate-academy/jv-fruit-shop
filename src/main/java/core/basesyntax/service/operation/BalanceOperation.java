@@ -1,15 +1,20 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.dao.FruitTransactionDao;
-import core.basesyntax.dao.FruitTransactionDaoIml;
+import core.basesyntax.dao.impl.FruitTransactionDaoIml;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
-import core.basesyntax.service.FruitTransactionServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 
 public class BalanceOperation implements OperationHandler {
-    private final FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoIml();
-    private final FruitTransactionService fruitTransactionService
-            = new FruitTransactionServiceImpl(fruitTransactionDao);
+    private  FruitTransactionDao fruitTransactionDao ;
+    private FruitTransactionService fruitTransactionService;
+
+    public BalanceOperation(FruitTransactionDao fruitTransactionDao,
+                            FruitTransactionService fruitTransactionService) {
+        this.fruitTransactionDao = fruitTransactionDao;
+        this.fruitTransactionService = fruitTransactionService;
+    }
 
     @Override
     public void operation(FruitTransaction fruitTransaction) {

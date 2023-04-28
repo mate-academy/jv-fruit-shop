@@ -1,11 +1,13 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitTransactionDao;
+import core.basesyntax.dao.impl.FruitTransactionDaoIml;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitTransferImpl;
+import core.basesyntax.service.FruitTransactionService;
+import core.basesyntax.service.WriteScvService;
+import core.basesyntax.service.impl.*;
 import core.basesyntax.service.ReadScvService;
-import core.basesyntax.service.ReadScvServiceImpl;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.operation.BalanceOperation;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperation;
@@ -18,16 +20,26 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> operationMap = new HashMap<>();
-        operationMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        operationMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        OperationStrategy operationStrategy = new OperationStrategyImp(operationMap);
+        FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoIml();
+        WriteScvService writeScvService = new WriteScvServiceIml();
         ReadScvService readScvService = new ReadScvServiceImpl();
+        FruitTransactionService fruitTransactionService =
+                new FruitTransactionServiceImpl(fruitTransactionDao);
+
+        Map<FruitTransaction.Operation, OperationHandler> operationMap = new HashMap<>();
+        operationMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperation(fruitTransactionDao, fruitTransactionService));
+        operationMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperation(fruitTransactionDao));
+        operationMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperation(fruitTransactionDao));
+        operationMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperation(fruitTransactionDao));
+
+        OperationStrategy operationStrategy = new OperationStrategyImp(operationMap);
         FruitTransferImpl fruitTransfer = new FruitTransferImpl(operationStrategy, readScvService);
         fruitTransfer.transfer();
-        ReportService report = new ReportServiceImpl();
+        ReportService report = new ReportServiceImpl(fruitTransactionDao, writeScvService);
         report.createReport();
     }
 }
