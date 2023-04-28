@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class WriteScvServiceIml implements WriteScvService {
     @Override
     public void writeDataScvFile(String data, String fileName) {
