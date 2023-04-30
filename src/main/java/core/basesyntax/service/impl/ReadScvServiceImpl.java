@@ -9,28 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadScvServiceImpl implements ReadScvService {
-    private final String filePath = "input.csv";
-    private final int operationColumnIndex = 0;
-    private final int fruitColumnIndex = 1;
-    private final int quantityColumnIndex = 2;
+    private static final int OPERATION_COLUMN_INDEX = 0;
+    private static final int FRUIT_COLUMN_INDEX = 1;
+    private static final int QUANTITY_COLUMN_INDEX = 2;
+    private static final String SEPARATOR = ",";
 
     @Override
-    public List<FruitTransaction> readFromFileInputCsv() {
+    public List<FruitTransaction> readFromFile(String filePath) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 FruitTransaction fruitTransaction = new FruitTransaction();
-                String[] value = line.split((","));
+                String[] value = line.split((SEPARATOR));
                 fruitTransaction.setOperation(FruitTransaction
-                        .Operation.fromCode(value[operationColumnIndex]));
-                fruitTransaction.setFruit(value[fruitColumnIndex]);
-                fruitTransaction.setQuantity(Integer.parseInt(value[quantityColumnIndex]));
+                        .Operation.fromCode(value[OPERATION_COLUMN_INDEX]));
+                fruitTransaction.setFruit(value[FRUIT_COLUMN_INDEX]);
+                fruitTransaction.setQuantity(Integer.parseInt(value[QUANTITY_COLUMN_INDEX]));
                 fruitTransactions.add(fruitTransaction);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't read from file: " + filePath, e);
         }
         return fruitTransactions;
     }

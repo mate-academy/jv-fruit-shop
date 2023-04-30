@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface ReadScvService {
-    public List<FruitTransaction> readFromFileInputCsv();
+    public List<FruitTransaction> readFromFile(String filePath);
 }

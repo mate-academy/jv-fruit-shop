@@ -5,24 +5,16 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriteScvService;
 
+import java.util.List;
+
 public class ReportServiceImpl implements ReportService {
-    private FruitTransactionDao fruitTransactionDao;
-    private WriteScvService writeScvService;
-    private final String nameReportFile = "report.csv";
-    private StringBuilder data;
-
-    public ReportServiceImpl(FruitTransactionDao fruitTransactionDao,
-                             WriteScvService writeScvService) {
-        this.fruitTransactionDao = fruitTransactionDao;
-        this.writeScvService = writeScvService;
-    }
-
+    private static final String TEMPLATE = "fruit,quantity\n";
     @Override
-    public void createReport() {
-        data = new StringBuilder("fruit,quantity\n");
-        for (FruitTransaction fruit : fruitTransactionDao.getAllListDb()) {
+    public String createReport(List<FruitTransaction> fruitTransactions) {
+        StringBuilder data = new StringBuilder(TEMPLATE);
+        for (FruitTransaction fruit : fruitTransactions) {
             data.append(fruit.getFruit()).append(",").append(fruit.getQuantity()).append("\n");
         }
-        writeScvService.writeDataScvFile(data.toString(), nameReportFile);
+        return data.toString();
     }
 }

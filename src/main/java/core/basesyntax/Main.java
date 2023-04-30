@@ -19,6 +19,7 @@ import core.basesyntax.service.operation.ReturnOperation;
 import core.basesyntax.service.operation.SupplyOperation;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImp;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,11 +38,12 @@ public class Main {
                 new PurchaseOperation(fruitTransactionDao));
         operationMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperation(fruitTransactionDao));
-        WriteScvService writeScvService = new WriteScvServiceIml();
         OperationStrategy operationStrategy = new OperationStrategyImp(operationMap);
         FruitTransferImpl fruitTransfer = new FruitTransferImpl(operationStrategy, readScvService);
         fruitTransfer.transfer();
-        ReportService report = new ReportServiceImpl(fruitTransactionDao, writeScvService);
-        report.createReport();
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.createReport(fruitTransactionDao.getAllListDb());
+        WriteScvService writeScvService = new WriteScvServiceIml();
+        writeScvService.writeDataScvFile(report,"report.csv");
     }
 }

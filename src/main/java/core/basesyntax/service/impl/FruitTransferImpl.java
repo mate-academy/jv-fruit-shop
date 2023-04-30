@@ -17,7 +17,8 @@ public class FruitTransferImpl implements FruitTransfer {
 
     @Override
     public void transfer() {
-        List<FruitTransaction> fruitTransactions = readScvService.readFromFileInputCsv();
+        String filePath = "input.csv";
+        List<FruitTransaction> fruitTransactions = readScvService.readFromFile(filePath);
         for (FruitTransaction fruit : fruitTransactions) {
             operationStrategy.get(fruit.getOperation()).operation(fruit);
         }
