@@ -1,10 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.WriteScvService;
-
 import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
