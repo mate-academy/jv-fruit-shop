@@ -3,17 +3,17 @@ package service.impl;
 import java.util.Map;
 import model.Operation;
 import service.CalculationStrategy;
-import service.FruitCalculation;
+import service.OperationHandler;
 
 public class CalculationStrategyImpl implements CalculationStrategy {
-    private Map<Operation, FruitCalculation> calculationHandlerMap;
+    private Map<Operation, OperationHandler> calculationHandlerMap;
 
-    public CalculationStrategyImpl(Map<Operation, FruitCalculation> calculationHandlerMap) {
+    public CalculationStrategyImpl(Map<Operation, OperationHandler> calculationHandlerMap) {
         this.calculationHandlerMap = calculationHandlerMap;
     }
 
     @Override
-    public FruitCalculation get(Operation operation) {
+    public OperationHandler get(Operation operation) {
         return calculationHandlerMap.get(operation);
     }
 }

@@ -1,8 +1,8 @@
 package service;
 
-import java.util.Map;
-import model.Operation;
+import java.util.List;
+import model.FruitTransaction;
 
 public interface CalculationService {
-    Map<String, Integer> calculate(Map<Operation, FruitCalculation> calculationHandlerMap);
+    void calculate(List<FruitTransaction> fruitTransactionList);
 }

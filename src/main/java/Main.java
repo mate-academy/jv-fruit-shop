@@ -1,17 +1,21 @@
-import dao.CsvDao;
-import dao.CsvDaoImpl;
+import static db.StorageTotalBalance.fruitStorageTotalBalance;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
 import service.CalculationService;
-import service.FruitCalculation;
+import service.FileService;
+import service.OperationHandler;
 import service.Parser;
+import service.ReportCreator;
+import service.impl.AddingOperationHandler;
 import service.impl.CalculationServiceImpl;
-import service.impl.FruitCalculationIncome;
-import service.impl.FruitCalculationOutcome;
+import service.impl.FileServiceImpl;
 import service.impl.ParserImpl;
+import service.impl.ReportCreatorImpl;
+import service.impl.SubtractOperationHandler;
 
 public class Main {
     private static final String FROM_FILE_NAME =
@@ -20,22 +24,24 @@ public class Main {
             "src/main/resources/report - fruit_total_balance.csv";
 
     public static void main(String[] args) {
-        Map<Operation, FruitCalculation> calculationHandlerMap = new HashMap<>();
-        calculationHandlerMap.put(Operation.RETURN, new FruitCalculationIncome());
-        calculationHandlerMap.put(Operation.SUPPLY, new FruitCalculationIncome());
-        calculationHandlerMap.put(Operation.BALANCE, new FruitCalculationIncome());
-        calculationHandlerMap.put(Operation.PURCHASE, new FruitCalculationOutcome());
+        Map<Operation, OperationHandler> calculationHandlerMap = new HashMap<>();
+        calculationHandlerMap.put(Operation.RETURN, new AddingOperationHandler());
+        calculationHandlerMap.put(Operation.SUPPLY, new AddingOperationHandler());
+        calculationHandlerMap.put(Operation.BALANCE, new AddingOperationHandler());
+        calculationHandlerMap.put(Operation.PURCHASE, new SubtractOperationHandler());
 
-        CsvDao csvDao = new CsvDaoImpl();
-        List<String> dataFromFile = csvDao.readFromFile(FROM_FILE_NAME);
+        FileService fileService = new FileServiceImpl();
+        List<String> dataFromFile = fileService.readFromFile(FROM_FILE_NAME);
 
         Parser parser = new ParserImpl();
         List<FruitTransaction> fruitList = parser.parse(dataFromFile);
 
-        CalculationService calculationService = new CalculationServiceImpl(fruitList);
-        Map<String, Integer> fruitBalance = calculationService.calculate(calculationHandlerMap);
+        CalculationService calculationService = new CalculationServiceImpl(calculationHandlerMap);
+        calculationService.calculate(fruitList);
 
-        csvDao.writeToFile(fruitBalance, TO_FILE_NAME);
+        ReportCreator reportCreator = new ReportCreatorImpl();
+        List<String> report = reportCreator.create(fruitStorageTotalBalance);
+        fileService.writeToFile(report, TO_FILE_NAME);
     }
 }
 

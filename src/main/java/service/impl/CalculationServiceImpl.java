@@ -1,29 +1,26 @@
 package service.impl;
 
-import static db.StorageTotalBalance.fruitStorageTotalBalance;
-
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
 import service.CalculationService;
 import service.CalculationStrategy;
-import service.FruitCalculation;
+import service.OperationHandler;
 
 public class CalculationServiceImpl implements CalculationService {
-    private List<FruitTransaction> fruitTransactionList;
+    private Map<Operation, OperationHandler> calculationHandlerMap;
 
-    public CalculationServiceImpl(List<FruitTransaction> fruitTransactionList) {
-        this.fruitTransactionList = fruitTransactionList;
+    public CalculationServiceImpl(Map<Operation, OperationHandler> calculationHandlerMap) {
+        this.calculationHandlerMap = calculationHandlerMap;
     }
 
     @Override
-    public Map<String, Integer> calculate(Map<Operation, FruitCalculation> calculationHandlerMap) {
+    public void calculate(List<FruitTransaction> fruitTransactionList) {
         CalculationStrategy calculationStrategy =
                 new CalculationStrategyImpl(calculationHandlerMap);
         for (FruitTransaction fruit : fruitTransactionList) {
-            calculationStrategy.get(fruit.getOperation()).fruitStorageCalculation(fruit);
+            calculationStrategy.get(fruit.getOperation()).handle(fruit);
         }
-        return fruitStorageTotalBalance;
     }
 }
