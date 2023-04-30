@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
     private static final String TEMPLATE = "fruit,quantity\n";
+
     @Override
     public String createReport(List<FruitTransaction> fruitTransactions) {
         StringBuilder data = new StringBuilder(TEMPLATE);
