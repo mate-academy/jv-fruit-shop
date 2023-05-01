@@ -19,7 +19,6 @@ import core.basesyntax.service.operation.ReturnOperation;
 import core.basesyntax.service.operation.SupplyOperation;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImp;
-
 import java.util.HashMap;
 import java.util.Map;
 
