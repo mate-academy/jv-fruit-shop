@@ -6,10 +6,11 @@ import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
     private static final String TEMPLATE = "fruit,quantity\n";
+   private StringBuilder data;
 
     @Override
     public String createReport(List<FruitTransaction> fruitTransactions) {
-        StringBuilder data = new StringBuilder(TEMPLATE);
+        data = new StringBuilder(TEMPLATE);
         for (FruitTransaction fruit : fruitTransactions) {
             data.append(fruit.getFruit()).append(",").append(fruit.getQuantity()).append("\n");
         }
