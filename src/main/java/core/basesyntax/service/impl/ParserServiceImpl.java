@@ -17,11 +17,8 @@ public class ParserServiceImpl implements ParserService {
         List<FruitTransaction> listOfTransactions = new ArrayList<>();
         for (String[] transaction : dataFromFile) {
             FruitTransaction fruitTransaction = new FruitTransaction();
-            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-                if (operation.getCode().equals(transaction[INDEX_OF_OPERATION])) {
-                    fruitTransaction.setOperation(operation);
-                }
-            }
+            fruitTransaction.setOperation(FruitTransaction.Operation
+                    .getByCode(transaction[INDEX_OF_OPERATION]));
             fruitTransaction.setFruit(transaction[INDEX_OF_FRUIT]);
             fruitTransaction.setQuantity(Integer.parseInt(transaction[INDEX_OF_QUANTITY]));
             listOfTransactions.add(fruitTransaction);

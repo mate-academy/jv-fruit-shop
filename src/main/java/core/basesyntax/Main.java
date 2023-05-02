@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class Main {
     private static final String FILE_NAME_INPUT_DATA = "src/main/resources/inputData.csv";
-    private static final String FILE_NAME_PROCESSED_DATA = "src/main/resources/outputData.csv";
+    private static final String REPORT_FILE_NAME = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -48,6 +48,6 @@ public class Main {
         List<String> report = creatorService.createReport();
 
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile(FILE_NAME_PROCESSED_DATA, report);
+        writerService.writeToFile(REPORT_FILE_NAME, report);
     }
 }

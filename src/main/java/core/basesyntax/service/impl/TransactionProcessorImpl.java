@@ -13,10 +13,10 @@ public class TransactionProcessorImpl implements TransactionProcessor {
     }
 
     @Override
-    public void processData(List<FruitTransaction> dataOfTransaction) {
-        for (FruitTransaction transaction : dataOfTransaction) {
+    public void processData(List<FruitTransaction> transactions) {
+        for (FruitTransaction transaction : transactions) {
             strategy.getOperation(transaction.getOperation())
-                    .operate(transaction.getFruit(), transaction.getQuantity());
+                    .operate(transaction);
         }
     }
 }

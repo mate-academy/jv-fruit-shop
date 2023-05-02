@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
-
     @Override
     public List<String[]> readFromFile(String path) {
         try (CSVReader reader = new CSVReader(new FileReader(path))) {

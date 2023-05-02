@@ -44,5 +44,14 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static FruitTransaction.Operation getByCode(String code) {
+            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("Invalid name of operation");
+        }
     }
 }
