@@ -4,17 +4,16 @@ import core.basesyntax.service.WriterService;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 public class WriterServiceImpl implements WriterService {
     @Override
-    public void writeToFile(String path, Map<String, Integer> data) {
+    public void writeToFile(String path, List<String> report) {
         File file = new File(path);
         try {
             FileWriter writer = new FileWriter(file);
-            writer.write("fruit,quantity");
-            for (Map.Entry<String, Integer> entry : data.entrySet()) {
-                writer.write("\n" + entry.getKey() + "," + entry.getValue());
+            for (String line : report) {
+                writer.write(line);
             }
             writer.close();
         } catch (IOException e) {

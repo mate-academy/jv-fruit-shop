@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import java.util.Map;
+import java.util.List;
 
 public interface WriterService {
-    void writeToFile(String path, Map<String, Integer> data);
+    void writeToFile(String path, List<String> report);
 }

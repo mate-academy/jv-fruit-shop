@@ -1,5 +1,5 @@
 package core.basesyntax.strategy.operation;
 
 public interface OperationHandler {
-    int operate(String fruit, int number);
+    void operate(String fruit, int quantity);
 }
