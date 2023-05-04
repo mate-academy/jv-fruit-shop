@@ -1,5 +1,5 @@
 # Fruit shop
-Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
+Let's imagine that we have a fruitTransaction store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
 
@@ -11,10 +11,10 @@ Your tasks are:
 
 There are four activities at the store:
 ```text
-    b - balance, the remnants of fruits at the beginning of the working day
-    s - supply, means you are receiving new fruits from suppliers
-    p - purchase, means someone has bought some fruit
-    r - return, means someone who have bought the fruits now returns them back
+    b - balance, the remnants of fruitTransactions at the beginning of the working day
+    s - supply, means you are receiving new fruitTransactions from suppliers
+    p - purchase, means someone has bought some fruitTransaction
+    r - return, means someone who have bought the fruitTransactions now returns them back
 ```
 
 Let's check in details all types of activities:
@@ -24,19 +24,19 @@ Let's check in details all types of activities:
        b,banana,100  
     ```
    The line above means there are 100 bananas at the beginning of the work shift. 
-1. Supply. You are accepting new fruits from suppliers. The following line in the file will look like:
+1. Supply. You are accepting new fruitTransactions from suppliers. The following line in the file will look like:
     
     ```text
        s,banana,100     
     ```
    The line above means you receive 100 bananas.
-1. Purchase. Buyers can visit your shop and buy some fruits. In this case you will have the following line in the file:
+1. Purchase. Buyers can visit your shop and buy some fruitTransactions. In this case you will have the following line in the file:
     
     ```text
        p,banana,13  
     ```
    The line above means someone has bought 13 bananas.
-1. Return. Buyers can return you some fruits. In this case you will have the following line in the file:
+1. Return. Buyers can return you some fruitTransactions. In this case you will have the following line in the file:
     
     ```text
        r,banana,10   
@@ -45,7 +45,7 @@ Let's check in details all types of activities:
 
 ### Input file example
 ```text
-    type,fruit,quantity
+    type,fruitTransaction,quantity
     b,banana,20
     b,apple,100
     s,banana,100
@@ -57,9 +57,9 @@ Let's check in details all types of activities:
 ```
 
 ### Expecting report file example
-We are expecting to see how many fruits are available today after the work shift in your Fruit store. 
+We are expecting to see how many fruitTransactions are available today after the work shift in your Fruit store. 
 ```text
-    fruit,quantity
+    fruitTransaction,quantity
     banana,152
     apple,90
 ```
@@ -70,7 +70,7 @@ The line above means you have 152 bananas, and 90 apples in your Fruit store aft
 ```java
 public class FruitTransaction {
   private Operation operation;
-  private String fruit;
+  private String fruitTransaction;
   private int quantity;
 
   // getters, setters, ...
@@ -94,4 +94,4 @@ public class FruitTransaction {
 }
 ```
 
-#### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop)
+#### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruitTransaction-shop)
