@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FileProcessingImpl implements FileProcessing {
@@ -16,23 +16,28 @@ public class FileProcessingImpl implements FileProcessing {
     private static final String MASSAGE = "Can't get data from file ";
     private static final String TITLE_STRING = "type,fruit,quantity";
     private static final String TITLE_STRING_REPORT = "fruit,quantity";
+    private static final String MASSAGE_OF_EXCESSIVE_QUANTITY = "Check the "
+            + "data is a negative quantity of the product";
 
     @Override
-    public void add(FruitTransaction fruitTransaction) {
-        String fruitTransactionString = String.join(",",
-                String.valueOf(fruitTransaction.getOperation().getCode()),
-                String.valueOf(fruitTransaction.getFruit()),
-                fruitTransaction.getQuantity() + "\n");
+    public void add(List<Fruit> fruitList) {
+        if (fruitList.stream().filter(quan -> quan.getQuantity() < 0).count() > 0) {
+            throw new RuntimeException(MASSAGE_OF_EXCESSIVE_QUANTITY);
+        }
+        String headReport = TITLE_STRING_REPORT + "\n";
+        String fruitReport = headReport + fruitList.stream()
+                .map(o -> o.getFruit() + "," + o.getQuantity())
+                .collect(Collectors.joining("\n"));
         try {
-            Files.write(Paths.get(TRANSACTION_OF_DAY), fruitTransactionString.getBytes(),
-                    StandardOpenOption.APPEND);
+            Files.write(Paths.get(DAILY_REPORT), fruitReport.getBytes(),
+                    StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
-            throw new RuntimeException(MASSAGE + TRANSACTION_OF_DAY);
+            throw new RuntimeException(MASSAGE + DAILY_REPORT);
         }
     }
 
     @Override
-    public List<FruitTransaction> get() {
+    public List<FruitTransaction> getListOfTransaction() {
         List<String> stringList;
         try {
             stringList = Files.readAllLines(Path.of(TRANSACTION_OF_DAY));
@@ -41,43 +46,9 @@ public class FileProcessingImpl implements FileProcessing {
         }
         return stringList.stream()
                 .filter(string -> !string.equals(TITLE_STRING))
-                .map(this::getFromCsvRow)
+                .map(str -> str.split(","))
+                .map(transaction -> new FruitTransaction(transaction[0],
+                        transaction[1], transaction[2]))
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public void update(Map<String, Integer> newData) {
-        String newTitle = TITLE_STRING + System.lineSeparator()
-                + newData.entrySet().stream()
-                .map(p -> "b," + p.getKey() + "," + p.getValue())
-                .collect(Collectors.joining(System.lineSeparator()))
-                + System.lineSeparator();
-        String newString = TITLE_STRING_REPORT + System.lineSeparator()
-                + newData.entrySet().stream()
-                .map(p -> p.getKey() + "," + p.getValue())
-                        .collect(Collectors.joining(System.lineSeparator()))
-                + System.lineSeparator();
-        try {
-            Files.write(Paths.get(TRANSACTION_OF_DAY), newTitle.getBytes(),
-                    StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException(MASSAGE + TRANSACTION_OF_DAY);
-        }
-        try {
-            Files.write(Paths.get(DAILY_REPORT), newString.getBytes(),
-                    StandardOpenOption.TRUNCATE_EXISTING);
-        } catch (IOException e) {
-            throw new RuntimeException(MASSAGE + DAILY_REPORT);
-        }
-
-    }
-
-    private FruitTransaction getFromCsvRow(String line) {
-        String[] fields = line.split(",");
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE.getEnum(fields[0]));
-        fruitTransaction.setFruit(fields[1]);
-        fruitTransaction.setQuantity(Integer.parseInt(fields[2]));
-        return fruitTransaction;
     }
 }

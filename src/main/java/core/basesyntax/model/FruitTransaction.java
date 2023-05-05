@@ -7,8 +7,10 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public Operation getOperation() {
-        return operation;
+    public FruitTransaction(String operation, String fruit, String quantity) {
+        this.operation = this.getOperation(operation);
+        this.fruit = fruit;
+        this.quantity = Integer.parseInt(quantity);
     }
 
     public void setOperation(Operation operation) {
@@ -31,6 +33,17 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public Operation getOperation(String operation) {
+        return Arrays.stream(Operation.values())
+                .filter(o -> o.getCode().equals(operation))
+                .findFirst()
+                .orElse(null);
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -45,13 +58,6 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
-        }
-
-        public Operation getEnum(String code) {
-            Operation[] mass = Operation.values();
-            return Arrays.stream(mass)
-                    .filter(p -> p.getCode().equals(code))
-                    .findFirst().get();
         }
     }
 }

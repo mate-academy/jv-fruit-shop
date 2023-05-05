@@ -1,13 +1,11 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import java.util.Map;
 
 public interface FileProcessing {
-    void add(FruitTransaction fruitTransaction);
+    void add(List<Fruit> fruitList);
 
-    List<FruitTransaction> get();
-
-    void update(Map<String, Integer> newData);
+    List<FruitTransaction> getListOfTransaction();
 }
