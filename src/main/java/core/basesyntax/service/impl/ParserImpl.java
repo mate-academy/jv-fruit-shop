@@ -1,6 +1,7 @@
-package core.basesyntax.parser;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.Parser;
 
 public class ParserImpl implements Parser {
     private static final String REGEX = ",";
