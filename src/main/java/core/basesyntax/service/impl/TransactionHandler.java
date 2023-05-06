@@ -2,6 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 
-public interface TransactionRecord {
+public interface TransactionHandler {
     void addTransaction(FruitTransaction fruitTransaction);
 }

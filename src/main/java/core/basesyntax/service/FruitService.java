@@ -1,11 +1,11 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
+import java.util.Map;
 
 public interface FruitService {
-    Fruit getFruit(String fruitName);
+    String getFruit(String fruitName);
 
-    void addFruit(String fruit, int quantity);
+    void addFruit(Map<String, Integer> remnantsOfGoods, String fruit, int quantity);
 
-    void updateFruit(Fruit fruit, int quantity);
+    void updateFruit(Map<String, Integer> remnantsOfGoods, String fruit, int addQuantity);
 }

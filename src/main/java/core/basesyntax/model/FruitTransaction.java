@@ -3,12 +3,13 @@ package core.basesyntax.model;
 import java.util.Arrays;
 
 public class FruitTransaction {
+    private static final String MASSAGE = "There is no such enum";
     private Operation operation;
     private String fruit;
     private int quantity;
 
     public FruitTransaction(String operation, String fruit, String quantity) {
-        this.operation = this.getOperation(operation);
+        this.operation = Operation.getByCode(operation);
         this.fruit = fruit;
         this.quantity = Integer.parseInt(quantity);
     }
@@ -33,15 +34,8 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation getOperation() {
+    public Operation getByCode() {
         return operation;
-    }
-
-    public Operation getOperation(String operation) {
-        return Arrays.stream(Operation.values())
-                .filter(o -> o.getCode().equals(operation))
-                .findFirst()
-                .orElse(null);
     }
 
     public enum Operation {
@@ -54,6 +48,13 @@ public class FruitTransaction {
 
         Operation(String code) {
             this.code = code;
+        }
+
+        public static Operation getByCode(String operation) {
+            return Arrays.stream(Operation.values())
+                    .filter(o -> o.getCode().equals(operation))
+                    .findAny()
+                    .orElseThrow(() -> new RuntimeException(MASSAGE + operation));
         }
 
         public String getCode() {

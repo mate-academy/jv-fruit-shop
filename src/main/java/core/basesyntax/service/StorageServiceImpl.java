@@ -2,15 +2,15 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.TransactionHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class StorageServiceImpl implements StorageService {
     private List<FruitTransaction> fruitTransactionList;
-    private TransactionHandler transactionHandler;
+    private OperationStrategy transactionHandler;
 
     public StorageServiceImpl(List<FruitTransaction> fruitTransactionList,
-                              TransactionHandler transactionHandler) {
+                              OperationStrategy transactionHandler) {
         this.fruitTransactionList = fruitTransactionList;
         this.transactionHandler = transactionHandler;
     }
@@ -19,15 +19,16 @@ public class StorageServiceImpl implements StorageService {
     public void transfer() {
         for (int i = 0; i < fruitTransactionList.size(); i++) {
             transactionHandler.get(fruitTransactionList.get(i)
-                    .getOperation()).addTransaction(fruitTransactionList.get(i));
+                    .getByCode()).addTransaction(fruitTransactionList.get(i));
         }
     }
 
     @Override
     public void showReport() {
         System.out.println("fruit,quantity");
-        Storage.fruits.stream()
-                .map(o -> o.getFruit() + "," + o.getQuantity())
-                .forEach(System.out::println);
+        Storage.remnantsOfGoods.entrySet().stream()
+                .forEach(entry -> {
+                    System.out.println(entry.getKey() + "," + entry.getValue());
+                });
     }
 }
