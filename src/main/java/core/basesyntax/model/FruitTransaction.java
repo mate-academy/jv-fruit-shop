@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import java.util.Arrays;
 
 public class FruitTransaction {
-    private static final String MASSAGE = "There is no such enum";
+    private static final String MASSAGE = "There is no such enum: ";
     private Operation operation;
     private String fruit;
     private int quantity;

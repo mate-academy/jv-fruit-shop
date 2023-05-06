@@ -9,12 +9,8 @@ public class ReturnTransactionHandler implements TransactionHandler {
     @Override
     public void addTransaction(FruitTransaction fruitTransaction) {
         FruitService fruitService = new FruitServiceImpl();
-        if (null != Storage.remnantsOfGoods.keySet().stream()
-                .filter(o -> o.equals(fruitTransaction.getFruit()))
-                .findFirst()
-                .orElse(null)) {
-            fruitService.updateFruit(Storage.remnantsOfGoods, fruitService
-                            .getFruit(fruitTransaction.getFruit()), fruitTransaction.getQuantity());
+        if (Storage.remnantsOfGoods.containsKey(fruitTransaction.getFruit())) {
+            fruitService.updateFruit(fruitTransaction, fruitTransaction.getQuantity());
         } else {
             fruitService.addFruit(Storage.remnantsOfGoods, fruitTransaction.getFruit(),
                     fruitTransaction.getQuantity());

@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
@@ -18,8 +19,8 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void updateFruit(Map<String, Integer> remnantsOfGoods, String fruit, int addQuantity) {
-        int mmm = remnantsOfGoods.get(fruit);
-        remnantsOfGoods.put(fruit, mmm + addQuantity);
+    public void updateFruit(FruitTransaction fruitTransaction, int toAdd) {
+        int amountOfFruitNow = Storage.remnantsOfGoods.get(fruitTransaction.getFruit());
+        Storage.remnantsOfGoods.put(fruitTransaction.getFruit(), amountOfFruitNow + toAdd);
     }
 }

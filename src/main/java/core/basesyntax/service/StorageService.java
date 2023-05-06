@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
-public interface StorageService {
-    void transfer();
+import core.basesyntax.model.FruitTransaction;
+import java.util.List;
 
-    void showReport();
+public interface StorageService {
+    void processTransactions(List<FruitTransaction> fruitTransactionList);
 }

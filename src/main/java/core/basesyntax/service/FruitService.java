@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 
 public interface FruitService {
@@ -7,5 +8,5 @@ public interface FruitService {
 
     void addFruit(Map<String, Integer> remnantsOfGoods, String fruit, int quantity);
 
-    void updateFruit(Map<String, Integer> remnantsOfGoods, String fruit, int addQuantity);
+    void updateFruit(FruitTransaction fruitTransaction, int toAdd);
 }

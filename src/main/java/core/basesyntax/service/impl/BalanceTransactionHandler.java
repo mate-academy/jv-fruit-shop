@@ -10,9 +10,7 @@ public class BalanceTransactionHandler implements TransactionHandler {
     public void addTransaction(FruitTransaction fruitTransaction) {
         FruitService fruitService = new FruitServiceImpl();
         if (Storage.remnantsOfGoods.containsKey(fruitTransaction.getFruit())) {
-            fruitService.updateFruit(Storage.remnantsOfGoods,
-                    fruitService.getFruit(fruitTransaction.getFruit()),
-                    fruitTransaction.getQuantity());
+            fruitService.updateFruit(fruitTransaction, fruitTransaction.getQuantity());
         } else {
             fruitService.addFruit(Storage.remnantsOfGoods, fruitTransaction.getFruit(),
                     fruitTransaction.getQuantity());

@@ -38,10 +38,9 @@ public class Main {
         List<FruitTransaction> fruitTransactionList = transactionParser
                 .parseTransactions(fileService.read(TRANSACTION_OF_DAY));
         ReportService reportService = new ReportService();
-        StorageService storageService = new StorageServiceImpl(fruitTransactionList,
-                operationStrategy);
-        storageService.transfer();
+        StorageService storageService = new StorageServiceImpl(operationStrategy);
+        storageService.processTransactions(fruitTransactionList);
         fileService.write(reportService.getReport(), DAILY_REPORT);
-        storageService.showReport();
+        System.out.println(reportService.getReport());
     }
 }

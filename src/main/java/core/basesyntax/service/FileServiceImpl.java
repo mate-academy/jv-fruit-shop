@@ -9,7 +9,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class FileServiceImpl implements FileService {
-    private static final String MASSAGE = "Can't get data from file ";
+    private static final String MASSAGE = "Can't get data from file: ";
     private static final String MASSAGE_OF_EXCESSIVE_QUANTITY = "Check the "
             + "data is a negative quantity of the product";
 
