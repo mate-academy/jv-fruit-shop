@@ -5,5 +5,5 @@ import java.util.List;
 public interface FileService {
     List<String> readFromFile(String filename);
 
-    void writeToFile(List<String> report, String toFileName);
+    void writeToFile(List<String> lines, String toFileName);
 }

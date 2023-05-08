@@ -1,17 +1,17 @@
-import static db.StorageTotalBalance.fruitStorageTotalBalance;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
 import service.CalculationService;
+import service.CalculationStrategy;
 import service.FileService;
 import service.OperationHandler;
 import service.Parser;
 import service.ReportCreator;
 import service.impl.AddingOperationHandler;
 import service.impl.CalculationServiceImpl;
+import service.impl.CalculationStrategyImpl;
 import service.impl.FileServiceImpl;
 import service.impl.ParserImpl;
 import service.impl.ReportCreatorImpl;
@@ -19,9 +19,9 @@ import service.impl.SubtractOperationHandler;
 
 public class Main {
     private static final String FROM_FILE_NAME =
-            "src/main/resources/type,fruit,quantity.csv";
-    private static final String TO_FILE_NAME =
-            "src/main/resources/report - fruit_total_balance.csv";
+            "src/main/resources/daily_transactions.csv";
+    private static final String REPORT_FILE_NAME =
+            "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<Operation, OperationHandler> calculationHandlerMap = new HashMap<>();
@@ -36,12 +36,14 @@ public class Main {
         Parser parser = new ParserImpl();
         List<FruitTransaction> fruitList = parser.parse(dataFromFile);
 
-        CalculationService calculationService = new CalculationServiceImpl(calculationHandlerMap);
+        CalculationStrategy calculationStrategy =
+                new CalculationStrategyImpl(calculationHandlerMap);
+        CalculationService calculationService = new CalculationServiceImpl(calculationStrategy);
         calculationService.calculate(fruitList);
 
         ReportCreator reportCreator = new ReportCreatorImpl();
-        List<String> report = reportCreator.create(fruitStorageTotalBalance);
-        fileService.writeToFile(report, TO_FILE_NAME);
+        List<String> report = reportCreator.create();
+        fileService.writeToFile(report, REPORT_FILE_NAME);
+
     }
 }
-

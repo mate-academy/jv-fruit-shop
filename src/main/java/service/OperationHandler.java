@@ -3,5 +3,5 @@ package service;
 import model.FruitTransaction;
 
 public interface OperationHandler {
-    void handle(FruitTransaction fruit);
+    void handle(FruitTransaction transaction);
 }

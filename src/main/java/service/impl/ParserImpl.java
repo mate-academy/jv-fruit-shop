@@ -1,7 +1,6 @@
 package service.impl;
 
-import static db.StorageTransaction.fruitTransactionList;
-
+import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
 import model.Operation;
@@ -9,20 +8,30 @@ import service.Parser;
 
 public class ParserImpl implements Parser {
     @Override
-    public List<FruitTransaction> parse(List<String> dataFromFile) {
-        int operationIndex = 0;
-        int fruitIndex = 1;
-        int quantityIndex = 2;
-        for (String line : dataFromFile) {
-            String[] fields = line.split(",");
-            Operation operation = Operation.getOperation(fields[operationIndex]);
-            if (operation == null) {
-                continue;
+    public List<FruitTransaction> parse(List<String> lines) {
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+        for (String line : lines) {
+            FruitTransaction fruitTransaction = parseLine(line);
+            if (fruitTransaction != null) {
+                fruitTransactionList.add(fruitTransaction);
             }
-            String fruit = fields[fruitIndex];
-            int quantity = Integer.parseInt(fields[quantityIndex].trim());
-            fruitTransactionList.add(new FruitTransaction(operation, fruit, quantity));
         }
         return fruitTransactionList;
+    }
+
+    private FruitTransaction parseLine(String line) {
+        final int operationIndex = 0;
+        final int fruitIndex = 1;
+        final int quantityIndex = 2;
+        String[] fields = line.split(",");
+        Operation operation;
+        try {
+            operation = Operation.getOperation(fields[operationIndex].trim());
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+        String fruit = fields[fruitIndex].trim();
+        int quantity = Integer.parseInt(fields[quantityIndex].trim());
+        return new FruitTransaction(operation, fruit, quantity);
     }
 }

@@ -1,7 +1,5 @@
 package model;
 
-import jdk.jfr.Description;
-
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
@@ -18,14 +16,12 @@ public enum Operation {
         return code;
     }
 
-    @Description("Using this method - should do the null check"
-            + "returns null if such operation doesn't exist")
     public static Operation getOperation(String code) {
         for (Operation operation : Operation.values()) {
             if (operation.getCode().equals(code)) {
-                return Operation.valueOf(operation.name());
+                return operation;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Unknown Operation");
     }
 }
