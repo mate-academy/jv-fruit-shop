@@ -9,7 +9,7 @@ public class TransactionParser {
 
     public List<FruitTransaction> parseTransactions(List<String> data) {
         return data.stream()
-        .filter(string -> !string.equals(TITLE_STRING))
+        .skip(1)
         .map(str -> str.split(","))
         .map(transaction -> new FruitTransaction(transaction[0],
         transaction[1], transaction[2]))

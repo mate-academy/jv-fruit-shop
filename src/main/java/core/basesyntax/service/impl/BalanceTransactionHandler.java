@@ -3,16 +3,14 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.FruitServiceImpl;
 
 public class BalanceTransactionHandler implements TransactionHandler {
     @Override
-    public void addTransaction(FruitTransaction fruitTransaction) {
-        FruitService fruitService = new FruitServiceImpl();
+    public void handleTransaction(FruitTransaction fruitTransaction, FruitService fruitService) {
         if (Storage.remnantsOfGoods.containsKey(fruitTransaction.getFruit())) {
-            fruitService.updateFruit(fruitTransaction, fruitTransaction.getQuantity());
+            fruitService.addFruit(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         } else {
-            fruitService.addFruit(Storage.remnantsOfGoods, fruitTransaction.getFruit(),
+            fruitService.setFruit(fruitTransaction.getFruit(),
                     fruitTransaction.getQuantity());
         }
     }

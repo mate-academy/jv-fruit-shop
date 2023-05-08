@@ -3,6 +3,8 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.FileServiceImpl;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.StorageService;
 import core.basesyntax.service.StorageServiceImpl;
@@ -34,11 +36,12 @@ public class Main {
                 new SupplyTransactionHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(transactionRecordsMap);
         FileService fileService = new FileServiceImpl();
+        FruitService fruitService = new FruitServiceImpl();
         TransactionParser transactionParser = new TransactionParser();
         List<FruitTransaction> fruitTransactionList = transactionParser
                 .parseTransactions(fileService.read(TRANSACTION_OF_DAY));
         ReportService reportService = new ReportService();
-        StorageService storageService = new StorageServiceImpl(operationStrategy);
+        StorageService storageService = new StorageServiceImpl(operationStrategy, fruitService);
         storageService.processTransactions(fruitTransactionList);
         fileService.write(reportService.getReport(), DAILY_REPORT);
         System.out.println(reportService.getReport());

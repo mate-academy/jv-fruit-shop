@@ -3,7 +3,6 @@ package core.basesyntax.model;
 import java.util.Arrays;
 
 public class FruitTransaction {
-    private static final String MASSAGE = "There is no such enum: ";
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -54,7 +53,8 @@ public class FruitTransaction {
             return Arrays.stream(Operation.values())
                     .filter(o -> o.getCode().equals(operation))
                     .findAny()
-                    .orElseThrow(() -> new RuntimeException(MASSAGE + operation));
+                    .orElseThrow(() -> new IllegalArgumentException("There is no such enum: "
+                            + operation));
         }
 
         public String getCode() {

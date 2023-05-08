@@ -7,8 +7,9 @@ public class ReportService {
     private static final String TITLE_STRING_REPORT = "fruit,quantity";
 
     public String getReport() {
-        return TITLE_STRING_REPORT + "\n" + Storage.remnantsOfGoods.entrySet().stream()
+        return TITLE_STRING_REPORT + System.lineSeparator()
+                + Storage.remnantsOfGoods.entrySet().stream()
                 .map(entry -> entry.getKey() + "," + entry.getValue())
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }
