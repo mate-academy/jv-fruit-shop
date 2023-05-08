@@ -10,7 +10,7 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public void addFruit(String fruit, int toAdd) {
-        int amountOfFruitNow = Storage.remnantsOfGoods.get(fruit);
-        Storage.remnantsOfGoods.put(fruit, amountOfFruitNow + toAdd);
+        int currentAmount = Storage.remnantsOfGoods.getOrDefault(fruit, 0);
+        Storage.remnantsOfGoods.put(fruit, currentAmount + toAdd);
     }
 }
