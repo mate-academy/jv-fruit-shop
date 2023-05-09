@@ -12,35 +12,17 @@ import java.util.stream.Collectors;
 public class WarehouseDaoWrite {
     public static final String BEGIN_OF_CSV = "fruit,quantity";
 
-    public static void writeData(String fileName, Map<String, Integer> remains) {
+    public void writeData(String fileName, Map<String, Integer> remains) {
         List<String> outputList = remains.entrySet().stream().map(
                 entry -> entry.getKey() + "," + entry.getValue()).collect(Collectors.toList());
         Path filePath = Paths.get(fileName);
-        try {
-            Files.deleteIfExists(filePath);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't overwrite a file " + filePath, e);
-        }
-        try {
-            Files.createFile(filePath);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create a file " + filePath, e);
-        }
+
         try {
             Files.writeString(filePath, BEGIN_OF_CSV
-                        + System.lineSeparator(), StandardOpenOption.APPEND);
-            String lastValue = outputList.get(outputList.size() - 1);
-            for (String str : outputList) {
-                if (str.equals(lastValue)) {
-                    Files.writeString(filePath, str, StandardOpenOption.APPEND);
-                } else {
-                    Files.writeString(filePath, str
-                            + System.lineSeparator(), StandardOpenOption.APPEND);
-                }
-            }
+                    + System.lineSeparator(), StandardOpenOption.TRUNCATE_EXISTING);
+            Files.write(filePath, outputList, StandardOpenOption.APPEND);
         } catch (IOException e) {
-            throw new RuntimeException("Can't add line to file " + filePath, e);
+            throw new RuntimeException("Can't write data to a file " + filePath, e);
         }
-
     }
 }

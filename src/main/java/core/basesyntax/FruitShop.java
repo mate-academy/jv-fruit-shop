@@ -5,13 +5,13 @@ import core.basesyntax.dao.WarehouseDaoWrite;
 import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.Warehouse;
 import core.basesyntax.service.WarehouseImpl;
-import core.basesyntax.stretegy.Strategy;
-import core.basesyntax.stretegy.StrategyImpl;
-import core.basesyntax.stretegy.handlers.OperationBalance;
-import core.basesyntax.stretegy.handlers.OperationHandler;
-import core.basesyntax.stretegy.handlers.OperationPurchase;
-import core.basesyntax.stretegy.handlers.OperationReturn;
-import core.basesyntax.stretegy.handlers.OperationSupply;
+import core.basesyntax.strategy.Strategy;
+import core.basesyntax.strategy.StrategyImpl;
+import core.basesyntax.strategy.handlers.OperationBalance;
+import core.basesyntax.strategy.handlers.OperationHandler;
+import core.basesyntax.strategy.handlers.OperationPurchase;
+import core.basesyntax.strategy.handlers.OperationReturn;
+import core.basesyntax.strategy.handlers.OperationSupply;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,8 +27,9 @@ public class FruitShop {
         hendlerMap.put(FruitTransaction.Operation.SUPPLY, new OperationSupply());
 
         Strategy strategy = new StrategyImpl(hendlerMap);
-        Warehouse warehouse = new WarehouseImpl(WarehouseDaoRead.readData(INPUT_FILE), strategy);
-        WarehouseDaoWrite.writeData(OUTPUT_FILE, warehouse.getRemains());
+        Warehouse warehouse = new WarehouseImpl(
+                new WarehouseDaoRead().readData(INPUT_FILE), strategy);
+        new WarehouseDaoWrite().writeData(OUTPUT_FILE, warehouse.getRemains());
     }
 
 }

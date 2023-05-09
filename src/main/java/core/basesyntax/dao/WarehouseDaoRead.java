@@ -14,7 +14,7 @@ public class WarehouseDaoRead {
     private static final int FRUIT_INDEX = 1;
     private static final int QTE_INDEX = 2;
 
-    public static List<FruitTransaction> readData(String fileName) {
+    public List<FruitTransaction> readData(String fileName) {
         List<String> lines = null;
         try {
             lines = Files.readAllLines(Path.of(fileName));
@@ -26,7 +26,7 @@ public class WarehouseDaoRead {
                 .skip(SKIP_LINE)
                 .map(line -> line.split(SEPARATOR))
                 .map(array -> new FruitTransaction(FruitTransaction.Operation.getByCode(
-                        array[OPERATION_INDEX].replaceAll("\\s", "")),
+                        array[OPERATION_INDEX].trim()),
                         array[FRUIT_INDEX], Integer.parseInt(array[QTE_INDEX])))
                 .collect(Collectors.toList());
         return fruitTransactionList;
