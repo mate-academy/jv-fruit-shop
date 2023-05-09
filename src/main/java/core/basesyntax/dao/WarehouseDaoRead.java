@@ -14,7 +14,6 @@ public class WarehouseDaoRead {
     private static final int FRUIT_INDEX = 1;
     private static final int QTE_INDEX = 2;
 
-
     public static List<FruitTransaction> readData(String fileName) {
         List<String> lines = null;
         try {

@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.stretegy.Strategy;
 import core.basesyntax.stretegy.StrategyImpl;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,4 +30,4 @@ public class WarehouseImpl implements Warehouse {
     public List<FruitTransaction> getDayOperations() {
         return dayOperations;
     }
- }
+}
