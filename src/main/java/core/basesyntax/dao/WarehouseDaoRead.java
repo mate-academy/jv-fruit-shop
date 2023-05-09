@@ -8,6 +8,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class WarehouseDaoRead {
+    private static final String SEPARATOR = ",";
+    private static final int SKIP_LINE = 1;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QTE_INDEX = 2;
+
+
     public static List<FruitTransaction> readData(String fileName) {
         List<String> lines = null;
         try {
@@ -17,11 +24,11 @@ public class WarehouseDaoRead {
         }
 
         List<FruitTransaction> fruitTransactionList = lines.stream()
-                .skip(1)
-                .map(line -> line.split(","))
+                .skip(SKIP_LINE)
+                .map(line -> line.split(SEPARATOR))
                 .map(array -> new FruitTransaction(FruitTransaction.Operation.getByCode(
-                        array[0].replaceAll("\\s", "")),
-                        array[1], Integer.parseInt(array[2])))
+                        array[OPERATION_INDEX].replaceAll("\\s", "")),
+                        array[FRUIT_INDEX], Integer.parseInt(array[QTE_INDEX])))
                 .collect(Collectors.toList());
         return fruitTransactionList;
     }

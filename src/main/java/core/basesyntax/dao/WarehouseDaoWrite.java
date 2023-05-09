@@ -29,9 +29,14 @@ public class WarehouseDaoWrite {
         try {
             Files.writeString(filePath, BEGIN_OF_CSV
                         + System.lineSeparator(), StandardOpenOption.APPEND);
+            String lastValue = outputList.get(outputList.size() - 1);
             for (String str : outputList) {
-                Files.writeString(filePath, str
-                        + System.lineSeparator(), StandardOpenOption.APPEND);
+                if (str.equals(lastValue)) {
+                    Files.writeString(filePath, str, StandardOpenOption.APPEND);
+                } else {
+                    Files.writeString(filePath, str
+                            + System.lineSeparator(), StandardOpenOption.APPEND);
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't add line to file " + filePath, e);
