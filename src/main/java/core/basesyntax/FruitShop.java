@@ -7,8 +7,11 @@ import core.basesyntax.service.Warehouse;
 import core.basesyntax.service.WarehouseImpl;
 import core.basesyntax.stretegy.Strategy;
 import core.basesyntax.stretegy.StrategyImpl;
-import core.basesyntax.stretegy.handlers.*;
-
+import core.basesyntax.stretegy.handlers.OperationBalance;
+import core.basesyntax.stretegy.handlers.OperationHandler;
+import core.basesyntax.stretegy.handlers.OperationPurchase;
+import core.basesyntax.stretegy.handlers.OperationReturn;
+import core.basesyntax.stretegy.handlers.OperationSupply;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +20,7 @@ public class FruitShop {
     private static final String OUTPUT_FILE = "output.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler > hendlerMap = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> hendlerMap = new HashMap<>();
         hendlerMap.put(FruitTransaction.Operation.BALANCE, new OperationBalance());
         hendlerMap.put(FruitTransaction.Operation.PURCHASE, new OperationPurchase());
         hendlerMap.put(FruitTransaction.Operation.RETURN, new OperationReturn());
