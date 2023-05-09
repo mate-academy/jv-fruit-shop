@@ -11,10 +11,9 @@ public class WarehouseImpl implements Warehouse {
     private final Map<String, Integer> remains;
     private final List<FruitTransaction> dayOperations;
 
-    public WarehouseImpl(List<FruitTransaction> dayOperations) {
+    public WarehouseImpl(List<FruitTransaction> dayOperations, Strategy strategy) {
         this.remains = new HashMap<>();
         this.dayOperations = new ArrayList<>();
-        Strategy strategy = new StrategyImpl();
         for (FruitTransaction dayOperation : dayOperations) {
             strategy.getHandler(dayOperation.getOperation()).warehouseOperation(
                     dayOperation.getFruit(), dayOperation.getQuantity(), this);
