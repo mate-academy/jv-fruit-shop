@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.WarehouseDaoRead;
-import core.basesyntax.dao.WarehouseDaoWrite;
+import core.basesyntax.dao.WarehouseDaoReader;
+import core.basesyntax.dao.WarehouseDaoWriter;
 import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.Warehouse;
 import core.basesyntax.service.WarehouseImpl;
@@ -20,16 +20,16 @@ public class FruitShop {
     private static final String OUTPUT_FILE = "output.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> hendlerMap = new HashMap<>();
-        hendlerMap.put(FruitTransaction.Operation.BALANCE, new OperationBalance());
-        hendlerMap.put(FruitTransaction.Operation.PURCHASE, new OperationPurchase());
-        hendlerMap.put(FruitTransaction.Operation.RETURN, new OperationReturn());
-        hendlerMap.put(FruitTransaction.Operation.SUPPLY, new OperationSupply());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new OperationBalance());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new OperationPurchase());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new OperationReturn());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new OperationSupply());
 
-        Strategy strategy = new StrategyImpl(hendlerMap);
+        Strategy strategy = new StrategyImpl(operationHandlerMap);
         Warehouse warehouse = new WarehouseImpl(
-                new WarehouseDaoRead().readData(INPUT_FILE), strategy);
-        new WarehouseDaoWrite().writeData(OUTPUT_FILE, warehouse.getRemains());
+                new WarehouseDaoReader().readData(INPUT_FILE), strategy);
+        new WarehouseDaoWriter().writeData(OUTPUT_FILE, warehouse.getRemains());
     }
 
 }

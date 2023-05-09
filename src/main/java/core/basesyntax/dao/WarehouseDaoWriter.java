@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class WarehouseDaoWrite {
+public class WarehouseDaoWriter {
     public static final String BEGIN_OF_CSV = "fruit,quantity";
 
     public void writeData(String fileName, Map<String, Integer> remains) {

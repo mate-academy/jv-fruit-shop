@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WarehouseDaoRead {
+public class WarehouseDaoReader {
     private static final String SEPARATOR = ",";
     private static final int SKIP_LINE = 1;
     private static final int OPERATION_INDEX = 0;

@@ -10,10 +10,6 @@ public class FruitTransaction {
 
     // getters, setters, ...
 
-    public FruitTransaction(Operation operation) {
-        this.operation = operation;
-    }
-
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;

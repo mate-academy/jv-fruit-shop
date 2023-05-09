@@ -5,18 +5,18 @@ import core.basesyntax.strategy.handlers.OperationHandler;
 import java.util.Map;
 
 public class StrategyImpl implements Strategy {
-    private final Map<FruitTransaction.Operation, OperationHandler> hendlerMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
-    public StrategyImpl(Map hendlerMap) {
-        this.hendlerMap = hendlerMap;
+    public StrategyImpl(Map handlerMap) {
+        this.operationHandlerMap = handlerMap;
     }
 
-    public Map<FruitTransaction.Operation, OperationHandler> getHendlerMap() {
-        return hendlerMap;
+    public Map<FruitTransaction.Operation, OperationHandler> getOperationHandlerMap() {
+        return operationHandlerMap;
     }
 
     @Override
     public OperationHandler getHandler(FruitTransaction.Operation operation) {
-        return hendlerMap.get(operation);
+        return operationHandlerMap.get(operation);
     }
 }
