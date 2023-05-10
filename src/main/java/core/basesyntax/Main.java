@@ -22,7 +22,7 @@ import java.util.Map;
 public class Main {
     private static final String FILE_NAME = "src/main/resources/data.txt";
 
-    public static void main(String[] args) throws IllegalAccessException {
+    public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler());
