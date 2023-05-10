@@ -10,7 +10,6 @@ public class ReportServiceImpl implements ReportService {
     public String createFruitBalanceReport(Map<String, Integer> fruitBalance) {
         StringBuilder reportBuilder = new StringBuilder("fruit")
                 .append(SEPARATOR).append("quantity").append(System.lineSeparator());
-
         for (Map.Entry<String, Integer> balance : fruitBalance.entrySet()) {
             if (balance.getValue() < 0) {
                 throw new RuntimeException("Fruit quantity can`t be less than 0");
