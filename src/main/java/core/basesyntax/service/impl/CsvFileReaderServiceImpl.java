@@ -20,7 +20,7 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
                     .filter(line -> !HEADER.equals(line))
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Reading is failed " + fileName);
+            throw new RuntimeException("Reading failed " + fileName);
         }
     }
 }
