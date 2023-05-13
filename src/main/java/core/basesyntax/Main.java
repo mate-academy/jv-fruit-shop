@@ -8,10 +8,9 @@ import core.basesyntax.service.ReportMakerService;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-
 import java.util.List;
 
 public class Main {
