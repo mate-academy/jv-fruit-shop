@@ -52,6 +52,6 @@ public class FruitTransaction {
                 return operation;
             }
         }
-        throw new RuntimeException("Operation not found " + code);
+        throw new IllegalArgumentException("Operation not found " + code);
     }
 }
