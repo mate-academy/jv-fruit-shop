@@ -22,7 +22,7 @@ public class ParserImpl implements Parser {
 
     private FruitTransaction parseLine(String textLine) {
         String[] arrayOf1Line = textLine.split(SPLIT_REGEX);
-        FruitTransaction  fruitTransaction = new FruitTransaction();
+        FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit(arrayOf1Line[FRUIT_INDEX]);
         fruitTransaction.setOperation(FruitTransaction
                 .Operation.getCode(arrayOf1Line[OPERATION_INDEX]));
