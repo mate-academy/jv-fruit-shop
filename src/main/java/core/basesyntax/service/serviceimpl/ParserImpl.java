@@ -10,7 +10,6 @@ public class ParserImpl implements Parser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private FruitTransaction fruitTransaction;
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
@@ -23,7 +22,7 @@ public class ParserImpl implements Parser {
 
     private FruitTransaction parseLine(String textLine) {
         String[] arrayOf1Line = textLine.split(SPLIT_REGEX);
-        fruitTransaction = new FruitTransaction();
+        FruitTransaction  fruitTransaction = new FruitTransaction();
         fruitTransaction.setFruit(arrayOf1Line[FRUIT_INDEX]);
         fruitTransaction.setOperation(FruitTransaction
                 .Operation.getCode(arrayOf1Line[OPERATION_INDEX]));
