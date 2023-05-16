@@ -15,7 +15,7 @@ public class TransactionParserImpl implements TransactionParser {
     public List<FruitTransaction> parse(List<String> data) {
         List<FruitTransaction> transactions = new ArrayList<>();
         if (!data.isEmpty()) {
-            data.remove(0);
+            data.remove(FIRST_LINE_INDEX);
         }
         for (String lines: data) {
             String[] fields = lines.split(",");
