@@ -9,6 +9,7 @@ public class SupplyHandler implements OperationHandler {
     public SupplyHandler() {
         this.adder = new AdderToStorage();
     }
+
     @Override
     public void handle(FruitTransaction transaction) {
         adder.add(transaction);

@@ -9,6 +9,7 @@ public class BalanceHandler implements OperationHandler {
     public BalanceHandler() {
         this.adder = new AdderToStorage();
     }
+
     @Override
     public void handle(FruitTransaction transaction) {
         adder.add(transaction);
