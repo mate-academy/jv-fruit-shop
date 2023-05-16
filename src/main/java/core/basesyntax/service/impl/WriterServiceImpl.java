@@ -8,10 +8,10 @@ import java.io.IOException;
 
 public class WriterServiceImpl implements WriterService {
     @Override
-    public void writeToFile(String pathToFile, String report) {
+    public void writeToFile(String pathToFile, String report) throws IOException {
         File file = new File(pathToFile);
+        file.createNewFile();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            file.createNewFile();
             writer.write(report);
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file on the path "

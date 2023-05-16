@@ -10,7 +10,7 @@ public class ReportMakerServiceImpl implements ReportMakerService {
     private static final String HEAD_STRING = "fruit,quantity" + LINE_SEPARATOR;
 
     @Override
-    public String report() {
+    public String generateReport() {
         return Storage.storage.entrySet().stream()
                 .map(entry -> entry.getKey() + WORD_SEPARATOR + entry.getValue())
                 .collect(Collectors.joining(LINE_SEPARATOR,

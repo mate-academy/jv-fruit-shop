@@ -9,9 +9,10 @@ import java.util.List;
 public class FruitShopServiceImpl implements FruitShopService {
     private final OperationStrategy operationStrategy;
 
-    public FruitShopServiceImpl() {
-        operationStrategy = new OperationStrategyImpl();
+    public FruitShopServiceImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
     }
+
 
     @Override
     public void processData(List<FruitTransaction> transactions) {
