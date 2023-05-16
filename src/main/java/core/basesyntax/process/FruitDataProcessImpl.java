@@ -1,7 +1,6 @@
-package core.basesyntax.data_process;
+package core.basesyntax.process;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +32,8 @@ public class FruitDataProcessImpl implements FruitDataProcess {
                     case PURCHASE:
                         fruitsQuantity.put(fruit, currentQuantity - quantity);
                         break;
+                    default:
+                        throw new RuntimeException("No such operation!");
                 }
             }
         }

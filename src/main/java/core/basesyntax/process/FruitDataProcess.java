@@ -1,7 +1,6 @@
-package core.basesyntax.data_process;
+package core.basesyntax.process;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.List;
 import java.util.Map;
 

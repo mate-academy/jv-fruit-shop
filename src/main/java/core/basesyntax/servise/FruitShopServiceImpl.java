@@ -1,10 +1,9 @@
-package core.basesyntax.frut_servise;
+package core.basesyntax.servise;
 
-import core.basesyntax.DAO.FruitsDao;
-import core.basesyntax.frut_data_process.FruitDataProcess;
-import core.basesyntax.frut_data_process.FruitReportMaker;
+import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.FruitTransaction;
-
+import core.basesyntax.process.FruitDataProcess;
+import core.basesyntax.process.FruitReportMaker;
 import java.util.List;
 import java.util.Map;
 

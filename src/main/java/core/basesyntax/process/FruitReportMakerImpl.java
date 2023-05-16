@@ -1,4 +1,4 @@
-package core.basesyntax.data_process;
+package core.basesyntax.process;
 
 import java.util.Map;
 
@@ -12,7 +12,10 @@ public class FruitReportMakerImpl implements FruitReportMaker {
         StringBuilder resultReport = new StringBuilder();
         resultReport.append(INITIAL_LINE);
         for (Map.Entry<String, Integer> entry : processFruitsData.entrySet()) {
-            resultReport.append(entry.getKey()).append(DELIM).append(entry.getValue()).append(NEW_LINE);
+            resultReport.append(entry.getKey())
+                    .append(DELIM)
+                    .append(entry.getValue())
+                    .append(NEW_LINE);
         }
         return resultReport.toString();
     }

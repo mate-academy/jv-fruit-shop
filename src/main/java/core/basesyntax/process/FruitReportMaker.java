@@ -1,4 +1,4 @@
-package core.basesyntax.data_process;
+package core.basesyntax.process;
 
 import java.util.Map;
 
