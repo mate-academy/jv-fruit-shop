@@ -14,7 +14,7 @@ public class TransactionStrategyImpl implements TransactionStrategy {
     }
 
     @Override
-    public TransactionHandler getTransaction(FruitTransaction.Operation operation) {
+    public TransactionHandler getHandler(FruitTransaction.Operation operation) {
         return activitiesHandlersMap.get(operation);
     }
 }

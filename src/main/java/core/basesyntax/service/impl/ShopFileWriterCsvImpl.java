@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ShopFileWriterCsvImpl implements ShopFileWriter {
-
     @Override
     public void writeToFile(String fileName, String lines) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName,true))) {

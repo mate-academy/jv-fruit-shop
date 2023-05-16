@@ -4,14 +4,14 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopFileReader;
 import core.basesyntax.service.ShopFileWriter;
 import core.basesyntax.service.ShopService;
-import core.basesyntax.service.ShopTransaction;
 import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.TransactionStrategy;
 import core.basesyntax.service.impl.ShopFileReaderCsvImpl;
 import core.basesyntax.service.impl.ShopFileWriterCsvImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
-import core.basesyntax.service.impl.ShopTransactionImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.service.impl.TransactionStrategyImpl;
 import core.basesyntax.service.strategy.BalanceHandler;
 import core.basesyntax.service.strategy.PurchaseHandler;
@@ -36,13 +36,13 @@ public class Main {
         ShopFileReader shopFileReader = new ShopFileReaderCsvImpl();
         ShopFileWriter shopFileWriter = new ShopFileWriterCsvImpl();
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl(activitiesHandlerMap);
-        ShopTransaction shopTransaction = new ShopTransactionImpl(transactionStrategy);
+        TransactionService transactionService = new TransactionServiceImpl(transactionStrategy);
         TransactionParser transactionParser = new TransactionParserImpl();
         ShopService shopService = new ShopServiceImpl();
 
         List<String> dataFromFile = shopFileReader.readFromFile(DATA_BASE_FILE_NAME);
         List<FruitTransaction> fruitTransactions = transactionParser.parse(dataFromFile);
-        shopTransaction.makeTransaction(fruitTransactions);
+        transactionService.makeTransactions(fruitTransactions);
         String report = shopService.makeReport();
         shopFileWriter.writeToFile(REPORT_FILE_NAME, report);
     }

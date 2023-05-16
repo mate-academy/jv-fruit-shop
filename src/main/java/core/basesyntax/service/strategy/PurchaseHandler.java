@@ -6,6 +6,10 @@ public class PurchaseHandler implements TransactionHandler {
     @Override
     public void transaction(String fruit, int quantity) {
         int oldValue = Storage.STORAGE.get(fruit);
-        Storage.STORAGE.put(fruit, oldValue - quantity);
+        int newValue = oldValue - quantity;
+        if (newValue < 0) {
+            throw new RuntimeException("Balance is negative " + fruit + " " + newValue);
+        }
+        Storage.STORAGE.put(fruit, newValue);
     }
 }
