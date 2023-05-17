@@ -9,11 +9,9 @@ import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ReadServiceImpl;
 import core.basesyntax.service.impl.TransactionImpl;
 import core.basesyntax.service.impl.WriteServiceImpl;
-import core.basesyntax.strategy.BalanceOperation;
+import core.basesyntax.strategy.AdditionalOperation;
 import core.basesyntax.strategy.OperationHendler;
-import core.basesyntax.strategy.PurchaseOperation;
-import core.basesyntax.strategy.ReturnOperation;
-import core.basesyntax.strategy.SupplyOperation;
+import core.basesyntax.strategy.SubtractionOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +28,10 @@ public class Main {
         final WriteService writerService = new WriteServiceImpl();
         Map<FruitTransaction.Operation, OperationHendler> operationHandlerMap = new HashMap<>();
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new AdditionalOperation());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new AdditionalOperation());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new SubtractionOperation());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new AdditionalOperation());
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
             OperationHendler handler = strategy.get(fruitTransaction.getOperation());
             handler.operateTransaction(fruitTransaction);
