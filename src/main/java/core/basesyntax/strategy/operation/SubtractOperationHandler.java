@@ -4,7 +4,7 @@ import core.basesyntax.exception.NegativeNumberException;
 
 public class SubtractOperationHandler implements OperationHandler {
     @Override
-    public Integer getCalcFruits(Integer currentQuantity, Integer operationQuantity) {
+    public Integer handle(Integer currentQuantity, Integer operationQuantity) {
         currentQuantity = (currentQuantity != null) ? currentQuantity : 0;
         if (operationQuantity <= 0) {
             throw new NegativeNumberException();

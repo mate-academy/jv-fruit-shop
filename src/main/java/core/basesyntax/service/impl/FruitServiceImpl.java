@@ -14,7 +14,7 @@ public class FruitServiceImpl implements FruitService {
         for (FruitTransaction fruitTransaction : list) {
             Storage.listFruits.compute(fruitTransaction.getFruit(),
                     (k,v) -> operationStrategy.get(fruitTransaction.getOperation())
-                            .getCalcFruits(v,fruitTransaction.getQuantity()));
+                            .handle(v,fruitTransaction.getQuantity()));
         }
     }
 }

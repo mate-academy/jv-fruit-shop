@@ -20,7 +20,7 @@ public class FruitParserServiceImpl implements FruitParserService {
             listInpFromFile.remove(FIRST_LINE_DATA);
         }
         return listInpFromFile.stream()
-                .map(s -> s.split(SEPARATOR))
+                .map(line -> line.split(SEPARATOR))
                 .map(s -> new FruitTransaction(
                         FruitTransaction.Operation.getOperationByCode(s[OPERATION]),
                         s[FRUIT],

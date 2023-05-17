@@ -13,7 +13,7 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     {
         operationHandlerMap = new HashMap<>();
-        init_strategy_map();
+        initStrategyMap();
     }
 
     @Override
@@ -21,7 +21,7 @@ public class OperationStrategyImpl implements OperationStrategy {
         return operationHandlerMap.get(code);
     }
 
-    private void init_strategy_map() {
+    private void initStrategyMap() {
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new PlusOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new PlusOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new PlusOperationHandler());
