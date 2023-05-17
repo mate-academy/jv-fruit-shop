@@ -1,4 +1,4 @@
-package core.basesyntax.servise;
+package core.basesyntax.serviсe;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.model.FruitTransaction;
@@ -23,7 +23,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public String serviceFruitsShop(String fromFile) {
         List<FruitTransaction> fruitsList = fruitsDao.getFruitsData(fromFile);
-        Map<String, Integer> fruitsQuantity = fruitDataProcess.processFruitsData(fruitsList);
+        Map<String, Integer> fruitsQuantity = fruitDataProcess.processFruitData(fruitsList);
         return fruitReportMaker.makeFruitReport(fruitsQuantity);
     }
 }

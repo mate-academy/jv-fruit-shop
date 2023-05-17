@@ -11,15 +11,11 @@ public class FruitsDaoImpl implements FruitsDao {
     private static final int FIRST_ELEMENT = 0;
     private static final int SECOND_ELEMENT = 1;
     private static final int THIRD_ELEMENT = 2;
-    private List<FruitTransaction> fruitsData;
-
-    public FruitsDaoImpl() {
-        fruitsData = new ArrayList<>();
-    }
 
     @Override
     public List<FruitTransaction> getFruitsData(String fromFile) {
         try (BufferedReader fileReader = new BufferedReader(new FileReader((fromFile)))) {
+            List<FruitTransaction> fruitsData = new ArrayList<>();
             String lineFromFile = fileReader.readLine();
             while (lineFromFile != null) {
                 String[] lineParts = lineFromFile.split(",");
@@ -33,7 +29,7 @@ public class FruitsDaoImpl implements FruitsDao {
             }
             return fruitsData;
         } catch (IOException cat) {
-            throw new RuntimeException("Can't read the file!" + cat);
+            throw new RuntimeException("Can't read the file!", cat);
         }
     }
 }

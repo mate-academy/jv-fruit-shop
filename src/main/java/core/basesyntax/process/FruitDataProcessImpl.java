@@ -13,7 +13,7 @@ public class FruitDataProcessImpl implements FruitDataProcess {
     }
 
     @Override
-    public Map<String, Integer> processFruitsData(List<FruitTransaction> fruitTransactionList) {
+    public Map<String, Integer> processFruitData(List<FruitTransaction> fruitTransactionList) {
         if (fruitTransactionList.isEmpty()) {
             throw new RuntimeException("Empty list: " + fruitTransactionList);
         }
