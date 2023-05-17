@@ -1,11 +1,11 @@
-package serviceImpl;
+package service.impl;
 
-import service.ReadService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
+import service.ReadService;
 
 public class ReadServiceImpl implements ReadService {
     public static final int ACTIVITY_INDEX = 1;

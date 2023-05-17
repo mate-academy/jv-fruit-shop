@@ -1,7 +1,7 @@
 package strategy;
 
-import model.fruitActivitiesModel;
+import model.FruitActivitiesModel;
 
 public interface OperationHandler {
-    void operate(fruitActivitiesModel transaction);
+    void operate(FruitActivitiesModel transaction);
 }

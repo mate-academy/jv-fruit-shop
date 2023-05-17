@@ -1,6 +1,6 @@
 package model;
 
-public class fruitActivitiesModel {
+public class FruitActivitiesModel {
     private Operation operation;
     private String fruit;
     private int quantity;

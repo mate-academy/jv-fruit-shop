@@ -1,8 +1,8 @@
 package service;
 
-import model.fruitActivitiesModel;
 import java.util.List;
+import model.FruitActivitiesModel;
 
 public interface TransactionParser {
-    List<fruitActivitiesModel> parse(List<String> transaction);
+    List<FruitActivitiesModel> parse(List<String> transaction);
 }

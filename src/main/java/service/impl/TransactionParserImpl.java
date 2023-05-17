@@ -1,9 +1,9 @@
-package serviceImpl;
+package service.impl;
 
-import model.fruitActivitiesModel;
-import service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
+import model.FruitActivitiesModel;
+import service.TransactionParser;
 
 public class TransactionParserImpl implements TransactionParser {
     public static final int OPERATION_INDEX = 0;
@@ -11,13 +11,13 @@ public class TransactionParserImpl implements TransactionParser {
     public static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<fruitActivitiesModel> parse(List<String> transaction) {
-        List<fruitActivitiesModel> transactions = new ArrayList<>();
+    public List<FruitActivitiesModel> parse(List<String> transaction) {
+        List<FruitActivitiesModel> transactions = new ArrayList<>();
 
         for (String strings : transaction) {
-            fruitActivitiesModel fruitTransaction = new fruitActivitiesModel();
+            FruitActivitiesModel fruitTransaction = new FruitActivitiesModel();
             String[] divided = strings.split(",");
-            fruitTransaction.setOperation(fruitActivitiesModel.Operation
+            fruitTransaction.setOperation(FruitActivitiesModel.Operation
                     .getFruitByOperation(divided[OPERATION_INDEX]));
             fruitTransaction.setFruit(divided[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(divided[QUANTITY_INDEX]));

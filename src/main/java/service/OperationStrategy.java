@@ -1,8 +1,8 @@
 package service;
 
-import model.fruitActivitiesModel;
+import model.FruitActivitiesModel;
 import strategy.OperationHandler;
 
 public interface OperationStrategy {
-    OperationHandler get(fruitActivitiesModel.Operation type);
+    OperationHandler get(FruitActivitiesModel.Operation type);
 }

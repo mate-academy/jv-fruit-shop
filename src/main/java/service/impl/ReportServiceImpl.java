@@ -1,4 +1,4 @@
-package serviceImpl;
+package service.impl;
 
 import db.StorageImpl;
 import service.ReportService;

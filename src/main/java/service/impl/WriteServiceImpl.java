@@ -1,9 +1,9 @@
-package serviceImpl;
+package service.impl;
 
-import service.WriteService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import service.WriteService;
 
 public class WriteServiceImpl implements WriteService {
     @Override
