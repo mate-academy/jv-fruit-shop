@@ -1,5 +1,6 @@
 package core.basesyntax.process;
 
+import core.basesyntax.model.Storage;
 import java.util.Map;
 
 public class FruitReportMakerImpl implements FruitReportMaker {
@@ -8,10 +9,10 @@ public class FruitReportMakerImpl implements FruitReportMaker {
     private static final String NEW_LINE = "\n";
 
     @Override
-    public String makeFruitReport(Map<String, Integer> processFruitsData) {
+    public String makeFruitReport() {
         StringBuilder resultReport = new StringBuilder();
         resultReport.append(INITIAL_LINE);
-        for (Map.Entry<String, Integer> entry : processFruitsData.entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
             resultReport.append(entry.getKey())
                     .append(DELIM)
                     .append(entry.getValue())

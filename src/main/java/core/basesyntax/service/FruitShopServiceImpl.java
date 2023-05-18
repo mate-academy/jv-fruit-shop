@@ -5,7 +5,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.process.FruitDataProcess;
 import core.basesyntax.process.FruitReportMaker;
 import java.util.List;
-import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private FruitsDao fruitsDao;
@@ -21,9 +20,11 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public String serviceFruitsShop(String fromFile) {
+    public String serviceFruitsShop(String fromFile, String toFile) {
         List<FruitTransaction> fruitsList = fruitsDao.getFruitsData(fromFile);
-        Map<String, Integer> fruitsQuantity = fruitDataProcess.processFruitData(fruitsList);
-        return fruitReportMaker.makeFruitReport(fruitsQuantity);
+        fruitDataProcess.processFruitData(fruitsList);
+        String fruitReport = fruitReportMaker.makeFruitReport();
+        fruitsDao.writeToFile(fruitReport, toFile);
+        return fruitReport;
     }
 }
