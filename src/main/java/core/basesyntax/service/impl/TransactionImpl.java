@@ -16,13 +16,14 @@ public class TransactionImpl implements Transaction {
         List<FruitTransaction> newTransaction = new ArrayList<>();
         for (String string : transaction) {
             FruitTransaction fruitTransaction = new FruitTransaction();
-            String[] stringArray = string.split(SEPARATOR);
-            fruitTransaction.setOperation(FruitTransaction.Operation
-                    .getOperationByCode(stringArray[OPERATION_INDEX]));
-            fruitTransaction.setFruit(stringArray[FRUIT_INDEX]);
-            fruitTransaction.setQuantity(Integer.parseInt(stringArray[AMOUNT_INDEX]));
+            String[] splitTransaction = string.split(SEPARATOR);
+            fruitTransaction.setOperation(FruitTransaction
+                    .Operation.getOperationByCode(splitTransaction[OPERATION_INDEX]));
+            fruitTransaction.setFruit(splitTransaction[FRUIT_INDEX]);
+            fruitTransaction.setQuantity(Integer.parseInt(splitTransaction[AMOUNT_INDEX]));
             newTransaction.add(fruitTransaction);
         }
         return newTransaction;
     }
+
 }

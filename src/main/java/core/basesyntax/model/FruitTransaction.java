@@ -43,12 +43,13 @@ public class FruitTransaction {
         }
 
         public static Operation getOperationByCode(String code) {
-            for (Operation operationType : values()) {
+            for (Operation operationType : Operation.values()) {
                 if (operationType.operation.equals(code)) {
                     return operationType;
                 }
             }
-            throw new RuntimeException("Incorrect code " + code);
+            throw new RuntimeException("Incorrect code: " + code);
         }
+
     }
 }
