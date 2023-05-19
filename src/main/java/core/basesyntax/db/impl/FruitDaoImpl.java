@@ -1,10 +1,10 @@
 package core.basesyntax.db.impl;
 
-import core.basesyntax.db.DaoService;
+import core.basesyntax.db.FruitDao;
 import core.basesyntax.db.Storage;
 import java.util.List;
 
-public class DaoServiceImpl implements DaoService {
+public class FruitDaoImpl implements FruitDao {
     @Override
     public void addDataToStorage(List<String> calculatedData) {
         checkPositiveValues(calculatedData);

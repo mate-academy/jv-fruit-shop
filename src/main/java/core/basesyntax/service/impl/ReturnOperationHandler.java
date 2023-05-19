@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.OperationService;
+import core.basesyntax.service.OperationHandler;
 
-public class AddOperationService implements OperationService {
+public class ReturnOperationHandler implements OperationHandler {
     @Override
     public int doCalculation(int totalQuantity, int quantity) {
         return totalQuantity += quantity;

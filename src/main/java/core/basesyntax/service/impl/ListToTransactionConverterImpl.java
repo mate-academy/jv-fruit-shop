@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataProcessor;
+import core.basesyntax.service.ListToTransactionConverter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DataProcessorImpl implements DataProcessor {
+public class ListToTransactionConverterImpl implements ListToTransactionConverter {
     private static final String COMA_SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;

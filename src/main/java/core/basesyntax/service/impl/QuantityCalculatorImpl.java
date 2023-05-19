@@ -1,16 +1,20 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Calculator;
-import core.basesyntax.service.OperationService;
-import core.basesyntax.strategy.OperationServiceStrategy;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.QuantityCalculator;
+import core.basesyntax.strategy.OperationHandlerStrategy;
 import java.util.List;
 
-public class CalculatorImpl implements Calculator {
+public class QuantityCalculatorImpl implements QuantityCalculator {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
-    private OperationServiceStrategy operationServiceStrategy = new OperationServiceStrategy();
-    private OperationService operationService;
+    private OperationHandlerStrategy operationServiceStrategy;
+    private OperationHandler operationService;
+
+    public QuantityCalculatorImpl(OperationHandlerStrategy operationServiceStrategy) {
+        this.operationServiceStrategy = operationServiceStrategy;
+    }
 
     public List<String> calculate(List<FruitTransaction> fruitTransactions) {
         int appleTotalQuantity = 0;

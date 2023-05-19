@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface OperationService {
+public interface OperationHandler {
     int doCalculation(int totalQuantity, int quantity);
 }
