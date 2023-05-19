@@ -45,7 +45,8 @@ public class FruitTransaction {
                     return o;
                 }
             }
-            return null;
+            throw new RuntimeException(
+                    "Operation with the following code doesn't exists: " + useCode);
         }
     }
 

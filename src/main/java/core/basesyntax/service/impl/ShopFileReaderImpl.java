@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ShopFileReader;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class ShopFileReaderImpl implements ShopFileReader {
@@ -9,8 +10,7 @@ public class ShopFileReaderImpl implements ShopFileReader {
     public String read(String path) {
         StringBuilder builder = new StringBuilder();
         String line = "";
-        try (java.io.FileReader fr = new java.io.FileReader(path)) {
-            BufferedReader br = new BufferedReader(fr);
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             line = br.readLine();
             while (line != null) {
                 builder.append(line).append(System.lineSeparator());

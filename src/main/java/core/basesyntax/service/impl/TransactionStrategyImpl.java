@@ -1,14 +1,15 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.TransactionStrategy;
 import core.basesyntax.service.transaction.TransactionHandler;
-import java.util.HashMap;
+import java.util.Map;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
-    private HashMap<FruitTransaction.Operation, TransactionHandler> operationMap;
+    private Map<FruitTransaction.Operation, TransactionHandler> operationMap;
 
     public TransactionStrategyImpl(
-            HashMap<FruitTransaction.Operation, TransactionHandler> operationMap
+            Map<FruitTransaction.Operation, TransactionHandler> operationMap
     ) {
         this.operationMap = operationMap;
     }
