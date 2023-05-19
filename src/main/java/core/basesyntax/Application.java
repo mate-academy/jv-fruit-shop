@@ -4,11 +4,11 @@ import core.basesyntax.db.FruitDao;
 import core.basesyntax.db.impl.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileWriterService;
-import core.basesyntax.service.QuantityCalculator;
+import core.basesyntax.service.QuantityCalculatorService;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
-import core.basesyntax.service.impl.ListToTransactionConverterImpl;
-import core.basesyntax.service.impl.QuantityCalculatorImpl;
+import core.basesyntax.service.impl.QuantityCalculatorServiceImpl;
+import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import core.basesyntax.strategy.impl.OperationHandlerStrategyImpl;
 import java.util.List;
 
@@ -19,12 +19,12 @@ public class Application {
             "src/main/resources/WriteToFile.csv";
 
     public static void main(String[] args) {
-        QuantityCalculator quantityCalculator = new QuantityCalculatorImpl(
+        QuantityCalculatorService quantityCalculator = new QuantityCalculatorServiceImpl(
                 new OperationHandlerStrategyImpl());
         FruitDao fruitDao = new FruitDaoImpl();
         CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
         List<FruitTransaction> fruitTransactions =
-                new ListToTransactionConverterImpl()
+                new TransactionParserServiceImpl()
                         .getTransactions(new CsvFileReaderServiceImpl()
                                 .readFormFile(VALID_READ_FROM_FILE));
         fruitDao.addDataToStorage(quantityCalculator.calculate(fruitTransactions));

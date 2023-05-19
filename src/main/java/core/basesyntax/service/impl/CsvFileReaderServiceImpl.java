@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
-    private List<String> linesFromFile = new ArrayList<>();
 
     @Override
     public List<String> readFormFile(String filePath) {
         File readFromFile = new File(filePath);
+        List<String> linesFromFile = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(readFromFile))) {
             String newLine = bufferedReader.readLine();
             while (newLine != null) {

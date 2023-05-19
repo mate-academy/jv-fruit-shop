@@ -1,10 +1,6 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.impl.BalanceOperationHandler;
-import core.basesyntax.service.impl.PurchaseOperationHandler;
-import core.basesyntax.service.impl.ReturnOperationHandler;
-import core.basesyntax.service.impl.SupplyOperationHandler;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 import java.util.Map;
 

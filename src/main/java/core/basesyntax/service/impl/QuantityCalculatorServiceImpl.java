@@ -1,18 +1,18 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.QuantityCalculator;
+import core.basesyntax.service.QuantityCalculatorService;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 import java.util.List;
 
-public class QuantityCalculatorImpl implements QuantityCalculator {
+public class QuantityCalculatorServiceImpl implements QuantityCalculatorService {
     private static final String BANANA = "banana";
     private static final String APPLE = "apple";
     private OperationHandlerStrategy operationServiceStrategy;
     private OperationHandler operationService;
 
-    public QuantityCalculatorImpl(OperationHandlerStrategy operationServiceStrategy) {
+    public QuantityCalculatorServiceImpl(OperationHandlerStrategy operationServiceStrategy) {
         this.operationServiceStrategy = operationServiceStrategy;
     }
 
