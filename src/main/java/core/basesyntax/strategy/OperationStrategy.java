@@ -1,34 +1,36 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dao.ProductDaoService;
+import core.basesyntax.dao.ProductDao;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.impl.PlusOperationServiceImpl;
-import core.basesyntax.strategy.impl.SubtractOperationServiceImpl;
+import core.basesyntax.strategy.impl.BalanceOperationServiceImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationServiceImpl;
+import core.basesyntax.strategy.impl.ReturnOperationServiceImpl;
+import core.basesyntax.strategy.impl.SupplyOperationServiceImpl;
 import java.util.Map;
 
 public class OperationStrategy {
-    private final ProductDaoService productDaoService;
+    private final ProductDao productDaoService;
     private final Map<FruitTransaction.Operation, OperationService> operationServiceMap;
 
-    public OperationStrategy(ProductDaoService productDaoService) {
+    public OperationStrategy(ProductDao productDaoService) {
         this.productDaoService = productDaoService;
         this.operationServiceMap = createOperationServiceMap();
     }
 
-    public OperationService getOperationBySpecialMark(FruitTransaction transaction) {
+    public OperationService getOperation(FruitTransaction transaction) {
         return operationServiceMap.get(transaction.getOperation());
     }
 
     private Map<FruitTransaction.Operation, OperationService> createOperationServiceMap() {
         return Map.of(
                 FruitTransaction.Operation.BALANCE,
-                new PlusOperationServiceImpl(productDaoService),
+                new BalanceOperationServiceImpl(productDaoService),
                 FruitTransaction.Operation.SUPPLY,
-                new PlusOperationServiceImpl(productDaoService),
+                new SupplyOperationServiceImpl(productDaoService),
                 FruitTransaction.Operation.RETURN,
-                new PlusOperationServiceImpl(productDaoService),
+                new ReturnOperationServiceImpl(productDaoService),
                 FruitTransaction.Operation.PURCHASE,
-                new SubtractOperationServiceImpl(productDaoService)
+                new PurchaseOperationServiceImpl(productDaoService)
         );
     }
 }

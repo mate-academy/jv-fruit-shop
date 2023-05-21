@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import core.basesyntax.model.FruitTransaction;
 
-public interface ProductDaoService {
+public interface ProductDao {
 
     void update(FruitTransaction fruitTransaction, int count);
 

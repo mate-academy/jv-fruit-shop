@@ -4,7 +4,7 @@ import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 
-public class ProductDaoServiceImpl implements ProductDaoService {
+public class ProductDaoImpl implements ProductDao {
     private static final String DEFAULT_INFORMATION = "fruit,quantity";
     private static final String SEPARATOR = ",";
 
