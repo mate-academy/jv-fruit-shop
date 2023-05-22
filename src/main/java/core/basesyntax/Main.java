@@ -5,15 +5,15 @@ import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
-import core.basesyntax.service.DataHandlingService;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
-import core.basesyntax.service.impl.DataHandlingServiceImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.strategy.FruitService;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class Main {
@@ -31,12 +31,12 @@ public class Main {
         List<FruitTransaction> fruitTransactions = parserService.parseTransaction(linesFromFile);
 
         ProductDao productDao = new ProductDaoImpl();
-        FruitService fruitService =
-                new FruitService(productDao);
+        OperationStrategy operationStrategy =
+                new OperationStrategy(productDao);
 
-        DataHandlingService fruitDataHandler =
-                new DataHandlingServiceImpl(fruitService);
-        fruitDataHandler.process(fruitTransactions);
+        FruitService fruitService =
+                new FruitServiceImpl(operationStrategy);
+        fruitService.process(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();
         CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();

@@ -8,11 +8,11 @@ import core.basesyntax.strategy.impl.ReturnOperationServiceImpl;
 import core.basesyntax.strategy.impl.SupplyOperationServiceImpl;
 import java.util.Map;
 
-public class FruitService {
+public class OperationStrategy {
     private final ProductDao productDao;
     private final Map<FruitTransaction.Operation, OperationService> operationServiceMap;
 
-    public FruitService(ProductDao productDao) {
+    public OperationStrategy(ProductDao productDao) {
         this.productDao = productDao;
         this.operationServiceMap = createOperationServiceMap();
     }
