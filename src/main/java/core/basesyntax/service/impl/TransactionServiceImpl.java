@@ -12,17 +12,16 @@ public class TransactionServiceImpl implements TransactionService {
     public static final String SEPARATOR = ",";
 
     @Override
-    public List<FruitTransaction> parseTransaction(List<String> transaction) {
-        List<FruitTransaction> newTransaction = new ArrayList<>();
-        for (String string : transaction) {
-            FruitTransaction fruitTransaction = new FruitTransaction();
+    public List<FruitTransaction> parseTransactions(List<String> transactions) {
+        List<FruitTransaction> newTransactions = new ArrayList<>();
+        for (String string : transactions) {
             String[] splitTransaction = string.split(SEPARATOR);
-            fruitTransaction.setOperation(FruitTransaction
-                    .Operation.getOperationByCode(splitTransaction[OPERATION_INDEX]));
-            fruitTransaction.setFruit(splitTransaction[FRUIT_INDEX]);
-            fruitTransaction.setQuantity(Integer.parseInt(splitTransaction[AMOUNT_INDEX]));
-            newTransaction.add(fruitTransaction);
+            FruitTransaction.Operation operation = FruitTransaction
+                    .Operation.getOperationByCode(splitTransaction[OPERATION_INDEX]);
+            String fruit = splitTransaction[FRUIT_INDEX];
+            int quantity = Integer.parseInt(splitTransaction[AMOUNT_INDEX]);
+            newTransactions.add(new FruitTransaction(operation, fruit, quantity));
         }
-        return newTransaction;
+        return newTransactions;
     }
 }

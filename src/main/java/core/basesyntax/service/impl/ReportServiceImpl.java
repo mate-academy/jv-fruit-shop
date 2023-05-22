@@ -8,11 +8,13 @@ public class ReportServiceImpl implements ReportService {
     private static final String SEPARATOR = ",";
 
     @Override
-    public String writeReport() {
+    public String createReport() {
         StringBuilder report = new StringBuilder("fruit,quantity").append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : Storage.fruitStorage.entrySet()) {
-            report.append(entry.getKey()).append(SEPARATOR)
-                    .append(entry.getValue()).append(System.lineSeparator());
+            report.append(entry.getKey())
+                    .append(SEPARATOR)
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
         }
         return report.toString();
     }

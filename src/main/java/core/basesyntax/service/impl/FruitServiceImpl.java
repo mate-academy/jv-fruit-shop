@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationHandler;
@@ -8,11 +9,12 @@ import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
     @Override
-    public void getOperationByFruit(List<FruitTransaction> fruitTransactionList,
+    public void processTransactions(List<FruitTransaction> fruitTransactions,
                                     OperationStrategy strategy) {
-        for (FruitTransaction fruitTransaction : fruitTransactionList) {
+        Storage storage = new Storage();
+        for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler handler = strategy.get(fruitTransaction.getOperation());
-            handler.operateTransaction(fruitTransaction);
+            handler.operateTransaction(fruitTransaction, storage);
         }
     }
 }

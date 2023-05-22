@@ -5,11 +5,10 @@ import core.basesyntax.model.FruitTransaction;
 
 public class BalanceOperation implements OperationHandler {
     @Override
-    public void operateTransaction(FruitTransaction transaction) {
+    public void operateTransaction(FruitTransaction transaction, Storage storage) {
         if (transaction.getQuantity() < 0) {
             throw new RuntimeException("Balance should be positive.");
         }
-        Storage storage = new Storage();
         storage.put(transaction.getFruit(), transaction.getQuantity());
     }
 }
