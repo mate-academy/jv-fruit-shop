@@ -1,8 +1,8 @@
 package core.basesyntax.db;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    public static final List<String> dataStorage = new ArrayList<>();
+    public static final Map<String, Integer> dataStorage = new HashMap<>();
 }

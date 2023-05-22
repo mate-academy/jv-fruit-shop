@@ -5,6 +5,7 @@ import core.basesyntax.service.CsvFileWriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
 
 public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     private static final String FRUIT = "fruit";
@@ -15,11 +16,11 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     public void writeToFile(String path) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
             writeFirstLine(bufferedWriter);
-            for (int i = 0; i < Storage.dataStorage.size(); i += 2) {
+            for (Map.Entry<String, Integer> data : Storage.dataStorage.entrySet()) {
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(Storage.dataStorage.get(i))
+                stringBuilder.append(data.getKey())
                         .append(COMA_SEPARATOR)
-                        .append(Storage.dataStorage.get(i + 1))
+                        .append(data.getValue())
                         .append(System.lineSeparator());
                 bufferedWriter.write(stringBuilder.toString());
             }

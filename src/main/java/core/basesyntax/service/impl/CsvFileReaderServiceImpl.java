@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
-
     @Override
     public List<String> readFormFile(String filePath) {
         File readFromFile = new File(filePath);

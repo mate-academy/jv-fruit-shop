@@ -21,7 +21,8 @@ public class TransactionParserServiceImpl implements TransactionParserService {
             splitedLine = line.split(COMA_SEPARATOR);
             FruitTransaction fruitTransaction =
                     new FruitTransaction(getOperation(splitedLine[OPERATION_INDEX]),
-                    splitedLine[FRUIT_INDEX], Integer.parseInt(splitedLine[QUANTITY_INDEX]));
+                            splitedLine[FRUIT_INDEX], Integer
+                            .parseInt(splitedLine[QUANTITY_INDEX]));
             fruitTransactionList.add(fruitTransaction);
         }
         return fruitTransactionList;
@@ -29,8 +30,8 @@ public class TransactionParserServiceImpl implements TransactionParserService {
 
     private List<String> skipFirstLine(List<String> linesFromFile) {
         return linesFromFile.stream()
-                            .skip(1)
-                            .collect(Collectors.toList());
+                .skip(1)
+                .collect(Collectors.toList());
     }
 
     private FruitTransaction.Operation getOperation(String operationCode) {
