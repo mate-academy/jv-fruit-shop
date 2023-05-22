@@ -1,5 +1,4 @@
 package core.basesyntax.service;
 
-public interface MarketService {
-
+public interface Writer {
 }
