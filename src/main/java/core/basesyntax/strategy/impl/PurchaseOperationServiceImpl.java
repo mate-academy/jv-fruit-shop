@@ -6,15 +6,15 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationService;
 
 public class PurchaseOperationServiceImpl implements OperationService {
-    private ProductDao productDaoService;
+    private ProductDao productDao;
 
-    public PurchaseOperationServiceImpl(ProductDao productDaoService) {
-        this.productDaoService = productDaoService;
+    public PurchaseOperationServiceImpl(ProductDao productDao) {
+        this.productDao = productDao;
     }
 
     @Override
     public void calculate(FruitTransaction fruitTransaction) {
-        int curAmount = productDaoService.getQuantityOf(fruitTransaction);
+        int curAmount = productDao.getQuantityOf(fruitTransaction);
         if (curAmount < fruitTransaction.getQuantity()) {
             throw new NotEnoughProductsExeption("not enough product: "
                     + fruitTransaction.getFruit()
@@ -23,6 +23,6 @@ public class PurchaseOperationServiceImpl implements OperationService {
                     + ", but your order: " + fruitTransaction.getQuantity());
         }
         curAmount = curAmount - fruitTransaction.getQuantity();
-        productDaoService.update(fruitTransaction, curAmount);
+        productDao.update(fruitTransaction, curAmount);
     }
 }

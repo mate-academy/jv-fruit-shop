@@ -5,19 +5,19 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationService;
 
 public class BalanceOperationServiceImpl implements OperationService {
-    private ProductDao productDaoService;
+    private ProductDao productDao;
 
-    public BalanceOperationServiceImpl(ProductDao productDaoService) {
-        this.productDaoService = productDaoService;
+    public BalanceOperationServiceImpl(ProductDao productDao) {
+        this.productDao = productDao;
     }
 
     @Override
     public void calculate(FruitTransaction fruitTransaction) {
-        int total = productDaoService.getQuantityOf(fruitTransaction)
+        int total = productDao.getQuantityOf(fruitTransaction)
                 + fruitTransaction.getQuantity();
         if (total < 0) {
             throw new IllegalArgumentException("Balance can`t be negative, but was: " + total);
         }
-        productDaoService.update(fruitTransaction, total);
+        productDao.update(fruitTransaction, total);
     }
 }

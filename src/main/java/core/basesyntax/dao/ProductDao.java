@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.FruitTransaction;
+import java.util.List;
 
 public interface ProductDao {
 
@@ -8,5 +9,5 @@ public interface ProductDao {
 
     int getQuantityOf(FruitTransaction fruitTransaction);
 
-    String getAllData();
+    List<String> getAll();
 }

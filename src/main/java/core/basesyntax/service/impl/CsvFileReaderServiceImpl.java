@@ -6,12 +6,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
-    private static final int VALID_NUMBERS_OF_INFORMATION = 3;
-    private static final int HEADER_LINES_COUNT = 0;
+    private static final int VALID_ROWS_COUNT = 3;
+    private static final int HEADER_LINES_COUNT = 1;
     private static final String COMA_SEPARATOR = ",";
-    private List<String> dataFromFile;
 
     @Override
     public List<String> readLines(String source) {
@@ -20,20 +20,20 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
             throw new RuntimeException("File does not exist");
         }
         try {
-            dataFromFile = Files.readAllLines(file.toPath());
-            validateData(file.getName());
-            dataFromFile.remove(HEADER_LINES_COUNT);
-            return dataFromFile;
+            List<String> linesFromFile = Files.readAllLines(file.toPath()).stream()
+                    .skip(HEADER_LINES_COUNT)
+                    .collect(Collectors.toList());
+            validateData(file.getName(), linesFromFile);
+            return linesFromFile;
         } catch (IOException e) {
             throw new RuntimeException("can`t read data from file: " + file.getName(), e);
         }
     }
 
-    private void validateData(String fileName) {
-        long amountOfInvalidTransaction = dataFromFile.stream()
-                .skip(1)
+    private void validateData(String fileName, List<String> linesFromFile) {
+        long amountOfInvalidTransaction = linesFromFile.stream()
                 .map(s -> s.split(COMA_SEPARATOR))
-                .filter(s -> s.length % VALID_NUMBERS_OF_INFORMATION != 0)
+                .filter(s -> s.length % VALID_ROWS_COUNT != 0)
                 .count();
 
         if (amountOfInvalidTransaction > 0) {

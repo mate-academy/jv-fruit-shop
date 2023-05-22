@@ -8,12 +8,12 @@ import core.basesyntax.strategy.impl.ReturnOperationServiceImpl;
 import core.basesyntax.strategy.impl.SupplyOperationServiceImpl;
 import java.util.Map;
 
-public class OperationStrategy {
-    private final ProductDao productDaoService;
+public class FruitService {
+    private final ProductDao productDao;
     private final Map<FruitTransaction.Operation, OperationService> operationServiceMap;
 
-    public OperationStrategy(ProductDao productDaoService) {
-        this.productDaoService = productDaoService;
+    public FruitService(ProductDao productDao) {
+        this.productDao = productDao;
         this.operationServiceMap = createOperationServiceMap();
     }
 
@@ -24,13 +24,13 @@ public class OperationStrategy {
     private Map<FruitTransaction.Operation, OperationService> createOperationServiceMap() {
         return Map.of(
                 FruitTransaction.Operation.BALANCE,
-                new BalanceOperationServiceImpl(productDaoService),
+                new BalanceOperationServiceImpl(productDao),
                 FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationServiceImpl(productDaoService),
+                new SupplyOperationServiceImpl(productDao),
                 FruitTransaction.Operation.RETURN,
-                new ReturnOperationServiceImpl(productDaoService),
+                new ReturnOperationServiceImpl(productDao),
                 FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationServiceImpl(productDaoService)
+                new PurchaseOperationServiceImpl(productDao)
         );
     }
 }

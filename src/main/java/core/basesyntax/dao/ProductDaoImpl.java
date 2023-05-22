@@ -2,11 +2,10 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductDaoImpl implements ProductDao {
-    private static final String DEFAULT_INFORMATION = "fruit,quantity";
-    private static final String SEPARATOR = ",";
 
     @Override
     public void update(FruitTransaction fruitTransaction, int count) {
@@ -15,24 +14,14 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public int getQuantityOf(FruitTransaction fruitTransaction) {
-        Integer quantity = FruitsStorage.FRUIT_MAP.get(fruitTransaction.getFruit());
-        if (quantity == null) {
-            return 0;
-        }
-        return quantity;
+        return FruitsStorage.FRUIT_MAP.getOrDefault(fruitTransaction.getFruit(), 0);
     }
 
     @Override
-    public String getAllData() {
-        StringBuilder stringBuilder = new StringBuilder(DEFAULT_INFORMATION
-                + System.lineSeparator());
-        for (Map.Entry<String, Integer> item : FruitsStorage.FRUIT_MAP.entrySet()) {
-            stringBuilder.append(item.getKey())
-                    .append(SEPARATOR)
-                    .append(item.getValue())
-                    .append(System.lineSeparator());
-        }
-        return stringBuilder.toString();
+    public List<String> getAll() {
+        String joiningSymbol = ",";
+        return FruitsStorage.FRUIT_MAP.entrySet().stream()
+                .map(entry -> entry.getKey() + joiningSymbol + entry.getValue())
+                .collect(Collectors.toList());
     }
-
 }
