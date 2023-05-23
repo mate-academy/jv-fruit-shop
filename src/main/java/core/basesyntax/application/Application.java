@@ -5,20 +5,23 @@ import core.basesyntax.dao.WriteDao;
 import core.basesyntax.dao.impl.CsvReadDaoImpl;
 import core.basesyntax.dao.impl.CsvWriteDaoImpl;
 import core.basesyntax.model.fruit.Record;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.Parser;
-import core.basesyntax.service.impl.CsvParser;
-import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.fruit.FruitService;
+import core.basesyntax.service.fruit.impl.FruitServiceImpl;
+import core.basesyntax.service.parser.ReadParser;
+import core.basesyntax.service.parser.WriteParser;
+import core.basesyntax.service.parser.impl.CsvReadParserImpl;
+import core.basesyntax.service.parser.impl.CsvWriteParserImpl;
 import java.util.List;
 import java.util.Map;
 
 public class Application {
-    private FruitService fruitService;
-    private Parser parser;
     private ReadDao readDao;
     private WriteDao writeDao;
-    private final String inputPath = "src/main/java/db/input.csv";
-    private final String destinationPath = "src/main/java/db/report.csv";
+    private ReadParser readParser;
+    private WriteParser writeParser;
+    private FruitService fruitService;
+    private final String inputPath = "src/main/resources/input.csv";
+    private final String destinationPath = "src/main/resources/report.csv";
 
     public void run() {
         initialize();
@@ -28,22 +31,27 @@ public class Application {
     }
 
     private void initialize() {
-        parser = createParser();
+        readParser = createReadParser();
+        writeParser = createWriteParser();
         readDao = createReadDao();
         writeDao = createWriteDao();
         fruitService = createFruitService();
     }
 
-    private Parser createParser() {
-        return new CsvParser();
+    private ReadParser createReadParser() {
+        return new CsvReadParserImpl();
+    }
+
+    private WriteParser createWriteParser() {
+        return new CsvWriteParserImpl();
     }
 
     private ReadDao createReadDao() {
-        return new CsvReadDaoImpl(inputPath, parser);
+        return new CsvReadDaoImpl(inputPath, readParser);
     }
 
     private WriteDao createWriteDao() {
-        return new CsvWriteDaoImpl(destinationPath, parser);
+        return new CsvWriteDaoImpl(destinationPath, writeParser);
     }
 
     private FruitService createFruitService() {

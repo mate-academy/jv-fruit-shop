@@ -1,8 +1,8 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service.fruit.impl;
 
 import core.basesyntax.model.fruit.Operation;
 import core.basesyntax.model.fruit.Record;
-import core.basesyntax.service.FruitService;
+import core.basesyntax.service.fruit.FruitService;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceStrategy;
 import core.basesyntax.strategy.impl.PurchaseStrategy;

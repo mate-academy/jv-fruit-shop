@@ -3,16 +3,18 @@ package core.basesyntax.dao.impl;
 import core.basesyntax.dao.CsvDao;
 import core.basesyntax.dao.ReadDao;
 import core.basesyntax.model.fruit.Record;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.parser.ReadParser;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
 public class CsvReadDaoImpl extends CsvDao implements ReadDao {
+    private final ReadParser parser;
 
-    public CsvReadDaoImpl(String inputPath, Parser parser) {
-        super(inputPath, parser);
+    public CsvReadDaoImpl(String inputPath, ReadParser parser) {
+        super(inputPath);
+        this.parser = parser;
     }
 
     @Override
