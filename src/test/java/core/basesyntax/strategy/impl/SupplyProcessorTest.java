@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("SupplyProcessor Test")
 class SupplyProcessorTest {
 
     private static final OperationProcessor SUPPLY_PROCESSOR = new SupplyProcessor();

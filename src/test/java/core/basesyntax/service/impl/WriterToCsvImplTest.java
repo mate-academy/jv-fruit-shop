@@ -16,8 +16,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("WriterToCsvImpl Test")
 class WriterToCsvImplTest {
-    private static final String PATH = "src/main/resources/output";
+    private static final String PATH = "src/test/resources/output";
     private static final File FILE = new File(PATH + File.separator + "reportFile.csv");
     private static Writer writer;
 
@@ -52,7 +53,7 @@ class WriterToCsvImplTest {
     @Order(2)
     @Test
     void writeInFile_incorrectPath_notOk() {
-        writer = new WriterToCsvImpl("src/main/resources/incorrectPath");
+        writer = new WriterToCsvImpl("src/test/resources/incorrectPath");
         assertThrows(RuntimeException.class, () -> writer.writeInFile(List.of()));
     }
 }

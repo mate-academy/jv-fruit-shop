@@ -13,7 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Systemize Service Test")
+@DisplayName("ParserImpl Test")
 class ParserImplTest {
     private static final FruitTransaction.Operation BALANCE = FruitTransaction.Operation.BALANCE;
     private static final FruitTransaction.Operation PURCHASE = FruitTransaction.Operation.PURCHASE;

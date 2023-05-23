@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("ReportServiceImpl Test")
 class ReportServiceImplTest {
     private static final ReportService REPORT_SERVICE = new ReportServiceImpl();
     private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();

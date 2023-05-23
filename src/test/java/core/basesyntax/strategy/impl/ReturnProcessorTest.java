@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("ReturnProcessor Test")
 class ReturnProcessorTest {
 
     private static final OperationProcessor RETURN_PROCESSOR = new ReturnProcessor();

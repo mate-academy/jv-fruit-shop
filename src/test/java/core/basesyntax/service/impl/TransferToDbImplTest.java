@@ -16,6 +16,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("TransferToDbImplTest")
 class TransferToDbImplTest {
     private static final OperationStrategy STRATEGY = new OperationStrategyImpl();
     private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();
@@ -34,7 +35,7 @@ class TransferToDbImplTest {
     @DisplayName("Test transfer to DB")
     @Order(1)
     @Test
-    void transfer_transfer() {
+    void transfer_transferToDb_ok() {
         List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(BALANCE, BANANA, 20),
                 new FruitTransaction(SUPPLY, BANANA, 20),

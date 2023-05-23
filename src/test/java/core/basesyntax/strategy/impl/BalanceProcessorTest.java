@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("BalanceProcessor Test")
 class BalanceProcessorTest {
     private static final OperationProcessor BALANCE_PROCESSOR = new BalanceProcessor();
     private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();

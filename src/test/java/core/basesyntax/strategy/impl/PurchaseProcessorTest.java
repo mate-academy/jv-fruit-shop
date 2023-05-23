@@ -13,6 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("PurchaseProcessor Test")
 class PurchaseProcessorTest {
     private static final OperationProcessor PURCHASE_PROCESSOR = new PurchaseProcessor();
     private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();
@@ -58,7 +59,7 @@ class PurchaseProcessorTest {
     @DisplayName("Check purchase operation with valid value (Apple) and non empty Storage")
     @Order(4)
     @Test
-    void operate_checkPurchaseBanana_ok() {
+    void operate_checkPurchaseBanana_notOk() {
         assertThrows(RuntimeException.class,
                 () -> PURCHASE_PROCESSOR.operate(new FruitTransaction(PURCHASE, BANANA, 128)));
     }
