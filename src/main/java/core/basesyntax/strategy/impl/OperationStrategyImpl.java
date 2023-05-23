@@ -15,6 +15,14 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationProcessor get(FruitTransaction.Operation operation) {
+        validateOperation(operation);
         return strategy.get(operation);
+    }
+
+    private void validateOperation(FruitTransaction.Operation operation) {
+        if (operation == null) {
+            throw new RuntimeException("Operation is null in "
+                    + getClass().getSimpleName());
+        }
     }
 }

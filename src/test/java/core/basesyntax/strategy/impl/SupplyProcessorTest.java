@@ -1,6 +1,7 @@
 package core.basesyntax.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
@@ -58,5 +59,14 @@ class SupplyProcessorTest {
         DAO.put(BANANA, 10);
         SUPPLY_PROCESSOR.operate(new FruitTransaction(SUPPLY, BANANA, 20));
         assertEquals(DAO.get(BANANA), 30);
+    }
+
+    @DisplayName("Check supply operation with negative value")
+    @Order(5)
+    @Test
+    void operate_checkSupplyNegative_notOk() {
+        DAO.put(BANANA, 10);
+        assertThrows(RuntimeException.class, () -> SUPPLY_PROCESSOR.operate(
+                new FruitTransaction(SUPPLY, BANANA, -20)));
     }
 }

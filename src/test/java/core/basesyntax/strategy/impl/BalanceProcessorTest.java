@@ -1,6 +1,7 @@
 package core.basesyntax.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
@@ -57,5 +58,14 @@ class BalanceProcessorTest {
         DAO.put(BANANA, 10);
         BALANCE_PROCESSOR.operate(new FruitTransaction(BALANCE, BANANA, 20));
         assertEquals(DAO.get(BANANA), 30);
+    }
+
+    @DisplayName("Check balance operation with negative value")
+    @Order(5)
+    @Test
+    void operate_checkBalanceNegative_notOk() {
+        DAO.put(BANANA, 10);
+        assertThrows(RuntimeException.class, () -> BALANCE_PROCESSOR.operate(
+                new FruitTransaction(BALANCE, BANANA, -20)));
     }
 }

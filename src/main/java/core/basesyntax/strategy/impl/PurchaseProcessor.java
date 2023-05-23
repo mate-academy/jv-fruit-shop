@@ -21,12 +21,16 @@ public class PurchaseProcessor implements OperationProcessor {
     private int balance(FruitTransaction transaction) {
         int previousVal = dao.get(transaction.getFruit()) == null
                 ? 0 : dao.get(transaction.getFruit());
+        checkBalance(transaction, previousVal);
+        return previousVal - transaction.getQuantity();
+    }
+
+    private void checkBalance(FruitTransaction transaction, int previousVal) {
         if ((previousVal - transaction.getQuantity()) < 0) {
             throw new RuntimeException("That transaction in: "
                     + getClass().getSimpleName()
                     + " with value [" + transaction.getQuantity()
                     + "] provide a negative balance.");
         }
-        return previousVal - transaction.getQuantity();
     }
 }

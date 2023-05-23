@@ -1,6 +1,7 @@
 package core.basesyntax.strategy.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
@@ -58,5 +59,14 @@ class ReturnProcessorTest {
         DAO.put(BANANA, 10);
         RETURN_PROCESSOR.operate(new FruitTransaction(RETURN, BANANA, 20));
         assertEquals(DAO.get(BANANA), 30);
+    }
+
+    @DisplayName("Check return operation with negative value")
+    @Order(5)
+    @Test
+    void operate_checkReturnNegative_notOk() {
+        DAO.put(BANANA, 10);
+        assertThrows(RuntimeException.class, () -> RETURN_PROCESSOR.operate(
+                new FruitTransaction(RETURN, BANANA, -20)));
     }
 }
