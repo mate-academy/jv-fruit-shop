@@ -4,10 +4,10 @@ information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
 
 Your tasks are:
-- read data from csv file
+- read data from db file
 - process these data 
 - generate a report based on processed data
-- write report to new csv file
+- write report to new db file
 
 There are four activities at the store:
 ```text
