@@ -8,7 +8,7 @@ import java.util.List;
 public class TransferToDbImpl implements TransferToDb {
     private final OperationStrategy operationStrategy;
 
-    public TransferToDbImpl(OperationStrategy operationStrategy){
+    public TransferToDbImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 

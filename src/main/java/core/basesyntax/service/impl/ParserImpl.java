@@ -1,14 +1,13 @@
 package core.basesyntax.service.impl;
 
+import static java.util.stream.Collectors.toList;
+
 import core.basesyntax.model.Product;
 import core.basesyntax.service.Parser;
 import core.basesyntax.strategy.FruitTransaction;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
-
-import static java.util.stream.Collectors.toList;
 
 public class ParserImpl implements Parser {
     private static final String SEPARATOR = ",";
@@ -27,10 +26,10 @@ public class ParserImpl implements Parser {
     }
 
     private FruitTransaction castToProductList(String input) {
-        if(Arrays.stream(FruitTransaction.Operation.values())
+        if (Arrays.stream(FruitTransaction.Operation.values())
                 .noneMatch(o -> isEqualsIgnoreCase(input, OPERATION_INDEX, o.getCode()))
                 || Arrays.stream(Product.values())
-                .noneMatch(p -> isEqualsIgnoreCase(input, PRODUCT_INDEX, p.name()))){
+                .noneMatch(p -> isEqualsIgnoreCase(input, PRODUCT_INDEX, p.name()))) {
             return null;
         }
         FruitTransaction.Operation operation = Arrays.stream(FruitTransaction.Operation.values())
@@ -49,15 +48,15 @@ public class ParserImpl implements Parser {
         return input.split(SEPARATOR)[operationIndex].equalsIgnoreCase(o);
     }
 
-    private void validateInput(List<String> input){
-        if(input == null){
+    private void validateInput(List<String> input) {
+        if (input == null) {
             throw new RuntimeException("Not accepted null argument in class: "
                     + getClass().getSimpleName());
         }
-        if(input.stream()
-                .anyMatch(s -> s.split(SEPARATOR).length != DEFAULT_SPLITTER_ARRAY_CAPACITY)){
+        if (input.stream()
+                .anyMatch(s -> s.split(SEPARATOR).length != DEFAULT_SPLITTER_ARRAY_CAPACITY)) {
             throw new RuntimeException("Not available input string's format, expected: ["
-            + DEFAULT_SPLITTER_ARRAY_CAPACITY + "] columns, but get: ["
+                    + DEFAULT_SPLITTER_ARRAY_CAPACITY + "] columns, but get: ["
                     + input.stream().mapToInt(s -> s.split(SEPARATOR).length).findFirst().getAsInt()
                     + "] columns");
         }

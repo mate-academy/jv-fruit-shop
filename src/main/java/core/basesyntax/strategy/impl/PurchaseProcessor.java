@@ -19,7 +19,8 @@ public class PurchaseProcessor implements OperationProcessor {
     }
 
     private int balance(FruitTransaction transaction) {
-        int previousVal = dao.get(transaction.getFruit()) == null? 0 : dao.get(transaction.getFruit());
+        int previousVal = dao.get(transaction.getFruit()) == null
+                ? 0 : dao.get(transaction.getFruit());
         if ((previousVal - transaction.getQuantity()) < 0) {
             throw new RuntimeException("That transaction in: "
                     + getClass().getSimpleName()

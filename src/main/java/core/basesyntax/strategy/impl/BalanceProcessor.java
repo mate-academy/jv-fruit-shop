@@ -1,12 +1,10 @@
 package core.basesyntax.strategy.impl;
 
-
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.model.Product;
 import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
-
 
 public class BalanceProcessor implements OperationProcessor {
     private static final ProductDao<Product, Integer> dao = new ProductDaoImpl();
@@ -21,8 +19,8 @@ public class BalanceProcessor implements OperationProcessor {
     }
 
     private int balance(FruitTransaction transaction) {
-        return dao.get(transaction.getFruit()) == null ?
-                transaction.getQuantity() :
-                dao.get(transaction.getFruit()) + transaction.getQuantity();
+        return dao.get(transaction.getFruit()) == null
+                ? transaction.getQuantity()
+                : dao.get(transaction.getFruit()) + transaction.getQuantity();
     }
 }

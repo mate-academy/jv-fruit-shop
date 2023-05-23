@@ -19,8 +19,8 @@ public class SupplyProcessor implements OperationProcessor {
     }
 
     private int balance(FruitTransaction transaction) {
-        return dao.get(transaction.getFruit()) == null ?
-                transaction.getQuantity() :
-                dao.get(transaction.getFruit()) + transaction.getQuantity();
+        return dao.get(transaction.getFruit()) == null
+                ? transaction.getQuantity()
+                : dao.get(transaction.getFruit()) + transaction.getQuantity();
     }
 }

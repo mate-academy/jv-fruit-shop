@@ -11,14 +11,15 @@ public class ReaderCsvImpl implements Reader {
 
     public static final String FILE_FORMAT = ".csv";
     private final String pathFile;
-    public ReaderCsvImpl(String filePath){
+
+    public ReaderCsvImpl(String filePath) {
         this.pathFile = filePath;
     }
 
     @Override
     public List<String> readFile() {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathFile))) {
-            if(pathFile.endsWith(FILE_FORMAT)) {
+            if (pathFile.endsWith(FILE_FORMAT)) {
                 return bufferedReader.lines().collect(Collectors.toList());
             }
         } catch (IOException e) {

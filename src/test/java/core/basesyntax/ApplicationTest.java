@@ -1,26 +1,30 @@
 package core.basesyntax;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static java.util.stream.Collectors.toList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import core.basesyntax.dao.ProductDao;
+import core.basesyntax.dao.ProductDaoImpl;
+import core.basesyntax.model.Product;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-
-import static java.util.stream.Collectors.toList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest {
+    private static final String OUTPUT_PATH = "src/main/resources/output/reportFile.csv";
+    private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();
+
     @AfterEach
     void tearDown() {
         File outputFile = new File(OUTPUT_PATH);
         outputFile.delete();
+        DAO.clear();
     }
-
-    public static final String OUTPUT_PATH = "src/main/resources/output/reportFile.csv";
 
     @DisplayName("Test full application")
     @Test
