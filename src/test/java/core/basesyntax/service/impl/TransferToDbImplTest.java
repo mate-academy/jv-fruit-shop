@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TransferToDbImplTest {
     private static final OperationStrategy STRATEGY = new OperationStrategyImpl();
@@ -26,8 +26,6 @@ class TransferToDbImplTest {
     public static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
     public static final FruitTransaction.Operation RETURN = FruitTransaction.Operation.RETURN;
     public static final FruitTransaction.Operation PURCHASE = FruitTransaction.Operation.PURCHASE;
-    private TransferToDb transfer;
-    private List<FruitTransaction> transactions;
 
     @AfterEach
     void tearDown() {
@@ -38,7 +36,7 @@ class TransferToDbImplTest {
     @Order(1)
     @Test
     void transfer_transfer() {
-        transactions = List.of(
+        List<FruitTransaction> transactions = List.of(
                 new FruitTransaction(BALANCE, BANANA, 20),
                 new FruitTransaction(SUPPLY, BANANA, 20),
                 new FruitTransaction(RETURN, BANANA, 10),
@@ -47,7 +45,7 @@ class TransferToDbImplTest {
                 new FruitTransaction(SUPPLY, APPLE, 20),
                 new FruitTransaction(RETURN, APPLE, 10),
                 new FruitTransaction(PURCHASE, APPLE, 30));
-        transfer = new TransferToDbImpl(STRATEGY);
+        TransferToDb transfer = new TransferToDbImpl(STRATEGY);
         transfer.transfer(transactions);
         Map<Product, Integer> expected = Map.of(BANANA, 20, APPLE, 20);
         Map<Product, Integer> actual = Map.of(BANANA, DAO.get(BANANA), APPLE, DAO.get(APPLE));

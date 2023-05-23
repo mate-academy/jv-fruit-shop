@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class ReaderCsvImpl implements Reader {
 
+    public static final String FILE_FORMAT = ".csv";
     private final String pathFile;
     public ReaderCsvImpl(String filePath){
         this.pathFile = filePath;
@@ -17,13 +18,13 @@ public class ReaderCsvImpl implements Reader {
     @Override
     public List<String> readFile() {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(pathFile))) {
-            if(pathFile.endsWith(".csv")) {
+            if(pathFile.endsWith(FILE_FORMAT)) {
                 return bufferedReader.lines().collect(Collectors.toList());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file by path: " + pathFile, e);
         }
         throw new RuntimeException("Wrong extension of file: "
-                + pathFile + ", must be \\'.csv\\' file");
+                + pathFile + ", must be '" + FILE_FORMAT + "' file");
     }
 }
