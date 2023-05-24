@@ -1,24 +1,30 @@
 package core.basesyntax.application;
 
-import core.basesyntax.dao.ReadDao;
-import core.basesyntax.dao.WriteDao;
-import core.basesyntax.dao.impl.CsvReadDaoImpl;
-import core.basesyntax.dao.impl.CsvWriteDaoImpl;
+import core.basesyntax.model.fruit.Operation;
 import core.basesyntax.model.fruit.Record;
+import core.basesyntax.service.csv.ReadService;
+import core.basesyntax.service.csv.WriteService;
+import core.basesyntax.service.csv.impl.CsvReadServiceImpl;
+import core.basesyntax.service.csv.impl.CsvWriteServiceImpl;
 import core.basesyntax.service.fruit.FruitService;
 import core.basesyntax.service.fruit.impl.FruitServiceImpl;
 import core.basesyntax.service.parser.ReadParser;
 import core.basesyntax.service.parser.WriteParser;
 import core.basesyntax.service.parser.impl.CsvReadParserImpl;
 import core.basesyntax.service.parser.impl.CsvWriteParserImpl;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.BalanceHandler;
+import core.basesyntax.strategy.impl.PurchaseHandler;
+import core.basesyntax.strategy.impl.ReturnHandler;
+import core.basesyntax.strategy.impl.SupplyHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Application {
-    private ReadDao readDao;
-    private WriteDao writeDao;
+    private ReadService readDao;
+    private WriteService writeDao;
     private ReadParser readParser;
     private WriteParser writeParser;
     private OperationStrategy strategy;
@@ -38,9 +44,18 @@ public class Application {
     private void initialize() {
         readParser = new CsvReadParserImpl();
         writeParser = new CsvWriteParserImpl();
-        readDao = new CsvReadDaoImpl(inputPath);
-        writeDao = new CsvWriteDaoImpl(destinationPath);
-        strategy = new OperationStrategy(new HashMap<>());
+        readDao = new CsvReadServiceImpl(inputPath);
+        writeDao = new CsvWriteServiceImpl(destinationPath);
+        strategy = new OperationStrategy(initializeOperationMap());
         fruitService = new FruitServiceImpl(strategy);
+    }
+
+    public Map<Operation, OperationHandler> initializeOperationMap() {
+        HashMap<Operation, OperationHandler> operationMap = new HashMap<>();
+        operationMap.put(Operation.BALANCE, new BalanceHandler());
+        operationMap.put(Operation.SUPPLY, new SupplyHandler());
+        operationMap.put(Operation.PURCHASE, new PurchaseHandler());
+        operationMap.put(Operation.RETURN, new ReturnHandler());
+        return operationMap;
     }
 }

@@ -16,17 +16,9 @@ public class FruitServiceImpl implements FruitService {
 
     @Override
     public Map<String, Integer> processRecords(List<Record> records) {
-        Storage.fillFruitMap(records);
         for (Record record : records) {
-            updateRecord(record);
-        }
-        return Storage.fruitMap;
-    }
-
-    private void updateRecord(Record record) {
-        String fruitKey = record.getFruit();
-        if (Storage.fruitMap.containsKey(fruitKey)) {
             strategy.get(record.getOperation()).perform(record);
         }
+        return Storage.fruitMap;
     }
 }

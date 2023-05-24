@@ -1,13 +1,13 @@
-package core.basesyntax.dao.impl;
+package core.basesyntax.service.csv.impl;
 
-import core.basesyntax.dao.CsvDao;
-import core.basesyntax.dao.WriteDao;
+import core.basesyntax.service.csv.CsvService;
+import core.basesyntax.service.csv.WriteService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CsvWriteDaoImpl extends CsvDao implements WriteDao {
-    public CsvWriteDaoImpl(String destinationPath) {
+public class CsvWriteServiceImpl extends CsvService implements WriteService {
+    public CsvWriteServiceImpl(String destinationPath) {
         super(destinationPath);
     }
 

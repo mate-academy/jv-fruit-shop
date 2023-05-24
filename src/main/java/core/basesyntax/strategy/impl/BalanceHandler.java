@@ -7,8 +7,11 @@ import core.basesyntax.strategy.BaseOperationHandler;
 public class BalanceHandler extends BaseOperationHandler {
     @Override
     public void perform(Record record) {
-        int updatedValue = validator.check(
-                Storage.fruitMap.get(record.getFruit()) + record.getQuantity());
+        Integer currentValue = Storage.fruitMap.get(record.getFruit());
+        if (updateFruitMap(record, currentValue)) {
+            return;
+        }
+        int updatedValue = validator.check(currentValue + record.getQuantity());
         Storage.fruitMap.put(record.getFruit(), updatedValue);
     }
 }
