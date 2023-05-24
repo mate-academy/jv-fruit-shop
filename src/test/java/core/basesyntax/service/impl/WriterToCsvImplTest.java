@@ -18,14 +18,8 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("WriterToCsvImpl Test")
 class WriterToCsvImplTest {
-    private static final String PATH = "src/test/resources/output";
-    private static final File FILE = new File(PATH + File.separator + "reportFile.csv");
+    private static final File FILE = new File("src/test/resources/output/reportFile.csv");
     private static Writer writer;
-
-    @BeforeEach
-    void setUp() {
-        writer = new WriterToCsvImpl(PATH);
-    }
 
     @AfterEach
     void tearDown() {
@@ -36,12 +30,14 @@ class WriterToCsvImplTest {
     @Order(1)
     @Test
     void writeInFile_correctPath_ok() {
+        writer = new WriterToCsvImpl("src/test/resources/output");
         List<String> expected = List.of("fruit,quantity",
                 "banana,20",
                 "apple,10");
         writer.writeToFile(expected);
         List<String> actual;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE))) {
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new FileReader("src/test/resources/output/reportFile.csv"))) {
             actual = bufferedReader.lines().collect(toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read the file: " + FILE.getPath(), e);

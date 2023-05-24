@@ -14,11 +14,6 @@ import org.junit.jupiter.api.Test;
 class ReaderCsvImplTest {
     private ReaderCsvImpl reader;
 
-    @AfterEach
-    void tearDown() {
-        reader = null;
-    }
-
     @DisplayName("Check reader CSV with valid file")
     @Test
     @Order(1)
