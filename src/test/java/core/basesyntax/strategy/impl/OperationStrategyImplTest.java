@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
 import core.basesyntax.strategy.OperationStrategy;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
