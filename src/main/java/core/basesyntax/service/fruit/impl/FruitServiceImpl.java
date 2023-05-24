@@ -1,56 +1,32 @@
 package core.basesyntax.service.fruit.impl;
 
-import core.basesyntax.model.fruit.Operation;
 import core.basesyntax.model.fruit.Record;
 import core.basesyntax.service.fruit.FruitService;
+import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.BalanceStrategy;
-import core.basesyntax.strategy.impl.PurchaseStrategy;
-import core.basesyntax.strategy.impl.ReturnStrategy;
-import core.basesyntax.strategy.impl.SupplyStrategy;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
-    private Map<Operation, OperationStrategy> operationMap;
-    private Map<String, Integer> fruitMap;
+    private final OperationStrategy strategy;
+
+    public FruitServiceImpl(OperationStrategy strategy) {
+        this.strategy = strategy;
+    }
 
     @Override
     public Map<String, Integer> processRecords(List<Record> records) {
-        fillFruitMap(records);
-        fillOperationMap();
+        Storage.fillFruitMap(records);
         for (Record record : records) {
             updateRecord(record);
         }
-        return fruitMap;
+        return Storage.fruitMap;
     }
 
     private void updateRecord(Record record) {
         String fruitKey = record.getFruit();
-        if (fruitMap.containsKey(fruitKey)) {
-            int currentQuantity = fruitMap.get(fruitKey);
-            int recordQuantity = record.getQuantity();
-            int updatedValue = operationMap.get(record.getOperation())
-                    .perform(currentQuantity, recordQuantity);
-            fruitMap.put(fruitKey, updatedValue);
+        if (Storage.fruitMap.containsKey(fruitKey)) {
+            strategy.get(record.getOperation()).perform(record);
         }
-    }
-
-    private void fillFruitMap(List<Record> records) {
-        fruitMap = new HashMap<>();
-        for (Record record : records) {
-            if (!fruitMap.containsKey(record.getFruit())) {
-                fruitMap.put(record.getFruit(), 0);
-            }
-        }
-    }
-
-    private void fillOperationMap() {
-        operationMap = new HashMap<>();
-        operationMap.put(Operation.BALANCE, new BalanceStrategy());
-        operationMap.put(Operation.SUPPLY, new SupplyStrategy());
-        operationMap.put(Operation.RETURN, new ReturnStrategy());
-        operationMap.put(Operation.PURCHASE, new PurchaseStrategy());
     }
 }
