@@ -3,9 +3,12 @@ package core.basesyntax.strategy.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
 import core.basesyntax.strategy.OperationStrategy;
+import java.util.Map;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -13,7 +16,16 @@ import org.junit.jupiter.api.Test;
 @DisplayName("OperationStrategyImpl Test")
 class OperationStrategyImplTest {
 
-    private static final OperationStrategy STRATEGY = new OperationStrategyImpl();
+    private static OperationStrategy strategy;
+
+    @BeforeAll
+    static void beforeAll() {
+        strategy = new OperationStrategyImpl(Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceProcessor(new ProductDaoImpl()),
+                FruitTransaction.Operation.SUPPLY, new SupplyProcessor(new ProductDaoImpl()),
+                FruitTransaction.Operation.PURCHASE, new PurchaseProcessor(new ProductDaoImpl()),
+                FruitTransaction.Operation.RETURN, new ReturnProcessor(new ProductDaoImpl())));
+    }
 
     @DisplayName("Check method get in Operation Strategy with Balance Processor")
     @Order(1)
@@ -21,7 +33,7 @@ class OperationStrategyImplTest {
     void get_getBalanceOperationStrategy_ok() {
 
         Class<? extends OperationProcessor> actualOperationClass =
-                STRATEGY.get(FruitTransaction.Operation.BALANCE).getClass();
+                strategy.get(FruitTransaction.Operation.BALANCE).getClass();
         Class<? extends OperationProcessor> expectedClass = BalanceProcessor.class;
         assertEquals(expectedClass, actualOperationClass);
     }
@@ -31,7 +43,7 @@ class OperationStrategyImplTest {
     @Test
     void get_getPurchaseOperationStrategy_ok() {
         Class<? extends OperationProcessor> actualOperationClass =
-                STRATEGY.get(FruitTransaction.Operation.PURCHASE).getClass();
+                strategy.get(FruitTransaction.Operation.PURCHASE).getClass();
         Class<? extends OperationProcessor> expectedClass = PurchaseProcessor.class;
         assertEquals(expectedClass, actualOperationClass);
     }
@@ -41,7 +53,7 @@ class OperationStrategyImplTest {
     @Test
     void get_getReturnOperationStrategy_ok() {
         Class<? extends OperationProcessor> actualOperationClass =
-                STRATEGY.get(FruitTransaction.Operation.RETURN).getClass();
+                strategy.get(FruitTransaction.Operation.RETURN).getClass();
         Class<? extends OperationProcessor> expectedClass = ReturnProcessor.class;
         assertEquals(expectedClass, actualOperationClass);
     }
@@ -51,7 +63,7 @@ class OperationStrategyImplTest {
     @Test
     void get_getSupplyOperationStrategy_ok() {
         Class<? extends OperationProcessor> actualOperationClass =
-                STRATEGY.get(FruitTransaction.Operation.SUPPLY).getClass();
+                strategy.get(FruitTransaction.Operation.SUPPLY).getClass();
         Class<? extends OperationProcessor> expectedClass = SupplyProcessor.class;
         assertEquals(expectedClass, actualOperationClass);
     }
@@ -60,6 +72,6 @@ class OperationStrategyImplTest {
     @Order(5)
     @Test
     void get_getNullOperationStrategy_notOk() {
-        assertThrows(RuntimeException.class, () -> STRATEGY.get(null));
+        assertThrows(RuntimeException.class, () -> strategy.get(null));
     }
 }

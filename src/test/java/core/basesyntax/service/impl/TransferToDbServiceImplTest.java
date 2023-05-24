@@ -5,10 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.model.Product;
-import core.basesyntax.service.TransferToDb;
+import core.basesyntax.service.TransferToDbService;
 import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.BalanceProcessor;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseProcessor;
+import core.basesyntax.strategy.impl.ReturnProcessor;
+import core.basesyntax.strategy.impl.SupplyProcessor;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
@@ -17,8 +21,12 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("TransferToDbImplTest")
-class TransferToDbImplTest {
-    private static final OperationStrategy STRATEGY = new OperationStrategyImpl();
+class TransferToDbServiceImplTest {
+    private static final OperationStrategy STRATEGY = new OperationStrategyImpl(Map.of(
+            FruitTransaction.Operation.BALANCE, new BalanceProcessor(new ProductDaoImpl()),
+            FruitTransaction.Operation.SUPPLY, new SupplyProcessor(new ProductDaoImpl()),
+            FruitTransaction.Operation.PURCHASE, new PurchaseProcessor(new ProductDaoImpl()),
+            FruitTransaction.Operation.RETURN, new ReturnProcessor(new ProductDaoImpl())));
     private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();
     private static final Product BANANA = Product.BANANA;
     private static final Product APPLE = Product.APPLE;
@@ -45,7 +53,7 @@ class TransferToDbImplTest {
                 new FruitTransaction(SUPPLY, APPLE, 20),
                 new FruitTransaction(RETURN, APPLE, 10),
                 new FruitTransaction(PURCHASE, APPLE, 30));
-        TransferToDb transfer = new TransferToDbImpl(STRATEGY);
+        TransferToDbService transfer = new TransferToDbServiceImpl(STRATEGY);
         transfer.transfer(transactions);
         Map<Product, Integer> expected = Map.of(BANANA, 20, APPLE, 20);
         Map<Product, Integer> actual = Map.of(BANANA, DAO.get(BANANA), APPLE, DAO.get(APPLE));

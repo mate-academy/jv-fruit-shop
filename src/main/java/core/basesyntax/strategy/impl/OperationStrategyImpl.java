@@ -6,12 +6,11 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<FruitTransaction.Operation, OperationProcessor> strategy = Map.of(
-            FruitTransaction.Operation.BALANCE, new BalanceProcessor(),
-            FruitTransaction.Operation.SUPPLY, new SupplyProcessor(),
-            FruitTransaction.Operation.PURCHASE, new PurchaseProcessor(),
-            FruitTransaction.Operation.RETURN, new ReturnProcessor()
-    );
+    private final Map<FruitTransaction.Operation, OperationProcessor> strategy;
+
+    public OperationStrategyImpl(Map<FruitTransaction.Operation, OperationProcessor> strategy) {
+        this.strategy = strategy;
+    }
 
     @Override
     public OperationProcessor get(FruitTransaction.Operation operation) {

@@ -1,13 +1,16 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.ProductDao;
-import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.model.Product;
 import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
 
 public class PurchaseProcessor implements OperationProcessor {
-    private static final ProductDao<Product, Integer> dao = new ProductDaoImpl();
+    private final ProductDao<Product, Integer> dao;
+
+    public PurchaseProcessor(ProductDao<Product, Integer> dao) {
+        this.dao = dao;
+    }
 
     @Override
     public void operate(FruitTransaction transaction) {

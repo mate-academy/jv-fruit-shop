@@ -1,18 +1,17 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Reader;
+import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReaderCsvImpl implements Reader {
-
-    public static final String FILE_FORMAT = ".csv";
+public class FileReaderServiceCsvImpl implements FileReaderService {
+    private static final String FILE_FORMAT = ".csv";
     private final String pathFile;
 
-    public ReaderCsvImpl(String filePath) {
+    public FileReaderServiceCsvImpl(String filePath) {
         this.pathFile = filePath;
     }
 

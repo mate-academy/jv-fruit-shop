@@ -6,5 +6,4 @@ import java.util.Map;
 
 public class Storage {
     public static final Map<Product, Integer> storage = new HashMap<>();
-
 }

@@ -9,6 +9,7 @@ import core.basesyntax.model.Product;
 import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -16,11 +17,16 @@ import org.junit.jupiter.api.Test;
 @DisplayName("SupplyProcessor Test")
 class SupplyProcessorTest {
 
-    private static final OperationProcessor SUPPLY_PROCESSOR = new SupplyProcessor();
     private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();
     private static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
     private static final Product APPLE = Product.APPLE;
     private static final Product BANANA = Product.BANANA;
+    private static OperationProcessor supplyProcessor;
+
+    @BeforeAll
+    static void beforeAll() {
+        supplyProcessor = new SupplyProcessor(new ProductDaoImpl());
+    }
 
     @AfterEach
     void tearDown() {
@@ -31,7 +37,7 @@ class SupplyProcessorTest {
     @Order(1)
     @Test
     void operate_checkSupplyAppleEmptyStorage_ok() {
-        SUPPLY_PROCESSOR.operate(new FruitTransaction(SUPPLY, APPLE, 20));
+        supplyProcessor.operate(new FruitTransaction(SUPPLY, APPLE, 20));
         assertEquals(DAO.get(APPLE), 20);
     }
 
@@ -40,7 +46,7 @@ class SupplyProcessorTest {
     @Test
     void operate_checkSupplyApple_ok() {
         DAO.put(APPLE, 10);
-        SUPPLY_PROCESSOR.operate(new FruitTransaction(SUPPLY, APPLE, 20));
+        supplyProcessor.operate(new FruitTransaction(SUPPLY, APPLE, 20));
         assertEquals(DAO.get(APPLE), 30);
     }
 
@@ -48,7 +54,7 @@ class SupplyProcessorTest {
     @Order(3)
     @Test
     void operate_checkSupplyBananaEmptyStorage_ok() {
-        SUPPLY_PROCESSOR.operate(new FruitTransaction(SUPPLY, BANANA, 20));
+        supplyProcessor.operate(new FruitTransaction(SUPPLY, BANANA, 20));
         assertEquals(DAO.get(BANANA), 20);
     }
 
@@ -57,7 +63,7 @@ class SupplyProcessorTest {
     @Test
     void operate_checkSupplyBanana_ok() {
         DAO.put(BANANA, 10);
-        SUPPLY_PROCESSOR.operate(new FruitTransaction(SUPPLY, BANANA, 20));
+        supplyProcessor.operate(new FruitTransaction(SUPPLY, BANANA, 20));
         assertEquals(DAO.get(BANANA), 30);
     }
 
@@ -65,7 +71,7 @@ class SupplyProcessorTest {
     @Order(5)
     @Test
     void operate_checkSupplyNegative_notOk() {
-        assertThrows(RuntimeException.class, () -> SUPPLY_PROCESSOR.operate(
+        assertThrows(RuntimeException.class, () -> supplyProcessor.operate(
                 new FruitTransaction(SUPPLY, BANANA, -20)));
     }
 }

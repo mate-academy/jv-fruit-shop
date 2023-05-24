@@ -1,18 +1,25 @@
 package core.basesyntax;
 
-import core.basesyntax.service.Parser;
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.ReportService;
-import core.basesyntax.service.TransferToDb;
-import core.basesyntax.service.impl.ParserImpl;
-import core.basesyntax.service.impl.ReaderCsvImpl;
-import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.impl.TransferToDbImpl;
-import core.basesyntax.service.impl.WriterToCsvImpl;
+import core.basesyntax.dao.ProductDaoImpl;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.TransactionListParserService;
+import core.basesyntax.service.TransferToDbService;
+import core.basesyntax.service.impl.FileReaderServiceCsvImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
+import core.basesyntax.service.impl.ReportWriterToFileServiceToCsvImpl;
+import core.basesyntax.service.impl.TransactionListParserServiceImpl;
+import core.basesyntax.service.impl.TransferToDbServiceImpl;
 import core.basesyntax.strategy.FruitTransaction;
+import core.basesyntax.strategy.OperationProcessor;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.BalanceProcessor;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseProcessor;
+import core.basesyntax.strategy.impl.ReturnProcessor;
+import core.basesyntax.strategy.impl.SupplyProcessor;
 import java.util.List;
+import java.util.Map;
 
 public class Application {
     public static void main(String[] args) {
@@ -20,15 +27,26 @@ public class Application {
     }
 
     public static void run() {
-        Reader reader = new ReaderCsvImpl("src/main/resources/input/testFile.csv");
-        Parser parser = new ParserImpl();
-        OperationStrategy strategy = new OperationStrategyImpl();
-        TransferToDb transferToDb = new TransferToDbImpl(strategy);
-        ReportService reportService = new ReportServiceImpl();
-        WriterToCsvImpl writerToCsv = new WriterToCsvImpl("src/main/resources/output");
+        Map<FruitTransaction.Operation, OperationProcessor> strategyMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceProcessor(new ProductDaoImpl()),
+                FruitTransaction.Operation.SUPPLY, new SupplyProcessor(new ProductDaoImpl()),
+                FruitTransaction.Operation.PURCHASE, new PurchaseProcessor(new ProductDaoImpl()),
+                FruitTransaction.Operation.RETURN, new ReturnProcessor(new ProductDaoImpl()));
+        FileReaderService fileReaderService =
+                new FileReaderServiceCsvImpl("src/main/resources/input/testFile.csv");
+        TransactionListParserService transactionListParserService =
+                new TransactionListParserServiceImpl();
+        OperationStrategy strategy = new OperationStrategyImpl(strategyMap);
+        TransferToDbService transferToDbService =
+                new TransferToDbServiceImpl(strategy);
+        ReportCreatorService reportCreatorService =
+                new ReportCreatorServiceImpl(new ProductDaoImpl());
+        ReportWriterToFileServiceToCsvImpl writerToCsv =
+                new ReportWriterToFileServiceToCsvImpl("src/main/resources/output");
 
-        List<FruitTransaction> fruitTransactions = parser.parse(reader.readFile());
-        transferToDb.transfer(fruitTransactions);
-        writerToCsv.writeToFile(reportService.createReport());
+        List<FruitTransaction> fruitTransactions =
+                transactionListParserService.parse(fileReaderService.readFile());
+        transferToDbService.transfer(fruitTransactions);
+        writerToCsv.writeToFile(reportCreatorService.createReport());
     }
 }

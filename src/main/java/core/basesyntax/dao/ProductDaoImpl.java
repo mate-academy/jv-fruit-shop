@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Product;
 
 public class ProductDaoImpl implements ProductDao<Product, Integer> {
-
     @Override
     public Integer put(Product product, Integer value) {
         return Storage.storage.put(product, value);

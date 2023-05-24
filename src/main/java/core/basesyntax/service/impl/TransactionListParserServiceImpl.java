@@ -3,13 +3,13 @@ package core.basesyntax.service.impl;
 import static java.util.stream.Collectors.toList;
 
 import core.basesyntax.model.Product;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.TransactionListParserService;
 import core.basesyntax.strategy.FruitTransaction;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class ParserImpl implements Parser {
+public class TransactionListParserServiceImpl implements TransactionListParserService {
     private static final String SEPARATOR = ",";
     private static final int PRODUCT_INDEX = 1;
     private static final int OPERATION_INDEX = 0;

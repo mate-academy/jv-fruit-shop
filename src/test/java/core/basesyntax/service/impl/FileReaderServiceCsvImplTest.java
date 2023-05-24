@@ -10,14 +10,14 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("ReaderCsvImpl Test")
-class ReaderCsvImplTest {
-    private ReaderCsvImpl reader;
+class FileReaderServiceCsvImplTest {
+    private FileReaderServiceCsvImpl reader;
 
     @DisplayName("Check reader CSV with valid file")
     @Test
     @Order(1)
     void readFile_validClasspath_ok() {
-        reader = new ReaderCsvImpl("src/test/resources/input/testFile.csv");
+        reader = new FileReaderServiceCsvImpl("src/test/resources/input/testFile.csv");
         List<String> expectedList = List.of(
                 "type,fruit,quantity",
                 "b,banana,20",
@@ -36,7 +36,7 @@ class ReaderCsvImplTest {
     @Test
     @Order(2)
     void readFile_invalidClasspath_notOk() {
-        reader = new ReaderCsvImpl("invalid/classpath");
+        reader = new FileReaderServiceCsvImpl("invalid/classpath");
         assertThrows(RuntimeException.class, () -> reader.readFile(),
                 "Should throw an exception");
     }
@@ -45,7 +45,7 @@ class ReaderCsvImplTest {
     @Test
     @Order(3)
     void readFile_emptyFile_ok() {
-        reader = new ReaderCsvImpl("src/test/resources/input/empty.csv");
+        reader = new FileReaderServiceCsvImpl("src/test/resources/input/empty.csv");
         List<String> expectedList = new ArrayList<>();
         List<String> actualList = reader.readFile();
         assertEquals(expectedList, actualList);
@@ -55,7 +55,7 @@ class ReaderCsvImplTest {
     @Test
     @Order(4)
     void readFile_oneLine_ok() {
-        reader = new ReaderCsvImpl("src/test/resources/input/oneLine.csv");
+        reader = new FileReaderServiceCsvImpl("src/test/resources/input/oneLine.csv");
         List<String> expectedList = List.of("type,fruit,quantity");
         List<String> actualList = reader.readFile();
         assertEquals(expectedList, actualList);
@@ -65,7 +65,7 @@ class ReaderCsvImplTest {
     @Test
     @Order(5)
     void readFile_invalidFileExtension_notOk() {
-        reader = new ReaderCsvImpl("src/test/resources/input/wrongExtension");
+        reader = new FileReaderServiceCsvImpl("src/test/resources/input/wrongExtension");
         assertThrows(RuntimeException.class, () -> reader.readFile(),
                 "Should throw an exception");
     }

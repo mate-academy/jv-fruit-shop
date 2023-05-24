@@ -1,15 +1,18 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.ProductDao;
-import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.model.Product;
-import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportCreatorService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportServiceImpl implements ReportService {
-    private static final ProductDao<Product, Integer> dao = new ProductDaoImpl();
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String TITLE = "fruit,quantity";
+    private final ProductDao<Product, Integer> dao;
+
+    public ReportCreatorServiceImpl(ProductDao<Product, Integer> dao) {
+        this.dao = dao;
+    }
 
     @Override
     public List<String> createReport() {
