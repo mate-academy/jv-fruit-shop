@@ -99,7 +99,7 @@ public class FruitTransaction {
 <details>
   <summary>Additional tips (IMPOTANT: before viewing create a solution architecture and check it against these tips)</summary>
  
-![FruitShop Schema](https://prnt.sc/LTyGSgSo0xxl)
+! [FruitShop Schema](https://prnt.sc/LTyGSgSo0xxl)
 
 You are presented with a diagram describing an algorithm for the creation of a project structure. Your task is to implement it.
 
