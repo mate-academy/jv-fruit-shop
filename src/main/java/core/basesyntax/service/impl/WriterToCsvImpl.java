@@ -16,7 +16,7 @@ public class WriterToCsvImpl implements Writer {
     }
 
     @Override
-    public void writeInFile(List<String> lines) {
+    public void writeToFile(List<String> lines) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathFile + FILE_NAME))) {
             for (String line : lines) {
                 writer.write(line + '\n');

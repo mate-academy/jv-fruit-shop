@@ -65,7 +65,6 @@ class SupplyProcessorTest {
     @Order(5)
     @Test
     void operate_checkSupplyNegative_notOk() {
-        DAO.put(BANANA, 10);
         assertThrows(RuntimeException.class, () -> SUPPLY_PROCESSOR.operate(
                 new FruitTransaction(SUPPLY, BANANA, -20)));
     }

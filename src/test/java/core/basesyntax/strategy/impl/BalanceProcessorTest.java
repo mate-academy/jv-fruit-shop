@@ -64,7 +64,6 @@ class BalanceProcessorTest {
     @Order(5)
     @Test
     void operate_checkBalanceNegative_notOk() {
-        DAO.put(BANANA, 10);
         assertThrows(RuntimeException.class, () -> BALANCE_PROCESSOR.operate(
                 new FruitTransaction(BALANCE, BANANA, -20)));
     }

@@ -39,7 +39,7 @@ class WriterToCsvImplTest {
         List<String> expected = List.of("fruit,quantity",
                 "banana,20",
                 "apple,10");
-        writer.writeInFile(expected);
+        writer.writeToFile(expected);
         List<String> actual;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE))) {
             actual = bufferedReader.lines().collect(toList());
@@ -54,6 +54,6 @@ class WriterToCsvImplTest {
     @Test
     void writeInFile_incorrectPath_notOk() {
         writer = new WriterToCsvImpl("src/test/resources/incorrectPath");
-        assertThrows(RuntimeException.class, () -> writer.writeInFile(List.of()));
+        assertThrows(RuntimeException.class, () -> writer.writeToFile(List.of()));
     }
 }

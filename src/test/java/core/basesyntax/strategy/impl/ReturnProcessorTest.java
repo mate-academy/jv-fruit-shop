@@ -65,7 +65,6 @@ class ReturnProcessorTest {
     @Order(5)
     @Test
     void operate_checkReturnNegative_notOk() {
-        DAO.put(BANANA, 10);
         assertThrows(RuntimeException.class, () -> RETURN_PROCESSOR.operate(
                 new FruitTransaction(RETURN, BANANA, -20)));
     }

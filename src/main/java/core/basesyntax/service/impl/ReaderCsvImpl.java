@@ -22,10 +22,10 @@ public class ReaderCsvImpl implements Reader {
             if (pathFile.endsWith(FILE_FORMAT)) {
                 return bufferedReader.lines().collect(Collectors.toList());
             }
+            throw new RuntimeException("Wrong extension of file: "
+                    + pathFile + ", must be '" + FILE_FORMAT + "' file");
         } catch (IOException e) {
             throw new RuntimeException("Can't read file by path: " + pathFile, e);
         }
-        throw new RuntimeException("Wrong extension of file: "
-                + pathFile + ", must be '" + FILE_FORMAT + "' file");
     }
 }

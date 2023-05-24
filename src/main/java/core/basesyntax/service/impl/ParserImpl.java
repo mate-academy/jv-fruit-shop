@@ -14,18 +14,18 @@ public class ParserImpl implements Parser {
     private static final int PRODUCT_INDEX = 1;
     private static final int OPERATION_INDEX = 0;
     private static final int AMOUNT_INDEX = 2;
-    private static final int DEFAULT_SPLITTER_ARRAY_CAPACITY = 3;
+    private static final int COLUMN_QUANTITY = 3;
 
     @Override
     public List<FruitTransaction> parse(List<String> input) {
         validateInput(input);
         return input.stream()
-                .map(this::castToProductList)
+                .map(this::parseLine)
                 .filter(Objects::nonNull)
                 .collect(toList());
     }
 
-    private FruitTransaction castToProductList(String input) {
+    private FruitTransaction parseLine(String input) {
         if (Arrays.stream(FruitTransaction.Operation.values())
                 .noneMatch(o -> isEqualsIgnoreCase(input, OPERATION_INDEX, o.getCode()))
                 || Arrays.stream(Product.values())
@@ -54,9 +54,9 @@ public class ParserImpl implements Parser {
                     + getClass().getSimpleName());
         }
         if (input.stream()
-                .anyMatch(s -> s.split(SEPARATOR).length != DEFAULT_SPLITTER_ARRAY_CAPACITY)) {
+                .anyMatch(s -> s.split(SEPARATOR).length != COLUMN_QUANTITY)) {
             throw new RuntimeException("Not available input string's format, expected: ["
-                    + DEFAULT_SPLITTER_ARRAY_CAPACITY + "] columns, but get: ["
+                    + COLUMN_QUANTITY + "] columns, but get: ["
                     + input.stream().mapToInt(s -> s.split(SEPARATOR).length).findFirst().getAsInt()
                     + "] columns");
         }

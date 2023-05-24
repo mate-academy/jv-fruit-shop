@@ -29,6 +29,6 @@ public class Application {
 
         List<FruitTransaction> fruitTransactions = parser.parse(reader.readFile());
         transferToDb.transfer(fruitTransactions);
-        writerToCsv.writeInFile(reportService.createReport());
+        writerToCsv.writeToFile(reportService.createReport());
     }
 }

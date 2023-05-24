@@ -13,12 +13,14 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<String> createReport() {
-        List<String> res = new ArrayList<>(List.of(TITLE));
+        List<String> report = new ArrayList<>(List.of(TITLE));
         for (Product product : Product.values()) {
             if (dao.get(product) != null) {
-                res.add(String.format("%s,%d", product.name().toLowerCase(), dao.get(product)));
+                report.add(String.format("%s,%d",
+                        product.name().toLowerCase(),
+                        dao.get(product)));
             }
         }
-        return res;
+        return report;
     }
 }

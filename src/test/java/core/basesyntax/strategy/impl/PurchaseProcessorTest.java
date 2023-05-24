@@ -37,7 +37,7 @@ class PurchaseProcessorTest {
         assertEquals(DAO.get(APPLE), 0);
     }
 
-    @DisplayName("Check purchase operation with valid value (Apple) and non empty Storage")
+    @DisplayName("Check purchase operation with valid value (Apple) and empty Storage")
     @Order(2)
     @Test
     void operate_checkPurchaseApple_NotOk() {
@@ -45,7 +45,7 @@ class PurchaseProcessorTest {
                 () -> PURCHASE_PROCESSOR.operate(new FruitTransaction(PURCHASE, APPLE, 20)));
     }
 
-    @DisplayName("Check purchase operation with valid value (Apple) and empty Storage")
+    @DisplayName("Check purchase operation with valid value (Banana)")
     @Order(3)
     @Test
     void operate_checkPurchaseBananaEmptyStorage_ok() {
@@ -56,11 +56,29 @@ class PurchaseProcessorTest {
         assertEquals(DAO.get(BANANA), 0);
     }
 
-    @DisplayName("Check purchase operation with valid value (Apple) and non empty Storage")
+    @DisplayName("Check purchase operation with valid value (Banana) and empty Storage")
     @Order(4)
     @Test
-    void operate_checkPurchaseBanana_notOk() {
+    void operate_checkPurchaseBananaEmpty_notOk() {
         assertThrows(RuntimeException.class,
                 () -> PURCHASE_PROCESSOR.operate(new FruitTransaction(PURCHASE, BANANA, 128)));
+    }
+
+    @DisplayName("Check purchase operation with invalid value (Apple) and non empty Storage")
+    @Order(5)
+    @Test
+    void operate_checkPurchaseBananaIncorrect_notOk() {
+        DAO.put(BANANA, 147);
+        assertThrows(RuntimeException.class,
+                () -> PURCHASE_PROCESSOR.operate(new FruitTransaction(PURCHASE, BANANA, -15)));
+    }
+
+    @DisplayName("Check purchase operation with invalid value (Apple) and non empty Storage")
+    @Order(6)
+    @Test
+    void operate_checkPurchaseApple_notOk() {
+        DAO.put(BANANA, 147);
+        assertThrows(RuntimeException.class,
+                () -> PURCHASE_PROCESSOR.operate(new FruitTransaction(PURCHASE, APPLE, -18)));
     }
 }
