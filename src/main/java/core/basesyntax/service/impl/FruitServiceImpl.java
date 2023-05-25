@@ -8,11 +8,11 @@ import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
     @Override
-    public void getOperationByFruit(List<FruitTransaction> fruitTransactionList,
-                                    OperationStrategy strategy) {
+    public void makeOperationByFruit(List<FruitTransaction> fruitTransactionList,
+                                     OperationStrategy strategy) {
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
             OperationHandler handler = strategy.get(fruitTransaction.getOperation());
-            handler.operateTransaction(fruitTransaction);
+            handler.handle(fruitTransaction);
         }
     }
 }

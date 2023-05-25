@@ -49,6 +49,5 @@ public class FruitTransaction {
             }
             throw new RuntimeException("Incorrect code: " + code);
         }
-
     }
 }

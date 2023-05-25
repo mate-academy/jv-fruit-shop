@@ -12,7 +12,7 @@ public class TransactionServiceImpl implements TransactionService {
     public static final String SEPARATOR = ",";
 
     @Override
-    public List<FruitTransaction> parseTransaction(List<String> transaction) {
+    public List<FruitTransaction> parseTransactions(List<String> transaction) {
         List<FruitTransaction> newTransaction = new ArrayList<>();
         for (String string : transaction) {
             FruitTransaction fruitTransaction = new FruitTransaction();
