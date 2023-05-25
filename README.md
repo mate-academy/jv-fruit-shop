@@ -99,7 +99,7 @@ public class FruitTransaction {
 <details>
   <summary>Additional tips (IMPOTANT: before viewing create a solution architecture and check it against these tips)</summary>
  
-! [FruitShop Schema](https://prnt.sc/LTyGSgSo0xxl)
+! [FruitShop Schema](https://mate-academy-images.s3.eu-central-1.amazonaws.com/Fruit_Shop_1_c3855912d4.png)
 
 You are presented with a diagram describing an algorithm for the creation of a project structure. Your task is to implement it.
 
@@ -112,6 +112,7 @@ Remember the SOLID principles, think about which ones you might not be adhering 
 - Interface segregation - review your code, do you have interfaces that should be divided into smaller ones?
 - Liskov substitution - for example, imagine that you have a class S, which is a subtype of class T. Make sure you can replace class S with class T without changing the desired properties of the program.
 - Dependency Inversion - make sure that high-level modules do not depend on low-level modules. Both should depend on abstractions. Also, abstractions should not depend on details. Details should depend on abstractions.
+
 Bad practice example:
 ````
 public class UserService {
@@ -131,6 +132,21 @@ public class UserServiceImpl implements UserService {
   public List<User> getAll() {
       return userDao.getAll();
   }
+}
+````
+Better:
+````
+public class UserServiceImpl implements UserService {
+   private final UserDao userDao; //let's not depend on certain implementations here
+
+   public UserServiceImpl(UserDao userDao) {
+      this.userDao = userDao;
+   }
+
+   @Override
+   public List<User> getAll() {
+      return userDao.getAll();
+   }
 }
 ````
 Don't forget that your code will need to be tested, so try to anticipate all invalid input data and handle it in advance.
