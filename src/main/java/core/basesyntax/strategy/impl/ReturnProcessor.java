@@ -1,6 +1,7 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.ProductDao;
+import core.basesyntax.exeptions.InvalidTransaction;
 import core.basesyntax.model.Product;
 import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
@@ -22,7 +23,7 @@ public class ReturnProcessor implements OperationProcessor {
 
     private void checkTransactionValue(FruitTransaction transaction) {
         if (transaction.getQuantity() < 0) {
-            throw new RuntimeException("That transaction with value ["
+            throw new InvalidTransaction("That transaction with value ["
                     + transaction.getQuantity()
                     + "] invalid, value have to be positive.");
         }

@@ -1,36 +1,30 @@
 package core.basesyntax.strategy.impl;
 
+import static core.basesyntax.model.Product.APPLE;
+import static core.basesyntax.model.Product.BANANA;
+import static core.basesyntax.strategy.FruitTransaction.Operation.SUPPLY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
+import core.basesyntax.exeptions.InvalidTransaction;
 import core.basesyntax.model.Product;
 import core.basesyntax.strategy.FruitTransaction;
 import core.basesyntax.strategy.OperationProcessor;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("SupplyProcessor Test")
 class SupplyProcessorTest {
-
-    private static final ProductDao<Product, Integer> DAO = new ProductDaoImpl();
-    private static final FruitTransaction.Operation SUPPLY = FruitTransaction.Operation.SUPPLY;
-    private static final Product APPLE = Product.APPLE;
-    private static final Product BANANA = Product.BANANA;
-    private static OperationProcessor supplyProcessor;
-
-    @BeforeAll
-    static void beforeAll() {
-        supplyProcessor = new SupplyProcessor(new ProductDaoImpl());
-    }
+    private final ProductDao<Product, Integer> dao = new ProductDaoImpl();
+    private final OperationProcessor supplyProcessor = new SupplyProcessor(new ProductDaoImpl());
 
     @AfterEach
     void tearDown() {
-        DAO.clear();
+        dao.clear();
     }
 
     @DisplayName("Check supply operation with valid value (Apple) and empty Storage")
@@ -38,16 +32,16 @@ class SupplyProcessorTest {
     @Test
     void operate_checkSupplyAppleEmptyStorage_ok() {
         supplyProcessor.operate(new FruitTransaction(SUPPLY, APPLE, 20));
-        assertEquals(DAO.get(APPLE), 20);
+        assertEquals(dao.get(APPLE), 20);
     }
 
     @DisplayName("Check supply operation with valid value (Apple) and non empty Storage")
     @Order(2)
     @Test
     void operate_checkSupplyApple_ok() {
-        DAO.put(APPLE, 10);
+        dao.put(APPLE, 10);
         supplyProcessor.operate(new FruitTransaction(SUPPLY, APPLE, 20));
-        assertEquals(DAO.get(APPLE), 30);
+        assertEquals(dao.get(APPLE), 30);
     }
 
     @DisplayName("Check supply operation with valid value (Apple) and empty Storage")
@@ -55,23 +49,23 @@ class SupplyProcessorTest {
     @Test
     void operate_checkSupplyBananaEmptyStorage_ok() {
         supplyProcessor.operate(new FruitTransaction(SUPPLY, BANANA, 20));
-        assertEquals(DAO.get(BANANA), 20);
+        assertEquals(dao.get(BANANA), 20);
     }
 
     @DisplayName("Check supply operation with valid value (Apple) and non empty Storage")
     @Order(4)
     @Test
     void operate_checkSupplyBanana_ok() {
-        DAO.put(BANANA, 10);
+        dao.put(BANANA, 10);
         supplyProcessor.operate(new FruitTransaction(SUPPLY, BANANA, 20));
-        assertEquals(DAO.get(BANANA), 30);
+        assertEquals(dao.get(BANANA), 30);
     }
 
     @DisplayName("Check supply operation with negative value")
     @Order(5)
     @Test
     void operate_checkSupplyNegative_notOk() {
-        assertThrows(RuntimeException.class, () -> supplyProcessor.operate(
+        assertThrows(InvalidTransaction.class, () -> supplyProcessor.operate(
                 new FruitTransaction(SUPPLY, BANANA, -20)));
     }
 }

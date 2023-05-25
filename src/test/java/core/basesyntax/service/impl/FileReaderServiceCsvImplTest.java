@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.exeptions.WrongExtensionFile;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -66,7 +67,7 @@ class FileReaderServiceCsvImplTest {
     @Order(5)
     void readFile_invalidFileExtension_notOk() {
         reader = new FileReaderServiceCsvImpl("src/test/resources/input/wrongExtension");
-        assertThrows(RuntimeException.class, () -> reader.readFile(),
+        assertThrows(WrongExtensionFile.class, () -> reader.readFile(),
                 "Should throw an exception");
     }
 }

@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exeptions.WrongExtensionFile;
 import core.basesyntax.service.ReportWriterToFileService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,13 +17,13 @@ public class ReportWriterToFileServiceToCsvImpl implements ReportWriterToFileSer
 
     @Override
     public void writeToFile(List<String> lines) {
+        if (!pathFile.endsWith(FILE_FORMAT)) {
+            throw new WrongExtensionFile("Wrong extension of file: "
+                    + pathFile + ", must be '" + FILE_FORMAT + "' file");
+        }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathFile))) {
-            if (!pathFile.endsWith(FILE_FORMAT)) {
-                throw new RuntimeException("Wrong extension of file: "
-                        + pathFile + ", must be '" + FILE_FORMAT + "' file");
-            }
             for (String line : lines) {
-                writer.write(line + '\n');
+                writer.write(line + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't write file to file: " + pathFile, e);

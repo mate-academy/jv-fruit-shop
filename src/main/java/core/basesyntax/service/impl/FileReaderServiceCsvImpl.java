@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exeptions.WrongExtensionFile;
 import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -21,7 +22,7 @@ public class FileReaderServiceCsvImpl implements FileReaderService {
             if (pathFile.endsWith(FILE_FORMAT)) {
                 return bufferedReader.lines().collect(Collectors.toList());
             }
-            throw new RuntimeException("Wrong extension of file: "
+            throw new WrongExtensionFile("Wrong extension of file: "
                     + pathFile + ", must be '" + FILE_FORMAT + "' file");
         } catch (IOException e) {
             throw new RuntimeException("Can't read file by path: " + pathFile, e);

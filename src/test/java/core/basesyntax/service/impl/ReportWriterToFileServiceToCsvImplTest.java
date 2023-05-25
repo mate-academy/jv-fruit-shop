@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import core.basesyntax.exeptions.WrongExtensionFile;
 import core.basesyntax.service.ReportWriterToFileService;
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,19 +18,19 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("WriterToCsvImpl Test")
 class ReportWriterToFileServiceToCsvImplTest {
-    private static final File FILE = new File("src/test/resources/output/reportFile.csv");
     private static ReportWriterToFileService reportWriterToFileService;
 
     @AfterEach
     void tearDown() {
-        FILE.delete();
+        new File("src/test/resources/output/reportFile.csv").delete();
     }
 
     @DisplayName("Check writing to file in correct path")
     @Order(1)
     @Test
     void writeInFile_correctPath_ok() {
-        reportWriterToFileService = new ReportWriterToFileServiceToCsvImpl(FILE.getPath());
+        reportWriterToFileService = new ReportWriterToFileServiceToCsvImpl(
+                "src/test/resources/output/reportFile.csv");
         List<String> expected = List.of("fruit,quantity",
                 "banana,20",
                 "apple,10");
@@ -39,7 +40,8 @@ class ReportWriterToFileServiceToCsvImplTest {
                 new FileReader("src/test/resources/output/reportFile.csv"))) {
             actual = bufferedReader.lines().collect(toList());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read the file: " + FILE.getPath(), e);
+            throw new RuntimeException("Can't read the file: "
+                    + "src/test/resources/output/reportFile.csv", e);
         }
         assertEquals(expected, actual);
     }
@@ -62,7 +64,7 @@ class ReportWriterToFileServiceToCsvImplTest {
         reportWriterToFileService =
                 new ReportWriterToFileServiceToCsvImpl(
                         "src/test/resources/reportFile.txt");
-        assertThrows(RuntimeException.class, () ->
+        assertThrows(WrongExtensionFile.class, () ->
                 reportWriterToFileService.writeToFile(List.of()));
     }
 }
