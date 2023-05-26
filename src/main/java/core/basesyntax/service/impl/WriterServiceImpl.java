@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class WriterServiceImpl implements WriterService {
     @Override
-    public void writeReportToCcvFile(String report, String pathToFile) {
+    public void writeReportToCsvFile(String report, String pathToFile) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {
             writer.write(report);
         } catch (IOException exception) {

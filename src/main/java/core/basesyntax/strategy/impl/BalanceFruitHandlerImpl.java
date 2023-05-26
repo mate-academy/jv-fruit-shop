@@ -6,7 +6,7 @@ import core.basesyntax.strategy.FruitHandler;
 
 public class BalanceFruitHandlerImpl implements FruitHandler {
     @Override
-    public void getActivity(FruitTransaction fruitTransaction) {
+    public void doAction(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() < 0) {
             throw new RuntimeException("The balance of fruits in the store"
                     + " cannot be less than zero");

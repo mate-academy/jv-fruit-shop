@@ -1,15 +1,15 @@
 package core.basesyntax.service.parser.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.parser.ParserMapService;
+import core.basesyntax.service.parser.ReportService;
 import java.util.Map;
 
-public class ParserMapServiceImpl implements ParserMapService {
+public class ReportServiceImpl implements ReportService {
     private static final String REPORT_TITLE = "fruit,quantity";
     private static final String COMMA = ",";
 
     @Override
-    public String getStringFromFruitStorage() {
+    public String createReport() {
         StringBuilder builder = new StringBuilder();
         builder.append(REPORT_TITLE)
                 .append(System.lineSeparator());

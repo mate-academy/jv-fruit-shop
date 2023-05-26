@@ -15,15 +15,16 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public List<FruitTransaction> parseData(List<String> sourceData) {
-        List<FruitTransaction> resultWithEntities = new ArrayList<>();
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (int i = 1; i < sourceData.size(); i++) {
             String[] splitString = sourceData.get(i).split(SEPARATOR);
-            resultWithEntities
-                    .add(new FruitTransaction(getOperation(splitString[CODE_OF_OPERATION].trim()),
+            String codeOfOperation = splitString[CODE_OF_OPERATION].trim();
+            fruitTransactions 
+                    .add(new FruitTransaction(getOperation(codeOfOperation),
                             splitString[FRUIT_NAME],
                             Integer.parseInt(splitString[QUANTITY_OF_FRUIT])));
         }
-        return resultWithEntities;
+        return fruitTransactions;
     }
 
     private Operation getOperation(String string) {
