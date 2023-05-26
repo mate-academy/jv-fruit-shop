@@ -7,7 +7,11 @@ import core.basesyntax.strategy.FruitHandler;
 public class BalanceFruitHandlerImpl implements FruitHandler {
     @Override
     public void getActivity(FruitTransaction fruitTransaction) {
-        Storage.getFruitsComposition().put(fruitTransaction.getFruit(),
-                    fruitTransaction.getQuantity());
+        if (fruitTransaction.getQuantity() < 0) {
+            throw new RuntimeException("The balance of fruits in the store"
+                    + " cannot be less than zero");
+        }
+        Storage.getFruitStorage().put(fruitTransaction.getFruit(),
+                fruitTransaction.getQuantity());
     }
 }
