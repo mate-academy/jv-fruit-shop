@@ -52,7 +52,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Can't find code");
+            throw new RuntimeException("Can't find operation with code:" + fruitOperation);
         }
     }
 }

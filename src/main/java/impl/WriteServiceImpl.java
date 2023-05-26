@@ -8,12 +8,10 @@ import service.WriteService;
 public class WriteServiceImpl implements WriteService {
     @Override
     public void writeToFile(String report, String pathToFile) {
-        try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathToFile));
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathToFile))) {
             bufferedWriter.write(report);
-            bufferedWriter.close();
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file");
+            throw new RuntimeException("Can't write to file", e);
         }
     }
 }
