@@ -6,10 +6,11 @@ import service.OperationStrategy;
 import service.ParseService;
 import service.ReadService;
 import service.ReportService;
+import service.TransactionService;
 import service.WriteService;
 import strategy.OperationHandler;
 
-public class TransactionServiceImpl {
+public class TransactionServiceImpl implements TransactionService {
     private OperationStrategy operationStrategy;
     private ReadService readService;
     private ParseService parseService;
@@ -26,6 +27,7 @@ public class TransactionServiceImpl {
         this.writeService = writeService;
     }
 
+    @Override
     public void processTransactions() {
         List<String> dataFromFile = readService.read("src/main/java/database.csv");
         List<FruitTransaction> fruitTransactions = parseService.parse(dataFromFile);

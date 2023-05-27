@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import impl.OperationStrategyImpl;
 import impl.ParseServiceImpl;
 import impl.ReadServiceImpl;
 import impl.ReportServiceImpl;
@@ -10,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import model.FruitTransaction;
 import service.OperationStrategy;
+import service.OperationStrategyImpl;
 import service.ParseService;
 import service.ReadService;
 import service.ReportService;
@@ -38,6 +38,5 @@ public class Main {
         TransactionServiceImpl transactionService = new TransactionServiceImpl(operationStrategy,
                 readService, parseService, reportService, writeService);
         transactionService.processTransactions();
-
     }
 }
