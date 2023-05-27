@@ -1,5 +1,7 @@
 package core.basesyntax.enumeration;
 
+import java.util.Arrays;
+
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
@@ -14,5 +16,12 @@ public enum Operation {
 
     public String getCode() {
         return code;
+    }
+
+    public static Operation getOperation(String string) {
+        return Arrays.stream(Operation.values())
+                .filter(operation -> operation.getCode().equals(string))
+                .findFirst()
+                .get();
     }
 }

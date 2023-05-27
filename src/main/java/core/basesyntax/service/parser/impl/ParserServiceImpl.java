@@ -1,10 +1,10 @@
 package core.basesyntax.service.parser.impl;
 
-import core.basesyntax.enumeration.Operation;
+import static core.basesyntax.enumeration.Operation.getOperation;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.parser.ParserService;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ParserServiceImpl implements ParserService {
@@ -25,12 +25,5 @@ public class ParserServiceImpl implements ParserService {
                             Integer.parseInt(splitString[QUANTITY_OF_FRUIT])));
         }
         return fruitTransactions;
-    }
-
-    private Operation getOperation(String string) {
-        return Arrays.stream(Operation.values())
-                .filter(operation -> operation.getCode().equals(string))
-                .findFirst()
-                .get();
     }
 }
