@@ -14,9 +14,6 @@ public class PurchaseFruitHandlerImpl implements FruitHandler {
                     + "than is available in the store");
         }
         int newQuantity = oldQuantity - fruitTransaction.getQuantity();
-        if (newQuantity < 0) {
-            throw new RuntimeException("Reserve of fruits shouldn't be less than 0");
-        }
         Storage.getFruitStorage().put(fruit, newQuantity);
     }
 }

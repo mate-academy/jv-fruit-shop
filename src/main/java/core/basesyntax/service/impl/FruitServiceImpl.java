@@ -8,9 +8,10 @@ import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
     @Override
-    public void processAllTransations(List<FruitTransaction> transactions) {
+    public void processAllTransations(List<FruitTransaction> transactions,
+                                      FruitHandlerStrategy fruitHandlerStrategy) {
         for (FruitTransaction transaction : transactions) {
-            FruitHandler fruitHandler = new FruitHandlerStrategy().get(transaction);
+            FruitHandler fruitHandler = fruitHandlerStrategy.get(transaction);
             if (fruitHandler != null) {
                 fruitHandler.doAction(transaction);
             }
