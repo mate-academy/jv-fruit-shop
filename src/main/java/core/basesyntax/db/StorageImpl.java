@@ -1,11 +1,10 @@
-package core.basesyntax.dao;
+package core.basesyntax.db;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductDaoImpl implements ProductDao {
+public class StorageImpl implements Storage {
     @Override
     public void update(FruitTransaction fruitTransaction, int count) {
         Storage.storage.put(fruitTransaction.getFruit(), count);

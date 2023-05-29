@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FormatTransformer;
+import core.basesyntax.service.FormatTransformerService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FormatTransformerImpl implements FormatTransformer {
+public class FormatTransformerServiceImpl implements FormatTransformerService {
     private static final String LINE_SEPARATOR = ",";
     private static final int LENGTH_LINE = 3;
     private static final int INDEX_OF_OPERATION = 0;

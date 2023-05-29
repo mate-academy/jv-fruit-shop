@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.AnalysisFile;
+import core.basesyntax.service.AnalysisFileService;
 import core.basesyntax.strategy.OperationAnalysis;
 import core.basesyntax.strategy.Strategy;
 import java.util.List;
 
-public class AnalysisFileImpl implements AnalysisFile {
+public class AnalysisFileServiceImpl implements AnalysisFileService {
     private final Strategy strategy;
 
-    public AnalysisFileImpl(Strategy strategy) {
+    public AnalysisFileServiceImpl(Strategy strategy) {
         this.strategy = strategy;
     }
 

@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CsvFileWriter;
+import core.basesyntax.service.CsvFileWriterService;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class FileWriterImpl implements CsvFileWriter {
+public class FileWriterServiceImpl implements CsvFileWriterService {
     @Override
     public void writeFile(List<String> lines, String fileName) {
         File file = new File(fileName);
