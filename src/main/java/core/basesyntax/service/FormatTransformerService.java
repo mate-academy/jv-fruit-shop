@@ -5,5 +5,4 @@ import java.util.List;
 
 public interface FormatTransformerService {
     List<FruitTransaction> formatData(List<String> data);
-
 }
