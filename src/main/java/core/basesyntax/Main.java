@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.impl.FruitServiceImpl;
@@ -25,7 +24,6 @@ public class Main {
             = "src/main/resources/report_file.csv";
 
     public static void main(String[] args) {
-        final Map<String, Integer> map = Storage.getStorageMap();
         List<String> linesFromFile = new ReaderServiceImpl().readFromFile(INPUT_FILE);
         final List<FruitTransaction> fruitTransactions =
                 new TransactionServiceImpl().parseTransactions(linesFromFile);

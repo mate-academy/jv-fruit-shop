@@ -13,6 +13,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<FruitTransaction> parseTransactions(List<String> transaction) {
+        transaction.remove(OPERATION_INDEX);
         List<FruitTransaction> newTransaction = new ArrayList<>();
         for (String string : transaction) {
             FruitTransaction fruitTransaction = new FruitTransaction();
