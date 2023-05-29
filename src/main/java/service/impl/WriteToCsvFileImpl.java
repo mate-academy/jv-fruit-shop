@@ -1,11 +1,8 @@
 package service.impl;
 
-import db.FruitsStorage;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import model.OutFileStructure;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import service.WriteToFile;
 
 /*
@@ -14,17 +11,11 @@ This class writes all data from the Fruits Storage to the file.
  */
 public class WriteToCsvFileImpl implements WriteToFile {
     @Override
-    public void writeToCsvFile(String filePath, OutFileStructure structure, FruitsStorage storage) {
-        File file = new File(filePath);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, false))) {
-            bufferedWriter.write(structure.getColumn1() + ","
-                    + structure.getColumn2() + System.lineSeparator());
-            for (var node : storage.getFruitsStorage().entrySet()) {
-                bufferedWriter.write(node.getKey() + ","
-                        + node.getValue() + System.lineSeparator());
-            }
+    public void writeToCsvFile(String filePath, String reportData) {
+        try {
+            Files.writeString(Path.of(filePath), reportData);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file " + filePath, e);
+            throw new RuntimeException("Can't write to file " + filePath, e);
         }
     }
 }

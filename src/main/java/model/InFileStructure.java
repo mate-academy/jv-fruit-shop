@@ -4,19 +4,19 @@ package model;
 //we don't use it in this case, but it would be useful in real life
 //in my implementation I take the structure from the input file.
 public class InFileStructure {
-    private String column1;
-    private String column2;
-    private String column3;
+    private String type;
+    private String fruit;
+    private String quantity;
 
     public InFileStructure() {
-        this.column1 = "";
-        this.column2 = "";
-        this.column3 = "";
+        this.type = "type";
+        this.fruit = "fruit";
+        this.quantity = "quantity";
     }
 
-    public InFileStructure(String column1, String column2, String column3) {
-        this.column1 = column1;
-        this.column2 = column2;
-        this.column3 = column3;
+    public InFileStructure(String type, String fruit, String quantity) {
+        this.type = type;
+        this.fruit = fruit;
+        this.quantity = quantity;
     }
 }

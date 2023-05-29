@@ -1,6 +1,9 @@
 package strategy;
 
+import model.OperationType;
+import service.operation.handlers.OperationHandler;
+
 //Strategy Interface.
 public interface DalyOperationStrategy {
-    Integer getOperation(String type);
+    OperationHandler getOperation(OperationType operationType);
 }

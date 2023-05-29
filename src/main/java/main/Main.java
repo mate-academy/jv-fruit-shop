@@ -4,16 +4,23 @@ import db.FruitsStorage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransactionModel;
+import model.FruitTransaction;
 import model.OperationType;
 import model.OutFileStructure;
 import service.FileParser;
 import service.FruitDalyTransactionsHandler;
+import service.ReportService;
 import service.WriteToFile;
 import service.impl.FileParserImpl;
 import service.impl.FruitDalyTransactionsHandlerImpl;
 import service.impl.ReadFromCsvFileImpl;
+import service.impl.ReportServiceImpl;
 import service.impl.WriteToCsvFileImpl;
+import service.operation.handlers.BalanceOperationHandlerImpl;
+import service.operation.handlers.OperationHandler;
+import service.operation.handlers.PurchaseOperationHandlerImpl;
+import service.operation.handlers.ReturnOperationHandlerImpl;
+import service.operation.handlers.SupplyOperationHandlerImpl;
 import strategy.DalyOperationStrategy;
 import strategy.DalyOperationStrategyImpl;
 
@@ -26,19 +33,24 @@ public class Main {
     public static void main(String[] arg) {
         //read the data from the file
         ReadFromCsvFileImpl readFromCsvFile = new ReadFromCsvFileImpl();
-        String dataFromFile = readFromCsvFile.readFromCsvFile(INPUT_FILE_NAME);
+        List<String> dataFromFile = readFromCsvFile.readFromCsvFile(INPUT_FILE_NAME);
 
         //parse the data to the String
         FileParser fileParser = new FileParserImpl();
-        List<FruitTransactionModel> fruitsTransactionList =
+        List<FruitTransaction> fruitsTransactionList =
                 fileParser.getFruitTransaction(dataFromFile);
 
         //create Map with different operation types
-        Map<OperationType, Integer> operationTypeMap = new HashMap<>();
-        operationTypeMap.put(OperationType.B, 0); //balance
-        operationTypeMap.put(OperationType.S, 1); //supply
-        operationTypeMap.put(OperationType.R, 1); //return
-        operationTypeMap.put(OperationType.P, -1); //purchase
+        Map<OperationType, OperationHandler> operationTypeMap = new HashMap<>();
+        OperationHandler balanceOperationHandler = new BalanceOperationHandlerImpl();
+        OperationHandler purchaseOperationHandler = new PurchaseOperationHandlerImpl();
+        OperationHandler supplyOperationHandler = new SupplyOperationHandlerImpl();
+        OperationHandler returnOperationHandler = new ReturnOperationHandlerImpl();
+
+        operationTypeMap.put(OperationType.BALANCE, balanceOperationHandler);
+        operationTypeMap.put(OperationType.SUPPLY, supplyOperationHandler);
+        operationTypeMap.put(OperationType.RETURN, returnOperationHandler);
+        operationTypeMap.put(OperationType.PURCHASE, purchaseOperationHandler);
 
         //create an instance of Strategy Class and send him the Map
         DalyOperationStrategy dalyOperationStrategy =
@@ -55,9 +67,13 @@ public class Main {
         OutFileStructure outFileStructure =
                 new OutFileStructure(FIRST_REPORT_COLUMN, SECOND_REPORT_COLUMN);
 
+        //prepare data for report
+        ReportService reportService = new ReportServiceImpl();
+        String dataReport = reportService.getDataReport(outFileStructure, fruitCurrentStorage);
+
         //write the report to a new file
         WriteToFile writer = new WriteToCsvFileImpl();
-        writer.writeToCsvFile(OUTPUT_FILE_NAME, outFileStructure, fruitCurrentStorage);
+        writer.writeToCsvFile(OUTPUT_FILE_NAME, dataReport);
 
         //println for your convenience and quick check
         System.out.println(fruitCurrentStorage.getFruitsStorage().toString());

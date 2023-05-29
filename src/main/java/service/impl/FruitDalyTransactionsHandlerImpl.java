@@ -2,24 +2,24 @@ package service.impl;
 
 import db.FruitsStorage;
 import java.util.List;
-import model.FruitTransactionModel;
+import model.FruitTransaction;
 import service.FruitDalyTransactionsHandler;
 import strategy.DalyOperationStrategy;
 
 //this class calculate balance of fruits according to the strategy
-// - received List<FruitTransactionModel> and DalyOperationStrategy
+// - received List<FruitTransaction> and DalyOperationStrategy
 // - return an instance of FruitsStorage
 public class FruitDalyTransactionsHandlerImpl implements FruitDalyTransactionsHandler {
 
     @Override
-    public FruitsStorage getFruitBalance(List<FruitTransactionModel> fruitTransactionModels,
+    public FruitsStorage getFruitBalance(List<FruitTransaction> fruitTransactions,
                                 DalyOperationStrategy strategy) {
         int fruitAmount = 0;
         FruitsStorage fruitsStorage = new FruitsStorage();
 
-        for (var fruit : fruitTransactionModels) {
+        for (var fruit : fruitTransactions) {
             //if there is a balance operation - than just create new instance in the Map
-            if (strategy.getOperation(fruit.getOperationType()) == 0) {
+            if (strategy.getOperation(fruit.getOperationType()).getOperation() == 0) {
                 fruitsStorage.addFruitsStorage(fruit.getName(),
                         fruit.getQuantity());
             } else { //if there are others operations - than calculate the quantity
@@ -32,7 +32,7 @@ public class FruitDalyTransactionsHandlerImpl implements FruitDalyTransactionsHa
                 }
                 //calculate new amount according to the strategy
                 fruitAmount = fruitAmount + fruit.getQuantity()
-                        * strategy.getOperation(fruit.getOperationType());
+                        * strategy.getOperation(fruit.getOperationType()).getOperation();
                 fruitsStorage.addFruitsStorage(fruit.getName(),
                         fruitAmount);
                 fruitAmount = 0;
