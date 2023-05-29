@@ -36,9 +36,9 @@ public class Main {
                                 new PurchaseOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         OperationStrategy strategy = new OperationStrategy(operationHandlerMap);
-        FruitService fruitService = new FruitServiceImpl();
-        fruitService.makeOperationByFruit(fruitTransactions, strategy);
+        FruitService fruitService = new FruitServiceImpl(strategy);
+        fruitService.executeTransactions(fruitTransactions);
         new WriterServiceImpl()
-                .writeToFile(REPORT_FILE, new ReportServiceImpl().createReport(map));
+                .writeToFile(REPORT_FILE, new ReportServiceImpl().createReport());
     }
 }
