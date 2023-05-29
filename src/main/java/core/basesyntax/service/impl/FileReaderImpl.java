@@ -1,37 +1,52 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CSVFileReader;
-
-
-import java.io.BufferedReader;
-import java.io.FileReader;
+import core.basesyntax.exception.InvalidValueExeption;
+import core.basesyntax.service.CsvFileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class FileReaderImpl implements CSVFileReader {
-    private final String fileName;
+public class FileReaderImpl implements CsvFileReader {
+    private static final int FIRST_LINE = 1;
 
-    public FileReaderImpl(String fileName) {
-        this.fileName = fileName;
+    private String fileSource;
+
+    public FileReaderImpl(String fileSource) {
+        this.fileSource = fileSource;
     }
 
+    public String getFileSource() {
+        return fileSource;
+    }
 
     @Override
     public List<String> readFile() {
-        List<String> data = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            int count = 0;
-            while ((line = reader.readLine()) != null) {
-                count++;
-                if (count > 1) {
-                    data.add(line);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        Path filePath = Paths.get(fileSource);
+        if (!Files.exists(filePath)) {
+            throw new RuntimeException("File not found: " + fileSource);
         }
-        return data;
+        try {
+            return Files.lines(filePath)
+                    .skip(FIRST_LINE)
+                    .peek(this::checkData)
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            throw new RuntimeException("Can`t read data from file: " + getFileSource(), e);
+        }
+    }
+
+    private void checkData(String line) {
+        if (!isValidFormat(line)) {
+            throw new InvalidValueExeption("Data from " + getFileSource()
+                    + "is in an incorrect format");
+        }
+    }
+
+    private boolean isValidFormat(String line) {
+        String regex = "^[bpsr],\\w+,[0-9]+$";
+        return line.matches(regex);
     }
 }

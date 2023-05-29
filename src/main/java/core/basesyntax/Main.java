@@ -1,12 +1,17 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.AnalysisFile;
+import core.basesyntax.service.CsvFileWriter;
+import core.basesyntax.service.FormatTransformer;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.AnalysisFileImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.FormatTransformerImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.Strategy;
-
 import java.util.List;
 
 public class Main {
@@ -23,8 +28,8 @@ public class Main {
 
         AnalysisFile analysisFile = new AnalysisFileImpl(operationStrategy);
         analysisFile.process(fruitTransactions);
-        CreateReport reportService = new  CreateReportImpl();
-        CSVFileWriter csvFileWriter = new FileWriterImpl();
+        ReportService reportService = new ReportServiceImpl();
+        CsvFileWriter csvFileWriter = new FileWriterImpl();
         List<String> products = productDao.getAll();
         List<String> report = reportService.createReport(products);
         csvFileWriter.writeFile(report, WRITE_TO_FILE_PATH);

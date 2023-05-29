@@ -6,11 +6,10 @@ import core.basesyntax.strategy.impl.Balance;
 import core.basesyntax.strategy.impl.Purchase;
 import core.basesyntax.strategy.impl.Return;
 import core.basesyntax.strategy.impl.Supply;
-
 import java.util.Map;
 
 public class Strategy {
-    private final Map<FruitTransaction.Operation,  OperationAnalysis> strategy;
+    private final Map<FruitTransaction.Operation, OperationAnalysis> strategy;
     private final ProductDaoImpl productDao;
 
     public Strategy(ProductDaoImpl productDao) {
@@ -25,7 +24,6 @@ public class Strategy {
                 new Purchase(productDao));
         this.productDao = productDao;
     }
-
 
     public OperationAnalysis get(FruitTransaction.Operation operation) {
         return strategy.get(operation);

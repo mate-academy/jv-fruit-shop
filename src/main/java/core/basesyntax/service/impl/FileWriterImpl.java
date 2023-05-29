@@ -1,15 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CSVFileWriter;
-
+import core.basesyntax.service.CsvFileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.List;
 
-public class FileWriterImpl implements CSVFileWriter {
+public class FileWriterImpl implements CsvFileWriter {
     @Override
     public void writeFile(List<String> lines, String fileName) {
         File file = new File(fileName);
@@ -18,7 +16,7 @@ public class FileWriterImpl implements CSVFileWriter {
                 bufferedWriter.write(line + System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file. " + e);
+            throw new RuntimeException("Can't write to file " + file.getName());
         }
     }
 }

@@ -1,9 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransaction;
-
 import java.util.List;
 
-public interface CreateReport {
+public interface ReportService {
     List<String> createReport(List<String> information);
 }

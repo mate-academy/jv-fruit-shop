@@ -4,9 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.AnalysisFile;
 import core.basesyntax.strategy.OperationAnalysis;
 import core.basesyntax.strategy.Strategy;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AnalysisFileImpl implements AnalysisFile {
     private final Strategy strategy;
@@ -18,7 +16,7 @@ public class AnalysisFileImpl implements AnalysisFile {
     @Override
     public void process(List<FruitTransaction> data) {
         data.stream()
-                .forEach(c-> {
+                .forEach(c -> {
                     OperationAnalysis service =
                             strategy.get(c.getOperation());
                     service.processing(c);

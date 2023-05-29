@@ -1,13 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CreateReport;
-import core.basesyntax.strategy.Strategy;
-
+import core.basesyntax.service.ReportService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateReportImpl implements CreateReport {
+public class ReportServiceImpl implements ReportService {
     private static final String TITLE_INFORMATION = "fruit,quantity";
 
     @Override
