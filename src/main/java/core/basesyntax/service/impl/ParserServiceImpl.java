@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ParserServiceImpl implements ParserService {
-    private static final int INDEX_OF_REDUNDANT_LINE = 0;
     private static final String COMA_SEPARATOR = ",";
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT = 1;
@@ -16,8 +15,8 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public List<FruitTransaction> parseReadedData(List<String> infoFromFile) {
-        infoFromFile.remove(INDEX_OF_REDUNDANT_LINE);
         return infoFromFile.stream()
+                .skip(1)
                 .map(this::getFromCsvRow)
                 .collect(Collectors.toList());
     }

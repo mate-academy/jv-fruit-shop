@@ -1,10 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataProcess;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.DataProcessImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -32,14 +34,12 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         ParserService parserService = new ParserServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        DataProcess dataProcess = new DataProcessImpl();
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
         List<String> fruits = readerService.readFromFile(READ_FROM_FILE);
         List<FruitTransaction> parsedFruits = parserService.parseReadedData(fruits);
-        for (FruitTransaction fruitTransaction : parsedFruits) {
-            operationStrategy.getOperationStrategy(fruitTransaction.getOperation())
-                    .handle(fruitTransaction);
-        }
+        dataProcess.addDataToDB(parsedFruits, operationStrategy);
         writerService.writeToFile(WRITE_TO_FILE, reportService.makeReport());
     }
 }
