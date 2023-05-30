@@ -17,7 +17,7 @@ public class Main {
     private static final String INPUT = "src/main/java/resources/input file.csv";
     private static final String REPORT = "src/main/java/resources/report file.csv";
 
-    public Main(String[] args) {
+    public static void main(String[] args) {
         List<String> fromFile = new ReaderServiceImpl()
                 .readFile(INPUT);
         List<FruitTransaction> fruitTransactions = new ConvertServiceImpl()
