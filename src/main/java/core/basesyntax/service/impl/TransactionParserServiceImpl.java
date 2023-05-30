@@ -1,9 +1,8 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.transaction.FruitTransaction;
 import core.basesyntax.service.TransactionParserService;
+import core.basesyntax.transaction.FruitTransaction;
 import core.basesyntax.transaction.Operation;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

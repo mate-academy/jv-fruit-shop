@@ -1,8 +1,8 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.transaction.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.transaction.FruitTransaction;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override

@@ -1,12 +1,12 @@
 package core.basesyntax;
 
-import core.basesyntax.transaction.FruitTransaction;
 import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.QuantityCalculatorServiceImpl;
 import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import core.basesyntax.strategy.impl.OperationHandlerStrategyImpl;
+import core.basesyntax.transaction.FruitTransaction;
 import java.util.List;
 
 public class Application {

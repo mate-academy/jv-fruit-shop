@@ -3,7 +3,6 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 import core.basesyntax.transaction.Operation;
-
 import java.util.Map;
 
 public class OperationHandlerStrategyImpl implements OperationHandlerStrategy {

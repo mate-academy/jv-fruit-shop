@@ -17,10 +17,10 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
             writeFirstLine(bufferedWriter);
             for (Map.Entry<String, Integer> data : Storage.storage.entrySet()) {
-                String stringBuilder = data.getKey() +
-                        COMA_SEPARATOR +
-                        data.getValue() +
-                        System.lineSeparator();
+                String stringBuilder = data.getKey()
+                        + COMA_SEPARATOR
+                        + data.getValue()
+                        + System.lineSeparator();
                 bufferedWriter.write(stringBuilder);
             }
         } catch (IOException e) {
@@ -29,10 +29,10 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     }
 
     private void writeFirstLine(BufferedWriter bufferedWriter) throws IOException {
-        String stringBuilder = FRUIT +
-                COMA_SEPARATOR +
-                QUANTITY +
-                System.lineSeparator();
+        String stringBuilder = FRUIT
+                + COMA_SEPARATOR
+                + QUANTITY
+                + System.lineSeparator();
         bufferedWriter.write(stringBuilder);
     }
 }
