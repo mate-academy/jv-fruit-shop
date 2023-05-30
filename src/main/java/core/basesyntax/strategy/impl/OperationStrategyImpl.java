@@ -7,19 +7,14 @@ import core.basesyntax.strategy.handler.impl.BalanceHandler;
 import core.basesyntax.strategy.handler.impl.PurchaseHandler;
 import core.basesyntax.strategy.handler.impl.ReturnHandler;
 import core.basesyntax.strategy.handler.impl.SupplyHandler;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<FruitTransaction.Operation, OperationHandler> handlerMap;
-
-    public OperationStrategyImpl() {
-        handlerMap = new HashMap<>();
-        handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-    }
+    private final Map<FruitTransaction.Operation, OperationHandler> handlerMap
+            = Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+            FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+            FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+            FruitTransaction.Operation.RETURN, new ReturnHandler());
 
     @Override
     public OperationHandler getHandler(FruitTransaction.Operation operation) {

@@ -17,7 +17,6 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<FruitTransaction> parse(List<String> strings) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
-
         if (strings != null && strings.size() > 1) {
             List<String> dataRows = strings.subList(CSV_TITLE_INDEX, strings.size());
             fruitTransactions = dataRows.stream()
