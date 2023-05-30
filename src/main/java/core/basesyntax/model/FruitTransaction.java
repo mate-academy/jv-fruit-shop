@@ -23,7 +23,6 @@ public class FruitTransaction {
         return operation;
     }
 
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -36,8 +35,13 @@ public class FruitTransaction {
             this.code = code;
         }
 
-        public String getCode() {
-            return code;
+        public static Operation getCode(String code) {
+            for (Operation type : Operation.values()) {
+                if (type.code.equals(code)) {
+                    return type;
+                }
+            }
+            throw new RuntimeException("Incorrect code: " + code);
         }
     }
 }
