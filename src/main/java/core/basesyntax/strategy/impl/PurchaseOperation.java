@@ -3,17 +3,17 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.db.StorageImpl;
 import core.basesyntax.exception.InvalidOperatioExeption;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.OperationAnalysis;
+import core.basesyntax.strategy.OperationProcessor;
 
-public class Purchase implements OperationAnalysis {
+public class PurchaseOperation implements OperationProcessor {
     private StorageImpl storageImpl;
 
-    public Purchase(StorageImpl storageImpl) {
+    public PurchaseOperation(StorageImpl storageImpl) {
         this.storageImpl = storageImpl;
     }
 
     @Override
-    public void processing(FruitTransaction fruitTransaction) {
+    public void process(FruitTransaction fruitTransaction) {
         int currentQuantity = storageImpl.calculateAmount(fruitTransaction);
         if (currentQuantity < fruitTransaction.getQuantity()) {
             throw new InvalidOperatioExeption("Not enough product in stock now. In stock: "

@@ -2,14 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.db.StorageImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.AnalysisFileService;
 import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.FormatTransformerService;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.impl.AnalysisFileServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FormatTransformerServiceImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.Strategy;
 import java.util.List;
@@ -19,20 +19,19 @@ public class Main {
     private static final String SOURCE_PATH = "src/main/resources/Data.csv";
 
     public static void main(String[] args) {
-        List<String> fileReaderService = new FileReaderServiceImpl(SOURCE_PATH).readFile();
+        List<String> linesFromFile = new FileReaderServiceImpl(SOURCE_PATH).readFile();
         FormatTransformerService transformer = new FormatTransformerServiceImpl();
-        List<FruitTransaction> fruitTransactions = transformer.formatData(fileReaderService);
+        List<FruitTransaction> fruitTransactions = transformer.formatData(linesFromFile);
 
         StorageImpl storageImpl = new StorageImpl();
         Strategy operationStrategy = new Strategy(storageImpl);
 
-        AnalysisFileService analysisFile = new AnalysisFileServiceImpl(operationStrategy);
+        FruitService analysisFile = new FruitServiceImpl(operationStrategy);
         analysisFile.process(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();
         CsvFileWriterService csvFileWriter = new FileWriterServiceImpl();
-        List<String> storageImplAll = storageImpl.getAll();
-        List<String> report = reportService.createReport(storageImplAll);
+        List<String> report = reportService.createReport();
         csvFileWriter.writeFile(report, REPORT_PATH);
     }
 }
