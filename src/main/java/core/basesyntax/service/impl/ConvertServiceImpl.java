@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConvertServiceImpl implements ConvertService {
+    public static final String SEPARATOR = ",";
+
     @Override
     public List<FruitTransaction> parseTransactions(List<String> transactions) {
         List<FruitTransaction> pays = new ArrayList<>();
         for (String string : transactions) {
-            String[] split = string.split(",");
+            String[] split = string.split(SEPARATOR);
             FruitTransaction.Operation operation = FruitTransaction
                     .Operation.getCode(split[0]);
             String fruits = split[1];

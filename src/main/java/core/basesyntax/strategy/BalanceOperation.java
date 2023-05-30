@@ -3,10 +3,9 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
-public class Purchase implements OperationHandler {
+public class BalanceOperation implements OperationHandler {
     @Override
     public void operateTransaction(FruitTransaction transaction, Storage storage) {
-        int previousQuantity = storage.get(transaction.getFruit());
-        storage.put(transaction.getFruit(), previousQuantity - transaction.getQuantity());
+        storage.put(transaction.getFruit(), transaction.getQuantity());
     }
 }
