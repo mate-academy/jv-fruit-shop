@@ -26,20 +26,24 @@ public class Main {
     private static final String WRITE_TO_FILE = "src/main/resources/Report.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
-                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
-                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
-                FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = createMap();
         ReaderService readerService = new ReaderServiceImpl();
         ParserService parserService = new ParserServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        DataProcess dataProcess = new DataProcessImpl();
+        DataProcess dataProcess = new DataProcessImpl(operationStrategy);
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
         List<String> fruits = readerService.readFromFile(READ_FROM_FILE);
         List<FruitTransaction> parsedFruits = parserService.parseReadedData(fruits);
-        dataProcess.addDataToDB(parsedFruits, operationStrategy);
+        dataProcess.addDataToDB(parsedFruits);
         writerService.writeToFile(WRITE_TO_FILE, reportService.makeReport());
+    }
+
+    private static Map<FruitTransaction.Operation, OperationHandler> createMap() {
+        return Map.of(
+               FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+               FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
+               FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
+               FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
     }
 }
