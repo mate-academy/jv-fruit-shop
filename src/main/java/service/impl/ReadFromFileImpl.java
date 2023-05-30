@@ -1,12 +1,11 @@
 package service.impl;
 
-import service.ReadFromFile;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import service.ReadFromFile;
 
 public class ReadFromFileImpl implements ReadFromFile {
     @Override

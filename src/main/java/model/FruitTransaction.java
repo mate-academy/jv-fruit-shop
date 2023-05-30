@@ -1,7 +1,5 @@
 package model;
 
-import jdk.dynalink.Operation;
-
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -49,17 +47,17 @@ public class FruitTransaction {
             this.code = code;
         }
 
+        public static Operation getOperationByCode(String code) {
+            for (Operation operation: Operation.values()) {
+                if (code.equals(operation.code)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("Invalid code value: " + code);
+        }
+
         public String getCode() {
             return code;
         }
-    }
-
-    public static Operation getOperationByCode(String code) {
-        for (Operation operation: Operation.values()) {
-            if (code.equals(operation.code)) {
-                return operation;
-            }
-        }
-        throw new RuntimeException("Invalid code value: " + code);
     }
 }
