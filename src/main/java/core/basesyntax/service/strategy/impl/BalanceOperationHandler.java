@@ -1,7 +1,8 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service.strategy.impl;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.strategy.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
     private final ProductDao productDao;
@@ -11,7 +12,7 @@ public class BalanceOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void doOperationByTransaction(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() < 0) {
             throw new RuntimeException("Balance should be positive.");
         }

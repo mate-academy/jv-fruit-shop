@@ -1,7 +1,8 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service.strategy.impl;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.strategy.OperationHandler;
 
 public class PursheOperationHandler implements OperationHandler {
     private final ProductDao productDao;
@@ -11,7 +12,7 @@ public class PursheOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void doOperationByTransaction(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         int curAmount = productDao.getQuantity(fruitTransaction);
         if (curAmount < fruitTransaction.getQuantity()) {
             throw new RuntimeException("Not enough fruits in storage");

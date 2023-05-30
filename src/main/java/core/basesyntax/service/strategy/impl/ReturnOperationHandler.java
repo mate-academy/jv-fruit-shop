@@ -1,17 +1,18 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service.strategy.impl;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.strategy.OperationHandler;
 
-public class SupplyOperationHandler implements OperationHandler {
+public class ReturnOperationHandler implements OperationHandler {
     private final ProductDao productDao;
 
-    public SupplyOperationHandler(ProductDao productDao) {
+    public ReturnOperationHandler(ProductDao productDao) {
         this.productDao = productDao;
     }
 
     @Override
-    public void doOperationByTransaction(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         int totalQuantity = productDao.getQuantity(fruitTransaction)
                 + fruitTransaction.getQuantity();
         if (totalQuantity < 0) {

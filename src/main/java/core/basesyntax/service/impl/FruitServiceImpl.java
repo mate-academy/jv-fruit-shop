@@ -1,9 +1,9 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.service.strategy.OperationHandler;
+import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
@@ -17,7 +17,7 @@ public class FruitServiceImpl implements FruitService {
     public void processTransaction(List<FruitTransaction> data) {
         data.forEach(fruitTransaction -> {
             OperationHandler handler = operationStrategy.getOperation(fruitTransaction);
-            handler.doOperationByTransaction(fruitTransaction);
+            handler.handle(fruitTransaction);
         });
     }
 }
