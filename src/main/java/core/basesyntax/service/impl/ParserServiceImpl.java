@@ -12,10 +12,9 @@ public class ParserServiceImpl implements ParserService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> getFruitFromCsvRow(List<String> dataList) {
+    public List<FruitTransaction> formatData(List<String> dataList) {
         return dataList.stream()
                 .map(line -> line.split(COMA))
-                //.filter(array -> array.length == 3)
                 .map(array -> new FruitTransaction(
                         FruitTransaction.Operation.getByCode(array[OPERATION_INDEX]),
                         array[FRUIT_NAME_INDEX],

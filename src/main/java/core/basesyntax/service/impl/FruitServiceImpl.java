@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
     @Override
-    public void implementationHandler(List<FruitTransaction> fruitFromCsvRow,
+    public void getAllOperationsStrategy(List<FruitTransaction> fruitFromCsvRow,
                                       FruitStrategy fruitStrategy) {
         for (FruitTransaction fruitTransaction : fruitFromCsvRow) {
             OperationsStrategy operationsStrategy =

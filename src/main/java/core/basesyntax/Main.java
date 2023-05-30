@@ -11,13 +11,13 @@ import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.FruitStrategy;
-import core.basesyntax.strategy.FruitStrategyImpl;
 import core.basesyntax.strategy.OperationsStrategy;
-import core.basesyntax.strategy.PurchaseOperation;
-import core.basesyntax.strategy.ReturnOperation;
-import core.basesyntax.strategy.SupplyOperation;
+import core.basesyntax.strategy.impl.BalanceOperation;
+import core.basesyntax.strategy.impl.FruitStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseOperation;
+import core.basesyntax.strategy.impl.ReturnOperation;
+import core.basesyntax.strategy.impl.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,11 +40,11 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         WriterService writeToFileService = new WriterServiceImpl();
 
-        List<String> fruitTransactionList = readerService.readFromFile(SOURCE_PATH);
-        List<FruitTransaction> fruitFromCsvRow =
-                parserService.getFruitFromCsvRow(fruitTransactionList);
+        List<String> fruitList = readerService.readFromFile(SOURCE_PATH);
+        List<FruitTransaction> fruitTransactionList =
+                parserService.formatData(fruitList);
 
-        fruitService.implementationHandler(fruitFromCsvRow, fruitStrategy);
+        fruitService.getAllOperationsStrategy(fruitTransactionList, fruitStrategy);
         writeToFileService.writeToFile(reportService.getReport(), REPORT_PATH);
     }
 }

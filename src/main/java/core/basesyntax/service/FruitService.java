@@ -5,6 +5,6 @@ import core.basesyntax.strategy.FruitStrategy;
 import java.util.List;
 
 public interface FruitService {
-    void implementationHandler(List<FruitTransaction> fruitTransaction,
+    void getAllOperationsStrategy(List<FruitTransaction> fruitTransaction,
                                FruitStrategy fruitStrategy);
 }

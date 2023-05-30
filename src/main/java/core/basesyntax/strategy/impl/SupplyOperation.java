@@ -1,9 +1,10 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationsStrategy;
 
-public class ReturnOperation implements OperationsStrategy {
+public class SupplyOperation implements OperationsStrategy {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
         Integer fruitBalance = Storage.storage.getOrDefault(fruitTransaction.getFruit(), 0);
