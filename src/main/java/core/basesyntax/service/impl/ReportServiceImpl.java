@@ -1,11 +1,11 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
-import db.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
-import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String DEFAULT_TITLE = "fruit,quantity\n";
+    private static final String DEFAULT_TITLE = "fruit,quantity" + System.lineSeparator();
     private static final String COMA = ",";
 
     @Override

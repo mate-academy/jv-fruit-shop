@@ -1,32 +1,26 @@
-package model;
+package core.basesyntax.model;
 
-public class Fruit {
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
 
-    public Operation getOperation() {
-        return operation;
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
+    public Operation getOperation() {
+        return operation;
     }
 
     public String getFruit() {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public enum Operation {
@@ -45,8 +39,8 @@ public class Fruit {
             return code;
         }
 
-        public static Fruit.Operation getByCode(String code) {
-            for (Fruit.Operation operation : Fruit.Operation.values()) {
+        public static FruitTransaction.Operation getByCode(String code) {
+            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
                 if (operation.getCode().equals(code)) {
                     return operation;
                 }
@@ -57,7 +51,7 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{"
+        return "FruitTransaction{"
                 + "operation=" + operation
                 + ", fruit='" + fruit + '\''
                 + ", quantity=" + quantity
