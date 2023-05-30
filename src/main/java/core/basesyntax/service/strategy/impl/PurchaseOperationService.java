@@ -6,8 +6,9 @@ import core.basesyntax.storage.TemporaryStorage;
 
 public class PurchaseOperationService implements OperationService {
     @Override
-    public void calculateByOperation(FruitTransaction fruitTransaction) {
-        if (isOnBalanceSheet(fruitTransaction) && isEnoughToPurchase(fruitTransaction)) {
+    public void performOperation(FruitTransaction fruitTransaction) {
+        checkPurchasingPossibility(fruitTransaction);
+        if (isOnBalanceSheet(fruitTransaction)) {
             int oldValue = TemporaryStorage.temporaryStorage.get(fruitTransaction.getFruit());
             int newValue = oldValue - fruitTransaction.getQuantity();
             TemporaryStorage.temporaryStorage.put(fruitTransaction.getFruit(), newValue);
@@ -18,8 +19,12 @@ public class PurchaseOperationService implements OperationService {
         }
     }
 
-    private boolean isEnoughToPurchase(FruitTransaction fruitTransaction) {
-        return fruitTransaction.getQuantity()
-                <= TemporaryStorage.temporaryStorage.get(fruitTransaction.getFruit());
+    private void checkPurchasingPossibility(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getQuantity()
+                > TemporaryStorage.temporaryStorage.get(fruitTransaction.getFruit())) {
+            throw new RuntimeException("You can't purchase \"" + fruitTransaction.getQuantity()
+                    + " units of " + fruitTransaction.getFruit()
+                    + "\". There is not enough such fruits on balance");
+        }
     }
 }

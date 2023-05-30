@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String WORDS_SEPARATOR = ",";
-    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @Override
     public String createReport(Map<String, Integer> storage) {
@@ -14,7 +13,7 @@ public class ReportServiceImpl implements ReportService {
             stringBuilder.append(entry.getKey())
                     .append(WORDS_SEPARATOR)
                     .append(entry.getValue())
-                    .append(LINE_SEPARATOR);
+                    .append(System.lineSeparator());
         }
         return stringBuilder.toString().trim();
     }

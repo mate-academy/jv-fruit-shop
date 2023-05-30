@@ -10,6 +10,7 @@ public class SurplusCalculatorImpl implements SurplusCalculator {
     @Override
     public void calculateData(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.forEach(fruitTransaction ->
-                new OperationStrategy().makeOperation(fruitTransaction));
+                new OperationStrategy().getOperation(fruitTransaction)
+                        .performOperation(fruitTransaction));
     }
 }

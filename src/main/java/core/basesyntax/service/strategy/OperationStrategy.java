@@ -8,15 +8,13 @@ import core.basesyntax.service.strategy.impl.SupplyOperationService;
 import java.util.Map;
 
 public class OperationStrategy {
-    private final Map<FruitTransaction.Operation, OperationService> map = Map.of(
+    private final Map<FruitTransaction.Operation, OperationService> operationServiceMap = Map.of(
             FruitTransaction.Operation.BALANCE, new BalanceOperationService(),
             FruitTransaction.Operation.SUPPLY, new SupplyOperationService(),
             FruitTransaction.Operation.PURCHASE, new PurchaseOperationService(),
             FruitTransaction.Operation.RETURN, new ReturnOperationService());
 
-    public void makeOperation(FruitTransaction fruitTransaction) {
-        OperationService operationService = map.get(fruitTransaction.getOperation());
-        operationService.calculateByOperation(fruitTransaction);
-
+    public OperationService getOperation(FruitTransaction fruitTransaction) {
+        return operationServiceMap.get(fruitTransaction.getOperation());
     }
 }

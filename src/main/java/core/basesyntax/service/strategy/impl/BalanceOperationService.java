@@ -6,7 +6,7 @@ import core.basesyntax.storage.TemporaryStorage;
 
 public class BalanceOperationService implements OperationService {
     @Override
-    public void calculateByOperation(FruitTransaction fruitTransaction) {
+    public void performOperation(FruitTransaction fruitTransaction) {
         if (isOnBalanceSheet(fruitTransaction)) {
             throw new RuntimeException("Storage already have data for \""
                     + fruitTransaction.getFruit()

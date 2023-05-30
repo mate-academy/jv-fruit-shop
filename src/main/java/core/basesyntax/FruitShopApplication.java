@@ -27,8 +27,8 @@ public class FruitShopApplication {
         SurplusCalculator surplusCalculator = new SurplusCalculatorImpl();
         surplusCalculator.calculateData(dailyOperations);
 
-        ReportService storageParser = new ReportServiceImpl();
-        String report = storageParser.createReport(TemporaryStorage.temporaryStorage);
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.createReport(TemporaryStorage.temporaryStorage);
 
         DailyReportFileWriter dailyReportFileWriter = new DailyReportFileWriterImpl();
         dailyReportFileWriter.writeDailyStatistic(FILE_FOR_WRITE_PATH, report);

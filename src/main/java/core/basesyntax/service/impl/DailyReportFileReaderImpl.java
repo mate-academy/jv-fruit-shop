@@ -19,7 +19,6 @@ public class DailyReportFileReaderImpl implements DailyReportFileReader {
                     .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file: " + filePath, e);
-
         }
     }
 }

@@ -6,7 +6,7 @@ import core.basesyntax.storage.TemporaryStorage;
 
 public class SupplyOperationService implements OperationService {
     @Override
-    public void calculateByOperation(FruitTransaction fruitTransaction) {
+    public void performOperation(FruitTransaction fruitTransaction) {
         if (isOnBalanceSheet(fruitTransaction)) {
             int oldValue = TemporaryStorage.temporaryStorage.get(fruitTransaction.getFruit());
             int newValue = oldValue + fruitTransaction.getQuantity();
