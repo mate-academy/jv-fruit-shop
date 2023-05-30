@@ -1,6 +1,5 @@
 package model;
 
-//ENUM for operation types.
 public enum OperationType {
     BALANCE("b"),
     SUPPLY("s"),

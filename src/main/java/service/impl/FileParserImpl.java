@@ -6,13 +6,6 @@ import model.FruitTransaction;
 import model.InFileStructure;
 import service.FileParser;
 
-/*
-The main idea of this class is to parse the data from the file
-and to create new instances of FruitTransaction class.
-
-- receive String textBox from ReadFromCsvFileImpl
-- return List<FruitTransaction>
- */
 public class FileParserImpl implements FileParser {
     private static final String ONLY_LETTERS_SEPARATOR = "\\W+";
     private static final byte TYPE = 0;
@@ -27,7 +20,6 @@ public class FileParserImpl implements FileParser {
 
         for (var line : data) {
             String[] splitString = line.split(ONLY_LETTERS_SEPARATOR);
-            //try to separate first line with columns names
             if (lineNumber < 1) {
                 inFileStructure = new InFileStructure(splitString[TYPE],
                         splitString[FRUIT], splitString[QUANTITY]);

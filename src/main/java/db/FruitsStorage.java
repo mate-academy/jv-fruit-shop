@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-//DB for fruits
 public class FruitsStorage {
     private final Map<String, Integer> fruitsStorage;
 

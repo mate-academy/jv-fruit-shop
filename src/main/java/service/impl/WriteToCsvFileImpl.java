@@ -5,10 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import service.WriteToFile;
 
-/*
-This class writes all data from the Fruits Storage to the file.
-- receive String filePath, OutFileStructure, FruitsStorage
- */
 public class WriteToCsvFileImpl implements WriteToFile {
     @Override
     public void writeToCsvFile(String filePath, String reportData) {

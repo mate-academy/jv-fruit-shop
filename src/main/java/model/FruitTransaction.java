@@ -1,6 +1,5 @@
 package model;
 
-//this is a class to create a model for each line from a file.
 public class FruitTransaction {
     private OperationType operationType;
     private String name;

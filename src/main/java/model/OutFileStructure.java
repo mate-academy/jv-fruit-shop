@@ -1,6 +1,5 @@
 package model;
 
-//output file structure.
 public class OutFileStructure {
     private String fruit;
     private String quantity;
