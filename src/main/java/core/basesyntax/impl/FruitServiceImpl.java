@@ -17,7 +17,7 @@ public class FruitServiceImpl implements FruitService {
     public void processTransaction(List<FruitTransaction> data) {
         data.forEach(fruitTransaction -> {
             OperationHandler handler = operationStrategy.getOperation(fruitTransaction);
-            handler.operationByTransaction(fruitTransaction);
+            handler.doOperationByTransaction(fruitTransaction);
         });
     }
 }

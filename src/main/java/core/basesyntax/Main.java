@@ -2,17 +2,17 @@ package core.basesyntax;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProjectDaoImpl;
+import core.basesyntax.impl.CsvFileReaderServiceImpl;
+import core.basesyntax.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.impl.FruitServiceImpl;
-import core.basesyntax.impl.ParseDataFromServiceImpl;
-import core.basesyntax.impl.ReadFromCsvSercieImpl;
+import core.basesyntax.impl.ParserServiceImpl;
 import core.basesyntax.impl.ReportServiceImpl;
-import core.basesyntax.impl.WriteToCsvServiceImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.CsvFileReaderService;
+import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.ParseDataFromFileService;
-import core.basesyntax.service.ReadFromCsvService;
+import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.WriteToCsvService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
@@ -21,10 +21,10 @@ public class Main {
     private static final String WRITE_FILE = "src/Report.csv";
 
     public static void main(String[] args) {
-        ReadFromCsvService readFromCsvService = new ReadFromCsvSercieImpl();
+        CsvFileReaderService readFromCsvService = new CsvFileReaderServiceImpl();
         List<String> linesFromFile = readFromCsvService.readLines(INPUT_FILE);
 
-        ParseDataFromFileService parseDataFromFile = new ParseDataFromServiceImpl();
+        ParserService parseDataFromFile = new ParserServiceImpl();
         List<FruitTransaction> fruitTransactions = parseDataFromFile.parseData(linesFromFile);
 
         ProductDao productDao = new ProjectDaoImpl();
@@ -34,7 +34,7 @@ public class Main {
         fruitService.processTransaction(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();
-        WriteToCsvService writeToCsvService = new WriteToCsvServiceImpl();
+        CsvFileWriterService writeToCsvService = new CsvFileWriterServiceImpl();
         writeToCsvService.writeToFile(WRITE_FILE, reportService.createReport(productDao.getAll()));
     }
 }

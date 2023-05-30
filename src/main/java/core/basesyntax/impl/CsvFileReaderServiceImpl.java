@@ -1,12 +1,12 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.service.ReadFromCsvService;
+import core.basesyntax.service.CsvFileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadFromCsvSercieImpl implements ReadFromCsvService {
+public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     private static final int HEADER_ROW = 0;
 
     @Override

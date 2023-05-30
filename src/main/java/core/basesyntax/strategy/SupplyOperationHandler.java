@@ -11,7 +11,7 @@ public class SupplyOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void operationByTransaction(FruitTransaction fruitTransaction) {
+    public void doOperationByTransaction(FruitTransaction fruitTransaction) {
         int totalQuantity = productDao.getQuantity(fruitTransaction)
                 + fruitTransaction.getQuantity();
         if (totalQuantity < 0) {

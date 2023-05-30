@@ -12,6 +12,6 @@ public class ReportServiceImpl implements ReportService {
         for (String line: data) {
             builder.append(line).append(System.lineSeparator());
         }
-        return builder.toString();
+        return builder.toString().trim();
     }
 }

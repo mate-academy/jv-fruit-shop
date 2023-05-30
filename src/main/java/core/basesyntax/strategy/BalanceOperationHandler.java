@@ -11,7 +11,7 @@ public class BalanceOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void operationByTransaction(FruitTransaction fruitTransaction) {
+    public void doOperationByTransaction(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() < 0) {
             throw new RuntimeException("Balance should be positive.");
         }

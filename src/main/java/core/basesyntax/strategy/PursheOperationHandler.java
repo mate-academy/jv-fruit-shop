@@ -11,7 +11,7 @@ public class PursheOperationHandler implements OperationHandler {
     }
 
     @Override
-    public void operationByTransaction(FruitTransaction fruitTransaction) {
+    public void doOperationByTransaction(FruitTransaction fruitTransaction) {
         int curAmount = productDao.getQuantity(fruitTransaction);
         if (curAmount < fruitTransaction.getQuantity()) {
             throw new RuntimeException("Not enough fruits in storage");

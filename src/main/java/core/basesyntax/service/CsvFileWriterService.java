@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface WriteToCsvService {
+public interface CsvFileWriterService {
     void writeToFile(String source, String data);
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProjectDaoImpl implements ProductDao {
+    private static final String CONNECT_SYMBOL = ",";
+
     @Override
     public void update(FruitTransaction fruitTransaction, int count) {
         FruitStorage.Storage_Map.put(fruitTransaction.getFruit(), count);
@@ -18,9 +20,8 @@ public class ProjectDaoImpl implements ProductDao {
 
     @Override
     public List<String> getAll() {
-        String connectSymbol = ",";
         return FruitStorage.Storage_Map.entrySet().stream()
-                .map(entry -> entry.getKey() + connectSymbol + entry.getValue())
+                .map(entry -> entry.getKey() + CONNECT_SYMBOL + entry.getValue())
                 .collect(Collectors.toList());
     }
 }
