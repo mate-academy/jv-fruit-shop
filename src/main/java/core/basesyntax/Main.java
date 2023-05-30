@@ -1,13 +1,13 @@
 package core.basesyntax;
 
 import core.basesyntax.db.StorageImpl;
-import core.basesyntax.impl.AnalysisOperationImpl;
+import core.basesyntax.impl.AnalysisServiceImpl;
 import core.basesyntax.impl.ConvertServiceImpl;
 import core.basesyntax.impl.ReaderServiceImpl;
 import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.impl.WriterServiceImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.AnalysisOperation;
+import core.basesyntax.service.AnalysisService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.strategy.OperationStrategy;
@@ -23,8 +23,8 @@ public class Main {
                 = new ConvertServiceImpl().convertData(filedReader);
         StorageImpl storage = new StorageImpl();
         OperationStrategy strategy = new OperationStrategy(storage);
-        AnalysisOperation analysisOperation = new AnalysisOperationImpl(strategy);
-        analysisOperation.processing(fruitTransactions);
+        AnalysisService analysisService = new AnalysisServiceImpl(strategy);
+        analysisService.processing(fruitTransactions);
         ReportService reportService = new ReportServiceImpl();
         List<String> report = reportService.report(storage.getAll());
         WriterService writerService = new WriterServiceImpl();
