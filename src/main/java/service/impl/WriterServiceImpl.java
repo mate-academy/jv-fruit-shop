@@ -3,9 +3,9 @@ package service.impl;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import service.WriteToFile;
+import service.WriterService;
 
-public class WriteToCsvFileImpl implements WriteToFile {
+public class WriterServiceImpl implements WriterService {
     @Override
     public void writeToCsvFile(String filePath, String reportData) {
         try {

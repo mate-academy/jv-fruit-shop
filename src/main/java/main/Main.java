@@ -7,15 +7,15 @@ import java.util.Map;
 import model.FruitTransaction;
 import model.OperationType;
 import model.OutFileStructure;
-import service.FileParser;
 import service.FruitShopService;
+import service.ParserService;
 import service.ReportService;
-import service.WriteToFile;
-import service.impl.FileParserImpl;
+import service.WriterService;
 import service.impl.FruitShopServiceImpl;
-import service.impl.ReadFromCsvFileImpl;
+import service.impl.ParserServiceImpl;
+import service.impl.ReaderServiceImpl;
 import service.impl.ReportServiceImpl;
-import service.impl.WriteToCsvFileImpl;
+import service.impl.WriterServiceImpl;
 import strategy.OperationHandler;
 import strategy.OperationStrategy;
 import strategy.impl.BalanceOperationHandlerImpl;
@@ -31,7 +31,7 @@ public class Main {
     private static final String SECOND_REPORT_COLUMN = "quantity";
 
     public static void main(String[] arg) {
-        ReadFromCsvFileImpl readFromCsvFile = new ReadFromCsvFileImpl();
+        ReaderServiceImpl readFromCsvFile = new ReaderServiceImpl();
         List<String> dataFromFile = readFromCsvFile.readFromCsvFile(INPUT_FILE_NAME);
 
         Map<OperationType, OperationHandler> operationTypeMap = new HashMap<>();
@@ -49,8 +49,9 @@ public class Main {
         OperationStrategy operationStrategy =
                 new OperationStrategyImpl(operationTypeMap);
 
-        FileParser fileParser = new FileParserImpl();
-        List<FruitTransaction> fruitsTransactionList = fileParser.getFruitTransaction(dataFromFile);
+        ParserService parserService = new ParserServiceImpl();
+        List<FruitTransaction> fruitsTransactionList = parserService
+                .getFruitTransaction(dataFromFile);
 
         FruitShopService fruitShopService =
                 new FruitShopServiceImpl(operationStrategy);
@@ -64,7 +65,7 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         String dataReport = reportService.getDataReport(outFileStructure, fruitCurrentStorage);
 
-        WriteToFile writer = new WriteToCsvFileImpl();
+        WriterService writer = new WriterServiceImpl();
         writer.writeToCsvFile(OUTPUT_FILE_NAME, dataReport);
 
         System.out.println(fruitCurrentStorage.getFruitsStorage().toString());

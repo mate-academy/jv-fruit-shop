@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
 import model.OperationType;
-import service.FileParser;
+import service.ParserService;
 
-public class FileParserImpl implements FileParser {
+public class ParserServiceImpl implements ParserService {
     private static final String ONLY_LETTERS_SEPARATOR = "\\W+";
     private static final byte TYPE = 0;
     private static final byte FRUIT = 1;
