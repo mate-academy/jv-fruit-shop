@@ -2,11 +2,13 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.CalculatorImpl;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
-import core.basesyntax.strategy.impl.OperationHandlerStrategyImpl;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.List;
 
 public class Main {
@@ -20,10 +22,11 @@ public class Main {
                 .getTransactions(new FileReaderImpl()
                         .readDataFormFile(VALID_READ_FROM_FILE));
 
-        new CalculatorImpl(new OperationHandlerStrategyImpl())
+        new CalculatorImpl(new OperationStrategyImpl())
                 .calculate(fruitTransactions);
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeDataToFile(WRITE_TO_FILE);
+        ReportService reportService = new ReportServiceImpl();
+        fileWriter.writeDataToFile(WRITE_TO_FILE, reportService.createReport());
     }
 }
