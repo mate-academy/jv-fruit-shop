@@ -18,7 +18,6 @@ import core.basesyntax.service.transaction.SupplyHandlerImpl;
 import core.basesyntax.service.transaction.TransactionHandler;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

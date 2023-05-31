@@ -2,7 +2,6 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.transaction.TransactionHandler;
-
 import java.util.Map;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
@@ -12,6 +11,7 @@ public class TransactionStrategyImpl implements TransactionStrategy {
             TransactionHandler> transactionHandlersMap) {
         this.transactionHandlersMap = transactionHandlersMap;
     }
+
     @Override
     public TransactionHandler get(FruitTransaction.Operation operation) {
         return transactionHandlersMap.get(operation);

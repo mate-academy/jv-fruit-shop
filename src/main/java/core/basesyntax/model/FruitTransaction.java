@@ -6,7 +6,7 @@ public class FruitTransaction {
     private int quantity;
 
     private FruitTransaction(Operation operation, String fruit, int quantity) {
-        this.operation =  operation;
+        this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
@@ -59,11 +59,11 @@ public class FruitTransaction {
 
     @Override
     public String toString() {
-        return "FruitTransaction{" +
-                "operation=" + operation +
-                ", fruit='" + fruit + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "FruitTransaction{"
+                + "operation=" + operation
+                + ", fruit='" + fruit + '\''
+                + ", quantity=" + quantity
+                + '}';
     }
 
     private static Operation getOperationByCode(String operationCode) {
