@@ -1,17 +1,16 @@
 package core.basesyntax;
 
-import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import service.FruitShopService;
-import service.ReadFromFile;
+import service.ReaderService;
 import service.ReportService;
 import service.TransactionService;
 import service.WriterService;
 import service.impl.FruitShopServiceImpl;
-import service.impl.ReadFromFileImpl;
+import service.impl.ReaderServiceImpl;
 import service.impl.ReportServiceImpl;
 import service.impl.TransactionServiceImpl;
 import service.impl.WriterServiceImpl;
@@ -39,16 +38,15 @@ public class Main {
                 new ReturnOperation());
 
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
-        ReadFromFile readerService = new ReadFromFileImpl();
+        ReaderService readerService = new ReaderServiceImpl();
         TransactionService fruitTransform = new TransactionServiceImpl();
-        FruitShopService fruitShopService = new FruitShopServiceImpl();
+        FruitShopService fruitShopService = new FruitShopServiceImpl(strategy);
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
-        Storage storage = new Storage();
 
         List<String> list = readerService.readFromFile(INPUT_DATA_FILE);
         List<FruitTransaction> fruitTransactions = fruitTransform.parseTransactions(list);
-        fruitShopService.processOperation(fruitTransactions, strategy, storage);
+        fruitShopService.processOperation(fruitTransactions);
         String reportList = reportService.createReport();
         writerService.writeToFile(REPORT_DATA_FILE,reportList);
     }
