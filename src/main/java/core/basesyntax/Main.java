@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.imps.ParserServiceImp;
 import core.basesyntax.services.imps.ReaderServiceImp;
 import core.basesyntax.services.imps.ReportServiceImp;
-import core.basesyntax.services.imps.StorageServiceImp;
+import core.basesyntax.services.imps.FruitServiceImp;
 import core.basesyntax.services.imps.WriterServiceImp;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -21,7 +21,7 @@ public class Main {
         new OperationStrategy(operationHandlerMap);
         List<FruitTransaction> transactions = new ParserServiceImp()
                 .parse(new ReaderServiceImp().readFromFile(SOURCE_FILE_PATH));
-        new StorageServiceImp()
+        new FruitServiceImp()
                 .store(transactions, operationHandlerMap);
         new WriterServiceImp()
                 .writeToFile(REPORT_FILE_PATH, new ReportServiceImp().createReportString());

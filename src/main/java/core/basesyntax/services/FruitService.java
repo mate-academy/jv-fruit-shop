@@ -5,7 +5,7 @@ import core.basesyntax.strategy.OperationHandler;
 import java.util.List;
 import java.util.Map;
 
-public interface StorageService {
+public interface FruitService {
     void store(List<FruitTransaction> transactions,
                Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap);
 }
