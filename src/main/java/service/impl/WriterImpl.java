@@ -8,7 +8,7 @@ import service.Writer;
 
 public class WriterImpl implements Writer {
     private static final String NEW_HEADER = "fruit,quantity";
-    private Map<String, Integer> mapToWrite;
+    private final Map<String, Integer> mapToWrite;
 
     public WriterImpl(Map<String, Integer> mapToWrite) {
         this.mapToWrite = mapToWrite;

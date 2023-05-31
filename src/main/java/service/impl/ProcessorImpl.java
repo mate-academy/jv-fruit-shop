@@ -7,7 +7,7 @@ import service.operation.OperationHandler;
 import strategy.Strategy;
 
 public class ProcessorImpl implements Processor {
-    private Strategy strategy;
+    private final Strategy strategy;
 
     public ProcessorImpl(Strategy strategy) {
         this.strategy = strategy;
