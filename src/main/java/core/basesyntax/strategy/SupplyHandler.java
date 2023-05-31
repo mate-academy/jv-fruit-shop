@@ -1,11 +1,11 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 
 public class SupplyHandler implements OperationHandler {
     @Override
-    public void toStorage(FruitTransaction transaction) {
+    public void calculate(FruitTransaction transaction) {
         Storage.fruitInventory
                 .put(transaction.getFruit(), Storage.fruitInventory.get(transaction.getFruit())
                         + transaction.getQuantity());

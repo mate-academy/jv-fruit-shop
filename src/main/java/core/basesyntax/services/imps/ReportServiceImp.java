@@ -1,6 +1,6 @@
 package core.basesyntax.services.imps;
 
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.services.ReportService;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

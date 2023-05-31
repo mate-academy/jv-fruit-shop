@@ -1,12 +1,12 @@
 package core.basesyntax.services.imps;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.services.TransactionService;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.services.ParserService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TransactionServiceImp implements TransactionService {
+public class ParserServiceImp implements ParserService {
     private static final String LINE_SPLITERATOR = "/";
     private static final String SPLITERATOR = ",";
     private static final int HEADLINES_INDEX = 1;
@@ -15,7 +15,7 @@ public class TransactionServiceImp implements TransactionService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> transactionProcessor(String fromFile) {
+    public List<FruitTransaction> parse(String fromFile) {
         return Arrays.stream(fromFile.split(LINE_SPLITERATOR))
                 .skip(HEADLINES_INDEX)
                 .map(line -> line.split(SPLITERATOR))

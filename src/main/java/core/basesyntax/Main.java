@@ -1,8 +1,10 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.services.imps.ParserServiceImp;
 import core.basesyntax.services.imps.ReaderServiceImp;
 import core.basesyntax.services.imps.ReportServiceImp;
-import core.basesyntax.services.imps.TransactionServiceImp;
+import core.basesyntax.services.imps.StorageServiceImp;
 import core.basesyntax.services.imps.WriterServiceImp;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -15,13 +17,12 @@ public class Main {
     private static final String REPORT_FILE_PATH = "src\\main\\resources\\report_file.csv";
 
     public static void main(String[] args) {
-        List<FruitTransaction> transactions = new TransactionServiceImp()
-                .transactionProcessor(new ReaderServiceImp().readFromFile(SOURCE_FILE_PATH));
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         new OperationStrategy(operationHandlerMap);
-        transactions
-                .forEach(t -> operationHandlerMap
-                        .get(t.getOperation()).toStorage(t));
+        List<FruitTransaction> transactions = new ParserServiceImp()
+                .parse(new ReaderServiceImp().readFromFile(SOURCE_FILE_PATH));
+        new StorageServiceImp()
+                .store(transactions, operationHandlerMap);
         new WriterServiceImp()
                 .writeToFile(REPORT_FILE_PATH, new ReportServiceImp().createReportString());
     }
