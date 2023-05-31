@@ -8,8 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FileWriterImpl implements FileWriter {
-    private static final String FRUIT = "fruit";
-    private static final String QUANTITY = "quantity";
+    private static final String FIRST_LINE = "fruit,quantity";
     private static final String COMMA_SEPARATOR = ",";
 
     @Override
@@ -32,7 +31,7 @@ public class FileWriterImpl implements FileWriter {
     }
 
     private void writeFirstLineToFile(BufferedWriter bufferedWriter) throws IOException {
-        String firstLine = FRUIT + COMMA_SEPARATOR + QUANTITY + System.lineSeparator();
+        String firstLine = FIRST_LINE + System.lineSeparator();
         bufferedWriter.write(firstLine);
     }
 }
