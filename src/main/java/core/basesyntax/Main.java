@@ -45,6 +45,5 @@ public class Main {
 
         String createdReport = reportService.createReport();
         writerService.writeToFile(OUTPUT_CSV_FILE, createdReport);
-
     }
 }

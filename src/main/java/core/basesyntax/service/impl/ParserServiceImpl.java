@@ -15,8 +15,8 @@ public class ParserServiceImpl implements ParserService {
     public List<FruitTransaction> parse(List<String> fruitTransactions) {
         return fruitTransactions.stream()
                 .map(line -> line.split(SEPARATOR))
-                .map(lineArr -> new FruitTransaction(FruitTransaction.Operation
-                        .getByCode(lineArr[OPERATION]),
+                .map(lineArr -> new FruitTransaction(
+                        FruitTransaction.Operation.getByCode(lineArr[OPERATION]),
                         lineArr[FRUIT_NAME],
                         Integer.parseInt(lineArr[QUANTITY])))
                 .collect(Collectors.toList());
