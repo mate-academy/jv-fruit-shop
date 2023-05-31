@@ -8,7 +8,7 @@ public class SupplyOperationHandlerImpl implements OperationHandler {
     private static final int INVALID_QUANTITY = 0;
 
     @Override
-    public void calculateData(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() < INVALID_QUANTITY) {
             throw new RuntimeException("Quantity can`t be less then " + INVALID_QUANTITY);
         }

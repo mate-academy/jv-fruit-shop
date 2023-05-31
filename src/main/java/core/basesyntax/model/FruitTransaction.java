@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private final Operation operation;
     private final String fruit;
@@ -37,6 +39,14 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation getByCode(String code) {
+            return Arrays.stream(Operation.values())
+                    .filter(o -> o.getCode().equals(code))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("Illegal operation code: "
+                            + code));
         }
     }
 }

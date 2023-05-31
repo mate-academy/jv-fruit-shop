@@ -16,6 +16,6 @@ public class FruitQuantityCalculatorImpl implements FruitQuantityCalculator {
     public void calculateQuantity(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.forEach(f -> operationHandlerStrategy
                         .getOperationStrategy(f.getOperation())
-                        .calculateData(f));
+                        .handle(f));
     }
 }
