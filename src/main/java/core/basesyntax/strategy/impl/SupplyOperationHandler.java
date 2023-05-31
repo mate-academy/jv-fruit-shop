@@ -6,15 +6,11 @@ import core.basesyntax.transaction.FruitTransaction;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
-    public void doCalculation(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         int quantity = fruitTransaction.getQuantity();
         String fruit = fruitTransaction.getFruit();
-        if (Storage.storage.containsKey(fruit)) {
-            int newQuantity = Storage.storage.get(fruit)
-                    + quantity;
-            Storage.storage.put(fruit, newQuantity);
-        } else {
-            Storage.storage.put(fruit, quantity);
-        }
+        int currentQuantity = Storage.FRUITS.getOrDefault(fruit, 0);
+        int newQuantity = currentQuantity + quantity;
+        Storage.FRUITS.put(fruit, newQuantity);
     }
 }

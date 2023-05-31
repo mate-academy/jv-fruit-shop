@@ -17,7 +17,7 @@ public class QuantityCalculatorServiceImpl implements QuantityCalculatorService 
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler handler = operationServiceStrategy
                     .getOperationService(fruitTransaction.getOperation());
-            handler.doCalculation(fruitTransaction);
+            handler.handle(fruitTransaction);
         }
     }
 }

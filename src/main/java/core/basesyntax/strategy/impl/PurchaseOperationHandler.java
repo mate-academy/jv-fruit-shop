@@ -6,14 +6,14 @@ import core.basesyntax.transaction.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public void doCalculation(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int quantity = fruitTransaction.getQuantity();
-        if (!Storage.storage.containsKey(fruit) || Storage.storage.get(fruit) - quantity < 0) {
+        int currentQuantity = Storage.FRUITS.getOrDefault(fruit, 0);
+        if (currentQuantity < quantity) {
             throw new RuntimeException("Quantity is negative for fruit: " + fruit);
-        } else {
-            int newQuantity = Storage.storage.get(fruit) - quantity;
-            Storage.storage.put(fruit, newQuantity);
         }
+        int newQuantity = currentQuantity - quantity;
+        Storage.FRUITS.put(fruit, newQuantity);
     }
 }

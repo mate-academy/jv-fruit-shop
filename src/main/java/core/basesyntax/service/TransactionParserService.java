@@ -4,5 +4,5 @@ import core.basesyntax.transaction.FruitTransaction;
 import java.util.List;
 
 public interface TransactionParserService {
-    List<FruitTransaction> getTransactions(List<String> linesFormFile);
+    List<FruitTransaction> parse(List<String> rawData);
 }

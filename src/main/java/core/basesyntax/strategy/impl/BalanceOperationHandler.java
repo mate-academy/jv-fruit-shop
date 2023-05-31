@@ -6,15 +6,10 @@ import core.basesyntax.transaction.FruitTransaction;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override
-    public void doCalculation(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int quantity = fruitTransaction.getQuantity();
-        if (Storage.storage.containsKey(fruit)) {
-            int newQuantity = Storage.storage.get(fruit)
-                    + quantity;
-            Storage.storage.put(fruit, newQuantity);
-        } else {
-            Storage.storage.put(fruit, quantity);
-        }
+        int newQuantity = Storage.FRUITS.getOrDefault(fruit, 0) + quantity;
+        Storage.FRUITS.put(fruit, newQuantity);
     }
 }

@@ -6,12 +6,11 @@ import core.basesyntax.transaction.Operation;
 import java.util.Map;
 
 public class OperationHandlerStrategyImpl implements OperationHandlerStrategy {
-    private final Map<Operation, OperationHandler> strategies = Map.of(
-            Operation.BALANCE, new BalanceOperationHandler(),
-            Operation.PURCHASE, new PurchaseOperationHandler(),
-            Operation.RETURN, new ReturnOperationHandler(),
-            Operation.SUPPLY, new SupplyOperationHandler()
-    );
+    private final Map<Operation, OperationHandler> strategies;
+
+    public OperationHandlerStrategyImpl(Map<Operation, OperationHandler> strategies) {
+        this.strategies = strategies;
+    }
 
     public OperationHandler getOperationService(Operation operation) {
         return strategies.get(operation);

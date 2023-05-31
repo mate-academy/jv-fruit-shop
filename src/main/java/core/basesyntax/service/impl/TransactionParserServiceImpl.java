@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.TransactionParserService;
 import core.basesyntax.transaction.FruitTransaction;
 import core.basesyntax.transaction.Operation;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,14 +13,11 @@ public class TransactionParserServiceImpl implements TransactionParserService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> getTransactions(List<String> linesFormFile) {
-        linesFormFile = skipFirstLine(linesFormFile);
-        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        for (String line : linesFormFile) {
-            FruitTransaction fruitTransaction = parseTransaction(line);
-            fruitTransactionList.add(fruitTransaction);
-        }
-        return fruitTransactionList;
+    public List<FruitTransaction> parse(List<String> rawData) {
+        return rawData.stream()
+                .skip(FRUIT_INDEX)
+                .map(this::parseTransaction)
+                .collect(Collectors.toList());
     }
 
     private FruitTransaction parseTransaction(String line) {
@@ -32,9 +28,4 @@ public class TransactionParserServiceImpl implements TransactionParserService {
         return new FruitTransaction(operation, fruit, quantity);
     }
 
-    private List<String> skipFirstLine(List<String> linesFromFile) {
-        return linesFromFile.stream()
-                .skip(FRUIT_INDEX)
-                .collect(Collectors.toList());
-    }
 }

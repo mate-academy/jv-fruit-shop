@@ -9,12 +9,10 @@ import java.util.List;
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     @Override
     public List<String> readFormFile(String filePath) {
-        List<String> strings;
         try {
-            strings = Files.readAllLines(Path.of(filePath));
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file:" + filePath, e);
         }
-        return strings;
     }
 }
