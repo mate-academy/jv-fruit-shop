@@ -4,10 +4,12 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParserService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportGeneratorService;
 import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.strategy.FruitShopStrategy;
 import core.basesyntax.strategy.FruitTransactionHandler;
@@ -36,7 +38,8 @@ public class Main {
 
         );
         FruitShopStrategy fruitShopStrategy = new FruitShopStrategyImpl(handlerMap);
-        fruitTransactions.forEach(fruitShopStrategy::handle);
+        FruitShopService fruitShopService = new FruitShopServiceImpl(fruitShopStrategy);
+        fruitShopService.process(fruitTransactions);
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
         String report = reportGeneratorService.generate();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
