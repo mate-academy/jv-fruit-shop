@@ -9,13 +9,11 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         int quantity = fruitTransaction.getQuantity();
         String fruit = fruitTransaction.getFruit();
-        if (!Storage.fruitStorage.containsKey(fruit)
-                || Storage.fruitStorage.get(fruit) - quantity < 0) {
-            throw new RuntimeException("Not enough quantity of fruit"
-                    + fruitTransaction.getFruit());
-        } else {
-            Storage.fruitStorage.put(fruit,
-                    Storage.fruitStorage.get(fruitTransaction.getFruit()) - quantity);
+        boolean isInvalid = !Storage.FRUIT_STORAGE.containsKey(fruit)
+                || Storage.FRUIT_STORAGE.get(fruit) - quantity < 0;
+        if (isInvalid) {
+            throw new RuntimeException("Not enough quantity of fruit " + fruit);
         }
+        Storage.FRUIT_STORAGE.put(fruit, Storage.FRUIT_STORAGE.get(fruit) - quantity);
     }
 }

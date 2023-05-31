@@ -9,10 +9,9 @@ public class BalanceOperationHandler implements OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         int quantity = fruitTransaction.getQuantity();
         String fruit = fruitTransaction.getFruit();
-        if (quantity > 0) {
-            Storage.fruitStorage.put(fruit, quantity);
-        } else {
+        if (quantity < 0) {
             throw new RuntimeException("Invalid quantity of fruit" + quantity);
         }
+        Storage.FRUIT_STORAGE.put(fruit, quantity);
     }
 }

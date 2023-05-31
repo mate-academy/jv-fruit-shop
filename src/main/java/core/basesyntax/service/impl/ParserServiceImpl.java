@@ -3,29 +3,29 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ParserServiceImpl implements ParserService {
     private static final String COMA_SEPARATOR = ",";
-    private static final int INDEX_OF_OPERATION = 0;
-    private static final int INDEX_OF_FRUIT = 1;
-    private static final int INDEX_OF_QUANTITY = 2;
+    private static final int HEADER_LINES_COUNT = 1;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parseReadedData(List<String> infoFromFile) {
+    public List<FruitTransaction> parseData(List<String> infoFromFile) {
         return infoFromFile.stream()
-                .skip(1)
-                .map(this::getFromCsvRow)
+                .skip(HEADER_LINES_COUNT)
+                .map(this::parseCsvRow)
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction getFromCsvRow(String line) {
+    private FruitTransaction parseCsvRow(String line) {
         String[] fields = line.split(COMA_SEPARATOR);
-        FruitTransaction.Operation operation = getOperationFromString(fields[INDEX_OF_OPERATION]);
-        String fruit = fields[INDEX_OF_FRUIT];
-        int quantity = Integer.parseInt(fields[INDEX_OF_QUANTITY]);
+        FruitTransaction.Operation operation = getOperationFromString(fields[OPERATION_INDEX]);
+        String fruit = fields[FRUIT_INDEX];
+        int quantity = Integer.parseInt(fields[QUANTITY_INDEX]);
         return new FruitTransaction(operation, fruit, quantity);
     }
 
@@ -33,7 +33,8 @@ public class ParserServiceImpl implements ParserService {
         return Stream.of(FruitTransaction.Operation.values())
                 .filter(o -> o.getCode().equals(operationAbr))
                 .findAny()
-                .orElseThrow(() -> new NoSuchElementException("Invalid operation " + operationAbr));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid operation "
+                        + operationAbr));
     }
 }
 

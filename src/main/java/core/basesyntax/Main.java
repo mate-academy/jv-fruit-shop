@@ -1,12 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataProcess;
+import core.basesyntax.service.DataProcessor;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.DataProcessImpl;
+import core.basesyntax.service.impl.DataProcessorImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -30,13 +30,13 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         ParserService parserService = new ParserServiceImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        DataProcess dataProcess = new DataProcessImpl(operationStrategy);
+        DataProcessor dataProcessor = new DataProcessorImpl(operationStrategy);
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
         List<String> fruits = readerService.readFromFile(READ_FROM_FILE);
-        List<FruitTransaction> parsedFruits = parserService.parseReadedData(fruits);
-        dataProcess.addDataToDB(parsedFruits);
-        writerService.writeToFile(WRITE_TO_FILE, reportService.makeReport());
+        List<FruitTransaction> parsedFruits = parserService.parseData(fruits);
+        dataProcessor.addDataToDB(parsedFruits);
+        writerService.writeToFile(WRITE_TO_FILE, reportService.createReport());
     }
 
     private static Map<FruitTransaction.Operation, OperationHandler> createMap() {
