@@ -14,9 +14,7 @@ public class PurchaseHandler implements OperationHandler {
         } else {
             throw new RuntimeException(
                     "Quantity is not enough to make this purchase, should be at least "
-                    + transaction.getQuantity()
-                    + " but was "
-                    + currentAmount);
+                    + transaction.getQuantity() + " but was " + currentAmount);
         }
     }
 }
