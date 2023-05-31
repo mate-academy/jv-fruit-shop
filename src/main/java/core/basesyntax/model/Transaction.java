@@ -3,12 +3,12 @@ package core.basesyntax.model;
 public class Transaction {
     private Operation operation;
     private String productName;
-    private int emount;
+    private int amount;
 
-    public Transaction(Operation operation, String productName, int emount) {
+    public Transaction(Operation operation, String productName, int amount) {
         this.operation = operation;
         this.productName = productName;
-        this.emount = emount;
+        this.amount = amount;
     }
 
     public Operation getOperation() {
@@ -19,8 +19,8 @@ public class Transaction {
         return productName;
     }
 
-    public int getEmount() {
-        return emount;
+    public int get() {
+        return amount;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Transaction {
         return "Transaction{" +
                 "operation=" + operation +
                 ", productName='" + productName + '\'' +
-                ", emount=" + emount +
+                ", amount=" + amount +
                 '}';
     }
 
