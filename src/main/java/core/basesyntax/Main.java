@@ -1,30 +1,30 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.handlerimpl.BalanceOperation;
+import core.basesyntax.strategy.handlerimpl.PurchaseOperation;
+import core.basesyntax.strategy.handlerimpl.ReturnOperation;
+import core.basesyntax.strategy.handlerimpl.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
-import service.FruitShopService;
-import service.ReaderService;
-import service.ReportService;
-import service.TransactionService;
-import service.WriterService;
-import service.impl.FruitShopServiceImpl;
-import service.impl.ReaderServiceImpl;
-import service.impl.ReportServiceImpl;
-import service.impl.TransactionServiceImpl;
-import service.impl.WriterServiceImpl;
-import strategy.OperationHandler;
-import strategy.OperationStrategy;
-import strategy.OperationStrategyImpl;
-import strategy.handlerimpl.BalanceOperation;
-import strategy.handlerimpl.PurchaseOperation;
-import strategy.handlerimpl.ReturnOperation;
-import strategy.handlerimpl.SupplyOperation;
 
 public class Main {
-    private static final String INPUT_DATA_FILE = "src/main/java/resources/fruit_shop_data.csv";
-    private static final String REPORT_DATA_FILE = "src/main/java/resources/fruit_shop_report.csv";
+    private static final String INPUT_DATA_FILE = "src/main/java/resources/data.csv";
+    private static final String REPORT_DATA_FILE = "src/main/java/resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -48,6 +48,6 @@ public class Main {
         List<FruitTransaction> fruitTransactions = fruitTransform.parseTransactions(list);
         fruitShopService.process(fruitTransactions);
         String reportList = reportService.createReport();
-        writerService.writeToFile(REPORT_DATA_FILE,reportList);
+        writerService.writeToFile(REPORT_DATA_FILE, reportList);
     }
 }

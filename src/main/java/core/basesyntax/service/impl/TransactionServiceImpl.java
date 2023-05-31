@@ -1,9 +1,9 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.TransactionService;
 import java.util.List;
 import java.util.stream.Collectors;
-import model.FruitTransaction;
-import service.TransactionService;
 
 public class TransactionServiceImpl implements TransactionService {
 
@@ -15,7 +15,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<FruitTransaction> parseTransactions(List<String> transactions) {
-        return transactions.stream().skip(SKIP_HEADER)
+        return transactions.stream()
+                .skip(SKIP_HEADER)
                 .map(transaction -> {
                     String[] splitTransaction = transaction.split(SEPARATOR);
                     FruitTransaction.Operation operation = FruitTransaction.Operation

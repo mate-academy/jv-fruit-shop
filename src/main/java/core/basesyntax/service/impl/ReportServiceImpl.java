@@ -1,8 +1,8 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
-import db.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportService;
 import java.util.stream.Collectors;
-import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String SEPARATOR = ", ";
