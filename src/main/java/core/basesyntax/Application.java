@@ -1,9 +1,11 @@
 package core.basesyntax;
 
 import core.basesyntax.service.CsvFileWriterService;
+import core.basesyntax.service.ReportGenerationService;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.QuantityCalculatorServiceImpl;
+import core.basesyntax.service.impl.ReportGenerationServiceImpl;
 import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
@@ -43,6 +45,7 @@ public class Application {
         quantityCalculatorService.calculate(fruitTransactions);
 
         CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
-        csvFileWriterService.writeToFile(WRITE_TO_FILE);
+        ReportGenerationService reportGenerationService = new ReportGenerationServiceImpl();
+        csvFileWriterService.writeToFile(WRITE_TO_FILE, reportGenerationService);
     }
 }
