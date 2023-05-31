@@ -2,6 +2,6 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
 
-public interface FruitShopStrategy {
+public interface OperationHandler {
     void handle(FruitTransaction fruitTransaction);
 }

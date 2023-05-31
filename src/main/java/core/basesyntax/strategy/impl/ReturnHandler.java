@@ -2,10 +2,10 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.FruitTransactionHandler;
+import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 
-public class ReturnHandler implements FruitTransactionHandler {
+public class ReturnHandler implements OperationHandler {
     private static final int MINIMUM_RETURN_AMOUNT = 1;
 
     @Override

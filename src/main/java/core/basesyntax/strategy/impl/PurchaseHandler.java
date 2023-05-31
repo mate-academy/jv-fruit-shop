@@ -2,11 +2,10 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.FruitTransactionHandler;
+import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 
-public class PurchaseHandler implements FruitTransactionHandler {
-
+public class PurchaseHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
         int quantityToBuy = fruitTransaction.getQuantity();

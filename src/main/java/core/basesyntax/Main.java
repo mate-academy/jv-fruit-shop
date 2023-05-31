@@ -11,10 +11,10 @@ import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
-import core.basesyntax.strategy.FruitShopStrategy;
-import core.basesyntax.strategy.FruitTransactionHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceHandler;
-import core.basesyntax.strategy.impl.FruitShopStrategyImpl;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseHandler;
 import core.basesyntax.strategy.impl.ReturnHandler;
 import core.basesyntax.strategy.impl.SupplyHandler;
@@ -30,14 +30,14 @@ public class Main {
         List<String> lines = fileReaderService.readLinesFromFile(INPUT_FILE_PATH);
         DataParserService dataParserService = new DataParserServiceImpl();
         List<FruitTransaction> fruitTransactions = dataParserService.parseData(lines);
-        Map<FruitTransaction.Operation, FruitTransactionHandler> handlerMap = Map.of(
+        Map<FruitTransaction.Operation, OperationHandler> handlerMap = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceHandler(),
                 FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
                 FruitTransaction.Operation.RETURN, new ReturnHandler()
         );
-        FruitShopStrategy fruitShopStrategy = new FruitShopStrategyImpl(handlerMap);
-        FruitShopService fruitShopService = new FruitShopServiceImpl(fruitShopStrategy);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
+        FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
         fruitShopService.process(fruitTransactions);
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
         String report = reportGeneratorService.generate();
