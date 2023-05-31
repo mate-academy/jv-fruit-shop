@@ -13,7 +13,7 @@ public class ReturnHandler implements OperationHandler {
                             + transaction.getQuantity());
         } else {
             throw new RuntimeException(
-                    "Balance can't be negative, but was " + transaction.getQuantity());
+                    "Balance can't be negative, but was " + currentAmount);
         }
     }
 }
