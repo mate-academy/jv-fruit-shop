@@ -9,5 +9,4 @@ public class OperationHandlerMap {
             FruitTransaction.Operation.RETURN, new ReturnHandler(),
             FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
             FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-
 }

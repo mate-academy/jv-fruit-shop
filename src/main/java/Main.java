@@ -1,12 +1,12 @@
 import db.Storage;
 import java.util.List;
 import models.FruitTransaction;
+import service.FruitService;
 import service.Parser;
-import service.Processor;
 import service.Reader;
 import service.Writer;
+import service.impl.FruitServiceImpl;
 import service.impl.ParserImpl;
-import service.impl.ProcessorImpl;
 import service.impl.ReaderImpl;
 import service.impl.WriterImpl;
 import service.operation.OperationHandlerMap;
@@ -23,7 +23,7 @@ public class Main {
         List<String> dataFromFile = reader.read(fromFileName);
         Parser parser = new ParserImpl();
         List<FruitTransaction> fruitTransactionList = parser.parse(dataFromFile);
-        Processor processor = new ProcessorImpl(strategy);
+        FruitService processor = new FruitServiceImpl(strategy);
         processor.process(fruitTransactionList);
         Writer writer = new WriterImpl(Storage.fruitMap);
         writer.write(toFileName);

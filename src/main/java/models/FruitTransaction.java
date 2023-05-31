@@ -40,12 +40,11 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation getOperationFromString(String input) {
+        public static Operation getOperationByCode(String input) {
             return Arrays.stream(Operation.values())
                 .filter(o -> o.getCode().equals(input))
                 .findFirst()
                 .get();
         }
-
     }
 }

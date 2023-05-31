@@ -13,12 +13,12 @@ public class ParserImpl implements Parser {
     private static final int FRUIT_QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parse(List<String> dataFromFile) {
+    public List<FruitTransaction> parse(List<String> data) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        for (String line: dataFromFile) {
+        for (String line: data) {
             String[] lineInfo = line.split(COMMA_LINE_SEPARATOR);
             FruitTransaction.Operation operation =
-                    FruitTransaction.Operation.getOperationFromString(lineInfo[OPERATION_INDEX]);
+                    FruitTransaction.Operation.getOperationByCode(lineInfo[OPERATION_INDEX]);
             FruitTransaction fruit = new FruitTransaction(operation,
                     lineInfo[FRUIT_NAME_INDEX], Integer.parseInt(lineInfo[FRUIT_QUANTITY_INDEX]));
             fruitTransactionList.add(fruit);
