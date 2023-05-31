@@ -5,10 +5,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class FruitsStorage {
-    private final Map<String, Integer> fruitsStorage;
+    public static final Map<String, Integer> fruitsStorage = new HashMap<String, Integer>();
 
     public FruitsStorage() {
-        this.fruitsStorage = new HashMap<String, Integer>();
     }
 
     public Map<String, Integer> getFruitsStorage() {

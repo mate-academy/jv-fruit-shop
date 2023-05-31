@@ -8,21 +8,21 @@ import model.FruitTransaction;
 import model.OperationType;
 import model.OutFileStructure;
 import service.FileParser;
-import service.FruitDalyTransactionsHandler;
+import service.FruitShopService;
 import service.ReportService;
 import service.WriteToFile;
 import service.impl.FileParserImpl;
-import service.impl.FruitDalyTransactionsHandlerImpl;
+import service.impl.FruitShopServiceImpl;
 import service.impl.ReadFromCsvFileImpl;
 import service.impl.ReportServiceImpl;
 import service.impl.WriteToCsvFileImpl;
-import service.operation.handlers.BalanceOperationHandlerImpl;
-import service.operation.handlers.OperationHandler;
-import service.operation.handlers.PurchaseOperationHandlerImpl;
-import service.operation.handlers.ReturnOperationHandlerImpl;
-import service.operation.handlers.SupplyOperationHandlerImpl;
-import strategy.DalyOperationStrategy;
-import strategy.DalyOperationStrategyImpl;
+import strategy.OperationStrategy;
+import strategy.impl.OperationStrategyImpl;
+import strategy.impl.BalanceOperationHandlerImpl;
+import strategy.OperationHandler;
+import strategy.impl.PurchaseOperationHandlerImpl;
+import strategy.impl.ReturnOperationHandlerImpl;
+import strategy.impl.SupplyOperationHandlerImpl;
 
 public class Main {
     private static final String INPUT_FILE_NAME = "src/main/resources/activities.csv";
@@ -34,11 +34,8 @@ public class Main {
         ReadFromCsvFileImpl readFromCsvFile = new ReadFromCsvFileImpl();
         List<String> dataFromFile = readFromCsvFile.readFromCsvFile(INPUT_FILE_NAME);
 
-        FileParser fileParser = new FileParserImpl();
-        List<FruitTransaction> fruitsTransactionList =
-                fileParser.getFruitTransaction(dataFromFile);
-
         Map<OperationType, OperationHandler> operationTypeMap = new HashMap<>();
+
         OperationHandler balanceOperationHandler = new BalanceOperationHandlerImpl();
         OperationHandler purchaseOperationHandler = new PurchaseOperationHandlerImpl();
         OperationHandler supplyOperationHandler = new SupplyOperationHandlerImpl();
@@ -49,17 +46,20 @@ public class Main {
         operationTypeMap.put(OperationType.RETURN, returnOperationHandler);
         operationTypeMap.put(OperationType.PURCHASE, purchaseOperationHandler);
 
-        DalyOperationStrategy dalyOperationStrategy =
-                new DalyOperationStrategyImpl(operationTypeMap);
+        OperationStrategy operationStrategy =
+                new OperationStrategyImpl(operationTypeMap);
 
-        FruitDalyTransactionsHandler fruitDalyTransactionsHandler =
-                new FruitDalyTransactionsHandlerImpl();
-        FruitsStorage fruitCurrentStorage =
-                fruitDalyTransactionsHandler.getFruitBalance(fruitsTransactionList,
-                        dalyOperationStrategy);
+        FileParser fileParser = new FileParserImpl();
+        List<FruitTransaction> fruitsTransactionList = fileParser.getFruitTransaction(dataFromFile);
+
+        FruitShopService fruitShopService =
+                new FruitShopServiceImpl(operationStrategy);
+        fruitShopService.getFruitBalance(fruitsTransactionList);
 
         OutFileStructure outFileStructure =
                 new OutFileStructure(FIRST_REPORT_COLUMN, SECOND_REPORT_COLUMN);
+
+        FruitsStorage fruitCurrentStorage = new FruitsStorage();
 
         ReportService reportService = new ReportServiceImpl();
         String dataReport = reportService.getDataReport(outFileStructure, fruitCurrentStorage);

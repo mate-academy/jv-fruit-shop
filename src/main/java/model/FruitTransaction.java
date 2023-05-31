@@ -8,23 +8,8 @@ public class FruitTransaction {
     public FruitTransaction() {
     }
 
-    public FruitTransaction(String operationType, String name, int quantity) {
-        switch (operationType) {
-            case "b":
-                this.operationType = OperationType.BALANCE;
-                break;
-            case "s":
-                this.operationType = OperationType.SUPPLY;
-                break;
-            case "p":
-                this.operationType = OperationType.PURCHASE;
-                break;
-            case "r":
-                this.operationType = OperationType.RETURN;
-                break;
-            default:
-                this.operationType = OperationType.NONE;
-        }
+    public FruitTransaction(OperationType operationType, String name, int quantity) {
+        this.operationType = operationType;
         this.name = name;
         this.quantity = quantity;
     }

@@ -1,13 +1,14 @@
-package strategy;
+package strategy.impl;
 
 import java.util.Map;
 import model.OperationType;
-import service.operation.handlers.OperationHandler;
+import strategy.OperationStrategy;
+import strategy.OperationHandler;
 
-public class DalyOperationStrategyImpl implements DalyOperationStrategy {
+public class OperationStrategyImpl implements OperationStrategy {
     private Map<OperationType, OperationHandler> operationTypeMap;
 
-    public DalyOperationStrategyImpl(Map<OperationType, OperationHandler> operationTypeMap) {
+    public OperationStrategyImpl(Map<OperationType, OperationHandler> operationTypeMap) {
         this.operationTypeMap = operationTypeMap;
     }
 

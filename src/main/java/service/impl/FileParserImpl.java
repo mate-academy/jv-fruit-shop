@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
 import model.InFileStructure;
+import model.OperationType;
 import service.FileParser;
 
 public class FileParserImpl implements FileParser {
@@ -25,7 +26,8 @@ public class FileParserImpl implements FileParser {
                         splitString[FRUIT], splitString[QUANTITY]);
                 lineNumber++;
             } else {
-                fruitTransactionList.add(new FruitTransaction(splitString[TYPE],
+                fruitTransactionList
+                        .add(new FruitTransaction(OperationType.getByCode(splitString[TYPE]),
                         splitString[FRUIT], Integer.parseInt(splitString[QUANTITY])));
             }
         }

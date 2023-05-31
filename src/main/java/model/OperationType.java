@@ -16,4 +16,13 @@ public enum OperationType {
     public String getCode() {
         return code;
     }
+
+    public static OperationType getByCode(String character) {
+        for (OperationType operation : values()) {
+            if (operation.getCode().equals(character)) {
+                return operation;
+            }
+        }
+        throw new RuntimeException("Unknown operation");
+    }
 }

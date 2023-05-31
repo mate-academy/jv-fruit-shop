@@ -13,7 +13,7 @@ public class ReportServiceImpl implements ReportService {
         reportData.append(structure.getFruit()).append(COMMA_SEPARATOR)
                 .append(structure.getQuantity())
                 .append(System.lineSeparator());
-        for (var node : storage.getFruitsStorage().entrySet()) {
+        for (var node : FruitsStorage.fruitsStorage.entrySet()) {
             reportData.append(node.getKey())
                     .append(COMMA_SEPARATOR).append(node.getValue())
                     .append(System.lineSeparator());
