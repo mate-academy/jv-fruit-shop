@@ -20,23 +20,11 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     }
 
     private FruitTransaction getTransactionRecordFromCsvRow(String line) {
-        FruitTransaction.Operation operation;
         String[] dataFields = line.split(SPLITTER_FIELD);
+        FruitTransaction.Operation operation = FruitTransaction.Operation
+                .getByCode(dataFields[OPERATION_FIELD_NUMBER]);
         String fruit = dataFields[FRUIT_FIELD_NUMBER];
         int quantity = Integer.parseInt(dataFields[QUANTITY_FIELD_NUMBER]);
-        switch (dataFields[0]) {
-            case "s":
-                operation = FruitTransaction.Operation.SUPPLY;
-                break;
-            case "p":
-                operation = FruitTransaction.Operation.PURCHASE;
-                break;
-            case "r":
-                operation = FruitTransaction.Operation.RETURN;
-                break;
-            default:
-                operation = FruitTransaction.Operation.BALANCE;
-        }
         return new FruitTransaction(operation, fruit, quantity);
     }
 }

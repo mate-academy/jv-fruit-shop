@@ -38,5 +38,14 @@ public final class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation getByCode(String codeOperation) {
+            for (Operation currentOperation: Operation.values()) {
+                if (currentOperation.getCode().equals(codeOperation)) {
+                    return currentOperation;
+                }
+            }
+            throw new RuntimeException("Unknown operation");
+        }
     }
 }

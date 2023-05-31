@@ -13,7 +13,13 @@ import strategy.OperationStrategyImpl;
 
 public class ReportServiceImpl implements ReportService {
     private static final String COLUMNS_TITLE = "fruit,quantity";
-    private OperationStrategy operationStrategy = new OperationStrategyImpl();
+    private static final String SEPARATOR = ",";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+    private OperationStrategy operationStrategy;
+
+    public ReportServiceImpl() {
+        operationStrategy = new OperationStrategyImpl();
+    }
 
     @Override
     public HashMap<String, Integer> createReportToStoreDB() {
@@ -23,7 +29,7 @@ public class ReportServiceImpl implements ReportService {
         for (int i = 0; i < initialReportFromDB.size(); i++) {
             fruitTransaction = initialReportFromDB.get(i);
             OperationHandler operationHandler = operationStrategy
-                    .get(fruitTransaction.getOperation().getCode());
+                    .get(fruitTransaction.getOperation());
             finalReportToStoreDB.putAll(operationHandler
                     .getCurrentBalanceByFruit(initialReportFromDB, i));
         }
@@ -32,11 +38,11 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReportStringForWriting(HashMap<String, Integer> storedCurrentFriutBalance) {
-        StringBuilder stringBuilder = new StringBuilder(COLUMNS_TITLE);
+        StringBuilder summaryStringReport = new StringBuilder(COLUMNS_TITLE);
         String stringReport = storedCurrentFriutBalance.entrySet().stream()
-                .map(entry -> entry.getKey() + "," + entry.getValue())
+                .map(entry -> entry.getKey() + SEPARATOR + entry.getValue())
                 .sorted()
-                .collect(Collectors.joining(System.lineSeparator()));
-        return stringBuilder.append(System.lineSeparator()).append(stringReport).toString();
+                .collect(Collectors.joining(LINE_SEPARATOR));
+        return summaryStringReport.append(LINE_SEPARATOR).append(stringReport).toString();
     }
 }

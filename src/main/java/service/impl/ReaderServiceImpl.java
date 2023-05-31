@@ -10,12 +10,10 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public List<String> readFromFile(String filePath) {
-        List<String> storeActivitiesFromFile;
         try {
-            storeActivitiesFromFile = Files.readAllLines(Paths.get(filePath));
+            return Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't reaad data from file", e);
         }
-        return storeActivitiesFromFile;
     }
 }

@@ -11,7 +11,11 @@ public class PurchaseOperationHandler implements OperationHandler {
                                                          int index) {
         for (Map.Entry<String, Integer> entry : currentBalanceByFruit.entrySet()) {
             if (entry.getKey().equals(fruitTransactions.get(index).getFruit())) {
-                entry.setValue(entry.getValue() - fruitTransactions.get(index).getQuantity());
+                if (entry.getValue() > fruitTransactions.get(index).getQuantity()) {
+                    entry.setValue(entry.getValue() - fruitTransactions.get(index).getQuantity());
+                } else {
+                    throw new RuntimeException("Not enough quantity for purchase!");
+                }
             }
         }
         return currentBalanceByFruit;
