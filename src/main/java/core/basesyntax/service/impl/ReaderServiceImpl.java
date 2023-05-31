@@ -14,12 +14,13 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromFile(String fileName) {
         List<String> fruit;
         try {
-            fruit = Files.readAllLines(Path.of(fileName));
+            fruit = Files.lines(Path.of(fileName))
+                    .skip(1) // Skip the first line
+                    .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Can`t read data from file " + fileName);
+            throw new RuntimeException("Can't read data from file " + fileName);
         }
-        return fruit.stream()
-                .filter(line -> !line.startsWith(TITLE))
-                .collect(Collectors.toList());
+        return fruit;
     }
 }
+

@@ -32,7 +32,6 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-
         ReaderService readerService = new ReaderServiceImpl();
         ParserService parserService = new ParserServiceImpl();
         FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHandlerMap);
