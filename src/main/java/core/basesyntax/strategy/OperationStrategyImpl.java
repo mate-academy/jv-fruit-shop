@@ -1,9 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitModel;
-import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.handler.OperationHandler;
-
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {

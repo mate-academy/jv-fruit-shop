@@ -1,9 +1,16 @@
 package core.basesyntax;
 
-import com.sun.net.httpserver.Headers;
 import core.basesyntax.model.FruitModel;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.ParseService;
+import core.basesyntax.service.ReportMakerService;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.ParseServiceImpl;
+import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handler.OperationHandler;
@@ -11,7 +18,6 @@ import core.basesyntax.strategy.handler.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.handler.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.impl.SupllyOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +39,13 @@ public class Main {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         ParseService parseService = new ParseServiceImpl();
         FruitShopService fruitShopService = new FruitShopServiceImpl(strategy);
-        ReportMakerService reportMakerService = new ReportMakerServiceImpl(DELIMITER,HEADER);
+        ReportMakerService reportMakerService = new ReportMakerServiceImpl(DELIMITER, HEADER);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
 
         List<String> list = fileReaderService.readFromFile(READ_FILE_PATH);
         List<FruitModel> fruitModels = parseService.parsedData(list);
         fruitShopService.processData(fruitModels);
         List<String> report = reportMakerService.makeReport();
-        fileWriterService.writeToFile(WRITE_FILE_PATH,report);
-        }
+        fileWriterService.writeToFile(WRITE_FILE_PATH, report);
+    }
 }

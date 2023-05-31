@@ -5,18 +5,6 @@ public class FruitModel {
     private String fruit;
     private int quantity;
 
-    public Operation getOperation() {
-        return operation;
-    }
-
-    public String getFruit() {
-        return fruit;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
     public FruitModel(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
@@ -31,6 +19,19 @@ public class FruitModel {
         }
         return null;
     }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public String getFruit() {
+        return fruit;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -38,6 +39,7 @@ public class FruitModel {
         RETURN("r");
 
         private String code;
+
         Operation(String code) {
             this.code = code;
         }
@@ -47,6 +49,3 @@ public class FruitModel {
         }
     }
 }
-
-
-

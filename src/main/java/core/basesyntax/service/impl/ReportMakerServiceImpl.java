@@ -3,11 +3,10 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.dao.StorageDao;
 import core.basesyntax.db.dao.StorageDaoImpl;
 import core.basesyntax.service.ReportMakerService;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportMakerServiceImpl  implements ReportMakerService {
+public class ReportMakerServiceImpl implements ReportMakerService {
     private final String delimiter;
     private final String header;
     private final StorageDao storageDao;

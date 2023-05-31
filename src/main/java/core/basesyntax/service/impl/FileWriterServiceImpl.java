@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriterService;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -9,10 +8,10 @@ import java.util.List;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public void writeToFile(String fileName, List<String> report) {
+    public void writeToFile(String fileName, List<String> data) {
         File file = new File(fileName);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (String line : report) {
+            for (String line : data) {
                 writer.write(line + System.lineSeparator());
             }
         } catch (Exception e) {

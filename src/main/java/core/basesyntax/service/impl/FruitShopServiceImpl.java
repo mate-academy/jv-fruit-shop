@@ -5,13 +5,11 @@ import core.basesyntax.db.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitModel;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private final StorageDao storageDao;
     private final OperationStrategy operationStrategy;
-
 
     public FruitShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
@@ -24,6 +22,7 @@ public class FruitShopServiceImpl implements FruitShopService {
             calculateTotalPrice(fruitModel1);
         }
     }
+
     private void calculateTotalPrice(FruitModel fruitModel) {
         Integer oldAmount = storageDao.get(fruitModel.getFruit());
         Integer newAmount = operationStrategy.getHandler(fruitModel)

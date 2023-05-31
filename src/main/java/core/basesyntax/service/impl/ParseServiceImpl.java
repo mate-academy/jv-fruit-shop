@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitModel;
 import core.basesyntax.service.ParseService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,16 +13,15 @@ public class ParseServiceImpl implements ParseService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitModel> parsedData(List<String> dataFromFile) {
-        return dataFromFile.stream().skip(SKIP_LINE)
+    public List<FruitModel> parsedData(List<String> strings) {
+        return strings.stream().skip(SKIP_LINE)
                 .map(this::dataFromString)
                 .collect(Collectors.toList());
     }
 
     private FruitModel dataFromString(String string) {
-    String[] split = string.split(COMA_SEPARATOR);
-    return new FruitModel(FruitModel.getOperation(split[OPERATION_INDEX]),
-            split[FRUIT_INDEX],
-            Integer.parseInt(split[QUANTITY_INDEX]));
+        String[] split = string.split(COMA_SEPARATOR);
+        return new FruitModel(FruitModel.getOperation(split[OPERATION_INDEX]),
+                split[FRUIT_INDEX],Integer.parseInt(split[QUANTITY_INDEX]));
     }
 }
