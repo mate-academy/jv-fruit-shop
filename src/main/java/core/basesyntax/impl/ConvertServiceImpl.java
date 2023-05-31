@@ -13,13 +13,13 @@ public class ConvertServiceImpl implements ConvertService {
     private static final int NORMAL_LENGTH = 3;
 
     @Override
-    public List<FruitTransaction> convertData(List<String> database) {
-        return database.stream()
+    public List<FruitTransaction> convertData(List<String> lines) {
+        return lines.stream()
                 .map(line -> line.split(COMMA_SEPARATOR))
                 .filter(values -> values.length >= NORMAL_LENGTH)
                 .map(value -> {
                     FruitTransaction.Operation operation
-                            = FruitTransaction.Operation.getOperationCode(value[OPERATION_INDEX]);
+                            = FruitTransaction.Operation.getOperationByCode(value[OPERATION_INDEX]);
                     String fruit = value[FRUIT_INDEX];
                     int quantity = Integer.parseInt(value[QUANTITY_INDEX]);
                     return new FruitTransaction(operation, fruit, quantity);

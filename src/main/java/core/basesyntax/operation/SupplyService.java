@@ -5,17 +5,17 @@ import core.basesyntax.db.StorageImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationService;
 
-public class Supply implements OperationService {
+public class SupplyService implements OperationService {
     private StorageImpl storageImpl;
 
-    public Supply(StorageImpl storage) {
+    public SupplyService(StorageImpl storage) {
         this.storageImpl = storageImpl;
     }
 
     @Override
-    public void operation(FruitTransaction fruitTransaction) {
-        int totalQuantity = Storage.storage.getOrDefault(fruitTransaction.getFruit(), 0);
+    public void process(FruitTransaction fruitTransaction) {
+        int oldQuantity = Storage.storage.getOrDefault(fruitTransaction.getFruit(), 0);
         Storage.storage.put(fruitTransaction.getFruit(),
-                totalQuantity + fruitTransaction.getQuantity());
+                oldQuantity + fruitTransaction.getQuantity());
     }
 }

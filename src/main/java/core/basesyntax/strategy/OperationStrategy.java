@@ -2,10 +2,10 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.db.StorageImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operation.Balance;
-import core.basesyntax.operation.Purchase;
-import core.basesyntax.operation.Return;
-import core.basesyntax.operation.Supply;
+import core.basesyntax.operation.BalanceService;
+import core.basesyntax.operation.PurchaseService;
+import core.basesyntax.operation.ReturnService;
+import core.basesyntax.operation.SupplyService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,12 +16,13 @@ public class OperationStrategy {
         this.strategyMap = createStrategyMap(storage);
     }
 
-    private Map<FruitTransaction.Operation, OperationService> createStrategyMap(StorageImpl data) {
+    private Map<FruitTransaction.Operation, OperationService>
+                                    createStrategyMap(StorageImpl storage) {
         Map<FruitTransaction.Operation, OperationService> map = new HashMap<>();
-        map.put(FruitTransaction.Operation.BALANCE, new Balance(data));
-        map.put(FruitTransaction.Operation.SUPPLY, new Supply(data));
-        map.put(FruitTransaction.Operation.RETURN, new Return(data));
-        map.put(FruitTransaction.Operation.PURCHASE, new Purchase(data));
+        map.put(FruitTransaction.Operation.BALANCE, new BalanceService(storage));
+        map.put(FruitTransaction.Operation.SUPPLY, new SupplyService(storage));
+        map.put(FruitTransaction.Operation.RETURN, new ReturnService(storage));
+        map.put(FruitTransaction.Operation.PURCHASE, new PurchaseService(storage));
         return map;
     }
 
@@ -29,5 +30,3 @@ public class OperationStrategy {
         return strategyMap.get(fruitTransaction.getOperation());
     }
 }
-
-

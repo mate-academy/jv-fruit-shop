@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface ConvertService {
-    List<FruitTransaction> convertData(List<String> database);
+    List<FruitTransaction> convertData(List<String> lines);
 }
