@@ -11,19 +11,10 @@ import java.util.stream.Collectors;
 
 public class FileReaderServiceImpl implements CsvFileReaderService {
     private static final int FIRST_LINE = 1;
-
-    private String fileSource;
-
-    public FileReaderServiceImpl(String fileSource) {
-        this.fileSource = fileSource;
-    }
-
-    public String getFileSource() {
-        return fileSource;
-    }
+    private static final String REGEX = "^[bpsr],\\w+,[0-9]+$";
 
     @Override
-    public List<String> readFile() {
+    public List<String> readFile(String fileSource) {
         Path filePath = Paths.get(fileSource);
         if (!Files.exists(filePath)) {
             throw new RuntimeException("File not found: " + fileSource);
@@ -34,19 +25,13 @@ public class FileReaderServiceImpl implements CsvFileReaderService {
                     .peek(this::checkData)
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Can`t read data from file: " + getFileSource(), e);
+            throw new RuntimeException("Can`t read data from file: " + fileSource, e);
         }
     }
 
     private void checkData(String line) {
-        if (!isValidFormat(line)) {
-            throw new InvalidValueExeption("Data from " + getFileSource()
-                    + "is in an incorrect format");
+        if (!line.matches(REGEX)) {
+            throw new InvalidValueExeption("Data is in an incorrect format");
         }
-    }
-
-    private boolean isValidFormat(String line) {
-        String regex = "^[bpsr],\\w+,[0-9]+$";
-        return line.matches(regex);
     }
 }

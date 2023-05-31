@@ -19,7 +19,7 @@ public class Main {
     private static final String SOURCE_PATH = "src/main/resources/Data.csv";
 
     public static void main(String[] args) {
-        List<String> linesFromFile = new FileReaderServiceImpl(SOURCE_PATH).readFile();
+        List<String> linesFromFile = new FileReaderServiceImpl().readFile(SOURCE_PATH);
         FormatTransformerService transformer = new FormatTransformerServiceImpl();
         List<FruitTransaction> fruitTransactions = transformer.formatData(linesFromFile);
 

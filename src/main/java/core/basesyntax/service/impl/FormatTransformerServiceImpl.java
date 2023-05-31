@@ -12,6 +12,7 @@ public class FormatTransformerServiceImpl implements FormatTransformerService {
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_QUANTITY = 2;
 
+    @Override
     public List<FruitTransaction> formatData(List<String> data) {
         return data.stream()
                 .map(line -> line.split(LINE_SEPARATOR))
