@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Report;
-
 import java.util.Map;
 
 public class ReportImpl implements Report {

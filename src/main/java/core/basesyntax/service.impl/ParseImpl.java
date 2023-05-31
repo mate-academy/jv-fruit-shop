@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.service.Parser;
-
 import java.util.ArrayList;
 import java.util.List;
 
