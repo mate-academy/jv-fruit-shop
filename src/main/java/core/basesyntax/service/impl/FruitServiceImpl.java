@@ -6,11 +6,16 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
+    private OperationStrategy operationStrategy;
+
+    public FruitServiceImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
+
     @Override
-    public void processTransactions(List<FruitTransaction> fruitTransactionsList,
-                                    OperationStrategy fruitStrategy) {
-        for (FruitTransaction fruitTransaction: fruitTransactionsList) {
-            fruitStrategy.get(fruitTransaction.getOperation())
+    public void processTransactions(List<FruitTransaction> fruitTransactions) {
+        for (FruitTransaction fruitTransaction : fruitTransactions) {
+            operationStrategy.get(fruitTransaction.getOperation())
                     .handle(fruitTransaction);
         }
     }

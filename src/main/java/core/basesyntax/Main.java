@@ -37,14 +37,14 @@ public class Main {
         ParserService parser = new ParserInFruitTransactionImpl();
         OperationStrategy fruitStrategy =
                 new OperationStrategyImpl(operationsMap);
-        FruitService fruitService = new FruitServiceImpl();
+        FruitService fruitService = new FruitServiceImpl(fruitStrategy);
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
 
         List<String> strings = readService.readFromFile(PATH_TO_INPUT_FILE);
         List<FruitTransaction> fruitTransactions = parser.parseData(strings);
 
-        fruitService.processTransactions(fruitTransactions, fruitStrategy);
+        fruitService.processTransactions(fruitTransactions);
         writerService.write(PATH_TO_REPORT,reportService.reportStorage());
     }
 }
