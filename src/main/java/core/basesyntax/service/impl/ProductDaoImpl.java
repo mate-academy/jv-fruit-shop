@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDaoImpl implements ProductDao {
-    private final String SEPARATOR = ",";
+    private static final String SEPARATOR = ",";
+
     @Override
     public void update(FruitTransaction fruitTransaction, int count) {
         Storage.FRUIT_MAP.put(fruitTransaction.getFruit(), count);
