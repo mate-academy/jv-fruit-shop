@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,8 @@ public class ParserServiceImpl implements ParserService {
                         splitLine[FRUIT_NAME],
                         quantity));
             } else {
-                throw new RuntimeException("Quantity of fruits shouldn't be less than 0, but it was: "
+                throw new RuntimeException(
+                        "Quantity of fruits shouldn't be less than 0, but it was: "
                         + quantity);
             }
         }
