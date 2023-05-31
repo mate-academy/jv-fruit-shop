@@ -5,8 +5,13 @@ import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationHandlerImpl implements OperationHandler {
+    private static final int INVALID_QUANTITY = 0;
+
     @Override
     public void calculateData(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getQuantity() < INVALID_QUANTITY) {
+            throw new RuntimeException("Quantity can`t be less then " + INVALID_QUANTITY);
+        }
         if (!Storage.dataStorage.containsKey(fruitTransaction.getFruit())) {
             throw new RuntimeException("Operation failed, " + fruitTransaction.getFruit()
             + " is not find!");
