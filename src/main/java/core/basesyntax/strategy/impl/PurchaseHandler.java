@@ -6,11 +6,12 @@ import core.basesyntax.strategy.FruitTransactionHandler;
 import java.util.Map;
 
 public class PurchaseHandler implements FruitTransactionHandler {
+
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        Map<String, Integer> storageMap = Storage.storageMap;
-        String fruit = fruitTransaction.getFruit();
         int quantityToBuy = fruitTransaction.getQuantity();
+        String fruit = fruitTransaction.getFruit();
+        Map<String, Integer> storageMap = Storage.storageMap;
         int amountInStorage = storageMap.get(fruit);
         if (amountInStorage < quantityToBuy) {
             throw new RuntimeException(

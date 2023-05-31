@@ -6,8 +6,15 @@ import core.basesyntax.strategy.FruitTransactionHandler;
 import java.util.Map;
 
 public class SupplyHandler implements FruitTransactionHandler {
+    private static final int MINIMUM_SUPPLY_AMOUNT = 1;
+
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getQuantity() < MINIMUM_SUPPLY_AMOUNT) {
+            throw new RuntimeException(
+                    "Supply-transaction quantity cannot be less than: "
+                            + MINIMUM_SUPPLY_AMOUNT);
+        }
         Map<String, Integer> storageMap = Storage.storageMap;
         String fruit = fruitTransaction.getFruit();
         int amountInStorage = storageMap.get(fruit);

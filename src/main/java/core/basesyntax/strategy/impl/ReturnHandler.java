@@ -6,11 +6,18 @@ import core.basesyntax.strategy.FruitTransactionHandler;
 import java.util.Map;
 
 public class ReturnHandler implements FruitTransactionHandler {
+    private static final int MINIMUM_RETURN_AMOUNT = 1;
+
     @Override
     public void handle(FruitTransaction fruitTransaction) {
+        int returnAmount = fruitTransaction.getQuantity();
+        if (returnAmount < MINIMUM_RETURN_AMOUNT) {
+            throw new RuntimeException(
+                    "Balance-transaction quantity cannot be less than: "
+                            + MINIMUM_RETURN_AMOUNT);
+        }
         Map<String, Integer> storageMap = Storage.storageMap;
         String fruit = fruitTransaction.getFruit();
-        int returnAmount = fruitTransaction.getQuantity();
         int amountBeforeReturning = storageMap.get(fruit);
         storageMap.put(fruit, returnAmount + amountBeforeReturning);
     }
