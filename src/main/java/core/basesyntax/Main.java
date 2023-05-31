@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String READ_FILE_PATH = "src/main/resources/input.csv";
-    private static final String WRITE_FILE_PATH = "src/main/resources/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
     private static final String CAPTION = "fruit,quantity";
     private static final String SEPARATOR = ",";
 
@@ -46,11 +46,11 @@ public class Main {
         ReportService reportService = new ReportServiceImpl(CAPTION, SEPARATOR);
         WriterService writerService = new WriterServiceImpl();
 
-        List<String> list = readerService.readFromFile(READ_FILE_PATH);
+        List<String> list = readerService.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> fruitTransactions =
                 converterDataService.convertForTransaction(list);
         fruitShopService.processData(fruitTransactions);
         List<String> reportList = reportService.generateReport();
-        writerService.writeDataToFile(WRITE_FILE_PATH, reportList);
+        writerService.writeDataToFile(REPORT_FILE_PATH, reportList);
     }
 }

@@ -18,7 +18,7 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public void processData(List<FruitTransaction> fruitTransactions) {
-        for (FruitTransaction transaction :fruitTransactions) {
+        for (FruitTransaction transaction : fruitTransactions) {
             calculate(transaction);
         }
     }
