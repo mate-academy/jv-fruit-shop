@@ -1,10 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.FruitStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public interface FruitService {
-    void getAllTypeStrategy(List<FruitTransaction> fruitTransaction,
-                                  FruitStrategy fruitStrategy);
+    void processTransactions(List<FruitTransaction> fruitTransaction,
+                             OperationStrategy fruitStrategy);
 }

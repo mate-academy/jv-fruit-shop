@@ -1,18 +1,18 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReadService;
+import core.basesyntax.service.ReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadServiceImpl implements ReadService {
+public class ReadServiceImpl implements ReaderService {
     @Override
     public List<String> readFromFile(String fileName) {
         try {
             return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't get data from file " + fileName, e);
         }
     }
 }

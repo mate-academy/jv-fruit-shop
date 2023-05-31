@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ParserInFruitTransaction;
+import core.basesyntax.service.ParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParserInFruitTransactionImpl implements ParserInFruitTransaction {
+public class ParserInFruitTransactionImpl implements ParserService {
     public static final String COMA_SEPARATOR = ",";
     private static final int HEADLINES_INDEX = 0;
     private static final int OPERATION_INDEX = 0;
