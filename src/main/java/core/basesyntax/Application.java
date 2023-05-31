@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitQuantityCalculatorImpl;
@@ -21,7 +22,7 @@ public class Application {
         new FruitQuantityCalculatorImpl(new OperationHandlerStrategyImpl())
                 .calculateQuantity(fruitsTransaction);
 
-        FileWriterServiceImpl fileWriterService = new FileWriterServiceImpl();
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(RESULT_FILE_PATH);
     }
 }
