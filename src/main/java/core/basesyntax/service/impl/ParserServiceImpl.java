@@ -14,8 +14,8 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<FruitTransaction> parseTransaction(List<String> lines) {
         return lines.stream()
-                .map(l -> {
-                    String[] tokens = l.split(SEPARATOR);
+                .map(line -> {
+                    String[] tokens = line.split(SEPARATOR);
                     return new FruitTransaction(
                             tokens[PRODUCT_NAME_INDEX],
                             FruitTransaction.Operation.getByCode(tokens[OPERATION_INDEX]),

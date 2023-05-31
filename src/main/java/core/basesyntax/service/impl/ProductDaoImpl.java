@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDaoImpl implements ProductDao {
+    private final String SEPARATOR = ",";
     @Override
     public void update(FruitTransaction fruitTransaction, int count) {
         Storage.FRUIT_MAP.put(fruitTransaction.getFruit(), count);
@@ -19,9 +20,8 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<String> getAll() {
-        String joiningSymbol = ",";
         return Storage.FRUIT_MAP.entrySet().stream()
-                .map(entry -> entry.getKey() + joiningSymbol + entry.getValue())
+                .map(entry -> entry.getKey() + SEPARATOR + entry.getValue())
                 .collect(Collectors.toList());
     }
 }
