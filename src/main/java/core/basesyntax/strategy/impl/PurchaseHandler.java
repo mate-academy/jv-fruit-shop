@@ -1,14 +1,14 @@
-package core.basesyntax.service.strategy;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.FruitTransaction;
-import core.basesyntax.service.FruitTransactionHandler;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.FruitTransactionHandler;
 import java.util.Map;
 
-public class PurchaseTransactionHandler implements FruitTransactionHandler {
+public class PurchaseHandler implements FruitTransactionHandler {
     @Override
-    public void handle(FruitTransaction fruitTransaction, Storage storage) {
-        Map<String, Integer> storageMap = storage.getStorageMap();
+    public void handle(FruitTransaction fruitTransaction) {
+        Map<String, Integer> storageMap = Storage.storageMap;
         String fruit = fruitTransaction.getFruit();
         int quantityToBuy = fruitTransaction.getQuantity();
         int amountInStorage = storageMap.get(fruit);

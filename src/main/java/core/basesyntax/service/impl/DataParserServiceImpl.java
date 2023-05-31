@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CsvDataParserService;
-import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CsvDataParserServiceImpl implements CsvDataParserService {
+public class DataParserServiceImpl implements DataParserService {
     private static final int INFORMATION_LINES_COUNT = 1;
     private static final String COMMA_SEPARATOR = ",";
     private static final int TYPE_INDEX = 0;

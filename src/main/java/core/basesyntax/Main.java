@@ -1,23 +1,21 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.service.CsvDataParserService;
-import core.basesyntax.service.CsvFileReaderService;
-import core.basesyntax.service.CsvFileWriterService;
-import core.basesyntax.service.FruitTransaction;
-import core.basesyntax.service.FruitTransactionHandler;
-import core.basesyntax.service.FruitTransactionStrategy;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ReportGeneratorService;
-import core.basesyntax.service.impl.CsvDataParserServiceImpl;
-import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
-import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
-import core.basesyntax.service.impl.FruitTransactionStrategyImpl;
+import core.basesyntax.service.impl.DataParserServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
-import core.basesyntax.service.strategy.BalanceTransactionHandler;
-import core.basesyntax.service.strategy.PurchaseTransactionHandler;
-import core.basesyntax.service.strategy.ReturnTransactionHandler;
-import core.basesyntax.service.strategy.SupplyTransactionHandler;
-import java.util.HashMap;
+import core.basesyntax.strategy.FruitShopStrategy;
+import core.basesyntax.strategy.FruitTransactionHandler;
+import core.basesyntax.strategy.impl.BalanceHandler;
+import core.basesyntax.strategy.impl.FruitShopStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseHandler;
+import core.basesyntax.strategy.impl.ReturnHandler;
+import core.basesyntax.strategy.impl.SupplyHandler;
 import java.util.List;
 import java.util.Map;
 
@@ -26,26 +24,23 @@ public class Main {
     private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
-        List<String> lines = csvFileReaderService.readLinesFromFile(INPUT_FILE_PATH);
-        CsvDataParserService csvDataParserService = new CsvDataParserServiceImpl();
-        List<FruitTransaction> fruitTransactions = csvDataParserService.parseData(lines);
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        List<String> lines = fileReaderService.readLinesFromFile(INPUT_FILE_PATH);
+        DataParserService dataParserService = new DataParserServiceImpl();
+        List<FruitTransaction> fruitTransactions = dataParserService.parseData(lines);
         Map<FruitTransaction.Operation, FruitTransactionHandler> handlerMap = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceTransactionHandler(),
-                FruitTransaction.Operation.SUPPLY, new SupplyTransactionHandler(),
-                FruitTransaction.Operation.PURCHASE, new PurchaseTransactionHandler(),
-                FruitTransaction.Operation.RETURN, new ReturnTransactionHandler()
+                FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnHandler()
 
         );
-        Map<String, Integer> storageMap = new HashMap<>();
-        Storage storage = new Storage(storageMap);
-        FruitTransactionStrategy fruitTransactionStrategy =
-                new FruitTransactionStrategyImpl(handlerMap, storage);
-        fruitTransactions.forEach(fruitTransactionStrategy::handle);
+        FruitShopStrategy fruitShopStrategy = new FruitShopStrategyImpl(handlerMap);
+        fruitTransactions.forEach(fruitShopStrategy::handle);
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
-        String report = reportGeneratorService.generate(storage);
-        CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
-        csvFileWriterService.writeReport(report, OUTPUT_FILE_PATH);
+        String report = reportGeneratorService.generate();
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.writeReport(report, OUTPUT_FILE_PATH);
     }
 }
 
