@@ -1,10 +1,10 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.services.imps.FruitServiceImp;
 import core.basesyntax.services.imps.ParserServiceImp;
 import core.basesyntax.services.imps.ReaderServiceImp;
 import core.basesyntax.services.imps.ReportServiceImp;
-import core.basesyntax.services.imps.FruitServiceImp;
 import core.basesyntax.services.imps.WriterServiceImp;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
