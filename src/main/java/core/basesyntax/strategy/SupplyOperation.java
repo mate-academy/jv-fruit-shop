@@ -1,12 +1,14 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
+import static javax.swing.UIManager.get;
+import static javax.swing.UIManager.put;
+
 import core.basesyntax.model.FruitTransaction;
 
 public class SupplyOperation implements OperationHandler {
     @Override
-    public void operateTransaction(FruitTransaction transaction, Storage storage) {
-        int previousQuantity = storage.get(transaction.getFruit());
-        storage.put(transaction.getFruit(), previousQuantity + transaction.getQuantity());
+    public void handle(FruitTransaction transaction) {
+        int previousQuantity = (int) get(transaction.getFruit());
+        put(transaction.getFruit(), previousQuantity + transaction.getQuantity());
     }
 }

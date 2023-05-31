@@ -3,13 +3,13 @@ package core.basesyntax.db;
 import java.util.HashMap;
 
 public class Storage {
-    public static final HashMap<String, Integer> FruitStorage = new HashMap<>();
+    public static final HashMap<String, Integer> FRUIT_STORAGE = new HashMap<>();
 
-    public int get(String fruit) {
-        return Storage.FruitStorage.getOrDefault(fruit, 0);
+    public static int get(String fruit) {
+        return Storage.FRUIT_STORAGE.getOrDefault(fruit, 0);
     }
 
     public void put(String fruit, Integer quantity) {
-        Storage.FruitStorage.put(fruit, quantity);
+        Storage.FRUIT_STORAGE.put(fruit, quantity);
     }
 }

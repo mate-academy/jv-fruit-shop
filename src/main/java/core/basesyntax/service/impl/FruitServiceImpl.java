@@ -8,7 +8,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-
     @Override
     public void processTransactions(List<FruitTransaction> fruitTransactionList,
                                     OperationStrategy strategy) {
@@ -16,7 +15,7 @@ public class FruitServiceImpl implements FruitService {
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
             OperationHandler operationHandler = strategy.get(fruitTransaction
                     .getOperation());
-            operationHandler.operateTransaction(fruitTransaction, storage);
+            operationHandler.handle(fruitTransaction);
         }
     }
 }
