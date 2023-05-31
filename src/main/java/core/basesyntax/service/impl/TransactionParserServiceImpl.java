@@ -34,7 +34,7 @@ public class TransactionParserServiceImpl implements TransactionParserService {
 
     private List<String> skipFirstLine(List<String> linesFromFile) {
         return linesFromFile.stream()
-                .skip(1)
+                .skip(FRUIT_INDEX)
                 .collect(Collectors.toList());
     }
 }
