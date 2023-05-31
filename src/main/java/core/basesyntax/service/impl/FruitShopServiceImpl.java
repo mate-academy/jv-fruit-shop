@@ -19,11 +19,11 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public void processData(List<FruitModel> fruitModel) {
         for (FruitModel fruitModel1 : fruitModel) {
-            calculateTotalPrice(fruitModel1);
+            calculateTotalQuantity(fruitModel1);
         }
     }
 
-    private void calculateTotalPrice(FruitModel fruitModel) {
+    private void calculateTotalQuantity(FruitModel fruitModel) {
         Integer oldAmount = storageDao.get(fruitModel.getFruit());
         Integer newAmount = operationStrategy.getHandler(fruitModel)
                 .operate(fruitModel.getQuantity(), oldAmount);
