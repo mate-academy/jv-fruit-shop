@@ -35,7 +35,6 @@ public class Main {
                 FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
                 FruitTransaction.Operation.RETURN, new ReturnHandler()
-
         );
         FruitShopStrategy fruitShopStrategy = new FruitShopStrategyImpl(handlerMap);
         FruitShopService fruitShopService = new FruitShopServiceImpl(fruitShopStrategy);
