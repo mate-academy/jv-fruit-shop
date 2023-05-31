@@ -1,5 +1,8 @@
 package strategy;
 
+import dao.StorageDao;
+import model.FruitTransaction;
+
 public interface OperationHandler {
-    Integer operate(Integer order, Integer inStock);
+    Integer operate(FruitTransaction order, StorageDao inStock);
 }

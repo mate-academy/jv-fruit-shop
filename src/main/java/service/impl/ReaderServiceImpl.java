@@ -5,9 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import service.ReadFromFile;
+import service.ReaderService;
 
-public class ReadFromFileImpl implements ReadFromFile {
+public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> readFromFile(String fileName) {
         List<String> storageList = new ArrayList<>();
