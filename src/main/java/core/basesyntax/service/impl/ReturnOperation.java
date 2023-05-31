@@ -1,9 +1,10 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service.impl;
 
 import static javax.swing.UIManager.get;
 import static javax.swing.UIManager.put;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 
 public class ReturnOperation implements OperationHandler {
     @Override

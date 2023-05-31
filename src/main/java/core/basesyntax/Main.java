@@ -2,24 +2,26 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.BalanceOperation;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.PurchaseOperation;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.ReturnOperation;
+import core.basesyntax.service.impl.SupplyOperation;
 import core.basesyntax.service.impl.WriteServiceImpl;
-import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.PurchaseOperation;
-import core.basesyntax.strategy.ReturnOperation;
-import core.basesyntax.strategy.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT = "src/main/java/resources/input_file.csv";
-    private static final String REPORT = "src/main/java/resources/report_file.csv";
+    private static final String INPUT = "src/main/resources/input_file.csv";
+    private static final String REPORT = "src/main/resources/report_file.csv";
 
     public static void main(String[] args) {
         List<String> lines = new ReaderServiceImpl()
@@ -33,6 +35,8 @@ public class Main {
         OperationStrategy strategy = new OperationStrategy(operationHandlerMap);
         FruitService fruitService = new FruitServiceImpl();
         fruitService.processTransactions(fruitTransactions, strategy);
-        new WriteServiceImpl().writeToFile(REPORT, new ReportServiceImpl().createReport());
+        WriterService writeService = new WriteServiceImpl();
+        ReportService reportService = new ReportServiceImpl();
+        writeService.writeToFile(REPORT, reportService.createReport());
     }
 }

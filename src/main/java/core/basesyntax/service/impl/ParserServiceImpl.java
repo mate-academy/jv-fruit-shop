@@ -20,16 +20,5 @@ public class ParserServiceImpl implements ParserService {
                     return new FruitTransaction(operation, frutis, size);
                 })
                 .collect(Collectors.toList());
-
-        /* List<FruitTransaction> transaction = new ArrayList<>();
-        for (String string : transactions) {
-            String[] split = string.split(SEPARATOR);
-            FruitTransaction.Operation operation = FruitTransaction
-                    .Operation.getCode(split[0]);
-            String fruits = split[1];
-            int size = Integer.parseInt(split[2]);
-            transaction.add(new FruitTransaction(operation, fruits, size));
-        }
-        return transaction; */
     }
 }
