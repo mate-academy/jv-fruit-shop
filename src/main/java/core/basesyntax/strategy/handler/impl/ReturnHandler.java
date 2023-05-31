@@ -6,6 +6,6 @@ import core.basesyntax.strategy.handler.OperationHandler;
 public class ReturnHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        AddToStorage.add(transaction);
+        StorageService.add(transaction);
     }
 }

@@ -1,20 +1,19 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.StoreService;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.List;
 
-public class StoreServiceImpl implements StoreService {
+public class FruitServiceImpl implements FruitService {
     private final OperationStrategy operationStrategy;
 
-    public StoreServiceImpl() {
-        operationStrategy = new OperationStrategyImpl();
+    public FruitServiceImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public void dataProcess(List<FruitTransaction> transactions) {
+    public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             operationStrategy.getHandler(transaction.getOperation()).handle(transaction);
         }

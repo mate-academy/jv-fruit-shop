@@ -13,9 +13,9 @@ public class ReaderServiceImpl implements ReaderService {
         try {
             return Files.readAllLines(file.toPath());
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found", e);
+            throw new RuntimeException("File not found by path: " + pathToFile, e);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file", e);
+            throw new RuntimeException("Can't read file by path: " + pathToFile, e);
         }
     }
 }
