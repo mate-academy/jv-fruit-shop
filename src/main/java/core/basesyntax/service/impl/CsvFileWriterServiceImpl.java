@@ -1,12 +1,11 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CsvFileWriter;
+import core.basesyntax.service.CsvFileWriterService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class CsvFileWriterImpl implements CsvFileWriter {
-
+public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     @Override
     public void writeToFile(String fileName, String data) {
         File file = new File(fileName);

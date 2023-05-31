@@ -2,17 +2,17 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ProductDao;
-import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.OperationHandler;
 
-public class SupplyOperationImpl implements OperationService {
+public class SupplyOperationHandler implements OperationHandler {
     private ProductDao productDao;
 
-    public SupplyOperationImpl(ProductDao productDao) {
+    public SupplyOperationHandler(ProductDao productDao) {
         this.productDao = productDao;
     }
 
     @Override
-    public void calculate(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         int curAmount = productDao.getQuantityOf(fruitTransaction);
         if (curAmount < 0) {
             throw new IllegalArgumentException("Balance can`t be negative, but was: " + curAmount);

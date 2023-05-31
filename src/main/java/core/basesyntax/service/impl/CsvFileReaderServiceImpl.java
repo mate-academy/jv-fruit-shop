@@ -1,14 +1,14 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.AcceptedDataInvalidException;
-import core.basesyntax.service.CsvFileReader;
+import core.basesyntax.service.CsvFileReaderService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CsvFileReaderImpl implements CsvFileReader {
+public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     private static final int VALID_ROWS_COUNT = 3;
     private static final int HEADER_LINES_COUNT = 1;
     private static final String COMA_SEPARATOR = ",";

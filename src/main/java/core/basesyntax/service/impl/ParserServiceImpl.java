@@ -1,14 +1,14 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.ParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParserImpl implements Parser {
-    private static final int INDEX_OF_OPERATION = 0;
-    private static final int INDEX_OF_PRODUCT_NAME = 1;
-    private static final int INDEX_OF_AMOUNT = 2;
+public class ParserServiceImpl implements ParserService {
+    private static final int OPERATION_INDEX = 0;
+    private static final int PRODUCT_NAME_INDEX = 1;
+    private static final int AMOUNT_INDEX = 2;
     private static final String SEPARATOR = ",";
 
     @Override
@@ -17,9 +17,9 @@ public class ParserImpl implements Parser {
                 .map(l -> {
                     String[] tokens = l.split(SEPARATOR);
                     return new FruitTransaction(
-                            tokens[INDEX_OF_PRODUCT_NAME],
-                            FruitTransaction.Operation.getByCode(tokens[INDEX_OF_OPERATION]),
-                                                Integer.parseInt(tokens[INDEX_OF_AMOUNT])
+                            tokens[PRODUCT_NAME_INDEX],
+                            FruitTransaction.Operation.getByCode(tokens[OPERATION_INDEX]),
+                                                Integer.parseInt(tokens[AMOUNT_INDEX])
                                         );
                 })
                 .collect(Collectors.toList());
