@@ -1,20 +1,20 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.OperationsStrategy;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.FruitStrategy;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.FruitStrategy;
+import core.basesyntax.strategy.OperationsStrategy;
 import java.util.Map;
 
 public class FruitStrategyImpl implements FruitStrategy {
-    private Map<Fruit.Operation, OperationsStrategy> operationsStrategyMap;
+    private Map<FruitTransaction.Operation, OperationsStrategy> operationsStrategyMap;
 
-    public FruitStrategyImpl(Map<Fruit.Operation,
+    public FruitStrategyImpl(Map<FruitTransaction.Operation,
             OperationsStrategy> operationsStrategyMap) {
         this.operationsStrategyMap = operationsStrategyMap;
     }
 
     @Override
-    public OperationsStrategy get(Fruit.Operation operation) {
+    public OperationsStrategy get(FruitTransaction.Operation operation) {
         return operationsStrategyMap.get(operation);
     }
 }

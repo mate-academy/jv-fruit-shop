@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
@@ -11,6 +11,8 @@ import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.strategy.FruitStrategy;
+import core.basesyntax.strategy.OperationsStrategy;
 import core.basesyntax.strategy.impl.BalanceOperation;
 import core.basesyntax.strategy.impl.FruitStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperation;
@@ -25,11 +27,11 @@ public class Main {
     private static final String REPORT_PATH = "src/main/java/resources/report.csv";
 
     public static void main(String[] args) {
-        Map<Fruit.Operation, OperationsStrategy> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Fruit.Operation.BALANCE, new BalanceOperation());
-        operationHandlerMap.put(Fruit.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlerMap.put(Fruit.Operation.RETURN, new ReturnOperation());
-        operationHandlerMap.put(Fruit.Operation.SUPPLY, new SupplyOperation());
+        Map<FruitTransaction.Operation, OperationsStrategy> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
 
         ReaderService readerService = new ReaderServiceImpl();
         ParserService parserService = new ParserServiceImpl();
@@ -39,10 +41,11 @@ public class Main {
         WriterService writeToFileService = new WriterServiceImpl();
 
         List<String> fruitList = readerService.readFromFile(SOURCE_PATH);
-        List<Fruit> fruitTransactionList =
+        List<FruitTransaction> fruitTransactionList =
                 parserService.formatData(fruitList);
 
         fruitService.getAllOperationsStrategy(fruitTransactionList, fruitStrategy);
         writeToFileService.writeToFile(reportService.getReport(), REPORT_PATH);
     }
 }
+

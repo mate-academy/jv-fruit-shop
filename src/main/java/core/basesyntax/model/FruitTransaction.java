@@ -1,11 +1,11 @@
 package core.basesyntax.model;
 
-public class Fruit {
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
 
-    public Fruit(Operation operation, String fruit, int quantity) {
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -39,8 +39,8 @@ public class Fruit {
             return code;
         }
 
-        public static Fruit.Operation getByCode(String code) {
-            for (Fruit.Operation operation : Fruit.Operation.values()) {
+        public static FruitTransaction.Operation getByCode(String code) {
+            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
                 if (operation.getCode().equals(code)) {
                     return operation;
                 }
