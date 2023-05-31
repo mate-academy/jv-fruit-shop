@@ -2,10 +2,10 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.db.StorageImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operation.BalanceService;
-import core.basesyntax.operation.PurchaseService;
-import core.basesyntax.operation.ReturnService;
-import core.basesyntax.operation.SupplyService;
+import core.basesyntax.strategy.operation.BalanceService;
+import core.basesyntax.strategy.operation.PurchaseService;
+import core.basesyntax.strategy.operation.ReturnService;
+import core.basesyntax.strategy.operation.SupplyService;
 import java.util.HashMap;
 import java.util.Map;
 

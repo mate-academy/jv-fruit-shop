@@ -7,5 +7,4 @@ import java.util.Map;
 public interface Storage {
     Map<String, Integer> storage = new HashMap<>();
     List<String> getAll();
-
 }
