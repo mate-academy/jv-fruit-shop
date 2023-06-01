@@ -11,7 +11,7 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     public void writeToFile(String path, String report) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
             if (!report.isEmpty()) {
-                bufferedWriter.write(report); // Write the generated report to the file
+                bufferedWriter.write(report);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't find file on path: " + path, e);
