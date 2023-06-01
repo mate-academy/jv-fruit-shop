@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class WriterServiceImpl implements WriterService {
-
     @Override
     public void writeDataToFile(String fileName, List<String> data) {
         Path file = Path.of(fileName);

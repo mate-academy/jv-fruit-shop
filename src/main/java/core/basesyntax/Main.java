@@ -1,12 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ConverterDataService;
+import core.basesyntax.service.DataParserService;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.ConverterDataServiceImpl;
+import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -41,14 +41,14 @@ public class Main {
 
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
         ReaderService readerService = new ReaderServiceImpl();
-        ConverterDataService converterDataService = new ConverterDataServiceImpl();
+        DataParserService converterDataService = new DataParserServiceImpl();
         FruitShopService fruitShopService = new FruitShopServiceImpl(strategy);
         ReportService reportService = new ReportServiceImpl(CAPTION, SEPARATOR);
         WriterService writerService = new WriterServiceImpl();
 
         List<String> list = readerService.readFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> fruitTransactions =
-                converterDataService.convertForTransaction(list);
+                converterDataService.parse(list);
         fruitShopService.processData(fruitTransactions);
         List<String> reportList = reportService.generateReport();
         writerService.writeDataToFile(REPORT_FILE_PATH, reportList);

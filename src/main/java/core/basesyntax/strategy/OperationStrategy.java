@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handler.OperationHandler;
 
 public interface OperationStrategy {
-    OperationHandler get(FruitTransaction fruitTransaction);
+    OperationHandler get(FruitTransaction.Operation operation);
 }

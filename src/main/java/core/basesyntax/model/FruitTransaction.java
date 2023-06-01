@@ -23,15 +23,6 @@ public class FruitTransaction {
         return quantity;
     }
 
-    public static Operation findOperation(String code) {
-        for (Operation operation: Operation.values()) {
-            if (code.equals(operation.code)) {
-                return operation;
-            }
-        }
-        return Operation.valueOf("default operation");
-    }
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -46,6 +37,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation findOperation(String code) {
+            for (Operation operation: Operation.values()) {
+                if (code.equals(operation.code)) {
+                    return operation;
+                }
+            }
+            return Operation.valueOf("default operation");
         }
     }
 }
