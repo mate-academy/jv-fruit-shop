@@ -9,14 +9,15 @@ import java.io.IOException;
 public class CsvFileWriterServiceImpl implements CsvFileWriterService {
 
     @Override
-    public void writeToFile(String path, ReportGenerationService reportGenerationService) {
+    public void writeToFile(String path, String report) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
-            String report = reportGenerationService.generateReport();
             if (!report.isEmpty()) {
-                bufferedWriter.write(report);
+                bufferedWriter.write(report); // Write the generated report to the file
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't find file on path: " + path, e);
         }
     }
 }
+
+

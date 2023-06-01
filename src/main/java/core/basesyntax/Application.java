@@ -26,7 +26,7 @@ public class Application {
 
     public static void main(String[] args) {
         List<String> linesFromFile = new CsvFileReaderServiceImpl()
-                .readFormFile(VALID_READ_FROM_FILE);
+                .readFromFile(VALID_READ_FROM_FILE);
 
         Map<Operation, OperationHandler> strategies = new HashMap<>();
         strategies.put(Operation.BALANCE, new BalanceOperationHandler());
@@ -46,6 +46,6 @@ public class Application {
 
         CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
         ReportGenerationService reportGenerationService = new ReportGenerationServiceImpl();
-        csvFileWriterService.writeToFile(WRITE_TO_FILE, reportGenerationService);
+        csvFileWriterService.writeToFile(WRITE_TO_FILE, reportGenerationService.generateReport());
     }
 }
