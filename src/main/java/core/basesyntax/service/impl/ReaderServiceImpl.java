@@ -13,14 +13,12 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public List<String> readFromFile(String fileName) {
-        List<String> fruit;
         try {
-            fruit = Files.lines(Path.of(fileName))
+            return Files.lines(Path.of(fileName))
                     .skip(LINES_TO_SKIP)
                     .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + fileName);
         }
-        return fruit;
     }
 }

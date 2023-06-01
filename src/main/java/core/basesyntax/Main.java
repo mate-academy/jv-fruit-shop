@@ -12,8 +12,8 @@ import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.FruitStrategy;
-import core.basesyntax.strategy.OperationsStrategy;
-import core.basesyntax.strategy.impl.BalanceOperation;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.FruitStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperation;
 import core.basesyntax.strategy.impl.ReturnOperation;
@@ -23,12 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String SOURCE_PATH = "src/main/java/resources/database.csv";
-    private static final String REPORT_PATH = "src/main/java/resources/report.csv";
+    private static final String SOURCE_PATH = "src/main/resources/database.csv";
+    private static final String REPORT_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationsStrategy> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
@@ -41,9 +41,9 @@ public class Main {
 
         List<String> fruitList = readerService.readFromFile(SOURCE_PATH);
         List<FruitTransaction> fruitTransactionList =
-                parserService.formatData(fruitList);
+                parserService.parseData(fruitList);
 
-        fruitService.getAllOperationsStrategy(fruitTransactionList, fruitStrategy);
+        fruitService.processTransactions(fruitTransactionList, fruitStrategy);
         writeToFileService.writeToFile(reportService.getReport(), REPORT_PATH);
     }
 }

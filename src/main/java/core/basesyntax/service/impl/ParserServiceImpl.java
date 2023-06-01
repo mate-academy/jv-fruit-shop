@@ -12,7 +12,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int QUANTITY_POSITION = 2;
 
     @Override
-    public List<FruitTransaction> formatData(List<String> dataList) {
+    public List<FruitTransaction> parseData(List<String> dataList) {
         return dataList.stream()
                 .map(line -> line.split(COMMA_SEPARATOR))
                 .map(array -> new FruitTransaction(
