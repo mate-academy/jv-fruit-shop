@@ -3,6 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitModel;
 import java.util.List;
 
-public interface ParseService {
-    List<FruitModel> parsedData(List<String> strings);
+public interface ParserService {
+    List<FruitModel> parseData(List<String> strings);
 }

@@ -11,15 +11,6 @@ public class FruitModel {
         this.quantity = quantity;
     }
 
-    public static Operation getOperation(String code) {
-        for (Operation operation : Operation.values()) {
-            if (code.equals(operation.code)) {
-                return operation;
-            }
-        }
-        return null;
-    }
-
     public Operation getOperation() {
         return operation;
     }
@@ -42,6 +33,15 @@ public class FruitModel {
 
         Operation(String code) {
             this.code = code;
+        }
+
+        public static Operation getOperation(String code) {
+            for (Operation operation : Operation.values()) {
+                if (code.equals(operation.getCode())) {
+                    return operation;
+                }
+            }
+            return null;
         }
 
         public String getCode() {
