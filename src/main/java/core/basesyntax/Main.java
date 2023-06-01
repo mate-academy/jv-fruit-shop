@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.service.FileReader;
 import core.basesyntax.service.impl.CsvFileReaderImpl;
 import core.basesyntax.service.impl.CsvFileWriterImpl;
 
@@ -15,14 +16,17 @@ public class Main {
         System.out.println("-----------------------");
         System.out.println("-  --= Fuit shop =--  -");
         System.out.println("-----------------------");
-        List<String> linesFormFile = new CsvFileReaderImpl().readFile(READ_FILE_PATH);
+
+        FileReader fruitReader = new CsvFileReaderImpl();
+        List<String> linesFormFile = fruitReader.readFile(READ_FILE_PATH);
+
         for (String line :
                 linesFormFile) {
             System.out.println(line);
         }
         System.out.println("--------------------------");
-        CsvFileWriterImpl report = new CsvFileWriterImpl();
-        report.writeFile(WRITE_FILE_PATH);
+//        CsvFileWriterImpl report = new CsvFileWriterImpl();
+//        report.writeFile(WRITE_FILE_PATH);
 
 
     }

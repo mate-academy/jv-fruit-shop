@@ -1,22 +1,27 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.db.Storage;
-
+import java.util.HashMap;
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao{
+    private final Map<String, Integer> fruitStorageMap;
+
+    public StorageDaoImpl() {
+        this.fruitStorageMap = new HashMap<>();
+    }
+
     @Override
     public void add(String fruitName, Integer amount) {
-        Storage.fruitStorageMap.put(fruitName, amount);
+        fruitStorageMap.put(fruitName, amount);
     }
 
     @Override
     public Integer get(String fruitName) {
-        return Storage.fruitStorageMap.get(fruitName);
+        return fruitStorageMap.get(fruitName);
     }
 
     @Override
     public Map<String, Integer> getAll() {
-        return Storage.fruitStorageMap;
+        return fruitStorageMap;
     }
 }

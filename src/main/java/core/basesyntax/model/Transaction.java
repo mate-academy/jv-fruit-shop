@@ -48,7 +48,7 @@ public class Transaction {
             return code;
         }
 
-        public static Transaction.Operation getByCode(String code) {
+        public static Operation getByCode(String code) {
             for (Transaction.Operation operation : Transaction.Operation.values()) {
                 if (operation.getCode().equals(code)) {
                     return operation;

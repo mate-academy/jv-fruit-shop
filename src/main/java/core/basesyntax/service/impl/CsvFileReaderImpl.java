@@ -1,29 +1,18 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CsvFileReader;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import core.basesyntax.service.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
-public class CsvFileReaderImpl implements CsvFileReader {
+public class CsvFileReaderImpl implements FileReader {
     @Override
     public List<String> readFile(String filePath) {
-        File fileName = new File(filePath);
-        List<String> fileLines = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                fileLines.add(line);
-                line = bufferedReader.readLine();
-            }
+        try {
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file: " + filePath, e);
+            throw new RuntimeException("Can't read from file " + filePath, e);
         }
-        return fileLines;
     }
 }
