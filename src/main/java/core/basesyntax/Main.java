@@ -30,6 +30,7 @@ public class Main {
         fruitService.processTransactions(fruitTransactions, strategy);
         WriterService writeService = new WriteServiceImpl();
         ReportService reportService = new ReportServiceImpl();
-        writeService.writeToFile(REPORT, reportService.createReport());
+        String report = reportService.createReport();
+        writeService.writeToFile(REPORT, report);
     }
 }

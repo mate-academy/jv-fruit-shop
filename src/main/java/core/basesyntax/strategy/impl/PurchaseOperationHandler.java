@@ -1,18 +1,16 @@
 package core.basesyntax.strategy.impl;
 
-import static javax.swing.UIManager.get;
-import static javax.swing.UIManager.put;
-
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        int previousQuantity = (int) get(transaction.getFruit());
-        if (transaction.getQuantity() > previousQuantity) {
+        int previousQuantity = Storage.get(transaction.getFruit());
+        if (transaction.getQuantity() > previousQuantity || transaction.getQuantity() < 0) {
             throw new RuntimeException("There is no enough fruits");
         }
-        put(transaction.getFruit(), previousQuantity - transaction.getQuantity());
+        Storage.put(transaction.getFruit(), previousQuantity - transaction.getQuantity());
     }
 }

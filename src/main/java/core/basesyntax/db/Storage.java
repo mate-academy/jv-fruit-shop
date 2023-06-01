@@ -9,7 +9,7 @@ public class Storage {
         return Storage.FRUIT_STORAGE.getOrDefault(fruit, 0);
     }
 
-    public void put(String fruit, Integer quantity) {
+    public static void put(String fruit, Integer quantity) {
         Storage.FRUIT_STORAGE.put(fruit, quantity);
     }
 }
