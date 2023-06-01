@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TransactionServiceImpl implements TransactionService {
-
     private static final String SEPARATOR = ",";
     private static final int TRANSACTION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
