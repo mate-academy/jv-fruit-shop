@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Writer;
+import core.basesyntax.service.WriterService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-public class WriterImpl implements Writer {
+public class WriterServiceImpl implements WriterService {
     @Override
     public void writeFile(String list, String outputFileName) {
         File file = new File(outputFileName);

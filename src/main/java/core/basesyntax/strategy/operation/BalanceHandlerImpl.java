@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 
-public class BalanceImpl implements OperationHandler {
+public class BalanceHandlerImpl implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();

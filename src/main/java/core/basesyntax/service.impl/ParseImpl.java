@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseImpl implements Parser {
+public class ParseImpl implements ParserService {
 
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;

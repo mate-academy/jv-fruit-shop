@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.models.FruitTransaction;
 import java.util.List;
 
-public interface Parser {
+public interface ParserService {
 
     List<FruitTransaction> parse(List<String> parse);
 }
