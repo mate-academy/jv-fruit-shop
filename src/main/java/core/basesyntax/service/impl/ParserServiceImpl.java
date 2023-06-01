@@ -5,7 +5,7 @@ import core.basesyntax.service.ParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DataParseImpl implements ParserService {
+public class ParserServiceImpl implements ParserService {
     private static final String SEPARATOR = ",";
     private static final int CODE_OF_OPERATION = 0;
     private static final int FRUIT_NAME = 1;

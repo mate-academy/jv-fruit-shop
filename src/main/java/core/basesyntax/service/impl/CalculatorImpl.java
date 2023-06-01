@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CalculateService;
+import core.basesyntax.service.CalculatorService;
 import core.basesyntax.strategy.FruitHandler;
 import core.basesyntax.strategy.FruitHandlerStrategy;
 import java.util.List;
 
-public class CalculatorImpl implements CalculateService {
+public class CalculatorImpl implements CalculatorService {
     private FruitHandlerStrategy fruitHandlerStrategy;
 
     public CalculatorImpl(FruitHandlerStrategy fruitHandlerStrategy) {
@@ -16,7 +16,7 @@ public class CalculatorImpl implements CalculateService {
     public void calculate(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.forEach(fruitTransaction -> {
             FruitHandler handler = fruitHandlerStrategy
-                    .getOperationService(fruitTransaction.getOperation());
+                    .getHandler(fruitTransaction.getOperation());
             handler.calculateFruitOperation(fruitTransaction);
         });
     }

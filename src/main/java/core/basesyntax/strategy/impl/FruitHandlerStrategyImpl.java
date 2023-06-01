@@ -6,13 +6,19 @@ import core.basesyntax.strategy.FruitHandlerStrategy;
 import java.util.Map;
 
 public class FruitHandlerStrategyImpl implements FruitHandlerStrategy {
-    private Map<FruitTransaction.Operation, FruitHandler> strategies
-            = Map.of(FruitTransaction.Operation.BALANCE, new BalanceImpl(),
-            FruitTransaction.Operation.PURCHASE, new PurchaseImpl(),
-            FruitTransaction.Operation.RETURN, new ReturnImpl(),
-            FruitTransaction.Operation.SUPPLY, new SupplyImpl());
+    private final Map<FruitTransaction.Operation, FruitHandler> strategy;
 
-    public FruitHandler getOperationService(FruitTransaction.Operation operation) {
-        return strategies.get(operation);
+    public FruitHandlerStrategyImpl(Map<FruitTransaction.Operation, FruitHandler> strategy) {
+        this.strategy = strategy;
+    }
+
+    @Override
+    public FruitHandler getHandler(FruitTransaction.Operation operation) {
+        if (operation != null) {
+            return strategy.get(operation);
+        } else {
+            throw new RuntimeException("Operation is null in "
+                    + getClass().getSimpleName());
+        }
     }
 }
