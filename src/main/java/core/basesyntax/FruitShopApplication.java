@@ -4,12 +4,23 @@ import core.basesyntax.db.MapStorage;
 import core.basesyntax.db.Storage;
 import core.basesyntax.mapper.FruitTransactionMapper;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitTransactionProcessor;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionProcessorImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationHandlerStrategy;
-import core.basesyntax.service.strategy.impl.*;
-
+import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.service.strategy.impl.OperationHandlerStrategyImpl;
+import core.basesyntax.service.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.service.strategy.impl.SupplyOperationHandler;
 import java.util.List;
 import java.util.Map;
 

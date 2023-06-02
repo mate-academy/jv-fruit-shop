@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
-
 import java.util.Map;
 import java.util.Optional;
 
@@ -36,7 +35,8 @@ public class FruitServiceImpl implements FruitService {
         );
 
         if (quantityOptional.isEmpty()) {
-            throw new RuntimeException("Such fruit(" + fruitTransaction.fruit() + ") is not in storage");
+            throw new RuntimeException("Such fruit(" + fruitTransaction.fruit()
+                    + ") is not in storage");
         }
 
         storage.add(

@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionProcessor;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationHandlerStrategy;
-
 import java.util.List;
 
 public class FruitTransactionProcessorImpl implements FruitTransactionProcessor {
@@ -17,7 +16,8 @@ public class FruitTransactionProcessorImpl implements FruitTransactionProcessor 
     @Override
     public void process(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.forEach(fruitTransaction -> {
-            OperationHandler handler = operationHandlerStrategy.getByOperation(fruitTransaction.operation());
+            OperationHandler handler = operationHandlerStrategy
+                    .getByOperation(fruitTransaction.operation());
             handler.handle(fruitTransaction);
         });
     }
