@@ -11,7 +11,7 @@ public class WriterServiceImpl implements WriterService {
         try {
             Files.write(Path.of(filePath), fileContent.getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't write to file: " + filePath, e);
         }
     }
 }

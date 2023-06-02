@@ -18,7 +18,6 @@ import core.basesyntax.service.transaction.SupplyHandlerImpl;
 import core.basesyntax.service.transaction.TransactionHandler;
 import core.basesyntax.strategy.TransactionStrategy;
 import core.basesyntax.strategy.TransactionStrategyImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,19 +31,19 @@ public class Main {
     private static final WriterService writerService = new WriterServiceImpl();
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, TransactionHandler> transactionHandlersMap =
-                new HashMap<>();
-        transactionHandlersMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandlerImpl());
-        transactionHandlersMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandlerImpl());
-        transactionHandlersMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandlerImpl());
-        transactionHandlersMap.put(FruitTransaction.Operation.RETURN, new ReturnHandlerImpl());
+        Map<FruitTransaction.Operation, TransactionHandler> transactionHandlersMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceHandlerImpl(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseHandlerImpl(),
+                FruitTransaction.Operation.SUPPLY, new SupplyHandlerImpl(),
+                FruitTransaction.Operation.RETURN, new ReturnHandlerImpl()
+        );
 
         List<String> inputData = readerService.readFromFile(inputFilePath);
-        parserService.parseData(inputData);
+        List<FruitTransaction> transactions = parserService.parseData(inputData);
 
         TransactionStrategy transactionStrategy =
                 new TransactionStrategyImpl(transactionHandlersMap);
-        processDataService.processTransactions(transactionStrategy);
+        processDataService.processTransactions(transactions, transactionStrategy);
 
         String report = reportService.createReport();
         writerService.writeToFile(report, reportFilePath);

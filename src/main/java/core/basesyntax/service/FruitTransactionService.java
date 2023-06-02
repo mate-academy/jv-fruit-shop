@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
+
 public interface FruitTransactionService {
-    void createFruitTransaction(String operationCode, String fruit, int quantity);
+    FruitTransaction createTransaction(String operationCode, String fruit, int quantity);
 }

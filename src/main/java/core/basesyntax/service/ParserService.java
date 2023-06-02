@@ -1,8 +1,9 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface ParserService {
-    void parseData(List<String> inputDataList);
+    List<FruitTransaction> parseData(List<String> inputDataList);
 
 }
