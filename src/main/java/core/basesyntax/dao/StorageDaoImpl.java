@@ -3,7 +3,7 @@ package core.basesyntax.dao;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StorageDaoImpl implements StorageDao{
+public class StorageDaoImpl implements StorageDao {
     private final Map<String, Integer> fruitStorageMap;
 
     public StorageDaoImpl() {
@@ -16,7 +16,7 @@ public class StorageDaoImpl implements StorageDao{
     }
 
     @Override
-    public Integer get(String fruitName) {
+    public Integer getCurrentAmount(String fruitName) {
         return fruitStorageMap.get(fruitName);
     }
 

@@ -19,17 +19,17 @@ public class Transaction {
         return productName;
     }
 
-    public int get() {
+    public int getAmount() {
         return amount;
     }
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "operation=" + operation +
-                ", productName='" + productName + '\'' +
-                ", amount=" + amount +
-                '}';
+        return "Transaction{"
+                + "operation=" + operation
+                + ", productName='" + productName + '\''
+                + ", amount=" + amount
+                + '}';
     }
 
     public enum Operation {

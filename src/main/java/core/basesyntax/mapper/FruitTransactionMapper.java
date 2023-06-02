@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 public class FruitTransactionMapper {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
-    private static final int AMOUNT_INDEX = 1;
+    private static final int AMOUNT_INDEX = 2;
+
     public List<Transaction> mapToTransactions(List<String> lines) {
         final List<Transaction> transactions = lines.stream()
                 .skip(1)
@@ -18,7 +19,8 @@ public class FruitTransactionMapper {
     }
 
     private Transaction mapToOneTransaction(String[] partedLine) {
-        Transaction.Operation operation = Transaction.Operation.getByCode(partedLine[OPERATION_INDEX]);
+        Transaction.Operation operation = Transaction.Operation
+                .getByCode(partedLine[OPERATION_INDEX]);
         String fruitName = partedLine[FRUIT_INDEX];
         int amount = Integer.valueOf(partedLine[AMOUNT_INDEX]);
         return new Transaction(operation, fruitName, amount);
