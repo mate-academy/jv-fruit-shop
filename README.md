@@ -53,7 +53,7 @@ Let's check in details all types of activities:
     r,apple,10 
     p,apple,20 
     p,banana,5 
-    s,banana,50/
+    s,banana,50
 ```
 
 ### Expecting report file example
