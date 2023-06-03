@@ -1,20 +1,19 @@
 package fruitshop.strategy;
 
 import fruitshop.model.FruitTransaction;
-import fruitshop.strategy.impl.OperationStrategy;
-
+import fruitshop.strategy.handler.OperationHandler;
 import java.util.Map;
 
 public class HandleStrategyImpl implements HandleStrategy {
-    private Map<FruitTransaction.Operation, OperationStrategy> operationOperationStrategyMap;
+    private Map<FruitTransaction.Operation, OperationHandler> operationOperationStrategyMap;
 
     public HandleStrategyImpl(Map<FruitTransaction.Operation,
-            OperationStrategy> operationOperationStrategyMap) {
+            OperationHandler> operationOperationStrategyMap) {
         this.operationOperationStrategyMap = operationOperationStrategyMap;
     }
 
     @Override
-    public OperationStrategy getStrategy(FruitTransaction.Operation operation) {
+    public OperationHandler getStrategy(FruitTransaction.Operation operation) {
         return operationOperationStrategyMap.get(operation);
     }
 }

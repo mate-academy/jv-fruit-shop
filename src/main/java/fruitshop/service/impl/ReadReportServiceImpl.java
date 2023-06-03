@@ -1,22 +1,15 @@
 package fruitshop.service.impl;
 
-import fruitshop.service.ReadReport;
-
+import fruitshop.service.ReadReportService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class ReadReportImpl implements ReadReport {
-    private File file;
-    private List<String> text;
-
-    public ReadReportImpl(File file) {
-        this.file = file;
-    }
+public class ReadReportServiceImpl implements ReadReportService {
 
     @Override
-    public List<String> readReport() {
+    public List<String> readReport(File file) {
         try {
             return Files.readAllLines(file.toPath());
         } catch (IOException e) {

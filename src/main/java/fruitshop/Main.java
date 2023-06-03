@@ -1,55 +1,55 @@
 package fruitshop;
 
-import fruitshop.dao.FruitDao;
-import fruitshop.dao.FruitDaoImpl;
 import fruitshop.model.FruitTransaction;
-import fruitshop.service.CreateReportText;
-import fruitshop.service.impl.CreateReportTextImpl;
-import fruitshop.service.ParseText;
-import fruitshop.service.impl.ParseTextImpl;
-import fruitshop.service.ReadReport;
-import fruitshop.service.impl.ReadReportImpl;
-import fruitshop.service.WriteReportToFile;
-import fruitshop.service.impl.WriteReportToFileImpl;
-import fruitshop.strategy.impl.BalanceOperationStrategy;
+import fruitshop.service.CreateReportTextService;
+import fruitshop.service.ParseTextService;
+import fruitshop.service.ReadReportService;
+import fruitshop.service.WriteReportToFileService;
+import fruitshop.service.impl.CreateReportTextServiceImpl;
+import fruitshop.service.impl.ParseTextServiceImpl;
+import fruitshop.service.impl.ReadReportServiceImpl;
+import fruitshop.service.impl.WriteReportToFileServiceImpl;
 import fruitshop.strategy.HandleStrategy;
 import fruitshop.strategy.HandleStrategyImpl;
-import fruitshop.strategy.impl.OperationStrategy;
-import fruitshop.strategy.impl.PurchaseOperationStrategy;
-import fruitshop.strategy.impl.ReturnOperationStrategy;
-import fruitshop.strategy.impl.SupplyOperationStrategy;
+import fruitshop.strategy.handler.BalanceOperationHandler;
+import fruitshop.strategy.handler.OperationHandler;
+import fruitshop.strategy.handler.PurchaseOperationHandler;
+import fruitshop.strategy.handler.ReturnOperationHandler;
+import fruitshop.strategy.handler.SupplyOperationHandler;
 import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final File file = new File("src/main/resources/file.csv");
-    private static final File toFile = new File("src/main/resources/report.txt");
+    private static final File INPUT_FILE = new File("src/main/resources/database.csv");
+    private static final File REPORT = new File("src/main/resources/report.csv");
 
     public static void main(String[] args) {
-        ReadReport report = new ReadReportImpl(file);
-        ParseText parseText = new ParseTextImpl();
-        Map<FruitTransaction.Operation, OperationStrategy>
+        Map<FruitTransaction.Operation, OperationHandler>
                 operationOperationStrategyMap = new HashMap<>();
         operationOperationStrategyMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationStrategy());
+                new BalanceOperationHandler());
         operationOperationStrategyMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationStrategy());
+                new PurchaseOperationHandler());
         operationOperationStrategyMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationStrategy());
+                new ReturnOperationHandler());
         operationOperationStrategyMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationStrategy());
+                new SupplyOperationHandler());
         HandleStrategy strategy = new HandleStrategyImpl(operationOperationStrategyMap);
-        FruitDao dao = new FruitDaoImpl();
-        List<FruitTransaction> fruitTransactions = parseText.parseReport(report);
+        ReadReportService report = new ReadReportServiceImpl();
+        ParseTextService parseTextService = new ParseTextServiceImpl();
+        List<String> dataFromFile = report.readReport(INPUT_FILE);
+        List<FruitTransaction> fruitTransactions = parseTextService.parseReport(dataFromFile);
+
         for (FruitTransaction fruitTransaction : fruitTransactions) {
-            dao.add(fruitTransaction,
-                    strategy.getStrategy(fruitTransaction.getOperation()));
+            OperationHandler operationHandler = strategy
+                    .getStrategy(fruitTransaction.getOperation());
+            operationHandler.operate(fruitTransaction);
         }
-        CreateReportText createReportText = new CreateReportTextImpl();
-        Map<String, Integer> reportText = createReportText.createReportText();
-        WriteReportToFile writeReportToFile = new WriteReportToFileImpl();
-        writeReportToFile.writeReportToFile(reportText, toFile);
+        CreateReportTextService createReportTextService = new CreateReportTextServiceImpl();
+        String reportText = createReportTextService.createReportText();
+        WriteReportToFileService writeReportToFileService = new WriteReportToFileServiceImpl();
+        writeReportToFileService.writeReportToFile(reportText, REPORT);
     }
 }
