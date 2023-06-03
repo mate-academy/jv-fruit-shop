@@ -1,11 +1,12 @@
 package fruitshop.service.impl;
 
 import fruitshop.db.Storage;
-import fruitshop.service.CreateReportTextService;
+import fruitshop.service.ReportService;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CreateReportTextServiceImpl implements CreateReportTextService {
+public class ReportServiceImpl implements ReportService {
+    private static final String TITLE = "fruit,quantity" + System.lineSeparator();
     private static final String COMMA_SEPARATOR = ",";
     private Map<String, Integer> result = new HashMap<>();
 
@@ -13,6 +14,7 @@ public class CreateReportTextServiceImpl implements CreateReportTextService {
     public String createReportText() {
         StringBuilder report = new StringBuilder();
         Storage.fruits.forEach((key, value) -> report
+                .append(TITLE)
                 .append(key)
                 .append(COMMA_SEPARATOR)
                 .append(value)

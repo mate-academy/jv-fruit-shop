@@ -1,11 +1,11 @@
 package fruitshop.service.impl;
 
 import fruitshop.model.FruitTransaction;
-import fruitshop.service.ParseTextService;
+import fruitshop.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseTextServiceImpl implements ParseTextService {
+public class CsvTransactionParserImpl implements TransactionParser {
     private static final String COMMA_SEPARATOR = ",";
     private static final int TYPE_POSITION = 0;
     private static final int FRUIT_POSITION = 1;

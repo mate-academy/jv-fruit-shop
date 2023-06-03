@@ -3,6 +3,6 @@ package fruitshop.service;
 import java.io.File;
 import java.util.List;
 
-public interface ReadReportService {
+public interface FileReader {
     List<String> readReport(File file);
 }

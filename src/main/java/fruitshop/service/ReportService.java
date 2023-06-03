@@ -1,5 +1,5 @@
 package fruitshop.service;
 
-public interface CreateReportTextService {
+public interface ReportService {
     String createReportText();
 }

@@ -1,14 +1,14 @@
 package fruitshop;
 
 import fruitshop.model.FruitTransaction;
-import fruitshop.service.CreateReportTextService;
-import fruitshop.service.ParseTextService;
-import fruitshop.service.ReadReportService;
-import fruitshop.service.WriteReportToFileService;
-import fruitshop.service.impl.CreateReportTextServiceImpl;
-import fruitshop.service.impl.ParseTextServiceImpl;
-import fruitshop.service.impl.ReadReportServiceImpl;
-import fruitshop.service.impl.WriteReportToFileServiceImpl;
+import fruitshop.service.FileReader;
+import fruitshop.service.FileWriter;
+import fruitshop.service.ReportService;
+import fruitshop.service.TransactionParser;
+import fruitshop.service.impl.CsvTransactionParserImpl;
+import fruitshop.service.impl.FileReaderImpl;
+import fruitshop.service.impl.FileWriterImpl;
+import fruitshop.service.impl.ReportServiceImpl;
 import fruitshop.strategy.OperationStrategy;
 import fruitshop.strategy.OperationStrategyImpl;
 import fruitshop.strategy.handler.BalanceOperationHandler;
@@ -37,18 +37,18 @@ public class Main {
         operationOperationStrategyMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandler());
         OperationStrategy strategy = new OperationStrategyImpl(operationOperationStrategyMap);
-        ReadReportService report = new ReadReportServiceImpl();
-        ParseTextService parseTextService = new ParseTextServiceImpl();
+        FileReader report = new FileReaderImpl();
+        TransactionParser transactionParser = new CsvTransactionParserImpl();
         List<String> dataFromFile = report.readReport(INPUT_FILE);
-        List<FruitTransaction> fruitTransactions = parseTextService.parseReport(dataFromFile);
+        List<FruitTransaction> fruitTransactions = transactionParser.parseReport(dataFromFile);
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler operationHandler = strategy
                     .getStrategy(fruitTransaction.getOperation());
             operationHandler.operate(fruitTransaction);
         }
-        CreateReportTextService createReportTextService = new CreateReportTextServiceImpl();
-        String reportText = createReportTextService.createReportText();
-        WriteReportToFileService writeReportToFileService = new WriteReportToFileServiceImpl();
-        writeReportToFileService.writeReportToFile(reportText, REPORT);
+        ReportService reportService = new ReportServiceImpl();
+        String reportText = reportService.createReportText();
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeReportToFile(reportText, REPORT);
     }
 }
