@@ -43,7 +43,7 @@ public class Main {
         List<FruitTransaction> fruitTransactions = transactionParser.parseReport(dataFromFile);
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler operationHandler = strategy
-                    .getStrategy(fruitTransaction.getOperation());
+                    .getHandler(fruitTransaction.getOperation());
             operationHandler.operate(fruitTransaction);
         }
         ReportService reportService = new ReportServiceImpl();
