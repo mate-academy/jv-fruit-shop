@@ -1,4 +1,4 @@
-package fruitshop.service;
+package core.basesyntax.service;
 
 public interface CreateReportTextService {
     String createReportText();

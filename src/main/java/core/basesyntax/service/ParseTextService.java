@@ -1,6 +1,7 @@
-package fruitshop.service;
+package core.basesyntax.service;
 
-import fruitshop.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
+
 import java.util.List;
 
 public interface ParseTextService {
