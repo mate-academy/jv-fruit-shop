@@ -41,7 +41,6 @@ public class Main {
         ParseTextService parseTextService = new ParseTextServiceImpl();
         List<String> dataFromFile = report.readReport(INPUT_FILE);
         List<FruitTransaction> fruitTransactions = parseTextService.parseReport(dataFromFile);
-
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler operationHandler = strategy
                     .getStrategy(fruitTransaction.getOperation());
