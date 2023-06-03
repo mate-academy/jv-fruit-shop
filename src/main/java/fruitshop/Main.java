@@ -9,8 +9,8 @@ import fruitshop.service.impl.CreateReportTextServiceImpl;
 import fruitshop.service.impl.ParseTextServiceImpl;
 import fruitshop.service.impl.ReadReportServiceImpl;
 import fruitshop.service.impl.WriteReportToFileServiceImpl;
-import fruitshop.strategy.HandleStrategy;
-import fruitshop.strategy.HandleStrategyImpl;
+import fruitshop.strategy.OperationStrategy;
+import fruitshop.strategy.OperationStrategyImpl;
 import fruitshop.strategy.handler.BalanceOperationHandler;
 import fruitshop.strategy.handler.OperationHandler;
 import fruitshop.strategy.handler.PurchaseOperationHandler;
@@ -36,7 +36,7 @@ public class Main {
                 new ReturnOperationHandler());
         operationOperationStrategyMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandler());
-        HandleStrategy strategy = new HandleStrategyImpl(operationOperationStrategyMap);
+        OperationStrategy strategy = new OperationStrategyImpl(operationOperationStrategyMap);
         ReadReportService report = new ReadReportServiceImpl();
         ParseTextService parseTextService = new ParseTextServiceImpl();
         List<String> dataFromFile = report.readReport(INPUT_FILE);

@@ -4,10 +4,10 @@ import fruitshop.model.FruitTransaction;
 import fruitshop.strategy.handler.OperationHandler;
 import java.util.Map;
 
-public class HandleStrategyImpl implements HandleStrategy {
+public class OperationStrategyImpl implements OperationStrategy {
     private Map<FruitTransaction.Operation, OperationHandler> operationOperationStrategyMap;
 
-    public HandleStrategyImpl(Map<FruitTransaction.Operation,
+    public OperationStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationOperationStrategyMap) {
         this.operationOperationStrategyMap = operationOperationStrategyMap;
     }
