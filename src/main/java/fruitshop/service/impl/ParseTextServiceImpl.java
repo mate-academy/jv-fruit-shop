@@ -17,11 +17,11 @@ public class ParseTextServiceImpl implements ParseTextService {
     public List<FruitTransaction> parseReport(List<String> stringList) {
         fruitTransactions = new ArrayList<>();
         for (int i = DEFAULT_POSITION; i < stringList.size(); i++) {
-            String[] parts = stringList.get(i).split(COMMA_SEPARATOR);
+            String[] parse = stringList.get(i).split(COMMA_SEPARATOR);
             FruitTransaction.Operation operation
-                    = FruitTransaction.Operation.getByCode(parts[TYPE_POSITION]);
-            String fruit = parts[FRUIT_POSITION];
-            int quantity = Integer.parseInt(parts[QUANTITY_POSITION]);
+                    = FruitTransaction.Operation.getByCode(parse[TYPE_POSITION]);
+            String fruit = parse[FRUIT_POSITION];
+            int quantity = Integer.parseInt(parse[QUANTITY_POSITION]);
             fruitTransactions.add(new FruitTransaction(operation, fruit, quantity));
         }
         return fruitTransactions;
