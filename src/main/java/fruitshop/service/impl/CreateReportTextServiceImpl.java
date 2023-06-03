@@ -1,7 +1,7 @@
-package core.basesyntax.service.impl;
+package fruitshop.service.impl;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.service.CreateReportTextService;
+import fruitshop.db.Storage;
+import fruitshop.service.CreateReportTextService;
 import java.util.HashMap;
 import java.util.Map;
 

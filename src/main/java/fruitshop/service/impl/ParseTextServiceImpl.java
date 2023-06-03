@@ -1,8 +1,7 @@
-package core.basesyntax.service.impl;
+package fruitshop.service.impl;
 
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ParseTextService;
-
+import fruitshop.model.FruitTransaction;
+import fruitshop.service.ParseTextService;
 import java.util.ArrayList;
 import java.util.List;
 

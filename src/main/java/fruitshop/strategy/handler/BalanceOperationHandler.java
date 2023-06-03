@@ -1,7 +1,7 @@
-package core.basesyntax.strategy.handler;
+package fruitshop.strategy.handler;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
+import fruitshop.db.Storage;
+import fruitshop.model.FruitTransaction;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override

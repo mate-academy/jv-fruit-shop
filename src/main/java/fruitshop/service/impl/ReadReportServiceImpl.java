@@ -1,7 +1,6 @@
-package core.basesyntax.service.impl;
+package fruitshop.service.impl;
 
-import core.basesyntax.service.ReadReportService;
-
+import fruitshop.service.ReadReportService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package fruitshop.service;
 
 import java.io.File;
 

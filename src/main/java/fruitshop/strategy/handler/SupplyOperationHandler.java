@@ -1,9 +1,9 @@
-package core.basesyntax.strategy.handler;
+package fruitshop.strategy.handler;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
+import fruitshop.db.Storage;
+import fruitshop.model.FruitTransaction;
 
-public class ReturnOperationHandler implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void operate(FruitTransaction transaction) {
         int oldQuantity = Storage.fruits.get(transaction.getFruit());

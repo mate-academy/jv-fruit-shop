@@ -1,4 +1,4 @@
-package core.basesyntax.db;
+package fruitshop.db;
 
 import java.util.HashMap;
 import java.util.Map;
