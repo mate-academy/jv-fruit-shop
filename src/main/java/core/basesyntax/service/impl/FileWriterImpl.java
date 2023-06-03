@@ -1,6 +1,6 @@
-package fruitshop.service.impl;
+package core.basesyntax.service.impl;
 
-import fruitshop.service.FileWriter;
+import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;

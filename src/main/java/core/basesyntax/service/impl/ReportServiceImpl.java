@@ -1,7 +1,7 @@
-package fruitshop.service.impl;
+package core.basesyntax.service.impl;
 
-import fruitshop.db.Storage;
-import fruitshop.service.ReportService;
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportService;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,8 +13,8 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public String createReportText() {
         StringBuilder report = new StringBuilder();
+        report.append(TITLE);
         Storage.fruits.forEach((key, value) -> report
-                .append(TITLE)
                 .append(key)
                 .append(COMMA_SEPARATOR)
                 .append(value)
