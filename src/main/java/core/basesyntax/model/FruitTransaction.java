@@ -5,6 +5,9 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
+    private FruitTransaction() {
+    }
+
     private FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
@@ -12,7 +15,7 @@ public class FruitTransaction {
     }
 
     public static FruitTransaction of(String operationCode, String fruit, int quantity) {
-        Operation operationValue = getOperationByCode(operationCode);
+        Operation operationValue = new FruitTransaction().getOperationByCode(operationCode);
         return new FruitTransaction(operationValue, fruit, quantity);
     }
 
@@ -66,7 +69,7 @@ public class FruitTransaction {
                 + '}';
     }
 
-    private static Operation getOperationByCode(String operationCode) {
+    private Operation getOperationByCode(String operationCode) {
         for (Operation value : Operation.values()) {
             if (value.getCode().equals(operationCode)) {
                 return value;
