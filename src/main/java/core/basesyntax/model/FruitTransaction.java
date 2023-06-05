@@ -5,18 +5,10 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    private FruitTransaction() {
-    }
-
-    private FruitTransaction(Operation operation, String fruit, int quantity) {
-        this.operation = operation;
+    public FruitTransaction(String operationCode, String fruit, int quantity) {
+        this.operation = getOperationByCode(operationCode);
         this.fruit = fruit;
         this.quantity = quantity;
-    }
-
-    public static FruitTransaction of(String operationCode, String fruit, int quantity) {
-        Operation operationValue = new FruitTransaction().getOperationByCode(operationCode);
-        return new FruitTransaction(operationValue, fruit, quantity);
     }
 
     public Operation getOperation() {

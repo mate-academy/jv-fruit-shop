@@ -26,7 +26,7 @@ public class ParserServiceImpl implements ParserService {
             String operationCode = entryData[operationCodeIndex];
             String fruit = entryData[fruitNameIndex];
             int quantity = Integer.parseInt(entryData[quantityIndex].trim());
-            transactions.add(FruitTransaction.of(operationCode, fruit, quantity));
+            transactions.add(new FruitTransaction(operationCode, fruit, quantity));
         }
         return transactions;
     }
