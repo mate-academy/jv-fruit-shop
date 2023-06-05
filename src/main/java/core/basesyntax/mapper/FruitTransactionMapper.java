@@ -20,7 +20,7 @@ public class FruitTransactionMapper {
 
     private Transaction mapToOneTransaction(String[] partedLine) {
         Transaction.Operation operation = Transaction.Operation
-                .getByCode(partedLine[OPERATION_INDEX]);
+                .getOperationByCode(partedLine[OPERATION_INDEX]);
         String fruitName = partedLine[FRUIT_INDEX];
         int amount = Integer.valueOf(partedLine[AMOUNT_INDEX]);
         return new Transaction(operation, fruitName, amount);
