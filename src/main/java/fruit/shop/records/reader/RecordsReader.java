@@ -1,4 +1,4 @@
-package records.reader;
+package fruit.shop.records.reader;
 
 import java.util.List;
 

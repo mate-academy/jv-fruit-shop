@@ -1,4 +1,4 @@
-package records.writer;
+package fruit.shop.records.writer;
 
 import java.util.List;
 
