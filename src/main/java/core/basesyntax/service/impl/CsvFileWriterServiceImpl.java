@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class CsvFileWriterServiceImpl implements CsvFileWriterService {
+
     @Override
     public void writeToFile(String fileName, String data) {
         File file = new File(fileName);
