@@ -11,11 +11,10 @@ public class ParserImpl implements ParserService {
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int DEFAULT_POSITION = 1;
     private static final int QUANTITY_INDEX = 2;
-    private List<FruitTransaction> fruitTransactions;
 
     @Override
     public List<FruitTransaction> parser(List<String> stringList) {
-        fruitTransactions = new ArrayList<>();
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (int i = DEFAULT_POSITION; i < stringList.size(); i++) {
             String[] parse = stringList.get(i).split(CSV_SEPARATOR);
             FruitTransaction.Operation operation
