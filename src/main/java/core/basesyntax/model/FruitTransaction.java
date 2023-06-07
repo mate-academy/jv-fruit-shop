@@ -17,27 +17,12 @@ public class FruitTransaction {
         return operation;
     }
 
-    public FruitTransaction setOperation(Operation operation) {
-        this.operation = operation;
-        return this;
-    }
-
     public String getFruit() {
         return fruit;
     }
 
-    public FruitTransaction setFruit(String fruit) {
-        this.fruit = fruit;
-        return this;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public FruitTransaction setQuantity(int quantity) {
-        this.quantity = quantity;
-        return this;
     }
 
     public enum Operation {
@@ -46,7 +31,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String value;
+        private final String value;
 
         Operation(String code) {
             this.value = code;
