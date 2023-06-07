@@ -12,12 +12,10 @@ public class ReportInfoServiceImpl implements ReportInfoService {
         StringBuilder report = new StringBuilder();
         report.append(TITLE).append(System.lineSeparator());
 
-        Storage.fruits.forEach((fruit, quantity) -> {
-            report.append(fruit)
-                    .append(COMMA_SEPARATOR)
-                    .append(quantity)
-                    .append(System.lineSeparator());
-        });
+        Storage.fruits.forEach((fruit, quantity) -> report.append(fruit)
+                .append(COMMA_SEPARATOR)
+                .append(quantity)
+                .append(System.lineSeparator()));
 
         return report.toString();
     }
