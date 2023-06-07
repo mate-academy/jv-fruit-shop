@@ -18,7 +18,7 @@ public class RecordsSaverCommaSeparated implements RecordsSaver {
             String[] options = r.split(COMMA);
             ActivityStrategy activityStrategy = new ActivityStrategyImpl();
             int value;
-            if (report.containsKey(options[0])) {
+            if (report.containsKey(options[1])) {
                 value = activityStrategy.setValueAccordingToOption(options[0], report.get(options[FRUIT_INDEX]), Integer.parseInt(options[2]));
             } else {
                 value = activityStrategy.setValueAccordingToOption(options[0], 0, Integer.parseInt(options[2]));
