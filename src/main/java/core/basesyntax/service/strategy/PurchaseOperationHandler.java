@@ -7,6 +7,6 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public Integer applyOperation(Integer amount) {
-        return - amount;
+        return -amount;
     }
 }
