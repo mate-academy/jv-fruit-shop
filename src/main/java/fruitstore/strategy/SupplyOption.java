@@ -1,0 +1,8 @@
+package fruitstore.strategy;
+
+public class SupplyOption implements Option {
+    @Override
+    public int getOptionResult(int currentValue, int addValue) {
+        return currentValue + addValue;
+    }
+}
