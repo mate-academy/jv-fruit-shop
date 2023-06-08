@@ -8,11 +8,9 @@ public class SupplyHandler implements OperationHandler {
     public void operate(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
-        if (quantity >= 0) {
-            Storage.fruits.merge(fruit, quantity, Integer::sum);
-        } else {
+        if (quantity < 0) {
             throw new IllegalArgumentException("Invalid quantity: " + quantity);
         }
-
+        Storage.fruits.merge(fruit, quantity, Integer::sum);
     }
 }

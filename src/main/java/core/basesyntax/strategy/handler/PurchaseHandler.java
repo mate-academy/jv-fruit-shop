@@ -10,7 +10,7 @@ public class PurchaseHandler implements OperationHandler {
         int purchaseQuantity = transaction.getQuantity();
         if (purchaseQuantity <= storageQuantity && purchaseQuantity > 0) {
             int updateQuantity = storageQuantity - purchaseQuantity;
-            Storage.put(transaction.getFruit(), updateQuantity);
+            Storage.fruits.put(transaction.getFruit(), updateQuantity);
         } else {
             throw new IllegalArgumentException("Invalid purchase Quantity" + purchaseQuantity);
         }

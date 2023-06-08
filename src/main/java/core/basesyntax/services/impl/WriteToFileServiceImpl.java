@@ -11,7 +11,7 @@ public class WriteToFileServiceImpl implements WriteToFileService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(toFile))) {
             bufferedWriter.write(reportText);
         } catch (IOException e) {
-            throw new RuntimeException("can't write data to file: " + toFile);
+            throw new RuntimeException("can't write data to file: " + toFile, e);
         }
     }
 }
