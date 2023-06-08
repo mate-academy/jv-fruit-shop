@@ -6,14 +6,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class DaoCsvImpl implements Dao {
+public class DataBaseCsvImpl implements DataBase {
     private final String fullFilePath;
 
-    public DaoCsvImpl(String fileName, String path) {
-        this.fullFilePath = fileName;
-    }
-
-    public DaoCsvImpl(String fullFilePath) {
+    public DataBaseCsvImpl(String fullFilePath) {
         this.fullFilePath = fullFilePath;
     }
 
@@ -54,11 +50,5 @@ public class DaoCsvImpl implements Dao {
         } catch (IOException e) {
             throw new RuntimeException("Can't find file by path: " + fullFilePath, e);
         }
-    }
-
-    @Override
-    public void addDataToFile(List<String> listOfData) {
-        listOfData.addAll(getDataFromFile());
-        writeDataToFile(listOfData);
     }
 }

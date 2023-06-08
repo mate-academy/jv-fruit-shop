@@ -1,38 +1,28 @@
 package core.basesyntax.model;
 
 public enum Operation {
-    BALANCE("b", FruitsDirection.INCOMING.fruitsDirection),
-    SUPPLY("s", FruitsDirection.INCOMING.fruitsDirection),
-    PURCHASE("p", FruitsDirection.OUTGOING.fruitsDirection),
-    RETURN("r", FruitsDirection.INCOMING.fruitsDirection);
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
 
-    private String transaction;
-    private int direction;
+    private String operation;
 
-    Operation(String transaction, int direction) {
-        this.transaction = transaction;
-        this.direction = direction;
+    Operation(String operation) {
+        this.operation = operation;
     }
 
-    public String getTransaction() {
-        return transaction;
+    public String getOperation() {
+        return operation;
     }
 
-    public int getFruitDirection() {
-        return direction;
-    }
-
-    public void setTransaction(String transaction) {
-        this.transaction = transaction;
-    }
-
-    private enum FruitsDirection {
-        INCOMING(1),
-        OUTGOING(-1);
-        private final int fruitsDirection;
-
-        FruitsDirection(int fruitsDirection) {
-            this.fruitsDirection = fruitsDirection;
+    public static Operation getOperationByLetter(String operation) {
+        for (Operation op : Operation.values()) {
+            if (op.operation == operation) {
+                return op;
+            }
         }
+        throw new RuntimeException("Can't find Operation by letter " + operation);
     }
+
 }

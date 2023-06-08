@@ -15,4 +15,13 @@ public enum Fruit {
     public String getFruitName() {
         return fruitName;
     }
+
+    public static Fruit getFruitByName(String fruitName) {
+        for (Fruit fn : Fruit.values()) {
+            if (fn.fruitName == fruitName) {
+                return fn;
+            }
+        }
+        throw new RuntimeException("Can't find Fruit by name " + fruitName);
+    }
 }

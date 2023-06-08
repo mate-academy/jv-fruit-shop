@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.Dao;
-import core.basesyntax.db.DaoCsvImpl;
+import core.basesyntax.db.DataBase;
+import core.basesyntax.db.DataBaseCsvImpl;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +16,7 @@ public class ReadDailyTransactions {
     }
 
     public List<String> getListOfTransactions() {
-        Dao transactionFileConnection = new DaoCsvImpl(TRANSACTION_FULL_PATH);
-
+        DataBase transactionFileConnection = new DataBaseCsvImpl(TRANSACTION_FULL_PATH);
         return transactionFileConnection.getDataFromFile();
     }
 }
