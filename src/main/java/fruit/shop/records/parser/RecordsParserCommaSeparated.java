@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RecordsSaverCommaSeparated implements RecordsSaver {
-    public static final String COMMA = ",";
+public class RecordsParserCommaSeparated implements RecordsParser {
+    public static final String SEPARATOR = ",";
     public static final int FRUIT_INDEX = 1;
     public static final int OPTION_INDEX = 0;
     public static final int VALUE_INDEX = 2;
@@ -16,15 +16,15 @@ public class RecordsSaverCommaSeparated implements RecordsSaver {
     @Override
     public Map<String, Integer> saveRecordsToMap(List<String> records) {
         Map<String, Integer> report = new HashMap<>();
-        for (String r : records) {
-            String[] options = r.split(COMMA);
+        for (String record : records) {
+            String[] options = record.split(SEPARATOR);
             ActivityStrategy activityStrategy = new ActivityStrategyImpl();
             int value;
-            if (report.containsKey(options[1])) {
-                value = activityStrategy.setValueAccordingToOption(options[OPTION_INDEX],
+            if (report.containsKey(options[FRUIT_INDEX])) {
+                value = activityStrategy.handleTransaction(options[OPTION_INDEX],
                         report.get(options[FRUIT_INDEX]), Integer.parseInt(options[VALUE_INDEX]));
             } else {
-                value = activityStrategy.setValueAccordingToOption(options[OPTION_INDEX],
+                value = activityStrategy.handleTransaction(options[OPTION_INDEX],
                         DEFAULT_VALUE, Integer.parseInt(options[VALUE_INDEX]));
             }
             report.put(options[FRUIT_INDEX], value);

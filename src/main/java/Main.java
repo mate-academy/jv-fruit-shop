@@ -3,10 +3,11 @@ import fruit.shop.ShopServe;
 import java.io.IOException;
 
 public class Main {
+    private static final String EXAMPLE_PATH_FROM = "src/main/resources/test1";
+    private static final String EXAMPLE_PATH_TO = "src/main/resources/test2";
+
     public static void main(String[] args) throws IOException {
-        String fileFrom = "src/main/resources/test1";
-        String fileTo = "src/main/resources/test2";
         ShopServe fruitShop = new FruitShopServeImpl();
-        fruitShop.serveShop(fileFrom, fileTo);
+        fruitShop.serveShop(EXAMPLE_PATH_FROM, EXAMPLE_PATH_TO);
     }
 }

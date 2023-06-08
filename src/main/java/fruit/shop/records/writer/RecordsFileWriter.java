@@ -14,8 +14,7 @@ public class RecordsFileWriter implements RecordsWriter {
                         + entry.getValue() + System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Something went wrong! Data wasn't written."
-                    + System.lineSeparator() + e);
+            throw new RuntimeException("Something went wrong! Data wasn't written." + e);
         }
     }
 }

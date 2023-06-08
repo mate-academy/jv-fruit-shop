@@ -1,7 +1,7 @@
 package fruit.shop;
 
-import fruit.shop.records.parser.RecordsSaver;
-import fruit.shop.records.parser.RecordsSaverCommaSeparated;
+import fruit.shop.records.parser.RecordsParser;
+import fruit.shop.records.parser.RecordsParserCommaSeparated;
 import fruit.shop.records.reader.RecordsFileReader;
 import fruit.shop.records.reader.RecordsReader;
 import fruit.shop.records.writer.RecordsFileWriter;
@@ -11,12 +11,12 @@ import java.util.Map;
 
 public class FruitShopServeImpl implements ShopServe {
     private RecordsReader recordsReader;
-    private RecordsSaver saver;
+    private RecordsParser saver;
     private RecordsWriter writer;
 
     public FruitShopServeImpl() {
         recordsReader = new RecordsFileReader();
-        saver = new RecordsSaverCommaSeparated();
+        saver = new RecordsParserCommaSeparated();
         writer = new RecordsFileWriter();
     }
 

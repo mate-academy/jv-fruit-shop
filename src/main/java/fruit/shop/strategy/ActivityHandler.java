@@ -1,5 +1,5 @@
 package fruit.shop.strategy;
 
-public interface Option {
+public interface ActivityHandler {
     int getOptionResult(int currentValue, int addValue);
 }

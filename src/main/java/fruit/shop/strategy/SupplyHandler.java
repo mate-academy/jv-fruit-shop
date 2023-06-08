@@ -1,6 +1,6 @@
 package fruit.shop.strategy;
 
-public class ReturnOption implements Option {
+public class SupplyHandler implements ActivityHandler {
     @Override
     public int getOptionResult(int currentValue, int addValue) {
         return currentValue + addValue;

@@ -16,8 +16,7 @@ public class RecordsFileReader implements RecordsReader {
                 records.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Something went wrong! Data wasn't read."
-                    + System.lineSeparator() + e);
+            throw new RuntimeException("Something went wrong! Data wasn't read." + e);
         }
         return records;
     }

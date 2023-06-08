@@ -1,24 +1,44 @@
 package fruit.shop.strategy;
 
 public class ActivityStrategyImpl implements ActivityStrategy {
-    private static final String BALANCE = "b";
-    private static final String SUPPLY = "s";
-    private static final String PURCHASE = "p";
-    private static final String RETURN = "r";
-
     @Override
-    public int setValueAccordingToOption(String option, int currentValue, int value) {
+    public int handleTransaction(String strOption, int currentValue, int value) {
+        OptionRepresentation option = OptionRepresentation.getOptionRepresentation(strOption);
         switch (option) {
             case BALANCE:
-                return new BalanceOption().getOptionResult(currentValue, value);
+                return new BalanceHandler().getOptionResult(currentValue, value);
             case SUPPLY:
-                return new SupplyOption().getOptionResult(currentValue, value);
+                return new SupplyHandler().getOptionResult(currentValue, value);
             case PURCHASE:
-                return new PurchaseOption().getOptionResult(currentValue, value);
+                return new PurchaseHandler().getOptionResult(currentValue, value);
             case RETURN:
-                return new ReturnOption().getOptionResult(currentValue, value);
+                return new ReturnHandler().getOptionResult(currentValue, value);
             default:
-                throw new RuntimeException("There is no such option!");
+                throw new RuntimeException("There is no such strOption!");
         }
     }
+
+    private enum OptionRepresentation {
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private String stringOption;
+
+        OptionRepresentation(String stringOption) {
+            this.stringOption = stringOption;
+        }
+
+        private static OptionRepresentation getOptionRepresentation(String option) {
+            for (OptionRepresentation optionRepresentation : OptionRepresentation.values()) {
+                if (optionRepresentation.stringOption.equals(option)) {
+                    return optionRepresentation;
+                }
+            }
+            throw new RuntimeException("There is no such option!");
+        }
+    }
+
 }
+
