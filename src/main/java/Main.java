@@ -1,6 +1,5 @@
 import fruitstore.FruitShopServeImpl;
 import fruitstore.ShopServe;
-
 import java.io.IOException;
 
 public class Main {

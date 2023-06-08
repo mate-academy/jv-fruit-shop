@@ -1,15 +1,13 @@
 package fruitstore;
 
-
+import java.util.List;
+import java.util.Map;
 import records.parser.RecordsSaver;
 import records.parser.RecordsSaverCommaSeparated;
 import records.reader.RecordsFileReader;
 import records.reader.RecordsReader;
 import records.writer.RecordsFileWriter;
 import records.writer.RecordsWriter;
-
-import java.util.List;
-import java.util.Map;
 
 public class FruitShopServeImpl implements ShopServe {
     private RecordsReader recordsReader;

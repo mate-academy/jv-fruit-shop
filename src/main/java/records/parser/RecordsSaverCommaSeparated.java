@@ -2,7 +2,6 @@ package records.parser;
 
 import fruitstore.strategy.ActivityStrategy;
 import fruitstore.strategy.ActivityStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
