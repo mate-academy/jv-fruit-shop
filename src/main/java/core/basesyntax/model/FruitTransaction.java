@@ -16,39 +16,28 @@ public class FruitTransaction {
         return this;
     }
 
-    public Operation getOperationByCode(String code) {
-        for (Operation operation : Operation.values()) {
-            if (operation.getCode().equals(code)) {
-                return operation;
-            }
-        }
-        throw new NullPointerException("Incorrect code for operations " + code);
-    }
-
-    public static Pattern greatOperationPattern() {
-        StringBuilder patternBilder = new StringBuilder();
-        for (Operation operation : Operation.values()) {
-            patternBilder.append(operation.getCode());
-        }
-        return Pattern.compile("[" + patternBilder.toString() + "]");
-    }
-
     public String getFruit() {
         return fruit;
     }
 
-    public FruitTransaction setFruit(String fruit) {
+    public void setFruit(String fruit) {
         this.fruit = fruit;
-        return this;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public FruitTransaction setQuantity(int quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
-        return this;
+    }
+
+    public static Pattern greatOperationPattern() {
+        StringBuilder patternBuilder = new StringBuilder();
+        for (Operation operation : Operation.values()) {
+            patternBuilder.append(operation.getCode());
+        }
+        return Pattern.compile("[" + patternBuilder.toString() + "]");
     }
 
     public enum Operation {
@@ -57,7 +46,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String code;
+        private final String code;
 
         Operation(String code) {
             this.code = code;
@@ -65,6 +54,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation getOperationByCode(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new NullPointerException("Incorrect code for operations " + code);
         }
     }
 }

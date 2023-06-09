@@ -1,25 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitTransactionService;
-import core.basesyntax.service.GreatReportService;
-import core.basesyntax.service.IsDataFromInputFileCorrect;
-import core.basesyntax.service.ReadDataFromFile;
-import core.basesyntax.service.WriteDataToFile;
-import core.basesyntax.service.impl.FruitTransactionServiceImpl;
-import core.basesyntax.service.impl.GreatReportServiceImpl;
-import core.basesyntax.service.impl.IsDataFromInputFileCorrectImpl;
-import core.basesyntax.service.impl.ReadDataFromFileImpl;
-import core.basesyntax.service.impl.WriteDataToFileImpl;
-import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.service.operation.impl.OperationBalanceHandler;
-import core.basesyntax.service.operation.impl.OperationPurchaseHandler;
-import core.basesyntax.service.operation.impl.OperationReturnHandler;
-import core.basesyntax.service.operation.impl.OperationSupplyHandler;
-import java.util.HashMap;
+import core.basesyntax.db.StorageImpl;
+import core.basesyntax.service.DataValidatorService;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.ParserOperationService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.DataValidatorServiceImpl;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.ParserOperationServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH
@@ -28,22 +22,17 @@ public class Main {
             = "src/main/java/core/basesyntax/resuorse/reportDataFile.csv";
 
     public static void main(String[] args) {
-        ReadDataFromFile reader = new ReadDataFromFileImpl();
-        FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new OperationBalanceHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new OperationPurchaseHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new OperationReturnHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new OperationSupplyHandler());
-        List<String> dataFromFile = reader.readStatisticFromFile(INPUT_FILE_PATH);
-        IsDataFromInputFileCorrect isDataChecker = new IsDataFromInputFileCorrectImpl();
-        if (isDataChecker.isDataFromInputFileCorrect(dataFromFile)) {
-            fruitTransactionService.greatFruitTransaction(dataFromFile, operationHandlerMap);
+        ReaderService reader = new ReaderServiceImpl();
+        FruitShopService fruitTransactionService = new FruitShopServiceImpl();
+        List<String> dataFromFile = reader.readFromFile(INPUT_FILE_PATH);
+        DataValidatorService isDataChecker = new DataValidatorServiceImpl();
+        if (isDataChecker.isDataValid(dataFromFile)) {
+            ParserOperationService transactionParser = new ParserOperationServiceImpl();
+            fruitTransactionService.processOfOperations(transactionParser.parser(dataFromFile));
         }
-        GreatReportService greatReport = new GreatReportServiceImpl();
-        String stringReport = greatReport.generateReport(Storage.getDb());
-        WriteDataToFile writer = new WriteDataToFileImpl();
-        writer.writeReportToFile(STATISTIC_FILE_PATH, stringReport);
+        ReportService greatReport = new ReportServiceImpl();
+        String stringReport = greatReport.generateReport(StorageImpl.fruits);
+        WriterService writer = new WriterServiceImpl();
+        writer.writeToFile(STATISTIC_FILE_PATH, stringReport);
     }
 }

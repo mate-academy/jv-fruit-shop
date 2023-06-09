@@ -2,32 +2,35 @@ package core.basesyntax.service.impl;
 
 import static core.basesyntax.model.FruitTransaction.greatOperationPattern;
 
-import core.basesyntax.service.IsDataFromInputFileCorrect;
+import core.basesyntax.service.DataValidatorService;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class IsDataFromInputFileCorrectImpl implements IsDataFromInputFileCorrect {
+public class DataValidatorServiceImpl implements DataValidatorService {
     private static final Pattern INTEGER_PATTERN = Pattern.compile("-?\\d+");
     private static final Pattern OPERATION_PATTERN = greatOperationPattern();
-    private static final String SEPARATOR_IN_LINE = ",";
+    private static final String SEPARATOR = ",";
+    private static final int INDEX_SEPARATOR = 0;
     private static final int INDEX_FOR_OPERATION_IN_STRING = 0;
     private static final int INDEX_FOR_PRODUCT_NAME_IN_STRING = 1;
     private static final int INDEX_FOR_PRODUCT_VALUE_IN_STRING = 2;
     private static final int CORRECT_NUMBERS_OF_COMMAS = 2;
     private static final int INDEX_CORRECT_FOR_LINE_IN_WHICH_ERROR = 2;
+    private static final int HEADER_INDEX = 0;
 
     @Override
-    public boolean isDataFromInputFileCorrect(List<String> daraFromInputFile) {
-        if (daraFromInputFile == null || daraFromInputFile.isEmpty()) {
+    public boolean isDataValid(List<String> data) {
+        data.remove(HEADER_INDEX);
+        if (data.isEmpty()) {
             throw new RuntimeException("Data from input file empty");
         }
-        for (int i = 0; i < daraFromInputFile.size(); i++) {
-            String[] isLineLengthCorrect = daraFromInputFile.get(i)
-                    .split(SEPARATOR_IN_LINE);
-            char[] searchCountComma = daraFromInputFile.get(i).toCharArray();
+        for (int i = 0; i < data.size(); i++) {
+            String[] isLineLengthCorrect = data.get(i)
+                    .split(SEPARATOR);
+            char[] searchCountComma = data.get(i).toCharArray();
             int countCommaInLine = 0;
             for (char current : searchCountComma) {
-                if (current == SEPARATOR_IN_LINE.charAt(INDEX_FOR_OPERATION_IN_STRING)) {
+                if (current == SEPARATOR.charAt(INDEX_SEPARATOR)) {
                     countCommaInLine++;
                 }
             }

@@ -1,17 +1,17 @@
 package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.OperationDao;
-import core.basesyntax.db.Storage;
+import core.basesyntax.db.StorageImpl;
 
 public class OperationDaoImpl implements OperationDao {
     @Override
     public void put(String key, Integer value) {
-        Storage.getDb().put(key, value);
+        StorageImpl.fruits.put(key, value);
     }
 
     @Override
     public Integer get(String key) {
-        return Storage.getDb().get(key);
+        return StorageImpl.fruits.get(key) == null ? 0 : StorageImpl.fruits.get(key);
     }
 
 }
