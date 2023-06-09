@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
     @Override
-    public List<String> getValueFromFile(String value) {
+    public List<String> readFile(String value) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(value))) {
             String line;
@@ -22,4 +22,3 @@ public class ReaderServiceImpl implements ReaderService {
         return lines;
     }
 }
-

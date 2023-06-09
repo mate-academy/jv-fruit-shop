@@ -19,7 +19,7 @@ public class FruitShopStorage {
     }
 
     public void put(String key, Integer value) {
-        this.fruitShopStorage.put(key, value);
+        fruitShopStorage.put(key, value);
     }
 
     public int getQuantity(String key) {

@@ -7,7 +7,7 @@ public class SupplyOperationHandler implements OperationHandler {
     private FruitShopStorage fruitShopStorage;
 
     @Override
-    public void transferToStorage(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         int fruitInStorageQuantity = fruitShopStorage.getQuantity(fruitTransaction.getFruit());
         int balance = fruitInStorageQuantity + fruitTransaction.getQuantity();
         fruitShopStorage.put(fruitTransaction.getFruit(), balance);

@@ -6,15 +6,14 @@ import core.basesyntax.handler.OperationHandler;
 import core.basesyntax.handler.PurchaseOperationHandler;
 import core.basesyntax.handler.ReturnOperationHandler;
 import core.basesyntax.handler.SupplyOperationHandler;
-import core.basesyntax.impl.FillFruitShopStorageImpl;
-import core.basesyntax.impl.GetOperationStrategyImpl;
-import core.basesyntax.impl.ParsingReaderServiceImpl;
-import core.basesyntax.impl.ParsingReportServiceImpl;
+import core.basesyntax.impl.OperationStrategyImpl;
+import core.basesyntax.impl.ParserReaderServiceImpl;
+import core.basesyntax.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.impl.ReaderServiceImpl;
+import core.basesyntax.impl.ProcessFruitShopStorageImpl;
 import core.basesyntax.impl.WriterServiceImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FillFruitShopStorage;
-import core.basesyntax.service.GetOperationStrategy;
+import core.basesyntax.service.ProcessFruitShopStorage;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.util.Operation;
 import java.util.HashMap;
@@ -27,27 +26,22 @@ public class Main {
 
     public static void main(String[] args) {
         Map<Operation, OperationHandler> operationTypeMap = new HashMap<>();
-        OperationHandler balanceOperationHandler = new BalanceOperationHandler();
-        OperationHandler purchaseOperationHandler = new PurchaseOperationHandler();
-        OperationHandler supplyOperationHandler = new SupplyOperationHandler();
-        OperationHandler returnOperationHandler = new ReturnOperationHandler();
-        operationTypeMap.put(Operation.BALANCE, balanceOperationHandler);
-        operationTypeMap.put(Operation.SUPPLY, supplyOperationHandler);
-        operationTypeMap.put(Operation.RETURN, returnOperationHandler);
-        operationTypeMap.put(Operation.PURCHASE, purchaseOperationHandler);
-        List<String> value = new ReaderServiceImpl()
-                .getValueFromFile(PATH_INPUT_FILE);
-        List<FruitTransaction> fruitTransactionList = new ParsingReaderServiceImpl()
-                .getParsingValueFromFile(value);
+        operationTypeMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        operationTypeMap.put(Operation.SUPPLY, new SupplyOperationHandler());
+        operationTypeMap.put(Operation.RETURN, new ReturnOperationHandler());
+        operationTypeMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        List<String> values = new ReaderServiceImpl()
+                .readFile(PATH_INPUT_FILE);
+        List<FruitTransaction> fruitTransactionList = new ParserReaderServiceImpl()
+                .parse(values);
         FruitShopStorage fruitShopStorage = new FruitShopStorage();
-        GetOperationStrategy getOperationStrategy = new GetOperationStrategyImpl(operationTypeMap);
-        FillFruitShopStorage fillFruitShopStorage = new FillFruitShopStorageImpl(
-                getOperationStrategy,
+        ProcessFruitShopStorage processFruitShopStorage = new ProcessFruitShopStorageImpl(
+                new OperationStrategyImpl(operationTypeMap),
                 fruitShopStorage);
-        fillFruitShopStorage.fillFruitShopStorage(fruitTransactionList);
+        processFruitShopStorage.fillFruitShopStorage(fruitTransactionList);
         WriterService writerService = new WriterServiceImpl();
-        String valueToWrite = new ParsingReportServiceImpl()
-                .getValueToWrite(fruitShopStorage);
-        writerService.writeValueToFile(PATH_OUTPUT_FILE, valueToWrite);
+        String valuesToWrite = new ReportGeneratorServiceImpl()
+                .generateReport(fruitShopStorage);
+        writerService.writeValueToFile(PATH_OUTPUT_FILE, valuesToWrite);
     }
 }

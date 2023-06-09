@@ -16,6 +16,15 @@ public enum Operation {
         return code;
     }
 
+    public static String getCode(String operationCode) {
+        for (Operation operation : Operation.values()) {
+            if (operation.getCode().equalsIgnoreCase(operationCode)) {
+                return operation.getCode();
+            }
+        }
+        throw new IllegalArgumentException("Invalid operation code: " + operationCode);
+    }
+
     public void setCode(String code) {
         this.code = code;
     }

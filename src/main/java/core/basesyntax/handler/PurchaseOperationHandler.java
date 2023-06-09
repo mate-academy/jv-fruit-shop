@@ -7,16 +7,15 @@ public class PurchaseOperationHandler implements OperationHandler {
     private FruitShopStorage fruitShopStorage;
 
     @Override
-    public void transferToStorage(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         int fruitInStorageQuantity = fruitShopStorage.getQuantity(fruitTransaction.getFruit());
         int balance = fruitInStorageQuantity - fruitTransaction.getQuantity();
-        if (balance >= 0) {
-            fruitShopStorage.put(fruitTransaction.getFruit(), balance);
-        } else {
+        if (balance < 0) {
             throw new RuntimeException("Not enough fruits in storage: you have "
                     + fruitInStorageQuantity
                     + " but trying purchase "
                     + fruitTransaction.getQuantity());
         }
+        fruitShopStorage.put(fruitTransaction.getFruit(), balance);
     }
 }
