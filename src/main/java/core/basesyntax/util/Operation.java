@@ -24,8 +24,4 @@ public enum Operation {
         }
         throw new IllegalArgumentException("Invalid operation code: " + operationCode);
     }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
 }
