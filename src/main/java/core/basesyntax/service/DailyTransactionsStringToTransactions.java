@@ -18,18 +18,6 @@ public class DailyTransactionsStringToTransactions {
     public List<Transaction> stringListToTransactionList(List<String> transactionListString) {
         return transactionListString.stream()
                 .map(s -> s.split(SEPARATE_SYMBOL_FOR_CSV))
-                .peek(s -> {
-                    for (Operation operation : Operation.values()) {
-                        if (s[OPERATION_INDEX].equals(operation.getOperation())) {
-                            s[OPERATION_INDEX] = operation.name();
-                        }
-                    }
-                    for (Fruit fruit : Fruit.values()) {
-                        if (s[FRUIT_INDEX].equals(fruit.getFruitName())) {
-                            s[FRUIT_INDEX] = fruit.name();
-                        }
-                    }
-                })
                 .map(t -> new Transaction(Operation.valueOf(t[OPERATION_INDEX]),
                         Fruit.valueOf(t[FRUIT_INDEX]),
                         Integer.parseInt(t[AMOUNT_INDEX])))
