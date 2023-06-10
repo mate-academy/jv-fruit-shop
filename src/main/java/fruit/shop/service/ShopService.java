@@ -1,5 +1,5 @@
-package fruit.shop;
+package fruit.shop.service;
 
-public interface ShopServe {
+public interface ShopService {
     void serveShop(String sourceFile, String destinationFile);
 }

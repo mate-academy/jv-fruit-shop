@@ -1,7 +1,7 @@
-package fruit.shop.records.reader;
+package fruit.shop.service.reader;
 
 import java.util.List;
 
-public interface RecordsReader {
+public interface ReaderService {
     List<String> getRecords(String fileName);
 }

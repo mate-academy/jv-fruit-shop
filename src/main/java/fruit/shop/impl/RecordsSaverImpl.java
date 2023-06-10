@@ -1,24 +1,23 @@
-package fruit.shop.records.parser;
+package fruit.shop.impl;
 
-import fruit.shop.strategy.ActivityStrategy;
-import fruit.shop.strategy.ActivityStrategyImpl;
+import fruit.shop.service.saver.RecordsSaver;
+import fruit.shop.service.strategy.ActivityStrategy;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RecordsParserCommaSeparated implements RecordsParser {
-    public static final String SEPARATOR = ",";
+public class RecordsSaverImpl implements RecordsSaver {
     public static final int FRUIT_INDEX = 1;
     public static final int OPTION_INDEX = 0;
     public static final int VALUE_INDEX = 2;
     public static final int DEFAULT_VALUE = 0;
 
     @Override
-    public Map<String, Integer> saveRecordsToMap(List<String> records) {
+    public Map<String, Integer> saveRecordsToMap(List<String[]> parsedRecords) {
         Map<String, Integer> report = new HashMap<>();
-        for (String record : records) {
-            String[] options = record.split(SEPARATOR);
-            ActivityStrategy activityStrategy = new ActivityStrategyImpl();
+        ActivityStrategy activityStrategy = new ActivityStrategyImpl();
+        for (String[] options : parsedRecords) {
             int value;
             if (report.containsKey(options[FRUIT_INDEX])) {
                 value = activityStrategy.handleTransaction(options[OPTION_INDEX],

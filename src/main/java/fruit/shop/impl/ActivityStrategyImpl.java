@@ -1,9 +1,11 @@
-package fruit.shop.strategy;
+package fruit.shop.impl;
+
+import fruit.shop.service.strategy.*;
 
 public class ActivityStrategyImpl implements ActivityStrategy {
     @Override
     public int handleTransaction(String strOption, int currentValue, int value) {
-        OptionRepresentation option = OptionRepresentation.getOptionRepresentation(strOption);
+        Operation option = Operation.getOptionRepresentation(strOption);
         switch (option) {
             case BALANCE:
                 return new BalanceHandler().getOptionResult(currentValue, value);
@@ -17,8 +19,7 @@ public class ActivityStrategyImpl implements ActivityStrategy {
                 throw new RuntimeException("There is no such strOption!");
         }
     }
-
-    private enum OptionRepresentation {
+    private enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
@@ -26,14 +27,14 @@ public class ActivityStrategyImpl implements ActivityStrategy {
 
         private String stringOption;
 
-        OptionRepresentation(String stringOption) {
+        Operation(String stringOption) {
             this.stringOption = stringOption;
         }
 
-        private static OptionRepresentation getOptionRepresentation(String option) {
-            for (OptionRepresentation optionRepresentation : OptionRepresentation.values()) {
-                if (optionRepresentation.stringOption.equals(option)) {
-                    return optionRepresentation;
+        private static Operation getOptionRepresentation(String option) {
+            for (Operation operation : Operation.values()) {
+                if (operation.stringOption.equals(option)) {
+                    return operation;
                 }
             }
             throw new RuntimeException("There is no such option!");

@@ -1,4 +1,4 @@
-package fruit.shop.strategy;
+package fruit.shop.service.strategy;
 
 public class SupplyHandler implements ActivityHandler {
     @Override
