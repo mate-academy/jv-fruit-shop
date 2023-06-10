@@ -20,6 +20,8 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE_PATH =
             "src/main/java/core/basesyntax/resources/input.csv";
+    private static final String REPORT_FILE_PATH =
+            "src/main/java/core/basesyntax/resources/report.scv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler>
@@ -45,6 +47,6 @@ public class Main {
         System.out.println(report);
 
         WriteService writeService = new WriteServiceImpl();
-        writeService.writeReport(report);
+        writeService.writeReport(REPORT_FILE_PATH, report);
     }
 }
