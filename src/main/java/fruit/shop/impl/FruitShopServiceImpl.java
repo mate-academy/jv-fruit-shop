@@ -26,7 +26,7 @@ public class FruitShopServiceImpl implements ShopService {
     public void serveShop(String sourceFile, String destinationFile) {
         List<String> records = recordsReader.getRecords(sourceFile);
         List<String[]> list = parser.parseRecords(records);
-        Storage.FRUITS = saver.saveRecordsToMap(list);
+        Storage.saveToStorage(saver.saveRecordsToMap(list));
         writer.writeRecordsToFile(destinationFile, Storage.FRUITS);
     }
 }
