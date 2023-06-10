@@ -2,7 +2,6 @@ package fruit.shop.impl;
 
 import fruit.shop.service.saver.RecordsSaver;
 import fruit.shop.service.strategy.ActivityStrategy;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

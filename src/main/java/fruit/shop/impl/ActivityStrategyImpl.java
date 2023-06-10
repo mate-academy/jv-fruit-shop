@@ -1,6 +1,10 @@
 package fruit.shop.impl;
 
-import fruit.shop.service.strategy.*;
+import fruit.shop.service.strategy.ActivityStrategy;
+import fruit.shop.service.strategy.BalanceHandler;
+import fruit.shop.service.strategy.PurchaseHandler;
+import fruit.shop.service.strategy.ReturnHandler;
+import fruit.shop.service.strategy.SupplyHandler;
 
 public class ActivityStrategyImpl implements ActivityStrategy {
     @Override
@@ -19,6 +23,7 @@ public class ActivityStrategyImpl implements ActivityStrategy {
                 throw new RuntimeException("There is no such strOption!");
         }
     }
+
     private enum Operation {
         BALANCE("b"),
         SUPPLY("s"),

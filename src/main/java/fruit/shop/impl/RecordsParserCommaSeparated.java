@@ -1,7 +1,6 @@
 package fruit.shop.impl;
 
 import fruit.shop.service.parser.RecordsParser;
-
 import java.util.ArrayList;
 import java.util.List;
 
