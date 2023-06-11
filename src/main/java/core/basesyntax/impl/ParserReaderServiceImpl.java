@@ -10,11 +10,12 @@ public class ParserReaderServiceImpl implements ParserReaderService {
     private static final int INDEX_ZERO = 0;
     private static final int INDEX_ONE = 1;
     private static final int INDEX_TWO = 2;
+    private static final int HEADERS_IN_FILE = 1;
 
     @Override
     public List<FruitTransaction> parse(List<String> listStringsFromFile) {
         return listStringsFromFile.stream()
-                .skip(1)
+                .skip(HEADERS_IN_FILE)
                 .map(line -> {
                     String[] parts = line.split(REGEX_COMMA);
                     Operation operation = Operation.valueOf(

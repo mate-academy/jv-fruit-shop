@@ -10,13 +10,13 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
 
     @Override
     public String generateReport(FruitShopStorage fruitShopStorage) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(firstStringOfTheReport);
+        StringBuilder report = new StringBuilder();
+        report.append(firstStringOfTheReport);
         for (String key : fruitShopStorage.getFruitShopStorage().keySet()) {
-            stringBuilder.append(SEPARATOR_LINE)
+            report.append(SEPARATOR_LINE)
                     .append(key).append(SEPARATOR_COMMA)
                     .append(fruitShopStorage.getQuantity(key));
         }
-        return stringBuilder.toString();
+        return report.toString();
     }
 }

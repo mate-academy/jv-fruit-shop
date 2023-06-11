@@ -25,16 +25,16 @@ public class Main {
     private static final String PATH_OUTPUT_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
+        FruitShopStorage fruitShopStorage = new FruitShopStorage();
         Map<Operation, OperationHandler> operationTypeMap = new HashMap<>();
-        operationTypeMap.put(Operation.BALANCE, new BalanceOperationHandler());
-        operationTypeMap.put(Operation.SUPPLY, new SupplyOperationHandler());
-        operationTypeMap.put(Operation.RETURN, new ReturnOperationHandler());
-        operationTypeMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        operationTypeMap.put(Operation.BALANCE, new BalanceOperationHandler(fruitShopStorage));
+        operationTypeMap.put(Operation.SUPPLY, new SupplyOperationHandler(fruitShopStorage));
+        operationTypeMap.put(Operation.RETURN, new ReturnOperationHandler(fruitShopStorage));
+        operationTypeMap.put(Operation.PURCHASE, new PurchaseOperationHandler(fruitShopStorage));
         List<String> values = new ReaderServiceImpl()
                 .readFile(PATH_INPUT_FILE);
         List<FruitTransaction> fruitTransactionList = new ParserReaderServiceImpl()
                 .parse(values);
-        FruitShopStorage fruitShopStorage = new FruitShopStorage();
         ProcessFruitShopStorage processFruitShopStorage = new ProcessFruitShopStorageImpl(
                 new OperationStrategyImpl(operationTypeMap),
                 fruitShopStorage);

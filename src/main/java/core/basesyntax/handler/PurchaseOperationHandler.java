@@ -6,6 +6,10 @@ import core.basesyntax.model.FruitTransaction;
 public class PurchaseOperationHandler implements OperationHandler {
     private FruitShopStorage fruitShopStorage;
 
+    public PurchaseOperationHandler(FruitShopStorage fruitShopStorage) {
+        this.fruitShopStorage = fruitShopStorage;
+    }
+
     @Override
     public void handle(FruitTransaction fruitTransaction) {
         int fruitInStorageQuantity = fruitShopStorage.getQuantity(fruitTransaction.getFruit());
