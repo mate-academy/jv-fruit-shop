@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderImpl implements CsvFileReader {
+    private static final String COMMA = ",";
+    private static final int OPERATION = 0;
+    private static final int FRUIT = 1;
+    private static final int QUANTITY = 2;
+
     @Override
     public List<FruitTransaction> readFromFile(String filePath) {
         List<FruitTransaction> transactions = new ArrayList<>();
@@ -16,10 +21,10 @@ public class CsvFileReaderImpl implements CsvFileReader {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] data = line.split(",");
-                FruitTransaction.Operation operation = FruitTransaction.Operation.valueOf(data[0]);
-                String fruit = data[1];
-                int quantity = Integer.parseInt(data[2]);
+                String[] data = line.split(COMMA);
+                FruitTransaction.Operation operation = getOperation(data[OPERATION]);
+                String fruit = data[FRUIT];
+                int quantity = Integer.parseInt(data[QUANTITY]);
 
                 transactions.add(new FruitTransaction(operation, fruit, quantity));
             }
@@ -28,5 +33,14 @@ public class CsvFileReaderImpl implements CsvFileReader {
         }
 
         return transactions;
+    }
+
+    private FruitTransaction.Operation getOperation(String operationCode) {
+        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+            if (operation.getCode().equals(operationCode)) {
+                return operation;
+            }
+        }
+        throw new IllegalArgumentException("Invalid operation code: " + operationCode);
     }
 }
