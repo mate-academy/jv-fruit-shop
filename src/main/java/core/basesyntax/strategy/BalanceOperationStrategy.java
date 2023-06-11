@@ -11,7 +11,8 @@ public class BalanceOperationStrategy implements OperationStrategy {
         int quantity = transaction.getQuantity();
 
         if (fruitStorage.getFruit(fruitName) == null) {
-            FruitTransaction newBalance = new FruitTransaction(FruitTransaction.Operation.BALANCE, fruitName, quantity);
+            FruitTransaction newBalance = new FruitTransaction(FruitTransaction
+                    .Operation.BALANCE, fruitName, quantity);
             fruitStorage.addFruit(new Fruit(fruitName, quantity));
         } else {
             Fruit fruit = fruitStorage.getFruit(fruitName);

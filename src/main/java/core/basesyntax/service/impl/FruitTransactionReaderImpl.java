@@ -10,6 +10,7 @@ import java.util.List;
 
 public class FruitTransactionReaderImpl implements FruitTransactionReader {
     private static final String COMMA = ",";
+
     @Override
     public List<FruitTransaction> readFromFile(String filePath) {
         List<FruitTransaction> transactions = new ArrayList<>();
@@ -18,7 +19,8 @@ public class FruitTransactionReaderImpl implements FruitTransactionReader {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(COMMA);
-                FruitTransaction.Operation operation = FruitTransaction.Operation.valueOf(data[0].toUpperCase());
+                FruitTransaction.Operation operation = FruitTransaction
+                        .Operation.valueOf(data[0].toUpperCase());
                 String fruit = data[1];
                 int quantity = Integer.parseInt(data[2]);
 

@@ -3,10 +3,9 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitTransactionReader;
-import core.basesyntax.service.CsvFileWriter;
-
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {

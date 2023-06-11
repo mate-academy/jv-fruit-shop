@@ -7,7 +7,6 @@ import core.basesyntax.service.impl.CsvFileWriterImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionReaderImpl;
 
-
 public class Main {
     private static final String FROM_THIS_FILE = "input.csv";
 

@@ -2,11 +2,8 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CsvFileWriter;
-
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
 public class CsvFileWriterImpl implements CsvFileWriter {
