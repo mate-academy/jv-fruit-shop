@@ -6,5 +6,5 @@ import java.util.List;
 public interface FruitService {
     void processTransactions(List<FruitTransaction> transactions);
 
-    void generateReport();
+    List<String> generateReport();
 }

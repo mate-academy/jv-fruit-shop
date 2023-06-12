@@ -31,11 +31,4 @@ public class FruitStorage {
     public Fruit getFruit(String fruitName) {
         return fruits.get(fruitName);
     }
-
-    public void printReport() {
-        System.out.println("fruit,quantity");
-        for (Fruit fruit : fruits.values()) {
-            System.out.println(fruit.getName() + "," + fruit.getQuantity());
-        }
-    }
 }

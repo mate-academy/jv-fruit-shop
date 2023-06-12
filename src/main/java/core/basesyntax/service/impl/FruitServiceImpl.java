@@ -6,6 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.Operations;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
@@ -28,10 +29,12 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void generateReport() {
-        System.out.println(HEADER_LINE);
+    public List<String> generateReport() {
+        List<String> reportLines = new ArrayList<>();
+        reportLines.add(HEADER_LINE);
         for (Fruit fruit : fruitStorage.getAllFruits()) {
-            System.out.println(fruit.getName() + COMMA + fruit.getQuantity());
+            reportLines.add(fruit.getName() + COMMA + fruit.getQuantity());
         }
+        return reportLines;
     }
 }

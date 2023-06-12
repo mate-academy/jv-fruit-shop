@@ -19,9 +19,14 @@ public class Main {
         FruitStorage fruitStorage = new FruitStorage();
         FruitService fruitService = new FruitServiceImpl(fruitStorage);
         fruitService.processTransactions(transactions);
-        fruitService.generateReport();
+
+        for (FruitTransaction transaction : transactions) {
+            fruitStorage.updateFruitQuantity(transaction.getFruit(), transaction.getQuantity());
+        }
+
+        List<String> reportData = fruitService.generateReport();
 
         CsvFileWriter writer = new CsvFileWriterImpl();
-        writer.writeToFile(TO_THIS_FILE, fruitStorage.getAllFruits());
+        writer.writeToFile(TO_THIS_FILE, reportData);
     }
 }
