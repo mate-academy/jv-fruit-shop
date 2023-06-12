@@ -1,6 +1,5 @@
 package service;
 
 public interface ReportService {
-
-    String getReportStringForWriting();
+    String getReport();
 }

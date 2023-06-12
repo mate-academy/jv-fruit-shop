@@ -7,13 +7,14 @@ import service.FruitTransactionParser;
 
 public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final String SPLITTER_FIELD = ";";
+    private static final int HEADER = 0;
     private static final int OPERATION_FIELD_NUMBER = 0;
     private static final int FRUIT_FIELD_NUMBER = 1;
     private static final int QUANTITY_FIELD_NUMBER = 2;
 
     @Override
     public List<FruitTransaction> parseFruitTransaction(List<String> inputStoreActivities) {
-        inputStoreActivities.remove(0);
+        inputStoreActivities.remove(HEADER);
         return inputStoreActivities.stream()
                 .map(this::getTransactionRecordFromCsvRow)
                 .collect(Collectors.toList());

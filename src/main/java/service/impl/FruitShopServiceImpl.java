@@ -4,13 +4,12 @@ import java.util.List;
 import model.FruitTransaction;
 import service.FruitShopService;
 import strategy.OperationStrategy;
-import strategy.OperationStrategyImpl;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private OperationStrategy operationStrategy;
 
-    public FruitShopServiceImpl() {
-        operationStrategy = new OperationStrategyImpl();
+    public FruitShopServiceImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
     }
 
     @Override

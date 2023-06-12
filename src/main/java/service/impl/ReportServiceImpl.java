@@ -10,7 +10,7 @@ public class ReportServiceImpl implements ReportService {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @Override
-    public String getReportStringForWriting() {
+    public String getReport() {
         StringBuilder summaryStringReport = new StringBuilder(COLUMNS_TITLE);
         String stringReport = Storage.FRUITS.entrySet().stream()
                 .map(entry -> entry.getKey() + SEPARATOR + entry.getValue())
