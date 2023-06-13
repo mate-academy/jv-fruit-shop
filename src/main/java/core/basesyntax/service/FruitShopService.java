@@ -1,5 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
+import java.util.List;
+
 public interface FruitShopService {
-    void generateRreport(String pathFrom, String pathTo);
+    String applyTransactions(List<FruitTransaction> transactions);
 }

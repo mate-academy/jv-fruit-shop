@@ -1,8 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FileService;
 import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.FruitTransactionParseService;
 import core.basesyntax.service.impl.FileServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionParseServiceImpl;
@@ -14,6 +15,7 @@ import core.basesyntax.strategy.PurchaseHandler;
 import core.basesyntax.strategy.ReturnHandler;
 import core.basesyntax.strategy.SupplyHandler;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -30,9 +32,17 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        FruitShopService fruitShopService = new FruitShopServiceImpl(new FruitDaoImpl(),
-                new FileServiceImpl(), new FruitTransactionParseServiceImpl(), operationStrategy);
-        fruitShopService.generateRreport(INPUT_FILE_PATH, OUTPUT_FILE_PATH);
+        FileService fileService = new FileServiceImpl();
+        FruitTransactionParseService fruitTransactionParseService =
+                new FruitTransactionParseServiceImpl();
+        FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
+
+        List<String> records = fileService.readFromFile(INPUT_FILE_PATH);
+        List<FruitTransaction> transactions =
+                fruitTransactionParseService.parseFruitTransaction(records);
+
+        String report = fruitShopService.applyTransactions(transactions);
+        fileService.writeToFile(OUTPUT_FILE_PATH, report);
 
     }
 }

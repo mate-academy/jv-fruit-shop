@@ -1,8 +1,14 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+
 public class PurchaseHandler implements OperationHandler {
     @Override
-    public int execudeOperation(int currentQuantity, int quantityFromTransaction) {
-        return currentQuantity - quantityFromTransaction;
+    public int executeOperation(FruitTransaction fruitTransaction) {
+        int newQuantity = Storage.storage.get(fruitTransaction.getFruit())
+                - fruitTransaction.getQuantity();
+        Storage.storage.put(fruitTransaction.getFruit(), newQuantity);
+        return newQuantity;
     }
 }

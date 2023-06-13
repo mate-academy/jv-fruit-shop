@@ -1,50 +1,36 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitDao;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileService;
 import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.FruitTransactionParseService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
+import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private FruitDao fruitDao;
-    private FileService fileService;
-    private FruitTransactionParseService fruitTransactionParseService;
     private OperationStrategy operationStrategy;
 
-    public FruitShopServiceImpl(FruitDao fruitDao, FileService fileService,
-                                FruitTransactionParseService fruitTransactionParseService,
-                                OperationStrategy operationStrategy) {
-
-        this.fruitDao = fruitDao;
-        this.fileService = fileService;
-        this.fruitTransactionParseService = fruitTransactionParseService;
+    public FruitShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public void generateRreport(String pathFrom, String pathTo) {
-        List<String> records = fileService.readFromFile(pathFrom);
-        List<FruitTransaction> transactions =
-                fruitTransactionParseService.parseFruitTransaction(records);
-
+    public String applyTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            int currentQuantity = 0;
-            if (fruitDao.containsFruit(transaction.getFruit())) {
-                currentQuantity = fruitDao.get(transaction.getFruit());
-            }
             int newQuantity = operationStrategy.get(transaction.getOperation())
-                    .execudeOperation(currentQuantity, transaction.getQuantity());
+                    .executeOperation(transaction);
             if (newQuantity < 0) {
                 throw new RuntimeException("Quantity can't be less than zero");
-            } else {
-                fruitDao.add(transaction.getFruit(), newQuantity);
             }
         }
-
-        fileService.writeToFile(pathTo, fruitDao.getDataForReportFile());
-
+        StringBuilder reportStringBuilder = new StringBuilder();
+        reportStringBuilder.append("fruit,quantity").append(System.lineSeparator());
+        for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
+            reportStringBuilder.append(entry.getKey())
+                    .append(',')
+                    .append(entry.getValue().toString())
+                    .append(System.lineSeparator());
+        }
+        return reportStringBuilder.toString();
     }
 }
