@@ -26,7 +26,7 @@ public class Main {
         List<String> records = readerService.readFromFile(INPUT_FILE_NAME);
 
         ParseService parseService = new ParseServiceImpl();
-        List<FruitTransaction> fruitTransactions = parseService.parseFruitTransaction(records);
+        List<FruitTransaction> fruitTransactionDtos = parseService.parse(records);
 
         Map<FruitTransaction.Operation, OperationHandler> operationMap = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
@@ -36,7 +36,7 @@ public class Main {
         );
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
-        for (FruitTransaction fruitTransaction : fruitTransactions) {
+        for (FruitTransaction fruitTransaction : fruitTransactionDtos) {
             OperationHandler operationHandler = operationStrategy
                     .get(fruitTransaction.getOperation());
             operationHandler.handle(fruitTransaction);
@@ -47,7 +47,5 @@ public class Main {
 
         WriterService writerService = new WriterServiceImpl();
         writerService.write(report, OUTPUT_FILE_NAME);
-
-        System.out.println(readerService.readFromFile(OUTPUT_FILE_NAME));
     }
 }

@@ -5,26 +5,26 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
-    private static final String EXCEPTION_MESSAGE_FOR_READING = "Can't read data from file ";
     private static final String EXCEPTION_MESSAGE_FOR_FILEPATH = "FilePath argument is null";
-    private static final int INFORMATIVE_LINE_INDEX = 0;
+    private static final String EXCEPTION_MESSAGE_FOR_READING = "Can't read data from file: ";
+    private static final String EXCEPTION_MESSAGE_FOR_FILE_CONTENT = "Input file is empty: ";
 
     @Override
     public List<String> readFromFile(String filePath) {
-        if (filePath == null) {
-            throw new RuntimeException(EXCEPTION_MESSAGE_FOR_FILEPATH);
-        }
+        String sourceFile = Optional.ofNullable(filePath)
+                .orElseThrow(() -> new RuntimeException(EXCEPTION_MESSAGE_FOR_FILEPATH));
         List<String> data = new ArrayList<>();
         try {
-            data = Files.readAllLines(Path.of(filePath));
+            data = Files.readAllLines(Path.of(sourceFile));
         } catch (IOException e) {
-            throw new RuntimeException(EXCEPTION_MESSAGE_FOR_READING + filePath, e);
+            throw new RuntimeException(EXCEPTION_MESSAGE_FOR_READING + filePath);
         }
-        if (data.size() != 0) {
-            data.remove(INFORMATIVE_LINE_INDEX);
+        if (data.isEmpty()) {
+            throw new RuntimeException(EXCEPTION_MESSAGE_FOR_FILE_CONTENT + filePath);
         }
         return data;
     }
