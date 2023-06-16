@@ -3,9 +3,13 @@ package core.basesyntax.service.transaction;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitInventoryManipulator;
 
-public class PurchaseTransactionHandler implements TransactionHandler {
+public class PurchaseTransactionHandler extends TransactionHandler {
+    public PurchaseTransactionHandler(FruitInventoryManipulator fruitInventoryManipulator) {
+        super(fruitInventoryManipulator);
+    }
+
     @Override
     public void handle(FruitTransaction transaction) {
-        FruitInventoryManipulator.subtract(transaction.getFruit(), transaction.getQuantity());
+        fruitInventoryManipulator.subtract(transaction.getFruit(), transaction.getQuantity());
     }
 }
