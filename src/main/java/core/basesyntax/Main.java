@@ -3,12 +3,14 @@ package core.basesyntax;
 import core.basesyntax.db.StorageImpl;
 import core.basesyntax.service.DataValidatorService;
 import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ParserOperationService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.DataValidatorServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ParserOperationServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -23,7 +25,8 @@ public class Main {
 
     public static void main(String[] args) {
         ReaderService reader = new ReaderServiceImpl();
-        FruitShopService fruitTransactionService = new FruitShopServiceImpl();
+        OperationStrategy operationStrategy = new OperationStrategyImpl();
+        FruitShopService fruitTransactionService = new FruitShopServiceImpl(operationStrategy);
         List<String> dataFromFile = reader.readFromFile(INPUT_FILE_PATH);
         DataValidatorService isDataChecker = new DataValidatorServiceImpl();
         if (isDataChecker.isDataValid(dataFromFile)) {

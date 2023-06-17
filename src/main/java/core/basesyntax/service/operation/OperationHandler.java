@@ -6,6 +6,5 @@ import core.basesyntax.model.FruitTransaction;
 
 public interface OperationHandler {
     OperationDao operationDao = new OperationDaoImpl();
-
     void operationHandler(FruitTransaction fruitTransaction);
 }

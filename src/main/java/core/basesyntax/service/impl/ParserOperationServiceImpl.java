@@ -10,7 +10,6 @@ public class ParserOperationServiceImpl implements ParserOperationService {
     private static final int INDEX_FOR_OPERATION_IN_STRING = 0;
     private static final int INDEX_FOR_PRODUCT_NAME_IN_STRING = 1;
     private static final int INDEX_FOR_PRODUCT_VALUE_IN_STRING = 2;
-    private static final List<FruitTransaction> fruitTransactionList = new ArrayList<>();
 
     @Override
     public List<FruitTransaction> parser(List<String> data) {

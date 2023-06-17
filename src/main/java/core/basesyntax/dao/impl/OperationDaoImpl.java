@@ -13,5 +13,4 @@ public class OperationDaoImpl implements OperationDao {
     public Integer get(String key) {
         return StorageImpl.fruits.get(key) == null ? 0 : StorageImpl.fruits.get(key);
     }
-
 }
