@@ -1,4 +1,4 @@
-package fruit.shop.service.writer;
+package fruit.shop.service;
 
 import java.util.Map;
 

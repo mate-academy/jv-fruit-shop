@@ -1,6 +1,6 @@
-package fruit.shop.impl;
+package fruit.shop.service.impl;
 
-import fruit.shop.service.reader.ReaderService;
+import fruit.shop.service.ReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

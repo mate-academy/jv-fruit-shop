@@ -1,7 +1,10 @@
-package fruit.shop.service.reader;
+package fruit.shop.service;
 
 import java.util.List;
 
 public interface ReaderService {
     List<String> getRecords(String fileName);
+
+    interface TransactionParser {
+    }
 }
