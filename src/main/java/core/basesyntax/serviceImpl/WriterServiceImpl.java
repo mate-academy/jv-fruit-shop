@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 public class WriterServiceImpl implements WriterService {
 
     @Override
-    public void WriteToFile(String filePath, String report) {
+    public void writeToFile(String filePath, String report) {
         Path path = Paths.get(filePath);
         if (Files.notExists(path)) {
             try {

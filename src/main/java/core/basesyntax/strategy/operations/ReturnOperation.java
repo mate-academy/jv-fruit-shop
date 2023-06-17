@@ -7,8 +7,8 @@ import core.basesyntax.strategy.Operation;
 public class ReturnOperation implements Operation {
     @Override
     public void doOperation(FruitTransaction transaction) {
-        int currentQuantity = Storage.storage.get(transaction.getFruit()) != null ?
-                Storage.storage.get(transaction.getFruit()) : 0;
-        Storage.storage.put(transaction.getFruit(), transaction.getQuantity() + currentQuantity);
+        int currentQuantity = Storage.getStorage().get(transaction.getFruit()) != null
+                ? Storage.getStorage().get(transaction.getFruit()) : 0;
+        Storage.getStorage().put(transaction.getFruit(), transaction.getQuantity() + currentQuantity);
     }
 }

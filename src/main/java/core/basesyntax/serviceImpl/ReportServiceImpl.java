@@ -10,11 +10,11 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport() {
-        Set<String> fruits = Storage.storage.keySet();
+        Set<String> fruits = Storage.getStorage().keySet();
         StringBuilder builder = new StringBuilder(TITLES);
         builder.append(System.lineSeparator());
         for (String fruit : fruits) {
-            builder.append(fruit).append(COMMA_SEPARATOR).append(Storage.storage.get(fruit))
+            builder.append(fruit).append(COMMA_SEPARATOR).append(Storage.getStorage().get(fruit))
                     .append(System.lineSeparator());
         }
         return builder.toString();

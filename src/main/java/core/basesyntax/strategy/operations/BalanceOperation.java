@@ -7,6 +7,6 @@ import core.basesyntax.strategy.Operation;
 public class BalanceOperation implements Operation {
     @Override
     public void doOperation(FruitTransaction transaction) {
-        Storage.storage.put(transaction.getFruit(), transaction.getQuantity());
+        Storage.getStorage().put(transaction.getFruit(), transaction.getQuantity());
     }
 }

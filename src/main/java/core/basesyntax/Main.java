@@ -15,6 +15,7 @@ import java.util.List;
 public class Main {
     private static final String PATH_TO_READ = "src/main/resources/storeActivities.csv";
     private static final String PATH_TO_WRITE = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
         List<String> activities = readerService.readFromFile(PATH_TO_READ);
@@ -27,6 +28,6 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.createReport();
         WriterService writerService = new WriterServiceImpl();
-        writerService.WriteToFile(PATH_TO_WRITE, report);
+        writerService.writeToFile(PATH_TO_WRITE, report);
     }
 }
