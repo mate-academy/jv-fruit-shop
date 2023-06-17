@@ -1,4 +1,4 @@
-package core.basesyntax.serviceImpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.WriterService;
 import java.io.IOException;

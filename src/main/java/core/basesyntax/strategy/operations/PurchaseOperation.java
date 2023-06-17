@@ -13,6 +13,7 @@ public class PurchaseOperation implements Operation {
             throw new RuntimeException("You can buy only "
                     + currentQuantity + " " + transaction.getFruit());
         }
-        Storage.getStorage().put(transaction.getFruit(), currentQuantity - transaction.getQuantity());
+        Storage.getStorage()
+                .put(transaction.getFruit(), currentQuantity - transaction.getQuantity());
     }
 }

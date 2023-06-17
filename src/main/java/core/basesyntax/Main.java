@@ -5,10 +5,10 @@ import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.serviceImpl.ParseServiceImpl;
-import core.basesyntax.serviceImpl.ReaderServiceImpl;
-import core.basesyntax.serviceImpl.ReportServiceImpl;
-import core.basesyntax.serviceImpl.WriterServiceImpl;
+import core.basesyntax.service.impl.ParseServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
