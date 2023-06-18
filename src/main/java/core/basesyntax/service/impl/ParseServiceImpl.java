@@ -21,7 +21,7 @@ public class ParseServiceImpl implements ParseService {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = INDEX_DATA; i < list.size(); i++) {
             String[] currentTransaction = list.get(i).split(COMMA_SEPARATOR);
-            Operation operation = getOperation(currentTransaction[INDEX_OPERATION]);
+            Operation operation = Operation.getByCode(currentTransaction[INDEX_OPERATION]);
             String fruit = currentTransaction[INDEX_FRUIT];
             int quantity = Integer.parseInt(currentTransaction[INDEX_QUANTITY]);
             transactions.add(new FruitTransaction(operation, fruit, quantity));
@@ -38,21 +38,6 @@ public class ParseServiceImpl implements ParseService {
         }
         if (list.size() == INVALID_DATA) {
             throw new RuntimeException("List has not valid operation's data");
-        }
-    }
-
-    private Operation getOperation(String operation) {
-        switch (operation) {
-            case "b":
-                return Operation.BALANCE;
-            case "s":
-                return Operation.SUPPLY;
-            case "r":
-                return Operation.RETURN;
-            case "p":
-                return Operation.PURCHASE;
-            default:
-                throw new RuntimeException("Your operation is wrong");
         }
     }
 }
