@@ -1,7 +1,18 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.FruitTransaction;
+public enum Operation {
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
 
-public interface Operation {
-    void doOperation(FruitTransaction transaction);
+    private final String operation;
+
+    Operation(String operation) {
+        this.operation = operation;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
 }
