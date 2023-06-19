@@ -1,10 +1,10 @@
 package fruit.shop.service.impl;
 
-import fruit.shop.db.Storage;
 import fruit.shop.model.FruitTransaction;
 import fruit.shop.service.ReaderService;
 import fruit.shop.service.RecordsParser;
 import fruit.shop.service.ShopService;
+import fruit.shop.service.StringConnector;
 import fruit.shop.service.WriterService;
 import fruit.shop.service.strategy.OperationHandler;
 import java.util.List;
@@ -14,14 +14,19 @@ public class FruitShopServiceImpl implements ShopService {
     private ReaderService recordsReader;
     private RecordsParser parser;
     private WriterService writer;
+    private StringConnector connector;
     private Map<FruitTransaction.Operation, OperationHandler> fruitMap;
 
-    public FruitShopServiceImpl(ReaderService recordsReader, RecordsParser parser,
+    public FruitShopServiceImpl(ReaderService recordsReader,
+                                RecordsParser parser,
                                 WriterService writer,
-                                Map<FruitTransaction.Operation, OperationHandler> fruitMap) {
+                                StringConnector connector,
+                                Map<FruitTransaction.Operation,
+                                OperationHandler> fruitMap) {
         this.recordsReader = recordsReader;
         this.parser = parser;
         this.writer = writer;
+        this.connector = connector;
         this.fruitMap = fruitMap;
     }
 
@@ -30,6 +35,6 @@ public class FruitShopServiceImpl implements ShopService {
         List<String> records = recordsReader.getRecords(sourceFile);
         List<FruitTransaction> list = parser.parseRecords(records);
         new TransactionParserImpl(list, fruitMap).getParsedStorage();
-        writer.writeRecordsToFile(destinationFile, Storage.FRUITS);
+        writer.writeRecordsToFile(destinationFile, connector.generateReport());
     }
 }

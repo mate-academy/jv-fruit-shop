@@ -18,4 +18,3 @@ public class OperationStrategyImpl implements OperationStrategy {
         operationHandler.getOptionResult(transaction);
     }
 }
-

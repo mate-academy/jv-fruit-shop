@@ -2,10 +2,12 @@ import fruit.shop.model.FruitTransaction;
 import fruit.shop.service.ReaderService;
 import fruit.shop.service.RecordsParser;
 import fruit.shop.service.ShopService;
+import fruit.shop.service.StringConnector;
 import fruit.shop.service.WriterService;
 import fruit.shop.service.impl.FruitShopServiceImpl;
 import fruit.shop.service.impl.ReaderServiceImpl;
 import fruit.shop.service.impl.RecordsParserTransaction;
+import fruit.shop.service.impl.StringConnectorImpl;
 import fruit.shop.service.impl.WriterServiceImpl;
 import fruit.shop.service.strategy.OperationHandler;
 import fruit.shop.service.strategy.impl.BalanceHandler;
@@ -29,7 +31,9 @@ public class Main {
         ReaderService recordsReader = new ReaderServiceImpl();
         RecordsParser parser = new RecordsParserTransaction();
         WriterService writer = new WriterServiceImpl();
-        ShopService fruitShop = new FruitShopServiceImpl(recordsReader, parser, writer, fruitMap);
+        StringConnector connector = new StringConnectorImpl();
+        ShopService fruitShop = new FruitShopServiceImpl(recordsReader, parser,
+                writer, connector, fruitMap);
         fruitShop.serveShop(EXAMPLE_PATH_FROM, EXAMPLE_PATH_TO);
     }
 }
