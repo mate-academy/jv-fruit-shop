@@ -1,5 +1,5 @@
 package fruit.shop.service;
 
 public interface WriterService {
-    void writeRecordsToFile(String fileName, String data);
+    void writeToFile(String fileName, String data);
 }

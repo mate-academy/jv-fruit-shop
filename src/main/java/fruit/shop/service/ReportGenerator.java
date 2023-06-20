@@ -1,5 +1,5 @@
 package fruit.shop.service;
 
-public interface StringConnector {
+public interface ReportGenerator {
     String generateReport();
 }

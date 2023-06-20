@@ -1,5 +1,5 @@
 package fruit.shop.service;
 
-public interface TransactionParser {
+public interface TransactionHandler {
     void getParsedStorage();
 }

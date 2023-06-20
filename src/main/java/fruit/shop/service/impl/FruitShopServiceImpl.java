@@ -3,8 +3,8 @@ package fruit.shop.service.impl;
 import fruit.shop.model.FruitTransaction;
 import fruit.shop.service.ReaderService;
 import fruit.shop.service.RecordsParser;
+import fruit.shop.service.ReportGenerator;
 import fruit.shop.service.ShopService;
-import fruit.shop.service.StringConnector;
 import fruit.shop.service.WriterService;
 import fruit.shop.service.strategy.OperationHandler;
 import java.util.List;
@@ -14,27 +14,27 @@ public class FruitShopServiceImpl implements ShopService {
     private ReaderService recordsReader;
     private RecordsParser parser;
     private WriterService writer;
-    private StringConnector connector;
-    private Map<FruitTransaction.Operation, OperationHandler> fruitMap;
+    private ReportGenerator connector;
+    private Map<FruitTransaction.Operation, OperationHandler> handlerMap;
 
     public FruitShopServiceImpl(ReaderService recordsReader,
                                 RecordsParser parser,
                                 WriterService writer,
-                                StringConnector connector,
+                                ReportGenerator connector,
                                 Map<FruitTransaction.Operation,
-                                OperationHandler> fruitMap) {
+                                        OperationHandler> handlerMap) {
         this.recordsReader = recordsReader;
         this.parser = parser;
         this.writer = writer;
         this.connector = connector;
-        this.fruitMap = fruitMap;
+        this.handlerMap = handlerMap;
     }
 
     @Override
     public void serveShop(String sourceFile, String destinationFile) {
         List<String> records = recordsReader.getRecords(sourceFile);
         List<FruitTransaction> list = parser.parseRecords(records);
-        new TransactionParserImpl(list, fruitMap).getParsedStorage();
-        writer.writeRecordsToFile(destinationFile, connector.generateReport());
+        new TransactionHandlerImpl(list, handlerMap).getParsedStorage();
+        writer.writeToFile(destinationFile, connector.generateReport());
     }
 }

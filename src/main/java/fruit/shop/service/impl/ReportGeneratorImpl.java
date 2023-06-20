@@ -1,10 +1,10 @@
 package fruit.shop.service.impl;
 
 import fruit.shop.db.Storage;
-import fruit.shop.service.StringConnector;
+import fruit.shop.service.ReportGenerator;
 import java.util.Map;
 
-public class StringConnectorImpl implements StringConnector {
+public class ReportGeneratorImpl implements ReportGenerator {
     private static final String TITLE = "fruit,quantity\n";
     private static final String DELIMITER = ",";
 
