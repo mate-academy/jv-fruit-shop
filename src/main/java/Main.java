@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String EXAMPLE_PATH_FROM = "src/main/resources/test1";
-    private static final String EXAMPLE_PATH_TO = "src/main/resources/test2";
+    private static final String EXAMPLE_PATH_FROM = "src/main/resources/input.csv";
+    private static final String EXAMPLE_PATH_TO = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> fruitMap = new HashMap<>();

@@ -15,7 +15,7 @@ public class TransactionHandlerImpl implements TransactionHandler {
 
     public void parseStorage(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = strategy.getOperationHandler(transaction);
+            OperationHandler handler = strategy.getOperationHandler(transaction.getOperation());
             handler.handleTransaction(transaction);
         }
     }
