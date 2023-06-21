@@ -6,7 +6,7 @@ import fruit.shop.service.strategy.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
     @Override
-    public void getOptionResult(FruitTransaction transaction) {
+    public void handleTransaction(FruitTransaction transaction) {
         int result = Storage.FRUITS.get(transaction.getFruit()) - transaction.getValue();
         if (result >= 0) {
             Storage.FRUITS.put(transaction.getFruit(), result);

@@ -9,18 +9,16 @@ import java.util.List;
 import java.util.Map;
 
 public class TransactionHandlerImpl implements TransactionHandler {
-    private List<FruitTransaction> transactions;
     private OperationStrategy strategy;
 
-    public TransactionHandlerImpl(List<FruitTransaction> transactions,
-                                  Map<FruitTransaction.Operation, OperationHandler> fruitMap) {
-        this.transactions = transactions;
-        strategy = new OperationStrategyImpl(fruitMap);
+    public TransactionHandlerImpl(OperationStrategy strategy) {
+        this.strategy = strategy;
     }
 
-    public void getParsedStorage() {
+    public void parseStorage(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            strategy.handleTransaction(transaction);
+            OperationHandler handler = strategy.getOperationHandler(transaction);
+            handler.handleTransaction(transaction);
         }
     }
 }
