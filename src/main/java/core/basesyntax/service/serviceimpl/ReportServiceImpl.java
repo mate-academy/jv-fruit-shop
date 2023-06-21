@@ -1,13 +1,16 @@
 package core.basesyntax.service.serviceimpl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String TITLE = "fruit,quantity";
     private static final String SEPARATOR = ",";
-    private final StorageDao storageDao = new StorageDaoImpl();
+    private final StorageDao storageDao;
+
+    public ReportServiceImpl(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
 
     @Override
     public String getReport() {
@@ -18,5 +21,4 @@ public class ReportServiceImpl implements ReportService {
                 .forEach(string -> report.append(System.lineSeparator()).append(string));
         return report.toString();
     }
-
 }

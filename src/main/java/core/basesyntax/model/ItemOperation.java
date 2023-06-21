@@ -1,18 +1,18 @@
 package core.basesyntax.model;
 
-public class ItemActivities {
-    private final Activities activities;
+public class ItemOperation {
+    private final Operation operation;
     private final String item;
     private final int quantity;
 
-    public ItemActivities(Activities activities, String item, int quantity) {
-        this.activities = activities;
+    public ItemOperation(Operation operation, String item, int quantity) {
+        this.operation = operation;
         this.item = item;
         this.quantity = quantity;
     }
 
-    public Activities getOperation() {
-        return activities;
+    public Operation getOperation() {
+        return operation;
     }
 
     public String getItem() {
