@@ -154,6 +154,6 @@ For example:
 1. Incorrect file path
 2. Incorrect data in the input file, for example, quantity less than zero or incorrect strategy
 3. Null parameters
-4. Providing the right names for your classes, methods, and variables is important. You can find examples here: Link
+4. Providing the right names for your classes, methods, and variables is important. You can find examples here: [Link](https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html)
 
 </details>
