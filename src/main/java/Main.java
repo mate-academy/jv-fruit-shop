@@ -1,14 +1,11 @@
-import core.basesyntax.dao.FruitsDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FilesParser;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.TransactionHandler;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.FilesParserImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
-import core.basesyntax.service.impl.TransactionHandlerImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -37,9 +34,11 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        TransactionHandler transactionHandler
-                = new TransactionHandlerImpl(new FruitsDaoImpl(),operationStrategy);
-        transactionHandler.applyTransactions(transactions);
+        for (FruitTransaction fruitTransaction : transactions) {
+            OperationHandler operationHandler = operationStrategy
+                    .get(fruitTransaction.getOperation());
+            operationHandler.executeOperation(fruitTransaction);
+        }
         ReportGenerator generatedReport = new ReportGeneratorImpl();
         String reportFruitShop = generatedReport.getDataForReport();
         WriterService writerService = new WriterServiceImpl();
