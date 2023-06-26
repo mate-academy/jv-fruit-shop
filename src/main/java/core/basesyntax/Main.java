@@ -24,27 +24,25 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String Read_File_Path = "src/main/resources/FruitShop_db";
-    private static final String File_Write_Path = "src/main/resources/FruitStore_Report";
+    private static final String READ_FILE_PATH = "src/main/resources/FruitShop_db";
+    private static final String FILE_WRITE_PATH = "src/main/resources/FruitStore_Report";
+    private static final ReaderService readerService = new ReaderServiceImpl();
+    private static final Parser parser = new CsvParserImpl();
+    private static final WriteService writeService = new WriteServiceImpl();
+    private static final FruitDao fruitDao = new FruitDaoImpl();
 
     public static void main(String[] args) {
-        FruitDao fruitDao = new FruitDaoImpl();
         TransactionService transactionService =
                 new TransactionServiceImpl(createOperationHandlerMap(fruitDao));
-        ReaderService readerService = new ReaderServiceImpl();
-
-        List<String> data = readerService.readFromFile(Read_File_Path);
-        Parser parser = new CsvParserImpl();
-
+        List<String> data = readerService.readFromFile(READ_FILE_PATH);
         List<Transaction> transactions = parser.parse(data);
-        transactionService.excuteTransactions(transactions);
+        transactionService.execute(transactions);
         ReportService reportService = new ReportServiceImpl(fruitDao);
         String report = reportService.generateReport();
-        WriteService writeService = new WriteServiceImpl();
-        writeService.writeToFile(File_Write_Path, report);
+        writeService.writeToFile(FILE_WRITE_PATH, report);
     }
 
-    private static Map<Operation, OperationHandler> createOperationHandlerMap(
+    public static Map<Operation, OperationHandler> createOperationHandlerMap(
             FruitDao fruitDao) {
         Map<Operation, OperationHandler> map = new HashMap<>();
         map.put(Operation.BALANCE, new BalanceOperationHandler(fruitDao));

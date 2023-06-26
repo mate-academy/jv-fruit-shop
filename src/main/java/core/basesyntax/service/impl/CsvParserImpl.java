@@ -25,5 +25,4 @@ public class CsvParserImpl implements Parser {
         }
         return result;
     }
-
 }

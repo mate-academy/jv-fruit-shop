@@ -3,10 +3,11 @@ package core.basesyntax.dao;
 import core.basesyntax.fruit.Fruit;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FruitDaoImpl implements FruitDao {
-    private final HashMap<String, Integer> shop = new HashMap<>();
+    public static final Map<String, Integer> shop = new HashMap<>();
 
     @Override
     public void put(String key, Integer value) {
@@ -26,5 +27,3 @@ public class FruitDaoImpl implements FruitDao {
                 .collect(Collectors.toList());
     }
 }
-
-

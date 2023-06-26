@@ -15,10 +15,9 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void excuteTransactions(List<Transaction> transactionList) {
-        for (Transaction transaction : transactionList) {
+    public void execute(List<Transaction> transactionsList) {
+        for (Transaction transaction : transactionsList) {
             operationHandlerMap.get(transaction.getOperation()).execute(transaction);
         }
-
     }
 }
