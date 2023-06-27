@@ -1,10 +1,16 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.strategy.FruitTransactionOperationHandler;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.model.FruitTransaction;
 
-public class ReturnFruitTransactionOperationHandler implements FruitTransactionOperationHandler {
+public class ReturnFruitTransactionOperationHandler
+        extends AbstractFruitTransactionOperationHandler {
+    public ReturnFruitTransactionOperationHandler(FruitDao fruitDao) {
+        super(fruitDao);
+    }
+
     @Override
-    public int handle(int quantity) {
-        return quantity;
+    public void handle(FruitTransaction fruitTransaction) {
+        fruitDao.updateQuantity(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

@@ -1,6 +1,5 @@
 package core.basesyntax.service.transaction.impl;
 
-import core.basesyntax.dao.FruitDao;
 import core.basesyntax.exception.InvalidFruitTransactionException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.transaction.FruitTransactionService;
@@ -11,14 +10,11 @@ import java.util.List;
 public class DefaultFruitTransactionService implements FruitTransactionService {
     private final FruitTransactionValidator fruitTransactionValidator;
     private final FruitTransactionOperationStrategy fruitTransactionOperationStrategy;
-    private final FruitDao fruitDao;
 
     public DefaultFruitTransactionService(FruitTransactionValidator ftValidator,
-                                          FruitTransactionOperationStrategy ftOperationStrategy,
-                                          FruitDao ftDao) {
+                                          FruitTransactionOperationStrategy ftOperationStrategy) {
         this.fruitTransactionValidator = ftValidator;
         this.fruitTransactionOperationStrategy = ftOperationStrategy;
-        this.fruitDao = ftDao;
     }
 
     @Override
@@ -28,10 +24,9 @@ public class DefaultFruitTransactionService implements FruitTransactionService {
                     "Invalid FruitTransaction: " + fruitTransaction
             );
         }
-        int amount = fruitTransactionOperationStrategy
+        fruitTransactionOperationStrategy
                 .getHandler(fruitTransaction.getOperation())
-                .handle(fruitTransaction.getQuantity());
-        fruitDao.updateQuantity(fruitTransaction.getFruit(), amount);
+                .handle(fruitTransaction);
     }
 
     @Override

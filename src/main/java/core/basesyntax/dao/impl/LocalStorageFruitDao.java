@@ -6,6 +6,11 @@ import java.util.Map;
 
 public class LocalStorageFruitDao implements FruitDao {
     @Override
+    public void setQuantity(String fruit, Integer quantity) {
+        LocalStorage.FRUITS.put(fruit, quantity);
+    }
+
+    @Override
     public void updateQuantity(String fruit, Integer amount) {
         Integer oldValue = LocalStorage.FRUITS.getOrDefault(fruit, 0);
         LocalStorage.FRUITS.put(fruit, oldValue + amount);

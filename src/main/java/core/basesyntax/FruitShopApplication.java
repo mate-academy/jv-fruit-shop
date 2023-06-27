@@ -27,22 +27,6 @@ public class FruitShopApplication {
     private static final String INPUT_FILEPATH = "src/main/resources/input.csv";
     private static final String REPORT_FILEPATH = "src/main/resources/report.csv";
 
-    private static final Map<FruitTransaction.Operation, FruitTransactionOperationHandler>
-            HANDLER_MAP =
-            Map.of(
-                    FruitTransaction.Operation.BALANCE,
-                    new BalanceFruitTransactionOperationHandler(),
-
-                    FruitTransaction.Operation.SUPPLY,
-                    new SupplyFruitTransactionOperationHandler(),
-
-                    FruitTransaction.Operation.PURCHASE,
-                    new PurchaseFruitTransactionOperationHandler(),
-
-                    FruitTransaction.Operation.RETURN,
-                    new ReturnFruitTransactionOperationHandler()
-            );
-
     public static void main(String[] args) {
         // 1. Read input data from file
         FileService fileService = new DefaultFileService();
@@ -54,11 +38,25 @@ public class FruitShopApplication {
 
         // 3. Process parsed transactions
         FruitTransactionValidator ftValidator = new DefaultFruitTransactionValidator();
-        FruitTransactionOperationStrategy ftOperationStrategy =
-                new DefaultFruitTransactionOperationStrategy(HANDLER_MAP);
         FruitDao fruitDao = new LocalStorageFruitDao();
+        Map<FruitTransaction.Operation, FruitTransactionOperationHandler> handlerMap =
+                Map.of(
+                        FruitTransaction.Operation.BALANCE,
+                        new BalanceFruitTransactionOperationHandler(fruitDao),
+
+                        FruitTransaction.Operation.SUPPLY,
+                        new SupplyFruitTransactionOperationHandler(fruitDao),
+
+                        FruitTransaction.Operation.PURCHASE,
+                        new PurchaseFruitTransactionOperationHandler(fruitDao),
+
+                        FruitTransaction.Operation.RETURN,
+                        new ReturnFruitTransactionOperationHandler(fruitDao)
+                );
+        FruitTransactionOperationStrategy ftOperationStrategy =
+                new DefaultFruitTransactionOperationStrategy(handlerMap);
         FruitTransactionService ftService =
-                new DefaultFruitTransactionService(ftValidator, ftOperationStrategy, fruitDao);
+                new DefaultFruitTransactionService(ftValidator, ftOperationStrategy);
         ftService.processTransactions(fruitTransactions);
 
         // 4. Generate report
