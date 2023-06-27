@@ -1,6 +1,6 @@
-package core.basesyntax.service.ftoperation.impl;
+package core.basesyntax.strategy.impl;
 
-import core.basesyntax.service.ftoperation.FruitTransactionOperationHandler;
+import core.basesyntax.strategy.FruitTransactionOperationHandler;
 
 public class PurchaseFruitTransactionOperationHandler implements FruitTransactionOperationHandler {
     @Override

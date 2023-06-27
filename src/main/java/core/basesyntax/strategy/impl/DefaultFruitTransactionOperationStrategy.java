@@ -1,8 +1,8 @@
-package core.basesyntax.service.ftoperation.impl;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ftoperation.FruitTransactionOperationHandler;
-import core.basesyntax.service.ftoperation.FruitTransactionOperationStrategy;
+import core.basesyntax.strategy.FruitTransactionOperationHandler;
+import core.basesyntax.strategy.FruitTransactionOperationStrategy;
 import java.util.Map;
 
 public class DefaultFruitTransactionOperationStrategy implements FruitTransactionOperationStrategy {

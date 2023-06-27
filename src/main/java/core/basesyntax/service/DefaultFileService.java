@@ -1,14 +1,12 @@
-package core.basesyntax.util;
+package core.basesyntax.service;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class FileUtils {
-    private FileUtils() {
-    }
-
-    public static String readFile(String filePath) {
+public class DefaultFileService implements FileService {
+    @Override
+    public String readFile(String filePath) {
         try {
             return Files.readString(Path.of(filePath));
         } catch (IOException e) {
@@ -16,7 +14,8 @@ public class FileUtils {
         }
     }
 
-    public static void writeDataToFile(String filePath, String data) {
+    @Override
+    public void writeDataToFile(String filePath, String data) {
         try {
             Files.write(Path.of(filePath), data.getBytes());
         } catch (IOException e) {

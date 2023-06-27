@@ -1,7 +1,7 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service.transaction.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitTransactionValidator;
+import core.basesyntax.service.transaction.FruitTransactionValidator;
 
 public class DefaultFruitTransactionValidator implements FruitTransactionValidator {
     @Override

@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import core.basesyntax.exception.InvalidFruitTransactionOperationException;
 import java.util.Arrays;
 
-public class FruitTransaction implements Cloneable {
+public class FruitTransaction {
     private final Operation operation;
     private final String fruit;
     private final int quantity;
@@ -46,23 +46,5 @@ public class FruitTransaction implements Cloneable {
                             "Invalid code for FruitTransaction.Operation: " + code)
                     );
         }
-    }
-
-    @Override
-    public FruitTransaction clone() {
-        try {
-            return (FruitTransaction) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException("Cannot clone FruitTransaction object", e);
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "FruitTransaction{"
-                + "ftoperation=" + operation
-                + ", fruit='" + fruit + '\''
-                + ", quantity=" + quantity
-                + '}';
     }
 }
