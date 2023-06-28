@@ -18,7 +18,11 @@ public class DefaultFruitTransactionService implements FruitTransactionService {
     }
 
     @Override
-    public void processSingleTransaction(FruitTransaction fruitTransaction) {
+    public void processTransactions(List<FruitTransaction> fruitTransactions) {
+        fruitTransactions.forEach(this::processSingleTransaction);
+    }
+
+    private void processSingleTransaction(FruitTransaction fruitTransaction) {
         if (!fruitTransactionValidator.isValid(fruitTransaction)) {
             throw new InvalidFruitTransactionException(
                     "Invalid FruitTransaction: " + fruitTransaction
@@ -27,10 +31,5 @@ public class DefaultFruitTransactionService implements FruitTransactionService {
         fruitTransactionOperationStrategy
                 .getHandler(fruitTransaction.getOperation())
                 .handle(fruitTransaction);
-    }
-
-    @Override
-    public void processTransactions(List<FruitTransaction> fruitTransactions) {
-        fruitTransactions.forEach(this::processSingleTransaction);
     }
 }

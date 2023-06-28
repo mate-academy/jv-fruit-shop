@@ -11,9 +11,17 @@ public class LocalStorageFruitDao implements FruitDao {
     }
 
     @Override
-    public void updateQuantity(String fruit, Integer amount) {
-        Integer oldValue = LocalStorage.FRUITS.getOrDefault(fruit, 0);
-        LocalStorage.FRUITS.put(fruit, oldValue + amount);
+    public void addQuantity(String fruit, Integer amount) {
+        LocalStorage.FRUITS.put(fruit, getOldValue(fruit) + amount);
+    }
+
+    private Integer getOldValue(String fruit) {
+        return LocalStorage.FRUITS.getOrDefault(fruit, 0);
+    }
+
+    @Override
+    public void subtractQuantity(String fruit, Integer amount) {
+        LocalStorage.FRUITS.put(fruit, getOldValue(fruit) - amount);
     }
 
     @Override

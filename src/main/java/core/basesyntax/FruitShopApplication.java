@@ -30,7 +30,7 @@ public class FruitShopApplication {
     public static void main(String[] args) {
         // 1. Read input data from file
         FileService fileService = new DefaultFileService();
-        String input = fileService.readFile(INPUT_FILEPATH);
+        List<String> input = fileService.readLines(INPUT_FILEPATH);
 
         // 2. Parse input data
         FruitTransactionParsingService ftParsingService = new CsvFruitTransactionParsingService();

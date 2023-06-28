@@ -11,6 +11,6 @@ public class PurchaseFruitTransactionOperationHandler
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        fruitDao.updateQuantity(fruitTransaction.getFruit(), -fruitTransaction.getQuantity());
+        fruitDao.subtractQuantity(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

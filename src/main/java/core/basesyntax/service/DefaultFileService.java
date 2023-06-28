@@ -3,12 +3,13 @@ package core.basesyntax.service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 public class DefaultFileService implements FileService {
     @Override
-    public String readFile(String filePath) {
+    public List<String> readLines(String filePath) {
         try {
-            return Files.readString(Path.of(filePath));
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException(String.format("Cannot read file '%s'", filePath), e);
         }
