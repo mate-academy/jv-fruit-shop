@@ -4,7 +4,7 @@ import core.basesyntax.dto.Transaction;
 import core.basesyntax.model.Fruit;
 import java.util.Arrays;
 
-public class ParserImpl implements Parser {
+public class ParserServiceImpl implements ParserService {
     private static final String CSV_SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;

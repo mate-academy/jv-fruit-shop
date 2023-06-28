@@ -1,8 +1,7 @@
-package core.basesyntax.strategy;
+package core.basesyntax.startagy;
 
 import core.basesyntax.dto.Transaction;
 
 public interface OperationHandler {
-    void
-    handle(Transaction transaction);
+    int apply(Transaction transaction);
 }

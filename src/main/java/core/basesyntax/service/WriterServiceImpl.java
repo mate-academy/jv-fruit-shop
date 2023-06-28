@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-public class WriterImpl implements Writer {
+public class WriterServiceImpl implements WriterService {
 
     @Override
     public void writeToFile(String filePath, String content) {
