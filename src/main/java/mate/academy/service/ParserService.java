@@ -1,0 +1,1 @@
+package mate.academy.service;import mate.academy.model.FruitTransaction;import java.util.List;public interface ParserService {    List<FruitTransaction> parseData(List<String> inputDataList);}
