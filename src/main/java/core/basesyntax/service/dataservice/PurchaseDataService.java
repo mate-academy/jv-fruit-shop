@@ -1,13 +1,9 @@
 package core.basesyntax.service.dataservice;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.FruitServiceImpl;
 
 public class PurchaseDataService implements DataService {
-    private final FruitService fruitService = new FruitServiceImpl();
     private FruitDao fruitDao;
 
     public PurchaseDataService(FruitDao fruitDao) {
@@ -17,22 +13,22 @@ public class PurchaseDataService implements DataService {
     @Override
     public void processTransaction(FruitTransaction fruitTransaction) {
         validateFruitTransaction(fruitTransaction);
-        Fruit fruit = fruitService.createNewFruit(fruitTransaction.getFruit());
-        if (!fruitDao.getAll().containsKey(fruit)) {
-            throw new RuntimeException("There is no fruit " + fruitTransaction.getFruit()
+        String fruitName = fruitTransaction.getFruitName();
+        if (!fruitDao.getAll().containsKey(fruitName)) {
+            throw new RuntimeException("There is no fruit " + fruitTransaction.getFruitName()
                     + " for purchase.");
         }
 
-        int availableQuantity = fruitDao.getFruitQuantity(fruitTransaction.getFruit());
+        int availableQuantity = fruitDao.getFruitQuantity(fruitTransaction.getFruitName());
         int requiredQuantity = fruitTransaction.getQuantity();
 
         if (availableQuantity < fruitTransaction.getQuantity()) {
             throw new RuntimeException("Not enough quantity in storage for fruit "
-                    + fruitTransaction.getFruit() + " purchase. Required: "
+                    + fruitTransaction.getFruitName() + " purchase. Required: "
                     + requiredQuantity + ", available: "
                     + availableQuantity);
         }
 
-        fruitDao.add(fruit, availableQuantity - requiredQuantity);
+        fruitDao.put(fruitName, availableQuantity - requiredQuantity);
     }
 }

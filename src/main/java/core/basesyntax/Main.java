@@ -28,38 +28,37 @@ public class Main {
         FruitDao fruitDao = new FruitDaoImpl();
 
         //Читаємо з файлу
-        FileService workWithFile = new FileServiceImpl();
-        List<String> fruitsList = workWithFile.readFromFile(SOURCE_FILE);
+        FileService fileService = new FileServiceImpl();
+        List<String> sourceFileContent = fileService.readFromFile(SOURCE_FILE);
 
         // Створюємо мапу стратегії
-        Map<String, DataService> operationDataServiceMap = new HashMap<>();
-        operationDataServiceMap.put(FruitTransaction.Operation.BALANCE.getCode(),
+        Map<FruitTransaction.Operation, DataService> operationDataServiceMap = new HashMap<>();
+        operationDataServiceMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceDataService(fruitDao));
-        operationDataServiceMap.put(FruitTransaction.Operation.RETURN.getCode(),
+        operationDataServiceMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnDataService(fruitDao));
-        operationDataServiceMap.put(FruitTransaction.Operation.SUPPLY.getCode(),
+        operationDataServiceMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyDataService(fruitDao));
-        operationDataServiceMap.put(FruitTransaction.Operation.PURCHASE.getCode(),
+        operationDataServiceMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseDataService(fruitDao));
 
         DataServiceStrategy dataServiceStrategy =
                 new DataServiceStrategyImpl(operationDataServiceMap);
 
         // перетворюємо в ліст транзакцій
-        FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
+        FruitTransactionService fruitTransactionService =
+                new FruitTransactionServiceImpl(dataServiceStrategy);
         List<FruitTransaction> fruitTransactionList =
-                fruitTransactionService.castToList(fruitsList);
-
+                fruitTransactionService.parseTransactions(sourceFileContent);
         // і пішла обробка
-        ProcessTransactions processFruits = new ProcessTransactions(dataServiceStrategy);
-        processFruits.processFruitTransactionList(fruitTransactionList);
+        fruitTransactionService.processTransactions(fruitTransactionList);
 
         //створюємо звіт по БД:
-        ReportService reporter = new ReportServiceImpl(fruitDao);
-        String report = reporter.create();
+        ReportService reportService = new ReportServiceImpl(fruitDao);
+        String report = reportService.create();
 
         //записуємо звіт в файл
-        workWithFile.writeToFile(DESTINATION_FILE, report);
+        fileService.writeToFile(DESTINATION_FILE, report);
 
     }
 }

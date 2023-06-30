@@ -15,17 +15,14 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String create() {
-        String result;
         if (fruitDao.getAll().isEmpty()) {
-            result = "Storage is empty";
-        } else {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(HEADER);
-            Storage.fruitsStorage.entrySet().stream()
-                    .forEach(f -> stringBuilder.append(System.lineSeparator())
-                            .append(f.getKey().getName()).append(",").append(f.getValue()));
-            result = stringBuilder.toString();
+            return "Storage is empty";
         }
-        return result;
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(HEADER);
+        Storage.fruitsStorage.entrySet().stream()
+                .forEach(f -> stringBuilder.append(System.lineSeparator())
+                        .append(f.getKey()).append(",").append(f.getValue()));
+        return stringBuilder.toString();
     }
 }

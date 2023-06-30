@@ -12,13 +12,11 @@ import java.util.List;
 public class FileServiceImpl implements FileService {
     @Override
     public List<String> readFromFile(String fromFile) {
-        List<String> stringList;
         try {
-            stringList = Files.readAllLines(Path.of(fromFile));
+            return Files.readAllLines(Path.of(fromFile));
         } catch (IOException e) {
             throw new RuntimeException("Can't read file " + fromFile, e);
         }
-        return stringList;
     }
 
     @Override

@@ -2,30 +2,30 @@ package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operation;
-    private String fruit;
+    private String fruitName;
     private int quantity;
 
-    public FruitTransaction(String operation, String fruit, int quantity) {
+    public FruitTransaction(String operation, String fruitName, int quantity) {
 
         this.operation = FruitTransaction.Operation.getByCode(operation);
-        this.fruit = fruit;
+        this.fruitName = fruitName;
         this.quantity = quantity;
     }
 
-    public String getOperation() {
-        return this.operation.getCode();
+    public FruitTransaction.Operation getOperation() {
+        return this.operation;
     }
 
     public void setOperation(String operation) {
         this.operation = FruitTransaction.Operation.getByCode(operation);
     }
 
-    public String getFruit() {
-        return fruit;
+    public String getFruitName() {
+        return fruitName;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
+    public void setFruitName(String fruitName) {
+        this.fruitName = fruitName;
     }
 
     public int getQuantity() {
@@ -66,7 +66,7 @@ public class FruitTransaction {
     public String toString() {
         return "FruitTransaction{"
                 + "operation=" + operation
-                + ", fruit='" + fruit + '\''
+                + ", fruit='" + fruitName + '\''
                 + ", quantity=" + quantity
                 + '}';
     }

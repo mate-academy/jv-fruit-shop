@@ -1,13 +1,9 @@
 package core.basesyntax.service.dataservice;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.FruitServiceImpl;
 
 public class BalanceDataService implements DataService {
-    private final FruitService fruitService = new FruitServiceImpl();
     private FruitDao fruitDao;
 
     public BalanceDataService(FruitDao fruitDao) {
@@ -18,11 +14,11 @@ public class BalanceDataService implements DataService {
     public void processTransaction(FruitTransaction fruitTransaction) {
         validateFruitTransaction(fruitTransaction);
 
-        Fruit fruit = fruitService.createNewFruit(fruitTransaction.getFruit());
-        if (fruitDao.getAll().containsKey(fruit)) {
+        String fruitName = fruitTransaction.getFruitName();
+        if (fruitDao.getAll().containsKey(fruitTransaction.getFruitName())) {
             throw new RuntimeException("You can't override current balance for "
-                    + fruitTransaction.getFruit());
+                    + fruitTransaction.getFruitName());
         }
-        fruitDao.add(fruit, fruitTransaction.getQuantity());
+        fruitDao.put(fruitName, fruitTransaction.getQuantity());
     }
 }
