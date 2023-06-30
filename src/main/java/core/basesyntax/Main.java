@@ -12,7 +12,6 @@ import core.basesyntax.strategy.AddOperationHandler;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,13 +29,13 @@ public class Main {
         operationStrategyMap.put(Operation.SUPPLY, new AddOperationHandler());
         operationStrategyMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationStrategyMap.put(Operation.RETURN, new AddOperationHandler());
-        List<String> contentFromFile =
-                READER_FILE.readFromFile(SOURCE_ADDRESS);
+        List<String> contentFromFile = READER_FILE.readFromFile(SOURCE_ADDRESS);
         contentFromFile.remove(0);
         contentFromFile.stream()
                 .map(PARSER_FILE::parseLine)
-                .forEach(transaction ->
-                        operationStrategyMap.get(Operation.checkTypeOperation(transaction.getOperation())).handle(transaction));
+                .forEach(transaction -> operationStrategyMap
+                        .get(Operation.checkTypeOperation(transaction.getOperation()))
+                        .handle(transaction));
         FruitService reportService = new FruitServiceImpl();
         String report = reportService.getReport();
         WRITER_FILE.writeToFile(DESTINATION_ADDRESS, report);
