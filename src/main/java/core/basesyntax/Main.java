@@ -5,12 +5,14 @@ import core.basesyntax.db.DataBaseCsvImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.DailyTransactionsStringToTransactions;
+import core.basesyntax.service.CsvFruitTransactionParser;
+import core.basesyntax.service.FileWriterImpl;
 import core.basesyntax.service.FruitTransactionServiceImpl;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
 import core.basesyntax.service.ReadDailyTransactions;
-import core.basesyntax.service.WriteDailyReportToFile;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.strategy.BalanceOperationHandler;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.PurchaseOperationHandler;
@@ -23,30 +25,39 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Main {
+    public static final String TRANSACTION_FULL_PATH = "src/main/resources/transaction.csv";
+    public static final String REPORT_FULL_PATH = "src/main/resources/report.csv";
+
     public static final String SEPARATE_SYMBOL_FOR_CSV =
-            DailyTransactionsStringToTransactions.SEPARATE_SYMBOL_FOR_CSV;
+            CsvFruitTransactionParser.SEPARATE_SYMBOL_FOR_CSV;
     private static Map<Operation, OperationHandler> operationsMap = new HashMap<>();
 
     public static void main(String[] args) {
         createFileTransactionsCsv();
         createTransactionsMap();
-        ReadDailyTransactions readDailyTransactions = new ReadDailyTransactions();
+        ReadDailyTransactions readDailyTransactions =
+                new ReadDailyTransactions(TRANSACTION_FULL_PATH);
         List<String> transactionsStringList = new ArrayList<>(
                 readDailyTransactions.getListOfTransactions());
-        DailyTransactionsStringToTransactions dailyTransactionsStringToTransactions =
-                new DailyTransactionsStringToTransactions();
+
+        CsvFruitTransactionParser csvFruitTransactionParser =
+                new CsvFruitTransactionParser();
         List<Transaction> transactionsList = new ArrayList<>(
-                dailyTransactionsStringToTransactions.stringListToTransactionList(
+                csvFruitTransactionParser.stringListToTransactionList(
                         transactionsStringList));
+
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
         FruitTransactionServiceImpl fruitTransactionServiceImpl =
                 new FruitTransactionServiceImpl(operationStrategy);
+
         List<String> totalDailyTransactionsList =
                 fruitTransactionServiceImpl.processDailyReport(transactionsList);
+
+        ReportService reportService = new ReportServiceImpl();
         List<String> dailyTransactionsReport =
-                fruitTransactionServiceImpl.createReport(totalDailyTransactionsList);
-        WriteDailyReportToFile writeDailyReportToFile = new WriteDailyReportToFile();
-        writeDailyReportToFile.writeReportToFile(dailyTransactionsReport);
+                reportService.createReport(totalDailyTransactionsList);
+        FileWriterImpl writeDailyReportToFile = new FileWriterImpl(REPORT_FULL_PATH);
+        writeDailyReportToFile.writeToFile(dailyTransactionsReport);
     }
 
     public static void createTransactionsMap() {
@@ -67,7 +78,7 @@ public class Main {
         transaction.add(new Transaction(Operation.PURCHASE, Fruit.BANANA, 5));
         transaction.add(new Transaction(Operation.SUPPLY, Fruit.BANANA, 50));
         DataBase transactionsDataBase =
-                new DataBaseCsvImpl(ReadDailyTransactions.TRANSACTION_FULL_PATH);
+                new DataBaseCsvImpl(TRANSACTION_FULL_PATH);
         transactionsDataBase.writeDataToFile(transactionsListToStringList(
                 transaction, ReadDailyTransactions.HEAD_OF_TRANSACTION_TABLE));
     }
