@@ -11,7 +11,7 @@ In this case you will save a lot of time when you need to add/modify existing fu
 All services should be independent. 
 We shouldn't have Strategy and call its methods in CsvFileReaderService, or we shouldn't have CsvFileWriterService and call its methods in the Strategy class.
 
-Let's create `Main` class with `main()` method to show how the program works.
+Let's create `core.basesyntax.main.Main` class with `main()` method to show how the program works.
 Make all services independent and call them in the right order in `main()` method step by step (the result of previous service method should be the input for next one)
 
 #### Don't keep all logic in a single package
@@ -53,7 +53,7 @@ the most suitable for your needs.
 #### Place the input and output files into the `src/main/resources` folder.
 
 #### Avoid hardcode in your solution
-* Use hardcoded values only in the Main class and/or test classes.  
+* Use hardcoded values only in the core.basesyntax.main.Main class and/or test classes.  
     
 - Bad:  
     ```java
