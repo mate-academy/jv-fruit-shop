@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.util.Map;
 
-public class FruitServiceImpl implements FruitService {
+public class ReportServiceImpl implements ReportService {
 
     @Override
     public String getReport() {
