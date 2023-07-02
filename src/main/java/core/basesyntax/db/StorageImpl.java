@@ -1,6 +1,6 @@
 package core.basesyntax.db;
 
-import core.basesyntax.service.CsvFruitTransactionParser;
+import core.basesyntax.service.FruitTransactionParserCsv;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class StorageImpl implements Storage {
         return storage.entrySet()
                 .stream()
                 .map(s -> s.getKey().toString().toLowerCase()
-                        + CsvFruitTransactionParser.SEPARATE_SYMBOL_FOR_CSV
+                        + FruitTransactionParserCsv.SEPARATE_SYMBOL_FOR_CSV
                         + s.getValue())
                 .collect(Collectors.toList());
     }

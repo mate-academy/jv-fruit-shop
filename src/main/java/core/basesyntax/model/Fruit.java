@@ -16,9 +16,9 @@ public enum Fruit {
         return fruitName;
     }
 
-    public static Fruit getFruitByName(String fruitName) {
+    public static Fruit getByCode(String fruitName) {
         for (Fruit fn : Fruit.values()) {
-            if (fn.fruitName == fruitName) {
+            if (fn.fruitName.equals(fruitName)) {
                 return fn;
             }
         }

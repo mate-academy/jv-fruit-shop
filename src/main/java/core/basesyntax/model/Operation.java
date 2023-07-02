@@ -16,9 +16,9 @@ public enum Operation {
         return operation;
     }
 
-    public static Operation getOperationByLetter(String operation) {
+    public static Operation getByCode(String operation) {
         for (Operation op : Operation.values()) {
-            if (op.operation == operation) {
+            if (op.operation.equals(operation)) {
                 return op;
             }
         }
