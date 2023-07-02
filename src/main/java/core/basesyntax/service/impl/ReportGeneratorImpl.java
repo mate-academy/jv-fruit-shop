@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ReportGeneratorService;
 import java.util.Map;
 
-public class ReportGeneratorImpl implements ReportGenerator {
+public class ReportGeneratorImpl implements ReportGeneratorService {
     private static final String TITLE = "fruit,quantity\n";
     private static final String DELIMITER = ",";
 

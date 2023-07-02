@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserTransactionImpl implements Parser {
+public class ParserTransactionImpl implements ParserService {
     private static final String SEPARATOR = ",";
     private static final int OPERATION = 0;
     private static final int FRUIT = 1;

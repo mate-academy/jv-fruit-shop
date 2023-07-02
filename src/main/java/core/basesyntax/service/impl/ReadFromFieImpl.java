@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Reader;
+import core.basesyntax.service.ReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadFromFieImpl implements Reader {
+public class ReadFromFieImpl implements ReaderService {
     @Override
     public List<String> readFile(String filePath) {
         try {

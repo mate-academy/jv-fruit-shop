@@ -2,10 +2,10 @@ package core.basesyntax.main;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.Parser;
-import core.basesyntax.service.Reader;
-import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.Writer;
+import core.basesyntax.service.ParserService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportGeneratorService;
+import core.basesyntax.service.WriterService;
 import core.basesyntax.service.handler.BalanceOperationHandler;
 import core.basesyntax.service.handler.OperationHandler;
 import core.basesyntax.service.handler.PurchaseHandler;
@@ -33,16 +33,16 @@ public class Main {
         operationStrategyMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationStrategyMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         operationStrategyMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-        Reader reader = new ReadFromFieImpl();
+        ReaderService reader = new ReadFromFieImpl();
         List<String> strings = reader.readFile(INPUT_FILE);
-        Parser parser = new ParserTransactionImpl();
+        ParserService parser = new ParserTransactionImpl();
         List<FruitTransaction> transactions = parser.parseRecords(strings);
         FruitShopService fruitShopService =
                 new FruitShopServiceImpl(new OperationStrategyImpl(operationStrategyMap));
         fruitShopService.processOfOperations(transactions);
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        ReportGeneratorService reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.generateReport();
-        Writer writer = new WriteToFileImpl();
+        WriterService writer = new WriteToFileImpl();
         writer.writeReport(report, REPORT_FILE);
     }
 }
