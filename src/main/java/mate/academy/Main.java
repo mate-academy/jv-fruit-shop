@@ -2,7 +2,6 @@ package mate.academy;
 
 import java.util.List;
 import java.util.Map;
-
 import mate.academy.model.FruitTransaction;
 import mate.academy.service.ParserService;
 import mate.academy.service.ProcessDataService;
