@@ -25,7 +25,8 @@ public class FruitTransaction {
 
     @Override
     public String toString() {
-        return "FruitTransaction{" + "operation=" + operation + ", fruit='" + fruit + '\'' + ", quantity=" + quantity + '}';
+        return "FruitTransaction{" + "operation=" + operation
+                + ", fruit='" + fruit + '\'' + ", quantity=" + quantity + '}';
     }
 
     private Operation getOperationByCode(String operationCode) {

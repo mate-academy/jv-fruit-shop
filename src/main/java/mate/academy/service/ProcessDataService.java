@@ -5,5 +5,6 @@ import mate.academy.model.FruitTransaction;
 import mate.academy.strategy.TransactionStrategy;
 
 public interface ProcessDataService {
-    void processTransactions(List<FruitTransaction> transactions, TransactionStrategy transactionStrategy);
+    void processTransactions(List<FruitTransaction> transactions
+            , TransactionStrategy transactionStrategy);
 }

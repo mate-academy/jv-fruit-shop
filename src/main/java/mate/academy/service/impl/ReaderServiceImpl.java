@@ -12,7 +12,9 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromFile(String filePath) {
         List<String> inputData;
         try (Stream<String> lines = Files.lines(Path.of(filePath))) {
-            inputData = lines.filter(line -> !line.isEmpty()).map(String::trim).collect(Collectors.toList());
+            inputData = lines.filter(line -> !line.isEmpty())
+                    .map(String::trim)
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file: " + filePath, e);
         }

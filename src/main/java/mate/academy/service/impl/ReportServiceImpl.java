@@ -20,7 +20,10 @@ public class ReportServiceImpl implements ReportService {
     public String createReport() {
         StringBuilder reportBuilder = new StringBuilder().append(reportHeader);
         for (Map.Entry<String, Integer> entry : fruitDao.getAll().entrySet()) {
-            reportBuilder.append(System.lineSeparator()).append(entry.getKey()).append(dataSeparator).append(entry.getValue());
+            reportBuilder.append(System.lineSeparator())
+                    .append(entry.getKey())
+                    .append(dataSeparator)
+                    .append(entry.getValue());
         }
         return reportBuilder.toString();
     }

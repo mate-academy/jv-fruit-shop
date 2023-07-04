@@ -22,7 +22,7 @@ import mate.academy.strategy.TransactionStrategy;
 import mate.academy.strategy.TransactionStrategyImpl;
 
 public class Main {
-    private static final String inputFilePath = "src/main/java/mate/academy/resources/database.csv";//
+    private static final String inputFilePath = "src/main/java/mate/academy/resources/database.csv";
     private static final String reportFilePath = "src/main/java/mate/academy/resources/report.csv";
     private static final ReaderService readerService = new ReaderServiceImpl();
     private static final ParserService parserService = new ParserServiceImpl();
@@ -31,7 +31,15 @@ public class Main {
     private static final WriterService writerService = new WriterServiceImpl();
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, TransactionHandler> transactionHandlersMap = Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandlerImpl(), FruitTransaction.Operation.PURCHASE, new PurchaseHandlerImpl(), FruitTransaction.Operation.SUPPLY, new SupplyHandlerImpl(), FruitTransaction.Operation.RETURN, new ReturnHandlerImpl());
+        Map<FruitTransaction.Operation, TransactionHandler> transactionHandlersMap = Map.of(
+                FruitTransaction.Operation.BALANCE
+                , new BalanceHandlerImpl()
+                , FruitTransaction.Operation.PURCHASE
+                , new PurchaseHandlerImpl()
+                , FruitTransaction.Operation.SUPPLY
+                , new SupplyHandlerImpl()
+                , FruitTransaction.Operation.RETURN
+                , new ReturnHandlerImpl());
 
         List<String> inputData = readerService.readFromFile(inputFilePath);
         List<FruitTransaction> transactions = parserService.parseData(inputData);
