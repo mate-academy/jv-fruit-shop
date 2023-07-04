@@ -9,6 +9,11 @@ import model.FruitTransaction;
 import service.CsvFileReaderService;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
+    private static final String SEPARATOR = ",";
+    private static final int ACTIVITY_CODE = 0;
+    private static final int FRUIT_NAME = 1;
+    private static final int FRUIT_QUANTITY = 2;
+
     @Override
     public List<FruitTransaction> readFromFile(String filePath) {
         List<FruitTransaction> transactions = new ArrayList<>();
@@ -19,15 +24,15 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
 
-                String[] values = line.split(",");
-                String operationCode = values[0].trim();
-                String fruit = values[1].trim();
-                int quantity = Integer.parseInt(values[2].trim());
+                String[] values = line.split(SEPARATOR);
+                String operationCode = values[ACTIVITY_CODE].trim();
+                String fruit = values[FRUIT_NAME].trim();
+                int quantity = Integer.parseInt(values[FRUIT_QUANTITY].trim());
 
                 FruitTransaction.Operation operation = null;
-                for (FruitTransaction.Operation op : FruitTransaction.Operation.values()) {
-                    if (op.getCode().equals(operationCode)) {
-                        operation = op;
+                for (FruitTransaction.Operation fruitOperation : FruitTransaction.Operation.values()) {
+                    if (fruitOperation.getCode().equals(operationCode)) {
+                        operation = fruitOperation;
                         break;
                     }
                 }

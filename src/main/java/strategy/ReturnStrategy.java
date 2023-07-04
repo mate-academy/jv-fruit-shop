@@ -3,9 +3,9 @@ package strategy;
 import db.ShopStorage;
 import model.FruitTransaction;
 
-public class ReturnStrategy implements OperationHandler {
+public class ReturnStrategy implements FruitShopStrategy {
     @Override
-    public void handleOperation(FruitTransaction transaction, ShopStorage fruitStorage) {
+    public void doActivity(FruitTransaction transaction, ShopStorage fruitStorage) {
         int currentQuantity = fruitStorage.getQuantity(transaction.getFruit());
         int newQuantity = currentQuantity + transaction.getQuantity();
         fruitStorage.updateQuantity(transaction.getFruit(), newQuantity);

@@ -53,7 +53,7 @@ the most suitable for your needs.
 #### Place the input and output files into the `src/main/resources` folder.
 
 #### Avoid hardcode in your solution
-* Use hardcoded values only in the Main class and/or test classes.  
+* Use hardcoded values only in the Main class and/or main classes.  
     
 - Bad:  
     ```java

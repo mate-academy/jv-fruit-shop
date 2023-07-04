@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 public interface ReportGeneratorService {
-    void generateReport(String filePath);
+    List<String> generateReport();
 }

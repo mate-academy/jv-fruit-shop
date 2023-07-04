@@ -3,10 +3,10 @@ package strategy;
 import db.ShopStorage;
 import model.FruitTransaction;
 
-public class PurchaseStrategy implements OperationHandler {
+public class PurchaseStrategy implements FruitShopStrategy {
 
     @Override
-    public void handleOperation(FruitTransaction transaction, ShopStorage fruitStorage) {
+    public void doActivity(FruitTransaction transaction, ShopStorage fruitStorage) {
         int currentQuantity = fruitStorage.getQuantity(transaction.getFruit());
         int newQuantity = currentQuantity - transaction.getQuantity();
         if (newQuantity < 0) {
