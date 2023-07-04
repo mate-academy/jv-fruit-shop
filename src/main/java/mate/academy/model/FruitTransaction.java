@@ -1,4 +1,4 @@
-package mate.academy.model;
+package mate.academy.model;//*
 
 public class FruitTransaction {
     private final Operation operation;

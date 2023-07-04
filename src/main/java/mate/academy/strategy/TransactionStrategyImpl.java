@@ -1,4 +1,4 @@
-package mate.academy.strategy;
+package mate.academy.strategy;//*
 
 import java.util.Map;
 import mate.academy.model.FruitTransaction;
