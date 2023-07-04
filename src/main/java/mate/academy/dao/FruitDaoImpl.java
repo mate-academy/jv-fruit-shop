@@ -1,6 +1,6 @@
 package mate.academy.dao;
 
-import java.util.Map;//*
+import java.util.Map;
 import mate.academy.db.Storage;
 
 public class FruitDaoImpl implements FruitDao {

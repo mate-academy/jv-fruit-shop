@@ -1,4 +1,4 @@
-package mate.academy.service;//*
+package mate.academy.service;
 
 public interface ReportService {
     String createReport();

@@ -1,4 +1,4 @@
-package mate.academy.service.transaction;//*
+package mate.academy.service.transaction;
 
 import mate.academy.model.FruitTransaction;
 

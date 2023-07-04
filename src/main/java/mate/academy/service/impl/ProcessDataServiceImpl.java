@@ -1,4 +1,4 @@
-package mate.academy.service.impl;//*
+package mate.academy.service.impl;
 
 import java.util.List;
 import mate.academy.model.FruitTransaction;

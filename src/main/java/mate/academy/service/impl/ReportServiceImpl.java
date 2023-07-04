@@ -1,4 +1,4 @@
-package mate.academy.service.impl;//*
+package mate.academy.service.impl;
 
 import java.util.Map;
 import mate.academy.dao.FruitDao;

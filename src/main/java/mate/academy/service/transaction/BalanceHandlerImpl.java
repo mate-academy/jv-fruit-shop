@@ -1,4 +1,4 @@
-package mate.academy.service.transaction;//*
+package mate.academy.service.transaction;
 
 import mate.academy.dao.FruitDao;
 import mate.academy.dao.FruitDaoImpl;

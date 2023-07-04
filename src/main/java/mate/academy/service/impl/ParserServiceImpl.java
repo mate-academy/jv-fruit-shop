@@ -1,4 +1,4 @@
-package mate.academy.service.impl;//*
+package mate.academy.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
