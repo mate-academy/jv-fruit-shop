@@ -1,5 +1,6 @@
 package core.basesyntax.model;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.strategy.BalanceOperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.PurchaseOperationStrategy;
@@ -31,12 +32,12 @@ public class FruitTransaction {
         return quantity;
     }
 
-    public static Map<String, OperationStrategy> createOperationStrategies() {
+    public static Map<String, OperationStrategy> createOperationStrategies(Storage storage) {
         Map<String, OperationStrategy> operationStrategies = new HashMap<>();
-        operationStrategies.put("b", new BalanceOperationStrategy());
-        operationStrategies.put("s", new SupplyOperationStrategy());
-        operationStrategies.put("p", new PurchaseOperationStrategy());
-        operationStrategies.put("r", new ReturnOperationStrategy());
+        operationStrategies.put("b", new BalanceOperationStrategy(storage));
+        operationStrategies.put("s", new SupplyOperationStrategy(storage));
+        operationStrategies.put("p", new PurchaseOperationStrategy(storage));
+        operationStrategies.put("r", new ReturnOperationStrategy(storage));
         return operationStrategies;
     }
 }
