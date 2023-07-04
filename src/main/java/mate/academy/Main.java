@@ -32,19 +32,18 @@ public class Main {
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, TransactionHandler> transactionHandlersMap = Map.of(
-                FruitTransaction.Operation.BALANCE
-                , new BalanceHandlerImpl()
-                , FruitTransaction.Operation.PURCHASE
-                , new PurchaseHandlerImpl()
-                , FruitTransaction.Operation.SUPPLY
-                , new SupplyHandlerImpl()
-                , FruitTransaction.Operation.RETURN
-                , new ReturnHandlerImpl());
-
+                FruitTransaction.Operation.BALANCE, new BalanceHandlerImpl(),
+                FruitTransaction.Operation.PURCHASE,
+                new PurchaseHandlerImpl(),
+                FruitTransaction.Operation.SUPPLY,
+                new SupplyHandlerImpl(),
+                FruitTransaction.Operation.RETURN,
+                new ReturnHandlerImpl());
         List<String> inputData = readerService.readFromFile(inputFilePath);
         List<FruitTransaction> transactions = parserService.parseData(inputData);
 
-        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(transactionHandlersMap);
+        TransactionStrategy transactionStrategy = new TransactionStrategyImpl(
+                transactionHandlersMap);
         processDataService.processTransactions(transactions, transactionStrategy);
 
         String report = reportService.createReport();
