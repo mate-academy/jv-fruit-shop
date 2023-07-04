@@ -7,7 +7,8 @@ import mate.academy.strategy.TransactionStrategy;
 
 public class ProcessDataServiceImpl implements ProcessDataService {
     @Override
-    public void processTransactions(List<FruitTransaction> transactions, TransactionStrategy transactionStrategy) {
+    public void processTransactions(List<FruitTransaction> transactions,
+                                    TransactionStrategy transactionStrategy) {
         for (FruitTransaction transaction : transactions) {
             transactionStrategy.get(transaction.getOperation()).handleTransaction(transaction);
         }
