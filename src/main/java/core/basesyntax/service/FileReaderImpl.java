@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadDailyTransactionsImpl implements ReadDailyTransactions {
+public class FileReaderImpl implements FileReader {
 
     public List<String> getListOfTransactions(String filePath) {
         List<String> dataFromFile;
