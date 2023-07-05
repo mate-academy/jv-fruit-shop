@@ -2,6 +2,7 @@ package main;
 
 import db.ShopStorage;
 import db.ShopStorageImpl;
+import java.util.List;
 import model.FruitTransaction;
 import service.CsvFileWriterService;
 import service.ReportGeneratorService;
@@ -9,7 +10,6 @@ import service.impl.CsvFileReaderServiceImpl;
 import service.impl.CsvFileWriterServiceImpl;
 import service.impl.CsvReportGeneratorService;
 import strategy.FruitShopStrategyImpl;
-import java.util.List;
 
 public class Main {
     public static final String outputFilePath = "src/main/java/output.csv";
