@@ -30,7 +30,8 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
                 int quantity = Integer.parseInt(values[FRUIT_QUANTITY].trim());
 
                 FruitTransaction.Operation operation = null;
-                for (FruitTransaction.Operation fruitOperation : FruitTransaction.Operation.values()) {
+                for (FruitTransaction.Operation fruitOperation
+                        : FruitTransaction.Operation.values()) {
                     if (fruitOperation.getCode().equals(operationCode)) {
                         operation = fruitOperation;
                         break;
