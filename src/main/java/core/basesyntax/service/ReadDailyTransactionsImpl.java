@@ -1,14 +1,22 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.DataBase;
-import core.basesyntax.db.DataBaseCsvImpl;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 public class ReadDailyTransactionsImpl implements ReadDailyTransactions {
-    public static final String HEAD_OF_TRANSACTION_TABLE = "type,fruit,quantity";
 
-    public List<String> getListOfTransactions(String transactionFullPath) {
-        DataBase transactionFileConnection = new DataBaseCsvImpl(transactionFullPath);
-        return transactionFileConnection.getDataFromFile();
+    public List<String> getListOfTransactions(String filePath) {
+        List<String> dataFromFile;
+        try {
+            dataFromFile = Files.readAllLines(Path.of(filePath));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't find file by path: " + filePath, e);
+        }
+        if (!dataFromFile.isEmpty()) {
+            dataFromFile.remove(0);
+        }
+        return dataFromFile;
     }
 }
