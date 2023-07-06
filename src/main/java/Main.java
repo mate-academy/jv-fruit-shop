@@ -1,4 +1,4 @@
-import core.basesyntax.db.Storage;
+/* import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.TransactionParser;
@@ -11,12 +11,12 @@ import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.strategy.OperationStrategy;
 import java.io.IOException;
-import java.util.Map;
+import java.util.Map; */
 
 public class Main {
 
     public static void main(String[] args) {
-        String inputFileName = "src/main/resources/input_file.csv";
+        /* String inputFileName = "src/main/resources/input_file.csv";
         String outputFileName = "src/main/resources/output_file.csv";
         Storage storage = new Storage();
         Map<String, OperationStrategy> operationStrategies
@@ -37,6 +37,6 @@ public class Main {
             System.out.println("Report generated successfully");
         } catch (IOException e) {
             System.out.println("An error occured");
-        }
+        } */
     }
 }
