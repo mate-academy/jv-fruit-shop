@@ -1,23 +1,11 @@
 package core.shop.service.impl;
 
-import core.shop.service.FileService;
+import core.shop.service.FileWriteService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 
-public class FileServiceImpl implements FileService {
-    @Override
-    public List<String> read(String filename) {
-        try {
-            return Files.readAllLines(Path.of(filename));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + filename, e);
-        }
-    }
-
+public class FileWriteServiceImpl implements FileWriteService {
     @Override
     public void write(String fileName, String info) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {

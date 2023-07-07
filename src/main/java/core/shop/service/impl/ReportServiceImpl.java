@@ -1,42 +1,23 @@
 package core.shop.service.impl;
 
-import core.shop.model.FruitRecord;
-import core.shop.service.CalculateQuantityService;
-import core.shop.service.FileService;
-import core.shop.service.ParseListService;
+import core.shop.db.Storage;
 import core.shop.service.ReportService;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String REPORT_FILE = "src/report.csv";
     private static final String REPORT_TITLE = "fruit,quantity";
     private static final String COMA_SEPARATOR = ",";
-    private final CalculateQuantityService calculateQuantity = new CalculateQuantityServiceImpl();
-    private final ParseListService parseList = new ParseListServiceImpl();
-    private final FileService fileService = new FileServiceImpl();
 
     @Override
-    public void generateReport(List<String> fruitsList) {
-        StringBuilder reportBuilder = new StringBuilder(REPORT_TITLE)
-                .append(System.lineSeparator());
-        List<FruitRecord> fruitRecordList = parseList.getFruitRecords(fruitsList);
-        Set<String> fruitsSet = getFruits(fruitRecordList);
-
-        for (String fruit : fruitsSet) {
-            int totalQuantity = calculateQuantity.calculateQuantity(fruitRecordList, fruit);
-            reportBuilder.append(fruit)
+    public String generateReport() {
+        Map<String, Integer> records = Storage.fruits;
+        StringBuilder record = new StringBuilder(REPORT_TITLE);
+        for (Map.Entry<String, Integer> entry : records.entrySet()) {
+            record.append(System.lineSeparator())
+                    .append(entry.getKey())
                     .append(COMA_SEPARATOR)
-                    .append(totalQuantity)
-                    .append(System.lineSeparator());
+                    .append(entry.getValue());
         }
-        fileService.write(REPORT_FILE, reportBuilder.toString());
-    }
-
-    private Set<String> getFruits(List<FruitRecord> fruitRecords) {
-        return fruitRecords.stream()
-                .map(FruitRecord::getFruitName)
-                .collect(Collectors.toSet());
+        return record.toString();
     }
 }

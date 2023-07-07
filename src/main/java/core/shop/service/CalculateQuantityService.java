@@ -1,8 +1,8 @@
 package core.shop.service;
 
-import core.shop.model.FruitRecord;
+import core.shop.model.FruitTransaction;
 import java.util.List;
 
 public interface CalculateQuantityService {
-    int calculateQuantity(List<FruitRecord> fruitsList, String fruitName);
+    void calculate(List<FruitTransaction> fruitTransactions);
 }

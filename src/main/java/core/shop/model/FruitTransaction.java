@@ -1,26 +1,26 @@
 package core.shop.model;
 
-public class FruitRecord {
-    private ActivityType activityType;
+public class FruitTransaction {
+    private OperationType operationType;
     private String fruitName;
     private int quantity;
 
-    public FruitRecord() {
+    public FruitTransaction() {
 
     }
 
-    public FruitRecord(ActivityType activityType, String fruitName, int quantity) {
-        this.activityType = activityType;
+    public FruitTransaction(OperationType operationType, String fruitName, int quantity) {
+        this.operationType = operationType;
         this.fruitName = fruitName;
         this.quantity = quantity;
     }
 
-    public ActivityType getActivityType() {
-        return activityType;
+    public OperationType getOperationType() {
+        return operationType;
     }
 
-    public void setActivityType(ActivityType activityType) {
-        this.activityType = activityType;
+    public void setOperationType(OperationType operationType) {
+        this.operationType = operationType;
     }
 
     public String getFruitName() {
@@ -42,7 +42,7 @@ public class FruitRecord {
     @Override
     public String toString() {
         return "FruitRecord{"
-                + "activityType=" + activityType
+                + "operationType=" + operationType
                 + ", fruitName='" + fruitName + '\''
                 + ", quantity=" + quantity
                 + '}';
