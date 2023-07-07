@@ -12,7 +12,6 @@ public class ParserImpl implements Parser {
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int OFFSET = 1;
 
-
     @Override
     public List<FruitTransaction> parseData(List<String> inputDataRows) {
         List<FruitTransaction> transactions = new ArrayList<>();

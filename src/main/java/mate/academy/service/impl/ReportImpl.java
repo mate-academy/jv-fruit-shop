@@ -10,7 +10,6 @@ public class ReportImpl implements ReportGenerator {
     private static final String DATA_SEPARATOR = ",";
     private final FruitDao fruitDao;
 
-
     public ReportImpl() {
         fruitDao = new FruitDaoImpl();
     }
