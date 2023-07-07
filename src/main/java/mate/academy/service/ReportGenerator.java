@@ -1,5 +1,5 @@
 package mate.academy.service;
 
-public interface Report {
+public interface ReportGenerator {
     String createReport();
 }

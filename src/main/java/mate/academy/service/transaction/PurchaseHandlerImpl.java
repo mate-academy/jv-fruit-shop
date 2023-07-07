@@ -15,6 +15,17 @@ public class PurchaseHandlerImpl implements TransactionHandler {
     public void handleTransaction(FruitTransaction transaction) {
         int oldQuantity = fruitDao.getQuantity(transaction.getFruit());
         int newQuantity = oldQuantity - transaction.getQuantity();
+        isFruitAvailable(newQuantity, transaction);
         fruitDao.add(transaction.getFruit(), newQuantity);
     }
+
+    private void isFruitAvailable(int newQuantity, FruitTransaction transaction) {
+        if (newQuantity < 0) {
+            throw new RuntimeException("The store is missing "
+                    + newQuantity * -1
+                    + " "
+                    + transaction.getFruit());
+        }
+    }
+
 }

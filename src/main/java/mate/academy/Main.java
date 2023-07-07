@@ -6,7 +6,7 @@ import mate.academy.model.FruitTransaction;
 import mate.academy.service.Parser;
 import mate.academy.service.ProcessData;
 import mate.academy.service.Reader;
-import mate.academy.service.Report;
+import mate.academy.service.ReportGenerator;
 import mate.academy.service.Writer;
 import mate.academy.service.impl.ParserImpl;
 import mate.academy.service.impl.ProcessImpl;
@@ -27,7 +27,7 @@ public class Main {
     private static final Reader readerService = new ReaderImpl();
     private static final Parser parserService = new ParserImpl();
     private static final ProcessData processDataService = new ProcessImpl();
-    private static final Report reportService = new ReportImpl();
+    private static final ReportGenerator reportService = new ReportImpl();
     private static final Writer writerService = new WriterImpl();
 
     public static void main(String[] args) {

@@ -7,24 +7,20 @@ import mate.academy.service.Parser;
 
 public class ParserImpl implements Parser {
     private static final String SEPARATOR = ",";
-    private final int operationCodeIndex;
-    private final int quantityIndex;
-    private final int fruitNameIndex;
+    private static final int OPERATION_CODE_INDEX = 0;
+    private static final int QUANTITY_INDEX = 2;
+    private static final int FRUIT_NAME_INDEX = 1;
+    private static final int OFFSET = 1;
 
-    public ParserImpl() {
-        operationCodeIndex = 0;
-        quantityIndex = 2;
-        fruitNameIndex = 1;
-    }
 
     @Override
     public List<FruitTransaction> parseData(List<String> inputDataRows) {
         List<FruitTransaction> transactions = new ArrayList<>();
-        for (int i = 1; i < inputDataRows.size(); i++) {
+        for (int i = OFFSET; i < inputDataRows.size(); i++) {
             String[] entryData = inputDataRows.get(i).split(SEPARATOR);
-            String operationCode = entryData[operationCodeIndex];
-            String fruit = entryData[fruitNameIndex];
-            int quantity = Integer.parseInt(entryData[quantityIndex].trim());
+            String operationCode = entryData[OPERATION_CODE_INDEX];
+            String fruit = entryData[FRUIT_NAME_INDEX];
+            int quantity = Integer.parseInt(entryData[QUANTITY_INDEX].trim());
             transactions.add(new FruitTransaction(operationCode, fruit, quantity));
         }
         return transactions;
