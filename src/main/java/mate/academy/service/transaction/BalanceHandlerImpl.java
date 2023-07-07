@@ -16,13 +16,13 @@ public class BalanceHandlerImpl implements TransactionHandler {
         processFruit(transaction);
         fruitDao.add(transaction.getFruit(), transaction.getQuantity());
     }
+
     public void processFruit(FruitTransaction transaction) {
         if (transaction.getQuantity() < 0) {
-        throw new RuntimeException("Negative number of fruits "
+            throw new RuntimeException("Negative number of fruits "
                     + transaction.getFruit()
                     + ": "
                     + transaction.getQuantity());
         }
     }
-
 }
