@@ -3,16 +3,16 @@ package mate.academy;
 import java.util.List;
 import java.util.Map;
 import mate.academy.model.FruitTransaction;
-import mate.academy.service.ParserService;
-import mate.academy.service.ProcessDataService;
-import mate.academy.service.ReaderService;
-import mate.academy.service.ReportService;
-import mate.academy.service.WriterService;
-import mate.academy.service.impl.ParserServiceImpl;
-import mate.academy.service.impl.ProcessDataServiceImpl;
-import mate.academy.service.impl.ReaderServiceImpl;
-import mate.academy.service.impl.ReportServiceImpl;
-import mate.academy.service.impl.WriterServiceImpl;
+import mate.academy.service.Parser;
+import mate.academy.service.ProcessData;
+import mate.academy.service.Reader;
+import mate.academy.service.Report;
+import mate.academy.service.Writer;
+import mate.academy.service.impl.ParserImpl;
+import mate.academy.service.impl.ProcessImpl;
+import mate.academy.service.impl.ReaderImpl;
+import mate.academy.service.impl.ReportImpl;
+import mate.academy.service.impl.WriterImpl;
 import mate.academy.service.transaction.BalanceHandlerImpl;
 import mate.academy.service.transaction.PurchaseHandlerImpl;
 import mate.academy.service.transaction.ReturnHandlerImpl;
@@ -22,13 +22,13 @@ import mate.academy.strategy.TransactionStrategy;
 import mate.academy.strategy.TransactionStrategyImpl;
 
 public class Main {
-    private static final String inputFilePath = "src/main/java/mate/academy/resources/database.csv";
-    private static final String reportFilePath = "src/main/java/mate/academy/resources/report.csv";
-    private static final ReaderService readerService = new ReaderServiceImpl();
-    private static final ParserService parserService = new ParserServiceImpl();
-    private static final ProcessDataService processDataService = new ProcessDataServiceImpl();
-    private static final ReportService reportService = new ReportServiceImpl();
-    private static final WriterService writerService = new WriterServiceImpl();
+    private static final String inputFilePath = "src/main/resources/database.csv";
+    private static final String reportFilePath = "src/main/resources/report.csv";
+    private static final Reader readerService = new ReaderImpl();
+    private static final Parser parserService = new ParserImpl();
+    private static final ProcessData processDataService = new ProcessImpl();
+    private static final Report reportService = new ReportImpl();
+    private static final Writer writerService = new WriterImpl();
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, TransactionHandler> transactionHandlersMap = Map.of(

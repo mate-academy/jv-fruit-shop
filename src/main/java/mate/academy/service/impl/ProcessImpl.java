@@ -2,10 +2,10 @@ package mate.academy.service.impl;
 
 import java.util.List;
 import mate.academy.model.FruitTransaction;
-import mate.academy.service.ProcessDataService;
+import mate.academy.service.ProcessData;
 import mate.academy.strategy.TransactionStrategy;
 
-public class ProcessDataServiceImpl implements ProcessDataService {
+public class ProcessImpl implements ProcessData {
     @Override
     public void processTransactions(List<FruitTransaction> transactions,
                                     TransactionStrategy transactionStrategy) {

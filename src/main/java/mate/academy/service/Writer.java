@@ -1,5 +1,5 @@
 package mate.academy.service;
 
-public interface WriterService {
+public interface Writer {
     void writeToFile(String fileContent, String filePath);
 }
