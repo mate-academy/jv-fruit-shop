@@ -27,5 +27,4 @@ public class ParseFruitTransactionServiceImpl implements ParseFruitTransactionSe
                 })
                 .collect(Collectors.toList());
     }
-
 }

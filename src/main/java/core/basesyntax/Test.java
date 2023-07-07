@@ -22,8 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Test { private static final String DATABASE_FILE = "src/database.csv";
-    private static final String REPORT_FILE = "src/report.csv";
+public class Test {
+    private static final String DATABASE_FILE = "src/main/resources/database.csv";
+    private static final String REPORT_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<OperationType, OperationHandler> operationStrategyMap = new HashMap<>();
