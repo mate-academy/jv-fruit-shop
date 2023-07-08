@@ -3,7 +3,7 @@ package strategy;
 import db.ShopStorage;
 import model.FruitTransaction;
 
-public class PurchaseStrategy implements OperationHandler {
+public class PurchaseHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction, ShopStorage fruitStorage) {
         int currentQuantity = fruitStorage.getQuantity(transaction.getFruit());
