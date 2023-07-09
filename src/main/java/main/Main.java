@@ -2,18 +2,22 @@ package main;
 
 import db.ShopStorage;
 import db.ShopStorageImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import model.FruitTransaction;
 import service.CsvFileWriterService;
 import service.ReportGeneratorService;
 import service.impl.CsvFileReaderServiceImpl;
 import service.impl.CsvFileWriterServiceImpl;
 import service.impl.CsvReportGeneratorService;
-import strategy.*;
+import strategy.BalanceHandler;
+import strategy.FruitShopStrategy;
+import strategy.FruitShopStrategyImpl;
+import strategy.OperationHandler;
+import strategy.PurchaseHandler;
+import strategy.ReturnHandler;
+import strategy.SupplyHandler;
 
 public class Main {
     public static final String outputFilePath = "src/main/java/output.csv";
@@ -31,7 +35,8 @@ public class Main {
         CsvFileReaderServiceImpl fileReaderService = new CsvFileReaderServiceImpl();
         List<FruitTransaction> transactions = fileReaderService.readFromFile(inputFilePath);
 
-        FruitShopStrategy operationProcessor = new FruitShopStrategyImpl(fruitShopStrategyMap,fruitStorage);
+        FruitShopStrategy operationProcessor =
+                new FruitShopStrategyImpl(fruitShopStrategyMap,fruitStorage);
         operationProcessor.processTransactions(transactions);
 
         ReportGeneratorService reportGenerator = new CsvReportGeneratorService(fruitStorage);

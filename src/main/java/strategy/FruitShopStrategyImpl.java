@@ -1,15 +1,16 @@
 package strategy;
 
 import db.ShopStorage;
-import model.FruitTransaction;
 import java.util.List;
 import java.util.Map;
+import model.FruitTransaction;
 
 public class FruitShopStrategyImpl implements FruitShopStrategy {
     private final Map<FruitTransaction.Operation, OperationHandler> fruitShopStrategyMap;
     private final ShopStorage fruitStorage;
 
-    public FruitShopStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> fruitShopStrategyMap,
+    public FruitShopStrategyImpl(Map<FruitTransaction.Operation,
+            OperationHandler> fruitShopStrategyMap,
                                  ShopStorage fruitStorage) {
         this.fruitShopStrategyMap = fruitShopStrategyMap;
         this.fruitStorage = fruitStorage;
