@@ -1,26 +1,23 @@
 package strategy;
 
 import db.ShopStorage;
-import java.util.HashMap;
+import model.FruitTransaction;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
 
-public class FruitShopStrategyImpl {
-    private final Map<FruitTransaction.Operation, OperationHandler> fruitShopStrategy;
+public class FruitShopStrategyImpl implements FruitShopStrategy {
+    private final Map<FruitTransaction.Operation, OperationHandler> fruitShopStrategyMap;
+    private final ShopStorage fruitStorage;
 
-    public FruitShopStrategyImpl() {
-        fruitShopStrategy = new HashMap<>();
-        fruitShopStrategy.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        fruitShopStrategy.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        fruitShopStrategy.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        fruitShopStrategy.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+    public FruitShopStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> fruitShopStrategyMap,
+                                 ShopStorage fruitStorage) {
+        this.fruitShopStrategyMap = fruitShopStrategyMap;
+        this.fruitStorage = fruitStorage;
     }
 
-    public void processTransactions(List<FruitTransaction> transactions, ShopStorage fruitStorage) {
+    public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = fruitShopStrategy.get(transaction.getOperation());
-            handler.handle(transaction, fruitStorage);
+            fruitShopStrategyMap.get(transaction.getOperation()).handle(transaction, fruitStorage);
         }
     }
 }
