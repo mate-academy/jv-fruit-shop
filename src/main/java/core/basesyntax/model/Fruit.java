@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-public abstract class Fruit {
+public class Fruit {
     private int quantity;
 
     public int getQuantity() {

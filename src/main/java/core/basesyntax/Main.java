@@ -6,8 +6,6 @@ import core.basesyntax.handler.PurchaseOperationHandler;
 import core.basesyntax.handler.ReturnOperationHandler;
 import core.basesyntax.handler.ShopOperationHandler;
 import core.basesyntax.handler.SupplyOperationHandler;
-import core.basesyntax.model.Apple;
-import core.basesyntax.model.Banana;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CsvReaderService;
 import core.basesyntax.service.CsvWriterService;
@@ -38,8 +36,8 @@ public class Main {
         shopOperationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler());
 
-        Storage.FRUIT_STORAGE.put("banana", new Banana());
-        Storage.FRUIT_STORAGE.put("apple", new Apple());
+        Storage.FRUIT_STORAGE.put("banana", new Fruit());
+        Storage.FRUIT_STORAGE.put("apple", new Fruit());
 
         DataReaderService dataReaderService = new CsvReaderService(INPUT_CSV);
         List<String> strings = dataReaderService.readData();
@@ -47,12 +45,12 @@ public class Main {
         ShopOperationStrategy operationStrategy =
                 new ShopOperationStrategyImpl(shopOperationHandlerMap);
         DataProcessorService dataProcessorService =
-                new FruitShopDataProcessorService(operationStrategy, Storage.FRUIT_STORAGE);
+                new FruitShopDataProcessorService(operationStrategy);
         dataProcessorService.processData(strings);
 
         new FruitQuantityChecker().checkFruitQuantity(Storage.FRUIT_STORAGE);
 
-        DataWriterService csvWriter = new CsvWriterService(Storage.FRUIT_STORAGE, REPORT_CSV);
+        DataWriterService csvWriter = new CsvWriterService(REPORT_CSV);
         csvWriter.writeData();
     }
 }

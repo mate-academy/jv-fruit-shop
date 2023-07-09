@@ -1,13 +1,11 @@
 package core.basesyntax.handler;
 
-import core.basesyntax.model.Fruit;
-
-import java.util.Map;
+import core.basesyntax.db.Storage;
 
 public class ReturnOperationHandler implements ShopOperationHandler {
     @Override
-    public void doOperation(Map<String, Fruit> fruitMap, String fruitName, String quantity) {
-        fruitMap.get(fruitName.toLowerCase())
+    public void doOperation(String fruitName, String quantity) {
+        Storage.FRUIT_STORAGE.get(fruitName.toLowerCase())
                 .addQuantity(Integer.parseInt(quantity));
     }
 }

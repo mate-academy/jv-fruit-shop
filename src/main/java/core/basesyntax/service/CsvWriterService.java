@@ -1,18 +1,16 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
 public class CsvWriterService implements DataWriterService {
-    private final Map<String, Fruit> fruitMap;
     private final String path;
 
-    public CsvWriterService(Map<String, Fruit> fruitMap, String path) {
-        this.fruitMap = fruitMap;
+    public CsvWriterService(String path) {
         this.path = path;
     }
 
@@ -20,7 +18,7 @@ public class CsvWriterService implements DataWriterService {
     public void writeData() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
             bufferedWriter.write("fruit,quantity" + System.lineSeparator());
-            for (Map.Entry<String, Fruit> fruitEntry : fruitMap.entrySet()) {
+            for (Map.Entry<String, Fruit> fruitEntry : Storage.FRUIT_STORAGE.entrySet()) {
                 bufferedWriter.write(fruitEntry.getKey() + ","
                         + fruitEntry.getValue().getQuantity() + System.lineSeparator());
             }
