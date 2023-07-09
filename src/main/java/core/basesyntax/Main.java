@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.handler.BalanceOperationHandler;
 import core.basesyntax.handler.PurchaseOperationHandler;
 import core.basesyntax.handler.ReturnOperationHandler;
@@ -17,7 +18,6 @@ import core.basesyntax.service.FruitShopDataProcessorService;
 import core.basesyntax.strategy.ShopOperationStrategy;
 import core.basesyntax.strategy.ShopOperationStrategyImpl;
 import core.basesyntax.utility.FruitQuantityChecker;
-import core.basesyntax.utility.FruitType;
 import core.basesyntax.utility.Operation;
 import java.util.HashMap;
 import java.util.List;
@@ -38,9 +38,8 @@ public class Main {
         shopOperationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler());
 
-        Map<FruitType, Fruit> fruitStorage = new HashMap<>();
-        fruitStorage.put(FruitType.BANANA, new Banana());
-        fruitStorage.put(FruitType.APPLE, new Apple());
+        Storage.FRUIT_STORAGE.put("banana", new Banana());
+        Storage.FRUIT_STORAGE.put("apple", new Apple());
 
         DataReaderService dataReaderService = new CsvReaderService(INPUT_CSV);
         List<String> strings = dataReaderService.readData();
@@ -48,12 +47,12 @@ public class Main {
         ShopOperationStrategy operationStrategy =
                 new ShopOperationStrategyImpl(shopOperationHandlerMap);
         DataProcessorService dataProcessorService =
-                new FruitShopDataProcessorService(operationStrategy, fruitStorage);
+                new FruitShopDataProcessorService(operationStrategy, Storage.FRUIT_STORAGE);
         dataProcessorService.processData(strings);
 
-        new FruitQuantityChecker().checkFruitQuantity(fruitStorage);
+        new FruitQuantityChecker().checkFruitQuantity(Storage.FRUIT_STORAGE);
 
-        DataWriterService csvWriter = new CsvWriterService(fruitStorage, REPORT_CSV);
+        DataWriterService csvWriter = new CsvWriterService(Storage.FRUIT_STORAGE, REPORT_CSV);
         csvWriter.writeData();
     }
 }

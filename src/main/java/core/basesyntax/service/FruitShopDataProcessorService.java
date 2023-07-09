@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.handler.ShopOperationHandler;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.ShopOperationStrategy;
-import core.basesyntax.utility.FruitType;
+
 import java.util.List;
 import java.util.Map;
 
@@ -12,10 +12,10 @@ public class FruitShopDataProcessorService implements DataProcessorService {
     public static final int FRUIT_INDEX = 1;
     public static final int QUANTITY_INDEX = 2;
     private final ShopOperationStrategy shopOperationStrategy;
-    private final Map<FruitType, Fruit> fruitMap;
+    private final Map<String, Fruit> fruitMap;
 
     public FruitShopDataProcessorService(ShopOperationStrategy shopOperationStrategy,
-                                         Map<FruitType, Fruit> fruitMap) {
+                                         Map<String, Fruit> fruitMap) {
         this.shopOperationStrategy = shopOperationStrategy;
         this.fruitMap = fruitMap;
     }
