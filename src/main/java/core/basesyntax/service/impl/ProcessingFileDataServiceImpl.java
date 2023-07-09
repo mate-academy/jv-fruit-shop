@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ProcessingFileDataService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +17,8 @@ public class ProcessingFileDataServiceImpl implements ProcessingFileDataService 
         for (int i = 1; i < fileLines.size(); i++) {
             String[] parsedData = fileLines.get(i).split(LINE_SEPARATOR);
             FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(FruitTransaction.Operation.
-                    getParamCode(FruitTransaction.Operation.class, parsedData[PARAM_INDEX]));
+            fruitTransaction.setOperation(FruitTransaction.Operation
+                    .getParamCode(FruitTransaction.Operation.class, parsedData[PARAM_INDEX]));
             fruitTransaction.setFruit(parsedData[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(parsedData[QUANTITY_INDEX]));
             fruitTransactions.add(fruitTransaction);

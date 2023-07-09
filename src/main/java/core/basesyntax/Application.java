@@ -6,8 +6,11 @@ import core.basesyntax.service.impl.ProcessingFileDataServiceImpl;
 import core.basesyntax.service.impl.ReadingFileServiceImpl;
 import core.basesyntax.service.impl.WritingFileServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.impl.*;
-
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,14 +24,20 @@ public class Application {
         ReadingFileServiceImpl readingFileService = new ReadingFileServiceImpl();
         List<String> fileLines = readingFileService.readingDataFromFile(INPUT_FILE);
         // translate strings into a fieldset
-        ProcessingFileDataServiceImpl processingFileDataService = new ProcessingFileDataServiceImpl();
-        List<FruitTransaction> fruitTransactions = processingFileDataService.processingFileData(fileLines);
+        ProcessingFileDataServiceImpl processingFileDataService
+                = new ProcessingFileDataServiceImpl();
+        final List<FruitTransaction> fruitTransactions
+                = processingFileDataService.processingFileData(fileLines);
         // creating strategy map
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler());
         // filling the strategy with data
         OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         for (FruitTransaction fruitTransaction : fruitTransactions) {

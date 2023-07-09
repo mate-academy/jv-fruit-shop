@@ -9,7 +9,8 @@ public class BalanceOperationHandler implements OperationHandler {
     public void applyTransactionToStorage(FruitTransaction fruitTransaction) {
         int currQuantity = fruitTransaction.getQuantity();
         if (currQuantity < 0) {
-            throw new RuntimeException("Quantity of goods on the balance cannot be less than zero!");
+            throw new RuntimeException("Quantity of goods on the balance "
+                    + "cannot be less than zero!");
         }
         Storage.fruitsStorage.put(fruitTransaction.getFruit(), currQuantity);
     }
