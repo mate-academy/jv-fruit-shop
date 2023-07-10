@@ -16,6 +16,7 @@ import core.basesyntax.strategy.ShopOperationStrategy;
 import core.basesyntax.strategy.ShopOperationStrategyImpl;
 import core.basesyntax.utility.FruitQuantityChecker;
 import core.basesyntax.utility.Operation;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import java.util.Map;
 public class Main {
     public static final String INPUT_CSV = "src/main/resources/input.csv";
     public static final String REPORT_CSV = "src/main/resources/report.csv";
+    public static final int INITIAL_VALUE = 0;
 
     public static void main(String[] args) {
         Map<Operation, ShopOperationHandler> shopOperationHandlerMap = new HashMap<>();
@@ -35,8 +37,8 @@ public class Main {
         shopOperationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler());
 
-        Storage.FRUIT_STORAGE.put("banana", 0);
-        Storage.FRUIT_STORAGE.put("apple", 0);
+        Storage.FRUIT_STORAGE.put("banana", INITIAL_VALUE);
+        Storage.FRUIT_STORAGE.put("apple", INITIAL_VALUE);
 
         DataReaderService dataReaderService = new CsvReaderService(INPUT_CSV);
         List<String> strings = dataReaderService.readData();

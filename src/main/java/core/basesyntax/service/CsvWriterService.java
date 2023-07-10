@@ -1,7 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
