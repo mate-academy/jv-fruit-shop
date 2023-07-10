@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReadingFileService;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.impl.ReadingFileServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
@@ -21,7 +22,7 @@ public class Application {
         ReadingFileService readingFileService = new ReadingFileServiceImpl();
         List<String> fileLines = readingFileService.readDataFromFile(INPUT_FILE);
         // translate strings into a fieldset
-        TransactionParserImpl transactionParser = new TransactionParserImpl();
+        TransactionParser transactionParser = new TransactionParserImpl();
         final List<FruitTransaction> fruitTransactions = transactionParser.parseData(fileLines);
         // creating strategy map
         OperationStrategy operationStrategy = new OperationStrategyImpl();
