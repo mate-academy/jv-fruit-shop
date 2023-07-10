@@ -16,15 +16,14 @@ import core.basesyntax.strategy.ShopOperationStrategy;
 import core.basesyntax.strategy.ShopOperationStrategyImpl;
 import core.basesyntax.utility.FruitQuantityChecker;
 import core.basesyntax.utility.Operation;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String INPUT_CSV = "src/main/resources/input.csv";
-    public static final String REPORT_CSV = "src/main/resources/report.csv";
-    public static final int INITIAL_VALUE = 0;
+    private static final String INPUT_CSV = "src/main/resources/input.csv";
+    private static final String REPORT_CSV = "src/main/resources/report.csv";
+    private static final int INITIAL_VALUE = 0;
 
     public static void main(String[] args) {
         Map<Operation, ShopOperationHandler> shopOperationHandlerMap = new HashMap<>();
