@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.database.Storage;
-import core.basesyntax.service.GeneratingReportService;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
-public class GeneratingReportServiceImpl implements GeneratingReportService {
-    private static final String LINE_SEPARATOR = ",";
+public class ReportServiceImpl implements ReportService {
+    private static final String CSV_SEPARATOR = ",";
 
     @Override
     public String generateReport() {
@@ -13,8 +13,8 @@ public class GeneratingReportServiceImpl implements GeneratingReportService {
         reportData.append("fruit,quantity").append(System.lineSeparator());
         for (Map.Entry<String, Integer> entryLine : Storage.fruitsStorage.entrySet()) {
             reportData.append(entryLine.getKey())
-                    .append(LINE_SEPARATOR)
-                    .append(entryLine.getValue().toString())
+                    .append(CSV_SEPARATOR)
+                    .append(entryLine.getValue())
                     .append(System.lineSeparator());
         }
         return reportData.toString();
