@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,9 +18,9 @@ public class CsvWriterService implements DataWriterService {
     public void writeData() {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
             bufferedWriter.write("fruit,quantity" + System.lineSeparator());
-            for (Map.Entry<String, Fruit> fruitEntry : Storage.FRUIT_STORAGE.entrySet()) {
+            for (Map.Entry<String, Integer> fruitEntry : Storage.FRUIT_STORAGE.entrySet()) {
                 bufferedWriter.write(fruitEntry.getKey() + ","
-                        + fruitEntry.getValue().getQuantity() + System.lineSeparator());
+                        + fruitEntry.getValue() + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can not write data to report");

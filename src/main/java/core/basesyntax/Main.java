@@ -6,7 +6,6 @@ import core.basesyntax.handler.PurchaseOperationHandler;
 import core.basesyntax.handler.ReturnOperationHandler;
 import core.basesyntax.handler.ShopOperationHandler;
 import core.basesyntax.handler.SupplyOperationHandler;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.CsvReaderService;
 import core.basesyntax.service.CsvWriterService;
 import core.basesyntax.service.DataProcessorService;
@@ -36,8 +35,8 @@ public class Main {
         shopOperationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler());
 
-        Storage.FRUIT_STORAGE.put("banana", new Fruit());
-        Storage.FRUIT_STORAGE.put("apple", new Fruit());
+        Storage.FRUIT_STORAGE.put("banana", 0);
+        Storage.FRUIT_STORAGE.put("apple", 0);
 
         DataReaderService dataReaderService = new CsvReaderService(INPUT_CSV);
         List<String> strings = dataReaderService.readData();
