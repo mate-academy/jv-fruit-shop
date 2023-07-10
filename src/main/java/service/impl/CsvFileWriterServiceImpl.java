@@ -7,7 +7,6 @@ import java.util.List;
 import service.CsvFileWriterService;
 
 public class CsvFileWriterServiceImpl implements CsvFileWriterService {
-
     public void writeToFile(List<String> report, String filePath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (String line : report) {

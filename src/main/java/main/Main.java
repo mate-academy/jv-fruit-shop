@@ -20,8 +20,8 @@ import strategy.ReturnHandler;
 import strategy.SupplyHandler;
 
 public class Main {
-    public static final String outputFilePath = "src/main/java/output.csv";
-    private static final String inputFilePath = "src/main/java/input.csv";
+    public static final String outputFilePath = "src/main/resources/output.csv";
+    private static final String inputFilePath = "src/main/resources/input.csv";
 
     public static void main(String[] args) {
         ShopStorage fruitStorage = new ShopStorageImpl();
