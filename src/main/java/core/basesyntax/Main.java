@@ -24,7 +24,7 @@ public class Main {
         fruitService.processTransactions(transactions);
 
         for (FruitTransaction transaction : transactions) {
-          fruitStorage.updateFruitQuantity(transaction.getFruit(), transaction.getQuantity());
+           fruitStorage.updateFruitQuantity(transaction.getFruit(), transaction.getQuantity());
         }
 
         List<String> reportData = fruitService.generateReport();

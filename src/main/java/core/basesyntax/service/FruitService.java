@@ -8,3 +8,4 @@ public interface FruitService {
 
     List<String> generateReport();
 }
+

@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 public class Fruit {
     private String name;
-    int quantity;
+    private int quantity;
 
     public Fruit(String name, int quantity) {
         this.name = name;
