@@ -24,16 +24,16 @@ public class FruitTransaction {
     }
 
     public void setOperation(Operation operation) {
-    this.operation = operation;
-  }
+        this.operation = operation;
+    }
 
     public void setFruit(String fruit) {
-    this.fruit = fruit;
-  }
+        this.fruit = fruit;
+    }
 
     public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
+        this.quantity = quantity;
+    }
 
     public enum Operation {
         BALANCE("b"),
@@ -44,8 +44,8 @@ public class FruitTransaction {
         private String code;
 
         Operation(String code) {
-      this.code = code;
-    }
+            this.code = code;
+        }
 
         public String getCode() {
             return code;
