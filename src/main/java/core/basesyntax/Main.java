@@ -23,7 +23,6 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_CSV = "src/main/resources/input.csv";
     private static final String REPORT_CSV = "src/main/resources/report.csv";
-    private static final int INITIAL_VALUE = 0;
 
     public static void main(String[] args) {
         Map<Operation, ShopOperationHandler> shopOperationHandlerMap = new HashMap<>();
