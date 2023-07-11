@@ -35,10 +35,6 @@ public class Main {
                 new SupplyOperationHandler());
         shopOperationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler());
-
-        Storage.FRUIT_STORAGE.put("banana", INITIAL_VALUE);
-        Storage.FRUIT_STORAGE.put("apple", INITIAL_VALUE);
-
         DataReaderService dataReaderService = new CsvReaderService(INPUT_CSV);
         List<String> strings = dataReaderService.readData();
 
