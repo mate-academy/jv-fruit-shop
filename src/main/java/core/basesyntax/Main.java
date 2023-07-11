@@ -1,17 +1,19 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.handler.BalanceOperationHandler;
-import core.basesyntax.handler.PurchaseOperationHandler;
-import core.basesyntax.handler.ReturnOperationHandler;
 import core.basesyntax.handler.ShopOperationHandler;
-import core.basesyntax.handler.SupplyOperationHandler;
-import core.basesyntax.service.CsvReaderService;
-import core.basesyntax.service.CsvWriterService;
+import core.basesyntax.handler.impl.BalanceOperationHandler;
+import core.basesyntax.handler.impl.PurchaseOperationHandler;
+import core.basesyntax.handler.impl.ReturnOperationHandler;
+import core.basesyntax.handler.impl.SupplyOperationHandler;
 import core.basesyntax.service.DataProcessorService;
 import core.basesyntax.service.DataReaderService;
 import core.basesyntax.service.DataWriterService;
-import core.basesyntax.service.FruitShopDataProcessorService;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.impl.CsvReaderService;
+import core.basesyntax.service.impl.CsvWriterService;
+import core.basesyntax.service.impl.FruitShopDataProcessorService;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.strategy.ShopOperationStrategy;
 import core.basesyntax.strategy.ShopOperationStrategyImpl;
 import core.basesyntax.utility.FruitQuantityChecker;
@@ -34,8 +36,8 @@ public class Main {
                 new SupplyOperationHandler());
         shopOperationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler());
-        DataReaderService dataReaderService = new CsvReaderService(INPUT_CSV);
-        List<String> strings = dataReaderService.readData();
+        DataReaderService dataReaderService = new CsvReaderService();
+        List<String> strings = dataReaderService.readData(INPUT_CSV);
 
         ShopOperationStrategy operationStrategy =
                 new ShopOperationStrategyImpl(shopOperationHandlerMap);
@@ -45,7 +47,10 @@ public class Main {
 
         new FruitQuantityChecker().checkFruitQuantity(Storage.FRUIT_STORAGE);
 
-        DataWriterService csvWriter = new CsvWriterService(REPORT_CSV);
-        csvWriter.writeData();
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        String reportData = reportCreatorService.createReport();
+
+        DataWriterService csvWriter = new CsvWriterService();
+        csvWriter.writeData(reportData, REPORT_CSV);
     }
 }
