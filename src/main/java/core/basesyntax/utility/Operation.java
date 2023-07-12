@@ -9,7 +9,7 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    private java.lang.String operationName;
+    private String operationName;
 
     Operation(String operationName) {
         this.operationName = operationName;

@@ -9,21 +9,20 @@ public class FruitShopDataProcessorService implements DataProcessorService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final String COMMA = ",";
+    private static final String SEPARATOR = ",";
     private final ShopOperationStrategy shopOperationStrategy;
 
     public FruitShopDataProcessorService(ShopOperationStrategy shopOperationStrategy) {
         this.shopOperationStrategy = shopOperationStrategy;
-
     }
 
     @Override
     public void processData(List<String> data) {
-        for (String temp : data) {
-            String[] split = temp.split(COMMA);
+        for (String line : data) {
+            String[] split = line.split(SEPARATOR);
             ShopOperationHandler shopOperationHandler =
                     shopOperationStrategy.get(split[OPERATION_INDEX]);
-            shopOperationHandler.doOperation(split[FRUIT_INDEX],
+            shopOperationHandler.handle(split[FRUIT_INDEX],
                     split[QUANTITY_INDEX]);
         }
     }

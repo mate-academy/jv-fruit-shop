@@ -15,7 +15,7 @@ public class CsvReaderService implements DataReaderService {
         try {
             dataList = Files.readAllLines(Path.of(path));
         } catch (IOException e) {
-            throw new RuntimeException("Can not read file");
+            throw new RuntimeException("Can not read file. Path:" + path);
         }
         dataList.remove(HEADER_LINE_INDEX);
         return dataList;

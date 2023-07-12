@@ -45,7 +45,7 @@ public class Main {
                 new FruitShopDataProcessorService(operationStrategy);
         dataProcessorService.processData(strings);
 
-        new FruitQuantityChecker().checkFruitQuantity(Storage.FRUIT_STORAGE);
+        new FruitQuantityChecker().checkFruitQuantity(Storage.fruitStorage);
 
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
         String reportData = reportCreatorService.createReport();

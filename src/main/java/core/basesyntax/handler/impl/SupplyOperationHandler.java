@@ -5,10 +5,10 @@ import core.basesyntax.handler.ShopOperationHandler;
 
 public class SupplyOperationHandler implements ShopOperationHandler {
     @Override
-    public void doOperation(String fruitName, String quantityToOperate) {
-        Integer oldQuantityValue = Storage.FRUIT_STORAGE.get(fruitName.toLowerCase());
+    public void handle(String fruitName, String quantityToOperate) {
+        Integer oldQuantityValue = Storage.fruitStorage.get(fruitName.toLowerCase());
         oldQuantityValue = oldQuantityValue == null ? 0 : oldQuantityValue;
-        Storage.FRUIT_STORAGE.put(fruitName.toLowerCase(),
+        Storage.fruitStorage.put(fruitName.toLowerCase(),
                 Integer.parseInt(quantityToOperate) + oldQuantityValue);
     }
 }
