@@ -9,6 +9,5 @@ public class BalanceOperationHandler implements ShopOperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
         Storage.fruitStorage.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
-
     }
 }
