@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.handler.ShopOperationHandler;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataProcessorService;
 import core.basesyntax.strategy.ShopOperationStrategy;
 import java.util.List;
@@ -17,13 +17,9 @@ public class FruitShopDataProcessorService implements DataProcessorService {
     }
 
     @Override
-    public void processData(List<String> data) {
-        for (String line : data) {
-            String[] split = line.split(SEPARATOR);
-            ShopOperationHandler shopOperationHandler =
-                    shopOperationStrategy.get(split[OPERATION_INDEX]);
-            shopOperationHandler.handle(split[FRUIT_INDEX],
-                    split[QUANTITY_INDEX]);
+    public void processData(List<FruitTransaction> data) {
+        for (FruitTransaction transaction : data) {
+            shopOperationStrategy.get(transaction.getOperation()).handle(transaction);
         }
     }
 }

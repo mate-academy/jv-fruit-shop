@@ -12,7 +12,7 @@ public class ShopOperationStrategyImpl implements ShopOperationStrategy {
     }
 
     @Override
-    public ShopOperationHandler get(String operationName) {
-        return operationHandlerMap.get(Operation.getByValue(operationName));
+    public ShopOperationHandler get(Operation operation) {
+        return operationHandlerMap.get(operation);
     }
 }

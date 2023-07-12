@@ -9,19 +9,19 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
-    private String operationName;
+    private String code;
 
-    Operation(String operationName) {
-        this.operationName = operationName;
+    Operation(String code) {
+        this.code = code;
     }
 
-    public String getOperationName() {
-        return operationName;
+    public String getCode() {
+        return code;
     }
 
     public static Operation getByValue(String operationFirstLetter) {
         return Arrays.stream(Operation.values())
-                .filter(operation -> operation.getOperationName().equals(operationFirstLetter))
+                .filter(operation -> operation.getCode().equals(operationFirstLetter))
                 .findFirst()
                 .orElseThrow(NoSuchElementException::new);
     }
