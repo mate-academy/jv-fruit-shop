@@ -1,4 +1,4 @@
-package core.basesyntax.stretegyImpl;
+package core.basesyntax.stretegy.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.strategy.FruitOperationHandler;

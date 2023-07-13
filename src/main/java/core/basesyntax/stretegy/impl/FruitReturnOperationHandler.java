@@ -1,17 +1,17 @@
-package core.basesyntax.stretegyImpl;
+package core.basesyntax.stretegy.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.strategy.FruitOperationHandler;
 
-public class FruitPurchaseOperationHandler implements FruitOperationHandler {
+public class FruitReturnOperationHandler implements FruitOperationHandler {
     private final StorageDao storageDao;
 
-    public FruitPurchaseOperationHandler(StorageDao storageDao) {
+    public FruitReturnOperationHandler(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
     @Override
     public void operate(String fruitName, int amount) {
-        storageDao.remove(fruitName, amount);
+        storageDao.supply(fruitName, amount);
     }
 }

@@ -11,11 +11,10 @@ import core.basesyntax.service.Reader;
 import core.basesyntax.service.ReportHandler;
 import core.basesyntax.service.Writer;
 import core.basesyntax.strategy.FruitOperationHandler;
-import core.basesyntax.stretegyImpl.FruitBalanceOperationHandler;
-import core.basesyntax.stretegyImpl.FruitPurchaseOperationHandler;
-import core.basesyntax.stretegyImpl.FruitReturnOperationHandler;
-import core.basesyntax.stretegyImpl.FruitSupplyOperationHandler;
-
+import core.basesyntax.stretegy.impl.FruitBalanceOperationHandler;
+import core.basesyntax.stretegy.impl.FruitPurchaseOperationHandler;
+import core.basesyntax.stretegy.impl.FruitReturnOperationHandler;
+import core.basesyntax.stretegy.impl.FruitSupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

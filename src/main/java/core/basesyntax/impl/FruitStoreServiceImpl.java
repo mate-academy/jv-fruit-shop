@@ -2,7 +2,6 @@ package core.basesyntax.impl;
 
 import core.basesyntax.service.FruitStoreService;
 import core.basesyntax.strategy.FruitOperationHandler;
-
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +24,7 @@ public class FruitStoreServiceImpl implements FruitStoreService {
             throw new RuntimeException("Can't call method 'process' if handlerMap in null");
         }
         if (data == null || data.size() == 0) {
-            throw new RuntimeException("Can't process data, because input.csv data is null or empty");
+            throw new RuntimeException("Can't process data, because input data is null or empty");
         }
         if (data.get(0).equals(REPORT_HEAD_MESSAGE)) {
             data.remove(REPORT_HEAD_INDEX);

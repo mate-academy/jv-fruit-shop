@@ -2,7 +2,6 @@ package core.basesyntax.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.service.ReportHandler;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
