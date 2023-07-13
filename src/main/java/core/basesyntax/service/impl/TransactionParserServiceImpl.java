@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.TransactionParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataParserServiceImpl implements DataParserService {
+public class TransactionParserServiceImpl implements TransactionParserService {
     private static final String COMMA = ",";
     private static final int TITLE_INDEX = 0;
     private static final int OPERATION_INDEX = 0;
@@ -13,7 +13,7 @@ public class DataParserServiceImpl implements DataParserService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> dataParser(List<String> dataFromFile) {
+    public List<FruitTransaction> parser(List<String> dataFromFile) {
         dataFromFile.remove(TITLE_INDEX);
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String data : dataFromFile) {
