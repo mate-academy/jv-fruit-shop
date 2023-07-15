@@ -1,28 +1,29 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.Fruit;
+import java.util.Map;
+import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
-    public void add(Fruit fruit) {
-        if (fruit == null) {
-            throw new RuntimeException("Storage must contain only fruits");
+    public void add(String fruitName, int quantity) {
+        if (fruitName == null) {
+            throw new RuntimeException("FruitName must be not null");
         }
-        Storage.fruits.add(fruit);
+        Storage.fruits.put(fruitName, quantity);
     }
 
     @Override
-    public Fruit get(String name) {
-        for (Fruit fruit: Storage.fruits) {
-            if (fruit.getName().equals(name)) {
-                return fruit;
+    public Integer get(String fruitName) {
+        for (var mapEntry: Storage.fruits.entrySet()) {
+            if (mapEntry.getKey().equals(fruitName)) {
+                return mapEntry.getValue();
             }
         }
-        throw new RuntimeException("Storage don't contain " + name);
+        throw new RuntimeException("Storage don't contain " + fruitName);
     }
 
     @Override
-    public Fruit[] getAll() {
-        return Storage.fruits.toArray(new Fruit[0]);
+    public Set<Map.Entry<String,Integer>> getAll() {
+        return Storage.fruits.entrySet();
     }
 }

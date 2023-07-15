@@ -14,4 +14,13 @@ public enum FruitOperation {
     public String getCode() {
         return code;
     }
+
+    public static FruitOperation getOperationFromCode(String operationCode) {
+        for (FruitOperation fruitOperation : values()) {
+            if (fruitOperation.getCode().equals(operationCode)) {
+                return fruitOperation;
+            }
+        }
+        throw new RuntimeException("Unknown operation code: " + operationCode);
+    }
 }

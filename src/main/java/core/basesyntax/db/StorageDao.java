@@ -1,12 +1,13 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.Fruit;
+import java.util.Map;
+import java.util.Set;
 
 public interface StorageDao {
 
-    void add(Fruit fruit);
+    void add(String fruitName, int quantity);
 
-    Fruit get(String name);
+    Integer get(String fruitName);
 
-    Fruit[] getAll();
+    Set<Map.Entry<String,Integer>> getAll();
 }

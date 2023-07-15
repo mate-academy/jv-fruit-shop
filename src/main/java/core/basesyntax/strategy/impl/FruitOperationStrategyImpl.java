@@ -10,9 +10,6 @@ public class FruitOperationStrategyImpl implements FruitOperationStrategy {
 
     public FruitOperationStrategyImpl(Map<FruitOperation,
             FruitOperationHandler> operationHandlerMap) {
-        if (operationHandlerMap == null) {
-            throw new RuntimeException("OperationHandlerMap can't be null");
-        }
         this.operationHandlerMap = operationHandlerMap;
     }
 

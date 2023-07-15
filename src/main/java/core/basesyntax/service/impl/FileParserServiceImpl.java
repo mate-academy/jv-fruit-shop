@@ -12,9 +12,6 @@ public class FileParserServiceImpl implements FileParserService {
     private static final int INDEX_OF_QUANTITY = 2;
     private static final int MIN_QUANTITY_VALUE = 0;
 
-    private FruitOperation[] fruitOperations
-            = FruitOperation.values();
-
     @Override
     public List<FruitTransaction> parseFile(String[] fileContent) {
         if (fileContent == null) {
@@ -28,19 +25,10 @@ public class FileParserServiceImpl implements FileParserService {
                 throw new RuntimeException("Quantity must be not less than " + MIN_QUANTITY_VALUE);
             }
             fruitTransactionList.add(new FruitTransaction(
-                    getOperationFromCode(valuesFromFileLine[INDEX_OF_OPERATION]),
+                    FruitOperation.getOperationFromCode(valuesFromFileLine[INDEX_OF_OPERATION]),
                     valuesFromFileLine[INDEX_OF_FRUIT_NAME],
                     quantityValue));
         }
         return fruitTransactionList;
-    }
-
-    private FruitOperation getOperationFromCode(String operationCode) {
-        for (FruitOperation fruitOperation : fruitOperations) {
-            if (fruitOperation.getCode().equals(operationCode)) {
-                return fruitOperation;
-            }
-        }
-        throw new RuntimeException("Unknown operation code: " + operationCode);
     }
 }

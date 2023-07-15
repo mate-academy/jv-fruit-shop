@@ -2,8 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.db.StorageDao;
 import core.basesyntax.db.StorageDaoImpl;
-import core.basesyntax.model.Apple;
-import core.basesyntax.model.Banana;
 import core.basesyntax.model.FruitOperation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileParserService;
@@ -40,8 +38,6 @@ public class Main {
 
     public static void main(String[] args) {
         StorageDao storageDao = new StorageDaoImpl();
-        storageDao.add(new Apple(INITIAL_QUANTITY));
-        storageDao.add(new Banana(INITIAL_QUANTITY));
         Map<FruitOperation, FruitOperationHandler> fruitOperationHandlerMap = new HashMap<>();
         fruitOperationHandlerMap.put(FruitOperation.BALANCE,
                 new BalanceOperationHandler(storageDao));
