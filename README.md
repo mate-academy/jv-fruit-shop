@@ -1,4 +1,4 @@
-# Fruit shop
+_# Fruit shop
 Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
@@ -81,7 +81,7 @@ public class FruitTransaction {
     PURCHASE("p"),
     RETURN("r");
 
-    private String code;
+    private final String code;
 
     Operation(String code) {
       this.code = code;
@@ -156,4 +156,4 @@ For example:
 3. Null parameters
 4. Providing the right names for your classes, methods, and variables is important. You can find examples here: [Link](https://mate-academy.github.io/style-guides/java/java.html#s5-naming)
 
-</details>
+</details>_
