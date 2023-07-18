@@ -1,17 +1,18 @@
-package service;
+package service.impl;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import service.ReaderService;
 
-public class CsvFileReader implements ReadCsvFile {
-
+public class ReaderServiceImpl implements ReaderService {
     @Override
-    public List<String> readCsvFile(String fileName) {
+    public List<String> read(String fileName) {
         List<String> fileContent = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fileName))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             reader.readLine(); //removing headers from file
             String line;
             while ((line = reader.readLine()) != null) {

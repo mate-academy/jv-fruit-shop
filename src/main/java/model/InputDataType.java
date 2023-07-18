@@ -1,41 +1,19 @@
 package model;
 
-import java.util.Objects;
-
 public class InputDataType {
-    private final String operation;
-    private final String fruit;
-    private final Integer quantity;
+    private final Operation operation;
+    private final Fruit fruit;
 
-    public InputDataType(String operation, String fruit, Integer quantity) {
+    public InputDataType(Operation operation, Fruit fruit) {
         this.operation = operation;
         this.fruit = fruit;
-        this.quantity = quantity;
     }
 
-    public String getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
-    public String getFruit() {
+    public Fruit getFruit() {
         return fruit;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        InputDataType other = (InputDataType) obj;
-        return Objects.equals(operation, other.operation)
-                && Objects.equals(fruit, other.fruit)
-                && Objects.equals(quantity, other.quantity);
     }
 }

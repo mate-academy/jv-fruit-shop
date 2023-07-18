@@ -1,34 +1,40 @@
 package core.basesyntax;
 
-import db.FruitStorage;
+import dao.FruitStorageDao;
+import dao.FruitStorageDaoImpl;
 import java.util.ArrayList;
 import java.util.List;
 import model.InputDataType;
-import service.CsvFileReader;
 import service.GenerateReport;
 import service.InputDataResolver;
-import service.ReportToFileWriter;
+import service.ReaderService;
 import service.TransactionOperation;
+import service.WriterService;
+import service.impl.GenerateReportImpl;
+import service.impl.InputDataResolverImpl;
+import service.impl.ReaderServiceImpl;
+import service.impl.TransactionOperationImpl;
+import service.impl.WriterServiceImpl;
 
 public class Main {
     private static final String INPUT_CSV = "src/main/resources/input.csv";
     private static final String REPORT_CSV = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        CsvFileReader fileReader = new CsvFileReader();
-        ReportToFileWriter fileWriter = new ReportToFileWriter();
-        FruitStorage storage = new FruitStorage();
-        InputDataResolver resolver = new InputDataResolver();
-        TransactionOperation operation = new TransactionOperation();
-        GenerateReport report = new GenerateReport();
+        ReaderService reader = new ReaderServiceImpl();
+        WriterService writer = new WriterServiceImpl();
+        FruitStorageDao fruitStorage = new FruitStorageDaoImpl();
+        InputDataResolver resolver = new InputDataResolverImpl();
+        TransactionOperation transactionOperation = new TransactionOperationImpl();
+        GenerateReport report = new GenerateReportImpl();
 
-        List<String> fileContent = fileReader.readCsvFile(INPUT_CSV);
+        List<String> fileContent = reader.read(INPUT_CSV);
         ArrayList<InputDataType> resolvedData = resolver.resolveData(fileContent);
 
-        operation.transactionOperation(resolvedData, storage);
+        transactionOperation.execute(resolvedData, fruitStorage);
 
-        List<String> reportData = report.generateReport(storage.getFruitStock());
+        List<String> reportData = report.generateReport(fruitStorage.getFruits());
 
-        fileWriter.writeReport(reportData, REPORT_CSV);
+        writer.write(reportData, REPORT_CSV);
     }
 }
