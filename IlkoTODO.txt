@@ -1,0 +1,6 @@
+   + Read an input file, handle exception;
+   + Process data by specified storage keys;
+   + Check lines for consistent data "[bspr],\w++,\d++";
+   + Form a String report from calculated data in storage;
+   + Write the report in file, make sure to overwrite it;
+   + Perform additional checks for input/output files, negative values, etc.
