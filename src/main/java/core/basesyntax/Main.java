@@ -6,7 +6,6 @@ import core.basesyntax.service.FruitService;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-
 import java.util.List;
 
 public class Main {

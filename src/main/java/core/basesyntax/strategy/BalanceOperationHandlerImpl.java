@@ -11,7 +11,7 @@ public class BalanceOperationHandlerImpl implements OperationHandler {
         int quantity = transaction.getQuantity();
         try {
             if (quantity >= 0) {
-              FruitStorage.fruits.put(fruitName, transaction);
+                FruitStorage.getFruits().put(fruitName, transaction);
             }
         } catch (Exception e) {
             throw new RuntimeException("quantity must be positive value");

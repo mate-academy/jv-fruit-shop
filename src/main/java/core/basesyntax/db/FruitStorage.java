@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitStorage {
-    public static Map<String, FruitTransaction> fruits;
+    private static Map<String, FruitTransaction> fruits;
 
     public FruitStorage() {
         this.fruits = new HashMap<>();
@@ -33,6 +33,6 @@ public class FruitStorage {
     }
 
     public static FruitTransaction getFruit(String fruitName) {
-      return fruits.get(fruitName);
+        return fruits.get(fruitName);
     }
 }

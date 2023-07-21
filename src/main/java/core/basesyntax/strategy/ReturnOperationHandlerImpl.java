@@ -2,7 +2,6 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.Optional;
 
 public class ReturnOperationHandlerImpl implements OperationHandler {
@@ -13,8 +12,8 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
 
         FruitTransaction fruit = FruitStorage.getFruit(fruitName);
         fruit = Optional.ofNullable(fruit)
-                .orElseThrow(() -> new RuntimeException
-                        ("core.basesyntax.model.Fruit not found: " + fruitName));
+                .orElseThrow(() -> new RuntimeException(
+                "core.basesyntax.model.Fruit not found: " + fruitName));
         fruit.setQuantity(fruit.getQuantity() + quantity);
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public class FruitServiceImpl implements FruitService {
     private static final String HEADER_LINE = "fruit,quantity";
     private static final String COMMA = ",";
-    FruitStorage fruitStorage = new FruitStorage();
+    private FruitStorage fruitStorage = new FruitStorage();
 
     public FruitServiceImpl() {
     }
