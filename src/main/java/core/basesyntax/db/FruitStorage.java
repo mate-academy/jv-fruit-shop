@@ -1,35 +1,38 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FruitStorage {
-    private Map<String, Fruit> fruits;
+    public static Map<String, FruitTransaction> fruits;
 
     public FruitStorage() {
         this.fruits = new HashMap<>();
     }
 
-    public void addFruit(Fruit fruit) {
+    public static Map<String, FruitTransaction> getFruits() {
+        return fruits;
+    }
+
+    public static void addFruit(FruitTransaction fruit) {
         fruits.put(fruit.getName(), fruit);
     }
 
-    public List<Fruit> getAllFruits() {
+    public List<FruitTransaction> getAllFruits() {
         return new ArrayList<>(fruits.values());
     }
 
-    public void updateFruitQuantity(String fruitName, int quantity) {
-        Fruit fruit = fruits.get(fruitName);
+    public static void updateFruitQuantity(String fruitName, int quantity) {
+        FruitTransaction fruit = fruits.get(fruitName);
         if (fruit != null) {
             fruit.setQuantity(quantity);
         }
     }
 
-    public Fruit getFruit(String fruitName) {
-        return fruits.get(fruitName);
+    public static FruitTransaction getFruit(String fruitName) {
+      return fruits.get(fruitName);
     }
 }
-

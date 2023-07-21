@@ -22,15 +22,25 @@ public class ReaderServiceImpl implements ReaderService {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(COMMA);
-                if (data[OPERATION].equals("type")) {
-                    continue;
+                try {
+                    if (data[OPERATION].equals("type")) {
+                        continue;
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    throw new ArrayIndexOutOfBoundsException();
                 }
+
                 FruitTransaction.Operation operation = getOperation(data[OPERATION].trim());
                 String fruit = data[FRUIT];
-                int quantity = Integer.parseInt(data[QUANTITY]);
-
-                transactions.add(new FruitTransaction(operation, fruit, quantity));
+                try {
+                    int quantity = Integer.parseInt(data[QUANTITY]);
+                    transactions.add(new FruitTransaction(operation, fruit, quantity));
+                } catch (NumberFormatException e) {
+                    throw new InvalidNumberException();
+                }
             }
+        } catch (InvalidNumberException e) {
+            System.out.println("Not valid format");
         } catch (IOException e) {
             throw new RuntimeException("Failed to read from file: " + filePath, e);
         }
@@ -45,5 +55,8 @@ public class ReaderServiceImpl implements ReaderService {
             }
         }
         throw new IllegalArgumentException("Invalid operation code: " + operationCode);
+    }
+
+    private class InvalidNumberException extends Throwable {
     }
 }

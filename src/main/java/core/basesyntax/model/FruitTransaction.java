@@ -1,12 +1,18 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
+    private String name;
     private Operation operation;
     private String fruit;
     private int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
+    public FruitTransaction(String fruit, int quantity) {
         this.fruit = fruit;
         this.quantity = quantity;
     }
@@ -51,5 +57,8 @@ public class FruitTransaction {
             return code;
         }
     }
-}
 
+    public String getName() {
+        return name;
+    }
+}
