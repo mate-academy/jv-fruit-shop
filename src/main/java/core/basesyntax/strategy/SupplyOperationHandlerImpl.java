@@ -8,16 +8,11 @@ public class SupplyOperationHandlerImpl implements OperationHandler {
     public void handleOperation(FruitTransaction transaction) {
         String fruitName = transaction.getFruit();
         int quantity = transaction.getQuantity();
-
-        try {
-            FruitTransaction existingFruit = FruitStorage.getFruit(fruitName);
-            if (existingFruit == null) {
-                FruitStorage.addFruit(new FruitTransaction(fruitName, quantity));
-            } else {
-                existingFruit.setQuantity(existingFruit.getQuantity() + quantity);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Can't get data from file", e);
+        FruitTransaction existingFruit = FruitStorage.getFruit(fruitName);
+        if (existingFruit == null) {
+            FruitStorage.addFruit(new FruitTransaction(fruitName, quantity));
+        } else {
+            existingFruit.setQuantity(existingFruit.getQuantity() + quantity);
         }
     }
 }
