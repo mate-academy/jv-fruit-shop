@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.model.FruitTransaction.Operation.getAllAllowedOperationTypes;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.StringToListService;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class StringToFruitTransactionListService implements StringToListService<FruitTransaction> {
     private static final int OPERATION_INDEX = 0;
@@ -29,7 +29,6 @@ public class StringToFruitTransactionListService implements StringToListService<
             parsedTransactions
                     .add(new FruitTransaction(operation, transactionInArray[FRUIT_INDEX],quantity));
         }
-        currentLineInInputFile = 0;
         return parsedTransactions;
     }
 
@@ -40,9 +39,9 @@ public class StringToFruitTransactionListService implements StringToListService<
     }
 
     private void checkQuantityForNegativeNumber(int quantity) {
-        if (quantity < 0) {
+        if (quantity <= 0) {
             throw new RuntimeException("Invalid quantity on line " + currentLineInInputFile
-                    + "! Quantity can't be below zero! Actual number is " + quantity);
+                    + "! Quantity can't be below or equals zero! Actual number is " + quantity);
         }
     }
 
@@ -61,11 +60,5 @@ public class StringToFruitTransactionListService implements StringToListService<
                         + currentLineInInputFile + "! It's " + type + ", but allowed types are: "
                         + getAllAllowedOperationTypes());
         }
-    }
-
-    private String getAllAllowedOperationTypes() {
-        return Arrays.stream(FruitTransaction.Operation.values())
-                .map(FruitTransaction.Operation::getCode)
-                .collect(Collectors.joining(", "));
     }
 }
