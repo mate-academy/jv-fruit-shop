@@ -1,7 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.FruitTransactionsStorage;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportCreatorService;
 import java.util.List;

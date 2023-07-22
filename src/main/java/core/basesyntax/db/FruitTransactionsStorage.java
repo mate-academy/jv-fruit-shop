@@ -3,7 +3,7 @@ package core.basesyntax.db;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public class FruitTransactionsStorage implements Storage<FruitTransaction>{
+public class FruitTransactionsStorage implements Storage<FruitTransaction> {
     private static List<FruitTransaction> fruitTransactions;
 
     @Override
