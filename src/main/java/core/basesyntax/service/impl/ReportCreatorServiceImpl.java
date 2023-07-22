@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportCreatorService;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,9 +11,9 @@ import java.util.stream.Collectors;
 public class ReportCreatorServiceImpl implements ReportCreatorService<FruitTransaction> {
     @Override
     public String create(List<FruitTransaction> info) {
-        Set<String> fruitsSet = getAllFruitsNames(Storage.fruitTransactions);
+        Set<String> fruitsSet = getAllFruitsNames(Storage.getFruitTransactions());
         Map<String, Integer> report = createMapWithFruitsAsKey(fruitsSet);
-        fillReport(Storage.fruitTransactions, report);
+        fillReport(Storage.getFruitTransactions(), report);
         return convertMapToString(report);
     }
 
@@ -46,6 +45,9 @@ public class ReportCreatorServiceImpl implements ReportCreatorService<FruitTrans
                 case BALANCE:
                     changedAmountOfCurrentFruit = quantity;
                     break;
+                default:
+                    throw new RuntimeException("There is no operations with input type "
+                            + operation);
             }
             report.replace(fruit, changedAmountOfCurrentFruit);
         }

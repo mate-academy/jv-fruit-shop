@@ -19,9 +19,8 @@ public class Main {
         ReportCreatorService<FruitTransaction> reportCreatorService =
                 new ReportCreatorServiceImpl();
         String transactions = csvFileReaderService.read("src/main/resources/data.csv");
-        Storage.fruitTransactions =
-                transactionListService.convert(transactions);
-        String completeReport = reportCreatorService.create(Storage.fruitTransactions);
+        Storage.setFruitTransactions(transactionListService.convert(transactions));
+        String completeReport = reportCreatorService.create(Storage.getFruitTransactions());
         csvFileWriterService.write(completeReport);
     }
 }
