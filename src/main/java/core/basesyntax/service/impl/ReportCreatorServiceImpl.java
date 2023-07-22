@@ -52,6 +52,13 @@ public class ReportCreatorServiceImpl implements ReportCreatorService<FruitTrans
             }
             report.replace(fruit, changedAmountOfCurrentFruit);
         }
+        report.forEach((key, value) -> {
+            if (value < 0) {
+                throw new RuntimeException("Final amount of fruits \""
+                        + key + "\" is "
+                        + value + "! The number can't be negative");
+            }
+        });
     }
 
     private void checkReportForNull(Map<String, Integer> report) {
