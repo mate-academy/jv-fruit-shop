@@ -15,7 +15,7 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
             String firstLine = "fruit,quantity" + System.lineSeparator();
             bufferedWriter.write(firstLine + report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write report in file((");
+            throw new RuntimeException("Can't write report in file((", e);
         }
     }
 

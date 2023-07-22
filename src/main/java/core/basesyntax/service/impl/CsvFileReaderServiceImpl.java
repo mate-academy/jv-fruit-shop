@@ -20,7 +20,7 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
                     .lines()
                     .collect(Collectors.joining(System.lineSeparator()));
         } catch (IOException e) {
-            throw new RuntimeException("Something wrong with file's path " + filePath);
+            throw new RuntimeException("Something wrong with file's path " + filePath, e);
         }
     }
 

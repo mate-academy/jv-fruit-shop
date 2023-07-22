@@ -34,18 +34,20 @@ public class ReportCreatorServiceImpl implements ReportCreatorService<FruitTrans
             FruitTransaction.Operation operation = fruitTransaction.getOperation();
             String fruit = fruitTransaction.getFruit();
             int quantity = fruitTransaction.getQuantity();
+            int changedAmountOfCurrentFruit = 0;
             switch (operation) {
                 case RETURN:
                 case SUPPLY:
-                    report.replace(fruit, report.get(fruit) + quantity);
+                    changedAmountOfCurrentFruit = report.get(fruit) + quantity;
                     break;
                 case PURCHASE:
-                    report.replace(fruit, report.get(fruit) - quantity);
+                    changedAmountOfCurrentFruit = report.get(fruit) - quantity;
                     break;
                 case BALANCE:
-                    report.replace(fruit, quantity);
+                    changedAmountOfCurrentFruit = quantity;
                     break;
             }
+            report.replace(fruit, changedAmountOfCurrentFruit);
         }
     }
 
