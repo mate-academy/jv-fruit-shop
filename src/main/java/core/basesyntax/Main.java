@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.FruitTransactionsStorage;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
@@ -18,9 +19,11 @@ public class Main {
         CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
         ReportCreatorService<FruitTransaction> reportCreatorService =
                 new ReportCreatorServiceImpl();
+        Storage<FruitTransaction> fruitTransactionStorage =
+                new FruitTransactionsStorage();
         String transactions = csvFileReaderService.read("src/main/resources/data.csv");
-        Storage.setFruitTransactions(transactionListService.convert(transactions));
-        String completeReport = reportCreatorService.create(Storage.getFruitTransactions());
+        fruitTransactionStorage.setStorage(transactionListService.convert(transactions));
+        String completeReport = reportCreatorService.create(fruitTransactionStorage.getStorage());
         csvFileWriterService.write(completeReport);
     }
 }

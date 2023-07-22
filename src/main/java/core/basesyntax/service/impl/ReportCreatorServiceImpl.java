@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.FruitTransactionsStorage;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportCreatorService;
@@ -10,10 +11,10 @@ import java.util.stream.Collectors;
 
 public class ReportCreatorServiceImpl implements ReportCreatorService<FruitTransaction> {
     @Override
-    public String create(List<FruitTransaction> info) {
-        Set<String> fruitsSet = getAllFruitsNames(Storage.getFruitTransactions());
+    public String create(List<FruitTransaction> fruitTransactions) {
+        Set<String> fruitsSet = getAllFruitsNames(fruitTransactions);
         Map<String, Integer> report = createMapWithFruitsAsKey(fruitsSet);
-        fillReport(Storage.getFruitTransactions(), report);
+        fillReport(fruitTransactions, report);
         return convertMapToString(report);
     }
 
