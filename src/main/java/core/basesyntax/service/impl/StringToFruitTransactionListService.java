@@ -12,7 +12,7 @@ public class StringToFruitTransactionListService implements StringToListService<
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final int DIFFERENCE_BETWEEN_INDEX_AND_ROW_NUMBER = 2;
-    int currentLineInInputFile;
+    private int currentLineInInputFile;
 
     @Override
     public List<FruitTransaction> convert(String string) {
@@ -29,6 +29,7 @@ public class StringToFruitTransactionListService implements StringToListService<
             parsedTransactions
                     .add(new FruitTransaction(operation, transactionInArray[FRUIT_INDEX],quantity));
         }
+        currentLineInInputFile = 0;
         return parsedTransactions;
     }
 
