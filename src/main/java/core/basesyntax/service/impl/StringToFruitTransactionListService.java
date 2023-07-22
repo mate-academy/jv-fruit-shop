@@ -12,6 +12,7 @@ public class StringToFruitTransactionListService implements StringToListService<
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final int DIFFERENCE_BETWEEN_INDEX_AND_ROW_NUMBER = 2;
+    int currentLineInInputFile;
 
     @Override
     public List<FruitTransaction> convert(String string) {
@@ -20,12 +21,11 @@ public class StringToFruitTransactionListService implements StringToListService<
         List<FruitTransaction> parsedTransactions = new ArrayList<>();
         for (int i = 0; i < transactions.length; i++) {
             String[] transactionInArray = transactions[i].split(",");
-            int currentLineInInputFile = i + DIFFERENCE_BETWEEN_INDEX_AND_ROW_NUMBER;
+            currentLineInInputFile = i + DIFFERENCE_BETWEEN_INDEX_AND_ROW_NUMBER;
             FruitTransaction.Operation operation =
-                    defineOperationType(transactionInArray[OPERATION_INDEX],
-                            currentLineInInputFile);
+                    defineOperationType(transactionInArray[OPERATION_INDEX]);
             int quantity = Integer.parseInt(transactionInArray[QUANTITY_INDEX]);
-            checkQuantityForNegativeNumber(quantity, currentLineInInputFile);
+            checkQuantityForNegativeNumber(quantity);
             parsedTransactions
                     .add(new FruitTransaction(operation, transactionInArray[FRUIT_INDEX],quantity));
         }
@@ -38,15 +38,14 @@ public class StringToFruitTransactionListService implements StringToListService<
         }
     }
 
-    private void checkQuantityForNegativeNumber(int quantity, int currentLineInInputFile) {
+    private void checkQuantityForNegativeNumber(int quantity) {
         if (quantity < 0) {
             throw new RuntimeException("Invalid quantity on line " + currentLineInInputFile
                     + "! Quantity can't be below zero! Actual number is " + quantity);
         }
     }
 
-    private FruitTransaction.Operation defineOperationType(String type,
-                                                           int currentLineInInputFile) {
+    private FruitTransaction.Operation defineOperationType(String type) {
         switch (type) {
             case "b":
                 return FruitTransaction.Operation.BALANCE;
