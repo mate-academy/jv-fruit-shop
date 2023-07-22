@@ -40,12 +40,13 @@ public class StringToFruitTransactionListService implements StringToListService<
 
     private void checkQuantityForNegativeNumber(int quantity, int currentLineInInputFile) {
         if (quantity < 0) {
-            throw new RuntimeException("Invalid quantity on line " + currentLineInInputFile + "! Quantity "
-                    + "can't be below zero! Actual number is " + quantity);
+            throw new RuntimeException("Invalid quantity on line " + currentLineInInputFile
+                    + "! Quantity can't be below zero! Actual number is " + quantity);
         }
     }
 
-    private FruitTransaction.Operation defineOperationType(String type, int currentLineInInputFile) {
+    private FruitTransaction.Operation defineOperationType(String type,
+                                                           int currentLineInInputFile) {
         switch (type) {
             case "b":
                 return FruitTransaction.Operation.BALANCE;
