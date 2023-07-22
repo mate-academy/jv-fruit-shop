@@ -15,6 +15,7 @@ public class StringToFruitTransactionListService implements StringToListService<
 
     @Override
     public List<FruitTransaction> convert(String string) {
+        checkStringForNull(string);
         String[] transactions = string.split(System.lineSeparator());
         List<FruitTransaction> parsedTransactions = new ArrayList<>();
         for (int i = 0; i < transactions.length; i++) {
@@ -27,6 +28,12 @@ public class StringToFruitTransactionListService implements StringToListService<
                     .add(new FruitTransaction(operation, transactionInArray[FRUIT_INDEX],quantity));
         }
         return parsedTransactions;
+    }
+
+    private void checkStringForNull(String string) {
+        if (string == null) {
+            throw new RuntimeException("Input string is null((");
+        }
     }
 
     private void checkQuantityForNegativeNumber(int quantity, int index) {

@@ -29,6 +29,7 @@ public class ReportCreatorServiceImpl implements ReportCreatorService<FruitTrans
     }
 
     private void fillReport(List<FruitTransaction> fruitTransactions, Map<String, Integer> report) {
+        checkReportForNull(report);
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             FruitTransaction.Operation operation = fruitTransaction.getOperation();
             String fruit = fruitTransaction.getFruit();
@@ -45,6 +46,12 @@ public class ReportCreatorServiceImpl implements ReportCreatorService<FruitTrans
                     report.replace(fruit, quantity);
                     break;
             }
+        }
+    }
+
+    private void checkReportForNull(Map<String, Integer> report) {
+        if (report == null) {
+            throw new RuntimeException("The input list is null((");
         }
     }
 
