@@ -10,10 +10,17 @@ import java.util.stream.Collectors;
 public class ReportCreatorServiceImpl implements ReportCreatorService<FruitTransaction> {
     @Override
     public String create(List<FruitTransaction> fruitTransactions) {
+        checkFruitTransactionsForNull(fruitTransactions);
         Set<String> fruitsSet = getAllFruitsNames(fruitTransactions);
         Map<String, Integer> report = createMapWithFruitsAsKey(fruitsSet);
         fillReport(fruitTransactions, report);
         return convertMapToString(report);
+    }
+
+    private void checkFruitTransactionsForNull(List<FruitTransaction> fruitTransactions) {
+        if (fruitTransactions == null) {
+            throw new RuntimeException("The input list of fruit transactions is null!");
+        }
     }
 
     private Set<String> getAllFruitsNames(List<FruitTransaction> fruitTransactions) {
@@ -32,6 +39,7 @@ public class ReportCreatorServiceImpl implements ReportCreatorService<FruitTrans
             FruitTransaction.Operation operation = fruitTransaction.getOperation();
             String fruit = fruitTransaction.getFruit();
             int quantity = fruitTransaction.getQuantity();
+            checkQuantityForNotPositiveNumber(quantity);
             int changedAmountOfCurrentFruit = 0;
             switch (operation) {
                 case RETURN:
@@ -57,6 +65,13 @@ public class ReportCreatorServiceImpl implements ReportCreatorService<FruitTrans
                         + value + "! The number can't be negative");
             }
         });
+    }
+
+    private void checkQuantityForNotPositiveNumber(int quantity) {
+        if (quantity <= 0) {
+            throw new RuntimeException("Quantity in a transaction should be above zero, but input "
+                    + "quantity is " + quantity);
+        }
     }
 
     private void checkReportForNull(Map<String, Integer> report) {
