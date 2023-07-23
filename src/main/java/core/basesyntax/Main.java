@@ -16,7 +16,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         CustomFileReader fileReader = new CsvFileReader();
-        List<String> lines = fileReader.read("input.csv");
+        List<String> lines = fileReader.read("src/main/resources/input.csv");
         ReadParser readParser = new ReadParserImpl();
         List<FruitTransaction> transactions = readParser.parse(lines);
         OperationProcess operationProcess = new OperationProcessImpl();
@@ -24,6 +24,6 @@ public class Main {
         WriteParser writeParser = new WriteParserImpl();
         String report = writeParser.parse();
         CustomFileWriter fileWriter = new CsvFileWriter();
-        fileWriter.write(report, "dailyReport");
+        fileWriter.write(report, "src/main/resources/dailyReport");
     }
 }
