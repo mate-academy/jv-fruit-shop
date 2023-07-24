@@ -1,53 +1,36 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.ActivityTypeStrategyImpl;
 import core.basesyntax.service.impl.ConvertServiceImpl;
-import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
-import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.StoreServiceImpl;
-import core.basesyntax.service.impl.service.ActivityTypeStrategy;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.service.impl.service.ConvertService;
-import core.basesyntax.service.impl.service.CsvFileReaderService;
-import core.basesyntax.service.impl.service.CsvFileWriterService;
+import core.basesyntax.service.impl.service.ReaderService;
 import core.basesyntax.service.impl.service.ReportService;
-import core.basesyntax.service.impl.service.StoreService;
-import core.basesyntax.strategy.ActivityTypeHandler;
-import core.basesyntax.strategy.BalanceActivityTypeHandler;
-import core.basesyntax.strategy.PurchaseActivityTypeHandler;
-import core.basesyntax.strategy.ReturnActivityTypeHandler;
-import core.basesyntax.strategy.SupplyActivityTypeHandler;
-import java.util.HashMap;
+import core.basesyntax.service.impl.service.WriterService;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<String, ActivityTypeHandler> activityTypeServiceMap = new HashMap<>();
-        activityTypeServiceMap.put("b", new BalanceActivityTypeHandler());
-        activityTypeServiceMap.put("s", new SupplyActivityTypeHandler());
-        activityTypeServiceMap.put("p", new PurchaseActivityTypeHandler());
-        activityTypeServiceMap.put("r", new ReturnActivityTypeHandler());
+        OperationStrategy operationStrategy = new OperationStrategyImpl();
 
-        ActivityTypeStrategy activityTypeStrategy
-                = new ActivityTypeStrategyImpl(activityTypeServiceMap);
+        ReaderService fileReader = new ReaderServiceImpl();
+        List<String> rows = fileReader.readData("src/main/resources/validValues_ok.csv");
 
-        CsvFileReaderService fileReader = new CsvFileReaderServiceImpl(activityTypeStrategy);
-        /** Insert file name without its extension */
-        List<String> rows = fileReader.readData("validValues_ok");
-
-        ConvertService converter = new ConvertServiceImpl(activityTypeStrategy);
+        ConvertService converter = new ConvertServiceImpl(operationStrategy);
         List<FruitTransaction> fruitTransactionList = converter.convertData(rows);
 
-        StoreService storeService = new StoreServiceImpl(activityTypeStrategy);
-        List<Integer> operationAmount = storeService.getOperationsAmount(fruitTransactionList);
-        List<String> fruitList = storeService.getFruitList(fruitTransactionList);
+        StoreServiceImpl storeService = new StoreServiceImpl(operationStrategy);
+        storeService.putToMap(fruitTransactionList);
 
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.getReport(fruitList, operationAmount);
+        String report = reportService.getReport();
 
-        CsvFileWriterService fileWriter = new CsvFileWriterServiceImpl();
-        fileWriter.writeData(report);
+        WriterService fileWriter = new WriterServiceImpl();
+        fileWriter.writeData(report, "src/main/resources/report.csv");
     }
 }

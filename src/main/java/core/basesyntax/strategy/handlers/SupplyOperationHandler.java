@@ -1,0 +1,24 @@
+package core.basesyntax.strategy.handlers;
+
+import core.basesyntax.db.FruitStorage;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+
+public class SupplyOperationHandler implements OperationHandler {
+    private static final String EXCEPTION
+            = "Each fruit should have balance operation as the first operation type in input file";
+
+    @Override
+    public void handle(FruitTransaction transaction) {
+        if (FruitStorage.FRUITS.isEmpty()) {
+            throw new RuntimeException(EXCEPTION);
+        }
+        int quantity = FruitStorage.FRUITS.get(transaction.getFruit());
+        FruitStorage.FRUITS.put(transaction.getFruit(), transaction.getQuantity() + quantity);
+    }
+
+    @Override
+    public Operation getOperationType() {
+        return Operation.SUPPLY;
+    }
+}
