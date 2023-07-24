@@ -2,7 +2,6 @@ package core.basesyntax.strategy.handlers;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 
 public class ReturnOperationHandler implements OperationHandler {
     private static final String EXCEPTION
@@ -15,10 +14,5 @@ public class ReturnOperationHandler implements OperationHandler {
         }
         int quantity = FruitStorage.FRUITS.get(transaction.getFruit());
         FruitStorage.FRUITS.put(transaction.getFruit(), transaction.getQuantity() + quantity);
-    }
-
-    @Override
-    public Operation getOperationType() {
-        return Operation.RETURN;
     }
 }

@@ -5,6 +5,4 @@ import core.basesyntax.strategy.handlers.OperationHandler;
 
 public interface OperationStrategy {
     OperationHandler get(Operation operation);
-
-    OperationHandler get(String type);
 }

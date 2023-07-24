@@ -2,7 +2,6 @@ package core.basesyntax.strategy.handlers;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private static final String EXCEPTION
@@ -20,10 +19,5 @@ public class PurchaseOperationHandler implements OperationHandler {
             throw new RuntimeException(LESS_THAN_ZERO_EXCEPTION);
         }
         FruitStorage.FRUITS.put(transaction.getFruit(), quantity - transaction.getQuantity());
-    }
-
-    @Override
-    public Operation getOperationType() {
-        return Operation.PURCHASE;
     }
 }
