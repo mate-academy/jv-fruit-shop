@@ -24,6 +24,15 @@ public class FruitTransaction {
         return operation;
     }
 
+    public Operation getOperation(String operationCode) {
+        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+            if (operation.getCode().equals(operationCode)) {
+                return operation;
+            }
+        }
+        throw new IllegalArgumentException("Invalid operation code: " + operationCode);
+    }
+
     public String getFruit() {
         return fruit;
     }
@@ -63,14 +72,5 @@ public class FruitTransaction {
 
     public String getName() {
         return name;
-    }
-
-    public Operation getOperation(String operationCode) {
-        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getCode().equals(operationCode)) {
-                return operation;
-            }
-        }
-        throw new IllegalArgumentException("Invalid operation code: " + operationCode);
     }
 }

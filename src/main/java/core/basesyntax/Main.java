@@ -3,8 +3,11 @@ package core.basesyntax;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.*;
-
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import java.util.List;
 
 public class Main {
@@ -15,7 +18,8 @@ public class Main {
         ReaderServiceImpl reader = new ReaderServiceImpl();
         List<String> dataAll = reader.readFromFile(INPUT_FILE);
         FruitTransactionParserImpl fruitTransactionParser = new FruitTransactionParserImpl();
-        List<FruitTransaction> transactions = fruitTransactionParser.getFruitTransactionsList(dataAll);
+        List<FruitTransaction> transactions = fruitTransactionParser
+                .getFruitTransactionsList(dataAll);
 
         FruitStorage fruitStorage = new FruitStorage();
         FruitService fruitServiceImpl = new FruitServiceImpl(fruitStorage);
