@@ -3,26 +3,28 @@ package core.basesyntax;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.FruitServiceImpl;
-import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.service.impl.*;
+
 import java.util.List;
 
 public class Main {
-    private static final String FROM_THIS_FILE = "input.csv";
-    private static final String TO_THIS_FILE = "result.csv";
+    private static final String INPUT_FILE = "input.csv";
+    private static final String OUTPUT_FILE = "result.csv";
 
     public static void main(String[] args) {
         ReaderServiceImpl reader = new ReaderServiceImpl();
-        List<FruitTransaction> transactions = reader.readFromFile(FROM_THIS_FILE);
+        List<String> dataAll = reader.readFromFile(INPUT_FILE);
+        FruitTransactionParserImpl fruitTransactionParser = new FruitTransactionParserImpl();
+        List<FruitTransaction> transactions = fruitTransactionParser.getFruitTransactionsList(dataAll);
+
         FruitStorage fruitStorage = new FruitStorage();
-        FruitService fruitService = new FruitServiceImpl();
-        fruitService.processTransactions(transactions);
-        for (FruitTransaction transaction : transactions) {
-            fruitStorage.updateFruitQuantity(transaction.getFruit(), transaction.getQuantity());
-        }
-        List<String> reportData = fruitService.generateReport();
+        FruitService fruitServiceImpl = new FruitServiceImpl(fruitStorage);
+        fruitServiceImpl.processTransactions(transactions);
+
+        ReportServiceImpl reportServiceImpl = new ReportServiceImpl();
+        List<String> reportData = reportServiceImpl.generateReport();
+
         WriterServiceImpl writer = new WriterServiceImpl();
-        writer.writeToFile(TO_THIS_FILE, reportData);
+        writer.writeToFile(OUTPUT_FILE, reportData);
     }
 }

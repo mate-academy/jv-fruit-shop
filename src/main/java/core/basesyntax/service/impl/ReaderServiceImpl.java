@@ -5,58 +5,21 @@ import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
-    private static final String COMMA = ",";
-    private static final int OPERATION = 0;
-    private static final int FRUIT = 1;
-    private static final int QUANTITY = 2;
 
     @Override
-    public List<FruitTransaction> readFromFile(String filePath) {
-        List<FruitTransaction> transactions = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] data = line.split(COMMA);
-                try {
-                    if (data[OPERATION].equals("type")) {
-                        continue;
-                    }
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new ArrayIndexOutOfBoundsException();
-                }
-
-                FruitTransaction.Operation operation = getOperation(data[OPERATION].trim());
-                String fruit = data[FRUIT];
-                try {
-                    int quantity = Integer.parseInt(data[QUANTITY]);
-                    transactions.add(new FruitTransaction(operation, fruit, quantity));
-                } catch (NumberFormatException e) {
-                    throw new InvalidNumberException();
-                }
-            }
-        } catch (InvalidNumberException e) {
-            System.out.println("Not valid format");
+    public List<String> readFromFile(String filePath) {
+        List<String> dateFromFile;
+        try {
+            dateFromFile = Files.readAllLines(Path.of("src/main/resources/input.csv"));
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read from file: " + filePath, e);
+            throw new RuntimeException("Can not read data, please check file:" + filePath, e);
         }
-
-        return transactions;
-    }
-
-    private FruitTransaction.Operation getOperation(String operationCode) {
-        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getCode().equals(operationCode)) {
-                return operation;
-            }
-        }
-        throw new IllegalArgumentException("Invalid operation code: " + operationCode);
-    }
-
-    private class InvalidNumberException extends Throwable {
+        return dateFromFile;
     }
 }

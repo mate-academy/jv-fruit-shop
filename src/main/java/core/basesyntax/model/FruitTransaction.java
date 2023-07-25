@@ -6,6 +6,9 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
+    public FruitTransaction() {
+    }
+
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
@@ -60,5 +63,14 @@ public class FruitTransaction {
 
     public String getName() {
         return name;
+    }
+
+    public Operation getOperation(String operationCode) {
+        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+            if (operation.getCode().equals(operationCode)) {
+                return operation;
+            }
+        }
+        throw new IllegalArgumentException("Invalid operation code: " + operationCode);
     }
 }
