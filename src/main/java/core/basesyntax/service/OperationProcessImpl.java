@@ -2,11 +2,14 @@ package core.basesyntax.service;
 
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
 
 public class OperationProcessImpl implements OperationProcess {
-    private final OperationStrategy operationStrategy = new OperationStrategyImpl();
+    private final OperationStrategy operationStrategy;
+
+    public OperationProcessImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
 
     @Override
     public void processData(List<FruitTransaction> fruitTransactionList) {
