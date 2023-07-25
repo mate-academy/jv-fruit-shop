@@ -8,7 +8,7 @@ import core.basesyntax.strategy.Operations;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-    FruitStorage fruitStorage = new FruitStorage();
+    private FruitStorage fruitStorage = new FruitStorage();
 
     public FruitServiceImpl(FruitStorage fruitStorage) {
     }
