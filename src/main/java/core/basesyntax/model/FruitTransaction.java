@@ -20,17 +20,8 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation getOperation() {
+    public Operation parseOperation() {
         return operation;
-    }
-
-    public Operation getOperation(String operationCode) {
-        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getCode().equals(operationCode)) {
-                return operation;
-            }
-        }
-        throw new IllegalArgumentException("Invalid operation code: " + operationCode);
     }
 
     public String getFruit() {
@@ -67,6 +58,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation getOperation(String operationCode) {
+            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+                if (operation.getCode().equals(operationCode)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("Invalid operation code: " + operationCode);
         }
     }
 

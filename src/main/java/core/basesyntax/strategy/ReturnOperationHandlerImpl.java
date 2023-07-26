@@ -10,10 +10,10 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
         String fruitName = transaction.getFruit();
         int quantity = transaction.getQuantity();
 
-        FruitTransaction fruit = FruitStorage.getFruit(fruitName);
+        FruitTransaction fruit = FruitStorage.getFruit(fruitName).get();
         fruit = Optional.ofNullable(fruit)
                 .orElseThrow(() -> new RuntimeException(
-                "core.basesyntax.model.Fruit not found: " + fruitName));
+                        "Fruit not found: " + fruitName));
         fruit.setQuantity(fruit.getQuantity() + quantity);
     }
 }

@@ -1,16 +1,11 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+
+import java.util.*;
 
 public class FruitStorage {
     private static Map<String, FruitTransaction> fruits;
-    private FruitTransaction fruitTransaction = new FruitTransaction();
-    private String fruit = fruitTransaction.getFruit();
 
     public FruitStorage() {
         this.fruits = new HashMap<>();
@@ -35,8 +30,13 @@ public class FruitStorage {
         }
     }
 
-    public static FruitTransaction getFruit(String fruitName) {
-        Optional<FruitTransaction> optional = Optional.ofNullable(fruits.get(fruitName));
-        return optional.orElseThrow(() -> new RuntimeException("fruit not exist in DB"));
+    //public static FruitTransaction getFruit(String fruitName) {
+    //    Optional<FruitTransaction> optional = Optional.ofNullable(fruits.get(fruitName));
+    //    return optional.orElseThrow(() -> new RuntimeException("fruit not exist in DB"));
+    //}
+
+    public static Optional<FruitTransaction> getFruit(String fruitName) {
+        return Optional.ofNullable(fruits.get(fruitName));
+        //return optional.orElseThrow(() -> new RuntimeException("fruit not exist in DB"));
     }
 }

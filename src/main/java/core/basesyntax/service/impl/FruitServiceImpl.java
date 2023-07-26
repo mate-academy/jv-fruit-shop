@@ -20,10 +20,10 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            if (Operations.valueOf(transaction.getOperation().toString()) == null) {
+            if (Operations.valueOf(transaction.parseOperation().toString()) == null) {
                 throw new NullPointerException("operation not exist");
             }
-            Operations operation = Operations.valueOf(transaction.getOperation()
+            Operations operation = Operations.valueOf(transaction.parseOperation()
                         .toString().toUpperCase());
             OperationHandler handler = operation.getHandler();
             handler.handleOperation(transaction);

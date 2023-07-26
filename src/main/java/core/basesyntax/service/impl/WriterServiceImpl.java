@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class WriterServiceImpl implements WriterService {
-
     @Override
     public void writeToFile(String filePath, List<String> reportData) {
         try (FileWriter writer = new FileWriter(filePath)) {
@@ -20,5 +19,3 @@ public class WriterServiceImpl implements WriterService {
         }
     }
 }
-
-

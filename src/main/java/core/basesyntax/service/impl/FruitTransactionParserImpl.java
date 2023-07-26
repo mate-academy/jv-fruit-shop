@@ -17,22 +17,17 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     public List<FruitTransaction> getFruitTransactionsList(List<String> dataAll) {
         for (int i = 0; i < dataAll.size(); i++) {
             String[] data = dataAll.get(i).split(SEPARATOR);
-            try {
-                if (data[OPERATION_INDEX].equals("type")) {
-                    continue;
-                }
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ArrayIndexOutOfBoundsException();
+            if (data[OPERATION_INDEX].equals("type")) {
+                continue;
             }
-
-            FruitTransaction.Operation operation = fruitTransaction
+            FruitTransaction.Operation operation = FruitTransaction.Operation
                     .getOperation(data[OPERATION_INDEX].trim());
             String fruit = data[FRUIT_INDEX];
             try {
                 int quantity = Integer.parseInt(data[QUANTITY_INDEX]);
                 transactions.add(new FruitTransaction(operation, fruit, quantity));
-            } catch (NumberFormatException ex) {
-                System.err.println("Invalid format");
+            } catch (RuntimeException ex) {
+                System.err.println("Error parsing");
             }
         }
         return transactions;

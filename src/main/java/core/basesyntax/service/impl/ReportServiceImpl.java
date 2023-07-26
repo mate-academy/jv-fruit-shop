@@ -8,15 +8,14 @@ import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER_LINE = "fruit,quantity";
-    private static final String COMMA = ",";
-    //private FruitStorage fruitStorage = new FruitStorage();
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<String> generateReport() {
         List<String> reportLines = new ArrayList<>();
         reportLines.add(HEADER_LINE);
         for (FruitTransaction fruit : FruitStorage.getAllFruits()) {
-            reportLines.add(fruit.getFruit() + COMMA + fruit.getQuantity());
+            reportLines.add(fruit.getFruit() + SEPARATOR + fruit.getQuantity());
         }
         return reportLines;
     }
