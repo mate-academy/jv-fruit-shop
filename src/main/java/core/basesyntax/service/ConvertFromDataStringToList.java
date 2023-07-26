@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.util.List;
 
-public interface ListOfFruitTransactionFromString<T> {
+public interface ConvertFromDataStringToList<T> {
     List<T> convert(String csvData);
 }

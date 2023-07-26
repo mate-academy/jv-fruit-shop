@@ -2,28 +2,27 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.ListOfFruitTransactionFromString;
-import java.util.ArrayList;
+import core.basesyntax.service.ConvertFromDataStringToList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class ListOfFruitTransactionFromStringImpl implements
-        ListOfFruitTransactionFromString<FruitTransaction> {
+public class ConvertFromDataStringToListImpl implements
+        ConvertFromDataStringToList<FruitTransaction> {
     public static final String DELIMITER = ",";
+    public static final String NEW_LINE = "\\n";
     public static final int OPERATION_INDEX = 0;
     public static final int FRUIT_INDEX = 1;
     public static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> convert(String csvData) {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        String[] lines = csvData.split("\\n");
+        String[] lines = csvData.split(NEW_LINE);
 
-        for (int i = 1; i < lines.length; i++) {
-            FruitTransaction fruitTransaction = convertToTransaction(lines[i]);
-            fruitTransactions.add(fruitTransaction);
-        }
-        return fruitTransactions;
+        return Arrays.stream(lines)
+                .skip(1)
+                .map(this::convertToTransaction)
+                .collect(Collectors.toList());
     }
 
     private FruitTransaction convertToTransaction(String line) {

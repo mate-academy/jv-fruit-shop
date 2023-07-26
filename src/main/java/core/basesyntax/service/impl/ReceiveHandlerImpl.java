@@ -6,9 +6,9 @@ import core.basesyntax.handlers.PurchaseHandler;
 import core.basesyntax.handlers.ReturnHandler;
 import core.basesyntax.handlers.SupplyHandler;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.ReceivingHandler;
+import core.basesyntax.service.ReceiveHandler;
 
-public class ReceivingHandlerImpl implements ReceivingHandler {
+public class ReceiveHandlerImpl implements ReceiveHandler {
     @Override
     public OperationHandler getHandler(Operation operation) {
         switch (operation) {
