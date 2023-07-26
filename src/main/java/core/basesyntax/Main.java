@@ -3,8 +3,11 @@ package core.basesyntax;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.*;
-
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import java.util.List;
 
 public class Main {
