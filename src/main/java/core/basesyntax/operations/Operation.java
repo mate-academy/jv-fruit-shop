@@ -22,6 +22,6 @@ public enum Operation {
                 return operation;
             }
         }
-        return null;
+        throw new IllegalArgumentException(operationType + " operation doesn't exist");
     }
 }

@@ -12,7 +12,7 @@ public class OperationProcessImpl implements OperationProcess {
     }
 
     @Override
-    public void processData(List<FruitTransaction> fruitTransactionList) {
+    public void processTransactions(List<FruitTransaction> fruitTransactionList) {
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
             OperationHandler operationHandler = operationStrategy
                     .get(fruitTransaction.getOperation());
