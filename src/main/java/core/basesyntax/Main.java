@@ -1,15 +1,15 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.impl.CsvFileReaderImpl;
-import core.basesyntax.impl.CsvFileWriterImpl;
-import core.basesyntax.impl.ListOfFruitTransactionFromStringImpl;
-import core.basesyntax.impl.ReportCreatorImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.ListOfFruitTransactionFromString;
 import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.CsvFileReaderImpl;
+import core.basesyntax.service.impl.CsvFileWriterImpl;
+import core.basesyntax.service.impl.ListOfFruitTransactionFromStringImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import java.util.List;
 
 public class Main {

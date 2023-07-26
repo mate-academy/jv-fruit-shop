@@ -1,12 +1,8 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.handlers.BalanceHandler;
 import core.basesyntax.handlers.OperationHandler;
-import core.basesyntax.handlers.PurchaseHandler;
-import core.basesyntax.handlers.ReturnHandler;
-import core.basesyntax.handlers.SupplyHandler;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
+import core.basesyntax.service.ReceivingHandler;
 import core.basesyntax.service.ReportCreator;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +10,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ReportCreatorImpl implements ReportCreator<FruitTransaction> {
+    public static final ReceivingHandler receivingHandler = new ReceivingHandlerImpl();
+
     @Override
     public String create(List<FruitTransaction> fruitTransactions) {
         checkFruitTransactionsForNull(fruitTransactions);
@@ -47,7 +45,7 @@ public class ReportCreatorImpl implements ReportCreator<FruitTransaction> {
             int quantity = fruitTransaction.getQuantity();
             checkQuantityForNotPositiveNumber(quantity);
 
-            OperationHandler handler = getHandler(fruitTransaction.getOperation());
+            OperationHandler handler = receivingHandler.getHandler(fruitTransaction.getOperation());
             handler.operation(fruit, quantity);
         }
 
@@ -57,21 +55,6 @@ public class ReportCreatorImpl implements ReportCreator<FruitTransaction> {
                         + value + "! The number can't be negative");
             }
         });
-    }
-
-    private OperationHandler getHandler(Operation operation) {
-        switch (operation) {
-            case BALANCE:
-                return new BalanceHandler();
-            case PURCHASE:
-                return new PurchaseHandler();
-            case RETURN:
-                return new ReturnHandler();
-            case SUPPLY:
-                return new SupplyHandler();
-            default:
-                throw new IllegalArgumentException("Unknown operation: " + operation);
-        }
     }
 
     @Override
