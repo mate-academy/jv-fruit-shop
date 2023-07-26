@@ -2,9 +2,9 @@ package core.basesyntax.strategy.handlers;
 
 import core.basesyntax.db.Storage;
 
-public class BalanceHandler implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void doOperation(String fruit, int numbers) {
-        Storage.storageMap.put(fruit, numbers);
+        Storage.storage.put(fruit, Storage.storage.get(fruit) + numbers);
     }
 }

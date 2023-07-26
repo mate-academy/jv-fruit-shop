@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.WriteParser;
+import core.basesyntax.service.ReportCreator;
 import java.util.Map;
 import java.util.Set;
 
-public class WriteParserImpl implements WriteParser {
+public class ReportCreatorImpl implements ReportCreator {
     private static final String COMMA = ",";
     private static final String LINE = System.lineSeparator();
 
@@ -16,7 +16,7 @@ public class WriteParserImpl implements WriteParser {
                 .append(COMMA)
                 .append("quantity")
                 .append(LINE);
-        Set<Map.Entry<String, Integer>> entries = Storage.storageMap.entrySet();
+        Set<Map.Entry<String, Integer>> entries = Storage.storage.entrySet();
         for (Map.Entry<String, Integer> entry : entries) {
             builder.append(entry.getKey())
                     .append(COMMA)

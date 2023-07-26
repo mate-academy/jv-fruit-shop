@@ -8,7 +8,11 @@ import core.basesyntax.strategy.handlers.OperationHandler;
 import java.util.List;
 
 public class OperationProcessImpl implements OperationProcess {
-    private final OperationStrategy operationStrategy = new OperationStrategyImpl();
+    private final OperationStrategy operationStrategy;
+
+    public OperationProcessImpl() {
+        operationStrategy = new OperationStrategyImpl();
+    }
 
     public void processData(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {

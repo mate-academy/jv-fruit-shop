@@ -1,29 +1,29 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CustomFileReader;
-import core.basesyntax.service.CustomFileWriter;
+import core.basesyntax.service.DataParser;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.OperationProcess;
-import core.basesyntax.service.ReadParser;
-import core.basesyntax.service.WriteParser;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.impl.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileWriter;
+import core.basesyntax.service.impl.DataParserImpl;
 import core.basesyntax.service.impl.OperationProcessImpl;
-import core.basesyntax.service.impl.ReadParserImpl;
-import core.basesyntax.service.impl.WriteParserImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        CustomFileReader fileReader = new CsvFileReader();
+        FileReader fileReader = new CsvFileReader();
         List<String> lines = fileReader.read("src/main/resources/input.csv");
-        ReadParser readParser = new ReadParserImpl();
-        List<FruitTransaction> transactions = readParser.parse(lines);
+        DataParser dataParser = new DataParserImpl();
+        List<FruitTransaction> transactions = dataParser.parse(lines);
         OperationProcess operationProcess = new OperationProcessImpl();
         operationProcess.processData(transactions);
-        WriteParser writeParser = new WriteParserImpl();
-        String report = writeParser.parse();
-        CustomFileWriter fileWriter = new CsvFileWriter();
+        ReportCreator reportCreator = new ReportCreatorImpl();
+        String report = reportCreator.parse();
+        FileWriter fileWriter = new CsvFileWriter();
         fileWriter.write(report, "src/main/resources/dailyReport");
     }
 }

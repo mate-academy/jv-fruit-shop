@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface WriteParser {
+public interface ReportCreator {
     String parse();
 }
