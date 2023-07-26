@@ -11,8 +11,7 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
         checkReportForNull(report);
         try (BufferedWriter bufferedWriter =
                      new BufferedWriter(new FileWriter("src/main/resources/output.csv"))) {
-            String firstLine = "fruit,quantity" + System.lineSeparator();
-            bufferedWriter.write(firstLine + report);
+            bufferedWriter.write(report);
         } catch (IOException e) {
             throw new RuntimeException("Can't write report in file((", e);
         }

@@ -1,9 +1,8 @@
 package core.basesyntax.db;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-public interface Storage<T> {
-    List<T> getStorage();
-
-    void setStorage(List<T> storage);
+public class Storage {
+    public static final Map<String, Integer> storage = new HashMap<>();
 }
