@@ -3,20 +3,20 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportService;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String HEADER_LINE = "fruit,quantity";
+    private static final String TITLE = "fruit,quantity\n";
     private static final String SEPARATOR = ",";
+    private static final Map<String, FruitTransaction> STORAGE = FruitStorage.getFruits();
 
     @Override
-    public List<String> generateReport() {
-        List<String> reportLines = new ArrayList<>();
-        reportLines.add(HEADER_LINE);
-        for (FruitTransaction fruit : FruitStorage.getAllFruits()) {
-            reportLines.add(fruit.getFruit() + SEPARATOR + fruit.getQuantity());
-        }
-        return reportLines;
+    public String generateReport() {
+        String report = TITLE;
+        report += STORAGE.keySet().stream()
+                .map(fruit -> fruit + SEPARATOR + STORAGE.get(fruit).getQuantity() + System.lineSeparator())
+                .collect(Collectors.joining());
+        return report;
     }
 }

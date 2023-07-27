@@ -8,13 +8,8 @@ import core.basesyntax.strategy.Operations;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-    private FruitStorage fruitStorage = new FruitStorage();
 
     public FruitServiceImpl(FruitStorage fruitStorage) {
-    }
-
-    private FruitStorage getFruitStorage() {
-        return fruitStorage;
     }
 
     @Override
@@ -30,4 +25,3 @@ public class FruitServiceImpl implements FruitService {
         }
     }
 }
-

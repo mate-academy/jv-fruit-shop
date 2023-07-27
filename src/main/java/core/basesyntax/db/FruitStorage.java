@@ -8,10 +8,13 @@ import java.util.Map;
 import java.util.Optional;
 
 public class FruitStorage {
-    private static Map<String, FruitTransaction> fruits;
+    private static Map<String, FruitTransaction> fruits = new HashMap<>();
 
-    public FruitStorage() {
-        this.fruits = new HashMap<>();
+    private FruitStorage() {
+    }
+
+    public static FruitStorage getFruitStorage() {
+        return new FruitStorage();
     }
 
     public static Map<String, FruitTransaction> getFruits() {
@@ -33,13 +36,7 @@ public class FruitStorage {
         }
     }
 
-    //public static FruitTransaction getFruit(String fruitName) {
-    //    Optional<FruitTransaction> optional = Optional.ofNullable(fruits.get(fruitName));
-    //    return optional.orElseThrow(() -> new RuntimeException("fruit not exist in DB"));
-    //}
-
     public static Optional<FruitTransaction> getFruit(String fruitName) {
         return Optional.ofNullable(fruits.get(fruitName));
-        //return optional.orElseThrow(() -> new RuntimeException("fruit not exist in DB"));
     }
 }

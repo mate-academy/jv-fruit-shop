@@ -21,12 +21,11 @@ public class Main {
         List<FruitTransaction> transactions = fruitTransactionParser
                 .getFruitTransactionsList(dataAll);
 
-        FruitStorage fruitStorage = new FruitStorage();
-        FruitService fruitServiceImpl = new FruitServiceImpl(fruitStorage);
+        FruitService fruitServiceImpl = new FruitServiceImpl(FruitStorage.getFruitStorage());
         fruitServiceImpl.processTransactions(transactions);
 
         ReportServiceImpl reportServiceImpl = new ReportServiceImpl();
-        List<String> reportData = reportServiceImpl.generateReport();
+        String reportData = reportServiceImpl.generateReport();
 
         WriterServiceImpl writer = new WriterServiceImpl();
         writer.writeToFile(OUTPUT_FILE, reportData);
