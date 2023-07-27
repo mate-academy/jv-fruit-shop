@@ -10,6 +10,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    
     @Override
     public List<FruitTransaction> getFruitTransactionsList(List<String> dataAll) {
         List<FruitTransaction> transactions = new ArrayList<>();
