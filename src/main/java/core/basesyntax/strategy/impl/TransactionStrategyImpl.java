@@ -6,7 +6,7 @@ import core.basesyntax.transactionhandler.TransactionHandler;
 import java.util.Map;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
-    private Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap;
+    private final Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap;
 
     public TransactionStrategyImpl(Map<FruitTransaction.Operation,
             TransactionHandler> transactionHandlerMap) {

@@ -6,7 +6,7 @@ import core.basesyntax.strategy.TransactionStrategy;
 import java.util.List;
 
 public class DataHandlerImpl implements DataHandler {
-    private TransactionStrategy strategy;
+    private final TransactionStrategy strategy;
 
     public DataHandlerImpl(TransactionStrategy strategy) {
         this.strategy = strategy;
