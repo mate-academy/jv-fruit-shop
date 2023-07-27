@@ -6,7 +6,6 @@ import core.basesyntax.service.ReceiveHandler;
 import core.basesyntax.service.ReportCreator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ReportCreatorImpl implements ReportCreator<FruitTransaction> {
@@ -18,8 +17,10 @@ public class ReportCreatorImpl implements ReportCreator<FruitTransaction> {
     }
 
     @Override
-    public String formatReport(Map<String, Integer> report) {
+    public String createReport(Map<String, Integer> report,
+                               List<FruitTransaction> fruitTransactions) {
         checkQuantityInReport(report);
+        fillReport(fruitTransactions);
         StringBuilder formatReport = new StringBuilder();
         formatReport.append(FIRST_LINE_OF_REPORT).append(System.lineSeparator());
 
@@ -31,34 +32,8 @@ public class ReportCreatorImpl implements ReportCreator<FruitTransaction> {
         return formatReport.toString();
     }
 
-    @Override
-    public String create(List<FruitTransaction> fruitTransactions) {
-        checkFruitTransactionsForNull(fruitTransactions);
-        Set<String> fruitsSet = getSetOfFruitNames(fruitTransactions);
-        Map<String, Integer> report = createReportWithFruits(fruitsSet);
-        fillReport(fruitTransactions);
-        String result = formatReport(report);
-        return result;
-    }
-
-    private void checkFruitTransactionsForNull(List<FruitTransaction> fruitTransactions) {
-        if (fruitTransactions == null) {
-            throw new RuntimeException("Cannot create report with null");
-        }
-    }
-
-    private Set<String> getSetOfFruitNames(List<FruitTransaction> fruitTransactions) {
-        return fruitTransactions.stream()
-                .map(FruitTransaction::getFruit)
-                .collect(Collectors.toSet());
-    }
-
-    private Map<String, Integer> createReportWithFruits(Set<String> fruitsSet) {
-        return fruitsSet.stream()
-                .collect(Collectors.toMap(string -> string, iterator -> 0));
-    }
-
     private void fillReport(List<FruitTransaction> fruitTransactions) {
+        checkFruitTransactionsForNull(fruitTransactions);
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             String fruit = fruitTransaction.getFruit();
             int quantity = fruitTransaction.getQuantity();
@@ -66,6 +41,12 @@ public class ReportCreatorImpl implements ReportCreator<FruitTransaction> {
 
             OperationHandler handler = receiveHandler.getHandler(fruitTransaction.getOperation());
             handler.handle(fruit, quantity);
+        }
+    }
+
+    private void checkFruitTransactionsForNull(List<FruitTransaction> fruitTransactions) {
+        if (fruitTransactions == null) {
+            throw new RuntimeException("Cannot create report with null");
         }
     }
 

@@ -1,10 +1,9 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.Map;
 
 public interface ReportCreator<T> {
-    String create(List<T> data);
-
-    String formatReport(Map<String, Integer> report);
+    String createReport(Map<String, Integer> report, List<FruitTransaction> fruitTransactions);
 }

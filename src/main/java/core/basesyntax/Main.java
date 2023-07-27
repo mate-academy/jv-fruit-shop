@@ -19,16 +19,12 @@ public class Main {
         ConvertFromDataStringToList transactionFromString =
                 new ConvertFromDataStringToListImpl();
         ReportCreator reportCreator = new ReportCreatorImpl();
-
         String filePath = "src/main/resources/input.csv";
 
         String transaction = csvFileReader.read(filePath);
-
         List<FruitTransaction> fruitTransactions = transactionFromString.convert(transaction);
 
-        reportCreator.create(fruitTransactions);
-
-        String report = reportCreator.formatReport(Storage.storage);
+        String report = reportCreator.createReport(Storage.storage, fruitTransactions);
         csvFileWriter.write("src/main/resources/report.csv", report);
 
         System.out.println("Report:\n" + report);
