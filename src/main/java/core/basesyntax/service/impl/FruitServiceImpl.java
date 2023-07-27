@@ -4,7 +4,7 @@ import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.Operations;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
@@ -15,10 +15,10 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            if (Operations.valueOf(transaction.parseOperation().toString()) == null) {
+            if (OperationStrategy.valueOf(transaction.parseOperation().toString()) == null) {
                 throw new NullPointerException("operation not exist");
             }
-            Operations operation = Operations.valueOf(transaction.parseOperation()
+            OperationStrategy operation = OperationStrategy.valueOf(transaction.parseOperation()
                         .toString().toUpperCase());
             OperationHandler handler = operation.getHandler();
             handler.handleOperation(transaction);

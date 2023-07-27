@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-public enum Operations {
+public enum OperationStrategy {
     BALANCE {
         @Override
         public OperationHandler getHandler() {
