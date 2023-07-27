@@ -28,16 +28,16 @@ public class Main {
     public static final String OUTPUT_FILE_PATH = "src/main/java/core/basesyntax/outputfile.csv";
     public static final String INPUT_FILE_PATH = "src/main/java/core/basesyntax/inputfile.csv";
     private static final Dao dao = new DaoImpl();
-    private final static Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap
+    private static Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap
 
             = new HashMap<>();
-    private final static TransactionStrategy strategy
+    private static TransactionStrategy strategy
             = new TransactionStrategyImpl(transactionHandlerMap);
-    private final static FileReader fileReader = new FileReaderImpl();
-    private final static DataConverter converter = new DataConverterImpl();
-    private final static DataHandler handler = new DataHandlerImpl(strategy);
-    private final static ReportCreator reportCreator = new ReportCreatorImpl(dao);
-    private final static FileWriter fileWriter = new FileWriterImpl();
+    private static FileReader fileReader = new FileReaderImpl();
+    private static DataConverter converter = new DataConverterImpl();
+    private static DataHandler handler = new DataHandlerImpl(strategy);
+    private static ReportCreator reportCreator = new ReportCreatorImpl(dao);
+    private static FileWriter fileWriter = new FileWriterImpl();
 
     public static void main(String[] args) {
         transactionHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(dao));
