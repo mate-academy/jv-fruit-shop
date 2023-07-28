@@ -4,8 +4,8 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.service.ReportCreator;
 
 public class ReportCreatorImpl implements ReportCreator {
-    public static final String HEADER = "fruit,quantity";
-    public static final String DELIMITER = ",";
+    private static final String HEADER = "fruit,quantity";
+    private static final String DELIMITER = ",";
     private final StorageDao storageDao;
 
     public ReportCreatorImpl(StorageDao storageDao) {

@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
-    public static final String DELIMITER = ",";
-    public static final int OPERATION_TYPE_INDEX = 0;
-    public static final int FRUIT_INDEX = 1;
-    public static final int QUANTITY_INDEX = 2;
-    public static final int OFFSET = 1;
+    private static final String DELIMITER = ",";
+    private static final int OPERATION_TYPE_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final int OFFSET = 1;
 
     @Override
     public List<FruitTransaction> convertData(List<String> dataFromFile) {
