@@ -1,14 +1,14 @@
 package core.basesyntax.transactionhandler.impl;
 
-import core.basesyntax.dao.Dao;
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.transactionhandler.TransactionHandler;
 
 public class ReturnHandler implements TransactionHandler {
-    private final Dao dao;
+    private final StorageDao storageDao;
 
-    public ReturnHandler(Dao dao) {
-        this.dao = dao;
+    public ReturnHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override
@@ -16,8 +16,8 @@ public class ReturnHandler implements TransactionHandler {
         if (transaction.getQuantity() <= 0) {
             throw new RuntimeException("The number of fruits returned must be positive!");
         }
-        int currentQuantity = dao.getQuantity(transaction.getFruit());
+        int currentQuantity = storageDao.getQuantity(transaction.getFruit());
         int newQuantity = currentQuantity + transaction.getQuantity();
-        dao.add(transaction.getFruit(), newQuantity);
+        storageDao.add(transaction.getFruit(), newQuantity);
     }
 }

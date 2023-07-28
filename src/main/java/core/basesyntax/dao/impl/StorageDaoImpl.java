@@ -2,10 +2,10 @@ package core.basesyntax.dao.impl;
 
 import static core.basesyntax.db.Storage.fruitStorage;
 
-import core.basesyntax.dao.Dao;
+import core.basesyntax.dao.StorageDao;
 import java.util.Map;
 
-public class DaoImpl implements Dao {
+public class StorageDaoImpl implements StorageDao {
     @Override
     public void add(String fruit, int quantity) {
         fruitStorage.put(fruit, quantity);

@@ -1,14 +1,14 @@
 package core.basesyntax.transactionhandler.impl;
 
-import core.basesyntax.dao.Dao;
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.transactionhandler.TransactionHandler;
 
 public class BalanceHandler implements TransactionHandler {
-    private final Dao dao;
+    private final StorageDao storageDao;
 
-    public BalanceHandler(Dao dao) {
-        this.dao = dao;
+    public BalanceHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override
@@ -16,6 +16,6 @@ public class BalanceHandler implements TransactionHandler {
         if (transaction.getQuantity() < 0) {
             throw new RuntimeException("The amount of fruit in stock must be positive");
         }
-        dao.add(transaction.getFruit(), transaction.getQuantity());
+        storageDao.add(transaction.getFruit(), transaction.getQuantity());
     }
 }

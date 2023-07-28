@@ -10,11 +10,12 @@ public class DataConverterImpl implements DataConverter {
     public static final int OPERATION_TYPE_INDEX = 0;
     public static final int FRUIT_INDEX = 1;
     public static final int QUANTITY_INDEX = 2;
+    public static final int OFFSET = 1;
 
     @Override
     public List<FruitTransaction> convertData(List<String> dataFromFile) {
         List<FruitTransaction> result = new ArrayList<>();
-        for (int i = 1; i < dataFromFile.size(); i++) {
+        for (int i = OFFSET; i < dataFromFile.size(); i++) {
             if (dataFromFile.get(i).isEmpty()) {
                 break;
             }

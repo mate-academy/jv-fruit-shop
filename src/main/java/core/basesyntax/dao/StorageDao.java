@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import java.util.Map;
 
-public interface Dao {
+public interface StorageDao {
     void add(String fruit, int quantity);
 
     Map<String, Integer> getAll();

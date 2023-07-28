@@ -1,20 +1,20 @@
 package core.basesyntax.transactionhandler.impl;
 
-import core.basesyntax.dao.Dao;
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.transactionhandler.TransactionHandler;
 
 public class SupplyHandler implements TransactionHandler {
-    private final Dao dao;
+    private final StorageDao storageDao;
 
-    public SupplyHandler(Dao dao) {
-        this.dao = dao;
+    public SupplyHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override
     public void handleTransaction(FruitTransaction transaction) {
-        int currentQuantity = dao.getQuantity(transaction.getFruit());
+        int currentQuantity = storageDao.getQuantity(transaction.getFruit());
         int newQuantity = currentQuantity + transaction.getQuantity();
-        dao.add(transaction.getFruit(), newQuantity);
+        storageDao.add(transaction.getFruit(), newQuantity);
     }
 }
