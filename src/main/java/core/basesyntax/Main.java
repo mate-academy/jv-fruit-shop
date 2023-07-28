@@ -45,6 +45,7 @@ public class Main {
         FruitTransactionsReportService fruitTransactionsReportService
                 = new FruitTransactionsReportServiceImpl();
         String report = fruitTransactionsReportService.createReport();
+
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(REPORT_PATH,report);
     }
