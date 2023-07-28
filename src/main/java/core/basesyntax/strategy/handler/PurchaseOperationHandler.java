@@ -1,4 +1,4 @@
-package core.basesyntax.strategy.handlers;
+package core.basesyntax.strategy.handler;
 
 import core.basesyntax.db.Storage;
 
