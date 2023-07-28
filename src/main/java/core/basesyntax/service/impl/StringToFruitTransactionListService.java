@@ -26,15 +26,15 @@ public class StringToFruitTransactionListService implements StringToListService<
                     defineOperationType(transactionInArray[OPERATION_INDEX]);
             int quantity = Integer.parseInt(transactionInArray[QUANTITY_INDEX]);
             checkQuantityForNegativeNumber(quantity);
-            parsedTransactions
-                    .add(new FruitTransaction(operation, transactionInArray[FRUIT_INDEX],quantity));
+            parsedTransactions.add(new FruitTransaction(operation,
+                    transactionInArray[FRUIT_INDEX], quantity));
         }
         return parsedTransactions;
     }
 
     private void checkStringForNull(String string) {
         if (string == null) {
-            throw new RuntimeException("Input string is null((");
+            throw new RuntimeException("Input string is null");
         }
     }
 

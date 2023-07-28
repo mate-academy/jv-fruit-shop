@@ -4,18 +4,18 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
 import core.basesyntax.service.CsvFileWriterService;
 import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.StorageToStringService;
-import core.basesyntax.service.handlers.BalanceHandler;
-import core.basesyntax.service.handlers.PurchaseHandler;
-import core.basesyntax.service.handlers.ReturnHandler;
-import core.basesyntax.service.handlers.SupplyHandler;
+import core.basesyntax.service.ReportMakerService;
 import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
-import core.basesyntax.service.impl.StorageToStringServiceImpl;
+import core.basesyntax.service.impl.ReportMakerServiceImpl;
 import core.basesyntax.service.impl.StringToFruitTransactionListService;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
+import core.basesyntax.service.strategy.handler.BalanceHandler;
+import core.basesyntax.service.strategy.handler.PurchaseHandler;
+import core.basesyntax.service.strategy.handler.ReturnHandler;
+import core.basesyntax.service.strategy.handler.SupplyHandler;
 import java.util.Map;
 
 public class Main {
@@ -30,11 +30,11 @@ public class Main {
                         FruitTransaction.Operation.RETURN, new ReturnHandler(),
                         FruitTransaction.Operation.SUPPLY, new SupplyHandler())
         );
-        FruitShopService<FruitTransaction> reportCreatorService =
+        FruitShopService<FruitTransaction> fruitShopService =
                 new FruitShopServiceImpl(operationStrategy);
-        StorageToStringService storageToStringService = new StorageToStringServiceImpl();
+        ReportMakerService reportMakerService = new ReportMakerServiceImpl();
         String transactions = csvFileReaderService.read("src/main/resources/data.csv");
-        reportCreatorService.update(transactionListService.convert(transactions));
-        csvFileWriterService.write(storageToStringService.convert());
+        fruitShopService.update(transactionListService.convert(transactions));
+        csvFileWriterService.write(reportMakerService.convert(), "src/main/resources/output1.csv");
     }
 }

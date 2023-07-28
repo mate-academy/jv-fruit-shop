@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
-
     private static final String VALID_FIRST_LINE = "type,fruit,quantity";
 
     @Override

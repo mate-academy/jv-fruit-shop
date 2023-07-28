@@ -55,6 +55,15 @@ public class FruitTransaction {
         return false;
     }
 
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = 31 * result + (fruit == null ? 0 : fruit.hashCode());
+        result = 31 * result + (operation == null ? 0 : operation.hashCode());
+        result = 31 * result + quantity;
+        return result;
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -63,7 +72,7 @@ public class FruitTransaction {
 
         private final String code;
 
-        private Operation(String code) {
+        Operation(String code) {
             this.code = code;
         }
 
