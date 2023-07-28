@@ -35,6 +35,7 @@ public class Main {
         ReportMakerService reportMakerService = new ReportMakerServiceImpl();
         String transactions = csvFileReaderService.read("src/main/resources/data.csv");
         fruitShopService.update(transactionListService.convert(transactions));
-        csvFileWriterService.write(reportMakerService.convert(), "src/main/resources/output1.csv");
+        csvFileWriterService.write(reportMakerService.createReport(),
+                "src/main/resources/output1.csv");
     }
 }

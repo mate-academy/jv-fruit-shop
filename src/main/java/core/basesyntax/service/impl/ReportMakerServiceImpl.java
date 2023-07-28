@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ReportMakerServiceImpl implements ReportMakerService {
     @Override
-    public String convert() {
+    public String createReport() {
         StringBuilder stringBuilder = new StringBuilder("fruits,quantity" + System.lineSeparator());
         for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
             stringBuilder.append(entry.getKey())
