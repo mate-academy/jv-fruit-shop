@@ -16,6 +16,6 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
                         + "quantity after purchase: " + fruitName);
             }
             fruit.setQuantity(updatedQuantity);
-            }
+        }
     }
 }
