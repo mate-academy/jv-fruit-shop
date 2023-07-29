@@ -8,19 +8,14 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
     public void handleOperation(FruitTransaction transaction) {
         String fruitName = transaction.getFruit();
         int quantity = transaction.getQuantity();
-
-        try {
-            if (FruitStorage.getFruit(fruitName).isPresent()) {
-                FruitTransaction fruit = FruitStorage.getFruit(fruitName).get();
-                int updatedQuantity = fruit.getQuantity() - quantity;
-                if (updatedQuantity < 0) {
-                    throw new RuntimeException("Invalid fruit "
-                            + "quantity after purchase: " + fruitName);
-                }
-                fruit.setQuantity(updatedQuantity);
+        if (FruitStorage.getFruit(fruitName).isPresent()) {
+            FruitTransaction fruit = FruitStorage.getFruit(fruitName).get();
+            int updatedQuantity = fruit.getQuantity() - quantity;
+            if (updatedQuantity < 0) {
+                throw new RuntimeException("Invalid fruit "
+                        + "quantity after purchase: " + fruitName);
             }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+            fruit.setQuantity(updatedQuantity);
+            }
     }
 }

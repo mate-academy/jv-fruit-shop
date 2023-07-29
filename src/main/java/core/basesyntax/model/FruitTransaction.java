@@ -24,6 +24,10 @@ public class FruitTransaction {
         return operation;
     }
 
+    public Operation getOperation() {
+        return operation;
+    }
+
     public String getFruit() {
         return fruit;
     }
@@ -60,7 +64,7 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation getOperation(String operationCode) {
+        public static Operation parseOperation(String operationCode) {
             for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
                 if (operation.getCode().equals(operationCode)) {
                     return operation;

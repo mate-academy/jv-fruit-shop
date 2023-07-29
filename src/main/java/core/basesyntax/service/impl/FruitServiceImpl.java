@@ -8,19 +8,18 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-
     public FruitServiceImpl(FruitStorage fruitStorage) {
     }
 
     @Override
     public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            if (OperationStrategy.valueOf(transaction.parseOperation().toString()) == null) {
+            if (OperationStrategy.valueOf(transaction.getOperation().toString()) == null) {
                 throw new NullPointerException("operation not exist");
             }
-            OperationStrategy operation = OperationStrategy.valueOf(transaction.parseOperation()
-                        .toString().toUpperCase());
-            OperationHandler handler = operation.getHandler();
+            OperationStrategy strategy = OperationStrategy.valueOf(transaction.parseOperation()
+                    .toString().toUpperCase());
+            OperationHandler handler = strategy.getHandler();
             handler.handleOperation(transaction);
         }
     }
