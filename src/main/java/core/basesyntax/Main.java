@@ -15,5 +15,6 @@ public class Main {
     public static void main(String[] args) {
         List<String> fileData = READER_SERVICE.read(INPUT_FILE_PATH);
         List<FruitTransaction> parsedFile = PARSER_SERVICE.parse(fileData);
+
     }
 }
