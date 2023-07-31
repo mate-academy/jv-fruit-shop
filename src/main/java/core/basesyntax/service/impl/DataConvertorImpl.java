@@ -11,7 +11,7 @@ public class DataConvertorImpl implements
         DataConvertor<FruitTransaction> {
     private static final String DELIMITER = ",";
     private static final String NEW_LINE = "\\n";
-    private static final int INDEX_OF_FIRST_LINE = 1;
+    private static final int HEADER_INDEX = 1;
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -22,7 +22,7 @@ public class DataConvertorImpl implements
         String[] lines = csvData.split(NEW_LINE);
 
         return Arrays.stream(lines)
-                .skip(INDEX_OF_FIRST_LINE)
+                .skip(HEADER_INDEX)
                 .map(this::convertToTransaction)
                 .collect(Collectors.toList());
     }
