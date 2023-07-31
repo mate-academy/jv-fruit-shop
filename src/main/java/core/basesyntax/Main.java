@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.service.csvService.CsvReaderService;
-import core.basesyntax.service.csvService.ReaderService;
+import core.basesyntax.service.impl.CsvReaderService;
+import core.basesyntax.service.ReaderService;
 
 import java.util.List;
 
