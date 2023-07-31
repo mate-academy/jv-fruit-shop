@@ -1,18 +1,22 @@
 package core.basesyntax.service.strategy;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.strategy.handler.BalanceHandler;
 import core.basesyntax.service.strategy.handler.OperationHandler;
+import core.basesyntax.service.strategy.handler.PurchaseHandler;
+import core.basesyntax.service.strategy.handler.ReturnHandler;
+import core.basesyntax.service.strategy.handler.SupplyHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<FruitTransaction.Operation, OperationHandler> map;
-
-    public OperationStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> map) {
-        this.map = map;
-    }
+    private final Map<Operation, OperationHandler> map =
+            Map.of(Operation.BALANCE, new BalanceHandler(),
+                    Operation.PURCHASE, new PurchaseHandler(),
+                    Operation.RETURN, new ReturnHandler(),
+                    Operation.SUPPLY, new SupplyHandler());
 
     @Override
-    public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
+    public OperationHandler getOperationHandler(Operation operation) {
         return map.get(operation);
     }
 }

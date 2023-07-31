@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class FruitTransaction {
     private Operation operation;
@@ -39,51 +38,20 @@ public class FruitTransaction {
     }
 
     @Override
-    public boolean equals(Object fruitTransaction) {
-        if (this == fruitTransaction) {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (fruitTransaction == null) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        if (fruitTransaction.getClass().equals(this.getClass())) {
-            FruitTransaction realFruitTransaction = (FruitTransaction) fruitTransaction;
-            return realFruitTransaction.getFruit().equals(this.fruit)
-                    && realFruitTransaction.getQuantity() == this.quantity
-                    && realFruitTransaction.getOperation().equals(this.operation);
-        }
-        return false;
+        FruitTransaction that = (FruitTransaction) o;
+        return quantity == that.quantity && operation == that.operation
+                && Objects.equals(fruit, that.fruit);
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = 31 * result + (fruit == null ? 0 : fruit.hashCode());
-        result = 31 * result + (operation == null ? 0 : operation.hashCode());
-        result = 31 * result + quantity;
-        return result;
-    }
-
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private final String code;
-
-        Operation(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public static String getAllAllowedOperationTypes() {
-            return Arrays.stream(values())
-                    .map(Operation::getCode)
-                    .collect(Collectors.joining(", "));
-        }
+        return Objects.hash(operation, fruit, quantity);
     }
 }

@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 public class SupplyHandler implements OperationHandler {
     @Override
     public void process(FruitTransaction transaction) {
-        Storage.storage.replace(transaction.getFruit(),
-                Storage.storage.get(transaction.getFruit()) + transaction.getQuantity());
+        Storage.getStorage().replace(transaction.getFruit(),
+                Storage.getStorage().get(transaction.getFruit()) + transaction.getQuantity());
     }
 }

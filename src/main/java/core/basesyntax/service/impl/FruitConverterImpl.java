@@ -1,13 +1,14 @@
 package core.basesyntax.service.impl;
 
-import static core.basesyntax.model.FruitTransaction.Operation.getAllAllowedOperationTypes;
+import static core.basesyntax.model.Operation.getAllAllowedOperationTypes;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.StringToListService;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.FruitConverter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringToFruitTransactionListService implements StringToListService<FruitTransaction> {
+public class FruitConverterImpl implements FruitConverter<FruitTransaction> {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -17,19 +18,20 @@ public class StringToFruitTransactionListService implements StringToListService<
     @Override
     public List<FruitTransaction> convert(String string) {
         checkStringForNull(string);
-        String[] transactions = string.split(System.lineSeparator());
-        List<FruitTransaction> parsedTransactions = new ArrayList<>();
-        for (int i = 0; i < transactions.length; i++) {
-            String[] transactionInArray = transactions[i].split(",");
+        String[] rawTransactions = string.split(System.lineSeparator());
+        List<FruitTransaction> transactions = new ArrayList<>();
+        for (int i = 0; i < rawTransactions.length; i++) {
+            String[] rawTransaction = rawTransactions[i].split(",");
             currentLineInInputFile = i + DIFFERENCE_BETWEEN_INDEX_AND_ROW_NUMBER;
-            FruitTransaction.Operation operation =
-                    defineOperationType(transactionInArray[OPERATION_INDEX]);
-            int quantity = Integer.parseInt(transactionInArray[QUANTITY_INDEX]);
+            Operation operation =
+                    defineOperationType(rawTransaction[OPERATION_INDEX]);
+            int quantity = Integer.parseInt(rawTransaction[QUANTITY_INDEX]);
             checkQuantityForNegativeNumber(quantity);
-            parsedTransactions.add(new FruitTransaction(operation,
-                    transactionInArray[FRUIT_INDEX], quantity));
+            FruitTransaction newFruitTransaction = new FruitTransaction(operation,
+                    rawTransaction[FRUIT_INDEX], quantity);
+            transactions.add(newFruitTransaction);
         }
-        return parsedTransactions;
+        return transactions;
     }
 
     private void checkStringForNull(String string) {
@@ -45,16 +47,16 @@ public class StringToFruitTransactionListService implements StringToListService<
         }
     }
 
-    private FruitTransaction.Operation defineOperationType(String type) {
+    private Operation defineOperationType(String type) {
         switch (type) {
             case "b":
-                return FruitTransaction.Operation.BALANCE;
+                return Operation.BALANCE;
             case "p":
-                return FruitTransaction.Operation.PURCHASE;
+                return Operation.PURCHASE;
             case "r":
-                return FruitTransaction.Operation.RETURN;
+                return Operation.RETURN;
             case "s":
-                return FruitTransaction.Operation.SUPPLY;
+                return Operation.SUPPLY;
             default:
                 throw new RuntimeException("Invalid transaction type on line "
                         + currentLineInInputFile + "! It's " + type + ", but allowed types are: "
