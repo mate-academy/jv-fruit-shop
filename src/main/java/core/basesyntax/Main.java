@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
@@ -25,28 +24,8 @@ import java.util.Map;
 
 public class Main {
     public static final String INPUT_FILE_PATH = "src/main/resources/input_file.csv";
-    public static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        String inputData = "type,fruit,quantity,\n"
-                + "b,banana,20,\n"
-                + "b,apple,100,\n"
-                + "s,banana,100,\n"
-                + "p,banana,13,\n"
-                + "r,apple,10,\n"
-                + "p,apple,20,\n"
-                + "p,banana,5,\n"
-                + "s,banana,50";
-
-        WriterService writerService = new WriterServiceImpl();
-        writerService.writeDataToFile(inputData, INPUT_FILE_PATH);
-
-        ReaderService readerService = new ReaderServiceImpl();
-        TransactionParser transactionParser = new TransactionParserImpl();
-        List<FruitTransaction> fruitTransactionList = transactionParser
-                .parse(readerService.readFromFile(INPUT_FILE_PATH));
-        System.out.println(fruitTransactionList);
-
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler());
@@ -57,15 +36,21 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandler());
 
+        ReaderService readerService = new ReaderServiceImpl();
+        List<String> lines = readerService.readFromFile(INPUT_FILE_PATH);
+
+        TransactionParser transactionParser = new TransactionParserImpl();
+        List<FruitTransaction> fruitTransactions = transactionParser.parse(lines);
+
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         TransactionExecutor executor = new TransactionExecutorImpl(operationStrategy);
-        executor.execute(fruitTransactionList);
-        System.out.println(Storage.fruitStorage);
+        executor.execute(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.createReport();
         System.out.println(report);
 
-        writerService.writeDataToFile(report, REPORT_FILE_PATH);
+        WriterService writerService = new WriterServiceImpl();
+        writerService.writeDataToFile(report);
     }
 }
