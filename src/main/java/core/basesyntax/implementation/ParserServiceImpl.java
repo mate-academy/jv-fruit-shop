@@ -20,7 +20,7 @@ public class ParserServiceImpl implements ParserService {
             String[] array = record.split(SEPARATOR);
             FruitTransaction transaction = new FruitTransaction();
             transaction.setOperation(
-                    FruitTransaction.Operation.getOption(array[OPERATION]));
+                    FruitTransaction.Operation.getByCode(array[OPERATION]));
             transaction.setFruit(array[FRUIT]);
             transaction.setQuantity(Integer.parseInt(array[QUANTITY]));
             fruitTransactionList.add(transaction);

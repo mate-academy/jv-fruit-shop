@@ -42,7 +42,7 @@ public class Main {
         List<FruitTransaction> transactions = parser.parseRecords(strings);
         FruitShopService fruitShopService =
                 new FruitShopServiceImpl(new OperationStrategyImpl(operationStrategyMap));
-        fruitShopService.processOfOperations(transactions);
+        fruitShopService.processTransactions(transactions);
         ReportGeneratorService reportGenerator = new ReportGeneratorServiceImpl();
         String report = reportGenerator.generateReport();
         WriterService writer = new WriterServiceImpl();

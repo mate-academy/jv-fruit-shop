@@ -5,7 +5,7 @@ import core.basesyntax.service.ReportGeneratorService;
 import java.util.Map;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
-    private static final String TITLE = "fruit,quantity\n";
+    private static final String TITLE = "fruit,quantity" + System.lineSeparator();
     private static final String DELIMITER = ",";
 
     @Override
