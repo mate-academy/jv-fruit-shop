@@ -2,32 +2,34 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.ConvertFromDataStringToList;
+import core.basesyntax.service.DataConvertor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ConvertFromDataStringToListImpl implements
-        ConvertFromDataStringToList<FruitTransaction> {
-    public static final String DELIMITER = ",";
-    public static final String NEW_LINE = "\\n";
-    public static final int OPERATION_INDEX = 0;
-    public static final int FRUIT_INDEX = 1;
-    public static final int QUANTITY_INDEX = 2;
+public class DataConvertorImpl implements
+        DataConvertor<FruitTransaction> {
+    private static final String DELIMITER = ",";
+    private static final String NEW_LINE = "\\n";
+    private static final int INDEX_OF_FIRST_LINE = 1;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final int MAX_NUMBER_OF_PARTS = 3;
 
     @Override
     public List<FruitTransaction> convert(String csvData) {
         String[] lines = csvData.split(NEW_LINE);
 
         return Arrays.stream(lines)
-                .skip(1)
+                .skip(INDEX_OF_FIRST_LINE)
                 .map(this::convertToTransaction)
                 .collect(Collectors.toList());
     }
 
     private FruitTransaction convertToTransaction(String line) {
         String[] parts = line.split(DELIMITER);
-        if (parts.length != 3) {
+        if (parts.length != MAX_NUMBER_OF_PARTS) {
             throw new IllegalArgumentException("Invalid CSV line: " + line);
         }
 

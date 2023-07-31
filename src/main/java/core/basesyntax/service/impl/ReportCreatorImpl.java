@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class ReportCreatorImpl implements ReportCreator<FruitTransaction> {
     private static final String FIRST_LINE_OF_REPORT = "fruit,quantity";
+    private static final String COMA = ",";
     private final ReceiveHandler receiveHandler;
 
     {
@@ -25,7 +26,7 @@ public class ReportCreatorImpl implements ReportCreator<FruitTransaction> {
         formatReport.append(FIRST_LINE_OF_REPORT).append(System.lineSeparator());
 
         String reportString = report.entrySet().stream()
-                .map(entry -> entry.getKey() + "," + entry.getValue())
+                .map(entry -> entry.getKey() + COMA + entry.getValue())
                 .collect(Collectors.joining(System.lineSeparator()));
 
         formatReport.append(reportString);
