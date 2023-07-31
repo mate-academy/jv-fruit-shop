@@ -60,7 +60,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Unknown code");
+            throw new RuntimeException("Unknown code " + operationCode);
         }
     }
 }

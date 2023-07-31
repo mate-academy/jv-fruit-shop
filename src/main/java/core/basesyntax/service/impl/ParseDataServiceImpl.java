@@ -13,7 +13,7 @@ public class ParseDataServiceImpl implements ParseDataService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parseFile(List<String> dataFromFile) {
+    public List<FruitTransaction> parseTransactions(List<String> dataFromFile) {
         dataFromFile.remove(TITLE_INDEX);
         List<FruitTransaction> transactionsList = new ArrayList<>();
 
