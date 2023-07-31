@@ -1,20 +1,20 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionService;
-import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ParseDataService;
 import core.basesyntax.service.ReaderFileService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.WriterFileService;
 import core.basesyntax.service.handler.BalanceOperationHandler;
 import core.basesyntax.service.handler.OperationHandler;
 import core.basesyntax.service.handler.PurchaseOperationHandler;
 import core.basesyntax.service.handler.ReturnOperationHandler;
 import core.basesyntax.service.handler.SupplyOperationHandler;
-import core.basesyntax.service.impl.TransactionServiceImp;
-import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.ParseDataServiceImpl;
 import core.basesyntax.service.impl.ReaderFileServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionServiceImp;
 import core.basesyntax.service.impl.WriterFileServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class Main {
         List<String> data = readerFileService.read(INPUT_PATH_FILE);
 
         ParseDataService parseDataService = new ParseDataServiceImpl();
-        List<FruitTransaction> transactions = parseDataService.parseFile(data);
+        List<FruitTransaction> transactions = parseDataService.parseTransactions(data);
 
         TransactionService transactionService
                 = new TransactionServiceImp(new OperationStrategyImpl(operationHandlerMap));
