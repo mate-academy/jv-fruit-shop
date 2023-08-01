@@ -1,14 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvReaderService;
 import core.basesyntax.service.impl.CsvWriterService;
+import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.operation.OperationStrategy;
