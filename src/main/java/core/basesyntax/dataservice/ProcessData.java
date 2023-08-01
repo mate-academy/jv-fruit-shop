@@ -1,10 +1,10 @@
 package core.basesyntax.dataservice;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.exceptions.OperationNotFoundException;
 import core.basesyntax.operationstrategy.Operation;
 import core.basesyntax.operationstrategy.OperationStrategy;
 import core.basesyntax.operationstrategy.OperationStrategyImpl;
-import core.basesyntax.db.Storage;
-import core.basesyntax.exceptions.OperationNotFoundException;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,7 +15,7 @@ public class ProcessData {
     private static final int indexOfOperationsType = 0;
     private static final int indexOfFruitType = 1;
     private static final int indexOfQuantity = 2;
-    private OperationStrategy operationStrategy = new OperationStrategyImpl();
+    private final OperationStrategy operationStrategy = new OperationStrategyImpl();
 
     public String processData(String dataFromFile) {
         String[] data = dataFromFile.split(LINE_SEPARATOR);

@@ -2,7 +2,6 @@ package core.basesyntax.operationstrategy.handler;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
-import core.basesyntax.operationstrategy.handler.OperationHandler;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
