@@ -20,6 +20,6 @@ public class PurchaseOperation implements OperationStrategy {
                     "There are not enough fruits. Amount: " + oldValue
                             + ", but need " + subtrahend);
         }
-        return  oldValue - subtrahend;
+        return oldValue - subtrahend;
     }
 }

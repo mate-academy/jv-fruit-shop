@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.CsvFileException;
 import core.basesyntax.service.FileReader;
+import core.basesyntax.util.validator.PathValidator;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +12,7 @@ public class CsvFileReader implements FileReader {
     private final Path source;
 
     public CsvFileReader(Path source) {
+        PathValidator.validatePath(source);
         this.source = source;
     }
 

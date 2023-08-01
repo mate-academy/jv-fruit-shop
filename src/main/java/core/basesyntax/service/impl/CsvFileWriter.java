@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.CsvFileException;
 import core.basesyntax.service.FileWriter;
+import core.basesyntax.util.validator.PathValidator;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,6 +12,7 @@ public class CsvFileWriter implements FileWriter {
     private final Path destiny;
 
     public CsvFileWriter(Path destiny) {
+        PathValidator.validatePath(destiny);
         this.destiny = destiny;
     }
 
