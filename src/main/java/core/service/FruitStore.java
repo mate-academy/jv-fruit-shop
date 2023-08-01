@@ -1,7 +1,10 @@
 package core.service;
 
-import core.Transactions.*;
-
+import core.transactions.BalanceOperationHandler;
+import core.transactions.OperationHandler;
+import core.transactions.PurchaseOperationHandler;
+import core.transactions.ReturnOperationHandler;
+import core.transactions.SupplyOperationHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,10 +47,8 @@ public class FruitStore {
             int number = entry.getValue();
             result.add(new OperationData(OperationType.B, product, number));
         }
-
         return result;
     }
-
 
     public String convertListToString(List<OperationData> dataList) {
         StringBuilder sb = new StringBuilder();

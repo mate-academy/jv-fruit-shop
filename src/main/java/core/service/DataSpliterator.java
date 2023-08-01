@@ -1,6 +1,5 @@
 package core.service;
 
-import core.service.OperationType;
 import core.service.impl.Spliterator;
 import java.util.ArrayList;
 import java.util.List;

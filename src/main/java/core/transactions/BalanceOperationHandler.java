@@ -1,6 +1,6 @@
-package core.Transactions;
+package core.transactions;
 
-import core.Exception.FruitException;
+import core.exception.FruitException;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override
