@@ -1,7 +1,8 @@
 package service.transaction.strategy.type;
 
+import java.util.Map;
 import model.Transaction;
 
 public interface TransactionHandler {
-    void perform(Transaction transaction);
+    void perform(Map<String, Integer> stock, Transaction transaction);
 }

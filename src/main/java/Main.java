@@ -29,7 +29,7 @@ public class Main {
         DbDao dbDao = new StorageDao();
         FileReader fileReader = new CsvFileReader();
         TransactionParser transactionParser = new CsvTransactionParser();
-        TransactionExecutor transactionExecutor = buildTransactionExecutor(dbDao);
+        TransactionExecutor transactionExecutor = new ProductTransactionExecutor(strategy(), dbDao);
         Reporter reporter = new DbReporter(dbDao);
         FileWriter fileWriter = new CsvFileWriter();
 
@@ -40,13 +40,13 @@ public class Main {
         fileWriter.write(report);
     }
 
-    private static TransactionExecutor buildTransactionExecutor(DbDao dbDao) {
+    private static TransactionStrategy strategy() {
         Map<Transaction.Type, TransactionHandler> handlers = new HashMap<>();
-        handlers.put(Transaction.Type.BALANCE, new BalanceTransaction(dbDao));
-        handlers.put(Transaction.Type.PURCHASE, new PurchaseTransaction(dbDao));
-        handlers.put(Transaction.Type.SUPPLY, new SupplyTransaction(dbDao));
-        handlers.put(Transaction.Type.RETURN, new ReturnTransaction(dbDao));
+        handlers.put(Transaction.Type.BALANCE, new BalanceTransaction());
+        handlers.put(Transaction.Type.PURCHASE, new PurchaseTransaction());
+        handlers.put(Transaction.Type.SUPPLY, new SupplyTransaction());
+        handlers.put(Transaction.Type.RETURN, new ReturnTransaction());
         TransactionStrategy transactionStrategy = new ProductTransactionStrategy(handlers);
-        return new ProductTransactionExecutor(transactionStrategy);
+        return transactionStrategy;
     }
 }
