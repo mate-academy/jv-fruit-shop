@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         ReportFactory reportFactory = new ReportFactory();
         String filePath = "src/main/java/core/db/dataBase.csv";
-        String pathTo = "test";
+        String pathTo = "test333";
         reportFactory.start(filePath, pathTo);
     }
 }

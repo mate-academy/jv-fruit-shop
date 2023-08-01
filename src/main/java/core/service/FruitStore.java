@@ -1,5 +1,6 @@
 package core.service;
 
+import core.dao.StorageDaoImpl;
 import core.transactions.BalanceOperationHandler;
 import core.transactions.OperationHandler;
 import core.transactions.PurchaseOperationHandler;
@@ -22,27 +23,26 @@ public class FruitStore {
     }
 
     public List<OperationData> processOperations(List<OperationData> dataList) {
-        Map<String, Integer> fruitQuantityMap = new HashMap<>();
+        StorageDaoImpl storageDao = new StorageDaoImpl();
+        Map<String, Integer> allData = storageDao.getAll();
 
         for (OperationData data : dataList) {
             String product = data.getProduct();
             int number = data.getQuantity();
-            int currentQuantity = fruitQuantityMap.getOrDefault(product, 0);
-            int newQuantity = 0;
+            int currentQuantity = allData.getOrDefault(product, 0);
 
             OperationType operationType = data.getOperationType();
             OperationHandler handler = operationHandlers.get(operationType);
 
             if (handler != null) {
-                newQuantity = handler.getTransaction(currentQuantity, number);
+                int newQuantity = handler.getTransaction(currentQuantity, number);
+                allData.put(product, newQuantity);
             }
-
-            fruitQuantityMap.put(product, newQuantity);
         }
 
         List<OperationData> result = new ArrayList<>();
 
-        for (Map.Entry<String, Integer> entry : fruitQuantityMap.entrySet()) {
+        for (Map.Entry<String, Integer> entry : allData.entrySet()) {
             String product = entry.getKey();
             int number = entry.getValue();
             result.add(new OperationData(OperationType.B, product, number));
