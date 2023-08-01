@@ -8,14 +8,14 @@ import core.basesyntax.handlers.SupplyHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FileReader;
-import core.basesyntax.service.GenerateReport;
-import core.basesyntax.service.ParseData;
-import core.basesyntax.service.ProcessData;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.DataParser;
+import core.basesyntax.service.TransactionExecutor;
 import core.basesyntax.service.ReportWriter;
 import core.basesyntax.service.implemantation.CsvFileReaderImpl;
-import core.basesyntax.service.implemantation.GenerateReportImpl;
-import core.basesyntax.service.implemantation.ParseDateImpl;
-import core.basesyntax.service.implemantation.ProcessDataImpl;
+import core.basesyntax.service.implemantation.ReportGeneratorImpl;
+import core.basesyntax.service.implemantation.DataParserImpl;
+import core.basesyntax.service.implemantation.TransactionExecutorImpl;
 import core.basesyntax.service.implemantation.ReportWriterImpl;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * Feel free to remove this class and create your own.
  */
-public class HelloWorld {
+public class Main {
     private static final Map<Operation, OperationHandler> operationHandlerMap = Map.of(
             Operation.BALANCE, new BalanceHandler(),
             Operation.SUPPLY, new SupplyHandler(),
@@ -33,11 +33,11 @@ public class HelloWorld {
     public static void main(String[] args) {
         FileReader fileReader = new CsvFileReaderImpl();
         List<String> data = fileReader.readDate("src/main/resources/input.csv");
-        ParseData<FruitTransaction> parseData = new ParseDateImpl();
+        DataParser parseData = new DataParserImpl();
         List<FruitTransaction> fruitTransactions = parseData.parse(data);
-        ProcessData<FruitTransaction> processData = new ProcessDataImpl();
+        TransactionExecutor processData = new TransactionExecutorImpl();
         processData.processDate(fruitTransactions, operationHandlerMap);
-        GenerateReport generateReport = new GenerateReportImpl();
+        ReportGenerator generateReport = new ReportGeneratorImpl();
         String report = generateReport.generateReport();
         ReportWriter reportWriter = new ReportWriterImpl();
         reportWriter.writeReport(report, "src/main/resources/report");

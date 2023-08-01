@@ -3,16 +3,16 @@ package core.basesyntax.service.implemantation;
 import core.basesyntax.handlers.OperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.ProcessData;
+import core.basesyntax.service.TransactionExecutor;
 import core.basesyntax.strategy.StrategyOperation;
 import core.basesyntax.strategy.StrategyOperationImpl;
 import java.util.List;
 import java.util.Map;
 
-public class ProcessDataImpl implements ProcessData<FruitTransaction> {
+public class TransactionExecutorImpl implements TransactionExecutor {
     private final StrategyOperation strategyOperation;
 
-    public ProcessDataImpl() {
+    public TransactionExecutorImpl() {
         strategyOperation = new StrategyOperationImpl();
     }
 
