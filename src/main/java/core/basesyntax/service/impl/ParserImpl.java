@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Parser;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +12,7 @@ public class ParserImpl implements Parser {
     private static final int AMOUNT_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parse(List<String> data) {
+    public List<FruitTransaction> parseDataFromFile(List<String> data) {
         return data.stream()
                 .map(line -> line.split(COMMA_REGEX))
                 .map(this::createFruitTransaction)

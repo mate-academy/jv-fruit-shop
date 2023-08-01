@@ -33,8 +33,8 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String code;
         private static final Map<String, OperationType> ENUM_MAP;
+        private final String code;
 
         OperationType(String code) {
             this.code = code;
