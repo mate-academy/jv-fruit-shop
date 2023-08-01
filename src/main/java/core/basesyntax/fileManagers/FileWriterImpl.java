@@ -1,4 +1,4 @@
-package core.basesyntax.FileManagers;
+package core.basesyntax.fileManagers;
 
 import core.basesyntax.exceptions.FileException;
 import java.io.BufferedWriter;
@@ -9,6 +9,7 @@ import java.util.Map;
 public class FileWriterImpl implements FileWriter {
     private static final String PATH_TO_WRITE = "src/main/java/report.csv";
     private static final String COMA_SEPARATOR = ",";
+
     @Override
     public void writeReport(Map<String, Integer> data) {
         File file = new File(PATH_TO_WRITE);

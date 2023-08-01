@@ -1,4 +1,4 @@
-package core.basesyntax.FileManagers;
+package core.basesyntax.fileManagers;
 
 import core.basesyntax.exceptions.FileException;
 import java.io.BufferedReader;
@@ -13,7 +13,7 @@ public class FileReaderImpl implements FileReader {
     public List<String> getData(String filePath) {
         File file = new File(filePath);
         List<String> dataList = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(file))){
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(file))) {
             String dataLine = reader.readLine();
             while (dataLine != null) {
                 dataList.add(dataLine);

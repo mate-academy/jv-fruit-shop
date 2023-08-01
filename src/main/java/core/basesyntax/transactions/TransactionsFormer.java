@@ -1,7 +1,6 @@
-package core.basesyntax.Transactions;
+package core.basesyntax.transactions;
 
 import core.basesyntax.exceptions.InvalidOperationException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,9 @@ public class TransactionsFormer {
             }
             int quantity = Integer.parseInt(value[QUANTITY_INDEX]);
             if (quantity < 0) {
-                throw  new InvalidOperationException("Can't change quantity less than 0, line's quantity is " + quantity);
+                throw  new InvalidOperationException(
+                        "Can't change quantity less than 0, line's quantity is "
+                                + quantity);
             }
             FruitTransaction fruitTransaction = new FruitTransaction(
                     value[OPERATION_INDEX],

@@ -1,4 +1,4 @@
-package core.basesyntax.FileManagers;
+package core.basesyntax.fileManagers;
 
 import java.util.List;
 

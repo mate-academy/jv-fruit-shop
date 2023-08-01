@@ -1,4 +1,4 @@
-package core.basesyntax.Transactions;
+package core.basesyntax.transactions;
 
 import core.basesyntax.exceptions.InvalidOperationException;
 
