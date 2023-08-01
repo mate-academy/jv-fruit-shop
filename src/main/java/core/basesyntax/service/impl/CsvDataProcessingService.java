@@ -2,17 +2,17 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.DataConvertingToObjectsService;
+import core.basesyntax.service.DataConverterService;
 import core.basesyntax.service.DataProcessingService;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.operation.OperationHandler;
 
 public class CsvDataProcessingService implements DataProcessingService {
     private OperationStrategy operationStrategy;
-    private DataConvertingToObjectsService dataConvertingToObjects;
+    private DataConverterService dataConvertingToObjects;
 
     public CsvDataProcessingService(OperationStrategy operationStrategy,
-                                    DataConvertingToObjectsService dataConvertingToObjects) {
+                                    DataConverterService dataConvertingToObjects) {
         this.operationStrategy = operationStrategy;
         this.dataConvertingToObjects = dataConvertingToObjects;
     }

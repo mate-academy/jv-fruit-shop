@@ -1,15 +1,18 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.DataConvertingToObjectsService;
+import core.basesyntax.service.DataConverterService;
 import core.basesyntax.service.DataProcessingService;
 import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.impl.CsvDataConvertingToObjectsService;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.impl.CsvDataConverterService;
 import core.basesyntax.service.impl.CsvDataProcessingService;
 import core.basesyntax.service.impl.CsvFileReaderService;
+import core.basesyntax.service.impl.CsvFileWriterService;
 import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
@@ -28,11 +31,15 @@ public class Main {
     public static void main(String[] args) {
         File file = new File("src/main/resources/input.csv");
         FileReaderService fileReaderService = new CsvFileReaderService(file);
-        DataConvertingToObjectsService dataConverting = new CsvDataConvertingToObjectsService(fileReaderService);
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        DataProcessingService dataProcessingService = new CsvDataProcessingService(operationStrategy,
-                                                                                    dataConverting);
+        DataConverterService dataConverting = new CsvDataConverterService(fileReaderService);
+
+        OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
+        DataProcessingService dataProcessingService = new CsvDataProcessingService(strategy,
+                                                                                dataConverting);
         dataProcessingService.importDataToStorage();
-        System.out.println(Storage.storage);
+        ReportCreatorService reportCreator = new ReportCreatorServiceImpl();
+        String report = reportCreator.createReport();
+        FileWriterService fileWriterService = new CsvFileWriterService();
+        fileWriterService.writeToFile("src/main/resources/", report);
     }
 }

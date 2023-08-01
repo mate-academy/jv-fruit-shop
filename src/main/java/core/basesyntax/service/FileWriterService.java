@@ -1,7 +1,5 @@
 package core.basesyntax.service;
 
-import java.io.File;
-
 public interface FileWriterService {
-    void writeToFile(File file);
+    void writeToFile(String path, String report);
 }

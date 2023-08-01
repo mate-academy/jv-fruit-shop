@@ -4,20 +4,10 @@ import core.basesyntax.exception.InvalidDataFormatException;
 import java.util.Optional;
 
 public enum Operation {
-    BALANCE("b"),
-    SUPPLY("s"),
-    PURCHASE("p"),
-    RETURN("r");
-
-    private String operationSign;
-
-    Operation(String operationSign) {
-        this.operationSign = operationSign;
-    }
-
-    public String getOperationSign() {
-        return operationSign;
-    }
+    BALANCE,
+    SUPPLY,
+    PURCHASE,
+    RETURN;
 
     public static Operation of(String operationSign) {
         Optional<Operation> operation;
