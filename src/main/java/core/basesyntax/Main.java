@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReaderService;
@@ -21,7 +21,7 @@ public class Main {
     private static final WriterService WRITER_SERVICE = new CsvWriterService();
     private static final Parser PARSER_SERVICE = new ParserImpl();
     private static final OperationStrategy OPERATION_STRATEGY = new OperationStrategyImpl();
-    private static final FruitDao FRUIT_DAO = new FruitDaoImpl(OPERATION_STRATEGY);
+    private static final FruitService FRUIT_SERVICE = new FruitServiceImpl(OPERATION_STRATEGY);
     private static final ReportService REPORT_SERVICE = new ReportServiceImpl();
     private static final String INPUT_FILE_PATH = "src/main/resources/CsvInputData.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/CsvReport.csv";
@@ -29,8 +29,8 @@ public class Main {
     public static void main(String[] args) {
         List<String> fileData = READER_SERVICE.read(INPUT_FILE_PATH);
         List<FruitTransaction> transactions = PARSER_SERVICE.parseDataFromFile(fileData);
-        FRUIT_DAO.addAll(transactions);
-        Map<String, Integer> dataFromDatabase = FRUIT_DAO.getAll();
+        FRUIT_SERVICE.addAll(transactions);
+        Map<String, Integer> dataFromDatabase = FRUIT_SERVICE.getAll();
         String report = REPORT_SERVICE.createReport(dataFromDatabase);
         WRITER_SERVICE.write(report, OUTPUT_FILE_PATH);
     }
