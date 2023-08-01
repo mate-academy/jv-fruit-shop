@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
     private final OperationStrategy strategy;
+    private final StorageDao storageDao = new StorageDaoImpl();
 
     public FruitTransactionServiceImpl(OperationStrategy strategy) {
         this.strategy = strategy;
@@ -21,23 +22,22 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     public Map<String, Integer> addOrUpdate(List<FruitTransaction> fruitTransactions) {
         Map<String, Integer> fruitsBalance = new HashMap<>();
         for (FruitTransaction fruitTransaction : fruitTransactions) {
-            countQuantityForFruit(fruitsBalance, fruitTransaction);
+            calculateOperationForFruit(fruitsBalance, fruitTransaction);
         }
-        StorageDao storageDao = new StorageDaoImpl();
         storageDao.addAll(fruitsBalance);
         return fruitsBalance;
     }
 
-    private void countQuantityForFruit(Map<String, Integer> fruitsBalance,
-                                       FruitTransaction fruitTransaction) {
+    private void calculateOperationForFruit(Map<String, Integer> fruitsBalance,
+                                            FruitTransaction fruitTransaction) {
         OperationHandler operationHandler =
                 strategy.get(fruitTransaction.getOperation());
-        int quantity = 0;
+        int quantity;
         int currentAmount = 0;
         if (fruitsBalance.containsKey(fruitTransaction.getFruit())) {
             currentAmount = fruitsBalance.get(fruitTransaction.getFruit());
         }
-        quantity = operationHandler.getTransaction(
+        quantity = operationHandler.countQuantity(
                 currentAmount, fruitTransaction.getQuantity());
         fruitsBalance.put(fruitTransaction.getFruit(), quantity);
     }

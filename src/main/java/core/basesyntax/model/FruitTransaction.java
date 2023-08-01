@@ -48,7 +48,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new FruitTransactionException("wrong operation parsed: " + operationLetter);
+            throw new FruitTransactionException("unsopported operator: " + operationLetter);
         }
     }
 }

@@ -7,11 +7,11 @@ import java.util.Map;
 
 public class FruitTransactionsReportServiceImpl implements FruitTransactionsReportService {
 
-    public static final String COMMA = ",";
+    private static final String COMMA = ",";
+    private StorageDao storageDao = new StorageDaoImpl();
 
     @Override
     public String createReport() {
-        StorageDao storageDao = new StorageDaoImpl();
         Map<String, Integer> reportMap = storageDao.getAll();
         StringBuilder report = new StringBuilder("fruit,quantity")
                 .append(System.lineSeparator());

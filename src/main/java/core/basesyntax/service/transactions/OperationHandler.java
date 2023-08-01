@@ -1,5 +1,5 @@
 package core.basesyntax.service.transactions;
 
 public interface OperationHandler {
-    int getTransaction(int currentAmount, int operationAmount);
+    int countQuantity(int currentAmount, int operationAmount);
 }

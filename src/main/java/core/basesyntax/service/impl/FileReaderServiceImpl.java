@@ -7,17 +7,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FileReaderServiceImpl implements FileReaderService {
-    public static final int INDEX_OF_START_TRANSACTIONS = 1;
+    private static final int INDEX_OF_START_TRANSACTIONS = 1;
 
     @Override
     public List<String> readFromFile(String fileName) {
         Path path = Paths.get(fileName);
-        System.out.println();
         List<String> strings;
-        try {
-            strings = Files.readAllLines(path);
+        try (Stream<String> lines = Files.lines(path)) {
+            strings = lines.collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + fileName,e);
         }
