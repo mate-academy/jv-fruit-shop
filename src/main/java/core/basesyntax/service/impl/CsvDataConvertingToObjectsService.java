@@ -4,7 +4,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConvertingToObjectsService;
 import core.basesyntax.service.FileReaderService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +38,4 @@ public class CsvDataConvertingToObjectsService implements DataConvertingToObject
         validator.isValid(operation, name, quantity);
         return new Fruit(name, quantity, Operation.of(operation));
     }
-
-
 }

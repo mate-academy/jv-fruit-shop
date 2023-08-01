@@ -5,7 +5,6 @@ public class Fruit {
     private Integer quantity;
     private Operation operation;
 
-
     public Fruit(String name, Integer quantity, Operation operation) {
         this.name = name;
         this.quantity = quantity;
@@ -33,8 +32,8 @@ public class Fruit {
             return false;
         }
         if (o.getClass().equals(Fruit.class)) {
-         Fruit fruit = (Fruit) o;
-         return (this.name == fruit.name)
+            Fruit fruit = (Fruit) o;
+            return (this.name == fruit.name)
                  || (this.name != null && this.name.equals(fruit.name))
                  && (this.quantity == fruit.quantity)
                  || (this.quantity != null && this.quantity.equals(fruit.quantity))

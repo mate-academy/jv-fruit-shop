@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import core.basesyntax.exception.InvalidDataFormatException;
-
 import java.util.Optional;
 
 public enum Operation {
@@ -21,7 +20,7 @@ public enum Operation {
     }
 
     public static Operation of(String operationSign) {
-        Optional<Operation> operation = Optional.empty();
+        Optional<Operation> operation;
 
         switch (operationSign) {
             case "b" :
@@ -36,7 +35,10 @@ public enum Operation {
             case "r" :
                 operation = Optional.of(Operation.RETURN);
                 break;
+            default:
+                operation = Optional.empty();
         }
-        return operation.orElseThrow(() -> new InvalidDataFormatException("The " + operationSign + " doesn't exist!"));
+        return operation.orElseThrow(() -> new InvalidDataFormatException("The " + operationSign
+                                                                            + " doesn't exist!"));
     }
 }
