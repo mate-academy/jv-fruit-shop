@@ -26,5 +26,4 @@ public class ReaderCsvFile {
         output.remove(0);
         return output;
     }
-
 }

@@ -2,11 +2,9 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-
 import java.util.ArrayList;
 
 public class TransactionParserImpl implements TransactionParser {
-
     @Override
     public ArrayList<FruitTransaction> parseCsvRow(ArrayList<String> csvRowList) {
         ArrayList<FruitTransaction> output = new ArrayList<>();
