@@ -35,10 +35,6 @@ public class Transaction {
             this.code = code;
         }
 
-        public String getCode() {
-            return code;
-        }
-
         public static Type byCode(String code) {
             for (Type type : Type.values()) {
                 if (type.code.equals(code)) {

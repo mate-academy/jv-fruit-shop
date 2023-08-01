@@ -15,7 +15,7 @@ public class CsvFileWriter implements FileWriter {
         try {
             Files.write(Path.of(report.getPath()), data);
         } catch (IOException e) {
-            throw new RuntimeException("File cannot by written");
+            throw new RuntimeException("File cannot bе written");
         }
     }
 }

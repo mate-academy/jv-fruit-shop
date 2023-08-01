@@ -21,7 +21,7 @@ public class DbReporter implements Reporter {
         List<String> report = new ArrayList<>();
         report.add(HEAD_INDEX, HEAD_TEXT);
         data.entrySet().stream()
-                .forEach(x -> report.add(x.getKey() + SPLIT_SYMBOL + x.getValue()));
+                .forEach(entry -> report.add(entry.getKey() + SPLIT_SYMBOL + entry.getValue()));
         return report;
     }
 }
