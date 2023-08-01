@@ -1,7 +1,7 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.transactions.FruitTransaction;
 import core.basesyntax.exceptions.InvalidOperationException;
+import core.basesyntax.transactions.FruitTransaction;
 
 public class OperationStrategyImpl implements OperationStrategy {
     @Override

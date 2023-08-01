@@ -23,7 +23,7 @@ public class TransactionsFormer {
             }
             int quantity = Integer.parseInt(value[QUANTITY_INDEX]);
             if (quantity < 0) {
-                throw  new InvalidOperationException(
+                throw new InvalidOperationException(
                         "Can't change quantity less than 0, line's quantity is "
                                 + quantity);
             }

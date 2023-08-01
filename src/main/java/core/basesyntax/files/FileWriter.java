@@ -1,4 +1,4 @@
-package core.basesyntax.fileManagers;
+package core.basesyntax.files;
 
 import java.util.Map;
 

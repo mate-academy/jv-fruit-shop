@@ -1,4 +1,4 @@
-package core.basesyntax.fileManagers;
+package core.basesyntax.files;
 
 import core.basesyntax.exceptions.FileException;
 import java.io.BufferedWriter;

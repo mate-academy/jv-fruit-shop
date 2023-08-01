@@ -1,11 +1,11 @@
 package core.basesyntax;
 
-import core.basesyntax.fileManagers.FileReaderImpl;
-import core.basesyntax.fileManagers.FileWriterImpl;
-import core.basesyntax.transactions.FruitTransaction;
-import core.basesyntax.transactions.TransactionsFormer;
-import core.basesyntax.transactions.TransactionExecutor;
 import core.basesyntax.db.Storage;
+import core.basesyntax.files.FileReaderImpl;
+import core.basesyntax.files.FileWriterImpl;
+import core.basesyntax.transactions.FruitTransaction;
+import core.basesyntax.transactions.TransactionExecutor;
+import core.basesyntax.transactions.TransactionsFormer;
 import java.util.List;
 
 public class Main {
