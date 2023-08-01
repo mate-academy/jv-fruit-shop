@@ -13,13 +13,20 @@ public class TransactionMapperImpl implements TransactionMapper {
     private static final int TYPE_COLUMN = 0;
     private static final int FRUIT_COLUMN = 1;
     private static final int QUANTITY_COLUMN = 2;
+    private static final String RECORD_PATTERN = "^\\w,\\w+,\\d+$";
 
     @Override
     public List<Transaction> mapAll(List<String> source) {
-        return source.stream().skip(1).map(this::mapToTransaction).collect(Collectors.toList());
+        return source.stream()
+                .skip(1)
+                .map(this::mapToTransaction)
+                .collect(Collectors.toList());
     }
 
     private Transaction mapToTransaction(String line) {
+        if (!line.matches(RECORD_PATTERN)) {
+            throw new IllegalArgumentException("Invalid data provided: " + line);
+        }
         String[] record = line.split(COLUMN_SPLIT_REGEX);
         Transaction.Operation operation = getOperationByCode(record[TYPE_COLUMN]);
         Fruit fruit = new Fruit(record[FRUIT_COLUMN]);
