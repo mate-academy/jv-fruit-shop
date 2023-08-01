@@ -10,8 +10,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        final String inputFilePath = "src/main/resources/input.csv";
+        final String reportFilePath = "src/main/resources/report.csv";
         FileReaderImpl fileReader = new FileReaderImpl();
-        List<String> data = fileReader.getData("src/main/java/input.csv");
+        List<String> data = fileReader.getData(inputFilePath);
 
         TransactionsFormer transactionsFormer = new TransactionsFormer();
         List<FruitTransaction> transactions = transactionsFormer.formTransactionList(data);
@@ -22,6 +24,6 @@ public class Main {
         }
 
         FileWriterImpl fileWriter = new FileWriterImpl();
-        fileWriter.writeReport(Storage.reportData);
+        fileWriter.writeReport(Storage.reportData, reportFilePath);
     }
 }

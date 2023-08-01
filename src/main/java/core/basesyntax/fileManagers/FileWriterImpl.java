@@ -7,12 +7,11 @@ import java.io.IOException;
 import java.util.Map;
 
 public class FileWriterImpl implements FileWriter {
-    private static final String PATH_TO_WRITE = "src/main/java/report.csv";
     private static final String COMA_SEPARATOR = ",";
 
     @Override
-    public void writeReport(Map<String, Integer> data) {
-        File file = new File(PATH_TO_WRITE);
+    public void writeReport(Map<String, Integer> data, String reportPath) {
+        File file = new File(reportPath);
         if (file.exists()) {
             file.delete();
         }

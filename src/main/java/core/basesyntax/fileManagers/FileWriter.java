@@ -3,5 +3,5 @@ package core.basesyntax.fileManagers;
 import java.util.Map;
 
 public interface FileWriter {
-    void writeReport(Map<String, Integer> data);
+    void writeReport(Map<String, Integer> data, String reportPath);
 }
