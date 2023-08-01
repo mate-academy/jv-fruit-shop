@@ -26,9 +26,9 @@ import java.util.Map;
  */
 public class Main {
     private static final String INPUT_FILE =
-            "src/main/java/resources/database";
+            "src/main/resources/database";
     private static final String REPORT_FILE =
-            "src/main/java/resources/ReportFile";
+            "src/main/resources/ReportFile";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationStrategyMap = new HashMap<>();
