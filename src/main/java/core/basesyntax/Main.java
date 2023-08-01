@@ -13,7 +13,6 @@ import core.basesyntax.service.impl.ParserImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.operation.OperationStrategy;
 import core.basesyntax.service.operation.OperationStrategyImpl;
-
 import java.util.List;
 import java.util.Map;
 
