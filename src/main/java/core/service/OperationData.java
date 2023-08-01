@@ -1,14 +1,14 @@
 package core.service;
 
 public class OperationData {
-    private String operationType;
+    private OperationType operationType;
     private String product;
-    private int number;
+    private int quantity;
 
-    public OperationData(String operationType, String product, int number) {
+    public OperationData(OperationType operationType, String product, int number) {
         this.operationType = operationType;
         this.product = product;
-        this.number = number;
+        this.quantity = number;
     }
 
     @Override
@@ -16,11 +16,11 @@ public class OperationData {
         return "OperationData{"
                 + "operationType='" + operationType + '\''
                 + ", product='" + product + '\''
-                + ", number=" + number
+                + ", number=" + quantity
                 + '}';
     }
 
-    public String getOperationType() {
+    public OperationType getOperationType() {
         return operationType;
     }
 
@@ -28,7 +28,7 @@ public class OperationData {
         return product;
     }
 
-    public int getNumber() {
-        return number;
+    public int getQuantity() {
+        return quantity;
     }
 }

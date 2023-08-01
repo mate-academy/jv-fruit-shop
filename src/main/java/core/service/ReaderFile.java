@@ -1,5 +1,6 @@
 package core.service;
 
+import core.readException.ReadException;
 import core.service.impl.Readable;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,9 +13,10 @@ public class ReaderFile implements Readable {
     public String read(String path) {
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             return reader.lines()
+                    .skip(1)
                     .collect(Collectors.joining(System.lineSeparator()));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + path, e);
+            throw new ReadException("Can't read data from file " + path);
         }
     }
 }

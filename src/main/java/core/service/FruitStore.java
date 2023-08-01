@@ -16,17 +16,18 @@ public class FruitStore {
 
         for (OperationData data : dataList) {
             String product = data.getProduct();
-            int number = data.getNumber();
+            int number = data.getQuantity();
             int currentQuantity = fruitQuantityMap.getOrDefault(product, 0);
             int newQuantity = 0;
 
-            switch (data.getOperationType()) {
-                case "b":
-                case "s":
-                case "r":
+            OperationType operationType = data.getOperationType();
+            switch (operationType) {
+                case B:
+                case S:
+                case R:
                     newQuantity = currentQuantity + number;
                     break;
-                case "p":
+                case P:
                     newQuantity = currentQuantity - number;
                     break;
                 default:
@@ -41,7 +42,7 @@ public class FruitStore {
         for (Map.Entry<String, Integer> entry : fruitQuantityMap.entrySet()) {
             String product = entry.getKey();
             int number = entry.getValue();
-            result.add(new OperationData("balance", product, number));
+            result.add(new OperationData(OperationType.B, product, number));
         }
 
         return result;
@@ -53,7 +54,7 @@ public class FruitStore {
         for (OperationData data : dataList) {
             sb.append(data.getProduct())
                     .append(",")
-                    .append(data.getNumber())
+                    .append(data.getQuantity())
                     .append("\n");
         }
 
