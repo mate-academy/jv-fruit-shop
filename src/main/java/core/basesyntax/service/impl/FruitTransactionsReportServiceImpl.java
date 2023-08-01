@@ -6,6 +6,9 @@ import core.basesyntax.service.FruitTransactionsReportService;
 import java.util.Map;
 
 public class FruitTransactionsReportServiceImpl implements FruitTransactionsReportService {
+
+    public static final String COMMA = ",";
+
     @Override
     public String createReport() {
         StorageDao storageDao = new StorageDaoImpl();
@@ -14,7 +17,7 @@ public class FruitTransactionsReportServiceImpl implements FruitTransactionsRepo
                 .append(System.lineSeparator());
         for (Map.Entry<String,Integer> entry : reportMap.entrySet()) {
             report.append(entry.getKey())
-                    .append(",")
+                    .append(COMMA)
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }

@@ -50,9 +50,5 @@ public class FruitTransaction {
             }
             throw new FruitTransactionException("wrong operation parsed: " + operationLetter);
         }
-
-        public String getCode() {
-            return code;
-        }
     }
 }
