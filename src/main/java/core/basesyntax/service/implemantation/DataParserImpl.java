@@ -25,7 +25,6 @@ public class DataParserImpl implements DataParser {
         return fruitTransactions;
     }
 
-
     private Operation getOperationByCode(String operationCode) {
         return Arrays.stream(Operation.values())
                 .filter(operation -> operation.getCode().equals(operationCode))

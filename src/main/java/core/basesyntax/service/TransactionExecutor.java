@@ -7,5 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface TransactionExecutor {
-    void processDate(List<FruitTransaction> data, Map<Operation, OperationHandler> operationHandlerMap);
+    void processDate(List<FruitTransaction> data,
+                     Map<Operation, OperationHandler> operationHandlerMap);
 }
