@@ -1,14 +1,21 @@
 package core.service;
 
+import core.Transactions.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FruitStore {
+    private Map<OperationType, OperationHandler> operationHandlers;
 
     public FruitStore() {
-
+        operationHandlers = new HashMap<>();
+        operationHandlers.put(OperationType.B, new BalanceOperationHandler());
+        operationHandlers.put(OperationType.S, new SupplyOperationHandler());
+        operationHandlers.put(OperationType.R, new ReturnOperationHandler());
+        operationHandlers.put(OperationType.P, new PurchaseOperationHandler());
     }
 
     public List<OperationData> processOperations(List<OperationData> dataList) {
@@ -21,17 +28,10 @@ public class FruitStore {
             int newQuantity = 0;
 
             OperationType operationType = data.getOperationType();
-            switch (operationType) {
-                case B:
-                case S:
-                case R:
-                    newQuantity = currentQuantity + number;
-                    break;
-                case P:
-                    newQuantity = currentQuantity - number;
-                    break;
-                default:
-                    break;
+            OperationHandler handler = operationHandlers.get(operationType);
+
+            if (handler != null) {
+                newQuantity = handler.getTransaction(currentQuantity, number);
             }
 
             fruitQuantityMap.put(product, newQuantity);
@@ -47,6 +47,7 @@ public class FruitStore {
 
         return result;
     }
+
 
     public String convertListToString(List<OperationData> dataList) {
         StringBuilder sb = new StringBuilder();

@@ -5,7 +5,7 @@ import core.service.FruitStore;
 import core.service.OperationData;
 import core.service.ReaderFile;
 import core.service.ReportWriter;
-import core.service.impl.Strategy;
+
 import java.util.List;
 
 public class ReportFactory implements Strategy {
