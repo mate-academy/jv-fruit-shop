@@ -1,9 +1,12 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.FruitTransaction;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    public static final List<FruitTransaction> fruitShopData = new ArrayList<>();
+    private static final Map<String, Integer> storage = new HashMap<>();
+
+    public static Map<String, Integer> getStorage() {
+        return storage;
+    }
 }
