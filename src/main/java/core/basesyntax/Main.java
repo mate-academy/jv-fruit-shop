@@ -22,8 +22,8 @@ import java.util.Map;
 public class Main {
     private static final Map<FruitTransaction.Operation, OperationHandler> mapOfHandlers =
             new HashMap<>();
-    private static final String filePath = "src/main/resources/fileOne.csv";
-    private static final String resultFilePath = "src/main/resources/resultOne.csv";
+    private static final String filePath = "src/main/resources/file.csv";
+    private static final String resultFilePath = "src/main/resources/result.csv";
     private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
     private static final FileConverter converterToObjectService = new FileConverterImpl();
     private static final ProccessDataImpl processData = new ProccessDataImpl();
