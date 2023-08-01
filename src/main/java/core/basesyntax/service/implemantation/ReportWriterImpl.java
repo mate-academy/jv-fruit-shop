@@ -1,7 +1,6 @@
 package core.basesyntax.service.implemantation;
 
 import core.basesyntax.service.ReportWriter;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

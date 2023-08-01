@@ -3,8 +3,6 @@ package core.basesyntax.service.implemantation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParseData;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +22,8 @@ public class ParseDateImpl implements ParseData<FruitTransaction> {
                 .map(transactions ->
                         new FruitTransaction(getOperationByCod(transactions[OPERATION_INDEX]),
                                 transactions[FRUIT_INDEX],
-                                Integer.parseInt(transactions[QUANTITY_INDEX]))).collect(Collectors.toList());
+                                Integer.parseInt(transactions[QUANTITY_INDEX])))
+                .collect(Collectors.toList());
         return fruitTransactions;
     }
 
@@ -32,7 +31,8 @@ public class ParseDateImpl implements ParseData<FruitTransaction> {
         return Arrays.stream(Operation.values())
                 .filter(operation -> operation.getCode().equals(operationCode))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Invalid operation code: " + operationCode));
+                .orElseThrow(() ->
+                        new RuntimeException("Invalid operation code: " + operationCode));
     }
 
 }

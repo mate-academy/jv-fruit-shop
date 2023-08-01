@@ -10,7 +10,7 @@ public class PurchaseHandler implements OperationHandler {
         }
         int quantityBeforePurchase = Storage.storage.get(fruit);
         int quantityAfterPurchase = quantityBeforePurchase - quantity;
-        if ( quantityAfterPurchase < 0) {
+        if (quantityAfterPurchase < 0) {
             throw new RuntimeException("There is not enough fruit in the warehouse");
         }
         Storage.storage.put(fruit, quantityAfterPurchase);
