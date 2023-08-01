@@ -23,7 +23,7 @@ import service.transaction.strategy.type.SupplyTransaction;
 import service.transaction.strategy.type.TransactionHandler;
 
 public class Main {
-    private static String RECORDS_FILE_NAME = "Records.csv";
+    private static final String RECORDS_FILE_NAME = "Records.csv";
 
     public static void main(String[] args) {
         DbDao dbDao = new StorageDao();
@@ -46,7 +46,6 @@ public class Main {
         handlers.put(Transaction.Type.PURCHASE, new PurchaseTransaction());
         handlers.put(Transaction.Type.SUPPLY, new SupplyTransaction());
         handlers.put(Transaction.Type.RETURN, new ReturnTransaction());
-        TransactionStrategy transactionStrategy = new ProductTransactionStrategy(handlers);
-        return transactionStrategy;
+        return new ProductTransactionStrategy(handlers);
     }
 }
