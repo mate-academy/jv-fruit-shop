@@ -10,15 +10,15 @@ public class PurchaseOperation implements OperationStrategy {
                 .computeIfPresent(fruit, (k, v) -> purchase(v, quantity));
         if (newValue == null) {
             throw new IllegalArgumentException(
-                    "Such fruit is not exist in the Storage: " + fruit.getName());
+                    "Such fruit does not exist in the Storage: " + fruit.getName());
         }
     }
 
     private Integer purchase(Integer oldValue, Integer subtrahend) {
         if (oldValue < subtrahend) {
             throw new IllegalArgumentException(
-                    "There are not enough fruits. Amount: " + oldValue
-                            + ", but need " + subtrahend);
+                    "There aren't enough fruits in the Storage. The amount is " + oldValue
+                            + ", but " + subtrahend + " are needed");
         }
         return oldValue - subtrahend;
     }
