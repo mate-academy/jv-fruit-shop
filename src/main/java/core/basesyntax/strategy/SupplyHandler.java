@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 
 public class SupplyHandler implements StoreOperationsHandler {
     @Override
-    public void operation(Storage storage, String product, int quantity) {
+    public void applyOperation(Storage storage, String product, int quantity) {
         supply(storage, product, quantity);
     }
 

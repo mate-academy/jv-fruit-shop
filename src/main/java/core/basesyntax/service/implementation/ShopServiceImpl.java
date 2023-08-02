@@ -3,10 +3,7 @@ package core.basesyntax.service.implementation;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
-import core.basesyntax.strategy.BalanceHandler;
-import core.basesyntax.strategy.PurchaseHandler;
-import core.basesyntax.strategy.ReturnHandler;
-import core.basesyntax.strategy.SupplyHandler;
+import core.basesyntax.strategy.StoreOperationsHandler;
 
 public class ShopServiceImpl implements ShopService {
     private Storage storage;
@@ -20,24 +17,8 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(FruitTransaction transaction) {
-        switch (transaction.getOperation()) {
-            case BALANCE:
-                new BalanceHandler()
-                        .operation(storage, transaction.getFruit(), transaction.getQuantity());
-                break;
-            case SUPPLY:
-                new SupplyHandler()
-                        .operation(storage, transaction.getFruit(), transaction.getQuantity());
-                break;
-            case RETURN:
-                new ReturnHandler()
-                        .operation(storage, transaction.getFruit(), transaction.getQuantity());
-                break;
-            case PURCHASE:
-                new PurchaseHandler()
-                        .operation(storage, transaction.getFruit(), transaction.getQuantity());
-                break;
-            default: throw new RuntimeException("Invalid operation attempted");
-        }
+        StoreOperationsHandler handler
+                = FruitTransaction.PROCESS_SELECTOR.get(transaction.getOperation());
+        handler.applyOperation(storage, transaction.getFruit(), transaction.getQuantity());
     }
 }

@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 
 public class PurchaseHandler implements StoreOperationsHandler {
     @Override
-    public void operation(Storage storage, String product, int quantity) {
+    public void applyOperation(Storage storage, String product, int quantity) {
         purchase(storage, product, quantity);
     }
 
