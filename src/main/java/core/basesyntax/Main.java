@@ -34,22 +34,7 @@ public class Main {
         actionHandlerMap.put(Task.ActionType.RETURN, new ReturnActionHandler());
         //Create list<Task> - all actions from file
         List<Task> tasks = new CreateTaskServiceImpl()
-                .createTasks(path -> {
-                    List<String[]> strLines = new ArrayList<>();
-                    try (CSVReader reader = new CSVReader(new FileReader(path))) {
-                        String[] nextLine;
-                        while ((nextLine = reader.readNext()) != null) {
-                            strLines.add(nextLine);
-                        }
-                    } catch (IOException e) {
-                        System.out.println("Cant open the file!");
-                        e.printStackTrace();
-                    } catch (CsvValidationException e) {
-                        System.out.println("CSV file is incorrect!");
-                        e.printStackTrace();
-                    }
-                    return strLines;
-                }, "inputFile.csv");
+                .createTasks(Main::readFileHelper, "inputFile.csv");
         //create database
         StoreDao dao = new StoreDaoImpl();
         ActionStrategy actionStrategy = new ActionStrategyImpl(actionHandlerMap);
@@ -64,5 +49,22 @@ public class Main {
         //additional print
         Map<String, Integer> storage = dao.getStorage();
         System.out.println(storage.toString());
+    }
+
+    private static List<String[]> readFileHelper(String path) {
+        List<String[]> strLines = new ArrayList<>();
+        try (CSVReader reader = new CSVReader(new FileReader(path))) {
+            String[] nextLine;
+            while ((nextLine = reader.readNext()) != null) {
+                strLines.add(nextLine);
+            }
+        } catch (IOException e) {
+            System.out.println("Cant open the file!");
+            e.printStackTrace();
+        } catch (CsvValidationException e) {
+            System.out.println("CSV file is incorrect!");
+            e.printStackTrace();
+        }
+        return strLines;
     }
 }
