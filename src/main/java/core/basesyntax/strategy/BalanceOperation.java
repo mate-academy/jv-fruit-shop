@@ -1,8 +1,10 @@
 package core.basesyntax.strategy;
 
-public class BalanceOperation implements OperationHandler {
+import core.basesyntax.db.Storage;
+
+public class BalanceOperationHandler implements OperationHandler {
     @Override
-    public void update(String fruit, Integer quantity) {
-        storage.getStorage().put(fruit, quantity);
+    public void handle(String fruit, Integer quantity) {
+        Storage.getStorage().put(fruit, quantity);
     }
 }
