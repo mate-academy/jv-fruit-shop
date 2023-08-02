@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.FruitTransactionException;
 import core.basesyntax.model.FruitTransaction;
 
-public class SubtractionOperationHandler implements OperationHandler {
+public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void executeOperation(FruitTransaction transaction) {
         int fruitAmountInStorage = getFruitAmountInStorage(transaction.getFruitName());
@@ -12,8 +12,8 @@ public class SubtractionOperationHandler implements OperationHandler {
         if (fruitAmountInStorage < fruitAmountInTransaction) {
             throw new FruitTransactionException(
                     "Can't execute the subtraction operation. Fruit amount of "
-                    + transaction.getFruitName() + " is " + fruitAmountInStorage
-                    + ", but subtraction amount is " + fruitAmountInTransaction);
+                            + transaction.getFruitName() + " is " + fruitAmountInStorage
+                            + ", but subtraction amount is " + fruitAmountInTransaction);
         }
         Storage.STORAGE.replace(transaction.getFruitName(),
                 fruitAmountInStorage - fruitAmountInTransaction);

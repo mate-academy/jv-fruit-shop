@@ -1,8 +1,7 @@
 package core.basesyntax.model;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class FruitTransaction {
     private final OperationType operation;
@@ -10,7 +9,7 @@ public class FruitTransaction {
     private final int amount;
 
     public FruitTransaction(String operation, String fruit, int amount) {
-        this.operation = OperationType.get(operation);
+        this.operation = OperationType.findOperation(operation);
         this.name = fruit;
         this.amount = amount;
     }
@@ -33,10 +32,9 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private static final Map<String, OperationType> ENUM_MAP;
         private final String code;
 
-        OperationType(String code) {
+        private OperationType(String code) {
             this.code = code;
         }
 
@@ -44,16 +42,12 @@ public class FruitTransaction {
             return code;
         }
 
-        static {
-            Map<String, OperationType> map = new ConcurrentHashMap<>();
-            for (OperationType instance : OperationType.values()) {
-                map.put(instance.getCode().toLowerCase(), instance);
-            }
-            ENUM_MAP = Collections.unmodifiableMap(map);
-        }
-
-        public static OperationType get(String name) {
-            return ENUM_MAP.get(name.toLowerCase());
+        public static OperationType findOperation(String code) {
+            return Arrays.stream(OperationType.values())
+                    .filter(operationType -> operationType.getCode().equals(code))
+                    .findFirst().orElseThrow(() ->
+                            new NoSuchElementException("Invalid operation type. Operation code: "
+                                            + code));
         }
     }
 }
