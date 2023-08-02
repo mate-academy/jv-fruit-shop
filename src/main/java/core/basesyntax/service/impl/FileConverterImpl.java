@@ -14,6 +14,7 @@ public class FileConverterImpl implements FileConverter {
     @Override
     public List<FruitTransaction> convertToObjects(List<String> data) {
         return data.stream()
+                .skip(1)
                 .map(this::parseFruitTransaction)
                 .collect(Collectors.toList());
     }

@@ -20,31 +20,31 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final Map<FruitTransaction.Operation, OperationHandler> mapOfHandlers =
-            new HashMap<>();
-    private static final String filePath = "src/main/resources/file.csv";
-    private static final String resultFilePath = "src/main/resources/result.csv";
-    private static final FileReaderService fileReaderService = new FileReaderServiceImpl();
-    private static final FileConverter converterToObjectService = new FileConverterImpl();
-    private static final ProccessDataImpl processData = new ProccessDataImpl();
-    private static final ReportGeneratorService reportGenerator = new ReportGeneratorServiceImpl();
-    private static final FileWriterService fileWriterService = new FileWriterServiceImpl();
-
     public static void main(String[] args) {
+        final String filePath = "src/main/resources/file.csv";
+        final String resultFilePath = "src/main/resources/result.csv";
+
+        final Map<FruitTransaction.Operation, OperationHandler> mapOfHandlers =
+                new HashMap<>();
         mapOfHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         mapOfHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         mapOfHandlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
         mapOfHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
 
+        final FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> dataFromFile = fileReaderService.readFromFile(filePath);
 
+        final FileConverter converterToObjectService = new FileConverterImpl();
         List<FruitTransaction> objectsFromData = converterToObjectService
                 .convertToObjects(dataFromFile);
 
+        final ProccessDataImpl processData = new ProccessDataImpl();
         processData.handleOperations(objectsFromData, mapOfHandlers);
 
+        final ReportGeneratorService reportGenerator = new ReportGeneratorServiceImpl();
         String report = reportGenerator.generateReport();
 
+        final FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeReportToFile(resultFilePath, report);
     }
 }

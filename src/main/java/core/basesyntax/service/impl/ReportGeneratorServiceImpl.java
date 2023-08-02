@@ -7,8 +7,9 @@ import java.util.stream.Collectors;
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     @Override
     public String generateReport() {
-        return Storage.STORAGE.entrySet().stream()
-                .map(entry -> entry.getKey() + "," + entry.getValue())
-                .collect(Collectors.joining(System.lineSeparator()));
+        return "fruit,quantity" + System.lineSeparator()
+                + Storage.STORAGE.entrySet().stream()
+                        .map(entry -> entry.getKey() + "," + entry.getValue())
+                        .collect(Collectors.joining(System.lineSeparator()));
     }
 }
