@@ -1,4 +1,4 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParser;
@@ -12,8 +12,7 @@ public class DataParserImpl implements DataParser {
     private static final int AMOUNT_INDEX = 2;
     private static final String LINE_SEPARATOR = ",";
 
-    @Override
-    public List<FruitTransaction> parseDate(List<String> dataFromFile) {
+    public List<FruitTransaction> parseData(List<String> dataFromFile) {
         return dataFromFile.stream()
                 .skip(1)
                 .map(this::splitRow)

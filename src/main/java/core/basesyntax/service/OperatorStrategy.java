@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operators.Operator;
+import core.basesyntax.operators.OperationHandler;
 
 public interface OperatorStrategy {
-    Operator operatorHandler(FruitTransaction.Operation operator);
+    OperationHandler operatorHandler(FruitTransaction.Operation operator);
 }

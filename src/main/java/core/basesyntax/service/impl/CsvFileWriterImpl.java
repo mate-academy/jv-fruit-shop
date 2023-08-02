@@ -1,4 +1,4 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriter;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CsvFileWriterImpl implements FileWriter {
     @Override
-    public void writeInCsvFile(List<String> report, String fileName) {
+    public void writeToFile(List<String> report, String fileName) {
         Path filePath = Paths.get(fileName);
         try {
             Files.write(filePath, report);

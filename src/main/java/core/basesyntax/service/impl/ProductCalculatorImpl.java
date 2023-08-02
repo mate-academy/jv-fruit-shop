@@ -1,7 +1,7 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operators.Operator;
+import core.basesyntax.operators.OperationHandler;
 import core.basesyntax.service.OperatorStrategy;
 import core.basesyntax.service.ProductCalculator;
 import java.util.List;
@@ -16,8 +16,10 @@ public class ProductCalculatorImpl implements ProductCalculator {
     @Override
     public void calculateProducts(List<FruitTransaction> transactions) {
         for (FruitTransaction fruitTransaction : transactions) {
-            Operator operator = operatorStrategy.operatorHandler(fruitTransaction.getOperation());
-            operator.doReportOperation(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+            OperationHandler operationHandler
+                    = operatorStrategy.operatorHandler(fruitTransaction.getOperation());
+            operationHandler.applyOperation(fruitTransaction.getFruit(),
+                    fruitTransaction.getQuantity());
         }
     }
 }

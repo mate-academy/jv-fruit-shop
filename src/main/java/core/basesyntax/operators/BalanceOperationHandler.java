@@ -2,9 +2,9 @@ package core.basesyntax.operators;
 
 import core.basesyntax.db.Storage;
 
-public class BalanceOperator implements Operator {
+public class BalanceOperationHandler implements OperationHandler {
     @Override
-    public void doReportOperation(String product, int amount) {
+    public void applyOperation(String product, int amount) {
         Storage.storage.put(product, amount);
     }
 }
