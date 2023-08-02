@@ -1,7 +1,7 @@
-package core.basesyntax.operationstrategy;
+package core.basesyntax.strategy;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.operationstrategy.handler.OperationHandler;
+import core.basesyntax.strategy.handler.OperationHandler;
 
 public interface OperationStrategy {
     OperationHandler getOperationHandler(Operation operation);
