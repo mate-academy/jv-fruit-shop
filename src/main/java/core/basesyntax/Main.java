@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operations.BalanceOperation;
@@ -14,7 +13,7 @@ import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ReportWriter;
 import core.basesyntax.service.StrategyService;
-import core.basesyntax.service.impl.DataParsesImpl;
+import core.basesyntax.service.impl.DataParserImpl;
 import core.basesyntax.service.impl.DataReaderImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
@@ -25,17 +24,17 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String inputDbPath = "src/main/resources/inputDB.csv";
+    private static final String reportPath = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
-        final String inputDbPath = "src/main/resources/inputDB.csv";
-        final String reportPath = "src/main/resources/report.csv";
         Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE, new BalanceOperation());
         operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperation());
         operationHandlerMap.put(Operation.RETURN, new ReturnOperation());
         operationHandlerMap.put(Operation.SUPPLY, new SupplyOperation());
-        Storage storage = new Storage();
         DataReader dataReader = new DataReaderImpl();
-        DataParser dataParser = new DataParsesImpl();
+        DataParser dataParser = new DataParserImpl();
         FruitShopService fruitShopService = new FruitShopServiceImpl();
         ReportCreator reportCreator = new ReportCreatorImpl();
         ReportWriter reportWriter = new ReportWriterImpl();
@@ -44,9 +43,9 @@ public class Main {
         StrategyService strategyService = new StrategyServiceImpl(operationHandlerMap);
         for (FruitTransaction transaction : transactionList) {
             OperationHandler operation = strategyService.getHandler(transaction.getOperation());
-            fruitShopService.addToStorage(transaction, storage, operation);
+            fruitShopService.process(transaction, operation);
         }
-        String report = reportCreator.createReport(storage);
+        String report = reportCreator.createReport();
         reportWriter.writeReportToFile(report, reportPath);
     }
 }

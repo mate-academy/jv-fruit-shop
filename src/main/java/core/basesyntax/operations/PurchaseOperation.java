@@ -4,11 +4,15 @@ import core.basesyntax.db.Storage;
 
 public class PurchaseOperation implements OperationHandler {
     @Override
-    public void handle(String fruit, int quantity, Storage storage) {
-        if (storage.getStorage().get(fruit) - quantity < 0) {
+    public void handle(String fruit, int quantity) {
+        if (getFruitQuantity(fruit) - quantity < 0) {
             throw new RuntimeException("Current fruit quantity is "
-                    + storage.getStorage().get(fruit));
+                    + getFruitQuantity(fruit));
         }
-        storage.getStorage().put(fruit, storage.getStorage().get(fruit) - quantity);
+        Storage.storage.put(fruit, getFruitQuantity(fruit) - quantity);
+    }
+
+    private int getFruitQuantity(String fruit) {
+        return Storage.storage.get(fruit);
     }
 }
