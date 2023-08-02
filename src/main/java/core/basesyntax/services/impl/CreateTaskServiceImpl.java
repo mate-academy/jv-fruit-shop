@@ -1,9 +1,9 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.exception.ValidationDataException;
-import core.basesyntax.functions.ReadFile;
 import core.basesyntax.model.Task;
 import core.basesyntax.services.CreateTaskService;
+import core.basesyntax.services.ReadFileService;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class CreateTaskServiceImpl implements CreateTaskService {
     private static final int MAX_SIZE_LINE = 3;
 
     @Override
-    public List<Task> createTasks(ReadFile dataFromFile, String sourceFile) {
+    public List<Task> createTasks(ReadFileService dataFromFile, String sourceFile) {
         if (dataFromFile == null) {
             throw new ValidationDataException("ReadFile interface function "
                     + "is null! Dont know how to read file");

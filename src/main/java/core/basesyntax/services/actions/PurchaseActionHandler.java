@@ -6,7 +6,7 @@ public class PurchaseActionHandler implements ActionHandler {
     @Override
     public Map.Entry<String, Integer> actionStore(Map<String, Integer> copyDataFrmDB,
                                                   String nameOfGoods, Integer valueOfTask) {
-        test(copyDataFrmDB, nameOfGoods);
+        validData(copyDataFrmDB, nameOfGoods);
         Integer value = copyDataFrmDB.get(nameOfGoods);
         return Map.entry(nameOfGoods, value - valueOfTask);
     }

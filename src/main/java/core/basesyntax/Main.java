@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
 import core.basesyntax.dao.StoreDao;
 import core.basesyntax.dao.StoreDaoImpl;
 import core.basesyntax.model.Task;
@@ -16,10 +14,8 @@ import core.basesyntax.services.actions.SupplyActionHandler;
 import core.basesyntax.services.impl.ActionStrategyImpl;
 import core.basesyntax.services.impl.CreateTaskServiceImpl;
 import core.basesyntax.services.impl.ProcessStoreServiceImpl;
+import core.basesyntax.services.impl.ReadFileServiceImpl;
 import core.basesyntax.services.impl.WriteFileServiceImpl;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,12 +28,12 @@ public class Main {
         actionHandlerMap.put(Task.ActionType.SUPPLY, new SupplyActionHandler());
         actionHandlerMap.put(Task.ActionType.PURCHASE, new PurchaseActionHandler());
         actionHandlerMap.put(Task.ActionType.RETURN, new ReturnActionHandler());
+        ActionStrategy actionStrategy = new ActionStrategyImpl(actionHandlerMap);
         //Create list<Task> - all actions from file
         List<Task> tasks = new CreateTaskServiceImpl()
-                .createTasks(Main::readFileHelper, "inputFile.csv");
+                .createTasks(new ReadFileServiceImpl(), "resources/inputFile.csv");
         //create database
         StoreDao dao = new StoreDaoImpl();
-        ActionStrategy actionStrategy = new ActionStrategyImpl(actionHandlerMap);
         //Create main process of handle tasks
         ProcessStoreService handleTasks = new ProcessStoreServiceImpl(dao, actionStrategy);
         //handle tasks
@@ -45,26 +41,9 @@ public class Main {
         //write service created
         WriteFileService writeToFileService = new WriteFileServiceImpl();
         //write to file
-        writeToFileService.writeToFile(dao, "resultData.txt");
+        writeToFileService.writeToFile(dao, "resources/resultData.txt");
         //additional print
         Map<String, Integer> storage = dao.getStorage();
         System.out.println(storage.toString());
-    }
-
-    private static List<String[]> readFileHelper(String path) {
-        List<String[]> strLines = new ArrayList<>();
-        try (CSVReader reader = new CSVReader(new FileReader(path))) {
-            String[] nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                strLines.add(nextLine);
-            }
-        } catch (IOException e) {
-            System.out.println("Cant open the file!");
-            e.printStackTrace();
-        } catch (CsvValidationException e) {
-            System.out.println("CSV file is incorrect!");
-            e.printStackTrace();
-        }
-        return strLines;
     }
 }

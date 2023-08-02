@@ -17,11 +17,12 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
     }
 
     @Override
-    public void processAction(List<Task> tasks) {
+    public boolean processAction(List<Task> tasks) {
         for (Task task : tasks) {
             Map.Entry<String, Integer> resultTaskComplete = actionStrategy.get(task.getType())
                     .actionStore(storeDao.getStorage(), task.getLabelGoods(), task.getValue());
             storeDao.add(resultTaskComplete.getKey(), resultTaskComplete.getValue());
         }
+        return true;
     }
 }

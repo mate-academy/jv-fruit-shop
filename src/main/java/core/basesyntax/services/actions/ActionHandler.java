@@ -7,7 +7,7 @@ public interface ActionHandler {
     Map.Entry<String, Integer> actionStore(Map<String, Integer> copyDataFrmDB,
                                            String nameOfGoods, Integer valueOfTask);
 
-    default void test(Map<String, Integer> copyDataFrmDB, String nameOfGoods) {
+    default void validData(Map<String, Integer> copyDataFrmDB, String nameOfGoods) {
         if (copyDataFrmDB.isEmpty()) {
             throw new ValidationDataException("Task error db is empty");
         }

@@ -7,17 +7,21 @@ import java.io.IOException;
 import java.util.Map;
 
 public class WriteFileServiceImpl implements WriteFileService {
+    private static final String COMMA = ",";
+
     @Override
-    public void writeToFile(StoreDao dao, String fileName) {
+    public boolean writeToFile(StoreDao dao, String fileName) {
         Map<String, Integer> resultStore = dao.getStorage();
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write("fruit,quantity");
             for (Map.Entry<String, Integer> entry : resultStore.entrySet()) {
-                writer.write("\n" + entry.getKey() + "," + entry.getValue());
+                writer.write(System.lineSeparator() + entry.getKey() + COMMA + entry.getValue());
             }
         } catch (IOException e) {
             System.out.println("Cant write the data to the file " + fileName);
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 }
