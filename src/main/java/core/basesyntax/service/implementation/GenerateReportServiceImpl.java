@@ -7,17 +7,12 @@ import java.util.Map;
 public class GenerateReportServiceImpl implements GenerateReportService {
     public static final String COMA = ",";
     public static final String HEADER = "fruit,quantity";
-    private Storage storage;
-
-    public GenerateReportServiceImpl(Storage storage) {
-        this.storage = storage;
-    }
 
     @Override
     public String generate() {
         StringBuilder report = new StringBuilder();
         report.append(HEADER).append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : Storage.getStorage().entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
             report.append(entry.getKey())
                     .append(COMA)
                     .append(entry.getValue())

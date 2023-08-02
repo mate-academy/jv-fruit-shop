@@ -32,7 +32,7 @@ public class Main {
             shopService.process(transaction);
         }
 
-        GenerateReportService generateReportService = new GenerateReportServiceImpl(storage);
+        GenerateReportService generateReportService = new GenerateReportServiceImpl();
         String report = generateReportService.generate();
 
         WriteToFileService writeToFileService = new WriteToFileServiceImpl();
