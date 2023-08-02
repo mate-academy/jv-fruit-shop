@@ -13,7 +13,7 @@ public class CsvReaderServiceImpl implements CsvReaderService {
     public List<String> readFromFile(String fromFile) {
         File file = new File(fromFile);
         if (!file.exists() || !file.isFile()) {
-            throw new IllegalArgumentException("Not valid file: " + fromFile);
+            throw new IllegalArgumentException("File not found or not a valid file: " + fromFile);
         }
         List<String> list = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {

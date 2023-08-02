@@ -3,49 +3,56 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ActivitiesService;
 import core.basesyntax.service.CsvReaderService;
 import core.basesyntax.service.CsvWriterService;
-import core.basesyntax.service.DaoService;
+import core.basesyntax.service.DataConvertor;
 import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.impl.ActivityWorkerServiceImpl;
 import core.basesyntax.service.impl.CsvReaderServiceImpl;
 import core.basesyntax.service.impl.CsvWriterServiceImpl;
-import core.basesyntax.service.impl.DaoServiceImpl;
-import core.basesyntax.service.impl.QuantityModificationServiceImpl;
+import core.basesyntax.service.impl.DataConvertorImpl;
 import core.basesyntax.service.impl.ReportCreatorServiceImpl;
+import core.basesyntax.service.strategy.ActivityHandler;
 import core.basesyntax.service.strategy.ActivityStrategyImpl;
-import core.basesyntax.service.strategy.Balance;
-import core.basesyntax.service.strategy.Purchase;
-import core.basesyntax.service.strategy.Return;
-import core.basesyntax.service.strategy.Supply;
+import core.basesyntax.service.strategy.BalanceActivityHandler;
+import core.basesyntax.service.strategy.PurchaseActivityHandler;
+import core.basesyntax.service.strategy.ReturnActivityHandler;
+import core.basesyntax.service.strategy.SupplyActivityHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         // read data from file
         CsvReaderService csvReaderServiceImpl = new CsvReaderServiceImpl();
-        String path = "src/main/resources/input.csv";
-        List<String> input = csvReaderServiceImpl.readFromFile(path);
+        List<String> input = csvReaderServiceImpl.readFromFile(INPUT_FILE_PATH);
+
+        Map<Fruit.Operation, ActivityHandler> activitiesServiceMap = new HashMap<>();
+        activitiesServiceMap.put(Fruit.Operation.BALANCE, new BalanceActivityHandler());
+        activitiesServiceMap.put(Fruit.Operation.PURCHASE, new PurchaseActivityHandler());
+        activitiesServiceMap.put(Fruit.Operation.SUPPLY, new SupplyActivityHandler());
+        activitiesServiceMap.put(Fruit.Operation.RETURN, new ReturnActivityHandler());
+
         //convert data from file to Java object
-        FruitDao newDao = new FruitDaoImpl();
-        DaoService daoService = new DaoServiceImpl(newDao);
-        daoService.convertData(input);
+        FruitDao fruitDao = new FruitDaoImpl();
+        DataConvertor dataConvertor = new DataConvertorImpl();
+        List<Fruit> fruits1 = dataConvertor.convertData(input);
+
         //process Java object
-        Map<Fruit.Operation, ActivitiesService> activitiesServiceMap = new HashMap<>();
-        activitiesServiceMap.put(Fruit.Operation.BALANCE, new Balance());
-        activitiesServiceMap.put(Fruit.Operation.PURCHASE, new Purchase());
-        activitiesServiceMap.put(Fruit.Operation.SUPPLY, new Supply());
-        activitiesServiceMap.put(Fruit.Operation.RETURN, new Return());
-        QuantityModificationServiceImpl quantModServ = new QuantityModificationServiceImpl(
-                new ActivityStrategyImpl(activitiesServiceMap), newDao);
-        List<Fruit> fruits = quantModServ.modifyQuantity();
-        //create report
-        ReportCreatorService report = new ReportCreatorServiceImpl();
-        Map<String, Integer> report1 = report.createReport(fruits);
-        //write report to file
+        ActivityWorkerServiceImpl quantModServ = new ActivityWorkerServiceImpl(
+                new ActivityStrategyImpl(activitiesServiceMap), fruitDao);
+        quantModServ.modifyQuantity(fruits1);
+
+        //create reportService
+        ReportCreatorService reportService = new ReportCreatorServiceImpl(fruitDao);
+        String report = reportService.createReport();
+
+        //write reportService to file
         CsvWriterService csvWriterService = new CsvWriterServiceImpl();
-        csvWriterService.writeToReport("src/main/resources/report.csv", report1);
+        csvWriterService.writeToFile(OUTPUT_FILE_PATH, report);
     }
 }
