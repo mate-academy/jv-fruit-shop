@@ -23,7 +23,10 @@ public class FruitShopServiceImpl implements FruitShopService {
         transactions.forEach(transaction -> {
             int quantity = transaction.getQuantity();
             if (quantity < 0) {
-                throw new FruitsQuantityException("Invalid quantity: " + quantity);
+                throw new FruitsQuantityException("Invalid quantity: "
+                        + quantity
+                        + " for "
+                        + transaction.getFruit());
             }
             dataHandlerStrategy.getHandler(transaction.getOperation())
                     .processData(transaction.getFruit(), quantity);

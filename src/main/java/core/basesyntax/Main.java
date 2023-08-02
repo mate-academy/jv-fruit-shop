@@ -1,8 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.*;
-import core.basesyntax.service.implementations.*;
+import core.basesyntax.service.ParseService;
+import core.basesyntax.service.ReadCsvFileService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.WriteCsvFileService;
+import core.basesyntax.service.implementations.FruitShopServiceImpl;
+import core.basesyntax.service.implementations.MapBuilderOperationServiceImpl;
+import core.basesyntax.service.implementations.ParseServiceImpl;
+import core.basesyntax.service.implementations.ReadCsvFileServiceImpl;
+import core.basesyntax.service.implementations.ReportServiceImpl;
+import core.basesyntax.service.implementations.WriteCsvFileServiceImpl;
 import core.basesyntax.strategy.DataHandlerStrategy;
 import core.basesyntax.strategy.DataHandlerStrategyImpl;
 import core.basesyntax.strategy.handler.DataHandler;
@@ -37,7 +45,7 @@ public class Main {
         List<String> report = reportService.generateReport();
         // Write the data to the report file
         writeCsvFileService.writeFile(REPORT_FILE, report);
-        if (Files.isReadable(Path.of(REPORT_FILE))) {
+        if (Files.exists(Path.of(REPORT_FILE))) {
             System.out.println("Database updated and report generated successfully.");
         }
     }

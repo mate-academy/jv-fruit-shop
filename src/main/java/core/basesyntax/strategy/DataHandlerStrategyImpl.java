@@ -6,15 +6,15 @@ import java.util.Map;
 
 public class DataHandlerStrategyImpl implements DataHandlerStrategy {
     // створили мапу з операцією і відповідному їй хендлеру
-    private Map<FruitTransaction.Operation, DataHandler> activityDataHandlerMap;
+    private Map<FruitTransaction.Operation, DataHandler> operationDataHandlerMap;
 
     public DataHandlerStrategyImpl(
-            Map<FruitTransaction.Operation, DataHandler> activityDataHandlerMap) {
-        this.activityDataHandlerMap = activityDataHandlerMap;
+            Map<FruitTransaction.Operation, DataHandler> operationDataHandlerMap) {
+        this.operationDataHandlerMap = operationDataHandlerMap;
     }
 
     @Override
     public DataHandler getHandler(FruitTransaction.Operation operation) {
-        return activityDataHandlerMap.get(operation);
+        return operationDataHandlerMap.get(operation);
     }
 }

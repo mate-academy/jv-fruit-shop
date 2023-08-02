@@ -10,6 +10,15 @@ import java.util.List;
 public class WriteCsvFileServiceImpl implements WriteCsvFileService {
     public void writeFile(String filename, List<String> data) {
         try {
+            if (data.isEmpty()) {
+                throw new WriteFileException("Writing empty data. You give me " + data);
+            }
+            if (filename.matches(".*[:\\\\?*|\"<>].*")) {
+                throw new WriteFileException("Invalid characters in the filename: " + filename);
+            }
+            if (filename.contains(" ")) {
+                throw new WriteFileException("Filename cannot contain spaces: " + filename);
+            }
             Files.write(Path.of(filename), data);
         } catch (IOException e) {
             throw new WriteFileException("Can`t write to file: " + filename);
