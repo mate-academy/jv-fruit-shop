@@ -11,11 +11,6 @@ public class WriteServiceImpl implements WriteService {
     @Override
     public void writeToFile(String toFile, String report) {
         File file = new File(toFile);
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create the file " + toFile, e);
-        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(report);
         } catch (IOException e) {

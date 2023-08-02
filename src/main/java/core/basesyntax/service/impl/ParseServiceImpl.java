@@ -12,13 +12,13 @@ public class ParseServiceImpl implements ParseService {
     public static final int FRUIT_INDEX = 1;
     public static final int QUANTITY_INDEX = 2;
     public static final int VALID_TRANSACTION_LENGTH = 3;
-    public static final int CSV_INDEX = 1;
+    public static final int CSV_HEAD_INDEX = 1;
 
     @Override
     public List<FruitTransaction> parse(List<String> stringList) {
-        if (stringList != null && stringList.size() > CSV_INDEX) {
+        if (stringList != null && stringList.size() > CSV_HEAD_INDEX) {
             return stringList.stream()
-                   .skip(CSV_INDEX)
+                   .skip(CSV_HEAD_INDEX)
                    .map(s -> s.split(LINE_SEPARATOR))
                    .filter(line -> line.length
                            == VALID_TRANSACTION_LENGTH)
