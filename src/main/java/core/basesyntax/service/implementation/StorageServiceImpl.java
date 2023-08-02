@@ -24,11 +24,7 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public void remove(String key, Integer value) {
         if (Storage.storage.containsKey(key)) {
-            if (Storage.storage.get(key) >= value) {
-                Storage.storage.put(key, Storage.storage.get(key) - value);
-            } else {
-                throw new InsufficientStockException("Not enough product in stock");
-            }
+            checkProductAvailability(key, value);
         } else {
             throw new ProductIsAbsentException("Such product wasn't found");
         }
@@ -40,4 +36,11 @@ public class StorageServiceImpl implements StorageService {
         return value;
     }
 
+    private void checkProductAvailability(String key, Integer value) {
+        if (Storage.storage.get(key) >= value) {
+            Storage.storage.put(key, Storage.storage.get(key) - value);
+        } else {
+            throw new InsufficientStockException("Not enough product in stock");
+        }
+    }
 }
