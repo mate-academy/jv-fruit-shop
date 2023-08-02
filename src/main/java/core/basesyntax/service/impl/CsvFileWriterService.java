@@ -7,13 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class CsvFileWriterService implements FileWriterService {
-    private static final String DEFAULT_NAME = "report";
-    private static final String DEFAULT_FORMAT = ".csv";
+    private static final String DEFAULT_NAME = "report.csv";
 
     @Override
     public void writeToFile(String path, String report) {
-        String fileName = DEFAULT_NAME + DEFAULT_FORMAT;
-        File fileReport = new File(path + fileName);
+        File fileReport = new File(path + DEFAULT_NAME);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileReport))) {
             fileReport.createNewFile();
             bufferedWriter.write(report);

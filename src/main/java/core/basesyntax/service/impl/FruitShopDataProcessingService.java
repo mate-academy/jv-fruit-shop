@@ -16,7 +16,7 @@ public class FruitShopDataProcessingService implements DataProcessingService {
     public void processData(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction transaction : fruitTransactions) {
             OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
-            operationHandler.completeOperation(transaction);
+            operationHandler.execute(transaction);
         }
     }
 }

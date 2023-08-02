@@ -35,10 +35,10 @@ public class FruitTransactionDataConverterService implements DataConverterServic
         return new FruitTransaction(name, quantity, Operation.of(operation));
     }
 
-    private boolean isValid(String operation, String fruitName, Integer quantity) {
-        return isValidOperation(operation)
-                && isValidFruitName(fruitName)
-                && isValidQuantity(quantity);
+    private void isValid(String operation, String fruitName, Integer quantity) {
+        isValidOperation(operation);
+        isValidFruitName(fruitName);
+        isValidQuantity(quantity);
     }
 
     private boolean isValidOperation(String operation) {
