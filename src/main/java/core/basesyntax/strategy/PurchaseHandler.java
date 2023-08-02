@@ -15,11 +15,12 @@ public class PurchaseHandler implements OperationHandler {
         int currentQuantity = Storage.fruitStorage.get(fruitName);
         int newQuantity = currentQuantity - purchaseQuantity;
 
-        if (purchaseQuantity < 0 ) {
+        if (purchaseQuantity < 0) {
             throw new RuntimeException("Transaction \"purchase\" can`t be negative value");
         }
         if (newQuantity < 0) {
-            throw new RuntimeException("Result of transaction \"purchase\" can`t be negative value");
+            throw new RuntimeException(
+                    "Result of transaction \"purchase\" can`t be negative value");
         }
 
         Storage.fruitStorage.put(fruitName, newQuantity);

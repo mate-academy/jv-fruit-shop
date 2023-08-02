@@ -14,7 +14,7 @@ public class SupplyHandler implements OperationHandler {
         int supplyQuantity = fruitTransaction.getQuantity();
         int currentQuantity = Storage.fruitStorage.get(fruitName);
 
-        if (supplyQuantity < 0 ) {
+        if (supplyQuantity < 0) {
             throw new RuntimeException("Transaction \"supply\" can`t be negative value");
         }
 

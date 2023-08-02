@@ -13,7 +13,7 @@ public class BalanceHandler implements OperationHandler {
         String fruitName = fruitTransaction.getFruit();
         int balanceQuantity = fruitTransaction.getQuantity();
 
-        if (balanceQuantity < 0 ) {
+        if (balanceQuantity < 0) {
             throw new RuntimeException("Transaction \"balance\" can`t be negative value");
         }
 

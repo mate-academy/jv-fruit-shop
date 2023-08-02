@@ -14,7 +14,7 @@ public class ReturnHandler implements OperationHandler {
         int returnQuantity = fruitTransaction.getQuantity();
         int currentQuantity = Storage.fruitStorage.get(fruitName);
 
-        if (returnQuantity < 0 ) {
+        if (returnQuantity < 0) {
             throw new RuntimeException("Transaction \"return\" can`t be negative value");
         }
 
