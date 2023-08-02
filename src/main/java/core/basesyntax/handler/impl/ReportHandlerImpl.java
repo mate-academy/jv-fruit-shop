@@ -9,25 +9,18 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.Map;
 
 public class ReportHandlerImpl implements ReportHandler {
-    private final FruitsStorage storage;
-
-    public ReportHandlerImpl(FruitsStorage storage) {
-        this.storage = storage;
-    }
-
     @Override
-    public boolean getReport(String dataToReport) {
+    public boolean getReport(String dataPathToReport) {
         boolean isSaved = false;
-        File file = new File(dataToReport);
+        File file = new File(dataPathToReport);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(REPORT_TABLE_HEADER)
-                        .append(System.lineSeparator());
-            for (Map.Entry<String, BigDecimal> data : storage.getFruitsStorage().entrySet()) {
+                    .append(System.lineSeparator());
+            for (Map.Entry<String, Integer> data : FruitsStorage.fruitsStorage.entrySet()) {
                 stringBuilder.append(data.getKey())
                         .append(COMMA_SIGN)
                         .append(data.getValue())

@@ -1,7 +1,5 @@
 package core.basesyntax.handler;
 
-import java.math.BigDecimal;
-
 public interface OrderReturnHandler {
-    boolean returnOrder(String fruitName, BigDecimal priceToReturn);
+    boolean returnOrder(String fruitName, int quantityToReturn);
 }

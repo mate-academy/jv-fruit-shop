@@ -2,24 +2,17 @@ package core.basesyntax.handler.impl;
 
 import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.handler.OrderReturnHandler;
-import java.math.BigDecimal;
 
 public class OrderReturnHandlerImpl implements OrderReturnHandler {
-    private final FruitsStorage storage;
-
-    public OrderReturnHandlerImpl(FruitsStorage storage) {
-        this.storage = storage;
-    }
-
     @Override
-    public boolean returnOrder(String fruitName, BigDecimal priceToReturn) {
+    public boolean returnOrder(String fruitName, int quantityToReturn) {
         boolean isReturned = false;
-        BigDecimal fruitPrice = storage.getFruitsStorage().get(fruitName);
-        if (storage.getFruitsStorage().containsKey(fruitName)) {
-            fruitPrice = fruitPrice.add(priceToReturn);
-            isReturned = true;
+        int druitQuantity = FruitsStorage.fruitsStorage.get(fruitName);
+        if (FruitsStorage.fruitsStorage.containsKey(fruitName)) {
+            druitQuantity = druitQuantity + quantityToReturn;
         }
-        storage.getFruitsStorage().put(fruitName, fruitPrice);
+        FruitsStorage.fruitsStorage.put(fruitName, druitQuantity);
+        isReturned = true;
         return isReturned;
     }
 }

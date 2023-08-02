@@ -5,8 +5,8 @@ import core.basesyntax.service.OperationService;
 
 public class OperationServiceImpl implements OperationService {
     @Override
-    public Operation getOperation(String typeFromFile) {
-        switch (typeFromFile) {
+    public Operation getOperation(String operationType) {
+        switch (operationType) {
             case "b":
                 return Operation.BALANCE;
             case "s":
@@ -16,7 +16,7 @@ public class OperationServiceImpl implements OperationService {
             case "r":
                 return Operation.RETURN;
             default:
-                throw new IllegalArgumentException("Invalid operation type: " + typeFromFile);
+                throw new IllegalArgumentException("Invalid operation type: " + operationType);
         }
     }
 }

@@ -1,16 +1,15 @@
 package core.basesyntax.model;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class FruitTransaction {
     private final String fruitName;
-    private final BigDecimal fruitPrice;
+    private final int fruitQuantity;
     private final Operation operationType;
 
     public FruitTransaction(FruitBuilder fruitBuilder) {
         this.fruitName = fruitBuilder.fruitName;
-        this.fruitPrice = fruitBuilder.fruitPrice;
+        this.fruitQuantity = fruitBuilder.fruitQuantity;
         this.operationType = fruitBuilder.operationType;
     }
 
@@ -18,8 +17,8 @@ public class FruitTransaction {
         return fruitName;
     }
 
-    public BigDecimal getFruitPrice() {
-        return fruitPrice;
+    public int getFruitQuantity() {
+        return fruitQuantity;
     }
 
     public Operation getOperationType() {
@@ -36,18 +35,26 @@ public class FruitTransaction {
         }
         FruitTransaction that = (FruitTransaction) o;
         return Objects.equals(fruitName, that.fruitName)
-                && Objects.equals(fruitPrice, that.fruitPrice)
+                && Objects.equals(fruitQuantity, that.fruitQuantity)
                 && operationType == that.operationType;
     }
 
     @Override
+    public String toString() {
+        return "FruitTransaction{"
+                + "operationType=" + operationType
+                + ", fruitName='" + fruitName + '\''
+                + ", fruitQuantity=" + fruitQuantity + '}';
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(fruitName, fruitPrice, operationType);
+        return Objects.hash(fruitName, fruitQuantity, operationType);
     }
 
     public static class FruitBuilder {
         private String fruitName;
-        private BigDecimal fruitPrice;
+        private int fruitQuantity;
         private Operation operationType;
 
         public FruitBuilder setFruitName(String fruitName) {
@@ -55,8 +62,8 @@ public class FruitTransaction {
             return this;
         }
 
-        public FruitBuilder setFruitPrice(BigDecimal fruitPrice) {
-            this.fruitPrice = fruitPrice;
+        public FruitBuilder setFruitQuantity(int fruitQuantity) {
+            this.fruitQuantity = fruitQuantity;
             return this;
         }
 

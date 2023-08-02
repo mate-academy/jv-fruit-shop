@@ -1,10 +1,10 @@
 package core.basesyntax.handler.impl;
 
 import core.basesyntax.db.FruitsStorage;
-import core.basesyntax.handler.SupplierHandler;
+import core.basesyntax.handler.BalanceHandler;
 import core.basesyntax.model.FruitTransaction;
 
-public class SupplierHandlerImpl implements SupplierHandler {
+public class BalanceHandlerImpl implements BalanceHandler {
     @Override
     public boolean add(FruitTransaction fruitTransaction) {
         boolean isAdded = false;

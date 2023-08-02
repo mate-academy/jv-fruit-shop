@@ -2,24 +2,17 @@ package core.basesyntax.handler.impl;
 
 import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.handler.PurchaseHandler;
-import java.math.BigDecimal;
 
 public class PurchaseHandlerImpl implements PurchaseHandler {
-    private final FruitsStorage storage;
-
-    public PurchaseHandlerImpl(FruitsStorage fruitsStorage) {
-        this.storage = fruitsStorage;
-    }
-
     @Override
-    public boolean purchase(String fruitName, BigDecimal priceToSubtract) {
+    public boolean purchase(String fruitName, int quantityToSubtract) {
         boolean isSubstracted = false;
-        BigDecimal fruitPrice = storage.getFruitsStorage().get(fruitName);
-        if (storage.getFruitsStorage().containsKey(fruitName)) {
-            fruitPrice = fruitPrice.subtract(priceToSubtract);
-            isSubstracted = true;
+        int fruitQuantity = FruitsStorage.fruitsStorage.get(fruitName);
+        if (FruitsStorage.fruitsStorage.containsKey(fruitName)) {
+            fruitQuantity = fruitQuantity - quantityToSubtract;
         }
-        storage.getFruitsStorage().put(fruitName, fruitPrice);
+        FruitsStorage.fruitsStorage.put(fruitName, fruitQuantity);
+        isSubstracted = true;
         return isSubstracted;
     }
 }

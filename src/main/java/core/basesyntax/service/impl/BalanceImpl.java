@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.handler.SupplierHandler;
+import core.basesyntax.handler.BalanceHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 
-public class SupplierServiceImpl implements OperationHandler {
-    private final SupplierHandler supplierHandler;
+public class BalanceImpl implements OperationHandler {
+    private final BalanceHandler balanceHandler;
 
-    public SupplierServiceImpl(SupplierHandler supplierHandler) {
-        this.supplierHandler = supplierHandler;
+    public BalanceImpl(BalanceHandler balanceHandler) {
+        this.balanceHandler = balanceHandler;
     }
 
     @Override
@@ -17,8 +17,8 @@ public class SupplierServiceImpl implements OperationHandler {
                 .setOperationType(fruitTransaction.getOperationType())
                 .setFruitName(fruitTransaction.getFruitName())
                 .setFruitQuantity(fruitTransaction.getFruitQuantity())
-                .setOperationType(fruitTransaction.getOperationType())
                 .build();
-        return supplierHandler.add(newFruit);
+        return balanceHandler.add(newFruit);
     }
 }
+
