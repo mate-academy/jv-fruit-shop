@@ -1,14 +1,14 @@
 package service.transaction.strategy.type;
 
 import java.util.Map;
+import model.FruitTransaction;
 import model.InvalidTransaction;
-import model.Transaction;
 
 public class BalanceTransaction implements TransactionHandler {
     @Override
-    public void perform(Map<String, Integer> stock, Transaction transaction) {
-        String product = transaction.getProduct();
-        int quantity = transaction.getQuantity();
+    public void perform(Map<String, Integer> stock, FruitTransaction fruitTransaction) {
+        String product = fruitTransaction.getProduct();
+        int quantity = fruitTransaction.getQuantity();
         if (stock.containsKey(product)) {
             if (stock.get(product) != quantity) {
                 throw new InvalidTransaction("Product has already quantity in stock "

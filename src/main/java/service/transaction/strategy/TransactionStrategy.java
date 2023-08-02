@@ -1,9 +1,9 @@
 package service.transaction.strategy;
 
-import model.Transaction;
+import model.FruitTransaction;
 import service.transaction.strategy.type.TransactionHandler;
 
 public interface TransactionStrategy {
-    TransactionHandler getHandler(Transaction.Type type);
+    TransactionHandler getHandler(FruitTransaction.OperationType type);
 }
 

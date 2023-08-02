@@ -1,7 +1,7 @@
 package service.transaction;
 
 import java.util.List;
-import model.Transaction;
+import model.FruitTransaction;
 
 public class CsvTransactionParser implements TransactionParser {
     private static final String VALID_DATA_PATTERN = "^[a-z],[a-zA-Z`]+,\\d+$";
@@ -12,7 +12,7 @@ public class CsvTransactionParser implements TransactionParser {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<Transaction> parse(List<String> data) {
+    public List<FruitTransaction> parse(List<String> data) {
         data.remove(HEAD_INDEX);
         return data.stream()
                 .map(String::trim)
@@ -20,13 +20,14 @@ public class CsvTransactionParser implements TransactionParser {
                 .toList();
     }
 
-    private Transaction transactionFromLine(String data) {
+    private FruitTransaction transactionFromLine(String data) {
         checkData(data);
         String[] transactionData = data.split(SPLIT_SYMBOL);
-        Transaction.Type type = Transaction.Type.byCode(transactionData[TYPE_INDEX]);
+        FruitTransaction.OperationType type = FruitTransaction
+                .OperationType.byCode(transactionData[TYPE_INDEX]);
         String product = transactionData[PRODUCT_INDEX];
         int quantity = Integer.parseInt(transactionData[QUANTITY_INDEX]);
-        return new Transaction(type, product, quantity);
+        return new FruitTransaction(type, product, quantity);
     }
 
     private void checkData(String data) {

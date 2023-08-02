@@ -1,25 +1,25 @@
 package service.transaction;
 
-import dao.DbDao;
+import dao.Dao;
 import java.util.List;
 import java.util.Map;
-import model.Transaction;
+import model.FruitTransaction;
 import service.transaction.strategy.TransactionStrategy;
 
 public class ProductTransactionExecutor implements TransactionExecutor {
     private TransactionStrategy transactionStrategy;
-    private DbDao dbDao;
+    private Dao dao;
 
-    public ProductTransactionExecutor(TransactionStrategy transactionStrategy, DbDao dbDao) {
+    public ProductTransactionExecutor(TransactionStrategy transactionStrategy, Dao dao) {
         this.transactionStrategy = transactionStrategy;
-        this.dbDao = dbDao;
+        this.dao = dao;
     }
 
     @Override
-    public void execute(List<Transaction> transactions) {
-        Map<String, Integer> data = dbDao.getData();
-        transactions.stream()
+    public void execute(List<FruitTransaction> fruitTransactions) {
+        Map<String, Integer> data = dao.getStock();
+        fruitTransactions.stream()
                 .forEach(t -> transactionStrategy.getHandler(t.getType()).perform(data, t));
-        dbDao.updateData(data);
+        dao.updateStock(data);
     }
 }

@@ -1,17 +1,17 @@
 package model;
 
-public class Transaction {
-    private Type type;
+public class FruitTransaction {
+    private OperationType type;
     private String product;
     private int quantity;
 
-    public Transaction(Type type, String product, int quantity) {
+    public FruitTransaction(OperationType type, String product, int quantity) {
         this.product = product;
         this.quantity = quantity;
         this.type = type;
     }
 
-    public Type getType() {
+    public OperationType getType() {
         return type;
     }
 
@@ -23,7 +23,7 @@ public class Transaction {
         return quantity;
     }
 
-    public enum Type {
+    public enum OperationType {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
@@ -31,12 +31,12 @@ public class Transaction {
 
         private String code;
 
-        Type(String code) {
+        private OperationType(String code) {
             this.code = code;
         }
 
-        public static Type byCode(String code) {
-            for (Type type : Type.values()) {
+        public static OperationType byCode(String code) {
+            for (OperationType type : OperationType.values()) {
                 if (type.code.equals(code)) {
                     return type;
                 }

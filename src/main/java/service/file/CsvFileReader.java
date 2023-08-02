@@ -10,9 +10,9 @@ public class CsvFileReader implements FileReader {
     private static final String CSV_CHECK_PATTERN = "^.+\\.csv$";
 
     @Override
-    public List<String> read(String fileName) {
-        checkFileFormat(fileName);
-        File file = getFileFromResources(fileName);
+    public List<String> read(String filePath) {
+        checkFileFormat(filePath);
+        File file = new File(filePath);
         try {
             return Files.readAllLines(Path.of(file.getPath()));
         } catch (IOException e) {
@@ -24,14 +24,5 @@ public class CsvFileReader implements FileReader {
         if (!fileName.matches(CSV_CHECK_PATTERN)) {
             throw new IllegalStateException("Invalid file type, should be .csv but - " + fileName);
         }
-    }
-
-    private File getFileFromResources(String fileName) {
-        ClassLoader classLoader = FileReader.class.getClassLoader();
-        String filePath = classLoader.getResource(fileName).getFile();
-        if (filePath == null) {
-            throw new NullPointerException("File not found - " + fileName);
-        }
-        return new File(filePath);
     }
 }
