@@ -1,8 +1,8 @@
-package core.basesyntax.operationstrategy;
+package core.basesyntax.strategy;
 
 import core.basesyntax.exceptions.OperationNotFoundException;
 import core.basesyntax.model.Operation;
-import core.basesyntax.operationstrategy.handler.OperationHandler;
+import core.basesyntax.strategy.handler.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
