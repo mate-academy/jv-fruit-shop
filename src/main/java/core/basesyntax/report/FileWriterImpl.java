@@ -9,11 +9,6 @@ public class FileWriterImpl implements FileWriter {
     @Override
     public void writeToFile(List<String> reportList, String toFileName) {
         File toFile = new File(toFileName);
-        try {
-            toFile.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create file " + toFileName, e);
-        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(toFile))) {
             for (String report : reportList) {
                 bufferedWriter.write(report);

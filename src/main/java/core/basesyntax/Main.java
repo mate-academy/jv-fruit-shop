@@ -16,16 +16,16 @@ import java.io.File;
 import java.util.List;
 
 public class Main {
+    public static final String fromFileName = "src/main/resources/text.csv";
+    public static final String toFileName = "src/main/resources/report/report.csv";
+
+    public static final FileReader fileReader = new FileReaderImpl();
+    public static final DataConvertor dataConvertor = new DataConvertorImpl();
+    public static final FruitShopService fruitShopService = new FruitShopServiceImpl();
+    public static final ReportRecorder reportRecorder = new ReportRecorderImpl();
+    public static final FileWriter fileWriter = new FileWriterImpl();
+
     public static void main(String[] args) {
-        String fromFileName = "src/main/resources/text.csv";
-        String toFileName = "src/main/resources/report/report.csv";
-
-        FileReader fileReader = new FileReaderImpl();
-        DataConvertor dataConvertor = new DataConvertorImpl();
-        FruitShopService fruitShopService = new FruitShopServiceImpl();
-        ReportRecorder reportRecorder = new ReportRecorderImpl();
-        FileWriter fileWriter = new FileWriterImpl();
-
         String[] fileData = fileReader.readFromFile(new File(fromFileName));
         List<FruitTransaction> fruitTransactions = dataConvertor.convertData(fileData);
         fruitShopService.processAll(fruitTransactions);
