@@ -9,6 +9,9 @@ import java.util.List;
 public class WriteToCsv implements WriteService {
     @Override
     public void writeToFile(List<String> preparedData, String path) {
+        if (path == null || preparedData == null) {
+            throw new RuntimeException("Can't write to file with path or data null");
+        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
             for (String data : preparedData) {
                 bufferedWriter.write(data + "\n");
