@@ -17,5 +17,4 @@ public class ReportServiceImpl implements ReportService {
 
         return stringBuilder.toString();
     }
-
 }

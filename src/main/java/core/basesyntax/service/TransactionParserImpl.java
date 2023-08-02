@@ -13,8 +13,8 @@ public class TransactionParserImpl implements TransactionParser {
     public ArrayList<FruitTransaction> parseCsvRow(ArrayList<String> csvRowList) {
         ArrayList<FruitTransaction> output = new ArrayList<>();
 
-        for (String s : csvRowList) {
-            String[] rowSplit = s.split(",");
+        for (String row : csvRowList) {
+            String[] rowSplit = row.split(",");
             output.add(
                     new FruitTransaction(
                             Operation.getType(rowSplit[OPERATION_TYPE_INDEX]),
@@ -24,4 +24,5 @@ public class TransactionParserImpl implements TransactionParser {
 
         return output;
     }
+
 }
