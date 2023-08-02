@@ -15,7 +15,7 @@ import core.basesyntax.service.impl.TransactionParseServiceImpl;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
 
-public class HelloWorld {
+public class Main {
     private static final String FILE_PATH = "src/main/resources/data.csv";
     private static final String REPORT_PATH = "src/main/resources/report.csv";
 

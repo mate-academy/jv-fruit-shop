@@ -13,7 +13,7 @@ public class ReportServiceImpl implements ReportService {
     public String createReport() {
         StringBuilder builder = new StringBuilder();
         builder.append(FRUIT).append(SEPARATOR).append(QUANTITY);
-        for (Map.Entry<String, Integer> entry : Storage.fruit.entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.fruitsStorage.entrySet()) {
             builder.append(System.lineSeparator())
                     .append(entry.getKey()).append(SEPARATOR).append(entry.getValue());
         }

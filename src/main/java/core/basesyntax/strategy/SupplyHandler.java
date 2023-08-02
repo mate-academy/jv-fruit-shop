@@ -9,11 +9,11 @@ public class SupplyHandler implements OperationHandlerService {
     public void handle(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruit();
         int quantity = fruitTransaction.getQuantity();
-        if (Storage.fruit.containsKey(fruitName)) {
-            int storageQuantity = Storage.fruit.get(fruitName);
-            Storage.fruit.put(fruitName, quantity + storageQuantity);
+        if (Storage.fruitsStorage.containsKey(fruitName)) {
+            int storageQuantity = Storage.fruitsStorage.get(fruitName);
+            Storage.fruitsStorage.put(fruitName, quantity + storageQuantity);
         } else {
-            Storage.fruit.put(fruitName, quantity);
+            Storage.fruitsStorage.put(fruitName, quantity);
         }
     }
 }
