@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.TransactionMapper;
 import java.util.Arrays;
@@ -29,7 +28,7 @@ public class TransactionMapperImpl implements TransactionMapper {
         }
         String[] record = line.split(COLUMN_SPLIT_REGEX);
         Transaction.Operation operation = getOperationByCode(record[TYPE_COLUMN]);
-        Fruit fruit = new Fruit(record[FRUIT_COLUMN]);
+        String fruit = record[FRUIT_COLUMN];
         int quantity = Integer.parseInt(record[QUANTITY_COLUMN]);
         return new Transaction(operation, fruit, quantity);
     }

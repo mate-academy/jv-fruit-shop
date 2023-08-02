@@ -12,7 +12,7 @@ public class CsvFileReader implements FileReader {
     private final Path source;
 
     public CsvFileReader(Path source) {
-        PathValidator.validatePath(source);
+        PathValidator.validatePathForReading(source);
         this.source = source;
     }
 

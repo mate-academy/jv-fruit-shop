@@ -1,7 +1,5 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.Fruit;
-
 public interface OperationStrategy {
-    void apply(Fruit fruit, Integer quantity);
+    void apply(String fruit, Integer quantity);
 }

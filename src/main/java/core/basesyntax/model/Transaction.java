@@ -2,10 +2,10 @@ package core.basesyntax.model;
 
 public class Transaction {
     private final Operation operation;
-    private final Fruit fruit;
+    private final String fruit;
     private final int quantity;
 
-    public Transaction(Operation operation, Fruit fruit, int quantity) {
+    public Transaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -15,7 +15,7 @@ public class Transaction {
         return operation;
     }
 
-    public Fruit getFruit() {
+    public String getFruit() {
         return fruit;
     }
 

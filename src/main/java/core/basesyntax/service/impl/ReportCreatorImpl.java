@@ -12,7 +12,7 @@ public class ReportCreatorImpl implements ReportCreator {
     public String create() {
         return Storage.fruits.entrySet()
                 .stream()
-                .map(entry -> entry.getKey().getName() + COLUMN_SPLIT_STRING + entry.getValue())
+                .map(entry -> entry.getKey() + COLUMN_SPLIT_STRING + entry.getValue())
                 .collect(Collectors.joining(System.lineSeparator(), HEADER, ""));
     }
 }
