@@ -1,8 +1,8 @@
 package core.basesyntax.service.implementation;
 
-import core.basesyntax.InsufficientStockException;
-import core.basesyntax.ProductIsAbsentException;
 import core.basesyntax.db.Storage;
+import core.basesyntax.exceptions.InsufficientStockException;
+import core.basesyntax.exceptions.ProductIsAbsentException;
 import core.basesyntax.service.StorageService;
 
 public class StorageServiceImpl implements StorageService {

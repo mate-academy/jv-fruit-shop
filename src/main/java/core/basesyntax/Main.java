@@ -1,16 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ConvertDataFromFileService;
-import core.basesyntax.service.GenerateReportService;
-import core.basesyntax.service.ReadFromFileService;
+import core.basesyntax.service.DataConversionService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.ReportGenerationService;
 import core.basesyntax.service.ShopService;
-import core.basesyntax.service.WriteToFileService;
-import core.basesyntax.service.implementation.ConvertDataFromFileServiceImpl;
-import core.basesyntax.service.implementation.GenerateReportServiceImpl;
-import core.basesyntax.service.implementation.ReadFromFileServiceImpl;
+import core.basesyntax.service.implementation.DataConversionServiceImpl;
+import core.basesyntax.service.implementation.FileReaderServiceImpl;
+import core.basesyntax.service.implementation.FileWriterServiceImpl;
+import core.basesyntax.service.implementation.ReportGenerationServiceImpl;
 import core.basesyntax.service.implementation.ShopServiceImpl;
-import core.basesyntax.service.implementation.WriteToFileServiceImpl;
 import java.io.File;
 import java.util.List;
 
@@ -18,22 +18,22 @@ public class Main {
     public static void main(String[] args) {
         File transactionsFile = new File("src/main/resources/test.csv");
         File reportFile = new File("src/main/resources/report.csv");
-        ReadFromFileService readFromFileService = new ReadFromFileServiceImpl();
-        String rawData = readFromFileService.getDataFromFile(transactionsFile);
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        String rawData = fileReaderService.getDataFromFile(transactionsFile);
 
-        ConvertDataFromFileService convertDataFromFileService
-                = new ConvertDataFromFileServiceImpl();
-        List<FruitTransaction> convertedData = convertDataFromFileService.convert(rawData);
+        DataConversionService dataConversionService
+                = new DataConversionServiceImpl();
+        List<FruitTransaction> convertedData = dataConversionService.convert(rawData);
 
         ShopService shopService = new ShopServiceImpl();
         for (FruitTransaction transaction : convertedData) {
             shopService.process(transaction);
         }
 
-        GenerateReportService generateReportService = new GenerateReportServiceImpl();
-        String report = generateReportService.generate();
+        ReportGenerationService reportGenerationService = new ReportGenerationServiceImpl();
+        String report = reportGenerationService.generate();
 
-        WriteToFileService writeToFileService = new WriteToFileServiceImpl();
-        writeToFileService.writeToFile(report, reportFile);
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.writeToFile(report, reportFile);
     }
 }

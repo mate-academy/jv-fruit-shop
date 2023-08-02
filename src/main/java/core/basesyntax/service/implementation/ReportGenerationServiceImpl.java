@@ -1,10 +1,10 @@
 package core.basesyntax.service.implementation;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.GenerateReportService;
+import core.basesyntax.service.ReportGenerationService;
 import java.util.Map;
 
-public class GenerateReportServiceImpl implements GenerateReportService {
+public class ReportGenerationServiceImpl implements ReportGenerationService {
     public static final String COMA = ",";
     public static final String HEADER = "fruit,quantity";
 

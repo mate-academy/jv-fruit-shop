@@ -1,12 +1,12 @@
 package core.basesyntax.service.implementation;
 
-import core.basesyntax.service.ReadFromFileService;
+import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class ReadFromFileServiceImpl implements ReadFromFileService {
+public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public String getDataFromFile(File file) {
         StringBuilder stringBuilder = new StringBuilder();

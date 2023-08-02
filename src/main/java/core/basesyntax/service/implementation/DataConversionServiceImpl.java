@@ -1,12 +1,12 @@
 package core.basesyntax.service.implementation;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ConvertDataFromFileService;
+import core.basesyntax.service.DataConversionService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ConvertDataFromFileServiceImpl implements ConvertDataFromFileService {
+public class DataConversionServiceImpl implements DataConversionService {
     public static final String COMA = ",";
     public static final int OPERATION_INDEX = 0;
     public static final int PRODUCT_INDEX = 1;

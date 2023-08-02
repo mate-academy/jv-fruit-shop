@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.exceptions;
 
 public class InsufficientStockException extends RuntimeException {
     public InsufficientStockException(String message) {
