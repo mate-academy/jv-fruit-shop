@@ -4,6 +4,8 @@ import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.service.interfaces.TransactionValidator;
 
 public class TransactionValidatorImpl implements TransactionValidator {
+    private static final String RECORD_PATTERN = "[bspr],\\w+,([1-9][0-9]{0,3})$";
+
     @Override
     public void validate(String data) {
         checkIfNull(data);
@@ -24,7 +26,7 @@ public class TransactionValidatorImpl implements TransactionValidator {
     }
 
     private void checkIfCorrectFormat(String data) {
-        String regex = "[bspr],\\w+,([1-9][0-9]{0,3})$";
+        String regex = RECORD_PATTERN;
         data = data.trim();
         if (!data.matches(regex)) {
             throw new InvalidDataException("The record doesn't have required format!");

@@ -10,8 +10,8 @@ public class ReaderServiceImpl implements ReaderService {
     private static final String SOURCE_FILE_PATH = "dataTxt/input.txt";
 
     @Override
-    public String readFromFile() {
-        File file = new File(SOURCE_FILE_PATH);
+    public String readFromFile(String filePath) {
+        File file = new File(filePath);
         StringBuilder inputData = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = reader.readLine();
@@ -20,7 +20,7 @@ public class ReaderServiceImpl implements ReaderService {
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Oops! File not found!");
+            throw new RuntimeException("Oops! File not found: " + filePath, e);
         }
         return inputData.toString();
     }

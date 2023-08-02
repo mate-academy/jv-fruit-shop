@@ -1,8 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Arrays;
-import java.util.NoSuchElementException;
-
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
@@ -19,10 +16,12 @@ public enum Operation {
         return code;
     }
 
-    public static Operation getByCode(String code) {
-        return Arrays.stream(values())
-                .filter(e -> e.getCode().equals(code))
-                .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+    public static Operation fromCode(String code) {
+        for (Operation operation : Operation.values()) {
+            if (operation.code.equalsIgnoreCase(code)) {
+                return operation;
+            }
+        }
+        throw new IllegalArgumentException("Invalid operation code: " + code);
     }
 }

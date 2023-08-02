@@ -35,7 +35,7 @@ public class Main {
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
-        String inputData = readerService.readFromFile();
+        String inputData = readerService.readFromFile("dataTxt/input.txt");
         TransactionParserService parserService = new TransactionParserServiceImpl(
                 new TransactionValidatorImpl());
         List<FruitTransaction> transactions = parserService.parseFruitTransaction(inputData);
@@ -45,6 +45,6 @@ public class Main {
         dataProcessingService.processData(transactions);
         WriterService writerService = new WriterServiceImpl();
         String parsedRecords = parserService.parseReport(Storage.getAll());
-        writerService.writeToFile(parsedRecords);
+        writerService.writeToFile("dataTxt/report.txt", parsedRecords);
     }
 }

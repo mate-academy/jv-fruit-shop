@@ -42,7 +42,7 @@ public class FruitTransaction {
     public static FruitTransaction valueOf(String record) {
         record = record.trim();
         String[] fields = record.split(",");
-        Operation operation = Operation.getByCode(fields[INDEX_OF_OPERATION_IN_RECORD]);
+        Operation operation = Operation.fromCode(fields[INDEX_OF_OPERATION_IN_RECORD]);
         Fruit fruit = Fruit.valueOf(fields[INDEX_OF_FRUIT_IN_RECORD].toUpperCase());
         int quantity = Integer.parseInt(fields[INDEX_OF_QUANTITY_IN_RECORD]);
         return new FruitTransaction(operation, fruit, quantity);
