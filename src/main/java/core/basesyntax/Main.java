@@ -17,7 +17,6 @@ import core.basesyntax.service.strategy.PurchaseOperation;
 import core.basesyntax.service.strategy.ReturnOperation;
 import core.basesyntax.service.strategy.SupplyOperation;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,7 @@ public class Main {
 
     public static void main(String[] args) {
         // read data from csv file
-        Path source = Paths.get(SOURCE);
+        Path source = Path.of(SOURCE);
         FileReader reader = new CsvFileReader(source);
         List<String> lines = reader.read();
         // mapping data to Object
@@ -52,7 +51,7 @@ public class Main {
         String report = reportCreator.create();
 
         // write report to file
-        Path destination = Paths.get(DESTINATION);
+        Path destination = Path.of(DESTINATION);
         FileWriter fileWriter = new CsvFileWriter(destination);
         fileWriter.write(report);
     }
