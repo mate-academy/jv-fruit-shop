@@ -12,14 +12,10 @@ import core.basesyntax.service.implementations.ReportServiceImpl;
 import core.basesyntax.service.implementations.WriteCsvFileServiceImpl;
 import core.basesyntax.strategy.DataHandlerStrategy;
 import core.basesyntax.strategy.DataHandlerStrategyImpl;
-import core.basesyntax.strategy.handler.BalanceDataHandler;
 import core.basesyntax.strategy.handler.DataHandler;
-import core.basesyntax.strategy.handler.PurchaseDataHandler;
-import core.basesyntax.strategy.handler.ReturnDataHandler;
-import core.basesyntax.strategy.handler.SupplyDataHandler;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,24 +25,17 @@ public class Main {
     private static final ParseService parseService = new ParseServiceImpl();
     private static final ReadCsvFileService readCsvFileService = new ReadCsvFileServiceImpl();
     private static final WriteCsvFileService writeCsvFileService = new WriteCsvFileServiceImpl();
-    private static final Map<FruitTransaction.Operation, DataHandler> enumHandlerMap =
-            new HashMap<>();
-    private static final DataHandlerStrategy dataHandlerStrategy
-            = new DataHandlerStrategyImpl(enumHandlerMap);
     private static final ReportService reportService = new ReportServiceImpl();
+    private static final MapBuilderOperationServiceImpl springImitator = new MapBuilderOperationServiceImpl();
+    private static Map<FruitTransaction.Operation, DataHandler> enumHandlerMap;
+    private static DataHandlerStrategy dataHandlerStrategy;
 
     public static void main(String[] args) {
         List<String> data = readCsvFileService.readFile(SOURCE_FILE);
         List<FruitTransaction> fruitTransactions = parseService.parseDataToTransaction(data);
         // Build Map [Operation:Handler]
-        DataHandler balance = new BalanceDataHandler();
-        DataHandler supply = new SupplyDataHandler();
-        DataHandler purchase = new PurchaseDataHandler();
-        DataHandler returns = new ReturnDataHandler();
-        enumHandlerMap.put(FruitTransaction.Operation.BALANCE, balance);
-        enumHandlerMap.put(FruitTransaction.Operation.RETURN, returns);
-        enumHandlerMap.put(FruitTransaction.Operation.PURCHASE, purchase);
-        enumHandlerMap.put(FruitTransaction.Operation.SUPPLY, supply);
+        enumHandlerMap = springImitator.initializeMap();
+        dataHandlerStrategy = new DataHandlerStrategyImpl(enumHandlerMap);
         // fill Storage depending on operations and strategy
         FruitShopServiceImpl fruitShopService =
                 new FruitShopServiceImpl(fruitTransactions, dataHandlerStrategy);
