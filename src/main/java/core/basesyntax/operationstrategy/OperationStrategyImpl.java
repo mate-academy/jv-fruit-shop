@@ -1,22 +1,15 @@
 package core.basesyntax.operationstrategy;
 
 import core.basesyntax.exceptions.OperationNotFoundException;
-import core.basesyntax.operationstrategy.handler.BalanceOperationHandler;
+import core.basesyntax.model.Operation;
 import core.basesyntax.operationstrategy.handler.OperationHandler;
-import core.basesyntax.operationstrategy.handler.PurchaseOperationHandler;
-import core.basesyntax.operationstrategy.handler.ReturnOperationHandler;
-import core.basesyntax.operationstrategy.handler.SupplyOperationHandler;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<Operation, OperationHandler> strategy = new HashMap<>();
+    private final Map<Operation, OperationHandler> strategy;
 
-    public OperationStrategyImpl() {
-        strategy.put(Operation.BALANCE, new BalanceOperationHandler());
-        strategy.put(Operation.RETURN, new ReturnOperationHandler());
-        strategy.put(Operation.PURCHASE, new PurchaseOperationHandler());
-        strategy.put(Operation.SUPPLY, new SupplyOperationHandler());
+    public OperationStrategyImpl(Map<Operation, OperationHandler> strategy) {
+        this.strategy = strategy;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package core.basesyntax.dataservice;
+package core.basesyntax.service;
 
 import core.basesyntax.exceptions.WriteDataToFileException;
 import java.io.BufferedWriter;
@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CsvFileWriter implements FilesWriter {
+public class CsvFileWriterService implements FileWriterService {
 
     @Override
     public void writeDataToFile(String data, String fileName) {

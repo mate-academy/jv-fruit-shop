@@ -1,4 +1,4 @@
-package core.basesyntax.dataservice;
+package core.basesyntax.service;
 
 import core.basesyntax.exceptions.ReadDataFromFileException;
 import java.io.BufferedReader;
@@ -6,8 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CsvFileReader implements FilesReader {
-    //private static final String LINE_SEPARATOR = System.lineSeparator();
+public class CsvFileReaderService implements FileReaderService {
 
     @Override
     public String readDataFromFile(String fileName) {

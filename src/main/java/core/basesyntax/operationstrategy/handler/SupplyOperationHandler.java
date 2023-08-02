@@ -1,12 +1,10 @@
 package core.basesyntax.operationstrategy.handler;
 
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
-    public void processData(String fruitName, Integer quantity) {
-        StorageDao storageDao = new StorageDaoImpl();
-        storageDao.add(fruitName, quantity);
+    public Integer processData(String fruitName, Integer quantity) {
+        return Storage.getStorage().merge(fruitName, quantity, Integer::sum);
     }
 }
