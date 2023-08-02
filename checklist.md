@@ -23,7 +23,7 @@ Your project structure should consist the following packages:
 - `model` for holding models like Fruit (if necessary)
 - `service` for holding services, like Writer, Reader, Parser and so on
 - `service.impl` for holding implementations of services
-- `strategy` for holding handlers for different operations (you are expected to apply Strategy pattern)
+- `operations` for holding handlers for different operations (you are expected to apply Strategy pattern)
 
 #### VCS usage
 Remember about the informative commit and PR naming. Person that is outside of context of your work progress should understand
@@ -88,12 +88,12 @@ Please provide the relative path to a resource instead.
     ```
       
 #### Avoid using switch-cases and if-else constructions. It is recommended to use the Strategy pattern instead. 
-In the `main()` method you can pass the strategy map into the service that chooses the correct strategy for each operation.
+In the `main()` method you can pass the operations map into the service that chooses the correct operations for each operation.
 
 - Example:  
     ```java
     public static void main(String[] args){
-        // create and fill the strategy map
+        // create and fill the operations map
         FruitService fruitService = new FruitServiceImpl(operationStrategies);
     }
     ```  
