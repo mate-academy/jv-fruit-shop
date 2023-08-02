@@ -9,19 +9,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class CsvFileWriter implements FileWriter {
-    private final Path destiny;
+    private final Path destination;
 
-    public CsvFileWriter(Path destiny) {
-        PathValidator.validatePath(destiny);
-        this.destiny = destiny;
+    public CsvFileWriter(Path destination) {
+        PathValidator.validatePath(destination);
+        this.destination = destination;
     }
 
     @Override
     public void write(String source) {
-        try (BufferedWriter writer = Files.newBufferedWriter(destiny)) {
+        try (BufferedWriter writer = Files.newBufferedWriter(destination)) {
             writer.write(source);
         } catch (IOException e) {
-            throw new CsvFileException("Can't write date to csv file: " + destiny, e);
+            throw new CsvFileException("Can't write date to csv file: " + destination, e);
         }
     }
 }

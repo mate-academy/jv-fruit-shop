@@ -2,7 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.TransactionProcessor;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.Map;
 
 public class TransactionProcessorImpl implements TransactionProcessor {

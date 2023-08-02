@@ -1,4 +1,4 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service.strategy;
 
 import core.basesyntax.storage.Storage;
 
