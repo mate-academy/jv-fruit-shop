@@ -1,8 +1,5 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.PurchaseOperationHandlerImpl;
-
 public enum OperationStrategy {
     BALANCE {
         @Override
