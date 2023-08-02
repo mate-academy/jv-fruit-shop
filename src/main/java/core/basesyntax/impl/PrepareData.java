@@ -1,21 +1,24 @@
 package core.basesyntax.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.Preparer;
-import java.util.ArrayList;
-import java.util.List;
+import core.basesyntax.service.ReportPreparer;
 import java.util.Map;
 
-public class PrepareData implements Preparer {
+public class ReportCreator implements ReportPreparer {
+    private static final String REPORT_FRUIT = "fruit";
     private static final String COMMA = ",";
-    private final Storage storage = new Storage();
+    private static final String REPORT_QUANTITY = "fruit";
+    private static final String LINE = System.lineSeparator();
 
-    public List<String> prepare() {
-        List<String> preparedForWrite = new ArrayList<>();
-        preparedForWrite.add("fruit,quantity");
-        for (Map.Entry<String, Integer> data : storage.getStorage().entrySet()) {
-            preparedForWrite.add(data.getKey() + COMMA + data.getValue());
+    public String prepare() {
+        StringBuilder preparedForWrite = new StringBuilder()
+                .append(REPORT_FRUIT)
+                .append(COMMA)
+                .append(REPORT_QUANTITY);
+        for (Map.Entry<String, Integer> data : Storage.getStorage().entrySet()) {
+            preparedForWrite.append(LINE).append(data.getKey())
+                    .append(COMMA).append(data.getValue());
         }
-        return preparedForWrite;
+        return preparedForWrite.toString();
     }
 }
