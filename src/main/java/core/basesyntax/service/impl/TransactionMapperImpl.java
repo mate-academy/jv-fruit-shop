@@ -12,12 +12,13 @@ public class TransactionMapperImpl implements TransactionMapper {
     private static final int TYPE_COLUMN = 0;
     private static final int FRUIT_COLUMN = 1;
     private static final int QUANTITY_COLUMN = 2;
+    private static final int HEADER_ROW = 1;
     private static final String RECORD_PATTERN = "^\\w,\\w+,\\d+$";
 
     @Override
     public List<Transaction> mapAll(List<String> source) {
         return source.stream()
-                .skip(1)
+                .skip(HEADER_ROW)
                 .map(this::mapToTransaction)
                 .collect(Collectors.toList());
     }
