@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class Activity {
     private static final int ACTIVITY_TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
@@ -12,8 +14,7 @@ public class Activity {
 
     public Activity(String activityLine) {
         String[] activitySplit = activityLine.split(SEPARATOR);
-        this.activityType = getTypeFromString(activitySplit[ACTIVITY_TYPE_INDEX]
-                .replaceAll(" ", ""));
+        this.activityType = Type.getType(activitySplit[ACTIVITY_TYPE_INDEX]);
         this.fruitName = activitySplit[FRUIT_NAME_INDEX];
         this.quantity = Integer.parseInt(activitySplit[QUANTITY_INDEX]);
     }
@@ -30,24 +31,26 @@ public class Activity {
         return quantity;
     }
 
-    private Type getTypeFromString(String activityTypeSign) {
-        if (activityTypeSign.equals("b")) {
-            return Type.BALANCE;
-        }
-        if (activityTypeSign.equals("s")) {
-            return Type.SUPPLY;
-        }
-        if (activityTypeSign.equals("p")) {
-            return Type.PURCHASE;
-        }
-        if (activityTypeSign.equals("r")) {
-            return Type.RETURN;
-        }
-        throw new RuntimeException(
-                "Unsupported activity type sign. Sign type = " + activityTypeSign);
-    }
-
     public enum Type {
-        BALANCE, SUPPLY, PURCHASE, RETURN
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private final String code;
+
+        Type(String code) {
+            this.code = code.replaceAll(" ", "");
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public static Type getType(String code) {
+            return Arrays.stream(Type.values())
+                    .filter(t -> t.getCode().equals(code))
+                    .findFirst().orElseThrow();
+        }
     }
 }

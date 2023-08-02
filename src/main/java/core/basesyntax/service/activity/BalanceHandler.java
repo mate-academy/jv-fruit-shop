@@ -8,6 +8,5 @@ public class BalanceHandler implements ActivityHandler {
     @Override
     public void processActivity(Activity activity) {
         FruitsDb.fruitDb.put(activity.getFruitName(), activity.getQuantity());
-
     }
 }
