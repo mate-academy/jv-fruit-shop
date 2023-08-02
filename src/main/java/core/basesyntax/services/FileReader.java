@@ -1,5 +1,5 @@
 package core.basesyntax.services;
 
-public interface FileCsvReader {
+public interface FileReader {
     String read(String fileName);
 }

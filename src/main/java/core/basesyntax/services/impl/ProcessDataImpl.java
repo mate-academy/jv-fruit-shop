@@ -1,8 +1,7 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.services.ProcessData;
-import core.basesyntax.transactor.FruitTransaction;
-import core.basesyntax.transactor.Operation;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -23,8 +22,8 @@ public class ProcessDataImpl implements ProcessData {
                 .toList();
     }
 
-    private Operation getOperation(String code) {
-        return Stream.of(Operation.values())
+    private FruitTransaction.OperationType getOperation(String code) {
+        return Stream.of(FruitTransaction.OperationType.values())
                 .filter(o -> o.getCode().equals(code))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("No operation following code: " + code));

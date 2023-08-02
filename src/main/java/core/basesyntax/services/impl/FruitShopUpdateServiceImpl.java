@@ -2,7 +2,7 @@ package core.basesyntax.services.impl;
 
 import core.basesyntax.services.FruitShopUpdateService;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.transactor.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public class FruitShopUpdateServiceImpl implements FruitShopUpdateService<FruitTransaction> {
@@ -16,7 +16,7 @@ public class FruitShopUpdateServiceImpl implements FruitShopUpdateService<FruitT
     public void update(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             operationStrategy.get(fruitTransaction.getOperation())
-                    .operate(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+                    .operate(fruitTransaction);
         }
     }
 }

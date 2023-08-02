@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.services.FileCsvReader;
-import core.basesyntax.services.FileCsvWriter;
+import core.basesyntax.services.FileReader;
+import core.basesyntax.services.FileWriter;
 import core.basesyntax.services.FruitShopUpdateService;
 import core.basesyntax.services.ProcessData;
 import core.basesyntax.services.ReportCreator;
@@ -12,19 +12,19 @@ import core.basesyntax.services.impl.OperationStrategyImpl;
 import core.basesyntax.services.impl.ProcessDataImpl;
 import core.basesyntax.services.impl.ReportCreatorImpl;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.transactor.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public class Main {
+    private static final FileReader fileCsvReader = new CsvReaderImpl();
+    private static final ProcessData processDataService = new ProcessDataImpl();
+    private static final ReportCreator reportCreator = new ReportCreatorImpl();
+    private static final FileWriter fileCsvWriter = new CsvWriterImpl();
+    private static final OperationStrategy operationStrategy = new OperationStrategyImpl();
+    private static final FruitShopUpdateService<FruitTransaction> fruitShopUpdateService =
+            new FruitShopUpdateServiceImpl(operationStrategy);
+    private static final String fromFilePath = "src/main/resources/CsvInput.csv";
+    private static final String toFilePath = "src/main/resources/CsvOutput.csv";
     public static void main(String[] args) {
-        FileCsvReader fileCsvReader = new CsvReaderImpl();
-        ProcessData processDataService = new ProcessDataImpl();
-        ReportCreator reportCreator = new ReportCreatorImpl();
-        FileCsvWriter fileCsvWriter = new CsvWriterImpl();
-        String fromFilePath = "src/main/resources/CsvInput.csv";
-        String toFilePath = "src/main/resources/CsvOutput.csv";
-        OperationStrategy operationStrategy = new OperationStrategyImpl();
-        FruitShopUpdateService<FruitTransaction> fruitShopUpdateService =
-                new FruitShopUpdateServiceImpl(operationStrategy);
         String transactions = fileCsvReader.read(fromFilePath);
         fruitShopUpdateService.update(processDataService.process(transactions));
         fileCsvWriter.write(toFilePath, reportCreator.createReport());
