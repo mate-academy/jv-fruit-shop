@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportService;
 import java.util.Map;
 import java.util.stream.Collectors;
