@@ -69,7 +69,7 @@ public class WorkWithStore {
     @Test
     void isOneCorrectLine_ok() {
         List<Task> tasks = new CreateTaskServiceImpl()
-                .createTasks(path -> readFileHelper(path), "inputFileTestOneCrtLine.csv");
+                .createTasks(path -> readFileHelper(path), "testFiles/inputFileTestOneCrtLine.csv");
         handleTasksTest.processAction(tasks);
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 30);
@@ -80,7 +80,7 @@ public class WorkWithStore {
     @Test
     void isManyCorrectLine_ok() {
         List<Task> tasks = new CreateTaskServiceImpl()
-                .createTasks(path -> readFileHelper(path), "inputFileTestCorrectLines.csv");
+                .createTasks(path -> readFileHelper(path), "testFiles/inputFileTestCorrectLines.csv");
         handleTasksTest.processAction(tasks);
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 140);
@@ -93,7 +93,7 @@ public class WorkWithStore {
     void isWrongLine_notOk() {
         assertThrows(ValidationDataException.class, () -> {
             new CreateTaskServiceImpl()
-                    .createTasks(path -> readFileHelper(path), "inputFileTestWrongLine.csv");
+                    .createTasks(path -> readFileHelper(path), "testFiles/inputFileTestWrongLine.csv");
         });
     }
 
@@ -101,7 +101,7 @@ public class WorkWithStore {
     void isNumNegative_notOk() {
         assertThrows(ValidationDataException.class, () -> {
             new CreateTaskServiceImpl()
-                    .createTasks(path -> readFileHelper(path), "inputFileTestNumNegative.csv");
+                    .createTasks(path -> readFileHelper(path), "testFiles/inputFileTestNumNegative.csv");
         });
     }
 
@@ -109,7 +109,7 @@ public class WorkWithStore {
     void isFileEmpty_notOk() {
         assertThrows(ValidationDataException.class, () -> {
             new CreateTaskServiceImpl()
-                    .createTasks(path -> readFileHelper(path), "inputFileTestEmpty.csv");
+                    .createTasks(path -> readFileHelper(path), "testFiles/inputFileTestEmpty.csv");
         });
     }
 
