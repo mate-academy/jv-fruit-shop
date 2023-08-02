@@ -22,9 +22,9 @@ public class ConvertDataFromFileServiceImpl implements ConvertDataFromFileServic
             }
             String[] dataUnits = line.split(COMA);
             FruitTransaction fruitTransaction = new FruitTransaction();
-            for (FruitTransaction.Operation prop : FruitTransaction.Operation.values()) {
-                if (prop.getCode().equals(dataUnits[OPERATION_INDEX])) {
-                    fruitTransaction.setOperation(prop);
+            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+                if (operation.getCode().equals(dataUnits[OPERATION_INDEX])) {
+                    fruitTransaction.setOperation(operation);
                 }
             }
             fruitTransaction.setFruit(dataUnits[PRODUCT_INDEX]);
