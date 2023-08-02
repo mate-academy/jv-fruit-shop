@@ -45,7 +45,7 @@ public class Main {
         //write service created
         WriteFileService writeToFileService = new WriteFileServiceImpl();
         //write to file
-        writeToFileService.writeToFile(dao.getStorage(), "resultData.txt");
+        writeToFileService.writeToFile(dao, "resultData.txt");
         //additional print
         Map<String, Integer> storage = dao.getStorage();
         System.out.println(storage.toString());

@@ -1,7 +1,9 @@
 package core.basesyntax.services;
 
+import core.basesyntax.dao.StoreDao;
+
 import java.util.Map;
 
 public interface WriteFileService {
-    void writeToFile(Map<String, Integer> resultStore, String fileName);
+    void writeToFile(StoreDao dao, String fileName);
 }
