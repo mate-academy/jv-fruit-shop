@@ -21,7 +21,7 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
         for (Task task : tasks) {
             Map.Entry<String, Integer> resultTaskComplete = actionStrategy.get(task.getType())
                     .actionStore(storeDao.getStorage(), task.getLabelGoods(), task.getValue());
-            storeDao.put(resultTaskComplete.getKey(), resultTaskComplete.getValue());
+            storeDao.add(resultTaskComplete.getKey(), resultTaskComplete.getValue());
         }
     }
 }

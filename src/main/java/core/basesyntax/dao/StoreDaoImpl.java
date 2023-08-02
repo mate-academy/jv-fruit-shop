@@ -12,7 +12,7 @@ public class StoreDaoImpl implements StoreDao {
     }
 
     @Override
-    public void put(String key, Integer value) {
+    public void add(String key, Integer value) {
         storage.getStorageFruits().put(key, value);
     }
 
