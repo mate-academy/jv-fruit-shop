@@ -1,14 +1,15 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.service.implementation.StorageServiceImpl;
 
 public class SupplyHandler implements StoreOperationsHandler {
     @Override
-    public void applyOperation(Storage storage, String product, int quantity) {
-        supply(storage, product, quantity);
+    public void applyOperation(String product, int quantity) {
+        supply(product, quantity);
     }
 
-    private void supply(Storage storage, String product, int quantity) {
-        storage.add(product, quantity);
+    private void supply(String product, int quantity) {
+        StorageServiceImpl storageService = new StorageServiceImpl();
+        storageService.add(product, quantity);
     }
 }

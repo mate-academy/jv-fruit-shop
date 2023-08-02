@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ConvertDataFromFileService;
 import core.basesyntax.service.GenerateReportService;
@@ -26,8 +25,7 @@ public class Main {
                 = new ConvertDataFromFileServiceImpl();
         List<FruitTransaction> convertedData = convertDataFromFileService.convert(rawData);
 
-        Storage storage = new Storage();
-        ShopService shopService = new ShopServiceImpl(storage);
+        ShopService shopService = new ShopServiceImpl();
         for (FruitTransaction transaction : convertedData) {
             shopService.process(transaction);
         }

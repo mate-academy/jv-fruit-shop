@@ -1,14 +1,15 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.service.implementation.StorageServiceImpl;
 
 public class BalanceHandler implements StoreOperationsHandler {
     @Override
-    public void applyOperation(Storage storage, String product, int quantity) {
-        balance(storage, product, quantity);
+    public void applyOperation(String product, int quantity) {
+        balance(product, quantity);
     }
 
-    private void balance(Storage storage, String product, int quantity) {
-        storage.add(product, quantity);
+    private void balance(String product, int quantity) {
+        StorageServiceImpl storageService = new StorageServiceImpl();
+        storageService.add(product, quantity);
     }
 }
