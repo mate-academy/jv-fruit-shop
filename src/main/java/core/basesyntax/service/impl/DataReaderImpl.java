@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.DataReader;
 import java.io.BufferedReader;

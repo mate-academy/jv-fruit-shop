@@ -1,13 +1,10 @@
 package core.basesyntax.db;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private Map<String, Integer> storage;
-
-    public Storage(Map<String, Integer> map) {
-        this.storage = map;
-    }
+    public static final Map<String, Integer> storage = new HashMap<>();
 
     public Map<String, Integer> getStorage() {
         return storage;
