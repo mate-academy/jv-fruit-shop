@@ -1,6 +1,5 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class FruitStorage {
-    private static Map<String, FruitTransaction> fruits = new HashMap<>();
+    private static Map<String, Integer> fruits = new HashMap<>();
 
     private FruitStorage() {
     }
@@ -17,26 +16,38 @@ public class FruitStorage {
         return new FruitStorage();
     }
 
-    public static Map<String, FruitTransaction> getFruits() {
+    public static Map<String, Integer> getFruits() {
         return fruits;
     }
 
-    public static void addFruit(FruitTransaction fruit) {
-        fruits.put(fruit.getName(), fruit);
+    public static void addFruit(String fruit, int quantity) {
+        fruits.put(fruit, quantity);
     }
 
-    public static List<FruitTransaction> getAllFruits() {
-        return new ArrayList<>(fruits.values());
+    public static List<String> getAllFruits() {
+        return new ArrayList<>(fruits.keySet());
+    }
+
+    public static int getQuantity(String fruitName) {
+        return fruits.get(fruitName);
+    }
+
+    public static void setQuantity(String fruitName, int quantity) {
+        fruits.put(fruitName, quantity);
     }
 
     public static void updateFruitQuantity(String fruitName, int quantity) {
-        FruitTransaction fruit = fruits.get(fruitName);
-        if (fruit != null) {
-            fruit.setQuantity(quantity);
+        int fruit = fruits.get(fruitName);
+        if (fruit >= 0) {
+            fruits.put(fruitName, quantity);
         }
     }
 
-    public static Optional<FruitTransaction> getFruit(String fruitName) {
-        return Optional.ofNullable(fruits.get(fruitName));
+    public static Optional<String> getFruit(String fruitName) {
+        if (fruits.containsKey(fruitName)) {
+            return Optional.ofNullable(fruitName);
+        } else {
+            return Optional.ofNullable(null);
+        }
     }
 }

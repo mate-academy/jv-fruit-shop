@@ -9,13 +9,17 @@ public class FruitTransaction {
     public FruitTransaction() {
     }
 
-    public FruitTransaction(Operation operation, String fruit, int quantity) {
-        this.operation = operation;
-        this.fruit = fruit;
+    public FruitTransaction(int quantity) {
         this.quantity = quantity;
     }
 
     public FruitTransaction(String fruit, int quantity) {
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
