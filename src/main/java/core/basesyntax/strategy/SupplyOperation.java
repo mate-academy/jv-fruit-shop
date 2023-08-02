@@ -1,9 +1,11 @@
 package core.basesyntax.strategy;
 
-public class SupplyOperation implements OperationHandler {
+import core.basesyntax.db.Storage;
+
+public class SupplyOperationHandler implements OperationHandler {
     @Override
-    public void update(String fruit, Integer quantity) {
-        int newValueAfterReturning = storage.getStorage().get(fruit) + quantity;
-        storage.getStorage().put(fruit, newValueAfterReturning);
+    public void handle(String fruit, Integer quantity) {
+        int newValueAfterReturning = Storage.getStorage().get(fruit) + quantity;
+        Storage.getStorage().put(fruit, newValueAfterReturning);
     }
 }
