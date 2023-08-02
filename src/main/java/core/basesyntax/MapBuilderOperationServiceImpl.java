@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MapBuilderOperationServiceImpl implements MapBuilderOperationService {
-    private Map<FruitTransaction.Operation, DataHandler> enumHandlerMap =
+    private final Map<FruitTransaction.Operation, DataHandler> enumHandlerMap =
             new HashMap<>();
 
     @Override
