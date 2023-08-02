@@ -12,7 +12,7 @@ public class PrepareData implements Preparer {
 
     public List<String> prepare() {
         List<String> preparedForWrite = new ArrayList<>();
-        preparedForWrite.add("fruit, quantity");
+        preparedForWrite.add("fruit,quantity");
         for (Map.Entry<String, Integer> data : storage.getStorage().entrySet()) {
             preparedForWrite.add(data.getKey() + COMMA + data.getValue());
         }
