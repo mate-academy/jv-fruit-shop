@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.io.File;
 
 public interface FileReaderService {
-    String getDataFromFile(File file);
+    String read(File file);
 }

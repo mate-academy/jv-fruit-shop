@@ -2,7 +2,7 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.service.implementation.StorageServiceImpl;
 
-public class ReturnHandler implements StoreOperationsHandler {
+public class ReturnHandler implements FruitShopOperationsHandler {
     @Override
     public void applyOperation(String product, int quantity) {
         returnItem(product, quantity);

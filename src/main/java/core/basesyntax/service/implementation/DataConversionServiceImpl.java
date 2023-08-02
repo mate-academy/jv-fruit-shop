@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class DataConversionServiceImpl implements DataConversionService {
-    public static final String COMA = ",";
-    public static final int OPERATION_INDEX = 0;
-    public static final int PRODUCT_INDEX = 1;
-    public static final int AMOUNT_INDEX = 2;
-    public static final String HEADER = "type,fruit,quantity";
+    private static final String COMMA = ",";
+    private static final int OPERATION_INDEX = 0;
+    private static final int PRODUCT_INDEX = 1;
+    private static final int AMOUNT_INDEX = 2;
+    private static final String HEADER = "type,fruit,quantity";
 
     @Override
     public List<FruitTransaction> convert(String rawData) {
@@ -20,7 +20,7 @@ public class DataConversionServiceImpl implements DataConversionService {
             if (Objects.equals(line, HEADER)) {
                 continue;
             }
-            String[] dataUnits = line.split(COMA);
+            String[] dataUnits = line.split(COMMA);
             FruitTransaction fruitTransaction = new FruitTransaction();
             for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
                 if (operation.getCode().equals(dataUnits[OPERATION_INDEX])) {

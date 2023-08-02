@@ -19,7 +19,7 @@ public class Main {
         File transactionsFile = new File("src/main/resources/test.csv");
         File reportFile = new File("src/main/resources/report.csv");
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        String rawData = fileReaderService.getDataFromFile(transactionsFile);
+        String rawData = fileReaderService.read(transactionsFile);
 
         DataConversionService dataConversionService
                 = new DataConversionServiceImpl();
@@ -34,6 +34,6 @@ public class Main {
         String report = reportGenerationService.generate();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(report, reportFile);
+        fileWriterService.write(report, reportFile);
     }
 }

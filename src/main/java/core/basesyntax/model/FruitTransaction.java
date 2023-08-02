@@ -1,15 +1,16 @@
 package core.basesyntax.model;
 
 import core.basesyntax.strategy.BalanceHandler;
+import core.basesyntax.strategy.FruitShopOperationsHandler;
 import core.basesyntax.strategy.PurchaseHandler;
 import core.basesyntax.strategy.ReturnHandler;
-import core.basesyntax.strategy.StoreOperationsHandler;
 import core.basesyntax.strategy.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FruitTransaction {
-    public static final Map<Operation, StoreOperationsHandler> PROCESS_SELECTOR = new HashMap<>();
+    public static final Map<Operation, FruitShopOperationsHandler> PROCESS_SELECTOR
+            = new HashMap<>();
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -53,7 +54,7 @@ public class FruitTransaction {
 
         private String code;
 
-        Operation(String code) {
+        private Operation(String code) {
             this.code = code;
         }
 

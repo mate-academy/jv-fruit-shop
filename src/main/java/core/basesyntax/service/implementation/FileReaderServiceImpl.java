@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
-    public String getDataFromFile(File file) {
+    public String read(File file) {
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String value = bufferedReader.readLine();

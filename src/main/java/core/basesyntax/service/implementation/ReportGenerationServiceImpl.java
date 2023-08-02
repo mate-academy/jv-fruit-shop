@@ -5,18 +5,19 @@ import core.basesyntax.service.ReportGenerationService;
 import java.util.Map;
 
 public class ReportGenerationServiceImpl implements ReportGenerationService {
-    public static final String COMA = ",";
-    public static final String HEADER = "fruit,quantity";
+    private static final String COMMA = ",";
+    private static final String HEADER = "fruit,quantity";
+    private static final String SEPARATOR = System.lineSeparator();
 
     @Override
     public String generate() {
         StringBuilder report = new StringBuilder();
-        report.append(HEADER).append(System.lineSeparator());
+        report.append(HEADER).append(SEPARATOR);
         for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
             report.append(entry.getKey())
-                    .append(COMA)
+                    .append(COMMA)
                     .append(entry.getValue())
-                    .append(System.lineSeparator());
+                    .append(SEPARATOR);
         }
         return report.toString();
     }
