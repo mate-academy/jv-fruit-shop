@@ -4,7 +4,7 @@ import core.basesyntax.handlers.OperationHandler;
 import core.basesyntax.model.Operation;
 import java.util.Map;
 
-public class StrategyOperationImpl implements StrategyOperation {
+public class StrategyOperationImpl implements OperationStrategy {
     @Override
     public OperationHandler getOperation(Operation operation,
                                          Map<Operation, OperationHandler> operationHandlerMap) {
