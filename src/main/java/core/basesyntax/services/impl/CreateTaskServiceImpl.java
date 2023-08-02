@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CreateTaskServiceImpl implements CreateTaskService {
+    private static final int NUM_ZERO = 0;
     private static final int INDEX_OF_ACTION = 0;
     private static final int INDEX_OF_NAME = 1;
     private static final int INDEX_OF_VALUE = 2;
@@ -48,8 +49,12 @@ public class CreateTaskServiceImpl implements CreateTaskService {
             if (nameOfProduct.isEmpty()) {
                 throw new ValidationDataException("Name of Product cant be empty");
             }
-            tasks.add(new Task(typeOfTask, nameOfProduct,
-                    Integer.parseInt(readLine[INDEX_OF_VALUE])));
+
+            Integer valueOfLine = Integer.parseInt(readLine[INDEX_OF_VALUE]);
+            if (valueOfLine < NUM_ZERO) {
+                throw new ValidationDataException("Value cant be less than " + NUM_ZERO);
+            }
+            tasks.add(new Task(typeOfTask, nameOfProduct, valueOfLine));
         }
         return tasks;
     }

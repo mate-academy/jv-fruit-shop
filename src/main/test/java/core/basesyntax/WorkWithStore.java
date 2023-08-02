@@ -67,13 +67,24 @@ public class WorkWithStore {
     }
 
     @Test
-    void isOneCorrectLine_Ok() {
+    void isOneCorrectLine_ok() {
         List<Task> tasks = new CreateTaskServiceImpl()
                 .createTasks(path -> readFileHelper(path), "inputFileTestOneCrtLine.csv");
         handleTasksTest.processAction(tasks);
         Map<String, Integer> expected = new HashMap<>();
-        String[] firstLine = readFileHelper("inputFileTestOneCrtLine.csv").get(LINE_IN_FILE_1);
-        expected.put(firstLine[INDEX_NAME], Integer.parseInt(firstLine[INDEX_VALUE]));
+        expected.put("banana", 30);
+        Map<String, Integer> actual = dao.getStorage();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void isManyCorrectLine_ok() {
+        List<Task> tasks = new CreateTaskServiceImpl()
+                .createTasks(path -> readFileHelper(path), "inputFileTestCorrectLines.csv");
+        handleTasksTest.processAction(tasks);
+        Map<String, Integer> expected = new HashMap<>();
+        expected.put("banana", 140);
+        expected.put("apple", 80);
         Map<String, Integer> actual = dao.getStorage();
         assertEquals(expected, actual);
     }
@@ -83,6 +94,22 @@ public class WorkWithStore {
         assertThrows(ValidationDataException.class, () -> {
             new CreateTaskServiceImpl()
                     .createTasks(path -> readFileHelper(path), "inputFileTestWrongLine.csv");
+        });
+    }
+
+    @Test
+    void isNumNegative_notOk() {
+        assertThrows(ValidationDataException.class, () -> {
+            new CreateTaskServiceImpl()
+                    .createTasks(path -> readFileHelper(path), "inputFileTestNumNegative.csv");
+        });
+    }
+
+    @Test
+    void isFileEmpty_notOk() {
+        assertThrows(ValidationDataException.class, () -> {
+            new CreateTaskServiceImpl()
+                    .createTasks(path -> readFileHelper(path), "inputFileTestEmpty.csv");
         });
     }
 
