@@ -17,16 +17,12 @@ public class FruitShopServiceImpl implements FruitShopService {
     @Override
     public Map<String, Integer> processData(List<FruitTransaction> transactions) {
         addTransactionsToDatabase(transactions);
-        return getDataFromDatabase();
+        return Storage.STORAGE;
     }
 
     private void addTransactionsToDatabase(List<FruitTransaction> transactions) {
         transactions.forEach(transaction -> operationStrategy
                 .getOperation(transaction.getOperation())
                 .executeOperation(transaction));
-    }
-
-    private Map<String, Integer> getDataFromDatabase() {
-        return Storage.STORAGE;
     }
 }
