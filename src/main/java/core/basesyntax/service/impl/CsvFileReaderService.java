@@ -7,24 +7,18 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class CsvFileReaderService implements FileReaderService {
-    private File readFile;
-
-    public CsvFileReaderService(File readFile) {
-        this.readFile = readFile;
-    }
-
     @Override
-    public String readFromFile() {
+    public String readFromFile(File file) {
         StringBuilder data = new StringBuilder();
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(readFile))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String readLine = bufferedReader.readLine();
             while (readLine != null) {
                 data.append(readLine).append(System.lineSeparator());
                 readLine = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't open and read from the " + readFile.getName());
+            throw new RuntimeException("Can't open and read from the " + file.getName());
         }
         return data.toString();
     }

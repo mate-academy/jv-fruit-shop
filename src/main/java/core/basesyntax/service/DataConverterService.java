@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface DataConverterService {
-    List<Fruit> convertDataToObjects();
+    List<FruitTransaction> convertDataToObjects(String dataFromFile);
 }

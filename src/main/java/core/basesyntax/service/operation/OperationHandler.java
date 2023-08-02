@@ -1,7 +1,7 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 
 public interface OperationHandler {
-    public abstract Fruit completeOperation(Fruit fruit);
+    void completeOperation(FruitTransaction fruitTransaction);
 }
