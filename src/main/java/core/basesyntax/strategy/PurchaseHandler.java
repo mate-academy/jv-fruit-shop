@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.IllegalQuantityException;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseHandler implements OperationHandler {
@@ -16,10 +17,10 @@ public class PurchaseHandler implements OperationHandler {
         int newQuantity = currentQuantity - purchaseQuantity;
 
         if (purchaseQuantity < 0) {
-            throw new RuntimeException("Transaction \"purchase\" can`t be negative value");
+            throw new IllegalQuantityException("Transaction \"purchase\" can`t be negative value");
         }
         if (newQuantity < 0) {
-            throw new RuntimeException(
+            throw new IllegalQuantityException(
                     "Result of transaction \"purchase\" can`t be negative value");
         }
 

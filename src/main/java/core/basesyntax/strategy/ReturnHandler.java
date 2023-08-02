@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.IllegalQuantityException;
 import core.basesyntax.model.FruitTransaction;
 
 public class ReturnHandler implements OperationHandler {
@@ -15,7 +16,7 @@ public class ReturnHandler implements OperationHandler {
         int currentQuantity = Storage.fruitStorage.get(fruitName);
 
         if (returnQuantity < 0) {
-            throw new RuntimeException("Transaction \"return\" can`t be negative value");
+            throw new IllegalQuantityException("Transaction \"return\" can`t be negative value");
         }
 
         Storage.fruitStorage.put(fruitName, currentQuantity + returnQuantity);
