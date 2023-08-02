@@ -3,7 +3,7 @@ Let's imagine that we have a fruit store. Every day in the store there are a num
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
 
-Your fruitTransactions are:
+Your tasks are:
 - read data from csv file
 - process these data 
 - generate a report based on processed data
@@ -66,7 +66,7 @@ We are expecting to see how many fruits are available today after the work shift
 The line above means you have 152 bananas, and 90 apples in your Fruit store after the work shift.
 
 **Hint: Think about creating some FruitTransaction model to store info from file line for more convenient data processing 
-(this is only a recommendation, you can use other classes / approaches to solve this fruitTransaction at your discretion):**
+(this is only a recommendation, you can use other classes / approaches to solve this task at your discretion):**
 ```java
 public class FruitTransaction {
   private Operation operation;
@@ -94,16 +94,16 @@ public class FruitTransaction {
 }
 ```
 
-#### [Try to avoid these common mistakes while solving fruitTransaction](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop)
+#### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop)
 
 <details>
   <summary>Additional tips (IMPOTANT: before viewing create a solution architecture and check it against these tips)</summary>
  
  ![FruitShop Schema](https://mate-academy-images.s3.eu-central-1.amazonaws.com/Fruit_Shop_1_c3855912d4.png)
 
-You are presented with a diagram describing an algorithm for the creation of a project structure. Your fruitTransaction is to implement it.
+You are presented with a diagram describing an algorithm for the creation of a project structure. Your task is to implement it.
 
-While carrying out this fruitTransaction, please pay attention to the following points:
+While carrying out this task, please pay attention to the following points:
 
 All services should be invoked from the main() method. In each service, you should have a method that returns a specific type of data and passes this data to the method of the next service. In this way, your services will be independent of each other and your solution will adhere to SOLID principles. Moreover, such methods are easier to test. Think about what types of data the methods in each of the services should return.
 Remember the SOLID principles, think about which ones you might not be adhering to and how to fix this:
