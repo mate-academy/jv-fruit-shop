@@ -5,10 +5,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class ReaderCsvFile {
-    public ArrayList<String> getLinesFromCsv(String fileName) {
-        ArrayList<String> output = new ArrayList<>();
+public class ReaderCsvFile implements ReaderFile {
+    @Override
+    public List<String> getLinesFromFile(String fileName) {
+        List<String> output = new ArrayList<>();
         File file = new File(fileName);
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {

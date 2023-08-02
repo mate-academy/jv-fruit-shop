@@ -1,8 +1,9 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitShopService;
 import core.basesyntax.strategy.OperationStrategy;
+import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private final OperationStrategy operationStrategy;
@@ -16,8 +17,8 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void processStorage() {
-        for (FruitTransaction fruitTransaction : Storage.transactionStorage) {
+    public void processStorage(List<FruitTransaction> transactionList) {
+        for (FruitTransaction fruitTransaction : transactionList) {
             operationStrategy
                     .get(fruitTransaction.getOperation())
                     .handleOperation(fruitTransaction);

@@ -1,8 +1,10 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TransactionParserImpl implements TransactionParser {
     private static final int OPERATION_TYPE_INDEX = 0;
@@ -10,8 +12,8 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public ArrayList<FruitTransaction> parseCsvRow(ArrayList<String> csvRowList) {
-        ArrayList<FruitTransaction> output = new ArrayList<>();
+    public List<FruitTransaction> parseCsvRow(List<String> csvRowList) {
+        List<FruitTransaction> output = new ArrayList<>();
 
         for (String row : csvRowList) {
             String[] rowSplit = row.split(",");

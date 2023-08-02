@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface TransactionParser {
-    ArrayList<FruitTransaction> parseCsvRow(ArrayList<String> csvRowList);
+    List<FruitTransaction> parseCsvRow(List<String> csvRowList);
 }

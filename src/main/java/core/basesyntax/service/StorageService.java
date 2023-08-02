@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface StorageService {
-    void fillActivityStorage(List<FruitTransaction> list);
+    List<FruitTransaction> fillActivityStorage(List<FruitTransaction> list);
 }
