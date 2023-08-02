@@ -12,8 +12,9 @@ public class StoreDaoImpl implements StoreDao {
     }
 
     @Override
-    public void add(String key, Integer value) {
+    public boolean add(String key, Integer value) {
         storage.getStorageFruits().put(key, value);
+        return true;
     }
 
     @Override
@@ -22,7 +23,8 @@ public class StoreDaoImpl implements StoreDao {
     }
 
     @Override
-    public void clean() {
+    public boolean clean() {
         storage.getStorageFruits().clear();
+        return storage.getStorageFruits().isEmpty();
     }
 }
