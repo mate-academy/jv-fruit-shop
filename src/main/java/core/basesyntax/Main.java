@@ -18,15 +18,14 @@ import core.basesyntax.service.transactions.ReturnOperationHandler;
 import core.basesyntax.service.transactions.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
 
-    private static final String TRANSACTIONS_PATH = "src" + File.separator + "transactions.csv";
-    private static final String REPORT_PATH = "src" + File.separator + "report.csv";
+    private static final String TRANSACTIONS_PATH = "src\\main\\resources\\transactions.csv";
+    private static final String REPORT_PATH = "src\\main\\resources\\report.csv";
     private static Map<FruitTransaction.Operation, OperationHandler> strategyMap = new HashMap<>();
 
     public static void main(String[] args) {
