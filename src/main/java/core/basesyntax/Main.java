@@ -6,11 +6,9 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.StorageService;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.impl.StorageServiceImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.strategy.BalanceHandler;
 import core.basesyntax.strategy.OperationHandler;
@@ -31,7 +29,6 @@ public class Main {
     private static final ReaderCsvFile readerCsvFile = new ReaderCsvFile();
     private static final WriterCsvFile writerCsvFile = new WriterCsvFile();
     private static final TransactionParser parser = new TransactionParserImpl();
-    private static final StorageService transactionService = new StorageServiceImpl();
     private static final ReportService reportService = new ReportServiceImpl();
     private static final OperationStrategy operationStrategy
             = new OperationStrategyImpl(operationHandlerMap);
@@ -48,9 +45,7 @@ public class Main {
     public static void main(String[] args) {
         List<String> csvRowList = readerCsvFile.getLinesFromFile(INPUT_FILE_NAME);
         List<FruitTransaction> fruitTransactionList = parser.parseCsvRow(csvRowList);
-        List<FruitTransaction> transactionList = transactionService
-                .fillActivityStorage(fruitTransactionList);
-        fruitShopService.processStorage(transactionList);
+        fruitShopService.processStorage(fruitTransactionList);
         writerCsvFile.writeToFile(reportService.createReport(), OUTPUT_FILE_NAME);
     }
 
