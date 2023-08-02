@@ -1,11 +1,10 @@
 package core.basesyntax.services.actions;
 
-import java.util.Map;
+import core.basesyntax.db.Storage;
 
 public class BalanceActionHandler implements ActionHandler {
     @Override
-    public Map.Entry<String, Integer> actionStore(Map<String, Integer> copyDataFrmDB,
-                                                  String nameOfGoods, Integer valueOfTask) {
-        return Map.entry(nameOfGoods, valueOfTask);
+    public boolean actionStore(Storage fruitDB, String nameOfGoods, Integer valueOfTask) {
+        return fruitDB.add(nameOfGoods, valueOfTask);
     }
 }

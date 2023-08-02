@@ -1,7 +1,7 @@
 package core.basesyntax.services;
 
-import core.basesyntax.dao.StoreDao;
+import core.basesyntax.db.Storage;
 
 public interface WriteFileService {
-    boolean writeToFile(StoreDao dao, String fileName);
+    boolean writeToFile(Storage fruitDB, String fileName);
 }

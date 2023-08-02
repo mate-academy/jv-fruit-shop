@@ -1,6 +1,6 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.dao.StoreDao;
+import core.basesyntax.db.Storage;
 import core.basesyntax.services.WriteFileService;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,8 +10,8 @@ public class WriteFileServiceImpl implements WriteFileService {
     private static final String COMMA = ",";
 
     @Override
-    public boolean writeToFile(StoreDao dao, String fileName) {
-        Map<String, Integer> resultStore = dao.getStorage();
+    public boolean writeToFile(Storage fruitDB, String fileName) {
+        Map<String, Integer> resultStore = fruitDB.getStorageFruits();
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write("fruit,quantity");
             for (Map.Entry<String, Integer> entry : resultStore.entrySet()) {

@@ -1,19 +1,19 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.model.Task;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.ActionStrategy;
 import core.basesyntax.services.actions.ActionHandler;
 import java.util.Map;
 
 public class ActionStrategyImpl implements ActionStrategy {
-    private Map<Task.ActionType, ActionHandler> actionHandlerMap;
+    private Map<FruitTransaction.ActionType, ActionHandler> actionHandlerMap;
 
-    public ActionStrategyImpl(Map<Task.ActionType, ActionHandler> actionHandlerMap) {
+    public ActionStrategyImpl(Map<FruitTransaction.ActionType, ActionHandler> actionHandlerMap) {
         this.actionHandlerMap = actionHandlerMap;
     }
 
     @Override
-    public ActionHandler get(Task.ActionType type) {
+    public ActionHandler get(FruitTransaction.ActionType type) {
         return actionHandlerMap.get(type);
     }
 }

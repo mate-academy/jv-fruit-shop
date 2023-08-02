@@ -1,8 +1,8 @@
 package core.basesyntax.services;
 
-import core.basesyntax.model.Task;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface CreateTaskService {
-    List<Task> createTasks(ReadFileService dataFromFile, String sourcefile);
+    List<FruitTransaction> createTasks(List<String[]> parseData);
 }

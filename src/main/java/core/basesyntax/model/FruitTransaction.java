@@ -1,11 +1,11 @@
 package core.basesyntax.model;
 
-public class Task {
+public class FruitTransaction {
     private ActionType type;
     private String labelGoods;
     private int value;
 
-    public Task(ActionType type, String labelGoods, int value) {
+    public FruitTransaction(ActionType type, String labelGoods, int value) {
         this.type = type;
         this.labelGoods = labelGoods;
         this.value = value;

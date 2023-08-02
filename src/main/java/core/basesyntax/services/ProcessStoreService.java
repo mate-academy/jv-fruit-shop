@@ -1,8 +1,8 @@
 package core.basesyntax.services;
 
-import core.basesyntax.model.Task;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface ProcessStoreService {
-    boolean processAction(List<Task> tasks);
+    boolean processAction(List<FruitTransaction> fruitTransactions);
 }

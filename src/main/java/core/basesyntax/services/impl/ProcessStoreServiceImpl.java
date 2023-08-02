@@ -1,27 +1,28 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.dao.StoreDao;
-import core.basesyntax.model.Task;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.ActionStrategy;
 import core.basesyntax.services.ProcessStoreService;
+import core.basesyntax.services.actions.ActionHandler;
 import java.util.List;
-import java.util.Map;
 
 public class ProcessStoreServiceImpl implements ProcessStoreService {
-    private static StoreDao storeDao;
+    private static Storage fruitDB;
     private static ActionStrategy actionStrategy;
 
-    public ProcessStoreServiceImpl(StoreDao storeDao, ActionStrategy actionStrategy) {
-        this.storeDao = storeDao;
+    public ProcessStoreServiceImpl(Storage fruitDB, ActionStrategy actionStrategy) {
+        this.fruitDB = fruitDB;
         this.actionStrategy = actionStrategy;
     }
 
     @Override
-    public boolean processAction(List<Task> tasks) {
-        for (Task task : tasks) {
-            Map.Entry<String, Integer> resultTaskComplete = actionStrategy.get(task.getType())
-                    .actionStore(storeDao.getStorage(), task.getLabelGoods(), task.getValue());
-            storeDao.add(resultTaskComplete.getKey(), resultTaskComplete.getValue());
+    public boolean processAction(List<FruitTransaction> fruitTransactions) {
+        for (FruitTransaction fruitTransaction : fruitTransactions) {
+            String labelGoods = fruitTransaction.getLabelGoods();
+            int value = fruitTransaction.getValue();
+            ActionHandler actionHandler = actionStrategy.get(fruitTransaction.getType());
+            actionHandler.actionStore(fruitDB, labelGoods, value);
         }
         return true;
     }

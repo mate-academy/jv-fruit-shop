@@ -1,17 +1,16 @@
 package core.basesyntax.services.actions;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.exception.ValidationDataException;
-import java.util.Map;
 
 public interface ActionHandler {
-    Map.Entry<String, Integer> actionStore(Map<String, Integer> copyDataFrmDB,
-                                           String nameOfGoods, Integer valueOfTask);
+    boolean actionStore(Storage fruitDB, String nameOfGoods, Integer valueOfTask);
 
-    default void validData(Map<String, Integer> copyDataFrmDB, String nameOfGoods) {
-        if (copyDataFrmDB.isEmpty()) {
+    default void validData(Storage fruitDB, String nameOfGoods) {
+        if (fruitDB.getStorageFruits().isEmpty()) {
             throw new ValidationDataException("Task error db is empty");
         }
-        if (copyDataFrmDB.get(nameOfGoods) == null) {
+        if (fruitDB.getStorageFruits().get(nameOfGoods) == null) {
             throw new ValidationDataException("Client cant buy not exist product!");
         }
     }
