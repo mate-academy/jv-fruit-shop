@@ -11,10 +11,14 @@ public class PurchaseHandler implements OperationHandler {
         }
 
         String fruitName = fruitTransaction.getFruit();
-        int supplyQuantity = fruitTransaction.getQuantity();
+        int purchaseQuantity = fruitTransaction.getQuantity();
         int currentQuantity = Storage.fruitStorage.get(fruitName);
 
-        Storage.fruitStorage.put(fruitName, currentQuantity - supplyQuantity);
+        if (purchaseQuantity < 0 ) {
+            throw new RuntimeException("Transaction \"purchase\" can`t be negative value");
+        }
+
+        Storage.fruitStorage.put(fruitName, currentQuantity - purchaseQuantity);
 
     }
 }

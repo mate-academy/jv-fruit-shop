@@ -11,8 +11,12 @@ public class BalanceHandler implements OperationHandler {
         }
 
         String fruitName = fruitTransaction.getFruit();
-        int quantity = fruitTransaction.getQuantity();
+        int balanceQuantity = fruitTransaction.getQuantity();
 
-        Storage.fruitStorage.put(fruitName, quantity);
+        if (balanceQuantity < 0 ) {
+            throw new RuntimeException("Transaction \"balance\" can`t be negative value");
+        }
+
+        Storage.fruitStorage.put(fruitName, balanceQuantity);
     }
 }
