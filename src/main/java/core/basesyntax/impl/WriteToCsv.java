@@ -1,24 +1,20 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.service.WriteService;
+import core.basesyntax.service.WriteDataToFileService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
-public class WriteToCsv implements WriteService {
+public class WriteToFileDataToCsv implements WriteDataToFileService {
     @Override
-    public void writeToFile(List<String> preparedData, String path) {
-        if (path == null || preparedData == null) {
-            throw new RuntimeException("Can't write to file with path or data null");
+    public void writeToFile(String preparedData, String path) {
+        if (preparedData == null) {
+            throw new RuntimeException("Can't write to file null data");
         }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
-            for (String data : preparedData) {
-                bufferedWriter.write(data + "\n");
-            }
+            bufferedWriter.write(preparedData);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file with path: " + path);
         }
-
     }
 }
