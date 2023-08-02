@@ -6,11 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReportCreatorImpl implements ReportCreator {
-    private static List<String> apply(List<String> list) {
-        list.add(0, "fruit,quantity");
-        return list;
-    }
-
     @Override
     public List<String> createReport() {
         return Storage.storage.entrySet().stream()
@@ -19,5 +14,10 @@ public class ReportCreatorImpl implements ReportCreator {
                         Collectors.toList(),
                         ReportCreatorImpl::apply
                 ));
+    }
+
+    private static List<String> apply(List<String> list) {
+        list.add(0, "fruit,quantity");
+        return list;
     }
 }

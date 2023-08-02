@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String inputFileName = "src/inputFile.scv";
-    private static final String outputFileName = "src/reportFile.csv";
+    private static final String inputFileName = "src/main/resources/inputFile.scv";
+    private static final String outputFileName = "src/main/resources/reportFile.csv";
     private static final Map<FruitTransaction.Operation, Operator> map = Map.of(
             FruitTransaction.Operation.BALANCE, new BalanceOperator(),
             FruitTransaction.Operation.PURCHASE, new PurchaseOperator(),
