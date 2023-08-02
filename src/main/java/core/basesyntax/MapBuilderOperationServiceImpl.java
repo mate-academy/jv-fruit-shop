@@ -1,8 +1,11 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.handler.*;
-
+import core.basesyntax.strategy.handler.BalanceDataHandler;
+import core.basesyntax.strategy.handler.DataHandler;
+import core.basesyntax.strategy.handler.PurchaseDataHandler;
+import core.basesyntax.strategy.handler.ReturnDataHandler;
+import core.basesyntax.strategy.handler.SupplyDataHandler;
 import java.util.HashMap;
 import java.util.Map;
 

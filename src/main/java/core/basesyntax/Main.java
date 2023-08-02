@@ -13,7 +13,6 @@ import core.basesyntax.service.implementations.WriteCsvFileServiceImpl;
 import core.basesyntax.strategy.DataHandlerStrategy;
 import core.basesyntax.strategy.DataHandlerStrategyImpl;
 import core.basesyntax.strategy.handler.DataHandler;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -26,7 +25,8 @@ public class Main {
     private static final ReadCsvFileService readCsvFileService = new ReadCsvFileServiceImpl();
     private static final WriteCsvFileService writeCsvFileService = new WriteCsvFileServiceImpl();
     private static final ReportService reportService = new ReportServiceImpl();
-    private static final MapBuilderOperationServiceImpl springImitator = new MapBuilderOperationServiceImpl();
+    private static final MapBuilderOperationServiceImpl springImitator =
+            new MapBuilderOperationServiceImpl();
     private static Map<FruitTransaction.Operation, DataHandler> enumHandlerMap;
     private static DataHandlerStrategy dataHandlerStrategy;
 
