@@ -13,6 +13,9 @@ import java.util.List;
 public class FileReaderToolImpl implements FileReaderTool {
     @Override
     public List<String> getData(String filePath) {
+        if (filePath == null) {
+            throw new FileException("There is no path to read ");
+        }
         File file = new File(filePath);
         List<String> dataList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
