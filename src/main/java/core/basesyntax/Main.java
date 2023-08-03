@@ -15,6 +15,9 @@ import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.ProccessDataImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +41,8 @@ public class Main {
         List<FruitTransaction> objectsFromData = converterToObjectService
                 .convertToObjects(dataFromFile);
 
-        final ProccessDataImpl processData = new ProccessDataImpl();
+        final OperationStrategy operationStrategy = new OperationStrategyImpl();
+        final ProccessDataImpl processData = new ProccessDataImpl(operationStrategy);
         processData.handleOperations(objectsFromData, mapOfHandlers);
 
         final ReportGeneratorService reportGenerator = new ReportGeneratorServiceImpl();

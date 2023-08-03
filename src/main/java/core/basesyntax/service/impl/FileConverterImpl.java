@@ -10,18 +10,20 @@ public class FileConverterImpl implements FileConverter {
     private static final int OPERATION_INDEX = 0;
     private static final int TYPE_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final int SKIP_FIRST_LINE = 1;
+    private static final int COMMON_DATA_LENGTH = 3;
 
     @Override
     public List<FruitTransaction> convertToObjects(List<String> data) {
         return data.stream()
-                .skip(1)
+                .skip(SKIP_FIRST_LINE)
                 .map(this::parseFruitTransaction)
                 .collect(Collectors.toList());
     }
 
     private FruitTransaction parseFruitTransaction(String line) {
         String[] partsOfData = line.split(COMMA_SEPARATOR);
-        if (partsOfData.length != 3) {
+        if (partsOfData.length != COMMON_DATA_LENGTH) {
             throw new IllegalArgumentException("Invalid input parameters:" + line);
         }
         String operation = partsOfData[OPERATION_INDEX];
