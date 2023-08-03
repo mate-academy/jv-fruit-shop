@@ -22,7 +22,7 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
             String labelGoods = fruitTransaction.getLabelGoods();
             int value = fruitTransaction.getValue();
             ActionHandler actionHandler = actionStrategy.get(fruitTransaction.getType());
-            actionHandler.actionStore(fruitDB, labelGoods, value);
+            actionHandler.actionStore(labelGoods, value);
         }
         return true;
     }

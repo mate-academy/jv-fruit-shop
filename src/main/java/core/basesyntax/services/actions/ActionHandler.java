@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exception.ValidationDataException;
 
 public interface ActionHandler {
-    boolean actionStore(Storage fruitDB, String nameOfGoods, Integer valueOfTask);
+    boolean actionStore(String nameOfGoods, Integer valueOfTask);
 
     default void validData(Storage fruitDB, String nameOfGoods) {
         if (fruitDB.getStorageFruits().isEmpty()) {

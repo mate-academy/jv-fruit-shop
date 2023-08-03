@@ -23,12 +23,18 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
+        //create database
+        Storage fruitDB = new Storage();
         //Create strategy of actions
         Map<FruitTransaction.ActionType, ActionHandler> actionHandlerMap = new HashMap<>();
-        actionHandlerMap.put(FruitTransaction.ActionType.BALANCE, new BalanceActionHandler());
-        actionHandlerMap.put(FruitTransaction.ActionType.SUPPLY, new SupplyActionHandler());
-        actionHandlerMap.put(FruitTransaction.ActionType.PURCHASE, new PurchaseActionHandler());
-        actionHandlerMap.put(FruitTransaction.ActionType.RETURN, new ReturnActionHandler());
+        actionHandlerMap.put(FruitTransaction.ActionType.BALANCE,
+                new BalanceActionHandler(fruitDB));
+        actionHandlerMap.put(FruitTransaction.ActionType.SUPPLY,
+                new SupplyActionHandler(fruitDB));
+        actionHandlerMap.put(FruitTransaction.ActionType.PURCHASE,
+                new PurchaseActionHandler(fruitDB));
+        actionHandlerMap.put(FruitTransaction.ActionType.RETURN,
+                new ReturnActionHandler(fruitDB));
         ActionStrategy actionStrategy = new ActionStrategyImpl(actionHandlerMap);
         ReadFileService readService = new ReadFileServiceImpl();
         String[] readFiles = readService.read("resources/inputFile.csv");
@@ -36,16 +42,14 @@ public class Main {
         //Create list<Task> - all actions from file
         List<FruitTransaction> fruitTransactions = new CreateTaskServiceImpl()
                 .createTasks(parseData);
-        //create database
-        Storage fruitDB = new Storage();
         //Create main process of handle tasks
         ProcessStoreService handleTasks = new ProcessStoreServiceImpl(fruitDB, actionStrategy);
         //handle tasks
         handleTasks.processAction(fruitTransactions);
         //write service created
-        WriteFileService writeToFileService = new WriteFileServiceImpl();
+        WriteFileService writeToFileService = new WriteFileServiceImpl(fruitDB);
         //write to file
-        writeToFileService.writeToFile(fruitDB, "resources/resultData.txt");
+        writeToFileService.writeToFile("resources/resultData.txt");
         //additional print
         Map<String, Integer> storage = fruitDB.getStorageFruits();
         System.out.println(storage.toString());
