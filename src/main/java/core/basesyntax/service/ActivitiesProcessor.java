@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Activity;
+import core.basesyntax.model.FruitActivity;
 import java.util.List;
 
 public interface ActivitiesProcessor {
-    void processActivities(List<Activity> listOfActivities);
+    void processActivities(List<FruitActivity> activities);
 }

@@ -1,29 +1,18 @@
 package core.basesyntax.model;
 
+import core.basesyntax.service.exceptions.UnsupportedActivityException;
+
 import java.util.Arrays;
 
-public class Activity {
-    private static final int ACTIVITY_TYPE_INDEX = 0;
-    private static final int FRUIT_NAME_INDEX = 1;
-    private static final int QUANTITY_INDEX = 2;
-    private static final String SEPARATOR = ",";
-
+public class FruitActivity {
     private final Type activityType;
     private final String fruitName;
     private final Integer quantity;
 
-    public Activity(Type activityType, String fruitName, Integer quantity) {
+    public FruitActivity(Type activityType, String fruitName, Integer quantity) {
         this.activityType = activityType;
         this.fruitName = fruitName;
         this.quantity = quantity;
-    }
-
-    public static Activity makeActivity(String activityLine) {
-        String[] activitySplit = activityLine.split(SEPARATOR);
-        Type activityType = Type.getType(activitySplit[ACTIVITY_TYPE_INDEX]);
-        String fruitName = activitySplit[FRUIT_NAME_INDEX];
-        Integer quantity = Integer.parseInt(activitySplit[QUANTITY_INDEX]);
-        return new Activity(activityType, fruitName, quantity);
     }
 
     public Type getActivityType() {
@@ -57,7 +46,7 @@ public class Activity {
         public static Type getType(String code) {
             return Arrays.stream(Type.values())
                     .filter(t -> t.getCode().equals(code))
-                    .findFirst().orElseThrow();
+                    .findFirst().orElseThrow(() -> new UnsupportedActivityException(code));
         }
     }
 }
