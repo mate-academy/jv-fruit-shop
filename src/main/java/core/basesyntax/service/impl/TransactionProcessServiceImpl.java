@@ -2,13 +2,13 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategyService;
-import core.basesyntax.service.ShopProcessService;
+import core.basesyntax.service.TransactionProcessService;
 import java.util.List;
 
-public class ShopProcessServiceImpl implements ShopProcessService {
-    private OperationStrategyService operationStrategyService;
+public class TransactionProcessServiceImpl implements TransactionProcessService {
+    private final OperationStrategyService operationStrategyService;
 
-    public ShopProcessServiceImpl(OperationStrategyService operationStrategyService) {
+    public TransactionProcessServiceImpl(OperationStrategyService operationStrategyService) {
         this.operationStrategyService = operationStrategyService;
     }
 
