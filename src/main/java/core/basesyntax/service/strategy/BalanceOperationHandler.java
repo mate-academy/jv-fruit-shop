@@ -1,5 +1,6 @@
 package core.basesyntax.service.strategy;
 
+import core.basesyntax.exceptions.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.FruitStorage;
 

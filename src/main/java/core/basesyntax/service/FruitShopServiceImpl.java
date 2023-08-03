@@ -2,11 +2,15 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.strategy.OperationHandler;
-import core.basesyntax.service.strategy.OperationHandlerFactory;
 import java.util.List;
+import java.util.Map;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private final OperationHandlerFactory operationHandlerFactory = new OperationHandlerFactory();
+    private final Map<FruitTransaction.Operation, OperationHandler> strategyMap;
+
+    public FruitShopServiceImpl(Map<FruitTransaction.Operation, OperationHandler> strategyMap) {
+        this.strategyMap = strategyMap;
+    }
 
     @Override
     public void processAll(List<FruitTransaction> fruitTransactions) {
@@ -16,7 +20,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     private void process(FruitTransaction fruitTransaction) {
-        OperationHandler operationHandler = operationHandlerFactory.get(fruitTransaction);
+        OperationHandler operationHandler = strategyMap.get(fruitTransaction.getOperation());
         operationHandler.operate(fruitTransaction);
     }
 }

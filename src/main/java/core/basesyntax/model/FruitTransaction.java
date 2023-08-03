@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exceptions.InvalidDataException;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -57,7 +59,8 @@ public class FruitTransaction {
                     return values()[i];
                 }
             }
-            return null;
+            throw new InvalidDataException("Maybe you specified a non-existent operation, "
+                    + "you entered " + code);
         }
     }
 }

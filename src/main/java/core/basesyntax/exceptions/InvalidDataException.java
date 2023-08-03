@@ -1,9 +1,7 @@
-package core.basesyntax.service.strategy;
+package core.basesyntax.exceptions;
 
 public class InvalidDataException extends RuntimeException {
-    private String message;
-
     public InvalidDataException(String message) {
-        this.message = message;
+        super(message);
     }
 }

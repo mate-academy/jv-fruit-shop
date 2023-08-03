@@ -1,4 +1,4 @@
-package core.basesyntax.report;
+package core.basesyntax.writer;
 
 import java.util.List;
 
