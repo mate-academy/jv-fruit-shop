@@ -4,7 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.ActionStrategy;
 import core.basesyntax.services.ProcessStoreService;
-import core.basesyntax.services.ReadFileService;
 import core.basesyntax.services.WriteFileService;
 import core.basesyntax.services.actions.ActionHandler;
 import core.basesyntax.services.actions.BalanceActionHandler;
@@ -44,7 +43,7 @@ public class Main {
         List<FruitTransaction> fruitTransactions = new CreateTaskServiceImpl()
                 .createTasks(parseData);
         //Create main process of handle tasks
-        ProcessStoreService handleTasks = new ProcessStoreServiceImpl(fruitDB, actionStrategy);
+        ProcessStoreService handleTasks = new ProcessStoreServiceImpl(actionStrategy);
         //handle tasks
         handleTasks.processAction(fruitTransactions);
         //write service created

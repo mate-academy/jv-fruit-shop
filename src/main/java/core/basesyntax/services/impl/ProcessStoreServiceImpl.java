@@ -1,6 +1,5 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.ActionStrategy;
 import core.basesyntax.services.ProcessStoreService;
@@ -8,11 +7,9 @@ import core.basesyntax.services.actions.ActionHandler;
 import java.util.List;
 
 public class ProcessStoreServiceImpl implements ProcessStoreService {
-    private static Storage fruitDB;
     private static ActionStrategy actionStrategy;
 
-    public ProcessStoreServiceImpl(Storage fruitDB, ActionStrategy actionStrategy) {
-        this.fruitDB = fruitDB;
+    public ProcessStoreServiceImpl(ActionStrategy actionStrategy) {
         this.actionStrategy = actionStrategy;
     }
 
