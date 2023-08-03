@@ -23,7 +23,8 @@ public class DataParserImpl implements DataParser {
 
     public static FruitActivity makeActivityFromLine(String activityLine) {
         String[] activitySplit = activityLine.split(SEPARATOR);
-        FruitActivity.Type activityType = FruitActivity.Type.getType(activitySplit[ACTIVITY_TYPE_INDEX]);
+        FruitActivity.Type activityType =
+                FruitActivity.Type.getType(activitySplit[ACTIVITY_TYPE_INDEX]);
         String fruitName = activitySplit[FRUIT_NAME_INDEX];
         Integer quantity = Integer.parseInt(activitySplit[QUANTITY_INDEX]);
         return new FruitActivity(activityType, fruitName, quantity);

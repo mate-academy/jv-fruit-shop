@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
-import core.basesyntax.service.exceptions.UnsupportedActivityException;
-
+import core.basesyntax.service.exceptions.UnsupportedFruitActivityException;
 import java.util.Arrays;
 
 public class FruitActivity {
@@ -46,7 +45,7 @@ public class FruitActivity {
         public static Type getType(String code) {
             return Arrays.stream(Type.values())
                     .filter(t -> t.getCode().equals(code))
-                    .findFirst().orElseThrow(() -> new UnsupportedActivityException(code));
+                    .findFirst().orElseThrow(() -> new UnsupportedFruitActivityException(code));
         }
     }
 }

@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitActivity;
 import core.basesyntax.service.ActivitiesProcessor;
 import core.basesyntax.service.ActivityStrategy;
-
 import java.util.List;
 
 public class ActivitiesProcessorImpl implements ActivitiesProcessor {
