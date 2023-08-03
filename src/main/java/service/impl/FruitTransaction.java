@@ -1,11 +1,11 @@
-package core.basesyntax.service.impl;
+package service.impl;
 
 import java.util.Objects;
 
 public class FruitTransaction {
-    private final Operation operation;
-    private final String fruit;
-    private final int quantity;
+    private Operation operation;
+    private String fruit;
+    private int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
@@ -31,7 +31,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String code;
+        private String code;
 
         Operation(String code) {
             this.code = code;
@@ -43,7 +43,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Unknown operation code: " + code);
+            throw new RuntimeException("Unknown operation code" + code);
         }
     }
 }

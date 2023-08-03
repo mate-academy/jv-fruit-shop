@@ -1,10 +1,11 @@
-package core.basesyntax.service.impl;
+package service.impl;
 
-import core.basesyntax.service.DataFileParser;
 import java.util.ArrayList;
 import java.util.List;
+import service.Parser;
 
-public class DataFileParserImpl implements DataFileParser {
+public class ParserImpl implements Parser {
+    private static final int SERVICE_LINE = 0;
     private static final int OPERATION_CODE = 0;
     private static final int FRUIT_TYPE = 1;
     private static final int FRUIT_QTY = 2;
@@ -16,8 +17,9 @@ public class DataFileParserImpl implements DataFileParser {
             throw new RuntimeException("Input data is empty");
         }
         List<FruitTransaction> transactions = new ArrayList<>();
-        for (int i = 1; i < rawData.size(); i++) {
-            String[] parts = rawData.get(i).split(COMMA);
+        rawData.remove(SERVICE_LINE);
+        for (String line : rawData) {
+            String[] parts = line.split(COMMA);
             transactions.add(new FruitTransaction(FruitTransaction
                     .Operation.getOperation(parts[OPERATION_CODE]),
                     parts[FRUIT_TYPE], Integer.parseInt(parts[FRUIT_QTY])));

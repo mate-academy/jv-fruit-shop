@@ -1,4 +1,4 @@
-package core.basesyntax.db;
+package db;
 
 import java.util.HashMap;
 import java.util.Map;
