@@ -5,5 +5,4 @@ import java.util.Map;
 
 public class Storage {
     public static final Map<String, Integer> storage = new HashMap<>();
-
 }

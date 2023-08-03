@@ -1,42 +1,46 @@
 package core.basesyntax;
 
+import core.basesyntax.service.DataFileParser;
+import core.basesyntax.service.FruitReportService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.DataFileParserImpl;
+import core.basesyntax.service.impl.FruitReportServiceImpl;
+import core.basesyntax.service.impl.FruitTransaction;
+import core.basesyntax.service.impl.ReaderServiceCsvImpl;
+import core.basesyntax.service.impl.WriterServiceCsvImpl;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.handler.BalanceOperationHandler;
+import core.basesyntax.strategy.handler.OperationHandler;
+import core.basesyntax.strategy.handler.PurchaseOperationHandler;
+import core.basesyntax.strategy.handler.ReturnOperationHandler;
+import core.basesyntax.strategy.handler.SupplyOperationHandler;
 import java.util.List;
 import java.util.Map;
-import service.CreateReport;
-import service.Parser;
-import service.ReaderService;
-import service.WriterService;
-import service.impl.CreateReportImpl;
-import service.impl.FruitTransaction;
-import service.impl.ParserImpl;
-import service.impl.ReaderServiceCsvImpl;
-import service.impl.WriterServiceCsvImpl;
-import strategy.handler.BalanceHandler;
-import strategy.handler.Handler;
-import strategy.handler.PurchaseHandler;
-import strategy.handler.ReturnHandler;
-import strategy.handler.SupplyHandler;
 
 public class Main {
-    private static final Map<FruitTransaction.Operation, Handler> transactionHandlerMap = Map.of(
-            FruitTransaction.Operation.BALANCE, new BalanceHandler(),
-            FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
-            FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
-            FruitTransaction.Operation.RETURN, new ReturnHandler());
+    private static final String INPUT_FILE = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/report.csv";
+    private static final Map<FruitTransaction.Operation, OperationHandler> handlerMap = Map.of(
+            FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+            FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
+            FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
+            FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
 
     public static void main(String[] args) {
         ReaderService reader = new ReaderServiceCsvImpl();
-        List<String> inputData = reader.readFromFile("src/main/resources/input.csv");
-        Parser parser = new ParserImpl();
-        List<FruitTransaction> transactionList = parser.parse(inputData);
+        List<String> inputData = reader.readFromFile(INPUT_FILE);
+        DataFileParser dataFileParser = new DataFileParserImpl();
+        OperationStrategy strategy = new OperationStrategyImpl(handlerMap);
+        List<FruitTransaction> transactionList = dataFileParser.parse(inputData);
         for (FruitTransaction transaction : transactionList) {
-            Handler currentHandler = transactionHandlerMap.get(transaction.getOperation());
-            currentHandler.fruitOperation(transaction.getFruit(), transaction.getQuantity());
+            OperationHandler currentHandler = strategy.getHandler(transaction.getOperation());
+            currentHandler.handle(transaction.getFruit(), transaction.getQuantity());
         }
-        CreateReport report = new CreateReportImpl();
+        FruitReportService report = new FruitReportServiceImpl();
         List<String> result = report.createReport();
         WriterService writer = new WriterServiceCsvImpl();
-        writer.writeToFile(result);
+        writer.writeToFile(result, OUTPUT_FILE);
     }
-
 }
