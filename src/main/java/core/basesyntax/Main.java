@@ -23,10 +23,14 @@ public class Main {
         List<String> data = fileReader.getData(inputFilePath);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler());
 
         TransactionsFormerImpl transactionsFormerImpl = new TransactionsFormerImpl();
         List<FruitTransaction> transactions = transactionsFormerImpl.formTransactionList(data);
