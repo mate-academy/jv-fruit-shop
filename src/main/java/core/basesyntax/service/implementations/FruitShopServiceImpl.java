@@ -8,8 +8,8 @@ import core.basesyntax.strategy.DataHandlerStrategy;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private DataHandlerStrategy dataHandlerStrategy;
-    private List<FruitTransaction> transactions;
+    private final DataHandlerStrategy dataHandlerStrategy;
+    private final List<FruitTransaction> transactions;
 
     public FruitShopServiceImpl(
             List<FruitTransaction> transactions, DataHandlerStrategy dataHandlerStrategy) {

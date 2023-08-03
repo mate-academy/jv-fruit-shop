@@ -17,6 +17,9 @@ public class ParseServiceImpl implements ParseService {
 
     @Override
     public List<FruitTransaction> parseDataToTransaction(List<String> data) {
+        if (data == null) {
+            throw new WrongDataBaseException("How did you dare to give me null as file data?");
+        }
         if (!data.isEmpty() && !data.get(0).equals(HEADER)) {
             throw new WrongDataBaseException("Data without header: " + data);
         }

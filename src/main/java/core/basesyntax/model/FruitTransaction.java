@@ -3,7 +3,7 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class FruitTransaction {
-    private Operation operation;
+    private final Operation operation;
     private String fruit;
     private int quantity;
 
