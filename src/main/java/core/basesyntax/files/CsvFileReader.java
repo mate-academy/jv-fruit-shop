@@ -21,7 +21,7 @@ public class CsvFileReader implements FileReader {
             }
 
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file, " + fileName, e);
+            throw new RuntimeException("Can't find/read file by path: " + fileName, e);
         }
 
         output.remove(0);

@@ -10,7 +10,7 @@ public class CsvFileWriter implements FileWriter {
         try {
             Files.write(Path.of(toFileName), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file, ", e);
+            throw new RuntimeException("Can't find/read file by path: " + toFileName, e);
         }
     }
 }
