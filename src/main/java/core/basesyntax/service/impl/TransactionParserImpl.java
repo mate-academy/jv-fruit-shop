@@ -12,7 +12,7 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parseCsvRow(List<String> csvRowList) {
+    public List<FruitTransaction> parseCsvRows(List<String> csvRowList) {
         List<FruitTransaction> output = new ArrayList<>();
 
         for (String row : csvRowList) {

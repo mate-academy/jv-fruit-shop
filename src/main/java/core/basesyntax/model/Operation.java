@@ -22,7 +22,7 @@ public enum Operation {
         return Arrays
                 .stream(values())
                 .filter(s -> s.code.equals(type))
-                .findFirst().orElseThrow(() -> new RuntimeException("No such code transaction"));
+                .findFirst().orElseThrow(() -> new RuntimeException("No such code transaction - " + type));
     }
 
 }

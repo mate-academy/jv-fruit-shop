@@ -46,7 +46,7 @@ public class Main {
 
     public static void main(String[] args) {
         List<String> csvRowList = csvFileReader.readFileLines(INPUT_FILE_NAME);
-        List<FruitTransaction> fruitTransactionList = parser.parseCsvRow(csvRowList);
+        List<FruitTransaction> fruitTransactionList = parser.parseCsvRows(csvRowList);
         fruitShopService.processStorage(fruitTransactionList);
         csvFileWriter.writeToFile(reportService.createReport(), OUTPUT_FILE_NAME);
     }
