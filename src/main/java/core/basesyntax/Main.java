@@ -36,8 +36,9 @@ public class Main {
         actionHandlerMap.put(FruitTransaction.ActionType.RETURN,
                 new ReturnActionHandler(fruitDB));
         ActionStrategy actionStrategy = new ActionStrategyImpl(actionHandlerMap);
-        ReadFileService readService = new ReadFileServiceImpl();
-        String[] readFiles = readService.read("resources/inputFile.csv");
+        //read file
+        String[] readFiles = new ReadFileServiceImpl().read("resources/inputFile.csv");
+        //parse data from file
         List<String[]> parseData = new ParseCsvServiceImpl().parse(readFiles);
         //Create list<Task> - all actions from file
         List<FruitTransaction> fruitTransactions = new CreateTaskServiceImpl()
