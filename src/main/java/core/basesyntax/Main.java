@@ -17,7 +17,6 @@ import core.basesyntax.service.impl.ProccessDataImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
