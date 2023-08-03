@@ -2,8 +2,8 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operators.OperationHandler;
-import core.basesyntax.service.OperatorStrategy;
 import core.basesyntax.service.FruitTransactionService;
+import core.basesyntax.service.OperatorStrategy;
 import java.util.List;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {

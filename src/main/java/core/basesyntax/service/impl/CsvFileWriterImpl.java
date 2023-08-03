@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 public class CsvFileWriterImpl implements FileWriter {
     @Override
@@ -14,7 +13,8 @@ public class CsvFileWriterImpl implements FileWriter {
         try {
             Files.write(filePath, report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("An error occurred while writing the report to the file: " + fileName, e);
+            throw new RuntimeException("An error occurred while writing the report to the file: "
+                    + fileName, e);
         }
     }
 }

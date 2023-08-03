@@ -9,6 +9,7 @@ public class ReportCreatorImpl implements ReportCreator {
     private static final int HEADER_ROW_INDEX = 0;
     private static final String SEPARATOR = ",";
     private static final String HEADER_ROW = "fruit,quantity";
+
     @Override
     public String createReport() {
         List<String> reportLines = Storage.storage.entrySet().stream()

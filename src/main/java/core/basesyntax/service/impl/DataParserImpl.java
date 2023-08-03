@@ -28,8 +28,10 @@ public class DataParserImpl implements DataParser {
         }
         return values;
     }
+
     private FruitTransaction createFruitTransaction(String[] values) {
-        FruitTransaction.Operation operation = FruitTransaction.Operation.getOperation(values[OPERATION_INDEX]);
+        FruitTransaction.Operation operation
+                = FruitTransaction.Operation.getOperation(values[OPERATION_INDEX]);
         String product = values[PRODUCT_INDEX];
         int amount = Integer.parseInt(values[AMOUNT_INDEX]);
         return new FruitTransaction(operation, product, amount);
