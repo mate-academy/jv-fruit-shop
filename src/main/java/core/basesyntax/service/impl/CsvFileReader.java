@@ -9,15 +9,9 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class CsvFileReader implements FileReader {
-    private final Path source;
-
-    public CsvFileReader(Path source) {
-        PathValidator.validatePathForReading(source);
-        this.source = source;
-    }
-
     @Override
-    public List<String> read() {
+    public List<String> read(Path source) {
+        PathValidator.validatePathForReading(source);
         try {
             return Files.readAllLines(source);
         } catch (IOException e) {

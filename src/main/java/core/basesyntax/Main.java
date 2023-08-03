@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String SOURCE = "src/main/resources/source.csv";
-    private static final String DESTINATION = "src/main/resources/destination.csv";
+    private static final String SOURCE_PATH = "src/main/resources/source.csv";
+    private static final String DESTINATION_PATH = "src/main/resources/destination.csv";
     private static final Map<Transaction.Operation, OperationStrategy> HANDLERS = new HashMap<>();
 
     static {
@@ -35,9 +35,9 @@ public class Main {
 
     public static void main(String[] args) {
         // read data from csv file
-        Path source = Path.of(SOURCE);
-        FileReader reader = new CsvFileReader(source);
-        List<String> lines = reader.read();
+        Path source = Path.of(SOURCE_PATH);
+        FileReader reader = new CsvFileReader();
+        List<String> lines = reader.read(source);
         // mapping data to Object
         TransactionMapper mapper = new TransactionMapperImpl();
         List<Transaction> transactions = mapper.mapAll(lines);
@@ -51,8 +51,8 @@ public class Main {
         String report = reportCreator.create();
 
         // write report to file
-        Path destination = Path.of(DESTINATION);
-        FileWriter fileWriter = new CsvFileWriter(destination);
-        fileWriter.write(report);
+        Path destination = Path.of(DESTINATION_PATH);
+        FileWriter fileWriter = new CsvFileWriter();
+        fileWriter.write(destination, report);
     }
 }

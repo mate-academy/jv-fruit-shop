@@ -9,15 +9,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class CsvFileWriter implements FileWriter {
-    private final Path destination;
-
-    public CsvFileWriter(Path destination) {
-        PathValidator.validatePath(destination);
-        this.destination = destination;
-    }
-
     @Override
-    public void write(String source) {
+    public void write(Path destination, String source) {
+        PathValidator.validatePath(destination);
         try (BufferedWriter writer = Files.newBufferedWriter(destination)) {
             writer.write(source);
         } catch (IOException e) {
