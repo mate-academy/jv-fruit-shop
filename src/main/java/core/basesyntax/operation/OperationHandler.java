@@ -1,4 +1,4 @@
-package core.basesyntax.operations;
+package core.basesyntax.operation;
 
 public interface OperationHandler {
     void changeFruitQuantity(String fruit, int quantity);

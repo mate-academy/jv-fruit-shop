@@ -1,4 +1,4 @@
-package core.basesyntax.operations;
+package core.basesyntax.operation;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.PurchaseException;
