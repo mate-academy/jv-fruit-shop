@@ -7,7 +7,7 @@ import core.basesyntax.service.transaction.TransactionHandler;
 import java.util.List;
 
 public class DataProcessingServiceImpl implements DataProcessingService {
-    private TransactionStrategy transactionStrategy;
+    private final TransactionStrategy transactionStrategy;
 
     public DataProcessingServiceImpl(TransactionStrategy transactionStrategy) {
         this.transactionStrategy = transactionStrategy;

@@ -12,7 +12,7 @@ public class WriterServiceImpl implements WriterService {
     public void writeToFile(String filepath, String data) {
         File file = new File(filepath);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            writer.write(data); // do something with the file we've opened
+            writer.write(data);
         } catch (IOException e) {
             throw new RuntimeException("File not found: " + filepath, e);
         }

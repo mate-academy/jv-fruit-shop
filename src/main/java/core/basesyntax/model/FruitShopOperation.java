@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-public enum Operation {
+public enum FruitShopOperation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
@@ -8,7 +8,7 @@ public enum Operation {
 
     private String code;
 
-    Operation(String code) {
+    FruitShopOperation(String code) {
         this.code = code;
     }
 
@@ -16,10 +16,10 @@ public enum Operation {
         return code;
     }
 
-    public static Operation fromCode(String code) {
-        for (Operation operation : Operation.values()) {
-            if (operation.code.equalsIgnoreCase(code)) {
-                return operation;
+    public static FruitShopOperation fromCode(String code) {
+        for (FruitShopOperation fruitShopOperation : FruitShopOperation.values()) {
+            if (fruitShopOperation.code.equalsIgnoreCase(code)) {
+                return fruitShopOperation;
             }
         }
         throw new IllegalArgumentException("Invalid operation code: " + code);

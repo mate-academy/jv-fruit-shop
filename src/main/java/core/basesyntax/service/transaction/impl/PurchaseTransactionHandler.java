@@ -9,10 +9,11 @@ public class PurchaseTransactionHandler implements TransactionHandler {
     @Override
     public void executeTransaction(FruitTransaction transaction) {
         if (Storage.get(transaction.getFruit()) < transaction.getQuantity()) {
-            throw new InvalidDataException("The amount of purchase is too big! "
-                    + "Purchase amount is " + transaction.getQuantity() + ", but shop has only "
-                    + Storage.get(transaction.getFruit()) + " "
-                    + transaction.getFruit().name().toLowerCase());
+            throw new InvalidDataException(String.format("The amount of purchase is too big! "
+                            + "Purchase amount is %d, but shop has only %d %s.",
+                    transaction.getQuantity(),
+                    Storage.get(transaction.getFruit()),
+                    transaction.getFruit()));
         }
         Integer oldQuantity = Storage.get(transaction.getFruit());
         Integer newQuantity = oldQuantity - transaction.getQuantity();;

@@ -1,8 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitShopOperation;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.interfaces.TransactionParser;
 import core.basesyntax.service.interfaces.TransactionValidator;
 import java.util.ArrayList;
@@ -34,9 +33,10 @@ public class TransactionsParserImpl implements TransactionParser<List<FruitTrans
     private static FruitTransaction valueOf(String record) {
         record = record.trim();
         String[] fields = record.split(COMMA_DIVIDER);
-        Operation operation = Operation.fromCode(fields[INDEX_OF_OPERATION_IN_RECORD]);
-        Fruit fruit = Fruit.valueOf(fields[INDEX_OF_FRUIT_IN_RECORD].toUpperCase());
+        FruitShopOperation fruitShopOperation =
+                FruitShopOperation.fromCode(fields[INDEX_OF_OPERATION_IN_RECORD]);
+        String fruit = String.valueOf(fields[INDEX_OF_FRUIT_IN_RECORD].toUpperCase());
         int quantity = Integer.parseInt(fields[INDEX_OF_QUANTITY_IN_RECORD]);
-        return new FruitTransaction(operation, fruit, quantity);
+        return new FruitTransaction(fruitShopOperation, fruit, quantity);
     }
 }

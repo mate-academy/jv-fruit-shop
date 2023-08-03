@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.InvalidDataException;
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.FruitShopOperation;
 import core.basesyntax.service.interfaces.TransactionValidator;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -41,10 +41,11 @@ public class TransactionValidatorImpl implements TransactionValidator {
     }
 
     private void checkOperationName(String data) {
-        Predicate<Operation> predicate = element -> element.equals(
-                Operation.fromCode(splittedData(data)[INDEX_OF_OPERATION_IN_RECORD].trim()));
-        if (Arrays.stream(Operation.values()).noneMatch(predicate)) {
-            throw new InvalidDataException("The Operation is not valid!");
+        Predicate<FruitShopOperation> predicate = element -> element.equals(
+                FruitShopOperation.fromCode(
+                        splittedData(data)[INDEX_OF_OPERATION_IN_RECORD].trim()));
+        if (Arrays.stream(FruitShopOperation.values()).noneMatch(predicate)) {
+            throw new InvalidDataException("The FruitShopOperation is not valid!");
         }
     }
 
