@@ -1,10 +1,10 @@
 package core.service;
 
-import core.service.impl.Spliterator;
+import core.service.impl.SplitDataService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataSpliterator implements Spliterator<OperationData> {
+public class SplitDataImpl implements SplitDataService<OperationData> {
     private static final String COMMA = ",";
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int PRODUCT_INDEX = 1;

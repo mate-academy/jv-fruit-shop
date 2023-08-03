@@ -1,5 +1,5 @@
 package core.service.impl;
 
-public interface Readable {
+public interface ReadService {
     String read(String path);
 }

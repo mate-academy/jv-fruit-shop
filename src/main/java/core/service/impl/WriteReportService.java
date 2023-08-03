@@ -1,5 +1,5 @@
 package core.service.impl;
 
-public interface Writable {
+public interface WriteReportService {
     void createReport(String filePath, String report);
 }
