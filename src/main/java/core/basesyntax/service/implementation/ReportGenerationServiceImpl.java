@@ -13,7 +13,7 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
     public String generate() {
         StringBuilder report = new StringBuilder();
         report.append(HEADER).append(SEPARATOR);
-        for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.STORAGE.entrySet()) {
             report.append(entry.getKey())
                     .append(COMMA)
                     .append(entry.getValue())
