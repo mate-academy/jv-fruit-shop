@@ -1,18 +1,18 @@
 package service.impl;
 
-import service.*;
-
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import service.ReportWriterService;
 
 public class ReportWriterServiceImpl implements ReportWriterService {
-    String outputFilePath;
+    private String outputFilePath;
 
     public ReportWriterServiceImpl(String outputFilePath) {
         this.outputFilePath = outputFilePath;
     }
 
     @Override
-    public void writeReportToFile(String report, String outputFilePath) throws IOException {
+    public void writeReportToFile(String report) throws IOException {
         try (FileWriter writer = new FileWriter(outputFilePath)) {
             writer.write(report);
         } catch (IOException e) {

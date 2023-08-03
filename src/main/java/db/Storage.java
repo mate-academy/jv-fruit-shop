@@ -1,9 +1,7 @@
 package db;
 
-import model.*;
-
-import java.net.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
     private static HashMap<String,Integer> fruitBalances;
@@ -23,6 +21,7 @@ public class Storage {
             fruitBalances.put(fruit, newQuantity);
         }
     }
+
     public int getFruitBalance(String fruit) {
         return fruitBalances.getOrDefault(fruit, 0);
     }
@@ -33,6 +32,6 @@ public class Storage {
 
     @Override
     public String toString() {
-        return "Storage{" + fruitBalances  + "}";
+        return "Storage{" + fruitBalances + "}";
     }
 }

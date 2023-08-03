@@ -1,8 +1,7 @@
 package service;
 
-import model.*;
-
-import java.util.*;
+import java.util.List;
+import model.FruitTransaction;
 
 public interface DataProcesorService {
     /**
@@ -10,11 +9,13 @@ public interface DataProcesorService {
      *
      * @param inputLines list of lines from  CSV- file.
      */
+
     void process(List<String> inputLines);
     /**
      * Process data from CSV-file.
      *
      * @param line list of lines from  CSV- file.
      */
+
     FruitTransaction parseTransaction(String line);
 }

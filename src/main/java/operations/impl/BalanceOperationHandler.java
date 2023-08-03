@@ -1,8 +1,8 @@
 package operations.impl;
 
-import db.*;
-import model.*;
-import operations.*;
+import db.Storage;
+import model.FruitTransaction;
+import operations.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override

@@ -1,7 +1,7 @@
 package service;
 
-import model.*;
-import operations.*;
+import model.FruitTransaction;
+import operations.OperationHandler;
 
 public interface OperationStrategy {
     /**

@@ -1,7 +1,7 @@
 package operations;
 
-import db.*;
-import model.*;
+import db.Storage;
+import model.FruitTransaction;
 
 public interface OperationHandler {
     /*

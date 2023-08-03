@@ -1,7 +1,5 @@
 package model;
 
-import javax.swing.text.html.*;
-
 public class FruitTransaction {
     private Operation operation;
     private String fruitName;
@@ -42,7 +40,6 @@ public class FruitTransaction {
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
-
         private final String code;
 
         Operation(String code) {
@@ -62,6 +59,4 @@ public class FruitTransaction {
             throw new IllegalArgumentException("Invalid operation code: " + code);
         }
     }
-
-
 }

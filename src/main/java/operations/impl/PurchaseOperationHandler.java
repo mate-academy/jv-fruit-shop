@@ -1,8 +1,8 @@
 package operations.impl;
 
-import db.*;
-import model.*;
-import operations.*;
+import db.Storage;
+import model.FruitTransaction;
+import operations.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
 
@@ -12,7 +12,8 @@ public class PurchaseOperationHandler implements OperationHandler {
         int quantity = fruitTransaction.getQuantity();
         int balance = storage.getFruitBalance(fruit);
         if (balance < quantity) {
-            throw new RuntimeException("Insufficient quantity of " + fruit + " in the store for purchase.");
+            throw new RuntimeException("Insufficient quantity of "
+                + fruit + " in the store for purchase.");
         }
 
         storage.removeFruit(fruit,quantity);

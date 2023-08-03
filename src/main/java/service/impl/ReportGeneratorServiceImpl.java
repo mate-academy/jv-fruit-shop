@@ -1,9 +1,8 @@
 package service.impl;
 
-import db.*;
-import service.*;
-
-import java.util.*;
+import db.Storage;
+import java.util.Map;
+import service.ReportGeneratorService;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     private final Storage storage;
@@ -24,8 +23,6 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
             int quantity = entry.getValue();
             report.append(fruit).append(",").append(quantity).append("\n");
         }
-
         return report.toString();
     }
-
 }
