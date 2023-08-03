@@ -2,7 +2,6 @@ package core.basesyntax.services;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handlers.OperationHandler;
-
 import java.util.List;
 import java.util.Map;
 

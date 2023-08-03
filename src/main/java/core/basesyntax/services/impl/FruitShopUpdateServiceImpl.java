@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.FruitShopUpdateService;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.handlers.OperationHandler;
-
 import java.util.List;
 import java.util.Map;
 
