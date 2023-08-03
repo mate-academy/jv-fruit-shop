@@ -44,3 +44,4 @@ public class Main {
         writer.writeToFile(result, OUTPUT_FILE);
     }
 }
+

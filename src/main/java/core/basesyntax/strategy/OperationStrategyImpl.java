@@ -16,3 +16,4 @@ public class OperationStrategyImpl implements OperationStrategy {
         return handlerMap.get(operation);
     }
 }
+
