@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.exceptions.InvalidOperationException;
 import core.basesyntax.interfaces.TransactionsFormer;
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.ArrayList;
 import java.util.List;
 

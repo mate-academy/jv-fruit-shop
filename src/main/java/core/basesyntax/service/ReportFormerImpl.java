@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.interfaces.ReportFormer;
-
 import java.util.Map;
 
 public class ReportFormerImpl implements ReportFormer {

@@ -15,7 +15,9 @@ public class FileWriterToolImpl implements FileWriterTool {
         try {
             file.createNewFile();
         } catch (IOException e) {
-            throw new FileException("An error occurred while creating a report file at the path " + reportPath, e);
+            throw new FileException(
+                    "An error occurred while creating a report file at the path "
+                            + reportPath, e);
         }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write(data);

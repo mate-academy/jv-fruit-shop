@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.exceptions.FileException;
 import core.basesyntax.interfaces.FileReaderTool;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
