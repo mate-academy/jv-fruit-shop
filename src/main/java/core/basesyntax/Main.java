@@ -13,22 +13,33 @@ import core.basesyntax.services.impl.OperationStrategyImpl;
 import core.basesyntax.services.impl.ProcessDataImpl;
 import core.basesyntax.services.impl.ReportCreatorImpl;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.handlers.BalanceHandler;
+import core.basesyntax.strategy.handlers.OperationHandler;
+import core.basesyntax.strategy.handlers.PurchaseHandler;
+import core.basesyntax.strategy.handlers.ReturnHandler;
+import core.basesyntax.strategy.handlers.SupplyHandler;
+import java.util.Map;
 
 public class Main {
-    private static final FileReader fileCsvReader = new CsvReaderImpl();
-    private static final ProcessData processDataService = new ProcessDataImpl();
-    private static final ReportCreator reportCreator = new ReportCreatorImpl();
-    private static final FileWriter fileCsvWriter = new CsvWriterImpl();
-    private static final OperationStrategy operationStrategy = new OperationStrategyImpl();
-    private static final FruitShopUpdateService<FruitTransaction> fruitShopUpdateService =
-            new FruitShopUpdateServiceImpl(operationStrategy);
-    private static final String fromFilePath = "src/main/resources/CsvInput.csv";
-    private static final String toFilePath = "src/main/resources/CsvOutput.csv";
+    private static final Map<FruitTransaction.OperationType, OperationHandler> MAP = Map.of(
+            FruitTransaction.OperationType.BALANCE, new BalanceHandler(),
+            FruitTransaction.OperationType.RETURN, new ReturnHandler(),
+            FruitTransaction.OperationType.PURCHASE, new PurchaseHandler(),
+            FruitTransaction.OperationType.SUPPLY, new SupplyHandler());
+    private static final String FROM_FILE_PATH = "src/main/resources/CsvInput.csv";
+    private static final String TO_FILE_PATH = "src/main/resources/CsvOutput.csv";
 
     public static void main(String[] args) {
-        String transactions = fileCsvReader.read(fromFilePath);
-        fruitShopUpdateService.update(processDataService.process(transactions));
-        fileCsvWriter.write(toFilePath, reportCreator.createReport());
+        FileReader fileCsvReader = new CsvReaderImpl();
+        ProcessData processDataService = new ProcessDataImpl();
+        ReportCreator reportCreator = new ReportCreatorImpl();
+        FileWriter fileCsvWriter = new CsvWriterImpl();
+        OperationStrategy operationStrategy = new OperationStrategyImpl();
+        FruitShopUpdateService<FruitTransaction> fruitShopUpdateService =
+                new FruitShopUpdateServiceImpl(operationStrategy);
+        String transactions = fileCsvReader.read(FROM_FILE_PATH);
+        fruitShopUpdateService.update(processDataService.process(transactions), MAP);
+        fileCsvWriter.write(TO_FILE_PATH, reportCreator.createReport());
 
     }
 }
