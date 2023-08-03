@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class CsvFileReaderService implements FileReaderService {
+    private static final int END_OF_THE_FILE = -1;
 
     @Override
     public String readDataFromFile(String fileName) {
@@ -15,10 +16,10 @@ public class CsvFileReaderService implements FileReaderService {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileFrom))) {
             int value = reader.read();
-            if (value == -1) {
+            if (value == END_OF_THE_FILE) {
                 return "";
             }
-            while (value != -1) {
+            while (value != END_OF_THE_FILE) {
                 builder.append((char)value);
                 value = reader.read();
             }
