@@ -13,7 +13,6 @@ public class DataParserImpl implements DataParser {
 
     @Override
     public List<FruitActivity> processFile(List<String> lines) {
-        lines.remove(0);
         List<FruitActivity> activities = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             activities.add(makeActivityFromLine(lines.get(i)));
