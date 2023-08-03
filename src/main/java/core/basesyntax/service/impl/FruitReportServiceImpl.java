@@ -1,12 +1,12 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
-import db.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.FruitReportService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import service.CreateReport;
 
-public class CreateReportImpl implements CreateReport {
+public class FruitReportServiceImpl implements FruitReportService {
     private static final String SERVICE_INFO = "fruit,quantity";
     private static final String COMMA = ",";
 
@@ -23,4 +23,3 @@ public class CreateReportImpl implements CreateReport {
         return result;
     }
 }
-

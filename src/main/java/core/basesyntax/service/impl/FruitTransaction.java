@@ -1,4 +1,4 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
 import java.util.Objects;
 
