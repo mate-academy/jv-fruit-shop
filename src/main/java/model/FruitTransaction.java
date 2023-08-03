@@ -31,7 +31,7 @@ public class FruitTransaction {
 
         private String code;
 
-        private OperationType(String code) {
+        OperationType(String code) {
             this.code = code;
         }
 
