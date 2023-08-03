@@ -1,14 +1,15 @@
 package core.basesyntax.model;
 
 import core.basesyntax.exceptions.InvalidOperationException;
+import java.util.Objects;
 
 public class FruitTransaction {
     private final Operation operation;
     private final String fruit;
     private final int quantity;
 
-    public FruitTransaction(String operationCode, String fruit, int quantity) {
-        this.operation = getByCode(operationCode);
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
@@ -23,15 +24,6 @@ public class FruitTransaction {
 
     public Operation getOperation() {
         return operation;
-    }
-
-    private Operation getByCode(String code) {
-        for (Operation operation : Operation.values()) {
-            if (operation.getCode().equals(code)) {
-                return operation;
-            }
-        }
-        throw new InvalidOperationException("Invalid code");
     }
 
     public enum Operation {
@@ -49,5 +41,27 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation getByCode(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new InvalidOperationException("Invalid code");
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FruitTransaction that = (FruitTransaction) o;
+        return quantity == that.quantity && operation == that.operation && Objects.equals(fruit, that.fruit);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruit, quantity);
     }
 }

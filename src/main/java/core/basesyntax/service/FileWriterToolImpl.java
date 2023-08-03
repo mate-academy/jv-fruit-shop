@@ -13,6 +13,7 @@ public class FileWriterToolImpl implements FileWriterTool {
     public void writeToFile(String data, String reportPath) {
         File file = new File(reportPath);
         try {
+            file.delete();
             file.createNewFile();
         } catch (IOException e) {
             throw new FileException(
