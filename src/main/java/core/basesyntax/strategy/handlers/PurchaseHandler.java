@@ -6,7 +6,8 @@ import core.basesyntax.model.FruitTransaction;
 public class PurchaseHandler implements OperationHandler {
     @Override
     public void operate(FruitTransaction fruitTransaction) {
-        int newAmount = Storage.storage.get(fruitTransaction.getFruit()) - fruitTransaction.getQuantity();
+        int newAmount = Storage.storage.get(fruitTransaction.getFruit())
+                - fruitTransaction.getQuantity();
         if (newAmount < 0) {
             throw new RuntimeException("Can't do purchase, because amount will be less than 0");
         }

@@ -1,8 +1,8 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.FruitShopUpdateService;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public class FruitShopUpdateServiceImpl implements FruitShopUpdateService<FruitTransaction> {

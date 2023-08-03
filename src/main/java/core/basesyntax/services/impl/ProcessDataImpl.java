@@ -1,7 +1,7 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.services.ProcessData;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.services.ProcessData;
 import java.util.List;
 import java.util.stream.Stream;
 

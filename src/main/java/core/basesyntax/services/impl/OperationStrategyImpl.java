@@ -1,11 +1,11 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.handlers.BalanceHandler;
 import core.basesyntax.strategy.handlers.OperationHandler;
 import core.basesyntax.strategy.handlers.PurchaseHandler;
 import core.basesyntax.strategy.handlers.ReceiveHandler;
-import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
