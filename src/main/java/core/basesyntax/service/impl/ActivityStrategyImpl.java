@@ -2,7 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Activity;
 import core.basesyntax.service.ActivityStrategy;
-import core.basesyntax.service.activity.ActivityHandler;
+import core.basesyntax.service.activity.strategy.ActivityHandler;
 import java.util.Map;
 
 public class ActivityStrategyImpl implements ActivityStrategy {

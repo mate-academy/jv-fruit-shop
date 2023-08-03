@@ -3,11 +3,11 @@ package core.basesyntax;
 import core.basesyntax.model.Activity;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.activity.ActivityHandler;
-import core.basesyntax.service.activity.BalanceHandler;
-import core.basesyntax.service.activity.PurchaseHandler;
-import core.basesyntax.service.activity.ReturnHandler;
-import core.basesyntax.service.activity.SupplyHandler;
+import core.basesyntax.service.activity.strategy.ActivityHandler;
+import core.basesyntax.service.activity.strategy.BalanceHandler;
+import core.basesyntax.service.activity.strategy.PurchaseHandler;
+import core.basesyntax.service.activity.strategy.ReturnHandler;
+import core.basesyntax.service.activity.strategy.SupplyHandler;
 import core.basesyntax.service.impl.ActivitiesProcessorImpl;
 import core.basesyntax.service.impl.ActivityStrategyImpl;
 import core.basesyntax.service.impl.CsvFileReader;
@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShopHW {
-    private static final String FILE_NAME = "activities.csv";
-    private static final String REPORT_NAME = "report.csv";
+    private static final String FILE_NAME = "src/main/resources/activities.csv";
+    private static final String REPORT_NAME = "src/main/resources/report.csv";
     private static final List<Activity> LIST_OF_ACTIVITIES = new ArrayList<>();
     private static final FileReader CSV_FILE_READER = new CsvFileReader();
     private static final FileWriter CSV_FILE_WRITER = new CsvFileWriter();

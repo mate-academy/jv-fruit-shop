@@ -12,11 +12,18 @@ public class Activity {
     private final String fruitName;
     private final Integer quantity;
 
-    public Activity(String activityLine) {
+    public Activity(Type activityType, String fruitName, Integer quantity) {
+        this.activityType = activityType;
+        this.fruitName = fruitName;
+        this.quantity = quantity;
+    }
+
+    public static Activity makeActivity(String activityLine) {
         String[] activitySplit = activityLine.split(SEPARATOR);
-        this.activityType = Type.getType(activitySplit[ACTIVITY_TYPE_INDEX]);
-        this.fruitName = activitySplit[FRUIT_NAME_INDEX];
-        this.quantity = Integer.parseInt(activitySplit[QUANTITY_INDEX]);
+        Type activityType = Type.getType(activitySplit[ACTIVITY_TYPE_INDEX]);
+        String fruitName = activitySplit[FRUIT_NAME_INDEX];
+        Integer quantity = Integer.parseInt(activitySplit[QUANTITY_INDEX]);
+        return new Activity(activityType, fruitName, quantity);
     }
 
     public Type getActivityType() {

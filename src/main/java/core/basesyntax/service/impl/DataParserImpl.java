@@ -12,7 +12,7 @@ public class DataParserImpl implements DataParser {
         listOflines.remove(0);
         List<Activity> listOfActivities = new ArrayList<>();
         for (String line : listOflines) {
-            listOfActivities.add(new Activity(line));
+            listOfActivities.add(Activity.makeActivity(line));
         }
         return listOfActivities;
     }
