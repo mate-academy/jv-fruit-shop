@@ -9,12 +9,12 @@ import java.util.List;
 
 public class CsvFileWriterImpl implements FileWriter {
     @Override
-    public void writeToFile(List<String> report, String fileName) {
+    public void writeToFile(String report, String fileName) {
         Path filePath = Paths.get(fileName);
         try {
-            Files.write(filePath, report);
+            Files.write(filePath, report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write report in file ", e);
+            throw new RuntimeException("An error occurred while writing the report to the file: " + fileName, e);
         }
     }
 }

@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public void applyOperation(String product, int amount) {
+    public void execute(String product, int amount) {
         int productAmount = Storage.storage.get(product) + amount;
         Storage.storage.replace(product, productAmount);
     }

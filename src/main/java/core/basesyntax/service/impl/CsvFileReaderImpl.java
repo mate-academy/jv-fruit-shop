@@ -14,7 +14,8 @@ public class CsvFileReaderImpl implements FileReader {
         try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
             return stream.collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file ", e);
+            throw new RuntimeException("An error occurred while trying to read from the file "
+                    + fileName + " , error message received was: ", e);
         }
     }
 }
