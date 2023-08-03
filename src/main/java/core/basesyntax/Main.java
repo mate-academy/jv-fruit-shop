@@ -1,7 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.files.ReaderCsvFile;
-import core.basesyntax.files.WriterCsvFile;
+import core.basesyntax.files.CsvFileReader;
+import core.basesyntax.files.CsvFileWriter;
+import core.basesyntax.files.FileReader;
+import core.basesyntax.files.FileWriter;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitShopService;
@@ -26,8 +28,8 @@ public class Main {
     private static final String OUTPUT_FILE_NAME = "src/main/resources/outputFile.csv";
 
     private static final Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-    private static final ReaderCsvFile readerCsvFile = new ReaderCsvFile();
-    private static final WriterCsvFile writerCsvFile = new WriterCsvFile();
+    private static final FileReader csvFileReader = new CsvFileReader();
+    private static final FileWriter csvFileWriter = new CsvFileWriter();
     private static final TransactionParser parser = new TransactionParserImpl();
     private static final ReportService reportService = new ReportServiceImpl();
     private static final OperationStrategy operationStrategy
@@ -43,10 +45,10 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        List<String> csvRowList = readerCsvFile.getLinesFromFile(INPUT_FILE_NAME);
+        List<String> csvRowList = csvFileReader.readFileLines(INPUT_FILE_NAME);
         List<FruitTransaction> fruitTransactionList = parser.parseCsvRow(csvRowList);
         fruitShopService.processStorage(fruitTransactionList);
-        writerCsvFile.writeToFile(reportService.createReport(), OUTPUT_FILE_NAME);
+        csvFileWriter.writeToFile(reportService.createReport(), OUTPUT_FILE_NAME);
     }
 
 }
