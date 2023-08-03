@@ -9,14 +9,16 @@ import java.util.List;
 public class TransactionsFormerImpl implements TransactionsFormer {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
+    private static final int MIN_QUANTITY = 0;
     private static final int QUANTITY_INDEX = 2;
+    private static final int VALID_LINE_PARTS = 3;
     private static final String COMA_SEPARATOR = ",";
 
     public List<FruitTransaction> formTransactionList(List<String> data) {
         List<FruitTransaction> list = new ArrayList<>();
         for (String line : data) {
             String[] value = line.split(COMA_SEPARATOR);
-            if (value.length != 3) {
+            if (value.length != VALID_LINE_PARTS) {
                 throw new InvalidOperationException("Wrong operation input");
             }
             String fruit = value[FRUIT_NAME_INDEX];
@@ -24,10 +26,10 @@ public class TransactionsFormerImpl implements TransactionsFormer {
                 throw new InvalidOperationException("Fruit name can`t be null");
             }
             int quantity = Integer.parseInt(value[QUANTITY_INDEX]);
-            if (quantity < 0) {
-                throw new InvalidOperationException(
-                        "Can't change quantity less than 0, line's quantity is "
-                                + quantity);
+            if (quantity < MIN_QUANTITY) {
+                throw new InvalidOperationException(String.format(
+                        "Can't change quantity less than " + MIN_QUANTITY
+                        + ", line's quantity is " + quantity));
             }
             FruitTransaction fruitTransaction = new FruitTransaction(
                     value[OPERATION_INDEX],

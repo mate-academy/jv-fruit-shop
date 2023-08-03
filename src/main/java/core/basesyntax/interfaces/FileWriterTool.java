@@ -1,5 +1,5 @@
 package core.basesyntax.interfaces;
 
 public interface FileWriterTool {
-    void writeReport(String data, String reportPath);
+    void writeToFile(String data, String reportPath);
 }

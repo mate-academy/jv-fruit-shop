@@ -15,6 +15,6 @@ public class OperationStrategyImpl implements OperationStrategy {
     public void get(FruitTransaction transaction) {
         operationHandlerMap.get(
                 transaction.getOperation())
-                .changeFruitQuantity(transaction.getFruit(), transaction.getQuantity());
+                .handleOperation(transaction.getFruit(), transaction.getQuantity());
     }
 }

@@ -1,5 +1,5 @@
 package core.basesyntax.operation;
 
 public interface OperationHandler {
-    void changeFruitQuantity(String fruit, int quantity);
+    void handleOperation(String fruit, int quantity);
 }

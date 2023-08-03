@@ -10,7 +10,7 @@ import java.io.IOException;
 public class FileWriterToolImpl implements FileWriterTool {
 
     @Override
-    public void writeReport(String data, String reportPath) {
+    public void writeToFile(String data, String reportPath) {
         File file = new File(reportPath);
         try {
             file.createNewFile();

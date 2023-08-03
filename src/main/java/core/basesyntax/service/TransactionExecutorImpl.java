@@ -2,17 +2,14 @@ package core.basesyntax.service;
 
 import core.basesyntax.interfaces.TransactionExecutor;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
-import core.basesyntax.operation.OperationStrategyImpl;
-import java.util.Map;
 
 public class TransactionExecutorImpl implements TransactionExecutor {
     private final OperationStrategy strategy;
 
     public TransactionExecutorImpl(
-            Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap) {
-        this.strategy = new OperationStrategyImpl(operationHandlerMap);
+            OperationStrategy strategy) {
+        this.strategy = strategy;
     }
 
     public void transactionExecute(FruitTransaction transaction) {

@@ -3,6 +3,8 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceOperationHandler;
 import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.operation.OperationStrategy;
+import core.basesyntax.operation.OperationStrategyImpl;
 import core.basesyntax.operation.PurchaseOperationHandler;
 import core.basesyntax.operation.ReturnOperationHandler;
 import core.basesyntax.operation.SupplyOperationHandler;
@@ -35,7 +37,8 @@ public class Main {
         TransactionsFormerImpl transactionsFormerImpl = new TransactionsFormerImpl();
         List<FruitTransaction> transactions = transactionsFormerImpl.formTransactionList(data);
 
-        TransactionExecutorImpl executor = new TransactionExecutorImpl(operationHandlerMap);
+        OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
+        TransactionExecutorImpl executor = new TransactionExecutorImpl(strategy);
         for (FruitTransaction transaction : transactions) {
             executor.transactionExecute(transaction);
         }
@@ -44,6 +47,6 @@ public class Main {
         String report = reportFormer.formReport();
 
         FileWriterToolImpl fileWriter = new FileWriterToolImpl();
-        fileWriter.writeReport(report, reportFilePath);
+        fileWriter.writeToFile(report, reportFilePath);
     }
 }
