@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class ReaderServiceImpl implements ReaderService {
-    private static final String SOURCE_FILE_PATH = "dataTxt/input.txt";
 
     @Override
     public String readFromFile(String filePath) {
