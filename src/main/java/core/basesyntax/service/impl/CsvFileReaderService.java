@@ -16,9 +16,6 @@ public class CsvFileReaderService implements FileReaderService {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileFrom))) {
             int value = reader.read();
-            if (value == END_OF_THE_FILE) {
-                return "";
-            }
             while (value != END_OF_THE_FILE) {
                 builder.append((char)value);
                 value = reader.read();
