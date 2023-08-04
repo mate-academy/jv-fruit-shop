@@ -1,6 +1,7 @@
 package core.basesyntax.services.actions;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.exception.ValidationDataException;
 
 public class PurchaseActionHandler implements ActionHandler {
     private static Storage fruitDB;
@@ -10,9 +11,12 @@ public class PurchaseActionHandler implements ActionHandler {
     }
 
     @Override
-    public boolean actionStoring(String nameOfGoods, Integer valueOfTask) {
+    public boolean executeAction(String nameOfGoods, Integer valueOfTask) {
         validateData(fruitDB, nameOfGoods);
         Integer value = fruitDB.getStorageFruits().get(nameOfGoods);
+        if (value < valueOfTask) {
+            throw new ValidationDataException("Client can't buy " + valueOfTask + " " + nameOfGoods + " only " + value + " available");
+        }
         return fruitDB.add(nameOfGoods, value - valueOfTask);
     }
 }

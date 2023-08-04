@@ -21,25 +21,26 @@ public class CreateTaskServiceImpl implements CreateTaskService {
                     break;
                 }
             }
-            if (typeOfTask == null) {
-                throw new ValidationDataException("Type is not exist");
-            }
-
             String nameOfProduct = readLine[ConstantsForCsvParse.INDEX_OF_NAME];
-            if (nameOfProduct == null) {
-                throw new ValidationDataException("Name of Product cant be null");
-            }
-
-            if (nameOfProduct.isEmpty()) {
-                throw new ValidationDataException("Name of Product cant be empty");
-            }
-
             Integer valueOfLine = Integer.parseInt(readLine[ConstantsForCsvParse.INDEX_OF_VALUE]);
-            if (valueOfLine < NUM_ZERO) {
-                throw new ValidationDataException("Value cant be less than " + NUM_ZERO);
-            }
+            validateData(typeOfTask, nameOfProduct, valueOfLine);
             fruitTransactions.add(new FruitTransaction(typeOfTask, nameOfProduct, valueOfLine));
         }
         return fruitTransactions;
+    }
+
+    private void validateData(FruitTransaction.ActionType typeOfTask, String nameOfProduct, Integer valueOfLine) {
+        if (typeOfTask == null) {
+            throw new ValidationDataException("Type is not exist");
+        }
+        if (nameOfProduct == null) {
+            throw new ValidationDataException("Name of Product cant be null");
+        }
+        if (nameOfProduct.isEmpty()) {
+            throw new ValidationDataException("Name of Product cant be empty");
+        }
+        if (valueOfLine < NUM_ZERO) {
+            throw new ValidationDataException("Value cant be less than " + NUM_ZERO);
+        }
     }
 }

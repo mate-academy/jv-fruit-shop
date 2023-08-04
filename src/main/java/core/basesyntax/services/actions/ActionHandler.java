@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exception.ValidationDataException;
 
 public interface ActionHandler {
-    boolean actionStoring(String nameOfGoods, Integer valueOfTask);
+    boolean executeAction(String nameOfGoods, Integer valueOfTask);
 
     default void validateData(Storage fruitDB, String nameOfGoods) {
         if (fruitDB == null) {

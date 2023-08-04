@@ -10,7 +10,7 @@ public class BalanceActionHandler implements ActionHandler {
     }
 
     @Override
-    public boolean actionStoring(String nameOfGoods, Integer valueOfTask) {
+    public boolean executeAction(String nameOfGoods, Integer valueOfTask) {
         return fruitDB.add(nameOfGoods, valueOfTask);
     }
 }
