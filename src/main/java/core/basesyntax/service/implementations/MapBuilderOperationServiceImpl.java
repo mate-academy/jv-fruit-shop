@@ -2,11 +2,11 @@ package core.basesyntax.service.implementations;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.MapBuilderOperationService;
-import core.basesyntax.strategy.handler.BalanceDataHandler;
-import core.basesyntax.strategy.handler.DataHandler;
-import core.basesyntax.strategy.handler.PurchaseDataHandler;
-import core.basesyntax.strategy.handler.ReturnDataHandler;
-import core.basesyntax.strategy.handler.SupplyDataHandler;
+import core.basesyntax.strategy.handlers.BalanceDataHandler;
+import core.basesyntax.strategy.handlers.DataHandler;
+import core.basesyntax.strategy.handlers.PurchaseDataHandler;
+import core.basesyntax.strategy.handlers.ReturnDataHandler;
+import core.basesyntax.strategy.handlers.SupplyDataHandler;
 import java.util.HashMap;
 import java.util.Map;
 

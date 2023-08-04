@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.handler.DataHandler;
+import core.basesyntax.strategy.handlers.DataHandler;
 import java.util.Map;
 
 // SpringImitationService

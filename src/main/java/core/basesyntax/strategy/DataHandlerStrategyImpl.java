@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.handler.DataHandler;
+import core.basesyntax.strategy.handlers.DataHandler;
 import java.util.Map;
 
 public class DataHandlerStrategyImpl implements DataHandlerStrategy {

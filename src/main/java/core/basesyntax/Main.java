@@ -13,7 +13,7 @@ import core.basesyntax.service.implementations.ReportServiceImpl;
 import core.basesyntax.service.implementations.WriteCsvFileServiceImpl;
 import core.basesyntax.strategy.DataHandlerStrategy;
 import core.basesyntax.strategy.DataHandlerStrategyImpl;
-import core.basesyntax.strategy.handler.DataHandler;
+import core.basesyntax.strategy.handlers.DataHandler;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
