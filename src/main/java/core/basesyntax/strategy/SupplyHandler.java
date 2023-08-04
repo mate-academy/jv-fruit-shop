@@ -6,8 +6,8 @@ import core.basesyntax.service.implementation.StorageServiceImpl;
 public class SupplyHandler implements FruitShopOperationsHandler {
     private StorageService storageService;
 
-    public SupplyHandler() {
-        storageService = new StorageServiceImpl();
+    public SupplyHandler(StorageService storageService) {
+        this.storageService = storageService;
     }
 
     @Override

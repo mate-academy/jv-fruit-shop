@@ -1,13 +1,12 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.service.StorageService;
-import core.basesyntax.service.implementation.StorageServiceImpl;
 
 public class BalanceHandler implements FruitShopOperationsHandler {
     private StorageService storageService;
 
-    public BalanceHandler() {
-        storageService = new StorageServiceImpl();
+    public BalanceHandler(StorageService storageService) {
+        this.storageService = storageService;
     }
 
     @Override
