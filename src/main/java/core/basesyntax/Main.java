@@ -11,13 +11,12 @@ import core.basesyntax.service.implementation.FileReaderServiceImpl;
 import core.basesyntax.service.implementation.FileWriterServiceImpl;
 import core.basesyntax.service.implementation.ReportGenerationServiceImpl;
 import core.basesyntax.service.implementation.ShopServiceImpl;
-import java.io.File;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        File transactionsFile = new File("src/main/resources/test.csv");
-        File reportFile = new File("src/main/resources/report.csv");
+        String transactionsFile = "src/main/resources/test.csv";
+        String reportFile = "src/main/resources/report.csv";
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         String rawData = fileReaderService.read(transactionsFile);
 

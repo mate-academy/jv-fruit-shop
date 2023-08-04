@@ -2,13 +2,12 @@ package core.basesyntax.service.implementation;
 
 import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class FileReaderServiceImpl implements FileReaderService {
     @Override
-    public String read(File file) {
+    public String read(String file) {
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
             String value = bufferedReader.readLine();
