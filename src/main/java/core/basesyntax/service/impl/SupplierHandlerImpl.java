@@ -6,8 +6,7 @@ import core.basesyntax.service.OperationHandler;
 
 public class SupplierHandlerImpl implements OperationHandler {
     @Override
-    public boolean applyOperation(FruitTransaction fruitTransaction) {
-        boolean isAdded = false;
+    public void applyOperation(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruitName();
         int fruitQuantityToAdd = fruitTransaction.getFruitQuantity();
         if (FruitsStorage.fruitsStorage.containsKey(fruitName)) {
@@ -15,7 +14,5 @@ public class SupplierHandlerImpl implements OperationHandler {
             fruitQuantityToAdd = fruitQuantityToAdd + fruitQuantityInStorage;
         }
         FruitsStorage.fruitsStorage.put(fruitName, fruitQuantityToAdd);
-        isAdded = true;
-        return isAdded;
     }
 }

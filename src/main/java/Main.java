@@ -3,14 +3,12 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParserService;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.OperationService;
 import core.basesyntax.service.ReadDataService;
 import core.basesyntax.service.ReportCreationService;
 import core.basesyntax.service.WriteDataService;
 import core.basesyntax.service.impl.BalanceHandlerImpl;
 import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
-import core.basesyntax.service.impl.OperationHandlerImpl;
 import core.basesyntax.service.impl.PurchaseHandlerImpl;
 import core.basesyntax.service.impl.ReadDataServiceImpl;
 import core.basesyntax.service.impl.ReportCreationServiceImpl;
@@ -37,8 +35,7 @@ public class Main {
         ReadDataService fileReader = new ReadDataServiceImpl();
         List<String> dataFromFile = fileReader.readData(INPUT_DATA_FILE_NAME);
 
-        OperationService operationService = new OperationHandlerImpl();
-        DataParserService dataParserService = new DataParserServiceImpl(operationService);
+        DataParserService dataParserService = new DataParserServiceImpl();
         List<FruitTransaction> fruitTransaction = dataParserService
                 .createFruitTransaction(dataFromFile);
 

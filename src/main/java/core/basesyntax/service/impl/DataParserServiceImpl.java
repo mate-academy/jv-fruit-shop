@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParserService;
-import core.basesyntax.service.OperationService;
 import core.basesyntax.util.DataValidator;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +15,6 @@ public class DataParserServiceImpl implements DataParserService {
     private static final int PRICE_ARRAY_INDEX = 2;
     private static final int ELEMENT_DATA_LENGTH_IN_FILE = 3;
 
-    private final OperationService operationService;
-
-    public DataParserServiceImpl(OperationService operationService) {
-        this.operationService = operationService;
-    }
-
     @Override
     public List<FruitTransaction> createFruitTransaction(List<String> data) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
@@ -32,7 +26,7 @@ public class DataParserServiceImpl implements DataParserService {
                 int fruitQuantity = Integer.parseInt(splitData[PRICE_ARRAY_INDEX].trim());
                 DataValidator.validateInputData(operationCode, fruitName, fruitQuantity);
                 fruitTransactionList.add(new FruitTransaction.FruitBuilder()
-                        .setOperationType(operationService.getOperation(operationCode))
+                        .setOperationType(Operation.getOperationByCode(operationCode))
                         .setFruitName(fruitName)
                         .setFruitQuantity(fruitQuantity)
                         .build());
