@@ -6,8 +6,11 @@ import core.service.OperationType;
 import core.service.ReadServiceImpl;
 import core.service.SplitDataImpl;
 import core.service.WriteReportServiceImpl;
-import core.transactions.*;
-
+import core.transactions.BalanceOperationHandler;
+import core.transactions.OperationHandler;
+import core.transactions.PurchaseOperationHandler;
+import core.transactions.ReturnOperationHandler;
+import core.transactions.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
