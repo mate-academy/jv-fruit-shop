@@ -5,7 +5,7 @@ import core.basesyntax.db.Storage;
 public class ReturnOperationHandler implements OperationHandler {
     private final HandlerDataValidator dataValidator;
 
-    public ReturnOperationHandler() {
+    public ReturnOperationHandler(HandlerDataValidator dataValidator) {
         this.dataValidator = new HandlerDataValidatorImpl();
     }
 

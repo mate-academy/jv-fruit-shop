@@ -10,7 +10,6 @@ public class WriterServiceCsvImpl implements WriterService {
 
     @Override
     public void writeToFile(List<String> list, String fileName) {
-
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             for (String line : list) {
                 bw.write(line);
@@ -21,4 +20,3 @@ public class WriterServiceCsvImpl implements WriterService {
         }
     }
 }
-

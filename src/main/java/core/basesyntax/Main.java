@@ -12,6 +12,8 @@ import core.basesyntax.service.impl.WriterServiceCsvImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handler.BalanceOperationHandler;
+import core.basesyntax.strategy.handler.HandlerDataValidator;
+import core.basesyntax.strategy.handler.HandlerDataValidatorImpl;
 import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.ReturnOperationHandler;
@@ -22,11 +24,12 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE = "src/main/resources/input.csv";
     private static final String OUTPUT_FILE = "src/main/resources/report.csv";
+    private static final HandlerDataValidator dataValidator = new HandlerDataValidatorImpl();
     private static final Map<FruitTransaction.Operation, OperationHandler> handlerMap = Map.of(
-            FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
-            FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
-            FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
-            FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+            FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(dataValidator),
+            FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(dataValidator),
+            FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(dataValidator),
+            FruitTransaction.Operation.RETURN, new ReturnOperationHandler(dataValidator));
 
     public static void main(String[] args) {
         ReaderService reader = new ReaderServiceCsvImpl();
