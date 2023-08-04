@@ -26,7 +26,7 @@ public class StorageServiceImpl implements StorageService {
         if (Storage.STORAGE.containsKey(key)) {
             checkProductAvailability(key, value);
         } else {
-            throw new ProductIsAbsentException("Such product wasn't found");
+            throw new ProductIsAbsentException("The following product wasn't found: " + key);
         }
     }
 
@@ -40,7 +40,8 @@ public class StorageServiceImpl implements StorageService {
         if (Storage.STORAGE.get(key) >= value) {
             Storage.STORAGE.put(key, Storage.STORAGE.get(key) - value);
         } else {
-            throw new InsufficientStockException("Not enough product in stock");
+            throw new InsufficientStockException("Not enough " + key
+                    + "s in stock. Only " + value + " are available.");
         }
     }
 }
