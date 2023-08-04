@@ -2,15 +2,16 @@ package core.service;
 
 import static core.storage.Storage.fruitTransactions;
 
+import core.operationstrategy.OperationStrategyImpl;
 import core.transactions.OperationHandler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class FruitStore {
-    private Map<OperationType, OperationHandler> operationHandlers;
+    private OperationStrategyImpl operationHandlers;
 
-    public FruitStore(Map<OperationType, OperationHandler> operationHandlers) {
+    public FruitStore(OperationStrategyImpl operationHandlers) {
         this.operationHandlers = operationHandlers;
     }
 

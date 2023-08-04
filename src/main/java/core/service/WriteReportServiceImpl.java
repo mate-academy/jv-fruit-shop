@@ -11,11 +11,12 @@ public class WriteReportServiceImpl implements WriteReportService {
     private static final String PATH_DEFAULT = "src/main/";
 
     @Override
-    public void createReport(String filePath, String report) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(PATH_DEFAULT + filePath))) {
+    public void createReport(String filePathTo, String report) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(
+                PATH_DEFAULT + filePathTo))) {
             writer.write(FIRST_LINE + report);
         } catch (IOException e) {
-            throw new ReportWriteException("Can't write data in file " + filePath);
+            throw new ReportWriteException("Can't write data in file " + filePathTo);
         }
     }
 }
