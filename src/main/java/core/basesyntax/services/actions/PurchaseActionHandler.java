@@ -15,7 +15,8 @@ public class PurchaseActionHandler implements ActionHandler {
         validateData(fruitDB, nameOfGoods);
         Integer value = fruitDB.getStorageFruits().get(nameOfGoods);
         if (value < valueOfTask) {
-            throw new ValidationDataException("Client can't buy " + valueOfTask + " " + nameOfGoods + " only " + value + " available");
+            throw new ValidationDataException("Client can't buy " + valueOfTask
+                    + " " + nameOfGoods + " only " + value + " available");
         }
         return fruitDB.add(nameOfGoods, value - valueOfTask);
     }

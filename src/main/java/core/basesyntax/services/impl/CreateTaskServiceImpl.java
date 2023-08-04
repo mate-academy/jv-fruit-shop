@@ -29,7 +29,8 @@ public class CreateTaskServiceImpl implements CreateTaskService {
         return fruitTransactions;
     }
 
-    private void validateData(FruitTransaction.ActionType typeOfTask, String nameOfProduct, Integer valueOfLine) {
+    private void validateData(FruitTransaction.ActionType typeOfTask,
+                              String nameOfProduct, Integer valueOfLine) {
         if (typeOfTask == null) {
             throw new ValidationDataException("Type is not exist");
         }
