@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class FruitStorage {
     private static Map<String, Integer> fruits = new HashMap<>();
@@ -43,11 +42,7 @@ public class FruitStorage {
         }
     }
 
-    public static Optional<String> getFruit(String fruitName) {
-        if (fruits.containsKey(fruitName)) {
-            return Optional.ofNullable(fruitName);
-        } else {
-            return Optional.ofNullable(null);
-        }
+    public static boolean isFruitPresent(String fruitName) {
+        return fruits.containsKey(fruitName);
     }
 }

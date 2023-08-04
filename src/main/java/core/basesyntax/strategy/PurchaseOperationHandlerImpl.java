@@ -8,9 +8,8 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
     public void handleOperation(FruitTransaction transaction) {
         String fruitName = transaction.getFruit();
         int quantity = transaction.getQuantity();
-        if (FruitStorage.getFruit(fruitName).isPresent()) {
-            String fruit = FruitStorage.getFruit(fruitName).get();
-            int updatedQuantity = FruitStorage.getFruits().get(fruit) - quantity;
+        if (FruitStorage.isFruitPresent(fruitName)) {
+            int updatedQuantity = FruitStorage.getFruits().get(fruitName) - quantity;
             if (updatedQuantity < 0) {
                 throw new RuntimeException("Invalid fruit "
                         + "quantity after purchase: " + fruitName);
