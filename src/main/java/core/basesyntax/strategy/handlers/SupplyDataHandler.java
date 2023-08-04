@@ -1,7 +1,6 @@
 package core.basesyntax.strategy.handlers;
 
 import core.basesyntax.exceptions.FruitsNameException;
-import core.basesyntax.exceptions.FruitsQuantityException;
 import core.basesyntax.storage.Storage;
 import java.util.Objects;
 
@@ -9,17 +8,21 @@ public class SupplyDataHandler implements DataHandler {
 
     @Override
     public void processData(String fruit, int quantity) {
+        validateSupplyData(fruit, quantity);
+        Storage.addFruits(fruit, Storage.getFruits(fruit) + quantity);
+    }
+
+    private void validateSupplyData(String fruit, int quantity) {
         if (fruit == null || fruit.isEmpty()) {
             throw new FruitsNameException("Wrong fruit name: "
                     + fruit);
         }
         if (quantity < 0) {
-            throw new FruitsQuantityException("Wrong fruit quantity for "
+            throw new RuntimeException("Wrong fruit quantity for "
                     + fruit
                     + ", quantity: "
                     + quantity);
         }
-        Storage.addFruits(fruit, Storage.getFruits(fruit) + quantity);
     }
 
     @Override

@@ -11,13 +11,13 @@ public class ReportServiceImpl implements ReportService {
     private static final int HEADER_LIST_INDEX = 0;
 
     @Override
-    public List<String> generateReport() {
+    public String generateReport() {
         List<String> reportData = Storage.getStorage().entrySet().stream()
                 .map(entry -> entry.getKey() + COMMA + entry.getValue())
                 .collect(Collectors.toList());
         if (!reportData.isEmpty()) {
             reportData.add(HEADER_LIST_INDEX, HEADER);
         }
-        return reportData;
+        return String.join(System.lineSeparator(), reportData);
     }
 }

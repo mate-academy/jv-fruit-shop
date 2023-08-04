@@ -17,10 +17,7 @@ public class ReadCsvFileServiceImpl implements ReadCsvFileService {
             }
             data = Files.readAllLines(Path.of(filename));
         } catch (IOException e) {
-            throw new ReadFileException("Can`t read from file: " + filename);
-        }
-        if (data.isEmpty()) {
-            throw new ReadFileException("Empty csv file: " + filename);
+            throw new ReadFileException("Can`t read from file: " + filename, e);
         }
         return data;
     }

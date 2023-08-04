@@ -9,12 +9,17 @@ public class PurchaseDataHandler implements DataHandler {
 
     @Override
     public void processData(String fruit, int quantity) {
+        validatePurchaseData(fruit, quantity);
+        Storage.addFruits(fruit, Storage.getFruits(fruit) - quantity);
+    }
+
+    private void validatePurchaseData(String fruit, int quantity) {
         if (fruit == null || fruit.isEmpty()) {
             throw new FruitsNameException("Wrong fruit name: "
                     + fruit);
         }
         if (quantity < 0) {
-            throw new FruitsQuantityException("Wrong fruit quantity for "
+            throw new RuntimeException("Wrong fruit quantity for "
                     + fruit
                     + ", quantity: "
                     + quantity);
@@ -27,7 +32,6 @@ public class PurchaseDataHandler implements DataHandler {
                     + " and storage: "
                     + Storage.getFruits(fruit));
         }
-        Storage.addFruits(fruit, Storage.getFruits(fruit) - quantity);
     }
 
     @Override

@@ -5,7 +5,6 @@ import core.basesyntax.strategy.handlers.DataHandler;
 import java.util.Map;
 
 public class DataHandlerStrategyImpl implements DataHandlerStrategy {
-    // створили мапу з операцією і відповідному їй хендлеру
     private final Map<FruitTransaction.Operation, DataHandler> operationDataHandlerMap;
 
     public DataHandlerStrategyImpl(

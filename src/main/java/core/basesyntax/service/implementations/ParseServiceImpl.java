@@ -17,38 +17,47 @@ public class ParseServiceImpl implements ParseService {
 
     @Override
     public List<FruitTransaction> parseDataToTransaction(List<String> data) {
-        if (data == null) {
-            throw new WrongDataBaseException("How did you dare to give me null as file data?");
-        }
-        if (!data.isEmpty() && !data.get(0).equals(HEADER)) {
-            throw new WrongDataBaseException("Data without header: " + data);
-        }
+        validData(data);
         return data.stream()
                 .skip(HEADER_ROW)
-                .map(line -> {
-                    String[] row = line.split(COMMA);
-                    if (row.length != REQUIRED_ROW_LENGTH) {
-                        throw new WrongDataBaseException("Wrong csv file: Row length is "
-                                + row.length
-                                + " Need: "
-                                + REQUIRED_ROW_LENGTH);
-                    }
-                    try {
-                        String operationType = row[OPERATION_INDEX];
-                        String fruit = row[FRUIT_INDEX];
-                        int quantity = Integer.parseInt(row[QUANTITY_INDEX]);
-                        FruitTransaction.Operation operation =
-                                FruitTransaction.Operation.fromCode(operationType);
-                        return new FruitTransaction(operation, fruit, quantity);
-                    } catch (NumberFormatException e) {
-                        throw new WrongDataBaseException(
-                                "Invalid quantity format: " + row[QUANTITY_INDEX]);
-                    } catch (IllegalArgumentException e) {
-                        throw new WrongDataBaseException(
-                                "Invalid operation code: " + row[OPERATION_INDEX]);
-                    }
-                })
+                .map(this::parseDataToTransaction)
                 .collect(Collectors.toList());
     }
 
+    private FruitTransaction parseDataToTransaction(String row) {
+        String[] columns = row.split(COMMA);
+        validateColumns(columns);
+        try {
+            String operationType = columns[OPERATION_INDEX];
+            String fruit = columns[FRUIT_INDEX];
+            int quantity = Integer.parseInt(columns[QUANTITY_INDEX]);
+            FruitTransaction.Operation operation =
+                    FruitTransaction.Operation.fromCode(operationType);
+            return new FruitTransaction(operation, fruit, quantity);
+        } catch (NumberFormatException e) {
+            throw new WrongDataBaseException(
+                    "Invalid quantity format: " + columns[QUANTITY_INDEX], e);
+        } catch (IllegalArgumentException e) {
+            throw new WrongDataBaseException(
+                    "Invalid operation code: " + columns[OPERATION_INDEX], e);
+        }
+    }
+
+    private void validateColumns(String[] column) {
+        if (column.length != REQUIRED_ROW_LENGTH) {
+            throw new WrongDataBaseException("Wrong csv file: Row length is "
+                    + column.length
+                    + " Need: "
+                    + REQUIRED_ROW_LENGTH);
+        }
+    }
+
+    private void validData(List<String> data) {
+        if (data == null || data.size() == 0) {
+            throw new WrongDataBaseException("Empty data from file");
+        }
+        if (!data.get(0).equals(HEADER)) {
+            throw new WrongDataBaseException("Data without header: " + data);
+        }
+    }
 }
