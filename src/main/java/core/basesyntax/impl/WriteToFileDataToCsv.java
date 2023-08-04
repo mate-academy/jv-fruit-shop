@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteToFileDataToCsv implements WriteDataToFileService {
+public class WriteToCsv implements WriteDataToFileService {
     @Override
     public void writeToFile(String preparedData, String path) {
         if (preparedData == null) {
