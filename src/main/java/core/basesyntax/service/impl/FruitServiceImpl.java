@@ -8,8 +8,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
-    public FruitServiceImpl(FruitStorage fruitStorage) {
-    }
 
     @Override
     public void processTransactions(List<FruitTransaction> transactions) {

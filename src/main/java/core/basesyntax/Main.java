@@ -21,7 +21,7 @@ public class Main {
         List<FruitTransaction> transactions = fruitTransactionParser
                 .getFruitTransactionsList(dataAll);
 
-        FruitService fruitServiceImpl = new FruitServiceImpl(FruitStorage.getFruitStorage());
+        FruitService fruitServiceImpl = new FruitServiceImpl();
         fruitServiceImpl.processTransactions(transactions);
 
         ReportServiceImpl reportServiceImpl = new ReportServiceImpl();
