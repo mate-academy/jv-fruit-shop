@@ -4,9 +4,9 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exception.ValidationDataException;
 
 public interface ActionHandler {
-    boolean actionStore(String nameOfGoods, Integer valueOfTask);
+    boolean actionStoring(String nameOfGoods, Integer valueOfTask);
 
-    default void validData(Storage fruitDB, String nameOfGoods) {
+    default void validateData(Storage fruitDB, String nameOfGoods) {
         if (fruitDB == null) {
             throw new ValidationDataException("ActionHandle error db is null");
         }
@@ -14,7 +14,7 @@ public interface ActionHandler {
             throw new ValidationDataException("ActionHandle error db is empty");
         }
         if (fruitDB.getStorageFruits().get(nameOfGoods) == null) {
-            throw new ValidationDataException("Client cant buy not exist product!");
+            throw new ValidationDataException("Client can't buy not existing product!");
         }
     }
 }

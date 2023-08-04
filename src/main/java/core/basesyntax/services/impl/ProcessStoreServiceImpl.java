@@ -1,5 +1,6 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.exception.ValidationDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.ActionStrategy;
 import core.basesyntax.services.ProcessStoreService;
@@ -15,11 +16,20 @@ public class ProcessStoreServiceImpl implements ProcessStoreService {
 
     @Override
     public boolean processAction(List<FruitTransaction> fruitTransactions) {
+        if (fruitTransactions == null) {
+            throw new ValidationDataException("Process error. "
+                    + "List of fruit transactions can't be null");
+        }
+        if (fruitTransactions.isEmpty()) {
+            throw new ValidationDataException("Process error. "
+                    + "List of fruit transactions can't be empty");
+        }
+
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             String labelGoods = fruitTransaction.getLabelGoods();
             int value = fruitTransaction.getValue();
             ActionHandler actionHandler = actionStrategy.get(fruitTransaction.getType());
-            actionHandler.actionStore(labelGoods, value);
+            actionHandler.actionStoring(labelGoods, value);
         }
         return true;
     }

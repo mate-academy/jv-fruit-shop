@@ -10,8 +10,8 @@ public class SupplyActionHandler implements ActionHandler {
     }
 
     @Override
-    public boolean actionStore(String nameOfGoods, Integer valueOfTask) {
-        validData(fruitDB, nameOfGoods);
+    public boolean actionStoring(String nameOfGoods, Integer valueOfTask) {
+        validateData(fruitDB, nameOfGoods);
         Integer value = fruitDB.getStorageFruits().get(nameOfGoods);
         return fruitDB.add(nameOfGoods, value + valueOfTask);
     }

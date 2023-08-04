@@ -15,6 +15,7 @@ import core.basesyntax.services.impl.CreateTaskServiceImpl;
 import core.basesyntax.services.impl.ParseCsvServiceImpl;
 import core.basesyntax.services.impl.ProcessStoreServiceImpl;
 import core.basesyntax.services.impl.ReadFileServiceImpl;
+import core.basesyntax.services.impl.ReportCsvServiceImpl;
 import core.basesyntax.services.impl.WriteFileServiceImpl;
 import java.util.HashMap;
 import java.util.List;
@@ -47,9 +48,10 @@ public class Main {
         //handle tasks
         handleTasks.processAction(fruitTransactions);
         //write service created
-        WriteFileService writeToFileService = new WriteFileServiceImpl(fruitDB);
+        WriteFileService writeToFileService = new WriteFileServiceImpl();
         //write to file
-        writeToFileService.writeToFile("resources/resultData.txt");
+        writeToFileService.writeToFile(new ReportCsvServiceImpl(fruitDB).createReport(),
+                "resources/resultData.txt");
         //additional print
         Map<String, Integer> storage = fruitDB.getStorageFruits();
         System.out.println(storage.toString());

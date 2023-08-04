@@ -1,20 +1,22 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.constvars.Constants;
 import core.basesyntax.exception.ValidationDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.CreateTaskService;
+import core.basesyntax.util.ConstantsForCsvParse;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CreateTaskServiceImpl implements CreateTaskService {
+    private static final int NUM_ZERO = 0;
+
     @Override
     public List<FruitTransaction> createTasks(List<String[]> parseData) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String[] readLine : parseData) {
             FruitTransaction.ActionType typeOfTask = null;
             for (FruitTransaction.ActionType type : FruitTransaction.ActionType.values()) {
-                if (type.getType().equals(readLine[Constants.INDEX_OF_ACTION])) {
+                if (type.getType().equals(readLine[ConstantsForCsvParse.INDEX_OF_ACTION])) {
                     typeOfTask = type;
                     break;
                 }
@@ -23,7 +25,7 @@ public class CreateTaskServiceImpl implements CreateTaskService {
                 throw new ValidationDataException("Type is not exist");
             }
 
-            String nameOfProduct = readLine[Constants.INDEX_OF_NAME];
+            String nameOfProduct = readLine[ConstantsForCsvParse.INDEX_OF_NAME];
             if (nameOfProduct == null) {
                 throw new ValidationDataException("Name of Product cant be null");
             }
@@ -32,9 +34,9 @@ public class CreateTaskServiceImpl implements CreateTaskService {
                 throw new ValidationDataException("Name of Product cant be empty");
             }
 
-            Integer valueOfLine = Integer.parseInt(readLine[Constants.INDEX_OF_VALUE]);
-            if (valueOfLine < Constants.NUM_ZERO) {
-                throw new ValidationDataException("Value cant be less than " + Constants.NUM_ZERO);
+            Integer valueOfLine = Integer.parseInt(readLine[ConstantsForCsvParse.INDEX_OF_VALUE]);
+            if (valueOfLine < NUM_ZERO) {
+                throw new ValidationDataException("Value cant be less than " + NUM_ZERO);
             }
             fruitTransactions.add(new FruitTransaction(typeOfTask, nameOfProduct, valueOfLine));
         }
