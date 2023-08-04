@@ -1,18 +1,14 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.HashMap;
 import java.util.Map;
 
 public class StrategyImplementation {
-    private static final Map<FruitTransaction.Operation, FruitShopOperationsHandler> processSelector
-            = new HashMap<>();
+    private Map<FruitTransaction.Operation, FruitShopOperationsHandler> processSelector;
 
-    public StrategyImplementation() {
-        processSelector.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        processSelector.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        processSelector.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-        processSelector.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+    public StrategyImplementation(Map<FruitTransaction.Operation,
+            FruitShopOperationsHandler> processSelectorMap) {
+        processSelector = processSelectorMap;
     }
 
     public Map<FruitTransaction.Operation, FruitShopOperationsHandler> getProcessSelector() {
