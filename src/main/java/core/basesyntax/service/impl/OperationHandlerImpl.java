@@ -3,7 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.OperationService;
 
-public class OperationServiceImpl implements OperationService {
+public class OperationHandlerImpl implements OperationService {
     @Override
     public Operation getOperation(String operationType) {
         switch (operationType) {

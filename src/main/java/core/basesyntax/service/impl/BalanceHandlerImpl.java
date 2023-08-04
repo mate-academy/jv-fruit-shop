@@ -1,21 +1,22 @@
-package core.basesyntax.handler.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.FruitsStorage;
-import core.basesyntax.handler.BalanceHandler;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationHandler;
 
-public class BalanceHandlerImpl implements BalanceHandler {
+public class BalanceHandlerImpl implements OperationHandler {
     @Override
-    public boolean add(FruitTransaction fruitTransaction) {
+    public boolean applyOperation(FruitTransaction fruitTransaction) {
         boolean isAdded = false;
         String fruitName = fruitTransaction.getFruitName();
         int fruitQuantity = fruitTransaction.getFruitQuantity();
         if (FruitsStorage.fruitsStorage.containsKey(fruitName)) {
-            int existingFruitPrice = FruitsStorage.fruitsStorage.get(fruitName);
-            fruitQuantity = fruitQuantity + existingFruitPrice;
+            int fruitQuantityInStorage = FruitsStorage.fruitsStorage.get(fruitName);
+            fruitQuantity = fruitQuantity + fruitQuantityInStorage;
         }
         FruitsStorage.fruitsStorage.put(fruitName, fruitQuantity);
         isAdded = true;
         return isAdded;
     }
 }
+

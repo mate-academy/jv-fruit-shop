@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
-
 public class FruitTransaction {
     private final String fruitName;
     private final int fruitQuantity;
@@ -26,30 +24,11 @@ public class FruitTransaction {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FruitTransaction that = (FruitTransaction) o;
-        return Objects.equals(fruitName, that.fruitName)
-                && Objects.equals(fruitQuantity, that.fruitQuantity)
-                && operationType == that.operationType;
-    }
-
-    @Override
     public String toString() {
         return "FruitTransaction{"
                 + "operationType=" + operationType
                 + ", fruitName='" + fruitName + '\''
                 + ", fruitQuantity=" + fruitQuantity + '}';
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(fruitName, fruitQuantity, operationType);
     }
 
     public static class FruitBuilder {
