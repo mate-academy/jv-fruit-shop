@@ -1,6 +1,3 @@
-import core.basesyntax.service.ReportCreationService;
-import core.basesyntax.service.WriteDataService;
-import core.basesyntax.service.impl.ReportCreationServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParserService;
@@ -8,12 +5,15 @@ import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.OperationService;
 import core.basesyntax.service.ReadDataService;
+import core.basesyntax.service.ReportCreationService;
+import core.basesyntax.service.WriteDataService;
 import core.basesyntax.service.impl.BalanceHandlerImpl;
 import core.basesyntax.service.impl.DataParserServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.OperationHandlerImpl;
 import core.basesyntax.service.impl.PurchaseHandlerImpl;
 import core.basesyntax.service.impl.ReadDataServiceImpl;
+import core.basesyntax.service.impl.ReportCreationServiceImpl;
 import core.basesyntax.service.impl.ReturnOperationHandlerImpl;
 import core.basesyntax.service.impl.SupplierHandlerImpl;
 import core.basesyntax.service.impl.WriteDataServiceImpl;
@@ -23,10 +23,16 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
-        String INPUT_DATA_FILE_NAME = "src/main/resources/inputData.csv";
-        String REPORT_FILE_NAME = "src/main/resources/outputData.csv";
+    private static String INPUT_DATA_FILE_NAME = "src/main/resources/inputData.csv";
+    private static String REPORT_FILE_NAME = "src/main/resources/outputData.csv";
 
+    private static final Map<Operation, OperationHandler> operationStarategyMap = Map.of(
+            Operation.BALANCE, new BalanceHandlerImpl(),
+            Operation.PURCHASE, new PurchaseHandlerImpl(),
+            Operation.SUPPLY, new SupplierHandlerImpl(),
+            Operation.RETURN, new ReturnOperationHandlerImpl());
+
+    public static void main(String[] args) {
         // Read data from file
         ReadDataService fileReader = new ReadDataServiceImpl();
         List<String> dataFromFile = fileReader.readData(INPUT_DATA_FILE_NAME);
@@ -46,10 +52,4 @@ public class Main {
         String report = reportCreationService.getReport();
         writeDataService.writeData(report, REPORT_FILE_NAME);
     }
-
-    private static final Map<Operation, OperationHandler> operationStarategyMap = Map.of(
-            Operation.BALANCE, new BalanceHandlerImpl(),
-            Operation.PURCHASE, new PurchaseHandlerImpl(),
-            Operation.SUPPLY, new SupplierHandlerImpl(),
-            Operation.RETURN, new ReturnOperationHandlerImpl());
 }
