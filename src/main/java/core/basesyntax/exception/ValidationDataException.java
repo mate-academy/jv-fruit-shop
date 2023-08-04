@@ -11,10 +11,4 @@ public class ValidationDataException extends RuntimeException {
         super(message);
         System.out.println(e.getStackTrace());
     }
-
-    @Override
-    public StackTraceElement[] getStackTrace() {
-        return super.getStackTrace();
-    }
-
 }
