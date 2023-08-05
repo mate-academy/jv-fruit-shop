@@ -4,7 +4,7 @@ import core.basesyntax.impl.DataConverterToObject;
 import core.basesyntax.impl.OperationProcess;
 import core.basesyntax.impl.ReadFileFromCsv;
 import core.basesyntax.impl.ReportCreator;
-import core.basesyntax.impl.WriteToFileDataToCsv;
+import core.basesyntax.impl.WriteToCsv;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.DataProcesser;
