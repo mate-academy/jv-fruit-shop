@@ -15,6 +15,11 @@ import java.util.List;
 public class Application {
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
+    private static final Map<Operation, OperationHandler> operationDefiner = Map.of(
+            Operation.BALANCE, new BalanceOperationHandler(),
+            Operation.PURCHASE, new PurchaseOperationHandler(),
+            Operation.RETURN, new ReturnOperationHandler(),
+            Operation.SUPPLY, new SupplyOperationHandler());
 
     public static void main(String[] args) {
         ReadFileService readFileService = new ReadFileFromCsv();
@@ -22,9 +27,9 @@ public class Application {
         DataConverter dataConverter = new DataConverterToObject();
         List<FruitTransaction> transactions = dataConverter.convert(inputData);
         DataProcesser operationProcess = new OperationProcess();
-        operationProcess.processData(transactions);
+        operationProcess.processData(transactions, operationDefiner);
         ReportCreator reportCreator = new ReportCreator();
-        WriteDataToFileService writeDataToFileService = new WriteToFileDataToCsv();
+        WriteDataToFileService writeDataToFileService = new WriteToCsv();
         writeDataToFileService.writeToFile(reportCreator.prepare(), OUTPUT_FILE_PATH);
     }
 }
