@@ -6,11 +6,18 @@ import core.basesyntax.impl.ReadFileFromCsv;
 import core.basesyntax.impl.ReportCreator;
 import core.basesyntax.impl.WriteToCsv;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.DataProcesser;
 import core.basesyntax.service.ReadFileService;
 import core.basesyntax.service.WriteDataToFileService;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.List;
+import java.util.Map;
 
 public class Application {
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
