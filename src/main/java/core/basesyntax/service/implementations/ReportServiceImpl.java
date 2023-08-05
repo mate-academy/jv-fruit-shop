@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class ReportServiceImpl implements ReportService {
     private static final String COMMA = ",";
     private static final String HEADER = "fruit,quantity";
-    private static final int HEADER_LIST_INDEX = 0;
+    private static final int HEADER_INDEX = 0;
 
     @Override
     public String generateReport() {
@@ -16,7 +16,7 @@ public class ReportServiceImpl implements ReportService {
                 .map(entry -> entry.getKey() + COMMA + entry.getValue())
                 .collect(Collectors.toList());
         if (!reportData.isEmpty()) {
-            reportData.add(HEADER_LIST_INDEX, HEADER);
+            reportData.add(HEADER_INDEX, HEADER);
         }
         return String.join(System.lineSeparator(), reportData);
     }

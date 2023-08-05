@@ -1,12 +1,11 @@
 package core.basesyntax.storage;
 
 import core.basesyntax.exceptions.FruitsNameException;
-import core.basesyntax.exceptions.FruitsQuantityException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static Map<String, Integer> fruits;
+    private static Map<String, Integer> fruits = new HashMap<>();
 
     public static void createMap() {
         fruits = new HashMap<>();
@@ -25,16 +24,20 @@ public class Storage {
     }
 
     public static void addFruits(String fruit, int quantity) {
+        validateData(fruit,quantity);
+        Storage.fruits.put(fruit, quantity);
+    }
+
+    public static void validateData(String fruit, int quantity) {
         if (fruit == null || fruit.isEmpty()) {
             throw new FruitsNameException("Wrong fruit name: "
                     + fruit);
         }
         if (quantity < 0) {
-            throw new FruitsQuantityException("Wrong fruit quantity for "
+            throw new RuntimeException("Wrong fruit quantity for "
                     + fruit
                     + ", quantity: "
                     + quantity);
         }
-        Storage.fruits.put(fruit, quantity);
     }
 }

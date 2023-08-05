@@ -12,14 +12,14 @@ public class ParseServiceImpl implements ParseService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final int HEADER_ROW = 1;
+    private static final int HEADER_INDEX = 1;
     private static final String HEADER = "type,fruit,quantity";
 
     @Override
     public List<FruitTransaction> parseDataToTransaction(List<String> data) {
-        validData(data);
+        validateData(data);
         return data.stream()
-                .skip(HEADER_ROW)
+                .skip(HEADER_INDEX)
                 .map(this::parseDataToTransaction)
                 .collect(Collectors.toList());
     }
@@ -52,7 +52,7 @@ public class ParseServiceImpl implements ParseService {
         }
     }
 
-    private void validData(List<String> data) {
+    private void validateData(List<String> data) {
         if (data == null || data.size() == 0) {
             throw new WrongDataBaseException("Empty data from file");
         }

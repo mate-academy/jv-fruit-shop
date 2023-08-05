@@ -9,6 +9,7 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
 public class WriteCsvFileServiceImpl implements WriteCsvFileService {
+
     public void writeFile(String filename, String data) {
         try {
             if (data == null) {
