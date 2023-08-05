@@ -6,7 +6,7 @@ import core.model.FruitTransaction;
 public class BalanceOperationHandlerImpl implements OperationHandler{
 
     @Override
-    public void operation(FruitTransaction transaction) {
+    public void handle(FruitTransaction transaction) {
         String fruitName = transaction.getFruit();
         int quantityFruit = transaction.getQuantity();
         if (quantityFruit < 0) {

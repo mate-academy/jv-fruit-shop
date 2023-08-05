@@ -11,6 +11,11 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport() {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        builder.append(TITLE);
+        Storage.storage.entrySet().stream()
+                .map(fruit -> builder.append(fruit.getKey()).append(SEPARATOR).append(fruit.getValue()).append(System.lineSeparator()))
+                .collect(Collectors.joining());
+        return builder.toString();
     }
 }

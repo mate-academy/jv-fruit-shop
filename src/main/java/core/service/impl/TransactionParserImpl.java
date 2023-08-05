@@ -14,10 +14,14 @@ public class TransactionParserImpl implements TransactionParser {
 
     @Override
     public List<FruitTransaction> parseData(List<String> data) {
-        return data.stream()
-                .map(element -> element.split(SEPARATOR))
-                .map(element -> new FruitTransaction(FruitTransaction.Operation.getOperationByCode(element[INDEX_CODE_OPERATION]),
-                        element[INDEX_FRUIT_NAME], Integer.parseInt(element[INDEX_FRUIT_QUANTITY])))
-                .collect(Collectors.toList());
+        try {
+            return data.stream()
+                    .map(element -> element.split(SEPARATOR))
+                    .map(element -> new FruitTransaction(FruitTransaction.Operation.getOperationByCode(element[INDEX_CODE_OPERATION]),
+                            element[INDEX_FRUIT_NAME], Integer.parseInt(element[INDEX_FRUIT_QUANTITY])))
+                    .collect(Collectors.toList());
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid value for fruit quantity");
+        }
     }
 }
