@@ -1,17 +1,15 @@
 package core.basesyntax.service.operation;
 
+import core.basesyntax.impl.FruitShopServiceImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ShopService;
-import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.strategy.OperationHandler;
 
-public class BalanceOperation implements Operation {
+public class BalanceOperation implements OperationHandler {
 
     @Override
     public void processWithTransaction(FruitTransaction transaction) {
-        ShopService shopService = new ShopServiceImpl();
-        FruitTransaction newTransaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
-                transaction.getFruit(),
-                transaction.getQuantity());
-        shopService.balanceOfFruit(newTransaction);
+        FruitShopService fruitShopService = new FruitShopServiceImpl();
+        fruitShopService.balanceOfFruit(transaction);
     }
 }
