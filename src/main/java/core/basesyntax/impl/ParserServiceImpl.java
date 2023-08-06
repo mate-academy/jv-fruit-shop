@@ -8,7 +8,7 @@ import java.util.List;
 public class ParserServiceImpl implements ParserService<FruitTransaction> {
 
     @Override
-    public List<FruitTransaction> parser(List<String> inputData) {
+    public List<FruitTransaction> parse(List<String> inputData) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         FruitTransaction transaction = new FruitTransaction();
         for (int i = 1; i < inputData.size(); i++) {

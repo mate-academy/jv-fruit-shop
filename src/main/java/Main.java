@@ -25,14 +25,14 @@ public class Main {
         readerService.readFromFile(addressInputFile, data);
         //parser
         ParserService parserService = new ParserServiceImpl();
-        List<FruitTransaction> listOfTransaction = parserService.parser(data);
+        List<FruitTransaction> listOfTransaction = parserService.parse(data);
         //service
         OperationStrategy operationStrategy = new OperationStrategyImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationStrategy.getOperationAndProcess(listOfTransaction, operationHandlerMap);
         //report
         ReportService reportService = new ReportServiceImpl();
-        List<String> stringList = reportService.report(Storage.getFruits());
+        List<String> stringList = reportService.createReport(Storage.getFruits());
         //writer
         WriterService writerService = new WriterServiceImpl();
         String addressReportFile = "/src/main/java/core/recourses/report.csv";
