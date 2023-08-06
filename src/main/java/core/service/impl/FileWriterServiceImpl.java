@@ -1,12 +1,10 @@
 package core.service.impl;
 
 import core.service.FileWriterService;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override

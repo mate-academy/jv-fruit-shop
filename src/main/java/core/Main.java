@@ -1,6 +1,5 @@
-package core;
+/*package core;
 
-import core.db.Storage;
 import core.model.FruitTransaction;
 import core.service.FileReaderService;
 import core.service.FileWriterService;
@@ -25,25 +24,29 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-
-
     public static void main(String[] args) {
-        /*String, String[], List<String> fileContent = fileReaderImpl.read(filePath);
+        *//*String, String[], List<String> fileContent = fileReaderImpl.read(filePath);
         List<FruitTransaction> transactionList = transactionParser.parse(fileContent);
         fruitTransactionService.applyTransaction(transactionList);
         String report = reportServiceImpl.generate();
-        writer.write(report, filePath);*/
-        Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
-        operationOperationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandlerImpl());
-        operationOperationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandlerImpl());
-        operationOperationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandlerImpl());
-        operationOperationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandlerImpl());
+        writer.write(report, filePath);*//*
+        Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap =
+        new HashMap<>();
+        operationOperationHandlerMap.put(FruitTransaction.Operation.BALANCE,
+        new BalanceOperationHandlerImpl());
+        operationOperationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+        new PurchaseOperationHandlerImpl());
+        operationOperationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+        new SupplyOperationHandlerImpl());
+        operationOperationHandlerMap.put(FruitTransaction.Operation.RETURN,
+         new ReturnOperationHandlerImpl());
 
         FileReaderService readerService = new FileReaderServiceImp();
         List<String> data = readerService.read("src/main/resources/data.csv");
         TransactionParser parser = new TransactionParserImpl();
         List<FruitTransaction> fruitTransactions = parser.parseData(data);
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationOperationHandlerMap);
+        OperationStrategy operationStrategy =
+        new OperationStrategyImpl(operationOperationHandlerMap);
         FruitShopService service = new FruitShopServiceImpl(operationStrategy);
         service.processTransactions(fruitTransactions);
         ReportService reportService = new ReportServiceImpl();
@@ -51,4 +54,4 @@ public class Main {
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.write(report, "report.csv");
     }
-}
+}*/

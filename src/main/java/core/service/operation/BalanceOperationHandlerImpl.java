@@ -3,7 +3,7 @@ package core.service.operation;
 import core.db.Storage;
 import core.model.FruitTransaction;
 
-public class BalanceOperationHandlerImpl implements OperationHandler{
+public class BalanceOperationHandlerImpl implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {

@@ -2,7 +2,6 @@ package core.service.impl;
 
 import core.db.Storage;
 import core.service.ReportService;
-
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
@@ -14,7 +13,10 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder builder = new StringBuilder();
         builder.append(TITLE);
         Storage.storage.entrySet().stream()
-                .map(fruit -> builder.append(fruit.getKey()).append(SEPARATOR).append(fruit.getValue()).append(System.lineSeparator()))
+                .map(fruit -> builder.append(fruit.getKey())
+                        .append(SEPARATOR)
+                        .append(fruit.getValue())
+                        .append(System.lineSeparator()))
                 .collect(Collectors.joining());
         return builder.toString();
     }
