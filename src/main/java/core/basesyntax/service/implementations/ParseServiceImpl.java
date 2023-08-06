@@ -20,11 +20,11 @@ public class ParseServiceImpl implements ParseService {
         validateData(data);
         return data.stream()
                 .skip(HEADER_INDEX)
-                .map(this::parseDataToTransaction)
+                .map(this::buildTransaction)
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction parseDataToTransaction(String row) {
+    private FruitTransaction buildTransaction(String row) {
         String[] columns = row.split(COMMA);
         validateColumns(columns);
         try {

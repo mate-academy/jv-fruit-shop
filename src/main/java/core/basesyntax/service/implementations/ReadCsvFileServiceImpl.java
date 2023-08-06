@@ -12,13 +12,17 @@ public class ReadCsvFileServiceImpl implements ReadCsvFileService {
     public List<String> readFile(String filename) {
         List<String> data;
         try {
-            if (filename == null) {
-                throw new ReadFileException("How did you dare to give null filename?");
-            }
+            validateNullFileName(filename);
             data = Files.readAllLines(Path.of(filename));
         } catch (IOException e) {
             throw new ReadFileException("Can`t read from file: " + filename, e);
         }
         return data;
+    }
+
+    public void validateNullFileName(String filename) {
+        if (filename == null) {
+            throw new ReadFileException("How did you dare to give null filename?");
+        }
     }
 }

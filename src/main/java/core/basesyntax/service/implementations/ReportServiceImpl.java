@@ -15,9 +15,13 @@ public class ReportServiceImpl implements ReportService {
         List<String> reportData = Storage.getStorage().entrySet().stream()
                 .map(entry -> entry.getKey() + COMMA + entry.getValue())
                 .collect(Collectors.toList());
+        addHeader(reportData);
+        return String.join(System.lineSeparator(), reportData);
+    }
+
+    public void addHeader(List<String> reportData) {
         if (!reportData.isEmpty()) {
             reportData.add(HEADER_INDEX, HEADER);
         }
-        return String.join(System.lineSeparator(), reportData);
     }
 }
