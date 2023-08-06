@@ -1,13 +1,11 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public interface OperationStrategy {
-    Map<FruitTransaction.Operation, OperationHandler> operationHashMap = new HashMap<>();
-    FruitTransaction.Operation getOperation(FruitTransaction transaction,
+    void getOperationAndProcess(List<FruitTransaction> transactions,
                                             Map<FruitTransaction.Operation,
                                                     OperationHandler> operationHashMap);
-
 }

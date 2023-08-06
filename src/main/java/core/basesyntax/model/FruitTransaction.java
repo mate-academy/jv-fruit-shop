@@ -8,6 +8,9 @@ public class FruitTransaction {
     public FruitTransaction(Operation operation, String fruit, int quantity) {
     }
 
+    public FruitTransaction() {
+    }
+
     public int getQuantity() {
         return quantity;
     }

@@ -6,15 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParserServiceImpl implements ParserService<FruitTransaction> {
-    private FruitTransaction transaction;
-
-    public ParserServiceImpl(FruitTransaction transaction) {
-        this.transaction = transaction;
-    }
 
     @Override
     public List<FruitTransaction> parser(List<String> inputData) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        FruitTransaction transaction = new FruitTransaction();
         for (int i = 1; i < inputData.size(); i++) {
             String[] data = inputData.get(i).split(",");
             transaction.setOperation(FruitTransaction.Operation.valueOf(data[0]));
