@@ -24,10 +24,6 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation parseOperation() {
-        return operation;
-    }
-
     public Operation getOperation() {
         return operation;
     }

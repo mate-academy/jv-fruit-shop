@@ -14,7 +14,7 @@ public class FruitServiceImpl implements FruitService {
             if (OperationStrategy.valueOf(transaction.getOperation().toString()) == null) {
                 throw new NullPointerException("operation not exist");
             }
-            OperationStrategy strategy = OperationStrategy.valueOf(transaction.parseOperation()
+            OperationStrategy strategy = OperationStrategy.valueOf(transaction.getOperation()
                     .toString().toUpperCase());
             OperationHandler handler = strategy.getHandler();
             handler.handleOperation(transaction);
