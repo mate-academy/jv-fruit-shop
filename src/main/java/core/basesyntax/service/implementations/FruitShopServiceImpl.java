@@ -14,7 +14,9 @@ public class FruitShopServiceImpl implements FruitShopService {
         this.dataHandlerStrategy = dataHandlerStrategy;
     }
 
-    // add all information to Storage depending on transactions
+    /**
+     * Add data to storage depending on transaction fields
+     **/
     public void updateData(List<FruitTransaction> transactions) {
         validateTransactionData(transactions);
         transactions.forEach(transaction -> {

@@ -2,7 +2,6 @@ package core.basesyntax.strategy.handlers;
 
 import core.basesyntax.exceptions.FruitsQuantityException;
 import core.basesyntax.storage.Storage;
-import java.util.Objects;
 
 public class PurchaseDataHandler implements DataHandler {
 
@@ -24,21 +23,5 @@ public class PurchaseDataHandler implements DataHandler {
                     + " and storage: "
                     + Storage.getFruits(fruit));
         }
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object == null || getClass() != object.getClass()) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getClass());
     }
 }
