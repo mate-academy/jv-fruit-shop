@@ -1,31 +1,27 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.DataReaderService;
+import core.basesyntax.service.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvDataReaderServiceImpl implements DataReaderService {
+public class FileReaderImpl implements FileReader {
 
     @Override
-    public List<String> readFromFile(String pathToFile) {
+    public List<String> readFromFile(String filePath) {
         List<String> dataArray = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(pathToFile))) {
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
             String data = reader.readLine();
             while (data != null) {
                 dataArray.add(data);
                 data = reader.readLine();
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Can't find the file", e);
+            throw new RuntimeException("Can't find file by path: " + filePath, e);
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from the file", e);
-        }
-        if (dataArray.isEmpty()) {
-            throw new IllegalArgumentException("Data file is empty!");
+            throw new RuntimeException("Can't read data from file by path: " + filePath, e);
         }
         return dataArray;
     }
