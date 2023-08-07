@@ -1,18 +1,17 @@
 package core.basesyntax.service.operation;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitShopService;
 import core.basesyntax.strategy.OperationHandler;
 
 public class ReturnOperation implements OperationHandler {
-    private final FruitShopService fruitShopService;
-
-    public ReturnOperation(FruitShopService fruitShopService) {
-        this.fruitShopService = fruitShopService;
-    }
 
     @Override
     public void processWithTransaction(FruitTransaction transaction) {
-        fruitShopService.returnFruit(transaction);
+        if (Storage.getFruits().containsKey(transaction.getFruit())) {
+            int quantity = Storage.getFruits().get(transaction.getFruit());
+            Storage.getFruits().put(transaction.getFruit(),transaction.getQuantity() + quantity);
+        }
+        Storage.getFruits().put(transaction.getFruit(), transaction.getQuantity());
     }
 }
