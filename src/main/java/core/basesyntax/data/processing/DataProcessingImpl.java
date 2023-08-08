@@ -12,6 +12,6 @@ public class DataProcessingImpl implements DataProcessing {
             String[] dataParts = line.split(",");
             fruitInfo.add(dataParts);
         }
-       return fruitInfo;
+        return fruitInfo;
     }
 }
