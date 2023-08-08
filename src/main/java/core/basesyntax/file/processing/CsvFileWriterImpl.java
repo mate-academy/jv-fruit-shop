@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class TextDataWritingImpl implements TextDataWriting {
+public class CsvFileWriterImpl implements CsvFileWriter {
     public static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     @Override

@@ -1,34 +1,36 @@
 package core.basesyntax;
 
-import core.basesyntax.data.processing.DataProcessing;
-import core.basesyntax.data.processing.DataProcessingImpl;
-import core.basesyntax.file.processing.TextDataReading;
-import core.basesyntax.file.processing.TextDataReadingImpl;
-import core.basesyntax.file.processing.TextDataWriting;
-import core.basesyntax.file.processing.TextDataWritingImpl;
+import core.basesyntax.data.processing.TransactionParser;
+import core.basesyntax.data.processing.TransactionParserImpl;
+import core.basesyntax.file.processing.CsvFileReader;
+import core.basesyntax.file.processing.CsvFileReaderImpl;
+import core.basesyntax.file.processing.CsvFileWriter;
+import core.basesyntax.file.processing.CsvFileWriterImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.StorageLoader;
+import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.implementations.ReportCreatorImpl;
-import core.basesyntax.service.implementations.StorageLoaderImpl;
-import core.basesyntax.storage.Storage;
+import core.basesyntax.service.implementations.TransactionProcessorImpl;
 import java.util.List;
 
 public class Main {
+    public static final String FILE_PATH = "src/main/resources/";
+    public static final String FILE_NAME = "database.csv";
 
     public static void main(String[] args) {
-        TextDataReading textDataReading = new TextDataReadingImpl();
-        List<String> lines = textDataReading.read();
+        CsvFileReader csvFileReader = new CsvFileReaderImpl(FILE_PATH + FILE_NAME);
+        List<String> lines = csvFileReader.read();
 
-        DataProcessing processing = new DataProcessingImpl();
-        List<String[]> fruitInfo = processing.process(lines);
+        TransactionParser parser = new TransactionParserImpl();
+        List<FruitTransaction> transactions = parser.parseTransactions(lines);
 
-        StorageLoader loader = new StorageLoaderImpl();
-        loader.load(fruitInfo);
+        TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
+        transactionProcessor.process(transactions);
 
         ReportCreator creator = new ReportCreatorImpl();
-        String report = creator.create(Storage.storage);
+        String report = creator.create();
 
-        TextDataWriting writing = new TextDataWritingImpl();
+        CsvFileWriter writing = new CsvFileWriterImpl();
         writing.writing(report);
     }
 }

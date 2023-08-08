@@ -1,5 +1,5 @@
 package core.basesyntax.file.processing;
 
-public interface TextDataWriting {
+public interface CsvFileWriter {
     void writing(String report);
 }
