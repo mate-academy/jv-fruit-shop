@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static HashMap<String,Integer> fruitBalances;
+    private static Map<String,Integer> fruitBalances = new HashMap<>();
 
     public Storage() {
-        fruitBalances = new HashMap<>();
+        fruitBalances.put("apple",0);
     }
 
     public void addFruits(String fruit,Integer number) {

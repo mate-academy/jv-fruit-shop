@@ -19,6 +19,5 @@ public class ReportWriterServiceImpl implements ReportWriterService {
             e.printStackTrace();
             throw new IOException("Failed to write the report to: " + outputFilePath, e);
         }
-
     }
 }

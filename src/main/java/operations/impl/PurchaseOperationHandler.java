@@ -15,7 +15,6 @@ public class PurchaseOperationHandler implements OperationHandler {
             throw new RuntimeException("Insufficient quantity of "
                 + fruit + " in the store for purchase.");
         }
-
-        storage.removeFruit(fruit,quantity);
+        storage.removeFruit(fruit, quantity);
     }
 }

@@ -9,7 +9,7 @@ import operations.impl.BalanceOperationHandler;
 import operations.impl.PurchaseOperationHandler;
 import operations.impl.ReturnOperationHandler;
 import operations.impl.SupplyOperationHandler;
-import service.DataProcesorService;
+import service.DataProcessorService;
 import service.FileReaderService;
 import service.OperationStrategy;
 import service.ReportGeneratorService;
@@ -47,7 +47,7 @@ public class Main {
             OperationStrategy operationStrategy =
                     new OperationStrategyImpl(operationOperationHandlerMap);
             // Ініціалізуємо об'єкт для обробки даних
-            DataProcesorService dataProcesorService =
+            DataProcessorService dataProcesorService =
                     new DataProcessorServiceImpl(storage,operationStrategy);
             // Обробляємо дані з файлу
             dataProcesorService.process(inputLines);

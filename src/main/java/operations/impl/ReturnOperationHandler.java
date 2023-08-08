@@ -10,6 +10,6 @@ public class ReturnOperationHandler implements OperationHandler {
         String fruit = fruitTransaction.getFruitName();
         int quantity = fruitTransaction.getQuantity();
         int newBalance = storage.getFruitBalance(fruit) + quantity;
-        storage.addFruits(fruit,newBalance);
+        storage.addFruits(fruit, newBalance);
     }
 }

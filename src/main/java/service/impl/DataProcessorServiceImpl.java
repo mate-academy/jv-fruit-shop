@@ -4,10 +4,11 @@ import db.Storage;
 import java.util.List;
 import model.FruitTransaction;
 import operations.OperationHandler;
-import service.DataProcesorService;
+import service.DataProcessorService;
 import service.OperationStrategy;
+import service.TransactionDataParse;
 
-public class DataProcessorServiceImpl implements DataProcesorService {
+public class DataProcessorServiceImpl implements DataProcessorService {
     private final Storage storage;
     private final OperationStrategy operationStrategy;
 
@@ -18,8 +19,9 @@ public class DataProcessorServiceImpl implements DataProcesorService {
 
     @Override
     public void process(List<String> inputLines) {
+        TransactionDataParse transactionDataParse = new TransactionDataParseImpl();
         for (String line : inputLines) {
-            FruitTransaction transaction = parseTransaction(line);
+            FruitTransaction transaction = transactionDataParse.parseTransaction(line);
             if (transaction != null) {
                 OperationHandler handler = operationStrategy
                         .getOperationHandler(transaction.getOperation());
@@ -31,22 +33,5 @@ public class DataProcessorServiceImpl implements DataProcesorService {
                 }
             }
         }
-    }
-
-    public FruitTransaction parseTransaction(String line) {
-        String[] tokens = line.split(",");
-        if (tokens.length != 3) {
-            throw new IllegalArgumentException("Invalid transaction line: " + line);
-        }
-
-        String operationCode = tokens[0].trim();
-        String fruit = tokens[1].trim();
-        int quantity = Integer.parseInt(tokens[2].trim());
-        if (quantity < 0) {
-            throw new IllegalArgumentException("Invalid quantity value " + quantity);
-        }
-        FruitTransaction.Operation operation = FruitTransaction.Operation
-                .fromCode(operationCode);
-        return new FruitTransaction(operation, fruit, quantity);
     }
 }

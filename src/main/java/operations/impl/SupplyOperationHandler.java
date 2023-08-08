@@ -9,8 +9,6 @@ public class SupplyOperationHandler implements OperationHandler {
     public void execute(Storage storage, FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruitName();
         int quantity = fruitTransaction.getQuantity();
-        storage.addFruits(fruit,quantity);
-
+        storage.addFruits(fruit, quantity);
     }
-
 }

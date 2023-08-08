@@ -14,11 +14,13 @@ import operations.impl.SupplyOperationHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import service.DataProcesorService;
+import service.DataProcessorService;
 import service.OperationStrategy;
+import service.TransactionDataParse;
 
 class DataProcessorServiceImplTest {
-    private DataProcesorService dataProcesorService;
+    private DataProcessorService dataProcessorService;
+    private TransactionDataParse transactionDataParse;
 
     @BeforeEach
     void setUp() {
@@ -36,7 +38,9 @@ class DataProcessorServiceImplTest {
                 new OperationStrategyImpl(operationOperationHandlerMap);
 
         Storage storage = new Storage();
-        dataProcesorService = new DataProcessorServiceImpl(storage,operationStrategy);
+        dataProcessorService = new DataProcessorServiceImpl(storage,operationStrategy);
+        transactionDataParse = new TransactionDataParseImpl();
+
     }
 
     @Test
@@ -53,7 +57,7 @@ class DataProcessorServiceImplTest {
                 "s,banana,50",
                 "p,banana,5"
         );
-        Assertions.assertDoesNotThrow(() -> dataProcesorService.process(inputLines));
+        Assertions.assertDoesNotThrow(() -> dataProcessorService.process(inputLines));
     }
 
     @Test
@@ -62,7 +66,7 @@ class DataProcessorServiceImplTest {
         FruitTransaction.Operation supply = FruitTransaction.Operation.SUPPLY;
 
         FruitTransaction expected = new FruitTransaction(supply,"apple",1);
-        FruitTransaction actual = dataProcesorService.parseTransaction(line);
+        FruitTransaction actual = transactionDataParse.parseTransaction(line);
 
         Assertions.assertEquals(expected.getOperation(), actual.getOperation());
         Assertions.assertEquals(expected.getQuantity(),actual.getQuantity());
@@ -73,13 +77,13 @@ class DataProcessorServiceImplTest {
     void parseTransactionLessThenZero() {
         String line = "s,apple,-1";
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> dataProcesorService.parseTransaction(line));
+                () -> transactionDataParse.parseTransaction(line));
     }
 
     @Test
     void parseTransactionInvalidInput() {
         String line = "fafse";
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> dataProcesorService.parseTransaction(line));
+                () -> transactionDataParse.parseTransaction(line));
     }
 }
