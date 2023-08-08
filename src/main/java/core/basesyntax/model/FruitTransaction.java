@@ -16,14 +16,6 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public static Operation findOperation(String operationCode) {
-        return Arrays.stream(Operation.values())
-                .filter(op -> op.getCode().equals(operationCode))
-                .findFirst()
-                .orElseThrow(()
-                        -> new IllegalArgumentException("Unsupported operation: " + operationCode));
-    }
-
     public Operation getOperation() {
         return operation;
     }
@@ -62,6 +54,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation findOperation(String operationCode) {
+            return Arrays.stream(Operation.values())
+                    .filter(op -> op.getCode().equals(operationCode))
+                    .findFirst()
+                    .orElseThrow(()
+                            -> new IllegalArgumentException("Unsupported operation: "
+                            + operationCode));
         }
     }
 }

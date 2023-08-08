@@ -20,7 +20,8 @@ public class TransactionParserImpl implements TransactionParser {
             validator.validate(dataParts);
 
             String operationCode = dataParts[OPERATION_INDEX].trim();
-            FruitTransaction.Operation operation = FruitTransaction.findOperation(operationCode);
+            FruitTransaction.Operation operation = FruitTransaction
+                    .Operation.findOperation(operationCode);
             fruitInfo.add(new FruitTransaction(
                     operation, dataParts[FRUIT_INDEX],
                     Integer.parseInt(dataParts[AMOUNT_INDEX].trim())));
