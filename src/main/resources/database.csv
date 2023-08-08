@@ -2,12 +2,8 @@ type,fruit,quantity
     b,banana,20
     b,apple,100
     s,banana,100
-    s,apple,100
-    s,banana,100
-    p,banana,80
-    r,apple,10
-    p,apple,20
-    p,banana,5
+    p,banana,13
+    r,apple,10 
+    p,apple,20 
+    p,banana,5 
     s,banana,50
-    p,banana,152
-    s,mandarin,50

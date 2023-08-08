@@ -22,7 +22,8 @@ public class TransactionParserImpl implements TransactionParser {
             String operationCode = dataParts[OPERATION_INDEX].trim();
             FruitTransaction.Operation operation = FruitTransaction.findOperation(operationCode);
             fruitInfo.add(new FruitTransaction(
-                    operation, dataParts[FRUIT_INDEX], Integer.parseInt(dataParts[AMOUNT_INDEX])));
+                    operation, dataParts[FRUIT_INDEX],
+                    Integer.parseInt(dataParts[AMOUNT_INDEX].trim())));
         }
         return fruitInfo;
     }

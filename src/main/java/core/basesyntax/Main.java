@@ -15,10 +15,11 @@ import java.util.List;
 
 public class Main {
     public static final String FILE_PATH = "src/main/resources/";
-    public static final String FILE_NAME = "database.csv";
+    public static final String FILE_NAME_FROM = "database.csv";
+    public static final String FILE_NAME_TO = "report.csv";
 
     public static void main(String[] args) {
-        CsvFileReader csvFileReader = new CsvFileReaderImpl(FILE_PATH + FILE_NAME);
+        CsvFileReader csvFileReader = new CsvFileReaderImpl(FILE_PATH + FILE_NAME_FROM);
         List<String> lines = csvFileReader.read();
 
         TransactionParser parser = new TransactionParserImpl();
@@ -30,7 +31,7 @@ public class Main {
         ReportCreator creator = new ReportCreatorImpl();
         String report = creator.create();
 
-        CsvFileWriter writing = new CsvFileWriterImpl();
+        CsvFileWriter writing = new CsvFileWriterImpl(FILE_PATH + FILE_NAME_TO);
         writing.writing(report);
     }
 }

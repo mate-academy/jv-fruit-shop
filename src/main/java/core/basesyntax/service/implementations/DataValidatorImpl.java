@@ -33,7 +33,7 @@ public class DataValidatorImpl implements DataValidator {
 
     private boolean isValidInteger(String str) {
         try {
-            Integer.parseInt(str);
+            Integer.parseInt(str.trim());
             return true;
         } catch (NumberFormatException e) {
             return false;
