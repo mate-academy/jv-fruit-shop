@@ -14,7 +14,9 @@ public class CsvFileReaderImpl implements CsvFileReader {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                lines.add(line);
+                if (!line.trim().isEmpty()) {
+                    lines.add(line.trim());
+                }
             }
         } catch (Exception e) {
             throw new RuntimeException("Can't read from file " + filePath, e);
