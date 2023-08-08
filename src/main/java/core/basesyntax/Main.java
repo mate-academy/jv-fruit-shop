@@ -41,7 +41,7 @@ public class Main {
         }
         System.out.println(Storage.storage.values());
         System.out.println(Storage.storage.keySet());
-
+        System.out.println("her");
         ReportCreator creator = new ReportCreatorImpl();
         String report = creator.create(Storage.storage);
 
