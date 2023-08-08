@@ -20,7 +20,10 @@ public class CsvFileReaderImpl implements CsvFileReader {
             throw new RuntimeException("Can't read from file " + filePath, e);
         }
 
-        lines.remove(USELESS_LINE);
+        if (!lines.isEmpty()) {
+            lines.remove(USELESS_LINE);
+        }
+
         return lines;
     }
 }
