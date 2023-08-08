@@ -19,8 +19,8 @@ public class Main {
     public static final String FILE_NAME_TO = "report.csv";
 
     public static void main(String[] args) {
-        CsvFileReader csvFileReader = new CsvFileReaderImpl(FILE_PATH + FILE_NAME_FROM);
-        List<String> lines = csvFileReader.read();
+        CsvFileReader csvFileReader = new CsvFileReaderImpl();
+        List<String> lines = csvFileReader.read(FILE_PATH + FILE_NAME_FROM);
 
         TransactionParser parser = new TransactionParserImpl();
         List<FruitTransaction> transactions = parser.parseTransactions(lines);
