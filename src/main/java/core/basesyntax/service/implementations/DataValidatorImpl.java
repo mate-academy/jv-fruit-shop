@@ -9,6 +9,10 @@ public class DataValidatorImpl implements DataValidator {
 
     @Override
     public void validate(String[] data) {
+        if (data.length != 3) {
+            throw new IllegalArgumentException("Wrong data in input file");
+        }
+
         if (data[OPERATION_INDEX] == null
                 || data[FRUIT_INDEX] == null || data[AMOUNT_INDEX] == null) {
             throw new IllegalArgumentException("Wrong data in input file");
