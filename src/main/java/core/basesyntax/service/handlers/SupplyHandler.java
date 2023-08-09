@@ -8,11 +8,7 @@ public class SupplyHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        if (Storage.storage.containsKey(transaction.getFruit())) {
-            Integer quantity = Storage.storage.get(transaction.getFruit());
-            Storage.storage.put(transaction.getFruit(), quantity + transaction.getQuantity());
-        } else {
-            Storage.storage.put(transaction.getFruit(), transaction.getQuantity());
-        }
+        Storage.storage.merge(transaction.getFruit(), transaction.getQuantity(),
+                Integer::sum);
     }
 }
