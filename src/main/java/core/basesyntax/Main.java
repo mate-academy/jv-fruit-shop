@@ -1,11 +1,18 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
-import core.basesyntax.service.ReportGeneratorService;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
-import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
+import core.basesyntax.service.impl.FruitShopServiceImpl;
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
@@ -25,13 +32,18 @@ public class Main {
         operationHandlerMap.put("s", new SupplyOperationHandler());
         operationHandlerMap.put("p", new PurchaseOperationHandler());
         operationHandlerMap.put("r", new ReturnOperationHandler());
+        OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
 
         FileReader fileReader = new FileReaderImpl();
-        ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
+        TransactionParser transactionParser = new TransactionParserImpl();
+        FruitShopService fruitShopService = new FruitShopServiceImpl(strategy);
+        ReportCreator reportCreator = new ReportCreatorImpl();
         FileWriter fileWriter = new FileWriterImpl();
 
         List<String> data = fileReader.readFromFile(fromFileName);
-        String report = reportGeneratorService.generateReport(data);
+        List<FruitTransaction> transactions = transactionParser.parse(data);
+        fruitShopService.process(transactions);
+        String report = reportCreator.createReport();
         fileWriter.writeToFile(toFileName, report);
     }
 }

@@ -1,7 +1,8 @@
 package core.basesyntax.strategy;
 
-public interface OperationHandler {
-    int QUANTITY_INDEX = 2;
+import core.basesyntax.model.FruitTransaction;
 
-    int getValueByOperation(String[] dataArray);
+public interface OperationHandler {
+
+    void getValueByOperation(FruitTransaction dataArray);
 }

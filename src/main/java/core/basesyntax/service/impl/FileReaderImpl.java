@@ -11,6 +11,9 @@ public class FileReaderImpl implements FileReader {
 
     @Override
     public List<String> readFromFile(String filePath) {
+        if (filePath == null) {
+            throw new RuntimeException("File path can`t be null!");
+        }
         List<String> dataArray = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
             String data = reader.readLine();
