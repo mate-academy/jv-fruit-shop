@@ -1,7 +1,6 @@
 package core.basesyntax.db;
 
 import java.util.HashMap;
-
 import java.util.Map;
 
 public class FruitStorage {
@@ -13,7 +12,8 @@ public class FruitStorage {
         int currentQuantity = fruitDb.getOrDefault(fruit, 0);
         fruitDb.put(fruit, currentQuantity + quantityChange);
     }
-    public Map<String,Integer>getMap () {
+
+    public Map<String, Integer> getMap() {
         return fruitDb;
     }
 }

@@ -12,7 +12,6 @@ import core.basesyntax.service.impl.FileWriteReportToFileImpl;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.FruitTransactionsHandlerImpl;
 import core.basesyntax.service.impl.ReportGenerateServiceImpl;
-
 import java.util.List;
 
 /**
@@ -27,8 +26,10 @@ public class Main {
 
         // Processing
         List<String> transactionsStr = fileReader.readDataFromFile("data from File");
-        List<FruitTransaction> transactionsFruitList = transactionParser.parseTransactions(transactionsStr);
-        FruitTransactionHandler fruitTransactionsHandler = new FruitTransactionsHandlerImpl(storage);
+        List<FruitTransaction> transactionsFruitList = transactionParser
+                .parseTransactions(transactionsStr);
+        FruitTransactionHandler fruitTransactionsHandler =
+                new FruitTransactionsHandlerImpl(storage);
         fruitTransactionsHandler.processTransactionsList(transactionsFruitList);
 
         //Generate report
@@ -38,8 +39,8 @@ public class Main {
 
         //Writing report
 
-        FileWriteReportToFile writeReportToFile= new FileWriteReportToFileImpl();
-        writeReportToFile.writeReportToFile(generateReport,"data to file");
+        FileWriteReportToFile writeReportToFile = new FileWriteReportToFileImpl();
+        writeReportToFile.writeReportToFile(generateReport, "data to file");
 
     }
 }
