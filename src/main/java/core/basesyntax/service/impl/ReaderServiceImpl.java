@@ -34,7 +34,8 @@ public class ReaderServiceImpl implements ReaderService {
     private FruitTransaction getFromCsvRow(String line) {
         String[] fields = line.split(",");
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(operationTypeService.getOperationType(fields[OPERATION_INDEX]));
+        fruitTransaction.setOperation(
+                operationTypeService.getOperationType(fields[OPERATION_INDEX]));
         fruitTransaction.setFruitName(fields[FRUIT_NAME_INDEX]);
         fruitTransaction.setQuantity(new BigDecimal(fields[QUANTITY_INDEX]));
         return fruitTransaction;

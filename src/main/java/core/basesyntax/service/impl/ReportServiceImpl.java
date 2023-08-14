@@ -16,7 +16,10 @@ public class ReportServiceImpl implements ReportService {
     public String createReport(List<Fruit> fruits) {
         StringBuilder report = new StringBuilder("fruit,quantity").append(System.lineSeparator());
         for (Fruit fruit : fruits) {
-            report.append(fruit.getName()).append(",").append(fruit.getQuantity()).append(System.lineSeparator());
+            report.append(fruit.getName())
+                    .append(",")
+                    .append(fruit.getQuantity())
+                    .append(System.lineSeparator());
         }
         return report.toString();
     }

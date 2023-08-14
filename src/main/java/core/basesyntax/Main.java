@@ -19,15 +19,19 @@ import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.List;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "src/main/java/core/basesyntax/files/input_db.csv";
-    private static final String OUTPUT_FILE_NAME = "src/main/java/core/basesyntax/files/output_db.csv";
+    private static final String INPUT_FILE_NAME =
+            "src/main/java/core/basesyntax/files/input_db.csv";
+    private static final String OUTPUT_FILE_NAME =
+            "src/main/java/core/basesyntax/files/output_db.csv";
     private final ReaderService readerService = new ReaderServiceImpl();
     private final WriteService writeService = new WriteServiceImpl();
     private final FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
     private final FruitDao fruitDao = new FruitDaoImpl();
 
-    private final OperationStrategy operationStrategy = new OperationStrategyImpl(fruitDao, fruitTransactionDao);
-    private final ProcessDataService processDataService = new ProcessDataServiceImpl(operationStrategy);
+    private final OperationStrategy operationStrategy =
+            new OperationStrategyImpl(fruitDao, fruitTransactionDao);
+    private final ProcessDataService processDataService =
+            new ProcessDataServiceImpl(operationStrategy);
     private final ReportService reportService = new ReportServiceImpl(fruitDao);
 
     public static void main(String[] args) {

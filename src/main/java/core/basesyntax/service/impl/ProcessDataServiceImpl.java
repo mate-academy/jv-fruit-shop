@@ -16,7 +16,8 @@ public class ProcessDataServiceImpl implements ProcessDataService {
     public void processData(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             operationStrategy.getOperation(fruitTransaction.getOperation())
-                    .completeOperation(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
+                    .completeOperation(fruitTransaction.getFruitName(),
+                            fruitTransaction.getQuantity());
         }
     }
 }
