@@ -30,7 +30,9 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
                 result = operationStrategy.get(fruitTransaction.getOperation())
                         .getOperation(result, fruitTransaction.getQuantity());
             }
-            if (result < 0) throw new RuntimeException("Balance mustn't be negative");
+            if (result < 0) {
+                throw new RuntimeException("Balance mustn't be negative");
+            }
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setOperation(TOTAL);
             fruitTransaction.setFruit(entry.getKey());

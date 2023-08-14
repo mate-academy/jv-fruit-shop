@@ -12,15 +12,16 @@ import java.util.stream.Collectors;
 public class ReaderServiceImpl implements ReaderService {
     private static final String COMA = ",";
     private static final String TYPE = "type";
+
     @Override
     public List<FruitTransaction> readFromFile(String filePath) {
-        List<String> File;
+        List<String> strings;
         try {
-            File = Files.readAllLines(Path.of(filePath));
+            strings = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't get data from file " + filePath);
         }
-        return File.stream().map(this::getFromCsvRow).collect(Collectors.toList());
+        return strings.stream().map(this::getFromCsvRow).collect(Collectors.toList());
     }
 
     private FruitTransaction getFromCsvRow(String line) {
