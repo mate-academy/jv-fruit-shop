@@ -6,4 +6,3 @@ public interface OperationHandler {
 
     void handle(FruitTransaction fruit);
 }
-

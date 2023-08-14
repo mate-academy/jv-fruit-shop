@@ -20,10 +20,10 @@ import strategy.TransactionStrategyImpl;
 
 public class Main {
     public static void main(String[] args) {
-        String pathFrom = "src/main/resources/inputData.csv";
+        String pathFromFile = "src/main/resources/inputData.csv";
         FruitDao fruitDao = new FruitDaoImpl();
         ReaderServiceImpl readerService = new ReaderServiceImpl();
-        List<String> data = readerService.readFromFile(pathFrom);
+        List<String> data = readerService.readFromFile(pathFromFile);
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler(fruitDao));
@@ -36,12 +36,11 @@ public class Main {
         ParserService parserService = new ParserServiceCsvImpl();
         List<FruitTransaction> fruits = parserService.parseData(data);
         FruitService fruitService = new FruitServiceImpl(new FruitDaoImpl(),
-                new TransactionStrategyImpl(operationHandlerMap));
-        List<String> transactionList = fruitService.transaction(fruits);
+                new TransactionStrategyImpl(operationHandlerMap), parserService);
         List<String> reportList = fruitService
-                .createReport(transactionList, parserService.getHeader());
-        String pathTo = "src/main/resources/fruitReport.csv";
+                .createReport(fruits);
+        String pathToFile = "src/main/resources/fruitReport.csv";
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeInFile(pathTo, String.join("\n", reportList));
+        writerService.writeInFile(pathToFile, String.join("\n", reportList));
     }
 }

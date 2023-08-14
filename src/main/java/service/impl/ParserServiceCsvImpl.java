@@ -20,20 +20,10 @@ public class ParserServiceCsvImpl implements ParserService {
     private FruitTransaction getFromCsvRow(String row) {
         String[] lineFields = row.split(",");
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(operationChecker(lineFields[0]));
+        fruitTransaction.setOperation(FruitTransaction.Operation.getByCode(lineFields[0]));
         fruitTransaction.setFruitName(lineFields[1]);
         fruitTransaction.setFruitQuantity(Integer.parseInt(lineFields[2]));
         return fruitTransaction;
-    }
-
-    private FruitTransaction.Operation operationChecker(String operation) {
-        switch (operation) {
-            case "b" : return FruitTransaction.Operation.BALANCE;
-            case "s" : return FruitTransaction.Operation.SUPPLY;
-            case "p" : return FruitTransaction.Operation.PURCHASE;
-            case "r" : return FruitTransaction.Operation.RETURN;
-            default: return null;
-        }
     }
 
     @Override

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private FruitTransaction.Operation operation;
     private String fruitName;
@@ -39,6 +41,13 @@ public class FruitTransaction {
 
         Operation(String operation) {
             this.operation = operation;
+        }
+
+        public static Operation getByCode(String lineField) {
+            return Arrays.stream(Operation.values())
+                    .filter(o -> o.getOperation().equals(lineField))
+                    .findFirst()
+                    .get();
         }
 
         public String getOperation() {
