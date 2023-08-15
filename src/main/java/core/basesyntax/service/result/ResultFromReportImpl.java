@@ -1,22 +1,22 @@
 package core.basesyntax.service.result;
 
-import core.basesyntax.models.Fruit;
 import core.basesyntax.service.counter.OperationType;
 import core.basesyntax.service.strategy.CountStrategy;
 import core.basesyntax.service.strategy.CountStrategyImpl;
+import core.basesyntax.service.transaction.FruitTransaction;
 import java.util.List;
 import java.util.Map;
 
 public class ResultFromReportImpl implements ResultFromReport {
+    private CountStrategy countStrategy = new CountStrategyImpl();
 
     @Override
-    public void getResultFromReport(List<String> dataFromReport, Map<String,
-            OperationType> operationStrategyMap, Map<Fruit, Integer> dataToUpdateReport,
-                                    Map<String, Fruit> fruitTypes) {
-        CountStrategy countStrategy = new CountStrategyImpl();
-        for (int i = 1; i < dataFromReport.size(); i++) {
-            countStrategy.getOperationType(operationStrategyMap, dataFromReport.get(i))
-                    .countFruits(dataToUpdateReport, fruitTypes, dataFromReport.get(i));
+    public void getResultFromReport(List<FruitTransaction> fruitTransactionList,
+                                    Map<String, Integer> fruitTypesAndQuantity,
+                                    Map<String, OperationType> operationStrategyMap) {
+        for (int i = 0; i < fruitTransactionList.size(); i++) {
+            countStrategy.getOperationType(operationStrategyMap, fruitTransactionList.get(i))
+                    .countFruits(fruitTypesAndQuantity, fruitTransactionList.get(i));
         }
     }
 }

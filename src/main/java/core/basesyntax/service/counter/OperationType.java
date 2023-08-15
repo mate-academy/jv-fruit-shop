@@ -1,11 +1,9 @@
 package core.basesyntax.service.counter;
 
-import core.basesyntax.models.Fruit;
+import core.basesyntax.service.transaction.FruitTransaction;
 import java.util.Map;
 
 public interface OperationType {
-    int FRUIT_TYPE = 1;
-    int FRUIT_QUANTITY = 2;
-    void countFruits(Map<Fruit, Integer> dataToUpdateReport,
-                     Map<String, Fruit> fruitTypes, String string);
+
+    void countFruits(Map<String, Integer> fruitTypesAndQuantity, FruitTransaction fruitTransaction);
 }

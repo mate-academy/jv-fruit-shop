@@ -1,16 +1,14 @@
 package core.basesyntax.service.counter;
 
-import core.basesyntax.models.Fruit;
+import core.basesyntax.service.transaction.FruitTransaction;
 import java.util.Map;
 
 public class BalanceTypeImpl implements OperationType {
 
     @Override
-    public void countFruits(Map<Fruit, Integer> dataToUpdateReport, Map<String,
-            Fruit> fruitTypes, String string) {
-        String[] split = string.split(",");
-        Fruit fruitType = fruitTypes.get(split[FRUIT_TYPE]);
-        int fruitQuantity = Integer.parseInt(split[FRUIT_QUANTITY]);
-        dataToUpdateReport.put(fruitType, fruitQuantity);
+    public void countFruits(Map<String, Integer> fruitTypesAndQuantity,
+                            FruitTransaction fruitTransaction) {
+        fruitTypesAndQuantity.put(fruitTransaction.getFruit(),
+                fruitTransaction.getQuantity());
     }
 }

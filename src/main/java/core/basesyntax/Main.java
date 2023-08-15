@@ -1,12 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.ReadDataFromFile;
-import core.basesyntax.dao.ReadDataFromFileImpl;
+import core.basesyntax.dao.FileReadService;
+import core.basesyntax.dao.FileReadServiceImpl;
 import core.basesyntax.dao.WriteDataToFile;
 import core.basesyntax.dao.WriteDataToFileImpl;
-import core.basesyntax.models.Apple;
-import core.basesyntax.models.Banana;
-import core.basesyntax.models.Fruit;
 import core.basesyntax.service.counter.BalanceTypeImpl;
 import core.basesyntax.service.counter.OperationType;
 import core.basesyntax.service.counter.PurchaseTypeImpl;
@@ -14,11 +11,15 @@ import core.basesyntax.service.counter.ReturnTypeImpl;
 import core.basesyntax.service.counter.SupplyTypeImpl;
 import core.basesyntax.service.result.ResultFromReport;
 import core.basesyntax.service.result.ResultFromReportImpl;
+import core.basesyntax.service.transaction.TransactionParser;
+import core.basesyntax.service.transaction.TransactionParserImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_PATH = "src/main/resources/Report.csv";
+
     public static void main(String[] args) {
 
         Map<String, OperationType> operationStrategyMap = new HashMap<>();
@@ -27,22 +28,18 @@ public class Main {
         operationStrategyMap.put("p", new PurchaseTypeImpl());
         operationStrategyMap.put("r", new ReturnTypeImpl());
         
-        Map<String, Fruit> fruitTypes = new HashMap<>();
-        fruitTypes.put("banana", new Banana());
-        fruitTypes.put("apple", new Apple());
-        
-        Map<Fruit, Integer> dataToUpdateReport = new HashMap<>();
+        Map<String, Integer> fruitTypesAndQuantity = new HashMap<>();
 
-        ReadDataFromFile readDataFromFile = new ReadDataFromFileImpl();
-        String filePath = "src/main/java/core/basesyntax/resources/Report.csv";
-        List<String> dataFromReport = readDataFromFile.getDataFromReport(filePath);
+        FileReadService readService = new FileReadServiceImpl();
+        List<String> dataFromReport = readService.getDataFromReport(FILE_PATH);
 
         ResultFromReport resultFromReport = new ResultFromReportImpl();
-        resultFromReport.getResultFromReport(dataFromReport, operationStrategyMap,
-                dataToUpdateReport, fruitTypes);
+        TransactionParser transactionParser = new TransactionParserImpl();
+        resultFromReport.getResultFromReport(transactionParser.getFruitTransaction(dataFromReport),
+                fruitTypesAndQuantity, operationStrategyMap);
 
         WriteDataToFile writeDataToFile = new WriteDataToFileImpl();
-        writeDataToFile.writeDataToFile(dataToUpdateReport);
+        writeDataToFile.writeDataToFile(fruitTypesAndQuantity);
     }
 
 }

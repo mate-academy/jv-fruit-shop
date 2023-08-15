@@ -1,12 +1,12 @@
 package core.basesyntax.service.result;
 
-import core.basesyntax.models.Fruit;
 import core.basesyntax.service.counter.OperationType;
+import core.basesyntax.service.transaction.FruitTransaction;
 import java.util.List;
 import java.util.Map;
 
 public interface ResultFromReport {
-    void getResultFromReport(List<String> dataFromReport, Map<String,
-            OperationType> operationStrategyMap, Map<Fruit, Integer> dataToUpdateReport,
-                             Map<String, Fruit> fruitTypes);
+    void getResultFromReport(List<FruitTransaction> fruitTransactionList,
+                             Map<String, Integer> fruitTypesAndQuantity,
+                             Map<String, OperationType> operationStrategyMap);
 }

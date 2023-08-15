@@ -1,10 +1,11 @@
 package core.basesyntax.service.strategy;
 
 import core.basesyntax.service.counter.OperationType;
+import core.basesyntax.service.transaction.FruitTransaction;
 import java.util.Map;
 
 public interface CountStrategy {
 
-    int OPERATION_INDEX = 0;
-    OperationType getOperationType(Map<String, OperationType> operationStrategyMap, String string);
+    OperationType getOperationType(Map<String, OperationType> operationStrategyMap,
+                                   FruitTransaction fruitTransaction);
 }
