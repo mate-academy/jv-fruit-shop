@@ -14,24 +14,30 @@ import core.basesyntax.service.impl.ProcessDataServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriteServiceImpl;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationHandler;
+import core.basesyntax.strategy.impl.ReturnOperationHandler;
+import core.basesyntax.strategy.impl.SupplyOperationHandler;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_NAME =
-            "src/main/java/core/basesyntax/files/input_db.csv";
+            "src/main/resources/input_db.csv";
     private static final String OUTPUT_FILE_NAME =
-            "src/main/java/core/basesyntax/files/output_db.csv";
+            "src/main/resources/output_db.csv";
     private final ReaderService readerService = new ReaderServiceImpl();
     private final WriteService writeService = new WriteServiceImpl();
     private final FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
     private final FruitDao fruitDao = new FruitDaoImpl();
-
-    private final OperationStrategy operationStrategy =
-            new OperationStrategyImpl(fruitDao, fruitTransactionDao);
+    private final OperationStrategy operationStrategies =
+            new OperationStrategyImpl(createMapOfOperationStrategies());
     private final ProcessDataService processDataService =
-            new ProcessDataServiceImpl(operationStrategy);
+            new ProcessDataServiceImpl(operationStrategies);
     private final ReportService reportService = new ReportServiceImpl(fruitDao);
 
     public static void main(String[] args) {
@@ -54,6 +60,19 @@ public class Main {
         System.out.println("Report:\n" + report);
         // write report to file
         main.writeDataToFile(report);
+    }
+
+    private Map<FruitTransaction.Operation, OperationHandler> createMapOfOperationStrategies() {
+        Map<FruitTransaction.Operation, OperationHandler> operationServiceMap = new HashMap<>();
+        operationServiceMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(fruitDao));
+        operationServiceMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(fruitDao));
+        operationServiceMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(fruitDao));
+        operationServiceMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(fruitDao, fruitTransactionDao));
+        return operationServiceMap;
     }
 
     public <T> void print(List<T> list) { // TODO: correct if necessary

@@ -5,14 +5,14 @@ import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.exception.MyOwnException;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.OperationHandler;
 import java.math.BigDecimal;
 
-public class ReturnOperationService implements OperationService {
+public class ReturnOperationHandler implements OperationHandler {
     private FruitDao fruitDao;
     private FruitTransactionDao fruitTransactionDao;
 
-    public ReturnOperationService(FruitDao fruitDao, FruitTransactionDao fruitTransactionDao) {
+    public ReturnOperationHandler(FruitDao fruitDao, FruitTransactionDao fruitTransactionDao) {
         this.fruitDao = fruitDao;
         this.fruitTransactionDao = fruitTransactionDao;
     }

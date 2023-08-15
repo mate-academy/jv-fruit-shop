@@ -2,7 +2,7 @@ package core.basesyntax.strategy;
 
 import java.math.BigDecimal;
 
-public interface OperationService {
+public interface OperationHandler {
     void completeOperation(String fruitName, BigDecimal quantity);
 
 }

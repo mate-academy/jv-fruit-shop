@@ -2,13 +2,13 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.OperationHandler;
 import java.math.BigDecimal;
 
-public class BalanceOperationService implements OperationService {
+public class BalanceOperationHandler implements OperationHandler {
     private FruitDao fruitDao;
 
-    public BalanceOperationService(FruitDao fruitDao) {
+    public BalanceOperationHandler(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 

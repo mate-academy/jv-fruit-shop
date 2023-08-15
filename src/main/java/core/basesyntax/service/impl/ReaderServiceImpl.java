@@ -24,7 +24,7 @@ public class ReaderServiceImpl implements ReaderService {
             fruitTransactions = Files.readAllLines(Path.of(fileName));
             fruitTransactions.remove(HEADER_INDEX); // TODO: check it
         } catch (IOException e) {
-            throw new RuntimeException("Can't get data from file " + fileName);
+            throw new RuntimeException("Can't get data from file: " + fileName, e);
         }
         return fruitTransactions.stream()
                 .map(this::getFromCsvRow)
