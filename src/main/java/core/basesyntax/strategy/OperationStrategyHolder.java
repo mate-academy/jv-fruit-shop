@@ -19,7 +19,7 @@ public class OperationStrategyHolder {
         map.put(FruitTransaction.Operation.RETURN, new ReturnFruitAmountCalculateStrategy());
     }
 
-    public static FruitAmountCalculateStrategy getStrategy(FruitTransaction.Operation operation) {
+    public FruitAmountCalculateStrategy getStrategy(FruitTransaction.Operation operation) {
         return map.get(operation);
     }
 

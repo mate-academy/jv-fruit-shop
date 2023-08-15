@@ -9,6 +9,7 @@ import java.util.List;
 
 public class FruitTransactionsHandlerImpl implements FruitTransactionHandler {
     private final FruitStorage fruitStorage;
+    private OperationStrategyHolder operationStrategyHolder = new OperationStrategyHolder();
 
     public FruitTransactionsHandlerImpl(FruitStorage fruitStorage) {
         this.fruitStorage = fruitStorage;
@@ -18,7 +19,7 @@ public class FruitTransactionsHandlerImpl implements FruitTransactionHandler {
     public void processTransactionsList(List<FruitTransaction> fruitTransactionList) {
         for (int i = 0; i < fruitTransactionList.size(); i++) {
             FruitTransaction fruitTransaction = fruitTransactionList.get(i);
-            FruitAmountCalculateStrategy strategy = OperationStrategyHolder
+            FruitAmountCalculateStrategy strategy = operationStrategyHolder
                     .getStrategy(fruitTransaction.getOperation());
             fruitStorage.updateFruitQuantity(fruitTransaction.getFruit(),
                     strategy.getFruitAmount(fruitTransaction.getQuantity()));

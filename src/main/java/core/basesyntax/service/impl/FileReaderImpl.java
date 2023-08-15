@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CsvFileReader;
+import core.basesyntax.service.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class CsvFileReaderImpl implements CsvFileReader {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readDataFromFile(String path) {
         try {
@@ -14,6 +14,5 @@ public class CsvFileReaderImpl implements CsvFileReader {
         } catch (IOException e) {
             throw new RuntimeException("Error read file", e);
         }
-
     }
 }

@@ -21,16 +21,8 @@ public class FruitTransactionParserImpl implements TransactionParser {
                         throw new IllegalArgumentException("Invalid transaction data: "
                                 + transactionData);
                     }
-                    Operation operation = null;
-                    if (transactionFields[NAME_INDEX_OPERATION].equals("b")) {
-                        operation = Operation.BALANCE;
-                    } else if (transactionFields[NAME_INDEX_OPERATION].equals("s")) {
-                        operation = Operation.SUPPLY;
-                    } else if (transactionFields[NAME_INDEX_OPERATION].equals("r")) {
-                        operation = Operation.RETURN;
-                    } else if (transactionFields[NAME_INDEX_OPERATION].equals("p")) {
-                        operation = Operation.PURCHASE;
-                    }
+                    Operation operation = Operation
+                            .returnOperation(transactionFields[NAME_INDEX_OPERATION]);
 
                     String fruit = transactionFields[NAME_INDEX_FRUIT];
                     int quantity = Integer.parseInt(transactionFields[NAME_INDEX_QUANTITY].trim());
