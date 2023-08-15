@@ -16,7 +16,7 @@ public class ReaderServiceImpl implements ReaderService {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             return reader.lines().collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Can't find the file");
+            throw new RuntimeException("Can't find the file by path " + path, e);
         }
     }
 }

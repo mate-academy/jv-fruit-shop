@@ -12,8 +12,13 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction fruit) {
-        purchaseFruitDao.setFruitQuantity(fruit.getFruitName(),
-                purchaseFruitDao.getFruitQuantity(fruit.getFruitName())
-                        - fruit.getFruitQuantity());
+        if (purchaseFruitDao.getFruitQuantity(fruit.getFruitName()) > fruit.getFruitQuantity()) {
+            purchaseFruitDao.setFruitQuantity(fruit.getFruitName(),
+                    purchaseFruitDao.getFruitQuantity(fruit.getFruitName())
+                            - fruit.getFruitQuantity());
+        } else {
+            throw new RuntimeException("Balance of " + fruit.getFruitName()
+                    + " is negative " + purchaseFruitDao.getFruitQuantity(fruit.getFruitName()));
+        }
     }
 }

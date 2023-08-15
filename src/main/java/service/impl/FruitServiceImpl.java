@@ -1,24 +1,21 @@
 package service.impl;
 
 import dao.FruitDao;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
 import service.FruitService;
-import service.ParserService;
 import strategy.TransactionStrategy;
 
 public class FruitServiceImpl implements FruitService {
+    private static final String FORMATTED_HEADER = ParserServiceCsvImpl.getHeader();
     private final FruitDao fruitDao;
     private final TransactionStrategy transactionStrategy;
-    private final ParserService parserService;
 
     public FruitServiceImpl(FruitDao fruitDao,
-                            TransactionStrategy transactionStrategy, ParserService parserService) {
+                            TransactionStrategy transactionStrategy) {
         this.fruitDao = fruitDao;
         this.transactionStrategy = transactionStrategy;
-        this.parserService = parserService;
     }
 
     @Override
@@ -29,18 +26,11 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public List<String> createReport(List<FruitTransaction> fruits) {
-        processTransactions(fruits);
+    public List<String> createReport() {
         List<String> stringList = fruitDao.getAll().entrySet().stream()
                 .map(fruitInfo -> fruitInfo.getKey() + "," + fruitInfo.getValue())
                 .collect(Collectors.toList());
-        stringList.add(0, formattedHeader(parserService.getHeader()));
+        stringList.add(0, FORMATTED_HEADER);
         return stringList;
-    }
-
-    private String formattedHeader(String header) {
-        return Arrays.stream(header.split(","))
-                .skip(1)
-                .collect(Collectors.joining(","));
     }
 }

@@ -3,19 +3,18 @@ package service.impl;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
 
     @Override
-    public void writeInFile(String fileName, String data) {
+    public void writeInFile(String fileName, List<String> data) {
         File file = new File(fileName);
-        if (file.exists()) {
-            try (FileWriter writer = new FileWriter(file)) {
-                writer.write(data);
-            } catch (IOException e) {
-                throw new RuntimeException("Can't find the file");
-            }
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(String.join("\n", data));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't find the file by path " + fileName, e);
         }
     }
 }

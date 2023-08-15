@@ -19,11 +19,13 @@ import service.operation.SupplyOperationHandler;
 import strategy.TransactionStrategyImpl;
 
 public class Main {
+    private static final String PATH_FROM_FILE = "src/main/resources/inputData.csv";
+    private static final String PATH_TO_FILE = "src/main/resources/fruitReport.csv";
+
     public static void main(String[] args) {
-        String pathFromFile = "src/main/resources/inputData.csv";
         FruitDao fruitDao = new FruitDaoImpl();
         ReaderServiceImpl readerService = new ReaderServiceImpl();
-        List<String> data = readerService.readFromFile(pathFromFile);
+        List<String> data = readerService.readFromFile(PATH_FROM_FILE);
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler(fruitDao));
@@ -33,14 +35,13 @@ public class Main {
                 new ReturnOperationHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandler(fruitDao));
-        ParserService parserService = new ParserServiceCsvImpl();
-        List<FruitTransaction> fruits = parserService.parseData(data);
+        ParserService parserService = new ParserServiceCsvImpl(data);
+        List<FruitTransaction> fruits = parserService.parseData();
         FruitService fruitService = new FruitServiceImpl(new FruitDaoImpl(),
-                new TransactionStrategyImpl(operationHandlerMap), parserService);
-        List<String> reportList = fruitService
-                .createReport(fruits);
-        String pathToFile = "src/main/resources/fruitReport.csv";
+                new TransactionStrategyImpl(operationHandlerMap));
+        fruitService.processTransactions(fruits);
+        List<String> reportList = fruitService.createReport();
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeInFile(pathToFile, String.join("\n", reportList));
+        writerService.writeInFile(PATH_TO_FILE, reportList);
     }
 }
