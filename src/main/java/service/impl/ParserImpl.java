@@ -1,9 +1,8 @@
 package service.impl;
 
+import java.util.List;
 import model.TransactionDto;
 import service.Parser;
-
-import java.util.List;
 
 public class ParserImpl implements Parser {
     private static final int INDEX_OF_TYPE = 0;
@@ -24,4 +23,3 @@ public class ParserImpl implements Parser {
         return null;
     }
 }
-

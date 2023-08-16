@@ -1,7 +1,6 @@
 package dao;
 
 import db.Storage;
-
 import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
@@ -22,5 +21,6 @@ public class FruitDaoImpl implements FruitDao {
         return null;
     }
 }
+
 
 
