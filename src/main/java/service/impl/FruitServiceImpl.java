@@ -1,8 +1,9 @@
 package service.impl;
 
+import dao.Fruit;
 import dao.FruitDao;
 import java.util.List;
-import model.Fruit;
+
 import model.TransactionDto;
 import service.FruitService;
 import strategy.Operation;
@@ -26,5 +27,12 @@ public class FruitServiceImpl implements FruitService {
                     transactionDto.getQuantity());
         }
         return fruitsDao.getAll();
+    }
+
+    public void executeTransactions(List<Transaction> transactions) {
+
+    }
+
+    public class Transaction {
     }
 }

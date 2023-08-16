@@ -9,11 +9,11 @@ import service.FileWriterService;
 public class FileWriterImpl implements FileWriterService {
     public boolean writeData(String toFilePath, String data) {
         File file = new File(toFilePath);
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, false))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(data);
             return true;
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file!", e);
+            throw new RuntimeException("Can't write data to file: " + toFilePath, e);
         }
     }
 }

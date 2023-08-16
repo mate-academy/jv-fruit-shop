@@ -22,7 +22,7 @@ public class FileReaderImpl implements ReaderService {
             }
             return text;
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file!", e);
+            throw new RuntimeException("Can't read file " + filePath, e);
         }
     }
 }

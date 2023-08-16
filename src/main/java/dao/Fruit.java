@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 public class Fruit {
     private String name;

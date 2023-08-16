@@ -1,7 +1,8 @@
 package strategy.impl;
 
+import dao.Fruit;
 import dao.FruitDao;
-import model.Fruit;
+import service.impl.FruitServiceImpl;
 import strategy.OperationHandler;
 
 public class AddOperationImpl implements OperationHandler {
@@ -16,6 +17,11 @@ public class AddOperationImpl implements OperationHandler {
         Fruit fruit = fruitDao.get(name);
         int newQuantity = fruit.getQuantity() + quantity;
         fruit.setQuantity(newQuantity);
+    }
+
+    @Override
+    public void handle(FruitServiceImpl.Transaction transaction) {
+
     }
 }
 

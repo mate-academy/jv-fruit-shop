@@ -3,6 +3,8 @@ package service.impl;
 import model.TransactionDto;
 import service.Parser;
 
+import java.util.List;
+
 public class ParserImpl implements Parser {
     private static final int INDEX_OF_TYPE = 0;
     private static final int INDEX_OF_FRUIT_NAME = 1;
@@ -15,6 +17,11 @@ public class ParserImpl implements Parser {
         String fruitName = arrayStringLine[INDEX_OF_FRUIT_NAME];
         int quantity = Integer.parseInt(arrayStringLine[INDEX_OF_QUANTITY]);
         return new TransactionDto(fruitType, fruitName, quantity);
+    }
+
+    @Override
+    public List<FruitServiceImpl.Transaction> parse(List<String> lines) {
+        return null;
     }
 }
 

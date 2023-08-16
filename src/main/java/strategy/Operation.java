@@ -17,11 +17,11 @@ public enum Operation {
     }
 
     public static Operation getActivityType(String abbreviationActivityType) {
-        for (Operation typeActivity: Operation.values()) {
+        for (Operation typeActivity : Operation.values()) {
             if (typeActivity.getOperationTypes().equals(abbreviationActivityType)) {
                 return typeActivity;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Invalid abbreviation: " + abbreviationActivityType);
     }
 }

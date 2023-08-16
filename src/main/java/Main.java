@@ -1,10 +1,11 @@
+import dao.Fruit;
 import dao.FruitDao;
 import dao.FruitDaoImpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.Fruit;
+
 import model.TransactionDto;
 import service.Parser;
 import service.impl.CreateReportImpl;
@@ -42,7 +43,7 @@ public class Main {
         }
         List<Fruit> fruits = new FruitServiceImpl(fruitDao, activitiesStrategy)
                 .changeBalance(transactions);
-        String report = new CreateReportImpl().createReport(fruits);
+        String report = new CreateReportImpl().createReport();
         new FileWriterImpl().writeData(REPORT_PATH, report);
     }
 }

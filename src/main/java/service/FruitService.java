@@ -1,9 +1,9 @@
 package service;
 
 import java.util.List;
-import model.Fruit;
-import model.TransactionDto;
+
+import service.impl.FruitServiceImpl;
 
 public interface FruitService {
-    List<Fruit> changeBalance(List<TransactionDto> transactions);
+    void executeTransactions(List<FruitServiceImpl.Transaction> transactions);
 }

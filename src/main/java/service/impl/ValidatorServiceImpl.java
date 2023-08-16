@@ -8,13 +8,13 @@ public class ValidatorServiceImpl {
 
     public boolean validate(List<String> text) {
         if (text.isEmpty() || !text.get(0).equals(TITLE_TEXT)) {
-            throw new RuntimeException(("Incorrect input data!"));
+            throw new RuntimeException("Invalid input data! Expected title: " + TITLE_TEXT);
         }
         for (int i = 1; i < text.size(); i++) {
             String line = text.get(i);
 
             if (!line.matches(FORMAT_TEXT)) {
-                throw new RuntimeException("Incorrect format data!");
+                throw new RuntimeException("Incorrect format at line " + (i + 1) + ": " + line);
             }
         }
         return true;
