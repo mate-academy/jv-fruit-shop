@@ -35,13 +35,13 @@ public class Main {
                 new ReturnOperationHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandler(fruitDao));
-        ParserService parserService = new ParserServiceCsvImpl(data);
-        List<FruitTransaction> fruits = parserService.parseData();
+        ParserService parserService = new ParserServiceCsvImpl();
+        List<FruitTransaction> fruits = parserService.parseData(data);
         FruitService fruitService = new FruitServiceImpl(new FruitDaoImpl(),
                 new TransactionStrategyImpl(operationHandlerMap));
         fruitService.processTransactions(fruits);
         List<String> reportList = fruitService.createReport();
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeInFile(PATH_TO_FILE, reportList);
+        writerService.writeToFile(PATH_TO_FILE, reportList);
     }
 }

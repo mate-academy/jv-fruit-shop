@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
-
     @Override
     public List<String> readFromFile(String path) {
         File file = new File(path);

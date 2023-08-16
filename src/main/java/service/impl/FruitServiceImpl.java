@@ -8,7 +8,7 @@ import service.FruitService;
 import strategy.TransactionStrategy;
 
 public class FruitServiceImpl implements FruitService {
-    private static final String FORMATTED_HEADER = ParserServiceCsvImpl.getHeader();
+    private static final String REPORT_HEADER = "fruit,quantity";
     private final FruitDao fruitDao;
     private final TransactionStrategy transactionStrategy;
 
@@ -30,7 +30,7 @@ public class FruitServiceImpl implements FruitService {
         List<String> stringList = fruitDao.getAll().entrySet().stream()
                 .map(fruitInfo -> fruitInfo.getKey() + "," + fruitInfo.getValue())
                 .collect(Collectors.toList());
-        stringList.add(0, FORMATTED_HEADER);
+        stringList.add(0, REPORT_HEADER);
         return stringList;
     }
 }

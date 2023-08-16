@@ -36,7 +36,6 @@ public class FruitTransaction {
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
-
         private final String operation;
 
         Operation(String operation) {
