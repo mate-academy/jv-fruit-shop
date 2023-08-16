@@ -2,7 +2,7 @@ package core.basesyntax.service.report;
 
 import java.util.Map;
 
-public class CreateReportImpl implements CreateReport {
+public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String getDataForReport(Map<String, Integer> fruitTypesAndQuantity) {

@@ -5,15 +5,16 @@ import core.basesyntax.dao.FileReadServiceImpl;
 import core.basesyntax.dao.Storage;
 import core.basesyntax.dao.WriteDataToFile;
 import core.basesyntax.dao.WriteDataToFileImpl;
-import core.basesyntax.service.counter.BalanceTypeImpl;
-import core.basesyntax.service.counter.OperationType;
-import core.basesyntax.service.counter.PurchaseTypeImpl;
-import core.basesyntax.service.counter.ReturnTypeImpl;
-import core.basesyntax.service.counter.SupplyTypeImpl;
-import core.basesyntax.service.report.CreateReport;
-import core.basesyntax.service.report.CreateReportImpl;
-import core.basesyntax.service.report.ReportService;
-import core.basesyntax.service.report.ReportServiceImpl;
+import core.basesyntax.service.counter.BalanceHandlerImpl;
+import core.basesyntax.service.counter.OperationHandler;
+import core.basesyntax.service.counter.PurchaseHandlerImpl;
+import core.basesyntax.service.counter.ReturnHandlerImpl;
+import core.basesyntax.service.counter.SupplyHandlerImpl;
+import core.basesyntax.service.report.ReportCreator;
+import core.basesyntax.service.report.ReportCreatorImpl;
+import core.basesyntax.service.report.TransactionProcessor;
+import core.basesyntax.service.report.TransactionProcessorImpl;
+import core.basesyntax.service.strategy.OperationStrategyImpl;
 import core.basesyntax.service.transaction.FruitTransaction;
 import core.basesyntax.service.transaction.TransactionParser;
 import core.basesyntax.service.transaction.TransactionParserImpl;
@@ -26,11 +27,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Map<String, OperationType> operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put("b", new BalanceTypeImpl());
-        operationStrategyMap.put("s", new SupplyTypeImpl());
-        operationStrategyMap.put("p", new PurchaseTypeImpl());
-        operationStrategyMap.put("r", new ReturnTypeImpl());
+        Map<String, OperationHandler> operationStrategyMap = new HashMap<>();
+        operationStrategyMap.put("b", new BalanceHandlerImpl());
+        operationStrategyMap.put("s", new SupplyHandlerImpl());
+        operationStrategyMap.put("p", new PurchaseHandlerImpl());
+        operationStrategyMap.put("r", new ReturnHandlerImpl());
 
         FileReadService readService = new FileReadServiceImpl();
         List<String> dataFromReport = readService.getDataFromReport(REPORT_FILE);
@@ -39,11 +40,11 @@ public class Main {
         List<FruitTransaction> fruitTransaction =
                 transactionParser.getFruitTransaction(dataFromReport);
 
-        ReportService resultFromReport = new ReportServiceImpl();
-        resultFromReport.countFruit(fruitTransaction,
-                Storage.getFruitTypesAndQuantity(), operationStrategyMap);
+        TransactionProcessor resultFromReport =
+                new TransactionProcessorImpl(new OperationStrategyImpl(operationStrategyMap));
+        resultFromReport.process(fruitTransaction);
 
-        CreateReport createReport = new CreateReportImpl();
+        ReportCreator createReport = new ReportCreatorImpl();
         String dataForReport = createReport.getDataForReport(Storage.getFruitTypesAndQuantity());
 
         WriteDataToFile writeDataToFile = new WriteDataToFileImpl();

@@ -3,10 +3,10 @@ package core.basesyntax.service.counter;
 import core.basesyntax.dao.Storage;
 import core.basesyntax.service.transaction.FruitTransaction;
 
-public class BalanceTypeImpl implements OperationType {
+public class BalanceHandlerImpl implements OperationHandler {
 
     @Override
-    public void makeOperationWithFruit(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         Storage.getFruitTypesAndQuantity().put(fruitTransaction.getFruit(),
                 fruitTransaction.getQuantity());
     }

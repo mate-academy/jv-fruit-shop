@@ -13,13 +13,9 @@ public class WriteDataToFileImpl implements WriteDataToFile {
         File file = new File(FILE_PATH);
         try {
             file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create new file " + file, e);
-        }
-        try {
             Files.write(file.toPath(), dataForReport.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file " + file, e);
+            throw new RuntimeException("Can't create new file " + file, e);
         }
     }
 }

@@ -2,7 +2,7 @@ package core.basesyntax.service.counter;
 
 import core.basesyntax.service.transaction.FruitTransaction;
 
-public interface OperationType {
+public interface OperationHandler {
 
-    void makeOperationWithFruit(FruitTransaction fruitTransaction);
+    void handle(FruitTransaction fruitTransaction);
 }
