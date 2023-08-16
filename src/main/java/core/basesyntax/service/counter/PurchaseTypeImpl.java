@@ -1,15 +1,14 @@
 package core.basesyntax.service.counter;
 
+import core.basesyntax.dao.Storage;
 import core.basesyntax.service.transaction.FruitTransaction;
-import java.util.Map;
 
 public class PurchaseTypeImpl implements OperationType {
 
     @Override
-    public void countFruits(Map<String, Integer> fruitTypesAndQuantity,
-                            FruitTransaction fruitTransaction) {
-        fruitTypesAndQuantity.put(fruitTransaction.getFruit(),
-                fruitTypesAndQuantity.get(fruitTransaction.getFruit())
+    public void makeOperationWithFruit(FruitTransaction fruitTransaction) {
+        Storage.getFruitTypesAndQuantity().put(fruitTransaction.getFruit(),
+                Storage.getFruitTypesAndQuantity().get(fruitTransaction.getFruit())
                         - fruitTransaction.getQuantity());
     }
 }

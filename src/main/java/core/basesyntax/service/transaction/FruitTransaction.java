@@ -1,9 +1,10 @@
 package core.basesyntax.service.transaction;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class FruitTransaction {
+    private static final Map<String, Operation> OPERATION_MAP = Map.of("b",Operation.BALANCE, "s",
+            Operation.SUPPLY, "p", Operation.PURCHASE, "r", Operation.RETURN);
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -49,12 +50,7 @@ public class FruitTransaction {
         }
 
         public static Operation getOperationByString(String string) {
-            Map<String, Operation> operationMap = new HashMap<>();
-            operationMap.put("b",BALANCE);
-            operationMap.put("s",SUPPLY);
-            operationMap.put("p",PURCHASE);
-            operationMap.put("r",RETURN);
-            return operationMap.get(string);
+            return OPERATION_MAP.get(string);
         }
     }
 }
