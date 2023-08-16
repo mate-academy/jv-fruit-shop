@@ -31,9 +31,7 @@ public class FruitTransaction {
     public void setFruit(String fruit) {
         this.fruit = fruit;
     }
-    public FruitTransaction(Operation operation) {
-        this.operation = operation;
-    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -57,12 +55,13 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
-            public static Operation findOperation(String code) {
-                return Arrays.stream(Operation.values())
+
+        public static Operation findOperation(String code) {
+            return Arrays.stream(Operation.values())
                         .filter(c -> c.getCode().equals(code))
                         .findFirst()
                         .orElseThrow(() -> new RuntimeException("Unknown code operation \""
                                 + code + "\""));
-            }
+        }
     }
 }

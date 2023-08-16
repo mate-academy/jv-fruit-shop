@@ -3,7 +3,6 @@ package core.basesyntax.data;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataValidator;
 import core.basesyntax.service.impl.DataValidatorImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 

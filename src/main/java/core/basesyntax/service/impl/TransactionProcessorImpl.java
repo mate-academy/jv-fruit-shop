@@ -4,8 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandle;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.strategy.OperationStrategy;
-import jdk.dynalink.Operation;
-
 import java.util.List;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
@@ -15,11 +13,10 @@ public class TransactionProcessorImpl implements TransactionProcessor {
         this.operationStrategy = operationStrategy;
     }
 
-
     @Override
     public void process(List<FruitTransaction> fruitsInfo) {
         for (FruitTransaction fruitInfo: fruitsInfo) {
-            OperationHandle handle =  operationStrategy.get(fruitInfo.getOperation());
+            OperationHandle handle = operationStrategy.get(fruitInfo.getOperation());
             handle.handle(fruitInfo);
         }
 

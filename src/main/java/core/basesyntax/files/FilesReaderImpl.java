@@ -7,6 +7,7 @@ import java.util.List;
 
 public class FilesReaderImpl implements FilesReader {
     public static final int USELESS_LINE = 0;
+
     @Override
     public List<String> read(String filePath) {
         List<String> lines = new ArrayList<>();
