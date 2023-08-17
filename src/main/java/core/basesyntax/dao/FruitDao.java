@@ -1,14 +1,14 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Map;
 
 public interface FruitDao {
-    void add(Fruit fruit);
+    void add(String name, BigDecimal quantity);
 
-    Fruit get(String fruitName);
+    Map.Entry<String, BigDecimal> get(String fruitName);
 
-    void update(Fruit fruit);
+    void update(String fruitName, BigDecimal quantity);
 
-    List<Fruit> getAll();
+    Map<String, BigDecimal> getAll();
 }

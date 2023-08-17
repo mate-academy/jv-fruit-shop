@@ -1,9 +1,9 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.OperationHandler;
 import java.math.BigDecimal;
+import java.util.Map;
 
 public class SupplyOperationHandler implements OperationHandler {
     private FruitDao fruitDao;
@@ -14,13 +14,12 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void completeOperation(String fruitName, BigDecimal quantity) {
-        Fruit fruitFromDb = fruitDao.get(fruitName);
+        Map.Entry<String, BigDecimal> fruitFromDb = fruitDao.get(fruitName);
         if (fruitFromDb == null) {
-            fruitDao.add(new Fruit(fruitName, quantity));
+            fruitDao.add(fruitName, quantity);
         } else {
-            BigDecimal newQuantity = fruitFromDb.getQuantity().add(quantity);
-            fruitFromDb.setQuantity(newQuantity);
-            fruitDao.update(fruitFromDb);
+            BigDecimal newQuantity = fruitFromDb.getValue().add(quantity);
+            fruitDao.update(fruitName, newQuantity);
         }
     }
 }

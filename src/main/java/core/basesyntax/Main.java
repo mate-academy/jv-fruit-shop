@@ -1,18 +1,17 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
-import core.basesyntax.dao.impl.FruitTransactionDaoImpl;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ProcessDataService;
+import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.WriteService;
-import core.basesyntax.service.impl.ProcessDataServiceImpl;
+import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.service.impl.WriteServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -21,6 +20,7 @@ import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,39 +30,39 @@ public class Main {
             "src/main/resources/input_db.csv";
     private static final String OUTPUT_FILE_NAME =
             "src/main/resources/output_db.csv";
-    private final ReaderService readerService = new ReaderServiceImpl();
-    private final WriteService writeService = new WriteServiceImpl();
-    private final FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
-    private final FruitDao fruitDao = new FruitDaoImpl();
-    private final OperationStrategy operationStrategies =
+    private static final ReaderService readerService = new ReaderServiceImpl();
+    private static final WriteService writeService = new WriteServiceImpl();
+    private static final ParseService parseService = new ParseServiceImpl();
+    private static final FruitDao fruitDao = new FruitDaoImpl();
+    private static final OperationStrategy operationStrategies =
             new OperationStrategyImpl(createMapOfOperationStrategies());
-    private final ProcessDataService processDataService =
-            new ProcessDataServiceImpl(operationStrategies);
-    private final ReportService reportService = new ReportServiceImpl(fruitDao);
+    private static final TransactionService processDataService =
+            new TransactionServiceImpl(operationStrategies);
+    private static final ReportService reportService = new ReportServiceImpl(fruitDao);
 
     public static void main(String[] args) {
-        Main main = new Main();
         // read data from file
-        List<FruitTransaction> fruitTransactions = main.readDataFromFile();
-        // add fruit transactions to DB
-        main.addTransactionsToDb(fruitTransactions);
+        List<String> inputData = readerService.readDataFromFile(INPUT_FILE_NAME);
+        // parse fruit transactions
+        List<FruitTransaction> fruitTransactions = parseService.parseTransactions(inputData);
         // print fruit transactions
-        main.print(fruitTransactions);
+        fruitTransactions.forEach(System.out::println);
         // process fruit transactions
-        main.processData(fruitTransactions);
+        processDataService.processTransactions(fruitTransactions);
         // get processed data (fruits) from DB
-        List<Fruit> fruits = main.getFruitsFromDb();
+        Map<String, BigDecimal> fruits = fruitDao.getAll();
         // print fruits
-        main.print(fruits);
+        fruits.entrySet().forEach(System.out::println);
         // create report
-        String report = main.createReport(fruits);
+        String report = reportService.createReport();
         // print report
         System.out.println("Report:\n" + report);
         // write report to file
-        main.writeDataToFile(report);
+        writeService.writeDataToFile(OUTPUT_FILE_NAME, report);
     }
 
-    private Map<FruitTransaction.Operation, OperationHandler> createMapOfOperationStrategies() {
+    private static Map<FruitTransaction.Operation,
+            OperationHandler> createMapOfOperationStrategies() {
         Map<FruitTransaction.Operation, OperationHandler> operationServiceMap = new HashMap<>();
         operationServiceMap.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler(fruitDao));
@@ -71,37 +71,7 @@ public class Main {
         operationServiceMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandler(fruitDao));
         operationServiceMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler(fruitDao, fruitTransactionDao));
+                new ReturnOperationHandler(fruitDao));
         return operationServiceMap;
-    }
-
-    public <T> void print(List<T> list) { // TODO: correct if necessary
-        list.forEach(System.out::println);
-    }
-
-    public List<FruitTransaction> readDataFromFile() {
-        return readerService.readDataFromFile(INPUT_FILE_NAME);
-    }
-
-    public void addTransactionsToDb(List<FruitTransaction> fruitTransactions) {
-        for (FruitTransaction fruitTransaction : fruitTransactions) {
-            fruitTransactionDao.add(fruitTransaction);
-        }
-    }
-
-    public void processData(List<FruitTransaction> fruitTransactions) {
-        processDataService.processData(fruitTransactions);
-    }
-
-    private String createReport(List<Fruit> fruits) {
-        return reportService.createReport(fruits);
-    }
-
-    private void writeDataToFile(String data) {
-        writeService.writeDataToFile(OUTPUT_FILE_NAME, data);
-    }
-
-    public List<Fruit> getFruitsFromDb() {
-        return fruitDao.getAll();
     }
 }

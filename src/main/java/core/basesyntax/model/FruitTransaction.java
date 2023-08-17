@@ -64,5 +64,18 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation getByCode(String code) {
+            switch (code) {
+                case "b":
+                    return BALANCE;
+                case "s":
+                    return SUPPLY;
+                case "p":
+                    return PURCHASE;
+                default:
+                    return RETURN;
+            }
+        }
     }
 }

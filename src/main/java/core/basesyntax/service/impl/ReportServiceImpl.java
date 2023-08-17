@@ -1,9 +1,10 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportService;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private FruitDao fruitDao;
@@ -13,12 +14,12 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public String createReport(List<Fruit> fruits) {
+    public String createReport() {
         StringBuilder report = new StringBuilder("fruit,quantity").append(System.lineSeparator());
-        for (Fruit fruit : fruits) {
-            report.append(fruit.getName())
+        for (Map.Entry<String, BigDecimal> fruit : FruitStorage.fruits.entrySet()) {
+            report.append(fruit.getKey())
                     .append(",")
-                    .append(fruit.getQuantity())
+                    .append(fruit.getValue())
                     .append(System.lineSeparator());
         }
         return report.toString();
