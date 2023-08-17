@@ -6,14 +6,14 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
 public class WriteDataToFileImpl implements WriteDataToFile {
-    private static final String FILE_PATH = "src/main/resources/NewReport.csv";
+    private static final String FILE_PATH = "src/main/resources/Report.csv";
 
     @Override
-    public void writeDataToFile(String dataForReport) {
+    public void writeDataToFile(String data, String fileName) {
         File file = new File(FILE_PATH);
         try {
             file.createNewFile();
-            Files.write(file.toPath(), dataForReport.getBytes(), StandardOpenOption.APPEND);
+            Files.write(file.toPath(), data.getBytes(), StandardOpenOption.APPEND);
         } catch (IOException e) {
             throw new RuntimeException("Can't create new file " + file, e);
         }

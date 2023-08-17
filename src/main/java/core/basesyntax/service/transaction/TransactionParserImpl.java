@@ -10,13 +10,13 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int FRUIT_QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> getFruitTransaction(List<String> dataFromReport) {
+    public List<FruitTransaction> getFruitTransaction(List<String> transactionData) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        for (int i = BEGINNING_OF_THE_LIST; i < dataFromReport.size(); i++) {
+        for (int i = BEGINNING_OF_THE_LIST; i < transactionData.size(); i++) {
             FruitTransaction fruitTransaction = new FruitTransaction();
-            String[] splitString = dataFromReport.get(i).split(",");
+            String[] splitString = transactionData.get(i).split(",");
             fruitTransaction.setOperation(FruitTransaction.Operation
-                            .getOperationByString(splitString[OPERATION_INDEX]));
+                            .getOperationByCode(splitString[OPERATION_INDEX]));
             fruitTransaction.setFruit(splitString[FRUIT_TYPE_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(splitString[FRUIT_QUANTITY_INDEX]));
             fruitTransactionList.add(fruitTransaction);

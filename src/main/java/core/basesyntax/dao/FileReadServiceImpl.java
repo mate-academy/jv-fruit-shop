@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FileReadServiceImpl implements FileReadService {
     @Override
-    public List<String> getDataFromReport(String file) {
+    public List<String> readDataFromReport(String file) {
         File reportFile = new File(file);
         List<String> report;
         try {

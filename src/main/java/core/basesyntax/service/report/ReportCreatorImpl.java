@@ -5,7 +5,7 @@ import java.util.Map;
 public class ReportCreatorImpl implements ReportCreator {
 
     @Override
-    public String getDataForReport(Map<String, Integer> fruitTypesAndQuantity) {
+    public String createReport(Map<String, Integer> fruitTypesAndQuantity) {
         StringBuilder builder = new StringBuilder();
         builder.append(FIRST_LINE).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : fruitTypesAndQuantity.entrySet()) {

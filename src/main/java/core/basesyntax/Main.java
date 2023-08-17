@@ -23,31 +23,32 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_FILE = "src/main/resources/InputFile.csv";
     private static final String REPORT_FILE = "src/main/resources/Report.csv";
 
     public static void main(String[] args) {
 
-        Map<String, OperationHandler> operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put("b", new BalanceHandlerImpl());
-        operationStrategyMap.put("s", new SupplyHandlerImpl());
-        operationStrategyMap.put("p", new PurchaseHandlerImpl());
-        operationStrategyMap.put("r", new ReturnHandlerImpl());
+        Map<FruitTransaction.Operation, OperationHandler> operationStrategyMap = new HashMap<>();
+        operationStrategyMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandlerImpl());
+        operationStrategyMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandlerImpl());
+        operationStrategyMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandlerImpl());
+        operationStrategyMap.put(FruitTransaction.Operation.RETURN, new ReturnHandlerImpl());
 
         FileReadService readService = new FileReadServiceImpl();
-        List<String> dataFromReport = readService.getDataFromReport(REPORT_FILE);
+        List<String> dataFromReport = readService.readDataFromReport(INPUT_FILE);
 
         TransactionParser transactionParser = new TransactionParserImpl();
         List<FruitTransaction> fruitTransaction =
                 transactionParser.getFruitTransaction(dataFromReport);
 
-        TransactionProcessor resultFromReport =
+        TransactionProcessor transactionProcessor =
                 new TransactionProcessorImpl(new OperationStrategyImpl(operationStrategyMap));
-        resultFromReport.process(fruitTransaction);
+        transactionProcessor.process(fruitTransaction);
 
-        ReportCreator createReport = new ReportCreatorImpl();
-        String dataForReport = createReport.getDataForReport(Storage.getFruitTypesAndQuantity());
+        ReportCreator reportCreator = new ReportCreatorImpl();
+        String report = reportCreator.createReport(Storage.getFruitTypesAndQuantity());
 
         WriteDataToFile writeDataToFile = new WriteDataToFileImpl();
-        writeDataToFile.writeDataToFile(dataForReport);
+        writeDataToFile.writeDataToFile(report, REPORT_FILE);
     }
 }

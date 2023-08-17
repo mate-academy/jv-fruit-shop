@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface ReportCreator {
     String FIRST_LINE = "fruit,quantity";
-    String getDataForReport(Map<String, Integer> fruitTypesAndQuantity);
+    String createReport(Map<String, Integer> fruitTypesAndQuantity);
 }
