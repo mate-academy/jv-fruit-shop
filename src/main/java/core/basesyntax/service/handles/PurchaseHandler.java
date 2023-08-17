@@ -2,9 +2,9 @@ package core.basesyntax.service.handles;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationHandle;
+import core.basesyntax.service.OperationHandler;
 
-public class PurchaseHandle implements OperationHandle {
+public class PurchaseHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
         Integer quantity = Storage.storage.get(transaction.getFruit());

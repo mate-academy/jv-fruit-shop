@@ -3,14 +3,8 @@ package core.basesyntax.files;
 import java.io.FileWriter;
 
 public class FilesWriterImpl implements FilesWriter {
-    private final String filePath;
-
-    public FilesWriterImpl(String filePath) {
-        this.filePath = filePath;
-    }
-
     @Override
-        public void writing(String report) {
+        public void writeToFile(String filePath,String report) {
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.write(report);
         } catch (Exception e) {

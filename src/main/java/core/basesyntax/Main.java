@@ -7,13 +7,13 @@ import core.basesyntax.files.FilesReaderImpl;
 import core.basesyntax.files.FilesWriter;
 import core.basesyntax.files.FilesWriterImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationHandle;
+import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.TransactionProcessor;
-import core.basesyntax.service.handles.BallanceHandle;
-import core.basesyntax.service.handles.PurchaseHandle;
-import core.basesyntax.service.handles.ReturnHandle;
-import core.basesyntax.service.handles.SupplyHandle;
+import core.basesyntax.service.handles.BallanceHandler;
+import core.basesyntax.service.handles.PurchaseHandler;
+import core.basesyntax.service.handles.ReturnHandler;
+import core.basesyntax.service.handles.SupplyHandler;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.strategy.OperationStrategy;
@@ -33,11 +33,11 @@ public class Main {
 
         TransactionParser parser = new TransactionParserImpl();
 
-        Map<FruitTransaction.Operation, OperationHandle> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BallanceHandle());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandle());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandle());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandle());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BallanceHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
 
         List<FruitTransaction> transactions = parser.parseTransactions(lines);
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
@@ -48,7 +48,7 @@ public class Main {
         ReportCreator creator = new ReportCreatorImpl();
         String report = creator.create();
 
-        FilesWriter writing = new FilesWriterImpl(FILE_PATH + FILE_NAME_TO);
-        writing.writing(report);
+        FilesWriter writing = new FilesWriterImpl();
+        writing.writeToFile(FILE_PATH + FILE_NAME_TO,report);
     }
 }
