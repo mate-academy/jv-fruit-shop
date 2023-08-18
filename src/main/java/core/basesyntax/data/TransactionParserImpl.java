@@ -14,7 +14,7 @@ public class TransactionParserImpl implements TransactionParser {
     @Override
     public List<FruitTransaction> parseTransactions(List<String> lines) {
         DataValidator validator = new DataValidatorImpl();
-        List<FruitTransaction> fruitInfo = new ArrayList<>();
+        List<FruitTransaction> transactions = new ArrayList<>();
         for (String line : lines) {
             String[] dataParts = line.split(",");
             validator.validate(dataParts);
@@ -22,10 +22,10 @@ public class TransactionParserImpl implements TransactionParser {
             String operationCode = dataParts[OPERATION_INDEX].trim();
             FruitTransaction.Operation operation = FruitTransaction
                     .Operation.findOperation(operationCode);
-            fruitInfo.add(new FruitTransaction(
+            transactions.add(new FruitTransaction(
                     operation, dataParts[FRUIT_INDEX],
                     Integer.parseInt(dataParts[AMOUNT_INDEX].trim())));
         }
-        return fruitInfo;
+        return transactions;
     }
 }

@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.DataValidator;
 
 public class DataValidatorImpl implements DataValidator {
-
     public static final int OPERATION_INDEX = 0;
     public static final int FRUIT_INDEX = 1;
     public static final int AMOUNT_INDEX = 2;

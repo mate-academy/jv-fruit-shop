@@ -6,7 +6,7 @@ import core.basesyntax.service.OperationHandler;
 
 public class BallanceHandler implements OperationHandler {
     @Override
-    public void handle(FruitTransaction transaction) {
+    public void handler(FruitTransaction transaction) {
         Storage.storage.put(transaction.getFruit(),transaction.getQuantity());
     }
 }

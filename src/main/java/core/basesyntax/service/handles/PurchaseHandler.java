@@ -6,7 +6,7 @@ import core.basesyntax.service.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
     @Override
-    public void handle(FruitTransaction transaction) {
+    public void handler(FruitTransaction transaction) {
         Integer quantity = Storage.storage.get(transaction.getFruit());
 
         if (quantity - transaction.getQuantity() < 0) {

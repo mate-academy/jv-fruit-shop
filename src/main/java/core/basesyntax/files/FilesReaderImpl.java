@@ -22,10 +22,6 @@ public class FilesReaderImpl implements FilesReader {
             throw new RuntimeException("Can't read from file " + filePath, e);
         }
 
-        if (!lines.isEmpty()) {
-            lines.remove(USELESS_LINE);
-        }
-
         return lines;
     }
 }
