@@ -14,10 +14,13 @@ public class ParseServiceImpl implements ParseService {
 
     @Override
     public List<FruitTransaction> parseTransactions(List<String> data) {
-        data.remove(HEADER_INDEX);
-        return data.stream()
-                .map(this::getFromCsvRow)
-                .collect(Collectors.toList());
+        if (data != null && !data.isEmpty()) {
+            data.remove(HEADER_INDEX);
+            return data.stream()
+                    .map(this::getFromCsvRow)
+                    .collect(Collectors.toList());
+        }
+        throw new NullPointerException("Data can't be null.");
     }
 
     private FruitTransaction getFromCsvRow(String line) {

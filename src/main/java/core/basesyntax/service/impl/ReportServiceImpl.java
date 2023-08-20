@@ -1,16 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitDao;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportService;
 import java.math.BigDecimal;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
-    private FruitDao fruitDao;
 
-    public ReportServiceImpl(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
+    public ReportServiceImpl() {
     }
 
     @Override
@@ -22,6 +19,6 @@ public class ReportServiceImpl implements ReportService {
                     .append(fruit.getValue())
                     .append(System.lineSeparator());
         }
-        return report.toString();
+        return report.toString().trim();
     }
 }

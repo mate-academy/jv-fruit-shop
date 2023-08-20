@@ -7,7 +7,7 @@ import java.nio.file.Files;
 
 public class WriteServiceImpl implements WriteService {
     @Override
-    public void writeDataToFile(String fileName, String data) {
+    public void writeToFile(String fileName, String data) {
         try {
             Files.write(new File(fileName).toPath(), data.getBytes());
         } catch (IOException e) {

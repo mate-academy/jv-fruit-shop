@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class FruitTransaction {
     private Operation operation;
@@ -47,6 +48,25 @@ public class FruitTransaction {
                 + ", fruitName='" + fruitName + '\''
                 + ", quantity=" + quantity
                 + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        FruitTransaction that = (FruitTransaction) o;
+        return operation == that.operation
+               && Objects.equals(fruitName, that.fruitName)
+               && Objects.equals(quantity, that.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operation, fruitName, quantity);
     }
 
     public enum Operation {
