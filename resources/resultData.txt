@@ -1,0 +1,3 @@
+fruit,quantity
+banana,140
+apple,50
