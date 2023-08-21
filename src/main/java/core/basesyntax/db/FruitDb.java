@@ -1,15 +1,16 @@
 package core.basesyntax.db;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class FruitDb {
-    private Map<String, Integer> balanceMap;
+    private static Map<String, Integer> balanceMap = new HashMap<>();
 
-    public Map<String, Integer> getBalanceMap() {
+    public static Map<String, Integer> getBalanceMap() {
         return balanceMap;
     }
 
-    public void setBalanceMap(Map<String, Integer> balanceMap) {
-        this.balanceMap = balanceMap;
+    public static void setBalanceMap(Map<String, Integer> balanceMap) {
+        FruitDb.balanceMap = balanceMap;
     }
 }

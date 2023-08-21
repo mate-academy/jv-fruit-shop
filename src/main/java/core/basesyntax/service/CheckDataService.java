@@ -6,5 +6,5 @@ import java.util.Map;
 public interface CheckDataService {
     void checkData(List<String> dataFromFileList);
 
-    void checkingDataMapBeforeSavingToDb(Map<String, Integer> balanceMap);
+    void checkReport(Map<String, Integer> balanceMap);
 }

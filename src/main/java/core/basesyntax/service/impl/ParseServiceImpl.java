@@ -1,32 +1,26 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.Main;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.ConverterDataToFruitTransactionService;
+import core.basesyntax.service.ParseService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class ConverterDataToFruitTransactionServiceImpl
-        implements ConverterDataToFruitTransactionService {
-
+public class ParseServiceImpl
+        implements ParseService {
     public static final String COMA_DELIMITER = ",";
     public static final int OPERATION_CODE_INDEX = 0;
     public static final int QUANTITY_INDEX = 2;
     public static final int FRUIT_NAME_INDEX = 1;
 
     @Override
-    public List<FruitTransaction> convertToFruitTransaction(List<String> dataStringList) {
+    public List<FruitTransaction> parseTransaction(List<String> dataStringList) {
         List<FruitTransaction> transactionList = new ArrayList<>();
 
-        for (String stringTransaction : dataStringList) {
-            if (stringTransaction.equals(Main.DATA_FILE_TITLE)) {
-                continue;
-            }
-
-            String[] transactionArray = stringTransaction.split(COMA_DELIMITER);
+        for (int i = 1; i < dataStringList.size(); i++) {
+            String[] transactionArray = dataStringList.get(i).split(COMA_DELIMITER);
             Operation operation = getOperation(transactionArray[OPERATION_CODE_INDEX]);
 
             int quantity = Integer.parseInt(transactionArray[QUANTITY_INDEX]);

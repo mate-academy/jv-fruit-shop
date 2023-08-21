@@ -1,29 +1,22 @@
-package core.basesyntax.dao;
+package core.basesyntax.dao.impl;
 
+import core.basesyntax.dao.FileDao;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class ReadFromAndWriteToFileDaoImpl implements ReadFromFileDao, WriteToFileDao {
+public class FileDaoImpl implements FileDao {
     @Override
     public List<String> readFromFile(String fileName) {
         File file = new File(fileName);
 
-        if (!file.exists()) {
-            throw new RuntimeException("File is not exists by path " + fileName);
-        }
-
-        List<String> dataFromFileList;
-
         try {
-            dataFromFileList = Files.readAllLines(file.toPath());
+            return Files.readAllLines(file.toPath());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file ", e);
+            throw new RuntimeException("Can't read data from file " + fileName, e);
         }
-
-        return dataFromFileList;
     }
 
     @Override
@@ -31,7 +24,7 @@ public class ReadFromAndWriteToFileDaoImpl implements ReadFromFileDao, WriteToFi
         try {
             Files.write(Paths.get(fileName), reportString.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file ", e);
+            throw new RuntimeException("Can't write data to file " + fileName, e);
         }
     }
 }

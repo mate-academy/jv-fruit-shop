@@ -1,16 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.Main;
 import core.basesyntax.service.CheckDataService;
 import java.util.List;
 import java.util.Map;
 
 public class CheckDataServiceImpl implements CheckDataService {
-
     public static final int ZERO_NUMBER = 0;
     public static final int DATA_FILE_TITLE_INDEX = 0;
     public static final String COME_DELIMITER = ",";
     public static final int QUANTITY_INDEX = 2;
+    public static final String DATA_FILE_TITLE = "type,fruit,quantity";
 
     @Override
     public void checkData(List<String> dataFromFileList) {
@@ -18,7 +17,7 @@ public class CheckDataServiceImpl implements CheckDataService {
             throw new RuntimeException("File contains no data");
         }
 
-        if (!dataFromFileList.get(DATA_FILE_TITLE_INDEX).equals(Main.DATA_FILE_TITLE)) {
+        if (!dataFromFileList.get(DATA_FILE_TITLE_INDEX).equals(DATA_FILE_TITLE)) {
             throw new RuntimeException(
                     "The format of the data in the file "
                             + "needs to be checked - the "
@@ -28,7 +27,7 @@ public class CheckDataServiceImpl implements CheckDataService {
 
         for (String dataString : dataFromFileList) {
             String[] dataArray = dataString.split(COME_DELIMITER);
-            if (!dataString.equals(Main.DATA_FILE_TITLE)
+            if (!dataString.equals(DATA_FILE_TITLE)
                     && Integer.parseInt(dataArray[QUANTITY_INDEX]) < ZERO_NUMBER) {
                 throw new RuntimeException("The file contains a negative quantity : " + dataString);
             }
@@ -36,7 +35,7 @@ public class CheckDataServiceImpl implements CheckDataService {
     }
 
     @Override
-    public void checkingDataMapBeforeSavingToDb(Map<String, Integer> balanceMap) {
+    public void checkReport(Map<String, Integer> balanceMap) {
         for (Map.Entry<String, Integer> stringIntegerEntry : balanceMap.entrySet()) {
             if (stringIntegerEntry.getValue() < ZERO_NUMBER) {
                 throw new RuntimeException("The balance contains a negative value: "
