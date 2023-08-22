@@ -2,6 +2,6 @@ package core.basesyntax.service.report;
 
 import java.util.Map;
 
-public interface GenerateReport {
+public interface ReportGenerate {
     String generateReport(Map<String, Integer> storageFruit);
 }

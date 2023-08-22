@@ -2,7 +2,7 @@ package core.basesyntax.service.report;
 
 import java.util.Map;
 
-public class GenerateReportImpl implements GenerateReport {
+public class ReportGenerateImpl implements ReportGenerate {
     private static final String SEPARATOR = ",";
     private static final String HEAD_LINE = "fruit,quantity";
 
