@@ -74,9 +74,9 @@ public class FruitTransaction {
 
         public static Operation getByCode(String code) {
             return Arrays.stream(Operation.values())
-                    .filter(o -> o.getCode().equals(code))
-                    .findFirst()
-                    .orElseThrow(() -> new RuntimeException("Invalide operation name"));
+                .filter(o -> o.getCode().equals(code))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Invalide operation name: code" + code));
         }
     }
 }

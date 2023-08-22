@@ -4,14 +4,8 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    private final FruitDao fruitDao;
-
-    public PurchaseOperationHandler(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
-    }
-
     @Override
-    public void operate(Fruit fruit) {
+    public void operate(Fruit fruit, FruitDao fruitDao) {
         int currentQuantity = fruitDao.get(fruit.getName()).getQuantity();
         if (currentQuantity < fruit.getQuantity()) {
             throw new RuntimeException(String.format("%d %s is not enough to sell %d %s.",

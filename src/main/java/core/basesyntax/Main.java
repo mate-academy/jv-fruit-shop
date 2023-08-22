@@ -2,13 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
@@ -31,13 +32,13 @@ public class Main {
         FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler(fruitDao));
+                new BalanceOperationHandler());
         operationStrategyMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler(fruitDao));
+                new PurchaseOperationHandler());
         operationStrategyMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler(fruitDao));
+                new ReturnOperationHandler());
         operationStrategyMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler(fruitDao));
+                new SupplyOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationStrategyMap);
 
         ReaderService readFromCsvFile = new ReaderServiceImpl();
@@ -45,13 +46,9 @@ public class Main {
         ParserService parserService = new ParserServiceImpl();
         List<FruitTransaction> fruitTransactions = parserService.parse(dataFromFile);
 
-        for (FruitTransaction fruitTransaction : fruitTransactions) {
-            OperationHandler operationHandler =
-                    operationStrategy.get(fruitTransaction.getOperation());
-            Fruit fruit = new Fruit(fruitTransaction.getName(),
-                    fruitTransaction.getQuantity());
-            operationHandler.operate(fruit);
-        }
+        FruitTransactionService fruitTransactionService
+                = new FruitTransactionServiceImpl(fruitDao, operationStrategy);
+        fruitTransactionService.executeTransaction(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl(fruitDao);
         String report = reportService.createReport();

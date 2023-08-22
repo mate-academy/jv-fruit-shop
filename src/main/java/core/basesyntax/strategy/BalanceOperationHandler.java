@@ -4,14 +4,8 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 
 public class BalanceOperationHandler implements OperationHandler {
-    private final FruitDao fruitDao;
-
-    public BalanceOperationHandler(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
-    }
-
     @Override
-    public void operate(Fruit fruit) {
+    public void operate(Fruit fruit, FruitDao fruitDao) {
         fruitDao.add(fruit);
     }
 }

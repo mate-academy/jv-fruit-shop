@@ -17,7 +17,13 @@ public class ParserServiceImpl implements ParserService {
         if (lines.isEmpty()) {
             throw new RuntimeException("Data is empty.");
         }
+        boolean isFirstLine = true;
         for (String line: lines) {
+            if (isFirstLine) {
+                isFirstLine = false;
+                continue;
+            }
+
             String[] parsedLine = line.split(SEPARATOR);
             FruitTransaction.Operation operation
                     = FruitTransaction.Operation.getByCode(parsedLine[OPERATION_POSITION]);
