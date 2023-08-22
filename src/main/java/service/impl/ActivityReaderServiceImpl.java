@@ -15,8 +15,7 @@ public class ActivityReaderServiceImpl implements ActivityReaderService {
     public List<Activity> readFromFile(String fileName) {
         List<Activity> activityList = new ArrayList<>();
         File file = new File(fileName);
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             String[] data;
             reader.readLine();
@@ -28,7 +27,6 @@ public class ActivityReaderServiceImpl implements ActivityReaderService {
                         Integer.parseInt(data[2]))
                 );
             }
-            reader.close();
         } catch (IOException e) {
             throw new RuntimeException("Can't find or read file", e);
         }
