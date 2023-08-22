@@ -20,8 +20,4 @@ public enum ActivityType {
         }
         throw new IllegalArgumentException("No ActivityType found with code: " + code);
     }
-
-    public String getCode() {
-        return code;
-    }
 }

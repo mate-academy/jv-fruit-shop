@@ -1,9 +1,9 @@
 package model;
 
 public class Activity {
-    private ActivityType type;
-    private String fruit;
-    private int quantity;
+    private final ActivityType type;
+    private final String fruit;
+    private final int quantity;
 
     public Activity(ActivityType type, String fruit, int quantity) {
         this.type = type;

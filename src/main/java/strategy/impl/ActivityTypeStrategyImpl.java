@@ -6,7 +6,7 @@ import strategy.ActivityTypeHandler;
 import strategy.ActivityTypeStrategy;
 
 public class ActivityTypeStrategyImpl implements ActivityTypeStrategy {
-    private Map<ActivityType, ActivityTypeHandler> activityTypeHandlerMap;
+    private final Map<ActivityType, ActivityTypeHandler> activityTypeHandlerMap;
 
     public ActivityTypeStrategyImpl(Map<ActivityType, ActivityTypeHandler> activityTypeHandlerMap) {
         this.activityTypeHandlerMap = activityTypeHandlerMap;

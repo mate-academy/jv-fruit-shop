@@ -3,7 +3,7 @@ package db;
 import java.util.Map;
 
 public class Storage {
-    private Map<String, Integer> fruitBox;
+    private final Map<String, Integer> fruitBox;
 
     public Storage(Map<String, Integer> fruitBox) {
         this.fruitBox = fruitBox;
