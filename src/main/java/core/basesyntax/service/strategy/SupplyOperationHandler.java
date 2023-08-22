@@ -1,18 +1,13 @@
 package core.basesyntax.service.strategy;
 
-import java.util.Map;
+import core.basesyntax.db.FruitDb;
+import core.basesyntax.model.FruitTransaction;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
-    public Integer getQuantity(int transactionQuantity,
-                               String fruitName,
-                               Map<String, Integer> dayReport) {
-        Integer currentQuantity = dayReport.get(fruitName);
-
-        if (currentQuantity == null) {
-            return transactionQuantity;
-        }
-
-        return currentQuantity + transactionQuantity;
+    public void handleTransaction(FruitTransaction transaction) {
+        Integer currentQuantity = FruitDb.getBalanceMap().get(transaction.getFruitName());
+        FruitDb.getBalanceMap().put(transaction.getFruitName(),
+                (currentQuantity == null ? 0 : currentQuantity) + transaction.getQuantity());
     }
 }

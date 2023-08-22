@@ -1,14 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileDao;
-import core.basesyntax.dao.impl.FileDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.CheckDataService;
+import core.basesyntax.service.FileService;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.CheckDataServiceImpl;
+import core.basesyntax.service.impl.FileServiceImpl;
 import core.basesyntax.service.impl.FruitShopServiceImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ParseServiceImpl;
@@ -37,11 +37,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        FileDao fileDao = new FileDaoImpl();
+        FileService fileDao = new FileServiceImpl();
         CheckDataService checkDataService = new CheckDataServiceImpl();
         ParseService parseService = new ParseServiceImpl();
         FruitShopService fruitShopService = new FruitShopServiceImpl(
-                new OperationStrategyImpl(operationHandlerMap), checkDataService);
+                new OperationStrategyImpl(operationHandlerMap));
         ReportService reportService = new ReportServiceImpl();
 
         List<String> dataFromFile = fileDao.readFromFile(DAY_ACTIVITY_CSV);

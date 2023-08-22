@@ -4,9 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParseService;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class ParseServiceImpl
         implements ParseService {
@@ -21,7 +19,8 @@ public class ParseServiceImpl
 
         for (int i = 1; i < dataStringList.size(); i++) {
             String[] transactionArray = dataStringList.get(i).split(COMA_DELIMITER);
-            Operation operation = getOperation(transactionArray[OPERATION_CODE_INDEX]);
+
+            Operation operation = Operation.getByCode(transactionArray[OPERATION_CODE_INDEX]);
 
             int quantity = Integer.parseInt(transactionArray[QUANTITY_INDEX]);
 
@@ -34,13 +33,5 @@ public class ParseServiceImpl
         }
 
         return transactionList;
-    }
-
-    private Operation getOperation(String code) {
-        Optional<Operation> operation = Arrays.stream(Operation.values())
-                .filter(o -> o.getCode().equals(code))
-                .findFirst();
-
-        return operation.orElseThrow(() -> new RuntimeException("Wrong operation code - " + code));
     }
 }

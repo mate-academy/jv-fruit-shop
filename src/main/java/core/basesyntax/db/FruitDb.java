@@ -9,8 +9,4 @@ public class FruitDb {
     public static Map<String, Integer> getBalanceMap() {
         return balanceMap;
     }
-
-    public static void setBalanceMap(Map<String, Integer> balanceMap) {
-        FruitDb.balanceMap = balanceMap;
-    }
 }
