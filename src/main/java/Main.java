@@ -1,9 +1,9 @@
 import db.Storage;
+import db.StorageFiller;
+import db.StorageFillerImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import db.StorageFiller;
-import db.StorageFillerImpl;
 import model.Activity;
 import model.ActivityType;
 import service.ActivityParserService;
@@ -34,7 +34,7 @@ public class Main {
                 );
 
         Map<String, Integer> fruitBox = new HashMap<>();
-        Storage storage = new Storage(fruitBox);
+        final Storage storage = new Storage(fruitBox);
 
         Map<ActivityType, ActivityTypeHandler> activityTypeHandlerMap = new HashMap<>();
         activityTypeHandlerMap.put(ActivityType.BALANCE, new BalanceTypeHandler());

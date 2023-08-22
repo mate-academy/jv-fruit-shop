@@ -5,5 +5,7 @@ import model.Activity;
 import strategy.ActivityTypeStrategy;
 
 public interface StorageFiller {
-    void fullfillStorage(Storage storage, List<Activity> activityList, ActivityTypeStrategy activityTypeStrategy);
+    void fullfillStorage(Storage storage,
+                         List<Activity> activityList,
+                         ActivityTypeStrategy activityTypeStrategy);
 }
