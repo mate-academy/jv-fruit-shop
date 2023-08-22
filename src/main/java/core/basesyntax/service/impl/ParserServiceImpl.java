@@ -17,8 +17,8 @@ public class ParserServiceImpl implements ParserService {
         if (lines.isEmpty()) {
             throw new RuntimeException("Data is empty.");
         }
-        for (int i = 1; i < lines.size(); i++) {
-            String[] parsedLine = lines.get(i).split(SEPARATOR);
+        for (String line: lines) {
+            String[] parsedLine = line.split(SEPARATOR);
             FruitTransaction.Operation operation
                     = FruitTransaction.Operation.getByCode(parsedLine[OPERATION_POSITION]);
             String name = parsedLine[NAME_POSITION];
