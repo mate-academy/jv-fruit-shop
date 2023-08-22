@@ -17,7 +17,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public String create() {
+    public String createReport() {
         String result = fruitDao.getAll().stream()
                 .map(fruit -> fruit.getName() + SEPARATOR
                         + fruit.getQuantity() + System.lineSeparator())

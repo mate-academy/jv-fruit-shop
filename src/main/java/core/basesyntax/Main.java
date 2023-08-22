@@ -54,7 +54,7 @@ public class Main {
         }
 
         ReportService reportService = new ReportServiceImpl(fruitDao);
-        String report = reportService.create();
+        String report = reportService.createReport();
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(report, REPORT_FILE_NAME);
     }
