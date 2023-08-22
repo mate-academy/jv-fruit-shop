@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportGenerateService;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportGenerateServiceImpl implements ReportGenerateService {
@@ -15,12 +14,9 @@ public class ReportGenerateServiceImpl implements ReportGenerateService {
 
     @Override
     public String generateReport() {
-        Map<String, Integer> mapFruits = fruitStorage.getMap();
-        String result;
-        result = HEADER_REPORT + System.lineSeparator()
-                + mapFruits.entrySet()
+        return HEADER_REPORT + System.lineSeparator()
+                + fruitStorage.getData()
                 .stream().map(entry -> entry.getKey() + "," + entry.getValue())
                 .collect(Collectors.joining(System.lineSeparator()));
-        return result;
     }
 }

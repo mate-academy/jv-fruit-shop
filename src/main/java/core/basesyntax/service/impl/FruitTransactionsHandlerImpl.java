@@ -3,13 +3,21 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionHandler;
-import core.basesyntax.strategy.FruitAmountCalculateStrategy;
-import core.basesyntax.strategy.OperationStrategyHolder;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.BalanceHandler;
+import core.basesyntax.strategy.impl.PurchaseHandler;
+import core.basesyntax.strategy.impl.ReturnHandler;
+import core.basesyntax.strategy.impl.SupplyHandler;
 import java.util.List;
 
 public class FruitTransactionsHandlerImpl implements FruitTransactionHandler {
     private final FruitStorage fruitStorage;
-    private OperationStrategyHolder operationStrategyHolder = new OperationStrategyHolder();
+    private OperationStrategy operationStrategy = new OperationStrategy(
+            new BalanceHandler(),
+            new PurchaseHandler(),
+            new ReturnHandler(),
+            new SupplyHandler());
 
     public FruitTransactionsHandlerImpl(FruitStorage fruitStorage) {
         this.fruitStorage = fruitStorage;
@@ -17,12 +25,11 @@ public class FruitTransactionsHandlerImpl implements FruitTransactionHandler {
 
     @Override
     public void processTransactionsList(List<FruitTransaction> fruitTransactionList) {
-        for (int i = 0; i < fruitTransactionList.size(); i++) {
-            FruitTransaction fruitTransaction = fruitTransactionList.get(i);
-            FruitAmountCalculateStrategy strategy = operationStrategyHolder
-                    .getStrategy(fruitTransaction.getOperation());
-            fruitStorage.updateFruitQuantity(fruitTransaction.getFruit(),
-                    strategy.getFruitAmount(fruitTransaction.getQuantity()));
-        }
+        fruitTransactionList.forEach(transaction -> {
+            OperationHandler strategy = operationStrategy
+                    .getStrategy(transaction.getOperation());
+            fruitStorage.updateFruitQuantity(transaction.getFruit(),
+                    strategy.getFruitAmount(transaction.getQuantity()));
+        });
     }
 }

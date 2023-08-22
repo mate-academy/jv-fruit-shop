@@ -25,12 +25,13 @@ public class Main {
         TransactionParser transactionParser = new FruitTransactionParserImpl();
 
         // Processing
-        List<String> transactionsStr = fileReader.readDataFromFile("data from File");
-        List<FruitTransaction> transactionsFruitList = transactionParser
-                .parseTransactions(transactionsStr);
+        List<String> transactions = fileReader
+                .readDataFromFile("src\\main\\resources\\dataFruit.csv");
+        List<FruitTransaction> fruitTransactions = transactionParser
+                .parseTransactions(transactions);
         FruitTransactionHandler fruitTransactionsHandler =
                 new FruitTransactionsHandlerImpl(storage);
-        fruitTransactionsHandler.processTransactionsList(transactionsFruitList);
+        fruitTransactionsHandler.processTransactionsList(fruitTransactions);
 
         //Generate report
 
@@ -40,7 +41,7 @@ public class Main {
         //Writing report
 
         FileWriter writeReportToFile = new FileWriterImpl();
-        writeReportToFile.writeReportToFile(generateReport, "data to file");
+        writeReportToFile.writeReportToFile(generateReport, "src\\main\\resources\\report.csv");
 
     }
 }

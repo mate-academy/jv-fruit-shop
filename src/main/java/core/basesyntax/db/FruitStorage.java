@@ -2,6 +2,7 @@ package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class FruitStorage {
     private final Map<String, Integer> fruitDb = new HashMap<>();
@@ -11,7 +12,7 @@ public class FruitStorage {
         fruitDb.put(fruit, currentQuantity + quantityChange);
     }
 
-    public Map<String, Integer> getMap() {
-        return fruitDb;
+    public Set<Map.Entry<String, Integer>> getData() {
+        return fruitDb.entrySet();
     }
 }
