@@ -40,11 +40,6 @@ public class FruitTransaction {
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
-        public static final String BALANCE_OPERATION = "b";
-        public static final String SUPPLY_OPERATION = "s";
-        public static final String PURCHASE_OPERATION = "p";
-        public static final String RETURN_OPERATION = "r";
-
         private String code;
 
         Operation(String code) {
@@ -56,17 +51,10 @@ public class FruitTransaction {
         }
 
         public static Operation returnOperation(String codeOperation) {
-            if (codeOperation.equals(BALANCE_OPERATION)) {
-                return BALANCE;
-            }
-            if (codeOperation.equals(SUPPLY_OPERATION)) {
-                return SUPPLY;
-            }
-            if (codeOperation.equals(PURCHASE_OPERATION)) {
-                return PURCHASE;
-            }
-            if (codeOperation.equals(RETURN_OPERATION)) {
-                return RETURN;
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(codeOperation)) {
+                    return operation;
+                }
             }
             throw new IllegalArgumentException("Unknown operation code: " + codeOperation);
         }

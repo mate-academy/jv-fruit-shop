@@ -7,14 +7,14 @@ import java.util.Map;
 public class OperationStrategy {
     private final Map<FruitTransaction.Operation, OperationHandler> map;
 
-    public OperationStrategy(OperationHandler... strategies) {
+    public OperationStrategy(OperationHandler... handlers) {
         this.map = new HashMap<>();
-        for (OperationHandler strategy : strategies) {
-            map.put(strategy.getType(), strategy);
+        for (OperationHandler handler : handlers) {
+            map.put(handler.getType(), handler);
         }
     }
 
-    public OperationHandler getStrategy(FruitTransaction.Operation operation) {
+    public OperationHandler getHandler(FruitTransaction.Operation operation) {
         return map.get(operation);
     }
 }

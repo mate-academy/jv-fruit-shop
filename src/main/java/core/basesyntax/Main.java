@@ -12,6 +12,11 @@ import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.FruitTransactionsHandlerImpl;
 import core.basesyntax.service.impl.ReportGenerateServiceImpl;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.BalanceHandler;
+import core.basesyntax.strategy.impl.PurchaseHandler;
+import core.basesyntax.strategy.impl.ReturnHandler;
+import core.basesyntax.strategy.impl.SupplyHandler;
 import java.util.List;
 
 /**
@@ -23,14 +28,21 @@ public class Main {
         FruitStorage storage = new FruitStorage();
         FileReader fileReader = new FileReaderImpl();
         TransactionParser transactionParser = new FruitTransactionParserImpl();
+        OperationStrategy operationStrategy = new OperationStrategy(
+                         new BalanceHandler(),
+                         new PurchaseHandler(),
+                         new ReturnHandler(),
+                         new SupplyHandler());
 
         // Processing
         List<String> transactions = fileReader
                 .readDataFromFile("src\\main\\resources\\dataFruit.csv");
         List<FruitTransaction> fruitTransactions = transactionParser
                 .parseTransactions(transactions);
+
         FruitTransactionHandler fruitTransactionsHandler =
-                new FruitTransactionsHandlerImpl(storage);
+                new FruitTransactionsHandlerImpl(storage,operationStrategy);
+
         fruitTransactionsHandler.processTransactionsList(fruitTransactions);
 
         //Generate report
