@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
 Don't forget that your code will need to be tested, so try to anticipate all invalid input data and handle it in advance.
 For example:
 1. Incorrect file path
-2. Incorrect data in the input file, for example, quantity less than zero or incorrect strategy
+2. Incorrect data in the input file, for example, quantity less than zero or incorrect operations
 3. Null parameters
 4. Providing the right names for your classes, methods, and variables is important. You can find examples here: [Link](https://mate-academy.github.io/style-guides/java/java.html#s5-naming)
 
