@@ -20,7 +20,7 @@ public class FruitTransaction {
     }
 
     public FruitTransaction(String code, String fruitName, int quantity) {
-        this.type = Operation.codeOf(code);
+        this.type = Operation.getByCode(code);
         this.fruitName = fruitName;
         this.quantity = quantity;
     }

@@ -16,12 +16,12 @@ public enum Operation {
         return code;
     }
 
-    public static Operation codeOf(String code) {
+    public static Operation getByCode(String code) {
         for (Operation o: Operation.values()) {
             if (o.code.equals(code)) {
                 return o;
             }
         }
-        return null;
+        throw new RuntimeException("Operation d'n contain code of " + code);
     }
 }

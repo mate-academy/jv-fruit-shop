@@ -7,14 +7,14 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitItemService;
 import core.basesyntax.service.FruitItemServiceImpl;
-import core.basesyntax.service.FruitReportCreatorService;
-import core.basesyntax.service.FruitReportCreatorServiceImpl;
 import core.basesyntax.service.FruitReportFileWriter;
 import core.basesyntax.service.FruitReportFileWriterCsvImpl;
-import core.basesyntax.service.FruitServiceForHandleTransactions;
-import core.basesyntax.service.FruitServiceForHandleTransactionsImpl;
+import core.basesyntax.service.FruitTransactionsHandler;
+import core.basesyntax.service.FruitTransactionsHandlerImpl;
 import core.basesyntax.service.InputTransactionsFileReader;
 import core.basesyntax.service.InputTransactionsFileReaderCsvImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.strategy.FruitTransactionHandler;
 import core.basesyntax.service.strategy.FruitTransactionHandlerBalance;
 import core.basesyntax.service.strategy.FruitTransactionHandlerPurchase;
@@ -27,8 +27,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_NAME = "src\\main\\resources\\input.csv";
-    private static final String OUTPUT_FILE_NAME = "src\\main\\resources\\output.csv";
+    private static final String FOLDER_SEPARATOR = System.getProperty("file.separator");
+    private static final String INPUT_FILE_NAME = "src" + FOLDER_SEPARATOR + "main"
+            + FOLDER_SEPARATOR + "resources" + FOLDER_SEPARATOR + "input.csv";
+    private static final String OUTPUT_FILE_NAME = "src" + FOLDER_SEPARATOR + "main"
+            + FOLDER_SEPARATOR + "resources" + FOLDER_SEPARATOR + "output.csv";
 
     public static void main(String[] args) {
         final Map<Operation, FruitTransactionHandler> operationHandlersMap =
@@ -43,17 +46,16 @@ public class Main {
         FruitDao fruitDao = new FruitDaoImpl();
         FruitItemService fruitItemService = new FruitItemServiceImpl();
 
-        InputTransactionsFileReader transActionsReader = new InputTransactionsFileReaderCsvImpl();
-        List<FruitTransaction> fruitTransactions = transActionsReader.read(INPUT_FILE_NAME);
+        InputTransactionsFileReader transactionsReader = new InputTransactionsFileReaderCsvImpl();
+        List<FruitTransaction> fruitTransactions = transactionsReader.read(INPUT_FILE_NAME);
 
-        FruitServiceForHandleTransactions fruitServiceForHandleTransactions =
-                new FruitServiceForHandleTransactionsImpl(
-                        fruitDao, fruitItemService, fruitTransactionStrategy);
-        fruitServiceForHandleTransactions.handle(fruitTransactions);
+        FruitTransactionsHandler fruitTransactionsHandler =
+                new FruitTransactionsHandlerImpl(fruitTransactionStrategy);
+        fruitTransactionsHandler.handle(fruitTransactions);
 
-        FruitReportCreatorService fruitReportCreatorService =
-                new FruitReportCreatorServiceImpl(fruitDao);
-        List<FruitItem> fruitReport = fruitReportCreatorService.create();
+        ReportService reportService =
+                new ReportServiceImpl(fruitDao);
+        List<FruitItem> fruitReport = reportService.create();
 
         FruitReportFileWriter fruitReportFileWriter = new FruitReportFileWriterCsvImpl();
         fruitReportFileWriter.write(OUTPUT_FILE_NAME, fruitReport);

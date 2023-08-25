@@ -9,7 +9,7 @@ public class OperationConverterStringToEnum<T,I> extends AbstractBeanField<T,I> 
     @Override
     protected Object convert(String s) throws CsvDataTypeMismatchException,
             CsvConstraintViolationException {
-        return Operation.codeOf(s);
+        return Operation.getByCode(s);
     }
 }
 
