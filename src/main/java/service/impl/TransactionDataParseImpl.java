@@ -26,6 +26,6 @@ public class TransactionDataParseImpl implements TransactionDataParse {
         }
         FruitTransaction.Operation operation = FruitTransaction.Operation
                 .fromCode(operationCode);
-        return new FruitTransaction(operation, fruit, quantity);
+        return new FruitTransaction(fruit, quantity, operation);
     }
 }

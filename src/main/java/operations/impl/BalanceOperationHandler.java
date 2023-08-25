@@ -6,8 +6,7 @@ import operations.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override
-    public void execute(Storage storage, FruitTransaction fruitTransaction) {
-        String fruit = fruitTransaction.getFruitName();
-        int balance = storage.getFruitBalance(fruit);
+    public void execute(FruitTransaction fruitTransaction) {
+        int balance = Storage.getFruitBalance(fruitTransaction.getFruitName());
     }
 }

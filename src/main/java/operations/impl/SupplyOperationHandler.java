@@ -6,9 +6,7 @@ import operations.OperationHandler;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
-    public void execute(Storage storage, FruitTransaction fruitTransaction) {
-        String fruit = fruitTransaction.getFruitName();
-        int quantity = fruitTransaction.getQuantity();
-        storage.addFruits(fruit, quantity);
+    public void execute(FruitTransaction fruitTransaction) {
+        Storage.addFruits(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
     }
 }

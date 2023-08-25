@@ -1,6 +1,5 @@
 package operations;
 
-import db.Storage;
 import model.FruitTransaction;
 
 public interface OperationHandler {
@@ -10,5 +9,5 @@ public interface OperationHandler {
     p - purchase, means someone has bought some fruit
     r - return, means someone who have bought the fruits now returns them back
     */
-    void execute(Storage storage, FruitTransaction fruitTransaction);
+    void execute(FruitTransaction fruitTransaction);
 }

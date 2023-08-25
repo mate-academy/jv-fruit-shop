@@ -1,40 +1,31 @@
 package service.impl;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import model.FruitTransaction;
 import service.FileReaderService;
 
 public class FileReaderServiceImpl implements FileReaderService {
-    private String filePath;
 
-    public FileReaderServiceImpl(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public boolean filePathValidator(String filePath) {
-        File file = new File(filePath);
-        return file.exists() && file.isFile() && file.canRead();
+    public FileReaderServiceImpl() {
     }
 
     @Override
-    public List<String> readFromFile() throws IOException {
-        List<String> list = new ArrayList<>();
-        if (filePathValidator(filePath)) {
-            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    list.add(line);
-                }
-            } catch (IOException e) {
-                throw new IOException("Error reading the file: " + filePath, e);
+    public List<FruitTransaction> readFromFile(String filePath) throws RuntimeException {
+        try {
+            List<String> lines = Files.readAllLines(Path.of(filePath), StandardCharsets.UTF_8);
+            List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+            for (String line : lines) {
+                fruitTransactionList.add(new TransactionDataParseImpl().parseTransaction(line));
             }
-        } else {
-            throw new IllegalArgumentException("Invalid file path: " + filePath);
+            return fruitTransactionList;
+        } catch (IOException e) {
+            throw new UnsupportedOperationException(
+                "Can't read data from your file " + filePath + " !", e);
         }
-        return list;
     }
 }

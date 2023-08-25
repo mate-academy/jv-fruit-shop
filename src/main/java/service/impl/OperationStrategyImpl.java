@@ -6,7 +6,7 @@ import operations.OperationHandler;
 import service.OperationStrategy;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap;
 
     public OperationStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationOperationHandlerMap) {

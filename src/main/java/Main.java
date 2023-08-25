@@ -1,7 +1,6 @@
 import db.Storage;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import operations.OperationHandler;
@@ -17,16 +16,18 @@ import service.ReportWriterService;
 import service.impl.DataProcessorServiceImpl;
 import service.impl.FileReaderServiceImpl;
 import service.impl.OperationStrategyImpl;
+import service.impl.PathValidatorImpl;
 import service.impl.ReportGeneratorServiceImpl;
 import service.impl.ReportWriterServiceImpl;
 
 public class Main {
-    public static void main(String[] args) {
+    private static final String INPUT_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_PATH = "src/main/resources/output.csv";
 
-        // Ініціалізуємо storage для збереження даних про фрукти та
+    public static void main(String[] args) throws IOException {
         Storage storage = new Storage();
 
-        Map<FruitTransaction.Operation,OperationHandler> operationOperationHandlerMap =
+        Map<FruitTransaction.Operation, OperationHandler> operationOperationHandlerMap =
                 new HashMap<>();
 
         operationOperationHandlerMap.put(FruitTransaction.Operation.BALANCE,
@@ -37,31 +38,23 @@ public class Main {
                 new ReturnOperationHandler());
         operationOperationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandler());
-        // Ініціалізуємо об'єкт для читання даних з файлу
-        FileReaderService fileReaderService =
-                new FileReaderServiceImpl("src/main/resources/input.csv");
-        try {
-            // Отримаємо рядки даних з файлу
-            List<String> inputLines = fileReaderService.readFromFile();
-            // Ініціалізуємо стратегію обробки операцій
-            OperationStrategy operationStrategy =
-                    new OperationStrategyImpl(operationOperationHandlerMap);
-            // Ініціалізуємо об'єкт для обробки даних
-            DataProcessorService dataProcesorService =
-                    new DataProcessorServiceImpl(storage,operationStrategy);
-            // Обробляємо дані з файлу
-            dataProcesorService.process(inputLines);
-            // Ініціалізуємо об'єкт для генерації звіту
-            ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl(storage);
-            // Отримуємо звіт
-            String report = reportGeneratorService.generateReport();
-            // Ініціалізуємо об'єкт для запису звіту у файл
-            ReportWriterService reportWriterService =
-                    new ReportWriterServiceImpl("src/main/resources/output.csv");
-            // Записуємо звіт у файл
-            reportWriterService.writeReportToFile(report);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        OperationStrategy operationStrategy =
+                new OperationStrategyImpl(operationOperationHandlerMap);
+        DataProcessorService dataProcesorService = new DataProcessorServiceImpl(operationStrategy);
+        ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
+        ReportWriterService reportWriterService = new ReportWriterServiceImpl();
+
+        if (new PathValidatorImpl().filePathValidator(INPUT_PATH)) {
+            dataProcesorService.process(fileReaderService.readFromFile(INPUT_PATH));
+        } else {
+            throw new IllegalArgumentException("Invalid file path: " + INPUT_PATH);
         }
+
+        String report = reportGeneratorService.generateReport();
+
+        reportWriterService.writeReportToFile(report, OUTPUT_PATH);
+
     }
 }

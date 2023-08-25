@@ -5,23 +5,23 @@ import java.util.Map;
 import service.ReportGeneratorService;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
-    private final Storage storage;
+    private static final String SEPARATOR = ",";
+    private static final String HEADERS = "fruit,quantity\n";
 
-    public ReportGeneratorServiceImpl(Storage storage) {
-        this.storage = storage;
+    public ReportGeneratorServiceImpl() {
     }
 
     @Override
     public String generateReport() {
         StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity\n");
+        report.append(HEADERS);
 
-        Map<String, Integer> fruitBalance = storage.getAllFruitBalances();
+        Map<String, Integer> fruitBalance = Storage.getAllFruitBalances();
 
         for (Map.Entry<String, Integer> entry : fruitBalance.entrySet()) {
             String fruit = entry.getKey();
             int quantity = entry.getValue();
-            report.append(fruit).append(",").append(quantity).append("\n");
+            report.append(fruit).append(SEPARATOR).append(quantity).append("\n");
         }
         return report.toString();
     }

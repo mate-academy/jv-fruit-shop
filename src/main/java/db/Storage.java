@@ -4,17 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static Map<String,Integer> fruitBalances = new HashMap<>();
+    private static final Map<String, Integer> fruitBalances = new HashMap<>();
+
+    static {
+        fruitBalances.put("apple", 0);
+        fruitBalances.put("banana", 0);
+    }
 
     public Storage() {
-        fruitBalances.put("apple",0);
     }
 
-    public void addFruits(String fruit,Integer number) {
-        fruitBalances.put(fruit,number);
+    public static void addFruits(String fruit, Integer number) {
+        fruitBalances.put(fruit, number);
     }
 
-    public void removeFruit(String fruit, int quantity) {
+    public static void removeFruit(String fruit, int quantity) {
         int currentQuantity = fruitBalances.getOrDefault(fruit, 0);
         if (currentQuantity > 0) {
             int newQuantity = Math.max(currentQuantity - quantity, 0);
@@ -22,11 +26,11 @@ public class Storage {
         }
     }
 
-    public int getFruitBalance(String fruit) {
+    public static int getFruitBalance(String fruit) {
         return fruitBalances.getOrDefault(fruit, 0);
     }
 
-    public Map<String, Integer> getAllFruitBalances() {
+    public static Map<String, Integer> getAllFruitBalances() {
         return new HashMap<>(fruitBalances);
     }
 
