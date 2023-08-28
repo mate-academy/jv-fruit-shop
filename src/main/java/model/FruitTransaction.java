@@ -1,15 +1,15 @@
 package model;
 
 public class FruitTransaction {
-    private String operation;
+    private Operation operation;
     private String fruit;
     private int quantity;
 
-    public String getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
-    public void setOperation(String operation) {
+    public void setOperation(Operation operation) {
         this.operation = operation;
     }
 
@@ -28,5 +28,33 @@ public class FruitTransaction {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public enum Operation {
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private final String code;
+
+        Operation(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
+    }
+
+    public static FruitTransaction.Operation getByCode(String code) {
+        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+            if (operation.getCode().equals(code)) {
+                return operation;
+            }
+        }
+        throw new RuntimeException("Operation" + code + " not found");
+    }
 }
+
+
 

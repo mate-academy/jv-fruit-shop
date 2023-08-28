@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ParserToImpl implements ParserTo {
+public class ParserWriterImpl implements ParserWriter {
     static final String JAVA_CODE = "=";
     static final String FILE_CODE = ",";
 
@@ -14,6 +14,5 @@ public class ParserToImpl implements ParserTo {
                 .stream()
                 .map(m -> m.toString().replace(JAVA_CODE,FILE_CODE))
                 .toList();
-
     }
 }

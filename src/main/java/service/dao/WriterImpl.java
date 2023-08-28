@@ -7,11 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WriteFileImpl implements WriteFile {
+public class WriterImpl implements Writer {
     static final String TITLE_OF_REPORT = "fruit,quantity";
 
     @Override
-    public void writeListToFile(List<String> report, File file) {
+    public void writeListToFile(List<String> report) {
+        String filePathTo = "src/main/resources/fileTo.csv";
+        File file = new File(filePathTo);
         List<String> wrap = new ArrayList<>();
         wrap.add(TITLE_OF_REPORT);
         wrap.addAll(report);

@@ -5,5 +5,5 @@ import java.util.Map;
 import model.FruitTransaction;
 
 public interface ShopService {
-    void getRepport(List<FruitTransaction> from, Map<String,Integer> to);
+    Map<String,Integer> getRepport(List<FruitTransaction> fruitTransactions);
 }

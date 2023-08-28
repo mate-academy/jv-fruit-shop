@@ -1,18 +1,17 @@
 package service;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.dao.ParserImpl;
-import service.dao.ParserTo;
-import service.dao.ParserToImpl;
-import service.dao.ReadFile;
-import service.dao.ReadFileImpl;
-import service.dao.WriteFile;
-import service.dao.WriteFileImpl;
+import service.dao.ParserReader;
+import service.dao.ParserReaderImpl;
+import service.dao.ParserWriter;
+import service.dao.ParserWriterImpl;
+import service.dao.Reader;
+import service.dao.ReaderImpl;
+import service.dao.Writer;
+import service.dao.WriterImpl;
 import service.storage.Balance;
 import service.storage.PerformingOperation;
 import service.storage.Purchase;
@@ -22,38 +21,28 @@ import service.storage.Supply;
 public class Main {
 
     public static void main(String[] args) {
-        final String balanceCode = "b";
-        final String supplyCode = "s";
-        final String purchaseCode = "p";
-        final String returnCode = "r";
         // Read data from file
-        String filePath = "src/main/resources/fileFrom.csv";
-        File file = new File(filePath);
-        List<String> listFromFile = new ArrayList<>();
-        ReadFile fileDao = new ReadFileImpl();
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        Reader fileDao = new ReaderImpl();
+        List<String> listFromFile = fileDao.readFromFileToList();
         // Convert data to Java object
-        ParserImpl parser = new ParserImpl(fruitTransactions);
-        fruitTransactions = parser
-                .parsedToFruitTransaction(fileDao.readFromFileToList(file,listFromFile));
+        ParserReader parser = new ParserReaderImpl();
+        List<FruitTransaction> fruitTransactions = parser
+                .parsedToFruitTransaction(listFromFile);
         // Data operation Strategy
-        final Map<String,Integer> map = new HashMap<>();
-        HashMap<String, PerformingOperation> operationHashMap = new HashMap<>();
-        operationHashMap.put(balanceCode, new Balance());
-        operationHashMap.put(purchaseCode, new Purchase());
-        operationHashMap.put(returnCode, new Return());
-        operationHashMap.put(supplyCode, new Supply());
+        HashMap<FruitTransaction.Operation, PerformingOperation> operationHashMap = new HashMap<>();
+        operationHashMap.put(FruitTransaction.Operation.BALANCE, new Balance());
+        operationHashMap.put(FruitTransaction.Operation.PURCHASE, new Purchase());
+        operationHashMap.put(FruitTransaction.Operation.RETURN, new Return());
+        operationHashMap.put(FruitTransaction.Operation.SUPPLY, new Supply());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHashMap);
         // Data processing
         ShopServiceImpl shopService = new ShopServiceImpl(operationStrategy);
-        shopService.getRepport(fruitTransactions,map);
+        Map<String,Integer> mapReport = shopService.getRepport(fruitTransactions);
         // Create report
-        ParserTo parserTo = new ParserToImpl();
-        List<String> report = parserTo.parsedListToFile(map);
+        ParserWriter parserTo = new ParserWriterImpl();
+        List<String> report = parserTo.parsedListToFile(mapReport);
         // Write report to file
-        String filePathTo = "src/main/resources/fileTo.csv";
-        File fileTo = new File(filePathTo);
-        WriteFile writeFile = new WriteFileImpl();
-        writeFile.writeListToFile(report,fileTo);
+        Writer writeFile = new WriterImpl();
+        writeFile.writeListToFile(report);
     }
 }
