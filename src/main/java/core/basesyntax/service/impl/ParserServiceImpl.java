@@ -5,7 +5,6 @@ import core.basesyntax.service.ParserService;
 import java.util.List;
 
 public class ParserServiceImpl implements ParserService {
-
     public static final String COMMA_SEPARATOR = ",";
     public static final int ACTIVITIES_INDEX = 0;
     public static final int FRUIT_NAME_INDEX = 1;
@@ -13,14 +12,10 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public List<FruitTransaction> parse(List<String> linesFromFile) {
-        try {
-            return linesFromFile.stream()
-                    .skip(1)
-                    .map(this::getFromCsvRow)
-                    .toList();
-        } catch (NullPointerException e) {
-            throw new RuntimeException("list cannot be null", e);
-        }
+        return linesFromFile.stream()
+                .skip(1)
+                .map(this::getFromCsvRow)
+                .toList();
     }
 
     private FruitTransaction getFromCsvRow(String line) {

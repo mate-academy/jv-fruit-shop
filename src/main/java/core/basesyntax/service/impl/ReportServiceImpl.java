@@ -9,7 +9,6 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String createReport() {
-
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(HEADER_ROW).append(System.lineSeparator());
 
