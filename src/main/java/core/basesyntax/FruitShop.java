@@ -2,13 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ConverterService;
-import core.basesyntax.serviceimpl.*;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ProcessData;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriterService;
-
-import java.util.List;
+import core.basesyntax.serviceimpl.ConverterServiceImpl;
+import core.basesyntax.serviceimpl.ProcessDataimpl;
+import core.basesyntax.serviceimpl.ReaderServiceImpl;
+import core.basesyntax.serviceimpl.ReportService;
+import core.basesyntax.serviceimpl.WriterServiceImpl;
 
 public class FruitShop {
     public static void main(String[] args) {
@@ -21,7 +22,6 @@ public class FruitShop {
         WriterService writerService = new WriterServiceImpl();
         ReportService reportService = new ReportService();
         writerService.writeToFile("result.csv", reportService.createReport());
-
 
     }
 

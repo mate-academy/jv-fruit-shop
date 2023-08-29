@@ -1,9 +1,8 @@
 package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ConverterService;
 import core.basesyntax.model.Fruit;
-
+import core.basesyntax.service.ConverterService;
 import java.util.List;
 
 public class ConverterServiceImpl implements ConverterService {

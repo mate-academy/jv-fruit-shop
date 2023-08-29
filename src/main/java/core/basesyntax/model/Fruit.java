@@ -1,9 +1,9 @@
 package core.basesyntax.model;
 
 public class Fruit {
-    String type;
-    String fruit;
-    int quantity;
+    private String type;
+    private String fruit;
+    private int quantity;
 
     public Fruit(String type, String fruit, int quantity) {
         this.type = type;
@@ -45,10 +45,10 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "FruitEntry{" +
-                "type='" + type + '\'' +
-                ", fruit='" + fruit + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "FruitEntry{"
+                + "type='" + type + '\''
+                + ", fruit='" + fruit + '\''
+                + ", quantity=" + quantity
+                + '}';
     }
 }

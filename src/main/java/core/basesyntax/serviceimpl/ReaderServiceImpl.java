@@ -2,12 +2,10 @@ package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReaderService;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
