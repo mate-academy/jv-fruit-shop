@@ -1,8 +1,8 @@
 package service.impl;
 
 import db.Storage;
-import service.ReportService;
 import java.util.stream.Collectors;
+import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String TITLE = "fruit,quantity";

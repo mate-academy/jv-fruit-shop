@@ -1,8 +1,8 @@
 package service.impl;
 
-import model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
+import model.FruitTransaction;
 import service.TransactionParse;
 
 public class TransactionParseImpl implements TransactionParse {
