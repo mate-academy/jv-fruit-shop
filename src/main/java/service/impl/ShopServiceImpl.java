@@ -1,8 +1,8 @@
 package service.impl;
 
 import model.FruitTransaction;
-import service.ShopService;
 import java.util.List;
+import service.ShopService;
 import service.operation.OperationTransaction;
 import strategy.OperationStrategy;
 
