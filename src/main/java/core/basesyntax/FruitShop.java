@@ -14,14 +14,14 @@ import core.basesyntax.serviceimpl.WriterServiceImpl;
 public class FruitShop {
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
-        readerService.read("fileName.csv");
+        readerService.read("src/main/resources/filename.csv");
         ConverterService converterService = new ConverterServiceImpl();
         converterService.convert(Storage.stringList);
         ProcessData processData = new ProcessDataimpl();
         processData.processData(Storage.fruits);
         WriterService writerService = new WriterServiceImpl();
         ReportService reportService = new ReportService();
-        writerService.writeToFile("result.csv", reportService.createReport());
+        writerService.writeToFile("src/main/resources/result.csv", reportService.createReport());
 
     }
 
