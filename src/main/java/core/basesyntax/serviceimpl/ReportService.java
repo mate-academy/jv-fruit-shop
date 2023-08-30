@@ -1,12 +1,17 @@
 package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.Storage;
+import java.util.Map;
 
 public class ReportService {
+
     public String createReport() {
-        return "fruit," + "quantity" + System.lineSeparator()
-                + Storage.banana.getFruit() + "," + Storage.banana.getQuantity()
-                + System.lineSeparator()
-                + Storage.apple.getFruit() + "," + Storage.apple.getQuantity();
+        String report = "fruit," + "quantity";
+        for (Map.Entry<String, Integer> entry :
+                Storage.storage.entrySet()) {
+            report += System.lineSeparator() + entry.getKey() + "," + entry.getValue();
+        }
+        return report;
     }
 }
+

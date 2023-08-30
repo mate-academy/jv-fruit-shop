@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
+import core.basesyntax.serviceimpl.FruitTransaction;
 
 public interface OperationService {
-    void calculateQuantity(Fruit fruit);
+    void calculateQuantity(FruitTransaction fruitTransaction);
 }

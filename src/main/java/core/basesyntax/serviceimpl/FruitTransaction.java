@@ -1,30 +1,22 @@
-package core.basesyntax.model;
+package core.basesyntax.serviceimpl;
 
-public class Fruit {
-    private String type;
+public class FruitTransaction {
+    private String operation;
     private String fruit;
     private int quantity;
 
-    public Fruit(String type, String fruit, int quantity) {
-        this.type = type;
+    public FruitTransaction(String operation, String fruit, int quantity) {
+        this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public Fruit(String fruit, int quantity) {
-        this.fruit = fruit;
-        this.quantity = quantity;
+    public String getOperation() {
+        return operation;
     }
 
-    public Fruit() {
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
 
     public String getFruit() {
@@ -45,8 +37,8 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "FruitEntry{"
-                + "type='" + type + '\''
+        return "FruitTransaction{"
+                + "operation='" + operation + '\''
                 + ", fruit='" + fruit + '\''
                 + ", quantity=" + quantity
                 + '}';
