@@ -1,11 +1,10 @@
 package service.impl;
 
-import service.FileWriterService;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import service.FileWriterService;
 
 public class FileWriterServiceImpl implements FileWriterService {
 

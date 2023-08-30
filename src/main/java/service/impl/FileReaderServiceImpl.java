@@ -1,15 +1,15 @@
 package service.impl;
 
-import service.FileReaderService;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+import service.FileReaderService;
 
 public class FileReaderServiceImpl implements FileReaderService {
     private static final int OFFSET = 1;
+
     @Override
     public List<String> readFromFile(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {

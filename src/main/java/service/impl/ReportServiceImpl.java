@@ -2,12 +2,12 @@ package service.impl;
 
 import db.Storage;
 import service.ReportService;
-
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
     private static final String TITLE = "fruit,quantity";
     private static final String COMA = ",";
+
     @Override
     public String createReport() {
         StringBuilder builder = new StringBuilder();
