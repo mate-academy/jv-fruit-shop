@@ -1,4 +1,4 @@
-package service.dao;
+package service.util;
 
 import java.io.BufferedWriter;
 import java.io.File;

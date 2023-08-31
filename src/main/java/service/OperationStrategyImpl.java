@@ -2,18 +2,18 @@ package service;
 
 import java.util.Map;
 import model.FruitTransaction;
-import service.storage.PerformingOperation;
+import service.operation.OperationHandler;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<FruitTransaction.Operation,PerformingOperation> performingOperationMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> performingOperationMap;
 
     public OperationStrategyImpl(Map<FruitTransaction.Operation,
-            PerformingOperation> performingOperationMap) {
+            OperationHandler> performingOperationMap) {
         this.performingOperationMap = performingOperationMap;
     }
 
     @Override
-    public PerformingOperation get(FruitTransaction.Operation code) {
+    public OperationHandler get(FruitTransaction.Operation code) {
         return performingOperationMap.get(code);
     }
 }

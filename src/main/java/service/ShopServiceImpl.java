@@ -1,8 +1,6 @@
 package service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import model.FruitTransaction;
 
 public class ShopServiceImpl implements ShopService {
@@ -13,13 +11,10 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Map<String, Integer> getRepport(List<FruitTransaction> fruitTransactions) {
-        Map<String,Integer> mapReport = new HashMap<>();
-
+    public void processTransactions(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             operationStrategy.get(fruitTransaction.getOperation())
-                    .performToReport(fruitTransaction,mapReport);
+                    .processTransaction(fruitTransaction);
         }
-        return mapReport;
     }
 }

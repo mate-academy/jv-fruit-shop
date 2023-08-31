@@ -1,8 +1,8 @@
 package service;
 
 import model.FruitTransaction;
-import service.storage.PerformingOperation;
+import service.operation.OperationHandler;
 
 public interface OperationStrategy {
-    PerformingOperation get(FruitTransaction.Operation code);
+    OperationHandler get(FruitTransaction.Operation code);
 }
