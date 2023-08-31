@@ -1,19 +1,16 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.service.OperationService;
+import core.basesyntax.service.OperationHandler;
+import java.util.Map;
 
 public class FruitStrategy {
-    public OperationService getOperationService(String type) {
-        switch (type) {
-            case "s":
-                return new SupplyReturnOperationService();
-            case "r":
-                return new SupplyReturnOperationService();
-            case "p":
-                return new PurchaseOperationService();
-            case "b":
-            default:
-                return new BalanceOperationService();
-        }
+    private final Map<String, OperationHandler> operationHandlers;
+
+    public FruitStrategy(Map<String, OperationHandler> operationHandlers) {
+        this.operationHandlers = operationHandlers;
+    }
+
+    public OperationHandler getOperationService(String type) {
+        return operationHandlers.get(type);
     }
 }

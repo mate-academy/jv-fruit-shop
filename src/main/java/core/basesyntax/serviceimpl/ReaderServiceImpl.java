@@ -1,5 +1,6 @@
 package core.basesyntax.serviceimpl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,7 +19,10 @@ public class ReaderServiceImpl implements ReaderService {
             String value = bufferedReader.readLine();
             while (value != null) {
                 stringList.add(value);
+                String[] fruits = value.replaceAll("\\s+", "").split(",");
+                Storage.storage.put(fruits[1],0);
                 value = bufferedReader.readLine();
+
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read file ", e);
