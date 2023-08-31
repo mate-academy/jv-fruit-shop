@@ -15,7 +15,7 @@ public class ProcessTransactionServiceImpl implements ProcessTransactionService 
     public void processData(List<FruitTransaction> data) {
         for (FruitTransaction entry : data) {
             OperationHandler service = fruitStrategy.getOperationService(entry.getOperation());
-            service.handler(entry);
+            service.handle(entry);
         }
     }
 }
