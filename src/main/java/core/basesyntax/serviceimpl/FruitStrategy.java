@@ -1,16 +1,16 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.OperationService;
 import java.util.Map;
 
 public class FruitStrategy {
-    private final Map<String, OperationHandler> operationHandlers;
+    private final Map<FruitTransaction.Operation, OperationService> operationHandlers;
 
-    public FruitStrategy(Map<String, OperationHandler> operationHandlers) {
+    public FruitStrategy(Map<FruitTransaction.Operation, OperationService> operationHandlers) {
         this.operationHandlers = operationHandlers;
     }
 
-    public OperationHandler getOperationService(String type) {
+    public OperationService getOperationService(FruitTransaction.Operation type) {
         return operationHandlers.get(type);
     }
 }

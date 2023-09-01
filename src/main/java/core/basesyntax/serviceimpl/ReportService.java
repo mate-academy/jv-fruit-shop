@@ -8,7 +8,7 @@ public class ReportService {
     public String createReport() {
         String report = "fruit," + "quantity";
         for (Map.Entry<String, Integer> entry :
-                Storage.storage.entrySet()) {
+                Storage.DB.entrySet()) {
             report += System.lineSeparator() + entry.getKey() + "," + entry.getValue();
         }
         return report;

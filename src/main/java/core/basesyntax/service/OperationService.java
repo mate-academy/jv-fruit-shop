@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.serviceimpl.FruitTransaction;
 
-public interface OperationHandler {
+public interface OperationService {
     void handle(FruitTransaction fruitTransaction);
 }
