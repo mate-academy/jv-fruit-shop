@@ -1,19 +1,19 @@
 import model.FruitTransaction;
 import service.FileWriterService;
 import service.ShopService;
-import service.impl.ShopServiceImpl;
 import service.impl.FileReaderServiceImpl;
 import service.impl.ReportServiceImpl;
 import service.impl.BalanceOperationTransactionImpl;
 import service.impl.PurchaseOperationTransactionImpl;
 import service.impl.ReturnOperationTransactionImpl;
-import service.impl.SupplyOperationTransactionImpl;
+import service.impl.ShopServiceImpl;
 import service.impl.FileWriterServiceImpl;
+import service.impl.SupplyOperationTransactionImpl;
 import service.impl.TransactionParseImpl;
-import service.operation.OperationTransaction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import service.operation.OperationTransaction;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 
