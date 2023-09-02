@@ -13,7 +13,7 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder builder = new StringBuilder();
         builder.append(TITLE)
                 .append(System.lineSeparator());
-        return Storage.storageFruit.entrySet().stream()
+        return Storage.getStorageFruit().entrySet().stream()
                 .map(fruit -> builder.append(fruit.getKey()).append(COMA)
                         .append(fruit.getValue())
                         .append(System.lineSeparator()))

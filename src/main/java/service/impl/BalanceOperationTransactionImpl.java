@@ -13,6 +13,6 @@ public class BalanceOperationTransactionImpl implements OperationTransaction {
             throw new RuntimeException("Incorrect balance's quantity"
                     + fruitTransaction.getQuantity());
         }
-        Storage.storageFruit.put(fruitName, fruitQuantity);
+        Storage.getStorageFruit().put(fruitName, fruitQuantity);
     }
 }
