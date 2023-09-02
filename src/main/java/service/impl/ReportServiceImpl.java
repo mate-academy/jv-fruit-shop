@@ -13,11 +13,11 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder builder = new StringBuilder();
         builder.append(TITLE)
                 .append(System.lineSeparator());
-        Storage.storage.entrySet().stream()
+        return Storage.storageFruit.entrySet().stream()
                 .map(fruit -> builder.append(fruit.getKey()).append(COMA)
                         .append(fruit.getValue())
                         .append(System.lineSeparator()))
-                .collect(Collectors.joining());
-        return builder.toString();
+                .map(b -> builder.toString())
+               .collect(Collectors.joining());
     }
 }

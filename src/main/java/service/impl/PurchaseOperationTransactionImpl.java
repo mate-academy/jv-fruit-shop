@@ -9,12 +9,12 @@ public class PurchaseOperationTransactionImpl implements OperationTransaction {
     public void fruitOperation(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruit();
         int fruitQuantity = fruitTransaction.getQuantity();
-        if (Storage.storage.containsKey(fruitName)) {
-            int updateQuantityFruit = Storage.storage.get(fruitName) - fruitQuantity;
+        if (Storage.storageFruit.containsKey(fruitName)) {
+            int updateQuantityFruit = Storage.storageFruit.get(fruitName) - fruitQuantity;
             if (updateQuantityFruit < 0) {
                 throw new RuntimeException("We don't have enough fruits: " + fruitName);
             }
-            Storage.storage.replace(fruitName, updateQuantityFruit);
+            Storage.storageFruit.replace(fruitName, updateQuantityFruit);
         }
     }
 }
