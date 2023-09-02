@@ -11,13 +11,13 @@ public class FileReaderServiceImpl implements FileReaderService {
     private static final int OFFSET = 1;
 
     @Override
-    public List<String> readFromFile(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+    public List<String> readFromFile(String fileRead) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileRead))) {
             return reader.lines()
                     .skip(OFFSET)
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file: " + filePath, e);
+            throw new RuntimeException("Can't read file: " + fileRead, e);
         }
     }
 }
