@@ -6,12 +6,17 @@ import java.util.Map;
 public class ReportService {
 
     public String createReport() {
-        String report = "fruit," + "quantity";
-        for (Map.Entry<String, Integer> entry :
-                Storage.DB.entrySet()) {
-            report += System.lineSeparator() + entry.getKey() + "," + entry.getValue();
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append("fruit,quantity");
+
+        for (Map.Entry<String, Integer> entry : Storage.DB.entrySet()) {
+            reportBuilder.append(System.lineSeparator())
+                    .append(entry.getKey())
+                    .append(",")
+                    .append(entry.getValue());
         }
-        return report;
+
+        return reportBuilder.toString();
     }
 }
 
