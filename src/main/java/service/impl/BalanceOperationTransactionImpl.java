@@ -2,11 +2,11 @@ package service.impl;
 
 import db.Storage;
 import model.FruitTransaction;
-import service.operation.OperationTransaction;
+import service.operation.TransactionHandler;
 
-public class BalanceOperationTransactionImpl implements OperationTransaction {
+public class BalanceOperationTransactionImpl implements TransactionHandler {
     @Override
-    public void fruitOperation(FruitTransaction fruitTransaction) {
+    public void handleTransaction(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruit();
         int fruitQuantity = fruitTransaction.getQuantity();
         if (fruitTransaction.getQuantity() < 0) {

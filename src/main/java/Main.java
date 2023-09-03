@@ -13,8 +13,8 @@ import service.impl.ReportServiceImpl;
 import service.impl.ReturnOperationTransactionImpl;
 import service.impl.ShopServiceImpl;
 import service.impl.SupplyOperationTransactionImpl;
-import service.impl.TransactionParseImpl;
-import service.operation.OperationTransaction;
+import service.impl.TransactionParserImpl;
+import service.operation.TransactionHandler;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 
@@ -22,7 +22,7 @@ public class Main {
     public static void main(String[] args) {
         String fileRead = "src/main/resources/data.csv";
         List<String> dataContent = new FileReaderServiceImpl().readFromFile(fileRead);
-        Map<FruitTransaction.Operation, OperationTransaction> operationOperationTransactionMap
+        Map<FruitTransaction.Operation, TransactionHandler> operationOperationTransactionMap
                 = new HashMap<>();
         operationOperationTransactionMap
                 .put(FruitTransaction.Operation.BALANCE, new BalanceOperationTransactionImpl());
@@ -35,12 +35,12 @@ public class Main {
         OperationStrategy operationStrategy
                 = new OperationStrategyImpl(operationOperationTransactionMap);
         List<FruitTransaction> transactionList
-                = new TransactionParseImpl().transactionParse(dataContent);
+                = new TransactionParserImpl().parseTransactions(dataContent);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.shopTransactions(transactionList);
         String report = new ReportServiceImpl().createReport();
         String fileWrite = "src/main/resources/report.csv";
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.fileWriter(report, fileWrite);
+        fileWriterService.writeToFile(report, fileWrite);
     }
 }

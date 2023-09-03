@@ -8,7 +8,7 @@ import service.FileWriterService;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override
-    public void fileWriter(String report, String writeFile) {
+    public void writeToFile(String report, String writeFile) {
         File fileReport = new File(writeFile);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileReport))) {
             bufferedWriter.write(report);
