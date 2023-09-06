@@ -13,7 +13,5 @@ public class ReturnOperationTransactionImpl implements TransactionHandler {
             int updateQuantityFruit = Storage.getStorageFruit().get(fruitName) + fruitQuantity;
             Storage.getStorageFruit().replace(fruitName,updateQuantityFruit);
         }
-        throw new RuntimeException("You tried return fruit, "
-                + "which You have not bought in our store recently: " + fruitName);
     }
 }

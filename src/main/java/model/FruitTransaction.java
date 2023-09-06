@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -36,6 +38,34 @@ public class FruitTransaction {
     }
 
     @Override
+    public int hashCode() {
+        int result = operation != null ? operation.hashCode() : 0;
+        result = 31 * result + (fruit != null ? fruit.hashCode() : 0);
+        result = 31 * result + quantity;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        FruitTransaction that = (FruitTransaction) obj;
+
+        if (quantity != that.quantity) {
+            return false;
+        }
+        if (operation != that.operation) {
+            return false;
+        }
+        return Objects.equals(fruit, that.fruit);
+    }
+
+    @Override
     public String toString() {
         return "FruitTransaction{"
                 + "operation=" + operation
@@ -50,7 +80,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String code;
+        private String code;
 
         Operation(String code) {
             this.code = code;
@@ -66,7 +96,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new IllegalArgumentException("Invalid operation code: " + code);
+           throw new IllegalArgumentException("Invalid operation code: " + code);
         }
     }
 }
