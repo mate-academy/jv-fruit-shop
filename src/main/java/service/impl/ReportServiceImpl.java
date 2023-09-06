@@ -18,6 +18,6 @@ public class ReportServiceImpl implements ReportService {
                         .append(fruit.getValue())
                         .append(System.lineSeparator()))
                 .collect(Collectors.joining());
-        return  builder.toString();
+        return builder.toString();
     }
 }
