@@ -12,7 +12,7 @@ public class ReturnHandler implements OperationHandler {
 
     @Override
     public void processTransaction(FruitTransaction record) {
-        int value = record.getQuantity() + storageDao.getMap().get(record.getFruit());
+        int value = record.getQuantity() + storageDao.getFruitAmount(record.getFruit());
         storageDao.putFruit(record.getFruit(), value);
     }
 }

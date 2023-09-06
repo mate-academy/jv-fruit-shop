@@ -8,11 +8,10 @@ import java.util.List;
 
 public class ReaderImpl implements Reader {
     private static final int TITLE_INDEX = 0;
-    private static final String FILE_PATH = "src/main/resources/fileFrom.csv";
 
     @Override
-    public List<String> readFromFileToList() {
-        File file = new File(FILE_PATH);
+    public List<String> readFromFileToList(String fileName) {
+        File file = new File(fileName);
         List<String> report;
         try {
             report = Files.readAllLines(file.toPath());

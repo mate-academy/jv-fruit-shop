@@ -4,11 +4,13 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.impl.OperationStrategyImpl;
 import core.basesyntax.impl.ParserReaderImpl;
 import core.basesyntax.impl.ReaderImpl;
+import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.impl.ShopServiceImpl;
 import core.basesyntax.impl.StorageDaoImpl;
 import core.basesyntax.impl.WriterImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.operation.BalanceHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseHandler;
@@ -25,7 +27,8 @@ public class Main {
     public static void main(String[] args) {
         // Read data from file
         Reader fileDao = new ReaderImpl();
-        List<String> listFromFile = fileDao.readFromFileToList();
+        String fileFrom = "src/main/resources/fileFrom.csv";
+        List<String> listFromFile = fileDao.readFromFileToList(fileFrom);
         // Convert data to Java object
         ParserReader parser = new ParserReaderImpl();
         final List<FruitTransaction> fruitTransactions = parser
@@ -41,8 +44,12 @@ public class Main {
         // Data processing
         ShopServiceImpl shopService = new ShopServiceImpl(operationStrategy);
         shopService.processTransactions(fruitTransactions);
+        //Create report
+        ReportService reportService = new ReportServiceImpl(storageDao);
+        List<String> report = reportService.getReport();
         // Write report to file
-        Writer writeFile = new WriterImpl(storageDao);
-        writeFile.writeListToFile();
+        String fileTo = "src/main/resources/fileTo.csv";
+        Writer writeFile = new WriterImpl();
+        writeFile.writeToFile(report, fileTo);
     }
 }

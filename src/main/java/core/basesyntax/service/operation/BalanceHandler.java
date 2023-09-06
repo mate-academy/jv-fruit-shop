@@ -15,4 +15,3 @@ public class BalanceHandler implements OperationHandler {
         storageDao.putFruit(record.getFruit(), record.getQuantity());
     }
 }
-

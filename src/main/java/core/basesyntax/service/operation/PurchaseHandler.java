@@ -12,7 +12,7 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void processTransaction(FruitTransaction record) {
-        int value = storageDao.getMap().get(record.getFruit()) - record.getQuantity();
+        int value = storageDao.getFruitAmount(record.getFruit()) - record.getQuantity();
         if (value < 0) {
             throw new RuntimeException("Not enough " + record.getFruit());
         }
