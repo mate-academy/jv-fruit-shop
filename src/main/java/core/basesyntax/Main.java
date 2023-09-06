@@ -16,14 +16,14 @@ import core.basesyntax.service.impl.ReturnServiceImpl;
 import core.basesyntax.service.impl.SupplyServiceImpl;
 import core.basesyntax.service.impl.WriteServiceImpl;
 import core.basesyntax.strategy.Strategy;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static Path filePath;
-    private static Path reportPath;
+    public static final int HEADER_INDEX = 0;
+    private static String filePath;
+    private static String reportPath;
     private static ReaderService reader;
     private static FileDataConvertorService convertorService;
     private static Storage storage;
@@ -34,6 +34,7 @@ public class Main {
     public static void main(String[] args) {
         init();
         List<String> content = reader.readFromFile(filePath);
+        content.remove(HEADER_INDEX);
         List<FruitTransaction> fruitTransactions =
                 convertorService.convertToFruitTransaction(content);
         fruitTransactions.forEach(x -> strategy.doOperation(x));
@@ -42,8 +43,8 @@ public class Main {
     }
 
     private static void init() {
-        filePath = Path.of("src/main/resources/Test.csv");
-        reportPath = Path.of("src/main/resources/Report.csv");
+        filePath = "src/main/resources/Test.csv";
+        reportPath = "src/main/resources/Report.csv";
         reader = new ReaderServiceImpl();
         convertorService = new FileDataConvertorServiceImpl();
         storage = new Storage();
