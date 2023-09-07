@@ -38,7 +38,7 @@ public class Main {
         List<FruitTransaction> fruitTransactions =
                 convertorService.convertToFruitTransaction(content);
         fruitTransactions.forEach(x -> strategy.doOperation(x));
-        String report = reportService.createReport(storage);
+        String report = reportService.createReport();
         writerService.write(report, reportPath);
     }
 
@@ -60,7 +60,7 @@ public class Main {
                 new SupplyServiceImpl(storage));
 
         strategy = new Strategy(operationStrategies);
-        reportService = new ReportServiceImpl();
+        reportService = new ReportServiceImpl(storage);
         writerService = new WriteServiceImpl();
     }
 }

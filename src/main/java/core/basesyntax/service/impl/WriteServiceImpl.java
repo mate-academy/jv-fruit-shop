@@ -7,11 +7,11 @@ import java.nio.file.Path;
 
 public class WriteServiceImpl implements WriterService {
     @Override
-    public void write(String report, String path) {
+    public void write(String content, String path) {
         try {
-            Files.write(Path.of(path), report.getBytes());
+            Files.write(Path.of(path), content.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Cannot write a file", e);
+            throw new RuntimeException("Cannot write a file: " + path, e);
         }
     }
 }

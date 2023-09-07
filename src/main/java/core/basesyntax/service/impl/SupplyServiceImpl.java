@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.SupplyService;
+import core.basesyntax.service.OperationService;
 
-public class SupplyServiceImpl implements SupplyService {
+public class SupplyServiceImpl implements OperationService {
     private Storage storage;
 
     public SupplyServiceImpl(Storage storage) {

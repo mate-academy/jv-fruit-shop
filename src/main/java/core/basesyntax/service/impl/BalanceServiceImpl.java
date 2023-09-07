@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.BalanceService;
+import core.basesyntax.service.OperationService;
 
-public class BalanceServiceImpl implements BalanceService {
+public class BalanceServiceImpl implements OperationService {
     private Storage storage;
 
     public BalanceServiceImpl(Storage storage) {

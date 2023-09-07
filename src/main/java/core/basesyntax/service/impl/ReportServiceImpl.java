@@ -7,9 +7,14 @@ public class ReportServiceImpl implements ReportService {
     public static final String COMA = ",";
     public static final String FRUIT = "fruit";
     public static final String QUANTITY = "quantity";
+    private Storage storage;
+
+    public ReportServiceImpl(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
-    public String createReport(Storage storage) {
+    public String createReport() {
         StringBuilder report = new StringBuilder();
         report.append(FRUIT).append(COMA).append(QUANTITY);
         storage.getData().forEach((k, v) -> {

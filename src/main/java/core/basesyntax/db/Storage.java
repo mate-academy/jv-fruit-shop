@@ -8,14 +8,7 @@ public class Storage {
 
     public void add(String fruit, int quantity) {
         checkQuantity(quantity);
-
-        if (data.containsKey(fruit)) {
-            int currentValue = data.get(fruit);
-            int newValue = currentValue + quantity;
-            data.put(fruit, newValue);
-        } else {
-            data.put(fruit, quantity);
-        }
+        data.merge(fruit, quantity, Integer::sum);
     }
 
     public void subtract(String fruit, int quantity) {
