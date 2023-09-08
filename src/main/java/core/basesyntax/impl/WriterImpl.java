@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class WriterImpl implements Writer {
-
     @Override
     public void writeToFile(List<String> content, String fileName) {
         for (String line : content) {
@@ -22,5 +21,3 @@ public class WriterImpl implements Writer {
         }
     }
 }
-
-

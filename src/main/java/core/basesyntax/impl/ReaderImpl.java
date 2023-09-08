@@ -22,4 +22,3 @@ public class ReaderImpl implements Reader {
         return report;
     }
 }
-

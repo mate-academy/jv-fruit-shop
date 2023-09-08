@@ -19,7 +19,7 @@ public class ReportServiceImpl implements ReportService {
     public List<String> getReport() {
         List<String> report = storageDao.getAllFruits()
                 .stream()
-                .map(s -> s.replace(BASE_DELIMITER, FILE_DELIMITER))
+                .map(storage -> storage.replace(BASE_DELIMITER, FILE_DELIMITER))
                 .toList();
         List<String> lines = new ArrayList<>();
         lines.add(TITLE_OF_REPORT);

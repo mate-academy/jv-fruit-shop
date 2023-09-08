@@ -8,12 +8,12 @@ import java.util.List;
 public class StorageDaoImpl implements StorageDao {
     @Override
     public void putFruit(String key, Integer value) {
-        Storage.FRUIT_STORAGE.put(key, value);
+        Storage.addFruit(key, value);
     }
 
     @Override
     public List<String> getAllFruits() {
-        return new ArrayList<>(Storage.FRUIT_STORAGE.entrySet())
+        return new ArrayList<>(Storage.getFruits().entrySet())
                 .stream()
                 .map(Object::toString)
                 .toList();
@@ -22,6 +22,6 @@ public class StorageDaoImpl implements StorageDao {
     @Override
     public Integer getFruitAmount(String fruitName) {
 
-        return Storage.FRUIT_STORAGE.get(fruitName);
+        return Storage.getQuantityBy(fruitName);
     }
 }

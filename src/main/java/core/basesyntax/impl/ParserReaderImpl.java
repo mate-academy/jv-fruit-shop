@@ -9,13 +9,13 @@ public class ParserReaderImpl implements ParserReader {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final String REGEX = ",";
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> parsedToFruitTransaction(List<String> records) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String record : records) {
-            String[] transaction = record.split(REGEX);
+            String[] transaction = record.split(SEPARATOR);
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setOperation(FruitTransaction
                     .getByCode(transaction[OPERATION_INDEX].trim()));
