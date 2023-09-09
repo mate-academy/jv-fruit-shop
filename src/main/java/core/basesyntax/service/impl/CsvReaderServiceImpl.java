@@ -1,10 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReaderService;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 public class CsvReaderServiceImpl implements ReaderService {
@@ -17,9 +16,8 @@ public class CsvReaderServiceImpl implements ReaderService {
     @Override
     public List<String> getLines() {
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
-            return reader.lines().toList();
-        } catch (FileNotFoundException e) {
+            return Files.readAllLines(file.toPath());
+        } catch (IOException e) {
             throw new RuntimeException("Can't read from file: " + file);
         }
     }
