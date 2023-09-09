@@ -4,6 +4,7 @@ import strategy.OperationBalance;
 import strategy.OperationPurchase;
 import strategy.OperationReturn;
 import strategy.OperationStrategy;
+import strategy.OperationSupply;
 
 public interface Transaction {
     OperationStrategy getOperationStrategy();
