@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.impl.OperationStrategyImpl;
 import core.basesyntax.impl.ParserReaderImpl;
-import core.basesyntax.impl.ReaderImpl;
+import core.basesyntax.impl.ReaderServiceImpl;
 import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.impl.ShopServiceImpl;
 import core.basesyntax.impl.StorageDaoImpl;
@@ -17,7 +17,7 @@ import core.basesyntax.service.operation.PurchaseHandler;
 import core.basesyntax.service.operation.ReturnHandler;
 import core.basesyntax.service.operation.SupplyHandler;
 import core.basesyntax.service.util.ParserReader;
-import core.basesyntax.service.util.Reader;
+import core.basesyntax.service.util.ReaderService;
 import core.basesyntax.service.util.Writer;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +26,7 @@ public class Main {
 
     public static void main(String[] args) {
         // Read data from file
-        Reader fileDao = new ReaderImpl();
+        ReaderService fileDao = new ReaderServiceImpl();
         String fileFrom = "src/main/resources/fileFrom.csv";
         List<String> listFromFile = fileDao.readFromFileToList(fileFrom);
         // Convert data to Java object

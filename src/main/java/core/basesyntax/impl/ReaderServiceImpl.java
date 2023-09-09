@@ -1,12 +1,12 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.service.util.Reader;
+import core.basesyntax.service.util.ReaderService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class ReaderImpl implements Reader {
+public class ReaderServiceImpl implements ReaderService {
     private static final int TITLE_INDEX = 0;
 
     @Override

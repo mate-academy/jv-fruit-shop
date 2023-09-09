@@ -19,6 +19,5 @@ public class Storage {
 
     public static Map<String,Integer> getFruits() {
         return fruits;
-
     }
 }
