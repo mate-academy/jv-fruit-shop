@@ -97,7 +97,7 @@ public class FruitTransaction {
 #### [Try to avoid these common mistakes while solving task](https://mate-academy.github.io/jv-program-common-mistakes/java-core/solid/fruit-shop)
 
 <details>
-  <summary>Additional tips (IMPOTANT: before viewing create a solution architecture and check it against these tips)</summary>
+  <summary>Additional tips (IMPORTANT: before viewing create a solution architecture and check it against these tips)</summary>
  
  ![FruitShop Schema](https://mate-academy-images.s3.eu-central-1.amazonaws.com/Fruit_Shop_1_c3855912d4.png)
 
