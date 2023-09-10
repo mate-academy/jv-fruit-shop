@@ -22,7 +22,7 @@ public class CsvParserImpl implements CsvParserService {
                 .map(s -> s.split(SEPARATOR))
                 .map(CsvParserImpl::getByRow)
                 .sorted(Comparator.comparing(FruitTransaction::getOperation))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private static FruitTransaction getByRow(String... row) {
