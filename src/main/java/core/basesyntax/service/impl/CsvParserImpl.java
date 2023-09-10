@@ -6,7 +6,6 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.CsvParserService;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CsvParserImpl implements CsvParserService {
     private static final int HEADER_ROW_COUNT = 1;
