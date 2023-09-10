@@ -11,8 +11,10 @@ import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.OperationProcessImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
+import core.basesyntax.strategy.HandlerStrategy;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceHandler;
+import core.basesyntax.strategy.impl.HandlerStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseHandler;
 import core.basesyntax.strategy.impl.ReturnHandler;
 import core.basesyntax.strategy.impl.SupplyHandler;
@@ -21,10 +23,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final Map<FruitTransaction.Operation, OperationHandler> OPERATION_HANDLER_MAP
-            = new HashMap<>();
+
     private static final String INPUT_FILE_PATH = "src/main/resources/transactions.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
+    private static final Map<FruitTransaction.Operation, OperationHandler> OPERATION_HANDLER_MAP
+            = new HashMap<>();
 
     static {
         OPERATION_HANDLER_MAP.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
@@ -39,7 +42,8 @@ public class Main {
         TransactionParser transactionParser = new TransactionParserImpl();
         List<FruitTransaction> fruitTransactions
                 = transactionParser.getFruitTransactions(dataFromFile);
-        OperationProcess operationProcess = new OperationProcessImpl();
+        HandlerStrategy handlerStrategy = new HandlerStrategyImpl(OPERATION_HANDLER_MAP);
+        OperationProcess operationProcess = new OperationProcessImpl(handlerStrategy);
         operationProcess.processOperation(fruitTransactions);
         ReportService reportService = new ReportServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
