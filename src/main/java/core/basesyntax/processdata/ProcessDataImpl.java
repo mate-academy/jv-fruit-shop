@@ -28,7 +28,7 @@ public class ProcessDataImpl implements ProcessData {
             Integer value = Integer.parseInt(dataLine.get(ITEM_VALUE_POSITION));
             OperationHandler operationHandler = operationStrategy.get(operationType);
             if (operationHandler == null) {
-                throw new RuntimeException("Incorrrect operation type: " + operationType);
+                throw new RuntimeException("Incorrect operation type: " + operationType);
             }
             operationHandler.processOperation(itemName, value);
         }

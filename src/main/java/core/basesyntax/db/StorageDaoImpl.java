@@ -5,11 +5,10 @@ import java.util.Map;
 public class StorageDaoImpl implements StorageDao {
     @Override
     public void add(String product, Integer value) {
-        if (value >= 0) {
-            Storage.STOCK.put(product, value);
-            return;
+        if (value < 0) {
+            throw new RuntimeException("Amount of products '" + product + "' can`t be less than 0");
         }
-        throw new RuntimeException("Amount of products '" + product + "' can`t be less than 0");
+        Storage.STOCK.put(product, value);
     }
 
     @Override
