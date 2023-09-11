@@ -18,7 +18,7 @@ public class ParserServiceImpl implements ParserService {
             String[] line = data.get(i).split(SPLIT_INDEX);
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setOperation(FruitTransaction.Operation
-                    .getByCode(FruitTransaction.Operation.class, line[CODE_INDEX]));
+                    .getByCode(line[CODE_INDEX]));
             fruitTransaction.setFruit(line[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(line[QUANTITY_INDEX]));
             fruits.add(fruitTransaction);

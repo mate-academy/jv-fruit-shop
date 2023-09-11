@@ -45,8 +45,8 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation getByCode(Class<Operation> full, String codeFromLine) {
-            for (Operation type : full.getEnumConstants()) {
+        public static Operation getByCode(String codeFromLine) {
+            for (Operation type : Operation.values()) {
                 if (type != null) {
                     if (codeFromLine.equals(type.getCode())) {
                         return type;

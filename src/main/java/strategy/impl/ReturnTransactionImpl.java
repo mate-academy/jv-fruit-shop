@@ -4,7 +4,7 @@ import db.Warehouse;
 import model.FruitTransaction;
 import strategy.TransactionHandler;
 
-public class ReturnImpl implements TransactionHandler {
+public class ReturnTransactionImpl implements TransactionHandler {
 
     @Override
     public void getTransaction(FruitTransaction transaction) {
