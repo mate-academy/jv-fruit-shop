@@ -27,7 +27,7 @@ public class CsvReportCreator implements ReportCreator {
 
             System.out.println("Report created successfully" + filePath);
         } catch (IOException e) {
-            System.err.println("Error creating report" + e.getMessage());
+            throw new RuntimeException("Error creating report", e);
         }
     }
 }
