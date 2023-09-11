@@ -10,16 +10,20 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceCsvImpl;
 import core.basesyntax.service.impl.ReportServiceCsvImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String DATA_FILE_PATH = "src/main/resources/monday.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
     private static final Map<Operation, OperationHandler> OPERATION_HANDLER_MAP = new HashMap<>();
 
     static {
@@ -30,11 +34,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        String dataFilePath = "src/main/resources/monday.csv";
-        String reportFilePath = "src/main/resources/report.csv";
-
         final ReaderService readerService = new ReaderServiceCsvImpl();
-        List<FruitTransaction> transactions = readerService.readFromFile(dataFilePath);
+        List<String> lines = readerService.readFromFile(DATA_FILE_PATH);
+
+        final TransactionService transactionService = new TransactionServiceImpl();
+        List<FruitTransaction> transactions = transactionService.parseTransactions(lines);
 
         final FruitService fruitService = new FruitServiceImpl(OPERATION_HANDLER_MAP);
         fruitService.manageTransactions(transactions);
@@ -43,6 +47,6 @@ public class Main {
         String report = reportService.createReport();
 
         final WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile(reportFilePath, report);
+        writerService.writeToFile(REPORT_FILE_PATH, report);
     }
 }

@@ -1,19 +1,22 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.FruitStorage;
+import static java.util.stream.Collectors.joining;
+
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.ReportService;
-import java.util.stream.Collectors;
 
 public class ReportServiceCsvImpl implements ReportService {
     private static final String HEADERS = "fruit,quantity";
     private static final String DELIMITER = ",";
+    private final FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
     public String createReport() {
         return HEADERS + System.lineSeparator()
-                + FruitStorage.STORAGE.entrySet()
+                + fruitDao.getAll().entrySet()
                 .stream()
                 .map(entry -> entry.getKey() + DELIMITER + entry.getValue())
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(joining(System.lineSeparator()));
     }
 }

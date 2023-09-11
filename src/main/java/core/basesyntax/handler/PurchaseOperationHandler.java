@@ -1,19 +1,22 @@
 package core.basesyntax.handler;
 
-import core.basesyntax.db.FruitStorage;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
+    private final FruitDao fruitDao = new FruitDaoImpl();
+
     @Override
     public void process(FruitTransaction transaction) {
-        int amount = FruitStorage.STORAGE.getOrDefault(transaction.getFruit(), 0);
+        int amount = fruitDao.get(transaction.getFruit());
         int quantity = transaction.getQuantity();
         if (amount < quantity) {
             throw new RuntimeException(
                     getErrorMessage(transaction.getFruit(), amount, quantity)
             );
         }
-        FruitStorage.STORAGE.put(transaction.getFruit(), amount - quantity);
+        fruitDao.add(transaction.getFruit(), amount - quantity);
     }
 
     private String getErrorMessage(String fruit, int amount, int quantity) {

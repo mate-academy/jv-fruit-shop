@@ -1,9 +1,9 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.InvalidDataException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public enum Operation {
     BALANCE("b"),
@@ -27,7 +27,12 @@ public enum Operation {
         return code;
     }
 
-    public static Optional<Operation> getByCode(String code) {
-        return Optional.ofNullable(MAP.get(code.trim()));
+    public static Operation getByCode(String code) {
+        return Arrays.stream(values())
+                .filter(operation -> operation.getCode().equals(code))
+                .findAny()
+                .orElseThrow(
+                        () -> new InvalidDataException("File has invalid operation type: " + code)
+                );
     }
 }
