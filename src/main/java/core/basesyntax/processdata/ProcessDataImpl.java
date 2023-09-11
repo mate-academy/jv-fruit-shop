@@ -26,11 +26,7 @@ public class ProcessDataImpl implements ProcessData {
             Character operationType = dataLine.get(OPERATION_TYPE_POSITION).charAt(0);
             String itemName = dataLine.get(ITEM_NAME_POSITION);
             Integer value = Integer.parseInt(dataLine.get(ITEM_VALUE_POSITION));
-            OperationHandler operationHandler = operationStrategy.get(operationType);
-            if (operationHandler == null) {
-                throw new RuntimeException("Incorrect operation type: " + operationType);
-            }
-            operationHandler.processOperation(itemName, value);
+            operationStrategy.get(operationType).processOperation(itemName, value);
         }
         return storageDao.getStock();
     }

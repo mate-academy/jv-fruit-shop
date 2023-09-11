@@ -12,6 +12,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(Character type) {
-        return operationHandlerMap.get(type);
+        OperationHandler handler = operationHandlerMap.get(type);
+        if (handler != null) {
+            return handler;
+        }
+        throw new RuntimeException("Incorrect operation type: " + type);
     }
 }
