@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ public class Main {
         String inputFilePath = "input.csv";
         final String outputFilePath = "output.csv";
 
-        FileReaderService fileReaderService = new CsvFileReader();
+        FileReaderService fileReaderService = new FileReaderImpl();
         List<String> transactionData;
         try {
             transactionData = fileReaderService.readData(inputFilePath);
@@ -18,12 +19,18 @@ public class Main {
             return;
         }
 
-        TransactionParser transactionParser = new CsvTransactionParser();
-        List<FruitTransaction> transactions = transactionParser.parseTransactions(transactionData);
+        Map<FruitTransaction.Operation, OperationHandler> customHandlers = new HashMap<>();
+        customHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
+        customHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
+        customHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+        customHandlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+
+        DefaultOperationStrategy operationStrategy = new DefaultOperationStrategy(customHandlers);
+
+        List<FruitTransaction> transactions;
+        transactions = new CsvTransactionParser().parseTransactions(transactionData);
 
         Storage storage = new Storage();
-
-        DefaultOperationStrategy operationStrategy = new DefaultOperationStrategy();
 
         TransactionProcessor transactionProcessor;
         transactionProcessor = new TransactionProcessor(operationStrategy, storage);
@@ -32,6 +39,10 @@ public class Main {
         ReportCreator reportCreator = new CsvReportCreator(outputFilePath);
 
         Map<String, Integer> fruitInventory = storage.getFruitInventory();
-        reportCreator.createReport(fruitInventory, outputFilePath);
+        try {
+            reportCreator.createReport(fruitInventory, outputFilePath);
+        } catch (IOException e) {
+            System.err.println("Error creating report: " + e.getMessage());
+        }
     }
 }
