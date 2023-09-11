@@ -1,11 +1,14 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.strategy.OperationHandler;
 
 public class ReturnHandler implements OperationHandler {
+    private final FruitDao fruitDao = new FruitDaoImpl();
+
     @Override
     public void execute(String fruit, int quantity) {
-        Storage.STORAGE.put(fruit, Storage.STORAGE.getOrDefault(fruit, 0) + quantity);
+        fruitDao.add(fruit, fruitDao.getQuantity(fruit) + quantity);
     }
 }
