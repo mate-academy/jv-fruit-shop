@@ -12,8 +12,7 @@ public class CsvReportCreator implements ReportCreator {
     }
 
     @Override
-    public void createReport(Map<String, Integer> fruitInventory,
-                             String filePath) throws IOException {
+    public void createReport(Map<String, Integer> fruitInventory, String filePath) {
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.write("fruit,quantity\n");
 
