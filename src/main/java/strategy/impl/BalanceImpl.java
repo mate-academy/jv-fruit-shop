@@ -1,11 +1,13 @@
 package strategy.impl;
 
 import db.Warehouse;
-import strategy.Balance;
+import model.FruitTransaction;
+import strategy.TransactionHandler;
 
-public class BalanceImpl implements Balance {
+public class BalanceImpl implements TransactionHandler {
+
     @Override
-    public void getBalance(String fruit, int quantity) {
-        Warehouse.getStorage().put(Warehouse.TypeFruit.valueOf(fruit), quantity);
+    public void getTransaction(FruitTransaction transaction) {
+        Warehouse.STORAGE.put(transaction.getFruit(), transaction.getQuantity());
     }
 }

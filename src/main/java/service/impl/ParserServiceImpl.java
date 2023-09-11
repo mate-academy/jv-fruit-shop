@@ -1,12 +1,28 @@
 package service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
+import model.FruitTransaction;
 import service.ParserService;
-import strategy.impl.TransactionImpl;
 
 public class ParserServiceImpl implements ParserService {
+    private static final String SPLIT_INDEX = ",";
+    private static final int CODE_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+
     @Override
-    public void parseFile(List<String> data) {
-        data.forEach(a -> new TransactionImpl().operate(a));
+    public List<FruitTransaction> parseFile(List<String> data) {
+        List<FruitTransaction> fruits = new ArrayList<>();
+        for (int i = 1; i < data.size(); i++) {
+            String[] line = data.get(i).split(SPLIT_INDEX);
+            FruitTransaction fruitTransaction = new FruitTransaction();
+            fruitTransaction.setOperation(FruitTransaction.Operation
+                    .getByCode(FruitTransaction.Operation.class, line[CODE_INDEX]));
+            fruitTransaction.setFruit(line[FRUIT_INDEX]);
+            fruitTransaction.setQuantity(Integer.parseInt(line[QUANTITY_INDEX]));
+            fruits.add(fruitTransaction);
+        }
+        return fruits;
     }
 }

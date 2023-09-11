@@ -1,18 +1,20 @@
 package strategy.impl;
 
 import db.Warehouse;
-import strategy.Purchase;
+import model.FruitTransaction;
+import strategy.TransactionHandler;
 
-public class PurchaseImpl implements Purchase {
+public class PurchaseImpl implements TransactionHandler {
 
     @Override
-    public void subtract(String fruit, int quantity) {
-        int actual = Warehouse.getStorage().get(Warehouse.TypeFruit.valueOf(fruit));
-        int subtraction = actual - quantity;
+    public void getTransaction(FruitTransaction transaction) {
+        int actual = Warehouse.STORAGE.get(transaction.getFruit());
+        int subtraction = actual - transaction.getQuantity();
         if (subtraction < 0) {
-            throw new RuntimeException("The storage of " + fruit + "can't be negative."
-                    + " If it equals " + actual + " we can't purchased " + quantity);
+            throw new RuntimeException("The storage of " + transaction.getFruit()
+                    + "can't be negative." + " If it equals "
+                    + actual + " we can't purchased " + transaction.getQuantity());
         }
-        Warehouse.getStorage().put(Warehouse.TypeFruit.valueOf(fruit), subtraction);
+        Warehouse.STORAGE.put(transaction.getFruit(), subtraction);
     }
 }

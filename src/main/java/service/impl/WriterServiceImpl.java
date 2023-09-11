@@ -8,14 +8,16 @@ import java.util.Map;
 import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
+    private static final String TOP_OF_REPORT = "fruit,quantity";
+    private static final String COMMA = ",";
+
     @Override
     public void writeToFile(String toFileName) {
-        Map<Warehouse.TypeFruit, Integer> information = Warehouse.getStorage();
         File toFile = new File(toFileName);
         try (BufferedWriter writeTo = new BufferedWriter(new FileWriter(toFile))) {
-            writeTo.write("fruit,quantity" + System.lineSeparator());
-            for (Map.Entry<Warehouse.TypeFruit, Integer> line : information.entrySet()) {
-                writeTo.write(line.getKey() + "," + line.getValue());
+            writeTo.write(TOP_OF_REPORT + System.lineSeparator());
+            for (Map.Entry<String, Integer> line : Warehouse.STORAGE.entrySet()) {
+                writeTo.write(line.getKey() + COMMA + line.getValue());
                 writeTo.newLine();
             }
         } catch (Exception e) {

@@ -10,7 +10,7 @@ import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
     @Override
-    public void readFromFile(String filePath) {
+    public List<String> readFromFile(String filePath) {
         File fromFile = new File(filePath);
         List<String> data = new ArrayList<>();
         try (BufferedReader fromFileReader = new BufferedReader(new FileReader(fromFile))) {
@@ -21,6 +21,6 @@ public class ReaderServiceImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't find file by path: " + filePath, e);
         }
-        new ParserServiceImpl().parseFile(data);
+        return data;
     }
 }
