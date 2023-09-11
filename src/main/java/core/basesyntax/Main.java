@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String inputFilePath = "input.csv";
         final String outputFilePath = "output.csv";
 
@@ -32,10 +32,6 @@ public class Main {
         ReportCreator reportCreator = new CsvReportCreator(outputFilePath);
 
         Map<String, Integer> fruitInventory = storage.getFruitInventory();
-        try {
-            reportCreator.createReport(fruitInventory, outputFilePath);
-        } catch (IOException e) {
-            System.err.println("Error creating report: " + e.getMessage());
-        }
+        reportCreator.createReport(fruitInventory, outputFilePath);
     }
 }
