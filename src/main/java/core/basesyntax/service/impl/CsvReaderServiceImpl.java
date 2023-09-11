@@ -7,14 +7,9 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class CsvReaderServiceImpl implements ReaderService {
-    private File file;
-
-    public CsvReaderServiceImpl(String filePath) {
-        file = new File(filePath);
-    }
-
     @Override
-    public List<String> getLines() {
+    public List<String> getLines(String filePath) {
+        File file = new File(filePath);
         try {
             return Files.readAllLines(file.toPath());
         } catch (IOException e) {

@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.List;
 
 public interface ReaderService {
-    List<String> getLines();
+    List<String> getLines(String filePath);
 }

@@ -13,7 +13,7 @@ public class ParserServiceImpl implements ParserService {
     private static final String FIELD_SEPARATOR = ",";
 
     @Override
-    public List<FruitTransaction> getRecords(List<String> lines) {
+    public List<FruitTransaction> getTransactions(List<String> lines) {
         Function<String[], FruitTransaction> lineToOperation = strings -> {
             FruitTransaction.Operation operation =
                     FruitTransaction.Operation.getByCode(strings[INDEX_OF_OPERATION]);

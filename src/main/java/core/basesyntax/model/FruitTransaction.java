@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.NoSuchElementException;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -30,6 +32,7 @@ public class FruitTransaction {
         RETURN("r");
 
         private String code;
+
         Operation(String code) {
             this.code = code;
         }
@@ -41,7 +44,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            return null;
+            throw new NoSuchElementException("Can't find the operation by symbol: " + code);
         }
 
         public String getCode() {

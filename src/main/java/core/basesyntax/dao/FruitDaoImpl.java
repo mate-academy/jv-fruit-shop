@@ -2,7 +2,8 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitInStorage;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
@@ -22,7 +23,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Collection<FruitInStorage> getAll() {
-        return Storage.FRUITS.values();
+    public List<FruitInStorage> getAll() {
+        return new ArrayList<>(Storage.FRUITS.values());
     }
 }

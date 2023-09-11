@@ -1,10 +1,14 @@
 package core.basesyntax.strategy.handler;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.impl.ShopServiceImpl;
 
 public class ReturnHandler implements OperationHandler {
+    private final ShopService shopService = new ShopServiceImpl();
+
     @Override
     public void process(FruitTransaction fruit) {
-        SHOP_SERVICE.addFruits(fruit.getFruit(), fruit.getQuantity());
+        shopService.addFruits(fruit.getFruit(), fruit.getQuantity());
     }
 }

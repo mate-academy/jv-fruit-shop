@@ -4,11 +4,13 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.PrecessDataService;
 import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvReaderServiceImpl;
 import core.basesyntax.service.impl.CsvWriterServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.PrecessDataServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handler.BalanceHandler;
@@ -21,33 +23,28 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final ReaderService READER_SERVICE;
-    private static final WriterService WRITER_SERVICE;
-    private static final ParserService PARSER_SERVICE;
-    private static final OperationStrategy OPERATION_STRATEGY;
-    private static final PrecessDataService PRECESS_DATA_SERVICE;
-    private static Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
-    private static FruitDao fruitDao;
+    public static void main(String[] args) {
+        ReaderService readerService = new CsvReaderServiceImpl();
+        WriterService writerService = new CsvWriterServiceImpl();
+        ParserService parserService = new ParserServiceImpl();
+        ReportService reportService = new ReportServiceImpl();
+        OperationStrategy operationStrategy = new OperationStrategyImpl(getOperationHandlerMap());
+        PrecessDataService precessDataService = new PrecessDataServiceImpl(operationStrategy);
+        FruitDao fruitDao = new FruitDaoImpl();
 
-    static {
-        operationHandlerMap = new HashMap<>();
+        List<String> lines = readerService.getLines("src/main/resources/text.csv");
+        List<FruitTransaction> records = parserService.getTransactions(lines);
+        precessDataService.writeToStorage(records);
+        String report = reportService.generateReport(fruitDao.getAll());
+        writerService.write("src/main/resources/result.csv", report);
+    }
+
+    private static Map<FruitTransaction.Operation, OperationHandler> getOperationHandlerMap() {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-
-        READER_SERVICE = new CsvReaderServiceImpl("src/main/resources/text.csv");
-        WRITER_SERVICE = new CsvWriterServiceImpl("src/main/resources/result.csv");
-        PARSER_SERVICE = new ParserServiceImpl();
-        OPERATION_STRATEGY = new OperationStrategyImpl(operationHandlerMap);
-        PRECESS_DATA_SERVICE = new PrecessDataServiceImpl(OPERATION_STRATEGY);
-        fruitDao = new FruitDaoImpl();
-    }
-
-    public static void main(String[] args) {
-        List<String> lines = READER_SERVICE.getLines();
-        List<FruitTransaction> records = PARSER_SERVICE.getRecords(lines);
-        PRECESS_DATA_SERVICE.writeToStorage(records);
-        WRITER_SERVICE.write(fruitDao.getAll());
+        return operationHandlerMap;
     }
 }
