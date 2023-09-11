@@ -1,8 +1,10 @@
-package core.basesyntax;
+package core.basesyntax.operation.handlers;
 
+import core.basesyntax.FruitTransaction;
+import core.basesyntax.operation.OperationHandler;
 import java.util.Map;
 
-public class SupplyHandler implements OperationHandler {
+public class ReturnHandler implements OperationHandler {
     @Override
     public void handleTransaction(FruitTransaction transaction, Map<String, Integer> storage) {
         String fruit = transaction.getFruit();

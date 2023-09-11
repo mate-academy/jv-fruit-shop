@@ -1,5 +1,8 @@
 package core.basesyntax;
 
+import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.operation.OperationStrategy;
+import core.basesyntax.storage.Storage;
 import java.util.List;
 
 public class TransactionProcessor {

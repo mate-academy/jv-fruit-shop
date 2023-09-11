@@ -1,5 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.parser;
 
+import core.basesyntax.FruitTransaction;
 import java.util.List;
 
 public interface TransactionParser {

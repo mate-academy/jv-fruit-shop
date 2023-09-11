@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.report;
 
 import java.io.IOException;
 import java.util.Map;
