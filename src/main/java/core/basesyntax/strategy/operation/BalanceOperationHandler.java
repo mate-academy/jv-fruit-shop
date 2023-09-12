@@ -1,17 +1,17 @@
-package core.basesyntax.operationstrategy.operation;
+package core.basesyntax.strategy.operation;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 
-public class PurchaseOperationHandler implements OperationHandler {
+public class BalanceOperationHandler implements OperationHandler {
     private final StorageDao storageDao;
 
-    public PurchaseOperationHandler() {
+    public BalanceOperationHandler() {
         storageDao = new StorageDaoImpl();
     }
 
     @Override
     public void processOperation(String fruit, Integer value) {
-        storageDao.substractAmount(fruit, value);
+        storageDao.add(fruit, value);
     }
 }

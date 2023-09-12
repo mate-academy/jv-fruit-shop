@@ -1,4 +1,4 @@
-package core.basesyntax.file.reader;
+package core.basesyntax.service.reader;
 
 import java.util.List;
 

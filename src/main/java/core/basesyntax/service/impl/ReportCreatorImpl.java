@@ -1,7 +1,9 @@
-package core.basesyntax.processdata.createreport;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.service.reportcreator.ReportCreator;
+
 import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {

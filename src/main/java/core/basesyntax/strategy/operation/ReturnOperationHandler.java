@@ -1,12 +1,12 @@
-package core.basesyntax.operationstrategy.operation;
+package core.basesyntax.strategy.operation;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 
-public class SupplyOperationHandler implements OperationHandler {
+public class ReturnOperationHandler implements OperationHandler {
     private final StorageDao storageDao;
 
-    public SupplyOperationHandler() {
+    public ReturnOperationHandler() {
         storageDao = new StorageDaoImpl();
     }
 

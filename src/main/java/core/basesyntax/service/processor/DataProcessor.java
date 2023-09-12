@@ -1,4 +1,4 @@
-package core.basesyntax.processdata;
+package core.basesyntax.service.processor;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package core.basesyntax.operationstrategy.operation;
+package core.basesyntax.strategy.operation;
 
 public enum OperationType {
     B,

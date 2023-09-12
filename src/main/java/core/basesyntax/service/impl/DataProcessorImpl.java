@@ -1,9 +1,10 @@
-package core.basesyntax.processdata;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.operationstrategy.OperationStrategy;
-import core.basesyntax.operationstrategy.OperationStrategyImpl;
-import core.basesyntax.operationstrategy.operation.OperationHandler;
-import core.basesyntax.operationstrategy.operation.OperationType;
+import core.basesyntax.service.processor.DataProcessor;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.strategy.operation.OperationHandler;
+import core.basesyntax.strategy.operation.OperationType;
 import java.util.List;
 import java.util.Map;
 

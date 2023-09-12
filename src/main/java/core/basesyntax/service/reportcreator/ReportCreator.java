@@ -1,4 +1,4 @@
-package core.basesyntax.processdata.createreport;
+package core.basesyntax.service.reportcreator;
 
 public interface ReportCreator {
     String createReport();

@@ -1,4 +1,6 @@
-package core.basesyntax.file.writer;
+package core.basesyntax.service.impl;
+
+import core.basesyntax.service.writer.CsvFileWriter;
 
 import java.io.File;
 import java.io.IOException;
