@@ -1,5 +1,6 @@
-package core.basesyntax.db;
+package core.basesyntax.dao;
 
+import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
@@ -14,6 +15,10 @@ public class StorageDaoImpl implements StorageDao {
     @Override
     public void substractAmount(String product, Integer amountToDelete) {
         Integer value = Storage.STOCK.get(product);
+        if (value < amountToDelete) {
+            throw new RuntimeException("Amount of products is not enough. Available: "
+                    + value + " You want to buy: " + amountToDelete);
+        }
         value -= amountToDelete;
         add(product, value);
     }
