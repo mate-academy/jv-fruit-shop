@@ -4,7 +4,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.CsvParserService;
-import java.util.Comparator;
 import java.util.List;
 
 public class CsvParserImpl implements CsvParserService {
@@ -20,7 +19,6 @@ public class CsvParserImpl implements CsvParserService {
                 .skip(HEADER_ROW_COUNT)
                 .map(s -> s.split(SEPARATOR))
                 .map(CsvParserImpl::getByRow)
-                .sorted(Comparator.comparing(FruitTransaction::getOperation))
                 .toList();
     }
 
