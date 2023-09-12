@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.GreatReportService;
 import service.ParserService;
 import service.ReaderService;
+import service.ReportService;
 import service.WriterService;
-import service.impl.GreatReportServiceImpl;
 import service.impl.ParserServiceImpl;
 import service.impl.ReaderServiceImpl;
+import service.impl.ReportServiceImpl;
 import service.impl.WriterServiceImpl;
 import strategy.OperationStrategy;
 import strategy.TransactionHandler;
@@ -35,14 +35,14 @@ public class Main {
         transactionHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyTransactionImpl());
         OperationStrategy operationStrategy = new OperationStrategyImpl(transactionHandlerMap);
         ParserService parserService = new ParserServiceImpl();
-        List<FruitTransaction> fruitTransactions = parserService.parseFile(data);
+        List<FruitTransaction> fruitTransactions = parserService.parseLines(data);
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             TransactionHandler transactionHandler = operationStrategy
                     .get(fruitTransaction.getOperation());
-            transactionHandler.getTransaction(fruitTransaction);
+            transactionHandler.handleTransaction(fruitTransaction);
         }
-        GreatReportService greatReportService = new GreatReportServiceImpl();
-        String report = greatReportService.greatReport();
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.createReport();
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(report, TO_FILE_NAME);
     }

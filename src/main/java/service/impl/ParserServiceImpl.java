@@ -12,7 +12,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parseFile(List<String> data) {
+    public List<FruitTransaction> parseLines(List<String> data) {
         List<FruitTransaction> fruits = new ArrayList<>();
         for (int i = 1; i < data.size(); i++) {
             String[] line = data.get(i).split(SPLIT_INDEX);

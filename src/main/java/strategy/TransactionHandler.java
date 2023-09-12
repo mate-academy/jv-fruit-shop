@@ -3,5 +3,5 @@ package strategy;
 import model.FruitTransaction;
 
 public interface TransactionHandler {
-    void getTransaction(FruitTransaction transaction);
+    void handleTransaction(FruitTransaction transaction);
 }

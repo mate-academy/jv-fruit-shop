@@ -6,7 +6,7 @@ import strategy.TransactionHandler;
 
 public class BalanceTransactionImpl implements TransactionHandler {
     @Override
-    public void getTransaction(FruitTransaction transaction) {
+    public void handleTransaction(FruitTransaction transaction) {
         Warehouse.STORAGE.put(transaction.getFruit(), transaction.getQuantity());
     }
 }

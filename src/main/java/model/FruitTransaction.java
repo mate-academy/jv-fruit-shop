@@ -53,7 +53,7 @@ public class FruitTransaction {
                     }
                 }
             }
-            throw new RuntimeException("This typ of operation not exist: " + codeFromLine);
+            throw new RuntimeException("This type of operation does not exist: " + codeFromLine);
         }
     }
 }
