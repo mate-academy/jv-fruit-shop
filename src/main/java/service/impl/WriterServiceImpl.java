@@ -1,6 +1,5 @@
 package service.impl;
 
-import service.WriterService;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -8,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
     private static final String WORDS_SEPARATOR = ",";
@@ -35,10 +35,10 @@ public class WriterServiceImpl implements WriterService {
         File reportFile = new File(PATH_TO_SAVE);
         for (String line : linesList) {
             try (BufferedWriter writer = new BufferedWriter(
-                    new FileWriter(reportFile, true))){
+                    new FileWriter(reportFile, true))) {
                 writer.write(line);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Can't write data to file " + reportFile, e);
             }
         }
     }

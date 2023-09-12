@@ -1,8 +1,8 @@
 package service.impl;
 
-import strategy.OperationHandler;
 import service.OperationService;
 import service.TransactionService;
+import strategy.OperationHandler;
 
 public class TransactionServiceImpl implements TransactionService {
     private static final int ZERO_INDEX = 0;
