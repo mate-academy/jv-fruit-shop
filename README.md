@@ -6,8 +6,8 @@ The current input file is sent to the program in CSV format (it is recommended t
 Your tasks are:
 - read data from csv file
 - process these data 
-- generate a report based on processed data
-- write report to new csv file
+- generate a dao based on processed data
+- write dao to new csv file
 
 There are four activities at the store:
 ```text
@@ -56,7 +56,7 @@ Let's check in details all types of activities:
     s,banana,50
 ```
 
-### Expecting report file example
+### Expecting dao file example
 We are expecting to see how many fruits are available today after the work shift in your Fruit store. 
 ```text
     fruit,quantity
@@ -69,7 +69,7 @@ The line above means you have 152 bananas, and 90 apples in your Fruit store aft
 (this is only a recommendation, you can use other classes / approaches to solve this task at your discretion):**
 ```java
 public class FruitTransaction {
-  private Operation operation;
+  private Operation operationHandler;
   private String fruit;
   private int quantity;
 
