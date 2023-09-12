@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.converter.DataConverter;
-
 import java.util.List;
 import java.util.stream.IntStream;
 
