@@ -10,7 +10,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         int balance = Storage.getStorage().get(transaction.getFruit());
         int calculationResult = balance - transaction.getQuantity();
         if (calculationResult < 0) {
-            throw new RuntimeException("");
+            throw new RuntimeException("Insufficient fruit quantity");
         }
         Storage.getStorage().put(transaction.getFruit(), calculationResult);
     }
