@@ -10,7 +10,7 @@ import java.util.List;
 public class ReportWriterImpl implements ReportWriter {
     @Override
     public void writeReport(String reportName) {
-        String defaultText = "fruit,quantity \n";
+        String defaultText = "fruit,quantity" + System.lineSeparator();
         List<String> reportList = Storage.STORAGE
                 .entrySet()
                 .stream()
