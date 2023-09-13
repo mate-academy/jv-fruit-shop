@@ -22,16 +22,8 @@ public class Fruit {
         return operation;
     }
 
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getQuantity() {
@@ -44,10 +36,15 @@ public class Fruit {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Fruit fruit = (Fruit) o;
-        return quantity == fruit.quantity && operation == fruit.operation && Objects.equals(name, fruit.name);
+        return quantity == fruit.quantity && operation == fruit.operation
+                && Objects.equals(name, fruit.name);
     }
 
     @Override
@@ -57,20 +54,10 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{" +
-                "operation='" + operation + '\'' +
-                ", name='" + name + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "Fruit{"
+                + "operation='" + operation + '\''
+                + ", name='" + name + '\''
+                + ", quantity=" + quantity
+                + '}';
     }
-
-    /* public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        Operation(String str) {
-        }
-    }*/
 }

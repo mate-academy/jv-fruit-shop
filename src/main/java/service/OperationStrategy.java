@@ -1,7 +1,8 @@
 package service;
 
 import model.Fruit;
+import service.operation.OperationHandler;
 
 public interface OperationStrategy {
-    Fruit update(Fruit fruit);
+    OperationHandler update(Fruit fruit);
 }

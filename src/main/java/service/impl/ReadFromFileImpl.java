@@ -1,11 +1,10 @@
 package service.impl;
 
-import service.ReadFromFile;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import service.ReadFromFile;
 
 public class ReadFromFileImpl implements ReadFromFile {
     private static final String FILE_PATH = "src/main/resources/inputInfo.csv";

@@ -1,13 +1,11 @@
 package service.impl;
 
-import exception.InvalidDataException;
-import model.Fruit;
-import service.WriteToFile;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import model.Fruit;
+import service.WriteToFile;
 
 public class WriteToFileImpl implements WriteToFile {
     private static final String FILE_PATH = "src/main/resources/report.csv";

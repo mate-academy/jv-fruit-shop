@@ -1,9 +1,8 @@
 package service;
 
+import java.util.List;
 import model.Fruit;
 
-import java.util.List;
-
 public interface ConvertData {
-    List<Fruit> fruitList (List<String> inputInfo);
+    List<Fruit> fruitList(List<String> inputInfo);
 }
