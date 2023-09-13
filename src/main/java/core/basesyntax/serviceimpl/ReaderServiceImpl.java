@@ -14,9 +14,7 @@ public class ReaderServiceImpl implements ReaderService {
     public List<String> readOperations(Path pathToFile) {
         List<String> result;
         try (BufferedReader fileReader = new BufferedReader(
-                new FileReader(
-                        new File(
-                                pathToFile.toUri())))) {
+                new FileReader(new File(pathToFile.toUri())))) {
             result = fileReader.lines().skip(1).toList();
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File not found on path " + pathToFile);

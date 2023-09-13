@@ -1,23 +1,23 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseAction implements Action {
 
     @Override
-    public int action(Operation operation) {
-        int actualAmount = Storage.storage.get(new Fruit(operation.getNameOfObject()));
-        if (actualAmount < operation.getAmount()) {
+    public void action(FruitTransaction fruitTransaction) {
+        int actualAmount = Storage.storage.get(fruitTransaction.getNameOfObject());
+        if (actualAmount < fruitTransaction.getAmount()) {
             throw new RuntimeException("Not enough product "
-                    + operation.getNameOfObject()
+                    + fruitTransaction.getNameOfObject()
                     + ", actual amount is "
                     + actualAmount
                     + ", while "
-                    + operation.getAmount()
+                    + fruitTransaction.getAmount()
                     + " requested");
         }
-        return actualAmount - operation.getAmount();
+        Storage.storage.put(fruitTransaction.getNameOfObject(),
+                actualAmount - fruitTransaction.getAmount());
     }
 }

@@ -1,10 +1,11 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 
 public class BalanceAction implements Action {
     @Override
-    public int action(Operation operation) {
-        return operation.getAmount();
+    public void action(FruitTransaction fruitTransaction) {
+        Storage.storage.put(fruitTransaction.getNameOfObject(), fruitTransaction.getAmount());
     }
 }

@@ -1,7 +1,6 @@
 package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -26,11 +25,11 @@ public class WriterServiceImpl implements WriterService {
     private String createReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity\n");
-        for (Map.Entry<Fruit, Integer> entry : Storage.storage.entrySet()) {
-            stringBuilder.append(entry.getKey().getName())
+        for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
+            stringBuilder.append(entry.getKey())
                     .append(",")
                     .append(entry.getValue())
-                    .append("\n");
+                    .append(System.lineSeparator());
         }
         return stringBuilder.toString();
     }
