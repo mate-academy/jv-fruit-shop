@@ -11,15 +11,14 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String generateReport() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(REPORT_HEADER + System.lineSeparator());
-
+        StringBuilder reportLine = new StringBuilder(REPORT_HEADER)
+                .append(System.lineSeparator());
         for (Map.Entry<Fruit, Integer> row : Storage.storage.entrySet()) {
-            String reportLine = row.getKey().getName() + SEPARATOR + row.getValue()
-                    + System.lineSeparator();
-            builder.append(reportLine);
+            reportLine.append(row.getKey().getName())
+                    .append(SEPARATOR)
+                    .append(row.getValue())
+                    .append(System.lineSeparator());
         }
-
-        return builder.toString();
+        return reportLine.toString();
     }
 }

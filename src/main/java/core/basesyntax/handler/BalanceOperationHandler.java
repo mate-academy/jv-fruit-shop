@@ -1,18 +1,14 @@
 package core.basesyntax.handler;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
 public class BalanceOperationHandler implements OperationHandler {
+    private StorageDao storageDao = new StorageDaoImpl();
+
     @Override
     public void apply(FruitTransaction transaction) {
-        Fruit fruit = transaction.getFruit();
-        if (!Storage.storage.containsKey(fruit)) {
-            Storage.storage.put(fruit, transaction.getQuantity());
-        } else {
-            Integer currentQuantity = Storage.storage.get(fruit);
-            Storage.storage.put(fruit, currentQuantity + transaction.getQuantity());
-        }
+        storageDao.add(transaction.getFruit(),transaction.getQuantity());
     }
 }

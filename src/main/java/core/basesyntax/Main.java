@@ -19,10 +19,17 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE_PATH = "data.csv";
     private static final String OUTPUT_FILE_PATH = "report.csv";
+    private static Map<FruitTransaction.Operation, OperationHandler> handlerMap;
+
+    static {
+        handlerMap = new HashMap<>();
+        handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
+        handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+    }
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
-        initialize(handlerMap);
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
 
         List<String> data = new ReaderServiceImpl().readFromFile(INPUT_FILE_PATH);
@@ -36,12 +43,5 @@ public class Main {
         String report = new ReportServiceImpl().generateReport();
         new WriterServiceImpl().writeToFile(report, OUTPUT_FILE_PATH);
 
-    }
-
-    private static void initialize(Map<FruitTransaction.Operation, OperationHandler> map) {
-        map.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        map.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        map.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        map.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
     }
 }

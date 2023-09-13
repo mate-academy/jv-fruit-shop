@@ -13,7 +13,7 @@ public class ReaderServiceImpl implements ReaderService {
             List<String> data = Files.readAllLines(Paths.get(filePath));
             return data;
         } catch (IOException e) {
-            throw new RuntimeException("Can't get data from file with path: " + filePath);
+            throw new RuntimeException("Can't get data from file with path: ", e);
         }
     }
 }
