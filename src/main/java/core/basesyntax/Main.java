@@ -1,5 +1,10 @@
 package core.basesyntax;
 
+import core.basesyntax.handler.BalanceOperationHandler;
+import core.basesyntax.handler.OperationHandler;
+import core.basesyntax.handler.PurchaseOperationHandler;
+import core.basesyntax.handler.ReturnOperationHandler;
+import core.basesyntax.handler.SupplyOperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -7,11 +12,6 @@ import core.basesyntax.service.impl.TransactionParserServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
-import core.basesyntax.handler.BalanceOperationHandler;
-import core.basesyntax.handler.OperationHandler;
-import core.basesyntax.handler.PurchaseOperationHandler;
-import core.basesyntax.handler.ReturnOperationHandler;
-import core.basesyntax.handler.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
