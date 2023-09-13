@@ -10,10 +10,9 @@ public class ParserImpl implements Parser {
     private static final int OPERATION_POSITION = 0;
     private static final int FRUIT_POSITION = 1;
     private static final int AMOUNT_POSITION = 2;
-    private static final String delimiter = ",";
 
     @Override
-    public List<FruitTransaction> parseFile(List<String> fileContent) {
+    public List<FruitTransaction> parseInput(List<String> fileContent) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         FruitTransaction fruitTransaction;
 

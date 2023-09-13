@@ -1,8 +1,8 @@
 package strategy;
 
+import java.util.Map;
 import model.Operation;
 import service.OperationHandler;
-import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private final Map<Operation, OperationHandler> operationOperationHandlerMap;
