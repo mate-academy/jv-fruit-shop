@@ -1,6 +1,5 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportWriter;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
