@@ -33,7 +33,7 @@ public class FruitTransaction {
 
         private final String code;
 
-        private Operation(String code) {
+        Operation(String code) {
             this.code = code;
         }
 
