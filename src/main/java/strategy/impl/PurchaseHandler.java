@@ -1,13 +1,15 @@
 package strategy.impl;
 
-import java.util.Map;
+import database.Storage;
 import strategy.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
-
     @Override
-    public void doTransaction(Map<String, Integer> reportList, String fruit, int value) {
-        int oldValue = reportList.get(fruit);
-        reportList.put(fruit, oldValue - value);
+    public void doTransaction(String fruit, int value) {
+        if (Storage.STORAGE.get(fruit) < value) {
+            throw new RuntimeException(String.format("It's not enough %ss in storage", fruit));
+        }
+        int oldValue = Storage.STORAGE.get(fruit);
+        Storage.STORAGE.put(fruit, oldValue - value);
     }
 }

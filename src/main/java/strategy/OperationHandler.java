@@ -1,7 +1,5 @@
 package strategy;
 
-import java.util.Map;
-
 public interface OperationHandler {
-    void doTransaction(Map<String, Integer> reportList, String fruit, int value);
+    void doTransaction(String fruit, int value);
 }

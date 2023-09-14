@@ -1,8 +1,8 @@
 package service;
 
-import database.Storage;
 import java.util.List;
+import model.Transaction;
 
 public interface ReportService {
-    void createReport(List<TransactionService> transactionServiceList, Storage storage);
+    void createReport(List<Transaction> transactionServiceList);
 }

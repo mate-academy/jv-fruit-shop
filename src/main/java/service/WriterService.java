@@ -1,7 +1,7 @@
 package service;
 
-import java.util.Map;
+import java.util.List;
 
 public interface WriterService {
-    void writeReportToFile(Map<String, Integer> reportList);
+    void writeReportToFile(List<String> reportList);
 }

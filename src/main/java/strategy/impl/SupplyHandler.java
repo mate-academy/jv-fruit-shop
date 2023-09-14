@@ -1,13 +1,12 @@
 package strategy.impl;
 
-import java.util.Map;
+import database.Storage;
 import strategy.OperationHandler;
 
 public class SupplyHandler implements OperationHandler {
-
     @Override
-    public void doTransaction(Map<String, Integer> reportList, String fruit, int value) {
-        int oldValue = reportList.get(fruit);
-        reportList.put(fruit, oldValue + value);
+    public void doTransaction(String fruit, int value) {
+        int oldValue = Storage.STORAGE.get(fruit);
+        Storage.STORAGE.put(fruit, oldValue + value);
     }
 }

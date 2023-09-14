@@ -1,6 +1,6 @@
 package strategy;
 
-public enum OperationType {
+public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
@@ -8,7 +8,7 @@ public enum OperationType {
 
     private String code;
 
-    OperationType(String code) {
+    Operation(String code) {
         this.code = code;
     }
 

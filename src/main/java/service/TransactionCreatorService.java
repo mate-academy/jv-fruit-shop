@@ -1,9 +1,8 @@
 package service;
 
 import java.util.List;
+import model.Transaction;
 
 public interface TransactionCreatorService {
-    void creteTransactionsList(List<String> linesFromFile);
-
-    List<TransactionService> getListOfTransactions();
+    List<Transaction> creteTransactionsList(List<String> linesFromFile);
 }
