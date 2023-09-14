@@ -2,17 +2,17 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParseService;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParseServiceImpl implements ParseService {
-    private static final int CSV_HEAD = 1;
-    private static final String SEPARATOR = ",";
-    private static final int TRANSACTION_LENGTH = 3;
+    public static final int CSV_HEAD = 1;
+    public static final String SEPARATOR = ",";
+    public static final int TRANSACTION_LENGTH = 3;
     public static final int OPERATION_INDEX = 0;
-    private static final int FRUIT_INDEX = 1;
-    private static final int QUANTITY_INDEX = 2;
+    public static final int FRUIT_INDEX = 1;
+    public static final int QUANTITY_INDEX = 2;
+
     @Override
     public List<FruitTransaction> parse(List<String> strings) {
         if (strings != null && strings.size() > CSV_HEAD) {
@@ -23,7 +23,7 @@ public class ParseServiceImpl implements ParseService {
                     .map(this::createFruitTransaction)
                     .toList();
         }
-        return new ArrayList<>();   
+        return new ArrayList<>();
     }
 
     private FruitTransaction createFruitTransaction(String[] line) {
