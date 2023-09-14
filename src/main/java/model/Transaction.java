@@ -1,20 +1,9 @@
 package model;
 
-import service.SeparatorService;
-import service.impl.SeparatorServiceImpl;
-import strategy.OperationHandler;
-
 public class Transaction {
     private int value;
     private String fruit;
-    private OperationHandler operationHandler;
-
-    public void createTransaction(String line) {
-        SeparatorService separator = new SeparatorServiceImpl(line);
-        setFruitOperation(separator.getOperationFromLine());
-        setFruit(separator.getFruitFromLine());
-        setValue(separator.getValueFromLine());
-    }
+    private Operation operation;
 
     public int getFruitValue() {
         return value;
@@ -24,8 +13,8 @@ public class Transaction {
         return fruit;
     }
 
-    public OperationHandler getFruitOperationType() {
-        return operationHandler;
+    public Operation getFruitOperationType() {
+        return operation;
     }
 
     public void setValue(int value) {
@@ -36,7 +25,7 @@ public class Transaction {
         this.fruit = fruit;
     }
 
-    public void setFruitOperation(OperationHandler operationHandler) {
-        this.operationHandler = operationHandler;
+    public void setFruitOperation(Operation operation) {
+        this.operation = operation;
     }
 }

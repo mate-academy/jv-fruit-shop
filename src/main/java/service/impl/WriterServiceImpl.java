@@ -8,11 +8,9 @@ import java.util.List;
 import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
-    private static final String PATH_TO_SAVE = "src/main/resources/report_file.csv";
-
     @Override
-    public void writeReportToFile(List<String> reportList) {
-        File reportFile = new File(PATH_TO_SAVE);
+    public void writeReportToFile(List<String> reportList, String pathToSave) {
+        File reportFile = new File(pathToSave);
         for (String line : reportList) {
             try (BufferedWriter writer = new BufferedWriter(
                     new FileWriter(reportFile, true))) {

@@ -1,12 +1,13 @@
 package service;
 
+import java.util.List;
+import java.util.Map;
+import model.Operation;
+import model.Transaction;
 import strategy.OperationHandler;
 
 public interface SeparatorService {
 
-    OperationHandler getOperationFromLine();
-
-    String getFruitFromLine();
-
-    int getValueFromLine();
+    List<Transaction> getTransactionsList(List<String> readLines, Map<Operation,
+                                          OperationHandler> operationHandlerMap);
 }
