@@ -10,7 +10,7 @@ public class ReadFromFileImpl implements ReadFromFile {
     private static final String FILE_PATH = "src/main/resources/inputInfo.csv";
 
     @Override
-    public List<String> fileInfo() {
+    public List<String> dataToProcess() {
         List<String> fileInfo;
         try {
             fileInfo = Files.readAllLines(Path.of(FILE_PATH));

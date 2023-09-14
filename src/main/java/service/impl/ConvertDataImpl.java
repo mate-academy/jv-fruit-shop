@@ -1,9 +1,9 @@
 package service.impl;
 
-import exception.InvalidDataException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Fruit;
+import model.OperationType;
 import service.ConvertData;
 
 public class ConvertDataImpl implements ConvertData {
@@ -17,17 +17,39 @@ public class ConvertDataImpl implements ConvertData {
         List<Fruit> fruitList = new ArrayList<>();
         for (String line : inputInfo) {
             String[] splitLine = line.split(SEPARATOR);
-            if (!Character.isDigit(splitLine[QUANTITY_INDEX].charAt(OPERATION_INDEX))) {
-                continue;
+            if (splitLine.length != 3) {
+                continue; //and log or throw Exception
             }
-            int quantity = Integer.parseInt(splitLine[QUANTITY_INDEX]);
-            if (quantity < 0) {
-                throw new InvalidDataException(
-                        "Fruit quantity is not enough to process 'purchase' operation");
+            String operation = splitLine[OPERATION_INDEX].trim();
+            String fruitName = splitLine[FRUIT_NAME_INDEX];
+            String quantity = splitLine[QUANTITY_INDEX];
+            if (!quantity.matches("\\d+")) {
+                continue; //and log or throw Exception
             }
-            fruitList.add(new Fruit(splitLine[OPERATION_INDEX], splitLine[FRUIT_NAME_INDEX],
-                    quantity));
+            if (operation.length() != 1 || !OperationType.ALL_TYPES.getName().contains(operation)) {
+                continue; //and log or throw Exception
+            }
+            if (!operation.equals(OperationType.BALANCE.getName())) {
+                if (!isNameValid(fruitList, fruitName)) {
+                    continue; //and log or throw Exception
+                }
+            }
+            if (operation.equals((OperationType.BALANCE.getName()))) {
+                if (isNameValid(fruitList, fruitName)) {
+                    continue; // and log or throw Exception
+                }
+            }
+            fruitList.add(new Fruit(operation, fruitName, Integer.parseInt(quantity)));
         }
         return fruitList;
+    }
+
+    private boolean isNameValid(List<Fruit> fruitList, String fruitName) {
+        for (Fruit fruit : fruitList) {
+            if (fruit.getName().equals(fruitName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

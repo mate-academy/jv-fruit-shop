@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.Fruit;
+import model.OperationType;
 import service.ConvertData;
 import service.FruitService;
 import service.OperationStrategy;
@@ -29,15 +30,15 @@ public class Main {
         FruitDao fruitDao = new FruitDaoImpl(fruitService);
 
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put("b", new BalanceOperation(fruitDao));
-        operationHandlerMap.put("s", new SupplyOperation(fruitDao));
-        operationHandlerMap.put("p", new PurchaseOperation(fruitDao));
-        operationHandlerMap.put("r", new ReturnOperation(fruitDao));
+        operationHandlerMap.put(OperationType.BALANCE.getName(), new BalanceOperation(fruitDao));
+        operationHandlerMap.put(OperationType.SUPPLY.getName(), new SupplyOperation(fruitDao));
+        operationHandlerMap.put(OperationType.PURCHASE.getName(), new PurchaseOperation(fruitDao));
+        operationHandlerMap.put(OperationType.RETURN.getName(), new ReturnOperation(fruitDao));
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         WriteToFile writeToFile = new WriteToFileImpl();
 
-        List<String> inputInfo = readFromFile.fileInfo();
+        List<String> inputInfo = readFromFile.dataToProcess();
         List<Fruit> fruitList = convertData.fruitList(inputInfo);
         for (Fruit fruit : fruitList) {
             operationStrategy.update(fruit).operate(fruit);
