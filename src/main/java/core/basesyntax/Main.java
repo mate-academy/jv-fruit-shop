@@ -40,7 +40,7 @@ public class Main {
         writer.writeReportToFile(reportService.getReportList(), pathToSave);
     }
 
-    public static Map<Operation, OperationHandler> getOperationMap() {
+    private static Map<Operation, OperationHandler> getOperationMap() {
         Map<model.Operation, OperationHandler> operationMap = new HashMap<>();
         operationMap.put(model.Operation.BALANCE, new BalanceHandler());
         operationMap.put(model.Operation.SUPPLY, new SupplyHandler());
