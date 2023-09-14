@@ -23,7 +23,6 @@ public class TextProcessorServiceImpl implements TextProcessorService {
                             splittedLine[FRUIT_INDEX],
                             Integer.parseInt(splittedLine[AMOUNT_INDEX])));
         }
-
         return fruitTransactions;
     }
 }

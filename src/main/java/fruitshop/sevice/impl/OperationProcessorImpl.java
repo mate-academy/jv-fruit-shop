@@ -17,6 +17,5 @@ public class OperationProcessorImpl implements OperationProcessor {
     @Override
     public void manageTransaction(List<FruitTransaction> transactions) {
         transactions.forEach(t -> processedOperations.get(t.getOperation()).calculateOperation(t));
-
     }
 }

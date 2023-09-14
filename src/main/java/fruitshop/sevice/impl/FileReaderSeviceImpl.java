@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderSeviceImpl implements FileReaderService {
+    private static final int FIRST_LINE_SKIP_INDEX = 1;
 
     @Override
     public List<String> readFromFile(String fromFileName) {
         List<String> linesFromFile = new ArrayList<>();
         Path path = Paths.get(fromFileName);
         try {
-            Files.lines(path).skip(1).forEach(linesFromFile::add);
+            Files.lines(path).skip(FIRST_LINE_SKIP_INDEX).forEach(linesFromFile::add);
         } catch (IOException e) {
             throw new RuntimeException("Can`t read data from file: " + fromFileName);
         }

@@ -20,10 +20,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FROM_FILE_NAME = "src/main/resources/input.csv";
+    private static final String TO_FILE_NAME = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         FileReaderService fileReaderService = new FileReaderSeviceImpl();
-        List<String> strings = fileReaderService.readFromFile("src/main/resources/input.csv");
+        List<String> strings = fileReaderService.readFromFile(FROM_FILE_NAME);
 
         TextProcessorService textProcessorService = new TextProcessorServiceImpl();
 
@@ -44,7 +46,6 @@ public class Main {
         String report = reportProcessor.generateReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(report, "src/main/resources/report.csv");
+        fileWriterService.writeToFile(report, TO_FILE_NAME);
     }
-
 }
