@@ -24,24 +24,29 @@ import java.util.Map;
 public class Main {
     private static final String PATH_TO_INPUT_FILE = "src/main/resources/input.csv";
     private static final String PATH_TO_REPORT_FILE = "src/main/resources/report.csv";
-    private static final Map<FruitTransaction.Operation, OperationHandler> OPERATION_HANDLER_MAP =
-            Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandler(),
-                    FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
-                    FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
-                    FruitTransaction.Operation.RETURN, new ReturnHandler());
 
     public static void main(String[] args) {
         ReadService csvFileReader = new ReadServiceImpl();
         ParseService fruitTransactionParser = new ParseServiceImpl();
-        OperationStrategy operationStrategy = new OperationStrategyImpl(OPERATION_HANDLER_MAP);
-        FruitShopService fruitShopService =
-                new FruitShopServiceImpl(operationStrategy);
+        OperationStrategy operationStrategy = createOperationStrategy();
+        FruitShopService fruitShopService = new FruitShopServiceImpl(operationStrategy);
         ReportService reportService = new ReportServiceImpl();
         WriteService csvFileWriter = new WriteServiceImpl();
+
         List<String> stringFromFile = csvFileReader.readFromFile(PATH_TO_INPUT_FILE);
         List<FruitTransaction> fruitTransactions = fruitTransactionParser.parse(stringFromFile);
         fruitShopService.processData(fruitTransactions);
         String report = reportService.generateReport();
         csvFileWriter.writeToFile(PATH_TO_REPORT_FILE, report);
+    }
+
+    private static OperationStrategy createOperationStrategy() {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap =
+                Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+                        FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+                        FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+                        FruitTransaction.Operation.RETURN, new ReturnHandler());
+
+        return new OperationStrategyImpl(operationHandlerMap);
     }
 }

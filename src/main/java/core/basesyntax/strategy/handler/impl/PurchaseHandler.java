@@ -16,7 +16,7 @@ public class PurchaseHandler implements OperationHandler {
 
         if (transactionQuantity > currentQuantity) {
             throw new RuntimeException("Not enough " + fruit
-                    + "in stock. "
+                    + " in stock. "
                     + "The value is " + currentQuantity
                     + " and you want to purchase " + transactionQuantity
             );
