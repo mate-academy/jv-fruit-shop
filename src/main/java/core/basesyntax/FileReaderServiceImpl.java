@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements FileReaderService {
+public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> readData(String filePath) {
         List<String> data = new ArrayList<>();

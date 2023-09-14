@@ -20,7 +20,7 @@ public class Main {
         String inputFilePath = "input.csv";
         final String outputFilePath = "output.csv";
 
-        FileReaderService fileReaderService = new FileReaderImpl();
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> transactionData;
         try {
             transactionData = fileReaderService.readData(inputFilePath);
