@@ -21,7 +21,7 @@ public class FormaterServiceImpl implements FormaterService {
     }
 
     private FruitTransaction createFruitTransaction(String line) {
-        String[] splitedLine = line.split(SPLITERATOR);
+        String[] splitedLine = line.trim().split(SPLITERATOR);
         Operation operation = Operation.getOperationByCode(splitedLine[OPERATION_INDEX].trim());
         String fruit = splitedLine[FRUIT_NAME_INDEX].trim();
         int quantity = Integer.parseInt(splitedLine[QUANTITY_INDEX].trim());
