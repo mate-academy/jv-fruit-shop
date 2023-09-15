@@ -55,7 +55,7 @@ public class FruitTransaction {
 
         public static Operation getOperationByCode(String code) {
             return Arrays.stream(Operation.values())
-                    .filter(op -> op.getCode().equals(code))
+                    .filter(o -> o.getCode().equals(code))
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException("Can`t find operation by code"));
         }

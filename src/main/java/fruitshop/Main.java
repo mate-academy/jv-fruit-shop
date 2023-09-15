@@ -1,15 +1,15 @@
 package fruitshop;
 
 import fruitshop.model.FruitTransaction;
+import fruitshop.sevice.DataProcessorService;
 import fruitshop.sevice.FileReaderService;
 import fruitshop.sevice.FileWriterService;
 import fruitshop.sevice.OperationProcessor;
-import fruitshop.sevice.TextProcessorService;
+import fruitshop.sevice.impl.DataProcessorServiceImpl;
 import fruitshop.sevice.impl.FileReaderSeviceImpl;
 import fruitshop.sevice.impl.FileWriterServiceImpl;
 import fruitshop.sevice.impl.OperationProcessorImpl;
 import fruitshop.sevice.impl.ReportProcessorImpl;
-import fruitshop.sevice.impl.TextProcessorServiceImpl;
 import fruitshop.strategy.OperationHandler;
 import fruitshop.strategy.handlers.BalanceOperationHandler;
 import fruitshop.strategy.handlers.PurchaseOperationHandler;
@@ -27,8 +27,21 @@ public class Main {
         FileReaderService fileReaderService = new FileReaderSeviceImpl();
         List<String> strings = fileReaderService.readFromFile(FROM_FILE_NAME);
 
-        TextProcessorService textProcessorService = new TextProcessorServiceImpl();
+        DataProcessorService dataProcessorService = new DataProcessorServiceImpl();
 
+        Map<FruitTransaction.Operation, OperationHandler> processedOperations = getOperationsMap();
+        OperationProcessor operationProcessor = new OperationProcessorImpl(processedOperations);
+        List<FruitTransaction> format = dataProcessorService.processInputData(strings);
+        operationProcessor.manageTransaction(format);
+
+        ReportProcessorImpl reportProcessor = new ReportProcessorImpl();
+        String report = reportProcessor.generateReport();
+
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.writeToFile(report, TO_FILE_NAME);
+    }
+
+    private static Map<FruitTransaction.Operation, OperationHandler> getOperationsMap() {
         Map<FruitTransaction.Operation, OperationHandler> processedOperations = new HashMap<>();
         processedOperations.put(
                 FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
@@ -38,14 +51,6 @@ public class Main {
                 FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         processedOperations.put(
                 FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        OperationProcessor operationProcessor = new OperationProcessorImpl(processedOperations);
-        List<FruitTransaction> format = textProcessorService.format(strings);
-        operationProcessor.manageTransaction(format);
-
-        ReportProcessorImpl reportProcessor = new ReportProcessorImpl();
-        String report = reportProcessor.generateReport();
-
-        FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(report, TO_FILE_NAME);
+        return processedOperations;
     }
 }
