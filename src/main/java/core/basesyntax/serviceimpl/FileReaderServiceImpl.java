@@ -1,12 +1,12 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileReaderService;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class FileReaderImpl implements FileReader {
+public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> getInputData(String fileName) {
         File file = new File(fileName);

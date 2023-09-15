@@ -1,15 +1,16 @@
 package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportTextGenerator;
+import core.basesyntax.service.ReportTextGeneratorService;
 import java.util.stream.Collectors;
 
-public class ReportTextGeneratorImpl implements ReportTextGenerator {
+public class ReportTextGeneratorServiceImpl implements ReportTextGeneratorService {
     private static final String COMA = ",";
+    private static final String DEFAULT_TEXT = "fruit,quantity" + System.lineSeparator();
 
     @Override
     public String generateTextReport() {
-        return "fruit,quantity" + System.lineSeparator() + Storage.STORAGE
+        return DEFAULT_TEXT + Storage.STORAGE
                 .entrySet()
                 .stream()
                 .map(stringIntegerEntry -> stringIntegerEntry.getKey() + COMA

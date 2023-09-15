@@ -2,13 +2,13 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.DataProcessor;
-import core.basesyntax.service.ReportTextGenerator;
+import core.basesyntax.service.DataProcessorService;
+import core.basesyntax.service.ReportTextGeneratorService;
 import core.basesyntax.service.WriteService;
-import core.basesyntax.serviceimpl.DataParserImpl;
-import core.basesyntax.serviceimpl.DataProcessorImpl;
-import core.basesyntax.serviceimpl.FileReaderImpl;
-import core.basesyntax.serviceimpl.ReportTextGeneratorImpl;
+import core.basesyntax.serviceimpl.DataParserServiceImpl;
+import core.basesyntax.serviceimpl.DataProcessorServiceImpl;
+import core.basesyntax.serviceimpl.FileReaderServiceImpl;
+import core.basesyntax.serviceimpl.ReportTextGeneratorServiceImpl;
 import core.basesyntax.serviceimpl.WriteServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.handler.BalanceOperationHandler;
@@ -19,26 +19,29 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Main {
-    private static final String REPORT_PATH = "src/main/resources/reports/";
+    private static final String INPUT_REPORT_PATH = "src/main/resources/reports/inputReport.csv";
+    private static final String OUTPUT_REPORT_PATH = "src/main/resources/reports/outputReport.csv";
 
     public static void main(String[] args) {
-        FileReaderImpl reportReader = new FileReaderImpl();
-        DataParserImpl dataProcessor = new DataParserImpl();
+        FileReaderServiceImpl reportReader = new FileReaderServiceImpl();
+        DataParserServiceImpl dataProcessor = new DataParserServiceImpl();
         HashMap<Operation, OperationStrategy> operationStrategyHashMap
                 = new HashMap<>();
         operationStrategyHashMap.put(Operation.BALANCE, new BalanceOperationHandler());
         operationStrategyHashMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
         operationStrategyHashMap.put(Operation.RETURN, new ReturnOperationHandler());
         operationStrategyHashMap.put(Operation.SUPPLY, new SupplyOperationHandler());
-        DataProcessor reportGenerator = new DataProcessorImpl(operationStrategyHashMap);
+        DataProcessorService reportGenerator =
+                new DataProcessorServiceImpl(operationStrategyHashMap);
         WriteService writeService = new WriteServiceImpl();
-        ReportTextGenerator reportTextGenerator = new ReportTextGeneratorImpl();
+        ReportTextGeneratorService reportTextGeneratorService =
+                new ReportTextGeneratorServiceImpl();
 
         List<String> text = reportReader
-                .getInputData(REPORT_PATH + "inputReport.csv");
+                .getInputData(INPUT_REPORT_PATH);
         List<FruitTransaction> fruitTransactions = dataProcessor.getTransactions(text);
         reportGenerator.processData(fruitTransactions);
-        writeService.writeReport(REPORT_PATH + "outputReport.csv",
-                reportTextGenerator.generateTextReport());
+        writeService.writeReport(OUTPUT_REPORT_PATH,
+                reportTextGeneratorService.generateTextReport());
     }
 }
