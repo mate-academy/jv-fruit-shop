@@ -1,7 +1,7 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.InvalidDataException;
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 public enum Operation {
     BALANCE("b"),
@@ -23,6 +23,7 @@ public enum Operation {
         return Arrays.stream(Operation.values())
                 .filter(n -> n.getCode().equals(code))
                 .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+                .orElseThrow(
+                        () -> new InvalidDataException("File has invalid operation type: " + code));
     }
 }

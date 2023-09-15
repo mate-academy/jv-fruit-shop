@@ -4,5 +4,5 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface FormaterService {
-    List<FruitTransaction> format(List<String> stringList);
+    List<FruitTransaction> form(List<String> stringList);
 }

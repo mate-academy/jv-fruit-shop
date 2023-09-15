@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FormaterService;
 import core.basesyntax.service.ReaderService;
@@ -16,6 +17,7 @@ import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -37,9 +39,11 @@ public class Main {
         ProcessServiceImpl processService = new ProcessServiceImpl(HANDLER_MAP);
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
-        processService.manageTransactions(
-                formaterService.format(
-                        readerService.read(PATH_TO_INPUT_FILE)));
-        writerService.writeToFile(reportService.generateReport(), PATH_TO_REPORT_FILE);
+
+        List<String> inputFromFile = readerService.read(PATH_TO_INPUT_FILE);
+        List<FruitTransaction> fruitTransactions = formaterService.form(inputFromFile);
+        processService.manageTransactions(fruitTransactions);
+        String report = reportService.generateReport();
+        writerService.writeToFile(report, PATH_TO_REPORT_FILE);
     }
 }

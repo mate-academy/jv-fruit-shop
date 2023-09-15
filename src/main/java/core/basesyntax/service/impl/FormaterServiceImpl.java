@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FormaterService;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FormaterServiceImpl implements FormaterService {
@@ -14,20 +14,20 @@ public class FormaterServiceImpl implements FormaterService {
     private static final String SPLITERATOR = ",";
 
     @Override
-    public List<FruitTransaction> format(List<String> stringList) {
-        return createFormatedList(stringList);
+    public List<FruitTransaction> form(List<String> stringList) {
+        return stringList.stream()
+                .map(this::createFruitTransaction)
+                .toList();
     }
 
-    private List<FruitTransaction> createFormatedList(List<String> stringList) {
-        List<FruitTransaction> transactionsList = new ArrayList<>();
-        for (String line: stringList) {
-            String[] splitedLine = line.split(SPLITERATOR);
-            transactionsList.add(
-                    new FruitTransaction(
-                            Operation.getOperationByCode(splitedLine[OPERATION_INDEX]),
-                            splitedLine[FRUIT_NAME_INDEX],
-                            Integer.parseInt(splitedLine[QUANTITY_INDEX])));
+    private FruitTransaction createFruitTransaction(String line) {
+        String[] splitedLine = line.split(SPLITERATOR);
+        Operation operation = Operation.getOperationByCode(splitedLine[OPERATION_INDEX].trim());
+        String fruit = splitedLine[FRUIT_NAME_INDEX].trim();
+        int quantity = Integer.parseInt(splitedLine[QUANTITY_INDEX].trim());
+        if (quantity < 0) {
+            throw new InvalidDataException("Quantity can't be negative. actually: " + quantity);
         }
-        return transactionsList;
+        return new FruitTransaction(operation, fruit, quantity);
     }
 }

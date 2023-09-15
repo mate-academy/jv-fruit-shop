@@ -12,7 +12,7 @@ public class ReportServiceImpl implements ReportService {
     public String generateReport() {
         StringBuilder report = new StringBuilder()
                 .append(REPORT_HEADER).append(System.lineSeparator());
-        Storage.DATA_BASE.forEach((key, value) -> report.append(key)
+        Storage.DATABASE.forEach((key, value) -> report.append(key)
                 .append(SPLITERATOR).append(value).append(System.lineSeparator()));
         return report.toString();
     }
