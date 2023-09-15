@@ -13,8 +13,8 @@ public class ReaderServiceImpl implements ReaderService {
         List<String> readLines = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
+            reader.readLine();
             String stringLine = reader.readLine();
-            stringLine = reader.readLine();
             while (stringLine != null) {
                 readLines.add(stringLine);
                 stringLine = reader.readLine();

@@ -7,9 +7,14 @@ import strategy.OperationHandler;
 import strategy.OperationStrategy;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
+    private final OperationStrategy operationStrategy;
+
+    public TransactionProcessorImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
+
     @Override
-    public void createReport(List<Transaction> transactionsList,
-                             OperationStrategy operationStrategy) {
+    public void processTransaction(List<Transaction> transactionsList) {
         for (Transaction transaction : transactionsList) {
             OperationHandler operationHandler = operationStrategy
                     .get(transaction.getFruitOperationType());
