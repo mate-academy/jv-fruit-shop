@@ -8,7 +8,7 @@ import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvReaderServiceImpl;
 import core.basesyntax.service.impl.FormaterServiceImpl;
-import core.basesyntax.service.impl.ProcessServiceImpl;
+import core.basesyntax.service.impl.FruitStorageServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
@@ -36,13 +36,13 @@ public class Main {
     public static void main(String[] args) {
         ReaderService readerService = new CsvReaderServiceImpl();
         FormaterService formaterService = new FormaterServiceImpl();
-        ProcessServiceImpl processService = new ProcessServiceImpl(HANDLER_MAP);
+        FruitStorageServiceImpl fruitStorageService = new FruitStorageServiceImpl(HANDLER_MAP);
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
 
         List<String> inputFromFile = readerService.read(PATH_TO_INPUT_FILE);
         List<FruitTransaction> fruitTransactions = formaterService.form(inputFromFile);
-        processService.manageTransactions(fruitTransactions);
+        fruitStorageService.manageTransactions(fruitTransactions);
         String report = reportService.generateReport();
         writerService.writeToFile(report, PATH_TO_REPORT_FILE);
     }
