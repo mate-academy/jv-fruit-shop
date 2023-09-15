@@ -4,8 +4,10 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.db.Storage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
+
     @Override
     public void putFruit(String key, Integer value) {
         Storage.addFruit(key, value);
@@ -21,7 +23,11 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public Integer getFruitAmount(String fruitName) {
-
         return Storage.getQuantityBy(fruitName);
+    }
+
+    @Override
+    public Map<String, Integer> getStorage() {
+        return Storage.getFruits();
     }
 }

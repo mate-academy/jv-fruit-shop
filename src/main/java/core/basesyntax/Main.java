@@ -7,7 +7,7 @@ import core.basesyntax.impl.ReaderServiceImpl;
 import core.basesyntax.impl.ReportServiceImpl;
 import core.basesyntax.impl.ShopServiceImpl;
 import core.basesyntax.impl.StorageDaoImpl;
-import core.basesyntax.impl.WriterImpl;
+import core.basesyntax.impl.WriterServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ReportService;
@@ -18,7 +18,7 @@ import core.basesyntax.service.operation.ReturnHandler;
 import core.basesyntax.service.operation.SupplyHandler;
 import core.basesyntax.service.util.ParserReader;
 import core.basesyntax.service.util.ReaderService;
-import core.basesyntax.service.util.Writer;
+import core.basesyntax.service.util.WriterServise;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class Main {
         List<String> report = reportService.getReport();
         // Write report to file
         String fileTo = "src/main/resources/fileTo.csv";
-        Writer writeFile = new WriterImpl();
+        WriterServise writeFile = new WriterServiceImpl();
         writeFile.writeToFile(report, fileTo);
     }
 }

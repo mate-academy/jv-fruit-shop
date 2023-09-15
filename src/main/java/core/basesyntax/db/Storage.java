@@ -9,7 +9,7 @@ public class Storage {
     public Storage() {
     }
 
-    public static void addFruit(String fruitName,Integer quantity) {
+    public static void addFruit(String fruitName, Integer quantity) {
         fruits.put(fruitName, quantity);
     }
 
@@ -17,7 +17,8 @@ public class Storage {
         return fruits.get(fruitName);
     }
 
-    public static Map<String,Integer> getFruits() {
+    public static Map<String, Integer> getFruits() {
         return fruits;
     }
+
 }

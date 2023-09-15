@@ -11,7 +11,12 @@ public class BalanceHandler implements OperationHandler {
     }
 
     @Override
-    public void processTransaction(FruitTransaction record) {
+    public void putTransaction(FruitTransaction record) {
+        if (record.getQuantity() < 0) {
+            throw new RuntimeException("Wrong " + record.getFruit()
+                    + " quantity "
+                    + record.getQuantity());
+        }
         storageDao.putFruit(record.getFruit(), record.getQuantity());
     }
 }
