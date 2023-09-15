@@ -7,11 +7,12 @@ import core.basesyntax.strategy.OperationHandler;
 public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void handleTransaction(FruitTransaction transaction) {
-        if (!Storage.DATA_BASE.containsKey(transaction.getFruit())) {
+        String key = transaction.getFruit();
+        if (!Storage.DATA_BASE.containsKey(key)) {
             //just some logic
             throw new RuntimeException("No such fruit in shop");
         }
-        int newQuantity = transaction.getQuantity() + Storage.DATA_BASE.get(transaction.getFruit());
-        Storage.DATA_BASE.put(transaction.getFruit(), newQuantity);
+        int newQuantity = transaction.getQuantity() + Storage.DATA_BASE.get(key);
+        Storage.DATA_BASE.put(key, newQuantity);
     }
 }
