@@ -4,11 +4,18 @@ import core.basesyntax.handlers.BalanceOperationHandler;
 import core.basesyntax.handlers.PurchaseOperationHandler;
 import core.basesyntax.handlers.ReturnOperationHandler;
 import core.basesyntax.handlers.SupplyOperationHandler;
-import core.basesyntax.impl.*;
+import core.basesyntax.impl.DataProcessorServiceImpl;
+import core.basesyntax.impl.FileReaderServiceImpl;
+import core.basesyntax.impl.FileWriterServiceImpl;
+import core.basesyntax.impl.OperationProcessorImpl;
+import core.basesyntax.impl.ReportCreatorServiceImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.services.*;
+import core.basesyntax.services.DataProcessorService;
+import core.basesyntax.services.FileReaderService;
+import core.basesyntax.services.FileWriterService;
+import core.basesyntax.services.OperationProcessor;
+import core.basesyntax.services.ReportCreatorService;
 import core.basesyntax.strategy.OperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,22 +29,20 @@ public class FruitShop {
         List<String> lines = fileReaderService.readFromFile(INPUT_FILE_PATH);
         DataProcessorService dataProcessorService = new DataProcessorServiceImpl();
 
-        Map<FruitTransaction.Operation , OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY , new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE , new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN , new ReturnOperationHandler());
+        Map<FruitTransaction.Operation, OperationHandler> operationMap = new HashMap<>();
+        operationMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
+        operationMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        operationMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+        operationMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
 
-        OperationProcessor operationProcessor = new OperationProcessorImpl(operationHandlerMap);
+        OperationProcessor operationService = new OperationProcessorImpl(operationMap);
         List<FruitTransaction> fruitTransactionList = dataProcessorService.processInputData(lines);
-        operationProcessor.manageTransactions(fruitTransactionList);
+        operationService.manageTransactions(fruitTransactionList);
 
-        ReportProcessor reportProcessor = new ReportProcessorImpl();
-        String report = reportProcessor.createReport();
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        String report = reportCreatorService.createReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeToFile(OUTPUT_FILE_PATH , report);
-
-
+        fileWriterService.writeToFile(OUTPUT_FILE_PATH, report);
     }
 }
