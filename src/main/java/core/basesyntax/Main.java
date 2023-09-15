@@ -46,6 +46,5 @@ public class Main {
         String report = new ReportServiceImpl().generateReport();
         new WriterServiceImpl().writeToFile(report, OUTPUT_FILE_PATH);
         new OutputValidatorImpl().validateFile(OUTPUT_FILE_PATH);
-
     }
 }
