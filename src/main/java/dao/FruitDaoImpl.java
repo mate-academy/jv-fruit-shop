@@ -2,11 +2,10 @@ package dao;
 
 import database.Storage;
 import exception.InvalidDataException;
-import model.Fruit;
+import model.FruitTransaction;
 import service.FruitService;
 
 public class FruitDaoImpl implements FruitDao {
-
     private FruitService fruitService;
 
     public FruitDaoImpl(FruitService fruitService) {
@@ -14,20 +13,22 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Fruit add(Fruit fruit) {
-        Fruit newFruit = fruitService.createNewFruit(fruit.getName(), fruit.getQuantity());
-        Storage.fruits.add(newFruit);
-        return newFruit;
+    public FruitTransaction add(FruitTransaction fruitTransaction) {
+        FruitTransaction newFruitTransaction = fruitService.createNewFruit(
+                fruitTransaction.getName(), fruitTransaction.getQuantity());
+        Storage.FRUIT_DTOS.add(newFruitTransaction);
+        return newFruitTransaction;
     }
 
     @Override
-    public Fruit get(Fruit fruit) {
-        for (Fruit fruitFromStorage : Storage.fruits) {
-            if (fruitFromStorage.getName().equals(fruit.getName())) {
-                return fruitFromStorage;
+    public FruitTransaction get(FruitTransaction fruitTransaction) {
+        for (FruitTransaction fruitTransactionFromStorage : Storage.FRUIT_DTOS) {
+            if (fruitTransactionFromStorage.getName().equals(fruitTransaction.getName())) {
+                return fruitTransactionFromStorage;
             }
         }
-        throw new InvalidDataException("There is no fruit with name: " + fruit.getName());
+        throw new InvalidDataException(
+                "There is no fruit with name: " + fruitTransaction.getName());
     }
 }
 

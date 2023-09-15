@@ -2,10 +2,10 @@ package database;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.Fruit;
+import model.FruitTransaction;
 
 public class Storage {
-    public static final List<Fruit> fruits = new ArrayList<>();
+    public static final List<FruitTransaction> FRUIT_DTOS = new ArrayList<>();
 
 
 }

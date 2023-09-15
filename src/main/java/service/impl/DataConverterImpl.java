@@ -2,27 +2,27 @@ package service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.Fruit;
+import model.FruitTransaction;
 import model.OperationType;
-import service.ConvertData;
+import service.DataConverter;
 
-public class ConvertDataImpl implements ConvertData {
+public class DataConverterImpl implements DataConverter {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final String SEPARATOR = ",";
 
     @Override
-    public List<Fruit> fruitList(List<String> inputInfo) {
-        List<Fruit> fruitList = new ArrayList<>();
+    public List<FruitTransaction> fruitList(List<String> inputInfo) {
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (String line : inputInfo) {
             String[] splitLine = line.split(SEPARATOR);
             if (splitLine.length != 3) {
                 continue; //and log or throw Exception
             }
             String operation = splitLine[OPERATION_INDEX].trim();
-            String fruitName = splitLine[FRUIT_NAME_INDEX];
-            String quantity = splitLine[QUANTITY_INDEX];
+            String fruitName = splitLine[FRUIT_NAME_INDEX].trim();
+            String quantity = splitLine[QUANTITY_INDEX].trim();
             if (!quantity.matches("\\d+")) {
                 continue; //and log or throw Exception
             }
@@ -30,23 +30,24 @@ public class ConvertDataImpl implements ConvertData {
                 continue; //and log or throw Exception
             }
             if (!operation.equals(OperationType.BALANCE.getName())) {
-                if (!isNameValid(fruitList, fruitName)) {
+                if (!isNameValid(fruitTransactionList, fruitName)) {
                     continue; //and log or throw Exception
                 }
             }
             if (operation.equals((OperationType.BALANCE.getName()))) {
-                if (isNameValid(fruitList, fruitName)) {
+                if (isNameValid(fruitTransactionList, fruitName)) {
                     continue; // and log or throw Exception
                 }
             }
-            fruitList.add(new Fruit(operation, fruitName, Integer.parseInt(quantity)));
+            fruitTransactionList.add(
+                    new FruitTransaction(operation, fruitName, Integer.parseInt(quantity)));
         }
-        return fruitList;
+        return fruitTransactionList;
     }
 
-    private boolean isNameValid(List<Fruit> fruitList, String fruitName) {
-        for (Fruit fruit : fruitList) {
-            if (fruit.getName().equals(fruitName)) {
+    private boolean isNameValid(List<FruitTransaction> fruitTransactionList, String fruitName) {
+        for (FruitTransaction fruitTransaction : fruitTransactionList) {
+            if (fruitTransaction.getName().equals(fruitName)) {
                 return true;
             }
         }

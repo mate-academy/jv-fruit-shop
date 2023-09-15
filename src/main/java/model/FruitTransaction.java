@@ -2,18 +2,18 @@ package model;
 
 import java.util.Objects;
 
-public class Fruit {
+public class FruitTransaction {
     private String operation;
     private String name;
     private int quantity;
 
-    public Fruit(String operation, String name, int quantity) {
+    public FruitTransaction(String operation, String name, int quantity) {
         this.operation = operation;
         this.name = name;
         this.quantity = quantity;
     }
 
-    public Fruit(String name, int quantity) {
+    public FruitTransaction(String name, int quantity) {
         this.name = name;
         this.quantity = quantity;
     }
@@ -42,9 +42,9 @@ public class Fruit {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Fruit fruit = (Fruit) o;
-        return quantity == fruit.quantity && operation == fruit.operation
-                && Objects.equals(name, fruit.name);
+        FruitTransaction fruitTransaction = (FruitTransaction) o;
+        return quantity == fruitTransaction.quantity && operation == fruitTransaction.operation
+                && Objects.equals(name, fruitTransaction.name);
     }
 
     @Override

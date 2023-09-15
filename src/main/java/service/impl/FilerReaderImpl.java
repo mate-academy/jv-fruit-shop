@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import service.ReadFromFile;
+import service.FilerReader;
 
-public class ReadFromFileImpl implements ReadFromFile {
+public class FilerReaderImpl implements FilerReader {
     private static final String FILE_PATH = "src/main/resources/inputInfo.csv";
 
     @Override

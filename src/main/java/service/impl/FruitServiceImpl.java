@@ -1,6 +1,6 @@
 package service.impl;
 
-import model.Fruit;
+import model.FruitTransaction;
 import service.FruitService;
 
 public class FruitServiceImpl implements FruitService {
@@ -8,7 +8,7 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public Fruit createNewFruit(String name, int quantity) {
-        return new Fruit(name, quantity);
+    public FruitTransaction createNewFruit(String name, int quantity) {
+        return new FruitTransaction(name, quantity);
     }
 }

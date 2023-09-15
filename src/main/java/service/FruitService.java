@@ -1,7 +1,7 @@
 package service;
 
-import model.Fruit;
+import model.FruitTransaction;
 
 public interface FruitService {
-    Fruit createNewFruit(String name, int quantity);
+    FruitTransaction createNewFruit(String name, int quantity);
 }

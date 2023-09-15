@@ -1,10 +1,10 @@
 package dao;
 
-import model.Fruit;
+import model.FruitTransaction;
 
 public interface FruitDao {
-    Fruit add(Fruit fruit);
+    FruitTransaction add(FruitTransaction fruitTransaction);
 
-    Fruit get(Fruit fruit);
+    FruitTransaction get(FruitTransaction fruitTransaction);
 
 }

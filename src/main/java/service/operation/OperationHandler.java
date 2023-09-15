@@ -1,7 +1,7 @@
 package service.operation;
 
-import model.Fruit;
+import model.FruitTransaction;
 
 public interface OperationHandler {
-    Fruit operate(Fruit fruit);
+    FruitTransaction operate(FruitTransaction fruitTransaction);
 }

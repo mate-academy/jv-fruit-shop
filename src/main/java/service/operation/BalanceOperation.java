@@ -1,17 +1,19 @@
 package service.operation;
 
 import dao.FruitDao;
-import model.Fruit;
+import dao.FruitDaoImpl;
+import model.FruitTransaction;
+import service.impl.FruitServiceImpl;
 
 public class BalanceOperation implements OperationHandler {
     private FruitDao fruitDao;
 
-    public BalanceOperation(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
+    public BalanceOperation() {
+        this.fruitDao = new FruitDaoImpl(new FruitServiceImpl());
     }
 
     @Override
-    public Fruit operate(Fruit fruit) {
-        return fruitDao.add(fruit);
+    public FruitTransaction operate(FruitTransaction fruitTransaction) {
+        return fruitDao.add(fruitTransaction);
     }
 }
