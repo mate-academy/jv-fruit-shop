@@ -8,5 +8,5 @@ public interface StorageDao {
 
     void substractAmount(Fruit fruit, Integer amountToDelete);
 
-    Map<Fruit, Integer> get();
+    Map<Fruit, Integer> getAll();
 }

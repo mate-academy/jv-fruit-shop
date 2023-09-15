@@ -15,7 +15,7 @@ public class TransactionParserServiceImpl implements TransactionParserService {
 
     public List<FruitTransaction> parse(List<String> data) {
         List<FruitTransaction> transactions = new ArrayList<>();
-        for (int i = 1; i < data.size(); i++) {
+        for (int i = 0; i < data.size(); i++) {
             String[] fields = data.get(i).split(SEPARATOR);
 
             FruitTransaction transaction = new FruitTransaction();
@@ -23,14 +23,17 @@ public class TransactionParserServiceImpl implements TransactionParserService {
             transaction.setQuantity(Integer.parseInt(fields[QUANTITY_INDEX]));
 
             String operationValue = fields[OPERATION_INDEX];
-            FruitTransaction.Operation operation
-                    = Arrays.stream(FruitTransaction.Operation.values())
-                    .filter(v -> v.getOperation().equals(operationValue))
-                    .findFirst()
-                    .get();
+            FruitTransaction.Operation operation = getOperation(operationValue);
             transaction.setOperation(operation);
             transactions.add(transaction);
         }
         return transactions;
+    }
+
+    private FruitTransaction.Operation getOperation(String operationValue) {
+        return Arrays.stream(FruitTransaction.Operation.values())
+                .filter(v -> v.getOperation().equals(operationValue))
+                .findFirst()
+                .get();
     }
 }
