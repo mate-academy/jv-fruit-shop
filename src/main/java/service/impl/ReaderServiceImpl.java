@@ -11,8 +11,7 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> readFile(String filePath) {
         List<String> readLines = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             reader.readLine();
             String stringLine = reader.readLine();
             while (stringLine != null) {
