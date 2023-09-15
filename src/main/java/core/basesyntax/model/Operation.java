@@ -20,8 +20,8 @@ public enum Operation {
 
     public static Operation getOperationType(String code) {
         return Arrays.stream(Operation.values())
-                .filter(operation1 -> operation1.getCode().equals(code.trim()))
+                .filter(o -> o.getCode().equals(code))
                 .findFirst()
-                .get();
+                .orElseThrow(() -> new RuntimeException("Invalid operation code value: " + code));
     }
 }

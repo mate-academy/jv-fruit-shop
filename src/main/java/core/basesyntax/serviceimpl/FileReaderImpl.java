@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FileReaderImpl implements FileReader {
     @Override
-    public List<String> getTextReport(String fileName) {
+    public List<String> getInputData(String fileName) {
         File file = new File(fileName);
         try {
             return Files.readAllLines(file.toPath());

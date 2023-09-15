@@ -2,18 +2,18 @@ package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportTextGenerator;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReportTextGeneratorImpl implements ReportTextGenerator {
     private static final String COMA = ",";
 
     @Override
-    public List<String> generateTextReport() {
-        return Storage.STORAGE
+    public String generateTextReport() {
+        return "fruit,quantity" + System.lineSeparator() + Storage.STORAGE
                 .entrySet()
                 .stream()
                 .map(stringIntegerEntry -> stringIntegerEntry.getKey() + COMA
                         + stringIntegerEntry.getValue() + System.lineSeparator())
-                .toList();
+                .collect(Collectors.joining());
     }
 }

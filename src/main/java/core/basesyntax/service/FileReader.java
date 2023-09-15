@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.List;
 
 public interface FileReader {
-    List<String> getTextReport(String fileName);
+    List<String> getInputData(String fileName);
 }
