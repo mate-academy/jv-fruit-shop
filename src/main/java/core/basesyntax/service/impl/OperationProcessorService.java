@@ -6,7 +6,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class OperationProcessorService {
-
     public void process(List<FruitTransaction> transactions, OperationStrategy operationStrategy) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationStrategy.getByOperation(transaction.getOperation());

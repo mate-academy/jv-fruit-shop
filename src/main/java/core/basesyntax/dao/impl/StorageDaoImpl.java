@@ -6,7 +6,6 @@ import core.basesyntax.model.Fruit;
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
-
     @Override
     public void add(Fruit fruit, Integer value) {
         Storage.storage.put(fruit, Storage.storage.getOrDefault(fruit, 0)

@@ -2,9 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.TransactionParserService;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TransactionParserServiceImpl implements TransactionParserService {
@@ -23,17 +23,11 @@ public class TransactionParserServiceImpl implements TransactionParserService {
             transaction.setQuantity(Integer.parseInt(fields[QUANTITY_INDEX]));
 
             String operationValue = fields[OPERATION_INDEX];
-            FruitTransaction.Operation operation = getOperation(operationValue);
+
+            Operation operation = Operation.fromOperationValue(operationValue);
             transaction.setOperation(operation);
             transactions.add(transaction);
         }
         return transactions;
-    }
-
-    private FruitTransaction.Operation getOperation(String operationValue) {
-        return Arrays.stream(FruitTransaction.Operation.values())
-                .filter(v -> v.getOperation().equals(operationValue))
-                .findFirst()
-                .get();
     }
 }
