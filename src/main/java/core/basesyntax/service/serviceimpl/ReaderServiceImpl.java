@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
+    private static final int INDEX_OF_DESCRIPTION_LINE = 0;
 
     @Override
     public List<String> read(String pathToFile) {
@@ -21,7 +22,7 @@ public class ReaderServiceImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("You can`t read data from file " + pathToFile, e);
         }
-        lines.remove(0);
+        lines.remove(INDEX_OF_DESCRIPTION_LINE);
         return lines;
     }
 }
