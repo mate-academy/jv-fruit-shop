@@ -5,7 +5,7 @@ import core.basesyntax.service.ReportService;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String HEADER = "fruit,quantity\n";
+    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
 
     @Override
     public String createReport() {

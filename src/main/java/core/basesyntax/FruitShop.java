@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShop {
-    private static final String INPUT = "src/main/resources/input.csv";
-    private static final String OUTPUT = "src/main/resources/output.csv";
+    private static final String INPUT = "resources/input.csv";
+    private static final String OUTPUT = "resources/output.csv";
 
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
