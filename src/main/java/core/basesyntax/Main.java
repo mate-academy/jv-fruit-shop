@@ -1,15 +1,13 @@
 package core.basesyntax;
 
-import core.basesyntax.operation.DefaultOperationStrategy;
-import core.basesyntax.operation.OperationHandler;
-import core.basesyntax.operation.handlers.BalanceHandler;
-import core.basesyntax.operation.handlers.PurchaseHandler;
-import core.basesyntax.operation.handlers.ReturnHandler;
-import core.basesyntax.operation.handlers.SupplyHandler;
-import core.basesyntax.parser.CsvTransactionParser;
-import core.basesyntax.report.CsvReportCreator;
+import core.basesyntax.db.Storage;
+import core.basesyntax.impl.*;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.report.ReportCreator;
-import core.basesyntax.storage.Storage;
+import core.basesyntax.report.WriterService;
+import core.basesyntax.report.WriterServiceImpl;
+import core.basesyntax.service.*;
+import core.basesyntax.strategy.OperationHandler;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -46,13 +44,11 @@ public class Main {
         transactionProcessor = new TransactionProcessor(operationStrategy, storage);
         transactionProcessor.processTransactions(transactions);
 
-        ReportCreator reportCreator = new CsvReportCreator(outputFilePath);
+        WriterService writerService = new WriterServiceImpl();
+
+        ReportCreator reportCreator = new CsvReportCreator(writerService, outputFilePath);
 
         Map<String, Integer> fruitInventory = storage.getFruitInventory();
-        try {
-            reportCreator.createReport(fruitInventory, outputFilePath);
-        } catch (IOException e) {
-            System.err.println("Error creating report: " + e.getMessage());
-        }
+        reportCreator.createReport(fruitInventory, outputFilePath);
     }
 }

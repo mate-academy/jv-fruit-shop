@@ -1,7 +1,7 @@
-package core.basesyntax.operation.handlers;
+package core.basesyntax.service;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 import java.util.Map;
 
 public class PurchaseHandler implements OperationHandler {

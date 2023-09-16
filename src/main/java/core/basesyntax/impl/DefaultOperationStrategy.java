@@ -1,6 +1,8 @@
-package core.basesyntax.operation;
+package core.basesyntax.impl;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
 
 public class DefaultOperationStrategy implements OperationStrategy {

@@ -1,5 +1,6 @@
-package core.basesyntax.writer;
+package core.basesyntax.impl;
 
+import core.basesyntax.service.TextFileWriterInterface;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

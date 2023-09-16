@@ -1,4 +1,4 @@
-package core.basesyntax.writer;
+package core.basesyntax.service;
 
 import java.io.IOException;
 

@@ -1,8 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import core.basesyntax.operation.OperationHandler;
-import core.basesyntax.operation.OperationStrategy;
-import core.basesyntax.storage.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class TransactionProcessor {
