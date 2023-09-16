@@ -1,12 +1,20 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.impl.*;
+import core.basesyntax.impl.BalanceHandler;
+import core.basesyntax.impl.CsvReportCreator;
+import core.basesyntax.impl.CsvTransactionParser;
+import core.basesyntax.impl.DefaultOperationStrategy;
+import core.basesyntax.impl.FileReaderServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.report.ReportCreator;
 import core.basesyntax.report.WriterService;
 import core.basesyntax.report.WriterServiceImpl;
-import core.basesyntax.service.*;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.PurchaseHandler;
+import core.basesyntax.service.ReturnHandler;
+import core.basesyntax.service.SupplyHandler;
+import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.strategy.OperationHandler;
 import java.io.IOException;
 import java.util.HashMap;
