@@ -22,5 +22,4 @@ public class FruitTransaction {
     public OperationName getName() {
         return this.name;
     }
-
 }

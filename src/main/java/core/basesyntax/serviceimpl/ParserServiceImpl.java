@@ -6,27 +6,25 @@ import core.basesyntax.service.ParserService;
 import java.util.List;
 
 public class ParserServiceImpl implements ParserService {
-    public static final int AMOUNT = 2;
-    public static final int CODE = 0;
-    public static final int FRUIT = 1;
-    private final String separator;
-
-    public ParserServiceImpl(String separator) {
-        this.separator = separator;
-    }
+    private static final String SEPARATOR = ",";
+    private static final int AMOUNT = 2;
+    private static final int CODE = 0;
+    private static final int FRUIT = 1;
 
     @Override
     public List<FruitTransaction> parseOperations(List<String> lines) {
         return lines.stream()
                 .map(line -> {
-                    String[] splitted = line.split(separator);
-                    if (Integer.parseInt(splitted[AMOUNT]) < 0) {
+                    String[] operationData = line.split(SEPARATOR);
+                    if (Integer.parseInt(operationData[AMOUNT]) < 0) {
                         throw new IllegalArgumentException("You can't add negative "
                                 + "amount of products!");
                     }
-                    return new FruitTransaction(OperationName.getByCode(splitted[CODE]),
-                            splitted[FRUIT],
-                            Integer.parseInt(splitted[AMOUNT]));
+                    return new FruitTransaction(
+                            OperationName.getByCode(operationData[CODE]),
+                            operationData[FRUIT],
+                            Integer.parseInt(operationData[AMOUNT])
+                    );
                 })
                 .toList();
     }
