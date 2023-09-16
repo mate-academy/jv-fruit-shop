@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OperationProcessorImpl implements OperationProcessor {
-    private Map<FruitTransaction.Operation, OperationHandler> processedOperations;
+    private final Map<FruitTransaction.Operation, OperationHandler> processedOperations;
 
     public OperationProcessorImpl(
             Map<FruitTransaction.Operation, OperationHandler> processedOperations) {
@@ -16,8 +16,6 @@ public class OperationProcessorImpl implements OperationProcessor {
 
     @Override
     public void manageTransactions(List<FruitTransaction> transactions) {
-        for (FruitTransaction transaction : transactions) {
-            processedOperations.get(transaction.getOperation()).calculateOperation(transaction);
-        }
+        transactions.forEach(t -> processedOperations.get(t.getOperation()).calculateOperation(t));
     }
 }
