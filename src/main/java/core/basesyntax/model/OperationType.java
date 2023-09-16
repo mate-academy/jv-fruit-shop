@@ -8,7 +8,7 @@ public enum OperationType {
     PURCHASE("p"),
     RETURN("r");
 
-    private String name;
+    private final String name;
 
     OperationType(String name) {
         this.name = name;

@@ -5,9 +5,6 @@ import java.util.Map;
 public class Storage {
     private static Map<String, Integer> fruits;
 
-    public Storage(Map<String, Integer> fruits) {
-    }
-
     public static Map<String, Integer> getFruits() {
         return fruits;
     }

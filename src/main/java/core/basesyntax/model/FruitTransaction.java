@@ -1,9 +1,9 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private OperationType operationType;
-    private String fruitName;
-    private int amount;
+    private final OperationType operationType;
+    private final String fruitName;
+    private final int amount;
 
     public FruitTransaction(OperationType operationType, String name, int amount) {
         this.operationType = operationType;
