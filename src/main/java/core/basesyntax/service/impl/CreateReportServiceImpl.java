@@ -1,4 +1,4 @@
-package core.basesyntax.service.serviceimpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.service.CreateReportService;
 import core.basesyntax.storage.Storage;
