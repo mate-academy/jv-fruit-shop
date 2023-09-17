@@ -2,11 +2,10 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.List;
 
 public class OperationService {
-   private final OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public OperationService(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;

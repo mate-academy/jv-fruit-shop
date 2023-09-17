@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParseService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +24,12 @@ public class ParseServiceImpl implements ParseService {
     private FruitTransaction parseEachLine(String line) {
         FruitTransaction fruitTransaction = new FruitTransaction();
         String[] splitLines = line.split(DELIMITER);
-        fruitTransaction.setOperation(FruitTransaction.Operation.getOperationByCode(splitLines[OPERATION_INDEX]));
-        fruitTransaction.setFruit(splitLines[FRUIT_INDEX]);
-        fruitTransaction.setQuantity(Integer.parseInt(splitLines[QUANTITY_INDEX]));
+        fruitTransaction.setOperation(
+                FruitTransaction.Operation.getOperationByCode(splitLines[OPERATION_INDEX]));
+        fruitTransaction.setFruit(
+                splitLines[FRUIT_INDEX]);
+        fruitTransaction.setQuantity(
+                Integer.parseInt(splitLines[QUANTITY_INDEX]));
         return fruitTransaction;
     }
 }
