@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ReadService;
@@ -41,11 +42,11 @@ public class Main {
     }
 
     private static OperationStrategy createOperationStrategy() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap =
-                Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandler(),
-                        FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
-                        FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
-                        FruitTransaction.Operation.RETURN, new ReturnHandler());
+        Map<Operation, OperationHandler> operationHandlerMap =
+                Map.of(Operation.BALANCE, new BalanceHandler(),
+                        Operation.SUPPLY, new SupplyHandler(),
+                        Operation.PURCHASE, new PurchaseHandler(),
+                        Operation.RETURN, new ReturnHandler());
 
         return new OperationStrategyImpl(operationHandlerMap);
     }
