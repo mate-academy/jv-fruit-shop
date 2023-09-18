@@ -1,27 +1,28 @@
 package core.basesyntax;
 
-import core.basesyntax.service.CreateReportService;
 import core.basesyntax.service.DataProcessingService;
-import core.basesyntax.service.ReadFromFileService;
-import core.basesyntax.service.WriteToFileService;
-import core.basesyntax.service.impl.CreateReportServiceImpl;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.DataProcessingServiceImpl;
-import core.basesyntax.service.impl.ReadFromFileServiceImpl;
-import core.basesyntax.service.impl.WriteToFileServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import java.util.List;
 
 public class Main {
     private static final String PATH_TO_INPUT_FILE = "src/main/resources/input.csv";
+    private static final String PATH_TO_REPORT = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        ReadFromFileService readService = new ReadFromFileServiceImpl();
+        ReaderService readService = new ReaderServiceImpl();
         DataProcessingService processingService = new DataProcessingServiceImpl();
-        CreateReportService reportService = new CreateReportServiceImpl();
-        WriteToFileService writeService = new WriteToFileServiceImpl();
+        ReportCreatorService reportService = new ReportCreatorServiceImpl();
+        WriterService writeService = new WriterServiceImpl();
 
         List<String> list = readService.readFromFile(PATH_TO_INPUT_FILE);
         processingService.processing(list);
         String report = reportService.createReport();
-        writeService.writeToFile(report);
+        writeService.writeToFile(report, PATH_TO_REPORT);
     }
 }

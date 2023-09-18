@@ -8,6 +8,7 @@ import java.util.Map;
 public class PurchaseOperationsHandler implements OperationsHandler {
     @Override
     public void operation(FruitDto fruitDto) {
+        checkValue(fruitDto);
         for (Map.Entry<String, Integer> fruit : Storage.STORAGE.entrySet()) {
             if (fruit.getKey().equals(fruitDto.getName())) {
                 checkBalance(fruitDto, fruit.getValue());
@@ -22,6 +23,12 @@ public class PurchaseOperationsHandler implements OperationsHandler {
             throw new RuntimeException("Purchase value isn't correct. "
                                         + "Storage haven't such amount of "
                                         + fruitDto.getName());
+        }
+    }
+
+    private void checkValue(FruitDto fruitDto) {
+        if (fruitDto.getAmount() < 0) {
+            throw new RuntimeException("Purchase value can't be negative");
         }
     }
 }

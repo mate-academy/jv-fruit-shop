@@ -16,5 +16,4 @@ public class FruitDto {
     public int getAmount() {
         return amount;
     }
-
 }

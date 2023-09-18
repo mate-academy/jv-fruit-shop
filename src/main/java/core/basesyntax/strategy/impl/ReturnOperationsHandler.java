@@ -8,11 +8,18 @@ import java.util.Map;
 public class ReturnOperationsHandler implements OperationsHandler {
     @Override
     public void operation(FruitDto fruitDto) {
+        checkValue(fruitDto);
         for (Map.Entry<String, Integer> fruit : Storage.STORAGE.entrySet()) {
             if (fruit.getKey().equals(fruitDto.getName())) {
                 fruit.setValue(fruit.getValue() + fruitDto.getAmount());
                 break;
             }
+        }
+    }
+
+    private void checkValue(FruitDto fruitDto) {
+        if (fruitDto.getAmount() < 0) {
+            throw new RuntimeException("Return value can't be negative");
         }
     }
 }

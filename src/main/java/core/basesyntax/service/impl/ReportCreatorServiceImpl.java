@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.CreateReportService;
+import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.storage.Storage;
 
-public class CreateReportServiceImpl implements CreateReportService {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String REPORT_TITLE = "fruit,quantity";
     private static final String REPORT_SEPARATOR = ",";
 
