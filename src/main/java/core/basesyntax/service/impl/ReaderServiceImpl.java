@@ -11,7 +11,7 @@ public class ReaderServiceImpl implements ReaderService {
     private static final int INDEX_OF_DESCRIPTION_LINE = 0;
 
     @Override
-    public List<String> read(String pathToFile) {
+    public List<String> readFromFile(String pathToFile) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(pathToFile))) {
             String line = reader.readLine();

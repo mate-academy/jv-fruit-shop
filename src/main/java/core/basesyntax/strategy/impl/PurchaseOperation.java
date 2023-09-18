@@ -5,7 +5,6 @@ import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.Operation;
 
 public class PurchaseOperation implements Operation {
-
     @Override
     public void performOperation(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruitName();
