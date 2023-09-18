@@ -12,13 +12,9 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<String[]> parseInputData(List<String> inputData) {
         for (String action : inputData.stream().skip(NUMBER_OF_TITLE_LINES).toList()) {
-            String[] transaction = transactionParser(action);
+            String[] transaction = action.trim().split(TRANSACTION_SEPARATOR);
             transactionsList.add(transaction);
         }
         return transactionsList;
-    }
-
-    private String[] transactionParser(String transactionsLine) {
-        return transactionsLine.trim().split(TRANSACTION_SEPARATOR);
     }
 }
