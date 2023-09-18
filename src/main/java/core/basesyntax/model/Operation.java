@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 import java.util.Arrays;
 
-public enum OperationName {
+public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
@@ -10,12 +10,12 @@ public enum OperationName {
 
     private final String code;
 
-    OperationName(String code) {
+    Operation(String code) {
         this.code = code;
     }
 
-    public static OperationName getByCode(String code) {
-        return Arrays.stream(OperationName.values())
+    public static Operation getByCode(String code) {
+        return Arrays.stream(Operation.values())
                 .filter(o -> o.code.equals(code))
                 .findFirst().orElseThrow(() -> new RuntimeException("Invalid code " + code));
     }

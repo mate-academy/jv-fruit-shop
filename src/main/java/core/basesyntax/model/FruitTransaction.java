@@ -3,11 +3,11 @@ package core.basesyntax.model;
 import java.util.Objects;
 
 public class FruitTransaction {
-    private OperationName name;
+    private Operation name;
     private String nameOfObject;
     private int amount;
 
-    public FruitTransaction(OperationName name, String nameOfObject, int amount) {
+    public FruitTransaction(Operation name, String nameOfObject, int amount) {
         this.name = name;
         this.nameOfObject = nameOfObject;
         this.amount = amount;
@@ -21,7 +21,7 @@ public class FruitTransaction {
         return this.nameOfObject;
     }
 
-    public OperationName getName() {
+    public Operation getName() {
         return this.name;
     }
 

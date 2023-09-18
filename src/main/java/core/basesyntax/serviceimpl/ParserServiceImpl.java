@@ -1,7 +1,7 @@
 package core.basesyntax.serviceimpl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.OperationName;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParserService;
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class ParserServiceImpl implements ParserService {
                                 + "amount of products!");
                     }
                     return new FruitTransaction(
-                            OperationName.getByCode(operationData[CODE]),
+                            Operation.getByCode(operationData[CODE]),
                             operationData[FRUIT],
                             Integer.parseInt(operationData[AMOUNT])
                     );

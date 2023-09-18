@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterServiceImpl implements WriterService {
-
     @Override
     public void writeAll(String pathToFile) {
         ReportService reportService = new ReportServiceImpl();
