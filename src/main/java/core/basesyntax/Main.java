@@ -37,7 +37,7 @@ public class Main {
 
         OperationStrategy strategy = new OperationStrategy(operationHandlerMap);
         OperationService service = new OperationService(strategy);
-        service.toFillStorage(parsedInputData);
+        service.processOperation(parsedInputData);
 
         String report = new ReportServiceImpl().createReport();
         System.out.println(report);

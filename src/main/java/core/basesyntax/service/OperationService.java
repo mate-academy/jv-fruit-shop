@@ -11,7 +11,7 @@ public class OperationService {
         this.operationStrategy = operationStrategy;
     }
 
-    public void toFillStorage(List<FruitTransaction> transactions) {
+    public void processOperation(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             operationStrategy.get(transaction.getOperation()).handle(transaction);
         }
