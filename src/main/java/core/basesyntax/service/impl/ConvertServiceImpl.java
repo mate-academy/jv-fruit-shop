@@ -13,29 +13,15 @@ public class ConvertServiceImpl implements ConvertService {
     private static final int INDEX_BY_AMOUNT = 2;
 
     @Override
-    public List<FruitTransaction> proccesing(List<String> strings) {
+    public List<FruitTransaction> convertText(List<String> strings) {
         List<FruitTransaction> dataFruitTransaction = new ArrayList<>();
         for (int i = 0; i < strings.size(); i++) {
             String[] data = strings.get(i).split(SEPARATOR);
             dataFruitTransaction
-                    .add(new FruitTransaction(parseStringToOperation(data[INDEX_BY_TRANSACTION]),
+                    .add(new FruitTransaction(
+                            Operation.getOperationByCode(data[INDEX_BY_TRANSACTION]),
                     data[INDEX_BY_FRUIT], Integer.parseInt(data[INDEX_BY_AMOUNT])));
         }
         return dataFruitTransaction;
-    }
-
-    private Operation parseStringToOperation(String letter) {
-        switch (letter) {
-            case "b":
-                return Operation.BALANCE;
-            case "r":
-                return Operation.RETURN;
-            case "p":
-                return Operation.PURCHASE;
-            case "s":
-                return Operation.SUPPLY;
-            default:
-                throw new RuntimeException("not appropriate symbol for operation");
-        }
     }
 }

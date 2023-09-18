@@ -34,7 +34,7 @@ public class Main {
         OPERATIONS_MAPS.put(Operation.PURCHASE,new PurchaceOperation());
         OPERATIONS_MAPS.put(Operation.SUPPLY, new SupplyOperation());
         ConvertService convertService = new ConvertServiceImpl();
-        List<FruitTransaction> fruitTransactions = convertService.proccesing(strings);
+        List<FruitTransaction> fruitTransactions = convertService.convertText(strings);
         ProccessService proccessService = new ProccesServiceImpl(OPERATIONS_MAPS);
         proccessService.proccessing(fruitTransactions);
         Report report = new ReportImpl();

@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
@@ -14,5 +16,12 @@ public enum Operation {
 
     public String getCode() {
         return code;
+    }
+
+    public static Operation getOperationByCode(String code) {
+        return Arrays.stream(Operation.values())
+                .filter(o -> o.getCode().equals(code))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Can`t find operation by code"));
     }
 }
