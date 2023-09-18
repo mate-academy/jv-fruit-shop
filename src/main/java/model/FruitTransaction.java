@@ -13,10 +13,10 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public FruitTransaction(String name, int quantity) {
+    /*public FruitTransaction(String name, int quantity) {
         this.name = name;
         this.quantity = quantity;
-    }
+    }*/
 
     public String getOperation() {
         return operation;

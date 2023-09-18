@@ -1,10 +1,12 @@
 package dao;
 
-import model.FruitTransaction;
+import java.util.Map;
 
 public interface FruitDao {
-    FruitTransaction add(FruitTransaction fruitTransaction);
+    void add(String fruitName, Integer quantity);
 
-    FruitTransaction get(FruitTransaction fruitTransaction);
+    Integer get(String fruitName);
+
+    Map<String, Integer> getAll();
 
 }

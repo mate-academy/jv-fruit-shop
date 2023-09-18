@@ -7,11 +7,13 @@ import service.DataConverter;
 import service.FileReader;
 import service.FileWriter;
 import service.OperationStrategy;
+import service.ReportCreator;
 import service.impl.DataConverterImpl;
 import service.impl.FileReaderImpl;
 import service.impl.FileWriterImpl;
 import service.impl.OperationProcessorImpl;
 import service.impl.OperationStrategyImpl;
+import service.impl.ReportCreatorImpl;
 import service.operation.BalanceOperation;
 import service.operation.OperationHandler;
 import service.operation.OperationProcessor;
@@ -37,11 +39,13 @@ public class Main {
         DataConverter dataConverter = new DataConverterImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(OPERATION_HANDLER_MAP);
         OperationProcessor operationProcessor = new OperationProcessorImpl();
+        ReportCreator reportCreator = new ReportCreatorImpl();
         FileWriter fileWriter = new FileWriterImpl();
 
         List<String> inputInfo = fileReader.dataToProcess(DATA_FILE_PATH);
         List<FruitTransaction> fruitTransactionList = dataConverter.fruitList(inputInfo);
         operationProcessor.processConvertedData(fruitTransactionList, operationStrategy);
-        fileWriter.writeReport(REPORT_FILE_PATH);
+        String report = reportCreator.createReport();
+        fileWriter.writeReportToFile(REPORT_FILE_PATH, report);
     }
 }

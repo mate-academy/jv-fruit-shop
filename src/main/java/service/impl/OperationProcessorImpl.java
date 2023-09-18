@@ -10,7 +10,7 @@ public class OperationProcessorImpl implements OperationProcessor {
     public void processConvertedData(List<FruitTransaction> fruitTransactionList,
                                      OperationStrategy operationStrategy) {
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
-            operationStrategy.update(fruitTransaction).operate(fruitTransaction);
+            operationStrategy.getOperationHandler(fruitTransaction).operate(fruitTransaction);
         }
     }
 }

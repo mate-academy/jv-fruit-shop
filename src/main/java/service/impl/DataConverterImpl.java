@@ -1,5 +1,6 @@
 package service.impl;
 
+import exception.InvalidDataException;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
@@ -18,34 +19,25 @@ public class DataConverterImpl implements DataConverter {
         for (String line : inputInfo) {
             String[] splitLine = line.split(SEPARATOR);
             if (splitLine.length != 3) {
-                continue; //and log or throw Exception
+                throw new InvalidDataException("Invalid input data format: " + line);
             }
             String operation = splitLine[OPERATION_INDEX].trim();
             String fruitName = splitLine[FRUIT_NAME_INDEX].trim();
-            String quantity = splitLine[QUANTITY_INDEX].trim();
-            if (!quantity.matches("\\d+")) {
-                continue; //and log or throw Exception
-            }
-            if (operation.length() != 1 || !OperationType.ALL_TYPES.getName().contains(operation)) {
-                continue; //and log or throw Exception
-            }
-            if (!operation.equals(OperationType.BALANCE.getName())) {
-                if (!isNameValid(fruitTransactionList, fruitName)) {
-                    continue; //and log or throw Exception
-                }
-            }
+            int quantity = Integer.parseInt(splitLine[QUANTITY_INDEX].trim());
             if (operation.equals((OperationType.BALANCE.getName()))) {
-                if (isNameValid(fruitTransactionList, fruitName)) {
-                    continue; // and log or throw Exception
+                if (isFruitAlreadyStored(fruitTransactionList, fruitName)) {
+                    throw new InvalidDataException("Balance for '" + fruitName
+                            + "' is already set");
                 }
             }
             fruitTransactionList.add(
-                    new FruitTransaction(operation, fruitName, Integer.parseInt(quantity)));
+                    new FruitTransaction(operation, fruitName, quantity));
         }
         return fruitTransactionList;
     }
 
-    private boolean isNameValid(List<FruitTransaction> fruitTransactionList, String fruitName) {
+    private boolean isFruitAlreadyStored(
+            List<FruitTransaction> fruitTransactionList, String fruitName) {
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
             if (fruitTransaction.getName().equals(fruitName)) {
                 return true;

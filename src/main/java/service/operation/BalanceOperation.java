@@ -3,17 +3,12 @@ package service.operation;
 import dao.FruitDao;
 import dao.FruitDaoImpl;
 import model.FruitTransaction;
-import service.impl.FruitServiceImpl;
 
 public class BalanceOperation implements OperationHandler {
-    private FruitDao fruitDao;
-
-    public BalanceOperation() {
-        this.fruitDao = new FruitDaoImpl(new FruitServiceImpl());
-    }
+    private final FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
-    public FruitTransaction operate(FruitTransaction fruitTransaction) {
-        return fruitDao.add(fruitTransaction);
+    public void operate(FruitTransaction fruitTransaction) {
+        fruitDao.add(fruitTransaction.getName(), fruitTransaction.getQuantity());
     }
 }

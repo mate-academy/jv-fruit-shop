@@ -1,25 +1,17 @@
 package service.impl;
 
-import database.Storage;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import model.FruitTransaction;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import service.FileWriter;
 
 public class FileWriterImpl implements FileWriter {
-    private static final String TITLE = "fruit,quantity";
-
     @Override
-    public void writeReport(String filePath) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(
-                new java.io.FileWriter(filePath))) {
-            bufferedWriter.write(TITLE + System.lineSeparator());
-            for (FruitTransaction fruitTransaction : Storage.FRUIT_DTOS) {
-                bufferedWriter.write(String.format("%s,%s%s", fruitTransaction.getName(),
-                        fruitTransaction.getQuantity(), System.lineSeparator()));
-            }
+    public void writeReportToFile(String filePath, String report) {
+        try {
+            Files.writeString(Paths.get(filePath), report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file " + filePath, e);
+            throw new RuntimeException("Can't write data to file by path: " + filePath, e);
         }
     }
 }

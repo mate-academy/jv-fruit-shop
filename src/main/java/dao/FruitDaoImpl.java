@@ -2,33 +2,39 @@ package dao;
 
 import database.Storage;
 import exception.InvalidDataException;
-import model.FruitTransaction;
-import service.FruitService;
+import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-    private FruitService fruitService;
-
-    public FruitDaoImpl(FruitService fruitService) {
-        this.fruitService = fruitService;
+    @Override
+    public void add(String fruitName, Integer quantity) {
+        Storage.FRUIT_DTOS.put(fruitName, quantity);
     }
 
     @Override
-    public FruitTransaction add(FruitTransaction fruitTransaction) {
-        FruitTransaction newFruitTransaction = fruitService.createNewFruit(
-                fruitTransaction.getName(), fruitTransaction.getQuantity());
-        Storage.FRUIT_DTOS.add(newFruitTransaction);
-        return newFruitTransaction;
+    public Integer get(String fruitName) {
+        if (Storage.FRUIT_DTOS.containsKey(fruitName)) {
+            return Storage.FRUIT_DTOS.get(fruitName);
+        }
+        throw new InvalidDataException("No such fruit (' " + fruitName + " in the storage");
     }
 
     @Override
-    public FruitTransaction get(FruitTransaction fruitTransaction) {
-        for (FruitTransaction fruitTransactionFromStorage : Storage.FRUIT_DTOS) {
-            if (fruitTransactionFromStorage.getName().equals(fruitTransaction.getName())) {
-                return fruitTransactionFromStorage;
-            }
+    public Map<String, Integer> getAll() {
+        return Storage.FRUIT_DTOS;
+    }
+
+    /*@Override
+    public void add(String) {
+        Storage.FRUIT_DTOS.put(fruitTransaction.getName(), fruitTransaction.getQuantity());
+    }
+
+    @Override
+    public Integer get(FruitTransaction fruitTransaction) {
+        if (Storage.FRUIT_DTOS.containsKey(fruitTransaction.getName())) {
+            return Storage.FRUIT_DTOS.get(fruitTransaction.getName());
         }
         throw new InvalidDataException(
                 "There is no fruit with name: " + fruitTransaction.getName());
-    }
+    }*/
 }
 

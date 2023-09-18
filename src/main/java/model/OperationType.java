@@ -6,8 +6,7 @@ public enum OperationType {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
-    RETURN("r"),
-    ALL_TYPES("bspr");
+    RETURN("r");
     private final String name;
 
     OperationType(String name) {
