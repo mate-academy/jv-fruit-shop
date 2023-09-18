@@ -58,7 +58,7 @@ the most suitable for your needs.
 - Bad:  
     ```java
     public class ReaderServiceImpl implements ReaderService {
-       public List<String> filerReader() {
+       public List<String> fileReader() {
           File file = new File("src/main/resources/file.txt");
           ...
        }
@@ -67,7 +67,7 @@ the most suitable for your needs.
 - Good:  
     ```java
     public class ReaderServiceImpl implements ReaderService {
-       public List<String> filerReader(String filePath) {
+       public List<String> fileReader(String filePath) {
           File file = new File(filePath);
           ...
        }
@@ -79,12 +79,12 @@ Please provide the relative path to a resource instead.
  
 - Bad:  
     ```java
-    readerService.filerReader("C:/Users/.../my-project/src/main/resources/file.txt");
+    readerService.fileReader("C:/Users/.../my-project/src/main/resources/file.txt");
     ```  
     
 - Good:  
     ```java
-    readerService.filerReader("src/main/resources/file.txt");
+    readerService.fileReader("src/main/resources/file.txt");
     ```
       
 #### Avoid using switch-cases and if-else constructions. It is recommended to use the Strategy pattern instead. 

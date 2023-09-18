@@ -4,12 +4,12 @@ import java.util.Map;
 import model.FruitTransaction;
 import model.OperationType;
 import service.DataConverter;
+import service.FileReader;
 import service.FileWriter;
-import service.FilerReader;
 import service.OperationStrategy;
 import service.impl.DataConverterImpl;
+import service.impl.FileReaderImpl;
 import service.impl.FileWriterImpl;
-import service.impl.FilerReaderImpl;
 import service.impl.OperationProcessorImpl;
 import service.impl.OperationStrategyImpl;
 import service.operation.BalanceOperation;
@@ -20,23 +20,28 @@ import service.operation.ReturnOperation;
 import service.operation.SupplyOperation;
 
 public class Main {
+    private static final String DATA_FILE_PATH = "src/main/resources/inputInfo.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
+    private static final Map<OperationType, OperationHandler> OPERATION_HANDLER_MAP =
+            new HashMap<>();
+
+    static {
+        OPERATION_HANDLER_MAP.put(OperationType.BALANCE, new BalanceOperation());
+        OPERATION_HANDLER_MAP.put(OperationType.SUPPLY, new SupplyOperation());
+        OPERATION_HANDLER_MAP.put(OperationType.PURCHASE, new PurchaseOperation());
+        OPERATION_HANDLER_MAP.put(OperationType.RETURN, new ReturnOperation());
+    }
+
     public static void main(String[] args) {
-        FilerReader filerReader = new FilerReaderImpl();
+        FileReader fileReader = new FileReaderImpl();
         DataConverter dataConverter = new DataConverterImpl();
-
-        Map<OperationType, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(OperationType.BALANCE, new BalanceOperation());
-        operationHandlerMap.put(OperationType.SUPPLY, new SupplyOperation());
-        operationHandlerMap.put(OperationType.PURCHASE, new PurchaseOperation());
-        operationHandlerMap.put(OperationType.RETURN, new ReturnOperation());
-
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(OPERATION_HANDLER_MAP);
         OperationProcessor operationProcessor = new OperationProcessorImpl();
         FileWriter fileWriter = new FileWriterImpl();
 
-        List<String> inputInfo = filerReader.dataToProcess();
+        List<String> inputInfo = fileReader.dataToProcess(DATA_FILE_PATH);
         List<FruitTransaction> fruitTransactionList = dataConverter.fruitList(inputInfo);
         operationProcessor.processConvertedData(fruitTransactionList, operationStrategy);
-        fileWriter.writeReport();
+        fileWriter.writeReport(REPORT_FILE_PATH);
     }
 }
