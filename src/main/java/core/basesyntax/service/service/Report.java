@@ -1,4 +1,4 @@
-package core.basesyntax.service.report;
+package core.basesyntax.service.service;
 
 public interface Report {
     String report();

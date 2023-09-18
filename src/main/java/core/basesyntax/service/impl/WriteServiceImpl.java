@@ -1,5 +1,6 @@
-package core.basesyntax.service.writetofile;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.service.WriteService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

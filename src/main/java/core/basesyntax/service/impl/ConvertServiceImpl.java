@@ -2,7 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.ConvertService;
+import core.basesyntax.service.service.ConvertService;
 import java.util.ArrayList;
 import java.util.List;
 
