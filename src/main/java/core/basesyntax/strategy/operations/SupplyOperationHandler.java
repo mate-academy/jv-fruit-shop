@@ -3,7 +3,7 @@ package core.basesyntax.strategy.operations;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.FruitTransaction;
 
-public class ReturnOperation implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
     private final FruitStorageDao storageDao = new FruitStorageDao();
 
     @Override

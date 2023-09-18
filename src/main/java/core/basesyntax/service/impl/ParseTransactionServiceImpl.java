@@ -9,6 +9,7 @@ public class ParseTransactionServiceImpl implements ParseTransactionService {
     private static final int OPERATION_POSITION = 0;
     private static final int FRUIT_NAME_POSITION = 1;
     private static final int QUANTITY_POSITION = 2;
+    private static final String VALID_PATTERN = "^[1-9]\\\\d*|0$";
     private static final String CSV_STRING_SEPARATOR = ",";
 
     @Override
@@ -31,7 +32,7 @@ public class ParseTransactionServiceImpl implements ParseTransactionService {
     }
 
     private void quantityValidation(String[] stringParts) {
-        if (stringParts[QUANTITY_POSITION].matches("^[1-9]\\\\d*|0$")) {
+        if (stringParts[QUANTITY_POSITION].matches(VALID_PATTERN)) {
             throw new RuntimeException(
                     "Valid range is positive numbers, but it's: "
                             + stringParts[QUANTITY_POSITION]

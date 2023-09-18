@@ -20,5 +20,4 @@ public class ReaderServiceImpl implements ReaderService {
             throw new RuntimeException("Try to read from a file was unsuccessful: " + e);
         }
     }
-
 }

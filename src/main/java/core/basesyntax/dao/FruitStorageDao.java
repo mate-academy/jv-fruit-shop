@@ -8,18 +8,26 @@ public class FruitStorageDao {
     }
 
     public void add(String fruitName, int quantity) {
-        paramsValidator(fruitName, quantity);
+        validateParams(fruitName, quantity);
 
         FruitStorage.storage.put(fruitName, FruitStorage.storage.get(fruitName) + quantity);
     }
 
     public void subtract(String fruitName, int quantity) {
-        paramsValidator(fruitName, quantity);
+        validateParams(fruitName, quantity);
+
+        int amountAvailableInStorage = FruitStorage.storage.get(fruitName);
+        if (amountAvailableInStorage < quantity) {
+            throw new RuntimeException(
+                String.format("The available amount of %s in storage "
+                    + "is not enough for this operation: available "
+                    + "- %d, passed - %d", fruitName, amountAvailableInStorage, quantity));
+        }
 
         FruitStorage.storage.put(fruitName, FruitStorage.storage.get(fruitName) - quantity);
     }
 
-    private void paramsValidator(String fruitName, int quantity) {
+    private void validateParams(String fruitName, int quantity) {
         if (!FruitStorage.storage.containsKey(fruitName)) {
             throw new RuntimeException(
                     "PURCHASE, RETURN and SUPPLY operations can't be done before"
