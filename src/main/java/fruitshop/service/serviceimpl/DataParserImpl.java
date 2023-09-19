@@ -19,7 +19,8 @@ public class DataParserImpl implements DataParser {
         IntStream.range(1, stringList.size())
                 .forEach(i -> {
                     String[] data = stringList.get(i).split(SEPARATOR);
-                    dataLineList.add(new FruitTransaction(parseStringToOperation(data[OPERATION_INDEX]),
+                    dataLineList
+                            .add(new FruitTransaction(parseStringToOperation(data[OPERATION_INDEX]),
                             data[FRUIT_INDEX], Integer.parseInt(data[AMOUNT_INDEX])));
                 });
         return dataLineList;

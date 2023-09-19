@@ -2,22 +2,21 @@ package fruitshop;
 
 import fruitshop.model.FruitTransaction;
 import fruitshop.model.Operation;
-import fruitshop.service.FruitService;
 import fruitshop.service.DataParser;
 import fruitshop.service.FileReader;
-import fruitshop.service.ReportCreator;
 import fruitshop.service.FileWriter;
+import fruitshop.service.FruitService;
+import fruitshop.service.ReportCreator;
+import fruitshop.service.serviceimpl.DataParserImpl;
 import fruitshop.service.serviceimpl.FileReaderImpl;
 import fruitshop.service.serviceimpl.FileWriterImpl;
 import fruitshop.service.serviceimpl.FruitServiceImpl;
-import fruitshop.service.serviceimpl.DataParserImpl;
 import fruitshop.service.serviceimpl.ReportCreatorImpl;
 import fruitshop.strategy.operation.OperationHandler;
 import fruitshop.strategy.operation.impl.BalanceOperationHandler;
 import fruitshop.strategy.operation.impl.PurchaseOperationHandler;
 import fruitshop.strategy.operation.impl.ReturnOperationHandler;
 import fruitshop.strategy.operation.impl.SupplyOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

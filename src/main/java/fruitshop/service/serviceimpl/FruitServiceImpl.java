@@ -14,7 +14,8 @@ public class FruitServiceImpl implements FruitService {
     private final OperationStrategy operationStrategy;
     private OperationHandler operationService;
 
-    public FruitServiceImpl(List<FruitTransaction> dataLines, Map<Operation, OperationHandler> operationHandlerMap) {
+    public FruitServiceImpl(List<FruitTransaction> dataLines,
+                            Map<Operation, OperationHandler> operationHandlerMap) {
         operationStrategy = new OperationStrategy(operationHandlerMap);
         dataLinesObj = dataLines;
     }
