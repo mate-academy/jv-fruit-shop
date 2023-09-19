@@ -3,7 +3,6 @@ package core.basesyntax.servise.fileservice;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class FileReportWriterImp implements FileWriterUtility {
     @Override
