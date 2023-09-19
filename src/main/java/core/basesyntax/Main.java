@@ -1,10 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.operation.Operation;
-import core.basesyntax.operation.OperationBalance;
-import core.basesyntax.operation.OperationPurchase;
-import core.basesyntax.operation.OperationReturn;
-import core.basesyntax.operation.OperationSupply;
+import core.basesyntax.operation.BalanceTransactionHandler;
+import core.basesyntax.operation.PurchaseTransactionHandler;
+import core.basesyntax.operation.ReturnTransactionHandler;
+import core.basesyntax.operation.SupplyTransactionHandler;
+import core.basesyntax.operation.TransactionHandler;
 import core.basesyntax.servise.FruitStockUpdater;
 import core.basesyntax.servise.FruitStockUpdaterImp;
 import core.basesyntax.servise.FruitTransactionService;
@@ -13,9 +13,11 @@ import core.basesyntax.servise.ReportCreator;
 import core.basesyntax.servise.ReportCreatorImp;
 import core.basesyntax.servise.fileservice.FileReaderUtility;
 import core.basesyntax.servise.fileservice.FileReaderUtilityImp;
-import core.basesyntax.servise.fileservice.FileReportWriter;
 import core.basesyntax.servise.fileservice.FileReportWriterImp;
+import core.basesyntax.servise.fileservice.FileWriterUtility;
 import core.basesyntax.storage.Storage;
+
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,18 +33,20 @@ public class Main {
         FruitStockUpdater fruitStockUpdater = new FruitStockUpdaterImp(getFruitStrategy());
         fruitStockUpdater.processTransactions(fruitTransactionService
                 .createTransactionList(fileReaderUtility.retrieveFileData(pathName)));
-        ReportCreator report = new ReportCreatorImp();
-        FileReportWriter fileReportWriter = new FileReportWriterImp();
-        return fileReportWriter.writeReportToFile(report.createReport());
+        ReportCreator reportCreator = new ReportCreatorImp();
+        String pathNameReport = "src/main/java/core/basesyntax/files/report "
+                + LocalDate.now() + ".csv";
+        FileWriterUtility fileReportWriter = new FileReportWriterImp();
+        return fileReportWriter.writeReportToFile(reportCreator.createReport(), pathNameReport);
     }
 
-    private static Map<FruitTransaction.Operation, Operation> getFruitStrategy() {
+    private static Map<FruitTransaction.Operation, TransactionHandler> getFruitStrategy() {
         Storage.storage.clear();
-        Map<FruitTransaction.Operation, Operation> fruitStrategy = new HashMap<>();
-        fruitStrategy.put(FruitTransaction.Operation.BALANCE, new OperationBalance());
-        fruitStrategy.put(FruitTransaction.Operation.SUPPLY, new OperationSupply());
-        fruitStrategy.put(FruitTransaction.Operation.PURCHASE, new OperationPurchase());
-        fruitStrategy.put(FruitTransaction.Operation.RETURN, new OperationReturn());
+        Map<FruitTransaction.Operation, TransactionHandler> fruitStrategy = new HashMap<>();
+        fruitStrategy.put(FruitTransaction.Operation.BALANCE, new BalanceTransactionHandler());
+        fruitStrategy.put(FruitTransaction.Operation.SUPPLY, new SupplyTransactionHandler());
+        fruitStrategy.put(FruitTransaction.Operation.PURCHASE, new PurchaseTransactionHandler());
+        fruitStrategy.put(FruitTransaction.Operation.RETURN, new ReturnTransactionHandler());
         return fruitStrategy;
     }
 
