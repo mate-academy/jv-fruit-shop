@@ -14,5 +14,4 @@ public class OperationStrategy {
     public OperationHandler get(FruitTransaction.Operation operation) {
         return operationHandlerMap.get(operation);
     }
-
 }

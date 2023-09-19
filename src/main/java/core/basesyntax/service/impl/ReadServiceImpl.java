@@ -14,6 +14,5 @@ public class ReadServiceImpl implements ReadService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read this file " + inputFilePath);
         }
-
     }
 }
