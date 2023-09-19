@@ -17,7 +17,7 @@ public class FileReaderImpl implements FileReader {
                     .skip(HEADER_LINES_QUANTITY)
                     .toList();
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + filePath, e);
+            throw new RuntimeException("Can't read from file by path: " + filePath, e);
         }
     }
 }

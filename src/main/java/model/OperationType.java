@@ -1,6 +1,6 @@
 package model;
 
-import exception.InvalidDataException;
+import service.exception.InvalidDataException;
 
 public enum OperationType {
     BALANCE("b"),
@@ -25,6 +25,4 @@ public enum OperationType {
         }
         throw new InvalidDataException(operation + " operation doesn't exist");
     }
-    
 }
-

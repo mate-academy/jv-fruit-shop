@@ -3,22 +3,17 @@ package model;
 import java.util.Objects;
 
 public class FruitTransaction {
-    private String operation;
+    private OperationType operation;
     private String name;
     private int quantity;
 
-    public FruitTransaction(String operation, String name, int quantity) {
+    public FruitTransaction(OperationType operation, String name, int quantity) {
         this.operation = operation;
         this.name = name;
         this.quantity = quantity;
     }
 
-    /*public FruitTransaction(String name, int quantity) {
-        this.name = name;
-        this.quantity = quantity;
-    }*/
-
-    public String getOperation() {
+    public OperationType getOperation() {
         return operation;
     }
 

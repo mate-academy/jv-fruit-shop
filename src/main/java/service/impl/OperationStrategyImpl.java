@@ -15,7 +15,6 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getOperationHandler(FruitTransaction fruitTransaction) {
-        return operationHandlerMap.get(
-                OperationType.getOperation(fruitTransaction.getOperation().trim()));
+        return operationHandlerMap.get(fruitTransaction.getOperation());
     }
 }

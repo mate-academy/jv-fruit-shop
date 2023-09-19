@@ -10,7 +10,7 @@ public class ReportCreatorImpl implements ReportCreator {
     @Override
     public String createReport() {
         StringBuilder builder = new StringBuilder(TITLE + System.lineSeparator());
-        for (Map.Entry<String, Integer> fruitTransaction : Storage.FRUIT_DTOS.entrySet()) {
+        for (Map.Entry<String, Integer> fruitTransaction : Storage.STORAGE.entrySet()) {
             builder.append(String.format("%s,%s%s", fruitTransaction.getKey(),
                     fruitTransaction.getValue(), System.lineSeparator()));
         }

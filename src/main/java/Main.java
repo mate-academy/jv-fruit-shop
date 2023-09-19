@@ -38,13 +38,13 @@ public class Main {
         FileReader fileReader = new FileReaderImpl();
         DataConverter dataConverter = new DataConverterImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(OPERATION_HANDLER_MAP);
-        OperationProcessor operationProcessor = new OperationProcessorImpl();
+        OperationProcessor operationProcessor = new OperationProcessorImpl(operationStrategy);
         ReportCreator reportCreator = new ReportCreatorImpl();
         FileWriter fileWriter = new FileWriterImpl();
 
         List<String> inputInfo = fileReader.dataToProcess(DATA_FILE_PATH);
         List<FruitTransaction> fruitTransactionList = dataConverter.fruitList(inputInfo);
-        operationProcessor.processConvertedData(fruitTransactionList, operationStrategy);
+        operationProcessor.processConvertedData(fruitTransactionList);
         String report = reportCreator.createReport();
         fileWriter.writeReportToFile(REPORT_FILE_PATH, report);
     }

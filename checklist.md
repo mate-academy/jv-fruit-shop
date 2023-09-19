@@ -31,7 +31,7 @@ what feature/functional you have added.
 
 #### Don't ignore exceptions in try-catch blocks
 Don't leave `e.printStackTrace()` or `System.out.println(e.getMessage())` in the catch blocks. 
-Let's rethrow a RuntimeException with an **informative** message and exception object.
+Let's rethrow a RuntimeException with an **informative** message and service.exception object.
 
 - Good:   
     ```java

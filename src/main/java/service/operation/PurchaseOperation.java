@@ -1,9 +1,9 @@
 package service.operation;
 
-import dao.FruitDao;
-import dao.FruitDaoImpl;
-import exception.InvalidDataException;
+import database.dao.FruitDao;
+import database.dao.FruitDaoImpl;
 import model.FruitTransaction;
+import service.exception.InvalidDataException;
 
 public class PurchaseOperation implements OperationHandler {
     private final FruitDao fruitDao;
@@ -17,8 +17,8 @@ public class PurchaseOperation implements OperationHandler {
         int quantityInStorage = fruitDao.get(fruitTransaction.getName());
         int transactionQuantity = fruitTransaction.getQuantity();
         if (quantityInStorage < transactionQuantity) {
-            throw new InvalidDataException("Storage doesn't have required amount of "
-                    + fruitTransaction.getName());
+            throw new InvalidDataException("Storage doesn't have required amount of '"
+                    + fruitTransaction.getName() + "'");
         }
         fruitDao.add(fruitTransaction.getName(), quantityInStorage - transactionQuantity);
     }

@@ -1,7 +1,7 @@
 package service.operation;
 
-import dao.FruitDao;
-import dao.FruitDaoImpl;
+import database.dao.FruitDao;
+import database.dao.FruitDaoImpl;
 import model.FruitTransaction;
 
 public class SupplyOperation implements OperationHandler {

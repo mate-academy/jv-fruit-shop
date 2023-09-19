@@ -1,4 +1,4 @@
-package dao;
+package database.dao;
 
 import java.util.Map;
 
@@ -8,5 +8,4 @@ public interface FruitDao {
     Integer get(String fruitName);
 
     Map<String, Integer> getAll();
-
 }
