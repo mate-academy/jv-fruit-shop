@@ -21,14 +21,18 @@ public class Main {
     private static final HashMap<OperationType, Operation> STRATEGY_MAP = new HashMap<>();
 
     public static void main(String[] args) {
-        STRATEGY_MAP.put(OperationType.BALANCE, new BalanceOperation());
-        STRATEGY_MAP.put(OperationType.PURCHASE, new PurchaseOperation());
-        STRATEGY_MAP.put(OperationType.SUPPLY, new SupplyOperation());
-        STRATEGY_MAP.put(OperationType.RETURN, new ReturnOperation());
+        fillOutMap();
         List<String> lines = new ReaderServiceImpl().readFromFile(FILE_PATH_TO_READ);
         List<FruitTransaction> fruitTransactionList = new ParseServiceImpl().parse(lines);
         new ProcessServiceImpl().processTransactions(fruitTransactionList, STRATEGY_MAP);
         String report = new ReportCreatorServiceImpl().createReport();
         new WriteServiceImpl().writeToFile(FILE_PATH_TO_WRITE, report);
+    }
+
+    private static void fillOutMap() {
+        STRATEGY_MAP.put(OperationType.BALANCE, new BalanceOperation());
+        STRATEGY_MAP.put(OperationType.PURCHASE, new PurchaseOperation());
+        STRATEGY_MAP.put(OperationType.SUPPLY, new SupplyOperation());
+        STRATEGY_MAP.put(OperationType.RETURN, new ReturnOperation());
     }
 }
