@@ -2,10 +2,10 @@ package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operation;
-    private Fruit fruit;
+    private String fruit;
     private int quantity;
 
-    public FruitTransaction(String operationCode, Fruit fruit, int quantity) {
+    public FruitTransaction(String operationCode, String fruit, int quantity) {
         for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
             if (operation.getCode().equalsIgnoreCase(operationCode)) {
                 this.operation = operation;
@@ -23,11 +23,11 @@ public class FruitTransaction {
         this.operation = operation;
     }
 
-    public Fruit getFruit() {
+    public String getFruit() {
         return fruit;
     }
 
-    public void setFruit(Fruit fruit) {
+    public void setFruit(String fruit) {
         this.fruit = fruit;
     }
 

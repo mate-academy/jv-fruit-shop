@@ -1,10 +1,13 @@
 package core.basesyntax;
 
 import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ProcessInputService;
+import core.basesyntax.service.ProcessInputServiceImpl;
+import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.impl.CsvFileReaderService;
 import core.basesyntax.service.impl.CsvFileWriterService;
-import core.basesyntax.service.impl.CsvReportCreator;
+import core.basesyntax.service.impl.ReportCreator;
 import java.util.List;
 
 public class Main {
@@ -14,11 +17,11 @@ public class Main {
     public static void main(String[] args) {
         FileReaderService fileReaderService = new CsvFileReaderService();
         List<String> inputList = fileReaderService.readFromFile(INPUT_FILE_PATH);
-        ProcessInputService processInputService = new ProcessInputService();
+        ProcessInputService processInputService = new ProcessInputServiceImpl();
         processInputService.parseInput(inputList);
-        CsvReportCreator csvReportCreator = new CsvReportCreator();
-        String report = csvReportCreator.getReport();
-        CsvFileWriterService csvFileWriterService = new CsvFileWriterService();
+        ReportCreatorService csvReportCreator = new ReportCreator();
+        String report = csvReportCreator.createReport();
+        FileWriterService csvFileWriterService = new CsvFileWriterService();
         csvFileWriterService.writeToFile(OUTPUT_FILE_PATH, report);
     }
 }

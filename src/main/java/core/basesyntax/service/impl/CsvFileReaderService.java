@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class CsvFileReaderService implements FileReaderService {
-
     @Override
     public List<String> readFromFile(String filePath) {
         Path path = Path.of(filePath);

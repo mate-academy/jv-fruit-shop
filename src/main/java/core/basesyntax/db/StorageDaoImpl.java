@@ -1,24 +1,15 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.Fruit;
-
 public class StorageDaoImpl implements StorageDao {
-
     @Override
-    public boolean increaseFruitsAmount(Fruit fruit, int quantityToAdd) {
-        if (!Storage.fruitsMap.containsKey(fruit)) {
-            throw new RuntimeException("There is no such fruit in Storage");
-        }
+    public boolean increaseFruitsAmount(String fruit, int quantityToAdd) {
         int currentQuantity = Storage.fruitsMap.get(fruit);
         Storage.fruitsMap.put(fruit, currentQuantity + quantityToAdd);
         return true;
     }
 
     @Override
-    public boolean decreaseFruitsAmount(Fruit fruit, int quantityToSubtract) {
-        if (!Storage.fruitsMap.containsKey(fruit)) {
-            throw new RuntimeException("There is no such fruit in Storage");
-        }
+    public boolean decreaseFruitsAmount(String fruit, int quantityToSubtract) {
         int currentQuantity = Storage.fruitsMap.get(fruit);
         if (currentQuantity - quantityToSubtract < 0) {
             throw new RuntimeException("Fruit balance can`t be less than null after decreasing");
@@ -28,11 +19,18 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public boolean addNewFruit(Fruit fruit, int quantity) {
-        if (Storage.fruitsMap.containsKey(fruit)) {
-            throw new RuntimeException("Such fruit already exists, you can only add a new fruit");
-        }
+    public boolean addNewFruit(String fruit, int quantity) {
         Storage.fruitsMap.put(fruit, quantity);
         return true;
+    }
+
+    @Override
+    public boolean isInStorage(String fruit) {
+        return Storage.fruitsMap.containsKey(fruit);
+    }
+
+    @Override
+    public int getAmountOf(String fruit) {
+        return Storage.fruitsMap.get(fruit);
     }
 }
