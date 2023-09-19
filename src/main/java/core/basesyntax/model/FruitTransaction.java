@@ -9,8 +9,22 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
+    public void setOperation(String code) {
+        switch (code) {
+            case "b":
+                this.operation = Operation.BALANCE;
+                break;
+            case "s":
+                this.operation = Operation.SUPPLY;
+                break;
+            case "p":
+                this.operation = Operation.PURCHASE;
+                break;
+            case "r":
+                operation = Operation.RETURN;
+                break;
+            default:
+        }
     }
 
     public String getFruit() {
@@ -39,10 +53,6 @@ public class FruitTransaction {
 
         Operation(String code) {
             this.code = code;
-        }
-
-        public String getCode() {
-            return code;
         }
     }
 }

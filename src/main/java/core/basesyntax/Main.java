@@ -1,14 +1,13 @@
 package core.basesyntax;
 
-import core.basesyntax.service.FruitShopService;
-import core.basesyntax.service.FruitShopServiceImpl;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ReportGeneratorImpl;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        FruitShopService fruitShopService = new FruitShopServiceImpl();
-        fruitShopService.makeReport();
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        reportGenerator.makeReport();
     }
 }
 

@@ -1,31 +1,24 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.OperationHandlerBalance;
+import core.basesyntax.service.OperationHandlerIn;
+import core.basesyntax.service.OperationHandlerOut;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CalculateStrategy {
-    private int value = 0;
 
-    public void setOperation(FruitTransaction fruitTransaction,
+    public void calculate(FruitTransaction fruitTransaction,
                               FruitTransaction.Operation operation) {
-        switch (operation) {
-            case BALANCE:
-                Storage.result.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
-                break;
-            case SUPPLY:
-            case RETURN:
-                value = Storage.result.get(fruitTransaction.getFruit());
-                Storage.result.put(fruitTransaction.getFruit(), value
-                        + fruitTransaction.getQuantity());
-                break;
-            case PURCHASE:
-                value = Storage.result.get(fruitTransaction.getFruit());
-                Storage.result.put(fruitTransaction.getFruit(),
-                        value - fruitTransaction.getQuantity());
-                break;
-            default:
-                break;
-        }
-
+        Map<FruitTransaction.Operation, OperationHandler> correspondenceTable = new HashMap<>() {{
+                put(FruitTransaction.Operation.BALANCE, new OperationHandlerBalance());
+                put(FruitTransaction.Operation.SUPPLY, new OperationHandlerIn());
+                put(FruitTransaction.Operation.RETURN, new OperationHandlerIn());
+                put(FruitTransaction.Operation.PURCHASE, new OperationHandlerOut());
+            }};
+        OperationHandler handler = correspondenceTable.get(operation);
+        handler.handle(fruitTransaction);
     }
 }

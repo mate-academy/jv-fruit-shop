@@ -1,10 +1,8 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public interface FruitDao {
-    void writeToFile(String report);
-
+public interface FileReader {
     List<FruitTransaction> readFromFileToArray();
 }

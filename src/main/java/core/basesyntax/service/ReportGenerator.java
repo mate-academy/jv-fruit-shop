@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface FruitShopService {
+public interface ReportGenerator {
     void makeReport();
 }
