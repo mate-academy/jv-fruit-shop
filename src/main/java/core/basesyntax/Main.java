@@ -6,7 +6,7 @@ import core.basesyntax.service.DataConverterService;
 import core.basesyntax.service.FileWriteService;
 import core.basesyntax.service.ProccessService;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.Report;
+import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.impl.DataConverterServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriteServiceImpl;
@@ -27,15 +27,14 @@ public class Main {
 
     public static void main(String[] args) {
         ReaderService readerService = new FileReaderServiceImpl();
-        List<String> strings = readerService.readFromFile(FROM_FILE_NAME);
-        Map<Operation, OperationService> operationMapFromOperation = getOperationMap();
         DataConverterService dataConverterService = new DataConverterServiceImpl();
-        List<FruitTransaction> fruitTransactions = dataConverterService.convertText(strings);
-        ProccessService proccessService = new ProccesServiceImpl(operationMapFromOperation);
-        proccessService.proccessing(fruitTransactions);
-        Report report = new ReportCreatorServiceImpl();
-        String reportString = report.report();
+        ProccessService proccessService = new ProccesServiceImpl(getOperationMap());
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
         FileWriteService fileWriteService = new FileWriteServiceImpl();
+        List<String> strings = readerService.readFromFile(FROM_FILE_NAME);
+        List<FruitTransaction> fruitTransactions = dataConverterService.convertText(strings);
+        proccessService.proccessing(fruitTransactions);
+        String reportString = reportCreatorService.createReport();
         fileWriteService.writeToFile(reportString, TO_FILE_NAME);
     }
 
