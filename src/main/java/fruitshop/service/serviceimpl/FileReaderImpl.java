@@ -1,17 +1,16 @@
 package fruitshop.service.serviceimpl;
 
-import fruitshop.service.Reader;
+import fruitshop.service.FileReader;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements Reader {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readDataFromFile(String fileName) {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(fileName))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 lines.add(line);

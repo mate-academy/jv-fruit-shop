@@ -1,5 +1,5 @@
 package fruitshop.strategy.operation;
 
-public interface OperationService {
+public interface OperationHandler {
     int doSomeOperation(int currentAmount, int amount);
 }

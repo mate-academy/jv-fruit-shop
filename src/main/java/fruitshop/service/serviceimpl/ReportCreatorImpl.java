@@ -1,9 +1,9 @@
 package fruitshop.service.serviceimpl;
 
-import fruitshop.service.Report;
+import fruitshop.service.ReportCreator;
 import fruitshop.storage.Storage;
 
-public class ReportImpl implements Report {
+public class ReportCreatorImpl implements ReportCreator {
     private static final String TYPES = "fruit,quantity"
             + System.lineSeparator();
     private static final String SEPARATOR = ",";

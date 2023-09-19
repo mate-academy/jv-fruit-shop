@@ -2,6 +2,6 @@ package fruitshop.service;
 
 import java.util.List;
 
-public interface Reader {
+public interface FileReader {
     List<String> readDataFromFile(String fileName);
 }

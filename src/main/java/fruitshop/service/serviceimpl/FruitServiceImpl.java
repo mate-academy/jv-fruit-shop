@@ -1,25 +1,27 @@
 package fruitshop.service.serviceimpl;
 
-import fruitshop.model.DataLine;
+import fruitshop.model.FruitTransaction;
+import fruitshop.model.Operation;
 import fruitshop.service.FruitService;
 import fruitshop.storage.Storage;
 import fruitshop.strategy.OperationStrategy;
-import fruitshop.strategy.operation.OperationService;
+import fruitshop.strategy.operation.OperationHandler;
 import java.util.List;
+import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
-    private final List<DataLine> dataLinesObj;
+    private final List<FruitTransaction> dataLinesObj;
     private final OperationStrategy operationStrategy;
-    private OperationService operationService;
+    private OperationHandler operationService;
 
-    public FruitServiceImpl(List<DataLine> dataLines) {
-        operationStrategy = new OperationStrategy();
+    public FruitServiceImpl(List<FruitTransaction> dataLines, Map<Operation, OperationHandler> operationHandlerMap) {
+        operationStrategy = new OperationStrategy(operationHandlerMap);
         dataLinesObj = dataLines;
     }
 
     public void processFruits() {
         dataLinesObj.stream()
-                .map(DataLine::getFruit)
+                .map(FruitTransaction::getFruit)
                 .distinct()
                 .forEach(f -> Storage.getStorage().put(f, 0));
         countFruits();
@@ -27,13 +29,9 @@ public class FruitServiceImpl implements FruitService {
 
     private void countFruits() {
         dataLinesObj.forEach(l -> {
-            operationService = operationStrategy.getCertainOperation(l.getOperation());
+            operationService = operationStrategy.getOperationHandler(l.getOperation());
             int newAmount = operationService.doSomeOperation(Storage.getStorage().get(l.getFruit()),
                     l.getAmount());
-            if (newAmount < 0) {
-                throw new RuntimeException("Invalid data for amount, it should be more than 0."
-                        + " Amounts: " + newAmount);
-            }
             Storage.getStorage().put(l.getFruit(), newAmount);
         });
     }

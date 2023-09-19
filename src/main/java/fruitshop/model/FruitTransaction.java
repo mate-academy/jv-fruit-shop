@@ -1,11 +1,11 @@
 package fruitshop.model;
 
-public class DataLine {
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int amount;
 
-    public DataLine(Operation operation, String fruit, int amount) {
+    public FruitTransaction(Operation operation, String fruit, int amount) {
         this.operation = operation;
         this.fruit = fruit;
         this.amount = amount;
