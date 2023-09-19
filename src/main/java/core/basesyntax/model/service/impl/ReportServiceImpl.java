@@ -1,7 +1,6 @@
 package core.basesyntax.model.service.impl;
 
 import core.basesyntax.dao.FruitStorageDao;
-import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.service.ReportService;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,7 +8,11 @@ import java.util.stream.Collectors;
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity\n";
     private static final String ELEMENT_DELIMITER = ",";
-    private final FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
+    private FruitStorageDao fruitStorageDao;
+
+    public ReportServiceImpl(FruitStorageDao fruitStorageDao) {
+        this.fruitStorageDao = fruitStorageDao;
+    }
 
     @Override
     public String createReport() {
@@ -18,7 +21,7 @@ public class ReportServiceImpl implements ReportService {
         String report = fruitQuantities.entrySet()
                 .stream()
                 .map(entry -> entry.getKey() + ELEMENT_DELIMITER + entry.getValue())
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(System.lineSeparator()));
 
         return HEADER + report;
     }
