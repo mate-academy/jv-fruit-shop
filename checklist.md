@@ -1,4 +1,4 @@
-## Common mistakes (jv-fruit-shop)
+## Common mistakes (jv-fruitTransaction-shop)
 
 #### Don't begin class or method implementation with empty line. 
 Remove all redundant empty lines, be careful :)
@@ -31,7 +31,7 @@ what feature/functional you have added.
 
 #### Don't ignore exceptions in try-catch blocks
 Don't leave `e.printStackTrace()` or `System.out.println(e.getMessage())` in the catch blocks. 
-Let's rethrow a RuntimeException with an **informative** message and exception object.
+Let's rethrow a RuntimeException with an **informative** message and service.exception object.
 
 - Good:   
     ```java
@@ -47,7 +47,7 @@ Remember, if you are using classes that implement an AutoCloseable interface, we
 Hide inner class elements with the help of access modifiers. It's a bad practice to make your class exposed.
 
 #### Use data structures from the Collection framework
-In order to represent fruit storage you may use already existing data structures, think of the one that will be 
+In order to represent fruitTransaction storage you may use already existing data structures, think of the one that will be 
 the most suitable for your needs.
 
 #### Place the input and output files into the `src/main/resources` folder.
@@ -58,7 +58,7 @@ the most suitable for your needs.
 - Bad:  
     ```java
     public class ReaderServiceImpl implements ReaderService {
-       public List<String> readFromFile() {
+       public List<String> fileReader() {
           File file = new File("src/main/resources/file.txt");
           ...
        }
@@ -67,7 +67,7 @@ the most suitable for your needs.
 - Good:  
     ```java
     public class ReaderServiceImpl implements ReaderService {
-       public List<String> readFromFile(String filePath) {
+       public List<String> fileReader(String filePath) {
           File file = new File(filePath);
           ...
        }
@@ -79,12 +79,12 @@ Please provide the relative path to a resource instead.
  
 - Bad:  
     ```java
-    readerService.readFromFile("C:/Users/.../my-project/src/main/resources/file.txt");
+    readerService.fileReader("C:/Users/.../my-project/src/main/resources/file.txt");
     ```  
     
 - Good:  
     ```java
-    readerService.readFromFile("src/main/resources/file.txt");
+    readerService.fileReader("src/main/resources/file.txt");
     ```
       
 #### Avoid using switch-cases and if-else constructions. It is recommended to use the Strategy pattern instead. 
