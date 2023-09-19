@@ -1,16 +1,16 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataProcessorService;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.ProcessingDataService;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.List;
 
-public class ProcessingDataServiceImpl implements ProcessingDataService {
+public class DataProcessorServiceImpl implements DataProcessorService {
     private static final String DELIMITER = ",";
     private OperationStrategy operationStrategy;
 
-    public ProcessingDataServiceImpl(OperationStrategy operationStrategy) {
+    public DataProcessorServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 

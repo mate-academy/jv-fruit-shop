@@ -1,16 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.GeneratingReportService;
+import core.basesyntax.service.DataProcessorService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.OperationStrategyImpl;
-import core.basesyntax.service.ProcessingDataService;
-import core.basesyntax.service.ReadingFromCsvFileService;
-import core.basesyntax.service.WritingIntoCsvFileService;
-import core.basesyntax.service.impl.GeneratingReportServiceImpl;
-import core.basesyntax.service.impl.ProcessingDataServiceImpl;
-import core.basesyntax.service.impl.ReadingFromCsvFileServiceImpl;
-import core.basesyntax.service.impl.WritingIntoCsvFileServiceImpl;
+import core.basesyntax.service.ReportGeneratorService;
+import core.basesyntax.service.impl.DataProcessorServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.service.strategy.impl.BuyOperationHandler;
@@ -29,16 +29,16 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        ReadingFromCsvFileService readingFromCsvFileService = new ReadingFromCsvFileServiceImpl();
-        List<String> inputData = readingFromCsvFileService.readFromFile(
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        List<String> inputData = fileReaderService.readFromFile(
                 "src/main/resources/fruit_shop_input.csv");
 
-        ProcessingDataService processingDataService =
-                new ProcessingDataServiceImpl(operationStrategy);
-        processingDataService.updateDataInStorage(inputData);
-        GeneratingReportService generatingReportService = new GeneratingReportServiceImpl();
-        List<String> report = generatingReportService.generateReport();
-        WritingIntoCsvFileService writingIntoCsvFileService = new WritingIntoCsvFileServiceImpl();
-        writingIntoCsvFileService.writeIntoFile(report,"src/main/resources/fruit_shop_results.csv");
+        DataProcessorService dataProcessorService =
+                new DataProcessorServiceImpl(operationStrategy);
+        dataProcessorService.updateDataInStorage(inputData);
+        ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
+        List<String> report = reportGeneratorService.generateReport();
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.writeIntoFile(report, "src/main/resources/fruit_shop_results.csv");
     }
 }

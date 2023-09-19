@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.GeneratingReportService;
+import core.basesyntax.service.ReportGeneratorService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class GeneratingReportServiceImpl implements GeneratingReportService {
+public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     private static final String HEADER = "fruit,quantity";
     private static final String DELIMITER = ",";
 
