@@ -10,7 +10,6 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
     @Override
     public String createReport() {
         StringBuilder builder = new StringBuilder();
-
         builder.append(REPORT_TITLE);
         Storage.STORAGE.entrySet()
                        .forEach(store -> builder.append(System.lineSeparator())

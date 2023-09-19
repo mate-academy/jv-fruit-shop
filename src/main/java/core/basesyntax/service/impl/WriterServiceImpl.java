@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class WriterServiceImpl implements WriterService {
-
     @Override
     public void writeToFile(String report, String pathToReportFile) {
         Path path = Paths.get(pathToReportFile);
