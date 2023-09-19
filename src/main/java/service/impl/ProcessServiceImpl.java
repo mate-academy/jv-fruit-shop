@@ -5,12 +5,12 @@ import java.util.Map;
 import model.ActivityType;
 import model.FruitTransaction;
 import service.ProcessService;
-import strategy.StoreOperationsHandler;
+import strategy.OperationsHandler;
 
 public class ProcessServiceImpl implements ProcessService {
-    private Map<ActivityType, StoreOperationsHandler> processedStoreHandler;
+    private Map<ActivityType, OperationsHandler> processedStoreHandler;
 
-    public ProcessServiceImpl(Map<ActivityType, StoreOperationsHandler> storeHandler) {
+    public ProcessServiceImpl(Map<ActivityType, OperationsHandler> storeHandler) {
         this.processedStoreHandler = storeHandler;
     }
 

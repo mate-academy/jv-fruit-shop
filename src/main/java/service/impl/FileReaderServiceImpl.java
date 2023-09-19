@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import service.FileReaderService;
 
-public class ReaderServiceImpl implements FileReaderService {
+public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> readFromFileName(String fileName) {
         List<String> lines = new ArrayList<>();

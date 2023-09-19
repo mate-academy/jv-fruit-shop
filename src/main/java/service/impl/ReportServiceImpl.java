@@ -9,7 +9,7 @@ public class ReportServiceImpl implements ReportService {
     private static final String COMMA = ",";
 
     @Override
-    public String report() {
+    public String createReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(FIRST_RESULT_LINE).append(System.lineSeparator());
         for (Map.Entry<String, Integer> fruits : Storage.getStorage().entrySet()) {

@@ -2,9 +2,9 @@ package strategy.impl;
 
 import model.FruitTransaction;
 import storage.Storage;
-import strategy.StoreOperationsHandler;
+import strategy.OperationsHandler;
 
-public class BalanceStoreOperationsHandler implements StoreOperationsHandler {
+public class BalanceOperationsHandler implements OperationsHandler {
 
     @Override
     public void useOperation(FruitTransaction transaction) {

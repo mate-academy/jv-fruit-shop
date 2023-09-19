@@ -2,9 +2,9 @@ package strategy.impl;
 
 import model.FruitTransaction;
 import storage.Storage;
-import strategy.StoreOperationsHandler;
+import strategy.OperationsHandler;
 
-public class SupplyStoreOperationsHandler implements StoreOperationsHandler {
+public class SupplyOperationsHandler implements OperationsHandler {
     @Override
     public void useOperation(FruitTransaction transaction) {
         int balance = Storage.getStorage().get(transaction.getName());
