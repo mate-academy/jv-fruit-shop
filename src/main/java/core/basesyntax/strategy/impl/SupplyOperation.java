@@ -5,7 +5,6 @@ import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationService;
 
 public class SupplyOperation implements OperationService {
-
     @Override
     public void doOperation(FruitTransaction fruitTransaction) {
         int balance = Storage.getStorage().get(fruitTransaction.getFruit());

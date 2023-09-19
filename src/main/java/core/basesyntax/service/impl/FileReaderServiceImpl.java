@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.service.ReaderService;
+import core.basesyntax.service.ReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReaderServiceImpl implements ReaderService {
+public class FileReaderServiceImpl implements ReaderService {
     private static final int FIRST_LINE = 1;
 
     @Override
@@ -23,4 +23,3 @@ public class ReaderServiceImpl implements ReaderService {
         return linesFromFile;
     }
 }
-
