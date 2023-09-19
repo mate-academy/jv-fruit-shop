@@ -1,10 +1,10 @@
 package service.impl;
 
 import java.util.Map;
-import service.ReportService;
+import service.ReportCreatorService;
 import storage.Storage;
 
-public class ReportServiceImpl implements ReportService {
+public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String FIRST_RESULT_LINE = "fruit,quantity";
     private static final String COMMA = ",";
 

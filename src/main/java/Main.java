@@ -7,12 +7,12 @@ import service.FileReaderService;
 import service.FileWriterService;
 import service.FruitService;
 import service.ProcessService;
-import service.ReportService;
+import service.ReportCreatorService;
 import service.impl.FileReaderServiceImpl;
 import service.impl.FileWriterServiceImpl;
 import service.impl.FruitServiceImpl;
 import service.impl.ProcessServiceImpl;
-import service.impl.ReportServiceImpl;
+import service.impl.ReportCreatorServiceImpl;
 import strategy.OperationsHandler;
 import strategy.impl.BalanceOperationsHandler;
 import strategy.impl.PurchaseOperationsHandler;
@@ -35,8 +35,8 @@ public class Main {
         ProcessService processService = new ProcessServiceImpl(storeOperationsHandler);
         processService.process(fruitTransactions);
 
-        ReportService reportService = new ReportServiceImpl();
-        String report = reportService.createReport();
+        ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
+        String report = reportCreatorService.createReport();
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(report, TO_FILE);

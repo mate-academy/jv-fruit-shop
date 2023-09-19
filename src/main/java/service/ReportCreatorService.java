@@ -1,5 +1,5 @@
 package service;
 
-public interface ReportService {
+public interface ReportCreatorService {
     String createReport();
 }
