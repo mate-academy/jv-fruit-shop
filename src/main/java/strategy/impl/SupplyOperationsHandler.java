@@ -1,10 +1,9 @@
 package strategy.impl;
 
+import java.util.Map;
 import model.FruitTransaction;
 import storage.Storage;
 import strategy.OperationsHandler;
-
-import java.util.Map;
 
 public class SupplyOperationsHandler implements OperationsHandler {
     @Override

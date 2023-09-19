@@ -1,7 +1,6 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import model.ActivityType;
 import model.FruitTransaction;
 import service.FileReaderService;
