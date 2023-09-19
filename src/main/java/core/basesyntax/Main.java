@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE_PATH = "src/main/java/core/basesyntax/transactions.csv";
-    private static final String OUTPUT_FILE_PATH = "src/main/java/core/basesyntax/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/transactions.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
     private static final Map<FruitTransaction.Operation, OperationHandler> OPERATION_HANDLER_MAP
             = new HashMap<>();
 

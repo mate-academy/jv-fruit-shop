@@ -27,7 +27,7 @@ public class TransactionParserImpl implements TransactionParser {
         FruitTransaction fruitTransaction = new FruitTransaction();
         String[] lineInfo = line.split(SPLIT_SYMBOL);
         fruitTransaction.setOperation(FruitTransaction.Operation
-                .getOperationFromString(lineInfo[OPERATION_INDEX]));
+                .getOperation(lineInfo[OPERATION_INDEX]));
         fruitTransaction.setFruit(lineInfo[FRUIT_NAME_INDEX]);
         fruitTransaction.setQuantity(Integer.parseInt(lineInfo[FRUIT_QUANTITY_INDEX]));
         return fruitTransaction;
