@@ -2,26 +2,30 @@ package service.impl;
 
 import java.util.List;
 import model.FruitTransaction;
+import service.DataProcessorService;
 import service.OperationStrategy;
-import service.ProcessingDataService;
 import service.strategy.OperationHandler;
 
-public class ProcessingDataServiceImpl implements ProcessingDataService {
+public class DataProcessorServiceImpl implements DataProcessorService {
     private static final String DELIMITER = ",";
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
     private OperationStrategy operationStrategy;
 
-    public ProcessingDataServiceImpl(OperationStrategy operationStrategy) {
+    public DataProcessorServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public void updateDataInStorage(List<String> readData) {
+    public void processData(List<String> readData) {
         for (String line : readData) {
             FruitTransaction transaction = new FruitTransaction();
             String[] separatedData = line.split(DELIMITER);
-            transaction.setFruit(separatedData[1]);
-            transaction.setQuantity(Integer.parseInt(separatedData[2]));
-            updateNumberOfFruitInOneTransactionAccordingToHandler(separatedData[0], transaction);
+            transaction.setFruit(separatedData[FRUIT_INDEX]);
+            transaction.setQuantity(Integer.parseInt(separatedData[QUANTITY_INDEX]));
+            updateNumberOfFruitInOneTransactionAccordingToHandler(separatedData[OPERATION_INDEX],
+                    transaction);
         }
     }
 
@@ -29,6 +33,6 @@ public class ProcessingDataServiceImpl implements ProcessingDataService {
             String code, FruitTransaction transaction) {
         OperationHandler handlerForTransaction = operationStrategy
                 .getOperationHandler(FruitTransaction.Operation.getOperation(code));
-        handlerForTransaction.updateNumberOfFruit(transaction);
+        handlerForTransaction.handleOperation(transaction);
     }
 }

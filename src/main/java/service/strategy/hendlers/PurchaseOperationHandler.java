@@ -6,7 +6,7 @@ import service.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public void updateNumberOfFruit(FruitTransaction fruitTransaction) {
+    public void handleOperation(FruitTransaction fruitTransaction) {
         int numberToSell = fruitTransaction.getQuantity();
         int numberIsLeft = Storage.STORAGE.get(fruitTransaction.getFruit());
         int numberAfterSelling = numberIsLeft - numberToSell;

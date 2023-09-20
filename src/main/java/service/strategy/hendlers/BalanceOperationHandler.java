@@ -6,7 +6,7 @@ import service.strategy.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override
-    public void updateNumberOfFruit(FruitTransaction fruitTransaction) {
+    public void handleOperation(FruitTransaction fruitTransaction) {
         Integer startNumberOfFruit = fruitTransaction.getQuantity();
         Storage.STORAGE.put(fruitTransaction.getFruit(), startNumberOfFruit);
     }

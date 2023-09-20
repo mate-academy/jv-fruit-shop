@@ -6,10 +6,14 @@ import service.strategy.OperationHandler;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public void updateNumberOfFruit(FruitTransaction fruitTransaction) {
-        Integer sumOfFruitAfterReturn = Integer.sum(
-                Storage.STORAGE.get(fruitTransaction.getFruit()),
-                fruitTransaction.getQuantity());
-        Storage.STORAGE.put(fruitTransaction.getFruit(), sumOfFruitAfterReturn);
+    public void handleOperation(FruitTransaction fruitTransaction) {
+        String fruit = fruitTransaction.getFruit();
+        Integer quantity = fruitTransaction.getQuantity();
+
+        Integer currentQuantity = Storage.STORAGE.get(fruit);
+        Integer sumOfFruitAfterReturn = Integer.sum(currentQuantity, quantity);
+
+        Storage.STORAGE.put(fruit, sumOfFruitAfterReturn);
     }
 }
+
