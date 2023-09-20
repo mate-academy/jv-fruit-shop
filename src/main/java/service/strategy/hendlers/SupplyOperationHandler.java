@@ -16,4 +16,3 @@ public class SupplyOperationHandler implements OperationHandler {
         Storage.STORAGE.put(fruit, sumOfFruitAfterSupply);
     }
 }
-

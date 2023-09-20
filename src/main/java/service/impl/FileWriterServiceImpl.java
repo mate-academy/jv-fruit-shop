@@ -16,6 +16,5 @@ public class FileWriterServiceImpl implements FileWriterService {
         } catch (IOException e) {
             throw new RuntimeException("Can't write into the file " + fileName);
         }
-
     }
 }

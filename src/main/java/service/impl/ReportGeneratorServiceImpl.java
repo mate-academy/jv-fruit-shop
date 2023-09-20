@@ -1,19 +1,24 @@
 package service.impl;
 
 import data.base.Storage;
+import service.ReportGeneratorService;
 
-public class ReportGeneratorServiceImpl {
-    private static final String HEADER = "fruit,quantity";
-    private static final String SPLITTER = ",";
-    private final StringBuilder reportBuilder = new StringBuilder();
-
+public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     public String createReport() {
-        reportBuilder.append(HEADER).append(System.lineSeparator());
+        String header = "fruit,quantity";
+        String splitter = ",";
+        StringBuilder reportBuilder = new StringBuilder();
+
+        reportBuilder.append(header).append(System.lineSeparator());
         Storage.STORAGE.forEach((key, value) -> reportBuilder.append(key)
-                .append(SPLITTER)
+                .append(splitter)
                 .append(value)
                 .append(System.lineSeparator()));
         return reportBuilder.toString();
     }
-}
 
+    @Override
+    public String generateReport() {
+        return createReport();
+    }
+}

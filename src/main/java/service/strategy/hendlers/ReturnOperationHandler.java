@@ -16,4 +16,3 @@ public class ReturnOperationHandler implements OperationHandler {
         Storage.STORAGE.put(fruit, sumOfFruitAfterReturn);
     }
 }
-

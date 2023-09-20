@@ -25,22 +25,31 @@ public class FruitShop {
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/results.csv";
 
-    public static void main(String[] args) {
+    private static Map<FruitTransaction.Operation, OperationHandler>
+            initializeOperationHandlerMap() {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        FileReaderService readingFromCsvFileService = new FileReaderServiceImpl();
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler());
+        return operationHandlerMap;
+    }
+
+    public static void main(String[] args) {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap =
+                initializeOperationHandlerMap();
+        OperationStrategy operationStrategy =
+                new OperationStrategyImpl(operationHandlerMap);
+        FileReaderService readingFromCsvFileService =
+                new FileReaderServiceImpl();
         List<String> inputData = readingFromCsvFileService.readFromFile(INPUT_FILE_PATH);
         DataProcessorService processingDataService =
                 new DataProcessorServiceImpl(operationStrategy);
         processingDataService.processData(inputData);
-        ReportGeneratorService generatingReportService = (ReportGeneratorService)
-                new ReportGeneratorServiceImpl();
+        ReportGeneratorService generatingReportService = new ReportGeneratorServiceImpl();
         List<String> report = Collections.singletonList(generatingReportService.generateReport());
         FileWriterService writingIntoCsvFileService = new FileWriterServiceImpl();
         writingIntoCsvFileService.writeIntoFile(report, OUTPUT_FILE_PATH);
