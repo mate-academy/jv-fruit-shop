@@ -10,28 +10,19 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
-    private final List<FruitTransaction> dataLinesObj;
     private final OperationStrategy operationStrategy;
     private OperationHandler operationService;
 
-    public FruitServiceImpl(List<FruitTransaction> dataLines,
-                            Map<Operation, OperationHandler> operationHandlerMap) {
+    public FruitServiceImpl(Map<Operation, OperationHandler> operationHandlerMap) {
         operationStrategy = new OperationStrategy(operationHandlerMap);
-        dataLinesObj = dataLines;
     }
 
-    public void processFruits() {
-        dataLinesObj.stream()
-                .map(FruitTransaction::getFruit)
-                .distinct()
-                .forEach(f -> Storage.getStorage().put(f, 0));
-        countFruits();
-    }
-
-    private void countFruits() {
+    public void processFruits(List<FruitTransaction> dataLinesObj) {
         dataLinesObj.forEach(l -> {
             operationService = operationStrategy.getOperationHandler(l.getOperation());
-            int newAmount = operationService.doSomeOperation(Storage.getStorage().get(l.getFruit()),
+            int newAmount;
+            newAmount = operationService
+                    .doSomeOperation(Storage.getStorage().getOrDefault(l.getFruit(), 0),
                     l.getAmount());
             Storage.getStorage().put(l.getFruit(), newAmount);
         });

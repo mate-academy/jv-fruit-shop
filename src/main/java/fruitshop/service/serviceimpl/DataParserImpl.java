@@ -20,20 +20,10 @@ public class DataParserImpl implements DataParser {
                 .forEach(i -> {
                     String[] data = stringList.get(i).split(SEPARATOR);
                     dataLineList
-                            .add(new FruitTransaction(parseStringToOperation(data[OPERATION_INDEX]),
+                            .add(new FruitTransaction(Operation.getOperation(data[OPERATION_INDEX]),
                             data[FRUIT_INDEX], Integer.parseInt(data[AMOUNT_INDEX])));
                 });
         return dataLineList;
 
-    }
-
-    private Operation parseStringToOperation(String letter) {
-        switch (letter) {
-            case "b": return Operation.BALANCE;
-            case "r": return Operation.RETURN;
-            case "p": return Operation.PURCHASE;
-            case "s": return Operation.SUPPLY;
-            default: throw new RuntimeException("not appropriate symbol for operation");
-        }
     }
 }

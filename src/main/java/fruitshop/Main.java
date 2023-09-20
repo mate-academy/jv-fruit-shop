@@ -31,8 +31,8 @@ public class Main {
         List<String> fromFileData = reader.readDataFromFile(fromFile);
         List<FruitTransaction> fruitData = parser.parseStringToDataObject(fromFileData);
         Map<Operation, OperationHandler> operationHandlerMap = getOperationHandlerMap();
-        FruitService fruitService = new FruitServiceImpl(fruitData, operationHandlerMap);
-        fruitService.processFruits();
+        FruitService fruitService = new FruitServiceImpl(operationHandlerMap);
+        fruitService.processFruits(fruitData);
         ReportCreator reportInterface = new ReportCreatorImpl();
         String report = reportInterface.createReport();
         FileWriter writer = new FileWriterImpl();
