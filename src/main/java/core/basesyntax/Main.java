@@ -5,6 +5,7 @@ import core.basesyntax.operation.PurchaseTransactionHandler;
 import core.basesyntax.operation.ReturnTransactionHandler;
 import core.basesyntax.operation.SupplyTransactionHandler;
 import core.basesyntax.operation.TransactionHandler;
+import core.basesyntax.operation.TransactionHandlerStrategyImp;
 import core.basesyntax.servise.FruitStockUpdater;
 import core.basesyntax.servise.FruitStockUpdaterImp;
 import core.basesyntax.servise.FruitTransactionService;
@@ -29,7 +30,8 @@ public class Main {
     public static String createReportFile(String pathName) {
         FileReaderUtility fileReaderUtility = new FileReaderUtilityImp();
         FruitTransactionService fruitTransactionService = new FruitTransactionServiceImp();
-        FruitStockUpdater fruitStockUpdater = new FruitStockUpdaterImp(getFruitStrategy());
+        FruitStockUpdater fruitStockUpdater =
+                new FruitStockUpdaterImp(new TransactionHandlerStrategyImp(getFruitStrategyMap()));
         fruitStockUpdater.processTransactions(fruitTransactionService
                 .createTransactionList(fileReaderUtility.retrieveFileData(pathName)));
         ReportCreator reportCreator = new ReportCreatorImp();
@@ -39,7 +41,7 @@ public class Main {
         return fileReportWriter.writeReportToFile(reportCreator.createReport(), pathNameReport);
     }
 
-    private static Map<FruitTransaction.Operation, TransactionHandler> getFruitStrategy() {
+    private static Map<FruitTransaction.Operation, TransactionHandler> getFruitStrategyMap() {
         Storage.storage.clear();
         Map<FruitTransaction.Operation, TransactionHandler> fruitStrategy = new HashMap<>();
         fruitStrategy.put(FruitTransaction.Operation.BALANCE, new BalanceTransactionHandler());

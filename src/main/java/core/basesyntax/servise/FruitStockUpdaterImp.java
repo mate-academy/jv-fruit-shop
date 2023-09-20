@@ -1,25 +1,20 @@
 package core.basesyntax.servise;
 
 import core.basesyntax.FruitTransaction;
-import core.basesyntax.operation.TransactionHandler;
 import core.basesyntax.operation.TransactionHandlerStrategy;
-import core.basesyntax.operation.TransactionHandlerStrategyImp;
 import java.util.List;
-import java.util.Map;
 
 public class FruitStockUpdaterImp implements FruitStockUpdater {
-    private final Map<FruitTransaction.Operation, TransactionHandler> operationMap;
-    private final TransactionHandlerStrategy operationStrategy
-            = new TransactionHandlerStrategyImp();
+    private final TransactionHandlerStrategy operationStrategy;
 
-    public FruitStockUpdaterImp(Map<FruitTransaction.Operation, TransactionHandler> operationMap) {
-        this.operationMap = operationMap;
+    public FruitStockUpdaterImp(TransactionHandlerStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
     }
 
     @Override
     public void processTransactions(List<FruitTransaction> list) {
         for (FruitTransaction fruitTransaction : list) {
-            operationStrategy.get(fruitTransaction.getOperation(), operationMap)
+            operationStrategy.get(fruitTransaction.getOperation())
                     .applyTransaction(fruitTransaction);
         }
     }
