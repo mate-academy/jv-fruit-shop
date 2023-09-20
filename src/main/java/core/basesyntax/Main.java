@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataProcessorService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
@@ -21,24 +21,28 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_FILE = "src/main/resources/fruit_shop_input.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/fruit_shop_results.csv";
+
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new BuyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(getMapOperationHandler());
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> inputData = fileReaderService.readFromFile(
-                "src/main/resources/fruit_shop_input.csv");
-
+        List<String> inputData = fileReaderService.readFromFile(INPUT_FILE);
         DataProcessorService dataProcessorService =
                 new DataProcessorServiceImpl(operationStrategy);
         dataProcessorService.updateDataInStorage(inputData);
         ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
         List<String> report = reportGeneratorService.generateReport();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.writeIntoFile(report, "src/main/resources/fruit_shop_results.csv");
+        fileWriterService.writeIntoFile(report, OUTPUT_FILE);
+    }
+
+    private static Map<Operation, OperationHandler> getMapOperationHandler() {
+        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlerMap.put(Operation.PURCHASE, new BuyOperationHandler());
+        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
+        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
+        return operationHandlerMap;
     }
 }
