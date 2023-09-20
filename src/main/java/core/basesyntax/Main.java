@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class Main {
     private static final String DATA_FILE_PATH =
-            "src/main/java/core/basesyntax/resourses/DataFile.cvs";
+            "src/main/java/core/basesyntax/resourses/DataFile.csv";
     private static final String REPORT_FILE_PATH =
-            "src/main/java/core/basesyntax/resourses/ReportFile.cvs";
+            "src/main/java/core/basesyntax/resourses/ReportFile.csv";
 
     public static void main(String[] args) {
         FileReader readerService = new FileReader();
