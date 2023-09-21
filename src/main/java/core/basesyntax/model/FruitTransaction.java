@@ -10,20 +10,12 @@ public class FruitTransaction {
     }
 
     public void setOperation(String code) {
-        switch (code) {
-            case "b":
-                this.operation = Operation.BALANCE;
+
+        for (Operation operat : Operation.values()) {
+            if (operat.code.equals(code)) {
+                this.operation = operat;
                 break;
-            case "s":
-                this.operation = Operation.SUPPLY;
-                break;
-            case "p":
-                this.operation = Operation.PURCHASE;
-                break;
-            case "r":
-                operation = Operation.RETURN;
-                break;
-            default:
+            }
         }
     }
 
