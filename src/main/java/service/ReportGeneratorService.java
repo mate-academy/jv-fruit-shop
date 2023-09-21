@@ -1,6 +1,7 @@
 package service;
 
 public interface ReportGeneratorService {
-    String generateReport();
+    String createReport();
 }
+
 

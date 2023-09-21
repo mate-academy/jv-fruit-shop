@@ -50,7 +50,7 @@ public class FruitShop {
                 new DataProcessorServiceImpl(operationStrategy);
         processingDataService.processData(inputData);
         ReportGeneratorService generatingReportService = new ReportGeneratorServiceImpl();
-        List<String> report = Collections.singletonList(generatingReportService.generateReport());
+        List<String> report = Collections.singletonList(generatingReportService.createReport());
         FileWriterService writingIntoCsvFileService = new FileWriterServiceImpl();
         writingIntoCsvFileService.writeIntoFile(report, OUTPUT_FILE_PATH);
     }

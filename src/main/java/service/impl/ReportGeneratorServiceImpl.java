@@ -10,15 +10,14 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
         StringBuilder reportBuilder = new StringBuilder();
 
         reportBuilder.append(header).append(System.lineSeparator());
-        Storage.STORAGE.forEach((key, value) -> reportBuilder.append(key)
-                .append(splitter)
-                .append(value)
-                .append(System.lineSeparator()));
+        Storage.STORAGE.forEach((key, value) -> {
+            StringBuilder lineBuilder = new StringBuilder();
+            lineBuilder.append(key)
+                    .append(splitter)
+                    .append(value)
+                    .append(System.lineSeparator());
+            reportBuilder.append(lineBuilder);
+        });
         return reportBuilder.toString();
-    }
-
-    @Override
-    public String generateReport() {
-        return createReport();
     }
 }
