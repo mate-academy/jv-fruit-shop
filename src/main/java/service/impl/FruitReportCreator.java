@@ -3,16 +3,21 @@ package service.impl;
 import db.Storage;
 import java.util.ArrayList;
 import java.util.List;
-import service.Report;
 import service.ReportCreator;
+import service.WriterService;
 
 public class FruitReportCreator implements ReportCreator {
     public static final String SEPARATOR_NEW_LINE = "\n";
     public static final String SEPARATOR_COMA = ",";
     public static final String REPORT_HEADER = "fruit, quantity";
+    private final Storage fruitStorage;
+
+    public FruitReportCreator(Storage fruitStorage) {
+        this.fruitStorage = fruitStorage;
+    }
 
     @Override
-    public Report createReport(Storage fruitStorage) {
+    public WriterService createReport() {
         List<String> report = new ArrayList<>();
         report.add(REPORT_HEADER + SEPARATOR_NEW_LINE);
         for (String s : fruitStorage.getAllItems()) {
@@ -20,4 +25,5 @@ public class FruitReportCreator implements ReportCreator {
         }
         return new FruitReport(report);
     }
+
 }

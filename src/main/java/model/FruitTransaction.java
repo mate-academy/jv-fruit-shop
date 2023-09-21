@@ -1,8 +1,6 @@
 package model;
 
-import strategy.OperationStrategy;
-
-public class FruitTransaction implements Transaction {
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -13,19 +11,42 @@ public class FruitTransaction implements Transaction {
         this.quantity = quantity;
     }
 
-    @Override
-    public OperationStrategy getOperationStrategy() {
-        return operation.getOperationStrategy(this);
-    }
-
-    @Override
-    public String getItemName() {
+    public String getFruit() {
         return fruit;
     }
 
-    @Override
     public int getQuantity() {
         return quantity;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public enum Operation {
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private final String operation;
+
+        Operation(String operation) {
+            this.operation = operation;
+        }
+
+        public String getOperation() {
+            return operation;
+        }
+
+        public static Operation getByCode(String character) {
+            for (Operation operation : values()) {
+                if (operation.getOperation().equals(character)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("Unknown operation");
+        }
     }
 
 }

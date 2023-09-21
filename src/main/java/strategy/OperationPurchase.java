@@ -1,20 +1,21 @@
 package strategy;
 
 import db.Storage;
-import model.Transaction;
+import model.FruitTransaction;
 
 public class OperationPurchase implements OperationStrategy {
-    private Transaction transaction;
 
-    public OperationPurchase(Transaction transaction) {
-        this.transaction = transaction;
+    private final Storage storage;
+
+    public OperationPurchase(Storage storage) {
+        this.storage = storage;
     }
 
     @Override
-    public void handleOperation(Storage storage) {
-        if (storage.getQuantity(transaction.getItemName()) < transaction.getQuantity()) {
+    public void handleOperation(FruitTransaction transaction) {
+        if (storage.getQuantity(transaction.getFruit()) < transaction.getQuantity()) {
             throw new RuntimeException("Not enough fruits in Storage for purchase");
         }
-        storage.removeFruitInQuantity(transaction.getItemName(), transaction.getQuantity());
+        storage.removeFruitInQuantity(transaction.getFruit(), transaction.getQuantity());
     }
 }

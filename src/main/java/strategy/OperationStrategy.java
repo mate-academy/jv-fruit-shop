@@ -1,7 +1,7 @@
 package strategy;
 
-import db.Storage;
+import model.FruitTransaction;
 
 public interface OperationStrategy {
-    public void handleOperation(Storage fruitStorage);
+    public void handleOperation(FruitTransaction fruitTransaction);
 }

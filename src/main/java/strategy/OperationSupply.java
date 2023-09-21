@@ -1,18 +1,18 @@
 package strategy;
 
 import db.Storage;
-import model.Transaction;
+import model.FruitTransaction;
 
 public class OperationSupply implements OperationStrategy {
 
-    private Transaction transaction;
+    private final Storage storage;
 
-    public OperationSupply(Transaction fruitTransaction) {
-        this.transaction = fruitTransaction;
+    public OperationSupply(Storage storage) {
+        this.storage = storage;
     }
 
     @Override
-    public void handleOperation(Storage storage) {
-        storage.addFruitInQuantity(transaction.getItemName(), transaction.getQuantity());
+    public void handleOperation(FruitTransaction transaction) {
+        storage.addFruitInQuantity(transaction.getFruit(), transaction.getQuantity());
     }
 }

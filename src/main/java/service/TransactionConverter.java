@@ -1,9 +1,9 @@
 package service;
 
 import java.util.List;
-import model.Transaction;
+import model.FruitTransaction;
 
 public interface TransactionConverter {
-    List<Transaction> convertToTransactionList(List<String[]> dataFromFile);
+    List<FruitTransaction> convertToTransactionList(List<String[]> dataFromFile);
 }
 

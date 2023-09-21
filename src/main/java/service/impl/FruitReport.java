@@ -4,21 +4,22 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import service.Report;
+import service.WriterService;
 
-public class FruitReport implements Report {
+public class FruitReport implements WriterService {
 
-    private List<String> report;
+    private final List<String> report;
 
     public FruitReport(List<String> report) {
         this.report = report;
     }
 
     @Override
-    public void writeToCsvFile(File file) {
+    public void writeToFile(String filePath) {
+        File file = new File(filePath);
         try (FileWriter fileWriter = new FileWriter(file)) {
-            for (String s : report) {
-                fileWriter.write(s);
+            for (String reportLine : report) {
+                fileWriter.write(reportLine);
             }
             fileWriter.flush();
         } catch (IOException e) {
@@ -26,8 +27,4 @@ public class FruitReport implements Report {
         }
     }
 
-    @Override
-    public void printReport() {
-        report.forEach(System.out::println);
-    }
 }

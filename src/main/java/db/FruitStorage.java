@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class FruitStorage implements Storage {
+
+    private static final int DEFAULT_QUANTITY = 0;
+
     private HashMap<String, Integer> fruitStorage = new HashMap<>();
 
     @Override
