@@ -1,5 +1,6 @@
-package core.basesyntax.servise.fileservice;
+package core.basesyntax.servise.impl;
 
+import core.basesyntax.servise.FileReaderUtility;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -14,7 +15,7 @@ public class FileReaderUtilityImp implements FileReaderUtility {
         ArrayList<String> date = new ArrayList<>();
         File fileDate = new File(file);
         if (!fileDate.exists()) {
-            throw new RuntimeException("File missing");
+            throw new RuntimeException("File missing: " + file);
         }
         if (fileDate.length() == 0) {
             return new ArrayList<String>();
@@ -27,7 +28,7 @@ public class FileReaderUtilityImp implements FileReaderUtility {
             }
             date.remove(INDEX_TITULAR_LINE);
         } catch (IOException e) {
-            throw new RuntimeException("error reading file", e);
+            throw new RuntimeException("error reading file: " + file, e);
         }
         return date;
     }

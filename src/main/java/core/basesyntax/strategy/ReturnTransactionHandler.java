@@ -1,9 +1,9 @@
-package core.basesyntax.operation;
+package core.basesyntax.strategy;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.storage.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 
-public class SupplyTransactionHandler implements TransactionHandler {
+public class ReturnTransactionHandler implements TransactionHandler {
     @Override
     public void applyTransaction(FruitTransaction transaction) {
         if (Storage.storage.containsKey(transaction.getFruit())) {

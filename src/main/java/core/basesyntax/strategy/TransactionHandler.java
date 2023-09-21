@@ -1,6 +1,6 @@
-package core.basesyntax.operation;
+package core.basesyntax.strategy;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public interface TransactionHandler {
     void applyTransaction(FruitTransaction transaction);

@@ -1,7 +1,8 @@
-package core.basesyntax.servise;
+package core.basesyntax.servise.impl;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.operation.TransactionHandlerStrategy;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.servise.FruitStockUpdater;
+import core.basesyntax.strategy.TransactionHandlerStrategy;
 import java.util.List;
 
 public class FruitStockUpdaterImp implements FruitStockUpdater {

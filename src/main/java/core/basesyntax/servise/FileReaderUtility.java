@@ -1,4 +1,4 @@
-package core.basesyntax.servise.fileservice;
+package core.basesyntax.servise;
 
 import java.util.ArrayList;
 

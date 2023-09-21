@@ -1,30 +1,34 @@
 package core.basesyntax;
 
-import core.basesyntax.operation.BalanceTransactionHandler;
-import core.basesyntax.operation.PurchaseTransactionHandler;
-import core.basesyntax.operation.ReturnTransactionHandler;
-import core.basesyntax.operation.SupplyTransactionHandler;
-import core.basesyntax.operation.TransactionHandler;
-import core.basesyntax.operation.TransactionHandlerStrategyImp;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.servise.FileReaderUtility;
+import core.basesyntax.servise.FileWriterUtility;
 import core.basesyntax.servise.FruitStockUpdater;
-import core.basesyntax.servise.FruitStockUpdaterImp;
 import core.basesyntax.servise.FruitTransactionService;
-import core.basesyntax.servise.FruitTransactionServiceImp;
 import core.basesyntax.servise.ReportCreator;
-import core.basesyntax.servise.ReportCreatorImp;
-import core.basesyntax.servise.fileservice.FileReaderUtility;
-import core.basesyntax.servise.fileservice.FileReaderUtilityImp;
-import core.basesyntax.servise.fileservice.FileReportWriterImp;
-import core.basesyntax.servise.fileservice.FileWriterUtility;
-import core.basesyntax.storage.Storage;
+import core.basesyntax.servise.impl.FileReaderUtilityImp;
+import core.basesyntax.servise.impl.FileReportWriterImp;
+import core.basesyntax.servise.impl.FruitStockUpdaterImp;
+import core.basesyntax.servise.impl.FruitTransactionServiceImp;
+import core.basesyntax.servise.impl.ReportCreatorImp;
+import core.basesyntax.strategy.BalanceTransactionHandler;
+import core.basesyntax.strategy.PurchaseTransactionHandler;
+import core.basesyntax.strategy.ReturnTransactionHandler;
+import core.basesyntax.strategy.SupplyTransactionHandler;
+import core.basesyntax.strategy.TransactionHandler;
+import core.basesyntax.strategy.impl.TransactionHandlerStrategyImp;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    private static final String PATH_NAME = "src/main/java/core/basesyntax/files/file.csv";
+    private static final String PATH_NAME_REPORT = "src/main/java/core/basesyntax/files/report "
+            + LocalDate.now() + ".csv";
+
     public static void main(String[] args) {
-        String pathName = "src/main/java/core/basesyntax/files/file.csv";
-        createReportFile(pathName);
+        createReportFile(PATH_NAME);
     }
 
     public static String createReportFile(String pathName) {
@@ -35,10 +39,8 @@ public class Main {
         fruitStockUpdater.processTransactions(fruitTransactionService
                 .createTransactionList(fileReaderUtility.retrieveFileData(pathName)));
         ReportCreator reportCreator = new ReportCreatorImp();
-        String pathNameReport = "src/main/java/core/basesyntax/files/report "
-                + LocalDate.now() + ".csv";
         FileWriterUtility fileReportWriter = new FileReportWriterImp();
-        return fileReportWriter.writeReportToFile(reportCreator.createReport(), pathNameReport);
+        return fileReportWriter.writeReportToFile(reportCreator.createReport(), PATH_NAME_REPORT);
     }
 
     private static Map<FruitTransaction.Operation, TransactionHandler> getFruitStrategyMap() {

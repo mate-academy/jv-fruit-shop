@@ -1,6 +1,7 @@
-package core.basesyntax.servise;
+package core.basesyntax.servise.impl;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.servise.FruitTransactionService;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,20 +17,12 @@ public class FruitTransactionServiceImp implements FruitTransactionService {
                 .map(line -> line.split(SEPARATOR))
                 .map(part -> {
                     FruitTransaction fruitTransaction = new FruitTransaction();
-                    fruitTransaction.setOperation(getOperationByCode(part[INDEX_OPERATION]));
+                    fruitTransaction.setOperation(FruitTransaction.Operation
+                            .getOperationByCode(part[INDEX_OPERATION]));
                     fruitTransaction.setFruit(part[INDEX_FRUIT]);
                     fruitTransaction.setQuantity(Integer.parseInt(part[INDEX_QUANTITY]));
                     return fruitTransaction;
                 })
                 .collect(Collectors.toList());
-    }
-
-    private FruitTransaction.Operation getOperationByCode(String code) {
-        for (FruitTransaction.Operation operation: FruitTransaction.Operation.values()) {
-            if (operation.getCode().equals(code)) {
-                return operation;
-            }
-        }
-        throw new IllegalArgumentException("Unknown opcode" + code);
     }
 }
