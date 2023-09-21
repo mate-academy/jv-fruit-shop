@@ -7,10 +7,10 @@ public class ReportCreatorImpl implements ReportCreator {
     private static final String TYPES = "fruit,quantity"
             + System.lineSeparator();
     private static final String SEPARATOR = ",";
-    private final StringBuilder stringBuilder = new StringBuilder(TYPES);
 
     @Override
     public String createReport() {
+        StringBuilder stringBuilder = new StringBuilder(TYPES);
         Storage.getStorage().forEach((key, value) -> stringBuilder.append(key).append(SEPARATOR)
                 .append(value).append(System.lineSeparator()));
         return stringBuilder.toString();

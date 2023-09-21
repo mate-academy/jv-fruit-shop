@@ -22,13 +22,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String fromFile = "src/main/resources/fruitdata.csv";
-    private static final String toFile = "src/main/resources/result.csv";
+    private static final String FROM_FILE = "src/main/resources/fruitdata.csv";
+    private static final String TO_FILE = "src/main/resources/result.csv";
 
     public static void main(String[] args) {
         FileReader reader = new FileReaderImpl();
         DataParser parser = new DataParserImpl();
-        List<String> fromFileData = reader.readDataFromFile(fromFile);
+        List<String> fromFileData = reader.readDataFromFile(FROM_FILE);
         List<FruitTransaction> fruitData = parser.parseStringToDataObject(fromFileData);
         Map<Operation, OperationHandler> operationHandlerMap = getOperationHandlerMap();
         FruitService fruitService = new FruitServiceImpl(operationHandlerMap);
@@ -36,7 +36,7 @@ public class Main {
         ReportCreator reportInterface = new ReportCreatorImpl();
         String report = reportInterface.createReport();
         FileWriter writer = new FileWriterImpl();
-        writer.writeDataToTheFile(toFile, report);
+        writer.writeDataToTheFile(TO_FILE, report);
     }
 
     private static Map<Operation, OperationHandler> getOperationHandlerMap() {

@@ -4,7 +4,7 @@ import fruitshop.strategy.operation.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public int doSomeOperation(int currentAmount, int amount) {
+    public int operate(int currentAmount, int amount) {
         int result = currentAmount - amount;
         if (result < 0) {
             throw new RuntimeException("Invalid data for amount, it should be more than 0."

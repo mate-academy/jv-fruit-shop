@@ -22,7 +22,7 @@ public class FruitServiceImpl implements FruitService {
             operationService = operationStrategy.getOperationHandler(l.getOperation());
             int newAmount;
             newAmount = operationService
-                    .doSomeOperation(Storage.getStorage().getOrDefault(l.getFruit(), 0),
+                    .operate(Storage.getStorage().getOrDefault(l.getFruit(), 0),
                     l.getAmount());
             Storage.getStorage().put(l.getFruit(), newAmount);
         });

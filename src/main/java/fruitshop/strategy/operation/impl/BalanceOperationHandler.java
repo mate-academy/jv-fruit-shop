@@ -4,7 +4,7 @@ import fruitshop.strategy.operation.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override
-    public int doSomeOperation(int currentAmount, int amount) {
+    public int operate(int currentAmount, int amount) {
         return amount;
     }
 }
