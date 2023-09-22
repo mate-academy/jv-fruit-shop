@@ -1,17 +1,17 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private Transaction transaction;
+    private Operation transaction;
     private String fruitName;
     private int amount;
 
-    public FruitTransaction(Transaction transaction, String fruitName, int amount) {
-        this.transaction = transaction;
+    public FruitTransaction(Operation operation, String fruitName, int amount) {
+        this.transaction = operation;
         this.fruitName = fruitName;
         this.amount = amount;
     }
 
-    public Transaction getTransaction() {
+    public Operation getTransaction() {
         return transaction;
     }
 

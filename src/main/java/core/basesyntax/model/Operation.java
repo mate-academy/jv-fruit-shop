@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 import java.util.Arrays;
 
-public enum Transaction {
+public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
@@ -10,7 +10,7 @@ public enum Transaction {
 
     private String code;
 
-    Transaction(String code) {
+    Operation(String code) {
         this.code = code;
     }
 
@@ -18,8 +18,8 @@ public enum Transaction {
         return code;
     }
 
-    public static Transaction getTransactionByCode(String code) {
-        return Arrays.stream(Transaction.values())
+    public static Operation getTransactionByCode(String code) {
+        return Arrays.stream(Operation.values())
                 .filter(t -> t.getCode().equals(code))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Can`t find transaction by code"));

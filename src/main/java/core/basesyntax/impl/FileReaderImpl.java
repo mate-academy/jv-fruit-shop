@@ -1,5 +1,6 @@
-package core.basesyntax.filework;
+package core.basesyntax.impl;
 
+import core.basesyntax.service.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,10 +8,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReader {
-    static final int TITLE_LINE = 1;
+public class FileReaderImpl implements FileReader {
+    private static final int TITLE_LINE = 1;
 
-    public static List<String> readFromFile(String pathToFile) {
+    @Override
+    public List<String> readFromFile(String pathToFile) {
         List<String> linesFromFile = new ArrayList<>();
         Path path = Paths.get(pathToFile);
         try {
