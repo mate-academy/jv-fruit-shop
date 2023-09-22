@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportCreatorService;
+import core.basesyntax.service.ReportCreator;
 
-public class ReportCreator implements ReportCreatorService {
+public class ReportCreatorImpl implements ReportCreator {
     public static final String TABLE_HEADER = "fruit,quantity";
     private static final String SEPARATOR = ",";
 

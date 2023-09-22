@@ -6,14 +6,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class CsvFileReaderService implements FileReaderService {
+public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> readFromFile(String filePath) {
         Path path = Path.of(filePath);
         try {
             return Files.readAllLines(path);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to read the file ", e);
         }
     }
 }

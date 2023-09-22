@@ -4,10 +4,10 @@ import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ProcessInputService;
 import core.basesyntax.service.ProcessInputServiceImpl;
-import core.basesyntax.service.ReportCreatorService;
-import core.basesyntax.service.impl.CsvFileReaderService;
-import core.basesyntax.service.impl.CsvFileWriterService;
-import core.basesyntax.service.impl.ReportCreator;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import java.util.List;
 
 public class Main {
@@ -15,13 +15,13 @@ public class Main {
     private static String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        FileReaderService fileReaderService = new CsvFileReaderService();
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> inputList = fileReaderService.readFromFile(INPUT_FILE_PATH);
         ProcessInputService processInputService = new ProcessInputServiceImpl();
         processInputService.parseInput(inputList);
-        ReportCreatorService csvReportCreator = new ReportCreator();
+        ReportCreator csvReportCreator = new ReportCreatorImpl();
         String report = csvReportCreator.createReport();
-        FileWriterService csvFileWriterService = new CsvFileWriterService();
-        csvFileWriterService.writeToFile(OUTPUT_FILE_PATH, report);
+        FileWriterService fileWriterServiceImpl = new FileWriterServiceImpl();
+        fileWriterServiceImpl.writeToFile(OUTPUT_FILE_PATH, report);
     }
 }

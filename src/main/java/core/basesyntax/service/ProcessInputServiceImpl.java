@@ -7,6 +7,9 @@ import core.basesyntax.service.strategy.TransactionHandler;
 import java.util.List;
 
 public class ProcessInputServiceImpl implements ProcessInputService {
+
+    public static final String SPLITTER = ",";
+
     public boolean parseInput(List<String> inputList) {
         HandleTransactionStrategy strategy = new HandleTransactionStrategyImpl();
         FruitTransaction fruitTransaction;
@@ -19,7 +22,7 @@ public class ProcessInputServiceImpl implements ProcessInputService {
     }
 
     private FruitTransaction createTransaction(String line) {
-        String[] elements = line.split(",");
+        String[] elements = line.split(SPLITTER);
         String operationCode = elements[0];
         String fruit = elements[1];
         int quantity = Integer.parseInt(elements[2]);
