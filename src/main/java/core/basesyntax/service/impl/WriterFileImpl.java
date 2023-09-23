@@ -13,7 +13,7 @@ public class WriterFileImpl implements WriterFile {
                 BufferedWriter bwr = new BufferedWriter(writer)) {
             bwr.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write file " + fileName);
+            throw new RuntimeException("Can't write file " + fileName, e);
         }
     }
 }

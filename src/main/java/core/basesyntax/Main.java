@@ -18,13 +18,16 @@ import core.basesyntax.strategy.OperationHandlerOut;
 import java.util.Map;
 
 public class Main {
+    private static final Map<FruitTransaction.Operation, OperationHandler>
+            correspondenceTable = Map.of(
+            FruitTransaction.Operation.BALANCE, new OperationHandlerBalance(),
+            FruitTransaction.Operation.SUPPLY, new OperationHandlerIn(),
+            FruitTransaction.Operation.RETURN, new OperationHandlerIn(),
+            FruitTransaction.Operation.PURCHASE, new OperationHandlerOut());
+    private static final String INPUT_FILE_NAME = "src/main/resources/fruits.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> correspondenceTable = Map.of(
-                FruitTransaction.Operation.BALANCE, new OperationHandlerBalance(),
-                FruitTransaction.Operation.SUPPLY, new OperationHandlerIn(),
-                FruitTransaction.Operation.RETURN, new OperationHandlerIn(),
-                FruitTransaction.Operation.PURCHASE, new OperationHandlerOut());
+
         String outFileName = "src/main/resources/report.csv";
         FileReader fileReader = new FileReaderImpl();
         WriterFile fileWriter = new WriterFileImpl();
@@ -32,7 +35,7 @@ public class Main {
         TransactionParser transactionParser = new TransactionParserImpl();
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         calculateBalance.calculateBalance(transactionParser.parseTransaction(
-                fileReader.readFile()), correspondenceTable);
+                fileReader.readFile(INPUT_FILE_NAME)), correspondenceTable);
         fileWriter.writeToFile(reportGenerator.makeReport(), outFileName);
     }
 }

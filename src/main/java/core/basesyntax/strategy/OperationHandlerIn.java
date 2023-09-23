@@ -8,8 +8,7 @@ public class OperationHandlerIn implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        int value = 0;
-        value = Storage.result.get(transaction.getFruit());
+        int value = Storage.result.get(transaction.getFruit());
         Storage.result.put(transaction.getFruit(), value
                 + transaction.getQuantity());
     }
