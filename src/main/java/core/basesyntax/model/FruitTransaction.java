@@ -9,14 +9,8 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setOperation(String code) {
-
-        for (Operation operat : Operation.values()) {
-            if (operat.code.equals(code)) {
-                this.operation = operat;
-                break;
-            }
-        }
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     public String getFruit() {
@@ -45,6 +39,15 @@ public class FruitTransaction {
 
         Operation(String code) {
             this.code = code;
+        }
+
+        public static Operation getByCode(String character) {
+            for (Operation operation : values()) {
+                if (operation.code.equals(character.substring(0,1))) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("Unknown operation");
         }
     }
 }
