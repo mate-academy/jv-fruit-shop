@@ -3,10 +3,10 @@ package core.basesyntax;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ProcessInputService;
-import core.basesyntax.service.ProcessInputServiceImpl;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.ProcessInputServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import java.util.List;
 

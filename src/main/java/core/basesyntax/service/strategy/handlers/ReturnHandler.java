@@ -1,15 +1,15 @@
 package core.basesyntax.service.strategy.handlers;
 
+import core.basesyntax.db.StorageDao;
 import core.basesyntax.db.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.strategy.TransactionHandler;
 
 public class ReturnHandler implements TransactionHandler {
+    private final StorageDao storageDao;
 
-    private final StorageDaoImpl storageDao;
-
-    public ReturnHandler() {
-        storageDao = new StorageDaoImpl();
+    public ReturnHandler(StorageDao storageDao) {
+        this.storageDao = new StorageDaoImpl();
     }
 
     @Override
@@ -18,7 +18,7 @@ public class ReturnHandler implements TransactionHandler {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
 
-        ValidationService validationService = new ValidationService();
+        ValidationService validationService = new ValidationService(storageDao);
         validationService.validateIncreasing(fruit);
 
         return storageDao.increaseFruitsAmount(fruit, quantity);

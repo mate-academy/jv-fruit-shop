@@ -1,24 +1,27 @@
 package core.basesyntax.service.strategy.handlers;
 
 import core.basesyntax.db.StorageDao;
-import core.basesyntax.db.StorageDaoImpl;
 
 public class ValidationService {
-    private final StorageDao storageDao = new StorageDaoImpl();
+    private final StorageDao storageDao;
 
-    void validateIncreasing(String fruit) {
+    public ValidationService(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
+
+    public void validateIncreasing(String fruit) {
         if (!storageDao.isInStorage(fruit)) {
             throw new RuntimeException("There is not fruit called " + fruit + " in Storage");
         }
     }
 
-    void validateAddingNew(String fruit) {
+    public void validateAddingNew(String fruit) {
         if (storageDao.isInStorage(fruit)) {
             throw new RuntimeException("Fruit " + fruit + " already exists in Storage");
         }
     }
 
-    void validateDecreasing(String fruit, int quantity) {
+    public void validateDecreasing(String fruit, int quantity) {
         if (!storageDao.isInStorage(fruit)) {
             throw new RuntimeException("There is not fruit called " + fruit + " in Storage");
         }

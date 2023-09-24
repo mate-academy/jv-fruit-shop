@@ -1,13 +1,13 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ProcessInputService;
 import core.basesyntax.service.strategy.HandleTransactionStrategy;
 import core.basesyntax.service.strategy.HandleTransactionStrategyImpl;
 import core.basesyntax.service.strategy.TransactionHandler;
 import java.util.List;
 
 public class ProcessInputServiceImpl implements ProcessInputService {
-
     public static final String SPLITTER = ",";
 
     public boolean parseInput(List<String> inputList) {
