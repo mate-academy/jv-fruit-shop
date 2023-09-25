@@ -4,7 +4,6 @@ import db.Storage;
 import model.FruitTransaction;
 
 public class OperationSupply implements OperationStrategy {
-
     private final Storage storage;
 
     public OperationSupply(Storage storage) {

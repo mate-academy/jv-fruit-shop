@@ -48,5 +48,4 @@ public class FruitTransaction {
             throw new RuntimeException("Unknown operation");
         }
     }
-
 }

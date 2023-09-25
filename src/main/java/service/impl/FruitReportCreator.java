@@ -1,10 +1,7 @@
 package service.impl;
 
 import db.Storage;
-import java.util.ArrayList;
-import java.util.List;
 import service.ReportCreator;
-import service.WriterService;
 
 public class FruitReportCreator implements ReportCreator {
     public static final String SEPARATOR_NEW_LINE = "\n";
@@ -17,13 +14,14 @@ public class FruitReportCreator implements ReportCreator {
     }
 
     @Override
-    public WriterService createReport() {
-        List<String> report = new ArrayList<>();
-        report.add(REPORT_HEADER + SEPARATOR_NEW_LINE);
+    public String createReport() {
+        StringBuilder report = new StringBuilder();
+        report.append(REPORT_HEADER + SEPARATOR_NEW_LINE);
         for (String s : fruitStorage.getAllItems()) {
-            report.add(s + SEPARATOR_COMA + fruitStorage.getQuantity(s) + SEPARATOR_NEW_LINE);
+            report.append(s).append(SEPARATOR_COMA)
+                    .append(fruitStorage.getQuantity(s))
+                    .append(SEPARATOR_NEW_LINE);
         }
-        return new FruitReport(report);
+        return report.toString();
     }
-
 }

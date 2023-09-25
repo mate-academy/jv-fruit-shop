@@ -13,6 +13,7 @@ import service.impl.CsvDataReader;
 import service.impl.FruitReportCreator;
 import service.impl.FruitTransactionConverter;
 import service.impl.StorageStrategyProcessor;
+import service.impl.WriterServiceImpl;
 
 /**
  * Feel free to remove this class and create your own.
@@ -25,22 +26,19 @@ public class FruitShop {
 
         ReaderService readerService = new CsvDataReader();
         List<String[]> readFromFile = readerService.readFromFile(INPUT_FILE_PATH);
-        //read data from file
 
         TransactionConverter fr = new FruitTransactionConverter();
         List<FruitTransaction> listFruitTransaction = fr.convertToTransactionList(readFromFile);
-        //convert data from file to java object
 
         Storage storage = new FruitStorage();
 
         StrategyProcessor strategyProcessor = new StorageStrategyProcessor(storage);
         strategyProcessor.processTransactionStrategies(listFruitTransaction);
-        //process java object
 
         ReportCreator reportService = new FruitReportCreator(storage);
-        WriterService fruitReportService = reportService.createReport();
-        //create report
-        fruitReportService.writeToFile(OUTPUT_FILE_PATH);
-        //write report to file
+        String fruitReportService = reportService.createReport();
+
+        WriterService writerService = new WriterServiceImpl();
+        writerService.writeToFile(fruitReportService, OUTPUT_FILE_PATH);
     }
 }
