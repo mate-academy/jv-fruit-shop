@@ -7,12 +7,9 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-    private static final String DELIMITER = ",";
-    private List<String[]> strings;
 
     @Override
     public List<String> readFile(String inputFileName) {
-
         try {
             return Files.readAllLines(Path.of(inputFileName));
         } catch (IOException e) {

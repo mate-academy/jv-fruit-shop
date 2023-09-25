@@ -8,9 +8,11 @@ public class OperationHandlerOut implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-
-        int value = Storage.result.get(transaction.getFruit());
-        Storage.result.put(transaction.getFruit(),
+        int value = Storage.storage.get(transaction.getFruit());
+        if (value - transaction.getQuantity() < 0) {
+            throw new RuntimeException("Balance can`t be less then zero");
+        }
+        Storage.storage.put(transaction.getFruit(),
                 value - transaction.getQuantity());
     }
 }

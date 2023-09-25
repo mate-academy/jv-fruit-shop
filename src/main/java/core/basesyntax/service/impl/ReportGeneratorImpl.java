@@ -9,10 +9,10 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String makeReport() {
         StringBuilder report = new StringBuilder();
-        for (String element: Storage.result.keySet()) {
+        for (String element: Storage.storage.keySet()) {
             report.append(element)
                     .append(SEPARATOR)
-                    .append(Storage.result.get(element))
+                    .append(Storage.storage.get(element))
                     .append(System.lineSeparator());
         }
         return report.toString();
