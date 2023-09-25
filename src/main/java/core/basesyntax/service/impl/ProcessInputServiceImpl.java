@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitTransactionSupplier;
 import core.basesyntax.service.ProcessInputService;
 import core.basesyntax.service.strategy.HandleTransactionStrategy;
 import core.basesyntax.service.strategy.HandleTransactionStrategyImpl;
@@ -23,7 +24,8 @@ public class ProcessInputServiceImpl implements ProcessInputService {
 
     private FruitTransaction createTransaction(String line) {
         String[] elements = line.split(SPLITTER);
-        String operationCode = elements[0];
+        FruitTransactionSupplier fruitTransactionSupplier = new FruitTransactionSupplier();
+        FruitTransaction.Operation operationCode = fruitTransactionSupplier.get(elements[0]);
         String fruit = elements[1];
         int quantity = Integer.parseInt(elements[2]);
         return new FruitTransaction(operationCode, fruit, quantity);

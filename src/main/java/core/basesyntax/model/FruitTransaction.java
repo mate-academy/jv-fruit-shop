@@ -5,12 +5,8 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public FruitTransaction(String operationCode, String fruit, int quantity) {
-        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getCode().equalsIgnoreCase(operationCode)) {
-                this.operation = operation;
-            }
-        }
+    public FruitTransaction(FruitTransaction.Operation operation, String fruit, int quantity) {
+        this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
