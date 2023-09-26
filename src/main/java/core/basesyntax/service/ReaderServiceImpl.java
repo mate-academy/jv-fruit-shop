@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class DataReaderImpl implements DataReader {
+public class ReaderServiceImpl implements ReaderService {
     public List<String> readFromFile(String dailyReport) {
         List<String> dataFromFile;
         {

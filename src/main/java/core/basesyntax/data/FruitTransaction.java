@@ -1,6 +1,6 @@
 package core.basesyntax.data;
 
-public class FruitData {
+public class FruitTransaction {
     private OperationType operationType;
     private String name;
     private int quantity;
