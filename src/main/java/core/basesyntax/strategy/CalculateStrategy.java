@@ -12,9 +12,7 @@ public class CalculateStrategy {
         this.correspondenceTable = correspondenceTable;
     }
 
-    public void calculate(FruitTransaction fruitTransaction,
-                          FruitTransaction.Operation operation) {
-        OperationHandler handler = correspondenceTable.get(operation);
-        handler.handle(fruitTransaction);
+    public OperationHandler getHandler(FruitTransaction.Operation operation) {
+        return correspondenceTable.get(operation);
     }
 }
