@@ -1,4 +1,4 @@
-package core.basesyntax.service.workwithfile;
+package core.basesyntax.service.fileservices;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,11 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFileImpl implements ReadFile {
-    private final ParseFile parseFile = new ParseFile();
+    private final ParseFile parseFile;
+
+    public ReadFileImpl(ParseFile parseFile) {
+        this.parseFile = parseFile;
+    }
 
     @Override
     public List<String> readFromCsvFile(String filePath) {
-        final File fruitFile = new File(parseFile.parseFileWithData());
+        final File fruitFile = new File(parseFile.parseFileWithData(filePath));
         List<String> listOfFruits = new ArrayList<>();
         try {
             listOfFruits = Files.readAllLines(fruitFile.toPath());

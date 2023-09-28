@@ -8,6 +8,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class StorageDaoImpl implements StorageDao {
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final String SEPARATOR = ",";
+
     @Override
     public boolean addValueToStorage(Map<Operation, Map<String, List<Integer>>> fruitMap,
                                             Operation operation, String fruitName, int value) {
@@ -35,15 +39,13 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public String getFruits(String rowFromOperationList) {
-        int fruitIndex = 1;
-        String[] split = rowFromOperationList.split(",");
-        return split[fruitIndex];
+        String[] split = rowFromOperationList.split(SEPARATOR);
+        return split[FRUIT_INDEX];
     }
 
     @Override
     public int getQuantity(String rowFromOperationList) {
-        int quantityIndex = 2;
-        String[] split = rowFromOperationList.split(",");
-        return Integer.parseInt(split[quantityIndex]);
+        String[] split = rowFromOperationList.split(SEPARATOR);
+        return Integer.parseInt(split[QUANTITY_INDEX]);
     }
 }

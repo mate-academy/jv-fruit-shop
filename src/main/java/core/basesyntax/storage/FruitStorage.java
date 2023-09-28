@@ -1,19 +1,22 @@
 package core.basesyntax.storage;
 
 import core.basesyntax.model.Operation;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FruitStorage {
     private static final int OPERATION_TYPE_INDEX = 0;
-    private final PrepareList prepareList = new PrepareList();
-    private final ProcessingData processingData = new ProcessingData();
-    private final Map<Operation, Map<String, List<Integer>>> fruitMaps = new HashMap<>();
+    private static final String SEPARATOR = ",";
+    private final ProcessingData processingData;
 
-    public Map<Operation, Map<String, List<Integer>>> createStorage() {
-        for (String rowFromOperationList : prepareList.preparedListWithoutTitle()) {
-            String[] split = rowFromOperationList.split(",");
+    public FruitStorage(ProcessingData processingData) {
+        this.processingData = processingData;
+    }
+
+    public Map<Operation, Map<String, List<Integer>>> createStorage(Map<Operation, Map<String,
+            List<Integer>>> fruitMaps, List<String> listOperation) {
+        for (String rowFromOperationList : listOperation) {
+            String[] split = rowFromOperationList.split(SEPARATOR);
             String operationType = split[OPERATION_TYPE_INDEX];
             processingData.recognitionData(fruitMaps,operationType,rowFromOperationList);
         }

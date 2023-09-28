@@ -1,6 +1,6 @@
 package core.basesyntax.storage;
 
-import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Operation;
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,11 @@ public class ProcessingData {
     private static final String ABBREVIATION_PURCHASE = "p";
     private static final String ABBREVIATION_SUPPLY = "s";
     private static final String ABBREVIATION_RETURN = "r";
-    private final StorageDaoImpl storageOperation = new StorageDaoImpl();
+    private final StorageDao storageOperation;
+
+    public ProcessingData(StorageDao storageOperation) {
+        this.storageOperation = storageOperation;
+    }
 
     public void recognitionData(Map<Operation, Map<String, List<Integer>>> fruitMaps,
                                 String operationType, String rowFromOperationList) {
