@@ -1,22 +1,20 @@
 package core.basesyntax.service.summaryofoperations;
 
-import core.basesyntax.model.Operation;
-import java.util.List;
+import core.basesyntax.db.FruitStorage;
 import java.util.Map;
 
 public class PreparationReportList {
-    private static final int TITLE_INDEX = 0;
-    private final GeneralCalculation generalCalculation;
+    private static final String TITLE = "fruit,quantity\n";
+    private static final String DELIMITER = ",";
 
-    public PreparationReportList(GeneralCalculation generalCalculation) {
-        this.generalCalculation = generalCalculation;
-
-    }
-
-    public List<String> createReportList(Map<Operation, Map<String, List<Integer>>> fruitsStorage) {
-        List<String> generalAmountList =
-                generalCalculation.calculateTotalAmount(fruitsStorage);
-        generalAmountList.add(TITLE_INDEX,"fruit,quantity");
-        return generalAmountList;
+    public String reportPreparation() {
+        Map<String, Integer> reportMap = FruitStorage.fruitsStorage;
+        StringBuilder reportString = new StringBuilder(TITLE);
+        for (Map.Entry<String, Integer> entry : reportMap.entrySet()) {
+            reportString.append(entry.getKey()).append(DELIMITER).append(entry.getValue())
+                    .append(System.lineSeparator());
+        }
+        return reportString.toString();
     }
 }
+
