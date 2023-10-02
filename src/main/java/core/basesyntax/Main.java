@@ -10,7 +10,6 @@ import core.basesyntax.service.impl.FileServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.TransactionExecutorImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
-
 import java.util.List;
 
 public class Main {
