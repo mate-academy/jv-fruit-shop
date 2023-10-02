@@ -1,0 +1,14 @@
+type,fruit,quantity
+b,mango,20
+b,peach,100
+b,apple,100
+b,pear,0
+s,mango,130
+p,apple,10
+r,apple,1
+s,pear,10
+p,pear,2
+p,mango,26
+s,apple,50
+p,apple,18
+p,peach,22
