@@ -20,10 +20,12 @@ public class FileServiceImpl implements FileService {
     @Override
     public void writeToFile(String filePath, String text) {
         Path path = Path.of(filePath);
+
         try {
             Files.write(path, text.getBytes());
         } catch (IOException exception) {
-            throw new RuntimeException("File could not be found within path " + filePath, exception);
+            throw new RuntimeException("File could not be found within path "
+                    + filePath, exception);
         }
     }
 }

@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionParserImpl implements TransactionParser {
-    private List<FruitTransaction> fruitTransactionList;
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private List<FruitTransaction> fruitTransactionList;
 
     private FruitTransaction parseLine(String str) {
         String[] transactionDetails = str.split(",");
