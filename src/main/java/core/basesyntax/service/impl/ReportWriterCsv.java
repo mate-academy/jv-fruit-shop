@@ -1,6 +1,8 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.errors.ReportWriterError;
+import core.basesyntax.service.ReportWriter;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

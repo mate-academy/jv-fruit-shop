@@ -1,8 +1,9 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.errors.DataParserError;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.OperationType;
+import core.basesyntax.service.DataParser;
 
 public class DataParserImpl implements DataParser {
     private static final String SEPARATOR = ",";

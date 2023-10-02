@@ -1,4 +1,4 @@
-package core.basesyntax.db;
+package core.basesyntax.strategy;
 
 import core.basesyntax.model.OperationType;
 import java.util.Map;

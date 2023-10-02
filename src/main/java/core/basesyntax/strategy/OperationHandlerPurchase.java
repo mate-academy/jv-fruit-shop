@@ -1,4 +1,6 @@
-package core.basesyntax.db;
+package core.basesyntax.strategy;
+
+import core.basesyntax.db.FruitDao;
 
 public class OperationHandlerPurchase implements OperationHandler {
     @Override
