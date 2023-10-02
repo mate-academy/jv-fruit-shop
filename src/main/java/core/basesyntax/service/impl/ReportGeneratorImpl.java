@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.FruitDao;
 import core.basesyntax.service.ReportGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
 

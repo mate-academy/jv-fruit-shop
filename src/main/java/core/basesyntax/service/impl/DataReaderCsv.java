@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.errors.DataReaderError;
 import core.basesyntax.service.DataReader;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

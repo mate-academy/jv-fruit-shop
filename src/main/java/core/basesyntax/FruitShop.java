@@ -1,7 +1,17 @@
 package core.basesyntax;
 
 import core.basesyntax.db.FruitDao;
-import core.basesyntax.db.FruitStorageInMap;
+import core.basesyntax.db.FruitDaoStorageInMap;
+import core.basesyntax.model.Operation;
+import core.basesyntax.model.OperationType;
+import core.basesyntax.service.DataParser;
+import core.basesyntax.service.DataReader;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ReportWriter;
+import core.basesyntax.service.impl.DataParserImpl;
+import core.basesyntax.service.impl.DataReaderCsv;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ReportWriterCsv;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationHandlerBalance;
 import core.basesyntax.strategy.OperationHandlerPurchase;
@@ -9,16 +19,6 @@ import core.basesyntax.strategy.OperationHandlerReturn;
 import core.basesyntax.strategy.OperationHandlerSupply;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.model.Operation;
-import core.basesyntax.model.OperationType;
-import core.basesyntax.service.DataParser;
-import core.basesyntax.service.impl.DataParserImpl;
-import core.basesyntax.service.DataReader;
-import core.basesyntax.service.impl.DataReaderCsv;
-import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.impl.ReportGeneratorImpl;
-import core.basesyntax.service.ReportWriter;
-import core.basesyntax.service.impl.ReportWriterCsv;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +34,7 @@ public class FruitShop {
         strategies.put(OperationType.PURCHASE, new OperationHandlerPurchase());
         strategies.put(OperationType.RETURN, new OperationHandlerReturn());
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategies);
-        FruitDao fruitDb = new FruitStorageInMap();
+        FruitDao fruitDb = new FruitDaoStorageInMap();
 
         // Read data
         DataReader dataReader = new DataReaderCsv();
