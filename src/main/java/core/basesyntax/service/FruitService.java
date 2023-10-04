@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface FruitService {
-    String getReport(String data);
+    String createReport(String data);
 }

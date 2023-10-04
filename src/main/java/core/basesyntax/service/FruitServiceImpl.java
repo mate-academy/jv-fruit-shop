@@ -16,7 +16,7 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public String getReport(String data) {
+    public String createReport(String data) {
         Map<String, Integer> groupedReport = getGroupedReport(data);
         String resultReport = "fruit,quantity" + System.lineSeparator()
                 + getResultReport(groupedReport);

@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
 public interface FileService {
-    String readData(String fileName);
+    String readFile(String fileName);
 
-    void makeReport(String report, String fileName);
+    void writeToFile(String report, String fileName);
 }

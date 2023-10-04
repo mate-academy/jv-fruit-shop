@@ -18,6 +18,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         FileService fileService = new FileServiceImpl();
+        String data = fileService.readFile("src/main/resources/inputReport");
 
         Map<String, OperationStrategy> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put("b", new BalanceOperationStrategy());
@@ -26,9 +27,7 @@ public class Main {
         operationStrategyMap.put("r", new ReturnOperationStrategy());
 
         FruitService storeActivityService = new FruitServiceImpl(operationStrategyMap);
-
-        String data = fileService.readData("src/main/resources/inputReport");
-        String report = storeActivityService.getReport(data);
-        fileService.makeReport(report, "src/main/resources/resultReport");
+        String report = storeActivityService.createReport(data);
+        fileService.writeToFile(report, "src/main/resources/resultReport");
     }
 }

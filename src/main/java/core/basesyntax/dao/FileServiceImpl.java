@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class FileServiceImpl implements FileService {
     @Override
-    public String readData(String fileName) {
+    public String readFile(String fileName) {
         StringBuilder stringBuilder = new StringBuilder();
         try (BufferedReader bufferedReader =
                      new BufferedReader(new FileReader(fileName))) {
@@ -23,9 +23,9 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void makeReport(String report, String fileName) {
+    public void writeToFile(String content, String fileName) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
-            bufferedWriter.write(report);
+            bufferedWriter.write(content);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file " + fileName + e);
         }
