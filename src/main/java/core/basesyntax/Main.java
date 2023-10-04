@@ -27,8 +27,8 @@ public class Main {
 
         FruitService storeActivityService = new FruitServiceImpl(operationStrategyMap);
 
-        String data = fileService.readData("inputReport");
+        String data = fileService.readData("src/main/resources/inputReport");
         String report = storeActivityService.getReport(data);
-        fileService.makeReport(report, "resultReport");
+        fileService.makeReport(report, "src/main/resources/resultReport");
     }
 }
