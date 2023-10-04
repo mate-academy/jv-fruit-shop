@@ -8,13 +8,13 @@ import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.BalanceOperationStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseOperationStrategy;
 import core.basesyntax.strategy.ReturnOperationStrategy;
 import core.basesyntax.strategy.SupplyOperationStrategy;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

@@ -1,7 +1,6 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +23,8 @@ public class Storage {
         return fruitInventory;
     }
 
-    public void updateFruitQuantity(FruitTransaction.Operation operation, String fruitName, int quantity) {
+    public void updateFruitQuantity(FruitTransaction.Operation operation,
+                                    String fruitName, int quantity) {
         FruitTransaction fruit = fruitInventory.get(fruitName);
         if (fruit != null) {
             fruit.setQuantity(quantity);

@@ -21,7 +21,14 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
+        private String code;
+
         Operation(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
         }
     }
 }
