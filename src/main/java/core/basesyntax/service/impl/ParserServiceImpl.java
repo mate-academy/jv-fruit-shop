@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,9 +17,12 @@ public class ParserServiceImpl implements ParserService {
         return fileData.stream()
                 .map(line -> line.split(SEPARATOR))
                 .map(transaction ->
-                        new FruitTransaction(FruitTransaction.Operation.getOperation(transaction[OPERATION_INDEX].trim()),
+                        new FruitTransaction(FruitTransaction.Operation.getOperation(
+                                transaction[OPERATION_INDEX].trim()),
                                 new Fruit(transaction[PRODUCT_INDEX].trim()),
-                                Integer.parseInt(transaction[QUANTITY_INDEX].trim()))
+                                Integer.parseInt(transaction[QUANTITY_INDEX].trim()
+                                )
+                        )
                 )
                 .collect(Collectors.toList());
     }

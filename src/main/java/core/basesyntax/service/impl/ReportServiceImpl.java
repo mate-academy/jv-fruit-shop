@@ -8,6 +8,7 @@ import java.util.Map;
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
     private static final String REGEX = "%s,%s";
+
     @Override
     public List<String> createReport(Map<String, Integer> storage) {
         List<String> report = new ArrayList<>();

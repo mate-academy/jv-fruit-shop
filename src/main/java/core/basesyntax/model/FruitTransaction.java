@@ -25,7 +25,6 @@ public class FruitTransaction {
         return quantity;
     }
 
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),

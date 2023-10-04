@@ -16,7 +16,6 @@ import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseHandler;
 import core.basesyntax.strategy.impl.ReturnHandler;
 import core.basesyntax.strategy.impl.SupplyHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +35,8 @@ public class Main {
         ParserService parserService = new ParserServiceImpl();
         List<FruitTransaction> fruitTransactions = parserService
                 .parseTransactions(read);
-        FruitShopServiceImpl fruitShopService = new FruitShopServiceImpl(new OperationStrategyImpl(operationHandlerMap));
+        FruitShopServiceImpl fruitShopService = new FruitShopServiceImpl(
+                new OperationStrategyImpl(operationHandlerMap));
         Map<String, Integer> stringIntegerMap = fruitShopService
                 .processTransactions(fruitTransactions);
         ReportService reportService = new ReportServiceImpl();

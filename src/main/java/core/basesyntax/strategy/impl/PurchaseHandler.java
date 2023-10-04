@@ -11,7 +11,7 @@ public class PurchaseHandler implements OperationHandler {
         String fruit = transaction.getFruit().getName();
         int quantity = transaction.getQuantity();
         if (fruitQuantities.getOrDefault(fruit, 0) - quantity < 0) {
-            throw new RuntimeException("Not enough of "+ fruit + " to perform this operation");
+            throw new RuntimeException("Not enough of " + fruit + " to perform this operation");
         }
         fruitQuantities.put(fruit, fruitQuantities.getOrDefault(fruit, 0) - quantity);
         return fruitQuantities;
