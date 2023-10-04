@@ -18,7 +18,7 @@ public class FileParser {
             String[] array = record.split(SEPARATOR);
             FruitsTransaction operation = new FruitsTransaction();
             operation.setOperation(
-                    FruitsTransaction.Operation.getOption(array[OPERATION_INDEX]));
+                    FruitsTransaction.Operation.fromString(array[OPERATION_INDEX]));
             operation.setFruit(array[FRUIT_INDEX]);
             operation.setQuantity(Integer.parseInt(array[QUANTITY_INDEX]));
             operationList.add(operation);

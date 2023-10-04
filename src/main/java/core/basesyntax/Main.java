@@ -14,22 +14,19 @@ import core.basesyntax.service.operationhadler.SupplyHandler;
 import core.basesyntax.service.operationhadler.TransactionHandler;
 import core.basesyntax.service.summaryofoperations.PreparationReportList;
 import core.basesyntax.strategy.StrategyImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String inputFilePath = "src/main/resources"
-            + "/FruitFiles.csv";
-    private static final String reportFilePath = "src/main/resources"
-            + "/reportFiles/report.csv";
+    private static final String inputFilePath = "src/main/resources" + "/FruitFiles.csv";
+    private static final String reportFilePath = "src/main/resources" + "/reportFiles/report.csv";
 
     public static void main(String[] args) {
-        Map<FruitsTransaction.Operation, TransactionHandler> operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put(FruitsTransaction.Operation.BALANCE, new BalanceHandler());
-        operationStrategyMap.put(FruitsTransaction.Operation.PURCHASE, new PurchaseHandler());
-        operationStrategyMap.put(FruitsTransaction.Operation.SUPPLY, new SupplyHandler());
-        operationStrategyMap.put(FruitsTransaction.Operation.RETURN, new ReturnHandler());
+        Map<FruitsTransaction.Operation, TransactionHandler> operationStrategyMap =
+                Map.of(FruitsTransaction.Operation.BALANCE, new BalanceHandler(),
+                        FruitsTransaction.Operation.PURCHASE, new PurchaseHandler(),
+                        FruitsTransaction.Operation.SUPPLY, new SupplyHandler(),
+                        FruitsTransaction.Operation.RETURN, new ReturnHandler());
         FileReader fileReader = new FileReaderImpl();
         List<String> dataFromFile = fileReader.readFromCsvFile(inputFilePath);
         FileParser fileParser = new FileParser();

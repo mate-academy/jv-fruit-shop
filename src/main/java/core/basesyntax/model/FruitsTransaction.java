@@ -5,12 +5,6 @@ public class FruitsTransaction {
     private String fruit;
     private int quantity;
 
-    @Override
-    public String toString() {
-        return "FruitsTransaction{" + "operation=" + operation + ", fruit='" + fruit + '\'' + ", "
-                + "quantity=" + quantity + '}';
-    }
-
     public Operation getOperation() {
         return operation;
     }
@@ -35,6 +29,12 @@ public class FruitsTransaction {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return "FruitsTransaction{" + "operation=" + operation + ", fruit='" + fruit + '\'' + ", "
+                + "quantity=" + quantity + '}';
+    }
+
     public enum Operation {
         BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
 
@@ -48,16 +48,13 @@ public class FruitsTransaction {
             return code;
         }
 
-        public static Operation getOption(String option) {
+        public static Operation fromString(String code) {
             for (Operation operation : Operation.values()) {
-                if (operation.code.equals(option)) {
+                if (operation.code.equals(code)) {
                     return operation;
                 }
             }
-            throw new RuntimeException("Unknown operation!");
+            throw new IllegalArgumentException("Unknown operation - " + code + "!!!");
         }
     }
 }
-
-
-

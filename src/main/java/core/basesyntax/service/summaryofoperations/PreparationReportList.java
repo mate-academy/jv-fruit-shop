@@ -17,4 +17,3 @@ public class PreparationReportList {
         return reportString.toString();
     }
 }
-

@@ -11,8 +11,8 @@ public class FruitShop {
         this.strategy = strategy;
     }
 
-    public void processOfOperations(List<FruitsTransaction> operationList) {
-        for (FruitsTransaction operation : operationList) {
+    public void processOfOperations(List<FruitsTransaction> operations) {
+        for (FruitsTransaction operation : operations) {
             strategy.getOperationHandler(operation.getOperation())
                     .handleTransaction(operation);
         }
