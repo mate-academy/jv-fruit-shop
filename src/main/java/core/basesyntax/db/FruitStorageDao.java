@@ -1,6 +1,6 @@
 package core.basesyntax.db;
 
-public interface FruitDao {
+public interface FruitStorageDao {
     void increment(String fruit, int count);
 
     void decrement(String fruit, int count);

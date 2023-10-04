@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.FruitDao;
+import core.basesyntax.db.FruitStorageDao;
 import core.basesyntax.service.ReportGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String REPORT_HEAD = "fruit,quantity";
-    private final FruitDao fruitDb;
+    private final FruitStorageDao fruitDb;
 
-    public ReportGeneratorImpl(FruitDao fruitDb) {
+    public ReportGeneratorImpl(FruitStorageDao fruitDb) {
         this.fruitDb = fruitDb;
     }
 

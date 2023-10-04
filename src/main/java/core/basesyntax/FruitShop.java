@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.db.FruitDao;
-import core.basesyntax.db.FruitDaoStorageInMap;
+import core.basesyntax.db.FruitStorageDao;
+import core.basesyntax.db.FruitStorageDaoImpl;
 import core.basesyntax.model.Operation;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.DataParser;
@@ -25,6 +25,7 @@ import java.util.Map;
 public class FruitShop {
     private static final String DATA_FILE_NAME = "src/main/resources/data.csv";
     private static final String REPORT_FILE_NAME = "src/main/resources/report.csv";
+    private static final int OFFSET = 1;
 
     public static void main(String[] args) {
         // Initialization
@@ -34,7 +35,7 @@ public class FruitShop {
         strategies.put(OperationType.PURCHASE, new OperationHandlerPurchase());
         strategies.put(OperationType.RETURN, new OperationHandlerReturn());
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategies);
-        FruitDao fruitDb = new FruitDaoStorageInMap();
+        FruitStorageDao fruitDb = new FruitStorageDaoImpl();
 
         // Read data
         DataReader dataReader = new DataReaderCsv();
@@ -42,7 +43,7 @@ public class FruitShop {
 
         // Parse & put in DB
         DataParser dataParser = new DataParserImpl();
-        for (int i = 1; i < data.length; i++) {
+        for (int i = OFFSET; i < data.length; i++) {
             String entry = data[i];
             Operation operation = dataParser.parse(entry);
             OperationHandler operationHandler = operationStrategy.get(operation.getOperationType());

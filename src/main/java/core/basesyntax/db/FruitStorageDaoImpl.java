@@ -4,10 +4,10 @@ import core.basesyntax.errors.DaoError;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FruitDaoStorageInMap implements FruitDao {
+public class FruitStorageDaoImpl implements FruitStorageDao {
     private final Map<String, Integer> db;
 
-    public FruitDaoStorageInMap() {
+    public FruitStorageDaoImpl() {
         this.db = new HashMap<>();
     }
 

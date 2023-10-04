@@ -7,6 +7,10 @@ import core.basesyntax.service.DataParser;
 
 public class DataParserImpl implements DataParser {
     private static final String SEPARATOR = ",";
+    private static final int POSITION_OPERATION_TYPE = 0;
+    private static final int POSITION_FRUIT = 1;
+    private static final int POSITION_COUNT = 2;
+    private static final int RIGHT_DATA_COLUMNS_COUNT = 3;
 
     @Override
     public Operation parse(String entry) {
@@ -14,26 +18,28 @@ public class DataParserImpl implements DataParser {
             throw new DataParserError("Data entry is Null");
         }
         String[] parts = entry.split(SEPARATOR);
-        if (parts.length != 3) {
-            throw new DataParserError("Invalid parameters count in row, need 3, available "
+        if (parts.length != RIGHT_DATA_COLUMNS_COUNT) {
+            throw new DataParserError("Invalid parameters count in row, need "
+                    + RIGHT_DATA_COLUMNS_COUNT + ", available "
                     + parts.length);
         }
         OperationType operationType;
         try {
-            operationType = OperationType.fromString(parts[0]);
+            operationType = OperationType.fromString(parts[POSITION_OPERATION_TYPE]);
         } catch (IllegalArgumentException e) {
-            throw new DataParserError("Invalid operation type " + parts[0], e);
+            throw new DataParserError("Invalid operation type "
+                    + parts[POSITION_OPERATION_TYPE], e);
         }
         int count;
         try {
-            count = Integer.parseInt(parts[2]);
+            count = Integer.parseInt(parts[POSITION_COUNT]);
         } catch (NumberFormatException e) {
             throw new DataParserError("Count does not contain a parsable integer "
-                    + parts[2], e);
+                    + parts[POSITION_COUNT], e);
         }
         if (count <= 0) {
             throw new DataParserError("Invalid count " + count);
         }
-        return new Operation(operationType, parts[1], count);
+        return new Operation(operationType, parts[POSITION_FRUIT], count);
     }
 }

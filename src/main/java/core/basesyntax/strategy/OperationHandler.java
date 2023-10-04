@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.FruitDao;
+import core.basesyntax.db.FruitStorageDao;
 
 public interface OperationHandler {
-    void makeChanges(FruitDao db, String fruit, int count);
+    void makeChanges(FruitStorageDao db, String fruit, int count);
 }

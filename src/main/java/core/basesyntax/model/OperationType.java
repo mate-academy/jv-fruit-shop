@@ -22,6 +22,6 @@ public enum OperationType {
                 return type;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Invalid operation name: " + text);
     }
 }
