@@ -25,6 +25,7 @@ public class FruitTransaction {
         return quantity;
     }
 
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -40,5 +41,15 @@ public class FruitTransaction {
         public String getOperationType() {
             return operationType;
         }
+
+        public static Operation getOperation(String operationCode) {
+            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+                if (operation.getOperationType().equals(operationCode)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("No operation was found: " + operationCode);
+        }
+
     }
 }

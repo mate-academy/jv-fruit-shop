@@ -18,7 +18,7 @@ public class ReaderServiceImpl implements ReaderService {
                 parsedData.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Something is wrong", e);
+            throw new RuntimeException("Something is wrong with file " + filePath, e);
         }
 
         return parsedData;
