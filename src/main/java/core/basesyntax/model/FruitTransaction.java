@@ -1,7 +1,10 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private int quantity;
+
+    public FruitTransaction(int quantity) {
+        this.quantity = quantity;
+    }
 
     public int getQuantity() {
         return quantity;
@@ -11,9 +14,7 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public FruitTransaction(int quantity) {
-        this.quantity = quantity;
-    }
+    private int quantity;
 
     public enum Operation {
         BALANCE("b"),
@@ -21,7 +22,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String code;
+        private final String code;
 
         Operation(String code) {
             this.code = code;
