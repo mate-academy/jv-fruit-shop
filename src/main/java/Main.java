@@ -19,7 +19,8 @@ public class Main {
         try {
             Map<String, Integer> fruitInventory = new HashMap<>();
 
-            List<FruitTransaction> transactions = csvReaderService.readTransactions(inputFilePath);
+            final List<FruitTransaction> transactions
+                    = csvReaderService.readTransactions(inputFilePath);
             Map<FruitTransaction.Operation, BiConsumer<String, Integer>> operationMap
                     = new HashMap<>();
             operationMap.put(FruitTransaction.Operation.BALANCE, (fruit, quantity) ->
