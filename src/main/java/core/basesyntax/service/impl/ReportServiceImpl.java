@@ -1,12 +1,14 @@
-package core.basesyntax.service.summaryofoperations;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.FruitStorage;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
-public class PreparationReportList {
+public class ReportServiceImpl implements ReportService {
     private static final String TITLE = "fruit,quantity\n";
     private static final String DELIMITER = ",";
 
+    @Override
     public String reportPreparation() {
         Map<String, Integer> reportMap = FruitStorage.fruitsStorage;
         StringBuilder reportString = new StringBuilder(TITLE);

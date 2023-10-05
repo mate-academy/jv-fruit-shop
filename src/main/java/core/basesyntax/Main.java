@@ -1,41 +1,43 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitsTransaction;
-import core.basesyntax.service.FruitShop;
-import core.basesyntax.service.fileservices.FileParser;
-import core.basesyntax.service.fileservices.FileReader;
-import core.basesyntax.service.fileservices.FileReaderImpl;
-import core.basesyntax.service.fileservices.Writer;
-import core.basesyntax.service.fileservices.WriterImpl;
-import core.basesyntax.service.operationhadler.BalanceHandler;
-import core.basesyntax.service.operationhadler.PurchaseHandler;
-import core.basesyntax.service.operationhadler.ReturnHandler;
-import core.basesyntax.service.operationhadler.SupplyHandler;
-import core.basesyntax.service.operationhadler.TransactionHandler;
-import core.basesyntax.service.summaryofoperations.PreparationReportList;
-import core.basesyntax.strategy.StrategyImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.FruitShopService;
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.service.impl.operationhadler.BalanceHandler;
+import core.basesyntax.service.impl.operationhadler.PurchaseHandler;
+import core.basesyntax.service.impl.operationhadler.ReturnHandler;
+import core.basesyntax.service.impl.operationhadler.SupplyHandler;
+import core.basesyntax.strategy.OperationHandler;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String inputFilePath = "src/main/resources" + "/FruitFiles.csv";
-    private static final String reportFilePath = "src/main/resources" + "/reportFiles/report.csv";
+    private static final String inputFilePath = "src/main/resources/FruitFiles.csv";
+    private static final String reportFilePath = "src/main/resources/reportFiles/report.csv";
 
     public static void main(String[] args) {
-        Map<FruitsTransaction.Operation, TransactionHandler> operationStrategyMap =
-                Map.of(FruitsTransaction.Operation.BALANCE, new BalanceHandler(),
-                        FruitsTransaction.Operation.PURCHASE, new PurchaseHandler(),
-                        FruitsTransaction.Operation.SUPPLY, new SupplyHandler(),
-                        FruitsTransaction.Operation.RETURN, new ReturnHandler());
-        FileReader fileReader = new FileReaderImpl();
+        Map<FruitTransaction.Operation, OperationHandler> operationStrategyMap =
+                Map.of(FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+                        FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+                        FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+                        FruitTransaction.Operation.RETURN, new ReturnHandler());
+        ReaderService fileReader = new ReaderServiceImpl();
         List<String> dataFromFile = fileReader.readFromCsvFile(inputFilePath);
-        FileParser fileParser = new FileParser();
-        List<FruitsTransaction> operationList = fileParser.parseData(dataFromFile);
-        FruitShop fruitShop = new FruitShop(new StrategyImpl(operationStrategyMap));
+        ParserServiceImpl fileParser = new ParserServiceImpl();
+        List<FruitTransaction> operationList = fileParser.parseData(dataFromFile);
+        FruitShopService fruitShop =
+                new FruitShopService(new OperationStrategyImpl(
+                        operationStrategyMap));
         fruitShop.processOfOperations(operationList);
-        PreparationReportList preparationReportList = new PreparationReportList();
+        ReportServiceImpl preparationReportList = new ReportServiceImpl();
         String dataForReport = preparationReportList.reportPreparation();
-        Writer writer = new WriterImpl();
+        WriterService writer = new WriterServiceImpl();
         writer.writeData(dataForReport, reportFilePath);
     }
 }

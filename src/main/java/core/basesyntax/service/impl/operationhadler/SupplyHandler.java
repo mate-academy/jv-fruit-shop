@@ -1,11 +1,12 @@
-package core.basesyntax.service.operationhadler;
+package core.basesyntax.service.impl.operationhadler;
 
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.model.FruitsTransaction;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 
-public class SupplyHandler implements TransactionHandler {
+public class SupplyHandler implements OperationHandler {
     @Override
-    public void handleTransaction(FruitsTransaction transaction) {
+    public void handleTransaction(FruitTransaction transaction) {
         int currentQuantity = FruitStorage.fruitsStorage.get(transaction.getFruit());
         FruitStorage.fruitsStorage.put(transaction.getFruit(), currentQuantity
                 + transaction.getQuantity());
