@@ -1,13 +1,12 @@
 import core.basesyntax.FruitTransaction;
-import service.CsvReaderService;
-import service.CsvWriterService;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import service.CsvReaderService;
+import service.CsvWriterService;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +20,6 @@ public class Main {
             Map<String, Integer> fruitInventory = new HashMap<>();
 
             List<FruitTransaction> transactions = csvReaderService.readTransactions(inputFilePath);
-
             Map<FruitTransaction.Operation, BiConsumer<String, Integer>> operationMap
                     = new HashMap<>();
             operationMap.put(FruitTransaction.Operation.BALANCE, (fruit, quantity) ->
