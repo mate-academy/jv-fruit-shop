@@ -1,12 +1,12 @@
 import core.basesyntax.FruitTransaction;
-import service.CsvReaderService;
-import service.CsvWriterService;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import service.CsvReaderService;
+import service.CsvWriterService;
+
 
 public class Main {
     public static void main(String[] args) {

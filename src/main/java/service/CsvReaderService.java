@@ -1,7 +1,6 @@
 package service;
 
 import core.basesyntax.FruitTransaction;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,11 +15,11 @@ public class CsvReaderService {
             br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                    String type = parts[0].trim();
-                    String fruit = parts[1].trim();
-                    int quantity = Integer.parseInt(parts[2].trim());
-                    transactions.add(new FruitTransaction(FruitTransaction.Operation.fromCode(type),
-                            fruit, quantity));
+                String type = parts[0].trim();
+                String fruit = parts[1].trim();
+                int quantity = Integer.parseInt(parts[2].trim());
+                transactions.add(new FruitTransaction(FruitTransaction.Operation.fromCode(type),
+                        fruit, quantity));
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't read from the file", e);

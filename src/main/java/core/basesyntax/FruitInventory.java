@@ -29,7 +29,7 @@ public class FruitInventory {
     }
 
     public void setInventory(Map<String, Integer> inventory) {
-            this.inventory = inventory;
+        this.inventory = inventory;
     }
 
     public void addToInventory(String fruit, int quantity) {
