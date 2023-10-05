@@ -1,11 +1,12 @@
 import core.basesyntax.FruitTransaction;
+import service.CsvReaderService;
+import service.CsvWriterService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import service.CsvReaderService;
-import service.CsvWriterService;
+import java.util.function.BiConsumer;
 
 public class Main {
     public static void main(String[] args) {
@@ -20,42 +21,42 @@ public class Main {
 
             Map<String, Integer> fruitInventory = new HashMap<>();
 
+            Map<FruitTransaction.Operation, BiConsumer<String, Integer>> operationMap = new HashMap<>();
+            operationMap.put(FruitTransaction.Operation.BALANCE, (fruit, quantity) ->
+                    fruitInventory.put(fruit, fruitInventory.getOrDefault(fruit, 0) + quantity));
+            operationMap.put(FruitTransaction.Operation.SUPPLY, (fruit, quantity) ->
+                    fruitInventory.put(fruit, fruitInventory.getOrDefault(fruit, 0) + quantity));
+            operationMap.put(FruitTransaction.Operation.PURCHASE, (fruit, quantity) -> {
+                if (fruitInventory.containsKey(fruit)) {
+                    int currentQuantity = fruitInventory.get(fruit);
+                    if (currentQuantity >= quantity) {
+                        fruitInventory.put(fruit, currentQuantity - quantity);
+                    } else {
+                        throw new RuntimeException("Not enough " + fruit + " in inventory");
+                    }
+                } else {
+                    throw new RuntimeException("Fruit " + fruit + " not found in inventory");
+                }
+            });
+            operationMap.put(FruitTransaction.Operation.RETURN, (fruit, quantity) -> {
+                if (fruitInventory.containsKey(fruit)) {
+                    int currentQuantity = fruitInventory.get(fruit);
+                    fruitInventory.put(fruit, currentQuantity + quantity);
+                } else {
+                    throw new RuntimeException("Fruit " + fruit + " not found in inventory");
+                }
+            });
+
             for (FruitTransaction transaction : transactions) {
                 String fruit = transaction.getFruit();
                 int quantity = transaction.getQuantity();
+                FruitTransaction.Operation operation = transaction.getOperation();
 
-                switch (transaction.getOperation()) {
-                    case BALANCE:
-                    case SUPPLY:
-                        fruitInventory.put(fruit, fruitInventory.getOrDefault(fruit, 0)
-                                + quantity);
-                        break;
-                    case PURCHASE:
-                        if (fruitInventory.containsKey(fruit)) {
-                            int currentQuantity = fruitInventory.get(fruit);
-                            if (currentQuantity >= quantity) {
-                                fruitInventory.put(fruit, currentQuantity - quantity);
-                            } else {
-                                throw new RuntimeException("Not enough " + fruit
-                                        + " in inventory");
-                            }
-                        } else {
-                            throw new RuntimeException("Fruit " + fruit
-                                    + " not found in inventory");
-                        }
-                        break;
-                    case RETURN:
-                        if (fruitInventory.containsKey(fruit)) {
-                            int currentQuantity = fruitInventory.get(fruit);
-                            fruitInventory.put(fruit, currentQuantity + quantity);
-                        } else {
-                            throw new RuntimeException("Fruit " + fruit
-                                    + " not found in inventory");
-                        }
-                        break;
-                    default:
-                        throw new RuntimeException("Unknown operation: "
-                                + transaction.getOperation());
+                BiConsumer<String, Integer> operationFunction = operationMap.get(operation);
+                if (operationFunction != null) {
+                    operationFunction.accept(fruit, quantity);
+                } else {
+                    throw new RuntimeException("Unknown operation: " + operation);
                 }
             }
 
