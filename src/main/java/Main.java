@@ -7,7 +7,6 @@ import java.util.Map;
 import service.CsvReaderService;
 import service.CsvWriterService;
 
-
 public class Main {
     public static void main(String[] args) {
         CsvReaderService csvReaderService = new CsvReaderService();
