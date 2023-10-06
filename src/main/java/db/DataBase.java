@@ -1,7 +1,6 @@
 package db;
 
 import core.basesyntax.FruitInventory;
-
 import java.util.HashMap;
 import java.util.Map;
 

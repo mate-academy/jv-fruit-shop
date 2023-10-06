@@ -13,8 +13,10 @@ public class Main {
         CsvReaderService csvReaderService = new CsvReaderService();
         CsvWriterService csvWriterService = new CsvWriterService();
 
-        String inputFilePath = "C:\\Users\\BEST\\IdeaProjects\\jv-fruit-shop\\src\\main\\resources\\input.csv";
-        String outputFilePath = "C:\\Users\\BEST\\IdeaProjects\\jv-fruit-shop\\src\\main\\resources\\output.csv";
+        String inputFilePath
+                = "C:\\Users\\BEST\\IdeaProjects\\jv-fruit-shop\\src\\main\\resources\\input.csv";
+        String outputFilePath
+                = "C:\\Users\\BEST\\IdeaProjects\\jv-fruit-shop\\src\\main\\resources\\output.csv";
 
         try {
             Map<String, Integer> fruitInventory = new HashMap<>();
