@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String inputFilePath = "src/main/resources/FruitFiles.csv";
-    private static final String reportFilePath = "src/main/resources/reportFiles/report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/FruitFiles.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/reportFiles/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationStrategyMap =
@@ -28,16 +28,16 @@ public class Main {
                         FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
                         FruitTransaction.Operation.RETURN, new ReturnHandler());
         ReaderService fileReader = new ReaderServiceImpl();
-        List<String> dataFromFile = fileReader.readFromCsvFile(inputFilePath);
+        List<String> dataFromFile = fileReader.readFromCsvFile(INPUT_FILE_PATH);
         ParserServiceImpl fileParser = new ParserServiceImpl();
-        List<FruitTransaction> operationList = fileParser.parseData(dataFromFile);
+        List<FruitTransaction> operation = fileParser.parseData(dataFromFile);
         FruitShopService fruitShop =
                 new FruitShopService(new OperationStrategyImpl(
                         operationStrategyMap));
-        fruitShop.processOfOperations(operationList);
-        ReportServiceImpl preparationReportList = new ReportServiceImpl();
-        String dataForReport = preparationReportList.reportPreparation();
+        fruitShop.processOfOperations(operation);
+        ReportServiceImpl report = new ReportServiceImpl();
+        String dataForReport = report.reportPreparation();
         WriterService writer = new WriterServiceImpl();
-        writer.writeData(dataForReport, reportFilePath);
+        writer.writeData(dataForReport, REPORT_FILE_PATH);
     }
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.FruitStorage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
 import java.util.Map;
 
@@ -10,7 +10,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String reportPreparation() {
-        Map<String, Integer> reportMap = FruitStorage.fruitsStorage;
+        Map<String, Integer> reportMap = Storage.fruitsStorage;
         StringBuilder reportString = new StringBuilder(TITLE);
         for (Map.Entry<String, Integer> entry : reportMap.entrySet()) {
             reportString.append(entry.getKey()).append(DELIMITER).append(entry.getValue())
