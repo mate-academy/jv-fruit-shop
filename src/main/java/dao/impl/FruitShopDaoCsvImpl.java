@@ -16,29 +16,6 @@ public class FruitShopDaoCsvImpl implements FruitShopDao {
         this.readerFileService = readerFileService;
     }
 
-//    @Override
-//    public void add(FruitTransaction fruitTransaction) {
-//        FruitShop.fruitShop.add(fruitTransaction);
-//        activitiesStrategy.get(fruitTransaction.getOperation())
-//                .executeTransaction(fruitTransaction);
-//    }
-//
-//    @Override
-//    public FruitTransaction get(String fruit) {
-//        List<String> fruitList;
-//        fruitList = readerFileService.readFromFile();
-//        return fruitList.stream()
-//                .filter(line -> line.startsWith(fruit,1))
-//                        .map(this::getFromCvsRow)
-//                        .findFirst()
-//                        .get();
-//    }
-//
-//    @Override
-//    public List<FruitTransaction> getAll() {
-//        return FruitShop.fruitShop;
-//    }
-
     public void processTransactions(List<String> transactionLines) {
         for (int i = 1; i < transactionLines.size(); i++) {
             FruitTransaction fruitTransactionFromCvsRow = getFromCvsRow(transactionLines.get(i));
