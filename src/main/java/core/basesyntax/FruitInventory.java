@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitInventory {
-
-    private final String fruit;
-    private final int quantity;
+    private String fruit;
+    private int quantity;
 
     private Map<String, Integer> inventory;
 
