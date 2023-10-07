@@ -1,7 +1,6 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,13 +26,21 @@ public class Storage {
     public void updateFruitQuantity(FruitTransaction.Operation operation, String fruitName, int quantity) {
         int currentQuantity = fruitInventory.getOrDefault(fruitName, 0);
         switch (operation) {
-            case BALANCE, SUPPLY, RETURN -> currentQuantity += quantity;
-            case PURCHASE -> currentQuantity -= quantity;
-            default -> throw new IllegalArgumentException("Unknown operation type: " + operation);
+            case BALANCE:
+            case SUPPLY:
+            case RETURN:
+                currentQuantity += quantity;
+                break;
+            case PURCHASE:
+                currentQuantity -= quantity;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown operation type: " + operation);
         }
         if (currentQuantity < 0) {
             throw new IllegalArgumentException("Negative fruit quantity not allowed: " + fruitName);
         }
+
         fruitInventory.put(fruitName, currentQuantity);
     }
 }
