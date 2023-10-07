@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import service.WriterFileService;
 
 public class WriterFileServiceImpl implements WriterFileService {
-    private static final String FILE_NAME_OUTPUT = "output.csv";
+    private static final String FILE_NAME_OUTPUT = "src/main/resources/output.csv";
 
     @Override
     public void writeToFile(String report) {

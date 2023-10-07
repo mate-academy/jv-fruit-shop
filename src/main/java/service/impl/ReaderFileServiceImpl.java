@@ -7,7 +7,7 @@ import java.util.List;
 import service.ReaderFileService;
 
 public class ReaderFileServiceImpl implements ReaderFileService {
-    private static final String FILE_NAME_INPUT = "input.csv";
+    private static final String FILE_NAME_INPUT = "src/main/resources/input.csv";
 
     @Override
     public List<String> readFromFile() {
