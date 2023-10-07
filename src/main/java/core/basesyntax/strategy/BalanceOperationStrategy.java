@@ -5,12 +5,10 @@ import core.basesyntax.model.FruitTransaction;
 
 public class BalanceOperationStrategy implements OperationStrategy {
     @Override
-    public void applyStrategy(String[] transaction) {
-        if (transaction.length != 3) {
-            throw new IllegalArgumentException("Invalid balance transaction format.");
-        }
-        String fruitName = transaction[1];
-        int quantity = Integer.parseInt(transaction[2]);
+    public void applyStrategy(FruitTransaction transaction) {
+
+        String fruitName = transaction.getFruit();
+        int quantity = transaction.getQuantity();
         Storage storage = Storage.getInstance();
         storage.updateFruitQuantity(FruitTransaction.Operation.BALANCE, fruitName, quantity);
     }

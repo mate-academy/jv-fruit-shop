@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
@@ -12,18 +13,9 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void processTransaction(String[] transaction) {
-        if (transaction[0].equalsIgnoreCase("type")) {
-            return;
+    public void processTransaction(FruitTransaction transaction) {
+            FruitTransaction.Operation operationType = transaction.getOperation();
+            OperationStrategy strategy = operationStrategies.get(operationType.getCode());
+            strategy.applyStrategy(transaction);
         }
-        if (transaction.length < 3) {
-            throw new IllegalArgumentException("Invalid transaction format.");
-        }
-        String operationType = transaction[0];
-        if (!operationStrategies.containsKey(operationType)) {
-            throw new IllegalArgumentException("Unknown operation type: " + operationType);
-        }
-        OperationStrategy strategy = operationStrategies.get(operationType);
-        strategy.applyStrategy(transaction);
     }
-}
