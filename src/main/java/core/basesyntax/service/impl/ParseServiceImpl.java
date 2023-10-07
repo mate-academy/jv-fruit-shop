@@ -11,7 +11,9 @@ public class ParseServiceImpl implements ParseService {
         for (String line : inputLines) {
             line = line.trim();
             String[] transaction = line.split("\\s*,\\s*");
-            fruitList.add(new FruitTransaction(FruitTransaction.Operation.fromCode(transaction[0]), transaction[1], Integer.parseInt(transaction[2])));
+            fruitList.add(new FruitTransaction(FruitTransaction.Operation.fromCode(transaction[0]),
+                    transaction[1],
+                    Integer.parseInt(transaction[2])));
         }
         return fruitList;
     }

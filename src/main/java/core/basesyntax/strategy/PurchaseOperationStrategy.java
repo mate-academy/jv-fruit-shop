@@ -9,7 +9,7 @@ public class PurchaseOperationStrategy implements OperationStrategy {
         String fruitName = transaction.getFruit();
         int quantity = transaction.getQuantity();
         Storage storage = Storage.getInstance();
-        storage.updateFruitQuantity(FruitTransaction.
-                Operation.PURCHASE, fruitName, quantity);
+        storage.updateFruitQuantity(FruitTransaction
+                .Operation.PURCHASE, fruitName, quantity);
     }
 }

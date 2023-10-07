@@ -23,7 +23,8 @@ public class Storage {
         return new HashMap<>(fruitInventory);
     }
 
-    public void updateFruitQuantity(FruitTransaction.Operation operation, String fruitName, int quantity) {
+    public void updateFruitQuantity(FruitTransaction.Operation operation,
+                                    String fruitName, int quantity) {
         int currentQuantity = fruitInventory.getOrDefault(fruitName, 0);
         switch (operation) {
             case BALANCE:
