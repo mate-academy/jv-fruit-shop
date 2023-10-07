@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FruitInfoService;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class FruitInfoServiceImpl implements FruitInfoService {
+public class ReportServiceImpl implements ReportService {
     @Override
-    public String createReport(Map<String, Integer> groupedReport) {
+    public String createReport(Map<String, Integer> groupedTransactions) {
         return "fruit,quantity" + System.lineSeparator()
-                + groupedReport.entrySet().stream()
+                + groupedTransactions.entrySet().stream()
                 .map(e -> e.getKey() + "," + e.getValue() + System.lineSeparator())
                 .collect(Collectors.joining()).trim();
     }

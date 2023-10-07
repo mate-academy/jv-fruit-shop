@@ -2,15 +2,15 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FileService;
 import core.basesyntax.dao.FileServiceImpl;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FruitInfoConverter;
-import core.basesyntax.service.FruitInfoGrouper;
-import core.basesyntax.service.FruitInfoService;
-import core.basesyntax.service.impl.FruitInfoConverterImpl;
-import core.basesyntax.service.impl.FruitInfoGrouperImpl;
-import core.basesyntax.service.impl.FruitInfoServiceImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionConverter;
+import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.TransactionConverterImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.BalanceOperationStrategy;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationStrategy;
 import core.basesyntax.strategy.ReturnOperationStrategy;
 import core.basesyntax.strategy.SupplyOperationStrategy;
@@ -22,25 +22,30 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class Main {
+    private static final String INPUT_FILE_PATH = "src/main/resources/inputReport";
+    private static final String RESULT_FILE_PATH = "src/main/resources/resultReport";
+
     public static void main(String[] args) {
         FileService fileService = new FileServiceImpl();
-        String data = fileService.readFile("src/main/resources/inputReport");
+        String data = fileService.readFile(INPUT_FILE_PATH);
 
-        FruitInfoConverter fruitInfoConverter = new FruitInfoConverterImpl();
-        List<Fruit> convertedFruitsInfo = fruitInfoConverter.convertFruitInfo(data);
+        TransactionConverter fruitInfoConverter = new TransactionConverterImpl();
+        List<FruitTransaction> transactions = fruitInfoConverter.parse(data);
 
-        Map<String, OperationStrategy> operationStrategyMap = new HashMap<>();
+        Map<String, OperationHandler> operationStrategyMap = new HashMap<>();
         operationStrategyMap.put("b", new BalanceOperationStrategy());
         operationStrategyMap.put("p", new PurchaseOperationStrategy());
         operationStrategyMap.put("s", new SupplyOperationStrategy());
         operationStrategyMap.put("r", new ReturnOperationStrategy());
 
-        FruitInfoGrouper fruitGrouper = new FruitInfoGrouperImpl(operationStrategyMap);
-        Map<String, Integer> groupedInfoFruits = fruitGrouper.groupFruitsInfo(convertedFruitsInfo);
+        TransactionService transactionService =
+                new TransactionServiceImpl(operationStrategyMap);
+        Map<String, Integer> groupedTransactions =
+                transactionService.handleTransactions(transactions);
 
-        FruitInfoService fruitInfoService = new FruitInfoServiceImpl();
-        String report = fruitInfoService.createReport(groupedInfoFruits);
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.createReport(groupedTransactions);
 
-        fileService.writeToFile(report, "src/main/resources/resultReport");
+        fileService.writeToFile(report, RESULT_FILE_PATH);
     }
 }

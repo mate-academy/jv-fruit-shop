@@ -1,10 +1,10 @@
 package core.basesyntax.strategy;
 
-public class SupplyOperationStrategy implements OperationStrategy {
-    private static final int AMOUNT_INDEX = 2;
+import core.basesyntax.model.FruitTransaction;
 
+public class SupplyOperationStrategy implements OperationHandler {
     @Override
-    public int getAmount(int amount) {
-        return amount;
+    public void handle(FruitTransaction fruitTransaction) {
+        fruitTransaction.setAmount(fruitTransaction.getAmount());
     }
 }
