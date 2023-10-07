@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.strategy.OperationStrategy;
+import java.util.List;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
@@ -13,9 +14,11 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void processTransaction(FruitTransaction transaction) {
-            FruitTransaction.Operation operationType = transaction.getOperation();
+    public void processTransactions(List<FruitTransaction> transaction) {
+        for (FruitTransaction fruitTransaction : transaction) {
+            FruitTransaction.Operation operationType = fruitTransaction.getOperation();
             OperationStrategy strategy = operationStrategies.get(operationType.getCode());
-            strategy.applyStrategy(transaction);
+            strategy.applyStrategy(fruitTransaction);
         }
     }
+}

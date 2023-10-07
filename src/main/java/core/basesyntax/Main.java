@@ -9,7 +9,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseOperationStrategy;
 import core.basesyntax.strategy.ReturnOperationStrategy;
 import core.basesyntax.strategy.SupplyOperationStrategy;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +16,7 @@ import java.util.Map;
 public class Main {
     private static final String INPUT_FILE = "src/main/resources/input.csv";
     private static final String OUTPUT_FILE = "src/main/resources/output.csv";
+
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
         WriterService writerService = new WriterServiceImpl();
@@ -26,11 +26,8 @@ public class Main {
         Map<String, OperationStrategy> operationStrategies = initializeStrategies();
         FruitService fruitService = new FruitServiceImpl(operationStrategies);
         List<String> inputLines = readerService.readFromFile(INPUT_FILE);
-
-        List<FruitTransaction> transactions = parseService.parseTransactions(inputLines );
-        for (FruitTransaction transaction : transactions) {
-            fruitService.processTransaction(transaction);
-        }
+        List<FruitTransaction> transactions = parseService.parseTransactions(inputLines);
+        fruitService.processTransactions(transactions);
         List<String> report = reportService.generateReport(storage);
         writerService.writeToFile(OUTPUT_FILE, report);
     }

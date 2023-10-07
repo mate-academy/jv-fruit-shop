@@ -1,6 +1,7 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.FruitTransaction;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class Storage {
     }
 
     public Map<String, Integer> getFruitInventory() {
-        return new HashMap<>(fruitInventory); // Return a copy to prevent external modifications
+        return new HashMap<>(fruitInventory);
     }
 
     public void updateFruitQuantity(FruitTransaction.Operation operation, String fruitName, int quantity) {
