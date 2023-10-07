@@ -14,9 +14,9 @@ public class Main {
         CsvWriterService csvWriterService = new CsvWriterService();
 
         String inputFilePath
-                = "C:\\Users\\BEST\\IdeaProjects\\jv-fruit-shop\\src\\main\\resources\\input.csv";
+                = "src/main/resources/input.csv";
         String outputFilePath
-                = "C:\\Users\\BEST\\IdeaProjects\\jv-fruit-shop\\src\\main\\resources\\output.csv";
+                = "src/main/resources/output.csv";
 
         try {
             Map<String, Integer> fruitInventory = new HashMap<>();
