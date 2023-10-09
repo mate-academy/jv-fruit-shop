@@ -13,21 +13,22 @@ public class FruitInventory {
         this.inventory = new HashMap<>();
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void setInventory(Map<String, Integer> inventory) {
+        this.inventory = inventory;
     }
-    private Map<String, Integer> inventory;
 
     public FruitInventory() {
         this.inventory = new HashMap<>();
     }
 
-    public Map<String, Integer> getInventory() {
-        return inventory;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setInventory(Map<String, Integer> inventory) {
-        this.inventory = inventory;
+    private Map<String, Integer> inventory;
+
+    public Map<String, Integer> getInventory() {
+        return inventory;
     }
 
     public void addToInventory(String fruit, int quantity) {
@@ -40,7 +41,8 @@ public class FruitInventory {
         if (currentQuantity >= quantity) {
             inventory.put(fruit, currentQuantity - quantity);
         } else {
-            throw new IllegalArgumentException("Not enough " + fruit + " in inventory for purchase");
+            throw new IllegalArgumentException("Not enough " + fruit
+                    + " in inventory for purchase");
         }
     }
 }

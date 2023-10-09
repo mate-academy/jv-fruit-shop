@@ -11,6 +11,7 @@ public class CsvReaderService {
     private static final int TYPE_COLUMN = 0;
     private static final int FRUIT_COLUMN = 1;
     private static final int QUANTITY_COLUMN = 2;
+
     public List<FruitTransaction> readTransactions(String filePath) throws IOException {
         List<FruitTransaction> transactions = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {

@@ -1,5 +1,4 @@
 import db.DataBase;
-import service.TransactionProcessor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +7,7 @@ import core.basesyntax.FruitTransaction;
 import core.basesyntax.FruitInventory;
 import service.CsvReaderService;
 import service.CsvWriterService;
-
+import service.TransactionProcessor;
 
 public class Main {
     public static void main(String[] args) {
