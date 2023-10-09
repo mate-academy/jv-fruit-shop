@@ -5,18 +5,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DataBase {
-    private Map<String, FruitInventory> inventoryDatabase;
+    private final Map<String, FruitInventory> inventoryDatabase;
 
     public DataBase() {
         this.inventoryDatabase = new HashMap<>();
     }
 
-    public void addToDatabase(FruitInventory inventory) {
-        String fruit = inventory.getFruit();
+    public void updateInventory(String fruit, FruitInventory inventory) {
         inventoryDatabase.put(fruit, inventory);
     }
 
-    public FruitInventory getFromDatabase(String fruit) {
+    public FruitInventory getOrCreateInventory() {
+        return inventoryDatabase.computeIfAbsent("default", key -> new FruitInventory());
+    }
+
+    public FruitInventory getInventory(String fruit) {
         return inventoryDatabase.get(fruit);
     }
 
@@ -24,7 +27,7 @@ public class DataBase {
         return inventoryDatabase.containsKey(fruit);
     }
 
-    public void removeFromDatabase(String fruit) {
+    public void removeInventory(String fruit) {
         inventoryDatabase.remove(fruit);
     }
 

@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvReaderService {
+    private static final int TYPE_COLUMN = 0;
+    private static final int FRUIT_COLUMN = 1;
+    private static final int QUANTITY_COLUMN = 2;
     public List<FruitTransaction> readTransactions(String filePath) throws IOException {
         List<FruitTransaction> transactions = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
@@ -15,9 +18,9 @@ public class CsvReaderService {
             br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                String type = parts[0].trim();
-                String fruit = parts[1].trim();
-                int quantity = Integer.parseInt(parts[2].trim());
+                String type = parts[TYPE_COLUMN].trim();
+                String fruit = parts[FRUIT_COLUMN].trim();
+                int quantity = Integer.parseInt(parts[QUANTITY_COLUMN].trim());
                 transactions.add(new FruitTransaction(FruitTransaction.Operation.fromCode(type),
                         fruit, quantity));
             }
