@@ -1,10 +1,10 @@
 package service;
 
 import db.DataBase;
-import handlers.BalanceHandler;
-import handlers.PurchaseHandler;
 import core.basesyntax.FruitInventory;
 import core.basesyntax.FruitTransaction;
+import handlers.BalanceHandler;
+import handlers.PurchaseHandler;
 import handlers.ReturnHandler;
 import handlers.SupplyHandler;
 import handlers.TransactionHandler;
