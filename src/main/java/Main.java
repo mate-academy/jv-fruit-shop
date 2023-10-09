@@ -1,6 +1,6 @@
-import db.DataBase;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.FruitInventory;
+import db.DataBase;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
