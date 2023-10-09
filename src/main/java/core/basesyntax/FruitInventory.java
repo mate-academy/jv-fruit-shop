@@ -4,28 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitInventory {
-    private String fruit;
-    private int quantity;
+    private Map<String, Integer> inventory;
 
-    public FruitInventory(String fruit, int quantity) {
-        this.fruit = fruit;
-        this.quantity = quantity;
+    public FruitInventory() {
         this.inventory = new HashMap<>();
     }
 
     public void setInventory(Map<String, Integer> inventory) {
         this.inventory = inventory;
     }
-
-    public FruitInventory() {
-        this.inventory = new HashMap<>();
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    private Map<String, Integer> inventory;
 
     public Map<String, Integer> getInventory() {
         return inventory;

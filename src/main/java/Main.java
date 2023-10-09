@@ -1,10 +1,10 @@
 import db.DataBase;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.FruitInventory;
+import java.util.List;
+import java.util.Map;
 import service.CsvReaderService;
 import service.CsvWriterService;
 import service.TransactionProcessor;
