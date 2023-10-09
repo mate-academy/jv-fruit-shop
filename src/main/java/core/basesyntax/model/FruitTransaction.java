@@ -1,24 +1,24 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
+import core.basesyntax.operation.Operation;
 
 public class FruitTransaction {
-    private char type;
+    private Operation operation;
     private String name;
     private int amount;
 
-    public FruitTransaction(char type, String name, int amount) {
-        this.type = type;
+    public FruitTransaction(Operation operation, String name, int amount) {
+        this.operation = operation;
         this.name = name;
         this.amount = amount;
     }
 
-    public char getType() {
-        return type;
+    public Operation getOperation() {
+        return operation;
     }
 
-    public void setType(char type) {
-        this.type = type;
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     public String getName() {
@@ -35,35 +35,5 @@ public class FruitTransaction {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FruitTransaction fruit = (FruitTransaction) o;
-        return type == fruit.type && amount == fruit.amount && Objects.equals(name, fruit.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, name, amount);
-    }
-
-    @Override
-    public String toString() {
-        return "Fruit{"
-                + "type="
-                + type
-                + ", name='"
-                + name
-                + '\''
-                + ", amount="
-                + amount
-                + '}';
     }
 }

@@ -3,11 +3,12 @@ package core.basesyntax;
 import core.basesyntax.dao.FileService;
 import core.basesyntax.dao.FileServiceImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.operation.Operation;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.TransactionConverter;
+import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.impl.TransactionConverterImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.BalanceOperationStrategy;
 import core.basesyntax.strategy.OperationHandler;
@@ -29,22 +30,20 @@ public class Main {
         FileService fileService = new FileServiceImpl();
         String data = fileService.readFile(INPUT_FILE_PATH);
 
-        TransactionConverter fruitInfoConverter = new TransactionConverterImpl();
-        List<FruitTransaction> transactions = fruitInfoConverter.parse(data);
+        TransactionParser transactionParser = new TransactionParserImpl();
+        final List<FruitTransaction> transactions = transactionParser.parse(data);
 
-        Map<String, OperationHandler> operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put("b", new BalanceOperationStrategy());
-        operationStrategyMap.put("p", new PurchaseOperationStrategy());
-        operationStrategyMap.put("s", new SupplyOperationStrategy());
-        operationStrategyMap.put("r", new ReturnOperationStrategy());
+        Map<Operation, OperationHandler> operationStrategyMap = new HashMap<>();
+        operationStrategyMap.put(Operation.BALANCE, new BalanceOperationStrategy());
+        operationStrategyMap.put(Operation.PURCHASE, new PurchaseOperationStrategy());
+        operationStrategyMap.put(Operation.SUPPLY, new SupplyOperationStrategy());
+        operationStrategyMap.put(Operation.RETURN, new ReturnOperationStrategy());
 
-        TransactionService transactionService =
-                new TransactionServiceImpl(operationStrategyMap);
-        Map<String, Integer> groupedTransactions =
-                transactionService.handleTransactions(transactions);
+        TransactionService transactionService = new TransactionServiceImpl(operationStrategyMap);
+        transactionService.handleTransactions(transactions);
 
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.createReport(groupedTransactions);
+        String report = reportService.createReport();
 
         fileService.writeToFile(report, RESULT_FILE_PATH);
     }
