@@ -1,31 +1,28 @@
 package service.impl;
 
-import dao.FruitShopDao;
-import db.FruitShop;
+import db.FruitShopStorage;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import model.FruitTransaction;
+import service.FruitShopService;
 import service.ReportService;
-import service.WriterFileService;
 
 public class ReportServiceImpl implements ReportService {
-    private final FruitShopDao fruitShopDao;
-    private final WriterFileService writer = new WriterFileServiceImpl();
+    private FruitShopService fruitShopService;
 
-    public ReportServiceImpl(FruitShopDao fruitShopDao) {
-        this.fruitShopDao = fruitShopDao;
+    public ReportServiceImpl(FruitShopService fruitShopService) {
+        this.fruitShopService = fruitShopService;
     }
 
     @Override
-    public void createReport() {
+    public List<String> createReport() {
         //стоворюємо репорт
-        StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity").append(System.lineSeparator());
-        Map<String, Integer> collectFruit = FruitShop.fruitShop.stream()
-                .collect(Collectors.groupingBy(FruitTransaction::getFruit,
-                        Collectors.summingInt(FruitTransaction::getQuantity)));
-        collectFruit.forEach((fruit, quantity) ->
-                report.append(fruit).append(",").append(quantity).append(System.lineSeparator()));
-        writer.writeToFile(report.toString());
+        Map<String, Integer> collectFruit = FruitShopStorage.fruitShop;
+        List<String> reportLines = new ArrayList<>();
+        reportLines.add("fruit,quantity");
+        for (Map.Entry<String, Integer> entry : collectFruit.entrySet()) {
+            reportLines.add(entry.getKey() + "," + entry.getValue());
+        }
+        return reportLines;
     }
 }
