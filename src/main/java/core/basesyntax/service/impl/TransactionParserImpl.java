@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.Operation;
 import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TransactionParserImpl implements TransactionParser {
@@ -24,13 +23,9 @@ public class TransactionParserImpl implements TransactionParser {
 
     private FruitTransaction parseLine(String line) {
         String[] transactionLine = line.split(",");
-        Operation operation = Arrays.stream(Operation.values())
-                .filter(o -> o.getCode().equals(transactionLine[TYPE_INDEX]))
-                .findFirst()
-                .get();
 
         return new FruitTransaction(
-                operation,
+                Operation.getByCode(transactionLine[TYPE_INDEX]),
                 transactionLine[FRUIT_NAME_INDEX],
                 Integer.parseInt(transactionLine[AMOUNT_INDEX]));
     }
