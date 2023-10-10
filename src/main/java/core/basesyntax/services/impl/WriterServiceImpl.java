@@ -1,12 +1,12 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.services.FileWriter;
+import core.basesyntax.services.WriterService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class FileWriterImpl implements FileWriter {
+public class WriterServiceImpl implements WriterService {
     @Override
     public boolean writeToFile(String fileName, String report) {
         Path path = Paths.get(fileName);
