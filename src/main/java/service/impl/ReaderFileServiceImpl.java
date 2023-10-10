@@ -7,13 +7,12 @@ import java.util.List;
 import service.ReaderFileService;
 
 public class ReaderFileServiceImpl implements ReaderFileService {
-    private static final String FILE_NAME_INPUT = "src/main/resources/input.csv";
 
     @Override
-    public List<String> readFromFile() {
+    public List<String> readFromFile(String fileName) {
         List<String> fruitList;
         try {
-            fruitList = Files.readAllLines(Path.of(FILE_NAME_INPUT));
+            fruitList = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
