@@ -4,23 +4,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.ActivitiesStrategy;
 import service.FruitShopService;
+import service.ParseService;
 import service.ReaderFileService;
 import service.ReportService;
+import service.TransactionStrategy;
 import service.WriterFileService;
 import service.activities.BalanceTransactionHandler;
 import service.activities.PurchaseTransactionHandler;
 import service.activities.ReturnTransactionHandler;
 import service.activities.SupplyTransactionHandler;
 import service.activities.TransactionHandler;
-import service.impl.ActivitiesStrategyImpl;
 import service.impl.FruitShopServiceImpl;
+import service.impl.ParseServiceImpl;
 import service.impl.ReaderFileServiceImpl;
 import service.impl.ReportServiceImpl;
+import service.impl.TransactionStrategyImpl;
 import service.impl.WriterFileServiceImpl;
 
 public class Main {
+    private static final String FILE_NAME_INPUT = "src/main/resources/input.csv";
+    private static final String FILE_NAME_OUTPUT = "src/main/resources/output.csv";
+
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, TransactionHandler> activitiesHandlerMap = new HashMap<>();
         activitiesHandlerMap.put(FruitTransaction.Operation.BALANCE,
@@ -33,18 +38,21 @@ public class Main {
                 new SupplyTransactionHandler());
 
         ReaderFileService readerFileService = new ReaderFileServiceImpl();
-        List<String> listFromFile = readerFileService.readFromFile();
+        List<String> listFromFile = readerFileService.readFromFile(FILE_NAME_INPUT);
 
-        ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImpl(activitiesHandlerMap);
+        TransactionStrategy activitiesStrategy = new TransactionStrategyImpl(activitiesHandlerMap);
+        ParseService parseService = new ParseServiceImpl();
+
+        List<FruitTransaction> transactions = parseService.parseTransactions(listFromFile);
 
         FruitShopService fruitShopService = new FruitShopServiceImpl(activitiesStrategy);
-        fruitShopService.convert(listFromFile);
+        fruitShopService.handleTransactions(transactions);
 
-        ReportService reportService = new ReportServiceImpl(fruitShopService);
+        ReportService reportService = new ReportServiceImpl();
 
         List<String> report = reportService.createReport();
         WriterFileService writerFileService = new WriterFileServiceImpl();
-        writerFileService.writeToFile(report);
+        writerFileService.writeToFile(report, FILE_NAME_OUTPUT);
     }
 
 }
