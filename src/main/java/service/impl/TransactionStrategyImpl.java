@@ -6,15 +6,15 @@ import service.TransactionStrategy;
 import service.activities.TransactionHandler;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
-    private final Map<FruitTransaction.Operation, TransactionHandler> activitiesHandlerMap;
+    private final Map<FruitTransaction.Operation, TransactionHandler> transactionHandlerMap;
 
     public TransactionStrategyImpl(Map<FruitTransaction.Operation,
             TransactionHandler> activitiesHandlerMap) {
-        this.activitiesHandlerMap = activitiesHandlerMap;
+        this.transactionHandlerMap = activitiesHandlerMap;
     }
 
     @Override
     public TransactionHandler getHandler(FruitTransaction.Operation operation) {
-        return activitiesHandlerMap.get(operation);
+        return transactionHandlerMap.get(operation);
     }
 }
