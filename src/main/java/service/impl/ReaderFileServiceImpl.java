@@ -10,13 +10,11 @@ public class ReaderFileServiceImpl implements ReaderFileService {
 
     @Override
     public List<String> readFromFile(String fileName) {
-        List<String> fruitList;
         try {
-            fruitList = Files.readAllLines(Path.of(fileName));
+            return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can`t find file by path" + fileName, e);
         }
-        return fruitList;
     }
 }
 
