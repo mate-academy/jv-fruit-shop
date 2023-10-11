@@ -4,14 +4,15 @@ import db.FruitShopStorage;
 import model.FruitTransaction;
 
 public class PurchaseTransactionHandler implements TransactionHandler {
+    QuantityVerifier quantityVerifier = new QuantityVerifierImpl();
     @Override
     public void executeTransaction(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int quantity = fruitTransaction.getQuantity();
-        if (quantity < 0) {
-            throw new RuntimeException("Initial quantity cannot be negative for fruit: " + fruit);
-        }
+        quantityVerifier.quantityVerify(quantity, fruit);
         int quantityPurchase = FruitShopStorage.fruitShop.get(fruit);
-        FruitShopStorage.fruitShop.put(fruit, quantityPurchase - quantity);
+        int quantityNew = quantityPurchase - quantity;
+        quantityVerifier.quantityVerify(quantityNew, fruit);
+        FruitShopStorage.fruitShop.put(fruit, quantityNew);
     }
 }
