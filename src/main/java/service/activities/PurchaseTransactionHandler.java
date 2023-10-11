@@ -4,7 +4,8 @@ import db.FruitShopStorage;
 import model.FruitTransaction;
 
 public class PurchaseTransactionHandler implements TransactionHandler {
-    QuantityVerifier quantityVerifier = new QuantityVerifierImpl();
+    private final QuantityVerifier quantityVerifier = new QuantityVerifierImpl();
+
     @Override
     public void executeTransaction(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
