@@ -1,3 +1,4 @@
 .idea/*
 *.iml
+sample_data/out/*
 target/*
