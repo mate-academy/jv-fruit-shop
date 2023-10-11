@@ -49,7 +49,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Cannot find the operation");
+            throw new IllegalArgumentException("Cannot find the operation by code " + code);
         }
     }
 }
