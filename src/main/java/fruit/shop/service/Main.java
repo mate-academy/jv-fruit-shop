@@ -2,10 +2,10 @@ package fruit.shop.service;
 
 import fruit.shop.db.Storage;
 import fruit.shop.model.Operation;
-import fruit.shop.service.impl.CreaterReportImpl;
 import fruit.shop.service.impl.OperationStrategyImpl;
 import fruit.shop.service.impl.ParserImpl;
 import fruit.shop.service.impl.ReaderImpl;
+import fruit.shop.service.impl.ReportCreatorImpl;
 import fruit.shop.service.impl.WriterImpl;
 import fruit.shop.strategy.BalanceOperation;
 import fruit.shop.strategy.OperationHandler;
@@ -23,7 +23,7 @@ public class Main {
     private static final Reader reader = new ReaderImpl();
     private static final Parser parser = new ParserImpl();
     private static final Writer writer = new WriterImpl();
-    private static final CreaterReport creater = new CreaterReportImpl();
+    private static final ReportCreator creator = new ReportCreatorImpl();
 
     public static void main(String[] args) {
         Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -37,7 +37,7 @@ public class Main {
             List<String> dataType = parser.getOperationData(dataFromFile, operation.getCode());
             operationStrategy.get(operation.getCode()).calculateOperation(dataType);
         }
-        String stringResult = creater.createString(Storage.resultDB);
+        String stringResult = creator.createString(Storage.resultDB);
         writer.writeToFile(FILE_NAME_WRITE, stringResult);
     }
 }
