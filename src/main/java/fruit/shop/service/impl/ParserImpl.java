@@ -1,9 +1,10 @@
-package fruit.shop.service;
+package fruit.shop.service.impl;
 
+import fruit.shop.service.Parser;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ParserImpl implements Parser{
+public class ParserImpl implements Parser {
     @Override
     public List<String> getOperationData(List<String> data, String type) {
         return data.stream()
