@@ -33,9 +33,11 @@ public class TransactionParserImpl implements TransactionParser {
                     fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
                     break;
                 }
-                default : {
+                case "p" : {
                     fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+                    break;
                 }
+                default : throw new RuntimeException("Transaction is falsh " + word[ZERO_INDEX]);
             }
             fruitTransaction.setFruit(word[FIRST_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(word[SECOND_INDEX]));

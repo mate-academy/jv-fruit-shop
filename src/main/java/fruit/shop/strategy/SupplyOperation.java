@@ -9,11 +9,11 @@ public class SupplyOperation implements OperationHandler {
         if (transaction == null) {
             throw new RuntimeException("Data is null");
         }
-        if (transaction.getQuantity() < 0) {
-            throw new RuntimeException("Quantity is < 0 " + transaction.getQuantity());
+        Integer actual = Storage.DB.get(transaction.getFruit());
+        Integer result = actual + transaction.getQuantity();
+        if (result < 0) {
+            throw new RuntimeException("Quantity is < 0 " + result);
         }
-        Integer quantity = Storage.DB.get(transaction.getFruit());
-        Integer result = quantity + transaction.getQuantity();
         Storage.DB.put(transaction.getFruit(),result);
     }
 }
