@@ -1,21 +1,19 @@
 package fruit.shop.strategy;
 
 import fruit.shop.db.Storage;
-import java.util.List;
+import fruit.shop.model.FruitTransaction;
 
 public class ReturnOperation implements OperationHandler {
     @Override
-    public boolean calculateOperation(List<String> data) {
-        if (data == null || data.isEmpty()) {
-            return false;
+    public void handleTransaction(FruitTransaction transaction) {
+        if (transaction == null) {
+            throw new RuntimeException("Data is null");
         }
-        for (String word : data) {
-            String[] split = word.split(",");
-            Integer quantity = Storage.resultDB.get(split[FIRST_INDEX]);
-            Integer result = quantity + Integer.parseInt(split[SECOND_INDEX]);
-            OperationHandler.checkResult(result);
-            Storage.resultDB.put(split[FIRST_INDEX],result);
+        if (transaction.getQuantity() < 0) {
+            throw new RuntimeException("Quantity is < 0 " + transaction.getQuantity());
         }
-        return true;
+        Integer quantity = Storage.DB.get(transaction.getFruit());
+        Integer result = quantity + transaction.getQuantity();
+        Storage.DB.put(transaction.getFruit(),result);
     }
 }

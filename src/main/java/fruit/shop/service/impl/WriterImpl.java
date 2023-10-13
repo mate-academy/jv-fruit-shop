@@ -7,12 +7,12 @@ import java.nio.file.Path;
 
 public class WriterImpl implements Writer {
     @Override
-    public String writeToFile(String fileName, String resultString) {
+    public String writeToFile(String fileName, String content) {
         try {
-            Files.writeString(Path.of(fileName),resultString);
+            Files.writeString(Path.of(fileName), content);
         } catch (IOException e) {
             throw new RuntimeException("Can`t write to file " + fileName,e);
         }
-        return resultString;
+        return content;
     }
 }

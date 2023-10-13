@@ -1,17 +1,18 @@
 package fruit.shop.service.impl;
 
+import fruit.shop.db.Storage;
 import fruit.shop.service.ReportCreator;
 import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {
     @Override
-    public String createString(Map<String, Integer> balanceMap) {
+    public String createReport() {
         StringBuilder stringBuilder = new StringBuilder("fruit,quantity");
         StringBuilder resultString = stringBuilder.append(System.lineSeparator());
-        if (balanceMap.isEmpty()) {
+        if (Storage.DB.isEmpty()) {
             throw new RuntimeException("DB is Empty nothing to write");
         }
-        for (Map.Entry<String,Integer> entry : balanceMap.entrySet()) {
+        for (Map.Entry<String,Integer> entry : Storage.DB.entrySet()) {
             resultString.append(entry.getKey())
                     .append(",")
                     .append(entry.getValue())

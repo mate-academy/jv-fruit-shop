@@ -1,11 +1,14 @@
-package fruit.shop.service;
+package fruit.shop;
 
-import fruit.shop.db.Storage;
-import fruit.shop.model.Operation;
+import fruit.shop.model.FruitTransaction;
+import fruit.shop.service.Reader;
+import fruit.shop.service.ReportCreator;
+import fruit.shop.service.TransactionParser;
+import fruit.shop.service.Writer;
 import fruit.shop.service.impl.OperationStrategyImpl;
-import fruit.shop.service.impl.ParserImpl;
 import fruit.shop.service.impl.ReaderImpl;
 import fruit.shop.service.impl.ReportCreatorImpl;
+import fruit.shop.service.impl.TransactionParserImpl;
 import fruit.shop.service.impl.WriterImpl;
 import fruit.shop.strategy.BalanceOperation;
 import fruit.shop.strategy.OperationHandler;
@@ -21,7 +24,7 @@ public class Main {
     private static final String FILE_NAME_READ = "src/main/resources/fruitshop.csv";
     private static final String FILE_NAME_WRITE = "src/main/resources/balance.csv";
     private static final Reader reader = new ReaderImpl();
-    private static final Parser parser = new ParserImpl();
+    private static final TransactionParser transactionParser = new TransactionParserImpl();
     private static final Writer writer = new WriterImpl();
     private static final ReportCreator creator = new ReportCreatorImpl();
 
@@ -33,11 +36,12 @@ public class Main {
         operationHandlerMap.put("p", new PurchaseOperation());
         operationHandlerMap.put("r", new ReturnOperation());
         List<String> dataFromFile = reader.readFromFile(FILE_NAME_READ);
-        for (Operation operation : Operation.values()) {
-            List<String> dataType = parser.getOperationData(dataFromFile, operation.getCode());
-            operationStrategy.get(operation.getCode()).calculateOperation(dataType);
+        List<FruitTransaction> transactions = transactionParser.getTransactions(dataFromFile);
+        for (FruitTransaction transaction : transactions) {
+            operationStrategy.get(transaction.getOperation().getCode())
+                    .handleTransaction(transaction);
         }
-        String stringResult = creator.createString(Storage.resultDB);
-        writer.writeToFile(FILE_NAME_WRITE, stringResult);
+        String content = creator.createReport();
+        writer.writeToFile(FILE_NAME_WRITE, content);
     }
 }
