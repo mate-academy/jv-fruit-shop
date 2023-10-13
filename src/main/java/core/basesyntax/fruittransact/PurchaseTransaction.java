@@ -7,7 +7,7 @@ public class PurchaseTransaction implements FruitTransaction {
     private FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
-    public void transact(String name, int amount) {
+    public void handle(String name, int amount) {
         fruitDao.remove(name, amount);
     }
 }

@@ -1,5 +1,5 @@
 package core.basesyntax.fruittransact;
 
 public interface FruitTransaction {
-    void transact(String name, int amount);
+    void handle(String name, int amount);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CsvFileReader implements FileReader {
     private static final String SEPARATOR = ",";
-    private static final int INDEX_OF_HEADING = 0;
+    private static final int HEADER_INDEX = 0;
 
     @Override
     public List<String[]> readFromFile(File file) {
@@ -20,7 +20,7 @@ public class CsvFileReader implements FileReader {
         } catch (IOException ioException) {
             throw new RuntimeException("Cannot read data from file: " + file, ioException);
         }
-        data.remove(INDEX_OF_HEADING);
+        data.remove(HEADER_INDEX);
         return data;
     }
 }

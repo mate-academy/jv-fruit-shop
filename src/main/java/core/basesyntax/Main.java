@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.fruittransact.FruitTransactionService;
-import core.basesyntax.reportcreator.ReportCreator;
-import core.basesyntax.reportcreator.ReportCreatorImpl;
+import core.basesyntax.reportcreator.ReportGenerator;
+import core.basesyntax.reportcreator.ReportGeneratorImpl;
 import core.basesyntax.workwithfile.filereader.CsvFileReader;
 import core.basesyntax.workwithfile.filereader.FileReader;
 import java.io.File;
@@ -14,10 +14,10 @@ public class Main {
     public static void main(String[] args) {
         FileReader fileReader = new CsvFileReader();
         FruitTransactionService fruitTransactionService = new FruitTransactionService();
-        ReportCreator reportCreator = new ReportCreatorImpl();
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         for (String fileName : FILE_NAMES) {
-            fruitTransactionService.transactAll(fileReader.readFromFile(new File(fileName)));
-            System.out.println(reportCreator.generateReport() + System.lineSeparator());
+            fruitTransactionService.handleAll(fileReader.readFromFile(new File(fileName)));
+            System.out.println(reportGenerator.generateReport() + System.lineSeparator());
         }
     }
 }
