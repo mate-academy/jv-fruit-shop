@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionParserImpl implements TransactionParser {
-    private static final int ZERO_INDEX = 0;
-    private static final int FIRST_INDEX = 1;
-    private static final int SECOND_INDEX = 2;
+    private static final int TRANSACTION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> getTransactions(List<String> data) {
@@ -20,7 +20,7 @@ public class TransactionParserImpl implements TransactionParser {
         for (String element : data) {
             String[] word = element.split(",");
             FruitTransaction fruitTransaction = new FruitTransaction();
-            switch (word[ZERO_INDEX]) {
+            switch (word[TRANSACTION_INDEX]) {
                 case "b" : {
                     fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
                     break;
@@ -37,10 +37,11 @@ public class TransactionParserImpl implements TransactionParser {
                     fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
                     break;
                 }
-                default : throw new RuntimeException("Transaction is falsh " + word[ZERO_INDEX]);
+                default : throw new RuntimeException("Transaction is falsh "
+                        + word[TRANSACTION_INDEX]);
             }
-            fruitTransaction.setFruit(word[FIRST_INDEX]);
-            fruitTransaction.setQuantity(Integer.parseInt(word[SECOND_INDEX]));
+            fruitTransaction.setFruit(word[FRUIT_INDEX]);
+            fruitTransaction.setQuantity(Integer.parseInt(word[QUANTITY_INDEX]));
             transactionList.add(fruitTransaction);
         }
         return transactionList;
