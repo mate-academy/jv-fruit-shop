@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvFileReader implements FileReader {
+public class FileReaderImpl implements FileReader {
     private static final String SEPARATOR = ",";
     private static final int HEADER_INDEX = 0;
 
