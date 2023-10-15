@@ -1,9 +1,9 @@
 package core.basesyntax.dao;
 
 public interface FruitDao {
-    void add(String name, int amount);
+    void add(String name, int quantity);
 
-    void set(String name, int amount);
+    void set(String name, int quantity);
 
-    void remove(String name, int amount);
+    void remove(String name, int quantity);
 }
