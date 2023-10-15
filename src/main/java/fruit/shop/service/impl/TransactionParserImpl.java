@@ -20,30 +20,36 @@ public class TransactionParserImpl implements TransactionParser {
         for (String element : data) {
             String[] word = element.split(",");
             FruitTransaction fruitTransaction = new FruitTransaction();
-            switch (word[TRANSACTION_INDEX]) {
-                case "b" : {
-                    fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
-                    break;
-                }
-                case "s" : {
-                    fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
-                    break;
-                }
-                case "r" : {
-                    fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
-                    break;
-                }
-                case "p" : {
-                    fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
-                    break;
-                }
-                default : throw new RuntimeException("Transaction is falsh "
-                        + word[TRANSACTION_INDEX]);
-            }
+            choiceTransaction(word[TRANSACTION_INDEX], fruitTransaction);
             fruitTransaction.setFruit(word[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(word[QUANTITY_INDEX]));
             transactionList.add(fruitTransaction);
         }
         return transactionList;
+    }
+
+    private void choiceTransaction(String letterTransaction, FruitTransaction fruitTransaction) {
+        if (letterTransaction == null) {
+            throw new RuntimeException("Letter is null");
+        }
+        switch (letterTransaction) {
+            case "b" : {
+                fruitTransaction.setOperation(FruitTransaction.Operation.BALANCE);
+                break;
+            }
+            case "s" : {
+                fruitTransaction.setOperation(FruitTransaction.Operation.SUPPLY);
+                break;
+            }
+            case "r" : {
+                fruitTransaction.setOperation(FruitTransaction.Operation.RETURN);
+                break;
+            }
+            case "p" : {
+                fruitTransaction.setOperation(FruitTransaction.Operation.PURCHASE);
+                break;
+            }
+            default : throw new RuntimeException("Transaction is falsh " + letterTransaction);
+        }
     }
 }
