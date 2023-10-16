@@ -32,20 +32,20 @@ class FileWriterServiceTest {
         } catch (IOException e) {
             throw new RuntimeException("Can't read the file! ",e);
         }
-        Assertions.assertEquals(exceptedData, actualData);
+        assertEquals(exceptedData, actualData);
     }
 
     @Test
     void write_pathIsNull_notOk() {
         String report = "test";
         String path = null;
-        Assertions.assertThrows(RuntimeException.class, () -> fileWriter.write(report, path));
+        assertThrows(RuntimeException.class, () -> fileWriter.write(report, path));
     }
 
     @Test
     void write_dataForWriteIsNull_notOk() {
         String dataForWrite = null;
-        Assertions.assertThrows(RuntimeException.class, () -> fileWriter.write(dataForWrite, PATH_TO_WRITE));
+        assertThrows(RuntimeException.class, () -> fileWriter.write(dataForWrite, PATH_TO_WRITE));
     }
 
     @Test
@@ -53,6 +53,6 @@ class FileWriterServiceTest {
         String report = "Sample report content";
         String fileName = "sample.txt";
         String filePath = "nonexistentfolder" + File.separator + fileName;
-        Assertions.assertThrows(RuntimeException.class,() -> fileWriter.write(report, filePath));
+        assertThrows(RuntimeException.class,() -> fileWriter.write(report, filePath));
     }
 }
