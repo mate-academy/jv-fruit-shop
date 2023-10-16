@@ -11,9 +11,6 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
         }
         String fruitName = transaction.getFruit();
         int transactionQuantity = transaction.getQuantity();
-        if (Storage.storage.containsKey(fruitName)) {
-            int updatedQuantity = Storage.storage.get(fruitName) + transactionQuantity;
-            Storage.storage.replace(fruitName, updatedQuantity);
-        }
+            Storage.storage.merge(fruitName, transactionQuantity, Integer::sum);
     }
 }
