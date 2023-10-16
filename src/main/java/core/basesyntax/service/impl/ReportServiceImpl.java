@@ -5,7 +5,6 @@ import core.basesyntax.service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String TITLE = "fruit,quantity" + System.lineSeparator();
-    private static final String SEPARATOR = ",";
 
     @Override
     public String createReport() {
