@@ -13,21 +13,24 @@ public class TransactionParserImpl implements TransactionParser {
 
     @Override
     public List<FruitTransaction> parseData(List<String> data) {
-        if (data != null && data.isEmpty()) {
-            throw new RuntimeException("Not data found");
-        }
         try {
             return data.stream()
-                    .map(element -> element.split(SEPARATOR))
-                    .map(element -> new FruitTransaction(FruitTransaction.Operation
-                            .getOperationByCode(element[INDEX_CODE_OPERATION]),
-                            element[INDEX_FRUIT_NAME],
-                            Integer.parseInt(element[INDEX_FRUIT_QUANTITY])))
+                    .map(this::parseLine)
                     .collect(Collectors.toList());
-        } catch (NullPointerException e) {
-            throw new RuntimeException("Invalid data");
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid value for fruit quantity");
         }
+    }
+
+    private FruitTransaction parseLine(String line) {
+        String[] elements = line.split(SEPARATOR);
+        String code = elements[INDEX_CODE_OPERATION];
+        String name = elements[INDEX_FRUIT_NAME];
+        int quantity = Integer.parseInt(elements[INDEX_FRUIT_QUANTITY]);
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity must be greater or equal to 0!");
+        }
+        FruitTransaction.Operation operation = FruitTransaction.Operation.getOperationByCode(code);
+        return new FruitTransaction(operation, name, quantity);
     }
 }
