@@ -3,14 +3,14 @@ package core.basesyntax.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.Impl.FileReaderServiceImpl;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FileReaderServiceTest {
 
-    private static final String FILE_PATH = "src/test/resources/data.csv";
+    private static final String FILE_PATH = "src/test/resources/database.csv";
     private FileReaderService reader;
 
     @BeforeEach
@@ -29,18 +29,18 @@ class FileReaderServiceTest {
                 "p,apple,20",
                 "p,banana,5",
                 "s,banana,50");
-        Assertions.assertEquals(exceptedData, actualData);
+        assertEquals(exceptedData, actualData);
     }
 
     @Test
     void read_incorrectPath_notOK() {
         String incorrectPath = "incorrectPath";
-        Assertions.assertThrows(RuntimeException.class, () -> reader.read(incorrectPath));
+        assertThrows(RuntimeException.class, () -> reader.read(incorrectPath));
     }
 
     @Test
     void read_pathIsNull_notOk() {
         String nullPath = null;
-        Assertions.assertThrows(RuntimeException.class, () -> reader.read(nullPath));
+        assertThrows(RuntimeException.class, () -> reader.read(nullPath));
     }
 }
