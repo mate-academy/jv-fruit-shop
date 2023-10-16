@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Operation.BalanceOperationHandlerImpl;
-import core.basesyntax.service.Operation.OperationHandler;
-import core.basesyntax.service.Operation.PurchaseOperationHandlerImpl;
+import core.basesyntax.service.operation.BalanceOperationHandlerImpl;
+import core.basesyntax.service.operation.OperationHandler;
+import core.basesyntax.service.operation.PurchaseOperationHandlerImpl;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
