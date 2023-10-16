@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import core.basesyntax.service.impl.TransactionParserImpl;
 
+import core.basesyntax.service.impl.TransactionParserImpl;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
