@@ -6,6 +6,8 @@ import core.basesyntax.service.impl.FileWriterServiceImpl;
 public class Main {
     public static void main(String[] args) {
         FileWriterService writerService = new FileWriterServiceImpl();
-        writerService.write("salty", null);
+        String content = "banana";
+        String filePath = "src/test/resources/FileWriter.csv";
+        writerService.write(content, filePath);
     }
 }
