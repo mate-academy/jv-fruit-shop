@@ -1,9 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.DataStorage;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataStorageImpl implements DataStorage {
     private static final String SEPARATOR = ",";
@@ -13,7 +13,6 @@ public class DataStorageImpl implements DataStorage {
 
     @Override
     public List<FruitTransaction> convertText(List<String> strings) {
-
         return strings.stream()
                 .map(line -> line.split(SEPARATOR))
                 .map(data -> new FruitTransaction(
@@ -21,6 +20,6 @@ public class DataStorageImpl implements DataStorage {
                         data[INDEX_BY_FRUIT],
                         Integer.parseInt(data[INDEX_BY_AMOUNT])
                 ))
-                .collect(Collectors.toList());
+                .toList();
     }
 }

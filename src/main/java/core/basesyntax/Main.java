@@ -1,16 +1,18 @@
 package core.basesyntax;
 
-import core.basesyntax.handler.BalanceTransaction;
+import core.basesyntax.handler.BalanceTransactionHandler;
 import core.basesyntax.handler.PurchaseTransaction;
 import core.basesyntax.handler.ReturnTransaction;
 import core.basesyntax.handler.SupplyTransaction;
 import core.basesyntax.handler.TransactionHandler;
+import core.basesyntax.impl.DataStorageImpl;
 import core.basesyntax.impl.FileReaderImpl;
 import core.basesyntax.impl.FileWriteServiceImpl;
 import core.basesyntax.impl.ReportCreatorServiceImpl;
 import core.basesyntax.impl.TransactionProcessorServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.DataStorage;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriteService;
 import core.basesyntax.service.ReportCreatorService;
@@ -42,7 +44,7 @@ public class Main {
 
     private static Map<Operation, TransactionHandler> getOperationMap() {
         Map<Operation, TransactionHandler> operationMap = new HashMap<>();
-        operationMap.put(Operation.BALANCE, new BalanceTransaction());
+        operationMap.put(Operation.BALANCE, new BalanceTransactionHandler());
         operationMap.put(Operation.RETURN, new ReturnTransaction());
         operationMap.put(Operation.PURCHASE, new PurchaseTransaction());
         operationMap.put(Operation.SUPPLY, new SupplyTransaction());

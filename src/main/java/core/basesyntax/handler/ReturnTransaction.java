@@ -11,6 +11,5 @@ public class ReturnTransaction implements TransactionHandler {
     public void apply(FruitTransaction transaction) {
         int amount = fruitDao.get(transaction.getFruitName());
         fruitDao.add(transaction.getFruitName(), amount + transaction.getAmount());
-
     }
 }
