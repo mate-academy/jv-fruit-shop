@@ -12,12 +12,12 @@ class FruitTransactionTest {
         FruitTransaction.Operation actualOperation = FruitTransaction.Operation
                 .getOperationByCode("b");
         FruitTransaction.Operation exceptedOPeration = FruitTransaction.Operation.BALANCE;
-        Assertions.assertEquals(exceptedOPeration, actualOperation);
+        assertEquals(exceptedOPeration, actualOperation);
     }
 
     @Test
     void get_operation_notValidOperation_notOk() {
-        Assertions.assertThrows(IllegalArgumentException.class,
+        assertThrows(IllegalArgumentException.class,
                 () -> FruitTransaction.Operation.getOperationByCode("x"));
     }
 }
