@@ -32,6 +32,6 @@ class ReportServiceTest {
                 + "apple,10" + System.lineSeparator()
                 + "watermelon,15" + System.lineSeparator());
         String actualReport = reportService.createReport();
-        Assertions.assertEquals(exceptedReport, actualReport);
+        assertEquals(exceptedReport, actualReport);
     }
 }
