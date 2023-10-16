@@ -15,14 +15,14 @@ public class TransactionParserImpl implements TransactionParser {
     public List<FruitTransaction> parseData(List<String> data) {
         try {
             return data.stream()
-                    .map(this::parseLine)
+                    .map(this::TransactionFromData)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid value for fruit quantity");
         }
     }
 
-    private FruitTransaction parseLine(String line) {
+    private FruitTransaction TransactionFromData(String line) {
         String[] elements = line.split(SEPARATOR);
         String code = elements[INDEX_CODE_OPERATION];
         String name = elements[INDEX_FRUIT_NAME];
