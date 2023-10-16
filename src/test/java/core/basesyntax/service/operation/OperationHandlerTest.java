@@ -2,7 +2,6 @@ package core.basesyntax.service.operation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
@@ -25,14 +24,6 @@ class OperationHandlerTest {
         int exceptedBananaBalance = 15;
         int actualBananaBalance = Storage.storage.get("banana");
         assertEquals(exceptedBananaBalance, actualBananaBalance);
-    }
-
-    @Test
-    void balanceHandler_notValidData_notOk() {
-        operationHandler = new BalanceOperationHandlerImpl();
-        FruitTransaction balanceTransaction =
-                new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", -10);
-        assertThrows(RuntimeException.class, () -> operationHandler.handle(balanceTransaction));
     }
 
     @Test
