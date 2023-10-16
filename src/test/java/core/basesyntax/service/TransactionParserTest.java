@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Impl.TransactionParserImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
