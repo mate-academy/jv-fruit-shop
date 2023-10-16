@@ -11,6 +11,6 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
         }
         String fruitName = transaction.getFruit();
         int transactionQuantity = transaction.getQuantity();
-            Storage.storage.merge(fruitName, transactionQuantity, Integer::sum);
+        Storage.storage.merge(fruitName, transactionQuantity, Integer::sum);
     }
 }
