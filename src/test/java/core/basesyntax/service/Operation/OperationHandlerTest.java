@@ -24,7 +24,7 @@ class OperationHandlerTest {
         operationHandler.handle(balanceTransaction1);
         int exceptedBananaBalance = 15;
         int actualBananaBalance = Storage.storage.get("banana");
-        Assertions.assertEquals(exceptedBananaBalance, actualBananaBalance);
+        assertEquals(exceptedBananaBalance, actualBananaBalance);
     }
 
     @Test
@@ -32,14 +32,14 @@ class OperationHandlerTest {
         operationHandler = new BalanceOperationHandlerImpl();
         FruitTransaction balanceTransaction =
                 new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", -10);
-        Assertions.assertThrows(RuntimeException.class, () -> operationHandler.handle(balanceTransaction));
+        assertThrows(RuntimeException.class, () -> operationHandler.handle(balanceTransaction));
     }
 
     @Test
     void balanceHandler_transactionsIsNull_notOk() {
         operationHandler = new BalanceOperationHandlerImpl();
         FruitTransaction balanceTransactions = null;
-        Assertions.assertThrows(RuntimeException.class, () -> operationHandler.handle(balanceTransactions));
+        assertThrows(RuntimeException.class, () -> operationHandler.handle(balanceTransactions));
     }
 
     @Test
@@ -51,7 +51,7 @@ class OperationHandlerTest {
         operationHandler.handle(purchaseTransactions1);
         int exceptedBananaBalance = 10;
         int actualBananaBalance = Storage.storage.get("banana");
-        Assertions.assertEquals(exceptedBananaBalance,actualBananaBalance);
+        assertEquals(exceptedBananaBalance,actualBananaBalance);
     }
 
     @Test
@@ -63,7 +63,7 @@ class OperationHandlerTest {
         operationHandler.handle(fruitTransaction);
         int exceptedBalance = 0;
         int actualBalance = Storage.storage.get("banana");
-        Assertions.assertEquals(exceptedBalance, actualBalance);
+        assertEquals(exceptedBalance, actualBalance);
     }
 
     @Test
@@ -72,7 +72,7 @@ class OperationHandlerTest {
         Storage.storage.put("banana", 20);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 21);
-        Assertions.assertThrows(RuntimeException.class, () -> operationHandler.handle(fruitTransaction));
+        assertThrows(RuntimeException.class, () -> operationHandler.handle(fruitTransaction));
     }
 
     @Test
@@ -84,7 +84,7 @@ class OperationHandlerTest {
         operationHandler.handle(fruitTransaction);
         int exceptedBalance = 30;
         int actualBalance = Storage.storage.get("banana");
-        Assertions.assertEquals(exceptedBalance, actualBalance);
+        assertEquals(exceptedBalance, actualBalance);
     }
 
     @Test
@@ -93,7 +93,7 @@ class OperationHandlerTest {
         Storage.storage.put("banana", 20);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", -1);
-        Assertions.assertThrows(RuntimeException.class, () -> operationHandler.handle(fruitTransaction));
+        assertThrows(RuntimeException.class, () -> operationHandler.handle(fruitTransaction));
     }
 
     @Test
@@ -105,7 +105,7 @@ class OperationHandlerTest {
         operationHandler.handle(fruitTransaction);
         int exceptedBalance = 30;
         int actualBalance = Storage.storage.get("banana");
-        Assertions.assertEquals(exceptedBalance, actualBalance);
+        assertEquals(exceptedBalance, actualBalance);
     }
 
     @Test
@@ -114,6 +114,6 @@ class OperationHandlerTest {
         Storage.storage.put("banana", 20);
         FruitTransaction fruitTransaction =
                 new FruitTransaction(FruitTransaction.Operation.RETURN, "banana", -1);
-        Assertions.assertThrows(RuntimeException.class, () -> operationHandler.handle(fruitTransaction));
+        assertThrows(RuntimeException.class, () -> operationHandler.handle(fruitTransaction));
     }
 }
