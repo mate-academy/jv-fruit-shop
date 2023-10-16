@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class FileWriterServiceTest {
 
-    private static final String PATH_TO_WRITE = "src/test/resources/database.csv";
+    private static final String PATH_TO_WRITE = "src/test/resources/FileWriter.csv";
     private FileWriterService fileWriter;
 
     @BeforeEach
