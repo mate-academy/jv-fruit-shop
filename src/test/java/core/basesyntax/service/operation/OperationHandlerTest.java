@@ -2,6 +2,7 @@ package core.basesyntax.service.operation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import org.junit.jupiter.api.AfterEach;
