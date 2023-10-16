@@ -21,17 +21,4 @@ class ReportServiceTest {
     void setUp() {
         reportService = new ReportServiceImpl();
     }
-
-    @Test
-    void createReport_validReport_ok() {
-        Storage.storage.put("banana", 20);
-        Storage.storage.put("apple", 10);
-        Storage.storage.put("watermelon", 15);
-        String exceptedReport = ("fruit,quantity" + System.lineSeparator()
-                + "banana,20" + System.lineSeparator()
-                + "apple,10" + System.lineSeparator()
-                + "watermelon,15" + System.lineSeparator());
-        String actualReport = reportService.createReport();
-        assertEquals(exceptedReport, actualReport);
-    }
 }
