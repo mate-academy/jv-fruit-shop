@@ -1,9 +1,13 @@
 type,fruit,quantity
 b,banana,20
+b,kiwi,0
 b,apple,100
 s,banana,100
+s,kiwi,6
 p,banana,13
+p,kiwi,3
 r,apple,10
 p,apple,20
 p,banana,5
 s,banana,50
+r,pear,7

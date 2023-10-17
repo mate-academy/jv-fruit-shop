@@ -18,7 +18,7 @@ public class VirtualStorage implements Storage {
     public void income(StorageItemDto storageItem) {
         double newQty = storage.containsKey(storageItem.getName())
                                 ? storage.get(storageItem.getName()) + storageItem.getQty()
-                                : 0;
+                                : storageItem.getQty();
         storage.put(storageItem.getName(), newQty);
 
     }
