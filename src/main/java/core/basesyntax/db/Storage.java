@@ -1,7 +1,6 @@
 package core.basesyntax.db;
 
-import core.basesyntax.service.FruitTransaction;
-
+import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 

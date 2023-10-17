@@ -1,15 +1,14 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.dao.FruitTransactionDao;
+import core.basesyntax.dao.FruitTransactionDaoImpl;
+import core.basesyntax.model.FruitTransaction;
 
 public class SupplyActivityStrategyImpl implements TypeActivityStrategy {
+    private final FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
+
     @Override
-    public void setNewAmount(Integer amount, FruitTransaction fruitTransaction) {
-        for (FruitTransaction fruit : Storage.fruitTransactions) {
-            if (fruit.getFruit().equals(fruitTransaction.getFruit())) {
-                fruit.setQuantity(fruit.getQuantity() + amount);
-            }
-        }
+    public void setAmountOfFruit(FruitTransaction fruitTransaction) {
+        fruitTransactionDao.getFromStorage(fruitTransaction).add(fruitTransaction.getQuantity());
     }
 }

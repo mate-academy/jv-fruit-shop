@@ -1,9 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.FruitTransaction;
-
-import java.util.List;
+import core.basesyntax.model.FruitTransaction;
 
 public interface TypeActivityStrategy {
-   void setNewAmount(Integer amount, FruitTransaction fruitTransaction);
+    void setAmountOfFruit(FruitTransaction fruitTransaction);
 }
