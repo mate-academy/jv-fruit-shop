@@ -8,6 +8,7 @@ import core.basesyntax.strategy.TypeActivityStrategy;
 import java.util.List;
 
 public class FruitServiceImpl implements FruitService {
+    private static final String NEW_FILE = "newFile.CSV";
 
     private ReaderService readerService;
 
@@ -26,7 +27,8 @@ public class FruitServiceImpl implements FruitService {
     public void writeReport(String file) {
         List<FruitTransaction> fruitTransactions = readerService.readFromFile(file);
         fruitTransactions.stream()
-                .forEach(fruit -> typeActivityStrategy.get(fruit.getOperation()));
-        writerService.writeToFile("newFile.CSV");
+                .forEach(fruit -> typeActivityStrategy
+                        .get(fruit.getOperation()).setAmountOfFruit(fruit));
+        writerService.writeToFile(NEW_FILE);
     }
 }

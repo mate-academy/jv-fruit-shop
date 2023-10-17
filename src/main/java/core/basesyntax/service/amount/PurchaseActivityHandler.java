@@ -10,6 +10,6 @@ public class PurchaseActivityHandler implements ActivityHandler {
     @Override
     public void setAmountOfFruit(FruitTransaction fruitTransaction) {
         fruitTransactionDao.getFromStorage(fruitTransaction)
-                .substract(fruitTransaction.getQuantity());
+                .subtract(fruitTransaction.getQuantity());
     }
 }

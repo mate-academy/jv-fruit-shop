@@ -19,6 +19,6 @@ public class ReaderServiceImpl implements ReaderService {
             throw new RuntimeException("Can't read from file " + fromFile);
         }
         fruitTransactions.remove(0);
-        return parserService.getObjectsFromStrings(fruitTransactions);
+        return parserService.parseObjectsFromStrings(fruitTransactions);
     }
 }

@@ -19,6 +19,8 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class Main {
+    private static final String FILE = "file.CSV";
+
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, ActivityHandler>
                 amountOfFruitsHandlersMap = new HashMap<>();
@@ -45,6 +47,6 @@ public class Main {
         FruitService fruitService =
                 new FruitServiceImpl(new ReaderServiceImpl(),
                         new WriterServiceImpl(), typeActivityStrategy);
-        fruitService.writeReport("file.CSV");
+        fruitService.writeReport(FILE);
     }
 }

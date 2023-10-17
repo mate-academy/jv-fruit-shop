@@ -9,7 +9,7 @@ public class FruitTransaction {
         return fruit;
     }
 
-    public void substract(int quantity) {
+    public void subtract(int quantity) {
         this.quantity -= quantity;
     }
 
@@ -33,8 +33,8 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
+    public void setOperation(String operation) {
+        this.operation = Operation.getOperationFromString(operation);
     }
 
     public enum Operation {
@@ -43,8 +43,18 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
         private String code;
+
         Operation(String code) {
             this.code = code;
+        }
+
+        public static Operation getOperationFromString(String code) {
+            for (Operation op : Operation.values()) {
+                if (code.equals(op)) {
+                    return op;
+                }
+            }
+            return null;
         }
 
         public String getCode() {
