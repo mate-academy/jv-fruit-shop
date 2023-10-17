@@ -5,13 +5,13 @@ import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportGeneratorService implements ParserService<String> {
+public class ReportGenerationService implements ParserService<String> {
     private static final String CSV_COMMA_SEPARATOR = ",";
     private final List<StorageItemDto> storageItems;
     private final List<String> headers;
 
-    public ReportGeneratorService(List<StorageItemDto> storageItems,
-                                  List<String> headers) {
+    public ReportGenerationService(List<StorageItemDto> storageItems,
+                                   List<String> headers) {
         this.storageItems = storageItems;
         this.headers = headers;
     }

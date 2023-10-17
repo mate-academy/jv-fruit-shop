@@ -9,7 +9,7 @@ import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvFileReaderService;
 import core.basesyntax.service.impl.CsvFileWriterService;
 import core.basesyntax.service.impl.CsvToStorageOperationDtoParserService;
-import core.basesyntax.service.impl.ReportGeneratorService;
+import core.basesyntax.service.impl.ReportGenerationService;
 import core.basesyntax.service.impl.VirtualStorageService;
 import core.basesyntax.strategy.SimpleOperationStrategy;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
@@ -60,7 +60,7 @@ public class FruitShop {
         List<StorageItemDto> storageItemList = storageService.getRemainders();
 
         ParserService<String> dtoParserService =
-                new ReportGeneratorService(storageItemList, reportHeaders);
+                new ReportGenerationService(storageItemList, reportHeaders);
         List<String> csvStorafeItemList = dtoParserService.parse();
 
         System.out.println("Done!\n");
