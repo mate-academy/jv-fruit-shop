@@ -2,14 +2,16 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.amount.ActivityHandler;
+import core.basesyntax.service.amount.BalanceActivityHandler;
+import core.basesyntax.service.amount.PurchaseActivityHandler;
+import core.basesyntax.service.amount.ReturnActivityHandler;
+import core.basesyntax.service.amount.SupplyActivityHandler;
 import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.BalanceActivityStrategyImpl;
-import core.basesyntax.strategy.PurchaseActivityStrategyImpl;
-import core.basesyntax.strategy.ReturnActivityStrategyImpl;
-import core.basesyntax.strategy.SupplyActivityStrategyImpl;
 import core.basesyntax.strategy.TypeActivityStrategy;
+import core.basesyntax.strategy.TypeActivityStrategyImpl;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,20 +20,27 @@ import java.util.Map;
  */
 public class Main {
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, TypeActivityStrategy>
+        Map<FruitTransaction.Operation, ActivityHandler>
                 amountOfFruitsHandlersMap = new HashMap<>();
 
-        amountOfFruitsHandlersMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnActivityStrategyImpl());
-        amountOfFruitsHandlersMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceActivityStrategyImpl());
-        amountOfFruitsHandlersMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseActivityStrategyImpl());
-        amountOfFruitsHandlersMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyActivityStrategyImpl());
+        amountOfFruitsHandlersMap.put(FruitTransaction
+                        .Operation.RETURN,
+                new ReturnActivityHandler());
+        amountOfFruitsHandlersMap.put(FruitTransaction
+                        .Operation.BALANCE,
+                new BalanceActivityHandler());
+        amountOfFruitsHandlersMap.put(FruitTransaction
+                        .Operation.PURCHASE,
+                new PurchaseActivityHandler());
+        amountOfFruitsHandlersMap.put(FruitTransaction
+                        .Operation.SUPPLY,
+                new SupplyActivityHandler());
 
-        FruitService fruitService = new FruitServiceImpl(amountOfFruitsHandlersMap,
-                new ReaderServiceImpl(), new WriterServiceImpl());
+        TypeActivityStrategy typeActivityStrategy =
+                new TypeActivityStrategyImpl(amountOfFruitsHandlersMap);
+        FruitService fruitService =
+                new FruitServiceImpl(new ReaderServiceImpl(),
+                        new WriterServiceImpl(), typeActivityStrategy);
         fruitService.writeReport("file.CSV");
     }
 }

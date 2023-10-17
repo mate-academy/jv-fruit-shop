@@ -1,10 +1,10 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service.amount;
 
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
-public class PurchaseActivityStrategyImpl implements TypeActivityStrategy {
+public class PurchaseActivityHandler implements ActivityHandler {
     private final FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
 
     @Override
@@ -13,4 +13,3 @@ public class PurchaseActivityStrategyImpl implements TypeActivityStrategy {
                 .substract(fruitTransaction.getQuantity());
     }
 }
-
