@@ -15,7 +15,7 @@ public class VirtualStorage implements Storage {
     }
 
     @Override
-    public void income(StorageItemDto storageItem) {
+    public void stock(StorageItemDto storageItem) {
         double newQty = storage.containsKey(storageItem.getName())
                                 ? storage.get(storageItem.getName()) + storageItem.getQty()
                                 : storageItem.getQty();
@@ -24,7 +24,7 @@ public class VirtualStorage implements Storage {
     }
 
     @Override
-    public void outcome(StorageItemDto storageItem) {
+    public void withdraw(StorageItemDto storageItem) {
         double oldQty = storage.containsKey(storageItem.getName())
                 ? storage.get(storageItem.getName())
                 : 0;

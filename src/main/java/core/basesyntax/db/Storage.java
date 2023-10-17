@@ -6,13 +6,13 @@ import java.util.List;
 public interface Storage {
     void clear();
 
-    void income(StorageItemDto goods);
+    void stock(StorageItemDto storageItem);
 
-    void outcome(StorageItemDto goods);
+    void withdraw(StorageItemDto storageItem);
 
-    void setRemainder(StorageItemDto goods);
+    void setRemainder(StorageItemDto storageItem);
 
-    StorageItemDto getRemainder(String goodsName);
+    StorageItemDto getRemainder(String storageItemName);
 
     List<StorageItemDto> getRemainders();
 }

@@ -5,16 +5,16 @@ import core.basesyntax.db.dao.VirtualStorageDao;
 import core.basesyntax.db.dto.StorageItemDto;
 import core.basesyntax.db.dto.StorageOperationDto;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.strategy.StorageOperationStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.operation.StorageOperationHandler;
 import java.util.List;
 
 public class VirtualStorageService implements StorageService {
     private final StorageDao storageDao = new VirtualStorageDao();
-    private final StorageOperationStrategy storageOperationStrategy;
+    private final OperationStrategy operationStrategy;
 
-    public VirtualStorageService(StorageOperationStrategy storageOperationStrategy) {
-        this.storageOperationStrategy = storageOperationStrategy;
+    public VirtualStorageService(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
     }
 
     @Override
@@ -33,9 +33,9 @@ public class VirtualStorageService implements StorageService {
     }
 
     @Override
-    public void update(StorageOperationDto storageOperation) {
+    public void apply(StorageOperationDto storageOperation) {
         StorageOperationHandler storageOperationHandler =
-                storageOperationStrategy.getOperationHandler(storageOperation);
+                operationStrategy.getOperationHandler(storageOperation);
 
         if (storageOperationHandler == null) {
             throw new RuntimeException("Executing operation failed! Invalid operation type: "
@@ -46,9 +46,9 @@ public class VirtualStorageService implements StorageService {
     }
 
     @Override
-    public void update(List<StorageOperationDto> storageOperationList) {
-        for (StorageOperationDto storageOperation : storageOperationList) {
-            update(storageOperation);
+    public void apply(List<StorageOperationDto> storageOperations) {
+        for (StorageOperationDto storageOperation : storageOperations) {
+            apply(storageOperation);
         }
     }
 }

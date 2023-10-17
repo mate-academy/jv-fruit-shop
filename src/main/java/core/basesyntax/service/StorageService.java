@@ -11,7 +11,7 @@ public interface StorageService {
 
     List<StorageItemDto> getRemainders();
 
-    void update(StorageOperationDto storageOperation);
+    void apply(StorageOperationDto storageOperation);
 
-    void update(List<StorageOperationDto> storageOperationList);
+    void apply(List<StorageOperationDto> storageOperations);
 }

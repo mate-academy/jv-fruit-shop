@@ -5,14 +5,14 @@ import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StorageItemDtoToCsvParserService implements ParserService<String> {
+public class ReportGeneratorService implements ParserService<String> {
     private static final String CSV_COMMA_SEPARATOR = ",";
-    private final List<StorageItemDto> storageItemList;
+    private final List<StorageItemDto> storageItems;
     private final List<String> headers;
 
-    public StorageItemDtoToCsvParserService(List<StorageItemDto> storageItemList,
-                                            List<String> headers) {
-        this.storageItemList = storageItemList;
+    public ReportGeneratorService(List<StorageItemDto> storageItems,
+                                  List<String> headers) {
+        this.storageItems = storageItems;
         this.headers = headers;
     }
 
@@ -24,7 +24,7 @@ public class StorageItemDtoToCsvParserService implements ParserService<String> {
             remaindersList.add(String.join(CSV_COMMA_SEPARATOR, headers));
         }
 
-        for (StorageItemDto storageItem : storageItemList) {
+        for (StorageItemDto storageItem : storageItems) {
             String csvStorageItem = storageItem.getName()
                     + CSV_COMMA_SEPARATOR + storageItem.getQty();
 

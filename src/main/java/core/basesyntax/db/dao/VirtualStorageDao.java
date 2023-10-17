@@ -16,7 +16,7 @@ public class VirtualStorageDao implements StorageDao {
 
     @Override
     public StorageItemDto income(StorageItemDto storageItem) {
-        storage.income(storageItem);
+        storage.stock(storageItem);
         return storage.getRemainder(storageItem.getName());
     }
 
@@ -33,7 +33,7 @@ public class VirtualStorageDao implements StorageDao {
 
     @Override
     public StorageItemDto outcome(StorageItemDto storageItem) {
-        storage.outcome(storageItem);
+        storage.withdraw(storageItem);
         return storage.getRemainder(storageItem.getName());
     }
 

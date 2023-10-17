@@ -3,13 +3,13 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.dto.StorageOperationDto;
 import core.basesyntax.strategy.operation.Operation;
 import core.basesyntax.strategy.operation.StorageOperationHandler;
-import java.util.HashMap;
+import java.util.Map;
 
-public class VirtualStorageOperationStrategy implements StorageOperationStrategy {
-    private final HashMap<Operation, StorageOperationHandler> operationHandlers;
+public class SimpleOperationStrategy implements OperationStrategy {
+    private final Map<Operation, StorageOperationHandler> operationHandlers;
 
-    public VirtualStorageOperationStrategy(HashMap<Operation,
-            StorageOperationHandler> operationHandlers) {
+    public SimpleOperationStrategy(Map<Operation,
+                StorageOperationHandler> operationHandlers) {
 
         this.operationHandlers = operationHandlers;
     }

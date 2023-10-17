@@ -9,23 +9,29 @@ import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvFileReaderService;
 import core.basesyntax.service.impl.CsvFileWriterService;
 import core.basesyntax.service.impl.CsvToStorageOperationDtoParserService;
-import core.basesyntax.service.impl.StorageItemDtoToCsvParserService;
+import core.basesyntax.service.impl.ReportGeneratorService;
 import core.basesyntax.service.impl.VirtualStorageService;
-import core.basesyntax.strategy.VirtualStorageOperationStrategy;
+import core.basesyntax.strategy.SimpleOperationStrategy;
 import core.basesyntax.strategy.operation.BalanceOperationHandler;
 import core.basesyntax.strategy.operation.Operation;
 import core.basesyntax.strategy.operation.PurchaseOperationHandler;
 import core.basesyntax.strategy.operation.ReturnOperationHandler;
 import core.basesyntax.strategy.operation.StorageOperationHandler;
 import core.basesyntax.strategy.operation.SupplyOperationHandler;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FruitShop {
     public static void main(String[] args) {
-        final String inputFileName = "./sample_data/in/operations.csv";
-        final String outputFileName = "./sample_data/out/remainders.csv";
+        final String inputFileName = "./src/main/resources/operations.csv";
+        final String outputFileName = "./src/main/resources/remainders.csv";
+        final List<String> reportHeaders = List.of("fruit", "quantity");
+        final Map<Operation, StorageOperationHandler> virtualStorageOperationStrategy = Map.of(
+                Operation.BALANCE, new BalanceOperationHandler(),
+                Operation.PURCHASE, new PurchaseOperationHandler(),
+                Operation.RETURN, new ReturnOperationHandler(),
+                Operation.SUPPLY, new SupplyOperationHandler()
+        );
         boolean headersPresent = true;
 
         System.out.println("Hello, Fruits!\n");
@@ -44,20 +50,17 @@ public class FruitShop {
         System.out.println("Done!\n");
         System.out.println("Processing data to virtual storage...");
 
-        StorageService storageService = new VirtualStorageService(getVirtualStorageStrategy());
-        storageService.update(storageOperationList);
+        StorageService storageService = new VirtualStorageService(
+                new SimpleOperationStrategy(virtualStorageOperationStrategy));
+        storageService.apply(storageOperationList);
 
         System.out.println("Done!\n");
         System.out.println("Getting remainders...");
 
         List<StorageItemDto> storageItemList = storageService.getRemainders();
 
-        List<String> headers = new ArrayList<>();
-        headers.add("fruit");
-        headers.add("quantity");
-
         ParserService<String> dtoParserService =
-                new StorageItemDtoToCsvParserService(storageItemList, headers);
+                new ReportGeneratorService(storageItemList, reportHeaders);
         List<String> csvStorafeItemList = dtoParserService.parse();
 
         System.out.println("Done!\n");
@@ -69,16 +72,5 @@ public class FruitShop {
         storageService.clearStorage();
 
         System.out.println("\nDone! Stay fresh!");
-    }
-
-    public static VirtualStorageOperationStrategy getVirtualStorageStrategy() {
-        HashMap<Operation, StorageOperationHandler> operationHandlers = new HashMap<>();
-
-        operationHandlers.put(Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlers.put(Operation.RETURN, new ReturnOperationHandler());
-        operationHandlers.put(Operation.SUPPLY, new SupplyOperationHandler());
-
-        return new VirtualStorageOperationStrategy(operationHandlers);
     }
 }

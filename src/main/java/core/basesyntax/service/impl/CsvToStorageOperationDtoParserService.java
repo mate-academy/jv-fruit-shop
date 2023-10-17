@@ -27,31 +27,35 @@ public class CsvToStorageOperationDtoParserService implements ParserService<Stor
 
         for (int i = startLine; i < data.size(); i++) {
             String[] csvDataLine = data.get(i).split(CSV_COMMA_SEPARATOR);
-
             try {
-                if (csvDataLine.length < CSV_MIN_FIELDS_NUMBER
-                        || csvDataLine[0].isBlank()
-                        || csvDataLine[1].isBlank()
-                        || csvDataLine[2].isBlank()) {
-                    throw new RuntimeException("Parsing failed! Invalid data at line: " + i);
-                }
-
-                StorageItemDto storageItem =
-                        new StorageItemDto(csvDataLine[STORAGE_ITEM_NAME_FILED_INDEX],
-                        Double.parseDouble(csvDataLine[STORAGE_ITEM_QUANTITY_FIELD_INDEX].trim()));
-
-                StorageOperationDto storageOperation =
-                        new StorageOperationDto(csvDataLine[OPERATION_TYPE_FILED_INDEX],
-                        storageItem);
-
-                storageOperationList
-                        .add(storageOperation);
-
+                validateCsvLine(csvDataLine, i);
+                storageOperationList.add(parseCsvLine(csvDataLine));
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Parsing failed! Invalid data at line: " + i, e);
             }
         }
 
         return storageOperationList;
+    }
+
+    private void validateCsvLine(String[] csvDataLine, int csvLineIndex) {
+        if (csvDataLine.length < CSV_MIN_FIELDS_NUMBER
+                || csvDataLine[OPERATION_TYPE_FILED_INDEX].isBlank()
+                || csvDataLine[STORAGE_ITEM_NAME_FILED_INDEX].isBlank()
+                || csvDataLine[STORAGE_ITEM_QUANTITY_FIELD_INDEX].isBlank()) {
+            throw new RuntimeException("Parsing failed! Invalid data at line: " + csvLineIndex);
+        }
+    }
+
+    private StorageOperationDto parseCsvLine(String[] csvDataLine) {
+        StorageItemDto storageItem =
+                new StorageItemDto(csvDataLine[STORAGE_ITEM_NAME_FILED_INDEX],
+                        Double.parseDouble(csvDataLine[STORAGE_ITEM_QUANTITY_FIELD_INDEX].trim()));
+
+        StorageOperationDto storageOperation =
+                new StorageOperationDto(csvDataLine[OPERATION_TYPE_FILED_INDEX],
+                        storageItem);
+
+        return storageOperation;
     }
 }

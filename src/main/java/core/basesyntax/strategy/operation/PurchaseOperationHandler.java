@@ -16,7 +16,7 @@ public class PurchaseOperationHandler implements StorageOperationHandler {
         }
 
         if (existingStorageItem == null) {
-            throw new RuntimeException("Process outcome failed! Item don't exists: "
+            throw new RuntimeException("Process outcome failed! Item doesn't exists: "
                     + storageItem.getName());
         }
 
