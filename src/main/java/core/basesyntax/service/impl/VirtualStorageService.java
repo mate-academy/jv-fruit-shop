@@ -1,36 +1,54 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.dao.StorageDAO;
-import core.basesyntax.db.dao.VirtualStorageDAO;
-import core.basesyntax.db.dto.StorageItemDTO;
-import core.basesyntax.db.dto.StorageOperationDTO;
+import core.basesyntax.db.dao.StorageDao;
+import core.basesyntax.db.dao.VirtualStorageDao;
+import core.basesyntax.db.dto.StorageItemDto;
+import core.basesyntax.db.dto.StorageOperationDto;
 import core.basesyntax.service.StorageService;
+import core.basesyntax.strategy.StorageOperationStrategy;
+import core.basesyntax.strategy.operation.StorageOperationHandler;
 import java.util.List;
 
 public class VirtualStorageService implements StorageService {
-    private final StorageDAO storageDAO = new VirtualStorageDAO();
+    private final StorageDao storageDao = new VirtualStorageDao();
+    private final StorageOperationStrategy storageOperationStrategy;
+
+    public VirtualStorageService(StorageOperationStrategy storageOperationStrategy) {
+        this.storageOperationStrategy = storageOperationStrategy;
+    }
+
     @Override
     public void clearStorage() {
-        storageDAO.clearStorage();
+        storageDao.clearStorage();
     }
 
     @Override
-    public StorageItemDTO getRemainder(String storageItemName) {
-        return null;
+    public StorageItemDto getRemainder(String storageItemName) {
+        return storageDao.getRemainder(storageItemName);
     }
 
     @Override
-    public List<StorageItemDTO> getRemainders() {
-        return null;
+    public List<StorageItemDto> getRemainders() {
+        return storageDao.getRemainders();
     }
 
     @Override
-    public void update(StorageOperationDTO storageOperation) {
+    public void update(StorageOperationDto storageOperation) {
+        StorageOperationHandler storageOperationHandler =
+                storageOperationStrategy.getOperationHandler(storageOperation);
 
+        if (storageOperationHandler == null) {
+            throw new RuntimeException("Executing operation failed! Invalid operation type: "
+                    + storageOperation.getType());
+        }
+
+        storageOperationHandler.handle(storageDao, storageOperation);
     }
 
     @Override
-    public void update(List<StorageOperationDTO> storageOperationList) {
-
+    public void update(List<StorageOperationDto> storageOperationList) {
+        for (StorageOperationDto storageOperation : storageOperationList) {
+            update(storageOperation);
+        }
     }
 }

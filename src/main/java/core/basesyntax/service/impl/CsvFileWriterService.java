@@ -1,7 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.WriterService;
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -22,7 +24,6 @@ public class CsvFileWriterService implements WriterService {
                 bufferedWriter.write(csvLine);
                 bufferedWriter.newLine();
             }
-
             bufferedWriter.flush();
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file: " + fileName, e);

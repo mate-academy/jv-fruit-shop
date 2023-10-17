@@ -1,8 +1,8 @@
 package core.basesyntax.strategy.operation;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.db.dto.StorageOperationDTO;
+import core.basesyntax.db.dao.StorageDao;
+import core.basesyntax.db.dto.StorageOperationDto;
 
 public interface StorageOperationHandler {
-    void handle(Storage storage, StorageOperationDTO storageOperation);
+    void handle(StorageDao storage, StorageOperationDto storageOperation);
 }

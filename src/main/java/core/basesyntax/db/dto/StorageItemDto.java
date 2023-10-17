@@ -1,10 +1,10 @@
 package core.basesyntax.db.dto;
 
-public class StorageItemDTO {
+public class StorageItemDto {
     private final String name;
     private final double qty;
 
-    public StorageItemDTO(String name, double qty) {
+    public StorageItemDto(String name, double qty) {
         this.name = name;
         this.qty = qty;
     }

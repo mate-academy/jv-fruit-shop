@@ -1,13 +1,17 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.dto.StorageItemDTO;
-import core.basesyntax.db.dto.StorageOperationDTO;
+import core.basesyntax.db.dto.StorageItemDto;
+import core.basesyntax.db.dto.StorageOperationDto;
 import java.util.List;
 
 public interface StorageService {
     void clearStorage();
-    StorageItemDTO getRemainder(String storageItemName);
-    List<StorageItemDTO> getRemainders();
-    void update(StorageOperationDTO storageOperation);
-    void update (List<StorageOperationDTO> storageOperationList);
+
+    StorageItemDto getRemainder(String storageItemName);
+
+    List<StorageItemDto> getRemainders();
+
+    void update(StorageOperationDto storageOperation);
+
+    void update(List<StorageOperationDto> storageOperationList);
 }
