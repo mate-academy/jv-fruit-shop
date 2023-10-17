@@ -1,4 +1,7 @@
 package core.basesyntax.strategy;
 
-public class StorageOperationStrategy {
+import core.basesyntax.strategy.operation.StorageOperationHandler;
+
+public interface StorageOperationStrategy {
+    StorageOperationHandler getOperationHandler();
 }

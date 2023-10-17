@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
-public interface ParserService {
+import java.util.List;
 
+public interface ParserService<T> {
+    List<T> parse();
 }

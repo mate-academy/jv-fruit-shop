@@ -1,10 +1,10 @@
 package core.basesyntax.db.dto;
 
-public class GoodsOperationDTO {
+public class StorageOperationDTO {
     private final String type;
-    private final GoodsDTO goods;
+    private final StorageItemDTO goods;
 
-    public GoodsOperationDTO(String type, GoodsDTO goods) {
+    public StorageOperationDTO(String type, StorageItemDTO goods) {
         this.type = type;
         this.goods = goods;
     }
@@ -13,7 +13,7 @@ public class GoodsOperationDTO {
         return type;
     }
 
-    public GoodsDTO getGoods() {
+    public StorageItemDTO getGoods() {
         return goods;
     }
 }
