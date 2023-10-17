@@ -23,21 +23,25 @@ public class Main {
         Map<FruitTransaction.Operation, ActivityHandler>
                 amountOfFruitsHandlersMap = new HashMap<>();
 
-        amountOfFruitsHandlersMap.put(FruitTransaction
-                        .Operation.RETURN,
-                new ReturnActivityHandler());
-        amountOfFruitsHandlersMap.put(FruitTransaction
-                        .Operation.BALANCE,
-                new BalanceActivityHandler());
-        amountOfFruitsHandlersMap.put(FruitTransaction
-                        .Operation.PURCHASE,
-                new PurchaseActivityHandler());
-        amountOfFruitsHandlersMap.put(FruitTransaction
-                        .Operation.SUPPLY,
-                new SupplyActivityHandler());
+        amountOfFruitsHandlersMap
+                .put(FruitTransaction.Operation.RETURN,
+                    new ReturnActivityHandler());
+
+        amountOfFruitsHandlersMap
+                .put(FruitTransaction.Operation.BALANCE,
+                    new BalanceActivityHandler());
+
+        amountOfFruitsHandlersMap
+                .put(FruitTransaction.Operation.PURCHASE,
+                    new PurchaseActivityHandler());
+
+        amountOfFruitsHandlersMap
+                .put(FruitTransaction.Operation.SUPPLY,
+                    new SupplyActivityHandler());
 
         TypeActivityStrategy typeActivityStrategy =
                 new TypeActivityStrategyImpl(amountOfFruitsHandlersMap);
+
         FruitService fruitService =
                 new FruitServiceImpl(new ReaderServiceImpl(),
                         new WriterServiceImpl(), typeActivityStrategy);
