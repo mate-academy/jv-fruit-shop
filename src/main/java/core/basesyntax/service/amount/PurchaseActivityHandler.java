@@ -12,10 +12,7 @@ public class PurchaseActivityHandler implements ActivityHandler {
 
     @Override
     public void setAmountOfFruit(FruitTransaction fruitTransaction) {
-        FruitTransaction fruit = fruitTransactionDao.getFromStorage(fruitTransaction);
-        if (fruit.getQuantity() < fruitTransaction.getQuantity()) {
-            throw new RuntimeException("Cannot sell more fruit than is in stock");
-        }
-        fruit.subtract(fruitTransaction.getQuantity());
+        fruitTransactionDao.getFromStorage(fruitTransaction)
+                .subtract(fruitTransaction.getQuantity());
     }
 }

@@ -20,6 +20,9 @@ public class FruitTransaction {
     }
 
     public void subtract(int quantity) {
+        if (quantity > this.quantity) {
+            throw new RuntimeException("Cannot sell more fruit than is in stock");
+        }
         this.quantity -= quantity;
     }
 
