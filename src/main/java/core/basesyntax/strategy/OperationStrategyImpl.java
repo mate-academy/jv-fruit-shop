@@ -2,23 +2,23 @@ package core.basesyntax.strategy;
 
 ;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.OperationService;
-import core.basesyntax.service.PurchaseService;
-import core.basesyntax.service.RemnantService;
-import core.basesyntax.service.SupplyService;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.PurchaseOperationHandler;
+import core.basesyntax.service.RemnantOperationHandler;
+import core.basesyntax.service.SupplyOperationHandler;
 
 public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
-    public OperationService get(FruitTransaction.Operation operation) {
+    public OperationHandler get(FruitTransaction.Operation operation) {
         switch (operation) {
             case BALANCE:
-                return new RemnantService();
+                return new RemnantOperationHandler();
             case SUPPLY:
             case RETURN:
-                return new SupplyService();
+                return new SupplyOperationHandler();
             case PURCHASE:
-                return new PurchaseService();
+                return new PurchaseOperationHandler();
             default:
                 throw new RuntimeException("No such operation: " + operation);
         }

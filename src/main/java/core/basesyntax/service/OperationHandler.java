@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface OperationService {
+public interface OperationHandler {
     void handle(String name, int amount);
 }

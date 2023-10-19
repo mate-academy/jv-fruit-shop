@@ -15,20 +15,12 @@ public class FileReaderImpl implements FileReader {
     private static final int AMOUNT_INDEX = 2;
 
     @Override
-    public ArrayList<FruitTransaction> readFromFile(File file) {
+    public List<String> readFromFile(File file) {
         ArrayList<FruitTransaction> fruitTransactions = new ArrayList<>();
         try {
-            List<String> fruits = Files.readAllLines(file.toPath());
-            fruits.remove(HEADER_INDEX);
-            for (String fruit: fruits) {
-                String[] parsedFruit = fruit.split(SEPARATOR);
-                fruitTransactions.add(new FruitTransaction(parsedFruit[FRUIT_INDEX],
-                        Integer.parseInt(parsedFruit[AMOUNT_INDEX]),
-                        FruitTransaction.Operation.getByCode(parsedFruit[OPERATION_INDEX])));
-            }
+            return Files.readAllLines(file.toPath());
         } catch (IOException ioException) {
             throw new RuntimeException("Cannot read data from file: " + file, ioException);
         }
-        return fruitTransactions;
     }
 }

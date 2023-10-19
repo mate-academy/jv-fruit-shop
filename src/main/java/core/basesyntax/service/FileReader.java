@@ -1,9 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransaction;
 import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface FileReader {
-    ArrayList<FruitTransaction> readFromFile(File file);
+    List<String> readFromFile(File file);
 }
