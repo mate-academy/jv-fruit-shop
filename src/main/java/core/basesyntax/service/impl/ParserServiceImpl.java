@@ -11,6 +11,9 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public List<FruitTransaction> parseObjectsFromStrings(List<String> strings) {
+        if (strings == null) {
+            throw new RuntimeException("Cannot parse null");
+        }
         return strings.stream().map(this::getFruitFromString).collect(Collectors.toList());
     }
 
