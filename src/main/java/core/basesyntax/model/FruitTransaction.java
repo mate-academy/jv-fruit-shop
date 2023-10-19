@@ -36,6 +36,9 @@ public class FruitTransaction {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Quantiny cannot be less than 0");
+        }
         this.quantity = quantity;
     }
 
