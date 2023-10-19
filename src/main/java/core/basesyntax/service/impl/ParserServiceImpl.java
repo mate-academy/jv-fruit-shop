@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParserService;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,10 +16,26 @@ public class ParserServiceImpl implements ParserService {
 
     private FruitTransaction getFruitFromString(String string) {
         String [] parts = string.split(COMA);
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(parts[0]);
-        fruitTransaction.setFruit(parts[1]);
-        fruitTransaction.setQuantity(Integer.parseInt(parts[2]));
+        FruitTransaction fruitTransaction =
+                FruitTransaction.of(getOperationFromString(parts[0]),
+                        parts[1], Integer.parseInt(parts[2]));
         return fruitTransaction;
+    }
+
+    private Operation getOperationFromString(String string) {
+        switch (string) {
+            case "r": {
+                return Operation.RETURN;
+            }
+            case "s": {
+                return Operation.SUPPLY;
+            }
+            case "b": {
+                return Operation.BALANCE;
+            }
+            default: {
+                return Operation.PURCHASE;
+            }
+        }
     }
 }

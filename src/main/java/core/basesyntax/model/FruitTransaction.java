@@ -5,6 +5,16 @@ public class FruitTransaction {
     private int quantity;
     private Operation operation;
 
+    private FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.fruit = fruit;
+        this.quantity = quantity;
+        this.operation = operation;
+    }
+
+    public static FruitTransaction of(Operation operation, String fruit, int quantity) {
+        return new FruitTransaction(operation, fruit, quantity);
+    }
+
     public String getFruit() {
         return fruit;
     }
@@ -33,33 +43,8 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setOperation(String operation) {
-        this.operation = Operation.getOperationFromString(operation);
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-        private String code;
-
-        Operation(String code) {
-            this.code = code;
-        }
-
-        public static Operation getOperationFromString(String code) {
-            for (Operation op : Operation.values()) {
-                if (code.equals(op)) {
-                    return op;
-                }
-            }
-            return null;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-    }
 }

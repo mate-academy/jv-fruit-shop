@@ -10,11 +10,11 @@ import java.util.List;
 public class FruitServiceImpl implements FruitService {
     private static final String NEW_FILE = "newFile.CSV";
 
-    private ReaderService readerService;
+    private final ReaderService readerService;
 
-    private WriterService writerService;
+    private final WriterService writerService;
 
-    private TypeActivityStrategy typeActivityStrategy;
+    private final TypeActivityStrategy typeActivityStrategy;
 
     public FruitServiceImpl(ReaderService readerService, WriterService writerService,
                             TypeActivityStrategy typeActivityStrategy) {
@@ -26,7 +26,7 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public void writeReport(String file) {
         List<FruitTransaction> fruitTransactions = readerService.readFromFile(file);
-        fruitTransactions.stream()
+        fruitTransactions
                 .forEach(fruit -> typeActivityStrategy
                         .get(fruit.getOperation()).setAmountOfFruit(fruit));
         writerService.writeToFile(NEW_FILE);

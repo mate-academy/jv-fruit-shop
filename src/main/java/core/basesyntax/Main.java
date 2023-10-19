@@ -1,6 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.dao.FruitTransactionDaoImpl;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.amount.ActivityHandler;
 import core.basesyntax.service.amount.BalanceActivityHandler;
@@ -22,24 +23,24 @@ public class Main {
     private static final String FILE = "file.CSV";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, ActivityHandler>
+        Map<Operation, ActivityHandler>
                 amountOfFruitsHandlersMap = new HashMap<>();
 
         amountOfFruitsHandlersMap
-                .put(FruitTransaction.Operation.RETURN,
-                    new ReturnActivityHandler());
+                .put(Operation.RETURN,
+                    new ReturnActivityHandler(new FruitTransactionDaoImpl()));
 
         amountOfFruitsHandlersMap
-                .put(FruitTransaction.Operation.BALANCE,
-                    new BalanceActivityHandler());
+                .put(Operation.BALANCE,
+                    new BalanceActivityHandler(new FruitTransactionDaoImpl()));
 
         amountOfFruitsHandlersMap
-                .put(FruitTransaction.Operation.PURCHASE,
-                    new PurchaseActivityHandler());
+                .put(Operation.PURCHASE,
+                    new PurchaseActivityHandler(new FruitTransactionDaoImpl()));
 
         amountOfFruitsHandlersMap
-                .put(FruitTransaction.Operation.SUPPLY,
-                    new SupplyActivityHandler());
+                .put(Operation.SUPPLY,
+                    new SupplyActivityHandler(new FruitTransactionDaoImpl()));
 
         TypeActivityStrategy typeActivityStrategy =
                 new TypeActivityStrategyImpl(amountOfFruitsHandlersMap);
