@@ -5,12 +5,16 @@ import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileReaderImpl;
 import core.basesyntax.service.ParseService;
 import core.basesyntax.service.ParseServiceImpl;
+import core.basesyntax.service.PurchaseOperationHandler;
+import core.basesyntax.service.RemnantOperationHandler;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ReportServiceImpl;
+import core.basesyntax.service.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.io.File;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 public class Main {
@@ -21,7 +25,13 @@ public class Main {
         FileReader fileReader = new FileReaderImpl();
         ParseService parseService = new ParseServiceImpl();
         ReportService reportService = new ReportServiceImpl();
-        OperationStrategy operationStrategy = new OperationStrategyImpl();
+        OperationStrategy operationStrategy = new OperationStrategyImpl(new HashMap<>() {{
+                put(FruitTransaction.Operation.BALANCE, new RemnantOperationHandler());
+                put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+                put(FruitTransaction.Operation.RETURN, new SupplyOperationHandler());
+                put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+                }}
+        );
         ClassLoader classLoader = Main.class.getClassLoader();
         for (String fileName : FILE_NAMES) {
             URL resources = classLoader.getResource(fileName);

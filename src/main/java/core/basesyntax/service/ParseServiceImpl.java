@@ -3,6 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ParseServiceImpl implements ParseService {
     private static final String SEPARATOR = ",";
@@ -17,9 +18,23 @@ public class ParseServiceImpl implements ParseService {
         fruits.remove(HEADER_INDEX);
         for (String fruit : fruits) {
             String[] parsedFruit = fruit.split(SEPARATOR);
-            fruitTransactions.add(new FruitTransaction(parsedFruit[FRUIT_INDEX],
-                    Integer.parseInt(parsedFruit[AMOUNT_INDEX]),
-                    FruitTransaction.Operation.getByCode(parsedFruit[OPERATION_INDEX])));
+            try {
+                int amount = Integer.parseInt(parsedFruit[AMOUNT_INDEX]);
+                if (amount < 0) {
+                    throw new NumberFormatException();
+                }
+                FruitTransaction.Operation operation
+                        = FruitTransaction.Operation.getByCode(parsedFruit[OPERATION_INDEX]);
+                fruitTransactions.add(new FruitTransaction(parsedFruit[FRUIT_INDEX],
+                        amount, operation));
+            } catch (NumberFormatException numberFormatException) {
+                throw new RuntimeException("Invalid amount: " + parsedFruit[AMOUNT_INDEX],
+                        numberFormatException);
+            } catch (NoSuchElementException noSuchElementException) {
+                throw new RuntimeException("No such operation code: "
+                        + parsedFruit[OPERATION_INDEX],
+                        noSuchElementException);
+            }
         }
         return fruitTransactions;
     }

@@ -1,5 +1,8 @@
 package core.basesyntax.model;
 
+import java.util.NoSuchElementException;
+import java.util.Objects;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -35,6 +38,20 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != FruitTransaction.class) {
+            return false;
+        }
+        FruitTransaction fruitTransaction = (FruitTransaction) obj;
+        return Objects.equals(this.fruit, fruitTransaction.fruit)
+                && Objects.equals(this.quantity, fruitTransaction.quantity)
+                && Objects.equals(this.operation, fruitTransaction.operation);
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -51,13 +68,13 @@ public class FruitTransaction {
             return operation;
         }
 
-        public static Operation getByCode(String character) {
+        public static Operation getByCode(String code) {
             for (Operation operation : values()) {
-                if (operation.getOperation().equals(character)) {
+                if (operation.getOperation().equals(code)) {
                     return operation;
                 }
             }
-            throw new RuntimeException("Unknown operation");
+            throw new NoSuchElementException("Unknown operation: " + code);
         }
     }
 }
