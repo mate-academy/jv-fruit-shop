@@ -1,21 +1,21 @@
 package core.basesyntax.service.handler.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
 import java.util.Map;
 
 public class ReturnOperationHandler implements OperationHandler {
-    private static final int MIN_AMOUNT = 0;
-    private final StorageDao storageDao = new StorageDaoImpl();
+    private final StorageDao storageDao;
+
+    public ReturnOperationHandler(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
 
     @Override
     public void updateStorage(FruitTransaction transaction) {
-        if (transaction.getAmount() < MIN_AMOUNT) {
-            throw new RuntimeException("Amount of fruits are less then zero!!!");
-        }
+        validAmount(transaction);
         if (!storageDao.isInStorage(transaction.getFruitName())) {
             storageDao.add(new Fruit(transaction.getFruitName()), transaction.getAmount());
         } else {

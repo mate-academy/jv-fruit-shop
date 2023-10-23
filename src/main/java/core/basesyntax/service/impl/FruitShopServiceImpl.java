@@ -1,26 +1,23 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataProcessing;
 import core.basesyntax.service.DataReader;
-import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.Writer;
-import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.List;
-import java.util.Map;
 
 public class FruitShopServiceImpl {
-    private DataReader dataReader;
-    private DataProcessing dataProcessing;
-    private ReportCreator reportCreator;
-    private Writer writer;
+    private final DataReader dataReader;
+    private final DataProcessing dataProcessing;
+    private final ReportCreator reportCreator;
+    private final Writer writer;
 
-    public FruitShopServiceImpl(Map<FruitTransaction.Operation, OperationHandler> map) {
-        dataReader = new DataReaderFromCsv();
-        dataProcessing = new DataProcessingImpl(new OperationStrategyImpl(map));
-        reportCreator = new ReportCreatorImpl();
-        writer = new CsvWriter();
+    public FruitShopServiceImpl(DataReader dataReader, DataProcessing dataProcessing,
+                                ReportCreator reportCreator, Writer writer) {
+        this.dataReader = dataReader;
+        this.dataProcessing = dataProcessing;
+        this.reportCreator = reportCreator;
+        this.writer = writer;
     }
 
     public void createDailyReport(String fromFile, String toFile) {
