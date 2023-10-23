@@ -27,21 +27,7 @@ public class Main {
         Map<Operation, ActivityHandler>
                 amountOfFruitsHandlersMap = new HashMap<>();
 
-        amountOfFruitsHandlersMap
-                .put(Operation.RETURN,
-                    new ReturnActivityHandler(new FruitTransactionDaoImpl()));
-
-        amountOfFruitsHandlersMap
-                .put(Operation.BALANCE,
-                    new BalanceActivityHandler(new FruitTransactionDaoImpl()));
-
-        amountOfFruitsHandlersMap
-                .put(Operation.PURCHASE,
-                    new PurchaseActivityHandler(new FruitTransactionDaoImpl()));
-
-        amountOfFruitsHandlersMap
-                .put(Operation.SUPPLY,
-                    new SupplyActivityHandler(new FruitTransactionDaoImpl()));
+        initializationMap(amountOfFruitsHandlersMap);
 
         TypeActivityStrategy typeActivityStrategy =
                 new TypeActivityStrategyImpl(amountOfFruitsHandlersMap);
@@ -50,5 +36,24 @@ public class Main {
                 new FruitServiceImpl(new ReaderServiceImpl(new ParserServiceImpl()),
                         new WriterServiceImpl(), typeActivityStrategy);
         fruitService.writeReport(FILE);
+    }
+
+    private static void initializationMap(Map<Operation, ActivityHandler>
+                                           amountOfFruitsHandlersMap) {
+        amountOfFruitsHandlersMap
+                .put(Operation.RETURN,
+                        new ReturnActivityHandler(new FruitTransactionDaoImpl()));
+
+        amountOfFruitsHandlersMap
+                .put(Operation.BALANCE,
+                        new BalanceActivityHandler(new FruitTransactionDaoImpl()));
+
+        amountOfFruitsHandlersMap
+                .put(Operation.PURCHASE,
+                        new PurchaseActivityHandler(new FruitTransactionDaoImpl()));
+
+        amountOfFruitsHandlersMap
+                .put(Operation.SUPPLY,
+                        new SupplyActivityHandler(new FruitTransactionDaoImpl()));
     }
 }
