@@ -10,9 +10,12 @@ public enum Operation {
     Operation(String code) {
         this.code = code;
     }
-
-    public String getCode() {
-        return code;
+    public static Operation getOperationFromString(String string) {
+            return switch (string) {
+                case "r" -> Operation.RETURN;
+                case "s" -> Operation.SUPPLY;
+                case "b" -> Operation.BALANCE;
+                default -> Operation.PURCHASE;
+            };
     }
-
 }

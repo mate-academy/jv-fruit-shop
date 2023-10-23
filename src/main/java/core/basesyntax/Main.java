@@ -9,6 +9,7 @@ import core.basesyntax.service.amount.PurchaseActivityHandler;
 import core.basesyntax.service.amount.ReturnActivityHandler;
 import core.basesyntax.service.amount.SupplyActivityHandler;
 import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.TypeActivityStrategy;
@@ -46,7 +47,7 @@ public class Main {
                 new TypeActivityStrategyImpl(amountOfFruitsHandlersMap);
 
         FruitService fruitService =
-                new FruitServiceImpl(new ReaderServiceImpl(),
+                new FruitServiceImpl(new ReaderServiceImpl(new ParserServiceImpl()),
                         new WriterServiceImpl(), typeActivityStrategy);
         fruitService.writeReport(FILE);
     }

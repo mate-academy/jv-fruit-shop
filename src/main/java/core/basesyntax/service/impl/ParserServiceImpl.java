@@ -19,26 +19,8 @@ public class ParserServiceImpl implements ParserService {
 
     private FruitTransaction getFruitFromString(String string) {
         String [] parts = string.split(COMA);
-        FruitTransaction fruitTransaction =
-                FruitTransaction.of(getOperationFromString(parts[0]),
+        return FruitTransaction.of(Operation.getOperationFromString(parts[0]),
                         parts[1], Integer.parseInt(parts[2]));
-        return fruitTransaction;
     }
 
-    private Operation getOperationFromString(String string) {
-        switch (string) {
-            case "r": {
-                return Operation.RETURN;
-            }
-            case "s": {
-                return Operation.SUPPLY;
-            }
-            case "b": {
-                return Operation.BALANCE;
-            }
-            default: {
-                return Operation.PURCHASE;
-            }
-        }
-    }
 }

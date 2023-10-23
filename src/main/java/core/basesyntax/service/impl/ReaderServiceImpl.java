@@ -9,7 +9,11 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
-    private ParserService parserService = new ParserServiceImpl();
+    private final ParserService parserService;
+
+    public ReaderServiceImpl(ParserService parserService) {
+        this.parserService = parserService;
+    }
 
     @Override
     public List<FruitTransaction> readFromFile(String fromFile) {
