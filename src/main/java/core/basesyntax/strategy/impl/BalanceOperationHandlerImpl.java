@@ -1,7 +1,8 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 
 public class BalanceOperationHandlerImpl implements OperationHandler {
 
@@ -10,4 +11,3 @@ public class BalanceOperationHandlerImpl implements OperationHandler {
         FruitStorage.fruitQuantities.put(transaction.getFruit(), transaction.getQuantity());
     }
 }
-

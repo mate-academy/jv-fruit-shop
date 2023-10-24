@@ -1,9 +1,10 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 
-public class ReturnOperationHandlerImpl implements OperationHandler {
+public class SupplyOperationHandlerImpl implements OperationHandler {
 
     @Override
     public void process(FruitTransaction transaction) {
@@ -12,4 +13,3 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
                 .put(transaction.getFruit(), oldQuantity + transaction.getQuantity());
     }
 }
-

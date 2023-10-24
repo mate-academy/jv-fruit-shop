@@ -11,13 +11,13 @@ import core.basesyntax.service.impl.ParseOperationServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.BalanceOperationHandlerImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.strategy.PurchaseOperationHandlerImpl;
-import core.basesyntax.strategy.ReturnOperationHandlerImpl;
-import core.basesyntax.strategy.SupplyOperationHandlerImpl;
+import core.basesyntax.strategy.impl.BalanceOperationHandlerImpl;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationHandlerImpl;
+import core.basesyntax.strategy.impl.ReturnOperationHandlerImpl;
+import core.basesyntax.strategy.impl.SupplyOperationHandlerImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,4 +56,3 @@ public class Main {
         writerService.writeToFile(OUTPUT_FILE_PATH, report);
     }
 }
-

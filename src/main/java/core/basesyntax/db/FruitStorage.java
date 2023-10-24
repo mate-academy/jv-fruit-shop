@@ -6,5 +6,3 @@ import java.util.Map;
 public class FruitStorage {
     public static final Map<String, Integer> fruitQuantities = new HashMap<>();
 }
-
-
