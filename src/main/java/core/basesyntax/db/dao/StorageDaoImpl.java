@@ -3,14 +3,16 @@ package core.basesyntax.db.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
+import java.util.Map;
+
 public class StorageDaoImpl implements StorageDao {
     @Override
-    public void add(FruitTransaction fruitType) {
-        Storage.fruitTransactions.add(fruitType);
+    public void add(String fruitName, Long count) {
+        Storage.fruitsCount.put(fruitName, count);
     }
 
     @Override
-    public void remove(FruitTransaction fruitType) {
-        Storage.fruitTransactions.remove(fruitType);
+    public Map<String, Long> getInfo() {
+        return Storage.fruitsCount;
     }
 }
