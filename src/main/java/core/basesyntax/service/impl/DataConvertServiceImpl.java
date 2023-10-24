@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConvertService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class DataConvertServiceImpl implements DataConvertService {
         return fruitsTransactionsInfo;
     }
 
-    private int getQuantity(String fruitInfo){
+    private int getQuantity(String fruitInfo) {
         return Integer.parseInt(fruitInfo.split(SPLIT_CHARACTER)[QUANTITY_INDEX]);
     }
 

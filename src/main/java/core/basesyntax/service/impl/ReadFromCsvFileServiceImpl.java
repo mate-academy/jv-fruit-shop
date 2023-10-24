@@ -1,10 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.dao.StorageDao;
-import core.basesyntax.db.dao.StorageDaoImpl;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.ReadFromCsvFileService;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

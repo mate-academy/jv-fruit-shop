@@ -3,14 +3,14 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationHandler;
-
 import java.util.List;
 import java.util.function.Predicate;
 
 public class SupplyOperationHandlerImpl implements OperationHandler {
     @Override
     public long count(List<FruitTransaction> fruits, String fruitName) {
-        Predicate<FruitTransaction> filterByNameAndOperation = f -> f.getFruitName().equals(fruitName)
+        Predicate<FruitTransaction> filterByNameAndOperation = f ->
+                f.getFruitName().equals(fruitName)
                 && f.getOperation() == Operation.SUPPLY;
 
         return fruits.stream()

@@ -41,10 +41,10 @@ public class FruitTransaction {
 
     @Override
     public String toString() {
-        return "FruitTransaction{" +
-                "operation=" + operation +
-                ", fruitName='" + fruitName + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "FruitTransaction{"
+                + "operation=" + operation
+                + ", fruitName='" + fruitName + '\''
+                + ", quantity=" + quantity
+                + '}';
     }
 }

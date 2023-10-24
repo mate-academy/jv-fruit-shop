@@ -1,8 +1,5 @@
 package core.basesyntax.model;
 
-import javax.lang.model.element.Element;
-import java.util.Map;
-
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),

@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.dao.StorageDao;
 import core.basesyntax.db.dao.StorageDaoImpl;
 import core.basesyntax.service.CreateReportService;
-
 import java.util.Map;
 
 public class CreateReportServiceImpl implements CreateReportService {
@@ -12,6 +11,7 @@ public class CreateReportServiceImpl implements CreateReportService {
     private static final char SPLIT_CHARACTER = ',';
     private final StorageDao storageDao = new StorageDaoImpl();
     private final StringBuilder reportCreator = new StringBuilder();
+
     @Override
     public String createReport() {
         Map<String, Long> data = storageDao.getInfo();
