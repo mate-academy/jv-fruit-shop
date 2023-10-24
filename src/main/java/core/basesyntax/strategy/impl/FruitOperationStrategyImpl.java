@@ -30,6 +30,10 @@ public class FruitOperationStrategyImpl implements FruitOperationStrategy {
                 fruitCount += entry.getValue().count(fruitTransactions, fruitName);
             }
 
+            if (fruitCount < 0) {
+                throw new RuntimeException("Cannot be less then 0: " + fruitCount);
+            }
+
             storageDao.add(fruitName, fruitCount);
         }
     }
