@@ -23,7 +23,7 @@ public class Main {
         CreateReportService reportCreator = new CreateReportServiceImpl();
         WriteToCsvFileService writer = new WriteToCsvFileServiceImpl();
 
-        processor.processFruits(convertor.convert(reader.readFile(SECOND_TEST_CSV)));
+        processor.processFruits(convertor.convert(reader.readFile(THIRD_TEST_CSV)));
         writer.write(reportCreator.createReport());
     }
 }
