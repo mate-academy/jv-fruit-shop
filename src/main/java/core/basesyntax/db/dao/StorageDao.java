@@ -3,7 +3,7 @@ package core.basesyntax.db.dao;
 import java.util.Map;
 
 public interface StorageDao {
-    void add(String fruitName, Long count);
+    void add(String fruitName, Integer count);
 
-    Map<String, Long> getInfo();
+    Map<String, Integer> getInfo();
 }

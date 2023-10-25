@@ -14,12 +14,12 @@ public class CreateReportServiceImpl implements CreateReportService {
 
     @Override
     public String createReport() {
-        Map<String, Long> data = storageDao.getInfo();
+        Map<String, Integer> data = storageDao.getInfo();
         reportCreator.append(FRUIT_COLUMN)
                 .append(SPLIT_CHARACTER)
                 .append(QUANTITY_COLUMN);
 
-        for (Map.Entry<String, Long> entry : data.entrySet()) {
+        for (Map.Entry<String, Integer> entry : data.entrySet()) {
             reportCreator.append(System.lineSeparator())
                     .append(entry.getKey())
                     .append(SPLIT_CHARACTER)

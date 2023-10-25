@@ -25,9 +25,12 @@ public class FruitOperationStrategyImpl implements FruitOperationStrategy {
                 .toList();
 
         for (String fruitName : fruitNames) {
-            long fruitCount = 0;
-            for (Map.Entry<Operation, OperationHandler> entry : handlerOperationMap.entrySet()) {
-                fruitCount += entry.getValue().count(fruitTransactions, fruitName);
+            int fruitCount = 0;
+            for (FruitTransaction fruitTransaction : fruitTransactions) {
+                if (fruitTransaction.getFruitName().equals(fruitName)) {
+                    fruitCount += handlerOperationMap.get(fruitTransaction.getOperation())
+                            .count(fruitTransaction);
+                }
             }
 
             if (fruitCount < 0) {

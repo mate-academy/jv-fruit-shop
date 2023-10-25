@@ -8,14 +8,7 @@ import java.util.function.Predicate;
 
 public class SupplyOperationHandlerImpl implements OperationHandler {
     @Override
-    public long count(List<FruitTransaction> fruits, String fruitName) {
-        Predicate<FruitTransaction> filterByNameAndOperation = f ->
-                f.getFruitName().equals(fruitName)
-                && f.getOperation() == Operation.SUPPLY;
-
-        return fruits.stream()
-                .filter(filterByNameAndOperation)
-                .mapToInt(FruitTransaction::getQuantity)
-                .sum();
+    public int count(FruitTransaction fruitTransaction) {
+        return fruitTransaction.getQuantity();
     }
 }
