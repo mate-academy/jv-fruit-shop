@@ -4,22 +4,26 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileParser;
-import core.basesyntax.service.FileService;
 import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.FruitTransactionService;
+import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvFileParserImpl;
-import core.basesyntax.service.impl.FileServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.TransactionStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
-import core.basesyntax.strategy.impl.TransactionStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,31 +48,30 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandler());
 
-        TransactionStrategy strategy =
-                new TransactionStrategyImpl(operationHandlerMap);
+        OperationStrategy strategy =
+                new OperationStrategyImpl(operationHandlerMap);
+
+        ReaderService readerService = new ReaderServiceImpl();
+
+        List<String> lines = readerService.readFile(INPUT_FILE);
 
         FileParser fileParser = new CsvFileParserImpl();
-        FileService fileService = new FileServiceImpl(fileParser);
+        FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl(fileParser);
 
         FruitTransactionService fruitTransactionService =
                 new FruitTransactionServiceImpl(fruitDao, strategy);
 
-        for (FruitTransaction fruitTransaction
-                : fileService.readFile(INPUT_FILE)) {
+        for (FruitTransaction fruitTransaction : fruitTransactionParser.parse(lines)) {
             fruitTransactionService.transaction(fruitTransaction);
         }
 
         ReportService reportService = new ReportServiceImpl(fruitDao);
 
-        List<String> report = reportService.createReport();
+        String report = reportService.createReport();
 
-        StringBuilder reportData = new StringBuilder();
+        WriterService writerService = new WriterServiceImpl();
 
-        for (String line : report) {
-            reportData.append(line).append("\n");
-        }
-
-        fileService.writeToFile(OUTPUT_FILE, reportData.toString());
+        writerService.writeToFile(OUTPUT_FILE, report);
     }
 
 }

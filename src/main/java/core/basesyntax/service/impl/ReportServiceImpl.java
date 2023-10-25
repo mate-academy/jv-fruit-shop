@@ -3,8 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
@@ -21,7 +19,10 @@ public class ReportServiceImpl implements ReportService {
         report.append(HEADER);
 
         for (Fruit fruit : fruitDao.getAll()) {
-            report.append(fruit.getName()).append(SEPARATOR).append(fruit.getQuantity()).append("\n");
+            report.append("\n")
+                    .append(fruit.getName())
+                    .append(SEPARATOR)
+                    .append(fruit.getQuantity());
         }
 
         return report.toString();

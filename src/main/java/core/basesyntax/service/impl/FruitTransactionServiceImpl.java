@@ -22,6 +22,10 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
         int newQuantity = strategy.get(fruitTransaction.getOperation())
                 .operation(fruit.getQuantity(), fruitTransaction.getQuantity());
 
+        if (newQuantity < 0) {
+            throw new RuntimeException("Not enough " + fruit.getName() + " for purchase!");
+        }
+
         fruit.setQuantity(newQuantity);
         fruitDao.update(fruit);
     }
