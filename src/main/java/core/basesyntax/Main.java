@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.impl.FileParserServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
@@ -13,7 +12,6 @@ import core.basesyntax.strategy.impl.BalanceOperationHandler;
 import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,14 +29,19 @@ public class Main {
                 .parse(dataFromFile);
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler());
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             OperationHandler handler = strategy.getHandler(fruitTransaction.getOperation());
             handler.getTransaction(fruitTransaction);
-            new FileWriterServiceImpl().write(REPORT_FILE, new ReportGeneratorServiceImpl().generate());
+            new FileWriterServiceImpl().write(REPORT_FILE,
+                    new ReportGeneratorServiceImpl().generate());
         }
     }
 }
