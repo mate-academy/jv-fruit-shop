@@ -69,7 +69,7 @@ The line above means you have 152 bananas, and 90 apples in your Fruit store aft
 (this is only a recommendation, you can use other classes/approaches to solve this task at your discretion):**
 ```java
 public class FruitTransaction {
-  private Operation operation;
+  private Operation code;
   private String fruit;
   private int quantity;
 
