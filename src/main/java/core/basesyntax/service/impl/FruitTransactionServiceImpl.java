@@ -4,13 +4,13 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
-import core.basesyntax.strategy.TransactionStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
     private FruitDao fruitDao;
-    private TransactionStrategy strategy;
+    private OperationStrategy strategy;
 
-    public FruitTransactionServiceImpl(FruitDao fruitDao, TransactionStrategy strategy) {
+    public FruitTransactionServiceImpl(FruitDao fruitDao, OperationStrategy strategy) {
         this.fruitDao = fruitDao;
         this.strategy = strategy;
     }

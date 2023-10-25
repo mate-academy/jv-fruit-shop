@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
+    private static final String SEPARATOR = ",";
     private FruitDao fruitDao;
 
     public ReportServiceImpl(FruitDao fruitDao) {
@@ -15,14 +16,14 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public List<String> createReport() {
-        List<String> report = new ArrayList<>();
-        report.add(HEADER);
+    public String createReport() {
+        StringBuilder report = new StringBuilder();
+        report.append(HEADER);
 
         for (Fruit fruit : fruitDao.getAll()) {
-            report.add(fruit.getName() + "," + fruit.getQuantity());
+            report.append(fruit.getName()).append(SEPARATOR).append(fruit.getQuantity()).append("\n");
         }
 
-        return report;
+        return report.toString();
     }
 }
