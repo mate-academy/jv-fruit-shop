@@ -12,6 +12,6 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
             throw new RuntimeException("Quantity cannot be less then zero: " + quantity);
         }
 
-        return quantity;
+        return -quantity;
     }
 }
