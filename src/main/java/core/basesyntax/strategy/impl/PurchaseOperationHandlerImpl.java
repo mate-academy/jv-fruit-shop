@@ -6,6 +6,12 @@ import core.basesyntax.strategy.OperationHandler;
 public class PurchaseOperationHandlerImpl implements OperationHandler {
     @Override
     public int count(FruitTransaction fruitTransaction) {
-        return -fruitTransaction.getQuantity();
+        int quantity = fruitTransaction.getQuantity();
+
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity cannot be less then zero: " + quantity);
+        }
+
+        return quantity;
     }
 }
