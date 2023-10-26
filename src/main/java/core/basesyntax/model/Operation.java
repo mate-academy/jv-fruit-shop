@@ -16,12 +16,12 @@ public enum Operation {
     }
 
     public static Operation findByCode(String code) {
-        for (Operation op : values()) {
-            if (op.code.equals(code)) {
-                return op;
-            }
-        }
-
-        throw new RuntimeException("Code is not exist " + code);
+        return switch (code) {
+            case "b" -> BALANCE;
+            case "s" -> SUPPLY;
+            case "p" -> PURCHASE;
+            case "r" -> RETURN;
+            default -> throw new RuntimeException("Code is not exist " + code);
+        };
     }
 }

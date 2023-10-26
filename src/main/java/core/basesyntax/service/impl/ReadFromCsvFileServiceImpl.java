@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFromCsvFileServiceImpl implements ReadFromCsvFileService {
-
     @Override
     public List<String> readFile(String fromFileName) {
         List<String> fruits = new ArrayList<>();
