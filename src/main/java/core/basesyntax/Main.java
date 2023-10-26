@@ -7,7 +7,7 @@ import model.FruitTransaction;
 import service.OperationStrategy;
 import service.ReportMaking;
 import service.Reporter;
-import serviceimpl.FruitTransactionParserImpl;
+import serviceimpl.FruitPackerImpl;
 import serviceimpl.OperationStrategyImpl;
 import serviceimpl.ReaderImpl;
 import serviceimpl.ReportMakingImpl;
@@ -27,7 +27,7 @@ public class Main {
     public static void main(String[] args) {
         operationsMap.putAll(allOperationsMap());
         List<String> transactionsStringList = new ReaderImpl().readDataFromFile(SOURCE_FILE_NAME);
-        List<FruitTransaction> transactionsList = new FruitTransactionParserImpl()
+        List<FruitTransaction> transactionsList = new FruitPackerImpl()
                 .makeList(transactionsStringList);
         OperationStrategy operationStrategyService = new OperationStrategyImpl(operationsMap);
         ReportMaking fruitTransactionService = new ReportMakingImpl(operationStrategyService);

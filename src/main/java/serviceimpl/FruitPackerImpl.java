@@ -5,14 +5,14 @@ import java.util.stream.Collectors;
 import model.FruitTransaction;
 import service.FruitPacker;
 
-public class FruitTransactionParserImpl implements FruitPacker {
+public class FruitPackerImpl implements FruitPacker {
     public static final String COMMA = ",";
     private static final String NOT_NULL_MESSAGE = "List can not be null";
     private static final int INDEX_FOR_OPERATION = 0;
     private static final int INDEX_FOR_FRUITS = 1;
     private static final int INDEX_FOR_NUMBER = 2;
 
-    public FruitTransactionParserImpl() {
+    public FruitPackerImpl() {
     }
 
     public List<FruitTransaction> makeList(List<String> transactionListString) {

@@ -16,7 +16,7 @@ public class ReporterImpl implements Reporter {
                 storage.entrySet()
                         .stream()
                         .map(s -> s.getKey().toLowerCase()
-                                + FruitTransactionParserImpl.COMMA
+                                + FruitPackerImpl.COMMA
                                 + s.getValue())
                         .collect(Collectors.toList());
         dailyBalanceList.add(0, FIRST_STRING);
