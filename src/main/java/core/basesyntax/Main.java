@@ -4,14 +4,12 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileParser;
-import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitTransactionParser;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.CsvFileParserImpl;
-import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionParserImpl;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
@@ -34,19 +32,16 @@ public class Main {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        FruitService fruitService = new FruitServiceImpl(fruitDao);
-        fruitService.createFruit("banana");
-        fruitService.createFruit("apple");
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler());
+                new BalanceOperationHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler());
+                new SupplyOperationHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler());
+                new PurchaseOperationHandler(fruitDao));
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler());
+                new ReturnOperationHandler(fruitDao));
 
         OperationStrategy strategy =
                 new OperationStrategyImpl(operationHandlerMap);
@@ -59,7 +54,7 @@ public class Main {
         FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl(fileParser);
 
         FruitTransactionService fruitTransactionService =
-                new FruitTransactionServiceImpl(fruitDao, strategy);
+                new FruitTransactionServiceImpl(strategy);
 
         for (FruitTransaction fruitTransaction : fruitTransactionParser.parse(lines)) {
             fruitTransactionService.transaction(fruitTransaction);

@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportService;
+import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
@@ -18,11 +18,11 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder report = new StringBuilder();
         report.append(HEADER);
 
-        for (Fruit fruit : fruitDao.getAll()) {
+        for (Map.Entry<String, Integer> fruit : fruitDao.getAll()) {
             report.append("\n")
-                    .append(fruit.getName())
+                    .append(fruit.getKey())
                     .append(SEPARATOR)
-                    .append(fruit.getQuantity());
+                    .append(fruit.getValue());
         }
 
         return report.toString();
