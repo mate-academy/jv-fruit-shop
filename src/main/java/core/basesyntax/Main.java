@@ -20,8 +20,8 @@ import strategy.ReturnOperation;
 import strategy.SupplyOperation;
 
 public class Main {
-    public static final String SOURCE_FILE_NAME = "src/main/java/resources/sourceFile.txt";
-    public static final String RESULT_FILE_NAME = "src/main/java/resources/resultFile.txt";
+    public static final String SOURCE_FILE_NAME = "src/main/java/resources/sourceFile.csv";
+    public static final String RESULT_FILE_NAME = "src/main/java/resources/resultFile.csv";
     private static final Map<FruitTransaction.Operation, Operating> operationsMap = new HashMap<>();
 
     public static void main(String[] args) {
