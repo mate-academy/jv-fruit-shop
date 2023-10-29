@@ -1,0 +1,13 @@
+type,fruit,quantity
+b,dragonFruit,20
+b,apple,100
+b,papaya,50
+s,dragonFruit,100
+p,dragonFruit,13
+r,apple,10
+p,papaya,43
+p,apple,20
+p,dragonFruit,5
+s,dragonFruit,50
+s,papaya,3
+p,dragonFruit,23
