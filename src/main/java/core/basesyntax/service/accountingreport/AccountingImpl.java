@@ -4,15 +4,15 @@ import java.util.Map;
 
 public class AccountingImpl implements Accounting {
     @Override
-    public String accountingReport(Map<String, Integer> fruitTypesAndQuantity) {
+    public String accountingReport(Map<String, Integer> fruitKindsAndQuantity) {
         StringBuilder builder = new StringBuilder();
         builder.append(FIRST_LINE).append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : fruitTypesAndQuantity.entrySet()) {
+        for (Map.Entry<String, Integer> entry : fruitKindsAndQuantity.entrySet()) {
             if (entry.getValue() < 0) {
-                throw new RuntimeException("Quantity of " + entry.getKey()
+                throw new RuntimeException("Quantity : " + entry.getKey()
                         + " can't be less than 0");
             }
-            builder.append(entry.getKey()).append(",").append(entry.getValue())
+            builder.append(entry.getKey()).append(COMMA).append(entry.getValue())
                     .append(System.lineSeparator());
         }
         return builder.toString();

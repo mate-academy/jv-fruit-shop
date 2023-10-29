@@ -36,14 +36,14 @@ public class Main {
         FileReadService readService = new FileReadServiceImpl();
         List<String> dataFromReport = readService.readDataFromReport(INPUT_FILE);
 
-        OperationParser transactionParser = new OperationParserImpl();
+        OperationParser operationParserParser = new OperationParserImpl();
         List<FruitOperation> fruitTransaction =
-                transactionParser.getFruitTransaction(dataFromReport);
+                operationParserParser.getFruitTransaction(dataFromReport);
 
-        TransactionProcessor transactionProcessor = new TransactionProcessorImpl(
+        TransactionProcessor operationProcessor = new TransactionProcessorImpl(
                 new OperationStrategyImpl(operationStrategyMap)
         );
-        transactionProcessor.process(fruitTransaction);
+        operationProcessor.process(fruitTransaction);
 
         Accounting accounting = new AccountingImpl();
         String account = accounting.accountingReport(Storage.getFruitKindsAndQuantity());

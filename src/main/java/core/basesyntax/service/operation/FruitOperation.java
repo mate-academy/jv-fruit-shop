@@ -50,7 +50,7 @@ public class FruitOperation {
 
         public static Operation getOperationByCode(String code) {
             return Arrays.stream(values())
-                    .filter(o -> o.code.equals(code))
+                    .filter(operation -> operation.code.equals(code))
                     .findAny()
                     .orElseThrow(
                             () -> new RuntimeException("Invalid Operation code " + code));
