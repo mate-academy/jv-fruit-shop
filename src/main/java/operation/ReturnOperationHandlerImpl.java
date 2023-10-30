@@ -1,8 +1,8 @@
 package operation;
 
-import model.FruitTransaction;
-
 import static storages.FruitStorage.fruitQuantity;
+
+import model.FruitTransaction;
 
 public class ReturnOperationHandlerImpl implements OperationHandler {
     @Override

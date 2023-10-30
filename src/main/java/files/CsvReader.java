@@ -1,13 +1,12 @@
 package files;
 
-import model.FruitTransaction;
-import model.Operation;
+import static storages.TransactionStorage.transactionList;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.List;
-
-import static storages.TransactionStorage.transactionList;
+import model.FruitTransaction;
+import model.Operation;
 
 public class CsvReader implements Reader {
     private static final String CSV_DATA_SEPARATOR = ",";

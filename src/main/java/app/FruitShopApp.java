@@ -1,21 +1,21 @@
 package app;
 
+import static storages.FruitStorage.fruitQuantity;
+import static storages.TransactionStorage.transactionList;
+
 import files.CsvReader;
 import files.CsvWriter;
+import java.util.HashMap;
+import java.util.Map;
 import model.DailyReport;
 import model.FruitTransaction;
 import model.Operation;
 import operation.BalanceOperationHandlerImpl;
-import operation.SupplyOperationHandlerImpl;
+import operation.OperationHandler;
+import operation.OperationStrategyImpl;
 import operation.PurchaseOperationHandlerImpl;
 import operation.ReturnOperationHandlerImpl;
-import operation.OperationStrategyImpl;
-import operation.OperationHandler;
-import java.util.HashMap;
-import java.util.Map;
-
-import static storages.FruitStorage.fruitQuantity;
-import static storages.TransactionStorage.transactionList;
+import operation.SupplyOperationHandlerImpl;
 
 public class FruitShopApp {
     private static final String TEST_DATA_FILE_NAME = "data.csv";
