@@ -10,7 +10,8 @@ public class CreateReportServiceImpl implements CreateReportService {
     private static final String QUANTITY_COLUMN = "quantity";
     private static final char SPLIT_CHARACTER = ',';
     private final StorageDao storageDao = new StorageDaoImpl();
-    private final StringBuilder fruitShopReportCreator = new StringBuilder(); // just building report
+    private final StringBuilder fruitShopReportCreator
+            = new StringBuilder(); // just building report
 
     @Override
     public String createReport() {

@@ -7,7 +7,8 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
     @Override
     public int count(FruitTransaction fruitTransaction) {
         int quantity = fruitTransaction.getQuantity();
-        checkQuantityLessThenZero(quantity); // IDK, how to check a balance, if I'm just summarizing quantities
+        checkQuantityLessThenZero(quantity);
+        // IDK, how to check a balance, if I'm just summarizing quantities
 
         return purchase(quantity);
     }
