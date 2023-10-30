@@ -1,16 +1,9 @@
 package operation;
 
 import model.FruitTransaction;
-
-import java.util.Map;
+import static storages.FruitStorage.fruitQuantity;
 
 public class ReturnOperationHandlerImpl implements OperationHandler {
-    private final Map<String, Integer> fruitQuantity;
-
-    public ReturnOperationHandlerImpl(Map<String, Integer> fruitQuantity) {
-        this.fruitQuantity = fruitQuantity;
-    }
-
     @Override
     public void perform(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
