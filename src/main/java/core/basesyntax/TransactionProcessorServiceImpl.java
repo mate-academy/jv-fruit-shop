@@ -20,7 +20,8 @@ public class TransactionProcessorServiceImpl implements ProcessorService {
                     processReturnTransaction(transaction, storage);
                     break;
                 default:
-                    throw new IllegalArgumentException("Invalid transaction type: " + transaction.getOperation());
+                    throw new IllegalArgumentException("Invalid transaction type: "
+                            + transaction.getOperation());
             }
         }
     }
@@ -33,12 +34,18 @@ public class TransactionProcessorServiceImpl implements ProcessorService {
         storage.updateQuantity(transaction.getFruit(), transaction.getQuantity());
     }
 
-    private void processPurchaseTransaction(FruitTransaction transaction, FruitStorage storage) {
-        int availableQuantity = storage.getFruitQuantities().getOrDefault(transaction.getFruit(), 0);
+    private void processPurchaseTransaction(
+            FruitTransaction transaction,
+            FruitStorage storage
+    ) {
+        int availableQuantity = storage.getFruitQuantities()
+                .getOrDefault(transaction.getFruit(), 0);
+
         if (availableQuantity >= transaction.getQuantity()) {
             storage.updateQuantity(transaction.getFruit(), -transaction.getQuantity());
         } else {
-            throw new RuntimeException("Not enough quantity of " + transaction.getFruit() + " for purchase");
+            throw new RuntimeException("Not enough quantity of "
+                    + transaction.getFruit() + " for purchase");
         }
     }
 
