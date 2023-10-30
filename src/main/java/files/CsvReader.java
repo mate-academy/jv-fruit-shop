@@ -21,15 +21,15 @@ public class CsvReader implements Reader {
         this.transactionList = transactionList;
     }
     @Override
-    public void readFromFile(Path path) {
-        try(BufferedReader reader = new BufferedReader(new FileReader(path.toFile()))) {
+    public void readFromFile(String path) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String dataLine = reader.readLine();
             while (dataLine != null) {
                 transactionList.add(parseDataToFruitTransaction(dataLine));
                 dataLine = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException(CANT_READ_DATA_FROM_FILE_MESSAGE + path.getFileName() );
+            throw new RuntimeException(CANT_READ_DATA_FROM_FILE_MESSAGE + path);
         }
     }
 
