@@ -1,5 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.WriterService;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class CsvWriterServiceImpl implements WriterService {
 
             System.out.println("Fruit quantities have been successfully written to: " + filePath);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error in CsvWriterServiceImpl : ", e);
         }
     }
 }

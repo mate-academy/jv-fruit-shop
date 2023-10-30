@@ -1,5 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -34,7 +36,7 @@ public class CsvReaderServiceImpl implements ReaderService {
                 transactions.add(new FruitTransaction(operation, fruit, quantity));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error in CsvReaderServiceImpl : ", e);
         }
 
         return transactions;
