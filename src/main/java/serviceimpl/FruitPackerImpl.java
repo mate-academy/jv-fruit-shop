@@ -12,9 +12,6 @@ public class FruitPackerImpl implements FruitPacker {
     private static final int INDEX_FOR_FRUITS = 1;
     private static final int INDEX_FOR_NUMBER = 2;
 
-    public FruitPackerImpl() {
-    }
-
     public List<FruitTransaction> makeList(List<String> transactionListString) {
         if (transactionListString == null) {
             throw new RuntimeException(NOT_NULL_MESSAGE);

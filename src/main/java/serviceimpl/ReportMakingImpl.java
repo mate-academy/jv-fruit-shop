@@ -13,7 +13,7 @@ public class ReportMakingImpl implements ReportMaking {
     }
 
     @Override
-    public void makeReport(List<FruitTransaction> fruitTransactionList) {
+    public void processFruitTransactions(List<FruitTransaction> fruitTransactionList) {
         for (FruitTransaction transaction : fruitTransactionList) {
             operationStrategy.findRightStrategy(transaction.getOperation())
                     .doOperation(transaction);

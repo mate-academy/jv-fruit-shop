@@ -8,12 +8,13 @@ import service.Reporter;
 
 public class ReporterImpl implements Reporter {
     private static final String FIRST_STRING = "fruit,quantity";
+    private static final Storage storage = new Storage();
 
     @Override
     public List<String> report() {
-        Map<String, Integer> storage = Storage.getStorage();
+        Map<String, Integer> newStorage = storage.getStorage();
         List<String> dailyBalanceList =
-                storage.entrySet()
+                newStorage.entrySet()
                         .stream()
                         .map(s -> s.getKey().toLowerCase()
                                 + FruitPackerImpl.COMMA

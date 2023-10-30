@@ -20,8 +20,8 @@ import strategy.ReturnOperation;
 import strategy.SupplyOperation;
 
 public class Main {
-    public static final String SOURCE_FILE_NAME = "src/main/java/resources/sourceFile.csv";
-    public static final String RESULT_FILE_NAME = "src/main/java/resources/resultFile.csv";
+    public static final String SOURCE_FILE_NAME = "src/main/resources/sourceFile.csv";
+    public static final String RESULT_FILE_NAME = "src/main/resources/resultFile.csv";
     private static final Map<FruitTransaction.Operation, Operating> operationsMap = new HashMap<>();
 
     public static void main(String[] args) {
@@ -29,15 +29,15 @@ public class Main {
         List<String> transactionsStringList = new ReaderImpl().readDataFromFile(SOURCE_FILE_NAME);
         List<FruitTransaction> transactionsList = new FruitPackerImpl()
                 .makeList(transactionsStringList);
-        OperationStrategy operationStrategyService = new OperationStrategyImpl(operationsMap);
-        ReportMaking fruitTransactionService = new ReportMakingImpl(operationStrategyService);
-        fruitTransactionService.makeReport(transactionsList);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationsMap);
+        ReportMaking fruitTransactionService = new ReportMakingImpl(operationStrategy);
+        fruitTransactionService.processFruitTransactions(transactionsList);
         Reporter reportService = new ReporterImpl();
         List<String> dailyTransactionsReport = reportService.report();
         new WriterImpl().writeToFile(dailyTransactionsReport, RESULT_FILE_NAME);
     }
 
-    public static Map<FruitTransaction.Operation, Operating> allOperationsMap() {
+    private static Map<FruitTransaction.Operation, Operating> allOperationsMap() {
         Map<FruitTransaction.Operation, Operating> operationsMap = new HashMap<>();
         operationsMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         operationsMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());

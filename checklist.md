@@ -40,8 +40,8 @@ Let's rethrow a RuntimeException with an **informative** message and exception o
         }
     ```
   
-#### try-with-resources
-Remember, if you are using classes that implement an AutoCloseable interface, we should use it with try-with-resources.
+#### try-with-resourc
+Remember, if you are using classes that implement an AutoCloseable interface, we should use it with try-with-resourc.
 
 #### Follow the encapsulation principle
 Hide inner class elements with the help of access modifiers. It's a bad practice to make your class exposed.
@@ -50,7 +50,7 @@ Hide inner class elements with the help of access modifiers. It's a bad practice
 In order to represent fruit storage you may use already existing data structures, think of the one that will be 
 the most suitable for your needs.
 
-#### Place the input and output files into the `src/main/resources` folder.
+#### Place the input and output files into the `src/main/resourc` folder.
 
 #### Avoid hardcode in your solution
 * Use hardcoded values only in the Main class and/or test classes.  
@@ -59,7 +59,7 @@ the most suitable for your needs.
     ```java
     public class ReaderServiceImpl implements ReaderService {
        public List<String> readFromFile() {
-          File file = new File("src/main/resources/file.txt");
+          File file = new File("src/main/resourc/file.txt");
           ...
        }
     }
@@ -79,12 +79,12 @@ Please provide the relative path to a resource instead.
  
 - Bad:  
     ```java
-    readerService.readFromFile("C:/Users/.../my-project/src/main/resources/file.txt");
+    readerService.readFromFile("C:/Users/.../my-project/src/main/resourc/file.txt");
     ```  
     
 - Good:  
     ```java
-    readerService.readFromFile("src/main/resources/file.txt");
+    readerService.readFromFile("src/main/resourc/file.txt");
     ```
       
 #### Avoid using switch-cases and if-else constructions. It is recommended to use the strategy pattern instead. 
