@@ -3,8 +3,8 @@ package model;
 import java.util.Map;
 
 public class DailyReport {
+    private static final String DATA_SEPARATOR = ",";
     private static final String REPORT_HEADER = "fruit,quantity";
-    public static final String DATA_SEPARATOR = ",";
     private final Map<String, Integer> fruitQuantity;
 
     public DailyReport(Map<String, Integer> fruitQuantity) {

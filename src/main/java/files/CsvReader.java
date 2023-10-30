@@ -2,27 +2,23 @@ package files;
 
 import model.FruitTransaction;
 import model.Operation;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
+
+import static storages.TransactionStorage.transactionList;
 
 public class CsvReader implements Reader {
     private static final String CSV_DATA_SEPARATOR = ",";
-    public static final int OPERATION_ARRAY_INDEX = 0;
-    public static final int FRUIT_ARRAY_INDEX = 1;
-    public static final int QUANTITY_ARRAY_INDEX = 2;
-    public static final String CANT_READ_DATA_FROM_FILE_MESSAGE = "Can't read data from file: ";
-    private final List<FruitTransaction> transactionList;
+    private static final int OPERATION_ARRAY_INDEX = 0;
+    private static final int FRUIT_ARRAY_INDEX = 1;
+    private static final int QUANTITY_ARRAY_INDEX = 2;
+    private static final String CANT_READ_DATA_FROM_FILE_MESSAGE = "Can't read data from file: ";
 
-    public CsvReader(List<FruitTransaction> transactionList) {
-        this.transactionList = transactionList;
-    }
     @Override
     public void readFromFile(String path) {
-        try(BufferedReader reader = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String dataLine = reader.readLine();
             while (dataLine != null) {
                 transactionList.add(parseDataToFruitTransaction(dataLine));

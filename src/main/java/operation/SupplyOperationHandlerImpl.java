@@ -1,6 +1,7 @@
 package operation;
 
 import model.FruitTransaction;
+
 import static storages.FruitStorage.fruitQuantity;
 
 public class SupplyOperationHandlerImpl implements OperationHandler {

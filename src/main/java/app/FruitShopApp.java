@@ -21,26 +21,30 @@ public class FruitShopApp {
     private static final String TEST_DATA_FILE_NAME = "data.csv";
     private static final String TEST_RESULT_FILE_NAME = "result.csv";
     private final CsvWriter writer = new CsvWriter();
-    private final CsvReader reader = new CsvReader(transactionList);
+    private final CsvReader reader = new CsvReader();
     private final Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
-    private final OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationOperationHandlerMap);
+    private final OperationStrategyImpl operationStrategy =
+            new OperationStrategyImpl(operationOperationHandlerMap);
 
-    public void createDailyReport(){
+    public void createDailyReport() {
         fillOperationMap();
         reader.readFromFile(TEST_DATA_FILE_NAME);
-        for (FruitTransaction transaction : transactionList) {
-            OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
-            operationHandler.perform(transaction);
-        }
+        performTransactionList();
         DailyReport dailyReport = new DailyReport(fruitQuantity);
-        String reportString = dailyReport.createReportString();
-        writer.writeIntoFile(TEST_RESULT_FILE_NAME, reportString);
+        writer.writeIntoFile(TEST_RESULT_FILE_NAME, dailyReport.createReportString());
     }
 
-    public void fillOperationMap() {
+    private void fillOperationMap() {
         operationOperationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandlerImpl());
         operationOperationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandlerImpl());
         operationOperationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandlerImpl());
         operationOperationHandlerMap.put(Operation.RETURN, new ReturnOperationHandlerImpl());
+    }
+
+    private void performTransactionList() {
+        for (FruitTransaction transaction : transactionList) {
+            OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
+            operationHandler.perform(transaction);
+        }
     }
 }

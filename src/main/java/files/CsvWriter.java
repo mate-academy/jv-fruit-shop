@@ -3,10 +3,10 @@ package files;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
 
-public class CsvWriter implements Writer{
-    public static final String CANT_WRITE_DATA_INTO_THE_FILE_MESSAGE = "Can't write data into the file: ";
+public class CsvWriter implements Writer {
+    public static final String CANT_WRITE_DATA_INTO_THE_FILE_MESSAGE =
+            "Can't write data into the file: ";
 
     @Override
     public void writeIntoFile(String path, String data) {
