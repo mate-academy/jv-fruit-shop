@@ -1,8 +1,8 @@
 package service;
 
-import model.FruitTransaction;
+import model.Operation;
 import strategy.Operating;
 
 public interface OperationStrategy {
-    Operating findRightStrategy(FruitTransaction.Operation operation);
+    Operating findRightStrategy(Operation operation);
 }
