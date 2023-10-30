@@ -1,7 +1,8 @@
 package operation;
 
+import model.FruitTransaction;
 import model.Operation;
 
 public interface OperationHandler {
-    void perform(Operation operation);
+    void perform(FruitTransaction fruitTransaction);
 }
