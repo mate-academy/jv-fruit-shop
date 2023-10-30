@@ -7,11 +7,12 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
     @Override
     public int count(FruitTransaction fruitTransaction) {
         int quantity = fruitTransaction.getQuantity();
+        checkQuantityLessThenZero(quantity); // IDK, how to check a balance, if I'm just summarizing quantities
 
-        if (quantity < 0) {
-            throw new RuntimeException("Quantity cannot be less then zero: " + quantity);
-        }
+        return purchase(quantity);
+    }
 
+    private int purchase(int quantity) {
         return -quantity;
     }
 }
