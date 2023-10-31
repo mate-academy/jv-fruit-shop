@@ -45,11 +45,9 @@ public class Main {
         List<FruitTransaction> transactionList = Parser.parseListToTransactionList(dataLines);
         transactionPerformer.performTransactions(transactionList);
 
-        //3. generate a report based on processed data
         ReportGenerator generatedReport = new CsvReportGenerator();
         String csvReport = generatedReport.generateReport(fruitStorageDao);
 
-        //4. write a report to a new CSV file
         FileWriter fileWriter = new CsvFileWriter();
         fileWriter.writeToFile(csvReport, PATH_WRITE);
     }

@@ -12,10 +12,6 @@ public enum Operation {
         this.code = code;
     }
 
-    /*public String getCode() {
-        return code;
-    }*/
-
     public static Operation findByCode(String code) {
         return switch (code) {
             case "b" -> Operation.BALANCE;
