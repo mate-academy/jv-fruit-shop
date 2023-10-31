@@ -3,12 +3,11 @@ package files;
 import static storages.TransactionStorage.transactionList;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import model.FruitTransaction;
 import model.Operation;
 
-public class CsvFIleReader implements FIleReader {
+public class CsvFileReader implements FileReader {
     private static final String CSV_DATA_SEPARATOR = ",";
     private static final int OPERATION_ARRAY_INDEX = 0;
     private static final int FRUIT_ARRAY_INDEX = 1;
@@ -17,7 +16,7 @@ public class CsvFIleReader implements FIleReader {
 
     @Override
     public void readFromFile(String path) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(path))) {
             String dataLine = reader.readLine();
             while (dataLine != null) {
                 transactionList.add(parseDataToFruitTransaction(dataLine));

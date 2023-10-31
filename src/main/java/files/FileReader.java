@@ -1,5 +1,5 @@
 package files;
 
-public interface FIleReader {
+public interface FileReader {
     void readFromFile(String path);
 }
