@@ -30,7 +30,8 @@ public class FruitShopApp {
     private final OperationStrategy operationStrategy =
             new OperationStrategyImpl(operationOperationHandlerMap);
 
-    public FruitShopApp(FileWriter fileWriter, FileReader fileReader, Reporter reporter, DataParser<String> dataParser) {
+    public FruitShopApp(FileWriter fileWriter, FileReader fileReader,
+                        Reporter reporter, DataParser<String> dataParser) {
         this.fileWriter = fileWriter;
         this.fileReader = fileReader;
         this.reporter = reporter;

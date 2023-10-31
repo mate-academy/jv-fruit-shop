@@ -22,6 +22,4 @@ public class CsvFileReader implements FileReader {
         }
         return dataLines;
     }
-
-    private void skipFirstLine(){};
 }
