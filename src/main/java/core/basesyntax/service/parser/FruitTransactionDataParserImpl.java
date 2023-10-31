@@ -5,7 +5,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.List;
 
-public class FruitTransactionDataParserImpl implements DataParser<String> {
+public class FruitTransactionDataParserImpl implements DataParser {
     private static final String CSV_DATA_SEPARATOR = ",";
     private static final int OPERATION_ARRAY_INDEX = 0;
     private static final int FRUIT_ARRAY_INDEX = 1;

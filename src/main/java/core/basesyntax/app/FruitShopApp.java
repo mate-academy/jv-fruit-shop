@@ -13,12 +13,12 @@ public class FruitShopApp {
     private final FileReader fileReader;
     private final Reporter reporter;
     private final Performer performer;
-    private final DataParser<String> dataParser;
+    private final DataParser dataParser;
 
     public FruitShopApp(String dataFile, String resultFile,
                         FileWriter fileWriter, FileReader fileReader,
                         Reporter reporter, Performer performer,
-                        DataParser<String> dataParser) {
+                        DataParser dataParser) {
         this.dataFile = dataFile;
         this.resultFile = resultFile;
         this.fileWriter = fileWriter;
