@@ -13,7 +13,12 @@ public class CsvFileReader implements FileReader {
         List<String> dataLines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(path))) {
             String dataLine = reader.readLine();
+            boolean isFirstLineRead = false;
             while (dataLine != null) {
+                if(!isFirstLineRead) {
+                    isFirstLineRead = true;
+                    continue;
+                }
                 dataLines.add(dataLine);
                 dataLine = reader.readLine();
             }
