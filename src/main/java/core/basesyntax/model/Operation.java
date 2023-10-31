@@ -21,11 +21,21 @@ public enum Operation {
     }
 
     public static Operation fromString(String operationInString) {
-        for (Operation operation : Operation.values()) {
-            if (operation.code.equalsIgnoreCase(operationInString)) {
-                return operation;
+        switch (operationInString) {
+            case "b" -> {
+                return BALANCE;
             }
+            case "s" -> {
+                return SUPPLY;
+            }
+            case "p" -> {
+                return PURCHASE;
+            }
+            case "r" -> {
+                return RETURN;
+            }
+            default -> throw new NoSuchOperationException(
+                    NO_SUCH_OPERATION_MESSAGE + operationInString);
         }
-        throw new NoSuchOperationException(NO_SUCH_OPERATION_MESSAGE + operationInString);
     }
 }
