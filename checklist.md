@@ -9,7 +9,7 @@ In this case you will save a lot of time when you need to add/modify existing fu
 
 #### Make your services independent and call them in main() method
 All services should be independent. 
-We shouldn't have Strategy and call its methods in CsvFileReaderService, or we shouldn't have CsvFileWriterService and call its methods in the Strategy class.
+We shouldn't have strategy and call its methods in CsvFileReaderService, or we shouldn't have CsvFileWriterService and call its methods in the strategy class.
 
 Let's create `Main` class with `main()` method to show how the program works.
 Make all services independent and call them in the right order in `main()` method step by step (the result of previous service method should be the input for next one)
@@ -23,7 +23,7 @@ Your project structure should consist the following packages:
 - `model` for holding models like Fruit (if necessary)
 - `service` for holding services, like Writer, Reader, Parser and so on
 - `service.impl` for holding implementations of services
-- `strategy` for holding handlers for different operations (you are expected to apply Strategy pattern)
+- `strategy` for holding handlers for different operations (you are expected to apply strategy pattern)
 
 #### VCS usage
 Remember about the informative commit and PR naming. Person that is outside of context of your work progress should understand
@@ -40,8 +40,8 @@ Let's rethrow a RuntimeException with an **informative** message and exception o
         }
     ```
   
-#### try-with-resources
-Remember, if you are using classes that implement an AutoCloseable interface, we should use it with try-with-resources.
+#### try-with-resourc
+Remember, if you are using classes that implement an AutoCloseable interface, we should use it with try-with-resourc.
 
 #### Follow the encapsulation principle
 Hide inner class elements with the help of access modifiers. It's a bad practice to make your class exposed.
@@ -50,7 +50,7 @@ Hide inner class elements with the help of access modifiers. It's a bad practice
 In order to represent fruit storage you may use already existing data structures, think of the one that will be 
 the most suitable for your needs.
 
-#### Place the input and output files into the `src/main/resources` folder.
+#### Place the input and output files into the `src/main/resourc` folder.
 
 #### Avoid hardcode in your solution
 * Use hardcoded values only in the Main class and/or test classes.  
@@ -59,7 +59,7 @@ the most suitable for your needs.
     ```java
     public class ReaderServiceImpl implements ReaderService {
        public List<String> readFromFile() {
-          File file = new File("src/main/resources/file.txt");
+          File file = new File("src/main/resourc/file.txt");
           ...
        }
     }
@@ -79,15 +79,15 @@ Please provide the relative path to a resource instead.
  
 - Bad:  
     ```java
-    readerService.readFromFile("C:/Users/.../my-project/src/main/resources/file.txt");
+    readerService.readFromFile("C:/Users/.../my-project/src/main/resourc/file.txt");
     ```  
     
 - Good:  
     ```java
-    readerService.readFromFile("src/main/resources/file.txt");
+    readerService.readFromFile("src/main/resourc/file.txt");
     ```
       
-#### Avoid using switch-cases and if-else constructions. It is recommended to use the Strategy pattern instead. 
+#### Avoid using switch-cases and if-else constructions. It is recommended to use the strategy pattern instead. 
 In the `main()` method you can pass the strategy map into the service that chooses the correct strategy for each operation.
 
 - Example:  
