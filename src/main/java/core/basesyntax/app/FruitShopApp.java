@@ -5,7 +5,6 @@ import core.basesyntax.service.file.FileWriter;
 import core.basesyntax.service.parser.DataParser;
 import core.basesyntax.service.performer.Performer;
 import core.basesyntax.service.reporter.Reporter;
-import java.util.List;
 
 public class FruitShopApp {
     private final String dataFile;
@@ -30,8 +29,7 @@ public class FruitShopApp {
     }
 
     public void createDailyReport() {
-        List<String> strings = fileReader.readFromFile(dataFile);
-        dataParser.parseData(strings);
+        dataParser.parseData(fileReader.readFromFile(dataFile));
         performer.performAll();
         fileWriter.writeIntoFile(resultFile, reporter.createReport());
     }
