@@ -24,5 +24,4 @@ public class Storage {
     public Map<String, Integer> getStorage() {
         return storage;
     }
-
 }

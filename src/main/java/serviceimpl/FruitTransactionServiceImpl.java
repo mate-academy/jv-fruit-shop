@@ -2,13 +2,13 @@ package serviceimpl;
 
 import java.util.List;
 import model.FruitTransaction;
+import service.FruitTransactionService;
 import service.OperationStrategy;
-import service.ReportMaking;
 
-public class ReportMakingImpl implements ReportMaking {
+public class FruitTransactionServiceImpl implements FruitTransactionService {
     private final OperationStrategy operationStrategy;
 
-    public ReportMakingImpl(OperationStrategy operationStrategy) {
+    public FruitTransactionServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 

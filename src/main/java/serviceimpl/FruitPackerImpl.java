@@ -1,7 +1,6 @@
 package serviceimpl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import model.FruitTransaction;
 import model.Operation;
 import service.FruitPacker;
@@ -18,10 +17,11 @@ public class FruitPackerImpl implements FruitPacker {
             throw new RuntimeException(NOT_NULL_MESSAGE);
         }
         return transactionListString.stream()
-                .map(e -> e.split(COMMA))
-                .map(e -> new FruitTransaction(Operation.findRightOperation(e[INDEX_FOR_OPERATION]),
-                        e[INDEX_FOR_FRUITS],
-                        Integer.parseInt(e[INDEX_FOR_NUMBER])))
-                .collect(Collectors.toList());
+                .map(string -> string.split(COMMA))
+                .map(stringList -> new FruitTransaction(Operation
+                        .findRightOperation(stringList[INDEX_FOR_OPERATION]),
+                        stringList[INDEX_FOR_FRUITS],
+                        Integer.parseInt(stringList[INDEX_FOR_NUMBER])))
+                .toList();
     }
 }

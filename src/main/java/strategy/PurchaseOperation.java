@@ -11,6 +11,10 @@ public class PurchaseOperation implements Operating {
         String fruit = fruitTransaction.getFruit();
         Integer transactionAmount = fruitTransaction.getQuantity();
         Integer storageAmount = storage.getFruitsNumber(fruit);
-        storage.storeFruit(fruit, storageAmount - transactionAmount);
+        if (storageAmount >= transactionAmount) {
+            storage.storeFruit(fruit, storageAmount - transactionAmount);
+        } else {
+            throw new RuntimeException("Insufficient quantity in storage for " + fruit);
+        }
     }
 }

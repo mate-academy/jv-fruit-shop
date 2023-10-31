@@ -13,5 +13,4 @@ public class BalanceOperation implements Operating {
         Integer storageAmount = storage.getFruitsNumber(fruit);
         storage.storeFruit(fruit, storageAmount + transactionAmount);
     }
-
 }
