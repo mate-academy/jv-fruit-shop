@@ -9,12 +9,12 @@ import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
 import operation.BalanceOperationHandlerImpl;
-import operation.PurchaseOperationHandlerImpl;
-import operation.ReturnOperationHandlerImpl;
-import operation.SupplyOperationHandlerImpl;
 import operation.OperationHandler;
 import operation.OperationStrategy;
 import operation.OperationStrategyImpl;
+import operation.PurchaseOperationHandlerImpl;
+import operation.ReturnOperationHandlerImpl;
+import operation.SupplyOperationHandlerImpl;
 import reporter.Reporter;
 
 public class FruitShopApp {
