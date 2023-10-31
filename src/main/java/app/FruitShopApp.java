@@ -1,13 +1,13 @@
 package app;
 
-import static storages.FruitStorage.fruitQuantity;
 import static storages.TransactionStorage.transactionList;
 
 import files.CsvReader;
 import files.CsvWriter;
 import java.util.HashMap;
 import java.util.Map;
-import model.DailyReport;
+import files.Reader;
+import files.Writer;
 import model.FruitTransaction;
 import model.Operation;
 import operation.BalanceOperationHandlerImpl;
@@ -16,12 +16,15 @@ import operation.OperationStrategyImpl;
 import operation.PurchaseOperationHandlerImpl;
 import operation.ReturnOperationHandlerImpl;
 import operation.SupplyOperationHandlerImpl;
+import reporter.FruitReporterImpl;
+import reporter.Reporter;
 
 public class FruitShopApp {
     private static final String TEST_DATA_FILE_NAME = "data.csv";
     private static final String TEST_RESULT_FILE_NAME = "result.csv";
-    private final CsvWriter writer = new CsvWriter();
-    private final CsvReader reader = new CsvReader();
+    private final Writer writer = new CsvWriter();
+    private final Reader reader = new CsvReader();
+    private final Reporter reporter = new FruitReporterImpl();
     private final Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
     private final OperationStrategyImpl operationStrategy =
             new OperationStrategyImpl(operationOperationHandlerMap);
@@ -30,8 +33,7 @@ public class FruitShopApp {
         fillOperationMap();
         reader.readFromFile(TEST_DATA_FILE_NAME);
         performTransactionList();
-        DailyReport dailyReport = new DailyReport(fruitQuantity);
-        writer.writeIntoFile(TEST_RESULT_FILE_NAME, dailyReport.createReportString());
+        writer.writeIntoFile(TEST_RESULT_FILE_NAME, reporter.createReport());
     }
 
     private void fillOperationMap() {

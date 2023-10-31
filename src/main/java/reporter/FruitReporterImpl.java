@@ -1,24 +1,20 @@
-package model;
+package reporter;
 
-import java.util.Map;
+import static storages.FruitStorage.fruitQuantity;
 
-public class DailyReport {
+public class FruitReporterImpl implements Reporter {
     private static final String DATA_SEPARATOR = ",";
     private static final String REPORT_HEADER = "fruit,quantity";
-    private final Map<String, Integer> fruitQuantity;
 
-    public DailyReport(Map<String, Integer> fruitQuantity) {
-        this.fruitQuantity = fruitQuantity;
-    }
-
-    public String createReportString() {
+    @Override
+    public String createReport() {
         StringBuilder builder = new StringBuilder(REPORT_HEADER);
         for (String fruit : fruitQuantity.keySet()) {
             builder.append(System.lineSeparator())
                     .append(fruit)
                     .append(DATA_SEPARATOR)
                     .append(fruitQuantity.get(fruit));
-        }
+            }
         return builder.toString();
     }
 }
