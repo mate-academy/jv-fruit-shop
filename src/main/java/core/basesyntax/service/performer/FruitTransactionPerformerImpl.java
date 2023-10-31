@@ -5,12 +5,12 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
 
-public class FruitTransactionPerformer implements Performer {
+public class FruitTransactionPerformerImpl implements Performer {
     private final OperationStrategy operationStrategy;
     private final FruitTransactionDao fruitTransactionDao;
 
-    public FruitTransactionPerformer(OperationStrategy operationStrategy,
-                                     FruitTransactionDao fruitTransactionDao) {
+    public FruitTransactionPerformerImpl(OperationStrategy operationStrategy,
+                                         FruitTransactionDao fruitTransactionDao) {
         this.operationStrategy = operationStrategy;
         this.fruitTransactionDao = fruitTransactionDao;
     }

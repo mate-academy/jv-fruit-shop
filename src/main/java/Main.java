@@ -10,8 +10,8 @@ import core.basesyntax.operation.ReturnOperationHandlerImpl;
 import core.basesyntax.operation.SupplyOperationHandlerImpl;
 import core.basesyntax.service.file.CsvFileReader;
 import core.basesyntax.service.file.CsvFileWriter;
-import core.basesyntax.service.parser.FruitTransactionDataParser;
-import core.basesyntax.service.performer.FruitTransactionPerformer;
+import core.basesyntax.service.parser.FruitTransactionDataParserImpl;
+import core.basesyntax.service.performer.FruitTransactionPerformerImpl;
 import core.basesyntax.service.reporter.FruitReporterImpl;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,10 +27,10 @@ public class Main {
                 TEST_DATA_FILE_NAME, TEST_RESULT_FILE_NAME,
                 new CsvFileWriter(), new CsvFileReader(),
                 new FruitReporterImpl(new FruitQuantityDaoImpl()),
-                new FruitTransactionPerformer(
+                new FruitTransactionPerformerImpl(
                         new OperationStrategyImpl(operationOperationHandlerMap),
                         new FruitTransactionDaoImpl()),
-                new FruitTransactionDataParser(new FruitTransactionDaoImpl()));
+                new FruitTransactionDataParserImpl(new FruitTransactionDaoImpl()));
         fruitShopApp.createDailyReport();
     }
 
