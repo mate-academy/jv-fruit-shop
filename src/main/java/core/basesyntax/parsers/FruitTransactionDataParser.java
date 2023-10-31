@@ -2,9 +2,9 @@ package core.basesyntax.parsers;
 
 import static core.basesyntax.storages.TransactionStorage.transactionList;
 
-import java.util.List;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import java.util.List;
 
 public class FruitTransactionDataParser implements DataParser<String> {
     private static final String CSV_DATA_SEPARATOR = ",";

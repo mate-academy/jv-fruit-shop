@@ -4,9 +4,6 @@ import static core.basesyntax.storages.TransactionStorage.transactionList;
 
 import core.basesyntax.files.FileReader;
 import core.basesyntax.files.FileWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operation.BalanceOperationHandlerImpl;
@@ -18,6 +15,9 @@ import core.basesyntax.operation.ReturnOperationHandlerImpl;
 import core.basesyntax.operation.SupplyOperationHandlerImpl;
 import core.basesyntax.parsers.DataParser;
 import core.basesyntax.reporter.Reporter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FruitShopApp {
     private static final String TEST_DATA_FILE_NAME = "data.csv";
