@@ -1,4 +1,4 @@
-package core.basesyntax.storages;
+package core.basesyntax.db;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;

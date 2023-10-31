@@ -1,6 +1,6 @@
-package core.basesyntax.parsers;
+package core.basesyntax.service.parser;
 
-import static core.basesyntax.storages.TransactionStorage.transactionList;
+import static core.basesyntax.db.TransactionStorage.transactionList;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;

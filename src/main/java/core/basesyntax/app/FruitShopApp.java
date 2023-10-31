@@ -1,9 +1,9 @@
 package core.basesyntax.app;
 
-import static core.basesyntax.storages.TransactionStorage.transactionList;
+import static core.basesyntax.db.TransactionStorage.transactionList;
 
-import core.basesyntax.files.FileReader;
-import core.basesyntax.files.FileWriter;
+import core.basesyntax.service.file.FileReader;
+import core.basesyntax.service.file.FileWriter;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operation.BalanceOperationHandlerImpl;
@@ -13,8 +13,8 @@ import core.basesyntax.operation.OperationStrategyImpl;
 import core.basesyntax.operation.PurchaseOperationHandlerImpl;
 import core.basesyntax.operation.ReturnOperationHandlerImpl;
 import core.basesyntax.operation.SupplyOperationHandlerImpl;
-import core.basesyntax.parsers.DataParser;
-import core.basesyntax.reporter.Reporter;
+import core.basesyntax.service.parser.DataParser;
+import core.basesyntax.service.reporter.Reporter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

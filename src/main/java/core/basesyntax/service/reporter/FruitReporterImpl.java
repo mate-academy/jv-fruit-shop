@@ -1,6 +1,6 @@
-package core.basesyntax.reporter;
+package core.basesyntax.service.reporter;
 
-import static core.basesyntax.storages.FruitStorage.fruitQuantity;
+import static core.basesyntax.db.FruitStorage.fruitQuantity;
 
 public class FruitReporterImpl implements Reporter {
     private static final String DATA_SEPARATOR = ",";

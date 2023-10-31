@@ -1,6 +1,6 @@
 package core.basesyntax.operation;
 
-import static core.basesyntax.storages.FruitStorage.fruitQuantity;
+import static core.basesyntax.db.FruitStorage.fruitQuantity;
 
 import core.basesyntax.model.FruitTransaction;
 
