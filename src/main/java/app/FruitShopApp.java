@@ -5,6 +5,7 @@ import static storages.TransactionStorage.transactionList;
 import files.FileReader;
 import files.FileWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
@@ -15,6 +16,7 @@ import operation.OperationStrategyImpl;
 import operation.PurchaseOperationHandlerImpl;
 import operation.ReturnOperationHandlerImpl;
 import operation.SupplyOperationHandlerImpl;
+import parsers.DataParser;
 import reporter.Reporter;
 
 public class FruitShopApp {
@@ -24,18 +26,21 @@ public class FruitShopApp {
     private final FileWriter fileWriter;
     private final FileReader fileReader;
     private final Reporter reporter;
+    private final DataParser<String> dataParser;
     private final OperationStrategy operationStrategy =
             new OperationStrategyImpl(operationOperationHandlerMap);
 
-    public FruitShopApp(FileWriter fileWriter, FileReader fileReader, Reporter reporter) {
+    public FruitShopApp(FileWriter fileWriter, FileReader fileReader, Reporter reporter, DataParser<String> dataParser) {
         this.fileWriter = fileWriter;
         this.fileReader = fileReader;
         this.reporter = reporter;
+        this.dataParser = dataParser;
     }
 
     public void createDailyReport() {
         fillOperationMap();
-        fileReader.readFromFile(TEST_DATA_FILE_NAME);
+        List<String> strings = fileReader.readFromFile(TEST_DATA_FILE_NAME);
+        dataParser.parseData(strings);
         performTransactionList();
         fileWriter.writeIntoFile(TEST_RESULT_FILE_NAME, reporter.createReport());
     }
