@@ -1,19 +1,19 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.dao.FruitTransactionDao;
+import core.basesyntax.dao.FruitQuantityDao;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperationHandlerImpl implements OperationHandler {
-    private final FruitTransactionDao fruitTransactionDao;
+    private final FruitQuantityDao fruitQuantityDao;
 
-    public PurchaseOperationHandlerImpl(FruitTransactionDao fruitTransactionDao) {
-        this.fruitTransactionDao = fruitTransactionDao;
+    public PurchaseOperationHandlerImpl(FruitQuantityDao fruitQuantityDao) {
+        this.fruitQuantityDao = fruitQuantityDao;
     }
 
     @Override
     public void perform(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
-        int currentQuantity = fruitTransactionDao.get(fruit);
-        fruitTransactionDao.replace(fruit, currentQuantity - fruitTransaction.getQuantity());
+        int currentQuantity = fruitQuantityDao.get(fruit);
+        fruitQuantityDao.replace(fruit, currentQuantity - fruitTransaction.getQuantity());
     }
 }

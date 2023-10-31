@@ -2,7 +2,7 @@ package core.basesyntax.app;
 
 import static core.basesyntax.db.TransactionStorage.transactionList;
 
-import core.basesyntax.dao.FruitTransactionDaoImpl;
+import core.basesyntax.dao.FruitQuantityDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operation.BalanceOperationHandlerImpl;
@@ -49,13 +49,13 @@ public class FruitShopApp {
 
     private void fillOperationMap() {
         operationOperationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandlerImpl(
-                new FruitTransactionDaoImpl()));
+                new FruitQuantityDaoImpl()));
         operationOperationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandlerImpl(
-                new FruitTransactionDaoImpl()));
+                new FruitQuantityDaoImpl()));
         operationOperationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandlerImpl(
-                new FruitTransactionDaoImpl()));
+                new FruitQuantityDaoImpl()));
         operationOperationHandlerMap.put(Operation.RETURN, new ReturnOperationHandlerImpl(
-                new FruitTransactionDaoImpl()));
+                new FruitQuantityDaoImpl()));
     }
 
     private void performTransactionList() {
