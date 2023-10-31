@@ -1,5 +1,7 @@
 package files;
 
+import java.util.List;
+
 public interface FileReader {
-    void readFromFile(String path);
+    List<String> readFromFile(String path);
 }
