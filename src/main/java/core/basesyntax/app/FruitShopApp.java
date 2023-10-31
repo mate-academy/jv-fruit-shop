@@ -1,23 +1,23 @@
-package app;
+package core.basesyntax.app;
 
-import static storages.TransactionStorage.transactionList;
+import static core.basesyntax.storages.TransactionStorage.transactionList;
 
-import files.FileReader;
-import files.FileWriter;
+import core.basesyntax.files.FileReader;
+import core.basesyntax.files.FileWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
-import model.Operation;
-import operation.BalanceOperationHandlerImpl;
-import operation.OperationHandler;
-import operation.OperationStrategy;
-import operation.OperationStrategyImpl;
-import operation.PurchaseOperationHandlerImpl;
-import operation.ReturnOperationHandlerImpl;
-import operation.SupplyOperationHandlerImpl;
-import parsers.DataParser;
-import reporter.Reporter;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.operation.BalanceOperationHandlerImpl;
+import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.operation.OperationStrategy;
+import core.basesyntax.operation.OperationStrategyImpl;
+import core.basesyntax.operation.PurchaseOperationHandlerImpl;
+import core.basesyntax.operation.ReturnOperationHandlerImpl;
+import core.basesyntax.operation.SupplyOperationHandlerImpl;
+import core.basesyntax.parsers.DataParser;
+import core.basesyntax.reporter.Reporter;
 
 public class FruitShopApp {
     private static final String TEST_DATA_FILE_NAME = "data.csv";

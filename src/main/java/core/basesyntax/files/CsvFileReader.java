@@ -1,4 +1,4 @@
-package files;
+package core.basesyntax.files;
 
 import java.io.BufferedReader;
 import java.io.IOException;

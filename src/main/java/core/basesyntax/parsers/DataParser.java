@@ -1,4 +1,4 @@
-package parsers;
+package core.basesyntax.parsers;
 
 import java.util.List;
 

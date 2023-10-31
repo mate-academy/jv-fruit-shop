@@ -1,10 +1,10 @@
-package parsers;
+package core.basesyntax.parsers;
 
-import static storages.TransactionStorage.transactionList;
+import static core.basesyntax.storages.TransactionStorage.transactionList;
 
 import java.util.List;
-import model.FruitTransaction;
-import model.Operation;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 
 public class FruitTransactionDataParser implements DataParser<String> {
     private static final String CSV_DATA_SEPARATOR = ",";

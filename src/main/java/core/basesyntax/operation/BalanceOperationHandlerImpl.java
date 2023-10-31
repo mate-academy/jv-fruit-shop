@@ -1,8 +1,8 @@
-package operation;
+package core.basesyntax.operation;
 
-import static storages.FruitStorage.fruitQuantity;
+import static core.basesyntax.storages.FruitStorage.fruitQuantity;
 
-import model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public class BalanceOperationHandlerImpl implements OperationHandler {
     @Override

@@ -1,6 +1,6 @@
-package model;
+package core.basesyntax.model;
 
-import exceptions.NoSuchOperationException;
+import core.basesyntax.exceptions.NoSuchOperationException;
 
 public enum Operation {
     BALANCE("b"),

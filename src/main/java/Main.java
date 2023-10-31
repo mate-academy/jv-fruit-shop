@@ -1,8 +1,8 @@
-import app.FruitShopApp;
-import files.CsvFileReader;
-import files.CsvFileWriter;
-import parsers.FruitTransactionDataParser;
-import reporter.FruitReporterImpl;
+import core.basesyntax.app.FruitShopApp;
+import core.basesyntax.files.CsvFileReader;
+import core.basesyntax.files.CsvFileWriter;
+import core.basesyntax.parsers.FruitTransactionDataParser;
+import core.basesyntax.reporter.FruitReporterImpl;
 
 public class Main {
     private static final FruitShopApp fruitShopApp = new FruitShopApp(

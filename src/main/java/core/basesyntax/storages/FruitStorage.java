@@ -1,4 +1,4 @@
-package storages;
+package core.basesyntax.storages;
 
 import java.util.HashMap;
 import java.util.Map;
