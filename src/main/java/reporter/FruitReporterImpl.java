@@ -14,7 +14,7 @@ public class FruitReporterImpl implements Reporter {
                     .append(fruit)
                     .append(DATA_SEPARATOR)
                     .append(fruitQuantity.get(fruit));
-            }
+        }
         return builder.toString();
     }
 }

@@ -4,10 +4,10 @@ import static storages.TransactionStorage.transactionList;
 
 import files.CsvReader;
 import files.CsvWriter;
-import java.util.HashMap;
-import java.util.Map;
 import files.Reader;
 import files.Writer;
+import java.util.HashMap;
+import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
 import operation.BalanceOperationHandlerImpl;
