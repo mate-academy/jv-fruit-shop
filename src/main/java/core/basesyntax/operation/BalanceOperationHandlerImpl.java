@@ -1,12 +1,17 @@
 package core.basesyntax.operation;
 
-import static core.basesyntax.db.FruitStorage.fruitQuantity;
-
+import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.model.FruitTransaction;
 
 public class BalanceOperationHandlerImpl implements OperationHandler {
+    private final FruitTransactionDao fruitTransactionDao;
+
+    public BalanceOperationHandlerImpl(FruitTransactionDao fruitTransactionDao) {
+        this.fruitTransactionDao = fruitTransactionDao;
+    }
+
     @Override
     public void perform(FruitTransaction fruitTransaction) {
-        fruitQuantity.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        fruitTransactionDao.add(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

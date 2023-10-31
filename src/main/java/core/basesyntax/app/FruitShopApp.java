@@ -2,8 +2,7 @@ package core.basesyntax.app;
 
 import static core.basesyntax.db.TransactionStorage.transactionList;
 
-import core.basesyntax.service.file.FileReader;
-import core.basesyntax.service.file.FileWriter;
+import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operation.BalanceOperationHandlerImpl;
@@ -13,6 +12,8 @@ import core.basesyntax.operation.OperationStrategyImpl;
 import core.basesyntax.operation.PurchaseOperationHandlerImpl;
 import core.basesyntax.operation.ReturnOperationHandlerImpl;
 import core.basesyntax.operation.SupplyOperationHandlerImpl;
+import core.basesyntax.service.file.FileReader;
+import core.basesyntax.service.file.FileWriter;
 import core.basesyntax.service.parser.DataParser;
 import core.basesyntax.service.reporter.Reporter;
 import java.util.HashMap;
@@ -47,10 +48,14 @@ public class FruitShopApp {
     }
 
     private void fillOperationMap() {
-        operationOperationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandlerImpl());
-        operationOperationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandlerImpl());
-        operationOperationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandlerImpl());
-        operationOperationHandlerMap.put(Operation.RETURN, new ReturnOperationHandlerImpl());
+        operationOperationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandlerImpl(
+                new FruitTransactionDaoImpl()));
+        operationOperationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandlerImpl(
+                new FruitTransactionDaoImpl()));
+        operationOperationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandlerImpl(
+                new FruitTransactionDaoImpl()));
+        operationOperationHandlerMap.put(Operation.RETURN, new ReturnOperationHandlerImpl(
+                new FruitTransactionDaoImpl()));
     }
 
     private void performTransactionList() {
