@@ -8,7 +8,7 @@ import java.io.IOException;
 import model.FruitTransaction;
 import model.Operation;
 
-public class CsvReader implements Reader {
+public class CsvFIleReader implements FIleReader {
     private static final String CSV_DATA_SEPARATOR = ",";
     private static final int OPERATION_ARRAY_INDEX = 0;
     private static final int FRUIT_ARRAY_INDEX = 1;

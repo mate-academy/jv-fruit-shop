@@ -1,5 +1,5 @@
 package files;
 
-public interface Writer {
+public interface FileWriter {
     void writeIntoFile(String path, String data);
 }
