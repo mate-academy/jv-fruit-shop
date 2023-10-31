@@ -8,22 +8,17 @@ import java.util.HashMap;
 import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
-import operation.BalanceOperationHandlerImpl;
-import operation.OperationHandler;
-import operation.OperationStrategyImpl;
-import operation.PurchaseOperationHandlerImpl;
-import operation.ReturnOperationHandlerImpl;
-import operation.SupplyOperationHandlerImpl;
+import operation.*;
 import reporter.Reporter;
 
 public class FruitShopApp {
     private static final String TEST_DATA_FILE_NAME = "data.csv";
     private static final String TEST_RESULT_FILE_NAME = "result.csv";
+    private final Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
     private final Writer writer;
     private final Reader reader;
     private final Reporter reporter;
-    private final Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
-    private final OperationStrategyImpl operationStrategy =
+    private final OperationStrategy operationStrategy =
             new OperationStrategyImpl(operationOperationHandlerMap);
 
     public FruitShopApp(Writer writer, Reader reader, Reporter reporter) {
