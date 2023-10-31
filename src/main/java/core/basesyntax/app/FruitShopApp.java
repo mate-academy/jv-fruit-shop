@@ -1,67 +1,38 @@
 package core.basesyntax.app;
 
-import static core.basesyntax.db.TransactionStorage.transactionList;
-
-import core.basesyntax.dao.FruitQuantityDaoImpl;
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
-import core.basesyntax.operation.BalanceOperationHandlerImpl;
-import core.basesyntax.operation.OperationHandler;
-import core.basesyntax.operation.OperationStrategy;
-import core.basesyntax.operation.OperationStrategyImpl;
-import core.basesyntax.operation.PurchaseOperationHandlerImpl;
-import core.basesyntax.operation.ReturnOperationHandlerImpl;
-import core.basesyntax.operation.SupplyOperationHandlerImpl;
 import core.basesyntax.service.file.FileReader;
 import core.basesyntax.service.file.FileWriter;
 import core.basesyntax.service.parser.DataParser;
+import core.basesyntax.service.performer.Performer;
 import core.basesyntax.service.reporter.Reporter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FruitShopApp {
-    private static final String TEST_DATA_FILE_NAME = "data.csv";
-    private static final String TEST_RESULT_FILE_NAME = "result.csv";
-    private final Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
+    private final String dataFile;
+    private final String resultFile;
     private final FileWriter fileWriter;
     private final FileReader fileReader;
     private final Reporter reporter;
+    private final Performer performer;
     private final DataParser<String> dataParser;
-    private final OperationStrategy operationStrategy =
-            new OperationStrategyImpl(operationOperationHandlerMap);
 
-    public FruitShopApp(FileWriter fileWriter, FileReader fileReader,
-                        Reporter reporter, DataParser<String> dataParser) {
+    public FruitShopApp(String dataFile, String resultFile,
+                        FileWriter fileWriter, FileReader fileReader,
+                        Reporter reporter, Performer performer,
+                        DataParser<String> dataParser) {
+        this.dataFile = dataFile;
+        this.resultFile = resultFile;
         this.fileWriter = fileWriter;
         this.fileReader = fileReader;
         this.reporter = reporter;
+        this.performer = performer;
         this.dataParser = dataParser;
     }
 
     public void createDailyReport() {
-        fillOperationMap();
-        List<String> strings = fileReader.readFromFile(TEST_DATA_FILE_NAME);
+        List<String> strings = fileReader.readFromFile(dataFile);
         dataParser.parseData(strings);
-        performTransactionList();
-        fileWriter.writeIntoFile(TEST_RESULT_FILE_NAME, reporter.createReport());
-    }
-
-    private void fillOperationMap() {
-        operationOperationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandlerImpl(
-                new FruitQuantityDaoImpl()));
-        operationOperationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandlerImpl(
-                new FruitQuantityDaoImpl()));
-        operationOperationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandlerImpl(
-                new FruitQuantityDaoImpl()));
-        operationOperationHandlerMap.put(Operation.RETURN, new ReturnOperationHandlerImpl(
-                new FruitQuantityDaoImpl()));
-    }
-
-    private void performTransactionList() {
-        for (FruitTransaction transaction : transactionList) {
-            OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
-            operationHandler.perform(transaction);
-        }
+        performer.performAll();
+        fileWriter.writeIntoFile(resultFile, reporter.createReport());
     }
 }
