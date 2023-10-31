@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 
-public class PurchaseOperationCodeParser implements OperationCodeParser {
+public class PurchaseOperationStrategy implements OperationStrategy {
     @Override
     public void process(FruitTransaction transaction, FruitStorage storage) {
         int availableQuantity = storage.getFruitQuantities()
