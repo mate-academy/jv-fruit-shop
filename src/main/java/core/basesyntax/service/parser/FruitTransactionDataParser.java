@@ -1,7 +1,6 @@
 package core.basesyntax.service.parser;
 
-import static core.basesyntax.db.TransactionStorage.transactionList;
-
+import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.List;
@@ -11,11 +10,16 @@ public class FruitTransactionDataParser implements DataParser<String> {
     private static final int OPERATION_ARRAY_INDEX = 0;
     private static final int FRUIT_ARRAY_INDEX = 1;
     private static final int QUANTITY_ARRAY_INDEX = 2;
+    private final FruitTransactionDao fruitTransactionDao;
+
+    public FruitTransactionDataParser(FruitTransactionDao fruitTransactionDao) {
+        this.fruitTransactionDao = fruitTransactionDao;
+    }
 
     @Override
     public void parseData(List<String> data) {
         for (String dataLine : data) {
-            transactionList.add(parseDataToFruitTransaction(dataLine));
+            fruitTransactionDao.add(parseDataToFruitTransaction(dataLine));
         }
     }
 
