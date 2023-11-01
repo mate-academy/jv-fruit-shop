@@ -1,12 +1,12 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.DataReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import service.DataReader;
 
 public class CsvDataReader implements DataReader {
     @Override
@@ -16,7 +16,7 @@ public class CsvDataReader implements DataReader {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String readerString = reader.readLine();
             while (readerString != null) {
-                resultList.add(readerString);
+                resultList.add(readerString.trim());
                 readerString = reader.readLine();
             }
             return resultList;

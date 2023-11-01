@@ -1,9 +1,9 @@
-package model;
+package core.basesyntax.model;
 
 public class FruitTransaction {
-    private OperationType operationType;
-    private String fruitName;
-    private int quantity;
+    private final OperationType operationType;
+    private final String fruitName;
+    private final int quantity;
 
     public FruitTransaction(OperationType operationType, String fruitType, int quantity) {
         this.operationType = operationType;
@@ -15,24 +15,12 @@ public class FruitTransaction {
         return operationType;
     }
 
-    public void setOperationType(OperationType operationType) {
-        this.operationType = operationType;
-    }
-
     public String getFruitName() {
         return fruitName;
     }
 
-    public void setFruitName(String fruitName) {
-        this.fruitName = fruitName;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public enum OperationType {
@@ -49,6 +37,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static OperationType fromCode(String code) {
+            for (OperationType operationType : OperationType.values()) {
+                if (operationType.getCode().equals(code)) {
+                    return operationType;
+                }
+            }
+            throw new IllegalArgumentException("Invalid Operation code: " + code);
         }
     }
 }

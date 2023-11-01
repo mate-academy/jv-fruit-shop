@@ -1,9 +1,9 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.DataWriter;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import service.DataWriter;
 
 public class CsvDataWriter implements DataWriter {
     public void writeToFile(String destinationFileName, String reportData) {
