@@ -1,6 +1,5 @@
 import core.basesyntax.app.FruitShopApp;
 import core.basesyntax.dao.FruitQuantityDaoImpl;
-import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.model.Operation;
 import core.basesyntax.operation.BalanceOperationHandlerImpl;
 import core.basesyntax.operation.OperationHandler;
@@ -17,8 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    private static final String TEST_DATA_FILE_NAME = "data.csv";
-    private static final String TEST_RESULT_FILE_NAME = "result.csv";
+    private static final String TEST_DATA_FILE_NAME = "src/main/java/resource/data.csv";
+    private static final String TEST_RESULT_FILE_NAME = "src/main/java/resource/result.csv";
 
     public static void main(String[] args) {
         Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
@@ -28,9 +27,8 @@ public class Main {
                 new CsvFileWriter(), new CsvFileReader(),
                 new FruitReporterImpl(new FruitQuantityDaoImpl()),
                 new FruitTransactionPerformerImpl(
-                        new OperationStrategyImpl(operationOperationHandlerMap),
-                        new FruitTransactionDaoImpl()),
-                new FruitTransactionDataParserImpl(new FruitTransactionDaoImpl()));
+                        new OperationStrategyImpl(operationOperationHandlerMap)),
+                new FruitTransactionDataParserImpl());
         fruitShopApp.createDailyReport();
     }
 

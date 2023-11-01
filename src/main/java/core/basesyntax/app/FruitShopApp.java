@@ -1,10 +1,13 @@
 package core.basesyntax.app;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.file.FileReader;
 import core.basesyntax.service.file.FileWriter;
 import core.basesyntax.service.parser.DataParser;
 import core.basesyntax.service.performer.Performer;
 import core.basesyntax.service.reporter.Reporter;
+
+import java.util.List;
 
 public class FruitShopApp {
     private final String dataFile;
@@ -29,8 +32,8 @@ public class FruitShopApp {
     }
 
     public void createDailyReport() {
-        dataParser.parseData(fileReader.readFromFile(dataFile));
-        performer.performAll();
+        List<FruitTransaction> fruitTransactions = dataParser.parseData(fileReader.readFromFile(dataFile));
+        performer.performAll(fruitTransactions);
         fileWriter.writeIntoFile(resultFile, reporter.createReport());
     }
 }

@@ -1,23 +1,21 @@
 package core.basesyntax.service.performer;
 
-import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
 
+import java.util.List;
+
 public class FruitTransactionPerformerImpl implements Performer {
     private final OperationStrategy operationStrategy;
-    private final FruitTransactionDao fruitTransactionDao;
 
-    public FruitTransactionPerformerImpl(OperationStrategy operationStrategy,
-                                         FruitTransactionDao fruitTransactionDao) {
+    public FruitTransactionPerformerImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
-        this.fruitTransactionDao = fruitTransactionDao;
     }
 
     @Override
-    public void performAll() {
-        for (FruitTransaction transaction : fruitTransactionDao.getAll()) {
+    public void performAll(List<FruitTransaction> fruitTransactions) {
+        for (FruitTransaction transaction : fruitTransactions) {
             OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
             operationHandler.perform(transaction);
         }

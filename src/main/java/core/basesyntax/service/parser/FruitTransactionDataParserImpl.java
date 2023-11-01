@@ -1,8 +1,9 @@
 package core.basesyntax.service.parser;
 
-import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class FruitTransactionDataParserImpl implements DataParser {
@@ -10,17 +11,14 @@ public class FruitTransactionDataParserImpl implements DataParser {
     private static final int OPERATION_ARRAY_INDEX = 0;
     private static final int FRUIT_ARRAY_INDEX = 1;
     private static final int QUANTITY_ARRAY_INDEX = 2;
-    private final FruitTransactionDao fruitTransactionDao;
-
-    public FruitTransactionDataParserImpl(FruitTransactionDao fruitTransactionDao) {
-        this.fruitTransactionDao = fruitTransactionDao;
-    }
 
     @Override
-    public void parseData(List<String> data) {
+    public List<FruitTransaction> parseData(List<String> data) {
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String dataLine : data) {
-            fruitTransactionDao.add(parseDataToFruitTransaction(dataLine));
+            fruitTransactions.add(parseDataToFruitTransaction(dataLine));
         }
+        return fruitTransactions;
     }
 
     private FruitTransaction parseDataToFruitTransaction(String dataLine) {
