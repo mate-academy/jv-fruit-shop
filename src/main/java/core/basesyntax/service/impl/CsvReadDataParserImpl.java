@@ -6,7 +6,7 @@ import core.basesyntax.service.ReadDataParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadDataParserImpl implements ReadDataParser {
+public class CsvReadDataParserImpl implements ReadDataParser {
     private static final String SPLIT_REGEX = ",";
 
     @Override

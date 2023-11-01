@@ -9,7 +9,7 @@ import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.impl.CsvDataReader;
 import core.basesyntax.service.impl.CsvDataWriter;
 import core.basesyntax.service.impl.CsvReportGenerator;
-import core.basesyntax.service.impl.ReadDataParserImpl;
+import core.basesyntax.service.impl.CsvReadDataParserImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.strategy.HandlerStrategy;
 import core.basesyntax.strategy.handlers.BalanceHandler;
@@ -38,7 +38,7 @@ public class Main {
         CsvDataReader csvDataReader = new CsvDataReader();
         List<String> readData = csvDataReader.readFileLines(FILE_FROM);
 
-        ReadDataParser readDataParser = new ReadDataParserImpl();
+        ReadDataParser readDataParser = new CsvReadDataParserImpl();
         List<FruitTransaction> transactionList = readDataParser.convertToFruitTransactionList(
                 readData);
 
