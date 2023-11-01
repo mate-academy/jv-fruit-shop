@@ -10,6 +10,7 @@ import java.util.List;
 
 public class CsvDataReader implements DataReader {
     private static final String EXCEPTION_MESSAGE = "Can't read file";
+
     @Override
     public List<String> readFileLines(String pathName) {
         File file = new File(pathName);

@@ -7,6 +7,7 @@ import java.nio.file.Files;
 
 public class CsvDataWriter implements DataWriter {
     private static final String EXCEPTION_MESSAGE = "Can't write to file";
+
     public void writeToFile(String destinationFileName, String reportData) {
         File destinationfile = new File(destinationFileName);
         try {
