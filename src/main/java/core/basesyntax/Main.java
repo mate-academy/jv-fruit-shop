@@ -20,6 +20,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Main {
+    private static final String FILE_FROM = "src/main/resources/Input.txt";
+    private static final String FILE_TO = "src/main/resources/Output.txt";
+
     public static void main(String[] args) {
         InventoryDao inventoryDao = new InventoryDaoImpl();
         final HandlerStrategy handlerStrategy = new HandlerStrategy(new HashMap<>());
@@ -31,22 +34,24 @@ public class Main {
             new ReturnHandler(inventoryDao));
         HandlerStrategy.getStrategyMap().put(OperationType.SUPPLY,
             new SupplyHandler(inventoryDao));
+
         CsvDataReader csvDataReader = new CsvDataReader();
-        List<String> readData = csvDataReader.readFileLines("src/main/resources/Input.txt");
-        System.out.println(readData);
+        List<String> readData = csvDataReader.readFileLines(FILE_FROM);
+
         ReadDataParser readDataParser = new ReadDataParserImpl();
         List<FruitTransaction> transactionList = readDataParser.convertToFruitTransactionList(
                 readData);
-        System.out.println(transactionList);
+
         TransactionProcessor transactionProcessor = new TransactionProcessorImpl(handlerStrategy);
         for (FruitTransaction transaction : transactionList) {
             transactionProcessor.processTransaction(transaction, handlerStrategy);
         }
-        System.out.println(inventoryDao.getCurrentInventoryState());
+
         CsvReportGenerator csvReportGenerator = new CsvReportGenerator();
         String reportString = csvReportGenerator.generateReport();
-        System.out.println(reportString);
+
         CsvDataWriter csvDataWriter = new CsvDataWriter();
-        csvDataWriter.writeToFile("src/main/resources/Output.txt",reportString);
+        csvDataWriter.writeToFile(FILE_TO,reportString);
     }
+
 }
