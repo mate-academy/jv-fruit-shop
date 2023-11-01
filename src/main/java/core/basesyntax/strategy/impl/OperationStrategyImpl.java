@@ -13,7 +13,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public OperationHandler findOperation(Operation operation) {
+    public OperationHandler findOperationHandler(Operation operation) {
         return operationHandlerMap.get(operation);
     }
 }

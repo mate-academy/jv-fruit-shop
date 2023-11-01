@@ -15,8 +15,8 @@ public class TransactionPerformerImpl implements TransactionPerformer {
     @Override
     public void performTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction fruitTransaction : transactions) {
-            OperationHandler operationHandler = operationStrategy
-                    .findOperation(fruitTransaction.getOperation());
+            OperationHandler operationHandler =
+                    operationStrategy.findOperationHandler(fruitTransaction.getOperation());
             operationHandler.operate(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
     }

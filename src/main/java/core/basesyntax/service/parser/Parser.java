@@ -1,5 +1,7 @@
-package core.basesyntax.model;
+package core.basesyntax.service.parser;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ public class Parser {
     private static final int FRUIT = 1;
     private static final int QUANTITY = 2;
 
-    public static List<FruitTransaction> parseListToTransactionList(List<String> fileData) {
+    public List<FruitTransaction> parseListToTransactionList(List<String> fileData) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (int i = 1; i < fileData.size(); i++) {
             FruitTransaction fruitTransaction = new FruitTransaction();

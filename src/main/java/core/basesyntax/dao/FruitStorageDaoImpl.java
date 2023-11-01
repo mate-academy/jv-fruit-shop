@@ -7,16 +7,16 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public void add(String fruit, int quantity) {
-        FruitStorage.fruitStorage.put(fruit, quantity);
+        FruitStorage.fruitToStorageQuantityMap.put(fruit, quantity);
     }
 
     @Override
     public int getQuantity(String fruit) {
-        return FruitStorage.fruitStorage.get(fruit);
+        return FruitStorage.fruitToStorageQuantityMap.get(fruit);
     }
 
     @Override
     public Map<String,Integer> getAll() {
-        return FruitStorage.fruitStorage;
+        return FruitStorage.fruitToStorageQuantityMap;
     }
 }

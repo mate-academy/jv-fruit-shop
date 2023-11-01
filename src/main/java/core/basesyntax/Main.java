@@ -4,9 +4,9 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.model.Parser;
 import core.basesyntax.reporter.CsvReportGenerator;
 import core.basesyntax.reporter.ReportGenerator;
+import core.basesyntax.service.parser.Parser;
 import core.basesyntax.service.performer.TransactionPerformer;
 import core.basesyntax.service.performer.TransactionPerformerImpl;
 import core.basesyntax.service.reader.CsvFileReader;
@@ -43,11 +43,12 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         TransactionPerformer transactionPerformer =
                 new TransactionPerformerImpl(operationStrategy);
-        List<FruitTransaction> transactionList = Parser.parseListToTransactionList(dataLines);
+        Parser parser = new Parser();
+        List<FruitTransaction> transactionList = parser.parseListToTransactionList(dataLines);
         transactionPerformer.performTransactions(transactionList);
 
-        ReportGenerator generatedReport = new CsvReportGenerator(fruitStorageDao);
-        String csvReport = generatedReport.generateReport();
+        ReportGenerator reportGenerator = new CsvReportGenerator(fruitStorageDao);
+        String csvReport = reportGenerator.generateReport();
 
         FileWriter fileWriter = new CsvFileWriter();
         fileWriter.writeToFile(csvReport, PATH_WRITE);
