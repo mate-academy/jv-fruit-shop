@@ -2,14 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
+import core.basesyntax.model.FruitInputData;
 import core.basesyntax.service.DataHandlerService;
-import core.basesyntax.service.OperationService;
-import core.basesyntax.strategy.StorageUpdateStrategy;
-import core.basesyntax.strategy.impl.FruitBalanceStrategy;
-import core.basesyntax.strategy.impl.FruitPurchaseStrategy;
-import core.basesyntax.strategy.impl.FruitReturnStrategy;
-import core.basesyntax.strategy.impl.FruitSupplyStrategy;
-import java.util.ArrayList;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.StorageUpdateHandler;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,10 +14,15 @@ public class DataHandlerServiceImpl implements DataHandlerService {
     private static final String REPORT_COLUMNS = "fruit,quantity";
     private static final int INDEX_OF_REPORT_COLUMNS = 1;
     private static final String SEPARATE_SYMBOL = ",";
-    private final List<StorageUpdateStrategy> storageUpdateStrategies = createServicesList();
-    private final OperationService operationService =
-            new OperationServiceImpl(storageUpdateStrategies);
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final OperationStrategy operationService;
+    private final FruitDao fruitDao;
+    private final FruitInputData fruitInputData;
+
+    public DataHandlerServiceImpl(List<StorageUpdateHandler> storageUpdateHandlers) {
+        operationService = new OperationStrategyImpl(storageUpdateHandlers);
+        fruitDao = new FruitDaoImpl();
+        fruitInputData = new FruitInputData();
+    }
 
     @Override
     public String calculateInputData(String inputData) {
@@ -43,24 +45,15 @@ public class DataHandlerServiceImpl implements DataHandlerService {
 
     private void addProductTransaction(String productTransaction) {
         String[] separatedTransaction = productTransaction.split(SEPARATE_SYMBOL);
-        String operationCode = separatedTransaction[0];
-        String productName = separatedTransaction[1];
-        int productAmount = Integer.parseInt(separatedTransaction[2]);
-        operationService.manageStorageCells(operationCode, productName, productAmount);
+        fruitInputData.setOperationCode(separatedTransaction[0]);
+        fruitInputData.setFruitName(separatedTransaction[1]);
+        fruitInputData.setAmount(Integer.parseInt(separatedTransaction[2]));
+        operationService.manageStorageCells(fruitInputData);
     }
 
     private List<String> getOperationsList(String inputData) {
         return Arrays.stream(inputData.split(System.lineSeparator()))
                 .skip(INDEX_OF_REPORT_COLUMNS)
                 .toList();
-    }
-
-    private List<StorageUpdateStrategy> createServicesList() {
-        List<StorageUpdateStrategy> storageUpdateServices = new ArrayList<>();
-        storageUpdateServices.add(new FruitBalanceStrategy());
-        storageUpdateServices.add(new FruitSupplyStrategy());
-        storageUpdateServices.add(new FruitPurchaseStrategy());
-        storageUpdateServices.add(new FruitReturnStrategy());
-        return storageUpdateServices;
     }
 }
