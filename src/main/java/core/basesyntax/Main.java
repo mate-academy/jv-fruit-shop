@@ -3,46 +3,48 @@ package core.basesyntax;
 import core.basesyntax.Dao.FruitDao;
 import core.basesyntax.Dao.FruitDaoImp;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.Parsing;
+import core.basesyntax.service.impl.ParsingStringToFruitTransactionService;
+import core.basesyntax.service.impl.ReadFromCSVService;
+import core.basesyntax.service.impl.WriteToCSVService;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.Writer;
-import core.basesyntax.service.impl.ParseStringToFruitTransaction;
-import core.basesyntax.service.impl.ReadFromCSV;
-import core.basesyntax.service.impl.WriteToCSV;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Main {
     public static void main(String[] args) {
-        Reader read = new ReadFromCSV();
-        List<String> read1 = read.read("src/main/resources/csvFile.csv");
+        Map<FruitTransaction.Operation,OperationHandler> operationHandlerMap = new HashMap<>();
         List<FruitTransaction> fruits = new ArrayList<>();
+        Reader reader = new ReadFromCSVService();
         FruitDao dataBase = new FruitDaoImp();
-        Parser parser = new ParseStringToFruitTransaction();
-        for (String fruit : read1) {
-           fruits.add(parser.parse(fruit));
+        Parsing parser = new ParsingStringToFruitTransactionService();
+        Writer writer = new WriteToCSVService();
+        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,new BalanceOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,new PurchaseOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN,new ReturnOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,new SupplyOperationHandler());
+        OperationStrategy operationStrategy = new OperationStrategyImp(operationHandlerMap);
+        List<String> fileData = reader.read("src/main/resources/csvFile.csv");
+        for (String data : fileData) {
+           fruits.add(parser.parse(data));
         }
         dataBase.add(fruits);
         for (FruitTransaction fruit : fruits) {
-            switch (fruit.getOperation()){
-                case SUPPLY:
-                    dataBase.getStorage().put(fruit.getFruit(), dataBase.get(fruit.getFruit()) + fruit.getQuantity());
-                    break;
-                case BALANCE:
-                    dataBase.getStorage().put(fruit.getFruit(), fruit.getQuantity());
-                    break;
-                case PURCHASE:
-                    dataBase.getStorage().put(fruit.getFruit(), dataBase.get(fruit.getFruit()) - fruit.getQuantity());
-                    break;
-                case RETURN:
-                    dataBase.getStorage().put(fruit.getFruit(), dataBase.get(fruit.getFruit()) + fruit.getQuantity());
-                    break;
-            }
+            operationStrategy.get(fruit.getOperation()).DoOperation(fruit);
         }
-        Writer wr = new WriteToCSV();
-        wr.write(dataBase.getStorage());
+        writer.write(dataBase.getStorage());
     }
 
 }

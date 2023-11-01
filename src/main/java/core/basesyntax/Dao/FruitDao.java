@@ -9,6 +9,5 @@ public interface FruitDao {
     Map<String, Integer> getStorage();
     Integer get(String key);
     void add(String type, Integer quantity);
-
     void add(List<FruitTransaction> list);
 }
