@@ -32,21 +32,22 @@ public class Main {
         FileReader fileReader = new CsvFileReader();
         List<String> dataLines = fileReader.readFile(PATH_READ);
 
+        FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
+
         Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
-        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
+        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler(fruitStorageDao));
+        operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler(fruitStorageDao));
+        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler(fruitStorageDao));
+        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler(fruitStorageDao));
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
         TransactionPerformer transactionPerformer =
-                new TransactionPerformerImpl(operationStrategy, fruitStorageDao);
+                new TransactionPerformerImpl(operationStrategy);
         List<FruitTransaction> transactionList = Parser.parseListToTransactionList(dataLines);
         transactionPerformer.performTransactions(transactionList);
 
-        ReportGenerator generatedReport = new CsvReportGenerator();
-        String csvReport = generatedReport.generateReport(fruitStorageDao);
+        ReportGenerator generatedReport = new CsvReportGenerator(fruitStorageDao);
+        String csvReport = generatedReport.generateReport();
 
         FileWriter fileWriter = new CsvFileWriter();
         fileWriter.writeToFile(csvReport, PATH_WRITE);

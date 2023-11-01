@@ -1,11 +1,14 @@
 package core.basesyntax.model;
 
+import java.util.NoSuchElementException;
+
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
 
+    private static final String OPERATION_EXCEPTION = "Can't find operation";
     private String code;
 
     Operation(String code) {
@@ -18,7 +21,7 @@ public enum Operation {
             case "s" -> Operation.SUPPLY;
             case "p" -> Operation.PURCHASE;
             case "r" -> Operation.RETURN;
-            default -> null;
+            default -> throw new NoSuchElementException(OPERATION_EXCEPTION);
         };
     }
 }

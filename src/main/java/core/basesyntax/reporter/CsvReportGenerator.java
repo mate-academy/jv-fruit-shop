@@ -1,19 +1,27 @@
 package core.basesyntax.reporter;
 
 import core.basesyntax.dao.FruitStorageDao;
-import java.util.Set;
+import java.util.Map;
 
 public class CsvReportGenerator implements ReportGenerator {
+    private static final String HEADER = "fruit,quantity";
+    private static final String COMA = ",";
+    private final FruitStorageDao fruitStorageDao;
+
+    public CsvReportGenerator(FruitStorageDao fruitStorageDao) {
+        this.fruitStorageDao = fruitStorageDao;
+    }
+
     @Override
-    public String generateReport(FruitStorageDao fruitStorageDao) {
+    public String generateReport() {
         StringBuilder builder = new StringBuilder();
-        Set<String> fruitSet = fruitStorageDao.getFruitSet();
-        builder.append("fruit,quantity");
-        for (String fruit : fruitSet) {
+        Map<String, Integer> fruitMap = fruitStorageDao.getAll();
+        builder.append(HEADER);
+        for (Map.Entry<String, Integer> entry : fruitMap.entrySet()) {
             builder.append(System.lineSeparator())
-                    .append(fruit)
-                    .append(",")
-                    .append(fruitStorageDao.getQuantity(fruit));
+                    .append(entry.getKey())
+                    .append(COMA)
+                    .append(fruitStorageDao.getQuantity(entry.getKey()));
         }
         return builder.toString();
     }

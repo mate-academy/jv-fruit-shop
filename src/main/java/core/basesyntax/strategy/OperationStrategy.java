@@ -1,8 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dao.FruitStorageDao;
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 
 public interface OperationStrategy {
-    void handleOperation(FruitTransaction fruitTransaction, FruitStorageDao fruitStorageDao);
+    OperationHandler findOperation(Operation operation);
 }
