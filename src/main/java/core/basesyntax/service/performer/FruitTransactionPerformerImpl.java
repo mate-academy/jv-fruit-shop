@@ -3,7 +3,6 @@ package core.basesyntax.service.performer;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
-
 import java.util.List;
 
 public class FruitTransactionPerformerImpl implements Performer {
