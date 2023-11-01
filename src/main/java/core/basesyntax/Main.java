@@ -53,5 +53,4 @@ public class Main {
         CsvDataWriter csvDataWriter = new CsvDataWriter();
         csvDataWriter.writeToFile(FILE_TO,reportString);
     }
-
 }
