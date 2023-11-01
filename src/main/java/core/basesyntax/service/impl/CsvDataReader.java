@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvDataReader implements DataReader {
+    private static final String EXCEPTION_MESSAGE = "Can't read file";
     @Override
     public List<String> readFileLines(String pathName) {
         File file = new File(pathName);
@@ -21,7 +22,7 @@ public class CsvDataReader implements DataReader {
             }
             return resultList;
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file" + pathName, e);
+            throw new RuntimeException(EXCEPTION_MESSAGE + pathName, e);
         }
     }
 }
