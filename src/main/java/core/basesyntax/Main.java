@@ -7,10 +7,10 @@ import core.basesyntax.service.impl.DataHandlerServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.ReportWriterServiceImpl;
 import core.basesyntax.strategy.StorageUpdateHandler;
-import core.basesyntax.strategy.impl.FruitBalanceStrategy;
-import core.basesyntax.strategy.impl.FruitPurchaseStrategy;
-import core.basesyntax.strategy.impl.FruitReturnStrategy;
-import core.basesyntax.strategy.impl.FruitSupplyStrategy;
+import core.basesyntax.strategy.impl.FruitBalanceHandler;
+import core.basesyntax.strategy.impl.FruitPurchaseHandler;
+import core.basesyntax.strategy.impl.FruitReturnHandler;
+import core.basesyntax.strategy.impl.FruitSupplyHandler;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +20,10 @@ public class Main {
 
     public static void main(String[] args) {
         List<StorageUpdateHandler> storageUpdateHandlers = new ArrayList<>();
-        storageUpdateHandlers.add(new FruitBalanceStrategy());
-        storageUpdateHandlers.add(new FruitSupplyStrategy());
-        storageUpdateHandlers.add(new FruitPurchaseStrategy());
-        storageUpdateHandlers.add(new FruitReturnStrategy());
+        storageUpdateHandlers.add(new FruitBalanceHandler());
+        storageUpdateHandlers.add(new FruitSupplyHandler());
+        storageUpdateHandlers.add(new FruitPurchaseHandler());
+        storageUpdateHandlers.add(new FruitReturnHandler());
 
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         ReportWriterService reportWriterService = new ReportWriterServiceImpl();

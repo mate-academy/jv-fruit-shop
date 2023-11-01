@@ -14,14 +14,12 @@ public class DataHandlerServiceImpl implements DataHandlerService {
     private static final String REPORT_COLUMNS = "fruit,quantity";
     private static final int INDEX_OF_REPORT_COLUMNS = 1;
     private static final String SEPARATE_SYMBOL = ",";
-    private final OperationStrategy operationService;
+    private final OperationStrategy operationStrategy;
     private final FruitDao fruitDao;
-    private final FruitInputData fruitInputData;
 
     public DataHandlerServiceImpl(List<StorageUpdateHandler> storageUpdateHandlers) {
-        operationService = new OperationStrategyImpl(storageUpdateHandlers);
+        operationStrategy = new OperationStrategyImpl(storageUpdateHandlers);
         fruitDao = new FruitDaoImpl();
-        fruitInputData = new FruitInputData();
     }
 
     @Override
@@ -44,11 +42,12 @@ public class DataHandlerServiceImpl implements DataHandlerService {
     }
 
     private void addProductTransaction(String productTransaction) {
+        FruitInputData fruitInputData = new FruitInputData();
         String[] separatedTransaction = productTransaction.split(SEPARATE_SYMBOL);
         fruitInputData.setOperationCode(separatedTransaction[0]);
         fruitInputData.setFruitName(separatedTransaction[1]);
         fruitInputData.setAmount(Integer.parseInt(separatedTransaction[2]));
-        operationService.manageStorageCells(fruitInputData);
+        operationStrategy.manageStorageCells(fruitInputData);
     }
 
     private List<String> getOperationsList(String inputData) {

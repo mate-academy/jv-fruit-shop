@@ -5,20 +5,20 @@ import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.StorageUpdateHandler;
 
-public class FruitBalanceStrategy implements StorageUpdateHandler {
+public class FruitSupplyHandler implements StorageUpdateHandler {
     private final FruitDao fruitDao;
 
-    public FruitBalanceStrategy() {
+    public FruitSupplyHandler() {
         fruitDao = new FruitDaoImpl();
     }
 
     @Override
-    public void updateStorage(String fruitName, int amount) {
-        fruitDao.addFirst(fruitName, amount);
+    public void updateStorage(String fruit, int amount) {
+        fruitDao.add(fruit, amount);
     }
 
     @Override
     public boolean isServiceApplicable(String operationCode) {
-        return Operation.BALANCE.getCode().equals(operationCode);
+        return Operation.SUPPLY.getCode().equals(operationCode);
     }
 }

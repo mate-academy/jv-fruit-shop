@@ -5,10 +5,10 @@ import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.StorageUpdateHandler;
 
-public class FruitReturnStrategy implements StorageUpdateHandler {
+public class FruitReturnHandler implements StorageUpdateHandler {
     private final FruitDao fruitDao;
 
-    public FruitReturnStrategy() {
+    public FruitReturnHandler() {
         fruitDao = new FruitDaoImpl();
     }
 

@@ -7,13 +7,13 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.StorageUpdateHandler;
 import java.util.NoSuchElementException;
 
-public class FruitPurchaseStrategy implements StorageUpdateHandler {
+public class FruitPurchaseHandler implements StorageUpdateHandler {
     private static final String SEARCHING_FAILURE_MESSAGE = "Can`t find product {%s} in storage";
     private static final String PURCHASING_FAILURE_MESSAGE = "Amount of purchased"
             + " {%s} cannot be more than product amount!";
     private final FruitDao fruitDao;
 
-    public FruitPurchaseStrategy() {
+    public FruitPurchaseHandler() {
         fruitDao = new FruitDaoImpl();
     }
 
@@ -29,11 +29,12 @@ public class FruitPurchaseStrategy implements StorageUpdateHandler {
     }
 
     private void checkAbilityToUpdate(String fruit, int amount) {
-        if (fruitDao.get(fruit) == null) {
+        Integer actualAmount = fruitDao.get(fruit);
+        if (actualAmount == null) {
             throw new NoSuchElementException(String
                     .format(SEARCHING_FAILURE_MESSAGE, fruit));
         }
-        if (fruitDao.get(fruit) < amount) {
+        if (actualAmount < amount) {
             throw new GoodsLessQuantityException(String
                     .format(PURCHASING_FAILURE_MESSAGE, fruit));
         }
