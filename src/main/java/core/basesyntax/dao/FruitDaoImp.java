@@ -1,17 +1,17 @@
-package core.basesyntax.Dao;
-
-import core.basesyntax.model.FruitTransaction;
-
-import java.util.List;
-import java.util.Map;
+package core.basesyntax.dao;
 
 import static core.basesyntax.db.Storage.storage;
+
+import core.basesyntax.model.FruitTransaction;
+import java.util.List;
+import java.util.Map;
 
 public class FruitDaoImp implements FruitDao {
     public Map<String, Integer> getStorage() {
         return storage;
     }
-    public void add(String type, Integer quantity){
+
+    public void add(String type, Integer quantity) {
         storage.put(type, quantity);
     }
 

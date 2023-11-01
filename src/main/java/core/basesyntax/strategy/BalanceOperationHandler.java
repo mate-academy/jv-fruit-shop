@@ -1,9 +1,8 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.Dao.FruitDao;
-import core.basesyntax.Dao.FruitDaoImp;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImp;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.OperationHandler;
 
 public class BalanceOperationHandler implements OperationHandler {
     private FruitDao dataBase;
@@ -13,7 +12,7 @@ public class BalanceOperationHandler implements OperationHandler {
     }
 
     @Override
-    public boolean DoOperation(FruitTransaction fruit) {
+    public boolean doOperation(FruitTransaction fruit) {
         String fruitName = fruit.getFruit();
         int fruitQuantity = fruit.getQuantity();
         dataBase.getStorage().put(fruitName, fruitQuantity);

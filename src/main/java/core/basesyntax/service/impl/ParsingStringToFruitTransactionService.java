@@ -5,10 +5,11 @@ import core.basesyntax.service.Parsing;
 
 public class ParsingStringToFruitTransactionService implements Parsing {
     private static final String RUNTIME_EXCEPTION_MESSAGE = "can't parse this line";
-    private static final String SPLITER  = ",";
+    private static final String SPLITER = ",";
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT_NAME = 1;
     private static final int INDEX_OF_QUANTITY = 2;
+
     @Override
     public FruitTransaction parse(String line) {
         String[] splitedLine = line.split(SPLITER);

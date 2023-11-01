@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-public class WriteToCSVService implements Writer {
+public class WriteCsvService implements Writer {
     private static final String REPORT_PATH = "src/main/resources";
     private static final String FILE_NAME = "Log.CSV";
     private static final String UPPER_TEXT = "fruit,quantity";
@@ -15,7 +15,8 @@ public class WriteToCSVService implements Writer {
     @Override
     public boolean write(Map<String, Integer> map) {
         try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(REPORT_PATH + "/" + FILE_NAME));
+            BufferedWriter bufferedWriter = new BufferedWriter(
+                    new FileWriter(REPORT_PATH + "/" + FILE_NAME));
             bufferedWriter.write(UPPER_TEXT);
             bufferedWriter.newLine();
             for (Map.Entry<String, Integer> entry : map.entrySet()) {
