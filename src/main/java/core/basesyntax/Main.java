@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FruitStorageDao;
+import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ParserService;
@@ -18,9 +20,6 @@ import core.basesyntax.service.transaction.ReturnHandler;
 import core.basesyntax.service.transaction.SupplyHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import core.basesyntax.dao.FruitStorageDao;
-import core.basesyntax.dao.FruitStorageDaoImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
