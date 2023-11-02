@@ -14,8 +14,7 @@ public class CsvFileReader implements ReadFromFile {
     public List<String> readFile(String filePath) {
         File file = new File(filePath);
         List<String> inputData = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(file));
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             int value = reader.read();
             while (value != -1) {
                 inputData.add(String.valueOf(value));
