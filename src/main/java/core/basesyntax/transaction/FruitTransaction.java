@@ -41,18 +41,13 @@ public class FruitTransaction {
         }
 
         public static Operation getOperation(String code) {
-            switch (code) {
-                case "b":
-                    return BALANCE;
-                case "s":
-                    return SUPPLY;
-                case "p":
-                    return PURCHASE;
-                case "r":
-                    return RETURN;
-                default:
-                    throw new RuntimeException(INVALID_OPERATION_MESSAGE + code);
-            }
+            return switch (code) {
+                case "b" -> BALANCE;
+                case "s" -> SUPPLY;
+                case "p" -> PURCHASE;
+                case "r" -> RETURN;
+                default -> throw new RuntimeException(INVALID_OPERATION_MESSAGE + code);
+            };
         }
 
         public String getCode() {
