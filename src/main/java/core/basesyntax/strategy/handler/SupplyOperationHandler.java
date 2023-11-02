@@ -12,9 +12,9 @@ public class SupplyOperationHandler implements OperationHandler {
     }
 
     @Override
-    public boolean doOperation(FruitTransaction fruit) {
-        String fruitName = fruit.getFruit();
-        int fruitQuantity = fruit.getQuantity();
+    public boolean doOperation(FruitTransaction fruitTransaction) {
+        String fruitName = fruitTransaction.getFruit();
+        int fruitQuantity = fruitTransaction.getQuantity();
         dataBase.getStorage().put(fruitName, dataBase.get(fruitName) + fruitQuantity);
         return true;
     }

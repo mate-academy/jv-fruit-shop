@@ -23,9 +23,7 @@ public class ReadFromCsvService implements Reader {
         } catch (IOException e) {
             throw new RuntimeException(CANT_READ_EXCEPTION_MESSAGE + path,e);
         }
-        if (data.get(INDEX_OF_TITLE).contains(TITLE)) {
-            data.remove(INDEX_OF_TITLE);
-        }
+        data.remove(INDEX_OF_TITLE);
         return data;
     }
 }
