@@ -6,8 +6,8 @@ import java.util.Map;
 public class Storage {
     private static Map<String, Integer> storageMap = new HashMap<>();
 
-    public static void addFruit(String fruit, Integer number) {
-        storageMap.put(fruit, number + storageMap.get(fruit));
+    public static void addFruit(String fruit, Integer amount) {
+        storageMap.put(fruit, amount + storageMap.get(fruit));
     }
 
     public static Map<String, Integer> getFruitsAndAmount() {
@@ -17,10 +17,6 @@ public class Storage {
         }
 
         return newMap;
-    }
-
-    public static void getAmount(String fruit) {
-        storageMap.get(fruit);
     }
 
     public static void setAmount(String fruit, Integer number) {
