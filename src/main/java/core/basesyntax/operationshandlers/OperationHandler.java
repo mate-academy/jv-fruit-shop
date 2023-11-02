@@ -3,7 +3,7 @@ package core.basesyntax.operationshandlers;
 import core.basesyntax.model.FruitTransaction;
 
 public interface OperationHandler {
-    int MIN_AMOUNT = 0;
+    static final int MIN_AMOUNT = 0;
 
     void updateValueInStorage(FruitTransaction transaction);
 

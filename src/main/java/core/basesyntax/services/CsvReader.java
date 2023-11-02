@@ -9,8 +9,7 @@ public class CsvReader implements FileReader {
     private final int skippedRow = 1;
 
     public List<String> read(String source) {
-        try (BufferedReader reader =
-                     new BufferedReader(new java.io.FileReader(source))) {
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(source))) {
             return reader.lines()
                     .skip(skippedRow)
                     .toList();
