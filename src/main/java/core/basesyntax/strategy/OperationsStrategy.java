@@ -5,7 +5,6 @@ import core.basesyntax.transaction.FruitTransaction;
 import java.util.Map;
 
 public class OperationsStrategy {
-
     private final Map<FruitTransaction.Operation, OperationHandler> handlers;
 
     public OperationsStrategy(Map<FruitTransaction.Operation, OperationHandler> handlers) {
