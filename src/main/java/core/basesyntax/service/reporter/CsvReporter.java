@@ -11,7 +11,7 @@ public class CsvReporter implements Reporter {
     public String makeReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(FIRST_LINE).append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.FRUITS.entrySet()) {
             stringBuilder.append(entry.getKey())
                     .append(COMMA)
                     .append(entry.getValue())

@@ -58,9 +58,5 @@ public class FruitTransaction {
                     throw new NoSuchElementException(OPERATION_EXCEPTION);
             }
         }
-
-        public String getCode() {
-            return code;
-        }
     }
 }
