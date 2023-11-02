@@ -2,7 +2,7 @@ package core.basesyntax.storagedao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import java.util.HashMap;
+
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
@@ -23,10 +23,5 @@ public class StorageDaoImpl implements StorageDao {
 
     public boolean isInStorage(String name) {
         return get(name) != null;
-    }
-
-    @Override
-    public Map<Fruit, Integer> getALl() {
-        return new HashMap<>(Storage.fruits);
     }
 }
