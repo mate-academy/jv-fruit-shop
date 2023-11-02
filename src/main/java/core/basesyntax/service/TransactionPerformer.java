@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
-public interface TransactionPerformer {
+import core.basesyntax.model.FruitTransaction;
 
+public interface TransactionPerformer {
+    void performTransaction(FruitTransaction transaction);
 }

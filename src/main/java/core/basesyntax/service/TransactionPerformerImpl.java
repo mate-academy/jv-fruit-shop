@@ -1,5 +1,11 @@
 package core.basesyntax.service;
 
-public class TransactionPerformerImpl {
+import core.basesyntax.model.FruitTransaction;
 
+public class TransactionPerformerImpl implements TransactionPerformer {
+
+    @Override
+    public void performTransaction(FruitTransaction transaction) {
+
+    }
 }

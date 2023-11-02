@@ -1,5 +1,11 @@
 package core.basesyntax.dao;
 
-public interface StorageDao {
+import java.util.Map;
 
+public interface StorageDao {
+    Map<String, Integer> getStorage();
+
+    int getAmountByObjectType(String objectName);
+
+    void putToStorage(String objectName, int amount);
 }
