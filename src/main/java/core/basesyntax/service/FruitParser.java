@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class FruitParser {
     private static final String REGEX_COMMA = ",";
@@ -21,6 +20,6 @@ public class FruitParser {
                 .skip(1)
                 .map(line -> line.split(REGEX_COMMA))
                 .map(stringsToFruitTransaction)
-                .collect(Collectors.toList());
+                .toList();
     }
 }
