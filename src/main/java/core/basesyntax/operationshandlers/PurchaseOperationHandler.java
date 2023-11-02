@@ -29,7 +29,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         }
         if (storageDao.get(transaction.getFruitName()).getValue() < transaction.getQuantity()) {
             throw new RuntimeException("Amount of " + transaction.getFruitName()
-                    + " isn't enough!!!");
+                    + " isn't enough");
         }
     }
 }
