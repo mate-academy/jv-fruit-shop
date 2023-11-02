@@ -2,7 +2,7 @@ package core.basesyntax.service.validator;
 
 import core.basesyntax.exception.NegativeQuantityException;
 
-public class FruitQuantityValidator implements Validator {
+public class FruitQuantityValidatorImpl implements Validator {
     public static final String NEGATIVE_NUMBER_EXCEPTION_MESSAGE =
             "Quantity number can't be negative: ";
 

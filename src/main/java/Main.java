@@ -12,7 +12,7 @@ import core.basesyntax.service.file.writer.CsvFileWriter;
 import core.basesyntax.service.parser.FruitTransactionDataParserImpl;
 import core.basesyntax.service.performer.FruitTransactionPerformerImpl;
 import core.basesyntax.service.reporter.FruitReporterImpl;
-import core.basesyntax.service.validator.FruitQuantityValidator;
+import core.basesyntax.service.validator.FruitQuantityValidatorImpl;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +28,7 @@ public class Main {
                 new FruitReporterImpl(new FruitQuantityDaoImpl()),
                 new FruitTransactionPerformerImpl(
                         new OperationStrategyImpl(operationOperationHandlerMap)),
-                new FruitTransactionDataParserImpl(new FruitQuantityValidator()));
+                new FruitTransactionDataParserImpl(new FruitQuantityValidatorImpl()));
         fruitShopApp.createDailyReport(TEST_DATA_FILE_NAME, TEST_RESULT_FILE_NAME);
     }
 
