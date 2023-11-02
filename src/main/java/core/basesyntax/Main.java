@@ -17,8 +17,8 @@ import core.basesyntax.strategy.handlers.BalanceOperationHandler;
 import core.basesyntax.strategy.handlers.PurchaseOperationHandler;
 import core.basesyntax.strategy.handlers.ReturnOperationHandler;
 import core.basesyntax.strategy.handlers.SupplyOperationHandler;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -30,37 +30,37 @@ public class Main {
     private static final FileReadService fileReadService;
     private static final CsvParseService csvParseService;
     private static final Map<GoodsOperation.TransactionType, OperationHandler> strategies;
-    private static final StorageDao storageDaoImp;
+    private static final StorageDao storageDao;
     private static final OperationsStrategy operationsStrategy;
     private static final ReportService reportService;
     private static final FileWriteService fileWriteService;
 
     static {
         storage = new HashMap<>();
-        storageDaoImp = new StorageDaoImp(storage);
+        storageDao = new StorageDaoImp(storage);
         fileReadService = new FileReadServiceImp();
         csvParseService = new CsvParser();
         strategies = Map.of(GoodsOperation.TransactionType.BALANCE,
-                new BalanceOperationHandler(storageDaoImp),
+                new BalanceOperationHandler(storageDao),
                 GoodsOperation.TransactionType.PURCHASE,
-                new PurchaseOperationHandler(storageDaoImp),
+                new PurchaseOperationHandler(storageDao),
                 GoodsOperation.TransactionType.RETURN,
-                new ReturnOperationHandler(storageDaoImp),
+                new ReturnOperationHandler(storageDao),
                 GoodsOperation.TransactionType.SUPPLY,
-                new SupplyOperationHandler(storageDaoImp));
+                new SupplyOperationHandler(storageDao));
         operationsStrategy = new OperationsStrategy(strategies);
-        reportService = new Reporter(storageDaoImp);
+        reportService = new Reporter(storageDao);
         fileWriteService = new FileWriteServiceImp();
     }
 
     public static void main(String[] args) {
-        ArrayList<String> parsedLines = fileReadService.readFilesLines(PATH_SOURCE_FILE);
-        ArrayList<GoodsOperation> operationsList = csvParseService
+        List<String> parsedLines = fileReadService.readFilesLines(PATH_SOURCE_FILE);
+        List<GoodsOperation> operationsList = csvParseService
                 .listOperationsFromCsv(parsedLines);
         for (GoodsOperation operation : operationsList) {
             operationsStrategy.handleOperation(operation);
         }
-        ArrayList<String> goodsStockCsvReport = reportService.getGoodsStockCsv();
+        List<String> goodsStockCsvReport = reportService.getGoodsStockCsv();
         fileWriteService.writeCvsToFile(goodsStockCsvReport, PATH_CONSUMER_FILE);
     }
 }

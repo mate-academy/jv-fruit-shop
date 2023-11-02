@@ -3,6 +3,7 @@ package core.basesyntax.service.imp;
 import core.basesyntax.model.GoodsOperation;
 import core.basesyntax.service.CsvParseService;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CsvParser implements CsvParseService {
     private static final String LINE_DIVIDER = ",";
@@ -11,8 +12,8 @@ public class CsvParser implements CsvParseService {
     private static final int OPERATION_QUANTITY_INDEX = 2;
 
     @Override
-    public ArrayList<GoodsOperation> listOperationsFromCsv(ArrayList<String> csvOperationsList) {
-        ArrayList<GoodsOperation> operationsList = new ArrayList<>();
+    public List<GoodsOperation> listOperationsFromCsv(List<String> csvOperationsList) {
+        List<GoodsOperation> operationsList = new ArrayList<>();
         for (int i = 1; i < csvOperationsList.size(); i++) {
             String csvOperation = csvOperationsList.get(i);
             GoodsOperation operation = convertToOperationFromCsv(csvOperation);

@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ReportService {
-    ArrayList<String> getGoodsStockCsv();
+    List<String> getGoodsStockCsv();
 }

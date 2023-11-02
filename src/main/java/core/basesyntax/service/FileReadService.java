@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface FileReadService {
-    ArrayList<String> readFilesLines(String path);
+    List<String> readFilesLines(String path);
 }

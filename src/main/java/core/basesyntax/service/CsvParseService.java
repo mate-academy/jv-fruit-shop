@@ -1,10 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.GoodsOperation;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface CsvParseService {
-    ArrayList<GoodsOperation> listOperationsFromCsv(ArrayList<String> csvOperations);
+    List<GoodsOperation> listOperationsFromCsv(List<String> csvOperations);
 
     GoodsOperation convertToOperationFromCsv(String operation);
 }

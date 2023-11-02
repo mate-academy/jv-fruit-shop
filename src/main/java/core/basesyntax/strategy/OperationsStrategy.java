@@ -11,11 +11,6 @@ public class OperationsStrategy {
     }
 
     public void handleOperation(GoodsOperation operation) {
-        for (Map.Entry<GoodsOperation.TransactionType, OperationHandler> strategy
-                : strategies.entrySet()) {
-            if (strategy.getKey().equals(operation.getOperationType())) {
-                strategy.getValue().handleOperation(operation);
-            }
-        }
+        strategies.get(operation.getOperationType()).handleOperation(operation);
     }
 }
