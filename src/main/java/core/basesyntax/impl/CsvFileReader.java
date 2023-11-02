@@ -1,26 +1,20 @@
 package core.basesyntax.impl;
 
 import core.basesyntax.service.FileReaderService;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 public class CsvFileReader implements FileReaderService {
-    private final List<String> linesInFile = new ArrayList<>();
+    private static final String CANT_READ_MESSAGE = "Can't read from file: ";
 
     @Override
     public List<String> readFromFile(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line = reader.readLine();
-            while (line != null) {
-                linesInFile.add(line);
-                line = reader.readLine();
-            }
+        try {
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file: " + filePath, e);
+            throw new RuntimeException(CANT_READ_MESSAGE + filePath, e);
         }
-        return linesInFile;
     }
 }

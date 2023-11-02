@@ -6,6 +6,7 @@ public enum Operation {
     PURCHASE("p"),
     RETURN("r");
 
+    private static final String ILLEGAL_VALUE_MESSAGE = "No such value: ";
     private String code;
 
     Operation(String code) {
@@ -18,7 +19,7 @@ public enum Operation {
             case "s" -> SUPPLY;
             case "p" -> PURCHASE;
             case "r" -> RETURN;
-            default -> throw new IllegalArgumentException("No such value: " + code);
+            default -> throw new IllegalArgumentException(ILLEGAL_VALUE_MESSAGE + code);
         };
     }
 }
