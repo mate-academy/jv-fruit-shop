@@ -1,4 +1,4 @@
-package core.basesyntax.dao.reads;
+package core.basesyntax.services.reads;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderImpl implements CsvFileReader {
+    private static final String PREFIX = "\\s+";
     private static final String EXCEPTION_TEXT = "Error while reading a file";
 
     @Override
@@ -16,7 +17,7 @@ public class CsvFileReaderImpl implements CsvFileReader {
             String line;
             br.readLine();
             while ((line = br.readLine()) != null) {
-                String trimmedLine = line.trim().replaceAll("\\s+", "");
+                String trimmedLine = line.trim().replaceAll(PREFIX, "");
                 transactions.add(trimmedLine);
             }
         } catch (IOException exception) {

@@ -1,4 +1,4 @@
-package core.basesyntax.dao.writes;
+package core.basesyntax.services.writes;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

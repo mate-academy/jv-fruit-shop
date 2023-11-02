@@ -5,13 +5,13 @@ import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitMap {
-    private static final String SYMBOL = ",";
+public class FruitMapper {
+    private static final String COMMA = ",";
 
     public List<FruitTransaction> mapData(List<String> data) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String line : data) {
-            String[] splitLine = line.split(SYMBOL);
+            String[] splitLine = line.split(COMMA);
             String operationCode = splitLine[0];
             String fruit = splitLine[1];
             int quantity = Integer.parseInt(splitLine[2]);
