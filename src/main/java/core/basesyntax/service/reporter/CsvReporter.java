@@ -1,12 +1,12 @@
 package core.basesyntax.service.reporter;
 
 import core.basesyntax.db.Storage;
-
 import java.util.Map;
 
 public class CsvReporter implements Reporter {
     private static final String FIRST_LINE = "fruit,quantity";
     private static final String COMMA = ",";
+
     @Override
     public String makeReport() {
         StringBuilder stringBuilder = new StringBuilder();

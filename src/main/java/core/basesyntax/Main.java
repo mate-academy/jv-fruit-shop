@@ -16,14 +16,12 @@ import core.basesyntax.service.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.service.strategy.impl.SupplyOperationHandler;
 import core.basesyntax.service.writter.CsvFileWritter;
 import core.basesyntax.service.writter.FileWritter;
-
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     private static final String PATH_FROM = "src/main/resources/input.csv";
     private static final String PATH_TO = "src/main/resources/output.csv";
-
 
     public static void main(String[] args) {
         FileReader fileReader = new CsvFileReader();
@@ -52,7 +50,5 @@ public class Main {
 
         FileWritter fileWritter = new CsvFileWritter();
         fileWritter.write(reporter.makeReport(), PATH_TO);
-
-
     }
 }
