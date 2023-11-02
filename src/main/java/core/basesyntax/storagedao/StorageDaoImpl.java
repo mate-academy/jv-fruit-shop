@@ -2,7 +2,6 @@ package core.basesyntax.storagedao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
