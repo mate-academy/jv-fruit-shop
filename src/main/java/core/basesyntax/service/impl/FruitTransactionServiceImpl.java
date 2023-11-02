@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitStorageDao;
-import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.transaction.OperationHandler;
@@ -12,20 +11,20 @@ import java.util.Map;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
     private final OperationStrategy strategy;
-    private final FruitStorageDao storageDao = new FruitStorageDaoImpl();
+    private final FruitStorageDao storageDao;
 
-    public FruitTransactionServiceImpl(OperationStrategy strategy) {
+    public FruitTransactionServiceImpl(FruitStorageDao storageDao, OperationStrategy strategy) {
+        this.storageDao = storageDao;
         this.strategy = strategy;
     }
 
     @Override
-    public Map<String, Integer> addOrUpdate(List<FruitTransaction> fruitTransactions) {
+    public void processTransactions(List<FruitTransaction> fruitTransactions) {
         Map<String, Integer> fruitsBalance = new HashMap<>();
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             calculateOperationForFruit(fruitsBalance, fruitTransaction);
         }
         storageDao.addAll(fruitsBalance);
-        return fruitsBalance;
     }
 
     private void calculateOperationForFruit(Map<String, Integer> fruitsBalance,

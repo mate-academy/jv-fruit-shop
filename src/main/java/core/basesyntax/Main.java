@@ -18,6 +18,9 @@ import core.basesyntax.service.transaction.ReturnHandler;
 import core.basesyntax.service.transaction.SupplyHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.dao.FruitStorageDao;
+import core.basesyntax.dao.FruitStorageDaoImpl;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,28 +33,29 @@ public class Main {
 
     public static void main(String[] args) {
         fillMap();
+        FruitStorageDao storageDao = new FruitStorageDaoImpl();
         ReaderService fileReaderService = new ReaderServiceImpl();
         List<String> strings = fileReaderService.readFromFile(TRANSACTIONS_PATH);
 
         ParserService parser = new ParserServiceImpl();
-        List<FruitTransaction> fruitTransactions = parser.stringToFruitTransactions(strings);
+        List<FruitTransaction> fruitTransactions = parser.stringsToFruitTransactions(strings);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategyMap);
         FruitTransactionService fruitTransactionService =
-                new FruitTransactionServiceImpl(operationStrategy);
-        fruitTransactionService.addOrUpdate(fruitTransactions);
+                new FruitTransactionServiceImpl(storageDao, operationStrategy);
+        fruitTransactionService.processTransactions(fruitTransactions);
 
         ReportService fruitTransactionsReportService = new ReportServiceImpl();
         String report = fruitTransactionsReportService.createReport();
 
         WriterService fileWriterService = new WriterServiceImpl();
-        fileWriterService.writeToFile(REPORT_PATH,report);
+        fileWriterService.writeToFile(REPORT_PATH, report);
     }
 
     private static void fillMap() {
-        strategyMap.put(FruitTransaction.Operation.BALANCE,new BalanceHandler());
-        strategyMap.put(FruitTransaction.Operation.PURCHASE,new PurchaseHandler());
-        strategyMap.put(FruitTransaction.Operation.SUPPLY,new SupplyHandler());
-        strategyMap.put(FruitTransaction.Operation.RETURN,new ReturnHandler());
+        strategyMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
+        strategyMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
+        strategyMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
+        strategyMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
     }
 }

@@ -10,10 +10,10 @@ public class WriterServiceImpl implements WriterService {
     private static final String FILE_WRITE_EXCEPTION_MESSAGE = "Can't write to file: ";
 
     @Override
-    public void writeToFile(String fileName, String report) {
+    public void writeToFile(String fileName, String content) {
         Path path = Paths.get(fileName);
         try {
-            Files.writeString(path, report);
+            Files.writeString(path, content);
         } catch (IOException e) {
             throw new RuntimeException(FILE_WRITE_EXCEPTION_MESSAGE + fileName, e);
         }

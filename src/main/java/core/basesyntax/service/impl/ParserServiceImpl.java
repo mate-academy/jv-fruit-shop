@@ -14,7 +14,7 @@ public class ParserServiceImpl implements ParserService {
     private static final String INVALID_TRANSACTION = "Transaction is not valid, must match: ";
 
     @Override
-    public List<FruitTransaction> stringToFruitTransactions(List<String> strings) {
+    public List<FruitTransaction> stringsToFruitTransactions(List<String> strings) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String transaction : strings) {
             if (transaction.matches(TRANSACTION_REGEX)) {
