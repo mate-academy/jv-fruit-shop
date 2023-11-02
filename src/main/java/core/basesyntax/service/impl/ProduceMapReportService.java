@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Producer;
-
 import java.util.Map;
 
 public class ProduceMapReportService implements Producer {

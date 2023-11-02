@@ -4,7 +4,6 @@ import core.basesyntax.service.Writer;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
 public class WriteCsvService implements Writer {
     private static final String TITLE_TEXT = "fruit,quantity";
