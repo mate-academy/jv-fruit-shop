@@ -7,9 +7,9 @@ public class FruitQuantityValidatorImpl implements Validator {
             "Quantity number can't be negative: ";
 
     @Override
-    public boolean validate(Integer quantity) {
+    public void validate(Integer quantity) {
         if (quantity >= 0) {
-            return true;
+            return;
         }
         throw new NegativeQuantityException(NEGATIVE_NUMBER_EXCEPTION_MESSAGE + quantity);
     }
