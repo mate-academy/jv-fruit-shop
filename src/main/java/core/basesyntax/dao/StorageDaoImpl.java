@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
@@ -14,8 +13,4 @@ public class StorageDaoImpl implements StorageDao {
         return Storage.fruits.get(fruit);
     }
 
-    @Override
-    public Map<String, Integer> getAll() {
-        return Storage.fruits;
-    }
 }

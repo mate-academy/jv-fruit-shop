@@ -3,7 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.parser.Parser;
+import core.basesyntax.service.parser.ParserImpl;
 import core.basesyntax.service.reader.CsvFileReader;
 import core.basesyntax.service.reader.FileReader;
 import core.basesyntax.service.reporter.CsvReporter;
@@ -22,23 +22,21 @@ import java.util.Map;
 public class Main {
     private static final String PATH_FROM = "src/main/resources/input.csv";
     private static final String PATH_TO = "src/main/resources/output.csv";
+    private static final StorageDao storageDao = new StorageDaoImpl();
+    private static final Map<FruitTransaction.Operation, OperationHandler> handlers = Map.of(
+            FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(storageDao),
+            FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(storageDao),
+            FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(storageDao),
+            FruitTransaction.Operation.RETURN, new ReturnOperationHandler(storageDao)
+    );
 
     public static void main(String[] args) {
         FileReader fileReader = new CsvFileReader();
         List<String> lines = fileReader.read(PATH_FROM);
 
-        Parser parser = new Parser();
+        ParserImpl parser = new ParserImpl();
 
         List<FruitTransaction> fruitTransactionList = parser.parseStringToFruitTransaction(lines);
-
-        StorageDao storageDao = new StorageDaoImpl();
-
-        Map<FruitTransaction.Operation, OperationHandler> handlers = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(storageDao),
-                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(storageDao),
-                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(storageDao),
-                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(storageDao)
-        );
 
         OperationStrategy operationStrategy = new OperationStrategy(handlers);
 
