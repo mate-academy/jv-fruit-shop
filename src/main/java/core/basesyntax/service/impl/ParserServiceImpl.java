@@ -11,6 +11,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_QUANTITY = 2;
+    private static final String INVALID_TRANSACTION = "Transaction is not valid, must match: ";
 
     @Override
     public List<FruitTransaction> stringToFruitTransactions(List<String> strings) {
@@ -21,7 +22,7 @@ public class ParserServiceImpl implements ParserService {
                 fruitTransactions.add(fruitTransaction);
             } else {
                 throw new RuntimeException("Transaction: " + transaction
-                        + " is not valid, must match: " + TRANSACTION_REGEX);
+                        + " " + INVALID_TRANSACTION + TRANSACTION_REGEX);
             }
         }
         return fruitTransactions;
