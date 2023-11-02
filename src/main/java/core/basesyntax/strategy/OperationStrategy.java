@@ -6,7 +6,7 @@ import core.basesyntax.model.Operation;
 import java.util.Map;
 
 public class OperationStrategy {
-    private Map<Operation, OperationHandler> handlers;
+    private final Map<Operation, OperationHandler> handlers;
 
     public OperationStrategy(Map<Operation, OperationHandler> handlers) {
         this.handlers = handlers;
